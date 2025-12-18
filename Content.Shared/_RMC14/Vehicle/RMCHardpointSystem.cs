@@ -80,7 +80,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!TryGetSlot(ent.Comp, args.Container.ID, out var slot))
             return;
 
-        ent.Comp.PendingRemovals.Remove(args.Container.ID);
+        ent.Comp.PendingRemovals.Clear();
 
         if (!IsValidHardpoint(args.Entity, slot))
         {
@@ -608,10 +608,14 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
 
         if (component.PendingInserts.Contains(slotId) || component.CompletingInserts.Contains(slotId))
+        {
+            _popup.PopupEntity("Finish installing that hardpoint before removing it.", user, user);
             return;
+        }
 
         if (!TryGetPryingTool(user, out var tool))
         {
+            _popup.PopupEntity("You need a prying tool to remove this hardpoint.", user, user);
             UpdateHardpointUi(uid, component, itemSlots);
             return;
         }
@@ -643,9 +647,6 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_ui.HasUi(uid, RMCHardpointUiKey.Key))
-            return;
-
         if (!Resolve(uid, ref component, logMissing: false))
             return;
 
@@ -653,6 +654,16 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         var entries = new List<RMCHardpointUiEntry>(component.Slots.Count);
+        float frameIntegrity = 0f;
+        float frameMaxIntegrity = 0f;
+        var hasFrameIntegrity = false;
+
+        if (TryComp(uid, out RMCHardpointIntegrityComponent? frame))
+        {
+            frameIntegrity = frame.Integrity;
+            frameMaxIntegrity = frame.MaxIntegrity;
+            hasFrameIntegrity = true;
+        }
 
         foreach (var slot in component.Slots)
         {
@@ -692,7 +703,7 @@ public sealed class RMCHardpointSystem : EntitySystem
                 component.PendingRemovals.Contains(slot.Id)));
         }
 
-        _ui.SetUiState(uid, RMCHardpointUiKey.Key, new RMCHardpointBoundUserInterfaceState(entries));
+        _ui.SetUiState(uid, RMCHardpointUiKey.Key, new RMCHardpointBoundUserInterfaceState(entries, frameIntegrity, frameMaxIntegrity, hasFrameIntegrity));
     }
 
     private void UpdateFrameDamageAppearance(EntityUid uid, RMCHardpointIntegrityComponent component)
@@ -709,7 +720,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         _appearance.SetData(uid, RMCVehicleFrameDamageVisuals.IntegrityFraction, fraction, appearance);
     }
 
-    private bool TryGetPryingTool(EntityUid user, out EntityUid tool)
+   private bool TryGetPryingTool(EntityUid user, out EntityUid tool)
     {
         tool = default;
 

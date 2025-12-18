@@ -131,18 +131,31 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (vehicle.Operator is { } op && TryComp<InputMoverComponent>(op, out var inputComp))
                 inputDir = GetInputDirection(inputComp);
 
-            UpdateMovement(uid, mover, grid, gridComp, inputDir, frameTime);
+            UpdateMovement(uid, mover, vehicle, grid, gridComp, inputDir, frameTime);
         }
     }
 
     private void UpdateMovement(
         EntityUid uid,
         GridVehicleMoverComponent mover,
+        VehicleComponent vehicle,
         EntityUid grid,
         MapGridComponent gridComp,
         Vector2i inputDir,
         float frameTime)
     {
+        var canRunEvent = new VehicleCanRunEvent((uid, vehicle));
+        RaiseLocalEvent(uid, ref canRunEvent);
+        if (!canRunEvent.CanRun)
+        {
+            mover.CurrentSpeed = 0f;
+            mover.IsCommittedToMove = false;
+            mover.IsMoving = false;
+            SetGridPosition(uid, grid, mover.Position);
+            Dirty(uid, mover);
+            return;
+        }
+
         // Ensure smash slowdowns expire even if the vehicle is idle.
         GetSmashSlowdownMultiplier(mover);
 

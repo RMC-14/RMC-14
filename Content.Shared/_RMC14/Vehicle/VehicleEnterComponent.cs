@@ -28,6 +28,12 @@ public sealed partial class VehicleEnterComponent : Component
     public ResPath InteriorPath;
 
     [DataField]
+    public int MaxPassengers = 0;
+
+    [DataField]
+    public int MaxXenos = 0;
+
+    [DataField]
     public List<VehicleEntryPoint> EntryPoints = new();
 
     [DataField]

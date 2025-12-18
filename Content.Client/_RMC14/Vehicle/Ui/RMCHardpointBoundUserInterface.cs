@@ -19,6 +19,7 @@ public sealed class RMCHardpointBoundUserInterface : BoundUserInterface
 
         _menu = new RMCHardpointMenu();
         _menu.OnClose += Close;
+        _menu.VehicleEntity = Owner;
 
         var metaQuery = EntMan.GetEntityQuery<MetaDataComponent>();
         if (metaQuery.TryGetComponent(Owner, out var metadata))
@@ -49,6 +50,10 @@ public sealed class RMCHardpointBoundUserInterface : BoundUserInterface
         if (state is not RMCHardpointBoundUserInterfaceState hardpointState)
             return;
 
-        _menu?.Update(hardpointState.Hardpoints);
+        _menu?.Update(
+            hardpointState.Hardpoints,
+            hardpointState.FrameIntegrity,
+            hardpointState.FrameMaxIntegrity,
+            hardpointState.HasFrameIntegrity);
     }
 }

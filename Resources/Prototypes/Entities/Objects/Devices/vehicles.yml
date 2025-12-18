@@ -313,11 +313,13 @@
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
     entryPoints:
     # Entry point 0: Side door
     - offset: 1,-1
       radius: 0.6
-      interiorCoords: 3.25,0
+      interiorCoords: 3.5,-0.34
     # Entry point 1: Side-door
     - offset: -1,-1
       radius: 0.6
@@ -446,6 +448,8 @@
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml #TODO ACTUAL CLF INTERIOR
     enterDoAfter: 1.0
     exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 2
     entryPoints:
     # Entry point 0: Side door
     - offset: 1,-1
@@ -579,6 +583,8 @@
     interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
     entryPoints:
     # Entry point 0: Side door
     - offset: 1,-0.25
@@ -712,6 +718,8 @@
     interiorPath: /Maps/_RMC14/Vehicles/pizza_van_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
     entryPoints:
     # Entry point 0: Side door
     - offset: 1,-0.25

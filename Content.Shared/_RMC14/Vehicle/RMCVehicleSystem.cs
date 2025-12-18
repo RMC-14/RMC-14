@@ -2,10 +2,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Teleporter;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
@@ -38,6 +40,8 @@ public sealed class RMCVehicleSystem : EntitySystem
     private readonly Dictionary<MapId, EntityUid> _mapToVehicle = new();
     private readonly Dictionary<EntityUid, HashSet<int>> _entryLocks = new();
     private readonly HashSet<EntityUid> _exitLocks = new();
+    private readonly Dictionary<EntityUid, HashSet<EntityUid>> _vehiclePassengers = new();
+    private readonly Dictionary<EntityUid, HashSet<EntityUid>> _vehicleXenos = new();
 
     private sealed class InteriorData
     {
@@ -118,6 +122,26 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         Logger.Info($"[VehicleEnter] {ToPrettyString(user)} entering {ToPrettyString(ent.Owner)} index={entryIndex}");
 
+        EnsureOccupantTracking(ent.Owner, interior, out var passengers, out var xenos);
+
+        var isXeno = HasComp<XenoComponent>(user);
+        if (isXeno)
+        {
+            if (ent.Comp.MaxXenos > 0 && !xenos.Contains(user) && xenos.Count >= ent.Comp.MaxXenos)
+            {
+                _popup.PopupClient("There's no room for more xenos inside.", user, user);
+                return false;
+            }
+        }
+        else
+        {
+            if (ent.Comp.MaxPassengers > 0 && !passengers.Contains(user) && passengers.Count >= ent.Comp.MaxPassengers)
+            {
+                _popup.PopupClient("There's no room for more passengers inside.", user, user);
+                return false;
+            }
+        }
+
         var coords = interior.Entry;
         MapCoordinates targetMapCoords;
         if (entryIndex >= 0 && entryIndex < ent.Comp.EntryPoints.Count)
@@ -131,6 +155,10 @@ public sealed class RMCVehicleSystem : EntitySystem
                 targetMapCoords = _transform.ToMapCoordinates(entityCoords);
                 Logger.Info($"[VehicleEnter] Using interiorCoords={interiorCoord} parent={parent} map={interior.MapId} world={targetMapCoords.Position}");
                 _rmcTeleporter.HandlePulling(user, targetMapCoords);
+                if (isXeno)
+                    xenos.Add(user);
+                else
+                    passengers.Add(user);
                 return true;
             }
             else
@@ -142,6 +170,10 @@ public sealed class RMCVehicleSystem : EntitySystem
         targetMapCoords = _transform.ToMapCoordinates(coords);
         _rmcTeleporter.HandlePulling(user, targetMapCoords);
         Logger.Info($"[VehicleEnter] Teleported via fallback coords={coords} world={targetMapCoords.Position}");
+        if (isXeno)
+            xenos.Add(user);
+        else
+            passengers.Add(user);
         return true;
     }
 
@@ -231,6 +263,8 @@ public sealed class RMCVehicleSystem : EntitySystem
             return;
 
         _entryLocks.Remove(vehicle);
+        _vehiclePassengers.Remove(vehicle);
+        _vehicleXenos.Remove(vehicle);
 
         _mapToVehicle.Remove(interior.MapId);
 
@@ -296,8 +330,9 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (ent.Comp.EntryPoints.Count == 0)
             return true;
 
-        if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity) && frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f)
-            return true;
+        var bypassEntry = TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity) &&
+                          frameIntegrity.BypassEntryOnZero &&
+                          frameIntegrity.Integrity <= 0f;
 
         var vehicleXform = Transform(ent.Owner);
         var userXform = Transform(user);
@@ -309,6 +344,31 @@ public sealed class RMCVehicleSystem : EntitySystem
         var userPos = _transform.GetWorldPosition(userXform);
         var delta = userPos - vehiclePos;
         var localDelta = (-vehicleXform.LocalRotation).RotateVec(delta);
+
+        if (bypassEntry)
+        {
+            var closestDistance = float.MaxValue;
+            var closestIndex = -1;
+
+            for (var i = 0; i < ent.Comp.EntryPoints.Count; i++)
+            {
+                var entry = ent.Comp.EntryPoints[i];
+                var distance = (localDelta - entry.Offset).LengthSquared();
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestIndex = i;
+                }
+            }
+
+            if (closestIndex >= 0)
+            {
+                entryIndex = closestIndex;
+                return true;
+            }
+
+            return false;
+        }
 
         for (var i = 0; i < ent.Comp.EntryPoints.Count; i++)
         {
@@ -374,6 +434,10 @@ public sealed class RMCVehicleSystem : EntitySystem
         var exitCoords = new EntityCoordinates(parent.Value, position);
         var exitMapCoords = _transform.ToMapCoordinates(exitCoords);
         _rmcTeleporter.HandlePulling(user, exitMapCoords);
+        if (_vehiclePassengers.TryGetValue(vehicle, out var passengers))
+            passengers.Remove(user);
+        if (_vehicleXenos.TryGetValue(vehicle, out var xenos))
+            xenos.Remove(user);
         return true;
     }
 
@@ -385,6 +449,44 @@ public sealed class RMCVehicleSystem : EntitySystem
             return;
 
         args.Handled = TryExit(ent, args.User);
+    }
+
+    private void EnsureOccupantTracking(EntityUid vehicle, InteriorData interior, out HashSet<EntityUid> passengers, out HashSet<EntityUid> xenos)
+    {
+        if (!_vehiclePassengers.TryGetValue(vehicle, out passengers))
+        {
+            passengers = new HashSet<EntityUid>();
+            _vehiclePassengers[vehicle] = passengers;
+        }
+        else
+        {
+            passengers.Clear();
+        }
+
+        if (!_vehicleXenos.TryGetValue(vehicle, out xenos))
+        {
+            xenos = new HashSet<EntityUid>();
+            _vehicleXenos[vehicle] = xenos;
+        }
+        else
+        {
+            xenos.Clear();
+        }
+
+        if (interior.MapId == MapId.Nullspace)
+            return;
+
+        var query = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out _, out var xform))
+        {
+            if (xform.MapID != interior.MapId)
+                continue;
+
+            if (HasComp<XenoComponent>(uid))
+                xenos.Add(uid);
+            else
+                passengers.Add(uid);
+        }
     }
 
     private void OnDriverSeatStrapAttempt(Entity<VehicleDriverSeatComponent> ent, ref StrapAttemptEvent args)

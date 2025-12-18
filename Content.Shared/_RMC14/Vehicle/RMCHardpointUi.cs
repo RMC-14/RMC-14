@@ -54,10 +54,20 @@ public sealed class RMCHardpointUiEntry
 public sealed class RMCHardpointBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly List<RMCHardpointUiEntry> Hardpoints;
+    public readonly float FrameIntegrity;
+    public readonly float FrameMaxIntegrity;
+    public readonly bool HasFrameIntegrity;
 
-    public RMCHardpointBoundUserInterfaceState(List<RMCHardpointUiEntry> hardpoints)
+    public RMCHardpointBoundUserInterfaceState(
+        List<RMCHardpointUiEntry> hardpoints,
+        float frameIntegrity,
+        float frameMaxIntegrity,
+        bool hasFrameIntegrity)
     {
         Hardpoints = hardpoints;
+        FrameIntegrity = frameIntegrity;
+        FrameMaxIntegrity = frameMaxIntegrity;
+        HasFrameIntegrity = hasFrameIntegrity;
     }
 }
 

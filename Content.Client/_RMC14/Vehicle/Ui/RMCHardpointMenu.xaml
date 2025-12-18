@@ -3,25 +3,90 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Hardpoints"
-    MinSize="600 400">
+    MinSize="680 500">
 
     <PanelContainer HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat
-                BackgroundColor="#05090F"
-                BorderColor="#88C7FA"
+                BackgroundColor="#070E18"
+                BorderColor="#6BC7FF"
                 BorderThickness="2"/>
         </PanelContainer.PanelOverride>
 
-        <BoxContainer Orientation="Vertical" Margin="8" HorizontalExpand="True" VerticalExpand="True">
-            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                <BoxContainer
-                    Name="HardpointList"
-                    Access="Public"
-                    Orientation="Vertical"
-                    SeparationOverride="6"
-                    HorizontalExpand="True"/>
-            </ScrollContainer>
+        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True">
+                <PanelContainer MinSize="118 118" VerticalAlignment="Center">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BackgroundColor="#0D2235"
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+
+                    <SpriteView
+                        Name="VehicleIcon"
+                        Access="Public"
+                        MinSize="118 118"
+                        Stretch="Fill"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="10"/>
+                </PanelContainer>
+
+                <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
+                    <Label Text="Vehicle Hardpoints" StyleClasses="LabelHeading"/>
+                    <Label Text="Configure and monitor." FontColorOverride="#9DB5D1"/>
+                    <BoxContainer
+                        Name="FrameHealthRow"
+                        Access="Public"
+                        Orientation="Vertical"
+                        SeparationOverride="4"
+                        Visible="False"
+                        HorizontalExpand="True">
+                        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SeparationOverride="6">
+                            <Label Text="Frame Integrity" StyleClasses="LabelSecondary" FontColorOverride="#C7D7EA"/>
+                            <Label
+                                Name="FrameHealthLabel"
+                                Access="Public"
+                                StyleClasses="LabelSecondary"
+                                FontColorOverride="#6BC7FF"
+                                HorizontalAlignment="Right"
+                                HorizontalExpand="True"
+                                Text="0%"/>
+                        </BoxContainer>
+                        <ProgressBar
+                            Name="FrameHealthBar"
+                            Access="Public"
+                            MinValue="0"
+                            MaxValue="1"
+                            Value="0"
+                            HorizontalExpand="True"
+                            MinSize="0 18">
+                            <ProgressBar.ForegroundStyleBoxOverride>
+                                <graphics:StyleBoxFlat BackgroundColor="#53D188"/>
+                            </ProgressBar.ForegroundStyleBoxOverride>
+                        </ProgressBar>
+                    </BoxContainer>
+                </BoxContainer>
+            </BoxContainer>
+
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#0B131F"
+                        BorderColor="#1E3450"
+                        BorderThickness="1"/>
+                </PanelContainer.PanelOverride>
+
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="10">
+                    <BoxContainer
+                        Name="HardpointList"
+                        Access="Public"
+                        Orientation="Vertical"
+                        SeparationOverride="10"
+                        HorizontalExpand="True"/>
+                </ScrollContainer>
+            </PanelContainer>
         </BoxContainer>
     </PanelContainer>
 </controls:RMCHardpointMenu>

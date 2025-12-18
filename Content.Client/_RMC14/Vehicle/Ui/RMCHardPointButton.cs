@@ -4,6 +4,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
@@ -18,6 +19,9 @@ public sealed partial class RMCHardpointButton : Button
 
     private bool _initialized;
     private string? _text;
+    private bool _pulse;
+    private float _pulseTimer;
+    private int _pulseDots = 1;
 
     public Color HoveredColor { get; set; } = DefaultHoveredColor;
     public Color UnhoveredColor { get; set; } = DefaultUnhoveredColor;
@@ -39,6 +43,18 @@ public sealed partial class RMCHardpointButton : Button
     {
         RobustXamlLoader.Load(this);
         UpdateColor();
+    }
+
+    public bool Pulse
+    {
+        get => _pulse;
+        set
+        {
+            _pulse = value;
+            _pulseTimer = 0f;
+            _pulseDots = 1;
+            UpdateText();
+        }
     }
 
     protected override void DrawModeChanged()
@@ -65,7 +81,15 @@ public sealed partial class RMCHardpointButton : Button
             return;
 
         var color = Disabled ? DisabledTextColor : TextColor;
-        Label.SetMarkup($"[color={color.ToHex()}][bold]{_text ?? string.Empty}[/bold][/color]");
+        var text = _text ?? string.Empty;
+
+        if (_pulse && _text != null)
+        {
+            var dots = new string('.', MathHelper.Clamp(_pulseDots, 1, 3));
+            text = $"{_text}{dots}";
+        }
+
+        Label.SetMarkup($"[color={color.ToHex()}][bold]{text}[/bold][/color]");
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
@@ -73,7 +97,20 @@ public sealed partial class RMCHardpointButton : Button
         base.FrameUpdate(args);
 
         if (_initialized)
+        {
+            if (_pulse && _text != null)
+            {
+                _pulseTimer += args.DeltaSeconds;
+                if (_pulseTimer >= 0.3f)
+                {
+                    _pulseTimer = 0f;
+                    _pulseDots = (_pulseDots % 3) + 1;
+                    UpdateText();
+                }
+            }
+
             return;
+        }
 
         _initialized = true;
         UpdateColor();
