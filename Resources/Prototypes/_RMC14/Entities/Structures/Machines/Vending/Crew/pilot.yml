@@ -21,10 +21,10 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
-      - id: CMJumpsuitPilot
-      - id: RMCJumpsuitPilotAlt
-      - id: CMHandsInsulated
-      - id: CMHandsBlackInsulated
+      # - id: CMJumpsuitPilot TODO RMC14: split DCC and Pilot Officer equipment vendors
+      # - id: RMCJumpsuitPilotAlt
+      # - id: CMHandsInsulated
+      # - id: CMHandsBlackInsulated
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
