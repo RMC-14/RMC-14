@@ -30,7 +30,7 @@
     head: ArmorHelmetPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMCLight
-    belt: CMM77BeltFilled
+    belt: RMCM77BeltPMCFilled
     back: RMCSatchelLightpack
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMCFilled
@@ -133,7 +133,7 @@
     head: RMCArmorHelmetPMCCorporateHybrisa
     jumpsuit: RMCJumpsuitVeteranPMCHybrisa
     outerClothing: CMArmorM4PMCCorporateLead
-    belt: RMCMK80BeltFilled
+    belt: RMCMK80BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
     pocket2: RMCPouchMagazineFilledP90
 

@@ -290,10 +290,11 @@
     eyes: RMCGlassesAviators
     id: CMIDCardLiaisonColony
     ears: RMCHeadsetDistressWeYa
-    belt: CMM77BeltFilled # TODO random CL survivor notes
+    belt: RMCM77BeltPMCFilled
   storage:
     back:
     - RMCRadioHandheldColonyOff
+    # TODO random CL survivor notes
 
 - type: startingGear
   parent: RMCGearCorpseLiaison
@@ -495,7 +496,7 @@
     head: RMCHeadCapManager
     jumpsuit: RMCJumpsuitLiaisonManager
     outerClothing: RMCJacketCorporateManager
-    belt: RMCMK80BeltFilled
+    belt: RMCMK80BeltPMCFilled
     shoes: RMCShoesLaceup
     id: RMCIDCardExecutiveCorporateSupervisor
     pocket2: RMCPouchToolsFill
