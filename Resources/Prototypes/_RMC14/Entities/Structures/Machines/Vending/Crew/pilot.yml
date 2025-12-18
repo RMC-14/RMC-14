@@ -21,6 +21,8 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
+      - id: CMJumpsuitPilot
+      - id: RMCJumpsuitPilotAlt
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
@@ -33,7 +35,9 @@
     - name: Armour
       choices: { CMArmour: 1 }
       entries:
+      - id: RMCArmorVestFlak
       - id: CMArmorM3VLFlakVest
+      - id: RMCCoatPilot
       - id: CMArmorM3VLBallistics
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
