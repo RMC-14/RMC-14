@@ -229,7 +229,7 @@ public sealed class ManageHiveSystem : EntitySystem
         if (!CanSacrificeBurrowedPopup(ent, out var hive))
             return;
 
-        _hive.IncreaseBurrowedLarva(hive, -1);
+        _hive.ChangeBurrowedLarva(hive, -1);
         var given = _xenoEvolution.AddPointsCapped(target, _burrowedLarvaEvolutionPointsPer);
 
         _popup.PopupCursor(Loc.GetString("rmc-hivemanagement-exchange-larva-given-user", ("target", ent), ("points", given)), ent);

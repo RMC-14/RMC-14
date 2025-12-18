@@ -303,24 +303,28 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         return hive.Comp.FreeSlots.TryGetValue(caste, out value);
     }
 
-    public void IncreaseBurrowedLarva(int amount)
+    public void ChangeBurrowedLarva(int amount)
     {
         var hives = EntityQueryEnumerator<HiveComponent>();
         while (hives.MoveNext(out var uid, out var hive))
         {
-            IncreaseBurrowedLarva((uid, hive), amount);
+            ChangeBurrowedLarva((uid, hive), amount);
         }
     }
 
-    public void IncreaseBurrowedLarva(Entity<HiveComponent> hive, int amount)
+    public void ChangeBurrowedLarva(Entity<HiveComponent> hive, int amount)
     {
         SetHiveBurrowedLarva(hive, hive.Comp.BurrowedLarva + amount);
     }
 
     private void SetHiveBurrowedLarva(Entity<HiveComponent> hive, int larva)
     {
+        var initialValue = hive.Comp.BurrowedLarva;
         hive.Comp.BurrowedLarva = larva;
         Dirty(hive);
+
+        if (larva >= initialValue)
+            RaiseLocalEvent(new BurrowedLarvaAddedEvent(GetNetEntity(hive), larva));
 
         var ev = new BurrowedLarvaChangedEvent(larva);
         RaiseLocalEvent(hive, ref ev, true);
@@ -366,7 +370,7 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         if (larva == null)
             return false;
 
-        IncreaseBurrowedLarva(hive, -1);
+        ChangeBurrowedLarva(hive, -1);
 
         _xeno.MakeXeno(larva.Value);
         SetHive(larva.Value, hive);
