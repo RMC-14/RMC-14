@@ -168,6 +168,7 @@
   components:
   - type: Sprite
     state: back_1
+  - type: Clickable
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -190,6 +191,7 @@
   components:
   - type: Sprite
     state: back_1
+  - type: Clickable
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -197,6 +199,7 @@
   components:
   - type: Sprite
     state: back_2
+  - type: Clickable
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -253,9 +256,10 @@
   components:
   - type: Sprite
     state: back_2
+  - type: Clickable
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
+  parent: RMCVehicleBoxVanWallBase
   id: RMCVehicleBoxVanExterior1
   components:
   - type: Sprite
@@ -277,7 +281,7 @@
     reactToMouse: false
 
 - type: entity
-  parent: RMCVehicleBoxVanInteriorBase
+  parent: RMCVehicleBoxVanWallBase
   id: RMCVehicleBoxVanExterior3
   components:
   - type: Sprite
@@ -325,25 +329,29 @@
   id: RMCVehicleBoxVanBackground1
   components:
   - type: Sprite
+    drawdepth: Walls
     state: background_2
   - type: RMCSpriteFade
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+  - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
+  parent: RMCVehicleBoxVanRoofBase
   id: RMCVehicleBoxVanBackground2
   components:
   - type: Sprite
     state: background_2
+  - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleBoxVanWallBase
+  parent: RMCVehicleBoxVanRoofBase
   id: RMCVehicleBoxVanBackground3
   components:
   - type: Sprite
     state: background_3
+  - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 12/18/2025 09:27:29
-  entityCount: 38
+  time: 12/18/2025 12:35:01
+  entityCount: 40
 maps:
 - 1
 grids:
@@ -71,6 +71,8 @@ entities:
     - type: Gravity
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
+      inherent: True
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 2
@@ -138,6 +140,7 @@ entities:
       pos: -0.5,-1.5
       parent: 2
     - type: VehicleExit
+      entryIndex: 2
 - proto: RMCVehicleVanBack2
   entities:
   - uid: 12
@@ -186,29 +189,29 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 2
-  - uid: 22
+  - uid: 19
     components:
     - type: Transform
       pos: 1.5,0.5
       parent: 2
-  - uid: 23
+  - uid: 20
     components:
     - type: Transform
       pos: 2.5,0.5
       parent: 2
 - proto: RMCVehicleVanExterior2
   entities:
-  - uid: 19
+  - uid: 21
     components:
     - type: Transform
       pos: 0.5,-1.5
       parent: 2
-  - uid: 20
+  - uid: 22
     components:
     - type: Transform
       pos: 1.5,-1.5
       parent: 2
-  - uid: 21
+  - uid: 23
     components:
     - type: Transform
       pos: 2.5,-1.5
@@ -330,5 +333,18 @@ entities:
     components:
     - type: Transform
       pos: 3.5,0.5
+      parent: 2
+- proto: RMCVehicleViewportSimple
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 2
+  - uid: 40
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,-1.5
       parent: 2
 ...

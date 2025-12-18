@@ -1,0 +1,25 @@
+- type: entity
+  parent: RMCVehicleVanInteriorBase
+  id: RMCVehicleViewport
+  name: vehicle viewport
+  description: A small viewport for peering outside.
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    state: viewport
+    drawdepth: WallTops
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCVehicleViewport
+
+- type: entity
+  parent: RMCVehicleViewport
+  id: RMCVehicleViewportSimple
+  name: vehicle viewport (simple)
+  description: A small viewport for peering outside.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    state: viewport_simple

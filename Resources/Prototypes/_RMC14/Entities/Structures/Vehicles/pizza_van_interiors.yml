@@ -182,6 +182,7 @@
   components:
   - type: Sprite
     state: back_1
+  - type: Clickable
 
 - type: entity
   parent: RMCVehiclePizzaVanWallBase
@@ -189,6 +190,7 @@
   components:
   - type: Sprite
     state: back_2
+  - type: Clickable
 
 - type: entity
   parent: RMCVehiclePizzaVanWallBase
@@ -320,7 +322,7 @@
     reactToMouse: false
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
+  parent: RMCVehiclePizzaVanRoofBase
   id: RMCVehiclePizzaVanBackground1
   components:
   - type: Sprite
@@ -336,10 +338,12 @@
   id: RMCVehiclePizzaVanBackground2
   components:
   - type: Sprite
+    drawdepth: Walls
     state: background_2
+  - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehiclePizzaVanInteriorBase
+  parent: RMCVehiclePizzaVanRoofBase
   id: RMCVehiclePizzaVanBackground3
   components:
   - type: Sprite
@@ -392,7 +396,6 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
-  - type: Clickable
   - type: InteractionTransparency
 
 - type: entity

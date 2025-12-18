@@ -579,15 +579,15 @@
     # Entry point 0: Side door
     - offset: 1,-1
       radius: 0.6
-      interiorCoords: 3.25,0
+      interiorCoords: -0.42,1.6
     # Entry point 1: Side-door
     - offset: -1,-1
       radius: 0.6
-      interiorCoords: 3.25,-1
+      interiorCoords: -0.53,0.84
     # Entry point 2: Back door
     - offset: 0,2
       radius: 0.75
-      interiorCoords: 0.25,-1
+      interiorCoords: -1.74,1.22
 
 - type: entity
   id: RMCVehiclePizzaVan

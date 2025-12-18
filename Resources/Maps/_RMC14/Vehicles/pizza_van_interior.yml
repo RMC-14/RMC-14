@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 12/17/2025 18:17:17
-  entityCount: 40
+  time: 12/18/2025 14:37:40
+  entityCount: 39
 maps:
 - 1
 grids:
@@ -26,6 +26,8 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
+    - type: MapLight
+      ambientLightColor: '#FFFFFFFF'
     - type: GridTree
     - type: Broadphase
     - type: OccluderTree
@@ -107,6 +109,17 @@ entities:
     - type: VehicleDriverSeat
       skills:
         all: {}
+    - type: Absorbent
+      transferSound: !type:SoundPathSpecifier
+        params:
+          variation: 0.05
+          volume: -3
+        path: /Audio/Effects/Fluids/slosh.ogg
+      pickupSound: !type:SoundPathSpecifier
+        params:
+          variation: 0.05
+        path: /Audio/Effects/Fluids/watersplash.ogg
+      progress: {}
 - proto: RMCBoxPizzaGalaxyMystery
   entities:
   - uid: 8
@@ -226,34 +239,12 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 2
-    - type: VehicleExit
-      entryIndex: 1
 - proto: RMCVehiclePizzaVanFront1
   entities:
   - uid: 21
     components:
     - type: Transform
       pos: 1.5,0.5
-      parent: 2
-- proto: RMCVehiclePizzaVanFront2
-  entities:
-  - uid: 22
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,-0.5
-      parent: 2
-  - uid: 23
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,-0.5
-      parent: 2
-  - uid: 24
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,-0.5
       parent: 2
 - proto: RMCVehiclePizzaVanFront3
   entities:
@@ -332,6 +323,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,-0.5
       parent: 2
+    - type: VehicleExit
+      entryIndex: 1
 - proto: RMCVehiclePizzaVanRight3
   entities:
   - uid: 35
@@ -381,5 +374,18 @@ entities:
     components:
     - type: Transform
       pos: 0.5,1.5
+      parent: 2
+- proto: RMCVehicleViewportSimple
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,0.5
+      parent: 2
+  - uid: 42
+    components:
+    - type: Transform
+      pos: -0.5,2.5
       parent: 2
 ...
