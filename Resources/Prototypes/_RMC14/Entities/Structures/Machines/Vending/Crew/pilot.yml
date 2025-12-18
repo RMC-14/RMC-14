@@ -23,6 +23,8 @@
       entries:
       - id: CMJumpsuitPilot
       - id: RMCJumpsuitPilotAlt
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
