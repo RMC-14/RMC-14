@@ -69,12 +69,12 @@ public sealed partial class RMCPlaytimeStatsWindow : FancyWindow
     {
         if (playtime >= _prismaticTime)
             return RMCPlaytimeMedalType.Prismatic;
+        else if (playtime >= _emeraldTime)
+            return RMCPlaytimeMedalType.Emerald;
         else if (playtime >= _amethystTime)
             return RMCPlaytimeMedalType.Amethyst;
         else if (playtime >= _rubyTime)
             return RMCPlaytimeMedalType.Ruby;
-        else if (playtime >= _emeraldTime)
-            return RMCPlaytimeMedalType.Emerald;
         else if (playtime >= _platinumTime)
             return RMCPlaytimeMedalType.Platinum;
         else if (playtime >= _goldTime)

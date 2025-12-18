@@ -132,6 +132,9 @@
       3: rmc-xeno-elder-parasite
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
+      6: rmc-xeno-prime-parasite
+      7: rmc-xeno-prime-parasite
+      8: rmc-xeno-prime-parasite
   - type: FixedIdentity
     name: cm-job-name-xeno-parasite-xeno
     whitelist:
