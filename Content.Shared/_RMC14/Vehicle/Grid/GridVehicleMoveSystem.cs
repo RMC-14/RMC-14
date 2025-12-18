@@ -427,6 +427,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
+        var blocked = false;
+        var mobHits = new Dictionary<EntityUid, Box2>();
 
         foreach (var other in hits)
         {
@@ -478,15 +480,15 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
                 if (blocksXeno)
                 {
-                    PlayCollisionSound(uid, ref playedCollisionSound);
+                    PlayMobCollisionSound(uid, ref playedCollisionSound);
                     ApplyWheelCollisionDamage(uid, mover, wheelDamage);
                     DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
                     return false;
                 }
 
-                PlayCollisionSound(uid, ref playedCollisionSound);
+                PlayMobCollisionSound(uid, ref playedCollisionSound);
                 if (!_net.IsClient)
-                    PushMobOutOfVehicle(other, aabb, otherAabb);
+                    PushMobOutOfVehicle(uid, other, aabb, otherAabb);
 
                 continue;
             }
@@ -510,20 +512,33 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             if (TrySmash(other, uid, ref playedCollisionSound))
                 continue;
 
-            var blocked = !skipBlocking && hardCollidable;
-            if (blocked)
+            var isBlocked = !skipBlocking && hardCollidable;
+            if (isBlocked)
             {
                 PlayCollisionSound(uid, ref playedCollisionSound);
                 ApplyWheelCollisionDamage(uid, mover, wheelDamage);
                 DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
-                return false;
+                blocked = true;
+                break;
             }
 
             if (!_net.IsClient && isMob && mob != null)
+                mobHits[other] = otherAabb;
+        }
+
+        if (blocked)
+            return false;
+
+        if (!_net.IsClient)
+        {
+            foreach (var (mobUid, mobAabb) in mobHits)
             {
-                HandleMobCollision(uid, other, mob, ref playedCollisionSound);
-                if (!isXeno)
-                    PushMobOutOfVehicle(other, aabb, otherAabb);
+                if (!TryComp(mobUid, out MobStateComponent? mob))
+                    continue;
+
+                HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
+                if (!HasComp<XenoComponent>(mobUid))
+                    PushMobOutOfVehicle(uid, mobUid, aabb, mobAabb);
             }
         }
 
@@ -696,6 +711,31 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         played = true;
     }
 
+    private void PlayMobCollisionSound(EntityUid uid, ref bool played)
+    {
+        if (played)
+            return;
+
+        if (!TryComp<RMCVehicleSoundComponent>(uid, out var sound))
+            return;
+
+        var mobSound = sound.MobCollisionSound ?? sound.CollisionSound;
+        if (mobSound == null)
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        var now = _timing.CurTime;
+        if (sound.NextCollisionSound > now)
+            return;
+
+        _audio.PlayPvs(mobSound, uid);
+        sound.NextCollisionSound = now + TimeSpan.FromSeconds(sound.CollisionSoundCooldown);
+        Dirty(uid, sound);
+        played = true;
+    }
+
     private void HandleMobCollision(EntityUid vehicle, EntityUid target, MobStateComponent mobState, ref bool playedCollisionSound)
     {
         if (_net.IsClient || _mobState.IsDead(target, mobState))
@@ -707,7 +747,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         _lastMobCollision[target] = now;
 
-        PlayCollisionSound(vehicle, ref playedCollisionSound);
+        PlayMobCollisionSound(vehicle, ref playedCollisionSound);
 
         var damage = new DamageSpecifier
         {
@@ -732,7 +772,7 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     }
 
 
-    private void PushMobOutOfVehicle(EntityUid mob, Box2 vehicleAabb, Box2 mobAabb)
+    private void PushMobOutOfVehicle(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb)
     {
         var xform = Transform(mob);
         if (xform.Anchored)
@@ -755,8 +795,11 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             ? new Vector2(Math.Sign(diff.X == 0f ? 1f : diff.X) * overlapX, 0f)
             : new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY);
 
-        const float pushMultiplier = 1.5f;
+        var pushMultiplier = HasComp<XenoComponent>(mob) ? 2.25f : 1.5f;
         push *= pushMultiplier;
+
+        if (IsPushBlocked(vehicle, mob, mobAabb, push))
+            return;
 
         var newWorldPosition = transform.GetWorldPosition(mob) + push;
         transform.SetWorldPosition(mob, newWorldPosition);
@@ -766,5 +809,42 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             physics.SetLinearVelocity(mob, Vector2.Zero, body: mobBody);
             physics.SetAngularVelocity(mob, 0f, body: mobBody);
         }
+    }
+
+    private bool IsPushBlocked(EntityUid vehicle, EntityUid mob, Box2 mobAabb, Vector2 push)
+    {
+        if (push == Vector2.Zero)
+            return false;
+
+        var xform = Transform(mob);
+        var mapId = xform.MapID;
+        if (mapId == MapId.Nullspace)
+            return false;
+
+        if (!physicsQ.TryComp(mob, out var mobBody) || !fixtureQ.TryComp(mob, out var mobFixtures))
+            return false;
+
+        var shifted = mobAabb.Translated(push);
+        var hits = lookup.GetEntitiesIntersecting(mapId, shifted, LookupFlags.Dynamic | LookupFlags.Static);
+        foreach (var other in hits)
+        {
+            if (other == mob || other == vehicle)
+                continue;
+
+            if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
+                continue;
+
+            var otherXform = Transform(other);
+            if (otherXform.Anchored || otherBody.BodyType == BodyType.Static)
+                return true;
+
+            if (!fixtureQ.TryComp(other, out var otherFixtures))
+                continue;
+
+            if (physics.IsHardCollidable((mob, mobFixtures, mobBody), (other, otherFixtures, otherBody)))
+                return true;
+        }
+
+        return false;
     }
 }

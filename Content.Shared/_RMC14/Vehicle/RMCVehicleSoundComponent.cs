@@ -20,6 +20,9 @@ public sealed partial class RMCVehicleSoundComponent : Component
     public float CollisionSoundCooldown = 0.25f;
 
     [DataField]
+    public SoundSpecifier? MobCollisionSound;
+
+    [DataField]
     public SoundSpecifier? HornSound;
 
     [DataField]

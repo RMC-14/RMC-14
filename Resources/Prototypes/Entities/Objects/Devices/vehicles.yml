@@ -218,6 +218,7 @@
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.4
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
     energy: 2.5
@@ -351,6 +352,7 @@
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.4
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
     energy: 2.5
@@ -482,6 +484,7 @@
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.4
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
     energy: 2.5
@@ -493,7 +496,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.425,1.4,0.425,-0.35
         density: 1000
         mask:
         - Impassable
@@ -505,7 +508,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,1.2
+          bounds: -0.425,1.4,0.425,-0.35
         density: 1000
         mask:
         - MidImpassable
@@ -518,6 +521,7 @@
     damageModifierSet: StructuralMarine
   - type: InteractionOutline
   - type: Sprite
+    offset: "0,0.5"
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/box_van.rsi
     layers:
@@ -577,11 +581,11 @@
     exitDoAfter: 1.0
     entryPoints:
     # Entry point 0: Side door
-    - offset: 1,-1
+    - offset: 1,-0.25
       radius: 0.6
       interiorCoords: -0.42,1.6
     # Entry point 1: Side-door
-    - offset: -1,-1
+    - offset: -1,-0.25
       radius: 0.6
       interiorCoords: -0.53,0.84
     # Entry point 2: Back door
@@ -613,6 +617,7 @@
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
     collisionSoundCooldown: 0.4
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
     energy: 2.5
@@ -624,7 +629,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,0.7
+          bounds: -0.425,1.4,0.425,-0.35
         density: 1000
         mask:
         - Impassable
@@ -636,7 +641,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.425,-1.2,0.425,0.7
+          bounds: -0.425,1.4,0.425,-0.35
         density: 1000
         mask:
         - MidImpassable
@@ -651,7 +656,7 @@
   - type: Sprite
     drawdepth: Mobs
     sprite: _RMC14/Structures/Vehicles/pizza_van.rsi
-    offset: "0,-0.3"
+    offset: "0,0.5"
     layers:
     - map: [ base ]
       state: van_base
@@ -709,15 +714,15 @@
     exitDoAfter: 1.0
     entryPoints:
     # Entry point 0: Side door
-    - offset: 1,-1
+    - offset: 1,-0.25
       radius: 0.6
       interiorCoords: 0.4,1.65
     # Entry point 1: Side-door
-    - offset: -1,-1
+    - offset: -1,-0.25
       radius: 0.6
       interiorCoords: 0.55,0.43
     # Entry point 2: Back door
-    - offset: 0,1
+    - offset: 0,2
       radius: 0.75
       interiorCoords: -0.75,1.2
 
