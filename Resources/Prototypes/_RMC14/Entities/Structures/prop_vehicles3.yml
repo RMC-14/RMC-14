@@ -159,7 +159,7 @@
 - type: entity
   parent: RMCPropVehicleLargeBase
   id: RMCPropVehicleLoaderTruckBlack
-  name: heavy-loader truck
+  name: Weston-Yamada security truck
   description: It's locked and seems to be broken down, forget driving this.
   components:
   - type: Sprite
@@ -168,7 +168,7 @@
 - type: entity
   parent: RMCPropVehicleLargeBase
   id: RMCPropVehicleLoaderTruckBlackF
-  name: heavy-loader truck
+  name: Weston-Yamada security truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Flipped
   components:
@@ -178,7 +178,7 @@
 - type: entity
   parent: RMCPropVehicleLargeBase
   id: RMCPropVehicleLoaderTruckBlackFilled
-  name: heavy-loader truck
+  name: Weston-Yamada security truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Loaded
   components:
@@ -188,7 +188,7 @@
 - type: entity
   parent: RMCPropVehicleLargeBase
   id: RMCPropVehicleLoaderTruckBlackFilledF
-  name: heavy-loader truck
+  name: Weston-Yamada security truck
   description: It's locked and seems to be broken down, forget driving this.
   suffix: Loaded, Flipped
   components:
