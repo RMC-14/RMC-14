@@ -315,6 +315,8 @@ public sealed class XenoDevourSystem : EntitySystem
             }
         }
 
+        totalDamage *= usuable.DamageMult;
+
         //Reset attack cooldown so we don't like, go crazy
         melee.NextAttack = devoured.Comp.NextDevouredAttackTimeAllowed;
         Dirty(weapon.Value, melee);
