@@ -22,6 +22,11 @@
         shader: unshaded
     - type: Machine
       board: CMSMESMachineCircuitboard
+    - type: InteractedBlacklist
+      blacklist:
+        components:
+        - Xeno
+
 
 # SMES' in use
 
