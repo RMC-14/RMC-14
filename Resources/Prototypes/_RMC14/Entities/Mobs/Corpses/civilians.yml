@@ -475,11 +475,17 @@
 
 # Corporate Supervisor
 - type: randomHumanoidSettings
-  parent: RMCCorpse
+  parent: RMCCorpseWeYa
   id: RMCCorpseWeYaManager
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseWeYaManager ]
+  - type: Rank
+    rank: RMCRankWeYaExecutiveSupervisor
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: weya_execsuper
 
 - type: startingGear
   id: RMCGearCorpseWeYaManager # TODO lockable satchel and random research notes

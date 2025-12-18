@@ -139,7 +139,7 @@
   name: executive corporate supervisor ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialistLegal
+    job: CMCorporateExecutiveSupervisor
 
 - type: entity
   parent: CMIDCardLiaison
