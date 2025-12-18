@@ -30,6 +30,7 @@
   id: RMCArmorRiotCivilian
   name: riot suit
   description: A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement.
+  suffix: Civilian
   components:
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
     walkModifier: 0.62
