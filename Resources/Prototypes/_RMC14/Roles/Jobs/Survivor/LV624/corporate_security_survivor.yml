@@ -1,10 +1,11 @@
 - type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorLV624SecurityGuard
-  name: rmc-job-name-survivor-lv624-security-guard
-  description: cm-job-description-survivor
+  name: rmc-job-name-pmc-corporate-goon-secguard
   startingGear: RMCGearSurvivorLV624SecurityGuard
-  spawnMenuRoleName: Security Guard (LV624 Survivor)
+  hasIcon: true
+  icon: RMCJobIconWeYaSec
+  spawnMenuRoleName: WeYa Security Guard (LV624 Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,8 +20,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624SecurityGuard
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+      preset: RMCSurvivorPresetSecurity
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
@@ -35,18 +35,13 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorLV624SecurityGuard
-  name: survivor lv624 security guard spawn point
+  name: survivor lv624 weya secguard spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivor
+    job_id: CMSurvivorLV624SecurityGuard
   - type: Sprite # TODO: Replace with landmark sprite
     layers:
     - sprite: Markers/jobs.rsi
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: entity
-  parent: RMCSurvivorPresetSecurity
-  id: RMCGearSurvivorPresetLV624SecurityGuard
-  name: lv624 security guard colonist preset
