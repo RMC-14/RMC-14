@@ -188,7 +188,7 @@
 
 - type: marking
   id: RMCSpotsSkrellBodyLeft
-  bodyPart: Chest
+  bodyPart: LLeg
   markingCategory: Overlay
   speciesRestriction: [Skrell]
   sprites:
@@ -197,7 +197,7 @@
 
 - type: marking
   id: RMCSpotsSkrellBodyRight
-  bodyPart: Chest
+  bodyPart: RLeg
   markingCategory: Overlay
   speciesRestriction: [Skrell]
   sprites:

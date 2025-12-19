@@ -6,12 +6,21 @@
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   abstract: true
   components:
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+      params:
+        volume: -4
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:
@@ -180,3 +189,18 @@
         - ReagentId: WeldingFuel
           Quantity: 150
         maxVol: 150 # TODO RMC14 60 when welders are fixed
+
+- type: entity
+  parent: RMCWelderBase
+  id: RMCWelderPVE
+  name: modified blowtorch
+  description: A more 'advanced' version of the standard UNMC Blowtorch, this blowtorch has a welding shield for eye protection affixed to it. Seems the eye shield was ripped off of a standard ME3 hand welder and then crudely affixed.
+  suffix: PVE, DO NOT MAP
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 100
+        maxVol: 100 # TODO RMC14 40 when welders are fixed
