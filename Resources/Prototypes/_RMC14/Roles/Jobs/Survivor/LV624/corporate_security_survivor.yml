@@ -26,7 +26,7 @@
   parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorLV624SecurityGuard
   equipment:
-    head: ArmorHelmetPMC # TODO RMC black PMC hat
+    head: RMCArmorHelmetPMCDark
     jumpsuit: RMCJumsuitWhiteService
     outerClothing: RMCArmorVestWeYa
     ears: RMCHeadsetDistressWeYa
