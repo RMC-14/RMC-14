@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Admin.AdminGhost;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -43,12 +44,18 @@ public sealed class LarvaQueueSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnCleanup);
         SubscribeLocalEvent<BurrowedLarvaAddedEvent>(OnBurrowedLarvaAdded);
         SubscribeLocalEvent<PlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<HiveMemberComponent, PlayerDetachedEvent>(OnPlayerDetached);
+        SubscribeLocalEvent<HiveMemberComponent, MindRemovedMessage>(OnMindRemoved);
     }
 
-    private void OnPlayerDetached(Entity<HiveMemberComponent> ent, ref PlayerDetachedEvent args)
+    private void OnMindRemoved(Entity<HiveMemberComponent> ent, ref MindRemovedMessage args)
     {
+        if(HasComp<XenoParasiteComponent>(ent))
+            return;
 
+        if(!TryComp(ent, out XenoComponent? xeno))
+            return;
+
+        EnsureComp<LarvaQueuedComponent>(ent);
     }
 
     private void OnPlayerAttached(PlayerAttachedEvent ev)
