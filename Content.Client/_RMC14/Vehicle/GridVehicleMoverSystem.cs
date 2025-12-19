@@ -19,11 +19,8 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     public override void Initialize()
     {
         _overlay = new GridVehicleMoverOverlay(EntityManager);
-        if (_overlay != null)
-        {
-            _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
-            _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
-        }
+        _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
+        _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
 
         _cfg.OnValueChanged(RMCCVars.RMCVehicleDebugOverlay, val =>
         {
