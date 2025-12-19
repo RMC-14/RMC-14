@@ -1,0 +1,68 @@
+- type: job
+  parent: CMJobBase
+  id: RMCJobAverageJoe
+  name: rmc-job-name-average-joe
+  description: rmc-job-description-average-joe
+  playTimeTracker: RMCJobSynthetic
+  startingGear: RMCGearAverageJoe
+  hasIcon: false
+  joinNotifyCrew: false
+  whitelisted: true
+  supervisors: rmc-job-supervisors-robotic
+  accessGroups:
+  - ShipMasterAccess
+  - Synth
+  roleWeight: 0.1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: joe
+  whitelistParent: RMCJobSynthetic
+  applyTraits: false
+  jobEntity: RMCMobAverageJoe
+  jobPreviewEntity: RMCMobAverageJoeDummy
+  hidden: true
+
+- type: startingGear
+  id: RMCGearAverageJoe # TODO maintenance jacket on suit storage and Joe PDA in sling pouch
+  equipment:
+    ears: CMHeadsetEngineer
+    jumpsuit: RMCJumpsuitAverageJoePouch
+    belt: RMCBeltUtilityJoeFilled
+    back: CMSatchelMarine
+    shoes: RMCShoesLaceup
+    id: RMCIDCardAverageJoe
+    pocket1: RMCPouchSling
+    pocket2: RMCPouchConstruction
+  storage:
+    back:
+    - RMCSprayBottleSpaceCleaner
+    - RMCSprayBottleSpaceCleaner
+    - RMCBucket
+    - CMMop
+    pocket1:
+    - CMSheetMetal30
+    - CMSheetGlassReinforced30
+  inhand:
+    - TrashBag
+
+- type: entity
+  parent: CMJumpsuitAverageJoe
+  id: RMCJumpsuitAverageJoePouch
+  suffix: Drop Pouch, Filled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingPouchAverageJoe
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointAverageJoe
+  name: average joe spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobAverageJoe
+  - type: Sprite
+    state: syn_spawn

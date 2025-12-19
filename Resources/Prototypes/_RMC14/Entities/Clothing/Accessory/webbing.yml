@@ -815,6 +815,18 @@
       - id: CMMRE
 
 - type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingPouchAverageJoe
+  suffix: Filled, Average Joe
+  components:
+  - type: StorageFill
+    contents:
+      - id: CMAPCElectronics
+      # TODO airlock electronics
+      - id: RMCPowerCell
+      - id: CMWetSign
+
+- type: entity
   parent: CMWebbingBase
   id: CMWebbingSurgicalGreen
   name: surgical webbing vest

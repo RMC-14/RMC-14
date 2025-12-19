@@ -1,0 +1,142 @@
+- type: entity
+  save: false
+  parent: RMCBaseMobSpeciesOrganic
+  id: RMCMobAverageJoe
+  name: Urist McJoe
+  suffix: RMC14
+  components:
+  - type: Sprite
+    layers:
+    - map: [ "enum.HumanoidVisualLayers.Chest" ]
+    - map: [ "enum.HumanoidVisualLayers.Head" ]
+    - map: [ "enum.HumanoidVisualLayers.Snout" ]
+    - map: [ "enum.HumanoidVisualLayers.Eyes" ]
+      shader: unshaded
+    - map: [ "enum.HumanoidVisualLayers.RArm" ]
+    - map: [ "enum.HumanoidVisualLayers.LArm" ]
+    - map: [ "enum.HumanoidVisualLayers.RLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.LLeg" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
+    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    - map: ["jumpsuit"]
+    - map: ["enum.HumanoidVisualLayers.LFoot"]
+    - map: ["enum.HumanoidVisualLayers.RFoot"]
+    - map: ["enum.HumanoidVisualLayers.LHand"]
+    - map: ["enum.HumanoidVisualLayers.RHand"]
+    - map: [ "gloves" ]
+    - map: [ "enum.SquadArmorLayers.Gloves" ]
+    - map: [ "shoes" ]
+    - map: [ "id" ] # RMC14 re-arrange id slot
+    - map: [ "ears" ]
+    - map: [ "eyes" ]
+    - map: [ "outerClothing" ]
+    - map: [ "belt" ]
+    - map: [ "enum.SquadArmorLayers.Armor" ]
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "back" ]
+    - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
+    - map: [ "enum.HumanoidVisualLayers.Hair" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
+    - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
+    - map: [ "enum.HumanoidVisualLayers.Tail" ]
+    - map: [ "mask" ]
+    - map: [ "head" ]
+    - map: [ "enum.SquadArmorLayers.Helmet" ]
+    - map: [ "enum.VisorVisualLayers.Base" ]
+    - map: [ "pocket1" ]
+    - map: [ "pocket2" ]
+    - map: ["enum.HumanoidVisualLayers.Handcuffs"]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
+      visible: false
+    - map: [ "clownedon" ] # Dynamically generated
+      sprite: "Effects/creampie.rsi"
+      state: "creampie_human"
+      visible: false
+    - map: [ "acided" ]
+    - map: [ "hooked" ]
+      sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
+      state: hooked
+      visible: false
+    - map: [ "enum.NewPlayerLayers.Layer" ]
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
+  - type: HumanoidAppearance
+    species: AverageJoe
+  - type: Speech
+    speechVerb: Robotic
+  - type: Vocal
+    sounds: null
+    screamAction: null
+  - type: Deathgasp
+    prototype: RMCAverageJoeDeathGasp
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.1
+    baseSprintSpeed: 4.55
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+      params:
+        variation: 0.15
+        volume: -1
+    angle: 30
+    animation: WeaponArcFist
+    attackRate: 1
+    damage:
+      types:
+        Blunt: 35
+  - type: Synth
+    generation: rmc-species-synth-generation-first
+    removeComponents: RMCSynthJoeRemoveComponents
+    critThreshold: 199
+    deadThreshold: 200
+    newDamageModifier: RMCJoeSynth
+  - type: Skills
+    preset: AverageJoe
+  - type: RMCRandomName
+    baseName: rmc-species-name-average-joe-1
+    postFix: rmc-species-name-average-joe-postfix
+    maxNumber: 5000
+  - type: RMCCombatModeEyeColor
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: neuter
+
+- type: entity
+  parent: BaseSpeciesDummy
+  id: RMCMobAverageJoeDummy
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  id: RMCSynthJoeRemoveComponents
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CMSurgeryTarget
+  - type: Infectable
+  - type: Hunger
+  - type: Thirst
+  - type: Perishable
+  - type: ThermalRegulator
+  - type: Stamina
+  - type: DamageForceSay
+  - type: Dna
+  - type: InjectableSolution
+  - type: IVDripTarget
+  - type: RMCSuicide
+    damage: { }
+  - type: HiddenAppearance

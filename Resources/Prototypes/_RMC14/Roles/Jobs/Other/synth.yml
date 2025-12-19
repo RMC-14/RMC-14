@@ -1,8 +1,8 @@
 - type: job
   parent: CMJobBase
   id: RMCJobSynthetic
-  name: rmc-job-name-synth
-  description: rmc-job-description-synth
+  name: rmc-job-name-average-joe
+  description: rmc-job-description-average-joe
   playTimeTracker: RMCJobSynthetic
   ranks:
     RMCRankMasterSergeant: [ ]

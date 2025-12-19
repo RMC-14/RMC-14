@@ -30,3 +30,6 @@ rmc-job-description-hybrisa-civilian = Live out your life within Hybrisa Prosper
 
 rmc-job-name-corp-synthetic = Corporate Synthetic
 rmc-job-description-corp-synthetic = Support Weston-Yamada interests and personnel wherever needed.
+
+rmc-job-name-average-joe = Average Joe
+rmc-job-description-average-joe = Your primary task is to maintain the cleanliness of the ship, putting things in their proper place. Follow the orders of ARES and HERMES.

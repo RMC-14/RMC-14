@@ -309,6 +309,14 @@
     job: RMCJobSynthetic
 
 - type: entity
+  parent: CMIDCardBase
+  id: RMCIDCardAverageJoe
+  name: average joe ID card
+  components:
+  - type: PresetIdCard
+    job: RMCJobAverageJoe
+
+- type: entity
   parent: CMIDCardLanyard
   id: RMCIDCardSynthColony
   name: synth ID card
