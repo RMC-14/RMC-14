@@ -129,5 +129,17 @@ marking-AvaliTailTrimTwo-tail_avalibase = Tail Base
 marking-AvaliTailTrimTwo-tail_avali_primary = Primary
 marking-AvaliTailTrimTwo-tail_avali_secondary = Secondary
 marking-AvaliTailAnimated = (Base,wag) Avali tail
+marking-AvaliTailAnimated-Striped = (Type One,wag) Striped Avali Tail
+marking-AvaliTailAnimated-Stripedtail_avalibase = Base Tail
+marking-AvaliTailAnimated-Stripedtail_avali_primary = Primary
+marking-AvaliTailAnimated-Stripedtail_avali_secondary = Secondary
+marking-AvaliTailAnimated = (Type One) Trimmed Avali Tail
+marking-AvaliTailAnimated-trimmedonetail_avalibase = Base Tail
+marking-AvaliTailAnimated-trimmedonetail_avali_primary = Primary
+marking-AvaliTailAnimated-trimmedonetail_avali_secondary = Secondary
+marking-AvaliTailAnimated = (Type two) Trimmed Avali Tail
+marking-AvaliTailAnimated-trimmedtwotail_avalibase = Base Tail
+marking-AvaliTailAnimated-trimmedtwotail_avali_primary = Primary
+marking-AvaliTailAnimated-trimmedtwotail_avali_secondary = Secondary
 
 rmc-namepreset-firstlastcombined = {$first}{$last}
