@@ -53,11 +53,11 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<HiveMemberComponent> ent, ref MindRemovedMessage args)
     {
-        if (HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) ||
-            lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
+        if (!TryComp(ent, out XenoComponent? xeno))
             return;
 
-        if (!TryComp(ent, out XenoComponent? xeno))
+        if (HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) ||
+            lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
