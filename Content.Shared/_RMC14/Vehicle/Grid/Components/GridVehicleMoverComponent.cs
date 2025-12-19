@@ -41,7 +41,6 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public float ReverseAcceleration = 4f;
 
-    // Distance from physics origin to the vehicle's front anchor (meters).
     [DataField, AutoNetworkedField]
     public float FrontOffset = 0f;
 
@@ -51,9 +50,6 @@ public sealed partial class GridVehicleMoverComponent : Component
     [AutoNetworkedField]
     public bool IsMoving;
 
-    /// <summary>
-    /// Minimum xeno size that can block this vehicle. Null means any xeno blocks it.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public RMCSizes? XenoBlockMinimumSize;
 

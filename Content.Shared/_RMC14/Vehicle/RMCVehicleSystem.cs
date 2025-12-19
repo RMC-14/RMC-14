@@ -120,8 +120,6 @@ public sealed class RMCVehicleSystem : EntitySystem
                 return false;
         }
 
-        Logger.Info($"[VehicleEnter] {ToPrettyString(user)} entering {ToPrettyString(ent.Owner)} index={entryIndex}");
-
         EnsureOccupantTracking(ent.Owner, interior, out var passengers, out var xenos);
 
         var isXeno = HasComp<XenoComponent>(user);
@@ -149,11 +147,9 @@ public sealed class RMCVehicleSystem : EntitySystem
             var entryPoint = ent.Comp.EntryPoints[entryIndex];
             if (entryPoint.InteriorCoords is { } interiorCoord)
             {
-                // interiorCoord is already a Vector2, no parsing needed
                 var parent = interior.Grid.IsValid() ? interior.Grid : interior.EntryParent;
                 var entityCoords = new EntityCoordinates(parent, interiorCoord);
                 targetMapCoords = _transform.ToMapCoordinates(entityCoords);
-                Logger.Info($"[VehicleEnter] Using interiorCoords={interiorCoord} parent={parent} map={interior.MapId} world={targetMapCoords.Position}");
                 _rmcTeleporter.HandlePulling(user, targetMapCoords);
                 if (isXeno)
                     xenos.Add(user);
@@ -161,15 +157,10 @@ public sealed class RMCVehicleSystem : EntitySystem
                     passengers.Add(user);
                 return true;
             }
-            else
-            {
-                Logger.Info($"[VehicleEnter] No interiorCoords set for index={entryIndex}, using default Entry {interior.Entry}");
-            }
         }
 
         targetMapCoords = _transform.ToMapCoordinates(coords);
         _rmcTeleporter.HandlePulling(user, targetMapCoords);
-        Logger.Info($"[VehicleEnter] Teleported via fallback coords={coords} world={targetMapCoords.Position}");
         if (isXeno)
             xenos.Add(user);
         else
@@ -202,9 +193,6 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         var mapId = map.Comp.MapId;
 
-        Logger.Info($"[VehicleEnter] Loaded interior map {mapId} for {ToPrettyString(ent.Owner)}");
-
-        // Default parent to the first interior grid, otherwise fall back to the map.
         EntityUid entryParent = map.Owner;
         EntityUid interiorGrid = EntityUid.Invalid;
         var gridEnum = EntityQueryEnumerator<MapGridComponent, TransformComponent>();
@@ -218,11 +206,8 @@ public sealed class RMCVehicleSystem : EntitySystem
             break;
         }
 
-        Logger.Info($"[VehicleEnter] interior grid parent={entryParent} grid={interiorGrid}");
-
         var entryCoords = new EntityCoordinates(entryParent, Vector2.Zero);
 
-        // Fallback: if any VehicleExit exists, use its coordinates as the default entry.
         var exitQuery = EntityQueryEnumerator<VehicleExitComponent, TransformComponent>();
         while (exitQuery.MoveNext(out _, out _, out var xform))
         {
@@ -231,7 +216,6 @@ public sealed class RMCVehicleSystem : EntitySystem
 
             entryCoords = xform.Coordinates;
             entryParent = xform.ParentUid.IsValid() ? xform.ParentUid : entryParent;
-            Logger.Info($"[VehicleEnter] found fallback VehicleExit at {entryCoords} parent={entryParent}");
             break;
         }
 
@@ -243,8 +227,6 @@ public sealed class RMCVehicleSystem : EntitySystem
             EntryParent = entryParent,
             Grid = interiorGrid,
         };
-
-        Logger.Info($"[VehicleEnter] interior setup complete entry={entryCoords} parent={entryParent} grid={interiorGrid}");
 
         _vehicleInteriors[ent.Owner] = interior;
         _mapToVehicle[mapId] = ent.Owner;

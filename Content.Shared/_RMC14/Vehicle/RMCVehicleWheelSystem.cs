@@ -177,6 +177,7 @@ public sealed class RMCVehicleWheelSystem : EntitySystem
         return count;
     }
 
+    // For some reason I thought each wheels was its own thing, so did this. but at least it supports it if that ever is a thing
     private float GetAverageWheelIntegrityFraction(EntityUid uid, RMCVehicleWheelSlotsComponent component, ItemSlotsComponent? itemSlots = null)
     {
         if (!Resolve(uid, ref itemSlots, false))

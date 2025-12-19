@@ -180,14 +180,12 @@ public sealed class GridVehicleMoverSystem : EntitySystem
             mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
             if (mover.IsMoving)
                 PlayRunningSound(uid);
-            //UpdateFixtureHardness(uid, mover.IsMoving);
             SetGridPosition(uid, grid, mover.Position);
             Dirty(uid, mover);
             return;
         }
 
         CommitNextTile(uid, mover, grid, gridComp, inputDir);
-        //UpdateFixtureHardness(uid, mover.IsMoving);
         SetGridPosition(uid, grid, mover.Position);
         Dirty(uid, mover);
     }
@@ -295,7 +293,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
         mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
         if (mover.IsMoving)
             PlayRunningSound(uid);
-        //UpdateFixtureHardness(uid, mover.IsMoving);
 
         SetGridPosition(uid, grid, mover.Position);
         physics.WakeBody(uid);
@@ -364,7 +361,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
 
         mover.TargetTile = targetTile;
         mover.IsCommittedToMove = true;
-        //UpdateFixtureHardness(uid, true);
     }
 
     private Vector2i GetInputDirection(InputMoverComponent input)

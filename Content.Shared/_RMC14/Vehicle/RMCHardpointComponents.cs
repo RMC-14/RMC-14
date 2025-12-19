@@ -27,15 +27,9 @@ public sealed partial class RMCHardpointSlotsComponent : Component
     [DataField(required: true)]
     public List<RMCHardpointSlot> Slots = new();
 
-    /// <summary>
-    /// Damage multiplier applied to damage forwarded to hardpoints.
-    /// </summary>
     [DataField]
     public float HardpointDamageMultiplier = 1f;
 
-    /// <summary>
-    /// Fraction of incoming damage that hits the frame while at least one hardpoint is still intact.
-    /// </summary>
     [DataField]
     public float FrameDamageFractionWhileIntact = 0.1f;
 
@@ -64,9 +58,6 @@ public sealed partial class RMCHardpointSlot
     [DataField]
     public float InsertDelay { get; set; } = 1f;
 
-    /// <summary>
-    /// Delay for removing a hardpoint from this slot. If not set or non-positive, the insert delay is used.
-    /// </summary>
     [DataField]
     public float RemoveDelay { get; set; } = -1f;
 
@@ -89,22 +80,12 @@ public sealed partial class RMCHardpointIntegrityComponent : Component
     [DataField]
     public SoundSpecifier? RepairSound;
 
-    /// <summary>
-    /// If true and this integrity reaches 0, vehicle entry ignores entry point checks.
-    /// Useful for a destroyed frame letting users climb in anywhere.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public bool BypassEntryOnZero;
 
-    /// <summary>
-    /// Seconds of welding time per missing integrity point.
-    /// </summary>
     [DataField]
     public float RepairTimePerIntegrity = 0.01f;
 
-    /// <summary>
-    /// Minimum and maximum weld time when repairing.
-    /// </summary>
     [DataField]
     public float RepairTimeMin = 0.25f;
 
