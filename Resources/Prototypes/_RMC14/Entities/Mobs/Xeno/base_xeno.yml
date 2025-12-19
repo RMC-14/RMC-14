@@ -260,15 +260,6 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: cm-xeno-name
-    description: cm-xeno-description
-    raffle:
-      settings: short
-    rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
     - Stun
@@ -407,6 +398,20 @@
 
 - type: entity
   abstract: true
+  id: CMXenoBaseGhostRole
+  components:
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: cm-xeno-name
+    description: cm-xeno-description
+    raffle:
+      settings: short
+    rules: cm-xeno-rules
+
+- type: entity
+  abstract: true
   id: CMXenoPrying
   components:
   - type: Prying
@@ -464,7 +469,7 @@
 
 - type: entity
   id: CMXenoAI
-  parent: CMXenoBase
+  parent: CMXenoBaseGhostRole
   abstract: true
 #  components:
 #  - type: HTN # TODO RMC14 needs to not target nested marines
@@ -482,7 +487,7 @@
 - type: entity
   id: CMXenoDeveloped
   parent:
-  - CMXenoBase
+  - CMXenoBaseGhostRole
   - CMXenoPrying
   - CMXenoPuller
   - CMXenoMelee
