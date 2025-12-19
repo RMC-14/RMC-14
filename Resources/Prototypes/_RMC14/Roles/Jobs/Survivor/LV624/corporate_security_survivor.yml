@@ -6,6 +6,9 @@
   hasIcon: true
   icon: RMCJobIconWeYaSec
   spawnMenuRoleName: WeYa Security Guard (LV624 Survivor)
+  accessGroups:
+  - ColonistSec
+  - ColonistCorporate
   special:
   - !type:AddComponentSpecial
     components:

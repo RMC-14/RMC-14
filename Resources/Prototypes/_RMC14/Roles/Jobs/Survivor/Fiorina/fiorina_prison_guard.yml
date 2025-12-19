@@ -7,6 +7,7 @@
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
   accessGroups:
   - ColonistSec
+  - ColonistCorporate
   spawnMenuRoleName: We-Ya Corporate Security (Fiorina Survivor)
   icon: "RMCJobIconPMCGoonStandard"
   hasIcon: true
