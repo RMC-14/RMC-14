@@ -81,11 +81,6 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     private void UpdateGhostRoles(Entity<HiveLesserSpawnerComponent, GhostRoleMobSpawnerComponent> coreEnt)
     {
         var (uid, core, spawner) = coreEnt;
-
-        EntityUid? hiveUid = null;
-        if (TryComp<HiveMemberComponent>(uid, out var pylonMember))
-            hiveUid = pylonMember.Hive;
-
         for (var i = core.LiveLesserDrones.Count - 1; i >= 0; i--)
         {
             var drone = core.LiveLesserDrones[i];
@@ -100,21 +95,21 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
         _ghostRole.SetCurrent((uid, spawner), core.LiveLesserDrones.Count);
 
-        if (!_evolution.HasLiving<XenoComponent>(1, hiveUid) && 
-            !_evolution.HasLiving<XenoEvolutionGranterComponent>(1, hiveUid))
+        if (!_evolution.HasLiving<XenoComponent>(1) &&
+            !_evolution.HasLiving<XenoEvolutionGranterComponent>(1))
         {
             _ghostRole.SetAvailable((uid, spawner), 0);
             return;
         }
 
-        var living = _evolution.GetLiving<XenoComponent>(hiveUid, x => x.Comp.CountedInSlots);
+        var living = _evolution.GetLiving<XenoComponent>(x => x.Comp.CountedInSlots);
         var available = Math.Max(core.MinimumLesserDrones, living / core.XenosPerLesserDrone);
         core.MaxLesserDrones = available;
 
         var time = _timing.CurTime;
         if (time > core.NextLesserDroneAt)
         {
-            var hasOvipositor = _evolution.HasLiving<XenoAttachedOvipositorComponent>(1, hiveUid);
+            var hasOvipositor = _evolution.HasLiving<XenoAttachedOvipositorComponent>(1);
             core.NextLesserDroneAt = time + (hasOvipositor ? core.NextLesserDroneOviCooldown : core.NextLesserDroneCooldown * 2);
             core.CurrentLesserDrones = Math.Min(core.MaxLesserDrones, core.CurrentLesserDrones + 1);
         }
@@ -131,6 +126,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
 
         // TODO RMC14 lesser drone job bans
         // TODO RMC14 30 second delay to grabbing the next lesser drone role
+        // TODO RMC14 hive specific
         var time = _timing.CurTime;
         var query = EntityQueryEnumerator<HiveLesserSpawnerComponent>();
         while (query.MoveNext(out var uid, out var core))

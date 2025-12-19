@@ -9,6 +9,8 @@
   ranks:
     RMCRankCMBDeputy: []
   startingGear: RMCGearSurvivorCMBDeputy
+  accessGroups:
+  - ColonistCMBSurvivor
   spawnMenuRoleName: CMB Deputy (Survivor)
   icon: "RMCJobIconBureauDeputy"
   hasIcon: true
@@ -16,16 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
+      preset: SurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -50,7 +43,7 @@
   id: RMCGearSurvivorCMBDeputy
   equipment:
     head: RMCHeadCapBureau
-    id: RMCIDCardDeputySurvivor
+    id: RMCIDCardCMBDeputySurvivor
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauDeputy
     ears: RMCHeadsetDistressBureauDamaged
