@@ -14,7 +14,7 @@ orphans: []
 nullspace: []
 tilemap:
   1: Space
-  0: FloorMetalDiamond
+  0: CMFloorPlate
   2: RMCVoid
 entities:
 - proto: ""
