@@ -64,3 +64,11 @@
   components:
   - type: PresetIdCard
     job: CMSurvivorFiorinaRiotOfficer
+
+- type: entity
+  parent: RMCIDCardTSEPA
+  id: RMCIDCardConstableCorpse
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PresetIdCard
+    job: RMCSurvivorHybrisaTSEPAConstable

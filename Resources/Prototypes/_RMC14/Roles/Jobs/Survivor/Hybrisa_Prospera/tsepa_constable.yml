@@ -6,7 +6,7 @@
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement
-      role: CMJobSurvivorSecurity # TODO allow jobs to support multiple playtime trackers
+      role: CMJobSurvivorSecurity
       time: 630000 # 175 hours
     RMCRankTSEPASeniorConstable:
     - !type:RoleTimeRequirement
