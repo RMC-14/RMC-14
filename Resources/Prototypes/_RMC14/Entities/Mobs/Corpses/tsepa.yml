@@ -40,7 +40,7 @@
     jumpsuit: RMCJumpsuitTSEPA
     belt: RMCBeltHolsterPistolTSEFilledL54
     shoes: RMCShoesLaceup
-    id: RMCIDCardTSEPA
+    id: RMCIDCardConstableCorpse
     back: RMCSatchelBlack
     ears: RMCHeadsetTSEPA
   storage:
@@ -65,7 +65,7 @@
   id: RMCGearCorpseTSEPAConstableThree
   equipment:
     outerClothing: RMCArmorVestTSEPA
-    suitStorage: RMCWeaponShotgunHG3712
+    suitstorage: RMCWeaponShotgunHG3712
     pocket1: RMCPouchShotgunFilledConstable
   storage:
     back:
