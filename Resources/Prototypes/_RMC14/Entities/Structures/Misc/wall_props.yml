@@ -131,7 +131,7 @@
   id: RMCWallPropDeadPilot
   name: decapitated Weston-Yamada Pilot
   description: What remains of a Weston-Yamada Pilot. Their entire head is missing. Where'd it roll off to?...
-  suffix: Wall Dead Pilot, RMC14
+  suffix: RMC14
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_props_decals.rsi
@@ -140,7 +140,7 @@
 - type: entity
   parent: RMCWallPropDeadPilot
   id: RMCWallPropDeadPilotAlt
-  suffix: Wall Dead Pilot, RMC14, Alt
+  suffix: RMC14, Alt
   components:
   - type: Sprite
     sprite: _RMC14/Structures/hybrisa_props_decals.rsi
