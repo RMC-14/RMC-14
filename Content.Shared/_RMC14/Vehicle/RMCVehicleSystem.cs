@@ -435,7 +435,7 @@ public sealed class RMCVehicleSystem : EntitySystem
 
     private void EnsureOccupantTracking(EntityUid vehicle, InteriorData interior, out HashSet<EntityUid> passengers, out HashSet<EntityUid> xenos)
     {
-        if (!_vehiclePassengers.TryGetValue(vehicle, out passengers))
+        if (!_vehiclePassengers.TryGetValue(vehicle, out passengers!) || passengers == null)
         {
             passengers = new HashSet<EntityUid>();
             _vehiclePassengers[vehicle] = passengers;
@@ -445,7 +445,7 @@ public sealed class RMCVehicleSystem : EntitySystem
             passengers.Clear();
         }
 
-        if (!_vehicleXenos.TryGetValue(vehicle, out xenos))
+        if (!_vehicleXenos.TryGetValue(vehicle, out xenos!) || xenos == null)
         {
             xenos = new HashSet<EntityUid>();
             _vehicleXenos[vehicle] = xenos;
@@ -463,7 +463,6 @@ public sealed class RMCVehicleSystem : EntitySystem
         {
             if (xform.MapID != interior.MapId)
                 continue;
-
             if (HasComp<XenoComponent>(uid))
                 xenos.Add(uid);
             else
