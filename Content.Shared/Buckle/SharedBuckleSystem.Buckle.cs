@@ -1,6 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using Content.Shared._RMC14.Buckle;
+using Content.Shared._RMC14.Movement;
+using Content.Shared._RMC14.Standing;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
 using Content.Shared.Buckle.Components;
@@ -16,6 +18,7 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.Standing;
 using Content.Shared.Storage.Components;
 using Content.Shared.Stunnable;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
@@ -41,6 +44,8 @@ public abstract partial class SharedBuckleSystem
     // RMC14
     [Dependency] private readonly RMCBuckleSystem _rmcBuckle = default!;
     [Dependency] private readonly RMCMovementSystem _rmcMovement = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    private static readonly ProtoId<TagPrototype> WallTag = "Wall";
 
     private void InitializeBuckle()
     {
@@ -165,6 +170,10 @@ public abstract partial class SharedBuckleSystem
     {
         if (args.OtherEntity == component.BuckledTo && component.DontCollide)
             args.Cancelled = true;
+        //RMC14
+        if (component.Buckled && _tags.HasTag(args.OtherEntity, WallTag))
+            args.Cancelled = true;
+        //RMC14
     }
 
     private void OnBuckleDownAttempt(EntityUid uid, BuckleComponent component, DownAttemptEvent args)

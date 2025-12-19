@@ -71,6 +71,10 @@
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
+        crate: RMCCrateMagazineBGel
+      - cost: 4000
+        crate: RMCCrateMagazineFlamerMixed
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFire
@@ -347,6 +351,14 @@
         crate: RMCCrateMagazineM4SPRCustomImpact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
+      - cost: 6000
+        crate: RMCCratePyroTankMixed
+      - cost: 3000
+        crate: RMCCratePyroTankExtended
+      - cost: 3000
+        crate: RMCCratePyroTankTypeB
+      - cost: 4000
+        crate: RMCCratePyroTankTypeX
 
 
 
