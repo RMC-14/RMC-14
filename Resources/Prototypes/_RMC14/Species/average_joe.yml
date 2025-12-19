@@ -7,7 +7,7 @@
   defaultSkinTone: "#ffffff"
   markingLimits: MobAverageJoeMarkingLimits
   dollPrototype: RMCMobAverageJoeDummy
-  skinColoration: Hues
+  skinColoration: TintedHues
   maleFirstNames: RMCNamesAverageJoe
   femaleFirstNames: RMCNamesAverageJoe
   lastNames: RMCNamesNumbers
