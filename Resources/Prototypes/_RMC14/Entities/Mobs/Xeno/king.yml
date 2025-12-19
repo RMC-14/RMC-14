@@ -9,8 +9,6 @@
   name: King
   description: The end of the line.
   components:
-  - type: GhostRole
-    name: rmc-job-name-xeno-king
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/King/king.rsi
   - type: MobState

@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleRavager
-  - type: GhostRole
-    name: cm-job-name-xeno-ravager
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Ravager/ravager.rsi
     layers:

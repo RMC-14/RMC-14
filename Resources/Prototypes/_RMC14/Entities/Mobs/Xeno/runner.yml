@@ -12,8 +12,6 @@
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-runner
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Runner/runner.rsi
   - type: Eye

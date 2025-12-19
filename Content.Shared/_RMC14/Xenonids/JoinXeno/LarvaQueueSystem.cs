@@ -2,6 +2,7 @@ using System.Collections;
 using System.Linq;
 using Content.Shared._RMC14.Admin.AdminGhost;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Parasite;
@@ -15,6 +16,7 @@ using Content.Shared.Popups;
 using Robust.Shared.Configuration;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -31,7 +33,10 @@ public sealed class LarvaQueueSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly PrototypeManager _proto = default!;
 
+
+    private static readonly EntProtoId Lesser = "CMXenoLesserDrone";
 
     [ViewVariables] private static readonly Dictionary<Entity<HiveComponent>, List<NetUserId>> Queue = new();
 
@@ -49,7 +54,7 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<HiveMemberComponent> ent, ref MindRemovedMessage args)
     {
-        if(HasComp<XenoParasiteComponent>(ent))
+        if(HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) || lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
             return;
 
         if(!TryComp(ent, out XenoComponent? xeno))
