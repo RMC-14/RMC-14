@@ -24,24 +24,23 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
 public sealed class LarvaQueueSystem : EntitySystem
 {
-    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly ISharedPlayerManager _player = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly PrototypeManager _proto = default!;
-
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly EntProtoId Lesser = "CMXenoLesserDrone";
 
-    [ViewVariables] private static readonly Dictionary<Entity<HiveComponent>, List<NetUserId>> Queue = new();
+    [ViewVariables]
+    public static readonly Dictionary<Entity<HiveComponent>, List<NetUserId>> Queue = new();
 
     [ViewVariables]
-    private static readonly Dictionary<Entity<HiveComponent>, Dictionary<NetUserId, double>> PreQueue = new();
+    public static readonly Dictionary<Entity<HiveComponent>, Dictionary<NetUserId, double>> PreQueue = new();
 
     public override void Initialize()
     {
@@ -54,10 +53,11 @@ public sealed class LarvaQueueSystem : EntitySystem
 
     private void OnMindRemoved(Entity<HiveMemberComponent> ent, ref MindRemovedMessage args)
     {
-        if(HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) || lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
+        if (HasComp<XenoParasiteComponent>(ent) || !TryPrototype(ent, out var lesserProto) ||
+            lesserProto.ID == Lesser || HasComp<DropshipHijackerComponent>(ent))
             return;
 
-        if(!TryComp(ent, out XenoComponent? xeno))
+        if (!TryComp(ent, out XenoComponent? xeno))
             return;
 
         EnsureComp<LarvaQueuedComponent>(ent);
@@ -190,7 +190,8 @@ public sealed class LarvaQueueSystem : EntitySystem
                 if (!_player.TryGetSessionById(netId, out var session) || session.AttachedEntity == null)
                     continue;
 
-                var newMind = _mind.CreateMind(session.UserId, EntityManager.GetComponent<MetaDataComponent>(ent).EntityName);
+                var newMind = _mind.CreateMind(session.UserId,
+                    EntityManager.GetComponent<MetaDataComponent>(ent).EntityName);
                 _mind.TransferTo(newMind, ent, ghostCheckOverride: true);
                 RemComp<LarvaQueuedComponent>(ent);
                 tryFind = true;
