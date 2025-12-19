@@ -111,7 +111,7 @@
     baseName: rmc-species-name-average-joe-1
     postFix: rmc-species-name-average-joe-postfix
     maxNumber: 5000
-  - type: RMCCombatModeEyeColor
+  - type: RMCIntentsEyeColor
   - type: Grammar
     attributes:
       proper: true
