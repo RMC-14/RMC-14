@@ -77,7 +77,7 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
         else if (fraction > 1f)
             fraction = 1f;
 
-        // Darken based on average integrity, even before wheels are fully broken.
+        // Thoght each wheels was its own thing
         var integrityBrightness = 0.3f + 0.7f * averageIntegrity;
         var functionalBrightness = 0.3f + 0.7f * fraction;
         brightness = MathF.Min(integrityBrightness, functionalBrightness);

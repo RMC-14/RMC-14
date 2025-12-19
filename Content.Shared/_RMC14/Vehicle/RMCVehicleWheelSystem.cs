@@ -15,6 +15,7 @@ using Robust.Shared.Localization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
+// I initally thought each wheel was its own thing for some reason, hence this supporting multiple wheels even though its not necessary
 public sealed class RMCVehicleWheelSystem : EntitySystem
 {
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;

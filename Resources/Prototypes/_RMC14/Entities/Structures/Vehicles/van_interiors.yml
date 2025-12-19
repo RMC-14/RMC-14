@@ -433,11 +433,3 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
-
-- type: entity
-  parent: RMCVehicleVanInteriorBase
-  id: RMCVehicleVanNewStuff
-  name: van new stuff
-  components:
-  - type: Sprite
-    state: new stuff

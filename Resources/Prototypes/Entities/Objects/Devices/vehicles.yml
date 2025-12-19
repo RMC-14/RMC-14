@@ -38,46 +38,6 @@
     - FootstepSound
 
 - type: entity
-  id: VehicleWheelchair
-  parent: [BaseVehicleStrap, BaseFoldable, BaseItem]
-  name: wheelchair
-  description: A chair with big wheels. It looks like you can move in these on your own.
-  components:
-  - type: Sprite
-    sprite: Objects/Vehicles/wheelchair.rsi
-    layers:
-    - state: wheelchair
-      map: ["unfoldedLayer"]
-    - state: wheelchair_folded
-      map: ["foldedLayer"]
-      visible: false
-  - type: Appearance
-  - type: Item
-    size: Ginormous
-  - type: Damageable
-    damageContainer: Inorganic
-    damageModifierSet: Metallic
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 2
-  - type: Strap
-    buckleOffset: "0,-0.05"
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.2
-        density: 360
-        restitution: 0.0
-        mask:
-        - MobMask
-        layer:
-        - TableLayer
-  - type: StaticPrice
-    price: 70
-
-- type: entity
   id: VehicleJanicart
   parent: BaseVehicleStrap
   name: janicart
@@ -85,7 +45,7 @@
   components:
   - type: Sprite
     sprite: Objects/Vehicles/janicart.rsi
-    drawdepth: Mobs # fixes layering like magic.
+    drawdepth: Mobs
     layers:
     - state: vehicle
       map: ["movement"]
@@ -217,7 +177,8 @@
     runningSoundCooldown: 2
     hornSound: /Audio/Effects/Vehicle/carhorn.ogg
     hornCooldown: 1
-    collisionSoundCooldown: 0.4
+    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+    collisionSoundCooldown: 0.5
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
@@ -263,7 +224,6 @@
     - map: [ damaged_frame ]
       state: damaged_frame
       visible: false
-
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: SpriteMovement

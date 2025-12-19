@@ -415,10 +415,3 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
-
-- type: entity
-  parent: RMCVehicleBoxVanInteriorBase
-  id: RMCVehicleBoxVanNewStuff
-  components:
-  - type: Sprite
-    state: new stuff

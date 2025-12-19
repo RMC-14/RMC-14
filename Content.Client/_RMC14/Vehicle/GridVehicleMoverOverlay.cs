@@ -53,10 +53,12 @@ public sealed class GridVehicleMoverOverlay : Overlay
         {
             var handle = args.WorldHandle;
             var q = _ents.EntityQueryEnumerator<GridVehicleMoverComponent, TransformComponent>();
+
             while (q.MoveNext(out var uid, out var mover, out var xform))
             {
                 if (xform.GridUid is not { } grid || !_gridQ.TryComp(grid, out _))
                     continue;
+
                 DrawMovement(handle, grid, mover);
                 DrawFacing(handle, uid, mover);
                 DrawFixtures(handle, uid);
@@ -69,12 +71,15 @@ public sealed class GridVehicleMoverOverlay : Overlay
             {
                 var grid = entry.grid;
                 var tile = entry.tile;
+
                 if (!_gridQ.TryComp(grid, out _))
                     continue;
+
                 var center = _transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(tile.X + 0.5f, tile.Y + 0.5f))).Position;
                 var min = center - new Vector2(0.5f, 0.5f);
                 var max = center + new Vector2(0.5f, 0.5f);
                 var box = new Box2(min, max);
+
                 handle.DrawRect(box, Color.Black.WithAlpha(0.4f), false);
             }
 
@@ -94,8 +99,11 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         var start = _transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
         var target = _transform.ToMapCoordinates(new EntityCoordinates(grid, new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f))).Position;
+
         h.DrawLine(start, target, Color.Lime);
+
         var color = mover.IsCommittedToMove ? Color.White : Color.Red;
+
         h.DrawCircle(start, 0.15f, color);
         h.DrawCircle(target, 0.15f, Color.Yellow);
     }
@@ -104,11 +112,14 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         if (mover.CurrentDirection == Vector2i.Zero)
             return;
+
         var xform = _ents.GetComponent<TransformComponent>(uid);
         if (xform.GridUid is not { } grid)
             return;
+
         var pos = _transform.ToMapCoordinates(new EntityCoordinates(grid, mover.Position)).Position;
         var dir = Vector2.Normalize(new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y));
+
         h.DrawLine(pos, pos + dir * 0.7f, Color.Orange);
     }
 
@@ -118,7 +129,9 @@ public sealed class GridVehicleMoverOverlay : Overlay
             return;
         if (!_fixturesQ.TryComp(uid, out var fixtures))
             return;
+
         var index = 0;
+
         foreach (var f in fixtures.Fixtures.Values)
         {
             for (var i = 0; i < f.ProxyCount; i++)
@@ -136,15 +149,16 @@ public sealed class GridVehicleMoverOverlay : Overlay
     {
         var aabb = _lookup.GetWorldAABB(uid);
         h.DrawRect(aabb, Color.Magenta, false);
+
         var pos = _transform.GetWorldPosition(uid);
         h.DrawCircle(pos, 0.12f, Color.Magenta);
     }
 
     private void DrawEntryAndExitPoints(DrawingHandleWorld h, MapId mapId)
     {
-        // Find a grid on this map so we can project interior coordinates locally.
         EntityUid? interiorGrid = null;
         var gridEnum = _ents.EntityQueryEnumerator<MapGridComponent, TransformComponent>();
+        
         while (gridEnum.MoveNext(out var gridUid, out _, out var gridXform))
         {
             if (gridXform.MapID != mapId)
@@ -172,7 +186,6 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 h.DrawCircle(world, radius, color.WithAlpha(0.22f), true);
                 h.DrawCircle(world, radius, color.WithAlpha(0.85f), false);
 
-                // Draw interior target on the interior map if we can.
                 if (interiorGrid is { } grid && point.InteriorCoords is { } interior)
                 {
                     var target = _transform.ToMapCoordinates(new EntityCoordinates(grid, interior)).Position;
@@ -191,6 +204,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
 
             var pos = _transform.GetWorldPosition(xform);
             var color = _colors[Math.Abs(exit.EntryIndex) % _colors.Length];
+
             h.DrawCircle(pos, 0.12f, color.WithAlpha(0.2f), true);
             h.DrawCircle(pos, 0.12f, color.WithAlpha(0.9f), false);
         }
@@ -205,16 +219,19 @@ public sealed class GridVehicleMoverOverlay : Overlay
 
             var testedFill = new Color(0.92f, 0.27f, 0.36f, 0.16f);
             var testedOutline = new Color(0.97f, 0.38f, 0.46f, 0.85f);
+
             h.DrawRect(hit.TestedAabb, testedFill, true);
             h.DrawRect(hit.TestedAabb, testedOutline, false);
 
             var blockerFill = new Color(1f, 0.8f, 0.32f, 0.14f);
             var blockerOutline = new Color(1f, 0.82f, 0.22f, 0.9f);
+
             h.DrawRect(hit.BlockerAabb, blockerFill, true);
             h.DrawRect(hit.BlockerAabb, blockerOutline, false);
 
             var testedCenter = hit.TestedAabb.Center;
             var blockerCenter = hit.BlockerAabb.Center;
+
             h.DrawCircle(testedCenter, 0.09f, testedOutline);
             h.DrawCircle(blockerCenter, 0.09f, blockerOutline);
 
@@ -229,18 +246,21 @@ public sealed class GridVehicleMoverOverlay : Overlay
 
             var toBlocker = blockerCenter - testedCenter;
             var dist = toBlocker.Length();
+
             if (dist > 0.01f)
             {
                 var dir = toBlocker / dist;
                 var maxArrow = MathF.Min(dist, 0.9f);
                 var arrowEnd = testedCenter + dir * maxArrow;
                 var arrowColor = new Color(0.7f, 0.35f, 1f, 0.85f);
+
                 h.DrawLine(testedCenter, arrowEnd, arrowColor);
 
                 var headLength = 0.12f;
                 var headWidth = 0.06f;
                 var basePoint = arrowEnd - dir * headLength;
                 var perp = new Vector2(-dir.Y, dir.X) * headWidth;
+
                 h.DrawLine(arrowEnd, basePoint + perp, arrowColor);
                 h.DrawLine(arrowEnd, basePoint - perp, arrowColor);
             }
@@ -249,6 +269,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
             var mid = (testedCenter + blockerCenter) * 0.5f;
             var gapColor = gap <= 0 ? new Color(1f, 0.32f, 0.32f, 0.92f) : new Color(0.45f, 1f, 0.58f, 0.95f);
             var gapRadius = 0.07f + MathF.Min(MathF.Abs(gap) * 0.03f, 0.09f);
+
             h.DrawCircle(mid, gapRadius, gapColor);
             h.DrawCircle(mid, gapRadius * 0.55f, gapColor.WithAlpha(0.55f));
         }
