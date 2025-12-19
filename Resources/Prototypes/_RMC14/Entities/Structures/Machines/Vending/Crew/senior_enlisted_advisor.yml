@@ -19,6 +19,7 @@
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
+      - id: RMCStampSEA
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -143,5 +144,6 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

@@ -19,6 +19,9 @@ rmc-job-description-survivor-co = You are a Major of the UNMC.
 rmc-job-name-survivor-synth = Survivor Synthetic
 rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
 
+rmc-job-name-survivor-military = Military Survivor
+rmc-job-description-survivor-military = You are a survivor of the xenonid infestation on the colony, apart of some kind of military organization.
+
 # Playtime trackers
 rmc-playtime-tracker-job-name-survivor = Civilian Survivor
 rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
@@ -36,11 +39,18 @@ cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
 CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
 cm-job-prefix-survivor-icb = ICB Rep.
 
-cm-job-name-survivor-isr = Interstellar Sapient-Life Rights Observer
-CMJobSurvivorISR = Interstellar Sapient-Life Rights Observer
+cm-job-name-survivor-isr = Interstellar Life Rights Observer
+CMJobSurvivorISR = Interstellar Life Rights Observer
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+rmc-job-name-survivor-bureau-marshal = CMB Marshal
+cm-job-prefix-survivor-cmb-marshal = CMB MAR
+
+cm-job-name-survivor-flight-control-operator = Flight Control Operator
+
+cm-job-name-survivor-unmc = UNMC Remnant
 
 # misc survs
 
@@ -269,52 +279,25 @@ rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
 
-# Chance's Colonists
+# Solaris Ridge Survs
 
-rmc-job-greeting-chances-colonist = You are a colonist living on LV-522. You are tasked by your employer, the Weston-Yamada Corporation, to preform your expected duties.
+rmc-job-name-survivor-solaris-chaplain = Solaris Chaplain
 
-  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+rmc-job-name-survivor-solaris-corporate-liaison = Solaris Corporate Liaison
 
-rmc-job-name-survivor-chances-trucker = Weston-Yamada Heavy Vehicle Operator
-rmc-job-description-survivor-chances-trucker = Operate heavy equipment in and around the colony.
-CMSurvivorChancesTrucker = Weston-Yamada Heavy Vehicle Operator
+rmc-job-name-survivor-solaris-doctor = Solaris Doctor
 
-rmc-job-name-survivor-chances-miner = Mining Surveyor
-CMSurvivorChancesMiner = Mining Surveyor
+rmc-job-name-survivor-solaris-engineer = Solaris Engineer
 
-rmc-job-name-survivor-chances-civilian = Catering Technician
-CMSurvivorChancesCivilian = Catering Technician
+rmc-job-name-survivor-solaris-scientist = Solaris Scientist
 
-rmc-job-name-survivor-administrative-clerk = Administrative Clerk
-CMSurvivorAdministrativeClerk = Administrative Clerk
+rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
-rmc-job-name-survivor-operations-supervisor = Operations Supervisor
-CMSurvivorOperationsSupervisor = Operations Supervisor
+rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
 
-cm-job-name-survivor-chances-medic = Chance's Claim Medic
-CMSurvivorChancesMedic = Chance's Claim Medic
+# Shivas survs
 
-cm-job-name-survivor-chances-paramedic = Chance's Claim Paramedic
-CMSurvivorChancesParamedic = Chance's Claim Paramedic
-
-rmc-job-name-survivor-environmental-researcher = Environmental Researcher
-CMSurvivorChancesEnvironmentalResearcher= Environmental Researcher
-
-rmc-job-name-survivor-terraforming-specialist = Terraforming Specialist
-CMSurvivorChancesTerraformingSpecialist = Terraforming Specialist
-
-rmc-job-name-survivor-atmos-process-tech = Atmospheric Processing Reactor Technician
-CMSurvivorChancesAtmosProcessTech = Atmospheric Processing Reactor Technician
-
-rmc-job-name-survivor-vehicle-repairman = Vehicle Repairman
-CMSurvivorChancesVehicleRepairman = Vehicle Repairman
-
-rmc-job-name-survivor-colony-maint-tech = Colony Maintenance Technician
-CMSurvivorChancesColonyMaintTech = Colony Maintenance Technician
-
-rmc-job-name-survivor-cargo-tech = Warehouse Worker
-CMSurvivorChancesCargoTech = Warehouse Worker
-
-rmc-job-name-survivor-chances-goon = Chance's Claim Corporate Security
-CMSurvivorChancesGoon = Chance's Claim Corporate Security
-
+rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
+rmc-job-name-survivor-shivas-doctor = Shivas Doctor
+rmc-job-name-survivor-shivas-researcher = Shivas Researcher
+rmc-job-name-survivor-shivas-engineer = Shivas Engineer

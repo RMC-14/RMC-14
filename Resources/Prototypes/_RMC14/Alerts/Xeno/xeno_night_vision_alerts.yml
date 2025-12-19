@@ -3,13 +3,27 @@
   category: Sight
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
-    state: nightvision_full
+    state: nightvision_off
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
     state: nightvision_half
   - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
-    state: nightvision_off
+    state: nightvision_full
   name: Night Vision
   description: Click to change how you see in the dark.
   minSeverity: 0
   maxSeverity: 2
+  clickEvent: !type:ToggleNightVisionAlertEvent
+
+- type: alert
+  id: SynthNightVision
+  category: Sight
+  icons:
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
+    state: nightvision_off
+  - sprite: /Textures/_RMC14/Interface/Alerts/xeno_night_vision.rsi
+    state: nightvision_full
+  name: Night Vision
+  description: Click to change how you see in the dark.
+  minSeverity: 0
+  maxSeverity: 1
   clickEvent: !type:ToggleNightVisionAlertEvent

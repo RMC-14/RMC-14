@@ -21,7 +21,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillFirearms: 2 
+        RMCSkillFirearms: 2
         RMCSkillPolice: 2
         RMCSkillFireman: 2
         RMCSkillConstruction: 1
@@ -59,14 +59,14 @@
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
-  
+
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
     mask: RMCMaskScarfTan
-    jumpsuit: RMCJumpsuitMarineRoyalMK80 # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyalMK80
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

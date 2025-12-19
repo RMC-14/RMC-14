@@ -152,3 +152,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/db16154cb71e98060169230d7902d776d9b522f9/sound/weapons/gun_44mag_speed_loader.wav"
+
+- files: ["gun_m10_auto_pistol_reload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/handling/gun_m10_auto_pistol_reload.ogg"
+
+- files: ["gun_m10_auto_pistol_unload.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/handling/gun_m10_auto_pistol_unload.ogg"
