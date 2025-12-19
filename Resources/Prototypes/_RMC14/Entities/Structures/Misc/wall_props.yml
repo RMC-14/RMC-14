@@ -7,6 +7,7 @@
     anchored: false
   - type: Physics
     bodyType: Static
+    canCollide: false
   - type: Sprite
     drawdepth: WallTops
     sprite: _RMC14/Structures/hybrisa_props_decals.rsi
@@ -21,7 +22,6 @@
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: ImmuneToUnarmed
   - type: DeleteOnExplosion
   - type: Corrodible
     isCorrodible: false
