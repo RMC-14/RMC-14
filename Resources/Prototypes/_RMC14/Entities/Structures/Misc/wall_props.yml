@@ -10,7 +10,6 @@
   - type: Sprite
     drawdepth: WallTops
     sprite: _RMC14/Structures/hybrisa_props_decals.rsi
-  - type: Clickable
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
@@ -35,7 +34,6 @@
   suffix: Wall Blood, Floor Blood, RMC14
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: wallblood_floorblood
 
 - type: entity
@@ -45,7 +43,6 @@
   suffix: Wall Blood, RMC14
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: wall_blood_1
 
 - type: entity
@@ -55,7 +52,6 @@
   suffix: Wall Blood, RMC14, Alt
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: wall_blood_2
 
 # Graffiti
@@ -66,7 +62,6 @@
   suffix: Wall Graffiti, RMC14, One
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti1
 
 - type: entity
@@ -75,7 +70,6 @@
   suffix: Wall Graffiti, RMC14, Two
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti2
 
 - type: entity
@@ -84,7 +78,6 @@
   suffix: Wall Graffiti, RMC14, Three
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti3
 
 - type: entity
@@ -93,7 +86,6 @@
   suffix: Wall Graffiti, RMC14, Four
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti4
 
 - type: entity
@@ -102,7 +94,6 @@
   suffix: Wall Graffiti, RMC14, Five
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti5
 
 - type: entity
@@ -111,7 +102,6 @@
   suffix: Wall Graffiti, RMC14, Six
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti6
 
 - type: entity
@@ -120,7 +110,6 @@
   suffix: Wall Graffiti, RMC14, Seven
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: zgraffiti7
 
 # Dead pilots
@@ -132,7 +121,6 @@
   suffix: RMC14
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: pilotbody_decap1
 
 - type: entity
@@ -141,5 +129,4 @@
   suffix: RMC14, Alt
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
     state: pilotbody_decap2
