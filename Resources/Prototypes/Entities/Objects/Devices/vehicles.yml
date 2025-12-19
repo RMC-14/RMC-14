@@ -299,8 +299,6 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
-    collisionDamagePerSpeed: 5
-    minCollisionDamage: 5
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
     repairFuelCost: 10
@@ -434,8 +432,6 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
-    collisionDamagePerSpeed: 5
-    minCollisionDamage: 5
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
     repairFuelCost: 10
@@ -569,8 +565,6 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
-    collisionDamagePerSpeed: 5
-    minCollisionDamage: 5
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
     repairFuelCost: 10
@@ -704,8 +698,6 @@
         - RMCVehicleWheelItem
   - type: RMCVehicleWheelSlots
     slotCount: 1
-    collisionDamagePerSpeed: 5
-    minCollisionDamage: 5
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
     repairFuelCost: 10

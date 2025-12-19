@@ -136,6 +136,8 @@ public sealed class RMCSpriteFadeSystem : EntitySystem
                 var gridQuery = AllEntityQuery<RMCSpriteFadeComponent, TransformComponent>();
                 while (gridQuery.MoveNext(out var uid, out var fade, out var xform))
                 {
+                    if (!fade.FadeOnSharedGrid)
+                        continue;
                     if (xform.GridUid != playerGrid)
                         continue;
                     if (!_spriteQuery.TryGetComponent(uid, out var sprite))

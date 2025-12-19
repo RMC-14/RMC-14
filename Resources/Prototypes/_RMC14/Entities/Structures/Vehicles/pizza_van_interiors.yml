@@ -22,6 +22,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
     fadeLayers:
     - "roof"
 
@@ -278,6 +279,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
 
 - type: entity
   parent: RMCVehiclePizzaVanInteriorBase
@@ -289,6 +291,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
 
 - type: entity
   parent: RMCVehiclePizzaVanInteriorBase
@@ -320,6 +323,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
 
 - type: entity
   parent: RMCVehiclePizzaVanRoofBase
@@ -331,6 +335,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
   - type: InteractionTransparency
 
 - type: entity
@@ -352,6 +357,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
   - type: InteractionTransparency
 
 - type: entity
@@ -396,6 +402,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
   - type: InteractionTransparency
 
 - type: entity
@@ -408,6 +415,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
   - type: Clickable
 
 - type: entity
@@ -420,6 +428,7 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true
 
 - type: entity
   parent: RMCVehiclePizzaVanInteriorBase
@@ -431,3 +440,4 @@
     targetAlpha: 0.35
     changeRate: 4.0
     reactToMouse: false
+    fadeOnSharedGrid: true

@@ -269,6 +269,9 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+    - type: PointLight
+      energy: 2
+      radius: 20
 - proto: RMCVehiclePizzaVanFrontRoof2
   entities:
   - uid: 28
