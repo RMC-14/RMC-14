@@ -81,6 +81,9 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     [DataField]
     public ProtoId<JobPrototype>? WhitelistParent;
 
+    [DataField]
+    public string? AntagRole;
+
     /// <summary>
     /// Starting gear that is given when the map has a certain camoflage enabled.
     /// </summary>
