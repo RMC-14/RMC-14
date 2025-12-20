@@ -7,6 +7,7 @@
   startingGear: RMCGearSurvivorFiorinaPrisonGuard
   accessGroups:
   - ColonistSec
+  - ColonistCorporate
   spawnMenuRoleName: We-Ya Corporate Security (Fiorina Survivor)
   icon: "RMCJobIconPMCGoonStandard"
   hasIcon: true
@@ -34,7 +35,7 @@
     back: CMSatchelSecuritySurvivorFill
     outerClothing: RMCArmorVestWeYa
     ears: RMCHeadsetDistressWeYa
-    head: RMCHeadCapWestonYamadaDark
+    head: RMCArmorHelmetPMCDark
     gloves: RMCHandsVeteran
     shoes: RMCShoesJackboots
     id: CMIDCardLiaisonColony
