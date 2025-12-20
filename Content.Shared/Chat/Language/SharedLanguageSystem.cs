@@ -1,9 +1,6 @@
-using System.Collections.Frozen;
-using System.Linq;
 using System.Text;
 using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
-using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -15,32 +12,9 @@ public class SharedLanguageSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
 
     public static readonly ProtoId<LanguagePrototype> CommonLanguage = "English";
-
-    private FrozenDictionary<char, LanguagePrototype> _languagePrefixes = FrozenDictionary<char, LanguagePrototype>.Empty;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypeReload);
-        CacheLanguagePrefixes();
-    }
-
-    private void OnPrototypeReload(PrototypesReloadedEventArgs obj)
-    {
-        if (obj.WasModified<LanguagePrototype>())
-            CacheLanguagePrefixes();
-    }
-
-    private void CacheLanguagePrefixes()
-    {
-        var dict = new Dictionary<char, LanguagePrototype>();
-        foreach (var language in _prototypeManager.EnumeratePrototypes<LanguagePrototype>())
-        {
-            if (language.ChatPrefix.HasValue)
-                dict.TryAdd(language.ChatPrefix.Value, language);
-        }
-        _languagePrefixes = dict.ToFrozenDictionary();
-    }
+    private static readonly IReadOnlySet<ProtoId<LanguagePrototype>> DefaultLanguages =
+        new HashSet<ProtoId<LanguagePrototype>> { CommonLanguage };
+    private int _roundSeed;
 
     public ProtoId<LanguagePrototype> GetCurrentLanguage(EntityUid entity)
     {
@@ -66,20 +40,20 @@ public class SharedLanguageSystem : EntitySystem
         return component.UnderstoodLanguages.Contains(language);
     }
 
-    public HashSet<ProtoId<LanguagePrototype>> GetSpokenLanguages(EntityUid entity)
+    public IReadOnlySet<ProtoId<LanguagePrototype>> GetSpokenLanguages(EntityUid entity)
     {
         if (!TryComp<LanguageComponent>(entity, out var component))
-            return new HashSet<ProtoId<LanguagePrototype>> { CommonLanguage };
+            return DefaultLanguages;
 
-        return new HashSet<ProtoId<LanguagePrototype>>(component.SpokenLanguages);
+        return component.SpokenLanguages;
     }
 
-    public HashSet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid entity)
+    public IReadOnlySet<ProtoId<LanguagePrototype>> GetUnderstoodLanguages(EntityUid entity)
     {
         if (!TryComp<LanguageComponent>(entity, out var component))
-            return new HashSet<ProtoId<LanguagePrototype>> { CommonLanguage };
+            return DefaultLanguages;
 
-        return new HashSet<ProtoId<LanguagePrototype>>(component.UnderstoodLanguages);
+        return component.UnderstoodLanguages;
     }
 
     public string ObfuscateMessage(string message, ProtoId<LanguagePrototype> language)
@@ -87,7 +61,7 @@ public class SharedLanguageSystem : EntitySystem
         if (!_prototypeManager.TryIndex(language, out var languageProto))
             return message;
 
-        return ObfuscateMessageInternal(message, languageProto.ObfuscationMethod);
+        return ObfuscateMessageInternal(message, languageProto.ObfuscationMethod, languageProto.RandomizeObfuscation);
     }
 
     public string ObfuscateMessageWithComprehension(string message, ProtoId<LanguagePrototype> language, float comprehension)
@@ -95,47 +69,69 @@ public class SharedLanguageSystem : EntitySystem
         if (!_prototypeManager.TryIndex(language, out var languageProto))
             return message;
 
-        return ObfuscateMessageInternalWithComprehension(message, languageProto.ObfuscationMethod, comprehension);
+        return ObfuscateMessageInternalWithComprehension(
+            message,
+            languageProto.ObfuscationMethod,
+            languageProto.RandomizeObfuscation,
+            comprehension);
     }
 
-    protected string ObfuscateMessageInternal(string message, ObfuscationMethod obfuscationMethod)
+    protected string ObfuscateMessageInternal(
+        string message,
+        ObfuscationMethod obfuscationMethod,
+        bool randomize)
     {
-        var builder = new StringBuilder();
-        obfuscationMethod.ObfuscateInternal(builder, message, this);
+        var builder = new StringBuilder(message.Length);
+        obfuscationMethod.ObfuscateInternal(builder, message, this, randomize);
         return builder.ToString();
     }
 
-    protected string ObfuscateMessageInternalWithComprehension(string message, ObfuscationMethod obfuscationMethod, float comprehension)
+    protected string ObfuscateMessageInternalWithComprehension(
+        string message,
+        ObfuscationMethod obfuscationMethod,
+        bool randomize,
+        float comprehension)
     {
-        var builder = new StringBuilder();
-        obfuscationMethod.ObfuscateInternalWithComprehension(builder, message, this, comprehension);
+        var builder = new StringBuilder(message.Length);
+        obfuscationMethod.ObfuscateInternalWithComprehension(builder, message, this, randomize, comprehension);
         return builder.ToString();
     }
 
-    public bool TryParseLanguagePrefix(string message, out ProtoId<LanguagePrototype> language, out string remainingMessage)
+    public System.Random CreateRandom(int seed, bool randomize)
     {
-        language = default;
-        remainingMessage = message;
+        if (!randomize)
+            return new System.Random(CombineSeed(seed, _roundSeed));
 
-        if (message.Length < 2 || message[0] != '#')
-            return false;
+        return new System.Random(_random.Next());
+    }
 
-        var prefix = char.ToLower(message[1]);
+    protected void ReseedObfuscationForRound()
+    {
+        _roundSeed = _random.Next();
+    }
 
-        if (!_languagePrefixes.TryGetValue(prefix, out var languageProto))
-            return false;
-
-        language = languageProto.ID;
-        remainingMessage = message[2..].TrimStart();
-        return true;
+    private static int CombineSeed(int seed, int roundSeed)
+    {
+        unchecked
+        {
+            return (seed * 397) ^ roundSeed;
+        }
     }
 
     public int PseudoRandomNumber(int seed, int min, int max)
     {
+        return PseudoRandomNumber(seed, min, max, false);
+    }
+
+    public int PseudoRandomNumber(int seed, int min, int max, bool randomize)
+    {
         if (min >= max)
             return min;
 
-        var random = new System.Random(seed);
+        var random = CreateRandom(seed, randomize);
+        if (max == int.MaxValue)
+            return (int) random.NextInt64(min, (long) max + 1);
+
         return random.Next(min, max + 1);
     }
 }

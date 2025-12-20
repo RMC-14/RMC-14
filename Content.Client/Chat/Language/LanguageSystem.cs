@@ -82,14 +82,21 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         return CompOrNull<LanguageLearningComponent>(entity)?.LanguageProgress.GetValueOrDefault(language, 0f) ?? 0f;
     }
 
-    public Dictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
+    public IReadOnlyDictionary<string, float> GetLearnedWords(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
         var learningComp = CompOrNull<LanguageLearningComponent>(entity);
-        return learningComp?.LearnedWords.GetValueOrDefault(language, new()) ?? new();
+        if (learningComp?.LearnedWords.TryGetValue(language, out var words) == true)
+            return new Dictionary<string, float>(words);
+
+        return new Dictionary<string, float>();
     }
 
-    public HashSet<ProtoId<LanguagePrototype>> GetLearnableLanguages(EntityUid entity)
+    public IReadOnlySet<ProtoId<LanguagePrototype>> GetLearnableLanguages(EntityUid entity)
     {
-        return CompOrNull<LanguageLearningComponent>(entity)?.LearnableLanguages ?? new();
+        var learningComp = CompOrNull<LanguageLearningComponent>(entity);
+        if (learningComp == null)
+            return new HashSet<ProtoId<LanguagePrototype>>();
+
+        return new HashSet<ProtoId<LanguagePrototype>>(learningComp.LearnableLanguages);
     }
 }

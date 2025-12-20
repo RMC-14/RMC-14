@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language;
 using Content.Shared.Chat;
 using Robust.Shared.Prototypes;
@@ -53,10 +52,10 @@ public sealed partial class LanguagePrototype : IPrototype
     public ObfuscationMethod ObfuscationMethod = ObfuscationMethod.Default;
 
     [DataField]
-    public SpeechOverrideInfo SpeechOverride = new();
+    public bool RandomizeObfuscation { get; set; }
 
     [DataField]
-    public char? ChatPrefix;
+    public SpeechOverrideInfo SpeechOverride = new();
 
     [DataField]
     public int ExpectedVocabularySize { get; set; } = 100;

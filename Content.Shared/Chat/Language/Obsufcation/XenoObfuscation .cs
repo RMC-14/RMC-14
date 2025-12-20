@@ -22,32 +22,48 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
     [DataField]
     public float IntensityMultiplier = 1.0f;
 
-    internal override void ObfuscateInternal(StringBuilder builder, string message, SharedLanguageSystem context)
+    internal override void ObfuscateInternal(
+        StringBuilder builder,
+        string message,
+        SharedLanguageSystem context,
+        bool randomize)
     {
-        ObfuscateInternalWithComprehension(builder, message, context, 0.0f);
+        ObfuscateInternalWithComprehension(builder, message, context, randomize, 0.0f);
     }
 
     internal override void ObfuscateInternalWithComprehension(
         StringBuilder builder,
         string message,
         SharedLanguageSystem context,
+        bool randomize,
         float comprehension)
     {
         if (XenoSounds.Count == 0 || GarbleChars.Length == 0) return;
 
         if (comprehension <= MinComprehensionThreshold)
         {
-            ObfuscateCompletelyAsXeno(builder, message);
+            ObfuscateCompletelyAsXeno(builder, message, context, randomize);
             return;
         }
 
-        var processor = new XenoWordProcessor(message, XenoSounds, GarbleChars, comprehension, IntensityMultiplier);
+        var processor = new XenoWordProcessor(
+            message,
+            XenoSounds,
+            GarbleChars,
+            comprehension,
+            IntensityMultiplier,
+            context,
+            randomize);
         processor.ProcessMessage(builder);
     }
 
-    private void ObfuscateCompletelyAsXeno(StringBuilder builder, string message)
+    private void ObfuscateCompletelyAsXeno(
+        StringBuilder builder,
+        string message,
+        SharedLanguageSystem context,
+        bool randomize)
     {
-        var random = new System.Random(message.GetHashCode());
+        var random = context.CreateRandom(message.GetHashCode(), randomize);
         var wordCount = CountWords(message);
 
         for (var i = 0; i < wordCount; i++)
@@ -109,20 +125,25 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
         private readonly char[] _garbleChars;
         private readonly float _comprehension;
         private readonly float _intensityMultiplier;
+        private readonly SharedLanguageSystem _context;
+        private readonly bool _randomize;
 
         public XenoWordProcessor(string message, IReadOnlyList<string> xenoSounds,
-            char[] garbleChars, float comprehension, float intensityMultiplier)
+            char[] garbleChars, float comprehension, float intensityMultiplier,
+            SharedLanguageSystem context, bool randomize)
         {
             _message = message;
             _xenoSounds = xenoSounds;
             _garbleChars = garbleChars;
             _comprehension = comprehension;
             _intensityMultiplier = intensityMultiplier;
+            _context = context;
+            _randomize = randomize;
         }
 
         public void ProcessMessage(StringBuilder builder)
         {
-            var random = new System.Random(_message.GetHashCode());
+            var random = _context.CreateRandom(_message.GetHashCode(), _randomize);
             var currentWord = new StringBuilder();
 
             for (var i = 0; i <= _message.Length; i++)
@@ -148,7 +169,7 @@ public sealed partial class XenoObfuscation : ObfuscationMethod
         {
             if (string.IsNullOrEmpty(word)) return;
 
-            var wordComprehension = CalculateWordComprehension(word, _comprehension);
+            var wordComprehension = CalculateWordComprehension(word, _comprehension, _context, _randomize);
 
             if (wordComprehension >= HighComprehensionThreshold)
             {

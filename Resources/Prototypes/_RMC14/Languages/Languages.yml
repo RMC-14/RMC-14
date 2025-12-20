@@ -3,7 +3,6 @@
   name: "English"
   description: "The standard galactic English language."
   isVisibleLanguage: true
-  chatPrefix: null
   textColor: null
   typefaceId: Default
   textSize: null
@@ -33,7 +32,6 @@
   name: "Xenomorph"
   description: "The alien language of the Xenomorphs."
   isVisibleLanguage: true
-  chatPrefix: 'x'
   textColor: null
   typefaceId: null
   textSize: null
@@ -42,6 +40,7 @@
   languageIcon: "/Textures/_RMC14/Actions/xeno_actions.rsi/queen_word.png"
   canUseRadio: true
   needsSpeech: true
+  randomizeObfuscation: true
   expectedVocabularySize: 80
   obfuscationMethod:
     !type:XenoObfuscation
@@ -65,7 +64,6 @@
   name: "French"
   description: "An old Earth language."
   isVisibleLanguage: true
-  chatPrefix: 'f'
   textColor: "#4169e1"
   typefaceId: DefaultItalic
   textSize: null
@@ -97,7 +95,6 @@
   name: "Japanese"
   description: "An old Earth language."
   isVisibleLanguage: true
-  chatPrefix: 'j'
   textColor: null
   typefaceId: NotoSansDisplay
   textSize: null
@@ -129,7 +126,6 @@
   name: "Russian"
   description: "An old Earth language."
   isVisibleLanguage: true
-  chatPrefix: 'r'
   textColor: "#ffd700"
   typefaceId: DefaultBold
   textSize: null
@@ -161,7 +157,6 @@
   name: "German"
   description: "An old Earth language."
   isVisibleLanguage: true
-  chatPrefix: 'g'
   textColor: "#ffa500"
   typefaceId: DefaultBold
   textSize: null
@@ -193,7 +188,6 @@
   name: "Sign Language"
   description: "A visual language using hand gestures and body movements."
   isVisibleLanguage: true
-  chatPrefix: 's'
   textColor: "#87ceeb"
   typefaceId: DefaultItalic
   textSize: null

@@ -23,11 +23,12 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
         StringBuilder builder,
         string message,
         SharedLanguageSystem context,
+        bool randomize,
         float comprehension)
     {
         if (Replacement.Count == 0) return;
 
-        var sentenceProcessor = new SentenceProcessor(message, context, Replacement, comprehension);
+        var sentenceProcessor = new SentenceProcessor(message, context, Replacement, comprehension, randomize);
         sentenceProcessor.ProcessSentences(builder, MinPhrases, MaxPhrases, Separator, Proportion);
     }
 
@@ -37,14 +38,16 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
         private readonly SharedLanguageSystem _context;
         private readonly IReadOnlyList<string> _replacement;
         private readonly float _comprehension;
+        private readonly bool _randomize;
 
         public SentenceProcessor(string message, SharedLanguageSystem context,
-            IReadOnlyList<string> replacement, float comprehension)
+            IReadOnlyList<string> replacement, float comprehension, bool randomize)
         {
             _message = message;
             _context = context;
             _replacement = replacement;
             _comprehension = comprehension;
+            _randomize = randomize;
         }
 
         public void ProcessSentences(StringBuilder builder, int minPhrases, int maxPhrases,
@@ -106,7 +109,7 @@ public sealed partial class PhraseObfuscation : ReplacementObfuscation
                 if (i > 0)
                     builder.Append(separator);
 
-                var phraseIndex = _context.PseudoRandomNumber(hashCode + i, 0, _replacement.Count - 1);
+                var phraseIndex = _context.PseudoRandomNumber(hashCode + i, 0, _replacement.Count - 1, _randomize);
                 builder.Append(_replacement[phraseIndex]);
             }
         }

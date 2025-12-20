@@ -19,11 +19,12 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         StringBuilder builder,
         string message,
         SharedLanguageSystem context,
+        bool randomize,
         float comprehension)
     {
         if (Replacement.Count == 0) return;
 
-        var wordProcessor = new WordProcessor(message, context, Replacement, comprehension);
+        var wordProcessor = new WordProcessor(message, context, Replacement, comprehension, randomize);
         wordProcessor.ProcessWords(builder, MinSyllables, MaxSyllables);
     }
 
@@ -33,14 +34,16 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         private readonly SharedLanguageSystem _context;
         private readonly IReadOnlyList<string> _replacement;
         private readonly float _comprehension;
+        private readonly bool _randomize;
 
         public WordProcessor(string message, SharedLanguageSystem context,
-            IReadOnlyList<string> replacement, float comprehension)
+            IReadOnlyList<string> replacement, float comprehension, bool randomize)
         {
             _message = message;
             _context = context;
             _replacement = replacement;
             _comprehension = comprehension;
+            _randomize = randomize;
         }
 
         public void ProcessWords(StringBuilder builder, int minSyllables, int maxSyllables)
@@ -76,7 +79,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
             if (wordLength <= 0) return;
 
             var word = _message.Substring(wordBeginIndex, wordLength);
-            var wordComprehension = CalculateWordComprehension(word, _comprehension);
+            var wordComprehension = CalculateWordComprehension(word, _comprehension, _context, _randomize);
 
             if (wordComprehension >= FullComprehensionThreshold)
             {
@@ -107,7 +110,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
             int minSyllables, int maxSyllables, float wordComprehension)
         {
             var obfuscationIntensity = (1.0f - wordComprehension) * (1.0f - wordComprehension);
-            var baseSyllables = _context.PseudoRandomNumber(hashCode, minSyllables, maxSyllables);
+            var baseSyllables = _context.PseudoRandomNumber(hashCode, minSyllables, maxSyllables, _randomize);
             var adjustedSyllables = Math.Max(1, (int)(baseSyllables * obfuscationIntensity));
 
             AppendRandomSyllables(builder, hashCode, adjustedSyllables);
@@ -117,7 +120,7 @@ public sealed partial class SyllableObfuscation : ReplacementObfuscation
         {
             for (var i = 0; i < syllableCount; i++)
             {
-                var index = _context.PseudoRandomNumber(hashCode + i, 0, _replacement.Count - 1);
+                var index = _context.PseudoRandomNumber(hashCode + i, 0, _replacement.Count - 1, _randomize);
                 builder.Append(_replacement[index]);
             }
         }

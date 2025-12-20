@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Language.Components;
 using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
 using Content.Shared.Database;
+using Content.Server.GameTicking.Events;
 using Robust.Server.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
@@ -26,6 +27,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
 
         SubscribeLocalEvent<LanguageComponent, MapInitEvent>(OnInitLanguageSpeaker);
         SubscribeLocalEvent<LanguageComponent, ComponentGetState>(OnGetLanguageState);
+        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
         SubscribeNetworkEvent<LanguagesSetMessage>(OnClientSetLanguage);
     }
 
@@ -44,6 +46,11 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
             ent.Comp.CurrentLanguage = ent.Comp.DefaultLanguage ?? ent.Comp.SpokenLanguages.FirstOrDefault();
 
         UpdateEntityLanguages(ent.AsNullable());
+    }
+
+    private void OnRoundStarting(RoundStartingEvent ev)
+    {
+        ReseedObfuscationForRound();
     }
 
     private void OnClientSetLanguage(LanguagesSetMessage message, EntitySessionEventArgs args)
@@ -106,18 +113,21 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         UpdateEntityLanguages(ent.Owner);
     }
 
-    public bool EnsureValidLanguage(Entity<LanguageComponent?> ent)
+    public bool TryFixCurrentLanguage(Entity<LanguageComponent?> ent)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return false;
 
-        if (ent.Comp.CurrentLanguage != null && ent.Comp.SpokenLanguages.Contains(ent.Comp.CurrentLanguage.Value))
-            return false;
+        if (ent.Comp.CurrentLanguage == null ||
+            !ent.Comp.SpokenLanguages.Contains(ent.Comp.CurrentLanguage.Value))
+        {
+            ent.Comp.CurrentLanguage = ent.Comp.DefaultLanguage ?? ent.Comp.SpokenLanguages.FirstOrDefault();
+            RaiseLocalEvent(ent, new LanguagesUpdateEvent());
+            Dirty(ent);
+            return true;
+        }
 
-        ent.Comp.CurrentLanguage = ent.Comp.DefaultLanguage ?? ent.Comp.SpokenLanguages.FirstOrDefault();
-        RaiseLocalEvent(ent, new LanguagesUpdateEvent());
-        Dirty(ent);
-        return true;
+        return false;
     }
 
     public void UpdateEntityLanguages(Entity<LanguageComponent?> ent)
@@ -141,7 +151,7 @@ public sealed partial class LanguageSystem : SharedLanguageSystem
         ent.Comp.SpokenLanguages.UnionWith(ev.SpokenLanguages);
         ent.Comp.UnderstoodLanguages.UnionWith(ev.UnderstoodLanguages);
 
-        if (!EnsureValidLanguage(ent))
+        if (!TryFixCurrentLanguage(ent))
             RaiseLocalEvent(ent, new LanguagesUpdateEvent());
 
         Dirty(ent);

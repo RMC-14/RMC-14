@@ -82,7 +82,7 @@ public sealed class LanguageLearningSystem : SharedLanguageLearningSystem
 
     private void OnEntitySpoke(EntitySpokeEvent args)
     {
-        if (!_prototypeManager.TryIndex(args.Language, out var languageProto))
+        if (!_prototypeManager.TryIndex(args.Language, out _))
             return;
 
         var potentialLearners = new HashSet<EntityUid>();

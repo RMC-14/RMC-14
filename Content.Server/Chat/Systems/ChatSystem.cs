@@ -242,27 +242,6 @@ public sealed partial class ChatSystem : SharedChatSystem
 
         // RMC14 - Language system integration: Determine what language to speak in
         var currentLanguage = _languageSystem.GetCurrentLanguage(source);
-        var originalMessage = message;
-
-        // RMC14 - Check if the message starts with a language prefix (e.g., ":xeno Hello")
-        if (_languageSystem.TryParseLanguagePrefix(message, out var requestedLanguage, out var remainingMessage))
-        {
-            if (_languageSystem.CanSpeak(source, requestedLanguage))
-            {
-                currentLanguage = requestedLanguage;
-                message = remainingMessage;
-            }
-            else
-            {
-                // Player cannot speak the requested language
-                if (player != null)
-                {
-                    var errorMsg = Loc.GetString("chat-language-cannot-speak", ("language", requestedLanguage));
-                    _chatManager.DispatchServerMessage(player, errorMsg);
-                }
-                return;
-            }
-        }
 
         // RMC14 - Allow other systems to modify the language choice
         var languageEv = new DetermineLanguageEvent(source, currentLanguage);
@@ -857,12 +836,12 @@ public sealed partial class ChatSystem : SharedChatSystem
         else if (!_loocEnabled) return;
 
         // RMC14
-        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Looc))
-        {
-            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
-            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
-            return;
-        }
+        //if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Looc))
+        //{
+        //    var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+        //    _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+        //    return;
+        //}
 
         // If crit player LOOC is disabled, don't send the message at all.
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
@@ -888,12 +867,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             return;
 
         // RMC14
-        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Dead))
-        {
-            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
-            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
-            return;
-        }
+        //if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Dead))
+        //{
+        //    var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+        //    _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+        //    return;
+        //}
 
         if (_adminManager.IsAdmin(player))
         {

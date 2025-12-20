@@ -37,7 +37,6 @@ chat-language-German-name = German
 chat-language-Predator-name = Yautja
 
 # language selection
-chat-language-cannot-speak = You cannot speak {$language}.
 chat-language-switched = You are now speaking {$language}.
 
 # Game hud
@@ -54,10 +53,6 @@ language-learning-search-placeholder = Search words...
 chat-manager-no-radio-key = No radio key specified.
 chat-manager-no-such-channel = No such radio channel: {$key}
 rmc-no-queen-hivemind-chat = There is no Queen to guide the hive mind.
-
-# Language prefix
-language-prefix-help = Use #{$prefix} before your message to speak in {$language}.
-language-prefix-example = Example: #{$prefix}hello world
 
 # Speech Transformation Messages
 language-obfuscated-warning = You don't fully understand this language.
