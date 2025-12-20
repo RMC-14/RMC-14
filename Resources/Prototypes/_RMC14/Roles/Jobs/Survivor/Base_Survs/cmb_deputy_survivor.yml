@@ -37,7 +37,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
     - type: JobPrefix
-      prefix: cm-job-prefix-survivor-cmb-deputy
+      prefix: rmc-job-prefix-bureau-deputy
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
