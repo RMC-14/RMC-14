@@ -221,6 +221,8 @@
         crate: RMCCrateGrenadesAirburstStarShell
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+      - cost: 3000
+        crate: RMCCrateExplosiveClaymoreMine
     - name: Food
       entries:
       - cost: 1000

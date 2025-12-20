@@ -44,8 +44,8 @@
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 20
-    #- id: CMM20MineBox4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     - name: Sidearm Ammunitions
       entries:
       - id: RMCMagazinePistolM13Ext
