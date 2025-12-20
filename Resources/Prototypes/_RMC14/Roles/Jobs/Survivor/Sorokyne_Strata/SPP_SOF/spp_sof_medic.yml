@@ -1,0 +1,62 @@
+- type: job
+  parent: RMCSurvivorSPPSOFBase
+  id: RMCSurvivorSPPSOFMedic
+  name: rmc-job-name-soro-sof-medic
+  startingGear: RMCGearSPPSOFMedic
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  icon: "RMCJobIconSPPMedic"
+  spawnMenuRoleName: SPP SOF Medic (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+    - type: IntelRescueSurvivorObjective # TODO RMC14 assign squad
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-sof-medic
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPSOFBase
+  id: RMCGearSPPSOFMedic
+  equipment:
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: RMCBeltMedicBagSPP
+  storage:
+    back:
+    - CMDefibrillator
+    - CMHealthAnalyzer
+    belt:
+    - CMUpgradedTraumaKit10
+    - CMUpgradedTraumaKit10
+    - CMUpgradedBurnKit10
+    - CMUpgradedBurnKit10
+    # - RMCSplint
+    # - RMCHyposprayOxycodone
+    - CMPillCanisterBicaridine
+    - CMPillCanisterKelotane
+    - CMPillCanisterInaprovaline
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFMedic
+  name: spp sof medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFMedic
+  - type: Sprite
+    state: spp_spawn
