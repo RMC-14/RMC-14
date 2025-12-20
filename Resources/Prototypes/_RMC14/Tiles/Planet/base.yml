@@ -212,3 +212,4 @@
   id: RMCVoid
   name: tiles-rmc-empty
   sprite: /Textures/_RMC14/Tiles/floors/void.png
+  weedsSpreadable: false
