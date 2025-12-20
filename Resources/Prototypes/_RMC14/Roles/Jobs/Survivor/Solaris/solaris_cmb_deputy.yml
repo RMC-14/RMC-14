@@ -1,35 +1,8 @@
 - type: job
   parent: CMSurvivorCMBDeputy
   id: CMSurvivorSolarisCMBDeputy
-  name: rmc-job-name-survivor-cmb-deputy
-  description: cm-job-description-survivor
   startingGear: RMCGearSurvivorSolarisCMBDeputy
-  hasIcon: true
-  icon: RMCJobIconBureauDeputy
   spawnMenuRoleName: CMB Deputy (Solaris Survivor)
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: Skills
-      preset: SurvivorMarshal
-    - type: RMCSurvivor
-    - type: MotionDetectorTracked
-    - type: NpcFactionMember
-      factions:
-      - Bureau
-      - Civilian
-    - type: IntelRescueSurvivorObjective
-    - type: RMCAllowSuitStorage
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetCMBDeputy
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: deputy
-      background:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_cmb
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCMBDeputy
