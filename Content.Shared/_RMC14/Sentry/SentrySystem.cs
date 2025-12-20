@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -53,7 +54,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -71,7 +72,6 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
-
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -135,10 +135,7 @@ public sealed class SentrySystem : EntitySystem
 
         _rmcInteraction.SetMaxRotation(sentry.Owner, angle, sentry.Comp.MaxDeviation);
 
-        if (_gunIFF.TryGetFaction(args.User, out var faction))
-        {
-            _gunIFF.SetUserFaction(sentry.Owner, faction);
-        }
+        _targeting.ApplyDeployerFactions(sentry.Owner, args.User);
 
         UpdateState(sentry);
     }
@@ -539,6 +536,24 @@ public sealed class SentrySystem : EntitySystem
         sentry.Comp.Mode = mode;
         UpdateState(sentry);
         Dirty(sentry, sentry.Comp);
+        return true;
+    }
+
+    public bool TryGetSentryAmmo(EntityUid sentry, [NotNullWhen(true)] out int? ammoCount, [NotNullWhen(true)] out int? ammoCapacity, SentryComponent? sentryComponent = null)
+    {
+        ammoCount = null;
+        ammoCapacity = null;
+        if (!Resolve(sentry, ref sentryComponent, false))
+            return false;
+
+        if (!_container.TryGetContainer(sentry, sentryComponent.ContainerSlotId, out var container) ||  container.Count == 0)
+            return false;
+
+        var ammoEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(container.ContainedEntities[0], ref ammoEv);
+
+        ammoCount = ammoEv.Count;
+        ammoCapacity = ammoEv.Capacity;
         return true;
     }
 
