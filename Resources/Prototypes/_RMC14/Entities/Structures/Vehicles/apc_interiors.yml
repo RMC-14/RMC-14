@@ -1,0 +1,645 @@
+- type: entity
+  abstract: true
+  id: RMCVehicleAPCInteriorBase
+  name: APC interior piece
+  description: A decorative interior piece for the APC.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWallBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCDoorBase
+  components:
+  - type: Clickable
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront4
+  components:
+  - type: Sprite
+    state: front_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront5
+  components:
+  - type: Sprite
+    state: front_5
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFront6
+  components:
+  - type: Sprite
+    state: front_6
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear1
+  components:
+  - type: Sprite
+    state: rear_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear2
+  components:
+  - type: Sprite
+    state: rear_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear3
+  components:
+  - type: Sprite
+    state: rear_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear4
+  components:
+  - type: Sprite
+    state: rear_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear5
+  components:
+  - type: Sprite
+    state: rear_5
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRear6
+  components:
+  - type: Sprite
+    state: rear_6
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall1
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall2
+  components:
+  - type: Sprite
+    state: wall_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall3
+  components:
+  - type: Sprite
+    state: wall_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall4
+  components:
+  - type: Sprite
+    state: wall_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall5
+  components:
+  - type: Sprite
+    state: wall_5
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall6
+  components:
+  - type: Sprite
+    state: wall_6
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWall
+  components:
+  - type: Sprite
+    state: wall
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWallSmallL
+  components:
+  - type: Sprite
+    state: wall_small_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWallSmallR
+  components:
+  - type: Sprite
+    state: wall_small_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWallDoorFront
+  components:
+  - type: Sprite
+    state: wall_door_front
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCDoorFront
+  components:
+  - type: Sprite
+    state: door_front
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCDoorBack
+  components:
+  - type: Sprite
+    state: door_back
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCDoorRearRight
+  components:
+  - type: Sprite
+    state: door_rear_right
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCDoorRearCenter
+  components:
+  - type: Sprite
+    state: door_rear_center
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCDoorRearLeft
+  components:
+  - type: Sprite
+    state: door_rear_left
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCExitDoor
+  components:
+  - type: Sprite
+    state: exit_door
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerL
+  components:
+  - type: Sprite
+    state: corner_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerR
+  components:
+  - type: Sprite
+    state: corner_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL
+  components:
+  - type: Sprite
+    state: corner_inverse_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL1
+  components:
+  - type: Sprite
+    state: corner_inverse_L_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL2
+  components:
+  - type: Sprite
+    state: corner_inverse_L_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL3
+  components:
+  - type: Sprite
+    state: corner_inverse_L_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL4
+  components:
+  - type: Sprite
+    state: corner_inverse_L_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseL5
+  components:
+  - type: Sprite
+    state: corner_inverse_L_5
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseR
+  components:
+  - type: Sprite
+    state: corner_inverse_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseR1
+  components:
+  - type: Sprite
+    state: corner_inverse_R_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseR2
+  components:
+  - type: Sprite
+    state: corner_inverse_R_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseR3
+  components:
+  - type: Sprite
+    state: corner_inverse_R_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerInverseR4
+  components:
+  - type: Sprite
+    state: corner_inverse_R_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerSmallL
+  components:
+  - type: Sprite
+    state: corner_small_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCCornerSmallR
+  components:
+  - type: Sprite
+    state: corner_small_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFrontWheelL
+  components:
+  - type: Sprite
+    state: front_wheel_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCFrontWheelR
+  components:
+  - type: Sprite
+    state: front_wheel_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRearWheelL
+  components:
+  - type: Sprite
+    state: rear_wheel_L
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCRearWheelR
+  components:
+  - type: Sprite
+    state: rear_wheel_R
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcFront1
+  components:
+  - type: Sprite
+    state: apc_front_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcFront2
+  components:
+  - type: Sprite
+    state: apc_front_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcFront3
+  components:
+  - type: Sprite
+    state: apc_front_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcRight1
+  components:
+  - type: Sprite
+    state: apc_right_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcRight2
+  components:
+  - type: Sprite
+    state: apc_right_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcRight3
+  components:
+  - type: Sprite
+    state: apc_right_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcRight4
+  components:
+  - type: Sprite
+    state: apc_right_4
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcBack1
+  components:
+  - type: Sprite
+    state: apc_back_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcBack2
+  components:
+  - type: Sprite
+    state: apc_back_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcBack3
+  components:
+  - type: Sprite
+    state: apc_back_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcLeft1
+  components:
+  - type: Sprite
+    state: apc_left_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcLeft2
+  components:
+  - type: Sprite
+    state: apc_left_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcLeft3
+  components:
+  - type: Sprite
+    state: apc_left_3
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCApcLeft4
+  components:
+  - type: Sprite
+    state: apc_left_4
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWheelFrontTop1
+  components:
+  - type: Sprite
+    state: wheel_front_top_1
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWheelFrontTop2
+  components:
+  - type: Sprite
+    state: wheel_front_top_2
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWheelBackTop1
+  components:
+  - type: Sprite
+    state: wheel_back_top_1
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWheelBackTop2
+  components:
+  - type: Sprite
+    state: wheel_back_top_2
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCInteriorMarker
+  components:
+  - type: Sprite
+    state: current_interior_sprites
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCM56FPWInterior
+  components:
+  - type: Sprite
+    state: m56_FPW
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCSensors
+  components:
+  - type: Sprite
+    state: sensors_equipment
+
+# Convenience aliases matching the van interior layout naming so the map layout can be reused.
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCBack1
+  components:
+  - type: Sprite
+    state: rear_1
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCBack2
+  components:
+  - type: Sprite
+    state: rear_2
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCBack3
+  components:
+  - type: Sprite
+    state: rear_3
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCBackground1
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCBackground2
+  components:
+  - type: Sprite
+    state: wall_2
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCBackground3
+  components:
+  - type: Sprite
+    state: wall_3
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCExterior1
+  components:
+  - type: Sprite
+    state: front_4
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCExterior2
+  components:
+  - type: Sprite
+    state: front_5
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCExterior3
+  components:
+  - type: Sprite
+    state: front_6
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCExteriorDoor
+  components:
+  - type: Sprite
+    state: door_back
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCExteriorDoorUnique
+  components:
+  - type: Sprite
+    state: door_front
+
+- type: entity
+  parent: RMCVehicleAPCDoorBase
+  id: RMCVehicleAPCInteriorDoor
+  components:
+  - type: Sprite
+    state: exit_door
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCFrontRoof1
+  components:
+  - type: Sprite
+    state: wheel_front_top_1
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCFrontRoof2
+  components:
+  - type: Sprite
+    state: wheel_front_top_2
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCRoof2
+  components:
+  - type: Sprite
+    state: wall_4
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWindshieldTop
+  components:
+  - type: Sprite
+    state: wheel_back_top_2
+
+- type: entity
+  parent: RMCVehicleAPCInteriorBase
+  id: RMCVehicleAPCWindshieldBottom
+  components:
+  - type: Sprite
+    state: wheel_back_top_1
