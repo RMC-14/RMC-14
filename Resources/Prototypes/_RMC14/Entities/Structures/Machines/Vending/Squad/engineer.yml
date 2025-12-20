@@ -152,8 +152,8 @@
         points: 15
       - id: RMCPouchFuelTank
         points: 4
-    #- id: CMSlingPouch
-    #  points: 6
+      - id: RMCPouchSling
+        points: 6
       - id: RMCPouchGeneralLarge
         points: 6
       - id: CMBeltUtilityCombat

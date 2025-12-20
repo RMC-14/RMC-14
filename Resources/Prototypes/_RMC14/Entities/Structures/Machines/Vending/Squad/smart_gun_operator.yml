@@ -170,7 +170,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
-    #- id: CMSlingPouch
+      - id: RMCPouchSling
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:

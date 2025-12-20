@@ -292,7 +292,7 @@
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
         recommended: true
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
       - id: RMCPouchMagazineLarge
       - id: RMCPouchShotgunLarge
       - id: RMCPouchMagazinePistolLarge
