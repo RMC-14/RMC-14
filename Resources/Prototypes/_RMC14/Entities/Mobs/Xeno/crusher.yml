@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleCrusher
-  - type: GhostRole
-    name: cm-job-name-xeno-crusher
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Crusher/crusher.rsi
   - type: MobState

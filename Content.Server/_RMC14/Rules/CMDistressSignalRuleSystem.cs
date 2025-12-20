@@ -734,7 +734,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 // Any unfilled xeno slots become larva
                 var unfilled = totalXenos - selectedXenos;
                 if (unfilled > 0)
-                    _hive.IncreaseBurrowedLarva(unfilled);
+                    _hive.ChangeBurrowedLarva(unfilled);
             }
 
             if (comp.SpawnSurvivors)
@@ -1124,7 +1124,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             // Reset Hivecore Cooldown
             var hiveComp = EnsureComp<HiveComponent>(rule.Hive);
             //Add all the stranded xenos up
-            _hive.IncreaseBurrowedLarva(larva); // TODO RMC14 should prob make sure it's only main hive
+            _hive.ChangeBurrowedLarva(larva); // TODO RMC14 should prob make sure it's only main hive
             _hive.ResetHiveCoreCooldown((rule.Hive, hiveComp));
             var surge = EnsureComp<HijackBurrowedSurgeComponent>(rule.Hive);
             surge.PooledLarva = surgeAmount;
