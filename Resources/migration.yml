@@ -457,7 +457,7 @@ CMMagazineSMGM39: CMMagazineSMGM63
 CMMagazineSMGM39AP: CMMagazineSMGM63AP
 CMMagazineSMGM39Ext: CMMagazineSMGM63Ext
 CMAttachmentM39ArmBrace: RMCAttachmentM63ArmBrace
-CMAttachmentM39Stock: RMCAttachmentM63Stock
+CMAttachmentM39Stock: RMCAttachmentM63StockSolid
 CMAttachmentM39StockCollapsible: RMCAttachmentM63StockCollapsible
 WeaponSMGM39: WeaponSMGM63
 CMCrateMagazineM42AMixed: RMCCrateMagazineM96SMixed
