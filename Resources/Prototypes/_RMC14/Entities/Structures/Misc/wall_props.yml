@@ -1,0 +1,132 @@
+# These are intended to be placed next to or on top of walls.
+- type: entity
+  abstract: true
+  id: RMCWallPropBase
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: WallTops
+    sprite: _RMC14/Structures/hybrisa_props_decals.rsi
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 25 # These are pretty weak and are meant to be placed ontop of walls
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DeleteOnExplosion
+  - type: Corrodible
+    isCorrodible: false
+
+# Blood
+- type: entity
+  parent: RMCWallPropBase
+  id: RMCWallPropBloodWallFloor
+  name: blood
+  suffix: Wall Blood, Floor Blood, RMC14
+  components:
+  - type: Sprite
+    state: wallblood_floorblood
+
+- type: entity
+  parent: RMCWallPropBloodWallFloor
+  id: RMCWallPropBloodWall
+  name: blood
+  suffix: Wall Blood, RMC14
+  components:
+  - type: Sprite
+    state: wall_blood_1
+
+- type: entity
+  parent: RMCWallPropBloodWallFloor
+  id: RMCWallPropBloodWallAlt
+  name: blood
+  suffix: Wall Blood, RMC14, Alt
+  components:
+  - type: Sprite
+    state: wall_blood_2
+
+# Graffiti
+- type: entity
+  parent: RMCWallPropBase
+  id: RMCWallPropGraffiti
+  name: graffiti
+  suffix: Wall Graffiti, RMC14, One
+  components:
+  - type: Sprite
+    state: zgraffiti1
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiTwo
+  suffix: Wall Graffiti, RMC14, Two
+  components:
+  - type: Sprite
+    state: zgraffiti2
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiThree
+  suffix: Wall Graffiti, RMC14, Three
+  components:
+  - type: Sprite
+    state: zgraffiti3
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiFour
+  suffix: Wall Graffiti, RMC14, Four
+  components:
+  - type: Sprite
+    state: zgraffiti4
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiFive
+  suffix: Wall Graffiti, RMC14, Five
+  components:
+  - type: Sprite
+    state: zgraffiti5
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiSix
+  suffix: Wall Graffiti, RMC14, Six
+  components:
+  - type: Sprite
+    state: zgraffiti6
+
+- type: entity
+  parent: RMCWallPropGraffiti
+  id: RMCWallPropGraffitiSeven
+  suffix: Wall Graffiti, RMC14, Seven
+  components:
+  - type: Sprite
+    state: zgraffiti7
+
+# Dead pilots
+- type: entity
+  parent: RMCWallPropBase
+  id: RMCWallPropDeadPilot
+  name: decapitated Weston-Yamada Pilot
+  description: What remains of a Weston-Yamada Pilot. Their entire head is missing. Where'd it roll off to?...
+  suffix: RMC14
+  components:
+  - type: Sprite
+    state: pilotbody_decap1
+
+- type: entity
+  parent: RMCWallPropDeadPilot
+  id: RMCWallPropDeadPilotAlt
+  suffix: RMC14, Alt
+  components:
+  - type: Sprite
+    state: pilotbody_decap2
