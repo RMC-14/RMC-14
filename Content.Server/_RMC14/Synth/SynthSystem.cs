@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
+using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 
@@ -45,6 +46,12 @@ public sealed class SynthSystem : SharedSynthSystem
             QueueDel(organ); // Synths do not metabolize chems or breathe
         }
 
-        SpawnInContainerOrDrop(ent.Comp.NewBrain, ent.Owner, BrainSlotId);
+        var bodyParts = _body.GetBodyChildrenOfType(ent.Owner, BodyPartType.Head);
+
+        foreach (var part in bodyParts)
+        {
+            SpawnInContainerOrDrop(ent.Comp.NewBrain, part.Id, BrainSlotId);
+            break;
+        }
     }
 }

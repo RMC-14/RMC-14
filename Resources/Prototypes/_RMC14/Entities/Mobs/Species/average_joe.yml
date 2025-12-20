@@ -85,8 +85,8 @@
     screamAction: null
   - type: Deathgasp
     prototype: RMCAverageJoeDeathGasp
-  - type: RMCInnateSlowdownComponent
-    slowdown: 1.45
+  - type: RMCInnateSlowdown
+    slowdown: 1.25
   - type: MeleeWeapon
     soundHit:
       path: /Audio/_RMC14/Weapons/synthpunch1.ogg
