@@ -66,6 +66,6 @@
   name: average joe spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCJobAverageJoe
+    job_id: RMCAverageJoe
   - type: Sprite
     state: syn_spawn
