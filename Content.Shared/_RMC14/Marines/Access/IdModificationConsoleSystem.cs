@@ -79,6 +79,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        Dirty(uid.Value, access);
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -109,6 +111,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         idCard._jobTitle = "Civilian";
         Dirty(uid.Value, idCard);
+        Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
@@ -150,7 +153,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
         }
 
-
+        Dirty(uid.Value, iff);
         Dirty(ent);
     }
 
@@ -250,6 +253,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 break;
         }
 
+        Dirty(uid.Value, access);
         Dirty(ent);
     }
 
@@ -276,6 +280,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
         }
+
+        Dirty(uid.Value, access);
     }
 
     //TODO RMC14 add ranks tab
