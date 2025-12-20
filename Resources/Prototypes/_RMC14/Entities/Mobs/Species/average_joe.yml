@@ -132,20 +132,8 @@
     species: AverageJoe
 
 - type: entity
+  parent: RMCSynthRemoveComponents
   id: RMCSynthJoeRemoveComponents
   categories: [ HideSpawnMenu ]
   components:
-  - type: CMSurgeryTarget
-  - type: Infectable
-  - type: Hunger
-  - type: Thirst
-  - type: Perishable
-  - type: ThermalRegulator
-  - type: Stamina
-  - type: DamageForceSay
-  - type: Dna
-  - type: InjectableSolution
-  - type: IVDripTarget
-  - type: RMCSuicide
-    damage: { }
   - type: HiddenAppearance
