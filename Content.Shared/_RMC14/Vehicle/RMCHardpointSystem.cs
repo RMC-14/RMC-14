@@ -594,8 +594,11 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!usedWelder && !usedWrench)
             return;
 
-        if (usedWelder && !_repairable.UseFuel(used.Value, args.User, ent.Comp.RepairFuelCost))
-            return;
+        if (usedWelder)
+        {
+            if (used == null || !_repairable.UseFuel(used.Value, args.User, ent.Comp.RepairFuelCost))
+                return;
+        }
 
         var weldCap = ent.Comp.MaxIntegrity * FrameWeldCapFraction;
 
