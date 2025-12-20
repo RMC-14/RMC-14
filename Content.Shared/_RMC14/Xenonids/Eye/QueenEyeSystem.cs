@@ -213,11 +213,11 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetPvsScale(ent.Owner, ent.Comp.PvsScale);
         _eye.SetDrawFov(ent, true);
 
-        ent.Comp.Eye = null;
-        Dirty(ent);
-
         if (_net.IsServer && HasComp<QueenEyeComponent>(ent.Comp.Eye))
             QueueDel(ent.Comp.Eye);
+
+        ent.Comp.Eye = null;
+        Dirty(ent);
 
         RemComp<RelayInputMoverComponent>(ent);
 
