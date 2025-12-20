@@ -50,6 +50,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -151,7 +155,7 @@
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchElectronics
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
