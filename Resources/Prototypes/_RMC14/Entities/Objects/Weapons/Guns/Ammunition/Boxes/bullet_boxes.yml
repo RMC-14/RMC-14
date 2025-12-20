@@ -222,3 +222,75 @@
   - type: BulletBox
     bulletType: RMCBoxBulletsSmartGun
     amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsPistol
+  name: pistol ammunition box (10x20mm-APC)
+  description: A 10x20mm-APC ammunition box. Used to refill M13 regular, extended and drum magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#8F7D70"
+    - state: rifle_box_marking
+      color: "#704506"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#704506"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsPistol
+    max: 984
+    amount: 984
+
+- type: entity
+  parent: RMCBoxBulletsPistol
+  id: RMCBoxBulletsPistolEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsPistolEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsPistol
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsPistolAP
+  name: pistol ammunition box (10x20mm-APC (AP))
+  description: A 10x20mm-APC armor-piercing ammunition box. Used to refill M13 regular, extended and drum AP magazines. It comes with a leather strap allowing to wear it on the back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#8F7D70"
+    - state: rifle_box_marking
+      color: "#0A4306"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#0A4306"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsPistolAP
+    max: 984
+    amount: 984
+
+- type: entity
+  parent: RMCBoxBulletsPistolAP
+  id: RMCBoxBulletsPistolAPEmpty
+  suffix: Empty
+  components:
+  - type: Construction
+    graph: RMCBoxMagazine
+    node: RMCBoxBulletsPistolAPEmpty
+  - type: BulletBox
+    bulletType: RMCBoxBulletsPistolAP
+    amount: 0
