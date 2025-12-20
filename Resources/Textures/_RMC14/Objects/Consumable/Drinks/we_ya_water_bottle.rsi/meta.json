@@ -1,23 +1,111 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/0e5b77c99f162aa1462823e996ba8e0d52656448/icons/obj/items/drinkcans.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/obj/items/food/drinkcans.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/bottles_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/aefb9575f85df13fe574f4947c61218afa2c81a7/icons/mob/humans/onmob/inhands/items/bottles_righthand.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "crushed"
+      "name": "wy_water"
     },
     {
-      "name": "base"
+      "name": "wy_water_open"
     },
     {
-      "name": "icon"
+      "name": "pmc_cocomilk"
     },
     {
-      "name": "icon_open"
+      "name": "pmc_cocomilk_open"
+    },
+    {
+      "name": "wy_soylent"
+    },
+    {
+      "name": "wy_soylent_open"
+    },
+    {
+      "name": "wy_bug_juice"
+    },
+    {
+      "name": "wy_bug_juice_open"
+    },
+    {
+      "name": "wy_water_crushed"
+    },
+    {
+      "name": "pmc_cocomilk_crushed"
+    },
+    {
+      "name": "wy_soylent_crushed"
+    },
+    {
+      "name": "wy_bug_juice_crushed"
+    },
+    {
+      "name": "wy_water-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_water_open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pmc_cocomilk-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "pmc_cocomilk_open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_soylent-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_soylent_open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_bug_juice-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_bug_juice_open-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "wy_bug_juice_open-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_soylent_open-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_bug_juice-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_water_open-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pmc_cocomilk-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "pmc_cocomilk_open-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_soylent-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "wy_water-inhand-right",
+      "directions": 4
     }
   ]
 }
