@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivorCorporate
+  parent: [ RMCJobRibbonBase, CMSurvivorCorporate ] # Halcyon CL shouldn't spawn with WY badges
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
