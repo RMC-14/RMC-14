@@ -24,6 +24,8 @@ marking-RMCSpotsSkrellHairLeft = Skrell Spots (Hair, Left)
 marking-RMCSpotsSkrellHairRight = Skrell Spots (Hair, Right)
 marking-RMCSpotsSkrellHairTiny = Skrell Tiny Spots
 
+marking-RMCEyesSkrellAxiori = Axiori Skrell Eyes
+
 marking-RMCHeaddressSkrellFestive = Festive Headdress (Colorable)
 marking-RMCHeaddressSkrellGold = Headdress (Colorable)
 marking-RMCHeaddressSkrellGoldDiamond = Gold Diamond Headdress (Colorable)
@@ -72,6 +74,8 @@ marking-RMCSpotsSkrellBodyRight-spots-right = Spots
 marking-RMCSpotsSkrellHairLeft-spots-hair-left = Spots
 marking-RMCSpotsSkrellHairRight-spots-hair-right = Spots
 marking-RMCSpotsSkrellHairTiny-spots-hair-tiny = Spots
+
+marking-RMCEyesSkrellAxiori-skr-axiori-eyes = Eye
 
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_s = Headdress
 marking-RMCHeaddressSkrellGoldDiamond-skrell_golddia_gem_s = Gem

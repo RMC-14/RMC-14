@@ -279,6 +279,16 @@
     - sprite: _RMC14/Mobs/Skrells/headdress.rsi
       state: skrell_silvdia_gem_s
 
+# Face Markings
+- type: marking
+  id: RMCEyesSkrellAxiori # Alternate eye markings in case you wanna have giant frog eyes
+  bodyPart: Head
+  markingCategory: Overlay
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-axiori-eyes
+
 # Spots
 - type: marking
   id: RMCSpotsSkrellHairLeft
