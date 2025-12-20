@@ -268,6 +268,14 @@ public sealed partial class GunComponent : Component
     // RMC14
     [DataField]
     public bool MeleeCooldownOnShoot = true;
+
+    // RMC14
+    /// <summary>
+    /// Offsets the spawn location of the projectile.
+    /// </summary>
+    /// <example>[0, -1] means the projectile spawns 1 tile in front of the shooter</example>
+    [DataField]
+    public Vector2 ShootOriginOffset = Vector2.Zero;
 }
 
 [Flags]
