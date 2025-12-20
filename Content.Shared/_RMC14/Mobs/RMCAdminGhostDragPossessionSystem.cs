@@ -32,7 +32,7 @@ public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 
     private void OnCanDropDragged(Entity<CMGhostComponent> ent, ref CanDropDraggedEvent args)
     {
-        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.Fun))
+        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.AdminGhost))
             return;
 
         args.CanDrop = true;
@@ -41,7 +41,7 @@ public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 
     private void OnCanDropTarget(Entity<CMGhostComponent> ent, ref CanDropTargetEvent args)
     {
-        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.Fun))
+        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.AdminGhost))
             return;
 
         args.CanDrop = true;
@@ -50,7 +50,7 @@ public sealed class RMCAdminGhostDragPossessionSystem : EntitySystem
 
     private void OnGhostDraggedDropped(Entity<CMGhostComponent> ent, ref DragDropDraggedEvent args)
     {
-        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.Fun) || ent.Owner == args.Target)
+        if (!Exists(ent) || !_adminManager.HasAdminFlag(args.User, AdminFlags.AdminGhost) || ent.Owner == args.Target)
             return;
         args.Handled = true;
 
