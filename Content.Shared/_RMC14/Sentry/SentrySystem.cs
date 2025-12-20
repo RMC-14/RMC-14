@@ -54,6 +54,7 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -166,6 +167,7 @@ public sealed class SentrySystem : EntitySystem
                     }
                 }
                 mode = SentryMode.On;
+                _pointLight.SetEnabled(sentry, true);
                 var msg = Loc.GetString("rmc-sentry-on", ("sentry", sentry));
                 _popup.PopupClient(msg, sentry, user);
                 break;
@@ -173,6 +175,7 @@ public sealed class SentrySystem : EntitySystem
             default:
             {
                 mode = SentryMode.Off;
+                _pointLight.SetEnabled(sentry, false);
                 var msg = Loc.GetString("rmc-sentry-off", ("sentry", sentry));
                 _popup.PopupClient(msg, sentry, user);
                 break;
@@ -386,6 +389,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Item);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.Off:
                 if (fixture != null)
@@ -393,6 +397,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Off);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.On:
                 if (fixture != null)
@@ -400,6 +405,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.WakeNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.On);
+                _pointLight.SetEnabled(sentry, true);
                 break;
         }
     }

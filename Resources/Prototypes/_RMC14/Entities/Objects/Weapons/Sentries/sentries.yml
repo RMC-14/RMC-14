@@ -86,6 +86,7 @@
   - type: Tag
     tags:
     - RMCSentry
+  - type: PointLight
 
 - type: Tag
   id: RMCSentry
