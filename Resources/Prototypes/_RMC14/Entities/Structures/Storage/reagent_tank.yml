@@ -60,6 +60,10 @@
         Blunt: 0
     throwRange: 2
   - type: RMCMesonsNonviewable
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCTankReagentEmpty
