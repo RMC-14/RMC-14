@@ -322,14 +322,14 @@
     - range: 22
       falloff: 9999
       ignoreModifiers: true
-    - range: 4
+    - range: 3
       falloff: 7
   - type: CMArmorPiercing
     amount: 5
   - type: RMCProjectileAccuracy
     accuracy: 115
     thresholds:
-    - range: 4
+    - range: 2
       falloff: 10
 
 - type: entity
