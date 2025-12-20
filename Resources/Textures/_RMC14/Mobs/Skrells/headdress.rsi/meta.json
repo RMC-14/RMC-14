@@ -1,0 +1,59 @@
+  {
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Paradise at https://github.com/ParadiseSS13/Paradise/commit/f3e4f5fddb23177677b67535c3b1cb603fc93215 and https://github.com/ParadiseSS13/Paradise/blob/f9815fac410eda828448e1e438021e7bba37f575/icons/mob/sprite_accessories/skrell/skrell_hair.dmi, renamed gendered names to just be skrell given there is no need, split and recolored by Monotheonist",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "skrell_fest_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_gold_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_golddia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_golddia_gem_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tandia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_greendia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_blackdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_silvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_tansilvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_greensilvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_blacksilvdia_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_silvdia_gem_s",
+      "directions": 4
+    }
+  ]
+}
