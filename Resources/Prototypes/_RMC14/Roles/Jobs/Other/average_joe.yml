@@ -25,6 +25,7 @@
   applyTraits: false
   jobEntity: RMCMobAverageJoe
   jobPreviewEntity: RMCMobAverageJoeDummy
+  dummyStartingGear: RMCGearAverageJoe
   hidden: true
   hasIcon: false
 

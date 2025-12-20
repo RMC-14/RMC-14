@@ -127,6 +127,9 @@
   parent: BaseSpeciesDummy
   id: RMCMobAverageJoeDummy
   categories: [ HideSpawnMenu ]
+  components:
+  - type: HumanoidAppearance
+    species: AverageJoe
 
 - type: entity
   id: RMCSynthJoeRemoveComponents

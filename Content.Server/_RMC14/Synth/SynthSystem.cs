@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Organ;
-using Content.Shared.Body.Part;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage;
 
@@ -14,6 +13,8 @@ public sealed class SynthSystem : SharedSynthSystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
+
+    private const string BrainSlotId = "body_organ_slot_brain";
 
     protected override void MakeSynth(Entity<SynthComponent> ent)
     {
@@ -44,12 +45,6 @@ public sealed class SynthSystem : SharedSynthSystem
             QueueDel(organ); // Synths do not metabolize chems or breathe
         }
 
-        var headSlots = _body.GetBodyChildrenOfType(ent, BodyPartType.Head);
-
-        foreach (var part in headSlots)
-        {
-            var newBrain = SpawnNextToOrDrop(ent.Comp.NewBrain, ent);
-            _body.AddOrganToFirstValidSlot(part.Id, newBrain);
-        }
+        SpawnInContainerOrDrop(ent.Comp.NewBrain, ent.Owner, BrainSlotId);
     }
 }

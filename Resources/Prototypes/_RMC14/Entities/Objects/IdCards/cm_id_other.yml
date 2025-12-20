@@ -314,7 +314,7 @@
   name: average joe ID card
   components:
   - type: PresetIdCard
-    job: RMCJobAverageJoe
+    job: RMCAverageJoe
 
 - type: entity
   parent: CMIDCardLanyard
