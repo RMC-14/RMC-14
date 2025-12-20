@@ -39,6 +39,169 @@
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_long_tips
 
+- type: marking
+  id: RMCHairSkrellFluff
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_fluff_hair
+
+- type: marking
+  id: RMCHairSkrellShortTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_short_tuux
+
+- type: marking
+  id: RMCHairSkrellLongTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_long_tuux
+
+- type: marking
+  id: RMCHairSkrellStraightTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_straight_tuux
+
+- type: marking
+  id: RMCHairSkrellStraightTuuxLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_straight_tuux_long
+
+- type: marking
+  id: RMCHairSkrellMullet
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mullet
+
+- type: marking
+  id: RMCHairSkrellTucked
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_tucked
+
+- type: marking
+  id: RMCHairSkrellRightEmo
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_right_emo
+
+- type: marking
+  id: RMCHairSkrellLeftEmo
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_left_emo
+
+- type: marking
+  id: RMCHairSkrellRightEmoLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_right_emo_long
+
+- type: marking
+  id: RMCHairSkrellLeftEmoLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_left_emo_long
+  
+- type: marking
+  id: RMCHairSkrellLooseBraid
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_loose_braid
+
+- type: marking
+  id: RMCHairSkrellBackwater
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_backwater
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_backwater_hairtie
+
+- type: marking
+  id: RMCHairSkrellHoop
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hoop
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hoop_hoops
+
+- type: marking
+  id: RMCHairSkrellShortMidBun
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_short_mid_bun
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun_hairtie
+
+- type: marking
+  id: RMCHairSkrellMidBun
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun_hairtie
+
+- type: marking
+  id: RMCHairSkrellLongMidBun
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_long_mid_bun
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun_hairtie
+
 # Headdresses (all defined as tails so they load over your head, in special because they are a different type of overlay)
 - type: marking
   id: RMCHeaddressSkrellFestive
