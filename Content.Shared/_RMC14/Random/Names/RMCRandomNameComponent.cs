@@ -12,5 +12,5 @@ public sealed partial class RMCRandomNameComponent : Component
     public LocId PostFix;
 
     [DataField]
-    public float MaxNumber = 2500;
+    public int MaxNumber = 2500;
 }

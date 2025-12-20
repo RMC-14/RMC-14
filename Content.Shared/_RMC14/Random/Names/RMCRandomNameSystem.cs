@@ -25,7 +25,8 @@ public sealed class RMCRandomNameSystem : EntitySystem
 
         var baseName = Loc.GetString(ent.Comp.BaseName);
         var postFix = Loc.GetString(ent.Comp.PostFix);
-        var finalName = $"{baseName} {postFix}{Math.Abs(_random.NextFloat(1, ent.Comp.MaxNumber))}";
+        var randomNumber = _random.Next(1, ent.Comp.MaxNumber);
+        var finalName = $"{baseName} {postFix}{randomNumber}";
 
         _metaData.SetEntityName(ent, finalName, meta);
     }

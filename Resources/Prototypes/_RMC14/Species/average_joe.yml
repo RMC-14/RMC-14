@@ -11,6 +11,8 @@
   maleFirstNames: RMCNamesAverageJoe
   femaleFirstNames: RMCNamesAverageJoe
   lastNames: RMCNamesNumbers
+  sexes:
+  - Unsexed
 
 - type: speciesBaseSprites
   id: MobAverageJoeSprites

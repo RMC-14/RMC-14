@@ -25,7 +25,7 @@
   applyTraits: false
   jobEntity: RMCMobAverageJoe
   jobPreviewEntity: RMCMobAverageJoeDummy
-  hidden: true
+  hidden: false
 
 - type: startingGear
   id: RMCGearAverageJoe # TODO maintenance jacket on suit storage and Joe PDA in sling pouch
@@ -42,7 +42,7 @@
     back:
     - RMCSprayBottleSpaceCleaner
     - RMCSprayBottleSpaceCleaner
-    - RMCBucket
+    - RMCBucketJanitorial
     - CMMop
     pocket2:
     - CMSheetMetal30
