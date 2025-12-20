@@ -183,6 +183,9 @@ public abstract class SharedLadderSystem : EntitySystem
         {
             args.Cancel();
         }
+
+        if (Transform(user).Anchored)
+            args.Cancel();
     }
 
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)
