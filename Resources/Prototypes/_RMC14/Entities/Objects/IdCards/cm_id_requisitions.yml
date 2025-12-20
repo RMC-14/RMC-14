@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: CMIDCardSilver
   id: CMIDCardQuartermaster
-  name: Logistics Officer ID card
+  name: Requisitions Officer ID card
   components:
   - type: PresetIdCard
     job: CMQuartermaster
