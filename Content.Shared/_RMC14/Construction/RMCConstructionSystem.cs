@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Collision.Shapes;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Construction;
@@ -163,7 +164,23 @@ public sealed class RMCConstructionSystem : EntitySystem
             return true;
 
         if (!constructionComp.Buildable.Contains(proto.ID))
-            return false;
+        {
+            var listed = false;
+            foreach (var buildableId in constructionComp.Buildable)
+            {
+                if (!_prototype.TryIndex<RMCConstructionPrototype>(buildableId, out var buildableProto))
+                    continue;
+
+                if (buildableProto.Listed != null && buildableProto.Listed.Contains(proto.ID))
+                {
+                    listed = true;
+                    break;
+                }
+            }
+
+            if (!listed)
+                return false;
+        }
 
         if (proto.MaterialCost != null && TryComp<StackComponent>(item, out var stack))
         {
@@ -355,8 +372,19 @@ public sealed class RMCConstructionSystem : EntitySystem
 
     private void OnBuildDoAfter(Entity<RMCConstructionItemComponent> ent, ref RMCConstructionBuildDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled)
+        if (args.Handled)
             return;
+
+        if (args.Cancelled)
+        {
+            if (_net.IsServer && args.GhostId != null && TryComp(args.User, out ActorComponent? actor))
+            {
+                var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostId.Value);
+                RaiseNetworkEvent(failMsg, actor.PlayerSession);
+            }
+
+            return;
+        }
 
         if (_net.IsClient)
             return;
@@ -377,6 +405,11 @@ public sealed class RMCConstructionSystem : EntitySystem
             {
                 var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", entry.Name));
                 _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);
+                if (args.GhostId != null && TryComp(args.User, out ActorComponent? actor))
+                {
+                    var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostId.Value);
+                    RaiseNetworkEvent(failMsg, actor.PlayerSession);
+                }
                 return;
             }
         }

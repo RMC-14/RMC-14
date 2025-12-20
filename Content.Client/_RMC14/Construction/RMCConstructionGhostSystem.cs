@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Construction.Prototypes;
 using Content.Shared._RMC14.Map;
+using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Input;
 using Content.Shared.Stacks;
@@ -13,6 +15,7 @@ using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -39,7 +42,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private RMCMapSystem _rmcMap = default!;
 
     private readonly Dictionary<int, EntityUid> _ghosts = new();
-    private readonly Dictionary<int, TimeSpan> _flashingGhosts = new();
+    private readonly Dictionary<int, BuildGhostState> _buildingGhosts = new();
 
     private EntityUid? _currentGhost;
     private RMCConstructionPrototype? _currentPrototype;
@@ -51,11 +54,13 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private bool _isFlashing = false;
     private TimeSpan _flashEndTime;
 
-    private static readonly Color StaticGhostColor = new(48, 255, 48, 128);
-    private static readonly Color CursorGhostValidColor = new(100, 150, 255, 128);
-    private static readonly Color CursorGhostInvalidColor = new(255, 255, 100, 128);
-    private static readonly Color FlashColor = new(255, 48, 48, 128);
+    private static readonly Color StaticGhostColor = new(136, 199, 250, 160);
+    private static readonly Color CursorGhostValidColor = new(74, 163, 232, 140);
+    private static readonly Color CursorGhostInvalidColor = new(206, 210, 43, 140);
+    private static readonly Color FlashColor = new(164, 38, 37, 160);
     private static readonly TimeSpan FlashDuration = TimeSpan.FromMilliseconds(300);
+    private const float BuildFadeMinDuration = 0.05f;
+    private const float BuildCancelDistance = 0.5f;
 
     public override void Initialize()
     {
@@ -85,14 +90,43 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (_isFlashing && currentTime >= _flashEndTime)
             _isFlashing = false;
 
-        foreach (var (ghostId, endTime) in _flashingGhosts.ToList())
+        var userEntity = _playerManager.LocalEntity;
+        foreach (var (ghostId, state) in _buildingGhosts.ToList())
         {
-            if (currentTime >= endTime)
+            if (!_ghosts.TryGetValue(ghostId, out var ghost) || !EntityManager.EntityExists(ghost))
             {
-                _flashingGhosts.Remove(ghostId);
-                if (_ghosts.TryGetValue(ghostId, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
-                    sprite.Color = StaticGhostColor;
+                _buildingGhosts.Remove(ghostId);
+                continue;
             }
+
+            if (userEntity is { } userUid)
+            {
+                if (!userUid.IsValid() || userUid != state.User)
+                {
+                    Logger.Info($"RMCConstructionGhostSystem: Clearing ghost {ghostId} due to user mismatch. Expected {state.User}, got {userUid}.");
+                    ClearGhost(ghostId);
+                    continue;
+                }
+
+                var currentPos = _transformSystem.GetWorldPosition(userUid);
+                if ((currentPos - state.UserStartWorldPosition).LengthSquared() > BuildCancelDistance * BuildCancelDistance)
+                {
+                    Logger.Info($"RMCConstructionGhostSystem: Clearing ghost {ghostId} due to movement. Start={state.UserStartWorldPosition} Current={currentPos}.");
+                    ClearGhost(ghostId);
+                    continue;
+                }
+            }
+
+            if (!EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+                continue;
+
+            var durationSeconds = Math.Max((float) state.Duration.TotalSeconds, BuildFadeMinDuration);
+            var elapsedSeconds = (float) (currentTime - state.StartTime).TotalSeconds;
+            var progress = Math.Clamp(elapsedSeconds / durationSeconds, 0f, 1f);
+            sprite.Color = StaticGhostColor.WithAlpha(StaticGhostColor.A * progress);
+
+            if (progress >= 1f)
+                _buildingGhosts.Remove(ghostId);
         }
 
         var player = _playerManager.LocalEntity;
@@ -295,16 +329,14 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void HandleAckStructure(RMCAckStructureConstructionMessage msg)
     {
+        Logger.Info($"RMCConstructionGhostSystem: Build ack received for ghost {msg.GhostId}.");
         ClearGhost(msg.GhostId);
     }
 
     private void HandleBuildFailed(RMCConstructionGhostBuildFailedMessage msg)
     {
-        if (_ghosts.TryGetValue(msg.GhostId, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
-        {
-            sprite.Color = FlashColor;
-            _flashingGhosts[msg.GhostId] = _timing.CurTime + FlashDuration;
-        }
+        Logger.Info($"RMCConstructionGhostSystem: Build failed for ghost {msg.GhostId}.");
+        ClearGhost(msg.GhostId);
 
         if (_currentGhost != null)
             StartFlash();
@@ -422,6 +454,59 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         _currentConstructionItem = constructionItem;
         _currentDirection = Direction.North;
         _isPlacementActive = true;
+    }
+
+    public bool TryBuildAtPlayer(RMCConstructionPrototype prototype, EntityUid constructionItem, int amount)
+    {
+        if (prototype.Type != RMCConstructionType.Structure)
+            return false;
+
+        var player = _playerManager.LocalEntity;
+        if (player == null)
+            return false;
+
+        var playerTransform = EntityManager.GetComponent<TransformComponent>(player.Value);
+        var coords = playerTransform.Coordinates;
+        Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer start for {prototype.ID} amount={amount} user={player.Value} coords={coords}.");
+        var gridUid = _transformSystem.GetGrid(coords);
+        if (gridUid != null && EntityManager.TryGetComponent<MapGridComponent>(gridUid.Value, out var grid))
+        {
+            var tileCoords = _mapSystem.CoordinatesToTile(gridUid.Value, grid, coords);
+            coords = _mapSystem.GridTileToLocal(gridUid.Value, grid, tileCoords);
+        }
+        var direction = playerTransform.LocalRotation.GetCardinalDir();
+
+        if (!CheckConstructionConditionsForGhost(prototype, coords, direction, player.Value, constructionItem))
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer conditions failed for {prototype.ID} at {coords} dir={direction}.");
+            StartFlash();
+            return false;
+        }
+
+        if (!TrySpawnGhost(prototype, coords, direction, constructionItem, out var ghost))
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer failed to spawn ghost for {prototype.ID} at {coords} dir={direction}.");
+            StartFlash();
+            return false;
+        }
+
+        if (!TryComp<RMCConstructionGhostComponent>(ghost, out var ghostComp))
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer missing ghost component for {prototype.ID} at {coords}.");
+            return false;
+        }
+
+        var msg = new RMCConstructionGhostBuildMessage(
+            prototype.ID,
+            amount,
+            GetNetCoordinates(coords),
+            direction,
+            ghostComp.GhostId);
+
+        RaiseNetworkEvent(msg);
+        Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer sent build msg for {prototype.ID} ghostId={ghostComp.GhostId} at {coords} dir={direction}.");
+        StartBuildingGhost(ghostComp.GhostId, player.Value, _transformSystem.GetWorldPosition(player.Value), GetBuildDuration(prototype));
+        return true;
     }
 
     public void StopPlacement()
@@ -558,14 +643,35 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     public void TryStartConstruction(EntityUid ghostId, RMCConstructionGhostComponent? ghostComp = null)
     {
         if (!Resolve(ghostId, ref ghostComp) || ghostComp.Prototype == null)
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for entity {ghostId} (missing ghost component or prototype).");
             return;
+        }
 
         var user = _playerManager.LocalEntity;
         if (user == null)
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for ghost {ghostComp.GhostId} (no local user).");
             return;
+        }
 
         var transform = EntityManager.GetComponent<TransformComponent>(ghostId);
         var direction = GetGhostDirection(ghostId);
+
+        if (!CheckConstructionConditionsForGhost(ghostComp.Prototype, transform.Coordinates, direction, user.Value))
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction conditions failed for ghost {ghostComp.GhostId} at {transform.Coordinates} dir={direction}.");
+            return;
+        }
+
+        var userCoords = EntityManager.GetComponent<TransformComponent>(user.Value).Coordinates;
+        var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transformSystem);
+        var ghostTile = transform.Coordinates.ToVector2i(EntityManager, _mapManager, _transformSystem);
+        if (userTile != ghostTile)
+        {
+            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for ghost {ghostComp.GhostId} due to tile mismatch. UserTile={userTile} GhostTile={ghostTile}.");
+            return;
+        }
 
         var msg = new RMCConstructionGhostBuildMessage(
             ghostComp.Prototype.ID,
@@ -575,6 +681,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             ghostComp.GhostId);
 
         RaiseNetworkEvent(msg);
+        Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction sent build msg for ghost {ghostComp.GhostId} at {transform.Coordinates} dir={direction}.");
+        StartBuildingGhost(ghostComp.GhostId, user.Value, _transformSystem.GetWorldPosition(user.Value), GetBuildDuration(ghostComp.Prototype));
     }
 
     public void ClearGhost(int ghostId)
@@ -584,7 +692,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         EntityManager.QueueDeleteEntity(ghost);
         _ghosts.Remove(ghostId);
-        _flashingGhosts.Remove(ghostId);
+        _buildingGhosts.Remove(ghostId);
     }
 
     public void DeleteGhost(EntityUid ghost)
@@ -601,7 +709,39 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             EntityManager.QueueDeleteEntity(ghost);
 
         _ghosts.Clear();
-        _flashingGhosts.Clear();
+        _buildingGhosts.Clear();
         ClearCurrentGhost();
+    }
+
+    private void StartBuildingGhost(int ghostId, EntityUid user, Vector2 userStartWorldPosition, TimeSpan duration)
+    {
+        _buildingGhosts[ghostId] = new BuildGhostState(_timing.CurTime, duration, user, userStartWorldPosition);
+
+        if (_ghosts.TryGetValue(ghostId, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+            sprite.Color = StaticGhostColor.WithAlpha(0f);
+    }
+
+    private static TimeSpan GetBuildDuration(RMCConstructionPrototype prototype)
+    {
+        var duration = prototype.DoAfterTime;
+        if (prototype.DoAfterTimeMin > duration)
+            duration = prototype.DoAfterTimeMin;
+        return duration;
+    }
+
+    private readonly struct BuildGhostState
+    {
+        public readonly TimeSpan StartTime;
+        public readonly TimeSpan Duration;
+        public readonly EntityUid User;
+        public readonly Vector2 UserStartWorldPosition;
+
+        public BuildGhostState(TimeSpan startTime, TimeSpan duration, EntityUid user, Vector2 userStartWorldPosition)
+        {
+            StartTime = startTime;
+            Duration = duration;
+            User = user;
+            UserStartWorldPosition = userStartWorldPosition;
+        }
     }
 }
