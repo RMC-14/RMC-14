@@ -1,15 +1,27 @@
 ﻿<ui:RMCBuildChoiceControl
     xmlns="https://spacestation14.io"
-    xmlns:ui="clr-namespace:Content.Client._RMC14.Construction">
+    xmlns:ui="clr-namespace:Content.Client._RMC14.Construction"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
     <BoxContainer Orientation="Horizontal">
-        <Button Name="Button" Access="Public"
-                HorizontalExpand="True" VerticalExpand="False"
-                StyleClasses="ButtonSquare" Margin="2">
-            <BoxContainer Orientation="Horizontal" Margin="0">
-                <Control MinWidth="2"/>
-                <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
-            </BoxContainer>
-        </Button>
+        <PanelContainer Name="ButtonPanel" Access="Public" Margin="0 0 0 6" HorizontalExpand="True">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#1A3D5C"
+                                       BorderColor="#88C7FA" BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <Button Name="Button" Access="Public"
+                    HorizontalExpand="True" VerticalExpand="False"
+                    StyleClasses="OpenBoth"
+                    EnableAllKeybinds="True">
+                <BoxContainer Orientation="Horizontal" Margin="8 6" SeparationOverride="6">
+                    <EntityPrototypeView Name="PrototypeView" Access="Public"
+                                         MinSize="32 32"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Stretch="Fill" />
+                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
+                </BoxContainer>
+            </Button>
+        </PanelContainer>
     </BoxContainer>
     <BoxContainer Name="StackAmountContainer" Access="Public" Orientation="Horizontal" Margin="0 0 5 0">
         <Control HorizontalExpand="True" MinWidth="2"/>
