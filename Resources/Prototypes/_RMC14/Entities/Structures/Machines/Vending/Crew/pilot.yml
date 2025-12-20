@@ -21,6 +21,10 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
+      # - id: CMJumpsuitPilot TODO RMC14: split DCC and Pilot Officer equipment vendors
+      # - id: RMCJumpsuitPilotAlt
+      # - id: CMHandsInsulated
+      # - id: CMHandsBlackInsulated
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
@@ -33,7 +37,9 @@
     - name: Armour
       choices: { CMArmour: 1 }
       entries:
+      # - id: RMCArmorVestFlak TODO RMC14: same as the one in line 24
       - id: CMArmorM3VLFlakVest
+      # - id: RMCCoatPilot TODO RMC14: same as the one in line 24
       - id: CMArmorM3VLBallistics
     - name: Personal Sidearm
       choices: { CMSidearm: 1 }
