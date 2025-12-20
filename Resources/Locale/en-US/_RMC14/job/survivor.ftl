@@ -43,6 +43,7 @@ cm-job-name-survivor-isr = Interstellar Life Rights Observer
 CMJobSurvivorISR = Interstellar Life Rights Observer
 
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
+cm-job-prefix-survivor-cmb-deputy = CMB DEP
 CMSurvivorCMBDeputy = CMB Deputy
 
 rmc-job-name-survivor-bureau-marshal = CMB Marshal
