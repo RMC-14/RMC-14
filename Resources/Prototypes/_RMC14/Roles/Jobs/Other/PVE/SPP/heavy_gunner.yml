@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPHeavyGunnerPVE
   name: rmc-job-name-spp-gunner
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-gunner-pve
   playTimeTracker: RMCJobSPPHeavyGunnerPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []
@@ -34,6 +34,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-gunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

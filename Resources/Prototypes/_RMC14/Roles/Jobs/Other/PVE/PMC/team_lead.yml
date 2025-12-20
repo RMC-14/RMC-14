@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCTeamLeadPVE
   name: rmc-job-name-pmc-pve-team-leader
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-team-leader
   playTimeTracker: CMJobPMCTeamLeadPVE
   ranks:
     RMCRankWeYaTeamLeader: []
@@ -37,6 +37,10 @@
         RMCSkillSmartGun: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-team-leader
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable

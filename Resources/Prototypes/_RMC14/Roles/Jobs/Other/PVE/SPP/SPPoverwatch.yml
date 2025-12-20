@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPPlatCoPVE
   name: rmc-job-name-spp-overwatch
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-overwatch
   playTimeTracker: RMCJobSPPPlatCoPVE
   requirements:
   - !type:RoleTimeRequirement
@@ -30,7 +30,7 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 2
         RMCSkillMedical: 2
-        RMCSkillSurgery: 1
+        RMCSkillSurgery: 2
         RMCSkillCqc: 1
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1

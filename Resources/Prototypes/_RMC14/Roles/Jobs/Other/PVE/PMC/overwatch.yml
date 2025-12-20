@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCForceCommandPVE
   name: rmc-job-name-pmc-pve-force-command
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-force-command
   playTimeTracker: CMJobPMCForceCommandPVE
   requirements:
   - !type:RoleTimeRequirement
@@ -40,6 +40,7 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
+        RMCSkillSurgery: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-force-command
     - type: MarineOrders
