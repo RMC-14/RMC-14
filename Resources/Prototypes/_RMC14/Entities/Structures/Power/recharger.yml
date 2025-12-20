@@ -8,10 +8,14 @@
     drawdepth: SmallObjects
     layers:
     - state: recharger
-      #map: ["enum.PowerChargerVisualLayers.Base"] # TODO RMC14 charge visuals
+      map: ["enum.PowerChargerVisualLayers.Base"]
     - state: recharger-0
-      #map: ["enum.PowerChargerVisualLayers.Light"]
+      map: ["enum.PowerChargerVisualLayers.Light"]
       shader: unshaded
+  - type: PowerChargerVisuals
+    emptyState: "recharger"
+    occupiedState: "recharger"
+    chargeLevelState: "recharger-{0}"
   - type: Fixtures
     fixtures:
       fix1:
@@ -31,6 +35,7 @@
     powerLoad: 0 #15 kW
   - type: Charger
     chargeRate: 1000
+    chargeLevelSteps: 6
   - type: ItemSlots
     slots:
       charger_slot:
