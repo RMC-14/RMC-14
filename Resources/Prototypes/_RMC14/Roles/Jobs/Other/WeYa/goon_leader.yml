@@ -24,7 +24,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 2
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
