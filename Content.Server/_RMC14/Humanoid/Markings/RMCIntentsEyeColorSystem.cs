@@ -49,7 +49,11 @@ public sealed class RMCIntentsEyeColorSystem : EntitySystem
         if (_mobState.IsDead(ent.Owner))
         {
             SetEyeColor(ent.Owner, ent.Comp.DeadEyeColor);
-            return;
+        }
+        else
+        {
+            var color = GetCombatModeColor(ent);
+            SetEyeColor(ent.Owner, color);
         }
     }
 

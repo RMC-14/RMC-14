@@ -77,9 +77,10 @@
       visible: false
   - type: HumanoidAppearance
     species: AverageJoe
-    gender: neuter
+    gender: Neuter
   - type: Speech
     speechVerb: AverageJoe
+    speechSounds: null
   - type: Vocal
     sounds: null
     screamAction: null
