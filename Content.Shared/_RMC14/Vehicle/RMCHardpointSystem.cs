@@ -11,6 +11,7 @@ using Content.Shared.Tools.Systems;
 using Content.Shared.Damage;
 using Content.Shared._RMC14.Repairable;
 using Content.Shared.Tools.Components;
+using Content.Shared._RMC14.Tools;
 using Robust.Shared.GameObjects;
 using Content.Shared.Hands.Components;
 using Robust.Shared.Containers;
@@ -27,6 +28,9 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class RMCHardpointSystem : EntitySystem
 {
+    private const float FrameWeldCapFraction = 0.75f;
+    private const float FrameRepairEpsilon = 0.01f;
+
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -498,7 +502,11 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         var used = args.Used;
-        if (!_tool.HasQuality(used, "Welding") || !HasComp<WelderComponent>(used))
+        var isFrame = HasComp<RMCHardpointSlotsComponent>(ent.Owner);
+        var usedWelder = _tool.HasQuality(used, "Welding") && HasComp<BlowtorchComponent>(used);
+        var usedWrench = isFrame && _tool.HasQuality(used, "Anchoring");
+
+        if (!usedWelder && !usedWrench)
             return;
 
         if (ent.Comp.Integrity >= ent.Comp.MaxIntegrity)
@@ -514,15 +522,46 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
         }
 
+        var weldCap = ent.Comp.MaxIntegrity * FrameWeldCapFraction;
+
+        if (usedWelder && isFrame && ent.Comp.Integrity >= weldCap - FrameRepairEpsilon)
+        {
+            _popup.PopupClient("Finish tightening the frame with a wrench.", ent.Owner, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (usedWrench && ent.Comp.Integrity < weldCap - FrameRepairEpsilon)
+        {
+            _popup.PopupClient("Weld the frame before tightening it.", ent.Owner, args.User, PopupType.SmallCaution);
+            args.Handled = true;
+            return;
+        }
+
+        if (usedWelder && !_repairable.UseFuel(used, args.User, ent.Comp.RepairFuelCost, true))
+        {
+            args.Handled = true;
+            return;
+        }
+
         var missingIntegrity = ent.Comp.MaxIntegrity - ent.Comp.Integrity;
         var weldTime = MathF.Max(
             ent.Comp.RepairTimeMin,
             MathF.Min(ent.Comp.RepairTimeMax, missingIntegrity * ent.Comp.RepairTimePerIntegrity)
         );
+        var repairTime = usedWelder ? weldTime : ent.Comp.RepairTimeMin;
 
         ent.Comp.Repairing = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, weldTime, new RMCHardpointRepairDoAfterEvent(), ent.Owner, ent.Owner, used)
+        if (used != null)
+        {
+            var toolEvent = new RMCToolUseEvent(args.User, TimeSpan.FromSeconds(repairTime));
+            RaiseLocalEvent(used, ref toolEvent);
+            if (toolEvent.Handled)
+                repairTime = (float) toolEvent.Delay.TotalSeconds;
+        }
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, repairTime, new RMCHardpointRepairDoAfterEvent(), ent.Owner, ent.Owner, used)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -547,10 +586,32 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         args.Handled = true;
 
-        if (args.Used == null || !_repairable.UseFuel(args.Used.Value, args.User, ent.Comp.RepairFuelCost))
+        var used = args.Used;
+        var isFrame = HasComp<RMCHardpointSlotsComponent>(ent.Owner);
+        var usedWelder = used != null && _tool.HasQuality(used.Value, "Welding") && HasComp<BlowtorchComponent>(used);
+        var usedWrench = isFrame && used != null && _tool.HasQuality(used.Value, "Anchoring");
+
+        if (!usedWelder && !usedWrench)
             return;
 
-        ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+        if (usedWelder && !_repairable.UseFuel(used.Value, args.User, ent.Comp.RepairFuelCost))
+            return;
+
+        var weldCap = ent.Comp.MaxIntegrity * FrameWeldCapFraction;
+
+        if (usedWelder)
+        {
+            var target = isFrame ? MathF.Min(weldCap, ent.Comp.MaxIntegrity) : ent.Comp.MaxIntegrity;
+            ent.Comp.Integrity = MathF.Max(ent.Comp.Integrity, target);
+        }
+        else if (usedWrench)
+        {
+            if (ent.Comp.Integrity < weldCap - FrameRepairEpsilon)
+                return;
+
+            ent.Comp.Integrity = ent.Comp.MaxIntegrity;
+        }
+
         Dirty(ent.Owner, ent.Comp);
         UpdateFrameDamageAppearance(ent.Owner, ent.Comp);
 
@@ -720,7 +781,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         _appearance.SetData(uid, RMCVehicleFrameDamageVisuals.IntegrityFraction, fraction, appearance);
     }
 
-   private bool TryGetPryingTool(EntityUid user, out EntityUid tool)
+    private bool TryGetPryingTool(EntityUid user, out EntityUid tool)
     {
         tool = default;
 
@@ -734,7 +795,10 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!_hands.TryGetHeldItem((user, hands), activeHand, out var held))
             return false;
 
-        if (!_tool.HasQuality(held.Value, "Prying"))
+        if (!TryComp(held.Value, out ToolComponent? toolComp))
+            return false;
+
+        if (!_tool.HasQuality(held.Value, "Prying", toolComp))
             return false;
 
         tool = held.Value;
