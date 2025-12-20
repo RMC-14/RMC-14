@@ -78,7 +78,7 @@
   - type: HumanoidAppearance
     species: AverageJoe
   - type: Speech
-    speechVerb: Robotic
+    speechVerb: AverageJoe
   - type: Vocal
     sounds: null
     screamAction: null
@@ -116,6 +116,13 @@
     attributes:
       proper: true
       gender: neuter
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
+  - type: ActiveRadio
+    channels:
+    - Binary
 
 - type: entity
   parent: BaseSpeciesDummy

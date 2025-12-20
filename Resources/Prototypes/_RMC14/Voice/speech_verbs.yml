@@ -42,3 +42,10 @@
   - chat-speech-verb-megaphone-2
   priority: 1000
   bold: true
+
+- type: speechVerb
+  id: AverageJoe
+  name: chat-speech-verb-name-average-joe
+  speechVerbStrings:
+  - chat-speech-verb-robotic-1
+  - chat-speech-verb-average-joe-1
