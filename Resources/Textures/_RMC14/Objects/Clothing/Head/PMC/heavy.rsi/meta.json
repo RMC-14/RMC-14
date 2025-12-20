@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/06d35efb20e830eacc57d3c77fea047dadbcdee3/icons/obj/items/clothing/cm_hats.dmi, https://github.com/cmss13-devs/cmss13/blob/06d35efb20e830eacc57d3c77fea047dadbcdee3/icons/mob/humans/onmob/head_1.dmi",
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,13 @@
     },
     {
       "name": "equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "icon-flash"
+    },
+    {
+      "name": "on-equipped-HELMET",
       "directions": 4
     }
   ]
