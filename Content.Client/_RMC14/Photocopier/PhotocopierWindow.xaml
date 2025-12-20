@@ -3,7 +3,6 @@
     xmlns="https://spacestation14.io"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
-    xmlns:vp="clr-namespace:Content.Client.Viewport"
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="Photocopier"
     MinSize="380 220">
@@ -34,7 +33,7 @@
                 <Label Text="NAME"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"/>
-                <Label Text="PaperName"
+                <Label Name="PaperName"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"/>
             </BoxContainer>
