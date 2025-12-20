@@ -6,7 +6,7 @@
   color: "#595959"
   roles:
 #  - CMSilicon # TODO RMC14
-  - RMCJobAverageJoe
+  - RMCAverageJoe
   - RMCJobSynthetic
   - CMLiaison
   - CMCorrespondent

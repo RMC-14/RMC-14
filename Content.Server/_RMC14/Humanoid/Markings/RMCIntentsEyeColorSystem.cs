@@ -19,8 +19,7 @@ public sealed class RMCIntentsEyeColorSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<RMCIntentsEyeColorComponent, MapInitEvent>(OnMapInit,
-            after: new[] { typeof(RandomHumanoidAppearanceSystem) }
-        );
+            after: new[] { typeof(RandomHumanoidAppearanceSystem) });
 
         SubscribeLocalEvent<RMCIntentsEyeColorComponent, ToggleCombatActionEvent>(OnCombatModeChanged,
             after: new[] { typeof(SharedCombatModeSystem) }

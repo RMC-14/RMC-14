@@ -1,10 +1,10 @@
 - type: job
   parent: CMJobBase
-  id: RMCJobAverageJoe
+  id: RMCAverageJoe
   name: rmc-job-name-average-joe
   description: rmc-job-description-average-joe
   playTimeTracker: RMCJobSynthetic
-  hasIcon: false
+  icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   whitelisted: true
   supervisors: rmc-job-supervisors-robotic
@@ -25,7 +25,8 @@
   applyTraits: false
   jobEntity: RMCMobAverageJoe
   jobPreviewEntity: RMCMobAverageJoeDummy
-  hidden: false
+  hidden: true
+  hasIcon: false
 
 - type: startingGear
   id: RMCGearAverageJoe # TODO maintenance jacket on suit storage and Joe PDA in sling pouch

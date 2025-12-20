@@ -5,8 +5,10 @@ using Content.Shared._RMC14.Station;
 using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Preferences;
+using Content.Shared.Station;
 using Content.Shared.Whitelist;
 using Robust.Shared.Configuration;
+using Robust.Shared.GameObjects.Components.Localization;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 
@@ -18,6 +20,7 @@ public sealed class RMCHumanoidAppearanceSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
+    [Dependency] private readonly GrammarSystem _grammarSystem = default!;
     [Dependency] private readonly SharedRMCStationSpawningSystem _rmcStationSpawning = default!;
 
     private EntityUid? _spawnMap;
@@ -28,6 +31,9 @@ public sealed class RMCHumanoidAppearanceSystem : EntitySystem
     {
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
+
+        SubscribeLocalEvent<RMCSetGenderOnMapInitComponent, MapInitEvent>(OnSetGenderMapInit,
+            after: new[] { typeof(SharedHumanoidAppearanceSystem), typeof(SharedStationSpawningSystem) });
 
         Subs.CVar(_config, RMCCVars.HidePlayerIdentities, OnHidePlayerIdentitiesChanged, true);
     }
@@ -76,6 +82,18 @@ public sealed class RMCHumanoidAppearanceSystem : EntitySystem
 
         Dirty(ev.Mob, hidden);
         QueueDel(random);
+    }
+
+    private void OnSetGenderMapInit(Entity<RMCSetGenderOnMapInitComponent> ent, ref MapInitEvent args)
+    {
+        if (!TryComp<HumanoidAppearanceComponent>(ent.Owner, out var appearance))
+            return;
+
+        appearance.Gender = ent.Comp.Gender;
+        Dirty(ent.Owner, appearance);
+
+        if (TryComp<GrammarComponent>(ent.Owner, out var grammar))
+            _grammarSystem.SetGender((ent.Owner, grammar), ent.Comp.Gender);
     }
 
     private void OnHidePlayerIdentitiesChanged(bool value)

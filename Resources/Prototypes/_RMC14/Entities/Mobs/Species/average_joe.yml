@@ -77,7 +77,6 @@
       visible: false
   - type: HumanoidAppearance
     species: AverageJoe
-    gender: Neuter
   - type: Speech
     speechVerb: AverageJoe
     speechSounds: null
@@ -121,6 +120,8 @@
   - type: ActiveRadio
     channels:
     - Binary
+  - type: RMCSetGenderOnMapInit
+    gender: Neuter
 
 - type: entity
   parent: BaseSpeciesDummy
