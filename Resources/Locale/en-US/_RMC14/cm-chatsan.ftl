@@ -855,6 +855,8 @@ cm-chatsan-word-evos = evos
 cm-chatsan-replacement-evos = evolutions
 
 cm-chatsan-word-tax = tax
+cm-chatsan-word-taxx = taxx
+cm-chatsan-word-taxxx = taxxx
 cm-chatsan-word-xax = xax
 cm-chatsan-replacement-tax = build
 

@@ -313,6 +313,8 @@
     cm-chatsan-word-evo: cm-chatsan-replacement-evo
     cm-chatsan-word-evos: cm-chatsan-replacement-evos
     cm-chatsan-word-tax: cm-chatsan-replacement-tax
+    cm-chatsan-word-taxx: cm-chatsan-replacement-tax
+    cm-chatsan-word-taxxx: cm-chatsan-replacement-tax
     cm-chatsan-word-taxes: cm-chatsan-replacement-taxes
     cm-chatsan-word-taxing: cm-chatsan-replacement-taxing
     cm-chatsan-word-taxed: cm-chatsan-replacement-taxed
