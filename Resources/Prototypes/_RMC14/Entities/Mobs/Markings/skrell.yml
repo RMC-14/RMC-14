@@ -94,15 +94,6 @@
       state: skrell_mullet
 
 - type: marking
-  id: RMCHairSkrellTucked
-  bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Skrell]
-  sprites:
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_tucked
-
-- type: marking
   id: RMCHairSkrellRightEmo
   bodyPart: HeadTop
   markingCategory: HeadTop
@@ -146,39 +137,6 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_loose_braid
-
-- type: marking
-  id: RMCHairSkrellBackwater
-  bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Skrell]
-  sprites:
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_backwater
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_backwater_hairtie
-
-- type: marking
-  id: RMCHairSkrellHoop
-  bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Skrell]
-  sprites:
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_hoop
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_hoop_hoops
-
-- type: marking
-  id: RMCHairSkrellShortMidBun
-  bodyPart: HeadTop
-  markingCategory: HeadTop
-  speciesRestriction: [Skrell]
-  sprites:
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_short_mid_bun
-    - sprite: _RMC14/Mobs/Skrells/hair.rsi
-      state: skrell_mid_bun_hairtie
 
 - type: marking
   id: RMCHairSkrellMidBun
