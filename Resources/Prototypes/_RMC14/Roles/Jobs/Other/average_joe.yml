@@ -4,7 +4,6 @@
   name: rmc-job-name-average-joe
   description: rmc-job-description-average-joe
   playTimeTracker: RMCJobSynthetic
-  startingGear: RMCGearAverageJoe
   hasIcon: false
   joinNotifyCrew: false
   whitelisted: true
@@ -20,6 +19,8 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: joe
+    - type: Loadout
+      prototypes: [ RMCGearAverageJoe ] # Needs to be done this way because JobEntity doesn't support starting gear
   whitelistParent: RMCJobSynthetic
   applyTraits: false
   jobEntity: RMCMobAverageJoe
