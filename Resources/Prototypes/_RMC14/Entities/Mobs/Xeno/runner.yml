@@ -253,6 +253,10 @@
         types:
           Heat: 1
   - type: XenoAciderGeneration
+  - type: AcidTrap
+    trapLevel: 3
+    cost: 75
+    spray: XenoAcidSprayTrapStrong
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59
