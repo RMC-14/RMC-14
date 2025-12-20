@@ -177,8 +177,12 @@ public sealed partial class ActivatableUISystem : EntitySystem
         SetCurrentSingleUser(uid, null, component);
     }
 
-    private bool InteractUI(EntityUid user, EntityUid uiEntity, ActivatableUIComponent aui)
+    public bool InteractUI(EntityUid user, EntityUid uiEntity, ActivatableUIComponent? aui = null) //RMC14 made public
     {
+        //RMC14
+        if (!Resolve(uiEntity, ref aui, false))
+            return false;
+
         if (aui.Key == null || !_uiSystem.HasUi(uiEntity, aui.Key))
             return false;
 

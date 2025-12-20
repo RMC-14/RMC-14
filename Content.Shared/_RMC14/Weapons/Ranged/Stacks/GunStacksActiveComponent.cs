@@ -15,4 +15,7 @@ public sealed partial class GunStacksActiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Hits = 0;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? LastHitEntity;
 }

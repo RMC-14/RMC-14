@@ -16,6 +16,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Directions;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
@@ -98,7 +99,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         SubscribeLocalEvent<TileFireComponent, MapInitEvent>(OnTileFireMapInit);
         SubscribeLocalEvent<TileFireComponent, VaporHitEvent>(OnTileFireVaporHit);
-        SubscribeLocalEvent<TileFireComponent, InteractHandEvent>(OnTileFireInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<TileFireComponent, InteractHandEvent>(OnTileFireInteractHand, before: new [] {typeof(InteractionPopupSystem), typeof(DamagePopupSystem)});
         SubscribeLocalEvent<TileFireComponent, PreventCollideEvent>(OnTileFirePreventCollide);
 
         SubscribeLocalEvent<CraftsIntoMolotovComponent, ExaminedEvent>(OnCraftsIntoMolotovExamined);
@@ -116,7 +117,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         SubscribeLocalEvent<SteppingOnFireComponent, CMGetArmorEvent>(OnSteppingOnFireGetArmor);
         SubscribeLocalEvent<SteppingOnFireComponent, ComponentRemove>(OnSteppingOnFireRemoved);
 
-        SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: [typeof(InteractionPopupSystem)]);
+        SubscribeLocalEvent<CanBeFirePattedComponent, InteractHandEvent>(OnCanBeFirePattedInteractHand, before: new [] {typeof(InteractionPopupSystem), typeof(DamagePopupSystem)});
 
         SubscribeLocalEvent<FlammableComponent, IgnitedEvent>(OnFlammableIgnite);
         SubscribeLocalEvent<FlammableComponent, RMCExtinguishedEvent>(OnFlammableExtinguished);
