@@ -1,0 +1,14 @@
+<Control xmlns="https://spacestation14.io"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <BoxContainer Orientation="Horizontal"
+                  SeparationOverride="4"
+                  VerticalAlignment="Center">
+        <Label Text="{Loc 'ui-options-night-vision'}"
+               MinWidth="400"
+               VerticalAlignment="Center" />
+        <OptionButton Name="ColorOption"
+                      HorizontalExpand="False"
+                      MinWidth="150"
+                      MaxWidth="220" />
+    </BoxContainer>
+</Control>

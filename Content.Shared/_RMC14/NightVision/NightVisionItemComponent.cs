@@ -30,7 +30,7 @@ public sealed partial class NightVisionItemComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int>? Skills;
 
     [DataField, AutoNetworkedField]
-    public bool Green;
+    public NightVisionColor Color = NightVisionColor.Green;
 
     [DataField, AutoNetworkedField]
     public bool Mesons;
