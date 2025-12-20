@@ -85,7 +85,7 @@
   - type: WiresPanel
   - type: Wires
     boardName: wires-board-name-windoor
-    layoutId: Airlock
+    layoutId: RMCAirlock
   - type: UserInterface
     interfaces:
       enum.AiUi.Key:
