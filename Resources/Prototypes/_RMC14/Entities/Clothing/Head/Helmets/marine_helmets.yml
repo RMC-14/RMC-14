@@ -119,6 +119,41 @@
     - RMCVisorSquadIntegrated
 
 - type: entity
+  parent: RMCHelmetBase
+  id: RMCArmorHelmetM10FieldDoctor
+  name: M10-L field doctor helmet
+  description: A special variant of the M10 Pattern Helmet worn by the field doctors of the Marines. Comes with a built in medical display HUD.
+  components:
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    explosionArmor: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/desert.rsi
+      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/snow.rsi
+      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/classic.rsi
+      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/urban.rsi
+  - type: CycleableVisor
+    offIcon:
+      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
+      state: sight_up
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    startToggled: true
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+
+- type: entity
   parent: CMArmorHelmetM10Medic
   id: RMCArmorHelmetM10MedicWhite
   name: M10 white corpsman helmet

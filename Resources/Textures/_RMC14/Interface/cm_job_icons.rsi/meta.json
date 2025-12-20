@@ -95,6 +95,9 @@
             "name": "hudsquad_doctor"
         },
         {
+            "name": "hudsquad_fielddoctor"
+        },
+        {
             "name": "hudsquad_researcher"
         },
         {
