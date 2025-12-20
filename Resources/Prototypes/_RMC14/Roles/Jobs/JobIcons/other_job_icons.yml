@@ -82,3 +82,10 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_syn
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSPPSynth
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_synth
