@@ -1049,8 +1049,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             return;
 
         //RMC14
-        Vector2? muzzleFlashOffset = component.MuzzleFlashOffset;
-        Vector2? muzzleFlashOriginOffset = null;
+        var muzzleFlashOffset = component.MuzzleFlashOffset;
+        var muzzleFlashOriginOffset = Vector2.Zero;
         if (TryComp(gun, out GunComponent? gunComp))
         {
             var beforeEv = new RMCBeforeMuzzleFlashEvent(gun, gunComp.ShootOriginOffset);
@@ -1149,7 +1149,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
     }
 
-    protected abstract void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null, Vector2? offset = null, Vector2? originOffset = null);
+    protected abstract void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null, Vector2 offset = default, Vector2 originOffset = default);
 
     /// <summary>
     /// Used for animated effects on the client.

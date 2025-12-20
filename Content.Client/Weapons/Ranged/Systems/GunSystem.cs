@@ -236,7 +236,7 @@ public sealed partial class GunSystem : SharedGunSystem
         PopupSystem.PopupEntity(message, uid.Value, user.Value);
     }
 
-    protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? tracked = null, EntityUid? player = null, Vector2? offset = null, Vector2? originOffset = null)
+    protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? tracked = null, EntityUid? player = null, Vector2 offset = default, Vector2 originOffset = default)
     {
         if (!Timing.IsFirstTimePredicted)
             return;
@@ -273,7 +273,7 @@ public sealed partial class GunSystem : SharedGunSystem
         {
             var track = EnsureComp<TrackUserComponent>(ent);
             track.User = tracked;
-            track.Offset = offset ?? Vector2.UnitX / 2f; // RMC14
+            track.Offset = offset; // RMC14
             track.OriginOffset = originOffset; // RMC14
         }
 

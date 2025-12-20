@@ -56,7 +56,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
     protected override void Popup(string message, EntityUid? uid, EntityUid? user) { }
 
-    protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null, Vector2? offset = null, Vector2? originOffset = null)
+    protected override void CreateEffect(EntityUid gunUid, MuzzleFlashEvent message, EntityUid? user = null, EntityUid? player = null, Vector2 offset = default, Vector2 originOffset = default)
     {
         var filter = Filter.Pvs(gunUid, entityManager: EntityManager);
         if (TryComp<ActorComponent>(user, out var actor))

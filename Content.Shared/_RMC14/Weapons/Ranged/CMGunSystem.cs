@@ -895,4 +895,4 @@ public record struct BeforeAttemptShootEvent(EntityCoordinates Origin, Vector2 O
 /// An event raised right before a muzzle flash event is raised.
 /// </summary>
 [ByRefEvent]
-public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2? Offset = null);
+public record struct RMCBeforeMuzzleFlashEvent(EntityUid Weapon, Vector2 Offset = default);

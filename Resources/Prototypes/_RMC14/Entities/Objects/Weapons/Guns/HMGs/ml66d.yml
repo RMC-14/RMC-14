@@ -161,7 +161,7 @@
     skills:
       RMCSkillEngineer: 0
   - type: Gun
-    shootOriginOffset: 0, -0.5 #Shifts the spawn position of the projectile 0.5 tiles in front of the mount.
+    shootOriginOffset: 0, -0.5 #Shifts the spawn position of the projectile 0.5 tiles towards the front of the mount.
 
 # Magazines
 

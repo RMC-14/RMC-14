@@ -8,6 +8,9 @@ namespace Content.Shared.Weapons.Ranged.Components;
 /// </summary>
 public partial class AmmoComponent
 {
+    /// <summary>
+    ///     Distance the muzzle flash rotates from its origin.
+    /// </summary>
     [DataField]
-    public Vector2? MuzzleFlashOffset;
+    public Vector2 MuzzleFlashOffset = new (0.5f, 0);
 }

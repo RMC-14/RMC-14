@@ -543,27 +543,22 @@ public sealed class DropshipSystem : SharedDropshipSystem
     /// <param name="ent">The dropship entity that received the FTL event that will be relayed</param>
     /// <param name="args">The raised event that is forwarded</param>
     /// <typeparam name="TEvent">The type of the event</typeparam>
-    private void RelayFTLToMountedEntities<TEvent>(EntityUid ent, TEvent args) where TEvent : struct
+    private void RelayFTLToMountedEntities<TEvent>(Entity<DropshipComponent> ent, TEvent args) where TEvent : struct
     {
-        var childEnumerator = Transform(ent).ChildEnumerator;
-
-        while (childEnumerator.MoveNext(out var childEntity))
+        foreach (var attachPoint in ent.Comp.AttachmentPoints)
         {
-            if (!Transform(childEntity).Anchored)
-                continue;
-
             BaseContainer? container = null;
-            if (TryComp(childEntity, out DropshipWeaponPointComponent? weaponPoint))
-                _container.TryGetContainer(childEntity, weaponPoint.WeaponContainerSlotId, out container);
-            else if (TryComp(childEntity, out DropshipUtilityPointComponent? utilityPoint))
-                _container.TryGetContainer(childEntity, utilityPoint.UtilitySlotId, out container);
+            if (TryComp(attachPoint, out DropshipWeaponPointComponent? weaponPoint))
+                _container.TryGetContainer(attachPoint, weaponPoint.WeaponContainerSlotId, out container);
+            else if (TryComp(attachPoint, out DropshipUtilityPointComponent? utilityPoint))
+                _container.TryGetContainer(attachPoint, utilityPoint.UtilitySlotId, out container);
 
             if (container == null)
                 continue;
 
             foreach (var mountedEntity in container.ContainedEntities)
             {
-                var relayedEvent = new FTLUpdatedRelayedEvent<TEvent>(args, childEntity);
+                var relayedEvent = new FTLUpdatedRelayedEvent<TEvent>(args, attachPoint);
                 RaiseLocalEvent(mountedEntity, ref relayedEvent);
             }
         }
