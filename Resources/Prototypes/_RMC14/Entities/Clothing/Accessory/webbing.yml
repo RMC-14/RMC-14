@@ -744,7 +744,7 @@
     contents:
     - id: RMCMREWeYa
     - id: RMCMREWeYa
-    - id: CMCrowbar # TODO RMC14: tactical prybar
+    - id: RMCTacticalPrybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
 
