@@ -36,6 +36,7 @@
     - type: SniperWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-weapons-specialist-sniper
+    - type: RMCAllowSuitStorage
   hidden: true
 
 - type: startingGear
