@@ -20,6 +20,10 @@
     slots:
       - mask
       - neck
+  - type: UniformAccessory
+    category: Mask
+    limit: 1
+    layerKey: mask
 
 - type: entity
   parent: RMCBaseScarfMask
@@ -73,6 +77,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+      state: equipped-MASK
   - type: IdentityBlocker
     coverage: MOUTH
 
@@ -90,6 +98,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/bravo.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfBravo]
@@ -105,6 +117,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/charlie.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfCharlie]
@@ -120,6 +136,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/delta.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfDelta]
@@ -135,6 +155,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/echo.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfEcho]
@@ -150,6 +174,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/foxtrot.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfFoxtrot]
@@ -167,6 +195,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/alpha.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfRed]
@@ -182,6 +214,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/black.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfBlack]
@@ -197,6 +233,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/gray.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfGray]
@@ -212,6 +252,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/green.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfGreen]
@@ -227,6 +271,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Scarfs/tan.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskScarfTan]
@@ -243,6 +291,10 @@
     slots:
     - mask
     - neck
+  - type: UniformAccessory
+    category: Mask
+    limit: 1
+    layerKey: mask
 
 - type: entity
   parent: RMCMaskTornScarfBase
@@ -254,6 +306,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/black.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskTornScarfBlack
@@ -264,6 +320,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/desert.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskTornScarfBlack
@@ -274,6 +334,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/green.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskTornScarfBlack
@@ -284,6 +348,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/grey.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskTornScarfBlack
@@ -294,6 +362,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/urban.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskTornScarfBlack
@@ -304,6 +376,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/TornScarfs/snow.rsi
+      state: equipped-MASK
 
 # Smock
 
@@ -317,6 +393,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Smock/black.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: RMCMaskSmockBlack
@@ -333,6 +413,10 @@
       Snow: _RMC14/Objects/Clothing/Mask/Smock/snow.rsi
       Classic: _RMC14/Objects/Clothing/Mask/Smock/classic.rsi
       Urban: _RMC14/Objects/Clothing/Mask/Smock/urban.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Smock/jungle.rsi
+      state: equipped-MASK
 
 # Neckerchief - No flipped icons for these because I cant get it to work thanks yaml code
 
@@ -346,6 +430,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/alpha.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefAlpha]
@@ -360,6 +448,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/bravo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/bravo.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/bravo.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefBravo]
@@ -374,6 +466,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/charlie.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/charlie.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/charlie.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefCharlie]
@@ -388,6 +484,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/delta.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/delta.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/delta.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefDelta]
@@ -402,6 +502,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/echo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/echo.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/echo.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefEcho]
@@ -416,6 +520,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/foxtrot.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/foxtrot.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/foxtrot.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefFoxtrot]
@@ -430,6 +538,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/tan.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/tan.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/tan.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefTan]
@@ -444,6 +556,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/black.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/black.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefBlack]
@@ -458,6 +574,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/gray.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/gray.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/gray.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefGray]
@@ -472,6 +592,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/green.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/green.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefGreen]
@@ -505,6 +629,10 @@
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Mask/Neckerchief/white.rsi
+      state: equipped-MASK
 
 - type: entity
   parent: [RMCBaseScarfDown, RMCMaskNeckerchiefWhite]
