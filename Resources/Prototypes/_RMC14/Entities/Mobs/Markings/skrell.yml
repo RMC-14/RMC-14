@@ -282,8 +282,8 @@
 # Face Markings
 - type: marking
   id: RMCEyesSkrellAxiori # Alternate eye markings in case you wanna have giant frog eyes
-  bodyPart: Head
-  markingCategory: Overlay
+  bodyPart: Eyes
+  markingCategory: Head
   speciesRestriction: [Skrell]
   sprites:
     - sprite: _RMC14/Mobs/Skrells/markings.rsi
