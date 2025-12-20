@@ -247,17 +247,21 @@
         crate: RMCCrateGearParachute
     - name: Medical
       entries:
-      - cost: 3200
+      - cost: 2500
         crate: RMCCrateMedicalSurgery
-      - cost: 2000
+      - cost: 3500
+        crate: RMCCrateFieldDoctor
+        entities:
+        - CMIV # TODO RMC14 Make IV fit in crate.
+      - cost: 700
         crate: RMCCrateMedicalBodyBag
-      - cost: 1200
+      - cost: 1500
         crate: RMCCrateMedicalStasisBag
-      - cost: 1600
+      - cost: 1100
         crate: RMCCrateMedicalFirstAid
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalFilled
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalPill
     - name: Mortar
       entries:
