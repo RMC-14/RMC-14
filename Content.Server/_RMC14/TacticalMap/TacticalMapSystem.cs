@@ -1226,16 +1226,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var blip = new TacticalMapBlip(indices, icon, ent.Comp.Color, status, ent.Comp.Background, ent.Comp.HiveLeader);
         var updated = false;
+        var layerIds = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
 
         if (_tacticalMapLayerTrackedQuery.TryComp(ent, out var layerTracked) &&
             layerTracked.Layers.Count > 0)
         {
             foreach (var layerId in layerTracked.Layers)
             {
-                var layerData = EnsureLayer(tacticalMap, layerId);
-                layerData.Blips[ent.Owner.Id] = blip;
-                updated = true;
+                layerIds.Add(layerId);
             }
+        }
+
+        AddIffLayers(ent.Owner, layerIds);
+
+        foreach (var layerId in layerIds)
+        {
+            var layerData = EnsureLayer(tacticalMap, layerId);
+            layerData.Blips[ent.Owner.Id] = blip;
+            updated = true;
         }
 
         if (updated)

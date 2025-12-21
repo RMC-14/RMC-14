@@ -6,6 +6,7 @@
   sortOrder: 0
   updateAnnouncement: The UNMC tactical map has been updated.
   announcementTarget: Marines
+  iffFactions: [FactionMarine]
 
 - type: tacticalMapLayer
   id: Xenos
@@ -14,3 +15,45 @@
   sortOrder: 10
   updateAnnouncement: The Xenonid tactical map has been updated.
   announcementTarget: Xenos
+
+- type: tacticalMapLayer
+  id: FactionSurvivor
+  name: ui-tactical-map-layer-survivors
+  logName: survivor
+  sortOrder: 20
+  iffFactions: [FactionSurvivor]
+
+- type: tacticalMapLayer
+  id: FactionTSE
+  name: ui-tactical-map-layer-tse
+  logName: tse
+  sortOrder: 30
+  iffFactions: [FactionTSE]
+
+- type: tacticalMapLayer
+  id: FactionWeYa
+  name: ui-tactical-map-layer-weya
+  logName: weya
+  sortOrder: 40
+  iffFactions: [FactionWeYa]
+
+- type: tacticalMapLayer
+  id: FactionRoyalMarines
+  name: ui-tactical-map-layer-royal-marines
+  logName: royal marines
+  sortOrder: 50
+  iffFactions: [FactionRoyalMarines]
+
+- type: tacticalMapLayer
+  id: FactionSPP
+  name: ui-tactical-map-layer-spp
+  logName: spp
+  sortOrder: 60
+  iffFactions: [FactionSPP]
+
+- type: tacticalMapLayer
+  id: FactionHalcyon
+  name: ui-tactical-map-layer-halcyon
+  logName: halcyon
+  sortOrder: 70
+  iffFactions: [FactionHalcyon]

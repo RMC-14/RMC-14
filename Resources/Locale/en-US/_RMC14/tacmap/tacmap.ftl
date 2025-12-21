@@ -6,6 +6,12 @@ ui-tactical-map-layer-select-label = Layer
 ui-tactical-map-layer-all = All
 ui-tactical-map-layer-marines = Marines
 ui-tactical-map-layer-xenos = Xenos
+ui-tactical-map-layer-survivors = Survivors
+ui-tactical-map-layer-tse = TSE
+ui-tactical-map-layer-weya = Wey-Yu
+ui-tactical-map-layer-royal-marines = Royal Marines
+ui-tactical-map-layer-spp = SPP
+ui-tactical-map-layer-halcyon = Halcyon
 
 ui-tactical-map-label-dialog-create-title = Create Label
 ui-tactical-map-label-dialog-edit-title = Edit Label
