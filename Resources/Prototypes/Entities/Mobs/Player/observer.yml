@@ -88,8 +88,7 @@
         requireInputValidation: false
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
-    marines: true
-    xenos: true
+    visibleLayers: [Marines, Xenos]
   - type: ViewIntelObjectives
   - type: VentSight
   - type: IgnoreInteractionRange

@@ -67,6 +67,9 @@ public sealed partial class TacticalMapControl : TextureRect
     private int[]? _blipEntityIds;
     private int? _localPlayerEntityId;
     private Dictionary<Vector2i, string> _areaLabels = new();
+    private bool[]? _tileMask;
+    private int _tileMaskWidth;
+    private int _tileMaskHeight;
 
     private Vector2i _min;
     private Vector2i _delta;
@@ -187,29 +190,102 @@ public sealed partial class TacticalMapControl : TextureRect
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
         if (grid.Comp.Colors.Count == 0)
-            return;
-
-        _min = Vector2i.Zero;
-        Vector2i max = Vector2i.Zero;
-        foreach (Vector2i position in grid.Comp.Colors.Keys)
         {
-            _min = Vector2i.ComponentMin(_min, position);
-            max = Vector2i.ComponentMax(max, position);
+            _tileMask = null;
+            _tileMaskWidth = 0;
+            _tileMaskHeight = 0;
+            return;
         }
 
-        if (max.X - _min.X <= 0 || max.Y - _min.Y <= 0)
-            return;
-
-        _delta = max - _min;
-        Image<Rgba32> image = new(_delta.X + 1, _delta.Y + 1);
-        foreach ((Vector2i position, Color color) in grid.Comp.Colors)
+        var colors = grid.Comp.Colors;
+        var hasValue = false;
+        Vector2i fullMin = default;
+        Vector2i fullMax = default;
+        foreach (var (pos, _) in colors)
         {
+            if (!hasValue)
+            {
+                fullMin = pos;
+                fullMax = pos;
+                hasValue = true;
+            }
+            else
+            {
+                fullMin = Vector2i.ComponentMin(fullMin, pos);
+                fullMax = Vector2i.ComponentMax(fullMax, pos);
+            }
+        }
+
+        if (!hasValue)
+        {
+            _tileMask = null;
+            _tileMaskWidth = 0;
+            _tileMaskHeight = 0;
+            return;
+        }
+
+        Vector2i boundsMin;
+        Vector2i boundsMax;
+        if (grid.Comp.HasTacMapBounds)
+        {
+            boundsMin = Vector2i.ComponentMax(fullMin, grid.Comp.TacMapBoundsMin);
+            boundsMax = Vector2i.ComponentMin(fullMax, grid.Comp.TacMapBoundsMax);
+
+            if (boundsMax.X < boundsMin.X || boundsMax.Y < boundsMin.Y)
+            {
+                boundsMin = fullMin;
+                boundsMax = fullMax;
+            }
+        }
+        else
+        {
+            boundsMin = fullMin;
+            boundsMax = fullMax;
+        }
+
+        _min = boundsMin;
+        _delta = boundsMax - boundsMin;
+
+        if (_delta.X <= 0 || _delta.Y <= 0)
+        {
+            _tileMask = null;
+            _tileMaskWidth = 0;
+            _tileMaskHeight = 0;
+            return;
+        }
+
+        int width = _delta.X + 1;
+        int height = _delta.Y + 1;
+        _tileMaskWidth = width;
+        _tileMaskHeight = height;
+        _tileMask = new bool[width * height];
+
+        Image<Rgba32> image = new(width, height);
+        foreach ((Vector2i position, Color color) in colors)
+        {
+            if (position.X < boundsMin.X || position.X > boundsMax.X ||
+                position.Y < boundsMin.Y || position.Y > boundsMax.Y)
+            {
+                continue;
+            }
+
             (int x, int y) = GetDrawPosition(position);
+            _tileMask[y * width + x] = true;
             image[x, y] = new Rgba32(color.R, color.G, color.B, color.A);
         }
 
         Texture = Texture.LoadFromImage(image);
-        _areaLabels = new Dictionary<Vector2i, string>(grid.Comp.Labels);
+        _areaLabels.Clear();
+        foreach ((Vector2i position, string label) in grid.Comp.Labels)
+        {
+            if (position.X < boundsMin.X || position.X > boundsMax.X ||
+                position.Y < boundsMin.Y || position.Y > boundsMax.Y)
+            {
+                continue;
+            }
+
+            _areaLabels[position] = label;
+        }
 
         ApplyViewSettings();
     }
@@ -531,11 +607,78 @@ public sealed partial class TacticalMapControl : TextureRect
         UIBox2 textureRect = UIBox2.FromDimensions(actualTopLeft, actualSize);
         handle.DrawTextureRect(Texture, textureRect);
 
+        DrawTileGrid(handle, actualTopLeft, actualSize);
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
         DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawLabels(handle, overlayScale, actualTopLeft);
+    }
+
+    private void DrawTileGrid(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize)
+    {
+        if (Texture == null || _tileMask == null)
+            return;
+
+        Vector2 textureSize = Texture.Size;
+        if (textureSize.X <= 0 || textureSize.Y <= 0)
+            return;
+
+        if (_tileMaskWidth <= 0 || _tileMaskHeight <= 0)
+            return;
+
+        float tileWidth = actualSize.X / _tileMaskWidth;
+        float tileHeight = actualSize.Y / _tileMaskHeight;
+        float minTile = Math.Min(tileWidth, tileHeight);
+        if (minTile < 1.5f)
+            return;
+
+        float thickness = Math.Clamp(minTile * 0.12f, 1f, 1.25f);
+        if (thickness > minTile)
+            thickness = minTile;
+        Color gridColor = Color.FromHex("#88C7FA").WithAlpha(0.06f);
+
+        int columns = _tileMaskWidth;
+        int rows = _tileMaskHeight;
+
+        for (int y = 0; y < rows; y++)
+        {
+            float yTop = actualTopLeft.Y + y * tileHeight;
+            float yBottom = yTop + tileHeight;
+            float yTopEdge = Math.Min(yTop + thickness, yBottom);
+            float yBottomEdge = Math.Max(yBottom - thickness, yTop);
+
+            for (int x = 0; x < columns; x++)
+            {
+                if (!IsTilePresent(x, y))
+                    continue;
+
+                float xLeft = actualTopLeft.X + x * tileWidth;
+                float xRight = xLeft + tileWidth;
+                float xLeftEdge = Math.Min(xLeft + thickness, xRight);
+                float xRightEdge = Math.Max(xRight - thickness, xLeft);
+
+                handle.DrawRect(new UIBox2(xLeft, yTop, xRight, yTopEdge), gridColor);
+                handle.DrawRect(new UIBox2(xLeft, yTop, xLeftEdge, yBottom), gridColor);
+
+                if (!IsTilePresent(x + 1, y))
+                    handle.DrawRect(new UIBox2(xRightEdge, yTop, xRight, yBottom), gridColor);
+
+                if (!IsTilePresent(x, y + 1))
+                    handle.DrawRect(new UIBox2(xLeft, yBottomEdge, xRight, yBottom), gridColor);
+            }
+        }
+    }
+
+    private bool IsTilePresent(int x, int y)
+    {
+        if (_tileMask == null)
+            return false;
+
+        if ((uint)x >= (uint)_tileMaskWidth || (uint)y >= (uint)_tileMaskHeight)
+            return false;
+
+        return _tileMask[y * _tileMaskWidth + x];
     }
 
     private void DrawModeBorder(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize, float overlayScale)

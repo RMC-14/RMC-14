@@ -840,8 +840,8 @@ public sealed class XenoTunnelSystem : EntitySystem
 
     private void OpenDestinationUI(Entity<XenoTunnelComponent> tunnel, EntityUid enteringEntity)
     {
-        if (_tacticalMap.TryGetTacticalMap(out var map) &&
-            TryComp(enteringEntity, out TacticalMapUserComponent? userComp))
+        if (TryComp(enteringEntity, out TacticalMapUserComponent? userComp) &&
+            _tacticalMap.TryGetTacticalMap(userComp.Map, out var map))
         {
             _tacticalMap.UpdateUserData((enteringEntity, userComp), map);
         }

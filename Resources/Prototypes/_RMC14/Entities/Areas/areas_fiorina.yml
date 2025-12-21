@@ -38,6 +38,8 @@
     paradropping: false
     OB: false
     supplyDrop: false
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
     resinAllowed: false
     avoidBioscan: false
     noTunnel: true

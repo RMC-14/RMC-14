@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.CCVar;
+using System.Collections.Generic;
+using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared._RMC14.TacticalMap;
@@ -7,6 +8,8 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+
+    private static readonly List<TacticalMapLayer> DefaultLayers = new() { TacticalMapLayer.Marines };
 
     public int LineLimit { get; private set; }
 
@@ -20,7 +23,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     private void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
     {
-        if (TryGetTacticalMap(out var map))
+        if (TryResolveUserMap(ent, out var map))
             UpdateUserData(ent, map);
 
         ToggleMapUI(ent);
@@ -28,18 +31,44 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     private void OnUserOpenAlert(Entity<TacticalMapUserComponent> ent, ref OpenTacMapAlertEvent args)
     {
-        if (TryGetTacticalMap(out var map))
+        if (TryResolveUserMap(ent, out var map))
             UpdateUserData(ent, map);
 
         ToggleMapUI(ent);
     }
 
+    protected virtual bool TryResolveUserMap(Entity<TacticalMapUserComponent> user, out Entity<TacticalMapComponent> map)
+    {
+        return TryGetTacticalMap(user.Comp.Map, out map);
+    }
+
+    protected virtual bool TryResolveComputerMap(Entity<TacticalMapComputerComponent> computer, out Entity<TacticalMapComponent> map)
+    {
+        return TryGetTacticalMap(computer.Comp.Map, out map);
+    }
+
+    protected IReadOnlyList<TacticalMapLayer> GetVisibleLayers(IReadOnlyList<TacticalMapLayer> layers)
+    {
+        return layers.Count > 0 ? layers : DefaultLayers;
+    }
+
     public bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
     {
-        var query = EntityQueryEnumerator<TacticalMapComponent>();
-        while (query.MoveNext(out var uid, out var mapComp))
+        return TryGetTacticalMap(null, out map);
+    }
+
+    public bool TryGetTacticalMap(EntityUid? mapId, out Entity<TacticalMapComponent> map)
+    {
+        if (mapId != null && TryComp(mapId.Value, out TacticalMapComponent? mapComp))
         {
-            map = (uid, mapComp);
+            map = (mapId.Value, mapComp);
+            return true;
+        }
+
+        var query = EntityQueryEnumerator<TacticalMapComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            map = (uid, comp);
             return true;
         }
 
@@ -49,37 +78,44 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     protected void UpdateMapData(Entity<TacticalMapComputerComponent> computer)
     {
-        if (!TryGetTacticalMap(out var map))
+        if (!TryResolveComputerMap(computer, out var map))
             return;
 
         UpdateMapData(computer, map);
     }
 
-    protected void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
+    protected virtual void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
         var ev = new TacticalMapIncludeXenosEvent();
         RaiseLocalEvent(ref ev);
-        if (ev.Include)
+        var layers = new HashSet<TacticalMapLayer>(GetVisibleLayers(computer.Comp.VisibleLayers));
+        if (ev.Include && layers.Contains(TacticalMapLayer.Marines))
+            layers.Add(TacticalMapLayer.Xenos);
+
+        var blips = new Dictionary<int, TacticalMapBlip>();
+        foreach (var layer in layers)
         {
-            computer.Comp.Blips = new Dictionary<int, TacticalMapBlip>(map.MarineBlips);
-            foreach (var blip in map.XenoBlips)
+            if (!map.Layers.TryGetValue(layer, out var data))
+                continue;
+
+            foreach (var (id, blip) in data.Blips)
             {
-                computer.Comp.Blips.TryAdd(blip.Key, blip.Value);
+                blips.TryAdd(id, blip);
             }
         }
-        else
-        {
-            computer.Comp.Blips = map.MarineBlips;
-        }
+
+        computer.Comp.Blips = blips;
 
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);
-        lines.MarineLines = map.MarineLines;
+        lines.Lines = map.Layers.TryGetValue(TacticalMapLayer.Marines, out var marineLayer)
+            ? marineLayer.Lines
+            : new List<TacticalMapLine>();
         Dirty(computer, lines);
     }
 
-    public void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
+    public virtual void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)
     {
         if (!Resolve(computer, ref computer.Comp, false))
             return;

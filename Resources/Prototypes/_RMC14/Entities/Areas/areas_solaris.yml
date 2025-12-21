@@ -635,6 +635,8 @@
     buildSpecial: false
     weatherEnabled: false
     alwaysPowered: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -767,6 +769,8 @@
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
     weatherEnabled: false
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaBigredv2Caves

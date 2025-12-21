@@ -24,19 +24,10 @@ public sealed partial class TacticalMapUserComponent : Component
     public bool LiveUpdate;
 
     [DataField, AutoNetworkedField]
-    public bool Marines;
+    public List<TacticalMapLayer> VisibleLayers = new();
 
     [DataField, AutoNetworkedField]
-    public bool Xenos;
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<int, TacticalMapBlip> MarineBlips = new();
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<int, TacticalMapBlip> XenoBlips = new();
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<int, TacticalMapBlip> XenoStructureBlips = new();
+    public Dictionary<int, TacticalMapBlip> Blips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastAnnounceAt;

@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Network;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
@@ -9,7 +10,11 @@ public enum TacticalMapUserUi
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapBuiState(string mapName) : BoundUserInterfaceState
+public readonly record struct TacticalMapMapInfo(NetEntity Map, string MapId, string DisplayName);
+
+[Serializable, NetSerializable]
+public sealed class TacticalMapBuiState(NetEntity activeMap, List<TacticalMapMapInfo> maps) : BoundUserInterfaceState
 {
-    public readonly string MapName = mapName;
+    public readonly NetEntity ActiveMap = activeMap;
+    public readonly List<TacticalMapMapInfo> Maps = maps;
 }

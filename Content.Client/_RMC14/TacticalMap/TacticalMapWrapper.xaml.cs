@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
@@ -10,7 +9,6 @@ using Robust.Client.Player;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
-using Robust.Shared.Configuration;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Localization;
@@ -18,6 +16,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 using Robust.Shared.Input;
+using Robust.Shared.Network;
 using Robust.Shared.IoC.Exceptions;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -32,6 +31,8 @@ public enum DrawingMode
 [GenerateTypedNameReferences]
 public sealed partial class TacticalMapWrapper : Control
 {
+    private static readonly Color DefaultButtonTextColor = TacticalMapInnerButton.DefaultTextColor;
+
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
 
@@ -39,6 +40,7 @@ public sealed partial class TacticalMapWrapper : Control
     public TimeSpan NextUpdateAt;
 
     public Action<Vector2i>? OnQueenEyeMove;
+    public event Action<NetEntity>? MapSelected;
 
     private const float FollowUpdateInterval = 0.5f;
 
@@ -69,8 +71,9 @@ public sealed partial class TacticalMapWrapper : Control
 
     private TacticalMapSettingsManager? _settingsManager;
     private bool _settingsLoaded = false;
-    private string? _currentMapName;
-    private bool _mapNameSet = false;
+    private string? _currentMapId;
+    private bool _mapIdSet = false;
+    private bool _suppressMapSelection;
 
     private float _currentBlipSizeMultiplier = 1.0f;
     private float _currentLineThickness = 2.0f;
@@ -118,28 +121,28 @@ public sealed partial class TacticalMapWrapper : Control
         };
     }
 
-    public void SetMapEntity(string? mapName)
+    public void SetMapId(string? mapId)
     {
-        if (_currentMapName == mapName && _mapNameSet)
+        if (_currentMapId == mapId && _mapIdSet)
             return;
 
-        _currentMapName = mapName;
-        _mapNameSet = true;
+        _currentMapId = mapId;
+        _mapIdSet = true;
         _settingsLoaded = false;
 
         Map.SetCurrentMap(null);
-        Map.SetCurrentMapName(mapName);
+        Map.SetCurrentMapName(mapId);
         Canvas.SetCurrentMap(null);
-        Canvas.SetCurrentMapName(mapName);
+        Canvas.SetCurrentMapName(mapId);
 
         LoadSettings();
     }
 
-    public void LoadMapSpecificSettings(TacticalMapSettings settings, string? mapName)
+    public void LoadMapSpecificSettings(TacticalMapSettings settings, string? mapId)
     {
-        SetMapEntity(mapName);
-        Map.SetCurrentMapName(mapName);
-        Canvas.SetCurrentMapName(mapName);
+        SetMapId(mapId);
+        Map.SetCurrentMapName(mapId);
+        Canvas.SetCurrentMapName(mapId);
         ApplySettings(settings);
     }
 
@@ -177,7 +180,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         try
         {
-            var settings = _settingsManager.LoadSettings(_currentMapName);
+            var settings = _settingsManager.LoadSettings(_currentMapId);
             ApplySettings(settings);
             _settingsLoaded = true;
         }
@@ -229,7 +232,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public void SetupUpdateButton(System.Action<TacticalMapUpdateCanvasMsg> sendMessage)
     {
-        UpdateCanvasButton.OnPressed += _ => {
+        UpdateCanvasButton.Button.OnPressed += _ => {
             Dictionary<Vector2i, string> canvasLabels = new(Canvas.TacticalLabels);
             sendMessage(new TacticalMapUpdateCanvasMsg(Canvas.Lines, canvasLabels));
         };
@@ -240,13 +243,37 @@ public sealed partial class TacticalMapWrapper : Control
         Map.UpdateTexture(grid);
         Canvas.UpdateTexture(grid);
 
-        SetMapEntity(_currentMapName);
+        SetMapId(_currentMapId);
 
-        Map.SetCurrentMapName(_currentMapName);
-        Canvas.SetCurrentMapName(_currentMapName);
+        Map.SetCurrentMapName(_currentMapId);
+        Canvas.SetCurrentMapName(_currentMapId);
 
         Map.ApplyViewSettings();
         Canvas.ApplyViewSettings();
+    }
+
+    public void UpdateMapList(IReadOnlyList<TacticalMapMapInfo> maps, NetEntity activeMap)
+    {
+        _suppressMapSelection = true;
+        MapSelectButton.Clear();
+
+        var selectedId = -1;
+        for (var i = 0; i < maps.Count; i++)
+        {
+            var map = maps[i];
+            MapSelectButton.AddItem(map.DisplayName, i);
+            MapSelectButton.SetItemMetadata(i, map.Map);
+            if (map.Map == activeMap)
+                selectedId = i;
+        }
+
+        MapSelectionRow.Visible = maps.Count > 0;
+        MapSelectButton.Disabled = maps.Count <= 1;
+
+        if (maps.Count > 0)
+            MapSelectButton.SelectId(selectedId >= 0 ? selectedId : 0);
+
+        _suppressMapSelection = false;
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)
@@ -279,6 +306,15 @@ public sealed partial class TacticalMapWrapper : Control
         Canvas.LineLimit = limit;
     }
 
+    public void SetCanvasAccess(bool canDraw)
+    {
+        CanvasToolsContainer.Visible = canDraw;
+        Canvas.Visible = canDraw;
+        Map.Visible = !canDraw;
+        Canvas.Drawing = canDraw;
+        Map.Drawing = false;
+    }
+
     public void OnUserInteraction()
     {
         if (_followingPlayer)
@@ -291,13 +327,17 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void SetupControls()
     {
-        ClearCanvasButton.OnPressed += _ => {
+        ClearCanvasButton.Button.OnPressed += _ => {
             Canvas.Lines.Clear();
             Canvas.LineThicknesses.Clear();
         };
-        UndoButton.OnPressed += _ => OnUndoPressed();
+        UndoButton.Button.OnPressed += _ => OnUndoPressed();
         Canvas.Color = Color.Black;
+        Canvas.Drawing = false;
+        Canvas.IsCanvas = true;
+        Map.IsCanvas = false;
 
+        SetupMapSelector();
         SetupColorButton();
         SetupAreaLabels();
         SetupBlipSize();
@@ -305,10 +345,8 @@ public sealed partial class TacticalMapWrapper : Control
         SetupStraightLineMode();
         SetupLineThickness();
 
-        FollowPlayerButton.OnPressed += _ => ToggleFollowPlayer();
-        ResetViewButton.OnPressed += _ => ResetView();
-        FollowPlayerButtonCanvas.OnPressed += _ => ToggleFollowPlayer();
-        ResetViewButtonCanvas.OnPressed += _ => ResetView();
+        FollowPlayerButton.Button.OnPressed += _ => ToggleFollowPlayer();
+        ResetViewButton.Button.OnPressed += _ => ResetView();
 
         Map.OnUserInteraction += OnUserInteraction;
         Canvas.OnUserInteraction += OnUserInteraction;
@@ -377,8 +415,20 @@ public sealed partial class TacticalMapWrapper : Control
             }
         };
 
-        LabelEditButton.OnPressed += _ => ToggleDrawingMode(DrawingMode.LabelEdit);
+        LabelEditButton.Button.OnPressed += _ => ToggleDrawingMode(DrawingMode.LabelEdit);
         UpdateDrawingModeAppearance();
+    }
+
+    private void SetupMapSelector()
+    {
+        MapSelectButton.OnItemSelected += args =>
+        {
+            if (_suppressMapSelection)
+                return;
+
+            if (MapSelectButton.GetItemMetadata(args.Id) is NetEntity map)
+                MapSelected?.Invoke(map);
+        };
     }
 
     private void SetupColorButton()
@@ -405,19 +455,9 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void SetupAreaLabels()
     {
-        LabelsButton.OnPressed += _ => ToggleCurrentLabels();
-        LabelsButtonCanvas.OnPressed += _ => ToggleCurrentLabels();
+        LabelsButton.Button.OnPressed += _ => ToggleCurrentLabels();
 
-        LabelsButton.OnKeyBindDown += args =>
-        {
-            if (args.Function == EngineKeyFunctions.UIRightClick)
-            {
-                CycleLabelTypes();
-                args.Handle();
-            }
-        };
-
-        LabelsButtonCanvas.OnKeyBindDown += args =>
+        LabelsButton.Button.OnKeyBindDown += args =>
         {
             if (args.Function == EngineKeyFunctions.UIRightClick)
             {
@@ -469,13 +509,13 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void SetupSettingsToggle()
     {
-        SettingsToggleButton.OnPressed += _ => ToggleSettingsVisibility();
+        SettingsToggleButton.Button.OnPressed += _ => ToggleSettingsVisibility();
         UpdateSettingsVisibility();
     }
 
     private void SetupStraightLineMode()
     {
-        StraightLineButton.OnPressed += _ => ToggleDrawingMode(DrawingMode.StraightLine);
+        StraightLineButton.Button.OnPressed += _ => ToggleDrawingMode(DrawingMode.StraightLine);
         UpdateDrawingModeAppearance();
     }
 
@@ -522,7 +562,8 @@ public sealed partial class TacticalMapWrapper : Control
     {
         if (StraightLineButton != null)
         {
-            StraightLineButton.Modulate = (_currentDrawingMode == DrawingMode.StraightLine) ? Color.Green : Color.White;
+            var color = _currentDrawingMode == DrawingMode.StraightLine ? Color.Green : DefaultButtonTextColor;
+            SetButtonTextColor(StraightLineButton, color);
         }
     }
 
@@ -530,7 +571,8 @@ public sealed partial class TacticalMapWrapper : Control
     {
         if (LabelEditButton != null)
         {
-            LabelEditButton.Modulate = (_currentDrawingMode == DrawingMode.LabelEdit) ? Color.Green : Color.White;
+            var color = _currentDrawingMode == DrawingMode.LabelEdit ? Color.Green : DefaultButtonTextColor;
+            SetButtonTextColor(LabelEditButton, color);
         }
     }
 
@@ -651,29 +693,22 @@ public sealed partial class TacticalMapWrapper : Control
                 break;
             default:
                 text = Loc.GetString("ui-tactical-map-labels-mode-none");
-                color = Color.White;
+                color = DefaultButtonTextColor;
                 break;
         }
 
         if (LabelsButton != null)
-        {
-            LabelsButton.Text = text;
-            LabelsButton.Modulate = color;
-        }
+            SetButtonText(LabelsButton, text, color);
 
-        if (LabelsButtonCanvas != null)
-        {
-            LabelsButtonCanvas.Text = text;
-            LabelsButtonCanvas.Modulate = color;
-        }
     }
 
     private void UpdateSettingsVisibility()
     {
         SettingsContainer.Visible = _settingsVisible;
-        SettingsToggleButton.Text = _settingsVisible ?
+        var text = _settingsVisible ?
             Loc.GetString("ui-tactical-map-settings-toggle-expanded") :
             Loc.GetString("ui-tactical-map-settings-toggle-collapsed");
+        SetButtonText(SettingsToggleButton, text, DefaultButtonTextColor);
     }
 
     private void UpdateFollowButtonText()
@@ -681,19 +716,24 @@ public sealed partial class TacticalMapWrapper : Control
         string text = _followingPlayer ?
             Loc.GetString("ui-tactical-map-follow-player-active") :
             Loc.GetString("ui-tactical-map-follow-player-inactive");
-        Color color = _followingPlayer ? Color.Red : Color.White;
+        Color color = _followingPlayer ? Color.Red : DefaultButtonTextColor;
 
         if (FollowPlayerButton != null)
-        {
-            FollowPlayerButton.Text = text;
-            FollowPlayerButton.Modulate = color;
-        }
+            SetButtonText(FollowPlayerButton, text, color);
 
-        if (FollowPlayerButtonCanvas != null)
-        {
-            FollowPlayerButtonCanvas.Text = text;
-            FollowPlayerButtonCanvas.Modulate = color;
-        }
+    }
+
+    private static void SetButtonTextColor(TacticalMapButton button, Color color)
+    {
+        button.Button.TextColor = color;
+        if (button.Text != null)
+            button.Text = button.Text;
+    }
+
+    private static void SetButtonText(TacticalMapButton button, string text, Color color)
+    {
+        button.Button.TextColor = color;
+        button.Text = text;
     }
 
     private void UpdatePlayerFollowing(float deltaSeconds)
@@ -802,16 +842,7 @@ public sealed partial class TacticalMapWrapper : Control
         if (!TryGetCachedPlayerData(out int playerNetId, out TacticalMapUserComponent userComp))
             return false;
 
-        foreach ((int id, TacticalMapBlip blip) in userComp.XenoBlips)
-        {
-            if (id == playerNetId)
-            {
-                playerIndices = blip.Indices;
-                return true;
-            }
-        }
-
-        foreach ((int id, TacticalMapBlip blip) in userComp.MarineBlips)
+        foreach ((int id, TacticalMapBlip blip) in userComp.Blips)
         {
             if (id == playerNetId)
             {

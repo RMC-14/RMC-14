@@ -7,8 +7,5 @@ namespace Content.Shared._RMC14.TacticalMap;
 public sealed partial class TacticalMapLinesComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public List<TacticalMapLine> MarineLines = new();
-
-    [DataField, AutoNetworkedField]
-    public List<TacticalMapLine> XenoLines = new();
+    public List<TacticalMapLine> Lines = new();
 }

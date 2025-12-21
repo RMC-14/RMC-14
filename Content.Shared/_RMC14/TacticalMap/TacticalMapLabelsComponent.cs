@@ -8,8 +8,5 @@ namespace Content.Shared._RMC14.TacticalMap;
 public sealed partial class TacticalMapLabelsComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Dictionary<Vector2i, string> MarineLabels = new();
-
-    [DataField, AutoNetworkedField]
-    public Dictionary<Vector2i, string> XenoLabels = new();
+    public Dictionary<Vector2i, string> Labels = new();
 }

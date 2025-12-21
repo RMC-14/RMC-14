@@ -194,34 +194,21 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _tunnelCache.Clear();
         _positionToEntityCache.Clear();
 
-        var blipCollections = new[]
+        foreach (var (entityId, blip) in user.Blips)
         {
-            user.XenoStructureBlips,
-            user.XenoBlips,
-            user.MarineBlips
-        };
-
-        foreach (var blipCollection in blipCollections)
-        {
-            foreach (var kvp in blipCollection)
+            var tunnelName = GetTunnelNameByEntityId(entityId);
+            if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
             {
-                var entityId = kvp.Key;
-                var blip = kvp.Value;
-
-                var tunnelName = GetTunnelNameByEntityId(entityId);
-                if (tunnelName != null && _availableTunnels.ContainsKey(tunnelName))
+                var cacheEntry = new TunnelCacheEntry
                 {
-                    var cacheEntry = new TunnelCacheEntry
-                    {
-                        Position = blip.Indices,
-                        Name = tunnelName,
-                        Entity = _availableTunnels[tunnelName],
-                        EntityId = entityId
-                    };
+                    Position = blip.Indices,
+                    Name = tunnelName,
+                    Entity = _availableTunnels[tunnelName],
+                    EntityId = entityId
+                };
 
-                    _tunnelCache[entityId] = cacheEntry;
-                    _positionToEntityCache[blip.Indices] = entityId;
-                }
+                _tunnelCache[entityId] = cacheEntry;
+                _positionToEntityCache[blip.Indices] = entityId;
             }
         }
 
@@ -282,28 +269,18 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         if (selectedTunnelKey.HasValue)
             tunnelEntityIds.Add(selectedTunnelKey.Value);
 
-        var blipCollections = new[]
+        foreach (var (entityId, blip) in user.Blips)
         {
-            user.XenoStructureBlips,
-            user.XenoBlips,
-            user.MarineBlips
-        };
+            if (_showOnlyTunnels && !tunnelEntityIds.Contains(entityId))
+                continue;
 
-        foreach (var blips in blipCollections)
-        {
-            foreach (var (entityId, blip) in blips)
-            {
-                if (_showOnlyTunnels && !tunnelEntityIds.Contains(entityId))
-                    continue;
+            blipsList.Add(HighlightBlip(blip, entityId, selectedTunnelKey));
 
-                blipsList.Add(HighlightBlip(blip, entityId, selectedTunnelKey));
+            if (_currentTunnelNetEntityKey == entityId && currentTunnelPosition == null)
+                currentTunnelPosition = blip.Indices;
 
-                if (_currentTunnelNetEntityKey == entityId && currentTunnelPosition == null)
-                    currentTunnelPosition = blip.Indices;
-
-                if (selectedTunnelKey == entityId && selectedTunnelPosition == null)
-                    selectedTunnelPosition = blip.Indices;
-            }
+            if (selectedTunnelKey == entityId && selectedTunnelPosition == null)
+                selectedTunnelPosition = blip.Indices;
         }
 
         return (currentTunnelPosition, selectedTunnelPosition);
@@ -558,19 +535,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
 
     private int? FindEntityIdAtIndices(Vector2i indices, TacticalMapUserComponent user)
     {
-        foreach (var kvp in user.XenoStructureBlips)
-        {
-            if (kvp.Value.Indices == indices)
-                return kvp.Key;
-        }
-
-        foreach (var kvp in user.XenoBlips)
-        {
-            if (kvp.Value.Indices == indices)
-                return kvp.Key;
-        }
-
-        foreach (var kvp in user.MarineBlips)
+        foreach (var kvp in user.Blips)
         {
             if (kvp.Value.Indices == indices)
                 return kvp.Key;
@@ -598,8 +563,7 @@ public sealed class SelectDestinationTunnelBui : BoundUserInterface
         _window.SetBlipUpdateCallback(() => UpdateBlips());
 
         var wrapper = _window.TacticalMapWrapper;
-        TabContainer.SetTabVisible(wrapper.CanvasTab, false);
-        wrapper.Tabs.CurrentTab = 0;
+        wrapper.SetCanvasAccess(false);
 
         wrapper.Map.MouseFilter = MouseFilterMode.Stop;
         wrapper.Canvas.MouseFilter = MouseFilterMode.Stop;

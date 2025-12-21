@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Serialization;
+using Robust.Shared.Network;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
@@ -13,6 +14,12 @@ public sealed class TacticalMapUpdateCanvasMsg(List<TacticalMapLine> lines, Dict
 {
     public readonly List<TacticalMapLine> Lines = lines;
     public readonly Dictionary<Vector2i, string> Labels = labels;
+}
+
+[Serializable, NetSerializable]
+public sealed class TacticalMapSelectMapMsg(NetEntity map) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Map = map;
 }
 
 [Serializable, NetSerializable]

@@ -1,0 +1,9 @@
+<controls:TacticalMapButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat />
+    </PanelContainer.PanelOverride>
+    <controls:TacticalMapInnerButton Name="Button" Access="Public" />
+</controls:TacticalMapButton>

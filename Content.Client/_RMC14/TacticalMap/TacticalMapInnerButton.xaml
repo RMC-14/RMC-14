@@ -1,0 +1,6 @@
+<controls:TacticalMapInnerButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap">
+    <RichTextLabel Name="Label" Access="Public" HorizontalAlignment="Center"
+                   VerticalAlignment="Center" Margin="6 2" />
+</controls:TacticalMapInnerButton>

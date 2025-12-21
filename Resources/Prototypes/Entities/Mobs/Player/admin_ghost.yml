@@ -125,8 +125,7 @@
   - type: BypassSkillChecks
   - type: SeeNewPlayers
   - type: TacticalMapUser
-    marines: true
-    xenos: true
+    visibleLayers: [Marines, Xenos]
     liveUpdate: true
   
 

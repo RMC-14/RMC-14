@@ -75,6 +75,12 @@ public sealed partial class AreaComponent : Component
     public Color MinimapColor;
 
     [DataField, AutoNetworkedField]
+    public bool ExcludeFromTacMapBounds;
+
+    [DataField, AutoNetworkedField]
+    public bool ExcludeFromTacMapRender;
+
+    [DataField, AutoNetworkedField]
     public int ZLevel;
 
     [DataField, AutoNetworkedField]

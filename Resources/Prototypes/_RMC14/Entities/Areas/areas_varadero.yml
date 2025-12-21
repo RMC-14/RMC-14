@@ -155,6 +155,8 @@
     noTunnel: true
     unweedable: true
     alwaysPowered: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -638,3 +640,5 @@
     state: predship
   - type: Area
     minimapColor: '#885A04E7'
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true

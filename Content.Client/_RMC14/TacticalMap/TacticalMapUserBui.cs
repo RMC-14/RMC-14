@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Robust.Client.Player;
@@ -6,6 +7,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
+using Robust.Shared.Network;
 using JetBrains.Annotations;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -18,54 +20,32 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
-    private string? _currentMapName;
+    private string? _currentMapId;
+    private IReadOnlyList<TacticalMapMapInfo> _availableMaps = new List<TacticalMapMapInfo>();
+    private NetEntity _activeMap = NetEntity.Invalid;
 
     protected override void Open()
     {
         base.Open();
 
-        EntityUid? mapEntity = null;
-
-        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) && user.Map != null)
-        {
-            mapEntity = user.Map.Value;
-        }
-
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
-
-        if (mapEntity != null)
-        {
-            Window.SetMapEntity(_currentMapName);
-        }
-
-        TabContainer.SetTabTitle(Window.Wrapper.MapTab, Loc.GetString("ui-tactical-map-tab-map"));
-        TabContainer.SetTabVisible(Window.Wrapper.MapTab, true);
-
-        if (mapEntity != null)
-        {
-            Window.Wrapper.SetMapEntity(_currentMapName);
-        }
-
-        if (user?.Map != null &&
-            EntMan.TryGetComponent(user.Map.Value, out AreaGridComponent? areaGrid))
-        {
-            Window.Wrapper.UpdateTexture((user.Map.Value, areaGrid));
-        }
+        Window.Wrapper.SetCanvasAccess(false);
 
         try
         {
             var settingsManager = IoCManager.Resolve<TacticalMapSettingsManager>();
-            var settings = settingsManager.LoadSettings(_currentMapName);
-            if (_currentMapName != null)
-            {
-                Window.Wrapper.LoadMapSpecificSettings(settings, _currentMapName);
-            }
+            var settings = settingsManager.LoadSettings(_currentMapId);
+            if (_currentMapId != null)
+                Window.Wrapper.LoadMapSpecificSettings(settings, _currentMapId);
         }
         catch (Exception ex)
         {
-            _logger.Error($"Failed to load tactical map user settings for map '{_currentMapName}': {ex}");
+            _logger.Error($"Failed to load tactical map user settings for map '{_currentMapId}': {ex}");
         }
 
+        Window.Wrapper.MapSelected += OnMapSelected;
+        ApplyMapState();
+        TryUpdateTextureFromComponent();
         Refresh();
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
@@ -76,9 +56,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     {
         if (state is TacticalMapBuiState tacticalState)
         {
-            _currentMapName = tacticalState.MapName;
-            Window?.SetMapEntity(_currentMapName);
-            Window?.Wrapper.SetMapEntity(_currentMapName);
+            _availableMaps = tacticalState.Maps;
+            _activeMap = tacticalState.ActiveMap;
+            ApplyMapState();
         }
     }
 
@@ -94,15 +74,78 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
                 currentSettings.WindowSize = new Vector2(Window.SetSize.X, Window.SetSize.Y);
                 currentSettings.WindowPosition = new Vector2(Window.Position.X, Window.Position.Y);
 
-                settingsManager.SaveSettings(currentSettings, _currentMapName);
+                settingsManager.SaveSettings(currentSettings, _currentMapId);
             }
             catch (Exception ex)
             {
-                _logger.Error($"Failed to save tactical map user settings during disposal for map '{_currentMapName}': {ex}");
+                _logger.Error($"Failed to save tactical map user settings during disposal for map '{_currentMapId}': {ex}");
             }
         }
 
+        if (disposing && Window?.Wrapper != null)
+            Window.Wrapper.MapSelected -= OnMapSelected;
+
         base.Dispose(disposing);
+    }
+
+    private void OnMapSelected(NetEntity map)
+    {
+        SendPredictedMessage(new TacticalMapSelectMapMsg(map));
+    }
+
+    private void ApplyMapState()
+    {
+        if (Window == null)
+            return;
+
+        Window.Wrapper.UpdateMapList(_availableMaps, _activeMap);
+
+        if (!TryGetActiveMapInfo(out var mapInfo))
+            return;
+
+        _currentMapId = mapInfo.MapId;
+        Window.SetMapId(_currentMapId);
+        Window.Wrapper.SetMapId(_currentMapId);
+
+        if (EntMan.TryGetEntity(mapInfo.Map, out var mapEntity) &&
+            EntMan.TryGetComponent(mapEntity.Value, out AreaGridComponent? areaGrid))
+        {
+            Window.Wrapper.UpdateTexture((mapEntity.Value, areaGrid));
+        }
+    }
+
+    private bool TryGetActiveMapInfo(out TacticalMapMapInfo mapInfo)
+    {
+        foreach (var map in _availableMaps)
+        {
+            if (map.Map == _activeMap)
+            {
+                mapInfo = map;
+                return true;
+            }
+        }
+
+        if (_availableMaps.Count > 0)
+        {
+            mapInfo = _availableMaps[0];
+            return true;
+        }
+
+        mapInfo = default;
+        return false;
+    }
+
+    private void TryUpdateTextureFromComponent()
+    {
+        if (Window == null || _availableMaps.Count > 0)
+            return;
+
+        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user) &&
+            user.Map != null &&
+            EntMan.TryGetComponent(user.Map.Value, out AreaGridComponent? areaGrid))
+        {
+            Window.Wrapper.UpdateTexture((user.Map.Value, areaGrid));
+        }
     }
 
     public void Refresh()
@@ -120,10 +163,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
 
         var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
         if (lines != null)
-        {
-            Window.Wrapper.Map.Lines.AddRange(lines.MarineLines);
-            Window.Wrapper.Map.Lines.AddRange(lines.XenoLines);
-        }
+            Window.Wrapper.Map.Lines.AddRange(lines.Lines);
 
         if (_refreshed)
             return;
@@ -131,21 +171,10 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         Window.Wrapper.Canvas.Lines.Clear();
 
         if (lines != null)
-        {
-            Window.Wrapper.Canvas.Lines.AddRange(lines.MarineLines);
-            Window.Wrapper.Canvas.Lines.AddRange(lines.XenoLines);
-        }
+            Window.Wrapper.Canvas.Lines.AddRange(lines.Lines);
 
         var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
-        if (user?.CanDraw ?? false)
-        {
-            TabContainer.SetTabTitle(Window.Wrapper.CanvasTab, Loc.GetString("ui-tactical-map-tab-canvas"));
-            TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, true);
-        }
-        else
-        {
-            TabContainer.SetTabVisible(Window.Wrapper.CanvasTab, false);
-        }
+        Window.Wrapper.SetCanvasAccess(user?.CanDraw ?? false);
 
         _refreshed = true;
     }
@@ -161,26 +190,11 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             return;
         }
 
-        var totalCount = user.MarineBlips.Count + user.XenoBlips.Count + user.XenoStructureBlips.Count;
-        var blips = new TacticalMapBlip[totalCount];
-        var entityIds = new int[totalCount];
+        var blips = new TacticalMapBlip[user.Blips.Count];
+        var entityIds = new int[user.Blips.Count];
         var i = 0;
 
-        foreach (var (entityId, blip) in user.MarineBlips)
-        {
-            blips[i] = blip;
-            entityIds[i] = entityId;
-            i++;
-        }
-
-        foreach (var (entityId, blip) in user.XenoBlips)
-        {
-            blips[i] = blip;
-            entityIds[i] = entityId;
-            i++;
-        }
-
-        foreach (var (entityId, blip) in user.XenoStructureBlips)
+        foreach (var (entityId, blip) in user.Blips)
         {
             blips[i] = blip;
             entityIds[i] = entityId;
@@ -204,17 +218,15 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
         if (labels != null)
         {
-            var allLabels = new Dictionary<Vector2i, string>();
-            foreach (var label in labels.MarineLabels)
-                allLabels[label.Key] = label.Value;
-            foreach (var label in labels.XenoLabels)
-                allLabels[label.Key] = label.Value;
-
-            Window.Wrapper.Map.UpdateTacticalLabels(allLabels);
+            Window.Wrapper.Map.UpdateTacticalLabels(labels.Labels);
+            if (!_refreshed)
+                Window.Wrapper.Canvas.UpdateTacticalLabels(labels.Labels);
         }
         else
         {
             Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+            if (!_refreshed)
+                Window.Wrapper.Canvas.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
         }
     }
 

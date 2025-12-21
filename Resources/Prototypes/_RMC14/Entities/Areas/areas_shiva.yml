@@ -110,6 +110,8 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaShivaInteriorOob

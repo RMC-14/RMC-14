@@ -306,7 +306,7 @@
     trackDead: true
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapMarine
-    marines: true
+    visibleLayers: [Marines]
   - type: EmoteCooldown
   - type: FiremanCarriable
   - type: CanFiremanCarry

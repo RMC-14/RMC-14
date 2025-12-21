@@ -14,6 +14,15 @@ public sealed partial class AreaGridComponent : Component
     public Dictionary<Vector2i, Color> Colors = new();
 
     [DataField, AutoNetworkedField]
+    public bool HasTacMapBounds;
+
+    [DataField, AutoNetworkedField]
+    public Vector2i TacMapBoundsMin;
+
+    [DataField, AutoNetworkedField]
+    public Vector2i TacMapBoundsMax;
+
+    [DataField, AutoNetworkedField]
     public Dictionary<EntProtoId<AreaComponent>, EntityUid> AreaEntities = new();
 
     [DataField, AutoNetworkedField]
