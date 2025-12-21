@@ -62,7 +62,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         Padding = new Robust.Shared.Maths.Thickness(2)
     };
 
-    private BoxContainer CreateRecommendationContainer(MarineRecommendationInfo recommendation)
+    private BoxContainer CreateRecommendationContainer(MarineAwardRecommendationInfo recommendation)
     {
         var recContainer = new BoxContainer
         {
@@ -223,9 +223,13 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
                 HorizontalExpand = true
             };
 
-            // Header: Rank, Squad (if exists), Job, Name
-            var squadPart = string.IsNullOrEmpty(group.Squad) ? null : $"({group.Squad})";
-            var headerText = string.Join(" ", group.Rank, squadPart, group.Job, group.Name);
+            // Header: Rank, Squad (if exists), Job, Name - get from first recommendation
+            var firstRec = group.Recommendations.FirstOrDefault();
+            if (firstRec == null)
+                continue;
+
+            var squadPart = string.IsNullOrEmpty(firstRec.RecommendedSquad) ? null : $"({firstRec.RecommendedSquad})";
+            var headerText = string.Join(" ", firstRec.RecommendedRank, squadPart, firstRec.RecommendedJob, firstRec.RecommendedName);
             var headerLabel = new RichTextLabel
             {
                 HorizontalExpand = true

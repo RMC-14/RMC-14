@@ -66,6 +66,14 @@ public sealed class MarineAwardRecommendationInfo : IEquatable<MarineAwardRecomm
     public required string RecommendedLastPlayerId { get; init; }
     public required string RecommenderLastPlayerId { get; init; }
     public required string Reason { get; init; }
+    public string? RecommenderName { get; init; }
+    public string? RecommenderRank { get; init; }
+    public string? RecommenderSquad { get; set; }
+    public string? RecommenderJob { get; init; }
+    public string? RecommendedName { get; init; }
+    public string? RecommendedRank { get; init; }
+    public string? RecommendedSquad { get; set; }
+    public string? RecommendedJob { get; init; }
     public bool IsRejected { get; set; } = false;
 
     public bool Equals(MarineAwardRecommendationInfo? other)

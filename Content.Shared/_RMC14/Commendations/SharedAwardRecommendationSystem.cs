@@ -1,6 +1,8 @@
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Mind.Components;
@@ -22,6 +24,8 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
+    [Dependency] private readonly SquadSystem _squads = default!;
 
     public int CharacterLimit { get; private set; }
     public int MinCharacterLimit { get; private set; }
@@ -175,6 +179,9 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         var recommendedName = string.Empty;
         var recommendedLastPlayerId = args.LastPlayerId;
+        string? recommendedRank = null;
+        string? recommendedSquad = null;
+        string? recommendedJob = null;
 
         if (args.Marine is { } netMarine && TryGetEntity(netMarine, out var marine) && marine != null)
         {
@@ -186,6 +193,11 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
             recommendedName = Name(marine.Value);
             recommendedLastPlayerId ??= receiver.LastPlayerId;
+            
+            // Get recommended info at creation time to preserve it even if player leaves body
+            recommendedRank = _rank.GetRankString(marine.Value);
+            recommendedSquad = GetSquadName(marine.Value);
+            recommendedJob = GetJobName(marine.Value);
         }
         else if (recommendedLastPlayerId != null)
         {
@@ -196,6 +208,9 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             }
 
             recommendedName = info.Name;
+            recommendedRank = info.Rank;
+            recommendedSquad = info.Squad;
+            recommendedJob = info.Job;
         }
         else
         {
@@ -210,10 +225,21 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return;
         }
 
+        // Get recommender info at creation time to preserve it even if player leaves body
+        var recommenderInfo = GetRecommenderInfo(actor.Value);
+
         var recommendation = new MarineAwardRecommendationInfo
         {
             RecommendedLastPlayerId = recommendedLastPlayerId,
             RecommenderLastPlayerId = recommenderLastPlayerId,
+            RecommendedName = recommendedName,
+            RecommendedRank = recommendedRank,
+            RecommendedSquad = recommendedSquad,
+            RecommendedJob = recommendedJob,
+            RecommenderName = recommenderInfo.Name,
+            RecommenderRank = recommenderInfo.Rank,
+            RecommenderSquad = recommenderInfo.Squad,
+            RecommenderJob = recommenderInfo.Job,
             Reason = message
         };
 
@@ -268,6 +294,35 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (TryComp<ActorComponent>(actor, out var actorComp))
             return actorComp.PlayerSession.UserId.UserId.ToString();
+
+        return null;
+    }
+
+    private (string Name, string? Rank, string? Squad, string Job) GetRecommenderInfo(EntityUid actor)
+    {
+        var name = Name(actor);
+        var rank = _rank.GetRankString(actor);
+        var squad = GetSquadName(actor);
+        var job = GetJobName(actor);
+
+        return (name, rank, squad, job);
+    }
+
+    private string GetJobName(EntityUid actor)
+    {
+        if (TryComp<MindContainerComponent>(actor, out var mind) && mind.Mind is { } mindId)
+        {
+            if (_jobs.MindTryGetJobName(mindId, out var jobName))
+                return jobName;
+        }
+
+        return Loc.GetString("generic-unknown-title");
+    }
+
+    private string? GetSquadName(EntityUid marine)
+    {
+        if (_squads.TryGetMemberSquad((marine, null), out var squad))
+            return Name(squad);
 
         return null;
     }

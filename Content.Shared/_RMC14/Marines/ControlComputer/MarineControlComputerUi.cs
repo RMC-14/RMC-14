@@ -61,20 +61,5 @@ public sealed class MarineMedalsPanelBuiState : BoundUserInterfaceState
 public sealed record MarineRecommendationGroup
 {
     public required string LastPlayerId { get; init; }
-    public required string Name { get; init; }
-    public string? Rank { get; init; }
-    public string? Squad { get; init; }
-    public required string Job { get; init; }
-    public required List<MarineRecommendationInfo> Recommendations { get; init; }
-}
-
-[Serializable, NetSerializable]
-public sealed record MarineRecommendationInfo
-{
-    public required string RecommenderLastPlayerId { get; init; }
-    public required string RecommenderName { get; init; }
-    public string? RecommenderRank { get; init; }
-    public string? RecommenderSquad { get; init; }
-    public required string RecommenderJob { get; init; }
-    public required string Reason { get; init; }
+    public required List<MarineAwardRecommendationInfo> Recommendations { get; init; }
 }

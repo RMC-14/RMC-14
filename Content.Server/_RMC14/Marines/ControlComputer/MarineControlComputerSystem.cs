@@ -27,7 +27,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
     protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
     {
         var groups = new Dictionary<string, MarineRecommendationGroup>();
-        
+
         // Collect recommendations from all computers to ensure they're visible from any device
         var allRecommendations = new HashSet<MarineAwardRecommendationInfo>();
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
@@ -43,76 +43,49 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         foreach (var recommendation in allRecommendations)
         {
             var recommendedId = recommendation.RecommendedLastPlayerId;
-            
+
             // Skip recommendations for marines who have already been awarded medals
             if (awardedLastPlayerIds.Contains(recommendedId))
                 continue;
-            
+
             // Skip rejected recommendations
             if (recommendation.IsRejected)
                 continue;
-            
+
             if (!groups.TryGetValue(recommendedId, out var group))
             {
-                // Get marine info
-                var marineInfo = GetMarineInfo(recommendedId);
-                
+                // Try to get current squad if marine is alive and update all recommendations for this marine
+                var recommendedCurrentSquad = TryGetCurrentSquad(recommendedId);
+                if (recommendedCurrentSquad != null && recommendedCurrentSquad != recommendation.RecommendedSquad)
+                {
+                    // Update all recommendations for this recommended marine in all computers
+                    UpdateRecommendationSquad(recommendedId, recommendedCurrentSquad, true);
+                    // Update current recommendation's squad to reflect the change
+                    recommendation.RecommendedSquad = recommendedCurrentSquad;
+                }
+
                 group = new MarineRecommendationGroup
                 {
                     LastPlayerId = recommendedId,
-                    Name = marineInfo.Name,
-                    Rank = marineInfo.Rank,
-                    Squad = marineInfo.Squad,
-                    Job = marineInfo.Job,
-                    Recommendations = new List<MarineRecommendationInfo>()
+                    Recommendations = new List<MarineAwardRecommendationInfo>()
                 };
                 groups[recommendedId] = group;
             }
 
-            // Get recommender info
-            var recommenderInfo = GetMarineInfo(recommendation.RecommenderLastPlayerId);
-            
-            group.Recommendations.Add(new MarineRecommendationInfo
+            // Try to get current squad if marine is alive and update all recommendations from this recommender
+            var recommenderCurrentSquad = TryGetCurrentSquad(recommendation.RecommenderLastPlayerId);
+            if (recommenderCurrentSquad != null && recommenderCurrentSquad != recommendation.RecommenderSquad)
             {
-                RecommenderLastPlayerId = recommendation.RecommenderLastPlayerId,
-                RecommenderName = recommenderInfo.Name,
-                RecommenderRank = recommenderInfo.Rank,
-                RecommenderSquad = recommenderInfo.Squad,
-                RecommenderJob = recommenderInfo.Job,
-                Reason = recommendation.Reason
-            });
+                // Update all recommendations from this recommender in all computers
+                UpdateRecommendationSquad(recommendation.RecommenderLastPlayerId, recommenderCurrentSquad, false);
+                // Update current recommendation's squad to reflect the change
+                recommendation.RecommenderSquad = recommenderCurrentSquad;
+            }
+
+            group.Recommendations.Add(recommendation);
         }
 
         return new MarineMedalsPanelBuiState(groups.Values.ToList());
-    }
-
-    private (string Name, string? Rank, string? Squad, string Job) GetMarineInfo(string lastPlayerId)
-    {
-        // Try to find alive marine
-        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
-        while (receivers.MoveNext(out var uid, out var receiver, out _))
-        {
-            if (receiver.LastPlayerId == lastPlayerId)
-            {
-                var rank = _rank.GetRankString(uid);
-                var job = GetJobName(uid);
-                var squad = GetSquadName(uid);
-                return (Name(uid), rank, squad, job);
-            }
-        }
-
-        // Try to find gibbed marine
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out _, out var computer))
-        {
-            if (computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } gibbedInfo)
-            {
-                return (gibbedInfo.Name, gibbedInfo.Rank, gibbedInfo.Squad, gibbedInfo.Job);
-            }
-        }
-
-        // Fallback
-        return ("Unknown", null, null, "Unknown");
     }
 
     private void OnMarineGibbed(Entity<MarineComponent> ent, ref BeingGibbedEvent ev)
@@ -163,5 +136,50 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             return Name(squad);
 
         return null;
+    }
+
+    private string? TryGetCurrentSquad(string lastPlayerId)
+    {
+        // Try to find alive marine by LastPlayerId
+        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver, out _))
+        {
+            if (receiver.LastPlayerId == lastPlayerId)
+            {
+                return GetSquadName(uid);
+            }
+        }
+
+        return null;
+    }
+
+    private void UpdateRecommendationSquad(string lastPlayerId, string newSquad, bool isRecommended)
+    {
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            var updated = false;
+            foreach (var rec in computer.AwardRecommendations)
+            {
+                if (isRecommended)
+                {
+                    if (rec.RecommendedLastPlayerId == lastPlayerId)
+                    {
+                        rec.RecommendedSquad = newSquad;
+                        updated = true;
+                    }
+                }
+                else
+                {
+                    if (rec.RecommenderLastPlayerId == lastPlayerId)
+                    {
+                        rec.RecommenderSquad = newSquad;
+                        updated = true;
+                    }
+                }
+            }
+            if (updated)
+                Dirty(uid, computer);
+        }
     }
 }
