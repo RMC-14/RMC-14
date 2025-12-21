@@ -56,7 +56,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
 
         var damage = args.Damage.DamageDict;
-        var multiplier = 1 - comp.DamageModifier * TransformOrderLevel(comp.Received[0].Multiplier);
+        var multiplier = 1 - comp.DamageModifier.Float() * comp.Received[0].Multiplier.Float();
 
         foreach (var type in comp.DamageTypes)
         {
@@ -98,7 +98,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (!hasArmor)
             return;
 
-        var speed = 1 + (comp.MoveSpeedModifier * TransformOrderLevel(comp.Received[0].Multiplier)).Float();
+        var speed = 1 + comp.MoveSpeedModifier.Float() * comp.Received[0].Multiplier.Float();
         args.ModifySpeed(speed, speed);
     }
 
@@ -116,7 +116,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (entity.Comp.Received.Count == 0)
             return;
 
-        args.Evasion += TransformOrderLevel(entity.Comp.Received[0].Multiplier) * entity.Comp.EvasionModifier;
+        args.Evasion += entity.Comp.Received[0].Multiplier * entity.Comp.EvasionModifier;
     }
 
     private void OnMoveOrderDidEquip(Entity<MoveOrderComponent> ent, ref DidEquipEvent args)
@@ -161,8 +161,16 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return false;
         }
 
-        var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
-        var duration = orders.Comp.Duration * (TransformOrderLevel(level) + 1);
+        float level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
+        level = level switch
+        {
+            1 => 1f,
+            2 => 1.5f,
+            3 => 2f,
+            4 => 3f,
+            _ => level,
+        };
+        var duration = orders.Comp.Duration * (level + 1);
 
         _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.MoveActionEntity, orders.Comp.Cooldown);
@@ -232,31 +240,4 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         RemoveExpired<HoldOrderComponent>();
     }
 
-    /// <summary>
-    /// Translates the order level to the actual effective multiplier we use.
-    /// </summary>
-    private static float TransformOrderLevel(FixedPoint2 value)
-    {
-        var v = value.Float();
-        return v switch
-        {
-            1f => 1f,
-            2f => 1.5f,
-            3f => 2f,
-            4f => 3f,
-            _ => v,
-        };
-    }
-
-    private static float TransformOrderLevel(int value)
-    {
-        return value switch
-        {
-            1 => 1f,
-            2 => 1.5f,
-            3 => 2f,
-            4 => 3f,
-            _ => value,
-        };
-    }
 }
