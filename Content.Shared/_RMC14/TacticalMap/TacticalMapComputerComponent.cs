@@ -18,6 +18,9 @@ public sealed partial class TacticalMapComputerComponent : Component
     [DataField, AutoNetworkedField]
     public List<TacticalMapLayer> VisibleLayers = new() { TacticalMapLayer.Marines };
 
+    [DataField, AutoNetworkedField]
+    public TacticalMapLayer? ActiveLayer;
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastAnnounceAt;
 

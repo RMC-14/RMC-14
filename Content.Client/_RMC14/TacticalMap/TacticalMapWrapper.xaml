@@ -10,6 +10,13 @@
                           HorizontalExpand="True" MinHeight="26" />
         </BoxContainer>
 
+        <BoxContainer Name="LayerSelectionRow" Access="Public" Orientation="Horizontal" Margin="2 2 2 0" Visible="False">
+            <Label Name="LayerSelectLabel" Access="Public" Text="{Loc ui-tactical-map-layer-select-label}" StyleClasses="LabelSmall"
+                   Margin="0 0 6 0" VerticalAlignment="Center" FontColorOverride="#88C7FA" />
+            <OptionButton Name="LayerSelectButton" Access="Public"
+                          HorizontalExpand="True" MinHeight="26" />
+        </BoxContainer>
+
         <BoxContainer Orientation="Horizontal" Margin="2 4 2 4" HorizontalExpand="True">
             <controls:TacticalMapButton Name="LabelsButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}"
                                         Margin="0 0 6 0" MinWidth="60" MinHeight="26" />

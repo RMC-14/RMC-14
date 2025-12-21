@@ -27,6 +27,9 @@ public sealed partial class TacticalMapUserComponent : Component
     public List<TacticalMapLayer> VisibleLayers = new();
 
     [DataField, AutoNetworkedField]
+    public TacticalMapLayer? ActiveLayer;
+
+    [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> Blips = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

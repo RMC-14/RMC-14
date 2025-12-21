@@ -130,6 +130,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<BoundUIOpenedEvent>(OnUserBUIOpened);
                 subs.Event<BoundUIClosedEvent>(OnUserBUIClosed);
                 subs.Event<TacticalMapSelectMapMsg>(OnUserSelectMapMsg);
+                subs.Event<TacticalMapSelectLayerMsg>(OnUserSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
                 subs.Event<TacticalMapQueenEyeMoveMsg>(OnUserQueenEyeMoveMsg);
             });
@@ -139,6 +140,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             {
                 subs.Event<BoundUIOpenedEvent>(OnComputerBUIOpened);
                 subs.Event<TacticalMapSelectMapMsg>(OnComputerSelectMapMsg);
+                subs.Event<TacticalMapSelectLayerMsg>(OnComputerSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
             });
 
@@ -447,6 +449,22 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateTacticalMapState(ent);
     }
 
+    private void OnUserSelectLayerMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapSelectLayerMsg args)
+    {
+        if (!TryGetSelectedLayer(args.LayerId, out var selected))
+            return;
+
+        var visibleLayers = GetVisibleLayers(ent.Comp.VisibleLayers);
+        if (selected != null && !visibleLayers.Contains(selected.Value))
+            return;
+
+        ent.Comp.ActiveLayer = selected;
+        Dirty(ent);
+
+        if (TryResolveUserMap(ent, out var map))
+            UpdateUserData(ent, map.Comp);
+    }
+
     private void OnComputerSelectMapMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapSelectMapMsg args)
     {
         if (!TryGetEntity(args.Map, out var mapEntity) ||
@@ -461,6 +479,22 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         UpdateMapData((ent, ent), mapComp);
         UpdateTacticalMapComputerState(ent);
+    }
+
+    private void OnComputerSelectLayerMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapSelectLayerMsg args)
+    {
+        if (!TryGetSelectedLayer(args.LayerId, out var selected))
+            return;
+
+        var visibleLayers = GetVisibleLayers(ent.Comp.VisibleLayers);
+        if (selected != null && !visibleLayers.Contains(selected.Value))
+            return;
+
+        ent.Comp.ActiveLayer = selected;
+        Dirty(ent);
+
+        if (TryResolveComputerMap(ent, out var map))
+            UpdateMapData(ent, map.Comp);
     }
 
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
@@ -483,6 +517,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var state = new TacticalMapBuiState(activeMap, maps);
         _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
+    }
+
+    private bool TryGetSelectedLayer(int layerId, out TacticalMapLayer? selected)
+    {
+        if (layerId == TacticalMapSelectLayerMsg.AllLayersId)
+        {
+            selected = null;
+            return true;
+        }
+
+        if (!Enum.IsDefined(typeof(TacticalMapLayer), layerId))
+        {
+            selected = null;
+            return false;
+        }
+
+        selected = (TacticalMapLayer)layerId;
+        return true;
     }
 
     private List<TacticalMapMapInfo> BuildMapList()
@@ -556,7 +608,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         ent.Comp.NextAnnounceAt = nextAnnounce;
         Dirty(ent);
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateCanvas(map, lines, labels, layer, user, ent.Comp.Sound);
         }
@@ -593,7 +645,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             Dirty(uid, computer);
         }
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateCanvas(map, lines, labels, layer, user);
         }
@@ -612,7 +664,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, args.Text, user, LabelOperation.Create);
         }
@@ -631,7 +683,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, args.NewText, user, LabelOperation.Edit);
         }
@@ -650,7 +702,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, string.Empty, user, LabelOperation.Delete);
         }
@@ -669,7 +721,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
         }
@@ -688,7 +740,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, args.Text, user, LabelOperation.Create);
         }
@@ -707,7 +759,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, args.NewText, user, LabelOperation.Edit);
         }
@@ -726,7 +778,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateIndividualLabel(map, layer, args.Position, string.Empty, user, LabelOperation.Delete);
         }
@@ -745,7 +797,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetVisibleLayers(ent.Comp.VisibleLayers))
+        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
             UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
         }
@@ -1074,7 +1126,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var lines = EnsureComp<TacticalMapLinesComponent>(user);
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
 
-        var visibleLayers = GetVisibleLayers(user.Comp.VisibleLayers);
+        var visibleLayers = GetActiveLayers(user.Comp.VisibleLayers, user.Comp.ActiveLayer);
         var blips = new Dictionary<int, TacticalMapBlip>();
 
         foreach (var layer in visibleLayers)
@@ -1170,7 +1222,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     protected override void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
-        var visibleLayers = GetVisibleLayers(computer.Comp.VisibleLayers);
+        var visibleLayers = GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer);
         var blipLayers = new HashSet<TacticalMapLayer>(visibleLayers);
 
         var ev = new TacticalMapIncludeXenosEvent();

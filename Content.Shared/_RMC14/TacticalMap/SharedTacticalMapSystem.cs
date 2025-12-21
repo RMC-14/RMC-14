@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
 
@@ -52,6 +53,18 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         return layers.Count > 0 ? layers : DefaultLayers;
     }
 
+    protected IReadOnlyList<TacticalMapLayer> GetActiveLayers(IReadOnlyList<TacticalMapLayer> layers, TacticalMapLayer? activeLayer)
+    {
+        var visible = GetVisibleLayers(layers);
+        if (activeLayer == null)
+            return visible;
+
+        if (visible.Contains(activeLayer.Value))
+            return new List<TacticalMapLayer> { activeLayer.Value };
+
+        return visible;
+    }
+
     public bool TryGetTacticalMap(out Entity<TacticalMapComponent> map)
     {
         return TryGetTacticalMap(null, out map);
@@ -88,7 +101,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     {
         var ev = new TacticalMapIncludeXenosEvent();
         RaiseLocalEvent(ref ev);
-        var layers = new HashSet<TacticalMapLayer>(GetVisibleLayers(computer.Comp.VisibleLayers));
+        var layers = new HashSet<TacticalMapLayer>(GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer));
         if (ev.Include && layers.Contains(TacticalMapLayer.Marines))
             layers.Add(TacticalMapLayer.Xenos);
 

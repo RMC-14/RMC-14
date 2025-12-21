@@ -44,6 +44,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         }
 
         Window.Wrapper.MapSelected += OnMapSelected;
+        Window.Wrapper.LayerSelected += OnLayerSelected;
         ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
@@ -83,7 +84,10 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         }
 
         if (disposing && Window?.Wrapper != null)
+        {
             Window.Wrapper.MapSelected -= OnMapSelected;
+            Window.Wrapper.LayerSelected -= OnLayerSelected;
+        }
 
         base.Dispose(disposing);
     }
@@ -91,6 +95,12 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     private void OnMapSelected(NetEntity map)
     {
         SendPredictedMessage(new TacticalMapSelectMapMsg(map));
+    }
+
+    private void OnLayerSelected(TacticalMapLayer? layer)
+    {
+        var layerId = layer.HasValue ? (int) layer.Value : TacticalMapSelectLayerMsg.AllLayersId;
+        SendPredictedMessage(new TacticalMapSelectLayerMsg(layerId));
     }
 
     private void ApplyMapState()
@@ -112,6 +122,19 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         {
             Window.Wrapper.UpdateTexture((mapEntity.Value, areaGrid));
         }
+
+        UpdateLayerSelector();
+    }
+
+    private void UpdateLayerSelector()
+    {
+        if (Window == null)
+            return;
+
+        if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
+            Window.Wrapper.UpdateLayerList(user.VisibleLayers, user.ActiveLayer);
+        else
+            Window.Wrapper.UpdateLayerList(new List<TacticalMapLayer>(), null);
     }
 
     private bool TryGetActiveMapInfo(out TacticalMapMapInfo mapInfo)
@@ -152,6 +175,8 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     {
         if (Window == null)
             return;
+
+        UpdateLayerSelector();
 
         var lineLimit = EntMan.System<TacticalMapSystem>().LineLimit;
         Window.Wrapper.SetLineLimit(lineLimit);

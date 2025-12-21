@@ -2,6 +2,10 @@ ui-tactical-map-window-title = Map
 ui-tactical-map-tab-map = Map
 ui-tactical-map-tab-canvas = Canvas
 ui-tactical-map-map-select-label = Map
+ui-tactical-map-layer-select-label = Layer
+ui-tactical-map-layer-all = All
+ui-tactical-map-layer-marines = Marines
+ui-tactical-map-layer-xenos = Xenos
 
 ui-tactical-map-label-dialog-create-title = Create Label
 ui-tactical-map-label-dialog-edit-title = Edit Label

@@ -41,6 +41,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     public Action<Vector2i>? OnQueenEyeMove;
     public event Action<NetEntity>? MapSelected;
+    public event Action<TacticalMapLayer?>? LayerSelected;
 
     private const float FollowUpdateInterval = 0.5f;
 
@@ -74,6 +75,7 @@ public sealed partial class TacticalMapWrapper : Control
     private string? _currentMapId;
     private bool _mapIdSet = false;
     private bool _suppressMapSelection;
+    private bool _suppressLayerSelection;
 
     private float _currentBlipSizeMultiplier = 1.0f;
     private float _currentLineThickness = 2.0f;
@@ -276,6 +278,39 @@ public sealed partial class TacticalMapWrapper : Control
         _suppressMapSelection = false;
     }
 
+    public void UpdateLayerList(IReadOnlyList<TacticalMapLayer> layers, TacticalMapLayer? activeLayer)
+    {
+        _suppressLayerSelection = true;
+        LayerSelectButton.Clear();
+
+        if (layers.Count <= 1)
+        {
+            LayerSelectionRow.Visible = false;
+            _suppressLayerSelection = false;
+            return;
+        }
+
+        LayerSelectionRow.Visible = true;
+
+        var selectedId = 0;
+        var id = 0;
+
+        LayerSelectButton.AddItem(Loc.GetString("ui-tactical-map-layer-all"), id);
+        id++;
+
+        foreach (var layer in layers)
+        {
+            LayerSelectButton.AddItem(GetLayerName(layer), id);
+            LayerSelectButton.SetItemMetadata(id, layer);
+            if (activeLayer == layer)
+                selectedId = id;
+            id++;
+        }
+
+        LayerSelectButton.SelectId(selectedId);
+        _suppressLayerSelection = false;
+    }
+
     public void UpdateBlips(TacticalMapBlip[]? blips)
     {
         Map.UpdateBlips(blips);
@@ -338,6 +373,7 @@ public sealed partial class TacticalMapWrapper : Control
         Map.IsCanvas = false;
 
         SetupMapSelector();
+        SetupLayerSelector();
         SetupColorButton();
         SetupAreaLabels();
         SetupBlipSize();
@@ -428,6 +464,31 @@ public sealed partial class TacticalMapWrapper : Control
 
             if (MapSelectButton.GetItemMetadata(args.Id) is NetEntity map)
                 MapSelected?.Invoke(map);
+        };
+    }
+
+    private void SetupLayerSelector()
+    {
+        LayerSelectButton.OnItemSelected += args =>
+        {
+            if (_suppressLayerSelection)
+                return;
+
+            TacticalMapLayer? selected = null;
+            if (LayerSelectButton.GetItemMetadata(args.Id) is TacticalMapLayer layer)
+                selected = layer;
+
+            LayerSelected?.Invoke(selected);
+        };
+    }
+
+    private static string GetLayerName(TacticalMapLayer layer)
+    {
+        return layer switch
+        {
+            TacticalMapLayer.Marines => Loc.GetString("ui-tactical-map-layer-marines"),
+            TacticalMapLayer.Xenos => Loc.GetString("ui-tactical-map-layer-xenos"),
+            _ => layer.ToString()
         };
     }
 
