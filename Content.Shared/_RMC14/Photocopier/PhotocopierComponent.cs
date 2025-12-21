@@ -30,13 +30,13 @@ public sealed partial class PhotocopierComponent : Component
     /// Remaining time of printing animation
     /// </summary>
     [DataField]
-    public float PrintingTimeRemaining;
+    public TimeSpan NextPrintAt = TimeSpan.Zero;
 
     /// <summary>
     /// How long the printing animation will play
     /// </summary>
     [ViewVariables]
-    public float PrintingTime = 2.3f;
+    public TimeSpan PrintingTime = new(0,0,0,2,300);
 
     [ViewVariables]
     public int PrintingCount = 0;

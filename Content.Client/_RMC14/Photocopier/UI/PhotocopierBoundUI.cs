@@ -63,10 +63,10 @@ public sealed class PhotocopierBoundUI : BoundUserInterface
             }
         }
 
-        SendMessage(new FaxFileMessage(
+       /** SendMessage(new FaxFileMessage(
             label?[..Math.Min(label.Length, FaxFileMessageValidation.MaxLabelSize)],
             content[..Math.Min(content.Length, FaxFileMessageValidation.MaxContentSize)],
-            _window.OfficePaper));
+            _window.OfficePaper));**/
     }
 
     private void OnEjectButtonPressed()

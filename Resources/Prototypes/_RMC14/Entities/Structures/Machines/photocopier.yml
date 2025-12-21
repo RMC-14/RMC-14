@@ -29,6 +29,13 @@
     blacklist:
       components:
       - Xeno
+  - type: ActivatableUI
+    key: enum.PhotocopierUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.PhotocopierUIKey.Key:
+        type: PhotocopierBoundUI
 
 - type: entity
   parent: RMCBasePhotocopier

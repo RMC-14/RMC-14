@@ -14,6 +14,7 @@ using Content.Shared._RMC14.Photocopier;
 using Content.Shared._RMC14.Photocopier.Events;
 using Robust.Server.Containers;
 using Robust.Server.GameObjects;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Photocopier;
 
@@ -27,6 +28,7 @@ public sealed class PhotocopierSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly PaperSystem _paperSystem = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -48,14 +50,14 @@ public sealed class PhotocopierSystem : EntitySystem
         {
             return;
         }
-        var sendEntity=container.ContainedEntities[0];
+        var copyEntity=container.ContainedEntities[0];
 
-        if (!TryComp(sendEntity, out MetaDataComponent? metadata) ||
-            !TryComp<PaperComponent>(sendEntity, out var paper))
+        if (!TryComp(copyEntity, out MetaDataComponent? metadata) ||
+            !TryComp<PaperComponent>(copyEntity, out var paper))
             return;
 
-        TryComp<LabelComponent>(sendEntity, out var labelComponent);
-        TryComp<NameModifierComponent>(sendEntity, out var nameMod);
+        TryComp<LabelComponent>(copyEntity, out var labelComponent);
+        TryComp<NameModifierComponent>(copyEntity, out var nameMod);
 
         // TODO: See comment in 'Send()' about not being able to copy whole entities
         var printout = new CopyPrintout(paper.Content,
@@ -66,11 +68,74 @@ public sealed class PhotocopierSystem : EntitySystem
                                        paper.EditingDisabled);
         photocopierComp.Printout = printout;
         photocopierComp.PrintingCount = args.CopyCount;
-    }
+        photocopierComp.NextPrintAt = _timing.CurTime + photocopierComp.PrintingTime;
 
+        var paperName = "";
+
+        EnsureComp<MetaDataComponent>(copyEntity, out var metaData);
+        paperName = metaData.EntityName;
+        if (TryComp<LabelComponent>(copyEntity, out var label) && label.CurrentLabel is string currentLabel)
+        {
+            paperName = currentLabel;
+        }
+
+        var state = new PhotocopierUiState(paperName, true, false);
+        _uiSystem.SetUiState(photocopierId, PhotocopierUIKey.Key, state);
+    }
+    private void OnPaperEjected (EntityUid photocopierId, PhotocopierComponent photocopierComp, EjectPaperEvent args)
+    {
+        if(!_container.TryGetContainer(photocopierId, photocopierComp.PaperSlotId, out var container)||
+           container.ContainedEntities.Count == 0)
+        {
+            return;
+        }
+        var sendEntity=container.ContainedEntities[0];
+        _container.Remove(sendEntity, container);
+    }
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
+
+        var query = EntityQueryEnumerator<PhotocopierComponent, ApcPowerReceiverComponent>();
+        while (query.MoveNext(out var uid, out var photocopier, out var powerReceiverComponent))
+        {
+            if (!powerReceiverComponent.Powered)
+            {
+                continue;
+            }
+            ProcessPrintingAnimation(uid, photocopier);
+        }
+    }
+    private void ProcessPrintingAnimation(EntityUid uid, PhotocopierComponent photocopier)
+    {
+        if (_timing.CurTime > photocopier.NextPrintAt)
+        {
+            PrintCopy(uid, photocopier);
+            photocopier.PrintingCount--;
+            if (photocopier.PrintingCount <= 0)
+            {
+                var paperName = "";
+                var isPaperInserted = false;
+
+                if(_container.TryGetContainer(uid, photocopier.PaperSlotId, out var container)&&
+                 container.ContainedEntities.Count != 0)
+                {
+                    isPaperInserted = true;
+                    var paper = container.ContainedEntities[0];
+                    EnsureComp<MetaDataComponent>(paper, out var metaData);
+                    paperName = metaData.EntityName;
+                    if (TryComp<LabelComponent>(paper, out var label) && label.CurrentLabel is string currentLabel)
+                    {
+                        paperName = currentLabel;
+                    }
+                }
+                var state = new PhotocopierUiState(paperName, isPaperInserted, true);
+                _uiSystem.SetUiState(uid, PhotocopierUIKey.Key, state);
+                return;
+            }
+
+            photocopier.NextPrintAt = _timing.CurTime + photocopier.PrintingTime;
+        }
     }
     private void PrintCopy(EntityUid uid, PhotocopierComponent? component = null)
     {

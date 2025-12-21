@@ -19,11 +19,11 @@ public sealed partial class PhotocopierWindow : FancyWindow
         var canCopy = state.CanCopy;
         var isPaperInserted = state.IsPaperInserted;
         EjectButton.Disabled = !isPaperInserted;
-        CopyButton.Disabled = !canCopy;
-        Copy2Button.Disabled = !canCopy;
-        Copy3Button.Disabled = !canCopy;
-        Copy5Button.Disabled = !canCopy;
-        Copy10Button.Disabled = !canCopy;
+        CopyButton.Disabled = !canCopy || !isPaperInserted;
+        Copy2Button.Disabled = !canCopy || !isPaperInserted;
+        Copy3Button.Disabled = !canCopy || !isPaperInserted;
+        Copy5Button.Disabled = !canCopy || !isPaperInserted;
+        Copy10Button.Disabled = !canCopy || !isPaperInserted;
         PaperName.Text = paperName;
         if (isPaperInserted)
         {

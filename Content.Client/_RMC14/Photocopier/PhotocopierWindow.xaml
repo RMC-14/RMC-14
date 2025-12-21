@@ -6,45 +6,42 @@
     xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="Photocopier"
     MinSize="380 220">
-    <BoxContainer Orientation="Horizontal">
-        <PanelContainer MinWidth="600" HorizontalExpand="True">
-          <PanelContainer.PanelOverride/>
-            <graphics:StyleBoxFlat BackgroundColor="#05090F"
-                                   BorderColor="#88C7FA" BorderThickness="2" />
+    <BoxContainer Orientation="Vertical">
             <!-- Paper Status -->
-            <BoxContainer Orientation="Horizontal" Margin="2">
-                <Label Text="Paper"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"/>
+            <BoxContainer Orientation="Horizontal" Margin="2" VerticalExpand="True">
+                <Label Text="Paper: "
+                       HorizontalAlignment="Left"/>
                 <Label Name="PaperStatusLabel"
-                       VerticalAlignment="Center"
                        HorizontalAlignment="Center"/>
                 <Button Name="EjectButton"
                         Text="EJECT"
                         StyleClasses="OpenBoth"
                         HorizontalExpand="True"
-                        Disabled="True" />
+                        VerticalExpand="True"
+                        Disabled="True"
+                        HorizontalAlignment="Right"/>
             </BoxContainer>
 
             <cc:HSeparator Color="#76a5afff"/>
 
             <!-- Name And Copy -->
             <BoxContainer Orientation="Horizontal" Margin="2">
-                <Label Text="NAME"
+                <Label Text="NAME:"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"/>
                 <Label Name="PaperName"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"/>
             </BoxContainer>
-            <BoxContainer>
+            <BoxContainer VerticalExpand="True">
                 <Button Name="CopyButton"
                         Text="{Loc 'fax-machine-ui-copy-button'}"
                         StyleClasses="OpenBoth"
                         HorizontalExpand="True"
+                        VerticalExpand="True"
                         Disabled="True" />
             </BoxContainer>
-            <BoxContainer Margin="0 4 0 0">
+            <BoxContainer Margin="0 4 0 4" VerticalExpand="True">
                 <Button Name="Copy2Button"
                         Text="Copy x2"
                         HorizontalExpand="True"
@@ -68,16 +65,12 @@
             </BoxContainer>
 
             <cc:HSeparator Color="#76a5afff"/>
+
             <BoxContainer Margin="0 4 0 4">
-                <Button Name="PaperButton"
-                        Text="{Loc 'fax-machine-ui-paper-button-normal'}"
-                        StyleClasses="OpenBoth"
-                        HorizontalExpand="True"/>
                 <Button Name="FileButton"
                         Text="{Loc 'fax-machine-ui-file-button'}"
                         StyleClasses="OpenBoth"
                         HorizontalExpand="True"/>
             </BoxContainer>
-        </PanelContainer>
     </BoxContainer>
 </controls:FancyWindow>
