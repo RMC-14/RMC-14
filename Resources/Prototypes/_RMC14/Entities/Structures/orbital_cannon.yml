@@ -388,6 +388,7 @@
   - type: RMCExplosionShockWave
     falloffPower: 50
     sharpness: 25
+    width: 0.7
 
 # Tray
 - type: entity
@@ -446,5 +447,7 @@
           4: { visible: true, state: cannon_tray_4 }
           5: { visible: true, state: cannon_tray_5 }
           6: { visible: true, state: cannon_tray_6 }
-  - type: OrbitalCannonTray
+  - type: RMCLoreExaminable
+    content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable
+  - type: OrbitalCannonTray
