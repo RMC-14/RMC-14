@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
 using Content.Shared.Damage;
+using Content.Shared.FixedPoint;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mobs.Systems;
@@ -55,7 +56,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
 
         var damage = args.Damage.DamageDict;
-        var multiplier = 1 - comp.DamageModifier * comp.Received[0].Multiplier;
+        var multiplier = 1 - comp.DamageModifier * TransformOrderLevel(comp.Received[0].Multiplier);
 
         foreach (var type in comp.DamageTypes)
         {
@@ -97,7 +98,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (!hasArmor)
             return;
 
-        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
+        var speed = 1 + (comp.MoveSpeedModifier * TransformOrderLevel(comp.Received[0].Multiplier)).Float();
         args.ModifySpeed(speed, speed);
     }
 
@@ -115,7 +116,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         if (entity.Comp.Received.Count == 0)
             return;
 
-        args.Evasion += entity.Comp.Received[0].Multiplier * entity.Comp.EvasionModifier;
+        args.Evasion += TransformOrderLevel(entity.Comp.Received[0].Multiplier) * entity.Comp.EvasionModifier;
     }
 
     private void OnMoveOrderDidEquip(Entity<MoveOrderComponent> ent, ref DidEquipEvent args)
@@ -160,7 +161,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return false;
         }
 
-        var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
+        var level = TransformOrderLevel(Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill)));
         var duration = orders.Comp.Duration * (level + 1);
 
         _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
@@ -184,7 +185,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     /// <summary>
     /// Adds an order component to an entity. If the order already exists then the multiplier and duration is overriden.
     /// </summary>
-    private void AddOrder<T>(Entity<MarineComponent> receiver, int multiplier, TimeSpan duration) where T : IOrderComponent, new()
+    private void AddOrder<T>(Entity<MarineComponent> receiver, float multiplier, TimeSpan duration) where T : IOrderComponent, new()
     {
         var time = _timing.CurTime;
         var comp = EnsureComp<T>(receiver);
@@ -229,5 +230,33 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
         RemoveExpired<MoveOrderComponent>();
         RemoveExpired<FocusOrderComponent>();
         RemoveExpired<HoldOrderComponent>();
+    }
+
+    /// <summary>
+    /// Translates the order level to the actual effective multiplier we use.
+    /// </summary>
+    private static float TransformOrderLevel(FixedPoint2 value)
+    {
+        var v = value.Float();
+        return v switch
+        {
+            1f => 1f,
+            2f => 1.5f,
+            3f => 2f,
+            4f => 3f,
+            _ => v,
+        };
+    }
+
+    private static float TransformOrderLevel(int value)
+    {
+        return value switch
+        {
+            1 => 1f,
+            2 => 1.5f,
+            3 => 2f,
+            4 => 3f,
+            _ => value,
+        };
     }
 }
