@@ -61,10 +61,30 @@ public sealed record GibbedMarineInfo
 }
 
 [Serializable, NetSerializable]
-public sealed record MarineAwardRecommendationInfo
+public sealed class MarineAwardRecommendationInfo : IEquatable<MarineAwardRecommendationInfo>
 {
     public required string RecommendedLastPlayerId { get; init; }
     public required string RecommenderLastPlayerId { get; init; }
     public required string Reason { get; init; }
     public bool IsRejected { get; set; } = false;
+
+    public bool Equals(MarineAwardRecommendationInfo? other)
+    {
+        if (other is null)
+            return false;
+
+        return RecommendedLastPlayerId == other.RecommendedLastPlayerId &&
+               RecommenderLastPlayerId == other.RecommenderLastPlayerId &&
+               Reason == other.Reason;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as MarineAwardRecommendationInfo);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(RecommendedLastPlayerId, RecommenderLastPlayerId, Reason);
+    }
 }

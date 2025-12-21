@@ -192,7 +192,10 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
             while (computers.MoveNext(out var uid, out _))
             {
-                _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+                if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
+                {
+                    _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+                }
             }
         }
 
@@ -349,8 +352,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             
             foreach (var recommendation in toUpdate)
             {
-                computer.AwardRecommendations.Remove(recommendation);
-                computer.AwardRecommendations.Add(recommendation with { IsRejected = true });
+                recommendation.IsRejected = true;
                 updated = true;
             }
             
@@ -363,7 +365,10 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out _))
         {
-            _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+            if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
+            {
+                _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+            }
         }
     }
 
@@ -377,9 +382,6 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         if (_net.IsClient)
             return;
-
-        // Synchronize awarded medals list across all computers before building state
-        SynchronizeAwardedMedals();
 
         var state = BuildMedalsPanelState(ent);
         _ui.SetUiState(ent.Owner, MarineControlComputerUi.MedalsPanel, state);
@@ -565,39 +567,6 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         while (computers.MoveNext(out var uid, out var computer))
         {
             if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
-                Dirty(uid, computer);
-        }
-    }
-
-    /// <summary>
-    /// Synchronizes the list of awarded medal LastPlayerIds across all computers.
-    /// Should be called when opening the medals panel to ensure consistency.
-    /// </summary>
-    public void SynchronizeAwardedMedals()
-    {
-        if (_net.IsClient)
-            return;
-
-        // Collect all awarded LastPlayerIds from all computers
-        var allAwarded = new HashSet<string>();
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out _, out var computer))
-        {
-            allAwarded.UnionWith(computer.AwardedMedalLastPlayerIds);
-        }
-
-        // Update all computers to have the complete list
-        computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var uid, out var computer))
-        {
-            var updated = false;
-            foreach (var lastPlayerId in allAwarded)
-            {
-                if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
-                    updated = true;
-            }
-
-            if (updated)
                 Dirty(uid, computer);
         }
     }

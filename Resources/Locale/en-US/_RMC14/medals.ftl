@@ -31,7 +31,6 @@ rmc-award-recommendation-no-computer = Unable to store the recommendation.
 rmc-award-recommendation-success = { $name } has been successfully recommended for an award { $count }.
 rmc-award-recommendation-out = You have reached the limit of recommendations for an award.
 rmc-award-recommendation-no-authority = You do not have the authority to recommend for an award.
-rmc-award-recommendation-already-awarded = This marine has already been awarded a medal.
 rmc-award-recommendation-rank-unknown = No rank
 
 # Medal Recommendation Display
