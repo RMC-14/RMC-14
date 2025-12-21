@@ -15,11 +15,14 @@ public sealed partial class TacticalMapComputerComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> Blips = new();
 
-    [DataField, AutoNetworkedField]
-    public List<TacticalMapLayer> VisibleLayers = new() { TacticalMapLayer.Marines };
+    [DataField]
+    public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();
 
     [DataField, AutoNetworkedField]
-    public TacticalMapLayer? ActiveLayer;
+    public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastAnnounceAt;

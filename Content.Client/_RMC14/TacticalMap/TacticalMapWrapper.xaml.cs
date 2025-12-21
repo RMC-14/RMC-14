@@ -14,6 +14,7 @@ using Robust.Shared.IoC;
 using Robust.Shared.Localization;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Input;
 using Robust.Shared.Network;
@@ -35,13 +36,14 @@ public sealed partial class TacticalMapWrapper : Control
 
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;
 
     public Action<Vector2i>? OnQueenEyeMove;
     public event Action<NetEntity>? MapSelected;
-    public event Action<TacticalMapLayer?>? LayerSelected;
+    public event Action<ProtoId<TacticalMapLayerPrototype>?>? LayerSelected;
 
     private const float FollowUpdateInterval = 0.5f;
 
@@ -278,7 +280,7 @@ public sealed partial class TacticalMapWrapper : Control
         _suppressMapSelection = false;
     }
 
-    public void UpdateLayerList(IReadOnlyList<TacticalMapLayer> layers, TacticalMapLayer? activeLayer)
+    public void UpdateLayerList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, ProtoId<TacticalMapLayerPrototype>? activeLayer)
     {
         _suppressLayerSelection = true;
         LayerSelectButton.Clear();
@@ -474,22 +476,20 @@ public sealed partial class TacticalMapWrapper : Control
             if (_suppressLayerSelection)
                 return;
 
-            TacticalMapLayer? selected = null;
-            if (LayerSelectButton.GetItemMetadata(args.Id) is TacticalMapLayer layer)
+            ProtoId<TacticalMapLayerPrototype>? selected = null;
+            if (LayerSelectButton.GetItemMetadata(args.Id) is ProtoId<TacticalMapLayerPrototype> layer)
                 selected = layer;
 
             LayerSelected?.Invoke(selected);
         };
     }
 
-    private static string GetLayerName(TacticalMapLayer layer)
+    private string GetLayerName(ProtoId<TacticalMapLayerPrototype> layer)
     {
-        return layer switch
-        {
-            TacticalMapLayer.Marines => Loc.GetString("ui-tactical-map-layer-marines"),
-            TacticalMapLayer.Xenos => Loc.GetString("ui-tactical-map-layer-xenos"),
-            _ => layer.ToString()
-        };
+        if (_prototypes.TryIndex(layer, out var prototype))
+            return Loc.GetString(prototype.Name);
+
+        return layer.Id;
     }
 
     private void SetupColorButton()

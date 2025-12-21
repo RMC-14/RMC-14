@@ -321,7 +321,8 @@
       components:
       - CanBeSupplyDropped
   - type: NewPlayerLabel
-  - type: MarineMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines]
   - type: RMCSetPose
   - type: Evasion
   - type: CanBeFirePatted

@@ -28,7 +28,7 @@ public sealed class SensorTowerSystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<TacticalMapIncludeXenosEvent>(OnTacticalMapIncludeXenos);
+        SubscribeLocalEvent<TacticalMapModifyVisibleLayersEvent>(OnTacticalMapModifyVisibleLayers);
 
         SubscribeLocalEvent<SensorTowerComponent, MapInitEvent>(OnSensorTowerMapInit);
         SubscribeLocalEvent<SensorTowerComponent, InteractUsingEvent>(OnSensorTowerInteractUsing);
@@ -38,14 +38,37 @@ public sealed class SensorTowerSystem : EntitySystem
         SubscribeLocalEvent<SensorTowerComponent, SensorTowerDestroyDoAfterEvent>(OnSensorTowerDestroyDoAfter);
     }
 
-    private void OnTacticalMapIncludeXenos(ref TacticalMapIncludeXenosEvent ev)
+    private void OnTacticalMapModifyVisibleLayers(ref TacticalMapModifyVisibleLayersEvent ev)
     {
         var towers = EntityQueryEnumerator<SensorTowerComponent>();
         while (towers.MoveNext(out var tower))
         {
             if (tower.State == SensorTowerState.On)
             {
-                ev.Include = true;
+                if (tower.RevealLayers.Count == 0)
+                    return;
+
+                var shouldReveal = tower.RevealForLayers.Count == 0;
+                if (!shouldReveal)
+                {
+                    foreach (var layer in tower.RevealForLayers)
+                    {
+                        if (ev.Layers.Contains(layer))
+                        {
+                            shouldReveal = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!shouldReveal)
+                    continue;
+
+                foreach (var reveal in tower.RevealLayers)
+                {
+                    ev.Layers.Add(reveal);
+                }
+
                 return;
             }
         }

@@ -23,11 +23,14 @@ public sealed partial class TacticalMapUserComponent : Component
     [DataField, AutoNetworkedField]
     public bool LiveUpdate;
 
-    [DataField, AutoNetworkedField]
-    public List<TacticalMapLayer> VisibleLayers = new();
+    [DataField]
+    public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();
 
     [DataField, AutoNetworkedField]
-    public TacticalMapLayer? ActiveLayer;
+    public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
 
     [DataField, AutoNetworkedField]
     public Dictionary<int, TacticalMapBlip> Blips = new();

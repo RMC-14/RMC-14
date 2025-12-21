@@ -23,10 +23,9 @@ public sealed class TacticalMapSelectMapMsg(NetEntity map) : BoundUserInterfaceM
 }
 
 [Serializable, NetSerializable]
-public sealed class TacticalMapSelectLayerMsg(int layerId) : BoundUserInterfaceMessage
+public sealed class TacticalMapSelectLayerMsg(string? layerId) : BoundUserInterfaceMessage
 {
-    public const int AllLayersId = -1;
-    public readonly int LayerId = layerId;
+    public readonly string? LayerId = layerId;
 }
 
 [Serializable, NetSerializable]

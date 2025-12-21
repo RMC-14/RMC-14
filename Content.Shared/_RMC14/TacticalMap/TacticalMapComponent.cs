@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -36,7 +37,7 @@ public sealed partial class TacticalMapComponent : Component
    public string DisplayName = string.Empty;
 
    [DataField]
-   public Dictionary<TacticalMapLayer, TacticalMapLayerData> Layers = new();
+   public Dictionary<ProtoId<TacticalMapLayerPrototype>, TacticalMapLayerData> Layers = new();
 
    [DataField]
    public bool MapDirty;

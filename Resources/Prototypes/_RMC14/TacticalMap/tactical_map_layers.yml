@@ -1,0 +1,16 @@
+- type: tacticalMapLayer
+  id: Marines
+  name: ui-tactical-map-layer-marines
+  logName: marine
+  defaultVisible: true
+  sortOrder: 0
+  updateAnnouncement: The UNMC tactical map has been updated.
+  announcementTarget: Marines
+
+- type: tacticalMapLayer
+  id: Xenos
+  name: ui-tactical-map-layer-xenos
+  logName: xenonid
+  sortOrder: 10
+  updateAnnouncement: The Xenonid tactical map has been updated.
+  announcementTarget: Xenos

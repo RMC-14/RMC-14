@@ -7,6 +7,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.TacticalMap;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
 using JetBrains.Annotations;
 
@@ -97,9 +98,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         SendPredictedMessage(new TacticalMapSelectMapMsg(map));
     }
 
-    private void OnLayerSelected(TacticalMapLayer? layer)
+    private void OnLayerSelected(ProtoId<TacticalMapLayerPrototype>? layer)
     {
-        var layerId = layer.HasValue ? (int) layer.Value : TacticalMapSelectLayerMsg.AllLayersId;
+        var layerId = layer?.Id;
         SendPredictedMessage(new TacticalMapSelectLayerMsg(layerId));
     }
 
@@ -134,7 +135,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         if (EntMan.TryGetComponent(Owner, out TacticalMapUserComponent? user))
             Window.Wrapper.UpdateLayerList(user.VisibleLayers, user.ActiveLayer);
         else
-            Window.Wrapper.UpdateLayerList(new List<TacticalMapLayer>(), null);
+            Window.Wrapper.UpdateLayerList(new List<ProtoId<TacticalMapLayerPrototype>>(), null);
     }
 
     private bool TryGetActiveMapInfo(out TacticalMapMapInfo mapInfo)
