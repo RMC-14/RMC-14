@@ -161,8 +161,8 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return false;
         }
 
-        var level = TransformOrderLevel(Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill)));
-        var duration = orders.Comp.Duration * (level + 1);
+        var level = Math.Max(1, _skills.GetSkill(orders.Owner, orders.Comp.Skill));
+        var duration = orders.Comp.Duration * (TransformOrderLevel(level) + 1);
 
         _actions.SetCooldown(orders.Comp.FocusActionEntity, orders.Comp.Cooldown);
         _actions.SetCooldown(orders.Comp.MoveActionEntity, orders.Comp.Cooldown);
