@@ -15,8 +15,6 @@ public sealed class SynthSystem : SharedSynthSystem
     [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
 
-    private const string BrainSlotId = "body_organ_slot_brain";
-
     protected override void MakeSynth(Entity<SynthComponent> ent)
     {
         base.MakeSynth(ent);
@@ -36,21 +34,22 @@ public sealed class SynthSystem : SharedSynthSystem
         repOverrideComp.Age = ent.Comp.Generation;
         Dirty(ent, repOverrideComp);
 
-        if (!HasComp<BodyComponent>(ent.Owner))
+        if (!TryComp<BodyComponent>(ent.Owner, out var body))
             return;
 
-        var organs = _body.GetBodyOrganEntityComps<OrganComponent>(ent.Owner);
+        var organs = _body.GetBodyOrganEntityComps<OrganComponent>((ent.Owner, body));
 
         foreach (var organ in organs)
         {
             QueueDel(organ); // Synths do not metabolize chems or breathe
         }
 
-        var bodyParts = _body.GetBodyChildrenOfType(ent.Owner, BodyPartType.Head);
+        var newBrain = SpawnNextToOrDrop(ent.Comp.NewBrain, ent.Owner);
 
-        foreach (var part in bodyParts)
+        var headSlots = _body.GetBodyChildrenOfType(ent.Owner, BodyPartType.Head, body);
+        foreach (var part in headSlots)
         {
-            SpawnInContainerOrDrop(ent.Comp.NewBrain, part.Id, BrainSlotId);
+            _body.AddOrganToFirstValidSlot(part.Id, newBrain, part.Component);
             break;
         }
     }
