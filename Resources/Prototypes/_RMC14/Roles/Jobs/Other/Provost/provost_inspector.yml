@@ -38,7 +38,7 @@
         RMCSkillFireman: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
-        RMCSkillLeadership: 2
+        RMCSkillLeadership: 3
         RMCSkillMedical: 1
         RMCSkillOverwatch: 1
     - type: JobPrefix

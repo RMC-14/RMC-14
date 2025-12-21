@@ -14,7 +14,7 @@
         RMCSkillEndurance: 2
         RMCSkillFireman: 2
         RMCSkillFirearms: 1
-        RMCSkillLeadership: 1
+        RMCSkillLeadership: 2
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetPriest
     - type: MarineOrders

@@ -29,7 +29,7 @@
         RMCSkillJtac: 1
         RMCSkillMedical: 1
         RMCSkillEndurance: 2
-        RMCSkillLeadership: 1
+        RMCSkillLeadership: 2
         RMCSkillVehicles: 0
     - type: MarineOrders
     - type: SquadLeader
