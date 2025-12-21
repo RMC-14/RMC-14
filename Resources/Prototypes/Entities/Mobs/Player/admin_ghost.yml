@@ -125,9 +125,9 @@
   - type: BypassSkillChecks
   - type: SeeNewPlayers
   - type: TacticalMapUser
-    visibleLayers: [Marines, Xenos]
+    visibleLayers: [Marines, Xenos, FactionSurvivor, FactionWeYa, FactionTSE, FactionRoyalMarines, FactionSPP, FactionHalcyon]
     liveUpdate: true
-  
+
 
 - type: entity
   abstract: true
