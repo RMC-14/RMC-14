@@ -29,7 +29,8 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Appearance
-  - type: GenericVisualizer # TODO RMC14 animations
+  - type: RMCAnimation
+  - type: GenericVisualizer
     visuals:
       enum.OrbitalCannonVisuals.Base:
         base:
@@ -109,6 +110,7 @@
   - type: Sprite
     state: ob_warhead_1
   - type: OrbitalCannonWarhead
+    warheadType: explosive
     explosion: RMCOrbitalCannonExplosionExplosive
 
 - type: entity
@@ -120,6 +122,7 @@
   - type: Sprite
     state: ob_warhead_2
   - type: OrbitalCannonWarhead
+    warheadType: incendiary
     explosion: RMCOrbitalCannonExplosionIncendiary
 
 - type: entity
@@ -131,6 +134,7 @@
   - type: Sprite
     state: ob_warhead_3
   - type: OrbitalCannonWarhead
+    warheadType: cluster
     explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
@@ -387,4 +391,62 @@
   - type: RMCExplosionShockWave
     falloffPower: 50
     sharpness: 25
-    width: 0.7
+
+# Tray
+- type: entity
+  id: RMCOrbitalCannonTray
+  name: loading tray
+  description: "The orbital cannon's loading tray."
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,1.49,0.49"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/orbital_cannon_tray.rsi
+    drawdepth: SmallObjects
+    offset: 0.5, 0
+    layers:
+    - state: cannon_tray
+      map: [ "base" ]
+    - state: cannon_tray_explosive
+      map: [ "warhead" ]
+      visible: false
+    - state: cannon_tray_1
+      map: [ "fuel" ]
+      visible: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Climbable
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OrbitalCannonTrayVisuals.Warhead:
+        warhead:
+          "": { visible: false }
+          explosive: { visible: true, state: cannon_tray_explosive }
+          incendiary: { visible: true, state: cannon_tray_incendiary }
+          cluster: { visible: true, state: cannon_tray_cluster }
+      enum.OrbitalCannonTrayVisuals.Fuel:
+        fuel:
+          0: { visible: false }
+          1: { visible: true, state: cannon_tray_1 }
+          2: { visible: true, state: cannon_tray_2 }
+          3: { visible: true, state: cannon_tray_3 }
+          4: { visible: true, state: cannon_tray_4 }
+          5: { visible: true, state: cannon_tray_5 }
+          6: { visible: true, state: cannon_tray_6 }
+  - type: OrbitalCannonTray
