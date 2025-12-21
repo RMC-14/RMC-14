@@ -110,7 +110,6 @@
   - type: Sprite
     state: ob_warhead_1
   - type: OrbitalCannonWarhead
-    warheadType: explosive
     explosion: RMCOrbitalCannonExplosionExplosive
 
 - type: entity
@@ -122,7 +121,6 @@
   - type: Sprite
     state: ob_warhead_2
   - type: OrbitalCannonWarhead
-    warheadType: incendiary
     explosion: RMCOrbitalCannonExplosionIncendiary
 
 - type: entity
@@ -134,7 +132,6 @@
   - type: Sprite
     state: ob_warhead_3
   - type: OrbitalCannonWarhead
-    warheadType: cluster
     explosion: RMCOrbitalCannonExplosionCluster
 
 - type: entity
@@ -450,3 +447,4 @@
           5: { visible: true, state: cannon_tray_5 }
           6: { visible: true, state: cannon_tray_6 }
   - type: OrbitalCannonTray
+  - type: RMCMesonsNonviewable

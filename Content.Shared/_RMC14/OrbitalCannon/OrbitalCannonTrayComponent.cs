@@ -8,6 +8,9 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 public sealed partial class OrbitalCannonTrayComponent : Component
 {
     [DataField, AutoNetworkedField]
+    public EntityUid? LinkedCannon;
+
+    [DataField, AutoNetworkedField]
     public string? WarheadType;
 
     [DataField, AutoNetworkedField]
@@ -17,14 +20,6 @@ public sealed partial class OrbitalCannonTrayComponent : Component
 [Serializable, NetSerializable]
 public enum OrbitalCannonTrayVisuals
 {
-    Warhead,
-    Fuel,
-}
-
-[Serializable, NetSerializable]
-public enum OrbitalCannonTrayLayers
-{
-    Base,
     Warhead,
     Fuel,
 }

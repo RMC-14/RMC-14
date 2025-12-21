@@ -93,6 +93,12 @@ public sealed partial class OrbitalCannonComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan FireCooldown = TimeSpan.FromSeconds(500);
 
+    [DataField]
+    public EntProtoId? TrayPrototype = "RMCOrbitalCannonTray";
+
+    [DataField]
+    public Vector2i TrayOffset = new(1, 2);
+
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedTray;
 }

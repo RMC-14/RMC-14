@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
@@ -70,8 +71,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
         SubscribeLocalEvent<OrbitalCannonComponent, EntInsertedIntoContainerMessage>(OnOrbitalCannonContainerInserted);
         SubscribeLocalEvent<OrbitalCannonComponent, EntRemovedFromContainerMessage>(OnOrbitalCannonContainerRemoved);
 
-        SubscribeLocalEvent<OrbitalCannonTrayComponent, MapInitEvent>(OnTrayMapInit);
-
         SubscribeLocalEvent<OrbitalCannonWarheadComponent, PowerLoaderInteractEvent>(OnWarheadPowerLoaderInteract);
         SubscribeLocalEvent<OrbitalCannonWarheadComponent, OrbitalBombardmentFireEvent>(OnWarheadOrbitalBombardmentFire);
 
@@ -106,32 +105,24 @@ public sealed class OrbitalCannonSystem : EntitySystem
             ent.Comp.FuelRequirements.Add(new WarheadFuelRequirement(warhead, fuel));
         }
 
+        // Spawn the tray at offset position and link it to this cannon
+        if (_net.IsServer && ent.Comp.TrayPrototype != null)
+        {
+            var cannonTransform = Transform(ent);
+            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(ent.Comp.TrayOffset.X, ent.Comp.TrayOffset.Y));
+            var trayId = Spawn(ent.Comp.TrayPrototype.Value, trayCoords);
+
+            if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
+            {
+                // Bidirectional link
+                ent.Comp.LinkedTray = trayId;
+                tray.LinkedCannon = ent;
+                Dirty(trayId, tray);
+            }
+        }
+
         Dirty(ent);
         _appearance.SetData(ent, OrbitalCannonVisuals.Base, ent.Comp.Status);
-    }
-
-    private void OnTrayMapInit(Entity<OrbitalCannonTrayComponent> ent, ref MapInitEvent args)
-    {
-        // Try to find a nearby orbital cannon to link to
-        var trayTransform = Transform(ent);
-        var query = EntityQueryEnumerator<OrbitalCannonComponent, TransformComponent>();
-        while (query.MoveNext(out var cannonId, out var cannonComp, out var cannonTransform))
-        {
-            if (cannonTransform.MapID != trayTransform.MapID)
-                continue;
-
-            // Check if cannon is within a reasonable distance (5 tiles)
-            if (!trayTransform.Coordinates.TryDistance(EntityManager, _transform, cannonTransform.Coordinates, out var distance) ||
-                distance > 5)
-            {
-                continue;
-            }
-
-            // Link the tray to the cannon
-            cannonComp.LinkedTray = ent;
-            Dirty(cannonId, cannonComp);
-            break;
-        }
     }
 
     private void OnOrbitalCannonContainerInserted(Entity<OrbitalCannonComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -149,28 +140,20 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (cannon.Comp.LinkedTray is not { } trayId || !TryComp(trayId, out OrbitalCannonTrayComponent? tray))
             return;
 
-        if (cannon.Comp.Status != OrbitalCannonStatus.Unloaded)
-        {
-            tray.WarheadType = null;
-            tray.FuelAmount = 0;
-            Dirty(trayId, tray);
-            _appearance.SetData(trayId, OrbitalCannonTrayVisuals.Warhead, string.Empty);
-            _appearance.SetData(trayId, OrbitalCannonTrayVisuals.Fuel, 0);
-            return;
-        }
-
         string? warheadType = null;
-        if (_container.TryGetContainer(cannon, cannon.Comp.WarheadContainer, out var warheadContainer) &&
-            warheadContainer.ContainedEntities.Count > 0 &&
-            TryComp(warheadContainer.ContainedEntities[0], out OrbitalCannonWarheadComponent? warheadComp))
-        {
-            warheadType = warheadComp.WarheadType;
-        }
-
         var fuelAmount = 0;
-        if (_container.TryGetContainer(cannon, cannon.Comp.FuelContainer, out var fuelContainer))
+        if (cannon.Comp.Status == OrbitalCannonStatus.Unloaded)
         {
-            fuelAmount = fuelContainer.ContainedEntities.Count;
+            if (_container.TryGetContainer(cannon, cannon.Comp.WarheadContainer, out var warheadContainer) &&
+                warheadContainer.ContainedEntities.Count > 0)
+            {
+                var warheadEntity = warheadContainer.ContainedEntities[0];
+                if (HasComp<OrbitalCannonWarheadComponent>(warheadEntity))
+                    warheadType = MetaData(warheadEntity).EntityPrototype?.ID;
+            }
+
+            if (_container.TryGetContainer(cannon, cannon.Comp.FuelContainer, out var fuelContainer))
+                fuelAmount = fuelContainer.ContainedEntities.Count;
         }
 
         tray.WarheadType = warheadType;

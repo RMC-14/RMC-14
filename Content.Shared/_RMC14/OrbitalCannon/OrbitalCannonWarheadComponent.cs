@@ -12,9 +12,6 @@ public sealed partial class OrbitalCannonWarheadComponent : Component
     public EntProtoId<OrbitalCannonExplosionComponent> Explosion;
 
     [DataField, AutoNetworkedField]
-    public string? WarheadType;
-
-    [DataField, AutoNetworkedField]
     public bool IsAegis;
 
     [DataField, AutoNetworkedField]
