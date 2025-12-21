@@ -95,7 +95,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (options.Count == 0)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-targets"), user, user, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-targets"), user, PopupType.SmallCaution);
             return;
         }
 
@@ -112,6 +112,11 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     {
         if (_net.IsClient)
             return;
+
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
 
         if (!TryGetEntity(args.Actor, out var actor) || actor == null)
             return;
@@ -141,6 +146,11 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
         if (!TryGetEntity(args.Actor, out var actor) || actor == null)
             return;
 
@@ -156,7 +166,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (string.IsNullOrWhiteSpace(message))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-empty"), ent.Owner, actor.Value, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-empty"), actor.Value, PopupType.SmallCaution);
             return;
         }
 
@@ -170,7 +180,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         {
             if (!TryComp(marine, out CommendationReceiverComponent? receiver) || receiver.LastPlayerId == null)
             {
-                _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-invalid"), ent.Owner, actor.Value, PopupType.SmallCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-invalid"), actor.Value, PopupType.SmallCaution);
                 return;
             }
 
@@ -181,7 +191,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         {
             if (!_control.TryGetGibbedMarineInfo(recommendedLastPlayerId, out var info))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-invalid"), ent.Owner, actor.Value, PopupType.SmallCaution);
+                _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-invalid"), actor.Value, PopupType.SmallCaution);
                 return;
             }
 
@@ -189,14 +199,14 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         }
         else
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-invalid"), ent.Owner, actor.Value, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-invalid"), actor.Value, PopupType.SmallCaution);
             return;
         }
 
         var recommenderLastPlayerId = GetLastPlayerId(actor.Value);
         if (recommenderLastPlayerId == null)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-invalid"), ent.Owner, actor.Value, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-invalid"), actor.Value, PopupType.SmallCaution);
             return;
         }
 
@@ -209,7 +219,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (!_control.TryAddAwardRecommendation(recommendation))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-computer"), ent.Owner, actor.Value, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-computer"), actor.Value, PopupType.SmallCaution);
             return;
         }
 
@@ -218,9 +228,8 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         string count = ent.Comp.MaxRecommendations > 0 ? $"({ent.Comp.RecommendationsGiven}/{ent.Comp.MaxRecommendations})" : string.Empty;
 
-        _popup.PopupEntity(
+        _popup.PopupCursor(
             Loc.GetString("rmc-award-recommendation-success", ("name", recommendedName), ("count", count)),
-            ent.Owner,
             actor.Value,
             PopupType.Medium
         );
@@ -233,19 +242,19 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (!TryComp<RMCAwardRecommendationComponent>(entity, out var component))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-authority"), entity, entity, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
             return false;
         }
 
         if (!component.CanRecommend)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-no-authority"), entity, entity, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
             return false;
         }
 
         if (component.RecommendationsGiven >= component.MaxRecommendations)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-award-recommendation-out"), entity, entity, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-out"), entity, PopupType.SmallCaution);
             return false;
         }
 

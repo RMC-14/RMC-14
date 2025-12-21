@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Client.Resources;
@@ -54,6 +55,13 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         UpdateRecommendations(medalsState);
     }
 
+    private static StyleBoxFlat CreateStyleBox(Color backgroundColor) => new()
+    {
+        BackgroundColor = backgroundColor,
+        BorderThickness = new Robust.Shared.Maths.Thickness(0),
+        Padding = new Robust.Shared.Maths.Thickness(2)
+    };
+
     private BoxContainer CreateRecommendationContainer(MarineRecommendationInfo recommendation)
     {
         var recContainer = new BoxContainer
@@ -64,11 +72,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         // Recommender: Rank and Name
         var recommenderLabelText = Loc.GetString("rmc-medal-panel-recommender-label");
-        var recommenderParts = new List<string>();
-        if (!string.IsNullOrWhiteSpace(recommendation.RecommenderRank))
-            recommenderParts.Add(recommendation.RecommenderRank);
-        recommenderParts.Add(recommendation.RecommenderName);
-        var recommenderText = $"{recommenderLabelText} {string.Join(" ", recommenderParts)}";
+        var recommenderText = $"{recommenderLabelText} {string.Join(" ", recommendation.RecommenderRank, recommendation.RecommenderName)}";
         var recommenderLabel = new RichTextLabel
         {
             HorizontalExpand = true
@@ -78,11 +82,8 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         // Job: Squad (if exists) and Job
         var jobLabelText = Loc.GetString("rmc-medal-panel-job-label");
-        var jobParts = new List<string>();
-        if (!string.IsNullOrWhiteSpace(recommendation.RecommenderSquad))
-            jobParts.Add($"({recommendation.RecommenderSquad})");
-        jobParts.Add(recommendation.RecommenderJob);
-        var jobText = $"{jobLabelText} {string.Join(" ", jobParts)}";
+        var squadPart = string.IsNullOrEmpty(recommendation.RecommenderSquad) ? null : $"({recommendation.RecommenderSquad})";
+        var jobText = $"{jobLabelText} {string.Join(" ", squadPart, recommendation.RecommenderJob)}";
         var jobLabel = new RichTextLabel
         {
             HorizontalExpand = true
@@ -120,13 +121,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         var hoverColor = new Color(47, 47, 47); // Lighter than container background
         var pressedColor = new Color(23, 55, 23); // Green like standard button pressed state
 
-        var normalStyle = new StyleBoxFlat
-        {
-            BackgroundColor = normalColor,
-            BorderThickness = new Robust.Shared.Maths.Thickness(0),
-            Padding = new Robust.Shared.Maths.Thickness(2)
-        };
-
+        var normalStyle = CreateStyleBox(normalColor);
         copyButton.StyleBoxOverride = normalStyle;
 
         // Track hover state
@@ -137,14 +132,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         {
             isHovered = true;
             if (!copyButton.Pressed)
-            {
-                copyButton.StyleBoxOverride = new StyleBoxFlat
-                {
-                    BackgroundColor = hoverColor,
-                    BorderThickness = new Robust.Shared.Maths.Thickness(0),
-                    Padding = new Robust.Shared.Maths.Thickness(2)
-                };
-            }
+                copyButton.StyleBoxOverride = CreateStyleBox(hoverColor);
         };
 
         // Handle hover exit - restore normal color
@@ -152,33 +140,19 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         {
             isHovered = false;
             if (!copyButton.Pressed)
-            {
                 copyButton.StyleBoxOverride = normalStyle;
-            }
         };
 
         // Handle button press - change to green color while button is held
         copyButton.OnButtonDown += _ =>
         {
-            copyButton.StyleBoxOverride = new StyleBoxFlat
-            {
-                BackgroundColor = pressedColor,
-                BorderThickness = new Robust.Shared.Maths.Thickness(0),
-                Padding = new Robust.Shared.Maths.Thickness(2)
-            };
+            copyButton.StyleBoxOverride = CreateStyleBox(pressedColor);
         };
 
         // Handle button release - restore color based on hover state
         copyButton.OnButtonUp += _ =>
         {
-            copyButton.StyleBoxOverride = isHovered
-                ? new StyleBoxFlat
-                {
-                    BackgroundColor = hoverColor,
-                    BorderThickness = new Robust.Shared.Maths.Thickness(0),
-                    Padding = new Robust.Shared.Maths.Thickness(2)
-                }
-                : normalStyle;
+            copyButton.StyleBoxOverride = isHovered ? CreateStyleBox(hoverColor) : normalStyle;
         };
 
         var copyIcon = new TextureRect
@@ -250,16 +224,8 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             };
 
             // Header: Rank, Squad (if exists), Job, Name
-            var headerParts = new List<string>();
-            if (!string.IsNullOrWhiteSpace(group.Rank))
-                headerParts.Add(group.Rank);
-            if (!string.IsNullOrWhiteSpace(group.Squad))
-                headerParts.Add($"({group.Squad})");
-            if (!string.IsNullOrWhiteSpace(group.Job))
-                headerParts.Add(group.Job);
-            headerParts.Add(group.Name);
-
-            var headerText = string.Join(" ", headerParts);
+            var squadPart = string.IsNullOrEmpty(group.Squad) ? null : $"({group.Squad})";
+            var headerText = string.Join(" ", group.Rank, squadPart, group.Job, group.Name);
             var headerLabel = new RichTextLabel
             {
                 HorizontalExpand = true
@@ -288,14 +254,14 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             {
                 var recommendation = group.Recommendations[i];
                 var recContainer = CreateRecommendationContainer(recommendation);
-                
+
                 // Hide 3rd and later recommendations by default
                 if (i >= 2)
                 {
                     recContainer.Visible = false;
                     hiddenRecommendationContainers.Add(recContainer);
                 }
-                
+
                 recommendationsContainer.AddChild(recContainer);
             }
 
@@ -345,7 +311,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
                 Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0),
                 SeparationOverride = 8
             };
-            
+
             var approveButton = new Button
             {
                 Text = Loc.GetString("rmc-medal-panel-approve-recommendation")
@@ -354,7 +320,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             approveButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
             approveButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerApproveRecommendationMsg { LastPlayerId = group.LastPlayerId });
             buttonsContainer.AddChild(approveButton);
-            
+
             var rejectButton = new Button
             {
                 Text = Loc.GetString("rmc-medal-panel-reject-recommendation")
@@ -367,7 +333,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
             groupPanel.AddChild(groupContainer);
             _window.RecommendationsList.AddChild(groupPanel);
-            
+
             // Store reference for quick removal
             _recommendationGroups[group.LastPlayerId] = groupPanel;
         }
