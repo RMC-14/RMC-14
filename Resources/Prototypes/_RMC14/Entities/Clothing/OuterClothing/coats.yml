@@ -385,6 +385,29 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/aso/white_alt.rsi
 
+# Pilot Officer
+- type: entity
+  parent: RMCBaseJacketButtonable
+  id: RMCCoatPilot
+  name: M70B1 light flak jacket
+  description: A light flak jacket used by dropship pilots to protect themselves while flying in the cockpit. This specific flak jacket has been designed for style and comfort over protection, and it shows. Don't get hit by any stray bullets!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: jacket-icon
+      map: [ "foldedLayer" ]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/pilot.rsi
+  - type: CMArmor
+    melee: 10
+  - type: FoldableClothing
+    foldedEquippedPrefix: jacket
+    foldedHeldPrefix: jacket
+
 # Commanding Officer
 - type: entity
   parent: RMCBaseJacket
@@ -503,6 +526,17 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/formal_white.rsi
   - type: CMArmor
     melee: 10
+
+- type: entity
+  parent: CMCoatCO
+  id: RMCCoatCOPatchless
+  name: commanding officer's jacket
+  description: A patchless version of the officer jacket, its presence is still domineering.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket_patchless.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket_patchless.rsi
 
 - type: entity
   parent: CMCoatCO
