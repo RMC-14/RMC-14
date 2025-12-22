@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 public sealed partial class OrbitalCannonComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string CannonChamberContainer = "rmc_orbital_cannon_tray";
+    public string CannonChamberContainer = "rmc_orbital_cannon_chamber";
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? LoadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loading");
