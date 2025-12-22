@@ -786,6 +786,7 @@ cm-chatsan-word-batonged = batonged
 cm-chatsan-word-replacement-batonged = daze spitted
 
 cm-chatsan-word-xover = xover
+cm-chatsan-word-xenoover = xover
 cm-chatsan-word-replacement-xover = over
 
 cm-chatsan-word-m13 = m13
@@ -865,6 +866,7 @@ cm-chatsan-word-xaxes = xaxes
 cm-chatsan-replacement-taxes = building
 
 cm-chatsan-word-taxing = taxing
+cm-chatsan-word-taxxing = taxxing
 cm-chatsan-word-xaxing = xaxing
 cm-chatsan-replacement-taxing = building
 

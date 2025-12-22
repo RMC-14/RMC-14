@@ -292,6 +292,7 @@
     cm-chatsan-word-batoned: cm-chatsan-word-replacement-batoned
     cm-chatsan-word-batonged: cm-chatsan-word-replacement-batonged
     cm-chatsan-word-xover: cm-chatsan-word-replacement-xover
+    cm-chatsan-word-xenover: cm-chatsan-word-replacement-xover
     cm-chatsan-word-m13: cm-chatsan-word-replacement-m13
     cm-chatsan-word-m63: cm-chatsan-word-replacement-m63
     cm-chatsan-word-p90: cm-chatsan-word-replacement-p90
@@ -317,6 +318,7 @@
     cm-chatsan-word-taxxx: cm-chatsan-replacement-tax
     cm-chatsan-word-taxes: cm-chatsan-replacement-taxes
     cm-chatsan-word-taxing: cm-chatsan-replacement-taxing
+    cm-chatsan-word-taxxing: cm-chatsan-replacement-taxing
     cm-chatsan-word-taxed: cm-chatsan-replacement-taxed
     cm-chatsan-word-taxer: cm-chatsan-replacement-taxer
     cm-chatsan-word-xax: cm-chatsan-replacement-tax
