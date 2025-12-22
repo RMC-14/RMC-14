@@ -90,7 +90,7 @@
         amount: 0
       - id: RMCPackFlareCAS
         amount: 0
-      - id: RMCFlashlight # Combat Flashlight
+      - id: RMCFlashlight
         amount: 1
 #      - id: RMC Folding Barricades (Use the 3-stack prototype id)
 #        name: MB-6 Folding Barricades (x3)
@@ -159,4 +159,4 @@
 #      - name: Magazine Box (M2C x 8)
 #        box: CMMagazineSMGM63
 # TODO: Box of M89 Signal Flare Packs (CAS Flare Box)
-# TODO: Box of Combat Flashlights
+# TODO: Box of Flashlights
