@@ -895,5 +895,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             return;
 
         vendor.GlobalSharedVends[ent.Comp.Entry] = current - 1;
+        Dirty(ent.Comp.Vendor, vendor);
     }
 }

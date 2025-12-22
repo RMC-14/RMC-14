@@ -435,8 +435,8 @@ public sealed class CMGunSystem : EntitySystem
         var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
         RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
 
-        if (shooterFactionEvent.Faction != null &&
-            targetFactionEvent.Faction != null &&
+        if (shooterFactionEvent.Faction != null && 
+            targetFactionEvent.Faction != null && 
             shooterFactionEvent.Faction == targetFactionEvent.Faction &&
             HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
         {

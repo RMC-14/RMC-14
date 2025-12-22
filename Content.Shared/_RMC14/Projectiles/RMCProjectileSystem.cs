@@ -128,13 +128,45 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
             return;
 
-        if (!HasComp<ProjectileComponent>(projectile.Owner))
+        if (!TryComp(projectile.Owner, out ProjectileComponent? projectileComponent))
             return;
 
-        if (!HasComp<EvasionComponent>(args.OtherEntity))
+        if (!TryComp(args.OtherEntity, out EvasionComponent? evasionComponent))
             return;
 
-        var accuracy = GetEffectiveAccuracy((projectile.Owner, projectile.Comp), args.OtherEntity);
+        var accuracy = projectile.Comp.Accuracy;
+        var targetCoords = _transform.GetMoverCoordinates(args.OtherEntity);
+        var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
+
+        foreach (var threshold in projectile.Comp.Thresholds)
+        {
+            var pastRange = distance - threshold.Range;
+
+            if (threshold.Buildup)
+            {
+                if (pastRange >= 0)
+                    continue;
+
+                accuracy += threshold.Falloff * pastRange;
+                continue;
+            }
+
+            if (pastRange <= 0)
+                continue;
+
+            accuracy -= threshold.Falloff * pastRange;
+        }
+
+        if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
+            accuracy += (int) AccuracyModifiers.TargetOccluded;
+
+        if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, args.OtherEntity))
+            accuracy -= evasionComponent.ModifiedEvasionFriendly;
+
+        accuracy -= evasionComponent.ModifiedEvasion;
+
+        accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
+
         var random = new Xoshiro128P(projectile.Comp.GunSeed, (long) projectile.Comp.Tick << 32 | GetNetEntity(args.OtherEntity).Id).NextFloat(0f, 100f);
 
         if (accuracy >= random)
@@ -216,55 +248,6 @@ public sealed class RMCProjectileSystem : EntitySystem
             _physics.SetLinearVelocity(ent, Vector2.Zero);
             RemCompDeferred<ProjectileMaxRangeComponent>(ent);
         }
-    }
-
-    public FixedPoint2 GetEffectiveAccuracy(Entity<RMCProjectileAccuracyComponent?> projectile, EntityUid target)
-    {
-        if (!Resolve(projectile.Owner, ref projectile.Comp))
-            return 100f;
-
-        if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
-            return 100f;
-
-        if (!TryComp(projectile.Owner, out ProjectileComponent? projectileComponent))
-            return 100f;
-
-        var accuracy = projectile.Comp.Accuracy;
-        var targetCoords = _transform.GetMoverCoordinates(target);
-        var distance = (targetCoords.Position - projectile.Comp.ShotFrom.Value.Position).Length();
-
-        foreach (var threshold in projectile.Comp.Thresholds)
-        {
-            var pastRange = distance - threshold.Range;
-
-            if (threshold.Buildup)
-            {
-                if (pastRange >= 0)
-                    continue;
-
-                accuracy += threshold.Falloff * pastRange;
-                continue;
-            }
-
-            if (pastRange <= 0)
-                continue;
-
-            accuracy -= threshold.Falloff * pastRange;
-        }
-
-        if (!_examine.InRangeUnOccluded(_transform.ToMapCoordinates(projectile.Comp.ShotFrom.Value), _transform.ToMapCoordinates(targetCoords), distance, null))
-            accuracy += (int) AccuracyModifiers.TargetOccluded;
-
-        if (TryComp(target, out EvasionComponent? evasionComponent))
-        {
-            if (!projectile.Comp.IgnoreFriendlyEvasion && IsProjectileTargetFriendly(projectile.Owner, target))
-                accuracy -= evasionComponent.ModifiedEvasionFriendly;
-
-            accuracy -= evasionComponent.ModifiedEvasion;
-        }
-
-        accuracy = accuracy > projectile.Comp.MinAccuracy ? accuracy : projectile.Comp.MinAccuracy;
-        return accuracy;
     }
 
     public override void Update(float frameTime)

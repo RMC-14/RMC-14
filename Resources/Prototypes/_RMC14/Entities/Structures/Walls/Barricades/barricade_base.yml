@@ -27,7 +27,7 @@
         layer:
         - TableLayer
         - BarricadeImpassable
-        - BulletImpassable
+        # - BulletImpassable TODO
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -86,8 +86,8 @@
         Heat: 3.75
   - type: ExaminableDamage
     messages: RMCBarricadeMessages
-  - type: RMCGenericExamine
-    messageId: rmc-barricade-examine-tip
-    whitelist:
-      components:
-      - Marine
+  # - type: RMCGenericExamine TODO
+    # messageId: rmc-barricade-examine-tip
+    # whitelist:
+      # components:
+      # - Marine
