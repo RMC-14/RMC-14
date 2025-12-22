@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 public sealed partial class OrbitalCannonComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string TrayContainer = "rmc_orbital_cannon_tray";
+    public string CannonChamberContainer = "rmc_orbital_cannon_tray";
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? LoadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loading");
@@ -91,10 +91,16 @@ public sealed partial class OrbitalCannonComponent : Component
     public EntProtoId? TrayPrototype = "RMCOrbitalCannonTray";
 
     [DataField]
-    public Vector2i TrayOffset = new(1, 2);
+    public Vector2i TraySpawnOffset = new(1, 2);
 
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedTray;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan? UnloadingTrayAt;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan UnloadingTrayDelay = TimeSpan.FromSeconds(1);
 }
 
 [DataRecord]

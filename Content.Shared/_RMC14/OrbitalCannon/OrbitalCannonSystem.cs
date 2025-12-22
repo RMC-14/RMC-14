@@ -108,9 +108,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer && ent.Comp.TrayPrototype != null)
         {
             var cannonTransform = Transform(ent);
-            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(ent.Comp.TrayOffset.X, ent.Comp.TrayOffset.Y));
+            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(ent.Comp.TraySpawnOffset.X, ent.Comp.TraySpawnOffset.Y));
             var trayId = Spawn(ent.Comp.TrayPrototype.Value, trayCoords);
-
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
             {
                 // Bidirectional link
@@ -193,7 +192,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
             return;
 
         args.Handled = true;
-
         if (tray.LinkedCannon is { } cannonId &&
             TryComp(cannonId, out OrbitalCannonComponent? cannon) &&
             cannon.Status != OrbitalCannonStatus.Unloaded)
@@ -395,8 +393,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (time < cannon.Comp.LastToggledAt + cannon.Comp.ToggleCooldown)
             return;
 
-        var trayContainer = _container.EnsureContainer<ContainerSlot>(cannon, cannon.Comp.TrayContainer);
-        if (!_container.Insert(trayId, trayContainer))
+        var cannonChamber = _container.EnsureContainer<ContainerSlot>(cannon, cannon.Comp.CannonChamberContainer);
+        if (!_container.Insert(trayId, cannonChamber))
             return;
 
         cannon.Comp.LastToggledAt = time;
@@ -425,21 +423,15 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (time < cannon.Comp.LastToggledAt + cannon.Comp.ToggleCooldown)
             return;
 
-        if (!_container.TryGetContainer(cannon, cannon.Comp.TrayContainer, out var trayContainer) ||
-            trayContainer.ContainedEntities.Count == 0)
+        if (!_container.TryGetContainer(cannon, cannon.Comp.CannonChamberContainer, out var cannonChamber) ||
+            cannonChamber.ContainedEntities.Count == 0)
         {
             return;
         }
 
-        var trayId = trayContainer.ContainedEntities[0];
-        var cannonTransform = Transform(cannon);
-        var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(cannon.Comp.TrayOffset.X, cannon.Comp.TrayOffset.Y));
-
-        _container.Remove(trayId, trayContainer);
-        _transform.SetCoordinates(trayId, trayCoords);
-
         cannon.Comp.LastToggledAt = time;
         cannon.Comp.Status = OrbitalCannonStatus.Unloaded;
+        cannon.Comp.UnloadingTrayAt = time;
         Dirty(cannon);
 
         ent.Comp.Status = cannon.Comp.Status;
@@ -699,6 +691,35 @@ public sealed class OrbitalCannonSystem : EntitySystem
             return;
 
         var time = _timing.CurTime;
+        var cannonQuery = EntityQueryEnumerator<OrbitalCannonComponent>();
+        while (cannonQuery.MoveNext(out var uid, out var cannon))
+        {
+            if (cannon.UnloadingTrayAt == null)
+                continue;
+
+            if (time < cannon.UnloadingTrayAt + cannon.UnloadingTrayDelay)
+                continue;
+
+            cannon.UnloadingTrayAt = null;
+            Dirty(uid, cannon);
+
+            if (!_container.TryGetContainer(uid, cannon.CannonChamberContainer, out var cannonChamber) ||
+                cannonChamber.ContainedEntities.Count == 0)
+            {
+                continue;
+            }
+
+            var trayId = cannonChamber.ContainedEntities[0];
+            var cannonTransform = Transform(uid);
+            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(cannon.TraySpawnOffset.X, cannon.TraySpawnOffset.Y));
+
+            _container.Remove(trayId, cannonChamber);
+            _transform.SetCoordinates(trayId, trayCoords);
+
+            if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
+                UpdateTrayVisuals((trayId, tray));
+        }
+
         var firingQuery = EntityQueryEnumerator<OrbitalCannonFiringComponent, OrbitalCannonComponent>();
         while (firingQuery.MoveNext(out var uid, out var firing, out var cannon))
         {
@@ -803,16 +824,10 @@ public sealed class OrbitalCannonSystem : EntitySystem
                     RaiseLocalEvent(warhead, ref ev);
                 }
 
-                if (_container.TryGetContainer(uid, cannon.TrayContainer, out var trayContainer) &&
-                    trayContainer.ContainedEntities.Count > 0)
+                if (_container.TryGetContainer(uid, cannon.CannonChamberContainer, out var cannonChamber) &&
+                    cannonChamber.ContainedEntities.Count > 0)
                 {
-                    var trayId = trayContainer.ContainedEntities[0];
-                    var cannonTransform = Transform(uid);
-                    var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(cannon.TrayOffset.X, cannon.TrayOffset.Y));
-
-                    _container.Remove(trayId, trayContainer);
-                    _transform.SetCoordinates(trayId, trayCoords);
-
+                    var trayId = cannonChamber.ContainedEntities[0];
                     if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
                     {
                         if (_container.TryGetContainer(trayId, tray.FuelContainer, out var fuelContainer))
@@ -822,6 +837,11 @@ public sealed class OrbitalCannonSystem : EntitySystem
                             _container.CleanContainer(warheadContainer);
                     }
                 }
+
+                cannon.UnloadingTrayAt = time;
+                Dirty(uid, cannon);
+
+                _animation.TryFlick(uid, cannon.UnloadingAnimation, cannon.UnloadedState, "base");
 
                 CannonStatusChanged(cannonEnt);
                 RemCompDeferred<OrbitalCannonFiringComponent>(uid);
