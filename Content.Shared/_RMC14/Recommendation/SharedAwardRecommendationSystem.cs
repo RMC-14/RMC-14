@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles.Jobs;
@@ -14,7 +16,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 
-namespace Content.Shared._RMC14.Commendations;
+namespace Content.Shared._RMC14.Recommendation;
 
 public sealed class SharedAwardRecommendationSystem : EntitySystem
 {
@@ -26,9 +28,11 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly SharedMarineControlComputerSystem _control = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly SharedGameTicker _gameTicker = default!;
 
     public int CharacterLimit { get; private set; }
     public int MinCharacterLimit { get; private set; }
+    public TimeSpan RecommendationInitialDelay { get; private set; }
 
     public override void Initialize()
     {
@@ -40,6 +44,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCRecommendationMaxLength, v => CharacterLimit = v, true);
         Subs.CVar(_config, RMCCVars.RMCCommendationMinLength, v => MinCharacterLimit = v, true);
+        Subs.CVar(_config, RMCCVars.RMCDropshipInitialDelayMinutes, v => RecommendationInitialDelay = TimeSpan.FromMinutes(v), true);
     }
 
     private void OnGetHeadsetAlternativeVerb(Entity<RMCHeadsetComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -204,7 +209,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
             recommendedName = Name(marine.Value);
             recommendedLastPlayerId ??= receiver.LastPlayerId;
-            
+
             // Get recommended info at creation time to preserve it even if player leaves body
             recommendedRank = _rank.GetRankString(marine.Value);
             recommendedSquad = _squads.GetSquadName(marine.Value);
@@ -283,19 +288,32 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
         if (!TryComp<RMCAwardRecommendationComponent>(entity, out var component))
         {
-            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
+            if (!_net.IsClient)
+                _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
             return false;
         }
 
         if (!component.CanRecommend)
         {
-            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
+            if (!_net.IsClient)
+                _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-authority"), entity, PopupType.SmallCaution);
+            return false;
+        }
+
+        var roundDuration = _gameTicker.RoundDuration();
+        if (roundDuration < RecommendationInitialDelay)
+        {
+            var minutesLeft = Math.Max(1, (int)(RecommendationInitialDelay - roundDuration).TotalMinutes);
+            var msg = Loc.GetString("rmc-award-recommendation-too-early", ("minutes", minutesLeft));
+            if (!_net.IsClient)
+                _popup.PopupCursor(msg, entity, PopupType.SmallCaution);
             return false;
         }
 
         if ((component.RecommendedLastPlayerIds?.Count ?? 0) >= component.MaxRecommendations)
         {
-            _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-out"), entity, PopupType.SmallCaution);
+            if (!_net.IsClient)
+                _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-out"), entity, PopupType.SmallCaution);
             return false;
         }
 

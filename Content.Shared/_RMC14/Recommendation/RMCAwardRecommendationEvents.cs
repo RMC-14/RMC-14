@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Dialog;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared._RMC14.Commendations;
+namespace Content.Shared._RMC14.Recommendation;
 
 [ByRefEvent]
 [Serializable, NetSerializable]

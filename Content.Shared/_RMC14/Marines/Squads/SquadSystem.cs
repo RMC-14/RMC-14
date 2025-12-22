@@ -3,6 +3,7 @@ using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Recommendation;
 using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;

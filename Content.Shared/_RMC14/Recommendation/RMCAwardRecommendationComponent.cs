@@ -1,6 +1,7 @@
+using Content.Shared._RMC14.Commendations;
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Commendations;
+namespace Content.Shared._RMC14.Recommendation;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedAwardRecommendationSystem), typeof(SharedCommendationSystem))]
