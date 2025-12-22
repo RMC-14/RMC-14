@@ -75,6 +75,9 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
 
     private void OpenRecommendationMenu(EntityUid user)
     {
+        if (!TryComp<RMCAwardRecommendationComponent>(user, out var comp))
+            return;
+
         var options = new List<DialogOption>();
         var receivers = EntityQueryEnumerator<CommendationReceiverComponent>();
         while (receivers.MoveNext(out var uid, out var receiver))
@@ -85,6 +88,10 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             if (receiver.LastPlayerId == null)
                 continue;
 
+            // Skip players that have already been recommended
+            if (comp.RecommendedLastPlayerIds != null && comp.RecommendedLastPlayerIds.Contains(receiver.LastPlayerId))
+                continue;
+
             options.Add(new DialogOption(Name(uid), new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), GetNetEntity(uid), receiver.LastPlayerId)));
         }
 
@@ -92,6 +99,10 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         foreach (var info in allGibbed)
         {
             if (info.LastPlayerId == null)
+                continue;
+
+            // Skip players that have already been recommended
+            if (comp.RecommendedLastPlayerIds != null && comp.RecommendedLastPlayerIds.Contains(info.LastPlayerId))
                 continue;
 
             options.Add(new DialogOption(info.Name, new RMCAwardRecommendationSelectMarineEvent(GetNetEntity(user), null, info.LastPlayerId)));
@@ -249,10 +260,14 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return;
         }
 
-        ent.Comp.RecommendationsGiven++;
+        if (recommendedLastPlayerId != null)
+        {
+            ent.Comp.RecommendedLastPlayerIds ??= new List<string>();
+            ent.Comp.RecommendedLastPlayerIds.Add(recommendedLastPlayerId);
+        }
         Dirty(ent);
 
-        string count = ent.Comp.MaxRecommendations > 0 ? $"({ent.Comp.RecommendationsGiven}/{ent.Comp.MaxRecommendations})" : string.Empty;
+        string count = ent.Comp.MaxRecommendations > 0 ? $"({(ent.Comp.RecommendedLastPlayerIds?.Count ?? 0)}/{ent.Comp.MaxRecommendations})" : string.Empty;
 
         _popup.PopupCursor(
             Loc.GetString("rmc-award-recommendation-success", ("name", recommendedName), ("count", count)),
@@ -278,7 +293,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             return false;
         }
 
-        if (component.RecommendationsGiven >= component.MaxRecommendations)
+        if ((component.RecommendedLastPlayerIds?.Count ?? 0) >= component.MaxRecommendations)
         {
             _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-out"), entity, PopupType.SmallCaution);
             return false;

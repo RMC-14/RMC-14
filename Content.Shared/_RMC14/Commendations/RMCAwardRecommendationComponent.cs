@@ -13,10 +13,10 @@ public sealed partial class RMCAwardRecommendationComponent : Component
     public int MaxRecommendations = 2;
 
     /// <summary>
-    /// How many recommendations this entity has given out.
+    /// List of LastPlayerIds that this entity has recommended.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int RecommendationsGiven;
+    public List<string> RecommendedLastPlayerIds = new();
 
     /// <summary>
     /// Whether this entity can recommend awards.
