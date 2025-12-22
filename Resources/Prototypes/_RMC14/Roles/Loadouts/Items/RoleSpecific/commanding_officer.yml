@@ -142,12 +142,12 @@
   id: COCareerPathAviationRMC
   dummyEntity: RMCLoadoutDummyCareerPathAviation
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:TotalJobsTimeRequirement
-      group: CMJobsDropship
-      time: 72000 # 20 hours
+  # effects:
+  # - !type:JobRequirementLoadoutEffect
+  #   requirement:
+  #     !type:TotalJobsTimeRequirement
+  #     group: CMJobsDropship
+  #     time: 72000 # 20 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: RMCHandsBlack
@@ -156,23 +156,23 @@
     jumpsuit: RMCJumpsuitCOTurtleneck
     eyes: RMCGlassesAviators
 
-- type: loadout
-  id: COCareerPathTankerRMC
-  dummyEntity: RMCLoadoutDummyCareerPathTanker
-  cost: 0
-  # effects:
-  # - !type:JobRequirementLoadoutEffect
-  #   requirement:
-  #     !type:TotalJobsTimeRequirement
-  #     group: CMTanker
-  #     time: 72000 # 20 hours
-  equipment:
-    head: RMCHeadCapQuartermaster
-    gloves: RMCHandsBlack
-    shoes: CMBootsBlackFilled
-    outerClothing: RMCJacketWindbreakerBrown
-    jumpsuit: CMJumpsuitOperations
-    mask: RMCMaskScarfTan
+# - type: loadout                          Y'know, wouldn't be right if the Tanker path was available before the role itself comes around
+#   id: COCareerPathTankerRMC
+#   dummyEntity: RMCLoadoutDummyCareerPathTanker
+#   cost: 0
+#   # effects:
+#   # - !type:JobRequirementLoadoutEffect
+#   #   requirement:
+#   #     !type:TotalJobsTimeRequirement
+#   #     group: CMTanker
+#   #     time: 72000 # 20 hours
+#   equipment:
+#     head: RMCHeadCapQuartermaster
+#     gloves: RMCHandsBlack
+#     shoes: CMBootsBlackFilled
+#     outerClothing: RMCJacketWindbreakerBrown
+#     jumpsuit: CMJumpsuitOperations
+#     mask: RMCMaskScarfTan
 
 - type: loadout
   id: COCareerPathEngineeringRMC
@@ -195,12 +195,12 @@
   id: COCareerPathLogisticsRMC
   dummyEntity: RMCLoadoutDummyCareerPathLogistics
   cost: 0
-  # effects:
-  # - !type:JobRequirementLoadoutEffect
-  #   requirement:
-  #     !type:DepartmentTimeRequirement
-  #     department: CMRequisitions
-  #     time: 72000 # 20 hours
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: CMRequisitions
+      time: 72000 # 20 hours
   equipment:
     head: CMHeadBeretTan
     gloves: CMHandsInsulated

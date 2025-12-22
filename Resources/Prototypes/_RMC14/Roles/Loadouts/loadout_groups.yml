@@ -565,7 +565,7 @@
   - COCareerPathIntelRMC
   - COCareerPathMedicalRMC
   - COCareerPathAviationRMC
-  - COCareerPathTankerRMC
+  # - COCareerPathTankerRMC
   - COCareerPathEngineeringRMC
   - COCareerPathLogisticsRMC
 
