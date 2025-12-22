@@ -400,6 +400,17 @@ public sealed class SquadSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Gets the squad name for a given marine entity. Returns null if the marine is not in a squad.
+    /// </summary>
+    public string? GetSquadName(EntityUid marine)
+    {
+        if (TryGetMemberSquad((marine, null), out var squad))
+            return Name(squad);
+
+        return null;
+    }
+
     public bool HasSquad(EntProtoId id)
     {
         return TryGetSquad(id, out _);

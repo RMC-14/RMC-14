@@ -196,7 +196,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             
             // Get recommended info at creation time to preserve it even if player leaves body
             recommendedRank = _rank.GetRankString(marine.Value);
-            recommendedSquad = GetSquadName(marine.Value);
+            recommendedSquad = _squads.GetSquadName(marine.Value);
             recommendedJob = GetJobName(marine.Value);
         }
         else if (recommendedLastPlayerId != null)
@@ -302,7 +302,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     {
         var name = Name(actor);
         var rank = _rank.GetRankString(actor);
-        var squad = GetSquadName(actor);
+        var squad = _squads.GetSquadName(actor);
         var job = GetJobName(actor);
 
         return (name, rank, squad, job);
@@ -317,14 +317,6 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
         }
 
         return Loc.GetString("generic-unknown-title");
-    }
-
-    private string? GetSquadName(EntityUid marine)
-    {
-        if (_squads.TryGetMemberSquad((marine, null), out var squad))
-            return Name(squad);
-
-        return null;
     }
 
     public void SetCanRecommend(EntityUid uid, bool canRecommend)

@@ -54,32 +54,12 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
 
             if (!groups.TryGetValue(recommendedId, out var group))
             {
-                // Try to get current squad if marine is alive and update all recommendations for this marine
-                var recommendedCurrentSquad = TryGetCurrentSquad(recommendedId);
-                if (recommendedCurrentSquad != null && recommendedCurrentSquad != recommendation.RecommendedSquad)
-                {
-                    // Update all recommendations for this recommended marine in all computers
-                    UpdateRecommendationSquad(recommendedId, recommendedCurrentSquad, true);
-                    // Update current recommendation's squad to reflect the change
-                    recommendation.RecommendedSquad = recommendedCurrentSquad;
-                }
-
                 group = new MarineRecommendationGroup
                 {
                     LastPlayerId = recommendedId,
                     Recommendations = new List<MarineAwardRecommendationInfo>()
                 };
                 groups[recommendedId] = group;
-            }
-
-            // Try to get current squad if marine is alive and update all recommendations from this recommender
-            var recommenderCurrentSquad = TryGetCurrentSquad(recommendation.RecommenderLastPlayerId);
-            if (recommenderCurrentSquad != null && recommenderCurrentSquad != recommendation.RecommenderSquad)
-            {
-                // Update all recommendations from this recommender in all computers
-                UpdateRecommendationSquad(recommendation.RecommenderLastPlayerId, recommenderCurrentSquad, false);
-                // Update current recommendation's squad to reflect the change
-                recommendation.RecommenderSquad = recommenderCurrentSquad;
             }
 
             group.Recommendations.Add(recommendation);
@@ -103,7 +83,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
 
         var rank = _rank.GetRankString(ent.Owner);
         var job = GetJobName(ent.Owner);
-        var squadName = GetSquadName(ent.Owner);
+        var squadName = _squads.GetSquadName(ent.Owner);
 
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var computerId, out var computer))
@@ -128,58 +108,5 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             return _jobs.MindTryGetJobName(mindId);
 
         return Loc.GetString("generic-unknown-title");
-    }
-
-    private string? GetSquadName(EntityUid marine)
-    {
-        if (_squads.TryGetMemberSquad((marine, null), out var squad))
-            return Name(squad);
-
-        return null;
-    }
-
-    private string? TryGetCurrentSquad(string lastPlayerId)
-    {
-        // Try to find alive marine by LastPlayerId
-        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
-        while (receivers.MoveNext(out var uid, out var receiver, out _))
-        {
-            if (receiver.LastPlayerId == lastPlayerId)
-            {
-                return GetSquadName(uid);
-            }
-        }
-
-        return null;
-    }
-
-    private void UpdateRecommendationSquad(string lastPlayerId, string newSquad, bool isRecommended)
-    {
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var uid, out var computer))
-        {
-            var updated = false;
-            foreach (var rec in computer.AwardRecommendations)
-            {
-                if (isRecommended)
-                {
-                    if (rec.RecommendedLastPlayerId == lastPlayerId)
-                    {
-                        rec.RecommendedSquad = newSquad;
-                        updated = true;
-                    }
-                }
-                else
-                {
-                    if (rec.RecommenderLastPlayerId == lastPlayerId)
-                    {
-                        rec.RecommenderSquad = newSquad;
-                        updated = true;
-                    }
-                }
-            }
-            if (updated)
-                Dirty(uid, computer);
-        }
     }
 }
