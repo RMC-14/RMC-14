@@ -4,7 +4,6 @@ using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Evacuation;
-using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CCVar;
@@ -13,6 +12,7 @@ using Content.Shared.Dataset;
 using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using System.Linq;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -63,13 +63,21 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             {
                 subs.Event<MarineControlComputerAlertLevelMsg>(OnAlertLevel);
                 subs.Event<MarineControlComputerShipAnnouncementMsg>(OnShipAnnouncement);
-                subs.Event<MarineControlComputerMedalMsg>(OnMedal);
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnToggleEvacuationMsg);
+                subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnOpenMedalsPanel);
             });
+        Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.MedalsPanel,
+            subs =>
+            {
+                subs.Event<MarineControlComputerApproveRecommendationMsg>(OnApproveRecommendation);
+                subs.Event<MarineControlComputerRejectRecommendationMsg>(OnRejectRecommendation);
+            });
+        SubscribeLocalEvent<MarineControlComputerComponent, MarineControlComputerMedalMsg>(OnMedal);
         Subs.BuiEvents<MarineCommunicationsComputerComponent>(MarineCommunicationsComputerUI.Key,
             subs =>
             {
                 subs.Event<MarineControlComputerToggleEvacuationMsg>(OnMarineCommunicationsToggleEvacuation);
+                subs.Event<MarineControlComputerOpenMedalsPanelMsg>(OnMarineCommunicationsOpenMedalsPanel);
             });
 
         Subs.CVar(_config, CCVars.ChatMaxMessageLength, limit => _characterLimit = limit, true);
@@ -129,7 +137,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name, LastPlayerId: args.LastPlayerId);
-        _dialog.OpenInput(ent, actor.Value, Loc.GetString("rmc-medal-citation-prompt"), ev, true, _commendation.CharacterLimit);
+        _dialog.OpenInput(ent, actor.Value, Loc.GetString("rmc-medal-citation-prompt"), ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
@@ -141,6 +149,8 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
         }
 
+        string? awardedLastPlayerId = null;
+
         // For not gibbed marines
         if (args.Marine != null)
         {
@@ -150,15 +160,18 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             {
                 return;
             }
+            awardedLastPlayerId = receiver.LastPlayerId;
             _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
         }
         // For gibbed marines
         else if (args.LastPlayerId != null)
         {
+            var lastPlayerId = args.LastPlayerId;
             if (TryComp<MarineControlComputerComponent>(ent, out var computer) &&
-                computer.GibbedMarines.TryGetValue(args.LastPlayerId, out var info))
+                computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } info)
             {
-                _commendation.GiveCommendationByLastPlayerId(actor.Value, args.LastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
+                awardedLastPlayerId = lastPlayerId;
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
             }
         }
         else
@@ -168,6 +181,23 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        // Mark this marine as having received a medal on all computers
+        if (awardedLastPlayerId != null)
+        {
+            MarkMarineAsAwarded(awardedLastPlayerId);
+            
+            // Send message to remove the recommendation group from UI if medals panel is open
+            var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = awardedLastPlayerId };
+            var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+            while (computers.MoveNext(out var uid, out _))
+            {
+                if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
+                {
+                    _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+                }
+            }
+        }
 
         _popup.PopupCursor(Loc.GetString("rmc-medal-awarded"), actor.Value, PopupType.Large);
     }
@@ -239,7 +269,128 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
+        // Handle messages from both Key and MedalsPanel UI keys
+        if (!args.UiKey.Equals(MarineControlComputerUi.Key) && 
+            !args.UiKey.Equals(MarineControlComputerUi.MedalsPanel))
+            return;
+
         GiveMedal(ent, args.Actor);
+    }
+
+    private void OnApproveRecommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerApproveRecommendationMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        // Copy LastPlayerId to local variable for use in lambda
+        var targetLastPlayerId = args.LastPlayerId;
+
+        // Try to find alive marine
+        NetEntity? marineNetEntity = null;
+        var receivers = EntityQueryEnumerator<CommendationReceiverComponent, MarineComponent>();
+        while (receivers.MoveNext(out var uid, out var receiver, out _))
+        {
+            if (receiver.LastPlayerId == targetLastPlayerId)
+            {
+                marineNetEntity = GetNetEntity(uid);
+                break;
+            }
+        }
+
+        // If not found alive, check if it's a gibbed marine
+        string? lastPlayerId = null;
+        if (marineNetEntity == null)
+        {
+            var allGibbed = CollectGibbedMarines();
+            if (allGibbed.Any(info => info.LastPlayerId == targetLastPlayerId))
+            {
+                lastPlayerId = targetLastPlayerId;
+            }
+            else
+            {
+                return; // Marine not found
+            }
+        }
+
+        // Open medal type selection dialog (skip marine selection)
+        var netActor = GetNetEntity(args.Actor);
+        var evt = new MarineControlComputerMedalMarineEvent(netActor, marineNetEntity, lastPlayerId);
+        OnComputerMedalMarine(ent, ref evt);
+    }
+
+    private void OnRejectRecommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerRejectRecommendationMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        // Mark all recommendations for this marine as rejected
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            var updated = false;
+            var toUpdate = new List<MarineAwardRecommendationInfo>();
+            
+            foreach (var recommendation in computer.AwardRecommendations)
+            {
+                if (recommendation.RecommendedLastPlayerId == args.LastPlayerId && !recommendation.IsRejected)
+                {
+                    toUpdate.Add(recommendation);
+                }
+            }
+            
+            foreach (var recommendation in toUpdate)
+            {
+                recommendation.IsRejected = true;
+                updated = true;
+            }
+            
+            if (updated)
+                Dirty(uid, computer);
+        }
+        
+        // Send message to remove the recommendation group from UI if medals panel is open
+        var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = args.LastPlayerId };
+        computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out _))
+        {
+            if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
+            {
+                _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+            }
+        }
+    }
+
+    private void OnOpenMedalsPanel(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)
+    {
+        if (!HasComp<CommendationGiverComponent>(args.Actor))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-medal-error-officer-only"), args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        var state = BuildMedalsPanelState(ent, args.Actor);
+        _ui.SetUiState(ent.Owner, MarineControlComputerUi.MedalsPanel, state);
+        _ui.TryOpenUi(ent.Owner, MarineControlComputerUi.MedalsPanel, args.Actor);
+    }
+
+    protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
+    {
+        return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>());
     }
 
     public void GiveMedal(EntityUid computer, EntityUid actor)
@@ -279,20 +430,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         }
 
         // Add gibbed marines regardless of the entity itself, will always be added
-        var allGibbed = new Dictionary<string, GibbedMarineInfo>();
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var _, out var comp))  // all components must be synchronized with each other, but this is just in case
+        var allGibbed = CollectGibbedMarines();
+        foreach (var info in allGibbed)
         {
-            foreach (var (playerId, info) in comp.GibbedMarines)
-            {
-                if (info.LastPlayerId == null)
-                    continue;
-                allGibbed[playerId] = info;
-            }
-        }
-        foreach (var (playerId, info) in allGibbed)
-        {
-            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, playerId)));
+            if (info.LastPlayerId == string.Empty)
+                continue;
+
+            options.Add(new DialogOption(info.Name, new MarineControlComputerMedalMarineEvent(netActor, null, info.LastPlayerId)));
         }
 
         _dialog.OpenOptions(computer, actor, Loc.GetString("rmc-medal-recipient"), options, Loc.GetString("rmc-medal-recipient-prompt"));
@@ -328,6 +472,14 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         }
     }
 
+    private void OnMarineCommunicationsOpenMedalsPanel(Entity<MarineCommunicationsComputerComponent> ent, ref MarineControlComputerOpenMedalsPanelMsg args)
+    {
+        if (!TryComp<MarineControlComputerComponent>(ent.Owner, out var controlComp))
+            return;
+
+        OnOpenMedalsPanel(new Entity<MarineControlComputerComponent>(ent.Owner, controlComp), ref args);
+    }
+
     private void RefreshComputers()
     {
         if (_net.IsClient)
@@ -356,5 +508,79 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         }
 
         return true;
+    }
+
+    public bool TryAddAwardRecommendation(MarineAwardRecommendationInfo recommendation)
+    {
+        var added = false;
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            added = true;
+
+            if (computer.AwardRecommendations.Add(recommendation))
+                Dirty(uid, computer);
+        }
+
+        return added;
+    }
+
+    public HashSet<GibbedMarineInfo> CollectGibbedMarines()
+    {
+        var result = new HashSet<GibbedMarineInfo>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            result.UnionWith(computer.GibbedMarines);
+        }
+
+        return result;
+    }
+
+    public bool TryGetGibbedMarineInfo(string playerId, out GibbedMarineInfo info)
+    {
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            if (computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == playerId) is { } match)
+            {
+                info = match;
+                return true;
+            }
+        }
+
+        info = default!;
+        return false;
+    }
+
+    /// <summary>
+    /// Marks a marine as having received a medal by adding their LastPlayerId to all computers.
+    /// This prevents their recommendations from being displayed.
+    /// </summary>
+    public void MarkMarineAsAwarded(string lastPlayerId)
+    {
+        if (_net.IsClient)
+            return;
+
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var computer))
+        {
+            if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
+                Dirty(uid, computer);
+        }
+    }
+
+    /// <summary>
+    /// Gets the combined set of all LastPlayerIds who have been awarded medals from all computers.
+    /// </summary>
+    public HashSet<string> GetAllAwardedMedalLastPlayerIds()
+    {
+        var result = new HashSet<string>();
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out _, out var computer))
+        {
+            result.UnionWith(computer.AwardedMedalLastPlayerIds);
+        }
+        return result;
     }
 }

@@ -29,7 +29,17 @@ public sealed partial class MarineControlComputerComponent : Component
     public TimeSpan LastToggle;
 
     [DataField, AutoNetworkedField]
-    public Dictionary<string, GibbedMarineInfo> GibbedMarines = new();
+    public HashSet<GibbedMarineInfo> GibbedMarines = new();
+
+    [DataField, AutoNetworkedField]
+    public HashSet<MarineAwardRecommendationInfo> AwardRecommendations = new();
+
+    /// <summary>
+    /// List of LastPlayerIds for marines who have already been awarded medals.
+    /// Recommendations for these marines should not be displayed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> AwardedMedalLastPlayerIds = new();
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan? LastShipAnnouncement;
@@ -39,8 +49,48 @@ public sealed partial class MarineControlComputerComponent : Component
 }
 
 [Serializable, NetSerializable]
-public sealed class GibbedMarineInfo
+public sealed record GibbedMarineInfo
 {
-    public string Name = string.Empty;
-    public string? LastPlayerId;
+    public required string Name { get; init; }
+    public required string LastPlayerId { get; init; }
+    public required string Job { get; init; }
+    public string? Rank { get; init; }
+    public string? Squad { get; init; }
+}
+
+[Serializable, NetSerializable]
+public sealed class MarineAwardRecommendationInfo : IEquatable<MarineAwardRecommendationInfo>
+{
+    public required string RecommendedLastPlayerId { get; init; }
+    public required string RecommenderLastPlayerId { get; init; }
+    public required string Reason { get; init; }
+    public string? RecommenderName { get; init; }
+    public string? RecommenderRank { get; init; }
+    public string? RecommenderSquad { get; init; }
+    public string? RecommenderJob { get; init; }
+    public string? RecommendedName { get; init; }
+    public string? RecommendedRank { get; init; }
+    public string? RecommendedSquad { get; init; }
+    public string? RecommendedJob { get; init; }
+    public bool IsRejected { get; set; } = false;
+
+    public bool Equals(MarineAwardRecommendationInfo? other)
+    {
+        if (other is null)
+            return false;
+
+        return RecommendedLastPlayerId == other.RecommendedLastPlayerId &&
+               RecommenderLastPlayerId == other.RecommenderLastPlayerId &&
+               Reason == other.Reason;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as MarineAwardRecommendationInfo);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(RecommendedLastPlayerId, RecommenderLastPlayerId, Reason);
+    }
 }
