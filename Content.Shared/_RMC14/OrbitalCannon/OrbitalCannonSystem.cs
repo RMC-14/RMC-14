@@ -708,8 +708,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
             var trayId = cannonChamber.ContainedEntities[0];
             var trayCoords = _transform.GetMoverCoordinates(uid).Offset(cannon.TraySpawnOffset);
-            _transform.SetCoordinates(trayId, trayCoords);
             _container.Remove(trayId, cannonChamber);
+            _transform.SetCoordinates(trayId, trayCoords);
 
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
                 UpdateTrayVisuals((trayId, tray));
