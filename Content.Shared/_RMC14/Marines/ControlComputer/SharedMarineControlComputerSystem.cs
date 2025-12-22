@@ -383,14 +383,13 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var state = BuildMedalsPanelState(ent);
+        var state = BuildMedalsPanelState(ent, args.Actor);
         _ui.SetUiState(ent.Owner, MarineControlComputerUi.MedalsPanel, state);
         _ui.TryOpenUi(ent.Owner, MarineControlComputerUi.MedalsPanel, args.Actor);
     }
 
-    protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
+    protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
     {
-        // This should be overridden in the server system
         return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>());
     }
 

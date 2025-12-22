@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.ControlComputer;
@@ -7,8 +8,7 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared.Body.Events;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
-using System.Linq;
-using Robust.Shared.Localization;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Marines.ControlComputer;
 
@@ -24,9 +24,23 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         SubscribeLocalEvent<MarineComponent, BeingGibbedEvent>(OnMarineGibbed);
     }
 
-    protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent)
+    protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
     {
         var groups = new Dictionary<string, MarineRecommendationGroup>();
+
+        // Get viewer's LastPlayerId to exclude recommendations made on them
+        string? viewerLastPlayerId = null;
+        if (viewerActor != null)
+        {
+            if (TryComp<CommendationReceiverComponent>(viewerActor, out var receiver) && receiver.LastPlayerId != null)
+            {
+                viewerLastPlayerId = receiver.LastPlayerId;
+            }
+            else if (TryComp<ActorComponent>(viewerActor, out var actorComp))
+            {
+                viewerLastPlayerId = actorComp.PlayerSession.UserId.UserId.ToString();
+            }
+        }
 
         // Collect recommendations from all computers to ensure they're visible from any device
         var allRecommendations = new HashSet<MarineAwardRecommendationInfo>();
@@ -50,6 +64,10 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
 
             // Skip rejected recommendations
             if (recommendation.IsRejected)
+                continue;
+
+            // Skip recommendations made on the viewer (they shouldn't see recommendations on themselves)
+            if (viewerLastPlayerId != null && recommendedId == viewerLastPlayerId)
                 continue;
 
             if (!groups.TryGetValue(recommendedId, out var group))
