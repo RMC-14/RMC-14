@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleL24
   name: L24 rifle
-  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in the purple-blue camouflage of the RCM.
+  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire's Royal Crown Marines units. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in the purple-blue camouflage of the RCM.
   suffix: Filled
   components:
   - type: Sprite
@@ -131,6 +131,69 @@
       rmc-aslot-underbarrel: 0.3125, -0.315
 
 - type: entity
+  parent: RMCWeaponRifleL24
+  id: RMCWeaponRifleL24Stripped
+  suffix: Stripped
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL24
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL24
+          - RMCMagazineRifleL24AP
+          - RMCMagazineRifleL24Extended
+          - RMCMagazineRifleL24HEAP
+          - RMCMagazineRifleL24Incendiary
+  - type: GunDamageModifier
+    multiplier: 1.0
+  - type: AttachableHolder
+    randomAttachmentChance: 1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL24Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL24Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentU1GrenadeLauncher
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL24
   name: L24 Magazine (8.88x51mm)
@@ -155,6 +218,8 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleTSE
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -183,6 +248,8 @@
     - state: ammo_band
       color: "#1F951F"
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleTSEAP
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -266,6 +333,8 @@
       - state: mag-1
         map: [ "enum.GunVisualLayers.Mag" ]
     - type: Appearance
+    - type: RefillableByBulletBox
+      bulletType: RMCBoxBulletsRifleTSE
 
 - type: entity
   parent: CMBaseCartridgeRifle
