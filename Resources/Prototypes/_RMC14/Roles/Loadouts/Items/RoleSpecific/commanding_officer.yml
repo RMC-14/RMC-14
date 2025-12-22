@@ -90,13 +90,7 @@
   id: COCareerPathInfantryRMC
   dummyEntity: RMCLoadoutDummyCareerPathInfantry
   cost: 0
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:DepartmentTimeRequirement
-      department: CMSquad
-      time: 72000 # 20 hours
-  equipment:
+  equipment: # Being a default path, this shouldn't be timelocked
     head: RMCHeadCapQuartermaster
     gloves: RMCHandsBlack
     shoes: CMBootsBlackFilled
