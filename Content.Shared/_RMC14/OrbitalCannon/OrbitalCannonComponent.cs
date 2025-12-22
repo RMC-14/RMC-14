@@ -1,4 +1,5 @@
-﻿using Robust.Shared.Audio;
+﻿using System.Numerics;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -91,7 +92,7 @@ public sealed partial class OrbitalCannonComponent : Component
     public EntProtoId? TrayPrototype = "RMCOrbitalCannonTray";
 
     [DataField]
-    public Vector2i TraySpawnOffset = new(1, 2);
+    public Vector2 TraySpawnOffset = new(1f, 2f);
 
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedTray;

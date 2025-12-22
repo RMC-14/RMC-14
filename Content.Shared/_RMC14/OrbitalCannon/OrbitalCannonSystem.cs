@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Numerics;
 using Content.Shared._RMC14.Animations;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
@@ -108,7 +107,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer && ent.Comp.TrayPrototype != null)
         {
             var cannonTransform = Transform(ent);
-            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(ent.Comp.TraySpawnOffset.X, ent.Comp.TraySpawnOffset.Y));
+            var trayCoords = cannonTransform.Coordinates.Offset(ent.Comp.TraySpawnOffset);
             var trayId = Spawn(ent.Comp.TrayPrototype.Value, trayCoords);
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
             {
@@ -711,7 +710,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
             var trayId = cannonChamber.ContainedEntities[0];
             var cannonTransform = Transform(uid);
-            var trayCoords = cannonTransform.Coordinates.Offset(new Vector2(cannon.TraySpawnOffset.X, cannon.TraySpawnOffset.Y));
+            var trayCoords = cannonTransform.Coordinates.Offset(cannon.TraySpawnOffset);
 
             _container.Remove(trayId, cannonChamber);
             _transform.SetCoordinates(trayId, trayCoords);

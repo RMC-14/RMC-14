@@ -416,7 +416,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/orbital_cannon_tray.rsi
     drawdepth: SmallObjects
-    offset: 0.5, 0
+    offset: 0.5, 0.5
     layers:
     - state: cannon_tray
       map: [ "base" ]
