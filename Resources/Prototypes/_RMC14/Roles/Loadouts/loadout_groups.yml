@@ -147,7 +147,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-  
+
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
@@ -554,6 +554,20 @@
   loadouts:
   - ColIDCardRMC
   - ColNormalIDCardRMC
+
+- type: loadoutGroup
+  id: CommandingOfficerCareerPathRMC
+  name: rmc-loadout-group-role-specific-career-path
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - COCareerPathInfantryRMC
+  - COCareerPathIntelRMC
+  - COCareerPathMedicalRMC
+  - COCareerPathAviationRMC
+  - COCareerPathTankerRMC
+  - COCareerPathEngineeringRMC
+  - COCareerPathLogisticsRMC
 
 - type: loadoutGroup
   id: CommandingOfficerWeaponRMC

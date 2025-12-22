@@ -506,6 +506,17 @@
 
 - type: entity
   parent: CMCoatCO
+  id: RMCCoatCOPatchless
+  name: commanding officer's jacket
+  description: A patchless version of the officer jacket, its presence is still domineering.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket_patchless.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/CO/jacket_patchless.rsi
+
+- type: entity
+  parent: CMCoatCO
   id: RMCCoatCOServiceJacketStandard
   name: Standard commanding officer standard issue jacket
   description: A jacket complement to the standard-issue CO uniform. Smells synthetic, but at least it's stylish.

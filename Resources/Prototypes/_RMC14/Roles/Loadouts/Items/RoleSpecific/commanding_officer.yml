@@ -83,3 +83,127 @@
   storage:
     back:
     - RMCWeaponPistolHandcannonWinterWyvern
+
+- type: loadout
+  id: COCareerPathInfantryRMC
+  dummyEntity: RMCLoadoutDummyCareerPathInfantry
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:DepartmentTimeRequirement
+      department: CMSquad
+      time: 72000 # 20 hours
+  equipment:
+    head: RMCHeadCapQuartermaster
+    gloves: RMCHandsBlack
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCOuterClothingExternalWebbing
+    jumpsuit: RMCJumpsuitCOUniformGray
+    eyes: RMCSunglasses
+  inhand:
+  - RMCLaserDesignator
+
+- type: loadout
+  id: COCareerPathIntelRMC
+  dummyEntity: RMCLoadoutDummyCareerPathIntel
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobIntelOfficer
+      time: 72000 # 20 hours
+  equipment:
+    head: CMHeadBeretCOBlack
+    gloves: CMHandsBlackMarineColorless
+    shoes: CMBootsBlackFilled
+    outerClothing: CMUtilityVest
+    jumpsuit: RMCJumpsuitCOTurtleneck
+
+- type: loadout
+  id: COCareerPathMedicalRMC
+  dummyEntity: RMCLoadoutDummyCareerPathMedical
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:TotalJobsTimeRequirement
+      group: CMJobsMedical
+      time: 72000 # 20 hours
+  equipment:
+    head: CMHeadBeretCOWhite
+    gloves: CMHandsWhite
+    shoes: RMCShoesWhite
+    outerClothing: RMCCoatCOPatchless
+    jumpsuit: RMCJumpsuitCOUniform
+
+- type: loadout
+  id: COCareerPathAviationRMC
+  dummyEntity: RMCLoadoutDummyCareerPathAviation
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:TotalJobsTimeRequirement
+      group: CMJobsDropship
+      time: 72000 # 20 hours
+  equipment:
+    head: CMHeadBeretCOBlack
+    gloves: RMCHandsBlack
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCCoatPilot # M70B1 light flak jacket from a separate PR
+    jumpsuit: RMCJumpsuitCOTurtleneck
+    eyes: RMCGlassesAviators
+
+- type: loadout
+  id: COCareerPathTankerRMC
+  dummyEntity: RMCLoadoutDummyCareerPathTanker
+  cost: 0
+  # effects:
+  # - !type:JobRequirementLoadoutEffect
+  #   requirement:
+  #     !type:TotalJobsTimeRequirement
+  #     group: CMTanker
+  #     time: 72000 # 20 hours
+  equipment:
+    head: RMCHeadCapQuartermaster
+    gloves: RMCHandsBlack
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCJacketWindbreakerBrown
+    jumpsuit: CMJumpsuitOperations
+    mask: RMCMaskScarfTan
+
+- type: loadout
+  id: COCareerPathEngineeringRMC
+  dummyEntity: RMCLoadoutDummyCareerPathEngineering
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:TotalJobsTimeRequirement
+      group: CMJobsEngineering
+      time: 72000 # 20 hours
+  equipment:
+    head: CMHeadBeretEngineer
+    gloves: CMHandsInsulated
+    shoes: CMBootsBlackFilled
+    outerClothing: CMUtilityVest
+    jumpsuit: RMCJumpsuitCOUniformTools
+
+- type: loadout
+  id: COCareerPathLogisticsRMC
+  dummyEntity: RMCLoadoutDummyCareerPathLogistics
+  cost: 0
+  # effects:
+  # - !type:JobRequirementLoadoutEffect
+  #   requirement:
+  #     !type:DepartmentTimeRequirement
+  #     department: CMRequisitions
+  #     time: 72000 # 20 hours
+  equipment:
+    head: CMHeadBeretTan
+    gloves: CMHandsInsulated
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCVestTan
+    jumpsuit: RMCJumpsuitCOUniformTools

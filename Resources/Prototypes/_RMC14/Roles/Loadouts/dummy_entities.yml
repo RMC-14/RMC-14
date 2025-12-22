@@ -1,0 +1,69 @@
+- type: entity
+  id: RMCLoadoutDummyCareerPathInfantry
+  categories: [ HideSpawnMenu ]
+  name: Infantry
+  description: Only those who have earned the trust of marines by pushing towards victory alongside them are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_co
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathIntel
+  categories: [ HideSpawnMenu ]
+  name: Intel
+  description: Only those who have won entire operations risking their lives for information are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_io
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathMedical
+  categories: [ HideSpawnMenu ]
+  name: Medical
+  description: Only those who always keep a steady hand and strive to save as many they can are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_cmo
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathAviation
+  categories: [ HideSpawnMenu ]
+  name: Aviation
+  description: Only those who have earned their wings in the air and space are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_po
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathTanker
+  categories: [ HideSpawnMenu ]
+  name: Tanker
+  description: Only those who have known their vehicle better than their own skin are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_tc  # TODO RMC14: Replace with job icon entity when it comes around maybe?
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathEngineering
+  categories: [ HideSpawnMenu ]
+  name: Engineering
+  description: Only those who kept our ships afloat and the systems running are promoted to the position of a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_ce
+
+- type: entity
+  id: RMCLoadoutDummyCareerPathLogistics
+  categories: [ HideSpawnMenu ]
+  name: Logistics
+  description: Only those who can pull even the most distant units out of their underequipped state, deserve the honor of becoming a Commanding Officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_ro
