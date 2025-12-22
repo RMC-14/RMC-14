@@ -2,7 +2,6 @@
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.IoC;
 using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.Dialog;
@@ -12,7 +11,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 {
     private RMCDialogWindow? _window;
 
-    private readonly DialogSystem _dialog = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<DialogSystem>();
+    private DialogSystem? _dialog;
     protected override void Open()
     {
         base.Open();
@@ -174,6 +173,7 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     private void OnInputTextChanged(RMCDialogInputContainer container, string text, int min, int max, bool smartCheck)
     {
+        _dialog ??= EntMan.System<DialogSystem>();
         var textLength = _dialog.CalculateEffectiveLength(text, smartCheck);
         container.CharacterCount.Text = min > 0
             ? $"{textLength} / {min}-{max}"
