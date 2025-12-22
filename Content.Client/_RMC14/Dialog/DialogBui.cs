@@ -101,6 +101,18 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.MessageLineEdit.Visible = !s.LargeInput;
         container.MessageTextEdit.Visible = s.LargeInput;
 
+        // Set placeholders based on SmartCheck
+        if (s.SmartCheck)
+        {
+            container.MessageLineEdit.PlaceHolder = Loc.GetString("rmc-dialog-input-placeholder-smart-check");
+            container.MessageTextEdit.Placeholder = new Rope.Leaf(Loc.GetString("rmc-dialog-input-placeholder-smart-check"));
+        }
+        else
+        {
+            container.MessageLineEdit.PlaceHolder = Loc.GetString("rmc-dialog-input-placeholder-default");
+            container.MessageTextEdit.Placeholder = new Rope.Leaf(Loc.GetString("rmc-dialog-input-placeholder-default"));
+        }
+
         // Activate input field if AutoFocus is enabled
         if (s.AutoFocus)
         {
