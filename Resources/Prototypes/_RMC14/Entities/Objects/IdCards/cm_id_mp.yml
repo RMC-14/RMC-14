@@ -21,3 +21,19 @@
   components:
   - type: PresetIdCard
     job: CMMilitaryPolice
+
+- type: entity
+  parent: CMIDCardBase
+  id: CMIDCardRiotControl
+  name: riot control ID card
+  components:
+  - type: PresetIdCard
+    job: CMRiotControl
+
+- type: entity
+  parent: CMIDCardBase
+  id: CMIDCardChiefRiotControl
+  name: riot control ID card
+  components:
+  - type: PresetIdCard
+    job: CMChiefRiotControl

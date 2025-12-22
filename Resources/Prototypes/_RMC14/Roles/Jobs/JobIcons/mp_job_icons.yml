@@ -19,3 +19,17 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_mp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconRiotMP
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_rmp
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconRiotCMP
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_crmp
