@@ -1,0 +1,58 @@
+- type: job
+  parent: CMRiotControl
+  id: CMChiefRiotControl
+  name: cm-job-name-chief-riot-control
+  description: cm-job-description-riot-control
+  playTimeTracker: CMJobChiefRiotControl
+  ranks:
+    RMCRankSecondLT: []
+  startingGear: CMGearChiefRiotControl
+  spawnMenuRoleName: UNMC Chief Riot MP (CRMP)
+  icon: "CMJobIconRiotCMP"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: JobPrefix
+      prefix: cm-job-prefix-crmp
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: crmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+
+- type: startingGear
+  parent: CMGearRiotControl
+  id: CMGearChiefRiotControl
+  equipment:
+    id: CMIDCardChiefRiotControl
+
+- type: entity
+  id: RMCRandomHumanoidChiefRiotControl
+  name: unmc chief riot control ghost role
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: cmp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCChiefRiotControl
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCChiefRiotControl
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-chief-riot-control
+    description: rmc-ghost-role-information-riot-control-description
+    rules: rmc-ghost-role-information-riot-control-rules
+    reregister: false
+    job: CMChiefRiotControl
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: CMJobChiefRiotControl
+  isHumanoid: true

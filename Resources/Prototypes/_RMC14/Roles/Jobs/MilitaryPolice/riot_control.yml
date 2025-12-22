@@ -1,0 +1,97 @@
+- type: job
+  parent: CMJobBase
+  id: CMRiotControl
+  name: cm-job-name-riot-control
+  description: cm-job-description-riot-control
+  playTimeTracker: CMJobRiotControl
+  ranks:
+    RMCRankSergeant: []
+  hidden: true
+  startingGear: CMGearRiotControl
+  icon: "CMJobIconRiotMP"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-marine-high-command
+  spawnMenuRoleName: UNMC Riot MP (RMP)
+  accessGroups:
+  - MarineMain
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+    - type: JobPrefix
+      prefix: cm-job-prefix-rmp
+    - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
+
+- type: startingGear
+  parent: CMGearMilitaryPolice
+  id: CMGearRiotControl
+  equipment:
+    id: CMIDCardRiotControl
+    back: CMSatchelSecurity
+    ears: CMHeadsetCMP
+    jumpsuit: CMJumpsuitWO
+    outerClothing: CMArmorRiot
+    head: ArmorHelmetRiot
+    belt: CMBeltSecurityMPFilled
+    mask: CMMaskGas
+    suitstorage: RMCWeaponShotgunM890Riot
+    pocket1: RMCPouchShotgunLargeBeanbag
+    pocket2: RMCPouchShotgunLargeBeanbag
+  storage:
+    back:
+    - RMCPacketGrenadeFlashBang
+    # TODO RMC14: M66 teargas grenade (x4)
+    - RMCHandcuffs
+    - RMCHandcuffs
+  inhand:
+  - RiotShield # TODO RMC14: Port CM riot shield
+
+- type: entity
+  id: RMCRandomHumanoidRiotControl
+  name: unmc riot control ghost role
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: mp_spawn
+  - type: RandomHumanoidSpawner
+    settings: RMCRiotControl
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRiotControl
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-riot-control
+    description: rmc-ghost-role-information-riot-control-description
+    rules: rmc-ghost-role-information-riot-control-rules
+    reregister: false
+    job: CMRiotControl
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: CMJobRiotControl
+  isHumanoid: true
