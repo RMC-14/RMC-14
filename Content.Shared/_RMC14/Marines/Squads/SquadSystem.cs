@@ -98,6 +98,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
         SubscribeLocalEvent<SquadMemberComponent, GetMarineSquadNameEvent>(OnSquadRoleGetName);
 
+        SubscribeLocalEvent<SquadLeaderComponent, ComponentRemove>(OnSquadLeaderRemoved);
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
 
@@ -237,6 +238,12 @@ public sealed class SquadSystem : EntitySystem
         }
 
         squad.Roles[jobId] = roles + 1;
+    }
+
+    private void OnSquadLeaderRemoved(Entity<SquadLeaderComponent> ent, ref ComponentRemove args)
+    {
+        // Disable recommendation ability when squad leader is demoted
+        _awardRecommendation.SetCanRecommend(ent, false);
     }
 
     private void OnSquadLeaderTerminating(Entity<SquadLeaderComponent> ent, ref EntityTerminatingEvent args)
@@ -669,8 +676,6 @@ public sealed class SquadSystem : EntitySystem
                 RemComp<SquadLeaderComponent>(uid);
                 RemComp<RMCTrackableComponent>(uid);
                 RemCompDeferred<RMCPointingComponent>(uid);
-
-                _awardRecommendation.SetCanRecommend(uid, false);
             }
         }
 
