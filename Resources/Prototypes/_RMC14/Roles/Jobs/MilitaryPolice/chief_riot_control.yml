@@ -51,6 +51,10 @@
     job: CMChiefRiotControl
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobChiefMP
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
