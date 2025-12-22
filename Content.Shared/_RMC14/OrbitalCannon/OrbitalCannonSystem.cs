@@ -106,12 +106,10 @@ public sealed class OrbitalCannonSystem : EntitySystem
         // Spawn the tray at offset position and link it to this cannon
         if (_net.IsServer && ent.Comp.TrayPrototype != null)
         {
-            var cannonTransform = Transform(ent);
-            var trayCoords = cannonTransform.Coordinates.Offset(ent.Comp.TraySpawnOffset);
+            var trayCoords = _transform.GetMoverCoordinates(ent).Offset(ent.Comp.TraySpawnOffset);
             var trayId = Spawn(ent.Comp.TrayPrototype.Value, trayCoords);
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
             {
-                // Bidirectional link
                 ent.Comp.LinkedTray = trayId;
                 tray.LinkedCannon = ent;
                 Dirty(trayId, tray);
@@ -709,8 +707,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             }
 
             var trayId = cannonChamber.ContainedEntities[0];
-            var cannonTransform = Transform(uid);
-            var trayCoords = cannonTransform.Coordinates.Offset(cannon.TraySpawnOffset);
+            var trayCoords = _transform.GetMoverCoordinates(uid).Offset(cannon.TraySpawnOffset);
 
             _container.Remove(trayId, cannonChamber);
             _transform.SetCoordinates(trayId, trayCoords);

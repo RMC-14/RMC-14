@@ -407,12 +407,13 @@
       fix1:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.49,-0.49,1.49,0.49"
-        density: 155
+          bounds: "-0.49,-0.49,1.04,0.24"
+        density: 200
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
+        hard: false
   - type: Sprite
     sprite: _RMC14/Structures/orbital_cannon_tray.rsi
     drawdepth: SmallObjects
@@ -448,7 +449,5 @@
           4: { visible: true, state: cannon_tray_4 }
           5: { visible: true, state: cannon_tray_5 }
           6: { visible: true, state: cannon_tray_6 }
-  - type: RMCLoreExaminable
-    content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable
   - type: OrbitalCannonTray

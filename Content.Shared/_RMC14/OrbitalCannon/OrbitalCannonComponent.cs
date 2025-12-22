@@ -92,7 +92,7 @@ public sealed partial class OrbitalCannonComponent : Component
     public EntProtoId? TrayPrototype = "RMCOrbitalCannonTray";
 
     [DataField]
-    public Vector2 TraySpawnOffset = new(1f, 2f);
+    public Vector2 TraySpawnOffset = new(0.78f, 0.69f);
 
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedTray;
