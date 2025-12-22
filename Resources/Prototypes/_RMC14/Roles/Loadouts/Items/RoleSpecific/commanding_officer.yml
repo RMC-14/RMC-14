@@ -50,6 +50,7 @@
 
 - type: loadout
   id: GoldMatebaRMC
+  dummyEntity: RMCWeaponRevolverMatebaGold
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -74,6 +75,7 @@
 
 - type: loadout
   id: MatebaRMC
+  dummyEntity: RMCWeaponRevolverMateba
   storage:
     back:
     - RMCMatebaCustomizationCaseWeapon
