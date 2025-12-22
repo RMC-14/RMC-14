@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
@@ -11,7 +12,16 @@ public sealed partial class OrbitalCannonTrayComponent : Component
     public EntityUid? LinkedCannon;
 
     [DataField, AutoNetworkedField]
-    public string? WarheadType;
+    public string WarheadContainer = "rmc_orbital_tray_warhead";
+
+    [DataField, AutoNetworkedField]
+    public string FuelContainer = "rmc_orbital_tray_fuel";
+
+    [DataField, AutoNetworkedField]
+    public int MaxFuel = 6;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<OrbitalCannonWarheadComponent>? WarheadType;
 
     [DataField, AutoNetworkedField]
     public int FuelAmount;

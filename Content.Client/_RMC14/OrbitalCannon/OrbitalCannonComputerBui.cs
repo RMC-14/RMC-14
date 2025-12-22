@@ -60,8 +60,12 @@ public sealed class OrbitalCannonComputerBui : BoundUserInterface
 
         _window.FuelRequirementsLabel.Text = FormatRequirements(requirements.ToString().Trim());
 
-        if (_orbitalCannon.TryGetClosestCannon(Owner, out var cannon))
-            _window.FuelProgressBar.Value = Math.Clamp(computer.Fuel, 0, cannon.Comp.MaxFuel);
+        if (_orbitalCannon.TryGetClosestCannon(Owner, out var cannon) &&
+            cannon.Comp.LinkedTray is { } trayId &&
+            EntMan.TryGetComponent(trayId, out OrbitalCannonTrayComponent? tray))
+        {
+            _window.FuelProgressBar.Value = Math.Clamp(computer.Fuel, 0, tray.MaxFuel);
+        }
 
         UpdateTrayControls(computer);
     }

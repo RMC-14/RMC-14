@@ -12,10 +12,7 @@ namespace Content.Shared._RMC14.OrbitalCannon;
 public sealed partial class OrbitalCannonComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string WarheadContainer = "rmc_orbital_cannon_warhead";
-
-    [DataField, AutoNetworkedField]
-    public string FuelContainer = "rmc_orbital_cannon_fuel";
+    public string TrayContainer = "rmc_orbital_cannon_tray";
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? LoadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loading");
@@ -50,9 +47,6 @@ public sealed partial class OrbitalCannonComponent : Component
 
     [DataField, AutoNetworkedField]
     public OrbitalCannonStatus Status = OrbitalCannonStatus.Unloaded;
-
-    [DataField, AutoNetworkedField]
-    public int MaxFuel = 6;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastToggledAt;

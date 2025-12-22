@@ -435,9 +435,10 @@
       enum.OrbitalCannonTrayVisuals.Warhead:
         warhead:
           "": { visible: false }
-          explosive: { visible: true, state: cannon_tray_explosive }
-          incendiary: { visible: true, state: cannon_tray_incendiary }
-          cluster: { visible: true, state: cannon_tray_cluster }
+          RMCOrbitalCannonWarheadExplosive: { visible: true, state: cannon_tray_explosive }
+          RMCOrbitalCannonWarheadIncendiary: { visible: true, state: cannon_tray_incendiary }
+          RMCOrbitalCannonWarheadCluster: { visible: true, state: cannon_tray_cluster }
+          RMCOrbitalCannonWarheadAegis: { visible: true, state: cannon_tray_explosive } # We don't have aegis tray sprite
       enum.OrbitalCannonTrayVisuals.Fuel:
         fuel:
           0: { visible: false }
