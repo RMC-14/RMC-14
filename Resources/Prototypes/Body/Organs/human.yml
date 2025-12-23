@@ -6,23 +6,24 @@
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi
   - type: Organ
-  - type: Food
-  - type: Extractable
-    grindableSolutionName: organ
-  - type: SolutionContainerManager
-    solutions:
-      organ:
-        reagents:
-        - ReagentId: Nutriment
-          Quantity: 10
-      food:
-        maxVol: 5
-        reagents:
-        - ReagentId: UncookedAnimalProteins
-          Quantity: 5
-  - type: FlavorProfile
-    flavors:
-      - people
+# /// RMC14 - Makes Organs Inedible
+#  - type: Food
+#  - type: Extractable
+#    grindableSolutionName: organ
+#  - type: SolutionContainerManager
+#    solutions:
+#      organ:
+#        reagents:
+#        - ReagentId: Nutriment
+#          Quantity: 10
+#      food:
+#        maxVol: 5
+#        reagents:
+#        - ReagentId: UncookedAnimalProteins
+#          Quantity: 5
+#  - type: FlavorProfile
+#    flavors:
+#      - people
   - type: Tag
     tags:
       - Meat
