@@ -99,10 +99,13 @@ public sealed class SkillsSystem : EntitySystem
 
     private void OnSkillsMapInit(Entity<SkillsComponent> ent, ref MapInitEvent args)
     {
-        if (!_prototypes.TryIndex(ent.Comp.Preset, out var skillPreset))
+        if (ent.Comp.Preset is not { } presetPrototype)
             return;
 
-        ent.Comp.Skills = skillPreset.Skills;
+        if (!presetPrototype.TryGet(out var skillPreset, _prototypes, _compFactory))
+            return;
+
+        ent.Comp.Skills = new(skillPreset.Skills);
         Dirty(ent);
     }
 

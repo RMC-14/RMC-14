@@ -11,7 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorWeYaManager
+      preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624CorporateLiaison
     - type: RMCSurvivor

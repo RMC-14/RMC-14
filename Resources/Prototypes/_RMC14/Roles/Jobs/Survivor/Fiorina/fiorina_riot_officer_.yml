@@ -14,7 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorMarshal
+      preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember

@@ -9,14 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 1
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetSurvivorMiner
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaTMCCMiner
     - type: RMCSurvivor
@@ -26,7 +19,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
