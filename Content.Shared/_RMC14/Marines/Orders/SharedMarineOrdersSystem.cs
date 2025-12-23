@@ -104,7 +104,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             return;
 
         var speed = (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
-        speed = (speed + armorSprintModifier > 1) ? (1 - armorSprintModifier.Value + 1) : 1 + speed;
+        speed = (speed + armorSprintModifier > 1) ? (2 - armorSprintModifier.Value) : 1 + speed;
         args.ModifySpeed(speed, speed);
     }
 
