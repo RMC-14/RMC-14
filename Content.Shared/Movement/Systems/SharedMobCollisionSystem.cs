@@ -59,7 +59,6 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<MarineComponent> _marineQuery;
-
     private float _penCapSubtract;
     private bool _bigXenosCancelMovement;
     private bool _xenosCancelMovement;
@@ -90,13 +89,10 @@ public abstract class SharedMobCollisionSystem : EntitySystem
 
         // RMC14
         _rmcMobCollisionMassQuery = GetEntityQuery<RMCMobCollisionMassComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
         Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
         Subs.CVar(CfgManager, RMCCVars.RMCMovementBigXenosCancelMovement, v => _bigXenosCancelMovement = v, true);
-
-        _rmcMobCollisionMassQuery = GetEntityQuery<RMCMobCollisionMassComponent>();
-        _marineQuery = GetEntityQuery<MarineComponent>();
-        Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
         Subs.CVar(CfgManager, RMCCVars.RMCMovementXenosCancelMovement, v => _xenosCancelMovement = v, true);
     }
 
@@ -340,10 +336,12 @@ public abstract class SharedMobCollisionSystem : EntitySystem
                 _xenoQuery.HasComp(other) &&
                 _rmcSizeStun.TryGetSize(other, out var otherSize) &&
                 otherSize < RMCSizes.Big)
+            {
+                cancellableDirection += mobMovement;
+            }
 
             if (_xenosCancelMovement &&
-                userIsMarine &&
-                userSize >= RMCSizes.Humanoid &&
+                userIsXeno &&
                 _marineQuery.HasComp(other))
             {
                 cancellableDirection += mobMovement;

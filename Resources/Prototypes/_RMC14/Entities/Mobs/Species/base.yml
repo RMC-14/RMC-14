@@ -367,6 +367,7 @@
   - type: DeafenWhileCrit
   - type: RMCStopDropRollVisuals
   - type: XenoToggleChargingDamage
+  - type: RMCMobCollisionMass
     damage:
       types:
         Blunt: 0.25 # TODO RMC14 to the chest only
