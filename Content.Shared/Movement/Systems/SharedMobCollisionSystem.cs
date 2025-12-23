@@ -58,9 +58,12 @@ public abstract class SharedMobCollisionSystem : EntitySystem
 
     private EntityQuery<RMCMobCollisionMassComponent> _rmcMobCollisionMassQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
+    private EntityQuery<MarineComponent> _marineQuery;
 
     private float _penCapSubtract;
     private bool _bigXenosCancelMovement;
+    private bool _xenosCancelMovement;
+
 
     public override void Initialize()
     {
@@ -90,6 +93,11 @@ public abstract class SharedMobCollisionSystem : EntitySystem
         _xenoQuery = GetEntityQuery<XenoComponent>();
         Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
         Subs.CVar(CfgManager, RMCCVars.RMCMovementBigXenosCancelMovement, v => _bigXenosCancelMovement = v, true);
+
+        _rmcMobCollisionMassQuery = GetEntityQuery<RMCMobCollisionMassComponent>();
+        _marineQuery = GetEntityQuery<MarineComponent>();
+        Subs.CVar(CfgManager, RMCCVars.RMCMovementPenCapSubtract, v => _penCapSubtract = v, true);
+        Subs.CVar(CfgManager, RMCCVars.RMCMovementXenosCancelMovement, v => _xenosCancelMovement = v, true);
     }
 
     private void UpdatePushCap()
@@ -247,6 +255,7 @@ public abstract class SharedMobCollisionSystem : EntitySystem
         var speedMod = 1f;
         var cancellableDirection = Vector2.Zero;
         var userIsXeno = _xenoQuery.HasComp(entity);
+        var userIsMarine = _marineQuery.HasComp(entity);
         var userSize = RMCSizes.Small;
         if (userIsXeno)
             _rmcSizeStun.TryGetSize(entity, out userSize);
@@ -331,6 +340,11 @@ public abstract class SharedMobCollisionSystem : EntitySystem
                 _xenoQuery.HasComp(other) &&
                 _rmcSizeStun.TryGetSize(other, out var otherSize) &&
                 otherSize < RMCSizes.Big)
+
+            if (_xenosCancelMovement &&
+                userIsMarine &&
+                userSize >= RMCSizes.Humanoid &&
+                _marineQuery.HasComp(other))
             {
                 cancellableDirection += mobMovement;
             }
