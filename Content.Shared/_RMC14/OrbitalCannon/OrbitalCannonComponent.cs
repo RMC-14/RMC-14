@@ -4,6 +4,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
@@ -15,13 +16,28 @@ public sealed partial class OrbitalCannonComponent : Component
     public string CannonChamberContainer = "rmc_orbital_cannon_chamber";
 
     [DataField, AutoNetworkedField]
-    public string CannonRsiPath = "_RMC14/Structures/orbital_cannon.rsi";
-
-    [DataField, AutoNetworkedField]
-    public string BaseState = "obc";
-
-    [DataField, AutoNetworkedField]
     public string BaseLayerKey = "CannonLayerKey";
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? LoadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loading");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? UnloadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_unloading");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? ChamberingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_chambering");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? FiringAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_firing");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi UnloadedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_unloaded");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi LoadedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loaded");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi ChamberedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_chambered");
 
     [DataField, AutoNetworkedField]
     public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =

@@ -417,7 +417,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(cannon.Comp.LoadSound, cannon);
 
-        PlayCannonAnimation(cannon, $"{cannon.Comp.BaseState}_loading", $"{cannon.Comp.BaseState}_loaded");
+        _animation.TryFlick(cannon.Owner, cannon.Comp.LoadingAnimation, cannon.Comp.LoadedState, cannon.Comp.BaseLayerKey);
         CannonStatusChanged(cannon);
     }
 
@@ -450,7 +450,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(cannon.Comp.UnloadSound, cannon);
 
-        PlayCannonAnimation(cannon, $"{cannon.Comp.BaseState}_unloading", $"{cannon.Comp.BaseState}_unloaded");
+        _animation.TryFlick(cannon.Owner, cannon.Comp.UnloadingAnimation, cannon.Comp.UnloadedState, cannon.Comp.BaseLayerKey);
         CannonStatusChanged(cannon);
     }
 
@@ -479,7 +479,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(cannon.Comp.ChamberSound, cannon);
 
-        PlayCannonAnimation(cannon, $"{cannon.Comp.BaseState}_chambering", $"{cannon.Comp.BaseState}_chambered");
+        _animation.TryFlick(cannon.Owner, cannon.Comp.ChamberingAnimation, cannon.Comp.ChamberedState, cannon.Comp.BaseLayerKey);
         CannonStatusChanged(cannon);
     }
 
@@ -573,14 +573,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
             UpdateTrayVisuals((trayId, tray));
         var ev = new OrbitalCannonChangedEvent(cannon, CannonHasWarhead(cannon), CannonGetFuel(cannon));
         RaiseLocalEvent(cannon, ref ev, true);
-    }
-
-    private void PlayCannonAnimation(Entity<OrbitalCannonComponent> cannon, string animationState, string finalState)
-    {
-        var animationRsi = new SpriteSpecifier.Rsi(new ResPath(cannon.Comp.CannonRsiPath), animationState);
-        var defaultRsi = new SpriteSpecifier.Rsi(new ResPath(cannon.Comp.CannonRsiPath), finalState);
-
-        _animation.Flick((cannon.Owner, null), animationRsi, defaultRsi, cannon.Comp.BaseLayerKey);
     }
 
     private bool TileHasIndestructibleWalls(EntityCoordinates coordinates)
@@ -786,7 +778,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 Dirty(uid, firing);
 
                 _audio.PlayPvs(cannon.FireSound, uid);
-                PlayCannonAnimation((uid, cannon), $"{cannon.BaseState}_firing", $"{cannon.BaseState}_chambered");
+                _animation.TryFlick(uid, cannon.FiringAnimation, cannon.ChamberedState, cannon.BaseLayerKey);
 
                 var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
@@ -855,9 +847,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                 cannon.UnloadingTrayAt = time;
                 Dirty(uid, cannon);
-
-                PlayCannonAnimation((uid, cannon), $"{cannon.BaseState}_unloading", $"{cannon.BaseState}_unloaded");
-
+                _animation.TryFlick(uid, cannon.UnloadingAnimation, cannon.UnloadedState, cannon.BaseLayerKey);
                 CannonStatusChanged(cannonEnt);
                 RemCompDeferred<OrbitalCannonFiringComponent>(uid);
             }

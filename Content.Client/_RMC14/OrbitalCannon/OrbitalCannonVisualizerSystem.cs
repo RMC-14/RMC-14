@@ -11,32 +11,21 @@ public sealed class OrbitalCannonVisualizerSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<OrbitalCannonComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<OrbitalCannonComponent, AfterAutoHandleStateEvent>(OnAfterAutoHandleState);
     }
 
-    private void OnComponentStartup(Entity<OrbitalCannonComponent> ent, ref ComponentStartup args)
-    {
-        UpdateSprite(ent);
-    }
-
     private void OnAfterAutoHandleState(Entity<OrbitalCannonComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        UpdateSprite(ent);
-    }
-
-    private void UpdateSprite(Entity<OrbitalCannonComponent> ent)
     {
         if (!TryComp(ent, out SpriteComponent? sprite))
             return;
 
         var state = ent.Comp.Status switch
         {
-            OrbitalCannonStatus.Loaded => $"{ent.Comp.BaseState}_loaded",
-            OrbitalCannonStatus.Chambered => $"{ent.Comp.BaseState}_chambered",
-            _ => $"{ent.Comp.BaseState}_unloaded",
+            OrbitalCannonStatus.Loaded => ent.Comp.LoadedState,
+            OrbitalCannonStatus.Chambered => ent.Comp.ChamberedState,
+            _ => ent.Comp.UnloadedState,
         };
 
-        _sprite.LayerSetRsiState((ent.Owner, sprite), ent.Comp.BaseLayerKey, state);
+        _sprite.LayerSetSprite((ent.Owner, sprite), ent.Comp.BaseLayerKey, state);
     }
 }
