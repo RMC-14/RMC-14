@@ -100,6 +100,8 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
+      - id: CMBottleTricordrazine
+        amount: 3
 #      - id: CMBottleOxycodone # TODO RMC14
 #        amount: 3
 #      - id: CMBottlePeridaxon # TODO RMC14
@@ -117,6 +119,8 @@
       - id: CMPillCanisterInaprovaline
         amount: 2
       - id: CMPillCanisterKelotane
+        amount: 2
+      - id: CMPillCanisterTricordrazine
         amount: 2
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
 #        amount: 2
@@ -200,6 +204,8 @@
         amount: 3
       - id: CMBottleKelotane
         amount: 3
+      - id: CMBottleTricordrazine
+        amount: 3
 #      - id: CMBottleOxycodone # TODO RMC14
 #        amount: 3
 #      - id: CMBottlePeridaxon # TODO RMC14
@@ -219,6 +225,8 @@
       - id: CMPillCanisterDylovene
         amount: 2
       - id: CMPillCanisterInaprovaline
+        amount: 2
+      - id: CMPillCanisterTricordrazine
         amount: 2
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
 #        amount: 2
@@ -276,6 +284,8 @@
         amount: 6
       - id: CMBottleKelotane
         amount: 6
+      - id: CMBottleTricordrazine
+        amount: 3
     #      - id: CMBottleOxycodone # TODO RMC14
     #        amount: 6
     #      - id: CMBottlePeridaxon # TODO RMC14
@@ -354,6 +364,14 @@
         amount: 7
 #      - id: CMMedicalSplints5
 #        amount: 7
+    - name: Pills
+      entries:
+      - id: CMPacketPillsTricordrazine
+        amount: 7
+      - id: CMPacketPillsBicaridine
+        amount: 7
+      - id: CMPacketPillsKelotane
+        amount: 7
 
 - type: entity
   parent: ColMarTechMarineMedical
@@ -420,6 +438,15 @@
       entries:
       - id: CMHealthAnalyzer
         amount: 3
+    - name: Pills
+      entries:
+      - id: CMPacketPillsTricordrazine
+        amount: 7
+      - id: CMPacketPillsBicaridine
+        amount: 7
+      - id: CMPacketPillsKelotane
+        amount: 7
+
 
 - type: entity
   parent: RMCNanoMed
