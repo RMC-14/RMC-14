@@ -1,22 +1,22 @@
 - type: job
   parent: RMCSurvivorPMCBase
-  id: RMCSurvivorSolarisPMCFOL
+  id: RMCSurvivorSolarisPMCCommander
   name: rmc-job-name-pmc-field-operations-leader
   ranks:
     RMCRankWeYaFieldOperaionsLeader: []
   supervisors: cm-job-supervisors-we-ya
   accessGroups:
   - ColonistPMC
-  startingGear: RMCGearSurvivorPMCFOL
-  icon: RMCJobIconPMCFOL
-  greeting: rmc-job-greeting-solaris-pmc
+  startingGear: RMCGearSurvivorPMCCommander
+  icon: RMCJobIconPMCCommander
+  greeting: rmc-job-greeting-solaris-pmc-commander
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorWeYaPMCFOL
+      preset: SurvivorWeYaPMCCommander
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
@@ -41,7 +41,7 @@
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase
-  id: RMCGearSurvivorPMCFOL
+  id: RMCGearSurvivorPMCCommander
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCLeaderHolsterPatch
     shoes: RMCBootsPMCFilled
@@ -72,7 +72,7 @@
   name: special survivor crashlanding offices pmc field operations leader spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorSolarisPMCFOL
+    job_id: RMCSurvivorSolarisPMCCommander
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
@@ -80,7 +80,7 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconPMCFOL
+  id: RMCJobIconPMCCommander
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: pmc_fol

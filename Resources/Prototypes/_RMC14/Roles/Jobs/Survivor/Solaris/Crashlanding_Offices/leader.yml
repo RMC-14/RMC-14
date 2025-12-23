@@ -9,7 +9,7 @@
   - ColonistPMC
   startingGear: RMCGearSurvivorPMCLeader
   icon: RMCJobIconPMCLeader
-  greeting: rmc-job-greeting-solaris-pmc
+  greeting: rmc-job-greeting-solaris-pmc-leader
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Survivor — PMC Leader (Solaris Ridge special survivor)
   special:

@@ -9,6 +9,7 @@
   access:
   - CMAccessIllegal
   icon: CMJobIconExecSpec
+  greeting: rmc-job-greeting-solaris-pmc-supervisor
   spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
   startingGear: RMCGearSurvivorSolarisCorporateSupervisor
   special:
