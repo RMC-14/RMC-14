@@ -94,9 +94,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
             if (_moveOrderArmorQuery.HasComp(slot.ContainedEntity))
             {
                 if (_moveOrderArmorSpeedQuery.TryGetComponent(slot.ContainedEntity, out var speedModifierComponent))
-                {
                     armorSprintModifier = speedModifierComponent.SprintModifier;
-                }
                 hasArmor = true;
                 break;
             }
