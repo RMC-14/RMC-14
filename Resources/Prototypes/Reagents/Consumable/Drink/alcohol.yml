@@ -661,7 +661,7 @@
 - type: reagent
   id: BananaHonk
   name: reagent-name-banana-honk
-  parent: BaseAlcohol
+  parent: BaseDrink # RMC14
   desc: reagent-desc-banana-honk
   physicalDesc: reagent-physical-desc-creamy
   flavor: bananahonk
