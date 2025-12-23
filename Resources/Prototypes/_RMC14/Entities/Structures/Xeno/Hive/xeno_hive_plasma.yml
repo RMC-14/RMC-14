@@ -2,7 +2,7 @@
   id: HivePlasmaTreeXeno
   parent: HiveRecoveryNodeXeno
   name: plasma tree
-  description: A tree shaped node that has liquid plasma dripping around it.
+  description: A tree-shaped node whose "berries" are filled with glowing blue liquid that drips from them.
   components:
   - type: Sprite
     state: recovery_plasma
@@ -14,7 +14,7 @@
   id: HivePlasmaTreeXenoConstructionNode
   parent: HiveRecoveryNodeXenoConstructionNode
   name: plasma tree
-  description: Gives out small bursts of plasma, replenishing the reserves of the sisters around it
+  description: Making glowing blue "berries", replenishing plasma reserves of the sisters around it.
   components:
   - type: Sprite
     layers:
