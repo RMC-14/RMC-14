@@ -116,6 +116,11 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         {
             button.Refresh();
         }
+
+        foreach (var offsetButton in Window.Panel.GetControlOfType<DropshipFiremissionOffsetButton>())
+        {
+            offsetButton.Refresh();
+        }
     }
 
     private void SetScreen(bool first, Screen compScreen)

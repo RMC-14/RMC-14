@@ -1,0 +1,6 @@
+<controls:DropshipFiremissionOffsetButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    HorizontalExpand="True" VerticalExpand="True" MinSize="22, 22" MaxSize="30, 28" StyleClasses="OpenBoth" Margin="2">
+    <RichTextLabel Name="RichLabel" Access="Public" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+</controls:DropshipFiremissionOffsetButton>

@@ -1,0 +1,43 @@
+<controls:DropshipFiremissionEditScreen
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon"
+    MinSize="500 500">
+
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  SeparationOverride="4"
+                  Margin="10">
+
+        <!-- Mission name -->
+        <RichTextLabel Text="[color=#00FF36]Firemission: Attack one[/color]" HorizontalAlignment="Center" MinSize="0 30"/> <!-- TODO Replace text value on runtime -->
+
+        <!-- Weapon info table -->
+        <BoxContainer Orientation="Vertical" SeparationOverride="2">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <RichTextLabel Text="[color=#00FF36]Weapon[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
+                <RichTextLabel Name="WeaponName" Text="[color=#00FF36]LZR 1[/color]" HorizontalAlignment="Center" HorizontalExpand="True"/> <!-- TODO Replace text value on runtime-->
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <RichTextLabel Text="[color=#00FF36]Ammunition[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
+                <RichTextLabel Name="WeaponAmmoCount" Text="[color=#00FF36]100 / 100 using 0 per run[/color]" HorizontalAlignment="Center" HorizontalExpand="True"/> <!-- TODO Replace text value on runtime-->
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <RichTextLabel Text="[color=#00FF36]Gimbals[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
+                <RichTextLabel Name="WeaponGimbals" Text="[color=#00FF36]0 to 6[/color]" HorizontalAlignment="Center" HorizontalExpand="True"/> <!-- TODO Replace text value on runtime-->
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="2">
+                <RichTextLabel Text="[color=#00FF36]Fire Delay[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
+                <RichTextLabel Name="WeaponFireDelay" Text="[color=#00FF36]3[/color]" HorizontalAlignment="Center" HorizontalExpand="True"/> <!-- TODO Replace text value on runtime-->
+            </BoxContainer>
+        </BoxContainer>
+
+        <!-- GridContainer for the buttons -->
+        <GridContainer Columns="9" HSeparationOverride="2" VSeparationOverride="2"
+                       HorizontalExpand="True" VerticalExpand="True" Name="OffsetGrid">
+        </GridContainer>
+    </BoxContainer>
+</controls:DropshipFiremissionEditScreen>

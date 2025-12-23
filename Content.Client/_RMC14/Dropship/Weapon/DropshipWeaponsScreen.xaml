@@ -21,6 +21,8 @@
                     </PanelContainer.PanelOverride>
                     <viewport:ScalingViewport Name="Viewport" Access="Public" Visible="False"
                                               HorizontalExpand="True" VerticalExpand="True" />
+                    <controls:DropshipFiremissionEditScreen Name="FiremissionGrid" Access="Public" Visible="False"
+                        HorizontalExpand="True" VerticalExpand="True" />
                     <Label Name="ScreenLabel" Access="Public"
                            HorizontalExpand="True" VerticalExpand="True"
                            Align="Center" VAlign="Center" ModulateSelfOverride="#00E94E" />
