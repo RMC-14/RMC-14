@@ -2,7 +2,6 @@ using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
-using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Maps;
@@ -324,8 +323,7 @@ public sealed class BarricadeSystem : EntitySystem
                 Del(empty);
         }
 
-        if (!HasComp<GhostComponent>(user))
-            tool.Comp.TotalLayers -= amount;
+        tool.Comp.TotalLayers -= toRemove;
         Dirty(tool);
         _audio.PlayPredicted(tool.Comp.FillSound, user, user);
 
