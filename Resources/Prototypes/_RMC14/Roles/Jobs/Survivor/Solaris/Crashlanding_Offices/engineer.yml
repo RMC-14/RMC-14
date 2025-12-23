@@ -30,7 +30,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - SquadPMC
+        - RMCSquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
   useLoadoutOfJob: CMSurvivorEngineer

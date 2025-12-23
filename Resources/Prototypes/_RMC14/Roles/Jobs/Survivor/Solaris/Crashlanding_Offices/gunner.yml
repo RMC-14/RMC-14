@@ -32,7 +32,7 @@
     - type: AssignSquad
       whitelist:
         tags:
-        - SquadPMC
+        - RMCSquadPMC
   useLoadoutOfJob: CMSurvivor
 
 - type: startingGear

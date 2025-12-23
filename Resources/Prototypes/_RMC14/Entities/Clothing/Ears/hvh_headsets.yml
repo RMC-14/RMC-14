@@ -13,6 +13,15 @@
     containers:
       key_slots:
       - CMEncryptionKeyWEYAColony
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmc
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
 
 - type: entity
   parent: RMCHeadsetHvHWeYaPMC
