@@ -41,6 +41,7 @@
     burstScatterMult: 0
   - type: ShootAtFixedPoint
     maxFixedRange: 15
+    autoAimClosestObstacle: true
   - type: BallisticAmmoProvider
     whitelist:
       tags:
