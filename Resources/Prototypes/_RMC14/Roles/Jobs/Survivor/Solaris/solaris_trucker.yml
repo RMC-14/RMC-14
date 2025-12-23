@@ -9,7 +9,13 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorTrucker
+      skills:
+        RMCSkillFireman: 1
+        RMCSkillEngineer: 1
+        RMCSkillConstruction: 2
+        RMCSkillVehicles: 3
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
