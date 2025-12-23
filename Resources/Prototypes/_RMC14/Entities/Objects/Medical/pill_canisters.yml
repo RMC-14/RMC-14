@@ -360,7 +360,7 @@
 - type: entity
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterRussianRedNoSkill
-  name: Russian red pill bottle
+  name: russian red pill bottle
   description: It's an airtight container for storing medication. It's labeled "Russian Red (10u, 2 pill OD) A very dangerous radiation-countering substance."
   suffix: Russian Red, 16, No Skill
   components:
@@ -420,6 +420,7 @@
   - type: StorageSkillRequired
     skills:
       RMCSkillMedical: 2
+
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity
