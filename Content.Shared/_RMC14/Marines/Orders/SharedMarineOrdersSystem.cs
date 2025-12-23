@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Actions;
+using Content.Shared.Clothing;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
@@ -24,12 +25,14 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
     private readonly HashSet<Entity<MarineComponent>> _receivers = new();
 
     private EntityQuery<MoveOrderArmorComponent> _moveOrderArmorQuery;
+    private EntityQuery<ClothingSpeedModifierComponent> _moveOrderArmorSpeedQuery;
 
     public override void Initialize()
     {
         base.Initialize();
 
         _moveOrderArmorQuery = GetEntityQuery<MoveOrderArmorComponent>();
+        _moveOrderArmorSpeedQuery = GetEntityQuery<ClothingSpeedModifierComponent>();
 
         SubscribeLocalEvent<MoveOrderComponent, EntityUnpausedEvent>(OnUnpause);
         SubscribeLocalEvent<FocusOrderComponent, EntityUnpausedEvent>(OnUnpause);
@@ -82,6 +85,7 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
         var hasArmor = false;
         var armorEnumerator = _inventory.GetSlotEnumerator(orders.Owner, SlotFlags.OUTERCLOTHING);
+        float? armorSprintModifier = null;
         while (armorEnumerator.MoveNext(out var slot))
         {
             if (slot.ContainedEntity == null)
@@ -89,15 +93,20 @@ public abstract class SharedMarineOrdersSystem : EntitySystem
 
             if (_moveOrderArmorQuery.HasComp(slot.ContainedEntity))
             {
+                if (_moveOrderArmorSpeedQuery.TryGetComponent(slot.ContainedEntity, out var speedModifierComponent))
+                {
+                    armorSprintModifier = speedModifierComponent.SprintModifier;
+                }
                 hasArmor = true;
                 break;
             }
         }
 
-        if (!hasArmor)
+        if (!hasArmor || armorSprintModifier == null)
             return;
 
-        var speed = 1 + (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
+        var speed = (comp.MoveSpeedModifier * comp.Received[0].Multiplier).Float();
+        speed = (speed + armorSprintModifier > 1) ? (1 - armorSprintModifier.Value + 1) : 1 + speed;
         args.ModifySpeed(speed, speed);
     }
 
