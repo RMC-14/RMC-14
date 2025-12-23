@@ -25,18 +25,10 @@
     offset: 1.5, 0.5
     layers:
     - state: obc_unloaded
-      map: [ "base" ]
+      map: [ "CannonLayerKey" ]
   - type: Clickable
   - type: InteractionOutline
-  - type: Appearance
   - type: RMCAnimation
-  - type: GenericVisualizer
-    visuals:
-      enum.OrbitalCannonVisuals.Base:
-        base:
-          Loaded: { state: obc_loaded }
-          Unloaded: { state: obc_unloaded }
-          Chambered: { state: obc_chambered }
   - type: RMCLoreExaminable
     content: rmc-lore-examniable-orbital-cannon
   - type: RMCMesonsNonviewable

@@ -4,7 +4,6 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.OrbitalCannon;
 
@@ -16,25 +15,13 @@ public sealed partial class OrbitalCannonComponent : Component
     public string CannonChamberContainer = "rmc_orbital_cannon_chamber";
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? LoadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loading");
+    public string CannonRsiPath = "_RMC14/Structures/orbital_cannon.rsi";
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? UnloadingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_unloading");
+    public string BaseState = "obc";
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? ChamberingAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_chambering");
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? FiringAnimation = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_firing");
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi LoadedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_loaded");
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi UnloadedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_unloaded");
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi ChamberedState = new(new ResPath("_RMC14/Structures/orbital_cannon.rsi"), "obc_chambered");
+    public string BaseLayerKey = "CannonLayerKey";
 
     [DataField, AutoNetworkedField]
     public EntProtoId<OrbitalCannonWarheadComponent>[] WarheadTypes =
@@ -107,12 +94,6 @@ public sealed partial class OrbitalCannonComponent : Component
 [DataRecord]
 [Serializable, NetSerializable]
 public readonly record struct WarheadFuelRequirement(EntProtoId<OrbitalCannonWarheadComponent> Warhead, int Fuel);
-
-[Serializable, NetSerializable]
-public enum OrbitalCannonVisuals
-{
-    Base,
-}
 
 [Serializable, NetSerializable]
 public enum OrbitalCannonStatus
