@@ -10,6 +10,10 @@ rmc-ghost-role-clf-cell-commander = CLF Cell Commander (Hostile)
 rmc-clf-cell-commander = Cell Commander
 rmc-job-prefix-clf-cell-commander = CMDR
 
+rmc-ghost-role-clf-cell-leader = CLF Cell Leader (Hostile)
+rmc-clf-cell-leader = Cell Leader
+rmc-job-prefix-clf-cell-leader = CMDR
+
 rmc-ghost-role-clf-soldier = CLF Soldier (Hostile)
 rmc-clf-soldier = Soldier
 rmc-job-prefix-clf-soldier = GRL

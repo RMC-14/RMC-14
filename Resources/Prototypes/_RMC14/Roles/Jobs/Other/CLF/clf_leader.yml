@@ -1,21 +1,21 @@
 ﻿- type: job
   parent: CMJobBase
-  id: RMCCLFCellCommander
-  name: rmc-clf-cell-commander
+  id: RMCCLFCellLeader
+  name: rmc-clf-cell-leader
   description: rmc-ghost-role-information-clf-description
-  playTimeTracker: CMJobCLFCellCommander
+  playTimeTracker: CMJobCLFCellLeader
   ranks:
     RMCRankCLFRebelCommander: [ ]
-  startingGear: RMCGearCLFCellCommander
-  icon: RMCJobIconCLFCellCommander
+  startingGear: RMCGearCLFCellLeader
+  icon: RMCJobIconCLFCellLeader
   joinNotifyCrew: false
-  spawnMenuRoleName: CLF Cell Commander
+  spawnMenuRoleName: CLF Cell Leader
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
-        RMCSkillFirearms: 2
+        RMCSkillFirearms: 1
         RMCSkillEngineer: 2
         RMCSkillCqc: 2
         RMCSkillLeadership: 3
@@ -24,76 +24,87 @@
         RMCSkillPolice: 2
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 2
+        RMCSkillVehicles: 1
         RMCSkillEndurance: 5
-        RMCSkillJtac: 4
-        RMCSkillSmartGun: 1
-        RMCSkillExecution: 1
+        RMCSkillJtac: 3
+        RMCSkillConstruction: 2
     - type: NpcFactionMember
       factions:
       - CLF
     - type: JobPrefix
-      prefix: rmc-job-prefix-clf-cell-commander
+      prefix: rmc-job-prefix-clf-cell-leader
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: clf_cellcom
+        state: clf_sl
     - type: RMCPointing
     - type: MarineOrders
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidCLFCellCommander
-  name: clf ghost role cell commander
+  id: RMCRandomHumanoidCLFCellLeader
+  name: clf ghost role cell leader
   suffix: Spawner, Player
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCCLFCellCommander
+    settings: RMCCLFCellLeader
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCCLFCellCommander
+  id: RMCCLFCellLeader
   components:
   - type: GhostRole
-    name: rmc-ghost-role-clf-cell-commander
+    name: rmc-ghost-role-clf-cell-leader
     description: rmc-ghost-role-information-clf-description
     rules: rmc-ghost-role-information-clf-rules
     reregister: false
-    job: RMCCLFCellCommander
+    job: RMCCLFCellLeader
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
 - type: startingGear
-  id: RMCGearCLFCellCommander
+  id: RMCGearCLFCellLeader
   equipment:
-    head: RMCArmorHelmetMercenaryMiner
-    mask: RMCCombatUtilityKnifeB
+    head: CMHeadBeret # TODO RMC14 Officer beret
+    mask: RMCCombatUtilityKnifeB # TODO RMC14 Type 80 bayonet
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
-    outerClothing: RMCCoatMilitiaHarness
+    outerClothing: RMCCoatMilitia
     gloves: CMHandsBlackMarine
     shoes: RMCShoesCombat
-    suitstorage: RMCSmartGunCLF
-    id: RMCIDCardCLFCellCommander # TODO RMC14
-    belt: RMCBeltSmartGunOperatorPistolCLF
-    pocket1: RMCPouchSurvivalFill
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDCardCLFCellLeader # TODO RMC14
+    belt: RMCMAR40BeltFilled
+    back: RMCSatchelLightpack
+    pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidInjectors
   storage:
-    outerClothing:
-    - RMCSpeedLoaderMatebaHighImpact
-    - RMCSpeedLoaderMatebaHighImpact
+      back:
+      - RMCGrenadeIED
+      - RMCGrenadeIED
+      - RMCExplosivePlastic
+      - CMCrowbar
+      - CMScrewdriver
+      - CMMultitool
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+      - CMMagazinePistolM1984
+      - RMCMagazineRifleMAR40
+      outerClothing:
+      - RMCMagazineRifleMAR40
+      - RMCMagazineRifleMAR40
 
 - type: playTimeTracker
-  id: CMJobCLFCellCommander
+  id: CMJobCLFCellLeader
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconCLFCellCommander
+  id: RMCJobIconCLFCellLeader
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: clf_cellcom
+    state: clf_sl

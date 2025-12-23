@@ -155,6 +155,8 @@
     items:
       tags:
       - RMCMagazineMar50LMG
+      - RMCMagazineRifleMAR40
+      - RMCMagazineSMGMAC15
 
 - type: entity
   parent: RMCCoatMilitia
