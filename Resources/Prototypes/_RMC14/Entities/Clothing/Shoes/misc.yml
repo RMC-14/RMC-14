@@ -27,6 +27,15 @@
 
 - type: entity
   parent: RMCShoesLaceup
+  id: RMCShoesLaceupDress
+  name: dress shoes
+  description: Pre-polished fancy dress shoes. You can see your reflection in them.
+  components:
+  - type: NoSlip
+  # - siemensCoefficent: 0.6 TODO RMC14: Siemens coefficient
+
+- type: entity
+  parent: RMCShoesLaceup
   id: RMCShoesLaceupBrown
   components:
   - type: Sprite

@@ -188,6 +188,12 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: pmc_ld
+  - type: Tag
+    tags:
+    - RMCSquadPMC
+
+- type: Tag
+  id: RMCSquadPMC
 
 - type: entity
   parent: SquadBase

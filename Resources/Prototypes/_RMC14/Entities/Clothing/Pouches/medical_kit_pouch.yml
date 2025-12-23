@@ -138,6 +138,21 @@
     # TODO RMC14: splint nano
 
 - type: entity
+  parent: RMCPouchMedkitPMC
+  id: RMCPouchMedkitPMCFullAdvanced
+  suffix: Filled, Full Advanced, PMC
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTricordrazineAutoInjector
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMOintment10
+    - id: CMOintment10
+    # TODO RMC14: splints
+
+- type: entity
   parent: RMCPouchMedkit
   id: RMCPouchMedkitFillRoyal
   suffix: Filled, Royal

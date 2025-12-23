@@ -18,6 +18,25 @@
 
 - type: entity
   parent: RMCJumpsuitVeteranPMCNoWebbing
+  id: RMCJumpsuitVeteranPMCNoWebbingPatch
+  suffix: WY patch
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCNoWebbing
+  id: RMCJumpsuitVeteranPMCNoWebbingPatchFolded
+  suffix: Folded
+  components:
+  - type: RMCClothingFoldable
+    activatedPrefix: jacket
+  - type: Clothing
+    equippedPrefix: jacket
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCNoWebbing
   id: RMCJumpsuitVeteranPMC
   suffix: Webbing
   components:
@@ -53,17 +72,58 @@
 
 - type: entity
   parent: RMCVeteranUniformBase
-  id: RMCJumpsuitVeteranPMCEngineer
+  id: RMCJumpsuitVeteranPMCEngineerNoWebbing
   name: PMC engineer fatigues
   description: A black set of fatigues, designed for private security engineers. The symbol of the Weston-Yamada corporation is emblazed on the suit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/engineer.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCEngineerNoWebbing
+  id: RMCJumpsuitVeteranPMCEngineerNoWebbingPatch
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCEngineerNoWebbing
+  id: RMCJumpsuitVeteranPMCEngineer
+  components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCEngineer
 
 - type: entity
   parent: RMCVeteranUniformBase
+  id: RMCJumpsuitVeteranPMCLeaderNoWebbing
+  name: PMC command fatigues
+  description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit. This particular suit looks like it belongs to a high-ranking officer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/PMC/officer.rsi
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCLeaderNoWebbing
+  id: RMCJumpsuitVeteranPMCLeaderNoWebbingPatch
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCLeaderNoWebbingPatch
+  id: RMCJumpsuitVeteranPMCLeaderHolsterPatch
+  suffix: Holster, Patch, MK80
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYa
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterMK80
+
+- type: entity
+  parent: RMCJumpsuitVeteranPMCLeaderNoWebbing
   id: RMCJumpsuitVeteranPMCLeader
   name: PMC command fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit. This particular suit looks like it belongs to a high-ranking officer.
