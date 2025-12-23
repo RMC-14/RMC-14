@@ -1,0 +1,31 @@
+- type: entity
+  id: HivePlasmaTreeXeno
+  parent: HiveRecoveryNodeXeno
+  name: plasma tree
+  description: A tree shaped node that has liquid plasma dripping around it.
+  components:
+  - type: Sprite
+    state: recovery_plasma
+  - type: PlasmaTree
+  - type: HiveConstructionLimited
+    id: HivePlasmaTreeXeno
+
+- type: entity
+  id: HivePlasmaTreeXenoConstructionNode
+  parent: HiveRecoveryNodeXenoConstructionNode
+  name: plasma tree
+  description: Gives out small bursts of plasma, replenishing the reserves of the sisters around it
+  components:
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
+      state: recovery_plasma
+    - sprite: _RMC14/Interface/xeno_hud.rsi
+      state: xeno_structure_node_indicator
+      scale: 0.8, 0.8
+  - type: HiveConstructionNode
+    spawn: HivePlasmaTreeXeno
+  - type: HiveConstructionLimited
+    id: HivePlasmaTreeXeno
+  - type: WarpPoint
+    location: plasma tree

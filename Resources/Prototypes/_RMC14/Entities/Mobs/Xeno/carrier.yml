@@ -38,6 +38,7 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
