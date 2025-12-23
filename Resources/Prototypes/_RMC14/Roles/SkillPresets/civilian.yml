@@ -139,7 +139,7 @@
     RMCSkillIntel: 2
 
 - type: skillPreset
-  id: SurvivorWeYaPMCFOL
+  id: SurvivorWeYaPMCCommander
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
