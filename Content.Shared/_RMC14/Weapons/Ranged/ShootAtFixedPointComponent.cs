@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -13,6 +13,13 @@ public sealed partial class ShootAtFixedPointComponent : Component // TODO: Make
     /// </summary>
     [DataField, AutoNetworkedField]
     public float? MaxFixedRange;
+
+    /// <summary>
+    /// If true, targetting past an Impassable fixture obstacle result in automatically targetting
+    /// right in front of the obstacle.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AutoAimClosestObstacle = false;
 
     /// <summary>
     /// Should projectiles launched by a gun with this component be fired in an 'arc'?
