@@ -643,6 +643,25 @@
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTOPMCBroken
+  name: broken We-Ya radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
+
+- type: entity
   parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
   name: We-Ya radio telephone pack

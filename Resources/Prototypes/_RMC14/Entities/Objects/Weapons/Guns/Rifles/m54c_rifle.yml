@@ -222,9 +222,9 @@
 
 - type: entity
   parent: RMCWeaponRifleM54CSemiStripped
-  id: RMCWeaponRifleM54CWhite
+  id: RMCWeaponRifleM54CWhiteNoLock
   description: A M54C Mk2 with a Weston-Yamada logo imprinted on the reciever. Used primarily by Weston-Yamada's corporate security forces, and comes equipped with a drab corproate white paint job.
-  suffix: White, No UGL
+  suffix: Corporate, No UGL, No ID lock
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m54c/snow.rsi
@@ -245,6 +245,13 @@
           tags:
           - RMCAttachmentM54CStockSolid
           - RMCAttachmentM54CStockCollapsible
+
+- type: entity
+  parent: RMCWeaponRifleM54CWhiteNoLock
+  id: RMCWeaponRifleM54CWhite
+  suffix: Has ID Lock
+  components:
+  - type: GunIDLock
 
 - type: entity
   parent: CMMagazineRifleBase

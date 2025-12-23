@@ -1,0 +1,73 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorSolarisPMCMedic
+  name: rmc-job-name-pmc-medic
+  ranks:
+    RMCRankWeYaMedicalSpecialist: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCMedic
+  icon: RMCJobIconPMCMedic
+  greeting: rmc-job-greeting-solaris-pmc
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC Medic (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: SurvivorWeYaPMCMedic
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCBase
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - SquadPMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-medic
+  useLoadoutOfJob: CMSurvivorDoctor
+
+- type: startingGear
+  parent: RMCGearSurvivorPMCBase
+  id: RMCGearSurvivorPMCMedic
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbingPatch
+    shoes: RMCBootsPMCFilled
+    gloves: CMHandsBlackMarine
+    mask: RMCMaskCoifPMC
+    ears: RMCHeadsetHvHWeYaPMCMedic
+    head: ArmorHelmetPMC
+    outerClothing: CMArmorM4PMCLight
+    back: RMCSatchelPMCMedic
+    belt: CMM77BeltFilledNearEmpty
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+    eyes: RMCGlassesMedicalHUDGlasses
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMDefibrillator
+    outerClothing:
+    - RMCMREWeYa
+  inhand:
+  - CMHealthAnalyzer
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCrashlandingOfficesMedic
+  name: special survivor crashlanding offices pmc medic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisPMCMedic
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy

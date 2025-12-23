@@ -295,6 +295,9 @@ rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
 
 rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
 
+rmc-job-name-survivor-solaris-corporate-supervisor = Colony Supervisor
+rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
+
 # Shivas survs
 
 rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison

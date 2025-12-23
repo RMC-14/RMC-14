@@ -86,6 +86,76 @@
     RMCSkillLeadership: 1
 
 - type: skillPreset
+  id: SurvivorWeYaPMCStandard
+  skills:
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillMedical: 1
+    RMCSkillFirearms: 2
+    RMCSkillVehicles: 1
+
+- type: skillPreset
+  id: SurvivorWeYaPMCMedic
+  skills:
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillMedical: 2
+    RMCSkillSurgery: 1
+    RMCSkillEndurance: 2
+    RMCSkillFirearms: 2
+    RMCSkillVehicles: 1
+
+- type: skillPreset
+  id: SurvivorWeYaPMCEngineer
+  skills:
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillFirearms: 2
+    RMCSkillVehicles: 1
+    RMCSkillEngineer: 2
+    RMCSkillConstruction: 2
+    RMCSkillPowerLoader: 2
+
+- type: skillPreset
+  id: SurvivorWeYaPMCLeader
+  skills:
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillFirearms: 2
+    RMCSkillVehicles: 1
+    RMCSkillEngineer: 2
+    RMCSkillConstruction: 2
+    RMCSkillLeadership: 2
+    RMCSkillOverwatch: 1
+    RMCSkillJtac: 2
+    RMCSkillIntel: 2
+
+- type: skillPreset
+  id: SurvivorWeYaPMCFOL
+  skills:
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillFirearms: 2
+    RMCSkillVehicles: 1
+    RMCSkillEngineer: 2
+    RMCSkillConstruction: 2
+    RMCSkillLeadership: 3 # Replace with 4 when skill change comes around
+    RMCSkillOverwatch: 1
+    RMCSkillJtac: 2
+    RMCSkillIntel: 2
+
+- type: skillPreset
   id: SurvivorTrucker
   skills:
     RMCSkillFireman: 1
