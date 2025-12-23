@@ -114,6 +114,5 @@
   - type: SkillPreset
     skills:
       RMCSkillEngineer: 1
-      RMCSkillVehicles: 3
       RMCSkillPowerLoader: 2
       RMCSkillVehicles: 1
