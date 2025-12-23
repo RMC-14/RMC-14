@@ -1,5 +1,14 @@
 - type: entity
-  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  parent: RMCArmoredUniformBase
+  id: RMCVeteranUniformBase
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - RMCUniformPMC
+
+- type: entity
+  parent: [RMCVeteranUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCNoWebbing
   name: PMC fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit.
@@ -62,7 +71,7 @@
     - RMCPatchWeYa
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCVeteranUniformBase
   id: RMCJumpsuitVeteranPMCEngineerNoWebbing
   name: PMC engineer fatigues
   description: A black set of fatigues, designed for private security engineers. The symbol of the Weston-Yamada corporation is emblazed on the suit.
@@ -86,7 +95,7 @@
     startingWebbing: RMCWebbingPMCEngineer
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCVeteranUniformBase
   id: RMCJumpsuitVeteranPMCLeaderNoWebbing
   name: PMC command fatigues
   description: A white set of fatigues, designed for private security operators. The symbol of the Weston-Yamada corporation is emblazed on the suit. This particular suit looks like it belongs to a high-ranking officer.
@@ -134,7 +143,7 @@
     startingWebbing: RMCWebbingPMCWhiteout
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCVeteranUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCCorporate
   name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is commonly worn by what are known as 'goons'.
@@ -146,7 +155,7 @@
     foldVerbText: rmc-sleeves-verb-fold
 
 - type: entity
-  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  parent: [RMCVeteranUniformBase, RMCFoldableUniformBase]
   id: RMCJumpsuitVeteranPMCCorporateLead
   name: We-Ya corporate security uniform
   description: An armored uniform worn by We-Ya corporate security members. This variant is commonly worn by the lead of the 'goonsquad', as they are colloquially known.
