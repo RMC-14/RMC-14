@@ -66,6 +66,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<OrbitalCannonComponent, MapInitEvent>(OnOrbitalCannonMapInit);
+        SubscribeLocalEvent<OrbitalCannonComponent, ComponentShutdown>(OnOrbitalCannonShutdown);
 
         SubscribeLocalEvent<OrbitalCannonTrayComponent, PowerLoaderGrabEvent>(OnTrayPowerLoaderGrab);
         SubscribeLocalEvent<OrbitalCannonTrayComponent, EntInsertedIntoContainerMessage>(OnTrayContainerInserted);
@@ -119,6 +120,12 @@ public sealed class OrbitalCannonSystem : EntitySystem
         }
 
         Dirty(ent);
+    }
+
+    private void OnOrbitalCannonShutdown(Entity<OrbitalCannonComponent> ent, ref ComponentShutdown args)
+    {
+        if (_net.IsServer && ent.Comp.LinkedTray is { } trayId)
+            QueueDel(trayId);
     }
 
     private void OnTrayPowerLoaderGrab(Entity<OrbitalCannonTrayComponent> ent, ref PowerLoaderGrabEvent args)
