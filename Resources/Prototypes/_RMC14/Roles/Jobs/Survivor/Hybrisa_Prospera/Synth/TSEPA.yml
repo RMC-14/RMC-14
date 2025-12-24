@@ -62,7 +62,6 @@
   parent: RMCGearSyntheticColonistHybrisaCivilian
   id: RMCGearSyntheticColonistHybrisaTSEPA
   equipment:
-    head: RMCHeadBeretTSEPA
     ears: RMCHeadsetTSEPA
     eyes: RMCGlassesSecurityBlue
     jumpsuit: RMCJumpsuitTSEPA
