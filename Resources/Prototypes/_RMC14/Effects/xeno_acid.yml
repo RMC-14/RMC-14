@@ -107,6 +107,9 @@
     - state: acid2
   - type: ApplyAcidStacks
     amount: 2
+    damage:
+      types:
+        Heat: 30
   - type: DamageOnCollide
     damage:
       types:
