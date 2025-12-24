@@ -67,6 +67,11 @@
   - type: Tag
     tags:
     - RMCMetalBarricade
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barricades
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCMetalBarricade
@@ -485,6 +490,11 @@
   - type: InteractedBlacklist
     anchoredOnly: true
     blacklist:
+      components:
+      - Xeno
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barricades
+    whitelist:
       components:
       - Xeno
   - type: UseDelay

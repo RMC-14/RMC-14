@@ -77,6 +77,11 @@
     node: nodePlasteel
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgradePlasteel", "RMCBiohazardUpgradePlasteel", "RMCBruteUpgradePlasteel"]
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barricades
+    whitelist:
+      components:
+      - Xeno
   - type: Tag
     tags:
     - RMCPlasteelBarricade

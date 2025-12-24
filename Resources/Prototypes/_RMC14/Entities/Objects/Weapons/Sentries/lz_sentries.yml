@@ -58,6 +58,11 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTurret

@@ -63,6 +63,11 @@
     proto: RMCFlareBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlare
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-flare
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMFlare
@@ -110,6 +115,8 @@
     proto: RMCFlareCASBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlareCAS
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-signal-flare
 
 - type: entity
   parent: CMFlare

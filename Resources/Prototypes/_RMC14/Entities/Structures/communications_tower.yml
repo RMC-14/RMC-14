@@ -92,6 +92,11 @@
     blacklist:
       components:
       - Xeno
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-communications-tower
+    whitelist:
+      components:
+      - Xeno
   - type: RMCMesonsNonviewable
 
 - type: entity

@@ -49,6 +49,11 @@
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: sensor_tower
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sensor-tower
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSensorTower

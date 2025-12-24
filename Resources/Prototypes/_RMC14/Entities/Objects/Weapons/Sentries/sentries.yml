@@ -5,6 +5,11 @@
   name: turret
   components:
   - type: Sentry
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: htnCompound
   id: RMCSentryCompound
