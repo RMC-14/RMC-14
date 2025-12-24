@@ -1,0 +1,86 @@
+- type: job
+  parent: RMCJobSyntheticColony
+  id: RMCSyntheticColonyHybrisaTSEPA
+  startingGear: RMCGearSyntheticColonistHybrisaTSEPA
+  spawnMenuRoleName: TSEPA Support Synth (Hybrisa Survivor)
+  ranks:
+    RMCRankTSEPAConstable: [ ]
+  icon: "RMCJobIconTSEPASynth"
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 1
+        RMCSkillIntel: 1
+        RMCSkillDomestics: 2
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: NpcFactionMember
+      factions:
+      - TSE
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetHybrisaSynthTSEPA
+    - type: Synth
+      generation: rmc-species-synth-generation-second
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistHybrisaCivilian
+  id: RMCGearSyntheticColonistHybrisaTSEPA
+  equipment:
+    ears: RMCHeadsetTSEPA
+    eyes: RMCGlassesSecurityBlue
+    jumpsuit: RMCJumpsuitTSEPA
+    gloves: RMCHandsVeteran
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardTSEPASilverGold
+    back: RMCSatchelBlackFillSurvivorConstable
+
+- type: entity
+  id: RMCSurvivorPresetHybrisaSynthTSEPA
+  name: survivor synth hybrisa tsepa colonist preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCCoatTSEPAHighVisVest, RMCHeadCapTSEPA ]
+    - [ RMCCoatTSEPAHighVis, RMCHeadBeretTSEPA ]
+    - [ RMCCoatTSEPA, RMCHeadCapTSEPAPeaked ]
