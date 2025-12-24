@@ -61,6 +61,8 @@
       - id: CMPillCanisterKelotane
         points: 5
         recommended: true
+      - id: CMPillCanisterTricordrazine
+        points: 5
 #      - id: CMPillCanisterPeridaxon
 #        points: 5
 #      - id: CMPillCanisterTramadol
