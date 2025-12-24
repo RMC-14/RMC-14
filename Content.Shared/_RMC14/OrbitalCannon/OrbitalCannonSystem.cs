@@ -722,6 +722,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
             var trayCoords = _transform.GetMoverCoordinates(uid).Offset(cannon.TraySpawnOffset);
             _container.Remove(trayId, cannonChamber);
             _transform.SetCoordinates(trayId, trayCoords);
+            _audio.PlayPvs(cannon.UnloadSound, uid);
 
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
                 UpdateTrayVisuals((trayId, tray));
@@ -765,6 +766,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 var map = _transform.GetMapId(uid);
                 var sameMap = Filter.BroadcastMap(map);
                 _rmcCameraShake.ShakeCamera(sameMap, 10, 1);
+                _audio.PlayPvs(cannon.FireSound, uid);
+                _animation.TryFlick(uid, cannon.FiringAnimation, cannon.ChamberedState, cannon.BaseLayerKey);
 
                 var msg = "[color=red]The deck of the UNS Almayer shudders as the orbital cannons open fire on the colony.[/color]";
                 _rmcChat.ChatMessageToMany(msg, msg, sameMap, ChatChannel.Radio);
@@ -776,9 +779,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
             {
                 firing.Fired = true;
                 Dirty(uid, firing);
-
-                _audio.PlayPvs(cannon.FireSound, uid);
-                _animation.TryFlick(uid, cannon.FiringAnimation, cannon.ChamberedState, cannon.BaseLayerKey);
 
                 var planetEntCoordinates = _transform.ToCoordinates(planetCoordinates);
                 _audio.PlayPvs(cannon.TravelSound, planetEntCoordinates, AudioParams.Default.WithMaxDistance(75));
@@ -842,6 +842,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                         if (_container.TryGetContainer(trayId, tray.WarheadContainer, out var warheadContainer))
                             _container.CleanContainer(warheadContainer);
+
+                        UpdateTrayVisuals((trayId, tray));
                     }
                 }
 
