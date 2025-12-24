@@ -60,7 +60,7 @@ public abstract class SharedMedicalSupplyLinkSystem : EntitySystem
         return false;
     }
 
-    private void OnVendorAnchorChanged(Entity<CMAutomatedVendorComponent> vendor, ref AnchorStateChangedEvent args)
+    protected virtual void OnVendorAnchorChanged(Entity<CMAutomatedVendorComponent> vendor, ref AnchorStateChangedEvent args)
     {
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(vendor);
         while (anchored.MoveNext(out var anchoredId))

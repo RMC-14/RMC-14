@@ -18,12 +18,11 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
         base.Initialize();
 
         SubscribeLocalEvent<CMMedicalSupplyLinkComponent, ComponentStartup>(OnComponentStartup);
-        SubscribeLocalEvent<CMAutomatedVendorComponent, AnchorStateChangedEvent>(OnClientVendorAnchorChanged, before: [typeof(SharedMedicalSupplyLinkSystem)]);
     }
 
-    private void OnClientVendorAnchorChanged(Entity<CMAutomatedVendorComponent> vendor, ref AnchorStateChangedEvent args)
+    protected override void OnVendorAnchorChanged(Entity<CMAutomatedVendorComponent> vendor, ref AnchorStateChangedEvent args)
     {
-        // This prevents state mismatch when quickly unanchoring and reanchoring
+        // This should prevent state mismatch when quickly unanchoring and reanchoring
         var anchored = _rmcMap.GetAnchoredEntitiesEnumerator(vendor);
         while (anchored.MoveNext(out var anchoredId))
         {
@@ -33,8 +32,10 @@ public sealed class RMCMedicalSupplyLinkSystem : SharedMedicalSupplyLinkSystem
             if (_animationPlayer.HasRunningAnimation(anchoredId, FlickId))
                 _animationPlayer.Stop(anchoredId, FlickId);
 
-            return;
+            break;
         }
+
+        base.OnVendorAnchorChanged(vendor, ref args);
     }
 
     private void OnComponentStartup(Entity<CMMedicalSupplyLinkComponent> ent, ref ComponentStartup args)
