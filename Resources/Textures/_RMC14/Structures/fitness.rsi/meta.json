@@ -1,0 +1,20 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/546940acd0d90a98c6ac19cf5b8821ff54e56c9a/icons/obj/fluff/gym_equipment.dmi, colours edited by Zenith",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "fitnesslifter"
+    },
+    {
+      "name": "fitnessweight"
+    },
+    {
+      "name": "punchingbag"
+    }
+  ]
+}

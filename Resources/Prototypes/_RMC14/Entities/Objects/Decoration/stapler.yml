@@ -1,0 +1,36 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCStaplerRed
+  name: red stapler
+  description: "A stapler for stapling using staples. Popular in offices, schools, and homes across the galaxy"
+  components:
+  - type: Sprite
+    state: stapler-red
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
+
+- type: entity
+  parent: RMCStaplerRed
+  id: RMCStaplerGreen
+  name: green stapler
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
+    state: stapler-green
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
+
+- type: entity
+  parent: RMCStaplerRed
+  id: RMCStaplerBlue
+  name: blue stapler
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
+    state: stapler-blue
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Decoration/stapler.rsi
