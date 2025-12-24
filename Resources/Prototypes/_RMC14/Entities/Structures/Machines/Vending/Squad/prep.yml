@@ -11,6 +11,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
+    ignoreBulkRestockById:
+    - RMCBoxShotgunBuckshot
+    - RMCBoxShotgunFlechette
+    - RMCBoxShotgunSlugs
+    - RMCBoxShotgunBreaching
     access:
     - "CMAccessMarinePrep"
     hackable: true
@@ -50,7 +56,7 @@
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 10
     - name: Sidearm ammunition
       entries:
@@ -119,6 +125,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     hackable: true
@@ -357,6 +364,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"
@@ -428,6 +436,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"
@@ -506,6 +515,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/attachments.rsi
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessMarinePrep"
     - "CMAccessRequisitions"

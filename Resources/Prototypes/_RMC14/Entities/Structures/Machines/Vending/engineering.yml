@@ -18,6 +18,7 @@
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessCombatTechPrep"
     - "CMAccessEngineering"
@@ -204,6 +205,7 @@
   - type: AccessReader
     access: [["CMAccessResearch"]]
   - type: CMAutomatedVendor
+    canManualRestock: true
     access:
     - "CMAccessResearch"
     hackable: true
