@@ -36,6 +36,11 @@
     size: Small
   - type: Appearance
   - type: BarbedWire
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-barbed-wires
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BarbedWireBase

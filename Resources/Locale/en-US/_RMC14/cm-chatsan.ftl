@@ -52,6 +52,12 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
+cm-chatsan-word-signal-flare = signal flare
+cm-chatsan-replacement-signal-flare = green stick
+
+cm-chatsan-word-signal-flares = signal flares
+cm-chatsan-replacement-signal-flares = green sticks
+
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
 
@@ -460,6 +466,12 @@ cm-chatsan-replacement-sentry = auto spitter
 cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
+
+cm-chatsan-word-tesla = tesla
+cm-chatsan-replacement-tesla = shock emitter
+
+cm-chatsan-word-teslas = teslas
+cm-chatsan-replacement-teslas = shock emitters
 
 cm-chatsan-word-squad = squad
 cm-chatsan-replacement-squad = caste

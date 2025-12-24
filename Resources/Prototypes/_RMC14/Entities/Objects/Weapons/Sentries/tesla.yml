@@ -99,6 +99,11 @@
     blacklist:
       components:
       - Xeno
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-tesla
+    whitelist:
+      components:
+      - Xeno
   - type: RMCRepairable
   - type: RMCNameItemOnVend
     item: Sentry

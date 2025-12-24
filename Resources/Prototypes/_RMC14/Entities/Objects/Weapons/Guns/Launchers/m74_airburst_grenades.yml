@@ -105,6 +105,11 @@
     - Grenade
     - LauncherCompatibleGrenade
   - type: InheritAcid
+  - type: FixedIdentity
+    name: cm-chatsan-word-replacement-batong
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMC40MMGrenadeM74AGMF
