@@ -166,6 +166,14 @@
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/rusted_white_door.rsi
 
+- type: entity
+  parent: CMAirlock
+  id: RMCAirlockOCPGeneric
+  suffix: OCP-583
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/ocp_generic.rsi
+
 # Glass
 - type: entity
   parent: CMAirlock
@@ -245,6 +253,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/hybrisa_personal_door_glass.rsi
+
+- type: entity
+  parent: CMAirlockGlass
+  id: RMCAirlockOCPGenericGlass
+  suffix: OCP-583
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/ocp_generic_glass.rsi
 
 # Prep
 - type: entity

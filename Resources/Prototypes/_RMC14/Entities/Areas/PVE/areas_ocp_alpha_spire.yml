@@ -1,0 +1,58 @@
+﻿- type: entity
+  parent: RMCAreaProtectionFour
+  id: RMCAreaOCPMaintsLevel
+  name: OCP Maints Level
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_maints_level
+  - type: Area
+    minimapColor: '#8a4e23'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPCargo
+  name: OCP Cargo
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: cargo
+  - type: Area
+    minimapColor: '#bc9923'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPEngi
+  name: OCP Engi
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: engi
+  - type: Area
+    minimapColor: '#c87816'
+
+- type: entity
+  parent: RMCAreaPVE
+  id: RMCAreaOCPOOB
+  name: OCP Out Of Bounds
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_fiorina.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: true
