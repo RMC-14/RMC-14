@@ -63,7 +63,6 @@ public abstract class SharedMobCollisionSystem : EntitySystem
     private bool _bigXenosCancelMovement;
     private bool _xenosCancelMovement;
 
-
     public override void Initialize()
     {
         base.Initialize();
