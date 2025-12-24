@@ -3,6 +3,9 @@
   id: RMCSyntheticColonyHybrisaTSEPA
   startingGear: RMCGearSyntheticColonistHybrisaTSEPA
   spawnMenuRoleName: TSEPA Support Synth (Hybrisa Survivor)
+  ranks:
+    RMCRankTSEPAConstable: [ ]
+  icon: "RMCJobIconTSEPASynth"
   special:
   - !type:AddComponentSpecial
     components:
@@ -36,6 +39,7 @@
         state: synth
     - type: NpcFactionMember
       factions:
+      - TSE
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCSurvivor
