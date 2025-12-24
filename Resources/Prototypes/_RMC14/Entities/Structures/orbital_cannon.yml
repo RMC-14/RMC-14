@@ -387,6 +387,7 @@
   id: RMCOrbitalCannonTray
   name: loading tray
   description: "The orbital cannon's loading tray."
+  suffix: Cannon spawns with one that's linked.
   placement:
     mode: SnapgridCenter
   components:
