@@ -722,7 +722,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
             var trayCoords = _transform.GetMoverCoordinates(uid).Offset(cannon.TraySpawnOffset);
             _container.Remove(trayId, cannonChamber);
             _transform.SetCoordinates(trayId, trayCoords);
-            _audio.PlayPvs(cannon.UnloadSound, uid);
 
             if (TryComp(trayId, out OrbitalCannonTrayComponent? tray))
                 UpdateTrayVisuals((trayId, tray));
@@ -846,8 +845,8 @@ public sealed class OrbitalCannonSystem : EntitySystem
                 }
 
                 cannon.UnloadingTrayAt = time;
-                Dirty(uid, cannon);
                 _animation.TryFlick(uid, cannon.UnloadingAnimation, cannon.UnloadedState, cannon.BaseLayerKey);
+                Dirty(uid, cannon);
                 CannonStatusChanged(cannonEnt);
                 RemCompDeferred<OrbitalCannonFiringComponent>(uid);
             }
