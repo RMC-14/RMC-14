@@ -196,7 +196,7 @@ public sealed class OrbitalCannonSystem : EntitySystem
         tray.Comp.FuelAmount = fuelAmount;
         Dirty(tray);
 
-        _appearance.SetData(tray, OrbitalCannonTrayVisuals.Warhead, warheadType?.Id ?? string.Empty);
+        _appearance.SetData(tray, OrbitalCannonTrayVisuals.Warhead, warheadType?.Id ?? "None");
         _appearance.SetData(tray, OrbitalCannonTrayVisuals.Fuel, fuelAmount);
     }
 
@@ -842,8 +842,6 @@ public sealed class OrbitalCannonSystem : EntitySystem
 
                         if (_container.TryGetContainer(trayId, tray.WarheadContainer, out var warheadContainer))
                             _container.CleanContainer(warheadContainer);
-
-                        UpdateTrayVisuals((trayId, tray));
                     }
                 }
 

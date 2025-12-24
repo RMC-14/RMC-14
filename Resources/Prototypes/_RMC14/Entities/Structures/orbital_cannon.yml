@@ -388,10 +388,9 @@
   name: loading tray
   description: "The orbital cannon's loading tray."
   placement:
-    mode: PlaceFree
+    mode: SnapgridCenter
   components:
   - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -427,7 +426,7 @@
     visuals:
       enum.OrbitalCannonTrayVisuals.Warhead:
         warhead:
-          "": { visible: false }
+          None: { visible: false }
           RMCOrbitalCannonWarheadExplosive: { visible: true, state: cannon_tray_explosive }
           RMCOrbitalCannonWarheadIncendiary: { visible: true, state: cannon_tray_incendiary }
           RMCOrbitalCannonWarheadCluster: { visible: true, state: cannon_tray_cluster }
