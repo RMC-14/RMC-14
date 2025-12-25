@@ -156,3 +156,6 @@
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable

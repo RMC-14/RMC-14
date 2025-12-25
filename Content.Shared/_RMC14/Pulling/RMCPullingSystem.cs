@@ -19,11 +19,14 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Content.Shared._RMC14.Synth;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Fortify;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -110,6 +113,21 @@ public sealed class RMCPullingSystem : EntitySystem
             _mobState.IsDead(ent))
         {
             return;
+        }
+
+        // If is synth and target is on the whitelist, synth can pull.
+        // if not on whitelist, stunned.
+        if (TryComp<SynthComponent>(user, out var synth) &&
+            synth.ParalyzeImmuneFrom != null &&
+            _whitelist.IsWhitelistPass(synth.ParalyzeImmuneFrom, ent.Owner))
+        {
+            var defenderHasActiveDefense =
+                (TryComp<XenoCrestComponent>(ent.Owner, out var crest) && crest.Lowered) ||
+                (TryComp<XenoFortifyComponent>(ent.Owner, out var fort) && fort.Fortified);
+
+            if (!defenderHasActiveDefense)
+                return;
+            // if defender has crest lowered or is fortified, synth is stunned on grab.
         }
 
         args.Cancelled = true;

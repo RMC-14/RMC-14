@@ -67,6 +67,9 @@
           Blunt: 35
     - type: Synth
       generation: rmc-species-synth-generation-second
+      paralyzeImmuneFrom:
+        tags:
+        - RMCSynthGrabbable
   hidden: true
   useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
 

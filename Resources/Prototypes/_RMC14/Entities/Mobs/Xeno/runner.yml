@@ -23,6 +23,9 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoRunner
     tier: 1
