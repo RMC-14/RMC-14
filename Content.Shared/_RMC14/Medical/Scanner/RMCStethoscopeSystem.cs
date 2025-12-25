@@ -85,10 +85,9 @@ public sealed class RMCStethoscopeSystem : EntitySystem
         {
             if (!_inventorySystem.TryGetSlotEntity(user, slot, out var slotEntity))
                 continue;
-            if (!EntityManager.TryGetComponent(slotEntity.Value, out UniformAccessoryHolderComponent? holder))
+            if (!TryComp<UniformAccessoryHolderComponent>(slotEntity.Value, out var accessoryHolder))
                 continue;
-            var containerId = holder.ContainerId;
-            if (!_containerSystem.TryGetContainer(slotEntity.Value, containerId, out var container))
+            if (!_containerSystem.TryGetContainer(slotEntity.Value, accessoryHolder.ContainerId, out var container))
                 continue;
             foreach (var accessory in container.ContainedEntities)
             {
@@ -138,16 +137,18 @@ public sealed class RMCStethoscopeSystem : EntitySystem
 
     private float? GetPercentHealth(EntityUid target)
     {
-        if (!TryComp<DamageableComponent>(target, out var damage) ||
+        if (!TryComp<DamageableComponent>(target, out var damageable) ||
             !TryComp<MobThresholdsComponent>(target, out var thresholds))
         {
             return null;
         }
-        var totalDamage = damage.Damage.GetTotal().Float();
-        var maxThreshold = thresholds.Thresholds.Count > 0 ? (float)thresholds.Thresholds.Keys.Max() : 100f;
-        var healthPercent = 100.0f - MathF.Min(totalDamage / maxThreshold * 100.0f, 100.0f);
-        if (healthPercent > 100.0f)
-            healthPercent = 100.0f;
-        return healthPercent;
+
+        var totalDamage = damageable.Damage.GetTotal().Float();
+        var maxHealthThreshold = thresholds.Thresholds.Count > 0
+            ? (float)thresholds.Thresholds.Keys.Max()
+            : 100f;
+        var damagePercent = totalDamage / maxHealthThreshold * 100.0f;
+        var healthPercent = 100.0f - MathF.Min(damagePercent, 100.0f);
+        return MathF.Max(healthPercent, 0.0f);
     }
 }
