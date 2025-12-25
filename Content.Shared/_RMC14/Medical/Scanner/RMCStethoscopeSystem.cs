@@ -123,7 +123,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             >= 87.5f => "rmc-stethoscope-normal",
             >= 62.5f => "rmc-stethoscope-raggedy",
             >= 37.5f => "rmc-stethoscope-hyper",
-            >= 1.0f => "rmc-stethoscope-irregular",
+            >= 0.1f => "rmc-stethoscope-irregular",
             _ => "rmc-stethoscope-dead"
         };
 
