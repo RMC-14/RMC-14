@@ -8,6 +8,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
@@ -24,6 +25,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> MedicalSkill = "RMCSkillMedical";
     private static readonly string[] AccessorySlots = ["jumpsuit", "outerClothing"];
@@ -102,37 +104,35 @@ public sealed class RMCStethoscopeSystem : EntitySystem
 
     private FormattedMessage GetStethoscopeResults(EntityUid target, EntityUid? user = null)
     {
-        var totalHealth = GetPercentHealth(target);
         var msg = new FormattedMessage();
         if (user != null && !_skills.HasSkill(user.Value, MedicalSkill, 2))
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-unskilled"));
             return msg;
         }
-        if (totalHealth == null)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-nothing"));
-        }
-        else if (totalHealth >= 87.5f)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-normal", ("target", target)));
-        }
-        else if (totalHealth >= 62.5f)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-raggedy", ("target", target)));
-        }
-        else if (totalHealth >= 37.5f)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-hyper"));
-        }
-        else if (totalHealth >= 1.0f)
-        {
-            msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-irregular", ("target", target)));
-        }
-        else if (totalHealth >= 0.0f)
+
+        if (_mobState.IsDead(target))
         {
             msg.AddMarkupOrThrow(Loc.GetString("rmc-stethoscope-dead"));
+            return msg;
         }
+
+        var totalHealth = GetPercentHealth(target);
+        var locKey = totalHealth switch
+        {
+            null => "rmc-stethoscope-nothing",
+            >= 87.5f => "rmc-stethoscope-normal",
+            >= 62.5f => "rmc-stethoscope-raggedy",
+            >= 37.5f => "rmc-stethoscope-hyper",
+            >= 1.0f => "rmc-stethoscope-irregular",
+            _ => "rmc-stethoscope-dead"
+        };
+
+        var locString = locKey is "rmc-stethoscope-nothing" or "rmc-stethoscope-hyper" or "rmc-stethoscope-dead"
+            ? Loc.GetString(locKey)
+            : Loc.GetString(locKey, ("target", target));
+
+        msg.AddMarkupOrThrow(locString);
         return msg;
     }
 
