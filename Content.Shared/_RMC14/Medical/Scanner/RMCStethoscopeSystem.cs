@@ -116,8 +116,7 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             return msg;
         }
 
-        var totalHealth = GetPercentHealth(target);
-        var locKey = totalHealth switch
+        var totalHealth = GetPercentHealth(target) switch
         {
             null => "rmc-stethoscope-nothing",
             >= 87.5f => "rmc-stethoscope-normal",
@@ -127,9 +126,9 @@ public sealed class RMCStethoscopeSystem : EntitySystem
             _ => "rmc-stethoscope-dead"
         };
 
-        var locString = locKey is "rmc-stethoscope-nothing" or "rmc-stethoscope-hyper" or "rmc-stethoscope-dead"
-            ? Loc.GetString(locKey)
-            : Loc.GetString(locKey, ("target", target));
+        var locString = totalHealth is "rmc-stethoscope-nothing" or "rmc-stethoscope-hyper" or "rmc-stethoscope-dead"
+            ? Loc.GetString(totalHealth)
+            : Loc.GetString(totalHealth, ("target", target));
 
         msg.AddMarkupOrThrow(locString);
         return msg;
