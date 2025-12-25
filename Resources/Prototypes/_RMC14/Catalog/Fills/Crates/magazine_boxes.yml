@@ -163,6 +163,7 @@
     - id: RMCMagazineSmartGun
       amount: 2
 
+# Flamer
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateMagazineNapthalUT
@@ -194,6 +195,71 @@
       amount: 2
     - id: RMCTankFlamer
       amount: 2
+
+# Casino crate
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineAmmoSurplus
+  name: Surplus ammo crate (various UNMC magazines x10)
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCCrateMagazineAmmoSurplusLoot
+
+- type: entityTable
+  id: RMCCrateMagazineAmmoSurplusLoot
+  table: !type:AllSelector
+    children:
+    - !type:NestedSelector
+      tableId: RMCCrateMagazineAmmoSurplusTable
+      rolls: !type:ConstantNumberSelector
+        value: 10
+
+- type: entityTable
+  id: RMCCrateMagazineAmmoSurplusTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      children:
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54C
+      - id: CMMagazineRifleM54CExt
+      - id: CMMagazineRifleM54CAP
+      - id: RMCMagazineRifleM54CIncendiary
+      - id: CMMagazineRifleM4SPR
+      - id: RMCMagazineRifleM4SPRIncendiary
+      - id: CMMagazineRifleM54CMK1
+      - id: CMMagazineRifleM54CMK1AP
+      - id: CMMagazineRifleM54CE2
+      - id: CMMagazinePistolM1984
+      - id: CMMagazinePistolM1984
+      - id: CMMagazinePistolM1984
+      # - id: CMMagazinePistolM1984Incendiary TODO RMC14: Incend mag
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63
+      - id: CMMagazineSMGM63Ext
+      - id: CMMagazineSMGM63AP
+      - id: CMMagazineSMGM63AP
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCMagazinePistolM13Ext
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoaderM44
+      - id: RMCSpeedLoader44Marksman
+      # - id: RMCSpeedLoader44Heavy # TODO RMC14: Heavy m44 speedloader
+      - id: RMCBoxShotgunSlugs
+      - id: RMCBoxShotgunSlugs
+      - id: RMCBoxShotgunBuckshot
+      - id: RMCBoxShotgunBuckshot
+      - id: RMCBoxShotgunIncendiary
+      - id: CMMagazineRifleM4SPRAP
+      - id: CMMagazineRifleM4SPRExt
+      - id: CMMagazineRifleM4SPR
 
 # Smart Pistol
 - type: entity
