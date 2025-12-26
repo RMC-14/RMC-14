@@ -17,7 +17,7 @@ public sealed partial class BarricadeComponent : Component
     /// Number of tiles needed to max out block probability.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float DistanceLimit = 6.5f;
+    public float DistanceLimit = 6;
 
     /// <summary>
     /// Degree to which accuracy affects probability.

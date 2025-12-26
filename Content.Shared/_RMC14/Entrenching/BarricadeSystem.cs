@@ -1,3 +1,5 @@
+using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Barricade.Components;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Projectiles;
@@ -20,6 +22,7 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Shared._RMC14.Entrenching;
@@ -40,19 +43,19 @@ public sealed class BarricadeSystem : EntitySystem
     [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedStackSystem _stack = default!;
     [Dependency] private readonly ITileDefinitionManager _tiles = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _attackBlocker = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
     private EntityQuery<BarricadeComponent> _barricadeQuery;
-    private EntityQuery<ProjectileComponent> _projectileQuery;
     private EntityQuery<TargetedProjectileComponent> _projectileTargetQuery;
     private EntityQuery<RMCProjectileAccuracyComponent> _accuracyQuery;
 
     public override void Initialize()
     {
         _barricadeQuery = GetEntityQuery<BarricadeComponent>();
-        _projectileQuery = GetEntityQuery<ProjectileComponent>();
         _projectileTargetQuery = GetEntityQuery<TargetedProjectileComponent>();
         _accuracyQuery = GetEntityQuery<RMCProjectileAccuracyComponent>();
 
@@ -82,12 +85,7 @@ public sealed class BarricadeSystem : EntitySystem
         if (accuracyComp.ShotFrom == null)
             return;
 
-        // Someone aiming at a barricade always hits it
-        if (IsProjectileTargeting(barricade.Owner, projectile))
-        {
-            args.Cancelled = false;
-            return;
-        }
+        args.Cancelled = true;
 
         var barricadeCoords = _transform.GetMoverCoordinates(barricade.Owner);
         var distance = (barricadeCoords.Position - accuracyComp.ShotFrom.Value.Position).Length();
@@ -96,21 +94,33 @@ public sealed class BarricadeSystem : EntitySystem
 
         // If the distance is less than 1 tile
         // or the distance is greater than 3 but the shooter is behind the cade (the right side), then the bullet passes through
-        if (distance < 1 || distance > 3 && IsBehindOrParallelToTarget(projectile, barricade))
-        {
-            args.Cancelled = true;
+        Log.Warning($"Distance was {distance}!");
+        if (distance < 1 || distance > 3 && IsBehindTarget(projectile, barricade))
             return;
-        }
 
         var accuracy = _rmcProjectile.GetEffectiveAccuracy((projectile, accuracyComp), barricade.Owner).Float();
         var projectileCoverage = barricade.Comp.ProjectileCoverage;
         var distanceLimit = barricade.Comp.DistanceLimit;
         var accuracyFactor = barricade.Comp.AccuracyFactor;
 
-        var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
-        var prob = new Xoshiro128P(accuracyComp.GunSeed, (long) accuracyComp.Tick << 32 | GetNetEntity(barricade.Owner).Id).NextFloat(0f, 100f);
+        var tick = _timing.CurTick.Value;
+        var iD = GetNetEntity(projectile).Id;
+        var seed = ((long)tick << 32) | (uint)iD;
 
-        args.Cancelled = hitChance >= prob;
+        var hitChance = MathF.Min(projectileCoverage, projectileCoverage * distance / distanceLimit + accuracyFactor * (1 - accuracy / 100));
+        var prob = new Xoshiro128P(seed).NextFloat(0f, 100f);
+
+        if (_net.IsClient)
+        {
+            Log.Warning($"Probability was {prob} and hitChance was {hitChance}!");
+        }
+        else
+        {
+            Log.Warning($"Probability was {prob} and hitChance was {hitChance}!");
+        }
+
+        if (hitChance >= prob)
+            args.Cancelled = false;
     }
 
     private void OnAfterInteract(Entity<EntrenchingToolComponent> tool, ref AfterInteractEvent args)
@@ -533,39 +543,21 @@ public sealed class BarricadeSystem : EntitySystem
     /// </summary>
     public bool IsProjectileTargeting(EntityUid target, EntityUid other)
     {
-        if (_projectileTargetQuery.TryComp(other, out var projectileTarget) && projectileTarget.Target == target)
-            return true;
-
-        if (_projectileQuery.TryComp(other, out var projectile))
-        {
-            // Prevents shooting out of while inside of crates
-            var shooter = projectile.Shooter;
-            if (!shooter.HasValue)
-                return false;
-
-            // ProjectileGrenades delete the entity that's shooting the projectile,
-            // so it's impossible to check if the entity is in a container
-            if (TerminatingOrDeleted(shooter.Value))
-                return false;
-
-            if (!_container.IsEntityOrParentInContainer(shooter.Value))
-                return false;
-        }
-
-        return false;
+        return _projectileTargetQuery.TryComp(other, out var projectileTarget) && projectileTarget.Target == target;
     }
 
-    public bool IsBehindOrParallelToTarget(EntityUid projectile, EntityUid barricade)
+    public bool IsBehindTarget(EntityUid projectile, EntityUid barricade)
     {
-        var facingDirection = Transform(barricade).LocalRotation.GetCardinalDir();
-        var behindAngle = facingDirection.GetOpposite().ToAngle();
+        var facingDir = Transform(barricade).LocalRotation.ToWorldVec();
 
-        var projectileMapPos = _transform.GetMapCoordinates(projectile);
-        var barricadeMapPos = _transform.GetMapCoordinates(barricade);
-        var currentAngle = (projectileMapPos.Position - barricadeMapPos.Position).ToWorldAngle();
+        var projectilePos = _transform.GetMapCoordinates(projectile).Position;
+        var barricadePos = _transform.GetMapCoordinates(barricade).Position;
+        var difference = (projectilePos - barricadePos).Normalized();
 
-        var delta = Angle.ShortestDistance(behindAngle, currentAngle);
+        var dot = Vector2.Dot(facingDir, difference);
 
-        return Math.Abs(delta.Degrees) < 90f;
+        Log.Warning($"dot product was {dot}!");
+
+        return dot <= 0f;
     }
 }

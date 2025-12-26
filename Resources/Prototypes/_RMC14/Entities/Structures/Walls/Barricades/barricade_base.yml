@@ -27,7 +27,7 @@
         layer:
         - TableLayer
         - BarricadeImpassable
-        # - BulletImpassable TODO
+        - BulletImpassable
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
