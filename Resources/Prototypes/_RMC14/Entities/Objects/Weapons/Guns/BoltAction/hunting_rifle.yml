@@ -68,10 +68,12 @@
           tags:
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentHuntingScope
+        startingAttachable: RMCAttachmentMiniscopeHunting
         whitelist:
           tags:
           - RMCAttachmentHuntingScope
+          - RMCAttachmentMiniscopeHunting
+          - RMCAttachmentS84xTelescopicScope
       rmc-aslot-stock:
         locked: true
         startingAttachable: RMCAttachmentHuntingStock
