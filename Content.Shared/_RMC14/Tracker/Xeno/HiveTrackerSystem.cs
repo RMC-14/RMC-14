@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
@@ -31,6 +32,7 @@ public sealed class HiveTrackerSystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resin tracker
+        SubscribeLocalEvent<HiveTrackerComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerAltClickedAlertEvent>(OnAltClickedAlert);
@@ -39,6 +41,18 @@ public sealed class HiveTrackerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCTrackableComponent, RequestTrackableNameEvent>(OnRequestTrackableName);
         SubscribeLocalEvent<RMCTrackableComponent, MobStateChangedEvent>(OnMobStateChanged);
+    }
+
+    private void OnNewXenoEvolved(Entity<HiveTrackerComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        if (!TryComp<HiveTrackerComponent>(args.OldXeno, out var oldTracker))
+            return;
+
+        if (oldTracker.Mode != null)
+            SetMode(newXeno, oldTracker.Mode.Value);
+
+        SetTarget(newXeno, oldTracker.Target);
+        Dirty(newXeno);
     }
 
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)
