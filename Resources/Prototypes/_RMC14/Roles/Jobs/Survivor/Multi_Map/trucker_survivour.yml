@@ -9,7 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorTrucker
+      preset: RMCSkillPresetSurvivorTrucker
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetTrucker
     - type: RMCSurvivor

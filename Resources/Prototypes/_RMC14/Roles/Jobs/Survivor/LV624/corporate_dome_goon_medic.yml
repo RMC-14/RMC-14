@@ -11,7 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonMedic
+      preset: RMCSkillPresetSurvivorGoonMedic
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
