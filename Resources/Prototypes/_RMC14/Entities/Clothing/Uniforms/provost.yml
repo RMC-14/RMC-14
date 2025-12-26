@@ -19,6 +19,9 @@
     - RMCUniformMP
     - RMCUniformWarden
     - RMCUniformCMP
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: CMJumpsuitProvost
@@ -47,7 +50,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/marshal.rsi
 
-
 - type: entity
   parent: RMCMarineUniformBase
   id: CMJumpsuitProvostAgent
@@ -62,3 +64,6 @@
     - RMCUniformMP
     - RMCUniformWarden
     - RMCUniformCMP
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC

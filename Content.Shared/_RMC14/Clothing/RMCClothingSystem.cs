@@ -10,6 +10,8 @@ using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Clothing;
@@ -24,6 +26,7 @@ public sealed class RMCClothingSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
+    [Dependency] private readonly NpcFactionSystem _faction = default!;
 
     private EntityQuery<ClothingLimitComponent> _clothingLimitQuery;
 
@@ -35,6 +38,7 @@ public sealed class RMCClothingSystem : EntitySystem
 
         SubscribeLocalEvent<ClothingRequireEquippedComponent, BeingEquippedAttemptEvent>(OnRequireEquippedBeingEquippedAttempt);
 
+        SubscribeLocalEvent<ClothingFactionLockedComponent, BeingEquippedAttemptEvent>(OnFactionLockedBeingEquippedAttempt);
         // this is here so clothing with ClothingRequireEquippedComponent can drop when required clothing is unequipped
         // ex: scout cloak should not stay on when they take off the armor required for it
         SubscribeLocalEvent<ClothingComponent, DroppedEvent>(OnDropped);
@@ -85,6 +89,29 @@ public sealed class RMCClothingSystem : EntitySystem
             return;
 
         if (HasEquippedItemsWithinWhitelist(args.EquipTarget, ent.Comp.Whitelist))
+            return;
+
+        args.Cancel();
+
+        var denyReason = Loc.GetString(ent.Comp.DenyReason);
+        _popup.PopupClient(denyReason, args.EquipTarget, args.EquipTarget, PopupType.SmallCaution);
+    }
+
+    private void OnFactionLockedBeingEquippedAttempt(Entity<ClothingFactionLockedComponent> ent, ref BeingEquippedAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        TryComp<ClothingFactionLockIgnoreComponent>(args.EquipTarget, out var ignoreComp);
+        if (ignoreComp != null)
+            return;
+
+        if (args.Cancelled)
+            return;
+
+        TryComp<NpcFactionMemberComponent>(args.EquipTarget, out var factionComp);
+        var factionEnt = (args.EquipTarget, factionComp);
+        if (_faction.IsMemberOfAny(factionEnt, ent.Comp.Whitelist))
             return;
 
         args.Cancel();

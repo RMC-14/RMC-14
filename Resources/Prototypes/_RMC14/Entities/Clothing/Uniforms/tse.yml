@@ -11,6 +11,9 @@
   - type: Tag
     tags:
     - RMCUniformTSE
+  - type: ClothingFactionLocked
+    whitelist:
+    - TSE
 
 # Royal
 - type: entity
