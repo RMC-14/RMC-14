@@ -29,6 +29,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
+    - type: ClothingFactionLockIgnore
   hidden: true
 
 - type: playTimeTracker
