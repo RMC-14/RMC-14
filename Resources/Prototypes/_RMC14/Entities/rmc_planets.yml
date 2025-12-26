@@ -322,12 +322,12 @@
     selectRandomSurvivorInsert: false
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
+    - RMCSurvivorForeconSupportTech: 1
     - RMCSurvivorForeconBase: 7
     survivorJobInserts:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorForeconCommander: 1
       RMCSurvivorForeconBase:
-      - RMCSurvivorForeconSupportTech: 1
       - RMCSurvivorForeconSquadLeader: 1
       - RMCSurvivorForeconSniper: 1
       - RMCSurvivorForeconSmartgunOperator: 1
@@ -336,8 +336,8 @@
     survivorJobOverrides:
       CMSurvivor: RMCSurvivorForeconBase
       CMSurvivorCorporate: RMCSurvivorForeconBase
-      CMSurvivorDoctor: RMCSurvivorForeconBase
-      CMSurvivorEngineer: RMCSurvivorForeconBase
+      CMSurvivorDoctor: RMCSurvivorForeconSupportTech
+      CMSurvivorEngineer: RMCSurvivorForeconSupportTech
       CMSurvivorSecurity: RMCSurvivorForeconBase
       CMSurvivorScientist: RMCSurvivorForeconBase
 
