@@ -244,10 +244,10 @@
     channels:
     - MarineSOF
   - type: GrantSquadLeaderTracker
-    defaultMode: FORECONCommandingOfficer
+    defaultMode: SquadLeader
     trackerModes:
-    - FORECONCommandingOfficer
     - SquadLeader
+    - FORECONCommandingOfficer
 
 #for UNMC personnel
 - type: entity

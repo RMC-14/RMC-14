@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Alert;
@@ -31,6 +32,8 @@ public sealed class HiveTrackerSystem : EntitySystem
     public override void Initialize()
     {
         // TODO RMC14 resin tracker
+        SubscribeLocalEvent<HiveTrackerComponent, NewXenoEvolvedEvent>(OnNewXenoEvolved);
+        SubscribeLocalEvent<HiveTrackerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<HiveTrackerComponent, ComponentRemove>(OnRemove);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerClickedAlertEvent>(OnClickedAlert);
         SubscribeLocalEvent<HiveTrackerComponent, HiveTrackerAltClickedAlertEvent>(OnAltClickedAlert);
@@ -41,10 +44,47 @@ public sealed class HiveTrackerSystem : EntitySystem
         SubscribeLocalEvent<RMCTrackableComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
+    private void OnNewXenoEvolved(Entity<HiveTrackerComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        if (!TryComp<HiveTrackerComponent>(args.OldXeno, out var oldTracker))
+            return;
+
+        if (oldTracker.Mode != null)
+            SetMode(newXeno, oldTracker.Mode.Value);
+
+        SetTarget(newXeno, oldTracker.Target);
+        Dirty(newXeno);
+    }
+
+    private void OnMapInit(Entity<HiveTrackerComponent> ent, ref MapInitEvent args)
+    {
+        // Automatically set the target if a mode is set
+        if (ent.Comp.Mode is not { } mode)
+            return;
+
+        if (!TryComp(ent.Owner, out HiveMemberComponent? member))
+            return;
+
+        _squadLeaderTrackerSystem.TryFindTargets(mode, out _, out var trackingOptions);
+
+        foreach (var target in trackingOptions)
+        {
+            if (!TryComp(target, out HiveMemberComponent? targetHiveMember) ||
+                targetHiveMember.Hive != member.Hive)
+            {
+                continue;
+            }
+
+            SetTarget(ent, target);
+            Dirty(ent);
+            break;
+        }
+    }
+
     private void OnRemove(Entity<HiveTrackerComponent> ent, ref ComponentRemove args)
     {
         _prototypeManager.TryIndex(ent.Comp.Mode, out var trackerMode);
-        if(trackerMode == null)
+        if (trackerMode == null)
             return;
 
         _alerts.ClearAlert(ent, trackerMode.Alert);
@@ -94,10 +134,10 @@ public sealed class HiveTrackerSystem : EntitySystem
 
     private void OnHiveTrackerChangeMode(Entity<HiveTrackerComponent> ent, ref HiveTrackerChangeModeEvent args)
     {
-        if(!_timing.IsFirstTimePredicted)
+        if (!_timing.IsFirstTimePredicted)
             return;
 
-        if(!TryComp(ent.Owner, out HiveMemberComponent? member))
+        if (!TryComp(ent.Owner, out HiveMemberComponent? member))
             return;
 
         _squadLeaderTrackerSystem.TryFindTargets(args.Mode, out var options, out var trackingOptions);

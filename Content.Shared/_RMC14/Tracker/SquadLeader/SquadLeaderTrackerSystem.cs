@@ -635,7 +635,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                     TryComp(targetSquad, out SquadTeamComponent? team) &&
                     _squad.TryGetSquadLeader((targetSquad, team), out var leader))
                 {
-                    SetTarget((uid,tracker),leader );
+                    SetTarget((uid, tracker), leader);
                     targetSquadName = Name(targetSquad);
                     var targetCoordinates = _transform.GetMapCoordinates(tracker.Target.Value);
 
@@ -658,8 +658,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                         continue;
                     }
                 }
-                else if(tracker.Mode == SquadLeaderMode &&
-                        _squadLeaders.TryGetValue(squad, out var squadLeader))
+                else if (tracker.Mode == SquadLeaderMode && _squadLeaders.TryGetValue(squad, out var squadLeader))
                 {
                     targetSquadName = Name(squad);
 
@@ -694,7 +693,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             while (trackableQuery.MoveNext(out var trackableUid, out _))
             {
                 _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
-                if(trackerMode == null)
+                if (trackerMode == null)
                     continue;
 
                 if (trackerMode.Component != null)
