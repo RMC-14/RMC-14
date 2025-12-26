@@ -1,9 +1,73 @@
 using System.Linq;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Popups;
+using Content.Shared.Tag;
+using Content.Shared.Verbs;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.IconLabel;
 
 public abstract class SharedRMCIconLabelSystem : EntitySystem
 {
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<IconLabelComponent, GetVerbsEvent<InteractionVerb>>(OnSetIconLabelGetVerbs);
+    }
+
+    private void OnSetIconLabelGetVerbs(Entity<IconLabelComponent> ent, ref GetVerbsEvent<InteractionVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+        if (HasComp<XenoComponent>(args.User))
+            return;
+        if (ent.Comp.CanSetLabelTag == null || !_tag.HasTag(ent, ent.Comp.CanSetLabelTag.Value))
+            return;
+
+        var user = args.User;
+        var target = args.Target;
+        var maxLength = ent.Comp.LabelMaxSize;
+        args.Verbs.Add(new InteractionVerb
+        {
+            Text = Loc.GetString("rmc-set-icon-label-verb"),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/pencil.png")),
+            Priority = -1,
+            Act = () => TrySetIconLabel(user, target, maxLength),
+        });
+    }
+
+    protected virtual void TrySetIconLabel(EntityUid user, EntityUid target, int maxLength)
+    {
+    }
+
+    public void SetIconLabel(EntityUid user, EntityUid target, string label)
+    {
+        if (!TryComp<IconLabelComponent>(target, out var iconLabelComp))
+            return;
+
+        var maxLength = iconLabelComp.LabelMaxSize;
+        label = label.Trim();
+        if (label.Length > maxLength)
+            label = label[..maxLength];
+
+        if (string.IsNullOrWhiteSpace(label))
+        {
+            iconLabelComp.LabelTextLocId = null;
+            iconLabelComp.LabelTextParams.Clear();
+            Dirty(target, iconLabelComp);
+
+            _popup.PopupEntity(Loc.GetString("rmc-set-icon-label-cleared", ("item", target)), target, user);
+            return;
+        }
+
+        Label((target, iconLabelComp), "rmc-custom-container-label-text", ("customLabel", label));
+        _popup.PopupEntity(Loc.GetString("rmc-set-icon-label-set", ("item", target), ("label", label)), target, user);
+    }
+
     public void Label(Entity<IconLabelComponent?> ent, LocId newLocId, List<(string, object)> newParams)
     {
         ent.Comp = EnsureComp<IconLabelComponent>(ent);

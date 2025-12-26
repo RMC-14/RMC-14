@@ -1,4 +1,6 @@
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.IconLabel;
 
@@ -28,4 +30,10 @@ public sealed partial class IconLabelComponent : Component
 
     [DataField, AutoNetworkedField]
     public int LabelMaxSize = 3;
+
+    /// <summary>
+    /// If set, the entity must have this tag to allow users to set a custom label via verb.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<TagPrototype>? CanSetLabelTag = "PillCanister";
 }
