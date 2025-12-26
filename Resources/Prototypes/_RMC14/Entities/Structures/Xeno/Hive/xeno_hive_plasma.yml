@@ -1,31 +1,69 @@
 - type: entity
   id: HivePlasmaTreeXeno
-  parent: HiveRecoveryNodeXeno
+  parent: BaseHiveStructure
   name: plasma tree
   description: A tree-shaped node whose "berries" are filled with glowing blue liquid that drips from them.
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Xenos/hive_structures.rsi
     state: recovery_plasma
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 400
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 100
   - type: PlasmaTree
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HivePlasmaTreeXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
+  - type: DoAfter
+  - type: XenoStructureMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: recovery_node
 
 - type: entity
   id: HivePlasmaTreeXenoConstructionNode
-  parent: HiveRecoveryNodeXenoConstructionNode
+  parent: BaseHiveStructureNode
   name: plasma tree
   description: Making glowing blue "berries", replenishing plasma reserves of the sisters around it.
+  suffix: Construction
   components:
   - type: Sprite
+    color: '#FFFFFFAA'
     layers:
     - sprite: _RMC14/Structures/Xenos/hive_structures.rsi
       state: recovery_plasma
     - sprite: _RMC14/Interface/xeno_hud.rsi
       state: xeno_structure_node_indicator
       scale: 0.8, 0.8
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
   - type: HiveConstructionNode
+    initialPlasmaCost: 400
+    plasmaCost: 450
     spawn: HivePlasmaTreeXeno
+  - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HivePlasmaTreeXeno
+  - type: HiveConstructionRequiresHiveWeeds
+  - type: HiveConstructionRequiresSpace
   - type: WarpPoint
     location: plasma tree
