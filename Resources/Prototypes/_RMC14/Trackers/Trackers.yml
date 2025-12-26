@@ -41,7 +41,7 @@
 
 - type: trackerMode
   id: SquadLeader
-  component: SquadLeader
+  job: CMSquadLeader
 
 - type: trackerMode
   id: SectionSergeant
