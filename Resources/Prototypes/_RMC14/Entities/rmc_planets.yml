@@ -323,7 +323,7 @@
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - RMCSurvivorForeconSupportTech: 1
-    - RMCSurvivorForeconBase: 7
+    - RMCSurvivorForeconBase: 6 # todo 7 when eight survs
     survivorJobInserts:
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorForeconCommander: 1
