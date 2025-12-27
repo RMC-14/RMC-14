@@ -40,7 +40,7 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Text = Loc.GetString("rmc-set-icon-label-verb"),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/pencil.svg")),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/_RMC14/Interface/eraser.svg.png")),
             Priority = -1,
             Act = () => TrySetIconLabel(user, target, maxLength),
         });
