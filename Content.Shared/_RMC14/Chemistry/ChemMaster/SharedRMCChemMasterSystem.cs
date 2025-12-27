@@ -444,7 +444,11 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                     foreach (var (reagentProto, amount) in reagentsPerPill)
                     {
                         var removed = buffer.Value.Comp.Solution.RemoveReagent(reagentProto, amount);
-                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed);
+                        _solution.TryAddReagent(pillSolution.Value, reagentProto, removed, out var accepted);
+                        removed -= accepted;
+
+                        if (removed > FixedPoint2.Zero)
+                            _solution.TryAddReagent(buffer.Value, reagentProto, removed);
                     }
 
                     _adminLog.Add(LogType.Action,
