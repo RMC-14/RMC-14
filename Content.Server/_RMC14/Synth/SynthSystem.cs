@@ -34,14 +34,14 @@ public sealed class SynthSystem : SharedSynthSystem
         repOverrideComp.Age = ent.Comp.Generation;
         Dirty(ent, repOverrideComp);
 
-        if (!HasComp<BodyComponent>(ent.Owner))
+        if (!TryComp<BodyComponent>(ent.Owner, out var body))
             return;
 
-        var organs = _body.GetBodyOrganEntityComps<OrganComponent>(ent.Owner);
+        var organComps = _body.GetBodyOrganEntityComps<OrganComponent>((ent.Owner, body));
 
-        foreach (var organ in organs)
+        foreach (var organ in organComps)
         {
-            QueueDel(organ); // Synths do not metabolize chems or breathe
+            Del(organ); // Synths do not metabolize chems or breathe
         }
 
         var headSlots = _body.GetBodyChildrenOfType(ent, BodyPartType.Head);
@@ -50,6 +50,7 @@ public sealed class SynthSystem : SharedSynthSystem
         {
             var newBrain = SpawnNextToOrDrop(ent.Comp.NewBrain, ent);
             _body.AddOrganToFirstValidSlot(part.Id, newBrain);
+            break;
         }
     }
 }

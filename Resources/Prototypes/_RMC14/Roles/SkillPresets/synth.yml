@@ -1,0 +1,14 @@
+﻿- type: skillPreset
+  id: AverageJoe
+  skills:
+    RMCSkillCqc: 5
+    RMCSkillEngineer: 4
+    RMCSkillConstruction: 3
+    RMCSkillFirearms: 0
+    RMCSkillOverwatch: 1
+    RMCSkillMeleeWeapons: 2
+    RMCSkillPolice: 2
+    RMCSkillFireman: 3
+    RMCSkillPowerLoader: 2
+    RMCSkillVehicles: 2
+    RMCSkillDomestics: 2
