@@ -55,9 +55,6 @@
         types:
           Blunt: 35
     - type: Synth
-      paralyzeImmuneFrom:
-        tags:
-        - RMCSynthGrabbable
   hidden: true
 
 - type: startingGear

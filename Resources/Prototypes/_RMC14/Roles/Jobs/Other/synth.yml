@@ -73,9 +73,6 @@
         types:
           Blunt: 35
     - type: Synth
-      paralyzeImmuneFrom:
-        tags:
-        - RMCSynthGrabbable
   hidden: true
 
 - type: startingGear
@@ -116,6 +113,10 @@
   - type: RMCLeapProtection
     inherentStunDuration: 3
   - type: ZombieImmune
+  - type: ParalyzeImmuneFrom
+    whitelist:
+      tags:
+      - RMCSynthGrabbable
 
 - type: entity
   id: RMCSynthRemoveComponents

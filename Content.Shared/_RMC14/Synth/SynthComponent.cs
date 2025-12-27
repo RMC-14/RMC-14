@@ -127,9 +127,5 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
 
-    // If set, synths will be immune to ParalyzeOnPullAttempt from entities with RMCSynthGrabbable tag
-    [DataField, AutoNetworkedField]
-    public EntityWhitelist? ParalyzeImmuneFrom;
-
 }
 

@@ -54,9 +54,6 @@
         types:
           Blunt: 35
     - type: Synth
-      paralyzeImmuneFrom:
-        tags:
-        - RMCSynthGrabbable
   hasIcon: false
   hidden: true
 

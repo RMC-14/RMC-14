@@ -120,9 +120,9 @@ public sealed class RMCPullingSystem : EntitySystem
         }
 
         // if entitity is on synth whitelist allow pull unless its defender with crest lowered or fortified
-        if (TryComp<SynthComponent>(user, out var synth) &&
-            synth.ParalyzeImmuneFrom != null &&
-            _whitelist.IsWhitelistPass(synth.ParalyzeImmuneFrom, ent.Owner))
+        if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFrom) &&
+            immuneFrom.Whitelist != null &&
+            _whitelist.IsWhitelistPass(immuneFrom.Whitelist, ent.Owner))
         {
             var defenderHasActiveDefense =
                 (TryComp<XenoCrestComponent>(ent.Owner, out var crest) && crest.Lowered) ||
@@ -162,9 +162,9 @@ public sealed class RMCPullingSystem : EntitySystem
         else
         {
             // Enitity not on synths whitelist - knockback and stun but allows for synth to cancel
-            if (TryComp<SynthComponent>(user, out var synthNotWL) && synthNotWL.ParalyzeImmuneFrom != null)
+            if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFromNotWL) && immuneFromNotWL.Whitelist != null)
             {
-                if (!_whitelist.IsWhitelistPass(synthNotWL.ParalyzeImmuneFrom, ent.Owner))
+                if (!_whitelist.IsWhitelistPass(immuneFromNotWL.Whitelist, ent.Owner))
                 {
                     args.Cancelled = true;
 
