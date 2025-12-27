@@ -1428,3 +1428,27 @@ RMCTentBodyExtended: RMCTentUNMCExtended
 DeskBell: RMCDeskBell
 SignNoSmoking: CMPosterNoSmoking
 SignSmoking: CMPosterNoSmoking2
+
+# 2025-10-12
+CMLightReplacerEmpty: RMCLightReplacerEmpty
+CMLightReplacer: RMCLightReplacer
+CMLightFixture: RMCLightFixture
+CMLightFixtureSmall:  RMCLightFixtureSmall
+CMLightFixtureAlwaysPowered: RMCLightFixtureAlwaysPowered
+CMLightFixtureSmallAlwaysPowered: RMCLightFixtureSmallAlwaysPowered
+CMLightFixtureSmallOffset: RMCLightFixtureSmallOffset
+CMLightFixtureEmpty: RMCLightFixtureEmpty
+
+# 2025-11-14
+ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
+
+# 2025-11-27
+RMCToolWebbingSmallERT: RMCToolWebbing
+RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
+
+# 2025-11-29
+CMWallSuperReinforced: CMWallReinforced
+
+# 2025-12-02
+RMCTankFlamerImprovised: RMCTankFlamerColony
+RMCWeaponFlamerImprovised: RMCWeaponFlamerColony

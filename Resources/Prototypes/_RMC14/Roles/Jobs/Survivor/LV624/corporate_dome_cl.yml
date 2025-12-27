@@ -5,19 +5,13 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
+  ranks:
+    RMCRankWeYaExecutiveSpecialist: []
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillLeadership: 3
-        RMCSkillIntel: 2
-        RMCSkillMedical: 1
-        RMCSkillOverwatch: 1
+      preset: SurvivorWeYaManager
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetLV624CorporateLiaison
     - type: RMCSurvivor

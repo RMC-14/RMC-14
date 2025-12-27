@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFSpecialist
   icon: RMCJobIconCLFSpecialist
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Specialist
   special:
   - !type:AddComponentSpecial
     components:
@@ -65,7 +66,7 @@
   id: RMCGearCLFSpecialist
   equipment:
     head: RMCHeadMilitiaBucket
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesM4SPRBattleSight
     jumpsuit: RMCJumpsuitCLFWebbingMAR50
@@ -85,7 +86,7 @@
     - RMCFlashlight
     - CMFirstAidKitFilled
     - CMCrowbar
-    - CMMRE
+    - RMCMRECLF
     - RMCRangefinder
     - RMCGrenadeIED
     - RMCGrenadeIED

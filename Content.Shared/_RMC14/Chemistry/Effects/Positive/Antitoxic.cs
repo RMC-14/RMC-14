@@ -55,7 +55,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
             args.TargetEntity,
             Unconscious,
             TimeSpan.FromSeconds(5),
-            true
+            false
         );
     }
 }

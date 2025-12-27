@@ -89,3 +89,16 @@
   components:
   - type: Sprite
     state: xeno_telegraph_lash_anim
+
+- type: entity
+  parent: RMCEffectXenoTelegraphGreen
+  id: RMCEffectXenoTelegraphKing
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 2
+  - type: Sprite
+    drawdepth: Effects
+    sprite: _RMC14/Effects/xeno_telegraph_big.rsi
+    state: expand_out
+    color: "#A50824"

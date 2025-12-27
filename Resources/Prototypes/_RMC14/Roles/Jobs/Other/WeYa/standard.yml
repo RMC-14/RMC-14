@@ -97,7 +97,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
@@ -180,7 +180,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - RMCMagazineRifleSSG45Extended
     - RMCMagazineRifleSSG45Extended
     pocket2:
@@ -261,7 +261,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
     pocket2:

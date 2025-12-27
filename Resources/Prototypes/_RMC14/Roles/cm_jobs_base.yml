@@ -1,4 +1,5 @@
-﻿- type: job
+﻿
+- type: job
   abstract: true
   id: CMJobBase
   isCM: true
@@ -37,6 +38,7 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+  isXeno: true
 
 - type: entity
   parent: MarkerBase

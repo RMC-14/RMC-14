@@ -8,7 +8,9 @@ using Content.Shared._RMC14.Marines.Orders;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Projectiles;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Common;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
@@ -426,6 +428,20 @@ public sealed class CMGunSystem : EntitySystem
 
         if (!TryGetGunUser(gun.Owner, out var user))
             return;
+
+        var shooterFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
+        RaiseLocalEvent(user, ref shooterFactionEvent);
+
+        var targetFactionEvent = new GetIFFFactionEvent(null, SlotFlags.IDCARD);
+        RaiseLocalEvent(gunComp.Target.Value, ref targetFactionEvent);
+
+        if (shooterFactionEvent.Faction != null && 
+            targetFactionEvent.Faction != null && 
+            shooterFactionEvent.Faction == targetFactionEvent.Faction &&
+            HasComp<EntityActiveInvisibleComponent>(gunComp.Target))
+        {
+            return;
+        }
 
         var userDelay = EnsureComp<UserPointblankCooldownComponent>(user);
         if (_timing.CurTime < userDelay.LastPBAt + userDelay.TimeBetweenPBs)

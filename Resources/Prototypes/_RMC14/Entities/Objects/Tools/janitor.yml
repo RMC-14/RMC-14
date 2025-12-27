@@ -83,7 +83,7 @@
 
 - type: entity
   parent: BaseItem
-  id: CMLightReplacer
+  id: RMCLightReplacer
   name: light replacer
   description: A device to automatically replace lights. Refill with working lightbulbs.
   components:
@@ -94,9 +94,9 @@
     sprite: _RMC14/Objects/Misc/Janitorial/light_replacer.rsi
   - type: LightReplacer
     contents:
-    - id: CMLightTube
+    - id: RMCLightTube
       amount: 50
-    - id: CMLightBulb
+    - id: RMCLightBulb
       amount: 50
   - type: StaticPrice
     price: 100
@@ -105,13 +105,13 @@
       light_replacer_storage: !type:Container
 
 - type: entity
-  parent: CMLightReplacer
-  id: CMLightReplacerEmpty
+  parent: RMCLightReplacer
+  id: RMCLightReplacerEmpty
   suffix: Empty
   components:
   - type: LightReplacer
     contents:
-    - id: CMLightTube
+    - id: RMCLightTube
       amount: 0
 
 - type: entity

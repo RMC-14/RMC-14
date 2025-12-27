@@ -237,7 +237,7 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-imidazoline
-    
+
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity
@@ -281,3 +281,41 @@
   - type: ExamineRequiresSkill
     skills:
       RMCSkillMedical: 0
+
+- type: entity
+  parent: CMPill
+  id: RMCPillDexalinPlus
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill16
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-dexalin-plus
+
+- type: entity
+  parent: CMPill
+  id: RMCPillIron
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 15
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 10
+        - ReagentId: Nutriment
+          Quantity: 5
+  - type: Sprite
+    layers:
+    - state: pill14
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: ExamineRequiresSkill
+    skilledExamine: rmc-pill-contents-iron

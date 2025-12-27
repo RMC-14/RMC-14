@@ -1,6 +1,43 @@
 - type: entity
   parent: ClothingHeadHatWelding
   id: RMCHelmetWelding
-  suffix: RMC
-  name: welding helmet
-  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.
+  name: welding helmet # TODO RMC14 impairs vision when on
+  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
+  - type: ItemToggle
+    activated: true
+  - type: ToggleClothing
+    action: RMCActionToggleWeldingGoggles
+  - type: ComponentToggler
+    components:
+    - type: EyeProtection
+  - type: RMCItemToggleClothingVisuals
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: {state: icon-on}
+          False: {state: icon}
+  - type: Appearance
+  - type: Tag
+    tags:
+    - RMCHelmetWelding
+  - type: Item
+    storedRotation: 0
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
+      state: helmet-down
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bio: 10 # CLOTHING_ARMOR_LOW
+
+- type: Tag
+  id: RMCHelmetWelding

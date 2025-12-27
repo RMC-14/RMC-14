@@ -113,6 +113,7 @@
   - type: Tag
     tags:
     - Wall
+  - type: Clickable
 
 - type: entity
   abstract: true
@@ -189,6 +190,7 @@
     damage:
       types:
         Blunt: 5
+  - type: XenoRecentlyBuiltPreventCollisions
 
 # Invisible Wall
 

@@ -248,6 +248,16 @@
   description: Designed for maximum protection -- and badassery. Provides protection against facial attacks, filters toxins, and conceals the wearer's identity.
 
 - type: entity
+  parent: RMCMaskBalaclavaMARSOC
+  id: RMCMaskBalaclavaSPPCommando
+  name: SPP armored commando balaclava
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/spp_commando_coif.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/spp_commando_coif.rsi
+
+- type: entity
   parent: RMCMaskBalaclava
   id: RMCMaskBalaclavaSkullBlue
   name: skull balaclava
