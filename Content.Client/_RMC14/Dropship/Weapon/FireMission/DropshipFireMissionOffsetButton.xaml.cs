@@ -4,14 +4,15 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Utility;
 
-namespace Content.Client._RMC14.Dropship.Weapon;
+namespace Content.Client._RMC14.Dropship.Weapon.FireMission;
 
 [GenerateTypedNameReferences]
-public sealed partial class DropshipFiremissionOffsetButton : Button
+public sealed partial class DropshipFireMissionOffsetButton : Button
 {
     private Action<ButtonEventArgs>? _onPressed;
+    public int? Offset { get; set; }
 
-    public DropshipFiremissionOffsetButton()
+    public DropshipFireMissionOffsetButton()
     {
         RobustXamlLoader.Load(this);
     }

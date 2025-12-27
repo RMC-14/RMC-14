@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Numerics;
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.Areas;
@@ -19,6 +20,7 @@ using Content.Shared._RMC14.Rangefinder;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chat;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
@@ -65,6 +67,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly ISharedChatManager _chat = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
@@ -78,6 +81,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PowerLoaderSystem _powerloader = default!;
@@ -157,6 +161,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
                 subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
+                subs.Event<DropshipTerminalWeaponsCreateFireMissionMsg>(OnCreateFireMission);
+                subs.Event<DropshipTerminalWeaponsViewFireMissionMsg>(OnViewFireMission);
+                subs.Event<DropshipTerminalWeaponsEditFireMissionMsg>(OnEditFireMission);
+                subs.Event<DropshipTerminalWeaponsDeleteFireMissionMsg>(OnDeleteFireMission);
+                subs.Event<DropshipTerminalWeaponsSelectFireMissionMsg>(OnSelectFireMission);
+                subs.Event<DropshipTerminalWeaponsSelectStrikeVectorMsg>(OnSelectStrikeVector);
+                subs.Event<DropshipTerminalWeaponsFireMissionNextMsg>(OnNextFireMission);
+                subs.Event<DropshipTerminalWeaponsFireMissionPreviousMsg>(OnPreviousFireMission);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -730,7 +742,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         screen.State = screen.State switch
         {
-            Strike or StrikeWeapon => Target,
+            Strike or StrikeWeapon or StrikeFireMission or StrikeVector => Target,
             _ => screen.State,
         };
 
@@ -992,6 +1004,210 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RefreshWeaponsUI(ent);
     }
 
+    private void OnCreateFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsCreateFireMissionMsg args)
+    {
+        if (string.IsNullOrWhiteSpace(args.Name))
+            return;
+
+        if (!_dropship.TryGetGridDropship(ent, out var dropship))
+            return;
+
+        foreach (var mission in ent.Comp.FireMissions)
+        {
+            if (mission.Name == args.Name)
+                return;
+        }
+
+        // Generate a new unique FireMission Id
+        var newId = ent.Comp.FireMissions.Count > 0
+            ? ent.Comp.FireMissions.Max(fm => fm.Id) + 1
+            : 1;
+
+        var weaponOffsets = new List<WeaponOffsetData>();
+        var weapons = new List<EntityUid>();
+        foreach (var attachmentPoint in dropship.Comp.AttachmentPoints)
+        {
+            if (!TryComp(attachmentPoint, out DropshipWeaponPointComponent? weaponPoint) ||
+                !_container.TryGetContainer(attachmentPoint, weaponPoint.WeaponContainerSlotId, out var weaponContainer) ||
+                weaponContainer.ContainedEntities.Count == 0)
+                continue;
+
+            weapons.Add(weaponContainer.ContainedEntities[0]);
+        }
+        foreach (var weapon in weapons)
+        {
+            for (var timing = ent.Comp.MinTiming; timing <= ent.Comp.MaxTiming; timing++)
+            {
+                weaponOffsets.Add(new WeaponOffsetData(GetNetEntity(weapon), timing, null));
+            }
+        }
+
+
+        var newFireMission = new FireMissionData(newId, args.Name, weaponOffsets);
+        ent.Comp.FireMissions.Add(newFireMission);
+        Dirty(ent);
+
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnViewFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsViewFireMissionMsg args)
+    {
+        var idToSelect = args.Id;
+        if (ent.Comp.FireMissions.All(fm => fm.Id != idToSelect))
+            return;
+
+        if (args.First)
+            ent.Comp.ScreenOneSelectedFireMissionId = idToSelect;
+        else
+            ent.Comp.ScreenTwoSelectedFireMissionId = idToSelect;
+
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        screen.State = FireMissionView;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnEditFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsEditFireMissionMsg args)
+    {
+
+        var idToSelect = args.MissionId;
+        var mission = ent.Comp.FireMissions.FirstOrDefault(fm => fm.Id == idToSelect);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+
+        if (screen.Weapon == null)
+            return;
+
+        var offsets = mission.WeaponOffsets;
+
+        // Look for an existing offset for this weapon and row
+        var existingIndex = -1;
+        for (var i = 0; i < offsets.Count; i++)
+        {
+            if (offsets[i].WeaponId != screen.Weapon || offsets[i].Row != args.Row)
+                continue;
+
+            existingIndex = i;
+            break;
+        }
+
+        if (!IsOffsetEditValid(ent, idToSelect, screen.Weapon.Value, args.Row, args.Offset, out var suspicious))
+        {
+            if (suspicious && _player.TryGetSessionByEntity(args.Actor, out var player))
+                _chat.SendAdminAlert(Loc.GetString("rmc-dropship-firemission-invalid-value-admin-announcement", ("player", player)));
+            return;
+        }
+
+        var newOffset = new WeaponOffsetData(
+            screen.Weapon.Value,
+            args.Row,
+            args.Offset
+        );
+
+        if (existingIndex != -1)
+            offsets[existingIndex] = newOffset;
+        else
+            offsets.Add(newOffset);
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnDeleteFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsDeleteFireMissionMsg args)
+    {
+        ref var currentScreen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        ref var otherScreen   = ref args.First ? ref ent.Comp.ScreenTwo : ref ent.Comp.ScreenOne;
+
+        var idToDelete = args.First
+            ? ent.Comp.ScreenOneSelectedFireMissionId
+            : ent.Comp.ScreenTwoSelectedFireMissionId;
+
+        if (idToDelete == null)
+            return;
+
+        var missionId = idToDelete.Value;
+        ent.Comp.FireMissions.RemoveAll(fm => fm.Id == missionId);
+
+        // Reset the current screen
+        currentScreen.State = FireMissionCreate;
+        if (args.First)
+            ent.Comp.ScreenOneSelectedFireMissionId = null;
+        else
+            ent.Comp.ScreenTwoSelectedFireMissionId = null;
+
+        // Reset the other screen if it was viewing or editing the deleted mission
+        if (otherScreen.State is FireMissionEdit or FireMissionView)
+        {
+            var otherSelectedId = args.First
+                ? ent.Comp.ScreenTwoSelectedFireMissionId
+                : ent.Comp.ScreenOneSelectedFireMissionId;
+
+            if (otherSelectedId == missionId)
+            {
+                otherScreen.State = FireMissionCreate;
+                if (args.First)
+                    ent.Comp.ScreenTwoSelectedFireMissionId = null;
+                else
+                    ent.Comp.ScreenOneSelectedFireMissionId = null;
+            }
+        }
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnSelectFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsSelectFireMissionMsg args)
+    {
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        screen = screen with { FireMissionId = args.Id, Weapon = null};
+        screen.State = Target;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnSelectStrikeVector(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsSelectStrikeVectorMsg args)
+    {
+        if ( args.Direction != Direction.North &&
+             args.Direction != Direction.East &&
+             args.Direction != Direction.South &&
+             args.Direction != Direction.West)
+            return;
+
+        ent.Comp.StrikeVector = args.Direction;
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        screen.State = Target;
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnNextFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMissionNextMsg args)
+    {
+        ref var page = ref args.First ? ref ent.Comp.ScreenOneFireMissionPage : ref ent.Comp.ScreenTwoFireMissionPage;
+        var itemsPerPage = args.TargetsPerPage - args.FixedButtonsCount;
+        var totalPages = (ent.Comp.FireMissions.Count + itemsPerPage - 1) / itemsPerPage;
+        var maxPageIndex = totalPages - 1;
+
+        page = Math.Min(page + 1, maxPageIndex);
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnPreviousFireMission(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMissionPreviousMsg args)
+    {
+        ref var page = ref args.First ? ref ent.Comp.ScreenOneFireMissionPage : ref ent.Comp.ScreenTwoFireMissionPage;
+        var itemsPerPage = args.TargetsPerPage - args.FixedButtonsCount;
+        var totalPages = (ent.Comp.FireMissions.Count + itemsPerPage - 1) / itemsPerPage;
+        var maxPageIndex = totalPages - 1;
+
+        page = Math.Min(page - 1, maxPageIndex);
+
+        Dirty(ent);
+        RefreshWeaponsUI(ent);
+    }
+
     private void OnRefreshNameModifier(Entity<ActiveFlareSignalComponent> ent, ref RefreshNameModifiersEvent args)
     {
         if (ent.Comp.Abbreviation == null)
@@ -1015,6 +1231,73 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         RefreshWeaponsUI(ent);
         Dirty(ent);
+    }
+
+    private bool IsOffsetEditValid(Entity<DropshipTerminalWeaponsComponent> ent, int fireMissionId, NetEntity weapon, int row, int? offset, out bool suspicious)
+    {
+        suspicious = false;
+
+        // Validate fire mission exists
+        FireMissionData? fireMission = null;
+        foreach (var t in ent.Comp.FireMissions)
+        {
+            if (t.Id != fireMissionId)
+                continue;
+
+            fireMission = t;
+            break;
+        }
+
+        if (fireMission == null)
+            return false;
+
+        var weaponOffsetsForWeapon = new List<WeaponOffsetData>();
+        foreach (var wo in fireMission.Value.WeaponOffsets)
+        {
+            if (wo.WeaponId == weapon)
+                weaponOffsetsForWeapon.Add(wo);
+        }
+
+        // Check if the sent timing is allowed
+        if (row < ent.Comp.MinTiming || row > ent.Comp.MaxTiming)
+        {
+            suspicious = true;
+            return false;
+        }
+
+        // Check if the weapon point has a location set
+         if (!TryGetWeaponLocation(GetEntity(weapon), out var location))
+             return false;
+
+        // Check if the terminal has allowed offsets defined for this location
+         if (!ent.Comp.AllowedOffsets.TryGetValue(location, out var validOffsets))
+             return false;
+
+        // Check if the sent offset is allowed
+        if (!validOffsets.Contains(offset))
+        {
+            // This means the client sent an offset value that should be impossible to be sent through normal gameplay
+            suspicious = true;
+            return false;
+        }
+
+        if (!TryComp(GetEntity(weapon), out DropshipWeaponComponent? weaponComp))
+            return false;
+
+        // Check if the row is blocked by an already set offset in a nearby row.
+        foreach (var existing in weaponOffsetsForWeapon)
+        {
+            if (!existing.Offset.HasValue)
+                continue;
+
+            if (existing.Row == row)
+                continue;
+
+            if (Math.Abs(existing.Row - row) <= weaponComp.FireMissionDelay)
+                return false;
+        }
+
+        return true;
     }
 
     protected virtual void RefreshWeaponsUI(Entity<DropshipTerminalWeaponsComponent> terminal)
@@ -1518,10 +1801,66 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Dirty(ent);
         RefreshWeaponsUI(ent);
     }
+
+    /// <summary>
+    ///     Tries to get the <see cref="DropshipWeaponPointLocation"/> of the weapon point the weapon is installed in.
+    /// </summary>
+    /// <param name="weaponEntity">The entity to check the location of</param>
+    /// <param name="locationId">The location of the weapon point</param>
+    /// <returns>True if a location was found</returns>
+    public bool TryGetWeaponLocation(EntityUid weaponEntity, out DropshipWeaponPointLocation locationId)
+    {
+        locationId = default;
+
+        if (!_container.TryGetContainingContainer(weaponEntity, out var container))
+            return false;
+
+        if (!TryComp(container.Owner, out DropshipWeaponPointComponent? point))
+            return false;
+
+        if (point.Location is not { } location)
+            return false;
+
+        locationId = location;
+        return true;
+    }
+
+    /// <summary>
+    ///     Makes sure an offset(null) exists for the given weapon in the given fire mission.
+    /// </summary>
+    /// <param name="uid">The weapons control entity</param>
+    /// <param name="fireMission">The fire mission data</param>
+    /// <param name="weaponEntity">The weapon entity</param>
+    /// <param name="terminal">The <see cref="DropshipTerminalWeaponsComponent"/> of given uid entity</param>
+    public void EnsureWeaponOffsets(EntityUid uid, FireMissionData fireMission, EntityUid weaponEntity, DropshipTerminalWeaponsComponent? terminal = null)
+    {
+        if (!Resolve(uid, ref terminal, false))
+            return;
+
+        var existingOffsets = fireMission.WeaponOffsets
+            .Where(o => o.WeaponId == GetNetEntity(weaponEntity))
+            .ToList();
+
+        if (existingOffsets.Count == terminal.MaxTiming)
+            return;
+
+        var missingRows = Enumerable.Range(terminal.MinTiming, terminal.MaxTiming)
+            .Where(row => existingOffsets.All(o => o.Row != row))
+            .ToList();
+
+        foreach (var row in missingRows)
+        {
+            var newOffset = new WeaponOffsetData(GetNetEntity(weaponEntity), row, null);
+            fireMission.WeaponOffsets.Add(newOffset);
+        }
+
+        Dirty(uid, terminal);
+        RefreshWeaponsUI((uid, terminal));
+    }
 }
 
 /// <summary>
-///     Raised on a dropship when it shoots any of it's weapons.
+///     Raised on a dropship when it shoots any of its weapons.
 /// </summary>
 [ByRefEvent]
 public record struct DropshipWeaponShotEvent(

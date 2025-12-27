@@ -1,0 +1,27 @@
+<controls:DropshipFireMissionViewScreen
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon.FireMission"
+    MinSize="500 500">
+
+    <BoxContainer Orientation="Vertical"
+                  HorizontalExpand="True"
+                  VerticalExpand="True"
+                  Margin="10"
+                  SeparationOverride="4">
+
+        <!-- Title -->
+        <RichTextLabel Name="FireMissionTitle"
+                       Text="[color=#00FF36]Firemission: Placeholder[/color]"
+                       HorizontalAlignment="Center"
+                       MinSize="0 30"/>
+
+        <!-- GridContainer for the table -->
+        <GridContainer Name="FireMissionGrid"
+                       Columns="5"
+                       HorizontalExpand="True"
+                       VerticalExpand="True"
+                       HSeparationOverride="4"
+                       VSeparationOverride="2">
+        </GridContainer>
+    </BoxContainer>
+</controls:DropshipFireMissionViewScreen>

@@ -29,8 +29,8 @@ public enum DropshipWeaponPointLayers
 [Serializable, NetSerializable]
 public enum DropshipWeaponPointLocation
 {
-    StarboardFore,
-    PortFore,
-    StarboardWing,
-    PortWing,
+    PortWing = 1,
+    PortFore = 2,
+    StarboardFore = 3,
+    StarboardWing = 4,
 }

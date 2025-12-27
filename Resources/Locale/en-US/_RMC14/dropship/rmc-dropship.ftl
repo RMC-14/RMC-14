@@ -22,9 +22,11 @@ rmc-dropship-weapons-target-strike = Target Acquisition
 
   Target selected: {$target}
 
+  Attack Vector {$vector}
+
   Offset {$xOffset},{$yOffset}
 
-#  Attack Vector {$vector}
+
 
 #  Offset 0,0
 
@@ -44,6 +46,9 @@ rmc-dropship-weapons-lock = LOCK
 rmc-dropship-weapons-clear = CLEAR
 rmc-dropship-weapons-enable = ENABLE
 rmc-dropship-weapons-disable = DISABLE
+rmc-dropship-weapons-view = VIEW
+rmc-dropship-weapons-edit = EDIT
+rmc-dropship-weapons-delete = DELETE
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -88,6 +93,11 @@ rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait
 
 rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
 rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+rmc-dropship-firemission-invalid-value-admin-announcement = Player {$player} attempted to set an offset value that should not be possible through normal gameplay.
+rmc-dropship-firemission-vector-North = NORTH
+rmc-dropship-firemission-vector-East = EAST
+rmc-dropship-firemission-vector-South = SOUTH
+rmc-dropship-firemission-vector-West = WEST
 
 rmc-dropship-paradrop-target-screen-text = HPU-1 Paradrop Deployment System
     {$hasTarget}
