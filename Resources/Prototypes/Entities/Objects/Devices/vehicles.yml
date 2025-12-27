@@ -166,7 +166,9 @@
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
+    pushCooldown: 2
     xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
@@ -303,7 +305,9 @@
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
+    pushCooldown: 2
     xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
@@ -438,7 +442,9 @@
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
+    pushCooldown: 2
     xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3
@@ -574,7 +580,9 @@
     maxSpeed: 8
     acceleration: 5
     deceleration: 12
+    pushCooldown: 2
     xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
   - type: RMCVehicleOvercharge
     speedMultiplier: 1.6
     duration: 3

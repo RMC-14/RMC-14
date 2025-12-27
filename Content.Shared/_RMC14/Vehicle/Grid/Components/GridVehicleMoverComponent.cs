@@ -44,14 +44,26 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public float FrontOffset = 0f;
 
+    [DataField, AutoNetworkedField]
+    public float PushCooldown = 0f;
+
+    [AutoNetworkedField]
+    public TimeSpan NextPushTime;
+
     [AutoNetworkedField]
     public bool IsCommittedToMove;
+
+    [AutoNetworkedField]
+    public bool IsPushMove;
 
     [AutoNetworkedField]
     public bool IsMoving;
 
     [DataField, AutoNetworkedField]
     public RMCSizes? XenoBlockMinimumSize;
+
+    [DataField, AutoNetworkedField]
+    public RMCSizes? XenoMoveMinimumSize;
 
     [AutoNetworkedField]
     public float SmashSlowdownMultiplier = 1f;
