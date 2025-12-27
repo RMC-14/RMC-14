@@ -287,3 +287,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot3.ogg"
+
+- files: ["gun_type71.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"

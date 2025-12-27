@@ -18,6 +18,12 @@ chat-speech-verb-feroxi-2 = swishes
 chat-speech-verb-feroxi-3 = gnashes
 chat-speech-verb-feroxi-4 = growls
 
+chat-speech-verb-name-skrell = Skrell
+chat-speech-verb-skrell-1 = trills
+chat-speech-verb-skrell-2 = croaks
+chat-speech-verb-skrell-3 = warbles
+chat-speech-verb-skrell-4 = chirps
+
 chat-speech-verb-name-megaphone = Megaphone
 chat-speech-verb-megaphone-1 = broadcasts
 chat-speech-verb-megaphone-2 = announces

@@ -3,6 +3,7 @@
   id: RMCBoxDonutEmpty
   name: Yum! donuts
   description: A box of mouth-watering "Yum!" brand donuts
+  suffix: Empty
   components:
   - type: Sprite #TODO RMC14 - the different donuts have diff storage sprites that should show up based on varieties
     sprite: _RMC14/Objects/Storage/donutbox.rsi
@@ -55,6 +56,7 @@
 - type: entity
   parent: RMCBoxDonutEmpty
   id: RMCBoxDonut
+  suffix: ""
   components:
   - type: EntityTableContainerFill
     containers:
@@ -127,14 +129,11 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 3
-        - ReagentId: Sugar
-          Quantity: 2 # Sprinkles
+        - ReagentId: RMCSprinkles
+          Quantity: 2
   - type: Item
     heldPrefix: pink
   - type: FlavorProfile
     flavors:
       - bread
       - sweet
-
-
-

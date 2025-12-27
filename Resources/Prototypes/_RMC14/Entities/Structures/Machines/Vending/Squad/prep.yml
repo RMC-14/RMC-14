@@ -83,6 +83,29 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
+    - name: Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxShellsFlechette
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsBuckshot
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxMagazineRifleM4SPR
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineSMGM63
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRifleM54C
+        box: CMMagazineRifleM54C
+      - id: RMCBoxPackFlare
+        box: CMPackFlare
 
 - type: entity
   parent: ColMarTechBase
@@ -532,6 +555,8 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
+      - id: RMCAttachmentMicroLaserSight
+        amount: 2
       - id: RMCAttachmentMiniFlamethrower
         amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle

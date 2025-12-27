@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/icons/obj/items/weapons/guns/attachments/barrel.dmi, npz92_suppressor by github noctyrnal. Ebarrel, hbarrel and suppressor resprite by VictorJob, tanto, dagger and combat utility knife bayonets by august-sun (github)",
   "size": {
     "x": 32,
     "y": 32
@@ -339,6 +339,42 @@
     },
     {
       "name": "s_m10_overcomp_spike_a"
+    },
+    {
+      "name": "tantoa"
+    },
+    {
+      "name": "tantoa_a"
+    },
+    {
+      "name": "tantob"
+    },
+    {
+      "name": "tantob_a"
+    },
+    {
+      "name": "combatutilitya"
+    },
+    {
+      "name": "combatutilitya_a"
+    },
+    {
+      "name": "combatutilityb"
+    },
+    {
+      "name": "combatutilityb_a"
+    },
+    {
+      "name": "daggera"
+    },
+    {
+      "name": "daggera_a"
+    },
+    {
+      "name": "daggerb"
+    },
+    {
+      "name": "daggerb_a"
     }
   ]
 }

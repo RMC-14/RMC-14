@@ -187,3 +187,84 @@
   components:
   - type: Stack
     count: 2
+
+# Aluminum
+- type: material
+  id: RMCAluminum
+  stackEntity: RMCSheetAluminum
+  name: materials-aluminum
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  color: "#A8A8A8"
+  price: 0.2
+
+- type: stack
+  id: RMCAluminum
+  name: aluminum
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  spawn: RMCSheetAluminum
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetAluminum
+  name: aluminum
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCAluminum: 100
+  - type: Stack
+    stackType: RMCAluminum
+    count: 50
+  - type: Sprite
+    state: aluminum
+    sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+  - type: Item
+    heldPrefix: aluminum
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: aluminum
+  - type: SolutionContainerManager
+    solutions:
+      aluminum:
+        reagents:
+        - ReagentId: RMCAluminum
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum15
+  suffix: "15"
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum25
+  suffix: "25"
+  components:
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum30
+  suffix: "30"
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

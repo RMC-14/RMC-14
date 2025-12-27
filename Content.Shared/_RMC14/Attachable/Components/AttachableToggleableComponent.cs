@@ -151,6 +151,9 @@ public sealed partial class AttachableToggleableComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Attached = false;
+
+    [DataField, AutoNetworkedField]
+    public bool ActivateOnMove = true;
 }
 
 public enum AttachableInstantToggleConditions : byte

@@ -11,7 +11,6 @@
 
   [bold]Mutinies[/bold]
 
-  - MPs are not able to mutiny and will always side with the acting commander, unless they are neutral, in which case they may not help or arrest either side until the mutiny is concluded.\nThis applies to the individual player and not the MP as a whole.
   - Mutiny cannot occur during hijack, and any ongoing mutiny must be ended upon hijack.
   - Only the Acting Commander can be mutinied against. They must be given a chance to stand down peacefully.
   - During the mutiny, attacking any uninvolved, medical, or surrendered personnel is forbidden, as is perma-killing anyone involved.

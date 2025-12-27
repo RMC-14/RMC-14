@@ -28,4 +28,9 @@ public sealed class RMCGameTickerSystem : SharedRMCGameTickerSystem
         base.PlayerJoinGame(session);
         _gameTicker.PlayerJoinGame(session, silent);
     }
+
+    public override bool ServerOnlyIsInRound()
+    {
+        return _gameTicker.RunLevel == GameRunLevel.InRound;
+    }
 }

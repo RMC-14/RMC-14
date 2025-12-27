@@ -103,6 +103,15 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: RMCGlassesAviators
+    - name: Flight Visor
+      choices: { CMFlightVisor: 1 }
+      entries:
+      - id: RMCVisorPilotBlack
+      - id: RMCVisorPilotDarkblue
+      - id: RMCVisorPilotLightblue
+      - id: RMCVisorPilotPurple
+      - id: RMCVisorPilotRed
+      - id: RMCVisorPilotYellow
     - name: Masks
       choices: { CMMasks: 1 }
       entries:

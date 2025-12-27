@@ -1,0 +1,305 @@
+# Base
+- type: entity
+  abstract: true
+  parent: RMCBaseUniformAccessory
+  id: RMCPVEArmorAccessoryBase
+  name: armor accessory
+  description: Abstract armor accessories.
+  suffix: PVE
+  components:
+  - type: Sprite
+    state: icon
+  - type: UniformAccessory
+    limit: 1
+    hasIconSprite: true
+  - type: Appearance
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorAccessoryBase
+  id: RMCPVEArmorPadsBase
+  components:
+  - type: UniformAccessory
+    category: Pads
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorBracersBase
+  components:
+  - type: UniformAccessory
+    category: Bracers
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorNeckGuardBase
+  components:
+  - type: UniformAccessory
+    category: NeckGuard
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorGroinPlateBase
+  components:
+  - type: UniformAccessory
+    category: GroinPlate
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorShinGuardBase
+  components:
+  - type: UniformAccessory
+    category: ShinGuard
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorKneeGuardBase
+  components:
+  - type: UniformAccessory
+    category: KneeGuard
+
+- type: entity
+  abstract: true
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPaintBase
+  components:
+  - type: UniformAccessory
+    category: Paint
+
+# Pads
+- type: entity
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPads
+  name: M3 Pauldrons
+  description: Attachable supplementary armor for the M3 armor system. Protects from glancing hits and covers the arm opening in the cuirass against shrapnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/pads/urban.rsi
+
+# Bracers
+- type: entity
+  parent: RMCPVEArmorBracersBase
+  id: RMCPVEArmorBracers
+  name: M3 Vambraces
+  description: Attachable supplementary armor for the M3 armor system. A pair of composite ballistic vambraces to shield the forearms, with straps to ensure it doesn't ride up or down.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/bracers/urban.rsi
+
+# Neck Guard
+- type: entity
+  parent: RMCPVEArmorNeckGuardBase
+  id: RMCPVEArmorNeckGuard
+  name: M3 Gorget
+  description: Attachable supplementary armor for the M3 armor system. A simple polymer ballistic plate to resist ricochets and shrapnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/neckguard/urban.rsi
+
+# Groin Plate
+- type: entity
+  parent: RMCPVEArmorGroinPlateBase
+  id: RMCPVEArmorGroinPlate
+  name: M3 Lap Panel
+  description: Attachable supplementary armor for the M3 armor system. Shear thickening liquid armor piece covering the abdomen and groin, with an additional ruggedized boron carbide. Clasps to the inside of the M3 cuirass.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/groinplate/urban.rsi
+
+# Shin Guard
+- type: entity
+  parent: RMCPVEArmorShinGuardBase
+  id: RMCPVEArmorShinGuard
+  name: M3 Greaves
+  description: Attachable supplementary armor for the M3 armor system. Lightweight polymer clamshell-style plates enclose the lower legs to provide shrapnel and pistol protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/shinguards/urban.rsi
+
+# Knee Guard
+- type: entity
+  parent: RMCPVEArmorKneeGuardBase
+  id: RMCPVEArmorKneeGuard
+  name: M3 Kneepads
+  description: Attachable supplementary armor for the M3 armor system. High impact ruggedized outer shell and polymer internals protect from shrapnel as well as low power ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/jungle.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      Jungle: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/jungle.rsi
+      Desert: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/desert.rsi
+      Classic: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/classic.rsi
+      Snow: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/snow.rsi
+      Urban: _RMC14/Objects/Clothing/Accessory/PVE/Marine/thighguards/urban.rsi
+
+# Paint
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintSkull
+  name: skull armor paint
+  description: A set of paint tones to etch a skull into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/skull.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/skull.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintHeart
+  name: heart armor paint
+  description: A set of paint tones to etch a heart into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/heart.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/heart.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintMedic
+  name: medical cross armor paint
+  description: A set of paint tones to etch a blue cross into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/medic.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/medic.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintUN
+  name: UN flag armor paint
+  description: A set of paint tones to etch the white and blue into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/un.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/un.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintTarget
+  name: target armor paint
+  description: A set of paint tones to etch a target pattern into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/target.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/target.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintSmileyFace
+  name: smileyface armor paint
+  description: A set of paint tones to etch a happy face into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/smiley.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/smiley.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintNeutralFace
+  name: neutralface armor paint
+  description: A set of paint tones to etch a neutral face into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/neutral.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/neutral.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintCross
+  name: cross armor paint
+  description: A set of paint tones to etch a religious symbol into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/cross.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/cross.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintInscription
+  name: inscription armor paint
+  description: A set of paint tones to etch a text phrase into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/inscription.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/inscription.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintMixtape
+  name: flames armor paint
+  description: A set of paint tones to etch straight heat into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/mixtape.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Marine/paint/mixtape.rsi
+      state: equipped
+
