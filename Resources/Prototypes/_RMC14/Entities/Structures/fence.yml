@@ -12,6 +12,7 @@
     state: fence0
   - type: InteractionOutline
   - type: Clickable
+  - type: RMCVehicleSmashable
   - type: IconSmooth
     key: fences
     base: fence
