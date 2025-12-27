@@ -25,7 +25,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: CMM54CShoot
+      collection: RMCType71Shoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -104,6 +104,16 @@
     tags:
     - RMCWeaponRifleType71
 
+- type: entity
+  parent: RMCWeaponRifleType71
+  id: RMCWeaponRifleType71PVE
+  suffix: PVE
+  components:
+  - type: RMCSelectiveFire
+    baseFireRate: 3.5
+  - type: Tag
+    tags:
+    - RMCWeaponRifleType71PVE
 - type: entity
   parent: RMCWeaponRifleType71
   name: Type 71-F assault rifle
@@ -223,8 +233,8 @@
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
       color: "#9C9A19"
-#  - type: RefillableByBulletBox no bullet box yet
-#    bulletType: RMCBoxBulletsRifle
+  - type: RefillableByBulletBox
+    bulletType: null
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -333,3 +343,7 @@
 
 - type: Tag
   id: RMCCartridgeRifle545x39mmHEAP
+
+- type: Tag
+  id: RMCWeaponRifleType71PVE
+

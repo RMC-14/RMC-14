@@ -24,6 +24,7 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
     - name: Explosives
       entries:
@@ -117,6 +118,8 @@
         points: 5
       - id: CMEncryptionKeyRequisition
         points: 5
+      - id: CMEncryptionKeyMedical
+        points: 5
 
 - type: entity
   parent: ColMarTechBase
@@ -149,7 +152,7 @@
       entries:
       - id: RMCPouchFlareFilled
         name: Flare pouch (Full)
-#      - id: RMCPouchElectronics # TODO RMC14
+      - id: RMCPouchElectronics
       - id: RMCPouchFirstAidInjectors
         name: first-aid pouch (refillable injectors)
         recommended: true

@@ -55,16 +55,16 @@
         name: orange hard hat
       - id: RMCHelmetWelding
       - id: CMHeadFlapCap
-#    - name: Suit
-#      choices: { CMSuit: 1 }
-#      entries:
-    # - id: CMUtilityVestSynth
-       # recommended: true
-    # /obj/item/clothing/suit/storage/marine/light/synvest/grey
-    # /obj/item/clothing/suit/storage/marine/light/synvest/dgrey
-    # /obj/item/clothing/suit/storage/marine/light/synvest/jungle
-    # /obj/item/clothing/suit/storage/marine/light/synvest/snow
-    # /obj/item/clothing/suit/storage/marine/light/synvest/desert
+    - name: Suit # Parity Vendor Fill has one for the map's camo, then still lets the synth choose from any of the options. Hence why this has so many options.
+      choices: { CMSuit: 1 }
+      entries:
+      - id: CMArmorM3VLSynth
+        recommended: true
+      - id: CMArmorM3VLSynthJungle
+      - id: CMArmorM3VLSynthDesert
+      - id: CMArmorM3VLSynthSnow
+      - id: CMArmorM3VLSynthClassic
+      - id: CMArmorM3VLSynthUrban
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -320,6 +320,7 @@
   - type: CMAutomatedVendor
     jobs:
     - RMCJobSynthetic
+    pointsType: ExperimentalTools
     sections:
     - name: Experimental Tools
       entries:
@@ -332,8 +333,6 @@
         points: 15
       # backpack firefighting watertank - 15 Points
       # crew monitor - 15 Points
-      - id: RMCGlassesExperimentalMeson
-        points: 15
       # maintenance jack - 15 Points
       # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton

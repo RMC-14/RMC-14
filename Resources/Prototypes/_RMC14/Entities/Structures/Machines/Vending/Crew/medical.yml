@@ -89,10 +89,14 @@
       entries:
       - id: CMBackpackMarine
         name: backpack
+        replaceSlot: back
       - id: CMSatchelMarine
         name: satchel
+        replaceSlot: back
       - id: CMBackpackMedical
+        replaceSlot: back
       - id: CMSatchelMedical
+        replaceSlot: back
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:

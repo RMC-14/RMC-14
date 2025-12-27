@@ -164,8 +164,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -178,8 +177,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 25
-        - ReagentId: JuiceCarrot
-          Quantity: 5
         - ReagentId: Vitamin
           Quantity: 5
 
@@ -194,8 +191,7 @@
   - type: FlavorProfile
     flavors:
     - tomato
-    - eggplant
-    - corn
+    - vegetables
     - cheesy
     - oily
     - bread
@@ -206,8 +202,6 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 4
-        - ReagentId: JuiceCarrot
-          Quantity: 1
         - ReagentId: Vitamin
           Quantity: 1
 
@@ -258,6 +252,98 @@
         - ReagentId: Vitamin
           Quantity: 1
 
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaSupremeFull
+  name: supreme pizza
+  description: With this many toppings, it lives up to its name.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaSupremeSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaSupremeSlice
+  name: supreme slice
+  description: A slice of the top.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/supreme.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - vegetables
+    - cheesy
+    - oily
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 1
+
+- type: entity
+  parent: RMCFoodPizzaFullBase
+  id: RMCFoodPizzaCalabresaFull
+  name: calabresa pizza
+  description: Pizza so good it will make you see Cristo Redentor!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - bread
+  - type: SliceableFood
+    slice: RMCFoodPizzaCalabresaSlice
+
+- type: entity
+  parent: RMCFoodPizzaSliceBase
+  id: RMCFoodPizzaCalabresaSlice
+  name: slice de calabresa
+  description: A slice of paraíso.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/Pizza/calabresa.rsi
+  - type: FlavorProfile
+    flavors:
+    - meaty
+    - onion
+    - cheesy
+    - bread
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 6
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 4
+        - ReagentId: Vitamin
+          Quantity: 1
+        - ReagentId: Protein
+          Quantity: 1
+
 # Pizza Box Base
 - type: entity
   parent: BaseStorageItem
@@ -281,7 +367,7 @@
     stateDoorClosed: pizzabox1
   - type: Appearance
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Small
     grid:
     - 0,0,1,1
     whitelist:
@@ -406,4 +492,3 @@
         prob: 0.25
       - id: RMCFoodPizzaVegetableFull
         prob: 0.25
-

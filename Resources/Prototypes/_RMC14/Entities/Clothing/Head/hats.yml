@@ -167,6 +167,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretOfficerHos
+  name: officer beret
+  description: A navy-blue beret with a captain's rank emblem. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -775,6 +786,23 @@
     - Snout
 
 - type: entity
+  parent: RMCHeadRadiationHood
+  id: RMCHeadTychoRadiationHood
+  name: Tycho 4000 radiation protection hood
+  description: The burn-resistant hood for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and it's recommended you wear a rebreather or gas mask under it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: CMArmor
+    bio: 100
+    melee: 25
+    bullet: 15
+    explosionArmor: 10
+    #rad: 50
+
+- type: entity
   parent: CMHeadBeret
   id: RMCHeadWeYaPilotCap
   name: Weston-Yamada Pilot cap
@@ -958,6 +986,26 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
+
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadUshanka
+  name: ushanka
+  description: Perfect for winter in Siberia, da?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 15
+    explosionArmor: 10
+    # TODO 15 internal damage armor
+    # TODO give cold protection
 
 # Chaplain
 

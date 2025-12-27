@@ -71,6 +71,10 @@
   description: Glass is a non-crystalline solid, made out of silicate, the primary constituent of sand. It is valued for its transparency, albeit it is not too resistant to damage.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowDirectionalBuild
+      # Full window
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -91,6 +95,10 @@
     layers:
       - state: glass_4
         map: ["base"]
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetGlass
@@ -161,6 +169,11 @@
   description: A sheet of reinforced glass.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowReinforcedDirectionalBuild
+      # Full window
+      - RMCWindoorBuild
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -185,6 +198,11 @@
   - type: Construction
     graph: CMGlass
     node: SheetGlassReinforced
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
+
 
 - type: entity
   parent: CMSheetGlassReinforced

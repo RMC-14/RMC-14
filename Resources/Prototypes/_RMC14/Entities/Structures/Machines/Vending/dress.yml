@@ -1,0 +1,576 @@
+- type: entity
+  parent: ColMarTechBase
+  id: RMCAutomatedPersonalUniformCloset
+  name: automated personal uniform closet
+  description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/dress.rsi
+  - type: CMAutomatedVendor
+    sections:
+    # Auxiliary
+    - name: Auxiliary Support Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMAuxiliarySupportOfficer
+      entries:
+      - id: RMCJumpsuitASOBlack
+      - id: RMCJumpsuitASOBlackAlt
+      - id: RMCJumpsuitASOFormal
+      - id: RMCJumpsuitASOFormalAlt
+      - id: RMCJumpsuitASOOperations
+      - id: RMCCoatASOBlack
+      - id: RMCCoatASOBlackAlt
+      - id: CMCoatASO
+      - id: RMCCoatASOWhite
+      - id: RMCCoatASOWhiteAlt
+      - id: RMCHeadCapPeakedASO
+      - id: RMCHeadCapASO
+      - id: RMCHeadBeretASO
+      - id: CMHeadBeretTan
+    - name: Intelligence Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMIntelOfficer
+      entries:
+      - id: RMCUniformIntel
+    - name: Pilot
+      takeAll: RMCDresser
+      jobs:
+      - CMPilotDropship
+      - CMPilotGunship
+      entries:
+      - id: CMJumpsuitPilot
+    - name: Dropship Crew Chief
+      takeAll: RMCDresser
+      jobs:
+      - CMDropshipCrewChief
+      entries:
+      - id: CMJumpsuitDCC
+    - name: Senior Enlisted Advisor
+      takeAll: RMCDresser
+      jobs:
+      - CMSeniorEnlistedAdvisor
+      entries:
+      - id: CMHeadCapDrill
+    # Command
+    - name: Officer
+      takeAll: RMCDresser
+      ranks:
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
+      entries:
+      - id: CMJumpsuitOperations
+      - id: CMHeadCapPeakedService
+      - id: CMHeadCapOfficer
+      - id: RMCHeadBeret
+    - name: Commanding Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMCommandingOfficer
+      entries:
+      - id: CMJumpsuitCOService
+      - id: CMJumpsuitCOFormalBlack
+      - id: CMJumpsuitCOFormalWhite
+      - id: RMCJumpsuitCOUniform
+      - id: RMCJumpsuitCOUniformGray
+      - id: CMCoatCOBomber
+      - id: CMHeadCapCO
+      - id: CMHeadCapCOFormalBlack
+      - id: CMHeadCapCOFormalWhite
+      - id: CMHeadBeretCO
+      - id: CMHeadBeretCOBlack
+      - id: CMHeadBeretCOWhite
+      - id: RMCHandsDeluxeMarine
+      - id: CMShoesLaceupCommander
+    - name: Commanding Officer (Lieutenant colonel)
+      takeAll: RMCDresser
+      jobs:
+      - CMCommandingOfficer
+      ranks:
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      entries:
+      - id: CMHeadBeretCOLtCol
+    - name: Commanding Officer (Colonel)
+      takeAll: RMCDresser
+      jobs:
+      - CMCommandingOfficer
+      ranks:
+      - RMCRankColonel
+      entries:
+      - id: CMHeadBeretCOCol
+    - name: Ceremonial Weapon
+      choices: { CMCeremonial: 1 }
+      jobs:
+      - CMCommandingOfficer
+      entries:
+      - id: RMCScabbardCeremonialFilled
+        name: Commander's Ceremonial Sabre
+    - name: Executive Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMCommandingOfficer
+      - CMExecutiveOfficer
+      entries:
+      - id: CMJumpsuitXOFormal
+      - id: CMCoatXOFormal
+      - id: CMHeadCapPeakedFormal
+      - id: RMCSunglassesBig
+    - name: Squad Colors
+      jobs:
+      - CMCommandingOfficer
+      - CMExecutiveOfficer
+      - CMAuxiliarySupportOfficer
+      - CMStaffOfficer
+      entries:
+      - id: RMCHeadBeretSquadAlpha
+      - id: RMCAlphaArmband
+      - id: CMHeadBandAlpha
+      - id: RMCMaskScarfAlpha
+      - id: RMCHeadBeretSquadBravo
+      - id: RMCBravoArmband
+      - id: CMHeadBandBravo
+      - id: RMCMaskScarfBravo
+      - id: RMCHeadBeretSquadCharlie
+      - id: RMCCharlieArmband
+      - id: CMHeadBandCharlie
+      - id: RMCMaskScarfCharlie
+      - id: RMCHeadBeretSquadDelta
+      - id: RMCDeltaArmband
+      - id: CMHeadBandDelta
+      - id: RMCMaskScarfDelta
+      - id: RMCHeadBeretSquadEcho
+      - id: RMCEchoArmband
+      - id: CMHeadBandEcho
+      - id: RMCMaskScarfEcho
+      - id: RMCHeadBeretSquadFoxtrot
+      - id: RMCFoxtrotArmband
+      - id: CMHeadBandFoxtrot
+      - id: RMCMaskScarfFoxtrot
+      - id: RMCHeadBeretSquadIntel
+      # - id: No RMCIntelArmband
+      - id: CMHeadBandIntel
+      # - id: No RMCMaskScarfIntel
+    # Engineering
+    - name: Engineering
+      takeAll: RMCDresser
+      jobs:
+      - CMChiefEngineer
+      - CMMaintTech
+      - CMOrdnanceTech
+      entries:
+      # <Vests>
+      - id: RMCHazardVestBlack
+      - id: RMCHazardVestBlue
+      - id: RMCHazardVest
+      - id: RMCHazardVestYellow
+      # </Vests>
+      # <Hats>
+      - id: CMHeadBeretEngineer
+      - id: RMCHardhatWhite
+      - id: RMCHardhatOrange
+      - id: RMCHardhatBlue
+      # </Hats>
+      - id: RMCEngiArmband
+    - name: Chief Engineer
+      takeAll: RMCDresser
+      jobs:
+      - CMChiefEngineer
+      entries:
+      - id: CMJumpsuitChiefEngineer
+    - name: Maintenance Technician
+      takeAll: RMCDresser
+      jobs:
+      - CMMaintTech
+      entries:
+      - id: CMJumpsuitMaintTech
+    - name: Ordnance Technician
+      takeAll: RMCDresser
+      jobs:
+      - CMOrdnanceTech
+      entries:
+      - id: CMJumpsuitOrdnanceTech
+    # Medical
+    - name: Medical
+      takeAll: RMCDresser
+      jobs:
+      - CMCMO
+      - CMDoctor
+      - CMNurse
+      - CMResearcher
+      entries:
+      # <Scrubs>
+      - id: CMScrubsGreen
+      - id: CMScrubsBlue
+      - id: RMCScrubsLightBlue
+      - id: CMScrubsPurple
+      - id: RMCScrubsOlive
+      - id: RMCScrubsGrey
+      # </Scrubs>
+      # <Caps>
+      - id: CMHeadCapSurgOrange
+      - id: CMHeadCapSurgBlue
+      - id: CMHeadCapSurgPurple
+      - id: CMHeadCapSurgGreen
+      # </Caps>
+      - id: RMCShoesWhite
+      - id: RMCMedArmband
+    - name: Chief Medical Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMCMO
+      entries:
+      - id: CMJumpsuitCMO
+      - id: RMCLabcoatCMO
+      - id: CMHeadCapCMO
+    - name: Doctor
+      takeAll: RMCDresser
+      jobs:
+      - CMDoctor
+      entries:
+      - id: RMCJumpsuitDoctor
+      - id: RMCLabcoat
+    - name: Nurse
+      takeAll: RMCDresser
+      jobs:
+      - CMNurse
+      entries:
+      - id: RMCNurseArmband
+    - name: Researcher
+      takeAll: RMCDresser
+      jobs:
+      - CMResearcher
+      entries:
+      - id: CMJumpsuitResearch
+      - id: RMCLabcoatScience
+      - id: RMCScienceArmband
+    # Military Police
+    - name: Military Police
+      takeAll: RMCDresser
+      jobs:
+      - CMChiefMP
+      - CMMilitaryWarden
+      - CMMilitaryPolice
+      entries:
+      - id: RMCMPArmband
+    - name: Chief MP
+      takeAll: RMCDresser
+      jobs:
+      - CMChiefMP
+      entries:
+      - id: CMJumpsuitWO
+      - id: CMCoatChiefMP
+      - id: RMCHeadCapPeakedCMP
+      - id: CMHeadBeretCMP
+    - name: Military Warden
+      takeAll: RMCDresser
+      jobs:
+      - CMMilitaryWarden
+      entries:
+      - id: CMJumpsuitWarden
+      - id: CMCoatWarden
+      - id: CMHeadCapWarden
+    - name: Military Police Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMMilitaryPolice
+      entries:
+      - id: CMJumpsuitMP
+      - id: CMCoatMP
+    # Requisitions
+    - name: Requisitions
+      takeAll: RMCDresser
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      - CMMessTech
+      entries:
+      - id: RMCCargoArmband
+    - name: Logistics Officer
+      takeAll: RMCDresser
+      jobs:
+      - CMQuartermaster
+      entries:
+      - id: CMJumpsuitQM
+      - id: RMCQuartermasterJacket
+      - id: RMCHeadCapQuartermaster
+      - id: RMCHeadBeretQuartermaster
+    - name: Requisitions Technician
+      takeAll: RMCDresser
+      jobs:
+      - CMCargoTech
+      entries:
+      - id: CMJumpsuitCargoTech
+      - id: CMHeadCapCargo
+      - id: RMCHeadBeanieCargo
+    - name: Mess Technician
+      takeAll: RMCDresser
+      jobs:
+      - CMMessTech
+      entries:
+      - id: CMJumpsuitMessTech
+      - id: CMCoatMessTech
+      - id: ClothingHeadHatChef
+    # Gloves
+    - name: Standard Gloves
+      entries:
+      - id: CMHandsLatex
+      - id: RMCHandsLatexMarine
+      - id: RMCHandsBrownMarine
+      - id: RMCHandsGreyMarine
+      - id: CMHandsBlackMarine
+      - id: CMHandsInsulated
+      - id: CMHandsBlackInsulated
+    # Glasses
+    - name: Standard Glasses
+      entries:
+      - id: RMCEyepatch
+      - id: RMCSunglasses
+      - id: RMCSunglassesBigFake
+      - id: RMCGlassesMarineRpg
+      - id: RMCGlassesMarineRpgOld
+      - id: RMCGlassesAviators
+      - id: RMCGlassesAviatorsSilver
+      - id: RMCPrescriptionSunglasses
+      - id: RMCHipsterGlasses
+      - id: RMCHippieGlasses
+      - id: RMCHippieGlassesBloodred
+      - id: RMCHippieGlassesGreen
+      - id: RMCHippieGlassesMidnight
+      - id: RMCHippieGlassesNightblue
+      - id: RMCHippieGlassesPink
+      - id: RMCHippieGlassesSunrise
+      - id: RMCHippieGlassesSunset
+      - id: RMCGlassesTriMaxYellowFake
+      - id: RMCGlassesTriMaxBronzeFake
+      - id: RMCGlassesTriMaxBlackFake
+    # Goggles
+    - name: Standard Goggles
+      entries:
+      - id: RMCGogglesBallistic
+      - id: RMCGogglesPrescriptionBallistic
+      - id: RMCGogglesBallisticBlack
+      - id: RMCGogglesBallisticOrange
+      - id: RMCGogglesBallisticRed
+      - id: RMCGogglesBallisticBlue
+      - id: RMCGogglesBallisticPurple
+      - id: RMCGogglesBallisticYellow
+      - id: RMCGogglesBallisticSquad
+      - id: RMCGogglesM1A1Ballistic
+      - id: RMCGogglesBallisticPolarizedBlue
+      - id: RMCGogglesBallisticPolarizedOrange
+      - id: RMCGogglesM1A1BallisticBlue
+    # Masks and scarfs
+    - name: Standard Masks and Scarfs
+      entries:
+      - id: RMCMaskBalaclava
+      - id: RMCMaskBalaclavaGreen
+      - id: CMMaskCoif
+      - id: CMMaskGas
+      - id: RMCMaskScarfSquad
+      - id: RMCMaskScarfRed
+      - id: RMCMaskScarfBlack
+      - id: RMCMaskScarfGray
+      - id: RMCMaskScarfGreen
+      - id: RMCMaskScarfTan
+      - id: RMCMaskNeckerchiefSquad
+      - id: RMCMaskNeckerchiefTan
+      - id: RMCMaskNeckerchiefBlack
+      - id: RMCMaskNeckerchiefGray
+      - id: RMCMaskNeckerchiefGreen
+      - id: RMCMaskNeckerchiefWhite
+      - id: RMCMaskTornScarfBlack
+      - id: RMCMaskTornScarfDesert
+      - id: RMCMaskTornScarfGreen
+      - id: RMCMaskTornScarfGrey
+      - id: RMCMaskTornScarfUrban
+      - id: RMCMaskTornScarfSnow
+      - id: RMCMaskSmockBlack
+      - id: RMCMaskSmockCamo
+      - id: RMCMaskCoifGreen
+      - id: RMCMaskCoifGrey
+      - id: RMCMaskCoifTan
+      - id: RMCMaskKeffiyeh
+      - id: RMCMaskKeffiyehBlack
+      - id: RMCMaskKeffiyehBlue
+      - id: RMCMaskKeffiyehGreen
+      - id: RMCMaskKeffiyehWhite
+      - id: RMCMaskKeffiyehRed
+      - id: RMCMaskBalaclavaSkullBlue
+      - id: RMCMaskBalaclavaSkullBlack
+    # Squad
+    - name: Squad Themed Apparel
+      jobs:
+      - CMIntelOfficer
+      - CMSquadLeader
+      - CMFireteamLeader
+      - CMWeaponsSpecialist
+      - CMSmartGunOperator
+      - CMHospitalCorpsman
+      - CMCombatTech
+      - CMRifleman
+      - RMCRecruit
+      entries:
+      - id: RMCHeadBeretSquad
+      - id: RMCSquadArmband
+      - id: RMCHeadBandSquad
+      - id: RMCMaskScarfSquad
+    # Service
+    - name: Service Uniform
+      takeAll: RMCDresser
+      ranks:
+      - RMCRankRecruit
+      - RMCRankPrivate
+      - RMCRankPrivateFirstClass
+      - RMCRankLanceCorporal
+      - RMCRankCorporal
+      - RMCRankSergeant
+      - RMCRankStaffSergeant
+      - RMCRankGunnerySergeant
+      - RMCRankMasterSergeant
+      - RMCRankFirstSergeant
+      - RMCRankMasterGunnerySergeant
+      - RMCRankSergeantMajor
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
+      entries:
+      - id: RMCUniformCaseService
+      - id: RMCHeadCapPatrol
+      - id: RMCHeadBeretGreen
+    # Full Dress
+    - name: Enlisted Dress Uniform
+      takeAll: RMCDresser
+      ranks:
+      - RMCRankRecruit
+      - RMCRankPrivate
+      - RMCRankPrivateFirstClass
+      - RMCRankLanceCorporal
+      entries:
+      - id: RMCUniformCaseDressEnlisted
+    - name: NCO Dress Uniform
+      takeAll: RMCDresser
+      ranks:
+      - RMCRankCorporal
+      - RMCRankSergeant
+      - RMCRankStaffSergeant
+      - RMCRankGunnerySergeant
+      - RMCRankMasterSergeant
+      - RMCRankFirstSergeant
+      - RMCRankMasterGunnerySergeant
+      - RMCRankSergeantMajor
+      entries:
+      - id: RMCUniformCaseDressNCO
+    - name: Officer Dress Uniform
+      takeAll: RMCDresser
+      ranks:
+      - RMCRankWarrantOfficer
+      - RMCRankChiefWarrantOfficer
+      - RMCRankSecondLT
+      - RMCRankFirstLT
+      - RMCRankCaptain
+      - RMCRankMajor
+      - RMCRankLieutenantColonel
+      - RMCRankColonel
+      - RMCRankBrigadierGeneral
+      - RMCRankMajorGeneral
+      entries:
+      - id: RMCUniformCaseDressOfficer
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCUniformCaseDressEnlisted
+  name: enlisted dress uniform case
+  description: A case containing the dress uniform for an enlisted person.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1
+    whitelist:
+      components:
+      - Clothing
+  - type: StorageFill
+    contents:
+    - id: RMCMarineUniformDressEnlisted
+    - id: CMCoatDressBluesEnlisted
+    - id: CMHeadDressBlues
+    - id: CMHandsWhiteDress
+    - id: RMCShoesLaceup
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCUniformCaseDressNCO
+  name: nco dress uniform case
+  description: A case containing the dress uniform for a non-commissioned officer.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1
+    whitelist:
+      components:
+      - Clothing
+  - type: StorageFill
+    contents:
+    - id: RMCMarineUniformDressSenior
+    - id: CMCoatDressBluesSenior
+    - id: CMHeadDressBlues
+    - id: CMHandsWhiteDress
+    - id: RMCShoesLaceup
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCUniformCaseDressOfficer
+  name: officer dress uniform case
+  description: A case containing the dress uniform for a commissioned officer.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,9,1
+    whitelist:
+      components:
+      - Clothing
+  - type: StorageFill
+    contents:
+    - id: RMCMarineUniformDressSenior
+    - id: CMCoatDressBluesGeneral
+    - id: CMHeadDressBluesOfficer
+    - id: CMHandsWhiteDress
+    - id: RMCShoesLaceup
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCUniformCaseService
+  name: service uniform case
+  description: A case containing a standard-issue service uniform.
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1
+    whitelist:
+      components:
+      - Clothing
+  - type: StorageFill
+    contents:
+    - id: CMJumpsuitBO
+    - id: RMCCoatService
+    - id: RMCShoesLaceup

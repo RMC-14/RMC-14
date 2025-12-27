@@ -40,7 +40,7 @@ The ASRS terminal is one of your most critical tools in Requisitions. It enables
 [bold]Remember[/bold]: you are responsible for supplying every Marine. Prioritize efficiency, balance, and strategic foresight in every Decision.
 
 <Box>
- <GuideEntityEmbed Entity="CMASRSConsole" Caption="ASRS Console"/> 
+ <GuideEntityEmbed Entity="CMASRSConsole" Caption="ASRS Console"/>
 </Box>
 
 However, Technician, always consult your [color=#FFA500]Logistics Officer[/color] before placing any orders — or, in their absence, the most senior member of the Requisitions staff. Maintaining oversight of purchases, inventory, and budget is essential to the effective operation of the department.
@@ -60,7 +60,7 @@ The ASRS terminal is simple yet effective:
 The ASRS terminal contains many, many, many items—most that are redundant or straight up useless. There is only a key selection of items that you will be ordering on a standard basis:
 - Weapon Specialist Ammunition: This is highly specialized ammunition used only by a select few Marines. It’s also quite expensive.
 - Non-standard Ammunition: This is usually ammunition that is highly effective against high-value targets but also expensive, like 10x24mm AP ammo, mortar shells, or ML66A drums for smartgun operators.
-- High Explosives: The M40 Grenades HIDP and HEDP variants are expensive but can be a game changer. Make sure to supply them to the Marines if possible.
+- High Explosives: The 30mm Grenades HIDP and HEDP variants are expensive but can be a game changer. Make sure to supply them to the Marines if possible.
 - Engineering materials: Usually metal, plasteel, or batteries. It is [bold]HEAVILY[/bold] recommended that you do not order these unless absolutely necessary.
 
 [bold]Remember[/bold] to always ask other departments for materials and supplies before ordering. Like Engineering—they can supply you with metal and batteries without you having to spend any budget. How convenient!
@@ -94,7 +94,7 @@ Wooden crates can be crafted from lumber, but remember this: they hold no resale
 ##Supply Drops
 Now Technician, morning rush is done. But we are not. It’s time to pack supplies to be sent groundside—Marines run out of bullets fast and we have to supply. Make four crates and place them each on their respective squad drop pads.
 <Box>
- <GuideEntityEmbed Entity="RMCSupplyDropPadsGuideBook" Caption="Supply pads"/> 
+ <GuideEntityEmbed Entity="RMCSupplyDropPadsGuideBook" Caption="Supply pads"/>
 </Box>
 You’ve got five drop pads, Technician. But listen close—you’ll be using four of them on the regular.
 
@@ -115,7 +115,7 @@ Marines can request all kinds of supplies—but some must always be packed, no m
 - Ammunition: The bullets a marine needs to stay in the fight. Examples: M54C Regular, M4SPR Regular, Buckshot Shotgun Shells, ML66A Smartgun Drum, et cetera.
 - Medical: The first aid to keep a marine going on the field. Examples: Gauze, Ointment, Pressurized Canisters, Defibrilators, et cetera.
 - Utility: The tools and equipment marines need to stay effective. Examples: M-94 Flare Pack, M-89S Signal Flare Pack, Motion Detector, Laser Designator, Rangefinder, et cetera.
-- Miscellaneous: Anything else a marine requests that isn't mentioned above. Examples: Helmets, Attachments, MREs, et cetera. 
+- Miscellaneous: Anything else a marine requests that isn't mentioned above. Examples: Helmets, Attachments, MREs, et cetera.
 
 ##Basic Packing
 Line’s secured. Crates are packed. Supplies running low. Time to move, Techie. Cardboard’s in South Storage—same location as the surplus vendor. Retrieve it and start fabricating ammo boxes.
@@ -135,7 +135,7 @@ Maintain a steady stock of standard-issue ammunition at all times. No excuses, n
 ##Requisition Technician
 Requisition Technician, you're the backbone of Requisitions—never forget it. Underestimate your role, and the whole system starts to break down. Without you, logistics grinds to a halt. Stay sharp. Stay essential.
 <Box>
- <GuideEntityEmbed Entity="RMCCargotechGuideBook" Caption="Requisition Technician symbol"/> 
+ <GuideEntityEmbed Entity="RMCCargotechGuideBook" Caption="Requisition Technician symbol"/>
 </Box>
 Requisitons Technician you answer directly to the [color=#FFA500]Logistics Officer[/color]. Their orders are your mission. Execute swiftly, and Requisitions stays stocked and operational. You begin at rank E1—the foundation. Earn your stripes through discipline and drive. Push forward to E2, then E3. Stay focused. Stay relentless. Stay the course, Techie.
 
@@ -144,7 +144,7 @@ Marines may outrank you on paper, but rank doesn’t equal authority in Requisit
 ##Logistics Officer
 The [color=#FFA500]Logistics Officer[/color] top of the chain in Requisitions. Your direct superior. They command every facet of logistics, supply, and cargo operations. No crate moves without their say-so. They authorize and deny. Everything they deem necessary. Their word stands—within reason. Only the [color=#008000]Commander[/color] of the Almayer holds authority over them. Not even a higher-ranking officer can override the [color=#FFA500]Logistics Officer[/color] command in matters of Requisitons. Know the hierarchy. Respect the chain.
 <Box>
- <GuideEntityEmbed Entity="RMClogisticsofficerGuideBook" Caption="logistics Officer Symbol"/> 
+ <GuideEntityEmbed Entity="RMClogisticsofficerGuideBook" Caption="logistics Officer Symbol"/>
 </Box>
 The [color=#FFA500]Logistics Officer[/color] enters at O1. With grit and performance, they climb to O2. They bear the weight of Requisitions and command its full operational power.The [color=#FFA500]Logistics Officer[/color] reports to the [color=#008000]Commander[/color]. Only the [color=#008000]Commander[/color] of the Almayer may issue them orders. But remeber the [color=#FFA500]Logistics Officer[/color] [bold]only[/bold] has direct authority within Requisitions.
 </Document>

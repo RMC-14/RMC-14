@@ -1,11 +1,27 @@
 ﻿using Content.Shared._RMC14.Medical.IV;
 using Content.Shared.Rounding;
 using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 
 namespace Content.Client._RMC14.Medical.IV;
 
 public sealed class IVDripSystem : SharedIVDripSystem
 {
+    [Dependency] private readonly IOverlayManager _overlay = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        if (!_overlay.HasOverlay<IVDripOverlay>())
+            _overlay.AddOverlay(new IVDripOverlay());
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _overlay.RemoveOverlay<IVDripOverlay>();
+    }
+
     protected override void UpdateIVAppearance(Entity<IVDripComponent> iv)
     {
         base.UpdateIVAppearance(iv);

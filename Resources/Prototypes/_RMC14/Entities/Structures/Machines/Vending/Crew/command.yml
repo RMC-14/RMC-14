@@ -377,6 +377,7 @@
       - id: CMJumpsuitCO
       - id: CMJumpsuitOperations
       - id: CMHeadCapCO
+      - id: CMHeadCapOfficer
       - id: CMHeadBeretCO
       - id: CMBootsBlackFilled
       - id: CMBootsBrown
@@ -409,6 +410,10 @@
       - id: CMHeadCapPeakedService
     - name: Service Extras
       entries:
+      - id: RMCCoatCOServiceJacketStandard
+      - id: RMCCoatCOServiceJacketGreen
+      - id: RMCCoatCOServiceJacketPurple
+      - id: RMCCoatCOServiceJacketGrey
       - id: CMCoatCOBomber
     - name: Dress
       entries:
@@ -559,16 +564,16 @@
     - name: Commander's Primary
       takeOne: CMProtagGun
       entries:
-      - id: RMCWeaponRifleM59A
+      - id: RMCM59ACaseAP
         name: M59A Prototype Rifle
       - id: CMCOSmartGunOperatorEquipmentCaseBelt
         name: Commander's Smartgun
         recommended: true # TODO RMC14 Make choices: colour the options brown
-    - name: Commander's Secondary
+    - name: Commander's Secondary Belt
       choices: { CMSecondary: 1 }
       entries:
-      - id: RMCD50WinterWyvernBeltFilled
-      - id: RMCMatebaBeltFilled
+      - id: RMCD50WinterWyvernBeltFilledAmmo
+      - id: RMCMatebaBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -798,7 +803,7 @@
       - CMExecutiveOfficer
       takeAll: CMEquipment
       entries:
-      - id: RMCArmorVestExecutiveOfficer
+      - id: RMCArmorVestSeniorOfficer
       - id: RMCArmorM3SO
       - id: RMCArmorHelmetM10SO
       - id: CMBootsBlackFilled
@@ -1044,7 +1049,7 @@
       - id: CMHeadBeretEngineer
       - id: RMCHardhatWhite
       - id: RMCHeadCapFlippable
-      # TODO Welding helmet
+      - id: RMCHelmetWelding
     - name: Suit
       jobs:
       - CMChiefEngineer
@@ -1100,7 +1105,6 @@
         name: first-aid pouch (gauze, ointment) # TODO RMC14 splints comma
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
-        recommended: true
       - id: RMCPouchGeneralLarge
       - id: RMCPouchToolsFill
         name: tools pouch (Full)
@@ -1134,8 +1138,8 @@
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack
-        recommended: true
       - id: CMWebbingBrown
+        recommended: true
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbing
@@ -1190,9 +1194,9 @@
       - CMChiefEngineer
       entries:
       - id: CMHeadsetEngineer
-        amount: 15
+        points: 15
       - id: RMCSynthResetKey
-        amount: 15
+        points: 15
     # ////////////////////////////////////
     # Logistics Officer
     # ////////////////////////////////////

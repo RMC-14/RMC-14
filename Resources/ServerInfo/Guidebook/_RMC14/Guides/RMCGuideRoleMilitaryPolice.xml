@@ -15,7 +15,7 @@
   ## What do Military Police do?
 
 
-  Military police are the role that is entrusted in-game to enforce [textlink="Mlaw (Marine law)" link="RMCMarineLaw"] and [textlink="SOP (Standard Operating Procedure)" link="RMCMarineSOP"]. This is typically done with the intent of enforcing server rules and roleplay standards in a way that can be immersive in character. [bold]The goal of being a MP is not to brig as many marines as you can.[/bold] That is frowned upon. The goal of [color=#ff000d][bold]MP[/bold][/color]s is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal.
+  Military police are the role that is entrusted in-game to enforce [textlink="Marine Law" link="RMCMarineLaw"] and [textlink="SOP (Standard Operating Procedure)" link="RMCMarineSOP"]. [bold]The goal of being a MP is not to brig as many marines as you can.[/bold] That is frowned upon. The goal of [color=#ff000d][bold]MP[/bold][/color] is to make the server a more immersive and enjoyable place for everyone. Do your best to uphold that goal, by mediating conflicts and assisting the crew and marines with their needs with the minimal force required.
 
 
   <Box>
@@ -31,7 +31,7 @@
     <GuideEntityEmbed Entity="RMCGuidebookRoleCMP" Caption=""/>
   </Box>
   <Box>
-    [color=#8B0000][bold]The Chief of Military Police[/bold][/color], referred to as the [color=#8B0000][bold]Chief MP[/bold][/color] is the head of the Military police aboard the UNS Almayer. They are the second highest authority on the ship regarding [textlink="Marine Law" link="RMCMarineLaw"], second only to a whitelisted [color=#00CBFE][bold]Commanding Officer[/bold][/color]. They are tasked with ensuring that Marine law and [textlink="SOP" link="RMCMarineSOP"] are enforced correctly, and that [color=#ff000d][bold]MP[/bold][/color]s are doing their jobs well. The [color=#8B0000][bold]Chief MP[/bold][/color] is typically a more experienced [color=#ff000d][bold]MP[/bold][/color] so they can help answer questions and concerns. [color=#8B0000][bold]The Chief of Military Police[/bold][/color] can rank from Second Lieutenant (O1), up to First Lieutenant (O2)
+    [color=#8B0000][bold]The Chief of Military Police[/bold][/color], referred to as the [color=#8B0000][bold]Chief MP[/bold][/color] is the head of the Military police aboard the UNS Almayer. They are the second-highest authority on the ship regarding [textlink="Marine Law" link="RMCMarineLaw"], second only to a whitelisted [color=#00CBFE][bold]Commanding Officer[/bold][/color]. They are tasked with ensuring that Marine Law and [textlink="SOP" link="RMCMarineSOP"] are enforced correctly, and that [color=#ff000d][bold]MP[/bold][/color]s are doing their jobs well. The [color=#8B0000][bold]Chief MP[/bold][/color] is typically a more experienced [color=#ff000d][bold]MP[/bold][/color] so they can help answer questions and concerns. [color=#8B0000][bold]The Chief of Military Police[/bold][/color] can rank from Second Lieutenant (O1), up to First Lieutenant (O2)
   </Box>
 
 
@@ -59,10 +59,6 @@
     <GuideEntityEmbed Entity="RMCGuidebookRolePvM" Caption=""/>
   </Box>
   [color=#ffa500][bold]Provost Marshal Office,[/bold][/color] often shortened to just "Provost", is the organization that ensures the law is interpreted correctly and writes the law itself. [bold]If you see a member of the Provost aboard the Almayer, give them the utmost respect.[/bold]
-
-
-  [bold]Note: Provost is only available by direct admin spawn due to them being the ultimate authority on in-character rule enforcement[/bold]
-
 
   ## Security Alert Levels
   The ship has multiple alert levels, which can be changed in the C.I.C. They are as follows.
