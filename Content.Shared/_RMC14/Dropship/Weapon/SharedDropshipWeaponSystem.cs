@@ -38,7 +38,6 @@ using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
-using Content.Shared.Tag;
 using Content.Shared.Throwing;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -91,13 +90,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
-    [Dependency] private readonly TagSystem _tagSystem = default!;
-    [Dependency] private readonly ILogManager _log = default!;
-
-    private EntityQuery<RMCWallExplosionDeletableComponent> _wallDeletableQuery;
-    private readonly HashSet<EntityUid> _wallDeleteBuffer = new();
-
-    private readonly HashSet<EntityUid> _tileEnts = new();
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
     private const string SpotlightState = "spotlights_";
@@ -138,7 +130,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
 
         SubscribeLocalEvent<ActivateDropshipWeaponOnSpawnComponent, MapInitEvent>(OnDropshipWeaponOnSpawnFire);
-        _wallDeletableQuery = GetEntityQuery<RMCWallExplosionDeletableComponent>();
 
         Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
             subs =>
@@ -648,10 +639,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (spread != 0)
             targetCoords = targetCoords.Offset(_random.NextVector2(-spread, spread + 1));
 
-        if (ev.Explosion != null)
-        {
-            targetCoords = FindAlternateLandingTile(targetCoords, 3);
-        }
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
@@ -694,7 +681,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var inFlight = Spawn(null, MapCoordinates.Nullspace);
         var inFlightComp = new AmmoInFlightComponent
         {
-            Target = FindAlternateLandingTile(_transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager),3),
+            Target = _transform.GetMoverCoordinates(active).SnapToGrid(EntityManager, _mapManager),
             MarkerAt = time + ammo.TravelTime,
             ShotsLeft = ammo.RoundsPerShot,
             ShotsPerVolley = ammo.ShotsPerVolley,
@@ -1278,20 +1265,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 if (flight.BulletSpread > 0)
                     spread = _random.NextVector2(-flight.BulletSpread, flight.BulletSpread + 1);
 
-                var landing = flight.Target.Offset(spread);
-
-                var targetMap = _transform.ToMapCoordinates(landing.SnapToGrid(EntityManager, _mapManager));
-
+                var target = _transform.ToMapCoordinates(flight.Target).Offset(spread);
                 foreach (var effect in flight.ImpactEffects)
                 {
-                    Spawn(effect, targetMap, rotation: _random.NextAngle());
+                    Spawn(effect, target, rotation: _random.NextAngle());
                 }
 
                 if (flight.Damage != null)
                 {
                     _damageables.Clear();
-                    _entityLookup.GetEntitiesInRange(targetMap, 0.49f, _damageables, LookupFlags.Uncontained);
 
+                    _entityLookup.GetEntitiesInRange(target, 0.49f, _damageables, LookupFlags.Uncontained);
                     foreach (var damageable in _damageables)
                     {
                         _damageable.TryChangeDamage(
@@ -1305,7 +1289,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.Implosion != null)
                 {
-                    _rmcImplosion.Implode(flight.Implosion, targetMap);
+                    _rmcImplosion.Implode(flight.Implosion, target);
                 }
 
                 if (flight.Fire != null)
@@ -1368,8 +1352,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
                 if (flight.Explosion != null)
                 {
-                    TryDeleteDestructibleWallAt(landing);
-                    _rmcExplosion.QueueExplosion(targetMap,
+                    _rmcExplosion.QueueExplosion(target,
                         flight.Explosion.Type,
                         flight.Explosion.Total,
                         flight.Explosion.Slope,
@@ -1405,89 +1388,6 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (!_transform.InRange(xform.Coordinates, active.Origin, active.BreakRange))
                 RemCompDeferred<ActiveLaserDesignatorComponent>(uid);
         }
-    }
-
-    private bool IsWall(EntityUid uid)
-    {
-        return _tagSystem.HasTag(uid, "Wall");
-    }
-
-    private bool HasNonDeletableWallOnTile(EntityCoordinates impactCoords)
-    {
-        var tile = impactCoords.SnapToGrid(EntityManager, _mapManager);
-
-        _tileEnts.Clear();
-        _entityLookup.GetEntitiesInRange(tile, 0.49f, _tileEnts, LookupFlags.Uncontained);
-
-        var foundWall = false;
-
-        foreach (var ent in _tileEnts)
-        {
-            if (Transform(ent).Coordinates.SnapToGrid(EntityManager, _mapManager) != tile)
-                continue;
-
-            if (!IsWall(ent))
-                continue;
-
-            foundWall = true;
-            if (_wallDeletableQuery.HasComp(ent))
-                return false;
-        }
-        return foundWall;
-    }
-
-    private EntityCoordinates FindAlternateLandingTile(EntityCoordinates desired, int maxRadius = 3)
-    {
-        var origin = desired.SnapToGrid(EntityManager, _mapManager);
-
-        if (!HasNonDeletableWallOnTile(origin))
-            return origin;
-
-        for (var r = 1; r <= maxRadius; r++)
-        {
-            var offsets = new List<Vector2i> { new(r,0), new(-r,0), new(0,r), new(0,-r) };
-
-            for (var x = -r; x <= r; x++)
-            for (var y = -r; y <= r; y++)
-            {
-                if (Math.Abs(x) != r && Math.Abs(y) != r)
-                    continue;
-
-                var o = new Vector2i(x, y);
-                if (!offsets.Contains(o))
-                    offsets.Add(o);
-            }
-
-            foreach (var off in offsets)
-            {
-                var candidate = origin.Offset(off);
-
-                if (!HasNonDeletableWallOnTile(candidate))
-                    return candidate;
-            }
-        }
-
-        return origin;
-    }
-    private bool TryDeleteDestructibleWallAt(EntityCoordinates impactCoords)
-    {
-        var impactSnap = impactCoords.SnapToGrid(EntityManager, _mapManager);
-
-        _wallDeleteBuffer.Clear();
-        _entityLookup.GetEntitiesInRange(impactSnap, 0.49f, _wallDeleteBuffer, LookupFlags.Uncontained);
-
-        foreach (var ent in _wallDeleteBuffer)
-        {
-            if (!_wallDeletableQuery.HasComp(ent))
-                continue;
-            var entSnap = Transform(ent).Coordinates.SnapToGrid(EntityManager, _mapManager);
-            if (entSnap != impactSnap)
-                continue;
-            EntityManager.DeleteEntity(ent);
-            return true;
-        }
-
-        return false;
     }
 
     public void TargetUpdated(Entity<DropshipTargetComponent> ent)
