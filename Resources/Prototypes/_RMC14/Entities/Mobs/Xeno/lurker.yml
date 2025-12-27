@@ -20,6 +20,9 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
