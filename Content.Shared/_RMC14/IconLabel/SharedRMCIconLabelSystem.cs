@@ -1,5 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
@@ -9,6 +11,7 @@ namespace Content.Shared._RMC14.IconLabel;
 
 public abstract class SharedRMCIconLabelSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
@@ -34,14 +37,10 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
         args.Verbs.Add(new InteractionVerb
         {
             Text = Loc.GetString("rmc-set-icon-label-verb"),
-            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/pencil.png")),
+            Icon = new SpriteSpecifier.Texture(new ResPath("/Textures/Interface/pencil.svg")),
             Priority = -1,
             Act = () => TrySetIconLabel(user, target, maxLength),
         });
-    }
-
-    protected virtual void TrySetIconLabel(EntityUid user, EntityUid target, int maxLength)
-    {
     }
 
     public void SetIconLabel(EntityUid user, EntityUid target, string label)
@@ -61,11 +60,13 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
             Dirty(target, iconLabelComp);
 
             _popup.PopupEntity(Loc.GetString("rmc-set-icon-label-cleared", ("item", target)), target, user);
+            _adminLog.Add(LogType.RMCIconLabel, $"{ToPrettyString(user):user} cleared icon label on {ToPrettyString(target):target}");
             return;
         }
 
         Label((target, iconLabelComp), "rmc-custom-container-label-text", ("customLabel", label));
         _popup.PopupEntity(Loc.GetString("rmc-set-icon-label-set", ("item", target), ("label", label)), target, user);
+        _adminLog.Add(LogType.RMCIconLabel, $"{ToPrettyString(user):user} set icon label on {ToPrettyString(target):target} to '{label}'");
     }
 
     public void Label(Entity<IconLabelComponent?> ent, LocId newLocId, List<(string, object)> newParams)
@@ -79,5 +80,9 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
     public void Label(Entity<IconLabelComponent?> ent, LocId newLocId, params (string, object)[] newParams)
     {
         Label(ent, newLocId, newParams.ToList());
+    }
+
+    protected virtual void TrySetIconLabel(EntityUid user, EntityUid target, int maxLength)
+    {
     }
 }
