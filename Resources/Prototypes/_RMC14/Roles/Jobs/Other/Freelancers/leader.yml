@@ -30,7 +30,7 @@
         RMCSkillEngineer: 2
         RMCSkillEndurance: 2
         RMCSkillJtac: 3
-        RMCSkillLeadership: 2
+        RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
       # TODO RMC14 add English, russian, Chinese and Japanese languages

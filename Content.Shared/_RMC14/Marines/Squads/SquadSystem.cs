@@ -647,12 +647,6 @@ public sealed class SquadSystem : EntitySystem
                     _marine.ClearIcon((uid, otherMarine));
                 }
 
-                if (TryComp(uid, out MarineOrdersComponent? otherOrders) &&
-                    !otherOrders.Intrinsic)
-                {
-                    RemCompDeferred<MarineOrdersComponent>(uid);
-                }
-
                 RemComp<SquadLeaderComponent>(uid);
                 RemComp<RMCTrackableComponent>(uid);
                 RemCompDeferred<RMCPointingComponent>(uid);
@@ -661,12 +655,6 @@ public sealed class SquadSystem : EntitySystem
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
         newLeader.Icon = icon;
-        if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
-        {
-            orders.Intrinsic = false;
-            Dirty(toPromote, orders);
-            _marineOrders.StartActionUseDelay((toPromote, orders));
-        }
 
         EnsureComp<RMCTrackableComponent>(toPromote);
         EnsureComp<RMCPointingComponent>(toPromote);
