@@ -308,7 +308,7 @@
     heldPrefix: 7
   - type: Sprite
     layers:
-    - state: pill_canister0
+    - state: pill_canister
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
@@ -329,7 +329,7 @@
   components:
   - type: Sprite
     layers:
-    - state: pill_canister0
+    - state: pill_canister
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]

@@ -70,7 +70,7 @@ rmc-iron-container-label-text = Fe
 rmc-custom-container-label-text = {$customLabel}
 
 # Set Icon Label Verb
-rmc-set-icon-label-verb = Set short label (on-sprite)
+rmc-set-icon-label-verb = Set icon label
 rmc-set-icon-label-dialog-title = Set On-Sprite Label
 rmc-set-icon-label-dialog-prompt = Label text? ({$max} characters maximum)
 rmc-set-icon-label-cleared = You clear the label off {THE($item)}.
