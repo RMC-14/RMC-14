@@ -20,6 +20,94 @@
       volume: -3
 
 - type: explosion
+  id: RMCDropshipWidowmaker
+  damagePerIntensity:
+    types:
+      Blunt: 5
+      Heat: 5
+      Structural: 45
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: CMExplosion # TODO RMC14 bigboom
+    params:
+      volume: -3
+  smallSound:
+    collection: CMExplosion
+    params:
+      volume: -3
+
+- type: explosion
+  id: RMCDropshipKeeper
+  damagePerIntensity:
+    types:
+      Blunt: 5
+      Heat: 5
+      Structural: 140
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: CMExplosion # TODO RMC14 bigboom
+    params:
+      volume: -3
+  smallSound:
+    collection: CMExplosion
+    params:
+      volume: -3
+
+- type: explosion
+  id: RMCDropshipMiniMike
+  damagePerIntensity:
+    types:
+      Blunt: 5
+      Heat: 5
+      Structural: 20
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: CMExplosion # TODO RMC14 bigboom
+    params:
+      volume: -3
+  smallSound:
+    collection: CMExplosion
+    params:
+      volume: -3
+
+- type: explosion
+  id: RMCDropshipHarpoon
+  damagePerIntensity:
+    types:
+      Blunt: 5
+      Heat: 5
+      Structural: 22
+  tileBreakChance: [0, 0.5, 1]
+  tileBreakIntensity: [0, 10, 30]
+  tileBreakRerollReduction: 20
+  lightColor: Orange
+  texturePath: /Textures/Effects/fire.rsi
+  fireColor: Transparent
+  sound:
+    collection: CMExplosion # TODO RMC14 bigboom
+    params:
+      volume: -3
+  smallSound:
+    collection: CMExplosion
+    params:
+      volume: -3
+
+- type: explosion
   id: RMCMortar
   damagePerIntensity:
     types:
