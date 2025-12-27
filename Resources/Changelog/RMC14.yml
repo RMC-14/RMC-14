@@ -1,42 +1,6 @@
 ﻿Entries:
 - author: DoguhanOzgurAkca
   changes:
-  - message: The Aegis fax that is meant to be sent to CIC is now a set paper that
-      you can spawn. I am trying to get it to be auto-faxed to CIC as well.
-    type: Add
-  - message: Made it so that AEGIS fire system supports immunity bypassing fires.
-    type: Add
-  - message: Fixed the animation of AEGIS crates being all on client side and the
-      crate looking closed if you reset your client.
-    type: Fix
-  - message: Changed the announcements of factions regarding event briefly.
-    type: Tweak
-  id: 1966
-  time: '2025-07-07T12:29:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6798
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed being able to use actions while being devoured by a xeno.
-    type: Fix
-  id: 1967
-  time: '2025-07-08T01:12:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6958
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed deafness not hiding radio messages.
-    type: Fix
-  id: 1968
-  time: '2025-07-08T01:19:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6952
-- author: FeelFlows
-  changes:
-  - message: Added intel spawners to CORSAT.
-    type: Add
-  id: 1969
-  time: '2025-07-08T01:23:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6946
-- author: DoguhanOzgurAkca
-  changes:
   - message: A new alert that shows area information
     type: Add
   - message: Area name from the tacmap alert sas been removed to be moved to the new
@@ -4722,5 +4686,36 @@
   id: 2466
   time: '2025-10-19T23:24:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8187
+- author: noctyrnal
+  changes:
+  - message: Fixed xenos not being able to pry powered doors.
+    type: Fix
+  id: 2467
+  time: '2025-10-28T07:20:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8202
+- author: Aurallianz
+  changes:
+  - message: Fixed Id Modification Console popup.
+    type: Fix
+  - message: Invincible walls are now clickable and thus mapping selectable
+    type: Fix
+  id: 2468
+  time: '2025-10-28T21:41:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7992
+- author: CyberTropic
+  changes:
+  - message: Changed Kutjevo Abandoned Construction area.
+    type: Tweak
+  id: 2469
+  time: '2025-10-30T11:43:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8237
+- author: J C Denton
+  changes:
+  - message: Fixed players becoming stuck in LV-624 engineering room due to platform
+      placement.
+    type: Fix
+  id: 2470
+  time: '2025-10-30T11:43:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8220
 Name: RMC14
 Order: -1

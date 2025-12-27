@@ -179,7 +179,10 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             ContainerInHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
             if (ent.Comp.Authenticated)
                 return;
-            _popup.PopupClient($"This id is missing the {Loc.GetString(ent.Comp.Access)}",
+            if (!_prototype.TryIndex(ent.Comp.Access, out var accessPrototype) || accessPrototype.Name == null)
+                return;
+
+            _popup.PopupClient($"This id is missing the {Loc.GetString(accessPrototype.Name)}",
                 args.Actor,
                 PopupType.MediumCaution);
         }
