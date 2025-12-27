@@ -5,6 +5,7 @@ using Content.Shared.Database;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.IconLabel;
@@ -14,6 +15,8 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> PillCanisterTag = "PillCanister";
 
     public override void Initialize()
     {
@@ -28,7 +31,7 @@ public abstract class SharedRMCIconLabelSystem : EntitySystem
             return;
         if (HasComp<XenoComponent>(args.User))
             return;
-        if (ent.Comp.CanSetLabelTag == null || !_tag.HasTag(ent, ent.Comp.CanSetLabelTag.Value))
+        if (!_tag.HasTag(ent, PillCanisterTag))
             return;
 
         var user = args.User;
