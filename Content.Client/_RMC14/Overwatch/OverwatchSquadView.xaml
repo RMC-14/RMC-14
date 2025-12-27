@@ -3,6 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Overwatch"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    xmlns:uiControls="clr-namespace:Content.Client.UserInterface.Controls"
     VerticalExpand="True">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <PanelContainer>
@@ -14,12 +15,12 @@
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical">
                 <BoxContainer Orientation="Horizontal" Margin="5">
-                    <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
+                    <Label Name="OverwatchLabel" Access="Public" Text="{Loc rmc-overwatch-console}" />
                     <Control HorizontalExpand="True" />
-                    <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map"
+                    <Button Name="TacticalMapButton" Access="Public" Text="{Loc rmc-overwatch-console-tactical-map}"
                             StyleClasses="ActionButton" />
                     <Button Name="OperatorButton" Access="Public" StyleClasses="ActionButton" />
-                    <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch"
+                    <Button Name="StopOverwatchButton" Access="Public" Text="{Loc rmc-overwatch-console-stop-overwatch}"
                             StyleClasses="ActionButton" />
                 </BoxContainer>
             </BoxContainer>
@@ -34,10 +35,10 @@
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Horizontal">
                     <BoxContainer Name="MessageSquadContainer" Access="Public" Orientation="Vertical">
-                        <Button Name="MessageSquadButton" Access="Public" Text="Message Squad"
+                        <Button Name="MessageSquadButton" Access="Public" Text="{Loc rmc-overwatch-console-message-squad}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
-                        <Button Name="HideSquadInfoButton" Access="Public" Text="Hide Squad Info"
+                        <Button Name="HideSquadInfoButton" Access="Public" Text="{Loc rmc-overwatch-console-hide-squad-info}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
                     </BoxContainer>
@@ -55,7 +56,7 @@
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Horizontal" VerticalExpand="True">
                     <BoxContainer Name="TabButtonsContainer" Access="Public" Orientation="Vertical" MinWidth="250">
-                        <Button Name="SquadMonitorButton" Access="Public" Text="Squad Monitor"
+                        <Button Name="SquadMonitorButton" Access="Public" Text="{Loc rmc-overwatch-console-squad-monitor}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
                         <Button Name="SupplyDropButton" Access="Public" Text="Supply Drop"
@@ -243,7 +244,8 @@
                                                     <Label Text="STATUS" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>
-                                            <Button Name="LaunchButton" Access="Public" Text="Launch"
+                                            <uiControls:ConfirmButton Name="LaunchButton" Access="Public" Text="Launch Supply Drop"
+                                                    ConfirmationText="Confirm Supply Drop?"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" TextAlign="Center" />
                                             <Button Name="SaveButton" Access="Public" Text="Save"
@@ -299,7 +301,8 @@
                                                     <Label Text="STATUS" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>
-                                            <Button Name="OrbitalFireButton" Access="Public" Text="Fire"
+                                            <uiControls:ConfirmButton Name="OrbitalFireButton" Access="Public" Text="Fire"
+                                                    ConfirmationText="Confirm Fire Mission?"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#BB1F1D" TextAlign="Center" />
                                             <Button Name="OrbitalSaveButton" Access="Public" Text="Save"

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
+using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Maths;
 using Content.Shared._RMC14.Overwatch;
@@ -188,6 +189,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     args => SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg((int) args.Value));
                 monitor.Latitude.OnValueChanged +=
                     args => SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg((int) args.Value));
+                if (monitor.LaunchButton is ConfirmButton confirmLaunchButton)
+                {
+                    confirmLaunchButton.CooldownTime = TimeSpan.FromSeconds(1.0);
+                    confirmLaunchButton.ResetTime = TimeSpan.FromSeconds(2.5);
+                }
                 monitor.LaunchButton.OnPressed +=
                     _ => SendPredictedMessage(new OverwatchConsoleSupplyDropLaunchBuiMsg());
                 monitor.SaveButton.OnPressed +=
@@ -205,6 +211,11 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     args => SendPredictedMessage(new OverwatchConsoleOrbitalLongitudeBuiMsg((int) args.Value));
                 monitor.OrbitalLatitude.OnValueChanged +=
                     args => SendPredictedMessage(new OverwatchConsoleOrbitalLatitudeBuiMsg((int) args.Value));
+                if (monitor.OrbitalFireButton is ConfirmButton confirmOrbitalButton)
+                {
+                    confirmOrbitalButton.CooldownTime = TimeSpan.FromSeconds(1.0);
+                    confirmOrbitalButton.ResetTime = TimeSpan.FromSeconds(2.5);
+                }
                 monitor.OrbitalFireButton.OnPressed +=
                     _ => SendPredictedMessage(new OverwatchConsoleOrbitalLaunchBuiMsg());
                 monitor.OrbitalSaveButton.OnPressed +=
