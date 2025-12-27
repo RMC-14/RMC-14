@@ -37,19 +37,19 @@ public sealed class SynthSystem : SharedSynthSystem
         if (!TryComp<BodyComponent>(ent.Owner, out var body))
             return;
 
-        var organs = _body.GetBodyOrganEntityComps<OrganComponent>((ent.Owner, body));
+        var organComps = _body.GetBodyOrganEntityComps<OrganComponent>((ent.Owner, body));
 
-        foreach (var organ in organs)
+        foreach (var organ in organComps)
         {
-            QueueDel(organ); // Synths do not metabolize chems or breathe
+            Del(organ); // Synths do not metabolize chems or breathe
         }
 
-        var newBrain = SpawnNextToOrDrop(ent.Comp.NewBrain, ent.Owner);
+        var headSlots = _body.GetBodyChildrenOfType(ent, BodyPartType.Head);
 
-        var headSlots = _body.GetBodyChildrenOfType(ent.Owner, BodyPartType.Head, body);
         foreach (var part in headSlots)
         {
-            _body.AddOrganToFirstValidSlot(part.Id, newBrain, part.Component);
+            var newBrain = SpawnNextToOrDrop(ent.Comp.NewBrain, ent);
+            _body.AddOrganToFirstValidSlot(part.Id, newBrain);
             break;
         }
     }
