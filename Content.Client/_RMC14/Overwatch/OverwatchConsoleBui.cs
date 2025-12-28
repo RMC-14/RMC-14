@@ -12,6 +12,7 @@ using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Localization;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Control;
@@ -51,7 +52,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             return;
 
         Window = this.CreatePopOutableWindow<OverwatchConsoleWindow>();
-        Window.OverwatchHeader.SetMarkupPermissive("[color=#88C7FA]OVERWATCH DISABLED - SELECT SQUAD[/color]");
+        Window.OverwatchHeader.SetMarkupPermissive($"[color=#88C7FA]{Loc.GetString("rmc-overwatch-console-disabled-select-squad")}[/color]");
 
         if (State is OverwatchConsoleBuiState s)
             RefreshState(s);
@@ -189,11 +190,6 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     args => SendPredictedMessage(new OverwatchConsoleSupplyDropLongitudeBuiMsg((int) args.Value));
                 monitor.Latitude.OnValueChanged +=
                     args => SendPredictedMessage(new OverwatchConsoleSupplyDropLatitudeBuiMsg((int) args.Value));
-                if (monitor.LaunchButton is ConfirmButton confirmLaunchButton)
-                {
-                    confirmLaunchButton.CooldownTime = TimeSpan.FromSeconds(1.0);
-                    confirmLaunchButton.ResetTime = TimeSpan.FromSeconds(2.5);
-                }
                 monitor.LaunchButton.OnPressed +=
                     _ => SendPredictedMessage(new OverwatchConsoleSupplyDropLaunchBuiMsg());
                 monitor.SaveButton.OnPressed +=
@@ -211,11 +207,6 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     args => SendPredictedMessage(new OverwatchConsoleOrbitalLongitudeBuiMsg((int) args.Value));
                 monitor.OrbitalLatitude.OnValueChanged +=
                     args => SendPredictedMessage(new OverwatchConsoleOrbitalLatitudeBuiMsg((int) args.Value));
-                if (monitor.OrbitalFireButton is ConfirmButton confirmOrbitalButton)
-                {
-                    confirmOrbitalButton.CooldownTime = TimeSpan.FromSeconds(1.0);
-                    confirmOrbitalButton.ResetTime = TimeSpan.FromSeconds(2.5);
-                }
                 monitor.OrbitalFireButton.OnPressed +=
                     _ => SendPredictedMessage(new OverwatchConsoleOrbitalLaunchBuiMsg());
                 monitor.OrbitalSaveButton.OnPressed +=
@@ -261,7 +252,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 Window.SquadViewContainer.AddChild(monitor);
             }
 
-            monitor.OverwatchLabel.Text = $"{squad.Name} Overwatch | Dashboard";
+            monitor.OverwatchLabel.Text = Loc.GetString("rmc-overwatch-console-dashboard", ("squadName", squad.Name));
 
             monitor.OnStop += () => SendPredictedMessage(new OverwatchConsoleStopOverwatchBuiMsg());
 
@@ -291,7 +282,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
             foreach (var marine in marines)
             {
-                var roleName = "None";
+                var roleName = Loc.GetString("rmc-overwatch-console-role-none");
                 string? rankName = null;
                 if (marine.Role != null)
                 {
@@ -382,7 +373,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         StyleClasses = { "OpenBoth" },
                         Text = "-",
                         ModulateSelfOverride = Color.FromHex("#BB1F1D"),
-                        ToolTip = "Hide marine",
+                        ToolTip = Loc.GetString("rmc-overwatch-console-hide-marine"),
                     };
 
                     var promoteButton = new Button
@@ -393,7 +384,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                         StyleClasses = { "OpenBoth" },
                         Text = "^",
                         ModulateSelfOverride = Color.FromHex(GreenColor),
-                        ToolTip = "Promote marine to Squad Leader",
+                        ToolTip = Loc.GetString("rmc-overwatch-console-promote-squad-leader"),
                     };
 
                     hideButton.OnPressed += _ =>
@@ -443,7 +434,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 if (marine.Camera == default)
                 {
-                    row.Name.Label.SetMarkupPermissive($"[color={YellowColor}]{name} (NO CAMERA)[/color]");
+                    row.Name.Label.SetMarkupPermissive($"[color={YellowColor}]{name} {Loc.GetString("rmc-overwatch-console-no-camera")}[/color]");
                     row.Name.Button.Text = null;
                     row.Name.Button.Disabled = true;
                 }
@@ -458,18 +449,18 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
 
                 var (mobState, color) = marine.State switch
                 {
-                    MobState.Critical => ("Unconscious", YellowColor),
-                    MobState.Dead => ("Dead", RedColor),
-                    _ => ("Conscious", GreenColor),
+                    MobState.Critical => (Loc.GetString("rmc-overwatch-console-state-unconscious"), YellowColor),
+                    MobState.Dead => (Loc.GetString("rmc-overwatch-console-state-dead"), RedColor),
+                    _ => (Loc.GetString("rmc-overwatch-console-state-conscious"), GreenColor),
                 };
 
                 if (marine.SSD && marine.State != MobState.Dead)
-                    mobState = $"{mobState} (SSD)";
+                    mobState = $"{mobState} {Loc.GetString("rmc-overwatch-console-ssd")}";
 
                 row.State.Label.SetMarkupPermissive($"[color={color}]{mobState}[/color]");
                 row.Location.Label.Text = $"[color=white]{marine.AreaName}[/color]";
 
-                var distanceStr = "N/A";
+                var distanceStr = Loc.GetString("rmc-overwatch-console-na");
                 if (marine.LeaderDistance is { } distance &&
                     !distance.IsLengthZero())
                 {
@@ -483,13 +474,13 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     row.Buttons.Hide.Text = "+";
                     row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#248E34");
-                    row.Buttons.Hide.ToolTip = "Show marine";
+                    row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-console-show-marine");
                 }
                 else
                 {
                     row.Buttons.Hide.Text = "-";
                     row.Buttons.Hide.ModulateSelfOverride = Color.FromHex("#BB1F1D");
-                    row.Buttons.Hide.ToolTip = "Hide marine";
+                    row.Buttons.Hide.ToolTip = Loc.GetString("rmc-overwatch-console-hide-marine");
                 }
 
                 if (squad.Leader == marine.Id)
@@ -537,28 +528,28 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     {
                         roleDeployed = leader.Value.Name;
                         roleAlive = leader.Value.State == MobState.Dead
-                            ? $"[bold][color={RedColor}]DEAD[/color][/bold]"
-                            : $"[bold][color={GreenColor}]ALIVE[/color][/bold]";
+                            ? $"[bold][color={RedColor}]{Loc.GetString("rmc-overwatch-console-dead")}[/color][/bold]"
+                            : $"[bold][color={GreenColor}]{Loc.GetString("rmc-overwatch-console-alive")}[/color][/bold]";
                     }
                     else if (all.TryFirstOrNull(out var first))
                     {
                         roleDeployed = first.Value.Name;
                         roleAlive = first.Value.State == MobState.Dead
-                            ? $"[bold][color={RedColor}]DEAD[/color][/bold]"
-                            : $"[bold][color={GreenColor}]ALIVE[/color][/bold]";
+                            ? $"[bold][color={RedColor}]{Loc.GetString("rmc-overwatch-console-dead")}[/color][/bold]"
+                            : $"[bold][color={GreenColor}]{Loc.GetString("rmc-overwatch-console-alive")}[/color][/bold]";
                     }
                     else
                     {
-                        roleDeployed = $"[bold][color={RedColor}]NONE[/color][/bold]";
-                        roleAlive = $"[bold][color={RedColor}]N/A[/color][/bold]";
+                        roleDeployed = $"[bold][color={RedColor}]{Loc.GetString("rmc-overwatch-console-none")}[/color][/bold]";
+                        roleAlive = $"[bold][color={RedColor}]{Loc.GetString("rmc-overwatch-console-na")}[/color][/bold]";
                     }
                 }
                 else
                 {
-                    roleDeployed = $"[bold]{deployed.Count} DEPLOYED[/bold]";
+                    roleDeployed = $"[bold]{deployed.Count} {Loc.GetString("rmc-overwatch-console-deployed")}[/bold]";
 
                     var aliveColor = alive.Count > 0 ? GreenColor : RedColor;
-                    roleAlive = $"[bold][color={aliveColor}]{alive.Count} ALIVE[/color][/bold]";
+                    roleAlive = $"[bold][color={aliveColor}]{alive.Count} {Loc.GetString("rmc-overwatch-console-alive")}[/color][/bold]";
                 }
 
                 var deployedLabel = new RichTextLabel();
@@ -622,7 +613,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             }
 
             var totalAliveColor = allAlive > 0 ? GreenColor : RedColor;
-            var totalAlive = $"[bold][color={totalAliveColor}]{allAlive} ALIVE[/color][/bold]";
+            var totalAlive = $"[bold][color={totalAliveColor}]{allAlive} {Loc.GetString("rmc-overwatch-console-alive")}[/color][/bold]";
             var totalAliveLabel = new RichTextLabel();
             totalAliveLabel.SetMarkupPermissive(totalAlive);
 
@@ -631,7 +622,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             var totalLivingPanel = CreatePanel(thickness: new Thickness(0, 0, 0, 1));
 
             var totalLivingLabel = new RichTextLabel();
-            totalLivingLabel.SetMarkupPermissive("[bold]Total/Living[/bold]");
+            totalLivingLabel.SetMarkupPermissive($"[bold]{Loc.GetString("rmc-overwatch-console-total-living")}[/bold]");
 
             totalLivingPanel.AddChild(new BoxContainer
             {
@@ -646,7 +637,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             });
 
             var totalCountLabel = new RichTextLabel();
-            totalCountLabel.SetMarkupPermissive($"[bold]{marines.Count} TOTAL[/bold]");
+            totalCountLabel.SetMarkupPermissive($"[bold]{marines.Count} {Loc.GetString("rmc-overwatch-console-total")}[/bold]");
 
             totalPanel.AddChild(new BoxContainer
             {
@@ -714,22 +705,22 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
             squad.Visible = id == activeSquad;
             squad.OperatorButton.Text = consoleOperator == null
                 ? string.Empty
-                : $"Operator - {consoleOperator}";
+                : Loc.GetString("rmc-overwatch-console-operator", ("operator", consoleOperator));
 
             squad.ShowLocationButton.Text = console.Location switch
             {
-                OverwatchLocation.Planet => "Shown: planetside",
-                OverwatchLocation.Ship => "Shown: shipside",
-                _ => "Shown: all",
+                OverwatchLocation.Planet => Loc.GetString("rmc-overwatch-console-shown-planetside"),
+                OverwatchLocation.Ship => Loc.GetString("rmc-overwatch-console-shown-shipside"),
+                _ => Loc.GetString("rmc-overwatch-console-shown-all"),
             };
 
             squad.ShowDeadButton.Text = console.ShowDead
-                ? "Hide dead"
-                : "Show dead";
+                ? Loc.GetString("rmc-overwatch-console-hide-dead")
+                : Loc.GetString("rmc-overwatch-console-show-dead");
 
             squad.ShowHiddenButton.Text = console.ShowHidden
-                ? "Hide hidden"
-                : "Show hidden";
+                ? Loc.GetString("rmc-overwatch-console-hide-hidden")
+                : Loc.GetString("rmc-overwatch-console-show-hidden");
 
             var margin = new Thickness(2);
             if (supplyDrop != null)
@@ -786,7 +777,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         var panel = CreatePanel(50);
         panel.AddChild(new Label
         {
-            Text = "LONG.",
+            Text = Loc.GetString("rmc-overwatch-console-longitude-short"),
             Margin = margin,
         });
         longitudes.AddChild(panel);
@@ -795,7 +786,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         panel = CreatePanel(50);
         panel.AddChild(new Label
         {
-            Text = "LAT.",
+            Text = Loc.GetString("rmc-overwatch-console-latitude-short"),
             Margin = margin,
         });
         latitudes.AddChild(panel);
@@ -804,7 +795,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         panel = CreatePanel(50);
         panel.AddChild(new Label
         {
-            Text = "COMMENT",
+            Text = Loc.GetString("rmc-overwatch-console-comment"),
             Margin = margin,
         });
         comments.AddChild(panel);
@@ -867,7 +858,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 StyleClasses = { "OpenBoth" },
                 Text = "<",
                 ModulateSelfOverride = Color.FromHex("#D3B400"),
-                ToolTip = "Save Comment",
+                ToolTip = Loc.GetString("rmc-overwatch-console-save-comment"),
             };
             saveButton.OnPressed += _ => onSave(location);
 

@@ -18,11 +18,6 @@ public sealed class SupplyDropComputerBui(EntityUid owner, Enum uiKey) : BoundUs
             args => SendPredictedMessage(new SupplyDropComputerLongitudeBuiMsg((int)args.Value));
         _window.Latitude.OnValueChanged +=
             args => SendPredictedMessage(new SupplyDropComputerLatitudeBuiMsg((int)args.Value));
-        if (_window.LaunchButton is ConfirmButton confirmLaunchButton)
-        {
-            confirmLaunchButton.CooldownTime = TimeSpan.FromSeconds(1.0);
-            confirmLaunchButton.ResetTime = TimeSpan.FromSeconds(2.5);
-        }
         _window.LaunchButton.OnPressed += _ => SendPredictedMessage(new SupplyDropComputerLaunchBuiMsg());
         _window.UpdateButton.OnPressed += _ => SendPredictedMessage(new SupplyDropComputerUpdateBuiMsg());
 

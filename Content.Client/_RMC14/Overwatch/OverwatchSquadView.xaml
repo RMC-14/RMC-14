@@ -59,10 +59,10 @@
                         <Button Name="SquadMonitorButton" Access="Public" Text="{Loc rmc-overwatch-console-squad-monitor}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
-                        <Button Name="SupplyDropButton" Access="Public" Text="Supply Drop"
+                        <Button Name="SupplyDropButton" Access="Public" Text="{Loc rmc-overwatch-console-supply-drop}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
-                        <Button Name="OrbitalBombardmentButton" Access="Public" Text="Orbital Bombardment"
+                        <Button Name="OrbitalBombardmentButton" Access="Public" Text="{Loc rmc-overwatch-console-orbital-bombardment}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
                     </BoxContainer>
@@ -85,26 +85,26 @@
                                             BackgroundColor="#1A1A1A" />
                                         </PanelContainer.PanelOverride>
                                         <BoxContainer Orientation="Horizontal" Margin="5">
-                                            <Label Text="Monitor" />
+                                            <Label Text="{Loc rmc-overwatch-console-monitor}" />
                                             <Control HorizontalExpand="True" />
                                             <Button Name="ShowLocationButton" Access="Public"
-                                                    Text="Shown: all" StyleClasses="ActionButton"
+                                                    Text="{Loc rmc-overwatch-console-shown-all}" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" MinWidth="165" />
                                             <Button Name="ShowDeadButton" Access="Public"
-                                                    Text="Show dead" StyleClasses="ActionButton"
+                                                    Text="{Loc rmc-overwatch-console-show-dead}" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" MinWidth="105" />
                                             <Button Name="ShowHiddenButton" Access="Public"
-                                                    Text="Hide hidden" StyleClasses="ActionButton"
+                                                    Text="{Loc rmc-overwatch-console-hide-hidden}" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" MinWidth="120" />
                                             <Button Name="TransferMarineButton" Access="Public"
-                                                    Text="Transfer marine" StyleClasses="ActionButton"
+                                                    Text="{Loc rmc-overwatch-console-transfer-marine}" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" />
                                         </BoxContainer>
                                     </PanelContainer>
                                     <BoxContainer Orientation="Vertical" Margin="5"
                                                   VerticalExpand="True">
                                         <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True" Margin="0 0 0 5"
-                                                  PlaceHolder="Search..." />
+                                                  PlaceHolder="{Loc rmc-overwatch-console-search}" />
                                         <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Orientation="Vertical" HorizontalExpand="True">
@@ -117,7 +117,7 @@
                                                         </PanelContainer.PanelOverride>
                                                         <BoxContainer Orientation="Horizontal">
                                                             <Control HorizontalExpand="True" />
-                                                            <Label Text="Name" HorizontalAlignment="Center" />
+                                                            <Label Text="{Loc rmc-overwatch-console-name}" HorizontalAlignment="Center" />
                                                             <Control HorizontalExpand="True" />
                                                         </BoxContainer>
                                                     </PanelContainer>
@@ -133,7 +133,7 @@
                                                         </PanelContainer.PanelOverride>
                                                         <BoxContainer Orientation="Horizontal">
                                                             <Control HorizontalExpand="True" />
-                                                            <Label Text="Role" HorizontalAlignment="Center" />
+                                                            <Label Text="{Loc rmc-overwatch-console-role}" HorizontalAlignment="Center" />
                                                             <Control HorizontalExpand="True" />
                                                         </BoxContainer>
                                                     </PanelContainer>
@@ -149,7 +149,7 @@
                                                         </PanelContainer.PanelOverride>
                                                         <BoxContainer Orientation="Horizontal">
                                                             <Control HorizontalExpand="True" />
-                                                            <Label Text="State" HorizontalAlignment="Center" />
+                                                            <Label Text="{Loc rmc-overwatch-console-state}" HorizontalAlignment="Center" />
                                                             <Control HorizontalExpand="True" />
                                                         </BoxContainer>
                                                     </PanelContainer>
@@ -165,7 +165,7 @@
                                                         </PanelContainer.PanelOverride>
                                                         <BoxContainer Orientation="Horizontal">
                                                             <Control HorizontalExpand="True" />
-                                                            <Label Text="Location" HorizontalAlignment="Center" />
+                                                            <Label Text="{Loc rmc-overwatch-console-location}" HorizontalAlignment="Center" />
                                                             <Control HorizontalExpand="True" />
                                                         </BoxContainer>
                                                     </PanelContainer>
@@ -181,7 +181,7 @@
                                                         </PanelContainer.PanelOverride>
                                                         <BoxContainer Orientation="Horizontal">
                                                             <Control HorizontalExpand="True" />
-                                                            <Label Text="SL Dist." HorizontalAlignment="Center" />
+                                                            <Label Text="{Loc rmc-overwatch-console-sl-dist}" HorizontalAlignment="Center" />
                                                             <Control HorizontalExpand="True" />
                                                         </BoxContainer>
                                                     </PanelContainer>
@@ -226,35 +226,35 @@
                                             BorderThickness="0 0 0 1"
                                             BackgroundColor="#1A1A1A" />
                                         </PanelContainer.PanelOverride>
-                                        <Label Text="Supply Drop" />
+                                        <Label Text="{Loc rmc-overwatch-console-supply-drop}" />
                                     </PanelContainer>
                                     <BoxContainer Orientation="Horizontal" Margin="5"
                                                   VerticalExpand="True">
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="LONGITUDE" />
+                                                    <Label Text="{Loc rmc-overwatch-console-longitude}" />
                                                 </BoxContainer>
                                                 <BoxContainer Name="LatitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="LATITUDE" />
+                                                    <Label Text="{Loc rmc-overwatch-console-latitude}" />
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="CrateStatus" Access="Public"
-                                                                   Text="[color=red][bold][ NO CRATE LOADED ][/bold][/color]" />
-                                                    <Label Text="STATUS" HorizontalAlignment="Center" />
+                                                                   Text="{Loc rmc-overwatch-console-no-crate-loaded}" />
+                                                    <Label Text="{Loc rmc-overwatch-console-status}" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>
-                                            <uiControls:ConfirmButton Name="LaunchButton" Access="Public" Text="Launch Supply Drop"
-                                                    ConfirmationText="Confirm Supply Drop?"
+                                            <uiControls:ConfirmButton Name="LaunchButton" Access="Public" Text="{Loc rmc-overwatch-console-launch-supply-drop}"
+                                                    ConfirmationText="{Loc rmc-overwatch-console-confirm-supply-drop}"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" TextAlign="Center" />
-                                            <Button Name="SaveButton" Access="Public" Text="Save"
+                                            <Button Name="SaveButton" Access="Public" Text="{Loc rmc-overwatch-console-save}"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" TextAlign="Center" />
                                         </BoxContainer>
                                         <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
-                                            <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                            <Label Text="{Loc rmc-overwatch-console-max-coordinates}" />
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
@@ -283,35 +283,35 @@
                                             BorderThickness="0 0 0 1"
                                             BackgroundColor="#1A1A1A" />
                                         </PanelContainer.PanelOverride>
-                                        <Label Text="Orbital Bombardment" />
+                                        <Label Text="{Loc rmc-overwatch-console-orbital-bombardment}" />
                                     </PanelContainer>
                                     <BoxContainer Orientation="Horizontal" Margin="5"
                                                   VerticalExpand="True">
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="OrbitalLongitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="LONGITUDE" />
+                                                    <Label Text="{Loc rmc-overwatch-console-longitude}" />
                                                 </BoxContainer>
                                                 <BoxContainer Name="OrbitalLatitudeContainer" Access="Public" Orientation="Vertical">
-                                                    <Label Text="LATITUDE" />
+                                                    <Label Text="{Loc rmc-overwatch-console-latitude}" />
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="OrbitalStatus" Access="Public"
-                                                                   Text="[color=red][bold]No warhead loaded[/bold][/color]" />
-                                                    <Label Text="STATUS" HorizontalAlignment="Center" />
+                                                                   Text="{Loc rmc-overwatch-console-no-warhead-loaded}" />
+                                                    <Label Text="{Loc rmc-overwatch-console-status}" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>
-                                            <uiControls:ConfirmButton Name="OrbitalFireButton" Access="Public" Text="Fire"
-                                                    ConfirmationText="Confirm Fire Mission?"
+                                            <uiControls:ConfirmButton Name="OrbitalFireButton" Access="Public" Text="{Loc rmc-overwatch-console-fire}"
+                                                    ConfirmationText="{Loc rmc-overwatch-console-confirm-fire}"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#BB1F1D" TextAlign="Center" />
-                                            <Button Name="OrbitalSaveButton" Access="Public" Text="Save"
+                                            <Button Name="OrbitalSaveButton" Access="Public" Text="{Loc rmc-overwatch-console-save}"
                                                     HorizontalExpand="True" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" TextAlign="Center" />
                                         </BoxContainer>
                                         <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
                                         <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                            <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                            <Label Text="{Loc rmc-overwatch-console-max-coordinates}" />
                                             <BoxContainer Orientation="Horizontal">
                                                 <BoxContainer Name="OrbitalLongitudes" Access="Public" Orientation="Vertical" />
                                                 <BoxContainer Name="OrbitalLatitudes" Access="Public" Orientation="Vertical" />
