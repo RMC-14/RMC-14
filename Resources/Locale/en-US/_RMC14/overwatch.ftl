@@ -62,3 +62,24 @@ rmc-overwatch-console-ready = [color=green][bold][ READY ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ NOT READY ][/bold][/color]
 rmc-overwatch-console-cooldown = [color=#D3B400][bold][ COOLDOWN - { $seconds } SECONDS ][/bold][/color]
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]No warhead loaded[/bold][/color]
+
+# Transfer messages
+rmc-overwatch-console-squad-selection = Squad Selection
+rmc-overwatch-console-choose-marine-squad = Choose the marine's new squad
+rmc-overwatch-console-cant-transfer-squad = You can't transfer marines to that squad!
+rmc-overwatch-console-marine-kia = That marine is KIA.
+rmc-overwatch-console-marine-is-kia = { $marineName } is KIA.
+rmc-overwatch-console-transfer-aborted-squad-leader = Transfer aborted. { $squadName } can't have another Squad Leader.
+rmc-overwatch-console-marine-already-in-squad = { $marineName } is already in { $squadName }!
+rmc-overwatch-console-transfer-aborted-job = Transfer aborted. { $squadName } can't have another { $jobName }.
+rmc-overwatch-console-marine-transferred = { $marineName } has been transfered from squad '{ $oldSquad }' to squad '{ $newSquad }'. Logging to enlistment file.
+rmc-overwatch-console-you-transferred = You've been transfered to { $squadName }!
+rmc-overwatch-console-transfer-marine-title = Transfer Marine
+rmc-overwatch-console-choose-marine-transfer = Choose marine to transfer
+
+# Console messages
+rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
+
+# Squad message announcements
+rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
+rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]'{ $squadName }' squad message sent: '{ $message }'.[/color][/bold]
