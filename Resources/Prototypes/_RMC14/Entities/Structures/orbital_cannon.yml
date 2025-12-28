@@ -286,6 +286,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: ob_console # TODO RMC14 powered off, broken
+    drawdepth: HighFloorObjects
   - type: Clickable
   - type: InteractionOutline
   - type: UserInterface
