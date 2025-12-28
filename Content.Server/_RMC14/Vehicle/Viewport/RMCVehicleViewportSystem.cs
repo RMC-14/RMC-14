@@ -14,6 +14,7 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly RMCVehicleSystem _vehicles = default!;
+    [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
 
     public override void Initialize()
     {
@@ -31,7 +32,7 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
         if (!_vehicles.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is null)
             return;
 
-        if (ToggleViewport(args.User, vehicle.Value))
+        if (ToggleViewport(args.User, vehicle.Value, ent.Owner))
             args.Handled = true;
     }
 
@@ -51,7 +52,7 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
         if (!_vehicles.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is null)
             return;
 
-        if (ToggleViewport(args.User, vehicle.Value))
+        if (ToggleViewport(args.User, vehicle.Value, ent.Owner))
             args.Handled = true;
     }
 
@@ -63,11 +64,11 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
         if (!_vehicles.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is null)
             return;
 
-        if (ToggleViewport(args.User, vehicle.Value))
+        if (ToggleViewport(args.User, vehicle.Value, ent.Owner))
             args.Handled = true;
     }
 
-    private bool ToggleViewport(EntityUid user, EntityUid vehicle)
+    private bool ToggleViewport(EntityUid user, EntityUid vehicle, EntityUid source)
     {
         if (TryComp(user, out RMCVehicleViewportUserComponent? existing))
         {
@@ -78,8 +79,10 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
         var userState = EnsureComp<RMCVehicleViewportUserComponent>(user);
         if (TryComp(user, out EyeComponent? newEye))
             userState.PreviousTarget = newEye.Target;
+        userState.Source = source;
 
         _eye.SetTarget(user, vehicle);
+        _viewToggle.EnableViewToggle(user, vehicle, source, userState.PreviousTarget, isOutside: true);
         return true;
     }
 
@@ -91,6 +94,9 @@ public sealed class RMCVehicleViewportSystem : EntitySystem
 
         if (TryComp(user, out EyeComponent? eye))
             _eye.SetTarget(user, state.PreviousTarget, eye);
+
+        if (state.Source != null)
+            _viewToggle.DisableViewToggle(user, state.Source.Value);
 
         RemCompDeferred<RMCVehicleViewportUserComponent>(user);
     }

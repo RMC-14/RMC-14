@@ -36,6 +36,9 @@
   components:
   - type: Sprite
     state: armor_chair_old
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
 
 - type: entity
   parent: RMCVehicleInteriorGeneralBase
@@ -44,6 +47,9 @@
   components:
   - type: Sprite
     state: armor_chair_unfold
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
 
 - type: entity
   parent: RMCVehicleInteriorGeneralBase
@@ -52,6 +58,9 @@
   components:
   - type: Sprite
     state: armor_chair
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
 
 - type: entity
   parent: RMCVehicleInteriorGeneralBase
@@ -60,6 +69,9 @@
   components:
   - type: Sprite
     state: armor_chair_buckled
+  - type: Strap
+    position: Stand
+    buckleOffset: "0,-0.05"
 
 - type: entity
   parent: RMCVehicleInteriorGeneralBase

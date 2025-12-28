@@ -183,6 +183,17 @@ public abstract partial class SharedGunSystem : EntitySystem
 
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        if (TryComp(entity, out VehiclePortGunOperatorComponent? portGunOperator) &&
+            portGunOperator.Gun is { } portGun &&
+            TryComp(portGun, out VehiclePortGunComponent? portGunComp) &&
+            portGunComp.Operator == entity &&
+            TryComp(portGun, out GunComponent? portGunGun))
+        {
+            gunEntity = portGun;
+            gunComp = portGunGun;
+            return true;
+        }
+
         if (TryComp(entity, out VehicleWeaponsOperatorComponent? vehicleOperator) &&
             vehicleOperator.Vehicle is { } vehicle &&
             TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) &&
@@ -363,6 +374,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             gun.NextFire = attemptEv.ResetCooldown ? curTime : TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
             return null;
         }
+
+        fromCoordinates = attemptEv.FromCoordinates;
 
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);

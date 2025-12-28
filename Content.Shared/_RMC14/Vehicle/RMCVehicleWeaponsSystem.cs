@@ -25,6 +25,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly RMCVehicleSystem _vehicleSystem = default!;
+    [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -76,7 +77,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         Dirty(args.Buckle.Owner, operatorComp);
 
         if (HasComp<VehicleEnterComponent>(vehicleUid))
+        {
             _eye.SetTarget(args.Buckle.Owner, vehicleUid);
+            _viewToggle.EnableViewToggle(args.Buckle.Owner, vehicleUid, ent.Owner, insideTarget: null, isOutside: true);
+        }
 
         _ui.OpenUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons);
@@ -111,6 +115,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         if (TryComp(args.Buckle.Owner, out EyeComponent? eye) && eye.Target == vehicleUid)
             _eye.SetTarget(args.Buckle.Owner, null, eye);
+
+        _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);
     }
 
     private void OnWeaponsUiOpened(Entity<VehicleWeaponsSeatComponent> ent, ref BoundUIOpenedEvent args)
@@ -154,6 +160,13 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         if (!TryComp(args.Actor, out BuckleComponent? buckle) || buckle.BuckledTo != ent.Owner)
             return;
+
+        if (TryComp(args.Actor, out VehiclePortGunOperatorComponent? portGunOperator) &&
+            portGunOperator.Gun != null)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-portgun-active"), ent, args.Actor);
+            return;
+        }
 
         if (!TryComp(vehicleUid, out RMCHardpointSlotsComponent? hardpoints) ||
             !TryComp(vehicleUid, out ItemSlotsComponent? itemSlots))

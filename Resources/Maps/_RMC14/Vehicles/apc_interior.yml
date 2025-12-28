@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 12/28/2025 09:38:37
-  entityCount: 28
+  time: 12/28/2025 14:59:09
+  entityCount: 32
 maps:
 - 1
 grids:
@@ -78,31 +78,6 @@ entities:
       data:
         chunkSize: 4
     - type: GasTileOverlay
-- proto: CMChairComfy
-  entities:
-  - uid: 26
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,1.5
-      parent: 2
-    - type: VehicleWeaponsSeat
-      skills:
-        all:
-          RMCSkillVehicles: 1
-    - type: UserInterface
-      interfaces:
-        enum.RMCVehicleWeaponsUiKey.Key:
-          type: RMCVehicleWeaponsBoundUserInterface
-  - uid: 27
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,-0.5
-      parent: 2
-    - type: VehicleDriverSeat
-      skills:
-        all: {}
 - proto: RMCVehicleAmmoLoader
   entities:
   - uid: 28
@@ -117,6 +92,7 @@ entities:
     - type: Transform
       pos: 1.5,-1.5
       parent: 2
+    - type: VehicleExit
 - proto: RMCVehicleAPCBack2
   entities:
   - uid: 16
@@ -152,6 +128,7 @@ entities:
     - type: Transform
       pos: 1.5,3.5
       parent: 2
+    - type: VehicleExit
 - proto: RMCVehicleAPCFront1
   entities:
   - uid: 17
@@ -194,6 +171,24 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 2
+- proto: RMCVehicleAPCM56FPWInterior
+  entities:
+  - uid: 31
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,3.5
+      parent: 2
+    - type: VehiclePortGunController
+      gunSlotId: port-gun-north
+  - uid: 32
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-1.5
+      parent: 2
+    - type: VehiclePortGunController
+      gunSlotId: port-gun-south
 - proto: RMCVehicleAPCRear3
   entities:
   - uid: 15
@@ -271,4 +266,46 @@ entities:
     - type: Transform
       pos: -0.5,3.5
       parent: 2
+- proto: RMCVehicleInteriorArmorChair
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,-0.5
+      parent: 2
+    - type: VehicleDriverSeat
+      skills:
+        all: {}
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 0.5,-0.5
+      parent: 2
+    - type: VehiclePortGunSeat
+      skills:
+        all: {}
+  - uid: 29
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,1.5
+      parent: 2
+    - type: VehicleWeaponsSeat
+      skills:
+        all:
+          RMCSkillVehicles: 1
+    - type: UserInterface
+      interfaces:
+        enum.RMCVehicleWeaponsUiKey.Key:
+          type: RMCVehicleWeaponsBoundUserInterface
+  - uid: 30
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,2.5
+      parent: 2
+    - type: VehiclePortGunSeat
+      skills:
+        all: {}
 ...

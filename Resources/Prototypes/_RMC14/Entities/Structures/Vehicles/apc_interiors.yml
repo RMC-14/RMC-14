@@ -516,6 +516,13 @@
   components:
   - type: Sprite
     state: m56_FPW
+  - type: Clickable
+  - type: InteractionOutline
+  - type: VehiclePortGunController
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehiclePortGunUiKey.Key:
+        type: RMCVehiclePortGunBoundUserInterface
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase

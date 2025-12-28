@@ -165,3 +165,71 @@
     hardpointType: Support
   - type: RMCHardpointVisual
     vehicleState: freight_0
+
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleAPCM56FPWPortGunBase
+  abstract: true
+  name: APC port gun
+  description: A mounted M56 FPW port gun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    state: m56_FPW
+  - type: Item
+    size: Huge
+  - type: VehiclePortGun
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCGunChamber
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGun
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        whitelist:
+          tags:
+          - RMCMagazineSmartGun
+
+- type: entity
+  parent: RMCVehicleAPCM56FPWPortGunBase
+  id: RMCVehicleAPCM56FPWPortGunRight
+  name: APC port gun (starboard)
+  components:
+  - type: GunFireArc
+    arc: 90
+    angleOffset: 90
+  - type: GunMuzzleOffset
+    offset: "0.65,0"
+    muzzleOffset: "0.3,0"
+    angleOffset: 90
+    useAimDirection: true
+
+- type: entity
+  parent: RMCVehicleAPCM56FPWPortGunBase
+  id: RMCVehicleAPCM56FPWPortGunLeft
+  name: APC port gun (port)
+  components:
+  - type: GunFireArc
+    arc: 90
+    angleOffset: -90
+  - type: GunMuzzleOffset
+    offset: "0.65,0"
+    muzzleOffset: "0.3,0"
+    angleOffset: -90
+    useAimDirection: true

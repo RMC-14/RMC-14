@@ -26,6 +26,7 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed class RMCVehicleSystem : EntitySystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -531,6 +532,7 @@ public sealed class RMCVehicleSystem : EntitySystem
             return;
 
         _eye.SetTarget(ent.Owner, args.Vehicle.Owner);
+        _viewToggle.EnableViewToggle(ent.Owner, args.Vehicle.Owner, args.Vehicle.Owner, insideTarget: null, isOutside: true);
     }
 
     private void OnVehicleOperatorExited(Entity<VehicleOperatorComponent> ent, ref OnVehicleExitedEvent args)
@@ -540,6 +542,8 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         if (!TryComp(ent, out EyeComponent? eye))
             return;
+
+        _viewToggle.DisableViewToggle(ent.Owner, args.Vehicle.Owner);
 
         if (eye.Target != args.Vehicle.Owner)
             return;

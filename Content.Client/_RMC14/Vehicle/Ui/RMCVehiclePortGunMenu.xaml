@@ -1,0 +1,27 @@
+<controls:RMCVehiclePortGunMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Port Gun"
+    MinSize="320 180">
+
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#070E18"
+                BorderColor="#6BC7FF"
+                BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8" HorizontalExpand="True" VerticalExpand="True">
+            <Label Name="GunTitle" Text="Port Gun" StyleClasses="LabelHeading"/>
+
+            <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+                <Label Name="AmmoLabel" Text="Ammo: --" FontColorOverride="#9DB5D1"/>
+                <Label Name="MagazineLabel" Text="Magazine: --" FontColorOverride="#9DB5D1"/>
+            </BoxContainer>
+
+            <Button Name="EjectButton" Text="Eject Magazine" Disabled="True"/>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCVehiclePortGunMenu>

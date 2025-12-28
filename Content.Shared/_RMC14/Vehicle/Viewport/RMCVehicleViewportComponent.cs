@@ -12,4 +12,7 @@ public sealed partial class RMCVehicleViewportUserComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid? PreviousTarget;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? Source;
 }

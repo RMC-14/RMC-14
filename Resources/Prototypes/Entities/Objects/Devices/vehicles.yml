@@ -858,14 +858,37 @@
   - type: RMCVehicleHardpointVisuals
   - type: InputMover
   - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: RMCVehicleAPCM56FPWPortGunRight
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
+      port-gun-south:
+        startingItem: RMCVehicleAPCM56FPWPortGunLeft
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
   - type: RMCHardpointSlots
     slots:
     - id: primary
       hardpointType: Primary
       insertDelay: 2.5
+      required: false
     - id: secondary
       hardpointType: Secondary
       insertDelay: 2.5
+      required: false
     - id: support
       hardpointType: Support
       insertDelay: 2.0
