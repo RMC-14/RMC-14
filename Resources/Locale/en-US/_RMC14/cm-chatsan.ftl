@@ -886,3 +886,7 @@ cm-chatsan-replacement-slopcade = bad cades
 
 cm-chatsan-word-clanker = clanker
 cm-chatsan-replacement-clanker = synthetic
+
+cm-chatsan-word-rwall = rwall
+cm-chatsan-replacement-rwall = reinforced wall
+
