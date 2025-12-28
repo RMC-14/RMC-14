@@ -122,6 +122,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
             // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
+            subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
+            subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnOverwatchClearSquadObjectiveBui);
         });
 
         Subs.CVar(_config, RMCCVars.RMCOverwatchMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
@@ -560,6 +562,56 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
 
+    private void OnOverwatchSetSquadObjectiveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSetSquadObjectiveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastObjectiveUpdate + ent.Comp.MessageCooldown)
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            !TryComp(squad, out SquadTeamComponent? squadComp))
+        {
+            return;
+        }
+
+        var objective = args.Objective;
+        if (objective.Length > 300)
+            objective = objective[..300];
+
+        _squad.SetSquadObjective((squad.Value, squadComp), args.Type, objective);
+
+        ent.Comp.LastObjectiveUpdate = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} set {args.Type} objective for {Name(squad.Value)} squad: {objective}");
+    }
+
+    private void OnOverwatchClearSquadObjectiveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleClearSquadObjectiveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastObjectiveUpdate + ent.Comp.MessageCooldown)
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            !TryComp(squad, out SquadTeamComponent? squadComp))
+        {
+            return;
+        }
+
+        _squad.RemoveSquadObjective((squad.Value, squadComp), args.Type);
+
+        ent.Comp.LastObjectiveUpdate = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} cleared {args.Type} objective for {Name(squad.Value)} squad");
+    }
+
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
     {
     }
@@ -588,7 +640,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                 continue;
 
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.LeaderIcon);
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.LeaderIcon, new Dictionary<SquadObjectiveType, string>(team.Objectives));
             var members = marines.GetOrNew(netUid);
 
             foreach (var member in team.Members)

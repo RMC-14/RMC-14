@@ -824,6 +824,67 @@ public sealed class SquadSystem : EntitySystem
         squad.Comp.MaxRoles[job] = amount;
     }
 
+    /// <summary>
+    /// Gets all objectives for a squad.
+    /// </summary>
+    public Dictionary<SquadObjectiveType, string> GetSquadObjectives(Entity<SquadTeamComponent?> squad)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return new Dictionary<SquadObjectiveType, string>();
+
+        return new Dictionary<SquadObjectiveType, string>(squad.Comp.Objectives);
+    }
+
+    /// <summary>
+    /// Gets a specific objective for a squad.
+    /// </summary>
+    public bool TryGetSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type, out string objective)
+    {
+        objective = string.Empty;
+        if (!Resolve(squad, ref squad.Comp, false))
+            return false;
+
+        if (squad.Comp.Objectives.TryGetValue(type, out var value))
+        {
+            objective = value ?? string.Empty;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Sets an objective for a squad.
+    /// </summary>
+    public void SetSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type, string objective)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        if (string.IsNullOrWhiteSpace(objective))
+        {
+            squad.Comp.Objectives.Remove(type);
+        }
+        else
+        {
+            squad.Comp.Objectives[type] = objective;
+        }
+
+        Dirty(squad);
+    }
+
+    /// <summary>
+    /// Removes an objective from a squad.
+    /// </summary>
+    public void RemoveSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        squad.Comp.Objectives.Remove(type);
+        Dirty(squad);
+    }
+
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<SquadGrantAccessComponent>();

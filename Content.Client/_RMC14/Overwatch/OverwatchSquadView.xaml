@@ -38,6 +38,9 @@
                         <Button Name="MessageSquadButton" Access="Public" Text="{Loc rmc-overwatch-console-message-squad}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="SquadObjectivesButton" Access="Public" Text="{Loc rmc-overwatch-console-squad-objectives}"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
                         <Button Name="HideSquadInfoButton" Access="Public" Text="{Loc rmc-overwatch-console-hide-squad-info}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />

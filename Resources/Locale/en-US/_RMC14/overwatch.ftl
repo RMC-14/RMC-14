@@ -4,6 +4,7 @@ rmc-overwatch-console-tactical-map = Tactical Map
 rmc-overwatch-console-stop-overwatch = Stop Overwatch
 rmc-overwatch-console-squad-message-title = Squad Message
 rmc-overwatch-console-message-squad = Message Squad
+rmc-overwatch-console-squad-objectives = Squad Objectives
 rmc-overwatch-console-show-squad-info = Show Squad Info
 rmc-overwatch-console-hide-squad-info = Hide Squad Info
 rmc-overwatch-console-squad-monitor = Squad Monitor
@@ -90,3 +91,10 @@ rmc-overwatch-console-marine-is-kia-exclamation = { $marineName } is KIA!
 rmc-overwatch-console-promoted-to-leader = Overwatch: You've been promoted to 'ACTING SQUAD LEADER'{ $squadStr }. Your headset has access to the command channel (:v).
 rmc-overwatch-console-new-squad-leader-announce = Attention: A new Squad Leader has been set: { $leaderName }
 rmc-overwatch-console-new-squad-leader-popup = { $leaderName } is { $squadName }'s new leader!
+
+# Squad objectives
+rmc-overwatch-console-objective-primary = Primary Objective
+rmc-overwatch-console-objective-secondary = Secondary Objective
+rmc-overwatch-console-objective-placeholder = Enter objective text...
+rmc-overwatch-console-objective-update = Update
+rmc-overwatch-console-objective-cancel = Cancel

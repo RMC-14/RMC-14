@@ -36,6 +36,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
     private readonly Dictionary<NetEntity, OverwatchSquadView> _squadViews = new();
     private readonly Dictionary<NetEntity, PanelContainer> _squads = new();
     private readonly Dictionary<NetEntity, Dictionary<NetEntity, OverwatchRow>> _rows = new();
+    private SquadObjectivesWindow? _objectivesWindow;
 
     public OverwatchConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -230,6 +231,64 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     window.OkButton.OnPressed += _ => SendSquadMessage();
                     window.CancelButton.OnPressed += _ => window.Close();
                     window.OpenCentered();
+                };
+
+                monitor.SquadObjectivesButton.OnPressed += _ =>
+                {
+                    if (!EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) ||
+                        overwatch.Squad == null)
+                    {
+                        return;
+                    }
+
+                    // Check if window is already open
+                    if (_objectivesWindow != null && !_objectivesWindow.Disposed && _objectivesWindow.IsOpen)
+                    {
+                        return;
+                    }
+
+                    // Get objectives from BUI state instead of directly accessing entity
+                    Dictionary<SquadObjectiveType, string> objectives = new();
+                    if (State is OverwatchConsoleBuiState state)
+                    {
+                        var squadData = state.Squads.FirstOrDefault(s => s.Id == overwatch.Squad);
+                        if (squadData.Id != default)
+                        {
+                            objectives = new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
+                        }
+                    }
+
+                    var window = new SquadObjectivesWindow();
+                    _objectivesWindow = window;
+                    window.OnClose += () => _objectivesWindow = null;
+                    window.OpenCentered();
+
+                    // Set current objectives in the window
+                    foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())
+                    {
+                        var currentObjective = objectives.GetValueOrDefault(objectiveType, string.Empty);
+                        window.SetObjective(objectiveType, currentObjective);
+
+                        // Set button actions
+                        window.SetUpdateButtonAction(objectiveType, () =>
+                        {
+                            var objective = window.GetObjective(objectiveType);
+                            // Don't send empty or whitespace-only objectives
+                            if (string.IsNullOrWhiteSpace(objective))
+                                return;
+                            SendPredictedMessage(new OverwatchConsoleSetSquadObjectiveBuiMsg(objectiveType, objective));
+                        });
+
+                        window.SetCancelButtonAction(objectiveType, () =>
+                        {
+                            SendPredictedMessage(new OverwatchConsoleClearSquadObjectiveBuiMsg(objectiveType));
+                            window.SetObjective(objectiveType, string.Empty);
+                            window.UpdateButtonsState(objectiveType, string.Empty);
+                        });
+
+                        // Update button states based on current objective
+                        window.UpdateButtonsState(objectiveType, currentObjective);
+                    }
                 };
 
                 var canSupplyDrop = EntMan.HasComponent<SupplyDropComputerComponent>(Owner) && squad.CanSupplyDrop;
