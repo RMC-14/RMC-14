@@ -29,11 +29,35 @@ ui-tactical-map-update-button = Update
 ui-tactical-map-clear-button = Clear
 ui-tactical-map-undo-button = Undo
 ui-tactical-map-lines-button = Lines
+ui-tactical-map-eraser-button = Eraser
+
+ui-tactical-map-context-coords = Tile: {$x}, {$y}
+ui-tactical-map-context-id = ID: {$id}
+ui-tactical-map-context-label = Label: {$label}
+ui-tactical-map-context-tactical-label = Tactical: {$label}
+ui-tactical-map-context-area-label = Area: {$label}
+ui-tactical-map-context-linked-lz = Linked LZ: {$lz}
+ui-tactical-map-context-allowed = Allowed: {$actions}
+ui-tactical-map-context-blocked = Blocked: {$actions}
+ui-tactical-map-context-allowed-title = Allowed
+ui-tactical-map-context-blocked-title = Blocked
+ui-tactical-map-hover-area = Area: {$area}
+ui-tactical-map-action-ob = OB
+ui-tactical-map-action-cas = CAS
+ui-tactical-map-action-supply = Supply
+ui-tactical-map-action-mortar-fire = Mortar Fire
+ui-tactical-map-action-mortar-place = Mortar Place
+ui-tactical-map-action-lase = Lase
+ui-tactical-map-action-medevac = Medevac
+ui-tactical-map-action-paradrop = Paradrop
+ui-tactical-map-action-fulton = Fulton
+ui-tactical-map-action-landing-zone = LZ
 
 ui-tactical-map-blip-size-label = Blip Size: {$size}x
 ui-tactical-map-line-width-label = Line Width: {$width}px
 
 ui-tactical-map-color-black = Black
+ui-tactical-map-color-white = White
 ui-tactical-map-color-red = Red
 ui-tactical-map-color-orange = Orange
 ui-tactical-map-color-blue = Blue
@@ -43,7 +67,8 @@ ui-tactical-map-color-brown = Brown
 
 ui-tactical-map-labels-mode-area = Area
 ui-tactical-map-labels-mode-tactical = Tactical
-ui-tactical-map-labels-mode-none = Labels
+ui-tactical-map-labels-mode-all = All
+ui-tactical-map-labels-mode-off = {$mode} Off
 
 ui-tactical-map-follow-player-active = Stop
 ui-tactical-map-follow-player-inactive = Centre

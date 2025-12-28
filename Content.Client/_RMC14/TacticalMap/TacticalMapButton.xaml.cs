@@ -43,9 +43,9 @@ public sealed partial class TacticalMapButton : PanelContainer
         RobustXamlLoader.Load(this);
         if (PanelOverride is StyleBoxFlat box)
         {
-            box.BackgroundColor = Color.FromHex("#00000000");
-            box.BorderColor = Color.FromHex("#00000000");
-            box.BorderThickness = new Thickness(0);
+            box.BackgroundColor = Color.FromHex("#1A1F27").WithAlpha(0.75f);
+            box.BorderColor = Color.FromHex("#2C3440").WithAlpha(0.8f);
+            box.BorderThickness = new Thickness(1);
         }
     }
 }

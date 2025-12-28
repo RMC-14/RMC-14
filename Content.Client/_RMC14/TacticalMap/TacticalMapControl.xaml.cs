@@ -9,6 +9,8 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
+using Robust.Shared.Localization;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
@@ -22,9 +24,10 @@ public sealed partial class TacticalMapControl : TextureRect
 {
     public enum LabelMode
     {
-        None,
-        Tactical,
-        Area
+        All = 0,
+        Tactical = 1,
+        Area = 2,
+        None = 3
     }
 
     private const float MapScale = 3f;
@@ -38,7 +41,18 @@ public sealed partial class TacticalMapControl : TextureRect
     private const int ArrowLength = 15;
     private const int ArrowWidth = 8;
     private const float MinDragDistance = 10f;
+    private const float MinFreehandSegmentPixels = 6f;
+    private const float MinEraserSegmentPixels = 3f;
+    private const float SmoothSamplePixels = 4f;
+    private const float LineJoinEpsilon = 0.05f;
+    private const float LineSoftEdgePixels = 1.5f;
+    private const float LineSoftEdgeAlpha = 0.4f;
+    private const float EraserRadiusPixels = 6f;
     private const float LabelYOffset = 6f;
+    private const float LabelStackOffset = 9f;
+    private const float LabelMinFontSize = 7f;
+    private const float LabelFontScale = 9f;
+    private const float LabelPadding = 2f;
     private const float MinZoom = 0.3f;
     private const float MaxZoom = 5.0f;
     private const float ZoomSpeed = 1.2f;
@@ -51,9 +65,17 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float PingMaxAlpha = 0.65f;
     private const float PingRingThickness = 1.5f;
 
+    private static readonly Color AreaLabelColor = Color.White;
+    private static readonly Color DefaultTacticalLabelColor = Color.White;
+    private static readonly Color AreaLabelBackground = Color.Black.WithAlpha(0.5f);
+    private static readonly Color TacticalLabelBackground = Color.FromHex("#0D1A2F").WithAlpha(0.5f);
+    private static readonly Color LabelDragBackground = Color.Black.WithAlpha(0.7f);
+    private static readonly Color EraserPreviewColor = Color.White.WithAlpha(0.45f);
+
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     private readonly Font _font;
     private readonly Label? _tunnelInfoLabel;
@@ -68,6 +90,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private int? _localPlayerEntityId;
     private Dictionary<Vector2i, string> _areaLabels = new();
     private bool[]? _tileMask;
+    private Texture? _backgroundTexture;
     private int _tileMaskWidth;
     private int _tileMaskHeight;
 
@@ -82,36 +105,46 @@ public sealed partial class TacticalMapControl : TextureRect
     private Vector2i? _previewEnd;
     private bool _rightClickPanning;
     private Vector2? _lastPanPosition;
+    private Vector2? _rightClickStartPosition;
+    private bool _rightClickMoved;
+    private Vector2? _lastErasePosition;
 
     private Vector2i? _draggingLabel;
     private Vector2i? _labelDragStart;
     private Vector2? _currentDragPosition;
+    private Vector2? _lastMousePosition;
+    private Vector2i? _lastHoverIndices;
 
     private TacticalMapSettingsManager? _settingsManager;
     private EntityUid? _currentMapEntity;
     private string? _currentMapName;
+    private EntityUid? _currentAreaGridEntity;
 
     private Action<float, Vector2>? _viewUpdateCallback;
 
     public int LineLimit;
     public bool Drawing { get; set; }
     public bool IsCanvas { get; set; } = false;
-    public LabelMode CurrentLabelMode { get; set; } = LabelMode.Area;
+    public LabelMode CurrentLabelMode { get; set; } = LabelMode.All;
     public bool StraightLineMode { get; set; } = false;
     public bool LabelEditMode { get; set; } = false;
+    public bool EraserMode { get; set; } = false;
     public Color Color;
-    public float BlipSizeMultiplier { get; set; } = 1.0f;
+    public float BlipSizeMultiplier { get; set; } = 0.9f;
     public float LineThickness { get; set; } = 2.0f;
     public bool QueenEyeMode { get; set; }
+    public Color TacticalLabelTextColor { get; set; } = DefaultTacticalLabelColor;
 
     public Action<Vector2i>? OnBlipClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
+    public Action<TacticalMapControl, Vector2i, Vector2>? OnContextMenuRequested;
     public Action? OnUserInteraction;
     public Action<Vector2i>? OnQueenEyeMove;
     public Action<Vector2i, string>? OnCreateLabel;
     public Action<Vector2i, string>? OnEditLabel;
     public Action<Vector2i>? OnDeleteLabel;
     public Action<Vector2i, Vector2i>? OnMoveLabel;
+    public Action<TacticalMapAreaInfo?>? OnHoverAreaInfo;
 
     public TacticalMapControl()
     {
@@ -189,11 +222,14 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
+        _currentAreaGridEntity = grid.Owner;
+
         if (grid.Comp.Colors.Count == 0)
         {
             _tileMask = null;
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
+            _backgroundTexture = null;
             return;
         }
 
@@ -221,6 +257,7 @@ public sealed partial class TacticalMapControl : TextureRect
             _tileMask = null;
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
+            _backgroundTexture = null;
             return;
         }
 
@@ -251,6 +288,7 @@ public sealed partial class TacticalMapControl : TextureRect
             _tileMask = null;
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
+            _backgroundTexture = null;
             return;
         }
 
@@ -261,6 +299,7 @@ public sealed partial class TacticalMapControl : TextureRect
         _tileMask = new bool[width * height];
 
         Image<Rgba32> image = new(width, height);
+        Image<Rgba32> background = new(width, height);
         foreach ((Vector2i position, Color color) in colors)
         {
             if (position.X < boundsMin.X || position.X > boundsMax.X ||
@@ -271,9 +310,12 @@ public sealed partial class TacticalMapControl : TextureRect
 
             (int x, int y) = GetDrawPosition(position);
             _tileMask[y * width + x] = true;
+            var backgroundColor = color.WithAlpha(1f);
+            background[x, y] = new Rgba32(backgroundColor.R, backgroundColor.G, backgroundColor.B, backgroundColor.A);
             image[x, y] = new Rgba32(color.R, color.G, color.B, color.A);
         }
 
+        _backgroundTexture = Texture.LoadFromImage(background);
         Texture = Texture.LoadFromImage(image);
         _areaLabels.Clear();
         foreach ((Vector2i position, string label) in grid.Comp.Labels)
@@ -288,6 +330,80 @@ public sealed partial class TacticalMapControl : TextureRect
         }
 
         ApplyViewSettings();
+    }
+
+    public bool TryGetAreaInfo(Vector2i indices, out TacticalMapAreaInfo info)
+    {
+        info = default;
+        if (_currentAreaGridEntity == null)
+            return false;
+
+        if (!_entityManager.TryGetComponent(_currentAreaGridEntity.Value, out AreaGridComponent? areaGrid))
+            return false;
+
+        string? areaId = null;
+        string areaName = Loc.GetString("rmc-tacmap-alert-no-area");
+        string? linkedLz = null;
+        bool hasArea = false;
+        bool cas = false;
+        bool mortarFire = false;
+        bool mortarPlacement = false;
+        bool lasing = false;
+        bool medevac = false;
+        bool paradropping = false;
+        bool orbitalBombard = false;
+        bool supplyDrop = false;
+        bool fulton = false;
+        bool landingZone = false;
+        string? areaLabel = null;
+
+        if (areaGrid.Areas.TryGetValue(indices, out var areaProtoId))
+        {
+            hasArea = true;
+            areaId = areaProtoId.Id;
+            if (_prototypes.TryIndex(areaProtoId, out var areaProto))
+                areaName = areaProto.Name;
+
+            if (areaGrid.AreaEntities.TryGetValue(areaProtoId, out var areaEntity) &&
+                _entityManager.TryGetComponent(areaEntity, out AreaComponent? areaComp))
+            {
+                cas = areaComp.CAS;
+                mortarFire = areaComp.MortarFire;
+                mortarPlacement = areaComp.MortarPlacement;
+                lasing = areaComp.Lasing;
+                medevac = areaComp.Medevac;
+                paradropping = areaComp.Paradropping;
+                orbitalBombard = areaComp.OB;
+                supplyDrop = areaComp.SupplyDrop;
+                fulton = areaComp.Fulton;
+                landingZone = areaComp.LandingZone;
+                linkedLz = areaComp.LinkedLz;
+            }
+        }
+
+        areaLabel = _areaLabels.GetValueOrDefault(indices);
+        var tacticalLabel = TacticalLabels.GetValueOrDefault(indices);
+
+        info = new TacticalMapAreaInfo(
+            indices,
+            areaName,
+            areaId,
+            areaLabel,
+            tacticalLabel,
+            hasArea,
+            cas,
+            mortarFire,
+            mortarPlacement,
+            lasing,
+            medevac,
+            paradropping,
+            orbitalBombard,
+            supplyDrop,
+            fulton,
+            landingZone,
+            linkedLz);
+
+        return true;
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)
@@ -338,6 +454,68 @@ public sealed partial class TacticalMapControl : TextureRect
         );
     }
 
+    private Vector2 PositionToLineCoordinatesFloat(Vector2 controlPosition, Vector2 actualTopLeft, float overlayScale)
+    {
+        Vector2 pixelPosition = LogicalToPixel(controlPosition);
+        return (pixelPosition - actualTopLeft) / overlayScale;
+    }
+
+    private void AddLineSegment(Vector2 start, Vector2 end)
+    {
+        if ((end - start).LengthSquared() < 0.01f)
+            return;
+
+        AddLineToCanvas(start, end);
+    }
+
+    private void TryEraseAt(Vector2 controlPosition)
+    {
+        if (Texture == null || Lines.Count == 0)
+            return;
+
+        (_, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
+        if (overlayScale <= 0f)
+            return;
+
+        Vector2 linePosition = PositionToLineCoordinatesFloat(controlPosition, actualTopLeft, overlayScale);
+        float eraserRadius = (EraserRadiusPixels + LineThickness * 1.5f) / Math.Max(overlayScale, 0.001f);
+
+        EraseLinesNear(linePosition, eraserRadius);
+    }
+
+    private void EraseLinesNear(Vector2 linePosition, float radius)
+    {
+        float radiusSquared = radius * radius;
+
+        for (int i = Lines.Count - 1; i >= 0; i--)
+        {
+            TacticalMapLine line = Lines[i];
+            float thickness = GetLineThickness(i, line);
+            float effectiveRadius = radius + thickness * 0.6f;
+            float effectiveRadiusSquared = effectiveRadius * effectiveRadius;
+
+            if (DistanceSquaredPointToSegment(linePosition, line.Start, line.End) <= effectiveRadiusSquared)
+            {
+                Lines.RemoveAt(i);
+                if (i < LineThicknesses.Count)
+                    LineThicknesses.RemoveAt(i);
+            }
+        }
+    }
+
+    private static float DistanceSquaredPointToSegment(Vector2 point, Vector2 a, Vector2 b)
+    {
+        Vector2 ab = b - a;
+        float abLengthSquared = ab.LengthSquared();
+        if (abLengthSquared <= 0.0001f)
+            return Vector2.DistanceSquared(point, a);
+
+        float t = Vector2.Dot(point - a, ab) / abLengthSquared;
+        t = Math.Clamp(t, 0f, 1f);
+        Vector2 closest = a + ab * t;
+        return Vector2.DistanceSquared(point, closest);
+    }
+
     public bool CenterOnPosition(Vector2i indices)
     {
         if (Texture == null)
@@ -377,10 +555,9 @@ public sealed partial class TacticalMapControl : TextureRect
         NotifyViewChanged();
     }
 
-    public Vector2i ConvertIndicesToLineCoordinates(Vector2i indices)
+    public Vector2 ConvertIndicesToLineCoordinates(Vector2i indices)
     {
-        Vector2 scaled = GetDrawPosition(indices) * MapScale;
-        return new Vector2i((int)scaled.X, (int)scaled.Y);
+        return GetDrawPosition(indices) * MapScale;
     }
 
     public void ShowTunnelInfo(Vector2i indices, string tunnelName, Vector2 screenPosition)
@@ -480,25 +657,67 @@ public sealed partial class TacticalMapControl : TextureRect
         if (Texture == null)
             return null;
 
+        if (CurrentLabelMode == LabelMode.None)
+            return null;
+
         Vector2 pixelPosition = LogicalToPixel(controlPosition);
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
         float clickTolerance = LabelClickTolerance * overlayScale;
 
-        Dictionary<Vector2i, string> labelsToCheck = CurrentLabelMode switch
+        Vector2i? CheckLabels(Dictionary<Vector2i, string> labels, float yOffsetMultiplier)
         {
-            LabelMode.Area => _areaLabels,
-            LabelMode.Tactical => TacticalLabels,
-            _ => new Dictionary<Vector2i, string>()
-        };
+            foreach ((Vector2i indices, string label) in labels)
+            {
+                Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+                position = position with { Y = position.Y - (LabelYOffset + LabelStackOffset * yOffsetMultiplier) * overlayScale };
 
-        foreach ((Vector2i indices, string label) in labelsToCheck)
+                float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+                float textWidth = label.Length * fontSize * 0.6f;
+                float textHeight = fontSize;
+                Vector2 textSize = new(textWidth, textHeight);
+                UIBox2 labelRect = UIBox2.FromDimensions(
+                    position - textSize / 2 - new Vector2(clickTolerance),
+                    textSize + new Vector2(clickTolerance * 2)
+                );
+
+                if (labelRect.Contains(pixelPosition))
+                    return indices;
+            }
+
+            return null;
+        }
+
+        if (CurrentLabelMode == LabelMode.All)
+        {
+            return CheckLabels(TacticalLabels, 1f) ?? CheckLabels(_areaLabels, 0f);
+        }
+
+        return CurrentLabelMode == LabelMode.Area
+            ? CheckLabels(_areaLabels, 0f)
+            : CheckLabels(TacticalLabels, 0f);
+    }
+
+    private Vector2i? GetTacticalLabelAtPosition(Vector2 controlPosition)
+    {
+        if (CurrentLabelMode == LabelMode.Area || CurrentLabelMode == LabelMode.None)
+            return null;
+
+        if (Texture == null)
+            return null;
+
+        Vector2 pixelPosition = LogicalToPixel(controlPosition);
+        (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
+        float clickTolerance = LabelClickTolerance * overlayScale;
+
+        foreach ((Vector2i indices, string label) in TacticalLabels)
         {
             Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
-            position = position with { Y = position.Y - LabelYOffset * overlayScale };
+            float stackOffset = CurrentLabelMode == LabelMode.All && _areaLabels.ContainsKey(indices)
+                ? LabelStackOffset
+                : 0f;
+            position = position with { Y = position.Y - (LabelYOffset + stackOffset) * overlayScale };
 
-            float fontSize = Math.Max(8f, overlayScale * 10f);
-            VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), (int)fontSize);
-
+            float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
             float textWidth = label.Length * fontSize * 0.6f;
             float textHeight = fontSize;
             Vector2 textSize = new(textWidth, textHeight);
@@ -516,12 +735,16 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private string? GetLabelAt(Vector2i position)
     {
-        return CurrentLabelMode switch
-        {
-            LabelMode.Area => _areaLabels.GetValueOrDefault(position),
-            LabelMode.Tactical => TacticalLabels.GetValueOrDefault(position),
-            _ => null
-        };
+        if (CurrentLabelMode == LabelMode.None)
+            return null;
+
+        if (CurrentLabelMode == LabelMode.Tactical)
+            return TacticalLabels.GetValueOrDefault(position);
+
+        if (CurrentLabelMode == LabelMode.Area)
+            return _areaLabels.GetValueOrDefault(position);
+
+        return TacticalLabels.GetValueOrDefault(position) ?? _areaLabels.GetValueOrDefault(position);
     }
 
     private Vector2i SnapToStraightLine(Vector2i start, Vector2i end)
@@ -549,7 +772,7 @@ public sealed partial class TacticalMapControl : TextureRect
         }
     }
 
-    private void AddLineToCanvas(Vector2i start, Vector2i end)
+    private void AddLineToCanvas(Vector2 start, Vector2 end)
     {
         Lines.Add(new TacticalMapLine(start, end, Color, LineThickness));
         LineThicknesses.Add(LineThickness);
@@ -586,6 +809,12 @@ public sealed partial class TacticalMapControl : TextureRect
         );
     }
 
+    public void RequestTacticalLabelEditor(Vector2i position)
+    {
+        var existingText = TacticalLabels.GetValueOrDefault(position) ?? string.Empty;
+        ShowLabelInputDialog(position, existingText);
+    }
+
     protected override void Draw(DrawingHandleScreen handle)
     {
         if (Texture == null)
@@ -605,13 +834,16 @@ public sealed partial class TacticalMapControl : TextureRect
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
 
         UIBox2 textureRect = UIBox2.FromDimensions(actualTopLeft, actualSize);
+        if (_backgroundTexture != null)
+            handle.DrawTextureRect(_backgroundTexture, textureRect);
         handle.DrawTextureRect(Texture, textureRect);
 
         DrawTileGrid(handle, actualTopLeft, actualSize);
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
-        DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
+        DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
+        DrawEraserPreview(handle);
         DrawLabels(handle, overlayScale, actualTopLeft);
     }
 
@@ -786,12 +1018,44 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private void DrawLines(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)
     {
-        for (int i = 0; i < Lines.Count; i++)
+        int i = 0;
+        float joinEpsilonSquared = LineJoinEpsilon * LineJoinEpsilon;
+
+        while (i < Lines.Count)
         {
             TacticalMapLine line = Lines[i];
-            float thickness = line.Thickness > 0 ? line.Thickness :
-                           (i < LineThicknesses.Count ? LineThicknesses[i] : 2.0f);
-            DrawLineWithThickness(handle, line, overlayScale, actualTopLeft, thickness);
+            float thickness = GetLineThickness(i, line);
+            Color color = line.Color;
+
+            var points = new List<Vector2> { line.Start, line.End };
+            int j = i + 1;
+            for (; j < Lines.Count; j++)
+            {
+                TacticalMapLine next = Lines[j];
+                float nextThickness = GetLineThickness(j, next);
+
+                if (next.Color != color || MathF.Abs(nextThickness - thickness) > 0.001f)
+                    break;
+
+                if ((points[^1] - next.Start).LengthSquared() > joinEpsilonSquared)
+                    break;
+
+                points.Add(next.End);
+            }
+
+            if (points.Count >= 3)
+            {
+                DrawSmoothPolyline(handle, points, color, thickness, overlayScale, actualTopLeft);
+            }
+            else
+            {
+                for (int p = 0; p < points.Count - 1; p++)
+                {
+                    DrawLineSegment(handle, points[p], points[p + 1], color, thickness, overlayScale, actualTopLeft, true);
+                }
+            }
+
+            i = j;
         }
     }
 
@@ -809,65 +1073,313 @@ public sealed partial class TacticalMapControl : TextureRect
 
         endIndices = SnapToStraightLine(startIndices, endIndices);
 
-        Vector2i lineStart = ConvertIndicesToLineCoordinates(startIndices);
-        Vector2i lineEnd = ConvertIndicesToLineCoordinates(endIndices);
+        Vector2 lineStart = ConvertIndicesToLineCoordinates(startIndices);
+        Vector2 lineEnd = ConvertIndicesToLineCoordinates(endIndices);
         TacticalMapLine previewLine = new(lineStart, lineEnd, Color.WithAlpha(0.5f), LineThickness);
 
         DrawLineWithThickness(handle, previewLine, overlayScale, actualTopLeft, LineThickness);
     }
 
+    private void DrawEraserPreview(DrawingHandleScreen handle)
+    {
+        if (!Drawing || !EraserMode || _lastMousePosition == null)
+            return;
+
+        float radius = EraserRadiusPixels + LineThickness * 1.5f;
+        Vector2 center = LogicalToPixel(_lastMousePosition.Value);
+        handle.DrawCircle(center, radius, EraserPreviewColor);
+    }
+
     private void DrawLabels(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)
     {
-        Dictionary<Vector2i, string> labelsToDisplay = CurrentLabelMode switch
-        {
-            LabelMode.Area => _areaLabels,
-            LabelMode.Tactical => TacticalLabels,
-            _ => new Dictionary<Vector2i, string>()
-        };
+        if (CurrentLabelMode == LabelMode.None)
+            return;
 
-        foreach ((Vector2i indices, string label) in labelsToDisplay)
+        if (CurrentLabelMode == LabelMode.All)
         {
-            if (_draggingLabel == indices && _currentDragPosition != null)
-            {
-                DrawLabelAtPosition(handle, label, _currentDragPosition.Value, overlayScale, true);
-            }
-            else if (_draggingLabel != indices)
+            foreach ((Vector2i indices, string label) in _areaLabels)
             {
                 Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
                 position = position with { Y = position.Y - LabelYOffset * overlayScale };
-                DrawLabelAtPosition(handle, label, position, overlayScale, false);
+                DrawLabelAtPosition(handle, label, position, overlayScale, AreaLabelColor, AreaLabelBackground, false);
+
+                if (TacticalLabels.TryGetValue(indices, out var tacticalLabel))
+                {
+                    Vector2 tacticalPosition = position + new Vector2(0f, LabelStackOffset * overlayScale);
+                    if (_draggingLabel == indices && _currentDragPosition != null)
+                    {
+                        DrawLabelAtPosition(handle, tacticalLabel, _currentDragPosition.Value, overlayScale, TacticalLabelTextColor, TacticalLabelBackground, true);
+                    }
+                    else
+                    {
+                        DrawLabelAtPosition(handle, tacticalLabel, tacticalPosition, overlayScale, TacticalLabelTextColor, TacticalLabelBackground, false);
+                    }
+                }
             }
+
+            foreach ((Vector2i indices, string label) in TacticalLabels)
+            {
+                if (_areaLabels.ContainsKey(indices))
+                    continue;
+
+                if (_draggingLabel == indices && _currentDragPosition != null)
+                {
+                    DrawLabelAtPosition(handle, label, _currentDragPosition.Value, overlayScale, TacticalLabelTextColor, TacticalLabelBackground, true);
+                }
+                else
+                {
+                    Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+                    position = position with { Y = position.Y - LabelYOffset * overlayScale };
+                    DrawLabelAtPosition(handle, label, position, overlayScale, TacticalLabelTextColor, TacticalLabelBackground, false);
+                }
+            }
+
+            return;
+        }
+
+        bool isTactical = CurrentLabelMode == LabelMode.Tactical;
+        var labelsToDisplay = isTactical ? TacticalLabels : _areaLabels;
+        var textColor = isTactical ? TacticalLabelTextColor : AreaLabelColor;
+        var backgroundColor = isTactical ? TacticalLabelBackground : AreaLabelBackground;
+
+        foreach ((Vector2i indices, string label) in labelsToDisplay)
+        {
+            if (isTactical && _draggingLabel == indices && _currentDragPosition != null)
+            {
+                DrawLabelAtPosition(handle, label, _currentDragPosition.Value, overlayScale, textColor, backgroundColor, true);
+                continue;
+            }
+
+            Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+            position = position with { Y = position.Y - LabelYOffset * overlayScale };
+            DrawLabelAtPosition(handle, label, position, overlayScale, textColor, backgroundColor, false);
         }
     }
 
-    private void DrawLabelAtPosition(DrawingHandleScreen handle, string label, Vector2 position, float overlayScale, bool isDragging)
+    private void DrawLabelAtPosition(
+        DrawingHandleScreen handle,
+        string label,
+        Vector2 position,
+        float overlayScale,
+        Color textColor,
+        Color backgroundColor,
+        bool isDragging)
     {
-        float fontSize = Math.Max(8f, overlayScale * 10f);
+        float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
         VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), (int)fontSize);
 
-        Vector2 drawn = handle.DrawString(labelFont, position, label, Color.Transparent);
-        position -= drawn / 2;
-        drawn = drawn with { X = drawn.X + 4 * overlayScale, Y = drawn.Y + labelFont.GetLineHeight(1.0f) + 2 * overlayScale };
+        Vector2 textSize = handle.GetDimensions(labelFont, label, 1f);
+        position -= textSize / 2;
 
-        Color bgColor = isDragging ? Color.Blue.WithAlpha(0.85f) : Color.Black.WithAlpha(0.85f);
+        float padding = LabelPadding * overlayScale;
+        Vector2 boxSize = textSize + new Vector2(padding * 2f, padding * 2f);
 
-        handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(2 * overlayScale, 0), drawn), bgColor);
-        handle.DrawString(labelFont, position, label, Color.White);
+        Color bgColor = isDragging ? LabelDragBackground : backgroundColor;
+        if (bgColor.A > 0)
+            handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(padding, padding), boxSize), bgColor);
+
+        handle.DrawString(labelFont, position, label, textColor);
     }
 
     private void DrawLineWithThickness(DrawingHandleScreen handle, TacticalMapLine line, float overlayScale, Vector2 actualTopLeft, float thickness)
     {
-        Vector2 start = new Vector2(line.Start.X, line.Start.Y) * overlayScale + actualTopLeft;
-        Vector2 end = new Vector2(line.End.X, line.End.Y) * overlayScale + actualTopLeft;
-        Vector2 diff = end - start;
+        DrawLineSegment(handle, line.Start, line.End, line.Color, thickness, overlayScale, actualTopLeft, true);
+    }
 
-        if (diff.Length() < 1.0f)
+    private void UpdateHoverInfo(Vector2 controlPosition)
+    {
+        if (OnHoverAreaInfo == null || Texture == null)
             return;
 
-        float actualThickness = thickness * overlayScale;
+        Vector2i indices = PositionToIndices(controlPosition);
+        if (!IsWithinMap(indices))
+        {
+            ClearHoverInfo();
+            return;
+        }
 
-        Box2 box = Box2.CenteredAround(start + diff / 2, new Vector2(actualThickness, diff.Length()));
-        Box2Rotated boxRotated = new(box, diff.ToWorldAngle(), start + diff / 2);
+        if (_lastHoverIndices == indices)
+            return;
+
+        _lastHoverIndices = indices;
+
+        TacticalMapAreaInfo info;
+        if (!TryGetAreaInfo(indices, out info))
+            info = CreateFallbackAreaInfo(indices);
+
+        OnHoverAreaInfo?.Invoke(info);
+    }
+
+    private void ClearHoverInfo()
+    {
+        if (_lastHoverIndices == null)
+            return;
+
+        _lastHoverIndices = null;
+        OnHoverAreaInfo?.Invoke(null);
+    }
+
+    private bool IsWithinMap(Vector2i indices)
+    {
+        if (_tileMaskWidth <= 0 || _tileMaskHeight <= 0)
+            return true;
+
+        Vector2i drawPosition = GetDrawPosition(indices);
+        return drawPosition.X >= 0 && drawPosition.Y >= 0 &&
+               drawPosition.X < _tileMaskWidth && drawPosition.Y < _tileMaskHeight;
+    }
+
+    private static TacticalMapAreaInfo CreateFallbackAreaInfo(Vector2i indices)
+    {
+        return new TacticalMapAreaInfo(
+            indices,
+            Loc.GetString("rmc-tacmap-alert-no-area"),
+            null,
+            null,
+            null,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            null);
+    }
+
+    private void DrawLineSegment(
+        DrawingHandleScreen handle,
+        Vector2 start,
+        Vector2 end,
+        Color color,
+        float thickness,
+        float overlayScale,
+        Vector2 actualTopLeft,
+        bool drawCaps)
+    {
+        Vector2 startScreen = start * overlayScale + actualTopLeft;
+        Vector2 endScreen = end * overlayScale + actualTopLeft;
+        Vector2 diff = endScreen - startScreen;
+
+        float actualThickness = thickness * overlayScale;
+        float softThickness = actualThickness + LineSoftEdgePixels;
+        Color softColor = color.WithAlpha(color.A * LineSoftEdgeAlpha);
+
+        if (diff.Length() < 1.0f)
+        {
+            if (!drawCaps)
+                return;
+
+            DrawLineCap(handle, startScreen, softThickness, softColor);
+            DrawLineCap(handle, startScreen, actualThickness, color);
+            return;
+        }
+
+        DrawLineBox(handle, startScreen, diff, softThickness, softColor);
+        DrawLineBox(handle, startScreen, diff, actualThickness, color);
+
+        if (drawCaps)
+        {
+            DrawLineCap(handle, startScreen, softThickness, softColor);
+            DrawLineCap(handle, endScreen, softThickness, softColor);
+            DrawLineCap(handle, startScreen, actualThickness, color);
+            DrawLineCap(handle, endScreen, actualThickness, color);
+        }
+    }
+
+    private void DrawLineCaps(
+        DrawingHandleScreen handle,
+        Vector2 start,
+        Vector2 end,
+        Color color,
+        float thickness,
+        float overlayScale,
+        Vector2 actualTopLeft)
+    {
+        Vector2 startScreen = start * overlayScale + actualTopLeft;
+        Vector2 endScreen = end * overlayScale + actualTopLeft;
+
+        float actualThickness = thickness * overlayScale;
+        float softThickness = actualThickness + LineSoftEdgePixels;
+        Color softColor = color.WithAlpha(color.A * LineSoftEdgeAlpha);
+
+        DrawLineCap(handle, startScreen, softThickness, softColor);
+        DrawLineCap(handle, endScreen, softThickness, softColor);
+        DrawLineCap(handle, startScreen, actualThickness, color);
+        DrawLineCap(handle, endScreen, actualThickness, color);
+    }
+
+    private void DrawSmoothPolyline(
+        DrawingHandleScreen handle,
+        List<Vector2> points,
+        Color color,
+        float thickness,
+        float overlayScale,
+        Vector2 actualTopLeft)
+    {
+        if (points.Count < 2)
+            return;
+
+        float step = SmoothSamplePixels / Math.Max(overlayScale, 0.001f);
+        Vector2? previous = null;
+
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            Vector2 p0 = i > 0 ? points[i - 1] : points[i];
+            Vector2 p1 = points[i];
+            Vector2 p2 = points[i + 1];
+            Vector2 p3 = i + 2 < points.Count ? points[i + 2] : points[i + 1];
+
+            float segmentLength = (p2 - p1).Length();
+            int steps = Math.Max(1, (int)MathF.Ceiling(segmentLength / step));
+
+            for (int s = 0; s <= steps; s++)
+            {
+                float t = s / (float)steps;
+                Vector2 position = CatmullRom(p0, p1, p2, p3, t);
+
+                if (previous != null)
+                    DrawLineSegment(handle, previous.Value, position, color, thickness, overlayScale, actualTopLeft, false);
+
+                previous = position;
+            }
+        }
+
+        DrawLineCaps(handle, points[0], points[^1], color, thickness, overlayScale, actualTopLeft);
+    }
+
+    private static Vector2 CatmullRom(Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3, float t)
+    {
+        float t2 = t * t;
+        float t3 = t2 * t;
+
+        return 0.5f * (
+            (2f * p1) +
+            (-p0 + p2) * t +
+            (2f * p0 - 5f * p1 + 4f * p2 - p3) * t2 +
+            (-p0 + 3f * p1 - 3f * p2 + p3) * t3
+        );
+    }
+
+    private float GetLineThickness(int index, TacticalMapLine line)
+    {
+        return line.Thickness > 0
+            ? line.Thickness
+            : (index < LineThicknesses.Count ? LineThicknesses[index] : 2.0f);
+    }
+
+    private void DrawLineBox(DrawingHandleScreen handle, Vector2 start, Vector2 diff, float thickness, Color color)
+    {
+        if (diff.Length() < 0.001f)
+            return;
+
+        Vector2 center = start + diff / 2;
+        Box2 box = Box2.CenteredAround(center, new Vector2(thickness, diff.Length()));
+        Box2Rotated boxRotated = new(box, diff.ToWorldAngle(), center);
 
         _reusableLineVectors[0] = boxRotated.BottomLeft;
         _reusableLineVectors[1] = boxRotated.BottomRight;
@@ -876,7 +1388,16 @@ public sealed partial class TacticalMapControl : TextureRect
         _reusableLineVectors[4] = boxRotated.TopLeft;
         _reusableLineVectors[5] = boxRotated.TopRight;
 
-        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _reusableLineVectors, line.Color);
+        handle.DrawPrimitives(DrawPrimitiveTopology.TriangleList, _reusableLineVectors, color);
+    }
+
+    private void DrawLineCap(DrawingHandleScreen handle, Vector2 position, float thickness, Color color)
+    {
+        float radius = thickness / 2f;
+        if (radius <= 0.01f)
+            return;
+
+        handle.DrawCircle(position, radius, color);
     }
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
@@ -898,12 +1419,6 @@ public sealed partial class TacticalMapControl : TextureRect
         }
         else if (args.Function == EngineKeyFunctions.UIRightClick)
         {
-            if (HandleLabelRightClick(args))
-                return;
-
-            if (HandleBlipRightClick(args))
-                return;
-
             HandlePanningStart(args);
         }
     }
@@ -963,9 +1478,18 @@ public sealed partial class TacticalMapControl : TextureRect
         if (Drawing && !LabelEditMode)
         {
             _dragging = true;
-            _dragStart = LogicalToPixel(args.RelativePosition).Floored();
+            Vector2 startPixel = LogicalToPixel(args.RelativePosition);
+            _dragStart = startPixel.Floored();
             _lastDrag = _dragStart;
             _previewEnd = _dragStart;
+            _lastErasePosition = null;
+
+            if (EraserMode)
+            {
+                _lastErasePosition = startPixel;
+                TryEraseAt(args.RelativePosition);
+            }
+
             OnUserInteraction?.Invoke();
             args.Handle();
         }
@@ -973,17 +1497,17 @@ public sealed partial class TacticalMapControl : TextureRect
 
     private bool HandleLabelRightClick(GUIBoundKeyEventArgs args)
     {
-        if (LabelEditMode && Drawing && CurrentLabelMode == LabelMode.Tactical)
-        {
-            Vector2i? labelPosition = GetLabelAtPosition(args.RelativePosition);
-            if (labelPosition != null)
-            {
-                OnDeleteLabel?.Invoke(labelPosition.Value);
-                args.Handle();
-                return true;
-            }
-        }
-        return false;
+        Vector2i? labelPosition = GetTacticalLabelAtPosition(args.RelativePosition);
+        if (labelPosition == null)
+            return false;
+
+        string? existingText = TacticalLabels.GetValueOrDefault(labelPosition.Value);
+        if (string.IsNullOrWhiteSpace(existingText))
+            return false;
+
+        ShowLabelInputDialog(labelPosition.Value, existingText);
+        args.Handle();
+        return true;
     }
 
     private bool HandleBlipRightClick(GUIBoundKeyEventArgs args)
@@ -998,11 +1522,35 @@ public sealed partial class TacticalMapControl : TextureRect
         return false;
     }
 
+    private void HandleRightClickAction(GUIBoundKeyEventArgs args)
+    {
+        if (HandleLabelRightClick(args))
+            return;
+
+        if (HandleBlipRightClick(args))
+            return;
+
+        HandleContextMenuRequest(args);
+    }
+
+    private bool HandleContextMenuRequest(GUIBoundKeyEventArgs args)
+    {
+        if (OnContextMenuRequested == null || Texture == null)
+            return false;
+
+        Vector2i clickPosition = PositionToIndices(args.RelativePosition);
+        OnContextMenuRequested.Invoke(this, clickPosition, args.PointerLocation.Position);
+        args.Handle();
+        return true;
+    }
+
     private void HandlePanningStart(GUIBoundKeyEventArgs args)
     {
         HideTunnelInfo();
         _rightClickPanning = true;
-        _lastPanPosition = LogicalToPixel(args.RelativePosition);
+        _rightClickMoved = false;
+        _rightClickStartPosition = LogicalToPixel(args.RelativePosition);
+        _lastPanPosition = _rightClickStartPosition;
         args.Handle();
     }
 
@@ -1038,7 +1586,7 @@ public sealed partial class TacticalMapControl : TextureRect
             }
             else if (_dragging && Drawing && !LabelEditMode)
             {
-                if (_dragStart != null && StraightLineMode)
+                if (!EraserMode && _dragStart != null && StraightLineMode)
                 {
                     Vector2i currentPos = LogicalToPixel(args.RelativePosition).Floored();
                     Vector2i diff = currentPos - _dragStart.Value;
@@ -1051,8 +1599,8 @@ public sealed partial class TacticalMapControl : TextureRect
                         if (StraightLineMode)
                             endIndices = SnapToStraightLine(startIndices, endIndices);
 
-                        Vector2i lineStart = ConvertIndicesToLineCoordinates(startIndices);
-                        Vector2i lineEnd = ConvertIndicesToLineCoordinates(endIndices);
+                        Vector2 lineStart = ConvertIndicesToLineCoordinates(startIndices);
+                        Vector2 lineEnd = ConvertIndicesToLineCoordinates(endIndices);
                         AddLineToCanvas(lineStart, lineEnd);
                     }
                 }
@@ -1061,13 +1609,19 @@ public sealed partial class TacticalMapControl : TextureRect
                 _lastDrag = null;
                 _dragStart = null;
                 _previewEnd = null;
+                _lastErasePosition = null;
                 args.Handle();
             }
         }
         else if (args.Function == EngineKeyFunctions.UIRightClick)
         {
+            if (!_rightClickMoved)
+                HandleRightClickAction(args);
+
             _rightClickPanning = false;
             _lastPanPosition = null;
+            _rightClickStartPosition = null;
+            _rightClickMoved = false;
             args.Handle();
         }
     }
@@ -1076,6 +1630,8 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         base.MouseMove(args);
 
+        _lastMousePosition = args.RelativePosition;
+
         if (_draggingLabel != null)
         {
             _currentDragPosition = LogicalToPixel(args.RelativePosition);
@@ -1083,9 +1639,19 @@ public sealed partial class TacticalMapControl : TextureRect
         }
         else if (_dragging && Drawing && !LabelEditMode)
         {
-            Vector2i currentPos = LogicalToPixel(args.RelativePosition).Floored();
+            Vector2 currentPixelPos = LogicalToPixel(args.RelativePosition);
+            Vector2i currentPos = currentPixelPos.Floored();
 
-            if (StraightLineMode)
+            if (EraserMode)
+            {
+                if (_lastErasePosition == null ||
+                    (currentPixelPos - _lastErasePosition.Value).Length() >= MinEraserSegmentPixels)
+                {
+                    TryEraseAt(args.RelativePosition);
+                    _lastErasePosition = currentPixelPos;
+                }
+            }
+            else if (StraightLineMode)
             {
                 _previewEnd = currentPos;
             }
@@ -1096,11 +1662,35 @@ public sealed partial class TacticalMapControl : TextureRect
                     Vector2i diff = currentPos - _lastDrag.Value;
                     if (diff.Length >= MinDragDistance)
                     {
-                        Vector2i startIndices = PositionToIndices(PixelToLogical(new Vector2(_lastDrag.Value.X, _lastDrag.Value.Y)));
-                        Vector2i endIndices = PositionToIndices(args.RelativePosition);
-                        Vector2i lineStart = ConvertIndicesToLineCoordinates(startIndices);
-                        Vector2i lineEnd = ConvertIndicesToLineCoordinates(endIndices);
-                        AddLineToCanvas(lineStart, lineEnd);
+                        if (Texture == null)
+                            return;
+
+                        (_, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
+                        float minSegment = MinFreehandSegmentPixels / Math.Max(overlayScale, 0.001f);
+
+                        Vector2 lineStart = PositionToLineCoordinatesFloat(
+                            PixelToLogical(new Vector2(_lastDrag.Value.X, _lastDrag.Value.Y)),
+                            actualTopLeft,
+                            overlayScale);
+                        Vector2 lineEnd = PositionToLineCoordinatesFloat(
+                            args.RelativePosition,
+                            actualTopLeft,
+                            overlayScale);
+
+                        Vector2 delta = lineEnd - lineStart;
+                        float distance = delta.Length();
+                        if (distance >= minSegment)
+                        {
+                            int steps = (int)MathF.Ceiling(distance / minSegment);
+                            Vector2 step = delta / steps;
+                            Vector2 prev = lineStart;
+                            for (int i = 1; i <= steps; i++)
+                            {
+                                Vector2 next = lineStart + step * i;
+                                AddLineSegment(prev, next);
+                                prev = next;
+                            }
+                        }
                         _lastDrag = currentPos;
                     }
                 }
@@ -1110,6 +1700,22 @@ public sealed partial class TacticalMapControl : TextureRect
         else if (_rightClickPanning && _lastPanPosition != null)
         {
             Vector2 currentPixelPos = LogicalToPixel(args.RelativePosition);
+
+            if (_rightClickStartPosition == null)
+            {
+                _rightClickStartPosition = currentPixelPos;
+                _lastPanPosition = currentPixelPos;
+            }
+
+            if (!_rightClickMoved)
+            {
+                if ((currentPixelPos - _rightClickStartPosition.Value).Length() < MinDragDistance)
+                    return;
+
+                _rightClickMoved = true;
+                _lastPanPosition = currentPixelPos;
+            }
+
             Vector2 panDelta = currentPixelPos - _lastPanPosition.Value;
 
             _panOffset += panDelta;
@@ -1119,6 +1725,15 @@ public sealed partial class TacticalMapControl : TextureRect
             _lastPanPosition = currentPixelPos;
             args.Handle();
         }
+
+        UpdateHoverInfo(args.RelativePosition);
+    }
+
+    protected override void MouseExited()
+    {
+        base.MouseExited();
+        _lastMousePosition = null;
+        ClearHoverInfo();
     }
 
     protected override void MouseWheel(GUIMouseWheelEventArgs args)
@@ -1181,9 +1796,9 @@ public sealed partial class TacticalMapControl : TextureRect
 
         if (waypoints.Count == 2)
         {
-            Vector2i startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
-            Vector2i endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
-            double distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
+            Vector2 startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
+            Vector2 endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
+            float distance = Vector2.Distance(startPos, endPos);
             float scaledBlipSize = BaseBlipSize;
 
             if (distance < scaledBlipSize * 1.2f)
@@ -1195,25 +1810,22 @@ public sealed partial class TacticalMapControl : TextureRect
             Vector2i start = waypoints[i];
             Vector2i end = waypoints[i + 1];
 
-            Vector2i fromPoint = GetEdgePoint(start, end, true);
-            Vector2i toPoint = GetEdgePoint(start, end, false);
+            Vector2 fromPoint = GetEdgePoint(start, end, true);
+            Vector2 toPoint = GetEdgePoint(start, end, false);
 
             if (i == waypoints.Count - 2)
             {
-                Vector2i direction = toPoint - fromPoint;
-                double lineLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+                Vector2 direction = toPoint - fromPoint;
+                float lineLength = direction.Length();
 
-                if (lineLength > 0)
+                if (lineLength > 0f)
                 {
                     float scaledBlipSize = BaseBlipSize;
-                    int arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
+                    float arrowStartOffset = scaledBlipSize * 0.45f + ArrowLength;
 
                     if (lineLength > arrowStartOffset)
                     {
-                        toPoint = new Vector2i(
-                            toPoint.X - (int)(direction.X / lineLength * arrowStartOffset),
-                            toPoint.Y - (int)(direction.Y / lineLength * arrowStartOffset)
-                        );
+                        toPoint -= direction / lineLength * arrowStartOffset;
                     }
                 }
             }
@@ -1241,9 +1853,9 @@ public sealed partial class TacticalMapControl : TextureRect
 
         if (waypoints.Count == 2)
         {
-            Vector2i startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
-            Vector2i endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
-            double distance = Math.Sqrt(Math.Pow(endPos.X - startPos.X, 2) + Math.Pow(endPos.Y - startPos.Y, 2));
+            Vector2 startPos = ConvertIndicesToLineCoordinates(waypoints[0]);
+            Vector2 endPos = ConvertIndicesToLineCoordinates(waypoints[1]);
+            float distance = Vector2.Distance(startPos, endPos);
             float scaledBlipSize = BaseBlipSize;
 
             if (distance < scaledBlipSize * 1.2f)
@@ -1252,25 +1864,22 @@ public sealed partial class TacticalMapControl : TextureRect
 
         for (int i = 0; i < waypoints.Count - 1; i++)
         {
-            Vector2i fromPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], true);
-            Vector2i toPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], false);
+            Vector2 fromPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], true);
+            Vector2 toPoint = GetClosestEdgePoint(waypoints[i], waypoints[i + 1], false);
 
             if (i == waypoints.Count - 2)
             {
-                Vector2i direction = toPoint - fromPoint;
-                double lineLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+                Vector2 direction = toPoint - fromPoint;
+                float lineLength = direction.Length();
 
-                if (lineLength > 0)
+                if (lineLength > 0f)
                 {
                     float scaledBlipSize = BaseBlipSize;
-                    int arrowStartOffset = (int)(scaledBlipSize * 0.45f + ArrowLength);
+                    float arrowStartOffset = scaledBlipSize * 0.45f + ArrowLength;
 
                     if (lineLength > arrowStartOffset)
                     {
-                        toPoint = new Vector2i(
-                            toPoint.X - (int)(direction.X / lineLength * arrowStartOffset),
-                            toPoint.Y - (int)(direction.Y / lineLength * arrowStartOffset)
-                        );
+                        toPoint -= direction / lineLength * arrowStartOffset;
                     }
                 }
             }
@@ -1288,74 +1897,62 @@ public sealed partial class TacticalMapControl : TextureRect
         }
     }
 
-    private Vector2i GetClosestEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
+    private Vector2 GetClosestEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
     {
-        Vector2i fromUI = ConvertIndicesToLineCoordinates(fromIndices);
-        Vector2i toUI = ConvertIndicesToLineCoordinates(toIndices);
-        Vector2i sourcePoint = getFromPoint ? fromUI : toUI;
-        Vector2i targetPoint = getFromPoint ? toUI : fromUI;
-        Vector2i direction = targetPoint - sourcePoint;
-        double distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+        Vector2 fromUI = ConvertIndicesToLineCoordinates(fromIndices);
+        Vector2 toUI = ConvertIndicesToLineCoordinates(toIndices);
+        Vector2 sourcePoint = getFromPoint ? fromUI : toUI;
+        Vector2 targetPoint = getFromPoint ? toUI : fromUI;
+        Vector2 direction = targetPoint - sourcePoint;
+        float distance = direction.Length();
 
-        if (distance == 0)
+        if (distance == 0f)
             return sourcePoint;
 
-        int edgeOffset = (int)(BaseBlipSize * BlipEdgeRatio);
+        float edgeOffset = BaseBlipSize * BlipEdgeRatio;
         if (distance < edgeOffset * CloseBlipThreshold)
-            edgeOffset = (int)(edgeOffset * (distance / (edgeOffset * CloseBlipThreshold)) * CloseBlipSafety);
+            edgeOffset = edgeOffset * (distance / (edgeOffset * CloseBlipThreshold)) * CloseBlipSafety;
 
-        return new Vector2i(
-            sourcePoint.X + (int)(direction.X / distance * edgeOffset),
-            sourcePoint.Y + (int)(direction.Y / distance * edgeOffset)
-        );
+        return sourcePoint + direction / distance * edgeOffset;
     }
 
-    private Vector2i GetEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
+    private Vector2 GetEdgePoint(Vector2i fromIndices, Vector2i toIndices, bool getFromPoint)
     {
-        Vector2i fromUI = ConvertIndicesToLineCoordinates(fromIndices);
-        Vector2i toUI = ConvertIndicesToLineCoordinates(toIndices);
-        Vector2i sourcePoint = getFromPoint ? fromUI : toUI;
-        Vector2i targetPoint = getFromPoint ? toUI : fromUI;
-        Vector2i direction = targetPoint - sourcePoint;
-        double distance = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+        Vector2 fromUI = ConvertIndicesToLineCoordinates(fromIndices);
+        Vector2 toUI = ConvertIndicesToLineCoordinates(toIndices);
+        Vector2 sourcePoint = getFromPoint ? fromUI : toUI;
+        Vector2 targetPoint = getFromPoint ? toUI : fromUI;
+        Vector2 direction = targetPoint - sourcePoint;
+        float distance = direction.Length();
 
-        if (distance == 0)
+        if (distance == 0f)
             return sourcePoint;
 
         float scaledBlipSize = BaseBlipSize;
-        int edgeOffset = (int)(scaledBlipSize * 0.4f);
-        int minOffset = (int)(scaledBlipSize * 0.2f);
+        float edgeOffset = scaledBlipSize * 0.4f;
+        float minOffset = scaledBlipSize * 0.2f;
 
         if (distance < scaledBlipSize * 1.5f)
         {
-            edgeOffset = Math.Max(minOffset, (int)(distance * 0.3f));
+            edgeOffset = Math.Max(minOffset, distance * 0.3f);
         }
 
-        return new Vector2i(
-            sourcePoint.X + (int)(direction.X / distance * edgeOffset),
-            sourcePoint.Y + (int)(direction.Y / distance * edgeOffset)
-        );
+        return sourcePoint + direction / distance * edgeOffset;
     }
 
-    private void AddDashedSegment(Vector2i fromUI, Vector2i toUI, Color color)
+    private void AddDashedSegment(Vector2 fromUI, Vector2 toUI, Color color)
     {
-        Vector2i direction = toUI - fromUI;
-        double totalLength = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+        Vector2 direction = toUI - fromUI;
+        float totalLength = direction.Length();
 
-        if (totalLength < 1)
+        if (totalLength < 1f)
             return;
 
-        for (double distance = 0; distance < totalLength; distance += DashLength + GapLength)
+        for (float distance = 0; distance < totalLength; distance += DashLength + GapLength)
         {
             Lines.Add(new TacticalMapLine(
-                new Vector2i(
-                    fromUI.X + (int)(direction.X / totalLength * distance),
-                    fromUI.Y + (int)(direction.Y / totalLength * distance)
-                ),
-                new Vector2i(
-                    fromUI.X + (int)(direction.X / totalLength * Math.Min(distance + DashLength, totalLength)),
-                    fromUI.Y + (int)(direction.Y / totalLength * Math.Min(distance + DashLength, totalLength))
-                ),
+                fromUI + direction / totalLength * distance,
+                fromUI + direction / totalLength * Math.Min(distance + DashLength, totalLength),
                 color,
                 LineThickness
             ));
@@ -1363,39 +1960,26 @@ public sealed partial class TacticalMapControl : TextureRect
         }
     }
 
-    private void AddSimpleArrowHead(Vector2i start, Vector2i end, Color color)
+    private void AddSimpleArrowHead(Vector2 start, Vector2 end, Color color)
     {
-        Vector2i direction = end - start;
-        double length = Math.Sqrt(direction.X * direction.X + direction.Y * direction.Y);
+        Vector2 direction = end - start;
+        float length = direction.Length();
 
-        if (length < 10)
+        if (length < 10f)
             return;
 
         float scaledBlipSize = BaseBlipSize;
-        int blipEdgeOffset = (int)(scaledBlipSize * 0.45f);
+        float blipEdgeOffset = scaledBlipSize * 0.45f;
 
-        Vector2i arrowTip = new(
-            end.X - (int)(direction.X / length * blipEdgeOffset),
-            end.Y - (int)(direction.Y / length * blipEdgeOffset)
-        );
+        Vector2 arrowTip = end - direction / length * blipEdgeOffset;
 
-        Vector2i arrowBase = new(
-            arrowTip.X - (int)(direction.X / length * ArrowLength),
-            arrowTip.Y - (int)(direction.Y / length * ArrowLength)
-        );
+        Vector2 arrowBase = arrowTip - direction / length * ArrowLength;
 
-        double perpX = -direction.Y / length;
-        double perpY = direction.X / length;
+        Vector2 perp = new(-direction.Y / length, direction.X / length);
 
-        Vector2i leftWing = new(
-            arrowBase.X + (int)(perpX * ArrowWidth),
-            arrowBase.Y + (int)(perpY * ArrowWidth)
-        );
+        Vector2 leftWing = arrowBase + perp * ArrowWidth;
 
-        Vector2i rightWing = new(
-            arrowBase.X - (int)(perpX * ArrowWidth),
-            arrowBase.Y - (int)(perpY * ArrowWidth)
-        );
+        Vector2 rightWing = arrowBase - perp * ArrowWidth;
 
         Lines.Add(new TacticalMapLine(arrowTip, leftWing, color, LineThickness));
         LineThicknesses.Add(LineThickness);

@@ -66,7 +66,8 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
             LayoutContainer.SetPosition(this, targetPosition);
         }
 
-        OnPopout += () => Wrapper.ColorsButton.Visible = false;
+        OnPopout += () => Wrapper.PopoutButton.Visible = false;
+        Wrapper.PopoutRequested += PopOut;
         OnClose += OnWindowClose;
     }
 

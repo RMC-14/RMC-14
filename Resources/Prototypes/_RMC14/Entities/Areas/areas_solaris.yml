@@ -779,6 +779,9 @@
   components:
   - type: Sprite
     state: bluenew
+  - type: Area
+    excludeFromTacMapBounds: false
+    excludeFromTacMapRender: false
 
 - type: entity
   parent: RMCAreaBigredv2Caves

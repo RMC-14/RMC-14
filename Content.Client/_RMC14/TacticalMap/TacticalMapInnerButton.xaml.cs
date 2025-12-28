@@ -13,10 +13,10 @@ public sealed partial class TacticalMapInnerButton : Button
 {
     public static readonly Color DefaultHoveredColor = Color.White;
     public static readonly Color DefaultUnhoveredColor = Color.White;
-    public static readonly Color DefaultTextColor = Color.FromHex("#88C7FA");
-    public static readonly Color DefaultHoveredTextColor = Color.FromHex("#E6F3FF");
+    public static readonly Color DefaultTextColor = Color.FromHex("#8AB4FF");
+    public static readonly Color DefaultHoveredTextColor = Color.FromHex("#A3C5FF");
     public static readonly Color DefaultDisabledColor = Color.White;
-    public static readonly Color DefaultDisabledTextColor = Color.FromHex("#4AA3E8");
+    public static readonly Color DefaultDisabledTextColor = Color.FromHex("#6FB7FF");
 
     private bool _initialized;
     private string? _text;

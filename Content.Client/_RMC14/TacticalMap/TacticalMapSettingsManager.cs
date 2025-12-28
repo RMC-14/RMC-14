@@ -109,7 +109,7 @@ public sealed class TacticalMapSettingsManager
             new TacticalMapSettingRegistration
             {
                 Key = "LabelMode",
-                Value = (int) TacticalMapControl.LabelMode.Area,
+                Value = (int) TacticalMapControl.LabelMode.All,
                 PlanetId = null
             },
             new TacticalMapSettingRegistration
@@ -341,11 +341,11 @@ public sealed class TacticalMapSettingsManager
                 GetSettingValue<float>("PanOffsetX", planetId, 0.0f),
                 GetSettingValue<float>("PanOffsetY", planetId, 0.0f)
             ),
-            BlipSizeMultiplier = GetSettingValue<float>("BlipSizeMultiplier", planetId, 1.0f),
+            BlipSizeMultiplier = GetSettingValue<float>("BlipSizeMultiplier", planetId, 0.9f),
             LineThickness = GetSettingValue<float>("LineThickness", planetId, 2.0f),
             SelectedColorIndex = GetSettingValue<int>("SelectedColorIndex", planetId, 0),
             SettingsVisible = GetSettingValue<bool>("SettingsVisible", planetId, false),
-            LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, (int) TacticalMapControl.LabelMode.Area),
+            LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, (int) TacticalMapControl.LabelMode.All),
             WindowSize = new Vector2(
                 GetSettingValue<float>("WindowWidth", planetId, 1000.0f),
                 GetSettingValue<float>("WindowHeight", planetId, 800.0f)
@@ -604,7 +604,7 @@ public struct TacticalMapSettings()
     public float LineThickness;
     public int SelectedColorIndex;
     public bool SettingsVisible;
-    public TacticalMapControl.LabelMode LabelMode = TacticalMapControl.LabelMode.Area;
+    public TacticalMapControl.LabelMode LabelMode = TacticalMapControl.LabelMode.All;
     public Vector2 WindowSize;
     public Vector2 WindowPosition;
 }
