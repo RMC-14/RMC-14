@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
@@ -26,7 +27,7 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
             _menu.Title = metadata.EntityName;
 
         _menu.OnSelect += slotId => SendMessage(new RMCVehicleWeaponsSelectMessage(slotId));
-        _menu.OpenCentered();
+        _menu.OpenCenteredAt(new Vector2(0.1f, 0.9f));
     }
 
     protected override void Dispose(bool disposing)

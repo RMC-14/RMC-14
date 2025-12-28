@@ -10,7 +10,6 @@ namespace Content.Client._RMC14.Vehicle.Ui;
 public sealed partial class RMCVehiclePortGunMenu : FancyWindow
 {
     public event Action? OnEject;
-    private readonly Label _gunTitle;
     private readonly Label _ammoLabel;
     private readonly Label _magazineLabel;
     private readonly Button _ejectButton;
@@ -18,7 +17,6 @@ public sealed partial class RMCVehiclePortGunMenu : FancyWindow
     public RMCVehiclePortGunMenu()
     {
         RobustXamlLoader.Load(this);
-        _gunTitle = FindControl<Label>("GunTitle");
         _ammoLabel = FindControl<Label>("AmmoLabel");
         _magazineLabel = FindControl<Label>("MagazineLabel");
         _ejectButton = FindControl<Button>("EjectButton");
@@ -31,7 +29,6 @@ public sealed partial class RMCVehiclePortGunMenu : FancyWindow
     public void SetGunName(string name)
     {
         Title = name;
-        _gunTitle.Text = name;
     }
 
     public void Update(RMCVehiclePortGunUiState state)

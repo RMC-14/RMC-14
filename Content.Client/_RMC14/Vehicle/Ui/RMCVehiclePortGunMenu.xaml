@@ -14,8 +14,6 @@
         </PanelContainer.PanelOverride>
 
         <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8" HorizontalExpand="True" VerticalExpand="True">
-            <Label Name="GunTitle" Text="Port Gun" StyleClasses="LabelHeading"/>
-
             <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
                 <Label Name="AmmoLabel" Text="Ammo: --" FontColorOverride="#9DB5D1"/>
                 <Label Name="MagazineLabel" Text="Magazine: --" FontColorOverride="#9DB5D1"/>

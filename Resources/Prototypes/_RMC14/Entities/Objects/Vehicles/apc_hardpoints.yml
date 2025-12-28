@@ -87,11 +87,11 @@
     magazineSize: 60
     maxStoredMagazines: 2
   - type: GunFireArc
-    arc: 180
+    arc: 120
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxAceAutocannon
   - type: GunMuzzleOffset
-    offset: "1.0,0"
+    offset: "-0.2,1"
     muzzleOffset: "0.5,0"
     useAimDirection: true
   - type: RMCHardpointVisual
