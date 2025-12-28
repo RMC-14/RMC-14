@@ -12,6 +12,7 @@ using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Whitelist;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -762,7 +763,16 @@ public sealed class CMGunSystem : EntitySystem
     public bool TryGetGunUser(EntityUid gun, out Entity<HandsComponent> user)
     {
         if (_container.TryGetContainingContainer((gun, null), out var container) &&
-            TryComp(container.Owner, out HandsComponent? hands))
+            TryComp(container.Owner, out RMCVehicleWeaponsComponent? weapons) &&
+            weapons.Operator is { } operatorUid &&
+            weapons.SelectedWeapon == gun &&
+            TryComp(operatorUid, out HandsComponent? operatorHands))
+        {
+            user = (operatorUid, operatorHands);
+            return true;
+        }
+
+        if (container != null && TryComp(container.Owner, out HandsComponent? hands))
         {
             user = (container.Owner, hands);
             return true;

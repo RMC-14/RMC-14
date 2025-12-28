@@ -164,3 +164,5 @@ public sealed partial class RMCHardpointRepairDoAfterEvent : DoAfterEvent
         return new RMCHardpointRepairDoAfterEvent();
     }
 }
+
+public readonly record struct RMCHardpointSlotsChangedEvent(EntityUid Vehicle);

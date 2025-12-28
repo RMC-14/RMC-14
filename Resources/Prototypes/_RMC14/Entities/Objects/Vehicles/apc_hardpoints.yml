@@ -1,0 +1,137 @@
+- type: entity
+  parent: BaseItem
+  id: RMCAPCHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/apc.rsi
+  - type: Item
+    size: Large
+  - type: RMCHardpointIntegrity
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCWheel
+  name: APC wheel
+  description: A reinforced APC wheel.
+  components:
+  - type: Sprite
+    state: tires
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+  - type: RMCVehicleWheelItem
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFrontCannon
+  name: APC frontal cannon
+  description: A fixed forward cannon for an APC hardpoint.
+  components:
+  - type: Sprite
+    state: front_cannon
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    cameraRecoilScalar: 0
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridgeSentry10x50mm
+    capacity: 200
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 200
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxFrontal
+  - type: GunMuzzleOffset
+    offset: "1.2,0"
+    muzzleOffset: "0.5,0"
+    useAimDirection: true
+  - type: RMCHardpointVisual
+    vehicleState: frontalcannon_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCDualCannon
+  name: APC dual cannon
+  description: A dual cannon turret for an APC hardpoint.
+  components:
+  - type: Sprite
+    state: dual_cannon
+  - type: RMCHardpointItem
+    hardpointType: Primary
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 4
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    cameraRecoilScalar: 0
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridgeSentry10x50mm
+    capacity: 60
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 60
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxAceAutocannon
+  - type: GunMuzzleOffset
+    offset: "1.0,0"
+    muzzleOffset: "0.5,0"
+    useAimDirection: true
+  - type: RMCHardpointVisual
+    vehicleState: dualcannon_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCCommsRelay
+  name: APC comms relay
+  description: A communications relay array for APC support slots.
+  components:
+  - type: Sprite
+    state: comms_relay
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: RMCHardpointVisual
+    vehicleState: comms_relay_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFlareLauncher
+  name: APC flare launcher
+  description: A flare launcher hardpoint for APC support slots.
+  components:
+  - type: Sprite
+    state: flare_launcher
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: RMCHardpointVisual
+    vehicleState: flare_launcher_0
+
+- type: entity
+  parent: RMCAPCHardpointBase
+  id: RMCAPCFreightStorage
+  name: APC freight storage
+  description: A cargo pod for APC support slots.
+  components:
+  - type: Sprite
+    state: freighter_storage
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: RMCHardpointVisual
+    vehicleState: freight_0

@@ -96,6 +96,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         RefreshCanRun(ent.Owner);
         UpdateHardpointUi(ent.Owner, ent.Comp);
+        RaiseHardpointSlotsChanged(ent.Owner);
     }
 
     private void OnRemoved(Entity<RMCHardpointSlotsComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -106,6 +107,13 @@ public sealed class RMCHardpointSystem : EntitySystem
         RefreshCanRun(ent.Owner);
         ent.Comp.PendingRemovals.Remove(args.Container.ID);
         UpdateHardpointUi(ent.Owner, ent.Comp);
+        RaiseHardpointSlotsChanged(ent.Owner);
+    }
+
+    private void RaiseHardpointSlotsChanged(EntityUid vehicle)
+    {
+        var ev = new RMCHardpointSlotsChangedEvent(vehicle);
+        RaiseLocalEvent(vehicle, ev, broadcast: true);
     }
 
     private void OnInsertAttempt(Entity<RMCHardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)

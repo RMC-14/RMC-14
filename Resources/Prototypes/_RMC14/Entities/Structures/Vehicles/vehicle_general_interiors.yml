@@ -1,0 +1,350 @@
+- type: entity
+  abstract: true
+  id: RMCVehicleInteriorGeneralBase
+  name: vehicle interior piece
+  description: A decorative vehicle interior fixture.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    drawdepth: Overdoors
+  - type: InteractionOutline
+  - type: Clickable
+  - type: InteractionTransparency
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleAmmoLoader
+  name: vehicle ammo loader
+  description: A loader for vehicle hardpoint ammunition.
+  components:
+  - type: Sprite
+    state: weapons_loader
+  - type: RMCVehicleAmmoLoader
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleAmmoLoaderUiKey.Key:
+        type: RMCVehicleAmmoLoaderBoundUserInterface
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorArmorChairOld
+  name: armor chair (old)
+  components:
+  - type: Sprite
+    state: armor_chair_old
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorArmorChairUnfold
+  name: armor chair (unfolded)
+  components:
+  - type: Sprite
+    state: armor_chair_unfold
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorArmorChair
+  name: armor chair
+  components:
+  - type: Sprite
+    state: armor_chair
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorArmorChairBuckled
+  name: armor chair (buckled)
+  components:
+  - type: Sprite
+    state: armor_chair_buckled
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorVehicleSeat
+  name: vehicle seat
+  components:
+  - type: Sprite
+    state: vehicle_seat
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorVehicleSeatBuckled
+  name: vehicle seat (buckled)
+  components:
+  - type: Sprite
+    state: vehicle_seat_buckled
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorVehicleBars
+  name: vehicle bars
+  components:
+  - type: Sprite
+    state: vehicle_bars
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorVehicleSeatDestroyed
+  name: vehicle seat (destroyed)
+  components:
+  - type: Sprite
+    state: vehicle_seat_destroyed
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorLockerOpen
+  name: interior locker (open)
+  components:
+  - type: Sprite
+    state: locker_open
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorLocker
+  name: interior locker
+  components:
+  - type: Sprite
+    state: locker
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorLockerMedical
+  name: interior locker (medical)
+  components:
+  - type: Sprite
+    state: locker_med
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorExtinguisher
+  name: interior extinguisher
+  components:
+  - type: Sprite
+    state: extinguisher
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorExtinguisherClosed
+  name: interior extinguisher (closed)
+  components:
+  - type: Sprite
+    state: extinguisher_closed
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorExtinguisherFull
+  name: interior extinguisher (full)
+  components:
+  - type: Sprite
+    state: extinguisher_full
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorExtinguisherMini
+  name: interior extinguisher (mini)
+  components:
+  - type: Sprite
+    state: extinguisher_mini
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorExtinguisherEmpty
+  name: interior extinguisher (empty)
+  components:
+  - type: Sprite
+    state: extinguisher_empty
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorNanomed
+  name: nanomed
+  components:
+  - type: Sprite
+    state: nanomed
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorNanomedVend
+  name: nanomed (vend)
+  components:
+  - type: Sprite
+    state: nanomed_vend
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorNanomedDeny
+  name: nanomed (deny)
+  components:
+  - type: Sprite
+    state: nanomed_deny
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendor
+  name: medical vendor
+  components:
+  - type: Sprite
+    state: med
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendorVend
+  name: medical vendor (vend)
+  components:
+  - type: Sprite
+    state: med_vend
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendorDeny
+  name: medical vendor (deny)
+  components:
+  - type: Sprite
+    state: med_deny
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendorOff
+  name: medical vendor (off)
+  components:
+  - type: Sprite
+    state: med_off
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendorBroken
+  name: medical vendor (broken)
+  components:
+  - type: Sprite
+    state: med_broken
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorMedVendorPanel
+  name: medical vendor (panel)
+  components:
+  - type: Sprite
+    state: med_panel
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendor
+  name: blood vendor
+  components:
+  - type: Sprite
+    state: blood
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendorVend
+  name: blood vendor (vend)
+  components:
+  - type: Sprite
+    state: blood_vend
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendorDeny
+  name: blood vendor (deny)
+  components:
+  - type: Sprite
+    state: blood_deny
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendorOff
+  name: blood vendor (off)
+  components:
+  - type: Sprite
+    state: blood_off
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendorBroken
+  name: blood vendor (broken)
+  components:
+  - type: Sprite
+    state: blood_broken
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorBloodVendorPanel
+  name: blood vendor (panel)
+  components:
+  - type: Sprite
+    state: blood_panel
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorSupplyVendor
+  name: supply vendor
+  components:
+  - type: Sprite
+    state: supply
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorSupplyVendorOff
+  name: supply vendor (off)
+  components:
+  - type: Sprite
+    state: supply_off
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorSupplyVendorBroken
+  name: supply vendor (broken)
+  components:
+  - type: Sprite
+    state: supply_broken
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorSupplyVendorPanel
+  name: supply vendor (panel)
+  components:
+  - type: Sprite
+    state: supply_panel
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorWallPhone
+  name: wall phone
+  components:
+  - type: Sprite
+    state: wall_phone
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorWallPhoneRing
+  name: wall phone (ringing)
+  components:
+  - type: Sprite
+    state: wall_phone_ring
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorWallPhoneEar
+  name: wall phone (off hook)
+  components:
+  - type: Sprite
+    state: wall_phone_ear
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorCamera
+  name: vehicle camera
+  components:
+  - type: Sprite
+    state: vehicle_camera
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInteriorCameraEMP
+  name: vehicle camera (EMP)
+  components:
+  - type: Sprite
+    state: vehicle_cameraemp
