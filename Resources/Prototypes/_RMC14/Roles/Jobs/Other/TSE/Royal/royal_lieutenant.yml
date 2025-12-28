@@ -14,6 +14,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - RoyalMarines
@@ -37,6 +38,12 @@
         RMCSkillIntel: 1
         RMCSkillPowerLoader: 1
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader #due to this also being on the team leader and the major, be sure to spawn the one you want to be the squad leader first
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_lieutenant
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
@@ -44,7 +51,38 @@
       prefix: rmc-job-prefix-rcm-lieutenant
   hidden: true
 
-# This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality
+- type: entity
+  id: RMCRandomHumanoidRoyalMarinesLieutenant
+  name: royal crown marines ghost role lieutenant
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCRoyalMarinesLieutenant
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCRoyalMarinesLieutenant
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-rcm-lieutenant
+    description: rmc-ghost-role-information-rcm-description
+    rules: rmc-ghost-role-information-rcm-rules
+    reregister: false
+    job: CMRoyalMarinesLieutenant
+    raffle:
+      settings: long
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 54000 # 15 Hours
+    - !type:RoleTimeRequirement
+      role: CMJobStaffOfficer
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear # There's also a staff officer role with equivalent skills n shit but noncombatant gear that I don't feel like porting
   id: RMCGearRoyalLieutenant
@@ -59,9 +97,9 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCBeltHolsterPistolFilledL54
-    back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
-    pocket2: RMCPouchMedkitFillRoyal
+    back: RMCSatchelLightpackFilledRoyalLieutenant
+    pocket1: RMCPouchToolsRCM
+    pocket2: RMCPouchMedkitFillRoyalMarineCommand
 
 - type: playTimeTracker
   id: RMCJobRoyalLieutenant

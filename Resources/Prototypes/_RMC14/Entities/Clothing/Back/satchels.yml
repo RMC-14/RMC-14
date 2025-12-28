@@ -799,6 +799,37 @@
 
 - type: entity
   parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalLieutenant
+  suffix: Filled, Royal Lieutenant
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCSyringeCase
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
+    - id: RMCDefibrillatorCompact
+    - id: CMCautery
+    - id: CMPackFlare
+    - id: RMCMagazineRifleL24
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFilledRoyalMajor
+  suffix: Filled, Royal Major
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMAdvFirstAidKitFilled
+    - id: RMCSyringeCase
+    - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
+    - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175 // Why the FUCK does the medic get nades?
+    - id: RMCDefibrillatorCompact
+    - id: CMCautery
+    - id: CMPackFlare
+
+- type: entity
+  parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledRoyalTeamlead
   suffix: Filled, Royal Team Leader
   components:

@@ -139,7 +139,7 @@
 
 - type: entity
   parent: RMCPouchMedkit
-  id: RMCPouchMedkitFillRoyal
+  id: RMCPouchMedkitFillRoyalMarine
   suffix: Filled, Royal
   components:
   - type: StorageFill
@@ -148,6 +148,36 @@
     - id: CMTraumaKit10
     - id: CMBurnKit10
     #    - id: CMOxycodoneAutoInjector # TODO RMC14
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillRoyalMarineMedic
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: # TODO RMC splints
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillRoyalMarineCommand
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSurgicalCaseFilled # TODO RMC RCM surgical case (large surgical case)
+    - id: # TODO RMC splints
+    - id: CMTraumaKit10
+    - id: # TODO RMC OXY injector
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMHealthAnalyzer

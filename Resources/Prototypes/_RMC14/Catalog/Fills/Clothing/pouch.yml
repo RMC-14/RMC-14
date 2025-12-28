@@ -175,6 +175,18 @@
     - id: CMWrench
 
 - type: entity
+  parent: RMCPouchTools
+  id: RMCPouchToolsRCM
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMMultitool
+    - id: CMFireExtinguisherPortable
+
+- type: entity
   parent: RMCPouchToolsSoc
   id: RMCPouchToolsSocFill
   suffix: Filled
@@ -187,6 +199,22 @@
     - id: RMCCableCoil
     - id: CMMultitool
     - id: CMWrench
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMBreacher
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMCrowbar # RMCTodo tactical prybar
+    - id: RMCCableCoil
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
 
 - type: entity
   parent: RMCPouchToolsSoc
