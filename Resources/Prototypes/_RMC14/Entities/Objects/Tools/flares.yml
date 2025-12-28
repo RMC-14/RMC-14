@@ -262,6 +262,10 @@
       whitelist:
         tags:
         - RMCFlare
+  - type: BulletBox
+    amount: 8
+    max: 8
+    bulletType: RMCFlarePackAmmo
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
@@ -458,6 +462,11 @@
   - type: RMCNightVisionVisibleOnIgnite
   - type: TimedDespawn
     lifetime: 180
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCFlarePackAmmo
 
 - type: Tag
   id: RMCFlare

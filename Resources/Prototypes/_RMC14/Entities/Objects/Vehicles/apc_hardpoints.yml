@@ -73,11 +73,11 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 4
+    fireRate: 2.5
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false
@@ -120,6 +120,36 @@
     state: flare_launcher
   - type: RMCHardpointItem
     hardpointType: Support
+  - type: VehicleTurret
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+    cameraRecoilScalar: 0
+  - type: BallisticAmmoProvider
+    cycleable: false
+    capacity: 8
+    whitelist:
+      tags:
+      - Flare
+      - RMCFlare
+      - RMCFlareCAS
+    proto: CMFlare
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 8
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 360
+  - type: RefillableByBulletBox
+    bulletType: RMCFlarePackAmmo
+  - type: GunMuzzleOffset
+    offset: "0.9,0"
+    muzzleOffset: "0.5,0"
+    useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: flare_launcher_0
 

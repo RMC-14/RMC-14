@@ -127,8 +127,20 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (ent.Comp.CompletingInserts.Contains(slot.Id))
             return;
 
+        if (!IsValidHardpoint(args.Item, slot))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (slot.InsertDelay <= 0f)
             return;
+
+        if (ent.Comp.PendingInsertUsers.Contains(args.User.Value))
+        {
+            args.Cancelled = true;
+            return;
+        }
 
         if (!ent.Comp.PendingInserts.Add(slot.Id))
         {
@@ -137,6 +149,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         }
 
         args.Cancelled = true;
+        ent.Comp.PendingInsertUsers.Add(args.User.Value);
 
         var doAfter = new DoAfterArgs(EntityManager, args.User.Value, slot.InsertDelay, new RMCHardpointInsertDoAfterEvent(slot.Id), ent.Owner, ent.Owner, args.Item)
         {
@@ -151,7 +164,10 @@ public sealed class RMCHardpointSystem : EntitySystem
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
+        {
             ent.Comp.PendingInserts.Remove(slot.Id);
+            ent.Comp.PendingInsertUsers.Remove(args.User.Value);
+        }
     }
 
     private void OnVehicleCanRun(Entity<RMCHardpointSlotsComponent> ent, ref VehicleCanRunEvent args)
@@ -165,6 +181,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     private void OnInsertDoAfter(Entity<RMCHardpointSlotsComponent> ent, ref RMCHardpointInsertDoAfterEvent args)
     {
         ent.Comp.PendingInserts.Remove(args.SlotId);
+        ent.Comp.PendingInsertUsers.Remove(args.User);
 
         if (args.Cancelled || args.Handled)
             return;

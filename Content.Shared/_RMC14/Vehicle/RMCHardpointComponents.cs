@@ -4,6 +4,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -41,6 +42,9 @@ public sealed partial class RMCHardpointSlotsComponent : Component
 
     [NonSerialized]
     public HashSet<string> PendingRemovals = new();
+
+    [NonSerialized]
+    public HashSet<EntityUid> PendingInsertUsers = new();
 }
 
 [Serializable, NetSerializable, DataDefinition]
