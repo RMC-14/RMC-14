@@ -11,6 +11,7 @@
       state: power_mod
     - type: PhysicalComposition
       materialComposition:
+        CMSteel: 50
         CMGlass: 50
       chemicalComposition:
         Silicon: 20

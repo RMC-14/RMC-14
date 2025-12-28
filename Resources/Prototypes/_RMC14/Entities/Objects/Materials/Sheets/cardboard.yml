@@ -46,7 +46,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCSheetCardboard: 100
+      RMCSheetCardboard: 3750
   - type: Stack
     stackType: RMCSheetCardboard
     count: 50

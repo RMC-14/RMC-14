@@ -27,7 +27,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 25
+      CMSteel: 937.5
 
 - type: entity
   parent: CMTileItemBase

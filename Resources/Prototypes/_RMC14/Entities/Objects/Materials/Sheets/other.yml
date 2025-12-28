@@ -23,7 +23,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoron: 100
+      CMPhoron: 2000
   - type: Stack
     stackType: CMPhoron
     count: 50
@@ -105,7 +105,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCWood: 100
+      RMCWood: 3750
   - type: Stack
     stackType: RMCWood
     count: 50
@@ -213,7 +213,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCAluminum: 100
+      RMCAluminum: 3750
   - type: Stack
     stackType: RMCAluminum
     count: 50

@@ -78,7 +78,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMGlass: 100
+      CMGlass: 3750
   - type: Stack
     stackType: CMGlass
     count: 50
@@ -177,7 +177,8 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMReinforcedGlass: 100
+      CMSteel: 1875
+      CMGlass: 3750
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi
     layers:
@@ -265,7 +266,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlass: 100
+      CMGlass: 7500
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi
     layers:
@@ -345,7 +346,8 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlassReinforced: 100
+      CMSteel: 1875
+      CMGlass: 7500
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi
     layers:
