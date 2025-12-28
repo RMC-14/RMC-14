@@ -23,20 +23,44 @@
   - type: AlwaysHot
 
 - type: entity
-  parent: RMCBrazier
+  parent: CMBaseStructure
   id: RMCCampfire
   name: campfire
   description: A useful tool to turn fellow marines into lifelong friends. Pull up a chair!
   components:
   - type: Sprite
+    noRot: true
     sprite: _RMC14/Structures/campfire.rsi
     layers:
       - state: campfire
       - state: burning
+        map: ["burning"]
+        visible: false
   - type: Construction
     graph: RMCCampfire
-    node: start
-  - type: PointLight
-    radius: 5
     node: Campfire
   - type: RMCMesonsNonviewable
+  - type: Campfire
+  - type: PointLight
+    enabled: false
+    radius: 5
+    energy: 3
+    color: "#FFC90C"
+  - type: AmbientSound
+    enabled: false
+    volume: -5
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/fireplace.ogg
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CampfireVisuals.Lit:
+        burning:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags: []
