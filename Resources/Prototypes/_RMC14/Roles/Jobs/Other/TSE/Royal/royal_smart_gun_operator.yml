@@ -81,7 +81,7 @@
     belt: RMCMK80BeltFilled # TODO RMC14 L905 gunbelt
     back: RMCSatchelLightpackFilledRoyal # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledSmartGunDrums
-    pocket2: RMCPouchMedkitFillRoyal
+    pocket2: RMCPouchMedkitFillRoyalMarine
 
 - type: playTimeTracker
   id: RMCJobRoyalSmartGunOperator
