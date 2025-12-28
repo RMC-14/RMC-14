@@ -83,3 +83,10 @@ rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
 # Squad message announcements
 rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]
 rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]'{ $squadName }' squad message sent: '{ $message }'.[/color][/bold]
+
+# Squad leader promotion messages
+rmc-overwatch-console-marine-unfit-to-lead = { $marineName } is unfit to lead!
+rmc-overwatch-console-marine-is-kia-exclamation = { $marineName } is KIA!
+rmc-overwatch-console-promoted-to-leader = Overwatch: You've been promoted to 'ACTING SQUAD LEADER'{ $squadStr }. Your headset has access to the command channel (:v).
+rmc-overwatch-console-new-squad-leader-announce = Attention: A new Squad Leader has been set: { $leaderName }
+rmc-overwatch-console-new-squad-leader-popup = { $leaderName } is { $squadName }'s new leader!

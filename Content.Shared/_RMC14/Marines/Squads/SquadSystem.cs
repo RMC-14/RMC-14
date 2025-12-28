@@ -616,13 +616,13 @@ public sealed class SquadSystem : EntitySystem
 
         if (_rmcBan.IsJobBanned(toPromote.Owner, SquadLeaderJob))
         {
-            _popup.PopupCursor($"{Name(toPromote)} is unfit to lead!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-unfit-to-lead", ("marineName", Name(toPromote))), user, PopupType.MediumCaution);
             return;
         }
 
         if (_mobState.IsDead(toPromote))
         {
-            _popup.PopupCursor($"{Name(toPromote)} is KIA!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-is-kia-exclamation", ("marineName", Name(toPromote))), user, PopupType.MediumCaution);
             return;
         }
 
@@ -691,14 +691,14 @@ public sealed class SquadSystem : EntitySystem
         if (TryComp(toPromote, out ActorComponent? actor))
         {
             var squadStr = Exists(squad) ? $" for {Name(squad.Value)}" : string.Empty;
-            var message = $"Overwatch: You've been promoted to 'ACTING SQUAD LEADER'{squadStr}. Your headset has access to the command channel (:v).";
+            var message = Loc.GetString("rmc-overwatch-console-promoted-to-leader", ("squadStr", squadStr));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, message, message, default, false, actor.PlayerSession.Channel, Color.FromHex("#0084FF"), true);
         }
 
         if (Exists(squad) && Prototype(squad.Value) is { } squadProto)
         {
-            _marineAnnounce.AnnounceSquad($"Attention: A new Squad Leader has been set: {Name(toPromote)}", squadProto.ID);
-            _popup.PopupCursor($"{Name(toPromote)} is {Name(squad.Value)}'s new leader!", user, PopupType.Medium);
+            _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-new-squad-leader-announce", ("leaderName", Name(toPromote))), squadProto.ID);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-new-squad-leader-popup", ("leaderName", Name(toPromote)), ("squadName", Name(squad.Value))), user, PopupType.Medium);
         }
     }
 
