@@ -73,7 +73,7 @@
     reregister: false
     job: CMRoyalMarinesLieutenant
     raffle:
-      settings: long
+      settings: short
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobSquadLeader
