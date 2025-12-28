@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Message;
-using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Maths;
 using Content.Shared._RMC14.Overwatch;
@@ -12,7 +11,6 @@ using JetBrains.Annotations;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Localization;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Control;

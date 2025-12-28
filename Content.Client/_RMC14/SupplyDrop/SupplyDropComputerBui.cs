@@ -1,5 +1,4 @@
-﻿using Content.Client.UserInterface.Controls;
-using Content.Shared._RMC14.SupplyDrop;
+﻿using Content.Shared._RMC14.SupplyDrop;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
