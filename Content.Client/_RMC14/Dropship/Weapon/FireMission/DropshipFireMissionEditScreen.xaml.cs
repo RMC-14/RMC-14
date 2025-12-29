@@ -165,7 +165,7 @@ public sealed partial class DropshipFireMissionEditScreen : PanelContainer
 
         foreach (var offset in _weapon.Offsets)
         {
-            if (!_buttonsByRow.TryGetValue(offset.Row, out var buttons))
+            if (!_buttonsByRow.TryGetValue(offset.Step, out var buttons))
                 continue;
 
             foreach (var btn in buttons)
@@ -179,10 +179,10 @@ public sealed partial class DropshipFireMissionEditScreen : PanelContainer
             }
 
             if (offset.Offset == null)
-                EnableRowsAround(offset.Row);
+                EnableRowsAround(offset.Step);
             else
             {
-                DisableRowsAround(offset.Row);
+                DisableRowsAround(offset.Step);
             }
         }
     }

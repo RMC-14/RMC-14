@@ -24,10 +24,10 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
         FireMissionTitle.SetMarkupPermissive($"[color=#00FF36]Firemission: {fireMission.Name}[/color]");
         AddRow("Weapon", weapons.Select(w => w.Name).ToList());
         AddRow("Ammunition", weapons.Select(w => $"{w.Ammo} / {w.MaxAmmo}").ToList());
-        AddRow("Consumption", weapons.Select(w => w.AmmoConsumption.ToString()).ToList());
+        AddRow("Consumption", weapons.Select(w => w.AmmoConsumption > w.Ammo ? $"[color=red]{w.AmmoConsumption}[/color]" : w.AmmoConsumption.ToString()).ToList());
         AddRow("", new List<string>(new string[weapons.Count]));
 
-        for (var t = minTiming - 1; t < maxDuration; t++)
+        for (var timing = minTiming - 1; timing < maxDuration; timing++)
         {
             var weaponTexts = new List<string>();
 
@@ -37,7 +37,7 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
 
                 foreach (var offset in weapon.Offsets)
                 {
-                    if (offset.Row != t)
+                    if (offset.Step != timing)
                         continue;
 
                     if (offset.Offset.HasValue)
@@ -49,7 +49,7 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
                 weaponTexts.Add(text);
             }
 
-            AddRow((t + 1).ToString(), weaponTexts);
+            AddRow((timing + 1).ToString(), weaponTexts);
         }
     }
 

@@ -578,8 +578,8 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
                 // Determine which fire mission is selected for this screen
                 var selectedId = first
-                    ? terminal.ScreenOneSelectedFireMissionId
-                    : terminal.ScreenTwoSelectedFireMissionId;
+                    ? terminal.ScreenOneViewingFireMissionId
+                    : terminal.ScreenTwoViewingFireMissionId;
 
                 if (selectedId != null)
                 {
@@ -650,7 +650,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             }
             case FireMissionEdit:
             {
-                screen.TopRow.SetData(firemissionDelete,firemissionCreate, firemissionView);
                 TryGetWeapons(
                     first,
                     out var one,
@@ -678,8 +677,8 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
                     // Determine offsets for this weapon
                     var selectedMissionId = first
-                        ? terminal.ScreenOneSelectedFireMissionId
-                        : terminal.ScreenTwoSelectedFireMissionId;
+                        ? terminal.ScreenOneViewingFireMissionId
+                        : terminal.ScreenTwoViewingFireMissionId;
 
                     // Make sure offsets exist
                     var selectedMission = terminal.FireMissions.FirstOrDefault(fm => fm.Id == selectedMissionId);
@@ -710,6 +709,8 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                         weaponInfo.AmmoConsumption = weaponAmmo.Comp.RoundsPerShot;
                     }
 
+                    screen.TopRow.SetData(firemissionDelete,firemissionCreate, firemissionView);
+                    screen.BottomRow.SetData(exit);
                     screen.FireMissionEdit.SetData(selectedMission, weaponInfo, terminal.MinTiming, terminal.MaxTiming, allowedOffsets);
                     screen.ScreenLabel.Visible = false;
                     screen.FireMissionEdit.Visible = true;
@@ -765,15 +766,17 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     fixedButtons
                 );
 
-                screen.TopRow.SetData(fire, previousButton);
-                screen.BottomRow.SetData(exit, nextButton);
+                AddTargets(out var previous, out var next);
+                screen.TopRow.SetData(fire, previousButton, five: previous);
+                screen.BottomRow.SetData(exit, nextButton, five: next);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
             }
             case StrikeVector:
             {
-                screen.BottomRow.SetData(exit);
-                screen.TopRow.SetData(fire);
+                AddTargets(out var previous, out var next);
+                screen.BottomRow.SetData(exit, five: next);
+                screen.TopRow.SetData(fire, five: previous);
                 AddStrikeVectorButtons(screen.LeftRow, first, cancel);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;

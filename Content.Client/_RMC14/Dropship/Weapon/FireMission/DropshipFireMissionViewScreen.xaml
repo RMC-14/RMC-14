@@ -11,7 +11,7 @@
 
         <!-- Title -->
         <RichTextLabel Name="FireMissionTitle"
-                       Text="[color=#00FF36]Firemission: Placeholder[/color]"
+                       Text="[color=#00FF36]Firemission: Attack One[/color]"
                        HorizontalAlignment="Center"
                        MinSize="0 30"/>
 

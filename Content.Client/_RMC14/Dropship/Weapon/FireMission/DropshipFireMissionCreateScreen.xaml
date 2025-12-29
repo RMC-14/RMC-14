@@ -12,20 +12,21 @@
         <!-- Title -->
         <Label Text="Create Fire Mission"
                HorizontalAlignment="Center"
-               MinSize="0 30"/>
+               MinSize="0 30"
+               ModulateSelfOverride="#00E94E"/>
 
         <!-- Fire Mission Name Input -->
         <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center" SeparationOverride="5">
-            <Label Text="FireMission Name:" HorizontalAlignment="Center"/>
-            <LineEdit Name="FireMissionNameInput" HorizontalExpand="True" MinSize="200 24"/>
+            <Label Text="FireMission Name:" HorizontalAlignment="Center" ModulateSelfOverride="#00E94E"/>
+            <LineEdit Name="FireMissionNameInput" HorizontalExpand="True" MinSize="200 24" ModulateSelfOverride="#00E94E"/>
         </BoxContainer>
 
         <!-- Existing Fire Missions Label -->
-        <Label Text="Existing Fire Missions" HorizontalAlignment="Center" MinSize="0 24"/>
+        <Label Text="Existing Fire Missions" HorizontalAlignment="Center" MinSize="0 24" ModulateSelfOverride="#00E94E"/>
 
         <!-- Fire Missions List -->
         <BoxContainer Orientation="Vertical"  HorizontalExpand="True" VerticalExpand="True"
-                      SeparationOverride="4" Name="FireMissionsListContainer">
+                      SeparationOverride="4" Name="FireMissionsListContainer" ModulateSelfOverride="#00E94E">
         </BoxContainer>
 
     </BoxContainer>

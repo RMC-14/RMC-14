@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dropship.AttachmentPoint;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -57,13 +58,13 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     ///     The ID of the fire mission currently being viewed or edited on screen one.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int? ScreenOneSelectedFireMissionId;
+    public int? ScreenOneViewingFireMissionId;
 
     /// <summary>
-    ///     The ID of the firemission currently being viewed or edited on screen two.
+    ///     The ID of the fire mission currently being viewed or edited on screen two.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int? ScreenTwoSelectedFireMissionId;
+    public int? ScreenTwoViewingFireMissionId;
 
     /// <summary>
     ///     The lowest timing at which a weapon offset can be set.
@@ -120,7 +121,7 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
 [Serializable, NetSerializable]
 public readonly record struct WeaponOffsetData(
     NetEntity WeaponId,
-    int Row,
+    int Step,
     int? Offset
 );
 
@@ -139,4 +140,11 @@ public sealed class WeaponDisplayInfo
     public int AmmoConsumption { get; set; }
     public int FireDelay { get; set; }
     public List<WeaponOffsetData> Offsets { get; set; } = [];
+}
+
+[Serializable, NetSerializable]
+public enum DropshipWeaponStrikeType
+{
+    Direct,
+    FireMission,
 }

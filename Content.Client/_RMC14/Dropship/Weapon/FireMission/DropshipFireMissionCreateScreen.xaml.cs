@@ -38,6 +38,7 @@ public sealed partial class DropshipFireMissionCreateScreen : PanelContainer
             {
                 Text = $"FM {displayId}. {fm.Name}",
                 HorizontalAlignment = HAlignment.Center,
+                ModulateSelfOverride= Color.FromHex("#00E94E"),
             };
 
             FireMissionsListContainer.AddChild(label);
