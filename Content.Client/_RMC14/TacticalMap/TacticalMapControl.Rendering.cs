@@ -39,13 +39,31 @@ public sealed partial class TacticalMapControl
             handle.DrawTextureRect(_backgroundTexture, textureRect);
         handle.DrawTextureRect(Texture, textureRect);
 
+        if (ShowLinkedLzOverlay && _overlayLinkedLzTexture != null)
+            handle.DrawTextureRect(_overlayLinkedLzTexture, textureRect);
+        DrawIconOverlay(handle, textureRect, "roof0", ShowRoof0Overlay);
+        DrawIconOverlay(handle, textureRect, "roof1", ShowRoof1Overlay);
+        DrawIconOverlay(handle, textureRect, "roof2", ShowRoof2Overlay);
+        DrawIconOverlay(handle, textureRect, "roof3", ShowRoof3Overlay);
+        DrawIconOverlay(handle, textureRect, "roof4", ShowRoof4Overlay);
+
         DrawTileGrid(handle, actualTopLeft, actualSize);
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
+        DrawPreviewSquare(handle, overlayScale, actualTopLeft);
         DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawEraserPreview(handle);
         DrawLabels(handle, overlayScale, actualTopLeft);
+    }
+
+    private void DrawIconOverlay(DrawingHandleScreen handle, UIBox2 textureRect, string key, bool enabled)
+    {
+        if (!enabled)
+            return;
+
+        if (_overlayIconTextures.TryGetValue(key, out var overlay))
+            handle.DrawTextureRect(overlay, textureRect);
     }
 
     private void DrawTileGrid(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize)
@@ -227,6 +245,13 @@ public sealed partial class TacticalMapControl
             float thickness = GetLineThickness(i, line);
             Color color = line.Color;
 
+            if (!line.Smooth)
+            {
+                DrawLineSegment(handle, line.Start, line.End, color, thickness, overlayScale, actualTopLeft, true);
+                i++;
+                continue;
+            }
+
             var points = new List<Vector2> { line.Start, line.End };
             int j = i + 1;
             for (; j < Lines.Count; j++)
@@ -239,6 +264,18 @@ public sealed partial class TacticalMapControl
 
                 if ((points[^1] - next.Start).LengthSquared() > joinEpsilonSquared)
                     break;
+
+                if (!next.Smooth)
+                    break;
+
+                Vector2 prevDir = points[^1] - points[^2];
+                Vector2 nextDir = next.End - next.Start;
+                if (prevDir.LengthSquared() > 0.0001f && nextDir.LengthSquared() > 0.0001f)
+                {
+                    float dot = Vector2.Dot(Vector2.Normalize(prevDir), Vector2.Normalize(nextDir));
+                    if (dot < LineSmoothMinDot)
+                        break;
+                }
 
                 points.Add(next.End);
             }
@@ -288,6 +325,38 @@ public sealed partial class TacticalMapControl
         float radius = EraserRadiusPixels + LineThickness * 1.5f;
         Vector2 center = LogicalToPixel(_lastMousePosition.Value);
         handle.DrawCircle(center, radius, EraserPreviewColor);
+    }
+
+    private void DrawPreviewSquare(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)
+    {
+        if (!_dragging || !Drawing || !SquareMode || _dragStart == null || _previewEnd == null || Texture == null)
+            return;
+
+        Vector2i diff = _previewEnd.Value - _dragStart.Value;
+        if (diff.Length < MinDragDistance)
+            return;
+
+        Vector2i startIndices = PositionToIndices(PixelToLogical(new Vector2(_dragStart.Value.X, _dragStart.Value.Y)));
+        Vector2i endIndices = PositionToIndices(PixelToLogical(new Vector2(_previewEnd.Value.X, _previewEnd.Value.Y)));
+
+        if (startIndices == endIndices)
+            return;
+
+        int minX = Math.Min(startIndices.X, endIndices.X);
+        int maxX = Math.Max(startIndices.X, endIndices.X);
+        int minY = Math.Min(startIndices.Y, endIndices.Y);
+        int maxY = Math.Max(startIndices.Y, endIndices.Y);
+
+        Vector2 topLeft = ConvertIndicesToLineCoordinates(new Vector2i(minX, maxY));
+        Vector2 topRight = ConvertIndicesToLineCoordinates(new Vector2i(maxX, maxY));
+        Vector2 bottomRight = ConvertIndicesToLineCoordinates(new Vector2i(maxX, minY));
+        Vector2 bottomLeft = ConvertIndicesToLineCoordinates(new Vector2i(minX, minY));
+
+        Color previewColor = Color.WithAlpha(0.5f);
+        DrawLineWithThickness(handle, new TacticalMapLine(topLeft, topRight, previewColor, LineThickness), overlayScale, actualTopLeft, LineThickness);
+        DrawLineWithThickness(handle, new TacticalMapLine(topRight, bottomRight, previewColor, LineThickness), overlayScale, actualTopLeft, LineThickness);
+        DrawLineWithThickness(handle, new TacticalMapLine(bottomRight, bottomLeft, previewColor, LineThickness), overlayScale, actualTopLeft, LineThickness);
+        DrawLineWithThickness(handle, new TacticalMapLine(bottomLeft, topLeft, previewColor, LineThickness), overlayScale, actualTopLeft, LineThickness);
     }
 
     private void DrawLabels(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
@@ -36,6 +37,8 @@ public sealed partial class TacticalMapControl
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
             _backgroundTexture = null;
+            _overlayLinkedLzTexture = null;
+            _overlayIconTextures.Clear();
             return;
         }
 
@@ -64,6 +67,8 @@ public sealed partial class TacticalMapControl
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
             _backgroundTexture = null;
+            _overlayLinkedLzTexture = null;
+            _overlayIconTextures.Clear();
             return;
         }
 
@@ -95,6 +100,8 @@ public sealed partial class TacticalMapControl
             _tileMaskWidth = 0;
             _tileMaskHeight = 0;
             _backgroundTexture = null;
+            _overlayLinkedLzTexture = null;
+            _overlayIconTextures.Clear();
             return;
         }
 
@@ -106,6 +113,10 @@ public sealed partial class TacticalMapControl
 
         Image<Rgba32> image = new(width, height);
         Image<Rgba32> background = new(width, height);
+        Image<Rgba32>? linkedLzOverlay = null;
+        var iconOverlays = new Dictionary<string, Image<Rgba32>>();
+        bool canLookupAreas = _entitySystemManager.TryGetEntitySystem(out SharedAreaLookupSystem? areaLookupSystem);
+        bool hasLinkedLzOverlay = false;
         foreach ((Vector2i position, Color color) in colors)
         {
             if (position.X < boundsMin.X || position.X > boundsMax.X ||
@@ -120,10 +131,49 @@ public sealed partial class TacticalMapControl
             var overlayColor = color.WithAlpha(color.A * MapTileOpacity);
             background[x, y] = new Rgba32(backgroundColor.R, backgroundColor.G, backgroundColor.B, backgroundColor.A);
             image[x, y] = new Rgba32(overlayColor.R, overlayColor.G, overlayColor.B, overlayColor.A);
+
+            if (canLookupAreas && areaLookupSystem != null &&
+                areaLookupSystem.TryGetArea(grid.Owner, position, out var area, out _))
+            {
+                var areaComp = area.Value.Comp;
+                string? linkedLz = areaComp.LinkedLz;
+                if (!string.IsNullOrWhiteSpace(linkedLz))
+                {
+                    var lzIds = ParseLinkedLzIds(linkedLz);
+                    if (lzIds.Length > 0)
+                    {
+                        linkedLzOverlay ??= new Image<Rgba32>(width, height);
+                        Color lzColor = BlendLinkedLzColors(lzIds);
+                        linkedLzOverlay[x, y] = new Rgba32(lzColor.R, lzColor.G, lzColor.B, lzColor.A);
+                        hasLinkedLzOverlay = true;
+                    }
+                }
+
+                string iconState = GetAreaIconState(areaComp);
+                if (!string.IsNullOrWhiteSpace(iconState))
+                {
+                    if (!iconOverlays.TryGetValue(iconState, out var iconOverlay))
+                    {
+                        iconOverlay = new Image<Rgba32>(width, height);
+                        iconOverlays[iconState] = iconOverlay;
+                    }
+
+                    Color iconColor = GetAreaIconOverlayColor(iconState);
+                    iconOverlay[x, y] = new Rgba32(iconColor.R, iconColor.G, iconColor.B, iconColor.A);
+                }
+            }
         }
 
         _backgroundTexture = Texture.LoadFromImage(background);
         Texture = Texture.LoadFromImage(image);
+        _overlayLinkedLzTexture = hasLinkedLzOverlay && linkedLzOverlay != null
+            ? Texture.LoadFromImage(linkedLzOverlay)
+            : null;
+        _overlayIconTextures.Clear();
+        foreach (var (state, iconOverlay) in iconOverlays)
+        {
+            _overlayIconTextures[state] = Texture.LoadFromImage(iconOverlay);
+        }
         _areaLabels.Clear();
         foreach ((Vector2i position, string label) in grid.Comp.Labels)
         {
@@ -137,6 +187,111 @@ public sealed partial class TacticalMapControl
         }
 
         ApplyViewSettings();
+    }
+
+    private static Color GetLinkedLzOverlayColor(string linkedLz)
+    {
+        return linkedLz switch
+        {
+            "dropship_lz1" => Color.FromHex("#4FC3FF").WithAlpha(0.28f),
+            "dropship_lz2" => Color.FromHex("#7CFF7A").WithAlpha(0.28f),
+            "dropship_lz3" => Color.FromHex("#FFB74D").WithAlpha(0.28f),
+            "dropship_lz4" => Color.FromHex("#FF6B6B").WithAlpha(0.28f),
+            _ => GetHashedOverlayColor(linkedLz)
+        };
+    }
+
+    private static string[] ParseLinkedLzIds(string linkedLz)
+    {
+        var parts = linkedLz.Split(',', StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 0)
+            return Array.Empty<string>();
+
+        var ids = new List<string>(parts.Length);
+        foreach (var part in parts)
+        {
+            var trimmed = part.Trim();
+            if (!string.IsNullOrWhiteSpace(trimmed))
+                ids.Add(trimmed);
+        }
+
+        return ids.Count == 0 ? Array.Empty<string>() : ids.ToArray();
+    }
+
+    private static Color BlendLinkedLzColors(IReadOnlyList<string> linkedLzIds)
+    {
+        float r = 0f;
+        float g = 0f;
+        float b = 0f;
+        float maxAlpha = 0f;
+        int count = 0;
+
+        foreach (var id in linkedLzIds)
+        {
+            var color = GetLinkedLzOverlayColor(id);
+            r += color.R;
+            g += color.G;
+            b += color.B;
+            maxAlpha = MathF.Max(maxAlpha, color.A);
+            count++;
+        }
+
+        if (count == 0)
+            return Color.Transparent;
+
+        float blendAlpha = maxAlpha;
+        if (count > 1)
+            blendAlpha = MathF.Min(0.4f, maxAlpha + 0.06f * (count - 1));
+
+        return new Color(r / count, g / count, b / count, blendAlpha);
+    }
+
+    private static Color GetAreaIconOverlayColor(string state)
+    {
+        return state switch
+        {
+            "roof0" => Color.FromHex("#3DBF75").WithAlpha(0.24f),
+            "roof1" => Color.FromHex("#A6D96A").WithAlpha(0.24f),
+            "roof2" => Color.FromHex("#F4B860").WithAlpha(0.24f),
+            "roof3" => Color.FromHex("#F28C7A").WithAlpha(0.24f),
+            "roof4" => Color.FromHex("#6A61FF").WithAlpha(0.24f),
+            _ => Color.FromHex("#6A61FF").WithAlpha(0.24f)
+        };
+    }
+
+    private static string GetAreaIconState(AreaComponent areaComp)
+    {
+        if (!areaComp.OB)
+            return "roof4";
+
+        if (!areaComp.CAS)
+            return "roof3";
+
+        if (!areaComp.SupplyDrop || !areaComp.MortarFire)
+            return "roof2";
+
+        if (!areaComp.MortarPlacement || !areaComp.Lasing || !areaComp.Medevac || !areaComp.Paradropping)
+            return "roof1";
+
+        return "roof0";
+    }
+
+    private static Color GetHashedOverlayColor(string key)
+    {
+        unchecked
+        {
+            uint hash = 2166136261;
+            foreach (char c in key)
+            {
+                hash ^= c;
+                hash *= 16777619;
+            }
+
+            byte r = (byte)(90 + (hash & 0x3F));
+            byte g = (byte)(120 + ((hash >> 6) & 0x3F));
+            byte b = (byte)(160 + ((hash >> 12) & 0x3F));
+            return new Color(r / 255f, g / 255f, b / 255f, 0.28f);
+        }
     }
 
     public bool TryGetAreaInfo(Vector2i indices, out TacticalMapAreaInfo info)

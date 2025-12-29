@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
@@ -9,6 +10,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
+using Robust.Client.Graphics;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.GameObjects;
@@ -29,6 +31,7 @@ public enum DrawingMode
 {
     None,
     StraightLine,
+    Square,
     Eraser,
     LabelEdit
 }
@@ -38,6 +41,14 @@ public sealed partial class TacticalMapWrapper : Control
 {
     private static readonly Color DefaultButtonTextColor = TacticalMapInnerButton.DefaultTextColor;
     private static readonly ResPath AreaInfoRsiPath = new("/Textures/_RMC14/Structures/Machines/ceiling.rsi");
+
+    private const float CrtMinorGridSpacing = 4f;
+    private const float CrtMajorGridSpacing = 16f;
+    private const float CrtGridThickness = 1f;
+
+    private static readonly Color CrtTintColor = Color.FromHex("#0B1B2E").WithAlpha(0.08f);
+    private static readonly Color CrtMinorGridColor = Color.FromHex("#2C4F7B").WithAlpha(0.07f);
+    private static readonly Color CrtMajorGridColor = Color.FromHex("#5F8CC7").WithAlpha(0.12f);
 
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -75,6 +86,7 @@ public sealed partial class TacticalMapWrapper : Control
     private TacticalMapUserComponent? _cachedUserComponent;
 
     private bool _settingsVisible = false;
+    private bool _overlaysVisible = false;
     private DrawingMode _currentDrawingMode = DrawingMode.None;
 
     private TacticalMapControl.LabelMode _currentLabelState = TacticalMapControl.LabelMode.All;
@@ -93,6 +105,14 @@ public sealed partial class TacticalMapWrapper : Control
     private float _currentZoomFactor = 1.0f;
     private Vector2 _currentPanOffset = Vector2.Zero;
     private TacticalMapContextPopup? _contextPopup;
+    private TacticalMapOverlayLegendPopup? _overlayLegendPopup;
+    private bool _crtEffectEnabled = true;
+    private bool _linkedLzOverlayEnabled;
+    private bool _roof0OverlayEnabled;
+    private bool _roof1OverlayEnabled;
+    private bool _roof2OverlayEnabled;
+    private bool _roof3OverlayEnabled;
+    private bool _roof4OverlayEnabled;
 
     public TacticalMapWrapper()
     {
@@ -116,6 +136,12 @@ public sealed partial class TacticalMapWrapper : Control
 
         UpdatePlayerFollowing(args.DeltaSeconds);
         UpdateCooldownBar();
+    }
+
+    protected override void Draw(DrawingHandleScreen handle)
+    {
+        base.Draw(handle);
+        DrawCrtOverlay(handle);
     }
 
     public TacticalMapSettings GetCurrentSettings()
@@ -397,7 +423,9 @@ public sealed partial class TacticalMapWrapper : Control
         SetupAreaLabels();
         SetupBlipSize();
         SetupSettingsToggle();
+        SetupOverlayControls();
         SetupStraightLineMode();
+        SetupSquareMode();
         SetupEraserMode();
         SetupLineThickness();
         SetupHoverAreaInfo();
@@ -634,9 +662,49 @@ public sealed partial class TacticalMapWrapper : Control
         UpdateSettingsVisibility();
     }
 
+    private void SetupOverlayControls()
+    {
+        OverlaysToggleButton.Button.OnPressed += _ => ToggleOverlayVisibility();
+        OverlayLinkedLzButton.Button.OnPressed += _ => ToggleOverlay(ref _linkedLzOverlayEnabled);
+        OverlayRoof0Button.Button.OnPressed += _ => ToggleOverlay(ref _roof0OverlayEnabled);
+        OverlayRoof1Button.Button.OnPressed += _ => ToggleOverlay(ref _roof1OverlayEnabled);
+        OverlayRoof2Button.Button.OnPressed += _ => ToggleOverlay(ref _roof2OverlayEnabled);
+        OverlayRoof3Button.Button.OnPressed += _ => ToggleOverlay(ref _roof3OverlayEnabled);
+        OverlayRoof4Button.Button.OnPressed += _ => ToggleOverlay(ref _roof4OverlayEnabled);
+        OverlayLegendButton.Button.OnPressed += args => ShowOverlayLegend(args);
+        SetupOverlayIcons();
+        ApplyOverlays();
+        UpdateOverlayButtons();
+    }
+
+    private void SetupOverlayIcons()
+    {
+        SetOverlayIcon(OverlayRoof0Icon, "roof0");
+        SetOverlayIcon(OverlayRoof1Icon, "roof1");
+        SetOverlayIcon(OverlayRoof2Icon, "roof2");
+        SetOverlayIcon(OverlayRoof3Icon, "roof3");
+        SetOverlayIcon(OverlayRoof4Icon, "roof4");
+    }
+
+    private void SetOverlayIcon(TextureRect? target, string state)
+    {
+        if (target == null)
+            return;
+
+        target.Texture = _entityManager.System<SpriteSystem>()
+            .Frame0(new SpriteSpecifier.Rsi(AreaInfoRsiPath, state));
+        target.Visible = true;
+    }
+
     private void SetupStraightLineMode()
     {
         StraightLineButton.Button.OnPressed += _ => ToggleDrawingMode(DrawingMode.StraightLine);
+        UpdateDrawingModeAppearance();
+    }
+
+    private void SetupSquareMode()
+    {
+        SquareButton.Button.OnPressed += _ => ToggleDrawingMode(DrawingMode.Square);
         UpdateDrawingModeAppearance();
     }
 
@@ -770,6 +838,7 @@ public sealed partial class TacticalMapWrapper : Control
     {
         Canvas.StraightLineMode = false;
         Canvas.EraserMode = false;
+        Canvas.SquareMode = false;
         Canvas.LabelEditMode = false;
         Map.LabelEditMode = false;
 
@@ -777,6 +846,9 @@ public sealed partial class TacticalMapWrapper : Control
         {
             case DrawingMode.StraightLine:
                 Canvas.StraightLineMode = true;
+                break;
+            case DrawingMode.Square:
+                Canvas.SquareMode = true;
                 break;
             case DrawingMode.Eraser:
                 Canvas.EraserMode = true;
@@ -793,6 +865,7 @@ public sealed partial class TacticalMapWrapper : Control
     private void UpdateDrawingModeAppearance()
     {
         UpdateStraightLineButtonAppearance();
+        UpdateSquareButtonAppearance();
         UpdateEraserButtonAppearance();
         UpdateLabelEditButtonAppearance();
     }
@@ -812,6 +885,15 @@ public sealed partial class TacticalMapWrapper : Control
         {
             var color = _currentDrawingMode == DrawingMode.LabelEdit ? Color.Green : DefaultButtonTextColor;
             SetButtonTextColor(LabelEditButton, color);
+        }
+    }
+
+    private void UpdateSquareButtonAppearance()
+    {
+        if (SquareButton != null)
+        {
+            var color = _currentDrawingMode == DrawingMode.Square ? Color.Green : DefaultButtonTextColor;
+            SetButtonTextColor(SquareButton, color);
         }
     }
 
@@ -862,6 +944,20 @@ public sealed partial class TacticalMapWrapper : Control
     {
         _settingsVisible = !_settingsVisible;
         UpdateSettingsVisibility();
+    }
+
+    private void ToggleOverlayVisibility()
+    {
+        _overlaysVisible = !_overlaysVisible;
+        UpdateOverlayVisibility();
+    }
+
+    private void ShowOverlayLegend(BaseButton.ButtonEventArgs args)
+    {
+        EnsureOverlayLegendPopup();
+        var screenPosition = args.Event.PointerLocation.Position;
+        _overlayLegendPopup!.Open(UIBox2.FromDimensions(screenPosition, new Vector2(1, 1)));
+        _overlayLegendPopup.SetPositionLast();
     }
 
     private void ToggleFollowPlayer()
@@ -967,6 +1063,71 @@ public sealed partial class TacticalMapWrapper : Control
         SetButtonText(SettingsToggleButton, text, DefaultButtonTextColor);
     }
 
+    private void UpdateOverlayVisibility()
+    {
+        OverlayContainer.Visible = _overlaysVisible;
+        SetButtonText(OverlaysToggleButton, Loc.GetString("ui-tactical-map-overlays-toggle-button"), DefaultButtonTextColor);
+    }
+
+    private void ToggleOverlay(ref bool enabled)
+    {
+        enabled = !enabled;
+        ApplyOverlays();
+        UpdateOverlayButtons();
+    }
+
+    private void ApplyOverlays()
+    {
+        Map.ShowLinkedLzOverlay = _linkedLzOverlayEnabled;
+        Canvas.ShowLinkedLzOverlay = _linkedLzOverlayEnabled;
+        Map.ShowRoof0Overlay = _roof0OverlayEnabled;
+        Canvas.ShowRoof0Overlay = _roof0OverlayEnabled;
+        Map.ShowRoof1Overlay = _roof1OverlayEnabled;
+        Canvas.ShowRoof1Overlay = _roof1OverlayEnabled;
+        Map.ShowRoof2Overlay = _roof2OverlayEnabled;
+        Canvas.ShowRoof2Overlay = _roof2OverlayEnabled;
+        Map.ShowRoof3Overlay = _roof3OverlayEnabled;
+        Canvas.ShowRoof3Overlay = _roof3OverlayEnabled;
+        Map.ShowRoof4Overlay = _roof4OverlayEnabled;
+        Canvas.ShowRoof4Overlay = _roof4OverlayEnabled;
+    }
+
+    private void UpdateOverlayButtons()
+    {
+        var linkedColor = _linkedLzOverlayEnabled ? Color.Green : DefaultButtonTextColor;
+        var roof0Color = _roof0OverlayEnabled ? Color.Green : DefaultButtonTextColor;
+        var roof1Color = _roof1OverlayEnabled ? Color.Green : DefaultButtonTextColor;
+        var roof2Color = _roof2OverlayEnabled ? Color.Green : DefaultButtonTextColor;
+        var roof3Color = _roof3OverlayEnabled ? Color.Green : DefaultButtonTextColor;
+        var roof4Color = _roof4OverlayEnabled ? Color.Green : DefaultButtonTextColor;
+
+        if (OverlayLinkedLzButton != null)
+            SetButtonText(OverlayLinkedLzButton, Loc.GetString("ui-tactical-map-overlay-linked-lz"), linkedColor);
+
+        if (OverlayRoof0Button != null)
+            SetButtonText(OverlayRoof0Button, Loc.GetString("ui-tactical-map-overlay-roof0"), roof0Color);
+
+        if (OverlayRoof1Button != null)
+            SetButtonText(OverlayRoof1Button, Loc.GetString("ui-tactical-map-overlay-roof1"), roof1Color);
+
+        if (OverlayRoof2Button != null)
+            SetButtonText(OverlayRoof2Button, Loc.GetString("ui-tactical-map-overlay-roof2"), roof2Color);
+
+        if (OverlayRoof3Button != null)
+            SetButtonText(OverlayRoof3Button, Loc.GetString("ui-tactical-map-overlay-roof3"), roof3Color);
+
+        if (OverlayRoof4Button != null)
+            SetButtonText(OverlayRoof4Button, Loc.GetString("ui-tactical-map-overlay-roof4"), roof4Color);
+    }
+
+    private void EnsureOverlayLegendPopup()
+    {
+        if (_overlayLegendPopup != null)
+            return;
+
+        _overlayLegendPopup = new TacticalMapOverlayLegendPopup();
+    }
+
     private void UpdateFollowButtonText()
     {
         string text = _followingPlayer ?
@@ -1034,6 +1195,44 @@ public sealed partial class TacticalMapWrapper : Control
         CooldownBar.MaxValue = (float)NextUpdateAt.TotalSeconds;
         CooldownBar.Value = (float)(LastUpdateAt.TotalSeconds + NextUpdateAt.TotalSeconds - time.CurTime.TotalSeconds);
         CooldownLabel.Text = Loc.GetString("ui-tactical-map-cooldown-seconds", ("seconds", (int)cooldown.TotalSeconds));
+    }
+
+    private void DrawCrtOverlay(DrawingHandleScreen handle)
+    {
+        if (!_crtEffectEnabled)
+            return;
+
+        Vector2 size = new(PixelWidth, PixelHeight);
+        if (size.X <= 1f || size.Y <= 1f)
+            return;
+
+        UIBox2 rect = UIBox2.FromDimensions(Vector2.Zero, size);
+
+        handle.DrawRect(rect, CrtTintColor);
+
+        for (float y = 0f; y < size.Y; y += CrtMinorGridSpacing)
+        {
+            float lineBottom = Math.Min(y + CrtGridThickness, size.Y);
+            handle.DrawRect(new UIBox2(0f, y, size.X, lineBottom), CrtMinorGridColor);
+        }
+
+        for (float x = 0f; x < size.X; x += CrtMinorGridSpacing)
+        {
+            float lineRight = Math.Min(x + CrtGridThickness, size.X);
+            handle.DrawRect(new UIBox2(x, 0f, lineRight, size.Y), CrtMinorGridColor);
+        }
+
+        for (float y = 0f; y < size.Y; y += CrtMajorGridSpacing)
+        {
+            float lineBottom = Math.Min(y + CrtGridThickness, size.Y);
+            handle.DrawRect(new UIBox2(0f, y, size.X, lineBottom), CrtMajorGridColor);
+        }
+
+        for (float x = 0f; x < size.X; x += CrtMajorGridSpacing)
+        {
+            float lineRight = Math.Min(x + CrtGridThickness, size.X);
+            handle.DrawRect(new UIBox2(x, 0f, lineRight, size.Y), CrtMajorGridColor);
+        }
     }
 
     private bool IsInQueenEyeMode()

@@ -197,7 +197,7 @@ public sealed partial class TacticalMapControl
             }
             else if (_dragging && Drawing && !LabelEditMode)
             {
-                if (!EraserMode && _dragStart != null && StraightLineMode)
+                if (!EraserMode && _dragStart != null && (StraightLineMode || SquareMode))
                 {
                     Vector2i currentPos = LogicalToPixel(args.RelativePosition).Floored();
                     Vector2i diff = currentPos - _dragStart.Value;
@@ -208,11 +208,16 @@ public sealed partial class TacticalMapControl
                         Vector2i endIndices = PositionToIndices(args.RelativePosition);
 
                         if (StraightLineMode)
+                        {
                             endIndices = SnapToStraightLine(startIndices, endIndices);
-
-                        Vector2 lineStart = ConvertIndicesToLineCoordinates(startIndices);
-                        Vector2 lineEnd = ConvertIndicesToLineCoordinates(endIndices);
-                        AddLineToCanvas(lineStart, lineEnd);
+                            Vector2 lineStart = ConvertIndicesToLineCoordinates(startIndices);
+                            Vector2 lineEnd = ConvertIndicesToLineCoordinates(endIndices);
+                            AddLineToCanvas(lineStart, lineEnd, smooth: false);
+                        }
+                        else if (SquareMode)
+                        {
+                            AddSquareToCanvas(startIndices, endIndices);
+                        }
                     }
                 }
 
@@ -262,7 +267,7 @@ public sealed partial class TacticalMapControl
                     _lastErasePosition = currentPixelPos;
                 }
             }
-            else if (StraightLineMode)
+            else if (StraightLineMode || SquareMode)
             {
                 _previewEnd = currentPos;
             }

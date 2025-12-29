@@ -90,9 +90,9 @@ public sealed partial class TacticalMapControl
         }
     }
 
-    private void AddLineToCanvas(Vector2 start, Vector2 end)
+    private void AddLineToCanvas(Vector2 start, Vector2 end, bool smooth = true)
     {
-        Lines.Add(new TacticalMapLine(start, end, Color, LineThickness));
+        Lines.Add(new TacticalMapLine(start, end, Color, LineThickness, smooth));
         LineThicknesses.Add(LineThickness);
 
         while (LineLimit >= 0 && Lines.Count > LineLimit)
@@ -101,6 +101,27 @@ public sealed partial class TacticalMapControl
             if (LineThicknesses.Count > 0)
                 LineThicknesses.RemoveAt(0);
         }
+    }
+
+    private void AddSquareToCanvas(Vector2i start, Vector2i end)
+    {
+        if (start == end)
+            return;
+
+        int minX = Math.Min(start.X, end.X);
+        int maxX = Math.Max(start.X, end.X);
+        int minY = Math.Min(start.Y, end.Y);
+        int maxY = Math.Max(start.Y, end.Y);
+
+        Vector2 topLeft = ConvertIndicesToLineCoordinates(new Vector2i(minX, maxY));
+        Vector2 topRight = ConvertIndicesToLineCoordinates(new Vector2i(maxX, maxY));
+        Vector2 bottomRight = ConvertIndicesToLineCoordinates(new Vector2i(maxX, minY));
+        Vector2 bottomLeft = ConvertIndicesToLineCoordinates(new Vector2i(minX, minY));
+
+        AddLineToCanvas(topLeft, topRight, smooth: false);
+        AddLineToCanvas(topRight, bottomRight, smooth: false);
+        AddLineToCanvas(bottomRight, bottomLeft, smooth: false);
+        AddLineToCanvas(bottomLeft, topLeft, smooth: false);
     }
 
     public void RemoveLinesByColor(Color color)
@@ -284,7 +305,8 @@ public sealed partial class TacticalMapControl
                 fromUI + direction / totalLength * distance,
                 fromUI + direction / totalLength * Math.Min(distance + DashLength, totalLength),
                 color,
-                LineThickness
+                LineThickness,
+                false
             ));
             LineThicknesses.Add(LineThickness);
         }
@@ -311,11 +333,11 @@ public sealed partial class TacticalMapControl
 
         Vector2 rightWing = arrowBase - perp * ArrowWidth;
 
-        Lines.Add(new TacticalMapLine(arrowTip, leftWing, color, LineThickness));
+        Lines.Add(new TacticalMapLine(arrowTip, leftWing, color, LineThickness, false));
         LineThicknesses.Add(LineThickness);
-        Lines.Add(new TacticalMapLine(arrowTip, rightWing, color, LineThickness));
+        Lines.Add(new TacticalMapLine(arrowTip, rightWing, color, LineThickness, false));
         LineThicknesses.Add(LineThickness);
-        Lines.Add(new TacticalMapLine(leftWing, rightWing, color, LineThickness));
+        Lines.Add(new TacticalMapLine(leftWing, rightWing, color, LineThickness, false));
         LineThicknesses.Add(LineThickness);
     }
 

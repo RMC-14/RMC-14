@@ -27,7 +27,7 @@ public sealed partial class TacticalMapControl : TextureRect
     }
 
     private const float MapScale = 3f;
-    private const float MapTileOpacity = 0.85f;
+    private const float MapTileOpacity = 0.75f;
     private const float BaseBlipSize = 14f;
     private const float ClickTolerance = 8f;
     private const float BlipEdgeRatio = 0.7f;
@@ -44,6 +44,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float LineJoinEpsilon = 0.05f;
     private const float LineSoftEdgePixels = 1.5f;
     private const float LineSoftEdgeAlpha = 0.4f;
+    private const float LineSmoothMinDot = 0.7f;
     private const float EraserRadiusPixels = 6f;
     private const float LabelYOffset = 6f;
     private const float LabelStackOffset = 9f;
@@ -86,6 +87,8 @@ public sealed partial class TacticalMapControl : TextureRect
     private Dictionary<Vector2i, string> _areaLabels = new();
     private bool[]? _tileMask;
     private Texture? _backgroundTexture;
+    private Texture? _overlayLinkedLzTexture;
+    private readonly Dictionary<string, Texture> _overlayIconTextures = new();
     private int _tileMaskWidth;
     private int _tileMaskHeight;
 
@@ -123,6 +126,13 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool StraightLineMode { get; set; } = false;
     public bool LabelEditMode { get; set; } = false;
     public bool EraserMode { get; set; } = false;
+    public bool SquareMode { get; set; } = false;
+    public bool ShowLinkedLzOverlay { get; set; }
+    public bool ShowRoof0Overlay { get; set; }
+    public bool ShowRoof1Overlay { get; set; }
+    public bool ShowRoof2Overlay { get; set; }
+    public bool ShowRoof3Overlay { get; set; }
+    public bool ShowRoof4Overlay { get; set; }
     public Color Color;
     public float BlipSizeMultiplier { get; set; } = 0.9f;
     public float LineThickness { get; set; } = 2.0f;

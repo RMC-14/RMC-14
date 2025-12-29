@@ -65,4 +65,4 @@ public sealed class TacticalMapMoveLabelMsg(Vector2i oldPosition, Vector2i newPo
 
 [DataRecord]
 [Serializable, NetSerializable]
-public readonly record struct TacticalMapLine(Vector2 Start, Vector2 End, Color Color, float Thickness = 2.0f);
+public readonly record struct TacticalMapLine(Vector2 Start, Vector2 End, Color Color, float Thickness = 2.0f, bool Smooth = true);

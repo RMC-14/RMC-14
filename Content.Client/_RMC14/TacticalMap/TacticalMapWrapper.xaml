@@ -6,18 +6,18 @@
         <BoxContainer Name="MapSelectionRow" Access="Public" Orientation="Horizontal" Margin="2 2 2 0">
             <Label Name="MapSelectLabel" Access="Public" Text="{Loc ui-tactical-map-map-select-label}" StyleClasses="LabelSmall"
                    Margin="0 0 6 0" VerticalAlignment="Center" FontColorOverride="#8AB4FF" />
-            <OptionButton Name="MapSelectButton" Access="Public"
+            <controls:TacticalMapOptionButton Name="MapSelectButton" Access="Public"
                           HorizontalExpand="True" MinHeight="26" />
         </BoxContainer>
 
         <BoxContainer Name="LayerSelectionRow" Access="Public" Orientation="Horizontal" Margin="2 2 2 0" Visible="False">
             <Label Name="LayerSelectLabel" Access="Public" Text="{Loc ui-tactical-map-layer-select-label}" StyleClasses="LabelSmall"
                    Margin="0 0 6 0" VerticalAlignment="Center" FontColorOverride="#8AB4FF" />
-            <OptionButton Name="LayerSelectButton" Access="Public"
+            <controls:TacticalMapOptionButton Name="LayerSelectButton" Access="Public"
                           HorizontalExpand="True" MinHeight="26" />
         </BoxContainer>
 
-        <BoxContainer Orientation="Horizontal" Margin="2 4 2 4" HorizontalExpand="True">
+        <BoxContainer Orientation="Horizontal" Margin="2 2 2 0" HorizontalExpand="True">
             <controls:TacticalMapButton Name="LabelsButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}"
                                         Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
             <controls:TacticalMapButton Name="FollowPlayerButton" Access="Public" Text="{Loc ui-tactical-map-centre-button}"
@@ -27,23 +27,63 @@
             <TextureRect Name="HoverAreaIcon" Access="Public"
                          MinSize="16 16" MaxSize="16 16" Stretch="KeepAspectCentered"
                          Margin="0 0 4 0" Visible="False" />
-            <Label Name="HoverAreaLabel" Access="Public" Text=""
+            <Label Name="HoverAreaLabel" Access="Public" Text="" ClipText="True"
                    Margin="0 0 6 0" HorizontalExpand="True" VerticalAlignment="Center"
                    StyleClasses="LabelSmall" FontColorOverride="#8AB4FF" />
+            <controls:TacticalMapButton Name="OverlaysToggleButton" Access="Public" Text="{Loc ui-tactical-map-overlays-toggle-button}"
+                                        Margin="0 0 6 0" MinWidth="70" MinHeight="26" />
             <controls:TacticalMapButton Name="SettingsToggleButton" Access="Public" Text="{Loc ui-tactical-map-settings-toggle-collapsed}"
                                         Margin="0 0 6 0" MinWidth="28" MinHeight="26" />
             <controls:TacticalMapButton Name="PopoutButton" Access="Public" Text="Pop Out"
                                         MinWidth="60" MinHeight="26" />
         </BoxContainer>
 
-        <BoxContainer Name="SettingsContainer" Access="Public" Orientation="Horizontal" Margin="2 0 2 4" Visible="False">
+        <BoxContainer Name="OverlayContainer" Access="Public" Orientation="Vertical" Margin="2 0 2 0" Visible="False">
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                <controls:TacticalMapButton Name="OverlayLinkedLzButton" Access="Public" Text="{Loc ui-tactical-map-overlay-linked-lz}"
+                                            Margin="0 0 6 0" MinWidth="90" MinHeight="26" />
+                <controls:TacticalMapButton Name="OverlayLegendButton" Access="Public" Text="{Loc ui-tactical-map-overlay-legend}"
+                                            MinWidth="60" MinHeight="26" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                <TextureRect Name="OverlayRoof0Icon" Access="Public"
+                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                             Margin="0 0 4 0" />
+                <controls:TacticalMapButton Name="OverlayRoof0Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof0}"
+                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                <TextureRect Name="OverlayRoof1Icon" Access="Public"
+                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                             Margin="0 0 4 0" />
+                <controls:TacticalMapButton Name="OverlayRoof1Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof1}"
+                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                <TextureRect Name="OverlayRoof2Icon" Access="Public"
+                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                             Margin="0 0 4 0" />
+                <controls:TacticalMapButton Name="OverlayRoof2Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof2}"
+                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <TextureRect Name="OverlayRoof3Icon" Access="Public"
+                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                             Margin="0 0 4 0" />
+                <controls:TacticalMapButton Name="OverlayRoof3Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof3}"
+                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                <TextureRect Name="OverlayRoof4Icon" Access="Public"
+                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                             Margin="0 0 4 0" />
+                <controls:TacticalMapButton Name="OverlayRoof4Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof4}"
+                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+            </BoxContainer>
+        </BoxContainer>
+
+        <BoxContainer Name="SettingsContainer" Access="Public" Orientation="Horizontal" Margin="2 0 2 0" Visible="False">
             <Label Name="BlipSizeLabel" Access="Public" Text="Blip Size: 0.9x" StyleClasses="LabelSmall"
                    Margin="0 0 6 0" MinWidth="80" FontColorOverride="#8AB4FF" />
             <Slider Name="BlipSizeSlider" Access="Public" MinValue="0.5" MaxValue="3.0" Value="0.9" HorizontalExpand="True" />
         </BoxContainer>
 
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Name="CanvasToolsContainer" Access="Public" Orientation="Horizontal" Visible="False" Margin="2 2 6 2" MinWidth="160">
+            <BoxContainer Name="CanvasToolsContainer" Access="Public" Orientation="Horizontal" Visible="False" Margin="2 0 6 2" MinWidth="160">
                 <BoxContainer Name="CanvasButtonsColumn" Access="Public" Orientation="Vertical" HorizontalExpand="True">
                     <controls:TacticalMapButton Name="UpdateCanvasButton" Access="Public" Text="{Loc ui-tactical-map-update-button}"
                                                 HorizontalExpand="True" Margin="0 0 0 4" MinHeight="26" />
@@ -56,6 +96,8 @@
                                                 HorizontalExpand="True" Margin="0 0 0 4" MinHeight="26" />
 
                     <controls:TacticalMapButton Name="StraightLineButton" Access="Public" Text="{Loc ui-tactical-map-lines-button}"
+                                                HorizontalExpand="True" Margin="0 0 0 4" MinHeight="26" />
+                    <controls:TacticalMapButton Name="SquareButton" Access="Public" Text="{Loc ui-tactical-map-square-button}"
                                                 HorizontalExpand="True" Margin="0 0 0 4" MinHeight="26" />
                     <controls:TacticalMapButton Name="LabelEditButton" Access="Public" Text="{Loc ui-tactical-map-labels-button}"
                                                 HorizontalExpand="True" Margin="0 0 0 4" MinHeight="26" />
@@ -80,10 +122,10 @@
                 </BoxContainer>
             </BoxContainer>
 
-            <BoxContainer Name="MapContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="2">
-                <controls:TacticalMapControl Name="Map" Access="Public" Stretch="KeepAspectCentered"
+            <BoxContainer Name="MapContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="2 0 2 2">
+                <controls:TacticalMapControl Name="Map" Access="Public" Stretch="KeepAspect"
                                              MouseFilter="Pass" HorizontalExpand="True" VerticalExpand="True" />
-                <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="KeepAspectCentered"
+                <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="KeepAspect"
                                              Drawing="True" MouseFilter="Pass" Visible="False"
                                              HorizontalExpand="True" VerticalExpand="True" />
             </BoxContainer>
