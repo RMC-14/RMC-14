@@ -39,7 +39,7 @@
           Blunt: 5
     - type: PhysicalComposition
       materialComposition:
-        CMGlass: 100
+        CMGlass: 375
 
 - type: entity
   parent: RMCFlowerVase
