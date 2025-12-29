@@ -13,5 +13,8 @@ public sealed partial class GunSkilledAccuracyComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillFirearms";
 
     [DataField, AutoNetworkedField]
+    public int SkilledMinimum = 1;
+
+    [DataField, AutoNetworkedField]
     public FixedPoint2 AccuracyAddMult = 0.15;
 }
