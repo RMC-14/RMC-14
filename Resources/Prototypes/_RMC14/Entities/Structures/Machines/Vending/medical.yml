@@ -132,6 +132,8 @@
         amount: 2
       - id: CMHyposprayFilledTricord
         amount: 2
+      - id: RMCVial
+        amount: 2
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
