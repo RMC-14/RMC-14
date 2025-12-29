@@ -731,6 +731,35 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
         }
 
         UpdateView();
+        UpdateObjectivesWindow(s);
+    }
+
+    private void UpdateObjectivesWindow(OverwatchConsoleBuiState s)
+    {
+        // Update objectives window if it's open
+        if (_objectivesWindow == null || _objectivesWindow.Disposed || !_objectivesWindow.IsOpen)
+            return;
+
+        if (!EntMan.TryGetComponent(Owner, out OverwatchConsoleComponent? overwatch) ||
+            overwatch.Squad == null)
+        {
+            return;
+        }
+
+        // Get updated objectives from state
+        Dictionary<SquadObjectiveType, string> objectives = new();
+        var squadData = s.Squads.FirstOrDefault(squad => squad.Id == overwatch.Squad);
+        if (squadData.Id != default)
+        {
+            objectives = new Dictionary<SquadObjectiveType, string>(squadData.Objectives);
+        }
+
+        // Update window with new objectives only if user hasn't edited them
+        foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())
+        {
+            var currentObjective = objectives.GetValueOrDefault(objectiveType, string.Empty);
+            _objectivesWindow.UpdateObjectiveIfUnchanged(objectiveType, currentObjective);
+        }
     }
 
     private void UpdateView()

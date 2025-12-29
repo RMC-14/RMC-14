@@ -174,15 +174,47 @@ public sealed partial class SquadObjectivesWindow : DefaultWindow
             return;
 
         var text = Rope.Collapse(controls.Input.TextRope);
-        var hasText = !string.IsNullOrWhiteSpace(text);
         var hasOriginalObjective = !string.IsNullOrWhiteSpace(currentObjective);
         var textChanged = text != currentObjective;
         // Update button is disabled if field is empty, or if there's an original objective and text hasn't changed
         controls.UpdateButton.Disabled = string.IsNullOrWhiteSpace(text) || (hasOriginalObjective && !textChanged);
         controls.CancelButton.Disabled = !hasOriginalObjective;
-        
+
         // Update stored original text
         _objectiveControls[objectiveType] = (controls.Input, controls.UpdateButton, controls.CancelButton, currentObjective);
+    }
+
+    public void UpdateObjectiveIfUnchanged(SquadObjectiveType objectiveType, string newObjective)
+    {
+        if (!_objectiveControls.TryGetValue(objectiveType, out var controls))
+            return;
+
+        var currentText = Rope.Collapse(controls.Input.TextRope);
+
+        // Only update if the current text matches the original (user hasn't edited it)
+        if (currentText == controls.OriginalText)
+        {
+            controls.Input.TextRope = new Rope.Leaf(newObjective);
+            // Update the stored original text to the new value
+            _objectiveControls[objectiveType] = (controls.Input, controls.UpdateButton, controls.CancelButton, newObjective);
+
+            // Update button states
+            var hasOriginalObjective = !string.IsNullOrWhiteSpace(newObjective);
+            controls.UpdateButton.Disabled = string.IsNullOrWhiteSpace(newObjective) || hasOriginalObjective;
+            controls.CancelButton.Disabled = !hasOriginalObjective;
+        }
+        else
+        {
+            // User is editing, but update the original text reference for button state calculation
+            // This way if they revert to original, it will match the new original
+            _objectiveControls[objectiveType] = (controls.Input, controls.UpdateButton, controls.CancelButton, newObjective);
+
+            // Recalculate button states based on current text vs new original
+            var hasOriginalObjective = !string.IsNullOrWhiteSpace(newObjective);
+            var textChanged = currentText != newObjective;
+            controls.UpdateButton.Disabled = string.IsNullOrWhiteSpace(currentText) || (hasOriginalObjective && !textChanged);
+            controls.CancelButton.Disabled = !hasOriginalObjective;
+        }
     }
 }
 
