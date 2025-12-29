@@ -12,7 +12,7 @@ public sealed partial class GunSkilledScatterComponent : Component
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillFirearms";
 
     [DataField, AutoNetworkedField]
-    public Angle UnskilledAngleIncrease = Angle.FromDegrees(75);
+    public Angle UnskilledAngleIncrease = Angle.FromDegrees(8);
 
     [DataField, AutoNetworkedField]
     public int SkilledMinimum = 1;
