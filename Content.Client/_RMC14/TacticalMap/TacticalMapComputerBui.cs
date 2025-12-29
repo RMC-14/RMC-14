@@ -47,6 +47,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         Window.Wrapper.MapSelected += OnMapSelected;
         Window.Wrapper.LayerSelected += OnLayerSelected;
+        Window.Wrapper.CloseRequested += Close;
         ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
@@ -76,7 +77,9 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
                 currentSettings.WindowSize = new Vector2(Window.SetSize.X, Window.SetSize.Y);
                 currentSettings.WindowPosition = new Vector2(Window.Position.X, Window.Position.Y);
 
-                settingsManager.SaveSettings(currentSettings, _currentMapId);
+                var existingSettings = settingsManager.LoadSettings(_currentMapId);
+                if (!AreSettingsEqual(existingSettings, currentSettings))
+                    settingsManager.SaveSettings(currentSettings, _currentMapId);
             }
             catch (Exception ex)
             {
@@ -88,9 +91,36 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         {
             Window.Wrapper.MapSelected -= OnMapSelected;
             Window.Wrapper.LayerSelected -= OnLayerSelected;
+            Window.Wrapper.CloseRequested -= Close;
         }
 
         base.Dispose(disposing);
+    }
+
+    private static bool AreSettingsEqual(TacticalMapSettings existing, TacticalMapSettings current)
+    {
+        const float epsilon = 0.001f;
+
+        if (MathF.Abs(existing.ZoomFactor - current.ZoomFactor) > epsilon)
+            return false;
+        if ((existing.PanOffset - current.PanOffset).LengthSquared() > epsilon * epsilon)
+            return false;
+        if (MathF.Abs(existing.BlipSizeMultiplier - current.BlipSizeMultiplier) > epsilon)
+            return false;
+        if (MathF.Abs(existing.LineThickness - current.LineThickness) > epsilon)
+            return false;
+        if (existing.SelectedColorIndex != current.SelectedColorIndex)
+            return false;
+        if (existing.SettingsVisible != current.SettingsVisible)
+            return false;
+        if (existing.LabelMode != current.LabelMode)
+            return false;
+        if ((existing.WindowSize - current.WindowSize).LengthSquared() > epsilon * epsilon)
+            return false;
+        if ((existing.WindowPosition - current.WindowPosition).LengthSquared() > epsilon * epsilon)
+            return false;
+
+        return true;
     }
 
     private void OnMapSelected(NetEntity map)

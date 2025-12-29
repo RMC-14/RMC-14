@@ -61,6 +61,7 @@ public sealed partial class TacticalMapWrapper : Control
     public event Action<NetEntity>? MapSelected;
     public event Action<ProtoId<TacticalMapLayerPrototype>?>? LayerSelected;
     public event Action? PopoutRequested;
+    public event Action? CloseRequested;
 
     private const float FollowUpdateInterval = 0.5f;
 
@@ -433,6 +434,7 @@ public sealed partial class TacticalMapWrapper : Control
         FollowPlayerButton.Button.OnPressed += _ => ToggleFollowPlayer();
         ResetViewButton.Button.OnPressed += _ => ResetView();
         PopoutButton.Button.OnPressed += _ => PopoutRequested?.Invoke();
+        CloseButton.Button.OnPressed += _ => CloseRequested?.Invoke();
         PopoutButton.BorderThickness = new Thickness(0);
         PopoutButton.BorderColor = Color.Transparent;
 

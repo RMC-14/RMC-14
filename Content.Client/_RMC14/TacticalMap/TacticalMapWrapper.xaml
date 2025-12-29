@@ -35,6 +35,8 @@
             <controls:TacticalMapButton Name="SettingsToggleButton" Access="Public" Text="{Loc ui-tactical-map-settings-toggle-collapsed}"
                                         Margin="0 0 6 0" MinWidth="28" MinHeight="26" />
             <controls:TacticalMapButton Name="PopoutButton" Access="Public" Text="Pop Out"
+                                        Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+            <controls:TacticalMapButton Name="CloseButton" Access="Public" Text="Close"
                                         MinWidth="60" MinHeight="26" />
         </BoxContainer>
 

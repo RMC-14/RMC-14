@@ -53,6 +53,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
@@ -1523,6 +1524,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
                 UpdateMapData((weaponsId, weaponsComputer), map);
             }
+
+            _replay.RecordSnapshot(mapId, map);
         }
     }
 }

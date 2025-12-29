@@ -9,6 +9,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Color = Robust.Shared.Maths.Color;
@@ -17,6 +18,33 @@ namespace Content.Client._RMC14.TacticalMap;
 
 public sealed partial class TacticalMapControl
 {
+    private sealed class CachedMapTexture
+    {
+        public Dictionary<Vector2i, Color>? Colors;
+        public Dictionary<Vector2i, EntProtoId<AreaComponent>>? Areas;
+        public Dictionary<EntProtoId<AreaComponent>, EntityUid>? AreaEntities;
+        public Dictionary<Vector2i, string>? Labels;
+        public bool HasTacMapBounds;
+        public Vector2i TacMapBoundsMin;
+        public Vector2i TacMapBoundsMax;
+        public int ColorsCount;
+        public int LabelsCount;
+        public int AreasCount;
+        public int AreaEntitiesCount;
+        public Texture? BackgroundTexture;
+        public Texture? MapTexture;
+        public Texture? LinkedLzOverlay;
+        public Dictionary<string, Texture> IconOverlays = new();
+        public bool[]? TileMask;
+        public int TileMaskWidth;
+        public int TileMaskHeight;
+        public Vector2i Min;
+        public Vector2i Delta;
+        public Dictionary<Vector2i, string> AreaLabels = new();
+    }
+
+    private static readonly Dictionary<EntityUid, CachedMapTexture> _textureCache = new();
+
     public void SetCurrentMap(EntityUid? mapEntity)
     {
         _currentMapEntity = mapEntity;
@@ -30,6 +58,9 @@ public sealed partial class TacticalMapControl
     public void UpdateTexture(Entity<AreaGridComponent> grid)
     {
         _currentAreaGridEntity = grid.Owner;
+
+        if (TryApplyCachedTexture(grid))
+            return;
 
         if (grid.Comp.Colors.Count == 0)
         {
@@ -165,16 +196,20 @@ public sealed partial class TacticalMapControl
         }
 
         _backgroundTexture = Texture.LoadFromImage(background);
-        Texture = Texture.LoadFromImage(image);
+        var mapTexture = Texture.LoadFromImage(image);
+        Texture = mapTexture;
         _overlayLinkedLzTexture = hasLinkedLzOverlay && linkedLzOverlay != null
             ? Texture.LoadFromImage(linkedLzOverlay)
             : null;
         _overlayIconTextures.Clear();
+        var overlayTextures = new Dictionary<string, Texture>(iconOverlays.Count);
         foreach (var (state, iconOverlay) in iconOverlays)
         {
-            _overlayIconTextures[state] = Texture.LoadFromImage(iconOverlay);
+            var overlayTexture = Texture.LoadFromImage(iconOverlay);
+            _overlayIconTextures[state] = overlayTexture;
+            overlayTextures[state] = overlayTexture;
         }
-        _areaLabels.Clear();
+        var areaLabels = new Dictionary<Vector2i, string>();
         foreach ((Vector2i position, string label) in grid.Comp.Labels)
         {
             if (position.X < boundsMin.X || position.X > boundsMax.X ||
@@ -183,10 +218,86 @@ public sealed partial class TacticalMapControl
                 continue;
             }
 
-            _areaLabels[position] = label;
+            areaLabels[position] = label;
         }
+        _areaLabels = areaLabels;
+
+        CacheTexture(grid, new CachedMapTexture
+        {
+            Colors = grid.Comp.Colors,
+            Areas = grid.Comp.Areas,
+            AreaEntities = grid.Comp.AreaEntities,
+            Labels = grid.Comp.Labels,
+            HasTacMapBounds = grid.Comp.HasTacMapBounds,
+            TacMapBoundsMin = grid.Comp.TacMapBoundsMin,
+            TacMapBoundsMax = grid.Comp.TacMapBoundsMax,
+            ColorsCount = grid.Comp.Colors.Count,
+            LabelsCount = grid.Comp.Labels.Count,
+            AreasCount = grid.Comp.Areas.Count,
+            AreaEntitiesCount = grid.Comp.AreaEntities.Count,
+            BackgroundTexture = _backgroundTexture,
+            MapTexture = mapTexture,
+            LinkedLzOverlay = _overlayLinkedLzTexture,
+            IconOverlays = overlayTextures,
+            TileMask = _tileMask,
+            TileMaskWidth = _tileMaskWidth,
+            TileMaskHeight = _tileMaskHeight,
+            Min = _min,
+            Delta = _delta,
+            AreaLabels = areaLabels
+        });
 
         ApplyViewSettings();
+    }
+
+    private bool TryApplyCachedTexture(Entity<AreaGridComponent> grid)
+    {
+        if (!_textureCache.TryGetValue(grid.Owner, out var cached))
+            return false;
+
+        if (!IsCacheValid(cached, grid.Comp))
+        {
+            _textureCache.Remove(grid.Owner);
+            return false;
+        }
+
+        _min = cached.Min;
+        _delta = cached.Delta;
+        _tileMask = cached.TileMask;
+        _tileMaskWidth = cached.TileMaskWidth;
+        _tileMaskHeight = cached.TileMaskHeight;
+        _backgroundTexture = cached.BackgroundTexture;
+        Texture = cached.MapTexture;
+        _overlayLinkedLzTexture = cached.LinkedLzOverlay;
+        _overlayIconTextures.Clear();
+        foreach (var (state, texture) in cached.IconOverlays)
+        {
+            _overlayIconTextures[state] = texture;
+        }
+        _areaLabels = cached.AreaLabels;
+
+        ApplyViewSettings();
+        return true;
+    }
+
+    private static bool IsCacheValid(CachedMapTexture cached, AreaGridComponent grid)
+    {
+        return ReferenceEquals(cached.Colors, grid.Colors) &&
+               ReferenceEquals(cached.Areas, grid.Areas) &&
+               ReferenceEquals(cached.AreaEntities, grid.AreaEntities) &&
+               ReferenceEquals(cached.Labels, grid.Labels) &&
+               cached.HasTacMapBounds == grid.HasTacMapBounds &&
+               cached.TacMapBoundsMin == grid.TacMapBoundsMin &&
+               cached.TacMapBoundsMax == grid.TacMapBoundsMax &&
+               cached.ColorsCount == grid.Colors.Count &&
+               cached.LabelsCount == grid.Labels.Count &&
+               cached.AreasCount == grid.Areas.Count &&
+               cached.AreaEntitiesCount == grid.AreaEntities.Count;
+    }
+
+    private static void CacheTexture(Entity<AreaGridComponent> grid, CachedMapTexture cached)
+    {
+        _textureCache[grid.Owner] = cached;
     }
 
     private static Color GetLinkedLzOverlayColor(string linkedLz)

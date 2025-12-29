@@ -68,7 +68,6 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
 
         OnPopout += () => Wrapper.PopoutButton.Visible = false;
         Wrapper.PopoutRequested += PopOut;
-        OnClose += OnWindowClose;
     }
 
     public void SetMapId(string? mapId)
@@ -128,23 +127,4 @@ public sealed partial class TacticalMapWindow : RMCPopOutWindow
         }
     }
 
-    private void OnWindowClose()
-    {
-        if (_settingsManager == null || Wrapper == null)
-            return;
-
-        try
-        {
-            var currentSettings = Wrapper.GetCurrentSettings();
-
-            currentSettings.WindowSize = new Vector2(SetSize.X, SetSize.Y);
-            currentSettings.WindowPosition = new Vector2(Position.X, Position.Y);
-
-            _settingsManager.SaveSettings(currentSettings, _currentMapId);
-        }
-        catch (Exception ex)
-        {
-            _logger.Error($"Failed to save window settings on close for map '{_currentMapId}': {ex}");
-        }
-    }
 }
