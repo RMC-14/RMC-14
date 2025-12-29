@@ -381,8 +381,8 @@ public sealed class CMGunSystem : EntitySystem
 
         // Meaning firearms 2 gets around a 12 degree reduction
         var angleDecrease = _skills.GetSkill((user, user), ent.Comp.Skill) * ent.Comp.SkillMultiplier;
-        args.MinAngle -= angleDecrease;
-        args.MaxAngle -= angleDecrease;
+        args.MinAngle = Angle.FromDegrees(Math.Max(args.MinAngle.Degrees - angleDecrease, 0.0));
+        args.MaxAngle = Angle.FromDegrees(Math.Max(args.MaxAngle.Degrees - angleDecrease, args.MinAngle));
     }
 
     private void OnGunDamageModifierMapInit(Entity<GunDamageModifierComponent> ent, ref MapInitEvent args)
