@@ -98,3 +98,7 @@ rmc-overwatch-console-objective-secondary = Secondary Objective
 rmc-overwatch-console-objective-placeholder = Enter objective text...
 rmc-overwatch-console-objective-update = Update
 rmc-overwatch-console-objective-cancel = Cancel
+rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [bold]updated[/bold] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
+rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [bold]cancelled[/bold] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
+rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } updated: '{ $objective }'.[/color][/bold]
+rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' cancelled.[/color][/bold]

@@ -572,7 +572,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
-            !TryComp(squad, out SquadTeamComponent? squadComp))
+            !TryComp(squad, out SquadTeamComponent? squadComp) ||
+            Prototype(squad.Value) is not { } squadProto)
         {
             return;
         }
@@ -587,6 +588,23 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
 
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} set {args.Type} objective for {Name(squad.Value)} squad: {objective}");
+
+        var objectiveTypeName = args.Type switch
+        {
+            SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+            SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+            _ => args.Type.ToString()
+        };
+
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-updated", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", objective)), squadProto.ID);
+
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+
+        var userMsg = Loc.GetString("rmc-overwatch-console-objective-updated", ("squadName", Name(squad.Value)), ("objectiveType", objectiveTypeName), ("objective", objective));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
 
     private void OnOverwatchClearSquadObjectiveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleClearSquadObjectiveBuiMsg args)
@@ -599,9 +617,24 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
-            !TryComp(squad, out SquadTeamComponent? squadComp))
+            !TryComp(squad, out SquadTeamComponent? squadComp) ||
+            Prototype(squad.Value) is not { } squadProto)
         {
             return;
+        }
+
+        var objectiveTypeName = args.Type switch
+        {
+            SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+            SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+            _ => args.Type.ToString()
+        };
+
+        // Get objective text before removing it
+        var cancelledObjective = string.Empty;
+        if (_squad.TryGetSquadObjective((squad.Value, squadComp), args.Type, out var objectiveText))
+        {
+            cancelledObjective = objectiveText;
         }
 
         _squad.RemoveSquadObjective((squad.Value, squadComp), args.Type);
@@ -609,7 +642,17 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.LastObjectiveUpdate = time;
         Dirty(ent);
 
-        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} cleared {args.Type} objective for {Name(squad.Value)} squad");
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} cancelled {args.Type} objective for {Name(squad.Value)} squad");
+
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-cancelled", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective)), squadProto.ID);
+
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+
+        var userMsg = Loc.GetString("rmc-overwatch-console-objective-cancelled", ("squadName", Name(squad.Value)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
