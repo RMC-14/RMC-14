@@ -5,7 +5,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SkillsSystem))]
+[Access(typeof(CMGunSystem))]
 public sealed partial class GunSkilledScatterComponent : Component
 {
     [DataField, AutoNetworkedField]
