@@ -254,7 +254,7 @@ public sealed partial class TacticalMapWrapper : Control
     public void SetupUpdateButton(System.Action<TacticalMapUpdateCanvasMsg> sendMessage)
     {
         UpdateCanvasButton.Button.OnPressed += _ => {
-            Dictionary<Vector2i, string> canvasLabels = new(Canvas.TacticalLabels);
+            Dictionary<Vector2i, TacticalMapLabelData> canvasLabels = new(Canvas.TacticalLabels);
             sendMessage(new TacticalMapUpdateCanvasMsg(Canvas.Lines, canvasLabels));
         };
     }
@@ -344,13 +344,13 @@ public sealed partial class TacticalMapWrapper : Control
         InvalidatePlayerCache();
     }
 
-    public void UpdateTacticalLabels(Dictionary<Vector2i, string> labels)
+    public void UpdateTacticalLabels(Dictionary<Vector2i, TacticalMapLabelData> labels)
     {
         Map.UpdateTacticalLabels(labels);
         Canvas.UpdateTacticalLabels(labels);
     }
 
-    public void UpdateLabels(Dictionary<Vector2i, string> labels)
+    public void UpdateLabels(Dictionary<Vector2i, TacticalMapLabelData> labels)
     {
         UpdateTacticalLabels(labels);
     }
@@ -433,21 +433,30 @@ public sealed partial class TacticalMapWrapper : Control
     private void SetupLabelEditMode()
     {
         Map.OnCreateLabel += (position, text) => {
-            Map.TacticalLabels[position] = text;
+            var labelData = new TacticalMapLabelData(text, _colors[_currentSelectedColorIndex].Color);
+            Map.TacticalLabels[position] = labelData;
         };
 
         Canvas.OnCreateLabel += (position, text) => {
-            Canvas.TacticalLabels[position] = text;
-            Map.TacticalLabels[position] = text;
+            var labelData = new TacticalMapLabelData(text, _colors[_currentSelectedColorIndex].Color);
+            Canvas.TacticalLabels[position] = labelData;
+            Map.TacticalLabels[position] = labelData;
         };
 
         Map.OnEditLabel += (position, text) => {
-            Map.TacticalLabels[position] = text;
+            var color = Map.TacticalLabels.TryGetValue(position, out var existing)
+                ? existing.Color
+                : _colors[_currentSelectedColorIndex].Color;
+            Map.TacticalLabels[position] = new TacticalMapLabelData(text, color);
         };
 
         Canvas.OnEditLabel += (position, text) => {
-            Canvas.TacticalLabels[position] = text;
-            Map.TacticalLabels[position] = text;
+            var color = Canvas.TacticalLabels.TryGetValue(position, out var existing)
+                ? existing.Color
+                : _colors[_currentSelectedColorIndex].Color;
+            var labelData = new TacticalMapLabelData(text, color);
+            Canvas.TacticalLabels[position] = labelData;
+            Map.TacticalLabels[position] = labelData;
         };
 
         Map.OnDeleteLabel += position => {
@@ -460,20 +469,20 @@ public sealed partial class TacticalMapWrapper : Control
         };
 
         Map.OnMoveLabel += (oldPos, newPos) => {
-            if (Map.TacticalLabels.TryGetValue(oldPos, out var text))
+            if (Map.TacticalLabels.TryGetValue(oldPos, out var data))
             {
                 Map.TacticalLabels.Remove(oldPos);
-                Map.TacticalLabels[newPos] = text;
+                Map.TacticalLabels[newPos] = data;
             }
         };
 
         Canvas.OnMoveLabel += (oldPos, newPos) => {
-            if (Canvas.TacticalLabels.TryGetValue(oldPos, out var text))
+            if (Canvas.TacticalLabels.TryGetValue(oldPos, out var data))
             {
                 Canvas.TacticalLabels.Remove(oldPos);
-                Canvas.TacticalLabels[newPos] = text;
+                Canvas.TacticalLabels[newPos] = data;
                 Map.TacticalLabels.Remove(oldPos);
-                Map.TacticalLabels[newPos] = text;
+                Map.TacticalLabels[newPos] = data;
             }
         };
 
@@ -555,8 +564,6 @@ public sealed partial class TacticalMapWrapper : Control
 
         _currentSelectedColorIndex = index;
         Canvas.Color = _colors[index].Color;
-        Map.TacticalLabelTextColor = _colors[index].Color;
-        Canvas.TacticalLabelTextColor = _colors[index].Color;
         Color defaultBorder = Color.FromHex("#2C3440");
 
         for (int i = 0; i < _colorButtons.Count; i++)

@@ -250,9 +250,9 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         }
         else
         {
-            Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+            Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, TacticalMapLabelData>());
             if (!_refreshed)
-                Window.Wrapper.Canvas.UpdateTacticalLabels(new Dictionary<Vector2i, string>());
+                Window.Wrapper.Canvas.UpdateTacticalLabels(new Dictionary<Vector2i, TacticalMapLabelData>());
         }
     }
 }

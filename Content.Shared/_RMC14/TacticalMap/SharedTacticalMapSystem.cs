@@ -156,7 +156,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
         var visibleLayers = GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer);
         var combinedLines = new List<TacticalMapLine>();
-        var combinedLabels = new Dictionary<Vector2i, string>();
+        var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
 
         foreach (var layer in visibleLayers)
         {
@@ -164,9 +164,9 @@ public abstract class SharedTacticalMapSystem : EntitySystem
                 continue;
 
             combinedLines.AddRange(layerData.Lines);
-            foreach (var (pos, text) in layerData.Labels)
+            foreach (var (pos, label) in layerData.Labels)
             {
-                combinedLabels[pos] = text;
+                combinedLabels[pos] = label;
             }
         }
 

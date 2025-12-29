@@ -792,7 +792,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, args.Text, user, LabelOperation.Create);
+            UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
         }
     }
 
@@ -812,7 +812,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, args.NewText, user, LabelOperation.Edit);
+            UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
         }
     }
 
@@ -832,7 +832,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, string.Empty, user, LabelOperation.Delete);
+            UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
         }
     }
 
@@ -872,7 +872,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, args.Text, user, LabelOperation.Create);
+            UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
         }
     }
 
@@ -892,7 +892,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, args.NewText, user, LabelOperation.Edit);
+            UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
         }
     }
 
@@ -912,7 +912,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
         {
-            UpdateIndividualLabel(map, layer, args.Position, string.Empty, user, LabelOperation.Delete);
+            UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
         }
     }
 
@@ -983,7 +983,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
     }
 
-    private void UpdateIndividualLabel(Entity<TacticalMapComponent> map, ProtoId<TacticalMapLayerPrototype> layer, Vector2i position, string text, EntityUid user, LabelOperation operation)
+    private void UpdateIndividualLabel(
+        Entity<TacticalMapComponent> map,
+        ProtoId<TacticalMapLayerPrototype> layer,
+        Vector2i position,
+        string text,
+        Color? color,
+        EntityUid user,
+        LabelOperation operation)
     {
         var layerData = EnsureLayer(map.Comp, layer);
         map.Comp.MapDirty = true;
@@ -993,9 +1000,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             case LabelOperation.Create:
             case LabelOperation.Edit:
                 if (string.IsNullOrWhiteSpace(text))
+                {
                     layerData.Labels.Remove(position);
-                else
-                    layerData.Labels[position] = text;
+                    break;
+                }
+
+                var labelColor = color ?? (layerData.Labels.TryGetValue(position, out var existing)
+                    ? existing.Color
+                    : Color.White);
+                layerData.Labels[position] = new TacticalMapLabelData(text, labelColor);
                 break;
             case LabelOperation.Delete:
                 layerData.Labels.Remove(position);
@@ -1011,11 +1024,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var layerData = EnsureLayer(map.Comp, layer);
         map.Comp.MapDirty = true;
 
-        if (!layerData.Labels.TryGetValue(oldPosition, out var text))
+        if (!layerData.Labels.TryGetValue(oldPosition, out var data))
             return;
 
         layerData.Labels.Remove(oldPosition);
-        layerData.Labels[newPosition] = text;
+        layerData.Labels[newPosition] = data;
 
         _adminLog.Add(LogType.RMCTacticalMapUpdated,
             $"{ToPrettyString(user)} moved a {GetLayerLogName(layer)} tactical map label from {oldPosition} to {newPosition} for {ToPrettyString(map.Owner)}");
@@ -1276,7 +1289,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         user.Comp.Blips = blips;
 
         var combinedLines = new List<TacticalMapLine>();
-        var combinedLabels = new Dictionary<Vector2i, string>();
+        var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
 
         foreach (var layer in visibleLayers)
         {
@@ -1284,9 +1297,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 continue;
 
             combinedLines.AddRange(layerData.Lines);
-            foreach (var (pos, text) in layerData.Labels)
+            foreach (var (pos, label) in layerData.Labels)
             {
-                combinedLabels[pos] = text;
+                combinedLabels[pos] = label;
             }
         }
 
@@ -1309,13 +1322,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         return null;
     }
 
-    private void UpdateCanvas(Entity<TacticalMapComponent> map, List<TacticalMapLine> lines, Dictionary<Vector2i, string> labels, ProtoId<TacticalMapLayerPrototype> layer, EntityUid user, SoundSpecifier? sound = null)
+    private void UpdateCanvas(Entity<TacticalMapComponent> map, List<TacticalMapLine> lines, Dictionary<Vector2i, TacticalMapLabelData> labels, ProtoId<TacticalMapLayerPrototype> layer, EntityUid user, SoundSpecifier? sound = null)
     {
         var layerData = EnsureLayer(map.Comp, layer);
         map.Comp.MapDirty = true;
 
         layerData.Lines = lines;
-        layerData.Labels = new Dictionary<Vector2i, string>(labels);
+        layerData.Labels = new Dictionary<Vector2i, TacticalMapLabelData>(labels);
         layerData.LastUpdateBlips = layerData.Blips.ToDictionary();
 
         var snapshotLayers = ApplyLayerVisibilityRules(user, new[] { layer });
@@ -1383,7 +1396,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var labels = EnsureComp<TacticalMapLabelsComponent>(computer);
 
         var combinedLines = new List<TacticalMapLine>();
-        var combinedLabels = new Dictionary<Vector2i, string>();
+        var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
 
         foreach (var layer in visibleLayers)
         {
@@ -1391,9 +1404,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 continue;
 
             combinedLines.AddRange(layerData.Lines);
-            foreach (var (pos, text) in layerData.Labels)
+            foreach (var (pos, label) in layerData.Labels)
             {
-                combinedLabels[pos] = text;
+                combinedLabels[pos] = label;
             }
         }
 

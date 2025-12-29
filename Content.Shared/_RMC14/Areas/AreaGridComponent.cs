@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.Areas;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(AreaSystem))]
+[Access(typeof(AreaSystem), typeof(SharedAreaLookupSystem))]
 public sealed partial class AreaGridComponent : Component
 {
     [DataField, AutoNetworkedField]

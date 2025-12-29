@@ -20,7 +20,7 @@ public sealed partial class TacticalMapLayerData
    public List<TacticalMapLine> Lines = new();
 
    [DataField]
-   public Dictionary<Vector2i, string> Labels = new();
+   public Dictionary<Vector2i, TacticalMapLabelData> Labels = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentPause]
