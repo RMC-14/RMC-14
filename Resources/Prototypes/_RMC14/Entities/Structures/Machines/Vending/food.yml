@@ -88,6 +88,8 @@
         amount: 15
       - id: RMCMarinePreparedMealSPPLuncheon
         amount: 15
+      - id: RMCMarinePreparedMealSPPShrimp
+        amount: 15
       - id: RMCMarinePreparedMealSPPMeatballs
         amount: 1 # parity amount is 0 but i think this is funnier
       - id: RMCMarinePreparedMealSPPWursts
