@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on GitHub and github noctyrnal",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on GitHub, github noctyrnal, GitHub @TadJohnson00.",
   "size": {
     "x": 32,
     "y": 32
@@ -42,6 +42,12 @@
     },
     {
         "name": "rifle_box_88"
+    },
+    {
+      "name": "rifle_box_90"
+    },
+    {
+      "name": "rifle_box_90d"
     },
     {
       "name": "rifle_box_generic"

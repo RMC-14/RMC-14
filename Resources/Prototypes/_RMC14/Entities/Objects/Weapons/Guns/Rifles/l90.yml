@@ -2,8 +2,8 @@
 
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL90A1
-  name: L90A1
+  id: RMCWeaponRifleL90A1
+  name: L90A1 infantry carbine
   description: The L90A1 infantry carbine. While lacking in modularity and noticeably less ergonomic than later models, it still packs a punch. Chambered in 7x43mm.
   components:
   - type: Sprite
@@ -23,8 +23,6 @@
           - RMCMagazineRifleL90Drum
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a1.rsi
-  - type: RMCLoreExaminable
-    content: rmc-lore-examinable-l90a1
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -74,15 +72,25 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.9, 0.063
-      rmc-aslot-rail: -0.07, 0.18
+      rmc-aslot-rail: -0.07, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
+  - type: Tag
+    tags:
+    - RMCRifleL90
+    - RMCRifleL90A1
 
 - type: entity
-  parent: WeaponRifleL90A1
-  id: WeaponRifleL90A2
-  name: L90A2
+  parent: RMCWeaponRifleL90A1
+  id: RMCWeaponRifleL90A2
+  name: L90A2 infantry carbine
   description: The L90A2 infantry carbine. Highly modular, easy to handle, and hard-hitting, the A2 is widely regarded as a quality rifle by its users. Chambered in 7x43mm.
   components:
   - type: Sprite
@@ -92,8 +100,6 @@
       map: [ "enum.GunVisualLayers.Base" ]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a2.rsi
-  - type: RMCLoreExaminable
-    content: rmc-lore-examinable-l90a2
   - type: Gun
     selectedMode: FullAuto
     availableModes:
@@ -148,12 +154,16 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.87, 0.063
-      rmc-aslot-rail: -0.06, 0.16
+      rmc-aslot-rail: -0.06, 0.15
       rmc-aslot-underbarrel: 0.38, -0.25
+  - type: Tag
+    tags:
+    - RMCRifleL90
+    - RMCRifleL90A2
 
 - type: entity
-  parent: WeaponRifleL90A2
-  id: WeaponRifleL91SWS
+  parent: RMCWeaponRifleL90A2
+  id: RMCWeaponRifleL91SWS
   name: L91 SWS
   description: The L91 Support Weapon System features a significantly longer and heavier barrel than the L90. While this makes it more unwieldy, the added length, weight, and durability enable accurate and sustained fire from a stationary position. Chambered in 7x43mm.
   components:
@@ -174,8 +184,6 @@
           - RMCMagazineRifleL90Drum
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/L91.rsi
-  - type: RMCLoreExaminable
-    content: rmc-lore-examinable-l91
   - type: Gun
     selectedMode: SemiAuto
     availableModes:
@@ -251,14 +259,18 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 1.12, 0.063
-      rmc-aslot-rail: -0.03, 0.16
+      rmc-aslot-rail: -0.03, 0.15
       rmc-aslot-underbarrel: 0.69, -0.20
+  - type: Tag
+    tags:
+    - RMCRifleL90
+    - RMCRifleL91SWS
 
 # Rifles (Filled)
 
 - type: entity
-  parent: WeaponRifleL90A1
-  id: WeaponRifleL90A1Filled
+  parent: RMCWeaponRifleL90A1
+  id: RMCWeaponRifleL90A1Filled
   suffix: Filled
   components:
   - type: ItemSlots
@@ -290,14 +302,52 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.9, 0.063
-      rmc-aslot-rail: -0.07, 0.18
+      rmc-aslot-rail: -0.07, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
 
 - type: entity
-  parent: WeaponRifleL90A2
-  id: WeaponRifleL90A2Filled
+  parent: RMCWeaponRifleL90A1Filled
+  id: RMCWeaponRifleL90A1FilledSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.9, 0.063
+      rmc-aslot-rail: -0.07, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL90A2
+  id: RMCWeaponRifleL90A2Filled
   suffix: Filled
   components:
   - type: ItemSlots
@@ -350,12 +400,57 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.87, 0.063
-      rmc-aslot-rail: -0.06, 0.16
+      rmc-aslot-rail: -0.06, 0.15
       rmc-aslot-underbarrel: 0.38, -0.25
 
 - type: entity
-  parent: WeaponRifleL91SWS
-  id: WeaponRifleL91SWSFilled
+  parent: RMCWeaponRifleL90A2Filled
+  id: RMCWeaponRifleL90A2FilledSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.87, 0.063
+      rmc-aslot-rail: -0.06, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL91SWS
+  id: RMCWeaponRifleL91SWSFilled
   suffix: Filled
   components:
   - type: ItemSlots
@@ -401,166 +496,8 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 1.12, 0.063
-      rmc-aslot-rail: -0.03, 0.16
+      rmc-aslot-rail: -0.03, 0.15
       rmc-aslot-underbarrel: 0.69, -0.20
-
-# Attachments
-
-- type: entity
-  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
-  id: RMCAttachmentL91Bipod
-  name: "L91 SWS integrated bipod"
-  description: "You shouldn't be seeing this."
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-    state: bipod-l91
-  - type: Tag
-    tags:
-    - RMCAttachmentUnderbarrel
-    - RMCAttachmentL91Bipod
-  - type: AttachableToggleable
-    heldOnlyActivate: true
-    userOnly: true
-    doInterrupt: true
-    attachedOnly: true
-    breakOnMove: true
-    breakOnFullRotate: true
-    breakOnDrop: true
-    slowOnBreak: true
-    doAfter: 1.5
-    deactivateDoAfter: 0
-    doAfterNeedHand: false
-    instantToggle: Brace
-    useDelay: 0.5
-    activatePopupText: attachable-popup-activate-deploy-on-ground
-    deactivatePopupText: attachable-popup-deactivate-retract
-    activateSound:
-      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
-      params:
-        volume: -3
-    deactivateSound:
-      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
-      params:
-        volume: -3
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: bipod-l91
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: bipod-l91-on
-    actionName: Deploy Bipod
-    actionDesc: Deploy the bipod and get into a firing position.
-  - type: AttachableVisuals
-    showActive: true
-  - type: AttachableTemporarySpeedMods
-    alteration: Interrupted
-  - type: AttachableSizeMods
-    modifiers:
-    - size: 2
-  - type: AttachableWieldDelayMods
-    modifiers:
-    - delay: 0.2
-  - type: AttachableWeaponRangedMods
-    modifiers:
-    - conditions:
-        wieldedOnly: true
-        activeOnly: true
-      accuracyAddMult: 0.25
-      burstScatterAddMult: -1.16
-      scatterFlat: -4
-
-- type: entity
-  parent: RMCAttachmentU1GrenadeLauncher
-  id: RMCAttachmentL90GL
-  name: L90U3 grenade launcher
-  description: A grenade launcher designed specifically for L90 pattern rifles. Holds three 30mm grenades.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-    layers:
-    - state: grenade-l90
-      map: [ "enum.BreechVisuals.Open" ]
-  - type: OnShootTriggerAmmoTimer
-    delay: 1
-    beepInterval: 2
-    initialBeepDelay: 0
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
-  - type: GenericVisualizer
-    visuals:
-      enum.BreechVisuals.Open:
-        enum.BreechVisuals.Open:
-          True: { state: grenade-l90-open }
-          False: { state: grenade-l90 }
-  - type: AttachableToggleable
-    userOnly: true
-    attachedOnly: true
-    supercedeHolder: true
-    wieldedUseOnly: true
-    activatePopupText: attachable-popup-switch-to-generic
-    deactivatePopupText: attachable-popup-switch-from-generic
-    actionName: Switch to the L90U3 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: grenade-l90
-    iconActive:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
-      state: grenade-l90-on
-  - type: Tag
-    tags:
-    - RMCAttachmentUnderbarrel
-    - RMCAttachmentL90GL
-
-- type: entity
-  parent: RMCAttachmentScopeBase
-  id: RMCAttachmentSASOS
-  name: L91O1 SASOS
-  description: The TSE-produced Small Arms Smart Optical Sight, or SASOS, is an experimental, next-gen IFF-enabling optic designed for use as part of the L91 Support Weapon System.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
-    state: sasos
-  - type: RMCLoreExaminable
-    content: rmc-lore-examinable-sasos
-  - type: AttachableVisuals
-  - type: AttachableToggleable
-    breakOnMove: false
-    icon:
-      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
-      state: sasos
-    actionName: Look through SASOS
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
-  - type: AttachableToggleableSimpleActivate
-  - type: Scope
-    zoomLevels:
-    - zoom: 1
-      offset: 13
-      allowMovement: true
-      doAfter: 0
-  - type: AttachableSpeedMods
-    modifiers:
-    - conditions:
-        activeOnly: true
-      walk: -0.31
-      sprint: -0.448
-  - type: AttachableWieldDelayMods
-    modifiers:
-    - delay: 0.5
-  - type: AttachableIFF
-  - type: AttachableWeaponRangedMods
-    modifiers:
-    - damageAddMult: -0.2
-    - conditions:
-        inactiveOnly: true
-      accuracyAddMult: -0.2
-  - type: Tag
-    tags:
-    - RMCAttachmentRail
-    - RMCAttachmentSASOS
 
 # Magazines
 
@@ -589,6 +526,8 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90
 
 - type: entity
   parent: RMCMagazineRifleL90
@@ -615,6 +554,8 @@
     - state: mag-1
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90
 
 - type: entity
   parent: RMCMagazineRifleL90
@@ -643,6 +584,8 @@
     - state: ammo_band
       color: "#1F951F"
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
 
 - type: entity
   parent: RMCMagazineRifleL90AP
@@ -672,6 +615,8 @@
     - state: ammo_band
       color: "#1F951F"
   - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
 
 - type: entity
   parent: RMCMagazineRifleL90
@@ -901,13 +846,16 @@
 # Tags
 
 - type: Tag
-  id: RMCAttachmentL90GL
+  id: RMCRifleL90
 
 - type: Tag
-  id: RMCAttachmentL91Bipod
+  id: RMCRifleL90A1
 
 - type: Tag
-  id: RMCAttachmentSASOS
+  id: RMCRifleL90A2
+
+- type: Tag
+  id: RMCRifleL91SWS
 
 - type: Tag
   id: RMCMagazineRifleL90
