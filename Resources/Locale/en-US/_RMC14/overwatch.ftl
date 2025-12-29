@@ -93,8 +93,8 @@ rmc-overwatch-console-new-squad-leader-announce = Attention: A new Squad Leader 
 rmc-overwatch-console-new-squad-leader-popup = { $leaderName } is { $squadName }'s new leader!
 
 # Squad objectives
-rmc-overwatch-console-objective-primary = Primary Objective
-rmc-overwatch-console-objective-secondary = Secondary Objective
+rmc-overwatch-console-objective-primary = [bold]Primary Objective[/bold]
+rmc-overwatch-console-objective-secondary = [bold]Secondary Objective[/bold]
 rmc-overwatch-console-objective-placeholder = Enter objective text...
 rmc-overwatch-console-objective-update = Update
 rmc-overwatch-console-objective-cancel = Cancel

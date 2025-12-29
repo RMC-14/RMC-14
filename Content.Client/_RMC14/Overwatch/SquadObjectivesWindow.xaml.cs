@@ -47,7 +47,7 @@ public sealed partial class SquadObjectivesWindow : DefaultWindow
         };
 
         // Objective type label
-        var typeLabel = new Label
+        var typeLabel = new RichTextLabel
         {
             Text = GetObjectiveTypeName(objectiveType),
             StyleClasses = { "ColumnHeaderText" },

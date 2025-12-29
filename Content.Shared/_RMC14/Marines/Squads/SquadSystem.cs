@@ -871,6 +871,9 @@ public sealed class SquadSystem : EntitySystem
         }
 
         Dirty(squad);
+
+        var ev = new SquadObjectivesChangedEvent((squad.Owner, squad.Comp));
+        RaiseLocalEvent(squad, ref ev);
     }
 
     /// <summary>
@@ -883,6 +886,9 @@ public sealed class SquadSystem : EntitySystem
 
         squad.Comp.Objectives.Remove(type);
         Dirty(squad);
+
+        var ev = new SquadObjectivesChangedEvent((squad.Owner, squad.Comp));
+        RaiseLocalEvent(squad, ref ev);
     }
 
     public override void Update(float frameTime)
