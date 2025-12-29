@@ -42,6 +42,33 @@
     },
     {
       "name": "mretray_empty"
+    },
+    {
+      "name": "upp_banush"
+    },
+    {
+      "name": "upp_chowmein"
+    },
+    {
+      "name": "upp_cuban"
+    },
+    {
+      "name": "upp_frankfurter"
+    },
+    {
+      "name": "upp_jiaozi"
+    },
+    {
+      "name": "upp_luncheon"
+    },
+    {
+      "name": "upp_meatballs"
+    },
+    {
+      "name": "upp_wursts"
+    },
+    {
+      "name": "upp_tray"
     }
   ]
 }
