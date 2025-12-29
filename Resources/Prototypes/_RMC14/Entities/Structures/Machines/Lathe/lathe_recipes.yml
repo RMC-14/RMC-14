@@ -213,39 +213,39 @@
 #  result: DrinkGlass <- todo RMC14, rest is already complete
 #  completetime: 4
 #  materials:
-#  CMGlass: 625
+#  CMGlass: 625 # 500
 
 - type: latheRecipe
   id: RMCTablePartTan
   result: RMCTablePartTan
   completetime: 4
   materials:
-    CMSteel: 9375
+    CMSteel: 9375 # 7500
 
 - type: latheRecipe
   id: RMCTablePartAlmayer
   result: RMCTablePartAlmayer
   completetime: 4
   materials:
-    CMSteel: 9375
+    CMSteel: 9375 # 7500
 
 - type: latheRecipe
   id: RMCTablePartReinforced
   result: RMCTablePartReinforced
   completetime: 4
   materials:
-    CMSteel: 18750
+    CMSteel: 18750 # 15000
 
 - type: latheRecipe
   id: RMCRackParts
   result: RMCRackParts
   completetime: 4
   materials:
-    CMSteel: 4687
+    CMSteel: 4687 # 3750
 
 - type: latheRecipe
   id: RMCKitchenKnife
   result: RMCKitchenKnife
   completetime: 4
   materials:
-    CMSteel: 15000
+    CMSteel: 15000 # 12000
