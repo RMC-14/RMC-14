@@ -926,6 +926,39 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL90GL
 
+- type: entity
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentL90UBS
+  name: L90U1 underbarrel shotgun
+  description: An underbarrel shotgun designed specifically for L90 pattern rifles, capable of loading up to five buckshot shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: ubs-l90
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL90UBS
+  - type: AttachableToggleable
+    userOnly: true
+    attachedOnly: true
+    supercedeHolder: true
+    wieldedUseOnly: true
+    activatePopupText: attachable-popup-switch-to-generic
+    deactivatePopupText: attachable-popup-switch-from-generic
+    activateSound:
+      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
+      params:
+        volume: -2
+    actionName: Switch to the L90U1 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: ubs-l90
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: ubs-l90-on
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -979,6 +1012,9 @@
 
 - type: Tag
   id: RMCAttachmentL90GL
+
+- type: Tag
+  id: RMCAttachmentL90UBS
 
 - type: Tag
   id: RMCAttachmentL91Bipod

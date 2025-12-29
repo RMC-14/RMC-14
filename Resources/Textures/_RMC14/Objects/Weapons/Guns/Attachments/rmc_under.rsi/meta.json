@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "The RMC-14 development team. Agrip and vgrip sprited by Cepha. grenade-l90 and bipod-l91 sprited by TadJohnson00.",
+  "copyright": "The RMC-14 development team. Agrip and vgrip sprited by Cepha. grenade-l90, ubs-l90, and bipod-l91 sprited by TadJohnson00.",
   "size": {
     "x": 32,
     "y": 32
@@ -45,6 +45,15 @@
     },
     {
       "name": "grenade-l90-on"
+    },
+    {
+      "name": "ubs-l90"
+    },
+    {
+      "name": "ubs-l90-on"
+    },
+    {
+      "name": "ubs-l90_a"
     }
   ]
 }
