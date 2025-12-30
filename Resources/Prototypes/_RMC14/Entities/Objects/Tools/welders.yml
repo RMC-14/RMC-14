@@ -102,7 +102,7 @@
       collection: Welder
     qualities: Welding
   - type: Welder
-    fuelConsumption: 0.06 # TODO RMC14 change this when welders are fixed
+    fuelConsumption: 0.025
     fuelLitCost: 0
   - type: PointLight
     enabled: false
@@ -129,8 +129,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+          Quantity: 40
+        maxVol: 40
 
 - type: entity
   parent: RMCWelderBase
@@ -162,8 +162,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 12.5
-        maxVol: 12.5 # TODO RMC14 5 when welders are fixed
+          Quantity: 5
+        maxVol: 5
 
 - type: entity
   parent: RMCWelderBase
@@ -187,8 +187,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 150
-        maxVol: 150 # TODO RMC14 60 when welders are fixed
+          Quantity: 80
+        maxVol: 80
 
 - type: entity
   parent: RMCWelderBase
@@ -202,5 +202,5 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+          Quantity: 40
+        maxVol: 40

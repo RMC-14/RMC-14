@@ -191,9 +191,38 @@ public abstract partial class SharedToolSystem
 
     private void OnDeactivateAttempt(Entity<WelderComponent> entity, ref ItemToggleDeactivateAttemptEvent args)
     {
-        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value)) {
+        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value))
+        {
             args.Cancelled = true;
             return;
         }
+    }
+
+    /// Amount of 0 checks if fuel exists without consuming.
+    /// Amounts 1-5 consume that many units of fuel.
+    /// Returns true if there's enough fuel, false otherwise.
+    public bool CheckAndRemoveFuel(Entity<WelderComponent> entity, float fuelAmount)
+    {
+        if (!SolutionContainerSystem.TryGetSolution(
+                entity.Owner,
+                entity.Comp.FuelSolutionName,
+                out var solutionEntity,
+                out var solution))
+            return false;
+
+        var currentFuel = solution.GetTotalPrototypeQuantity(entity.Comp.FuelReagent);
+
+        // Amount 0 = just check if fuel exists, don't consume
+        if (fuelAmount == 0)
+            return currentFuel > FixedPoint2.Zero;
+
+        // Amounts 1-5 = check and consume
+        if (currentFuel >= FixedPoint2.New(fuelAmount))
+        {
+            SolutionContainerSystem.RemoveReagent(solutionEntity.Value, entity.Comp.FuelReagent, FixedPoint2.New(fuelAmount));
+            return true;
+        }
+
+        return false;
     }
 }
