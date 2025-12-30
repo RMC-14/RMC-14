@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -6,6 +7,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Item;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
@@ -23,6 +25,7 @@ public abstract class RMCHandsSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCStorageSystem _rmcStorage = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
@@ -61,6 +64,12 @@ public abstract class RMCHandsSystem : EntitySystem
             return;
 
         if (!_whitelist.IsValid(ent.Comp.Whitelist, args.Item))
+        {
+            args.Cancel();
+            return;
+        }
+
+        if (!ent.Comp.AllowDead && _mobState.IsDead(args.Item))
             args.Cancel();
     }
 
@@ -87,8 +96,10 @@ public abstract class RMCHandsSystem : EntitySystem
             return;
 
         var user = args.User;
-
         if (!ent.Comp.CanToggleStorage)
+            return;
+
+        if (_container.GetContainingContainers(ent.Owner).All(c => c.Owner != user))
             return;
 
         AlternativeVerb switchStorageVerb = new()
@@ -156,6 +167,9 @@ public abstract class RMCHandsSystem : EntitySystem
             return false;
 
         if (user.Comp != null && !_whitelist.IsValid(user.Comp.Whitelist, item.Owner))
+            return false;
+
+        if (user.Comp is { AllowDead: false } && _mobState.IsDead(item))
             return false;
 
         return true;

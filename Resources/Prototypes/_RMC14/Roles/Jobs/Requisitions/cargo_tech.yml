@@ -43,6 +43,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cargo
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearCargoTech
@@ -60,7 +61,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointCargoTech
-  name: cargo tech spawn point
+  name: req tech spawn point
   components:
   - type: SpawnPoint
     job_id: CMCargoTech

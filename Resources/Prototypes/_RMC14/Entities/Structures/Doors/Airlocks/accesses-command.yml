@@ -36,7 +36,7 @@
 - type: entity
   parent: CMAirlockCommand
   id: CMAirlockQuartermasterLocked
-  suffix: Quartermaster, Locked
+  suffix: Logistics Officer, Locked
   components:
   - type: AccessReader
     access: [["CMAccessQM"]]

@@ -72,6 +72,41 @@
 
 - type: entity
   parent: CMBeltMedicBag
+  id: RMCBeltMedicBagSPP
+  name: Type 41 pattern lifesaver bag
+  description: The Type 41 load rig is the standard load-bearing equipment of the SPP military. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
+  components:
+  # TODO RMC14 - Sprites
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPCommandoFilled
+  suffix: Commando, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+    # TODO RMC: splints
+    - id: CMEpinephrineAutoInjector
+    - id: CMDexalinPlusAutoInjector
+    # TODO RMC: oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterDexalin
+    - id: CMPillCanisterDylovene
+    - id: CMPillCanisterInaprovaline
+    # TODO RMC: tramadol pills
+    # TODO RMC: peridaxon
+
+- type: entity
+  parent: RMCBeltMedicBagSPP
   id: RMCBeltMedicBagPMC
   name: WY-TM625 pattern medical bag
   description: The WY-TM625 is the standard load-bearing equipment of the W-Y security forces. This configuration mounts a duffel bag filled with a range of injectors and light medical supplies, and is common among medics.
@@ -80,8 +115,6 @@
     sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Belt/medicbag/snow-urban.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
 
 - type: entity
   parent: RMCBeltMedicBagPMC
@@ -105,5 +138,31 @@
     # TODO RMC: tramadol pills
     # TODO RMC: splint nano
     - id: CMHealthAnalyzer
-    # TODO RMC: imidazoline pills
+    - id: RMCPillCanisterImidazoline # you're welcome, whoever was here last. fly high, mercenary
     # TODO RMC: alkysine pills
+
+- type: entity
+  parent: CMBeltMedicBag
+  id: RMCBeltMedicBagRoyal
+  suffix: Filled, Royal
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterBicaridine
+    - id: CMPillCanisterKelotane
+    - id: CMPillCanisterKelotane
+    # - id: CMPillCanisterTramadol
+    # - id: CMPillCanisterTramadol
+    - id: CMPillCanisterDylovene
+    # - id: CMPillCanisterPeridaxon
+    - id: CMPillCanisterDexalin
+    # - id: CMPillCanisterAlkysine
+    - id: RMCPillCanisterImidazoline
+    - id: CMUpgradedTraumaKit10
+      amount: 3
+    - id: CMUpgradedBurnKit10
+      amount: 3
+    # - id: RMCSplint
+    - id: CMDexalinPlusAutoInjector
+    - id: CMHealthAnalyzer

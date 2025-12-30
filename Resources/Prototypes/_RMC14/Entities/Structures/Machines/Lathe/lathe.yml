@@ -137,8 +137,8 @@
   #    - Infrared sensor (1000 metal, 500 glass)->(1250, 625)
   #    - Timer (500 metal, 50 glass)->(625, 62)
   #    - Proximity sensor (800 metal, 200 glass)->(1000, 250)
-  - CMLightTube
-  - CMLightBulb
+  - RMCLightTube
+  - RMCLightBulb
   #    - Glass ashtray (60 glass)->(75)
   - CMHandLabeler
 #    - Camera assembly (700 metal, 300 glass)->(875, 375)

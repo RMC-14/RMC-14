@@ -161,6 +161,18 @@
       - RMCEncryptionKeySPPMedic
 
 - type: entity
+  parent: RMCHeadsetSPPAbstract
+  id: RMCHeadsetSPPCommando
+  name: SPP-KdoC headset
+  description: A specialist headset used by SPP kommandos.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - RMCEncryptionKeySPPCommand
+      - CMEncryptionKeyColony
+
+- type: entity
   parent: RMCHeadsetIconsSPP
   id: RMCHeadsetDistressSPP
   name: SPP colony headset

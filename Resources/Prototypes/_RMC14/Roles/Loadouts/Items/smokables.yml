@@ -77,6 +77,20 @@
     - RMCTarbackCase
 
 - type: loadout
+  id: ShioRoyalsTubeRMC
+  cost: 2
+  storage:
+    back:
+    - RMCShioRoyalsTube
+
+- type: loadout
+  id: ShioRoyalsCaseRMC
+  cost: 6
+  storage:
+    back:
+    - RMCShioRoyalsCase
+
+- type: loadout
   id: PremiumCigarRMC
   cost: 2
   storage:

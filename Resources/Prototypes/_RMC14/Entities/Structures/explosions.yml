@@ -213,6 +213,8 @@
       range: 1
       cardinalRange: 3
       ordinalRange: 3
+    soundWarning: /Audio/_RMC14/Effects/rocketpod_fire.ogg
+    markerWarning: true
 
 - type: entity
   parent: RMCDropshipMissileExplosionBase

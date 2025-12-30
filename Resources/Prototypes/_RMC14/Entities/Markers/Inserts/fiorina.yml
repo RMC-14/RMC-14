@@ -1,0 +1,23 @@
+# Fiorina
+- type: entity
+  abstract: true
+  parent: RMCMapInsertBase
+  id: RMCMapInsertFiorinaBase
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaPodholder
+  name: Podholder # Not mapped
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/podholder.yml"
+      probability: 0.1
+      offset: 1,1

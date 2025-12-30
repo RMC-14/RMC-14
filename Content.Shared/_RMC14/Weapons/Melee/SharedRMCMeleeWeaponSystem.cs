@@ -260,18 +260,23 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         if (meleeEv.Weapon == meleeEv.Target)
             return false;
 
-        var disarm = false;
-        switch (newAttack)
+        var disarm = newAttack switch
         {
-            case DisarmAttackEvent:
-                disarm = true ;
-                break;
-        }
+            DisarmAttackEvent => true,
+            _ => false,
+        };
 
         // The new target is unable to be attacked by the user.
         if (!_blocker.CanAttack(user, GetEntity(meleeEv.Target), weapon, disarm))
             return false;
 
         return true;
+    }
+
+    public float GetUserLightAttackRange(EntityUid user, EntityUid? target, MeleeWeaponComponent melee)
+    {
+        var ev = new RMCMeleeUserGetRangeEvent(target, melee.Range);
+        RaiseLocalEvent(user, ref ev);
+        return ev.Range;
     }
 }

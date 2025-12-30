@@ -175,6 +175,8 @@
     - DoorBumpOpener
   - type: ItemIFF
     faction: FactionMarine
+  - type: Corrodible
+    isCorrodible: false
 
 - type: entity
   parent: CMIDCardBase

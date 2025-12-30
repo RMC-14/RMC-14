@@ -42,6 +42,7 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointSPPRiflemanPVE
   name: spp rifleman spawn point
   suffix: PVE

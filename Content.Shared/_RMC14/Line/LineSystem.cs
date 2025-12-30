@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared.Beam.Components;
@@ -37,7 +38,7 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, out EntityUid? blocker, bool hitBlocker = false)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false)
     {
         blocker = null;
         start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
@@ -45,6 +46,9 @@ public sealed class LineSystem : EntitySystem
         var tiles = new List<LineTile>();
         if (!start.TryDistance(EntityManager, _transform, end, out var distance))
             return tiles;
+
+        if (range != null)
+            distance = Math.Min(range.Value, distance);
 
         var distanceX = end.X - start.X;
         var distanceY = end.Y - start.Y;
@@ -57,29 +61,69 @@ public sealed class LineSystem : EntitySystem
         var gridComp = gridId == null ? null : _mapGridQuery.CompOrNull(gridId.Value);
         Entity<MapGridComponent>? grid = gridComp == null ? null : new Entity<MapGridComponent>(gridId!.Value, gridComp);
         var lastCoords = start;
-        var delay = 0;
 
         for (var i = 0; i < distance; i++)
         {
             x += xOffset;
             y += yOffset;
-
-            var entityCoords = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
-            if (entityCoords == lastCoords)
+            var center = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
+            if (center == lastCoords)
                 continue;
 
-            var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
-            var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
-            if (blocked && !hitBlocker)
+            List<EntityCoordinates> coords = new(9);
+            coords.Add(center);
+            if (thick && i > 1)
+            {
+                for (var xo = -1; xo < 2; xo++)
+                {
+                    for (var yo = -1; yo < 2; yo++)
+                    {
+                        if (xo == 0 && yo == 0)
+                            continue;
+
+                        var point = new EntityCoordinates(start.EntityId, x + xo, y + yo).SnapToGrid(EntityManager, _mapManager);
+                        coords.Add(point);
+                    }
+                }
+            }
+
+            var centerBlocked = false;
+            for (var j = 0; j < coords.Count; j++)
+            {
+                var entityCoords = coords[j];
+                var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
+                var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
+                if (blocked && !hitBlocker)
+                    continue;
+
+                var mapCoords = _transform.ToMapCoordinates(entityCoords);
+
+                var isDuplicate = false;
+                foreach (var existing in tiles)
+                {
+                    if (existing.Coordinates.Position == mapCoords.Position)
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (!isDuplicate)
+                {
+                    var delay = Vector2.Distance(entityCoords.Position, start.Position) - 1;
+                    tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
+                }
+
+                if (blocked && j == 0)
+                {
+                    centerBlocked = true;
+                    break;
+                }
+            }
+
+            if (centerBlocked)
                 break;
 
-            lastCoords = entityCoords;
-            var mapCoords = _transform.ToMapCoordinates(entityCoords);
-            tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
-            delay++;
-
-            if (blocked)
-                break;
+            lastCoords = center;
         }
 
         return tiles;

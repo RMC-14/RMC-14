@@ -9259,7 +9259,7 @@ entities:
     - type: Transform
       pos: -23.5,13.5
       parent: 1
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 589
     components:
@@ -10265,7 +10265,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.5,17.5
       parent: 1
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 614
     components:

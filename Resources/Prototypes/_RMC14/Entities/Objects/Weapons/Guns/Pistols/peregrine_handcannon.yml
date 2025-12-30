@@ -59,6 +59,7 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         whitelist:
@@ -119,6 +120,14 @@
     - Sidearm
     - RMCWeaponPistolHandcannonGold
   - type: RMCBattleExecute
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
 
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
@@ -134,14 +143,6 @@
     tags:
     - Sidearm
     - RMCWeaponPistolHandcannonWyvern
-  - type: RMCAirShot
-    preparationTime: 1.5
-    requiresCombat: true
-    doAfterBreakOnMove: false
-    ignoreRoof: true
-    shakeAmount: 5
-    requiredSkills:
-      RMCSkillLeadership: 3
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -284,8 +285,11 @@
   - type: CMArmorPiercing
     amount: 5
   - type: RMCStunOnHit
-    maxRange: 4.5
-    stunTime: 1
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 70
   - type: RMCDebilitate

@@ -75,8 +75,16 @@ public sealed class AreaSystem : EntitySystem
                 continue;
             }
 
+            EnsureAreaEntityExists(ent.Comp, area);
+        }
+    }
+
+    private void EnsureAreaEntityExists(AreaGridComponent areaGrid, EntProtoId<AreaComponent> area)
+    {
+        if (!areaGrid.AreaEntities.ContainsKey(area))
+        {
             var areaEnt = Spawn(area, MapCoordinates.Nullspace);
-            ent.Comp.AreaEntities[area] = areaEnt;
+            areaGrid.AreaEntities[area] = areaEnt;
             _rmcPvs.AddGlobalOverride(areaEnt);
         }
     }
@@ -84,6 +92,8 @@ public sealed class AreaSystem : EntitySystem
     public void ReplaceArea(AreaGridComponent areaGrid, Vector2i position, EntProtoId<AreaComponent> area)
     {
         areaGrid.Areas[position] = area;
+
+        EnsureAreaEntityExists(areaGrid, area);
     }
 
     public bool TryGetArea(
@@ -356,6 +366,25 @@ public sealed class AreaSystem : EntitySystem
             return false;
 
         return area.Value.Comp.SupplyDrop;
+    }
+
+    public void TrySetCanOrbitalBombardRoofing(Entity<RoofingEntityComponent?> roofing, bool ob)
+    {
+        if (!Resolve(roofing, ref roofing.Comp, false) ||
+            roofing.Comp.CanOrbitalBombard == ob)
+        {
+            return;
+        }
+
+        roofing.Comp.CanOrbitalBombard = ob;
+        Dirty(roofing);
+    }
+
+    public string GetAreaName(EntityUid coordinates)
+    {
+        return TryGetArea(coordinates.ToCoordinates(), out _, out var area)
+            ? area.Name
+            : Loc.GetString("rmc-tacmap-alert-no-area");
     }
 
     public override void Update(float frameTime)

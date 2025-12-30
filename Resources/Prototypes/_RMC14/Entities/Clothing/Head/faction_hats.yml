@@ -135,11 +135,11 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_general.rsi
 
-# Quartermaster hats
+# Logistics Officer hats
 - type: entity
   parent: CMHeadCapCargo
   id: RMCHeadCapQuartermaster
-  name: UNMC quartermaster cap
+  name: UNMC Logistics Officer cap
   description: It's a fancy hat for a not-so-fancy military supply clerk.
   components:
   - type: Sprite
@@ -150,7 +150,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretQuartermaster
-  name: UNMC quartermaster beret
+  name: UNMC Logistics Officer beret
   description: A beret with the sergeant insignia emblazoned on it. It symbolizes hard work and shady business.
   components:
   - type: Sprite

@@ -43,6 +43,15 @@
     - range: 4
       falloff: 10
   - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 2.5 # TODO RMC14 1.5 if shot from underbarrel shotgun
+      stunTime: 1.4
+      slowTime: 2
+      superSlowTime: 1
+#    - whitelist: # TODO RMC14 stamina damage targeted at part
+#      - Marine
 
 - type: entity
   parent: CMPelletShotgunBase
@@ -68,10 +77,19 @@
   - type: CMArmorPiercing
     amount: 20
   - type: RMCStunOnHit
-    maxRange: 6.5
-    stunTime: 1
-    superSlowTime: 2
-    slowTime: 6
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 6.5
+      stunTime: 1
+      slowTime: 3
+      superSlowTime: 1
+    - whitelist: # TODO RMC14 stamina damage targeted at part
+        components:
+        - Marine
+      maxRange: 6.5
+      slowTime: 2
+      superSlowTime: 1
   - type: RMCProjectileAccuracy
     accuracy: 100
     thresholds:

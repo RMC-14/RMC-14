@@ -1,0 +1,21 @@
+- type: gameMap
+  id: Rover
+  mapName: "Rover"
+  mapPath: /Maps/_RMC14/PVE/rover.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Rover:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'UNS Rover'
+        - type: StationJobs
+          availableJobs:
+            RMCFORECONPVESquadLead: [1, 1]
+            RMCFORECONPVEAssistantSL: [1, 1]
+            RMCFORECONPVERadioTelephoneOperator: [1, 1]
+            RMCFORECONPVECorpsman: [1, 1]
+            RMCFORECONPVESmartgunner: [1, 1]
+            RMCFORECONPVERifleman: [3, 3]

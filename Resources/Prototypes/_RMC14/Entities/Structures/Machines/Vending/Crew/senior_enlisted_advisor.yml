@@ -19,6 +19,7 @@
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
+      - id: RMCStampSEA
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -77,6 +78,7 @@
       - id: RMCWebbingLegPouch
       - id: RMCWebbingLegPouchBlack
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
@@ -85,7 +87,9 @@
       takeAll: RMCBook
       entries:
       - id: RMCGuidebookLawMarine
+        amount: 10
       - id: RMCGuidebookSOP
+        amount: 10
     - name: Patches
       takeAll: RMCPatch
       entries:
@@ -140,5 +144,6 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

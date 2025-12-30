@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
@@ -50,6 +51,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
@@ -71,8 +73,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -94,6 +95,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
 
+    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
+    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+    private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
+
     private static readonly ImmutableArray<Direction> Directions = Enum.GetValues<Direction>()
         .Where(d => d != Direction.Invalid)
         .ToImmutableArray();
@@ -112,11 +117,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private const string XenoStructuresAnimation = "RMCEffect";
     private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
 
-    private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
-    private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
-    private static readonly ProtoId<TagPrototype> PlatformTag = "Platform";
-
     private float _densityThreshold;
+    private TimeSpan _newResinPreventCollideTime;
+
+    private readonly HashSet<EntityUid> _intersectingResin = new();
+
+    // Multiplier force to push out corpses
+    private const float ResinDoorCorpsePushForce = 10f;
+
+    private static readonly List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
 
     // Multiplier force to push out corpses
     private const float ResinDoorCorpsePushForce = 10f;
@@ -178,6 +191,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoConstructComponent, MapInitEvent>(OnXenoConstructMapInit);
         SubscribeLocalEvent<XenoConstructComponent, EntityTerminatingEvent>(OnXenoConstructRemoved);
 
+        SubscribeLocalEvent<XenoRecentlyConstructedComponent, PreventCollideEvent>(OnRecentlyPreventCollide);
+
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
             {
@@ -193,6 +208,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         UpdatesAfter.Add(typeof(SharedPhysicsSystem));
 
         Subs.CVar(_config, RMCCVars.RMCResinConstructionDensityCostIncreaseThreshold, v => _densityThreshold = v, true);
+        Subs.CVar(_config, RMCCVars.RMCNewResinPreventCollideTimeSeconds, v => _newResinPreventCollideTime = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnXenoOrderConstructionClick(XenoOrderConstructionClickEvent ev, EntitySessionEventArgs args)
@@ -242,6 +258,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoStructureDestruction(Entity<XenoAnnounceStructureDestructionComponent> ent, ref DestructionEventArgs args)
     {
+        if (HasComp<HiveConstructionSuppressAnnouncementsComponent>(ent))
+            return;
+
         if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 
@@ -439,7 +458,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var inRange = _queenEye.IsInQueenEye(xeno.Owner) ||
                         (hasBoost && _queenBoostQuery.TryComp(xeno.Owner, out var boost)
                             ? _transform.InRange(_transform.GetMoverCoordinates(xeno.Owner), args.Target, boost.RemoteUpgradeRange)
-                            : _interaction.InRangeUnobstructed(xeno.Owner, upgradeable.Owner, popup: true));
+                            : _transform.InRange(_transform.GetMoverCoordinates(xeno.Owner), args.Target, xeno.Comp.BuildRange.Float()));
 
             if (!inRange)
                 return;
@@ -447,7 +466,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             var cost = upgradeable.Comp.Cost;
             if (_area.TryGetArea(snapped, out var area, out _))
                 cost = GetDensityCost(area.Value, xeno, cost);
-
 
             if (!hasBoost && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
@@ -461,7 +479,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 return;
 
             QueueDel(upgradeable);
-            Spawn(to, snapped);
+            var spawn = Spawn(to, snapped);
+            _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
             return;
         }
@@ -502,7 +521,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, xeno, finalBuildTime, ev, xeno)
         {
             BreakOnMove = true,
-            RootEntity = true
+            RootEntity = true,
+            CancelDuplicate = false
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
@@ -562,7 +582,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         args.Handled = true;
 
-        // TODO RMC14 stop collision for mobs until they move off
         if (_net.IsServer)
         {
             var structureToSpawn = args.StructureId;
@@ -578,6 +597,31 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             var structure = Spawn(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
+
+            if (HasComp<XenoRecentlyBuiltPreventCollisionsComponent>(structure))
+            {
+                _intersectingResin.Clear();
+                _entityLookup.GetEntitiesIntersecting(structure, _intersectingResin);
+                XenoRecentlyConstructedComponent? recently = null;
+                foreach (var id in _intersectingResin)
+                {
+                    if (!HasComp<MarineComponent>(id) && !HasComp<XenoComponent>(id))
+                        continue;
+
+                    if (id == xeno.Owner)
+                        continue;
+
+                    recently ??= EnsureComp<XenoRecentlyConstructedComponent>(structure);
+                    recently.StopCollide.Add(id);
+                }
+
+                if (recently != null)
+                {
+                    recently.ExpireAt = _timing.CurTime + _newResinPreventCollideTime;
+                    Dirty(structure, recently);
+                }
+            }
+
             _adminLogs.Add(LogType.RMCXenoConstruct, $"Xeno {ToPrettyString(xeno):xeno} constructed {ToPrettyString(structure):structure} at {coordinates}");
         }
 
@@ -820,7 +864,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 if (inRange)
                     return;
             }
-            if (_interaction.InRangeUnobstructed(args.User, upgradeable.Owner, popup: false))
+            if (_transform.InRange(_transform.GetMoverCoordinates(args.User), upgradeable.Owner.ToCoordinates(), construction.BuildRange.Float()))
                 return;
         }
 
@@ -1052,6 +1096,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         area.Value.Comp.ResinConstructCount--;
         Dirty(area.Value);
     }
+
+    private void OnRecentlyPreventCollide(Entity<XenoRecentlyConstructedComponent> ent, ref PreventCollideEvent args)
+    {
+        if (ent.Comp.StopCollide.Contains(args.OtherEntity))
+            args.Cancelled = true;
+    }
     private void OnXenoDoorStateChange(Entity<ResinDoorComponent> resinDoor, ref DoorStateChangedEvent args)
     {
         if (args.State != DoorState.Closed)
@@ -1134,6 +1184,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return null;
     }
 
+    public FixedPoint2 GetStructureMinRange(EntProtoId prototype)
+    {
+        XenoConstructionMinRangeComponent? minRangeComp = null;
+        if (_prototype.TryIndex(prototype, out var buildChoice))
+            buildChoice.TryGetComponent(out minRangeComp, _compFactory);
+        if (minRangeComp != null)
+            return minRangeComp.MinRange.Float();
+        return 0;
+    }
+
     private float? GetBuildSpeed(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
@@ -1156,6 +1216,17 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return null;
     }
 
+    public FixedPoint2 GetStructureMinRange(EntProtoId? building)
+    {
+        if (building is { } choice &&
+            GetStructureMinRange(choice) is { } minRange)
+        {
+            return minRange;
+        }
+
+        return 0;
+    }
+
     private bool TileSolidAndNotBlocked(EntityCoordinates target)
     {
         return _turf.GetTileRef(target) is { } tile &&
@@ -1165,7 +1236,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                !_xenoNest.HasAdjacentNestFacing(target);
     }
 
-    private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range)
+    private bool InRangePopup(EntityUid xeno, EntityCoordinates target, float range, float minRange = 0)
     {
         var origin = _transform.GetMoverCoordinates(xeno);
         target = target.SnapToGrid(EntityManager, _map);
@@ -1175,7 +1246,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (_transform.InRange(origin, target, 0.75f))
+        if (minRange != 0 && _transform.InRange(origin, target, minRange))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-cant-build-in-self"), target, xeno);
             return false;
@@ -1213,7 +1284,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (ev.Range > 0 && !_queenEye.IsInQueenEye(xeno.Owner))
         {
-            if (!InRangePopup(xeno, target, ev.Range.Float()))
+            if (!InRangePopup(xeno, target, ev.Range.Float(), GetStructureMinRange(buildChoice).Float()))
                 return false;
         }
 
@@ -1285,7 +1356,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return false;
         }
 
-        if (!CanSecreteOnTilePopup(xeno, xeno.Comp.BuildChoice, target, false, false))
+        if (!CanSecreteOnTilePopup(xeno, choice, target, false, false))
             return false;
 
         if (_transform.GetGrid(target) is not { } gridId ||
@@ -1450,7 +1521,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         var mapId = mapCoords.MapId;
         var aabbRange = new Box2(mapCoords.X - 1.5F, mapCoords.Y + 1.5F, mapCoords.X + 1.5F, mapCoords.Y - 1.5F);
-        var nearHiveLimitedStructure = _lookup.AnyComponentsIntersecting(typeof(HiveConstructionLimitedComponent), mapId, aabbRange);
+        var nearHiveLimitedStructure = _entityLookup.AnyComponentsIntersecting(typeof(HiveConstructionLimitedComponent), mapId, aabbRange);
         var centerTile = _mapSystem.GetTileRef(map, mapCoords);
         var userCoords = _transform.ToCoordinates(user, mapCoords);
 
@@ -1567,6 +1638,32 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             cost = plasma.MaxPlasma;
 
         return cost;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+        var query = EntityQueryEnumerator<XenoRecentlyConstructedComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (time >= comp.ExpireAt)
+            {
+                RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
+                continue;
+            }
+
+            _intersectingResin.Clear();
+            _entityLookup.GetEntitiesIntersecting(uid, _intersectingResin);
+            for (var i = comp.StopCollide.Count - 1; i >= 0; i--)
+            {
+                var colliding = comp.StopCollide[i];
+                if (!_intersectingResin.Contains(colliding))
+                    comp.StopCollide.RemoveAt(i);
+            }
+
+            if (comp.StopCollide.Count == 0)
+                RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
+        }
     }
 
 }

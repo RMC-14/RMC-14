@@ -1,6 +1,6 @@
 ﻿# Corporate Liaison
 - type: loadout
-  id: DrinkCanAleRMC
+  id: RMCWeYaClipboard
   cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -10,4 +10,29 @@
       time: 90000 # 25 hours
   storage:
     back:
-    - CMDrinkCanAle
+      - RMCWeYaClipboard
+
+- type: loadout
+  id: RMCWeYaThermos
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 252000 # 70 hours
+  storage:
+    back:
+    - RMCWeYaThermos
+
+- type: loadout
+  id: RMCJacketWindbreakerWEYA
+  cost: 1
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobLiaison
+      time: 630000 # 175 hours
+  equipment:
+    outerClothing: RMCJacketWindbreakerWEYA

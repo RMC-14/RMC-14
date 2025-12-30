@@ -98,3 +98,5 @@
     item: RMCOrganXenoHeartT1
   - type: VentCrawler
     ventCrawlIcon: sentinel
+  - type: RMCActionOrder
+    id: CMXenoSentinel

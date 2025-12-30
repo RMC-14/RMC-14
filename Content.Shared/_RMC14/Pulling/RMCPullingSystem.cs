@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Fireman;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -58,6 +59,8 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         _firemanQuery = GetEntityQuery<FiremanCarriableComponent>();
 
+        SubscribeLocalEvent<BuckleComponent, RMCGetPullTargetEvent>(OnGetPullTarget);
+
         SubscribeLocalEvent<XenoComponent, RMCPullToggleEvent>(OnXenoPullToggle);
 
         SubscribeLocalEvent<ParalyzeOnPullAttemptComponent, PullAttemptEvent>(OnParalyzeOnPullAttempt);
@@ -84,6 +87,18 @@ public sealed class RMCPullingSystem : EntitySystem
         SubscribeLocalEvent<PullerComponent, PullStoppedMessage>(OnPullerPullStopped);
 
         SubscribeLocalEvent<BeingPulledComponent, PullStoppedMessage>(OnBeingPulledPullStopped);
+    }
+
+    private void OnGetPullTarget(Entity<BuckleComponent> ent, ref RMCGetPullTargetEvent ev)
+    {
+        if (ent.Owner != ev.Target)
+            return;
+
+        if (HasComp<XenoComponent>(ev.User))
+            return;
+
+        if (HasComp<RMCRetargetBucklePullComponent>(ent.Comp.BuckledTo))
+            ev.Target = ent.Comp.BuckledTo.Value;
     }
 
     private void OnParalyzeOnPullAttempt(Entity<ParalyzeOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -409,6 +424,16 @@ public sealed class RMCPullingSystem : EntitySystem
             return true;
 
         return false;
+    }
+
+    public EntityUid? TryRetargetPull(EntityUid user, EntityUid target)
+    {
+        var ev = new RMCGetPullTargetEvent(user, target);
+        RaiseLocalEvent(target, ref ev);
+        if (target == ev.Target)
+            return null;
+
+        return ev.Target;
     }
 
     public override void Update(float frameTime)

@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Damage;
+using Content.Shared._RMC14.DoAfter;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -35,6 +36,7 @@ public abstract class SharedWoundsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStackSystem _stacks = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -146,7 +148,7 @@ public abstract class SharedWoundsSystem : EntitySystem
         args.Handled = true;
         if (damage != FixedPoint2.Zero)
         {
-            var total = _rmcDamageable.DistributeDamage((target, damageable), treater.Comp.Group, damage);
+            var total = _rmcDamageable.DistributeDamageCached((target, damageable), treater.Comp.Group, damage);
             _damageable.TryChangeDamage(target, total, true, damageable: damageable, origin: user, tool: args.Used);
         }
 
@@ -216,7 +218,7 @@ public abstract class SharedWoundsSystem : EntitySystem
             _popup.PopupClient(Loc.GetString(userPopup, ("target", target)), target, user);
 
         if (user != target && targetPopup != null)
-            _popup.PopupEntity(Loc.GetString(targetPopup, ("user", user)), target, target);
+            _popup.PopupEntity(Loc.GetString(targetPopup, ("user", user)), target, target, PopupType.Large);
 
         if (user != target && othersPopup != null)
         {
@@ -355,13 +357,13 @@ public abstract class SharedWoundsSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-wounds-start-fumbling", ("name", treater.Owner)), target, user);
 
         var scaling = treater.Comp.ScalingDoAfter;
+        scaling *= _skills.GetSkillDelayMultiplier(user, treater.Comp.DoAfterSkill, treater.Comp.DoAfterSkillMultipliers);
+        if (user == target)
+            scaling *= treater.Comp.SelfTargetDoAfterMultiplier;
+
         if (scaling > TimeSpan.Zero)
         {
-            var scaledDoAfter = scaling * damage.Double();
-            var minimumDoAfter = treater.Comp.MinimumDoAfter;
-            if (scaledDoAfter < minimumDoAfter)
-                scaledDoAfter = minimumDoAfter;
-
+            var scaledDoAfter = scaling * Math.Abs(damage.Double());
             if (scaledDoAfter > TimeSpan.Zero)
             {
                 delay += scaledDoAfter;
@@ -369,12 +371,11 @@ public abstract class SharedWoundsSystem : EntitySystem
         }
 
         if (user != target && treater.Comp.TargetStartPopup != null)
-            _popup.PopupEntity(Loc.GetString(treater.Comp.TargetStartPopup, ("user", user)), target, target);
+            _popup.PopupEntity(Loc.GetString(treater.Comp.TargetStartPopup, ("user", user)), target, target, PopupType.Medium);
 
         var ev = new TreatWoundDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, treater, target, treater)
         {
-            BreakOnDamage = true,
             BreakOnMove = true,
             BreakOnHandChange = true,
             NeedHand = true,
@@ -383,7 +384,14 @@ public abstract class SharedWoundsSystem : EntitySystem
             TargetEffect = "RMCEffectHealBusy",
             MovementThreshold = 0.5f,
         };
-        _doAfter.TryStartDoAfter(doAfter);
+
+        _rmcDoAfter.TryCancel(user, treater.Comp.CurrentDoAfter);
+        if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))
+            return;
+
+        treater.Comp.CurrentDoAfter = doAfterId.Value.Index;
+        DirtyField(treater, treater.Comp, nameof(WoundTreaterComponent.CurrentDoAfter));
+
         _audio.PlayPredicted(treater.Comp.TreatBeginSound, user, user);
     }
 

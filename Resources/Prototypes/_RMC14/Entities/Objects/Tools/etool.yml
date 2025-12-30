@@ -30,3 +30,19 @@
   - type: EntrenchingTool
   - type: XenoTunnelFiller
   - type: Shovel
+  - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/bladeslice.ogg
+    activatedSoundOnSwing:
+      path: /Audio/Weapons/punchmiss.ogg
+    deactivatedSoundOnHit:
+      collection: MetalThud
+    activatedDamage:
+      types:
+        Blunt: 30
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 3
+    soundHit:
+      collection: MetalThud

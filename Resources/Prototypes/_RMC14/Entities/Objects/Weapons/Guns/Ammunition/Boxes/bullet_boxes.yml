@@ -50,6 +50,8 @@
     - Back
   - type: DropOnUseInHand
   - type: BulletBox
+  - type: DeployableItem
+    leftClickPickup: true
   - type: Tag
     tags:
     - RMCAmmoBox

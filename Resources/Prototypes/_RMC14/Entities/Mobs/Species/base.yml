@@ -1,7 +1,7 @@
 ﻿- type: entity
   save: false
   parent: BaseMobSpecies
-  id: CMBaseMobSpeciesOrganic
+  id: RMCBaseMobSpeciesOrganic
   abstract: true
   name: Urist C.M. McHands
   suffix: RMC14
@@ -119,9 +119,13 @@
   - type: RMCRevivable
   - type: RMCMedicalExamine
   - type: FireVisuals
-    sprite: Mobs/Effects/onfire.rsi
-    normalState: Generic_mob_burning
-    alternateState: Standing
+    sprite: _RMC14/Mobs/Effects/on_fire.rsi
+    normalState: standing_weak
+    alternateState: standing_medium
+    fireStackAlternateState: 14 # 15 stacks or above uses alternate state
+    lightRadiusPerStack: 0.2 # Around 15 stacks to reach 3 radius
+    maxLightRadius: 3
+  - type: RMCFireColor
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -377,7 +381,7 @@
   - type: XenoToggleChargingParalyze
   - type: RMCMobStateDrawDepth
     drawDepths:
-      Dead: DeadMobs
+      Dead: BelowMobs
   - type: IVDripTarget
   - type: FixedIdentity
     name: rmc-host
@@ -391,3 +395,5 @@
   - type: RMCHealthIcons
   - type: RMCMesonsNonviewable
     xenoVisible: true
+  - type: RMCActionOrder
+    id: RMCBaseMobSpeciesOrganic

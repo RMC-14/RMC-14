@@ -158,30 +158,18 @@
   boilingPoint: -84.7 # Acetylene. Close enough.
   meltingPoint: -80.7
   friction: 0.4
-  intensity: 10
+  intensity: 10 # <RMC14>
   duration: 10
-  tileReactions:
-  - !type:FlammableTileReaction {}
+  radius: 4
+  intensityMod: 0.1
+  durationMod: 0.7
+  radiusMod: -0.08
   metabolisms:
-    Food:
-      effects:
-      - !type:SatiateThirst
-        factor: 1
-        conditions:
-        - !type:OrganType
-          type: Vox
     Poison:
+      metabolismRate: 0.1
       effects:
-      - !type:HealthChange
-        conditions:
-        - !type:OrganType
-          type: Vox
-          shouldHave: false
-        damage:
-          types:
-            Poison: 1
-      - !type:FlammableReaction
-        multiplier: 0.4
+      - !type:Toxic
+        potency: 1 # </RMC14>
 
 - type: reagent
   id: Fluorosurfactant

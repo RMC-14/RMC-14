@@ -7,7 +7,7 @@
   ranks:
     RMCRankWeYaTeamLeader: []
   startingGear: RMCJobPMCTeamLeadPVE
-  icon: RMCJobIconPMCGunner
+  icon: RMCJobIconPMCTeamLead
   joinNotifyCrew: false
   accessGroups:
   - Colony
@@ -35,9 +35,8 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
         RMCSkillSmartGun: 1
-    - type: SquadArmorWearer
     - type: JobPrefix
-      prefix: rmc-job-prefix-pmc-standard
+      prefix: rmc-job-prefix-pmc-pve-team-leader
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -46,6 +45,13 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_tl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity
@@ -67,3 +73,10 @@
 
 - type: playTimeTracker
   id: CMJobPMCTeamLeadPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCTeamLead
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_tl
