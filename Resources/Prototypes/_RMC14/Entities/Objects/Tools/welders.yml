@@ -187,8 +187,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 80
-        maxVol: 80
+          Quantity: 60
+        maxVol: 60
 
 - type: entity
   parent: RMCWelderBase
