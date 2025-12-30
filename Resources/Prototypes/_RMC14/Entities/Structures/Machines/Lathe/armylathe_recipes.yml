@@ -1,5 +1,5 @@
 # Items are more expensive to produce than they are to recycle.
-# For all non-sheet items, multiply original costs by 1.25 rounded down
+# For all non-sheet items, multiply original costs by 1.25 rounded down. Sheets are all under /obj/item/stack/sheet
 # Example: M40 is 4250 x 1.25 = 5312
 - type: latheRecipe
   id: RMCM40GrenadeCasing
