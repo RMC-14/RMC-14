@@ -10,7 +10,7 @@
 #  - type: Food
 #  - type: Extractable
 #    grindableSolutionName: organ
-#  - type: SolutionContainerManager
+  - type: SolutionContainerManager
 #    solutions:
 #      organ:
 #        reagents:
