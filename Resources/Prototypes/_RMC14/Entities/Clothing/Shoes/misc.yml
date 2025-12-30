@@ -111,7 +111,7 @@
   parent: RMCShoesLaceup
   id: RMCShoesSnow
   name: snow boots
-  description: When your feet are as cold as your heart
+  description: When your feet are as cold as your heart.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi

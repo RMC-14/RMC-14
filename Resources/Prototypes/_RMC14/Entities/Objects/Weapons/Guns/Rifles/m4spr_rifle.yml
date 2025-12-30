@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: M4SPR battle rifle
   id: WeaponRifleM4SPR
-  description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
+  description: The M4SPR battle rifle is a designated marksman rifle in service with the Marine Corps. Sporting a bullpup configuration, the M4SPR battle rifle is perfect for reconnaissance and fire support teams.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/m4spr/desert.rsi
