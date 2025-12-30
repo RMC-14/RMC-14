@@ -340,6 +340,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             {
                 RemovePvsActors((uid, terminal));
                 SetTarget((uid, terminal), null);
+                TrySetCameraTarget(uid, null);
             }
 
             var targets = terminal.Targets;
@@ -549,7 +550,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 if (fireMission.Id != missionId)
                     continue;
 
-                TryStartFireMission(dropship, ent.Comp.Target.Value, ent.Comp.StrikeVector, ent.Comp.MaxTiming, ent.Comp.Offset, args.Actor, fireMission);
+                TryStartFireMission(dropship, ent.Comp.Target.Value, ent.Comp.StrikeVector, ent.Comp.MaxTiming, ent.Comp.Offset, args.Actor, fireMission, ent);
                 break;
             }
             return;
@@ -630,7 +631,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ammo.SoundImpact,
             SoundWarning = ammo.SoundWarning,
             MarkerWarning = ammo.MarkerWarning,
-            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
+            WarningMarkerAt = time + ammo.MarkerDuration,
             ImpactEffects = ammo.ImpactEffects,
             Explosion = ammo.Explosion,
             Implosion = ammo.Implosion,
@@ -648,8 +649,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         ent.Comp.NightVision = args.On;
-        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.CameraTarget) is { } target)
             _eye.SetDrawLight(target, !ent.Comp.NightVision);
+        else if (HasComp<EyeComponent>(ent.Comp.CameraTarget))
+        {
+            _eye.SetDrawLight(ent.Comp.CameraTarget.Value, !ent.Comp.NightVision);
+        }
     }
 
     private void OnWeaponsExitMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsExitMsg args)
@@ -679,6 +684,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!args.Direction.IsCardinal())
             return;
 
+        if (_dropship.TryGetGridDropship(ent, out var dropship) &&
+            _fireMission.HasActiveFireMission(dropship))
+            return;
+
         var adjust = args.Direction.ToIntVec();
         var newOffset = ent.Comp.Offset + adjust;
         var limit = ent.Comp.OffsetLimit;
@@ -689,7 +698,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ent.Comp.Offset = newOffset;
 
-        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.CameraTarget) is { } target)
             _eye.SetOffset(target, ent.Comp.Offset);
 
         Dirty(ent);
@@ -698,9 +707,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void OnWeaponsResetOffset(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsResetOffsetMsg args)
     {
+        if (_dropship.TryGetGridDropship(ent, out var dropship) &&
+            _fireMission.HasActiveFireMission(dropship))
+            return;
+
         ent.Comp.Offset = Vector2i.Zero;
 
-        if (EnsureTargetEye(ent, ent.Comp.Target) is { } target)
+        if (EnsureTargetEye(ent, ent.Comp.CameraTarget) is { } target)
             _eye.SetOffset(target, ent.Comp.Offset);
 
         Dirty(ent);
@@ -1148,19 +1161,47 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private void UpdateTarget(Entity<DropshipTerminalWeaponsComponent> ent, EntityUid target)
     {
-        RemovePvsActors(ent);
         SetTarget(ent, target);
-
-        if (EnsureTargetEye(ent, ent.Comp.Target) is { } targetEye)
-        {
-            _eye.SetOffset(targetEye, ent.Comp.Offset);
-            _eye.SetDrawLight(targetEye, !ent.Comp.NightVision);
-        }
-
-        AddPvsActors(ent);
+        if (TryUpdateCameraTarget(ent, target, terminalComp: ent.Comp))
+            return;
 
         RefreshWeaponsUI(ent);
         Dirty(ent);
+    }
+
+    public bool TryUpdateCameraTarget(EntityUid terminal, EntityUid target, bool force = false, DropshipTerminalWeaponsComponent? terminalComp = null)
+    {
+        if (!Resolve(terminal, ref terminalComp, false))
+            return false;
+
+        if (!_dropship.TryGetGridDropship(terminal, out var dropship))
+            return false;
+
+        if (!force && _fireMission.HasActiveFireMission(dropship))
+            return false;
+
+        RemovePvsActors((terminal, terminalComp));
+        TrySetCameraTarget(terminal, target, terminalComp);
+
+        if (EnsureTargetEye((terminal, terminalComp), terminalComp.CameraTarget) is { } targetEye)
+        {
+            _eye.SetOffset(targetEye, terminalComp.Offset);
+            _eye.SetDrawLight(targetEye, !terminalComp.NightVision);
+        }
+        else if (HasComp<EyeComponent>(target))
+        {
+            _eye.SetDrawLight(target, !terminalComp.NightVision);
+
+            var targetEyeComp = EnsureComp<DropshipTargetEyeComponent>(target);
+            targetEyeComp.Target = target;
+            Dirty(target, targetEyeComp);
+        }
+
+        AddPvsActors((terminal, terminalComp));
+        RefreshWeaponsUI((terminal, terminalComp));
+        Dirty(terminal, terminalComp);
+
+        return true;
     }
 
     private bool IsOffsetEditValid(Entity<DropshipTerminalWeaponsComponent> ent, int fireMissionId, NetEntity weapon, int row, int? offset, out bool suspicious)
@@ -1453,7 +1494,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 flight.WarningMarker = null;
             }
 
-            if (flight.MarkerAt.Add(TimeSpan.FromSeconds(1)) > time)
+            if (flight.MarkerAt.Add(flight.MarkerDuration) > time)
                 continue;
 
             if (flight.Marker != null)
@@ -1658,6 +1699,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         Entity<DropshipTargetComponent?> target,
         out EntityUid eye)
     {
+        if (EntityManager.HasComponent<EyeComponent>(target))
+        {
+            eye = target;
+            return true;
+        }
+
         if (Resolve(target, ref target.Comp, false) &&
             target.Comp.Eyes.TryGetValue(terminal, out eye))
         {
@@ -1800,7 +1847,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     /// <param name="user">The entity that tried to start the fire mission</param>
     /// <param name="missionData">The fire mission data, this determines when and where to shoot</param>
     /// <returns>True if a fire mission was successfully started</returns>
-    public bool TryStartFireMission(Entity<DropshipComponent> dropship, EntityUid target, Direction strikeVector, int maxSteps, Vector2 offset, EntityUid user, FireMissionData missionData)
+    public bool TryStartFireMission(Entity<DropshipComponent> dropship, EntityUid target, Direction strikeVector, int maxSteps, Vector2 offset, EntityUid user, FireMissionData missionData, EntityUid? watchingTerminal = null)
     {
         if (HasComp<ActiveFireMissionComponent>(dropship))
         {
@@ -1835,12 +1882,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         }
 
         var targetEntity = Spawn(null, _transform.GetMapCoordinates(target));
+        var missionEye = Spawn(null, _transform.GetMapCoordinates(target).Offset(offset));
+        var eyeComp = EnsureComp<EyeComponent>(missionEye);
+        _eye.SetDrawFov(missionEye, false, eyeComp);
+
         var activeFireMission = EnsureComp<ActiveFireMissionComponent>(dropship);
         activeFireMission.StartTime = _timing.CurTime;
         activeFireMission.TargetCoordinates = targetEntity.ToCoordinates();
         activeFireMission.MaxSteps = maxSteps;
         activeFireMission.StrikeVector = strikeVector;
         activeFireMission.Offset = offset;
+        activeFireMission.MissionEye = missionEye;
+        activeFireMission.WatchingTerminal = watchingTerminal;
         activeFireMission.FireMissionData = missionData;
         Dirty(dropship, activeFireMission);
 
@@ -1933,6 +1986,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return true;
     }
 
+    public void TrySetCameraTarget(EntityUid terminal, EntityUid? newTarget, DropshipTerminalWeaponsComponent? terminalComp = null)
+    {
+        if (!Resolve(terminal, ref terminalComp, false))
+            return;
+
+        if (newTarget == terminalComp.CameraTarget)
+            return;
+
+        terminalComp.Offset = Vector2i.Zero;
+        terminalComp.CameraTarget = newTarget;
+        Dirty(terminal, terminalComp);
+    }
+
     private void FireWeapon(EntityUid weapon, EntityCoordinates targetCoordinates, DropshipWeaponStrikeType strikeType, EntityUid dropship,  EntityUid? actor = null, DropshipTerminalWeaponsComponent? terminalComp = null, DropshipWeaponComponent? weaponComp = null)
     {
         if (!Resolve(weapon, ref weaponComp, false))
@@ -1944,6 +2010,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         var time = _timing.CurTime;
         var travelTime = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero : ammo.Comp.TravelTime;
         var targetSpread = strikeType == DropshipWeaponStrikeType.FireMission ? ammo.Comp.TargetSpread / 2: ammo.Comp.TargetSpread;
+        var markerDuration = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero: TimeSpan.FromSeconds(1);
 
         var ev = new DropshipWeaponShotEvent(
             targetSpread,
@@ -1998,12 +2065,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundImpact = ev.SoundImpact,
             SoundWarning = ev.SoundWarning,
             MarkerWarning = ev.MarkerWarning,
-            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
+            WarningMarkerAt = time + markerDuration,
             ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
             Implosion = ev.Implosion,
             Fire = ev.Fire,
-            SoundEveryShots = ev.SoundEveryShots
+            SoundEveryShots = ev.SoundEveryShots,
+            MarkerDuration = markerDuration,
         };
         AddComp(inFlight, inFlightComp, true);
 

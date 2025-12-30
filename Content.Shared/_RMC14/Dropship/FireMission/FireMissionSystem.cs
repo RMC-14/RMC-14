@@ -27,7 +27,7 @@ public sealed class FireMissionSystem : EntitySystem
         if (!Resolve(uid, ref mission, false))
             return false;
 
-        return mission.CurrentPhase != FireMissionPhase.Cooldown;
+        return mission.CurrentPhase != FireMissionPhase.Cooldown && mission.CurrentPhase != FireMissionPhase.Preparing;
     }
 
     public override void Update(float frameTime)
@@ -41,6 +41,16 @@ public sealed class FireMissionSystem : EntitySystem
             // Mission has ended
             if (fireMission.CurrentPhase == FireMissionPhase.Cooldown)
             {
+                if (fireMission.StartTime + TimeSpan.FromSeconds(16) < _timing.CurTime) //TODO store the seconds on the component
+                {
+                    if (fireMission is { WatchingTerminal: { } watchingTerminal, MissionEye: { } missionEye })
+                        _dropshipWeapon.TrySetCameraTarget(watchingTerminal, null);
+
+                    Del(fireMission.MissionEye);
+                    fireMission.MissionEye = null;
+                    Dirty(uid, fireMission);
+                }
+
                 if (fireMission.StartTime + fireMission.MissionCooldown < _timing.CurTime)
                 {
                     Del(fireMission.TargetCoordinates.EntityId);
@@ -63,6 +73,9 @@ public sealed class FireMissionSystem : EntitySystem
             {
                 fireMission.CurrentPhase = FireMissionPhase.Approaching;
                 Dirty(uid, fireMission);
+
+                if (fireMission is { WatchingTerminal: { } watchingTerminal, MissionEye: { } missionEye })
+                    _dropshipWeapon.TryUpdateCameraTarget(watchingTerminal, missionEye, true);
 
                 _audio.PlayPvs(fireMission.StartSound, startCoordinates);
             }
@@ -96,6 +109,10 @@ public sealed class FireMissionSystem : EntitySystem
             {
                 var strikeVector = fireMission.StrikeVector.ToIntVec();
                 var stepOffset = new Vector2(strikeVector.X, strikeVector.Y) * fireMission.CurrentStep;
+                var travelOffset = stepOffset + fireMission.Offset;
+
+                if (fireMission.MissionEye is { } missionEye)
+                    _transform.SetCoordinates(missionEye, fireMission.TargetCoordinates.Offset(travelOffset));
 
                 foreach (var weaponOffset in fireMission.FireMissionData.Value.WeaponOffsets)
                 {
@@ -104,7 +121,7 @@ public sealed class FireMissionSystem : EntitySystem
 
                     var weaponOffsetRotated = new Vector2(strikeVector.Y, -strikeVector.X) * weaponOffset.Offset.Value;
 
-                    var totalOffset = stepOffset + weaponOffsetRotated+ fireMission.Offset;
+                    var totalOffset = travelOffset + weaponOffsetRotated;
                     var adjustedCoordinates = fireMission.TargetCoordinates.Offset(totalOffset);
 
                     _dropshipWeapon.TryFireWeapon(GetEntity(weaponOffset.WeaponId), adjustedCoordinates, DropshipWeaponStrikeType.FireMission);

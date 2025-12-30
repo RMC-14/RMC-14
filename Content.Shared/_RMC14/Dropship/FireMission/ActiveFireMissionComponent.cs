@@ -97,6 +97,9 @@ public sealed partial class ActiveFireMissionComponent : Component
     public TimeSpan MissionCooldown = TimeSpan.FromSeconds(25);
 
     [DataField, AutoNetworkedField]
+    public EntityUid? MissionEye;
+
+    [DataField, AutoNetworkedField]
     public EntityUid? WatchingTerminal;
 }
 

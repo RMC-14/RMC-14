@@ -97,4 +97,7 @@ public sealed partial class AmmoInFlightComponent : Component
 
     [DataField, AutoNetworkedField]
     public RMCFire? Fire;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MarkerDuration;
 }

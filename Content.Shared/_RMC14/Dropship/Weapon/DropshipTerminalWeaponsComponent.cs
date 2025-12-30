@@ -48,6 +48,9 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     [DataField, AutoNetworkedField]
     public NetEntity? SelectedSystem;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? CameraTarget;
+
     /// <summary>
     ///     A list of all fire missions currently stored on this component.
     /// </summary>

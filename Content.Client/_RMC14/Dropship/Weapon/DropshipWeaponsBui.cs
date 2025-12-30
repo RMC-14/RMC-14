@@ -411,12 +411,12 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
                 screen.ScreenLabel.Visible = false;
 
-                if (_oldEye != null && _oldEye != terminal.Target)
+                if (_oldEye != null && _oldEye != terminal.CameraTarget)
                     _eyeLerping.RemoveEye(_oldEye.Value);
 
-                _oldEye = terminal.Target;
-                if (terminal.Target != null &&
-                    _weaponSystem.TryGetTargetEye((Owner, terminal), terminal.Target.Value, out var eyeId))
+                _oldEye = terminal.CameraTarget;
+                if (terminal.CameraTarget != null &&
+                    _weaponSystem.TryGetTargetEye((Owner, terminal), terminal.CameraTarget.Value, out var eyeId))
                 {
                     if (!EntMan.HasComponent<LerpingEyeComponent>(eyeId))
                         _eyeLerping.AddEye(eyeId);
