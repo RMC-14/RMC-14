@@ -42,6 +42,8 @@
     textColor: White
     storedOffset: 0, 12
   - type: RMCSmartFridgeInsertable
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: CMAutoInjectorBase

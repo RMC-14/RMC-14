@@ -9,11 +9,5 @@
     - type: Sprite
       sprite: _RMC14/Objects/Misc/module.rsi
       state: power_mod
-    - type: PhysicalComposition
-      materialComposition:
-        CMSteel: 50
-        CMGlass: 50
-      chemicalComposition:
-        Silicon: 20
     - type: StaticPrice
       price: 34
