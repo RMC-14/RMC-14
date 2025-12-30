@@ -35,7 +35,7 @@
     energyPerUse: 50
   - type: RMCStaminaDamageOnHit
     damage: 100
-    jitterDuration: 0.8
+    jitterDuration: 2
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
@@ -59,6 +59,10 @@
         variation: 0.250
   - type: ItemToggleMeleeWeapon
     activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
       path: /Audio/Weapons/egloves.ogg
       params:
         variation: 0.2

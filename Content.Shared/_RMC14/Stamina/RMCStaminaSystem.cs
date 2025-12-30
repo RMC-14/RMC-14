@@ -19,6 +19,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
 using Content.Shared.Jittering;
+using Content.Shared.Item.ItemToggle;
 
 namespace Content.Shared._RMC14.Stamina;
 
@@ -34,6 +35,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
@@ -153,6 +155,9 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     //Same as stamina code minus eveents
     private void OnStaminaOnHit(Entity<RMCStaminaDamageOnHitComponent> ent, ref MeleeHitEvent args)
     {
+        if (!_itemToggle.IsActivated(ent.Owner))
+            return;
+
         if (ent.Comp.RequiresWield && TryComp<WieldableComponent>(ent.Owner, out var wieldable) && !wieldable.Wielded)
             return;
 
@@ -185,7 +190,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         foreach (var (hit, comp) in toHit)
         {
             DoStaminaDamage(hit, damage / toHit.Count, true);
-            _jitter.DoJitter(hit, ent.Comp.JitterDuration, true, 9, 5);
+            _jitter.DoJitter(hit, ent.Comp.JitterDuration, true, 7, 5);
             _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(hit):target} was dealt {damage} stamina damage from {args.User} with {args.Weapon}.");
         }
     }
@@ -203,6 +208,9 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     private void OnCollide(Entity<RMCStaminaDamageOnCollideComponent> ent, EntityUid target)
     {
         if (!TryComp<RMCStaminaComponent>(target, out var stam))
+            return;
+
+        if (!_itemToggle.IsActivated(ent.Owner))
             return;
 
         DoStaminaDamage((target, stam), ent.Comp.Damage, true);
