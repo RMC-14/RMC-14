@@ -39,11 +39,20 @@ public readonly record struct TacticalMapReplayMap(
 [Serializable, NetSerializable]
 public readonly record struct TacticalMapReplayFrame(
     float Time,
-    List<TacticalMapReplayLayerFrame> Layers);
+    bool IsKeyframe,
+    List<TacticalMapReplayLayerDelta> Layers);
 
 [Serializable, NetSerializable]
-public readonly record struct TacticalMapReplayLayerFrame(
+public readonly record struct TacticalMapReplayLayerDelta(
     string LayerId,
+    bool LinesChanged,
+    bool LinesIsFull,
     List<TacticalMapLine> Lines,
+    bool LabelsChanged,
+    bool LabelsIsFull,
     Dictionary<Vector2i, TacticalMapLabelData> Labels,
-    TacticalMapBlip[] Blips);
+    List<Vector2i> RemovedLabels,
+    bool BlipsChanged,
+    bool BlipsIsFull,
+    Dictionary<int, TacticalMapBlip> Blips,
+    List<int> RemovedBlips);

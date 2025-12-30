@@ -51,6 +51,17 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
     private const int EstimatedBlipBytes = 48;
     private const int EstimatedLabelBaseBytes = 24;
 
+    private sealed class ReplayLayerState
+    {
+        public readonly List<TacticalMapLine> Lines = new();
+        public readonly Dictionary<Vector2i, TacticalMapLabelData> Labels = new();
+        public readonly Dictionary<int, TacticalMapBlip> Blips = new();
+    }
+
+    private readonly Dictionary<string, ReplayLayerState> _resolvedLayers = new();
+    private readonly List<int> _keyframeIndices = new();
+    private int _resolvedFrameIndex = -1;
+
     public TacticalMapReplayWindow()
     {
         RobustXamlLoader.Load(this);
@@ -177,6 +188,9 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         _duration = map.Frames.Count > 0 ? map.Frames[^1].Time - _baseTime : 0f;
         _duration = MathF.Max(0f, _duration);
         _currentLayerId = null;
+        _resolvedLayers.Clear();
+        _resolvedFrameIndex = -1;
+        UpdateKeyframeIndexCache(map);
 
         _playing = false;
         PlayButton.Text = "Play";
@@ -226,6 +240,9 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         UpdateSlider(0f);
         UpdateTimeLabel();
         _currentLayerId = null;
+        _resolvedLayers.Clear();
+        _resolvedFrameIndex = -1;
+        _keyframeIndices.Clear();
 
         Wrapper.SetMapId(null);
         Wrapper.Map.SetCurrentMap(null);
@@ -299,7 +316,7 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
 
         var frames = _currentMap.Value.Frames;
         index = Math.Clamp(index, 0, frames.Count - 1);
-        var frame = frames[index];
+        EnsureResolvedState(index);
 
         Wrapper.Map.Lines.Clear();
         Wrapper.Canvas.Lines.Clear();
@@ -309,34 +326,167 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         var labels = new Dictionary<Vector2i, TacticalMapLabelData>();
         var blips = new List<TacticalMapBlip>();
 
-        foreach (var layer in frame.Layers)
+        foreach (var (layerId, state) in _resolvedLayers)
         {
             if (_currentLayerId != null &&
-                !string.Equals(layer.LayerId, _currentLayerId, StringComparison.OrdinalIgnoreCase))
+                !string.Equals(layerId, _currentLayerId, StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
-            if (_showLines)
+            if (_showLines && state.Lines.Count > 0)
             {
-                Wrapper.Map.Lines.AddRange(layer.Lines);
-                Wrapper.Canvas.Lines.AddRange(layer.Lines);
+                Wrapper.Map.Lines.AddRange(state.Lines);
+                Wrapper.Canvas.Lines.AddRange(state.Lines);
             }
 
-            if (_showCustomLabels)
+            if (_showCustomLabels && state.Labels.Count > 0)
             {
-                foreach (var (pos, label) in layer.Labels)
+                foreach (var (pos, label) in state.Labels)
                 {
                     labels[pos] = label;
                 }
             }
 
-            if (_showBlips)
-                blips.AddRange(layer.Blips);
+            if (_showBlips && state.Blips.Count > 0)
+            {
+                foreach (var (_, blip) in state.Blips.OrderBy(pair => pair.Key))
+                    blips.Add(blip);
+            }
         }
 
         Wrapper.UpdateTacticalLabels(labels);
         Wrapper.UpdateBlips(_showBlips ? blips.ToArray() : Array.Empty<TacticalMapBlip>());
+    }
+
+    private void EnsureResolvedState(int targetIndex)
+    {
+        if (_currentMap == null)
+            return;
+
+        if (_resolvedFrameIndex == targetIndex && _resolvedLayers.Count > 0)
+            return;
+
+        if (_resolvedFrameIndex >= 0 && targetIndex > _resolvedFrameIndex)
+        {
+            ApplyFrameRange(_resolvedFrameIndex + 1, targetIndex);
+            _resolvedFrameIndex = targetIndex;
+            return;
+        }
+
+        RebuildResolvedState(targetIndex);
+    }
+
+    private void RebuildResolvedState(int targetIndex)
+    {
+        if (_currentMap == null)
+            return;
+
+        var frames = _currentMap.Value.Frames;
+        if (frames.Count == 0)
+            return;
+
+        targetIndex = Math.Clamp(targetIndex, 0, frames.Count - 1);
+        var startIndex = FindKeyframeIndex(targetIndex);
+
+        _resolvedLayers.Clear();
+        for (var i = startIndex; i <= targetIndex; i++)
+        {
+            var frame = frames[i];
+            if (frame.IsKeyframe)
+                _resolvedLayers.Clear();
+
+            ApplyFrameToState(_resolvedLayers, frame);
+        }
+
+        _resolvedFrameIndex = targetIndex;
+    }
+
+    private void ApplyFrameRange(int startIndex, int endIndex)
+    {
+        if (_currentMap == null)
+            return;
+
+        var frames = _currentMap.Value.Frames;
+        startIndex = Math.Clamp(startIndex, 0, frames.Count - 1);
+        endIndex = Math.Clamp(endIndex, 0, frames.Count - 1);
+
+        for (var i = startIndex; i <= endIndex; i++)
+        {
+            var frame = frames[i];
+            if (frame.IsKeyframe)
+                _resolvedLayers.Clear();
+
+            ApplyFrameToState(_resolvedLayers, frame);
+        }
+    }
+
+    private static void ApplyFrameToState(
+        Dictionary<string, ReplayLayerState> resolvedLayers,
+        TacticalMapReplayFrame frame)
+    {
+        foreach (var delta in frame.Layers)
+        {
+            if (!resolvedLayers.TryGetValue(delta.LayerId, out var state))
+            {
+                state = new ReplayLayerState();
+                resolvedLayers[delta.LayerId] = state;
+            }
+
+            ApplyLayerDelta(state, delta);
+        }
+    }
+
+    private static void ApplyLayerDelta(ReplayLayerState state, TacticalMapReplayLayerDelta delta)
+    {
+        if (delta.LinesChanged)
+        {
+            if (delta.LinesIsFull)
+            {
+                state.Lines.Clear();
+                state.Lines.AddRange(delta.Lines);
+            }
+            else
+            {
+                state.Lines.AddRange(delta.Lines);
+            }
+        }
+
+        if (delta.LabelsChanged)
+        {
+            if (delta.LabelsIsFull)
+            {
+                state.Labels.Clear();
+                foreach (var (pos, label) in delta.Labels)
+                    state.Labels[pos] = label;
+            }
+            else
+            {
+                foreach (var (pos, label) in delta.Labels)
+                    state.Labels[pos] = label;
+
+                foreach (var pos in delta.RemovedLabels)
+                    state.Labels.Remove(pos);
+            }
+        }
+
+        if (delta.BlipsChanged)
+        {
+            if (delta.BlipsIsFull)
+            {
+                state.Blips.Clear();
+                foreach (var (id, blip) in delta.Blips)
+                    state.Blips[id] = blip;
+            }
+            else
+            {
+                foreach (var (id, blip) in delta.Blips)
+                    state.Blips[id] = blip;
+
+                foreach (var id in delta.RemovedBlips)
+                    state.Blips.Remove(id);
+            }
+        }
     }
 
     private void UpdateSlider(float value)
@@ -363,6 +513,20 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
 
         Wrapper.UpdateLayerList(layers, null);
         _currentLayerId = null;
+    }
+
+    private void UpdateKeyframeIndexCache(TacticalMapReplayMap map)
+    {
+        _keyframeIndices.Clear();
+
+        for (var i = 0; i < map.Frames.Count; i++)
+        {
+            if (map.Frames[i].IsKeyframe)
+                _keyframeIndices.Add(i);
+        }
+
+        if (_keyframeIndices.Count == 0 && map.Frames.Count > 0)
+            _keyframeIndices.Add(0);
     }
 
     private void OnLayerSelected(ProtoId<TacticalMapLayerPrototype>? layer)
@@ -467,26 +631,24 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         int maxBlips = 0;
         long estimatedBytes = 0;
 
+        var resolved = new Dictionary<string, ReplayLayerState>();
+
         foreach (var frame in map.Frames)
         {
+            if (frame.IsKeyframe)
+                resolved.Clear();
+
+            ApplyFrameToState(resolved, frame);
+
             int frameLines = 0;
             int frameLabels = 0;
             int frameBlips = 0;
 
-            foreach (var layer in frame.Layers)
+            foreach (var layer in resolved.Values)
             {
                 frameLines += layer.Lines.Count;
                 frameLabels += layer.Labels.Count;
-                frameBlips += layer.Blips.Length;
-
-                estimatedBytes += layer.Lines.Count * EstimatedLineBytes;
-                estimatedBytes += layer.Blips.Length * EstimatedBlipBytes;
-                estimatedBytes += layer.Labels.Count * EstimatedLabelBaseBytes;
-
-                foreach (var label in layer.Labels.Values)
-                {
-                    estimatedBytes += Encoding.UTF8.GetByteCount(label.Text);
-                }
+                frameBlips += layer.Blips.Count;
             }
 
             totalLines += frameLines;
@@ -495,6 +657,24 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
             maxLines = Math.Max(maxLines, frameLines);
             maxLabels = Math.Max(maxLabels, frameLabels);
             maxBlips = Math.Max(maxBlips, frameBlips);
+
+            foreach (var layer in frame.Layers)
+            {
+                if (layer.LinesChanged)
+                    estimatedBytes += layer.Lines.Count * EstimatedLineBytes;
+
+                if (layer.BlipsChanged)
+                    estimatedBytes += layer.Blips.Count * EstimatedBlipBytes;
+
+                if (layer.LabelsChanged)
+                {
+                    estimatedBytes += layer.Labels.Count * EstimatedLabelBaseBytes;
+                    foreach (var label in layer.Labels.Values)
+                    {
+                        estimatedBytes += Encoding.UTF8.GetByteCount(label.Text);
+                    }
+                }
+            }
         }
 
         float avgLines = frameCount > 0 ? totalLines / (float) frameCount : 0f;
@@ -539,6 +719,23 @@ public sealed partial class TacticalMapReplayWindow : RMCPopOutWindow
         }
 
         return Math.Clamp(high, 0, frames.Count - 1);
+    }
+
+    private int FindKeyframeIndex(int targetIndex)
+    {
+        if (_keyframeIndices.Count == 0)
+            return 0;
+
+        var keyframeIndex = _keyframeIndices[0];
+        foreach (var index in _keyframeIndices)
+        {
+            if (index > targetIndex)
+                break;
+
+            keyframeIndex = index;
+        }
+
+        return keyframeIndex;
     }
 
     private static string FormatTime(float seconds)
