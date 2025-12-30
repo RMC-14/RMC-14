@@ -18,6 +18,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
+using Content.Shared.Jittering;
 
 namespace Content.Shared._RMC14.Stamina;
 
@@ -31,6 +32,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly MovementSpeedModifierSystem _speed = default!;
     [Dependency] private readonly TemporarySpeedModifiersSystem _temporarySpeed = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
+    [Dependency] private readonly SharedJitteringSystem _jitter = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
@@ -164,7 +166,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         var ev = new StaminaDamageOnHitAttemptEvent();
         RaiseLocalEvent(ent, ref ev);
         if (ev.Cancelled)
-        return;
+            return;
 
         var stamQuery = GetEntityQuery<RMCStaminaComponent>();
         var toHit = new List<(EntityUid Entity, RMCStaminaComponent Component)>();
@@ -183,6 +185,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         foreach (var (hit, comp) in toHit)
         {
             DoStaminaDamage(hit, damage / toHit.Count, true);
+            _jitter.DoJitter(hit, ent.Comp.JitterDuration, true, 9, 5);
             _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(hit):target} was dealt {damage} stamina damage from {args.User} with {args.Weapon}.");
         }
     }
