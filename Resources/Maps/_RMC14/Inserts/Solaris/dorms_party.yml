@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/31/2025 15:25:25
+  time: 12/31/2025 20:04:42
   entityCount: 97
 maps: []
 grids:
@@ -25,7 +25,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      pos: -0.44293466,-0.10076076
       parent: invalid
     - type: MapGrid
       chunks:
@@ -112,6 +111,12 @@ entities:
             id: RMCDecalBloodFloor1
           decals:
             26: 16,-2
+        - node:
+            cleanable: True
+            color: '#FFFFFFFF'
+            id: RMCDecalBloodFloor1
+          decals:
+            34: 9,-5
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalBloodFloor2
@@ -815,23 +820,23 @@ entities:
     - type: Transform
       pos: 2.5,-5.5
       parent: 1
-- proto: RMCLightFixture
+- proto: RMCLightFixtureOffset
   entities:
   - uid: 42
     components:
     - type: Transform
-      pos: 7.5,-5.5
+      pos: 16.5,-5.5
       parent: 1
   - uid: 43
     components:
     - type: Transform
-      pos: 16.5,-5.5
+      rot: 3.141592653589793 rad
+      pos: 14.5,0.5
       parent: 1
   - uid: 44
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 14.5,0.5
+      pos: 7.5,-5.5
       parent: 1
   - uid: 45
     components:

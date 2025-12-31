@@ -228,3 +228,14 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/cargo_containers.yml"
       probability: 0.3
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLZ1ContainersScramble
+  name: LZ1 Containers Scramble
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1containers_scramble.yml"
+      probability: 0.25
