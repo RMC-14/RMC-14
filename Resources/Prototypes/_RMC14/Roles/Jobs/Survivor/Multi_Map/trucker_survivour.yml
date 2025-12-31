@@ -4,17 +4,12 @@
   name: cm-job-name-survivor-trucker
   description: cm-job-description-survivor
   startingGear: RMCGearSurvivorTrucker
+  playTimeTracker: CMJobSurvivorEngineer
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillEngineer: 1
-        RMCSkillConstruction: 2
-        RMCSkillVehicles: 3
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
+      preset: SurvivorTrucker
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetTrucker
     - type: RMCSurvivor
@@ -24,7 +19,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivor # for inheritance
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   id: RMCGearSurvivorTrucker

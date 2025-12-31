@@ -86,7 +86,4 @@ public sealed partial class JobPrototype : IInheritingPrototype, ICMSpecific
     /// </summary>
     [DataField]
     public readonly Dictionary<CamouflageType, ProtoId<StartingGearPrototype>>? CamouflageStartingGear;
-
-    [DataField]
-    public bool IsXeno;
 }

@@ -457,7 +457,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
         return true;
     }
 
-    private bool PickupSlot(EntityUid user, EntityUid holster)
+    private bool PickupSlot(EntityUid user, EntityUid holster, EntityWhitelist? whitelist = null)
     {
         if (!SlotCanInteract(user, holster, out var itemSlots))
             return false;
@@ -465,6 +465,9 @@ public abstract class SharedCMInventorySystem : EntitySystem
         foreach (var slot in itemSlots.Slots.Values.OrderBy(s => s.Priority))
         {
             var item = slot.ContainerSlot?.ContainedEntity;
+            if (item.HasValue && _whitelist.IsWhitelistFail(whitelist, item.Value))
+                continue;
+
             if (_itemSlots.TryEjectToHands(holster, slot, user, true))
             {
                 if (item != null)
@@ -766,7 +769,7 @@ public abstract class SharedCMInventorySystem : EntitySystem
                 return true;
             }
 
-            if (PickupSlot(user, item))
+            if (PickupSlot(user, item, holster.Whitelist))
             {
                 _adminLog.Add(LogType.RMCHolster, $"{ToPrettyString(user)} unholstered {ToPrettyString(item)}");
                 return true;
