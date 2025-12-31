@@ -2,6 +2,7 @@ using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
@@ -28,6 +29,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly XenoSystem _xeno = default!;
 
     public override void Initialize()
     {
@@ -45,6 +47,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<SpawnOnTerminateComponent, EntityTerminatingEvent>(OnSpawnOnTerminatingTerminate);
 
         SubscribeLocalEvent<PreventCollideWithDeadComponent, PreventCollideEvent>(OnPreventCollideWithDead);
+        SubscribeLocalEvent<AcidProjectileComponent, ProjectileHitEvent>(OnAcidProjectileHit);
     }
 
     private void OnDeleteOnCollideStartCollide(Entity<DeleteOnCollideComponent> ent, ref StartCollideEvent args)
@@ -96,6 +99,11 @@ public sealed class RMCProjectileSystem : EntitySystem
 
             args.Damage *= FixedPoint2.Clamp((totalDamage - pastEffectiveRange * threshold.Falloff * extraMult) / totalDamage, minMult, 1);
         }
+    }
+
+    private void OnAcidProjectileHit(Entity<AcidProjectileComponent> projectile, ref ProjectileHitEvent args)
+    {
+        args.Damage = _xeno.TryApplyXenoAcidDamageMultiplier(args.Target, args.Damage);
     }
 
     public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult, float range)
