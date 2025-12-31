@@ -80,9 +80,9 @@
           state: random_bombsupply
     - type: RandomSpawner
       prototypes:
-      - Igniter
-      - ProximitySensor
-      - RemoteSignaller
+      - Igniter # todo: RMCIgniter
+      - ProximitySensor # todo: RMCProximitySensor
+      - RemoteSignaller # todo: RMCRemoteSignaller
       - CMMultitool
 
 - type: entity
