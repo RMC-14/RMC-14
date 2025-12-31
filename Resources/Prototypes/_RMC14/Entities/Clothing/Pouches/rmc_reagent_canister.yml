@@ -60,6 +60,10 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 2000 # glass generator if recyclable?
+      RMCPlastic: 2000
 
 - type: entity
   parent: RMCPouchReagentCanister

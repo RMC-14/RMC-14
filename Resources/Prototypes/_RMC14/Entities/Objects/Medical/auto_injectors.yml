@@ -43,7 +43,8 @@
     storedOffset: 0, 12
   - type: RMCSmartFridgeInsertable
   - type: PhysicalComposition
-    materialComposition: {}
+    materialComposition:
+      RMCPlastic: 300
 
 - type: entity
   parent: CMAutoInjectorBase

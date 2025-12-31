@@ -135,9 +135,9 @@
   id: CMSheetGlassReinforced
   result: CMSheetGlassReinforced1
   completetime: 4
-  materials:
-    CMSteel: 1875 # 1500
-    CMGlass: 3750 # 3000
+  materials: # sheet items keep their original cost
+    CMSteel: 1875 # 1875
+    CMGlass: 3750 # 3750
 
 - type: latheRecipe
   id: CMRodMetal
