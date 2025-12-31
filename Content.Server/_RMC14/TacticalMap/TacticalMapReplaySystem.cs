@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Content.Server.Administration.Managers;
+using Content.Server.GameTicking;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Administration;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.GameTicking;
+using Robust.Shared.Configuration;
 using Robust.Shared.Maths;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -15,6 +18,8 @@ public sealed class TacticalMapReplaySystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IAdminManager _admin = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     private const int MaxFramesPerMap = 2000;
     private static readonly TimeSpan KeyframeInterval = TimeSpan.FromSeconds(10);
@@ -85,10 +90,34 @@ public sealed class TacticalMapReplaySystem : EntitySystem
 
     private void OnReplayRequest(TacticalMapReplayRequestEvent msg, EntitySessionEventArgs args)
     {
-        if (!_admin.HasAdminFlag(args.SenderSession, AdminFlags.Admin))
+        if (!CanAccessReplay(args.SenderSession, out _))
             return;
 
         SendReplay(args.SenderSession, msg.MapId);
+    }
+
+    public bool CanAccessReplay(ICommonSession session, out string? reason)
+    {
+        if (_admin.HasAdminFlag(session, AdminFlags.Admin))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (!_cfg.GetCVar(RMCCVars.RMCTacticalMapReplayPublicAfterRound))
+        {
+            reason = "Tactical map replay access for non-admins is currently disabled.";
+            return false;
+        }
+
+        if (_gameTicker.RunLevel != GameRunLevel.PostRound)
+        {
+            reason = "Tactical map replay is only available on round end.";
+            return false;
+        }
+
+        reason = null;
+        return true;
     }
 
     private void OnMapTerminating(Entity<TacticalMapComponent> ent, ref EntityTerminatingEvent args)

@@ -68,7 +68,7 @@ public sealed partial class TacticalMapControl
 
     private void DrawTileGrid(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize)
     {
-        if (Texture == null || _tileMask == null)
+        if (Texture == null)
             return;
 
         Vector2 textureSize = Texture.Size;
@@ -88,48 +88,13 @@ public sealed partial class TacticalMapControl
         if (thickness > minTile)
             thickness = minTile;
         Color gridColor = Color.FromHex("#88C7FA").WithAlpha(0.06f);
+        _gridShader.SetParameter("tile_size", new Vector2(tileWidth, tileHeight));
+        _gridShader.SetParameter("line_thickness", thickness);
+        _gridShader.SetParameter("grid_color", gridColor);
 
-        int columns = _tileMaskWidth;
-        int rows = _tileMaskHeight;
-
-        for (int y = 0; y < rows; y++)
-        {
-            float yTop = actualTopLeft.Y + y * tileHeight;
-            float yBottom = yTop + tileHeight;
-            float yTopEdge = Math.Min(yTop + thickness, yBottom);
-            float yBottomEdge = Math.Max(yBottom - thickness, yTop);
-
-            for (int x = 0; x < columns; x++)
-            {
-                if (!IsTilePresent(x, y))
-                    continue;
-
-                float xLeft = actualTopLeft.X + x * tileWidth;
-                float xRight = xLeft + tileWidth;
-                float xLeftEdge = Math.Min(xLeft + thickness, xRight);
-                float xRightEdge = Math.Max(xRight - thickness, xLeft);
-
-                handle.DrawRect(new UIBox2(xLeft, yTop, xRight, yTopEdge), gridColor);
-                handle.DrawRect(new UIBox2(xLeft, yTop, xLeftEdge, yBottom), gridColor);
-
-                if (!IsTilePresent(x + 1, y))
-                    handle.DrawRect(new UIBox2(xRightEdge, yTop, xRight, yBottom), gridColor);
-
-                if (!IsTilePresent(x, y + 1))
-                    handle.DrawRect(new UIBox2(xLeft, yBottomEdge, xRight, yBottom), gridColor);
-            }
-        }
-    }
-
-    private bool IsTilePresent(int x, int y)
-    {
-        if (_tileMask == null)
-            return false;
-
-        if ((uint)x >= (uint)_tileMaskWidth || (uint)y >= (uint)_tileMaskHeight)
-            return false;
-
-        return _tileMask[y * _tileMaskWidth + x];
+        handle.UseShader(_gridShader);
+        handle.DrawTextureRect(Texture, UIBox2.FromDimensions(actualTopLeft, actualSize));
+        handle.UseShader(null);
     }
 
     private void DrawModeBorder(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize, float overlayScale)
@@ -452,8 +417,7 @@ public sealed partial class TacticalMapControl
         Color backgroundColor,
         bool isDragging)
     {
-        float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
-        VectorFont labelFont = new(_resourceCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), (int)fontSize);
+        VectorFont labelFont = GetLabelFont(overlayScale);
 
         Vector2 textSize = handle.GetDimensions(labelFont, label, 1f);
         position -= textSize / 2;
@@ -466,6 +430,21 @@ public sealed partial class TacticalMapControl
             handle.DrawRect(UIBox2.FromDimensions(position - new Vector2(padding, padding), boxSize), bgColor);
 
         handle.DrawString(labelFont, position, label, textColor);
+    }
+
+    private VectorFont GetLabelFont(float overlayScale)
+    {
+        float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+        int size = (int)MathF.Round(fontSize);
+        if (size < 1)
+            size = 1;
+
+        if (_labelFontCache.TryGetValue(size, out var font))
+            return font;
+
+        font = new VectorFont(_resourceCache.GetResource<FontResource>(LabelFontPath), size);
+        _labelFontCache[size] = font;
+        return font;
     }
 
     private void DrawLineWithThickness(DrawingHandleScreen handle, TacticalMapLine line, float overlayScale, Vector2 actualTopLeft, float thickness)

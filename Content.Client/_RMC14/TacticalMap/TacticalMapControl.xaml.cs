@@ -11,6 +11,8 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using Color = Robust.Shared.Maths.Color;
 
 namespace Content.Client._RMC14.TacticalMap;
@@ -69,13 +71,17 @@ public sealed partial class TacticalMapControl : TextureRect
     private static readonly Color TacticalLabelBackground = Color.FromHex("#0D1A2F").WithAlpha(0.5f);
     private static readonly Color LabelDragBackground = Color.Black.WithAlpha(0.7f);
     private static readonly Color EraserPreviewColor = Color.White.WithAlpha(0.45f);
+    private static readonly ResPath LabelFontPath = new("/Fonts/NotoSans/NotoSans-Bold.ttf");
 
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private readonly Font _font;
+    private readonly ShaderInstance _gridShader;
     private readonly Label? _tunnelInfoLabel;
     private readonly Vector2[] _reusableLineVectors = new Vector2[6];
+    private readonly Dictionary<int, VectorFont> _labelFontCache = new();
 
     public readonly List<TacticalMapLine> Lines = new();
     public readonly List<float> LineThicknesses = new();
@@ -153,7 +159,8 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _font = new VectorFont(_resourceCache.GetResource<FontResource>("/Fonts/NotoSans/NotoSans-Bold.ttf"), 10);
+        _font = new VectorFont(_resourceCache.GetResource<FontResource>(LabelFontPath), 10);
+        _gridShader = _prototypeManager.Index<ShaderPrototype>("RMCTacMapGrid").InstanceUnique();
 
         _tunnelInfoLabel = new Label
         {

@@ -1,11 +1,10 @@
-using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.TacticalMap;
 
-[AdminCommand(AdminFlags.Admin)]
+[AnyCommand]
 public sealed class TacticalMapReplayCommand : IConsoleCommand
 {
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
@@ -29,8 +28,14 @@ public sealed class TacticalMapReplayCommand : IConsoleCommand
             return;
         }
 
-        string? mapId = args.Length == 1 ? args[0] : null;
         var replay = _entitySystemManager.GetEntitySystem<TacticalMapReplaySystem>();
+        if (!replay.CanAccessReplay(player, out var reason))
+        {
+            shell.WriteLine(reason ?? "You do not have access to the tactical map replay.");
+            return;
+        }
+
+        string? mapId = args.Length == 1 ? args[0] : null;
         replay.SendReplay(player, mapId);
     }
 }
