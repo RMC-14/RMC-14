@@ -6,8 +6,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
     drawdepth: Overdoors
@@ -531,7 +529,6 @@
   - type: Sprite
     state: sensors_equipment
 
-# Convenience aliases matching the van interior layout naming so the map layout can be reused.
 - type: entity
   parent: RMCVehicleAPCWallBase
   id: RMCVehicleAPCBack1
