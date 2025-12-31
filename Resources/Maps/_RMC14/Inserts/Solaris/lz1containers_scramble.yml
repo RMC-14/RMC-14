@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/31/2025 20:42:56
-  entityCount: 120
+  time: 12/31/2025 21:14:56
+  entityCount: 122
 maps: []
 grids:
 - 1
@@ -900,6 +900,20 @@ entities:
     components:
     - type: Transform
       pos: 16.5,14.5
+      parent: 1
+- proto: RMCTurretGaussSpaceborne
+  entities:
+  - uid: 121
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,12.5
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,5.5
       parent: 1
 - proto: RMCWindowFrameSolaris
   entities:
