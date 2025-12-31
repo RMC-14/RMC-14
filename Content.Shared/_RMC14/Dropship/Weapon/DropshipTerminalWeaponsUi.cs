@@ -164,11 +164,11 @@ public sealed class DropshipTerminalWeaponsViewFireMissionMsg(bool first, int id
 }
 
 [Serializable, NetSerializable]
-public sealed class DropshipTerminalWeaponsEditFireMissionMsg(bool first, int missionId, int row, int? offset) : BoundUserInterfaceMessage
+public sealed class DropshipTerminalWeaponsEditFireMissionMsg(bool first, int missionId, int step, int? offset) : BoundUserInterfaceMessage
 {
     public readonly bool First = first;
     public readonly int MissionId = missionId;
-    public readonly int Row = row;
+    public readonly int Step = step;
     public readonly int? Offset = offset;
 }
 

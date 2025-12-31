@@ -668,6 +668,8 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     ? terminal.ScreenOne.Weapon
                     : terminal.ScreenTwo.Weapon;
 
+                var validAmmo = true;
+                var labelMessage = Loc.GetString("rmc-dropship-firemission-edit");
                 if (selectedWeaponId != null)
                 {
                     var weaponEntity = EntMan.GetEntity(selectedWeaponId.Value);
@@ -699,7 +701,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                             ? $"{weaponComp.Abbreviation} {(int) location}"
                             : weaponComp.Abbreviation,
                         Offsets = offsets,
-                        FireDelay = weaponComp.FireMissionDelay,
                     };
 
                     if (_weaponSystem.TryGetWeaponAmmo(weaponEntity, out var weaponAmmo))
@@ -707,19 +708,31 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                         weaponInfo.MaxAmmo = weaponAmmo.Comp.MaxRounds;
                         weaponInfo.Ammo = weaponAmmo.Comp.Rounds;
                         weaponInfo.AmmoConsumption = weaponAmmo.Comp.RoundsPerShot;
+
+                        if (weaponAmmo.Comp.FireMissionDelay != null)
+                            weaponInfo.FireDelay = weaponAmmo.Comp.FireMissionDelay.Value;
+                        else
+                        {
+                            var name = EntMan.TryGetComponent(weaponAmmo, out MetaDataComponent? metaData)
+                                ? metaData.EntityName
+                                : "Loaded Ammo";
+
+                            validAmmo = false;
+                            labelMessage = Loc.GetString("rmc-dropship-firemission-invalid-ammo",("ammo", weaponAmmo));
+                        }
                     }
 
-                    screen.TopRow.SetData(firemissionDelete,firemissionCreate, firemissionView);
-                    screen.BottomRow.SetData(exit);
                     screen.FireMissionEdit.SetData(selectedMission, weaponInfo, terminal.MinTiming, terminal.MaxTiming, allowedOffsets);
-                    screen.ScreenLabel.Visible = false;
-                    screen.FireMissionEdit.Visible = true;
+                    if (validAmmo)
+                    {
+                        screen.ScreenLabel.Visible = false;
+                        screen.FireMissionEdit.Visible = true;
+                    }
                 }
-                else
-                {
-                    screen.ScreenLabel.Visible = false;
-                    screen.FireMissionView.Visible = true;
-                }
+
+                screen.TopRow.SetData(firemissionDelete,firemissionCreate, firemissionView);
+                screen.BottomRow.SetData(exit);
+                screen.ScreenLabel.Text = labelMessage;
                 break;
             }
             case StrikeFireMission:

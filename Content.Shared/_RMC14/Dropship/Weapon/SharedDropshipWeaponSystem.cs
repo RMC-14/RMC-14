@@ -545,6 +545,14 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (ent.Comp.Target == null)
                 return;
 
+            if (!IsValidTarget(ent.Comp.Target.Value))
+            {
+                RemovePvsActors(ent);
+                SetTarget(ent, null);
+                Dirty(ent);
+                return;
+            }
+
             foreach (var fireMission in ent.Comp.FireMissions)
             {
                 if (fireMission.Id != missionId)
@@ -984,8 +992,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
-
-        var newFireMission = new FireMissionData(newId, args.Name, weaponOffsets);
+        var cutName = args.Name[..Math.Min(ent.Comp.MaxFireMissionNameLength, args.Name.Length)];
+        var newFireMission = new FireMissionData(newId, cutName, weaponOffsets);
         ent.Comp.FireMissions.Add(newFireMission);
         Dirty(ent);
 
@@ -1022,18 +1030,18 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var offsets = mission.WeaponOffsets;
 
-        // Look for an existing offset for this weapon and row
+        // Look for an existing offset for this weapon and step
         var existingIndex = -1;
         for (var i = 0; i < offsets.Count; i++)
         {
-            if (offsets[i].WeaponId != screen.Weapon || offsets[i].Step != args.Row)
+            if (offsets[i].WeaponId != screen.Weapon || offsets[i].Step != args.Step)
                 continue;
 
             existingIndex = i;
             break;
         }
 
-        if (!IsOffsetEditValid(ent, idToSelect, screen.Weapon.Value, args.Row, args.Offset, out var suspicious))
+        if (!IsOffsetEditValid(ent, idToSelect, screen.Weapon.Value, args.Step, args.Offset, args.Actor, out var suspicious))
         {
             if (suspicious && _player.TryGetSessionByEntity(args.Actor, out var player))
                 _chat.SendAdminAlert(Loc.GetString("rmc-dropship-firemission-invalid-value-admin-announcement", ("player", player)));
@@ -1042,7 +1050,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var newOffset = new WeaponOffsetData(
             screen.Weapon.Value,
-            args.Row,
+            args.Step,
             args.Offset
         );
 
@@ -1204,11 +1212,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return true;
     }
 
-    private bool IsOffsetEditValid(Entity<DropshipTerminalWeaponsComponent> ent, int fireMissionId, NetEntity weapon, int row, int? offset, out bool suspicious)
+    private bool IsOffsetEditValid(Entity<DropshipTerminalWeaponsComponent> ent, int fireMissionId, NetEntity weapon, int step, int? offset, EntityUid user, out bool suspicious)
     {
         suspicious = false;
+        var weaponEntity = GetEntity(weapon);
 
-        // Validate fire mission exists
+        // Validate fire mission exists.
         FireMissionData? fireMission = null;
         foreach (var t in ent.Comp.FireMissions)
         {
@@ -1229,42 +1238,51 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 weaponOffsetsForWeapon.Add(wo);
         }
 
-        // Check if the sent timing is allowed
-        if (row < ent.Comp.MinTiming || row > ent.Comp.MaxTiming)
+        // Check if the sent timing is allowed.
+        if (step < ent.Comp.MinTiming || step > ent.Comp.MaxTiming)
         {
             suspicious = true;
             return false;
         }
 
-        // Check if the weapon point has a location set
-        if (!TryGetWeaponLocation(GetEntity(weapon), out var location))
+        // Check if the weapon point has a location set.
+        if (!TryGetWeaponLocation(weaponEntity, out var location))
             return false;
 
-        // Check if the terminal has allowed offsets defined for this location
+        // Check if the terminal has allowed offsets defined for this location.
         if (!ent.Comp.AllowedOffsets.TryGetValue(location, out var validOffsets))
             return false;
 
         // Check if the sent offset is allowed
         if (!validOffsets.Contains(offset))
         {
-            // This means the client sent an offset value that should be impossible to be sent through normal gameplay
+            // This means the client sent an offset value that should be impossible to be sent through normal gameplay.
             suspicious = true;
             return false;
         }
 
-        if (!TryComp(GetEntity(weapon), out DropshipWeaponComponent? weaponComp))
+        if (!TryComp(weaponEntity, out DropshipWeaponComponent? weaponComp))
             return false;
 
-        // Check if the row is blocked by an already set offset in a nearby row.
+        // Check if a weapons has ammo laoded that can't be used during a fire mission.
+        if (TryGetWeaponAmmo((weaponEntity, weaponComp), out var ammo) &&
+            ammo.Comp.FireMissionDelay == null)
+        {
+            var cooldownMsg = Loc.GetString("rmc-dropship-firemission-invalid-ammo");
+            _popup.PopupCursor(cooldownMsg, user, PopupType.SmallCaution);
+            return false;
+        }
+
+        // Check if the step is blocked by an already set offset in a nearby step.
         foreach (var existing in weaponOffsetsForWeapon)
         {
             if (!existing.Offset.HasValue)
                 continue;
 
-            if (existing.Step == row)
+            if (existing.Step == step)
                 continue;
 
-            if (Math.Abs(existing.Step - row) <= weaponComp.FireMissionDelay)
+            if (Math.Abs(existing.Step - step) <= ammo.Comp.FireMissionDelay)
                 return false;
         }
 
@@ -1822,13 +1840,13 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (existingOffsets.Count == terminal.MaxTiming)
             return;
 
-        var missingRows = Enumerable.Range(terminal.MinTiming, terminal.MaxTiming)
-            .Where(row => existingOffsets.All(o => o.Step != row))
+        var missingSteps = Enumerable.Range(terminal.MinTiming, terminal.MaxTiming)
+            .Where(step => existingOffsets.All(o => o.Step != step))
             .ToList();
 
-        foreach (var row in missingRows)
+        foreach (var step in missingSteps)
         {
-            var newOffset = new WeaponOffsetData(GetNetEntity(weaponEntity), row, null);
+            var newOffset = new WeaponOffsetData(GetNetEntity(weaponEntity), step, null);
             fireMission.WeaponOffsets.Add(newOffset);
         }
 
@@ -1980,6 +1998,17 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
             var msg = Loc.GetString("rmc-dropship-weapons-fire-no-ammo", ("weapon", uid));
             _popup.PopupCursor(msg, actor.Value);
+            return false;
+        }
+
+        if (strikeType == DropshipWeaponStrikeType.FireMission && ammo.Comp.FireMissionDelay == null)
+        {
+            if (actor == null)
+                return false;
+
+            var msg = Loc.GetString("rmc-dropship-firemission-invalid-ammo", ("ammo", ammo));
+            _popup.PopupCursor(msg, actor.Value, PopupType.SmallCaution);
+
             return false;
         }
 

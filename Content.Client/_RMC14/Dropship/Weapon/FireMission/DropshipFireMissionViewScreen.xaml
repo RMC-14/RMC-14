@@ -11,13 +11,13 @@
 
         <!-- Title -->
         <RichTextLabel Name="FireMissionTitle"
-                       Text="[color=#00FF36]Firemission: Attack One[/color]"
                        HorizontalAlignment="Center"
-                       MinSize="0 30"/>
+                       MinSize="0 30"
+                       ModulateSelfOverride="#00FF36"/>
 
-        <!-- GridContainer for the table -->
+        <!-- GridContainer for the table that shows the weapon information -->
         <GridContainer Name="FireMissionGrid"
-                       Columns="5"
+                       Columns="6"
                        HorizontalExpand="True"
                        VerticalExpand="True"
                        HSeparationOverride="4"

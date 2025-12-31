@@ -11,6 +11,8 @@ namespace Content.Client._RMC14.Dropship.Weapon.FireMission;
 [GenerateTypedNameReferences]
 public sealed partial class DropshipFireMissionViewScreen : PanelContainer
 {
+    private const int MaxWeapons = 4;
+
     public DropshipFireMissionViewScreen()
     {
         RobustXamlLoader.Load(this);
@@ -18,14 +20,13 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
 
     public void SetData(FireMissionData fireMission, List<WeaponDisplayInfo> weapons, int minTiming, int maxDuration)
     {
-        FireMissionGrid.Columns = weapons.Count + 1;
         FireMissionGrid.RemoveAllChildren();
 
-        FireMissionTitle.SetMarkupPermissive($"[color=#00FF36]Firemission: {fireMission.Name}[/color]");
-        AddRow("Weapon", weapons.Select(w => w.Name).ToList());
-        AddRow("Ammunition", weapons.Select(w => $"{w.Ammo} / {w.MaxAmmo}").ToList());
-        AddRow("Consumption", weapons.Select(w => w.AmmoConsumption > w.Ammo ? $"[color=red]{w.AmmoConsumption}[/color]" : w.AmmoConsumption.ToString()).ToList());
-        AddRow("", new List<string>(new string[weapons.Count]));
+        FireMissionTitle.SetMarkupPermissive($"Firemission: {fireMission.Name}");
+        AddRow("Weapon:", weapons.Select(w => w.Name).ToList());
+        AddRow("Ammunition:", weapons.Select(w => $"{w.Ammo} / {w.MaxAmmo}").ToList());
+        AddRow("Consumption:", weapons.Select(w => w.AmmoConsumption.ToString()).ToList());
+        AddRow("", new List<string>());
 
         for (var timing = minTiming - 1; timing < maxDuration; timing++)
         {
@@ -55,21 +56,34 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
 
     private void AddRow(string infoText, List<string> weaponTexts)
     {
-        var infoLabel = new RichTextLabel
+        FireMissionGrid.AddChild(new RichTextLabel
         {
-            Text = $"[color=#00FF36]{infoText}[/color]",
+            Text = $"{infoText}",
             HorizontalAlignment = HAlignment.Right,
-            MinSize = new Vector2(100, 18),
-        };
-        FireMissionGrid.AddChild(infoLabel);
+            MinSize = new Vector2(0, 18),
+            Modulate =  Color.FromHex("#00FF36"),
+            //ModulateSelfOverride = Color.FromHex("#00FF36"),
+        });
 
-        for (var i = 0; i < weaponTexts.Count; i++)
+        FireMissionGrid.AddChild(new PanelContainer()
         {
+            MinSize = new Vector2(15, 0),
+            VerticalExpand = true,
+        });
+
+        for (var i = 0; i < MaxWeapons; i++)
+        {
+            var text = i < weaponTexts.Count
+                ? weaponTexts[i]
+                : string.Empty;
+
             FireMissionGrid.AddChild(new RichTextLabel
             {
-                Text = $"[color=#00FF36]{weaponTexts[i]}[/color]",
+                Text = $"{text}",
                 HorizontalAlignment = HAlignment.Center,
                 HorizontalExpand = true,
+                MinSize = new Vector2(0, 18),
+                ModulateSelfOverride = Color.FromHex("#00FF36"),
             });
         }
     }

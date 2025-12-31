@@ -1,5 +1,4 @@
-﻿using System.Numerics;
-using Content.Shared._RMC14.Dropship.AttachmentPoint;
+﻿using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
@@ -48,6 +47,9 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     [DataField, AutoNetworkedField]
     public NetEntity? SelectedSystem;
 
+    /// <summary>
+    ///     The entity being looked at by the camera view.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? CameraTarget;
 
@@ -104,6 +106,12 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
 
     [DataField, AutoNetworkedField]
     public int ScreenTwoFireMissionPage;
+
+    /// <summary>
+    ///     The max length of a fire mission's name. Values higher than 40 might mess up how some of the UI looks.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int MaxFireMissionNameLength = 40;
 
     [DataRecord]
     [Serializable, NetSerializable]

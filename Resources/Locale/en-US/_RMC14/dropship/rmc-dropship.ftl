@@ -102,6 +102,8 @@ rmc-dropship-firemission-vector-South = SOUTH
 rmc-dropship-firemission-vector-West = WEST
 rmc-dropship-firemission-started = Firemission underway!
 rmc-dropship-firemission-cooldown = Firemission in progress.
+rmc-dropship-firemission-edit = Select a weapon.
+rmc-dropship-firemission-invalid-ammo = {$ammo} can't be used during a fire mission.
 
 rmc-dropship-paradrop-target-screen-text = HPU-1 Paradrop Deployment System
     {$hasTarget}

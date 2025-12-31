@@ -7,34 +7,41 @@
                   VerticalExpand="True" SeparationOverride="4" Margin="10">
 
         <!-- Mission title -->
-        <RichTextLabel Name="FireMissionTitle" Text="[color=#00FF36]FireMission: Attack one[/color]"
-                       HorizontalAlignment="Center" MinSize="0 30"/>
+        <RichTextLabel Name="FireMissionTitle" HorizontalAlignment="Center" MinSize="0 30" ModulateSelfOverride="#00FF36"/>
 
         <!-- Weapon info -->
         <BoxContainer Orientation="Vertical" SeparationOverride="2">
             <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <RichTextLabel Text="[color=#00FF36]Weapon[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
-                <RichTextLabel Name="WeaponName" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <PanelContainer  MinSize="90 18">
+                    <RichTextLabel Text="Weapon" HorizontalAlignment="Right" ModulateSelfOverride="#00FF36" VerticalAlignment="Center"/>
+                </PanelContainer>
+                <RichTextLabel Name="WeaponName" HorizontalAlignment="Center" HorizontalExpand="True" ModulateSelfOverride="#00FF36"/>
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <RichTextLabel Text="[color=#00FF36]Ammunition[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
-                <RichTextLabel Name="WeaponAmmoCount" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <PanelContainer  MinSize="90 18" >
+                    <RichTextLabel Text="Ammunition" HorizontalAlignment="Right" ModulateSelfOverride="#00FF36" VerticalAlignment="Center"/>
+                </PanelContainer>
+                <RichTextLabel Name="WeaponAmmoCount" HorizontalAlignment="Center" HorizontalExpand="True" ModulateSelfOverride="#00FF36"/>
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <RichTextLabel Text="[color=#00FF36]Gimbals[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
-                <RichTextLabel Name="WeaponGimbals" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <PanelContainer MinSize="90 18">
+                    <RichTextLabel Text="Gimbals" HorizontalAlignment="Right" ModulateSelfOverride="#00FF36" VerticalAlignment="Center"/>
+                </PanelContainer>
+                <RichTextLabel Name="WeaponGimbals" HorizontalAlignment="Center" HorizontalExpand="True" ModulateSelfOverride="#00FF36"/>
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" SeparationOverride="2">
-                <RichTextLabel Text="[color=#00FF36]Fire Delay[/color]" HorizontalAlignment="Right" MinSize="80 18"/>
-                <RichTextLabel Name="WeaponFireDelay" HorizontalAlignment="Center" HorizontalExpand="True"/>
+                <PanelContainer MinSize="90 18">
+                    <RichTextLabel Text="Fire Delay" HorizontalAlignment="Right" ModulateSelfOverride="#00FF36" VerticalAlignment="Center"/>
+                </PanelContainer>
+                <RichTextLabel Name="WeaponFireDelay" HorizontalAlignment="Center" HorizontalExpand="True" ModulateSelfOverride="#00FF36"/>
             </BoxContainer>
         </BoxContainer>
 
         <!-- Vertical container for all offset rows -->
-        <BoxContainer Name="FireMissionRows" Orientation="Vertical" SeparationOverride="2" HorizontalExpand="True">
+        <BoxContainer Name="FireMissionRows" Orientation="Vertical" SeparationOverride="3" HorizontalExpand="True" ModulateSelfOverride="#00FF36">
         </BoxContainer>
     </BoxContainer>
 </controls:DropshipFireMissionEditScreen>
