@@ -84,6 +84,7 @@
       - ProximitySensor # todo: RMCProximitySensor
       - RemoteSignaller # todo: RMCRemoteSignaller
       - CMMultitool
+      offset: 0
 
 - type: entity
   parent: MarkerBase
