@@ -1,0 +1,324 @@
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorWarshipMedicalPeach
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q1234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ1
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q1.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ2
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q2.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ3
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q3.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ4
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q4.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ12
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q12.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ23
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q23.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ34
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q34.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ41
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q41.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ123
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q123.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ234
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ341
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q341.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalPeach
+  id: RMCFloorWarshipMedicalPeachQ412
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/peach_metal_sterile_q412.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorWarshipMedicalAsh
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q1234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ1
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q1.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ2
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q2.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ3
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q3.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ4
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q4.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ12
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q12.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ23
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q23.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ34
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q34.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ41
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q41.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ123
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q123.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ234
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ341
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q341.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalAsh
+  id: RMCFloorWarshipMedicalAshQ412
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/ash_metal_sterile_q412.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorWarshipMedicalMauve
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q1234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ1
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q1.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ2
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q2.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ3
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q3.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ4
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q4.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ12
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q12.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ23
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q23.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ34
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q34.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ41
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q41.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ123
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q123.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ234
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ341
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q341.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalMauve
+  id: RMCFloorWarshipMedicalMauveQ412
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/mauve_metal_sterile_q412.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorWarshipMedicalRose
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q1234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ1
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q1.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ2
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q2.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ3
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q3.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ4
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q4.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ12
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q12.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ23
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q23.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ34
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q34.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ41
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q41.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ123
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q123.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ234
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ341
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q341.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalRose
+  id: RMCFloorWarshipMedicalRoseQ412
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/rose_metal_sterile_q412.png
+
+- type: tile
+  parent: CMFloorPlate
+  id: RMCFloorWarshipMedicalSky
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q1234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ1
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q1.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ2
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q2.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ3
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q3.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ4
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q4.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ12
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q12.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ23
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q23.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ34
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q34.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ41
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q41.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ123
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q123.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ234
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q234.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ341
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q341.png
+
+- type: tile
+  parent: RMCFloorWarshipMedicalSky
+  id: RMCFloorWarshipMedicalSkyQ412
+  sprite: /Textures/_RMC14/Tiles/warship/Medbay_Tiles.rsi/sky_metal_sterile_q412.png
