@@ -72,8 +72,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Drinks/tea.rsi
-    state: tea_upp
+    state: tea_spp
     layers: []
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+        reagents:
+        - ReagentId: RMCTea
+          Quantity: 30
 
 - type: entity
   parent: RMCDrinkTeaSPP
@@ -84,7 +91,7 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 50
+        maxVol: 30
         reagents:
         - ReagentId: Water
           Quantity: 30
