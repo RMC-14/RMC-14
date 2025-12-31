@@ -197,7 +197,7 @@
     tags:
     - MRE
   - type: Item
-    size: Small
+    size: Tiny
   - type: SpawnItemsOnUse
     items:
     - id: RMCMRESPPSurvivalRationTypeA
