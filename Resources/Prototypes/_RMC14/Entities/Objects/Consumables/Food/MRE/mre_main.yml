@@ -219,7 +219,7 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    state: upp_1
+    state: spp_1
 
 - type: entity
   parent: CMMREFoodMain
@@ -231,7 +231,7 @@
   - type: Item
     size: Tiny
   - type: Sprite
-    state: upp_2
+    state: spp_2
 
 # Flavors
 - type: flavor

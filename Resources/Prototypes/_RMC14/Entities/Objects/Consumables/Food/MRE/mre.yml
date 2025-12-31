@@ -208,7 +208,7 @@
       collection: CMFoodRip
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi
-    state: upp_ration
+    state: spp_ration
   - type: InteractedBlacklist
     blacklist:
       components:

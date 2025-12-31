@@ -139,7 +139,7 @@
   description: A Ukrainian style Banush cornmeal stew, dried apricots, and a couple vienna sausages.
   components:
   - type: Sprite
-    state: upp_banush
+    state: spp_banush
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -157,7 +157,7 @@
   description: Chow mein with imitation shrimp, two slightly overcooked spring rolls, some type of porridge and a small tofu cube.
   components:
   - type: Sprite
-    state: upp_chowmein
+    state: spp_chowmein
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -175,7 +175,7 @@
   description: Cuban rice with bland-ish eggs pieces, tomato sauce, potato salad, and a dry biscuit.
   components:
   - type: Sprite
-    state: upp_cuban
+    state: spp_cuban
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -193,7 +193,7 @@
   description: A large, juicy frankfurter with mashed potato, crispy potato pancakes and saurkraut.
   components:
   - type: Sprite
-    state: upp_frankfurter
+    state: spp_frankfurter
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -211,7 +211,7 @@
   description: Four boiled dumplings, soy-vinegar dipping sauce, pickled red cucumbers and two rye biscuits.
   components:
   - type: Sprite
-    state: upp_jiaozi
+    state: spp_jiaozi
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -229,7 +229,7 @@
   description: Two scoops of slightly dried out rice, a square of some kind of luncheon meat, two carrot sticks, and a 'fruit' bar.
   components:
   - type: Sprite
-    state: upp_luncheon
+    state: spp_luncheon
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -247,7 +247,7 @@
   description: Königsberger Klopse meatballs, a creamy sauce, some spinach, and a scoop of rice. One of the better options out of the pre-packaged meals and is rarely ever in stock.
   components:
   - type: Sprite
-    state: upp_meatballs
+    state: spp_meatballs
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -265,7 +265,7 @@
   description: A greasy rice patty with bits of fake imitation shrimp and egg flavoring. Smells quite off. On the side there's a slightly soggy spring roll.
   components:
   - type: Sprite
-    state: upp_meatballs
+    state: spp_meatballs
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -283,7 +283,7 @@
   description: Two scoops of rice, two Weiner wursts, a tortilla with tomato sauce and a small bowl of Mungbean soup fill this tray.
   components:
   - type: Sprite
-    state: upp_wursts
+    state: spp_wursts
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
@@ -300,7 +300,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
-    state: upp_tray
+    state: spp_tray
 
 # Festive
 
