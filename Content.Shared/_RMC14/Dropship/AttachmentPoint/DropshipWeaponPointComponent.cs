@@ -30,7 +30,7 @@ public enum DropshipWeaponPointLayers
 public enum DropshipWeaponPointLocation
 {
     PortWing = 1,
-    PortFore = 2,
-    StarboardFore = 3,
-    StarboardWing = 4,
+    StarboardWing = 2,
+    PortFore = 3,
+    StarboardFore = 4,
 }
