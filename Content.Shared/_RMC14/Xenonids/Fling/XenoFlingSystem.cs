@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -6,10 +7,8 @@ using Content.Shared._RMC14.Xenonids.Heal;
 using Content.Shared._RMC14.Xenonids.Rage;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Effects;
 using Content.Shared.FixedPoint;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
@@ -25,22 +24,18 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly RMCSlowSystem _rmcSlow = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
     [Dependency] private readonly XenoRageSystem _rage = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThresholds = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDazedSystem _daze = default!;
-
-    private static readonly ProtoId<DamageTypePrototype> LethalDamageType = "Asphyxiation";
 
     public override void Initialize()
     {
@@ -96,15 +91,7 @@ public sealed class XenoFlingSystem : EntitySystem
             daze = true;
         }
 
-        if (_mobThresholds.TryGetDeadThreshold(targetId, out var mobThreshold)
-            && TryComp<DamageableComponent>(targetId, out var damageable)
-            && _mobState.IsCritical(targetId)) // Kill crit targets
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index(LethalDamageType);
-            var lethalDamage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damageable.TryChangeDamage(targetId, lethalDamage, true, origin: xeno);
-        }
+        _rmcDamageable.DoLethalDamage(targetId, origin: xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
 
