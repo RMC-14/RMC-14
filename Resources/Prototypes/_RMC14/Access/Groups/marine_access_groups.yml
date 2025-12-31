@@ -16,7 +16,6 @@
   tags:
   - CMAccessMarinePrep
   - CMAccessFTLPrep
-  - CMAccessColonyEngineering
 
 - type: accessGroup
   id: WeaponSpec
