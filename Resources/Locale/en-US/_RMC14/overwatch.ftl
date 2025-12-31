@@ -102,3 +102,5 @@ rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Overwatc
 rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Overwatch:[/bold] { $operatorName } [bold]cancelled[/bold] the squad { $objectiveType }: [font size=16][bold]{ $objective }[/bold][/font][/color]
 rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } updated: '{ $objective }'.[/color][/bold]
 rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' { $objectiveType } '{ $objective }' cancelled.[/color][/bold]
+rmc-overwatch-console-objectives = Your squad objectives:
+    { $objectives }

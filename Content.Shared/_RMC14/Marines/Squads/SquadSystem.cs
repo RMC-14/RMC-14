@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
@@ -103,6 +104,8 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
         SubscribeLocalEvent<AssignSquadComponent, PlayerSpawnCompleteEvent>(OnAssignSquadPlayerSpawnComplete);
+
+        SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -262,6 +265,44 @@ public sealed class SquadSystem : EntitySystem
         {
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
+        }
+    }
+
+    private void OnSquadMemberAdded(ref SquadMemberAddedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Get squad objectives
+        var squadTeam = ev.Squad.Comp;
+        if (squadTeam.Objectives.Count == 0)
+            return;
+
+        // Check if member has ActorComponent (player is attached)
+        if (!TryComp(ev.Member, out ActorComponent? actor))
+            return;
+
+        var objectivesText = new List<string>();
+        foreach (var (objectiveType, objectiveText) in squadTeam.Objectives)
+        {
+            if (string.IsNullOrWhiteSpace(objectiveText))
+                continue;
+
+            var objectiveName = objectiveType switch
+            {
+                SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+                SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+                _ => objectiveType.ToString()
+            };
+
+            objectivesText.Add($"{objectiveName}: {objectiveText}");
+        }
+
+        if (objectivesText.Count > 0)
+        {
+            var message = Loc.GetString("rmc-overwatch-console-objectives",
+                ("objectives", string.Join("\n", objectivesText)));
+            _rmcChat.ChatMessageToOne(message, ev.Member, ChatChannel.Radio);
         }
     }
 

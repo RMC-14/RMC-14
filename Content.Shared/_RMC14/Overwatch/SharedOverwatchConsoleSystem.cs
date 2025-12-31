@@ -248,8 +248,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null);
-
         var selfMsg = Loc.GetString("rmc-overwatch-console-marine-transferred", ("marineName", Name(marineId.Value)), ("oldSquad", Name(currentSquad)), ("newSquad", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(selfMsg, actor);
         _popup.PopupCursor(selfMsg, actor, PopupType.Large);
@@ -257,6 +255,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         var targetMsg = Loc.GetString("rmc-overwatch-console-you-transferred", ("squadName", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
         _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
+
+        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null); //We do this later so that the announcement about transfer to another squad is before the text of the squad's objectives
     }
 
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
@@ -579,8 +579,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
 
         var objective = args.Objective;
-        if (objective.Length > 300)
-            objective = objective[..300];
+        if (objective.Length > 200)
+            objective = objective[..200];
 
         _squad.SetSquadObjective((squad.Value, squadComp), args.Type, objective);
 
