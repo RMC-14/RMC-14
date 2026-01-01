@@ -1,14 +1,42 @@
+# Sleeves Only
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: CMJumpsuitSPPOfficer
+  name: SPP officer fatigues
+  description: A set of SPP officer fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPP
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CMJumpsuitSPPMP
+  name: SPP military police fatigues
+  description: A set of SPP military police fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mp.rsi
+
+# Sleeves and Jacket
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitSPP
   name: SPP fatigues
   description: A set of SPP fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/uniform.rsi
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchSPP
@@ -18,21 +46,8 @@
 
 - type: entity
   parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPWebbing
-  components:
-  - type: WebbingClothing
-    startingWebbing: CMWebbing
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPWebbingVestBlack
-  components:
-  - type: WebbingClothing
-    startingWebbing: CMWebbingBlack
-
-- type: entity
-  parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPWebbingTools
+  suffix: Filled, Tool Webbing
   components:
   - type: WebbingClothing
     startingWebbing: RMCToolWebbingFilled
@@ -54,24 +69,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/engi.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: CMJumpsuitSPPMP
-  name: SPP military police fatigues
-  description: A set of SPP military police fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mp.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: CMJumpsuitSPPOfficer
-  name: SPP officer fatigues
-  description: A set of SPP officer fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
 
 - type: entity
   parent: CMJumpsuitSPP

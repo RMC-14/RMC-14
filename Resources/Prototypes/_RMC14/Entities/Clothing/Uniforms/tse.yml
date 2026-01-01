@@ -14,7 +14,7 @@
 
 # Royal
 - type: entity
-  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
   description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
@@ -30,11 +30,6 @@
     - RMCPatchTSE
   - type: ItemCamouflage
     camouflageVariations: {}
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: sleeves
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
@@ -53,7 +48,7 @@
     startingWebbing: CMWebbingSurgicalBlue
 
 - type: entity
-  parent: RMCJumpsuitTSEPA
+  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine uniform
   description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
