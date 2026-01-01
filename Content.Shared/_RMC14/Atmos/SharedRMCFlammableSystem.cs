@@ -770,8 +770,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         if (ent.Comp2 != null)
         {
-            if (duration != null)
-                ent.Comp2.Damage.DamageDict[HeatDamage] = duration.Value;
+            if (intensity != null)
+                ent.Comp2.Damage.DamageDict[HeatDamage] = intensity.Value * ent.Comp2.DirectHitMultiplier;
 
             Dirty(ent, ent.Comp2);
         }
