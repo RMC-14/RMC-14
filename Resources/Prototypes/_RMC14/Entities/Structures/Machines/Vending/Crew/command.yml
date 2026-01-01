@@ -19,6 +19,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMBootsBlackFilled
       - id: RMCHeadsetMarineCommand
       - id: CMMRE
@@ -446,6 +447,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMMRE
     - name: Commanding Officer Essentials Kit
@@ -753,6 +755,7 @@
       - CMExecutiveOfficer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetSeniorCommand
       - id: CMSatchel
       - id: CMMRE
@@ -1021,6 +1024,7 @@
       - CMChiefEngineer
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMHeadsetCE
       - id: CMBootsBlack
       - id: ClothingEyesGlassesMeson # TODO change to CM13 engi goggles.
@@ -1205,6 +1209,7 @@
       - CMQuartermaster
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMSatchel
       - id: RMCQuartermasterJacket
     - name: Gloves
@@ -1480,6 +1485,7 @@
       - CMAuxiliarySupportOfficer
       choices: { CMSuit: 1 }
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMCoatASO
       - id: RMCCoatASOBlack
       - id: RMCCoatASOWhite

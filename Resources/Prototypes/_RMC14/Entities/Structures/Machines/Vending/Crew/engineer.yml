@@ -40,6 +40,7 @@
     - name: Suit
       choices: { CMSuit: 1 }
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: RMCHazardVestBlack
       - id: RMCHazardVestBlue
       - id: RMCHazardVest

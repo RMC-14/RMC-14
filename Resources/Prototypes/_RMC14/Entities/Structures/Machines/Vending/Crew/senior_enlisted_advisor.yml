@@ -16,6 +16,7 @@
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE

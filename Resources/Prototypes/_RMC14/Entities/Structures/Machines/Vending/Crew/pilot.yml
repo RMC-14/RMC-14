@@ -21,6 +21,7 @@
     - name: Standard Equipment
       takeAll: CMEquipment
       entries:
+      - id: RMCOuterClothingExternalWebbing
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
