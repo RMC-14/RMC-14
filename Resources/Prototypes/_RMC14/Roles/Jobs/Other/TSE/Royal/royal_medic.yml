@@ -88,7 +88,7 @@
     belt: RMCBeltMedicBagRoyal
     back: RMCSatchelLightpackFilledRoyalMedic
     pocket1: RMCPouchReagentCanisterTricordrazineRevival
-    pocket2: RMCPouchMedkitFillRoyal
+    pocket2: RMCPouchMedkitFillRoyalMedic
 
 - type: playTimeTracker
   id: RMCJobRoyalMedic

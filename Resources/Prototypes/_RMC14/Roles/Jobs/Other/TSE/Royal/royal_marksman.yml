@@ -65,6 +65,10 @@
     job: CMRoyalMarinesMarksman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadRoyalMarines
   
@@ -73,6 +77,7 @@
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
+    eyes: RMCGlassesM4SPRBattleSight
     mask: RMCMaskScarfTan
     jumpsuit: RMCJumpsuitMarineRoyalMK80
     outerClothing: RMCArmorRoyalLightFilled

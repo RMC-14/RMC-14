@@ -86,7 +86,7 @@
     id: RMCIDRoyalMarinesBreacher
     belt: RMCBeltUtiliyGeneralFilledRoyal
     # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
-    pocket1: RMCPouchToolsFilledRCM
+    pocket1: RMCPouchToolsSocFilledTactical
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
