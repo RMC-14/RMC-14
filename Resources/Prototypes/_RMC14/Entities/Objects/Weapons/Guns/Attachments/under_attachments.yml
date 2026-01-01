@@ -155,8 +155,13 @@
   - type: AttachableWeaponRangedMods
     fireModeMods:
     - extraFireModes: Burst
+    - setFireMode: Burst
     modifiers:
-    - shotsPerBurstFlat: 2
+    - conditions:
+        blacklist:
+          tags:
+          - RMCWeaponPistolL14
+      shotsPerBurstFlat: 2
     - conditions:
         wieldedOnly: true
       accuracyAddMult: -0.15
