@@ -46,6 +46,20 @@
 
 - type: entity
   parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPWebbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbing
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPWebbingVestBlack
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingBlack
+
+- type: entity
+  parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPWebbingTools
   suffix: Filled, Tool Webbing
   components:
