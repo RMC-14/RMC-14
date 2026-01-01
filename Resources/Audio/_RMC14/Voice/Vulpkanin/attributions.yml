@@ -28,7 +28,8 @@
   copyright: "Original sound by https://freesound.org/people/Sruddi1/sounds/34878/ - cleaned up, converted to ogg"
   source: "https://freesound.org/people/Sruddi1/sounds/34878/"
 
-
-
-
-
+- files: ["yip.ogg"]
+  license: "CC0-1.0"
+  copyright: "Modified from 'Video Game Squeak' by freesound user 'Breviceps'. The original audio was converted from WAV to OGG format"
+  source: "https://freesound.org/people/Breviceps/sounds/468442/"
+  
