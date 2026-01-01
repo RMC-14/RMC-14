@@ -818,8 +818,9 @@
       scatterFlat: -4
 
 - type: entity
-  parent: [ RMCUnderAttachmentBase, RMCAttachableToggleableBase ]
+  parent: RMCAttachmentBipod
   id: RMCAttachmentL91Bipod
+  categories: [ HideSpawnMenu ]
   name: "L91 SWS integrated bipod"
   description: "Blimey! This should be bolted to your rifle, you twat - put it back on and get back to it, mate!"
   components:
@@ -831,29 +832,6 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL91Bipod
   - type: AttachableToggleable
-    heldOnlyActivate: true
-    userOnly: true
-    doInterrupt: true
-    attachedOnly: true
-    breakOnMove: true
-    breakOnFullRotate: true
-    breakOnDrop: true
-    slowOnBreak: true
-    doAfter: 1.5
-    deactivateDoAfter: 0
-    doAfterNeedHand: false
-    instantToggle: Brace
-    useDelay: 0.5
-    activatePopupText: attachable-popup-activate-deploy-on-ground
-    deactivatePopupText: attachable-popup-deactivate-retract
-    activateSound:
-      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
-      params:
-        volume: -3
-    deactivateSound:
-      path: /Audio/_RMC14/Attachable/bipod_toggle.ogg
-      params:
-        volume: -3
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: bipod-l91
@@ -862,13 +840,11 @@
       state: bipod-l91-on
     actionName: Deploy Bipod
     actionDesc: Deploy the bipod and get into a firing position.
-  - type: AttachableVisuals
-    showActive: true
-  - type: AttachableTemporarySpeedMods
-    alteration: Interrupted
-  - type: AttachableSizeMods
+  - type: AttachableWeaponMeleeMods
     modifiers:
-    - size: 2
+    - bonusDamage:
+        types:
+          Blunt: 0
   - type: AttachableWieldDelayMods
     modifiers:
     - delay: 0.2
@@ -892,14 +868,6 @@
     layers:
     - state: grenade-l90
       map: [ "enum.BreechVisuals.Open" ]
-  - type: OnShootTriggerAmmoTimer
-    delay: 1
-    beepInterval: 2
-    initialBeepDelay: 0
-    beepSound:
-      path: "/Audio/Effects/beep1.ogg"
-      params:
-        volume: 5
   - type: GenericVisualizer
     visuals:
       enum.BreechVisuals.Open:
@@ -907,12 +875,6 @@
           True: { state: grenade-l90-open }
           False: { state: grenade-l90 }
   - type: AttachableToggleable
-    userOnly: true
-    attachedOnly: true
-    supercedeHolder: true
-    wieldedUseOnly: true
-    activatePopupText: attachable-popup-switch-to-generic
-    deactivatePopupText: attachable-popup-switch-from-generic
     actionName: Switch to the L90U3 Grenade Launcher
     actionDesc: Switch to using the underbarrel grenade launcher.
     icon:
@@ -940,16 +902,6 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL90UBS
   - type: AttachableToggleable
-    userOnly: true
-    attachedOnly: true
-    supercedeHolder: true
-    wieldedUseOnly: true
-    activatePopupText: attachable-popup-switch-to-generic
-    deactivatePopupText: attachable-popup-switch-from-generic
-    activateSound:
-      path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
-      params:
-        volume: -2
     actionName: Switch to the L90U1 underbarrel shotgun
     actionDesc: Switch to using the underbarrel shotgun.
     icon:

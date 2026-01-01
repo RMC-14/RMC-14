@@ -186,7 +186,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/L91.rsi
   - type: Gun
-    selectedMode: SemiAuto
+    selectedMode: FullAuto
     availableModes:
     - SemiAuto
     - FullAuto
@@ -309,11 +309,6 @@
           tags:
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.9, 0.063
-      rmc-aslot-rail: -0.07, 0.15
-      rmc-aslot-underbarrel: 0.38, -0.25
 
 - type: entity
   parent: RMCWeaponRifleL90A1Filled
@@ -342,11 +337,6 @@
           tags:
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.9, 0.063
-      rmc-aslot-rail: -0.07, 0.15
-      rmc-aslot-underbarrel: 0.38, -0.25
 
 - type: entity
   parent: RMCWeaponRifleL90A2
@@ -400,11 +390,6 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.87, 0.063
-      rmc-aslot-rail: -0.06, 0.15
-      rmc-aslot-underbarrel: 0.38, -0.25
 
 - type: entity
   parent: RMCWeaponRifleL90A2Filled
@@ -445,11 +430,48 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 0.87, 0.063
-      rmc-aslot-rail: -0.06, 0.15
-      rmc-aslot-underbarrel: 0.38, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL90A2Filled
+  id: RMCWeaponRifleL90A2Breacher
+  suffix: Breacher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90UBS
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
 
 - type: entity
   parent: RMCWeaponRifleL91SWS
@@ -496,11 +518,6 @@
         whitelist:
           tags:
           - RMCAttachmentL91Bipod
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-barrel: 1.12, 0.063
-      rmc-aslot-rail: -0.03, 0.15
-      rmc-aslot-underbarrel: 0.69, -0.20
 
 # Magazines
 
