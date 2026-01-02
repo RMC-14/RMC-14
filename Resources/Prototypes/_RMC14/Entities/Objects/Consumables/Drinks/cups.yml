@@ -136,3 +136,29 @@
         sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
         state: icon-3
         visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCPaperCup
+  name: paper cup
+  description: A paper water cup.
+  suffix: RMC
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 10
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/water_cup.rsi
+    layers:
+      - state: icon-0
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: icon-3
+        visible: false
+  - type: Tag
+    tags:
+    - DrinkGlass
+    - Trash
+  - type: TrashOnSolutionEmpty
+    solution: drink
