@@ -2007,3 +2007,14 @@
     state: kaizer_deathwish_valentine
   - type: PatronFigurine
     id: 2cd412a9-6316-4163-8a33-637c63b2cd38
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLost-In-Stars
+  name: Lost-In-Stars figurine
+  description: "The laziest, most irresponsible purple lizard of the requisition crew. Wonder where he got that giant poppy from..."
+  components:
+  - type: Sprite
+    state: lost-in-stars
+  - type: PatronFigurine
+    id: 5024804a-2912-4f89-b64e-8932488afa50
