@@ -2051,3 +2051,14 @@
     state: zoey_marz
   - type: PatronFigurine
     id: b6f6ada7-cd38-4ba9-b2a2-8e5a5ef44b8f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGreedyJamie
+  name: Greedy Jamie figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: greedy_jamie
+  - type: PatronFigurine
+    id: e16782f6-f11f-4381-b74e-d9ffde8f17df
