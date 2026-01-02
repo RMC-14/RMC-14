@@ -145,10 +145,7 @@
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
           - RMCMagazineRifleL83A3Extended
-  - type: GunDamageModifier
-    multiplier: 1.7
   - type: AttachableHolder
-    randomAttachmentChance: 0.42
     slots:
       rmc-aslot-barrel:
         whitelist:

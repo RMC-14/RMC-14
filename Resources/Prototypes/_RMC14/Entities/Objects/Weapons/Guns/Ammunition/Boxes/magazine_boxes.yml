@@ -636,9 +636,6 @@
   id: RMCBoxMagazineRifleL24Empty
   name: magazine box (L24 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL24Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -684,9 +681,6 @@
   id: RMCBoxMagazineRifleL24APEmpty
   name: magazine box (AP L24 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL24APEmpty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -732,9 +726,6 @@
   id: RMCBoxMagazineRifleL24ExtEmpty
   name: magazine box (Ext L24 x 12)
   components:
-  - type: Construction 
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL24ExtEmpty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -788,7 +779,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
-      color: "#1f951f"
+      color: "#9c9a19"
     - state: rifle_box_24
       color: "#ffcb26"
     - state: rifle_box_marking
@@ -833,7 +824,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
     - state: rifle_ammo_full_mags_color
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
-      color: "#1f951f"
+      color: "#771A10"
     - state: rifle_box_24
       color: "#ffcb26"
     - state: rifle_box_marking
@@ -1127,9 +1118,6 @@
   id: RMCBoxMagazineRifleL83A3Empty
   name: magazine box (L83A3 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL83A3Empty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -1175,9 +1163,6 @@
   id: RMCBoxMagazineRifleL83A3APEmpty
   name: magazine box (AP L83A3 x 16)
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL83A3APEmpty
   - type: Sprite
     layers:
     - state: rifle_box
@@ -1223,9 +1208,6 @@
   id: RMCBoxMagazineRifleL83A3ExtEmpty
   name: magazine box (Ext L83A3 x 12)
   components:
-  - type: Construction 
-    graph: RMCBoxMagazine
-    node: RMCBoxMagazineRifleL83A3ExtEmpty
   - type: Sprite
     layers:
     - state: rifle_box

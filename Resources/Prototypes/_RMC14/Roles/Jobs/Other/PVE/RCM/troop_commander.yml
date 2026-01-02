@@ -38,17 +38,14 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
-    - type: SquadLeader
-      icon: 
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: rmc_lieutenant_pve
+    - type: InnateCommandSpeech
     - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-troop-commander
     - type: AssignSquad
       whitelist:
         tags:
-        - RMCSquadRoyalMarines
+        - RMCSquadRoyalMarinesPVE
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -62,7 +59,7 @@
   id: RMCGearRoyalTroopCommanderPVE
   equipment:
     head: RMCHeadRoyalBeretLead
-    ears: RMCHeadsetRoyalMarineOfficer
+    ears: RMCHeadsetRoyalMarineLeaderPVE
     jumpsuit: RMCJumpsuitMarineRoyal
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

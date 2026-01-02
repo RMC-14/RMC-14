@@ -150,10 +150,7 @@
           - RMCMagazineRifleL24Extended
           - RMCMagazineRifleL24HEAP
           - RMCMagazineRifleL24Incendiary
-  - type: GunDamageModifier
-    multiplier: 1.0
   - type: AttachableHolder
-    randomAttachmentChance: 1
     slots:
       rmc-aslot-barrel:
         whitelist:

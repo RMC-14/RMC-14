@@ -39,31 +39,31 @@ rmc-job-name-rcm-major = Major
 rmc-job-prefix-rcm-major = RCM MAJ
 
 rmc-job-name-rcm-pve-rifleman = Rifleman
-rmc-job-prefix-rcm-pve-rifleman = RCM RM
+rmc-job-prefix-rcm-pve-rifleman = RM
 
-rmc-job-name-rcm-pve-troop-sergeant = Troop Sergeant
-rmc-job-prefix-rcm-pve-troop-sergeant = RCM TS
+rmc-job-name-rcm-pve-troop-sergeant = Sergeant
+rmc-job-prefix-rcm-pve-troop-sergeant = Sgt
 
 rmc-job-name-rcm-pve-section-leader = Section Leader
-rmc-job-prefix-rcm-pve-section-leader = RCM STL
+rmc-job-prefix-rcm-pve-section-leader = STL
 
 rmc-job-name-rcm-pve-team-leader = Team Leader
-rmc-job-prefix-rcm-pve-team-leader = RCM TL
+rmc-job-prefix-rcm-pve-team-leader = TL
 
 rmc-job-name-rcm-pve-gpmg-gunner = GPMG Gunner
-rmc-job-prefix-rcm-pve-gpmg-gunner = RCM GPMG
+rmc-job-prefix-rcm-pve-gpmg-gunner = GPMG
 
 rmc-job-name-rcm-pve-medical-assistant = Medical Assistant
-rmc-job-prefix-rcm-pve-medical-assistant = RCM MA
+rmc-job-prefix-rcm-pve-medical-assistant = MA
 
 rmc-job-name-rcm-pve-assault-engineer = Assault Engineer
-rmc-job-prefix-rcm-pve-assault-engineer = RCM AE
+rmc-job-prefix-rcm-pve-assault-engineer = AE
 
 rmc-job-name-rcm-pve-scout-sniper = Scout Sniper
-rmc-job-prefix-rcm-pve-scout-sniper = RCM SnS
+rmc-job-prefix-rcm-pve-scout-sniper = SnS
 
 rmc-job-name-rcm-pve-bombardment-specialist = Bombardment Specialist
-rmc-job-prefix-rcm-pve-bombardment-specialist = RCM BMBRD
+rmc-job-prefix-rcm-pve-bombardment-specialist = BMBRD
 
-rmc-job-name-rcm-pve-troop-commander = Troop Commander
-rmc-job-prefix-rcm-pve-troop-commander = RCM TCO
+rmc-job-name-rcm-pve-troop-commander = Commander
+rmc-job-prefix-rcm-pve-troop-commander = Com
