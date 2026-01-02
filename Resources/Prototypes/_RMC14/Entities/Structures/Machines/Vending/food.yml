@@ -64,8 +64,9 @@
 
 - type: entity
   parent: RMCNutriCoVendor
-  id: RMCVendorFoodSPP
+  id: RMCVendorNutriCoFoodSPP
   name: food dispenser
+  suffix: SPP
   description: A food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need.
   components:
   - type: CMAutomatedVendor

@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/29/2025 06:33:17
+  time: 01/02/2026 03:37:10
   entityCount: 8960
 maps:
 - 1
@@ -33788,28 +33788,6 @@ entities:
     - type: Transform
       pos: 9.975904,105.5
       parent: 1
-- proto: RMCNutriCoVendor
-  entities:
-  - uid: 3806
-    components:
-    - type: Transform
-      pos: -21.5,39.5
-      parent: 1
-  - uid: 3807
-    components:
-    - type: Transform
-      pos: -20.5,39.5
-      parent: 1
-  - uid: 3808
-    components:
-    - type: Transform
-      pos: 0.5,39.5
-      parent: 1
-  - uid: 3809
-    components:
-    - type: Transform
-      pos: -0.5,39.5
-      parent: 1
 - proto: RMCOrbitalCannonCable
   entities:
   - uid: 3810
@@ -44184,7 +44162,29 @@ entities:
     - type: Transform
       pos: 53.5,30.5
       parent: 1
-- proto: RMCVendorNutriCoDrink
+- proto: RMCVendorNutriCoFoodSPP
+  entities:
+  - uid: 3806
+    components:
+    - type: Transform
+      pos: -20.5,39.5
+      parent: 1
+  - uid: 3807
+    components:
+    - type: Transform
+      pos: -21.5,39.5
+      parent: 1
+  - uid: 3808
+    components:
+    - type: Transform
+      pos: -0.5,39.5
+      parent: 1
+  - uid: 3809
+    components:
+    - type: Transform
+      pos: 0.5,39.5
+      parent: 1
+- proto: RMCVendorNutriCoDrinkSPP
   entities:
   - uid: 5631
     components:
