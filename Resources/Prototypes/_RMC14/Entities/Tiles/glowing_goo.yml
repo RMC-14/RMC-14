@@ -20,12 +20,12 @@
         - MobMask
         hard: false
   - type: Sprite
-    sprite: _RMC14/Effects/glowing_goo.rsi
+    sprite: _RMC14/Effects/green_glow.rsi
     noRot: true
     drawdepth: WallTops
     layers:
     - map: [ "base" ]
-      state: glowing_goo
+      state: green_glow
   - type: Clickable
   - type: InteractionOutline
   - type: PointLight
