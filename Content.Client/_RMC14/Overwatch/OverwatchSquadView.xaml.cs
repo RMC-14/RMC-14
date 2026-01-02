@@ -275,8 +275,8 @@ public sealed partial class OverwatchSquadView : Control
         base.FrameUpdate(args);
 
         CrateStatus.Text = HasCrate
-            ? Loc.GetString("rmc-overwatch-console-crate-loaded")
-            : Loc.GetString("rmc-overwatch-console-no-crate-loaded");
+            ? "[color=green][bold] \\[ CRATE LOADED \\][/bold][/color]"
+            : "[color=red][bold] \\[ NO CRATE LOADED \\][/bold][/color]";
 
         var time = IoCManager.Resolve<IGameTiming>().CurTime;
         var supplyTimeLeft = NextLaunchAt - time;
@@ -299,8 +299,8 @@ public sealed partial class OverwatchSquadView : Control
         else
         {
             OrbitalStatus.Text = HasOrbital
-                ? Loc.GetString("rmc-overwatch-console-ready")
-                : Loc.GetString("rmc-overwatch-console-not-ready");
+                ? "[color=green][bold] \\[ READY \\][/bold][/color]"
+                : "[color=red][bold] \\[ NOT READY \\][/bold][/color]";
             OrbitalFireButton.Disabled = false;
         }
     }
