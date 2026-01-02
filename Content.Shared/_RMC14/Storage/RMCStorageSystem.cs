@@ -544,13 +544,17 @@ public sealed class RMCStorageSystem : EntitySystem
 
     private void OnOpenStorageStartingGear(Entity<OpenStorageOnGearEquipComponent> ent, ref StartingGearEquippedEvent args)
     {
-        if (!_storageQuery.TryComp(args.Entity, out var storageComp))
-            return;
+        var slots = _inventory.GetSlotEnumerator(ent.Owner);
+        while (slots.MoveNext(out var slot))
+        {
+            if (!_storageQuery.TryComp(slot.ContainedEntity, out var storageComp))
+                continue;
 
-        if (!_entityWhitelist.CheckBoth(args.Entity, ent.Comp.Blacklist, ent.Comp.Whitelist))
-            return;
+            if (!_entityWhitelist.CheckBoth(slot.ContainedEntity, ent.Comp.Blacklist, ent.Comp.Whitelist))
+                continue;
 
-        _storage.OpenStorageUI(args.Entity, ent.Owner, storageComp, doAfter: false);
+            _storage.OpenStorageUI(slot.ContainedEntity.Value, ent.Owner, storageComp, doAfter: false);
+        }
     }
 
     public override void Update(float frameTime)
