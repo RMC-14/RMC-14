@@ -13,6 +13,31 @@
 
 - type: entity
   abstract: true
+  id: RMCVehicleAPCRoofBase
+  name: APC interior roof
+  description: A removable roof section for the APC interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCWallBase
   placement:
@@ -181,6 +206,14 @@
 
 - type: entity
   parent: RMCVehicleAPCWallBase
+  id: RMCVehicleAPCWallViewport
+  components:
+  - type: Sprite
+    drawdepth: Walls
+    state: wall
+
+- type: entity
+  parent: RMCVehicleAPCWallBase
   id: RMCVehicleAPCWallSmallL
   components:
   - type: Sprite
@@ -194,11 +227,20 @@
     state: wall_small_R
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
+  parent: RMCVehicleAPCRoofBase
   id: RMCVehicleAPCWallDoorFront
   components:
   - type: Sprite
-    state: wall_door_front
+    layers:
+    - state: wall_door_front
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
 
 - type: entity
   parent: RMCVehicleAPCDoorBase
@@ -411,11 +453,20 @@
     state: apc_right_2
 
 - type: entity
-  parent: RMCVehicleAPCWallBase
+  parent: RMCVehicleAPCRoofBase
   id: RMCVehicleAPCApcRight3
   components:
   - type: Sprite
-    state: apc_right_3
+    layers:
+    - state: apc_right_3
+      map: [ "roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -521,6 +572,20 @@
     interfaces:
       enum.RMCVehiclePortGunUiKey.Key:
         type: RMCVehiclePortGunBoundUserInterface
+
+- type: entity
+  parent: RMCVehicleAPCM56FPWInterior
+  id: RMCVehicleAPCM56FPWInteriorNorth
+  components:
+  - type: VehiclePortGunController
+    gunSlotId: port-gun-north
+
+- type: entity
+  parent: RMCVehicleAPCM56FPWInterior
+  id: RMCVehicleAPCM56FPWInteriorSouth
+  components:
+  - type: VehiclePortGunController
+    gunSlotId: port-gun-south
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase

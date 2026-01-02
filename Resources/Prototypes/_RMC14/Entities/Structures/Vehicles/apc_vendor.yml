@@ -1,0 +1,12 @@
+- type: entity
+  parent: ColMarTechUtilities
+  id: RMCVehicleAPCSupplyVendor
+  name: ColMarTech automated supply vendor
+  description: An automated supply rack for APC crews.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: Overdoors

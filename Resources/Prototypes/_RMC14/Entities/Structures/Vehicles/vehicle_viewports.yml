@@ -16,6 +16,17 @@
 
 - type: entity
   parent: RMCVehicleViewport
+  id: RMCVehicleViewportUnanchored
+  name: vehicle viewport (unanchored)
+  description: A small viewport for peering outside.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: RMCVehicleViewport
   id: RMCVehicleViewportSimple
   name: vehicle viewport (simple)
   description: A small viewport for peering outside.

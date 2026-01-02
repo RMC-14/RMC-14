@@ -59,3 +59,52 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/hotseat.rsi
     state: base
+
+- type: entity
+  abstract: true
+  parent: CMSeatBase
+  id: RMCSeatArmoredBase
+  name: armored seat
+  description: A reinforced chair designed for vehicle interiors.
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    state: armor_chair
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmored
+  name: armored seat
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredDriver
+  name: armored driver's seat
+  components:
+  - type: VehicleDriverSeat
+    skills:
+      all: {}
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredWeaponsOperator
+  name: armored weapons operator seat
+  components:
+  - type: VehicleWeaponsSeat
+    skills:
+      all: {}
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredPortGunOperator
+  name: armored port gun operator seat
+  components:
+  - type: VehiclePortGunSeat
+    skills:
+      all: {}
