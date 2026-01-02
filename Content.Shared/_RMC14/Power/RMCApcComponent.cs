@@ -58,7 +58,7 @@ public sealed partial class RMCApcComponent : Component
     public ProtoId<ToolQualityPrototype> CrowbarTool = "Prying";
 
     [DataField, AutoNetworkedField]
-    public ProtoId<AccessLevelPrototype>[] Access = ["CMAccessEngineering", "CMAccessColonyEngineering" ];
+    public ProtoId<AccessLevelPrototype>[] Access = ["CMAccessEngineering", "CMAccessColonyEngineering"];
 
     [DataField, AutoNetworkedField]
     public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillEngineer";
