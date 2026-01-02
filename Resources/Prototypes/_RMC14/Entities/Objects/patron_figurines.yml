@@ -2062,3 +2062,14 @@
     state: greedy_jamie
   - type: PatronFigurine
     id: e16782f6-f11f-4381-b74e-d9ffde8f17df
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBailey
+  name: Bailey figurine
+  description: "1 of 100. The figure smells eerily like napthal, high-combustion napalm, and CLF3. The burn marks are very apparent and the M34 incinerator toy does not come off. Ever."
+  components:
+  - type: Sprite
+    state: bailey
+  - type: PatronFigurine
+    id: 833ab8ba-7fa1-41a5-b342-07190ed2029f
