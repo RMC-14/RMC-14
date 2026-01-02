@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/02/2026 02:43:54
-  entityCount: 676
+  time: 01/02/2026 03:41:09
+  entityCount: 683
 maps: []
 grids:
 - 1
@@ -148,6 +148,17 @@ entities:
             1: 21,3
         - node:
             cleanable: True
+            id: burnt1
+          decals:
+            29: 6,17
+        - node:
+            cleanable: True
+            angle: 1.5707963267948966 rad
+            id: burnt1
+          decals:
+            30: 10,22
+        - node:
+            cleanable: True
             id: burnt2
           decals:
             8: 6,17
@@ -157,6 +168,18 @@ entities:
             id: burnt3
           decals:
             9: 10,22
+        - node:
+            cleanable: True
+            angle: 1.5707963267948966 rad
+            id: burnt4
+          decals:
+            31: 6,17
+        - node:
+            cleanable: True
+            angle: 3.141592653589793 rad
+            id: burnt4
+          decals:
+            32: 10,22
     - type: GridAtmosphere
       version: 2
       data:
@@ -927,7 +950,7 @@ entities:
       pos: 16.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5001.99
+      secondsUntilStateChange: -5197.9146
       state: Opening
   - uid: 474
     components:
@@ -936,7 +959,7 @@ entities:
       pos: 20.5,17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4967.1904
+      secondsUntilStateChange: -5163.1147
       state: Opening
 - proto: CMBarricadeSandbag
   entities:
@@ -2521,15 +2544,6 @@ entities:
     - type: Transform
       pos: 1.5,24.5
       parent: 1
-- proto: DrinkWineBottleFull
-  entities:
-  - uid: 223
-    components:
-    - type: Transform
-      parent: 221
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCBannerCLFWorn
   entities:
   - uid: 390
@@ -2951,6 +2965,13 @@ entities:
       parent: 1
 - proto: RMCDrinkAlcoholPurpleWine
   entities:
+  - uid: 223
+    components:
+    - type: Transform
+      parent: 221
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 224
     components:
     - type: Transform
@@ -3724,6 +3745,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 20.5,25.5
       parent: 1
+  - uid: 677
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,20.5
+      parent: 1
 - proto: RMCLockerSecureSafe
   entities:
   - uid: 221
@@ -3768,6 +3795,28 @@ entities:
     components:
     - type: Transform
       pos: 8.487238,17.447626
+      parent: 1
+- proto: RMCMagazinePistolHandcannon
+  entities:
+  - uid: 680
+    components:
+    - type: Transform
+      pos: 7.5585375,20.508202
+      parent: 1
+  - uid: 681
+    components:
+    - type: Transform
+      pos: 7.6366625,20.508202
+      parent: 1
+  - uid: 682
+    components:
+    - type: Transform
+      pos: 7.7147875,20.508202
+      parent: 1
+  - uid: 683
+    components:
+    - type: Transform
+      pos: 7.3866625,20.555077
       parent: 1
 - proto: RMCMagazineRifleM16
   entities:
@@ -4398,6 +4447,11 @@ entities:
     - type: Transform
       pos: 20.5,14.5
       parent: 1
+  - uid: 678
+    components:
+    - type: Transform
+      pos: 7.5,20.5
+      parent: 1
 - proto: RMCSpawnerRandomPowercell
   entities:
   - uid: 234
@@ -4719,6 +4773,13 @@ entities:
     components:
     - type: Transform
       pos: 8.518488,17.510126
+      parent: 1
+- proto: RMCWeaponPistolHandcannon
+  entities:
+  - uid: 679
+    components:
+    - type: Transform
+      pos: 7.4960375,20.758202
       parent: 1
 - proto: RMCWeaponRifleMAR30
   entities:
