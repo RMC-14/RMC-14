@@ -2029,3 +2029,14 @@
     state: luxi_la_lustriana
   - type: PatronFigurine
     id: 615015b0-91bb-44d1-bc69-9a6bd8d5db18
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArtemisLua
+  name: Artemis Lua figurine
+  description: "Moff loaded. . . Clear for SADAR!!"
+  components:
+  - type: Sprite
+    state: artemis_lua
+  - type: PatronFigurine
+    id: 41e41d1d-4144-46ea-b03d-6a29ddede029
