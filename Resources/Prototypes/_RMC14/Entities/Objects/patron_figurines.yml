@@ -2040,3 +2040,14 @@
     state: artemis_lua
   - type: PatronFigurine
     id: 41e41d1d-4144-46ea-b03d-6a29ddede029
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZoeyMarz
+  name: Zoey Marz figurine
+  description: "Looks like there's a crudely taped label on the figure's leg that says, '#1 Technician'."
+  components:
+  - type: Sprite
+    state: zoey_marz
+  - type: PatronFigurine
+    id: b6f6ada7-cd38-4ba9-b2a2-8e5a5ef44b8f
