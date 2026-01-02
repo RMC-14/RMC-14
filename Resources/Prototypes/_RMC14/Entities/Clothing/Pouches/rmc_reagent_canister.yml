@@ -61,8 +61,8 @@
     storageClosed: closedLayer
     storageOpen: openLayer
   - type: PhysicalComposition
-    materialComposition:
-      CMGlass: 2000 # glass generator if recyclable?
+    materialComposition: # Generates glass if canister is ejected and recycled. Parity behavior btw.
+      CMGlass: 2000 # +0.4 glass sheet -0.25 plastic.
       RMCPlastic: 2000
 
 - type: entity

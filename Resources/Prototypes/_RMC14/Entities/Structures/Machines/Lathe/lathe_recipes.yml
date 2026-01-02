@@ -80,8 +80,8 @@
     CMSteel: 187 # 150
 
 - type: latheRecipe
-  id: CMWelderSmall
-  result: CMWelderSmall
+  id: RMCWelderEmpty
+  result: RMCWelderEmpty
   completetime: 4
   materials:
     CMSteel: 87 # 70
