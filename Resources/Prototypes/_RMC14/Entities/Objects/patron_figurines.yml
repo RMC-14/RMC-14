@@ -1968,7 +1968,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronZaydenSoapKirkson
   name: Zayden 'Soap' Kirkson figurine
-  description: "BATTLE, WE SHALL GIVE THEM WAR!"
+  description: "Zayden 'Soap' Kirkson Collectible Figurine!\n\nFrom brig bound to shelf ready, this unserious MP is finally here! Rumored to have finally conquered his PTSD, Soap arrives with his trademark stare and his infamous habit of devouring soap..? possibly with unlimited resistance!\n\nGet yours today before he eats the rest of the stock!"
   components:
   - type: Sprite
     state: zayden_soap_kirkson
