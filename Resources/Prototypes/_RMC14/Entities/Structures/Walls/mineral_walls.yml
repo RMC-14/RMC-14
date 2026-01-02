@@ -85,6 +85,15 @@
     color: '#1b4506'
 
 - type: entity
+  parent: RMCWallSandstone
+  id: RMCWallUraniumBroken
+  name: broken uranium wall
+  description: A uranium plated wall that's leaking something. Just looking at it makes you dizzy.
+  components:
+  - type: Sprite
+    color: '#660202'
+
+- type: entity
   parent: CMBaseWall
   id: RMCWallGold
   name: gold wall
