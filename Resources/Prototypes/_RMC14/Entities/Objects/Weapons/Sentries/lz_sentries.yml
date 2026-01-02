@@ -138,3 +138,6 @@
     curve: !type:BoolCurve
   - !type:CanFaceCon
     curve: !type:BoolCurve
+  - !type:TargetNotBurrowedCon
+    curve: !type:BoolCurve
+
