@@ -12,6 +12,7 @@ using Content.Shared.Item;
 using Content.Shared.Lock;
 using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -82,6 +83,8 @@ public sealed class RMCStorageSystem : EntitySystem
 
         SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, DestructionEventArgs>(OnContainerEmptyDestroyed);
         SubscribeLocalEvent<RMCContainerEmptyOnDestructionComponent, EntityTerminatingEvent>(OnContainerEmptyDeleted);
+
+        SubscribeLocalEvent<OpenStorageOnGearEquipComponent, StartingGearEquippedEvent>(OnOpenStorageStartingGear);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -537,6 +540,17 @@ public sealed class RMCStorageSystem : EntitySystem
         }
 
         return columns;
+    }
+
+    private void OnOpenStorageStartingGear(Entity<OpenStorageOnGearEquipComponent> ent, ref StartingGearEquippedEvent args)
+    {
+        if (!_storageQuery.TryComp(args.Entity, out var storageComp))
+            return;
+
+        if (!_entityWhitelist.CheckBoth(args.Entity, ent.Comp.Blacklist, ent.Comp.Whitelist))
+            return;
+
+        _storage.OpenStorageUI(args.Entity, ent.Owner, storageComp, doAfter: false);
     }
 
     public override void Update(float frameTime)

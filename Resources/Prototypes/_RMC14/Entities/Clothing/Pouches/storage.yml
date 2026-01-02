@@ -55,6 +55,10 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
@@ -595,7 +599,7 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 #3 slots
-    whitelist: 
+    whitelist:
       components:
       - CassetteTape
 
