@@ -2018,3 +2018,14 @@
     state: lost-in-stars
   - type: PatronFigurine
     id: 5024804a-2912-4f89-b64e-8932488afa50
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMothroach
+  name: Luxi La Lustriana figurine
+  description: "At a glance it catches your eye, a strange looking moth... Looking closer, it seems to not just be a moth... but also some sort of insect... Like a moth... roach...? You think a bit more about it... How could it be a moth... and a roach... At the same time? It seems contradictory...\n\nLooking at it further... it seems to invoke some emotion... Like... you want to give everything you have to the moth... Your eyes can't look away from it... Drawn to it... like a moth to a flame... How ironic..."
+  components:
+  - type: Sprite
+    state: luxi_la_lustriana
+  - type: PatronFigurine
+    id: 615015b0-91bb-44d1-bc69-9a6bd8d5db18
