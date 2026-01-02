@@ -173,8 +173,6 @@
         points: 3
     - name: Utilities
       entries:
-      - id: RMCFulton20
-        points: 5
       - id: CMFireExtinguisherPortable
         points: 3
       - id: RMCMotionDetector
