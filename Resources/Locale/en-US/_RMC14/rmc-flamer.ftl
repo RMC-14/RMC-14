@@ -1,4 +1,5 @@
 ﻿rmc-flamer-tank-not-potent-enough = This chemical is not potent enough to be used in a flamethrower!
+rmc-flamer-tank-not-whitelisted = This chemical can't be used in {THE($tank)}.
 rmc-flamer-ignite-first = You need to ignite the gun with {$key} first!
 rmc-flamer-ignite-first-with = You need to ignite the gun first!
 rmc-flamer-ignite-action-examine = [bold]Press your [color=cyan]unique action[/color] keybind (Spacebar by default) to toggle the pilot light.[/bold]
