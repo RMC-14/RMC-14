@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/items/casings.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cartridge_1"
+    },
+    {
+      "name": "cartridge_2"
+    },
+    {
+      "name": "cartridge_3"
+    },
+    {
+      "name": "cartridge_4"
+    },
+    {
+      "name": "cartridge_5"
+    },
+    {
+      "name": "cartridge_6"
+    },
+    {
+      "name": "cartridge_7"
+    },
+    {
+      "name": "cartridge_8"
+    },
+    {
+      "name": "cartridge_9"
+    },
+    {
+      "name": "cartridge_10"
+    },
+    {
+      "name": "cartridge_11"
+    }
+  ]
+}

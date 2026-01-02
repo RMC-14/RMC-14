@@ -75,6 +75,8 @@
     - 30
     - 40
     - 60
+  - type: RMCSmartFridgeInsertable
+    category: Bottle
 
 - type: entity
   parent: CMBottleEmpty
@@ -172,4 +174,157 @@
     reagents:
       CMInaprovaline: 60
 
+- type: entity
+  parent: CMBottleFilled
+  id: CMBottleTricordrazine
+  name: tricordrazine bottle
+  description: A small bottle. Contains tricordrazine - A weak but catch-all medicine for treating all sorts of damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: CMTricordrazine
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      CMTricordrazine: 60
+
 # TODO RMC14 oxycodone, peridaxon, tramadol
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleAntiZed
+  suffix: DO NOT MAP
+  name: "'Pathogen' cure bottle"
+  description: The bottle has a biohazard symbol on the front, and has a label, designating its use against Agent A0-3959X.91–15, colloquially known as the "Black Goo".
+  components:
+  - type: Sprite
+    layers:
+    - state: bottle-1
+    - state: bottle-1-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+    - state: label-1
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCAntiZed: 60
+
+- type: entity
+  parent: CMBottleFilled
+  id: RMCBottleMindbreaker
+  name: mindbreaker bottle
+  description: A small bottle. Contains mindbreaker toxin - Fucks up anyone who takes it.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 60
+        reagents:
+        - ReagentId: RMCMindbreakerToxin
+          Quantity: 60
+  - type: CMRefillableSolution
+    reagents:
+      RMCMindbreakerToxin: 60
+
+# larger bottles
+
+- type: entity
+  parent: CMBottleEmpty
+  id: RMCLargeBottleEmpty
+  name: A large bottle.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+  - type: SolutionTransfer
+    transferAmount: 140
+    maxTransferAmount: 140
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+    - 40
+    - 60
+    - 70
+    - 140
+
+- type: entity
+  parent: RMCLargeBottleEmpty
+  id: RMCLargeBottleFilled
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Bottle
+  - type: CMRefillableSolution
+    solution: drink
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleDexalinPlus
+  name: large dexalin plus bottle
+  description: A large bottle. Contains dexalin plus - used to instantly treat oxygen deprivation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 140
+  - type: CMRefillableSolution
+    reagents:
+      CMDexalinPlus: 140
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleMeralyneBicaridine
+  name: large meralyne-bicaridine bottle
+  description: A large bottle. Contains a mix of meralyne and bicaridine - used to treat brute damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 70
+        - ReagentId: CMBicaridine
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMMeralyne: 70
+      CMBicaridine: 70
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleKelotaneDermaline
+  name: large kelotane-dermaline bottle
+  description: A large bottle. Contains a mix of kelotane and dermaline - used to treat burned areas.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 70
+        - ReagentId: CMDermaline
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMKelotane: 70
+      CMDermaline: 70

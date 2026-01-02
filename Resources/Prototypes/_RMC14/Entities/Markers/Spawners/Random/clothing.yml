@@ -1,0 +1,67 @@
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerRandomClothingBase
+  name: gun spawner
+  description: spawns a random clothing item
+  suffix: Base
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_goggles
+
+# Goggles
+- type: entity
+  parent: RMCSpawnerRandomClothingBase
+  id: RMCSpawnerRandomGoggles
+  name: goggles loot spawner
+  description: This is a random set of goggles, for survivors.
+  suffix: Guaranteed
+  components:
+  - type: RandomSpawner
+    offset: 0
+    chance: 1.0
+    prototypes:
+    - RMCWeldingGogglesSuperior
+    - RMCGlassesJensen
+    #- TODO RMC14 refurbished meson scanner
+    #- TODO RMC14 RMCGlassesReagentHUDGlasses
+    #- TODO RMC14 SensorMate HUD
+    - RMCGlassesHUDSecurity
+
+- type: entity
+  parent: RMCSpawnerRandomGoggles
+  id: RMCSpawnerRandomGogglesLowChance
+  suffix: Low Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_goggles_20
+  - type: RandomSpawner
+    chance: 0.2
+
+- type: entity
+  parent: RMCSpawnerRandomGoggles
+  id: RMCSpawnerRandomGogglesMidChance
+  suffix: Mid Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_goggles_50
+  - type: RandomSpawner
+    chance: 0.5
+
+- type: entity
+  parent: RMCSpawnerRandomGoggles
+  id: RMCSpawnerRandomGogglesHighChance
+  suffix: High Chance
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: loot_goggles_80
+  - type: RandomSpawner
+    chance: 0.8

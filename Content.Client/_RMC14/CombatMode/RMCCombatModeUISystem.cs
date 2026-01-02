@@ -31,18 +31,20 @@ public sealed class RMCCombatModeUISystem : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
-        if (_ui.CurrentlyHovered is IViewportControl &&
-            _crosshairsEnabled &&
+        if (_ui.CurrentlyHovered is not IViewportControl)
+            return;
+
+        if (_crosshairsEnabled &&
             _combatMode.IsInCombatMode() &&
             _hands.GetActiveHandEntity() is { } held &&
             _rmcCombatMode.GetCrosshair(held) != null)
         {
             _crosshairCursor ??= _clyde.CreateCursor(new Image<Rgba32>(1, 1), Vector2i.One);
-            _clyde.SetCursor(_crosshairCursor);
+            _ui.CurrentlyHovered.CustomCursorShape = _crosshairCursor;
         }
         else
         {
-            _clyde.SetCursor(null);
+            _ui.CurrentlyHovered.CustomCursorShape = null;
         }
     }
 }

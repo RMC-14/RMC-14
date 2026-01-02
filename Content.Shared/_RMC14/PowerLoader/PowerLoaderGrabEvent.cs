@@ -4,7 +4,7 @@
 public record struct PowerLoaderGrabEvent(
     EntityUid PowerLoader,
     EntityUid Target,
-    List<EntityUid> Buckled,
-    EntityUid ToGrab,
+    HashSet<EntityUid> Buckled,
+    EntityUid? ToGrab = null,
     bool Handled = false
 );

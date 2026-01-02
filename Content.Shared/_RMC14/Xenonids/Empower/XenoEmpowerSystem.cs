@@ -1,8 +1,9 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Aura;
-using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Shields;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -17,7 +18,6 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -39,12 +39,13 @@ public sealed class XenoEmpowerSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedAuraSystem _aura = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCPullingSystem _rmcPulling = default!;
     [Dependency] private readonly DamageableSystem _damagable = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly HashSet<Entity<MobStateComponent>> _mobs = new();
     public override void Initialize()
@@ -84,7 +85,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
         if (!xeno.Comp.ActivatedOnce)
         {
-            _actions.SetUseDelay(args.Action, TimeSpan.Zero);
+            _actions.SetUseDelay(args.Action.AsNullable(), TimeSpan.Zero);
             if (!_plasma.TryRemovePlasmaPopup(xeno.Owner, xeno.Comp.Cost))
                 return;
 
@@ -95,11 +96,11 @@ public sealed class XenoEmpowerSystem : EntitySystem
             xeno.Comp.TimeoutAt = _timing.CurTime + xeno.Comp.TimeoutDuration;
             xeno.Comp.FirstActivationAt = _timing.CurTime;
 
-            foreach (var (actionId, action) in _actions.GetActions(xeno))
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoEmpowerActionEvent>(xeno))
             {
-                if (action.BaseEvent is XenoEmpowerActionEvent)
-                    _actions.SetToggled(actionId, true);
+                _actions.SetToggled(action.AsNullable(), true);
             }
+
             _popup.PopupPredicted(Loc.GetString("rmc-xeno-empower-start-self"), Loc.GetString("rmc-xeno-empower-start-others", ("user", xeno)),
                 xeno, xeno, PopupType.MediumCaution);
         }
@@ -107,16 +108,14 @@ public sealed class XenoEmpowerSystem : EntitySystem
             FullEmpower(xeno);
     }
 
-
     private void FullEmpower(Entity<XenoEmpowerComponent> xeno)
     {
         if (_net.IsClient)
             return;
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoEmpowerActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoEmpowerActionEvent)
-                _actions.SetToggled(actionId, false);
+            _actions.SetToggled(action.AsNullable(), false);
         }
 
         SpawnAttachedTo(xeno.Comp.EmpowerEffect, xeno.Owner.ToCoordinates());
@@ -138,7 +137,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
             hits++;
 
-            if (ent.Owner.ToCoordinates().GetTileRef(EntityManager) is { } tile)
+            if (_turf.GetTileRef(ent.Owner.ToCoordinates()) is { } tile)
                 SpawnAtPosition(xeno.Comp.TargetEffect, _turf.GetTileCenter(tile));
 
             if (hits >= xeno.Comp.MaxTargets)
@@ -204,11 +203,7 @@ public sealed class XenoEmpowerSystem : EntitySystem
         _stun.TryParalyze(args.Hit, xeno.Comp.StunDuration, true);
 
         var origin = _transform.GetMapCoordinates(xeno);
-        var target = _transform.GetMapCoordinates(args.Hit);
-        var diff = target.Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.FlingDistance;
-
-        _throwing.TryThrow(args.Hit, diff, 10);
+        _sizeStun.KnockBack(args.Hit, origin, xeno.Comp.FlingDistance, xeno.Comp.FlingDistance, 10, true);
     }
 
     public override void Update(float frameTime)
@@ -259,15 +254,13 @@ public sealed class XenoEmpowerSystem : EntitySystem
 
     private void DoCooldown(Entity<XenoEmpowerComponent> xeno)
     {
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoEmpowerActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoEmpowerActionEvent)
-            {
-                _actions.SetToggled(actionId, false);
-                var cooldownTime = xeno.Comp.CooldownDuration - (_timing.CurTime - xeno.Comp.FirstActivationAt);
-                _actions.SetUseDelay(actionId, cooldownTime);
-                _actions.SetCooldown(actionId, cooldownTime);
-            }
+            var actionEnt = action.AsNullable();
+            _actions.SetToggled(actionEnt, false);
+            var cooldownTime = xeno.Comp.CooldownDuration - (_timing.CurTime - xeno.Comp.FirstActivationAt);
+            _actions.SetUseDelay(actionEnt, cooldownTime);
+            _actions.SetCooldown(actionEnt, cooldownTime);
         }
     }
 }

@@ -83,7 +83,7 @@ public sealed class VanguardShieldSystem : EntitySystem
             if (vanguardShield.LastRecharge <= vanguardShield.LastTimeHit && vanguardShield.LastTimeHit + vanguardShield.RechargeTime <= time)
                 RegenShield(uid);
 
-            if (!vanguardShield.WasHit || vanguardShield.NextDecay > time)
+            if (!shield.Active || !vanguardShield.WasHit || vanguardShield.NextDecay > time)
                 continue;
 
             vanguardShield.NextDecay = time + vanguardShield.DecayEvery;

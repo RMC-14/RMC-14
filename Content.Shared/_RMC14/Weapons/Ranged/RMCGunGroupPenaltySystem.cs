@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Hands;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -8,6 +9,7 @@ namespace Content.Shared._RMC14.Weapons.Ranged;
 public sealed class RMCGunGroupPenaltySystem : EntitySystem
 {
     [Dependency] private readonly SharedGunSystem _gun = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly CMGunSystem _rmcGun = default!;
 
     private EntityQuery<GunGroupPenaltyComponent> _gunGroupPenalty;
@@ -39,11 +41,10 @@ public sealed class RMCGunGroupPenaltySystem : EntitySystem
         if (!_rmcGun.TryGetGunUser(ent, out var user))
             return;
 
-        foreach (var hand in user.Comp.Hands)
+        foreach (var held in _hands.EnumerateHeld((user, user)))
         {
-            if (hand.Value.HeldEntity is not { } held ||
-                held == ent.Owner ||
-                !_gunGroupPenalty.HasComp(hand.Value.HeldEntity))
+            if (held == ent.Owner ||
+                !_gunGroupPenalty.HasComp(held))
             {
                 continue;
             }
@@ -62,11 +63,10 @@ public sealed class RMCGunGroupPenaltySystem : EntitySystem
             return;
 
         var other = false;
-        foreach (var hand in user.Comp.Hands)
+        foreach (var held in _hands.EnumerateHeld((user, user)))
         {
-            if (hand.Value.HeldEntity is { } held &&
-                held != ent.Owner &&
-                _gunGroupPenalty.HasComp(hand.Value.HeldEntity))
+            if (held != ent.Owner &&
+                _gunGroupPenalty.HasComp(held))
             {
                 other = true;
                 break;
@@ -92,13 +92,10 @@ public sealed class RMCGunGroupPenaltySystem : EntitySystem
         if (!_rmcGun.TryGetGunUser(gun, out var user))
             return;
 
-        foreach (var hand in user.Comp.Hands)
+        foreach (var held in _hands.EnumerateHeld((user, user)))
         {
-            if (hand.Value.HeldEntity is { } held &&
-                held != gun.Owner)
-            {
+            if (held != gun.Owner)
                 _gun.RefreshModifiers(held);
-            }
         }
     }
 }

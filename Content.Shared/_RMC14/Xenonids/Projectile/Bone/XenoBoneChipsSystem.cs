@@ -17,12 +17,12 @@ public sealed class XenoBoneChipsSystem : EntitySystem
 
     private void OnXenoBoneSpursAction(Entity<XenoBoneChipsComponent> xeno, ref XenoBoneChipsActionEvent args)
     {
-        if (args.Handled || args.Coords == null)
+        if (args.Handled)
             return;
 
         args.Handled = _xenoProjectile.TryShoot(
             xeno,
-            args.Coords.Value,
+            args.Target,
             FixedPoint2.Zero,
             xeno.Comp.ProjectileId,
             null,

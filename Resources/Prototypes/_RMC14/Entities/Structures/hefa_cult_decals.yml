@@ -1,0 +1,110 @@
+- type: entity
+  id: RMCHefaDecalBase
+  name: strange paint marks
+  description: You think you can make out the iconography of a HEFA grenade.
+  abstract: true
+  suffix: Floor
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: False
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/hefa_decals.rsi
+    drawdepth: FloorTiles
+    noRot: false
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecalWallBase
+  abstract: true
+  suffix: Wall
+  components:
+  - type: Sprite
+    drawdepth: WallTops
+
+# Floor
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecal1
+  components:
+  - type: Sprite
+    state: 1
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecal2
+  components:
+  - type: Sprite
+    state: 2
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecal3
+  components:
+  - type: Sprite
+    state: 3
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecal4
+  components:
+  - type: Sprite
+    state: 4
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecalBee
+  components:
+  - type: Sprite
+    state: bee
+
+- type: entity
+  parent: RMCHefaDecalBase
+  id: RMCHefaDecalSigil
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hefa_decals_96.rsi
+    state: summon_circle_alt
+
+# Wall
+
+- type: entity
+  parent: RMCHefaDecalWallBase
+  id: RMCHefaDecalWall1
+  components:
+  - type: Sprite
+    state: 1
+
+- type: entity
+  parent: RMCHefaDecalWallBase
+  id: RMCHefaDecalWall2
+  components:
+  - type: Sprite
+    state: 2
+
+- type: entity
+  parent: RMCHefaDecalWallBase
+  id: RMCHefaDecalWall3
+  components:
+  - type: Sprite
+    state: 3
+
+- type: entity
+  parent: RMCHefaDecalWallBase
+  id: RMCHefaDecalWall4
+  components:
+  - type: Sprite
+    state: 4
+
+- type: entity
+  parent: RMCHefaDecalWallBase
+  id: RMCHefaDecalWallBee
+  components:
+  - type: Sprite
+    state: bee

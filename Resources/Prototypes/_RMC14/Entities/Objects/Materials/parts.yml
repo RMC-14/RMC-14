@@ -35,7 +35,14 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 50
-    #RMC TODO: Lattice
+  - type: RMCConstructionItem
+    buildable:
+    - RMCGrilleBuild
+    - RMCFenceBuild
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMRodMetal

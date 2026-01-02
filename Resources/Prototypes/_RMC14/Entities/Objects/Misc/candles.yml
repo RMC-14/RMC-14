@@ -1,0 +1,95 @@
+- type: entity
+  parent: BaseItem
+  id: RMCCandle
+  name: red candle
+  description: a candle.
+  components:
+    - type: Tag
+      tags:
+      - Candle
+    - type: Sprite
+      noRot: true
+      sprite: _RMC14/Objects/Misc/candles.rsi
+      state: candle1
+    - type: Item
+      size: Small
+    - type: Appearance
+    - type: Reactive
+      groups:
+        Flammable: [ Touch ]
+        Extinguish: [ Touch ]
+    - type: ExtinguishOnInteract
+      extinguishAttemptSound:
+        path: /Audio/Items/candle_blowing.ogg
+        params:
+          variation: 0.05
+          volume: 10
+    - type: UseDelay
+    - type: Flammable
+      fireSpread: false
+      canResistFire: false
+      alwaysCombustible: true
+      canExtinguish: true
+      firestacksOnIgnite: 3.0
+      firestackFade: -0.01
+      damage:
+        types:
+          Heat: 0.1
+    - type: FireVisuals
+      sprite: _RMC14/Objects/Misc/candles.rsi
+      normalState: candle1_lit
+    - type: ItemTogglePointLight
+    - type: ToggleableVisuals
+      spriteLayer: null
+      inhandVisuals:
+        left:
+        - state: inhand-left-flame
+          shader: unshaded
+        right:
+        - state: inhand-right-flame
+          shader: unshaded
+    - type: Damageable
+      damageModifierSet: Wood
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCCandle
+  id: RMCCandle2
+  components:
+    - type: Sprite
+      state: candle2
+    - type: FireVisuals
+      normalState: candle2_lit
+
+- type: entity
+  parent: RMCCandle
+  id: RMCCandle3
+  components:
+    - type: Sprite
+      state: candle3
+    - type: FireVisuals
+      normalState: candle3_lit
+
+- type: entity
+  parent: BaseItem
+  id: RMCCandle4
+  name: red candle
+  description: a candle.
+  components:
+    - type: Tag
+      tags:
+      - Candle
+    - type: Sprite
+      noRot: true
+      sprite: _RMC14/Objects/Misc/candles.rsi
+      state: candle4
+    - type: Item
+      size: Small
+    - type: Appearance

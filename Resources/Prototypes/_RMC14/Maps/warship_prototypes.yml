@@ -16,3 +16,14 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform
+
+- type: entity
+  id: UNMCHighCommand
+  parent:
+  - BaseStation
+  - BaseStationCentcomm
+  - BaseStationAlertLevels
+  - BaseStationNanotrasen
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform

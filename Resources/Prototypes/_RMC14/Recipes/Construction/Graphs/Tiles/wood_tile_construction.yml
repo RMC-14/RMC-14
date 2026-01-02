@@ -7,7 +7,6 @@
   startNode: start
   targetNode: RMCTileWood
   category: construction-category-cm-materials
-  icon: { sprite: _RMC14/Objects/Tiles/tiles.rsi, state: wood }
   objectType: Item
 
 - type: constructionGraph

@@ -13,7 +13,7 @@
     key: enum.MarineCommunicationsComputerUI.Key
   - type: ActivatableUIRequiresAccess
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessSeniorCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
@@ -25,6 +25,7 @@
   - type: MarineCommunicationsComputer
     canCreateEcho: false
     canGiveMedals: true
+    canInitiateEvac: true
   - type: TacticalMapComputer
   - type: MarineControlComputer
   - type: Tag

@@ -1,0 +1,248 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/32cb5892413243cc74bb2d11df8e3085f8ef1164/icons/obj/items/marine-items.dmi, https://github.com/cmss13-devs/cmss13/blob/a50253802b9d56391f7b857684e345119a207f43/icons/mob/humans/onmob/items_lefthand_0.dmi. https://github.com/cmss13-devs/cmss13/blob/a50253802b9d56391f7b857684e345119a207f43/icons/mob/humans/onmob/items_righthand_0.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "detector"
+    },
+    {
+      "name": "detector_long_switch"
+    },
+    {
+      "name": "detector_short_switch"
+    },
+    {
+      "name": "detector_on_0",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_1",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_2",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_3",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_4",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_5",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_6",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_7",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_8",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_on_9",
+      "delays": [
+        [
+          1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "detector_blip",
+      "delays": [
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "detector_blip_dir",
+      "directions": 8,
+      "delays": [
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "queen_eye_blip",
+      "delays": [
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ]
+      ]
+    },
+    {
+      "name": "queen_eye_blip_dir",
+      "directions": 8,
+      "delays": [
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ],
+        [
+          0.1,
+          0.15,
+          0.2,
+          0.25
+        ]
+      ]
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 rmc-announcement-author = Command
+rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = UNMC High Command
 rmc-announcement-message = [font size=16][bold][color=#CECECE]{$author} Announcement[/color][/bold][/font][font size=16][color=red]
 
@@ -57,3 +58,5 @@ rmc-announcement-ares-command = [color=#CECECE][font size=16][bold]ARES v3.2[/bo
 rmc-announcement-unidentified-lifesigns = [color=#CECECE][font size=16][bold]Unidentifled lifesigns[/bold][/font][/color][color=red][font size=16][bold]
 
     Unidentified lifesigns ({$count}) detected onboard the dropship {$name}. Recommendation: lockdown of exterior access ports, including ducting and ventilation.[/bold][/font][/color]
+
+rmc-announcement-shipside-header = Please write a message to announce to the crew

@@ -1,0 +1,80 @@
+- type: job
+  parent: CMJobBase
+  id: CMPMCForceLeadPVE
+  name: rmc-job-name-pmc-pve-force-leader
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: CMJobPMCForceLeadPVE
+  ranks:
+    RMCRankWeYaForceLeader: []
+  startingGear: RMCJobPMCForceLeadPVE
+  icon: RMCJobIconPMCLeader
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  - SquadLeader
+  spawnMenuRoleName: WEYA PMC Force Lead (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-pve-force-leader
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: pmc_ld
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_ld
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCForceLeadPVE
+  name: weya pmc force lead spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: CMPMCForceLeadPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobPMCForceLeadPVE
+  equipment:
+    id: RMCIDCardPMC
+
+- type: playTimeTracker
+  id: CMJobPMCForceLeadPVE

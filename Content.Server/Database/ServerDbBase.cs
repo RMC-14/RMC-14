@@ -6,10 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
+using Content.Server.IP;
 using Content.Shared._RMC14.NamedItems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -68,7 +71,11 @@ namespace Content.Server.Database
                 profiles[profile.Slot] = ConvertProfiles(profile);
             }
 
-            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor));
+            var constructionFavorites = new List<ProtoId<ConstructionPrototype>>(prefs.ConstructionFavorites.Count);
+            foreach (var favorite in prefs.ConstructionFavorites)
+                constructionFavorites.Add(new ProtoId<ConstructionPrototype>(favorite));
+
+            return new PlayerPreferences(profiles, prefs.SelectedCharacterSlot, Color.FromHex(prefs.AdminOOCColor), constructionFavorites);
         }
 
         public async Task SaveSelectedCharacterIndexAsync(NetUserId userId, int index)
@@ -151,7 +158,8 @@ namespace Content.Server.Database
             {
                 UserId = userId.UserId,
                 SelectedCharacterSlot = 0,
-                AdminOOCColor = Color.Red.ToHex()
+                AdminOOCColor = Color.Red.ToHex(),
+                ConstructionFavorites = [],
             };
 
             prefs.Profiles.Add(profile);
@@ -160,7 +168,7 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
-            return new PlayerPreferences(new[] {new KeyValuePair<int, ICharacterProfile>(0, defaultProfile)}, 0, Color.FromHex(prefs.AdminOOCColor));
+            return new PlayerPreferences(new[] { new KeyValuePair<int, ICharacterProfile>(0, defaultProfile) }, 0, Color.FromHex(prefs.AdminOOCColor), []);
         }
 
         public async Task DeleteSlotAndSetSelectedIndex(NetUserId userId, int deleteSlot, int newSlot)
@@ -184,6 +192,19 @@ namespace Content.Server.Database
 
             await db.DbContext.SaveChangesAsync();
 
+        }
+
+        public async Task SaveConstructionFavoritesAsync(NetUserId userId, List<ProtoId<ConstructionPrototype>> constructionFavorites)
+        {
+            await using var db = await GetDb();
+            var prefs = await db.DbContext.Preference.SingleAsync(p => p.UserId == userId.UserId);
+
+            var favorites = new List<string>(constructionFavorites.Count);
+            foreach (var favorite in constructionFavorites)
+                favorites.Add(favorite.Id);
+            prefs.ConstructionFavorites = favorites;
+
+            await db.DbContext.SaveChangesAsync();
         }
 
         private static async Task SetSelectedCharacterSlotAsync(NetUserId userId, int newSlot, ServerDbContext db)
@@ -1980,27 +2001,35 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             return (random.Message, random.LastSeenUserName);
         }
 
-        public async Task<(string? Marine, string? Xeno)> GetRandomShoutout()
+        public async Task<(RoundEndShoutout? Marine, RoundEndShoutout? Xeno)> GetRandomShoutout()
         {
             // TODO RMC14 the random row is evaluated outside the DB, if we have that many patrons I guess we have better problems!
             await using var db = await GetDb();
-            var marineNames = await db.DbContext.RMCPatronRoundEndMarineShoutouts
+            var marines = await db.DbContext.RMCPatronRoundEndMarineShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var xenoNames = await db.DbContext.RMCPatronRoundEndXenoShoutouts
+            var xenos = await db.DbContext.RMCPatronRoundEndXenoShoutouts
                 .Include(p => p.Patron)
+                .ThenInclude(p => p.Player)
                 .Where(p => p.Patron.Tier.RoundEndShoutout)
                 .Where(p => !string.IsNullOrWhiteSpace(p.Name))
-                .Select(p => p.Name)
                 .ToListAsync();
 
-            var marineName = marineNames.Count == 0 ? null : marineNames[Random.Shared.Next(marineNames.Count)];
-            var xenoName = xenoNames.Count == 0 ? null : xenoNames[Random.Shared.Next(xenoNames.Count)];
-            return (marineName, xenoName);
+            var marine = marines.Count == 0 ? null : marines[Random.Shared.Next(marines.Count)];
+            RoundEndShoutout? marineShoutout = marine == null
+                ? null
+                : new RoundEndShoutout(marine.Patron.Player.LastSeenUserName, marine.Name);
+
+            var xeno = xenos.Count == 0 ? null : xenos[Random.Shared.Next(xenos.Count)];
+            RoundEndShoutout? xenoShoutout = xeno == null
+                ? null
+                : new RoundEndShoutout(xeno.Patron.Player.LastSeenUserName, xeno.Name);
+
+            return (marineShoutout, xenoShoutout);
         }
 
         public async Task<List<string>> GetExcludedRoleTimers(Guid player, CancellationToken cancel)
@@ -2067,12 +2096,115 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendations(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
         {
             await using var db = await GetDb();
-            return  await db.DbContext.RMCCommendations
+            return await db.DbContext.RMCCommendations
                 .Where(c => c.ReceiverId == player)
                 .ToListAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCCommendations
+                .Where(c => c.GiverId == player)
+                .ToListAsync();
+        }
+
+        public async Task IncreaseInfects(Guid player)
+        {
+            await using var db = await GetDb();
+            var stats = await db.DbContext.RMCPlayerStats
+                .FirstOrDefaultAsync(s => s.PlayerId == player);
+
+            stats ??= db.DbContext.RMCPlayerStats
+                .Add(new RMCPlayerStats { PlayerId = player })
+                .Entity;
+
+            stats.ParasiteInfects++;
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<Dictionary<string, List<string>>?> GetActionOrder(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerActionOrder
+                .Where(a => a.PlayerId == player)
+                .ToDictionaryAsync(a => a.Id, a => a.Actions);
+        }
+
+        public async Task SetActionOrder(Guid player, string id, List<string> actions)
+        {
+            await using var db = await GetDb();
+            var order = await db.DbContext.RMCPlayerActionOrder
+                .FirstOrDefaultAsync(a => a.PlayerId == player && a.Id == id);
+
+            order ??= db.DbContext.RMCPlayerActionOrder
+                .Add(new RMCPlayerActionOrder
+                {
+                    PlayerId = player,
+                    Id = id,
+                })
+                .Entity;
+
+            order.Actions = new List<string>(actions);
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task AddChatBan(int? round, NetUserId target, (IPAddress, int)? addressRange, ImmutableTypedHwid? hwid, TimeSpan? duration, ChatType type, NetUserId admin, string reason)
+        {
+            await using var db = await GetDb();
+
+            var time = DateTimeOffset.UtcNow.UtcDateTime;
+            db.DbContext.RMCPlayerChatBans.Add(new RMCChatBans
+            {
+                RoundId = round,
+                PlayerId = target,
+                Address = addressRange.ToNpgsqlInet(),
+                HWId = hwid,
+                Type = type,
+                BanningAdminId = admin,
+                Reason = reason,
+                BannedAt = time,
+                ExpiresAt = duration == null ? null : time.Add(duration.Value),
+            });
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<RMCChatBans>> GetAllChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
+                .Where(c => c.PlayerId == player)
+                .ToListAsync();
+        }
+
+        public async Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCPlayerChatBans
+                .Include(b => b.UnbanningAdmin)
+                .Where(c => c.PlayerId == player)
+                .Where(c => c.UnbannedAt == null && (c.ExpiresAt == null || c.ExpiresAt.Value > DateTime.UtcNow))
+                .ToListAsync();
+        }
+
+        public async Task<Guid?> TryPardonChatBan(int id, Guid? admin)
+        {
+            await using var db = await GetDb();
+            var ban = await db.DbContext.RMCPlayerChatBans.FirstOrDefaultAsync(c => c.Id == id);
+            if (ban == null || ban.UnbanningAdminId != null)
+                return null;
+
+            ban.UnbanningAdminId = admin;
+            ban.UnbannedAt = DateTimeOffset.UtcNow.UtcDateTime;
+            await db.DbContext.SaveChangesAsync();
+            return ban.PlayerId;
         }
 
         #endregion

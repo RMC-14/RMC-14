@@ -376,3 +376,97 @@
   icon: { sprite: "/Textures/_RMC14/Objects/Medical/medical.rsi", state: traumakit }
   spawn: CMTraumaKit1
   maxCount: 10
+
+- type: entity
+  parent: CMBurnKit
+  abstract: true
+  id: CMUpgradedBurnKit
+  name: upgraded burn kit
+  description: An upgraded burn treatment kit. Three times as effective as standard-issue, and non-replenishable. Use sparingly on only the most critical burns.
+  components:
+  - type: Sprite
+    state: burnkit_upgraded
+  - type: WoundTreater
+    wound: Burn
+    treats: true
+    group: Burn
+    consumable: true
+    damage: -36
+    unskilledDamage: -9
+    canUseUnskilled: true
+    skills:
+      RMCSkillMedical: 2
+    treatBeginSound:
+      path: "/Audio/_RMC14/Medical/bandage.ogg"
+    treatEndSound:
+      path: "/Audio/Items/Medical/brutepack_end.ogg"
+    userPopup: cm-burn-kit-user-popup
+    targetPopup: cm-burn-kit-target-popup
+    othersPopup: cm-burn-kit-others-popup
+    noneSelfPopup: cm-burn-kit-none-self-popup
+    noneOtherPopup: cm-burn-kit-none-other-popup
+    noWoundsOnUserPopup: cm-burns-already-treated-self-popup
+    noWoundsOnTargetPopup: cm-burns-already-treated-target-popup
+
+- type: entity
+  id: CMUpgradedBurnKit1
+  parent: CMUpgradedBurnKit
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: CMUpgradedBurnKit10
+  parent: CMUpgradedBurnKit
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
+- type: stack
+  id: CMUpgradedBurnKit
+  name: upgraded burn kit
+  icon: { sprite: "/Textures/_RMC14/Objects/Medical/medical.rsi", state: burnkit_upgraded }
+  spawn: CMUpgradedBurnKit1
+  maxCount: 10
+
+- type: entity
+  parent: CMTraumaKit
+  id: CMUpgradedTraumaKit
+  name: upgraded trauma kit
+  description: An upgraded trauma treatment kit. Three times as effective as standard-issue, and non-replenishable. Use sparingly on only the most critical wounds.
+  components:
+  - type: Sprite
+    state: traumakit_upgraded
+  - type: WoundTreater
+    wound: Brute
+    treats: true
+    group: Brute
+    consumable: true
+    damage: -36
+    unskilledDamage: -9
+    canUseUnskilled: true
+
+- type: entity
+  id: CMUpgradedTraumaKit1
+  parent: CMUpgradedTraumaKit
+  suffix: One
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  id: CMUpgradedTraumaKit10
+  parent: CMUpgradedTraumaKit
+  suffix: Ten
+  components:
+  - type: Stack
+    count: 10
+
+- type: stack
+  id: CMUpgradedTraumaKit
+  name: upgraded trauma kit
+  icon: { sprite: "/Textures/_RMC14/Objects/Medical/medical.rsi", state: traumakit_upgraded }
+  spawn: CMUpgradedTraumaKit1
+  maxCount: 10

@@ -6,7 +6,7 @@ using Content.Shared._RMC14.Xenonids.Leap;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Ghost;
@@ -251,10 +251,11 @@ public abstract partial class SharedXenoParasiteSystem
         if (!actions.TryGetValue(para.Comp.RestAction, out var action))
             return;
 
-        if (!TryComp<InstantActionComponent>(action, out var instant))
+        if (!TryComp<ActionComponent>(action, out var actionComp))
             return;
 
-        _action.PerformAction(para, null, xeno.Actions[para.Comp.RestAction], instant, instant.Event, _timing.CurTime);
+        var actionEvent = _action.GetEvent(action);
+        _action.PerformAction(para.Owner, (action, actionComp), actionEvent);
     }
 
     protected virtual void ChangeHTN(EntityUid parasite, ParasiteMode mode)

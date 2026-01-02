@@ -16,7 +16,7 @@
   - type: Appearance
   - type: KeycardDevice
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
   - type: UserInterface
     interfaces:
       enum.DialogUiKey.Key:

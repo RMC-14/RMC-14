@@ -21,6 +21,6 @@
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoDislocate"/>
   - [bold]Tail Lash[/bold]: Knock hosts back in a 2x3 area in front of you and slow them. Take note that this ability has a wind up.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailLash"/>
-  - [bold]Tail Seize[/bold]: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - however, it deals no damage, instead pulling the target in towards you and slowing them upon their arrival.
+  - [bold]Tail Seize[/bold]: The Oppressor has a unique tail stab, instead called Tail Seize. It has a range of 3 tiles - dealing 40 damage, pulling the target in towards you and slowing them upon their arrival.
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailSeize"/>
 </Document>

@@ -32,14 +32,22 @@ public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayS
     {
         var widget = UI;
         if (widget != null)
+        {
             widget.AlertPressed -= OnAlertPressed;
+            widget.AlertAltPressed += OnAlertAltPressed;
+        }
+
     }
 
     private void OnScreenLoad()
     {
         var widget = UI;
         if (widget != null)
+        {
             widget.AlertPressed += OnAlertPressed;
+            widget.AlertAltPressed += OnAlertAltPressed;
+        }
+
 
         SyncAlerts();
     }
@@ -47,6 +55,11 @@ public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayS
     private void OnAlertPressed(object? sender, ProtoId<AlertPrototype> e)
     {
         _alertsSystem?.AlertClicked(e);
+    }
+
+    private void OnAlertAltPressed(object? sender, ProtoId<AlertPrototype> e)
+    {
+        _alertsSystem?.AlertClickedAlt(e);
     }
 
     private void SystemOnClearAlerts(object? sender, EventArgs e)
@@ -98,7 +111,8 @@ public sealed class AlertsUIController : UIController, IOnStateEntered<GameplayS
         if (!EntityManager.TryGetComponent<SpriteComponent>(spriteViewEnt, out var sprite))
             return;
 
-        var ev = new UpdateAlertSpriteEvent((spriteViewEnt, sprite), alert);
+        var ev = new UpdateAlertSpriteEvent((spriteViewEnt, sprite), player, alert);
         EntityManager.EventBus.RaiseLocalEvent(player, ref ev);
+        EntityManager.EventBus.RaiseLocalEvent(spriteViewEnt, ref ev);
     }
 }

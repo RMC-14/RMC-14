@@ -20,7 +20,6 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
     {
         if (!TryGetEntity(ev.Effect, out var eff) ||
         !TryGetEntity(ev.Xeno, out var entity) ||
-        !TryComp(entity, out XenoConstructionComponent? comp) ||
         !TryComp(eff, out XenoConstructionAnimationComponent? timing))
         {
             return;
@@ -32,11 +31,12 @@ public sealed class XenoConstructionAnimationVisualizerSystem : EntitySystem
         sprite.LayerMapTryGet(XenoConstructionVisualLayers.Animation, out var layer);
         var state = sprite.LayerGetState(layer);
 
-        timing.AnimationTime = comp.BuildDelay;
-        timing.AnimationTimeFinished = _timing.CurTime + comp.BuildDelay;
+        timing.AnimationTime = ev.BuildTime;
+        timing.AnimationTimeFinished = _timing.CurTime + ev.BuildTime;
         if(sprite.TryGetLayer(layer, out var aLayer) && aLayer.ActualState != null)
             timing.TotalFrames = aLayer.ActualState.DelayCount;
     }
+
     private void Animate(SpriteComponent sprite, object layerKey, int frame)
     {
         if (!sprite.LayerExists(layerKey) ||

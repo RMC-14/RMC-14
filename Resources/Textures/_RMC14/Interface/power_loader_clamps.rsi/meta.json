@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/891d428e7604b5af1d02e266298260318e779f9d/icons/obj/vehicles/powerloader_clamp.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/891d428e7604b5af1d02e266298260318e779f9d/icons/obj/vehicles/powerloader_clamp.dmi, ob_warhead_aegis by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -48,6 +48,12 @@
     },
     {
       "name": "ob_warhead_right"
+    },
+    {
+      "name": "ob_warhead_aegis"
+    },
+    {
+      "name": "ob_warhead_aegis_right"
     },
     {
       "name": "vehicle_module"

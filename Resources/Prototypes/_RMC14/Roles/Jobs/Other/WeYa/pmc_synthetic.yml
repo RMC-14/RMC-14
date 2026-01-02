@@ -1,0 +1,77 @@
+- type: job
+  parent: CMJobBase
+  id: RMCPMCSynthetic
+  name: rmc-job-name-pmc-synth
+  description: rmc-job-description-pmc-synth
+  playTimeTracker: RMCJobPMCSynthetic
+  ranks:
+    RMCRankWeYaPMCSynthetic: [ ]
+  startingGear: RMCGearPMCSynthetic
+  icon: "RMCJobIconPMCSynthetic"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Synthetic
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        # RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 4
+        RMCSkillSurgery: 3
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 5
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 3
+        RMCSkillIntel: 2
+        RMCSkillDomestics: 2
+        RMCSkillNavigations: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-synth
+    - type: RMCTrackable
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+  hidden: true
+
+- type: startingGear
+  id: RMCGearPMCSynthetic
+  equipment:
+    head: ArmorHelmetPMCOfficer # Why the shit is the PMC beret a HELMET???
+    ears: RMCHeadsetDistressWeYa
+    # eyes: RMCGogglesMeson // TODO RMC14 mesons
+    back: RMCPMCSyntheticSmartpack
+    belt: RMCBeltMedicBagPMCFilled
+    suitstorage: RMCScabbardMacheteFilled # TODO RMC14 maintenance jack
+    jumpsuit: RMCJumpsuitVeteranPMCSynth
+    outerClothing: RMCArmorM4PMCSynthFilled
+    shoes: RMCBootsPMCFilled
+    id: CMIDCardPMC
+    pocket1: RMCPouchToolsSocFilledSynthetic
+    pocket2: RMCPouchConstructionFillLowGrade
+
+- type: playTimeTracker
+  id: RMCJobPMCSynthetic

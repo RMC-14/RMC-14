@@ -1,0 +1,81 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorCommanderNewVaradero
+  name: rmc-job-name-survivor-commander-new-varadero
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankLieutenantColonel: []
+  startingGear: RMCGearSurvivorCommanderNewVaradero
+  supervisors: cm-job-supervisors-marine-high-command
+  roleWeight: 0.25
+  icon: "RMCJobIconSurvivorCommanderNewVaradero"
+  hasIcon: true
+  spawnMenuRoleName: Commander (NV Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: Commander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+      - Civilian
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorCommanderNewVaradero
+  equipment:
+    ears: RMCHeadsetMarineDistress
+    jumpsuit: CMJumpsuitBO
+    head: RMCHeadCapFlippable
+    outerClothing: RMCCoatServiceFolded
+    shoes: CMBootsBlackFilled
+    back: CMSatchelFillSurvivor
+    belt: RMCM1984BeltFilled
+    id: CMIDCardGold
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledSurvivorCommanderNewVaradero
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMClipboard
+    - id: CMPenFountain
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSurvivorCommanderNewVardero
+  name: new varadero commanding officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorCommanderNewVaradero
+  - type: Sprite
+    state: co_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivorCommanderNewVaradero
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_nv_co

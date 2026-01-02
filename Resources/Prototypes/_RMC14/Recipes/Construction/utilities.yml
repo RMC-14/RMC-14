@@ -7,24 +7,6 @@
   targetNode: apc
   category: construction-category-cm-utilities
   description: "Area Power Controller (APC). Controls power. In an area."
-  icon:
-    sprite: _RMC14/Structures/Power/apc.rsi
-    state: base
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: true
-
-- type: construction
-  parent: RMC
-  name: machine frame
-  description: A machine under construction. Needs more parts.
-  id: CMMachineFrame
-  graph: CMMachineFrame
-  startNode: start
-  targetNode: machine
-  category: construction-category-cm-utilities
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  icon:
-    sprite: _RMC14/Structures/Machines/parts.rsi
-    state: "box_0"

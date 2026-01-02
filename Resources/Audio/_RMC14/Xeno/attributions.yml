@@ -372,3 +372,63 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/ce39f048bf5eb25e2a93d7355327ccacc0504b01/sound/effects/oppressor_tail.ogg"
+
+- files: ["alien_echoroar_1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ea919a8798253f334169819f21e913a3601e831e/sound/voice/alien_echoroar_1.ogg"
+
+- files: ["alien_echoroar_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ea919a8798253f334169819f21e913a3601e831e/sound/voice/alien_echoroar_2.ogg"
+
+- files: ["alien_echoroar_3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/ea919a8798253f334169819f21e913a3601e831e/sound/voice/alien_echoroar_3.ogg"
+
+- files: ["alien_doorpry1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2b0d2f79b470515c893f2a1d9364896023246efa/sound/effects/alien_doorpry1.ogg"
+
+- files: ["alien_doorpry2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2b0d2f79b470515c893f2a1d9364896023246efa/sound/effects/alien_doorpry2.ogg"
+
+- files: ["alien_ventcrawl1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/alien_ventcrawl1.ogg"
+
+- files: ["alien_ventcrawl2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/21e6447cc08aea502f671c819fdbcecbb85e6028/sound/effects/alien_ventcrawl2.ogg"
+
+- files: ["alien_ventpass1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8d03fdc4382b7af9512f522fd6521e7dcbcc400c/sound/effects/alien_ventpass1.ogg"
+
+- files: ["alien_ventpass2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8d03fdc4382b7af9512f522fd6521e7dcbcc400c/sound/effects/alien_ventpass2.ogg"
+
+- files: ["spike_spray.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/8a583493f634e4fa9e983ac78c8f2306f31d6159/sound/effects/spike_spray.ogg"
+
+- files: ["deep_alien_screech.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/085faa829b8e86366f180a5cc9d45dda0d9e4e0b/sound/effects/deep_alien_screech.ogg"
+
+- files: ["deep_alien_screech2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/085faa829b8e86366f180a5cc9d45dda0d9e4e0b/sound/effects/deep_alien_screech2.ogg"

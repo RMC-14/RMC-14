@@ -1,5 +1,7 @@
+using Content.Shared.Stacks;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.Light.Components;
@@ -34,6 +36,13 @@ public sealed partial class ExpendableLightComponent : Component
     [DataField]
     public string? SpriteShaderSpent = null;
 
+	// RMC14
+    /// <summary>
+    /// If the expendable light should activate itself on initialization
+    /// </summary>
+    [DataField]
+    public bool StartsActivated = false;
+
     /// <summary>
     /// The sprite layer shader used after the expendable light has burnt out.
     /// </summary>
@@ -65,10 +74,19 @@ public sealed partial class ExpendableLightComponent : Component
     public string FadeOutBehaviourID { get; set; } = string.Empty;
 
     [DataField]
-    public float GlowDuration { get; set; } = 60 * 15f;
+    public TimeSpan GlowDuration = TimeSpan.FromSeconds(60 * 15f);
 
     [DataField]
-    public float FadeOutDuration { get; set; } = 60 * 5f;
+    public TimeSpan FadeOutDuration = TimeSpan.FromSeconds(60 * 5f);
+
+    [DataField]
+    public ProtoId<StackPrototype>? RefuelMaterialID;
+
+    [DataField]
+    public TimeSpan RefuelMaterialTime = TimeSpan.FromSeconds(15f);
+
+    [DataField]
+    public TimeSpan RefuelMaximumDuration = TimeSpan.FromSeconds(60 * 15f * 2);
 
     [DataField]
     public string SpentDesc { get; set; } = string.Empty;

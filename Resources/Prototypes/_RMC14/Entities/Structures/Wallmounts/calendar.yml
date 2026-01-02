@@ -1,0 +1,68 @@
+- type: entity
+  id: RMCCalendarBase
+  name: wall calendar
+  description: Classic office decoration and a place to stare at maniacally.
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/calendar.rsi
+    drawdepth: WallMountedItems
+  - type: RMCCalendar
+  - type: BlockExamine
+    whitelist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCCalendarBase
+  id: RMCCalendarColonist
+  suffix: Colony
+  components:
+  - type: Sprite
+    state: calendar_colony
+
+- type: entity
+  parent: RMCCalendarBase
+  id: RMCCalendarWeYa
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: calendar_weya
+
+- type: entity
+  parent: RMCCalendarBase
+  id: RMCCalendarUNMC
+  suffix: UNMC
+  components:
+  - type: Sprite
+    state: calendar_unmc
+
+- type: entity
+  parent: RMCCalendarBase
+  id: RMCCalendarTWE
+  suffix: TWE
+  components:
+  - type: Sprite
+    state: calendar_twe
+
+- type: entity
+  parent: RMCCalendarBase
+  id: RMCCalendarSPP
+  suffix: SPP
+  components:
+  - type: Sprite
+    state: calendar_spp

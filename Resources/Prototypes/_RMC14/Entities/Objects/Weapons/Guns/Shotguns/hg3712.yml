@@ -26,7 +26,7 @@
     baseFireRate: 0.625
     burstScatterMult: 5
   - type: BallisticAmmoProvider
-    proto: CMShellShotgunBuckshot1
+    proto: CMShellShotgunBuckshot
     whitelist:
       tags:
       - RMCShellShotgunBuckshot

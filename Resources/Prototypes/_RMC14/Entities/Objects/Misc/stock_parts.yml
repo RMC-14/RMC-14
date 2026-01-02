@@ -40,9 +40,6 @@
 #  - type: MachinePart
 #    part: Capacitor
 #    rating: 1
-  - type: Tag
-    tags:
-    - CapacitorStockPart
 
 - type: entity
   parent: CMStockPartBase

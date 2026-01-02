@@ -1,9 +1,10 @@
-﻿# TODO RMC14 text labels on the bottom right
+# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
-  id: CMPillCanister
+  id: RMCPillCanisterNoSkill
   name: pill bottle
   description: It's an airtight container for storing medication.
+  suffix: No Skill
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
@@ -36,21 +37,21 @@
     sprite: _RMC14/Objects/Chemistry/pill_canister.rsi
   - type: GenericVisualizer
     visuals:
-      enum.PillBottleVisuals.Color:
+      enum.RMCPillBottleVisuals.Color:
         bottleSurfaceLayer:
-          Orange: {state: pill_canister}
-          Blue: {state: pill_canister1}
-          Yellow: {state: pill_canister2}
-          Light_Purple: {state: pill_canister3}
-          Light_Grey: {state: pill_canister4}
-          White: {state: pill_canister5}
-          Light_Green: {state: pill_canister6}
-          Cyan: {state: pill_canister7}
-          Bordeaux: {state: pill_canister8}
-          Aquamarine: {state: pill_canister9}
-          Grey: {state: pill_canister10}
-          Red: {state: pill_canister11}
-          Black: {state: pill_canister12}
+          Orange: { state: pill_canister }
+          Blue: { state: pill_canister1 }
+          Yellow: { state: pill_canister2 }
+          LightPurple: { state: pill_canister3 }
+          LightGrey: { state: pill_canister4 }
+          White: { state: pill_canister5 }
+          LightGreen: { state: pill_canister6 }
+          Cyan: { state: pill_canister7 }
+          Pink: { state: pill_canister8 }
+          Aquamarine: { state: pill_canister9 }
+          Grey: { state: pill_canister10 }
+          Red: { state: pill_canister11 }
+          Black: { state: pill_canister12 }
       enum.SharedBagOpenVisuals.BagState:
         openLayer:
           Open: { visible: true }
@@ -62,9 +63,6 @@
   - type: Tag
     tags:
     - PillCanister
-  - type: StorageSkillRequired
-    skills:
-      RMCSkillMedical: 2
   - type: IconLabel
     textColor: White
     storedOffset: 3, 12
@@ -76,13 +74,30 @@
     quickEquip: false
     slots:
     - suitstorage
-
+  - type: RMCStorageEjectHand
+    state: Last
+    canToggleStorage: false
+    ejectWhenEmpty: true
+    nestedWhitelist:
+      tags:
+      - RMCBeltMedical
+  - type: RMCSmartFridgeInsertable
+    category: Pills
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterBicaridine
+  parent: RMCPillCanisterNoSkill
+  id: CMPillCanister
+  suffix: Skill Required
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterBicaridineNoSkill
   name: bicaridine pill bottle
-  suffix: Bicaridine, 16
+  suffix: Bicaridine, 16, No Skill
   components:
   - type: Item
     heldPrefix: 11
@@ -100,6 +115,47 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterBicaridineNoSkill
+  id: CMPillCanisterBicaridine
+  suffix: Bicaridine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterMeralyneBicaridineNoSkill
+  name: meralyne-bicaridine pill bottle
+  suffix: Meralyne-Bicaridine, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 2
+  - type: Sprite
+    layers:
+    - state: pill_canister11
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillMeralyneBicaridine
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-merabic-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterMeralyneBicaridineNoSkill
+  id: RMCPillCanisterMeralyneBicaridine
+  suffix: Meralyne-Bicaridine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister
@@ -148,10 +204,10 @@
     labelTextLocId: rmc-dylovene-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterInaprovaline
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterInaprovalineNoSkill
   name: inaprovaline pill bottle
-  suffix: Inaprovaline, 16
+  suffix: Inaprovaline, 16, No Skill
   components:
   - type: Item
     heldPrefix: 3
@@ -171,10 +227,19 @@
     labelTextLocId: rmc-inaprovaline-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterKelotane
+  parent: RMCPillCanisterInaprovalineNoSkill
+  id: CMPillCanisterInaprovaline
+  suffix: Inaprovaline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterKelotaneNoSkill
   name: kelotane pill bottle
-  suffix: Kelotane, 16
+  suffix: Kelotane, 16, No Skill
   components:
   - type: Item
     heldPrefix: 2
@@ -192,6 +257,47 @@
       amount: 16
   - type: IconLabel
     labelTextLocId: rmc-kelotane-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterKelotaneNoSkill
+  id: CMPillCanisterKelotane
+  suffix: Kelotane, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterKelotaneDermalineNoSkill
+  name: kelotane-dermaline pill bottle
+  suffix: Kelotane-Dermaline, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 2
+  - type: Sprite
+    layers:
+    - state: pill_canister2
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillKelotaneDermaline
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-keloderm-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterKelotaneDermalineNoSkill
+  id: CMPillCanisterKelotaneDermaline
+  suffix: Kelotane-Dermaline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
 
 - type: entity
   parent: CMPillCanister
@@ -216,4 +322,112 @@
   - type: IconLabel
     labelTextLocId: rmc-tricordazine-container-label-text
 
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterRussianRed
+  name: Russian red pill bottle
+  suffix: Russian Red, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillRussianRed
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-russianred-container-label-text
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterImidazoline
+  name: imidazoline pill bottle
+  suffix: Imidazoline, 16
+  components:
+  - type: Item
+    heldPrefix: 7
+  - type: Sprite
+    layers:
+    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillImidazoline
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-imidazoline-container-label-text
+
 # TODO RMC14 peridaxon, tramadol
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterDexalinPlusNoSkill
+  name: dexalin plus pill bottle
+  suffix: DexalinPlus, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 3
+  - type: Sprite
+    layers:
+    - state: pill_canister1
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillDexalinPlus
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-dexalin-plus-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterDexalinPlusNoSkill
+  id: RMCPillCanisterDexalinPlus
+  suffix: DexalinPlus, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterIronNoSkill
+  name: iron pill bottle
+  suffix: Iron, 16, No Skill
+  components:
+  - type: Item
+    heldPrefix: 3
+  - type: Sprite
+    layers:
+    - state: pill_canister12
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillIron
+      amount: 16
+  - type: IconLabel
+    labelTextLocId: rmc-iron-container-label-text
+
+- type: entity
+  parent: RMCPillCanisterIronNoSkill
+  id: RMCPillCanisterIron
+  suffix: Iron, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2

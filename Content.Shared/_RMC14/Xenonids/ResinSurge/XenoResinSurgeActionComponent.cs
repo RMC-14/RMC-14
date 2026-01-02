@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 
@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Xenonids.ResinSurge;
 public sealed partial class XenoResinSurgeActionComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public TimeSpan FailCooldown = TimeSpan.FromSeconds(5);
+    public float FailCooldownMult = 0.5f;
 
     [DataField, AutoNetworkedField]
     public TimeSpan SuccessCooldown = TimeSpan.FromSeconds(10);

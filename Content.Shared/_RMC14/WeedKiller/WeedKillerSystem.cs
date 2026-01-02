@@ -130,7 +130,7 @@ public sealed class WeedKillerSystem : EntitySystem
 
             _audio.PlayGlobal(killer.Comp.Sound, mapFilter, false);
             _rmcCameraShake.ShakeCamera(mapFilter, 3, 1);
-            _marineAnnounce.AnnounceARES(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", Name(dropship.Value))));
+            _marineAnnounce.AnnounceARESStaging(null, Loc.GetString("rmc-weed-killer-deploying", ("dropship", Name(dropship.Value))));
         }
 
         foreach (var position in killer.Comp.Positions)

@@ -13,4 +13,7 @@ public sealed partial class XenoMeleeSlowComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RequiresKnockDown = false;
+
+    [DataField, AutoNetworkedField]
+    public bool HigherOnXenos = false;
 }

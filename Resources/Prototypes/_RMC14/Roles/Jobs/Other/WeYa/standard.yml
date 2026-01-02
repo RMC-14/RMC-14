@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Operator (M63B2)
   special:
   - !type:AddComponentSpecial
     components:
@@ -28,7 +29,6 @@
         RMCSkillConstruction: 2
         RMCSkillEngineer: 1
         RMCSkillEndurance: 5
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
   hidden: true
@@ -44,6 +44,18 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM63B2
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardM63B2
+  name: weya pmc operator spawn point
+  suffix: M63B2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM63B2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCStandardM63B2
@@ -56,6 +68,10 @@
     job: RMCPMCStandardM63B2
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -65,15 +81,15 @@
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteran
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponSMGM63B2
   storage:
     back:
@@ -81,7 +97,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
@@ -98,6 +114,7 @@
   id: RMCPMCStandardSSG45
   playTimeTracker: RMCJobPMCStandardSSG45
   startingGear: RMCJobPMCStandardSSG45
+  spawnMenuRoleName: WEYA PMC Operator (SSG-45)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardSSG45
@@ -109,6 +126,18 @@
     state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardSSG45
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCStandardSSG45
+  name: weya pmc operator spawn point
+  suffix: SSG45
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardSSG45
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -122,6 +151,10 @@
     job: RMCPMCStandardSSG45
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -130,24 +163,24 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    outerClothing: RMCArmorM4PMCNoLight
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
-    suitstorage: WeaponRifleSSG45
+    pocket2: RMCPouchMagazineLargePMC
+    suitstorage: RMCWeaponRifleSSG45
   storage:
     back:
     - RMCGrenadeBlastM12
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - RMCMagazineRifleSSG45Extended
     - RMCMagazineRifleSSG45Extended
     pocket2:
@@ -162,6 +195,7 @@
   id: RMCPMCStandardM54C2
   playTimeTracker: RMCJobPMCStandardM54C2
   startingGear: RMCJobPMCStandardM54C2
+  spawnMenuRoleName: WEYA PMC Operator (M54C2)
 
 - type: entity
   id: RMCRandomHumanoidPMCStandardM54C2
@@ -173,6 +207,18 @@
     state: pmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCPMCStandardM54C2
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCPMCStandardM54C2
+  name: weya pmc operator spawn point
+  suffix: M54C2
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCStandardM54C2
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -186,6 +232,10 @@
     job: RMCPMCStandardM54C2
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -194,16 +244,16 @@
   equipment:
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMC
-    outerClothing: CMArmorM4PMC
-    gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    outerClothing: RMCArmorM4PMCNoLight
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetPMCTactical
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
     suitstorage: RMCWeaponRifleM54C2
   storage:
     back:
@@ -211,7 +261,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
     pocket2:

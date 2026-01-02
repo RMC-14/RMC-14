@@ -1,0 +1,96 @@
+﻿- type: skillPreset
+  id: Survivor
+  skills:
+    RMCSkillConstruction: 1
+    RMCSkillEndurance: 2
+    RMCSkillFireman: 1
+    RMCSkillFirearms: 1
+
+- type: skillPreset
+  id: SurvivorWeYaManager
+  skills:
+    RMCSkillConstruction: 1
+    RMCSkillEndurance: 2
+    RMCSkillFireman: 1
+    RMCSkillFirearms: 1
+    RMCSkillLeadership: 3
+    RMCSkillIntel: 2
+    RMCSkillMedical: 1
+    RMCSkillOverwatch: 1
+
+- type: skillPreset
+  id: SurvivorMarshal
+  skills:
+    RMCSkillEngineer: 1
+    RMCSkillMeleeWeapons: 1
+    RMCSkillConstruction: 1
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillCqc: 2
+    RMCSkillFirearms: 2
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+
+- type: skillPreset
+  id: SurvivorGoon
+  skills:
+    RMCSkillEngineer: 1
+    RMCSkillConstruction: 1
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillCqc: 1
+    RMCSkillFirearms: 2
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillVehicles: 1
+
+- type: skillPreset
+  id: SurvivorGoonMedic
+  skills:
+    RMCSkillConstruction: 1
+    RMCSkillEndurance: 2
+    RMCSkillFireman: 2
+    RMCSkillFirearms: 2
+    RMCSkillMedical: 2
+    RMCSkillSurgery: 1
+    RMCSkillVehicles: 1
+    RMCSkillCqc: 1
+    RMCSkillPolice: 0 # RMC14
+
+- type: skillPreset
+  id: SurvivorGoonTechnician
+  skills:
+    RMCSkillConstruction: 2
+    RMCSkillEngineer: 2
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillCqc: 1
+    RMCSkillFirearms: 2
+    RMCSkillPolice: 0 # RMC14
+    RMCSkillFireman: 2
+    RMCSkillPowerLoader: 2
+    RMCSkillVehicles: 1
+
+- type: skillPreset
+  id: SurvivorGoonLead
+  skills:
+    RMCSkillMedical: 1
+    RMCSkillEndurance: 2
+    RMCSkillCqc: 1
+    RMCSkillFirearms: 2
+    RMCSkillPolice: 2
+    RMCSkillFireman: 2
+    RMCSkillVehicles: 1
+    RMCSkillConstruction: 2
+    RMCSkillEngineer: 2
+    RMCSkillLeadership: 1
+
+- type: skillPreset
+  id: SurvivorTrucker
+  skills:
+    RMCSkillFireman: 1
+    RMCSkillEngineer: 2
+    RMCSkillConstruction: 2
+    RMCSkillVehicles: 3
+    RMCSkillEndurance: 2
+    RMCSkillFirearms: 1

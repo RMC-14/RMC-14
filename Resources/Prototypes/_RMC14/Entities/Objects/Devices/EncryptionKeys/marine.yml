@@ -7,6 +7,7 @@
     channels:
     - MarineCommand
     - MarineJTAC
+    - MarineRequisition
     defaultChannel: MarineCommand
   - type: Sprite
     state: sl_key
@@ -103,7 +104,8 @@
     - MarineEngineer
     - MarineIntel
     - MarineJTAC
-    defaultChannel: MarineCommand
+    - MarineHighCommand
+    defaultChannel: MarineHighCommand
   - type: Sprite
     state: binary_key
 
@@ -127,6 +129,20 @@
     - MarineJTAC
     - MarineIntel
     - MarineCommon
-    defaultChannel: MarineForecon
+    defaultChannel: MarineSOF
   - type: Sprite
     state: sl_key
+
+# PVE
+
+- type: entity
+  parent: CMEncryptionKey
+  id: RMCEncryptionKeySunRiders
+  name: sun riders encryption key
+  components:
+  - type: EncryptionKey
+    channels:
+    - MarineAlpha
+    defaultChannel: MarineAlpha
+  - type: Sprite
+    state: delta_key

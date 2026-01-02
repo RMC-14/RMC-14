@@ -15,6 +15,7 @@ using Content.Shared.Prying.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
+using Content.Shared._RMC14.Doors;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -26,6 +27,7 @@ using Robust.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Doors.Systems;
 
@@ -49,9 +51,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
 
-
-    [ValidatePrototypeId<TagPrototype>]
-    public const string DoorBumpTag = "DoorBumpOpener";
+    public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
 
     /// <summary>
     ///     A set of doors that are currently opening, closing, or just queued to open/close after some delay.
@@ -225,6 +225,14 @@ public abstract partial class SharedDoorSystem : EntitySystem
     {
         if (door.State == DoorState.Welded || !door.CanPry)
             args.Cancelled = true;
+
+         // RMC14
+        var beforepry = new RMCBeforePryEvent(args.User);
+        RaiseLocalEvent(uid, ref beforepry);
+
+        if (beforepry.Cancelled)
+            args.Cancelled = true;
+        // RMC14
     }
 
     /// <summary>
@@ -774,10 +782,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
         var door = ent.Comp;
         door.NextStateChange = null;
 
-        if (door.CurrentlyCrushing.Count > 0)
+        if (door.CurrentlyCrushing.Count > 0 && door.State != DoorState.Opening)
+        {
             // This is a closed door that is crushing people and needs to auto-open. Note that we don't check "can open"
             // here. The door never actually finished closing and we don't want people to get stuck inside of doors.
             StartOpening(ent, door);
+            return;
+        }
 
         switch (door.State)
         {

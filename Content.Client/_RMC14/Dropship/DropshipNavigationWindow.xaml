@@ -32,6 +32,7 @@
                 <RichTextLabel Name="ProgressBarHeader" Access="Public" />
                 <ProgressBar Name="ProgressBar" Access="Public" />
             </BoxContainer>
+            <cc:HSeparator Color="#02E74E" />
             <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
                 <RichTextLabel Name="DoorHeader" Access="Public" />
                 <Control HorizontalExpand="True" />
@@ -41,6 +42,23 @@
                                          Text="Lockdown" />
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
+                <controls:DropshipButton Name="LockdownButtonAft" Access="Public"
+                                         Margin="1" BackgroundColor="#004E25"
+                                         BorderColor="#02E74E" BorderThickness="1"
+                                         Text="Lock Aft"
+                                         HorizontalExpand="True"/>
+                <controls:DropshipButton Name="LockdownButtonPort" Access="Public"
+                                         Margin="1" BackgroundColor="#004E25"
+                                         BorderColor="#02E74E" BorderThickness="1"
+                                         Text="Lock Port"
+                                         HorizontalExpand="True"/>
+                <controls:DropshipButton Name="LockdownButtonStarboard" Access="Public"
+                                         Margin="1" BackgroundColor="#004E25"
+                                         BorderColor="#02E74E" BorderThickness="1"
+                                         Text="Lock Starboard"
+                                         HorizontalExpand="True"/>
+            </BoxContainer>
         </BoxContainer>
     </PanelContainer>
 </controls:DropshipNavigationWindow>

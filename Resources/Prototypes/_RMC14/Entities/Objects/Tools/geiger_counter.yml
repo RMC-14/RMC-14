@@ -1,0 +1,30 @@
+﻿- type: entity
+  parent: GeigerCounter
+  id: RMCGeigerCounter
+  name: geiger counter
+  description: A hand-held tool used to detect radiation, measured in Sieverts. A staple of CBRN crews and nuclear engineers, this model appears to be made by Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/geiger_counter.rsi
+    layers:
+    - state: geiger_base
+    - state: geiger_on_idle
+      map: ["enum.GeigerLayers.Screen"]
+      shader: unshaded
+      visible: false
+  - type: Item
+    sprite: _RMC14/Objects/Tools/geiger_counter.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.GeigerVisuals.IsEnabled:
+        GeigerLayers.Screen:
+          True: { visible: True }
+          False: { visible: False }
+      enum.GeigerVisuals.DangerLevel:
+        GeigerLayers.Screen:
+          None: {state: geiger_on_idle}
+          Low: {state: geiger_on_low}
+          Med: {state: geiger_on_med}
+          High: {state: geiger_on_high}
+          Extreme: {state: geiger_on_ext}

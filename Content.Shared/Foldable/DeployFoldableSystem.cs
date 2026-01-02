@@ -1,7 +1,12 @@
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.DragDrop;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Shared.Tag;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Foldable;
 
@@ -9,6 +14,16 @@ public sealed class DeployFoldableSystem : EntitySystem
 {
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
+    [Dependency] private readonly AnchorableSystem _anchorable = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    // RMC14
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> StairsTag = "RMCStairs";
+    private static readonly ProtoId<TagPrototype> CarpetTag = "Carpet";
+    // RMC14
 
     public override void Initialize()
     {
@@ -57,11 +72,22 @@ public sealed class DeployFoldableSystem : EntitySystem
         if (args.Handled || !args.CanReach)
             return;
 
+        // Don't do anything unless you clicked on the floor.
+        if (args.Target.HasValue && !_tag.HasAnyTag(args.Target.Value, CatwalkTag, StairsTag, CarpetTag)) // RMC14
+            return;
+
         if (!TryComp<FoldableComponent>(ent, out var foldable))
             return;
 
+        if (!TryComp(ent.Owner, out PhysicsComponent? anchorBody)
+            || !_anchorable.TileFree(args.ClickLocation, anchorBody))
+        {
+            _popup.PopupPredicted(Loc.GetString("foldable-deploy-fail", ("object", ent)), ent, args.User);
+            return;
+        }
+
         if (!TryComp(args.User, out HandsComponent? hands)
-            || !_hands.TryDrop(args.User, args.Used, targetDropLocation: args.ClickLocation, handsComp: hands))
+            || !_hands.TryDrop((args.User, hands), args.Used, targetDropLocation: args.ClickLocation))
             return;
 
         if (!_foldable.TrySetFolded(ent, foldable, false))

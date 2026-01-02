@@ -1,0 +1,52 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorLV624SecurityGuard
+  name: rmc-job-name-survivor-lv624-security-guard
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorLV624SecurityGuard
+  spawnMenuRoleName: Security Guard (LV624 Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: SurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetLV624SecurityGuard
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorLV624SecurityGuard
+  equipment:
+    head: ArmorHelmetPMC # TODO RMC black PMC hat
+    jumpsuit: RMCJumsuitWhiteService
+    outerClothing: RMCArmorVestWeYa
+    ears: RMCHeadsetDistressWeYa
+    id: CMIDCardLiaisonColony
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624SecurityGuard
+  name: survivor lv624 security guard spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624SecurityGuard
+  name: lv624 security guard colonist preset

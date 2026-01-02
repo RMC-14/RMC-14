@@ -1,3 +1,5 @@
+using Content.Server._RMC14.Actions;
+using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Commendations;
 using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
@@ -12,13 +14,13 @@ using Content.Server.Chat.Managers;
 using Content.Server.Connection;
 using Content.Server.Database;
 using Content.Server.Discord;
+using Content.Server.Discord.DiscordLink;
 using Content.Server.Discord.WebhookMessages;
 using Content.Server.EUI;
 using Content.Server.GhostKick;
 using Content.Server.Info;
 using Content.Server.Mapping;
 using Content.Server.Maps;
-using Content.Server.MoMMI;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.Players.JobWhitelist;
 using Content.Server.Players.PlayTimeTracking;
@@ -44,7 +46,6 @@ namespace Content.Server.IoC
             IoCManager.Register<IChatManager, ChatManager>();
             IoCManager.Register<ISharedChatManager, ChatManager>();
             IoCManager.Register<IChatSanitizationManager, ChatSanitizationManager>();
-            IoCManager.Register<IMoMMILink, MoMMILink>();
             IoCManager.Register<IServerPreferencesManager, ServerPreferencesManager>();
             IoCManager.Register<IServerDbManager, ServerDbManager>();
             IoCManager.Register<RecipeManager, RecipeManager>();
@@ -83,12 +84,17 @@ namespace Content.Server.IoC
             IoCManager.Register<MultiServerKickManager>();
             IoCManager.Register<CVarControlManager>();
 
+            IoCManager.Register<DiscordLink>();
+            IoCManager.Register<DiscordChatLink>();
+
             // RMC14
             IoCManager.Register<LinkAccountManager>();
             IoCManager.Register<RMCPlayTimeManager>();
             IoCManager.Register<RMCDiscordManager>();
             IoCManager.Register<MentorManager>();
             IoCManager.Register<CommendationManager>();
+            IoCManager.Register<RMCActionsManager>();
+            IoCManager.Register<RMCChatBansManager>();
         }
     }
 }

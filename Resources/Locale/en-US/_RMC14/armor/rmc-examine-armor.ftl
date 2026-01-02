@@ -8,3 +8,4 @@ rmc-examine-armor-xeno = - [color=lightblue]{$armor}[/color] [color=yellow]armor
 rmc-examine-armor-xeno-frontal = - [color=lightblue]{$armor}[/color] [color=yellow]frontal armor[/color]
 rmc-examine-armor-xeno-side = - [color=lightblue]{$armor}[/color] [color=yellow]side armor[/color]
 rmc-examine-armor-xeno-explosion = - [color=lightblue]{$armor}[/color] [color=yellow]explosion armor[/color]
+rmc-examine-armor-piercing-immune = [color=cyan]This has immunity to armor piercing rounds![/color]

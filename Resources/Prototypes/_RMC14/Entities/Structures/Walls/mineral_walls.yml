@@ -13,8 +13,10 @@
     state: stone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: stone
- 
+
 - type: entity
   parent: RMCWallSandstone
   id: RMCWallSandstoneTemple
@@ -30,7 +32,17 @@
     state: stone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: stone
+
+- type: entity
+  parent: RMCWallSandstoneTemple
+  id: RMCWallSandstoneTempleTimed
+  suffix: Timed
+  components:
+  - type: TimedDespawn
+    lifetime: 1200
 
 - type: entity
   parent: RMCWallSandstone
@@ -47,4 +59,56 @@
     state: runedstone
   - type: IconSmooth
     key: walls
+    additionalKeys:
+    - windows
     base: runedstone
+
+- type: entity
+  parent: RMCWallSandstoneTemple
+  id: RMCWallSandstoneTempleGrey
+  components:
+  - type: Sprite
+    color: '#666666'
+
+- type: entity
+  parent: RMCWallSandstoneTempleGrey
+  id: RMCWallSandstoneMemorial
+  name: memorial wall
+
+- type: entity
+  parent: RMCWallSandstone
+  id: RMCWallUranium
+  name: uranium wall
+  description: A wall with uranium plating. This is probably a bad idea.
+  components:
+  - type: Sprite
+    color: '#1b4506'
+
+- type: entity
+  parent: CMBaseWall
+  id: RMCWallGold
+  name: gold wall
+  description:  A wall with gold plating. Swag!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/gold.rsi
+    state: gold0
+  - type: Tag
+    tags:
+    - Wall
+  - type: ReceiverXenoClaws
+    maxHealth: 9000
+    minimumClawStrength: VerySharp
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: StaticPrice
+    price: 150

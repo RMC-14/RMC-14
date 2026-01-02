@@ -1,0 +1,20 @@
+# Spotter
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseFORECONSpotter
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseFORECONSpotter ]
+
+- type: startingGear
+  id: RMCGearCorpseFORECONSpotter
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouch
+    back: CMSatchelMarine
+    shoes: CMBootsBlackFilled
+    id: RMCIDCardFORECONSpotter
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff

@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Fruit.Events;
+using Content.Shared._RMC14.Xenonids.Hedgehog;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Pheromones;
 using Content.Shared._RMC14.Xenonids.Plasma;
@@ -105,6 +106,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SubscribeLocalEvent<XenoFruitComponent, XenoFruitHarvestDoAfterEvent>(OnXenoFruitHarvestDoAfter);
         // Fruit consuming (eating and feeding)
         SubscribeLocalEvent<XenoFruitComponent, XenoFruitConsumeDoAfterEvent>(OnXenoFruitConsumeDoAfter);
+        // Examines
+        SubscribeLocalEvent<XenoFruitHealComponent, ExaminedEvent>(OnXenoHealFruitExamined);
+        SubscribeLocalEvent<XenoFruitRegenComponent, ExaminedEvent>(OnXenoRegenFruitExamined);
+        SubscribeLocalEvent<XenoFruitShieldComponent, ExaminedEvent>(OnXenoShieldFruitExamined);
+        SubscribeLocalEvent<XenoFruitHasteComponent, ExaminedEvent>(OnXenoHasteFruitExamined);
+        SubscribeLocalEvent<XenoFruitSpeedComponent, ExaminedEvent>(OnXenoSpeedFruitExamined);
+        SubscribeLocalEvent<XenoFruitPlasmaComponent, ExaminedEvent>(OnXenoPlasmaFruitExamined);
         // Fruit effects
         SubscribeLocalEvent<GardenerShieldComponent, RemovedShieldEvent>(OnShieldRemove);
         SubscribeLocalEvent<XenoFruitEffectRegenComponent, XenoFruitEffectRegenEvent>(OnXenoFruitEffectRegen);
@@ -157,11 +165,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnActionFruitChosen(Entity<XenoFruitChooseActionComponent> xeno, ref XenoFruitChosenEvent args)
     {
-        if (_actions.TryGetActionData(xeno, out var action) &&
+        if (_actions.GetAction(xeno.Owner) is { } action &&
             _prototype.TryIndex(args.Choice, out var fruit))
         {
-            action.Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), GetFruitSprite(fruit));
-            Dirty(xeno, action);
+            _actions.SetIcon(action.AsNullable(), new SpriteSpecifier.Rsi(new ResPath("_RMC14/Structures/Xenos/xeno_fruit.rsi"), GetFruitSprite(fruit)));
         }
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-choose", ("fruit", args.Choice)), xeno, xeno);
@@ -185,6 +192,63 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
         args.PushMarkup(Loc.GetString("rmc-xeno-fruit-examine-base",
             ("growthStatus", Loc.GetString(state))));
+
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-consume-examine"), -10);
+    }
+
+    private void OnXenoHealFruitExamined(EntityUid uid, XenoFruitHealComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-instant-heal", ("amount", fruit.HealAmount)), -12);
+    }
+
+    private void OnXenoRegenFruitExamined(EntityUid uid, XenoFruitRegenComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-regen-heal", ("amount", fruit.RegenPerTick),
+            ("time", (fruit.TickCount * fruit.TickPeriod).TotalSeconds)), -12);
+    }
+
+    private void OnXenoShieldFruitExamined(EntityUid uid, XenoFruitShieldComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-shield", ("percent", fruit.ShieldRatio * 100),
+            ("max", fruit.ShieldAmount), ("duration", fruit.Duration.TotalSeconds), ("decay", fruit.ShieldDecay)), -12);
+    }
+
+    private void OnXenoHasteFruitExamined(EntityUid uid, XenoFruitHasteComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-cooldown", ("amount", fruit.ReductionPerSlash * 100),
+            ("max", fruit.ReductionMax * 100), ("time", fruit.Duration.TotalSeconds)), -12);
+    }
+
+    private void OnXenoSpeedFruitExamined(EntityUid uid, XenoFruitSpeedComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-speed", ("amount", fruit.SpeedModifier), ("time", fruit.Duration.TotalSeconds)), -12);
+    }
+
+    private void OnXenoPlasmaFruitExamined(EntityUid uid, XenoFruitPlasmaComponent fruit, ExaminedEvent args)
+    {
+        if (!HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString("rmc-xeno-fruit-regen-plasma", ("amount", fruit.RegenPerTick),
+            ("time", (fruit.TickCount * fruit.TickPeriod).TotalSeconds)), -12);
     }
 
     private void OnXenoFruitActivateInWorld(Entity<XenoFruitComponent> fruit, ref ActivateInWorldEvent args)
@@ -376,7 +440,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 [FruitPlantDamageType] = args.HealthCost,
             },
         };
-        _damageable.TryChangeDamage(xeno.Owner, fruitDamage, ignoreResistances: true, interruptsDoAfters: false);
+
+        if (TryComp<DamageableComponent>(xeno, out var damage))
+            _damageable.AddDamage(xeno.Owner, damage, fruitDamage);
 
         // Apply cooldown
         args.Handled = true;
@@ -432,6 +498,14 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         UpdateFruitCount(xeno);
     }
 
+    public void GardenerFruitActionMessage(Entity<XenoFruitComponent> fruit, LocId message)
+    {
+        if (fruit.Comp.Planter == null || _net.IsClient)
+            return;
+
+        _popup.PopupEntity(Loc.GetString(message), fruit.Comp.Planter.Value, fruit.Comp.Planter.Value, PopupType.SmallCaution);
+    }
+
     #endregion
 
     // Fruit harvesting
@@ -461,8 +535,10 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
+        var pickMult = TryComp<XenoFruitPlanterComponent>(user, out var planter) ? planter.FruitPickingMultiplier : 1;
+
         var ev = new XenoFruitHarvestDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.HarvestDelay, ev, fruit, fruit.Owner)
+        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.HarvestDelay * pickMult, ev, fruit, fruit.Owner)
         {
             NeedHand = true,
             BreakOnMove = true,
@@ -527,6 +603,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         SetFruitState(fruit, XenoFruitState.Item);
         _hands.TryPickup(args.User, fruit);
         RemCompDeferred<AuraComponent>(fruit);
+        if (args.User != fruit.Comp.Planter)
+            GardenerFruitActionMessage(fruit, "rmc-xeno-fruit-picked");
     }
 
     #endregion
@@ -572,7 +650,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         }
 
         var ev = new XenoFruitConsumeDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay, ev, fruit, user)
+        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay, ev, fruit, user, fruit)
         {
             NeedHand = true,
             BreakOnMove = true,
@@ -620,7 +698,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-wrong-hive"), user, user, PopupType.SmallCaution);
             return false;
         }
-        else if(!_hive.FromSameHive(user, target))
+        else if (!_hive.FromSameHive(user, target))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-feed-wrong-hive", ("target", target)), user, user, PopupType.SmallCaution);
             return false;
@@ -643,12 +721,16 @@ public sealed class SharedXenoFruitSystem : EntitySystem
             return false;
         }
 
+        var fruitFeedSpeed = TryComp<XenoFruitPlanterComponent>(user, out var planter) ? planter.FruitFeedingMultiplier : 1;
+
         var ev = new XenoFruitConsumeDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay, ev, fruit, target)
+        var doAfter = new DoAfterArgs(EntityManager, user, fruit.Comp.ConsumeDelay * fruitFeedSpeed, ev, fruit, target, fruit)
         {
             NeedHand = true,
             BreakOnMove = true,
-            RequireCanInteract = true
+            BreakOnHandChange = true,
+            RequireCanInteract = true,
+            TargetEffect = "RMCEffectHealBusy"
         };
 
         var popupSelf = Loc.GetString("rmc-xeno-fruit-feed-fail-self", ("target", target), ("fruit", fruit));
@@ -712,9 +794,8 @@ public sealed class SharedXenoFruitSystem : EntitySystem
         _popup.PopupClient(Loc.GetString(fruit.Comp.Popup), target, target, PopupType.Medium);
 
         // If neither the user nor the target were the planter, inform the planter as well
-        if (fruit.Comp.Planter is { } planter)
-            if (target != planter && user != planter)
-                _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-consumed"), planter, planter, PopupType.Medium);
+        if (args.User != fruit.Comp.Planter && args.Target != fruit.Comp.Planter)
+            GardenerFruitActionMessage(fruit, "rmc-xeno-fruit-consumed");
 
         SetFruitState(fruit, XenoFruitState.Eaten);
         RemCompDeferred<AuraComponent>(fruit);
@@ -831,14 +912,12 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Shield (unstable fruit)
     private void ApplyFruitShield(Entity<XenoFruitShieldComponent> fruit, EntityUid target)
     {
-        var ent = target;
         var comp = fruit.Comp;
-        var maxShield = _mobThreshold.GetThresholdForState(ent, MobState.Dead) * comp.ShieldRatio;
+        var maxShield = _mobThreshold.GetThresholdForState(target, MobState.Dead) * comp.ShieldRatio;
         var shieldAmount = maxShield < comp.ShieldAmount ? maxShield : comp.ShieldAmount;
 
-        _xenoShield.ApplyShield(ent, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
+        _xenoShield.ApplyShield(target, XenoShieldSystem.ShieldType.Gardener, shieldAmount,
             comp.Duration, comp.ShieldDecay.Double(), true, shieldAmount.Double());
-
         EnsureComp<GardenerShieldComponent>(target);
     }
 
@@ -853,13 +932,13 @@ public sealed class SharedXenoFruitSystem : EntitySystem
     // Cooldown reduction (spore fruit)
     public void ApplyFruitHaste(Entity<XenoFruitHasteComponent> fruit, EntityUid target)
     {
-        var comp = EnsureComp<XenoFruitEffectHasteComponent>(target);
+        var result = EnsureComp<XenoFruitEffectHasteComponent>(target, out var comp);
 
         comp.Duration = fruit.Comp.Duration;
         comp.ReductionMax = fruit.Comp.ReductionMax;
         comp.ReductionPerSlash = fruit.Comp.ReductionPerSlash;
         // Only reset current reduction if user was not already under the effect
-        comp.ReductionCurrent = comp.ReductionCurrent != null ? comp.ReductionCurrent : 0;
+        comp.ReductionCurrent = result ? comp.ReductionCurrent : 0;
         // Mark as null for Update() to refresh end time in case user was already under the effect
         comp.EndAt = null;
     }
@@ -957,9 +1036,7 @@ public sealed class SharedXenoFruitSystem : EntitySystem
 
     private void OnXenoFruitDestruction(Entity<XenoFruitComponent> fruit, ref DestructionEventArgs args)
     {
-        if (fruit.Comp.Planter is { } planter)
-            _popup.PopupClient(Loc.GetString("rmc-xeno-fruit-destroyed"), planter, planter, PopupType.MediumCaution);
-
+        GardenerFruitActionMessage(fruit, "rmc-xeno-fruit-destroyed");
         XenoFruitRemoved(fruit);
     }
 

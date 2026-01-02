@@ -1,0 +1,20 @@
+- type: entity
+  id: RMCHypersleepFeed
+  name: hypersleep chamber feed
+  description: A bewildering tangle of machinery and pipes linking the hypersleep chambers to the hypersleep bay.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Sprite
+    sprite: _RMC14/Structures/coolant_feed.rsi
+    state: coolant
+    drawdepth: HighFloorObjects
+
+- type: entity
+  parent: RMCHypersleepFeed
+  id: RMCCoolantFeed
+  name: coolant feed
+  description: A bewildering tangle of machinery and pipes providing steady coolant feed to the hypersleep bay.

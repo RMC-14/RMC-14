@@ -1,0 +1,103 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCJobSyntheticColony
+  name: rmc-job-name-synth-colony
+  description: rmc-job-description-synth-colony
+  playTimeTracker: RMCJobSyntheticColony
+  ranks:
+    RMCRankSyntheticColonist: []
+  startingGear: RMCGearSyntheticColonist
+  icon: "RMCJobIconSynth"
+  joinNotifyCrew: true
+  whitelisted: true
+  supervisors: cm-job-supervisors-colonists
+  accessGroups:
+  - Colony # Colony All Access
+  - ColonistSynthShipside # Med, Engi, Synth
+  roleWeight: 0.25
+  basePlaytimeTracker: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillEngineer: 4
+        RMCSkillConstruction: 3
+        RMCSkillFirearms: 2
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillResearch: 1
+        RMCSkillMeleeWeapons: 2
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 2
+        RMCSkillJtac: 1
+        RMCSkillIntel: 1
+        RMCSkillDomestics: 2
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: synth
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: MeleeWeapon
+      soundHit:
+        path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+        params:
+          variation: 0.15
+          volume: -1
+      angle: 30
+      animation: WeaponArcFist
+      attackRate: 1
+      damage:
+        types:
+          Blunt: 35
+    - type: Synth
+      generation: rmc-species-synth-generation-second
+  hidden: true
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+
+- type: startingGear
+  id: RMCGearSyntheticColonistBase
+  equipment:
+    id: RMCIDCardSynthColony
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchToolsFill
+
+- type: startingGear
+  parent: RMCGearSyntheticColonistBase
+  id: RMCGearSyntheticColonist
+  equipment:
+    jumpsuit: RMCJumpsuitSynthetic
+    gloves: CMHandsInsulated
+    shoes: CMBootsBlackFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSynthColonist
+  name: synthetic colonist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCJobSyntheticColony
+  - type: Sprite
+    state: syn_spawn
+
+- type: playTimeTracker
+  id: RMCJobSyntheticColony
+  name: rmc-playtime-tracker-job-name-survivor-synth
+  isHumanoid: true

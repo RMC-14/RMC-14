@@ -1,0 +1,62 @@
+﻿- type: entity
+  parent: DrinkBaseCup
+  id: RMCBlackGooGlass
+  name: strange bottle
+  description: A strange bottle of unknown origin.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/black_goo.rsi
+    layers:
+      - state: icon-0
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: icon-3
+        visible: false
+  - type: Item
+    size: Small
+  - type: DamageOnLand
+    damage: {}
+  - type: DamageOtherOnHit
+    damage: {}
+  - type: Appearance
+  - type: SolutionContainerVisuals
+    maxFillLevels: 3
+    fillBaseName: icon-
+  - type: Destructible
+    thresholds: [] # TODO RMC14 destroy on explosion unless inside a container
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCBlackGooGlass
+  id: RMCBlackGooGlassFull
+  suffix: DO NOT MAP, full
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCBlackGoo
+          Quantity: 100
+
+- type: entity
+  parent: RMCBlackGooGlass
+  id: RMCBlackGooGlassAntiZedFull
+  suffix: DO NOT MAP, AntiZed, full
+  name: even stranger bottle
+  description: A bottle of blue labeled CURE...
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCAntiZed
+          Quantity: 100

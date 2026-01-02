@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Server.Access.Systems;
 using Content.Server.Forensics;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Access.Components;
 using Content.Shared.Forensics.Components;
 using Content.Shared.GameTicking;
@@ -393,6 +394,10 @@ public sealed class StationRecordsSystem : SharedStationRecordsSystem
         {
             StationRecordFilterType.Name =>
                 !someRecord.Name.ToLower().Contains(filterLowerCaseValue),
+            StationRecordFilterType.Job =>
+                !someRecord.JobTitle.ToLower().Contains(filterLowerCaseValue),
+            StationRecordFilterType.Species =>
+                !someRecord.Species.ToLower().Contains(filterLowerCaseValue),
             StationRecordFilterType.Prints => someRecord.Fingerprint != null
                 && IsFilterWithSomeCodeValue(someRecord.Fingerprint, filterLowerCaseValue),
             StationRecordFilterType.DNA => someRecord.DNA != null

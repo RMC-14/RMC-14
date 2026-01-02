@@ -1,12 +1,15 @@
-﻿using Content.Server.Atmos.EntitySystems;
+using Content.Server.Atmos.EntitySystems;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared.ActionBlocker;
 using Content.Shared.Atmos.Components;
+using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Atmos;
 
 public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
 {
     [Dependency] private readonly FlammableSystem _flammable = default!;
+    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
     public override void Initialize()
     {
@@ -28,6 +31,8 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         if (!Resolve(flammable, ref flammable.Comp, false))
             return false;
 
+        var hadBypassComponent = HasComp<RMCFireBypassActiveComponent>(flammable);
+
         var stacks = flammable.Comp.FireStacks + duration;
         if (maxStacks != null && stacks > maxStacks)
             stacks = maxStacks.Value;
@@ -35,6 +40,11 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
         _flammable.SetFireStacks(flammable, stacks, flammable, true);
         if (!flammable.Comp.OnFire)
             return false;
+
+        if (hadBypassComponent)
+        {
+            EnsureComp<RMCFireBypassActiveComponent>(flammable);
+        }
 
         flammable.Comp.Intensity = intensity;
         flammable.Comp.Duration = duration;
@@ -57,5 +67,25 @@ public sealed class RMCFlammableSystem : SharedRMCFlammableSystem
             return;
 
         _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void AdjustStacks(Entity<FlammableComponent?> flammable, int stacks)
+    {
+        if (!Resolve(flammable, ref flammable.Comp, false))
+            return;
+
+        flammable.Comp.Intensity = 30;
+        flammable.Comp.Duration = 20;
+        Dirty(flammable);
+
+        _flammable.AdjustFireStacks(flammable, stacks, flammable);
+    }
+
+    public override void DoStopDropRollAnimation(EntityUid uid)
+    {
+        if (!_actionBlocker.CanInteract(uid, null))
+            return;
+
+        RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(uid)), Filter.Pvs(uid)); // RMC14
     }
 }

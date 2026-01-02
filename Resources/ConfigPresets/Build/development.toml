@@ -19,7 +19,7 @@ generator_enabled = false
 mob_pushing = true
 
 [net]
-tickrate = 15
+tickrate = 30
 
 [physics]
 # Makes mapping annoying
@@ -44,4 +44,11 @@ preload_grids = false
 see_own_notes = true
 
 [rmc]
+automatic_commander_promotion = false
 planet_map_vote = false
+
+[ic]
+# random_characters = true
+random_species_weights = ""
+ssd_sleep_time = 3600
+id_job_length = 50

@@ -25,6 +25,9 @@ public sealed partial class CMSolutionRefillerComponent : Component
     public FixedPoint2 Max;
 
     [DataField, AutoNetworkedField]
+    public bool RandomizeReagentsPlanetside = false;
+
+    [DataField, AutoNetworkedField]
     public FixedPoint2 Recharge;
 
     [DataField, AutoNetworkedField]

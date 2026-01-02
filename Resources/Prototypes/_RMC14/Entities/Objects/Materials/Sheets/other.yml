@@ -49,6 +49,14 @@
 
 - type: entity
   parent: CMSheetPhoron
+  id: CMSheetPhoron15
+  suffix: 15
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: CMSheetPhoron
   id: CMSheetPhoron25
   suffix: 25
   components:
@@ -69,83 +77,6 @@
   suffix: Single
   components:
   - type: Stack
-    count: 1
-
-# Cardboard
-- type: material
-  id: RMCSheetCardboard
-  stackEntity: RMCSheetCardboard
-  name: materials-cardboard
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
-  color: "#70736C"
-  price: 0.01
-
-- type: stack
-  id: RMCSheetCardboard
-  name: materials-cardboard
-  icon: { sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi, state: icon }
-  spawn: RMCSheetCardboard
-  maxCount: 50
-
-- type: entity
-  parent: SheetOtherBase
-  id: RMCSheetCardboard
-  name: cardboard
-  suffix: Full, RMC
-  components:
-  - type: Material
-  - type: PhysicalComposition
-    materialComposition:
-      RMCSheetCardboard: 100
-  - type: Stack
-    stackType: RMCSheetCardboard
-    count: 50
-  - type: Sprite
-    state: icon
-    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
-  - type: Item
-    heldPrefix: cardboard
-    size: Normal
-    sprite: _RMC14/Objects/Materials/Sheets/rmc_cardboard.rsi
-  - type: Appearance
-  - type: Tag
-    tags:
-    - Sheet
-
-- type: entity
-  parent: RMCSheetCardboard
-  id: RMCSheetCardboard30
-  suffix: 30, RMC
-  components:
-  - type: Stack
-    stackType: RMCSheetCardboard
-    count: 30
-
-- type: entity
-  parent: RMCSheetCardboard
-  id: RMCSheetCardboard25
-  suffix: 25, RMC
-  components:
-  - type: Stack
-    stackType: RMCSheetCardboard
-    count: 25
-
-- type: entity
-  parent: RMCSheetCardboard
-  id: RMCSheetCardboard10
-  suffix: 10, RMC
-  components:
-  - type: Stack
-    stackType: RMCSheetCardboard
-    count: 10
-
-- type: entity
-  parent: RMCSheetCardboard
-  id: RMCSheetCardboard1
-  suffix: Single, RMC
-  components:
-  - type: Stack
-    stackType: RMCSheetCardboard
     count: 1
 
 # Wood
@@ -198,6 +129,24 @@
   - type: Tag
     tags:
     - Sheet
+  - type: RMCConstructionItem
+    buildable:
+    # - RMCSandalsBuild
+    - RMCFloorTileWoodBuild
+    - RMCCampfireBuild
+    # wooden chair
+    - RMCWoodenBarricadeBuild
+    - RMCWoodenCrateBuild
+    # wooden door
+    # coffin
+    # baseball bat
+    # wooden cross
+    # wooden pole
+    # fishing pole
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: RMCPlankWood
@@ -206,6 +155,14 @@
   components:
   - type: Stack
     count: 10
+
+- type: entity
+  parent: RMCPlankWood
+  id: RMCPlankWood25
+  suffix: 25
+  components:
+  - type: Stack
+    count: 25
 
 - type: entity
   parent: RMCPlankWood
@@ -226,7 +183,88 @@
 - type: entity
   parent: RMCPlankWood
   id: RMCPlankWood2
-  suffix: Single
+  suffix: 2
   components:
   - type: Stack
     count: 2
+
+# Aluminum
+- type: material
+  id: RMCAluminum
+  stackEntity: RMCSheetAluminum
+  name: materials-aluminum
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  color: "#A8A8A8"
+  price: 0.2
+
+- type: stack
+  id: RMCAluminum
+  name: aluminum
+  icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
+  spawn: RMCSheetAluminum
+  maxCount: 50
+
+- type: entity
+  parent: SheetOtherBase
+  id: RMCSheetAluminum
+  name: aluminum
+  suffix: Full
+  components:
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      RMCAluminum: 100
+  - type: Stack
+    stackType: RMCAluminum
+    count: 50
+  - type: Sprite
+    state: aluminum
+    sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+  - type: Item
+    heldPrefix: aluminum
+    size: Normal
+    sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi
+  - type: Appearance
+  - type: Extractable
+    grindableSolutionName: aluminum
+  - type: SolutionContainerManager
+    solutions:
+      aluminum:
+        reagents:
+        - ReagentId: RMCAluminum
+          Quantity: 10
+  - type: Tag
+    tags:
+    - Sheet
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum15
+  suffix: "15"
+  components:
+  - type: Stack
+    count: 15
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum25
+  suffix: "25"
+  components:
+  - type: Stack
+    count: 25
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum30
+  suffix: "30"
+  components:
+  - type: Stack
+    count: 30
+
+- type: entity
+  parent: RMCSheetAluminum
+  id: RMCSheetAluminum1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1

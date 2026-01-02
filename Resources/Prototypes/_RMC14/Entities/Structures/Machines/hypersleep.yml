@@ -54,6 +54,7 @@
       components:
       - Xeno
   - type: NoStunOnExit
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMHyperSleepChamber
@@ -86,3 +87,43 @@
   components:
   - type: SquadSpawner
     squad: SquadDelta
+
+- type: entity
+  parent: CMHyperSleepChamber
+  id: RMCHyperSleepChamberPVE
+  suffix: PVE, East
+  components:
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#75bdf0"
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/hypersleep_pve.rsi
+    offset: 0.25, 0.25
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.55"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: RMCHyperSleepChamberPVE
+  id: RMCHyperSleepChamberPVEWest
+  suffix: PVE, West
+  components:
+  - type: Sprite
+    offset: -0.25, 0.25
+
+- type: entity
+  parent: RMCHyperSleepChamberPVE
+  id: RMCHyperSleepChamberPVEAltRot
+  suffix: PVE, North/South
+  components:
+  - type: Sprite
+    offset: 0, 0.25

@@ -1,0 +1,70 @@
+- type: job
+  parent: CMJobBase
+  id: CMPMCGunnerPVE
+  name: rmc-job-name-pmc-gunner
+  description: rmc-ghost-role-information-pmc-description
+  playTimeTracker: CMJobPMCGunnerPVE
+  ranks:
+    RMCRankWeYaSupportSpecialist: []
+  startingGear: RMCJobPMCGunnerPVE
+  icon: RMCJobIconPMCGunner
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  - SmartGunOperator
+  spawnMenuRoleName: WEYA PMC Support Gunner (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-gunner
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCGunnerPVE
+  name: weya pmc gunner spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: CMPMCGunnerPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
+- type: startingGear
+  id: RMCJobPMCGunnerPVE
+  equipment:
+    id: RMCIDCardPMC
+
+- type: playTimeTracker
+  id: CMJobPMCGunnerPVE

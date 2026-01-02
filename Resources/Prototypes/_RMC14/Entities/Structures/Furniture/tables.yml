@@ -36,6 +36,85 @@
   - type: XenoLeapDestroyOnPass
   - type: XenoToggleChargingDamage
     destroy: true
+  - type: XenoCrusherChargable
+    instantDestroy: true
+    passOnDestroy: true
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: CMTable
+  id: RMCTableBrown
+  suffix: Brown
+  components:
+  - type: Sprite
+    color: "#8B7B5B"
+  - type: Icon
+    color: "#8B7B5B"
+
+- type: entity
+  parent: BaseStructure
+  id: RMCLargeTable
+  name: table
+  description: A square metal surface resting on four legs. Useful to put stuff on.
+  abstract: true
+  components:
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
+    state: full
+    offset: 0.5, 0.5
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
+    state: full
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: DamageMultiplierFlags
+    flags: Breaching
+  - type: XenoLeapDestroyOnPass
+  - type: XenoToggleChargingDamage
+    destroy: true
+  - type: Animateable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Metallic
+  - type: PlaceableSurface
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,1.45,0.45"
+        density: 55
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+  - type: SpriteFade
+  - type: Climbable
+  - type: Bonkable
+    bonkDamage:
+      types:
+        Blunt: 4
+  - type: Clickable
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepHull
+  - type: Tag
+    tags:
+    - ForceFixRotations
 
 # Reinforced
 - type: entity
@@ -64,6 +143,23 @@
     sprite: _RMC14/Structures/Furniture/Tables/requisition.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/requisition.rsi
+
+- type: entity
+  parent: CMTableReinforcedRequisition
+  id: RMCTableReinforcedRequisitionBrown
+  components:
+  - type: Sprite
+    color: "#ffb84d"
+  - type: Icon
+    color: "#ffb84d"
+
+- type: entity
+  parent: RMCTableReinforcedRequisitionBrown
+  id: RMCTableReinforcedRequisitionBrownOffset
+  suffix: Offset
+  components:
+  - type: Sprite
+    offset: 0, 0.1
 
 # Reinforced Black
 - type: entity
@@ -166,6 +262,36 @@
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/prison.rsi
 
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonSoro
+  suffix: Prison, Blue
+  components:
+  - type: Sprite
+    color: "#98A3AB"
+  - type: Icon
+    color: "#98A3AB"
+
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonBeige
+  suffix: Prison, Beige
+  components:
+  - type: Sprite
+    color: "#ffe6e6"
+  - type: Icon
+    color: "#ffe6e6"
+
+- type: entity
+  parent: RMCTablePrison
+  id: RMCTablePrisonBrown
+  suffix: Prison, Brown
+  components:
+  - type: Sprite
+    color: "#8B7B5B"
+  - type: Icon
+    color: "#8B7B5B"
+
 # Hunter
 - type: entity
   parent: CMTable
@@ -178,3 +304,15 @@
     sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi
   - type: Icon
     sprite: _RMC14/Structures/Furniture/Tables/hunter.rsi
+
+# Bar
+- type: entity
+  parent: RMCLargeTable
+  id: RMCLargeTableBar
+  name: bar table
+  description: A wooden table that has seen better days. There's the stickly sensation of spilled drinks within the cracks of the wood.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Tables/bar.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Furniture/Tables/bar.rsi

@@ -94,13 +94,13 @@ public sealed class XenoRestSystem : EntitySystem
         {
             RemComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.NotResting);
-            _actions.SetToggled(args.Action, false);
+            _actions.SetToggled(args.Action.AsNullable(), false);
         }
         else
         {
             AddComp<XenoRestingComponent>(xeno);
             _appearance.SetData(xeno, XenoVisualLayers.Base, XenoRestState.Resting);
-            _actions.SetToggled(args.Action, true);
+            _actions.SetToggled(args.Action.AsNullable(), true);
         }
 
         _actionBlocker.UpdateCanMove(xeno);

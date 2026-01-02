@@ -1,0 +1,8 @@
+﻿<controls:UniformAccessoryMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.UniformAccessories"
+    xmlns:radial="clr-namespace:Content.Client.UserInterface.Controls"
+    CloseButtonStyleClass="RadialMenuCloseButton"
+    HorizontalExpand="True" VerticalExpand="True">
+    <radial:RadialContainer Name="Accessories" Access="Public"/>
+</controls:UniformAccessoryMenu>

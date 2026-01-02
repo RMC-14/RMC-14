@@ -29,7 +29,7 @@ namespace Content.Client.Options.UI
         public void UpdateTabs()
         {
             var isAdmin = _adminManager.IsAdmin(true);
-            Tabs.SetTabVisible(5, isAdmin);
+            Tabs.SetTabVisible(6, isAdmin);
 
             GraphicsTab.Control.ReloadValues();
             MiscTab.Control.ReloadValues();

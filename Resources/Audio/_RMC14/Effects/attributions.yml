@@ -77,3 +77,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/4a4d5467e0889a350de3b6dfef2d9bc91300eee2/sound/effects/gibbed.ogg"
+
+- files: ["meteorimpact.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2b0d2f79b470515c893f2a1d9364896023246efa/sound/effects/meteorimpact.ogg"

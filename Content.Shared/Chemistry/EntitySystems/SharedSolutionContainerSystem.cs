@@ -1,21 +1,22 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Text;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Content.Shared.Hands.Components;
-using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Dependency = Robust.Shared.IoC.DependencyAttribute;
@@ -162,6 +163,12 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         [NotNullWhen(true)] out Entity<SolutionComponent>? entity,
         bool errorOnMissing = false)
     {
+        // use connected container instead of entity from arguments, if it exists.
+        var ev = new GetConnectedContainerEvent();
+        RaiseLocalEvent(container, ref ev);
+        if (ev.ContainerEntity.HasValue)
+            container = ev.ContainerEntity.Value;
+
         EntityUid uid;
         if (name is null)
             uid = container;
@@ -275,8 +282,8 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
     public FixedPoint2 GetTotalPrototypeQuantity(EntityUid owner, string reagentId)
     {
         var reagentQuantity = FixedPoint2.New(0);
-        if (EntityManager.EntityExists(owner)
-            && EntityManager.TryGetComponent(owner, out SolutionContainerManagerComponent? managerComponent))
+        if (Exists(owner)
+            && TryComp(owner, out SolutionContainerManagerComponent? managerComponent))
         {
             foreach (var (_, soln) in EnumerateSolutions((owner, managerComponent)))
             {
@@ -328,7 +335,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         var (uid, comp, appearanceComponent) = soln;
         var solution = comp.Solution;
 
-        if (!EntityManager.EntityExists(uid) || !Resolve(uid, ref appearanceComponent, false))
+        if (!Exists(uid) || !Resolve(uid, ref appearanceComponent, false))
             return;
 
         AppearanceSystem.SetData(uid, SolutionContainerVisuals.FillFraction, solution.FillFraction, appearanceComponent);
@@ -435,7 +442,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         }
         else
         {
-            var proto = PrototypeManager.Index<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
+            var proto = PrototypeManager.IndexReagent<ReagentPrototype>(reagentQuantity.Reagent.Prototype);
             solution.AddReagent(proto, acceptedQuantity, temperature.Value, PrototypeManager);
         }
 
@@ -788,7 +795,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
             return;
         }
 
-        if (!PrototypeManager.TryIndex(primaryReagent.Value.Prototype, out ReagentPrototype? primary))
+        if (!PrototypeManager.TryIndexReagent(primaryReagent.Value.Prototype, out ReagentPrototype? primary))
         {
             Log.Error($"{nameof(Solution)} could not find the prototype associated with {primaryReagent}.");
             return;
@@ -940,12 +947,7 @@ public abstract partial class SharedSolutionContainerSystem : EntitySystem
         if (!entity.Comp.HeldOnly)
             return true;
 
-        if (TryComp(examiner, out HandsComponent? handsComp))
-        {
-            return Hands.IsHolding(examiner, entity, out _, handsComp);
-        }
-
-        return true;
+        return Hands.IsHolding(examiner, entity, out _);
     }
 
     private void OnMapInit(Entity<SolutionContainerManagerComponent> entity, ref MapInitEvent args)

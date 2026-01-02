@@ -5,7 +5,7 @@
   suffix: Requisitions, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessRequisitions" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorAlmayerSolid
@@ -13,7 +13,7 @@
   suffix: Requisitions, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessRequisitions" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessRequisitions" ], [ "RMCAccessCommand" ] ]
 
 # Engi
 - type: entity
@@ -22,7 +22,7 @@
   suffix: Engineer, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorEngineerSolid
@@ -30,7 +30,7 @@
   suffix: Engineer, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessEngineering" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessEngineering" ], [ "RMCAccessCommand" ] ]
 
 # Medical
 - type: entity
@@ -39,7 +39,7 @@
   suffix: Medical, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorMedicalSolid
@@ -47,7 +47,7 @@
   suffix: Medical, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessMedical" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessMedical" ], [ "RMCAccessCommand" ] ]
 
 # Chemistry
 - type: entity
@@ -56,7 +56,7 @@
   suffix: Chemistry, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessChemistry" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessChemistry" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorMedicalSolid
@@ -64,7 +64,7 @@
   suffix: Chemistry, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessChemistry" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessChemistry" ], [ "RMCAccessCommand" ] ]
 
 # Research
 - type: entity
@@ -91,7 +91,7 @@
   suffix: Pilots, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessDropship" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorGenericSolid
@@ -99,7 +99,7 @@
   suffix: Pilots, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessDropship" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessDropship" ], [ "RMCAccessCommand" ] ]
 
 # Security
 - type: entity
@@ -108,7 +108,7 @@
   suffix: Security, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessBrig" ], [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorSecuritySolid
@@ -116,4 +116,4 @@
   suffix: Security, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessBrig" ], [ "CMAccessCommand" ] ]
+    access: [ [ "CMAccessBrig" ], [ "RMCAccessCommand" ] ]

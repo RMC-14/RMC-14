@@ -1,17 +1,17 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by Cephalopod222",
+  "copyright": "Created by Cephalopod222, modified by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-      "name": "mag-1"
+      "name": "base"
     },
     {
-      "name": "base"
+      "name": "mag-1"
     },
     {
       "name": "ammo_band"

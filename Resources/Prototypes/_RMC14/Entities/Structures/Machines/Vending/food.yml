@@ -53,6 +53,16 @@
         amount: 5
 
 - type: entity
+  parent: ColMarTechFood
+  id: RMCNutriCoVendor
+  name: NutriCo AutoChef
+  description: An autochef food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need. Inedible-looking sludge is passed through a variety of heaters, re-shapers, and solidifiers before being artificially flavored to create something that looks and tastes mostly edible.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/food.rsi
+    offset: 0, 0.5
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat
@@ -73,39 +83,45 @@
     - "CMAccessColonyPublic"
     hackable: true
     scaling: false
+    randomUnstockAmount: 3 # between 1 and 3
+    randomEmptyChance: 0.25 # 25% chance
     sections:
     - name: Alcohol
       entries:
-#      - id: DrinkAleBottleFull
-#        amount: 6
-#      - id: DrinkBeerBottleFull
-#        amount: 6
-#      - id: DrinkGrenadineBottleFull
-#        amount: 5
-#      - id: DrinkTequilaBottleFull
-#        amount: 5
+      - id: CMDrinkCanAle
+        name: ale
+        amount: 6
+      - id: CMDrinkCanBeerLite
+        name: beer
+        amount: 6
+      - id: RMCDrinkAlcoholGrenadine
+        amount: 5
+      - id: RMCDrinkAlcoholTequila
+        amount: 5
       - id: RMCDrinkAlcoholRum
-        amount: 27 # TODO RMC14 5
+        amount: 5
       - id: RMCDrinkAlcoholCognac
         amount: 5
-      - id: RMCDrinkAlcoholWhiskey
+      - id: RMCDrinkAlcoholDavenport
         amount: 5
       - id: RMCDrinkAlcoholPurpleWine
         amount: 5
       - id: RMCDrinkAlcoholMelonLiquor
         amount: 2
-#      - id: DrinkVermouthBottleFull
-#        amount: 5
+      - id: RMCDrinkAlcoholVermouth
+        amount: 5
       - id: RMCDrinkAlcoholGin
-        amount: 10 # TODO RMC14 5
+        amount: 5
       - id: RMCDrinkAlcoholAbsinthe
         amount: 2
-#      - id: DrinkBlueCuracaoBottleFull
-#        amount: 2
+      - id: RMCDrinkAlcoholBlueCuracao
+        amount: 2
       - id: RMCDrinkAlcoholVodka
-        amount: 12 # TODO RMC14 5
-#      - id: DrinkCoffeeLiqueurBottleFull
-#        amount: 5
+        amount: 5
+      - id: RMCDrinkAlcoholKahlua
+        amount: 5
+      - id: RMCDrinkAlcoholWhiskey
+        amount: 5
     - name: Craft Beers
       entries: []
     - name: Non-Alcohol
@@ -137,8 +153,8 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorChess
-  name: Chess-o-mat
-  description: In 2143 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
+  name: Chess-O-Mat
+  description: In 2107 Red Star Drinks, a SPP-CA (Colony Administration) affiliated corporation ran a promotional sweepstakes for drinkers who had found special codes on the inside of the caps of a limited run of Red Star Vodka, shipping them a Chess-O-Mat with unlimited refills.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/chessomat.rsi
@@ -153,7 +169,42 @@
       - id: ChessBoard
         amount: 5
     - name: White Pieces
-      entries: []
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessWhitePawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessWhiteQueen
+        name: Queen
+        amount: 2
     - name: Black Pieces
-      entries: []
-    # TODO RMC14 vodka chess pieces
+      entries:
+      - id: RMCDrinkAlcoholVodkaChessBlackPawn
+        name: Pawn
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackBishop
+        name: Bishop
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKnight
+        name: Knight
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackRook
+        name: Rook
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackKing
+        name: King
+        amount: 2
+      - id: RMCDrinkAlcoholVodkaChessBlackQueen
+        name: Queen
+        amount: 2

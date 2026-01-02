@@ -5,12 +5,16 @@
     Title="{Loc cm-xeno-available-evolutions}"
     MinSize="300 300">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical">
-            <Label Name="PointsLabel" Access="Public" Text="Evolution points:" />
-            <RichTextLabel Name="OvipositorNeededLabel" Access="Public" />
+        <BoxContainer Orientation="Vertical" Margin="4">
+            <Label Name="PointsLabel" Access="Public" Text="Evolution points:" 
+                   StyleClasses="LabelBold" HorizontalExpand="True" HorizontalAlignment="Center" />
+            <RichTextLabel Name="OvipositorNeededLabel" Access="Public" 
+                           HorizontalExpand="True" HorizontalAlignment="Center" Margin="0 4" />
             <BoxContainer Orientation="Vertical" Name="EvolutionsContainer" Access="Public" />
-            <userInterface:BlueHorizontalSeparator Name="Separator" Access="Public" />
-            <Label Name="StrainsLabel" Access="Public" Text="Strains:" />
+            <userInterface:BlueHorizontalSeparator Name="Separator" Access="Public" 
+                           Visible="false" Margin="4 8" />
+            <Label Name="StrainsLabel" Access="Public" Text="Strains:" 
+                   StyleClasses="LabelBold" HorizontalExpand="True" HorizontalAlignment="Center" />
             <BoxContainer Orientation="Vertical" Name="StrainsContainer" Access="Public" />
         </BoxContainer>
     </ScrollContainer>

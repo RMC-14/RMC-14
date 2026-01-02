@@ -15,6 +15,9 @@
     },
     {
       "name": "closed"
+    },
+    {
+      "name": "reagent"
     }
   ]
 }

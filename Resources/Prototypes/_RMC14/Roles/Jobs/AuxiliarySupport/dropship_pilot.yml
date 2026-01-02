@@ -9,10 +9,19 @@
     group: CMJobsDropship
     time: 18000 # 5 hours
   ranks:
-    RMCRankSecondLT: []
+    RMCRankSecondLT:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotDropship
+      time: 252000 # 70 hours
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: CMJobPilotDropship
+      time: 90000 # 25 hours
+    RMCRankWarrantOfficer: []
   startingGear: CMGearPilotDropship
   icon: "CMJobIconPilotDropship"
   joinNotifyCrew: false
+  marineAuthorityLevel: 7
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - Pilot
@@ -22,6 +31,7 @@
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillIntel: 1
@@ -34,6 +44,7 @@
         RMCSkillSurgery: 1
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMPilotDropship
       points: 45
     - type: RMCPointing
     - type: JobPrefix
@@ -41,11 +52,12 @@
     - type: ViewIntelObjectives
     - type: TacticalMapIcon
       icon:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: pilot
       background:
-        sprite: _RMC14/Interface/map_blips.rsi
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearPilotDropship

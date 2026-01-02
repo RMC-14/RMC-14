@@ -7,6 +7,8 @@
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-fax-machine
   - type: Sprite
     sprite: _RMC14/Structures/Machines/fax_machine.rsi
     drawdepth: SmallObjects

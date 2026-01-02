@@ -1,4 +1,5 @@
-﻿using Robust.Shared.GameStates;
+﻿using Robust.Shared.Audio;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -22,4 +23,7 @@ public sealed partial class DropshipFabricatorComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2i PrintOffset = new(1, 0);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier RecycleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/fax.ogg");
 }

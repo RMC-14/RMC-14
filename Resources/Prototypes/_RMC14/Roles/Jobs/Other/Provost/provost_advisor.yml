@@ -25,6 +25,7 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-advisor
+    - type: RMCTrackable
   hidden: true
 
 - type: entity

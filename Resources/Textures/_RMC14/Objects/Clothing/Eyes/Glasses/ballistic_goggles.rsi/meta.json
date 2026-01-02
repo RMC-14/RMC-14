@@ -33,6 +33,14 @@
     {
       "name": "helmet-down",
       "directions": 4
+    },
+    {
+      "name": "hat",
+      "directions": 4
+    },
+    {
+      "name": "hat-down",
+      "directions": 4
     }
   ]
 }

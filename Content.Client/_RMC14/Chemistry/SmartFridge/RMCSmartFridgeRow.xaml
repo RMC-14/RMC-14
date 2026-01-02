@@ -1,0 +1,14 @@
+﻿<controls:RMCSmartFridgeRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.SmartFridge"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface">
+    <BoxContainer Orientation="Horizontal">
+        <SpriteView Name="SpriteView" Access="Public" />
+        <Label Name="AmountLabel" Access="Public" Margin="0 0 25 0" />
+        <ui:RMCResettableButton Name="NameButton" Access="Public" StyleClasses="OpenBoth"
+                                HorizontalExpand="True" />
+        <!-- <Button Name="NetworkButton" Access="Public"/> TODO RMC14 -->
+        <Button Text="?" Name="TooltipLabel" Access="Public"
+                ModulateSelfOverride="#00000000" Margin="-5 0" />
+    </BoxContainer>
+</controls:RMCSmartFridgeRow>

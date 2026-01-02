@@ -2,8 +2,11 @@
   parent: RMCBaseWeaponSniperRifle
   id: RMCXM43E1AntiMaterielRifle
   name: XM43E1 anti-materiel rifle
-  description: An experimental anti-materiel rifle produced by Aegis Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless. This weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
+  description: An experimental anti-materiel rifle produced by AEGIS Armaments, recently reacquired from the deep storage of an abandoned prototyping facility. This one in particular is currently undergoing field testing. Chambered in 10x99mm Caseless. This weapon can punch through thin metal plating and walls, though it'll lose most of its lethality in the process. It can even work for demolitions, with experienced users known to disassemble segments of solid, reinforced walls in the field with just a single standard magazine of 10x99mm. In lieu of explosives or an engineer, they instead use each of the 8 shots to break down vital structural supports, taking the wall apart in the process.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSpecSniper
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/xm43e1/xm43e1_inhands.rsi
     layers:
@@ -83,6 +86,8 @@
     aimedShotCooldown: 4.5
   - type: TargetingLaser
   - type: RMCFocusedShooting
+  - type: RMCGunChamber
+    enabled: false
 
 - type: entity
   parent: CMMagazineSniperM96S

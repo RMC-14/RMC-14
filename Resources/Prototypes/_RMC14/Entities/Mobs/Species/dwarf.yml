@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobDwarf
   name: Urist C.M McHands The Dwarf
   suffix: RMC14
@@ -21,3 +21,5 @@
     accent: dwarf
   - type: Speech
     speechSounds: Bass
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-dwarf

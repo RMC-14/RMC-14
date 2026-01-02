@@ -7,251 +7,322 @@
     <BoxContainer Orientation="Vertical" VerticalExpand="True">
         <PanelContainer>
             <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
+                <graphics:StyleBoxFlat
+                BorderColor="#3A3A3A"
+                BorderThickness="1"
+                BackgroundColor="#1A1A1A" />
             </PanelContainer.PanelOverride>
             <BoxContainer Orientation="Vertical">
                 <BoxContainer Orientation="Horizontal" Margin="5">
                     <Label Name="OverwatchLabel" Access="Public" Text="Overwatch" />
                     <Control HorizontalExpand="True" />
                     <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map"
-                            StyleClasses="OpenBoth" />
-                    <Button Name="OperatorButton" Access="Public" StyleClasses="OpenBoth" />
+                            StyleClasses="ActionButton" />
+                    <Button Name="OperatorButton" Access="Public" StyleClasses="ActionButton" />
                     <Button Name="StopOverwatchButton" Access="Public" Text="Stop Overwatch"
-                            StyleClasses="OpenBoth" />
-                </BoxContainer>
-                <BoxContainer Name="MessageSquadContainer" Access="Public" Orientation="Vertical">
-                    <ui:BlueHorizontalSeparator />
-                    <Button Name="MessageSquadButton" Access="Public" Text="Message Squad"
-                            StyleClasses="OpenBoth" />
+                            StyleClasses="ActionButton" />
                 </BoxContainer>
             </BoxContainer>
         </PanelContainer>
         <BoxContainer Orientation="Vertical" Margin="0 10">
-            <Label Text="Squad Roles" />
-            <BoxContainer Orientation="Horizontal">
-                <BoxContainer Name="RolesContainer" Access="Public" Orientation="Horizontal" />
-                <Control HorizontalExpand="True" />
-            </BoxContainer>
+            <PanelContainer>
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                    BorderColor="#3A3A3A"
+                    BorderThickness="1"
+                    BackgroundColor="#1A1A1A" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal">
+                    <BoxContainer Name="MessageSquadContainer" Access="Public" Orientation="Vertical">
+                        <Button Name="MessageSquadButton" Access="Public" Text="Message Squad"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="HideSquadInfoButton" Access="Public" Text="Hide Squad Info"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                    </BoxContainer>
+                    <BoxContainer Name="RolesContainer" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                </BoxContainer>
+            </PanelContainer>
         </BoxContainer>
-        <TabContainer Name="Tabs" Access="Public" VerticalExpand="True">
-            <BoxContainer Name="SquadMonitor" Access="Public" Orientation="Vertical"
-                          VerticalExpand="True">
-                <PanelContainer VerticalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" VerticalExpand="True">
-                        <PanelContainer>
-                            <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
-                            </PanelContainer.PanelOverride>
-                            <BoxContainer Orientation="Horizontal" Margin="5">
-                                <Label Text="Monitor" />
-                                <Control HorizontalExpand="True" />
-                                <Button Name="ShowLocationButton" Access="Public"
-                                        Text="Shown: all" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" MinWidth="165" />
-                                <Button Name="ShowDeadButton" Access="Public"
-                                        Text="Show dead" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" MinWidth="105" />
-                                <Button Name="ShowHiddenButton" Access="Public"
-                                        Text="Hide hidden" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" MinWidth="120" />
-                                <Button Name="TransferMarineButton" Access="Public"
-                                        Text="Transfer marine" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" />
-                            </BoxContainer>
-                        </PanelContainer>
-                        <BoxContainer Orientation="Vertical" Margin="5"
-                                      VerticalExpand="True">
-                            <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True" Margin="0 0 0 5"
-                                      PlaceHolder="Search..." />
-                            <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
-                                <BoxContainer Orientation="Horizontal">
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" Margin="0 10" VerticalExpand="True">
+            <PanelContainer VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                    BorderColor="#3A3A3A"
+                    BorderThickness="1"
+                    BackgroundColor="#1A1A1A" />
+                </PanelContainer.PanelOverride>
+                <BoxContainer Orientation="Horizontal" VerticalExpand="True">
+                    <BoxContainer Name="TabButtonsContainer" Access="Public" Orientation="Vertical" MinWidth="250">
+                        <Button Name="SquadMonitorButton" Access="Public" Text="Squad Monitor"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="SupplyDropButton" Access="Public" Text="Supply Drop"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="OrbitalBombardmentButton" Access="Public" Text="Orbital Bombardment"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                    </BoxContainer>
+                    <BoxContainer Name="TabContentContainer" Access="Public" Orientation="Vertical" HorizontalExpand="True">
+                        <BoxContainer Name="SquadMonitor" Access="Public" Orientation="Vertical"
+                                      VerticalExpand="True" Visible="True">
+                            <PanelContainer VerticalExpand="True">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat
+                                    BorderColor="#3A3A3A"
+                                    BorderThickness="1"
+                                    BackgroundColor="#1A1A1A" />
+                                </PanelContainer.PanelOverride>
+                                <BoxContainer Orientation="Vertical" VerticalExpand="True">
+                                    <PanelContainer>
+                                        <PanelContainer.PanelOverride>
+                                            <graphics:StyleBoxFlat
+                                            BorderColor="#3A3A3A"
+                                            BorderThickness="0 0 0 1"
+                                            BackgroundColor="#1A1A1A" />
+                                        </PanelContainer.PanelOverride>
+                                        <BoxContainer Orientation="Horizontal" Margin="5">
+                                            <Label Text="Monitor" />
+                                            <Control HorizontalExpand="True" />
+                                            <Button Name="ShowLocationButton" Access="Public"
+                                                    Text="Shown: all" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" MinWidth="165" />
+                                            <Button Name="ShowDeadButton" Access="Public"
+                                                    Text="Show dead" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" MinWidth="105" />
+                                            <Button Name="ShowHiddenButton" Access="Public"
+                                                    Text="Hide hidden" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" MinWidth="120" />
+                                            <Button Name="TransferMarineButton" Access="Public"
+                                                    Text="Transfer marine" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" />
+                                        </BoxContainer>
+                                    </PanelContainer>
+                                    <BoxContainer Orientation="Vertical" Margin="5"
+                                                  VerticalExpand="True">
+                                        <LineEdit Name="SearchBar" Access="Public" HorizontalExpand="True" Margin="0 0 0 5"
+                                                  PlaceHolder="Search..." />
+                                        <ScrollContainer HorizontalExpand="True" VerticalExpand="True">
                                             <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text="Name" HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
+                                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text="Name" HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="Names" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text="Role" HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="Roles" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text="State" HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="States" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text="Location" HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="Locations" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.5">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text="SL Dist." HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="Distances" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical" MinWidth="30">
+                                                    <PanelContainer>
+                                                        <PanelContainer.PanelOverride>
+                                                            <graphics:StyleBoxFlat
+                                                            BorderColor="#3A3A3A"
+                                                            BorderThickness="1"
+                                                            BackgroundColor="#1A1A1A" />
+                                                        </PanelContainer.PanelOverride>
+                                                        <BoxContainer Orientation="Horizontal">
+                                                            <Control HorizontalExpand="True" />
+                                                            <Label Text=" " HorizontalAlignment="Center" />
+                                                            <Control HorizontalExpand="True" />
+                                                        </BoxContainer>
+                                                    </PanelContainer>
+                                                    <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />
+                                                </BoxContainer>
                                             </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="Names" Access="Public" Orientation="Vertical" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
-                                            <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text="Role" HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
-                                            </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="Roles" Access="Public" Orientation="Vertical" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
-                                            <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text="State" HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
-                                            </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="States" Access="Public" Orientation="Vertical" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
-                                            <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text="Location" HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
-                                            </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="Locations" Access="Public" Orientation="Vertical" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.5">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
-                                            <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text="SL Dist." HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
-                                            </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="Distances" Access="Public" Orientation="Vertical" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical" MinWidth="30">
-                                        <PanelContainer>
-                                            <PanelContainer.PanelOverride>
-                                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                                            </PanelContainer.PanelOverride>
-                                            <BoxContainer Orientation="Horizontal">
-                                                <Control HorizontalExpand="True" />
-                                                <Label Text=" " HorizontalAlignment="Center" />
-                                                <Control HorizontalExpand="True" />
-                                            </BoxContainer>
-                                        </PanelContainer>
-                                        <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />
+                                        </ScrollContainer>
                                     </BoxContainer>
                                 </BoxContainer>
-                            </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                        <BoxContainer Name="SupplyDrop" Access="Public" Orientation="Vertical"
+                                      VerticalExpand="True" Visible="False">
+                            <PanelContainer VerticalExpand="True">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat
+                                    BorderColor="#3A3A3A"
+                                    BorderThickness="1"
+                                    BackgroundColor="#1A1A1A" />
+                                </PanelContainer.PanelOverride>
+                                <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
+                                    <PanelContainer>
+                                        <PanelContainer.PanelOverride>
+                                            <graphics:StyleBoxFlat
+                                            BorderColor="#3A3A3A"
+                                            BorderThickness="0 0 0 1"
+                                            BackgroundColor="#1A1A1A" />
+                                        </PanelContainer.PanelOverride>
+                                        <Label Text="Supply Drop" />
+                                    </PanelContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="5"
+                                                  VerticalExpand="True">
+                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                            <BoxContainer Orientation="Horizontal">
+                                                <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
+                                                    <Label Text="LONGITUDE" />
+                                                </BoxContainer>
+                                                <BoxContainer Name="LatitudeContainer" Access="Public" Orientation="Vertical">
+                                                    <Label Text="LATITUDE" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical">
+                                                    <RichTextLabel Name="CrateStatus" Access="Public"
+                                                                   Text="[color=red][bold][ NO CRATE LOADED ][/bold][/color]" />
+                                                    <Label Text="STATUS" HorizontalAlignment="Center" />
+                                                </BoxContainer>
+                                            </BoxContainer>
+                                            <Button Name="LaunchButton" Access="Public" Text="Launch"
+                                                    HorizontalExpand="True" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                                            <Button Name="SaveButton" Access="Public" Text="Save"
+                                                    HorizontalExpand="True" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                                        </BoxContainer>
+                                        <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
+                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
+                                            <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                            <BoxContainer Orientation="Horizontal">
+                                                <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="Comments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                                                <BoxContainer Name="Saves" Access="Public" Orientation="Vertical" />
+                                            </BoxContainer>
+                                        </BoxContainer>
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </PanelContainer>
+                        </BoxContainer>
+                        <BoxContainer Name="OrbitalBombardment" Access="Public" Orientation="Vertical"
+                                      VerticalExpand="True" Visible="False">
+                            <PanelContainer VerticalExpand="True">
+                                <PanelContainer.PanelOverride>
+                                    <graphics:StyleBoxFlat
+                                    BorderColor="#3A3A3A"
+                                    BorderThickness="1"
+                                    BackgroundColor="#1A1A1A" />
+                                </PanelContainer.PanelOverride>
+                                <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
+                                    <PanelContainer>
+                                        <PanelContainer.PanelOverride>
+                                            <graphics:StyleBoxFlat
+                                            BorderColor="#3A3A3A"
+                                            BorderThickness="0 0 0 1"
+                                            BackgroundColor="#1A1A1A" />
+                                        </PanelContainer.PanelOverride>
+                                        <Label Text="Orbital Bombardment" />
+                                    </PanelContainer>
+                                    <BoxContainer Orientation="Horizontal" Margin="5"
+                                                  VerticalExpand="True">
+                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                            <BoxContainer Orientation="Horizontal">
+                                                <BoxContainer Name="OrbitalLongitudeContainer" Access="Public" Orientation="Vertical">
+                                                    <Label Text="LONGITUDE" />
+                                                </BoxContainer>
+                                                <BoxContainer Name="OrbitalLatitudeContainer" Access="Public" Orientation="Vertical">
+                                                    <Label Text="LATITUDE" />
+                                                </BoxContainer>
+                                                <BoxContainer Orientation="Vertical">
+                                                    <RichTextLabel Name="OrbitalStatus" Access="Public"
+                                                                   Text="[color=red][bold]No warhead loaded[/bold][/color]" />
+                                                    <Label Text="STATUS" HorizontalAlignment="Center" />
+                                                </BoxContainer>
+                                            </BoxContainer>
+                                            <Button Name="OrbitalFireButton" Access="Public" Text="Fire"
+                                                    HorizontalExpand="True" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#BB1F1D" TextAlign="Center" />
+                                            <Button Name="OrbitalSaveButton" Access="Public" Text="Save"
+                                                    HorizontalExpand="True" StyleClasses="ActionButton"
+                                                    ModulateSelfOverride="#D3B400" TextAlign="Center" />
+                                        </BoxContainer>
+                                        <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
+                                        <BoxContainer Orientation="Vertical" HorizontalExpand="True">
+                                            <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
+                                            <BoxContainer Orientation="Horizontal">
+                                                <BoxContainer Name="OrbitalLongitudes" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="OrbitalLatitudes" Access="Public" Orientation="Vertical" />
+                                                <BoxContainer Name="OrbitalComments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
+                                                <BoxContainer Name="OrbitalSaves" Access="Public" Orientation="Vertical" />
+                                            </BoxContainer>
+                                        </BoxContainer>
+                                    </BoxContainer>
+                                </BoxContainer>
+                            </PanelContainer>
                         </BoxContainer>
                     </BoxContainer>
-                </PanelContainer>
-            </BoxContainer>
-            <BoxContainer Name="SupplyDrop" Access="Public" Orientation="Vertical"
-                          VerticalExpand="True">
-                <PanelContainer VerticalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
-                        <PanelContainer>
-                            <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
-                            </PanelContainer.PanelOverride>
-                            <Label Text="Supply Drop" />
-                        </PanelContainer>
-                        <BoxContainer Orientation="Horizontal" Margin="5"
-                                      VerticalExpand="True">
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                <BoxContainer Orientation="Horizontal">
-                                    <BoxContainer Name="LongitudeContainer" Access="Public" Orientation="Vertical">
-                                        <Label Text="LONGITUDE" />
-                                    </BoxContainer>
-                                    <BoxContainer Name="LatitudeContainer" Access="Public" Orientation="Vertical">
-                                        <Label Text="LATITUDE" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical">
-                                        <RichTextLabel Name="CrateStatus" Access="Public"
-                                                       Text="[color=red][bold]No crate loaded[/bold][/color]" />
-                                        <Label Text="STATUS" HorizontalAlignment="Center" />
-                                    </BoxContainer>
-                                </BoxContainer>
-                                <Button Name="LaunchButton" Access="Public" Text="Launch"
-                                        HorizontalExpand="True" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
-                                <Button Name="SaveButton" Access="Public" Text="Save"
-                                        HorizontalExpand="True" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
-                            </BoxContainer>
-                            <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True" Visible="False">
-                                <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
-                                <BoxContainer Orientation="Horizontal">
-                                    <BoxContainer Name="Longitudes" Access="Public" Orientation="Vertical" />
-                                    <BoxContainer Name="Latitudes" Access="Public" Orientation="Vertical" />
-                                    <BoxContainer Name="Comments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
-                                    <BoxContainer Name="Saves" Access="Public" Orientation="Vertical" />
-                                </BoxContainer>
-                            </BoxContainer>
-                        </BoxContainer>
-                    </BoxContainer>
-                </PanelContainer>
-            </BoxContainer>
-            <BoxContainer Name="OrbitalBombardment" Access="Public" Orientation="Vertical"
-                          VerticalExpand="True">
-                <PanelContainer VerticalExpand="True">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="1" />
-                    </PanelContainer.PanelOverride>
-                    <BoxContainer Orientation="Vertical" VerticalExpand="True" Margin="5">
-                        <PanelContainer>
-                            <PanelContainer.PanelOverride>
-                                <graphics:StyleBoxFlat BorderColor="#88C7FA" BorderThickness="0 0 0 1" />
-                            </PanelContainer.PanelOverride>
-                            <Label Text="Orbital Bombardment" />
-                        </PanelContainer>
-                        <BoxContainer Orientation="Horizontal" Margin="5"
-                                      VerticalExpand="True">
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                <BoxContainer Orientation="Horizontal">
-                                    <BoxContainer Name="OrbitalLongitudeContainer" Access="Public" Orientation="Vertical">
-                                        <Label Text="LONGITUDE" />
-                                    </BoxContainer>
-                                    <BoxContainer Name="OrbitalLatitudeContainer" Access="Public" Orientation="Vertical">
-                                        <Label Text="LATITUDE" />
-                                    </BoxContainer>
-                                    <BoxContainer Orientation="Vertical">
-                                        <RichTextLabel Name="OrbitalStatus" Access="Public"
-                                                       Text="[color=red][bold]No warhead loaded[/bold][/color]" />
-                                        <Label Text="STATUS" HorizontalAlignment="Center" />
-                                    </BoxContainer>
-                                </BoxContainer>
-                                <Button Name="OrbitalFireButton" Access="Public" Text="Fire"
-                                        HorizontalExpand="True" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#BB1F1D" TextAlign="Center" />
-                                <Button Name="OrbitalSaveButton" Access="Public" Text="Save"
-                                        HorizontalExpand="True" StyleClasses="OpenBoth"
-                                        ModulateSelfOverride="#D3B400" TextAlign="Center" />
-                            </BoxContainer>
-                            <ui:BlueHorizontalSeparator SetWidth="2" Margin="5 0" />
-                            <BoxContainer Orientation="Vertical" HorizontalExpand="True">
-                                <Label Text="Max 3 stored coordinates. Will overwrite oldest first." />
-                                <BoxContainer Orientation="Horizontal">
-                                    <BoxContainer Name="OrbitalLongitudes" Access="Public" Orientation="Vertical" />
-                                    <BoxContainer Name="OrbitalLatitudes" Access="Public" Orientation="Vertical" />
-                                    <BoxContainer Name="OrbitalComments" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
-                                    <BoxContainer Name="OrbitalSaves" Access="Public" Orientation="Vertical" />
-                                </BoxContainer>
-                            </BoxContainer>
-                        </BoxContainer>
-                    </BoxContainer>
-                </PanelContainer>
-            </BoxContainer>
-        </TabContainer>
+                </BoxContainer>
+            </PanelContainer>
+        </BoxContainer>
     </BoxContainer>
 </controls:OverwatchSquadView>

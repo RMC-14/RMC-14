@@ -18,6 +18,7 @@
       entries:
       # /obj/item/coin/marine/synth
       # /obj/item/device/defibrillator/synthetic
+      - id: RMCSynthResetKey
       - id: RMCHeadsetSynth
     - name: Uniform
       choices: { CMUniform: 1 }
@@ -33,9 +34,14 @@
       - id: CMWebbingBrown
         recommended: true
       - id: CMWebbingBlack
-      - id: CMWebbingPouch
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: RMCWebbingDropPouch
+      - id: RMCWebbingDropPouchBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
       - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
     - name: Shoes
       choices: { RMCShoes: 1 }
       entries:
@@ -47,22 +53,24 @@
       entries:
       - id: RMCHardhatOrange
         name: orange hard hat
-      - id: ClothingHeadHatWelding
-      # /obj/item/clothing/head/cmcap/flap
-#    - name: Suit
-#      choices: { CMSuit: 1 }
-#      entries:
-    # - id: CMUtilityVestSynth
-       # recommended: true
-    # /obj/item/clothing/suit/storage/marine/light/synvest/grey
-    # /obj/item/clothing/suit/storage/marine/light/synvest/dgrey
-    # /obj/item/clothing/suit/storage/marine/light/synvest/jungle
-    # /obj/item/clothing/suit/storage/marine/light/synvest/snow
-    # /obj/item/clothing/suit/storage/marine/light/synvest/desert
+      - id: RMCHelmetWelding
+      - id: CMHeadFlapCap
+    - name: Suit # Parity Vendor Fill has one for the map's camo, then still lets the synth choose from any of the options. Hence why this has so many options.
+      choices: { CMSuit: 1 }
+      entries:
+      - id: CMArmorM3VLSynth
+        recommended: true
+      - id: CMArmorM3VLSynthJungle
+      - id: CMArmorM3VLSynthDesert
+      - id: CMArmorM3VLSynthSnow
+      - id: CMArmorM3VLSynthClassic
+      - id: CMArmorM3VLSynthUrban
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
       - id: CMHandsInsulated
+        recommended: true
+      - id: CMHandsBlackInsulated
         recommended: true
       - id: CMHandsBlackMarine
       - id: CMHandsLatex
@@ -143,6 +151,16 @@
       - id: CMMaskSterile
 
 - type: entity
+  parent: ColMarTechCrewSynthetic
+  id: ColMarTechCrewSyntheticColony
+  name: ColMarTech Synthetic Equipment Rack
+  suffix: Colony Synth Access
+  components:
+  - type: CMAutomatedVendor
+    jobs:
+    - RMCJobSyntheticColony
+
+- type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
   name: ColMarTech Synthetic Auxiliary Gear Rack
@@ -166,7 +184,7 @@
         points: 2
       - id: RMCPowerCellHigh
         points: 3
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         points: 2
       - id: CMSheetMetal10
         name: metal x10
@@ -198,21 +216,20 @@
         points: 6
       - id: CMFirstAidO2KitFilled
         points: 6
-      # /obj/item/storage/firstaid/rad - 6 Points
+      - id: RMCRadiationAidKit
+        points: 6
     - name: Medical Supplies
       entries:
       - id: CMBurnKit1
         points: 2
       - id: CMTraumaKit1
         points: 2
-      - id: RMCMedevacStretcher
+      - id: RMCMedevacStretcherFolded
         points: 6
       # /obj/item/stack/medical/splint - 1 Point
       - id: CMRollerBed
         points: 4
       - id: CMStasisBag
-        points: 6
-      - id: CMMiniTank
         points: 6
       - id: CMMiniTank
         points: 6
@@ -271,7 +288,7 @@
       - id: RMCFlashlight
         points: 1
         recommended: true
-      - id: RMCFulton
+      - id: RMCFulton20
         points: 5
       - id: RMCMotionDetector
         points: 5
@@ -282,10 +299,11 @@
       - id: RMCScabbardMacheteFilled
         name: machete scabbard (Full)
         points: 2
-      - id: ClothingNeckStethoscope
+      - id: RMCStethoscope
         points: 2
       - id: RMCFlashlightPen
         points: 2
+
 
 - type: entity
   parent: ColMarTechBase
@@ -302,22 +320,30 @@
   - type: CMAutomatedVendor
     jobs:
     - RMCJobSynthetic
+    pointsType: ExperimentalTools
     sections:
     - name: Experimental Tools
       entries:
       # autocompressor - 15 Points
-      # breaching hammer - 15 Points
+      - id: RMCSynthBreachingHammer
+        points: 15
       - id: RMCDefibrillatorCompact
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
         points: 15
       # backpack firefighting watertank - 15 Points
       # crew monitor - 15 Points
-      - id: RMCGlassesExperimentalMeson
-        points: 15
       # maintenance jack - 15 Points
       # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
+        points: 15
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      - id: CMWebbingSurgicalGreen
+        points: 15
+      - id: CMSatchelMarineLogistics
+        points: 15
+      - id: RMCSatchelMarineIntelChestrig
         points: 15
 
 - type: entity

@@ -1,4 +1,4 @@
-﻿using Content.Client._RMC14.Sprite;
+using Content.Client._RMC14.Sprite;
 using Content.Client._RMC14.Xenonids;
 using Content.Shared._RMC14.Buckle;
 using Content.Shared._RMC14.Sprite;
@@ -36,20 +36,23 @@ public sealed class RMCBuckleVisualsSystem : EntitySystem
     private int? GetDrawDepth(Entity<BuckleComponent> buckle, Entity<StrapComponent> strap)
     {
         var buckleDepth = (int?) CompOrNull<RMCBuckleDrawDepthComponent>(buckle)?.BuckleDepth;
-        if (HasComp<RMCStrapNoDrawDepthChangeComponent>(strap) &&
-            buckleDepth == null)
-        {
-            return null;
-        }
 
         if (!TryComp(strap, out SpriteComponent? strapSprite))
             return null;
+
+        if (HasComp<RMCStrapNoDrawDepthChangeComponent>(strap) &&
+            buckleDepth == null)
+        {
+            buckleDepth = strapSprite.DrawDepth + 1;
+        }
 
         if (buckleDepth == null)
         {
             var isNorth = Transform(strap).LocalRotation.GetCardinalDir() == Direction.North;
             if (isNorth)
                 buckleDepth = strapSprite.DrawDepth - 1;
+            else
+                buckleDepth = strapSprite.DrawDepth + 1;
         }
 
         return buckleDepth;

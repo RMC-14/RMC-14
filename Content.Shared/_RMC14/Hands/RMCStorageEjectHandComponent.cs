@@ -16,6 +16,12 @@ public sealed partial class RMCStorageEjectHandComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
+
+    [DataField, AutoNetworkedField]
+    public bool EjectWhenEmpty;
+
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? NestedWhitelist;
 }
 
 [Serializable, NetSerializable]

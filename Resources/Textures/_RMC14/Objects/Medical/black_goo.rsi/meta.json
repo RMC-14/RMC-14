@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/71d46ee8057d19b12e1495419cb299d2fedef6cc/icons/obj/items/black_goo_stuff.dmi, fill sprites by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon-0"
+    },
+    {
+      "name": "icon-1"
+    },
+    {
+      "name": "icon-2"
+    },
+    {
+      "name": "icon-3"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Evasion;
 using Content.Shared._RMC14.Random;
-using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mobs.Systems;
@@ -27,6 +27,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()
     {
@@ -56,7 +57,6 @@ public sealed class RMCProjectileSystem : EntitySystem
     {
         if (!_whitelist.IsWhitelistPassOrNull(ent.Comp.Whitelist, args.Target))
             return;
-
         if (ent.Comp.Add is { } add)
             EntityManager.AddComponents(args.Target, add);
     }
@@ -80,7 +80,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
         var distance = (_transform.GetMoverCoordinates(args.Target).Position - projectile.Comp.ShotFrom.Value.Position).Length();
         var minDamage = args.Damage.GetTotal() * projectile.Comp.MinRemainingDamageMult;
-
         foreach (var threshold in projectile.Comp.Thresholds)
         {
             var pastEffectiveRange = distance - threshold.Range;
@@ -89,7 +88,6 @@ public sealed class RMCProjectileSystem : EntitySystem
                 continue;
 
             var totalDamage = args.Damage.GetTotal();
-
             if (totalDamage <= minDamage)
                 break;
 
@@ -97,12 +95,19 @@ public sealed class RMCProjectileSystem : EntitySystem
             var minMult = FixedPoint2.Min(minDamage / totalDamage, 1);
 
             args.Damage *= FixedPoint2.Clamp((totalDamage - pastEffectiveRange * threshold.Falloff * extraMult) / totalDamage, minMult, 1);
-
         }
     }
 
-    public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult)
+    public void SetProjectileFalloffWeaponMult(Entity<RMCProjectileDamageFalloffComponent> projectile, FixedPoint2 mult, float range)
     {
+        var count = 0;
+        while (projectile.Comp.Thresholds.Count > count)
+        {
+            var threshold = projectile.Comp.Thresholds[count];
+            projectile.Comp.Thresholds[count] = threshold with { Range = threshold.Range + range };
+            count++;
+        }
+
         projectile.Comp.WeaponMult = mult;
         Dirty(projectile);
     }
@@ -202,9 +207,15 @@ public sealed class RMCProjectileSystem : EntitySystem
             delta.Length() > 0)
         {
             coordinates = coordinates.Offset(delta.Normalized() / -2);
+
+            if (HasComp<RMCFireProjectileComponent>(ent))
+            {
+                coordinates = coordinates.Offset(delta.Normalized()); // Apparently that works...
+            }
         }
 
-        SpawnAtPosition(ent.Comp.Spawn, coordinates);
+        var spawn = SpawnAtPosition(ent.Comp.Spawn, coordinates);
+        _hive.SetSameHive(ent.Owner, spawn);
 
         if (ent.Comp.Popup is { } popup)
             _popup.PopupCoordinates(Loc.GetString(popup), coordinates, ent.Comp.PopupType ?? PopupType.Small);
@@ -229,7 +240,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     {
         if (ent.Comp.Delete)
         {
-            if (_net.IsServer)
+            if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
         }
         else
@@ -241,9 +252,6 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        if (_net.IsClient)
-            return;
-
         var maxQuery = EntityQueryEnumerator<ProjectileMaxRangeComponent>();
         while (maxQuery.MoveNext(out var uid, out var comp))
         {

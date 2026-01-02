@@ -89,10 +89,10 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             return;
         }
 
-        if (!_hands.TryGetEmptyHand(eggRetriever, out var _))
+        if (!_hands.TryGetEmptyHand(eggRetriever.Owner, out _))
             return;
 
-        if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
+        if (RemoveEgg(eggRetriever) is not { } newEgg)
             return;
 
         _hive.SetSameHive(eggRetriever.Owner, newEgg);
@@ -100,7 +100,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         _hands.TryPickupAnyHand(eggRetriever, newEgg);
 
         var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", eggRetriever.Comp.CurEggs), ("max_eggs", eggRetriever.Comp.MaxEggs));
-        _popup.PopupEntity(unstashMsg, eggRetriever, eggRetriever);;
+        _popup.PopupEntity(unstashMsg, eggRetriever, eggRetriever);
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)

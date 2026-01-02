@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared._RMC14.Explosion.Implosion;
 using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -37,7 +38,7 @@ public sealed partial class DropshipAmmoComponent : Component
     public int ArmorPiercing = 10;
 
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId<DropshipWeaponComponent> Weapon = new("");
+    public EntProtoId<DropshipWeaponComponent> Weapon = new(string.Empty);
 
     [DataField, AutoNetworkedField]
     public TimeSpan TravelTime = TimeSpan.FromSeconds(10);
@@ -58,13 +59,19 @@ public sealed partial class DropshipAmmoComponent : Component
     public SoundSpecifier? SoundImpact;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId? ImpactEffect;
+    public SoundSpecifier? SoundWarning;
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> ImpactEffects = new();
 
     [DataField, AutoNetworkedField]
     public string? AmmoType;
 
     [DataField, AutoNetworkedField]
     public RMCExplosion? Explosion;
+
+    [DataField, AutoNetworkedField]
+    public RMCImplosion? Implosion;
 
     [DataField, AutoNetworkedField]
     public RMCFire? Fire;
@@ -74,6 +81,9 @@ public sealed partial class DropshipAmmoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool DeleteOnEmpty;
+
+    [DataField, AutoNetworkedField]
+    public bool MarkerWarning;
 }
 
 [Serializable, NetSerializable]

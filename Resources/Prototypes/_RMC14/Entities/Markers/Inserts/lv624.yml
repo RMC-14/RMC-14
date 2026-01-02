@@ -15,6 +15,20 @@
       probability: 0.10
     clearEntities: true
     clearDecals: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertLV624CorporateDome
+  name: Corporate Dome
+  suffix: Insert LV624
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/LV624/corporate_dome.yml"
+      probability: 1
+      nightmareScenario: asset_protection
+    clearEntities: true
+    clearDecals: true
     
 - type: entity
   parent: RMCMapInsertBase
