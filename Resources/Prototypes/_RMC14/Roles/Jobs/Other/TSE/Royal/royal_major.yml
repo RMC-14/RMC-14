@@ -41,9 +41,21 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
+    - type: InnateCommandSpeech
     - type: ViewIntelObjectives
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_major
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: startingGear
@@ -59,8 +71,8 @@
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
     belt: RMCMatebaBeltLuxuriousFilled
-    back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    back: RMCSatchelLightpackFilledRoyalMajor
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
@@ -71,4 +83,5 @@
   id: RMCJobIconRoyalMajor
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_commander
+    state: rmc_major
+

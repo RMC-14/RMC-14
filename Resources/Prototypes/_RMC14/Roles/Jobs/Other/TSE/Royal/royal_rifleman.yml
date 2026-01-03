@@ -33,6 +33,13 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-commando
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_rifleman
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -58,7 +65,12 @@
     job: CMRoyalMarinesCommando
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalCommando
@@ -69,7 +81,7 @@
     outerClothing: RMCArmorRoyalLightFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
-    suitstorage: WeaponRifleL83A3
+    suitstorage: RMCWeaponRifleL83A3
     id: RMCIDRoyalMarinesCommando
     belt: RMCL83A3BeltFilled
     back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack

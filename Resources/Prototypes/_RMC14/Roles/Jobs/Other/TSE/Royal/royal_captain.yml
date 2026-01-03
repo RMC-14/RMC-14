@@ -1,0 +1,85 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesCaptain
+  name: rmc-job-name-rcm-captain
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalCaptain
+  ranks:
+    RMCRankTSECaptain: [ ] 
+  startingGear: RMCGearRoyalCaptain
+  icon: "RMCJobIconRoyalCaptain"
+  joinNotifyCrew: false
+  spawnMenuRoleName: RCM Captain
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 2 
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 3
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 3
+        RMCSkillPilot: 1
+        RMCSkillIntel: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: ViewIntelObjectives
+    - type: InnateCommandSpeech
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-captain
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_commander
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: startingGear 
+  id: RMCGearRoyalCaptain
+  equipment:
+    head: RMCHeadRoyalBeretLead
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: RMCHeadsetRoyalMarineOfficer
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
+    outerClothing: RMCArmorRoyalPaddedFilledCO
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarines
+    belt: RMCBeltHolsterPistolFilledL54
+    back: RMCSatchelLightpackFilledRoyalMedic
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalCaptain
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalCaptain
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_captain

@@ -34,6 +34,13 @@
         RMCSkillPowerLoader: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-breacher
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_breacher
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -64,13 +71,14 @@
       role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalBreacher
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
-    jumpsuit: RMCJumpsuitMarineRoyal
+    jumpsuit: RMCJumpsuitMarineRoyalDropPouch
     outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
@@ -78,7 +86,7 @@
     id: RMCIDRoyalMarinesBreacher
     belt: RMCBeltUtiliyGeneralFilledRoyal
     # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket1: RMCPouchToolsSocFilledTactical
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker
