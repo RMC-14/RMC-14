@@ -3063,7 +3063,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 16.5,21.5
       parent: 1
-- proto: RMCArmorIASFVest
+- proto: RMCArmorEIAFVest
   entities:
   - uid: 678
     components:
@@ -3374,7 +3374,7 @@ entities:
     - type: Transform
       pos: 10.5,12.5
       parent: 1
-- proto: RMCBeltHolsterPistolIASFL54
+- proto: RMCBeltHolsterPistolEIAFL54
   entities:
   - uid: 702
     components:
@@ -4913,14 +4913,14 @@ entities:
     - type: Transform
       pos: 17.400862,9.680672
       parent: 1
-- proto: RMCHeadCapPeakedIASF
+- proto: RMCHeadCapPeakedEIAF
   entities:
   - uid: 802
     components:
     - type: Transform
       pos: 19.60573,26.798523
       parent: 1
-- proto: RMCHeadIASFBeret
+- proto: RMCHeadEIAFBeret
   entities:
   - uid: 685
     components:
@@ -4988,7 +4988,7 @@ entities:
     - type: Transform
       pos: 7.5,14.5
       parent: 1
-- proto: RMCJacketIASFCombatJacket
+- proto: RMCJacketEIAFCombatJacket
   entities:
   - uid: 668
     components:
@@ -4997,7 +4997,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCJumpsuitMarineIASFNo8
+- proto: RMCJumpsuitMarineEIAFNo8
   entities:
   - uid: 654
     components:

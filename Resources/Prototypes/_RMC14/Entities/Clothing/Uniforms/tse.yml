@@ -68,15 +68,15 @@
     - RMCPatchTSEMarines
     - RMCPatchTSE
 
-# IASF
+# EIAF
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
-  id: RMCJumpsuitMarineIASFNo8
-  name: IASF No.8 combat uniform
+  id: RMCJumpsuitMarineEIAFNo8
+  name: EIAF No.8 combat uniform
   description: Standard issue No.8 Pattern BDU used by the Imperial Armed Space Force. Identical in cut and protection to the Royal Crown Marine variant, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/iasf.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines

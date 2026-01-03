@@ -140,15 +140,15 @@
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24
 
-#IASF
+#EIAF
 - type: entity
   parent: RMCArmorRoyal
-  id: RMCArmorIASFVest
+  id: RMCArmorEIAFVest
   name: goshawk airborne vest
   description: A lightweight, high-mobility flak vest designed for the Imperial Armed Space Force’s airborne troops. Developed by Alphatech, the Goshawk offers crucial protection while ensuring paratroopers retain full freedom of movement during high-risk insertions. Advanced composite plating and reinforced webbing make it effective against shrapnel and small-arms fire, striking the perfect balance between defense and agility for those who strike fast and strike hard.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/iasf_vest.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/eiaf_vest.rsi
   - type: CMArmor
     melee: 15
     bullet: 20 # CLOTHING_ARMOR_MEDIUMHIGH

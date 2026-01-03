@@ -40,25 +40,25 @@
 
 - type: entity
   parent: RMCHeadRoyalBeret
-  id: RMCHeadIASFBeret
-  name: IASF beret
+  id: RMCHeadEIAFBeret
+  name: EIAF beret
   description: A distinctive crimson beret worn by the Imperial Armed Space Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
 
 - type: entity
   parent: RMCHeadCapTSEPA
-  id: RMCHeadCapPeakedIASF
-  name: IASF officer's service cap
-  description: A distinguished service cap worn by officers of the Imperial Armed Space Force. Featuring a crimson band, gold IASF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
+  id: RMCHeadCapPeakedEIAF
+  name: EIAF officer's service cap
+  description: A distinguished service cap worn by officers of the Imperial Armed Space Force. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_peaked.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_peaked.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
 
 # Royal marine helmets
 - type: entity
