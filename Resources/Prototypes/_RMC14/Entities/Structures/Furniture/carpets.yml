@@ -500,6 +500,7 @@
     anchored: false
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/Carpets/rug.rsi
+    drawdepth: FloorTiles
     state: colorable_rug
   - type: Clickable
   - type: Physics
@@ -515,8 +516,6 @@
         behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
-
-
 
 - type: entity
   parent: RMCBaseColourableRug

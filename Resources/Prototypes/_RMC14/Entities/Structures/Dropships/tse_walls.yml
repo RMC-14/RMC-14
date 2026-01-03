@@ -578,6 +578,8 @@
       state: 63
     - type: Icon
       state: 63
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
@@ -677,6 +679,8 @@
       state: 74
     - type: Icon
       state: 74
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
@@ -695,6 +699,8 @@
       state: 76
     - type: Icon
       state: 76
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
@@ -704,6 +710,8 @@
       state: 77
     - type: Icon
       state: 77
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
@@ -722,6 +730,8 @@
       state: 79
     - type: Icon
       state: 79
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall
@@ -731,6 +741,8 @@
       state: 80
     - type: Icon
       state: 80
+    - type: Occluder
+      enabled: false
 
 - type: entity
   parent: RMCBaseTSEDropshipWall

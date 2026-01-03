@@ -49,6 +49,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_beret.rsi
 
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapPeakedIASF
+  name: IASF officer's service cap
+  description: A distinguished service cap worn by officers of the Imperial Armed Space Force. Featuring a crimson band, gold IASF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/iasf_peaked.rsi
+
 # Royal marine helmets
 - type: entity
   parent: ArmorHelmetPMC

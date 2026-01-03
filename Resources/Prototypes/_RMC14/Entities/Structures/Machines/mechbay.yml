@@ -48,20 +48,3 @@
         layer:
         - MachineLayer
         density: 200
-
-- type: entity
-  parent: BaseStructure
-  abstract: false
-  id: RMCMechRechargePort
-  name: mech recharge station
-  components:
-  - type: Sprite
-    drawdepth: FloorTiles
-    sprite: _RMC14/Structures/Machines/mechbay.rsi
-    state: mech_port
-  - type: Icon
-    state: mech_port
-  - type: Physics
-    canCollide: false
-  - type: Fixtures
-  - type: Appearance
