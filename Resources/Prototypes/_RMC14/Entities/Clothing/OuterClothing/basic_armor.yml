@@ -39,8 +39,6 @@
     melee: 30
     bullet: 10
     explosionArmor: 10
-  - type: RMCNameItemOnVend
-    item: Armor
 
 - type: entity
   parent: CMArmorRiot
