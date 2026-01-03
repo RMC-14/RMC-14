@@ -4805,7 +4805,7 @@ entities:
     - type: Transform
       pos: 18.574793,13.308371
       parent: 1
-- proto: RMCWeaponSMGFP9000PMC
+- proto: RMCWeaponSMGFP9000
   entities:
   - uid: 485
     components:
