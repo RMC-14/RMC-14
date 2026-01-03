@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 02:36:42
-  entityCount: 1204
+  time: 01/03/2026 05:03:37
+  entityCount: 1205
 maps: []
 grids:
 - 1
@@ -4926,6 +4926,13 @@ entities:
     components:
     - type: Transform
       pos: 7.66343,12.849939
+      parent: 1
+- proto: RMCHeadRoyalFlightHelmet
+  entities:
+  - uid: 1205
+    components:
+    - type: Transform
+      pos: 24.240267,18.449532
       parent: 1
 - proto: RMCHeadRoyalL1HelmetBallistic
   entities:
