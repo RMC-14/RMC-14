@@ -3,13 +3,15 @@
   id: RMCVehicleViewport
   name: vehicle viewport
   description: A small viewport for peering outside.
+  placement:
+    mode: PlaceFree
   components:
   - type: WallMount
     arc: 360
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
     state: viewport
-    drawdepth: WallTops
+    drawdepth: Overdoors
   - type: Clickable
   - type: InteractionOutline
   - type: RMCVehicleViewport

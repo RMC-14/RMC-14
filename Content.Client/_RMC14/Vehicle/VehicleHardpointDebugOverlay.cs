@@ -21,6 +21,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly SharedContainerSystem _container;
     private readonly EntityQuery<GunComponent> _gunQ;
+    private readonly EntityQuery<VehicleTurretComponent> _turretQ;
+    private readonly EntityQuery<VehiclePortGunComponent> _portGunQ;
 
     public VehicleHardpointDebugOverlay(IEntityManager ents)
     {
@@ -28,6 +30,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         _transform = ents.System<SharedTransformSystem>();
         _container = ents.System<SharedContainerSystem>();
         _gunQ = ents.GetEntityQuery<GunComponent>();
+        _turretQ = ents.GetEntityQuery<VehicleTurretComponent>();
+        _portGunQ = ents.GetEntityQuery<VehiclePortGunComponent>();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
@@ -36,10 +40,13 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             return;
 
         var handle = args.WorldHandle;
-        var query = _ents.EntityQueryEnumerator<VehicleTurretComponent, GunMuzzleOffsetComponent>();
+        var query = _ents.EntityQueryEnumerator<GunMuzzleOffsetComponent>();
 
-        while (query.MoveNext(out var uid, out _, out var muzzle))
+        while (query.MoveNext(out var uid, out var muzzle))
         {
+            if (!_turretQ.HasComp(uid) && !_portGunQ.HasComp(uid))
+                continue;
+
             if (!TryGetMuzzlePositions(uid, muzzle, args.MapId, out var origin, out var muzzlePos))
                 continue;
 

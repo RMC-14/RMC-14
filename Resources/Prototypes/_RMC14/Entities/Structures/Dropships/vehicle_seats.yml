@@ -3,6 +3,8 @@
   id: CMSeatPassenger
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -16,7 +18,7 @@
   name: pilot's chair
   description: A specially designed chair for pilots to sit in.
   placement:
-    mode: SnapgridCenter
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -29,6 +31,8 @@
   id: RMCSeatHunter
   name: hunter chair
   description: An exquisitely crafted chair for a large humanoid hunter.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -41,6 +45,8 @@
   id: RMCSeatWhite
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -53,6 +59,8 @@
   id: RMCSeatDark
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -66,6 +74,8 @@
   id: RMCSeatArmoredBase
   name: armored seat
   description: A reinforced chair designed for vehicle interiors.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static

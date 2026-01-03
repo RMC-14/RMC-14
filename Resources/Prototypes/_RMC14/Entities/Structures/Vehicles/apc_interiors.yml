@@ -6,6 +6,8 @@
   placement:
     mode: SnapgridCenter
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/apc.rsi
     drawdepth: Overdoors
@@ -527,14 +529,22 @@
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCWheelFrontTop1
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_front_top_1
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCWheelFrontTop2
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_front_top_2
 
@@ -567,6 +577,8 @@
     state: m56_FPW
   - type: Clickable
   - type: InteractionOutline
+  - type: WallMount
+    arc: 360
   - type: VehiclePortGunController
   - type: UserInterface
     interfaces:
@@ -637,7 +649,7 @@
     state: wall_3
 
 - type: entity
-  parent: RMCVehicleAPCInteriorBase
+  parent: RMCVehicleAPCWallBase
   id: RMCVehicleAPCExterior1
   components:
   - type: Sprite
@@ -681,14 +693,22 @@
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCFrontRoof1
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_front_top_1
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCFrontRoof2
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_front_top_2
 
@@ -702,13 +722,21 @@
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCWindshieldTop
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_back_top_2
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase
   id: RMCVehicleAPCWindshieldBottom
+  placement:
+    mode: PlaceFree
   components:
+  - type: Transform
+    anchored: false
   - type: Sprite
     state: wheel_back_top_1
