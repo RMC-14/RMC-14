@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 04:49:59
+  time: 01/03/2026 21:43:50
   entityCount: 124
 maps: []
 grids:
@@ -794,6 +794,8 @@ entities:
     - type: Transform
       pos: 11.5,10.5
       parent: 1
+    - type: RMCPodDoor
+      id: Spaceport
   - uid: 87
     components:
     - type: MetaData
@@ -801,6 +803,8 @@ entities:
     - type: Transform
       pos: 12.5,10.5
       parent: 1
+    - type: RMCPodDoor
+      id: Spaceport
   - uid: 88
     components:
     - type: MetaData
@@ -808,6 +812,8 @@ entities:
     - type: Transform
       pos: 16.5,10.5
       parent: 1
+    - type: RMCPodDoor
+      id: Spaceport
   - uid: 89
     components:
     - type: MetaData
@@ -816,6 +822,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 9.5,13.5
       parent: 1
+    - type: RMCPodDoor
+      id: Spaceport
   - uid: 90
     components:
     - type: MetaData
@@ -824,6 +832,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 9.5,12.5
       parent: 1
+    - type: RMCPodDoor
+      id: Spaceport
 - proto: RMCSpawnerRandomPowercell
   entities:
   - uid: 99

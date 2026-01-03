@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 18:06:49
+  time: 01/03/2026 22:48:17
   entityCount: 276
 maps: []
 grids:
@@ -55,7 +55,6 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      pos: -0.5,-0.51425934
       parent: invalid
     - type: MapGrid
       chunks:
@@ -104,6 +103,22 @@ entities:
       chunkCollection:
         version: 2
         nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped2
+          decals:
+            52: 2,-4
+            53: 2,-5
+            54: 2,-6
+            55: 2,-7
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped3
+          decals:
+            48: 2,-5
+            49: 2,-4
+            50: 2,-6
+            51: 2,-7
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -170,6 +185,11 @@ entities:
             id: WarnLineE
           decals:
             41: 22,-10
+            43: 23,-24
+            44: 23,-23
+            45: 23,-22
+            46: 23,-21
+            47: 23,-20
         - node:
             color: '#FFFFFFFF'
             id: WarnLineS
@@ -2022,13 +2042,12 @@ entities:
     - type: Transform
       pos: 5.5,0.5
       parent: 1
-- proto: RMCLightFixture
+- proto: RMCLightFixtureOffset
   entities:
   - uid: 176
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 9.5,-3.5
+      pos: 2.5,-1.5
       parent: 1
   - uid: 177
     components:
@@ -2039,7 +2058,8 @@ entities:
   - uid: 178
     components:
     - type: Transform
-      pos: 2.5,-1.5
+      rot: 3.141592653589793 rad
+      pos: 9.5,-3.5
       parent: 1
   - uid: 179
     components:
@@ -2073,76 +2093,76 @@ entities:
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 13.5,-8.5
+      pos: 9.5,-15.5
       parent: 1
   - uid: 185
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: 16.5,-5.5
+      pos: 4.5,-15.5
       parent: 1
   - uid: 186
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 20.5,-5.5
+      pos: 4.5,-13.5
       parent: 1
   - uid: 187
     components:
     - type: Transform
-      pos: 16.5,-10.5
+      pos: 9.5,-13.5
       parent: 1
   - uid: 188
     components:
     - type: Transform
-      pos: 20.5,-10.5
+      pos: 1.5,-22.5
       parent: 1
   - uid: 189
     components:
     - type: Transform
-      pos: 13.5,-10.5
+      pos: 4.5,-22.5
       parent: 1
   - uid: 190
     components:
     - type: Transform
-      pos: 9.5,-13.5
+      pos: 9.5,-22.5
       parent: 1
   - uid: 191
     components:
     - type: Transform
-      pos: 4.5,-13.5
+      pos: 12.5,-22.5
       parent: 1
   - uid: 192
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.5,-15.5
+      pos: 20.5,-10.5
       parent: 1
   - uid: 193
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 9.5,-15.5
+      pos: 16.5,-10.5
       parent: 1
   - uid: 194
     components:
     - type: Transform
-      pos: 4.5,-22.5
+      pos: 13.5,-10.5
       parent: 1
   - uid: 195
     components:
     - type: Transform
-      pos: 9.5,-22.5
+      rot: 3.141592653589793 rad
+      pos: 13.5,-8.5
       parent: 1
   - uid: 196
     components:
     - type: Transform
-      pos: 1.5,-22.5
+      rot: 3.141592653589793 rad
+      pos: 16.5,-5.5
       parent: 1
   - uid: 197
     components:
     - type: Transform
-      pos: 12.5,-22.5
+      rot: 3.141592653589793 rad
+      pos: 20.5,-5.5
       parent: 1
 - proto: RMCPickaxe
   entities:
@@ -2165,6 +2185,8 @@ entities:
   entities:
   - uid: 199
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       pos: 3.5,-13.5
       parent: 1
@@ -2174,6 +2196,8 @@ entities:
       fixtures: {}
   - uid: 200
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,-14.5
@@ -2186,6 +2210,8 @@ entities:
   entities:
   - uid: 201
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 5.5,-14.5
@@ -2194,6 +2220,8 @@ entities:
       id: FiltrationShutters
   - uid: 202
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 6.5,-14.5
@@ -2202,6 +2230,8 @@ entities:
       id: FiltrationShutters
   - uid: 203
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 7.5,-14.5
@@ -2210,6 +2240,8 @@ entities:
       id: FiltrationShutters
   - uid: 204
     components:
+    - type: MetaData
+      name: Airlock Shutters
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,-14.5

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 17:26:53
-  entityCount: 628
+  time: 01/03/2026 22:43:44
+  entityCount: 630
 maps: []
 grids:
 - 1
@@ -94,6 +94,12 @@ entities:
       chunkCollection:
         version: 2
         nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped2
+          decals:
+            105: 15,23
+            106: 15,22
         - node:
             color: '#FFFFFFFF'
             id: Dirt
@@ -4240,6 +4246,17 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 6.5,19.5
+      parent: 1
+  - uid: 629
+    components:
+    - type: Transform
+      pos: 2.5,19.5
+      parent: 1
+  - uid: 630
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,26.5
       parent: 1
 - proto: RMCLightReplacer
   entities:
