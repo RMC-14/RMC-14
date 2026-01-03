@@ -20,7 +20,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-v3.yml"
-      probability: 0.5
+      probability: 0.13 # todo: weight 1 with 0.5 standalone chance vs Medbay Passage
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -31,7 +31,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-passage.yml"
-      probability: 0.5
+      probability: 0.37 # todo: weight 3 with 0.5 standalone chance vs Medbay v3
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -42,7 +42,18 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_extratunnel.yml"
-      probability: 0.5
+      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda cave mushroom
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLambdaCaveMushroom
+  name: Lambda Cave Mushroom
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_mushroom.yml"
+      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda Cave Extratunnel
 
 # Sprinkles
 - type: entity
