@@ -20,7 +20,7 @@ rmc-emote-bark = barks.
 rmc-emote-snarl = snarls.
 rmc-emote-whine = whines.
 rmc-emote-howl = howls.
-rmc-emote-yip = yip.
+rmc-emote-yip = yips.
 
 rmc-emote-name-gnash = Gnash
 rmc-emote-gnash = gnashes.
