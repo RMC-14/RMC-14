@@ -18,4 +18,4 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase.yml"
-      probability: 0.1
+      probability: 0.28
