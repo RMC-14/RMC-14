@@ -27,8 +27,8 @@
   </Box>
    <Box>
     <GuideEntityEmbed Entity="CMWrench"/>
-    <GuideEntityEmbed Entity="CMBeltUtilityFilled"/>
-    <GuideEntityEmbed Entity="RMCBeltConstruction"/>
+    <GuideEntityEmbed Entity="CMBeltUtilityFilled" Caption="toolbelt"/>
+    <GuideEntityEmbed Entity="RMCBeltConstruction" Caption="toolbelt"/>
   </Box>
 
   - [bold]Welding Protection[/bold]. The standard Combat Technician Helmet provides Welding protection, but Welding Goggles can be found elsewhere should you lose your helmet.
@@ -45,6 +45,7 @@
     <GuideEntityEmbed Entity="CMSandbagFull50"/>
     <GuideEntityEmbed Entity="CMSheetMetal"/>
     <GuideEntityEmbed Entity="CMSheetPlasteel50"/>
+    <GuideEntityEmbed Entity="RMCPouchConstruction"/>
   </Box>
 
   - [bold]Breaching explosives[/bold], for accessing inaccessible areas through a newly crafted doorway and stripping cover from the enemy.
@@ -64,6 +65,12 @@
 
   Majority of these items are provided for free in your specialised Barracks. The Essential Engineer set, Sentry Gun, and a toolbelt full of tools can all be dispensed free of charge. Use your limited points to purchase an upgrade to the Sentry Gun, additional breaching explosives, or additional building materials. If you need more of anything, line up at Requisitions to request more.
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCSentry"/>
+    <GuideEntityEmbed Entity="CMBeltUtilityFilled" Caption="toolbelt"/>
+    <GuideEntityEmbed Entity="RMCEngineeringUpgrade"/>
+  </Box>
+
   Once you are equipped and deployed, you'll be expected to perform the following responsibilities.
 
   ##Fixing Power and Repairing Lights
@@ -80,6 +87,11 @@
 
   The Combat Technician is among the few Marines specially trained in repairing vital equipment on the Colony. The two you will be entrusted with are the Telecommunications and Sensor tower, which you can learn more about [textlink="here" link="RMCGuideCommunicationsTowers"].
 
+  <Box>
+    <GuideEntityEmbed Entity="RMCCommunicationsTower"/>
+    <GuideEntityEmbed Entity="RMCSensorTower"/>
+  </Box>
+
   ##Building Fortifications
 
   The enemy that you are fighting excels in melee range. In many situations, the only thing that stops a fighting Marine from getting mauled is the simple metal barricade, which blocks movement but still allows you to shoot over.
@@ -93,6 +105,12 @@
   - [bold]Metal Folding Barricade[/bold]: A metal barricade that can be folded down to allow passage. Is extremely fragile, so do not rely on it to provide much safety. Requires 6 metal.
   - [bold]Plasteel Barricade[/bold]: Much more durable but expensive version of the metal barricade. Requires 6 Plasteel.
   - [bold]Plasteel Folding Barricade[/bold]: This folding barricade is more durable than its metal counterparts, and as such is recommended for making doorways in sturdy fortifications. Requires 8 plasteel.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMBarricadeMetalDoor"/>
+    <GuideEntityEmbed Entity="RMCBarricadePlasteel"/>
+    <GuideEntityEmbed Entity="CMBarricadePlasteelDoor"/>
+  </Box>
 
   The cheap alternative to metal barricades are [bold]sandbag barricades[/bold]. These can be deployed faster than a barricade and do not need specialised training to construct, but the bags need to be filled using an entrenching tool beforehand. Sandbags also have limited repair options, so they are only reliable for so long.
 
