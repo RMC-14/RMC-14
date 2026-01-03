@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 01:03:24
+  time: 01/03/2026 07:16:56
   entityCount: 288
 maps: []
 grids:
@@ -2020,6 +2020,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,14.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 261
     components:
     - type: MetaData
@@ -2028,6 +2030,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,13.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 262
     components:
     - type: MetaData
@@ -2036,6 +2040,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.5,12.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 263
     components:
     - type: MetaData
@@ -2043,6 +2049,8 @@ entities:
     - type: Transform
       pos: 5.5,0.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 264
     components:
     - type: MetaData
@@ -2050,6 +2058,8 @@ entities:
     - type: Transform
       pos: 4.5,0.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 265
     components:
     - type: MetaData
@@ -2057,6 +2067,8 @@ entities:
     - type: Transform
       pos: 3.5,0.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
   - uid: 266
     components:
     - type: MetaData
@@ -2064,6 +2076,8 @@ entities:
     - type: Transform
       pos: 2.5,0.5
       parent: 1
+    - type: RMCPodDoor
+      id: Cargonia
 - proto: RMCSpawnerCorpseDeputy
   entities:
   - uid: 232
