@@ -10,7 +10,7 @@
     Whine:
       collection: VulpkaninWhines
     Yip:
-      path: /Audio/_RMC14/Voice/Vulpkanin/yip.ogg
+      path: /Audio/Animals/fox_squeak.ogg
 
 - type: emoteSounds
   parent: [RMCUnisexVulpkanin, RMCMaleHuman]
