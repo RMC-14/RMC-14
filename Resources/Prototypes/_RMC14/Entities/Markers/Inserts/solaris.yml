@@ -242,7 +242,7 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisReactor Meltdown
+  id: RMCMapInsertSolarisReactorMeltdown
   name: Reactor Meltdown
   suffix: Insert Solaris
   components:
@@ -250,3 +250,15 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/reactor_meltdown.yml"
       probability: 0.15
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisChapelCult
+  name: Chapel Cult
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/chapel_cult.yml"
+      probability: 0.25
+    replaceAreas: false
