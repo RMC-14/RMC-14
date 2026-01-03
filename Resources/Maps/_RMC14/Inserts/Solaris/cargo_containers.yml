@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/31/2025 20:07:29
-  entityCount: 286
+  time: 01/03/2026 01:03:24
+  entityCount: 288
 maps: []
 grids:
 - 1
@@ -174,17 +174,6 @@ entities:
             id: DirtMedium
           decals:
             85: 16,17
-        - node:
-            cleanable: True
-            color: '#FFFFFFFF'
-            id: RMCDecalBloodFloor1
-          decals:
-            112: 5,17
-        - node:
-            color: '#FFFFFFFF'
-            id: RMCDecalBloodFloor4
-          decals:
-            113: 5,7
     - type: GridAtmosphere
       version: 2
       data:
@@ -1435,6 +1424,18 @@ entities:
     components:
     - type: Transform
       pos: 4.5,18.5
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 267
+    components:
+    - type: Transform
+      pos: 5.5,17.5
+      parent: 1
+  - uid: 288
+    components:
+    - type: Transform
+      pos: 5.5,7.5
       parent: 1
 - proto: RMCFlashlight
   entities:
