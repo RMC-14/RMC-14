@@ -250,9 +250,6 @@
   id: RMCBoxBulletsRifleTSEEmpty
   suffix: Empty
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxBulletsRifleTSEEmpty
   - type: BulletBox
     bulletType: RMCBoxBulletsRifleTSE
     amount: 0
@@ -284,9 +281,6 @@
   id: RMCBoxBulletsRifleTSEAPEmpty
   suffix: Empty
   components:
-  - type: Construction
-    graph: RMCBoxMagazine
-    node: RMCBoxBulletsRifleTSEAPEmpty
   - type: BulletBox
     bulletType: RMCBoxBulletsRifleTSEAP
     amount: 0
