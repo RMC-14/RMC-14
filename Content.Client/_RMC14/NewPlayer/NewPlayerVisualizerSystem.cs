@@ -26,7 +26,7 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
         SubscribeLocalEvent<SeeNewPlayersComponent, LocalPlayerAttachedEvent>(OnSeeNewPlayersLocalAttached);
         SubscribeLocalEvent<SeeNewPlayersComponent, LocalPlayerDetachedEvent>(OnSeeNewPlayersLocalDetached);
 
-        Subs.CVar(_configManager, RMCCVars.RMCShowNewPlayerIcons, NewPlayerIconsOptionChanged);
+        Subs.CVar(_configManager, RMCCVars.RMCShowNewPlayerIcons, NewPlayerIconsOptionChanged, true);
     }
 
     private void OnSeeNewPlayersLocalAttached(Entity<SeeNewPlayersComponent> ent, ref LocalPlayerAttachedEvent args)
