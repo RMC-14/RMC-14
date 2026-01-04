@@ -43,16 +43,14 @@ public sealed class XenoBombardSystem : EntitySystem
         if (source.MapId != target.MapId)
             return;
 
+        args.Handled = true;
+
         if (!_xenoPlasma.HasPlasmaPopup(ent.Owner, ent.Comp.PlasmaCost))
             return;
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
             target = source.Offset(direction.Normalized() * ent.Comp.Range);
-
-        args.Handled = true;
-
-
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
