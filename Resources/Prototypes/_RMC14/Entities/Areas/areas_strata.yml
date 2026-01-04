@@ -36,6 +36,7 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaStrata
@@ -161,7 +162,7 @@
   name: Geothermal Springs Marshes
   components:
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -215,7 +216,7 @@
   - type: Sprite
     state: marshship
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExteriorMarsh
@@ -234,22 +235,8 @@
   components:
   - type: Sprite
     state: garage
-
-- type: entity
-  parent: RMCAreaStrataExterior
-  id: RMCAreaStrataExteriorTcommsMiningCaves
-  name: Mining Pathway Relay
-  components:
-  - type: Sprite
-    state: tcomms1
-
-- type: entity
-  parent: RMCAreaStrataExterior
-  id: RMCAreaStrataExteriorTcommsVehicleYard
-  name: Vehicle Yard Relay
-  components:
-  - type: Sprite
-    state: tcomms1
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataExterior
@@ -306,6 +293,53 @@
   components:
   - type: Sprite
     state: path
+
+# TComms
+
+- type: entity
+  parent: RMCAreaStrataExterior
+  id: RMCAreaStrataExteriorTcommsMiningCaves
+  name: Mining Pathway Relay
+  components:
+  - type: Sprite
+    state: tcomms1
+
+- type: entity
+  parent: RMCAreaStrataExterior
+  id: RMCAreaStrataExteriorTcommsVehicleYard
+  name: Vehicle Yard Relay
+  components:
+  - type: Sprite
+    state: tcomms1
+  - type: Area
+    linkedLz: dropship_lz2
+
+- type: entity
+  parent: RMCAreaStrataExterior
+  id: RMCAreaStrataExteriorTcommsCrashedDropship
+  name: Crashed Dropship Relay
+  components:
+  - type: Sprite
+    state: tcomms1
+
+- type: entity
+  parent: RMCAreaStrataExterior
+  id: RMCAreaStrataExteriorTcommsGeosprings
+  name: Geothermal Springs Relay
+  components:
+  - type: Sprite
+    state: tcomms1
+
+- type: entity
+  parent: RMCAreaStrataExterior
+  id: RMCAreaStrataExteriorTcommsEngineeringPartsStorage
+  name: Engineering - Parts Storage Platform Relay
+  components:
+  - type: Sprite
+    state: tcomms1
+
+
+# Interior
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -578,6 +612,9 @@
   parent: RMCAreaStrataInteriorCheckpoints
   id: RMCAreaStrataInteriorCheckpointsSouth
   name: Landing Zone South Security Checkpoint
+  components:
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInteriorCheckpoints
@@ -594,6 +631,8 @@
   components:
   - type: Sprite
     state: outpost_engi_1
+  - type: Area
+    linkedLz: dropship_lz2
 
 - type: entity
   parent: RMCAreaStrataInterior
@@ -972,6 +1011,7 @@
   - type: Sprite
     state: marshwater
   - type: Area
+    alwaysPowered: true
     CAS: false
     fulton: false
     lasing: false

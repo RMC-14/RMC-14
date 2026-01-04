@@ -49,6 +49,7 @@ public sealed partial class GhostRoleApplySpecialSystem : EntitySystem
                 if (TryComp<IdCardComponent>(item, out var card))
                 {
                     card.FullName = metaData.EntityName;
+                    card.OriginalOwner = ent.Owner;
                     _meta.SetEntityName(item, $"{metaData.EntityName} ({job.LocalizedName})");
                 }
             }

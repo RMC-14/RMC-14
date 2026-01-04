@@ -263,7 +263,7 @@ namespace Content.IntegrationTests.Tests.Interaction.Click
                 user = sEntities.SpawnEntity(null, coords);
                 sEntities.EnsureComponent<HandsComponent>(user);
                 handSys.AddHand(user, "hand", HandLocation.Left);
-                target = sEntities.SpawnEntity(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange + 0.01f, 0), mapId));
+                target = sEntities.SpawnEntity(null, new MapCoordinates(new Vector2(SharedInteractionSystem.InteractionRange + 0.5f, 0), mapId)); // RMC14
                 item = sEntities.SpawnEntity(null, coords);
                 sEntities.EnsureComponent<ItemComponent>(item);
             });

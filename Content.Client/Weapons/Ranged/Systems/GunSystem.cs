@@ -1,11 +1,13 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.ItemPickup;
+using Content.Client._RMC14.Movement;
 using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
 using Content.Client.Weapons.Ranged.Components;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CombatMode;
 using Content.Shared.Weapons.Ranged.Events;
@@ -42,6 +44,7 @@ public sealed partial class GunSystem : SharedGunSystem
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -221,6 +224,7 @@ public sealed partial class GunSystem : SharedGunSystem
             Coordinates = GetNetCoordinates(coordinates),
             Gun = GetNetEntity(gunUid),
             Shot = projectiles?.Select(e => e.Id).ToList(),
+            LastRealTick = _rmcLagCompensation.GetLastRealTick(null),
         });
     }
 

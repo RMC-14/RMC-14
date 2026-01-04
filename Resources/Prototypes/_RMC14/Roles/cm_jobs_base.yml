@@ -1,4 +1,5 @@
-﻿- type: job
+﻿
+- type: job
   abstract: true
   id: CMJobBase
   isCM: true
@@ -9,8 +10,8 @@
     Gold: RMCMedalGoldService
     Platinum: RMCMedalPlatinumService
     Ruby: RMCMedalRubyService
-    Emerald: RMCMedalEmeraldService
     Amethyst: RMCMedalAmethystService
+    Emerald: RMCMedalEmeraldService
     Prismatic: RMCMedalPrismaticService
 
 - type: job
@@ -37,6 +38,7 @@
   - CMAccessXeno
   hasIcon: false
   hidden: true
+  isXeno: true
 
 - type: entity
   parent: MarkerBase

@@ -234,3 +234,97 @@
   - type: CMRefillableSolution
     reagents:
       RMCMindbreakerToxin: 60
+
+# larger bottles
+
+- type: entity
+  parent: CMBottleEmpty
+  id: RMCLargeBottleEmpty
+  name: A large bottle.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+  - type: SolutionTransfer
+    transferAmount: 140
+    maxTransferAmount: 140
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 5
+    - 10
+    - 15
+    - 25
+    - 30
+    - 40
+    - 60
+    - 70
+    - 140
+
+- type: entity
+  parent: RMCLargeBottleEmpty
+  id: RMCLargeBottleFilled
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - Bottle
+  - type: CMRefillableSolution
+    solution: drink
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleDexalinPlus
+  name: large dexalin plus bottle
+  description: A large bottle. Contains dexalin plus - used to instantly treat oxygen deprivation.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMDexalinPlus
+          Quantity: 140
+  - type: CMRefillableSolution
+    reagents:
+      CMDexalinPlus: 140
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleMeralyneBicaridine
+  name: large meralyne-bicaridine bottle
+  description: A large bottle. Contains a mix of meralyne and bicaridine - used to treat brute damage.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMMeralyne
+          Quantity: 70
+        - ReagentId: CMBicaridine
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMMeralyne: 70
+      CMBicaridine: 70
+
+- type: entity
+  parent: RMCLargeBottleFilled
+  id: RMCLargeBottleKelotaneDermaline
+  name: large kelotane-dermaline bottle
+  description: A large bottle. Contains a mix of kelotane and dermaline - used to treat burned areas.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 140
+        reagents:
+        - ReagentId: CMKelotane
+          Quantity: 70
+        - ReagentId: CMDermaline
+          Quantity: 70
+  - type: CMRefillableSolution
+    reagents:
+      CMKelotane: 70
+      CMDermaline: 70

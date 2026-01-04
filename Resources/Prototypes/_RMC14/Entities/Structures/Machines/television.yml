@@ -38,7 +38,8 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCTelevision
+    protoIds:
+    - RMCTelevision
     title: rmc-television-title
   - type: Machine
     board: RMCCircuitboardTelevision
@@ -60,8 +61,10 @@
   - type: WallMount
     arc: 360
   - type: Transform
-    anchored: true
+    anchored: false
     noRot: false
+  - type: Anchorable
+    flags: None
   - type: Sprite
     drawdepth: WallMountedItems
   - type: Fixtures
@@ -91,7 +94,8 @@
       enum.RMCCameraUiKey.Key:
         type: RMCCameraBui
   - type: RMCCameraComputer
-    id: RMCTelevision
+    protoIds:
+    - RMCTelevision
     title: rmc-television-title
   - type: Machine
     board: RMCCircuitboardTelevision

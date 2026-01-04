@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9d74e72aa5a379fd41eb4e31c54888e6d342d0e7/icons/mob/hud/human_midnight.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/9d74e72aa5a379fd41eb4e31c54888e6d342d0e7/icons/mob/hud/human_midnight.dmi, fl icons by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -1137,6 +1137,87 @@
     },
     {
       "name": "trackon-direct_tl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-northwest_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-north_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-northeast_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-east_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-southeast_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-south_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-southwest_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-west_fl",
+      "delays": [
+        [
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "name": "trackon-direct_fl",
       "delays": [
         [
           0.5,

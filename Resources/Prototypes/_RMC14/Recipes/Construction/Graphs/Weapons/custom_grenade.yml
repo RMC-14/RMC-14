@@ -64,8 +64,6 @@
   - node: grenade
     actions:
     - !type:AppearanceChange
-    - !type:PlaySound
-      sound: /Audio/Machines/button.ogg
     - !type:AdminLog
       message: "A grenade was crafted"
     edges:

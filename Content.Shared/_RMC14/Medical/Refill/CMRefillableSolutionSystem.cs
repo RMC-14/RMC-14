@@ -37,8 +37,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
 
-    private bool _log;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -52,6 +50,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionFromContainerOnStoreInserted);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, GetVerbsEvent<AlternativeVerb>>(OnRefillSolutionFromContainerOnStoreGetVerbs);
         SubscribeLocalEvent<RMCRefillSolutionFromContainerOnStoreComponent, ContainerFlushDoAfterEvent>(OnRefillSolutionFromContainerOnStoreFlush);
+
+        SubscribeLocalEvent<RMCFlushableSolutionComponent, GetVerbsEvent<AlternativeVerb>>(OnFlushableSolutionGetVerbs);
+        SubscribeLocalEvent<RMCFlushableSolutionComponent, ContainerFlushDoAfterEvent>(OnFlushableSolutionFlush);
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
     }
@@ -179,16 +180,10 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (_log)
-            Log.Info($"Running {nameof(CMRefillableSolutionSystem)}");
-
         var time = _timing.CurTime;
         var refillers = EntityQueryEnumerator<CMSolutionRefillerComponent, TransformComponent>();
         while (refillers.MoveNext(out var uid, out var comp, out var xform))
         {
-            if (_log)
-                Log.Info($"Running {nameof(CMRefillableSolutionSystem)} for {uid}: {time}, {comp.RechargeAt}");
-
             if (time < comp.RechargeAt)
                 continue;
 
@@ -210,7 +205,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             }
 
             if (!any)
-                return;
+                continue;
 
             comp.Current = FixedPoint2.Min(comp.Max, comp.Current + comp.Recharge);
         }
@@ -293,6 +288,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
     private void OnRefillSolutionFromContainerOnStoreGetVerbs(Entity<RMCRefillSolutionFromContainerOnStoreComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
         if (!ent.Comp.CanFlush)
             return;
 
@@ -362,6 +360,48 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         _solution.RemoveAllSolution(drainable.Value);
 
+        if (TryComp<AppearanceComponent>(ent, out var appearance))
+            _appearance.QueueUpdate(ent, appearance);
+    }
+
+    private void OnFlushableSolutionGetVerbs(Entity<RMCFlushableSolutionComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-refillsolution-flush"),
+            Act = () =>
+            {
+                TryFlushSolution(ent, user);
+            },
+        });
+    }
+
+    private void TryFlushSolution(Entity<RMCFlushableSolutionComponent> ent, EntityUid user)
+    {
+        //TODO RMC immovable
+        _popup.PopupClient(Loc.GetString("rmc-refillsolution-flush-start", ("time", ent.Comp.FlushTime.TotalSeconds)), user, user, PopupType.SmallCaution);
+        _doafter.TryStartDoAfter(new DoAfterArgs(EntityManager, user, ent.Comp.FlushTime, new ContainerFlushDoAfterEvent(), ent, target: ent)
+        {
+            BreakOnMove = true,
+            DuplicateCondition = DuplicateConditions.SameTarget,
+        });
+    }
+
+    private void OnFlushableSolutionFlush(Entity<RMCFlushableSolutionComponent> ent, ref ContainerFlushDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var solution, out _))
+            return;
+
+        _solution.RemoveAllSolution(solution.Value);
         if (TryComp<AppearanceComponent>(ent, out var appearance))
             _appearance.QueueUpdate(ent, appearance);
     }

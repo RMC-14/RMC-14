@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Gibbing;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
@@ -22,7 +22,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedJitteringSystem _jitter = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCGibSystem _rmcGib = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -64,6 +64,7 @@ public sealed class SharedXenoGutSystem : EntitySystem
         {
             BreakOnMove = true,
             BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent
         };
 
         var selfMsg = Loc.GetString("rmc-gut-start-self");

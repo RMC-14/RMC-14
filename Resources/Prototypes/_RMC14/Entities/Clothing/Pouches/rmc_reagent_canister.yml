@@ -48,6 +48,14 @@
   - type: RMCRefillSolutionOnStore
   - type: RMCRefillSolutionFromContainerOnStore
     canFlush: true
+  - type: ReagentExaminationRequiresSkill
+    containerId: pressurized_reagent_canister
+    noContainerExamine: rmc-reagent-pouch-no-canister
+    unskilledExamine: rmc-reagent-pouch-unskilled
+    skilledExamineContains: rmc-reagent-pouch-examine-contains
+    skilledExamineNone: rmc-reagent-pouch-examine-empty
+    skills:
+      RMCSkillMedical: 1
   - type: Appearance
   - type: CMStorageVisualizer
     storageClosed: closedLayer
@@ -120,6 +128,42 @@
       pressurized_reagent_canister:
         name: Canister
         startingItem: RMCPressurizedCanisterTricordrazine
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterMeraBic
+  suffix: MeraBic
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorMeraBic15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterMeraBic
+        whitelist:
+          tags:
+          - PressurizedCanister
+        insertOnInteract: true
+
+- type: entity
+  parent: RMCPouchReagentCanister
+  id: RMCPouchReagentCanisterKeloDerm
+  suffix: KeloDerm
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMedicAutoInjectorKeloDerm15
+  - type: ItemSlots
+    slots:
+      pressurized_reagent_canister:
+        name: Canister
+        startingItem: RMCPressurizedCanisterKeloDerm
         whitelist:
           tags:
           - PressurizedCanister

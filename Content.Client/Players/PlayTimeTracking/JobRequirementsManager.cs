@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Client._RMC14.PlayTimeTracking;
 using Content.Shared.CCVar;
 using Content.Shared.Localizations;
@@ -94,6 +95,26 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         Updated?.Invoke();
     }
 
+    // RMC14-Whitelist-Tweak-Start
+    private bool IsWhitelistedInternal(string jobId)
+    {
+        if (_jobWhitelists.Contains(jobId))
+            return true;
+
+        if (!_prototypes.TryIndex<JobPrototype>(jobId, out var jobPrototype))
+        {
+            _sawmill.Error($"Failed to index job prototype {jobId} during whitelist check. Assuming not whitelisted");
+            return false;
+        }
+
+        if (jobPrototype.WhitelistParent != null)
+        {
+            return IsWhitelistedInternal(jobPrototype.WhitelistParent.Value.Id);
+        }
+
+        return false;
+    }
+    // RMC14-Whitelist-Tweak-End
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
@@ -150,8 +171,13 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
             return true;
 
-        if (job.Whitelisted && !_jobWhitelists.Contains(job.ID))
+        // RMC14-Whitelist-Tweak-Start
+        if (job.Whitelisted)
         {
+            if (IsWhitelistedInternal(job.ID))
+                return true;
+        // RMC14-Whitelist-Tweak-Start
+
             reason = FormattedMessage.FromUnformatted(Loc.GetString("role-not-whitelisted"));
             return false;
         }
@@ -217,10 +243,22 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
 
     public IEnumerable<KeyValuePair<string, TimeSpan>> FetchPlaytimeJobIdByRoles()
     {
-        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>();
+        // RMC14
+        var jobsToMap = _prototypes.EnumeratePrototypes<JobPrototype>().ToArray();
+        var trackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
+        var duplicateTrackers = new HashSet<ProtoId<PlayTimeTrackerPrototype>>();
 
         foreach (var job in jobsToMap)
         {
+            if (!trackers.Add(job.PlayTimeTracker))
+                duplicateTrackers.Add(job.PlayTimeTracker);
+        }
+
+        foreach (var job in jobsToMap)
+        {
+            if (duplicateTrackers.Contains(job.PlayTimeTracker) && !job.BasePlaytimeTracker)
+                continue;
+
             if (_roles.TryGetValue(job.PlayTimeTracker, out var locJobName))
             {
                 yield return new KeyValuePair<string, TimeSpan>(job.ID, locJobName);

@@ -4,14 +4,17 @@
   name: rmc-job-name-spp-overwatch
   description: rmc-ghost-role-information-spp-pve-description
   playTimeTracker: RMCJobSPPPlatCoPVE
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 10800 # 3 hours
   ranks:
     RMCRankSPPMladshiyLeytenant: []
   startingGear: RMCSPPPlatCoPVEGear
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   accessGroups:
-  - SO
-  - Rifleman
+  - ShipMasterAccess
   spawnMenuRoleName: SPP Platoon Commander (PVE)
   special:
   - !type:AddComponentSpecial
@@ -35,12 +38,19 @@
         RMCSkillJtac: 4
         RMCSkillExecution: 1
         RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-overwatch
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 - type: entity

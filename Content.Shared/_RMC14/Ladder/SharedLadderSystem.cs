@@ -1,9 +1,10 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Teleporter;
 using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
+using Content.Shared.Ghost;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -66,6 +67,36 @@ public abstract class SharedLadderSystem : EntitySystem
         _toUpdate.Add(ent);
     }
 
+    public bool LadderIdInUse(string id)
+    {
+        if (_toUpdateIds.ContainsKey(id))
+            return true;
+        return false;
+    }
+
+    public void ReassignLadderId(Entity<LadderComponent> ent, string? newId)
+    {
+        if (ent.Comp.Other != null)
+        {
+            if (TryComp<LadderComponent>(ent.Comp.Other, out var ladder))
+            {
+                var other = ent.Comp.Other.Value;
+                //Remove other ladder connect
+                ent.Comp.Other = null;
+                ladder.Id = null;
+                ladder.Other = null;
+                Dirty(other, ladder);
+            }
+        }
+
+        if (ent.Comp.Id != null)
+            _toUpdateIds.Remove(ent.Comp.Id);
+
+        ent.Comp.Id = newId;
+        Dirty(ent);
+        _toUpdate.Add(ent);
+    }
+
     private void OnLadderRemove<T>(Entity<LadderComponent> ent, ref T args)
     {
         foreach (var watching in ent.Comp.Watching)
@@ -112,9 +143,13 @@ public abstract class SharedLadderSystem : EntitySystem
         }
 
         var ev = new LadderDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, ent.Comp.Delay, ev, ent, ent, ent)
+        var delay = ent.Comp.Delay;
+        if (HasComp<GhostComponent>(args.User))
+            delay = TimeSpan.Zero;
+
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, ent)
         {
-            AttemptFrequency = AttemptFrequency.EveryTick,
+            AttemptFrequency = delay == TimeSpan.Zero ? AttemptFrequency.Never : AttemptFrequency.EveryTick,
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter, out var doAfterId))

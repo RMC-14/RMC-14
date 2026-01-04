@@ -25,3 +25,60 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hc_exec
+
+# WEYA Job Icons
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecSpec
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_execspec
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecSuper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_execsuper
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecAssMan
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_assman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecDivMan
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_divman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconExecChief
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_chiefman
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconDepDirector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_depdirector
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconDirector
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_director
+    
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_syn

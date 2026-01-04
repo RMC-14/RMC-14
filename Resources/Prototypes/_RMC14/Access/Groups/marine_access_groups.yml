@@ -2,6 +2,8 @@
 
 - type: accessGroup
   id: SquadLeader
+  parent: RMCBaseMarinesJob
+  name: Squad Leader
   tags:
   - CMAccessMarinePrep
   - CMAccessSquadLeaderPrep
@@ -9,24 +11,32 @@
 
 - type: accessGroup
   id: FTL
+  parent: RMCBaseMarinesJob
+  name: Fireteam Leader
   tags:
   - CMAccessMarinePrep
   - CMAccessFTLPrep
 
 - type: accessGroup
   id: WeaponSpec
+  parent: RMCBaseMarinesJob
+  name: Weapons Specialist
   tags:
   - CMAccessMarinePrep
   - CMAccessSpecPrep
 
 - type: accessGroup
   id: SmartGunOperator
+  parent: RMCBaseMarinesJob
+  name: Smart Gunner
   tags:
   - CMAccessMarinePrep
   - CMAccessSmartPrep
 
 - type: accessGroup
   id: HospitalCorpsman
+  parent: RMCBaseMarinesJob
+  name: Hospital Corpsman
   tags:
   - CMAccessMarinePrep
   - CMAccessMedPrep
@@ -34,6 +44,8 @@
 
 - type: accessGroup
   id: CombatTech
+  parent: RMCBaseMarinesJob
+  name: Combat Technician
   tags:
   - CMAccessMarinePrep
   - CMAccessCombatTechPrep
@@ -42,6 +54,8 @@
 # this exists because other squad members will have their own equipment vendors.
 - type: accessGroup
   id: Rifleman
+  parent: RMCBaseMarinesJob
+  name: Rifleman
   tags:
   - CMAccessMarineRifleman
   - CMAccessMarinePrep

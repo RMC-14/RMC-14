@@ -1,9 +1,0 @@
-<DefaultWindow
-    SetSize="250 120"
-    Margin="4 0"
-    xmlns="https://spacestation14.io">
-    <BoxContainer Orientation="Vertical">
-        <SpinBox Name="ReserveBar" Access="Public" HorizontalExpand="True" Margin ="0 4"/>
-        <Button Name="ApplyButton" Access="Public" HorizontalExpand="True" Margin ="0 4" />
-    </BoxContainer>
-</DefaultWindow>

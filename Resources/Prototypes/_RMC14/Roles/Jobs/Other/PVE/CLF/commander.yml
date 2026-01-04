@@ -1,0 +1,75 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFCommanderPVE
+  name: rmc-job-name-clf-pve-commander
+  description: rmc-ghost-role-information-clf-pve-description
+  playTimeTracker: CMJobCLFCommanderPVE
+  ranks:
+    RMCRankCLFRebelCommander: []
+  startingGear: RMCJobCLFCommanderPVE
+  icon: RMCJobIconCLFCellCommander
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - SO
+  - Rifleman
+  spawnMenuRoleName: CLF Commander (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillMedical: 2
+        RMCSkillCqc: 1
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 4
+        RMCSkillExecution: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-pve-commander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCLFCommanderPVE
+  name: clf commander spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCCLFCommanderPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: clf_spawn
+
+- type: startingGear
+  id: RMCJobCLFCommanderPVE
+  equipment:
+    id: RMCIDCardCLFCommanderPVE
+    jumpsuit: RMCJumpsuitCLFSoldier
+    shoes: RMCShoesJackbootsFilled
+    ears: RMCHeadsetDistressCLF
+
+- type: playTimeTracker
+  id: CMJobCLFCommanderPVE

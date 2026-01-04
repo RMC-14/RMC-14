@@ -3,6 +3,7 @@
   id: CMPlushieBase
   name: generic plushie
   description: perfectly generic
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Fun/plushies.rsi
@@ -19,6 +20,7 @@
 - type: entity
   parent: PlushieMoth
   id: RMCPlushieMoth
+  suffix: RMC
   components:
   - type: UseDelay
     delay: 120
@@ -70,6 +72,23 @@
   - type: EmitSoundOnCollide
     sound:
       collection: ToyFall
+
+- type: entity
+  parent: RMCPlushieSharkBlue
+  id: RMCShorkMedicalOfficer
+  name: Shork medical officer plushie
+  description: The Shork Medical Officer is dissapointed to see you in surgery yet again. Maybe you should take better care of yourself?
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/smo.rsi
+    state: SMO
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: SMO-inhand-left
+      right:
+      - state: SMO-inhand-right
 
 - type: entity
   parent: CMPlushieBase

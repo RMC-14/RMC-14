@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.FightOrFlight;
 
 public sealed class XenoFightOrFlightSystem : EntitySystem
 {
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly XenoEnergySystem _energy = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;

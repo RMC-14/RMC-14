@@ -81,6 +81,29 @@ marking-VulpSnoutBlaze = Vulpkanin Blaze
 marking-VulpSnoutPatch-patch = Patch
 marking-VulpSnoutPatch = Vulpkanin Patch
 
+marking-VulpSnoutShort-m_snout_fscanid_FRONT_primary = Primary
+marking-VulpSnoutShort-m_snout_fscanid_FRONT_secondary = Secondary
+marking-VulpSnoutShort-m_snout_fscanid_FRONT_tertiary = Nose
+marking-VulpSnoutShort = Vulpkanin Short
+
+marking-VulpSnoutShortAlt1-m_snout_fscanidalt_FRONT_primary = Primary
+marking-VulpSnoutShortAlt1-m_snout_fscanidalt_FRONT_secondary = Secondary
+marking-VulpSnoutShortAlt1-m_snout_fscanidalt_FRONT_tertiary = Nose
+marking-VulpSnoutShortAlt1 = Vulpkanin Short Alt
+
+marking-VulpSnoutShortAlt2-m_snout_fscanidalt2_FRONT_primary = Primary
+marking-VulpSnoutShortAlt2-m_snout_fscanidalt2_FRONT_secondary = Nose
+marking-VulpSnoutShortAlt2 = Vulpkanin Short Alt 2
+
+marking-VulpSnoutShortAlt3-m_snout_fscanidalt3_FRONT_primary = Primary
+marking-VulpSnoutShortAlt3-m_snout_fscanidalt3_FRONT_secondary = Secondary
+marking-VulpSnoutShortAlt3-m_snout_fscanidalt3_FRONT_tertiary = Nose
+marking-VulpSnoutShortAlt3 = Vulpkanin Short Alt 3
+
+marking-VulpSnoutWolf-m_snout_fwolf_FRONT_primary = Primary
+marking-VulpSnoutWolf-m_snout_fwolf_FRONT_secondary = Secondary
+marking-VulpSnoutWolf = Vulpkanin Wolf
+
 
 marking-VulpHeadTiger-tiger_head = Tiger stripes
 marking-VulpHeadTiger = Vulpkanin Tiger stripes (head)
@@ -146,6 +169,18 @@ marking-VulpTailAustralianShepherd-m_tail_australianshepherd_secondary = Seconda
 
 marking-VulpTailStraight = Straight
 marking-VulpTailStraight-m_tail_straighttail_primary = Primary
+
+marking-VulpTailFox3 = Vulpkanin Fox 3
+marking-VulpTailFox3-m_tail_fox3_ = Primary
+
+marking-VulpTailFox4 = Vulpkanin Fox 4
+marking-VulpTailFox4-m_tail_fox4_primary = Primary
+marking-VulpTailFox4-m_tail_fox4_secondary = Tip
+
+
+marking-VulpTailLong = Long
+marking-VulpTailLong-long = Base
+marking-VulpTailLong-long-tip = Tip
 
 
 marking-VulpBellyCrest-belly_crest = Belly

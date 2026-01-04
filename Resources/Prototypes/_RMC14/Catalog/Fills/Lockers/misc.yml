@@ -71,3 +71,21 @@
       - id: RMCHeadsetMarineCommand
       - id: CMBeltMarine
       - id: CMBeltMarine
+
+- type: entity
+  parent: RMCLockerSecureSafeLiaison
+  id: RMCLockerSecureSafeLiaisonFilled
+  suffix: Corporate Liaison, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorVest #should be bulletproof vest from CM13.
+    - id: RMCSynthResetKeySMART
+      # ToDo: RMC14 2 WeYa ration packs
+      # ToDo: RMC14 Platinum Coin
+    - id: RMCSpaceCash1000
+    - id: RMCSpaceCash1000
+    - id: CMWebbingHolster
+    - id: RMCWeaponPistolPK7
+    - id: RMCMagazinePistolPK7
+    - id: RMCMagazinePistolPK7

@@ -82,7 +82,7 @@ entities:
     - type: Transform
       pos: 1.5,3.5
       parent: 1
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 8
     components:
@@ -423,7 +423,7 @@ entities:
           showEnts: False
           occludes: False
           ent: null
-- proto: WeaponShotgunM42A2
+- proto: WeaponShotgunM42A1
   entities:
   - uid: 63
     components:

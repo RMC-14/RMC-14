@@ -6,6 +6,7 @@
     size: Small
     shape: null
   - type: VentExit
+  - type: RMCContainerEmptyOnDestruction
   - type: ContainerContainer
     containers:
       storagebase: !type:Container

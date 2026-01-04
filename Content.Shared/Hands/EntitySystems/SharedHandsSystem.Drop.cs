@@ -74,7 +74,7 @@ public abstract partial class SharedHandsSystem
         if (!ContainerSystem.CanRemove(held, container))
             return false;
 
-        if (checkActionBlocker && !_actionBlocker.CanDrop(uid))
+        if (checkActionBlocker && !_actionBlocker.CanDrop(uid, held))
             return false;
 
         return true;

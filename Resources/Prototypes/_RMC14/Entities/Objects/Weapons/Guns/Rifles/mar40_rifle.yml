@@ -73,6 +73,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCM5Bayonet
         random:
           - RMCAttachmentExtendedBarrel

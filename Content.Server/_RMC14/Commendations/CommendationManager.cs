@@ -16,14 +16,13 @@ public sealed class CommendationManager : IPostInjectInit
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly UserDbDataManager _userDb = default!;
 
-    private readonly Dictionary<NetUserId, List<Commendation>> _commendations = new();
+    private readonly Dictionary<NetUserId, (List<Commendation> Received, List<Commendation> Given)> _commendations = new();
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
     {
-        var commendations = await _db.GetCommendationsReceived(player.UserId);
-        _commendations[player.UserId] = commendations
-            .Select(c => new Commendation(c.GiverName, c.ReceiverName, c.Name, c.Text, c.Type, c.RoundId))
-            .ToList();
+        var commendationsReceived = await _db.GetCommendationsReceived(player.UserId);
+        var commendationsGiven = await _db.GetCommendationsGiven(player.UserId);
+        _commendations[player.UserId] = (ParseCommendations(commendationsReceived), ParseCommendations(commendationsGiven));
     }
 
     private void FinishLoad(ICommonSession player)
@@ -36,7 +35,11 @@ public sealed class CommendationManager : IPostInjectInit
         if (!_commendations.TryGetValue(player.UserId, out var commendations))
             return;
 
-        var msg = new CommendationsMsg { Commendations = commendations.ToList() };
+        var msg = new CommendationsMsg
+        {
+            CommendationsReceived = commendations.Received.ToList(),
+            CommendationsGiven = commendations.Given.ToList(),
+        };
         _net.ServerSendMessage(msg, player.Channel);
     }
 
@@ -45,15 +48,10 @@ public sealed class CommendationManager : IPostInjectInit
         _commendations.Remove(player.UserId);
     }
 
-    public void CommendationAdded(NetUserId receiver, Commendation commendation)
+    public void CommendationAdded(NetUserId giver, NetUserId receiver, Commendation commendation)
     {
-        if (!_commendations.TryGetValue(receiver, out var commendations))
-            return;
-
-        commendations.Add(commendation);
-
-        if (_player.TryGetSessionById(receiver, out var receiverSession))
-            SendCommendations(receiverSession);
+        UpdateCommendations(giver, commendation, false);
+        UpdateCommendations(receiver, commendation, true);
     }
 
     public void PostInject()
@@ -63,5 +61,24 @@ public sealed class CommendationManager : IPostInjectInit
         _userDb.AddOnLoadPlayer(LoadData);
         _userDb.AddOnFinishLoad(FinishLoad);
         _userDb.AddOnPlayerDisconnect(ClientDisconnected);
+    }
+
+    private List<Commendation> ParseCommendations(List<RMCCommendation> commendations)
+    {
+        return commendations
+            .Select(c => new Commendation(c.GiverName, c.ReceiverName, c.Name, c.Text, c.Type, c.RoundId))
+            .ToList();
+    }
+
+    private void UpdateCommendations(NetUserId user, Commendation commendation, bool received)
+    {
+        if (!_commendations.TryGetValue(user, out var giverCommendations))
+            return;
+
+        var collection = received ? giverCommendations.Received : giverCommendations.Given;
+        collection.Add(commendation);
+
+        if (_player.TryGetSessionById(user, out var giverSession))
+            SendCommendations(giverSession);
     }
 }

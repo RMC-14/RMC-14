@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Ingame screenshot",
+  "size": {
+    "x": 453,
+    "y": 153
+  },
+  "states": [
+    {
+      "name": "ASRSinterface"
+    }
+  ]
+}

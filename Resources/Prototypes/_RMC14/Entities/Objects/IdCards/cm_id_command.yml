@@ -7,6 +7,14 @@
     job: CMStaffOfficer
 
 - type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardPlatoonCommander
+  name: platoon commander ID card
+  components:
+  - type: PresetIdCard
+    job: CMPVEPlatoonCommander
+
+- type: entity
   parent: CMIDCardGold
   id: CMIDCardCommandingOfficer
   name: commanding officer ID card

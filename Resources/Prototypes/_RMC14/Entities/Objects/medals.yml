@@ -117,26 +117,6 @@
 
 - type: entity
   parent: RMCMedalBase
-  id: RMCMedalEmerald
-  name: emerald medal
-  description: A revered emerald medal, only able to be handed out by High Command due to especially special circumstances.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Medals/emerald.rsi
-    state: icon
-  - type: UniformAccessory
-    playerSprite:
-      sprite: _RMC14/Objects/Medals/emerald.rsi
-      state: equipped
-
-- type: entity
-  parent: RMCMedalEmerald
-  id: RMCMedalEmeraldService
-  name: emerald service medal
-  description: A revered emerald awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the exorbitant amount of time a marine has spent in the line of duty.
-
-- type: entity
-  parent: RMCMedalBase
   id: RMCMedalAmethyst
   name: amethyst medal
   description: A mythical amethyst medal, only able to be handed out by High Command due to especially special circumstances.
@@ -154,6 +134,26 @@
   id: RMCMedalAmethystService
   name: amethyst service medal
   description: A mythical amethyst medal awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the unreasonable amount of time a marine has spent in the line of duty.
+
+- type: entity
+  parent: RMCMedalBase
+  id: RMCMedalEmerald
+  name: emerald medal
+  description: A revered emerald medal, only able to be handed out by High Command due to especially special circumstances.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/emerald.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/emerald.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalEmerald
+  id: RMCMedalEmeraldService
+  name: emerald service medal
+  description: A revered emerald awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the exorbitant amount of time a marine has spent in the line of duty.
 
 - type: entity
   parent: RMCMedalBase
@@ -175,7 +175,7 @@
   name: prismatic service medal
   description: A legendary prismatic medal awarded for a marine's service within the UNMC, Whom this is awarded may be a god walking amongst mere mortals. It signifies the nigh on impossible amount of time a marine has spent in the line of duty.
 
-# Civilian Ribbons 
+# Civilian Ribbons
 
 - type: entity
   parent: RMCMedalBase
@@ -216,7 +216,7 @@
   id: RMCMedalRibbonWhiteService
   name: white award ribbon
   description: A white ribbon awarded to civilians for participation in a UNMC-sponsored event. It is a somewhat common award, signifying their dedication and support for the organization.
-  
+
 - type: entity
   parent: RMCMedalBase
   id: RMCMedalRibbonYellow
@@ -336,8 +336,8 @@
   id: RMCMedalRibbonPrismaticService
   name: prismatic award ribbon
   description: A legendary prismatic ribbon awarded to civilians, whom may be a god walking amongst mere mortals. Such awards require a nigh on impossible amount of time and dedication to the organization to achieve.
-  
-   
+
+
   # Liaison Medals
 - type: entity
   parent: RMCMedalBase

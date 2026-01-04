@@ -46,7 +46,7 @@
   suffix: Command, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMWindoorSecure
@@ -55,3 +55,15 @@
   components:
   - type: AccessReader
     access: [ [ "RMCAccessTSEPABrig" ] ]
+
+# Misc secure
+- type: entity
+  parent: CMWindoorSecure
+  id: CMWindoorSecureBrigPowered
+  suffix: Brig, Locked, Powered
+  components:
+  - type: AccessReader
+    access: [ [ "CMAccessBrig" ] ]
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false # intentionally!

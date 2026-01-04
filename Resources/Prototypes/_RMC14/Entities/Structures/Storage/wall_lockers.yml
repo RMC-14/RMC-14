@@ -26,7 +26,8 @@
       - CommandTablet
       - RMCHeadset
   - type: AccessReader
-    access: [["CMAccessCommand"]]
+    access: [["RMCAccessSeniorCommand"]]
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: CMLockerCMDCabinet

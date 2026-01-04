@@ -1,5 +1,5 @@
 # Medal Types
-rmc-medal-1 = Distinguished  conduct medal
+rmc-medal-1 = Distinguished conduct medal
 rmc-medal-2 = Bronze heart medal
 rmc-medal-3 = Medal of valor
 rmc-medal-4 = Medal of exceptional heroism

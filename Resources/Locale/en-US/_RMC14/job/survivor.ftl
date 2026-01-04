@@ -19,6 +19,9 @@ rmc-job-description-survivor-co = You are a Major of the UNMC.
 rmc-job-name-survivor-synth = Survivor Synthetic
 rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
 
+rmc-job-name-survivor-military = Military Survivor
+rmc-job-description-survivor-military = You are a survivor of the xenonid infestation on the colony, apart of some kind of military organization.
+
 # Playtime trackers
 rmc-playtime-tracker-job-name-survivor = Civilian Survivor
 rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
@@ -32,8 +35,30 @@ rmc-playtime-tracker-job-name-survivor-synth = Survivor Synthetic
 
 cm-job-name-survivor-trucker = Trucker Colonist
 
+cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
+CMJobSurvivorICB = Interstellar Commerce Bureau Liaison
+cm-job-prefix-survivor-icb = ICB Rep.
+
+cm-job-name-survivor-isr = Interstellar Life Rights Observer
+CMJobSurvivorISR = Interstellar Life Rights Observer
+
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
+
+rmc-job-name-survivor-bureau-marshal = CMB Marshal
+cm-job-prefix-survivor-cmb-marshal = CMB MAR
+
+cm-job-name-survivor-flight-control-operator = Flight Control Operator
+
+cm-job-name-survivor-unmc = UNMC Remnant
+
+# misc survs
+
+cm-job-name-survivor-prisoner = Prisoner
+CMSurvivorPrisoner = Prisoner
+
+cm-job-name-survivor-gang-leader = Gang Leader
+CMSurvivorGangLeader = Gang Leader
 
 rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You worked or lived in the colony, and managed to avoid the alien attacks... until now.
 
@@ -140,9 +165,6 @@ cm-job-name-survivor-technician = New Varadero Engineering Technician
 
 cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
 
-cm-job-name-survivor-icb = Interstellar Commerce Bureau Liaison
-cm-job-prefix-survivor-icb = ICB
-
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
 # Hybrisa Prospera Survs
@@ -219,3 +241,63 @@ cm-job-name-survivor-trijent-engi-hydro = Hydro Electric Engineer
 cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
+CMSurvivorTrijentCorporate = Trijent Corporation Liaison
+
+# Fiorina Science Annex Survs
+
+cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison
+CMSurvivorFiorinaCorporateLiaison = Fiorina Corporate Liaison
+
+cm-job-name-survivor-fiorina-doctor = Fiorina Doctor
+CMSurvivorFiorinaDoctor = Fiorina Doctor
+
+cm-job-name-survivor-fiorina-engineer = Fiorina Engineer
+CMSurvivorFiorinaEngineer = Fiorina Engineer
+
+cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
+CMSurvivorFiorinaResearcher = Fiorina Researcher
+
+cm-job-name-survivor-riot-officer = United Nations Riot Officer
+CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
+cm-job-prefix-survivor-riot-officer = UN RO
+
+CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
+
+# Kutjevo Refinery Survs
+
+rmc-job-name-survivor-kutjevo-chaplain = Kutjevo Chaplain
+
+rmc-job-name-survivor-kutjevo-corporate = Kutjevo Corporate Liaison
+
+rmc-job-name-survivor-kutjevo-doctor = Kutjevo Doctor
+
+rmc-job-name-survivor-kutjevo-engineer = Kutjevo Engineer
+
+rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
+
+rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
+
+rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# Solaris Ridge Survs
+
+rmc-job-name-survivor-solaris-chaplain = Solaris Chaplain
+
+rmc-job-name-survivor-solaris-corporate-liaison = Solaris Corporate Liaison
+
+rmc-job-name-survivor-solaris-doctor = Solaris Doctor
+
+rmc-job-name-survivor-solaris-engineer = Solaris Engineer
+
+rmc-job-name-survivor-solaris-scientist = Solaris Scientist
+
+rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
+
+rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+# Shivas survs
+
+rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
+rmc-job-name-survivor-shivas-doctor = Shivas Doctor
+rmc-job-name-survivor-shivas-researcher = Shivas Researcher
+rmc-job-name-survivor-shivas-engineer = Shivas Engineer

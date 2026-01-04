@@ -9,6 +9,27 @@
     simple: true
     deadText: rmc-medical-examine-dead-simple-mob
   - type: CrashLandable
+  - type: StatusEffects
+    allowed:
+    - Stun
+    - KnockedDown
+    - SlowedDown
+    - Stutter
+    - Electrocution
+    - ForcedSleep
+    - TemporaryBlindness
+    - Drunk
+    - SlurredSpeech
+    - RatvarianLanguage
+    - PressureImmunity
+    - Muted
+    - Pacified
+    - StaminaModifier
+    - Flashed
+    - Dazed
+    - Blinded
+    - Deaf
+    - Unconscious
 
 - type: entity
   id: RMCSmallHost
@@ -32,6 +53,7 @@
 - type: entity
   parent: [RMCSimpleMob, MobMonkey, RMCSmallHost]
   id: CMMobMonkey
+  name: monkey
   suffix: CM
   components:
   - type: GhostRole
@@ -40,6 +62,7 @@
 - type: entity
   parent: [RMCSimpleMob, MobKobold, RMCSmallHost]
   id: CMMobKobold
+  name: kobold
   suffix: CM
   components:
   - type: GhostRole

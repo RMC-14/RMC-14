@@ -1,11 +1,11 @@
-﻿using Content.Server.Administration.Logs;
+﻿using System.Threading.Tasks;
+using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared.Database;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
-using System.Threading.Tasks;
 
 namespace Content.Server._RMC14.Commendations;
 
@@ -98,7 +98,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
 
         var commendation = new Commendation(giverName, receiverName, name, text, type, round);
         RoundCommendations.Add(commendation);
-        _commendation.CommendationAdded(new NetUserId(receiverId), commendation);
+        _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);
         _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
 
         try

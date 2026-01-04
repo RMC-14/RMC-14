@@ -2,13 +2,20 @@
   parent: CMJobBase
   id: CMProvostChiefInspector
   name: rmc-job-name-corp-provost-chief
-  description: rmc-ghost-role-information-provost-description
+  description: rmc-job-description-inspector
+  whitelisted: true
   playTimeTracker: CMJobProvostChiefInspector
+#  requirements:
+#  - !type:RoleTimeRequirement
+#    role: CMJobProvostInspector
+#    time: 108000 # 30 hours
   ranks:
     RMCRankProvostChiefInspector: []
   startingGear: RMCGearProvostChiefInspector
   icon: RMCJobIconProvostChiefInspector
   joinNotifyCrew: false
+  marineAuthorityLevel: 0
+  supervisors: cm-job-supervisors-marine-high-command
   accessGroups:
   - ShipMasterAccess
   special:
@@ -22,10 +29,24 @@
         RMCSkillFireman: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillPolice: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 1
+        RMCSkillOverwatch: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-chief
     - type: RMCTrackable
-  hidden: true
+      hidden: true
+    - type: MarineOrders
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: RMCPointing
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pve_chief_inspector
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_mp
 
 - type: entity
   id: RMCRandomHumanoidProvostChiefInspector

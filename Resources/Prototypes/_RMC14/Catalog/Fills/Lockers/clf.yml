@@ -1,0 +1,7 @@
+- type: entityTable
+  id: RMCClosetCLFSGOFill
+  table: !type:AllSelector
+    children:
+    - id: RMCWeaponMar50LMG
+    - id: RMCMagazineMar50LMG
+      amount: 5

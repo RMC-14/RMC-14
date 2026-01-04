@@ -418,11 +418,15 @@ public abstract partial class SharedHandsSystem
         return free;
     }
 
-    public int CountFreeableHands(Entity<HandsComponent> hands)
+    public int CountFreeableHands(Entity<HandsComponent> hands, EntityUid except)
     {
         var freeable = 0;
         foreach (var name in hands.Comp.Hands.Keys)
         {
+            // RMC14
+            if (TryGetHeldItem(hands.AsNullable(), name, out var item) && item == except)
+                continue;
+
             if (HandIsEmpty(hands.AsNullable(), name) || CanDropHeld(hands, name))
                 freeable++;
         }

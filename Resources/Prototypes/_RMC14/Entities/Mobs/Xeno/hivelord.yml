@@ -147,6 +147,8 @@
     value: 0.2
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT2
+  - type: RMCActionOrder
+    id: CMXenoHivelord
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -197,5 +199,5 @@
     description: rmc-xeno-resin-whisperer-description
     popup: rmc-xeno-resin-whisperer-popup
   - type: XenoHidden
-
-
+  - type: RMCActionOrder
+    id: CMXenoHivelordResinWhisperer

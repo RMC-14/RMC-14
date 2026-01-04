@@ -21,6 +21,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Utility;
+using Robust.Shared.Physics.Components;
 
 namespace Content.Server.Light.EntitySystems
 {
@@ -44,7 +45,10 @@ namespace Content.Server.Light.EntitySystems
         {
             base.Initialize();
 
-            SubscribeLocalEvent<ExpendableLightComponent, ComponentInit>(OnExpLightInit);
+            // RMC14
+            SubscribeLocalEvent<ExpendableLightComponent, MapInitEvent>(OnExpLightInit);
+            // RMC14
+
             SubscribeLocalEvent<ExpendableLightComponent, UseInHandEvent>(OnExpLightUse);
             SubscribeLocalEvent<ExpendableLightComponent, GetVerbsEvent<ActivationVerb>>(AddIgniteVerb);
             SubscribeLocalEvent<ExpendableLightComponent, InteractUsingEvent>(OnInteractUsing);
@@ -99,7 +103,8 @@ namespace Content.Server.Light.EntitySystems
                         }
 
                         // RMC14
-                        _physics.SetBodyType(ent, BodyType.Dynamic);
+                        if (HasComp<PhysicsComponent>(ent))
+                            _physics.SetBodyType(ent, BodyType.Dynamic);
 
                         break;
                 }
@@ -224,7 +229,8 @@ namespace Content.Server.Light.EntitySystems
             }
         }
 
-        private void OnExpLightInit(EntityUid uid, ExpendableLightComponent component, ComponentInit args)
+        // RMC14
+        private void OnExpLightInit(EntityUid uid, ExpendableLightComponent component, MapInitEvent args)
         {
             if (TryComp<ItemComponent>(uid, out var item))
             {
@@ -234,11 +240,16 @@ namespace Content.Server.Light.EntitySystems
             component.CurrentState = ExpendableLightState.BrandNew;
             component.StateExpiryTime = (float)component.GlowDuration.TotalSeconds;
 
+			// RMC14
+            if (component.StartsActivated)
+                TryActivate((uid, component));
+
             // RMC14
             Dirty(uid, component);
 
             EnsureComp<PointLightComponent>(uid);
         }
+        // RMC14
 
         private void OnExpLightUse(Entity<ExpendableLightComponent> ent, ref UseInHandEvent args)
         {

@@ -222,6 +222,8 @@ public sealed class CrewManifestSystem : EntitySystem
     /// <param name="station"></param>
     private void BuildCrewManifest(EntityUid station)
     {
+        _queuedManifests.Add(station);
+        return;
         var iter = _recordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
 
         var entries = new CrewManifestEntries();
@@ -247,6 +249,52 @@ public sealed class CrewManifestSystem : EntitySystem
 
         entries.Entries = entriesSort.Select(x => x.entry).ToArray();
         _cachedEntries[station] = entries;
+    }
+
+
+    // RMC14
+    private readonly HashSet<EntityUid> _queuedManifests = new();
+    private void RMCBuildCrewManifest(EntityUid station)
+    {
+        var iter = _recordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
+
+        var entries = new CrewManifestEntries();
+
+        var entriesSort = new List<(JobPrototype? job, CrewManifestEntry entry)>();
+        foreach (var recordObject in iter)
+        {
+            var record = recordObject.Item2;
+            var entry = new CrewManifestEntry(record.Name, record.JobTitle, record.JobIcon, record.JobPrototype, record.Squad);
+
+            _prototypeManager.TryIndex(record.JobPrototype, out JobPrototype? job);
+            entriesSort.Add((job, entry));
+        }
+
+        entriesSort.Sort((a, b) =>
+        {
+            var cmp = JobUIComparer.Instance.Compare(a.job, b.job);
+            if (cmp != 0)
+                return cmp;
+
+            return string.Compare(a.entry.Name, b.entry.Name, StringComparison.CurrentCultureIgnoreCase);
+        });
+
+        entries.Entries = entriesSort.Select(x => x.entry).ToArray();
+        _cachedEntries[station] = entries;
+    }
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_queuedManifests.Count < 1)
+            return;
+
+        foreach (var queuedStation in _queuedManifests)
+        {
+            RMCBuildCrewManifest(queuedStation);
+            UpdateEuis(queuedStation);
+        }
+        _queuedManifests.Clear();
     }
 }
 

@@ -8,6 +8,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.UserInterface;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Intel.Tech;
@@ -15,6 +16,7 @@ namespace Content.Shared._RMC14.Intel.Tech;
 public sealed class TechSystem : EntitySystem
 {
     [Dependency] private readonly DropshipFabricatorSystem _dropshipFabricator = default!;
+    [Dependency] private readonly SharedGameTicker _ticker = default!;
     [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -28,7 +30,7 @@ public sealed class TechSystem : EntitySystem
         SubscribeLocalEvent<TechUnlockTierEvent>(OnTechUnlockTier);
         SubscribeLocalEvent<TechRequisitionsBudgetEvent>(OnTechRequisitionsBudget);
         SubscribeLocalEvent<TechDropshipBudgetEvent>(OnTechDropshipBudget);
-        SubscribeLocalEvent<TechWarheadEvent>(OnTechWarhead);
+        SubscribeLocalEvent<TechLogisticsDeliveryEvent>(OnTechLogisticsDelivery);
 
         SubscribeLocalEvent<TechControlConsoleComponent, BeforeActivatableUIOpenEvent>(OnControlConsoleBeforeOpen);
 
@@ -64,9 +66,9 @@ public sealed class TechSystem : EntitySystem
         _dropshipFabricator.ChangeBudget(ev.Amount);
     }
 
-    private void OnTechWarhead(TechWarheadEvent ev)
+    private void OnTechLogisticsDelivery(TechLogisticsDeliveryEvent ev)
     {
-        _requisitions.CreateSpecialDelivery(ev.Warhead);
+        _requisitions.CreateSpecialDelivery(ev.Object);
     }
 
     private void OnControlConsoleBeforeOpen(Entity<TechControlConsoleComponent> ent, ref BeforeActivatableUIOpenEvent args)
@@ -97,6 +99,9 @@ public sealed class TechSystem : EntitySystem
             Log.Warning($"{ToPrettyString(args.Actor)} tried to buy tech option with invalid index {args.Index}");
             return;
         }
+
+        if (option.TimeLock  > _ticker.RoundDuration())
+            return;
 
         if (option.Purchased && !option.Repurchasable)
             return;

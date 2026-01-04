@@ -13,7 +13,7 @@
   - CMAccessCMO # chief medical officer
   - CMAccessCMP # chief MP
   - CMAccessCO # commanding officer
-  - CMAccessCommand # all command level doors, including bridge. May need to be split.
+  - RMCAccessCommand # all command level doors, including bridge. May need to be split.
   - CMAccessCrewman # access for dropship maintenance doors
   - CMAccessChemistry # access for chem doors and chem machines
   - CMAccessDelta # Squad prep access
@@ -29,7 +29,7 @@
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
   - CMAccessPress # correspondent access
-  - CMAccessQM # quartermaster
+  - CMAccessQM # Logistics Officer
   - CMAccessRequisitions # (cargo)
   - CMAccessResearch # research access
   - CMAccessSEA # senior enlisted
@@ -40,12 +40,61 @@
   - RMCAccessTSEPAInspector # tsepa inspector
   - RMCAccessTSEPABrig # tsepa brig / senior constables
   - RMCAccessTSEPA # tsepa
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand
+
+- type: accessGroup
+  id: CO
+  parent: RMCBaseCommandJob
+  name: Commanding Officer
+  tags:
+  - CMAccessAlpha # Squad prep access
+  - CMAccessArmory # MP weapon vault
+  - CMAccessASO # auxiliary support officer
+  - CMAccessBravo # Squad prep access
+  - CMAccessBrig # MP Access
+  - CMAccessCE # chief engineer
+  - CMAccessCharlie # Squad prep access
+  - CMAccessCMO # chief medical officer
+  - CMAccessCMP # chief MP
+  - CMAccessCO # commanding officer
+  - RMCAccessCommand # all command level doors, including bridge. May need to be split.
+  - CMAccessCrewman # access for dropship maintenance doors
+  - CMAccessChemistry # access for chem doors and chem machines
+  - CMAccessDelta # Squad prep access
+  - CMAccessDropship # access to open dropship doors
+  - CMAccessEngineering # ship-side engineering
+  - CMAccessCombatTechPrep # combat technician
+  - CMAccessFTLPrep # fireteam leader
+  - CMAccessKitchen # chef access
+  - CMAccessMaint # maints
+  - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
+  - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - CMAccessMedPrep # hospital corpsman
+  - CMAccessOT # ordnance tech
+  - CMAccessPilot # dropship pilot door access
+  - CMAccessPress # correspondent access
+  - CMAccessQM # Logistics Officer
+  - CMAccessRequisitions # (cargo)
+  - CMAccessResearch # research access
+  - CMAccessSEA # senior enlisted
+  - CMAccessSmartPrep # smart gun operator
+  - CMAccessSpecPrep # weapons specialist
+  - CMAccessSquadLeaderPrep # squad leader access
+  - CMAccessMarineRifleman # this access is used for the basic vendor, which only the rifleman can use.
+  - RMCAccessTSEPAInspector # tsepa inspector
+  - RMCAccessTSEPABrig # tsepa brig / senior constables
+  - RMCAccessTSEPA # tsepa
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand
 
 # all ship-side access that is not CO
 # SEA uses this.
 # XO/EO Uses this.
 - type: accessGroup
   id: MarineMain
+  parent: RMCBaseCommandJob
+  name: Executive Officer
   tags:
   - CMAccessAlpha
   - CMAccessArmory
@@ -56,7 +105,7 @@
   - CMAccessCharlie
   - CMAccessCMO
   - CMAccessCMP
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessCrewman
   - CMAccessChemistry
   - CMAccessDelta
@@ -80,13 +129,59 @@
   - CMAccessSpecPrep
   - CMAccessSquadLeaderPrep
   - CMAccessMarineRifleman
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand
+
+- type: accessGroup
+  id: SEA
+  parent: RMCBaseAuxiliaryJob
+  name: Senior Enlisted Advisor
+  tags:
+  - CMAccessAlpha
+  - CMAccessArmory
+  - CMAccessASO
+  - CMAccessBravo
+  - CMAccessBrig
+  - CMAccessCE
+  - CMAccessCharlie
+  - CMAccessCMO
+  - CMAccessCMP
+  - RMCAccessCommand
+  - CMAccessCrewman
+  - CMAccessChemistry
+  - CMAccessDelta
+  - CMAccessDropship
+  - CMAccessEngineering
+  - CMAccessCombatTechPrep
+  - CMAccessFTLPrep
+  - CMAccessKitchen
+  - CMAccessMaint
+  - CMAccessMarinePrep
+  - CMAccessMedical
+  - CMAccessMedPrep
+  - CMAccessOT
+  - CMAccessPilot
+  - CMAccessPress
+  - CMAccessQM
+  - CMAccessRequisitions
+  - CMAccessResearch
+  - CMAccessSEA
+  - CMAccessSmartPrep
+  - CMAccessSpecPrep
+  - CMAccessSquadLeaderPrep
+  - CMAccessMarineRifleman
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand
 
 - type: accessGroup
   id: SO
+  parent: RMCBaseCommandJob
+  name: Staff Officer
   tags:
-  - CMAccessCommand
+  - RMCAccessCommand
   - CMAccessDropship
   - CMAccessMedical
+  - RMCAccessDatabase
 
 # Corp access, probably not needed
 - type: accessGroup
@@ -94,8 +189,12 @@
   tags:
   - CMAccessCorp
 
-# Synth access
+# UNMC Synth access
 - type: accessGroup
   id: Synth
+  parent: RMCBaseMiscellaneousJob
+  name: Synthetic
   tags:
   - RMCAccessSynth
+  - RMCAccessDatabase
+  - RMCAccessSeniorCommand

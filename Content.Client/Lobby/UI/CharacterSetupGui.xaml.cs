@@ -65,8 +65,10 @@ namespace Content.Client.Lobby.UI
 
             StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered(); // RMC-PlaytimeStats-Tweak
 
-            CommendationsButton.OnPressed += _ =>
-                IoCManager.Resolve<CommendationsManager>().OpenWindow();
+            CommendationsReceivedButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
+            CommendationsGivenButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenGivenWindow();
 
             _cfg.OnValueChanged(CCVars.SeeOwnNotes, p => AdminRemarksButton.Visible = p, true);
         }

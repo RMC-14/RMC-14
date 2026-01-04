@@ -223,7 +223,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
@@ -238,7 +238,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
@@ -251,7 +251,7 @@
   id: RMCPouchSurvivalBlackFilled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
 
 - type: entity
   parent: RMCPouchSurvivalSynth
@@ -260,7 +260,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: CMSheetMetal50
     - id: CMCrowbarRed
     - id: CMWelder
     - id: RMCCableCoil

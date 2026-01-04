@@ -14,7 +14,7 @@ public abstract partial class SharedXenoEggRetrieverSystem : EntitySystem
     [Dependency] protected readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] protected readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()

@@ -32,25 +32,32 @@
         RMCSkillMedical: 1
         RMCSkillJtac: 1
         RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-squadlead
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
   hidden: true
 
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSPPSquadLeadPVE
-  name: weya pmc team lead spawn point
+  name: spp squad lead spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
     job_id: RMCSPPSquadLeadPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
-    state: pmc_spawn
+    state: spp_spawn
 
 - type: startingGear
   id: RMCJobSPPSquadLeadPVEGear

@@ -185,6 +185,28 @@
     - sprite: _RMC14/Mobs/Felinids/catbig_tail.rsi
       state: m_tail_catbig_primary
 
+- type: marking
+  id: FelinidTigerDouble
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_secondary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_tertiary
+
+- type: marking
+  id: FelinidDouble
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/double_tail.rsi
+      state: m_tail_twocat
+
 #Animated Tails
 
 - type: marking
@@ -267,6 +289,28 @@
   - sprite: _RMC14/Mobs/Felinids/catbig_tail.rsi
     state: m_tail_catbig_primary_wag
 
+- type: marking
+  id: FelinidTigerDoubleAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_primary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_secondary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_tertiary
+
+- type: marking
+  id: FelinidDoubleAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/double_tail.rsi
+      state: m_waggingtail_twocat
+
 # Snout
 
 - type: marking
@@ -279,4 +323,3 @@
       state: snout_cat
     - sprite: _RMC14/Mobs/Felinids/felinid_snouts.rsi
       state: snout_cat_nose
-  

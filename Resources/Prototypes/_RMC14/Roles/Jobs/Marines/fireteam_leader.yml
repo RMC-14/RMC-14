@@ -29,6 +29,7 @@
   overwatchSortPriority: -5
   overwatchRoleName: Fire Team Leaders
   roleWeight: 1
+  displayWeight: 5
   special:
   - !type:AddComponentSpecial
     components:
@@ -50,6 +51,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tl
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearFireteamLeader

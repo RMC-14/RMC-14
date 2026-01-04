@@ -1,0 +1,32 @@
+- type: job
+  parent: CMSurvivorScientist
+  id: RMCSurvivorShivasResearcher
+  name: rmc-job-name-survivor-shivas-researcher
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorShivasResearcher
+  spawnMenuRoleName: Researcher (Shivas Survivor)
+  camouflageStartingGear: null
+
+- type: startingGear
+  parent: RMCGearSurvivorScientist
+  id: RMCGearSurvivorShivasResearcher
+  equipment:
+    head: RMCHeadUshanka
+    mask: CMMaskCoif
+    outerClothing: RMCCoatSnowSurvivorPurple
+    gloves: CMHandsLatex
+    shoes: RMCShoesSnow
+    jumpsuit: CMScrubsBlue
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorShivasResearcher
+  name: survivor shivas researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorShivasResearcher
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

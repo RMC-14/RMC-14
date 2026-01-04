@@ -47,6 +47,7 @@
   - type: Corrodible
     timeToApply: 4
     structure: true
+  - type: RMCContainerEmptyOnDestruction
   - type: Destructible
     thresholds:
     - trigger:
@@ -111,6 +112,8 @@
   - type: ParaDroppable
     dropScatter: 4
   - type: AnimationPlayer
+  - type: RMCMesonsNonviewable
+  - type: EntityStorageCloseOnMapInit
 
 - type: entity
   parent: RMCCrateBase
@@ -680,6 +683,7 @@
   id: RMCCrateSecureWeYa
   name: secure We-Ya crate
   description: A secure crate with a We-Ya insignia on it.
+  suffix: We-Ya, Req, Locked
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
@@ -701,7 +705,7 @@
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/secure_we_ya.rsi
   - type: AccessReader
-    access: [["CMAccessRequisitions"], ["CMAccessCorp"]]
+    access: [["RMCAccessWeYa"]]
 
 - type: entity
   parent: RMCCrateSecure
@@ -829,6 +833,14 @@
 - type: entity
   parent: RMCCrateBase
   id: RMCCrateMetalBuildable
+  suffix: Buildable, No Req Reward
+  components:
+  - type: RequisitionsCrate
+    reward: 0
+
+- type: entity
+  parent: RMCCratePlastic
+  id: RMCCratePlasticBuildable
   suffix: Buildable, No Req Reward
   components:
   - type: RequisitionsCrate

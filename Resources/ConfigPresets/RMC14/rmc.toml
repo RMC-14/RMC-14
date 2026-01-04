@@ -75,6 +75,7 @@ wiki = "https://wiki.rouny-ss14.com"
 [net]
 tickrate = 25
 bindto = "::,0.0.0.0"
+log_late_msg = false
 
 [physics]
 grid_splitting = false

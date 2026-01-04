@@ -9,6 +9,9 @@ rmc-breech-loaded-open-shoot-attempt = You need to close the breech first!
 rmc-breech-loaded-not-ready-to-shoot = You need to open and close the breech first!
 rmc-breech-loaded-closed-load-attempt = You need to open the breech first!
 rmc-breech-loaded-closed-extract-attempt = You need to open the breech first!
+rmc-breech-loaded-toggle-attempt-cooldown = You must wait before {$action} the chamber again!
+rmc-breech-loaded-open = opening
+rmc-breech-loaded-close = closing
 
 rmc-wield-use-delay = You need to wait {$seconds} seconds before wielding {THE($wieldable)}!
 rmc-shoot-use-delay = You need to wait {$seconds} seconds before shooting {THE($wieldable)}!

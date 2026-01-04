@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Taken from https://cm-ss13.com/wiki/Marines",
+  "copyright": "Taken from https://cm-ss13.com/wiki/Marines, Chief MP, Warden, Military Police and Hospital Corpsman textures from RMC14 added on github by BreakpointDebug1234, Provost Marshal texture from RMC14 and submited by drmichael.",
   "size": {
     "x": 32,
     "y": 32
@@ -66,6 +66,9 @@
     },
     {
       "name": "pmc"
+    },
+	{
+      "name": "provost_marshal"
     },
     {
       "name": "quartermaster"

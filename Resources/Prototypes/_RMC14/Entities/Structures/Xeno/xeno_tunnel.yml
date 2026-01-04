@@ -18,6 +18,8 @@
     transparency: 0.2
   - type: DestroyedByExplosionType
     explosion: RMCOBXenoTunnel
+  - type: RMCMesonsNonviewable
+    xenoVisible: true
   - type: XenoTunnel
   - type: XenoStructureMapTracked
   - type: TacticalMapTracked

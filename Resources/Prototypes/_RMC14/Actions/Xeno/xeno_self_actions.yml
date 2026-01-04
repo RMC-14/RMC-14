@@ -2,7 +2,7 @@
   id: ActionXenoRest
   parent: ActionXenoBase
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -17,7 +17,7 @@
   parent: CMGuidebookActionXenoBase
   id: RMCGuidebookActionXenoRest
   name: Rest
-  description: Lie down to regenerate health more quickly while on weeds.
+  description: Lie down to regenerate health more quickly while on weeds. [color=red]Your rest keybind will also activate this action, Shift+R by default.[/color]
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -211,7 +211,7 @@
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
   name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
-  description: Become immobile and start laying eggs which will produce parasites. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
+  description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -307,8 +307,8 @@
 - type: entity
   id: ActionXenoThrowParasite
   parent: ActionXenoBase
-  name: Throw Parasite
-  description: Retrieves a parasite from your storage if you have an empty hand. Using this on a parasite on the ground will pickup all nearby parasites. Targeting a tile with a parasite in hand will throw it up to 4 tiles away, where the parasite will be stunned for 5 seconds. Using a parasite in hand will add it to your storage. [color=green]Parasites won't die due to time while you hold or carry them.[/color]
+  name: Carrier's Bond
+  description: Retrieves a child from your storage if you have an empty hand. Using this on a child on the ground will pickup all nearby children. Targeting a tile with a child in hand will throw it up to 4 tiles away, where the child will be stunned for 5 seconds. Using a child in hand will add it to your storage. [color=green]Children won't die due to time while you hold or carry them.[/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -335,8 +335,8 @@
 - type: entity
   id: ActionXenoParasiteReserve
   parent: ActionXenoBase
-  name: Set Parasite Reserve
-  description: Sets your parasite Reserves. Observers cannot join as a stored parasite if your parasites stored is less than or equal to your reserve.
+  name: Set Child Reserve
+  description: Sets your child Reserves. Observers cannot join as a stored child if your children stored is less than or equal to your reserve.
   components:
   - type: Action
     itemIconStyle: NoItem

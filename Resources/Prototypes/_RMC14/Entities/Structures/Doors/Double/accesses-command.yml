@@ -4,7 +4,7 @@
   suffix: Command, Glass, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]
 
 - type: entity
   parent: CMDoubleDoorCommandSolid
@@ -12,4 +12,4 @@
   suffix: Command, Solid, Locked
   components:
   - type: AccessReader
-    access: [ [ "CMAccessCommand" ] ]
+    access: [ [ "RMCAccessCommand" ] ]

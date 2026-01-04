@@ -90,4 +90,10 @@ public sealed partial class AreaComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool RetrieveItemObjective;
+
+    [DataField, AutoNetworkedField]
+    public int BuildableTiles;
+
+    [DataField, AutoNetworkedField]
+    public int ResinConstructCount;
 }

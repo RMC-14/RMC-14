@@ -90,3 +90,12 @@
   components:
   - type: Sprite
     state: flask_we_ya
+
+- type: entity
+  parent: [CMCanteenBase, DrinkFlaskVisualsOpenable]
+  id: RMCWeYaThermos
+  name: We-Ya thermos
+  description: A sleek metal thermos, decorated with the colours of the Weston-Yamada Corporation. The marketing claims it can withstands equivalent to a nuclear blast, though that's probably just PR talking.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/weya_thermos.rsi

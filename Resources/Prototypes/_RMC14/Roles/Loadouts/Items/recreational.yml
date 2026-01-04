@@ -56,13 +56,6 @@
     - RMCMagazineWeYaOrreryN184
 
 - type: loadout
-  id: MagazineDirtyMagazineRMC
-  cost: 1
-  storage:
-    back:
-    - RMCMagazineDirtyMagazine
-
-- type: loadout
   id: D20DiceRMC
   cost: 1
   storage:
