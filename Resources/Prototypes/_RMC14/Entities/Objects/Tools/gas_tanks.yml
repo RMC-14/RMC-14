@@ -1,5 +1,17 @@
+# Gas Tanks /obj/item/tank/oxygen  # Base Gas Tank code/game/objects/items/tanks/tanks.dm
+
+# for future needs
 - type: entity
-  parent: NitrousOxideTank
+  abstract: true
+  parent: GasTankBase
+  id: CMGasTankBase
+  components:
+  - type: PhysicalComposition
+    materialComposition: {}
+
+# Filled Resources/Prototypes/_RMC14/Catalog/Fills/Items/gas_tanks.yml
+- type: entity
+  parent: CMGasTankBase
   id: CMAnestheticTank
   name: anesthetic tank
   description: A tank with an N2O/O2 gas mix.
@@ -11,6 +23,22 @@
     sprite: _RMC14/Objects/Tanks/anesthetic.rsi
   - type: GasTank
     outputPressure: 30.4
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/anesthetic.rsi
+
+- type: entity
+  parent: CMGasTankBase
+  id: RMCGasTankOxygen
+  name: oxygen tank
+  description: A tank containing pressurized oxygen for breathing.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
 
 - type: entity
   parent: CMGasTankBase
@@ -28,6 +56,7 @@
     slots:
     - Pocket
     - Belt
+    - Back
     - suitStorage
   - type: MeleeWeapon
     damage:
@@ -37,9 +66,6 @@
     air:
       volume: 0.66
       temperature: 293.15
-  - type: PhysicalComposition
-    materialComposition:
-      CMSteel: 100
 
 - type: entity
   parent: RMCEmergencyOxygenTank
@@ -75,94 +101,6 @@
       volume: 2.5
       temperature: 293.15
 
-# Gas Tanks /obj/item/reagent_container/glass/canister
-
-# for future needs
-- type: entity
-  abstract: true
-  parent: GasTankBase
-  id: CMGasTankBase
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankHydrogen
-  name: hydrogen canister
-  description: A canister containing pressurized hydrogen. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
-  # TODO RMC14 hydrogen fill
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankAmmonia
-  name: ammonia canister
-  description: A canister containing pressurized ammonia. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/ammonia.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/ammonia.rsi
-  - type: GasTank
-    outputPressure: 21.3
-    air:
-      volume: 5
-      moles:
-        - 0 #         oxygen
-        - 0 #         nitrogen
-        - 0 #         CO2
-        - 0 #         plasma
-        - 0 #         tritium
-        - 0 #         water vapor
-        - 2.0513795 # ammonia
-        # 2.0513795   total
-      temperature: 293.15
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankMethane
-  name: methane canister
-  description: A canister containing pressurized methane. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/methane.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/methane.rsi
-  # TODO RMC14 methane fill
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankPacid
-  name: polytrinic acid canister
-  description: A canister containing pressurized polytrinic acid. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/pacid.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/pacid.rsi
-  # TODO RMC14 polyt acid fill
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankOxygen
-  name: oxygen canister
-  description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/oxygen.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/oxygen.rsi
-  - type: GasTank
-    outputPressure: 21.3
-    air:
-      volume: 5
-      moles:
-        - 2.0513795 # oxygen
-        # 2.0513795   total
-      temperature: 293.15
-
 - type: entity
   parent: CMGasTankBase
   id: RMCGasTankPhoron
@@ -173,14 +111,124 @@
     sprite: _RMC14/Objects/Tanks/phoron.rsi
   - type: Item
     sprite: _RMC14/Objects/Tanks/phoron.rsi
-  - type: GasTank
-    outputPressure: 21.3
-    air:
-      volume: 5
-      moles:
-        - 0 #         oxygen
-        - 0 #         nitrogen
-        - 0 #         CO2
-        - 2.0513795 # plasma
-        # 2.0513795   total
-      temperature: 293.15
+
+
+# Reagent "Gas" Canisters /obj/item/reagent_container/glass/canister
+# These are reagent containers(like beakers), not upstream atmos gas canisters. BaseBeaker has Drink and Spillable components, which is undesirable.
+- type: entity
+  abstract: true
+  parent: CMBeakerBase # TODO MARK PR AS DRAFT AND CHECK BASEBEAKER COMPONENTS 4 PARITY i eeb now
+  id: RMCReagentGasTankBase # also do clothing compoent back + suitslot
+  components:
+  - type: Item
+    size: Normal
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+  - type: SolutionTransfer
+    transferAmount: 100
+    minTransferAmount: 50
+    maxTransferAmount: 400
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 50
+    - 100
+    - 200
+    - 300
+    - 400
+  - type: Spillable
+    solution: beaker
+    spillDelay: 3.0 # TODO remove this
+  - type: PhysicalComposition
+    materialComposition: {}
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankHydrogen
+  name: hydrogen canister
+  description: A canister containing pressurized hydrogen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: Hydrogen
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankAmmonia
+  name: ammonia canister
+  description: A canister containing pressurized ammonia. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: Ammonia
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankMethane
+  name: methane canister
+  description: A canister containing pressurized methane. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: RMCMethane
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankPacid
+  name: polytrinic acid canister
+  description: A canister containing pressurized polytrinic acid. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: PolytrinicAcid
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankOxygen
+  name: oxygen canister
+  description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: Oxygen
+          Quantity: 400

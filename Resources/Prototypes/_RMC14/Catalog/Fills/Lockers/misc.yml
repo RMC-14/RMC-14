@@ -55,7 +55,7 @@
     contents:
       - id: RMCHardhatRed
       - id: RMCSuitFirefighter
-      - id: CMGasTankOxygen
+      - id: RMCReagentGasTankOxygen
       - id: CMFireExtinguisher
       - id: CMPackFlare
 
