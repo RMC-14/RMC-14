@@ -12,3 +12,5 @@
     state: molten
   - type: Transform
     anchored: true
+  - type: Physics
+    bodyType: Static
