@@ -47,6 +47,9 @@
   - type: Construction
     graph: RMCTileWood
     node: start
+  - type: PhysicalComposition
+    materialComposition:
+      RMCWood: 937.5
 
 - type: stack
   id: RMCTileSteel
