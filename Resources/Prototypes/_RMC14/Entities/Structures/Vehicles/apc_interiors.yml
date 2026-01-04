@@ -205,6 +205,8 @@
   components:
   - type: Sprite
     state: wall
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -213,6 +215,8 @@
   - type: Sprite
     drawdepth: Walls
     state: wall
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -306,6 +310,8 @@
   components:
   - type: Sprite
     state: corner_inverse_L
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -348,6 +354,8 @@
   components:
   - type: Sprite
     state: corner_inverse_R
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -383,6 +391,8 @@
   components:
   - type: Sprite
     state: corner_small_L
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -390,6 +400,8 @@
   components:
   - type: Sprite
     state: corner_small_R
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -469,6 +481,7 @@
     fadeOnSharedGrid: true
     fadeLayers:
     - "roof"
+  - type: Clickable
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -675,6 +688,8 @@
   components:
   - type: Sprite
     state: door_back
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCDoorBase
@@ -700,6 +715,8 @@
     anchored: false
   - type: Sprite
     state: wheel_front_top_1
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase
@@ -729,6 +746,8 @@
     anchored: false
   - type: Sprite
     state: wheel_back_top_2
+  - type: Occluder
+    enabled: false
 
 - type: entity
   parent: RMCVehicleAPCInteriorBase
@@ -740,3 +759,5 @@
     anchored: false
   - type: Sprite
     state: wheel_back_top_1
+  - type: Occluder
+    enabled: false

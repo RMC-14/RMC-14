@@ -123,13 +123,16 @@
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
   - type: Gun
     fireRate: 0.5
+    projectileSpeed: 20
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
     cameraRecoilScalar: 0
+  - type: ShootAtFixedPoint
   - type: BallisticAmmoProvider
     cycleable: false
     capacity: 8
@@ -147,8 +150,8 @@
   - type: RefillableByBulletBox
     bulletType: RMCFlarePackAmmo
   - type: GunMuzzleOffset
-    offset: "0.9,0"
-    muzzleOffset: "0.5,0"
+    offset: "0,0"
+    muzzleOffset: "0,0"
     useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: flare_launcher_0

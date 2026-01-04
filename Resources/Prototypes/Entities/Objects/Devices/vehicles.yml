@@ -787,7 +787,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.6,-1.4,0.6,1.4
+          bounds: -1,-1.5,1,1.5
         density: 1200
         mask:
         - Impassable
@@ -799,7 +799,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -0.6,-1.4,0.6,1.4
+          bounds: -1,-1.5,1,1.5
         density: 1200
         mask:
         - MidImpassable
@@ -907,71 +907,111 @@
     fuelUsed: 6
   - type: Appearance
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/apc_interior.yml
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
     maxPassengers: 10
     maxXenos: 3
     entryPoints:
     # Entry point 0: starboard hatch
-    - offset: 1,-1
+    - offset: 1.5,0
       radius: 0.7
-      interiorCoords: 3.5,-0.5
+      interiorCoords: 1.6,2.6
     # Entry point 1: port hatch
-    - offset: -1,-1
+    - offset: -1.5,0
       radius: 0.7
-      interiorCoords: 3.25,-1
+      interiorCoords: 1.6,-1.5
     # Entry point 2: rear door
     - offset: 0,2
       radius: 0.85
       interiorCoords: 0.25,-1
 
-# - type: entity
-#   parent: RMCVehicleAPC
-#   id: RMCVehicleAPCMed
-#   name: armored personnel carrier (medical)
-#   description: A medical-configured APC outfitted with triage markings.
-#   components:
-#   - type: Sprite
-#     layers:
-#     - map: [ base ]
-#       state: apc_base_med
-#     - map: [ damaged_frame ]
-#       state: damaged_frame
-#       visible: false
-#     - map: [ primary ]
-#       state: PRIMARY
-#       visible: false
-#     - map: [ secondary ]
-#       state: SECONDARY
-#       visible: false
-#     - map: [ support ]
-#       state: SUPPORT
-#       visible: false
-#     - map: [ rmc-wheels ]
-#       state: wheels_1
+- type: entity
+  parent: RMCVehicleAPC
+  id: RMCVehicleAPCMed
+  name: armored personnel carrier (medical)
+  description: A medical-configured APC outfitted with triage markings.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_med
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    # Entry point 0: starboard hatch
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    # Entry point 1: port hatch
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    # Entry point 2: rear door
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
 
-# - type: entity
-#   parent: RMCVehicleAPC
-#   id: RMCVehicleAPCCommand
-#   name: armored personnel carrier (command)
-#   description: A command-configured APC bristling with sensors and comms gear.
-#   components:
-#   - type: Sprite
-#     layers:
-#     - map: [ base ]
-#       state: apc_base_com
-#     - map: [ damaged_frame ]
-#       state: damaged_frame
-#       visible: false
-#     - map: [ primary ]
-#       state: PRIMARY
-#       visible: false
-#     - map: [ secondary ]
-#       state: SECONDARY
-#       visible: false
-#     - map: [ support ]
-#       state: SUPPORT
-#       visible: false
-#     - map: [ rmc-wheels ]
-#       state: wheels_1
+
+- type: entity
+  parent: RMCVehicleAPC
+  id: RMCVehicleAPCCommand
+  name: armored personnel carrier (command)
+  description: A command-configured APC bristling with sensors and comms gear.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_com
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    # Entry point 0: starboard hatch
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    # Entry point 1: port hatch
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    # Entry point 2: rear door
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+

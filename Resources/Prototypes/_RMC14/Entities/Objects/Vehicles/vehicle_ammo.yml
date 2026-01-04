@@ -170,8 +170,8 @@
           High: { state: ace_autocannon, visible: true }
           Full: { state: ace_autocannon, visible: true }
   - type: BulletBox
-    amount: 200
-    max: 200
+    amount: 60
+    max: 60
     bulletType: RMCVehicleAmmoBoxAceAutocannon
 
 - type: entity
