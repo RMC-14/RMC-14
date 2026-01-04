@@ -30,6 +30,7 @@ public sealed partial class TacticalMapControl
         SpriteSpecifier.Rsi defibbableRsi4 = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "defibbable4");
         SpriteSpecifier.Rsi undefibbableRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "undefibbable");
         SpriteSpecifier.Rsi hiveLeaderRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "xenoleader");
+        SpriteSpecifier.Rsi mortarRsi = new(new ResPath("/Textures/_RMC14/Interface/map_blips.rsi"), "mortar");
         Texture background = system.Frame0(backgroundRsi);
 
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
@@ -47,14 +48,215 @@ public sealed partial class TacticalMapControl
         DrawIconOverlay(handle, textureRect, "roof3", ShowRoof3Overlay);
         DrawIconOverlay(handle, textureRect, "roof4", ShowRoof4Overlay);
 
+        DrawMortarOverlay(handle, actualTopLeft, overlayScale);
         DrawTileGrid(handle, actualTopLeft, actualSize);
         DrawModeBorder(handle, actualTopLeft, actualSize, overlayScale);
         DrawLines(handle, overlayScale, actualTopLeft);
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawPreviewSquare(handle, overlayScale, actualTopLeft);
+        DrawRadiusPreview(handle, actualTopLeft, actualSize, overlayScale);
+        DrawHiveStructureOverlays(handle, system, background, actualTopLeft, overlayScale, curTime);
         DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
+        DrawMortarMarker(handle, system, mortarRsi, actualTopLeft, overlayScale, curTime);
         DrawEraserPreview(handle);
         DrawLabels(handle, overlayScale, actualTopLeft);
+    }
+
+    private const float RadiusPreviewFillAlpha = 0.12f;
+    private const float MortarOverlayFillAlpha = 0.4f;
+    private const float HiveOverlayFillAlpha = 0.3f;
+    private static readonly ResPath MapBlipsRsiPath = new("/Textures/_RMC14/Interface/map_blips.rsi");
+    private static readonly Color HiveCoreOverlayColor = Color.FromHex("#9B59B6");
+    private static readonly Color HivePylonOverlayColor = Color.FromHex("#4FD2A3");
+    private const string HiveCoreBlipState = "core";
+    private const string HivePylonBlipState = "pylon";
+
+    private void DrawRadiusPreview(DrawingHandleScreen handle, Vector2 actualTopLeft, Vector2 actualSize, float overlayScale)
+    {
+        if (!RadiusPreviewEnabled || RadiusPreviewTiles <= 0f || _lastMousePosition == null)
+            return;
+
+        if (overlayScale <= 0.0001f)
+            return;
+
+        Vector2 pixelPosition = LogicalToPixel(_lastMousePosition.Value);
+        UIBox2 mapRect = UIBox2.FromDimensions(actualTopLeft, actualSize);
+        if (!mapRect.Contains(pixelPosition))
+            return;
+
+        Vector2 relativeToTexture = (pixelPosition - actualTopLeft) / overlayScale;
+        Vector2i indices = new(
+            (int)(relativeToTexture.X / MapScale) + _min.X,
+            _delta.Y - (int)(relativeToTexture.Y / MapScale) + _min.Y);
+
+        if (!IsWithinMap(indices))
+            return;
+
+        DrawTileRadiusOverlay(handle, actualTopLeft, overlayScale, indices, RadiusPreviewTiles, RadiusPreviewColor, RadiusPreviewFillAlpha, RadiusPreviewFilter);
+    }
+
+    private void DrawMortarOverlay(DrawingHandleScreen handle, Vector2 actualTopLeft, float overlayScale)
+    {
+        if (_mortarOverlayCenter == null || _mortarOverlayTiles.Count == 0)
+            return;
+
+        float tileSize = MapScale * overlayScale;
+        if (tileSize <= 0.5f)
+            return;
+
+        Color fillColor = _mortarOverlayColor.WithAlpha(MortarOverlayFillAlpha);
+        Vector2 tileDimensions = new(tileSize, tileSize);
+
+        foreach (var indices in _mortarOverlayTiles)
+        {
+            Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+            handle.DrawRect(UIBox2.FromDimensions(position, tileDimensions), fillColor);
+        }
+    }
+
+    private void DrawMortarMarker(
+        DrawingHandleScreen handle,
+        SpriteSystem system,
+        SpriteSpecifier.Rsi mortarRsi,
+        Vector2 actualTopLeft,
+        float overlayScale,
+        TimeSpan curTime)
+    {
+        if (_mortarOverlayCenter == null)
+            return;
+
+        Vector2 position = IndicesToPosition(_mortarOverlayCenter.Value) * overlayScale + actualTopLeft;
+        float tileSize = MapScale * overlayScale;
+        float scaledBlipSize = GetScaledBlipSize(overlayScale);
+        Vector2 centeredPosition = GetCenteredMarkerPosition(position, tileSize, scaledBlipSize);
+        UIBox2 rect = UIBox2.FromDimensions(centeredPosition, new Vector2(scaledBlipSize, scaledBlipSize));
+        handle.DrawTextureRect(system.GetFrame(mortarRsi, curTime), rect);
+    }
+
+    private void DrawHiveStructureOverlays(
+        DrawingHandleScreen handle,
+        SpriteSystem system,
+        Texture background,
+        Vector2 actualTopLeft,
+        float overlayScale,
+        TimeSpan curTime)
+    {
+        if (_blips == null)
+            return;
+
+        if (overlayScale <= 0.0001f)
+            return;
+
+        float tileSize = MapScale * overlayScale;
+        if (tileSize <= 0.5f)
+            return;
+
+        foreach (var blip in _blips)
+        {
+            if (!TryGetHiveOverlay(blip, out var radiusTiles, out var overlayColor))
+                continue;
+
+            Vector2 position = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
+
+            if (radiusTiles > 0f)
+                DrawTileRadiusOverlay(handle, actualTopLeft, overlayScale, blip.Indices, radiusTiles, overlayColor, HiveOverlayFillAlpha, RadiusPreviewFilterMode.None);
+
+            float scaledBlipSize = GetScaledBlipSize(overlayScale);
+            Vector2 centeredPosition = GetCenteredMarkerPosition(position, tileSize, scaledBlipSize);
+            UIBox2 rect = UIBox2.FromDimensions(centeredPosition, new Vector2(scaledBlipSize, scaledBlipSize));
+            var backTexture = blip.Background != null ? system.GetFrame(blip.Background, curTime) : background;
+            handle.DrawTextureRect(backTexture, rect, blip.Color);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
+        }
+    }
+
+    private bool TryGetHiveOverlay(TacticalMapBlip blip, out float radiusTiles, out Color overlayColor)
+    {
+        radiusTiles = 0f;
+        overlayColor = Color.Transparent;
+
+        if (blip.Image.RsiPath != MapBlipsRsiPath)
+            return false;
+
+        switch (blip.Image.RsiState)
+        {
+            case HiveCoreBlipState:
+                radiusTiles = HiveCoreRangeTiles;
+                overlayColor = HiveCoreOverlayColor;
+                return true;
+            case HivePylonBlipState:
+                radiusTiles = HivePylonRangeTiles;
+                overlayColor = HivePylonOverlayColor;
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private bool IsHiveStructureBlip(TacticalMapBlip blip)
+    {
+        if (blip.Image.RsiPath != MapBlipsRsiPath)
+            return false;
+
+        return blip.Image.RsiState == HiveCoreBlipState || blip.Image.RsiState == HivePylonBlipState;
+    }
+
+    private static Vector2 GetCenteredMarkerPosition(Vector2 topLeft, float tileSize, float markerSize)
+    {
+        return topLeft + new Vector2((tileSize - markerSize) * 0.5f, (tileSize - markerSize) * 0.5f);
+    }
+
+    private void DrawTileRadiusOverlay(
+        DrawingHandleScreen handle,
+        Vector2 actualTopLeft,
+        float overlayScale,
+        Vector2i center,
+        float radiusTiles,
+        Color color,
+        float alpha,
+        RadiusPreviewFilterMode filterMode)
+    {
+        if (radiusTiles <= 0f)
+            return;
+
+        float tileSize = MapScale * overlayScale;
+        if (tileSize <= 0.5f)
+            return;
+
+        int maxRange = (int)MathF.Ceiling(radiusTiles);
+        float radiusSquared = radiusTiles * radiusTiles;
+        Color fillColor = color.WithAlpha(alpha);
+        Vector2 tileDimensions = new(tileSize, tileSize);
+
+        for (int dx = -maxRange; dx <= maxRange; dx++)
+        {
+            for (int dy = -maxRange; dy <= maxRange; dy++)
+            {
+                float distanceSquared = dx * dx + dy * dy;
+                if (distanceSquared > radiusSquared)
+                    continue;
+
+                Vector2i indices = new(center.X + dx, center.Y + dy);
+                if (!IsWithinMap(indices))
+                    continue;
+
+                if (!IsRadiusPreviewTileAllowed(indices, filterMode))
+                    continue;
+
+                Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+                handle.DrawRect(UIBox2.FromDimensions(position, tileDimensions), fillColor);
+            }
+        }
+    }
+
+    private bool IsRadiusPreviewTileAllowed(Vector2i indices, RadiusPreviewFilterMode filterMode)
+    {
+        return filterMode switch
+        {
+            RadiusPreviewFilterMode.Mortar => IsMortarFireAllowed(indices),
+            RadiusPreviewFilterMode.OrbitalBombardment => IsOrbitalBombardAllowed(indices),
+            _ => true
+        };
     }
 
     private void DrawIconOverlay(DrawingHandleScreen handle, UIBox2 textureRect, string key, bool enabled)
@@ -133,6 +335,8 @@ public sealed partial class TacticalMapControl
         for (int i = 0; i < _blips.Length; i++)
         {
             TacticalMapBlip blip = _blips[i];
+            if (IsHiveStructureBlip(blip))
+                continue;
             Vector2 position = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));

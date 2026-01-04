@@ -28,6 +28,13 @@ public sealed partial class TacticalMapControl : TextureRect
         None = 3
     }
 
+    public enum RadiusPreviewFilterMode
+    {
+        None = 0,
+        OrbitalBombardment = 1,
+        Mortar = 2
+    }
+
     private const float MapScale = 3f;
     private const float MapTileOpacity = 0.75f;
     private const float BaseBlipSize = 14f;
@@ -113,6 +120,12 @@ public sealed partial class TacticalMapControl : TextureRect
     private bool _rightClickMoved;
     private Vector2? _lastErasePosition;
 
+    private Vector2i? _mortarOverlayCenter;
+    private readonly List<Vector2i> _mortarOverlayTiles = new();
+    private int _mortarOverlayMinRange;
+    private int _mortarOverlayMaxRange;
+    private Color _mortarOverlayColor = Color.White;
+
     private Vector2i? _draggingLabel;
     private Vector2i? _labelDragStart;
     private Vector2? _currentDragPosition;
@@ -139,6 +152,12 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool ShowRoof2Overlay { get; set; }
     public bool ShowRoof3Overlay { get; set; }
     public bool ShowRoof4Overlay { get; set; }
+    public bool RadiusPreviewEnabled { get; set; }
+    public float RadiusPreviewTiles { get; set; }
+    public Color RadiusPreviewColor { get; set; } = Color.White;
+    public RadiusPreviewFilterMode RadiusPreviewFilter { get; set; }
+    public float HiveCoreRangeTiles { get; set; }
+    public float HivePylonRangeTiles { get; set; }
     public Color Color;
     public float BlipSizeMultiplier { get; set; } = 0.9f;
     public float LineThickness { get; set; } = 2.0f;

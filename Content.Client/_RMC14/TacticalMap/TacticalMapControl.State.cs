@@ -248,6 +248,8 @@ public sealed partial class TacticalMapControl
         });
 
         ApplyViewSettings();
+        if (_mortarOverlayCenter != null)
+            RebuildMortarOverlayTiles();
     }
 
     private bool TryApplyCachedTexture(Entity<AreaGridComponent> grid)
@@ -277,6 +279,8 @@ public sealed partial class TacticalMapControl
         _areaLabels = cached.AreaLabels;
 
         ApplyViewSettings();
+        if (_mortarOverlayCenter != null)
+            RebuildMortarOverlayTiles();
         return true;
     }
 
@@ -501,6 +505,89 @@ public sealed partial class TacticalMapControl
         {
             TacticalLabels[pos] = data;
         }
+    }
+
+    public void SetMortarOverlay(Vector2i center, int minRange, int maxRange, Color color)
+    {
+        _mortarOverlayCenter = center;
+        _mortarOverlayMinRange = Math.Max(0, minRange);
+        _mortarOverlayMaxRange = Math.Max(_mortarOverlayMinRange, maxRange);
+        _mortarOverlayColor = color;
+        RebuildMortarOverlayTiles();
+    }
+
+    public void ClearMortarOverlay()
+    {
+        _mortarOverlayCenter = null;
+        _mortarOverlayTiles.Clear();
+    }
+
+    public bool HasMortarOverlay => _mortarOverlayCenter != null;
+
+    public bool IsMortarOverlayTile(Vector2i indices)
+    {
+        if (_mortarOverlayCenter == null)
+            return false;
+
+        if (_mortarOverlayCenter.Value == indices)
+            return true;
+
+        return _mortarOverlayTiles.Contains(indices);
+    }
+
+    private void RebuildMortarOverlayTiles()
+    {
+        _mortarOverlayTiles.Clear();
+
+        if (_mortarOverlayCenter == null)
+            return;
+
+        if (!IsWithinMap(_mortarOverlayCenter.Value))
+            return;
+
+        int maxRange = _mortarOverlayMaxRange;
+        int minRange = _mortarOverlayMinRange;
+        if (maxRange <= 0)
+            return;
+
+        int maxRangeSquared = maxRange * maxRange;
+        int minRangeSquared = minRange * minRange;
+        Vector2i center = _mortarOverlayCenter.Value;
+
+        for (int dx = -maxRange; dx <= maxRange; dx++)
+        {
+            for (int dy = -maxRange; dy <= maxRange; dy++)
+            {
+                int distanceSquared = dx * dx + dy * dy;
+                if (distanceSquared > maxRangeSquared || distanceSquared < minRangeSquared)
+                    continue;
+
+                Vector2i indices = new(center.X + dx, center.Y + dy);
+                if (!IsWithinMap(indices))
+                    continue;
+
+                if (!IsMortarFireAllowed(indices))
+                    continue;
+
+                _mortarOverlayTiles.Add(indices);
+            }
+        }
+    }
+
+    private bool IsMortarFireAllowed(Vector2i indices)
+    {
+        if (TryGetAreaInfo(indices, out var info))
+            return info.MortarFire;
+
+        return true;
+    }
+
+    private bool IsOrbitalBombardAllowed(Vector2i indices)
+    {
+        if (TryGetAreaInfo(indices, out var info))
+            return info.OrbitalBombard;
+
+        return true;
     }
 
     public void ShowTunnelInfo(Vector2i indices, string tunnelName, Vector2 screenPosition)

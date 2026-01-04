@@ -1287,6 +1287,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             AddAlwaysVisibleBlips(layer, map, blips);
         }
 
+        AddSelfBlip(user.Owner, map, blips);
         user.Comp.Blips = blips;
 
         var combinedLines = new List<TacticalMapLine>();
@@ -1321,6 +1322,18 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         return null;
+    }
+
+    private void AddSelfBlip(EntityUid user, TacticalMapComponent map, Dictionary<int, TacticalMapBlip> blips)
+    {
+        if (blips.ContainsKey(user.Id))
+            return;
+
+        var blip = FindBlipInMap(user.Id, map);
+        if (blip == null)
+            return;
+
+        blips[user.Id] = blip.Value;
     }
 
     private void UpdateCanvas(Entity<TacticalMapComponent> map, List<TacticalMapLine> lines, Dictionary<Vector2i, TacticalMapLabelData> labels, ProtoId<TacticalMapLayerPrototype> layer, EntityUid user, SoundSpecifier? sound = null)

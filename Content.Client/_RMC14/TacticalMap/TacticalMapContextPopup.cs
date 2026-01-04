@@ -21,11 +21,17 @@ public sealed class TacticalMapContextPopup : Popup
     private readonly TextureRect _areaIcon;
     private readonly Label _areaNameLabel;
     private readonly TacticalMapButton _createLabelButton;
+    private readonly TacticalMapButton _createMortarButton;
+    private readonly TacticalMapButton _deleteMortarButton;
+    private readonly TacticalMapButton _enterCoordinatesButton;
     private readonly SpriteSystem _spriteSystem;
 
     private static readonly ResPath AreaInfoRsiPath = new("/Textures/_RMC14/Structures/Machines/ceiling.rsi");
 
     public Action? OnCreateLabelPressed;
+    public Action? OnCreateMortarPressed;
+    public Action? OnDeleteMortarPressed;
+    public Action? OnEnterCoordinatesPressed;
 
     public TacticalMapContextPopup()
     {
@@ -79,18 +85,44 @@ public sealed class TacticalMapContextPopup : Popup
         };
         _createLabelButton.Button.OnPressed += _ => OnCreateLabelPressed?.Invoke();
 
+        _createMortarButton = new TacticalMapButton
+        {
+            MinHeight = 20,
+            HorizontalExpand = true
+        };
+        _createMortarButton.Button.OnPressed += _ => OnCreateMortarPressed?.Invoke();
+
+        _deleteMortarButton = new TacticalMapButton
+        {
+            MinHeight = 20,
+            HorizontalExpand = true
+        };
+        _deleteMortarButton.Button.OnPressed += _ => OnDeleteMortarPressed?.Invoke();
+
+        _enterCoordinatesButton = new TacticalMapButton
+        {
+            MinHeight = 20,
+            HorizontalExpand = true
+        };
+        _enterCoordinatesButton.Button.OnPressed += _ => OnEnterCoordinatesPressed?.Invoke();
+
         _headerRow.AddChild(_areaIcon);
         _headerRow.AddChild(_areaNameLabel);
         root.AddChild(_headerRow);
         root.AddChild(_infoContainer);
-        root.AddChild(_createLabelButton);
         _background.AddChild(root);
         AddChild(_background);
 
         UserInterfaceManager.ModalRoot.AddChild(this);
     }
 
-    public void SetInfo(TacticalMapAreaInfo info, bool showCoordinates)
+    public void SetInfo(
+        TacticalMapAreaInfo info,
+        bool showCoordinates,
+        Vector2i? enteredCoordinates,
+        Vector2i? calculatedCoordinates,
+        bool showDeleteMortar,
+        bool showCoordinateEntry)
     {
         _areaNameLabel.Text = info.AreaName;
         _infoContainer.RemoveAllChildren();
@@ -99,6 +131,22 @@ public sealed class TacticalMapContextPopup : Popup
 
         if (showCoordinates)
             AddInfoLine(Loc.GetString("ui-tactical-map-context-coords", ("x", info.Indices.X), ("y", info.Indices.Y)));
+
+        if (enteredCoordinates != null)
+        {
+            AddInfoLine(Loc.GetString(
+                "ui-tactical-map-context-coords-entered",
+                ("x", enteredCoordinates.Value.X),
+                ("y", enteredCoordinates.Value.Y)));
+        }
+
+        if (calculatedCoordinates != null)
+        {
+            AddInfoLine(Loc.GetString(
+                "ui-tactical-map-context-coords-current",
+                ("x", calculatedCoordinates.Value.X),
+                ("y", calculatedCoordinates.Value.Y)));
+        }
 
         if (!string.IsNullOrWhiteSpace(info.AreaId))
             AddInfoLine(Loc.GetString("ui-tactical-map-context-id", ("id", info.AreaId)));
@@ -112,18 +160,22 @@ public sealed class TacticalMapContextPopup : Popup
         if (!string.IsNullOrWhiteSpace(info.AreaLabel))
             AddInfoLine(Loc.GetString("ui-tactical-map-context-area-label", ("label", info.AreaLabel)), Color.FromHex("#E5E5E5"));
 
+        List<string> allowed = new();
+        List<string> blocked = new();
         if (info.HasArea)
-        {
-            BuildActionLists(info, out var allowed, out var blocked);
-
-            if (allowed.Count > 0 || blocked.Count > 0)
-                AddActionColumns(allowed, blocked);
-        }
+            BuildActionLists(info, out allowed, out blocked);
 
         var labelKey = string.IsNullOrWhiteSpace(info.TacticalLabel)
             ? "ui-tactical-map-label-dialog-create-title"
             : "ui-tactical-map-label-dialog-edit-title";
         _createLabelButton.Text = Loc.GetString(labelKey);
+        _createMortarButton.Text = Loc.GetString("ui-tactical-map-create-mortar");
+        _createMortarButton.Disabled = info.HasArea && !info.MortarPlacement;
+        _deleteMortarButton.Text = Loc.GetString("ui-tactical-map-remove-mortar");
+        _deleteMortarButton.Visible = showDeleteMortar;
+        _enterCoordinatesButton.Text = Loc.GetString("ui-tactical-map-enter-coordinates");
+        _enterCoordinatesButton.Visible = showCoordinateEntry;
+        AddActionRow(allowed, blocked);
     }
 
     private void AddInfoLine(string text, Color? color = null)
@@ -153,7 +205,7 @@ public sealed class TacticalMapContextPopup : Popup
         AddAction(info.LandingZone, "ui-tactical-map-action-landing-zone", allowed, blocked);
     }
 
-    private void AddActionColumns(List<string> allowed, List<string> blocked)
+    private void AddActionRow(List<string> allowed, List<string> blocked)
     {
         var row = new BoxContainer
         {
@@ -162,25 +214,57 @@ public sealed class TacticalMapContextPopup : Popup
             Margin = new Thickness(0, 2, 0, 0)
         };
 
-        if (allowed.Count > 0)
+        bool hasActions = allowed.Count > 0 || blocked.Count > 0;
+        if (hasActions)
         {
-            row.AddChild(BuildActionColumn(
-                "ui-tactical-map-context-allowed-title",
-                Color.FromHex("#43B581"),
-                allowed,
-                "+",
-                Color.FromHex("#43B581")));
+            var actionRow = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                SeparationOverride = 10
+            };
+
+            if (allowed.Count > 0)
+            {
+                actionRow.AddChild(BuildActionColumn(
+                    "ui-tactical-map-context-allowed-title",
+                    Color.FromHex("#43B581"),
+                    allowed,
+                    "+",
+                    Color.FromHex("#43B581")));
+            }
+
+            if (blocked.Count > 0)
+            {
+                actionRow.AddChild(BuildActionColumn(
+                    "ui-tactical-map-context-blocked-title",
+                    Color.FromHex("#ED4245"),
+                    blocked,
+                    "-",
+                    Color.FromHex("#ED4245")));
+            }
+
+            row.AddChild(actionRow);
         }
 
-        if (blocked.Count > 0)
+        _createLabelButton.Orphan();
+        _createMortarButton.Orphan();
+        _deleteMortarButton.Orphan();
+        _enterCoordinatesButton.Orphan();
+
+        var buttonColumn = new BoxContainer
         {
-            row.AddChild(BuildActionColumn(
-                "ui-tactical-map-context-blocked-title",
-                Color.FromHex("#ED4245"),
-                blocked,
-                "-",
-                Color.FromHex("#ED4245")));
-        }
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            SeparationOverride = 4,
+            Margin = hasActions ? new Thickness(6, 0, 0, 0) : default
+        };
+
+        buttonColumn.AddChild(_createLabelButton);
+        buttonColumn.AddChild(_createMortarButton);
+        if (_deleteMortarButton.Visible)
+            buttonColumn.AddChild(_deleteMortarButton);
+        if (_enterCoordinatesButton.Visible)
+            buttonColumn.AddChild(_enterCoordinatesButton);
+        row.AddChild(buttonColumn);
 
         _infoContainer.AddChild(row);
     }

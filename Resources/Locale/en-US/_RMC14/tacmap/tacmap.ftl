@@ -39,6 +39,11 @@ ui-tactical-map-overlay-roof1 = Roof
 ui-tactical-map-overlay-roof2 = Structure
 ui-tactical-map-overlay-roof3 = Cavea
 ui-tactical-map-overlay-roof4 = Deep Cave
+ui-tactical-map-radius-ob = OB Radius
+ui-tactical-map-radius-mortar = Mortar Radius
+ui-tactical-map-create-mortar = Create Mortar
+ui-tactical-map-remove-mortar = Remove Mortar
+ui-tactical-map-enter-coordinates = Enter Coordinates
 ui-tactical-map-overlay-legend-title = Roof Legend
 ui-tactical-map-overlay-roof0-desc = Sky all support actions allowed
 ui-tactical-map-overlay-roof1-desc = Roof: blocks mortar placement, lasing, medevac, paradrop
@@ -47,6 +52,8 @@ ui-tactical-map-overlay-roof3-desc = Cave: blocks CAS
 ui-tactical-map-overlay-roof4-desc = Deep Cave: blocks orbital bombard
 
 ui-tactical-map-context-coords = Tile: {$x}, {$y}
+ui-tactical-map-context-coords-entered = Entered: {$x}, {$y}
+ui-tactical-map-context-coords-current = Current: {$x}, {$y}
 ui-tactical-map-context-id = ID: {$id}
 ui-tactical-map-context-label = Label: {$label}
 ui-tactical-map-context-tactical-label = Tactical: {$label}
@@ -67,6 +74,10 @@ ui-tactical-map-action-medevac = Medevac
 ui-tactical-map-action-paradrop = Paradrop
 ui-tactical-map-action-fulton = Fulton
 ui-tactical-map-action-landing-zone = LZ
+
+ui-tactical-map-coords-dialog-title = Enter Coordinates
+ui-tactical-map-coords-dialog-x = X
+ui-tactical-map-coords-dialog-y = Y
 
 ui-tactical-map-blip-size-label = Blip Size: {$size}x
 ui-tactical-map-line-width-label = Line Width: {$width}px

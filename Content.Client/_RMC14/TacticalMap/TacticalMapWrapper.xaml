@@ -40,41 +40,50 @@
                                         MinWidth="60" MinHeight="26" />
         </BoxContainer>
 
-        <BoxContainer Name="OverlayContainer" Access="Public" Orientation="Vertical" Margin="2 0 2 0" Visible="False">
-            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
-                <controls:TacticalMapButton Name="OverlayLinkedLzButton" Access="Public" Text="{Loc ui-tactical-map-overlay-linked-lz}"
-                                            Margin="0 0 6 0" MinWidth="90" MinHeight="26" />
-                <controls:TacticalMapButton Name="OverlayLegendButton" Access="Public" Text="{Loc ui-tactical-map-overlay-legend}"
-                                            MinWidth="60" MinHeight="26" />
+        <BoxContainer Name="OverlayContainer" Access="Public" Orientation="Horizontal" Margin="2 0 2 0" Visible="False" HorizontalExpand="True">
+            <BoxContainer Name="OverlayButtonsColumn" Orientation="Vertical" HorizontalExpand="True">
+                <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                    <controls:TacticalMapButton Name="OverlayLinkedLzButton" Access="Public" Text="{Loc ui-tactical-map-overlay-linked-lz}"
+                                                Margin="0 0 6 0" MinWidth="90" MinHeight="26" />
+                    <controls:TacticalMapButton Name="OverlayLegendButton" Access="Public" Text="{Loc ui-tactical-map-overlay-legend}"
+                                                MinWidth="60" MinHeight="26" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
+                    <TextureRect Name="OverlayRoof0Icon" Access="Public"
+                                 MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                                 Margin="0 0 4 0" />
+                    <controls:TacticalMapButton Name="OverlayRoof0Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof0}"
+                                                Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                    <TextureRect Name="OverlayRoof1Icon" Access="Public"
+                                 MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                                 Margin="0 0 4 0" />
+                    <controls:TacticalMapButton Name="OverlayRoof1Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof1}"
+                                                Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                    <TextureRect Name="OverlayRoof2Icon" Access="Public"
+                                 MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                                 Margin="0 0 4 0" />
+                    <controls:TacticalMapButton Name="OverlayRoof2Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof2}"
+                                                Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <TextureRect Name="OverlayRoof3Icon" Access="Public"
+                                 MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                                 Margin="0 0 4 0" />
+                    <controls:TacticalMapButton Name="OverlayRoof3Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof3}"
+                                                Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                    <TextureRect Name="OverlayRoof4Icon" Access="Public"
+                                 MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
+                                 Margin="0 0 4 0" />
+                    <controls:TacticalMapButton Name="OverlayRoof4Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof4}"
+                                                Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+                </BoxContainer>
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal" Margin="0 0 0 4">
-                <TextureRect Name="OverlayRoof0Icon" Access="Public"
-                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
-                             Margin="0 0 4 0" />
-                <controls:TacticalMapButton Name="OverlayRoof0Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof0}"
-                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
-                <TextureRect Name="OverlayRoof1Icon" Access="Public"
-                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
-                             Margin="0 0 4 0" />
-                <controls:TacticalMapButton Name="OverlayRoof1Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof1}"
-                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
-                <TextureRect Name="OverlayRoof2Icon" Access="Public"
-                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
-                             Margin="0 0 4 0" />
-                <controls:TacticalMapButton Name="OverlayRoof2Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof2}"
-                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
-            </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
-                <TextureRect Name="OverlayRoof3Icon" Access="Public"
-                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
-                             Margin="0 0 4 0" />
-                <controls:TacticalMapButton Name="OverlayRoof3Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof3}"
-                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
-                <TextureRect Name="OverlayRoof4Icon" Access="Public"
-                             MinSize="18 18" MaxSize="18 18" Stretch="KeepAspectCentered"
-                             Margin="0 0 4 0" />
-                <controls:TacticalMapButton Name="OverlayRoof4Button" Access="Public" Text="{Loc ui-tactical-map-overlay-roof4}"
-                                            Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
+            <BoxContainer Name="RadiusOverlayContainer" Access="Public" Orientation="Vertical" Margin="6 0 0 0" MinWidth="80"
+                          VerticalAlignment="Top">
+                <controls:TacticalMapButton Name="OrbitalRadiusButton" Access="Public" Text="{Loc ui-tactical-map-radius-ob}"
+                                            Margin="0 0 0 6" MinWidth="80" MinHeight="26" />
+                <controls:TacticalMapButton Name="MortarRadiusButton" Access="Public" Text="{Loc ui-tactical-map-radius-mortar}"
+                                            MinWidth="80" MinHeight="26" />
             </BoxContainer>
         </BoxContainer>
 
