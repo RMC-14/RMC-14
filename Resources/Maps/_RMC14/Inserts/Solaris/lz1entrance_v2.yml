@@ -1333,7 +1333,7 @@ entities:
     - type: Transform
       pos: 18.5,15.5
       parent: 1
-- proto: RMCLightFixture
+- proto: RMCLightFixtureOffset
   entities:
   - uid: 103
     components:
