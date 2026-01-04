@@ -58,14 +58,16 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
 
     private void UpdateAppearance(Entity<AppearanceComponent, SpriteComponent> ent)
     {
-        if (!_sprite.LayerMapTryGet(ent.Owner, NewPlayerLayers.Layer, out var layer, false))
+        var spriteEntity = (ent.Owner, ent.Comp2);
+
+        if (!_sprite.LayerMapTryGet(spriteEntity, NewPlayerLayers.Layer, out var layer, false))
             return;
 
         if (!_seeNewPlayersQuery.TryComp(_player.LocalEntity, out var see) ||
             !AppearanceSystem.TryGetData(ent, NewPlayerLayers.Layer, out NewPlayerVisuals visual, ent) ||
             !_showPlayerIcons)
         {
-            _sprite.LayerSetVisible(ent.Owner, layer, false);
+            _sprite.LayerSetVisible(spriteEntity, layer, false);
             return;
         }
 
@@ -81,9 +83,9 @@ public sealed class NewPlayerVisualizerSystem : VisualizerSystem<NewPlayerLabelC
         if (state == null)
             return;
 
-        _sprite.LayerSetSprite(ent.Owner, layer, state);
-        _sprite.LayerSetVisible(ent.Owner, layer, true);
-        _sprite.LayerSetOffset(ent.Owner, layer, new Vector2(0, 0.21f));
+        _sprite.LayerSetSprite(spriteEntity, layer, state);
+        _sprite.LayerSetVisible(spriteEntity, layer, true);
+        _sprite.LayerSetOffset(spriteEntity, layer, new Vector2(0, 0.21f));
     }
 
     private void NewPlayerIconsOptionChanged(bool enabled)
