@@ -41,7 +41,7 @@
     - type: SniperWhitelist
     - type: PyroWhitelist
     - type: JobPrefix
-      prefix: rmc-job-prefix-provost-special-agent
+      prefix: rmc-job-prefix-provost-operative
     - type: RMCTrackable
     - type: RMCAllowSuitStorage
   hidden: true
@@ -51,7 +51,7 @@
   id: RMCProvostOperative
   components:
   - type: GhostRole
-    name: rmc-ghost-name-corp-provost-special-agent
+    name: rmc-ghost-name-corp-provost-operative
     description: rmc-ghost-role-information-provost-description
     rules: rmc-ghost-role-information-provost-rules
     reregister: false
