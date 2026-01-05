@@ -145,9 +145,7 @@
   - type: SolutionContainerManager
     solutions:
       Welder:
-        reagents:
-        - ReagentId: WeldingFuel
-          Quantity: 0
+        reagents: []
         maxVol: 100 # TODO RMC14 40 when welders are fixed
 
 - type: entity
