@@ -548,9 +548,8 @@
   - sprite: /Textures/_RMC14/Structures/Machines/map_table.rsi
     state: maptable
   name: Tactical Map
-  description: Click to open the Tactical Map. Alt click to open the crew manifest.
+  description: Click to open the Tactical Map.
   clickEvent: !type:OpenTacMapAlertEvent
-  altClickEvent: !type:OpenCrewManifestAlertEvent
 
 - type: alert
   id: XenoTacMapAlert
