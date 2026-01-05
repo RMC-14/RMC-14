@@ -147,7 +147,7 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: []
+          Quantity: 0
         maxVol: 100 # TODO RMC14 40 when welders are fixed
 
 - type: entity
