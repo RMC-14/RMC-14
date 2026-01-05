@@ -36,9 +36,9 @@
     sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
   - type: Item
     size: Normal
-    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi # TODO Update inhands
   - type: Clothing
-    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi # TODO Update back & suitstorage
 
 - type: entity
   parent: CMGasTankBase
