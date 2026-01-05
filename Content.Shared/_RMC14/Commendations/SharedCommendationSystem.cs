@@ -76,4 +76,9 @@ public abstract class SharedCommendationSystem : EntitySystem
     {
         return RoundCommendations;
     }
+
+    public void AddRoundCommendation(Commendation commendation)
+    {
+        RoundCommendations.Add(commendation);
+    }
 }
