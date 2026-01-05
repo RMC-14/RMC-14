@@ -172,9 +172,9 @@
     solution: beaker
   - type: InjectableSolution
     solution: beaker
-  - type: RMCSolutionTransferWhitelist # Only allow transferring OUT to ReagentTank entities (storage tanks)
+  - type: RMCSolutionTransferWhitelist
     popup: rmc-canister-transfer-out-whitelist
-    targetWhitelist:
+    sourceWhitelist: # Only allow transferring OUT from canister to reagent tanks.
       tags:
       - RMCTankReagent
   - type: SolutionItemStatus
