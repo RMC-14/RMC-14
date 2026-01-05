@@ -33,12 +33,12 @@
   description: A tank containing pressurized oxygen for breathing.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
   - type: Item
     size: Normal
-    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
 
 - type: entity
   parent: CMGasTankBase
@@ -110,18 +110,30 @@
   - type: Sprite
     sprite: _RMC14/Objects/Tanks/phoron.rsi
   - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/phoron.rsi
+  - type: Clothing
     sprite: _RMC14/Objects/Tanks/phoron.rsi
 
 
 # Reagent "Gas" Canisters /obj/item/reagent_container/glass/canister
-# These are reagent containers(like beakers), not upstream atmos gas canisters. BaseBeaker has Drink and Spillable components, which is undesirable.
+# Canisters can only transfer reagents OUT to reagent tanks, but CAN receive reagents from other containers.
 - type: entity
   abstract: true
-  parent: CMBeakerBase # TODO MARK PR AS DRAFT AND CHECK BASEBEAKER COMPONENTS 4 PARITY i eeb now
-  id: RMCReagentGasTankBase # also do clothing compoent back + suitslot
+  parent: BaseItem
+  id: RMCReagentGasTankBase
   components:
+  - type: Sprite
+    sprite: Objects/Tanks/generic.rsi
+    state: icon
   - type: Item
-    size: Normal
+    size: Small
+    sprite: Objects/Tanks/generic.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: Objects/Tanks/generic.rsi
+    slots:
+    - suitStorage
   - type: SolutionContainerManager
     solutions:
       beaker:
@@ -137,11 +149,66 @@
     - 200
     - 300
     - 400
-  - type: Spillable
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: StaticPrice
+    price: 40
+  - type: Tag
+    tags:
+    - ChemDispensable
+  - type: MixableSolution
     solution: beaker
-    spillDelay: 3.0 # TODO remove this
-  - type: PhysicalComposition
-    materialComposition: {}
+  - type: FitsInDispenser
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: InjectableSolution
+    solution: beaker
+  - type: RMCSolutionTransferWhitelist # Only allow transferring OUT to ReagentTank entities (storage tanks)
+    popup: rmc-canister-transfer-out-whitelist
+    targetWhitelist:
+      tags:
+      - RMCTankReagent
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage: {}
+  - type: DnaSubstanceTrace
 
 - type: entity
   parent: RMCReagentGasTankBase
@@ -158,7 +225,7 @@
       beaker:
         maxVol: 400
         reagents:
-        - ReagentId: Hydrogen
+        - ReagentId: RMCHydrogen
           Quantity: 400
 
 - type: entity
@@ -176,7 +243,7 @@
       beaker:
         maxVol: 400
         reagents:
-        - ReagentId: Ammonia
+        - ReagentId: Ammonia # TODO RMCAmmonia
           Quantity: 400
 
 - type: entity
@@ -212,7 +279,7 @@
       beaker:
         maxVol: 400
         reagents:
-        - ReagentId: PolytrinicAcid
+        - ReagentId: PolytrinicAcid # TODO RMCPolytrinicAcid
           Quantity: 400
 
 - type: entity
@@ -222,13 +289,13 @@
   description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_canister.rsi
   - type: Item
-    sprite: _RMC14/Objects/Tanks/canister_oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_canister.rsi
   - type: SolutionContainerManager
     solutions:
       beaker:
         maxVol: 400
         reagents:
-        - ReagentId: Oxygen
+        - ReagentId: RMCOxygen
           Quantity: 400
