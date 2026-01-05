@@ -157,7 +157,7 @@
     contents:
     - id: RMCWeaponTaser
     - id: RMCPacketGrenadeFlashBang
-    - id: RMCTabletCO
+    #- id: RMCTabletCO
     - id: RMCProvostJacket
 
 - type: entity
