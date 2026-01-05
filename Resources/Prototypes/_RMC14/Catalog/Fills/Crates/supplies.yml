@@ -26,7 +26,7 @@
       amount: 2
     - id: RMCHazardVest
       amount: 2
-    - id: RMCEmergencyOxygenTank
+    - id: RMCEmergencyOxygenTankFilled
       amount: 5
     - id: CMMaskGas
       amount: 5
