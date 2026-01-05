@@ -1005,7 +1005,20 @@ public sealed partial class TacticalMapWrapper : Control
             return;
         }
 
-        HoverAreaLabel.Text = Loc.GetString("ui-tactical-map-hover-area", ("area", info.Value.AreaName));
+        if (TryGetCalculatedCoordinates(info.Value.Indices, out var coordinates))
+        {
+            HoverAreaLabel.Text = Loc.GetString(
+                "ui-tactical-map-hover-area-coords",
+                ("area", info.Value.AreaName),
+                ("x", coordinates.X),
+                ("y", coordinates.Y));
+        }
+        else
+        {
+            HoverAreaLabel.Text = Loc.GetString(
+                "ui-tactical-map-hover-area",
+                ("area", info.Value.AreaName));
+        }
         if (HoverAreaIcon != null)
         {
             HoverAreaIcon.Texture = _entityManager.System<SpriteSystem>()
@@ -1064,8 +1077,10 @@ public sealed partial class TacticalMapWrapper : Control
     {
         var entries = new List<QuickDialogEntry>
         {
-            new(CoordinateFieldX, QuickDialogEntryType.Integer, Loc.GetString("ui-tactical-map-coords-dialog-x")),
-            new(CoordinateFieldY, QuickDialogEntryType.Integer, Loc.GetString("ui-tactical-map-coords-dialog-y"))
+            new(CoordinateFieldX, QuickDialogEntryType.ShortText, Loc.GetString("ui-tactical-map-coords-dialog-x"),
+                Loc.GetString("ui-tactical-map-coords-dialog-placeholder")),
+            new(CoordinateFieldY, QuickDialogEntryType.ShortText, Loc.GetString("ui-tactical-map-coords-dialog-y"),
+                Loc.GetString("ui-tactical-map-coords-dialog-placeholder"))
         };
 
         var dialog = new DialogWindow(Loc.GetString("ui-tactical-map-coords-dialog-title"), entries);

@@ -64,6 +64,7 @@ ui-tactical-map-context-blocked = Blocked: {$actions}
 ui-tactical-map-context-allowed-title = Allowed
 ui-tactical-map-context-blocked-title = Blocked
 ui-tactical-map-hover-area = Area: {$area}
+ui-tactical-map-hover-area-coords = Coords: {$x}, {$y} | Area: {$area}
 ui-tactical-map-action-ob = OB
 ui-tactical-map-action-cas = CAS
 ui-tactical-map-action-supply = Supply
@@ -78,6 +79,7 @@ ui-tactical-map-action-landing-zone = LZ
 ui-tactical-map-coords-dialog-title = Enter Coordinates
 ui-tactical-map-coords-dialog-x = X
 ui-tactical-map-coords-dialog-y = Y
+ui-tactical-map-coords-dialog-placeholder = e.g. -10
 
 ui-tactical-map-blip-size-label = Blip Size: {$size}x
 ui-tactical-map-line-width-label = Line Width: {$width}px

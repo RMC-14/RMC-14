@@ -159,7 +159,12 @@ public sealed partial class TacticalMapControl
             Vector2 position = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
 
             if (radiusTiles > 0f)
-                DrawTileRadiusOverlay(handle, actualTopLeft, overlayScale, blip.Indices, radiusTiles, overlayColor, HiveOverlayFillAlpha, RadiusPreviewFilterMode.None);
+            {
+                var filterMode = blip.Image.RsiState == HiveCoreBlipState
+                    ? RadiusPreviewFilterMode.HiveCore
+                    : RadiusPreviewFilterMode.HivePylon;
+                DrawTileRadiusOverlay(handle, actualTopLeft, overlayScale, blip.Indices, radiusTiles, overlayColor, HiveOverlayFillAlpha, filterMode);
+            }
 
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             Vector2 centeredPosition = GetCenteredMarkerPosition(position, tileSize, scaledBlipSize);
@@ -255,6 +260,8 @@ public sealed partial class TacticalMapControl
         {
             RadiusPreviewFilterMode.Mortar => IsMortarFireAllowed(indices),
             RadiusPreviewFilterMode.OrbitalBombardment => IsOrbitalBombardAllowed(indices),
+            RadiusPreviewFilterMode.HiveCore => IsOrbitalBombardAreaAllowed(indices),
+            RadiusPreviewFilterMode.HivePylon => IsCasAreaAllowed(indices),
             _ => true
         };
     }

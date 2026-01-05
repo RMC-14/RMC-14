@@ -8,6 +8,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using SixLabors.ImageSharp;
@@ -577,17 +578,67 @@ public sealed partial class TacticalMapControl
     private bool IsMortarFireAllowed(Vector2i indices)
     {
         if (TryGetAreaInfo(indices, out var info))
-            return info.MortarFire;
+        {
+            if (!info.MortarFire)
+                return false;
+        }
 
-        return true;
+        return !IsRoofed(indices, roof => !roof.CanMortarFire);
     }
 
     private bool IsOrbitalBombardAllowed(Vector2i indices)
     {
         if (TryGetAreaInfo(indices, out var info))
+        {
+            if (!info.OrbitalBombard)
+                return false;
+        }
+
+        return !IsRoofed(indices, roof => !roof.CanOrbitalBombard);
+    }
+
+    private bool IsOrbitalBombardAreaAllowed(Vector2i indices)
+    {
+        if (TryGetAreaInfo(indices, out var info))
             return info.OrbitalBombard;
 
         return true;
+    }
+
+    private bool IsCasAreaAllowed(Vector2i indices)
+    {
+        if (TryGetAreaInfo(indices, out var info))
+            return info.Cas;
+
+        return true;
+    }
+
+    private bool IsRoofed(Vector2i indices, Predicate<RoofingEntityComponent> predicate)
+    {
+        if (_currentAreaGridEntity == null)
+            return false;
+
+        if (!_entityManager.TryGetComponent(_currentAreaGridEntity.Value, out MapGridComponent? grid))
+            return false;
+
+        var mapSystem = _entityManager.System<SharedMapSystem>();
+        var roofs = _entityManager.EntityQueryEnumerator<RoofingEntityComponent, TransformComponent>();
+        while (roofs.MoveNext(out _, out var roof, out var xform))
+        {
+            if (!predicate(roof))
+                continue;
+
+            if (xform.GridUid != _currentAreaGridEntity || xform.GridUid == null)
+                continue;
+
+            var roofTile = mapSystem.TileIndicesFor(xform.GridUid.Value, grid, xform.Coordinates);
+            float dx = indices.X - roofTile.X;
+            float dy = indices.Y - roofTile.Y;
+            if (dx * dx + dy * dy <= roof.Range * roof.Range)
+                return true;
+        }
+
+        return false;
     }
 
     public void ShowTunnelInfo(Vector2i indices, string tunnelName, Vector2 screenPosition)

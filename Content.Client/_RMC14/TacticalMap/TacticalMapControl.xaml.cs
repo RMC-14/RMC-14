@@ -32,7 +32,9 @@ public sealed partial class TacticalMapControl : TextureRect
     {
         None = 0,
         OrbitalBombardment = 1,
-        Mortar = 2
+        Mortar = 2,
+        HiveCore = 3,
+        HivePylon = 4
     }
 
     private const float MapScale = 3f;
@@ -81,6 +83,7 @@ public sealed partial class TacticalMapControl : TextureRect
     private static readonly ResPath LabelFontPath = new("/Fonts/NotoSans/NotoSans-Bold.ttf");
 
     [Dependency] private readonly IEntitySystemManager _entitySystemManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
