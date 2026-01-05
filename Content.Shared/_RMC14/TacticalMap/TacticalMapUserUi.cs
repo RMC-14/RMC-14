@@ -13,5 +13,5 @@ public enum TacticalMapUserUi
 public sealed class TacticalMapBuiState(string mapName, Dictionary<SquadObjectiveType, string>? squadObjectives = null) : BoundUserInterfaceState
 {
     public readonly string MapName = mapName;
-    public readonly Dictionary<SquadObjectiveType, string> SquadObjectives = squadObjectives ?? new();
+    public readonly Dictionary<SquadObjectiveType, string>? SquadObjectives = squadObjectives;
 }
