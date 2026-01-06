@@ -56,6 +56,7 @@ public sealed class CrewManifestEntry
     public string JobPrototype { get; }
 
     public string? Squad { get; }
+
     public Color? SquadColor { get; }
 
 
