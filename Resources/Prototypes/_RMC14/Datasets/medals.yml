@@ -3,3 +3,9 @@
   values:
     prefix: rmc-medal-
     count: 4
+
+- type: localizedDataset
+  id: RMCMarineMedalsSpecial
+  values:
+    prefix: rmc-medal-special-
+    count: 1
