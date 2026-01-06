@@ -573,7 +573,7 @@
         amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
-      - id: RMCAttachmentM63StockSolid
+      - id: RMCAttachmentM63Stock
         amount: 2
       - id: RMCAttachmentM63ArmBrace
         amount: 2

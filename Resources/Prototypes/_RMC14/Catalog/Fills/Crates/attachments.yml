@@ -171,7 +171,7 @@
         amount: 3
       - id: RMCAttachmentM54CStockSolid
         amount: 3
-      - id: RMCAttachmentM63StockSolid
+      - id: RMCAttachmentM63Stock
         amount: 3
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 3
@@ -215,5 +215,5 @@
   components:
   - type: StorageFill
     contents:
-      - id: RMCAttachmentM63StockSolid
+      - id: RMCAttachmentM63Stock
         amount: 4
