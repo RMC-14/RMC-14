@@ -100,7 +100,7 @@
       components:
       - Xeno
   - type: FixedIdentity
-    name: cm-chatsan-replacement-tesla
+    name: rmc-xeno-style-name-tesla
     whitelist:
       components:
       - Xeno

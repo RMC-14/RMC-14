@@ -26,6 +26,11 @@
     - state: "off"
       map: [ "base" ]
   - type: Clickable
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-generator
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGeneratorFusionFake

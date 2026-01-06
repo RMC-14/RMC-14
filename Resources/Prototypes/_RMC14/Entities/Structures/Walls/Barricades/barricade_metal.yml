@@ -68,7 +68,7 @@
     tags:
     - RMCMetalBarricade
   - type: FixedIdentity
-    name: cm-chatsan-replacement-barricades
+    name: rmc-xeno-style-name-cade
     whitelist:
       components:
       - Xeno
@@ -493,7 +493,7 @@
       components:
       - Xeno
   - type: FixedIdentity
-    name: cm-chatsan-replacement-barricades
+    name: rmc-xeno-style-name-cade
     whitelist:
       components:
       - Xeno

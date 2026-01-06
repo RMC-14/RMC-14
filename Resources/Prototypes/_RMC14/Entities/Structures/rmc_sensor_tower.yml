@@ -50,7 +50,7 @@
       state: sensor_tower
   - type: RMCMesonsNonviewable
   - type: FixedIdentity
-    name: cm-chatsan-replacement-sensor-tower
+    name: rmc-xeno-style-name-sensor-tower
     whitelist:
       components:
       - Xeno

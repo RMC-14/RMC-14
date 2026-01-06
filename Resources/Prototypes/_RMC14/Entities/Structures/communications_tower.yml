@@ -93,7 +93,7 @@
       components:
       - Xeno
   - type: FixedIdentity
-    name: cm-chatsan-replacement-communications-tower
+    name: rmc-xeno-style-name-name-communications-tower
     whitelist:
       components:
       - Xeno

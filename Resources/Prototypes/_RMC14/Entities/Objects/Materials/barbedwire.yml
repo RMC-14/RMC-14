@@ -37,7 +37,7 @@
   - type: Appearance
   - type: BarbedWire
   - type: FixedIdentity
-    name: cm-chatsan-replacement-barbed-wires
+    name: rmc-xeno-style-name-barbed-wires
     whitelist:
       components:
       - Xeno

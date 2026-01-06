@@ -227,7 +227,7 @@
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
     - type: FixedIdentity
-      name: cm-chatsan-replacement-plasteel
+      name: rmc-xeno-style-name-plasteel
       whitelist:
         components:
         - Xeno

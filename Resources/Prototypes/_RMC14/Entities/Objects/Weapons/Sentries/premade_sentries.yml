@@ -124,7 +124,7 @@
       components:
       - Xeno
   - type: FixedIdentity
-    name: cm-chatsan-replacement-sentry
+    name: rmc-xeno-style-name-sentry
     whitelist:
       components:
       - Xeno

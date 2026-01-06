@@ -59,10 +59,10 @@ cm-chatsan-word-signal-flares = signal flares
 cm-chatsan-replacement-signal-flares = green sticks
 
 cm-chatsan-word-flare = flare
-cm-chatsan-replacement-flare = glow stick
+cm-chatsan-replacement-flare = red stick
 
 cm-chatsan-word-flares = flares
-cm-chatsan-replacement-flares = glow sticks
+cm-chatsan-replacement-flares = red sticks
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake host

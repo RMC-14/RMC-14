@@ -38,11 +38,6 @@
   - type: Tag
     tags:
     - HandGrenade
-  - type: FixedIdentity
-    name: cm-chatsan-replacement-nade
-    whitelist:
-      components:
-      - Xeno
 
 - type: entity
   name: explosive grenade
