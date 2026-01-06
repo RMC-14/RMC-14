@@ -27,7 +27,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 938 # 937.5 <string, int>
+      CMSteel: 938 # 937.5 Needs to be an integer.
 
 - type: entity
   parent: CMTileItemBase
