@@ -607,6 +607,12 @@ cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
 cm-chatsan-replacement-barricades = metal resin
 
+cm-chatsan-word-plasteel-barricade = plasteel barricade
+cm-chatsan-word-plasteel-cade = plasteel cade
+cm-chatsan-word-plasteel-barricades = plasteel barricades
+cm-chatsan-word-plasteel-cades = plasteel cades
+cm-chatsan-replacement-plasteel-barricades = hard metal resin
+
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
 
@@ -614,6 +620,9 @@ cm-chatsan-word-barbs = barbs
 cm-chatsan-word-barbed-wire = barbed wire
 cm-chatsan-word-barbed-wires = barbed wires
 cm-chatsan-replacement-barbed-wires = spikes
+
+cm-chatsan-word-plasteel = plasteel
+cm-chatsan-replacement-plasteel = hard metal
 
 cm-chatsan-word-medal = medal
 cm-chatsan-replacement-medal = jelly

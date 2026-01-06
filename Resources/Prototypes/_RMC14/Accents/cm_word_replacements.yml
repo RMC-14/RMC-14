@@ -219,6 +219,10 @@
     cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
     cm-chatsan-word-paras: cm-chatsan-replacement-parasites
     cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
+    cm-chatsan-word-plasteel-barricade: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-cade: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-barricades: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-cades: cm-chatsan-replacement-plasteel-barricades
     cm-chatsan-word-barricade: cm-chatsan-replacement-barricades
     cm-chatsan-word-cade: cm-chatsan-replacement-barricades
     cm-chatsan-word-barricades: cm-chatsan-replacement-barricades
@@ -227,6 +231,7 @@
     cm-chatsan-word-barbs: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wire: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wires: cm-chatsan-replacement-barbed-wires
+    cm-chatsan-word-plasteel: cm-chatsan-replacement-plasteel
     cm-chatsan-word-medal: cm-chatsan-replacement-medal
     cm-chatsan-word-fob: cm-chatsan-replacement-fob
     cm-chatsan-word-rifle: cm-chatsan-replacement-rifle

@@ -226,6 +226,11 @@
       interfaces:
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
+    - type: FixedIdentity
+      name: cm-chatsan-replacement-plasteel
+      whitelist:
+        components:
+        - Xeno
 
 - type: entity
   parent: CMSheetPlasteel

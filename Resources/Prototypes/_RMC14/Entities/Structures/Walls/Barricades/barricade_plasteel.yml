@@ -78,7 +78,7 @@
   - type: RMCConstructionUpgradeTarget
     upgrades: ["RMCExplosiveUpgradePlasteel", "RMCBiohazardUpgradePlasteel", "RMCBruteUpgradePlasteel"]
   - type: FixedIdentity
-    name: cm-chatsan-replacement-barricades
+    name: cm-chatsan-replacement-plasteel-barricades
     whitelist:
       components:
       - Xeno
@@ -243,3 +243,8 @@
   - type: Construction
     graph: BarricadePlasteelDoorGraph
     node: nodeBarricadePlasteelDoor
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-plasteel-barricades
+    whitelist:
+      components:
+      - Xeno
