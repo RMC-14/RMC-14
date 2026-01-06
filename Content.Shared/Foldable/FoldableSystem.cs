@@ -124,6 +124,10 @@ public sealed class FoldableSystem : EntitySystem
             !_anchorable.TileFree(Transform(uid).Coordinates, body, uid)) //RMC14
             return false;
 
+        // RMC14
+        if (fold.IsLocked)
+            return false;
+
         var ev = new FoldAttemptEvent(fold);
         RaiseLocalEvent(uid, ref ev);
         return !ev.Cancelled;
@@ -149,6 +153,10 @@ public sealed class FoldableSystem : EntitySystem
     private void AddFoldVerb(EntityUid uid, FoldableComponent component, GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract || args.Hands == null)
+            return;
+
+        //RMC14
+        if (component.IsLocked)
             return;
 
         AlternativeVerb verb = new()

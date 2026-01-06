@@ -50,7 +50,7 @@
   - type: DamageExaminable
   - type: Sprite
     drawdepth: Mobs
-    noRot: false
+    noRot: true
 
 - type: entity
   parent: RMCBaseWeaponMount
@@ -221,7 +221,6 @@
     - state: m2c_overheat
       map: [ "enum.WeaponMountComponentVisualLayers.Overheated" ]
       visible: false
-  - type: Rotatable
   - type: Strap
     enabled: false
   - type: Clothing
@@ -248,11 +247,13 @@
     mountOnDeploy: true
     barricadeExclusionAreaSize: 2
     assembleDelay: 0.5
+    undeploySound: null
   - type: Tag
     tags:
     - M2CMount
   - type: Foldable
     folded: true
+    isLocked: true
 
 - type: Tag
   id: ML66DMount

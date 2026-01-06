@@ -133,16 +133,16 @@ public sealed partial class WeaponMountComponent : Component
     public bool Broken;
 
     [DataField]
-    public SoundSpecifier UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
+    public SoundSpecifier? UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
 
     [DataField]
-    public SoundSpecifier RotateSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
+    public SoundSpecifier? RotateSound = new SoundPathSpecifier("/Audio/Items/ratchet.ogg");
 
     [DataField]
-    public SoundSpecifier DetachSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
+    public SoundSpecifier? DetachSound = new SoundPathSpecifier("/Audio/Items/crowbar.ogg");
 
     [DataField]
-    public SoundSpecifier SecureSound = new SoundPathSpecifier("/Audio/Items/deconstruct.ogg");
+    public SoundSpecifier? SecureSound = new SoundPathSpecifier("/Audio/Items/deconstruct.ogg");
 
     [DataField]
     public SoundSpecifier? DeploySound;

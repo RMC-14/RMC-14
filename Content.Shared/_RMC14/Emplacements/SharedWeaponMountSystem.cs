@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -63,6 +64,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
@@ -182,6 +184,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (ent.Comp.MountedEntity == null)
             return;
 
+        args.Handled = true;
+
         if (!CanDeployPopup(ent, args.User, out _, out _))
             return;
 
@@ -277,6 +281,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         ent.Comp.MountedEntity = args.Used;
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
+        _rmcFoldable.TryLockFold(ent, true);
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.RotateSound, ent, args.User);
@@ -323,6 +328,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _buckle.StrapSetEnabled(ent, false);
         _collisionWake.SetEnabled(ent, true);
         _item.SetSize(ent, ent.Comp.MountSize);
+        _rmcFoldable.TryLockFold(ent, false);
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.DetachSound, ent, args.User);
