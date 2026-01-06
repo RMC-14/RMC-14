@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/04/2026 02:28:51
-  entityCount: 107
+  time: 01/06/2026 19:11:27
+  entityCount: 108
 maps: []
 grids:
 - 1
@@ -843,6 +843,15 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.5,0.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 108
+    components:
+    - type: MetaData
+      name: Dorms
+    - type: Transform
+      pos: 8.5,-2.5
       parent: 1
 - proto: RMCMegaphone
   entities:

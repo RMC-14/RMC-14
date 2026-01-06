@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 22:43:44
-  entityCount: 630
+  time: 01/06/2026 19:08:45
+  entityCount: 631
 maps: []
 grids:
 - 1
@@ -4264,6 +4264,15 @@ entities:
     components:
     - type: Transform
       pos: 12.5,26.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 631
+    components:
+    - type: MetaData
+      name: Engineering
+    - type: Transform
+      pos: 15.5,11.5
       parent: 1
 - proto: RMCPodDoorAlmayer
   entities:

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/04/2026 02:27:13
-  entityCount: 223
+  time: 01/06/2026 19:14:59
+  entityCount: 225
 maps: []
 grids:
 - 1
@@ -623,6 +623,13 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 15.5,8.5
+      parent: 1
+- proto: CMSpawnPointSurvivor
+  entities:
+  - uid: 225
+    components:
+    - type: Transform
+      pos: 7.5,3.5
       parent: 1
 - proto: CMTableWooden
   entities:
@@ -1308,6 +1315,15 @@ entities:
     components:
     - type: Transform
       pos: 13.5,1.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 224
+    components:
+    - type: MetaData
+      name: Chapel
+    - type: Transform
+      pos: 8.5,4.5
       parent: 1
 - proto: RMCPodDoorButton
   entities:
