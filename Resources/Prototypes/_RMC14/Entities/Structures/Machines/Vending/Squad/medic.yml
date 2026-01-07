@@ -95,7 +95,7 @@
       - id: CMStasisBagFolded
         points: 6
       - id: CMHyposprayFilledTricord
-        points: 10
+        points: 8
     - name: Explosives
       entries:
       - id: CMPacketGrenadeHighExplosiveFilled
