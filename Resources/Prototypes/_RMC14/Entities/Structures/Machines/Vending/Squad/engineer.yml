@@ -277,7 +277,6 @@
       - id: RMCM82FHolster
       - id: RMCM276ShotgunShellLoadingRig
       - id: RMCBeltGrenade
-
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
