@@ -30,6 +30,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
           - RMCMagazinePistolM1984Rubber
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
@@ -79,6 +80,8 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
+          - RMCMagazinePistolM1984Rubber
 
 #9mm
 - type: entity
@@ -176,6 +179,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
+      - CMMagazinePistol
       - RMCCartridgePistol9mmHP
     proto: RMCCartridgePistol9mmHP
   - type: Sprite
@@ -209,6 +213,9 @@
     damage:
       types:
         Piercing: 55 # TODO RMC14 30 shrapneltPistol9mmHP
+
+- type: Tag
+  id: RMCMagazinePistolM1984HP
 
 - type: Tag
   id: RMCCartridgePistol9mmHP
