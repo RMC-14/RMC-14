@@ -48,6 +48,10 @@ marking-VulpEarCoyote = Vulpkanin Coyote
 marking-VulpEarDalmatian-dalmatian = Dalmatian ears
 marking-VulpEarDalmatian = Vulpkanin Dalmatian
 
+marking-VulpEarFloppy-floppy = Floppy ears (base)
+marking-VulpEarFloppy-floppy-inner = Floppy ears (inner)
+marking-VulpEarFloppy = Vulpkanin Floppy
+
 
 marking-VulpSnoutAlt-muzzle_alt = Muzzle
 marking-VulpSnoutAlt-nose = Nose

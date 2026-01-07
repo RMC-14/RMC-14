@@ -83,6 +83,14 @@
     {
       "name": "dalmatian",
       "directions": 4
+    },
+    {
+      "name": "floppy",
+      "directions": 4
+    },
+    {
+      "name": "floppy-inner",
+      "directions": 4
     }
   ]
 }
