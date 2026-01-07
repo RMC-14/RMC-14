@@ -6,7 +6,7 @@
   name: materials-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/glass.rsi, state: glass }
   color: "#a8ccd7"
-  price: 0.075
+  price: 0.002
 
 - type: stack
   id: CMGlass
@@ -153,7 +153,7 @@
   name: materials-reinforced-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
   color: "#549bb0"
-  price: 0.16
+  price: 0.00284
 
 - type: stack
   id: CMGlassReinforced
@@ -247,7 +247,7 @@
   name: materials-phoron-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
   color: "#b35989"
-  price: 0.30
+  price: 0.004
 
 - type: stack
   id: CMGlassPhoron
@@ -327,7 +327,7 @@
   name: materials-reinforced-phoron-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
   color: "#8c4069"
-  price: 0.40
+  price: 0.00426
 
 - type: stack
   id: CMGlassPhoronReinforced

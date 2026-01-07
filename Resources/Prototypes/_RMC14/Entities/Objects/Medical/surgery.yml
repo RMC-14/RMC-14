@@ -13,6 +13,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: StaticPrice
+    price: 24
 
 # Retractor
 - type: entity
@@ -147,6 +149,8 @@
     materialComposition:
       CMSteel: 15000
       CMGlass: 10000
+  - type: StaticPrice
+    price: 40
 
 # - Bonedrill
 - type: entity
@@ -328,6 +332,8 @@
     materialComposition:
       CMSteel: 20000
       CMGlass: 10000
+  - type: StaticPrice
+    price: 47
 
 # - Predator
 - type: entity
@@ -356,6 +362,8 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 7500
+  - type: StaticPrice
+    price: 75
 
 # - Predator
 - type: entity
@@ -415,6 +423,8 @@
   - type: PhysicalComposition
     materialComposition:
       RMCPlastic: 7500
+  - type: StaticPrice
+    price: 75
 
 - type: entity
   parent: CMBoneGel

@@ -5,7 +5,7 @@
   name: materials-phoron
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron.rsi, state: phoron }
   color: "#7e009e"
-  price: 0.2
+  price: 0.01
 
 - type: stack
   id: CMPhoron
@@ -86,7 +86,7 @@
   name: materials-wood
   icon: { sprite: _RMC14/Objects/Materials/Sheets/wood.rsi, state: wood }
   color: "#966F33"
-  price: 0.05
+  price: 0.00133
 
 - type: stack
   id: RMCWood
@@ -195,7 +195,7 @@
   name: materials-aluminum
   icon: { sprite: _RMC14/Objects/Materials/Sheets/aluminum.rsi, state: aluminum }
   color: "#A8A8A8"
-  price: 0.2
+  price: 0.0053
 
 - type: stack
   id: RMCAluminum

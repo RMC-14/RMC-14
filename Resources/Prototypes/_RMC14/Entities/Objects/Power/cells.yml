@@ -26,6 +26,8 @@
     materialComposition:
       CMSteel: 700
       CMGlass: 50
+  - type: StaticPrice
+    price: 1.1
 
 - type: entity
   parent: RMCPowerCell
