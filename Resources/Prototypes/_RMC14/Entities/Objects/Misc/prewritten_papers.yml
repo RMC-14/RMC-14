@@ -575,22 +575,3 @@
 
       [color=#AAAAAA]===================================================[/color]
       [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
-
-- type: entity
-  parent: CMPaper
-  id: RMCPaperCLFVaradero
-  name: SOS!
-  components:
-  - type: Paper
-    contentSize: 20000
-    content: |
-      [color=#444]██████████████████████████████
-      ██[color=#eee]████[color=#666]██[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#444]██
-      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]██[color=#666]██████[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#444]██
-      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██████[color=#eee]██[color=#666]████[color=#444]██
-      ██[color=#ddd]████[color=#666]██[color=#ddd]████[color=#666]██[color=#ddd]██[color=#666]████[color=#ddd]██[color=#666]██[color=#ddd]██[color=#666]██[color=#ddd]██[color=#444]██
-      ██████████████████████████████
-      [color=#666]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
-                     [bolditalic]AUTHENTICATION CODE: [/bolditalic][color=red]DAVID-103-EB-9[/color]
-      [color=#666]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color][color=#000]
-      [italic]Mayday! Mayday! To all nearby CLF frequencies, we are under attack! Unknown creatures have overrun New Varadero Outpost and our shuttle is damaged beyond repair! We ne-[/italic]
