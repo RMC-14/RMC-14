@@ -183,7 +183,6 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CMMagazinePistol
       - RMCCartridgePistol9mmHP
     proto: RMCCartridgePistol9mmHP
   - type: Sprite
