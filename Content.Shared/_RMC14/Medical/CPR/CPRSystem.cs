@@ -394,7 +394,7 @@ public sealed class CPRSystem : EntitySystem
             var jobNames = ent.Comp.ResetCPRCounterJobs
                 .Select(jobId => _prototypes.Index(jobId).LocalizedName)
                 .ToList();
-            var jobsString = string.Join(", ", jobNames);
+            var jobsString = string.Join("; ", jobNames);
             _popups.PopupEntity(Loc.GetString("rmc-cpr-dummy-reset-denied", ("jobs", jobsString)), ent, user, PopupType.MediumCaution);
             return;
         }

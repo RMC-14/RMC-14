@@ -16,5 +16,5 @@ rmc-cpr-dummy-fail-self = You fail to perform CPR on the CPR dummy. Incorrect rh
 rmc-cpr-dummy-fail-others = {$user} fails to perform CPR on a CPR dummy.
 rmc-cpr-dummy-examine-successful = [color=green]Successful CPRs: {$count}.[/color]
 rmc-cpr-dummy-examine-failed = [color=red]Failed CPRs: {$count}.[/color]
-rmc-cpr-dummy-reset-denied = Only these people can reset the counter on this dummy: {$jobs}.
+rmc-cpr-dummy-reset-denied = Resetting the counter is restricted to: {$jobs}
 rmc-cpr-dummy-reset-success = You reset the counter on the CPR dummy.
