@@ -8,25 +8,10 @@
   },
   "states": [
     {
-      "name": "logistics officer"
-    },
-    {
-      "name": "tech"
-    }, 
-    {
       "name": "pitrased"
     },
     {
       "name": "pitlowerd"
-    },
-    {
-      "name": "invoiceblank"
-    },
-    {
-      "name": "invoiceapproved"
-    },
-    {
-      "name": "stamp"
     }
   ]
   
