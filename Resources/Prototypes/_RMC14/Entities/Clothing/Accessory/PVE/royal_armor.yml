@@ -2,7 +2,7 @@
   parent: RMCPVEArmorPadsBase
   id: RMCPVEArmorPadsKestrel
   name: Kestrel Pauldrons
-  description: Attachable supplementary armor for the M3 armor system. Protects from glancing hits and covers the arm opening in the cuirass against shrapnel.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against overhead strikes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/pads.rsi
@@ -11,7 +11,7 @@
   parent: RMCPVEArmorBracersBase
   id: RMCPVEArmorBracersKestrel
   name: Kestrel Vambraces
-  description: Attachable supplementary armor for the M3 armor system. A pair of composite ballistic vambraces to shield the forearms, with straps to ensure it doesn't ride up or down.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against shattered forearms.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/bracer.rsi
@@ -20,7 +20,7 @@
   parent: RMCPVEArmorNeckGuardBase
   id: RMCPVEArmorNeckGuardKestrel
   name: Kestrel Gorget
-  description: Attachable supplementary armor for the M3 armor system. A simple polymer ballistic plate to resist ricochets and shrapnel.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against slit throats.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/neckguard.rsi
@@ -29,7 +29,7 @@
   parent: RMCPVEArmorGroinPlateBase
   id: RMCPVEArmorGroinPlateKestrel
   name: Kestrel Lap Panel
-  description: Attachable supplementary armor for the M3 armor system. Shear thickening liquid armor piece covering the abdomen and groin, with an additional ruggedized boron carbide. Clasps to the inside of the M3 cuirass.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against sneak attacks.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/groinplate.rsi
@@ -38,7 +38,7 @@
   parent: RMCPVEArmorShinGuardBase
   id: RMCPVEArmorShinGuardKestrel
   name: Kestrel Greaves
-  description: Attachable supplementary armor for the M3 armor system. Lightweight polymer clamshell-style plates enclose the lower legs to provide shrapnel and pistol protection.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against bruised shins.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/shinguards.rsi
@@ -47,7 +47,7 @@
   parent: RMCPVEArmorKneeGuardBase
   id: RMCPVEArmorKneeGuardKestrel
   name: Kestrel Kneepads
-  description: Attachable supplementary armor for the M3 armor system. High impact ruggedized outer shell and polymer internals protect from shrapnel as well as low power ballistics.
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against grazed knees.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/thighguards.rsi
