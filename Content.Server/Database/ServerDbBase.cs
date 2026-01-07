@@ -2112,6 +2112,14 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
+        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCCommendations
+                .Where(c => c.RoundId == roundId)
+                .ToListAsync();
+        }
+
         public async Task IncreaseInfects(Guid player)
         {
             await using var db = await GetDb();

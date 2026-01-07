@@ -387,6 +387,8 @@ namespace Content.Server.Database
 
         Task<List<RMCCommendation>> GetCommendationsGiven(Guid player);
 
+        Task<List<RMCCommendation>> GetCommendationsByRound(int roundId);
+
         Task IncreaseInfects(Guid player);
 
         Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
@@ -1258,6 +1260,12 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetCommendationsGiven(player));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsByRound(int roundId)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationsByRound(roundId));
         }
 
         public Task IncreaseInfects(Guid player)
