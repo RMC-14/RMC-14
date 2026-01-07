@@ -70,21 +70,6 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<CPRDummyComponent, GetVerbsEvent<AlternativeVerb>>(OnDummyGetAlternativeVerbs);
     }
 
-    private void SkilledCPRDoAfter(EntityUid performer, EntityUid target, float baseTime, string? targetEffect = null)
-    {
-        var delay = TimeSpan.FromSeconds(baseTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
-        var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), target, target)
-        {
-            BreakOnMove = true,
-            NeedHand = true,
-            BlockDuplicate = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
-            TargetEffect = targetEffect,
-        };
-
-        _doAfter.TryStartDoAfter(doAfter);
-    }
-
     private void OnMarineInteractHand(Entity<MarineComponent> ent, ref InteractHandEvent args)
     {
         if (args.Handled)
@@ -246,6 +231,21 @@ public sealed class CPRSystem : EntitySystem
         _popups.PopupEntity(othersPopup, performer, othersFilter, true, PopupType.Medium);
 
         return true;
+    }
+
+    private void SkilledCPRDoAfter(EntityUid performer, EntityUid target, float baseTime, string? targetEffect = null)
+    {
+        var delay = TimeSpan.FromSeconds(baseTime * _skills.GetSkillDelayMultiplier(performer, SkillType));
+        var doAfter = new DoAfterArgs(EntityManager, performer, delay, new CPRDoAfterEvent(), target, target)
+        {
+            BreakOnMove = true,
+            NeedHand = true,
+            BlockDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameEvent,
+            TargetEffect = targetEffect,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
     }
 
     private void OnDummyUseInHand(Entity<CPRDummyComponent> ent, ref UseInHandEvent args)
