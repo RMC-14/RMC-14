@@ -29,6 +29,8 @@
   description: Tough single-use plastic zipties, ideal for restraining rowdy prisoners.
   suffix: RMC
   components:
+  - type: Item
+    size: Tiny
   - type: UseDelay
     delay: 4
   - type: Handcuff
