@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added a Liaison role-specific loadout section
-    type: Add
-  - message: Adjusted the items in the Liaison's Automated Briefcase to be correct
-      and no longer use upstream items
-    type: Tweak
-  id: 2199
-  time: '2025-08-19T17:07:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6913
 - author: DummeHytteOst
   changes:
   - message: Fixed a typo in the guidebook.
@@ -4761,5 +4751,12 @@
   id: 2701
   time: '2025-12-15T07:23:53.367570+00:00'
   url: null
+- author: XxSWAG-MASTER-OVERLORDxX
+  changes:
+  - message: Fixed synth ranks
+    type: Fix
+  id: 2702
+  time: '2025-12-20T04:16:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8796
 Name: RMC14
 Order: -1
