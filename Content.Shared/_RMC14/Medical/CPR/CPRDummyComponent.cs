@@ -18,7 +18,7 @@ public sealed partial class CPRDummyComponent : Component
     public List<ProtoId<JobPrototype>> ResetCPRCounterJobs = new()
     {
         "CMSeniorEnlistedAdvisor",
-        "CMChiefMedicalOfficer",
+        "CMCMO",
     };
 }
 
