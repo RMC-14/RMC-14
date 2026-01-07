@@ -63,7 +63,8 @@ public sealed class CPRSystem : EntitySystem
         SubscribeLocalEvent<MobStateComponent, ReceiveCPRAttemptEvent>(OnMobStateCPRAttempt);
 
         SubscribeLocalEvent<CPRDummyComponent, UseInHandEvent>(OnDummyUseInHand);
-        SubscribeLocalEvent<CPRDummyComponent, InteractHandEvent>(OnDummyInteractHand);
+        SubscribeLocalEvent<CPRDummyComponent, InteractHandEvent>(OnDummyInteractHand,
+            before: [typeof(InteractionPopupSystem), typeof(StunShakeableSystem)]);
         SubscribeLocalEvent<CPRDummyComponent, CPRDoAfterEvent>(OnDummyDoAfter);
         SubscribeLocalEvent<CPRDummyComponent, ExaminedEvent>(OnDummyExamined);
         SubscribeLocalEvent<CPRDummyComponent, GetVerbsEvent<AlternativeVerb>>(OnDummyGetAlternativeVerbs);
