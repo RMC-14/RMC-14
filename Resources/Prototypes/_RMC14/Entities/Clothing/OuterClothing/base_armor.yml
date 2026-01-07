@@ -295,6 +295,7 @@
   - type: CMHardArmor
   - type: RMCBulkyArmor
   - type: RMCMagneticArmor
+  - type: ArmorWebbingClothing
   - type: Appearance
   - type: ItemTogglePointLight
   - type: ToggleableVisuals

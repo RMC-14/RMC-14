@@ -29,7 +29,6 @@
     whitelist:
       tags:
       - RMCUniformTSE
-  - type: ArmorWebbingClothing
 
 - type: entity
   parent: RMCArmorRoyalPVE

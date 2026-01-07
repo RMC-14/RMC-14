@@ -29,7 +29,6 @@
     whitelist:
       tags:
       - RMCUniformMarine
-  - type: ArmorWebbingClothing
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi
