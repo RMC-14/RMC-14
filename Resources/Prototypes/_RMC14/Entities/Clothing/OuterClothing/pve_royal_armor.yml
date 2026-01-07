@@ -1,0 +1,74 @@
+# standard
+- type: entity
+  parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
+  id: RMCArmorRoyalPVE
+  suffix: PVE, RCM
+  name: L3A Kestrel modular vest
+  description: The ubiquitous Assault variant of the L3 Kestrel modular vest, standard issue body armor for Royal Crown Marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelmedium.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 20
+    explosionArmor: 20
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: Corrodible
+    isCorrodible: false
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-tse-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformTSE
+  - type: ArmorWebbingClothing
+
+- type: entity
+  parent: RMCArmorRoyalPVE
+  id: RMCArmorRoyalLightPVE
+  suffix: PVE, RCM
+  name: L3S Kestrel modular vest
+  description: The light Support variant of the L3 Kestrel modular vest, standard issue body armor for officers and support personnel of the Royal Crown Marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrellight.rsi
+
+- type: entity
+  parent: RMCArmorRoyalPVE
+  id: RMCArmorRoyalPointmanPVE
+  suffix: PVE, RCM
+  name: L3T Kestrel modular vest
+  description: The robust Technician variant of the L3 Kestrel modular vest, standard issue body armor for sappers and breachers of the Royal Crown Marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelheavy.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 35
+    explosionArmor: 35
+    bio: 20
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+
+- type: entity
+  parent: RMCArmorRoyalPVE
+  id: RMCArmorRoyalHarnessPVE
+  suffix: PVE, RCM
+  name: L3H Kestrel modular harness
+  description: The aptly-named Harness variant of the L3 Kestrel modular vest, standard issue body armor for gunners of the Royal Crown Marines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelharness.rsi
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor
