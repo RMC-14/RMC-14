@@ -28,7 +28,29 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             return;
         }
 
-        // Mode 1: round <roundId> [type]
+        // Mode 1: last <count> [type]
+        if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase))
+        {
+            if (args.Length < 2 || !int.TryParse(args[1], out var count) || count <= 0)
+            {
+                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-count"));
+                shell.WriteLine(Help);
+                return;
+            }
+
+            var typeFilter = args.Length >= 3 ? args[2].ToLowerInvariant() : "all";
+            if (!TryParseCommendationType(typeFilter, out var filterType))
+            {
+                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-type", ("type", typeFilter)));
+                shell.WriteLine(Help);
+                return;
+            }
+
+            await ListLastCommendations(shell, count, filterType);
+            return;
+        }
+
+        // Mode 2: round <roundId> [type]
         if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
         {
             if (args.Length < 2 || !int.TryParse(args[1], out var roundId))
@@ -50,8 +72,8 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             return;
         }
 
-        // Mode 2: player giver <usernameOrId> <count> [type]
-        // Mode 3: player receiver <usernameOrId> <count> [type]
+        // Mode 3: player giver <usernameOrId> <count> [type]
+        // Mode 4: player receiver <usernameOrId> <count> [type]
         if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
         {
             if (args.Length < 2)
@@ -133,9 +155,27 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         return false;
     }
 
+    private async Task ListLastCommendations(IConsoleShell shell, int count, CommendationType? filterType)
+    {
+        var commendations = await _db.GetLastCommendations(count, filterType, includePlayers: true);
+
+        if (commendations.Count == 0)
+        {
+            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            return;
+        }
+
+        shell.WriteLine(Loc.GetString("cmd-listcommendations-last-header", ("count", commendations.Count), ("total", count)));
+
+        foreach (var c in commendations)
+        {
+            shell.WriteLine(FormatCommendation(c));
+        }
+    }
+
     private async Task ListCommendationsByRound(IConsoleShell shell, int roundId, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsByRound(roundId);
+        var commendations = await _db.GetCommendationsByRound(roundId, includePlayers: true);
 
         if (filterType.HasValue)
         {
@@ -158,7 +198,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByGiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsGiven(playerId);
+        var commendations = await _db.GetCommendationsGiven(playerId, includePlayers: true);
 
         if (filterType.HasValue)
         {
@@ -184,7 +224,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByReceiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsReceived(playerId);
+        var commendations = await _db.GetCommendationsReceived(playerId, includePlayers: true);
 
         if (filterType.HasValue)
         {
@@ -214,9 +254,9 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             ("id", c.Id),
             ("type", c.Type.ToString().ToLowerInvariant()),
             ("name", c.Name),
-            ("giverUserName", c.Giver.LastSeenUserName),
+            ("giverUserName", c.Giver?.LastSeenUserName ?? "Unknown"),
             ("giver", c.GiverName),
-            ("receiverUserName", c.Receiver.LastSeenUserName),
+            ("receiverUserName", c.Receiver?.LastSeenUserName ?? "Unknown"),
             ("receiver", c.ReceiverName),
             ("round", c.RoundId),
             ("text", c.Text));
@@ -228,6 +268,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             var options = new[]
             {
+                new CompletionOption("last", Loc.GetString("cmd-listcommendations-hint-mode-last")),
                 new CompletionOption("round", Loc.GetString("cmd-listcommendations-hint-mode-round")),
                 new CompletionOption("player", Loc.GetString("cmd-listcommendations-hint-mode-player"))
             };
@@ -236,6 +277,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (args.Length == 2)
         {
+            if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase))
+            {
+                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-count"));
+            }
+
             if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
             {
                 return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-round-id"));
@@ -254,6 +300,17 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (args.Length == 3)
         {
+            if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase))
+            {
+                var typeOptions = new[]
+                {
+                    new CompletionOption("all", Loc.GetString("cmd-listcommendations-hint-type-all")),
+                    new CompletionOption("medal", Loc.GetString("cmd-listcommendations-hint-type-medal")),
+                    new CompletionOption("jelly", Loc.GetString("cmd-listcommendations-hint-type-jelly"))
+                };
+                return CompletionResult.FromHintOptions(typeOptions, Loc.GetString("cmd-listcommendations-hint-type"));
+            }
+
             if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
             {
                 var typeOptions = new[]

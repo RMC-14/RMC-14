@@ -2096,26 +2096,74 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            return await query
                 .Where(c => c.ReceiverId == player)
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            return await query
                 .Where(c => c.GiverId == player)
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId)
+        public async Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
+                .OrderByDescending(c => c.Id)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            return await query
                 .Where(c => c.RoundId == roundId)
                 .ToListAsync();
         }

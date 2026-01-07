@@ -1,6 +1,11 @@
 # List Commendations Command
-cmd-listcommendations-desc = Lists commendations by round or player
+cmd-listcommendations-desc = Lists commendations by round, player, or recent entries.
 cmd-listcommendations-help = Usage:
+  listcommendations last <count> [type]
+    - Lists the most recent commendations
+    - count: number of most recent commendations to show
+    - type: all (default), medal, or jelly
+  
   listcommendations round <roundId> [type]
     - Lists all commendations for a specific round
     - type: all (default), medal, or jelly
@@ -16,6 +21,8 @@ cmd-listcommendations-help = Usage:
     - type: all (default), medal, or jelly
   
   Examples:
+    listcommendations last 10
+    listcommendations last 5 all
     listcommendations round 42
     listcommendations round 42 medal
     listcommendations player giver PlayerName 10
@@ -31,6 +38,7 @@ cmd-listcommendations-player-not-found = Player '{ $player }' not found.
 cmd-listcommendations-no-results = No commendations found.
 
 # Headers
+cmd-listcommendations-last-header = Showing { $count } most recent commendations (requested: { $total }):
 cmd-listcommendations-round-header = Commendations for Round { $round } ({ $count } total):
 cmd-listcommendations-giver-header = Showing { $count } most recent commendations given (requested: { $total }):
 cmd-listcommendations-receiver-header = Showing { $count } most recent commendations received (requested: { $total }):
@@ -39,7 +47,8 @@ cmd-listcommendations-receiver-header = Showing { $count } most recent commendat
 cmd-listcommendations-format = [{ $id }] { $type }: { $name } - { $giverUserName } ({ $giver }) → { $receiverUserName } ({ $receiver }) Round { $round }: { $text }
 
 # Completion hints
-cmd-listcommendations-hint-mode = Mode (round or player)
+cmd-listcommendations-hint-mode = Mode (last, round, or player)
+cmd-listcommendations-hint-mode-last = List most recent commendations
 cmd-listcommendations-hint-mode-round = List commendations by round
 cmd-listcommendations-hint-mode-player = List commendations by player
 cmd-listcommendations-hint-round-id = Round ID

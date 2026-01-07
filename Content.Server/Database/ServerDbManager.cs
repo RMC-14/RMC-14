@@ -383,11 +383,13 @@ namespace Content.Server.Database
             CommendationType type,
             int round);
 
-        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player);
+        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, bool includePlayers = false);
 
-        Task<List<RMCCommendation>> GetCommendationsGiven(Guid player);
+        Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, bool includePlayers = false);
 
-        Task<List<RMCCommendation>> GetCommendationsByRound(int roundId);
+        Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false);
+
+        Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, bool includePlayers = false);
 
         Task IncreaseInfects(Guid player);
 
@@ -1250,22 +1252,28 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.AddCommendation(giver, receiver, giverName, receiverName, name, text, type, round));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsReceived(player));
+            return RunDbCommand(() => _db.GetCommendationsReceived(player, includePlayers));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsGiven(player));
+            return RunDbCommand(() => _db.GetCommendationsGiven(player, includePlayers));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsByRound(int roundId)
+        public Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsByRound(roundId));
+            return RunDbCommand(() => _db.GetLastCommendations(count, filterType, includePlayers));
+        }
+
+        public Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, bool includePlayers = false)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationsByRound(roundId, includePlayers));
         }
 
         public Task IncreaseInfects(Guid player)
