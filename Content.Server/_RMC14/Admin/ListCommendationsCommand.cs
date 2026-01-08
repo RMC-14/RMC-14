@@ -71,8 +71,22 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             return;
         }
 
-        // Mode 3: player giver <usernameOrId> <count> [type]
-        // Mode 4: player receiver <usernameOrId> <count> [type]
+        // Mode 3: id <commendationId>
+        if (args[0].Equals("id", StringComparison.OrdinalIgnoreCase))
+        {
+            if (args.Length < 2 || !int.TryParse(args[1], out var commendationId))
+            {
+                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-id"));
+                shell.WriteLine(Help);
+                return;
+            }
+
+            await ListCommendationById(shell, commendationId);
+            return;
+        }
+
+        // Mode 4: player giver <usernameOrId> <count> [type]
+        // Mode 5: player receiver <usernameOrId> <count> [type]
         if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
         {
             if (args.Length < 2)
@@ -190,6 +204,20 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         }
     }
 
+    private async Task ListCommendationById(IConsoleShell shell, int commendationId)
+    {
+        var commendation = await _db.GetCommendationById(commendationId, true);
+
+        if (commendation == null)
+        {
+            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            return;
+        }
+
+        shell.WriteLine(Loc.GetString("cmd-listcommendations-id-header", ("id", commendationId)));
+        shell.WriteLine(FormatCommendation(commendation));
+    }
+
     private async Task ListCommendationsByGiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
         var commendations = await _db.GetCommendationsGiven(playerId, filterType, true);
@@ -260,6 +288,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             {
                 new CompletionOption("last", Loc.GetString("cmd-listcommendations-hint-mode-last")),
                 new CompletionOption("round", Loc.GetString("cmd-listcommendations-hint-mode-round")),
+                new CompletionOption("id", Loc.GetString("cmd-listcommendations-hint-mode-id")),
                 new CompletionOption("player", Loc.GetString("cmd-listcommendations-hint-mode-player"))
             };
             return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-listcommendations-hint-mode"));
@@ -275,6 +304,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
             {
                 return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-round-id"));
+            }
+
+            if (args[0].Equals("id", StringComparison.OrdinalIgnoreCase))
+            {
+                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-commendation-id"));
             }
 
             if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))

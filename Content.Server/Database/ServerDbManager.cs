@@ -389,6 +389,8 @@ namespace Content.Server.Database
 
         Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false);
 
+        Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false);
+
         Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false);
 
         Task IncreaseInfects(Guid player);
@@ -1268,6 +1270,12 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetLastCommendations(count, filterType, includePlayers));
+        }
+
+        public Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetCommendationById(commendationId, includePlayers));
         }
 
         public Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
