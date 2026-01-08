@@ -33,7 +33,7 @@
       whitelist:
         tags:
         - RMCSquadPMC
-  useLoadoutOfJob: CMSurvivor
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase

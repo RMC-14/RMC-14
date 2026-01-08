@@ -33,7 +33,7 @@
         - RMCSquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
-  useLoadoutOfJob: CMSurvivorEngineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase

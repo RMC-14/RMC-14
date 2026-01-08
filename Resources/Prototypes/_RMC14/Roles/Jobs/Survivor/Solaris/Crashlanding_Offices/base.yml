@@ -33,7 +33,7 @@
       - Civilian
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
-  useLoadoutOfJob: CMSurvivor
+  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack

@@ -37,7 +37,7 @@
         - RMCSquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
-  useLoadoutOfJob: RMCSurvivorCommandingOfficer
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorPMCBase
