@@ -604,7 +604,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
         if (!attachable.Comp.Active &&
             TryComp<InputMoverComponent>(args.User, out var input) &&
-            (input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None)
+            (input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None &&
+            !attachable.Comp.ActivateOnMove)
         {
             return;
         }
