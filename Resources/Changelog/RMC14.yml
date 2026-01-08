@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed cargo tech headsets not having engi and command radio channels,
-      tuned out by default.
-    type: Fix
-  id: 2221
-  time: '2025-08-26T03:48:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7479
 - author: N0lim
   changes:
   - message: Fixed parasite having plasma
@@ -4739,5 +4731,12 @@
   id: 2723
   time: '2026-01-08T03:16:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8826
+- author: YO0teacher
+  changes:
+  - message: Police skill now allows you to strip dogtags.
+    type: Tweak
+  id: 2724
+  time: '2026-01-08T22:38:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8578
 Name: RMC14
 Order: -1
