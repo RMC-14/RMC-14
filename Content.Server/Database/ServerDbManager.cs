@@ -383,7 +383,7 @@ namespace Content.Server.Database
             CommendationType type,
             int round);
 
-        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, bool includePlayers = false);
+        Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false);
 
         Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false);
 
@@ -1252,10 +1252,10 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.AddCommendation(giver, receiver, giverName, receiverName, name, text, type, round));
         }
 
-        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, bool includePlayers = false)
+        public Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             DbReadOpsMetric.Inc();
-            return RunDbCommand(() => _db.GetCommendationsReceived(player, includePlayers));
+            return RunDbCommand(() => _db.GetCommendationsReceived(player, filterType, includePlayers));
         }
 
         public Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)

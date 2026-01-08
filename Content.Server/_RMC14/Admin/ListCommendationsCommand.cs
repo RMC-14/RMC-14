@@ -216,10 +216,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByReceiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsReceived(playerId, includePlayers: true);
-
-        if (filterType.HasValue)
-            commendations = commendations.Where(c => c.Type == filterType.Value).ToList();
+        var commendations = await _db.GetCommendationsReceived(playerId, filterType, true);
 
         commendations = commendations
             .OrderByDescending(c => c.Id)
