@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ProspectorAres
-  changes:
-  - message: Added a new lobby Screen
-    type: Add
-  id: 2204
-  time: '2025-08-22T02:19:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7478
 - author: BramvanZijp
   changes:
   - message: The Commanding Officer's Smartgun will no longer cause your hitbox to
@@ -4754,5 +4747,13 @@
   id: 2706
   time: '2026-01-08T02:38:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8687
+- author: Deerstop
+  changes:
+  - message: On Kutjevo Refinery, you can no longer see out-of-bounds in the Hydroelectric
+      Dam
+    type: Fix
+  id: 2707
+  time: '2026-01-08T02:40:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8923
 Name: RMC14
 Order: -1
