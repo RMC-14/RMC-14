@@ -1,6 +1,6 @@
 # m3
 - type: entity
-  parent: [RMCBaseMarineArmorLightNoAccessory, RMCBaseUniformAccessoryItemArmorPVE]
+  parent: [RMCBaseArmorPVE, RMCBaseUniformAccessoryItemArmorPVE]
   id: RMCArmorM3PVE
   suffix: PVE, Standard
   name: M3 pattern marine armor
@@ -23,6 +23,12 @@
     worn: false
   - type: Corrodible
     isCorrodible: false
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/OuterClothing/PVE/Marines/standard/jungle.rsi

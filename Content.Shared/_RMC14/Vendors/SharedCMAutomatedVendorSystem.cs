@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Webbing;
+using Content.Shared._RMC14.ArmorWebbing;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
@@ -73,6 +74,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
+    [Dependency] private readonly SharedArmorWebbingSystem _armorWebbing = default!;
     [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
 
@@ -779,6 +781,9 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (TryAttachWebbing(player, item))
             return true;
 
+        if (TryAttachArmorWebbing(player, item))
+            return true;
+
         if (!TryComp(item, out ClothingComponent? clothing))
             return _hands.TryPickupAnyHand(player, item);
 
@@ -820,6 +825,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 if (slot.ContainedEntity is { } contained &&
                     TryComp(contained, out WebbingClothingComponent? clothing) &&
                     _webbing.Attach((contained, clothing), item, player, out _))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryAttachArmorWebbing(EntityUid player, EntityUid item)
+    {
+        if (HasComp<ArmorWebbingComponent>(item) &&
+            _inventory.TryGetContainerSlotEnumerator(player, out var enumerator))
+        {
+            while (enumerator.MoveNext(out var slot))
+            {
+                if (slot.ContainedEntity is { } contained &&
+                    TryComp(contained, out ArmorWebbingClothingComponent? clothing) &&
+                    _armorWebbing.Attach((contained, clothing), item, player, out _))
                 {
                     return true;
                 }

@@ -1,0 +1,248 @@
+- type: entity
+  parent: BaseItem
+  abstract: true
+  id: RMCArmorWebbingBase
+  name: armor webbing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/pouch.rsi
+  - type: Item
+    size: Large
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,5,1 # 3 slots
+    - type: FixedItemSizeStorage
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: StoreAfterFailedInteract
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCArmorWebbingBase
+  id: RMCArmorWebbingDrum
+  name: armor webbing (drums)
+  description: A brown harness fitted with a pair of large pouches capable of carrying high-capacity drums and other large magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/drum.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,3,1
+    whitelist:
+      tags:
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - RMCShellShotgun
+      - RMCMagazineSmartGun
+  - type: FixedItemSizeStorage
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,3,1
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+        - CMMagazineRifle
+        - RMCMagazineShotgun
+        - CMMagazineSmg
+        - CMMagazineSniper
+        - RMCShellShotgun
+        - RMCMagazineSmartGun
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCArmorWebbingBase
+  id: RMCArmorWebbingMag
+  name: armor webbing (magazines)
+  description: A brown harness fitted with a set of four magazine pouches.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/mag.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - CMMagazinePistol
+      - RMCMagazineRevolver
+      - CMMagazineRifle
+      - RMCMagazineShotgun
+      - CMMagazineSmg
+      - CMMagazineSniper
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,7,1
+      whitelist:
+        tags:
+        - CMMagazinePistol
+        - RMCMagazineRevolver
+        - CMMagazineRifle
+        - RMCMagazineShotgun
+        - CMMagazineSmg
+        - CMMagazineSniper
+        - RMCShellShotgun
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCArmorWebbingBase
+  id: RMCArmorWebbingGrenade
+  name: armor webbing (grenades)
+  description: A brown harness fitted with an array of small pouches, capable of holding up to 6 grenades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/nade.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,11,1
+    whitelist:
+      tags:
+      - Grenade
+  - type: FixedItemSizeStorage
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+      - 0,0,11,1
+      whitelist:
+        tags:
+        - Grenade
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCArmorWebbingBase
+  id: RMCArmorWebbingPouch
+  name: armor webbing (pouches)
+  description: A brown harness fitted with several small pouches, capable of carrying assorted small items.
+  components:
+  - type: Sprite
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,7,1
+    - type: FixedItemSizeStorage
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCArmorWebbingBase
+  id: RMCArmorWebbingShell
+  name: armor webbing (shells)
+  description: A brown harness fitted with a number of loops designed to hold loose shotgun shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/shell.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,9,1
+    whitelist:
+      tags:
+      - RMCShellShotgun
+  - type: FixedItemSizeStorage
+  - type: ArmorWebbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,9,1
+      whitelist:
+        tags:
+        - RMCShellShotgun
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
