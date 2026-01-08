@@ -478,7 +478,7 @@
     linkedLz: dropship_lz2
 
 - type: entity
-  parent: RMCAreaFiorinaStation
+  parent: RMCAreaFiorinaMaintenance
   id: RMCAreaFiorinaStationRocinante
   name: Tramp Freighter Rocinante
   components:

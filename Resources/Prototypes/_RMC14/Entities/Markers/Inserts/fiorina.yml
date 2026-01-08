@@ -33,6 +33,4 @@
     - spawn: "/Maps/_RMC14/Inserts/Fiorina/rocinante.yml"
       probability: 1
       nightmareScenario: rocinante_clf
-    clearEntities: true
-    clearDecals: true
     replaceAreas: true
