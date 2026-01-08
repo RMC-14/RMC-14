@@ -198,15 +198,10 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByGiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsGiven(playerId, includePlayers: true);
+        var commendations = await _db.GetCommendationsGiven(playerId, count, filterType, true);
 
-        if (filterType.HasValue)
-        {
-            commendations = commendations.Where(c => c.Type == filterType.Value).ToList();
-        }
-
-        // Order by ID descending (newest first) and take count
-        commendations = commendations.OrderByDescending(c => c.Id).Take(count).ToList();
+        // Order by ID descending (newest first)
+        commendations = commendations.OrderByDescending(c => c.Id).ToList();
 
         if (commendations.Count == 0)
         {
