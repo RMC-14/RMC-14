@@ -98,7 +98,7 @@
   parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalFlightHelmet
   name: PH-4 'Spitfire' flight helmet
-  description: Standard flight helmet used across the Three Sun Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire..
+  description: Standard flight helmet used across the Three Suns Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi
