@@ -1974,3 +1974,36 @@
     state: zayden_soap_kirkson
   - type: PatronFigurine
     id: e3cf902c-a055-42ed-a3fd-c1267eb795bd
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPsyJuniJuniper
+  name: Psy 'Juni' Juniper figurine
+  description: "You look at the tiny rabbit, he has an Anti-Material Rifle on his back and blood all over his fur. He's offering a carrot! Just for you!"
+  components:
+  - type: Sprite
+    state: psy_juni_juniper
+  - type: PatronFigurine
+    id: f7b90833-5c77-43b5-b109-a262a3083742
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIceyIana
+  name: Icey Iana figurine
+  description: "Be Aggressive! Never stop pushing!"
+  components:
+  - type: Sprite
+    state: icey_iana
+  - type: PatronFigurine
+    id: 9f9087f0-270c-4177-866c-1b988b596ffb
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaizerDeathwishValentine
+  name: Kaizer 'Deathwish' Valentine figurine
+  description: "This high-quality figurine depicts Kaizer 'Deathwish' Valentine, an elite UNMC medic known for his perfectionist attitude towards treatment and his reckless disregard for his own safety when recovering the fallen.  Sculpted with exceptional precision, the figure shows his pristine, meticulously arranged medical tools contrasted against his battle-worn armor, reflecting both his discipline and the danger he constantly throws himself into.  His focused expression peers through a cracked visor, one hand gripping a compact scanner while the other reaches toward a debris-strewn base featuring shattered concrete and a partially exposed UNMC emblem.  Premium paintwork, layered shading, and fine weathering give the entire piece a cinematic realism befitting a tribute to a medic who refuses to lose a patient—even at his own expense."
+  components:
+  - type: Sprite
+    state: kaizer_deathwish_valentine
+  - type: PatronFigurine
+    id: 2cd412a9-6316-4163-8a33-637c63b2cd38

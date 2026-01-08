@@ -272,6 +272,8 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartTQ
   - type: RMCTrackable
+  - type: ExcludedFromKingVote
+    canVote: true
 
 - type: entity
   parent: RMCXenoQueenBase

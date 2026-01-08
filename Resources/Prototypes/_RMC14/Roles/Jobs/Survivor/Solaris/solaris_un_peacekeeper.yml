@@ -10,16 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 0 # RMC14
-        RMCSkillFireman: 2
+      preset: SurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -32,12 +23,12 @@
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
-  parent: RMCGearSurvivorUNPeacekeeper
+  parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorSolarisUNPeacekeeper
   equipment:
-    head: ArmorHelmetPMCRiotShield
     jumpsuit: RMCJumpsuitUNSecurity
-    outerClothing: RMCArmorPMCRiot
+    outerClothing: RMCArmorVest
+    head: RMCHeadBeretOfficerHos
 
 - type: entity
   parent: CMSpawnPointJobBase

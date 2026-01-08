@@ -61,6 +61,7 @@
       - CMMagazineSmg
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSniper
       - MRE
       - PillPacket
@@ -80,6 +81,7 @@
         - CMMagazineSmg
         - CMMagazinePistol
         - CMMagazineRifle
+        - RMCMagazineShotgun
         - CMMagazineSniper
         - MRE
         - PillPacket
