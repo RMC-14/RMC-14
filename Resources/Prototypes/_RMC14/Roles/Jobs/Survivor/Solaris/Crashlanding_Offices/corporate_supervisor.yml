@@ -1,6 +1,6 @@
 - type: job
   parent: CMSurvivorCorporate
-  id: CMSurvivorSolarisCorporateSupervisor
+  id: RMCSurvivorSolarisCorporateSupervisor
   name: rmc-job-name-survivor-solaris-corporate-supervisor
   ranks:
     RMCRankWeYaExecutiveSupervisor: []
@@ -53,7 +53,7 @@
   name: special survivor crashlanding offices coporate supervisor spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorSolarisCorporateSupervisor
+    job_id: RMCSurvivorSolarisCorporateSupervisor
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
