@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Grid
+  category: Map
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 05:03:37
-  entityCount: 1205
-maps: []
+  time: 01/08/2026 22:52:36
+  entityCount: 1207
+maps:
+- 1206
 grids:
 - 1
-orphans:
-- 1
+orphans: []
 nullspace: []
 tilemap:
   0: Space
@@ -97,7 +97,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: invalid
+      parent: 1206
     - type: MapGrid
       chunks:
         0,0:
@@ -1192,6 +1192,16 @@ entities:
         5,3: RMCAreaLv759IndoorsOutpostSouterMainHall
         5,2: RMCAreaLv759IndoorsOutpostSouterMainHall
         29,22: RMCAreaLv759IndoorsOutpostSouterHangar
+  - uid: 1206
+    components:
+    - type: MetaData
+      name: Map Entity
+    - type: Transform
+    - type: Map
+      mapPaused: True
+    - type: GridTree
+    - type: Broadphase
+    - type: OccluderTree
 - proto: BedrollFolded
   entities:
   - uid: 653
@@ -5498,6 +5508,19 @@ entities:
     - type: Transform
       pos: 23.490177,4.5656767
       parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 1207
+    components:
+    - type: MetaData
+      name: TSE Airbase
+    - type: Transform
+      pos: 15.5,16.5
+      parent: 1
+    - type: NavMapBeacon
+      text: TSE Airbase
+    - type: WarpPoint
+      location: TSE Airbase
 - proto: RMCMechPowerLoader
   entities:
   - uid: 765

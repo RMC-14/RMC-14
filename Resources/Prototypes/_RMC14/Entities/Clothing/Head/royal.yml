@@ -87,7 +87,7 @@
   parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalL1HelmetBallistic
   name: L1 ballistic helmet
-  description: A versatile ballistic helmet designed by Alphatech for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
+  description: A versatile ballistic helmet designed by Weston-Yamada for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
