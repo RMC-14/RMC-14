@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: blueisdumb
-  changes:
-  - message: Added two new tails for Vulpkanins and Felinids
-    type: Add
-  - message: Fixed Animated Tails for felinids showing on the marking customization
-      tab.
-    type: Fix
-  id: 2218
-  time: '2025-08-26T03:41:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7085
 - author: Vermidia
   changes:
   - message: Added lethal injection syringes
@@ -4743,5 +4733,13 @@
   id: 2720
   time: '2026-01-08T03:09:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8750
+- author: Arykh
+  changes:
+  - message: You can now change the icon label on pill bottles via the right click
+      menu!
+    type: Add
+  id: 2721
+  time: '2026-01-08T03:11:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8849
 Name: RMC14
 Order: -1
