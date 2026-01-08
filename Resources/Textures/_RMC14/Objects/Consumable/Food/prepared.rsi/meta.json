@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1cc75f29838f1dd7c6772bd5512716767a86a35f/icons/obj/items/food.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/1cc75f29838f1dd7c6772bd5512716767a86a35f/icons/obj/items/food.dmi, rmc entries by Valia at https://github.com/cmss13-devs/cmss13-pve/commits/master/icons/obj/items/food_canteen.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -39,6 +39,24 @@
     },
     {
       "name": "mealpackempty"
+    },
+    {
+      "name": "rmc_fish"
+    },
+    {
+      "name": "rmc_katsu"
+    },
+    {
+      "name": "rmc_meat"
+    },
+    {
+      "name": "rmc_sausage"
+    },
+    {
+      "name": "rmc_tikka"
+    },
+    {
+      "name": "rmc_tray_empty"
     },
     {
       "name": "mretray_empty"

@@ -410,6 +410,22 @@
         tags:
         - Flare
 
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareL96
+  name: L96 flare pouch
+  description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
+  components:
+  - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before taking another flare!
+    count: 16
+    slot:
+      name: RMCFlareL96
+      whitelist:
+        tags:
+        - RMCFlareL96
+
 # Radio Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -648,3 +664,19 @@
 
 - type: Tag
   id: RMCPouchShotgunShells
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMEntrenchingTool
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: RMCNailgunCompact
+    - id: CMMultitool
