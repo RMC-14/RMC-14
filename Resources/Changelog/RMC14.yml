@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added SPP equivalents for the PVE UNMC gear vendors.
-    type: Add
-  - message: Added PVE SPP roles.
-    type: Add
-  - message: Added the Type 71 gun rack.
-    type: Add
-  id: 2212
-  time: '2025-08-23T22:23:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7565
-- author: DrSmugleaf
-  changes:
-  - message: Added chat repeated messages, where a message will get x2, x3, x4 and
-      so on added to the end of it in your chat history when someone repeatedly sends
-      the same message over a short period of time.
-    type: Add
-  - message: Fixed Normandy not being able to load guns.
-    type: Fix
-  - message: Fixed zombie spawners not working after spawning more than 100.
-    type: Fix
-  - message: Fixed corpsmen not being able to use the medical vendor in PvE.
-    type: Fix
-  id: 2213
-  time: '2025-08-23T22:42:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7587
-- author: Aurallianz
-  changes:
-  - message: Fixed chemist pouch not having rmc-specific beakers.
-    type: Fix
-  id: 2214
-  time: '2025-08-26T03:37:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7459
 - author: Aurallianz
   changes:
   - message: PMC ID card is available
@@ -4750,5 +4717,27 @@
   id: 2714
   time: '2026-01-08T03:01:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8775
+- author: monomethylhydrazine
+  changes:
+  - message: Fixed WeYa PMC synthetics not being automatically assigned to the PMC
+      squad and missing a tracker for PMC squad leaders
+    type: Fix
+  id: 2715
+  time: '2026-01-08T03:03:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8767
+- author: Vermidia
+  changes:
+  - message: '[PVE] Sound markers are now visible to ghosts.'
+    type: Tweak
+  id: 2716
+  time: '2026-01-08T03:02:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8753
+- author: Vermidia
+  changes:
+  - message: Fixed weapon damage dealt while devoured being too high.
+    type: Fix
+  id: 2717
+  time: '2026-01-08T03:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8779
 Name: RMC14
 Order: -1
