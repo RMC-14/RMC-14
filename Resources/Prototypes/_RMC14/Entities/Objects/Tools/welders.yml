@@ -6,12 +6,21 @@
   description: "Melts anything as long as it's fueled, don't forget your eye protection!"
   abstract: true
   components:
+  - type: EmitSoundOnDrop
+    sound:
+      path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/welder_drop.ogg
+      params:
+        volume: -4
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/weldingtool_pickup.ogg
+      params:
+        volume: -4
   - type: Sprite
     sprite: _RMC14/Objects/Tools/welder.rsi
     layers:

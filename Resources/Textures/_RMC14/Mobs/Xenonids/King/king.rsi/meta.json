@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Sprites by @aleksh and @.sigma_draconis.",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "alive",
+      "directions": 4
+    },
+    {
+      "name": "king_downed_0"
+    },
+    {
+      "name": "king_downed_1"
+    },
+    {
+      "name": "king_downed_2"
+    },
+    {
+      "name": "king_downed_3"
+    },
+    {
+      "name": "king_rest_0"
+    },
+    {
+      "name": "king_rest_1"
+    },
+    {
+      "name": "king_rest_2"
+    },
+    {
+      "name": "king_rest_3"
+    },
+    {
+      "name": "king_walk_3",
+      "directions": 4
+    },
+    {
+      "name": "king_walk_0",
+      "directions": 4
+    },
+    {
+      "name": "king_walk_1",
+      "directions": 4
+    },
+    {
+      "name": "king_walk_2",
+      "directions": 4
+    },
+    {
+      "name": "sleeping"
+    },
+    {
+      "name": "crit"
+    },
+    {
+      "name": "dead"
+    }
+  ]
+}

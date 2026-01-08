@@ -56,9 +56,18 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: IgnoreContentsSize
     items:
       components:

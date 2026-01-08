@@ -62,7 +62,7 @@
   id: RMCGearCLFSoldier
   equipment:
     head: RMCHeadMilitiaHood
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFWebbing
     outerClothing: RMCCoatMilitiaVest
