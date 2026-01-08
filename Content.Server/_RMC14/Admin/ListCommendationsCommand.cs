@@ -166,7 +166,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         shell.WriteLine(Loc.GetString("cmd-listcommendations-last-header", ("count", commendations.Count), ("total", count)));
 
-        foreach (var c in commendations)
+        foreach (var c in commendations.OrderBy(c => c.Id))
         {
             shell.WriteLine(FormatCommendation(c));
         }
@@ -192,7 +192,13 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByGiver(IConsoleShell shell, Guid playerId, int count, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsGiven(playerId, count, filterType, true);
+        var commendations = await _db.GetCommendationsGiven(playerId, filterType, true);
+
+        commendations = commendations
+            .OrderByDescending(c => c.Id)
+            .Take(count)
+            .OrderBy(c => c.Id)
+            .ToList();
 
         if (commendations.Count == 0)
         {
@@ -202,7 +208,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         shell.WriteLine(Loc.GetString("cmd-listcommendations-giver-header", ("count", commendations.Count), ("total", count)));
 
-        foreach (var c in commendations.OrderBy(c => c.Id))
+        foreach (var c in commendations)
         {
             shell.WriteLine(FormatCommendation(c));
         }
@@ -213,12 +219,13 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         var commendations = await _db.GetCommendationsReceived(playerId, includePlayers: true);
 
         if (filterType.HasValue)
-        {
             commendations = commendations.Where(c => c.Type == filterType.Value).ToList();
-        }
 
-        // Order by ID descending (newest first) and take count
-        commendations = commendations.Take(count).ToList();
+        commendations = commendations
+            .OrderByDescending(c => c.Id)
+            .Take(count)
+            .OrderBy(c => c.Id)
+            .ToList();
 
         if (commendations.Count == 0)
         {
@@ -228,7 +235,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         shell.WriteLine(Loc.GetString("cmd-listcommendations-receiver-header", ("count", commendations.Count), ("total", count)));
 
-        foreach (var c in commendations.OrderBy(c => c.Id))
+        foreach (var c in commendations)
         {
             shell.WriteLine(FormatCommendation(c));
         }

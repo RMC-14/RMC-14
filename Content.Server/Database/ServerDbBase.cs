@@ -2113,13 +2113,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, int? count = null, CommendationType? filterType = null, bool includePlayers = false)
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
             var query = db.DbContext.RMCCommendations.AsQueryable();
-
-            if (count != null)
-                query = query.Take(count.Value);
 
             if (includePlayers)
             {
