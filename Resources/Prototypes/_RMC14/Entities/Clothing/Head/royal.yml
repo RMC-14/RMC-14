@@ -42,7 +42,7 @@
   parent: RMCHeadRoyalBeret
   id: RMCHeadEIAFBeret
   name: EIAF beret
-  description: A distinctive crimson beret worn by the Imperial Armed Space Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  description: A distinctive crimson beret worn by the Extrasolar Imperial Airborne Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
