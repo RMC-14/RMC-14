@@ -10,19 +10,19 @@ using Robust.Shared.Console;
 namespace Content.Server._RMC14.Admin;
 
 [AdminCommand(AdminFlags.Commendations)]
-public sealed class ListCommendationsCommand : LocalizedCommands
+public sealed class RMCListCommendationsCommand : LocalizedCommands
 {
     [Dependency] private readonly IPlayerLocator _locator = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
 
-    public override string Command => "listcommendations";
+    public override string Command => "rmclistcommendations";
 
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         if (args.Length == 0)
         {
-            shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-arguments"));
+            shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-arguments"));
             shell.WriteLine(Help);
             return;
         }
@@ -32,7 +32,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             if (args.Length < 2 || !int.TryParse(args[1], out var count) || count <= 0)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-count"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-count"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -40,7 +40,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             var typeFilter = args.Length >= 3 ? args[2].ToLowerInvariant() : "all";
             if (!TryParseCommendationType(typeFilter, out var filterType))
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-type", ("type", typeFilter)));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-type", ("type", typeFilter)));
                 shell.WriteLine(Help);
                 return;
             }
@@ -54,7 +54,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             if (args.Length < 2 || !int.TryParse(args[1], out var roundId))
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-round-id"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-round-id"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -62,7 +62,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             var typeFilter = args.Length >= 3 ? args[2].ToLowerInvariant() : "all";
             if (!TryParseCommendationType(typeFilter, out var filterType))
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-type", ("type", typeFilter)));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-type", ("type", typeFilter)));
                 shell.WriteLine(Help);
                 return;
             }
@@ -76,7 +76,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             if (args.Length < 2 || !int.TryParse(args[1], out var commendationId))
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-id"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-id"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -91,7 +91,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             if (args.Length < 2)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-arguments"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-arguments"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -101,14 +101,14 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
             if (!isGiver && !isReceiver)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-player-mode"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-player-mode"));
                 shell.WriteLine(Help);
                 return;
             }
 
             if (args.Length < 3)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-arguments"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-arguments"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -116,13 +116,13 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             var located = await _locator.LookupIdByNameOrIdAsync(args[2]);
             if (located == null)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-player-not-found", ("player", args[2])));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-player-not-found", ("player", args[2])));
                 return;
             }
 
             if (args.Length < 4 || !int.TryParse(args[3], out var count) || count <= 0)
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-count"));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-count"));
                 shell.WriteLine(Help);
                 return;
             }
@@ -130,7 +130,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             var typeFilter = args.Length >= 5 ? args[4].ToLowerInvariant() : "all";
             if (!TryParseCommendationType(typeFilter, out var filterType))
             {
-                shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-type", ("type", typeFilter)));
+                shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-type", ("type", typeFilter)));
                 shell.WriteLine(Help);
                 return;
             }
@@ -146,7 +146,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             return;
         }
 
-        shell.WriteError(Loc.GetString("cmd-listcommendations-invalid-arguments"));
+        shell.WriteError(Loc.GetString("cmd-rmclistcommendations-invalid-arguments"));
         shell.WriteLine(Help);
     }
 
@@ -174,11 +174,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (commendations.Count == 0)
         {
-            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-no-results"));
             return;
         }
 
-        shell.WriteLine(Loc.GetString("cmd-listcommendations-last-header", ("count", commendations.Count), ("total", count)));
+        shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-last-header", ("count", commendations.Count), ("total", count)));
 
         foreach (var c in commendations.OrderBy(c => c.Id))
         {
@@ -192,11 +192,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (commendations.Count == 0)
         {
-            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-no-results"));
             return;
         }
 
-        shell.WriteLine(Loc.GetString("cmd-listcommendations-round-header", ("round", roundId), ("count", commendations.Count)));
+        shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-round-header", ("round", roundId), ("count", commendations.Count)));
 
         foreach (var c in commendations.OrderBy(c => c.Id))
         {
@@ -210,11 +210,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (commendation == null)
         {
-            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-no-results"));
             return;
         }
 
-        shell.WriteLine(Loc.GetString("cmd-listcommendations-id-header", ("id", commendationId)));
+        shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-id-header", ("id", commendationId)));
         shell.WriteLine(FormatCommendation(commendation));
     }
 
@@ -230,11 +230,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (commendations.Count == 0)
         {
-            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-no-results"));
             return;
         }
 
-        shell.WriteLine(Loc.GetString("cmd-listcommendations-giver-header", ("count", commendations.Count), ("total", count)));
+        shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-giver-header", ("count", commendations.Count), ("total", count)));
 
         foreach (var c in commendations)
         {
@@ -254,11 +254,11 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (commendations.Count == 0)
         {
-            shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
+            shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-no-results"));
             return;
         }
 
-        shell.WriteLine(Loc.GetString("cmd-listcommendations-receiver-header", ("count", commendations.Count), ("total", count)));
+        shell.WriteLine(Loc.GetString("cmd-rmclistcommendations-receiver-header", ("count", commendations.Count), ("total", count)));
 
         foreach (var c in commendations)
         {
@@ -268,7 +268,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private string FormatCommendation(RMCCommendation c)
     {
-        return Loc.GetString("cmd-listcommendations-format",
+        return Loc.GetString("cmd-rmclistcommendations-format",
             ("id", c.Id),
             ("type", c.Type.ToString().ToLowerInvariant()),
             ("name", c.Name),
@@ -286,39 +286,39 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         {
             var options = new[]
             {
-                new CompletionOption("last", Loc.GetString("cmd-listcommendations-hint-mode-last")),
-                new CompletionOption("round", Loc.GetString("cmd-listcommendations-hint-mode-round")),
-                new CompletionOption("id", Loc.GetString("cmd-listcommendations-hint-mode-id")),
-                new CompletionOption("player", Loc.GetString("cmd-listcommendations-hint-mode-player"))
+                new CompletionOption("last", Loc.GetString("cmd-rmclistcommendations-hint-mode-last")),
+                new CompletionOption("round", Loc.GetString("cmd-rmclistcommendations-hint-mode-round")),
+                new CompletionOption("id", Loc.GetString("cmd-rmclistcommendations-hint-mode-id")),
+                new CompletionOption("player", Loc.GetString("cmd-rmclistcommendations-hint-mode-player"))
             };
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-listcommendations-hint-mode"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmclistcommendations-hint-mode"));
         }
 
         if (args.Length == 2)
         {
             if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase))
             {
-                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-count"));
+                return CompletionResult.FromHint(Loc.GetString("cmd-rmclistcommendations-hint-count"));
             }
 
             if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
             {
-                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-round-id"));
+                return CompletionResult.FromHint(Loc.GetString("cmd-rmclistcommendations-hint-round-id"));
             }
 
             if (args[0].Equals("id", StringComparison.OrdinalIgnoreCase))
             {
-                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-commendation-id"));
+                return CompletionResult.FromHint(Loc.GetString("cmd-rmclistcommendations-hint-commendation-id"));
             }
 
             if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
             {
                 var options = new[]
                 {
-                    new CompletionOption("giver", Loc.GetString("cmd-listcommendations-hint-player-giver")),
-                    new CompletionOption("receiver", Loc.GetString("cmd-listcommendations-hint-player-receiver"))
+                    new CompletionOption("giver", Loc.GetString("cmd-rmclistcommendations-hint-player-giver")),
+                    new CompletionOption("receiver", Loc.GetString("cmd-rmclistcommendations-hint-player-receiver"))
                 };
-                return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-listcommendations-hint-player-mode"));
+                return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmclistcommendations-hint-player-mode"));
             }
         }
 
@@ -331,13 +331,13 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
             {
                 var options = _players.Sessions.Select(c => c.Name).OrderBy(c => c).ToArray();
-                return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-listcommendations-hint-player"));
+                return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmclistcommendations-hint-player"));
             }
         }
 
         if (args.Length == 4 && args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
         {
-            return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-count"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-rmclistcommendations-hint-count"));
         }
 
         if (args.Length == 5 && args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
@@ -357,7 +357,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         return CompletionResult.FromHintOptions(
             options,
-            Loc.GetString("cmd-listcommendations-hint-type")
+            Loc.GetString("cmd-rmclistcommendations-hint-type")
         );
     }
 
