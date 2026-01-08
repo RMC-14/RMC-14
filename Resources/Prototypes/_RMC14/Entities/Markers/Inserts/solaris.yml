@@ -272,4 +272,16 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/chapel_cult.yml"
       probability: 0.25
-    replaceAreas: false
+    replaceAres: false
+
+- type: entity
+  id: RMCMapInsertSolarisCrashlandingEva
+  name: Crashlanding Eva
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
+        probability: 1
+        nightmareScenario: crashlanding_offices
+      replaceAreas: false
