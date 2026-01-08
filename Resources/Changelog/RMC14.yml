@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Fixed knives not being able to cut fences.
-    type: Fix
-  id: 2216
-  time: '2025-08-26T03:40:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7458
 - author: rokudara-sen
   changes:
   - message: Added Mhelp information to the first time join message.
@@ -4739,5 +4732,12 @@
   id: 2718
   time: '2026-01-08T03:06:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8774
+- author: CatoChristopherMrow
+  changes:
+  - message: Admin ghosts filling sandbags no longer crash the server
+    type: Fix
+  id: 2719
+  time: '2026-01-08T03:08:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8836
 Name: RMC14
 Order: -1
