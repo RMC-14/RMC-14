@@ -7,7 +7,7 @@ using Content.Shared.Database;
 using Robust.Server.Player;
 using Robust.Shared.Console;
 
-namespace Content.Server._RMC14.Admin;
+namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Commendations)]
 public sealed class RMCListCommendationsCommand : LocalizedCommands

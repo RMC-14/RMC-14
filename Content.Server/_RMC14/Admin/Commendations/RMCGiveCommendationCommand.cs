@@ -15,10 +15,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Content.Server._RMC14.Commendations;
 
-namespace Content.Server._RMC14.Admin;
+namespace Content.Server._RMC14.Admin.Commendations;
 
 [AdminCommand(AdminFlags.Commendations)]
-public sealed class GiveCommendationCommand : LocalizedCommands
+public sealed class RMCGiveCommendationCommand : LocalizedCommands
 {
     [Dependency] private readonly IPlayerLocator _locator = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
@@ -34,7 +34,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
     private LocalizedDatasetPrototype? _medalsSpecialDataset;
     private LocalizedDatasetPrototype? _jelliesSpecialDataset;
 
-    public override string Command => "givecommendation";
+    public override string Command => "rmcgivecommendation";
 
     private int MedalCount => (_medalsDataset?.Values.Count ?? 0) + (_medalsSpecialDataset?.Values.Count ?? 0);
     private int JellyCount => (_jelliesDataset?.Values.Count ?? 0) + (_jelliesSpecialDataset?.Values.Count ?? 0);
@@ -49,7 +49,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
 
         if (args.Length < 6)
         {
-            shell.WriteError(Loc.GetString("cmd-givecommendation-invalid-arguments"));
+            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-arguments"));
             shell.WriteLine(Help);
             return;
         }
@@ -92,7 +92,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
                 maxAwardType = JellyCount;
                 break;
             default:
-                shell.WriteError(Loc.GetString("cmd-givecommendation-invalid-type"));
+                shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-type"));
                 shell.WriteLine(Help);
                 return;
         }
@@ -100,7 +100,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
         // Parse award type number (1-indexed, but dataset is 0-indexed)
         if (!int.TryParse(awardTypeStr, out var awardNum) || awardNum < 1 || awardNum > maxAwardType)
         {
-            shell.WriteError(Loc.GetString("cmd-givecommendation-invalid-award-type",
+            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-invalid-award-type",
                 ("type", commendationTypeStr), ("max", maxAwardType)));
             shell.WriteLine(Help);
             return;
@@ -128,7 +128,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
         citation = citation.Trim();
         if (string.IsNullOrWhiteSpace(citation))
         {
-            shell.WriteError(Loc.GetString("cmd-givecommendation-empty-citation"));
+            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-empty-citation"));
             return;
         }
 
@@ -137,7 +137,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
 
         if (located == null)
         {
-            shell.WriteError(Loc.GetString("cmd-givecommendation-player-not-found", ("player", receiverNameOrId)));
+            shell.WriteError(Loc.GetString("cmd-rmcgivecommendation-player-not-found", ("player", receiverNameOrId)));
             return;
         }
 
@@ -170,7 +170,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
                 $"{actualAdminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverName}) that reads:\n{citation}");
 
             // Send admin announcement
-            var announcementMsg = Loc.GetString("cmd-givecommendation-admin-announcement",
+            var announcementMsg = Loc.GetString("cmd-rmcgivecommendation-admin-announcement",
                 ("admin", actualAdminName),
                 ("type", typeName),
                 ("award", awardName),
@@ -179,7 +179,7 @@ public sealed class GiveCommendationCommand : LocalizedCommands
                 ("round", targetRound));
             _chat.SendAdminAnnouncement(announcementMsg, null, null);
 
-            shell.WriteLine(Loc.GetString("cmd-givecommendation-success",
+            shell.WriteLine(Loc.GetString("cmd-rmcgivecommendation-success",
                 ("award", awardName), ("player", receiverLogin)));
         }
         catch (Exception e)
@@ -204,17 +204,17 @@ public sealed class GiveCommendationCommand : LocalizedCommands
 
             var options = new[]
             {
-                new CompletionOption(highCommandName, Loc.GetString("cmd-givecommendation-hint-giver-highcommand")),
-                new CompletionOption(queenMotherName, Loc.GetString("cmd-givecommendation-hint-giver-queen-mother"))
+                new CompletionOption(highCommandName, Loc.GetString("cmd-rmcgivecommendation-hint-giver-highcommand")),
+                new CompletionOption(queenMotherName, Loc.GetString("cmd-rmcgivecommendation-hint-giver-queen-mother"))
             };
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-givecommendation-hint-giver"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmcgivecommendation-hint-giver"));
         }
 
         if (args.Length == 2)
         {
             // Complete receiver username/UserId
             var options = _players.Sessions.Select(c => c.Name).OrderBy(c => c).ToArray();
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-givecommendation-hint-receiver"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmcgivecommendation-hint-receiver"));
         }
 
         if (args.Length == 3)
@@ -238,9 +238,9 @@ public sealed class GiveCommendationCommand : LocalizedCommands
             }
 
             if (characterNames.Count > 0)
-                return CompletionResult.FromHintOptions(characterNames, Loc.GetString("cmd-givecommendation-hint-receiver-name"));
+                return CompletionResult.FromHintOptions(characterNames, Loc.GetString("cmd-rmcgivecommendation-hint-receiver-name"));
 
-            return CompletionResult.FromHint(Loc.GetString("cmd-givecommendation-hint-receiver-name"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-rmcgivecommendation-hint-receiver-name"));
         }
 
         if (args.Length == 4)
@@ -248,11 +248,11 @@ public sealed class GiveCommendationCommand : LocalizedCommands
             // Complete type (medal or jelly)
             var options = new[]
             {
-                new CompletionOption("medal", Loc.GetString("cmd-givecommendation-hint-type-medal")),
-                new CompletionOption("jelly", Loc.GetString("cmd-givecommendation-hint-type-jelly"))
+                new CompletionOption("medal", Loc.GetString("cmd-rmcgivecommendation-hint-type-medal")),
+                new CompletionOption("jelly", Loc.GetString("cmd-rmcgivecommendation-hint-type-jelly"))
             };
 
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-givecommendation-hint-type"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmcgivecommendation-hint-type"));
         }
 
         if (args.Length == 5)
@@ -264,22 +264,22 @@ public sealed class GiveCommendationCommand : LocalizedCommands
             {
                 var options = GetAwardCompletionOptions(_medalsDataset, _medalsSpecialDataset);
                 return CompletionResult.FromHintOptions(options,
-                    Loc.GetString("cmd-givecommendation-hint-medal-type", ("count", MedalCount)));
+                    Loc.GetString("cmd-rmcgivecommendation-hint-medal-type", ("count", MedalCount)));
             }
 
             if (type == "jelly")
             {
                 var options = GetAwardCompletionOptions(_jelliesDataset, _jelliesSpecialDataset);
                 return CompletionResult.FromHintOptions(options,
-                    Loc.GetString("cmd-givecommendation-hint-jelly-type", ("count", JellyCount)));
+                    Loc.GetString("cmd-rmcgivecommendation-hint-jelly-type", ("count", JellyCount)));
             }
 
-            return CompletionResult.FromHint(Loc.GetString("cmd-givecommendation-hint-invalid-type"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-rmcgivecommendation-hint-invalid-type"));
         }
 
         if (args.Length == 6)
         {
-            return CompletionResult.FromHint(Loc.GetString("cmd-givecommendation-hint-citation"));
+            return CompletionResult.FromHint(Loc.GetString("cmd-rmcgivecommendation-hint-citation"));
         }
 
         if (args.Length == 7)
@@ -289,9 +289,9 @@ public sealed class GiveCommendationCommand : LocalizedCommands
             var currentRound = gameTicker.RoundId;
             var options = new[]
             {
-                new CompletionOption(currentRound.ToString(), Loc.GetString("cmd-givecommendation-hint-round-current"))
+                new CompletionOption(currentRound.ToString(), Loc.GetString("cmd-rmcgivecommendation-hint-round-current"))
             };
-            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-givecommendation-hint-round"));
+            return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-rmcgivecommendation-hint-round"));
         }
 
         return CompletionResult.Empty;
