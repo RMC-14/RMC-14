@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: Aurallianz
   changes:
-  - message: PMC ID card is available
-    type: Fix
-  id: 2215
-  time: '2025-08-26T03:39:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7620
-- author: Aurallianz
-  changes:
   - message: Fixed knives not being able to cut fences.
     type: Fix
   id: 2216
@@ -4739,5 +4732,12 @@
   id: 2717
   time: '2026-01-08T03:02:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8779
+- author: J C Denton
+  changes:
+  - message: Corporate Colonists now get badges as playtime awards instead of ribbons.
+    type: Tweak
+  id: 2718
+  time: '2026-01-08T03:06:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8774
 Name: RMC14
 Order: -1
