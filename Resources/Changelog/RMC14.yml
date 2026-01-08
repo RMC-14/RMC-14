@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: Max_Power
-  changes:
-  - message: Fixed the smartgunner harness being acidable.
-    type: Fix
-  id: 2209
-  time: '2025-08-22T02:55:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7439
-- author: Gabrote42
-  changes:
-  - message: The Guidebook now contains a guide on Marine Communications, detailing
-      the mechanics and best practices of all Marine communication methods.
-    type: Add
-  id: 2210
-  time: '2025-08-22T03:09:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7082
-- author: UnicornOnLSD
-  changes:
-  - message: Removed SO job scaling. CIC will now have 4 SO slots at any pop, up to
-      5 at 160+ pop.
-    type: Remove
-  id: 2211
-  time: '2025-08-23T09:17:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6712
 - author: Shromply
   changes:
   - message: Added SPP equivalents for the PVE UNMC gear vendors.
@@ -4751,5 +4728,27 @@
   id: 2711
   time: '2026-01-08T02:53:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8804
+- author: Dygon
+  changes:
+  - message: Fixed the base Defender caste being able to use ladders while fortified.
+    type: Fix
+  id: 2712
+  time: '2026-01-08T02:59:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8803
+- author: noctyrnal
+  changes:
+  - message: CMB Deputy survivors now have a radio prefix.
+    type: Add
+  id: 2713
+  time: '2026-01-08T03:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8799
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed access granted by the ID console mispredicting by making an access
+      denied sound even if you had the proper access.
+    type: Fix
+  id: 2714
+  time: '2026-01-08T03:01:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8775
 Name: RMC14
 Order: -1
