@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on GitHub, github noctyrnal, and @TadJohnson00 (GitHub).",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98, RavenCaat, and noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -114,6 +114,9 @@
     },
     {
       "name": "smg_box_64"
+    },
+    {
+      "name": "smg_box_7A3"
     },
     {
       "name": "pistol_box_11"
