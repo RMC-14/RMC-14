@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Added a handful of chatsans for xenonids, making some shorthand words
-      turn into their full word, e.g. prae becomes praetorian, zerker becomes berserker,
-      hivey becomes hivelord, and so on.
-    type: Add
-  - message: Added basic highlight presets for each xenonid caste, check your settings
-      if you wish to change the highlight color.
-    type: Add
-  - message: Deleted a few xenonid chatsans that would make xenonids say liquid carrier.
-    type: Remove
-  id: 2223
-  time: '2025-08-26T04:09:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7410
 - author: J C Denton
   changes:
   - message: Fixed ICBL survivor not spawning with a weapon.
@@ -4739,5 +4725,12 @@
   id: 2725
   time: '2026-01-08T22:40:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8694
+- author: Dygon
+  changes:
+  - message: You can now extinguish yourself using the underbarrel extinguisher.
+    type: Fix
+  id: 2726
+  time: '2026-01-08T22:42:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8809
 Name: RMC14
 Order: -1
