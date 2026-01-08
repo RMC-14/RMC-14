@@ -53,7 +53,7 @@
   parent: RMCHeadCapTSEPA
   id: RMCHeadCapPeakedEIAF
   name: EIAF officer's service cap
-  description: A distinguished service cap worn by officers of the Extrasolar Imperial Armed Forces. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
+  description: A distinguished service cap worn by officers of the Extrasolar Imperial Airborne Forces. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
