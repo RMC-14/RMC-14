@@ -60,4 +60,7 @@ rmc-squad-info-FORECONCommandingOfficer = Commanding Officer
 rmc-squad-info-InspectorTSEPA = TSEPA Inspector
 rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable
 
+rmc-squad-info-MARSOCLeader = Marine Raider Team Leader
+rmc-squad-info-MARSOCOfficer = Marine Raider Platoon Leader
+
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone

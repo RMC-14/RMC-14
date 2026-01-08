@@ -295,7 +295,7 @@
   name: SOF
   components:
   - type: SquadTeam
-    color: "#400000"
+    color: "#851524"
     background:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: empty
