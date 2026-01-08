@@ -272,7 +272,7 @@
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/chapel_cult.yml"
       probability: 0.25
-    replaceAres: false
+    replaceAreas: false
 
 - type: entity
   id: RMCMapInsertSolarisCrashlandingEva
