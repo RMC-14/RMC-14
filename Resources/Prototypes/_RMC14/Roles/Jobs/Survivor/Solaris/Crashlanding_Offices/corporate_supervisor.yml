@@ -50,11 +50,11 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSurvivorSolarisCorporateSupervisor
-  name: survivor solaris coporate supervisor spawn point
+  name: special survivor crashlanding offices coporate supervisor spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivorSolarisCorporateSupervisor
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv
+      state: surv_wy
