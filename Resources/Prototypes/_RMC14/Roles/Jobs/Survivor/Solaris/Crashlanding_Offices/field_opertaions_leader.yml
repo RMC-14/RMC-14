@@ -2,6 +2,7 @@
   parent: RMCSurvivorPMCBase
   id: RMCSurvivorSolarisPMCCommander
   name: rmc-job-name-pmc-field-operations-leader
+  whitelistParent: CMCommandingOfficer
   ranks:
     RMCRankWeYaFieldOperaionsLeader: []
   supervisors: cm-job-supervisors-we-ya
