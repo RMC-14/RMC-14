@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: BadaBoomie
-  changes:
-  - message: Fixes a minor typo in the supreme taco
-    type: Fix
-  id: 2202
-  time: '2025-08-21T23:52:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7529
-- author: x5tink
-  changes:
-  - message: New medals for longer playtimes, re-ordered ribbons playtime hours.
-    type: Add
-  id: 2203
-  time: '2025-08-22T02:05:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6666
 - author: ProspectorAres
   changes:
   - message: Added a new lobby Screen
@@ -4754,5 +4740,19 @@
   id: 2704
   time: '2026-01-08T02:34:22.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8878
+- author: J C Denton
+  changes:
+  - message: Crashlanding EVA insert for Solaris.
+    type: Add
+  id: 2705
+  time: '2026-01-08T02:37:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8891
+- author: Tunguso4ka
+  changes:
+  - message: Fixed duplicated light fixtures on Hybrisa Prospera.
+    type: Fix
+  id: 2706
+  time: '2026-01-08T02:38:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8687
 Name: RMC14
 Order: -1
