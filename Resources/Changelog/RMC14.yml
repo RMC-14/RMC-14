@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: Fixed parasite having plasma
-    type: Fix
-  id: 2222
-  time: '2025-08-26T03:49:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7484
 - author: DummeHytteOst
   changes:
   - message: Added a handful of chatsans for xenonids, making some shorthand words
@@ -4738,5 +4731,13 @@
   id: 2724
   time: '2026-01-08T22:38:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8578
+- author: Ian321
+  changes:
+  - message: Sling straps have been added. They store one item and prevent you from
+      dropping it.
+    type: Add
+  id: 2725
+  time: '2026-01-08T22:40:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8694
 Name: RMC14
 Order: -1
