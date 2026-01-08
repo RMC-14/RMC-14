@@ -175,12 +175,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
     private async Task ListCommendationsByRound(IConsoleShell shell, int roundId, CommendationType? filterType)
     {
-        var commendations = await _db.GetCommendationsByRound(roundId, includePlayers: true);
-
-        if (filterType.HasValue)
-        {
-            commendations = commendations.Where(c => c.Type == filterType.Value).ToList();
-        }
+        var commendations = await _db.GetCommendationsByRound(roundId, filterType, true);
 
         if (commendations.Count == 0)
         {

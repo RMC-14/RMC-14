@@ -2157,7 +2157,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, bool includePlayers = false)
+        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
             var query = db.DbContext.RMCCommendations.AsQueryable();
@@ -2168,6 +2168,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                     .Include(c => c.Giver)
                     .Include(c => c.Receiver);
             }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
 
             return await query
                 .Where(c => c.RoundId == roundId)
