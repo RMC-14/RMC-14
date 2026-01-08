@@ -1,4 +1,5 @@
 # MEDICAL
+
 - type: entity
   id: CMMedilinkSupplyPort
   name: medilink supply port
@@ -332,6 +333,7 @@
         amount: 3
       - id: CMSyringe
         amount: 7
+
 
 - type: entity
   parent: ColMarTechBaseAnchorable
