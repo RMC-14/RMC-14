@@ -195,9 +195,6 @@ public sealed class ListCommendationsCommand : LocalizedCommands
     {
         var commendations = await _db.GetCommendationsGiven(playerId, count, filterType, true);
 
-        // Order by ID descending (newest first)
-        commendations = commendations.OrderByDescending(c => c.Id).ToList();
-
         if (commendations.Count == 0)
         {
             shell.WriteLine(Loc.GetString("cmd-listcommendations-no-results"));
@@ -206,7 +203,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         shell.WriteLine(Loc.GetString("cmd-listcommendations-giver-header", ("count", commendations.Count), ("total", count)));
 
-        foreach (var c in commendations)
+        foreach (var c in commendations.OrderBy(c => c.Id))
         {
             shell.WriteLine(FormatCommendation(c));
         }
@@ -222,7 +219,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
         }
 
         // Order by ID descending (newest first) and take count
-        commendations = commendations.OrderByDescending(c => c.Id).Take(count).ToList();
+        commendations = commendations.Take(count).ToList();
 
         if (commendations.Count == 0)
         {
@@ -232,7 +229,7 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         shell.WriteLine(Loc.GetString("cmd-listcommendations-receiver-header", ("count", commendations.Count), ("total", count)));
 
-        foreach (var c in commendations)
+        foreach (var c in commendations.OrderBy(c => c.Id))
         {
             shell.WriteLine(FormatCommendation(c));
         }

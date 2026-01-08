@@ -2152,7 +2152,7 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 query = query.Where(c => c.Type == filterType.Value);
 
             return await query
-                .OrderByDescending(c => c.Id)
+                .OrderBy(c => c.Id)
                 .Take(count)
                 .ToListAsync();
         }
