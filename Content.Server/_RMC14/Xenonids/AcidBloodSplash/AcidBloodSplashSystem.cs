@@ -12,13 +12,12 @@ using Content.Shared.Popups;
 using Robust.Shared.Player;
 using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio.Systems;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using System.Linq;
 using Content.Server._RMC14.Decals;
 using Content.Server.Spawners.Components;
-using Content.Shared.Decals;
 using Content.Shared.Body.Events;
+using Content.Shared.Effects;
+using Content.Shared._RMC14.Stun;
 
 namespace Content.Server._RMC14.Xenonids.AcidBloodSplash;
 
@@ -34,7 +33,7 @@ public sealed class AcidBloodSplashSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDecalSystem _rmcDecal = default!;
-    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
 
@@ -59,45 +58,51 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         }
     }
 
-    private void ActivateSplash(EntityUid uid, AcidBloodSplashComponent comp, float splashRadius)
+    private void ActivateSplash(Entity<AcidBloodSplashComponent> ent, float splashRadius)
     {
-        if (!_prototypes.TryIndex(comp.BloodDecalSpawnerPrototype, out var prototype) ||
+        if (!_prototypes.TryIndex(ent.Comp.BloodDecalSpawnerPrototype, out var prototype) ||
             !prototype.TryGetComponent(out RandomDecalSpawnerComponent? spawner, _compFactory) ||
-            _rmcDecal.GetDecalsInTile(uid, spawner.Decals) < spawner.MaxDecalsPerTile)
+            _rmcDecal.GetDecalsInTile(ent, spawner.Decals) < spawner.MaxDecalsPerTile)
         {
             // create decal, probability inside prototype
-            Spawn(comp.BloodDecalSpawnerPrototype, uid.ToCoordinates());
+            Spawn(ent.Comp.BloodDecalSpawnerPrototype, ent.Owner.ToCoordinates());
         }
 
         var i = 0; // parity moment, I would prefer a for loop if I knew how to do it in not ugly way.
-        var targetsSet = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), splashRadius);
-        var closeRangeTargets = _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), comp.CloseSplashRadius);
+        var targetsSet = _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), splashRadius);
+        var closeRangeTargets = _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.CloseSplashRadius);
         var targetsList = targetsSet.ToList(); // shuffle don't work on HashSet
         _random.Shuffle(targetsList);
         foreach (var target in targetsList)
         {
-            if (!_xeno.CanAbilityAttackTarget(uid, target))
+            if (!_xeno.CanAbilityAttackTarget(ent, target))
                 continue;
 
-            var hitProbability = comp.BaseHitProbability - i * 0.05;
+            var hitProbability = ent.Comp.BaseHitProbability - i * 5;
 
             if (closeRangeTargets.Contains(target))
-                hitProbability += 0.3;
+                hitProbability += 30;
+
+            hitProbability /= 100f; // Reduce the value to decimal
 
             if (_random.NextFloat() > hitProbability)
                 continue;
 
-            comp.NextSplashAvailable = _timing.CurTime + comp.SplashCooldown;
-            _damageable.TryChangeDamage(target, _xeno.TryApplyXenoAcidDamageMultiplier(target, comp.Damage));
+            ent.Comp.NextSplashAvailable = _timing.CurTime + ent.Comp.SplashCooldown;
+            _damageable.TryChangeDamage(target, _xeno.TryApplyXenoAcidDamageMultiplier(target, ent.Comp.Damage));
             i++;
 
-            _audio.PlayPvs(comp.AcidSplashSound, target);
+            _audio.PlayPvs(ent.Comp.AcidSplashSound, target);
 
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-others", ("target", target)), target, Filter.PvsExcept(target), true, PopupType.SmallCaution);
             _popup.PopupEntity(Loc.GetString("rmc-xeno-acid-blood-target-self"), target, target, PopupType.MediumCaution);
 
-            if (_random.NextFloat() < comp.TargetScreamProbability) // TODO: don't activate when target don't feel pain
+            // TODO: don't activate when target don't feel pain
+            if (_random.NextFloat() < ent.Comp.TargetScreamProbability && !HasComp<RMCUnconsciousComponent>(target))
                 _emote.TryEmoteWithChat(target, ScreamProto);
+
+            var filter = Filter.Pvs(target, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == ent.Owner);
+            _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { target }, filter);
         }
     }
 
@@ -106,40 +111,49 @@ public sealed class AcidBloodSplashSystem : EntitySystem
         if (!ent.Comp.IsActivateSplashOnGib)
             return;
 
-        ActivateSplash(ent.Owner, ent.Comp, ent.Comp.GibSplashRadius);
+        ActivateSplash(ent, ent.Comp.GibSplashRadius);
     }
 
-    private void OnDamageChanged(EntityUid uid, AcidBloodSplashComponent comp, ref DamageChangedEvent args)
+    private void OnDamageChanged(Entity<AcidBloodSplashComponent> ent, ref DamageChangedEvent args)
     {
         var time = _timing.CurTime;
-        if (comp.NextSplashAvailable > time)
+        if (ent.Comp.NextSplashAvailable > time)
             return;
 
-        if (_mobState.IsDead(uid))
+        if (_mobState.IsDead(ent) && !ent.Comp.WorksWhileDead)
             return;
 
         if (!args.DamageIncreased || args.DamageDelta == null)
             return;
 
+        // Self-inflicted damage or from fire damage over time doesn't trigger splash
+        if (args.Origin is { } origin && origin == ent.Owner)
+            return;
+
         // activate acid splash only when damage is big enough
-        if (args.DamageDelta.GetTotal() < comp.MinimalTriggerDamage)
+        if (args.DamageDelta.GetTotal() < ent.Comp.MinimalTriggerDamage)
             return;
 
         var damageDict = args.DamageDelta.DamageDict;
-        var triggerProbability = comp.BaseSplashTriggerProbability; // probability of splash activation
-        triggerProbability += (float)args.DamageDelta.GetTotal() * comp.DamageTriggerProbabilityMultiplier;
+        var triggerProbability = ent.Comp.BaseSplashTriggerProbability; // probability of splash activation, in percents
+        triggerProbability += (float)args.DamageDelta.GetTotal() * ent.Comp.DamageTriggerProbabilityMultiplier;
 
         foreach (var (type, _) in damageDict)
         {
             if (_bruteTypes.Contains(type) && damageDict[type] > 0)
-                triggerProbability += comp.BruteDamageProbabilityModificator;
+            {
+                triggerProbability += ent.Comp.BruteDamageProbabilityModificator;
+                break;
+            }
         }
+
+        triggerProbability /= 100f; // Reduce the value to decimal
 
         // TODO: increase probability from sharp and edge weapon + from damage in chest
 
         if (_random.NextFloat() > triggerProbability)
             return;
 
-        ActivateSplash(uid, comp, comp.StandardSplashRadius);
+        ActivateSplash(ent, ent.Comp.StandardSplashRadius);
     }
 }

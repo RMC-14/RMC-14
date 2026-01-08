@@ -653,8 +653,9 @@
     range: 5
     deselectOnMiss: false
   - type: EntityTargetAction
-    event: !type:XenoLungeActionEvent
     toggleOutline: false
+  - type: WorldTargetAction
+    event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
   - type: RMCCooldownOnMiss

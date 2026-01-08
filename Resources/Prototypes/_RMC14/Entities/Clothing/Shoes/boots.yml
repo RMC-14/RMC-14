@@ -44,9 +44,16 @@
     - state: icon
     - state: filled
       map: [ "enum.CMItemSlotsLayers.Fill" ]
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     unequipSound:
       collection: RMCEquipArmor

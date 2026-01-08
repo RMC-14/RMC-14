@@ -90,7 +90,11 @@ public sealed class MotionDetectorSystem : EntitySystem
         args.Handled = true;
         Toggle(ent);
 
-        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
     }
 
     private void OnMotionDetectorGetVerbs(Entity<MotionDetectorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -157,7 +161,11 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         var user = args.Performer;
         if (TryComp(ent, out MotionDetectorComponent? detector))
+        {
             _motionDetector.Toggle((ent, detector));
+            detector.LastUser = user;
+            Dirty(ent);
+        }
 
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
         DetectorUpdated(ent);
@@ -324,20 +332,20 @@ public sealed class MotionDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
-            var userUid = Transform(uid).ParentUid;
-            var hasFaction = _gunIFF.TryGetFaction(userUid, out var userFaction);
-
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Owner == userUid) // User of the MD isn't tracked
+                if (tracked.Owner == detector.LastUser) // User of the MD isn't tracked
                     continue;
 
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                if (hasFaction && _gunIFF.IsInFaction(tracked.Owner, userFaction))
-                    continue;
+                if (detector.LastUser is { } lastUser && _gunIFF.TryGetFaction(lastUser, out var userFaction))
+                {
+                    if (_gunIFF.IsInFaction(tracked.Owner, userFaction))
+                        continue;
+                }
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }

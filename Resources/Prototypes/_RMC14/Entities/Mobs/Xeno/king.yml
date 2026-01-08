@@ -89,7 +89,6 @@
         density: 185
         layer:
         - BulletImpassable
-  - type: DropshipHijacker
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
@@ -156,7 +155,7 @@
   - type: StunHostilesOnStep
     damage:
       groups:
-        Brute: 20   
+        Brute: 20
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 1.4
   - type: XenoRankNames
@@ -196,4 +195,3 @@
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
-  
