@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/02/2026 03:41:09
-  entityCount: 683
+  time: 01/08/2026 21:53:22
+  entityCount: 684
 maps: []
 grids:
 - 1
@@ -950,7 +950,7 @@ entities:
       pos: 16.5,20.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5197.9146
+      secondsUntilStateChange: -5269.2847
       state: Opening
   - uid: 474
     components:
@@ -959,7 +959,7 @@ entities:
       pos: 20.5,17.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -5163.1147
+      secondsUntilStateChange: -5234.485
       state: Opening
 - proto: CMBarricadeSandbag
   entities:
@@ -3979,6 +3979,19 @@ entities:
     - type: Transform
       pos: 5.7175903,6.7343264
       parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 684
+    components:
+    - type: MetaData
+      name: Research
+    - type: Transform
+      pos: 11.5,8.5
+      parent: 1
+    - type: NavMapBeacon
+      text: Research
+    - type: WarpPoint
+      location: Research
 - proto: RMCMRECLF
   entities:
   - uid: 229
@@ -4805,7 +4818,7 @@ entities:
     - type: Transform
       pos: 18.574793,13.308371
       parent: 1
-- proto: RMCWeaponSMGFP9000
+- proto: RMCWeaponSMGFP9000PMC
   entities:
   - uid: 485
     components:
