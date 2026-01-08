@@ -6,7 +6,6 @@ using Content.Shared.Administration;
 using Content.Shared.Database;
 using Robust.Server.Player;
 using Robust.Shared.Console;
-using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Admin;
 
@@ -287,27 +286,9 @@ public sealed class ListCommendationsCommand : LocalizedCommands
 
         if (args.Length == 3)
         {
-            if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase))
-            {
-                var typeOptions = new[]
-                {
-                    new CompletionOption("all", Loc.GetString("cmd-listcommendations-hint-type-all")),
-                    new CompletionOption("medal", Loc.GetString("cmd-listcommendations-hint-type-medal")),
-                    new CompletionOption("jelly", Loc.GetString("cmd-listcommendations-hint-type-jelly"))
-                };
-                return CompletionResult.FromHintOptions(typeOptions, Loc.GetString("cmd-listcommendations-hint-type"));
-            }
-
-            if (args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
-            {
-                var typeOptions = new[]
-                {
-                    new CompletionOption("all", Loc.GetString("cmd-listcommendations-hint-type-all")),
-                    new CompletionOption("medal", Loc.GetString("cmd-listcommendations-hint-type-medal")),
-                    new CompletionOption("jelly", Loc.GetString("cmd-listcommendations-hint-type-jelly"))
-                };
-                return CompletionResult.FromHintOptions(typeOptions, Loc.GetString("cmd-listcommendations-hint-type"));
-            }
+            if (args[0].Equals("last", StringComparison.OrdinalIgnoreCase) ||
+                args[0].Equals("round", StringComparison.OrdinalIgnoreCase))
+                return GetTypeOptions();
 
             if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
             {
@@ -316,28 +297,30 @@ public sealed class ListCommendationsCommand : LocalizedCommands
             }
         }
 
-        if (args.Length == 4)
+        if (args.Length == 4 && args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
         {
-            if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
-            {
-                return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-count"));
-            }
+            return CompletionResult.FromHint(Loc.GetString("cmd-listcommendations-hint-count"));
         }
 
-        if (args.Length == 5)
+        if (args.Length == 5 && args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
         {
-            if (args[0].Equals("player", StringComparison.OrdinalIgnoreCase))
-            {
-                var typeOptions = new[]
-                {
-                    new CompletionOption("all", Loc.GetString("cmd-listcommendations-hint-type-all")),
-                    new CompletionOption("medal", Loc.GetString("cmd-listcommendations-hint-type-medal")),
-                    new CompletionOption("jelly", Loc.GetString("cmd-listcommendations-hint-type-jelly"))
-                };
-                return CompletionResult.FromHintOptions(typeOptions, Loc.GetString("cmd-listcommendations-hint-type"));
-            }
+            return GetTypeOptions();
         }
 
         return CompletionResult.Empty;
     }
+
+    private CompletionResult GetTypeOptions()
+    {
+        var options = Enum.GetNames<CommendationType>()
+            .Select(x => new CompletionOption(x.ToLowerInvariant()))
+            .Prepend(new CompletionOption("all"))
+            .ToArray();
+
+        return CompletionResult.FromHintOptions(
+            options,
+            Loc.GetString("cmd-listcommendations-hint-type")
+        );
+    }
+
 }
