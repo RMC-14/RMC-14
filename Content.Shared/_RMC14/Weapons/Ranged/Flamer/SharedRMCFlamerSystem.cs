@@ -377,7 +377,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (user == null)
             return;
 
-        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates));
+        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates), spray.Comp.HitUser);
     }
 
     /// <summary>
