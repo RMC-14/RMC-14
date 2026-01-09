@@ -11,6 +11,8 @@
                 <Button Name="PresetsButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc rmc-chem-master-presets}" />
             </BoxContainer>
+            <BoxContainer Name="QuickAccessContainer" Access="Public"
+                          Orientation="Horizontal" Margin="0 5 0 5" />
             <ui:BlueHorizontalSeparator />
             <BoxContainer Orientation="Horizontal">
                 <RichTextLabel Text="{Loc rmc-chem-master-beaker}" Margin="0 0 5 0" />

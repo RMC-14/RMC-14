@@ -1,0 +1,11 @@
+<controls:RMCChemMasterPresetRow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master">
+    <BoxContainer Orientation="Horizontal" Margin="2">
+        <RichTextLabel Name="PresetNameLabel" Access="Public" HorizontalExpand="True" />
+        <Button Name="LoadButton" Access="Public" StyleClasses="OpenBoth"
+                Text="{Loc rmc-chem-master-preset-load}" Margin="5 0 0 0" />
+        <Button Name="DeleteButton" Access="Public" StyleClasses="OpenBoth Caution"
+                Text="{Loc rmc-chem-master-preset-delete}" Margin="5 0 0 0" />
+    </BoxContainer>
+</controls:RMCChemMasterPresetRow>
