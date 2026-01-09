@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Skills;
@@ -344,6 +344,40 @@ public sealed class RangefinderSystem : EntitySystem
             _audio.PlayPredicted(rangefinder.Comp.TargetSound, rangefinder, user);
 
             rangefinder.Comp.DoAfter = ev.DoAfter;
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
+
+        var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, RangefinderComponent>();
+        while (query.MoveNext(out var rangefinderUid, out var active, out var rangefinder))
+        {
+            // Skip if no target
+            if (active.Target == null || !Exists(active.Target.Value))
+                continue;
+
+            // Get origin and target coordinates
+            var originCoords = _transform.ToMapCoordinates(active.Origin);
+            var targetCoords = _transform.GetMapCoordinates(active.Target.Value);
+
+            // Check if on same map
+            if (originCoords.MapId != targetCoords.MapId)
+            {
+                RemCompDeferred<ActiveLaserDesignatorComponent>(rangefinderUid);
+                continue;
+            }
+
+            // Check line of sight, ignoring the rangefinder and target entities
+            SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == rangefinderUid || uid == active.Target.Value;
+            if (!_examine.InRangeUnOccluded(originCoords, targetCoords, rangefinder.Range, predicate))
+            {
+                RemCompDeferred<ActiveLaserDesignatorComponent>(rangefinderUid);
+            }
         }
     }
 }
