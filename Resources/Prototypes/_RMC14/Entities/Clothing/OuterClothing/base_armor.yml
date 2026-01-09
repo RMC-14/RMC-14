@@ -353,6 +353,9 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 2
+  - type: Tag
+    tags:
+    - RMCPVEArmor
 
 
 - type: entity

@@ -53,31 +53,15 @@
         amount: 5
     - name: Armor
       entries:
-      - id: ArmorHelmetM10
-        amount: 15
-      - id: RMCArmorM3PVE
+      - id: RMCPVEArmorCaseM3
         name: Standard M3 Pattern Armor Set
         amount: 15
-      - id: RMCArmorM3PVERidged
-        name: Ridged M3 Pattern Armor Set
-        amount: 15
-      - id: RMCArmorM3PVESmooth
+      - id: RMCPVEArmorCaseM3Smooth
         name: Smooth M3 Pattern Armor Set
         amount: 15
-    - name: Attachable Armor
-      entries:
-      - id: RMCPVEArmorNeckGuard
-        amount: 10
-      - id: RMCPVEArmorShinGuard
-        amount: 10
-      - id: RMCPVEArmorKneeGuard
-        amount: 10
-      - id: RMCPVEArmorGroinPlate
-        amount: 10
-      - id: RMCPVEArmorPads
-        amount: 10
-      - id: RMCPVEArmorBracers
-        amount: 10
+      - id: RMCPVEArmorCaseM3Ridged
+        name: Ridged M3 Pattern Armor Set
+        amount: 15
     - name: Armor Webbings
       entries:
       - id: RMCArmorWebbingDrum
