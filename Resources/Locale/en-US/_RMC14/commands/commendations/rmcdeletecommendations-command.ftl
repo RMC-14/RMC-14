@@ -1,9 +1,19 @@
 cmd-rmcdeletecommendations-desc = Deletes commendations by round, giver, receiver, or id.
 cmd-rmcdeletecommendations-help = Usage:
   rmcdeletecommendations id <commendationId>
+    - Deletes a single commendation by id
+
   rmcdeletecommendations round <roundId> <type>
+    - Deletes all commendations for a specific round and type
+    - type: type commendation filter
+
   rmcdeletecommendations round <roundId> <type> giver <usernameOrId>
+    - Deletes commendations in a round and type given by a player
+    - type: type commendation filter
+
   rmcdeletecommendations round <roundId> <type> receiver <usernameOrId>
+    - Deletes commendations in a round and type received by a player
+    - type: type commendation filter
 
   Examples:
     rmcdeletecommendations id 128
