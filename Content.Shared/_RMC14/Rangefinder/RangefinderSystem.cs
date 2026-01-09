@@ -16,6 +16,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Rangefinder.RangefinderMode;
 
 namespace Content.Shared._RMC14.Rangefinder;
@@ -28,6 +29,7 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -38,6 +40,9 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+
+    private static readonly TimeSpan LosCheckInterval = TimeSpan.FromSeconds(5);
+    private TimeSpan _nextLosCheck = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -353,6 +358,12 @@ public sealed class RangefinderSystem : EntitySystem
 
         if (_net.IsClient)
             return;
+
+        var curTime = _timing.CurTime;
+        if (curTime < _nextLosCheck)
+            return;
+
+        _nextLosCheck = curTime + LosCheckInterval;
 
         // Check LOS for active rangefinder doafter
         var doAfterQuery = EntityQueryEnumerator<DoAfterComponent>();
