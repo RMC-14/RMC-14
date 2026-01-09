@@ -19,6 +19,7 @@
   - CMAccessOT
   - RMCAccessDatabase
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: MP
@@ -58,3 +59,4 @@
   - CMAccessMaint
   - CMAccessOT
   - RMCAccessDatabase
+  - RMCAccessLogs

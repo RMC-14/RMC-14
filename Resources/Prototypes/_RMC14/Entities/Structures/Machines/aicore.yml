@@ -6,6 +6,7 @@
     mode: SnapgridCenter
   components: #has no collission in 13 they have invisible walls behind it
   - type: InteractionOutline
+  - type: ARESCore
   - type: Clickable
   - type: Corrodible
     isCorrodible: false
@@ -201,3 +202,102 @@
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false # Intentional
+  - type: ARESExternalTerminal
+    showsLogs: true
+  - type: ActivatableUI
+    key: enum.ARESExternalTerminalUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.ARESExternalTerminalUIKey.Key:
+        type: ARESExternalTerminalBui
+
+- type: entity
+  abstract: true
+  id: MasterARESLogType
+  name: SYS Error Log
+  components:
+  - type: ARESLogType
+
+#Logs Category
+#The permissions set here are arbitrary as hell
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabRequisitionsLogs
+  name: Requisitions Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - CMAccessQM
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabAnnouncementLogs
+  name: Announcement Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCAccessCommand
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabOrbitalCannonLogs
+  name: Orbital Cannon Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabMedicalLogs
+  name: Medical Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - CMAccessCMO
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabARESLogs
+  name: ARES Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabIdentificationLogs
+  name: Identification Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabManufacturingLogs
+  name: Manufacturing Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCBaseEngineeringAccess
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabIntelLogs
+  name: Intel Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - RMCAccessSeniorCommand
+
+- type: entity
+  parent: MasterARESLogType
+  id: ARESTabDropshipLogs
+  name: Dropship Logs
+  components:
+  - type: ARESLogType
+    permissions:
+    - CMAccessDropship

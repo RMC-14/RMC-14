@@ -10,6 +10,7 @@
   - CMAccessChemistry
   - RMCAccessDatabase
   - RMCAccessSeniorCommand
+  - RMCAccessLogs
 
 - type: accessGroup
   id: CMMedbay
