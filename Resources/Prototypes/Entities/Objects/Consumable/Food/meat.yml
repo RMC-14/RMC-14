@@ -680,9 +680,9 @@
         reagents:
         - ReagentId: SulfuricAcid
           Quantity: 20
-  - type: SliceableFood
-    count: 3
-    slice: FoodMeatXenoCutlet
+  #- type: SliceableFood # RMC14 - Disable access to xeno cutlets.
+  #  count: 3
+  #  slice: FoodMeatXenoCutlet
   - type: Item
     inhandVisuals:
       left:
