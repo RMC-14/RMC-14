@@ -167,7 +167,7 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
             var receiverLogin = located.Username;
 
             _adminLog.Add(LogType.RMCMedal,
-                $"{actualAdminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverName}) that reads:\n{citation}");
+                $"admin {actualAdminName} gave a {typeName} '{awardName}' to {receiverLogin} (character: {receiverName}) that reads:\n{citation}");
 
             // Send admin announcement
             var announcementMsg = Loc.GetString("cmd-rmcgivecommendation-admin-announcement",
