@@ -152,6 +152,16 @@
         whitelist:
           tags:
           - RMCPVEArmor
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-generic
+      whitelist:
+        tags:
+        - RMCPVEArmor
+    - popup: rmc-storage-limit-generic
+      whitelist:
+        tags:
+        - RMCHelmet
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
