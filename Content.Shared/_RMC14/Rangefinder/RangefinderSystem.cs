@@ -354,6 +354,49 @@ public sealed class RangefinderSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // Check LOS for active rangefinder doafter
+        var doAfterQuery = EntityQueryEnumerator<DoAfterComponent>();
+        while (doAfterQuery.MoveNext(out var userUid, out var doAfterComp))
+        {
+            foreach (var doAfter in doAfterComp.DoAfters.Values)
+            {
+                // Skip if already cancelled or completed
+                if (doAfter.Cancelled || doAfter.Completed)
+                    continue;
+
+                if (doAfter.Args.Event is not LaserDesignatorDoAfterEvent laserEvent)
+                    continue;
+
+                var coordinates = GetCoordinates(laserEvent.Coordinates);
+                if (!coordinates.IsValid(EntityManager))
+                    continue;
+
+                var userCoords = _transform.GetMapCoordinates(userUid);
+                var targetCoords = _transform.ToMapCoordinates(coordinates);
+
+                // Check if on same map
+                if (userCoords.MapId != targetCoords.MapId)
+                {
+                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
+                    continue;
+                }
+
+                // Get range from rangefinder if available, otherwise use a large range
+                var range = float.MaxValue;
+                if (doAfter.Args.Used != null && TryComp<RangefinderComponent>(doAfter.Args.Used, out var rangefinder))
+                {
+                    range = rangefinder.Range;
+                }
+
+                // Check line of sight, ignoring the user and rangefinder
+                SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == userUid || uid == doAfter.Args.Used;
+                if (!_examine.InRangeUnOccluded(userCoords, targetCoords, range, predicate))
+                {
+                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
+                }
+            }
+        }
+
         var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, RangefinderComponent>();
         while (query.MoveNext(out var rangefinderUid, out var active, out var rangefinder))
         {
