@@ -24,6 +24,9 @@ rmc-announcement-ares-lz-designated = Command Order Issued:
 
     {$name} has been designated as the primary landing zone.
 
+rmc-announcement-ares-lz-reminder = Attention Command:
+    A primary landing zone has not yet been designated. If no landing zone is in chosen in two minutes, a random one will automatically be designated.
+
 rmc-announcement-ares-online = [color=#CECECE][font size=16][bold]ARES Online[/bold][/font][/color][color=red][font size=16][bold]
 
     {$message}[/bold][/font][/color]

@@ -5,7 +5,9 @@ using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
+using Content.Shared.GameTicking;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
@@ -26,6 +28,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.Radio;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Timing;
@@ -35,6 +38,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Dropship;
@@ -42,6 +46,7 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly ARESSystem _ares = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
@@ -66,8 +71,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityQuery<DoorBoltComponent> _doorBoltQuery;
 
     private TimeSpan _lzPrimaryAutoDelay;
+    private TimeSpan _lzPrimaryReminderDelay;
     private TimeSpan _flyByTime;
     private TimeSpan _hijackTravelTime;
+
+    private bool _lzReminderSent;
+    private bool _lzAutoEnabled;
 
     private EntityUid _dropshipId;
     private bool _hijack;
@@ -81,6 +90,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _doorBoltQuery = GetEntityQuery<DoorBoltComponent>();
 
         SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
@@ -96,8 +106,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryReminderMinutes, v => _lzPrimaryReminderDelay = TimeSpan.FromMinutes(v), true);
+        Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoEnabled, v => _lzAutoEnabled = v, true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
+    {
+        _lzReminderSent = false;
     }
 
     private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
@@ -629,7 +646,25 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (Count<PrimaryLandingZoneComponent>() > 0)
             return;
 
-        if (_gameTicker.RoundDuration() < _lzPrimaryAutoDelay)
+        // Auto LZ selection can be disabled (e.g., for PvE)
+        if (!_lzAutoEnabled)
+            return;
+
+        var roundDuration = _gameTicker.RoundDuration();
+
+        // Send one-time reminder to command channel at 8 minutes if LZ not selected
+        if (!_lzReminderSent && roundDuration >= _lzPrimaryReminderDelay)
+        {
+            _lzReminderSent = true;
+            
+            var ares = _ares.EnsureARES();
+            var message = Loc.GetString("rmc-announcement-ares-lz-reminder");
+            
+            // Send to MarineCommand channel
+            _marineAnnounce.AnnounceRadio(ares.Owner, message, "MarineCommand");
+        }
+
+        if (roundDuration < _lzPrimaryAutoDelay)
             return;
 
         foreach (var primaryLZCandidate in GetPrimaryLZCandidates())
