@@ -80,6 +80,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        Dirty(uid.Value, access);
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -110,6 +112,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         idCard._jobTitle = "Civilian";
         Dirty(uid.Value, idCard);
+        Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
@@ -267,6 +270,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 break;
         }
 
+        Dirty(uid.Value, access);
         Dirty(ent);
     }
 
@@ -293,14 +297,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
         }
+
+        Dirty(uid.Value, access);
     }
-
-    //TODO RMC14 add ranks tab
-
-    // private void RankUpdate(Entity<IdCardComponent> card, RankPrototype Rank)
-    // {
-    //
-    // }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
     {
@@ -433,7 +432,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         ent.Comp.HiddenAccessList = accessListHidden;
 
         var groupList = new HashSet<ProtoId<AccessGroupPrototype>>();
-        // var groupListHidden = new HashSet<ProtoId<AccessGroupPrototype>>();
         var groupGroups = new HashSet<ProtoId<AccessGroupPrototype>>();
 
         foreach (var accessGroup in _accessGroup.Values)
@@ -445,11 +443,6 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 else
                     groupList.Add(accessGroup);
             }
-            // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
-            // {
-            //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
-            //         groupListHidden.Add(accessGroup);
-            // }
         }
 
         ent.Comp.JobGroups = groupGroups;

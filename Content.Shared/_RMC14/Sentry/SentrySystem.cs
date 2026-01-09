@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -55,6 +55,8 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -153,7 +155,7 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
                 {
                     if (sentry != defense && defense.Comp.Mode == SentryMode.On)
                     {
@@ -191,7 +193,6 @@ public sealed class SentrySystem : EntitySystem
         if(!ent.Comp.HomingShots)
             return;
 
-        //Make projectiles shot from a sentry gun homing.
         foreach (var projectile in args.FiredProjectiles)
         {
             if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
@@ -383,6 +384,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Item);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.Off:
                 if (fixture != null)
@@ -390,6 +392,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Off);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.On:
                 if (fixture != null)
@@ -397,6 +400,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.WakeNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.On);
+                _pointLight.SetEnabled(sentry, true);
                 break;
         }
     }
