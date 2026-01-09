@@ -393,6 +393,15 @@ namespace Content.Server.Database
 
         Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false);
 
+        Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false);
+
+        Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false);
+
         Task IncreaseInfects(Guid player);
 
         Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
@@ -1282,6 +1291,23 @@ namespace Content.Server.Database
         {
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.GetCommendationsByRound(roundId, filterType, includePlayers));
+        }
+
+        public Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCommendationById(commendationId, includePlayers));
+        }
+
+        public Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.DeleteCommendationsByRound(roundId, type, giverId, receiverId, includePlayers));
         }
 
         public Task IncreaseInfects(Guid player)

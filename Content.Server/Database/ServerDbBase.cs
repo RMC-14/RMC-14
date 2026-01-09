@@ -2193,6 +2193,64 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
+        public async Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            var commendation = await query
+                .FirstOrDefaultAsync(c => c.Id == commendationId);
+
+            if (commendation == null)
+                return null;
+
+            db.DbContext.RMCCommendations.Remove(commendation);
+            await db.DbContext.SaveChangesAsync();
+            return commendation;
+        }
+
+        public async Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations.AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            query = query.Where(c => c.RoundId == roundId && c.Type == type);
+
+            if (giverId.HasValue)
+                query = query.Where(c => c.GiverId == giverId.Value);
+
+            if (receiverId.HasValue)
+                query = query.Where(c => c.ReceiverId == receiverId.Value);
+
+            var commendations = await query.ToListAsync();
+
+            if (commendations.Count == 0)
+                return commendations;
+
+            db.DbContext.RMCCommendations.RemoveRange(commendations);
+            await db.DbContext.SaveChangesAsync();
+            return commendations;
+        }
+
         public async Task IncreaseInfects(Guid player)
         {
             await using var db = await GetDb();
