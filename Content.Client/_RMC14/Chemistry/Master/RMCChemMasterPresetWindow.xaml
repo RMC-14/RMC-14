@@ -1,0 +1,55 @@
+<controls:RMCChemMasterPresetWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master"
+    SetSize="400 450">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <RichTextLabel Text="{Loc rmc-chem-master-preset-title}" StyleClasses="LabelHeading" Margin="0 0 0 10" />
+
+        <!-- Preset Name -->
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-name}" MinWidth="120" />
+            <LineEdit Name="PresetNameInput" Access="Public" HorizontalExpand="True" />
+        </BoxContainer>
+
+        <!-- Pill Bottle Color Selection -->
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-color}" MinWidth="120" />
+            <Button Name="BottleColorButton" Access="Public" StyleClasses="OpenBoth">
+                <TextureRect Name="BottleColorView" Access="Public" SetSize="32 32" Stretch="KeepAspectCentered" />
+            </Button>
+        </BoxContainer>
+
+        <!-- Pill Bottle Label Input -->
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-label}" MinWidth="120" />
+            <LineEdit Name="BottleLabelInput" Access="Public" HorizontalExpand="True" />
+        </BoxContainer>
+
+        <!-- Use Preset Name As Label Checkbox -->
+        <BoxContainer Orientation="Horizontal" Margin="0 10">
+            <CheckBox Name="UsePresetNameAsLabelCheckbox" Access="Public"
+                      Text="{Loc rmc-chem-master-preset-use-name-as-label}" />
+        </BoxContainer>
+
+        <!-- Info about icon label using first 3 characters -->
+        <RichTextLabel Name="LabelInfoText" Access="Public"
+                       Text="{Loc rmc-chem-master-preset-label-info}"
+                       StyleClasses="LabelSubText" Margin="0 0 0 10" />
+
+        <!-- Pill Type Selection -->
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-pill-type}" MinWidth="120" />
+            <Button Name="PillTypeButton" Access="Public" StyleClasses="OpenBoth" MinWidth="50">
+                <TextureRect Name="PillTypeView" Access="Public" SetSize="32 32" Stretch="KeepAspectCentered" />
+            </Button>
+        </BoxContainer>
+
+        <Control VerticalExpand="True" />
+        <BoxContainer Orientation="Horizontal" Margin="0 10 0 0">
+            <Button Name="ApplyButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="{Loc rmc-chem-master-preset-apply}" HorizontalExpand="True" Margin="0 0 5 0" />
+            <Button Name="CancelButton" Access="Public" StyleClasses="OpenBoth"
+                    Text="{Loc rmc-chem-master-preset-cancel}" HorizontalExpand="True" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCChemMasterPresetWindow>

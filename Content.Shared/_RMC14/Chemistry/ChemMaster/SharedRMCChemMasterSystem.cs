@@ -72,6 +72,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 subs.Event<RMCChemMasterSetPillAmountMsg>(OnSetPillAmountMsg);
                 subs.Event<RMCChemMasterSetPillTypeMsg>(OnSetPillTypeMsg);
                 subs.Event<RMCChemMasterCreatePillsMsg>(OnCreatePillsMsg);
+                subs.Event<RMCChemMasterApplyPresetMsg>(OnApplyPresetMsg);
             });
     }
 
@@ -463,6 +464,41 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             """);
 
         Dirty(ent);
+    }
+
+    private void OnApplyPresetMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterApplyPresetMsg args)
+    {
+        var label = args.UsePresetNameAsLabel ? args.PresetName : args.BottleLabel;
+        if (string.IsNullOrEmpty(label))
+            label = string.Empty;
+
+        if (label.Length > ent.Comp.MaxLabelLength)
+            label = label[..ent.Comp.MaxLabelLength];
+
+        foreach (var bottle in ent.Comp.SelectedBottles)
+        {
+            if (!_container.TryGetContainingContainer((bottle, null), out var container) ||
+                container.Owner != ent.Owner)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(label))
+            {
+                _label.Label(bottle, label);
+                _rmcIconLabel.Label(bottle, "rmc-custom-container-label-text", ("customLabel", label));
+            }
+
+            _appearance.SetData(bottle, RMCPillBottleVisuals.Color, args.BottleColor);
+        }
+
+        if (args.PillType > 0 && args.PillType <= ent.Comp.PillTypes)
+        {
+            ent.Comp.SelectedType = args.PillType;
+        }
+
+        Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnPillBottleBoxTransferDoAfter(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterPillBottleTransferDoAfterEvent args)

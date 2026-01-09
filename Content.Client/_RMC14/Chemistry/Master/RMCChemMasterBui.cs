@@ -33,7 +33,13 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
     private RMCChemMasterWindow? _window;
     private RMCChemMasterPopupWindow? _colorPopup;
+    private RMCChemMasterPresetWindow? _presetWindow;
+    private RMCChemMasterPopupWindow? _presetColorPopup;
+    private RMCChemMasterPopupWindow? _presetPillTypePopup;
     private FixedPoint2? _lastBottleAmount;
+
+    private RMCPillBottleColors _selectedPresetBottleColor = RMCPillBottleColors.Orange;
+    private uint _selectedPresetPillType = 1;
 
     private readonly List<EntityUid> _lastPillBottleRows = new();
     private readonly Dictionary<EntityUid, RMCChemMasterPillBottleRow> _bottleRows = new();
@@ -84,6 +90,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         }
 
         _window.CreatePillsButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterCreatePillsMsg());
+        _window.PresetsButton.OnPressed += _ => OpenPresetWindow(chemMaster);
 
         Refresh();
     }
@@ -470,5 +477,138 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             labelStr = labelStr[..3];
 
         row.NameLabel.Text = $"({labelStr})";
+    }
+
+    private void OpenPresetWindow(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetWindow != null)
+        {
+            _presetWindow.OpenCentered();
+            return;
+        }
+
+        _presetWindow = new RMCChemMasterPresetWindow { Title = Loc.GetString("rmc-chem-master-presets") };
+        _presetWindow.OnClose += () =>
+        {
+            _presetWindow = null;
+            _presetColorPopup?.Close();
+            _presetColorPopup = null;
+            _presetPillTypePopup?.Close();
+            _presetPillTypePopup = null;
+        };
+
+        _selectedPresetBottleColor = RMCPillBottleColors.Orange;
+        _selectedPresetPillType = chemMaster.SelectedType;
+
+        UpdatePresetBottleColorView(chemMaster);
+        UpdatePresetPillTypeView(chemMaster);
+
+        _presetWindow.BottleColorButton.OnPressed += _ =>
+        {
+            if (_presetColorPopup != null)
+            {
+                _presetColorPopup.OpenCentered();
+                return;
+            }
+
+            _presetColorPopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pill-bottle-window-title") };
+            _presetColorPopup.OnClose += () => _presetColorPopup = null;
+            _presetColorPopup.OpenCentered();
+
+            for (var j = 0; j < chemMaster.PillCanisterTypes; j++)
+            {
+                var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{j}"));
+                var button = new TextureButton
+                {
+                    TextureNormal = state.Frame0,
+                };
+
+                var type = j;
+                button.OnPressed += _ =>
+                {
+                    _selectedPresetBottleColor = (RMCPillBottleColors) type;
+                    UpdatePresetBottleColorView(chemMaster);
+                    _presetColorPopup?.Close();
+                };
+
+                _presetColorPopup.Grid.AddChild(button);
+            }
+        };
+
+        _presetWindow.PillTypeButton.OnPressed += _ =>
+        {
+            if (_presetPillTypePopup != null)
+            {
+                _presetPillTypePopup.OpenCentered();
+                return;
+            }
+
+            _presetPillTypePopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pills") };
+            _presetPillTypePopup.OnClose += () => _presetPillTypePopup = null;
+            _presetPillTypePopup.OpenCentered();
+
+            for (var j = 0; j < chemMaster.PillTypes; j++)
+            {
+                var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{j + 1}"));
+                var button = new TextureButton
+                {
+                    TextureNormal = state.Frame0,
+                };
+
+                var type = (uint) (j + 1);
+                button.OnPressed += _ =>
+                {
+                    _selectedPresetPillType = type;
+                    UpdatePresetPillTypeView(chemMaster);
+                    _presetPillTypePopup?.Close();
+                };
+
+                _presetPillTypePopup.Grid.AddChild(button);
+            }
+        };
+
+        _presetWindow.ApplyButton.OnPressed += _ => ApplyPresetSettings();
+        _presetWindow.CancelButton.OnPressed += _ => _presetWindow.Close();
+        _presetWindow.OpenCentered();
+    }
+
+    private void ApplyPresetSettings()
+    {
+        if (_presetWindow == null)
+            return;
+
+        var presetName = _presetWindow.PresetNameInput.Text;
+        var bottleLabel = _presetWindow.BottleLabelInput.Text;
+        var usePresetNameAsLabel = _presetWindow.GetUsePresetNameAsLabel();
+        if (usePresetNameAsLabel && string.IsNullOrWhiteSpace(presetName))
+            return;
+
+        SendPredictedMessage(new RMCChemMasterApplyPresetMsg(
+            presetName,
+            bottleLabel,
+            _selectedPresetBottleColor,
+            _selectedPresetPillType,
+            usePresetNameAsLabel));
+
+        _presetWindow.Close();
+    }
+
+    private void UpdatePresetBottleColorView(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetWindow == null)
+            return;
+
+        var colorIndex = (int) _selectedPresetBottleColor;
+        var specifier = new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{colorIndex}");
+        _presetWindow.BottleColorView.Texture = _sprite.Frame0(specifier);
+    }
+
+    private void UpdatePresetPillTypeView(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetWindow == null)
+            return;
+
+        var specifier = new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{_selectedPresetPillType}");
+        _presetWindow.PillTypeView.Texture = _sprite.Frame0(specifier);
     }
 }

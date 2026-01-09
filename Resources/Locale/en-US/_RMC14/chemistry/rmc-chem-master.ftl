@@ -41,3 +41,14 @@ rmc-chem-master-create-bottle = Create Bottle ({$amount}u)
 rmc-chem-master-create-transfer-bottle = Create and Transfer
 
 rmc-chem-master-not-enough-space-solution = There are not enough reagents in the buffer!
+
+rmc-chem-master-presets = Presets
+rmc-chem-master-preset-title = [bold]Preset Editor[/bold]
+rmc-chem-master-preset-name = Preset Name:
+rmc-chem-master-preset-bottle-color = Bottle Color:
+rmc-chem-master-preset-bottle-label = Bottle Label:
+rmc-chem-master-preset-use-name-as-label = Use preset name as pill bottle label
+rmc-chem-master-preset-label-info = [italic]First 3 characters will be shown on the bottle icon.[/italic]
+rmc-chem-master-preset-pill-type = Pill Type:
+rmc-chem-master-preset-apply = Apply
+rmc-chem-master-preset-cancel = Cancel
