@@ -381,16 +381,9 @@ public sealed class RangefinderSystem : EntitySystem
                     continue;
                 }
 
-                // Get range from rangefinder if available, otherwise use a large range
-                var range = float.MaxValue;
-                if (doAfter.Args.Used != null && TryComp<RangefinderComponent>(doAfter.Args.Used, out var rangefinder))
-                {
-                    range = rangefinder.Range;
-                }
-
                 // Check line of sight, ignoring the user and rangefinder
                 SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == userUid || uid == doAfter.Args.Used;
-                if (!_examine.InRangeUnOccluded(userCoords, targetCoords, range, predicate))
+                if (!_examine.InRangeUnOccluded(userCoords, targetCoords, float.MaxValue, predicate))
                 {
                     _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
                 }
