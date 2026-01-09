@@ -22,6 +22,8 @@ cmd-rmcdeletecommendations-no-results = No commendations found.
 cmd-rmcdeletecommendations-id-header = Deleted commendation { $id }:
 cmd-rmcdeletecommendations-round-header = Deleted commendations for Round { $round } ({ $count } total):
 cmd-rmcdeletecommendations-format = id [{ $id }] { $type }: { $name } - { $giverUserName } ({ $giver }) → { $receiverUserName } ({ $receiver }) Round { $round }: { $text }
+cmd-rmcdeletecommendations-admin-announcement = { $admin } deleted commendations: { $ids }
+cmd-rmcdeletecommendations-admin-announcement-round = { $admin } deleted commendations for Round { $round }: { $ids }
 
 cmd-rmcdeletecommendations-hint-mode = Mode (id or round)
 cmd-rmcdeletecommendations-hint-mode-id = Delete a commendation by id

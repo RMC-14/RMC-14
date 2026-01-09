@@ -1,6 +1,8 @@
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using Content.Server.Administration;
+using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
 using Content.Server.Database;
 using Content.Shared.Administration;
 using Content.Shared.Database;
@@ -15,6 +17,8 @@ public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
     [Dependency] private readonly IPlayerLocator _locator = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
+    [Dependency] private readonly IAdminLogManager _adminLog = default!;
+    [Dependency] private readonly IChatManager _chat = default!;
 
     public override string Command => "rmcdeletecommendations";
 
@@ -47,6 +51,16 @@ public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
 
             shell.WriteLine(Loc.GetString("cmd-rmcdeletecommendations-id-header", ("id", commendationId)));
             shell.WriteLine(FormatCommendation(commendation));
+
+            var adminName = shell.Player?.Name ?? "Server";
+            var formatted = FormatCommendation(commendation);
+            _adminLog.Add(LogType.RMCMedal, $"{adminName} deleted commendation:\n{formatted}");
+
+            var idList = commendation.Id.ToString();
+            var announcement = Loc.GetString("cmd-rmcdeletecommendations-admin-announcement",
+                ("admin", adminName),
+                ("ids", idList));
+            _chat.SendAdminAnnouncement(announcement, null, null);
             return;
         }
 
@@ -127,10 +141,27 @@ public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
 
             shell.WriteLine(Loc.GetString("cmd-rmcdeletecommendations-round-header", ("round", roundId), ("count", commendations.Count)));
 
-            foreach (var c in commendations.OrderBy(c => c.Id))
+            var ordered = commendations.OrderBy(c => c.Id).ToArray();
+            foreach (var c in ordered)
             {
                 shell.WriteLine(FormatCommendation(c));
             }
+
+            var adminName = shell.Player?.Name ?? "Server";
+            var formattedLog = new StringBuilder();
+            formattedLog.AppendLine($"{adminName} deleted commendations for round {roundId}:");
+            foreach (var commendation in ordered)
+            {
+                formattedLog.AppendLine(FormatCommendation(commendation));
+            }
+            _adminLog.Add(LogType.RMCMedal, $"{formattedLog.ToString().TrimEnd()}");
+
+            var idList = string.Join(", ", ordered.Select(c => c.Id));
+            var announcement = Loc.GetString("cmd-rmcdeletecommendations-admin-announcement-round",
+                ("admin", adminName),
+                ("round", roundId),
+                ("ids", idList));
+            _chat.SendAdminAnnouncement(announcement, null, null);
 
             return;
         }
