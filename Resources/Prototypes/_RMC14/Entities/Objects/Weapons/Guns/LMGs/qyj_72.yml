@@ -124,6 +124,34 @@
   - type: Appearance
 
 - type: entity
+  parent: RMCMagazineLMGQYJ72
+  id: RMCMagazineLMGQYJ72AP
+  name: "QYJ-72 AP ammo box (7.62x54mmR)"
+  description: An inexpensive and discardable ammo box to fit the QYJ-72. This one is filled with armor-piercing 7.62x54mm rimmed rounds.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineLMG
+    - RMCMagazineLMGQYJ72AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge762RAP
+    proto: RMCCartridge762RAP
+    capacity: 250
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/qyj_72.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+
+- type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridge762R
   name: cartridge (7.62x54mmR)
@@ -140,6 +168,19 @@
     - RMCCartridge762R
   - type: CartridgeAmmo
     proto: RMCBullet762R
+
+- type: entity
+  parent: RMCCartridge762R
+  id: RMCCartridge762RAP
+  name: AP cartridge (7.62x54mmR)
+  description: An armor piercing 7.62x54mmR cartridge. Likely SPP surplus.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge762RAP
+  - type: CartridgeAmmo
+    proto: RMCBullet762RAP
 
 - type: entity
   parent: RMCCartridge762R
@@ -181,6 +222,31 @@
 
 - type: entity
   parent: RMCBullet762R
+  id: RMCBullet762RAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 30
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileAccuracy
+    accuracy: 95
+    thresholds:
+    - range: 20
+      falloff: 10
+    - range: 10
+      falloff: 10
+      buildup: true
+
+- type: entity
+  parent: RMCBullet762R
   id: RMCBullet762RMarksman
   categories: [ HideSpawnMenu ]
   components:
@@ -211,7 +277,13 @@
   id: RMCMagazineLMGQYJ72
 
 - type: Tag
+  id: RMCMagazineLMGQYJ72AP
+
+- type: Tag
   id: RMCCartridge762R
+
+- type: Tag
+  id: RMCCartridge762RAP
 
 - type: Tag
   id: RMCCartridge762RMarksman
