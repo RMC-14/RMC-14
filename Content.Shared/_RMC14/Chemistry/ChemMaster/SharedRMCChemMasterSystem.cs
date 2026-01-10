@@ -468,12 +468,26 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     private void OnApplyPresetMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterApplyPresetMsg args)
     {
-        var label = args.UsePresetNameAsLabel ? args.PresetName : args.BottleLabel;
-        if (string.IsNullOrEmpty(label))
-            label = string.Empty;
+        string fullLabel;
+        string iconLabel;
 
-        if (label.Length > ent.Comp.MaxLabelLength)
-            label = label[..ent.Comp.MaxLabelLength];
+        if (args.UsePresetNameAsLabel)
+        {
+            fullLabel = args.PresetName;
+            iconLabel = !string.IsNullOrEmpty(args.BottleLabel)
+                ? args.BottleLabel
+                : (args.PresetName.Length > ent.Comp.MaxLabelLength
+                    ? args.PresetName[..ent.Comp.MaxLabelLength]
+                    : args.PresetName);
+        }
+        else
+        {
+            fullLabel = args.BottleLabel;
+            iconLabel = args.BottleLabel;
+        }
+
+        if (iconLabel.Length > ent.Comp.MaxLabelLength)
+            iconLabel = iconLabel[..ent.Comp.MaxLabelLength];
 
         foreach (var bottle in ent.Comp.SelectedBottles)
         {
@@ -483,10 +497,14 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 continue;
             }
 
-            if (!string.IsNullOrWhiteSpace(label))
+            if (!string.IsNullOrWhiteSpace(fullLabel))
             {
-                _label.Label(bottle, label);
-                _rmcIconLabel.Label(bottle, "rmc-custom-container-label-text", ("customLabel", label));
+                _label.Label(bottle, fullLabel);
+            }
+
+            if (!string.IsNullOrWhiteSpace(iconLabel))
+            {
+                _rmcIconLabel.Label(bottle, "rmc-custom-container-label-text", ("customLabel", iconLabel));
             }
 
             _appearance.SetData(bottle, RMCPillBottleVisuals.Color, args.BottleColor);

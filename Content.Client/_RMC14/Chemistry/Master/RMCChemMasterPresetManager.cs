@@ -1,11 +1,15 @@
+using System.Globalization;
 using System.Linq;
-using System.Text.Json;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chemistry.ChemMaster;
 using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Chemistry.Master;
 
+/// <summary>
+/// Manages ChemMaster presets for the client. Uses a simple text-based serialization format.
+/// Format: name|bottleLabel|bottleColor|pillType|usePresetName|quickSlot|quickLabel;...
+/// </summary>
 public sealed class RMCChemMasterPresetManager
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -13,11 +17,10 @@ public sealed class RMCChemMasterPresetManager
     private List<RMCChemMasterPreset> _presets = new();
     private bool _loaded;
 
-    private static readonly JsonSerializerOptions JsonOptions = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = false,
-    };
+    private const char PresetDelimiter = ';';
+    private const char FieldDelimiter = '|';
+    private const string EscapedPipe = "%%PIPE%%";
+    private const string EscapedSemicolon = "%%SEMI%%";
 
     public IReadOnlyList<RMCChemMasterPreset> Presets
     {
@@ -47,17 +50,21 @@ public sealed class RMCChemMasterPresetManager
 
         try
         {
-            var json = _config.GetCVar(RMCCVars.RMCChemMasterPresets);
-            if (string.IsNullOrWhiteSpace(json))
+            var data = _config.GetCVar(RMCCVars.RMCChemMasterPresets);
+            if (string.IsNullOrWhiteSpace(data))
                 return;
 
-            var presets = JsonSerializer.Deserialize<List<RMCChemMasterPreset>>(json, JsonOptions);
-            if (presets != null)
-                _presets = presets;
+            var presetStrings = data.Split(PresetDelimiter, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var presetStr in presetStrings)
+            {
+                var preset = DeserializePreset(presetStr);
+                if (preset != null)
+                    _presets.Add(preset);
+            }
         }
-        catch (JsonException)
+        catch
         {
-            // Invalid JSON, reset to empty
+            // Invalid data, reset to empty
             _presets = new List<RMCChemMasterPreset>();
         }
     }
@@ -66,14 +73,91 @@ public sealed class RMCChemMasterPresetManager
     {
         try
         {
-            var json = JsonSerializer.Serialize(_presets, JsonOptions);
-            _config.SetCVar(RMCCVars.RMCChemMasterPresets, json);
+            var serialized = string.Join(PresetDelimiter.ToString(),
+                _presets.Select(SerializePreset));
+            _config.SetCVar(RMCCVars.RMCChemMasterPresets, serialized);
             _config.SaveToFile();
         }
-        catch (JsonException)
+        catch
         {
             // Serialization failed, don't save
         }
+    }
+
+    private static string EscapeField(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return string.Empty;
+
+        return value
+            .Replace("|", EscapedPipe)
+            .Replace(";", EscapedSemicolon);
+    }
+
+    private static string UnescapeField(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            return string.Empty;
+
+        return value
+            .Replace(EscapedPipe, "|")
+            .Replace(EscapedSemicolon, ";");
+    }
+
+    private static string SerializePreset(RMCChemMasterPreset preset)
+    {
+        // Format: name|bottleLabel|bottleColor|pillType|usePresetName|quickSlot|quickLabel
+        var quickSlot = preset.QuickAccessSlot?.ToString(CultureInfo.InvariantCulture) ?? string.Empty;
+
+        return string.Join(FieldDelimiter.ToString(),
+            EscapeField(preset.Name),
+            EscapeField(preset.BottleLabel),
+            ((int)preset.BottleColor).ToString(CultureInfo.InvariantCulture),
+            preset.PillType.ToString(CultureInfo.InvariantCulture),
+            preset.UsePresetNameAsLabel ? "1" : "0",
+            quickSlot,
+            EscapeField(preset.QuickAccessLabel));
+    }
+
+    private static RMCChemMasterPreset? DeserializePreset(string data)
+    {
+        var fields = data.Split(FieldDelimiter);
+        if (fields.Length < 5)
+            return null;
+
+        var preset = new RMCChemMasterPreset
+        {
+            Name = UnescapeField(fields[0]),
+            BottleLabel = UnescapeField(fields[1]),
+        };
+
+        if (int.TryParse(fields[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out var colorInt)
+            && Enum.IsDefined(typeof(RMCPillBottleColors), colorInt))
+        {
+            preset.BottleColor = (RMCPillBottleColors)colorInt;
+        }
+
+        if (uint.TryParse(fields[3], NumberStyles.Integer, CultureInfo.InvariantCulture, out var pillType))
+        {
+            preset.PillType = pillType;
+        }
+
+        preset.UsePresetNameAsLabel = fields[4] == "1";
+
+        if (fields.Length > 5 && !string.IsNullOrEmpty(fields[5]))
+        {
+            if (int.TryParse(fields[5], NumberStyles.Integer, CultureInfo.InvariantCulture, out var quickSlot))
+            {
+                preset.QuickAccessSlot = quickSlot;
+            }
+        }
+
+        if (fields.Length > 6)
+        {
+            preset.QuickAccessLabel = UnescapeField(fields[6]);
+        }
+
+        return preset;
     }
 
     public void SavePreset(RMCChemMasterPreset preset)
@@ -91,40 +175,15 @@ public sealed class RMCChemMasterPresetManager
         SavePresets();
     }
 
-    public bool RemovePreset(string name)
+    public void RemovePreset(string name)
     {
         EnsureLoaded();
 
-        var removed = _presets.RemoveAll(p =>
-            string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase)) > 0;
-
-        if (removed)
-            SavePresets();
-
-        return removed;
-    }
-
-    public RMCChemMasterPreset? GetPreset(string name)
-    {
-        EnsureLoaded();
-        return _presets.FirstOrDefault(p =>
+        var count = _presets.RemoveAll(p =>
             string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
-    }
 
-    public bool RenamePreset(string oldName, string newName)
-    {
-        EnsureLoaded();
-
-        var preset = GetPreset(oldName);
-        if (preset == null)
-            return false;
-
-        if (GetPreset(newName) != null)
-            return false;
-
-        preset.Name = newName;
-        SavePresets();
-        return true;
+        if (count > 0)
+            SavePresets();
     }
 
     public bool MovePreset(string name, int direction)
