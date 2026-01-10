@@ -1,0 +1,503 @@
+From ca132315530978d03cb37f820f0d0a8161f0c616 Mon Sep 17 00:00:00 2001
+From: PJB3005 <pieterjan.briers+git@gmail.com>
+Date: Tue, 15 Jul 2025 15:14:40 +0200
+Subject: [PATCH 1/6] Update packaging script to support ARM64 properly.
+
+---
+ RobustToolbox/.github/workflows/publish-client.yml |   2 +-
+ RobustToolbox/Tools/package_client_build.py        | 151 ++++++++++++---------------
+ 2 files changed, 67 insertions(+), 86 deletions(-)
+
+diff --git a/RobustToolbox/.github/workflows/publish-client.yml b/RobustToolbox/.github/workflows/publish-client.yml
+index 6cac40e35..7d9377bcb 100644
+--- a/RobustToolbox/.github/workflows/publish-client.yml
++++ b/RobustToolbox/.github/workflows/publish-client.yml
+@@ -26,7 +26,7 @@ jobs:
+           dotnet-version: 9.0.x
+ 
+       - name: Package client
+-        run: Tools/package_client_build.py -p windows mac linux
++        run: Tools/package_client_build.py
+ 
+       - name: Shuffle files around
+         run: |
+diff --git a/RobustToolbox/Tools/package_client_build.py b/RobustToolbox/Tools/package_client_build.py
+index 8acea5126..3c09245ef 100755
+--- a/RobustToolbox/Tools/package_client_build.py
++++ b/RobustToolbox/Tools/package_client_build.py
+@@ -9,6 +9,7 @@ import sys
+ import zipfile
+ import argparse
+ import glob
++from enum import Enum, auto
+ 
+ from typing import List, Optional
+ 
+@@ -28,12 +29,34 @@ except ImportError:
+ 
+ p = os.path.join
+ 
+-PLATFORM_WINDOWS = "windows"
++PLATFORM_WIN = "win"
+ PLATFORM_LINUX = "linux"
+-PLATFORM_LINUX_ARM64 = "linux-arm64"
+-PLATFORM_MACOS = "mac"
++PLATFORM_OSX = "osx"
+ PLATFORM_FREEBSD = "freebsd"
+ 
++TARGET_OS_WINDOWS = "Windows"
++TARGET_OS_MACOS = "MacOS"
++TARGET_OS_LINUX = "Linux"
++TARGET_OS_FREEBSD = "FreeBSD"
++
++class TargetOS(Enum):
++    Windows = auto()
++    MacOS = auto()
++    Linux = auto()
++    FreeBSD = auto()
++
++RID_WIN_X64 = f"{PLATFORM_WIN}-x64"
++RID_WIN_ARM64 = f"{PLATFORM_WIN}-arm64"
++RID_LINUX_X64 = f"{PLATFORM_LINUX}-x64"
++RID_LINUX_ARM64 = f"{PLATFORM_LINUX}-arm64"
++RID_OSX_X64 = f"{PLATFORM_OSX}-x64"
++RID_OSX_ARM64 = f"{PLATFORM_OSX}-arm64"
++RID_FREEBSD_X64 = f"{PLATFORM_FREEBSD}-x64"
++RID_FREEBSD_ARM64 = f"{PLATFORM_FREEBSD}-arm64"
++
++DEFAULT_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64]
++ALL_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64, RID_FREEBSD_X64, RID_FREEBSD_ARM64]
++
+ IGNORED_RESOURCES = {
+     ".gitignore",
+     ".directory",
+@@ -86,7 +109,7 @@ def main() -> None:
+     parser.add_argument("--platform",
+                         "-p",
+                         action="store",
+-                        choices=[PLATFORM_WINDOWS, PLATFORM_MACOS, PLATFORM_LINUX, PLATFORM_FREEBSD],
++                        choices=ALL_RIDS,
+                         nargs="*",
+                         help="Which platform to build for. If not provided, all platforms will be built")
+ 
+@@ -95,11 +118,17 @@ def main() -> None:
+                         help=argparse.SUPPRESS)
+ 
+     args = parser.parse_args()
+-    platforms = args.platform
+-    skip_build = args.skip_build
++    platforms: list[str] = args.platform
++    skip_build: bool = args.skip_build
+ 
+     if not platforms:
+-        platforms = [PLATFORM_WINDOWS, PLATFORM_MACOS, PLATFORM_LINUX, PLATFORM_FREEBSD]
++        platforms = DEFAULT_RIDS
++
++    # Validate that nobody put invalid platform names in.
++    for rid in platforms:
++        if rid not in ALL_RIDS:
++            print(Fore.RED + f"Invalid platform specified: '{rid}'" + Style.RESET_ALL)
++            exit(1)
+ 
+     if os.path.exists("release"):
+         print(Fore.BLUE + Style.DIM +
+@@ -109,32 +138,25 @@ def main() -> None:
+     else:
+         os.mkdir("release")
+ 
++    for platform in platforms:
++        build_for_platform(platform, skip_build)
+ 
+-    if PLATFORM_WINDOWS in platforms:
+-        if not skip_build:
+-            wipe_bin()
+-        build_windows(skip_build)
+-
+-    if PLATFORM_LINUX in platforms:
+-        if not skip_build:
+-            wipe_bin()
+-        build_linux(skip_build, "linux", "Linux")
+-
+-    if PLATFORM_LINUX_ARM64 in platforms:
+-        if not skip_build:
+-            wipe_bin()
+-        build_linux_arm64(skip_build)
+ 
+-    if PLATFORM_MACOS in platforms:
+-        if not skip_build:
+-            wipe_bin()
+-        build_macos(skip_build)
+-
+-    if PLATFORM_FREEBSD in platforms:
+-        if not skip_build:
+-            wipe_bin()
+-        build_linux(skip_build, "freebsd", "FreeBSD")
++def build_for_platform(rid: str, skip_build: bool):
++    print(Fore.GREEN + f"Building for platform '{rid}'..." + Style.RESET_ALL)
+ 
++    if not skip_build:
++        wipe_bin()
++
++    platform = rid.split('-', maxsplit=2)[0]
++    if platform == PLATFORM_WIN:
++        build_windows(rid, skip_build)
++    elif platform == PLATFORM_LINUX:
++        build_linux_like(rid, TargetOS.Linux, skip_build)
++    elif platform == PLATFORM_OSX:
++        build_macos(rid, skip_build)
++    elif platform == PLATFORM_FREEBSD:
++        build_linux_like(rid, TargetOS.FreeBSD, skip_build)
+ 
+ def wipe_bin():
+     print(Fore.BLUE + Style.DIM +
+@@ -144,53 +166,42 @@ def wipe_bin():
+         shutil.rmtree("bin")
+ 
+ 
+-def build_windows(skip_build: bool) -> None:
+-    # Run a full build.
+-    print(Fore.GREEN + "Building project for Windows x64..." + Style.RESET_ALL)
+-
++def build_windows(rid: str, skip_build: bool) -> None:
+     if not skip_build:
+-        publish_client("win-x64", "Windows")
++        publish_client(rid, TargetOS.Windows)
+         if sys.platform != "win32":
+-            subprocess.run(["Tools/exe_set_subsystem.py", p("bin", "Client", "win-x64", "publish", "Robust.Client"), "2"])
+-
++            subprocess.run(["Tools/exe_set_subsystem.py", p("bin", "Client", rid, "publish", "Robust.Client"), "2"])
+ 
+-    print(Fore.GREEN + "Packaging Windows x64 client..." + Style.RESET_ALL)
++    print(Fore.GREEN + f"Packaging {rid} client..." + Style.RESET_ALL)
+ 
+     client_zip = zipfile.ZipFile(
+-        p("release", "Robust.Client_win-x64.zip"), "w",
++        p("release", f"Robust.Client_{rid}.zip"), "w",
+         compression=zipfile.ZIP_DEFLATED)
+ 
+-    copy_dir_into_zip(p("bin", "Client", "win-x64", "publish"), "", client_zip, IGNORED_FILES_WINDOWS)
++    copy_dir_into_zip(p("bin", "Client", rid, "publish"), "", client_zip, IGNORED_FILES_WINDOWS)
+     copy_resources("Resources", client_zip)
+     # Cool we're done.
+     client_zip.close()
+ 
+-def build_macos(skip_build: bool) -> None:
+-    print(Fore.GREEN + "Building project for macOS x64..." + Style.RESET_ALL)
+-
++def build_macos(rid: str, skip_build: bool) -> None:
+     if not skip_build:
+-        publish_client("osx-x64", "MacOS")
++        publish_client(rid, TargetOS.MacOS)
+ 
+-    print(Fore.GREEN + "Packaging macOS x64 client..." + Style.RESET_ALL)
++    print(Fore.GREEN + f"Packaging {rid} client..." + Style.RESET_ALL)
+     # Client has to go in an app bundle.
+-    client_zip = zipfile.ZipFile(p("release", "Robust.Client_osx-x64.zip"), "a",
++    client_zip = zipfile.ZipFile(p("release", f"Robust.Client_{rid}.zip"), "a",
+                                  compression=zipfile.ZIP_DEFLATED)
+ 
+     contents = p("Space Station 14.app", "Contents", "Resources")
+     copy_dir_into_zip(p("BuildFiles", "Mac", "Space Station 14.app"), "Space Station 14.app", client_zip)
+-    copy_dir_into_zip(p("bin", "Client", "osx-x64", "publish"), contents, client_zip, IGNORED_FILES_MACOS)
++    copy_dir_into_zip(p("bin", "Client", rid, "publish"), contents, client_zip, IGNORED_FILES_MACOS)
+     copy_resources(p(contents, "Resources"), client_zip)
+     client_zip.close()
+ 
+ 
+-def build_linux(skip_build: bool, platform, name) -> None:
+-    """Build on Unix-like platforms including Linux and FreeBSD."""
+-    # Run a full build.
+-    rid = "%s-x64" % platform
+-    print(Fore.GREEN + "Building project for %s..." % rid + Style.RESET_ALL)
+-
++def build_linux_like(rid: str, target_os: TargetOS, skip_build: bool) -> None:
+     if not skip_build:
+-        publish_client(rid, name)
++        publish_client(rid, target_os)
+ 
+     print(Fore.GREEN + "Packaging %s client..." % rid + Style.RESET_ALL)
+ 
+@@ -204,37 +215,7 @@ def build_linux(skip_build: bool, platform, name) -> None:
+     client_zip.close()
+ 
+ 
+-
+-def build_linux_arm64(skip_build: bool) -> None:
+-    # Run a full build.
+-    # TODO: Linux-arm64 is currently server-only.
+-    pass
+-""" print(Fore.GREEN + "Building project for Linux ARM64 (SERVER ONLY)..." + Style.RESET_ALL)
+-
+-    if not skip_build:
+-        subprocess.run([
+-            "dotnet",
+-            "build",
+-            "SpaceStation14.sln",
+-            "-c", "Release",
+-            "--nologo",
+-            "/v:m",
+-            "/p:TargetOS=Linux",
+-            "/t:Rebuild",
+-            "/p:FullRelease=True"
+-        ], check=True)
+-
+-        publish_client("linux-arm64", "Linux", True)
+-
+-    print(Fore.GREEN + "Packaging Linux ARM64 server..." + Style.RESET_ALL)
+-    server_zip = zipfile.ZipFile(p("release", "SS14.Server_Linux_ARM64.zip"), "w",
+-                                 compression=zipfile.ZIP_DEFLATED)
+-    copy_dir_into_zip(p("RobustToolbox", "bin", "Server", "linux-arm64", "publish"), "", server_zip)
+-    copy_resources(p("Resources"), server_zip, server=True)
+-    server_zip.close()"""
+-
+-
+-def publish_client(runtime: str, target_os: str) -> None:
++def publish_client(runtime: str, target_os: TargetOS) -> None:
+     base = [
+         "dotnet", "publish",
+         "--runtime", runtime,
+-- 
+2.50.1 (Apple Git-155)
+
+
+From 14821d0af9c6f2a9a9220d2208b989738443886a Mon Sep 17 00:00:00 2001
+From: PJB3005 <pieterjan.briers+git@gmail.com>
+Date: Sat, 16 Aug 2025 03:15:09 +0200
+Subject: [PATCH 2/6] Detect CPU model name on Windows ARM
+
+Uses WMI query
+---
+ RobustToolbox/Directory.Packages.props                   |  1 +
+ RobustToolbox/Robust.Shared/Robust.Shared.csproj         |  1 +
+ RobustToolbox/Robust.Shared/Utility/SystemInformation.cs | 21 ++++++++++++++++++++-
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/RobustToolbox/Directory.Packages.props b/RobustToolbox/Directory.Packages.props
+index 02f2845ac..511e2b305 100644
+--- a/RobustToolbox/Directory.Packages.props
++++ b/RobustToolbox/Directory.Packages.props
+@@ -60,6 +60,7 @@
+     <PackageVersion Include="SpaceWizards.NFluidsynth" Version="0.1.1" />
+     <PackageVersion Include="SpaceWizards.SharpFont" Version="1.0.2" />
+     <PackageVersion Include="SpaceWizards.Sodium" Version="0.2.1" />
++    <PackageVersion Include="System.Management" Version="9.0.8" />
+     <PackageVersion Include="TerraFX.Interop.Windows" Version="10.0.26100.1" />
+     <PackageVersion Include="TerraFX.Interop.Xlib" Version="6.4.0" />
+     <PackageVersion Include="VorbisPizza" Version="1.3.0" />
+diff --git a/RobustToolbox/Robust.Shared/Robust.Shared.csproj b/RobustToolbox/Robust.Shared/Robust.Shared.csproj
+index b6f11c450..25e27220a 100644
+--- a/RobustToolbox/Robust.Shared/Robust.Shared.csproj
++++ b/RobustToolbox/Robust.Shared/Robust.Shared.csproj
+@@ -12,6 +12,7 @@
+     <PackageReference Include="Microsoft.ILVerification" PrivateAssets="compile" />
+     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
+     <PackageReference Include="Nett" PrivateAssets="compile" />
++    <PackageReference Include="System.Management" />
+     <PackageReference Include="VorbisPizza" PrivateAssets="compile" />
+     <PackageReference Include="Pidgin" />
+     <PackageReference Include="prometheus-net" />
+diff --git a/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs b/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
+index 02d1401af..0198be21d 100644
+--- a/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
++++ b/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
+@@ -1,6 +1,7 @@
+ ﻿using System;
+ using System.Collections.Generic;
+ using System.ComponentModel;
++using System.Management;
+ using System.Runtime.InteropServices;
+ using System.Runtime.Intrinsics.Arm;
+ using System.Runtime.Intrinsics.Wasm;
+@@ -31,8 +32,14 @@ internal static class SystemInformation
+             if (name != null)
+                 return name;
+         }
++        else if (OperatingSystem.IsWindows())
++        {
++            var name = GetProcessorModelWindows();
++            if (name != null)
++                return name;
++        }
+ 
+-        // TODO: ask OS as fallback for when x86 CPUID isn't available on Windows and Linux.
++        // TODO: ask OS as fallback for when x86 CPUID isn't available on Linux.
+ 
+         return "Unknown processor model";
+     }
+@@ -93,6 +100,18 @@ internal static class SystemInformation
+         void* newp,
+         nint newlen);
+ 
++    private static string? GetProcessorModelWindows()
++    {
++        var mgs = new ManagementObjectSearcher("select Name from Win32_Processor");
++        foreach (var o in mgs.Get())
++        {
++            var obj = (ManagementObject)o;
++            return (string)obj["Name"];
++        }
++
++        return null;
++    }
++
+     public static List<string> GetIntrinsics()
+     {
+         var options = new List<string>();
+-- 
+2.50.1 (Apple Git-155)
+
+
+From 801e9b4fc7a5bdf1b4ef8ab9279e5fe7b24be8fe Mon Sep 17 00:00:00 2001
+From: Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
+Date: Sat, 16 Aug 2025 14:22:46 +0200
+Subject: [PATCH 3/6] Get CPU model on Linux ARM64
+
+Uses /proc/cpuinfo
+---
+ RobustToolbox/Robust.Shared/Utility/SystemInformation.cs | 26 ++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
+
+diff --git a/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs b/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
+index 0198be21d..00ca56e16 100644
+--- a/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
++++ b/RobustToolbox/Robust.Shared/Utility/SystemInformation.cs
+@@ -1,6 +1,7 @@
+ ﻿using System;
+ using System.Collections.Generic;
+ using System.ComponentModel;
++using System.IO;
+ using System.Management;
+ using System.Runtime.InteropServices;
+ using System.Runtime.Intrinsics.Arm;
+@@ -38,8 +39,12 @@ internal static class SystemInformation
+             if (name != null)
+                 return name;
+         }
+-
+-        // TODO: ask OS as fallback for when x86 CPUID isn't available on Linux.
++        else if (OperatingSystem.IsLinux())
++        {
++            var name = GetProcessorModelLinux();
++            if (name != null)
++                return name;
++        }
+ 
+         return "Unknown processor model";
+     }
+@@ -112,6 +117,23 @@ internal static class SystemInformation
+         return null;
+     }
+ 
++    private static string? GetProcessorModelLinux()
++    {
++        using var sr = new StreamReader("/proc/cpuinfo");
++        while (sr.ReadLine() is { } line)
++        {
++            var entry = line.Split(':', 2);
++            if (entry.Length != 2)
++                continue;
++
++            var key = entry[0].Trim();
++            if (key == "model name")
++                return entry[1].Trim();
++        }
++
++        return null;
++    }
++
+     public static List<string> GetIntrinsics()
+     {
+         var options = new List<string>();
+-- 
+2.50.1 (Apple Git-155)
+
+
+From a58448435dd3ee0c47316bbb7677422d8e64fc8f Mon Sep 17 00:00:00 2001
+From: PJB3005 <pieterjan.briers+git@gmail.com>
+Date: Sun, 17 Aug 2025 16:27:14 +0200
+Subject: [PATCH 4/6] Disable ARM64 targets by default for now
+
+---
+ RobustToolbox/Tools/package_client_build.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/RobustToolbox/Tools/package_client_build.py b/RobustToolbox/Tools/package_client_build.py
+index 3c09245ef..60d02f13e 100755
+--- a/RobustToolbox/Tools/package_client_build.py
++++ b/RobustToolbox/Tools/package_client_build.py
+@@ -54,7 +54,7 @@ RID_OSX_ARM64 = f"{PLATFORM_OSX}-arm64"
+ RID_FREEBSD_X64 = f"{PLATFORM_FREEBSD}-x64"
+ RID_FREEBSD_ARM64 = f"{PLATFORM_FREEBSD}-arm64"
+ 
+-DEFAULT_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64]
++DEFAULT_RIDS = [RID_WIN_X64, RID_LINUX_X64, RID_OSX_X64, RID_FREEBSD_X64]
+ ALL_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64, RID_FREEBSD_X64, RID_FREEBSD_ARM64]
+ 
+ IGNORED_RESOURCES = {
+-- 
+2.50.1 (Apple Git-155)
+
+
+From c461829720afa397d2202435d0092cb6b406bfd6 Mon Sep 17 00:00:00 2001
+From: PJB3005 <pieterjan.briers+git@gmail.com>
+Date: Mon, 18 Aug 2025 22:53:27 +0200
+Subject: [PATCH 5/6] Enable SDL3 by default on ARM64
+
+Enough to unblock releasing ARM64 engines
+---
+ RobustToolbox/Robust.Client/Graphics/Clyde/Clyde.Windowing.cs | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/RobustToolbox/Robust.Client/Graphics/Clyde/Clyde.Windowing.cs b/RobustToolbox/Robust.Client/Graphics/Clyde/Clyde.Windowing.cs
+index 3ae979c46..4095de59c 100644
+--- a/RobustToolbox/Robust.Client/Graphics/Clyde/Clyde.Windowing.cs
++++ b/RobustToolbox/Robust.Client/Graphics/Clyde/Clyde.Windowing.cs
+@@ -2,6 +2,7 @@
+ using System.Collections.Generic;
+ using System.Diagnostics.CodeAnalysis;
+ using System.Numerics;
++using System.Runtime.InteropServices;
+ using System.Threading;
+ using System.Threading.Tasks;
+ using Robust.Client.Input;
+@@ -101,6 +102,10 @@ namespace Robust.Client.Graphics.Clyde
+ 
+             _windowingThread = Thread.CurrentThread;
+ 
++            // Default to SDL3 on ARM64. GLFW is not feature complete there (lacking file dialog implementation)
++            if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
++                _cfg.SetCVar(CVars.DisplayWindowingApi, "sdl3");
++
+             var windowingApi = _cfg.GetCVar(CVars.DisplayWindowingApi);
+             IWindowingImpl winImpl;
+ 
+-- 
+2.50.1 (Apple Git-155)
+
+
+From dee5bf983cb2dd2226ee1882c08bab70e26e3f12 Mon Sep 17 00:00:00 2001
+From: PJB3005 <pieterjan.briers+git@gmail.com>
+Date: Mon, 18 Aug 2025 22:55:02 +0200
+Subject: [PATCH 6/6] Enable ARM64 RIDs for publish
+
+Fixes #5830
+---
+ RobustToolbox/Tools/package_client_build.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/RobustToolbox/Tools/package_client_build.py b/RobustToolbox/Tools/package_client_build.py
+index 60d02f13e..e92bd5da4 100755
+--- a/RobustToolbox/Tools/package_client_build.py
++++ b/RobustToolbox/Tools/package_client_build.py
+@@ -54,7 +54,7 @@ RID_OSX_ARM64 = f"{PLATFORM_OSX}-arm64"
+ RID_FREEBSD_X64 = f"{PLATFORM_FREEBSD}-x64"
+ RID_FREEBSD_ARM64 = f"{PLATFORM_FREEBSD}-arm64"
+ 
+-DEFAULT_RIDS = [RID_WIN_X64, RID_LINUX_X64, RID_OSX_X64, RID_FREEBSD_X64]
++DEFAULT_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64, RID_FREEBSD_X64, RID_FREEBSD_ARM64]
+ ALL_RIDS = [RID_WIN_X64, RID_WIN_ARM64, RID_LINUX_X64, RID_LINUX_ARM64, RID_OSX_X64, RID_OSX_ARM64, RID_FREEBSD_X64, RID_FREEBSD_ARM64]
+ 
+ IGNORED_RESOURCES = {
+-- 
+2.50.1 (Apple Git-155)
+
