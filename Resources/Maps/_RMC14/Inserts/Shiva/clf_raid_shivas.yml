@@ -4786,8 +4786,6 @@ entities:
     - type: Transform
       pos: 10.5,6.5
       parent: 1
-    - type: NavMapBeacon
-      text: Panic Room
     - type: WarpPoint
       location: Panic Room
   - uid: 739
