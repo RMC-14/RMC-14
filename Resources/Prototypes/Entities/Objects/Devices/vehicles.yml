@@ -787,7 +787,7 @@
       world:
         shape:
           !type:PhysShapeAabb
-          bounds: -1,-1.5,1,1.5
+          bounds: -1,-1.2,1,1.2
         density: 1200
         mask:
         - Impassable
@@ -799,7 +799,7 @@
       mob:
         shape:
           !type:PhysShapeAabb
-          bounds: -1,-1.5,1,1.5
+          bounds: -1,-1.2,1,1.2
         density: 1200
         mask:
         - MidImpassable
