@@ -17,10 +17,16 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
       mag-1:
         whitelist:
           tags:
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a1.rsi
   - type: Gun
@@ -53,7 +59,13 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: GunDamageModifier
     multiplier: 1.1
   - type: AttachableHolder
@@ -179,10 +191,16 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
       mag-1:
         whitelist:
           tags:
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/L91.rsi
   - type: Gun
@@ -227,7 +245,13 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: GunDamageModifier
     multiplier: 1.4
   - type: GunRequiresWield
@@ -264,7 +288,6 @@
       rmc-aslot-underbarrel: 0.69, -0.20
   - type: Tag
     tags:
-    - RMCRifleL90
     - RMCRifleL91SWS
 
 # Rifles (Filled)
@@ -285,7 +308,13 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -354,7 +383,13 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -489,7 +524,13 @@
         whitelist:
           tags:
           - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
           - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -587,7 +628,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90
     - RMCMagazineRifleL90AP
   - type: BallisticAmmoProvider
     whitelist:
@@ -617,7 +657,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90Drum
     - RMCMagazineRifleL90DrumAP
   - type: BallisticAmmoProvider
     whitelist:
@@ -648,7 +687,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90
     - RMCMagazineRifleL90HEAP
   - type: BallisticAmmoProvider
     whitelist:
@@ -676,7 +714,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90Drum
     - RMCMagazineRifleL90DrumHEAP
   - type: BallisticAmmoProvider
     whitelist:
@@ -705,7 +742,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90
     - RMCMagazineRifleL90Incendiary
   - type: BallisticAmmoProvider
     whitelist:
@@ -733,7 +769,6 @@
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL90Drum
     - RMCMagazineRifleL90DrumIncendiary
   - type: BallisticAmmoProvider
     whitelist:
