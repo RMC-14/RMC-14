@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed ICBL survivor not spawning with a weapon.
-    type: Fix
-  - message: Fixed Varadero ICBL survivor having a wrong loadout.
-    type: Fix
-  id: 2224
-  time: '2025-08-26T04:13:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7428
 - author: monomethylhydrazine
   changes:
   - message: Fixed Fiorina's LZ1 name spelling "hangar" as "hanger"
@@ -4732,5 +4723,14 @@
   id: 2726
   time: '2026-01-08T22:42:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8809
+- author: YO0teacher
+  changes:
+  - message: Acider runners can now fill resin traps with acid.
+    type: Tweak
+  - message: Fixed a popup with non-xenoids clicking on resin traps.
+    type: Fix
+  id: 2727
+  time: '2026-01-09T15:19:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8439
 Name: RMC14
 Order: -1
