@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
-using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
@@ -16,7 +15,6 @@ public sealed class MountableWeaponSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
-    [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     public override void Initialize()
     {
@@ -119,6 +117,19 @@ public sealed class MountableWeaponSystem : EntitySystem
             return;
 
         args.Weapon = GetEntity(ent.Comp.MountedTo.Value);
+    }
+
+    public bool TryGetWeaponMount(EntityUid weapon, [NotNullWhen(true)] out EntityUid? mountEntity, MountableWeaponComponent? mountable = null)
+    {
+        mountEntity = null;
+        if (!Resolve(weapon, ref mountable, false))
+            return false;
+
+        if (mountable.MountedTo == null)
+            return false;
+
+        mountEntity = GetEntity(mountable.MountedTo.Value);
+        return true;
     }
 }
 

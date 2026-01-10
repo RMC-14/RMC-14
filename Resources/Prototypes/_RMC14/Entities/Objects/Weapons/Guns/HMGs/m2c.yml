@@ -83,7 +83,7 @@
     mustBeWielded: false
   - type: WieldedCrosshair
     rsi:
-      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      sprite: _RMC14/Interface/MousePointer/lmg_mouse.rsi
       state: all
   - type: MountableWeapon
   - type: GunUnskilledPenalty

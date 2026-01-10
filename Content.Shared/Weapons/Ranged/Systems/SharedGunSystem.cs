@@ -94,7 +94,7 @@ public abstract partial class SharedGunSystem : EntitySystem
     // RMC14
     [Dependency] private readonly AttachableHolderSystem _attachableHolder = default!;
     [Dependency] private readonly SharedRMCFlamerSystem _flamer = default!;
-    [Dependency] private readonly WeaponControllerSystem _weaponController = default!;
+    [Dependency] private readonly RMCSharedWeaponControllerSystem _rmcSharedWeaponController = default!;
 
     private const float InteractNextFire = 0.3f;
     private const double SafetyNextFire = 0.5;
@@ -207,8 +207,11 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         //RMC14
-        if (_weaponController.TryGetControlledWeapon(entity, out gunEntity, out gunComp))
+        if (_rmcSharedWeaponController.TryGetControlledWeapon(entity, out var weapon, out gunComp))
+        {
+            gunEntity = weapon.Value;
             return true;
+        }
         //
 
         return false;

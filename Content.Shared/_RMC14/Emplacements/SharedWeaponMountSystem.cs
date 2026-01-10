@@ -459,6 +459,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         var weaponController = EnsureComp<WeaponControllerComponent>(args.Buckle);
         weaponController.ControlledWeapon = GetNetEntity(ent.Comp.MountedEntity.Value);
+        Dirty(args.Buckle, weaponController );
 
         if (TryComp(ent.Comp.MountedEntity.Value, out ScopeComponent? scope))
         {
@@ -887,43 +888,28 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 ///     DoAfter event for attaching equipment to an equipment mount.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class AttachToMountDoAfterEvent : SimpleDoAfterEvent
-{
-
-}
+public sealed partial class AttachToMountDoAfterEvent : SimpleDoAfterEvent;
 
 /// <summary>
 ///     DoAfter event for detaching equipment from an equipment mount.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class DetachFromMountDoAfterEvent : SimpleDoAfterEvent
-{
-
-}
+public sealed partial class DetachFromMountDoAfterEvent : SimpleDoAfterEvent;
 
 /// <summary>
 ///     DoAfter event for securing  equipment to an equipment mount.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class SecureToMountDoAfterEvent : SimpleDoAfterEvent
-{
-
-}
+public sealed partial class SecureToMountDoAfterEvent : SimpleDoAfterEvent;
 
 /// <summary>
 ///     DoAfter event for deploying the mount.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class MountDeployDoafterEvent : SimpleDoAfterEvent
-{
-
-}
+public sealed partial class MountDeployDoafterEvent : SimpleDoAfterEvent;
 
 /// <summary>
 ///     DoAfter event for attempting to pick up a deployed mount.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class MountUnDeployDoAfterEvent : SimpleDoAfterEvent
-{
-
-}
+public sealed partial class MountUnDeployDoAfterEvent : SimpleDoAfterEvent;

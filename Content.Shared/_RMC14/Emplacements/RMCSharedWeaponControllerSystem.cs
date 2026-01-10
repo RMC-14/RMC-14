@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Emplacements;
 
-public sealed class WeaponControllerSystem : EntitySystem
+public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
 {
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -48,7 +48,7 @@ public sealed class WeaponControllerSystem : EntitySystem
     /// <param name="controlledWeapon">The weapon being controlled by the user through the <see cref="WeaponControllerComponent"/></param>
     /// <param name="gunComp">The <see cref="GunComponent"/> of the controlled weapon</param>
     /// <returns>True if a controlled weapon is found</returns>
-    public bool TryGetControlledWeapon(EntityUid user, out EntityUid controlledWeapon, [NotNullWhen(true)] out GunComponent? gunComp)
+    public bool TryGetControlledWeapon(EntityUid user, [NotNullWhen(true)] out EntityUid? controlledWeapon, [NotNullWhen(true)] out GunComponent? gunComp)
     {
         gunComp = null;
         controlledWeapon = default;
