@@ -565,7 +565,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL90
-  name: L90 Magazine (7x43mm)
+  name: L90 magazine (7x43mm)
   description: "A magazine of 7x43mm rounds for use in L90 pattern rifles."
   components:
   - type: Tag
@@ -593,8 +593,8 @@
 - type: entity
   parent: RMCMagazineRifleL90
   id: RMCMagazineRifleL90Drum
+  name: L90 drum magazine (7x43mm)
   description: "A drum magazine of 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 Drum Magazine (7x43mm)
   suffix: Drum
   components:
   - type: Tag
@@ -621,8 +621,8 @@
 - type: entity
   parent: RMCMagazineRifleL90
   id: RMCMagazineRifleL90AP
+  name: L90 AP magazine (7x43mm)
   description: "A magazine of armor-piercing 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 AP Magazine (7x43mm)
   suffix: AP
   components:
   - type: Tag
@@ -650,8 +650,8 @@
 - type: entity
   parent: RMCMagazineRifleL90AP
   id: RMCMagazineRifleL90DrumAP
+  name: L90 AP drum magazine (7x43mm)
   description: "A drum magazine of armor-piercing 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 AP Drum Magazine (7x43mm)
   suffix: Drum, AP
   components:
   - type: Tag
@@ -680,8 +680,8 @@
 - type: entity
   parent: RMCMagazineRifleL90
   id: RMCMagazineRifleL90HEAP
+  name: L90 HEAP magazine (7x43mm)
   description: "A magazine of HEAP 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 HEAP Magazine (7x43mm)
   suffix: HEAP
   components:
   - type: Tag
@@ -707,8 +707,8 @@
 - type: entity
   parent: RMCMagazineRifleL90AP
   id: RMCMagazineRifleL90DrumHEAP
+  name: L90 HEAP drum magazine (7x43mm)
   description: "A drum magazine of HEAP 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 HEAP Drum Magazine (7x43mm)
   suffix: Drum, HEAP
   components:
   - type: Tag
@@ -735,8 +735,8 @@
 - type: entity
   parent: RMCMagazineRifleL90
   id: RMCMagazineRifleL90Incendiary
+  name: L90 incendiary magazine (7x43mm)
   description: "A magazine of incendiary 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 Incendiary Magazine (7x43mm)
   suffix: Incendiary
   components:
   - type: Tag
@@ -762,8 +762,8 @@
 - type: entity
   parent: RMCMagazineRifleL90Incendiary
   id: RMCMagazineRifleL90DrumIncendiary
+  name: L90 incendiary drum magazine (7x43mm)
   description: "A drum magazine of incendiary 7x43mm rounds for use in L90 pattern rifles."
-  name: L90 Incendiary Drum Magazine (7x43mm)
   suffix: Drum, Incendiary
   components:
   - type: Tag
@@ -792,7 +792,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL90
-  name: Cartridge (7x43mm)
+  name: cartridge (7x43mm)
   description: A 7x43mm rifle cartridge designed for L90 pattern rifles.
   components:
   - type: Tag
@@ -829,7 +829,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL90AP
-  name: AP Cartridge (7x43mm)
+  name: AP cartridge (7x43mm)
   description: A 7x43mm AP rifle cartridge designed for L90 pattern rifles.
   components:
   - type: Tag
@@ -854,7 +854,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL90HEAP
-  name: HEAP Cartridge (7x43mm)
+  name: HEAP cartridge (7x43mm)
   description: A 7x43mm HEAP rifle cartridge designed for L90 pattern rifles.
   components:
   - type: Tag
@@ -878,7 +878,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL90Incendiary
-  name: Incendiary Cartridge (7x43mm)
+  name: incendiary cartridge (7x43mm)
   description: A 7x43mm incendiary rifle cartridge designed for L90 pattern rifles.
   components:
   - type: Tag
