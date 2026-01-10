@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/03/2026 07:16:56
+  time: 01/10/2026 19:57:45
   entityCount: 288
 maps: []
 grids:
@@ -605,9 +605,23 @@ entities:
   entities:
   - uid: 225
     components:
+    - type: MetaData
+      name: Supply ordering console
     - type: Transform
       pos: 4.5,1.5
       parent: 1
+    missingComponents:
+    - CargoOrderConsole
+    - ActivatableUI
+    - ActivatableUIRequiresAccess
+    - AccessReader
+    - UserInterface
+    - Computer
+    - DeviceNetwork
+    - DeviceLinkSource
+    - CargoSellBlacklist
+    - EmitSoundOnUIOpen
+    - RequisitionsComputer
 - proto: CMAutolathe
   entities:
   - uid: 185
