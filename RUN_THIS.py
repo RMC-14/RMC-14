@@ -7,16 +7,7 @@ import subprocess
 
 version = sys.version_info
 if version.major < 3 or (version.major == 3 and version.minor < 5):
-	print("ERROR: You need at least Python 3.5 to build SS14.")
-	sys.exit(1)
-
-patchPath = "Tools/patches/arm64.patch"
-checkResult = subprocess.run(
-	["git", "apply", "-R", "--check", patchPath],
-	stdout=subprocess.DEVNULL,
-	stderr=subprocess.DEVNULL,
-)
-if checkResult.returncode != 0:
-	subprocess.run(["git", "apply", patchPath], check=True)
+    print("ERROR: You need at least Python 3.5 to build SS14.")
+    sys.exit(1)
 
 subprocess.run([sys.executable, "git_helper.py"], cwd="BuildChecker")
