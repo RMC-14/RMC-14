@@ -18,6 +18,7 @@ namespace Content.Shared._RMC14.Projectiles;
 
 public sealed class RMCProjectileSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -263,6 +264,7 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+        StopProjectile(ent);
     }
 
     public override void Update(float frameTime)
