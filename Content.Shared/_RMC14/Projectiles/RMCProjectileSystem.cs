@@ -254,6 +254,9 @@ public sealed class RMCProjectileSystem : EntitySystem
 
     private void OnProjectileMaxRangePreventCollide(Entity<ProjectileMaxRangeComponent> ent, ref PreventCollideEvent args)
     {
+        if (args.Cancelled)
+            return;
+
         if (ent.Comp.Origin is not { } origin)
             return;
 
