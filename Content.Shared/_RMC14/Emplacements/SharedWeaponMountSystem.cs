@@ -122,11 +122,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         var weapon = SpawnInContainerOrDrop(ent.Comp.FixedWeaponPrototype, ent, ent.Comp.WeaponSlotId);
         ent.Comp.MountedEntity = weapon;
+        Dirty(ent);
+
         if (!TryComp(weapon, out MountableWeaponComponent? mountedWeapon))
             return;
 
         mountedWeapon.MountedTo = GetNetEntity(ent.Owner);
-        Dirty(ent);
         Dirty(weapon, mountedWeapon);
     }
 
@@ -282,6 +283,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
         _rmcFoldable.TryLockFold(ent, true);
+        Dirty(ent);
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.RotateSound, ent, args.User);
@@ -329,6 +331,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _collisionWake.SetEnabled(ent, true);
         _item.SetSize(ent, ent.Comp.MountSize);
         _rmcFoldable.TryLockFold(ent, false);
+        Dirty(ent);
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.DetachSound, ent, args.User);
