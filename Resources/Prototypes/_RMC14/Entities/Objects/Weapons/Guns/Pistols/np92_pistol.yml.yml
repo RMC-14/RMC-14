@@ -167,7 +167,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolNP92
-  name: NP92 magazine (9mm)
+  name: NP92 magazine (7.62x25mm)
   components:
   - type: Tag
     tags:
@@ -177,8 +177,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolNP92
-    proto: RMCCartridgePistolNP92
+      - RMCCartridge762x25mm
+    proto: RMCCartridge762x25mm
     capacity: 12
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/np92.rsi
@@ -193,7 +193,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolNP92Extended
-  name: NP92 extended magazine (9mm)
+  name: NP92 extended magazine (7.62x25mm)
   components:
   - type: Tag
     tags:
@@ -203,8 +203,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolNP92
-    proto: RMCCartridgePistolNP92
+      - RMCCartridge762x25mm
+    proto: RMCCartridge762x25mm
     capacity: 36
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/np92.rsi
@@ -215,29 +215,6 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: ext
-
-- type: entity
-  parent: CMBulletBase
-  id: RMCBulletPistolNP92
-  name: bullet (9mm)
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 40
-
-- type: entity
-  id: RMCCartridgePistolNP92
-  name: cartridge (9mm)
-  parent: CMCartridgePistolBase
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCCartridgePistolNP92
-  - type: CartridgeAmmo
-    proto: RMCBulletPistolNP92
 
 - type: Tag
   id: RMCWeaponPistolNP92
@@ -250,6 +227,3 @@
 
 - type: Tag
   id: RMCMagazinePistolNP92Extended
-
-- type: Tag
-  id: RMCCartridgePistolNP92

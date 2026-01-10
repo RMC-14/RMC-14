@@ -419,7 +419,7 @@
 - type: entity
   parent: CMCartridgeSmartGun10x30mm
   id: RMCCartridgeSmartGun10x30mmHT
-  name: ht cartridge (10x30mm)
+  name: holotargeting cartridge (10x30mm)
   components:
   - type: CartridgeAmmo
     proto: RMCBulletSmartGun10x30mmHT
@@ -471,7 +471,7 @@
 - type: entity
   parent: CMBulletSmartGun10x30mm
   id: RMCBulletSmartGun10x30mmHT
-  name: ht bullet (10x30mm)
+  name: holotargeting bullet (10x30mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

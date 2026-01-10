@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverRSh9
   name: RSh-9 Assault Revolver
-  description: The RSh-9 Assault Revolver is a highly unusual weapon, originally designed for CQB Room clearing on request for counter-terrorism units. This one uses the smaller 9x39 cartridge instead of the 12.7x55mm Cartridge it was originally chambered in, It is still nothing short of the ultimate man killing device.
+  description: The RSh-9 Assault Revolver is a highly unusual weapon, originally designed for CQB Room clearing on request for counter-terrorism units. This one uses the smaller 9x39mm cartridge instead of the 12.7x55mm Cartridge it was originally chambered in, It is still nothing short of the ultimate man killing device.
   components:
   - type: Tag
     tags:
@@ -61,7 +61,7 @@
 
 - type: entity
   id: RMCBaseSpeedLoaderRsh9
-  name: "RSh-9 Speed Loader (9x39)"
+  name: "RSh-9 speed loader (9x39mm)"
   parent: BaseItem
   abstract: true
   components:
@@ -86,7 +86,7 @@
 - type: entity
   parent: RMCBaseSpeedLoaderRsh9
   id: RMCSpeedLoaderRsh9
-  description: A six round load of 9x39 Armor Penetrating rounds, designed to defeat most modern body-armor.
+  description: A six round load of 9x39mm armor-piercing rounds, designed to defeat most modern body-armor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/SpeedLoaders/mateba.rsi
@@ -106,7 +106,7 @@
 
 - type: entity
   id: RMCCartridgeRevolverRsh9
-  name: cartridge (9x39)
+  name: cartridge (9x39mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -119,7 +119,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletRsh9
-  name: bullet (9x39)
+  name: bullet (9x39mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

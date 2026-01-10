@@ -7,7 +7,7 @@
   - type: RMCSelectiveFire
     scatterWielded: 5
     scatterUnwielded: 6
-    baseFireRate: 10
+    baseFireRate: 4
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/kt42.rsi
   - type: Clothing
@@ -59,8 +59,8 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolKT42
-  name: KT-42 magazine (.44)
-  description: A .44 pistol magazine.
+  name: KT-42 magazine (.44 automag)
+  description: A .44 automag pistol magazine.
   components:
   - type: Tag
     tags:
@@ -70,8 +70,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridgePistol9mm
-    proto: CMCartridgePistol9mm
+      - RMCCartridgePistol44Auto
+    proto: RMCCartridgePistol44Auto
     capacity: 16
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/kt42.rsi
@@ -81,8 +81,36 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
 
+- type: entity
+  id: RMCCartridgePistol44Auto
+  name: cartridge (.44 automag)
+  parent: CMCartridgePistolBase
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol44Auto
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol44Auto
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol44Auto
+  name: bullet (.44 automag)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 55
+  - type: CMArmorPiercing
+    amount: 15
+
 - type: Tag
   id: RMCMagazinePistolKT42
 
 - type: Tag
   id: RMCWeaponPistolKT42
+
+- type: Tag
+  id: RMCCartridgePistol44Auto

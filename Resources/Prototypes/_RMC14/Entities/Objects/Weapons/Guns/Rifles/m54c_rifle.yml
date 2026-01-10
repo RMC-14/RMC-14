@@ -305,7 +305,7 @@
 - type: entity
   parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CIncendiary
-  name: "M54C Incendiary magazine (10x24mm)"
+  name: "M54C incendiary magazine (10x24mm)"
   suffix: Incendiary
   components:
   - type: Tag
@@ -367,7 +367,7 @@
 - type: entity
   parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CWP
-  name: "M54C WP magazine (10x24mm)"
+  name: "M54C wall-penetrating magazine (10x24mm)"
   suffix: WP
   components:
   - type: Tag
@@ -449,8 +449,8 @@
 - type: entity
   parent: CMCartridgeRifle10x24mm
   id: RMCCartridgeRifle10x24mmIncendiary
-  name: AP cartridge (10x24mm)
-  description: An armor piercing 10x24mm cartridge. Fits in 10x24mm AP magazines.
+  name: incendiary cartridge (10x24mm)
+  description: An incendiary 10x24mm cartridge. Fits in 10x24mm incendiary magazines.
   components:
   - type: Tag
     tags:
@@ -475,8 +475,8 @@
 - type: entity
   parent: CMCartridgeRifle10x24mm
   id: RMCCartridgeRifle10x24mmWP
-  name: WP cartridge (10x24mm)
-  description: An armor piercing wall-penetrating 10x24mm cartridge. Fits in 10x24mm WP magazines.
+  name: wall-penetrating cartridge (10x24mm)
+  description: A wall-penetrating 10x24mm cartridge. Fits in 10x24mm wall-penetrating magazines.
   components:
   - type: Tag
     tags:

@@ -56,8 +56,8 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolD18
-  name: D18 magazine (9mm)
-  description: A small D18 magazine storing seven 9mm bullets. How is it even this small?
+  name: D18 magazine (9x19mm)
+  description: A small D18 magazine storing seven 9x19mm bullets. How is it even this small?
   components:
   - type: Tag
     tags:

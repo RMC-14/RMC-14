@@ -289,8 +289,8 @@
 - type: entity
   parent: CMMagazineRifleM4SPR
   id: RMCMagazineRifleM4SPRWP
-  name: M4SPR WP magazine (10x24mm)
-  description: "A magazine of wall-piercing 10x24mm rounds for use in the M4SPR battle rifle."
+  name: M4SPR wall-penetrating magazine (10x24mm)
+  description: "A magazine of wall-penetrating 10x24mm rounds for use in the M4SPR battle rifle."
   suffix: WP
   components:
   - type: Tag
@@ -429,8 +429,8 @@
 - type: entity
   parent: CMMagazineRifleM4SPR
   id: RMCMagazineRifleM5SPRHVP
-  name: "M5SPR HV-Piercing magazine (10x24mm)"
-  description: "A magazine of HV-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
+  name: "M5SPR HV-AP magazine (10x24mm)"
+  description: "A magazine of high-velocity armor-piercing 10x24mm rounds for use in the M5SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -456,8 +456,8 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleM5SPRHVP
-  name: cartridge (HV-Piercing)
-  description: A high-velocity HV-Piercing cartridge. Fits in M5SPR custom magazines.
+  name: high-velocity armor-piercing cartridge (10x24mm)
+  description: ...or HV-AP for short. Fits in M5SPR custom magazines.
   components:
   - type: Tag
     tags:
@@ -496,8 +496,8 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleM5SPRHVHIP
-  name: cartridge (HVHI-Piercing)
-  description: A high-velocity HVHI-Piercing cartridge. Fits in M5SPR custom magazines.
+  name: high-velocity high-impact armor-piercing cartridge (10x24mm)
+  description: ...or HV-HI-AP for short. Fits in M5SPR custom magazines.
   components:
   - type: Tag
     tags:
@@ -523,8 +523,8 @@
 - type: entity
   parent: RMCMagazineRifleM5SPRHVP
   id: RMCMagazineRifleM5SPRHVHIP
-  name: "M5SPR HVHI-Piercing magazine (10x24mm)"
-  description: "A magazine of HVHI-Piercing 10x24mm rounds for use in the M5SPR battle rifle."
+  name: "M5SPR HV-HI-AP magazine (10x24mm)"
+  description: "A magazine of HV-HI-AP 10x24mm rounds for use in the M5SPR battle rifle."
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True

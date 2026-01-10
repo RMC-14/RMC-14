@@ -1,8 +1,8 @@
 - type: entity
   parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolHandcannon
-  name: peregrine handcannon
-  description: The handcannon that needs no introduction, the Peregrine Handcannon is expensive, unwieldy, and extremely heavy for a pistol. However, it more than makes up for its weighty build with its powerful shots, capable of stopping a human, or even a bear, dead in their tracks.
+  name: Peregrine handcannon
+  description: The handcannon that needs no introduction. While expensive, unwieldy, and extremely heavy for a pistol, it more than makes up for its weighty build with its tremendous firepower, capable of stopping a human, or even a bear, dead in their tracks.
   components:
   - type: Gun
     shotsPerBurst: 2
@@ -78,8 +78,8 @@
 - type: entity
   parent: RMCWeaponPistolHandcannon
   id: RMCWeaponPistolHandcannonGold
-  name: golden peregrine handcannon
-  description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
+  name: golden Peregrine handcannon
+  description: A Peregrine handcannon anodized in gold and adorned with rosewood grips. The very definition of ostentatious; flashy, unwieldy, and kicks like a mule despite its immense weight. But, as a symbol of power, there's nothing quite like it.
   components:
   - type: Corrodible
     isCorrodible: false
@@ -132,8 +132,8 @@
 - type: entity
   parent: RMCWeaponPistolHandcannonGold
   id: RMCWeaponPistolHandcannonWinterWyvern
-  name: winter wyvern handcannon
-  description: A Peregrine Handcannon hand crafted from the finest blacksteel with an ivory grip bolted together with gold studs. Tt's flashy, unwieldy, tremendously heavy, and kicks like a mule - Very elegant.
+  name: Winter Wyvern handcannon
+  description: A Peregrine handcannon hand crafted from the finest blacksteel, adorned with ivory grips bolted the frame with gold studs. While it's flashy, unwieldy, and it kicks like a mule despite its immense weight, it can't be denied there's a degree of elegance to the thing.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_winter.rsi
@@ -147,7 +147,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannon
-  name: peregrine handcannon magazine (.50)
+  name: Peregrine handcannon magazine (.50 express)
   description: Seven rounds of powerful 50-caliber destruction.
   components:
   - type: Tag
@@ -172,7 +172,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannonHI
-  name: high impact peregrine handcannon magazine (.50)
+  name: high-impact Peregrine handcannon magazine (.50 express)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. The bullets are tipped with a synthesized osmium and lead alloy to stagger absolutely anything they hit. Point away from anything you value.
   components:
   - type: Tag
@@ -199,7 +199,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannonHIAP
-  name: high impact armor-piercing peregrine handcannon magazine (.50)
+  name: high-impact armor-piercing Peregrine handcannon magazine (.50 express)
   description: Seven rounds of devastatingly powerful 50-caliber destruction. Packs a devastating punch. The bullets are tipped with an osmium-tungsten carbide alloy to not only stagger but also shred through any target's armor. Issued in few numbers due to the massive production cost and worries about hull breaches. Point away from anything you value.
   components:
   - type: Tag
@@ -225,7 +225,7 @@
 
 - type: entity
   id: RMCCartridgePistolHandcannon
-  name: cartridge (.50)
+  name: cartridge (.50 express)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -237,7 +237,7 @@
 
 - type: entity
   id: RMCCartridgePistolHandcannonHI
-  name: cartridge (High Impact .50)
+  name: high-impact cartridge (.50 express)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -249,7 +249,7 @@
 
 - type: entity
   id: RMCCartridgePistolHandcannonHIAP
-  name: cartridge (High Impact Armor Piercing .50)
+  name: high-impact armor-piercing cartridge (.50 express)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -262,7 +262,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletPistolHandcannon
-  name: bullet (.50)
+  name: bullet (.50 express)
   components:
   - type: Projectile
     damage:
@@ -276,7 +276,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletPistolHandcannonHI
-  name: bullet (High Impact .50)
+  name: high-impact bullet (.50 express)
   components:
   - type: Projectile
     damage:
@@ -304,7 +304,7 @@
 - type: entity
   parent: RMCBulletPistolHandcannonHI
   id: RMCBulletPistolHandcannonHIAP
-  name: bullet (High Impact Armor Piercing .50)
+  name: high-impact armor-piercing bullet (.50 express)
   components:
   - type: CMArmorPiercing
     amount: 50

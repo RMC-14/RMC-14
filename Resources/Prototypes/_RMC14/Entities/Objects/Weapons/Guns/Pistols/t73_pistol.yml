@@ -52,7 +52,7 @@
           - RMCMagazinePistolT73
         startingItem: RMCMagazinePistolT73
   - type: GunDamageModifier
-    multiplier: 1.30
+    multiplier: 1.7
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -170,8 +170,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolT73
-    proto: RMCCartridgePistolT73
+      - RMCCartridge762x25mm
+    proto: RMCCartridge762x25mm
     capacity: 9
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t73.rsi
@@ -186,7 +186,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolT74Impact
-  name: Type 74 impact magazine (7.62x25mm)
+  name: Type 74 high-impact magazine (7.62x25mm)
   components:
   - type: Tag
     tags:
@@ -196,8 +196,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgePistolT74Impact
-    proto: RMCCartridgePistolT74Impact
+      - RMCCartridge762x25mmImpact
+    proto: RMCCartridge762x25mmImpact
     capacity: 9
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/t73.rsi
@@ -211,31 +211,8 @@
 
 - type: entity
   parent: CMBulletBase
-  id: RMCBulletPistolT73
-  name: bullet (7.62x25mm)
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 55
-
-- type: entity
-  id: RMCCartridgePistolT73
-  name: cartridge (7.62x25mm)
-  parent: CMCartridgePistolBase
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCCartridgePistolT73
-  - type: CartridgeAmmo
-    proto: RMCBulletPistolT73
-
-- type: entity
-  parent: CMBulletBase
-  id: RMCBulletPistolT74Impact
-  name: bullet (7.62x25mm impact)
+  id: RMCBullet762x25mmImpact
+  name: high-impact bullet (7.62x25mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -252,16 +229,16 @@
     accuracy: 90
 
 - type: entity
-  id: RMCCartridgePistolT74Impact
-  name: cartridge (7.62x25mm impact)
+  id: RMCCartridge762x25mmImpact
+  name: high-impact cartridge (7.62x25mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgePistolT74Impact
+    - RMCCartridge762x25mmImpact
   - type: CartridgeAmmo
-    proto: RMCBulletPistolT74Impact
+    proto: RMCBullet762x25mmImpact
 
 - type: Tag
   id: RMCWeaponPistolT73
@@ -276,7 +253,4 @@
   id: RMCMagazinePistolT74Impact
 
 - type: Tag
-  id: RMCCartridgePistolT73
-
-- type: Tag
-  id: RMCCartridgePistolT74Impact
+  id: RMCCartridge762x25mmImpact

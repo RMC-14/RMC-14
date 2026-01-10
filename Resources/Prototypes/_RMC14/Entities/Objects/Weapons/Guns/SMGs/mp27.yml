@@ -159,7 +159,7 @@
 - type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge46x30mm
-  name: cartridge (46x30mm SMG)
+  name: cartridge (4.6x30mm)
   description: A 4.6mm cartridge for the MP27 Submachinegun
   components:
   - type: Tag

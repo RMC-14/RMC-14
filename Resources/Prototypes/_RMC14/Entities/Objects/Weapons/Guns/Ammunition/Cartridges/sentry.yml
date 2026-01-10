@@ -14,7 +14,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeSentry
-  name: cartridge (10x28mm)
+  name: cartridge (10x50mm)
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Ammunition/Casings/ammo_casing.rsi

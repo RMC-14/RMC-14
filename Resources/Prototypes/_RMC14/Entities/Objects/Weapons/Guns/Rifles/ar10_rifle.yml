@@ -113,7 +113,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleAR10
-  name: "AR10 Magazine (7.62x51mm)"
+  name: "AR10 magazine (7.62x51mm)"
   components:
   - type: Tag
     tags:
@@ -123,8 +123,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleAR10
-    proto: RMCCartridgeRifleAR10
+      - RMCCartridgeRifle762NATO
+    proto: RMCCartridgeRifle762NATO
     capacity: 20
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/ar10.rsi
@@ -137,20 +137,20 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleAR10
-  name: Cartridge (7.62x51)
+  id: RMCCartridgeRifle762NATO
+  name: cartridge (7.62x51mm)
   description: A 7.62x51 rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleAR10
+    - RMCCartridgeRifle762NATO
   - type: CartridgeAmmo
-    proto: BulletRifleAR10
+    proto: BulletRifle762NATO
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleAR10
+  id: BulletRifle762NATO
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -176,4 +176,4 @@
   id: RMCMagazineRifleAR10
 
 - type: Tag
-  id: RMCCartridgeRifleAR10
+  id: RMCCartridgeRifle762NATO

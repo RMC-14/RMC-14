@@ -207,11 +207,11 @@
   - type: StorageFill
     contents:
     - id: RMCType88SniperRifle
-    - id: RMCMagazineSniperType88
-    - id: RMCMagazineSniperType88
-    - id: RMCMagazineSniperType88
-    - id: RMCMagazineSniperType88
-    - id: RMCMagazineSniperType88
+    - id: RMCMagazineSniperType88Marksman
+    - id: RMCMagazineSniperType88Marksman
+    - id: RMCMagazineSniperType88Marksman
+    - id: RMCMagazineSniperType88Marksman
+    - id: RMCMagazineSniperType88Marksman
   - type: ItemMapper
     mapLayers:
       gun:

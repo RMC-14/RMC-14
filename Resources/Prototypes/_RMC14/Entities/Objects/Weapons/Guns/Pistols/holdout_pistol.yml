@@ -58,8 +58,8 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHoldout
-  name: tiny pistol magazine (.22)
-  description: A surprisingly small magazine, holding .22 bullets. No Kolibri, but it's getting there.
+  name: tiny pistol magazine (.22 short)
+  description: A surprisingly small magazine, holding .22 short bullets. No Kolibri, but it's getting there.
   components:
   - type: Tag
     tags:
@@ -85,7 +85,7 @@
 - type: entity
   parent: CMBulletBase
   id: CMBulletPistol22mm
-  name: bullet (.22)
+  name: bullet (.22 short)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -97,7 +97,7 @@
 
 - type: entity
   id: CMCartridgePistol22mm
-  name: cartridge (.22)
+  name: cartridge (.22 short)
   parent: CMCartridgePistolBase
   components:
   - type: Tag

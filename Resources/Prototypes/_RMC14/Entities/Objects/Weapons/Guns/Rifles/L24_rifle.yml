@@ -133,7 +133,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL24
-  name: L24 Magazine (8.88x51mm)
+  name: L24 magazine (8.88x51mm)
   description: "A magazine of 8.88x51mm rounds for use in the L24 rifle."
   components:
   - type: Tag
@@ -160,7 +160,7 @@
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24AP
   description: "A magazine of armor-piercing 8.88x51mm rounds for use in the L24 rifle."
-  name: L24 AP Magazine (8.88x51mm)
+  name: L24 AP magazine (8.88x51mm)
   suffix: AP
   components:
   - type: Tag
@@ -188,7 +188,7 @@
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24HEAP
   description: "A magazine of high-explosive armor-piercing 8.88x51mm rounds for use in the L24 rifle."
-  name: L24 HEAP Magazine (8.88x51mm)
+  name: L24 HEAP magazine (8.88x51mm)
   suffix: HEAP
   components:
     - type: Tag
@@ -216,7 +216,7 @@
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24Incendiary
   description: "A magazine of incendiary 8.88x51mm rounds for use in the L24 rifle."
-  name: L24 Incendiary Magazine (8.88x51mm)
+  name: L24 incendiary magazine (8.88x51mm)
   suffix: Incendiary
   components:
     - type: Tag
@@ -244,7 +244,7 @@
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24Extended
   description: "An extended magazine of 8.88x51mm rounds for use in the L24 rifle."
-  name: L24 Extended Magazine (8.88x51mm)
+  name: L24 extended magazine (8.88x51mm)
   suffix: Extended
   components:
     - type: Tag
@@ -270,7 +270,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL24
-  name: Cartridge (8.88x51mm)
+  name: cartridge (8.88x51mm)
   description: A 8.88x51mm rifle cartridge
   components:
   - type: Tag
@@ -283,7 +283,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL24AP
-  name: AP Cartridge (8.88x51mm)
+  name: AP cartridge (8.88x51mm)
   description: A 8.88x51mm AP rifle cartridge
   components:
   - type: Tag
@@ -296,7 +296,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL24HEAP
-  name: HEAP Cartridge (8.88x51mm)
+  name: HEAP cartridge (8.88x51mm)
   description: A 8.88x51mm HEAP rifle cartridge
   components:
   - type: Tag
@@ -309,7 +309,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL24Incendiary
-  name: Incendiary Cartridge (8.88x51mm)
+  name: incendiary cartridge (8.88x51mm)
   description: A 8.88x51mm Incendiary rifle cartridge
   components:
   - type: Tag

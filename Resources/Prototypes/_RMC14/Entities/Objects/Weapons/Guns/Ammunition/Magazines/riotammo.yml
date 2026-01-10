@@ -146,7 +146,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolM1984Rubber
-  name: M1984 rubber magazine (9mm)
+  name: M1984 rubber magazine (9x19mm)
   components:
   - type: Tag
     tags:
@@ -171,7 +171,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolM77Rubber
-  name: M77 rubber magazine (9mm)
+  name: M77 rubber magazine (9x19mm)
   components:
   - type: Tag
     tags:
@@ -197,7 +197,7 @@
 
 - type: entity
   id: RMCCartridgePistol9mmRubber
-  name: rubber cartridge (9mm)
+  name: rubber cartridge (9x19mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -210,7 +210,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletPistol9mmRubber
-  name: rubber bullet (9mm)
+  name: rubber bullet (9x19mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

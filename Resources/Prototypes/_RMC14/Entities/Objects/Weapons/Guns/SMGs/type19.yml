@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
-  name: Type-19 Submachinegun
+  name: Type 19 submachine gun
   id: RMCWeaponSMGType19
-  description: An outdated, but reliable and powerful, submachinegun originating in the Socialist Progressive Peoples, it is still in limited service in the SPP but is most often used by paramilitary groups or corporate security forces. It is usually used with a 35 round stick magazine, or a 71 round drum.
+  description: An outdated but reliable and powerful submachine gun originating from the Socialist Progressive Peoples. While still in limited service, it most often finds use by paramilitary groups and corporate security forces. Chambered in 7.62x25mm.
   suffix: Filled
   components:
   - type: Sprite
@@ -92,14 +92,12 @@
       rmc-aslot-barrel: 0.8, 0.095
       rmc-aslot-rail: -0.125, 0.15
       rmc-aslot-underbarrel: 0.475, -0.19
-  - type: GunDamageModifier
-    multiplier: 1.2
 
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGType19
-  name: Type-19 stick magazine (7.62x25mm)
-  description: A stick magazine for the Type-19 submachinegun.
+  name: Type 19 stick magazine (7.62x25mm)
+  description: A stick magazine for the Type 19 submachinegun.
   components:
   - type: Tag
     tags:
@@ -129,8 +127,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGType19Drum
-  name: Type-19 drum magazine (7.62x25mm)
-  description: A 7.62x25mm drum magazine for the Type-19 submachinegun.
+  name: Type 19 drum magazine (7.62x25mm)
+  description: A 7.62x25mm drum magazine for the Type 19 submachinegun.
   components:
   - type: Tag
     tags:
@@ -160,8 +158,8 @@
 - type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge762x25mm
-  name: cartridge (7.62x25mm SMG)
-  description: A 7.62x25mm magazine for the Type19.
+  name: cartridge (7.62x25mm)
+  description: A 7.62x25mm magazine for the Type 19.
   components:
   - type: Tag
     tags:
@@ -178,7 +176,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Piercing: 42
   - type: RMCProjectileDamageFalloff
     thresholds:
     - range: 20

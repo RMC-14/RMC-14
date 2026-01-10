@@ -200,7 +200,7 @@
 - type: entity
   parent: CMMagazineRifleM54CMK1
   id: RMCMagazineRifleM54CMK1Incendiary
-  name: "M54C MK1 Incendiary magazine (10x24mm)"
+  name: "M54C MK1 incendiary magazine (10x24mm)"
   suffix: AP
   components:
   - type: Tag
@@ -254,7 +254,7 @@
 - type: entity
   parent: CMMagazineRifleM54CMK1
   id: RMCMagazineRifleM54CMK1WP
-  name: "M54C MK1 WP magazine (10x24mm)"
+  name: "M54C MK1 wall-penetrating magazine (10x24mm)"
   suffix: WP
   components:
   - type: Tag

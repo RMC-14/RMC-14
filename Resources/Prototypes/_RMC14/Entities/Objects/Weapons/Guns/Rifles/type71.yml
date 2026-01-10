@@ -252,8 +252,8 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifle545x39mmAP
-  name: cartridge (5.45x39mm)
-  description: A 5.45x39mm cartridge. Fits in 5.45x39mm magazines.
+  name: AP cartridge (5.45x39mm)
+  description: A 5.45x39mm armor-piercing cartridge. Fits in 5.45x39mm magazines.
   components:
   - type: Tag
     tags:
@@ -265,7 +265,7 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifle545x39mmHEAP
-  name: cartridge (5.45x39mm)
+  name: HEAP cartridge (5.45x39mm)
   description: A 5.45x39mm HEAP cartridge. Fits in 5.45x39mm magazines.
   components:
   - type: Tag

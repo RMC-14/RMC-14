@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverZHNK72
   name: ZHNK-72 revolver
-  description: The ZHNK-72 is a SPP designed revolver. The ZHNK-72 is used by the SPP armed forces in a policing role as well as limited numbers in the hands of SNCOs.
+  description: The ZHNK-72 is a SPP designed revolver chambered in the 7.62x38mm rimmed cartridge. While it's mostly used by military police, some limited numbers can be found in the hands of their senior NCOs.
   components:
   - type: Tag
     tags:
@@ -87,7 +87,7 @@
 
 - type: entity
   id: RMCBaseSpeedLoaderZHNK72
-  name: "Speed loader (7.62mm)"
+  name: "speed loader (7.62x38mmR)"
   parent: BaseItem
   abstract: true
   components:
@@ -112,7 +112,7 @@
 - type: entity
   parent: RMCBaseSpeedLoaderZHNK72
   id: RMCSpeedLoaderZHNK72
-  name: "ZHNK-72 Speed loader (7.62mm)"
+  name: "speed loader (7.62x38mmR)"
   description: A revolver speed loader.
   components:
   - type: Sprite
@@ -133,7 +133,7 @@
 
 - type: entity
   id: RMCCartridgeRevolverZHNK72
-  name: cartridge (7.62mm)
+  name: cartridge (7.62x38mmR)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -146,7 +146,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletRevolverZHNK72
-  name: bullet (7.62mm)
+  name: bullet (7.62x38mmR)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

@@ -98,12 +98,14 @@
       rmc-aslot-underbarrel: 0.45, -0.31
   - type: GunDamageModifier
     multiplier: 1.2
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 2.5
 
 - type: entity
   parent: CMMagazineRifleBase
   id: CMMagazineSMGMP5
-  name: "MP5 magazine (9mm)"
-  description: "A 9mm magazine for the MP5."
+  name: "MP5 magazine (9x19mm)"
+  description: "A 9x19mm magazine for the MP5."
   components:
   - type: Tag
     tags:
@@ -113,8 +115,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMCartridge9mmSMG
-    proto: CMCartridge9mmSMG
+      - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
     capacity: 30
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mp5.rsi
@@ -130,26 +132,5 @@
     zeroOnlyOnEmpty: true
   - type: Appearance
 
-- type: entity
-  parent: CMCartridge10x20mm
-  id: CMCartridge9mmSMG
-  name: cartridge (9mm SMG)
-  description: A 9mm cartridge for the mp5 submachinegun.
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - CMCartridge9mmSMG
-  - type: CartridgeAmmo
-    proto: CMBullet9mmSMG
-
-- type: entity
-  parent: Bullet10x20mm
-  id: CMBullet9mmSMG #Yes it does use a seperate type of 9mm thats mechanically identical to 10x20mm for some reason
-  categories: [ HideSpawnMenu ]
-
 - type: Tag
   id: CMMagazineSMGMP5
-
-- type: Tag
-  id: CMCartridge9mmSMG

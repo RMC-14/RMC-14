@@ -56,13 +56,14 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSMGFP9000
+        startingItem: RMCMagazineSMGFP9000AP
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
           - RMCMagazineSMGFP9000
+          - RMCMagazineSMGFP9000AP
   - type: AttachableHolder
     randomAttachmentChance: 0.65
     slots:
@@ -199,8 +200,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridge57x28mmFP9000
-    proto: RMCCartridge57x28mmFP9000
+      - RMCCartridge57x28mm
+    proto: RMCCartridge57x28mm
     capacity: 50
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/fp9000.rsi
@@ -217,35 +218,40 @@
   - type: Appearance
 
 - type: entity
-  parent: CMCartridge10x20mm
-  id: RMCCartridge57x28mmFP9000
-  name: cartridge (57×28mm SMG)
-  description: A 5.7×28mm magazine for the FN FP9000 SMG.
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGFP9000AP
+  name: "FN FP9000 AP magazine (5.7x28mm)"
+  description: "An AP 5.7x28mm magazine for the FN FP9000 SMG."
   components:
   - type: Tag
     tags:
-    - Cartridge
-    - RMCBullet57x28mmFP9000
-  - type: CartridgeAmmo
-    proto: RMCBullet57x28mmFP9000
-
-- type: entity
-  parent: Bullet10x20mm
-  id: RMCBullet57x28mmFP9000
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 26
-  - type: CMArmorPiercing
-    amount: 30
+    - CMMagazineSmg
+    - RMCMagazineSMGFP9000AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge57x28mmAP
+    proto: RMCCartridge57x28mmAP
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/fp9000.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
 
 - type: Tag
   id: RMCMagazineSMGFP9000
 
 - type: Tag
-  id: RMCCartridge57x28mmFP9000
-
-- type: Tag
-  id: RMCBullet57x28mmFP9000
+  id: RMCMagazineSMGFP9000AP

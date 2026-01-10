@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3   #In cm13 the L42
   name: L83A3 rifle
-  description: The L83A3 Battle Rifle, found commonly in Three Sun Empires armories.
+  description: The L83A3 assault rifle, found commonly in Three Sun Empires armories.
   suffix: Filled
   components:
   - type: Sprite
@@ -45,17 +45,17 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleL83A3
+        startingItem: RMCMagazineRifleL83A
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleL83A3
-          - RMCMagazineRifleL83A3AP
-          - RMCMagazineRifleL83A3HEAP
-          - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A
+          - RMCMagazineRifleL83AAP
+          - RMCMagazineRifleL83AHEAP
+          - RMCMagazineRifleL83AInc
+          - RMCMagazineRifleL83AExt
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder
@@ -125,20 +125,20 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineRifleL83A3
-  name: L83A3 Magazine (5.56x45mm)
-  description: "A magazine of 5.56x45mm rounds for use in the L83A3 rifle."
+  id: RMCMagazineRifleL83A
+  name: L83 magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm rounds for use in L83 pattern rifles."
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL83A3
+    - RMCMagazineRifleL83A
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleL83A
-    proto: RMCCartridgeRifleL83A
+      - RMCCartridgeRifle556NATO
+    proto: RMCCartridgeRifle556NATO
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
@@ -150,22 +150,21 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCMagazineRifleL83A3
-  id: RMCMagazineRifleL83A3AP
-  description: "A magazine of armor-piercing 5.56x45mm rounds for use in the L83A3 rifle."
-  name: L83A3 AP Magazine (5.56x45mm)
+  parent: RMCMagazineRifleL83A
+  id: RMCMagazineRifleL83AAP
+  name: L83 AP magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm armor-piercing rounds for use in L83 pattern rifles."
   suffix: AP
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3AP
+    - RMCMagazineRifleL83AAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridgeRifleL83AAP
-    proto: RMCCartridgeRifleL83AAP
+      - RMCCartridgeRifle556NATOAP
+    proto: RMCCartridgeRifle556NATOAP
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
     layers:
@@ -178,22 +177,21 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCMagazineRifleL83A3
-  id: RMCMagazineRifleL83A3extended
-  description: "An extended magazine for the L83A3 rifle."
-  name: L83A3 Extended Magazine (5.56x45mm)
+  parent: RMCMagazineRifleL83A
+  id: RMCMagazineRifleL83AExt
+  name: L83 extended magazine (5.56x45mm)
+  description: "An extended magazine of 5.56x45mm rounds for use in L83 pattern rifles."
   suffix: Extended
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3extended
+    - RMCMagazineRifleL83AExt
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridgeRifleL83A
-    proto: RMCCartridgeRifleL83A
+      - RMCCartridgeRifle556NATO
+    proto: RMCCartridgeRifle556NATO
     capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3extended.rsi
@@ -205,22 +203,21 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCMagazineRifleL83A3
-  id: RMCMagazineRifleL83A3HEAP
-  description: "A magazine of HEAP 5.56x45mm rounds for use in the L83A3 rifle."
-  name: L83A3 HEAP Magazine (5.56x45mm)
+  parent: RMCMagazineRifleL83A
+  id: RMCMagazineRifleL83AHEAP
+  name: L83 HEAP magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm HEAP rounds for use in L83 pattern rifles."
   suffix: HEAP
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3HEAP
+    - RMCMagazineRifleL83AHEAP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridgeRifleL83AHEAP
-    proto: RMCCartridgeRifleL83AHEAP
+      - RMCCartridgeRifle556NATOHEAP
+    proto: RMCCartridgeRifle556NATOHEAP
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
     layers:
@@ -233,22 +230,21 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCMagazineRifleL83A3
-  id: RMCMagazineRifleL83A3Incendiary
-  description: "A magazine of incendiary 5.56x45mm rounds for use in the L83A3 rifle."
-  name: L83A3 Incendiary Magazine (5.56x45mm)
+  parent: RMCMagazineRifleL83A
+  id: RMCMagazineRifleL83AInc
+  name: L83 incendiary magazine (5.56x45mm)
+  description: "A magazine of 5.56x45mm incendiary rounds for use in L83 pattern rifles."
   suffix: Incendiary
   components:
   - type: Tag
     tags:
     - CMMagazineRifle
-    - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3Incendiary
+    - RMCMagazineRifleL83AInc
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RMCCartridgeRifleL83AIncendiary
-    proto: RMCCartridgeRifleL83AIncendiary
+      - RMCCartridgeRifle556NATOInc
+    proto: RMCCartridgeRifle556NATOInc
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
     layers:
@@ -262,34 +258,83 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleL83AHEAP
-  name: HEAP Cartridge (5.56x45)
-  description: A 5.56x45 HEAP rifle cartridge
+  id: RMCCartridgeRifle556NATO
+  name: cartridge (5.56x45mm)
+  description: A 5.56x45mm rifle cartridge.
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleL83AHEAP
+    - RMCCartridgeRifle556NATO
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mmHEAP
-
+    proto: BulletRifle556NATO
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleL83AIncendiary
-  name: Incendiary Cartridge (5.56x45)
+  id: RMCCartridgeRifle556NATOAP
+  name: AP cartridge (5.56x45mm)
+  description: A 5.56x45mm AP rifle cartridge.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle556NATOAP
+  - type: CartridgeAmmo
+    proto: BulletRifle556NATOAP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle556NATOHEAP
+  name: HEAP cartridge (5.56x45mm)
+  description: A 5.56x45mm HEAP rifle cartridge.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifle556NATOHEAP
+  - type: CartridgeAmmo
+    proto: BulletRifle556NATOHEAP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifle556NATOInc
+  name: incendiary cartridge (5.56x45)
   description: A 5.56x45 incendiary rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleL83AIncendiary
+    - RMCCartridgeRifle556NATOInc
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mmIncendiary
+    proto: BulletRifle556NATOInc
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifle556x45mmHEAP
+  id: BulletRifle556NATO
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 5
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle556NATOAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 30
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle556NATOHEAP
   components:
   - type: Projectile
     damage:
@@ -300,7 +345,7 @@
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifle556x45mmIncendiary
+  id: BulletRifle556NATOInc
   components:
   - type: Projectile
     damage:
@@ -308,30 +353,32 @@
           Piercing: 30
   - type: IgniteOnProjectileHit
 
-
-
-
+- type: Tag
+  id: RMCMagazineRifleL83A
 
 - type: Tag
-  id: RMCMagazineRifleL83A3
+  id: RMCMagazineRifleL83AAP
 
 - type: Tag
-  id: RMCMagazineRifleL83A3AP
+  id: RMCMagazineRifleL83AExt
 
 - type: Tag
-  id: RMCMagazineRifleL83A3extended
+  id: RMCMagazineRifleL83AHEAP
 
 - type: Tag
-  id: RMCMagazineRifleL83A3HEAP
+  id: RMCMagazineRifleL83AInc
 
 - type: Tag
-  id: RMCMagazineRifleL83A3Incendiary
+  id: RMCCartridgeRifle556NATO
 
 - type: Tag
-  id: RMCCartridgeRifleL83AHEAP
+  id: RMCCartridgeRifle556NATOAP
 
 - type: Tag
-  id: RMCCartridgeRifleL83AIncendiary
+  id: RMCCartridgeRifle556NATOHEAP
+
+- type: Tag
+  id: RMCCartridgeRifle556NATOInc
 
 # L83A3B Variant
 
@@ -392,17 +439,17 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleL83A3
+        startingItem: RMCMagazineRifleL83A
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleL83A3
-          - RMCMagazineRifleL83A3AP
-          - RMCMagazineRifleL83A3HEAP
-          - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A
+          - RMCMagazineRifleL83AAP
+          - RMCMagazineRifleL83AHEAP
+          - RMCMagazineRifleL83AInc
+          - RMCMagazineRifleL83AExt
   - type: GunDamageModifier
     multiplier: 1.5
   - type: AttachableHolder
@@ -475,7 +522,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3M
   name: L83A3M rifle
-  description: The L83A3M Battle Rifle, a modification sold to the Three Sun Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
+  description: The L83A3M assault rifle, a modification sold to the Three Sun Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
   suffix: Filled
   components:
   - type: Sprite
@@ -518,17 +565,17 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineRifleL83A3AP
+        startingItem: RMCMagazineRifleL83AAP
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineRifleL83A3
-          - RMCMagazineRifleL83A3AP
-          - RMCMagazineRifleL83A3HEAP
-          - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A
+          - RMCMagazineRifleL83AAP
+          - RMCMagazineRifleL83AHEAP
+          - RMCMagazineRifleL83AInc
+          - RMCMagazineRifleL83AExt
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder

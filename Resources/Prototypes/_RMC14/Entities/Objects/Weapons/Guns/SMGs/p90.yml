@@ -63,6 +63,7 @@
         whitelist:
           tags:
           - RMCMagazineSMGP90
+          - RMCMagazineSMGP90AP
   - type: AttachableHolder
     randomAttachmentChance: 0.1
     slots:
@@ -123,10 +124,43 @@
   - type: Appearance
 
 - type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGP90AP
+  name: "FN P90 AP magazine (5.7×28mm)"
+  description: "An armor-piercing 5.7×28mm magazine for the FN P90."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGP90AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridge57x28mmAP
+    proto: RMCCartridge57x28mmAP
+    capacity: 50
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/p90.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge57x28mm
-  name: cartridge (57×28mm SMG)
-  description: A 5.7×28mm magazine for the FN P90.
+  name: cartridge (5.7×28mm)
+  description: A 5.7×28mm cartridge for PDWs.
   components:
   - type: Tag
     tags:
@@ -134,6 +168,19 @@
     - RMCCartridge57x28mm
   - type: CartridgeAmmo
     proto: RMCBullet57x28mm
+
+- type: entity
+  parent: CMCartridge10x20mm
+  id: RMCCartridge57x28mmAP
+  name: AP cartridge (5.7×28mm)
+  description: A 5.7×28mm armor-piercing cartridge for PDWs.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge57x28mmAP
+  - type: CartridgeAmmo
+    proto: RMCBullet57x28mmAP
 
 - type: entity
   parent: Bullet10x20mm
@@ -154,8 +201,26 @@
   - type: CMArmorPiercing
     amount: 10
 
+- type: entity
+  parent: RMCBullet57x28mm
+  id: RMCBullet57x28mmAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 20
+  - type: CMArmorPiercing
+    amount: 30
+
 - type: Tag
   id: RMCMagazineSMGP90
 
 - type: Tag
+  id: RMCMagazineSMGP90AP
+
+- type: Tag
   id: RMCCartridge57x28mm
+
+- type: Tag
+  id: RMCCartridge57x28mmAP

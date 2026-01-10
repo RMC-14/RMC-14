@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolM77
   name: M77 combat pistol
-  description: Standard issue UNMC firearm. Also found in the hands of We-Ya PMC teams. Fires 9mm armor shredding rounds and is capable of 3-round burst.
+  description: Standard issue UNMC firearm. Also found in the hands of We-Ya PMC teams. Fires 9x19mm armor-piercing rounds and is capable of 3-round burst.
   components:
   - type: Tag
     tags:
@@ -102,7 +102,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolM77AP
-  name: M77 AP magazine (9mm)
+  name: M77 AP magazine (9x19mm)
   components:
   - type: Tag
     tags:
@@ -113,7 +113,7 @@
     whitelist:
       tags:
       - CMCartridgePistol9mmAP
-    proto: CMCartridgePistolM77AP
+    proto: CMCartridgePistol9mmAP
     capacity: 19
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m77.rsi
@@ -127,8 +127,8 @@
 
 - type: entity
   parent: CMBulletBase
-  id: CMBulletPistolM77AP
-  name: bullet (9mm AP)
+  id: CMBulletPistol9mmAP
+  name: AP bullet (9x19mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -139,8 +139,8 @@
     amount: 40
 
 - type: entity
-  id: CMCartridgePistolM77AP
-  name: cartridge (9mm AP)
+  id: CMCartridgePistol9mmAP
+  name: AP cartridge (9x19mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -148,7 +148,7 @@
     - Cartridge
     - CMCartridgePistol9mmAP
   - type: CartridgeAmmo
-    proto: CMBulletPistolM77AP
+    proto: CMBulletPistol9mmAP
 
 - type: Tag
   id: CMMagazinePistolM77AP

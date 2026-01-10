@@ -154,7 +154,7 @@
 - type: entity
   parent: CMMagazineRifleM54CE2
   id: CMMagazineRifleM54CE2HT
-  name: "M54CE2 HT magazine (10x24mm)"
+  name: "M54CE2 holotargeting magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True
@@ -176,8 +176,8 @@
 - type: entity
   parent: CMCartridgeRifle10x24mm
   id: CMCartridgeRifle10x24mmHT
-  name: cartridge (10x24mm)
-  description: A 10x24mm HT cartridge. Fits in 10x24mm holo targeting magazines.
+  name: holotargeting cartridge (10x24mm)
+  description: A 10x24mm HT cartridge. Fits in 10x24mm holotargeting magazines.
   components:
   - type: Tag
     tags:
@@ -244,7 +244,7 @@
 - type: entity
   parent: CMMagazineRifleM54CE2
   id: RMCMagazineRifleM54CE2WP
-  name: "M54CE2 WP magazine (10x24mm)"
+  name: "M54CE2 wall-penetrating magazine (10x24mm)"
   components:
   - type: BallisticAmmoProvider
     mayTransfer: True

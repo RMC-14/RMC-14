@@ -131,7 +131,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleM16
-  name: "M16 Magazine (5.56x45mm)"
+  name: "M16 magazine (5.56x45mm)"
+  description: An early box magazine for the M16 rifle, capable of holding twenty 5.56x45mm cartridges.
   components:
   - type: Tag
     tags:
@@ -141,8 +142,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleM16
-    proto: RMCCartridgeRifleM16
+      - RMCCartridgeRifle556NATO
+    proto: RMCCartridgeRifle556NATO
     capacity: 20
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m16.rsi
@@ -153,33 +154,5 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
 
-- type: entity
-  parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleM16
-  name: Cartridge (5.56x45)
-  description: A 5.56x45 rifle cartridge
-  components:
-  - type: Tag
-    tags:
-    - Cartridge
-    - RMCCartridgeRifleM16
-  - type: CartridgeAmmo
-    proto: BulletRifle556x45mm
-
-- type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle556x45mm
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Projectile
-    damage:
-      types:
-        Piercing: 40
-  - type: CMArmorPiercing
-    amount: 5
-
 - type: Tag
   id: RMCMagazineRifleM16
-
-- type: Tag
-  id: RMCCartridgeRifleM16

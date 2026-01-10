@@ -430,7 +430,7 @@ CMWeaponPistolM4A3: CMWeaponPistolM1984
 #CMWeaponPistol88m4: CMWeaponPistolM77
 CMCrateBoxMagazinePistol88m4AP: RMCCrateBoxMagazinePistolM77AP
 CMBoxMagazinePistol88m4AP: RMCBoxMagazinePistolM77AP
-CMCartridgePistol88m4AP: CMCartridgePistolM77AP
+CMCartridgePistol88m4AP: CMCartridgePistol9mmAP
 CMCrateBoxMagazinePistolVP78: RMCCrateBoxMagazinePistolMK80
 CMCrateVP78: RMCCrateMK80
 CMBoxMagazinePistolVP78: RMCBoxMagazinePistolMK80
@@ -1096,7 +1096,7 @@ RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
 RMCCrateM54C: RMCCrateM54CMK1
 
 # 2025-02-10
-BulletRifle5.56x45mm: BulletRifle556x45mm
+BulletRifle5.56x45mm: BulletRifle556NATO
 CMBulletPistol.22mm: CMBulletPistol22mm
 CMCartridgePistol.22mm: CMCartridgePistol22mm
 

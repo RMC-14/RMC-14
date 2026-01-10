@@ -2,7 +2,7 @@
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
   id: RMCWeaponRevolverM44
   name: M44 combat revolver
-  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 Magnum rounds.
+  description: A bulky revolver, occasionally carried by assault troops and officers in the Marine Corps, as well as civilian law enforcement. Fires .44 magnum rounds.
   components:
   - type: Tag
     tags:
@@ -80,7 +80,7 @@
 
 - type: entity
   id: RMCBaseSpeedLoader44
-  name: "M44 speed loader (.44)"
+  name: "M44 speed loader (.44 magnum)"
   parent: BaseItem
   abstract: true
   components:
@@ -105,7 +105,7 @@
 - type: entity
   parent: RMCBaseSpeedLoader44
   id: RMCSpeedLoaderM44
-  name: "M44 speed loader (.44)"
+  name: "M44 speed loader (.44 magnum)"
   description: A revolver speed loader.
   components:
   - type: Sprite
@@ -127,8 +127,8 @@
 - type: entity
   parent: RMCSpeedLoaderM44
   id: RMCSpeedLoader44Marksman
-  name: "M44 marksman speed loader (.44)"
-  description: A revolver speed loader filled with Marksman ammo.
+  name: "M44 marksman speed loader (.44 magnum)"
+  description: A revolver speed loader filled with marksman ammo.
   components:
   - type: Tag
     tags:
@@ -150,7 +150,7 @@
 
 - type: entity
   id: RMCCartridgeRevolver44
-  name: cartridge (.44)
+  name: cartridge (.44 magnum)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -162,7 +162,7 @@
 
 - type: entity
   id: RMCCartridgeRevolver44Marksman
-  name: cartridge (.44)
+  name: marksman cartridge (.44 magnum)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -175,7 +175,7 @@
 - type: entity
   parent: CMBulletBase
   id: CMBulletRevolver44
-  name: bullet (.44)
+  name: bullet (.44 magnum)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -190,7 +190,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletRevolver44Marksman
-  name: bullet (.44 Marksman)
+  name: marksman bullet (.44 magnum)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

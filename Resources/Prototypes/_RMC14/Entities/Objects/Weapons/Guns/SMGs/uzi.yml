@@ -134,9 +134,10 @@
     - RMCMagazineSMGUZIExt
 
 - type: entity
-  parent: CMCartridge9mmSMG
+  parent: CMCartridge10x20mm
   id: RMCCartridge9x21mmSMGUZI
-  description: A 9x21mmcartridge for the UZI submachinegun.
+  name: cartridge (9x21mm)
+  description: A 9x21mm cartridge for the UZI submachinegun.
   components:
   - type: Tag
     tags:

@@ -127,8 +127,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleMAR40
-    proto: RMCCartridgeRifleMAR40
+      - RMCCartridgeRifle762x39
+    proto: RMCCartridgeRifle762x39
     capacity: 40
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40.rsi
@@ -153,8 +153,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleMAR40
-    proto: RMCCartridgeRifleMAR40
+      - RMCCartridgeRifle762x39
+    proto: RMCCartridgeRifle762x39
     capacity: 60
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar40e.rsi
@@ -183,8 +183,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleMAR40
-    proto: RMCCartridgeRifleMAR40
+      - RMCCartridgeRifle762x39
+    proto: RMCCartridgeRifle762x39
     capacity: 100
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/mar50.rsi
@@ -199,20 +199,20 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RMCCartridgeRifleMAR40
-  name: Cartridge (7.62x39mm)
+  id: RMCCartridgeRifle762x39
+  name: cartridge (7.62x39mm)
   description: A 7.62x39mm rifle cartridge
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeRifleMAR40
+    - RMCCartridgeRifle762x39
   - type: CartridgeAmmo
-    proto: BulletRifleMAR40
+    proto: BulletRifle762x39
 
 - type: entity
   parent: BulletRifle10x24mm
-  id: BulletRifleMAR40
+  id: BulletRifle762x39
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -224,7 +224,7 @@
   id: RMCMagazineRifleMAR40
 
 - type: Tag
-  id: RMCCartridgeRifleMAR40
+  id: RMCCartridgeRifle762x39
 
 - type: Tag
   id: RMCMagazineRifleMAR40Ext

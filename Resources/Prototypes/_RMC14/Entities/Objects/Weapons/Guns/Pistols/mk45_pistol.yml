@@ -78,7 +78,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolMK45
-  name: MK-45 automagnum magazine (.45)
+  name: MK-45 automagnum magazine (.45 automagnum)
   description: A pistol magazine.
   components:
   - type: Tag
@@ -105,7 +105,7 @@
 - type: entity
   parent: CMCartridgePistolBase
   id: CMCartridgePistolMK45
-  name: Cartridge (.45 Automagnum)
+  name: cartridge (.45 automagnum)
   components:
   - type: Tag
     tags:
@@ -117,7 +117,7 @@
 - type: entity
   parent: CMBulletBase
   id: CMBulletPistolMK45
-  name: high-powered pistol bullet (.45)
+  name: bullet (.45 automagnum)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

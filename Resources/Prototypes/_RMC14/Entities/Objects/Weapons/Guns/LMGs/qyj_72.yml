@@ -1,6 +1,6 @@
 - type: entity
   parent: RMCBaseWeaponLMG
-  name: QYJ-72 General Purpose Machine Gun
+  name: QYJ-72 general purpose machine gun
   id: RMCWeaponLMGQYJ72
   description: The QYJ-72 is the standard GPMG of the Socialists Progressive Peoples, chambered in 7.62x54mmR, it fires a hard-hitting cartridge with a high rate of fire. With an extremely large box at 250 rounds, the QJY-72 is designed with suppressing fire and accuracy by volume of fire at its forefront.
   components:
@@ -70,6 +70,7 @@
         whitelist:
           tags:
           - RMCMagazineLMGQYJ72
+          - RMCMagazineLMGQYJ72AP
   - type: GunDamageModifier
     multiplier: 1
   # - type: UniqueAction
@@ -99,7 +100,8 @@
 - type: entity
   parent: RMCMagazineLMGBase
   id: RMCMagazineLMGQYJ72
-  name: "QYJ-72 Ammo Box (7.62x54mmR)"
+  name: "QYJ-72 ammo box (7.62x54mmR)"
+  description: An inexpensive and discardable ammo box to fit the QYJ-72. This one is filled with 7.62x54mm rimmed rounds.
   components:
   - type: Tag
     tags:
@@ -109,8 +111,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeLMGQYJ72
-    proto: RMCCartridgeLMGQYJ72
+      - RMCCartridge762R
+    proto: RMCCartridge762R
     capacity: 250
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/qyj_72.rsi
@@ -122,39 +124,85 @@
   - type: Appearance
 
 - type: entity
-  parent: RMCCartridgeRifleAR10
-  id: RMCCartridgeLMGQYJ72
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridge762R
   name: cartridge (7.62x54mmR)
-  description: A 7.62x54mmR cartridge
+  description: A 7.62x54mmR cartridge. Likely SPP surplus.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridge762R
+  - type: CartridgeAmmo
+    proto: RMCBullet762R
+
+- type: entity
+  parent: RMCCartridge762R
+  id: RMCCartridge762RMarksman
+  name: marksman cartridge (7.62x54mmR)
+  description: A 7.62x54mmR marksman cartridge. Likely SPP surplus.
   components:
   - type: Tag
     tags:
     - Cartridge
-    - RMCCartridgeLMGQYJ72
+    - RMCCartridge762RMarksman
   - type: CartridgeAmmo
-    proto: RMCBulletLMGQYJ72
+    proto: RMCBullet762RMarksman
 
 - type: entity
   parent: RMCBaseBullet
-  id: RMCBulletLMGQYJ72
+  id: RMCBullet762R
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:
       types:
-        Piercing: 35
+        Piercing: 50
   - type: RMCProjectileDamageFalloff
     thresholds:
-    - range: 22
+    - range: 30
       falloff: 9999
       ignoreModifiers: true
   - type: CMArmorPiercing
-    amount: 30
+    amount: 15
   - type: RMCProjectileAccuracy
     accuracy: 95
     thresholds:
-    - range: 14
+    - range: 20
       falloff: 10
+    - range: 10
+      falloff: 10
+      buildup: true
+
+- type: entity
+  parent: RMCBullet762R
+  id: RMCBullet762RMarksman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCProjectileAccuracy
+    accuracy: 125
+    thresholds:
+    - range: 32
+      falloff: 10
+    - range: 4
+      falloff: 10
+      buildup: true
 
 - type: Tag
   id: RMCWeaponLMGQYJ72
@@ -163,4 +211,7 @@
   id: RMCMagazineLMGQYJ72
 
 - type: Tag
-  id: RMCCartridgeLMGQYJ72
+  id: RMCCartridge762R
+
+- type: Tag
+  id: RMCCartridge762RMarksman

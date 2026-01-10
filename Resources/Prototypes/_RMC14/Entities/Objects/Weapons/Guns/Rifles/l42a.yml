@@ -90,7 +90,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL42A
   name: L42A magazine (10x24mm)
-  description: A 10x24mm battle rifle magazine.
+  description: A magazine of 10x24mm rounds for the L42A battle rifle.
   components:
   - type: Tag
     tags:
@@ -125,8 +125,8 @@
 - type: entity
   parent: RMCMagazineRifleL42A
   id: RMCMagazineRifleL42AExtended
-  name: L42A Extended magazine (10x24mm)
-  description: A Extended 10x24mm battle rifle magazine.
+  name: L42A extended magazine (10x24mm)
+  description: An extended magazine of 10x24mm rounds for the L42A battle rifle.
   components:
   - type: Tag
     tags:
@@ -160,7 +160,7 @@
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL42AAP
   name: L42A AP magazine (10x24mm)
-  description: A 10x24mm Armor Piercing battle rifle magazine.
+  description: A magazine of 10x24mm armor-piercing rounds for the L42A battle rifle.
   components:
   - type: Tag
     tags:
@@ -189,8 +189,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL42AWP
-  name: L42A WP magazine (10x24mm)
-  description: A 10x24mm Wall Piercing battle rifle magazine.
+  name: L42A wall-penetrating magazine (10x24mm)
+  description: A magazine of 10x24mm wall-penetrating rounds for the L42A battle rifle.
   components:
   - type: Tag
     tags:

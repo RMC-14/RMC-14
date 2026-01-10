@@ -231,7 +231,7 @@
 - type: entity
   parent: CMMagazineSMGM63
   id: RMCMagazineSMGM63WP
-  name: "M63 WP magazine (10x20mm)"
+  name: "M63 wall-penetrating magazine (10x20mm)"
   suffix: WP
   components:
   - type: BallisticAmmoProvider
@@ -285,7 +285,7 @@
 - type: entity
   parent: CMMagazineSMGM63
   id: CMMagazineSMGM63Ext
-  name: "M63 extended magazine (10x20mm)"
+  name: "M63 HV extended magazine (10x20mm)"
   components:
   - type: BallisticAmmoProvider
     capacity: 72
@@ -340,7 +340,7 @@
 - type: entity
   parent: CMCartridge10x20mm
   id: RMCCartridge10x20mmWP
-  name: WP cartridge (10x20mm)
+  name: wall-penetrating cartridge (10x20mm)
   components:
   - type: Tag
     tags:

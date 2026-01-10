@@ -1,8 +1,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineShotgunXM51
-  name: XM51 magazine (16g)
-  description: A 16 gauge pump-action shotgun magazine.
+  name: XM51 magazine (16ga)
+  description: A box-magazine filled with 16 gauge breaching shells. Fits the XM51 breaching scattergun.
   components:
   - type: Tag
     tags:

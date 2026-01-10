@@ -168,7 +168,7 @@
 - type: entity
   parent: CMCartridgeSniper10x28mm
   id: CMCartridgeSniper10x28mmIncendiary
-  name: cartridge (10x28mm) (incendiary)
+  name: incendiary cartridge (10x28mm)
   components:
   - type: CartridgeAmmo
     proto: CMBulletSniper10x28mmIncendiary
@@ -176,7 +176,7 @@
 - type: entity
   parent: CMCartridgeSniper10x28mm
   id: CMCartridgeSniper10x28mmFlak
-  name: cartridge (10x28mm) (Flak)
+  name: flak cartridge (10x28mm)
   components:
   - type: CartridgeAmmo
     proto: CMBulletSniper10x28mmFlak

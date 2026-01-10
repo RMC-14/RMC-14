@@ -67,7 +67,7 @@
 
 - type: entity
   id: RMCBaseSpeedLoader38
-  name: "Speed loader (.38)"
+  name: "speed loader (.38 magnum)"
   parent: BaseItem
   abstract: true
   components:
@@ -92,7 +92,7 @@
 - type: entity
   parent: RMCBaseSpeedLoader38
   id: RMCSpeedLoader38
-  name: "Speed loader (.38)"
+  name: "speed loader (.38 magnum)"
   description: A revolver speed loader.
   components:
   - type: Sprite
@@ -113,7 +113,7 @@
 
 - type: entity
   id: RMCCartridgeRevolver38
-  name: cartridge (.38)
+  name: cartridge (.38 magnum)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -126,7 +126,7 @@
 - type: entity
   parent: CMBulletBase
   id: RMCBulletRevolver38
-  name: bullet (.38)
+  name: bullet (.38 magnum)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

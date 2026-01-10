@@ -89,8 +89,8 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGMAC15
-  name: MAC-15 magazine (9mm)
-  description: A 9mm magazine for the MAC-15.
+  name: MAC-15 magazine (9x17mm)
+  description: A 9x17mm magazine for the MAC-15.
   components:
   - type: Tag
     tags:
@@ -120,7 +120,7 @@
 - type: entity
   parent: RMCMagazineSMGMAC15
   id: RMCMagazineSMGMAC15Ext
-  name: MAC-15 extended magazine (9mm)
+  name: MAC-15 extended magazine (9x17mm)
   components:
   - type: BallisticAmmoProvider
     capacity: 50
@@ -137,9 +137,10 @@
     - RMCMagazineSMGMAC15Ext
 
 - type: entity
-  parent: CMCartridge9mmSMG
+  parent: CMCartridge10x20mm
   id: RMCCartridge9mmSMGMAC15
-  description: A 9mm cartridge for the mac-15 submachinegun.
+  name: cartridge (9x17mm)
+  description: A 9x17mm cartridge for the mac-15 submachinegun.
   components:
   - type: Tag
     tags:

@@ -55,7 +55,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolPK7
-  name: PK-7 electrostatic magazine (9mm)
+  name: PK-7 electrostatic magazine (9x19mm)
   description: Holds 19 rounds of specialized Conductive 9mm. Electrostatic propulsion in the PK-7 functions by propelling an cV9mm round, at a proportionally slower velocity to maintain a higher kinetic energy transfer rate. All this turns a penetrative round into a less-than-lethal round.
   components:
   - type: Tag
@@ -81,7 +81,7 @@
 
 - type: entity
   id: RMCCartridgePistol9mmElectrostatic
-  name: electrostatic cartridge (9mm)
+  name: electrostatic cartridge (9x19mm)
   parent: CMCartridgePistolBase
   components:
   - type: Tag
@@ -94,7 +94,7 @@
 - type: entity
   parent: RMCProjectileTaser
   id: RMCBulletPistol9mmElectrostatic
-  name: electrostatic bullet (9mm)
+  name: electrostatic bullet (9x19mm)
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

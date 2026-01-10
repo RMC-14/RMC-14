@@ -92,7 +92,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleHunting
-  name: "Basira-Armstrong magazine (6.5mm)"
+  name: "Basira-Armstrong magazine (6.5x52mm)"
   components:
   - type: Item
     size: Small
@@ -119,8 +119,8 @@
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeBoltActionRifle
-  name: Cartridge (5.56x45)
-  description: A Cartridge for the Basira-Armstrong hunting rifle. Compliant with the 15-cartridge limit on civilian hunting rifles.
+  name: cartridge (6.5x52mm)
+  description: A 6.5x52mm cartridge for the Basira-Armstrong hunting rifle. While outdated, it still packs a punch.
   components:
   - type: Tag
     tags:

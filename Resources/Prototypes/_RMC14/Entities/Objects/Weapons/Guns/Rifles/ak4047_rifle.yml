@@ -203,7 +203,7 @@
 - type: entity
   parent: RMCMagazineRifleAK4047
   id: RMCMagazineRifleAK4047Incendiary
-  name: "AK4047 Incendiary magazine (10x24mm)"
+  name: "AK4047 incendiary magazine (10x24mm)"
   suffix: Incendiary
   components:
   - type: Tag
