@@ -1655,11 +1655,11 @@
 - type: entity
   parent: CMBeltMarine
   id: RMCL83A3BeltFilled
-  suffix: Filled, L83A3
+  suffix: Filled, L83A
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleL83A3
+    - id: RMCMagazineRifleL83A
       amount: 5
 
 - type: entity

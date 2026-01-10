@@ -761,8 +761,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineRifleL83A3AP
-    - id: RMCMagazineRifleL83A3
+    - id: RMCMagazineRifleL83AAP
+    - id: RMCMagazineRifleL83A
     - id: RMCPacketGrenadeIncendiaryFilled # TODO RMC14 R2175
     - id: CMPacketGrenadeHighExplosiveFilled # TODO RMC14 R2175
     - id: CMPackFlare
