@@ -1,4 +1,3 @@
-# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
   id: RMCPillCanisterNoSkill
@@ -309,7 +308,7 @@
     heldPrefix: 7
   - type: Sprite
     layers:
-    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+    - state: pill_canister
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
@@ -353,7 +352,7 @@
     heldPrefix: 7
   - type: Sprite
     layers:
-    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+    - state: pill_canister9
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]

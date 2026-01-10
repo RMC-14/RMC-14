@@ -214,8 +214,8 @@
         amount: 5
       - id: RMCPouchDocumentSmall
         amount: 2
-      #- id: RMCPouchSling
-      #  amount: 2
+      - id: RMCPouchSling
+        amount: 2
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
