@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: Fixed repeating plasma transmission when the target has full plasma
-    type: Fix
-  id: 2242
-  time: '2025-08-29T04:55:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7648
 - author: ExponentialWizard
   changes:
   - message: Fixed scoping not facing seat direction while buckled
@@ -4717,5 +4710,13 @@
   id: 2744
   time: '2026-01-11T10:58:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8906
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Survival pouches will now automatically open when you spawn in to assist
+      new survivor players.
+    type: Tweak
+  id: 2745
+  time: '2026-01-11T11:01:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8913
 Name: RMC14
 Order: -1
