@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier, king, and gm icons by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst, honorguard.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/ui_icons/map_blips.dmi, rto by github monomethylhydrazine, spec_pyro from https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/ui_icons/map_blips.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5368c7a5342a52d204eac3d6cc45228f3b976893/icons/ui_icons/map_blips.dmi, background_free and pmc tl by github noctyrnal, lesser_carrier, king, and gm icons by Vermidia, aegiscrate, aegisob, and forecon_synth by Sigma Draconis, edited runner to create lurker, and edited supply to create pylon by github DummeHytteOst, honorguard.png taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/e7df18b4f22a55044502ecbf54c646e1ff68c03d/icons/ui_icons/map_blips.dmi and edited by CatAndHats (github), rto by github monomethylhydrazine, spec_pyro from https://github.com/cmss13-devs/cmss13/blob/eaebcdc7f433220e071f7059bf6eb31a3429c37b/icons/ui_icons/map_blips.dmi",
   "size": {
     "x": 7,
     "y": 7
