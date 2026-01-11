@@ -27,6 +27,7 @@ using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
@@ -47,10 +48,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
     [Dependency] private readonly RMCSlowSystem _slow = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
     private const string attachableToggleUseDelayID = "RMCAttachableToggle";
 
-    private const int bracingInvalidCollisionGroup = (int)CollisionGroup.ThrownItem;
+    private const int bracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable | (int)CollisionGroup.Opaque;
     private const int bracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
 
     public override void Initialize()
@@ -502,70 +504,45 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 if (attachable.Comp.Active || transformComponent.ParentUid != userUid || !TryComp(userUid, out TransformComponent? userTransform))
                     break;
 
-                TimeSpan? doAfter;
+                var origin = _transformSystem.GetWorldPosition(userTransform);
+                var direction = _transformSystem.GetWorldRotation(userTransform).ToWorldVec();
+                var mapId = userTransform.MapID;
 
-                var coords = userTransform.Coordinates;
+                var hits = _physics.IntersectRay(
+                    mapId,
+                    new CollisionRay(origin, direction, bracingRequiredCollisionGroup),
+                    maxLength: attachable.Comp.InstantToggleRange,
+                    ignoredEnt: userUid,
+                    returnOnFirstHit: false
+                );
 
-                Func<EntityCoordinates, EntityCoordinates, bool> comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return false; };
-                var coordsShift = new Vector2(0f, 0f);
-
-                Func<HashSet<EntityUid>, EntityUid?> GetBracingSurface = (HashSet<EntityUid> ents) =>
+                EntityUid? surface = null;
+                foreach (var hit in hits)
                 {
-                    foreach (var entity in ents)
+                    var ent = hit.HitEntity;
+
+                    if (!Transform(ent).Anchored)
+                        continue;
+
+                    if (!TryComp(ent, out FixturesComponent? fixtures))
+                        continue;
+
+                    foreach (var fixture in fixtures.Fixtures.Values)
                     {
-                        if (!TryComp(entity, out FixturesComponent? fixturesComponent) || !Transform(entity).Anchored)
+                        if ((fixture.CollisionLayer & bracingRequiredCollisionGroup) == 0)
                             continue;
 
-                        foreach (var fixture in fixturesComponent.Fixtures.Values)
-                        {
-                            if ((fixture.CollisionLayer & bracingInvalidCollisionGroup) != 0 || (fixture.CollisionLayer & bracingRequiredCollisionGroup) == 0)
-                                continue;
+                        if ((fixture.CollisionLayer & bracingInvalidCollisionGroup) != 0)
+                            continue;
 
-                            if (!comparer(coords, Transform(entity).Coordinates))
-                                continue;
-
-                            return entity;
-                        }
+                        surface = ent;
+                        break;
                     }
 
-                    return null;
-                };
-
-                switch (userTransform.LocalRotation.GetCardinalDir())
-                {
-                    case Direction.South:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y < userCoords.Y; };
-                        coordsShift = new Vector2(0f, -0.7f);
-                        break;
-
-                    case Direction.North:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.Y > userCoords.Y; };
-                        coordsShift = new Vector2(0f, 0.7f);
-                        break;
-
-                    case Direction.East:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X > userCoords.X; };
-                        coordsShift = new Vector2(0.7f, 0f);
-                        break;
-
-                    case Direction.West:
-                        comparer = (EntityCoordinates userCoords, EntityCoordinates entCoords) => { return entCoords.X < userCoords.X; };
-                        coordsShift = new Vector2(-0.7f, 0f);
-                        break;
-
-                    default:
+                    if (surface != null)
                         break;
                 }
 
-                var surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
-                if (surface != null)
-                {
-                    popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
-                    return TimeSpan.FromSeconds(0f);
-                }
-
-                coords = new EntityCoordinates(coords.EntityId, coords.Position + coordsShift);
-                surface = GetBracingSurface(_entityLookupSystem.GetEntitiesInRange(coords, 0.5f, LookupFlags.Dynamic | LookupFlags.Static));
                 if (surface != null)
                 {
                     popupText = Loc.GetString("attachable-popup-activate-deploy-on-generic", ("attachable", attachable.Owner), ("surface", surface));
