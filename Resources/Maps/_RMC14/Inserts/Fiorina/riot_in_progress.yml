@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/11/2026 18:58:20
-  entityCount: 539
+  time: 01/11/2026 19:39:05
+  entityCount: 544
 maps: []
 grids:
 - 1
@@ -428,6 +428,25 @@ entities:
     - type: Transform
       pos: 11.5,-7.5
       parent: 1
+- proto: CMFax
+  entities:
+  - uid: 544
+    components:
+    - type: Transform
+      pos: 13.5,4.5
+      parent: 1
+    - type: ContainerContainer
+      containers: {}
+    missingComponents:
+    - ApcPowerReceiver
+    - FaxMachine
+    - ActivatableUI
+    - ActivatableUIRequiresPower
+    - UserInterface
+    - Faxecute
+    - ItemSlots
+    - DeviceNetworkRequiresPower
+    - DeviceNetwork
 - proto: CMFilingCabinet
   entities:
   - uid: 389
@@ -2207,6 +2226,28 @@ entities:
     components:
     - type: Transform
       pos: 18.5,-7.5
+      parent: 1
+- proto: RMCSpawnerCorpseUNRiotOfficer
+  entities:
+  - uid: 540
+    components:
+    - type: Transform
+      pos: 4.5,-1.5
+      parent: 1
+  - uid: 541
+    components:
+    - type: Transform
+      pos: 10.5,-5.5
+      parent: 1
+  - uid: 542
+    components:
+    - type: Transform
+      pos: 11.5,-11.5
+      parent: 1
+  - uid: 543
+    components:
+    - type: Transform
+      pos: 13.5,-14.5
       parent: 1
 - proto: RMCSpawnerIntelClose
   entities:
