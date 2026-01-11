@@ -55,6 +55,10 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
@@ -636,7 +640,7 @@
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchDrumPMC
   name: smartgun drum pouch
-  description: A heavy pouch designed for carrying a surplus of smargun drums.
+  description: A heavy pouch designed for carrying a surplus of smartgun drums.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_sgdrums_ammo.rsi

@@ -1330,28 +1330,6 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCMK80BeltFilled
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80
-
-- type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCMK80BeltPMCFilled
-  suffix: Filled, MK80
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80
-
-- type: entity
-  parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
   components:
@@ -1360,28 +1338,6 @@
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
-
-- type: entity
-  parent: RMCBeltHolsterPistol
-  id: CMM77BeltFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
-
-- type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCM77BeltPMCFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
 
 - type: entity
   parent: RMCBeltHolsterRevolver
@@ -1542,7 +1498,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
