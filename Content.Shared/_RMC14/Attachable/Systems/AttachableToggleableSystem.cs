@@ -49,7 +49,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private const string AttachableToggleUseDelayId = "RMCAttachableToggle";
 
-    private const int BracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable | (int)CollisionGroup.Opaque;
+    private const int BracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable;
     private const int BracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
 
     public override void Initialize()
