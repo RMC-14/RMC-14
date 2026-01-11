@@ -111,6 +111,7 @@
   parent: BaseMachinePowered
   id: RMCFaxUnusable #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
   name: fax machine
+  suffix: Unusable
   description: This won't be much help to anyone.
   components:
   - type: RMCLoreExaminable
