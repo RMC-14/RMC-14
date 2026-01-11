@@ -1,0 +1,54 @@
+- type: job
+  parent: CMSurvivorCMBDeputy
+  id: CMSurvivorFiorinaRiotInProgressUNRiotOfficer
+  name: cm-job-name-survivor-riot-in-progress-united-nations-riot-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  ranks:
+    RMCRankCivilianOfficer: []
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: United Nations Riot Officer (Special Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: SurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBDeputy
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCMBDeputy
+  id: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
+  equipment:
+    jumpsuit: RMCJumpsuitUNSecurity
+    back: CMSatchelSecuritySurvivorFillRiotOfficer
+    outerClothing: RMCArmorPMCRiot
+    head: ArmorHelmetPMCRiot
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket2: RMCPouchMagazineLarge
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
+  name: special survivor fiorina riot in progress united nations riot officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorFiorinaRiotInProgressUnitedNationsRiotOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

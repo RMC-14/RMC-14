@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/11/2026 05:28:18
-  entityCount: 530
+  time: 01/11/2026 18:58:20
+  entityCount: 539
 maps: []
 grids:
 - 1
@@ -1884,8 +1884,8 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 500
           - 501
+          - 500
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2245,6 +2245,50 @@ entities:
     components:
     - type: Transform
       pos: 10.5,-5.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  entities:
+  - uid: 531
+    components:
+    - type: Transform
+      pos: 10.5,-0.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
+  entities:
+  - uid: 532
+    components:
+    - type: Transform
+      pos: 10.5,-3.5
+      parent: 1
+  - uid: 533
+    components:
+    - type: Transform
+      pos: 8.5,-1.5
+      parent: 1
+  - uid: 534
+    components:
+    - type: Transform
+      pos: 12.5,-1.5
+      parent: 1
+  - uid: 535
+    components:
+    - type: Transform
+      pos: 14.5,2.5
+      parent: 1
+  - uid: 536
+    components:
+    - type: Transform
+      pos: 13.5,0.5
+      parent: 1
+  - uid: 537
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 538
+    components:
+    - type: Transform
+      pos: 5.5,-2.5
       parent: 1
 - proto: RMCStairs
   entities:
@@ -3242,6 +3286,11 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+  - uid: 539
+    components:
+    - type: Transform
+      pos: 3.5,-2.5
+      parent: 1
 - proto: RMCWeaponShotgunHG3712
   entities:
   - uid: 464

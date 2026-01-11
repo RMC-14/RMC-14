@@ -157,6 +157,9 @@
     camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: riot_in_progress
+      scenarioProbability: 0.15
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
@@ -174,6 +177,20 @@
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
+      survivorJobScenarios:
+        riot_in_progress:
+          CMSurvivor:
+          - CMSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
+          CMSurvivorCorporate:
+          - CMSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+          CMSurvivorDoctor:
+          - CMSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+          CMSurvivorEngineer:
+          - CMSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+          CMSurvivorSecurity:
+          - CMSurvivorFiorinaRiotInProgressCMBRiotOfficer: 1
+          CMSurvivorScientist:
+          - CMSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
 
 - type: entity
   id: RMCPlanetTrijent
