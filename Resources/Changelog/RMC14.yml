@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added scenario survivors for the Corporate Dome insert on LV624
-    type: Add
-  id: 2235
-  time: '2025-08-29T04:09:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7412
-- author: Max_Power
-  changes:
-  - message: Fixed smartgunner armor letting you store weapons that aren't smartguns
-      in their suit storage.
-    type: Fix
-  id: 2236
-  time: '2025-08-29T04:10:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7438
-- author: DummeHytteOst
-  changes:
-  - message: Fixed mango juice flavor not displaying correctly.
-    type: Fix
-  id: 2237
-  time: '2025-08-29T04:38:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7497
 - author: Shromply
   changes:
   - message: Buffed the Type 71s firerate by one for PVE only, hopefully making it
@@ -4718,5 +4696,26 @@
   id: 2737
   time: '2026-01-11T10:50:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8874
+- author: Thereisabear
+  changes:
+  - message: Marine Radiophones now stack the same messages in chatbox.
+    type: Tweak
+  id: 2738
+  time: '2026-01-11T10:52:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8865
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed accessories not fitting on armor.
+    type: Fix
+  id: 2739
+  time: '2026-01-11T10:53:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8866
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Shotgun choke now has a special fire sound.
+    type: Add
+  id: 2740
+  time: '2026-01-11T10:52:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8872
 Name: RMC14
 Order: -1
