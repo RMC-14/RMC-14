@@ -359,7 +359,7 @@
 
 
 - type: entity
-  parent: RMCBaseMarineArmorNoAccessory
+  parent: [ RMCBaseMarineArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmor
   abstract: true
 
@@ -445,7 +445,7 @@
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
 
 - type: entity
-  parent: RMCBaseMarineArmorLightNoAccessory
+  parent: [ RMCBaseMarineArmorLightNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmorLight
   abstract: true
 

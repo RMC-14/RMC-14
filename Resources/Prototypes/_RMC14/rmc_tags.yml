@@ -56,6 +56,9 @@
   id: Pouch
 
 - type: Tag
+  id: SurvivalPouch
+
+- type: Tag
   id: LauncherCompatibleGrenade
 
 - type: Tag
