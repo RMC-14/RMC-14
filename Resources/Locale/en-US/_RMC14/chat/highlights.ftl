@@ -27,7 +27,7 @@ highlights-nurse = Nurse, Medical, MedBay, "Med", Infected, Surgery, "Chem", "Ch
 highlights-researcher = Researcher, Research, Science, "Sci", "Chem", "Chems"
 
 # Military Police
-highlights-chief-MP = Chief MP, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command", Execution, Executed
+highlights-chief-mp = Chief MP, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, "Command", Execution, Executed
 highlights-military-warden = Military Warden, Warden, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, Execution, Executed
 highlights-military-police = Military Police, "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", Arrest, Detain, Appeal, Execution, Executed
 highlights-provost-inspector = Provost Inspector, Inspector, @"PvI", "CMP", "MP", "MPs", "MW", "Alert", Brig, "Perma", Loose, Burst, Colonist, Survivor, "SOP", "Mlaw", Marine Law, Arrest, Detain, Appeal, Execution, Executed
