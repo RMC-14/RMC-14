@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Added battlefield executions, performed by a commanding officer with
-      a sidearm.
-    type: Add
-  id: 2233
-  time: '2025-08-29T04:04:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7442
 - author: Dygon
   changes:
   - message: Dropships can now independently lock or unlock the aft port and starboard
@@ -4719,5 +4711,12 @@
   id: 2735
   time: '2026-01-11T10:48:01.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8829
+- author: MortalBaguette
+  changes:
+  - message: CMP chat highlights now autofill
+    type: Fix
+  id: 2736
+  time: '2026-01-11T10:49:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8864
 Name: RMC14
 Order: -1
