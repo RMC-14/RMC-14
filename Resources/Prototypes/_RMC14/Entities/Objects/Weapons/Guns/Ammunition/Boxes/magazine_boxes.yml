@@ -892,7 +892,6 @@
       whitelist:
         tags:
         - RMCMagazineRifleL24Incendiary
->>>>>>> rcmroles/rcm-roles-part-two
 
 # L42A REG
 - type: entity

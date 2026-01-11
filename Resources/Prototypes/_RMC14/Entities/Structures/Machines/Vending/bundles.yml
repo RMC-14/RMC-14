@@ -230,3 +230,17 @@
     - RMCStethoscope
     - RMCSurgicalCaseRCMFilled
     - CMHealthAnalyzer
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMGL
+  name: Multiple Grenade Launcher Set
+  description: Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/rcmgl.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle: 
+    - RMCRoyalGrenadeLauncher
+    - RMCBeltRoyalMortarFilled

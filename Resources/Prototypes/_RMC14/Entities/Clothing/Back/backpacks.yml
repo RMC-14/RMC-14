@@ -322,3 +322,117 @@
     storageOpen: null
   - type: ItemCamouflage
     camouflageVariations: {}
+
+# PVE RCM backpacks
+
+- type: entity
+  parent: CMPersonalStorageBase
+  id: RMCBackpackRCMSmall
+  name: lightweight RCM backpack
+  description: "A TSE military light-carry RCM combat pack MK3."
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/small.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,14,1
+
+- type: entity
+  parent: CMPersonalStorageBase
+  id: RMCBackpackRCMMedium
+  name: standard RCM backpack
+  description: "A TSE military standard-carry RCM combat pack MK3."
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medium.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,17,1
+  - type: StorageCloseOnMove
+    skipInHand: true
+
+- type: entity
+  parent: CMBackpack
+  id: RMCBackpackRCMLarge
+  name: heavyweight RCM backpack
+  description: "The heavy-carry pack of the RMC forces. Designed to lug the most amount of gear into the battlefield."
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/large.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,1
+
+- type: entity
+  parent: RMCSatchelWelder
+  id: RMCBackpackRCMTechnician
+  name: RCM engineering backpack
+  description: "A TSE military standard-carry RCM combat pack MK3. Modified by ingenious Royal Engineers to better fit their requirements."
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/tech.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,17,1
+
+- type: entity
+  parent: CMPersonalStorageBase
+  id: RMCBackpackRCMMedic
+  name: RCM medical backpack
+  description: "A TSE military standard-carry RCM combat pack MK3. Modified by Medical Assistants to fit their needs better."
+  components: 
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medic.rsi
+    layers:
+    - state: icon
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: CMStorageVisualizer
+    storageClosed: closedLayer
+    storageOpen: openLayer
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1
