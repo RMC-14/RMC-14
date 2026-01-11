@@ -24,7 +24,10 @@ public sealed partial class RMCChemMasterPresetEditWindow : DefaultWindow
         BottleLabelInput.Editable = !value;
     }
 
-    public bool GetUsePresetNameAsLabel() => UsePresetNameAsLabelCheckbox.Pressed;
+    public bool GetUsePresetNameAsLabel()
+    {
+        return UsePresetNameAsLabelCheckbox.Pressed;
+    }
 
     public void LoadPreset(RMCChemMasterPreset preset)
     {

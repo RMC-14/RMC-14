@@ -47,7 +47,6 @@ public sealed partial class RMCChemMasterPresetWindow : DefaultWindow
 
     private void UpdateReorderButtonState()
     {
-        // Visual feedback when reorder mode is active
         if (_showReorder)
         {
             ToggleReorderButton.AddStyleClass("Caution");
@@ -64,11 +63,10 @@ public sealed partial class RMCChemMasterPresetWindow : DefaultWindow
     {
         foreach (var child in SavedPresetsContainer.Children)
         {
-            if (child is RMCChemMasterPresetRow row)
-            {
-                row.MoveUpButton.Visible = _showReorder;
-                row.MoveDownButton.Visible = _showReorder;
-            }
+            if (child is not RMCChemMasterPresetRow row)
+                continue;
+            row.MoveUpButton.Visible = _showReorder;
+            row.MoveDownButton.Visible = _showReorder;
         }
     }
 }

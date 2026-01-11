@@ -1,7 +1,7 @@
 <controls:RMCChemMasterPresetEditWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master"
-    SetSize="400 420">
+    SetSize="400 480">
     <BoxContainer Orientation="Vertical" Margin="10">
         <!-- Preset Name (required) -->
         <BoxContainer Orientation="Vertical" Margin="0 5">
@@ -9,13 +9,15 @@
             <LineEdit Name="PresetNameInput" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
         <!-- Pill Bottle Color Selection (optional) -->
-        <BoxContainer Orientation="Horizontal" Margin="0 10">
-            <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-color-optional}" MinWidth="180" />
-            <Button Name="BottleColorButton" Access="Public" StyleClasses="OpenBoth" MinWidth="40">
-                <TextureRect Name="BottleColorView" Access="Public" SetSize="24 24" Stretch="KeepAspectCentered" />
-            </Button>
+        <BoxContainer Orientation="Vertical" Margin="0 10">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-color-optional}" MinWidth="180" />
+                <Button Name="BottleColorButton" Access="Public" StyleClasses="OpenBoth" MinWidth="40">
+                    <TextureRect Name="BottleColorView" Access="Public" SetSize="24 24" Stretch="KeepAspectCentered" />
+                </Button>
+            </BoxContainer>
             <Button Name="ClearBottleColorButton" Access="Public" StyleClasses="OpenBoth"
-                    Margin="5 0 0 0">
+                    Margin="0 5 0 0" HorizontalExpand="True">
                 <BoxContainer Orientation="Horizontal">
                     <RichTextLabel Text="✕ " />
                     <RichTextLabel Text="{Loc rmc-chem-master-preset-clear}" />
@@ -38,13 +40,15 @@
                       Text="{Loc rmc-chem-master-preset-use-name-as-label}" />
         </BoxContainer>
         <!-- Pill Color/Type Selection (optional) -->
-        <BoxContainer Orientation="Horizontal" Margin="0 15">
-            <RichTextLabel Text="{Loc rmc-chem-master-preset-pill-color-optional}" MinWidth="180" />
-            <Button Name="PillTypeButton" Access="Public" StyleClasses="OpenBoth" MinWidth="40">
-                <TextureRect Name="PillTypeView" Access="Public" SetSize="24 24" Stretch="KeepAspectCentered" />
-            </Button>
+        <BoxContainer Orientation="Vertical" Margin="0 15">
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Text="{Loc rmc-chem-master-preset-pill-color-optional}" MinWidth="180" />
+                <Button Name="PillTypeButton" Access="Public" StyleClasses="OpenBoth" MinWidth="40">
+                    <TextureRect Name="PillTypeView" Access="Public" SetSize="24 24" Stretch="KeepAspectCentered" />
+                </Button>
+            </BoxContainer>
             <Button Name="ClearPillTypeButton" Access="Public" StyleClasses="OpenBoth"
-                    Margin="5 0 0 0">
+                    Margin="0 5 0 0" HorizontalExpand="True">
                 <BoxContainer Orientation="Horizontal">
                     <RichTextLabel Text="✕ " />
                     <RichTextLabel Text="{Loc rmc-chem-master-preset-clear}" />

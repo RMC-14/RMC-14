@@ -940,8 +940,9 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             {
                 Text = label,
                 ToolTip = preset.Name,
-                MinWidth = 40,
-                StyleClasses = { "OpenBoth" }
+                MinWidth = 32,
+                StyleClasses = { "OpenBoth" },
+                ModulateSelfOverride = GetPillBottleButtonColor(preset.BottleColor),
             };
 
             var capturedPreset = preset;
@@ -959,5 +960,26 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             preset.BottleColor,
             preset.PillType,
             preset.UsePresetNameAsLabel));
+    }
+
+    private static Color GetPillBottleButtonColor(RMCPillBottleColors color)
+    {
+        return color switch
+        {
+            RMCPillBottleColors.Orange => Color.FromHex("#CC8800"),
+            RMCPillBottleColors.Blue => Color.FromHex("#4444CC"),
+            RMCPillBottleColors.Yellow => Color.FromHex("#CCCC00"),
+            RMCPillBottleColors.LightPurple => Color.FromHex("#B19CD9"),
+            RMCPillBottleColors.LightGrey => Color.FromHex("#AAAAAA"),
+            RMCPillBottleColors.White => Color.FromHex("#DDDDDD"),
+            RMCPillBottleColors.LightGreen => Color.FromHex("#66CC66"),
+            RMCPillBottleColors.Cyan => Color.FromHex("#00CCCC"),
+            RMCPillBottleColors.Pink => Color.FromHex("#CC6699"),
+            RMCPillBottleColors.Aquamarine => Color.FromHex("#66CCAA"),
+            RMCPillBottleColors.Grey => Color.FromHex("#666666"),
+            RMCPillBottleColors.Red => Color.FromHex("#CC4444"),
+            RMCPillBottleColors.Black => Color.FromHex("#333333"),
+            _ => Color.FromHex("#CC8800"),
+        };
     }
 }
