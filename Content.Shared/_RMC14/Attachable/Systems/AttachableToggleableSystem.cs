@@ -518,9 +518,6 @@ public sealed class AttachableToggleableSystem : EntitySystem
                 {
                     var ent = hit.HitEntity;
 
-                    if (!Transform(ent).Anchored)
-                        continue;
-
                     if (!TryComp(ent, out FixturesComponent? fixtures))
                         continue;
 
