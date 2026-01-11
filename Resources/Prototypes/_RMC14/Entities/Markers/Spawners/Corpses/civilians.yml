@@ -64,14 +64,6 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseDeputy
-  name: Corpse Spawner - CMB Deputy
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseDeputy
-
-- type: entity
-  parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseLiaison
   name: Corpse Spawner - Corporate Liaison
   components:
@@ -122,36 +114,20 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaGoon
-  name: Corpse Spawner - We-Ya Goon
+  id: RMCSpawnerCorpseUNRiotOfficer
+  name: Corpse Spawner - United Nations Riot Officer
   components:
   - type: CorpseSpawner
-    spawn: RMCCorpseWeYaGoon
+    spawn: RMCCorpseUnitedNationsRiotOfficer
 
 - type: entity
-  parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaGoonKutjevo
-  name: Corpse Spawner - We-Ya Goon Kutjevo
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseWeYaGoonKutjevo
-
-- type: entity
-  parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaPMC
-  name: Corpse Spawner - We-Ya PMC Standard
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseWeYaPMCStandard
-
-- type: entity
-  parent: RMCSpawnerCorpseWeYaPMC
-  id: RMCSpawnerCorpseWeYaPMCStandardBurst
-  name: Corpse Spawner - We-Ya PMC Standard
+  parent: RMCSpawnerCorpseUNRiotOfficer
+  id: RMCSpawnerCorpseUNRiotOfficerBurst
+  name: Corpse Spawner - United Nations Riot Officer
   suffix: RMC14, Burst
   components:
   - type: CorpseSpawner
-    spawn: RMCCorpseWeYaPMCStandardBurst
+    spawn: RMCCorpseUnitedNationsRiotOfficerBurst
 
 - type: entity
   parent: RMCSpawnerCorpse

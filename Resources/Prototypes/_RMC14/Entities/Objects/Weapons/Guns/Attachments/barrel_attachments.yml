@@ -231,6 +231,10 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -333,6 +337,26 @@
   - type: AttachableSilencer
     sound:
       collection: CMSilencedShoot
+      params:
+        maxDistance: 6
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentSuppressorL112
+  name: L112A1 integrated suppressor
+  description: Cor... I don't think you can put that one back on.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_barrel.rsi
+    state: suppressor_l112
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressorL112
+  - type: AttachableVisuals
+  - type: AttachableSilencer
+    sound:
+      collection: RMCL112Shoot
       params:
         maxDistance: 6
 
@@ -459,7 +483,11 @@
   id: RMCAttachmentSuppressorNPZ92
 
 - type: Tag
+<<<<<<< HEAD
   id: RMCAttachmentSuppressorM96SB
+=======
+  id: RMCAttachmentSuppressorL112
+>>>>>>> rcmdmr/L112
 
 - type: Tag
   id: RMCAttachmentBarrelCharger
