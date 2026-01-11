@@ -966,20 +966,20 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     {
         return color switch
         {
-            RMCPillBottleColors.Orange => Color.FromHex("#CC8800"),
-            RMCPillBottleColors.Blue => Color.FromHex("#4444CC"),
-            RMCPillBottleColors.Yellow => Color.FromHex("#CCCC00"),
-            RMCPillBottleColors.LightPurple => Color.FromHex("#B19CD9"),
-            RMCPillBottleColors.LightGrey => Color.FromHex("#AAAAAA"),
-            RMCPillBottleColors.White => Color.FromHex("#DDDDDD"),
-            RMCPillBottleColors.LightGreen => Color.FromHex("#66CC66"),
-            RMCPillBottleColors.Cyan => Color.FromHex("#00CCCC"),
-            RMCPillBottleColors.Pink => Color.FromHex("#CC6699"),
-            RMCPillBottleColors.Aquamarine => Color.FromHex("#66CCAA"),
-            RMCPillBottleColors.Grey => Color.FromHex("#666666"),
-            RMCPillBottleColors.Red => Color.FromHex("#CC4444"),
-            RMCPillBottleColors.Black => Color.FromHex("#333333"),
-            _ => Color.FromHex("#CC8800"),
+            RMCPillBottleColors.Orange => new Color(255, 165, 0, 128),
+            RMCPillBottleColors.Blue => new Color(0, 0, 255, 128),
+            RMCPillBottleColors.Yellow => new Color(255, 255, 0, 128),
+            RMCPillBottleColors.LightPurple => new Color(177, 156, 217, 128),
+            RMCPillBottleColors.LightGrey => new Color(200, 200, 200, 128),
+            RMCPillBottleColors.White => new Color(255, 255, 255, 128),
+            RMCPillBottleColors.LightGreen => new Color(144, 238, 144, 128),
+            RMCPillBottleColors.Cyan => new Color(0, 255, 255, 128),
+            RMCPillBottleColors.Pink => new Color(255, 192, 203, 128),
+            RMCPillBottleColors.Aquamarine => new Color(127, 255, 212, 128),
+            RMCPillBottleColors.Grey => new Color(128, 128, 128, 128),
+            RMCPillBottleColors.Red => new Color(255, 0, 0, 128),
+            RMCPillBottleColors.Black => new Color(36, 16, 0, 128),
+            _ => new Color(200, 200, 200, 128), // Default to LightGrey
         };
     }
 }
