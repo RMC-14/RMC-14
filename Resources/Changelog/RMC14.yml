@@ -1,31 +1,4 @@
 ﻿Entries:
-- author: BramvanZijp
-  changes:
-  - message: Fixed not properly reassigning a new owner to a CO Primary Weapon's after
-      they become unrevivable.
-    type: Fix
-  id: 2239
-  time: '2025-08-29T04:42:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7567
-- author: DummeHytteOst
-  changes:
-  - message: Fixed the green EMT coat being red instead of green.
-    type: Fix
-  id: 2240
-  time: '2025-08-29T04:44:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7625
-- author: x5tink
-  changes:
-  - message: Fixed synth reset key being normal size instead of small.
-    type: Fix
-  - message: Fixed the synth vendor not having synth reset keys, marine logistics
-      IMP backpack, or the UNMC expedition chestrig.
-    type: Fix
-  - message: Fixed engineer belts not being able to hold synth reset keys.
-    type: Fix
-  id: 2241
-  time: '2025-08-29T04:49:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7647
 - author: N0lim
   changes:
   - message: Fixed repeating plasma transmission when the target has full plasma
@@ -4716,5 +4689,33 @@
   id: 2741
   time: '2026-01-11T10:56:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8881
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Changed the loadouts of the miner corpse.
+    type: Tweak
+  - message: Fixed corpses not having their correct ranks, factions, or icons.
+    type: Fix
+  - message: Fixed the M3-VL vests having an uniform whitelist. You can now use them
+      with any uniform.
+    type: Fix
+  - message: Fixed some Hybrisa corpses not being Hybrisa weya goons.
+    type: Fix
+  id: 2742
+  time: '2026-01-11T10:59:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8777
+- author: noctyrnal
+  changes:
+  - message: Added sprites for the colony power generators.
+    type: Add
+  id: 2743
+  time: '2026-01-11T10:58:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8801
+- author: MoonlightHollow
+  changes:
+  - message: Vulpkanins have started to roll their R's and yip.
+    type: Add
+  id: 2744
+  time: '2026-01-11T10:58:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8906
 Name: RMC14
 Order: -1
