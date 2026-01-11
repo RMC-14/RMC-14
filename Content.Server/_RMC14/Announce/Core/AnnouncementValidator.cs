@@ -41,7 +41,11 @@ public sealed class AnnouncementValidator
             result.AddError($"Message too long. Maximum {MaxMessageLength} characters, got {message.Length}");
         }
 
-        var lines = message.Split('\n');
+        var normalized = message.Replace("\r\n", "\n").Replace('\r', '\n');
+        if (!normalized.Contains('\n') && normalized.Contains("\\n"))
+            normalized = normalized.Replace("\\n", "\n");
+
+        var lines = normalized.Split('\n');
         if (lines.Length > MaxLineCount)
         {
             result.AddError($"Too many lines. Maximum {MaxLineCount} lines, got {lines.Length}");

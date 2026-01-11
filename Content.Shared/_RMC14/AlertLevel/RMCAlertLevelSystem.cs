@@ -133,12 +133,16 @@ public sealed class RMCAlertLevelSystem : EntitySystem
         {
             if (announcement != null)
             {
-                _marineAnnounce.AnnounceToMarines(Loc.GetString(announcement));
+                var text = Loc.GetString(announcement);
+                _marineAnnounce.AnnounceToMarines(text);
+                _marineAnnounce.AnnounceAlertLevel(level, text, filter);
             }
             else if (message != null)
             {
                 var ares = _ares.EnsureARES();
-                _marineAnnounce.AnnounceRadio(ares, Loc.GetString(message.Value), ent.Comp.RadioChannel);
+                var text = Loc.GetString(message.Value);
+                _marineAnnounce.AnnounceRadio(ares, text, ent.Comp.RadioChannel);
+                _marineAnnounce.AnnounceAlertLevel(level, text, filter);
             }
         }
 

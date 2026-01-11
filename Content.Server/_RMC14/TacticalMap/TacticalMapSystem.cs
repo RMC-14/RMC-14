@@ -5,6 +5,7 @@ using Content.Server._RMC14.Marines;
 using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
+using Content.Shared._RMC14.Announce;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Skills;
@@ -42,6 +43,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
+    [Dependency] private readonly GeneralAnnounceSystem _generalAnnounce = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -968,6 +970,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 }
 
                 _marineAnnounce.AnnounceARESStaging(user, "The UNMC tactical map has been updated.", sound);
+                _generalAnnounce.AnnounceAdvanced(new AnnouncementRequest
+                {
+                    Message = "The UNMC tactical map has been updated.",
+                    Preset = "MarineCommand",
+                    Target = AnnouncementTarget.Marines,
+                    ShowSprite = false
+                });
                 _adminLog.Add(LogType.RMCTacticalMapUpdated, $"{ToPrettyString(user)} updated the marine tactical map for {ToPrettyString(mapId)}");
             }
 

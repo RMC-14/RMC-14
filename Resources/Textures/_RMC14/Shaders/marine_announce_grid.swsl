@@ -1,0 +1,35 @@
+light_mode unshaded;
+
+uniform highp vec2 tile_size;
+uniform highp float line_thickness;
+uniform lowp vec4 grid_color;
+uniform highp float scroll_speed;
+
+void fragment() {
+    lowp vec4 base = zTexture(UV);
+    if (base.a <= 0.0) {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    highp float spacing = max(tile_size.y, 1.0);
+    highp float tileCoord = (FRAGCOORD.y + (TIME * scroll_speed)) / spacing;
+    highp float frac = fract(tileCoord);
+    highp float ty = line_thickness / spacing;
+
+#ifdef HAS_DFDX
+    highp float fw = fwidth(tileCoord);
+    ty = max(ty, fw * 0.5);
+#endif
+
+    highp float lineY = step(frac, ty) + step(1.0 - frac, ty);
+    highp float mask = clamp(lineY, 0.0, 1.0);
+
+    highp float alpha = mask * grid_color.a;
+    if (alpha <= 0.0) {
+        COLOR = vec4(0.0);
+        return;
+    }
+
+    COLOR = vec4(grid_color.rgb, alpha);
+}

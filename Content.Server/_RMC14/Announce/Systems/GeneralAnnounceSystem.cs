@@ -69,10 +69,30 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             return;
 
         var filter = _targetFilter.Build(request.Target);
+        AnnounceAdvanced(request, preset, filter);
+    }
+
+    public void AnnounceAdvanced(AnnouncementRequest request, Filter filter)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!ValidateRequest(request))
+            return;
+
+        if (!TryResolvePreset(request.Preset, out var preset))
+            return;
+
+        AnnounceAdvanced(request, preset, filter);
+    }
+
+    private void AnnounceAdvanced(AnnouncementRequest request, AnnouncementPresetPrototype preset, Filter filter)
+    {
         if (filter.Count == 0)
             return;
 
         var stylizedSessions = new List<ICommonSession>();
+        var defaultSessions = new List<ICommonSession>();
         var simplifiedSessions = new List<ICommonSession>();
         foreach (var session in filter.Recipients)
         {
@@ -80,6 +100,9 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             switch (preference)
             {
                 case AnnouncementDisplayPreference.Disabled:
+                    continue;
+                case AnnouncementDisplayPreference.Default:
+                    defaultSessions.Add(session);
                     continue;
                 case AnnouncementDisplayPreference.Simplified:
                     simplifiedSessions.Add(session);
@@ -90,29 +113,35 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             }
         }
 
-        if (stylizedSessions.Count == 0 && simplifiedSessions.Count == 0)
+        if (stylizedSessions.Count == 0 && defaultSessions.Count == 0 && simplifiedSessions.Count == 0)
             return;
 
         var lines = BuildLines(request.Message);
         var speakerName = ResolveSpeakerName(request);
         var stylizedPreset = GetPresetForPreference(preset, AnnouncementDisplayPreference.Stylized);
+        var defaultPreset = GetPresetForPreference(preset, AnnouncementDisplayPreference.Default);
         var simplifiedPreset = GetPresetForPreference(preset, AnnouncementDisplayPreference.Simplified);
 
         AnnouncementStyle? stylizedStyle = stylizedSessions.Count > 0
             ? MergeStyle(stylizedPreset.Style, request.StyleOverride)
+            : null;
+        AnnouncementStyle? defaultStyle = defaultSessions.Count > 0
+            ? MergeStyle(defaultPreset.Style, request.StyleOverride)
             : null;
         AnnouncementStyle? simplifiedStyle = simplifiedSessions.Count > 0
             ? MergeStyle(simplifiedPreset.Style, request.StyleOverride)
             : null;
 
         var stylizedFilter = Filter.Empty().AddPlayers(stylizedSessions);
+        var defaultFilter = Filter.Empty().AddPlayers(defaultSessions);
         var simplifiedFilter = Filter.Empty().AddPlayers(simplifiedSessions);
 
         var deliveredFilter = Filter.Empty();
         deliveredFilter.AddPlayers(stylizedSessions);
+        deliveredFilter.AddPlayers(defaultSessions);
         deliveredFilter.AddPlayers(simplifiedSessions);
 
-        var longestStyle = GetLongestStyle(stylizedStyle, simplifiedStyle);
+        var longestStyle = GetLongestStyle(stylizedStyle, defaultStyle, simplifiedStyle);
         if (longestStyle != null && deliveredFilter.Count > 0)
             EnsureSpeakerPvs(request, deliveredFilter, longestStyle);
 
@@ -123,6 +152,13 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             PlayAnnouncementSound(request, stylizedPreset, stylizedFilter);
         }
 
+        if (defaultFilter.Count > 0 && defaultStyle != null)
+        {
+            var clientData = BuildClientData(request, defaultPreset, defaultStyle, lines, speakerName);
+            RaiseNetworkEvent(new AnnouncementNetMessage(clientData), defaultFilter);
+            PlayAnnouncementSound(request, defaultPreset, defaultFilter);
+        }
+
         if (simplifiedFilter.Count > 0 && simplifiedStyle != null)
         {
             var clientData = BuildClientData(request, simplifiedPreset, simplifiedStyle, lines, speakerName);
@@ -130,7 +166,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             PlayAnnouncementSound(request, simplifiedPreset, simplifiedFilter);
         }
 
-        var deliveredCount = stylizedSessions.Count + simplifiedSessions.Count;
+        var deliveredCount = stylizedSessions.Count + defaultSessions.Count + simplifiedSessions.Count;
         LogAnnouncement(preset.ID, lines, request.Target, request.Source, deliveredCount);
     }
 
@@ -374,6 +410,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             AnimationEnhancements = overrideStyle.AnimationEnhancements ?? baseStyle.AnimationEnhancements,
 
             PrimaryColor = overrideStyle.PrimaryColor ?? baseStyle.PrimaryColor,
+            TitleColor = overrideStyle.TitleColor ?? baseStyle.TitleColor,
             BackgroundColor = overrideStyle.BackgroundColor ?? baseStyle.BackgroundColor,
             BackgroundAlpha = overrideStyle.BackgroundAlpha ?? baseStyle.BackgroundAlpha,
 
@@ -392,7 +429,14 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
     private static string[] BuildLines(string message)
     {
-        return message
+        if (string.IsNullOrEmpty(message))
+            return Array.Empty<string>();
+
+        var normalized = message.Replace("\r\n", "\n").Replace('\r', '\n');
+        if (!normalized.Contains('\n') && normalized.Contains("\\n"))
+            normalized = normalized.Replace("\\n", "\n");
+
+        return normalized
             .Split('\n')
             .Select(line => line.Trim())
             .Where(line => !string.IsNullOrWhiteSpace(line))
@@ -502,7 +546,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         if (_preferences.TryGetValue(session.UserId, out var preference))
             return preference;
 
-        return AnnouncementDisplayPreference.Stylized;
+        return AnnouncementDisplayPreference.Default;
     }
 
     private AnnouncementPresetPrototype GetPresetForPreference(
@@ -512,6 +556,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var targetId = preference switch
         {
             AnnouncementDisplayPreference.Stylized => preset.StylizedVariant,
+            AnnouncementDisplayPreference.Default => preset.DefaultVariant,
             AnnouncementDisplayPreference.Simplified => preset.SimplifiedVariant,
             _ => null
         };
@@ -522,16 +567,25 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         return preset;
     }
 
-    private static AnnouncementStyle? GetLongestStyle(AnnouncementStyle? first, AnnouncementStyle? second)
+    private static AnnouncementStyle? GetLongestStyle(params AnnouncementStyle?[] styles)
     {
-        if (first == null)
-            return second;
-        if (second == null)
-            return first;
+        AnnouncementStyle? longest = null;
+        float longestDuration = 0f;
 
-        var firstDuration = AnnouncementDurationCalculator.Calculate(first) + first.HoldDuration;
-        var secondDuration = AnnouncementDurationCalculator.Calculate(second) + second.HoldDuration;
-        return firstDuration >= secondDuration ? first : second;
+        foreach (var style in styles)
+        {
+            if (style == null)
+                continue;
+
+            var duration = AnnouncementDurationCalculator.Calculate(style) + style.HoldDuration;
+            if (longest == null || duration >= longestDuration)
+            {
+                longest = style;
+                longestDuration = duration;
+            }
+        }
+
+        return longest;
     }
 
     private void OnAnnouncementPreference(AnnouncementPreferenceNetMessage msg, EntitySessionEventArgs args)

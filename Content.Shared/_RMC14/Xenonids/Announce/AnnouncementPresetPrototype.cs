@@ -47,6 +47,9 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public string? StylizedVariant { get; private set; }
 
     [DataField]
+    public string? DefaultVariant { get; private set; }
+
+    [DataField]
     public string? SimplifiedVariant { get; private set; }
 
     [DataField]

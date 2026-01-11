@@ -546,7 +546,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
 
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
-        _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
+        if (TryComp(squad.Value, out SquadTeamComponent? squadComp))
+        {
+            var squadColor = squadComp.AccessibleColor ?? squadComp.Color;
+            _marineAnnounce.AnnounceOverwatchSquad(args.Actor, message, squad.Value, squadColor, squadProto.Name);
+        }
+        else
+        {
+            _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
+        }
 
         var coordinates = _transform.GetMapCoordinates(ent);
         var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);

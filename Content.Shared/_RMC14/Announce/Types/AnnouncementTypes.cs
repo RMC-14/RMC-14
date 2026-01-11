@@ -46,9 +46,10 @@ public enum AnnouncementTarget : byte
 [Serializable, NetSerializable]
 public enum AnnouncementDisplayPreference
 {
-    Stylized,
-    Simplified,
-    Disabled
+    Stylized = 0,
+    Simplified = 1,
+    Disabled = 2,
+    Default = 3
 }
 
 [Serializable, NetSerializable]
@@ -671,6 +672,9 @@ public sealed partial record AnnouncementStyle
     public float SpriteBoxCornerRadius { get; set; } = 0f;
 
     [DataField]
+    public string? SpriteBoxShader { get; set; }
+
+    [DataField]
     public bool SpriteGlow { get; set; }
 
     [DataField]
@@ -776,6 +780,12 @@ public sealed partial record AnnouncementStyle
     public float TitleFontSize { get; set; } = 20f;
 
     [DataField]
+    public bool TitleUnderline { get; set; }
+
+    [DataField]
+    public float TitleUnderlineThickness { get; set; } = 2f;
+
+    [DataField]
     public AnnouncementTitlePosition TitlePosition { get; set; } = AnnouncementTitlePosition.Above;
 
     [DataField]
@@ -789,6 +799,9 @@ public sealed partial record AnnouncementStyle
 
     [DataField]
     public bool EnableResponsiveScaling { get; set; } = true;
+
+    [DataField]
+    public float ResponsiveScaleFactor { get; set; } = 1.0f;
 
     [DataField]
     public bool EnableAutoUIScale { get; set; } = true;

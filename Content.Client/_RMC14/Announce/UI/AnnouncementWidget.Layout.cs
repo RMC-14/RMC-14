@@ -51,8 +51,8 @@ public sealed partial class AnnouncementWidget
             {
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Top,
-                HorizontalExpand = true,
-                VerticalExpand = true
+                HorizontalExpand = false,
+                VerticalExpand = false
             };
             spriteWrapper.AddChild(_spriteContainer);
 
@@ -132,7 +132,8 @@ public sealed partial class AnnouncementWidget
         var optimalWidth = AnnouncementStyling.CalculateOptimalTextWidth(text, style, screenSize);
         var maxAllowedWidth = Math.Min(baseMaxWidth, optimalWidth * 1.1f);
         // Expand available width when the sprite is laid out horizontally with text.
-        if (_spriteContainer != null && (style.SpritePosition == AnnouncementSpritePosition.Left || style.SpritePosition == AnnouncementSpritePosition.Right))
+        if (_spriteContainer != null &&
+            (style.SpritePosition == AnnouncementSpritePosition.Left || style.SpritePosition == AnnouncementSpritePosition.Right))
         {
             _spriteContainer.Measure(screenSize);
             var spriteWidth = _spriteContainer.DesiredSize.X;
@@ -149,6 +150,10 @@ public sealed partial class AnnouncementWidget
         _richTextLabels = new RichTextLabel[totalLabels];
 
         var scaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
+        var labelIndex = 0;
+        RichTextLabel? titleLabelRef = null;
+        Control? titleUnderlineRef = null;
+
         var outerContainer = new Control
         {
             HorizontalAlignment = HAlignment.Center,
@@ -171,10 +176,11 @@ public sealed partial class AnnouncementWidget
         container.SetWidth = optimalWidth;
         container.MinWidth = optimalWidth;
 
+        var textAlign = GetTextAlignment(style);
         var textContainer = new BoxContainer
         {
             Orientation = BoxContainer.LayoutOrientation.Vertical,
-            HorizontalAlignment = HAlignment.Center,
+            HorizontalAlignment = textAlign,
             VerticalAlignment = VAlignment.Top,
             HorizontalExpand = false
         };
@@ -182,14 +188,11 @@ public sealed partial class AnnouncementWidget
         textContainer.MinWidth = optimalWidth;
         textContainer.SetWidth = optimalWidth;
 
-        var labelIndex = 0;
-        RichTextLabel? titleLabelRef = null;
-
         if (_hasTitle && !string.IsNullOrEmpty(titleText))
         {
             var titleLabel = new RichTextLabel
             {
-                HorizontalAlignment = HAlignment.Center,
+                HorizontalAlignment = textAlign,
                 VerticalAlignment = VAlignment.Center,
                 MaxWidth = maxAllowedWidth,
                 HorizontalExpand = false
@@ -197,10 +200,51 @@ public sealed partial class AnnouncementWidget
 
             var titleMessage = CreateFormattedTitleMessage(titleText, style, screenSize, maxAllowedWidth);
             titleLabel.SetMessage(titleMessage);
-            var titleResponsive = AnnouncementStyling.CalculateResponsiveFontSize(new[] { titleText }, style.TitleFontSize, maxAllowedWidth, screenSize);
+            var titleResponsive = AnnouncementStyling.CalculateResponsiveFontSize(new[] { titleText }, style.TitleFontSize, maxAllowedWidth, screenSize, style);
             Logger.Info($"[AnnouncementWidget] Title label MaxWidth {titleLabel.MaxWidth}, text \"{titleText}\", titleFont {style.TitleFontSize}, responsive {titleResponsive}, fontResource {style.TitleFont}");
 
-            textContainer.AddChild(titleLabel);
+            if (style.TitleUnderline)
+            {
+                var underlineThickness = Math.Max(1f, style.TitleUnderlineThickness * scaleFactor);
+                titleLabel.Measure(new Vector2(maxAllowedWidth, float.PositiveInfinity));
+                var underlineWidth = MathF.Min(maxAllowedWidth, titleLabel.DesiredSize.X);
+                var titleStack = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Vertical,
+                    HorizontalAlignment = textAlign,
+                    VerticalAlignment = VAlignment.Top,
+                    SeparationOverride = Math.Max(2, (int)MathF.Ceiling(underlineThickness))
+                };
+
+                var underline = new PanelContainer
+                {
+                    HorizontalAlignment = textAlign,
+                    VerticalAlignment = VAlignment.Top,
+                    HorizontalExpand = false,
+                    VerticalExpand = false,
+                    MinWidth = underlineWidth,
+                    SetWidth = underlineWidth,
+                    MinHeight = underlineThickness,
+                    SetHeight = underlineThickness
+                };
+                underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleColor };
+
+                titleStack.AddChild(titleLabel);
+                titleStack.AddChild(underline);
+                textContainer.AddChild(titleStack);
+                var spacerHeight = Math.Max(2f, underlineThickness * 1.3f);
+                var titleSpacer = new Control
+                {
+                    MinHeight = spacerHeight,
+                    SetHeight = spacerHeight
+                };
+                textContainer.AddChild(titleSpacer);
+                titleUnderlineRef = underline;
+            }
+            else
+            {
+                textContainer.AddChild(titleLabel);
+            }
             _richTextLabels[labelIndex] = titleLabel;
             titleLabelRef = titleLabel;
             labelIndex++;
@@ -210,7 +254,7 @@ public sealed partial class AnnouncementWidget
         {
             var label = new RichTextLabel
             {
-                HorizontalAlignment = HAlignment.Center,
+                HorizontalAlignment = textAlign,
                 VerticalAlignment = VAlignment.Center,
                 MaxWidth = maxAllowedWidth,
                 HorizontalExpand = false
@@ -250,6 +294,7 @@ public sealed partial class AnnouncementWidget
         container.Measure(screenSize);
         textContainer.Measure(screenSize);
         titleLabelRef?.Measure(screenSize);
+        titleUnderlineRef?.Measure(screenSize);
         crtOverlayRef?.Measure(screenSize);
         Logger.Info($"[AnnouncementWidget] Measured outer width {outerContainer.DesiredSize.X}, panel width {container.DesiredSize.X}, text stack width {textContainer.DesiredSize.X}");
         Logger.Info($"[AnnouncementWidget] Title desired width {(titleLabelRef?.DesiredSize.X ?? 0)}, maxAllowed {maxAllowedWidth}, Size {titleLabelRef?.Size ?? Vector2.Zero}, MinSize {titleLabelRef?.MinSize ?? Vector2.Zero}, MaxSize {titleLabelRef?.MaxSize ?? Vector2.Zero}");
@@ -425,6 +470,7 @@ public sealed partial class AnnouncementWidget
             panel.PanelOverride = styleBox;
             panel.AddChild(container);
             outerPanel.AddChild(panel);
+            AddSpriteBoxShaderOverlay(style, outerPanel, underlay: false);
             container = outerPanel;
         }
 
@@ -473,7 +519,8 @@ public sealed partial class AnnouncementWidget
             var message = CreateFormattedMessage(announcement.SpeakerName, new AnnouncementStyle
             {
                 PrimaryColor = style.SpeakerNameColor,
-                FontSize = style.SpeakerNameFontSize
+                FontSize = style.SpeakerNameFontSize,
+                Font = style.Font
             });
 
             label.SetMessage(message);
@@ -623,13 +670,20 @@ public sealed partial class AnnouncementWidget
         {
             var resPath = new ResPath(announcement.DecalRsi!);
             var rsi = _resCache.GetResource<RSIResource>(resPath);
-            if (!rsi.RSI.TryGetState(announcement.DecalState!, out var state) || state == null || state.DelayCount <= 0)
+            if (!rsi.RSI.TryGetState(announcement.DecalState!, out var state) || state == null)
             {
                 Logger.Info($"[AnnouncementWidget] Decal missing state {announcement.DecalState} in {announcement.DecalRsi}");
                 return;
             }
 
-            var texture = state.GetFrame(RsiDirection.South, 0);
+            var frames = state.GetFrames(RsiDirection.South);
+            if (frames.Length == 0)
+            {
+                Logger.Info($"[AnnouncementWidget] Decal state has no frames {announcement.DecalState} in {announcement.DecalRsi}");
+                return;
+            }
+
+            var texture = frames[0];
             var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
             var decalTestScale = Math.Max(0.1f, announcement.DecalScale * screenScaleFactor);
 
@@ -688,7 +742,7 @@ public sealed partial class AnnouncementWidget
                 clipContainer.SetWidth = topHalfWidth;
                 clipContainer.SetHeight = topHalfHeight;
                 spriteView.SetWidth = topHalfWidth * spriteMultiplier;
-                spriteView.SetHeight = topHalfHeight * spriteMultiplier * 1.5f;
+                spriteView.SetHeight = topHalfHeight * spriteMultiplier;
                 spriteView.VerticalAlignment = VAlignment.Top;
                 break;
 
@@ -730,6 +784,44 @@ public sealed partial class AnnouncementWidget
 
         spriteView.HorizontalAlignment = HAlignment.Center;
         spriteView.Stretch = SpriteView.StretchMode.Fill;
+    }
+
+    private static HAlignment GetTextAlignment(AnnouncementStyle style)
+    {
+        return style.Position switch
+        {
+            AnnouncementPosition.TopLeft or AnnouncementPosition.MiddleLeft or AnnouncementPosition.BottomLeft => HAlignment.Left,
+            AnnouncementPosition.TopRight or AnnouncementPosition.MiddleRight or AnnouncementPosition.BottomRight => HAlignment.Right,
+            _ => HAlignment.Center
+        };
+    }
+
+    private void AddSpriteBoxShaderOverlay(AnnouncementStyle style, Control container, bool underlay)
+    {
+        if (string.IsNullOrWhiteSpace(style.SpriteBoxShader))
+            return;
+
+        if (!_prototypeManager.TryIndex<ShaderPrototype>(style.SpriteBoxShader, out var shaderPrototype))
+        {
+            Logger.Warning($"[AnnouncementWidget] Sprite box shader '{style.SpriteBoxShader}' not found.");
+            return;
+        }
+
+        var overlay = new TextureRect
+        {
+            Texture = Texture.White,
+            Stretch = TextureRect.StretchMode.Scale,
+            ShaderOverride = shaderPrototype.Instance(),
+            MouseFilter = Control.MouseFilterMode.Ignore,
+            HorizontalAlignment = HAlignment.Stretch,
+            VerticalAlignment = VAlignment.Stretch,
+            HorizontalExpand = true,
+            VerticalExpand = true
+        };
+
+        container.AddChild(overlay);
+        if (underlay)
+            overlay.SetPositionFirst();
     }
 
     private void ApplyUIScale(float uiScale)
@@ -820,14 +912,14 @@ public sealed partial class AnnouncementWidget
     {
         var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
         var maxAllowedWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, maxAllowedWidth, screenSize);
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, maxAllowedWidth, screenSize, style);
 
         return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor, style.Font);
     }
 
     private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)
     {
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleFontSize, maxAllowedWidth, screenSize);
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleFontSize, maxAllowedWidth, screenSize, style);
         // Keep titles slightly smaller than body to avoid overflow and give hierarchy.
         var cappedFontSize = Math.Min(responsiveFontSize, style.FontSize * 0.9f);
         return AnnouncementStyling.CreateFormattedMessage(text, cappedFontSize, style.TitleColor, style.TitleFont);

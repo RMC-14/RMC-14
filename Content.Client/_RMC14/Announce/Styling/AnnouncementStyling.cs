@@ -128,9 +128,13 @@ public static class AnnouncementStyling
         };
     }
 
-    public static float CalculateResponsiveFontSize(string[] text, float baseFontSize, float maxWidth, Vector2? screenSize)
+    public static float CalculateResponsiveFontSize(string[] text, float baseFontSize, float maxWidth, Vector2? screenSize, AnnouncementStyle? style = null)
     {
-        if (text.Length == 0) return baseFontSize;
+        if (text.Length == 0)
+            return baseFontSize;
+
+        if (style?.EnableResponsiveScaling == false)
+            return baseFontSize;
 
         var totalWordCount = text.Sum(line => CountWords(line));
         var totalCharCount = text.Sum(line => line.Length);
@@ -154,34 +158,29 @@ public static class AnnouncementStyling
             combinedScaleFactor *= screenScaleFactor;
         }
 
+        var scalingFactor = style?.ResponsiveScaleFactor ?? 1.0f;
+        combinedScaleFactor *= scalingFactor;
+
         var finalFontSize = baseFontSize * combinedScaleFactor;
-        var minFontSize = baseFontSize * 0.4f;
-        var maxFontSize = baseFontSize * 1.5f;
+        var minScale = style?.MinScale ?? 0.4f;
+        var maxScale = style?.MaxScale ?? 1.5f;
+        var minFontSize = baseFontSize * minScale;
+        var maxFontSize = baseFontSize * maxScale;
 
         return MathHelper.Clamp(finalFontSize, minFontSize, maxFontSize);
     }
 
     private static float CalculateWordCountScaleFactor(int wordCount, int charCount)
     {
+        if (wordCount <= 0 || charCount <= 0)
+            return 1.0f;
 
-        if (wordCount <= 10)
-        {
-            return MathHelper.Lerp(1.0f, 0.9f, wordCount / 10.0f);
-        }
-        else if (wordCount <= 30)
-        {
-            return MathHelper.Lerp(0.9f, 0.7f, (wordCount - 10) / 20.0f);
-        }
-        else if (wordCount <= 60)
-        {
-            return MathHelper.Lerp(0.7f, 0.5f, (wordCount - 30) / 30.0f);
-        }
-        else
-        {
-            var baseScale = 0.5f;
-            var charScale = Math.Max(0.4f, 0.5f - ((charCount - 300) * 0.0002f));
-            return Math.Min(baseScale, charScale);
-        }
+        var wordFactor = 1f + (wordCount / 18f);
+        var charFactor = 1f + (charCount / 240f);
+        var combined = MathF.Pow(wordFactor * charFactor, 0.35f);
+        var scale = 1f / combined;
+
+        return MathHelper.Clamp(scale, 0.65f, 1.0f);
     }
 
     private static int CountWords(string text)
@@ -216,7 +215,7 @@ public static class AnnouncementStyling
     {
         var scaleFactor = CalculateScreenScaleFactor(screenSize);
         var optimalWidth = CalculateOptimalTextWidth(text, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(text, style.FontSize, optimalWidth, screenSize);
+        var fontSize = CalculateResponsiveFontSize(text, style.FontSize, optimalWidth, screenSize, style);
         var lineHeight = style.LineHeight * scaleFactor;
 
         var estimatedWidth = optimalWidth;
@@ -229,7 +228,7 @@ public static class AnnouncementStyling
     {
         var textArray = new[] { text };
         var optimalWidth = CalculateOptimalTextWidth(textArray, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(textArray, style.FontSize, optimalWidth, screenSize);
+        var fontSize = CalculateResponsiveFontSize(textArray, style.FontSize, optimalWidth, screenSize, style);
 
         label.HorizontalAlignment = HAlignment.Center;
         label.VerticalAlignment = VAlignment.Center;

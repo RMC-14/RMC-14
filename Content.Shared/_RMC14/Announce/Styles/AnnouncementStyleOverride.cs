@@ -11,6 +11,7 @@ public sealed record AnnouncementStyleOverride
     public RealisticAnimations? AnimationEnhancements { get; init; }
 
     public Color? PrimaryColor { get; init; }
+    public Color? TitleColor { get; init; }
     public Color? BackgroundColor { get; init; }
     public float? BackgroundAlpha { get; init; }
 

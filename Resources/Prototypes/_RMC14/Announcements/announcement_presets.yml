@@ -3,19 +3,22 @@
   name: "Marine Command"
   description: "Official announcements from Marine Command"
   target: Marines
+  defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
     animation: Typewriter
     position: TopLeft
-    showBackground: true
+    showBackground: false
     backgroundAlpha: 0.7
     backgroundColor: "#0a1a2d"
-    primaryColor: "#4a9eff"
-    secondaryColor: "#87ceeb"
-    accentColor: "#ffffff"
+    primaryColor: "#a8d6ff"
+    secondaryColor: "#c7d2e5"
+    accentColor: "#6ba3ff"
+    font: "Cozette"
     fontSize: 20
     lineHeight: 48
     printSpeed: 0.025
+    responsiveScaleFactor: 3
     holdDuration: 10
     shakeIntensity: 0.8
     flickerChance: 0
@@ -38,10 +41,12 @@
     spriteScale: 1
     uiScale: 3
     showTitle: true
-    title: ">> HIGH COMMAND <<"
+    title: ">> COMMAND <<"
     titleColor: "#4a9eff"
     titleFontSize: 40
-    titleFont: "DefaultBold"
+    titleFont: "CozetteBold"
+    titleUnderline: true
+    titleUnderlineThickness: 2
     titlePosition: Above
     animationEnhancements:
       typewriterMode: Linear
@@ -107,23 +112,115 @@
   incognitoMask: false
 
 - type: announcementPreset
+  id: MarineCommandDefault
+  name: "Marine Command (Default)"
+  description: "Standard marine announcements"
+  target: Marines
+  style:
+    animation: Typewriter
+    position: TopLeft
+    showBackground: false
+    backgroundAlpha: 0.7
+    backgroundColor: "#0a1a2d"
+    primaryColor: "#a8d6ff"
+    secondaryColor: "#c7d2e5"
+    accentColor: "#6ba3ff"
+    font: "Cozette"
+    fontSize: 20
+    lineHeight: 48
+    printSpeed: 0.025
+    responsiveScaleFactor: 1.15
+    holdDuration: 10
+    shakeIntensity: 0.8
+    flickerChance: 0
+    glitchChance: 0.01
+    showSpriteBox: true
+    spriteBoxColor: "#0a1a2d"
+    spriteBoxBorderColor: "#4a9eff"
+    spriteBoxBorderThickness: 2
+    spriteBoxPadding: 18
+    spriteBoxShader: RMCMarineAnnouncementGrid
+    spriteGlow: false
+    spriteGlowColor: "#4a9eff"
+    spriteGlowIntensity: 0.6
+    showSpeakerName: true
+    speakerNameColor: "#ffffff"
+    speakerNameFontSize: 14
+    speakerNamePosition: Below
+    spritePosition: Left
+    spriteSpacing: 0
+    spriteDisplayMode: TopHalf
+    spriteScale: 1
+    uiScale: 3
+    showTitle: true
+    title: ">> COMMAND <<"
+    titleColor: "#4a9eff"
+    titleFontSize: 40
+    titleFont: "CozetteBold"
+    titleUnderline: true
+    titleUnderlineThickness: 2
+    titlePosition: Above
+    animationEnhancements:
+      typewriterMode: Linear
+      randomizeSpeed: false
+      speedVariation: 0.2
+      enableSlide: false
+      slideDuration: 1.0
+      slideDirection: Top
+      enableZoom: false
+      zoomStartScale: 0.1
+      zoomDuration: 1.0
+      enableBounce: false
+      bounceCount: 3
+      bounceHeight: 15
+      easingIn: EaseInOut
+      easingOut: EaseInOut
+      enableCRT: false
+    textEnhancements:
+      showOutline: true
+      outlineColor: "#000000"
+      outlineThickness: 2
+    backgroundStyle:
+      type: Gradient
+      showGradient: true
+      gradientStart: "#0a1a2d"
+      gradientEnd: "#051122"
+      direction: Vertical
+    enableScreenShake: false
+    shakeDuration: 1
+    enableFlash: false
+    flashColor: "#ffffff"
+    flashDuration: 0.05
+    flashCount: 1
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  soundVolume: 1.0
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  aliases: ["command_default", "marine_default"]
+  incognitoMask: false
+
+- type: announcementPreset
   id: MarineCommandSimplified
   name: "Marine Command (Simplified)"
   description: "Clean, low-effect marine announcements"
   target: Marines
   showSprite: false
   style:
-    animation: Fade
+    animation: None
     position: TopLeft
-    showBackground: true
+    showBackground: false
     backgroundAlpha: 0.35
     backgroundColor: "#0d1320"
     secondaryColor: "#c7d2e5"
     accentColor: "#6ba3ff"
     primaryColor: "#a8d6ff"
-    fontSize: 24
-    lineHeight: 46
+    font: "Cozette"
+    fontSize: 20
+    lineHeight: 48
     printSpeed: 0.02
+    responsiveScaleFactor: 1.15
     holdDuration: 8
     shakeIntensity: 0
     flickerChance: 0
@@ -134,7 +231,14 @@
     spriteDisplayMode: FullSprite
     spriteScale: 0.85
     uiScale: 2
-    showTitle: false
+    showTitle: true
+    title: ">> COMMAND <<"
+    titleColor: "#4a9eff"
+    titleFontSize: 40
+    titleFont: "CozetteBold"
+    titleUnderline: true
+    titleUnderlineThickness: 2
+    titlePosition: Above
     animationEnhancements:
       enableCRT: false
     backgroundStyle:
@@ -164,6 +268,69 @@
   # decalAlpha: 0.5
   # decalOffset: "150,0"
   # textOffset: "-75,0"
+  incognitoMask: false
+
+- type: announcementPreset
+  id: MarineAlertLevel
+  name: "Evacuation Alert"
+  description: "Alert level announcement styling"
+  target: All
+  showSprite: false
+  style:
+    animation: Typewriter
+    position: TopLeft
+    showBackground: false
+    backgroundAlpha: 0.7
+    backgroundColor: "#0a1a2d"
+    primaryColor: "#a8d6ff"
+    secondaryColor: "#c7d2e5"
+    accentColor: "#6ba3ff"
+    font: "Cozette"
+    fontSize: 20
+    lineHeight: 48
+    printSpeed: 0.025
+    responsiveScaleFactor: 1.15
+    holdDuration: 10
+    shakeIntensity: 0.0
+    flickerChance: 0
+    glitchChance: 0
+    showSpriteBox: false
+    showSpeakerName: false
+    spritePosition: Left
+    spriteDisplayMode: FullSprite
+    spriteScale: 1
+    uiScale: 3
+    showTitle: true
+    title: "ALERT LEVEL"
+    titleColor: "#4a9eff"
+    titleFontSize: 40
+    titleFont: "CozetteBold"
+    titleUnderline: true
+    titleUnderlineThickness: 2
+    titlePosition: Above
+    animationEnhancements:
+      typewriterMode: Linear
+      randomizeSpeed: false
+      speedVariation: 0.2
+      enableSlide: false
+      enableZoom: false
+      enableBounce: false
+      enableCRT: false
+    textEnhancements:
+      showOutline: true
+      outlineColor: "#000000"
+      outlineThickness: 2
+    backgroundStyle:
+      type: Gradient
+      showGradient: true
+      gradientStart: "#0a1a2d"
+      gradientEnd: "#051122"
+      direction: Vertical
+    enableScreenShake: false
+    enableFlash: false
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
   incognitoMask: false
 
 - type: announcementPreset

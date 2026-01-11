@@ -64,7 +64,7 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
             }
             else if (textIndex == context.State.CurrentLine)
             {
-                var currentLineText = originalText[textIndex];
+                var currentLineText = cleanText[textIndex];
                 var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
                 var partialText = currentLineText.Substring(0, maxLength);
                 var message = context.FormatMessage(partialText, style);

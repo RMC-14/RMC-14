@@ -67,6 +67,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
     private static void UpdateDisplay(AnnouncementAnimationContext context)
     {
         var originalText = context.OriginalText;
+        var cleanText = context.CleanText;
         var style = context.Style;
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
@@ -79,7 +80,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
             }
             else if (textIndex == context.State.CurrentLine)
             {
-                var currentLineText = originalText[textIndex];
+                var currentLineText = cleanText[textIndex];
                 var maxLength = Math.Min(context.State.CurrentChar, currentLineText.Length);
                 var partialText = currentLineText.Substring(0, maxLength);
                 var message = context.FormatMessage(partialText, style);
@@ -95,13 +96,14 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
     private static void ApplyGlitchEffect(AnnouncementAnimationContext context)
     {
         var style = context.Style;
+        var cleanText = context.CleanText;
 
         for (var i = context.TitleOffset; i < context.Labels.Length; i++)
         {
             var textIndex = i - context.TitleOffset;
             if (textIndex <= context.State.CurrentLine && RandomChance(context.Random, 0.1f))
             {
-                var originalText = context.OriginalText[textIndex];
+                var originalText = cleanText[textIndex];
                 var glitchedText = string.Join("", originalText.Select(c =>
                     RandomChance(context.Random, 0.05f) ? GlitchChars[context.Random.Next(GlitchChars.Length)] : c));
 

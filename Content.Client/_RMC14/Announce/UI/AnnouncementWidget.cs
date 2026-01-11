@@ -11,6 +11,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Log;
 using Robust.Client.ResourceManagement;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -20,6 +21,7 @@ public sealed partial class AnnouncementWidget : UIWidget
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IResourceCache _resCache = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public event Action? OnAnnouncementFinished;
 
