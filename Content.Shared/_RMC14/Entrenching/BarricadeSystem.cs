@@ -323,7 +323,7 @@ public sealed class BarricadeSystem : EntitySystem
                 Del(empty);
         }
 
-        tool.Comp.TotalLayers -= amount;
+        tool.Comp.TotalLayers -= toRemove;
         Dirty(tool);
         _audio.PlayPredicted(tool.Comp.FillSound, user, user);
 

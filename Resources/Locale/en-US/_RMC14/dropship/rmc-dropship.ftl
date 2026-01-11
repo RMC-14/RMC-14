@@ -108,6 +108,11 @@ rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
 
+rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
+rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
+rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
+rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
+
 rmc-dropship-equipment-deployer-text = {$deployName}
 rmc-dropship-equipment-deployer-health = Condition: {$status}
 rmc-dropship-equipment-deployer-ammo = Ammo: {$ammoCount} / {$totalAmmoCount}

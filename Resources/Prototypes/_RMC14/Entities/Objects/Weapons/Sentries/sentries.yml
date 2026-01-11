@@ -85,6 +85,7 @@
   - type: Tag
     tags:
     - RMCSentry
+  - type: PointLight
 
 - type: entity
   parent: [RMCSentryConstruct, BaseItem]
