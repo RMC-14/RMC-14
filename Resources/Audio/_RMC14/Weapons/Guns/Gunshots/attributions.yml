@@ -297,3 +297,8 @@
   license: "CC-BY-4.0"
   copyright: "Taken from Pixabay (content license at https://pixabay.com/service/license-summary/) and modified by @TadJohnson00 (GitHub)."
   source: "https://pixabay.com/sound-effects/single-pistol-gunshot-42-40781/"
+
+- files: ["gun_shotgun_choke.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/28bf8164895c60155d482b9e435c3e728c6f090f/sound/weapons/gun_shotgun_choke.ogg"
