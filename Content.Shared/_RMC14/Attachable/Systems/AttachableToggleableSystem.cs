@@ -34,9 +34,7 @@ namespace Content.Shared._RMC14.Attachable.Systems;
 
 public sealed class AttachableToggleableSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ActionContainerSystem _actionContainerSystem = default!;
-    [Dependency] private readonly EntityLookupSystem _entityLookupSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelistSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaDataSystem = default!;
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
@@ -47,13 +45,12 @@ public sealed class AttachableToggleableSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly UseDelaySystem _useDelaySystem = default!;
-    [Dependency] private readonly RMCSlowSystem _slow = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
 
-    private const string attachableToggleUseDelayID = "RMCAttachableToggle";
+    private const string AttachableToggleUseDelayId = "RMCAttachableToggle";
 
-    private const int bracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable | (int)CollisionGroup.Opaque;
-    private const int bracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
+    private const int BracingInvalidCollisionGroup = (int)CollisionGroup.Impassable | (int)CollisionGroup.HighImpassable | (int)CollisionGroup.Opaque;
+    private const int BracingRequiredCollisionGroup = (int)CollisionGroup.MidImpassable;
 
     public override void Initialize()
     {
@@ -451,7 +448,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private bool CanStartToggleDoAfter(Entity<AttachableToggleableComponent> attachable, ref AttachableToggleStartedEvent args, bool silent = false)
     {
         if (TryComp(attachable.Owner, out UseDelayComponent? useDelayComponent) &&
-            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), attachableToggleUseDelayID))
+            _useDelaySystem.IsDelayed((attachable.Owner, useDelayComponent), AttachableToggleUseDelayId))
         {
             return false;
         }
@@ -510,7 +507,7 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
                 var hits = _physics.IntersectRay(
                     mapId,
-                    new CollisionRay(origin, direction, bracingRequiredCollisionGroup),
+                    new CollisionRay(origin, direction, BracingRequiredCollisionGroup),
                     maxLength: attachable.Comp.InstantToggleRange,
                     ignoredEnt: userUid,
                     returnOnFirstHit: false
@@ -529,10 +526,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
                     foreach (var fixture in fixtures.Fixtures.Values)
                     {
-                        if ((fixture.CollisionLayer & bracingRequiredCollisionGroup) == 0)
+                        if ((fixture.CollisionLayer & BracingRequiredCollisionGroup) == 0)
                             continue;
 
-                        if ((fixture.CollisionLayer & bracingInvalidCollisionGroup) != 0)
+                        if ((fixture.CollisionLayer & BracingInvalidCollisionGroup) != 0)
                             continue;
 
                         surface = ent;
@@ -638,8 +635,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         var holderEv = new AttachableHolderAttachablesAlteredEvent(attachable.Owner, slotId, mode);
         RaiseLocalEvent(holder.Owner, ref holderEv);
 
-        _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, attachableToggleUseDelayID);
-        _useDelaySystem.TryResetDelay(attachable.Owner, id: attachableToggleUseDelayID);
+        _useDelaySystem.SetLength(attachable.Owner, attachable.Comp.UseDelay, AttachableToggleUseDelayId);
+        _useDelaySystem.TryResetDelay(attachable.Owner, id: AttachableToggleUseDelayId);
         _actionsSystem.StartUseDelay(attachable.Comp.Action);
 
         if (attachable.Comp.ShowTogglePopup && userUid != null)
