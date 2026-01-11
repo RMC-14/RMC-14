@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Dropships can now independently lock or unlock the aft port and starboard
-      doors.
-    type: Tweak
-  id: 2234
-  time: '2025-08-29T04:07:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7400
 - author: CyberTropic
   changes:
   - message: Added scenario survivors for the Corporate Dome insert on LV624
@@ -4718,5 +4710,13 @@
   id: 2736
   time: '2026-01-11T10:49:02.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8864
+- author: Thereisabear
+  changes:
+  - message: Fixed the underbarrel flashlight grip being toggleable without being
+      attached to an appropriate weapon.
+    type: Fix
+  id: 2737
+  time: '2026-01-11T10:50:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8874
 Name: RMC14
 Order: -1
