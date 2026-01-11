@@ -51,6 +51,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     private readonly Dictionary<int, RMCChemMasterReagentRow> _beakerRows = new();
     private readonly Dictionary<int, RMCChemMasterReagentRow> _bufferRows = new();
     private readonly List<int> _toRemove = new();
+    private bool _showQuickAccess = true;
 
     public RMCChemMasterBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -524,7 +525,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         _presetWindow.OnClose += () =>
         {
             if (_presetWindow != null)
-                _presetWindow.OnQuickAccessToggled -= UpdateQuickAccessBar;
+                _presetWindow.OnQuickAccessToggled -= OnQuickAccessToggled;
 
             _presetWindow = null;
             _presetEditWindow?.Close();
@@ -535,7 +536,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             _presetPillTypePopup = null;
         };
 
-        _presetWindow.OnQuickAccessToggled += UpdateQuickAccessBar;
+        _presetWindow.OnQuickAccessToggled += OnQuickAccessToggled;
 
         _presetWindow.OnReorderToggled += () =>
         {
@@ -891,12 +892,27 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         }
     }
 
+    private void OnQuickAccessToggled()
+    {
+        if (_presetWindow == null)
+            return;
+
+        _showQuickAccess = _presetWindow.ShowQuickAccess;
+        UpdateQuickAccessBar();
+    }
+
     private void UpdateQuickAccessBar()
     {
         if (_window == null || _window.Disposed)
             return;
 
         _window.QuickAccessContainer.RemoveAllChildren();
+
+        if (!_showQuickAccess)
+        {
+            _window.QuickAccessContainer.Visible = false;
+            return;
+        }
 
         var quickAccessPresets = _presetManager.Presets
             .Where(p => p.QuickAccessSlot != null)

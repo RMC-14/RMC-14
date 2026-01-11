@@ -55,10 +55,11 @@ rmc-chem-master-preset-hide = Hide
 
 rmc-chem-master-preset-name-required = Preset Name: *
 rmc-chem-master-preset-bottle-color-optional = Pill Bottle Color: (optional)
-rmc-chem-master-preset-bottle-label-optional = Pill Bottle Label: (optional, max 3 characters)
+rmc-chem-master-preset-bottle-label-optional = Pill Bottle Label: (optional)
+rmc-chem-master-preset-label-info = [italic]First 3 characters will be shown on the bottle icon.[/italic]
 rmc-chem-master-preset-pill-color-optional = Pill Color: (optional)
 rmc-chem-master-preset-additional-options = Additional Options:
-rmc-chem-master-preset-use-name-as-label = Use preset name for bottle name
+rmc-chem-master-preset-use-name-as-label = Use preset name as the bottle label
 rmc-chem-master-preset-clear = Clear
 rmc-chem-master-preset-save = Save
 

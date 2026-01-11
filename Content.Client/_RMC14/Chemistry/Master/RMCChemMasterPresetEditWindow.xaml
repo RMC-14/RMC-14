@@ -4,8 +4,8 @@
     SetSize="400 420">
     <BoxContainer Orientation="Vertical" Margin="10">
         <!-- Preset Name (required) -->
-        <BoxContainer Orientation="Horizontal" Margin="0 5">
-            <RichTextLabel Text="{Loc rmc-chem-master-preset-name-required}" MinWidth="180" />
+        <BoxContainer Orientation="Vertical" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-name-required}" Margin="0 0 0 5" />
             <LineEdit Name="PresetNameInput" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
         <!-- Pill Bottle Color Selection (optional) -->
@@ -22,11 +22,15 @@
                 </BoxContainer>
             </Button>
         </BoxContainer>
-        <!-- Pill Bottle Label Input (optional) -->
-        <BoxContainer Orientation="Horizontal" Margin="0 5">
-            <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-label-optional}" MinWidth="180" />
+        <!-- Pill Bottle Label (optional) -->
+        <BoxContainer Orientation="Vertical" Margin="0 5">
+            <RichTextLabel Text="{Loc rmc-chem-master-preset-bottle-label-optional}" Margin="0 0 0 5" />
             <LineEdit Name="BottleLabelInput" Access="Public" HorizontalExpand="True" />
         </BoxContainer>
+        <!-- Info about icon label using first 3 characters -->
+        <RichTextLabel Name="LabelInfoText" Access="Public"
+                       Text="{Loc rmc-chem-master-preset-label-info}"
+                       StyleClasses="LabelSubText" Margin="0 0 0 10" />
         <!-- Additional Options Section -->
         <RichTextLabel Text="{Loc rmc-chem-master-preset-additional-options}" Margin="0 15 0 5" />
         <BoxContainer Orientation="Horizontal" Margin="10 0 0 0">
@@ -52,7 +56,7 @@
         <Button Name="SavePresetButton" Access="Public" StyleClasses="OpenBoth"
                 HorizontalExpand="True">
             <BoxContainer Orientation="Horizontal">
-                <RichTextLabel Text="💾 " />
+                <Label Text="💾 " />
                 <RichTextLabel Text="{Loc rmc-chem-master-preset-save}" />
             </BoxContainer>
         </Button>

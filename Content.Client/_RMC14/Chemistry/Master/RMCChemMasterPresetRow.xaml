@@ -4,14 +4,13 @@
     <BoxContainer Orientation="Vertical">
         <!-- Main Preset Row -->
         <BoxContainer Orientation="Horizontal" Margin="2" MinHeight="36">
-            <RichTextLabel Text="•  " Margin="5 0 0 0" />
             <!-- Bottle Color Icon -->
             <TextureRect Name="BottleColorView" Access="Public" SetSize="24 24"
                          Stretch="KeepAspectCentered" Margin="0 0 2 0" />
             <!-- Pill Type Icon -->
             <TextureRect Name="PillTypeView" Access="Public" SetSize="24 24"
                          Stretch="KeepAspectCentered" Margin="0 0 5 0" />
-            <!-- Apply Button (shows preset name, label, slot) -->
+            <!-- Apply Preset (Also shows preset name, label, slot) -->
             <Button Name="ApplyButton" Access="Public" StyleClasses="OpenBoth"
                     HorizontalExpand="True" HorizontalAlignment="Stretch" />
             <!-- Quick Access Button -->
