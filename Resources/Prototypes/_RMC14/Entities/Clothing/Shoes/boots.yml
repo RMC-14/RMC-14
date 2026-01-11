@@ -87,7 +87,7 @@
   parent: CMBootsBlackFilled
   id: RMCScoutShoes
   name: infiltrator boots # Could probably use it's own sprite
-  description: A modified pair of combat boots, including several trimmed down areas and padded with cloth alongside some form of leather
+  description: A modified pair of combat boots, including several trimmed down areas and padded with cloth alongside some form of leather.
   components:
   - type: FootstepModifier
     footstepSoundCollection:
@@ -100,7 +100,7 @@
   parent: CMBootsBlack
   id: RMCShoesCombat
   name: combat boots
-  description: When you REALLY want to turn up the heat
+  description: When you REALLY want to turn up the heat.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
@@ -179,7 +179,7 @@
   parent: CMBootsBlack
   id: RMCBootsCorporate
   name: rugged boots
-  description: These synth-leather boots seem high quality when first worn, but quickly detoriate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
+  description: These synth-leather boots seem high quality when first worn, but quickly deteriorate, especially in the environments the corporate security members these are issued to operate in. Still, better than nothing.
 
 
 # SPP

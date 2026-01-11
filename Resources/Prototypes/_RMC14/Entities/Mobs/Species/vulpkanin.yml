@@ -15,9 +15,10 @@
   - type: Icon
     sprite: _RMC14/Mobs/Vulpkanin/parts.rsi
     state: full
+  - type: VulpkaninAccent
   - type: Speech
     speechVerb: Vulpkanin
-    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl' ]
+    allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Growl', 'Yip' ]
   - type: Vocal
     sounds:
       Male: RMCMaleVulpkanin
