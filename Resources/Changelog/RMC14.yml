@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed Fiorina's LZ1 name spelling "hangar" as "hanger"
-    type: Fix
-  id: 2225
-  time: '2025-08-26T04:16:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7554
 - author: Shromply
   changes:
   - message: Added the Custom M1984 and Custom M44, as well as the HG-45 'Aguila'
@@ -4732,5 +4725,13 @@
   id: 2727
   time: '2026-01-09T15:19:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8439
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the Stripped Corporate M54C MK2 being unable to take barrel and
+      underbarrel attachments.
+    type: Fix
+  id: 2728
+  time: '2026-01-11T10:38:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8805
 Name: RMC14
 Order: -1
