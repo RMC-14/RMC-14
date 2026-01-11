@@ -55,6 +55,10 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
