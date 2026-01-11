@@ -155,7 +155,7 @@ public sealed partial class CMDistressSignalRuleComponent : Component
     public TimeSpan? EndAtAllClear;
 
     [DataField]
-    public TimeSpan AllClearEndDelay = TimeSpan.FromMinutes(3);
+    public TimeSpan AllClearEndDelay = TimeSpan.FromMinutes(7);
 
     [DataField]
     public ProtoId<RadioChannelPrototype> AllClearChannel = "MarineCommand";
