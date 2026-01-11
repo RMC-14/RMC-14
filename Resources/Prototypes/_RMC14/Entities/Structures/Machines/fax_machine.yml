@@ -106,3 +106,42 @@
   - type: FaxMachine
     name: "Three Suns Empire"
     notifyAdmins: true
+
+- type: entity
+  parent: BaseMachinePowered
+  id: RMCFaxUnusable #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
+  name: fax machine
+  description: This won't be much help to anyone.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-fax-machine
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/fax_machine.rsi
+    drawdepth: SmallObjects
+    layers:
+    - state: icon
+      map: [ "enum.FaxMachineVisuals.VisualState" ]
+  - type: Icon
+    sprite: _RMC14/Structures/Machines/fax_machine.rsi
+    state: icon
+  - type: GenericVisualizer
+    visuals:
+      enum.FaxMachineVisuals.VisualState:
+        enum.FaxMachineVisuals.VisualState:
+          Printing: { state: printing }
+          Normal: {state: icon}
+  - type: Appearance
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 25
+        mask:
+        - TabletopMachineMask
+        layer:
+        - TabletopMachineLayer
+  - type: RequireProjectileTarget
