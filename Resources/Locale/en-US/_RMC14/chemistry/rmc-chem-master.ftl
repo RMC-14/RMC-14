@@ -37,6 +37,7 @@ rmc-chem-master-buffer-empty = Buffer is empty.
 rmc-chem-master-pills = [bold]Pills[/bold]
 rmc-chem-master-pills-create = Create Pills
 rmc-chem-master-pills-not-enough-space = Selected pill bottles do not have enough space in each bottle!
+rmc-chem-master-pills-type-window-title = Pill Types
 
 rmc-chem-master-glassware = [bold]Glassware[/bold]
 rmc-chem-master-create-bottle = Create Bottle ({$amount}u)

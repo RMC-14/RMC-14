@@ -650,8 +650,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 return;
             }
 
-            _presetPillTypePopup = new RMCChemMasterPopupWindow();
-            _presetPillTypePopup.Header.SetMessage(Loc.GetString("rmc-chem-master-pills"));
+            _presetPillTypePopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pills-type-window-title") };
             _presetPillTypePopup.OnClose += () => _presetPillTypePopup = null;
             _presetPillTypePopup.OpenCentered();
 
