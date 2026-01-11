@@ -47,7 +47,7 @@
     head: ArmorHelmetPMCEngineer
     outerClothing: RMCArmorM4PMCEngineer
     back: RMCBackpackWelderPMC
-    belt: CMM77BeltFilledNearEmpty
+    belt: RMCM77BeltPMCFilledNearEmpty
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
   storage:

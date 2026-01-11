@@ -55,7 +55,7 @@
     head: ArmorHelmetPMCOfficer
     outerClothing: CMArmorM4PMCLeader
     back: RMCSatchelPMC
-    belt: CMM77BeltFilledNearEmpty
+    belt: RMCM77BeltPMCFilledNearEmpty
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
     # eyes: # TODO RMC14: SensorMate HUD

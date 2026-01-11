@@ -1351,17 +1351,6 @@
     - id: RMCWeaponPistolM77
 
 - type: entity
-  parent: RMCBeltHolsterPistol
-  id: CMM77BeltFilledNearEmpty
-  suffix: Filled, M77, Near_Empty
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 3
-    - id: RMCWeaponPistolM77
-
-- type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCM44BeltFilled
   suffix: Filled

@@ -45,7 +45,7 @@
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetHvHWeYaPMC
     back: RMCSatchelPMC
-    belt: CMM77BeltFilledNearEmpty
+    belt: RMCM77BeltPMCFilledNearEmpty
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
   storage:
