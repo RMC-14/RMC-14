@@ -263,7 +263,7 @@
       - RMCUniformMarine
 
 - type: entity
-  parent: [ RMCBaseMarineArmorNoAccessory , RMCBaseUniformAccessoryItemOuterClothing ]
+  parent: [ RMCBaseMarineArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmor
   abstract: true
 
