@@ -49,7 +49,7 @@
     head: ArmorHelmetPMCCorporateLead
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleSSG45
     pocket1: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill

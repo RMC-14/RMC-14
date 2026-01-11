@@ -95,6 +95,16 @@
 
 - type: entity
   parent: ArmorHelmetPMC
+  id: RMCArmorHelmetPMCDark
+  name: We-Ya armored cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
   id: ArmorHelmetPMCCorporate
   name: We-Ya corporate security helmet
   description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
