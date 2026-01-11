@@ -8,6 +8,8 @@
             <BoxContainer Orientation="Horizontal">
                 <RichTextLabel Text="{Loc rmc-chem-master-status}" />
                 <Control HorizontalExpand="True" />
+                <Button Name="SelectAllButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc rmc-chem-master-select-all}" Visible="False" Margin="0 0 5 0" />
                 <Button Name="PresetsButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc rmc-chem-master-presets}" />
             </BoxContainer>

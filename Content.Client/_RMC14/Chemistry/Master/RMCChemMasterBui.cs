@@ -98,6 +98,14 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
         _window.CreatePillsButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterCreatePillsMsg());
         _window.PresetsButton.OnPressed += _ => OpenPresetWindow(chemMaster);
+        _window.SelectAllButton.OnPressed += _ =>
+        {
+            if (!_container.TryGetContainer(Owner, chemMaster.PillBottleContainer, out var container))
+                return;
+
+            var allSelected = chemMaster.SelectedBottles.Count == container.ContainedEntities.Count;
+            SendPredictedMessage(new RMCChemMasterPillBottleSelectAllMsg(!allSelected));
+        };
 
         UpdateQuickAccessBar();
         Refresh();
@@ -222,6 +230,17 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         if (_container.TryGetContainer(Owner, chemMaster.Comp.PillBottleContainer, out var container) &&
             container.ContainedEntities.Count > 0)
         {
+            var hasMultipleBottles = container.ContainedEntities.Count > 1;
+            _window.SelectAllButton.Visible = hasMultipleBottles;
+
+            if (hasMultipleBottles)
+            {
+                var allSelected = chemMaster.Comp.SelectedBottles.Count == container.ContainedEntities.Count;
+                _window.SelectAllButton.Text = allSelected
+                    ? Loc.GetString("rmc-chem-master-deselect-all")
+                    : Loc.GetString("rmc-chem-master-select-all");
+            }
+
             _window.PillBottleColumnLabel.Margin = new Thickness(0, 3, 5, 0);
             _window.PillBottlesNoneLabel.Visible = false;
 
@@ -336,6 +355,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             _window.PillBottleColumnLabel.Margin = new Thickness(0, 0, 5, 0);
             _window.PillBottlesContainer.RemoveChildExcept(_window.PillBottlesNoneLabel);
             _window.PillBottlesNoneLabel.Visible = true;
+            _window.SelectAllButton.Visible = false;
         }
     }
 

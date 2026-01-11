@@ -61,6 +61,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 subs.Event<RMCChemMasterPillBottleLabelMsg>(OnPillBottleLabelMsg);
                 subs.Event<RMCChemMasterPillBottleColorMsg>(OnPillBottleColorMsg);
                 subs.Event<RMCChemMasterPillBottleFillMsg>(OnPillBottleFillMsg);
+                subs.Event<RMCChemMasterPillBottleSelectAllMsg>(OnPillBottleSelectAllMsg);
                 subs.Event<RMCChemMasterPillBottleTransferMsg>(OnPillBottleTransferMsg);
                 subs.Event<RMCChemMasterPillBottleEjectMsg>(OnPillBottleEjectMsg);
                 subs.Event<RMCChemMasterBeakerEjectMsg>(OnBeakerEjectMsg);
@@ -464,6 +465,27 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             """);
 
         Dirty(ent);
+    }
+
+    private void OnPillBottleSelectAllMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterPillBottleSelectAllMsg args)
+    {
+        if (!_container.TryGetContainer(ent, ent.Comp.PillBottleContainer, out var container))
+            return;
+
+        if (args.SelectAll)
+        {
+            foreach (var bottle in container.ContainedEntities)
+            {
+                ent.Comp.SelectedBottles.Add(bottle);
+            }
+        }
+        else
+        {
+            ent.Comp.SelectedBottles.Clear();
+        }
+
+        Dirty(ent);
+        RefreshUIs(ent);
     }
 
     private void OnApplyPresetMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterApplyPresetMsg args)
