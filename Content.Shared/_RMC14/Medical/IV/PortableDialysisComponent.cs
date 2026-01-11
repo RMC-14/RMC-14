@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
@@ -43,7 +44,7 @@ public sealed partial class PortableDialysisComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillRequired = new() { ["RMCSkillMedical"] = 2 };
 
     [DataField, AutoNetworkedField]
-    public string[] NonTransferableReagents = ["Blood"];
+    public ProtoId<ReagentPrototype>[] NonTransferableReagents = ["Blood"];
 
     [DataField, AutoNetworkedField]
     public bool IsAttaching;
