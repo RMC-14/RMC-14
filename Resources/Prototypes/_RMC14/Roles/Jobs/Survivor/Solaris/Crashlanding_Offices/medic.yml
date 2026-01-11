@@ -47,7 +47,7 @@
     head: ArmorHelmetPMC
     outerClothing: CMArmorM4PMCLight
     back: RMCSatchelPMCMedic
-    belt: CMM77BeltFilledNearEmpty
+    belt: RMCM77BeltFilled
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
     eyes: RMCGlassesMedicalHUDGlasses
