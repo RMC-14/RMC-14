@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Overfull pods now bolt open after exploding
-    type: Fix
-  id: 2232
-  time: '2025-08-29T03:56:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7396
 - author: Aurallianz
   changes:
   - message: Added battlefield executions, performed by a commanding officer with
@@ -4719,5 +4712,12 @@
   id: 2734
   time: '2026-01-11T10:42:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8846
+- author: XxSWAG-MASTER-OVERLORDxX
+  changes:
+  - message: Executive Bodyguard Synth now says its a synth in "Spawn here as job"
+    type: Tweak
+  id: 2735
+  time: '2026-01-11T10:48:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8829
 Name: RMC14
 Order: -1
