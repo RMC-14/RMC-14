@@ -474,10 +474,7 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
         if (args.SelectAll)
         {
-            foreach (var bottle in container.ContainedEntities)
-            {
-                ent.Comp.SelectedBottles.Add(bottle);
-            }
+            ent.Comp.SelectedBottles.UnionWith(container.ContainedEntities);
         }
         else
         {

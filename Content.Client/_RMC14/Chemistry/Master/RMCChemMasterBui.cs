@@ -226,7 +226,8 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
-        var anySelected = chemMaster.Comp.SelectedBottles.Count > 0;
+        var selectedBottles = chemMaster.Comp.SelectedBottles;
+        var anySelected = selectedBottles.Count > 0;
         if (_container.TryGetContainer(Owner, chemMaster.Comp.PillBottleContainer, out var container) &&
             container.ContainedEntities.Count > 0)
         {
@@ -235,7 +236,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
             if (hasMultipleBottles)
             {
-                var allSelected = chemMaster.Comp.SelectedBottles.Count == container.ContainedEntities.Count;
+                var allSelected = selectedBottles.Count == container.ContainedEntities.Count;
                 _window.SelectAllButton.Text = allSelected
                     ? Loc.GetString("rmc-chem-master-deselect-all")
                     : Loc.GetString("rmc-chem-master-select-all");
@@ -261,6 +262,10 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                     if (!_bottleRows.TryGetValue(contained, out var row))
                         continue;
 
+                    var isSelected = selectedBottles.Contains(contained);
+                    if (row.FillBottleButton is { Disposed: false })
+                        row.FillBottleButton.Pressed = isSelected;
+
                     UpdatePillBottleFill(row, contained);
                     UpdatePillBottleName(row, contained);
                 }
@@ -281,8 +286,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                     continue;
 
                 var row = new RMCChemMasterPillBottleRow();
-                var fillBottles = chemMaster.Comp.SelectedBottles;
-                row.FillBottleButton.Pressed = fillBottles.Contains(contained);
+                row.FillBottleButton.Pressed = selectedBottles.Contains(contained);
                 row.FillBottleButton.OnPressed += args => SendPredictedMessage(new RMCChemMasterPillBottleFillMsg(netContained.Value, args.Button.Pressed));
 
                 UpdatePillBottleFill(row, contained);
@@ -519,6 +523,9 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         _presetWindow = new RMCChemMasterPresetWindow { Title = Loc.GetString("rmc-chem-master-presets") };
         _presetWindow.OnClose += () =>
         {
+            if (_presetWindow != null)
+                _presetWindow.OnQuickAccessToggled -= UpdateQuickAccessBar;
+
             _presetWindow = null;
             _presetEditWindow?.Close();
             _presetEditWindow = null;
@@ -886,7 +893,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
     private void UpdateQuickAccessBar()
     {
-        if (_window == null)
+        if (_window == null || _window.Disposed)
             return;
 
         _window.QuickAccessContainer.RemoveAllChildren();
