@@ -631,7 +631,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 UpdatePresetEditBottleColorView(chemMaster);
                 _presetColorPopup?.Close();
             };
-            _presetColorPopup.Grid.AddChild(clearButton);
+            _presetColorPopup.ButtonContainer.AddChild(clearButton);
         };
 
         // Clear bottle color button
@@ -650,7 +650,8 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 return;
             }
 
-            _presetPillTypePopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pills") };
+            _presetPillTypePopup = new RMCChemMasterPopupWindow();
+            _presetPillTypePopup.Header.SetMessage(Loc.GetString("rmc-chem-master-pills"));
             _presetPillTypePopup.OnClose += () => _presetPillTypePopup = null;
             _presetPillTypePopup.OpenCentered();
 
@@ -683,7 +684,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 UpdatePresetEditPillTypeView(chemMaster);
                 _presetPillTypePopup?.Close();
             };
-            _presetPillTypePopup.Grid.AddChild(clearButton);
+            _presetPillTypePopup.ButtonContainer.AddChild(clearButton);
         };
 
         // Clear pill type button
@@ -836,6 +837,8 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
             _presetWindow.SavedPresetsContainer.AddChild(row);
         }
+
+        _presetWindow.InvalidateMeasure();
     }
 
     private void MovePreset(string name, int direction, RMCChemMasterComponent chemMaster)

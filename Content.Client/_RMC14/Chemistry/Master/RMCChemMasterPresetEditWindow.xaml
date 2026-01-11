@@ -1,7 +1,7 @@
 <controls:RMCChemMasterPresetEditWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master"
-    SetSize="400 500">
+    MinWidth="400" MinHeight="500">
     <BoxContainer Orientation="Vertical" Margin="10">
         <!-- Preset Name (required) -->
         <BoxContainer Orientation="Vertical" Margin="0 5">
@@ -59,8 +59,9 @@
         <!-- Save Button -->
         <Button Name="SavePresetButton" Access="Public" StyleClasses="OpenBoth"
                 HorizontalExpand="True">
-            <BoxContainer Orientation="Horizontal">
-                <Label Text="💾 " />
+            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextureRect TexturePath="/Textures/Interface/VerbIcons/insert.svg.192dpi.png"
+                             SetSize="16 16" Stretch="KeepAspectCentered" Margin="0 0 5 0" />
                 <RichTextLabel Text="{Loc rmc-chem-master-preset-save}" />
             </BoxContainer>
         </Button>

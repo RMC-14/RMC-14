@@ -19,6 +19,7 @@ public sealed partial class RMCChemMasterPresetWindow : DefaultWindow
     public RMCChemMasterPresetWindow()
     {
         RobustXamlLoader.Load(this);
+        SetWidth = float.NaN;
 
         ToggleQuickAccessButton.OnPressed += _ =>
         {

@@ -3,16 +3,16 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.Master">
     <BoxContainer Orientation="Vertical">
         <!-- Main Preset Row -->
-        <BoxContainer Orientation="Horizontal" Margin="2" MinHeight="36">
+        <BoxContainer Orientation="Horizontal" Margin="2" MinHeight="36" MinWidth="350">
             <!-- Bottle Color Icon -->
             <TextureRect Name="BottleColorView" Access="Public" SetSize="24 24"
                          Stretch="KeepAspectCentered" Margin="0 0 2 0" />
             <!-- Pill Type Icon -->
             <TextureRect Name="PillTypeView" Access="Public" SetSize="24 24"
                          Stretch="KeepAspectCentered" Margin="0 0 5 0" />
-            <!-- Apply Preset (Also shows preset name, label, slot) -->
+            <!-- Apply Preset (Button shows preset name, "label", [slot]) -->
             <Button Name="ApplyButton" Access="Public" StyleClasses="OpenBoth"
-                    HorizontalExpand="True" HorizontalAlignment="Stretch" />
+                    HorizontalExpand="True" />
             <!-- Quick Access Button -->
             <Button Name="QuickAccessButton" Access="Public" StyleClasses="OpenBoth"
                     Margin="2 0 0 0" MinWidth="28" MinHeight="28" />
