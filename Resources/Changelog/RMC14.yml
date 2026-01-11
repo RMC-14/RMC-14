@@ -1,69 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added the Custom M1984 and Custom M44, as well as the HG-45 'Aguila'
-      and HG-45 'Marina'.
-    type: Add
-  - message: Added the Custom M1984/M44, HG-45s, ZHNK-72 and T73 to the weapon loadout
-      category.
-    type: Add
-  id: 2226
-  time: '2025-08-26T04:15:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6945
-- author: noctyrnal
-  changes:
-  - message: Updated the sprites for the M54C Mk1, M54C Mk2, M54C2, M54CE2, M59A and
-      the Smartgun.
-    type: Tweak
-  - message: Fixed a copyrighted rifle being visible on certain vendors. It now correctly
-      has an M54C in the texture instead.
-    type: Fix
-  id: 2227
-  time: '2025-08-26T04:17:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7586
-- author: Djvarik and J C Denton
-  changes:
-  - message: Circuitboards now fit in the M276 Pattern Toolbelt Rig, M277 Pattern
-      Construction Rig, and tools pouch.
-    type: Fix
-  - message: Hive structures are now properly capitalized.
-    type: Fix
-  - message: The warden now has their proper headset, which is mechanically identical
-      to the CMP's.
-    type: Add
-  - message: Electro Cigs and WeYa Cigs vendors.
-    type: Add
-  - message: 3-slot Black Webbing has been ported and can now be found in many vendors.
-    type: Add
-  - message: The correspondent vendor now contains the correspondent cap and grey
-      fedora.
-    type: Add
-  id: 2228
-  time: '2025-08-26T04:28:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6970
-- author: x5tink
-  changes:
-  - message: Black Drop Pouches
-    type: Add
-  id: 2229
-  time: '2025-08-26T04:29:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7163
-- author: J C Denton
-  changes:
-  - message: Fixed an inaccessible area on LV-522 being accessible by melting it's
-      entrance podlocks.
-    type: Fix
-  id: 2230
-  time: '2025-08-27T03:01:46.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7626
-- author: UnicornOnLSD
-  changes:
-  - message: SLs can now choose between B12 (recommended) and M4 for free (instead
-      of having to buy the M4)
-    type: Add
-  id: 2231
-  time: '2025-08-29T03:41:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6564
 - author: Ian321
   changes:
   - message: Overfull pods now bolt open after exploding
@@ -4733,5 +4668,56 @@
   id: 2728
   time: '2026-01-11T10:38:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8805
+- author: Thereisabear
+  changes:
+  - message: Fixes Bravo Neckerchief colour when folded, it now represents Bravo as
+      intended.
+    type: Fix
+  id: 2729
+  time: '2026-01-11T10:41:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8761
+- author: Ian321
+  changes:
+  - message: The dropship terminal can now be used by the marines to summon a dropship.
+    type: Add
+  - message: The queen can now lock a dropships for 10 minutes before hijacking.
+    type: Add
+  id: 2730
+  time: '2026-01-11T10:45:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8345
+- author: Bobert-Brockson
+  changes:
+  - message: Praetorian sizzle no longer does 0 damage if the 5th stack is applied
+      by spray acid.
+    type: Fix
+  id: 2731
+  time: '2026-01-11T10:43:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8843
+- author: CatAndHats
+  changes:
+  - message: Flamethowers now warn you when you are out of fuel
+    type: Fix
+  id: 2732
+  time: '2026-01-11T10:44:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8599
+- author: Dygon
+  changes:
+  - message: Alt-clicking a target dummy allows adjusting its armor values.
+    type: Add
+  - message: Hitting a target dummy or humanoid with the XM88 now grants a stack.
+    type: Tweak
+  - message: Target dummies can now be lit on fire and extinguished.
+    type: Tweak
+  id: 2733
+  time: '2026-01-11T10:45:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8662
+- author: Arykh
+  changes:
+  - message: Fixed the stethoscope falsely claiming that larva burst victims were
+      still alive.
+    type: Fix
+  id: 2734
+  time: '2026-01-11T10:42:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8846
 Name: RMC14
 Order: -1
