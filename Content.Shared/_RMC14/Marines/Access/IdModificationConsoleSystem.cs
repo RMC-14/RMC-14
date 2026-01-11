@@ -301,6 +301,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         Dirty(uid.Value, access);
     }
 
+    //TODO RMC14 add ranks tab
+
+    // private void RankUpdate(Entity<IdCardComponent> card, RankPrototype Rank)
+    // {
+    //
+    // }
+
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
     {
         if (ev.WasModified<AccessLevelPrototype>())
@@ -432,6 +439,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         ent.Comp.HiddenAccessList = accessListHidden;
 
         var groupList = new HashSet<ProtoId<AccessGroupPrototype>>();
+        // var groupListHidden = new HashSet<ProtoId<AccessGroupPrototype>>();
         var groupGroups = new HashSet<ProtoId<AccessGroupPrototype>>();
 
         foreach (var accessGroup in _accessGroup.Values)
@@ -444,6 +452,11 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                     groupList.Add(accessGroup);
             }
         }
+        // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
+        // {
+        //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
+        //         groupListHidden.Add(accessGroup);
+        // }
 
         ent.Comp.JobGroups = groupGroups;
         ent.Comp.JobList = groupList;

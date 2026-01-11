@@ -193,6 +193,7 @@ public sealed class SentrySystem : EntitySystem
         if(!ent.Comp.HomingShots)
             return;
 
+        //Make projectiles shot from a sentry gun homing.
         foreach (var projectile in args.FiredProjectiles)
         {
             if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
