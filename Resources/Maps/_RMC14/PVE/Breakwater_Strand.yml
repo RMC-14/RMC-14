@@ -10484,7 +10484,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: CMArmorRiot
+- proto: RMCArmorRiotCivilian
   entities:
   - uid: 3892
     components:

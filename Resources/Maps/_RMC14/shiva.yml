@@ -38053,7 +38053,7 @@ entities:
       parent: 1
     - type: SpriteSetRenderOrder
       offset: 0.7,-1.45
-- proto: CMArmorRiot
+- proto: RMCArmorRiotCivilian
   entities:
   - uid: 265
     components:
