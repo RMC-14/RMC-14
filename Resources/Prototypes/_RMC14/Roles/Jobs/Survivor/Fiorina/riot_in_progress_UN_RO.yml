@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCMBDeputy
-  id: CMSurvivorFiorinaRiotInProgressUNRiotOfficer
-  name: cm-job-name-survivor-riot-in-progress-united-nations-riot-officer
+  id: RMCSurvivorFiorinaRiotInProgressUNRiotOfficer
+  name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
@@ -28,6 +28,7 @@
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-riot-officer
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+  greeting: rmc-job-greeting-riot-in-progress-UN-RO
 
 - type: startingGear
   parent: RMCGearSurvivorCMBDeputy
@@ -47,7 +48,7 @@
   name: special survivor fiorina riot in progress united nations riot officer spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorFiorinaRiotInProgressUnitedNationsRiotOfficer
+    job_id: RMCSurvivorFiorinaRiotInProgressUNRiotOfficer
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi

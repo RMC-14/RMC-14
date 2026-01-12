@@ -1,7 +1,7 @@
 - type: job
   parent: CMSurvivorCMBDeputy
-  id: CMSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
-  name: cm-job-name-survivor-riot-in-progress-colony-marshal-bureau-riot-control-officer
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  name: rmc-job-name-bureau-riot-control-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   ranks:
@@ -9,7 +9,7 @@
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   accessGroups:
   - ColonistSec
-  spawnMenuRoleName: Colony Marshal Bureau Riot Control Officer (Special Survivor)
+  spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,8 +26,9 @@
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetCMBDeputy
     - type: JobPrefix
-      prefix: cm-job-prefix-survivor-riot-officer
+      prefix: rmc-job-prefix-bureau-riot-control-officer
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
 
 - type: startingGear
   parent: RMCGearSurvivorCMBDeputy
@@ -47,7 +48,7 @@
   name: special survivor fiorina riot in progress colony marshal bureau riot control officer spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
