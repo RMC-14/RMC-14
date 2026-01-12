@@ -27,6 +27,7 @@
 - type: entity
   parent: CMArmorRiot
   id: RMCArmorRiotCivilianOld
+  name: old riot control armor
   description: Barring the slightly off-color plates, it's preserved quite well.
   components:
   - type: Sprite
