@@ -23,6 +23,7 @@
   - type: Tag
     tags:
     - Radio
+  - type: ChatRepeatIgnoreSender # RMC14
   - type: InteractedBlacklist
     blacklist:
       components:

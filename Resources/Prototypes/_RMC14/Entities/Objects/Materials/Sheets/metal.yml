@@ -189,7 +189,7 @@
   parent: CMSheetMetalBase
   id: CMSheetPlasteel
   name: plasteel sheet
-  description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is."
+  description: Plasteel is an expensive, durable material made from combining platinum, steel, and advanced polymers to create a metal that is corrosion-resistant, highly durable, and lightweight. The only reason this isn't used more often is because of how damn costly it is.
   suffix: Filled
   components:
     - type: RMCConstructionItem
