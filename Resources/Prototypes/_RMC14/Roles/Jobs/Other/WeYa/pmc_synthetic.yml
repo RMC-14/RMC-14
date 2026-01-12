@@ -55,13 +55,17 @@
         types:
           Blunt: 35
     - type: Synth
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
   hidden: true
 
 - type: startingGear
   id: RMCGearPMCSynthetic
   equipment:
     head: ArmorHelmetPMCOfficer # Why the shit is the PMC beret a HELMET???
-    ears: RMCHeadsetDistressWeYa
+    ears: RMCHeadsetDistressPMC
     # eyes: RMCGogglesMeson // TODO RMC14 mesons
     back: RMCPMCSyntheticSmartpack
     belt: RMCBeltMedicBagPMCFilled

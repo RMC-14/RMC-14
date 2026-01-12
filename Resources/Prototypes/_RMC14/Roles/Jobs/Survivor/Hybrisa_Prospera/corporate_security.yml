@@ -44,6 +44,6 @@
     - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
     primaryWeaponChance: 1
     randomOutfits:
-    - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
-    - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
-    - [ RMCArmorHelmetPMCCorporateLeadHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisaLead ]
+    - [ RMCHeadCapWestonYamadaDark, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
+    - [ RMCArmorHelmetPMCCorporateHybrisa, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
+    - [ RMCArmorHelmetPMCCorporateLeadHybrisa, RMCJumpsuitVeteranPMCHybrisaLead, CMArmorM4PMCCorporateLead ]
