@@ -26,8 +26,18 @@
 
 - type: entity
   parent: CMArmorRiot
-  id: CMArmorRiotOld
+  id: RMCArmorRiotCivilianOld
   description: Barring the slightly off-color plates, it's preserved quite well.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
+
+- type: entity
+  parent: CMArmorRiot
+  id: RMCArmorRiotCivilian
+  name: riot control armor
+  description: An older design of the more commonly known M5 riot control armor used by the military police, now used by civilian law enforcement. Used to suppress riots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot_civilian.rsi
+ 
