@@ -217,3 +217,16 @@
       probability: 1
       nightmareScenario: crashlanding_offices
     replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisCrashlandingEva
+  name: Crashlanding Eva
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
+      probability: 1
+      nightmareScenario: crashlanding_offices
+    replaceAreas: false
