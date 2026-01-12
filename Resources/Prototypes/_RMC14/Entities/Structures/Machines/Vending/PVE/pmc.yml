@@ -132,7 +132,7 @@
     sections:
     - name: Food
       entries:
-      - id: RMCMREWeYaPMC
+      - id: RMCMREWeYa
         name: MRE
         amount: 5
       - id: RMCBoxMRE  # TODO RMC14 - PMC rations
