@@ -12,3 +12,8 @@
   id: rmcmango
   flavorType: Complex
   description: rmc-flavor-complex-mango
+
+- type: flavor
+  id: rmckiwi
+  flavorType: Complex
+  description: like kiwi

@@ -12,3 +12,13 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+
+- type: reagent
+  id: RMCJuiceBug
+  name: rmc-reagent-name-juice-bug
+  parent: BaseJuice
+  desc: rmc-reagent-desc-juice-bug
+  physicalDesc: reagent-physical-desc-bubbly
+  color: "#2ca314"
+  flavor: rmckiwi
+  
