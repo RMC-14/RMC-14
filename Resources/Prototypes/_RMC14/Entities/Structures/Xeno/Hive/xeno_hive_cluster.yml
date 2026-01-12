@@ -83,3 +83,4 @@
   - type: RMCAlternateSprite
     normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
     alternateSprite: _RMC14/Structures/Xenos/hive_cluster_old.rsi
+  - type: QueenEyeVision
