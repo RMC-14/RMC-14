@@ -6,6 +6,8 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -29,6 +31,7 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     public int CharacterLimit { get; private set; }
     public int MinCharacterLimit { get; private set; }
@@ -264,6 +267,11 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
             _popup.PopupCursor(Loc.GetString("rmc-award-recommendation-no-computer"), actor.Value, PopupType.SmallCaution);
             return;
         }
+
+        var actorComp = Comp<ActorComponent>(actor.Value);
+        _adminLog.Add(
+            LogType.RMCMedalRecommendation,
+            $"{actorComp.PlayerSession.Name} ({Name(actor.Value)}) submitted a medal recommendation for {recommendedName} (lastPlayerId: {recommendedLastPlayerId}) with reason: {message}");
 
         if (recommendedLastPlayerId != null)
         {
