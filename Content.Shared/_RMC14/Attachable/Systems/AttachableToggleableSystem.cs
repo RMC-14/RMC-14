@@ -28,6 +28,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Physics;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Entrenching;
 
 namespace Content.Shared._RMC14.Attachable.Systems;
 
@@ -520,6 +521,9 @@ public sealed class AttachableToggleableSystem : EntitySystem
                     {
                         if (!TryComp(entity, out FixturesComponent? fixturesComponent) || !Transform(entity).Anchored)
                             continue;
+
+                        if (HasComp<BarricadeComponent>(entity))
+                            return entity;
 
                         foreach (var fixture in fixturesComponent.Fixtures.Values)
                         {
