@@ -16,9 +16,24 @@
   prefix: Dr.
 
 - type: rank
+  id: RMCRankCivilianAssistantProfessor
+  name: Assistant Professor
+  prefix: Asst. Prof.
+
+- type: rank
+  id: RMCRankCivilianAssociateProfessor
+  name: Associate Professor
+  prefix: Assoc. Prof.
+
+- type: rank
   id: RMCRankCivilianProfessor
   name: Professor
   prefix: Prof.
+
+- type: rank
+  id: RMCRankCivilianRegentsProfessor
+  name: Regents Professor
+  prefix: Regents Prof.
 
 - type: rank
   id: RMCRankCivilianRepresentative
