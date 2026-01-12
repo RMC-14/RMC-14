@@ -93,4 +93,19 @@ public sealed partial class RMCChemMasterPresetRow : BoxContainer
             QuickAccessButton.RemoveStyleClass(StyleNano.StyleClassButtonColorGreen);
         }
     }
+
+    public int? GetSelectedQuickAccessSlot()
+    {
+        return _selectedQuickAccessSlot;
+    }
+
+    public void UpdateSlotAvailability(HashSet<int>? usedSlots)
+    {
+        foreach (var (slot, button) in _slotButtons)
+        {
+            var isUsed = usedSlots?.Contains(slot) ?? false;
+            var isCurrent = _selectedQuickAccessSlot == slot;
+            button.Disabled = isUsed && !isCurrent;
+        }
+    }
 }

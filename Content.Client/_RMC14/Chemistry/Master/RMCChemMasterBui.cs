@@ -50,6 +50,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     private readonly Dictionary<EntityUid, RMCChemMasterPillBottleRow> _bottleRows = new();
     private readonly Dictionary<int, RMCChemMasterReagentRow> _beakerRows = new();
     private readonly Dictionary<int, RMCChemMasterReagentRow> _bufferRows = new();
+    private readonly Dictionary<string, RMCChemMasterPresetRow> _presetRows = new();
     private readonly List<int> _toRemove = new();
     private bool _showQuickAccess = true;
 
@@ -743,6 +744,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
 
         _presetWindow.SavedPresetsContainer.RemoveAllChildren();
         _presetWindow.NoPresetsLabel.Visible = _presetManager.Presets.Count == 0;
+        _presetRows.Clear();
 
         var usedSlots = new HashSet<int>();
         foreach (var p in _presetManager.Presets)
@@ -756,6 +758,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             var preset = _presetManager.Presets[i];
             var index = i;
             var row = new RMCChemMasterPresetRow();
+            _presetRows[preset.Name] = row;
 
             // Set pill bottle color icon
             var colorSpecifier = new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{(int) preset.BottleColor}");
@@ -798,7 +801,28 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                     QuickAccessLabel = preset.QuickAccessLabel,
                 };
                 _presetManager.SavePreset(updatedPreset);
-                RefreshPresetsList(chemMaster);
+
+                // Update the button text for this row
+                var quickAccessButtonText = preset.Name;
+                if (!string.IsNullOrWhiteSpace(preset.BottleLabel))
+                    quickAccessButtonText += $" \"{preset.BottleLabel}\"";
+                if (newSlot != null)
+                    quickAccessButtonText += $" [Q{newSlot}]";
+                row.ApplyButton.Text = quickAccessButtonText;
+                row.SetHasQuickAccess(newSlot != null);
+
+                // Recalculate used slots and update all rows' slot availability
+                var newUsedSlots = new HashSet<int>();
+                foreach (var p in _presetManager.Presets)
+                {
+                    if (p.QuickAccessSlot != null)
+                        newUsedSlots.Add(p.QuickAccessSlot.Value);
+                }
+                foreach (var (_, presetRow) in _presetRows)
+                {
+                    presetRow.UpdateSlotAvailability(newUsedSlots);
+                }
+
                 UpdateQuickAccessBar();
             };
 
