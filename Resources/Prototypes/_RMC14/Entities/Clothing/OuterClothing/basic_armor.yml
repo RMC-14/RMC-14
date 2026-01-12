@@ -27,19 +27,25 @@
 
 - type: entity
   parent: CMArmorRiot
-  id: RMCArmorRiotCivilianOld
-  name: old riot control armor
+  id: RMCArmorRiotCivilian
+  name: riot suit
+  description: A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement.
+  suffix: Civilian
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot_civilian.rsi
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
+    walkModifier: 0.62
+    sprintModifier: 0.62
+  - type: CMArmor
+    melee: 30
+    bullet: 10
+    explosionArmor: 10
+
+- type: entity
+  parent: CMArmorRiot
+  id: CMArmorRiotOld
   description: Barring the slightly off-color plates, it's preserved quite well.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/old_riot.rsi
-
-- type: entity
-  parent: CMArmorRiot
-  id: RMCArmorRiotCivilian
-  name: riot control armor
-  description: An older design of the more commonly known M5 riot control armor used by the military police, now used by civilian law enforcement. Used to suppress riots.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot_civilian.rsi
- 
