@@ -100,6 +100,9 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.MessageLineEdit.Visible = !s.LargeInput;
         container.MessageTextEdit.Visible = s.LargeInput;
 
+        if (container.MessageTextEdit.Visible)
+            container.MessageLabel.MaxWidth = 500;
+
         // Set placeholders based on SmartCheck
         if (s.SmartCheck)
         {

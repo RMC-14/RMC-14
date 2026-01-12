@@ -18,7 +18,7 @@ rmc-medal-recipient-prompt = Who do you want to award a medal to?
 rmc-medal-type = Medal Type
 rmc-medal-type-prompt = What type of medal do you want to award?
 
-rmc-medal-citation-prompt = What should the medal citation read?
+rmc-medal-citation-prompt = [bold]What should the medal citation read?[/bold]
 rmc-medal-awarded = Medal awarded
 
 # Medal Errors
@@ -30,7 +30,7 @@ rmc-award-recommendation-verb = Recommend for award
 rmc-award-recommendation-verb-message = Recommend a person for an award for special merits.
 rmc-award-recommendation-title = Award Recommendation
 rmc-award-recommendation-prompt = Who do you want to recommend for award?
-rmc-award-recommendation-reason = Why are you recommending?
+rmc-award-recommendation-reason = [bold]Why are you recommending?[/bold]
 rmc-award-recommendation-empty = You need to provide a reason for the recommendation.
 rmc-award-recommendation-invalid = Could not find that marine.
 rmc-award-recommendation-no-targets = There is no one to recommend right now.

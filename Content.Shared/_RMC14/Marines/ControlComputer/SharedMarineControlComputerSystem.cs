@@ -120,9 +120,10 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        foreach (var name in _medalsDataset.Values)
+        foreach (var medalId in _medalsDataset.Values)
         {
-            options.Add(new DialogOption(Loc.GetString(name), new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, Loc.GetString(name), args.LastPlayerId)));
+            var medalName = Loc.GetString(medalId);
+            options.Add(new DialogOption(medalName, new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, medalId, args.LastPlayerId)));
         }
 
         _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-medal-type"), options, Loc.GetString("rmc-medal-type-prompt"));
@@ -136,8 +137,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (!TryGetEntity(args.Actor, out var actor))
             return;
 
-        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, args.Name, LastPlayerId: args.LastPlayerId);
-        _dialog.OpenInput(ent, actor.Value, Loc.GetString("rmc-medal-citation-prompt"), ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
+        var medalName = Loc.GetString(args.MedalId);
+        var medalDescription = Loc.GetString($"{args.MedalId}-desc");
+        var prompt = $"[italic]{medalName} - {medalDescription}[/italic]\n\n{Loc.GetString("rmc-medal-citation-prompt")}";
+        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, medalName, LastPlayerId: args.LastPlayerId);
+        _dialog.OpenInput(ent, actor.Value, prompt, ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
     }
 
     private void OnComputerMedalMessage(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMessageEvent args)
