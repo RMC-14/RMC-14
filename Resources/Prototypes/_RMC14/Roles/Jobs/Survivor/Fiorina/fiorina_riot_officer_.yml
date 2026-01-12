@@ -10,6 +10,8 @@
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: Fiorina Riot Officer (Survivor)
+  icon: "RMCJobIconBureauRCO"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -52,3 +54,10 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauRCO
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_rco

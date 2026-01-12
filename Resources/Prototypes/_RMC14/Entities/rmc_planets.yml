@@ -178,20 +178,20 @@
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
-      survivorJobScenarios:
-        riot_in_progress:
-          CMSurvivorSecurity:
-          - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
-          CMSurvivorCorporate:
-          - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
-          CMSurvivorDoctor:
-          - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
-          CMSurvivorEngineer:
-          - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
-          CMSurvivorScientist:
-          - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
-          CMSurvivor:
-          - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
+    survivorJobScenarios:
+      riot_in_progress:
+        CMSurvivorSecurity:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        CMSurvivorScientist:
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        CMSurvivor:
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
 
 - type: entity
   id: RMCPlanetTrijent

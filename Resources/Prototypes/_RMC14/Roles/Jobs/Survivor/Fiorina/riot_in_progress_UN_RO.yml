@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivorCMBDeputy
+  parent: CMSurvivorFiorinaRiotOfficer
   id: RMCSurvivorFiorinaRiotInProgressUNRiotOfficer
   name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
@@ -24,23 +24,24 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetCMBDeputy
+      preset: RMCSurvivorPresetRiotInProgressUNRO
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-riot-officer
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
   greeting: rmc-job-greeting-riot-in-progress-UN-RO
 
 - type: startingGear
-  parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
   equipment:
     jumpsuit: RMCJumpsuitUNSecurity
+    id: RMCIDCardCMBDeputySurvivor
     back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiot
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: RMCGlassesSecurityBlue
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
-    pocket2: RMCPouchMagazineLarge
+    pocket1: RMCPouchSurvivalBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,3 +54,23 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressUNRO
+  name: riot in progress UN RO preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCWebbingHolsterBlackB92FS, ArmorHelmetPMCRiot ]
+    - [ RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCWebbingHolsterBlackMK45, RMCHeadCapBureau ]
+    - [ RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCWebbingHolsterBlackM1984, RMCHeadBeanieGray ]
+    - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCWebbingHolsterBlackMK45, ArmorHelmetPMCRiot ]
+    - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, RMCWebbingHolsterBlackMK45, ArmorHelmetPMCRiot ]
+    primaryWeaponChance: 1
+

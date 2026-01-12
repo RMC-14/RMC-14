@@ -24,23 +24,22 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetCMBDeputy
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-officer
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
   greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
 
 - type: startingGear
-  parent: RMCGearSurvivorCMBDeputy
+  parent: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
   id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   equipment:
-    jumpsuit: RMCJumpsuitUNSecurity
-    back: CMSatchelSecuritySurvivorFillRiotOfficer
-    outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiot
-    gloves: CMHandsBlackMarine
-    shoes: RMCBootsPMCFilled
-    pocket2: RMCPouchMagazineLarge
+    jumpsuit: RMCSwatCMBUniformSpearhead
+    outerClothing: RMCArmorM4RMedium
+    mask: RMCMaskSWAT
+    head: RMCArmorHelmetM10CMB
+    back: CMSatchelSecuritySurvivorFillRiotControlOfficer
+
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -53,3 +52,22 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMBRCO
+  name: riot in progress UN RO preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact ]
+    primaryWeaponChance: 1

@@ -15,7 +15,7 @@ rmc-ghost-name-bureau-deputy = CMB Deputy (Friendly)
 rmc-job-name-bureau-deputy = CMB Deputy
 rmc-job-prefix-bureau-deputy = CMB DEP
 
-rmc-job-name-bureau-riot-control-officer = Riot Control Officer
+rmc-job-name-bureau-riot-control-officer = CMB Riot Control Officer
 rmc-job-prefix-bureau-riot-control-officer = CMB RCO
 
 rmc-ghost-name-bureau-observer = Interstellar Life Rights Observer (Friendly)
