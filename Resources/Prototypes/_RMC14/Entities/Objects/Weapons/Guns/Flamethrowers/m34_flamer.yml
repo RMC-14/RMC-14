@@ -193,6 +193,9 @@
       rmc_flamer_tank:
         maxVol: 100
         reagents: [ ]
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 3750
 
 - type: entity
   parent: RMCTankFlamer

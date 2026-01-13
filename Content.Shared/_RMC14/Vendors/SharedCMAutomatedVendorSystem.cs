@@ -190,8 +190,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 AmountUpdated(ent, entry);
         }
 
-        if (_boxEntries.Count > 0)
-            Dirty(ent);
+        Dirty(ent);
     }
 
     private void OnExamined(Entity<CMAutomatedVendorComponent> ent, ref ExaminedEvent args)

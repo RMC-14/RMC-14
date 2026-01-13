@@ -95,6 +95,16 @@
 
 - type: entity
   parent: ArmorHelmetPMC
+  id: RMCArmorHelmetPMCDark
+  name: We-Ya armored cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
   id: ArmorHelmetPMCCorporate
   name: We-Ya corporate security helmet
   description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
@@ -173,7 +183,7 @@
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCEngineer
   name: pmc engineer helmet
-  description: An advanced technician helmet with a black finish, including advanced welding protection and resistence to the potential industrial hazards, but has less kevlar against potential firefights.
+  description: An advanced technician helmet with a black finish, including advanced welding protection and resistance to the potential industrial hazards, but has less kevlar against potential firefights.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/engineer.rsi
@@ -226,7 +236,7 @@
 - type: entity
   parent: ArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateHybrisa
-  description: A basic skull-helm with a orange saftey vison fitted. Worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
+  description: A basic skull-helm with a orange safety visor fitted. Worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
   suffix: Hybrisa
   components:
   - type: Sprite
@@ -237,7 +247,7 @@
 - type: entity
   parent: ArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateLeadHybrisa
-  description: A basic skull-helm with a orange saftey vison fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
+  description: A basic skull-helm with a orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   suffix: Hybrisa
   components:
   - type: Sprite
