@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 05:43:59
-  entityCount: 6133
+  time: 01/13/2026 06:13:03
+  entityCount: 6134
 maps:
 - 1
 grids:
@@ -23867,7 +23867,7 @@ entities:
       pos: -44.5,-4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -111879.4
+      secondsUntilStateChange: -112117.82
       state: Opening
     - type: Airlock
       autoClose: False
@@ -25222,7 +25222,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -117691.234
+      secondsUntilStateChange: -117929.66
       state: Opening
   - uid: 3329
     components:
@@ -33481,7 +33481,7 @@ entities:
       pos: -8.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -769.30334
+      secondsUntilStateChange: -1007.7263
       state: Closing
   - uid: 4466
     components:
@@ -33490,7 +33490,7 @@ entities:
       pos: -9.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -769.83673
+      secondsUntilStateChange: -1008.2597
       state: Closing
   - uid: 4467
     components:
@@ -33511,7 +33511,7 @@ entities:
       pos: -12.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -772.3367
+      secondsUntilStateChange: -1010.75964
       state: Closing
   - uid: 4470
     components:
@@ -33532,7 +33532,7 @@ entities:
       pos: -11.5,-4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -75277.414
+      secondsUntilStateChange: -75515.836
       state: Closing
   - uid: 4473
     components:
@@ -35101,30 +35101,36 @@ entities:
   - uid: 4723
     components:
     - type: Transform
-      pos: -30.5,7.5
+      rot: 3.141592653589793 rad
+      pos: -26.5,7.5
       parent: 2
   - uid: 4724
     components:
     - type: Transform
       rot: 3.141592653589793 rad
-      pos: -30.5,4.5
+      pos: -30.5,7.5
       parent: 2
   - uid: 4725
     components:
     - type: Transform
-      pos: -22.5,7.5
+      rot: 3.141592653589793 rad
+      pos: -21.5,7.5
       parent: 2
   - uid: 4726
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -22.5,4.5
+      rot: -1.5707963267948966 rad
+      pos: -15.5,7.5
       parent: 2
   - uid: 4727
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -15.5,7.5
+      pos: -30.5,4.5
+      parent: 2
+  - uid: 6134
+    components:
+    - type: Transform
+      pos: -21.5,4.5
       parent: 2
 - proto: RMCLightFixtureDoubleOffset
   entities:
@@ -41788,516 +41794,6 @@ entities:
     - type: Transform
       pos: -68.5,-11.5
       parent: 2
-    - type: CMAutomatedVendor
-      sections:
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCVndorBundleRCMPVEMGL
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCMortarKit
-        takeOne: CMPrimary
-        takeAll: null
-        choices: null
-        name: Fire Support Set (Mandatory)
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCHeadRoyalHelmetBallistic
-        takeOne: null
-        takeAll: null
-        choices:
-        - RMCAccesories
-        - 1
-        name: Helmet (Mandatory)
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCBackpackRCMSmall
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCBackpackRCMMedium
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCBackpackRCMLarge
-        takeOne: null
-        takeAll: null
-        choices:
-        - CMBackpack
-        - 1
-        name: Backpack
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: CMBeltMarine
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCBeltHolsterPistolTSE
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCBeltUtilityGeneral
-        takeOne: null
-        takeAll: null
-        choices:
-        - CMBelt
-        - 1
-        name: Belt
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCArmorWebbingGrenade
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCArmorWebbingDrum
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCArmorWebbingPouch
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCArmorWebbingMag
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCArmorWebbingShell
-        takeOne: null
-        takeAll: null
-        choices:
-        - CMAccessories
-        - 1
-        name: Armor Webbing
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: Webbing
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: CMWebbingBlack
-        - replaceSlot: null
-          linkedEntries: []
-          name: Shoulder Holster
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCWebbingHolsterBlack
-        - replaceSlot: null
-          linkedEntries: []
-          name: Drop Pouch
-          amount: null
-          points: null
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCWebbingDropPouchBlack
-        takeOne: null
-        takeAll: null
-        choices:
-        - CMAccessories
-        - 1
-        name: Uniform Webbing
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: 15
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCMortarShellHE
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: 15
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCMortarShellIncendiary
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: 10
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCMortarShellFlare
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Mortar Shells
-      - hasBoxes: False
-        holidays: []
-        ranks: []
-        jobs: []
-        sharedSpecLimit: null
-        entries:
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: 20
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCPacketGrenade20mmHEFilled
-        - replaceSlot: null
-          linkedEntries: []
-          name: null
-          amount: null
-          points: 20
-          spawn: 1
-          recommended: False
-          multiplier: null
-          max: null
-          box: null
-          giveMapBlip: null
-          boxAmount: null
-          boxSlots: null
-          giveSquadRoleName: null
-          isAppendSquadRoleName: False
-          givePrefix: null
-          isAppendPrefix: False
-          giveIcon: null
-          id: RMCPacketGrenade20mmIncendiaryFilled
-        takeOne: null
-        takeAll: null
-        choices: null
-        name: Grenade Packets
 - proto: RMCRoyalMedicalAssistantVendor
   entities:
   - uid: 5862
