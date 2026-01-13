@@ -55,6 +55,10 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
@@ -573,14 +577,46 @@
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
   id: RMCPouchSling
-  name: sling strap # TODO RMC14 implement this
+  name: sling strap
   description: Keeps a single item attached to a strap.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/sling.rsi
+  - type: RMCStorageEjectHand
+    state: Last
   - type: Storage
     maxItemSize: Normal
-
+    whitelist:
+      components:
+      - Blowtorch
+      - Defibrillator
+      - Flash
+      - RMCMegaphone
+      - Whistle
+      tags:
+      - Binoculars
+      - CMFireExtinguisherPortable
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - FireExtinguisher
+      - Flashlight
+      - Multitool
+      - RMCDetector
+      - RMCPinpointer
+      - Screwdriver
+      - Shovel
+      - Wirecutter
+      - Wrench
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - Shovel
+  - type: FixedItemSizeStorage
+  - type: RMCSlingPouch
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # Cassetes Pouch
 - type: entity
@@ -595,7 +631,7 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 #3 slots
-    whitelist: 
+    whitelist:
       components:
       - CassetteTape
 
@@ -604,7 +640,7 @@
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchDrumPMC
   name: smartgun drum pouch
-  description: A heavy pouch designed for carrying a surplus of smargun drums.
+  description: A heavy pouch designed for carrying a surplus of smartgun drums.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_sgdrums_ammo.rsi

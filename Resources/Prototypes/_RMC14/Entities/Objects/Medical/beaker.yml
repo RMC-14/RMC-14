@@ -103,6 +103,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 500
 
 - type: entity
   parent: CMBeakerBase
@@ -146,6 +149,9 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 5000
 
 - type: entity
   parent: RMCBeakerBaseMetallic
@@ -211,6 +217,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 10000
 
 # Parent for containers that cannot be filled/drained by hand.
 - type: entity
@@ -302,6 +311,9 @@
   - type: RMCFlushableSolution
     solution: beaker
     flushTime: 3
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 500
 
 - type: Tag
   id: RMCMiniTank
@@ -336,6 +348,9 @@
     tags:
     - PressurizedCanister
     - ChemDispensable
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 2000
 
 - type: entity
   parent: RMCPressurizedCanister
@@ -479,6 +494,8 @@
   - type: Vial
   - type: StaticPrice
     price: 10
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCVial
