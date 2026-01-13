@@ -1,59 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added RMC14 Hot Chocolate and Tea
-    type: Add
-  - message: Added inhand sprites for the coffee cup
-    type: Add
-  - message: Gave the coffee cup the ability to be inserted into a drinks machine.
-    type: Tweak
-  id: 2249
-  time: '2025-08-29T05:07:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7556
-- author: SharkSnake98
-  changes:
-  - message: Arcturian Ace, Lady Fingers, Emerald Greens, Kierlan Electro Golds, Sol
-      Reds, and Sol Yellows, added to cig machines and loadout options
-    type: Add
-  - message: WeYa Sequoia beer containing 50u, as well as a beer pack
-    type: Add
-  - message: Straight Razor, a toggleable knife
-    type: Add
-  - message: Urban boots, Grey Boots, and Grey Gloves
-    type: Add
-  - message: A new Misc. section in the loadouts page
-    type: Add
-  - message: UNMC Chaplain patch, Io Flair, Peace Flair, Terratek Flair, UNMC Flair,
-      and movie ticket helmet garbs
-    type: Add
-  - message: All Boots! Magazines, as well as a new magazine, the WeYa Orrery
-    type: Add
-  - message: UNMC Headset headwear
-    type: Add
-  id: 2250
-  time: '2025-08-29T05:10:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7078
-- author: Aurallianz
-  changes:
-  - message: Admins can delay the round-end properly.
-    type: Add
-  id: 2251
-  time: '2025-08-29T06:06:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7455
-- author: PursuitInAshes
-  changes:
-  - message: Added a repaired version of Sorokyne for use in PVE.
-    type: Add
-  id: 2252
-  time: '2025-08-29T23:48:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7653
-- author: x5tink
-  changes:
-  - message: Fixed the requisitions vendor not having M4SPR extended magazines.
-    type: Fix
-  id: 2253
-  time: '2025-08-29T23:50:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7718
 - author: noctyrnal
   changes:
   - message: Executing someone via the Mateba or Winter Wyvern will have recoil when
@@ -4717,5 +4662,42 @@
   id: 2751
   time: '2026-01-13T08:47:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8707
+- author: texas1234567889
+  changes:
+  - message: Added the two missing black market crates to Chance's Claim.
+    type: Add
+  id: 2752
+  time: '2026-01-13T08:50:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8743
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne civilian roles having medical 3 and surgery 2.
+    type: Fix
+  id: 2753
+  time: '2026-01-13T08:50:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8833
+- author: Ian321
+  changes:
+  - message: The logistics officer can now also vend filled pistol and bullet boxes
+      from the vendors in the squad preparation areas.
+    type: Add
+  id: 2754
+  time: '2026-01-13T08:49:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8948
+- author: Thereisabear
+  changes:
+  - message: 'IMP Ammo Racks do not slow down as much, still stacks the slowdown if
+      you are holding multiple. Running: 29% -> 12% slowdown'
+    type: Tweak
+  id: 2755
+  time: '2026-01-13T08:48:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8924
+- author: J C Denton
+  changes:
+  - message: Added Morgue access.
+    type: Add
+  id: 2756
+  time: '2026-01-13T08:48:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8925
 Name: RMC14
 Order: -1
