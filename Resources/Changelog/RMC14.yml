@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DummeHytteOst
-  changes:
-  - message: Fixed the EMT - paramedic uniforms stating another color than they are.
-    type: Fix
-  id: 2267
-  time: '2025-08-30T00:34:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7549
 - author: Vermidia
   changes:
   - message: Fixed parasites spawning from carriers sometimes taking collision damage.
@@ -4697,5 +4690,24 @@
   id: 2769
   time: '2026-01-13T09:02:24.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8756
+- author: CatAndHats
+  changes:
+  - message: 'Added five new Map Inserts for Solaris: Cargo Containers, Lz1 Containers
+      Scramble, Reactor Meltdown, Chapel Cult, and Lambda Cave Mushrooms (look at
+      the PR for pictures)'
+    type: Add
+  - message: 'Fourteen pre-existing Solaris Map Inserts have recieved some love: Errors
+      fixed, decals added, new tiles placed, items given, and some polish done to
+      them (look at the PR for pictures)'
+    type: Tweak
+  - message: Fixed some Solaris Map Inserts deleting a row of tiles to their south
+    type: Fix
+  - message: Fixed some Solaris Map Inserts not having tacmap labels
+    type: Fix
+  - message: Fixed certain Solaris map tiles showing the pipes underneath them
+    type: Fix
+  id: 2770
+  time: '2026-01-13T22:52:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8928
 Name: RMC14
 Order: -1
