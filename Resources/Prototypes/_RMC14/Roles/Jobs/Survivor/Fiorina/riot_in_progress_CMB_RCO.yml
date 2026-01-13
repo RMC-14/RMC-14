@@ -1,15 +1,15 @@
 - type: job
-  parent: CMSurvivorCMBDeputy
+  parent: CMSurvivorSecurity
   id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   name: rmc-job-name-bureau-riot-control-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
-  ranks:
-    RMCRankCivilianOfficer: []
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
+  icon: "RMCJobIconBureauDeputy"
+  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
@@ -25,6 +25,13 @@
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetRiotInProgressCMBRCO
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-officer
   greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
@@ -37,7 +44,8 @@
     outerClothing: RMCArmorM4RMedium
     mask: RMCMaskSWAT
     head: RMCArmorHelmetM10CMB
-    back: CMSatchelSecuritySurvivorFillRiotControlOfficer
+    back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
+    eyes: RMCGlassesSecuritySwat
 
 
 - type: entity

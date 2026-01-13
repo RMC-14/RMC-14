@@ -249,7 +249,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  id: CMSatchelSecuritySurvivorFillRiotControlOfficer
+  id: RMCSatchelSecuritySurvivorFillRiotControlOfficer
   suffix: Survivor
   components:
   - type: StorageFill
