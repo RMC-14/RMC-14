@@ -2073,3 +2073,14 @@
     state: bailey
   - type: PatronFigurine
     id: 833ab8ba-7fa1-41a5-b342-07190ed2029f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVickyHowlitzer
+  name: Vicky Howlitzer figurine
+  description: "The local irritable 50 year-old Delta SGO Vulp. The figure itself has a few knicks and marks from the constant handling over time and has a faint smell of magnolias, reflecting its owner. Vicky says she looks more youthful than the figurine. She does not."
+  components:
+  - type: Sprite
+    state: vicky_howlitzer
+  - type: PatronFigurine
+    id: 75c30413-9e78-4767-b9bc-a05e3b677f8e
