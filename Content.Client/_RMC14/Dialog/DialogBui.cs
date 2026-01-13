@@ -1,8 +1,10 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
+using static Robust.Client.UserInterface.Control;
 
 namespace Content.Client._RMC14.Dialog;
 
@@ -34,10 +36,35 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
             {
                 foreach (var child in container.Options.Children)
                 {
-                    if (child is not Button { Text: not null } button)
+                    if (child is not ContainerButton button)
                         continue;
 
-                    button.Visible = button.Text.Contains(args.Text, StringComparison.OrdinalIgnoreCase);
+                    // Find label inside button
+                    Label? label = null;
+                    foreach (var subChild in button.Children)
+                    {
+                        if (subChild is BoxContainer boxContainer)
+                        {
+                            foreach (var boxChild in boxContainer.Children)
+                            {
+                                if (boxChild is Label lbl)
+                                {
+                                    label = lbl;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (subChild is Label lbl)
+                        {
+                            label = lbl;
+                            break;
+                        }
+                    }
+
+                    if (label == null || label.Text == null)
+                        continue;
+
+                    button.Visible = label.Text.Contains(args.Text, StringComparison.OrdinalIgnoreCase);
                 }
             };
 
@@ -50,15 +77,49 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.Message.Visible = container.Message.Text?.Length > 0;
 
         container.Options.DisposeAllChildren();
+        var spriteSystem = EntMan.System<SpriteSystem>();
+
         for (var i = 0; i < s.Options.Count; i++)
         {
             var option = s.Options[i];
-            var button = new Button
+
+            // Create button with icon and text inside
+            var button = new ContainerButton
+            {
+                StyleClasses = { ContainerButton.StyleClassButton, "OpenBoth" },
+                HorizontalExpand = true
+            };
+
+            var contentContainer = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalExpand = true
+            };
+
+            if (option.Icon != null)
+            {
+                var iconRect = new TextureRect
+                {
+                    SetWidth = 32,
+                    SetHeight = 32,
+                    HorizontalAlignment = HAlignment.Left,
+                    VerticalAlignment = VAlignment.Center,
+                    Margin = new Thickness(0, 0, 8, 0),
+                    Texture = spriteSystem.Frame0(option.Icon)
+                };
+                contentContainer.AddChild(iconRect);
+            }
+
+            var label = new Label
             {
                 Text = option.Text,
-                StyleClasses = { "OpenBoth" },
+                HorizontalExpand = true,
+                VerticalAlignment = VAlignment.Center
             };
-            button.Label.AddStyleClass("CMAlignLeft");
+            label.AddStyleClass("CMAlignLeft");
+            contentContainer.AddChild(label);
+
+            button.AddChild(contentContainer);
 
             var index = i;
             button.OnPressed += _ => SendPredictedMessage(new DialogOptionBuiMsg(index));

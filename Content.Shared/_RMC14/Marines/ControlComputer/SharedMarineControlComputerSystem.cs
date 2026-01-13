@@ -8,10 +8,10 @@ using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
-using Content.Shared.Dataset;
 using Content.Shared.Ghost;
 using Content.Shared.Popups;
 using Content.Shared.UserInterface;
+using System.Globalization;
 using System.Linq;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -19,6 +19,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
 
@@ -38,13 +39,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly WarshipSystem _warship = default!;
 
-    private LocalizedDatasetPrototype _medalsDataset = default!;
     private int _characterLimit = 1000;
 
     public override void Initialize()
     {
         base.Initialize();
-        _medalsDataset = _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedals");
         SubscribeLocalEvent<EvacuationEnabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationDisabledEvent>(OnRefreshComputers);
         SubscribeLocalEvent<EvacuationProgressEvent>(OnRefreshComputers);
@@ -120,10 +119,19 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
             return;
 
         var options = new List<DialogOption>();
-        foreach (var medalId in _medalsDataset.Values)
+        foreach (var medalEntityId in _commendation.GetAwardableMedalIds())
         {
-            var medalName = Loc.GetString(medalId);
-            options.Add(new DialogOption(medalName, new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, medalId, args.LastPlayerId)));
+            if (!_prototype.TryIndex(medalEntityId, out var medalProto))
+                continue;
+
+            var medalName = medalProto.Name;
+            if (!string.IsNullOrEmpty(medalName))
+            {
+                medalName = medalName[0].ToString().ToUpper() + medalName.Substring(1);
+            }
+            var icon = new SpriteSpecifier.EntityPrototype(medalEntityId);
+
+            options.Add(new DialogOption(medalName, new MarineControlComputerMedalNameEvent(args.Actor, args.Marine, medalEntityId, args.LastPlayerId), icon));
         }
 
         _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-medal-type"), options, Loc.GetString("rmc-medal-type-prompt"));
@@ -137,8 +145,15 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (!TryGetEntity(args.Actor, out var actor))
             return;
 
-        var medalName = Loc.GetString(args.MedalId);
-        var medalDescription = Loc.GetString($"{args.MedalId}-desc");
+        if (!_prototype.TryIndex(args.MedalEntityId, out var medalProto))
+            return;
+
+        var medalName = medalProto.Name;
+        if (!string.IsNullOrEmpty(medalName))
+        {
+            medalName = medalName[0].ToString().ToUpper() + medalName.Substring(1);
+        }
+        var medalDescription = medalProto.Description;
         var prompt = $"[italic][bolditalic]{medalName}[/bolditalic] - {medalDescription}[/italic]\n\n{Loc.GetString("rmc-medal-citation-prompt")}";
         var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, medalName, LastPlayerId: args.LastPlayerId);
         _dialog.OpenInput(ent, actor.Value, prompt, ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
