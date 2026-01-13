@@ -38,6 +38,10 @@
   parent: RMCBaseMedicalAccess
   name: id-card-access-level-medical
 
+- type: accessLevel
+  id: RMCAccessMorgue
+  parent: RMCBaseMedicalAccess
+  name: id-card-access-level-morgue
 
 - type: accessLevel
   id: CMAccessChemistry

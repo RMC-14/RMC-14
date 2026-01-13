@@ -120,6 +120,11 @@
 # Canisters can only transfer reagents OUT to reagent tanks, but CAN receive reagents from other containers.
 - type: entity
   abstract: true
+  parent: GasTankBase
+  id: CMGasTankBase
+  components:
+  - type: PhysicalComposition
+    materialComposition: {}
   parent: BaseItem
   id: RMCReagentGasTankBase
   components:
