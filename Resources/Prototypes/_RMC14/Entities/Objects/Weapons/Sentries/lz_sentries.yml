@@ -85,6 +85,8 @@
     - UNMC
   - type: TimedDespawnOnLanding
   - type: MarineIFF
+  - type: SleepNPC
+  - type: WakeNPCOnDropshipLanding
   - type: BlockXenoConstruction
 
 - type: htnCompound
