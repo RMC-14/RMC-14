@@ -1279,6 +1279,9 @@
   id: RMCAttachmentM16StockCollapsible
 
 - type: Tag
+  id: RMCAttachmentM16A5Stock
+
+- type: Tag
   id: RMCAttachmentM63Stock
 
 - type: Tag
