@@ -1,12 +1,13 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class DropshipEquipmentDeployerComponent : Component
+public sealed partial class RMCEquipmentDeployerComponent : Component
 {
     /// <summary>
     ///     The prototype to deploy.
@@ -56,6 +57,12 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
     [DataField, AutoNetworkedField]
     public bool AutoUnDeploy;
 
+    /// <summary>
+    ///     Whether the deployer can be activated by interacting with it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsDeployableByHand;
+
     [DataField, AutoNetworkedField]
     public Vector2i StarboardForeDeployDirection = new(1, 0);
 
@@ -84,8 +91,28 @@ public sealed partial class DropshipEquipmentDeployerComponent : Component
     public SpriteSpecifier.Rsi? WeaponDeployedSprite;
 
     [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi? ElectronicDeployedSprite;
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi DeployedSprite = new(new ResPath("_RMC14/Objects/dropship_utility_attachments.rsi"), "sentry_system_deployed");
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier DeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_1.ogg");
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier UnDeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_2.ogg");
+}
+
+[Serializable, NetSerializable]
+public enum EquipmentDeployerVisuals
+{
+    Sprite,
+    State,
+}
+
+[Serializable, NetSerializable]
+public enum EquipmentDeployState
+{
+    UnDeployed,
+    Deployed,
 }

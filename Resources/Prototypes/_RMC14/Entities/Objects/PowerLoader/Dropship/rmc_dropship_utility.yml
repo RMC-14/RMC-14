@@ -107,7 +107,8 @@
     attachableTypes:
     - RMCDropshipUtilityPoint
     - RMCDropshipWeaponPoint
-  - type: DropshipEquipmentDeployer
+  - type: RMCEquipmentDeployer
+    isDeployableByHand: true
     utilityDeployedSprite:
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
       state: mg_system_deployed
@@ -139,7 +140,7 @@
     attachableTypes:
     - RMCDropshipUtilityPoint
     - RMCDropshipWeaponPoint
-  - type: DropshipEquipmentDeployer
+  - type: RMCEquipmentDeployer
     deployPrototype: RMCSentryDropship
     dropShipWindowButtonText: Sentry
     starboardForeDeployDirection: 0, 1

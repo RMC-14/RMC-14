@@ -627,10 +627,10 @@ public sealed class PowerLoaderSystem : EntitySystem
                 return false;
             }
         }
-        else if (HasComp<DropshipEquipmentDeployerComponent>(used))
+        else if (HasComp<RMCEquipmentDeployerComponent>(used))
         {
             slotId = target.Comp.WeaponContainerSlotId;
-            msg = Loc.GetString("rmc-power-loader-occupied-weapon");
+            msg = Loc.GetString("rmc-power-loader-occupied-deployer");
         }
         else
         {

@@ -6,16 +6,16 @@ using Content.Shared._RMC14.Dropship.Utility.Systems;
 
 namespace Content.Server._RMC14.Dropship.Utility;
 
-public sealed class DropshipEquipmentDeployerSystem : SharedDropshipEquipmentDeployerSystem
+public sealed class RMCEquipmentDeployerSystem : SharedRMCEquipmentDeployerSystem
 {
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, FTLUpdatedRelayedEvent<FTLStartedEvent>>(OnFTLStarted);
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, FTLUpdatedRelayedEvent<FTLCompletedEvent>>(OnFTLCompleted);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnFTLStarted);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, DropshipRelayedEvent<FTLCompletedEvent>>(OnFTLCompleted);
     }
 
-    private void OnFTLStarted(Entity<DropshipEquipmentDeployerComponent> ent, ref FTLUpdatedRelayedEvent<FTLStartedEvent> args)
+    private void OnFTLStarted(Entity<RMCEquipmentDeployerComponent> ent, ref DropshipRelayedEvent<FTLStartedEvent> args)
     {
         if (!ent.Comp.AutoUnDeploy)
             return;
@@ -25,7 +25,7 @@ public sealed class DropshipEquipmentDeployerSystem : SharedDropshipEquipmentDep
         Dirty(ent);
     }
 
-    private void OnFTLCompleted(Entity<DropshipEquipmentDeployerComponent> ent, ref FTLUpdatedRelayedEvent<FTLCompletedEvent> args)
+    private void OnFTLCompleted(Entity<RMCEquipmentDeployerComponent> ent, ref DropshipRelayedEvent<FTLCompletedEvent> args)
     {
         ent.Comp.IsDeployable = true;
         Dirty(ent);

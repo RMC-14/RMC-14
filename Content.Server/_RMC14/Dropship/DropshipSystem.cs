@@ -115,7 +115,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             RaiseLocalEvent(ent, ref ev, true);
         }
 
-        RelayFTLToMountedEntities(ent, args);
+        RelayToMountedEntities(ent, args);
 
         if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
         {
@@ -164,7 +164,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             RaiseLocalEvent(ref ev);
         }
 
-        RelayFTLToMountedEntities(ent, args);
+        RelayToMountedEntities(ent, args);
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
@@ -558,12 +558,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
     }
 
     /// <summary>
-    ///     Relays FTL events to equipment slotted in the dropship's weapon or utility hardpoints.
+    ///     Relays events to equipment slotted in the dropship's weapon, utility and electronic hardpoints.
     /// </summary>
-    /// <param name="ent">The dropship entity that received the FTL event that will be relayed</param>
+    /// <param name="ent">The dropship entity that received the event that will be relayed</param>
     /// <param name="args">The raised event that is forwarded</param>
     /// <typeparam name="TEvent">The type of the event</typeparam>
-    private void RelayFTLToMountedEntities<TEvent>(Entity<DropshipComponent> ent, TEvent args) where TEvent : struct
+    private void RelayToMountedEntities<TEvent>(Entity<DropshipComponent> ent, TEvent args) where TEvent : struct
     {
         foreach (var attachPoint in ent.Comp.AttachmentPoints)
         {
@@ -572,13 +572,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _container.TryGetContainer(attachPoint, weaponPoint.WeaponContainerSlotId, out container);
             else if (TryComp(attachPoint, out DropshipUtilityPointComponent? utilityPoint))
                 _container.TryGetContainer(attachPoint, utilityPoint.UtilitySlotId, out container);
+            else if (TryComp(attachPoint, out DropshipElectronicSystemPointComponent? electronicPoint))
+                _container.TryGetContainer(attachPoint, electronicPoint.ContainerId, out container);
 
             if (container == null)
                 continue;
 
             foreach (var mountedEntity in container.ContainedEntities)
             {
-                var relayedEvent = new FTLUpdatedRelayedEvent<TEvent>(args, attachPoint);
+                var relayedEvent = new DropshipRelayedEvent<TEvent>(args, attachPoint);
                 RaiseLocalEvent(mountedEntity, ref relayedEvent);
             }
         }

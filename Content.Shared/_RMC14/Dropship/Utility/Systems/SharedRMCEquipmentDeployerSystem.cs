@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Emplacements;
+using Content.Shared._RMC14.PowerLoader;
 using Content.Shared._RMC14.Sentry;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -15,7 +16,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
-public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySystem
+public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
@@ -26,13 +27,13 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, EntGotInsertedIntoContainerMessage>(OnInserted);
-        SubscribeLocalEvent<DropshipEquipmentDeployerComponent, EntGotRemovedFromContainerMessage>(OnRemovedFromContainer);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, InteractHandEvent>(OnInteract);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotInsertedIntoContainerMessage>(OnInserted);
+        SubscribeLocalEvent<RMCEquipmentDeployerComponent, EntGotRemovedFromContainerMessage>(OnRemovedFromContainer);
     }
 
-    private void OnMapInit(Entity<DropshipEquipmentDeployerComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<RMCEquipmentDeployerComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.DeployPrototype == null)
             return;
@@ -46,13 +47,11 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         Dirty(ent);
     }
 
-    private void OnInteract(Entity<DropshipEquipmentDeployerComponent> ent, ref InteractHandEvent args)
+    private void OnInteract(Entity<RMCEquipmentDeployerComponent> ent, ref InteractHandEvent args)
     {
         var parent = Transform(ent).ParentUid;
 
-        if (!TryComp(parent, out DropshipWeaponPointComponent? weaponPoint) &&
-            !TryComp(parent, out DropshipUtilityPointComponent? utilityPoint) ||
-            ent.Comp.DeployEntity == null)
+        if (ent.Comp.DeployEntity == null)
             return;
 
         if (_container.TryGetContainer(ent, ent.Comp.DeploySlotId, out var container))
@@ -60,7 +59,7 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
             var deployOffset = Vector2.Zero;
             var rotationOffset = 0f;
 
-            if (container.ContainedEntities.Count > 0 && weaponPoint != null)
+            if (container.ContainedEntities.Count > 0 && TryComp(parent, out DropshipWeaponPointComponent? weaponPoint))
             {
                 TryGetOffset(ent, out deployOffset, out rotationOffset, weaponPoint.Location);
             }
@@ -74,9 +73,9 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         }
     }
 
-    private void OnInserted(Entity<DropshipEquipmentDeployerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
+    private void OnInserted(Entity<RMCEquipmentDeployerComponent> ent, ref EntGotInsertedIntoContainerMessage args)
     {
-        if (!HasComp<DropshipWeaponPointComponent>(args.Container.Owner) && !HasComp<DropshipUtilityPointComponent>(args.Container.Owner))
+        if (HasComp<PowerLoaderComponent>(args.Container.Owner))
         {
             ent.Comp.IsDeployable = false;
             Dirty(ent);
@@ -90,7 +89,7 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         Dirty(ent);
     }
 
-    private void OnRemovedFromContainer(Entity<DropshipEquipmentDeployerComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnRemovedFromContainer(Entity<RMCEquipmentDeployerComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         if (ent.Comp.DeployEntity != null)
         {
@@ -104,20 +103,15 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
         Dirty(ent);
     }
 
-    private void UpdateAppearance(Entity<DropshipEquipmentDeployerComponent> ent, bool deployed)
+    private void UpdateAppearance(Entity<RMCEquipmentDeployerComponent> ent, bool deployed)
     {
         var parent = Transform(ent).ParentUid;
         var isWeaponPoint = HasComp<DropshipWeaponPointComponent>(parent);
         var isUtilityPoint = HasComp<DropshipUtilityPointComponent>(parent);
+        var isElectronicPoint = HasComp<DropshipElectronicSystemPointComponent>(parent);
 
-        if (!isWeaponPoint && !isUtilityPoint)
-            return;
-
-        if (ent.Comp.UtilityDeployedSprite is not { } baseRsi)
-            return;
-
-        var rsiPath = baseRsi.RsiPath.ToString();
-        var rsiState = baseRsi.RsiState;
+        var rsiPath = "";
+        var rsiState = "";
 
         // Undeployed sprites
         if (!deployed && TryComp(ent, out DropshipAttachedSpriteComponent? attached))
@@ -127,17 +121,31 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
                 rsiPath = weaponAttachRsi.RsiPath.ToString();
                 rsiState = weaponAttachRsi.RsiState;
             }
-            else if (isUtilityPoint && attached.Sprite is {} utilityAttachRsi)
+            else if ((isUtilityPoint || isElectronicPoint) && attached.Sprite is {} sprite)
             {
-                rsiPath = utilityAttachRsi.RsiPath.ToString();
-                rsiState = utilityAttachRsi.RsiState;
+                rsiPath = sprite.RsiPath.ToString();
+                rsiState = sprite.RsiState;
             }
         }
         // Deployed sprites
-        else if (deployed && isWeaponPoint && ent.Comp.WeaponDeployedSprite is {} weaponDeployRsi)
+        else if (deployed)
         {
-            rsiPath = weaponDeployRsi.RsiPath.ToString();
-            rsiState = weaponDeployRsi.RsiState;
+            if (isWeaponPoint && ent.Comp.WeaponDeployedSprite is {} weaponDeployRsi)
+            {
+                rsiPath = weaponDeployRsi.RsiPath.ToString();
+                rsiState = weaponDeployRsi.RsiState;
+            }
+            else if (isElectronicPoint && ent.Comp.ElectronicDeployedSprite is {} electronicDeployRsi)
+            {
+                rsiPath = electronicDeployRsi.RsiPath.ToString();
+                rsiState = electronicDeployRsi.RsiState;
+            }
+
+            else if (isUtilityPoint && ent.Comp.UtilityDeployedSprite is {} utilityDeployRsi)
+            {
+                rsiPath = utilityDeployRsi.RsiPath.ToString();
+                rsiState = utilityDeployRsi.RsiState;
+            }
         }
 
         if (isWeaponPoint)
@@ -145,26 +153,27 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
             _appearance.SetData(parent, DropshipWeaponVisuals.Sprite, rsiPath);
             _appearance.SetData(parent, DropshipWeaponVisuals.State, rsiState);
         }
-        else
+        else if (isUtilityPoint || isElectronicPoint)
         {
             _appearance.SetData(parent, DropshipUtilityVisuals.Sprite, rsiPath);
             _appearance.SetData(parent, DropshipUtilityVisuals.State, rsiState);
         }
-
-        ent.Comp.IsDeployed = deployed;
-        Dirty(ent);
+        else
+        {
+            _appearance.SetData(ent, EquipmentDeployerVisuals.Sprite, ent.Comp.IsDeployed);
+        }
     }
 
     /// <summary>
-    ///     Try to deploy the equipment stored in the deployer.
+    ///     Try to deploy or undeploy the equipment stored in the deployer.
     /// </summary>
     /// <param name="deployer">The deployer entity</param>
     /// <param name="deploy">Whether the deployable should be deployed or undeployed</param>
     /// <param name="deployOffset">The position offset of the deployed entity.</param>
     /// <param name="rotationOffset">The rotation offset of the deployed entity.</param>
-    /// <param name="equipmentDeployerComponent">The <see cref="DropshipEquipmentDeployerComponent"/> of the deployer</param>
+    /// <param name="equipmentDeployerComponent">The <see cref="RMCEquipmentDeployerComponent"/> of the deployer</param>
     /// <returns>True if deploying succeeds</returns>
-    public bool TryDeploy(EntityUid deployer, bool deploy, Vector2 deployOffset = new (), float rotationOffset = 0, DropshipEquipmentDeployerComponent? equipmentDeployerComponent = null, EntityUid? user = null)
+    public bool TryDeploy(EntityUid deployer, bool deploy, Vector2 deployOffset = new (), float rotationOffset = 0, RMCEquipmentDeployerComponent? equipmentDeployerComponent = null, EntityUid? user = null)
     {
         if (TerminatingOrDeleted(deployer))
             return false;
@@ -200,6 +209,9 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
             }
         }
 
+        equipmentDeployerComponent.IsDeployed = deploy;
+        Dirty(deployer, equipmentDeployerComponent);
+
         UpdateAppearance((deployer, equipmentDeployerComponent), deploy);
 
         var audio = deploy
@@ -217,9 +229,9 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
     /// <param name="deployOffset">The position offset.</param>
     /// <param name="rotationOffset">The rotation offset.</param>
     /// <param name="location">The location of the weapon point.</param>
-    /// <param name="equipmentDeployerComponent">The <see cref="DropshipEquipmentDeployerComponent"/> of the deployer</param>
+    /// <param name="equipmentDeployerComponent">The <see cref="RMCEquipmentDeployerComponent"/> of the deployer</param>
     /// <returns>True if an offset is found based on the given location</returns>
-    public bool TryGetOffset(EntityUid deployer, out Vector2 deployOffset, out float rotationOffset, DropshipWeaponPointLocation? location = null, DropshipEquipmentDeployerComponent? equipmentDeployerComponent = null)
+    public bool TryGetOffset(EntityUid deployer, out Vector2 deployOffset, out float rotationOffset, DropshipWeaponPointLocation? location = null, RMCEquipmentDeployerComponent? equipmentDeployerComponent = null)
     {
         deployOffset = Vector2.Zero;
         rotationOffset = 0;
@@ -255,8 +267,8 @@ public abstract partial class SharedDropshipEquipmentDeployerSystem : EntitySyst
     /// </summary>
     /// <param name="deployer">The deployer entity.</param>
     /// <param name="autoDeploy">Should auto deploy be toggled on or off.</param>
-    /// <param name="equipmentDeployer">The <see cref="DropshipEquipmentDeployerComponent"/> of the deployer</param>
-    public void SetAutoDeploy(EntityUid deployer, bool autoDeploy, DropshipEquipmentDeployerComponent? equipmentDeployer = null)
+    /// <param name="equipmentDeployer">The <see cref="RMCEquipmentDeployerComponent"/> of the deployer</param>
+    public void SetAutoDeploy(EntityUid deployer, bool autoDeploy, RMCEquipmentDeployerComponent? equipmentDeployer = null)
     {
         if (!Resolve(deployer, ref equipmentDeployer, false))
             return;

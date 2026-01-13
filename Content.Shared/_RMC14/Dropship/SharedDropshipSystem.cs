@@ -76,6 +76,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ExaminedEvent>(OnElectronicSystemExamined);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, InteractHandEvent>(OnInteract);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -538,17 +539,31 @@ public abstract class SharedDropshipSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Pass interaction events to the entity stored within the Weapon Point.
+    ///     Relay interaction events to the entity stored within the Weapon Point.
     /// </summary>
     private void OnInteract(Entity<DropshipWeaponPointComponent> ent, ref InteractHandEvent args)
     {
         var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.WeaponContainerSlotId);
-        var deployerEntity = slot.ContainedEntity;
-        if (!HasComp<DropshipEquipmentDeployerComponent>(deployerEntity))
+        RelayInteractToContained(slot, ref args);
+    }
+
+    /// <summary>
+    ///     Relay interaction events to the entity stored within the Electronic Point.
+    /// </summary>
+    private void OnInteract(Entity<DropshipElectronicSystemPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+        RelayInteractToContained(slot, ref args);
+    }
+
+    private void RelayInteractToContained(ContainerSlot slot, ref InteractHandEvent args)
+    {
+        var deployer= slot.ContainedEntity;
+        if (!HasComp<RMCEquipmentDeployerComponent>(deployer))
             return;
 
         var ev = new InteractHandEvent(args.User, args.Target);
-        RaiseLocalEvent(deployerEntity.Value, ev);
+        RaiseLocalEvent(deployer.Value, ev);
         args.Handled = ev.Handled;
     }
 

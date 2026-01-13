@@ -27,7 +27,7 @@ namespace Content.Client._RMC14.Dropship.Weapon;
 public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 {
     private readonly ContainerSystem _container;
-    private readonly SharedDropshipEquipmentDeployerSystem _equipmentDeployer;
+    private readonly SharedRMCEquipmentDeployerSystem _equipmentDeployer;
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly DropshipSystem _system;
     private readonly DropshipWeaponSystem _weaponSystem;
@@ -46,7 +46,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         _system = EntMan.System<DropshipSystem>();
         _weaponSystem = EntMan.System<DropshipWeaponSystem>();
         _tacticalMapSystem = EntMan.System<TacticalMapSystem>();
-        _equipmentDeployer = EntMan.System<SharedDropshipEquipmentDeployerSystem>();
+        _equipmentDeployer = EntMan.System<SharedRMCEquipmentDeployerSystem>();
     }
 
     protected override void Open()
@@ -286,7 +286,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     }
 
                     var rounds = _weaponSystem.GetWeaponRounds(weaponEnt.Value);
-                    if (EntMan.TryGetComponent(weaponEnt.Value, out DropshipEquipmentDeployerComponent? deployer) &&
+                    if (EntMan.TryGetComponent(weaponEnt.Value, out RMCEquipmentDeployerComponent? deployer) &&
                         deployer.DeployEntity != null &&
                         _equipmentDeployer.TryGetDeployedAmmo(EntMan.GetEntity(deployer.DeployEntity.Value), out var deployAmmo, out _))
                     {
@@ -495,7 +495,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 if (equipmentContainer.Count > 0)
                     deployerEntity = equipmentContainer.ContainedEntities[0];
 
-                if (EntMan.TryGetComponent(deployerEntity, out DropshipEquipmentDeployerComponent? equipmentDeployer) &&
+                if (EntMan.TryGetComponent(deployerEntity, out RMCEquipmentDeployerComponent? equipmentDeployer) &&
                     EntMan.TryGetComponent(deployerEntity, out MetaDataComponent? metaData))
                 {
                     var ammoText = "";
@@ -655,7 +655,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     text = "PDS";
                     msg = new DropshipTerminalWeaponsChooseParaDropMsg(first);
                 }
-                else if (EntMan.TryGetComponent(utilityMount, out DropshipEquipmentDeployerComponent? deployer))
+                else if (EntMan.TryGetComponent(utilityMount, out RMCEquipmentDeployerComponent? deployer))
                 {
                     text = deployer.DropShipWindowButtonText;
                     msg = new DropshipTerminalWeaponsChooseEquipmentDeployerMsg(first, EntMan.GetNetEntity(pointId));
@@ -709,7 +709,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             foreach (var contained in container.ContainedEntities)
             {
                 EntMan.TryGetComponent(contained, out DropshipWeaponComponent? weapon);
-                EntMan.TryGetComponent(contained, out DropshipEquipmentDeployerComponent? deployer);
+                EntMan.TryGetComponent(contained, out RMCEquipmentDeployerComponent? deployer);
 
                 if (weapon == null && deployer == null)
                     continue;
