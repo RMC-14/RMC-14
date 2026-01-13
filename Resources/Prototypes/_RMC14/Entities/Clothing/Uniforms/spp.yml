@@ -86,7 +86,7 @@
   parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPArmy
   name: SPP army fatigues
-  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
+  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialist Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
@@ -112,7 +112,7 @@
   parent: CMJumpsuitSPPCiv1
   id: CMJumpsuitSPPCiv2
   name: SPP civilian-style tan overalls
-  description: A set of Civilian-style Tan Overalls with a Blue undershirt. The material is of a poor quality, however it's better than nothing. Clothing of this style is typically given to those who work laborious jobs.
+  description: A set of civilian-style tan overalls with a blue undershirt. The material is of a poor quality, however it's better than nothing. Clothing of this style is typically given to those who work laborious jobs.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/civ2.rsi
