@@ -1,0 +1,23 @@
+- type: entity
+  parent: RMCPaperWeYa
+  id: RMCPaperWeYaLiaisonBriefingBase
+  abstract: true
+  components:
+  - type: Paper
+    editingDisabled: true
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingSolaris
+  suffix: Solaris Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-solaris
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingKutjevo
+  suffix: Kutjevo Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-kutjevo

@@ -176,7 +176,7 @@
 - type: entity
   parent: CMApcBase
   id: CMApc
-  suffix: No Power
+  suffix: Power
   components:
   - type: RMCApc
     startingCell: RMCPowerCellAPC

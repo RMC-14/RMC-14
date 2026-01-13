@@ -69,7 +69,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -174,8 +174,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-                           # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -774,7 +773,7 @@
         recommended: true
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -854,7 +853,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-      #- id: RMCPouchSling # TODO RMC14 Sling Pouch
+      - id: RMCPouchSling
       - id: RMCPouchToolsFill
       - id: RMCPouchConstruction
       - id: RMCPouchElectronicsFill
@@ -1118,6 +1117,7 @@
         name: flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchEngineerKit
+      - id: RMCPouchSling
     - name: Personal Sidearms
       jobs:
       - CMChiefEngineer
@@ -1126,7 +1126,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1229,7 +1229,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1376,7 +1376,7 @@
       entries:
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -1513,7 +1513,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
