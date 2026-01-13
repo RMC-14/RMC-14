@@ -27,7 +27,6 @@
       preset: RMCSurvivorPresetRiotInProgressUNRO
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-riot-officer
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
   greeting: rmc-job-greeting-riot-in-progress-UN-RO
 
 - type: startingGear
