@@ -18,7 +18,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorWeYaPMCStandard
+      preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: RMCAllowSuitStorage

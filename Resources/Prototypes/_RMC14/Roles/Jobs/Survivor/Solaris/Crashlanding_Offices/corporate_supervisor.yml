@@ -16,7 +16,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorWeYaManager
+      preset: RMCSkillPresetSurvivorWeYaManager
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent

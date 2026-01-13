@@ -119,85 +119,95 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: SurvivorWeYaPMCStandard
+  id: RMCSkillPresetSurvivorWeYaPMCStandard
   name: Survivor PMC Standard
   categories: [ HideSpawnMenu ]
-  skills:
-    RMCSkillCqc: 1
-    RMCSkillPolice: 0 # RMC14
-    RMCSkillFireman: 2
-    RMCSkillMedical: 1
-    RMCSkillFirearms: 2
-    RMCSkillVehicles: 1
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: SurvivorWeYaPMCMedic
+  id: RMCSkillPresetSurvivorWeYaPMCMedic
   name: Survivor PMC Medic
   categories: [ HideSpawnMenu ]
-  skills:
-    RMCSkillCqc: 1
-    RMCSkillPolice: 0 # RMC14
-    RMCSkillFireman: 2
-    RMCSkillMedical: 2
-    RMCSkillSurgery: 1
-    RMCSkillEndurance: 2
-    RMCSkillFirearms: 2
-    RMCSkillVehicles: 1
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: SurvivorWeYaPMCEngineer
+  id: RMCSkillPresetSurvivorWeYaPMCEngineer
   name: Survivor PMC Engineer
   categories: [ HideSpawnMenu ]
-  skills:
-    RMCSkillCqc: 1
-    RMCSkillPolice: 0 # RMC14
-    RMCSkillFireman: 2
-    RMCSkillMedical: 1
-    RMCSkillEndurance: 2
-    RMCSkillFirearms: 2
-    RMCSkillVehicles: 1
-    RMCSkillEngineer: 2
-    RMCSkillConstruction: 2
-    RMCSkillPowerLoader: 2
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillPowerLoader: 2
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: SurvivorWeYaPMCLeader
+  id: RMCSkillPresetSurvivorWeYaPMCLeader
   name: Survivor PMC Team Leader
   categories: [ HideSpawnMenu ]
-  skills:
-    RMCSkillCqc: 1
-    RMCSkillPolice: 0 # RMC14
-    RMCSkillFireman: 2
-    RMCSkillMedical: 1
-    RMCSkillEndurance: 2
-    RMCSkillFirearms: 2
-    RMCSkillVehicles: 1
-    RMCSkillEngineer: 2
-    RMCSkillConstruction: 2
-    RMCSkillLeadership: 2
-    RMCSkillOverwatch: 1
-    RMCSkillJtac: 2
-    RMCSkillIntel: 2
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillLeadership: 2
+      RMCSkillOverwatch: 1
+      RMCSkillJtac: 2
+      RMCSkillIntel: 2
 
 - type: entity
   parent: RMCSkillPresetSurvivor
-  id: SurvivorWeYaPMCCommander
+  id: RMCSkillPresetSurvivorWeYaPMCCommander
   name: Survivor PMC Field Operations Leader
   categories: [ HideSpawnMenu ]
-  skills:
-    RMCSkillCqc: 1
-    RMCSkillPolice: 0 # RMC14
-    RMCSkillFireman: 2
-    RMCSkillMedical: 1
-    RMCSkillEndurance: 2
-    RMCSkillFirearms: 2
-    RMCSkillVehicles: 1
-    RMCSkillEngineer: 2
-    RMCSkillConstruction: 2
-    RMCSkillLeadership: 3 # Replace with 4 when skill change comes around
-    RMCSkillOverwatch: 1
-    RMCSkillJtac: 2
-    RMCSkillIntel: 2
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillLeadership: 3 # Replace with 4 when skill change comes around
+      RMCSkillOverwatch: 1
+      RMCSkillJtac: 2
+      RMCSkillIntel: 2
