@@ -1,29 +1,4 @@
 ﻿Entries:
-- author: Max_Power
-  changes:
-  - message: Fixed the M82F Flare Gun having a 1.15x wielded accuracy and 0.95x unwielded
-      accuracy multiplier instead of 1x wielded and 0.5x unwielded.
-    type: Fix
-  - message: Fixed the Basira-Armstrong rifle having a 1x wielded accuracy and 0.95x
-      unwielded accuracy multiplier instead of 1.35x wielded and 0.35x unwielded.
-    type: Fix
-  id: 2244
-  time: '2025-08-29T04:58:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7482
-- author: Aurallianz
-  changes:
-  - message: ~ commands are now logged.
-    type: Add
-  id: 2245
-  time: '2025-08-29T04:56:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7474
-- author: J C Denton
-  changes:
-  - message: Fixed some Survivor Jobs not spawning with their job-specific loadouts.
-    type: Fix
-  id: 2246
-  time: '2025-08-29T04:59:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7475
 - author: DummeHytteOst
   changes:
   - message: The hive pylon has gotten a map blip, and is now visible on the tactical
@@ -4718,5 +4693,29 @@
   id: 2746
   time: '2026-01-12T02:00:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8825
+- author: CatAndHats
+  changes:
+  - message: '"submachinegun stock" renamed to "submachinegun solid stock"'
+    type: Tweak
+  id: 2747
+  time: '2026-01-13T08:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8617
+- author: SirChopwood
+  changes:
+  - message: Added the "His Highness" Lobby Art by ShiroSh_kun
+    type: Add
+  id: 2748
+  time: '2026-01-13T08:39:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8967
+- author: CatAndHats
+  changes:
+  - message: Added chat highlights for the Provost Inspector
+    type: Add
+  - message: Added "burst", "execution", and "executed" as a chat highlight for all
+      Military Police roles
+    type: Add
+  id: 2749
+  time: '2026-01-13T08:39:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8941
 Name: RMC14
 Order: -1
