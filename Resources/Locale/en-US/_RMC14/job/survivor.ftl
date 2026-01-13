@@ -259,7 +259,6 @@ CMSurvivorFiorinaResearcher = Fiorina Researcher
 
 cm-job-name-survivor-riot-officer = United Nations Riot Officer
 CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
-RMCSurvivorFiorinaRiotInProgressUNRiotOfficer = United Nations Riot Officer
 cm-job-prefix-survivor-riot-officer = UN RO
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
