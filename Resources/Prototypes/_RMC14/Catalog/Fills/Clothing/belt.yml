@@ -217,16 +217,6 @@
 
 - type: entity
   parent: CMBeltMarine
-  id: CMBeltMarineBeanbag
-  suffix: Filled, Beanbag
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunBeanbag
-      amount: 5
-
-- type: entity
-  parent: CMBeltMarine
   id: RMCBeltMarineUZI
   suffix: Filled, UZI
   components:
