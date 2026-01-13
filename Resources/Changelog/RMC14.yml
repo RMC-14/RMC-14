@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Admin only pamphlets for every skill and level.
-    type: Add
-  - message: Recruit job and rank for events.
-    type: Add
-  id: 2248
-  time: '2025-08-29T05:04:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7616
 - author: SharkSnake98
   changes:
   - message: Added RMC14 Hot Chocolate and Tea
@@ -4716,5 +4707,15 @@
   id: 2750
   time: '2026-01-13T08:42:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8850
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added roundstart briefings for liaisons on certain planets! Check your
+      fax machine, liaisons.
+    type: Add
+  - message: Added a paper with the Weston-Yamada logo to the Liaison vendor briefcase.
+    type: Add
+  id: 2751
+  time: '2026-01-13T08:47:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8707
 Name: RMC14
 Order: -1
