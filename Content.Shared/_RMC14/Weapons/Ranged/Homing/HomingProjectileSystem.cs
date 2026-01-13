@@ -56,7 +56,11 @@ public sealed class HomingProjectileSystem : EntitySystem
                 return;
 
             var homing = EnsureComp<HomingProjectileComponent>(projectile);
+            if (TryComp(ent, out GunComponent? gun))
+                homing.ProjectileSpeed = gun.ProjectileSpeedModified;
+
             homing.Target = targeted.Target;
+            Dirty(ent);
         }
     }
 
