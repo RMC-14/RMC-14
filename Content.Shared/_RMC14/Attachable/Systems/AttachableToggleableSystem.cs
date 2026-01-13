@@ -15,6 +15,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Light;
 using Content.Shared.Movement.Events;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Timing;
@@ -136,6 +138,11 @@ public sealed class AttachableToggleableSystem : EntitySystem
     private void OnAttachableAltered(Entity<AttachableToggleableSimpleActivateComponent> attachable, ref AttachableAlteredEvent args)
     {
         if (args.User == null)
+            return;
+
+        // Check if attachment has AttachedOnly restriction
+        if (TryComp(attachable.Owner, out AttachableToggleableComponent? toggleableComponent) &&
+            toggleableComponent.AttachedOnly && !toggleableComponent.Attached)
             return;
 
         switch (args.Alteration)
@@ -600,6 +607,14 @@ public sealed class AttachableToggleableSystem : EntitySystem
         if (!TryComp(args.Used, out AttachableHolderComponent? holderComponent))
             return;
 
+        if (!attachable.Comp.Active &&
+            TryComp<InputMoverComponent>(args.User, out var input) &&
+            (input.HeldMoveButtons & MoveButtons.AnyDirection) != MoveButtons.None &&
+            !attachable.Comp.ActivateOnMove)
+        {
+            return;
+        }
+
         FinishToggle(attachable, (used, holderComponent), args.SlotId, args.User, args.PopupText);
         args.Handled = true;
         Dirty(attachable);
@@ -721,6 +736,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void Toggle(Entity<AttachableToggleableComponent> attachable, EntityUid? user, bool interrupted = false)
     {
+        // Prevent toggling if attachment is restricted to being attached only
+        if (attachable.Comp.AttachedOnly && !attachable.Comp.Attached)
+            return;
+
         if (!_attachableHolderSystem.TryGetHolder(attachable.Owner, out var holderUid) ||
             !TryComp(holderUid, out AttachableHolderComponent? holderComponent) ||
             !_attachableHolderSystem.TryGetSlotId(holderUid.Value, attachable.Owner, out var slotId))
@@ -748,6 +767,10 @@ public sealed class AttachableToggleableSystem : EntitySystem
 
     private void GrantAttachableActions(Entity<AttachableToggleableComponent> ent, EntityUid user, bool doSecondTry = true)
     {
+        // Don't grant action if AttachedOnly is true and not currently attached
+        if (ent.Comp.AttachedOnly && !ent.Comp.Attached)
+            return;
+
         // This is to prevent ActionContainerSystem from shitting itself if the attachment has actions other than its attachment toggle.
         if (!TryComp(ent.Owner, out ActionsContainerComponent? actionsContainerComponent) || actionsContainerComponent.Container == null)
         {
@@ -818,6 +841,8 @@ public sealed class AttachableToggleableSystem : EntitySystem
         }
 
         _actionsSystem.RemoveProvidedAction(user, ent, action);
+        ent.Comp.Action = null;
+        Dirty(ent);
     }
 
     private void RemoveRelayedActions(Entity<AttachableToggleableComponent> attachable, EntityUid user)
