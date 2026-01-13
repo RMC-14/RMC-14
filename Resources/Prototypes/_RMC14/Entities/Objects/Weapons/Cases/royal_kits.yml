@@ -1,0 +1,38 @@
+- type: entity
+  parent: CMSniperEquipmentCase
+  id: RMCScoutSniperEquipmentCase
+  name: scout sniper equipment case
+  description: "A large case containing an M96S-B suppressed scoped rifle, its corresponding head-mounted sight, six spare magazines of standard ammo, and a bipod. \n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: sniper
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/loadout_kits.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        base:
+          True: { state: open }
+          False: { state: closed }
+        label:
+          True: { visible: false }
+          False: { visible: true }
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,17,1
+  - type: StorageFill
+    contents:
+    - id: CMGlassesM42ScoutSight
+    - id: CMMagazineSniperM96S
+      amount: 6
+    - id: RMCM96SBSniperRifle
+    - id: RMCAttachmentBipod
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: SniperWhitelist

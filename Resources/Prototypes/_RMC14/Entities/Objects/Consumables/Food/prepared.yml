@@ -210,3 +210,103 @@
     tags:
     - Trash
   - type: SpaceGarbage
+
+# RCM tray meals
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealRCMFish
+  name: RCM prepared meal (seafood platter)
+  description: Numerous kinds of sushi occupy the side-component slots of this tray, with the main component being several slices of salmon sashimi atop cold, boiled rice.
+  components:
+  - type: Sprite
+    state: rmc_fish
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealRCMKatsu
+  name: RCM prepared meal (katsu curry)
+  description: Breaded chicken strips slathered in a Japanese style curry sauce. Comes with a helping of fluffy rice and an unidentifiable mound of overcooked veg as the side components.
+  components:
+  - type: Sprite
+    state: rmc_katsu
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealRCMSausage
+  name: RCM prepared meal (sausage and eggs)
+  description: Several overdone sausages, a wodge of scrambled eggs, and a load of sweet potato fries & green beans fill this tray.
+  components:
+  - type: Sprite
+    state: rmc_sausage
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealRCMMeat
+  name: RCM prepared meal (roast beef)
+  description: A slab of imitation beef drenched in too-salty gravy, with a portion of undercooked peas, soggy carrots and oddly dry mashed potatoes.
+  components:
+  - type: Sprite
+    state: rmc_meat
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealRCMTikka
+  name: RCM prepared meal (tikka curry)
+  description: Chunks of pork and potato submerged in a mass of mild Indian curry sauce, with a side of fluffy rice and a lukewarm bit of naan flatbread.
+  components:
+  - type: Sprite
+    state: rmc_tikka
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: RMCTrayEmpty
+  id: RMCTrayEmptyRCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+    state: rmc_tray_empty

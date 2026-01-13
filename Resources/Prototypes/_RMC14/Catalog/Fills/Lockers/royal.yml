@@ -1,0 +1,35 @@
+- type: entityTable
+  id: RMCClosetRCMTroopSgtFill
+  table: !type:AllSelector
+    children:
+    - id: RMCLaserDesignator
+    - id: RMCBackpackAmmoRCM
+    - id: CMAdvFirstAidKit
+    - id: RMCBoxMagazineRifleSSG45
+
+- type: entityTable
+  id: RMCClosetRCMSectionLeaderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCLaserDesignator
+    - id: RMCWhistle
+
+- type: entityTable
+  id: RMCClosetRCMGPMGFill
+  table: !type:AllSelector
+    children:
+    - id: RMCSmartGunRCMPVE
+    - id: RMCPowerCellSmartgun
+    - id: RMCArmorRoyalHarnessNoBackpack
+    - id: RMCMagazineSmartGunHT
+      amount: 3
+    - id: RMCGlassesSmartGunSight
+
+- type: entityTable
+  id: RMCClosetRCMFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalBeret
+    - id: RMCJumpsuitMarineRoyal
+    - id: RMCBootsRoyalFilled
+    - id: RMCHeadsetRoyalMarine # TODO RMC14 replace with RMCHeadsetRoyalMarinePVE after #8076 is merged
