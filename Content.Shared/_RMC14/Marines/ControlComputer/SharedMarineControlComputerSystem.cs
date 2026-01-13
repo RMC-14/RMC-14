@@ -139,7 +139,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         var medalName = Loc.GetString(args.MedalId);
         var medalDescription = Loc.GetString($"{args.MedalId}-desc");
-        var prompt = $"[italic]{medalName} - {medalDescription}[/italic]\n\n{Loc.GetString("rmc-medal-citation-prompt")}";
+        var prompt = $"[italic][bolditalic]{medalName}[/bolditalic] - {medalDescription}[/italic]\n\n{Loc.GetString("rmc-medal-citation-prompt")}";
         var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, medalName, LastPlayerId: args.LastPlayerId);
         _dialog.OpenInput(ent, actor.Value, prompt, ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
     }
