@@ -60,7 +60,7 @@ public sealed class HomingProjectileSystem : EntitySystem
                 homing.ProjectileSpeed = gun.ProjectileSpeedModified;
 
             homing.Target = targeted.Target;
-            Dirty(ent);
+            Dirty(projectile, homing);
         }
     }
 
