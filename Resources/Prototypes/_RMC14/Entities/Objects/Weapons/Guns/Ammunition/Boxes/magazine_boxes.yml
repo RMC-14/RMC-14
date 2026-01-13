@@ -636,9 +636,6 @@
   id: RMCBoxMagazineSMGL7A3SquashHeadEmpty
   name: magazine box (L7A3 x 12)
   components:
-#  - type: Construction
-#    graph: RMCBoxMagazine
-#    node: RMCBoxMagazineRifleM54CEmpty #TODO: Construction node needed.
   - type: Sprite
     layers:
     - state: smg_box
