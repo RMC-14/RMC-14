@@ -31,6 +31,34 @@
 
 - type: entity
   parent: RMCMedalBronze
+  id: RMCMedalBronzeDistinguishedConduct
+  name: distinguished conduct medal
+  description: A bronze medal awarded for distinguished conduct. Whilst a great honor, this is the most basic award given by the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronze
+  id: RMCMedalBronzeHeart
+  name: bronze heart medal
+  description: A bronze heart-shaped medal awarded for sacrifice. It is often awarded posthumously or for severe injury in the line of duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze_heart.rsi
+    state: bronze_heart
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronze
   id: RMCMedalBronzeService
   name: bronze service medal
   description: A bronze medal awarded for a marine's service within the UNMC. It is a very common medal, and is typically the first medal a marine would receive.
@@ -51,6 +79,20 @@
 
 - type: entity
   parent: RMCMedalSilver
+  id: RMCMedalSilverValor
+  name: medal of valor
+  description: A silver medal awarded for acts of exceptional valor. Normally given to those who outstand themselves from the ranks, either it be in Leadership skills or actions crucial to the mission success.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/silver.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/silver.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalSilver
   id: RMCMedalSilverService
   name: silver service medal
   description: A shiny silver medal awarded for a marine's service within the UNMC. It is a somewhat common medal which signifies the amount of time a marine has spent in the line of duty.
@@ -64,6 +106,20 @@
   - type: Sprite
     sprite: _RMC14/Objects/Medals/gold.rsi
     state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalGold
+  id: RMCMedalGoldExceptionalHeroism
+  name: medal of exceptional heroism
+  description: An extremely rare golden medal awarded only by the UNCM. To receive such a medal is the highest honor and as such, very few exist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold.rsi
+    state: icon_co
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/gold.rsi
