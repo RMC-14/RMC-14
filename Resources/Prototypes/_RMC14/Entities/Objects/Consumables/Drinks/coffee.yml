@@ -33,6 +33,8 @@
   - type: Tag
     tags:
     - DrinkGlass
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCDrinkCoffee
@@ -80,5 +82,3 @@
         reagents:
         - ReagentId: RMCHotCocoa
           Quantity: 30
-
-
