@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 01:19:25
+  time: 01/13/2026 01:35:32
   entityCount: 544
 maps: []
 grids:
@@ -105,11 +105,12 @@ entities:
             6: 17,-7
             7: 14,-6
         - node:
+            angle: 1.5707963267948966 rad
             color: '#FFFFFFFF'
-            id: RMCDecalBloodTrail3
+            id: RMCDecalBloodTrail2
           decals:
-            1: 20,-8
-            2: 19,-8
+            22: 19,-8
+            23: 20,-8
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalOilFloor1
