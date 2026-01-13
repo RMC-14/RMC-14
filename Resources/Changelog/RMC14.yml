@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed parasites spawning from carriers sometimes taking collision damage.
-    type: Fix
-  id: 2268
-  time: '2025-08-30T00:34:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7492
-- author: Ian321
-  changes:
-  - message: Everything communications related now has link to the relevant guide.
-    type: Tweak
-  id: 2269
-  time: '2025-08-30T00:36:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7583
-- author: snebl
-  changes:
-  - message: Scouts will now drop their cloak when dropping their required armor.
-    type: Tweak
-  id: 2270
-  time: '2025-08-30T00:40:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7134
-- author: Vixting
-  changes:
-  - message: Fixed the Tunnel UI breaking.
-    type: Fix
-  id: 2271
-  time: '2025-08-30T00:50:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7581
 - author: SharkSnake98
   changes:
   - message: Added the DrinksGlass component to the flasks/canteens and faction cups
@@ -4709,5 +4681,42 @@
   id: 2770
   time: '2026-01-13T22:52:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8928
+- author: PursuitinAshes
+  changes:
+  - message: '[PvE] The SPP Medics now have access to correct equipment.'
+    type: Fix
+  - message: '[PvE] The SPP Shipmap has received various fixes to bring up its quality
+      and fix various bugs.'
+    type: Fix
+  - message: '[PvE] FORECON Medic has access to their equipment rack now.'
+    type: Fix
+  id: 2771
+  time: '2026-01-13T23:42:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8763
+- author: SharkSnake98
+  changes:
+  - message: Added the CLF Spaceport Nightmare Insert for Hybrisa Prospera (Not Playable)
+    type: Add
+  - message: Added the WEYA logo to Hybrisa's Celestia Gateway
+    type: Add
+  id: 2772
+  time: '2026-01-13T23:40:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8922
+- author: SharkSnake98
+  changes:
+  - message: Changed some lockers, geiger counters and added WEYA Decals to Port Nereid
+    type: Tweak
+  id: 2773
+  time: '2026-01-13T23:41:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8905
+- author: SharkSnake98
+  changes:
+  - message: Added the Rocinante CLF Nightmare Insert (Not Playable)
+    type: Add
+  - message: Added a CLF Soldier corpse spawner
+    type: Add
+  id: 2774
+  time: '2026-01-13T23:41:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8934
 Name: RMC14
 Order: -1
