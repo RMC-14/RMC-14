@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The Dropship Part Fabricator can now print the LAU-229 Rocket Pod, which
-      can be loaded with AGR-59 'Mini-Mike' and AGR-59-I 'Mini-Mike' ammunition; each
-      pod holds six rockets.
-    type: Add
-  - message: Dropship weapons now update their loaded ammo sprite after every shot.
-    type: Fix
-  id: 2255
-  time: '2025-08-29T23:48:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7341
-- author: J C Denton
-  changes:
-  - message: Baseball bats now fit into bags.
-    type: Tweak
-  id: 2256
-  time: '2025-08-30T00:01:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7721
 - author: ExponentialWizard
   changes:
   - message: Fixed dead things rendering behind rollerbeds.
@@ -4698,5 +4680,22 @@
   id: 2757
   time: '2026-01-13T08:51:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8944
+- author: Dygon
+  changes:
+  - message: Xeno projectiles no longer have slightly more range than intended.
+    type: Fix
+  - message: The Oppressor's tail seize ability now pulls targets closer to the Oppressor's
+      position.
+    type: Fix
+  id: 2758
+  time: '2026-01-13T08:53:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8955
+- author: Dygon
+  changes:
+  - message: Ghosts can use ladders even when another player is climbing.
+    type: Fix
+  id: 2759
+  time: '2026-01-13T08:54:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8961
 Name: RMC14
 Order: -1
