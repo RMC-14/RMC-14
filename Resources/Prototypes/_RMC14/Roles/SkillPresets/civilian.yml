@@ -92,7 +92,31 @@
       RMCSkillConstruction: 2
       RMCSkillEngineer: 2
       RMCSkillLeadership: 1
-      
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorTrucker
+  name: Survivor Trucker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillVehicles: 3
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorMiner
+  name: Survivor Miner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 1
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 1
+
 - type: skillPreset
   id: SurvivorWeYaPMCStandard
   skills:
@@ -162,27 +186,3 @@
     RMCSkillOverwatch: 1
     RMCSkillJtac: 2
     RMCSkillIntel: 2
-
-- type: entity
-  parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorTrucker
-  name: Survivor Trucker
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillEngineer: 2
-      RMCSkillConstruction: 2
-      RMCSkillVehicles: 3
-
-- type: entity
-  parent: RMCSkillPresetSurvivor
-  id: RMCSkillPresetSurvivorMiner
-  name: Survivor Miner
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SkillPreset
-    skills:
-      RMCSkillEngineer: 1
-      RMCSkillPowerLoader: 2
-      RMCSkillVehicles: 1
