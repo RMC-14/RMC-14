@@ -19,6 +19,7 @@
       - id: CMSatchel
       - id: CMBootsBlackFilled
       - id: CMMRE
+      - id: RMCStampSEA
     - name: Gloves
       choices: { CMGloves: 1 }
       entries:
@@ -82,6 +83,11 @@
       - id: RMCWebbingBlackSmall
       - id: RMCWebbingDropPouch
       - id: RMCWebbingDropPouchBlack
+    - name: Tools of the Trade
+      takeAll: RMCSEATrainingTools
+      entries:
+      - id: RMCCPRDummy
+        amount: 5
     - name: Books
       takeAll: RMCBook
       entries:
@@ -143,5 +149,6 @@
       entries:
       - id: RMCAttachmentLaserSight
       - id: RMCAttachmentS5RedDotSight
+      - id: RMCAttachmentS5MicroRedDotSight
       - id: RMCAttachmentS6ReflexSight
       - id: RMCAttachmentRailFlashlight

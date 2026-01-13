@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFMedic
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Medic
   special:
   - !type:AddComponentSpecial
     components:
@@ -57,7 +58,7 @@
 - type: startingGear
   id: RMCGearCLFMedic
   equipment:
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
     head: CMHeadBandRed
@@ -78,7 +79,7 @@
     - CMAdvFirstAidKitFilled
     - CMAdvFirstAidKitFilled
     - RMCPacketGrenadeSmokeFilled
-    - CMMRE
+    - RMCMRECLF
     - CMSynthGraft
     - CMCrowbar
     pocket2:

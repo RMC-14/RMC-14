@@ -133,12 +133,18 @@ public sealed class XenoSpitSystem : EntitySystem
 
     private void OnActiveChargingSpitGetProjectile(Entity<XenoActiveChargingSpitComponent> ent, ref XenoGetSpitProjectileEvent args)
     {
+        if (ent.Comp.FiredProjectile)
+            return;
+
         args.Id = ent.Comp.Projectile;
     }
 
     private void OnXenoSpitAction(Entity<XenoSpitComponent> xeno, ref XenoSpitActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         var ev = new XenoGetSpitProjectileEvent(xeno.Comp.ProjectileId);
@@ -156,8 +162,12 @@ public sealed class XenoSpitSystem : EntitySystem
             target: args.Entity
         );
 
-        if (RemCompDeferred<XenoActiveChargingSpitComponent>(xeno))
-            _popup.PopupClient(Loc.GetString("cm-xeno-charge-spit-expire"), xeno, xeno, PopupType.SmallCaution);
+        if (!TryComp(xeno, out XenoActiveChargingSpitComponent? active))
+            return;
+
+        active.FiredProjectile = true;
+        Dirty(xeno, active);
+        _popup.PopupClient(Loc.GetString("cm-xeno-charge-spit-expire"), xeno, xeno, PopupType.SmallCaution);
     }
 
     private void OnXenoSlowingSpitAction(Entity<XenoSlowingSpitComponent> xeno, ref XenoSlowingSpitActionEvent args)
@@ -181,6 +191,9 @@ public sealed class XenoSpitSystem : EntitySystem
     private void OnXenoScatteredSpitAction(Entity<XenoScatteredSpitComponent> xeno, ref XenoScatteredSpitActionEvent args)
     {
         if (args.Handled)
+            return;
+
+        if (!_rmcActions.TryUseAction(args))
             return;
 
         args.Handled = _xenoProjectile.TryShoot(

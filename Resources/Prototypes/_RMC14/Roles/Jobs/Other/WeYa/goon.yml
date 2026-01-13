@@ -28,6 +28,7 @@
         RMCSkillEndurance: 2
         RMCSkillMeleeWeapons: 1
         RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
 
 - type: playTimeTracker
   id: RMCJobWeYaGoon
@@ -43,7 +44,7 @@
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
-    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleM54C # TODO RMC14: Corporate re-sprite (white)
     pocket1: RMCPouchMagazine # TODO RMC14: PMC re-sprite
     pocket2: RMCPouchFirstAidPMCFill
@@ -54,7 +55,7 @@
     - RMCZipties
     - RMCZipties
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYa
     pocket1:
     - CMMagazineRifleM54C
     - CMMagazineRifleM54C

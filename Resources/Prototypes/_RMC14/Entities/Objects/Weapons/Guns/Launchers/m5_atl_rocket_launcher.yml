@@ -74,9 +74,6 @@
       - state: base
         sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
         map: ["enum.GunVisualLayers.Base"]
-      - state: mag-0
-        sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_icon.rsi
-        map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5atl/m5atl_inhands.rsi
   - type: Gun
@@ -89,15 +86,7 @@
       - DemoSpecWhitelist
   - type: Corrodible
     isCorrodible: false
-  - type: AttachableHolder
-    slots:
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentMagneticHarness
-  - type: AttachableHolderVisuals
-    offsets:
-      rmc-aslot-rail: 0.447, 0.122
+  - type: RMCMagneticItem
 
 # 84mm HE
 - type: entity

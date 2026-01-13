@@ -256,6 +256,13 @@ public sealed partial class TacticalMapWrapper : Control
         InvalidatePlayerCache();
     }
 
+    public void UpdateBlips(TacticalMapBlip[]? blips, int[]? entityIds)
+    {
+        Map.UpdateBlips(blips, entityIds);
+        Canvas.UpdateBlips(blips, entityIds);
+        InvalidatePlayerCache();
+    }
+
     public void UpdateTacticalLabels(Dictionary<Vector2i, string> labels)
     {
         Map.UpdateTacticalLabels(labels);

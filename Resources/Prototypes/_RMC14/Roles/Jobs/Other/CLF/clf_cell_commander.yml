@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Cell Commander
   special:
   - !type:AddComponentSpecial
     components:
@@ -71,11 +72,12 @@
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
+    mask: RMCCombatUtilityKnifeB
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
-    shoes: CMBootsBlackFilled # TODO RMC14
+    shoes: RMCShoesCombat
     suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCBeltSmartGunOperatorPistolCLF

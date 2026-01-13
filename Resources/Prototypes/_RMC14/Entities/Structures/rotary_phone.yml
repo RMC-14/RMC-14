@@ -110,3 +110,24 @@
   parent: RMCRotaryPhone
   id: RMCRotaryPhoneMPTent
   name: Military Police Tent
+
+# Admin
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneAdmin
+  suffix: Admin
+  components:
+  - type: RotaryPhone
+    canDnd: true
+    category: Comms Relay
+    notifyAdmins: true
+
+- type: entity
+  parent: RMCRotaryPhoneWallmount
+  id: RMCRotaryPhoneWallmountAdmin
+  suffix: Admin
+  components:
+  - type: RotaryPhone
+    canDnd: true
+    category: Comms Relay
+    notifyAdmins: true

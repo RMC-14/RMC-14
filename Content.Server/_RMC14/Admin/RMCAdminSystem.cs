@@ -15,7 +15,9 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Content.Shared.Ghost;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Mind.Components;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Shared.Configuration;
@@ -156,6 +158,12 @@ public sealed class RMCAdminSystem : SharedRMCAdminSystem
                 profile
             );
             RaiseLocalEvent(mobUid.Value, spawnEv, true);
+        }
+
+        if (HasComp<GhostComponent>(target))
+        {
+            RemComp<MindContainerComponent>(target);
+            QueueDel(target);
         }
 
         _adminLog.Add(LogType.RMCSpawnJob, $"{ToPrettyString(user)} spawned {ToPrettyString(mobUid)} as job {jobName}");

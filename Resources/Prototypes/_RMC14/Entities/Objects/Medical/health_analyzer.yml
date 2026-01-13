@@ -34,3 +34,7 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: RMCItemKeepUIOpenOnStorageClosed
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 200

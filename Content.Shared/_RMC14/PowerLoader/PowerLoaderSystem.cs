@@ -16,6 +16,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Hands;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -25,6 +26,7 @@ using Content.Shared.Item;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
@@ -62,11 +64,15 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
+    private static readonly EntProtoId DefaultHandVisual = "RMCVirtualDropshipGearRight";
+
     private EntityQuery<PowerLoaderGrabbableComponent> _powerLoaderGrabbableQuery;
 
     public override void Initialize()
     {
         _powerLoaderGrabbableQuery = GetEntityQuery<PowerLoaderGrabbableComponent>();
+
+        SubscribeLocalEvent<ItemComponent, AfterInteractEvent>(OnItemAfterInteract);
 
         SubscribeLocalEvent<PowerLoaderComponent, MapInitEvent>(OnPowerLoaderMapInit);
         SubscribeLocalEvent<PowerLoaderComponent, ComponentRemove>(OnPowerLoaderRemove);
@@ -79,6 +85,8 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<PowerLoaderComponent, GetUsedEntityEvent>(OnGetUsedEntity, after: new[] { typeof(SharedHandsSystem) });
         SubscribeLocalEvent<PowerLoaderComponent, UserActivateInWorldEvent>(OnUserGrab);
         SubscribeLocalEvent<PowerLoaderComponent, DestructionEventArgs>(OnDestruction);
+        SubscribeLocalEvent<PowerLoaderComponent, DidEquipHandEvent>(OnHandsChanged);
+        SubscribeLocalEvent<PowerLoaderComponent, DidUnequipHandEvent>(OnHandsChanged);
 
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, PickupAttemptEvent>(OnGrabbablePickupAttempt);
         SubscribeLocalEvent<PowerLoaderGrabbableComponent, AfterInteractEvent>(OnGrabbableAfterInteract);
@@ -122,6 +130,26 @@ public sealed class PowerLoaderSystem : EntitySystem
         SubscribeLocalEvent<ActivePowerLoaderPilotComponent, CatchAttemptEvent>(OnPowerLoaderPilotCatchAttempt);
 
         SubscribeLocalEvent<PowerLoaderComponent, BeforeMeltedEvent>(PowerLoaderBeforeMelted);
+    }
+
+    private void OnItemAfterInteract(Entity<ItemComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (_powerLoaderGrabbableQuery.HasComp(ent))
+            return;
+
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container) ||
+            !TryComp(container.Owner, out PowerLoaderComponent? loader) ||
+            !TryComp(container.Owner, out HandsComponent? hands) ||
+            _hands.EnumerateHeld((container.Owner, hands)).All(held => held != ent.Owner))
+        {
+            return;
+        }
+
+        if (TryDropLoaderHeld((container.Owner, loader), args.ClickLocation, args.Used))
+            args.Handled = true;
     }
 
     private void OnPowerLoaderMapInit(Entity<PowerLoaderComponent> ent, ref MapInitEvent args)
@@ -284,6 +312,11 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
     }
 
+    private void OnHandsChanged<T>(Entity<PowerLoaderComponent> ent, ref T args)
+    {
+        SyncHands(ent);
+    }
+
     private void OnPointActivateInWorld(Entity<DropshipWeaponPointComponent> ent, ref ActivateInWorldEvent args)
     {
         if (!TryComp(args.User, out PowerLoaderComponent? loader))
@@ -340,61 +373,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnGrabbableAfterInteract(Entity<PowerLoaderGrabbableComponent> ent, ref AfterInteractEvent args)
     {
-        var user = args.User;
-        if (!TryComp(user, out PowerLoaderComponent? loader))
-            return;
-
-        if (!_hands.IsHolding(user, ent))
-            return;
-
-        var source = ent.Owner.ToCoordinates();
-        var coords = _transform.GetMoverCoordinates(args.ClickLocation);
-        coords = coords.SnapToGrid(EntityManager, _mapManager);
-        if (!source.TryDistance(EntityManager, coords, out var distance))
-            return;
-
-        args.Handled = true;
-        if (distance < 0.5f)
-        {
-            var msg = Loc.GetString("rmc-power-loader-too-close");
-            foreach (var buckled in GetBuckled(user))
-            {
-                _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
-            }
-
-            return;
-        }
-
-        if (distance > InteractionRange)
-        {
-            var msg = Loc.GetString("rmc-power-loader-too-far");
-            foreach (var buckled in GetBuckled(user))
-            {
-                _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
-            }
-
-            return;
-        }
-
-        var group = Impassable | MidImpassable | HighImpassable | InteractImpassable | MobLayer;
-        if (_rmcMap.IsTileBlocked(coords, group) ||
-            _rmcMap.TileHasStructure(coords))
-        {
-            var msg = Loc.GetString("rmc-power-loader-cant-drop-occupied", ("drop", ent));
-            foreach (var buckled in GetBuckled(user))
-            {
-                _popup.PopupClient(msg, ent, buckled, PopupType.SmallCaution);
-            }
-
-            return;
-        }
-
-        var used = args.Used;
-        if (_hands.TryDrop(user, used, coords, false))
-        {
-            _transform.AnchorEntity((used, Transform(used)));
-            SyncHands((user, loader));
-        }
+        TryDropLoaderHeld(args.User, args.ClickLocation, args.Used);
     }
 
     private void OnGetSlot(Entity<DropshipWeaponPointComponent> ent, ref GetAttachmentSlotEvent args)
@@ -829,12 +808,12 @@ public sealed class PowerLoaderSystem : EntitySystem
                 continue;
             }
 
+            var id = DefaultHandVisual;
             if (_powerLoaderGrabbableQuery.TryComp(held, out var grabbable))
-            {
-                var id = hand.Value.Location == HandLocation.Right ? grabbable.VirtualRight : grabbable.VirtualLeft;
-                var name = Name(held.Value);
-                toSpawn.Add((held, id, name, hand.Value.Location));
-            }
+                id = hand.Value.Location == HandLocation.Right ? grabbable.VirtualRight : grabbable.VirtualLeft;
+
+            var name = Name(held.Value);
+            toSpawn.Add((held, id, name, hand.Value.Location));
         }
 
         foreach (var (grabbed, spawnVirtual, name, location) in toSpawn)
@@ -1114,19 +1093,6 @@ public sealed class PowerLoaderSystem : EntitySystem
         args.SlotId = slot.ID;
     }
 
-    public override void Update(float frameTime)
-    {
-        var pilots = EntityQueryEnumerator<ActivePowerLoaderPilotComponent>();
-        while (pilots.MoveNext(out var uid, out var active))
-        {
-            if (!TryComp(uid, out BuckleComponent? buckle) ||
-                !HasComp<PowerLoaderComponent>(buckle.BuckledTo))
-            {
-                RemovePilot((uid, active));
-            }
-        }
-    }
-
     private void OnWeaponPointContainerChanged(Entity<DropshipWeaponPointComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         SyncAppearance(ent.Owner);
@@ -1168,6 +1134,79 @@ public sealed class PowerLoaderSystem : EntitySystem
             foreach (var buckled in strap.BuckledEntities.ToArray())
             {
                 _buckle.Unbuckle(buckled, null);
+            }
+        }
+    }
+
+    private bool TryDropLoaderHeld(Entity<PowerLoaderComponent?> loader, EntityCoordinates clickLocation, EntityUid item)
+    {
+        if (!Resolve(loader, ref loader.Comp, false))
+            return false;
+
+        if (!_hands.IsHolding(loader.Owner, item))
+            return false;
+
+        var source = loader.Owner.ToCoordinates();
+        var coords = _transform.GetMoverCoordinates(clickLocation);
+        coords = coords.SnapToGrid(EntityManager, _mapManager);
+        if (!source.TryDistance(EntityManager, coords, out var distance))
+            return false;
+
+        if (distance < 0.5f)
+        {
+            var msg = Loc.GetString("rmc-power-loader-too-close");
+            foreach (var buckled in GetBuckled(loader))
+            {
+                _popup.PopupClient(msg, loader, buckled, PopupType.SmallCaution);
+            }
+
+            return true;
+        }
+
+        if (distance > InteractionRange)
+        {
+            var msg = Loc.GetString("rmc-power-loader-too-far");
+            foreach (var buckled in GetBuckled(loader))
+            {
+                _popup.PopupClient(msg, loader, buckled, PopupType.SmallCaution);
+            }
+
+            return true;
+        }
+
+        const CollisionGroup group = Impassable | MidImpassable | HighImpassable | InteractImpassable | MobLayer;
+        if (_rmcMap.IsTileBlocked(coords, group) ||
+            _rmcMap.TileHasStructure(coords))
+        {
+            var msg = Loc.GetString("rmc-power-loader-cant-drop-occupied", ("drop", item));
+            foreach (var buckled in GetBuckled(loader))
+            {
+                _popup.PopupClient(msg, loader, buckled, PopupType.SmallCaution);
+            }
+
+            return true;
+        }
+
+        if (_hands.TryDrop(loader.Owner, item, coords, false))
+        {
+            if (_powerLoaderGrabbableQuery.HasComp(item))
+                _transform.AnchorEntity((item, Transform(item)));
+
+            SyncHands((loader, loader.Comp));
+        }
+
+        return true;
+    }
+
+    public override void Update(float frameTime)
+    {
+        var pilots = EntityQueryEnumerator<ActivePowerLoaderPilotComponent>();
+        while (pilots.MoveNext(out var uid, out var active))
+        {
+            if (!TryComp(uid, out BuckleComponent? buckle) ||
+                !HasComp<PowerLoaderComponent>(buckle.BuckledTo))
+            {
+                RemovePilot((uid, active));
             }
         }
     }

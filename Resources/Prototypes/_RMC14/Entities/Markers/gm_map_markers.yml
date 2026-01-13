@@ -1,0 +1,169 @@
+- type: entity
+  id: RMCMarkerGM
+  abstract: true
+  name: GM marker
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Markers/gm_tacmap_marks.rsi
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Tag
+    tags:
+    - ForceFixRotations
+    - HideContextMenu
+  - type: WarpPoint
+    location: GM marker
+  - type: RMCVisibleToGhostsOnly
+  - type: Appearance
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMExclamation
+  suffix: Exclamation
+  components:
+  - type: WarpPoint
+    location: GM marker (!)
+  - type: Sprite
+    layers:
+    - state: exclamation
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_exclamation
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMQuestion
+  suffix: Question
+  components:
+  - type: WarpPoint
+    location: GM marker (?)
+  - type: Sprite
+    layers:
+    - state: question
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_question
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMCircle
+  suffix: Circle
+  components:
+  - type: WarpPoint
+    location: GM marker (O)
+  - type: Sprite
+    layers:
+    - state: circle
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_circle
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMX
+  suffix: X
+  components:
+  - type: WarpPoint
+    location: GM marker (X)
+  - type: Sprite
+    layers:
+    - state: x
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_x
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMDollar
+  suffix: Dollar
+  components:
+  - type: WarpPoint
+    location: GM marker ($)
+  - type: Sprite
+    layers:
+    - state: dollar
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_dollar
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMSword
+  suffix: Sword
+  components:
+  - type: WarpPoint
+    location: GM marker (Sword)
+  - type: Sprite
+    layers:
+    - state: sword
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_sword
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMShield
+  suffix: Shield
+  components:
+  - type: WarpPoint
+    location: GM marker (Shield)
+  - type: Sprite
+    layers:
+    - state: shield
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_shield
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMHash
+  suffix: Hash
+  components:
+  - type: WarpPoint
+    location: GM marker (Hash)
+  - type: Sprite
+    layers:
+    - state: hash
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_hash
+
+- type: entity
+  parent: RMCMarkerGM
+  id: RMCMarkerGMStar
+  suffix: Star
+  components:
+  - type: WarpPoint
+    location: GM marker (Star)
+  - type: Sprite
+    layers:
+    - state: star
+      map: ["enum.RMCGhostVisibleOnlyVisualLayers.Base"]
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: gm_star
+  

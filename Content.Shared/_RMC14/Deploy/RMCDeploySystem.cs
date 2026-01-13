@@ -21,6 +21,7 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Spray;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Ghost;
 
 namespace Content.Shared._RMC14.Deploy;
 
@@ -369,6 +370,12 @@ public sealed class RMCDeploySystem : EntitySystem
             if (entId == ignore || (user != null && entId == user))
                 continue;
 
+            // Always filter out ghosts (and anything owned by them) before any other
+            // checks. This guarantees that a ghost-held item never has the chance to
+            // mark the deployment area as blocked before we recognise who owns it.
+            if (IsGhostRelated(entId))
+                continue;
+
             if (TryComp<PhysicsComponent>(entId, out var physics) && (physics.CanCollide || physics.Hard))
             {
                 var name = MetaData(entId).EntityName;
@@ -383,6 +390,38 @@ public sealed class RMCDeploySystem : EntitySystem
         }
 
         return found;
+    }
+
+    /// <summary>
+    /// Checks if the entity is a ghost or is owned by a ghost (e.g., held or worn by a ghost).
+    /// </summary>
+    private bool IsGhostRelated(EntityUid uid)
+    {
+        var current = uid;
+        var visited = new HashSet<EntityUid>();
+
+        while (visited.Add(current))
+        {
+
+            if (HasComp<GhostComponent>(current))
+                return true;
+
+            // Hands, inventory slots, and similar storage are all implemented via the
+            // container system, so walking container ownership lets us spot items
+            // that a ghost is holding or wearing.
+            if (_container.TryGetContainingContainer(current, out var container))
+            {
+                current = container.Owner;
+                continue;
+            }
+
+            if (!TryComp(current, out TransformComponent? xform) || !xform.ParentUid.IsValid())
+                break;
+
+            current = xform.ParentUid;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -502,8 +541,6 @@ public sealed class RMCDeploySystem : EntitySystem
         if (args.Handled)
             return;
 
-        args.Handled = true;
-
         // Check if this entity is from a ReactiveParentalSetup
         if (!TryComp<RMCDeployableComponent>(ent.Comp.OriginalEntity, out var deployable))
             return;
@@ -524,6 +561,8 @@ public sealed class RMCDeploySystem : EntitySystem
         // If the tool has ItemToggleComponent, it must be activated (e.g., shovel)
         if (TryComp(args.Used, out ItemToggleComponent? toggle) && !toggle.Activated)
             return;
+
+        args.Handled = true;
 
         var doAfter = new DoAfterArgs(_entMan, args.User, TimeSpan.FromSeconds(deployable.CollapseTime), new RMCParentalCollapseDoAfterEvent(), ent.Owner)
         {

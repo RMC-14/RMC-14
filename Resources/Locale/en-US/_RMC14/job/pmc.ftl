@@ -11,8 +11,6 @@ rmc-ghost-role-information-pmc-whiteout-rules = You are a [color=orange][bold]PM
 
 rmc-ghost-role-information-pmc-description = Ensure no damage is incurred against Weston-Yamada. Make sure the Corporate Liaison is safe. Deny the Weston-Yamada's involvement and do not trust the UNMC forces. Only fire if fired upon, or ordered to.
 
-rmc-ghost-role-information-pmc-whiteout-description = Listen to your superiors. Follow orders.
-
 rmc-ghost-name-pmc-standard = We-Ya PMC Operator (Neutral)
 rmc-job-name-pmc-standard = Operator
 rmc-job-prefix-pmc-standard = OP
@@ -79,6 +77,7 @@ rmc-job-name-pmc-corporate-goon = We-Ya Corporate Security
 rmc-job-name-pmc-corporate-goon-engi = We-Ya Corporate Security Technician
 rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
 rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
+rmc-job-name-pmc-corporate-goon-secguard = We-Ya Security Guard
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL
@@ -116,3 +115,6 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
+
+# Corpses
+rmc-job-name-pmc-operator-corpse = PMC Operator
