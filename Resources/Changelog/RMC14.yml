@@ -1,72 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Choosing a weapons spec and reading a job pamphlet now update your role
-      and icon in the squad tracker and overwatch.
-    type: Tweak
-  id: 2259
-  time: '2025-08-30T00:04:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7499
-- author: NotInButIn
-  changes:
-  - message: Updated the UIs for the orbital cannon, tech tree, mortar, playtime stats,
-      dropship fabricator, and xenonid strain confirmation.
-    type: Tweak
-  id: 2260
-  time: '2025-08-30T00:07:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7042
-- author: ExponentialWizard
-  changes:
-  - message: fixed incorrect standing/resting states when unbuckling
-    type: Fix
-  id: 2261
-  time: '2025-08-30T00:21:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7462
-- author: shibechef
-  changes:
-  - message: Flare guns are significantly less likely to shoot through walls.
-    type: Fix
-  id: 2262
-  time: '2025-08-30T00:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7546
-- author: Utmanarn
-  changes:
-  - message: Added icons for the prop calling UI buttons.
-    type: Add
-  id: 2263
-  time: '2025-08-30T00:25:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7444
-- author: Vermidia
-  changes:
-  - message: Added vent crawling. T0s, most T1s, and some T2s can vent crawl to move
-      quickly through pipes from one location to the next.
-    type: Add
-  - message: Non-Queen xenos in containers (tunnels, vents) no longer count as alive
-      for round end checks.
-    type: Fix
-  id: 2264
-  time: '2025-08-30T00:27:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7485
-- author: Shromply
-  changes:
-  - message: Gave the SPP and PMC roles pilot 1. (PVE)
-    type: Fix
-  - message: Fixed the PMC SGs rank and icon. (PVE)
-    type: Fix
-  - message: Fixed the SPP Officer not being able to access gear racks. (PVE)
-    type: Fix
-  id: 2265
-  time: '2025-08-30T00:31:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7705
-- author: x5tink
-  changes:
-  - message: Added Intel support crate to req.
-    type: Add
-  - message: Enabled Red dot attachment crate and HAR ammo crate.
-    type: Fix
-  id: 2266
-  time: '2025-08-30T00:33:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7717
 - author: DummeHytteOst
   changes:
   - message: Fixed the EMT - paramedic uniforms stating another color than they are.
@@ -4700,5 +4632,70 @@
   id: 2761
   time: '2026-01-13T08:57:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8806
+- author: SharkSnake98
+  changes:
+  - message: Added the New Varadero Nightmare Insert "CLF Raid" (Not Playable)
+    type: Add
+  - message: Added CLF-aligned Gauss Sentries.
+    type: Add
+  id: 2762
+  time: '2026-01-13T08:59:23.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8909
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Refilling autoinjectors from a medvend now plays a sound
+    type: Tweak
+  id: 2763
+  time: '2026-01-13T08:59:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8977
+- author: Dygon
+  changes:
+  - message: Bipods now instantly deploy even when standing really close to a deployable
+      surface.
+    type: Fix
+  - message: Bipods can now instantly deploy on window frames, racks, crates, and
+      most machines.
+    type: Fix
+  id: 2764
+  time: '2026-01-13T09:00:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8963
+- author: QuietlyWhisper
+  changes:
+  - message: Fixed hive structures like the hive cluster not giving the Queen Eye
+      vision.
+    type: Fix
+  id: 2765
+  time: '2026-01-13T09:01:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8973
+- author: SharkSnake98
+  changes:
+  - message: Fixed weeds and areas in the Repaired Chance's Claim map.
+    type: Fix
+  id: 2766
+  time: '2026-01-13T09:00:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8978
+- author: wheelwrightt
+  changes:
+  - message: Visors with power cells will now display their charge when examining
+      the helmet they're inserted into.
+    type: Tweak
+  id: 2767
+  time: '2026-01-13T09:02:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8565
+- author: SharkSnake98
+  changes:
+  - message: Added the Shiva's Snowball CLF Raid Scenario Nightmare Insert (Not Playable
+      yet)
+    type: Add
+  id: 2768
+  time: '2026-01-13T08:58:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8936
+- author: MoonlightHollow
+  changes:
+  - message: Replace the headset in the Command Tablet Cabinet
+    type: Tweak
+  id: 2769
+  time: '2026-01-13T09:02:24.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8756
 Name: RMC14
 Order: -1
