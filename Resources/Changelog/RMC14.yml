@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: ExponentialWizard
-  changes:
-  - message: Fixed scoping not facing seat direction while buckled
-    type: Fix
-  id: 2243
-  time: '2025-08-29T04:57:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7464
 - author: Max_Power
   changes:
   - message: Fixed the M82F Flare Gun having a 1.15x wielded accuracy and 0.95x unwielded
@@ -4718,5 +4711,12 @@
   id: 2745
   time: '2026-01-11T11:01:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8913
+- author: XxSWAG-MASTER-OVERLORDxX
+  changes:
+  - message: CLF Leader (ERT)
+    type: Add
+  id: 2746
+  time: '2026-01-12T02:00:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8825
 Name: RMC14
 Order: -1
