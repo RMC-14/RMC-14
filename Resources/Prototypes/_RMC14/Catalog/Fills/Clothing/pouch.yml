@@ -116,8 +116,8 @@
 
 - type: entity
   parent: RMCPouchShotgun
-  id: RMCPouchShotgunFilledConstable
-  suffix: Filled, Constable
+  id: RMCPouchShotgunFilledPolicing
+  suffix: Filled, Policing
   components:
   - type: StorageFill
     contents:

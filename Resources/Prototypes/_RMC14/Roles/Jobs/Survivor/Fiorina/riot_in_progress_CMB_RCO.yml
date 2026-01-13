@@ -67,14 +67,14 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledM16, WeaponRifleM16, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledM16, WeaponRifleM16A5, RMCExplosiveBreachingCharge ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
     - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
     primaryWeaponChance: 1
