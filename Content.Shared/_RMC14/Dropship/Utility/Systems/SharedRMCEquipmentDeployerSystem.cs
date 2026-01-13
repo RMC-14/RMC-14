@@ -54,6 +54,9 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         if (ent.Comp.DeployEntity == null)
             return;
 
+        if (!ent.Comp.IsDeployableByHand)
+            return;
+
         if (_container.TryGetContainer(ent, ent.Comp.DeploySlotId, out var container))
         {
             var deployOffset = Vector2.Zero;
