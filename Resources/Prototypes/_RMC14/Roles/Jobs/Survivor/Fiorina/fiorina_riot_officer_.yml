@@ -42,6 +42,7 @@
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge
+    eyes: RMCGlassesSecurityBlue
 
 - type: entity
   parent: CMSpawnPointJobBase
