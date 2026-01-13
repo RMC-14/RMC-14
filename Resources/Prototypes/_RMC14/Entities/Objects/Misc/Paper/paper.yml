@@ -256,3 +256,17 @@
     headerImagePath: "/Textures/_RMC14/Interface/Paper/paper_heading_requisition_invoice.svg.96dpi.png"
     headerMargin: 0.0, 12.0, 0.0, 0.0
   - type: RequisitionsInvoice
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperWeYa
+  name: weston-yamada official document
+  components:
+  - type: PaperVisuals
+    headerImagePath: "/Textures/_RMC14/Interface/Paper/paper_heading_weya.svg.96dpi.png"
+    headerMargin: 0.0, 1.0, 0.0, 0.0
+
+- type: entity
+  parent: RMCPaperWeYa
+  id: RMCPaperWeYaLiaison
+  name: weston-yamada document
