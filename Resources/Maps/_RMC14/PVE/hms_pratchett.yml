@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 21:12:21
-  entityCount: 6132
+  time: 01/13/2026 22:13:47
+  entityCount: 6133
 maps:
 - 1
 grids:
@@ -6606,6 +6606,8 @@ entities:
         -76,-35: RMCAreaPRTCraneTunnel
         -108,-25: RMCAreaPRTHangarCargo
         -34,-26: RMCAreaPRTCargoBayUpper
+    - type: BecomesStation
+      id: HMSPratchett
 - proto: ActionToggleLight
   entities:
   - uid: 4
@@ -23846,6 +23848,11 @@ entities:
     - type: Transform
       pos: -107.5,-25.5
       parent: 2
+  - uid: 6133
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 2
 - proto: CMWashingMachineDouble
   entities:
   - uid: 3111
@@ -23863,7 +23870,7 @@ entities:
       pos: -44.5,-4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -115237.08
+      secondsUntilStateChange: -115319.016
       state: Opening
     - type: Airlock
       autoClose: False
@@ -25218,7 +25225,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -121048.914
+      secondsUntilStateChange: -121130.85
       state: Opening
   - uid: 3328
     components:
@@ -33477,7 +33484,7 @@ entities:
       pos: -8.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4126.9907
+      secondsUntilStateChange: -4208.9253
       state: Closing
   - uid: 4465
     components:
@@ -33486,7 +33493,7 @@ entities:
       pos: -9.5,2.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4127.524
+      secondsUntilStateChange: -4209.4585
       state: Closing
   - uid: 4466
     components:
@@ -33507,7 +33514,7 @@ entities:
       pos: -12.5,-1.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -4130.024
+      secondsUntilStateChange: -4211.9585
       state: Closing
   - uid: 4469
     components:
@@ -33528,7 +33535,7 @@ entities:
       pos: -11.5,-4.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -78635.09
+      secondsUntilStateChange: -78717.03
       state: Closing
   - uid: 4472
     components:
