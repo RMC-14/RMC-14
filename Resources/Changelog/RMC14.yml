@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Executing someone via the Mateba or Winter Wyvern will have recoil when
-      one-handed, and a popup when starting.
-    type: Tweak
-  id: 2254
-  time: '2025-08-29T23:49:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7720
 - author: Dygon
   changes:
   - message: The Dropship Part Fabricator can now print the LAU-229 Rocket Pod, which
@@ -4699,5 +4691,12 @@
   id: 2756
   time: '2026-01-13T08:48:52.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8925
+- author: TheBlueYowie
+  changes:
+  - message: Updated recommendations and ordering in CT gear vendor
+    type: Tweak
+  id: 2757
+  time: '2026-01-13T08:51:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8944
 Name: RMC14
 Order: -1
