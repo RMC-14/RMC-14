@@ -27,7 +27,6 @@
       preset: RMCSurvivorPresetRiotInProgressCMBRCO
     - type: JobPrefix
       prefix: rmc-job-prefix-bureau-riot-control-officer
-  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
   greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
 
 - type: startingGear
