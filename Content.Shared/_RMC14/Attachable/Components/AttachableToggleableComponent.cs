@@ -100,6 +100,9 @@ public sealed partial class AttachableToggleableComponent : Component
     [DataField, AutoNetworkedField]
     public AttachableInstantToggleConditions InstantToggle = AttachableInstantToggleConditions.None;
 
+    [DataField, AutoNetworkedField]
+    public float InstantToggleRange = 1f;
+
     /// <summary>
     /// If set to true, this attachment will block some of the holder's functionality when active and perform it instead.
     /// Used for attached weapons, like the UGL.
