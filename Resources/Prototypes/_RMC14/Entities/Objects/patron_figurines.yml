@@ -2095,3 +2095,14 @@
     state: ignis_nightfire_nyx
   - type: PatronFigurine
     id: fdcfa5a0-80bb-45d1-9214-2753eab83006
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHethrynCliffton
+  name: Hethryn Cliffton figurine
+  description: "It's just intuition. My sources? How about my gut feeling, huh? How am I supposed to explain that?"
+  components:
+  - type: Sprite
+    state: hethryn_cliffton
+  - type: PatronFigurine
+    id: a87df95b-8419-42c3-899f-796fd1410ec2
