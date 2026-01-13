@@ -42,12 +42,10 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillJtac: 2
-        RMCSkillLeadership: 1
         RMCSkillMedical: 2
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
-    - type: MarineOrders
     - type: CMVendorUser
       id: CMDropshipCrewChief
       points: 45

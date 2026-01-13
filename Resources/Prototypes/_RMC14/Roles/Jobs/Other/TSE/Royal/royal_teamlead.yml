@@ -31,7 +31,7 @@
         RMCSkillMeleeWeapons: 1
         RMCSkillJtac: 2
         RMCSkillVehicles: 1
-        RMCSkillLeadership: 1
+        RMCSkillLeadership: 2
         RMCSkillPilot: 1
         RMCSkillIntel: 1
     - type: MarineOrders
