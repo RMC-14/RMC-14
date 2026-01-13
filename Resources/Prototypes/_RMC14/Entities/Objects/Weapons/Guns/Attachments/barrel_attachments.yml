@@ -483,11 +483,10 @@
   id: RMCAttachmentSuppressorNPZ92
 
 - type: Tag
-<<<<<<< HEAD
   id: RMCAttachmentSuppressorM96SB
-=======
+
+- type: Tag
   id: RMCAttachmentSuppressorL112
->>>>>>> rcmdmr/L112
 
 - type: Tag
   id: RMCAttachmentBarrelCharger

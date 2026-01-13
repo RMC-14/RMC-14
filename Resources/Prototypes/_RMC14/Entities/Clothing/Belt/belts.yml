@@ -1340,17 +1340,6 @@
     - id: RMCMK80
 
 - type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCMK80BeltPMCFilled
-  suffix: Filled, MK80
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80
-
-- type: entity
   parent: RMCBeltHolsterPistolTSE
   id: RMCMK80BeltRoyalFilled
   suffix: Filled, MK80

@@ -110,6 +110,7 @@
   components:
   - type: Tag
     tags:
+    - RMCL112SniperRifle
     - RMCL112SniperRifleSuppressed
   - type: AttachableHolder
     slots:
