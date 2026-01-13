@@ -1,6 +1,8 @@
+using System.Numerics;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Containers;
-using System.Numerics;
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -19,7 +21,7 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (ent.Comp.Offset == Vector2.Zero && ent.Comp.MuzzleOffset == Vector2.Zero)
+        if (ent.Comp.Offset == Vector2.Zero && ent.Comp.MuzzleOffset == Vector2.Zero && !ent.Comp.UseDirectionalOffsets)
             return;
 
         var baseUid = ent.Owner;
@@ -30,8 +32,11 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         }
 
         var baseCoords = _transform.GetMoverCoordinates(baseUid);
-        var baseRotation = _transform.GetWorldRotation(baseUid) + ent.Comp.AngleOffset;
-        var fromCoords = baseCoords.Offset(baseRotation.RotateVec(ent.Comp.Offset));
+        var baseRotation = GetBaseRotation(baseUid, ent.Comp.AngleOffset);
+        var (offset, rotateOffset) = GetOffset(ent.Comp, baseUid, baseRotation);
+        var fromCoords = rotateOffset
+            ? baseCoords.Offset(baseRotation.RotateVec(offset))
+            : baseCoords.Offset(offset);
 
         if (ent.Comp.MuzzleOffset != Vector2.Zero)
         {
@@ -49,5 +54,43 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         }
 
         args.FromCoordinates = fromCoords;
+    }
+
+    private Angle GetBaseRotation(EntityUid baseUid, Angle angleOffset)
+    {
+        var rotation = _transform.GetWorldRotation(baseUid);
+        if (TryComp(baseUid, out GridVehicleMoverComponent? mover) && mover.CurrentDirection != Vector2i.Zero)
+            rotation = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
+
+        return rotation + angleOffset;
+    }
+
+    private (Vector2 Offset, bool Rotate) GetOffset(
+        GunMuzzleOffsetComponent muzzle,
+        EntityUid baseUid,
+        Angle baseRotation)
+    {
+        if (!muzzle.UseDirectionalOffsets)
+            return (muzzle.Offset, true);
+
+        var dir = GetBaseDirection(baseUid, baseRotation);
+        var offset = dir switch
+        {
+            Direction.North => muzzle.OffsetNorth,
+            Direction.East => muzzle.OffsetEast,
+            Direction.South => muzzle.OffsetSouth,
+            Direction.West => muzzle.OffsetWest,
+            _ => muzzle.Offset,
+        };
+
+        return (offset, false);
+    }
+
+    private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
+    {
+        if (TryComp(baseUid, out GridVehicleMoverComponent? mover) && mover.CurrentDirection != Vector2i.Zero)
+            return mover.CurrentDirection.AsDirection();
+
+        return baseRotation.GetCardinalDir();
     }
 }

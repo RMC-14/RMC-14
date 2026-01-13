@@ -123,6 +123,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCVehicleDebugOverlay =
         CVarDef.Create("rmc.vehicle.debug_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCVehicleHardpointOverlay =
+        CVarDef.Create("rmc.vehicle.hardpoint_overlay", false, CVar.CLIENT | CVar.ARCHIVE);
+
     public static readonly CVarDef<bool> RMCVehicleCollisionOverlay =
         CVarDef.Create("rmc.vehicle.collision_overlay", true, CVar.CLIENT | CVar.ARCHIVE);
 

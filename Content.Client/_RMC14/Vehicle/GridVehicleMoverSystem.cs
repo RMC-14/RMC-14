@@ -15,17 +15,28 @@ public sealed class GridVehicleMoverSystem : EntitySystem
     public static readonly List<Vector2> DebugCollisionPositions = new();
 
     private GridVehicleMoverOverlay? _overlay;
+    private VehicleHardpointDebugOverlay? _hardpointOverlay;
 
     public override void Initialize()
     {
         _overlay = new GridVehicleMoverOverlay(EntityManager);
         _overlay.DebugEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleDebugOverlay);
         _overlay.CollisionsEnabled = _cfg.GetCVar(RMCCVars.RMCVehicleCollisionOverlay);
+        _hardpointOverlay = new VehicleHardpointDebugOverlay(EntityManager)
+        {
+            Enabled = _cfg.GetCVar(RMCCVars.RMCVehicleHardpointOverlay)
+        };
 
         _cfg.OnValueChanged(RMCCVars.RMCVehicleDebugOverlay, val =>
         {
             if (_overlay != null)
                 _overlay.DebugEnabled = val;
+        }, true);
+
+        _cfg.OnValueChanged(RMCCVars.RMCVehicleHardpointOverlay, val =>
+        {
+            if (_hardpointOverlay != null)
+                _hardpointOverlay.Enabled = val;
         }, true);
 
         _cfg.OnValueChanged(RMCCVars.RMCVehicleCollisionOverlay, val =>
@@ -34,12 +45,17 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 _overlay.CollisionsEnabled = val;
         }, true);
 
-        IoCManager.Resolve<IOverlayManager>().AddOverlay(_overlay);
+        var overlayManager = IoCManager.Resolve<IOverlayManager>();
+        overlayManager.AddOverlay(_overlay);
+        overlayManager.AddOverlay(_hardpointOverlay);
     }
 
     public override void Shutdown()
     {
+        var overlayManager = IoCManager.Resolve<IOverlayManager>();
         if (_overlay != null)
-            IoCManager.Resolve<IOverlayManager>().RemoveOverlay(_overlay);
+            overlayManager.RemoveOverlay(_overlay);
+        if (_hardpointOverlay != null)
+            overlayManager.RemoveOverlay(_hardpointOverlay);
     }
 }

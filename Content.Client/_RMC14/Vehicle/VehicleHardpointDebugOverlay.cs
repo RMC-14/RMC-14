@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
+using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.Graphics;
 using Robust.Shared.Containers;
@@ -21,6 +22,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly SharedContainerSystem _container;
     private readonly EntityQuery<GunComponent> _gunQ;
+    private readonly EntityQuery<GunFireArcComponent> _fireArcQ;
+    private readonly EntityQuery<GridVehicleMoverComponent> _moverQ;
     private readonly EntityQuery<VehicleTurretComponent> _turretQ;
     private readonly EntityQuery<VehiclePortGunComponent> _portGunQ;
 
@@ -30,6 +33,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         _transform = ents.System<SharedTransformSystem>();
         _container = ents.System<SharedContainerSystem>();
         _gunQ = ents.GetEntityQuery<GunComponent>();
+        _fireArcQ = ents.GetEntityQuery<GunFireArcComponent>();
+        _moverQ = ents.GetEntityQuery<GridVehicleMoverComponent>();
         _turretQ = ents.GetEntityQuery<VehicleTurretComponent>();
         _portGunQ = ents.GetEntityQuery<VehiclePortGunComponent>();
     }
@@ -53,6 +58,9 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             handle.DrawLine(origin, muzzlePos, new Color(0.95f, 0.95f, 0.95f, 0.7f));
             handle.DrawCircle(origin, 0.07f, new Color(0.2f, 0.9f, 1f, 0.9f));
             handle.DrawCircle(muzzlePos, 0.1f, new Color(1f, 0.75f, 0.2f, 0.95f));
+
+            DrawShootArc(uid, origin, args.MapId, handle);
+            DrawShootTarget(uid, origin, args.MapId, handle);
         }
     }
 
@@ -79,9 +87,12 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             return false;
 
         var baseCoords = _transform.GetMoverCoordinates(baseUid);
-        var baseRotation = _transform.GetWorldRotation(baseUid) + muzzle.AngleOffset;
+        var baseRotation = GetBaseRotation(baseUid, muzzle.AngleOffset);
 
-        var originCoords = baseCoords.Offset(baseRotation.RotateVec(muzzle.Offset));
+        var (offset, rotateOffset) = GetOffset(muzzle, baseUid, baseRotation);
+        var originCoords = rotateOffset
+            ? baseCoords.Offset(baseRotation.RotateVec(offset))
+            : baseCoords.Offset(offset);
         origin = _transform.ToMapCoordinates(originCoords).Position;
 
         var muzzleCoords = originCoords;
@@ -105,5 +116,78 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
 
         muzzlePos = _transform.ToMapCoordinates(muzzleCoords).Position;
         return true;
+    }
+
+    private void DrawShootArc(EntityUid uid, Vector2 origin, MapId mapId, DrawingHandleWorld handle)
+    {
+        if (!_fireArcQ.TryComp(uid, out var arc))
+            return;
+
+        if (!_container.TryGetContainingContainer((uid, null), out var container))
+            return;
+
+        if (!_ents.TryGetComponent(container.Owner, out TransformComponent? baseXform) || baseXform.MapID != mapId)
+            return;
+
+        var baseRotation = GetBaseRotation(container.Owner, arc.AngleOffset);
+        var halfArc = Angle.FromDegrees(arc.Arc.Degrees / 2f);
+        var left = baseRotation + halfArc;
+        var right = baseRotation - halfArc;
+
+        const float arcLength = 3.5f;
+        handle.DrawLine(origin, origin + baseRotation.ToWorldVec() * arcLength, new Color(0.2f, 0.9f, 0.3f, 0.8f));
+        handle.DrawLine(origin, origin + left.ToWorldVec() * arcLength, new Color(0.95f, 0.45f, 0.2f, 0.8f));
+        handle.DrawLine(origin, origin + right.ToWorldVec() * arcLength, new Color(0.95f, 0.45f, 0.2f, 0.8f));
+    }
+
+    private void DrawShootTarget(EntityUid uid, Vector2 origin, MapId mapId, DrawingHandleWorld handle)
+    {
+        if (!_gunQ.TryComp(uid, out var gun) || gun.ShootCoordinates == null)
+            return;
+
+        var targetCoords = _transform.ToMapCoordinates(gun.ShootCoordinates.Value);
+        if (targetCoords.MapId != mapId)
+            return;
+
+        handle.DrawLine(origin, targetCoords.Position, new Color(0.9f, 0.2f, 0.9f, 0.7f));
+        handle.DrawCircle(targetCoords.Position, 0.08f, new Color(0.9f, 0.2f, 0.9f, 0.8f));
+    }
+
+    private Angle GetBaseRotation(EntityUid baseUid, Angle angleOffset)
+    {
+        var rotation = _transform.GetWorldRotation(baseUid);
+        if (_moverQ.TryComp(baseUid, out var mover) && mover.CurrentDirection != Vector2i.Zero)
+            rotation = new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
+
+        return rotation + angleOffset;
+    }
+
+    private (Vector2 Offset, bool Rotate) GetOffset(
+        GunMuzzleOffsetComponent muzzle,
+        EntityUid baseUid,
+        Angle baseRotation)
+    {
+        if (!muzzle.UseDirectionalOffsets)
+            return (muzzle.Offset, true);
+
+        var dir = GetBaseDirection(baseUid, baseRotation);
+        var offset = dir switch
+        {
+            Direction.North => muzzle.OffsetNorth,
+            Direction.East => muzzle.OffsetEast,
+            Direction.South => muzzle.OffsetSouth,
+            Direction.West => muzzle.OffsetWest,
+            _ => muzzle.Offset,
+        };
+
+        return (offset, false);
+    }
+
+    private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
+    {
+        if (_moverQ.TryComp(baseUid, out var mover) && mover.CurrentDirection != Vector2i.Zero)
+            return mover.CurrentDirection.AsDirection();
+
+        return baseRotation.GetCardinalDir();
     }
 }
