@@ -70,6 +70,9 @@
     skills:
       all:
         RMCSkillMedical: 2
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 2000
 
 - type: entity
   parent: CMFirstAidKit

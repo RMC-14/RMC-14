@@ -1,5 +1,5 @@
 - type: entity
-  parent: NitrousOxideTank
+  parent: CMGasTankBase
   id: CMAnestheticTank
   name: anesthetic tank
   description: A tank with an N2O/O2 gas mix.
@@ -11,6 +11,8 @@
     sprite: _RMC14/Objects/Tanks/anesthetic.rsi
   - type: GasTank
     outputPressure: 30.4
+  - type: Clothing
+    sprite: Objects/Tanks/anesthetic.rsi
 
 # Gas Tanks /obj/item/reagent_container/glass/canister
 
@@ -19,6 +21,9 @@
   abstract: true
   parent: GasTankBase
   id: CMGasTankBase
+  components:
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: CMGasTankBase

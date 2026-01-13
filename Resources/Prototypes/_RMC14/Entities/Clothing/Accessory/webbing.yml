@@ -498,6 +498,8 @@
       - PowerCell
       - RMCNailgunCompact
       - RMCNailgunTactical
+      - RMCSynthResetKey
+      - RodMetal1
       components:
       - Welder
       - PowerCell
@@ -525,6 +527,8 @@
         - PowerCell
         - RMCNailgunCompact
         - RMCNailgunTactical
+        - RMCSynthResetKey
+        - RodMetal1
         components:
         - Welder
         - PowerCell
@@ -576,6 +580,8 @@
       - PowerCell
       - RMCNailgunCompact
       - RMCNailgunTactical
+      - RMCSynthResetKey
+      - RodMetal1
       components:
       - Welder
       - PowerCell
@@ -597,6 +603,8 @@
         - PowerCell
         - RMCNailgunCompact
         - RMCNailgunTactical
+        - RMCSynthResetKey
+        - RodMetal1
         components:
         - Welder
         - PowerCell

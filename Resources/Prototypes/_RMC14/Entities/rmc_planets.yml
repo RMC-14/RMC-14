@@ -52,6 +52,8 @@
     map: /Maps/_RMC14/solaris.yml
     camouflage: Desert
     announcement: "Weston-Yamada has lost contact with one of its Biological Storage Facilities, Solaris Ridge, on the planet of LV-1413. The UNS Almayer has been requested to look into the blackout by Weston-Yamada."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     selectRandomSurvivorInsert: false
     nightmareScenarios:
     - scenarioName: clfmining
@@ -292,6 +294,8 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1

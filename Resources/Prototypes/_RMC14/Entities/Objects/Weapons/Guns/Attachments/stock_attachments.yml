@@ -774,7 +774,7 @@
 - type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
-  name: submachinegun stock
+  name: submachinegun solid stock
   description: A rare AEGIS stock distributed in small numbers to UNMC forces. Compatible with the M63, this stock reduces recoil and scatter, but at a reduction to handling and agility. Seemingly a bit more effective in a brawl.
   components:
   - type: Sprite
