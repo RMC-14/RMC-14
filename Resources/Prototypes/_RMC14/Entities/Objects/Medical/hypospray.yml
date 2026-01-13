@@ -84,4 +84,14 @@
       vial:
       - RMCVialTricordrazine
 
+- type: entity
+  parent: CMHypospray
+  id: RMCHyposprayFilledEpi
+  suffix: Filled, Epinephrine
+  components:
+  - type: ContainerFill
+    containers:
+      vial:
+      - RMCVialEpinephrine
+
 
