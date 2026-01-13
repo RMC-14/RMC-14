@@ -183,13 +183,13 @@
         CMSurvivorSecurity:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
         CMSurvivorCorporate:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
         CMSurvivorDoctor:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
         CMSurvivorEngineer:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
         CMSurvivorScientist:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: 1
+        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
         CMSurvivor:
         - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
 
