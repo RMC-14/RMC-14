@@ -655,7 +655,7 @@
 - type: entity
   parent: RMCHeadBeretSquadAlpha
   id: RMCHeadBeretSquadEcho
-  description: Tightly Woven, as it should be.
+  description: Tightly woven, as it should be.
   suffix: Echo
   components:
   - type: Sprite
@@ -677,7 +677,7 @@
 - type: entity
   parent: RMCHeadBeretSquadAlpha
   id: RMCHeadBeretSquadIntel
-  description: Looks more intellegent than the person wearing it.
+  description: Looks more intelligent than the person wearing it.
   suffix: Intel
   components:
   - type: Sprite
@@ -772,7 +772,7 @@
   parent: ClothingHeadBase
   id: RMCHeadRadiationHood
   name: radiation hood
-  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
@@ -806,7 +806,7 @@
   parent: CMHeadBeret
   id: RMCHeadWeYaPilotCap
   name: Weston-Yamada Pilot cap
-  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civillian Pilots, akin to old Earth formal Pilots-wear.
+  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civilian Pilots, akin to old Earth formal Pilots-wear.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
@@ -1013,7 +1013,7 @@
   parent: ClothingHeadHatHoodNunHood
   id: RMCHeadNunHood
   name: nun hood
-  description: Maximum piety in this star system
+  description: Maximum piety in this star system.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hoods/nun.rsi
