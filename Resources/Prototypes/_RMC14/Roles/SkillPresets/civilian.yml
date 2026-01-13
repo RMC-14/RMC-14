@@ -117,8 +117,11 @@
       RMCSkillPowerLoader: 2
       RMCSkillVehicles: 1
 
-- type: skillPreset
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: SurvivorWeYaPMCStandard
+  name: Survivor PMC Standard
+  categories: [ HideSpawnMenu ]
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
@@ -127,8 +130,11 @@
     RMCSkillFirearms: 2
     RMCSkillVehicles: 1
 
-- type: skillPreset
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: SurvivorWeYaPMCMedic
+  name: Survivor PMC Medic
+  categories: [ HideSpawnMenu ]
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
@@ -139,8 +145,11 @@
     RMCSkillFirearms: 2
     RMCSkillVehicles: 1
 
-- type: skillPreset
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: SurvivorWeYaPMCEngineer
+  name: Survivor PMC Engineer
+  categories: [ HideSpawnMenu ]
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
@@ -153,8 +162,11 @@
     RMCSkillConstruction: 2
     RMCSkillPowerLoader: 2
 
-- type: skillPreset
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: SurvivorWeYaPMCLeader
+  name: Survivor PMC Team Leader
+  categories: [ HideSpawnMenu ]
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
@@ -170,8 +182,11 @@
     RMCSkillJtac: 2
     RMCSkillIntel: 2
 
-- type: skillPreset
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: SurvivorWeYaPMCCommander
+  name: Survivor PMC Field Operations Leader
+  categories: [ HideSpawnMenu ]
   skills:
     RMCSkillCqc: 1
     RMCSkillPolice: 0 # RMC14
