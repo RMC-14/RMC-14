@@ -11,7 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonLead
+      preset: RMCSkillPresetSurvivorGoonLead
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
