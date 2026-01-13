@@ -40,6 +40,7 @@ using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Fax;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -886,6 +887,33 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             while (faxes.MoveNext(out var faxId, out var faxComp))
             {
                 _fax.Refresh(faxId, faxComp);
+            }
+
+            if (SelectedPlanetMap == null)
+                return;
+
+            var specialFaxesList = SelectedPlanetMap.Value.Comp.SpecialFaxes;
+
+            if (specialFaxesList == null)
+                return;
+
+            var specialFaxes = EntityQueryEnumerator<FaxMachineComponent, SpecialFaxComponent>();
+            while (specialFaxes.MoveNext(out var faxId, out var faxComp, out var special))
+            {
+                foreach ((var targetFaxId, var paper) in specialFaxesList)
+                {
+                    if (special.FaxId != targetFaxId)
+                        continue;
+
+                    if (!paper.TryGet(out var paperComponent, _prototypes, _compFactory))
+                        continue;
+
+                    if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
+                        continue;
+
+                    var printout = new FaxPrintout(paperComponent.Content, entProto.Name, prototypeId: paper.Id, locked: true);
+                    _fax.Receive(faxId, printout, component: faxComp);
+                }
             }
         }
     }
