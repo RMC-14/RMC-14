@@ -106,6 +106,16 @@
   - type: FaxMachine
     name: "Three Suns Empire"
     notifyAdmins: true
+    
+- type: entity
+  parent: CMFax
+  id: RMCFaxLiaison
+  suffix: Corporate Liaison
+  components:
+  - type: FaxMachine
+    name: "Corporate Liaison"
+  - type: SpecialFax
+    faxId: Liaison
 
 - type: entity
   parent: CMFax
@@ -116,3 +126,4 @@
   - type: ApcPowerReceiver
     needsPower: true
     powerLoad: 5
+    

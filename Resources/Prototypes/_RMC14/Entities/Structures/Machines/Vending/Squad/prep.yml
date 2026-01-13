@@ -83,7 +83,7 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
-    - name: Boxes
+    - name: Magazine Boxes
       hasBoxes: true
       jobs:
       - CMQuartermaster
@@ -104,6 +104,38 @@
         box: CMMagazineSMGM63
       - id: RMCBoxMagazineRifleM54C
         box: CMMagazineRifleM54C
+      - id: RMCBoxMagazinePistolM77AP
+        box: CMMagazinePistolM77AP
+      - id: RMCBoxMagazineRevolverM44
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazinePistolM1984
+        box: CMMagazinePistolM1984
+      - id: RMCBoxMagazinePistolM13
+        box: RMCMagazinePistolM13
+    - name: Ammunition Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+    - name: Other Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
       - id: RMCBoxPackFlare
         box: CMPackFlare
 
@@ -575,9 +607,9 @@
         amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
-      - id: RMCAttachmentM63ArmBrace
-        amount: 2
       - id: RMCAttachmentM63Stock
+        amount: 2
+      - id: RMCAttachmentM63ArmBrace
         amount: 2
       - id: RMCAttachmentM54CStockSolid
         amount: 2
