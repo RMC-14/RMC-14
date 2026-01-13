@@ -1,0 +1,35 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by t0de (t0wnshark on GitHub",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "medical"
+        },
+		{
+            "name": "engi"
+        },
+		{
+            "name": "hangar"
+        },
+		{
+            "name": "maints"
+        },
+		{
+            "name": "public"
+        },
+		{
+            "name": "public1"
+        },
+		{
+            "name": "public2"
+		},
+		{
+		    "name": "cargo"	
+		}
+    ]
+}

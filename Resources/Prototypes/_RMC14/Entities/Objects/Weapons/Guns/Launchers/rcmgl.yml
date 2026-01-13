@@ -1,0 +1,24 @@
+- type: entity
+  name: L989A2 multiple grenade launcher
+  parent: [ RMCBaseWeaponGrenadeLauncher ]
+  id: RMCRoyalGrenadeLauncher
+  description: A lightweight support weapon fielded by the Royal Crown Marines. Chambered in small 20mm grenades, it lacks the punch of larger bore grenade launchers, but makes up for that in rate of fire.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/rcmgl.rsi
+    state: icon
+  - type: RMCSelectiveFire
+    baseFireRate: 1.43
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+  - type: OnShootTriggerAmmoTimer
+    timerStart: enum.TimerStartMode.OnHitGround
+    delay: 0
+  - type: BallisticAmmoProvider
+    capacity: 7
+    proto: RMCGrenade20mmHE
+    whitelist: 
+      tags: 
+      - LauncherCompatibleGrenade
+      - RMCGrenade20mm
