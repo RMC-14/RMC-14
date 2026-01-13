@@ -215,8 +215,6 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
-  - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsRifleTSE
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -245,8 +243,6 @@
     - state: ammo_band
       color: "#1F951F"
   - type: Appearance
-  - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsRifleTSEAP
 
 - type: entity
   parent: RMCMagazineRifleL24
