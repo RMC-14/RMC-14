@@ -2084,3 +2084,14 @@
     state: vicky_howlitzer
   - type: PatronFigurine
     id: 75c30413-9e78-4767-b9bc-a05e3b677f8e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIgnisNightfireNyx
+  name: Ignis 'Nightfire' Nyx figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: ignis_nightfire_nyx
+  - type: PatronFigurine
+    id: fdcfa5a0-80bb-45d1-9214-2753eab83006
