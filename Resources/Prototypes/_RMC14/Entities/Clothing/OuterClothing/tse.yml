@@ -46,7 +46,7 @@
   parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]
   id: RMCArmourM4TSEPAChief
   name: M4 pattern inspector TSEPA armour
-  description: A modified variant of the M4 TSEPA armour to have the additional riot plating returned, feauturing a golden insignia on the chestplate.
+  description: A modified variant of the M4 TSEPA armour to have the additional riot plating returned, featuring a golden insignia on the chestplate.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/marshal.rsi

@@ -1,0 +1,110 @@
+﻿- type: job
+  parent: CMJobBase
+  id: RMCCLFCellLeader
+  name: rmc-clf-cell-leader
+  description: rmc-ghost-role-information-clf-description
+  playTimeTracker: CMJobCLFCellLeader
+  ranks:
+    RMCRankCLFRebelCommander: [ ]
+  startingGear: RMCGearCLFCellLeader
+  icon: RMCJobIconCLFCellLeader
+  joinNotifyCrew: false
+  spawnMenuRoleName: CLF Cell Leader
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillFirearms: 1
+        RMCSkillEngineer: 2
+        RMCSkillCqc: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillPolice: 1
+        RMCSkillFireman: 3
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 3
+        RMCSkillConstruction: 2
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-cell-leader
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: clf_sl
+    - type: RMCPointing
+    - type: MarineOrders
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCLFCellLeader
+  name: clf ghost role cell leader
+  suffix: Spawner, Player
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Armbands/clf_armband.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCLFCellLeader
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCLFCellLeader
+  components:
+  - type: GhostRole
+    name: rmc-ghost-role-clf-cell-leader
+    description: rmc-ghost-role-information-clf-description
+    rules: rmc-ghost-role-information-clf-rules
+    reregister: false
+    job: RMCCLFCellLeader
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+    squad: SquadCLF
+
+- type: startingGear
+  id: RMCGearCLFCellLeader
+  equipment:
+    head: CMHeadBeret # TODO RMC14 Officer beret
+    mask: RMCCombatUtilityKnifeB # TODO RMC14 Type 80 bayonet
+    ears: RMCHeadsetDistressCLF
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitia
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesCombat
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDCardCLFCellLeader # TODO RMC14
+    belt: RMCMAR40BeltFilled
+    back: RMCSatchelLightpack
+    pocket1: RMCFlashlight
+    pocket2: RMCPouchFirstAidInjectors
+  storage:
+      back:
+      - RMCGrenadeIED
+      - RMCGrenadeIED
+      - RMCExplosivePlastic
+      - CMCrowbar
+      - CMScrewdriver
+      - CMMultitool
+      - CMWeaponPistolM1984
+      - CMMagazinePistolM1984
+      - CMMagazinePistolM1984
+      - RMCMagazineRifleMAR40
+      outerClothing:
+      - RMCMagazineRifleMAR40
+      - RMCMagazineRifleMAR40
+
+- type: playTimeTracker
+  id: CMJobCLFCellLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCLFCellLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: clf_sl
