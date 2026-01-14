@@ -65,7 +65,7 @@ public sealed class PlaceableSurfaceSystem : EntitySystem
         if (HasComp<DumpableComponent>(args.Used))
             return;
 
-        // Don't drop tools - they need to stay in hand to execute their action (e.g., welding DoAfter)
+        // RMC14: Don't drop tools - they need to stay in hand to execute their action (e.g., welding DoAfter)
         if (HasComp<ToolComponent>(args.Used))
             return;
 
