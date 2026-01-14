@@ -165,7 +165,7 @@
   - type: Tag
     tags:
     - RMCHelmetHEFA
-  # Uses same explosion system as CMGrenadeFrag
+  # Uses same explosion components as CMGrenadeFrag
   - type: ExplodeOnTrigger
   - type: Explosive
     explosionType: RMC
@@ -201,6 +201,8 @@
   - type: TimerTriggerVisuals
     primingSprite: icon-up
     unprimedSprite: icon
+  - type: TimerTriggerClothingVisuals
+    primedPrefix: up
 
 - type: Tag
   id: RMCHelmetHEFA
