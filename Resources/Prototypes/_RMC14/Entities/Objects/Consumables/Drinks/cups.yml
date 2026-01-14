@@ -48,6 +48,8 @@
   - type: Tag
     tags:
     - DrinkGlass
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCCoffeeCup

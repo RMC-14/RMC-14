@@ -183,6 +183,37 @@
     size: Small
   - type: MREItem
 
+# SPP survival bar
+
+- type: entity
+  parent: BaseItem
+  id: RMCSurvivalRationSPP
+  name: SPP survival ration
+  description: A small compressed package containing a single portion of food you cannot distinguish.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-spp-survival-ration
+  - type: Tag
+    tags:
+    - MRE
+  - type: Item
+    size: Tiny
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMRESPPSurvivalRationTypeA
+      orGroup: main
+    - id: RMCMRESPPSurvivalRationTypeB
+      orGroup: main
+    sound:
+      collection: CMFoodRip
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi
+    state: spp_ration
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
 - type: entity
   parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxMREEmpty

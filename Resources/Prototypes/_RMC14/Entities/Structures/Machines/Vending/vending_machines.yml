@@ -299,6 +299,16 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/spp_cola.rsi
 
 - type: entity
+  parent: RMCVendorColaSPP
+  id: RMCVendorNutriCoDrinkSPP
+  name: drink dispenser
+  suffix: SPP
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
+    offset: 0, 0.5
+
+- type: entity
   parent: CMVendor
   id: RMCVendorSoda
   name: Cold Drinks machine
