@@ -49,3 +49,13 @@ rmc-medal-panel-reject-recommendation = Reject
 rmc-medal-panel-recommender-label = [color=#5B88B0]Recommender:[/color]
 rmc-medal-panel-job-label = [color=#5B88B0]Job:[/color]
 rmc-medal-panel-reason-label = [color=#5B88B0]Reason:[/color]
+
+# Commendation Types
+rmc-commendation-type-medal = Medals
+rmc-commendation-type-jelly = Jelly
+
+# Commendation Display
+rmc-commendation-window = Commendations
+rmc-commendation-title = [bold]Round {$round} - {$name}[/bold]
+rmc-commendation-description = Issued to [bold]{$receiver}[/bold] by [bold]{$giver}[/bold] for:
+    {$text}

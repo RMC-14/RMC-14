@@ -114,8 +114,13 @@ public sealed class CommendationsManager : IPostInjectInit
         foreach (var commendation in commendations)
         {
             var container = new CommendationContainer();
-            container.Title.Text = $"[bold]Round {commendation.Round} - {commendation.Name}[/bold]";
-            container.Description.Text = $"Issued to [bold]{commendation.Receiver}[/bold] by [bold]{commendation.Giver}[/bold] for:\n{commendation.Text}";
+            container.Title.Text = Loc.GetString("rmc-commendation-title",
+                ("round", commendation.Round),
+                ("name", commendation.Name));
+            container.Description.Text = Loc.GetString("rmc-commendation-description",
+                ("receiver", commendation.Receiver),
+                ("giver", commendation.Giver),
+                ("text", commendation.Text));
 
             if (TryGetMedalInfo(commendation.Name, out var medalInfo))
             {
@@ -141,7 +146,8 @@ public sealed class CommendationsManager : IPostInjectInit
                 };
             }
 
-            window.Commendations.AddChild(container);
+            // Add container to appropriate tab based on commendation type
+            window.AddCommendation(commendation.Type, container);
         }
     }
 
