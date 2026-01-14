@@ -35,6 +35,90 @@
     minimapColor: '#c87816'
 
 - type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPMainLevel
+  name: OCP Main Level
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_main_level
+  - type: Area
+    minimapColor: '#335F8C'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPSpaceport
+  name: OCP Spaceport
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: spaceport
+  - type: Area
+    minimapColor: '#6C3280'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPMedbay
+  name: OCP Medbay
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: medbay
+  - type: Area
+    minimapColor: '#3f7fad'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPOffice
+  name: OCP Office
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: office
+  - type: Area
+    minimapColor: '#499751'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPDorms
+  name: OCP Dorm
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: dorms
+  - type: Area
+    minimapColor: '#4552a2'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPResearch
+  name: OCP Research
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: research
+  - type: Area
+    minimapColor: '#babc7a'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPCMB
+  name: OCP CMB
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: cmb
+  - type: Area
+    minimapColor: '#a22a27'
+
+- type: entity
   parent: RMCAreaPVE
   id: RMCAreaOCPOOB
   name: OCP Out Of Bounds

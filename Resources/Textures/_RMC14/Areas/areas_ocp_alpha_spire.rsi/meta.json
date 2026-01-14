@@ -15,6 +15,27 @@
         },
         {
             "name": "ocp_maints_level"
+        },
+        {
+            "name": "ocp_main_level"
+        },
+        {
+            "name": "spaceport"
+        },
+        {
+            "name": "medbay"
+        },
+        {
+            "name": "office"
+        },
+        {
+            "name": "dorms"
+        },
+        {
+            "name": "research"
+        },
+        {
+            "name": "cmb"
         }
     ]
 }
