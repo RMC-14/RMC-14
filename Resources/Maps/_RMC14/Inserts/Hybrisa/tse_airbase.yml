@@ -1270,7 +1270,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 29.5,22.5
       parent: 1
-- proto: CMApcMediumCapacity
+- proto: CMApcNoPower
   entities:
   - uid: 430
     components:
