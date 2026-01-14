@@ -37,6 +37,7 @@
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteranSPP
     back: RMCSatchelLightpack
+    mask: RMCMaskGasSPP
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
     ears: RMCHeadsetDistressSPP
@@ -64,8 +65,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ RMCFireAxe ]
-    - [ CMFireExtinguisherPortable ]
-
-
+    randomGearOther:
+    -
+      - [ RMCFireAxe ]
+      - [ CMFireExtinguisherPortable ]
