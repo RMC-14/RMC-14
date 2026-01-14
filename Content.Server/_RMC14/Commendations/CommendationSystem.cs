@@ -3,6 +3,8 @@ using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.Database;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -15,6 +17,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
     [Dependency] private readonly CommendationManager _commendation = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
 
     public override async void GiveCommendation(
         Entity<CommendationGiverComponent?, ActorComponent?> giver,
@@ -35,7 +38,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             }
 
             var receiverId = Guid.Parse(receiver.Comp.LastPlayerId);
-            var receiverName = Name(receiver);
+            var receiverName = GetNameWithRank(receiver);
 
             await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type);
         }
@@ -90,7 +93,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             return;
 
         var giverId = giver.Comp2.PlayerSession.UserId;
-        var giverName = Name(giver);
+        var giverName = GetNameWithRank(giver);
         var round = _gameTicker.RoundId;
 
         giver.Comp1.Given++;
@@ -109,5 +112,20 @@ public sealed class CommendationSystem : SharedCommendationSystem
         {
             Log.Error($"Error saving commendation to database, giver: {giverName}, receiver: {receiverName}, round: {round}:\n{e}");
         }
+    }
+
+    /// <summary>
+    /// Gets the name with rank/rank prefix for commendations.
+    /// </summary>
+    private string GetNameWithRank(EntityUid uid)
+    {
+        if (TryComp<XenoNameComponent>(uid, out var xenoName) && !string.IsNullOrEmpty(xenoName.Rank))
+        {
+            var baseName = Name(uid);
+            return $"{xenoName.Rank} {baseName}";
+        }
+
+        var rankName = _rank.GetSpeakerFullRankName(uid);
+        return rankName ?? Name(uid);
     }
 }

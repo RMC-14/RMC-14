@@ -190,7 +190,9 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 computer.GibbedMarines.FirstOrDefault(info => info.LastPlayerId == lastPlayerId) is { } info)
             {
                 awardedLastPlayerId = lastPlayerId;
-                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, info.Name, args.Name, args.Message, CommendationType.Medal);
+                // Format name with rank if available
+                var receiverName = !string.IsNullOrEmpty(info.Rank) ? $"{info.Rank} {info.Name}" : info.Name;
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, receiverName, args.Name, args.Message, CommendationType.Medal);
             }
         }
         else
