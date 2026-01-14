@@ -103,6 +103,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 500
 
 - type: entity
   parent: CMBeakerBase
@@ -146,6 +149,9 @@
     solution: beaker
   - type: StaticPrice
     price: 20
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 5000
 
 - type: entity
   parent: RMCBeakerBaseMetallic
@@ -211,6 +217,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 10000
 
 # Minitank /obj/item/reagent_container/glass/minitank
 - type: entity
@@ -244,6 +253,9 @@
     quickEquip: false
     slots:
     - none
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 500
 
 # Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
 # BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
@@ -329,6 +341,9 @@
     damageContainer: Inorganic
     damageModifierSet: Glass
   - type: DnaSubstanceTrace
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 2000
 
 - type: entity
   parent: RMCPressurizedCanister
@@ -472,6 +487,8 @@
   - type: Vial
   - type: StaticPrice
     price: 10
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCVial

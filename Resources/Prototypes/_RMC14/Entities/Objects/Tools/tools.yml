@@ -37,6 +37,9 @@
     - Ears
     - Suitstorage
     - Mask
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 75
 
 - type: entity
   parent: Wirecutter
@@ -75,6 +78,9 @@
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 80
 
 - type: entity
   parent: Wrench
@@ -109,6 +115,9 @@
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 150
 
 - type: entity
   parent: Multitool
@@ -145,6 +154,10 @@
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
 
 - type: entity
   parent: trayScanner
@@ -190,6 +203,9 @@
     quickEquip: false
     slots:
     - Suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 150
 
 - type: entity
   parent: Crowbar
@@ -228,6 +244,9 @@
     speedModifier: 100000
   - type: ToolTileCompatible
     delay: 0
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
 
 - type: entity
   parent: CMCrowbar
@@ -263,6 +282,9 @@
           type: HandLabelerBoundUserInterface
         enum.RMCHandLabelerUiKey.PillBottleColor:
           type: RMCHandLabelerPillBottleColorBui
+    - type: PhysicalComposition
+      materialComposition:
+        CMSteel: 125
 
 - type: entity
   parent: Shovel
@@ -285,6 +307,9 @@
   - type: Appearance
   - type: XenoTunnelFiller
   - type: Shovel
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
 
 #PVE Tool
 - type: entity

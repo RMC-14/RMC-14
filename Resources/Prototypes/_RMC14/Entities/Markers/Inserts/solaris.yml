@@ -20,7 +20,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-v3.yml"
-      probability: 0.5
+      probability: 0.13 # todo: weight 1 with 0.5 standalone chance vs Medbay Passage
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -31,7 +31,7 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/medbay-passage.yml"
-      probability: 0.5
+      probability: 0.37 # todo: weight 3 with 0.5 standalone chance vs Medbay v3
 
 - type: entity
   parent: RMCMapInsertSolarisBase
@@ -42,7 +42,18 @@
   - type: MapInsert
     variations:
     - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_extratunnel.yml"
-      probability: 0.5
+      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda cave mushroom
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLambdaCaveMushroom
+  name: Lambda Cave Mushroom
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lambda-cave_mushroom.yml"
+      probability: 0.25 # todo: 0.5 lambda caves standalone chance vs Lambda Cave Extratunnel
 
 # Sprinkles
 - type: entity
@@ -220,13 +231,57 @@
 
 - type: entity
   parent: RMCMapInsertSolarisBase
-  id: RMCMapInsertSolarisCrashlandingEva
-  name: Crashlanding Eva
+  id: RMCMapInsertSolarisCargoContainers
+  name: Cargo Containers
   suffix: Insert Solaris
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
-      probability: 1
-      nightmareScenario: crashlanding_offices
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/cargo_containers.yml"
+      probability: 0.3
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisLZ1ContainersScramble
+  name: LZ1 Containers Scramble
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/lz1containers_scramble.yml"
+      probability: 0.25
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisReactorMeltdown
+  name: Reactor Meltdown
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/reactor_meltdown.yml"
+      probability: 0.15
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisChapelCult
+  name: Chapel Cult
+  suffix: Insert Solaris
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Solaris/chapel_cult.yml"
+      probability: 0.25
     replaceAreas: false
+
+- type: entity
+  id: RMCMapInsertSolarisCrashlandingEva
+  name: Crashlanding Eva
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/crashlanding-eva.yml"
+        probability: 1
+        nightmareScenario: crashlanding_offices
+      replaceAreas: false

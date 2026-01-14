@@ -136,3 +136,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseWeYaManager
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseCLF
+  name: Corpse Spawner - CLF Soldier
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseCLF

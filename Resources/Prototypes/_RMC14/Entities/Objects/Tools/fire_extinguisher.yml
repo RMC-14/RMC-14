@@ -42,6 +42,9 @@
     quickEquip: false
     slots:
     - Belt
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 90
 
 - type: entity
   parent: CMFireExtinguisher

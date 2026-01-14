@@ -5,7 +5,7 @@
   stackEntity: CMSheetMetal
   name: materials-metal
   icon: { sprite: _RMC14/Objects/Materials/Sheets/metal.rsi, state: metal }
-  price: 0.05
+  price: 0.00133
 
 - type: stack
   id: CMSteel
@@ -72,7 +72,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        CMSteel: 100
+        CMSteel: 3750
     - type: Stack
       count: 50
       stackType: CMSteel
@@ -176,7 +176,7 @@
   name: materials-plasteel
   icon: { sprite: _RMC14/Objects/Materials/Sheets/plasteel.rsi, state: plasteel }
   color: "#696969"
-  price: 0.28
+  price: 0.00746
 
 - type: stack
   id: CMPlasteel
@@ -204,7 +204,7 @@
     - type: Material
     - type: PhysicalComposition
       materialComposition:
-        CMPlasteel: 100
+        CMPlasteel: 3750
     - type: Stack
       count: 40
       stackType: CMPlasteel
