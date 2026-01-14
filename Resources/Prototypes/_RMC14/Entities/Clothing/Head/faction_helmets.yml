@@ -162,6 +162,9 @@
     # armor_internaldamage = CLOTHING_ARMOR_HIGH
   - type: ParasiteResistance
     maxCount: 6
+  - type: Tag
+    tags:
+    - RMCHelmetHEFA
   # Uses same explosion system as CMGrenadeFrag
   - type: ExplodeOnTrigger
   - type: Explosive
@@ -172,7 +175,7 @@
     deleteAfterExplosion: true
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 48
+    capacity: 1 # TODO RMC14 shrapnel lag
     directHit: false
   - type: ContainerContainer
     containers:
@@ -181,6 +184,7 @@
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
   - type: OnUseTimerTrigger
     delay: 4
     beepSound:
@@ -190,11 +194,16 @@
     initialBeepDelay: 0
     beepInterval: 10
     doPopup: false
+  - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
   - type: Appearance
   - type: AnimationPlayer
   - type: TimerTriggerVisuals
     primingSprite: icon-up
     unprimedSprite: icon
+
+- type: Tag
+  id: RMCHelmetHEFA
 
 # CBRN
 - type: entity
