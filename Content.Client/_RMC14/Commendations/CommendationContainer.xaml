@@ -1,9 +1,18 @@
-﻿<controls:CommendationContainer
+<controls:CommendationContainer
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Commendations"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Orientation="Vertical">
-    <RichTextLabel Name="Title" Access="Public" />
+    <RichTextLabel Name="Title" Access="Public" HorizontalExpand="True" />
     <ui:BlueHorizontalSeparator />
-    <RichTextLabel Name="Description" Access="Public" />
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
+        <TextureRect Name="Icon"
+                     Access="Public"
+                     Visible="False"
+                     SetSize="64 64"
+                     Stretch="KeepAspectCentered"
+                     VerticalAlignment="Top"
+                     Margin="0 0 2 0" />
+        <RichTextLabel Name="Description" Access="Public" HorizontalExpand="True" />
+    </BoxContainer>
 </controls:CommendationContainer>
