@@ -1221,6 +1221,17 @@
     alwaysPowered: true
 
 - type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportDogbite
+  name: UD-9M 'Dogbite' Utility Dropship
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#525252D8'
+    alwaysPowered: true
+
+- type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsGarageReception
   name: Garage - Reception
