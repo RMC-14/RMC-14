@@ -58,3 +58,17 @@
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/lifeboat.yml"
     offset: 12.5,2.5
+
+- type: entity
+  parent: MarkerBase
+  id: RMCSpawnerLifeboatAthena
+  name: lifeboat spawner
+  description: Defines a location to spawn a lifeboat.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    state: green
+  - type: GridSpawner
+    spawn: "/Maps/_RMC14/Shuttles/athenaEvacBoat.yml"
+    offset: 12.5,2.5

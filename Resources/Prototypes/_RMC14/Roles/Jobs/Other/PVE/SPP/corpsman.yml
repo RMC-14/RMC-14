@@ -4,6 +4,10 @@
   name: rmc-job-name-spp-corpsman
   description: rmc-ghost-role-information-spp-pve-description
   playTimeTracker: RMCJobSPPCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankSPPMladshiySerzhant: []
   startingGear: RMCJobSPPCorpsmanPVEGear
@@ -63,9 +67,6 @@
   id: RMCJobSPPCorpsmanPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPCorpsmanPVE
