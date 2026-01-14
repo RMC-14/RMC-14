@@ -14,6 +14,8 @@
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: 1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorLV624CorporateLiaison: 2
@@ -72,6 +74,7 @@
       - CMSurvivorSolarisCMBMarshal: 1
       CMSurvivor:
       - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorSolarisChaplain: -1
       - CMSurvivorUNMCRecruiter: -1
       - RMCSurvivorHybrisaTMCCMiner: -1
@@ -189,7 +192,8 @@
     survivorJobInserts:
       CMSurvivor:
       - CMSurvivor: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorCivilianUnique: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorTrijentChaplain: 1
       - RMCSurvivorHybrisaFireProtectionSpecialist: 1
       CMSurvivorCorporate:
@@ -273,8 +277,10 @@
       RMCSurvivorCommandingOfficer:
       - RMCSurvivorCommanderNewVaradero: 1
       CMSurvivor:
+      - CMSurvivor: -1
+      - RMCSurvivorCivilianUnique: -1
       - CMSurvivorBeachBum: -1
-      - CMSurvivorMiner: -1
+      - RMCSurvivorHybrisaTMCCMiner: -1
       - CMSurvivorPriest: 1
       CMSurvivorCorporate:
       - CMSurvivorVaraderoICB: 2

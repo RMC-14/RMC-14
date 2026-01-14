@@ -2,7 +2,8 @@
   parent: ClothingHeadHatWelding
   id: RMCHelmetWelding
   name: welding helmet # TODO RMC14 impairs vision when on
-  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye
+  description: A head-mounted face cover designed to protect the wearer completely from space-arc eye.
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/welding_helmet.rsi
@@ -41,3 +42,19 @@
 
 - type: Tag
   id: RMCHelmetWelding
+
+- type: entity
+  parent: RMCHelmetWelding
+  id: RMCHelmetWeldingPainted
+  name: custom welding helmet
+  description: A head-mounted face cover, painted red with bold white stripes, offering solid protection and a touch of style.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
+      state: equipped-HELMET
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
+      state: on-equipped-HELMET

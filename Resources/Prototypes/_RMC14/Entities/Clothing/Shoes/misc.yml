@@ -117,3 +117,22 @@
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Boots/swat.rsi
+
+# Slippers
+- type: entity
+  parent: RMCShoesLaceup
+  id: RMCShoesSlippers
+  name: bunny slippers
+  description: Fluffy!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/slippers.rsi
+
+- type: entity
+  parent: RMCShoesSlippers
+  id: RMCShoesSlippersWorn
+  name: worn bunny slippers
+  description: Fluffy...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Shoes/Boots/slippers_worn.rsi

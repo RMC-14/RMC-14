@@ -255,6 +255,24 @@
   name: researcher's labcoat
 
 - type: entity
+  parent: RMCLabcoat
+  id: RMCLabcoatGreen
+  name: green labcoat
+  description: A suit that protects against minor chemical spills. This one is green.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
+  - type: CMArmor
+    bio: 15
+
+- type: entity
+  parent: [RMCBaseJacketButtonableOpened, RMCLabcoatGreen]
+  id: RMCLabcoatGreenOpened
+  name: labcoat
+
+- type: entity
   parent: [RMCAllowSuitStorageClothingChefApron, ClothingOuterBase]
   id: RMCMedicalApron
   name: medical apron

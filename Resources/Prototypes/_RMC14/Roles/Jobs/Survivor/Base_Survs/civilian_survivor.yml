@@ -16,7 +16,7 @@
     time: 18000 # 5 hours
   ranks:
     RMCRankCivilian: []
-  startingGear: RMCGearSurvivor
+  startingGear: RMCGearSurvivorBaseNoBackpack
   dummyStartingGear: RMCGearSurvivorEquipped
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
@@ -27,11 +27,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetCivilianOutfits
     - type: RMCSurvivor
@@ -187,12 +183,75 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # todo different backpacks
-    - [ CMJumpsuitColonist, RMCShoesBlack ] # Default
-    - [ RMCJumpsuitCivilianJanitor, RMCShoesGaloshes, RMCHipsterGlasses, RMCHandsPurple, ClothingHeadHatPurplesoft, RMCHazardVest ] # Janitor
-    - [ RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, RMCHydroApron ] # Botanist (TODO: Add Hatchet)
-    - [ CMJumpsuitLiaisonBlack, RMCShoesLaceup, RMCJacketCorporateBlue, ClothingHeadHatBowlerHat ] # Bartender
-    - [ CMJumpsuitTShirtGray, RMCShoesWeYaStompers, RMCOuterClothingExternalWebbing ] # Protagonist
+    randomStartingGear:
+      back:
+      - RMCSatchelNorm
+      - CMSatchelMedical
+      - CMSatchelEngineer
+      - RMCSatchelHydro
+      - CMSatchel
+      - RMCSatchelBlack
+      - RMCSatchelBlue
+      - CMBackpack
+      - CMBackpackEngineer
+      - RMCSatchelLightpack5Slot
+      outerClothing:
+      - RMCOuterClothingExternalWebbing
+      - RMCVestTan
+      - RMCVestGrey
+      - RMCCoatBomberRed
+      - RMCCoatBomberGrey
+      - RMCCoatBomber
+      - RMCCoatHoboBrown
+      - RMCCoatHoboDarkBlue
+      - RMCCoatHoboRed
+      # Blue Coveralls
+      # Red Coveralls
+      # Tan Coveralls
+      jumpsuit:
+      - RMCJumpsuitNormCivilianWhiteAlt
+      # black jumpsuit
+      # dark red jumpsuit
+      # green jumpsuit
+      # light red jumpsuit
+      - RMCJumpsuitNormCivilianBrown
+      - RMCJumpsuitNormCivilianLightBrown
+      - RMCJumpsuitNormCivilianGrey
+      - RMCJumpsuitNormCivilianYellow
+      - CMJumpsuitLiaisonBlue
+      - CMJumpsuitLiaisonBrown
+      - RMCJumpsuitLiaisonOrange
+      - RMCJumpsuitCivilianGreen
+      - RMCJumpsuitCivilianBlue
+      - RMCJumpsuitCivilianBrown
+      - RMCJumpsuitCivilian
+      - RMCJumpsuitCivilianRed
+      - RMCJumpsuitCivilianYellow
+      - CMJumpsuitColonist
+      - RMCJumpsuitLiaisonGreyWorkwear
+      - RMCJumpsuitBlueWorkwear
+      - RMCJumpsuitLiaisonGreenWorkwear
+      - RMCJumpsuitLiaisonKhakiWorkwear
+      - RMCJumpsuitLiaisonPinkWorkwear
+      - RMCJumpsuitLiaisonOrange
+      - CMJumpsuitTShirtGray
+      - CMJumpsuitTShirtRed
+      - CMJumpsuitTShirtWhite
+      shoes:
+      - RMCShoesLaceupBrown
+      - RMCShoesLaceup
+      - RMCShoesBlack
+      - RMCShoesBrown
+      - RMCShoesWhite
+      - RMCShoesYellow
+      - RMCShoesGreen
+      - RMCShoesRed
+      - RMCShoesBlue
+      - RMCShoesJackboots
+      - RMCShoesCombat
+    randomGearOther:
+    -
+      - [ CMSheetMetal20 ]
 
 - type: entity
   parent: MarkerBase

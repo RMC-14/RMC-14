@@ -211,6 +211,23 @@
       CMGlass: 60
 
 - type: entity
+  parent: RMCWelderIndustrial
+  id: RMCWelderIndustrialHighCapacity
+  name: high-capacity industrial blowtorch
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      Welder:
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 200
+        maxVol: 200 # TODO RMC14 80 when welders are fixed
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 70
+      CMGlass: 120
+
+- type: entity
   parent: RMCWelderBase
   id: RMCWelderPVE
   name: modified blowtorch
