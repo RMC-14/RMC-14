@@ -337,7 +337,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         // Open medal type selection dialog (skip marine selection)
         var netActor = GetNetEntity(args.Actor);
         var evt = new MarineControlComputerMedalMarineEvent(netActor, marineNetEntity, lastPlayerId);
-        OnComputerMedalMarine(ent, ref evt);
+        RaiseLocalEvent(ent, ref evt);
     }
 
     private void OnRejectRecommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerRejectRecommendationMsg args)
