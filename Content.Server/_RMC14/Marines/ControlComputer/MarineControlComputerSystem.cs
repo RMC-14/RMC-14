@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Survivor;
 using Content.Shared.Body.Events;
+using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
 using Robust.Shared.Player;
@@ -17,6 +18,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly SharedCommendationSystem _commendation = default!;
 
     public override void Initialize()
     {
@@ -50,23 +52,22 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             allRecommendations.UnionWith(computer.AwardRecommendations);
         }
 
-        // Get all LastPlayerIds who have already been awarded medals
-        var awardedLastPlayerIds = GetAllAwardedMedalLastPlayerIds();
+        var awardedLastPlayerIds = _commendation.GetCommendations()
+            .Where(c => c.Type == CommendationType.Medal)
+            .Select(c => c.Receiver)
+            .ToHashSet();
 
         // Group recommendations by recommended marine, excluding those who already received medals or were rejected
         foreach (var recommendation in allRecommendations)
         {
             var recommendedId = recommendation.RecommendedLastPlayerId;
 
-            // Skip recommendations for marines who have already been awarded medals
             if (awardedLastPlayerIds.Contains(recommendedId))
                 continue;
 
-            // Skip rejected recommendations
             if (recommendation.IsRejected)
                 continue;
 
-            // Skip recommendations made on the viewer (they shouldn't see recommendations on themselves)
             if (viewerLastPlayerId != null && recommendedId == viewerLastPlayerId)
                 continue;
 

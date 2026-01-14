@@ -201,12 +201,9 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // Mark this marine as having received a medal on all computers
+        // Send message to remove the recommendation group from UI if medals panel is open
         if (awardedLastPlayerId != null)
         {
-            MarkMarineAsAwarded(awardedLastPlayerId);
-            
-            // Send message to remove the recommendation group from UI if medals panel is open
             var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = awardedLastPlayerId };
             var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
             while (computers.MoveNext(out var uid, out _))
@@ -570,36 +567,5 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         info = default!;
         return false;
-    }
-
-    /// <summary>
-    /// Marks a marine as having received a medal by adding their LastPlayerId to all computers.
-    /// This prevents their recommendations from being displayed.
-    /// </summary>
-    public void MarkMarineAsAwarded(string lastPlayerId)
-    {
-        if (_net.IsClient)
-            return;
-
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out var uid, out var computer))
-        {
-            if (computer.AwardedMedalLastPlayerIds.Add(lastPlayerId))
-                Dirty(uid, computer);
-        }
-    }
-
-    /// <summary>
-    /// Gets the combined set of all LastPlayerIds who have been awarded medals from all computers.
-    /// </summary>
-    public HashSet<string> GetAllAwardedMedalLastPlayerIds()
-    {
-        var result = new HashSet<string>();
-        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-        while (computers.MoveNext(out _, out var computer))
-        {
-            result.UnionWith(computer.AwardedMedalLastPlayerIds);
-        }
-        return result;
     }
 }
