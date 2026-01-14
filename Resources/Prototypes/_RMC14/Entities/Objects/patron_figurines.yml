@@ -2106,3 +2106,14 @@
     state: hethryn_cliffton
   - type: PatronFigurine
     id: a87df95b-8419-42c3-899f-796fd1410ec2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSenecaArchibald
+  name: Seneca Archibald figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: seneca_archibald
+  - type: PatronFigurine
+    id: 6708071b-dbe6-4e54-9129-d7db177bff62
