@@ -1,0 +1,162 @@
+# We-Ya PMC
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseWeYa
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - WeYa
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYa
+  id: RMCCorpseWeYaPMCStandard
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaPMCStandard ]
+  - type: Rank
+    rank: RMCRankWeYaOperator
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: pmc_gun
+
+- type: startingGear
+  id: RMCGearCorpseWeYaPMCStandard # TODO RMC14 gasmask, lightpack, 50% chance to have bulletproof armor variant and black cap
+  equipment:
+    head: ArmorHelmetPMC
+    jumpsuit: RMCJumpsuitVeteranPMC
+    outerClothing: CMArmorM4PMCLight
+    belt: RMCM77BeltPMCFilled
+    back: RMCSatchelLightpack
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskBalaclava
+    id: RMCIDCardPMCCorpse
+    ears: RMCHeadsetDistressWeYa
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchToolsFill
+  storage:
+    back:
+    - RMCRadioHandheldColonyOff
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaPMCStandard
+  id: RMCCorpseWeYaPMCStandardBurst
+  components:
+  - type: VictimBurst
+
+# We-Ya Goon
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaPMCStandard
+  id: RMCCorpseWeYaGoon
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoon ]
+  - type: Rank
+    rank: RMCRankCivilianOfficer
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: weya_goon_standard
+
+- type: startingGear
+  id: RMCGearCorpseWeYaGoon
+  equipment:
+    head: ArmorHelmetPMCCorporate
+    jumpsuit: RMCJumpsuitVeteranPMCCorporate
+    outerClothing: CMArmorM4PMCCorporate
+    back: RMCSatchelLightpack # TODO WeYa variant
+    gloves: RMCHandsVeteran
+    shoes: RMCBootsCorporate
+    id: RMCIDCardPMCGoonCorpse
+    ears: RMCHeadsetDistressWeYa
+    belt: RMCM77BeltPMCFilledNearEmpty
+    pocket1: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMStunbaton
+    - CMCrowbar
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoon
+  id: RMCCorpseWeYaGoonKutjevo
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoonKutjevo ]
+
+- type: startingGear
+  id: RMCGearCorpseWeYaGoonKutjevo
+  parent: RMCGearCorpseWeYaGoon
+  equipment:
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    eyes: RMCGogglesKutjevo
+
+# Goon Lead
+- type: startingGear
+  parent: RMCGearCorpseWeYaGoon
+  id: RMCGearCorpseWeYaGoonLead
+  equipment:
+    head: ArmorHelmetPMCCorporateLead
+    jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
+    outerClothing: CMArmorM4PMCCorporateLead
+    id: RMCIDCardPMCGoonLeadCorpse
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoon
+  id: RMCCorpseWeYaGoonLead
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoonLead ]
+  - type: Rank
+    rank: RMCRankCivilianSeniorOfficer
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: weya_goon_lead
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoonLead
+  id: RMCCorpseWeYaGoonLeadBurst
+  components:
+  - type: VictimBurst
+
+# Hybrisa Goons
+- type: startingGear
+  parent: RMCGearCorpseWeYaGoon
+  id: RMCGearCorpseWeYaGoonHybrisa
+  equipment:
+    head: RMCArmorHelmetPMCCorporateHybrisa
+    jumpsuit: RMCJumpsuitVeteranPMCHybrisa
+    outerClothing: CMArmorM4PMCCorporateLead
+    belt: RMCMK80BeltPMCFilled
+    pocket1: RMCPouchFirstAidPMCFill
+    pocket2: RMCPouchMagazineFilledP90
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoon
+  id: RMCCorpseWeYaGoonHybrisa
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoonHybrisa ]
+
+- type: startingGear
+  parent: RMCGearCorpseWeYaGoonHybrisa
+  id: RMCGearCorpseWeYaGoonHybrisaLead
+  equipment:
+    head: RMCArmorHelmetPMCCorporateLeadHybrisa
+    jumpsuit: RMCJumpsuitVeteranPMCHybrisaLead
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoonLead
+  id: RMCCorpseWeYaGoonHybrisaLead
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseWeYaGoonHybrisaLead ]
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseWeYaGoonHybrisaLead
+  id: RMCCorpseWeYaGoonHybrisaLeadBurst
+  components:
+  - type: VictimBurst
