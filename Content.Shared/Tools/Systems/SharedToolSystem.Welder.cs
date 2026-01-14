@@ -191,8 +191,7 @@ public abstract partial class SharedToolSystem
 
     private void OnDeactivateAttempt(Entity<WelderComponent> entity, ref ItemToggleDeactivateAttemptEvent args)
     {
-        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value))
-        {
+        if (args.User != null && !_actionBlocker.CanComplexInteract(args.User.Value)) {
             args.Cancelled = true;
             return;
         }
