@@ -49,7 +49,7 @@
       state: surv
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCSurvivorPresetMiner
   name: miner colonist preset
   categories: [ HideSpawnMenu ]  # TODO RMC14 random research notes

@@ -59,13 +59,14 @@
       state: surv
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetFireProtectionSpecialist
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomGearOther:
-    -
-      - [ RMCFireAxe ]
-      - [ CMFireExtinguisherPortable ]
+    randomOutfits:
+    - [ RMCFireAxe ]
+    - [ CMFireExtinguisherPortable ]
+
+
