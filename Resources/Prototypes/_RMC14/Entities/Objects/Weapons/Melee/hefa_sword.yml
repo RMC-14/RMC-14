@@ -2,7 +2,7 @@
   parent: CMM2132Machete
   id: RMCSwordHEFA
   name: HEFA sword
-  description: A blade known to be used by the Order of the HEFA. # this highly dangerous blade blows up in a shower of shrapnel on impact. # TODO RMC14 HEFA sword explosion
+  description: A blade known to be used by the Order of the HEFA, this highly dangerous blade blows up in a shower of shrapnel on impact.
   components:
   - type: Tag
     tags:
@@ -13,6 +13,11 @@
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
+  - type: HefaKnightExplosions
+    shrapnelCount: 48
+    totalIntensity: 110
+    maxIntensity: 8
+    intensitySlope: 4
 
 - type: Tag
   id: RMCSwordHEFA

@@ -138,7 +138,6 @@
   - type: EyeProtection
 
 # HEFA
-# TODO: actually implement this
 - type: entity
   parent: RMCArmorHelmetM3G4
   id: RMCArmorHelmetHEFA
@@ -147,10 +146,55 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
   - type: ItemCamouflage
-    camouflageVariations: { }
+    camouflageVariations: {}
+  - type: CMArmor
+    melee: 40
+    bullet: 40
+    bio: 30
+    explosionArmor: 70
+    # armor_rad = CLOTHING_ARMOR_HIGH
+    # armor_internaldamage = CLOTHING_ARMOR_HIGH
+  - type: ParasiteResistance
+    maxCount: 6
+  # Uses same explosion system as CMGrenadeFrag
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 8
+    intensitySlope: 4
+    totalIntensity: 110
+    deleteAfterExplosion: true
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+    directHit: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+  - type: OnUseTimerTrigger
+    delay: 4
+    beepSound:
+      path: "/Audio/_RMC14/Explosion/armbomb.ogg"
+      params:
+        volume: -5
+    initialBeepDelay: 0
+    beepInterval: 10
+    doPopup: false
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: TimerTriggerVisuals
+    primingSprite: icon-up
+    unprimedSprite: icon
 
 # CBRN
 - type: entity

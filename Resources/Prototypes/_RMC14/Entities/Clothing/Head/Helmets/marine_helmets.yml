@@ -339,7 +339,7 @@
 
 # M3-G4 Grenadier Spec
 - type: entity
-  parent: RMCArmorHelmetM3Scout
+  parent: ArmorHelmetM10
   id: RMCArmorHelmetM3G4
   name: M3-G4 grenadier helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
@@ -351,7 +351,10 @@
   - type: CMArmor
     melee: 25
     bullet: 25
+    bio: 25
     explosionArmor: 50
+    # armor_rad = CLOTHING_ARMOR_HIGH
+    # armor_internaldamage = CLOTHING_ARMOR_HIGH
   - type: ParasiteResistance
     maxCount: 6
   - type: ItemCamouflage
