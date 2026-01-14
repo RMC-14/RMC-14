@@ -33,7 +33,7 @@ public sealed partial class WelderComponent : Component
     ///     Fuel consumption per second while the welder is active.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 FuelConsumption = FixedPoint2.New(0.025f);
+    public FixedPoint2 FuelConsumption = FixedPoint2.New(0.025f); // RMC14
 
     /// <summary>
     ///     A fuel amount to be consumed when the welder goes from being unlit to being lit.
