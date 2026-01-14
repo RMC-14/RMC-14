@@ -740,16 +740,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (comp.SpawnSurvivors)
             {
-                // Shuffle survivor jobs and ensure civilian survivor stays at the bottom, as civ survivor has infinite slots
-                var compCopy = comp;
-                IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs
-                    .Where(entry => entry.Job != compCopy.CivilianSurvivorJob)
-                    .OrderBy(_ => _random.Next());
-
-                if (comp.SurvivorJobs.TryFirstOrNull(entry => entry.Job == compCopy.CivilianSurvivorJob, out var civJob))
-                {
-                    jobs = jobs.Append(civJob.Value);
-                }
+                // Shuffle survivor jobs
+                IEnumerable<(ProtoId<JobPrototype> Job, int Amount)> jobs = comp.SurvivorJobs.OrderBy(_ => _random.Next());
 
                 comp.SurvivorJobs = jobs.ToList();
 
