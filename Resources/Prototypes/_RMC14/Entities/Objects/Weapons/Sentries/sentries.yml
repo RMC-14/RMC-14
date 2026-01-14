@@ -551,3 +551,21 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+
+- type: entity
+  parent: RMCTurretGaussDumb
+  id: RMCTurretGaussModifiedCLF
+  name: modified UN-577 gauss turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a high-capacity drum magazine. This one's IFF system has been fried via acid damage, and it will open fire on any targets within range.
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 500
+  - type: NpcFactionMember
+    factions:
+    - CLF
+  - type: UserIFF
+    faction: FactionSurvivor
