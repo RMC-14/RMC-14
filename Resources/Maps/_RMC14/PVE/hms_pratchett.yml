@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/14/2026 01:38:34
-  entityCount: 6130
+  time: 01/14/2026 16:00:17
+  entityCount: 6131
 maps:
 - 1
 grids:
@@ -11030,14 +11030,14 @@ entities:
     - type: Transform
       pos: 1.5,-0.5
       parent: 1
-  - uid: 732
+  - uid: 729
     components:
     - type: Transform
       pos: 2.5,-0.5
       parent: 1
 - proto: CMSpawnPointRCMPVEBombSpec
   entities:
-  - uid: 746
+  - uid: 730
     components:
     - type: Transform
       pos: 0.5,1.5
@@ -11051,7 +11051,7 @@ entities:
       parent: 1
 - proto: CMSpawnPointRCMPVEMedicalAssistant
   entities:
-  - uid: 729
+  - uid: 732
     components:
     - type: Transform
       pos: 0.5,-0.5
@@ -11115,21 +11115,21 @@ entities:
       parent: 1
 - proto: CMSpawnPointRCMPVEScoutSniper
   entities:
-  - uid: 745
+  - uid: 744
     components:
     - type: Transform
       pos: 2.5,1.5
       parent: 1
 - proto: CMSpawnPointRCMPVESectionLeader
   entities:
-  - uid: 730
+  - uid: 745
     components:
     - type: Transform
       pos: -1.5,1.5
       parent: 1
 - proto: CMSpawnPointRCMPVETeamLeader
   entities:
-  - uid: 748
+  - uid: 746
     components:
     - type: Transform
       pos: -0.5,1.5
@@ -11143,7 +11143,7 @@ entities:
       parent: 1
 - proto: CMSpawnPointRCMPVETroopSergeant
   entities:
-  - uid: 744
+  - uid: 748
     components:
     - type: Transform
       pos: -1.5,-0.5
@@ -23872,7 +23872,7 @@ entities:
       pos: -44.5,-4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -115742.586
+      secondsUntilStateChange: -115818.77
       state: Opening
     - type: Airlock
       autoClose: False
@@ -25227,7 +25227,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -121554.42
+      secondsUntilStateChange: -121630.61
       state: Opening
   - uid: 3328
     components:
@@ -33486,7 +33486,7 @@ entities:
       pos: -8.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4632.499
+      secondsUntilStateChange: -4708.6865
       state: Closing
   - uid: 4465
     components:
@@ -33495,7 +33495,7 @@ entities:
       pos: -9.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4633.032
+      secondsUntilStateChange: -4709.2197
       state: Closing
   - uid: 4466
     components:
@@ -33516,7 +33516,7 @@ entities:
       pos: -12.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4635.532
+      secondsUntilStateChange: -4711.7197
       state: Closing
   - uid: 4469
     components:
@@ -33537,7 +33537,7 @@ entities:
       pos: -11.5,-4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -79140.6
+      secondsUntilStateChange: -79216.79
       state: Closing
   - uid: 4472
     components:
@@ -43401,6 +43401,13 @@ entities:
     components:
     - type: Transform
       pos: -49.506954,-3.4766474
+      parent: 1
+- proto: SpawnPointLatejoin
+  entities:
+  - uid: 6131
+    components:
+    - type: Transform
+      pos: -47.5,-28.5
       parent: 1
 - proto: ToyFigurineClown
   entities:
