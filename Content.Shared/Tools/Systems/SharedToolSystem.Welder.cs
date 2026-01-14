@@ -197,6 +197,7 @@ public abstract partial class SharedToolSystem
         }
     }
 
+    // RMC14
     /// Amount of 0 checks if fuel exists without consuming.
     /// Amounts 1-5 consume that many units of fuel.
     /// Returns true if there's enough fuel, false otherwise.
