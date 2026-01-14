@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/14/2026 16:00:17
-  entityCount: 6131
+  time: 01/14/2026 16:22:53
+  entityCount: 6141
 maps:
 - 1
 grids:
@@ -9135,11 +9135,15 @@ entities:
   entities:
   - uid: 425
     components:
+    - type: MetaData
+      name: Hangar Bay 1
     - type: Transform
       pos: -91.5,-3.5
       parent: 1
   - uid: 426
     components:
+    - type: MetaData
+      name: Hangar Bay 2
     - type: Transform
       pos: -91.5,-30.5
       parent: 1
@@ -10529,6 +10533,28 @@ entities:
     - type: Transform
       pos: -7,-7.5
       parent: 1
+- proto: CMSemioticBulkhead_door
+  entities:
+  - uid: 6134
+    components:
+    - type: Transform
+      pos: -77.52796,-1.5
+      parent: 1
+  - uid: 6135
+    components:
+    - type: Transform
+      pos: -85.5,-45.5
+      parent: 1
+  - uid: 6136
+    components:
+    - type: Transform
+      pos: -92.5,-45.5
+      parent: 1
+  - uid: 6137
+    components:
+    - type: Transform
+      pos: -77.5,-15.5
+      parent: 1
 - proto: CMSemioticCommline_connection
   entities:
   - uid: 651
@@ -10708,12 +10734,12 @@ entities:
     - type: Transform
       pos: -39.5,-15.5
       parent: 1
-- proto: CMSemioticNonpress
+- proto: CMSemioticNonpress_0g
   entities:
   - uid: 680
     components:
     - type: Transform
-      pos: -82.45491,12.5
+      pos: -82.52163,12.5
       parent: 1
 - proto: CMSemioticOne
   entities:
@@ -10722,12 +10748,24 @@ entities:
     - type: Transform
       pos: -22,-32.5
       parent: 1
+  - uid: 6132
+    components:
+    - type: Transform
+      pos: -85.04772,-14.5
+      parent: 1
 - proto: CMSemioticRad_haz
   entities:
   - uid: 682
     components:
     - type: Transform
       pos: -68.0572,-64.5
+      parent: 1
+- proto: CMSemioticRad_shield
+  entities:
+  - uid: 6140
+    components:
+    - type: Transform
+      pos: -40.553226,-78.5
       parent: 1
 - proto: CMSemioticReception
   entities:
@@ -10791,12 +10829,34 @@ entities:
     - type: Transform
       pos: -81.059296,-84.5
       parent: 1
+  - uid: 6138
+    components:
+    - type: Transform
+      pos: -77.529564,-18.5
+      parent: 1
+  - uid: 6139
+    components:
+    - type: Transform
+      pos: -42.990685,-31
+      parent: 1
 - proto: CMSemioticTwo
   entities:
   - uid: 693
     components:
     - type: Transform
       pos: -22,-36.5
+      parent: 1
+  - uid: 6133
+    components:
+    - type: Transform
+      pos: -85.02689,-41.5
+      parent: 1
+- proto: CMSemioticWaterhazard
+  entities:
+  - uid: 4080
+    components:
+    - type: Transform
+      pos: -79.09948,-18.5
       parent: 1
 - proto: CMSheetMetal1
   entities:
@@ -23872,7 +23932,7 @@ entities:
       pos: -44.5,-4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -115818.77
+      secondsUntilStateChange: -116386.19
       state: Opening
     - type: Airlock
       autoClose: False
@@ -25227,7 +25287,7 @@ entities:
       lastSignals:
         DoorStatus: True
     - type: Door
-      secondsUntilStateChange: -121630.61
+      secondsUntilStateChange: -122198.02
       state: Opening
   - uid: 3328
     components:
@@ -29148,10 +29208,10 @@ entities:
       parent: 1
 - proto: RMCCalendarTWE
   entities:
-  - uid: 4080
+  - uid: 6141
     components:
     - type: Transform
-      pos: -31.744444,-17.5
+      pos: -31.5,-17.5
       parent: 1
 - proto: RMCCalendarWeYa
   entities:
@@ -33486,7 +33546,7 @@ entities:
       pos: -8.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4708.6865
+      secondsUntilStateChange: -5276.0977
       state: Closing
   - uid: 4465
     components:
@@ -33495,7 +33555,7 @@ entities:
       pos: -9.5,2.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4709.2197
+      secondsUntilStateChange: -5276.631
       state: Closing
   - uid: 4466
     components:
@@ -33516,7 +33576,7 @@ entities:
       pos: -12.5,-1.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -4711.7197
+      secondsUntilStateChange: -5279.131
       state: Closing
   - uid: 4469
     components:
@@ -33537,7 +33597,7 @@ entities:
       pos: -11.5,-4.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -79216.79
+      secondsUntilStateChange: -79784.2
       state: Closing
   - uid: 4472
     components:
@@ -43404,21 +43464,21 @@ entities:
       parent: 1
 - proto: SpawnPointLatejoin
   entities:
-  - uid: 6131
+  - uid: 6125
     components:
     - type: Transform
       pos: -47.5,-28.5
       parent: 1
 - proto: ToyFigurineClown
   entities:
-  - uid: 6125
+  - uid: 6126
     components:
     - type: Transform
       pos: -90.492,-78.479576
       parent: 1
 - proto: TwoWayLever
   entities:
-  - uid: 6126
+  - uid: 6127
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
@@ -43470,7 +43530,7 @@ entities:
           - Off
 - proto: WarpPoint
   entities:
-  - uid: 6127
+  - uid: 6128
     components:
     - type: MetaData
       name: Maintenance Sublevel
@@ -43479,7 +43539,7 @@ entities:
       parent: 1
     - type: WarpPoint
       location: Sublevel Alpha
-  - uid: 6128
+  - uid: 6129
     components:
     - type: MetaData
       name: HMS Pratchett
@@ -43490,14 +43550,14 @@ entities:
       location: HMS Pratchett
 - proto: WehMedipen
   entities:
-  - uid: 6129
+  - uid: 6130
     components:
     - type: Transform
       pos: -47.820004,-27.224781
       parent: 1
 - proto: WeYaExperimentalToolsVendor
   entities:
-  - uid: 6130
+  - uid: 6131
     components:
     - type: Transform
       pos: -52.5,-68.5
