@@ -47,7 +47,7 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
   - type: GunDamageModifier
-    multiplier: .65
+    multiplier: .75
   - type: ItemSlots
     slots:
       gun_magazine:
