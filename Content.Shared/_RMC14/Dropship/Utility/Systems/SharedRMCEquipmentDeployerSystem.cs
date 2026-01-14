@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
@@ -11,6 +12,8 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
@@ -18,10 +21,13 @@ namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
 public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 {
+    [Dependency] private readonly RMCAlertLevelSystem _alert = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SentrySystem _sentry = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
 
@@ -189,6 +195,18 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
         if (!equipmentDeployerComponent.IsDeployable)
             return false;
+
+        if (user != null)
+        {
+            if (_entityWhitelist.IsBlacklistPass(equipmentDeployerComponent.Blacklist, user.Value))
+                return false;
+
+            if (_alert.Get() < equipmentDeployerComponent.AlertLevelRequired && deploy)
+            {
+                _popup.PopupClient(Loc.GetString("rmc-sentry-not-emergency", ("deployer", deployer)), deployer, user.Value);
+                return false;
+            }
+        }
 
         var deployingEntity = GetEntity(equipmentDeployerComponent.DeployEntity);
         if (deployingEntity != null)

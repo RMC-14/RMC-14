@@ -115,6 +115,9 @@
     weaponDeployedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: mg_system_deployed
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCDropshipAttachmentUtility
@@ -153,3 +156,6 @@
     weaponDeployedSprite:
       sprite: _RMC14/Objects/dropship_attachments.rsi
       state: sentry_system_deployed
+    blacklist:
+      components:
+      - Xeno

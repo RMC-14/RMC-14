@@ -1,3 +1,6 @@
+using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -63,6 +66,18 @@ public sealed partial class RMCEquipmentDeployerComponent : Component
     [DataField, AutoNetworkedField]
     public bool IsDeployableByHand;
 
+    /// <summary>
+    ///     The minimum alert level required to activate the deployer.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public RMCAlertLevels AlertLevelRequired;
+
+    /// <summary>
+    ///     Blacklist for entities not allowed to use the deployer.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityWhitelist? Blacklist;
+
     [DataField, AutoNetworkedField]
     public Vector2i StarboardForeDeployDirection = new(1, 0);
 
@@ -92,9 +107,6 @@ public sealed partial class RMCEquipmentDeployerComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? ElectronicDeployedSprite;
-
-    [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi DeployedSprite = new(new ResPath("_RMC14/Objects/dropship_utility_attachments.rsi"), "sentry_system_deployed");
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier DeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_1.ogg");
