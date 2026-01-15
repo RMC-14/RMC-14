@@ -46,7 +46,7 @@
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeFillSPPRations
-  suffix: SPP, Filled
+  suffix: SPP Rations, Filled
   components:
   - type: StorageFill
     contents:
