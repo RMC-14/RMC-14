@@ -58,7 +58,7 @@
     - scenarioName: clfmining
       scenarioProbability: 0.1
     - scenarioName: crashlanding_offices
-      scenarioProbability: 1.0
+      scenarioProbability: 0.2
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
