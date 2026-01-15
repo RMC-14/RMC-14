@@ -332,7 +332,7 @@
   parent: CMM2132Machete
   id: RMCCombatRapier
   name: combat rapier
-  description: The M600 Rapier is a rarity. Less than 20 were produced as a feasible experiment, utilizing cutting-edge technology to make an advanced melee weapon. Despite all the efforts it wasn't much better than a standard machete, so production was abandoned.
+  description: The M600 Rapier is a rarity, utilizing cutting-edge experimental technology to make an advanced melee weapon. Despite all the efforts it wasn't much better than a standard machete, so production was abandoned.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/combat_rapier.rsi
