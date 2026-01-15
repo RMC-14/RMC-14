@@ -27,3 +27,59 @@
 
 - type: Tag
   id: RMCBoxStorage
+
+- type: entity
+  parent: RMCBoxCardboard
+  id: RMCBoxAttachmentsFilled
+  name: attachment package
+  description: A package containing some random attachments. Why not see what's inside?
+  components:
+  - type: Sprite
+    state: circuit
+  - type: Item
+    size: Tiny
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: StorageFill
+    contents:
+    # Common
+    - id: RMCAttachmentSuppressor
+      orGroup: Common
+    - id: RMCM5Bayonet
+      orGroup: Common
+    - id: RMCAttachmentRailFlashlight
+      orGroup: Common
+    # Set 1
+    - id: RMCAttachmentS5RedDotSight
+      orGroup: SetOne
+    - id: RMCAttachmentBurstFireAssembly
+      orGroup: SetOne
+    - id: RMCAttachmentLaserSight
+      orGroup: SetOne
+    - id: RMCAttachmentExtendedBarrel
+      orGroup: SetOne
+    - id: RMCAttachmentVerticalGrip
+      orGroup: SetOne
+    - id: RMCAttachmentAngledGrip
+      orGroup: SetOne
+    - id: RMCAttachmentGyroscopicStabilizer
+      orGroup: SetOne
+    - id: RMCAttachmentBipod
+      orGroup: SetOne
+    # Set 2
+    - id: RMCAttachmentM63Stock
+      orGroup: SetTwo
+    - id: RMCAttachmentM42A1WoodenStock
+      orGroup: SetTwo
+    - id: RMCAttachmentM54CStockSolid
+      orGroup: SetTwo
+    - id: RMCAttachmentMagneticHarness
+      orGroup: SetTwo
+    - id: RMCAttachmentBarrelCharger
+      orGroup: SetTwo
+    - id: RMCAttachmentS84xTelescopicScope
+      orGroup: SetTwo
+    - id: RMCAttachmentS42xTelescopicMiniscope
+      orGroup: SetTwo
