@@ -15,14 +15,14 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
-
 - type: accent
   id: CMChatSanitizeMarine
   wordReplacements:
     cm-chatsan-word-admin-marine: cm-chatsan-replacement-admin-marine
     cm-chatsan-word-admins-marine: cm-chatsan-replacement-admins-marine
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
-
+    cm-chatsan-word-xx121-marine: cm-chatsan-replacement-xx121-marine
+    cm-chatsan-word-xx-121-marine: cm-chatsan-replacement-xx-121-marine
 - type: accent
   id: CMChatSanitizeXeno
   wordReplacements:
