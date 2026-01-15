@@ -55,6 +55,10 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         {
             RemoveRecommendationGroup(removeMsg.LastPlayerId);
         }
+        else if (message is MarineControlComputerAddMedalMsg addMsg)
+        {
+            AddMedal(addMsg.MedalEntry, addMsg.CanPrint, addMsg.IsPrinted);
+        }
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -368,6 +372,23 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         }
     }
 
+    private void AddMedal(RoundCommendationEntry entry, bool canPrint, bool isPrinted)
+    {
+        if (_window == null)
+            return;
+
+        // Build medals info if not built yet
+        if (!_medalsInfoBuilt)
+        {
+            BuildMedalsInfo();
+            _medalsInfoBuilt = true;
+        }
+
+        var container = CreateAwardedMedalContainer(entry, canPrint, isPrinted);
+
+        _window.ViewMedalsList.AddChild(container);
+    }
+
     private void BuildMedalsInfo()
     {
         _medalsInfo.Clear();
@@ -434,6 +455,86 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         return $"{commendation.Receiver}|{commendation.Name}|{commendation.Round}|{commendation.Text}"; // Improvised hash
     }
 
+    private CommendationContainer CreateAwardedMedalContainer(RoundCommendationEntry entry, bool canPrint, bool isPrinted)
+    {
+        var spriteSystem = _systems.GetEntitySystem<SpriteSystem>();
+
+        var container = new CommendationContainer();
+        container.Title.Text = entry.Commendation.Name;
+        container.Description.Text = Loc.GetString("rmc-commendation-description",
+            ("receiver", entry.Commendation.Receiver),
+            ("giver", entry.Commendation.Giver),
+            ("text", entry.Commendation.Text));
+
+        if (TryGetMedalInfo(entry.CommendationPrototypeId, entry.Commendation.Name, out var medalData))
+        {
+            var texture = spriteSystem.Frame0(medalData.Icon);
+            var tooltipText = $"[bold]{medalData.Name}[/bold]\n[font size=10]{medalData.Description}[/font]";
+
+            container.Icon.Texture = texture;
+            container.Icon.Visible = true;
+            container.Icon.MouseFilter = Control.MouseFilterMode.Pass;
+            container.Icon.TooltipDelay = 0f;
+
+            // Set up formatted tooltip
+            container.Icon.TooltipSupplier = _ =>
+            {
+                var label = new RichTextLabel { MaxWidth = 400 };
+                label.SetMessage(FormattedMessage.FromMarkupOrThrow(tooltipText));
+
+                var tooltip = new Tooltip();
+                tooltip.GetChild(0).Children.Clear();
+                tooltip.GetChild(0).Children.Add(label);
+
+                return tooltip;
+            };
+        }
+
+        // Add print button
+        var commendationId = GetCommendationId(entry);
+
+        var printButton = new Button
+        {
+            HorizontalExpand = true,
+            Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+        };
+        printButton.AddStyleClass("OpenBoth");
+
+        if (canPrint && !isPrinted)
+        {
+            printButton.Text = Loc.GetString("rmc-medal-panel-print-medal");
+            printButton.Disabled = false;
+            printButton.OnPressed += _ =>
+            {
+                SendPredictedMessage(new MarineControlComputerPrintCommendationMsg { CommendationId = commendationId });
+                printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
+                printButton.Disabled = true;
+            };
+        }
+        else if (isPrinted)
+        {
+            printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
+            printButton.Disabled = true;
+        }
+        else
+        {
+            printButton.Text = Loc.GetString("rmc-medal-panel-cant-print");
+            printButton.Disabled = true;
+        }
+
+        // Find the inner BoxContainer and add button there
+        if (container.ChildCount > 0 && container.GetChild(0) is BoxContainer innerContainer)
+        {
+            innerContainer.AddChild(printButton);
+        }
+        else
+        {
+            container.AddChild(printButton);
+        }
+
+        return container;
+    }
+
     private void UpdateAwardedMedals(MarineMedalsPanelBuiState state)
     {
         if (_window == null)
@@ -448,86 +549,13 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         _window.ViewMedalsList.DisposeAllChildren();
 
-        var spriteSystem = _systems.GetEntitySystem<SpriteSystem>();
-
-        foreach (var entry in state.AwardedMedals.OrderByDescending(e => e.Commendation.Round))
+        foreach (var entry in state.AwardedMedals)
         {
-            var container = new CommendationContainer();
-            container.Title.Text = entry.Commendation.Name;
-            container.Description.Text = Loc.GetString("rmc-commendation-description",
-                ("receiver", entry.Commendation.Receiver),
-                ("giver", entry.Commendation.Giver),
-                ("text", entry.Commendation.Text));
-
-            if (TryGetMedalInfo(entry.CommendationPrototypeId, entry.Commendation.Name, out var medalData))
-            {
-                var texture = spriteSystem.Frame0(medalData.Icon);
-                var tooltipText = $"[bold]{medalData.Name}[/bold]\n[font size=10]{medalData.Description}[/font]";
-
-                container.Icon.Texture = texture;
-                container.Icon.Visible = true;
-                container.Icon.MouseFilter = Control.MouseFilterMode.Pass;
-                container.Icon.TooltipDelay = 0f;
-
-                // Set up formatted tooltip
-                container.Icon.TooltipSupplier = _ =>
-                {
-                    var label = new RichTextLabel { MaxWidth = 400 };
-                    label.SetMessage(FormattedMessage.FromMarkupOrThrow(tooltipText));
-
-                    var tooltip = new Tooltip();
-                    tooltip.GetChild(0).Children.Clear();
-                    tooltip.GetChild(0).Children.Add(label);
-
-                    return tooltip;
-                };
-            }
-
-            // Add print button
             var commendationId = GetCommendationId(entry);
             var isPrinted = state.PrintedCommendationIds.Contains(commendationId);
             var canPrint = state.CanPrintCommendations;
 
-            var printButton = new Button
-            {
-                HorizontalExpand = true,
-                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
-            };
-            printButton.AddStyleClass("OpenBoth");
-
-            if (canPrint && !isPrinted)
-            {
-                printButton.Text = Loc.GetString("rmc-medal-panel-print-medal");
-                printButton.Disabled = false;
-                printButton.OnPressed += _ =>
-                {
-                    SendPredictedMessage(new MarineControlComputerPrintCommendationMsg { CommendationId = commendationId });
-                    printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
-                    printButton.Disabled = true;
-                };
-            }
-            else if (isPrinted)
-            {
-                printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
-                printButton.Disabled = true;
-            }
-            else
-            {
-                printButton.Text = Loc.GetString("rmc-medal-panel-cant-print");
-                printButton.Disabled = true;
-            }
-
-            // Find the inner BoxContainer and add button there
-            if (container.ChildCount > 0 && container.GetChild(0) is BoxContainer innerContainer)
-            {
-                innerContainer.AddChild(printButton);
-            }
-            else
-            {
-                container.AddChild(printButton);
-            }
-
-            _window.ViewMedalsList.AddChild(container);
+            AddMedal(entry, canPrint, isPrinted);
         }
     }
 }

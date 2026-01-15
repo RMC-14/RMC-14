@@ -203,16 +203,39 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // Send message to remove the recommendation group from UI if medals panel is open
+        // Send messages to update UI if medals panel is open
         if (awardedLastPlayerId != null)
         {
+            // Remove recommendation group
             var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = awardedLastPlayerId };
+
+            // Get the last added medal from commendation system
+            var allEntries = _commendation.GetRoundCommendationEntries();
+            var lastMedal = allEntries
+                .LastOrDefault(e => e.Commendation.Type == CommendationType.Medal);
+
             var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
-            while (computers.MoveNext(out var uid, out _))
+            while (computers.MoveNext(out var uid, out var comp))
             {
                 if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
                 {
                     _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, removeMsg);
+
+                    // Send add message only if we found the medal
+                    if (lastMedal != default)
+                    {
+                        var commendationId = GetCommendationId(lastMedal);
+                        var canPrint = comp.CanPrintCommendations;
+                        var isPrinted = comp.PrintedCommendationIds.Contains(commendationId);
+
+                        var addMsg = new MarineControlComputerAddMedalMsg
+                        {
+                            MedalEntry = lastMedal,
+                            CanPrint = canPrint,
+                            IsPrinted = isPrinted
+                        };
+                        _ui.ServerSendUiMessage(uid, MarineControlComputerUi.MedalsPanel, addMsg);
+                    }
                 }
             }
         }
@@ -573,5 +596,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
         info = default!;
         return false;
+    }
+
+    protected static string GetCommendationId(RoundCommendationEntry entry)
+    {
+        var commendation = entry.Commendation;
+        return $"{commendation.Receiver}|{commendation.Name}|{commendation.Round}|{commendation.Text}"; // Improvised hash
     }
 }

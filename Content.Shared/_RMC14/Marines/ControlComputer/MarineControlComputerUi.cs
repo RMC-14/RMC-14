@@ -49,6 +49,14 @@ public sealed class MarineControlComputerRemoveRecommendationGroupMsg : BoundUse
 }
 
 [Serializable, NetSerializable]
+public sealed class MarineControlComputerAddMedalMsg : BoundUserInterfaceMessage
+{
+    public required RoundCommendationEntry MedalEntry { get; init; }
+    public required bool CanPrint { get; init; }
+    public required bool IsPrinted { get; init; }
+}
+
+[Serializable, NetSerializable]
 public sealed class MarineControlComputerPrintCommendationMsg : BoundUserInterfaceMessage
 {
     public required string CommendationId { get; init; }
