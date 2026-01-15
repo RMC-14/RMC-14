@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Gabrote42
-  changes:
-  - message: The general chat sanitizer now replaces t.t crying emoticons (and its
-      variants) with "sobs"
-    type: Tweak
-  - message: The xenonid chat sanitizer now replaces more Command and High Command
-      roles plus honor guards with their hivemind equivalents, and uses different
-      terms for existing ones
-    type: Tweak
-  id: 2275
-  time: '2025-08-30T01:38:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7692
-- author: DummeHytteOst
-  changes:
-  - message: Cargo containers can now be destroyed by other means than explosions,
-      and now has 200 health for each individual part, they are weak to explosions,
-      and resistant against projectiles.
-    type: Add
-  id: 2276
-  time: '2025-08-30T02:11:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7541
 - author: Shromply
   changes:
   - message: Added the HVHI-P ammunition type and magazine for the M5SPR. (PVE)
@@ -4721,5 +4700,31 @@
   id: 2777
   time: '2026-01-15T08:30:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8807
+- author: Arykh
+  changes:
+  - message: Added the breath mask, emergency, double emergency, and extended-capacity
+      oxygen tanks!
+    type: Add
+  - message: Repalced the fire-safety closet's gas mask and fire first-aid kit with
+      a firefighter helmet, firesuit, and a M94 marking flare pack.
+    type: Tweak
+  - message: Emergency closets now have a randomized set of oxygen related items with
+      a very small chance of containing nothing.
+    type: Tweak
+  id: 2778
+  time: '2026-01-15T08:34:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8758
+- author: Dutch-VanDerLinde
+  changes:
+  - message: FORECON survivors now spawn with a tactical prybar in their webbing instead
+      of a normal crowbar.
+    type: Tweak
+  - message: Fixed FORECON survivors not spawning with flashlights on their suit storage.
+    type: Fix
+  - message: Fixed FORECON survivors not counting towards global survivor time.
+    type: Fix
+  id: 2779
+  time: '2026-01-15T08:34:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8811
 Name: RMC14
 Order: -1
