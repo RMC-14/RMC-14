@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Elysium206
-  changes:
-  - message: Disabler's now have a melee stun function similar to Drive Stunning!
-    type: Add
-  id: 2282
-  time: '2025-08-30T04:01:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7363
-- author: Vixting
-  changes:
-  - message: Added live tacticalmap to dropship console
-    type: Add
-  id: 2283
-  time: '2025-08-30T04:40:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7017
 - author: monomethylhydrazine
   changes:
   - message: removed duplicate flashlight entry in XO vendor
@@ -4726,5 +4712,20 @@
   id: 2784
   time: '2026-01-15T08:41:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8984
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fix MOU53 not coming pre-equipped with flechette shells.
+    type: Fix
+  id: 2785
+  time: '2026-01-15T08:43:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8852
+- author: J C Denton
+  changes:
+  - message: Fixed Basira spawning with wrong mini-scope, as well as not allowing
+      S8 4x scope.
+    type: Fix
+  id: 2786
+  time: '2026-01-15T08:42:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8851
 Name: RMC14
 Order: -1
