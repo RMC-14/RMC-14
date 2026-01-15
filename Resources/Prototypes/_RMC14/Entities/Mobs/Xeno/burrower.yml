@@ -14,8 +14,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleBurrower
-  - type: GhostRole
-    name: cm-job-name-xeno-burrower
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Burrower/burrower.rsi
   - type: MobState
