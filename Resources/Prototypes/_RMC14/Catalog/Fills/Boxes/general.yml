@@ -38,7 +38,7 @@
   - type: Sprite
     state: circuit
   - type: Item
-    size: Tiny
+    size: Small
   - type: Storage
     grid:
     - 0,0,5,1 # 3 slots
