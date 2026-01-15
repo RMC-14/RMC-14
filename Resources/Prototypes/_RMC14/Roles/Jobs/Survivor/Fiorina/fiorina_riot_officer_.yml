@@ -41,9 +41,8 @@
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
     jumpsuit: RMCJumpsuitUNSecurity
-    back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiot
+    head: ArmorHelmetPMCRiotShield
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge

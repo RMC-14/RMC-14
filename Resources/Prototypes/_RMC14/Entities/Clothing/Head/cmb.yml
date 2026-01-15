@@ -11,3 +11,11 @@
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: RMCEarProtection
+
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisorSWAT
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT
