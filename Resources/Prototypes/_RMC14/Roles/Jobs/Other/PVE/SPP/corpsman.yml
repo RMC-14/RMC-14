@@ -67,9 +67,6 @@
   id: RMCJobSPPCorpsmanPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPCorpsmanPVE

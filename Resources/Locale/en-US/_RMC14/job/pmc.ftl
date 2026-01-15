@@ -55,6 +55,9 @@ rmc-ghost-name-pmc-leader = We-Ya PMC Leader (Neutral)
 rmc-job-name-pmc-leader = Leader
 rmc-job-prefix-pmc-leader = SL
 
+rmc-job-name-pmc-field-operations-leader = Field Operations Leader
+rmc-job-prefix-pmc-field-operations-leader = FOL
+
 rmc-ghost-name-pmc-lead-investigator = We-Ya PMC Lead Investigator (Neutral)
 rmc-job-name-pmc-lead-investigator = Lead Investigator
 rmc-job-prefix-pmc-lead-investigator = SL
