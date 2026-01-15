@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: Added X17 riot breaching charges to Riot Tech.
-    type: Add
-  id: 2290
-  time: '2025-09-04T09:02:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7758
 - author: Spaghetti
   changes:
   - message: Fixed warrior lunge always slashing a target even if they were let go
@@ -4722,5 +4715,12 @@
   id: 2792
   time: '2026-01-15T08:55:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8815
+- author: PursuitInAshes
+  changes:
+  - message: The CMB Observer and Liaison icons have been swapped.
+    type: Tweak
+  id: 2793
+  time: '2026-01-15T08:56:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7403
 Name: RMC14
 Order: -1
