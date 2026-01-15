@@ -794,7 +794,7 @@
     - id: CMMaskGas # TODO RMC14 royal marine gas masks
     - id: RMCSyringeCase
     - id: CMPortableSurgicalBedSpawnFolded
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
     - id: RMCMRETSE
 
 - type: entity

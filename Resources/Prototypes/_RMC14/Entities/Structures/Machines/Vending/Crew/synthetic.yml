@@ -202,7 +202,7 @@
       # /obj/item/tool/weldpack/minitank - 4 Points
       - id: RMCEngineerKit
         points: 1
-      - id: CMCrowbar # TODO RMC14: tactical prybar
+      - id: RMCTacticalPrybar
         points: 5
     - name: Firstaid Kits
       entries:
