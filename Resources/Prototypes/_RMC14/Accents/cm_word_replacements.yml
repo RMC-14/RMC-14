@@ -15,6 +15,7 @@
     cm-chatsan-word-deltoids: cm-chatsan-replacement-deltoids
     cm-chatsan-word-xenoid: cm-chatsan-replacement-xenoid
     cm-chatsan-word-xenoids: cm-chatsan-replacement-xenoids
+
 - type: accent
   id: CMChatSanitizeMarine
   wordReplacements:
