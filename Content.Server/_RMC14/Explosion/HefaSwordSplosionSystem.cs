@@ -5,19 +5,19 @@ namespace Content.Server._RMC14.Explosion;
 
 public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 {
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    protected override void ExplodeSword(Entity<HefaSwordOnHitTriggerComponent> ent, EntityUid user, EntityUid target)
+    protected override void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
     {
-        // Move the sword to the target's position so it explodes there.
-        var targetCoords = Transform(target).Coordinates;
-        _transform.SetCoordinates(ent, targetCoords);
+        // Move sword to target so all effects spawn at target location.
+        TransformSystem.SetCoordinates(ent, Transform(target).Coordinates);
 
-        // Set sword rotation to user's facing direction for directional shrapnel.
-        var userRotation = _transform.GetWorldRotation(user);
-        _transform.SetWorldRotation(ent, userRotation);
+        // Set rotation to match user's facing direction so shrapnel launches correctly.
+        TransformSystem.SetLocalRotation(ent, Transform(user).LocalRotation);
+
+        // Trigger ProjectileGrenadeComponent for shrapnel.
         _trigger.Trigger(ent, user);
-        QueueDel(ent);
+        _explosion.TriggerExplosive(ent, user: user);
     }
 }

@@ -5,7 +5,7 @@ namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedHefaSwordSplosionSystem))]
-public sealed partial class HefaSwordOnHitTriggerComponent : Component
+public sealed partial class HefaSwordSplosionComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Primed;

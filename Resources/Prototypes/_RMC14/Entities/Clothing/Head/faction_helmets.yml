@@ -138,7 +138,7 @@
 
 # HEFA
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM3G4
   id: RMCArmorHelmetHEFA
   name: HEFA helmet
   description: For some reason, seeing this helmet causes you to feel extremely distressed.
@@ -150,6 +150,7 @@
       map: ["enum.TriggerVisualLayers.Base"]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: CMArmor
@@ -159,13 +160,6 @@
     explosionArmor: 70
     # armor_rad = CLOTHING_ARMOR_HIGH
     # armor_internaldamage = CLOTHING_ARMOR_HIGH
-  - type: ParasiteResistance
-    maxCount: 6
-  - type: Corrodible
-    isCorrodible: false
-  - type: Tag
-    tags:
-    - RMCHelmetHEFA
   # Uses same explosion components as CMGrenadeFrag
   - type: ExplodeOnTrigger
   - type: Explosive
@@ -176,7 +170,7 @@
     deleteAfterExplosion: true
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
     directHit: false
   - type: ContainerContainer
     containers:
@@ -204,9 +198,6 @@
     unprimedSprite: icon
   - type: TimerTriggerClothingVisuals
     primedPrefix: up
-
-- type: Tag
-  id: RMCHelmetHEFA
 
 # CBRN
 - type: entity

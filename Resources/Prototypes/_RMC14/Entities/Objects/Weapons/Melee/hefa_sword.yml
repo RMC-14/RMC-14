@@ -13,23 +13,19 @@
   - type: Item
     size: Large
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
-  - type: HefaSwordOnHitTrigger
-  # Explosion components - triggered on melee hit when primed
-  - type: ExplodeOnTrigger
+  - type: HefaSwordSplosion
   - type: Explosive
     explosionType: RMC
     maxIntensity: 8
     intensitySlope: 4
     totalIntensity: 110
-    deleteAfterExplosion: false
-  # Directional shrapnel - similar to airburst grenades
+  # Reuses the ProjectileGrenade system for shrapnel.
   - type: ProjectileGrenade
     evenSpread: true
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
     spreadAngle: 90
     directHit: false
-    directionAngle: 0 # Forward direction (rotation set by server system)
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

@@ -1,26 +1,35 @@
+using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Explosion;
 
 public abstract class SharedHefaSwordSplosionSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedAudioSystem Audio = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] protected readonly SharedPopupSystem Popup = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
+
+    private static readonly ProtoId<TagPrototype> SwordTag = "RMCSwordHEFA";
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<HefaSwordOnHitTriggerComponent, UseInHandEvent>(OnUseInHand);
-        SubscribeLocalEvent<HefaSwordOnHitTriggerComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<HefaSwordSplosionComponent, UseInHandEvent>(OnUseInHand, before: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<HefaSwordSplosionComponent, MeleeHitEvent>(OnMeleeHit);
     }
 
-    private void OnUseInHand(Entity<HefaSwordOnHitTriggerComponent> ent, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<HefaSwordSplosionComponent> ent, ref UseInHandEvent args)
     {
+        if (!_tag.HasTag(ent, SwordTag))
+            return;
         if (args.Handled)
             return;
 
@@ -30,18 +39,20 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
 
         if (ent.Comp.Primed)
         {
-            Popup.PopupClient(Loc.GetString(ent.Comp.PrimedPopup), args.User, args.User);
+            _popup.PopupClient(Loc.GetString(ent.Comp.PrimedPopup), args.User, args.User);
             if (ent.Comp.PrimeSound != null)
-                Audio.PlayPredicted(ent.Comp.PrimeSound, ent, args.User);
+                _audio.PlayPredicted(ent.Comp.PrimeSound, ent, args.User);
         }
         else
         {
-            Popup.PopupClient(Loc.GetString(ent.Comp.DeprimedPopup), args.User, args.User);
+            _popup.PopupClient(Loc.GetString(ent.Comp.DeprimedPopup), args.User, args.User);
         }
     }
 
-    private void OnMeleeHit(Entity<HefaSwordOnHitTriggerComponent> ent, ref MeleeHitEvent args)
+    private void OnMeleeHit(Entity<HefaSwordSplosionComponent> ent, ref MeleeHitEvent args)
     {
+        if (!_tag.HasTag(ent, SwordTag))
+            return;
         if (!args.IsHit || !ent.Comp.Primed)
             return;
         if (_net.IsClient)
@@ -58,7 +69,7 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
         }
     }
 
-    protected virtual void ExplodeSword(Entity<HefaSwordOnHitTriggerComponent> ent, EntityUid user, EntityUid target)
+    protected virtual void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
     {
     }
 }
