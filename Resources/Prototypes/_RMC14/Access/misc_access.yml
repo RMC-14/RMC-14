@@ -6,3 +6,7 @@
   id: CMAccessAegis
   tags:
     - CMAccessAegis
+
+- type: accessLevel
+  id: CMAccessIllegal # "The generic "I'm a bad guy" access"
+  name: Illegal

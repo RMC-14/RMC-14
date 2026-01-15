@@ -55,6 +55,9 @@ rmc-ghost-name-pmc-leader = We-Ya PMC Leader (Neutral)
 rmc-job-name-pmc-leader = Leader
 rmc-job-prefix-pmc-leader = SL
 
+rmc-job-name-pmc-field-operations-leader = Field Operations Leader
+rmc-job-prefix-pmc-field-operations-leader = FOL
+
 rmc-ghost-name-pmc-lead-investigator = We-Ya PMC Lead Investigator (Neutral)
 rmc-job-name-pmc-lead-investigator = Lead Investigator
 rmc-job-prefix-pmc-lead-investigator = SL
@@ -77,6 +80,7 @@ rmc-job-name-pmc-corporate-goon = We-Ya Corporate Security
 rmc-job-name-pmc-corporate-goon-engi = We-Ya Corporate Security Technician
 rmc-job-name-pmc-corporate-goon-medic = We-Ya Corporate Security Medic
 rmc-job-name-pmc-corporate-goon-leader = We-Ya Corporate Security Lead
+rmc-job-name-pmc-corporate-goon-secguard = We-Ya Security Guard
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL
@@ -114,3 +118,6 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
+
+# Corpses
+rmc-job-name-pmc-operator-corpse = PMC Operator

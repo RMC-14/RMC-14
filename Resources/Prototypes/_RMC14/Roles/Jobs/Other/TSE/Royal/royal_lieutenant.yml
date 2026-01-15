@@ -21,7 +21,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 3
-        RMCSkillFirearms: 2 
+        RMCSkillFirearms: 2
         RMCSkillPolice: 2
         RMCSkillFireman: 3
         RMCSkillConstruction: 2
@@ -52,7 +52,7 @@
     head: RMCHeadRoyalBeretLead
     eyes: RMCGlassesMedicalHUDGlasses
     ears: RMCHeadsetRoyalMarineOfficer
-    jumpsuit: RMCJumpsuitMarineRoyalTeamlead # TOOD RMC14 royal marines commando uniform
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
     outerClothing: RMCArmorRoyalPaddedFilled
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled

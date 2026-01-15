@@ -9,6 +9,7 @@ cm-xeno-devour-start-observer = {$user} starts to devour {$target}!
 cm-xeno-devour-regurgitate = We're about to regurgitate {$target}...
 cm-xeno-devour-hurl-out = We hurl out the contents of our stomach!
 
+cm-xeno-devour-fake-host = That wouldn't serve a purpose.
 cm-xeno-devour-success = That wouldn't taste very good.
 
 cm-xeno-devour-failed = You can't devour {$target}!

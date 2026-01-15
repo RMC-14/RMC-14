@@ -1,5 +1,11 @@
 - type: localizedDataset
-  id: names_avali_unisex
+  id: RMCNamesAvaliFirst
   values:
-    prefix: rmc-name-avali-
-    count: 78
+    prefix: rmc-name-avali-first-
+    count: 24
+
+- type: localizedDataset
+  id: RMCNamesAvaliLast
+  values:
+    prefix: rmc-name-avali-last-
+    count: 130

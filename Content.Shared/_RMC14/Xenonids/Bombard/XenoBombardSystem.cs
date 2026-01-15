@@ -49,7 +49,7 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
-            target = target.Offset(direction.Normalized() * ent.Comp.Range);
+            target = source.Offset(direction.Normalized() * ent.Comp.Range);
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 

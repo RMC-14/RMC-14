@@ -79,8 +79,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchMedkit
       - id: RMCPouchPistol
-          #- id: RMCPouchSling # TODO RMC14 Sling Pouch
-        # This has a comment saying "implement this", going to leave it commented out.
+      - id: RMCPouchSling
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
@@ -103,6 +102,15 @@
       - id: RMCGlassesMedicalHUDGlasses
         recommended: true
       - id: RMCGlassesAviators
+    - name: Flight Visor
+      choices: { CMFlightVisor: 1 }
+      entries:
+      - id: RMCVisorPilotBlack
+      - id: RMCVisorPilotDarkblue
+      - id: RMCVisorPilotLightblue
+      - id: RMCVisorPilotPurple
+      - id: RMCVisorPilotRed
+      - id: RMCVisorPilotYellow
     - name: Masks
       choices: { CMMasks: 1 }
       entries:

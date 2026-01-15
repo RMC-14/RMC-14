@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using System.Text;
 using Content.Server._RMC14.Dropship;
 using Content.Server._RMC14.MapInsert;
 using Content.Server._RMC14.Marines;
@@ -34,10 +35,12 @@ using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.Armor.Ghillie;
 using Content.Shared._RMC14.Armor.ThermalCloak;
+using Content.Shared._RMC14.Audio;
 using Content.Shared._RMC14.Bioscan;
 using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Fax;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -60,6 +63,7 @@ using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
+using Content.Shared._RMC14.Xenonids.Maturing;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Actions;
 using Content.Shared.CCVar;
@@ -133,7 +137,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly RoleSystem _roles = default!;
     [Dependency] private readonly RoundEndSystem _roundEnd = default!;
     [Dependency] private readonly ScalingSystem _scaling = default!;
-    [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly StationJobsSystem _stationJobs = default!;
     [Dependency] private readonly StationSpawningSystem _stationSpawning = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -156,6 +159,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly GhostSystem _ghost = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly XenoMaturingSystem _maturing = default!;
 
     private readonly HashSet<string> _operationNames = new();
     private readonly HashSet<string> _operationPrefixes = new();
@@ -884,6 +888,33 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 _fax.Refresh(faxId, faxComp);
             }
+
+            if (SelectedPlanetMap == null)
+                return;
+
+            var specialFaxesList = SelectedPlanetMap.Value.Comp.SpecialFaxes;
+
+            if (specialFaxesList == null)
+                return;
+
+            var specialFaxes = EntityQueryEnumerator<FaxMachineComponent, SpecialFaxComponent>();
+            while (specialFaxes.MoveNext(out var faxId, out var faxComp, out var special))
+            {
+                foreach ((var targetFaxId, var paper) in specialFaxesList)
+                {
+                    if (special.FaxId != targetFaxId)
+                        continue;
+
+                    if (!paper.TryGet(out var paperComponent, _prototypes, _compFactory))
+                        continue;
+
+                    if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
+                        continue;
+
+                    var printout = new FaxPrintout(paperComponent.Content, entProto.Name, prototypeId: paper.Id, locked: true);
+                    _fax.Receive(faxId, printout, component: faxComp);
+                }
+            }
         }
     }
 
@@ -1030,11 +1061,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
         while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
         {
+            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(hiveStructure);
+
             if (transformComp.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(hiveStructure.ToCoordinates()))
-            {
                 _destruction.DestroyEntity(hiveStructure);
-            }
         }
+
         var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
         var xenoAmount = 0;
         var larva = 0;
@@ -1072,6 +1104,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             }
             else
                 xenoAmount++;
+        }
+
+        //Queen Maturing - TODO only main hive
+        var queens = EntityQueryEnumerator<XenoMaturingComponent, MobStateComponent>();
+        while (queens.MoveNext(out var queen, out var maturing, out var mobstate))
+        {
+            if (_mobState.IsDead(queen))
+                continue;
+
+            _maturing.Mature((queen, maturing));
         }
 
         //Surge
@@ -1833,23 +1875,47 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             _currentVote = null;
             RMCPlanet picked;
 
-            var voteResult = planets.Zip(args.Votes);
-            var adjustedVotes = voteResult.Select(p => (p.Item1, p.Item2 + _carryoverVotes.GetValueOrDefault(p.First.Proto.ID))).ToList();
-            var maxVotes = adjustedVotes.Max(v => v.Item2);
-            var winningMaps = adjustedVotes.Where(item => item.Item2 == maxVotes).Select(item => item.Item1).ToList();
+            var adjustedVotes = planets
+                .Zip(args.Votes, (planet, newVotes) => (
+                    planet,
+                    newVotes,
+                    totalVotes: newVotes + _carryoverVotes.GetValueOrDefault(planet.Proto.ID)
+                ))
+                .ToList();
+            var maxVotes = adjustedVotes.Max(v => v.totalVotes);
+            var winningMaps = adjustedVotes
+                .Where(v => v.totalVotes == maxVotes)
+                .Select(v => v.planet)
+                .ToList();
+
+            var sb = new StringBuilder();
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-header"));
+            foreach (var result in adjustedVotes)
+            {
+                sb.AppendLine(Loc.GetString(result.newVotes > 0
+                    ? "rmc-distress-signal-next-map-votes-new"
+                    : "rmc-distress-signal-next-map-votes",
+                    ("map", result.planet.Proto.Name),
+                    ("votes", result.totalVotes),
+                    ("newVotes", result.newVotes)));
+            }
 
             if (winningMaps.Count > 1)
             {
+                sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-tiebreaker"));
+                foreach (var map in winningMaps)
+                {
+                    sb.AppendLine($"    {map.Proto.Name}");
+                }
                 picked = _random.Pick(winningMaps);
-                var msg = Loc.GetString("rmc-distress-signal-next-map-tie", ("picked", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
             else
             {
                 picked = winningMaps.First();
-                var msg = Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name));
-                _chatManager.DispatchServerAnnouncement(msg);
             }
+            sb.AppendLine(Loc.GetString("rmc-distress-signal-next-map-win", ("winner", picked.Proto.Name)));
+
+            _chatManager.DispatchServerAnnouncement(sb.ToString());
 
             foreach (var (planet, votes) in planets.Zip(args.Votes))
             {

@@ -164,7 +164,6 @@
       recoilFlat: -2
     - conditions:
         unwieldedOnly: true
-      recoilFlat: 2
       accuracyAddMult: -0.2
   - type: ItemCamouflage
     states:
@@ -232,6 +231,10 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
 
 - type: entity
   parent: RMCBarrelAttachmentBase

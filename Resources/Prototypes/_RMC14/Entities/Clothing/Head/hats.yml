@@ -167,6 +167,17 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_purple.rsi
 
+- type: entity
+  parent: CMHeadBeret
+  id: RMCHeadBeretOfficerHos
+  name: officer beret
+  description: A navy-blue beret with a captain's rank emblem. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/beret_hos.rsi
+
 # Caps
 - type: entity
   parent: ClothingHeadBase
@@ -644,7 +655,7 @@
 - type: entity
   parent: RMCHeadBeretSquadAlpha
   id: RMCHeadBeretSquadEcho
-  description: Tightly Woven, as it should be.
+  description: Tightly woven, as it should be.
   suffix: Echo
   components:
   - type: Sprite
@@ -666,7 +677,7 @@
 - type: entity
   parent: RMCHeadBeretSquadAlpha
   id: RMCHeadBeretSquadIntel
-  description: Looks more intellegent than the person wearing it.
+  description: Looks more intelligent than the person wearing it.
   suffix: Intel
   components:
   - type: Sprite
@@ -761,7 +772,7 @@
   parent: ClothingHeadBase
   id: RMCHeadRadiationHood
   name: radiation hood
-  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation"
+  description: "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/radiation_hood.rsi
@@ -775,10 +786,27 @@
     - Snout
 
 - type: entity
+  parent: RMCHeadRadiationHood
+  id: RMCHeadTychoRadiationHood
+  name: Tycho 4000 radiation protection hood
+  description: The burn-resistant hood for the Weston-Yamada Tycho 4000 Radiation Protection Suit. It's lined with lead, and it's recommended you wear a rebreather or gas mask under it.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/rad_hood_weya.rsi
+  - type: CMArmor
+    bio: 100
+    melee: 25
+    bullet: 15
+    explosionArmor: 10
+    #rad: 50
+
+- type: entity
   parent: CMHeadBeret
   id: RMCHeadWeYaPilotCap
   name: Weston-Yamada Pilot cap
-  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civillian Pilots, akin to old Earth formal Pilots-wear.
+  description: A dark peaked cap enscribed with the Weston-Yamada 'Wings' logo. A formal cap for qualified civilian Pilots, akin to old Earth formal Pilots-wear.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/weya_pilot_cap.rsi
@@ -959,13 +987,33 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/Fedora/grey_fedora.rsi
 
+- type: entity
+  parent: RMCHeadCapFlippable
+  id: RMCHeadUshanka
+  name: ushanka
+  description: Perfect for winter in Siberia, da?
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/ushanka.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 15
+    explosionArmor: 10
+    # TODO 15 internal damage armor
+    # TODO give cold protection
+
 # Chaplain
 
 - type: entity
   parent: ClothingHeadHatHoodNunHood
   id: RMCHeadNunHood
   name: nun hood
-  description: Maximum piety in this star system
+  description: Maximum piety in this star system.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hoods/nun.rsi

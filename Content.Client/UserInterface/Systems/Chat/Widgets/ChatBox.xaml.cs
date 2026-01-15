@@ -32,6 +32,7 @@ public partial class ChatBox : UIWidget
 
     // RMC14
     public readonly Queue<RepeatedMessage> RepeatQueue = new();
+    private readonly HashSet<string> _whitelist = ["mono", "scramble", "bolditalic", "bold", "bullet", "color", "font", "head", "italic"];
 
     public ChatBox()
     {
@@ -123,10 +124,23 @@ public partial class ChatBox : UIWidget
         formatted.Pop();
 
         // RMC14
+        formatted = FilterProblematicTags(formatted);
         if (_entManager.SystemOrNull<CMChatSystem>()?.TryRepetition(this, Contents, formatted, sender, unwrapped, channel, repeatCheckSender) ?? false)
             return;
 
         Contents.AddMessage(formatted);
+    }
+
+    // RMC14
+    private FormattedMessage FilterProblematicTags(FormattedMessage message)
+    {
+        var output = new FormattedMessage(message.Count);
+        foreach (var tag in message)
+        {
+            if (tag.Name is not { } name || _whitelist.Contains(name))
+                output.PushTag(tag);
+        }
+        return output;
     }
 
     public void Focus(ChatSelectChannel? channel = null)
