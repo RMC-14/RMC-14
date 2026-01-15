@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Survivor;
+using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
@@ -170,6 +171,7 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         var coordinates = Transform(ent.Owner).Coordinates;
         var commendationId = args.CommendationId;
         var entityUid = ent.Owner;
+        var receiverEntity = targetEntry.Value.ReceiverEntity;
 
         // Play print sound
         if (ent.Comp.PrintCommendationSound != null)
@@ -190,8 +192,14 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             if (!computer.PrintedCommendationIds.Contains(commendationId))
                 return;
 
-            // Spawn the medal entity
-            Spawn(prototypeId.Value, coordinates);
+            var medal = Spawn(prototypeId.Value, coordinates);
+
+            // Set owner in accessory component if it exists
+            if (receiverEntity != null && TryComp<UniformAccessoryComponent>(medal, out var accessory))
+            {
+                accessory.User = receiverEntity.Value;
+                Dirty(medal, accessory);
+            }
         });
     }
 
