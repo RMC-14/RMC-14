@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Boiler bombard, tunnel creation, planting eggs, ravager eviscerate, and
-      praetorian acid ball now root the entity in place while they are being used,
-      preventing them from being moved by others to cancel their doafter.
-    type: Add
-  id: 2281
-  time: '2025-08-30T04:00:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6988
 - author: Elysium206
   changes:
   - message: Disabler's now have a melee stun function similar to Drive Stunning!
@@ -4728,5 +4719,12 @@
   id: 2783
   time: '2026-01-15T08:39:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8957
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Sorokyne Fire Protection Survivor not spawning with a rare item
+    type: Fix
+  id: 2784
+  time: '2026-01-15T08:41:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8984
 Name: RMC14
 Order: -1
