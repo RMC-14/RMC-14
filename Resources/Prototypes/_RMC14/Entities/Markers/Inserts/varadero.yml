@@ -1,0 +1,22 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCMapInsertBase
+  id: RMCMapInsertVaraderoBase
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true
+
+- type: entity
+  parent: RMCMapInsertVaraderoBase
+  id: RMCMapInsertVaraderoCLFRaid
+  name: CLF Raid
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/clf_raid.yml"
+      probability: 1
+      nightmareScenario: clfraid_varadero
