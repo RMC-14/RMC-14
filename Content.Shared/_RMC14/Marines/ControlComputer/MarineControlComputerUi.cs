@@ -49,15 +49,25 @@ public sealed class MarineControlComputerRemoveRecommendationGroupMsg : BoundUse
 }
 
 [Serializable, NetSerializable]
+public sealed class MarineControlComputerPrintCommendationMsg : BoundUserInterfaceMessage
+{
+    public required string CommendationId { get; init; }
+}
+
+[Serializable, NetSerializable]
 public sealed class MarineMedalsPanelBuiState : BoundUserInterfaceState
 {
     public readonly List<MarineRecommendationGroup> RecommendationGroups;
     public readonly List<RoundCommendationEntry> AwardedMedals;
+    public readonly bool CanPrintCommendations;
+    public readonly HashSet<string> PrintedCommendationIds;
 
-    public MarineMedalsPanelBuiState(List<MarineRecommendationGroup> recommendationGroups, List<RoundCommendationEntry> awardedMedals)
+    public MarineMedalsPanelBuiState(List<MarineRecommendationGroup> recommendationGroups, List<RoundCommendationEntry> awardedMedals, bool canPrintCommendations, HashSet<string> printedCommendationIds)
     {
         RecommendationGroups = recommendationGroups;
         AwardedMedals = awardedMedals;
+        CanPrintCommendations = canPrintCommendations;
+        PrintedCommendationIds = printedCommendationIds;
     }
 }
 

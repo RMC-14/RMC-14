@@ -9,8 +9,11 @@ using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Marines.ControlComputer;
 
@@ -20,11 +23,20 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
     [Dependency] private readonly SharedJobSystem _jobs = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
     [Dependency] private readonly SharedCommendationSystem _commendation = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<MarineComponent, BeingGibbedEvent>(OnMarineGibbed);
+
+        Subs.BuiEvents<MarineControlComputerComponent>(MarineControlComputerUi.MedalsPanel,
+            subs =>
+            {
+                subs.Event<MarineControlComputerPrintCommendationMsg>(OnPrintCommendation);
+            });
     }
 
     protected override MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
@@ -90,7 +102,97 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             .Where(e => e.Commendation.Type == CommendationType.Medal)
             .ToList();
 
-        return new MarineMedalsPanelBuiState(groups.Values.ToList(), awardedMedals);
+        return new MarineMedalsPanelBuiState(
+            groups.Values.ToList(),
+            awardedMedals,
+            ent.Comp.CanPrintCommendations,
+            ent.Comp.PrintedCommendationIds);
+    }
+
+    private static string GetCommendationId(RoundCommendationEntry entry)
+    {
+        var commendation = entry.Commendation;
+        return $"{commendation.Receiver}|{commendation.Name}|{commendation.Round}|{commendation.Text}"; // Improvised hash
+    }
+
+    private void OnPrintCommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerPrintCommendationMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Check if printing is supported
+        if (!ent.Comp.CanPrintCommendations)
+            return;
+
+        // Check if already printed
+        if (ent.Comp.PrintedCommendationIds.Contains(args.CommendationId))
+            return;
+
+        // Find the commendation entry
+        var entries = _commendation.GetRoundCommendationEntries()
+            .Where(e => e.Commendation.Type == CommendationType.Medal)
+            .ToList();
+
+        RoundCommendationEntry? targetEntry = null;
+        foreach (var entry in entries)
+        {
+            if (GetCommendationId(entry) == args.CommendationId)
+            {
+                targetEntry = entry;
+                break;
+            }
+        }
+
+        if (targetEntry == null)
+            return;
+
+        // Check if we have a prototype ID
+        var prototypeId = targetEntry.Value.CommendationPrototypeId;
+        if (prototypeId == null)
+            return;
+
+        // Mark as printed immediately to prevent duplicate requests
+        ent.Comp.PrintedCommendationIds.Add(args.CommendationId);
+        Dirty(ent);
+
+        // Update UI state immediately to disable button
+        var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
+        while (computers.MoveNext(out var uid, out var comp))
+        {
+            if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
+            {
+                var state = BuildMedalsPanelState(new Entity<MarineControlComputerComponent>(uid, comp), null);
+                _ui.SetUiState(uid, MarineControlComputerUi.MedalsPanel, state);
+            }
+        }
+
+        // Store data for delayed spawn
+        var coordinates = Transform(ent.Owner).Coordinates;
+        var commendationId = args.CommendationId;
+        var entityUid = ent.Owner;
+
+        // Play print sound
+        if (ent.Comp.PrintCommendationSound != null)
+        {
+            _audio.PlayPvs(ent.Comp.PrintCommendationSound, ent.Owner);
+        }
+
+        // Spawn medal after delay
+        Timer.Spawn(ent.Comp.PrintCommendationDelay, () =>
+        {
+            if (!Exists(entityUid))
+                return;
+
+            if (!TryComp<MarineControlComputerComponent>(entityUid, out var computer))
+                return;
+
+            // Double-check that it's still marked as printed (in case of component removal)
+            if (!computer.PrintedCommendationIds.Contains(commendationId))
+                return;
+
+            // Spawn the medal entity
+            Spawn(prototypeId.Value, coordinates);
+        });
     }
 
     private void OnMarineGibbed(Entity<MarineComponent> ent, ref BeingGibbedEvent ev)

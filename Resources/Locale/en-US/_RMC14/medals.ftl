@@ -44,6 +44,9 @@ rmc-medal-panel-reject-recommendation = Reject
 rmc-medal-panel-recommender-label = [color=#5B88B0]Recommender:[/color]
 rmc-medal-panel-job-label = [color=#5B88B0]Job:[/color]
 rmc-medal-panel-reason-label = [color=#5B88B0]Reason:[/color]
+rmc-medal-panel-print-medal = Print medal
+rmc-medal-panel-medal-printed = Medal printed
+rmc-medal-panel-cant-print = Printing is not supported
 
 # Commendation Types
 rmc-commendation-type-medal = Medals

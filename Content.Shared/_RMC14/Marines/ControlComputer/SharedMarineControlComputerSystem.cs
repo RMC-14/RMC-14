@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.AlertLevel;
+﻿using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
@@ -288,7 +288,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     private void OnMedal(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerMedalMsg args)
     {
         // Handle messages from both Key and MedalsPanel UI keys
-        if (!args.UiKey.Equals(MarineControlComputerUi.Key) && 
+        if (!args.UiKey.Equals(MarineControlComputerUi.Key) &&
             !args.UiKey.Equals(MarineControlComputerUi.MedalsPanel))
             return;
 
@@ -359,7 +359,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         {
             var updated = false;
             var toUpdate = new List<MarineAwardRecommendationInfo>();
-            
+
             foreach (var recommendation in computer.AwardRecommendations)
             {
                 if (recommendation.RecommendedLastPlayerId == args.LastPlayerId && !recommendation.IsRejected)
@@ -367,17 +367,17 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                     toUpdate.Add(recommendation);
                 }
             }
-            
+
             foreach (var recommendation in toUpdate)
             {
                 recommendation.IsRejected = true;
                 updated = true;
             }
-            
+
             if (updated)
                 Dirty(uid, computer);
         }
-        
+
         // Send message to remove the recommendation group from UI if medals panel is open
         var removeMsg = new MarineControlComputerRemoveRecommendationGroupMsg { LastPlayerId = args.LastPlayerId };
         computers = EntityQueryEnumerator<MarineControlComputerComponent>();
@@ -408,7 +408,11 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
     {
-        return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>(), new List<RoundCommendationEntry>());
+        return new MarineMedalsPanelBuiState(
+            new List<MarineRecommendationGroup>(),
+            new List<RoundCommendationEntry>(),
+            ent.Comp.CanPrintCommendations,
+            ent.Comp.PrintedCommendationIds);
     }
 
     public void GiveMedal(EntityUid computer, EntityUid actor)

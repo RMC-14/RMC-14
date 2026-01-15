@@ -39,6 +39,21 @@ public sealed partial class MarineControlComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan ShipAnnouncementCooldown = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
+    public bool CanPrintCommendations = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan PrintCommendationDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? PrintCommendationSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/print.ogg");
+
+    /// <summary>
+    /// List of improvised hash of printed commendations
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> PrintedCommendationIds = new();
 }
 
 [Serializable, NetSerializable]

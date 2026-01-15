@@ -428,6 +428,12 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         return false;
     }
 
+    private static string GetCommendationId(RoundCommendationEntry entry)
+    {
+        var commendation = entry.Commendation;
+        return $"{commendation.Receiver}|{commendation.Name}|{commendation.Round}|{commendation.Text}"; // Improvised hash
+    }
+
     private void UpdateAwardedMedals(MarineMedalsPanelBuiState state)
     {
         if (_window == null)
@@ -475,6 +481,50 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
                     return tooltip;
                 };
+            }
+
+            // Add print button
+            var commendationId = GetCommendationId(entry);
+            var isPrinted = state.PrintedCommendationIds.Contains(commendationId);
+            var canPrint = state.CanPrintCommendations;
+
+            var printButton = new Button
+            {
+                HorizontalExpand = true,
+                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+            };
+            printButton.AddStyleClass("OpenBoth");
+
+            if (canPrint && !isPrinted)
+            {
+                printButton.Text = Loc.GetString("rmc-medal-panel-print-medal");
+                printButton.Disabled = false;
+                printButton.OnPressed += _ =>
+                {
+                    SendPredictedMessage(new MarineControlComputerPrintCommendationMsg { CommendationId = commendationId });
+                    printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
+                    printButton.Disabled = true;
+                };
+            }
+            else if (isPrinted)
+            {
+                printButton.Text = Loc.GetString("rmc-medal-panel-medal-printed");
+                printButton.Disabled = true;
+            }
+            else
+            {
+                printButton.Text = Loc.GetString("rmc-medal-panel-cant-print");
+                printButton.Disabled = true;
+            }
+
+            // Find the inner BoxContainer and add button there
+            if (container.ChildCount > 0 && container.GetChild(0) is BoxContainer innerContainer)
+            {
+                innerContainer.AddChild(printButton);
+            }
+            else
+            {
+                container.AddChild(printButton);
             }
 
             _window.ViewMedalsList.AddChild(container);
