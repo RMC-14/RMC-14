@@ -2,7 +2,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechFOBSupplies
-  name: ColMarTech Automated FOB Supplies Vendor
+  name: ASRS FOB Supplies Vendor
   description: An automated restockable storage vendor for use in organizing FOB supplies.
   components:
   - type: ApcPowerReceiver

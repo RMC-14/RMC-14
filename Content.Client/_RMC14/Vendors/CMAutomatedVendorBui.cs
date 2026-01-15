@@ -45,7 +45,7 @@ public sealed class CMAutomatedVendorBui : BoundUserInterface
     {
         base.Open();
         _window = this.CreateWindow<CMAutomatedVendorWindow>();
-        _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ColMarTech Vendor";
+        _window.Title = EntMan.GetComponentOrNull<MetaDataComponent>(Owner)?.EntityName ?? "ASRS Vendor";
         _window.ReagentsBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#AF7F38"));
 
         var user = EntMan.GetComponentOrNull<CMVendorUserComponent>(_player.LocalEntity);

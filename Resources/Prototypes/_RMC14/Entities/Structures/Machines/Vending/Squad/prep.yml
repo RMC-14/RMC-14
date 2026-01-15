@@ -2,7 +2,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechGuns
-  name: ColMarTech automated weapons rack
+  name: ASRS weapons rack
   description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
   components:
   - type: AccessReader
@@ -142,7 +142,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechSurplus
-  name: ColMarTech surplus uniform vendor
+  name: ASRS surplus uniform vendor
   description: An automated rack hooked up to a small storage of standard marine uniforms.
   components:
   - type: AccessReader
@@ -379,7 +379,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechMunitions
-  name: ColMarTech automated munition squad vendor
+  name: ASRS munition squad vendor
   description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -450,7 +450,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechUtilities
-  name: ColMarTech automated utilities squad vendor
+  name: ASRS utilities squad vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader

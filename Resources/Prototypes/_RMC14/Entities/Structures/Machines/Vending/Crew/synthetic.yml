@@ -1,7 +1,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSynthetic
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS Synthetic Equipment Rack
   description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
@@ -153,7 +153,7 @@
 - type: entity
   parent: ColMarTechCrewSynthetic
   id: ColMarTechCrewSyntheticColony
-  name: ColMarTech Synthetic Equipment Rack
+  name: ASRS Synthetic Equipment Rack
   suffix: Colony Synth Access
   components:
   - type: CMAutomatedVendor
@@ -163,7 +163,7 @@
 - type: entity
   parent: ColMarTechBase
   id: ColMarTechCrewSyntheticGear
-  name: ColMarTech Synthetic Auxiliary Gear Rack
+  name: ASRS Synthetic Auxiliary Gear Rack
   description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
   components:
   - type: AccessReader
