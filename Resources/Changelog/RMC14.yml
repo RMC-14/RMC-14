@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: SEAs now have patches in their equipment vendor.
-    type: Fix
-  - message: Added a patch for SEAs.
-    type: Add
-  id: 2280
-  time: '2025-08-30T03:31:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7595
 - author: Vixting
   changes:
   - message: Boiler bombard, tunnel creation, planting eggs, ravager eviscerate, and
@@ -4727,5 +4718,15 @@
   id: 2782
   time: '2026-01-15T08:37:13.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8937
+- author: Arykh
+  changes:
+  - message: Added the presets system to the ChemMaster! Presets let you save, edit,
+      and apply frequently used pill bottle labels, bottle colors, and pill types/colors.
+    type: Add
+  - message: Added the missing Select/Deselect All button to the ChemMaster!
+    type: Add
+  id: 2783
+  time: '2026-01-15T08:39:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8957
 Name: RMC14
 Order: -1
