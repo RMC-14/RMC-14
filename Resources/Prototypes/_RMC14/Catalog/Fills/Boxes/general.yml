@@ -38,7 +38,7 @@
   - type: Sprite
     state: circuit
   - type: Item
-    size: Tiny
+    size: Small
   - type: Storage
     maxItemSize: Small
     grid:
