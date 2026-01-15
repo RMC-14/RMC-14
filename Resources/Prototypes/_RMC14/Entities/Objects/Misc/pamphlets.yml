@@ -55,7 +55,7 @@
   description: A pamphlet used to quickly impart vital knowledge. This one has a scientific insignia.
   components:
   - type: Sprite
-    state: pamphlet_medical
+    state: pamphlet_science
   - type: SkillPamphlet
     addSkills:
       RMCSkillResearch: 1
