@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Flap cap added to synth vendor.
-    type: Add
-  - message: Added document pouch to the SO vendor.
-    type: Add
-  - message: Fixed synth fultons not having 20 uses,
-    type: Fix
-  - message: fIX Syringe/surgical cases not fitting into medkits.
-    type: Fix
-  - message: Fix stray pixels on the potted plant sprite.
-    type: Fix
-  id: 2289
-  time: '2025-09-04T08:59:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7777
 - author: BreakpointDebug1234
   changes:
   - message: Added X17 riot breaching charges to Riot Tech.
@@ -4729,5 +4714,13 @@
   id: 2791
   time: '2026-01-15T08:51:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7897
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Alien cryo tanks on the colonies will now release the aliens contained
+      inside them.
+    type: Tweak
+  id: 2792
+  time: '2026-01-15T08:55:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8815
 Name: RMC14
 Order: -1
