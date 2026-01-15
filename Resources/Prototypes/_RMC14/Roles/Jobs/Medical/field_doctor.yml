@@ -5,9 +5,9 @@
   description: cm-job-description-field-doctor
   playTimeTracker: CMJobFieldDoctor
   requirements:
-  - !type:TotalJobsTimeRequirement
-    group: CMJobsMedical
-    time: 18000 # 5 hour
+  - !type:RoleTimeRequirement
+    role: CMJobDoctor
+    time: 36000 # 10 hours
   ranks:
     RMCRankSecondLT: []
   startingGear: CMGearFieldDoctor
