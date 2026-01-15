@@ -1,14 +1,14 @@
 - type: job
   parent: CMJobBase
-  id: CMRiotControl
-  name: cm-job-name-riot-control
-  description: cm-job-description-riot-control
-  playTimeTracker: CMJobRiotControl
+  id: RMCRiotControl
+  name: rmc-job-name-riot-control
+  description: rmc-job-description-riot-control
+  playTimeTracker: RMCJobRiotControl
   ranks:
     RMCRankSergeant: []
   hidden: true
-  startingGear: CMGearRiotControl
-  icon: "CMJobIconRiotMP"
+  startingGear: RMCGearRiotControl
+  icon: "RMCJobIconRiotMP"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-marine-high-command
   spawnMenuRoleName: UNMC Riot MP (RMP)
@@ -33,7 +33,7 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 2
     - type: JobPrefix
-      prefix: cm-job-prefix-rmp
+      prefix: rmc-job-prefix-rmp
     - type: CommandAccent
     - type: TacticalMapIcon
       icon:
@@ -45,9 +45,9 @@
 
 - type: startingGear
   parent: CMGearMilitaryPolice
-  id: CMGearRiotControl
+  id: RMCGearRiotControl
   equipment:
-    id: CMIDCardRiotControl
+    id: RMCIDCardRiotControl
     back: CMSatchelSecurity
     ears: CMHeadsetCMP
     jumpsuit: CMJumpsuitWO
@@ -87,7 +87,7 @@
     description: rmc-ghost-role-information-riot-control-description
     rules: rmc-ghost-role-information-riot-control-rules
     reregister: false
-    job: CMRiotControl
+    job: RMCRiotControl
     raffle:
       settings: short
     requirements:
@@ -97,5 +97,5 @@
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
-  id: CMJobRiotControl
+  id: RMCJobRiotControl
   isHumanoid: true

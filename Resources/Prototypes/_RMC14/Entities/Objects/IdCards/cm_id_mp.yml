@@ -24,16 +24,16 @@
 
 - type: entity
   parent: CMIDCardBase
-  id: CMIDCardRiotControl
+  id: RMCIDCardRiotControl
   name: riot control ID card
   components:
   - type: PresetIdCard
-    job: CMRiotControl
+    job: RMCRiotControl
 
 - type: entity
   parent: CMIDCardBase
-  id: CMIDCardChiefRiotControl
+  id: RMCIDCardChiefRiotControl
   name: riot control ID card
   components:
   - type: PresetIdCard
-    job: CMChiefRiotControl
+    job: RMCChiefRiotControl

@@ -22,14 +22,14 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: CMJobIconRiotMP
+  id: RMCJobIconRiotMP
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_rmp
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: CMJobIconRiotCMP
+  id: RMCJobIconRiotCMP
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_crmp
