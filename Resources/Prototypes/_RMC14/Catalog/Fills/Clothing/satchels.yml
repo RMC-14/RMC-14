@@ -180,3 +180,13 @@
       amount: 2
     - id: CMDrinkWEYAWaterBottle30
       amount: 2
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderProWelderFill
+  suffix: Pro Welder Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWelderIndustrialHighCapacity
+    - id: CMPamphletEngineer

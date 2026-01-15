@@ -57,7 +57,7 @@
     # Cameraman (TODO: Old Camera, Camera, and Camera Film)
     - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondentBlack, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting ]
     # Pro Welder (TODO: welding pack)
-    - [ RMCSatchelLightpackWelder, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated, RMCWelderIndustrialHighCapacity, CMPamphletEngineer ]
+    - [ RMCSatchelLightpackWelderProWelderFill, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated ]
     # Farmer (TODO: scythe and coveralls)
     - [ RMCPouchGeneralLargeFillWheat, ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCSatchelEngineerFarmerFill ]
     # Fisherman (TODO: tan coveralls, fishing pole, and fish bait)
