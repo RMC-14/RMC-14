@@ -10,6 +10,7 @@
   - type: Item
     sprite: _RMC14/Objects/Storage/boxes.rsi
     size: Large
+    shape: null
   - type: Storage
     maxItemSize: Small
     grid:
