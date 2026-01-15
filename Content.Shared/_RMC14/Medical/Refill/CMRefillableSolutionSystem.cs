@@ -18,11 +18,13 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Shared.DoAfter;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
 public sealed class CMRefillableSolutionSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
@@ -126,10 +128,15 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         if (anyRefilled)
         {
-            Dirty(ent);
             var ev = new RefilledSolutionEvent();
             RaiseLocalEvent(args.Used, ref ev);
+
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", fillable)), args.User, args.User);
+
+            if (_net.IsServer)
+                _audio.PlayPvs(ent.Comp.RefillSound, ent.Owner);
+
+            Dirty(ent);
         }
         else
         {

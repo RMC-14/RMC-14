@@ -40,6 +40,14 @@
 
 - type: entity
   parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFCellLeader
+  name: clf cell leader's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFCellLeader
+
+- type: entity
+  parent: RMCIDCardCLFBase
   id: RMCIDCardCLFCellCommander
   name: clf cell commander's ID card
   components:
