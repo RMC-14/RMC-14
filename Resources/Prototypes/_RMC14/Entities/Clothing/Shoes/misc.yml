@@ -130,7 +130,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Shoes/Misc/slippers.rsi
 
-
 - type: entity
   parent: RMCShoesSlippers
   id: RMCShoesSlippersWorn
