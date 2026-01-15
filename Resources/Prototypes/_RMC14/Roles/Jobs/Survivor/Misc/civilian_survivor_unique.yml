@@ -49,17 +49,17 @@
     # Landing Pad Attendant
     - [ RMCJumpsuitCivilianYellow, RMCHeadCapFlippable, RMCSatchelNorm, CMBootsBlackFilled, CMPackFlare, RMCHazardVest, RMCBinoculars, RMCBeltUtilityGeneral, CMHandsBlackMarine, RMCEarmuffs ]
     # High roller
-    - [ RMCPouchGeneralLargeFillHighroller, RMCHeadCowboyHatDark, RMCSunglassesBigFake, RMCShioCigar, RMCJumpsuitCheckeredSuit, RMCJacketCorporateBrown, RMCHandsLeatherBlack, RMCSatchelBlack, RMCShoesFancyLeather ]
+    - [ RMCHeadCowboyHatDark, RMCSunglassesBigFake, RMCShioCigar, RMCJumpsuitCheckeredSuit, RMCJacketCorporateBrown, RMCHandsLeatherBlack, RMCSatchelBlack, RMCShoesFancyLeather, RMCPouchGeneralLargeFillHighroller ]
     # Prepper
     - [ RMCHeadFoil, CMMaskGas, RMCArmorVestCivilian, RMCJumpsuitSteward, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCBackpackMarineTechPrepperFill, RMCPouchGeneralLargeFillSPPRations]
     # Mad Scientist
     - [ RMCMaskKutjevoRespirator, RMCSatchelVirology, RMCJumpsuitCivilianScientist, CMHandsWhite, RMCLabcoatGreen, RMCWeldingGogglesSuperior, RMCShoesGreen, RMCPouchAutoinjectorFillEmergencyInjectors, RMCPamphletScience ]
     # Cameraman (TODO: Old Camera, Camera, and Camera Film)
-    - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondentBlack, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting ]
+    - [ RMCSunglassesBig, RMCSatchelBlack, RMCJumpsuitCorrespondent, RMCVestGrey, RMCShoesLaceup, RMCPouchGeneralLarge, RMCCameraBroadcasting ]
     # Pro Welder (TODO: welding pack)
     - [ RMCSatchelLightpackWelderProWelderFill, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated ]
     # Farmer (TODO: scythe and coveralls)
-    - [ RMCPouchGeneralLargeFillWheat, ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCSatchelEngineerFarmerFill ]
+    - [ ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCSatchelEngineerFarmerFill, RMCPouchGeneralLargeFillWheat ]
     # Fisherman (TODO: tan coveralls, fishing pole, and fish bait)
     - [ RMCGlassesAviatorsSilver, RMCSatchelLightpack5Slot, RMCBoonieFisherman, RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, CMHandsBrown, RMCPouchGeneralLarge ]
     randomGearOther:
