@@ -1,4 +1,3 @@
-
 # Marine raider
 - type: entity
   parent: ArmorHelmetM10
@@ -139,7 +138,7 @@
 
 # HEFA
 - type: entity
-  parent: RMCArmorHelmetM3G4
+  parent: ArmorHelmetM10
   id: RMCArmorHelmetHEFA
   name: HEFA helmet
   description: For some reason, seeing this helmet causes you to feel extremely distressed.
@@ -162,6 +161,8 @@
     # armor_internaldamage = CLOTHING_ARMOR_HIGH
   - type: ParasiteResistance
     maxCount: 6
+  - type: Corrodible
+    isCorrodible: false
   - type: Tag
     tags:
     - RMCHelmetHEFA

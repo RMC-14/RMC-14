@@ -26,10 +26,10 @@
   - type: ProjectileGrenade
     evenSpread: true
     fillPrototype: CMProjectileShrapnel
-    capacity: 48
+    capacity: 1 # TODO RMC14 shrapnel lag
     spreadAngle: 90
     directHit: false
-    directionAngle: 0 # Forward direction (sword rotation set by system)
+    directionAngle: 0 # Forward direction (rotation set by server system)
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container

@@ -18,7 +18,6 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
         var userRotation = _transform.GetWorldRotation(user);
         _transform.SetWorldRotation(ent, userRotation);
         _trigger.Trigger(ent, user);
-
         QueueDel(ent);
     }
 }

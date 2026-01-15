@@ -157,6 +157,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetM10
@@ -173,6 +174,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 # M11
 - type: entity
