@@ -348,6 +348,9 @@
       "name": "engi_spawn_delta"
     },
     {
+      "name": "field_doc_spawn"
+    },
+    {
       "name": "medic_spawn"
     },
     {

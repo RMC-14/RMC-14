@@ -126,3 +126,16 @@
     - id: RMCWeaponPistolPK7
     - id: RMCMagazinePistolPK7
     - id: RMCMagazinePistolPK7
+
+- type: entity
+  parent: CMLockerBase
+  id: CMLockerFieldDoctor
+  suffix: Filled, Field Doctor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM3VLBallistics
+    - id: RMCArmorHelmetM10FieldDoctor
+    - id: RMCPatchMedic
+    - id: CMBootsBlack
+    - id: CMMRE
