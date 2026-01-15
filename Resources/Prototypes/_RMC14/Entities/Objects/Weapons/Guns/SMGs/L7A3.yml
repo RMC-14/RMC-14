@@ -4,7 +4,6 @@
   suffix: PVE
   id: RMCWeaponSMGL7A3
   description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearance, where the L24A1 proved a tad too unwieldy. Sometimes referred to as the "Little Armat" by Royal Marines.
-  suffix: Filled
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
