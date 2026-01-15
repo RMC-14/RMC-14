@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: removed duplicate flashlight entry in XO vendor
-    type: Remove
-  - message: moved welding visors in XO vendor to their own subheading + made them
-      recommended
-    type: Tweak
-  id: 2284
-  time: '2025-08-30T10:02:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6741
 - author: Shromply
   changes:
   - message: Added FORECON PVE roles.
@@ -4727,5 +4717,12 @@
   id: 2786
   time: '2026-01-15T08:42:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8851
+- author: J C Denton
+  changes:
+  - message: Added WY Survivors insert on Solaris Ridge.
+    type: Add
+  id: 2787
+  time: '2026-01-15T08:44:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8832
 Name: RMC14
 Order: -1
