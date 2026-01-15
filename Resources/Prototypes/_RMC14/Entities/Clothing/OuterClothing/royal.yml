@@ -55,7 +55,7 @@
     contents:
     - id: RMCRangefinder
     - id: RMCExplosiveBreachingCharge
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
 
 - type: entity
   parent: RMCArmorRoyalPadded
@@ -84,7 +84,7 @@
     contents:
     - id: RMCRangefinder
     - id: RMCExplosiveBreachingCharge
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
 
 - type: entity
   parent: RMCArmorRoyalLight

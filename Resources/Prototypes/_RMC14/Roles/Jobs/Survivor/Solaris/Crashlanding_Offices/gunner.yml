@@ -1,0 +1,83 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorSolarisPMCStandard
+  name: rmc-job-name-pmc-standard
+  description: rmc-job-description-survivor
+  ranks:
+    RMCRankOperator: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCGunner
+  icon: RMCJobIconPMCGunner
+  hasIcon: true
+  greeting: rmc-job-greeting-solaris-pmc
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC Standard (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaPMCStandard
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCGunner
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorPMCBase
+  id: RMCGearSurvivorPMCGunner
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbingPatch
+    shoes: RMCBootsPMCFilled
+    gloves: CMHandsBlackMarine
+    mask: RMCMaskCoifPMC
+    ears: RMCHeadsetHvHWeYaPMC
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilledNearEmpty
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMSheetMetal20
+    outerClothing:
+    - RMCMREWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisPMCGunner
+  name: special survivor crashlanding offices pmc gunner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisPMCStandard
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: entity
+  parent: [ RMCSurvivorPresetNoGun, RMCGearSurvivorPresetPMCGun ]
+  id: RMCGearSurvivorPresetPMCGunner
+  name: pmc standard survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomStartingGear:
+      jumpsuit:
+      - RMCJumpsuitVeteranPMCNoWebbingPatch
+      - RMCJumpsuitVeteranPMCNoWebbingPatchFolded
+    randomOutfits:
+    - [ CMArmorM4PMCLight, ArmorHelmetPMC]
+    - [ CMArmorM4PMCLight, ArmorHelmetPMC] # TODO RMC14: PMC bulletproof armor, black tactical cap
+    - [ WeaponSMGM63, ArmorHelmetPMC] # TODO RMC14: PMC helmet (enclosed)
