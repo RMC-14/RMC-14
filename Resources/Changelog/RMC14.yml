@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Spaghetti
-  changes:
-  - message: Fixed warrior lunge always slashing a target even if they were let go
-      early.
-    type: Fix
-  id: 2291
-  time: '2025-09-04T09:07:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7737
 - author: J C Denton
   changes:
   - message: All planet maps with the exception of LV-759 and LV-522 use the newly
@@ -4722,5 +4714,15 @@
   id: 2793
   time: '2026-01-15T08:56:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/7403
+- author: Monotheonist
+  changes:
+  - message: Gave skrell even longer and shorter haircuts, as well as optional tails
+      and headdresses.
+    type: Add
+  - message: Gave skrell access to gauze (on the body.)
+    type: Tweak
+  id: 2794
+  time: '2026-01-15T09:03:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8101
 Name: RMC14
 Order: -1
