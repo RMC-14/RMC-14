@@ -35,7 +35,7 @@ cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
 cm-chatsan-word-xx121-marine = xx121
-cm-chatsan-replacement-xx121-marine = Xenonids
+cm-chatsan-replacement-xx121-marine = xenonids
 
 cm-chatsan-word-xx-121-marine = xx-121
 cm-chatsan-replacement-xx-121-marine = xenonids
