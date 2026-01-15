@@ -1,15 +1,21 @@
 using System.Linq;
+using Content.Client._RMC14.Commendations;
 using Content.Client._RMC14.UserInterface;
+using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Client.Resources;
 using Content.Client.Stylesheets;
 using JetBrains.Annotations;
+using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
+using Robust.Client.UserInterface.CustomControls;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Client._RMC14.Marines.ControlComputer;
 
@@ -18,12 +24,18 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 {
     [Dependency] private readonly IClipboardManager _clipboard = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IEntitySystemManager _systems = default!;
 
     [ViewVariables]
     private MedalsPanelWindow? _window;
 
     // Dictionary to store LastPlayerId -> PanelContainer mapping for quick removal
     private readonly Dictionary<string, PanelContainer> _recommendationGroups = new();
+
+    private sealed record MedalInfo(SpriteSpecifier Icon, string Name, string Description);
+    private readonly Dictionary<string, MedalInfo> _medalsInfo = new();
+    private bool _medalsInfoBuilt = false;
 
     protected override void Open()
     {
@@ -53,6 +65,7 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
             return;
 
         UpdateRecommendations(medalsState);
+        UpdateAwardedMedals(medalsState);
     }
 
     private static StyleBoxFlat CreateStyleBox(Color backgroundColor) => new()
@@ -352,6 +365,119 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         {
             panel.Orphan();
             _recommendationGroups.Remove(lastPlayerId);
+        }
+    }
+
+    private void BuildMedalsInfo()
+    {
+        _medalsInfo.Clear();
+
+        var commendationSystem = _systems.GetEntitySystem<SharedCommendationSystem>();
+        var awardableMedals = commendationSystem.GetAwardableMedalIds();
+
+        foreach (var medalId in awardableMedals)
+        {
+            if (!_prototype.TryIndex(medalId, out var medalProto))
+                continue;
+
+            var medalName = medalProto.Name;
+            if (string.IsNullOrWhiteSpace(medalName))
+                continue;
+
+            var medalDescription = medalProto.Description ?? string.Empty;
+            var medalInfo = new MedalInfo(
+                new SpriteSpecifier.EntityPrototype(medalId),
+                medalName,
+                medalDescription
+            );
+
+            _medalsInfo[medalName] = medalInfo;
+        }
+    }
+
+    private bool TryGetMedalInfo(string? prototypeId, string? name, [NotNullWhen(true)] out MedalInfo? info)
+    {
+        info = null;
+
+        // First try to get by prototype ID
+        if (!string.IsNullOrWhiteSpace(prototypeId))
+        {
+            if (_prototype.TryIndex(prototypeId, out var proto))
+            {
+                var medalName = proto.Name;
+                if (!string.IsNullOrWhiteSpace(medalName) && _medalsInfo.TryGetValue(medalName, out info))
+                {
+                    return true;
+                }
+            }
+        }
+
+        // Fallback to name matching
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            var entry = _medalsInfo.FirstOrDefault(kvp =>
+                string.Equals(kvp.Key, name, StringComparison.InvariantCultureIgnoreCase));
+
+            if (entry.Value != null)
+            {
+                info = entry.Value;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void UpdateAwardedMedals(MarineMedalsPanelBuiState state)
+    {
+        if (_window == null)
+            return;
+
+        // Build medals info lazily on first update
+        if (!_medalsInfoBuilt)
+        {
+            BuildMedalsInfo();
+            _medalsInfoBuilt = true;
+        }
+
+        _window.ViewMedalsList.DisposeAllChildren();
+
+        var spriteSystem = _systems.GetEntitySystem<SpriteSystem>();
+
+        foreach (var entry in state.AwardedMedals.OrderByDescending(e => e.Commendation.Round))
+        {
+            var container = new CommendationContainer();
+            container.Title.Text = entry.Commendation.Name;
+            container.Description.Text = Loc.GetString("rmc-commendation-description",
+                ("receiver", entry.Commendation.Receiver),
+                ("giver", entry.Commendation.Giver),
+                ("text", entry.Commendation.Text));
+
+            if (TryGetMedalInfo(entry.CommendationPrototypeId, entry.Commendation.Name, out var medalData))
+            {
+                var texture = spriteSystem.Frame0(medalData.Icon);
+                var tooltipText = $"[bold]{medalData.Name}[/bold]\n[font size=10]{medalData.Description}[/font]";
+
+                container.Icon.Texture = texture;
+                container.Icon.Visible = true;
+                container.Icon.MouseFilter = Control.MouseFilterMode.Pass;
+                container.Icon.TooltipDelay = 0f;
+
+                // Set up formatted tooltip
+                container.Icon.TooltipSupplier = _ =>
+                {
+                    var label = new RichTextLabel { MaxWidth = 400 };
+                    label.SetMessage(FormattedMessage.FromMarkupOrThrow(tooltipText));
+
+                    var tooltip = new Tooltip();
+                    tooltip.GetChild(0).Children.Clear();
+                    tooltip.GetChild(0).Children.Add(label);
+
+                    return tooltip;
+                };
+            }
+
+            _window.ViewMedalsList.AddChild(container);
         }
     }
 }

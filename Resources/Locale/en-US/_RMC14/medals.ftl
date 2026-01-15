@@ -37,6 +37,8 @@ rmc-award-recommendation-rank-unknown = No rank
 # Medal Recommendation Display
 rmc-medal-panel = Medals Panel
 rmc-medal-panel-give-new-medal = Give new medal
+rmc-medal-panel-tab-give-medals = Give medals
+rmc-medal-panel-tab-view-medals = View medals
 rmc-medal-panel-approve-recommendation = Approve
 rmc-medal-panel-reject-recommendation = Reject
 rmc-medal-panel-recommender-label = [color=#5B88B0]Recommender:[/color]

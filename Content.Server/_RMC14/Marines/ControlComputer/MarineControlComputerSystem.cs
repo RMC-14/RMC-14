@@ -9,6 +9,7 @@ using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Server._RMC14.Marines.ControlComputer;
@@ -84,7 +85,12 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             group.Recommendations.Add(recommendation);
         }
 
-        return new MarineMedalsPanelBuiState(groups.Values.ToList());
+        // Collect awarded medals from round commendations
+        var awardedMedals = _commendation.GetRoundCommendationEntries()
+            .Where(e => e.Commendation.Type == CommendationType.Medal)
+            .ToList();
+
+        return new MarineMedalsPanelBuiState(groups.Values.ToList(), awardedMedals);
     }
 
     private void OnMarineGibbed(Entity<MarineComponent> ent, ref BeingGibbedEvent ev)

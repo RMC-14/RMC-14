@@ -408,7 +408,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
 
     protected virtual MarineMedalsPanelBuiState BuildMedalsPanelState(Entity<MarineControlComputerComponent> ent, EntityUid? viewerActor = null)
     {
-        return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>());
+        return new MarineMedalsPanelBuiState(new List<MarineRecommendationGroup>(), new List<RoundCommendationEntry>());
     }
 
     public void GiveMedal(EntityUid computer, EntityUid actor)

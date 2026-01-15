@@ -1,4 +1,6 @@
-﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Dialog;
+using Robust.Shared.Network;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
@@ -50,10 +52,12 @@ public sealed class MarineControlComputerRemoveRecommendationGroupMsg : BoundUse
 public sealed class MarineMedalsPanelBuiState : BoundUserInterfaceState
 {
     public readonly List<MarineRecommendationGroup> RecommendationGroups;
+    public readonly List<RoundCommendationEntry> AwardedMedals;
 
-    public MarineMedalsPanelBuiState(List<MarineRecommendationGroup> recommendationGroups)
+    public MarineMedalsPanelBuiState(List<MarineRecommendationGroup> recommendationGroups, List<RoundCommendationEntry> awardedMedals)
     {
         RecommendationGroups = recommendationGroups;
+        AwardedMedals = awardedMedals;
     }
 }
 
