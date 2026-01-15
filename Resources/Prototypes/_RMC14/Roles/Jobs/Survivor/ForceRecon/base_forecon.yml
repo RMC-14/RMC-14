@@ -1,5 +1,5 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: RMCSurvivorForeconBase
   name: rmc-job-name-forecon
   description: rmc-job-description-forecon
@@ -14,12 +14,6 @@
   greeting: rmc-job-greeting-forecon
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: FORECON Survivor (Base)
-  useLoadoutOfJob: CMSurvivor
-  medals:
-    Bronze: RMCMedalBronzeService
-    Silver: RMCMedalSilverService
-    Gold: RMCMedalGoldService
-    Platinum: RMCMedalPlatinumService
   hidden: true
 
 - type: startingGear
@@ -33,6 +27,7 @@
     ears: RMCHeadsetForecon
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
