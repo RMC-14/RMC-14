@@ -1,27 +1,6 @@
 ﻿Entries:
 - author: x5tink
   changes:
-  - message: Upgraded Burn and Trauma Kits for ERT's
-    type: Add
-  id: 2286
-  time: '2025-09-04T08:53:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7768
-- author: SharkSnake98
-  changes:
-  - message: Added the Holiday Priest Robes
-    type: Add
-  id: 2287
-  time: '2025-09-04T08:56:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7757
-- author: Spaghetti
-  changes:
-  - message: Gave C4 / Plastic Explosives a beeping noise
-    type: Add
-  id: 2288
-  time: '2025-09-04T08:58:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7754
-- author: x5tink
-  changes:
   - message: Flap cap added to synth vendor.
     type: Add
   - message: Added document pouch to the SO vendor.
@@ -4723,5 +4702,32 @@
   id: 2788
   time: '2026-01-15T08:46:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8856
+- author: J C Denton
+  changes:
+  - message: Fixed names of a few shoreline and sand tiles.
+    type: Fix
+  id: 2789
+  time: '2026-01-15T08:50:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8982
+- author: CatAndHats
+  changes:
+  - message: Added bomb supply random spawner for mapping
+    type: Add
+  id: 2790
+  time: '2026-01-15T08:50:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8889
+- author: SharkSnake98
+  changes:
+  - message: Added the Field Doctor role, intended for surgeries and other medical
+      procedures in the FOB.
+    type: Add
+  - message: Added the Field Doctor locker, containing an MRE, marine combat boots,
+      M3-VL Ballistic Vest, Field Medic patch, and a Medic's helmet
+    type: Add
+  - message: Added the M10-L field doctor helmet for Field Doctor Usage in the field.
+    type: Add
+  id: 2791
+  time: '2026-01-15T08:51:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/7897
 Name: RMC14
 Order: -1
