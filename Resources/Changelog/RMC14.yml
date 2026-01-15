@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added the HVHI-P ammunition type and magazine for the M5SPR. (PVE)
-    type: Add
-  id: 2277
-  time: '2025-08-30T02:26:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7607
-- author: BramvanZijp
-  changes:
-  - message: Added a Purple new player tag that SEA's and AGhosts will see for players
-      with under 1 hour of playtime as a job.
-    type: Add
-  id: 2278
-  time: '2025-08-30T03:30:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7585
-- author: PursuitInAshes
-  changes:
-  - message: XO now requires five hours of MP Department playtime. (0 Hrs -> 5 Hrs)
-    type: Tweak
-  id: 2279
-  time: '2025-08-30T03:30:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7075
 - author: noctyrnal
   changes:
   - message: SEAs now have patches in their equipment vendor.
@@ -4726,5 +4704,28 @@
   id: 2779
   time: '2026-01-15T08:34:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8811
+- author: Dutch-VanDerLinde
+  changes:
+  - message: You can now flush reagents from the colony flamer tank with a verb, like
+      the M34 incinerator tank.
+    type: Tweak
+  id: 2780
+  time: '2026-01-15T08:37:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8939
+- author: Arykh
+  changes:
+  - message: Fixes the ChemMaster leaving no remainder in the buffer when making pills.
+    type: Fix
+  id: 2781
+  time: '2026-01-15T08:36:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8858
+- author: Ian321
+  changes:
+  - message: Dropships, escape pods and boats should no longer start to shake after
+      using extinguishers on them.
+    type: Fix
+  id: 2782
+  time: '2026-01-15T08:37:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8937
 Name: RMC14
 Order: -1
