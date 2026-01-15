@@ -24,6 +24,7 @@
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
     cm-chatsan-word-xx121-marine: cm-chatsan-replacement-xx121-marine
     cm-chatsan-word-xx-121-marine: cm-chatsan-replacement-xx-121-marine
+    
 - type: accent
   id: CMChatSanitizeXeno
   wordReplacements:
