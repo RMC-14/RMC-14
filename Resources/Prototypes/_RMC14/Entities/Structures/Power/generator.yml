@@ -89,6 +89,19 @@
           Hundred: { state: "on-100" }
 
 - type: entity
+  parent: RMCGeneratorFusionColony
+  id: RMCGeneratorFusionColonyTracked
+  suffix: Tracked
+  components:
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: generator
+
+- type: entity
   parent: BaseItem
   id: RMCGeneratorFusionCell
   name: WL-6 universal fuel cell
