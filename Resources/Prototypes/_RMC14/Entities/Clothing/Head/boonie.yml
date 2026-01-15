@@ -45,5 +45,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
   - type: ItemCamouflage
     camouflageVariations: { }

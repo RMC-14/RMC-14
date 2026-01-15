@@ -31,6 +31,40 @@
     - id: WheatBushel
       amount: 3
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillHighroller
+  suffix: Dice, Smokes, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTarbackTube
+    - id: d6Dice
+    - id: RMCZippoGold
+    - id: RMCSpaceCash1000
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillSPPRations
+  suffix: SPP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMarinePreparedMealSPPCuban
+    - id: RMCMarinePreparedMealSPPBanush
+    - id: CMCanteen
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillStowaway
+  suffix: Stowaway, .38 Magnum, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpaceCash1000
+    - id: RMCSpeedLoader38
+      amount: 2
+
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine

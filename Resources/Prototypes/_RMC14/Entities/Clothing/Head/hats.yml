@@ -1074,7 +1074,7 @@
       state: helmet
 
 - type: entity
-  parent: CMHeadBeret
+  parent: ClothingHeadBase
   id: RMCHeadFoil
   name: foil hat
   description: Keeps the government, aliens, and your in-laws from reading your thoughts. Probably.

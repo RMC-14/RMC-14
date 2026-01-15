@@ -261,11 +261,9 @@
   description: A suit that protects against minor chemical spills. This one is green.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/green.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/labcoat.rsi
-  - type: CMArmor
-    bio: 15
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Labcoats/green.rsi
 
 - type: entity
   parent: [RMCBaseJacketButtonableOpened, RMCLabcoatGreen]

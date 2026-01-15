@@ -126,7 +126,10 @@
   description: Fluffy!
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Boots/slippers.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/slippers.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/slippers.rsi
+
 
 - type: entity
   parent: RMCShoesSlippers
@@ -135,4 +138,6 @@
   description: Fluffy...
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Shoes/Boots/slippers_worn.rsi
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/slippers_worn.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Shoes/Misc/slippers_worn.rsi

@@ -51,6 +51,8 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Helmets/painted_welding_helmet.rsi
