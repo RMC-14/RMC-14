@@ -28,8 +28,15 @@
       - CMSurvivorLV624SecurityGuard: 2
       CMSurvivorScientist:
       - CMSurvivorLV624Archeologist: 2
+    survivorJobScenarios:
+      asset_protection: # Corporate Dome Goons, order of job priority for goons. Scientist is overriden into doctor.
+      - CMSurvivorCorporate: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorSecurity: 1
+      - CMSurvivor: -1
     survivorJobVariantScenarios:
-      asset_protection:
+      asset_protection: # Corporate Dome Goons
         CMSurvivor:
         - CMSurvivorLV624CorporateDomeGoon: -1
         CMSurvivorCorporate:
@@ -42,6 +49,9 @@
         - CMSurvivorLV624CorporateDomeGoonLead: 1
         CMSurvivorScientist:
         - CMSurvivor: 0
+    survivorJobOverrideScenarios:
+      asset_protection: # Corporate Dome Goons
+        CMSurvivorScientist: CMSurvivorDoctor
 
 
 - type: entity
