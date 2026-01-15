@@ -89,7 +89,6 @@
         density: 185
         layer:
         - BulletImpassable
-  - type: DropshipHijacker
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.66
     baseSprintSpeed: 3
@@ -149,6 +148,9 @@
       components:
       - RMCFireImmunityBypass
   - type: StunFriendlyXenoOnStep
+    whitelist:
+      components:
+      - StunFriendlyXenoOnStep
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
   - type: RMCActionOrder

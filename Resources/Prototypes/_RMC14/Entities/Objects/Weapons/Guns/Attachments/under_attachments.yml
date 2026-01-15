@@ -45,6 +45,7 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentBipod
   - type: AttachableToggleable
+    activateOnMove: false
     heldOnlyActivate: true
     userOnly: true
     doInterrupt: true
@@ -282,6 +283,9 @@
   - type: RMCFlamerTank
     maxIntensity: 10
     maxDuration: 10
+    reagentWhitelist:
+    - RMCNapalmUT
+    - WeldingFuel
   - type: AttachableToggleable
     userOnly: true
     attachedOnly: true
@@ -307,6 +311,10 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
       state: all
+  - type: RMCFlushableSolution
+    solution: rmc_flamer_tank
+    flushTime: 1.5
+  - type: NoMixingReagents
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -448,6 +456,7 @@
     vaporAmount: 3
     sprayDistance: 5
     sprayVelocity: 5
+    pushbackAmount: 0
     spraySound:
       path: /Audio/Effects/extinguish.ogg
   - type: RefillableSolution

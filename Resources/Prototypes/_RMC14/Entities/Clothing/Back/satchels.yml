@@ -275,6 +275,7 @@
   - type: StorageFill
     contents:
     - id: RMCArmorProvostFlexi
+    - id: RMCStampProvostInspector
 
 - type: entity
   parent: CMSatchelSecurity
@@ -532,6 +533,7 @@
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     sourceWhitelist:
       components:
+      - RMCFlamerTank
       - Welder
     targetWhitelist:
       tags:
@@ -641,6 +643,25 @@
       Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTOPMCBroken
+  name: broken We-Ya radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
 
 - type: entity
   parent: RMCBackpackRTO
@@ -792,7 +813,7 @@
     - id: CMMaskGas # TODO RMC14 royal marine gas masks
     - id: RMCSyringeCase
     - id: CMPortableSurgicalBedSpawnFolded
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
     - id: RMCMRETSE
 
 - type: entity
