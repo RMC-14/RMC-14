@@ -107,6 +107,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
+
+- type: entity
+  parent: RMCJumpsuitMercenaryEngineer
+  id: RMCJumpsuitMercenaryEngineerWebbing
+  suffix: Webbing, PMC
+  components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCEngineer
 

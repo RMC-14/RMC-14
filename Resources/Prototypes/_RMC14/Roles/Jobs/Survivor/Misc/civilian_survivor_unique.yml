@@ -2,6 +2,7 @@
   parent: CMSurvivor
   id: RMCSurvivorCivilianUnique
   name: rmc-job-name-survivor-civilian
+  spawnMenuRoleName: Unique Civilian (Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -26,23 +27,23 @@
   - type: SurvivorPreset
     randomOutfits:
     # Sleepy Colonist
-    - [ RMCJumpsuitBluePjs, RMCShoesSlippers, CMSatchel, CMBedsheetWhite, CMBedsheetBlue, RMCJumpsuitRedPjs ]
+    - [ RMCJumpsuitBluePjs, RMCShoesSlippers, RMCSatchelSleepyColonistFill ]
     # Bug Exterminator Colonist (TODO: backpack water tank with fuel)
     - [ RMCJumpsuitCivilianGreen, CMSatchel, RMCHazardVestGreen, RMCBootsCBRN, RMCHandsVeteranCBRNLessArmored, CMMaskGas ]
     # Janitor
-    - [ RMCJumpsuitCivilianJanitor, RMCSatchelVirology, RMCHazardVest, ClothingHeadHatPurplesoft, RMCHandsPurple, RMCHipsterGlasses, RMCShoesGaloshes, RMCGrenadeCustomMetalFoam ]
+    - [ RMCJumpsuitCivilianJanitor, RMCSatchelVirologyJanitorFill, RMCHazardVest, ClothingHeadHatPurplesoft, RMCHandsPurple, RMCHipsterGlasses, RMCShoesGaloshes ]
     # Bartender
-    - [ RMCJumpsuitWaiter, CMSatchel, ClothingHeadHatBowlerHat, RMCShoesLaceup, CMPaperBin30, RMCDrinkAlcoholWhiskey, RMCGrenadeMolotov ]
+    - [ RMCJumpsuitWaiter, RMCSatchelBartenderFill, ClothingHeadHatBowlerHat, RMCShoesLaceup ]
     # Botanist
     - [ RMCJumpsuitLiaisonGreenWorkwear, RMCSatchelHydro, RMCHydroApron, RMCShoesLaceupBrown, RMCToolHatchet, RMCToolSpade ]
     # Butcher
-    - [ CMSatchel, ClothingHeadBandBrown, CMJumpsuitMessTech, RMCChefApron, RMCShoesLaceupBrown, CMHandsLatex, RMCKitchenKnifeButcher ]
+    - [ RMCSatchelButcherFill, ClothingHeadBandBrown, CMJumpsuitMessTech, RMCChefApron, RMCShoesLaceupBrown, CMHandsLatex ]
     # Protagonist
     - [ CMJumpsuitTShirtGray, RMCSatchelBlack, RMCOuterClothingExternalWebbing, RMCShoesWeYaStompers, RMCTankFlamerColony ]
     # Escaped Colony Prisoner
     - [ RMCJumpsuitOrangeEscapedPrisoner, CMSatchelSecurity, RMCShoesJackboots, RMCPouchGeneralLarge, WeaponShotgunM357Sawn ]
     # Stowaway
-    - [ RMCHipsterGlasses, CMSatchel, RMCJumpsuitLiaisonStowaway, RMCShoesBrown, RMCBriefcaseStowAway, RMCWeaponRevolver38Magnum, RMCPouchGeneralLargeFillStowaway ]
+    - [ RMCHipsterGlasses, RMCSatchelStowawayFill, RMCJumpsuitLiaisonStowaway, RMCShoesBrown, RMCBriefcaseStowAway, RMCPouchGeneralLargeFillStowaway ]
     # Private Detective (TODO: Camera and tape recorder)
     - [ RMCHeadCapFedoraTan, RMCJumpsuitLiaisonShoulderHolster, RMCCoatBureauTrenchCoatBeige, CMSatchel, RMCShoesLeather ]
     # Landing Pad Attendant
@@ -50,7 +51,7 @@
     # High roller
     - [ RMCPouchGeneralLargeFillHighroller, RMCHeadCowboyHatDark, RMCSunglassesBigFake, RMCShioCigar, RMCJumpsuitCheckeredSuit, RMCJacketCorporateBrown, RMCHandsLeatherBlack, RMCSatchelBlack, RMCShoesFancyLeather ]
     # Prepper
-    - [ RMCHeadFoil, CMMaskGas, RMCArmorVestCivilian, RMCJumpsuitSteward, RMCHandsVeteranSPP, RMCBootsSPPFilled, CMBackpackMarineTech, CMMRE, CMMRE, CMDrinkWEYAWaterBottle30, CMDrinkWEYAWaterBottle30, RMCPouchGeneralLargeFillSPPRations]
+    - [ RMCHeadFoil, CMMaskGas, RMCArmorVestCivilian, RMCJumpsuitSteward, RMCHandsVeteranSPP, RMCBootsSPPFilled, RMCBackpackMarineTechPrepperFill, RMCPouchGeneralLargeFillSPPRations]
     # Mad Scientist
     - [ RMCMaskKutjevoRespirator, RMCSatchelVirology, RMCJumpsuitCivilianScientist, CMHandsWhite, RMCLabcoatGreen, RMCWeldingGogglesSuperior, RMCShoesGreen, RMCPouchAutoinjectorFillEmergencyInjectors, RMCPamphletScience ]
     # Cameraman (TODO: Old Camera, Camera, and Camera Film)
@@ -58,7 +59,7 @@
     # Pro Welder (TODO: welding pack)
     - [ RMCSatchelLightpackWelder, RMCHelmetWeldingPainted, RMCJumpsuitMercenaryEngineer, CMUtilityVest, RMCShoesCombat, CMHandsInsulated, RMCWelderIndustrialHighCapacity, CMPamphletEngineer ]
     # Farmer (TODO: scythe and coveralls)
-    - [ RMCPouchGeneralLargeFillWheat, CMSatchelEngineer, ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCToolMiniHoe ]
+    - [ RMCPouchGeneralLargeFillWheat, ClothingHeadHatStrawHat, RMCJumpsuitLiaisonKhakiWorkwear, RMCShoesLeather, ClothingHandsGlovesLeather, RMCSatchelEngineerFarmerFill ]
     # Fisherman (TODO: tan coveralls, fishing pole, and fish bait)
     - [ RMCGlassesAviatorsSilver, RMCSatchelLightpack5Slot, RMCBoonieFisherman, RMCJumpsuitLiaisonGreenWorkwear, RMCShoesLaceupBrown, CMHandsBrown, RMCPouchGeneralLarge ]
     randomGearOther:
