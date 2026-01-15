@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Dialog;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Marines.ControlComputer;
@@ -10,5 +11,6 @@ public sealed record MarineControlComputerMedalMessageEvent(
     NetEntity? Marine,
     string Name,
     string Message = "",
-    string? LastPlayerId = null
+    string? LastPlayerId = null,
+    ProtoId<EntityPrototype>? CommendationPrototypeId = null
 ) : DialogInputEvent(Message);

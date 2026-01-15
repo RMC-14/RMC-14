@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Content.Server.Administration.Logs;
 using Content.Server.Database;
 using Content.Server.GameTicking;
@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.Database;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.Commendations;
 
@@ -24,11 +25,13 @@ public sealed class CommendationSystem : SharedCommendationSystem
         Entity<CommendationReceiverComponent?> receiver,
         string name,
         string text,
-        CommendationType type)
+        CommendationType type,
+        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        NetEntity? receiverEntity = null)
     {
         try
         {
-            base.GiveCommendation(giver, receiver, name, text, type);
+            base.GiveCommendation(giver, receiver, name, text, type, commendationPrototypeId, receiverEntity);
 
             if (!Resolve(giver, ref giver.Comp1, ref giver.Comp2, false) ||
                 !Resolve(receiver, ref receiver.Comp, false) ||
@@ -40,7 +43,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             var receiverId = Guid.Parse(receiver.Comp.LastPlayerId);
             var receiverName = GetNameWithRank(receiver);
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
         }
         catch (Exception e)
         {
@@ -54,11 +57,13 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string receiverName,
         string name,
         string text,
-        CommendationType type)
+        CommendationType type,
+        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        NetEntity? receiverEntity = null)
     {
         try
         {
-            base.GiveCommendationByLastPlayerId(giver, lastPlayerId, receiverName, name, text, type);
+            base.GiveCommendationByLastPlayerId(giver, lastPlayerId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
 
             if (!Resolve(giver, ref giver.Comp1, ref giver.Comp2, false))
                 return;
@@ -66,7 +71,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             if (!Guid.TryParse(lastPlayerId, out var receiverId))
                 return;
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
         }
         catch (Exception e)
         {
@@ -80,7 +85,9 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string receiverName,
         string name,
         string text,
-        CommendationType type)
+        CommendationType type,
+        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        NetEntity? receiverEntity = null)
     {
         text = text.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -100,7 +107,8 @@ public sealed class CommendationSystem : SharedCommendationSystem
         Dirty(giver, giver.Comp1);
 
         var commendation = new Commendation(giverName, receiverName, name, text, type, round);
-        RoundCommendations.Add(commendation);
+        var entry = new RoundCommendationEntry(commendation, commendationPrototypeId, receiverEntity);
+        RoundCommendations.Add(entry);
         _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);
         _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
 

@@ -1,7 +1,9 @@
-﻿using Content.Shared._RMC14.CCVar;
+using System.Linq;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -11,7 +13,7 @@ public abstract class SharedCommendationSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
 
-    protected readonly List<Commendation> RoundCommendations = new();
+    protected readonly List<RoundCommendationEntry> RoundCommendations = new();
 
     public int CharacterLimit { get; private set; }
     public int MinCharacterLimit { get; private set; }
@@ -81,7 +83,9 @@ public abstract class SharedCommendationSystem : EntitySystem
         Entity<CommendationReceiverComponent?> receiver,
         string name,
         string text,
-        CommendationType type)
+        CommendationType type,
+        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        NetEntity? receiverEntity = null)
     {
     }
 
@@ -91,11 +95,18 @@ public abstract class SharedCommendationSystem : EntitySystem
         string receiverName,
         string name,
         string text,
-        CommendationType type)
+        CommendationType type,
+        ProtoId<EntityPrototype>? commendationPrototypeId = null,
+        NetEntity? receiverEntity = null)
     {
     }
 
     public IReadOnlyList<Commendation> GetCommendations()
+    {
+        return RoundCommendations.Select(e => e.Commendation).ToList();
+    }
+
+    public IReadOnlyList<RoundCommendationEntry> GetRoundCommendationEntries()
     {
         return RoundCommendations;
     }

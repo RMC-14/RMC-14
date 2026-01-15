@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.AlertLevel;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Commendations;
 using Content.Shared._RMC14.Dialog;
@@ -155,7 +155,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
         }
         var medalDescription = medalProto.Description;
         var prompt = $"[italic][bolditalic]{medalName}[/bolditalic] - {medalDescription}[/italic]\n\n{Loc.GetString("rmc-medal-citation-prompt")}";
-        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, medalName, LastPlayerId: args.LastPlayerId);
+        var ev = new MarineControlComputerMedalMessageEvent(args.Actor, args.Marine, medalName, LastPlayerId: args.LastPlayerId, CommendationPrototypeId: args.MedalEntityId);
         _dialog.OpenInput(ent, actor.Value, prompt, ev, true, _commendation.CharacterLimit, _commendation.MinCharacterLimit, true);
     }
 
@@ -180,7 +180,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 return;
             }
             awardedLastPlayerId = receiver.LastPlayerId;
-            _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal);
+            _commendation.GiveCommendation(actor.Value, marine.Value, args.Name, args.Message, CommendationType.Medal, args.CommendationPrototypeId, args.Marine);
         }
         // For gibbed marines
         else if (args.LastPlayerId != null)
@@ -192,7 +192,7 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
                 awardedLastPlayerId = lastPlayerId;
                 // Format name with rank if available
                 var receiverName = !string.IsNullOrEmpty(info.Rank) ? $"{info.Rank} {info.Name}" : info.Name;
-                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, receiverName, args.Name, args.Message, CommendationType.Medal);
+                _commendation.GiveCommendationByLastPlayerId(actor.Value, lastPlayerId, receiverName, args.Name, args.Message, CommendationType.Medal, args.CommendationPrototypeId, null);
             }
         }
         else
