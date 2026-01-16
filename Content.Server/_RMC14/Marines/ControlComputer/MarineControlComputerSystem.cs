@@ -148,14 +148,16 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         if (prototypeId == null)
             return;
 
-        // Mark as printed immediately to prevent duplicate requests
-        ent.Comp.PrintedCommendationIds.Add(args.CommendationId);
-        Dirty(ent);
-
         // Update UI state immediately to disable button
         var computers = EntityQueryEnumerator<MarineControlComputerComponent>();
         while (computers.MoveNext(out var uid, out var comp))
         {
+            if (!comp.PrintedCommendationIds.Contains(args.CommendationId))
+            {
+                comp.PrintedCommendationIds.Add(args.CommendationId);
+                Dirty(uid, comp);
+            }
+
             if (_ui.IsUiOpen(uid, MarineControlComputerUi.MedalsPanel))
             {
                 var state = BuildMedalsPanelState(new Entity<MarineControlComputerComponent>(uid, comp), null);
