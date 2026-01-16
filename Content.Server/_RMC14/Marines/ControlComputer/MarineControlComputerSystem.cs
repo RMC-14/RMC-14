@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Examine;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -10,6 +11,7 @@ using Content.Shared.Body.Events;
 using Content.Shared.Database;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles.Jobs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -110,12 +112,6 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             ent.Comp.PrintedCommendationIds);
     }
 
-    private static string GetCommendationId(RoundCommendationEntry entry)
-    {
-        var commendation = entry.Commendation;
-        return $"{commendation.Receiver}|{commendation.Name}|{commendation.Round}|{commendation.Text}"; // Improvised hash
-    }
-
     private void OnPrintCommendation(Entity<MarineControlComputerComponent> ent, ref MarineControlComputerPrintCommendationMsg args)
     {
         if (_net.IsClient)
@@ -172,6 +168,9 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
         var commendationId = args.CommendationId;
         var entityUid = ent.Owner;
         var receiverEntity = targetEntry.Value.ReceiverEntity;
+        var receiver = targetEntry.Value.Commendation.Receiver;
+        var giver = targetEntry.Value.Commendation.Giver;
+        var text = targetEntry.Value.Commendation.Text;
 
         // Play print sound
         if (ent.Comp.PrintCommendationSound != null)
@@ -199,6 +198,25 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             {
                 accessory.User = receiverEntity.Value;
                 Dirty(medal, accessory);
+            }
+
+            if (!HasComp<RMCGenericExamineComponent>(medal))
+            {
+                var examine = EnsureComp<RMCGenericExamineComponent>(medal);
+                string messageHeader = Loc.GetString("rmc-commendation-examine-1");
+                string messageDesc = Loc.GetString("rmc-commendation-examine-2",
+                    ("receiver", receiver),
+                    ("giver", giver),
+                    ("text", text));
+                examine.Message = $"{messageHeader}\n{messageDesc}";
+                examine.DisplayMode = RMCExamineDisplayMode.DetailedVerb;
+                examine.DetailedVerbConfig = new RMCDetailedVerbConfig 
+                {
+                    HoverMessageId = "rmc-commendation-examine-hover",
+                    Title = "rmc-commendation-examine-title"
+                };
+                examine.Blacklist = new EntityWhitelist { Components = ["Xeno"] };
+                Dirty(medal, examine);
             }
         });
     }

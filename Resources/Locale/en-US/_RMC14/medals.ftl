@@ -57,3 +57,8 @@ rmc-commendation-window = Commendations
 rmc-commendation-title = [bold]Round {$round} - {$name}[/bold]
 rmc-commendation-description = Issued to [bold]{$receiver}[/bold] by [bold]{$giver}[/bold] for:
     {$text}
+
+rmc-commendation-examine-title = Inscription
+rmc-commendation-examine-1 = The inscription on this award reads:
+rmc-commendation-examine-2 = [italic]Issued to [bolditalic]{$receiver}[/bolditalic] by [bolditalic]{$giver}[/bolditalic] for: {$text}[/italic]
+rmc-commendation-examine-hover = Read the full inscription on this award
