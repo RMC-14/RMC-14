@@ -201,8 +201,8 @@ public abstract class SharedWebbingSystem : EntitySystem
             return false;
         }
 
-        if ((whitelist is { } && !_whitelist.IsWhitelistPass(whitelist, webbing)) ||    //     if whitelist is null AND the webbing is not whitelisted
-            (whitelist is not { } && _tag.HasTag(webbing, ArmorWebbingTag)))            // OR  if whitelist is not null AND the webbing has the ArmorWebbing tag
+        if ((whitelist is { } && !_whitelist.IsWhitelistPass(whitelist, webbing)) ||    //     if whitelist is not null, but the webbing is not whitelisted
+            (whitelist is not { } && _tag.HasTag(webbing, ArmorWebbingTag)))            // OR  if whitelist is null but the webbing has the ArmorWebbing tag
         {
             return false;
         }
