@@ -20,7 +20,7 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Small
@@ -41,6 +41,9 @@
       components:
       - Xeno
   - type: StoreAfterFailedInteract
+  - type: Tag
+    tags:
+    - ArmorWebbing
 
 - type: entity
   parent: RMCArmorWebbingBase
@@ -66,7 +69,7 @@
       - RMCShellShotgun
       - RMCMagazineSmartGun
   - type: FixedItemSizeStorage
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Normal
@@ -113,7 +116,7 @@
       - CMMagazineSniper
       - RMCShellShotgun
   - type: FixedItemSizeStorage
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Normal
@@ -153,7 +156,7 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Normal
@@ -191,7 +194,7 @@
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Small
@@ -230,7 +233,7 @@
       tags:
       - RMCShellShotgun
   - type: FixedItemSizeStorage
-  - type: ArmorWebbing
+  - type: Webbing
     components:
     - type: Storage
       maxItemSize: Small
@@ -246,3 +249,9 @@
       damageCoefficient: 0
       worn: false
     - type: StoreAfterFailedInteract
+  - type: Tag
+    tags:
+    - ArmorWebbing
+
+- type: Tag
+  id: ArmorWebbing
