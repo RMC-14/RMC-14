@@ -197,7 +197,7 @@
         name: Chemical Dispenser
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
           - RMCMiniTank
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Science/chem_master.rsi

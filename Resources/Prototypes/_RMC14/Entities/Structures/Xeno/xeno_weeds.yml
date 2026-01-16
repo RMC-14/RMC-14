@@ -388,6 +388,7 @@
     mode: Corners
   - type: XenoNestSurface
   - type: XenoFriendly
+
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
@@ -404,6 +405,10 @@
   - type: RMCNightVisionVisible
     priority: -1
     transparency: 0.2
+
+- type: entity
+  parent: XenoWeedsWall
+  id: RMCXenoWeedsWall
 
 # Gardener's weeds
 - type: entity # TODO RMC14 sound

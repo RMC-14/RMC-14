@@ -1486,6 +1486,8 @@ BarbedWire1: RMCBarbedWire1
 BarbedWire10: RMCBarbedWire10
 BarbedWire15: RMCBarbedWire15
 BarbedWireBase: RMCBarbedWire1
+Bedroll: RMCBedroll
+BedrollFolded: RMCBedrollFolded
 Bullet10x20mm: RMCBullet10x20mm
 Bullet10x20mmAP: RMCBullet10x20mmAP
 Bullet10x20mmRubber: RMCBullet10x20mmRubber
@@ -1571,6 +1573,15 @@ MobRodentiaDummy: RMCMobRodentiaDummy
 MobSkrellDummy: RMCMobSkrellDummy
 MobVulpkaninDummy: RMCMobVulpkaninDummy
 RCMBulletPistol9mmSquashHead: RMCBulletPistol9mmSquashHead
+RCMWallShivaFab: RMCWallShivaFab
+RCMWallShivaIce: RMCWallShivaIce
+RCMWallShivaInvincibleFab: RMCWallShivaInvincibleFab
+RCMWallShivaReinforcedFab: RMCWallShivaReinforcedFab
+RCMWallShivaReinforcedFabBlue: RMCWallShivaReinforcedFabBlue
+RCMWallShivaReinforcedFabOrange: RMCWallShivaReinforcedFabOrange
+RCMWallShivaReinforcedFabPink: RMCWallShivaReinforcedFabPink
+RCMWallShivaReinforcedFabRed: RMCWallShivaReinforcedFabRed
+RCMWallShivaReinforcedFabWhite: RMCWallShivaReinforcedFabWhite
 WeaponRifleAR10: RMCWeaponRifleAR10
 WeaponRifleL83A2: RMCWeaponRifleL83A2
 WeaponRifleL83A3: RMCWeaponRifleL83A3
