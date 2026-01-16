@@ -1590,6 +1590,8 @@ RCMWallShivaReinforcedFabOrange: RMCWallShivaReinforcedFabOrange
 RCMWallShivaReinforcedFabPink: RMCWallShivaReinforcedFabPink
 RCMWallShivaReinforcedFabRed: RMCWallShivaReinforcedFabRed
 RCMWallShivaReinforcedFabWhite: RMCWallShivaReinforcedFabWhite
+SpawnCMTestDummy: RMCSpawnCMTestDummy
+SpawnRMCTrainingDummy: RMCSpawnRMCTrainingDummy
 StalkyBush01: RMCStalkyBush01
 StalkyBush02: RMCStalkyBush02
 StalkyBush03: RMCStalkyBush03
