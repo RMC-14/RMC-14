@@ -5,7 +5,7 @@ namespace Content.Server._RMC14.Explosion;
 
 public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 {
-    [Dependency] private readonly ExplosionSystem _explosion = default!;
+    [Dependency] private readonly RMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly TriggerSystem _trigger = default!;
 
     protected override void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
@@ -18,6 +18,6 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 
         // Trigger ProjectileGrenadeComponent for shrapnel.
         _trigger.Trigger(ent, user);
-        _explosion.TriggerExplosive(ent, user: user);
+        _rmcExplosion.TriggerExplosive(ent, user: user);
     }
 }
