@@ -7,8 +7,6 @@
   components:
   - type: HumanoidAppearance
     species: Arachnid
-    hideLayersOnEquip:
-    - UndergarmentTop
   - type: DamageVisuals
     damageOverlayGroups:
       Brute:
