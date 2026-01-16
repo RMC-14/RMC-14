@@ -74,7 +74,7 @@
         amount: 5
       - id: CMDexalinPlusAutoInjector
         amount: 5
-      - id: CMDyloveneAutoInjector
+      - id: RMCDyloveneAutoInjector
         amount: 5
       - id: CMEpinephrineAutoInjector
         amount: 5
@@ -180,7 +180,7 @@
         amount: 5
       - id: CMDexalinPlusAutoInjector
         amount: 5
-      - id: CMDyloveneAutoInjector
+      - id: RMCDyloveneAutoInjector
         amount: 5
       - id: CMEpinephrineAutoInjector
         amount: 5
