@@ -1,4 +1,3 @@
-
 # Marine raider
 - type: entity
   parent: ArmorHelmetM10
@@ -12,6 +11,11 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/marsoc.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    bullet: 30
+    bio: 25
+    # armor_energy = 15
 
 # Dutch's Dozen
 - type: entity
@@ -172,4 +176,10 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/cbrn.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 100
+    explosionArmor: 20
+    # armor_rad = 55
 # TODO: add advanced version of CBRN helmet

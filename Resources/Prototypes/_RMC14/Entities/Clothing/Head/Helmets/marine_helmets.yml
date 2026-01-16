@@ -119,15 +119,13 @@
     - RMCVisorSquadIntegrated
 
 - type: entity
-  parent: RMCHelmetBase
+  parent: ArmorHelmetM10
   id: RMCArmorHelmetM10FieldDoctor
   name: M10-L field doctor helmet
   description: A special variant of the M10 Pattern Helmet worn by the field doctors of the Marines. Comes with a built in medical display HUD.
   components:
-  - type: CMArmor
-    melee: 20
-    bullet: 20
-    explosionArmor: 10
+  - type: RMCBulkyArmor
+    isBulky: false
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
   - type: Clothing
@@ -229,6 +227,8 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
+  - type: CMArmor
+    bio: 25
 
 - type: entity
   parent: ArmorHelmetM10
@@ -244,7 +244,6 @@
     melee: 25
     bullet: 30
     bio: 25
-    explosionArmor: 10 #same as base m10 helmet
     #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations:
@@ -264,7 +263,7 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: CMArmorHelmetM11CCO
   id: CMArmorHelmetM11CGeneral
   name: M11C pattern ceremonial helmet
   description: A special M11 pattern ceremonial helmet worn occasionally by general officers of the UNMC.
@@ -273,12 +272,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
-  - type: CMArmor
-    melee: 25
-    bullet: 30
-    bio: 25
-    explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations: { }
 
