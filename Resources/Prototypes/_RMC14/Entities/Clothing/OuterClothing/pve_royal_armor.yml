@@ -29,6 +29,10 @@
     whitelist:
       tags:
       - RMCUniformTSE
+  - type: WebbingClothing
+    whitelist:
+      tags:
+      - ArmorWebbing
 
 - type: entity
   parent: RMCArmorRoyalPVE
@@ -71,3 +75,136 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/PVE/Royal/kestrelharness.rsi
   - type: ClothingBlockBackpack
   - type: SmartGunArmor
+
+# Armour Cases
+
+- type: entity
+  parent: RMCPVEArmorCaseBase
+  id: RMCPVEArmorCaseRoyal
+  name: L3A Kestrel modular armor kit
+  description: A case containing the L3A Kestrel modular vest, L5A2 helmet, and relevant accoutrements.
+  components:
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    state: icon
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_a
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_a }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalHelmet
+    - id: RMCArmorRoyalPVE
+    - id: RMCPVEArmorPadsKestrel
+    - id: RMCPVEArmorBracersKestrel
+    - id: RMCPVEArmorNeckGuardKestrel
+    - id: RMCPVEArmorGroinPlateKestrel
+    - id: RMCPVEArmorShinGuardKestrel
+    - id: RMCPVEArmorKneeGuardKestrel
+
+- type: entity
+  parent: RMCPVEArmorCaseRoyal
+  id: RMCPVEArmorCaseRoyalLight
+  name: L3S Kestrel modular armor kit
+  description: A case containing the L3S Kestrel modular vest, L5A3 helmet, and relevant accoutrements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_s
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_s }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCArmorRoyalLightPVE
+    - id: RMCPVEArmorPadsKestrel
+    - id: RMCPVEArmorBracersKestrel
+    - id: RMCPVEArmorNeckGuardKestrel
+    - id: RMCPVEArmorGroinPlateKestrel
+    - id: RMCPVEArmorShinGuardKestrel
+    - id: RMCPVEArmorKneeGuardKestrel
+
+- type: entity
+  parent: RMCPVEArmorCaseRoyal
+  id: RMCPVEArmorCaseRoyalPointman
+  name: L3T Kestrel modular armor kit
+  description: A case containing the L3T Kestrel modular vest, L5A3 helmet, and relevant accoutrements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_t
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_t }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCArmorRoyalPointmanPVE
+    - id: RMCPVEArmorPadsKestrel
+    - id: RMCPVEArmorBracersKestrel
+    - id: RMCPVEArmorNeckGuardKestrel
+    - id: RMCPVEArmorGroinPlateKestrel
+    - id: RMCPVEArmorShinGuardKestrel
+    - id: RMCPVEArmorKneeGuardKestrel
+
+- type: entity
+  parent: RMCPVEArmorCaseRoyal
+  id: RMCPVEArmorCaseRoyalHarness
+  name: L3H Kestrel modular harness kit
+  description: A case containing the L3H Kestrel modular harness, L5A3 helmet, and relevant accoutrements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/Armor/royal.rsi
+    layers:
+    - state: base
+    - state: armor
+      map: [ armor ]
+      visible: false
+    - state: lid_closed_h
+      map: [ lid ]
+  - type: GenericVisualizer
+    visuals:
+      enum.StorageVisuals.Open:
+        lid:
+          True: { state: lid_open }
+          False: { state: lid_closed_h }
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCArmorRoyalHarnessPVE
+    - id: RMCPVEArmorPadsKestrel
+    - id: RMCPVEArmorBracersKestrel
+    - id: RMCPVEArmorNeckGuardKestrel
+    - id: RMCPVEArmorGroinPlateKestrel
+    - id: RMCPVEArmorShinGuardKestrel
+    - id: RMCPVEArmorKneeGuardKestrel

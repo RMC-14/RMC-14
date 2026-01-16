@@ -92,6 +92,15 @@
   id: RMCGlass
 
 - type: Tag
+  id: RMCHelmet
+
+- type: Tag
+  id: RMCPVEArmor
+
+- type: Tag
+  id: RMCPVEArmorAccessory
+
+- type: Tag
   id: Scabbard
 
 - type: Tag
