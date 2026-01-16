@@ -1,9 +1,9 @@
 - type: job
   parent: RMCRiotControl
-  id: RMCChiefRiotControl
+  id: CMChiefRiotControl
   name: rmc-job-name-chief-riot-control
   description: rmc-job-description-riot-control
-  playTimeTracker: RMCJobChiefRiotControl
+  playTimeTracker: CMJobChiefRiotControl
   ranks:
     RMCRankSecondLT: []
   startingGear: RMCGearChiefRiotControl
@@ -37,7 +37,7 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: cmp_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCChiefRiotControl
+    settings: CMChiefRiotControl
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -48,7 +48,7 @@
     description: rmc-ghost-role-information-riot-control-description
     rules: rmc-ghost-role-information-riot-control-rules
     reregister: false
-    job: RMCChiefRiotControl
+    job: CMChiefRiotControl
     raffle:
       settings: short
     requirements:
@@ -58,5 +58,5 @@
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
-  id: RMCJobChiefRiotControl
+  id: CMJobChiefRiotControl
   isHumanoid: true

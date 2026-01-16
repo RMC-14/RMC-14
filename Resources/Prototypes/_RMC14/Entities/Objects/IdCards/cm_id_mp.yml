@@ -28,7 +28,7 @@
   name: riot control ID card
   components:
   - type: PresetIdCard
-    job: RMCRiotControl
+    job: CMRiotControl
 
 - type: entity
   parent: CMIDCardBase
@@ -36,4 +36,4 @@
   name: riot control ID card
   components:
   - type: PresetIdCard
-    job: RMCChiefRiotControl
+    job: CMChiefRiotControl

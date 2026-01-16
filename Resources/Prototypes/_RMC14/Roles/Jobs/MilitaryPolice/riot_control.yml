@@ -1,9 +1,9 @@
 - type: job
   parent: CMJobBase
-  id: RMCRiotControl
+  id: CMRiotControl
   name: rmc-job-name-riot-control
   description: rmc-job-description-riot-control
-  playTimeTracker: RMCJobRiotControl
+  playTimeTracker: CMJobRiotControl
   ranks:
     RMCRankSergeant: []
   hidden: true
@@ -76,7 +76,7 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: mp_spawn
   - type: RandomHumanoidSpawner
-    settings: RMCRiotControl
+    settings: CMRiotControl
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
@@ -87,7 +87,7 @@
     description: rmc-ghost-role-information-riot-control-description
     rules: rmc-ghost-role-information-riot-control-rules
     reregister: false
-    job: RMCRiotControl
+    job: CMRiotControl
     raffle:
       settings: short
     requirements:
@@ -97,5 +97,5 @@
   - type: GhostRoleApplySpecial
 
 - type: playTimeTracker
-  id: RMCJobRiotControl
+  id: CMJobRiotControl
   isHumanoid: true
