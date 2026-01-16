@@ -1564,6 +1564,12 @@ ColMarTechWardenEquipment: RMCColMarTechWardenEquipment
 ColMarTechWardrobeCorp: RMCColMarTechWardrobeCorp
 GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
 JumpsuitMarine: RMCJumpsuitMarine
+MobAvaliDummy: RMCMobAvaliDummy
+MobFelinidDummy: RMCMobFelinidDummy
+MobFeroxiDummy: RMCMobFeroxiDummy
+MobRodentiaDummy: RMCMobRodentiaDummy
+MobSkrellDummy: RMCMobSkrellDummy
+MobVulpkaninDummy: RMCMobVulpkaninDummy
 RCMBulletPistol9mmSquashHead: RMCBulletPistol9mmSquashHead
 WeaponRifleAR10: RMCWeaponRifleAR10
 WeaponRifleL83A2: RMCWeaponRifleL83A2

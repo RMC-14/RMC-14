@@ -8,7 +8,7 @@
   sprites: MobSkrellSprites
   defaultSkinTone: "#8cd7a3"
   markingLimits: MobSkrellMarkingLimits
-  dollPrototype: MobSkrellDummy
+  dollPrototype: RMCMobSkrellDummy
   skinColoration: Hues
   maleFirstNames: RMCNamesSkrellFirst
   femaleFirstNames: RMCNamesSkrellFirst
