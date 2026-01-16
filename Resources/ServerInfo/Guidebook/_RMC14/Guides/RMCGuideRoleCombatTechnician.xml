@@ -60,7 +60,7 @@
   Once a Barricade is built, it isn’t finished until you lace it with barbed wire, which you can craft for 1 metal per barricade. A Barbed barricade will harm anything that strikes it, as well as completely prevent anything from vaulting over it. [bold]Every Barricade should have some barbed wire[/bold].
 
   <Box>
-    <GuideEntityEmbed Entity="BarbedWire1"/>
+    <GuideEntityEmbed Entity="RMCBarbedWire1"/>
   </Box>
 
   Non-foldable Barricades have three upgrades which require 2 metal:

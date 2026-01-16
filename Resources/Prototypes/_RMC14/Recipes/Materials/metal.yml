@@ -7,7 +7,7 @@
 - type: rmcConstruction
   id: RMCBarbedWireBuild
   name: barbed wire
-  prototype: BarbedWire1
+  prototype: RMCBarbedWire1
   doAfterTime: 1
   doAfterTimeMin: 1
   skill: RMCSkillConstruction

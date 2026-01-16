@@ -1482,6 +1482,10 @@ ArmorHelmetRiotOld: RMCArmorHelmetRiotOld
 ArmorHelmetSPP: RMCArmorHelmetSPP
 ArmorHelmetSPPEngineer: RMCArmorHelmetSPPEngineer
 ArmorHelmetSPPHeavy: RMCArmorHelmetSPPHeavy
+BarbedWire1: RMCBarbedWire1
+BarbedWire10: RMCBarbedWire10
+BarbedWire15: RMCBarbedWire15
+BarbedWireBase: RMCBarbedWire1
 Bullet10x20mm: RMCBullet10x20mm
 Bullet10x20mmAP: RMCBullet10x20mmAP
 Bullet10x20mmRubber: RMCBullet10x20mmRubber
