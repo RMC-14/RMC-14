@@ -198,9 +198,6 @@
 - type: Tag
   id: RMCSquadPMC
 
-- type: Tag
-  id: RMCSquadPMC
-
 - type: entity
   parent: SquadBase
   id: SquadFreelancer
