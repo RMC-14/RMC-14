@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: Admin only command "rmcrecalcualtepower" for fixing the power system.
-    type: Add
-  id: 2294
-  time: '2025-09-04T09:27:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7513
 - author: blueDev2
   changes:
   - message: Hive clusters turn into only 1 pylon on weeding of the comms tower
@@ -4727,5 +4720,12 @@
   id: 2796
   time: '2026-01-16T01:04:00.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8972
+- author: noctyrnal
+  changes:
+  - message: Added more turrets to both of Trijent's LZs
+    type: Add
+  id: 2797
+  time: '2026-01-16T01:12:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8778
 Name: RMC14
 Order: -1
