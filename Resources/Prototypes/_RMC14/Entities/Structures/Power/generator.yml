@@ -107,8 +107,8 @@
     - type: TacticalMapTracked
     - type: TacticalMapIcon
       icon:
-      sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: generator
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
 
 - type: entity
   parent: BaseItem
