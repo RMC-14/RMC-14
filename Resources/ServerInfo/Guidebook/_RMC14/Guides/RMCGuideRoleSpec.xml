@@ -42,6 +42,6 @@
 
   - [bold][textlink="Scout Specialist" link="RMCGuideRoleScoutSpec"][/textlink][/bold] - "Silent Hunter & Intel"
   - Armed with the hard-hitting M4SPR custom battle rifle and an M68 Thermal Cloak, the Scout excels in reconnaissance, target designation with their Scout Designator, and surgical engagements.
-  <Box> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom" Context=""/> <GuideEntityEmbed Entity="RMCBackpackScout" Context=""/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout" Context=""/> </Box>
+  <Box> <GuideEntityEmbed Entity="RMCWeaponRifleM4SPRCustom" Context=""/> <GuideEntityEmbed Entity="RMCBackpackScout" Context=""/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout" Context=""/> </Box>
 
 </Document>

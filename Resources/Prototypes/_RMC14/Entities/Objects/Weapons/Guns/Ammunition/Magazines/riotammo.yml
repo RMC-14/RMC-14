@@ -63,11 +63,11 @@
     - Cartridge
     - RMCCartridgeRifle10x24mmRubber
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mmRubber
+    proto: RMCBulletRifle10x24mmRubber
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifle10x24mmRubber
+  id: RMCBulletRifle10x24mmRubber
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -120,11 +120,11 @@
     - Cartridge
     - RMCCartridge10x20mmRubber
   - type: CartridgeAmmo
-    proto: Bullet10x20mmRubber
+    proto: RMCBullet10x20mmRubber
 
 - type: entity
   parent: RMCBaseBullet
-  id: Bullet10x20mmRubber
+  id: RMCBullet10x20mmRubber
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

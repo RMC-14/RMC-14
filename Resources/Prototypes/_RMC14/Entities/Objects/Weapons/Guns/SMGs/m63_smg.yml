@@ -311,7 +311,7 @@
     - Cartridge
     - CMCartridge10x20mm
   - type: CartridgeAmmo
-    proto: Bullet10x20mm
+    proto: RMCBullet10x20mm
 
 - type: entity
   parent: CMCartridge10x20mm
@@ -323,7 +323,7 @@
     - Cartridge
     - CMCartridge10x20mmAP
   - type: CartridgeAmmo
-    proto: Bullet10x20mmAP
+    proto: RMCBullet10x20mmAP
 
 - type: entity
   parent: CMCartridge10x20mm
@@ -363,7 +363,7 @@
 
 - type: entity
   parent: RMCBaseBullet
-  id: Bullet10x20mm
+  id: RMCBullet10x20mm
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -386,8 +386,8 @@
       falloff: 10
 
 - type: entity
-  parent: Bullet10x20mm
-  id: Bullet10x20mmAP
+  parent: RMCBullet10x20mm
+  id: RMCBullet10x20mmAP
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -398,7 +398,7 @@
     amount: 30
 
 - type: entity
-  parent: Bullet10x20mm
+  parent: RMCBullet10x20mm
   id: RMCBullet10x20mmHEAP
   categories: [ HideSpawnMenu ]
   components:
@@ -410,7 +410,7 @@
     amount: 30
 
 - type: entity
-  parent: Bullet10x20mm
+  parent: RMCBullet10x20mm
   id: RMCBullet10x20mmWP
   categories: [ HideSpawnMenu ]
   components:
@@ -426,7 +426,7 @@
     lifetime: 0.2
 
 - type: entity
-  parent: Bullet10x20mm
+  parent: RMCBullet10x20mm
   id: RMCBullet10x20mmIncendiary
   categories: [ HideSpawnMenu ]
   components:

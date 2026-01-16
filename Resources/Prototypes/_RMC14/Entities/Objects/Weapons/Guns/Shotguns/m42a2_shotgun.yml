@@ -1,7 +1,7 @@
 - type: entity
   parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
   name: M42A2 pump shotgun
-  id: WeaponShotgunM42A2
+  id: RMCWeaponShotgunM42A2
   description: An AEGIS modern take on an all-time classic, combining close range firepower with long-term reliability. Requires a pump.
   components:
   - type: Sprite
@@ -85,7 +85,7 @@
     - RMCWeaponShotgun
 
 - type: entity
-  parent: WeaponShotgunM42A2
+  parent: RMCWeaponShotgunM42A2
   id: RMCWeaponShotgunM42A2Filled
   suffix: Filled
   components:

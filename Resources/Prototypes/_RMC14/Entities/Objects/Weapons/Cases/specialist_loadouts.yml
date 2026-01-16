@@ -157,7 +157,7 @@
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
-    - id: WeaponRifleM4SPRCustom
+    - id: RMCWeaponRifleM4SPRCustom
     - id: RMCThermalTarpFolded
     - id: RMCExplosivePlastic
       amount: 2
