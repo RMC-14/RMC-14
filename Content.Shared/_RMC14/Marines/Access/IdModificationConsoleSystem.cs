@@ -97,7 +97,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             !TryComp(uid, out IdCardComponent? idCard) || !TryComp(uid, out AccessComponent? access))
             return;
 
-        _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+        _iff.SetIdFaction((uid.Value, iff), "RMCFactionSurvivor");
         ent.Comp.HasIFF = false;
 
         foreach (var accessToRemove in ent.Comp.AccessList)
@@ -156,7 +156,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
             if (iff.Factions.Count == 0)
             {
-                _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+                _iff.SetIdFaction((uid.Value, iff), "RMCFactionSurvivor");
             }
             else if (removed)
                 Dirty(uid.Value, iff);

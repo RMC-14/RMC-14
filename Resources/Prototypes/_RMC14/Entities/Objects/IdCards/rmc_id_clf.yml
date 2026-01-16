@@ -5,7 +5,7 @@
   components:
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFSoldier

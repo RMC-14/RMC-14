@@ -90,7 +90,7 @@
     - UNMC
   - type: UserIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: XenoCrusherChargable
     setDamage:
       types:
@@ -184,7 +184,7 @@
     - WeYa
   - type: UserIFF
     factions:
-    - FactionWeYa
+    - RMCFactionWeYa
   - type: Tag
     tags:
     - RMCSentryWeYa
@@ -505,7 +505,7 @@
     - UNMC
   - type: UserIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: Sentry
     homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
@@ -592,4 +592,4 @@
     - CLF
   - type: UserIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor

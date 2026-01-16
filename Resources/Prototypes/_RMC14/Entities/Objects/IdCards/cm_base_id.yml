@@ -24,7 +24,7 @@
     canMicrowave: false
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: TakeableTags
   - type: Appearance
   - type: Foldable
@@ -176,7 +176,7 @@
     - DoorBumpOpener
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: Corrodible
     isCorrodible: false
 
@@ -226,7 +226,7 @@
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
 
 - type: entity
-  id: FactionMarine
+  id: RMCFactionMarine
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -250,7 +250,7 @@
     - WEYA
 
 - type: entity
-  id: FactionSurvivor
+  id: RMCFactionSurvivor
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -259,7 +259,7 @@
     - Colony
 
 - type: entity
-  id: FactionTSE
+  id: RMCFactionTSE
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction

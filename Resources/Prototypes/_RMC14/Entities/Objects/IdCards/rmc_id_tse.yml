@@ -13,7 +13,7 @@
     sprite: _RMC14/Objects/CMIDs/tsepa_silver.rsi
   - type: ItemIFF
     factions:
-    - FactionTSE
+    - RMCFactionTSE
 - type: entity
   parent: CMIDCardBase
   id: RMCIDCardTSEPASilverGold
@@ -29,7 +29,7 @@
     sprite: _RMC14/Objects/CMIDs/tsepa_silver_gold.rsi
   - type: ItemIFF
     factions:
-    - FactionTSE
+    - RMCFactionTSE
 - type: entity
   parent: CMIDCardBase
   id: RMCIDCardTSEPAGold
@@ -45,4 +45,4 @@
     sprite: _RMC14/Objects/CMIDs/tsepa_gold.rsi
   - type: ItemIFF
     factions:
-    - FactionTSE
+    - RMCFactionTSE
