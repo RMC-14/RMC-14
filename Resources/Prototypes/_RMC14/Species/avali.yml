@@ -7,7 +7,7 @@
   prototype: CMMobAvali
   sprites: MobAvaliSprites
   markingLimits: MobAvaliMarkingLimits
-  dollPrototype: MobAvaliDummy
+  dollPrototype: RMCMobAvaliDummy
   skinColoration: Hues
   maleFirstNames: RMCNamesAvaliFirst
   femaleFirstNames: RMCNamesAvaliFirst

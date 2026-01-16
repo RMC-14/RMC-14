@@ -1579,6 +1579,12 @@ BarbedWireBase: RMCBarbedWireBase
 BarbedWire10: RMCBarbedWire10
 BarbedWire15: RMCBarbedWire15
 BarbedWire1: RMCBarbedWire1
+MobAvaliDummy: RMCMobAvaliDummy
+MobFelinidDummy: RMCMobFelinidDummy
+MobFeroxiDummy: RMCMobFeroxiDummy
+MobRodentiaDummy: RMCMobRodentiaDummy
+MobSkrellDummy: RMCMobSkrellDummy
+MobVulpkaninDummy: RMCMobVulpkaninDummy
 # 2026-01-17
 DoorXenoResin: RMCDoorXenoResin
 WallXenoResin: RMCWallXenoResin
