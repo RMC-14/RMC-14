@@ -46,6 +46,7 @@
         whitelist:
           tags:
           - RMCMagazinePistolL14
+          - RMCMagazinePistolL14AP
         startingItem: RMCMagazinePistolL14
   - type: AttachableHolder
     slots:
@@ -109,7 +110,6 @@
   - type: Tag
     tags:
     - CMMagazinePistol
-    - RMCMagazinePistolL14
     - RMCMagazinePistolL14AP
   - type: BallisticAmmoProvider
     mayTransfer: True

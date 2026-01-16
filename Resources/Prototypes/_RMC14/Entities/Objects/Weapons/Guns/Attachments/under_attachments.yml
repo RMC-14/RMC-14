@@ -155,7 +155,6 @@
   - type: AttachableWeaponRangedMods
     fireModeMods:
     - extraFireModes: Burst
-    - setFireMode: Burst
     modifiers:
     - conditions:
         blacklist:
