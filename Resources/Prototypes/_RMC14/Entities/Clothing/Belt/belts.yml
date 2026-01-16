@@ -1329,6 +1329,72 @@
     - id: RMCWeaponRevolverMateba
 
 - type: entity
+  parent: CMBeltBaseStorage
+  id: RMCWebleyBelt
+  name: L16 pattern Webley revolver holster
+  suffix: PVE
+  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: mkx
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCWeaponRevolverWebley
+  - type: FixedItemSizeStorage
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+  - type: Tag
+    tags:
+    - RMCWebleyBelt
+
+- type: Tag
+  id: RMCWebleyBelt
+
+- type: entity
+  parent: RMCWebleyBelt
+  id: RMCWebleyBeltFilled
+  suffix: PVE, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 3
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+    - id: RMCWeaponRevolverWebley
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCMK80BeltFilled
   suffix: Filled
