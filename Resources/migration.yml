@@ -446,7 +446,7 @@ CMMagazinePistolVP78: CMMagazinePistolMK80
 #CMMagazineRifleM4RAAP: CMMagazineRifleM4DMRAP
 #CMMagazineRifleM4RAExt: CMMagazineRifleM4DMRExt
 #WeaponRifleM4RA: WeaponRifleM4DMR
-WeaponShotgunM37A2: WeaponShotgunM42A2
+WeaponShotgunM37A2: RMCWeaponShotgunM42A2
 CMCrateBoxMagazineSMGM39: RMCCrateBoxMagazineSMGM63
 CMCrateBoxMagazineSMGM39AP: RMCCrateBoxMagazineSMGM63AP
 CMCrateBoxMagazineSMGM39Ext: RMCCrateBoxMagazineSMGM63Ext
@@ -523,7 +523,7 @@ BookChefGaming: BookHowToCookForFortySpaceman
 IntercomAssesmbly: IntercomAssembly
 
 # 2024-07-1
-CMDispenserChem : RMCChemDispenserGround
+CMDispenserChem: RMCChemDispenserGround
 
 # 2024-07-7
 SignScience1: SignScience
@@ -1023,7 +1023,7 @@ MagazineBoxCaselessRifleBig: null
 MagazinePistolHighCapacityRubber: null
 
 # 2024-10-28
-ColMarTechExecutiveOfficerEquipment: ColMarTechSeniorOfficerEquipment
+ColMarTechExecutiveOfficerEquipment: RMCColMarTechSeniorOfficerEquipment
 
 # 2024-11-2
 ToolboxArtistic: RMCToolboxMechanicalGreen
@@ -1037,7 +1037,6 @@ CheapLighter: RMCLighter
 
 # 2024-11-28
 ClosetLegal: RMCClosetBlue
-
 
 # 2024-12-14
 #WeaponRifleM54C: WeaponRifleM54CCamo
@@ -1064,12 +1063,12 @@ WaterTankFull: RMCTankReagentWater
 #WeaponRifleM54CE2Camo: WeaponRifleM54CE2
 WeaponRifleM4SPRCamo: WeaponRifleM4SPR
 WeaponSMGM63Camo: WeaponSMGM63
-WeaponShotgunM42A2Camo: WeaponShotgunM42A2
+WeaponShotgunM42A2Camo: RMCWeaponShotgunM42A2
 WeaponM96SSniperRifleCamo: CMM96SSniperRifle
 WeaponLauncherM83Camo: WeaponLauncherM83
 RMCBinocularsCamo: RMCBinoculars
 RMCMortarKitCamo: RMCMortarKit
-ArmorHelmetM10Camo: ArmorHelmetM10
+ArmorHelmetM10Camo: RMCArmorHelmetM10
 
 # 2024-12-29
 CMWeaponPistolMK80: RMCMK80
@@ -1096,7 +1095,7 @@ RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
 RMCCrateM54C: RMCCrateM54CMK1
 
 # 2025-02-10
-BulletRifle5.56x45mm: BulletRifle556x45mm
+BulletRifle5.56x45mm: RMCBulletRifle556x45mm
 CMBulletPistol.22mm: CMBulletPistol22mm
 CMCartridgePistol.22mm: CMCartridgePistol22mm
 
@@ -1433,7 +1432,7 @@ SignSmoking: CMPosterNoSmoking2
 CMLightReplacerEmpty: RMCLightReplacerEmpty
 CMLightReplacer: RMCLightReplacer
 CMLightFixture: RMCLightFixture
-CMLightFixtureSmall:  RMCLightFixtureSmall
+CMLightFixtureSmall: RMCLightFixtureSmall
 CMLightFixtureAlwaysPowered: RMCLightFixtureAlwaysPowered
 CMLightFixtureSmallAlwaysPowered: RMCLightFixtureSmallAlwaysPowered
 CMLightFixtureSmallOffset: RMCLightFixtureSmallOffset
