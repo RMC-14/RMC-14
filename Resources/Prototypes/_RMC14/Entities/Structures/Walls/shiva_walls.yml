@@ -1,7 +1,7 @@
 ﻿
 - type: entity
   parent: CMBaseWallInvincible
-  id: RCMWallShivaIce
+  id: RMCWallShivaIce
   name: black ice slabs
   description: Slabs on slabs of dirty black ice crusted over ancient rock formations. The permafrost fluctuates between 20in and 12in during the summer months.
   components:
@@ -22,7 +22,7 @@
 
 - type: entity
   parent: CMBaseWallInvincible
-  id: RCMWallShivaInvincibleFab
+  id: RMCWallShivaInvincibleFab
   name: reinforced prefabricated structure wall
   description: It cannot be destroyed by any means you have available. Perhaps praying to the gods may help.
   suffix: Hull
@@ -44,7 +44,7 @@
 
 - type: entity
   parent: CMWallMetal
-  id: RCMWallShivaFab
+  id: RMCWallShivaFab
   name: prefabricated structure wall
   description: This structure is made of metal support rods and robust poly-kevlon plastics. A derivative of the stuff used in UN ballistics vests, UNMC and SPP uniforms. These walls are pulled taut and have been reinforced into a more permanent structure.
   components:
@@ -63,7 +63,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFab
+  id: RMCWallShivaReinforcedFab
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
@@ -82,7 +82,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFabOrange
+  id: RMCWallShivaReinforcedFabOrange
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
@@ -101,7 +101,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFabBlue
+  id: RMCWallShivaReinforcedFabBlue
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
@@ -120,7 +120,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFabPink
+  id: RMCWallShivaReinforcedFabPink
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
@@ -139,7 +139,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFabWhite
+  id: RMCWallShivaReinforcedFabWhite
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:
@@ -158,7 +158,7 @@
 
 - type: entity
   parent: RMCBaseWallReinforced
-  id: RCMWallShivaReinforcedFabRed
+  id: RMCWallShivaReinforcedFabRed
   name: reinforced prefabricated structure wall
   description: This structure is made of metal support rods. The poly-kevlon has been replaced with sheet metal, reinforcing it.
   components:

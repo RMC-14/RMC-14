@@ -1585,6 +1585,17 @@ MobFeroxiDummy: RMCMobFeroxiDummy
 MobRodentiaDummy: RMCMobRodentiaDummy
 MobSkrellDummy: RMCMobSkrellDummy
 MobVulpkaninDummy: RMCMobVulpkaninDummy
+Bedroll: RMCBedroll
+BedrollFolded: RMCBedrollFolded
+RCMWallShivaIce: RMCWallShivaIce
+RCMWallShivaInvincibleFab: RMCWallShivaInvincibleFab
+RCMWallShivaFab: RMCWallShivaFab
+RCMWallShivaReinforcedFab: RMCWallShivaReinforcedFab
+RCMWallShivaReinforcedFabOrange: RMCWallShivaReinforcedFabOrange
+RCMWallShivaReinforcedFabBlue: RMCWallShivaReinforcedFabBlue
+RCMWallShivaReinforcedFabPink: RMCWallShivaReinforcedFabPink
+RCMWallShivaReinforcedFabWhite: RMCWallShivaReinforcedFabWhite
+RCMWallShivaReinforcedFabRed: RMCWallShivaReinforcedFabRed
 # 2026-01-17
 DoorXenoResin: RMCDoorXenoResin
 WallXenoResin: RMCWallXenoResin
