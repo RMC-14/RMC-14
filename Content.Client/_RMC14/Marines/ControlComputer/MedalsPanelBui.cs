@@ -219,145 +219,152 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         foreach (var group in state.RecommendationGroups)
         {
-            // Create panel container for each marine group
-            var groupPanel = new PanelContainer
+            var groupPanel = CreateRecommendationGroup(group);
+            if (groupPanel != null)
             {
-                HorizontalExpand = true
-            };
-
-            var panelStyle = new StyleBoxFlat
-            {
-                BorderColor = new Color(58, 58, 58), // #3A3A3A
-                BorderThickness = new Robust.Shared.Maths.Thickness(1),
-                BackgroundColor = new Color(31, 31, 31) // #1F1F1F
-            };
-            groupPanel.PanelOverride = panelStyle;
-
-            var groupContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                Margin = new Robust.Shared.Maths.Thickness(8),
-                HorizontalExpand = true
-            };
-
-            // Header: Rank, Squad (if exists), Job, Name - get from first recommendation
-            var firstRec = group.Recommendations.FirstOrDefault();
-            if (firstRec == null)
-                continue;
-
-            var squadPart = string.IsNullOrEmpty(firstRec.RecommendedSquad) ? null : $"({firstRec.RecommendedSquad})";
-            var headerText = string.Join(" ", firstRec.RecommendedRank, squadPart, firstRec.RecommendedJob, firstRec.RecommendedName);
-            var headerLabel = new RichTextLabel
-            {
-                HorizontalExpand = true
-            };
-            headerLabel.SetMessage(FormattedMessage.FromMarkupOrThrow($"[bold]{headerText}[/bold]"));
-            groupContainer.AddChild(headerLabel);
-
-            // Add blue separator after header
-            var separator = new BlueHorizontalSeparator();
-            groupContainer.AddChild(separator);
-
-            // Recommendations
-            var recommendationsContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
-                Margin = new Robust.Shared.Maths.Thickness(4, 0),
-                SeparationOverride = 12,
-                HorizontalExpand = true
-            };
-
-            // Store references to hidden recommendation containers (3+)
-            var hiddenRecommendationContainers = new List<BoxContainer>();
-
-            // Add all recommendations
-            for (int i = 0; i < group.Recommendations.Count; i++)
-            {
-                var recommendation = group.Recommendations[i];
-                var recContainer = CreateRecommendationContainer(recommendation);
-
-                // Hide 3rd and later recommendations by default
-                if (i >= 2)
-                {
-                    recContainer.Visible = false;
-                    hiddenRecommendationContainers.Add(recContainer);
-                }
-
-                recommendationsContainer.AddChild(recContainer);
+                _window.RecommendationsList.AddChild(groupPanel);
+                _recommendationGroups[group.LastPlayerId] = groupPanel;
             }
-
-            groupContainer.AddChild(recommendationsContainer);
-
-            // Add expand/collapse button separately below recommendations if there are hidden ones
-            if (hiddenRecommendationContainers.Count > 0)
-            {
-                var isExpanded = false;
-                var expandButton = new Button
-                {
-                    Text = "",
-                    HorizontalExpand = true,
-                    Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
-                };
-                expandButton.AddStyleClass("OpenBoth");
-
-                // Use RichTextLabel for bold text, matching the style of GrantNewMedalButton
-                var arrowLabel = new RichTextLabel
-                {
-                    HorizontalAlignment = Control.HAlignment.Center,
-                    VerticalAlignment = Control.VAlignment.Center,
-                    HorizontalExpand = true
-                };
-                arrowLabel.SetMessage(FormattedMessage.FromMarkupOrThrow("[bold]v[/bold]"));
-                expandButton.AddChild(arrowLabel);
-
-                // Handle expand/collapse toggle
-                expandButton.OnPressed += _ =>
-                {
-                    isExpanded = !isExpanded;
-                    foreach (var container in hiddenRecommendationContainers)
-                    {
-                        container.Visible = isExpanded;
-                    }
-                    arrowLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(isExpanded ? "[bold]^[/bold]" : "[bold]v[/bold]"));
-                };
-
-                groupContainer.AddChild(expandButton);
-            }
-
-            // Approve and Reject buttons - right bottom corner
-            var buttonsContainer = new BoxContainer
-            {
-                Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                HorizontalAlignment = Control.HAlignment.Right,
-                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0),
-                SeparationOverride = 8
-            };
-
-            var approveButton = new Button
-            {
-                Text = Loc.GetString("rmc-medal-panel-approve-recommendation")
-            };
-            approveButton.AddStyleClass("OpenBoth");
-            approveButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
-            approveButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerApproveRecommendationMsg { LastPlayerId = group.LastPlayerId });
-            buttonsContainer.AddChild(approveButton);
-
-            var rejectButton = new Button
-            {
-                Text = Loc.GetString("rmc-medal-panel-reject-recommendation")
-            };
-            rejectButton.AddStyleClass("OpenBoth");
-            rejectButton.AddStyleClass(StyleNano.StyleClassButtonColorRed);
-            rejectButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerRejectRecommendationMsg { LastPlayerId = group.LastPlayerId });
-            buttonsContainer.AddChild(rejectButton);
-            groupContainer.AddChild(buttonsContainer);
-
-            groupPanel.AddChild(groupContainer);
-            _window.RecommendationsList.AddChild(groupPanel);
-
-            // Store reference for quick removal
-            _recommendationGroups[group.LastPlayerId] = groupPanel;
         }
+    }
+
+    private PanelContainer? CreateRecommendationGroup(MarineRecommendationGroup group)
+    {
+        var groupPanel = new PanelContainer
+        {
+            HorizontalExpand = true
+        };
+
+        var panelStyle = new StyleBoxFlat
+        {
+            BorderColor = new Color(58, 58, 58), // #3A3A3A
+            BorderThickness = new Robust.Shared.Maths.Thickness(1),
+            BackgroundColor = new Color(31, 31, 31) // #1F1F1F
+        };
+        groupPanel.PanelOverride = panelStyle;
+
+        var groupContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Robust.Shared.Maths.Thickness(8),
+            HorizontalExpand = true
+        };
+
+        // Header: Rank, Squad (if exists), Job, Name - get from first recommendation
+        var firstRec = group.Recommendations.FirstOrDefault();
+        if (firstRec == null)
+            return null;
+
+        var squadPart = string.IsNullOrEmpty(firstRec.RecommendedSquad) ? null : $"({firstRec.RecommendedSquad})";
+        var headerText = string.Join(" ", firstRec.RecommendedRank, squadPart, firstRec.RecommendedJob, firstRec.RecommendedName);
+        var headerLabel = new RichTextLabel
+        {
+            HorizontalExpand = true
+        };
+        headerLabel.SetMessage(FormattedMessage.FromMarkupOrThrow($"[bold]{headerText}[/bold]"));
+        groupContainer.AddChild(headerLabel);
+
+        // Add blue separator after header
+        var separator = new BlueHorizontalSeparator();
+        groupContainer.AddChild(separator);
+
+        // Recommendations
+        var recommendationsContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Robust.Shared.Maths.Thickness(4, 0),
+            SeparationOverride = 12,
+            HorizontalExpand = true
+        };
+
+        // Store references to hidden recommendation containers (3+)
+        var hiddenRecommendationContainers = new List<BoxContainer>();
+
+        // Add all recommendations
+        for (int i = 0; i < group.Recommendations.Count; i++)
+        {
+            var recommendation = group.Recommendations[i];
+            var recContainer = CreateRecommendationContainer(recommendation);
+
+            // Hide 3rd and later recommendations by default
+            if (i >= 2)
+            {
+                recContainer.Visible = false;
+                hiddenRecommendationContainers.Add(recContainer);
+            }
+
+            recommendationsContainer.AddChild(recContainer);
+        }
+
+        groupContainer.AddChild(recommendationsContainer);
+
+        // Add expand/collapse button separately below recommendations if there are hidden ones
+        if (hiddenRecommendationContainers.Count > 0)
+        {
+            var isExpanded = false;
+            var expandButton = new Button
+            {
+                Text = "",
+                HorizontalExpand = true,
+                Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0)
+            };
+            expandButton.AddStyleClass("OpenBoth");
+
+            // Use RichTextLabel for bold text, matching the style of GrantNewMedalButton
+            var arrowLabel = new RichTextLabel
+            {
+                HorizontalAlignment = Control.HAlignment.Center,
+                VerticalAlignment = Control.VAlignment.Center,
+                HorizontalExpand = true
+            };
+            arrowLabel.SetMessage(FormattedMessage.FromMarkupOrThrow("[bold]v[/bold]"));
+            expandButton.AddChild(arrowLabel);
+
+            // Handle expand/collapse toggle
+            expandButton.OnPressed += _ =>
+            {
+                isExpanded = !isExpanded;
+                foreach (var container in hiddenRecommendationContainers)
+                {
+                    container.Visible = isExpanded;
+                }
+                arrowLabel.SetMessage(FormattedMessage.FromMarkupOrThrow(isExpanded ? "[bold]^[/bold]" : "[bold]v[/bold]"));
+            };
+
+            groupContainer.AddChild(expandButton);
+        }
+
+        // Approve and Reject buttons - right bottom corner
+        var buttonsContainer = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Horizontal,
+            HorizontalAlignment = Control.HAlignment.Right,
+            Margin = new Robust.Shared.Maths.Thickness(0, 8, 0, 0),
+            SeparationOverride = 8
+        };
+
+        var approveButton = new Button
+        {
+            Text = Loc.GetString("rmc-medal-panel-approve-recommendation")
+        };
+        approveButton.AddStyleClass("OpenBoth");
+        approveButton.AddStyleClass(StyleNano.StyleClassButtonColorGreen);
+        approveButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerApproveRecommendationMsg { LastPlayerId = group.LastPlayerId });
+        buttonsContainer.AddChild(approveButton);
+
+        var rejectButton = new Button
+        {
+            Text = Loc.GetString("rmc-medal-panel-reject-recommendation")
+        };
+        rejectButton.AddStyleClass("OpenBoth");
+        rejectButton.AddStyleClass(StyleNano.StyleClassButtonColorRed);
+        rejectButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerRejectRecommendationMsg { LastPlayerId = group.LastPlayerId });
+        buttonsContainer.AddChild(rejectButton);
+        groupContainer.AddChild(buttonsContainer);
+
+        groupPanel.AddChild(groupContainer);
+
+        return groupPanel;
     }
 
     private void RemoveRecommendationGroup(string lastPlayerId)
