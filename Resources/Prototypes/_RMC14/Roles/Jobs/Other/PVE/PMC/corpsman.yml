@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCCorpsmanPVE
   name: rmc-job-name-pmc-medic
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-medic
   playTimeTracker: CMJobPMCCorpsmanPVE
   requirements:
   - !type:TotalJobsTimeRequirement
@@ -16,6 +16,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  - HospitalCorpsman
   spawnMenuRoleName: WEYA PMC Medic (PVE)
   special:
   - !type:AddComponentSpecial
@@ -44,6 +45,10 @@
         Chemicals: 120
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

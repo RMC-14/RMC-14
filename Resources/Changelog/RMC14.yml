@@ -1,58 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 5 new WeYa Orrery magazine issues
-    type: Add
-  - message: Gave WEYA Sequoia beer an Icon.
-    type: Add
-  - message: Changed the descriptions of a few magazines to make them lore-accurate
-      and avoid any issues.
-    type: Tweak
-  id: 2293
-  time: '2025-09-04T09:09:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7738
-- author: Ian321
-  changes:
-  - message: Admin only command "rmcrecalcualtepower" for fixing the power system.
-    type: Add
-  id: 2294
-  time: '2025-09-04T09:27:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7513
-- author: blueDev2
-  changes:
-  - message: Hive clusters turn into only 1 pylon on weeding of the comms tower
-    type: Fix
-  id: 2295
-  time: '2025-09-05T09:11:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7794
-- author: Aurallianz
-  changes:
-  - message: Added ID Console
-    type: Add
-  id: 2296
-  time: '2025-09-05T09:27:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7752
-- author: AutoOtter
-  changes:
-  - message: Crosshairs will now change when using the underbarrel flamer, shotgun,
-      and grenade launcher(z).
-    type: Tweak
-  id: 2297
-  time: '2025-09-05T09:37:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7780
-- author: to4no_fix
-  changes:
-  - message: Added a new feature to color the speaker's name in the color of the squad
-      the speaker belongs to! The feature setting is in the settings in the "Accessibility"
-      section. The feature helps to feel more part of the squad and keep the squad
-      together.
-    type: Add
-  - message: Fixed a bug with the lack of support for multi-colored names of xenonids,
-      now the names of xenonids can have different colors.
-    type: Fix
-  id: 2298
-  time: '2025-09-05T09:41:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6201
 - author: noctyrnal
   changes:
   - message: The M54C magazines have received minor visual tweaks.
@@ -4729,5 +4675,68 @@
   id: 2795
   time: '2026-01-15T09:13:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8174
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the MRE being given to marines being the WeYa one instead of the
+      UNMC one
+    type: Fix
+  - message: Added the bulletproof vest to the liaison's vest
+    type: Add
+  id: 2796
+  time: '2026-01-16T01:04:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8972
+- author: noctyrnal
+  changes:
+  - message: Added more turrets to both of Trijent's LZs
+    type: Add
+  id: 2797
+  time: '2026-01-16T01:12:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8778
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The WeYa PMC corpse now has a 50% chance to spawn with a bulletproof
+      PMC vest or light PMC vest.
+    type: Tweak
+  - message: Fixed the lower-capacity light combat pack having 5 slots instead of
+      15 storage slots.
+    type: Fix
+  id: 2798
+  time: '2026-01-16T01:19:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8969
+- author: monomethylhydrazine
+  changes:
+  - message: Added prepared meals, a survival ration bar, and a food vendor for the
+      SPP.
+    type: Add
+  id: 2799
+  time: '2026-01-16T01:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8873
+- author: monomethylhydrazine
+  changes:
+  - message: Replaced placeholder PVE role descriptions with proper ones.
+    type: Tweak
+  - message: Fixed PVE PMC vendors having some marine gear instead of PMC equivalents.
+    type: Fix
+  - message: Fixed PVE PMC medics not having corpsman vendor access.
+    type: Fix
+  - message: Fixed PVE PMC and SPP roles needing manual squad assignment. They now
+      spawn in their respective squads.
+    type: Fix
+  - message: Added surgery 2 skill to both SPP and PMC overwatches, to allow them
+      to conduct larva surgery.
+    type: Add
+  id: 2800
+  time: '2026-01-16T01:23:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8525
+- author: SharkSnake98
+  changes:
+  - message: Added the TSE Airbase Nightmare Insert
+    type: Add
+  - message: Changed the paper cups in the RMC water cooler to use specific RMC paper
+      cups instead of upstream
+    type: Tweak
+  id: 2801
+  time: '2026-01-16T01:31:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8914
 Name: RMC14
 Order: -1

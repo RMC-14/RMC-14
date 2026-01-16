@@ -116,9 +116,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorVest #should be bulletproof vest from CM13.
+    - id: RMCArmorBulletproof
     - id: RMCSynthResetKeySMART
-      # ToDo: RMC14 2 WeYa ration packs
+    - id: RMCMREWeYa
+    - id: RMCMREWeYa
       # ToDo: RMC14 Platinum Coin
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
@@ -129,7 +130,7 @@
 
 - type: entity
   parent: CMLockerBase
-  id: CMLockerFieldDoctor
+  id: RMCLockerFieldDoctor
   suffix: Filled, Field Doctor
   components:
   - type: StorageFill
