@@ -1507,7 +1507,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: GoldHandcannonBeltFilled
+  id: RMCGoldHandcannonBeltFilled
   suffix: Filled, Gold Handcannon
   components:
   - type: StorageFill

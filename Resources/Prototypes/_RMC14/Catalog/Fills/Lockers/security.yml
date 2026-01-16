@@ -25,7 +25,7 @@
         amount: 1
       - id: CMArmorRiot
         amount: 3
-      - id: ArmorHelmetRiot
+      - id: RMCArmorHelmetRiot
         amount: 3
       - id: RMCWeaponShotgunM890Riot
         amount: 3

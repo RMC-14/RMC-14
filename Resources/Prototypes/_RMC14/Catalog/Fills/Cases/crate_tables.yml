@@ -5,7 +5,7 @@
     - !type:AllSelector # PMC
       children:
       - id: RMCJumpsuitVeteranPMCNoWebbing
-      - id: ArmorHelmetPMC
+      - id: RMCArmorHelmetPMC
       - id: CMArmorM4PMCLight
       - id: RMCHandsVeteran
       - id: RMCMaskCoifPMC
@@ -23,7 +23,7 @@
       - id: RMCSatchelLightpack5Slot
     - !type:AllSelector # SPP
       children:
-      - id: ArmorHelmetSPP
+      - id: RMCArmorHelmetSPP
       - id: CMJumpsuitSPP
       - id: RMCArmorSPPRifleman
       - id: RMCCombatUtilityKnifeB

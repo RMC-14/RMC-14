@@ -1,7 +1,7 @@
 # PMC headgear
 - type: entity
-  parent: ArmorHelmetM10
-  id: ArmorHelmetPMC
+  parent: RMCArmorHelmetM10
+  id: RMCArmorHelmetPMC
   name: PMC tactical cap
   description: A protective cap made from flexible kevlar. Standard issue for most security forms in the place of a helmet.
   components:
@@ -18,7 +18,7 @@
     # armor_internaldamage = 10
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCArmorHelmetPMC
   id: RMCArmorHelmetPMCBlack
   name: PMC black tactical cap
   components:
@@ -28,7 +28,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/black_cap.rsi
 
 - type: entity
-  parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
+  parent: [RMCArmorHelmetPMC, RMCMarineHelmetWithLightBase]
   id: RMCArmorHelmetPMCTactical
   name: tactical helmet
   description: A contender for service with the Royal Crown Marines, it is presently, exclusively, field tested by Weston-Yamada mercenaries. Features a ballistic mask and integrated display connected to the visor.
@@ -61,8 +61,8 @@
     color: "#73e6f5"
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCOfficer
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCOfficer
   name: PMC beret
   description: The pinnacle of fashion for any aspiring mercenary leader. Designed to protect the head from light impacts.
   components:
@@ -72,8 +72,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCFieldOfficer
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCFieldOfficer
   name: PMC field officer beret
   description: The pinnacle of fashion for any aspiring mercenary leader. Designed to protect the head from light impacts.
   components:
@@ -88,9 +88,9 @@
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
-  id: ArmorHelmetPMCGunner
+  id: RMCArmorHelmetPMCGunner
   name: PMC specialist operator helmet
-  description: A modification of the standard PMC tactical helmet, featuring a frontal shield to protect the user's from shrapnel and small arms fire while operating heavy weaponry.
+  description: A modification of the standard PMC tactical helmet, featuring a frontal shield to protect the user from shrapnel and small arms fire while operating heavy weaponry.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/heavy.rsi
@@ -102,7 +102,7 @@
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
-  id: ArmorHelmetPMCCommando
+  id: RMCArmorHelmetPMCCommando
   name: PMC M5X helmet
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor.
   components:
@@ -127,7 +127,7 @@
     color: "#e41c1f"
 
 - type: entity
-  parent: ArmorHelmetPMCCommando
+  parent: RMCArmorHelmetPMCCommando
   id: RMCArmorHelmetPMCCommandoAlt
   suffix: Alt
   description: A fully enclosed, armored helmet made to complete the M5X exoskeleton armor. This one has had a skull scratched into the visor.
@@ -138,7 +138,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando_alt.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCArmorHelmetPMC
   id: RMCArmorHelmetPMCDark
   name: We-Ya armored cap
   components:
@@ -148,8 +148,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa_cap.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCCorporate
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCCorporate
   name: We-Ya corporate security helmet
   description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
   components:
@@ -159,8 +159,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/corporate.rsi
 
 - type: entity
-  parent: ArmorHelmetPMCCorporate
-  id: ArmorHelmetPMCCorporateLead
+  parent: RMCArmorHelmetPMCCorporate
+  id: RMCArmorHelmetPMCCorporateLead
   description: A basic skull-helm worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   components:
   - type: Sprite
@@ -169,8 +169,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/corporate_lead.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCRiot
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCRiot
   name: RC6 helmet
   description: The standard UN Riot Control 6 helmet is of odd design, lacking a face shield by default (mounting points are available). The distinct white pattern and red emblem are synonymous with oppression throughout the rim.
   components:
@@ -180,16 +180,16 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/riot.rsi
 
 - type: entity
-  parent: ArmorHelmetPMCRiot
-  id: ArmorHelmetPMCRiotShield
+  parent: RMCArmorHelmetPMCRiot
+  id: RMCArmorHelmetPMCRiotShield
   components:
   - type: StorageFill
     contents:
     - id: RMCRC6RiotShield
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCKutjevo
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCKutjevo
   name: kutjevo helmet
   description: Standard issued helmet for the workers of Kutjevo. Contains a small webbing to hold small items like pens, oil or even a photo of a loved one.
   suffix: Kutjevo
@@ -200,7 +200,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCArmorHelmetPMC
   id: RMCArmorHelmetPMCKutjevoSecurity
   name: We-Ya corporate security helmet
   description: A basic skull-helm worn by corporate security assets. This variant comes with a wider brim to protect the user from the harsh climate of the desert.
@@ -212,7 +212,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/kutjevo_security.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCArmorHelmetPMC
   id: RMCArmorHelmetPMCKutjevoMedical
   name: We-Ya corporate medic helmet
   description: A basic skull-helm worn by corporate security assets. This variant comes with a wider brim to protect the user from the harsh climate of the desert and has a medical cross across the front.
@@ -225,7 +225,7 @@
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
-  id: ArmorHelmetPMCEngineer
+  id: RMCArmorHelmetPMCEngineer
   name: pmc engineer helmet
   description: An advanced technician helmet with a black finish, including advanced welding protection and resistance to the potential industrial hazards, but has less kevlar against potential firefights.
   components:
@@ -239,7 +239,7 @@
 
 - type: entity
   parent: CMHeadCap
-  id: ArmorHelmetPMCDirector
+  id: RMCArmorHelmetPMCDirector
   name: director's hat
   description: Belongs to someone very important. Has minor protection to all damage types.
   components:
@@ -258,7 +258,7 @@
     # armor_internaldamage = 20
 
 - type: entity
-  parent: ArmorHelmetPMCDirector
+  parent: RMCArmorHelmetPMCDirector
   id: RMCHeadCapManager
   name: manager's hat
   description: Belongs to someone very important. Has minor protection to all damage types.
@@ -285,7 +285,7 @@
     camouflageVariations: { }
 
 - type: entity
-  parent: ArmorHelmetPMCCorporate
+  parent: RMCArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateHybrisa
   description: A basic skull-helm with a orange safety visor fitted. Worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
   suffix: Hybrisa
@@ -296,7 +296,7 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/hybrisa.rsi
 
 - type: entity
-  parent: ArmorHelmetPMCCorporate
+  parent: RMCArmorHelmetPMCCorporate
   id: RMCArmorHelmetPMCCorporateLeadHybrisa
   description: A basic skull-helm with a orange safety visor fitted. Worn by corporate security assets. This variant is worn by low-level guards that have too much brainmatter to fit into the old one. Or so they say.
   suffix: Hybrisa
