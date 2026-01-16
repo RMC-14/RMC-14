@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: AutoOtter
-  changes:
-  - message: Crosshairs will now change when using the underbarrel flamer, shotgun,
-      and grenade launcher(z).
-    type: Tweak
-  id: 2297
-  time: '2025-09-05T09:37:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7780
 - author: to4no_fix
   changes:
   - message: Added a new feature to color the speaker's name in the color of the squad
@@ -4732,5 +4724,22 @@
   id: 2799
   time: '2026-01-16T01:20:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8873
+- author: monomethylhydrazine
+  changes:
+  - message: Replaced placeholder PVE role descriptions with proper ones.
+    type: Tweak
+  - message: Fixed PVE PMC vendors having some marine gear instead of PMC equivalents.
+    type: Fix
+  - message: Fixed PVE PMC medics not having corpsman vendor access.
+    type: Fix
+  - message: Fixed PVE PMC and SPP roles needing manual squad assignment. They now
+      spawn in their respective squads.
+    type: Fix
+  - message: Added surgery 2 skill to both SPP and PMC overwatches, to allow them
+      to conduct larva surgery.
+    type: Add
+  id: 2800
+  time: '2026-01-16T01:23:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8525
 Name: RMC14
 Order: -1
