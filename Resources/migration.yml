@@ -1488,6 +1488,10 @@ BarbedWire15: RMCBarbedWire15
 BarbedWireBase: RMCBarbedWire1
 Bedroll: RMCBedroll
 BedrollFolded: RMCBedrollFolded
+BonsaiTree01: RMCBonsaiTree01
+BonsaiTree02: RMCBonsaiTree02
+BonsaiTree03: RMCBonsaiTree03
+BonsaiTree04: RMCBonsaiTree04
 Bullet10x20mm: RMCBullet10x20mm
 Bullet10x20mmAP: RMCBullet10x20mmAP
 Bullet10x20mmRubber: RMCBullet10x20mmRubber
@@ -1564,6 +1568,9 @@ ColMarTechSWSGear: RMCColMarTechSWSGear
 ColMarTechUtilities: RMCColMarTechUtilities
 ColMarTechWardenEquipment: RMCColMarTechWardenEquipment
 ColMarTechWardrobeCorp: RMCColMarTechWardrobeCorp
+FernyBush01: RMCFernyBush01
+FernyBush02: RMCFernyBush02
+FernyBush03: RMCFernyBush03
 GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
 JumpsuitMarine: RMCJumpsuitMarine
 MobAvaliDummy: RMCMobAvaliDummy
@@ -1583,6 +1590,9 @@ RCMWallShivaReinforcedFabOrange: RMCWallShivaReinforcedFabOrange
 RCMWallShivaReinforcedFabPink: RMCWallShivaReinforcedFabPink
 RCMWallShivaReinforcedFabRed: RMCWallShivaReinforcedFabRed
 RCMWallShivaReinforcedFabWhite: RMCWallShivaReinforcedFabWhite
+StalkyBush01: RMCStalkyBush01
+StalkyBush02: RMCStalkyBush02
+StalkyBush03: RMCStalkyBush03
 WeaponRifleAR10: RMCWeaponRifleAR10
 WeaponRifleL83A2: RMCWeaponRifleL83A2
 WeaponRifleL83A3: RMCWeaponRifleL83A3
