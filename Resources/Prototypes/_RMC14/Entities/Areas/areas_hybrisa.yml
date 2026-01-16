@@ -2654,3 +2654,80 @@
   components:
   - type: Sprite
     state: wylab
+
+# TSE Airbase
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsOutpostSouterMainHall
+  name: EIAF Outpost Souter - Main Hall
+  components:
+  - type: Sprite
+    state: security_checkpoint_central
+  - type: Area
+    minimapColor: '#2364a1'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterDorms
+  name: EIAF Outpost Souter - Dormitories
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterArmoury
+  name: EIAF Outpost Souter - Armoury
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterFlightMaints
+  name: EIAF Outpost Souter - Flight Maintenance Room
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterHangar
+  name: EIAF Outpost Souter - Hangar
+  components:
+  - type: Sprite
+    state: security_checkpoint_east
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterReception
+  name: EIAF Outpost Souter - Reception Office
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterEntrance
+  name: EIAF Outpost Souter - Entrance
+  components:
+  - type: Sprite
+    state: security_checkpoint_west
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterFlightControl
+  name: EIAF Outpost Souter - Flight Control
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterUD4UK
+  name: TSE UD4-UK
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#6C6767D8'

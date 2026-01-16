@@ -13,6 +13,25 @@
       - id: CMAnestheticTankFilled
 
 - type: entity
+  id: RMCCrateFieldDoctor
+  parent: CMCrateSecureSurgery
+  name: field doctor crate (replacement field doctor gear)
+  components:
+  - type: StorageFill
+    contents:
+      - id: RMCTentUNMCStandardMedicalFolded
+      - id: CMWebbingSurgicalGreen
+      - id: CMPortableSurgicalBedSpawnFolded
+      - id: RMCPortableDialysis
+      #- id: CMIV # TODO RMC14 Make IV fit in crate.
+      - id: RMCSprayBottleSpaceCleaner
+      - id: CMMaskGasMedical
+      - id: RMCBoxSterileMask
+      - id: RMCBoxLatexGloves
+      - id: CMWrench
+      - id: CMCrowbar
+
+- type: entity
   id: RMCCrateMedicalBodyBag
   parent: RMCCrateMedical
   name: body bag crate (x28)
