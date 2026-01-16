@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: Hive clusters turn into only 1 pylon on weeding of the comms tower
-    type: Fix
-  id: 2295
-  time: '2025-09-05T09:11:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7794
-- author: Aurallianz
-  changes:
-  - message: Added ID Console
-    type: Add
-  id: 2296
-  time: '2025-09-05T09:27:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7752
 - author: AutoOtter
   changes:
   - message: Crosshairs will now change when using the underbarrel flamer, shotgun,
@@ -4727,5 +4713,24 @@
   id: 2797
   time: '2026-01-16T01:12:54.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8778
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The WeYa PMC corpse now has a 50% chance to spawn with a bulletproof
+      PMC vest or light PMC vest.
+    type: Tweak
+  - message: Fixed the lower-capacity light combat pack having 5 slots instead of
+      15 storage slots.
+    type: Fix
+  id: 2798
+  time: '2026-01-16T01:19:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8969
+- author: monomethylhydrazine
+  changes:
+  - message: Added prepared meals, a survival ration bar, and a food vendor for the
+      SPP.
+    type: Add
+  id: 2799
+  time: '2026-01-16T01:20:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8873
 Name: RMC14
 Order: -1
