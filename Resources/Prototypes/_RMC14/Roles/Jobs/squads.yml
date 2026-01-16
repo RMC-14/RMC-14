@@ -164,6 +164,9 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: upp_sl_a
 
+- type: Tag
+  id: RMCSquadSPP
+
 - type: entity
   parent: SquadBase
   id: SquadPMC
@@ -191,6 +194,9 @@
   - type: Tag
     tags:
     - RMCSquadPMC
+
+- type: Tag
+  id: RMCSquadPMC
 
 - type: Tag
   id: RMCSquadPMC
