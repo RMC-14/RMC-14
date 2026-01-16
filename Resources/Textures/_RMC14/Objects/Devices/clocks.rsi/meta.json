@@ -43,7 +43,7 @@
     },
     {
       "name": "cat_clock_stopped"
-    },    
+    },
 	{
       "name": "digital_clock",
       "delays": [
@@ -52,6 +52,12 @@
           1
         ]
       ]
+    },
+    {
+      "name": "gold_clock"
+    },
+    {
+      "name": "wood_clock"
     }
   ]
 }
