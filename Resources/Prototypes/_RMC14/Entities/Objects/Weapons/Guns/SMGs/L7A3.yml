@@ -169,7 +169,8 @@
       falloff: 8
   - type: CMArmorPiercing
     amount: 15
-
+- type: Tag 
+  id: RMCWeaponSMGL7A3
 - type: Tag    
   id: RMCMagazineSMGL7A3SquashHead
 
