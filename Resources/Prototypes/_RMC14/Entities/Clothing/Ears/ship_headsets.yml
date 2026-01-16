@@ -298,7 +298,7 @@
   parent: CMHeadsetCMP
   id: RMCHeadsetMW
   name: marine military warden radio headset
-  description: It seems oddly similar to the CMPs'... Smells like donuts too.
+  description: It seems oddly similar to the CMP's... Smells like donuts too.
   components:
   - type: GrantSquadLeaderTracker
     defaultMode: ChiefMilitaryPolice

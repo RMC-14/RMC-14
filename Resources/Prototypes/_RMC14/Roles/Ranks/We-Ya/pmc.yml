@@ -83,6 +83,12 @@
   paygrade: PMC-TL
 
 - type: rank
+  id: RMCRankWeYaFieldOperaionsLeader
+  name: Field Operations Leader
+  prefix: FOL.
+  paygrade: PMC-FOL
+
+- type: rank
   id: RMCRankWeYaForceLeader
   name: Force Leader
   prefix: FL.

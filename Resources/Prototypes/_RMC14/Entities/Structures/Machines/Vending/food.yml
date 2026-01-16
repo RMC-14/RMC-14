@@ -63,6 +63,51 @@
     offset: 0, 0.5
 
 - type: entity
+  parent: RMCNutriCoVendor
+  id: RMCVendorNutriCoFoodSPP
+  name: food dispenser
+  suffix: SPP
+  description: A food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need.
+  components:
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Prepared Meals
+      entries:
+      - id: RMCMRESPP
+        name: SPP Combat Ration
+        amount: 15
+      - id: RMCMarinePreparedMealSPPBanush
+        amount: 15
+      - id: RMCMarinePreparedMealSPPChowMein
+        amount: 15
+      - id: RMCMarinePreparedMealSPPCuban
+        amount: 15
+      - id: RMCMarinePreparedMealSPPFrankfurter
+        amount: 15
+      - id: RMCMarinePreparedMealSPPJiaozi
+        amount: 15
+      - id: RMCMarinePreparedMealSPPLuncheon
+        amount: 15
+      - id: RMCMarinePreparedMealSPPShrimp
+        amount: 15
+      - id: RMCMarinePreparedMealSPPMeatballs
+        amount: 1 # parity amount is 0 but i think this is funnier
+      - id: RMCMarinePreparedMealSPPWursts
+        amount: 15
+      - id: RMCSurvivalRationSPP
+        name: SPP Survival Ration
+        amount: 15
+    - name: Flasks
+      entries:
+      - id: RMCDrinkWaterSPP
+        name: Water
+        amount: 10
+      - id: RMCDrinkTeaSPP
+        name: Tea
+        amount: 10
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat

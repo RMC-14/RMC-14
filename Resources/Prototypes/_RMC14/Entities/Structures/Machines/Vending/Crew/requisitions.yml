@@ -215,8 +215,8 @@
         amount: 5
       - id: RMCPouchDocumentSmall
         amount: 2
-      #- id: RMCPouchSling
-      #  amount: 2
+      - id: RMCPouchSling
+        amount: 2
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
@@ -677,9 +677,9 @@
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
-      - id: RMCAttachmentM63StockCollapsible
-        amount: 5
       - id: RMCAttachmentM63Stock
+        amount: 5
+      - id: RMCAttachmentM63StockCollapsible
         amount: 5
       - id: RMCAttachmentM54CStockSolid
         amount: 5
