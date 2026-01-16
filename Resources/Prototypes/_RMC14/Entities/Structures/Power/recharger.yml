@@ -42,6 +42,7 @@
           - ProjectileBatteryAmmoProvider
           - Defibrillator
           - Visor
+          - PortableDialysis
           # SmartGun Battery
   - type: ItemMapper
     sprite: _RMC14/Structures/Power/recharger.rsi

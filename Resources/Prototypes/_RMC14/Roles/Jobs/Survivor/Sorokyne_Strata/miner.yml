@@ -10,15 +10,9 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetSurvivorMiner
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetSoroMiner
+      preset: RMCSurvivorPresetCivilian
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -27,7 +21,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -36,7 +29,7 @@
     head: RMCHardhatWhiteAlt
     jumpsuit: RMCJumpsuitSPPCiv5
     back: CMSatchelEngineer
-    OuterClothing: RMCOuterClothingExternalWebbingBrown
+    outerClothing: RMCOuterClothingExternalWebbingBrown
     shoes: RMCBootsSPP
     pocket2: RMCPouchToolsFill
     gloves: RMCHandsVeteran
@@ -57,9 +50,3 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
-
-- type: entity
-  parent: RMCSurvivorPresetCivilian
-  id: RMCGearSurvivorPresetSoroMiner
-  name: sorokyne miner preset
-  categories: [ HideSpawnMenu ]
