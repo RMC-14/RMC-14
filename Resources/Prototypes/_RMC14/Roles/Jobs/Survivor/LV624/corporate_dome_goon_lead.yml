@@ -11,7 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonLead
+      preset: RMCSkillPresetSurvivorGoonLead
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -48,7 +48,7 @@
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack
-    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleM54CWhite
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidPMCFill

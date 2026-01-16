@@ -56,6 +56,22 @@
     sprintModifier: 0.897
 
 - type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM4PMCBulletProof
+  name: M4 pattern PMC bulletproof armor
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This set is designed for protecting against ballistics, and has minimal protection against blades and biohazards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/bulletproof.rsi
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bullet: 30 # CLOTHING_ARMOR_HIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+
+- type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]
   id: CMArmorM4PMCCorporate
   name: M1 pattern corporate security armor

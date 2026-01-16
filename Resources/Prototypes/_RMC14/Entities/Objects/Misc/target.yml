@@ -82,6 +82,32 @@
           collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: RMCAdjustableArmorValue
+  - type: UserInterface
+    interfaces:
+      enum.AdjustableArmorUiKey.Key:
+        type: ArmorAdjustBoundUserInterface
+  - type: ActivatableUI
+    key: enum.AdjustableArmorUiKey.Key
+    verbOnly: true
+  - type: Flammable
+    fireSpread: false
+    damage:
+      types:
+        Heat: 1
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+  - type: FireVisuals
+    sprite: _RMC14/Mobs/Effects/on_fire_xeno.rsi
+    normalState: simple_onfire
+    lightEnergyPerStack: 0.2
+    lightRadiusPerStack: 0.1
+    maxLightRadius: 2
+    maxLightEnergy: 8
+  - type: RMCFireColor
+  - type: CanBeFirePatted
 
 - type: entity
   name: xenonid target

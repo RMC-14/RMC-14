@@ -148,6 +148,9 @@
       components:
       - RMCFireImmunityBypass
   - type: StunFriendlyXenoOnStep
+    whitelist:
+      components:
+      - StunFriendlyXenoOnStep
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
   - type: RMCActionOrder
