@@ -63,8 +63,8 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
-  id: ArmorHelmetPMCFieldOfficer
+  parent: RMCArmorHelmetPMC
+  id: RMCArmorHelmetPMCFieldOfficer
   name: PMC field officer beret
   description: The pinnacle of fashion for any aspiring mercenary leader. Designed to protect the head from light impacts.
   components:
