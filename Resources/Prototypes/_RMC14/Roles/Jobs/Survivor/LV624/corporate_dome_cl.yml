@@ -13,7 +13,7 @@
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CorporateLiaison
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
