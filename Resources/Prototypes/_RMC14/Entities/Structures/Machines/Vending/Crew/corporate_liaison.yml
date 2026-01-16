@@ -1,8 +1,8 @@
 # Corporate Liaison
 # TODO Add Clothing options as they become ported
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechWardrobeCorp
+  parent: RMCColMarTechBase
+  id: RMCColMarTechWardrobeCorp
   name: Corporate Liaison's Personal Wardrobe
   description: A wardrobe containing all the clothes an executive would ever need.
   suffix: Corp

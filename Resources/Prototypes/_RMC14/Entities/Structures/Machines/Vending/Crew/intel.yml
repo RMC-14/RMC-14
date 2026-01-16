@@ -1,6 +1,6 @@
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechIntelGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechIntelGear
   name: ColMarTech intelligence officer gear rack
   description: An automated gear rack for IOs.
   components:
@@ -110,8 +110,8 @@
         points: 20
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechIntelEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechIntelEquipment
   name: ColMarTech intelligence officer equipment rack
   description: An automated rack hooked up to a colossal storage of IO standard-issue equipment.
   components:
@@ -226,8 +226,8 @@
       - id: CMMaskCoif
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechIntelWeapons
+  parent: RMCColMarTechBase
+  id: RMCColMarTechIntelWeapons
   name: ColMarTech intelligence officer weapons rack
   description: An automated weapon rack hooked up to a small storage of standard-issue weapons. Can be accessed only by the Intelligence Officers.
   components:
@@ -246,7 +246,7 @@
         amount: 4
       - id: WeaponSMGM63
         amount: 4
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A2
         amount: 4
       - id: RMCWeaponRifleM54C
         amount: 4

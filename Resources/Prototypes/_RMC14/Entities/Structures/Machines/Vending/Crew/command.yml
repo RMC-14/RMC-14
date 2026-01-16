@@ -2,8 +2,8 @@
 
 # Equipment Vend
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechStaffOfficerEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechStaffOfficerEquipment
   name: ColMarTech Staff Officer Equipment Rack
   description: An automated equipment vendor for Staff Officers
   components:
@@ -103,8 +103,8 @@
 # Armoury Vend
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechStaffOfficerWeapon
+  parent: RMCColMarTechBase
+  id: RMCColMarTechStaffOfficerWeapon
   name: ColMarTech Staff Officer Armory Weapon Rack
   description: An automated combat equipment vendor for Staff Officers.
   components:
@@ -232,8 +232,8 @@
 
 # Weapon Vendor
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechExecutiveOfficerWeapon
+  parent: RMCColMarTechBase
+  id: RMCColMarTechExecutiveOfficerWeapon
   name: ColMarTech Executive Officer Weapon Rack
   description: An automated weapons rack for the Executive Officer. It features a decent selection of weaponry meant only for the second in command of a ship.
   components:
@@ -356,8 +356,8 @@
 # Clothing Vend
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCommandingOfficerClothing
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCommandingOfficerClothing
   name: ColMarTech Commanding Officer Clothing Rack
   description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.
   components:
@@ -428,8 +428,8 @@
 
 # Equipment Vend
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCommandingOfficerEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCommandingOfficerEquipment
   name: ColMarTech Commanding Officer Equipment Rack
   description: An automated equipment vendor for the Commanding Officer. Contains a prime selection of equipment for only the UNMC's top officers.
   components:
@@ -546,8 +546,8 @@
 
 # Weapon Vend
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCommandingOfficerWeapon
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCommandingOfficerWeapon
   name: ColMarTech Commanding Officer Weapon Rack
   description: An automated weapons rack for the Commanding Officer. It features a robust selection of weaponry meant only for the UNMC's top officers.
   components:
@@ -725,8 +725,8 @@
 # Senior Officer Vendors
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSeniorOfficerEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSeniorOfficerEquipment
   name: ColMarTech Senior Officer Equipment Rack
   description: An automated equipment vendor for Senior Officers.
   components:

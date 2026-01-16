@@ -1,6 +1,6 @@
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechEquipmentSEA
+  parent: RMCColMarTechBase
+  id: RMCColMarTechEquipmentSEA
   name: ColMarTech SEA equipment rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
@@ -50,7 +50,7 @@
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
-      - id: ArmorHelmetM10
+      - id: RMCArmorHelmetM10
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
@@ -111,8 +111,8 @@
       - id: RMCPatchSEA
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechGunsSEA
+  parent: RMCColMarTechBase
+  id: RMCColMarTechGunsSEA
   name: ColMarTech SEA weapon rack
   description: An automated rack hooked up to a colossal storage of Senior Enlisted Advisor standard-issue equipment.
   suffix: SEA
