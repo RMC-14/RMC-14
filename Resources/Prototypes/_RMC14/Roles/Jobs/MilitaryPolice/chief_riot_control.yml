@@ -1,5 +1,5 @@
 - type: job
-  parent: RMCRiotControl
+  parent: CMRiotControl
   id: CMChiefRiotControl
   name: rmc-job-name-chief-riot-control
   description: rmc-job-description-riot-control
