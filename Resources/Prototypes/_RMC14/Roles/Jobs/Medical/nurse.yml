@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMNurse
-  name: cm-job-name-nurse
-  description: cm-job-description-nurse
+  name: rmc-job-name-nurse
+  description: rmc-job-description-nurse
   playTimeTracker: CMJobNurse
   requirements:
   - !type:TotalDepartmentsTimeRequirement
@@ -33,7 +33,7 @@
         RMCSkillFireman: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: cm-job-prefix-nurse
+      prefix: rmc-job-prefix-nurse
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
