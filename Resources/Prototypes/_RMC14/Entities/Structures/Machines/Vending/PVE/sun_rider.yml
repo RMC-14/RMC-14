@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechSurplus
+  parent: RMCColMarTechSurplus
   id: RMCColMarTechSurplusPVE
   suffix: PVE, Marine
   components:
@@ -53,7 +53,7 @@
         amount: 5
     - name: Armor
       entries:
-      - id: ArmorHelmetM10
+      - id: RMCArmorHelmetM10
         amount: 15
       - id: RMCArmorM3PVE
         name: Standard M3 Pattern Armor Set
@@ -180,7 +180,7 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechUtilities
+  parent: RMCColMarTechUtilities
   id: RMCColMarTechUtilitiesPVE
   suffix: PVE, Marine
   components:

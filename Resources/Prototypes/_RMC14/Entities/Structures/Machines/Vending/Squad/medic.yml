@@ -1,8 +1,8 @@
 # HOSPITAL CORPSMAN
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechMedicalGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechMedicalGear
   name: ColMarTech squad medical gear rack
   description: An automated gear rack for hospital corpsmen.
   components:
@@ -208,8 +208,8 @@
         points: 3
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechMedicalEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechMedicalEquipment
   name: ColMarTech squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
   components:
@@ -327,7 +327,7 @@
 # PVE
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCColMarTechMedicalEquipmentPVE
   name: ColMarTech squad medical equipment rack
   description: An automated rack hooked up to a colossal storage of hospital corpsman standard-issue equipment.
@@ -422,7 +422,7 @@
       - id: CMMaskSterile
       - id: RMCSatchelPMCMedic
         recommended: true
-      - id: ArmorHelmetPMC
+      - id: RMCArmorHelmetPMC
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }

@@ -662,7 +662,7 @@
 
 # Dinnerware
 - type: entity
-  parent: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBaseAnchorable
   id: CMVendorDinnerware
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.
@@ -819,7 +819,7 @@
         amount: 24
       - id: FoodMeatBacon
         amount: 24
-      - id: FoodMeatSausage
+      - id: RMCFoodMeatSausage
         amount: 18
       - id: DrinkMilkCarton
         amount: 24

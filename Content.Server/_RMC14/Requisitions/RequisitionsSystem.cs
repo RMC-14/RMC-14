@@ -47,7 +47,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
     private static readonly EntProtoId AccountId = "RMCASRSAccount";
     private static readonly EntProtoId PaperRequisitionInvoice = "RMCPaperRequisitionInvoice";
-    private static readonly EntProtoId<IFFFactionComponent> MarineFaction = "FactionMarine";
+    private static readonly EntProtoId<IFFFactionComponent> MarineFaction = "RMCFactionMarine";
 
     private EntityQuery<ChasmComponent> _chasmQuery;
     private EntityQuery<ChasmFallingComponent> _chasmFallingQuery;

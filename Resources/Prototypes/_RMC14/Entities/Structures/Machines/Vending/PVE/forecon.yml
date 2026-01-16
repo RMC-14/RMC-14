@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechSurplus
+  parent: RMCColMarTechSurplus
   id: RMCColMarTechSurplusFORECONPVE
   suffix: PVE, FORECON
   components:
@@ -58,7 +58,7 @@
         amount: 5
     - name: Armor #todo m3-r armor
       entries:
-      - id: ArmorHelmetM10
+      - id: RMCArmorHelmetM10
         amount: 15
       - id: RMCArmorM3MediumVariants
         name: Standard M3 Pattern Armor Set
@@ -161,6 +161,6 @@
         amount: 15
       - id: RMCPatchUNMC
         amount: 15
-      - id: BedrollFolded
+      - id: RMCBedrollFolded
         name: LRRP Bedroll
         amount: 15
