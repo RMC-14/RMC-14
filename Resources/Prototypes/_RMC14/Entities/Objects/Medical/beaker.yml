@@ -286,7 +286,7 @@
     price: 40
   - type: Tag
     tags:
-    - PressurizedCanister
+    - RMCPressurizedCanister
     - ChemDispensable
   - type: Clothing
     quickEquip: false
@@ -432,7 +432,7 @@
           Quantity: 240
 
 - type: Tag
-  id: PressurizedCanister
+  id: RMCPressurizedCanister
 
 - type: entity
   parent: CMBeakerBase
