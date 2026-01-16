@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCForceLeadPVE
   name: rmc-job-name-pmc-pve-force-leader
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-force-leader
   playTimeTracker: CMJobPMCForceLeadPVE
   ranks:
     RMCRankWeYaForceLeader: []
@@ -38,6 +38,10 @@
         RMCSkillSmartGun: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-force-leader
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi

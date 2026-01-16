@@ -645,6 +645,25 @@
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchel
+  id: RMCBackpackRTOPMCBroken
+  name: broken We-Ya radio telephone pack
+  description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the logo of Weston-Yamada and internal systems seem to be completely fried and broken.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/rto.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,19,1 # 20
+
+- type: entity
   parent: RMCBackpackRTO
   id: RMCBackpackRTOPMC
   name: We-Ya radio telephone pack
@@ -700,11 +719,11 @@
 - type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpack5Slot
-  suffix: 5 Slot
+  suffix: 15 Slot
   components:
   - type: Storage
     grid:
-    - 0,0,9,1 # 15
+    - 0,0,14,1 # 15
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -794,7 +813,7 @@
     - id: CMMaskGas # TODO RMC14 royal marine gas masks
     - id: RMCSyringeCase
     - id: CMPortableSurgicalBedSpawnFolded
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
     - id: RMCMRETSE
 
 - type: entity
@@ -840,6 +859,15 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_black.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelLightpackWeYa
+  name: We-Ya combat pack
+  description: A small, lightweight pack for expeditions and short-range operations, designed for Weston-Yamada security and private military personnel.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/corporate.rsi
 
 - type: entity
   parent: RMCSatchelLightpack

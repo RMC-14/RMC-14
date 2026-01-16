@@ -30,16 +30,29 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
     private readonly ItemSlotsSystem _itemSlots;
     private readonly SolutionContainerSystem _solution;
     private readonly SpriteSystem _sprite;
+    private readonly RMCChemMasterPresetManager _presetManager;
 
     private RMCChemMasterWindow? _window;
     private RMCChemMasterPopupWindow? _colorPopup;
+    private RMCChemMasterPresetWindow? _presetWindow;
+    private RMCChemMasterPresetEditWindow? _presetEditWindow;
+    private RMCChemMasterPopupWindow? _presetColorPopup;
+    private RMCChemMasterPopupWindow? _presetPillTypePopup;
     private FixedPoint2? _lastBottleAmount;
+
+    private RMCPillBottleColors _selectedPresetBottleColor = RMCPillBottleColors.Orange;
+    private uint _selectedPresetPillType = 1;
+    private bool _hasPresetBottleColor = true;
+    private bool _hasPresetPillType = true;
+    private string? _editingPresetName;
 
     private readonly List<EntityUid> _lastPillBottleRows = new();
     private readonly Dictionary<EntityUid, RMCChemMasterPillBottleRow> _bottleRows = new();
     private readonly Dictionary<int, RMCChemMasterReagentRow> _beakerRows = new();
     private readonly Dictionary<int, RMCChemMasterReagentRow> _bufferRows = new();
+    private readonly Dictionary<string, RMCChemMasterPresetRow> _presetRows = new();
     private readonly List<int> _toRemove = new();
+    private bool _showQuickAccess = true;
 
     public RMCChemMasterBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -47,6 +60,8 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         _itemSlots = EntMan.System<ItemSlotsSystem>();
         _solution = EntMan.System<SolutionContainerSystem>();
         _sprite = EntMan.System<SpriteSystem>();
+        _presetManager = new RMCChemMasterPresetManager();
+        _presetManager.Initialize();
     }
 
     protected override void Open()
@@ -84,7 +99,17 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         }
 
         _window.CreatePillsButton.OnPressed += _ => SendPredictedMessage(new RMCChemMasterCreatePillsMsg());
+        _window.PresetsButton.OnPressed += _ => OpenPresetWindow(chemMaster);
+        _window.SelectAllButton.OnPressed += _ =>
+        {
+            if (!_container.TryGetContainer(Owner, chemMaster.PillBottleContainer, out var container))
+                return;
 
+            var allSelected = chemMaster.SelectedBottles.Count == container.ContainedEntities.Count;
+            SendPredictedMessage(new RMCChemMasterPillBottleSelectAllMsg(!allSelected));
+        };
+
+        UpdateQuickAccessBar();
         Refresh();
     }
 
@@ -203,10 +228,22 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
         if (_window == null)
             return;
 
-        var anySelected = chemMaster.Comp.SelectedBottles.Count > 0;
+        var selectedBottles = chemMaster.Comp.SelectedBottles;
+        var anySelected = selectedBottles.Count > 0;
         if (_container.TryGetContainer(Owner, chemMaster.Comp.PillBottleContainer, out var container) &&
             container.ContainedEntities.Count > 0)
         {
+            var hasMultipleBottles = container.ContainedEntities.Count > 1;
+            _window.SelectAllButton.Visible = hasMultipleBottles;
+
+            if (hasMultipleBottles)
+            {
+                var allSelected = selectedBottles.Count == container.ContainedEntities.Count;
+                _window.SelectAllButton.Text = allSelected
+                    ? Loc.GetString("rmc-chem-master-deselect-all")
+                    : Loc.GetString("rmc-chem-master-select-all");
+            }
+
             _window.PillBottleColumnLabel.Margin = new Thickness(0, 3, 5, 0);
             _window.PillBottlesNoneLabel.Visible = false;
 
@@ -226,6 +263,10 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                 {
                     if (!_bottleRows.TryGetValue(contained, out var row))
                         continue;
+
+                    var isSelected = selectedBottles.Contains(contained);
+                    if (row.FillBottleButton is { Disposed: false })
+                        row.FillBottleButton.Pressed = isSelected;
 
                     UpdatePillBottleFill(row, contained);
                     UpdatePillBottleName(row, contained);
@@ -247,8 +288,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
                     continue;
 
                 var row = new RMCChemMasterPillBottleRow();
-                var fillBottles = chemMaster.Comp.SelectedBottles;
-                row.FillBottleButton.Pressed = fillBottles.Contains(contained);
+                row.FillBottleButton.Pressed = selectedBottles.Contains(contained);
                 row.FillBottleButton.OnPressed += args => SendPredictedMessage(new RMCChemMasterPillBottleFillMsg(netContained.Value, args.Button.Pressed));
 
                 UpdatePillBottleFill(row, contained);
@@ -321,6 +361,7 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             _window.PillBottleColumnLabel.Margin = new Thickness(0, 0, 5, 0);
             _window.PillBottlesContainer.RemoveChildExcept(_window.PillBottlesNoneLabel);
             _window.PillBottlesNoneLabel.Visible = true;
+            _window.SelectAllButton.Visible = false;
         }
     }
 
@@ -470,5 +511,501 @@ public sealed class RMCChemMasterBui : BoundUserInterface, IRefreshableBui
             labelStr = labelStr[..3];
 
         row.NameLabel.Text = $"({labelStr})";
+    }
+
+    private void OpenPresetWindow(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetWindow != null)
+        {
+            RefreshPresetsList(chemMaster);
+            _presetWindow.OpenCentered();
+            return;
+        }
+
+        _presetWindow = new RMCChemMasterPresetWindow { Title = Loc.GetString("rmc-chem-master-presets") };
+        _presetWindow.OnClose += () =>
+        {
+            if (_presetWindow != null)
+                _presetWindow.OnQuickAccessToggled -= OnQuickAccessToggled;
+
+            _presetWindow = null;
+            _presetEditWindow?.Close();
+            _presetEditWindow = null;
+            _presetColorPopup?.Close();
+            _presetColorPopup = null;
+            _presetPillTypePopup?.Close();
+            _presetPillTypePopup = null;
+        };
+
+        _presetWindow.OnQuickAccessToggled += OnQuickAccessToggled;
+
+        _presetWindow.OnReorderToggled += () =>
+        {
+            _presetWindow.RefreshPresetRows();
+        };
+
+        _presetWindow.CreateNewPresetButton.OnPressed += _ => OpenPresetEditWindow(chemMaster, null);
+
+        RefreshPresetsList(chemMaster);
+        _presetWindow.OpenCentered();
+    }
+
+    private void OpenPresetEditWindow(RMCChemMasterComponent chemMaster, RMCChemMasterPreset? existingPreset)
+    {
+        _presetEditWindow?.Close();
+
+        var title = existingPreset != null
+            ? Loc.GetString("rmc-chem-master-preset-edit-title", ("name", existingPreset.Name))
+            : Loc.GetString("rmc-chem-master-preset-create-new");
+
+        _presetEditWindow = new RMCChemMasterPresetEditWindow { Title = title };
+        _presetEditWindow.OnClose += () =>
+        {
+            _presetEditWindow = null;
+            _presetColorPopup?.Close();
+            _presetColorPopup = null;
+            _presetPillTypePopup?.Close();
+            _presetPillTypePopup = null;
+            _editingPresetName = null;
+        };
+
+        _hasPresetBottleColor = true;
+        _hasPresetPillType = true;
+
+        if (existingPreset != null)
+        {
+            _editingPresetName = existingPreset.Name;
+            _selectedPresetBottleColor = existingPreset.BottleColor;
+            _selectedPresetPillType = existingPreset.PillType;
+            _presetEditWindow.LoadPreset(existingPreset);
+        }
+        else
+        {
+            _editingPresetName = null;
+            _selectedPresetBottleColor = RMCPillBottleColors.Orange;
+            _selectedPresetPillType = chemMaster.SelectedType;
+            _presetEditWindow.Clear();
+        }
+
+        UpdatePresetEditBottleColorView(chemMaster);
+        UpdatePresetEditPillTypeView(chemMaster);
+
+        // Pill bottle color button
+        _presetEditWindow.BottleColorButton.OnPressed += _ =>
+        {
+            if (_presetColorPopup != null)
+            {
+                _presetColorPopup.OpenCentered();
+                return;
+            }
+
+            _presetColorPopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pill-bottle-window-title") };
+            _presetColorPopup.OnClose += () => _presetColorPopup = null;
+            _presetColorPopup.OpenCentered();
+
+            for (var j = 0; j < chemMaster.PillCanisterTypes; j++)
+            {
+                var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{j}"));
+                var button = new TextureButton { TextureNormal = state.Frame0 };
+
+                var type = j;
+                button.OnPressed += _ =>
+                {
+                    _selectedPresetBottleColor = (RMCPillBottleColors) type;
+                    _hasPresetBottleColor = true;
+                    UpdatePresetEditBottleColorView(chemMaster);
+                    _presetColorPopup?.Close();
+                };
+
+                _presetColorPopup.Grid.AddChild(button);
+            }
+
+            // Add clear selection button at the bottom
+            var clearButton = new Button
+            {
+                Text = "✕ " + Loc.GetString("rmc-chem-master-preset-clear-selection"),
+                HorizontalExpand = true,
+            };
+            clearButton.OnPressed += _ =>
+            {
+                _hasPresetBottleColor = false;
+                UpdatePresetEditBottleColorView(chemMaster);
+                _presetColorPopup?.Close();
+            };
+            _presetColorPopup.ButtonContainer.AddChild(clearButton);
+        };
+
+        // Clear bottle color button
+        _presetEditWindow.ClearBottleColorButton.OnPressed += _ =>
+        {
+            _hasPresetBottleColor = false;
+            UpdatePresetEditBottleColorView(chemMaster);
+        };
+
+        // Pill type button
+        _presetEditWindow.PillTypeButton.OnPressed += _ =>
+        {
+            if (_presetPillTypePopup != null)
+            {
+                _presetPillTypePopup.OpenCentered();
+                return;
+            }
+
+            _presetPillTypePopup = new RMCChemMasterPopupWindow { Title = Loc.GetString("rmc-chem-master-pills-type-window-title") };
+            _presetPillTypePopup.OnClose += () => _presetPillTypePopup = null;
+            _presetPillTypePopup.OpenCentered();
+
+            for (var j = 0; j < chemMaster.PillTypes; j++)
+            {
+                var state = _sprite.GetState(new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{j + 1}"));
+                var button = new TextureButton { TextureNormal = state.Frame0 };
+
+                var type = (uint) (j + 1);
+                button.OnPressed += _ =>
+                {
+                    _selectedPresetPillType = type;
+                    _hasPresetPillType = true;
+                    UpdatePresetEditPillTypeView(chemMaster);
+                    _presetPillTypePopup?.Close();
+                };
+
+                _presetPillTypePopup.Grid.AddChild(button);
+            }
+
+            // Add clear selection button at the bottom
+            var clearButton = new Button
+            {
+                Text = "✕ " + Loc.GetString("rmc-chem-master-preset-clear-selection"),
+                HorizontalExpand = true,
+            };
+            clearButton.OnPressed += _ =>
+            {
+                _hasPresetPillType = false;
+                UpdatePresetEditPillTypeView(chemMaster);
+                _presetPillTypePopup?.Close();
+            };
+            _presetPillTypePopup.ButtonContainer.AddChild(clearButton);
+        };
+
+        // Clear pill type button
+        _presetEditWindow.ClearPillTypeButton.OnPressed += _ =>
+        {
+            _hasPresetPillType = false;
+            UpdatePresetEditPillTypeView(chemMaster);
+        };
+
+        // Save button
+        _presetEditWindow.SavePresetButton.OnPressed += _ =>
+        {
+            if (_presetEditWindow == null)
+                return;
+
+            var name = _presetEditWindow.PresetNameInput.Text;
+            if (string.IsNullOrWhiteSpace(name))
+                return;
+
+            // Get existing quick access settings if editing
+            int? quickAccessSlot = null;
+            string? quickAccessLabel = null;
+            if (_editingPresetName != null)
+            {
+                var existingPresetData = _presetManager.Presets.FirstOrDefault(p => p.Name == _editingPresetName);
+                if (existingPresetData != null)
+                {
+                    quickAccessSlot = existingPresetData.QuickAccessSlot;
+                    quickAccessLabel = existingPresetData.QuickAccessLabel;
+                }
+            }
+
+            var preset = _presetEditWindow.GetPreset(
+                _hasPresetBottleColor ? _selectedPresetBottleColor : RMCPillBottleColors.Orange,
+                _hasPresetPillType ? _selectedPresetPillType : 1,
+                quickAccessSlot,
+                quickAccessLabel);
+
+            if (_editingPresetName != null && !string.Equals(_editingPresetName, preset.Name, StringComparison.OrdinalIgnoreCase))
+            {
+                _presetManager.RemovePreset(_editingPresetName);
+            }
+
+            _presetManager.SavePreset(preset);
+            RefreshPresetsList(chemMaster);
+            UpdateQuickAccessBar();
+            _presetEditWindow.Close();
+        };
+
+        _presetEditWindow.OpenCentered();
+    }
+
+    private void RefreshPresetsList(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetWindow == null)
+            return;
+
+        _presetWindow.SavedPresetsContainer.RemoveAllChildren();
+        _presetWindow.NoPresetsLabel.Visible = _presetManager.Presets.Count == 0;
+        _presetRows.Clear();
+
+        var usedSlots = new HashSet<int>();
+        foreach (var p in _presetManager.Presets)
+        {
+            if (p.QuickAccessSlot != null)
+                usedSlots.Add(p.QuickAccessSlot.Value);
+        }
+
+        for (var i = 0; i < _presetManager.Presets.Count; i++)
+        {
+            var preset = _presetManager.Presets[i];
+            var index = i;
+            var row = new RMCChemMasterPresetRow();
+            _presetRows[preset.Name] = row;
+
+            // Set pill bottle color icon
+            var colorSpecifier = new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{(int) preset.BottleColor}");
+            row.BottleColorView.Texture = _sprite.Frame0(colorSpecifier);
+
+            // Set pill color/type icon
+            var pillSpecifier = new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{preset.PillType}");
+            row.PillTypeView.Texture = _sprite.Frame0(pillSpecifier);
+
+            // Preset button that applies the preset when pressed. PresetName "Label" [QuickAccessSlot]
+            var buttonText = preset.Name;
+            if (!string.IsNullOrWhiteSpace(preset.BottleLabel))
+                buttonText += $" \"{preset.BottleLabel}\"";
+            if (preset.QuickAccessSlot != null)
+                buttonText += $" [Q{preset.QuickAccessSlot}]";
+            row.ApplyButton.Text = buttonText;
+            row.ApplyButton.OnPressed += _ => ApplyPresetDirectly(preset);
+
+            // Quick access button
+            row.SetHasQuickAccess(preset.QuickAccessSlot != null);
+            row.QuickAccessButton.Text = "⚡";
+            row.QuickAccessButton.OnPressed += _ =>
+            {
+                row.ToggleQuickAccessDropdown();
+            };
+
+            row.InitializeQuickAccessSlots(chemMaster.MaxQuickAccessSlots, usedSlots, preset.QuickAccessSlot);
+            row.SetQuickAccessLabel(preset.QuickAccessLabel);
+
+            row.OnQuickAccessSlotChanged += newSlot =>
+            {
+                var updatedPreset = new RMCChemMasterPreset
+                {
+                    Name = preset.Name,
+                    BottleLabel = preset.BottleLabel,
+                    BottleColor = preset.BottleColor,
+                    PillType = preset.PillType,
+                    UsePresetNameAsLabel = preset.UsePresetNameAsLabel,
+                    QuickAccessSlot = newSlot,
+                    QuickAccessLabel = preset.QuickAccessLabel,
+                };
+                _presetManager.SavePreset(updatedPreset);
+
+                // Update the button text for this row
+                var quickAccessButtonText = preset.Name;
+                if (!string.IsNullOrWhiteSpace(preset.BottleLabel))
+                    quickAccessButtonText += $" \"{preset.BottleLabel}\"";
+                if (newSlot != null)
+                    quickAccessButtonText += $" [Q{newSlot}]";
+                row.ApplyButton.Text = quickAccessButtonText;
+                row.SetHasQuickAccess(newSlot != null);
+
+                // Recalculate used slots and update all rows' slot availability
+                var newUsedSlots = new HashSet<int>();
+                foreach (var p in _presetManager.Presets)
+                {
+                    if (p.QuickAccessSlot != null)
+                        newUsedSlots.Add(p.QuickAccessSlot.Value);
+                }
+                foreach (var (_, presetRow) in _presetRows)
+                {
+                    presetRow.UpdateSlotAvailability(newUsedSlots);
+                }
+
+                UpdateQuickAccessBar();
+            };
+
+            row.OnQuickAccessLabelChanged += newLabel =>
+            {
+                var updatedPreset = new RMCChemMasterPreset
+                {
+                    Name = preset.Name,
+                    BottleLabel = preset.BottleLabel,
+                    BottleColor = preset.BottleColor,
+                    PillType = preset.PillType,
+                    UsePresetNameAsLabel = preset.UsePresetNameAsLabel,
+                    QuickAccessSlot = preset.QuickAccessSlot,
+                    QuickAccessLabel = newLabel,
+                };
+                _presetManager.SavePreset(updatedPreset);
+                UpdateQuickAccessBar();
+            };
+
+            // Edit button
+            row.EditButton.Text = "✏";
+            row.EditButton.OnPressed += _ => OpenPresetEditWindow(chemMaster, preset);
+
+            // Delete button
+            row.DeleteButton.Text = "🗑";
+            row.DeleteButton.OnPressed += _ => DeletePreset(preset.Name);
+
+            // Move buttons mode
+            row.MoveUpButton.Visible = _presetWindow.ShowReorder;
+            row.MoveDownButton.Visible = _presetWindow.ShowReorder;
+            row.MoveUpButton.Disabled = index == 0;
+            row.MoveDownButton.Disabled = index == _presetManager.Presets.Count - 1;
+            row.MoveUpButton.OnPressed += _ => MovePreset(preset.Name, -1, chemMaster);
+            row.MoveDownButton.OnPressed += _ => MovePreset(preset.Name, 1, chemMaster);
+
+            _presetWindow.SavedPresetsContainer.AddChild(row);
+        }
+
+        _presetWindow.InvalidateMeasure();
+    }
+
+    private void MovePreset(string name, int direction, RMCChemMasterComponent chemMaster)
+    {
+        if (_presetManager.MovePreset(name, direction))
+        {
+            RefreshPresetsList(chemMaster);
+            UpdateQuickAccessBar();
+        }
+    }
+
+    private void DeletePreset(string name)
+    {
+        if (!EntMan.TryGetComponent(Owner, out RMCChemMasterComponent? chemMaster))
+            return;
+
+        _presetManager.RemovePreset(name);
+        RefreshPresetsList(chemMaster);
+        UpdateQuickAccessBar();
+    }
+
+    private void UpdatePresetEditBottleColorView(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetEditWindow == null)
+            return;
+
+        if (_hasPresetBottleColor)
+        {
+            var colorIndex = (int) _selectedPresetBottleColor;
+            var specifier = new SpriteSpecifier.Rsi(chemMaster.PillCanisterRsi, $"pill_canister{colorIndex}");
+            _presetEditWindow.BottleColorView.Texture = _sprite.Frame0(specifier);
+            _presetEditWindow.BottleColorView.Visible = true;
+        }
+        else
+        {
+            _presetEditWindow.BottleColorView.Visible = false;
+        }
+    }
+
+    private void UpdatePresetEditPillTypeView(RMCChemMasterComponent chemMaster)
+    {
+        if (_presetEditWindow == null)
+            return;
+
+        if (_hasPresetPillType)
+        {
+            var specifier = new SpriteSpecifier.Rsi(chemMaster.PillRsi.RsiPath, $"pill{_selectedPresetPillType}");
+            _presetEditWindow.PillTypeView.Texture = _sprite.Frame0(specifier);
+            _presetEditWindow.PillTypeView.Visible = true;
+        }
+        else
+        {
+            _presetEditWindow.PillTypeView.Visible = false;
+        }
+    }
+
+    private void OnQuickAccessToggled()
+    {
+        if (_presetWindow == null)
+            return;
+
+        _showQuickAccess = _presetWindow.ShowQuickAccess;
+        UpdateQuickAccessBar();
+    }
+
+    private void UpdateQuickAccessBar()
+    {
+        if (_window == null || _window.Disposed)
+            return;
+
+        _window.QuickAccessContainer.RemoveAllChildren();
+
+        if (!_showQuickAccess)
+        {
+            _window.QuickAccessContainer.Visible = false;
+            return;
+        }
+
+        var quickAccessPresets = _presetManager.Presets
+            .Where(p => p.QuickAccessSlot != null)
+            .OrderBy(p => p.QuickAccessSlot)
+            .ToList();
+
+        if (quickAccessPresets.Count == 0)
+        {
+            _window.QuickAccessContainer.Visible = false;
+            return;
+        }
+
+        _window.QuickAccessContainer.Visible = true;
+
+        foreach (var preset in quickAccessPresets)
+        {
+            var label = !string.IsNullOrWhiteSpace(preset.QuickAccessLabel)
+                ? preset.QuickAccessLabel
+                : preset.QuickAccessSlot?.ToString() ?? string.Empty;
+
+            if (label.Length > 3)
+                label = label[..3];
+
+            var button = new Button
+            {
+                Text = label,
+                ToolTip = preset.Name,
+                MinWidth = 32,
+                StyleClasses = { "OpenBoth" },
+                ModulateSelfOverride = GetPillBottleButtonColor(preset.BottleColor),
+            };
+
+            var capturedPreset = preset;
+            button.OnPressed += _ => ApplyPresetDirectly(capturedPreset);
+
+            _window.QuickAccessContainer.AddChild(button);
+        }
+    }
+
+    private void ApplyPresetDirectly(RMCChemMasterPreset preset)
+    {
+        SendPredictedMessage(new RMCChemMasterApplyPresetMsg(
+            preset.Name,
+            preset.BottleLabel,
+            preset.BottleColor,
+            preset.PillType,
+            preset.UsePresetNameAsLabel));
+    }
+
+    private static Color GetPillBottleButtonColor(RMCPillBottleColors color)
+    {
+        return color switch
+        {
+            RMCPillBottleColors.Orange => new Color(255, 165, 0, 128),
+            RMCPillBottleColors.Blue => new Color(0, 0, 255, 128),
+            RMCPillBottleColors.Yellow => new Color(255, 255, 0, 128),
+            RMCPillBottleColors.LightPurple => new Color(177, 156, 217, 128),
+            RMCPillBottleColors.LightGrey => new Color(200, 200, 200, 128),
+            RMCPillBottleColors.White => new Color(255, 255, 255, 128),
+            RMCPillBottleColors.LightGreen => new Color(144, 238, 144, 128),
+            RMCPillBottleColors.Cyan => new Color(0, 255, 255, 128),
+            RMCPillBottleColors.Pink => new Color(255, 192, 203, 128),
+            RMCPillBottleColors.Aquamarine => new Color(127, 255, 212, 128),
+            RMCPillBottleColors.Grey => new Color(128, 128, 128, 128),
+            RMCPillBottleColors.Red => new Color(255, 0, 0, 128),
+            RMCPillBottleColors.Black => new Color(36, 16, 0, 128),
+            _ => new Color(200, 200, 200, 128), // Default to LightGrey
+        };
     }
 }

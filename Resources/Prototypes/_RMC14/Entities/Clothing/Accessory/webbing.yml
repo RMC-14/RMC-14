@@ -296,6 +296,17 @@
 
 - type: entity
   parent: CMWebbingHolster
+  id: RMCWebbingHolsterMK80
+  suffix: PMC FOL, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+    - id: CMMagazinePistolMK80
+
+- type: entity
+  parent: CMWebbingHolster
   id: RMCWebbingHolsterBlack
   name: black shoulder holster
   description: A black handgun holster with an attached pouch, allowing two magazines or speedloaders to be stored along with it.
@@ -737,7 +748,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMREWeYa
+    - id: RMCMREWeYaPMC
     - id: RMCRangefinder
     - id: RMCGrenadeBlastM12
     - id: RMCTelescopicBaton
@@ -750,9 +761,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMREWeYa
-    - id: RMCMREWeYa
-    - id: CMCrowbar # TODO RMC14: tactical prybar
+    - id: RMCMREWeYaPMC
+    - id: RMCMREWeYaPMC
+    - id: RMCTacticalPrybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
 
@@ -765,7 +776,7 @@
     contents:
     # - id: CMSplint5
     - id: CMFireExtinguisherPortable
-    - id: RMCMREWeYa
+    - id: RMCMREWeYaPMC
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
 
