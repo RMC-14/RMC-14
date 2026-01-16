@@ -1332,8 +1332,8 @@
   parent: CMBeltBaseStorage
   id: RMCWebleyBelt
   name: L16 pattern Webley revolver holster
-  suffix: PVE
-  description: Special issue variant of the M276 designed to holster a M63 submachine gun and two spare magazines. Uncommonly issued to UNMC support and specialist personnel.
+  suffix: PVE, CO
+  description: A beautiful dark chocolate brown leather belt designed to fit the Webley top-break revolver. Available to senior officers of the RCM by back order only.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
