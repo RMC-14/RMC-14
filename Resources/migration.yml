@@ -1607,6 +1607,8 @@ StalkyBush03: RMCStalkyBush03
 FernyBush01: RMCFernyBush01
 FernyBush02: RMCFernyBush02
 FernyBush03: RMCFernyBush03
+SpawnCMTestDummy: RMCSpawnCMTestDummy
+SpawnRMCTrainingDummy: RMCSpawnRMCTrainingDummy
 # 2026-01-17
 DoorXenoResin: RMCDoorXenoResin
 WallXenoResin: RMCWallXenoResin

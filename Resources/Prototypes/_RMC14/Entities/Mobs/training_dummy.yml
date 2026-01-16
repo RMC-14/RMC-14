@@ -29,12 +29,12 @@
 - type: startingGear
   id: RMCGearTrainingDummy
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlack
 
 - type: entity
   parent: MarkerBase
-  id: SpawnRMCTrainingDummy
+  id: RMCSpawnRMCTrainingDummy
   name: RMC Training Dummy Spawner
   components:
   - type: Sprite
