@@ -4,8 +4,12 @@
   name: rmc-job-name-pve-forecon-corpsman
   description: cm-job-description-corpsman
   playTimeTracker: CMJobFORECONPVECorpsman
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
-   RMCRankSergeant: []
+    RMCRankSergeant: []
   startingGear: RMCJobFORECONPVECorpsman
   icon: "CMJobIconHospitalCorpsman"
   joinNotifyCrew: false
@@ -35,13 +39,20 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-corpsman
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
   hidden: true
-
 
 - type: entity
   parent: CMSpawnPointJobBase

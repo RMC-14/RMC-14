@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Sprites taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/d07b313102b3138fc8cfcc969bd18a897d688c0a/icons/obj/structures/props/64x64_bodybag_pile.dmi",
+  "size": {
+    "x": 64,
+    "y": 64
+  },
+  "states": [
+    {
+      "name": "bodybag_pile"
+    },
+    {
+      "name": "bodybag_pile2"
+    },
+    {
+      "name": "bodybag_pile_charred"
+    },
+    {
+      "name": "bodybag_pile_charred2"
+    }
+]
+}

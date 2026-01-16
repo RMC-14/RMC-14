@@ -202,7 +202,7 @@
       # /obj/item/tool/weldpack/minitank - 4 Points
       - id: RMCEngineerKit
         points: 1
-      - id: CMCrowbar # TODO RMC14: tactical prybar
+      - id: RMCTacticalPrybar
         points: 5
     - name: Firstaid Kits
       entries:
@@ -304,7 +304,6 @@
       - id: RMCFlashlightPen
         points: 2
 
-
 - type: entity
   parent: ColMarTechBase
   id: WeYaExperimentalToolsVendor
@@ -324,23 +323,23 @@
     sections:
     - name: Experimental Tools
       entries:
-      # autocompressor - 15 Points
       - id: RMCSynthBreachingHammer
         points: 15
       - id: RMCDefibrillatorCompact
         points: 15
       - id: RMCVendorBundleCompactNailgunKit
         points: 15
-      # backpack firefighting watertank - 15 Points
-      # crew monitor - 15 Points
-      # maintenance jack - 15 Points
-      # portable dialysis machine - 15 Points
       - id: RMCTelescopicBaton
-        points: 15
-      - id: CMWebbingSurgicalBlue
         points: 15
       - id: CMWebbingSurgicalGreen
         points: 15
+      - id: CMWebbingSurgicalBlue
+        points: 15
+      # Surgical Drop Pouch (Green) - 15 Points
+      # Surgical Drop Pouch (Blue) - 15 Points
+      # Surgical Drop Pouch (Black) - 15 Points
+      # Tool Webbing (Not small) - 15 Points
+      # Tool Drop Pouch (Not small) - 15 Points
       - id: CMSatchelMarineLogistics
         points: 15
       - id: RMCSatchelMarineIntelChestrig

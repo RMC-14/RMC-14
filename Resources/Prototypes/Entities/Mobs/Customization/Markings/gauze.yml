@@ -1,4 +1,4 @@
-# added Felinids to the species restrictions list
+# added Felinids, Skrell to the species restrictions list
 - type: marking
   id: GauzeLefteyePatch
   bodyPart: Eyes
@@ -73,7 +73,7 @@
   id: GauzeShoulder
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -87,7 +87,7 @@
   id: GauzeStomach
   bodyPart: Chest
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -101,7 +101,7 @@
   id: GauzeUpperArmRight
   bodyPart: RArm
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -115,7 +115,7 @@
   id: GauzeLowerArmRight
   bodyPart: RArm, RHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -129,7 +129,7 @@
   id: GauzeLeftArm
   bodyPart: LArm, LHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -143,7 +143,7 @@
   id: GauzeLowerLegLeft
   bodyPart: LFoot
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -157,7 +157,7 @@
   id: GauzeUpperLegLeft
   bodyPart: LLeg
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -171,7 +171,7 @@
   id: GauzeUpperLegRight
   bodyPart: RLeg
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -185,7 +185,7 @@
   id: GauzeLowerLegRight
   bodyPart: RFoot
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -199,7 +199,7 @@
   id: GauzeBoxerWrapRight
   bodyPart: RHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
@@ -213,7 +213,7 @@
   id: GauzeBoxerWrapLeft
   bodyPart: LHand
   markingCategory: Overlay
-  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi]
+  speciesRestriction: [Dwarf, Human, Reptilian, Arachnid, Felinid, Vulpkanin, Rodentia, Feroxi, Skrell]
   coloring:
     default:
       type:
