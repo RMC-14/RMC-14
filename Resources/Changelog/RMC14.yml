@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: to4no_fix
-  changes:
-  - message: Added a new feature to color the speaker's name in the color of the squad
-      the speaker belongs to! The feature setting is in the settings in the "Accessibility"
-      section. The feature helps to feel more part of the squad and keep the squad
-      together.
-    type: Add
-  - message: Fixed a bug with the lack of support for multi-colored names of xenonids,
-      now the names of xenonids can have different colors.
-    type: Fix
-  id: 2298
-  time: '2025-09-05T09:41:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6201
 - author: noctyrnal
   changes:
   - message: The M54C magazines have received minor visual tweaks.
@@ -4741,5 +4728,15 @@
   id: 2800
   time: '2026-01-16T01:23:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8525
+- author: SharkSnake98
+  changes:
+  - message: Added the TSE Airbase Nightmare Insert
+    type: Add
+  - message: Changed the paper cups in the RMC water cooler to use specific RMC paper
+      cups instead of upstream
+    type: Tweak
+  id: 2801
+  time: '2026-01-16T01:31:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8914
 Name: RMC14
 Order: -1
