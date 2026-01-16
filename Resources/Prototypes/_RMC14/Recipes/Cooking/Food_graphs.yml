@@ -13,4 +13,4 @@
       - minTemperature: 335
 
   - node: sausage cooked
-    entity: FoodMeatSausageCooked
+    entity: RMCFoodMeatSausageCooked
