@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.UserInterface.Systems.Actions;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Smoke;
@@ -16,6 +17,7 @@ using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.UserInterface;
+using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects;
 using Robust.Shared.IoC;
@@ -44,6 +46,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly IEyeManager _eye;
     private readonly IPlayerManager _player;
     private readonly IUserInterfaceManager _ui;
+    private readonly IConfigurationManager _config;
     private readonly IMapManager _mapManager;
     private readonly IPrototypeManager _prototypes;
     private readonly IComponentFactory _componentFactory;
@@ -65,6 +68,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _eye = IoCManager.Resolve<IEyeManager>();
         _player = IoCManager.Resolve<IPlayerManager>();
         _ui = IoCManager.Resolve<IUserInterfaceManager>();
+        _config = IoCManager.Resolve<IConfigurationManager>();
         _mapManager = IoCManager.Resolve<IMapManager>();
         _prototypes = IoCManager.Resolve<IPrototypeManager>();
         _componentFactory = IoCManager.Resolve<IComponentFactory>();
@@ -83,6 +87,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
+        if (!_config.GetCVar(RMCCVars.RMCXenoAbilityPreviews))
+            return;
+
         var player = _player.LocalEntity;
         if (player == null)
             return;
