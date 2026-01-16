@@ -184,11 +184,11 @@
     - Cartridge
     - CMCartridgeRifle10x24mmHT
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mmHT
+    proto: RMCBulletRifle10x24mmHT
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle10x24mmHT
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifle10x24mmHT
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

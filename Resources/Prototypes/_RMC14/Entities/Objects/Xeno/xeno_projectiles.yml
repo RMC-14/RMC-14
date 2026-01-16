@@ -229,6 +229,7 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+
   - type: XenoSlowingSpitProjectile
     slow: 0
     paralyze: 4
@@ -252,6 +253,10 @@
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger
+
+- type: entity
+  parent: XenoBombardAcidProjectile
+  id: RMCXenoBombardAcidProjectile
 
 - type: entity
   id: CMGuidebookXenoBombardAcidProjectile
@@ -285,6 +290,7 @@
     popupType: LargeCaution
   - type: ProjectileMaxRange
     max: 10
+
   - type: XenoSlowingSpitProjectile
     slow: 0
     paralyze: 4
@@ -311,6 +317,10 @@
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger
+
+- type: entity
+  parent: XenoBombardNeurotoxinProjectile
+  id: RMCXenoBombardNeurotoxinProjectile
 
 - type: entity
   id: CMGuidebookXenoBombardNeurotoxinProjectile
@@ -470,4 +480,3 @@
         - BulletImpassable
         - XenoProjectileImpassable
         - BarricadeImpassable
-

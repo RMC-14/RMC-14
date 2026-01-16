@@ -497,7 +497,7 @@
     - Cartridge
     - CMCartridgeRifle10x24mm
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mm
+    proto: RMCBulletRifle10x24mm
 
 - type: entity
   parent: CMCartridgeRifle10x24mm
@@ -510,7 +510,7 @@
     - Cartridge
     - CMCartridgeRifle10x24mmAP
   - type: CartridgeAmmo
-    proto: BulletRifle10x24mmAP
+    proto: RMCBulletRifle10x24mmAP
 
 - type: entity
   parent: CMCartridgeRifle10x24mm
@@ -553,7 +553,7 @@
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifle10x24mm
+  id: RMCBulletRifle10x24mm
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -576,8 +576,8 @@
       falloff: 10
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle10x24mmAP
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifle10x24mmAP
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -588,7 +588,7 @@
     amount: 40
 
 - type: entity
-  parent: BulletRifle10x24mm
+  parent: RMCBulletRifle10x24mm
   id: RMCBulletRifle10x24mmWP
   categories: [ HideSpawnMenu ]
   components:
@@ -604,7 +604,7 @@
     lifetime: 0.2
 
 - type: entity
-  parent: BulletRifle10x24mm
+  parent: RMCBulletRifle10x24mm
   id: RMCBulletRifle10x24mmIncendiary
   categories: [ HideSpawnMenu ]
   components:
@@ -617,7 +617,7 @@
   - type: IgniteOnProjectileHit
 
 - type: entity
-  parent: BulletRifle10x24mm
+  parent: RMCBulletRifle10x24mm
   id: RMCBulletRifle10x24mmHEAP
   categories: [ HideSpawnMenu ]
   components:

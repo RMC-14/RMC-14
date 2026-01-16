@@ -65,7 +65,7 @@
         - id: RMCMagazineSMGUZIExt
       - !type:AllSelector
         children:
-        - id: WeaponSMGMAC15
+        - id: RMCWeaponSMGMAC15
         - id: RMCMagazineSMGMAC15
           amount: 2
         - id: RMCMagazineSMGMAC15Ext
@@ -80,7 +80,7 @@
         amount: 2
     - !type:AllSelector # Freelancer
       children:
-      - id: WeaponRifleMAR40
+      - id: RMCWeaponRifleMAR40
       - id: RMCMagazineRifleMAR40Ext
       - id: RMCMagazineRifleMAR40
         amount: 2
