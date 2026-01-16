@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/16/2026 04:40:24
+  time: 01/16/2026 08:40:49
   entityCount: 17350
 maps:
 - 1
@@ -103,7 +103,6 @@ tilemap:
   7: CMShuttleTileRasputin15
   5: FloorShuttleBlack
   20: FloorSteel
-  883: Plating
   76: PlatingDamaged
   92: RMCFloorCement8
   95: RMCFloorHybrisaBlackAlt
@@ -109893,36 +109892,6 @@ entities:
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
-  - uid: 13840
-    components:
-    - type: Transform
-      pos: 165.5,80.5
-      parent: 1
-  - uid: 13841
-    components:
-    - type: Transform
-      pos: 166.5,80.5
-      parent: 1
-  - uid: 13842
-    components:
-    - type: Transform
-      pos: 167.5,81.5
-      parent: 1
-  - uid: 13843
-    components:
-    - type: Transform
-      pos: 167.5,82.5
-      parent: 1
-  - uid: 13844
-    components:
-    - type: Transform
-      pos: 167.5,83.5
-      parent: 1
-  - uid: 13845
-    components:
-    - type: Transform
-      pos: 166.5,84.5
-      parent: 1
   - uid: 13846
     components:
     - type: Transform
@@ -109940,6 +109909,66 @@ entities:
       parent: 1
 - proto: RMCGeneratorFusionColonyNoMapIcon
   entities:
+  - uid: 13840
+    components:
+    - type: Transform
+      pos: 166.5,84.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13841
+    components:
+    - type: Transform
+      pos: 167.5,83.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13842
+    components:
+    - type: Transform
+      pos: 167.5,82.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13843
+    components:
+    - type: Transform
+      pos: 167.5,81.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13844
+    components:
+    - type: Transform
+      pos: 166.5,80.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13845
+    components:
+    - type: Transform
+      pos: 165.5,80.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
   - uid: 13847
     components:
     - type: Transform
