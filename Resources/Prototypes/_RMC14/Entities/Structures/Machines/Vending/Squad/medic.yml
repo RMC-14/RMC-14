@@ -525,7 +525,7 @@
 
 - type: entity
   parent: RMCColMarTechMedicalEquipmentPVE
-  id: ColMarTechMedicalChemicalPVE
+  id: RMCColMarTechMedicalChemicalPVE
   suffix: PVE
   name: ColMarTech squad medical chemical rack
   description: An automated gear rack for specialized chemicals for the hospital corpsman.

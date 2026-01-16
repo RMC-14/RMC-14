@@ -1,8 +1,8 @@
 # MILITARY POLICE
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechMilitaryPoliceEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechMilitaryPoliceEquipment
   name: ColMarTech Military Police Equipment Rack
   description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
   components:
@@ -90,8 +90,8 @@
 
 # WARDEN
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechWardenEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechWardenEquipment
   name: ColMarTech Military Warden Equipment Rack
   description: An automated rack hooked up to a colossal storage of Military Police standard-issue equipment.
   components:
