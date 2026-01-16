@@ -23,5 +23,6 @@ public readonly record struct Commendation(
 public readonly record struct RoundCommendationEntry(
     Commendation Commendation,
     ProtoId<EntityPrototype>? CommendationPrototypeId,
-    NetEntity? ReceiverEntity
+    NetEntity? ReceiverEntity,
+    string? ReceiverLastPlayerId
 );

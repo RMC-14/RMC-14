@@ -68,9 +68,9 @@ public sealed class MarineControlComputerSystem : SharedMarineControlComputerSys
             allRecommendations.UnionWith(computer.AwardRecommendations);
         }
 
-        var awardedLastPlayerIds = _commendation.GetCommendations()
-            .Where(c => c.Type == CommendationType.Medal)
-            .Select(c => c.Receiver)
+        var awardedLastPlayerIds = _commendation.GetRoundCommendationEntries()
+            .Where(e => e.Commendation.Type == CommendationType.Medal && e.ReceiverLastPlayerId != null)
+            .Select(e => e.ReceiverLastPlayerId!)
             .ToHashSet();
 
         // Group recommendations by recommended marine, excluding those who already received medals or were rejected

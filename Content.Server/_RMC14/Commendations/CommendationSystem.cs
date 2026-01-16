@@ -42,8 +42,9 @@ public sealed class CommendationSystem : SharedCommendationSystem
 
             var receiverId = Guid.Parse(receiver.Comp.LastPlayerId);
             var receiverName = GetNameWithRank(receiver);
+            var receiverLastPlayerId = receiver.Comp.LastPlayerId;
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity, receiverLastPlayerId);
         }
         catch (Exception e)
         {
@@ -71,7 +72,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             if (!Guid.TryParse(lastPlayerId, out var receiverId))
                 return;
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity, lastPlayerId);
         }
         catch (Exception e)
         {
@@ -87,7 +88,8 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string text,
         CommendationType type,
         ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null)
+        NetEntity? receiverEntity = null,
+        string? receiverLastPlayerId = null)
     {
         text = text.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -107,7 +109,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         Dirty(giver, giver.Comp1);
 
         var commendation = new Commendation(giverName, receiverName, name, text, type, round);
-        var entry = new RoundCommendationEntry(commendation, commendationPrototypeId, receiverEntity);
+        var entry = new RoundCommendationEntry(commendation, commendationPrototypeId, receiverEntity, receiverLastPlayerId);
         RoundCommendations.Add(entry);
         _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);
         _adminLog.Add(LogType.RMCMedal, $"{ToPrettyString(giver)} gave a medal to {receiverName} of type {type} {name} that reads:\n{text}");
