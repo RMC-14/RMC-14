@@ -48,7 +48,7 @@
 - type: entity
   parent: RMCArmorWebbingBase
   id: RMCArmorWebbingDrum
-  name: armor webbing (drums)
+  name: drum armor webbing
   description: A brown harness fitted with a pair of large pouches capable of carrying high-capacity drums and other large magazines.
   components:
   - type: Sprite
@@ -96,7 +96,7 @@
 - type: entity
   parent: RMCArmorWebbingBase
   id: RMCArmorWebbingMag
-  name: armor webbing (magazines)
+  name: magazine armor webbing
   description: A brown harness fitted with a set of four magazine pouches.
   components:
   - type: Sprite
@@ -142,7 +142,7 @@
 - type: entity
   parent: RMCArmorWebbingBase
   id: RMCArmorWebbingGrenade
-  name: armor webbing (grenades)
+  name: grenade armor webbing
   description: A brown harness fitted with an array of small pouches, capable of holding up to 6 grenades.
   components:
   - type: Sprite
@@ -176,7 +176,7 @@
 - type: entity
   parent: RMCArmorWebbingBase
   id: RMCArmorWebbingPouch
-  name: armor webbing (pouches)
+  name: general armor webbing
   description: A brown harness fitted with several small pouches, capable of carrying assorted small items.
   components:
   - type: Sprite
@@ -219,7 +219,7 @@
 - type: entity
   parent: RMCArmorWebbingBase
   id: RMCArmorWebbingShell
-  name: armor webbing (shells)
+  name: shell armor webbing
   description: A brown harness fitted with a number of loops designed to hold loose shotgun shells.
   components:
   - type: Sprite
