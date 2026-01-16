@@ -186,7 +186,7 @@
 
 - type: entity
   parent: CMAutoInjector
-  id: CMDyloveneAutoInjector
+  id: RMCDyloveneAutoInjector
   name: dylovene autoinjector
   description: An autoinjector loaded with 3 doses of 15u of Dylovene, a common toxin damage medicine. You can refill it at Wey-Med vending machines.
   components:
