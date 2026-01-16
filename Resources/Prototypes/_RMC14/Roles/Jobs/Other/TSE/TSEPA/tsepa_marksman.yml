@@ -16,15 +16,16 @@
     components:
     - type: Skills
       skills:
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
         RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 2
         RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
     - type: SniperWhitelist
     - type: NpcFactionMember
       factions:
