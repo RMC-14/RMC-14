@@ -37,7 +37,7 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: cmp_spawn
   - type: RandomHumanoidSpawner
-    settings: CMChiefRiotControl
+    settings: RMCChiefRiotControl
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
