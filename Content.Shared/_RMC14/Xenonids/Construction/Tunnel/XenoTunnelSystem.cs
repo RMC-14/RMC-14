@@ -40,7 +40,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 
 public sealed class XenoTunnelSystem : EntitySystem
 {
-    private const string TunnelPrototypeId = "XenoTunnel";
+    private const string TunnelPrototypeId = "RMCXenoTunnel";
 
     [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
@@ -881,7 +881,7 @@ public sealed partial class XenoDigTunnelDoAfter : SimpleDoAfterEvent
 public sealed partial class XenoPlaceResinTunnelDestroyWeedSourceDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
-    public EntProtoId Prototype = "XenoTunnel";
+    public EntProtoId Prototype = "RMCXenoTunnel";
 
     [DataField]
     public float CreateTunnelDelay = 4.0f;
@@ -914,7 +914,7 @@ public sealed class SelectDestinationTunnelInterfaceState(Dictionary<string, Net
 public sealed partial class XenoDigTunnelActionEvent : InstantActionEvent
 {
     [DataField]
-    public EntProtoId Prototype = "XenoTunnel";
+    public EntProtoId Prototype = "RMCXenoTunnel";
 
     [DataField]
     public float DestroyWeedSourceDelay = 1.0f;

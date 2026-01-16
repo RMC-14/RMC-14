@@ -38,7 +38,7 @@ public sealed partial class XenoWeedsComponent : Component
     public EntityUid? Source;
 
     [DataField]
-    public EntProtoId Spawns = "XenoWeeds";
+    public EntProtoId Spawns = "RMCXenoWeeds";
 
     [DataField, AutoNetworkedField]
     public List<EntityUid> Spread = new();

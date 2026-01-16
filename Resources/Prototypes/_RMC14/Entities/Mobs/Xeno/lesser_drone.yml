@@ -47,9 +47,9 @@
   - type: XenoConstruction
     buildDelay: 4
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
+    - RMCWallXenoResin
+    - RMCWallXenoMembrane
+    - RMCDoorXenoResin
   - type: XenoDevour
   - type: XenoPheromones
     pheroSuffix: weak

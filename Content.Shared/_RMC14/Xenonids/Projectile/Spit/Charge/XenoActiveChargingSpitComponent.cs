@@ -18,7 +18,7 @@ public sealed partial class XenoActiveChargingSpitComponent : Component
     public float Speed = 1.4f;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoChargedSpitProjectile";
+    public EntProtoId Projectile = "RMCXenoChargedSpitProjectile";
 
     [DataField, AutoNetworkedField]
     public bool FiredProjectile;

@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Xenonids.TailSeize;
 public sealed partial class XenoTailSeizeComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoOppressorTailHook";
+    public EntProtoId Projectile = "RMCXenoOppressorTailHook";
 
     [DataField, AutoNetworkedField]
     public float Speed = 30;

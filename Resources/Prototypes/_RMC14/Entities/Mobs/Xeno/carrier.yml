@@ -34,10 +34,10 @@
     - CMXenoDrone
   - type: XenoConstruction
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
   - type: XenoPheromones
     pheromonesMultiplier: 2
   - type: XenoPlasma
@@ -152,7 +152,7 @@
     - ActionXenoOrderConstruction
     - ActionXenoPheromones
     - ActionXenoPlantWeeds
-    - ActionXenoResinHole
+    - ActionRMCXenoResinHole
     - ActionXenoThrowParasite
     - ActionXenoRetrieveEgg
     - ActionXenoParasiteReserve
@@ -229,4 +229,3 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoCarrierEggsac
-

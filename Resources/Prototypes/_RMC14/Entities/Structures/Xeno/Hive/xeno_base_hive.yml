@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: BaseHiveStructure
+  id: RMCBaseHiveStructure
   components:
   - type: GuideHelp
     guides:
@@ -41,7 +41,7 @@
 
 - type: entity
   abstract: true
-  id: BaseHiveStructureNode
+  id: RMCBaseHiveStructureNode
   components:
   - type: GuideHelp
     guides:

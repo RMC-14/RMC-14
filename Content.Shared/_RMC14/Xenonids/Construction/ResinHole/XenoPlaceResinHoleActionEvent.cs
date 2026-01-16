@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 public sealed partial class XenoPlaceResinHoleActionEvent : InstantActionEvent
 {
     [DataField]
-    public EntProtoId Prototype = "XenoResinHole";
+    public EntProtoId Prototype = "RMCXenoResinHole";
 
     [DataField]
     public float DestroyWeedSourceDelay = 1.0f;

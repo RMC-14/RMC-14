@@ -11,8 +11,8 @@
 
   Remember, to boost your parasite production, plot down Egg Morphers on hive weeds and collect parasites from them. Don't forget to ask the Queen since they are limited!
 
-  <GuideEntityEmbed Entity="HiveEggMorpherXeno"/>
-  <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+  <GuideEntityEmbed Entity="RMCHiveEggMorpherXeno"/>
+  <GuideEntityEmbed Entity="RMCXenoHiveWeeds"/>
 
   ##Parasites
 
@@ -21,7 +21,7 @@
   <Box>
     <GuideEntityEmbed Entity="XenoEgg"/>
     <GuideEntityEmbed Entity="CMXenoParasite"/>
-    <GuideEntityEmbed Entity="XenoResinHole"/>
+    <GuideEntityEmbed Entity="RMCXenoResinHole"/>
   </Box>
 
   \n

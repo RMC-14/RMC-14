@@ -87,7 +87,7 @@
 - type: entity
   parent: BaseItem
   categories: [ HideSpawnMenu ]
-  id: XenoEggDestroyed
+  id: RMCXenoEggDestroyed
   name: destroyed egg
   description: A mess of... something.
   placement:
@@ -151,18 +151,18 @@
   - type: RMCMesonsNonviewable
 
 - type: entity
-  parent: XenoEggDestroyed
+  parent: RMCXenoEggDestroyed
   categories: [ HideSpawnMenu ]
-  id: XenoEggDestroyedFragile
+  id: RMCXenoEggDestroyedFragile
   name: fragile egg
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/xeno_egg_fragile.rsi
 
 - type: entity
-  parent: XenoEggDestroyed
+  parent: RMCXenoEggDestroyed
   categories: [ HideSpawnMenu ]
-  id: XenoEggDestroyedFragileSustained
+  id: RMCXenoEggDestroyedFragileSustained
   name: fragile egg
   components:
   - type: Sprite

@@ -37,7 +37,7 @@ public sealed partial class XenoSpikeShieldComponent : Component
     public float AccumulatedDamage;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoHedgehogSpikeProjectileSpreadShort";
+    public EntProtoId Projectile = "RMCXenoHedgehogSpikeProjectileSpreadShort";
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 7;

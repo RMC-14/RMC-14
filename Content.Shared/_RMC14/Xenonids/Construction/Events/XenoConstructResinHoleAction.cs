@@ -15,5 +15,5 @@ public sealed partial class XenoConstructResinHoleActionEvent : InstantActionEve
     public FixedPoint2 PlasmaCost = 200;
 
     [DataField]
-    public EntProtoId Prototype = "XenoResinHole";
+    public EntProtoId Prototype = "RMCXenoResinHole";
 }

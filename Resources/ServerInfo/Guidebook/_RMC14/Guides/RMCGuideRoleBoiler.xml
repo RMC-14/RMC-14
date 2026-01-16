@@ -8,8 +8,8 @@
 
   Its [color=green]acidic[/color] globs are capable of killing off any hosts caught within, while its [color=yellow]neurotoxin[/color] variant spreads further and will weaken any hosts allowing for capture.
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookXenoBombardAcidProjectile"/>
-    <GuideEntityEmbed Entity="CMGuidebookXenoBombardNeurotoxinProjectile"/>
+    <GuideEntityEmbed Entity="CMGuidebookRMCXenoBombardAcidProjectile"/>
+    <GuideEntityEmbed Entity="CMGuidebookRMCXenoBombardNeurotoxinProjectile"/>
   </Box>\n
 
   Remember to melt green flares and stay away from red dots as they pose a great threat to you from above.
@@ -18,7 +18,7 @@
   <GuideEntityEmbed Entity="RMCTileFire"/>
   ##Door tech
   To safely use bombard you can stand behind a closed resin door and charge your bombard. Make sure to aim outside the path of the door, then hover your mouse over the door and press [color=yellow][bold][keybind="ActivateItemInWorld"][/bold][/color] when the bombard is almost done, if timed then the resin door will open letting your glob pass through!
-  <GuideEntityEmbed Entity="DoorXenoResin"/>
+  <GuideEntityEmbed Entity="RMCDoorXenoResin"/>
   ##Abilities:
   - [bold][color=#E61919]PASSIVE[/color][/bold]: Vulnerable to fire and glows in the dark.
   - [bold]Strong Corrosive Acid[/bold]: Secretes a glob of acid on items to be dissolved.

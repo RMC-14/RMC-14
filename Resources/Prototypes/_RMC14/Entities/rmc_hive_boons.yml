@@ -47,7 +47,7 @@
     event: !type:HiveBoonActivateKingEvent
 
 - type: entity
-  parent: BaseHiveStructure
+  parent: RMCBaseHiveStructure
   id: RMCHiveCocoonKing
   name: alien cocoon
   description: A large pulsating cocoon.

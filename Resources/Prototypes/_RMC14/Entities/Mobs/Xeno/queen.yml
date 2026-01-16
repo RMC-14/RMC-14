@@ -88,16 +88,16 @@
   - type: XenoConstruction
     buildDelay: 2
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
-    - XenoStickyResin
-    - XenoFastResin
+    - RMCWallXenoResin
+    - RMCWallXenoMembrane
+    - RMCDoorXenoResin
+    - RMCXenoStickyResin
+    - RMCXenoFastResin
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
@@ -244,7 +244,7 @@
   - type: StunOnExplosionReceived
     weak: false
   - type: XenoSpit
-    projectileId: XenoQueenNeuroSpitProjectile
+    projectileId: RMCXenoQueenNeuroSpitProjectile
     plasmaCost: 50
   - type: CommendationGiver
   - type: XenoInhands
@@ -289,7 +289,7 @@
   #   - RMCXenoQueenMaid
 
 - type: entity
-  id: XenoLeaderPheromoneRelay
+  id: RMCXenoLeaderPheromoneRelay
   categories: [ HideSpawnMenu ]
   components:
   - type: XenoPheromones

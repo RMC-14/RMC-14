@@ -1,5 +1,5 @@
 - type: entity
-  id: XenoBaseFloorResin
+  id: RMCXenoBaseFloorResin
   abstract: true
   placement:
     mode: SnapgridCenter
@@ -65,8 +65,8 @@
         Heat: 2
 
 - type: entity
-  parent: XenoBaseFloorResin
-  id: XenoStickyResin
+  parent: RMCXenoBaseFloorResin
+  id: RMCXenoStickyResin
   name: sticky resin
   description: A layer of disgusting sticky slime.
   components:
@@ -78,8 +78,8 @@
 
 
 - type: entity
-  parent: XenoStickyResin
-  id: XenoStickyResinWeak
+  parent: RMCXenoStickyResin
+  id: RMCXenoStickyResinWeak
   name: weak sticky resin
   description: A thin and weak layer of disgusting sticky slime. It looks like it's already melting...
   components:
@@ -92,8 +92,8 @@
     outsiderSpeedModifierArmor: 0.4856
 
 - type: entity
-  parent: XenoBaseFloorResin
-  id: XenoFastResin
+  parent: RMCXenoBaseFloorResin
+  id: RMCXenoFastResin
   name: fast resin
   description: A layer of disgusting sleek slime.
   components:

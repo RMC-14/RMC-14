@@ -14,5 +14,5 @@ public sealed partial class HiveLeaderGranterComponent : Component
     public int MaxLeaders = 4;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId PheromoneRelayId = "XenoLeaderPheromoneRelay";
+    public EntProtoId PheromoneRelayId = "RMCXenoLeaderPheromoneRelay";
 }

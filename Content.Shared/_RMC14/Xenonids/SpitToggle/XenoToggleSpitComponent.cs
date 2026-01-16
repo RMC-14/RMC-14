@@ -17,8 +17,8 @@ public sealed partial class XenoToggleSpitComponent : Component
     public FixedPoint2 AcidCost = 25;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId NeuroProto = "XenoQueenNeuroSpitProjectile";
+    public EntProtoId NeuroProto = "RMCXenoQueenNeuroSpitProjectile";
 
     [DataField, AutoNetworkedField]
-    public EntProtoId AcidProto = "XenoChargedSpitProjectile";
+    public EntProtoId AcidProto = "RMCXenoChargedSpitProjectile";
 }

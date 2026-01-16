@@ -8,7 +8,7 @@
     <GuideEntityEmbed Entity="CMXenoCarrier"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="XenoResinHole"/>
+    <GuideEntityEmbed Entity="RMCXenoResinHole"/>
   </Box>
 
   ##Where to place?

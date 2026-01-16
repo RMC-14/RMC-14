@@ -262,9 +262,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     {
         return originalId switch
         {
-            "WallXenoResin" => "WallXenoResinQueen",
-            "WallXenoMembrane" => "WallXenoMembraneQueen",
-            "DoorXenoResin" => "DoorXenoResinQueen",
+            "RMCWallXenoResin" => "RMCWallXenoResinQueen",
+            "RMCWallXenoMembrane" => "RMCWallXenoMembraneQueen",
+            "RMCDoorXenoResin" => "RMCDoorXenoResinQueen",
             _ => originalId
         };
     }

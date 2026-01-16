@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Xenonids.ManageHive.Boons;
 public sealed partial class HiveClusterComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntProtoId TowerReplaceWith = "HivePylonXeno";
+    public EntProtoId TowerReplaceWith = "RMCHivePylonXeno";
 }

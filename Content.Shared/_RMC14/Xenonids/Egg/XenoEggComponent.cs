@@ -93,19 +93,19 @@ public sealed partial class XenoEggComponent : Component
     ///     The ent to spawn on normal destruction.
     /// </summary>
     [DataField]
-    public EntProtoId EggDestroyed = "XenoEggDestroyed";
+    public EntProtoId EggDestroyed = "RMCXenoEggDestroyed";
 
     /// <summary>
     ///     The ent to spawn on fragile destruction.
     /// </summary>
     [DataField]
-    public EntProtoId EggDestroyedFragile = "XenoEggDestroyedFragile";
+    public EntProtoId EggDestroyedFragile = "RMCXenoEggDestroyedFragile";
 
     /// <summary>
     ///     The ent to spawn on sustained destruction.
     /// </summary>
     [DataField]
-    public EntProtoId EggDestroyedSustained = "XenoEggDestroyedFragileSustained";
+    public EntProtoId EggDestroyedSustained = "RMCXenoEggDestroyedFragileSustained";
 
     /// <summary>
     ///     How long the creature jitters for when it exits the egg.

@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseWallXeno
-  id: WallXenoResin
+  id: RMCWallXenoResin
   name: resin wall
   description: Weird slime solidified into a wall.
   components:
@@ -26,7 +26,7 @@
     plasma: 120
     scalingCost: true
   - type: XenoStructureUpgradeable
-    to: WallXenoResinThick
+    to: RMCWallXenoResinThick
     cost: 50
   - type: MeleeReceivedMultiplier
     xenoDamage:
@@ -34,8 +34,8 @@
         Slash: 225
 
 - type: entity
-  parent: WallXenoResin
-  id: WallXenoResinThick
+  parent: RMCWallXenoResin
+  id: RMCWallXenoResinThick
   name: thick resin wall
   description: Weird slime solidified into a thick wall.
   components:
@@ -67,7 +67,7 @@
 
 - type: entity
   parent: CMBaseWallXeno
-  id: BaseMembraneXeno
+  id: RMCBaseMembraneXeno
   name: resin membrane
   abstract: true
   components:
@@ -105,8 +105,8 @@
         Slash: 150
 
 - type: entity
-  parent: BaseMembraneXeno
-  id: WallXenoMembrane
+  parent: RMCBaseMembraneXeno
+  id: RMCWallXenoMembrane
   name: resin membrane
   description: Weird slime translucent enough to let light pass through.
   components:
@@ -127,12 +127,12 @@
     key: walls
     base: membrane
   - type: XenoStructureUpgradeable
-    to: WallXenoMembraneThick
+    to: RMCWallXenoMembraneThick
     cost: 25
 
 - type: entity
-  parent: BaseMembraneXeno
-  id: WallXenoMembraneThick
+  parent: RMCBaseMembraneXeno
+  id: RMCWallXenoMembraneThick
   name: thick resin membrane
   description: Weird thick slime just translucent enough to let light pass through.
   components:
@@ -161,8 +161,8 @@
     scalingCost: true
 
 - type: entity
-  parent: WallXenoResin
-  id: WallXenoResinWeak
+  parent: RMCWallXenoResin
+  id: RMCWallXenoResinWeak
   name: weak resin wall
   description: Weird slime solidified into a wall. It already looks on the verge of collapsing...
   components:

@@ -102,7 +102,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private EntityQuery<QueenBuildingBoostComponent> _queenBoostQuery;
 
     private const string XenoStructuresAnimation = "RMCEffect";
-    private const string XenoHiveCoreNodeId = "HiveCoreXenoConstructionNode";
+    private const string XenoHiveCoreNodeId = "RMCHiveCoreXenoConstructionNode";
 
     private float _densityThreshold;
     private TimeSpan _newResinPreventCollideTime;
@@ -394,9 +394,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         return originalId.Id switch
         {
-            "WallXenoResin" => "WallXenoResinQueen",
-            "WallXenoMembrane" => "WallXenoMembraneQueen",
-            "DoorXenoResin" => "DoorXenoResinQueen",
+            "RMCWallXenoResin" => "RMCWallXenoResinQueen",
+            "RMCWallXenoMembrane" => "RMCWallXenoMembraneQueen",
+            "RMCDoorXenoResin" => "RMCDoorXenoResinQueen",
             _ => originalId
         };
     }
@@ -405,9 +405,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     {
         return originalId.Id switch
         {
-            "WallXenoResin" => "WallXenoResinThick",
-            "WallXenoMembrane" => "WallXenoMembraneThick",
-            "DoorXenoResin" => "DoorXenoResinThick",
+            "RMCWallXenoResin" => "RMCWallXenoResinThick",
+            "RMCWallXenoMembrane" => "RMCWallXenoMembraneThick",
+            "RMCDoorXenoResin" => "RMCDoorXenoResinThick",
             _ => originalId
         };
     }

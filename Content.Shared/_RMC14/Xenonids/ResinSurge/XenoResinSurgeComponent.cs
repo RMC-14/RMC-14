@@ -36,11 +36,11 @@ public sealed partial class XenoResinSurgeComponent : Component
 
     // Prototype for unstable wall to create
     [DataField, AutoNetworkedField]
-    public EntProtoId UnstableWallId = "WallXenoResinWeak";
+    public EntProtoId UnstableWallId = "RMCWallXenoResinWeak";
 
     // Prototype for resin to create
     [DataField, AutoNetworkedField]
-    public EntProtoId StickyResinId = "XenoStickyResinWeak";
+    public EntProtoId StickyResinId = "RMCXenoStickyResinWeak";
 
     [DataField, AutoNetworkedField]
     public int Range = 7;

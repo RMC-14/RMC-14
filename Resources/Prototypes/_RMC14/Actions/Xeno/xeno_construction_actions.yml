@@ -126,7 +126,7 @@
       state: morph_resin
 
 - type: entity
-  id: ActionXenoResinHole
+  id: ActionRMCXenoResinHole
   parent: ActionXenoBase
   name: Plant Resin Hole (200)
   description: Places a resin hole on weeds. It can be filled with boiler gas, acid, or parasites.
@@ -195,7 +195,7 @@
   - type: InstantAction
     event: !type:XenoPlantWeedsActionEvent
       plasmaCost: 125
-      prototype: XenoHardyWeedsSource
+      prototype: RMCXenoHardyWeedsSource
 
 # For healer drone
 - type: entity

@@ -10,7 +10,7 @@ public sealed partial class XenoPlantWeedsActionEvent : InstantActionEvent
     public FixedPoint2 PlasmaCost = 75;
 
     [DataField]
-    public EntProtoId Prototype = "XenoWeedsSource";
+    public EntProtoId Prototype = "RMCXenoWeedsSource";
 
     // Slight corner cutting to avoid the pain of having to extract this from the prototype every time
     // TODO: do this properly
