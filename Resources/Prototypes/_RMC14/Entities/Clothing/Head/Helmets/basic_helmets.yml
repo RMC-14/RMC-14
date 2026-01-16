@@ -109,12 +109,7 @@
   - type: CMArmor
     melee: 20
     bullet: 20
-    bio: 20
     explosionArmor: 10
-    # armor_laser = CLOTHING_ARMOR_MEDIUMLOW
-    # armor_energy = CLOTHING_ARMOR_LOW
-    # armor_rad = CLOTHING_ARMOR_LOW
-    # armor_internaldamage = CLOTHING_ARMOR_MEDIUM
   - type: RMCBulkyArmor
   - type: OverwatchCamera
   - type: SquadArmor

@@ -153,13 +153,6 @@
     quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: {}
-  - type: CMArmor
-    melee: 40
-    bullet: 40
-    bio: 30
-    explosionArmor: 70
-    # armor_rad = CLOTHING_ARMOR_HIGH
-    # armor_internaldamage = CLOTHING_ARMOR_HIGH
   # Uses same explosion components as CMGrenadeFrag
   - type: ExplodeOnTrigger
   - type: Explosive
