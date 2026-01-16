@@ -130,7 +130,7 @@
 
 - type: entity
   parent: CMLockerBase
-  id: CMLockerFieldDoctor
+  id: RMCLockerFieldDoctor
   suffix: Filled, Field Doctor
   components:
   - type: StorageFill

@@ -1,9 +1,9 @@
 ﻿- type: job
   parent: CMDoctor
-  id: CMFieldDoctor
-  name: cm-job-name-field-doctor
-  description: cm-job-description-field-doctor
-  playTimeTracker: CMJobFieldDoctor
+  id: RMCFieldDoctor
+  name: rmc-job-name-field-doctor
+  description: rmc-job-description-field-doctor
+  playTimeTracker: RMCJobFieldDoctor
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobDoctor
@@ -29,7 +29,7 @@
         RMCSkillSurgery: 2
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: cm-job-prefix-field-doctor
+      prefix: rmc-job-prefix-field-doctor
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -49,14 +49,14 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: CMSpawnPointFieldDoctor
+  id: RMCSpawnPointFieldDoctor
   name: field doctor spawn point
   components:
   - type: SpawnPoint
-    job_id: CMFieldDoctor
+    job_id: RMCFieldDoctor
   - type: Sprite
     state: field_doc_spawn
 
 - type: playTimeTracker
-  id: CMJobFieldDoctor
+  id: RMCJobFieldDoctor
   isHumanoid: true
