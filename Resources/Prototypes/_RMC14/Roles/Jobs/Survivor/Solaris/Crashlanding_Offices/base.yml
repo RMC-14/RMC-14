@@ -1,0 +1,62 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorPMCBase
+  name: rmc-job-name-pmc-standard
+  description: rmc-job-description-survivor
+  ranks:
+    RMCRankOperator: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCBase
+  icon: RMCJobIconPMCGunner # TODO RMC14: minimap icons of diff factions mechanic
+  hasIcon: true
+  hidden: true
+  joinNotifyCrew: false
+  greeting: rmc-job-greeting-solaris-pmc
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC (Base)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaPMCStandard
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCBase
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-standard
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorPMCBase
+  equipment:
+    id: RMCIDCardPMC
+
+- type: entity
+  id: RMCGearSurvivorPresetPMCGun
+  name: pmc survivor weapons preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - [ RMCWeaponRifleM54CWhiteNoLock, CMMagazineRifleM54C, CMMagazineRifleM54C]
+    - [ RMCWeaponRifleSSG45NoLockStripped, RMCMagazineRifleSSG45, RMCMagazineRifleSSG45 ]
+    - [ CMBaseWeaponSMG, CMMagazineSMGM63, CMMagazineSMGM63 ]
+    - [ RMCWeaponSMGFP9000PMC, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000 ]
+    - [ WeaponShotgunM890, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
+    tryEquipRandomWeapon: true
+
+- type: entity
+  parent: [ RMCSurvivorPresetNoGun, RMCGearSurvivorPresetPMCGun ]
+  id: RMCGearSurvivorPresetPMCBase
+  name: pmc base survivor preset
+  categories: [ HideSpawnMenu ]

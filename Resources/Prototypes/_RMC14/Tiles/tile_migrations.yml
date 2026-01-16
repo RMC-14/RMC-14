@@ -40,3 +40,7 @@
 - type: tileAlias
   id: RCMPlanetSnow4
   target: RMCPlanetSnow4
+
+- type: tileAlias
+  id: Plating
+  target: CMFloorPlating
