@@ -18,7 +18,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleRCMPVEAssaultEngi
-      - id: RMCArmorRoyalPointmanPVE
+      - id: RMCPVEArmorCaseRoyalPointman
       - id: CMHandsBlackInsulated
       - id: RMCWeaponRifleL90A2Breacher
     - name: Heavy-Duty Breaching Equipment # TODO RMC royal marines breaching hammer, XM51 is placeholder
@@ -68,7 +68,7 @@
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleRCMPVEMedic
-      - id: RMCArmorRoyalLightPVE
+      - id: RMCPVEArmorCaseRoyalLight
       - id: CMHandsLatex
     - name: Backpack
       choices: { CMBackpack: 1 }
@@ -286,25 +286,18 @@
     - name: Armor
       entries:
       - id: RMCArmorRoyalPVE
-        name: L3A Kestrel modular vest
         amount: 15
       - id: RMCPVEArmorPadsKestrel
-        name: Kestrel Pauldrons
         amount: 15
       - id: RMCPVEArmorBracersKestrel
-        name: Kestrel Vambraces
         amount: 15
       - id: RMCPVEArmorNeckGuardKestrel
-        name: Kestrel Gorget
         amount: 15
       - id: RMCPVEArmorGroinPlateKestrel
-        name: Kestrel Lap Panel
         amount: 15
       - id: RMCPVEArmorShinGuardKestrel
-        name: Kestrel Greaves
         amount: 15
       - id: RMCPVEArmorKneeGuardKestrel
-        name: Kestrel Kneepads
         amount: 15
     - name: Backpack
       entries: 

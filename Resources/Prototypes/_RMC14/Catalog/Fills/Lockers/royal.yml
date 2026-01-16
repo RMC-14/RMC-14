@@ -23,7 +23,7 @@
     children:
     - id: RMCSmartGunRCMPVE
     - id: RMCPowerCellSmartgun
-    - id: RMCArmorRoyalHarnessPVE
+    - id: RMCPVEArmorCaseRoyalHarness
     - id: RMCMagazineSmartGunHT
       amount: 3
     - id: RMCArmorWebbingDrum
@@ -55,7 +55,7 @@
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBeltHolsterPistolRCM
-    - id: RMCArmorRoyalLightPVE
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMSapperFill
