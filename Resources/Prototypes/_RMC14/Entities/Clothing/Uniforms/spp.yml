@@ -29,6 +29,39 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mp.rsi
 
 # Sleeves and Jacket
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitSPPPaP
+  name: PaP service uniform
+  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPP
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+- type: entity
+  parent: RMCJumpsuitSPPPaP
+  id: RMCJumpsuitSPPArmy
+  name: SPP army fatigues
+  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
+
+- type: entity
+  parent: RMCJumpsuitSPPArmy
+  id: RMCJumpsuitSPPArmyAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
+
+# Sleeves and Jacket (hides undergarment top)
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
   id: CMJumpsuitSPP
@@ -40,6 +73,9 @@
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchSPP
+  - type: HideLayerClothing
+    slots:
+    - UndergarmentTop
   - type: Tag
     tags:
     - RMCUniformSPP
@@ -85,31 +121,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/engi.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPPaP
-  name: PaP service uniform
-  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPArmy
-  name: SPP army fatigues
-  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
-
-- type: entity
-  parent: RMCJumpsuitSPPArmy
-  id: RMCJumpsuitSPPArmyAlt
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
 
 # Civilians
 - type: entity

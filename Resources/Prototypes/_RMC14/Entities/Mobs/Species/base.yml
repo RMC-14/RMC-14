@@ -397,3 +397,8 @@
     xenoVisible: true
   - type: RMCActionOrder
     id: RMCBaseMobSpeciesOrganic
+  - type: HumanoidAppearance
+    species: Human
+    hideLayersOnEquip:
+    - UndergarmentTop
+    - Hair
