@@ -1536,6 +1536,11 @@ BaseHiveStructureNode: RMCBaseHiveStructureNode
 XenoBaseFloorResin: RMCXenoBaseFloorResin
 XenoFruitBase: RMCXenoFruitBase
 BaseMembraneXeno: RMCBaseMembraneXeno
+FactionHalcyon: RMCFactionHalcyon
+FactionMarine: RMCFactionMarine
+FactionSurvivor: RMCFactionSurvivor
+FactionTSE: RMCFactionTSE
+FactionWeYa: RMCFactionWeYa
 # 2026-01-17
 DoorXenoResin: RMCDoorXenoResin
 WallXenoResin: RMCWallXenoResin

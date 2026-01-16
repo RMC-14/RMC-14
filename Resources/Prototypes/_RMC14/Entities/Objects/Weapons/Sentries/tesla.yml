@@ -121,7 +121,7 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    faction: RMCFactionMarine
 
 - type: entity
   parent: RMCTesla
@@ -176,7 +176,7 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    faction: RMCFactionMarine
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
@@ -219,7 +219,7 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    faction: RMCFactionMarine
   - type: Sentry
     upgrades: null
   - type: RMCTeslaCoil
