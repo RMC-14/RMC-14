@@ -192,6 +192,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetM10
@@ -208,6 +209,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 # M11
 - type: entity
@@ -300,7 +302,6 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m12/urban.rsi
   - type: CMArmor
     melee: 25
-    bullet: 25
     bio: 25
   - type: CycleableVisor
     containers:
@@ -326,6 +327,10 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m30/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m30/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m30/urban.rsi
+  - type: CMArmor
+    melee: 15
+    explosionArmor: 15
+    # armor_internaldamage = 15
   - type: CycleableVisor
     containers:
     - rmc_visor_one
@@ -374,7 +379,7 @@
 
 # M3-G4 Grenadier Spec
 - type: entity
-  parent: RMCArmorHelmetM3Scout
+  parent: ArmorHelmetM10
   id: RMCArmorHelmetM3G4
   name: M3-G4 grenadier helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
@@ -386,7 +391,10 @@
   - type: CMArmor
     melee: 25
     bullet: 25
+    bio: 25
     explosionArmor: 50
+    # armor_rad = CLOTHING_ARMOR_HIGH
+    # armor_internaldamage = CLOTHING_ARMOR_HIGH
   - type: ParasiteResistance
     maxCount: 6
   - type: ItemCamouflage
@@ -444,6 +452,10 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m45/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m45/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m45/urban.rsi
+  - type: CMArmor
+    bio: 10
+    explosionArmor: 20
+    # armor_internaldamage = 15
   - type: SquadArmor
     layer: Helmet
     slot: HEAD
@@ -474,7 +486,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
-  - type: RMCEarProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
@@ -482,6 +493,9 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/urban.rsi
+  - type: CMArmor
+    explosionArmor: 30
+  - type: RMCEarProtection
 
 - type: entity
   parent: CMArmorHelmetM12
