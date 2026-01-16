@@ -393,8 +393,8 @@
     bullet: 25
     bio: 25
     explosionArmor: 50
-    # armor_rad = CLOTHING_ARMOR_HIGH
-    # armor_internaldamage = CLOTHING_ARMOR_HIGH
+    # armor_rad = 30
+    # armor_internaldamage = 30
   - type: ParasiteResistance
     maxCount: 6
   - type: ItemCamouflage

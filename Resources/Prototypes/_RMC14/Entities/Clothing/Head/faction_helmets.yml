@@ -156,8 +156,8 @@
     bullet: 40
     bio: 30
     explosionArmor: 70
-    # armor_rad = CLOTHING_ARMOR_HIGH
-    # armor_internaldamage = CLOTHING_ARMOR_HIGH
+    # armor_rad = 30
+    # armor_internaldamage = 30
 
 # CBRN
 - type: entity
