@@ -85,6 +85,6 @@
       - RMCJumpsuitVeteranPMCNoWebbingPatch
       - RMCJumpsuitVeteranPMCNoWebbingPatchFolded
     randomOutfits:
-    - [ CMArmorM4PMCLight, ArmorHelmetPMC ]
+    - [ CMArmorM4PMCLight, RMCArmorHelmetPMC ]
     - [ RMCArmorM4PMCBulletProof, RMCArmorHelmetPMCBlack ]
-    - [ WeaponSMGM63, ArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)
+    - [ WeaponSMGM63, RMCArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)

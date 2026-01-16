@@ -32,7 +32,7 @@
   id: RMCGearSurvivorKutjevoTrucker
   equipment:
     eyes: RMCGogglesKutjevo
-    head: ArmorHelmetPMCKutjevo
+    head: RMCArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     gloves: CMHandsLightBrown
     jumpsuit: RMCJumpsuitKutjevoJumper

@@ -38,7 +38,7 @@
     randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
-    - [ ArmorHelmetM10 ]
+    - [ RMCArmorHelmetM10 ]
     - [ RMCHeadBeanie ]
     - [ RMCHeadDurag ]
     randomGearOther:
@@ -62,7 +62,7 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, RMCWeaponRifleM4SPRFilled ]
     primaryWeaponChance: 1
 
 - type: entity

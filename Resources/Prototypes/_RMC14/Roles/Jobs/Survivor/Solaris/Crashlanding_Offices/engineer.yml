@@ -51,7 +51,7 @@
     gloves: RMCHandsVeteranPMC
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetHvHWeYaPMCEngineer
-    head: ArmorHelmetPMCEngineer
+    head: RMCArmorHelmetPMCEngineer
     outerClothing: RMCArmorM4PMCEngineer
     back: RMCBackpackWelderPMC
     belt: RMCM77BeltPMCFilledNearEmpty

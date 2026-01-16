@@ -142,7 +142,7 @@
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]
     - [ RMCBeltMarineUZI, RMCWeaponSMGUZI ]
     - [ CMBeltMarineBuckshot, RMCWeaponShotgunHG3712 ]
-    - [ CMBeltMarineAR10, WeaponRifleAR10 ]
+    - [ CMBeltMarineAR10, RMCWeaponRifleAR10 ]
     primaryWeaponChance: 0.6
 
 - type: entity
