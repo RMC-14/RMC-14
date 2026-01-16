@@ -52,7 +52,7 @@
 - type: accessLevel
   id: CMAccessResearch
   parent: RMCBaseMedicalAccess
-  name: cm-job-name-researcher
+  name: rmc-job-name-researcher
 
 
 # correspondent

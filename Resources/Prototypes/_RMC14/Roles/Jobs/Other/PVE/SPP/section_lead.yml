@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPSectionLeadPVE
   name: rmc-job-name-spp-sectionsergeant
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-sectionsergeant
   playTimeTracker: RMCJobSPPSectionLeadPVE
   ranks:
     RMCRankSPPStarshiySerzhant: []
@@ -38,6 +38,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-sectionsergeant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
