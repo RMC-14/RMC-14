@@ -24,7 +24,7 @@
 - type: startingGear
   id: RMCGearMilitarySurvivor
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlackFilled
     back: CMSatchelMarine
 

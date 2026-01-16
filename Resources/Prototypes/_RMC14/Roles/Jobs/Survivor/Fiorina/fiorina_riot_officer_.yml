@@ -36,7 +36,7 @@
     jumpsuit: RMCJumpsuitUNSecurity
     back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
-    head: ArmorHelmetPMCRiot
+    head: RMCArmorHelmetPMCRiot
     gloves: CMHandsBlackMarine
     shoes: RMCBootsPMCFilled
     pocket2: RMCPouchMagazineLarge

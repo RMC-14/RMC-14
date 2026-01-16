@@ -84,7 +84,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCMedic
     outerClothing: CMArmorM4PMCLight
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMC
+    head: RMCArmorHelmetPMC
     shoes: RMCBootsPMCFilled
     mask: RMCMaskCoifPMC
     eyes: RMCGlassesMedicalHUDGlasses

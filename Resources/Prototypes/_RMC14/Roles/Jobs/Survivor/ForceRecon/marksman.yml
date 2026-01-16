@@ -67,4 +67,4 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ WeaponRifleM4SPRCustom, RMCMagazineRifleM4SPRA19, RMCMagazineRifleM4SPRA19 ]
+    - [ RMCWeaponRifleM4SPRCustom, RMCMagazineRifleM4SPRA19, RMCMagazineRifleM4SPRA19 ]

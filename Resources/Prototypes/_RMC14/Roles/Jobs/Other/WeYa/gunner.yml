@@ -85,7 +85,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCGunner
     outerClothing: CMArmorM4PMCSmartGunHarness
     gloves: RMCHandsVeteran
-    head: ArmorHelmetPMCGunner
+    head: RMCArmorHelmetPMCGunner
     shoes: RMCBootsPMCFilled
     mask: RMCMaskCoifPMC
     suitstorage: RMCSmartGunPMC

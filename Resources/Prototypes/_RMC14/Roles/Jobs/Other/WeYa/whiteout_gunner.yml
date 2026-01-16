@@ -28,7 +28,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCCommando
     outerClothing: CMArmorM4PMCSmartGunHarnessCommando
     gloves: RMCHandsVeteranPMCCommando
-    head: ArmorHelmetPMCCommando
+    head: RMCArmorHelmetPMCCommando
     shoes: RMCBootsPMCCommandoFilled
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC

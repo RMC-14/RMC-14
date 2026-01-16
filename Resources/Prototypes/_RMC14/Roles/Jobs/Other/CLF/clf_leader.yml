@@ -77,7 +77,7 @@
     outerClothing: RMCCoatMilitia
     gloves: CMHandsBlackMarine
     shoes: RMCShoesCombat
-    suitstorage: WeaponRifleMAR40
+    suitstorage: RMCWeaponRifleMAR40
     id: RMCIDCardCLFCellLeader # TODO RMC14
     belt: RMCMAR40BeltFilled
     back: RMCSatchelLightpack

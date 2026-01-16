@@ -35,7 +35,7 @@
   id: RMCGearSurvivorFiorinaDoctor
   equipment:
     jumpsuit: RMCScrubsLightBlue
-    head: ArmorHelmetPMC # TODO RMC14: W-Y armored cap resprite?
+    head: RMCArmorHelmetPMC # TODO RMC14: W-Y armored cap resprite?
     ears: RMCHeadsetDistressWeYa
 
 - type: entity
