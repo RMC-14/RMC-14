@@ -203,7 +203,6 @@
       CMBicaridine: 45
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
-
 - type: entity
   parent: CMAutoInjector
   id: CMInaprovalineAutoInjector

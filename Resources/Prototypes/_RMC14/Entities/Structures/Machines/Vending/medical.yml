@@ -1,4 +1,5 @@
 # MEDICAL
+
 - type: entity
   id: CMMedilinkSupplyPort
   name: medilink supply port
@@ -10,29 +11,10 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
-    state: medlink_green_unclamped
+    state: medlink_green_clamped # TODO RMC14 change states dynamically
     drawdepth: FloorObjects
-    layers:
-    - state: medlink_green_unclamped
-      map: ["MedLinkLayerKey"]
   - type: CMMedicalSupplyLink
-    baseState: medlink_green
-  - type: RMCAnimation
   - type: RMCMesonsNonviewable
-
-- type: entity
-  parent: CMMedilinkSupplyPort
-  id: RMCMedilinkSupplyPortGrey
-  components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
-    state: medlink_unclamped
-    drawdepth: FloorObjects
-    layers:
-    - state: medlink_unclamped
-      map: [ "MedLinkLayerKey" ]
-  - type: CMMedicalSupplyLink
-    baseState: medlink
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -557,4 +539,3 @@
       - id: CMBloodPack
         amount: 5
         name: empty blood pack
-
