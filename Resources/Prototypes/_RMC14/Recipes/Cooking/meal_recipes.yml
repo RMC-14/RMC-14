@@ -173,7 +173,7 @@
 - type: microwaveMealRecipe
   id: RecipeRiceMango
   name: mango recipe
-  result: FoodRiceMango
+  result: RMCFoodRiceMango
   time: 15
   group: Dessert
   reagents:
@@ -187,7 +187,7 @@
 - type: microwaveMealRecipe
   id: RecipeYorkshirePudding
   name: yorkshire pudding recipe
-  result: FoodYorkshirePudding
+  result: RMCFoodYorkshirePudding
   time: 10
   group: Breads
   reagents:
@@ -199,7 +199,7 @@
 - type: microwaveMealRecipe
   id: RecipeSausage
   name: Sausage recipe
-  result: FoodMeatSausage
+  result: RMCFoodMeatSausage
   time: 5
   group: Meat
   solids:
@@ -209,22 +209,22 @@
 - type: microwaveMealRecipe
   id: RecipeHotDog
   name: hot dog recipe
-  result: FoodHotDog
+  result: RMCFoodHotDog
   time: 10
   group: Savory
   solids:
     FoodBreadBun: 1
-    FoodMeatSausage: 1
+    RMCFoodMeatSausage: 1
 
 - type: microwaveMealRecipe
   id: RecipeHotDogCooked
   name: cooked hot dog recipe
-  result: FoodHotDog
+  result: RMCFoodHotDog
   time: 5
   group: Savory
   solids:
     FoodBreadBun: 1
-    FoodMeatSausageCooked: 1
+    RMCFoodMeatSausageCooked: 1
 
 - type: microwaveMealRecipe
   id: RecipeRMCGrilledFish
@@ -276,7 +276,7 @@
 - type: microwaveMealRecipe
   id: RecipeBlackForest
   name: black forest cake recipe
-  result: FoodCakeBlackForest
+  result: RMCFoodCakeBlackForest
   time: 5
   solids:
     FoodCakeChocolate: 1
@@ -296,7 +296,7 @@
     FoodTomato: 1
     FoodOnionRedSlice: 1
     FoodChiliPepper: 1
-    FoodMeatSausage: 1
+    RMCFoodMeatSausage: 1
 
 - type: microwaveMealRecipe
   id: RecipeRMCPizzaCalabresa
@@ -305,7 +305,7 @@
   time: 30
   solids:
     FoodDoughFlat: 1
-    FoodMeatSausage: 2
+    RMCFoodMeatSausage: 2
     FoodCheeseSlice: 1
     FoodTomato: 1
     FoodOnionSlice: 1
@@ -313,7 +313,7 @@
 - type: microwaveMealRecipe
   id: RecipeCakeBlackForest
   name: black forest cake recipe
-  result: FoodCakeBlackForest
+  result: RMCFoodCakeBlackForest
   time: 5
   solids:
     FoodCakeChocolate: 1
@@ -336,7 +336,7 @@
 - type: microwaveMealRecipe
   id: RecipeTapsilog
   name: tapsilog recipe
-  result: FoodTapsilog
+  result: RMCFoodTapsilog
   time: 10
   group: Savory
   reagents:
@@ -350,7 +350,7 @@
 - type: microwaveMealRecipe
   id: RecipeTocilog
   name: tocilog recipe
-  result: FoodTocilog
+  result: RMCFoodTocilog
   time: 10
   group: Savory
   reagents:
@@ -365,7 +365,7 @@
 - type: microwaveMealRecipe
   id: RecipeChicksilog
   name: Chicksilog recipe
-  result: FoodChicksilog
+  result: RMCFoodChicksilog
   time: 10
   group: Savory
   reagents:
@@ -379,7 +379,7 @@
 - type: microwaveMealRecipe
   id: RecipeCarpsilog
   name: Carpsilog recipe
-  result: FoodCarpsilog
+  result: RMCFoodCarpsilog
   time: 10
   group: Savory
   reagents:
@@ -394,18 +394,18 @@
 - type: microwaveMealRecipe
   id: RecipeBangersMash
   name: bangers and mash recipe
-  result: FoodBangersMash
+  result: RMCFoodBangersMash
   time: 10
   group: Savory
   solids:
     FoodOnionSlice: 1
-    FoodMeatSausage: 1
+    RMCFoodMeatSausage: 1
     FoodPotato: 1
 
 - type: microwaveMealRecipe
   id: RecipePieMash
   name: pie and mash recipe
-  result: FoodPieMash
+  result: RMCFoodPieMash
   time: 10
   group: Savory
   solids:
@@ -418,7 +418,7 @@
 - type: microwaveMealRecipe
   id: RecipeBanhMi
   name: banh mi recipe
-  result: FoodBanhMi
+  result: RMCFoodBanhMi
   time: 15
   group: Savory
   reagents:
@@ -432,7 +432,7 @@
 - type: microwaveMealRecipe
   id: RecipeChickenParm
   name: chicken parm recipe
-  result: FoodChickenParmHero
+  result: RMCFoodChickenParmHero
   time: 15
   group: Savory
   solids:
@@ -444,7 +444,7 @@
 - type: microwaveMealRecipe
   id: RecipeMeatballSub
   name: meatball sub recipe
-  result: FoodMeatballSub
+  result: RMCFoodMeatballSub
   time: 15
   group: Savory
   solids:
@@ -456,7 +456,7 @@
 - type: microwaveMealRecipe
   id: RecipeGabagool
   name: Gabagool sandwich recipe
-  result: FoodGabagool
+  result: RMCFoodGabagool
   time: 15
   group: Savory
   solids:
@@ -470,7 +470,7 @@
 - type: microwaveMealRecipe
   id: RecipeCheesesteak
   name: cheesesteak recipe
-  result: FoodCheesesteak
+  result: RMCFoodCheesesteak
   time: 15
   group: Savory
   solids:
