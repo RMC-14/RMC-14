@@ -15,14 +15,14 @@
     jobs:
     - CMNurse
     - CMDoctor
-    - CMFieldDoctor
+    - RMCFieldDoctor
     - CMResearcher
     - CMCMO
     sections:
     - name: Medical Set (Mandatory)
       jobs:
       - CMDoctor
-      - CMFieldDoctor
+      - RMCFieldDoctor
       - CMResearcher
       - CMCMO
       takeAll: CMMedicalSet
