@@ -5,8 +5,17 @@
     MinSize="600 720">
     <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
         <BoxContainer Orientation="Vertical">
-            <RichTextLabel Text="{Loc rmc-chem-master-status}" />
+            <BoxContainer Orientation="Horizontal">
+                <RichTextLabel Text="{Loc rmc-chem-master-status}" />
+                <Control HorizontalExpand="True" />
+                <Button Name="SelectAllButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc rmc-chem-master-select-all}" Visible="False" Margin="0 0 5 0" />
+                <Button Name="PresetsButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc rmc-chem-master-presets}" />
+            </BoxContainer>
             <ui:BlueHorizontalSeparator />
+            <BoxContainer Name="QuickAccessContainer" Access="Public"
+                          Orientation="Horizontal" Margin="0 5 0 5" />
             <BoxContainer Orientation="Horizontal">
                 <RichTextLabel Text="{Loc rmc-chem-master-beaker}" Margin="0 0 5 0" />
                 <RichTextLabel Name="BeakerLabel" Access="Public"

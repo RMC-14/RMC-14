@@ -499,7 +499,7 @@
     - Trash
   - type: PhysicalComposition
     materialComposition:
-      Steel: 100
+      RMCPlastic: 5
   - type: SpaceGarbage
 
 - type: entity
