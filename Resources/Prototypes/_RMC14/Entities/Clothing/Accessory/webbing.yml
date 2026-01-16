@@ -748,7 +748,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMREWeYa
+    - id: RMCMREWeYaPMC
     - id: RMCRangefinder
     - id: RMCGrenadeBlastM12
     - id: RMCTelescopicBaton
@@ -761,8 +761,8 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCMREWeYa
-    - id: RMCMREWeYa
+    - id: RMCMREWeYaPMC
+    - id: RMCMREWeYaPMC
     - id: RMCTacticalPrybar
     - id: RMCGrenadeBlastM12
     - id: RMCExplosivePlastic
@@ -776,7 +776,7 @@
     contents:
     # - id: CMSplint5
     - id: CMFireExtinguisherPortable
-    - id: RMCMREWeYa
+    - id: RMCMREWeYaPMC
     - id: RMCGrenadeBlastM12
     - id: RMCPowerCellSmartgun
 
