@@ -8,7 +8,7 @@
 
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
-  id: JumpsuitMarine
+  id: RMCJumpsuitMarine
   name: UNMC uniform
   description: Standard-issue Marine uniform. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
   components:
@@ -24,7 +24,7 @@
       Urban: _RMC14/Objects/Clothing/Uniforms/Marine/standard/urban.rsi
 
 - type: entity
-  parent: [JumpsuitMarine, RMCJumpsuitMarinePatchBase]
+  parent: [RMCJumpsuitMarine, RMCJumpsuitMarinePatchBase]
   id: RMCJumpsuitMarinePatch
   suffix: Patch
 
@@ -39,7 +39,7 @@
 
 # ComTech
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitMarineEngineer
   name: UNMC ComTech uniform
   description: Standard-issue Marine combat technician fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -61,7 +61,7 @@
 
 # Hospital Corpsman
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitMarineMedic
   name: UNMC corpsman uniform
   description: Standard-issue Marine hospital corpsman fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -83,7 +83,7 @@
 
 # RTO / FTL
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitMarineRTO
   name: UNMC radio telephone operator uniform
   description: Standard-issue RTO fatigues. They have shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -105,7 +105,7 @@
 
 # Sniper
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitMarineSniper
   name: UNMC sniper uniform
 
@@ -137,7 +137,7 @@
 # Sun Riders
 
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: RMCJumpsuitSunRiders
   components:
   - type: UniformAccessoryHolder

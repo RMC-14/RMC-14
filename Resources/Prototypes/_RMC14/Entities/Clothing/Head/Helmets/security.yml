@@ -1,7 +1,7 @@
 # riot
 - type: entity
   parent: [RMCHelmetBase, RMCFoldableHelmetBase]
-  id: ArmorHelmetRiot
+  id: RMCArmorHelmetRiot
   name: riot helmet
   description: It's a helmet specifically designed to protect against close range attacks. It covers your ears.
   components:
@@ -16,8 +16,8 @@
   - type: CMHardArmor
 
 - type: entity
-  parent: ArmorHelmetRiot
-  id: ArmorHelmetRiotOld
+  parent: RMCArmorHelmetRiot
+  id: RMCArmorHelmetRiotOld
   description: BA scarred riot helmet covered in cobwebs. It still protects your ears.
   components:
   - type: Sprite

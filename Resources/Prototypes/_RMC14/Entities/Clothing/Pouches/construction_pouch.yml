@@ -32,7 +32,7 @@
     contents:
     - id: CMSheetPlasteel30
     - id: CMSheetMetal50
-    - id: BarbedWire15
+    - id: RMCBarbedWire15
 
 - type: entity
   parent: RMCPouchConstruction

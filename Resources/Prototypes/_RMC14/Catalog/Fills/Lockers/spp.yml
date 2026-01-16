@@ -21,7 +21,7 @@
     children:
     - id: RMCWeaponLMGQYJ72
     - id: RMCArmorSPPHeavy
-    - id: ArmorHelmetSPPHeavy
+    - id: RMCArmorHelmetSPPHeavy
     - id: RMCMagazineLMGQYJ72
     - id: RMCMagazineLMGQYJ72
     - id: RMCMagazineLMGQYJ72
