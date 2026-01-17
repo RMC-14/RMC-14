@@ -154,7 +154,7 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
   - type: ItemCamouflage
-    camouflageVariations: {}
+    camouflageVariations: { }
   - type: CMArmor
     melee: 40
     bullet: 40
