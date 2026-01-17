@@ -305,7 +305,7 @@
     max: 300
   - type: XenoScatteredSpit
     plasmaCost: 0
-    projectileId: XenoHedgehogSpikeProjectileSpread
+    projectileId: RMCXenoHedgehogSpikeProjectileSpread
     sound:
       path: /Audio/_RMC14/Xeno/spike_spray.ogg
     speed: 20

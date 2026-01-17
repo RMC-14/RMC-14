@@ -94,7 +94,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCLeader
     outerClothing: CMArmorM4PMCLeader
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCOfficer
+    head: RMCArmorHelmetPMCOfficer
     shoes: RMCBootsPMCFilled
     mask: RMCMaskCoifPMC
     eyes: RMCGlassesMedicalHUDGlasses

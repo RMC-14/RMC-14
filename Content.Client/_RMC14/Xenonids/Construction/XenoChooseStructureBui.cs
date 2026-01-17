@@ -84,9 +84,9 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
     {
         return originalId.Id switch
         {
-            "WallXenoResin" => "WallXenoResinQueen",
-            "WallXenoMembrane" => "WallXenoMembraneQueen",
-            "DoorXenoResin" => "DoorXenoResinQueen",
+            "RMCWallXenoResin" => "RMCWallXenoResinQueen",
+            "RMCWallXenoMembrane" => "RMCWallXenoMembraneQueen",
+            "RMCDoorXenoResin" => "RMCDoorXenoResinQueen",
             _ => originalId
         };
     }

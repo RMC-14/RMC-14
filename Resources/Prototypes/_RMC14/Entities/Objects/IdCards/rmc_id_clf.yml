@@ -4,7 +4,7 @@
   abstract: true
   components:
   - type: ItemIFF
-    faction: FactionSurvivor
+    faction: RMCFactionSurvivor
 
 - type: entity
   parent: RMCIDCardCLFBase

@@ -1,6 +1,6 @@
 - type: entity
-  id: HiveClusterXeno
-  parent: BaseHiveStructure
+  id: RMCHiveClusterXeno
+  parent: RMCBaseHiveStructure
   name: hive cluster
   description: A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
   components:
@@ -24,7 +24,7 @@
         Slash: 300
   - type: XenoWeeds
     range: 5
-    spawns: XenoHiveWeedsCluster
+    spawns: RMCXenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
     spreadsOnSemiWeedable: true
@@ -33,7 +33,7 @@
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
-    id: HiveClusterXeno
+    id: RMCHiveClusterXeno
   - type: RepairableXenoStructure
     plasmaCost: 300
     repairLength: 4
@@ -49,8 +49,8 @@
 
 
 - type: entity
-  id: HiveClusterXenoConstructionNode
-  parent: BaseHiveStructureNode
+  id: RMCHiveClusterXenoConstructionNode
+  parent: RMCBaseHiveStructureNode
   name: hive cluster
   description: A large clump of gooey mass. Looks like a marker for something.
   components:
@@ -73,11 +73,11 @@
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 300
-    spawn: HiveClusterXeno
+    spawn: RMCHiveClusterXeno
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
-    id: HiveClusterXeno
+    id: RMCHiveClusterXeno
   - type: WarpPoint
     location: hive cluster
   - type: RMCAlternateSprite

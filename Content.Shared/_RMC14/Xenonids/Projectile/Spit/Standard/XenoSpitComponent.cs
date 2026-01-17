@@ -17,7 +17,7 @@ public sealed partial class XenoSpitComponent : Component
     public float Speed = 30;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId ProjectileId = "XenoSpitProjectile";
+    public EntProtoId ProjectileId = "RMCXenoSpitProjectile";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier Sound = new SoundCollectionSpecifier("XenoSpitAcid", AudioParams.Default.WithVolume(-10f));

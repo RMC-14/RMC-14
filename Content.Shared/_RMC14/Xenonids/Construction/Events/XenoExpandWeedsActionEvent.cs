@@ -7,10 +7,10 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 public sealed partial class XenoExpandWeedsActionEvent : WorldTargetActionEvent
 {
     [DataField]
-    public EntProtoId Expand = "XenoWeeds";
+    public EntProtoId Expand = "RMCXenoWeeds";
 
     [DataField]
-    public EntProtoId Source = "XenoWeedsSource";
+    public EntProtoId Source = "RMCXenoWeedsSource";
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 PlasmaCost = 50;

@@ -23,7 +23,7 @@
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
     canMicrowave: false
   - type: ItemIFF
-    faction: FactionMarine
+    faction: RMCFactionMarine
   - type: TakeableTags
   - type: Appearance
   - type: Foldable
@@ -174,7 +174,7 @@
     tags:
     - DoorBumpOpener
   - type: ItemIFF
-    faction: FactionMarine
+    faction: RMCFactionMarine
   - type: Corrodible
     isCorrodible: false
 
@@ -224,7 +224,7 @@
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
 
 - type: entity
-  id: FactionMarine
+  id: RMCFactionMarine
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -248,7 +248,7 @@
     - WEYA
 
 - type: entity
-  id: FactionSurvivor
+  id: RMCFactionSurvivor
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -257,7 +257,7 @@
     - Colony
 
 - type: entity
-  id: FactionTSE
+  id: RMCFactionTSE
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction

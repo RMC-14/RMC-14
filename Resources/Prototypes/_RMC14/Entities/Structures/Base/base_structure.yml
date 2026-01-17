@@ -103,7 +103,7 @@
         - WallLayer
         density: 1000
   - type: XenoWeedable
-    spawn: XenoWeedsWall
+    spawn: RMCXenoWeedsWall
   - type: XenoConstructionSupport
   - type: RMCDropshipBlocked
   - type: MinimapColor

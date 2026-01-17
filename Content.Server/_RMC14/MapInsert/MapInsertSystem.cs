@@ -102,10 +102,48 @@ public sealed class MapInsertSystem : EntitySystem
         coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
 
-        // _mergeOfset is needed to make sure the grid isn't overlapping the destination, otherwise merge causes issues
-        if (!_mapLoader.TryLoadGrid(xform.MapID, spawn, out var grid, offset: coordinatesi + new Vector2(_mergeOffset)))
-            return;
-        var insertGrid = grid.Value;
+        // _mergeOfset is needed to make sure the grid isn't overlapping the
+        // destination, otherwise merge causes issues.
+        Entity<MapGridComponent> insertGrid;
+        if (_mapLoader.TryLoadGrid(
+            xform.MapID,
+            spawn,
+            out var grid,
+            offset: coordinatesi + new Vector2(_mergeOffset)))
+        {
+            insertGrid = grid.Value;
+        }
+        else
+        {
+            if (!_mapLoader.TryMergeMap(
+                xform.MapID,
+                spawn,
+                out var mergedGrids,
+                offset: coordinatesi + new Vector2(_mergeOffset)))
+            {
+                return;
+            }
+
+            if (mergedGrids == null || mergedGrids.Count != 1)
+            {
+                if (mergedGrids != null)
+                {
+                    foreach (var mergedGrid in mergedGrids)
+                    {
+                        QueueDel(mergedGrid);
+                    }
+                }
+
+                return;
+            }
+
+            insertGrid = default;
+            foreach (var mergedGrid in mergedGrids)
+            {
+                insertGrid = mergedGrid;
+                break;
+            }
+        }
 
         //Replace areas
         if (ent.Comp.ReplaceAreas)

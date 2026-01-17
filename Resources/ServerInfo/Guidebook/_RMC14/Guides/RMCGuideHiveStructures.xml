@@ -2,17 +2,17 @@
   #Hive Structures
   Xenonids thrive by constructing a range of specialized structures, these have to be made by a member of the drone caste line using the Order Construction ability on top of hive weeds then filled with plasma.
   <Box>
-    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
+    <GuideEntityEmbed Entity="RMCXenoHiveWeeds"/>
     <GuideEntityEmbed Entity="RMCGuidebookActionXenoOrderConstruction"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="HiveEggMorpherXeno"/>
-    <GuideEntityEmbed Entity="HiveCoreXeno"/>
-    <GuideEntityEmbed Entity="HivePylonXeno"/>
+    <GuideEntityEmbed Entity="RMCHiveEggMorpherXeno"/>
+    <GuideEntityEmbed Entity="RMCHiveCoreXeno"/>
+    <GuideEntityEmbed Entity="RMCHivePylonXeno"/>
   </Box>
   <Box>
-    <GuideEntityEmbed Entity="HiveClusterXeno"/>
-    <GuideEntityEmbed Entity="HiveRecoveryNodeXeno"/>
+    <GuideEntityEmbed Entity="RMCHiveClusterXeno"/>
+    <GuideEntityEmbed Entity="RMCHiveRecoveryNodeXeno"/>
   </Box>
   ##Each have limits!
   - 1 Hive Core

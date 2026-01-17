@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseXenoStructure
-  id: DoorXenoResin
+  id: RMCDoorXenoResin
   name: resin door
   description: That's a resin door.
   placement:
@@ -78,7 +78,7 @@
     plasma: 120
     scalingCost: true
   - type: XenoStructureUpgradeable
-    to: DoorXenoResinThick
+    to: RMCDoorXenoResinThick
     cost: 25
   - type: MeleeReceivedMultiplier
     xenoDamage:
@@ -100,8 +100,8 @@
   - type: XenoRecentlyBuiltPreventCollisions
 
 - type: entity
-  parent: DoorXenoResin
-  id: DoorXenoResinThick
+  parent: RMCDoorXenoResin
+  id: RMCDoorXenoResinThick
   name: thick resin door
   description: A thick resin door, which is more durable.
   components:

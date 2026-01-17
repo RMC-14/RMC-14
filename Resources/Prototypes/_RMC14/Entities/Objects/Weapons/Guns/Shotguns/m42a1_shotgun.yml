@@ -1,7 +1,7 @@
 - type: entity
-  parent: WeaponShotgunM42A2
+  parent: RMCWeaponShotgunM42A2
   name: M42A1 pump shotgun
-  id: WeaponShotgunM42A1
+  id: RMCWeaponShotgunM42A1
   description: An AEGIS Armaments classic design, the M42A1 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
   - type: Sprite

@@ -40,7 +40,7 @@
       #   amount: 8
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCVendorLifeboatWall
   name: lifeboat wall cabinet
   description: A wall-mounted emergency cabinet containing survival supplies.

@@ -159,21 +159,21 @@
         shader: unshaded
 
 - type: entity
-  parent: WallXenoResinThick
-  id: WallXenoResinQueen
+  parent: RMCWallXenoResinThick
+  id: RMCWallXenoResinQueen
   name: queen resin wall
   description: A heavily reinforced wall of resin, built with the queen's enhanced abilities.
   components:
   - type: Sprite
 
 - type: entity
-  parent: WallXenoMembraneThick
-  id: WallXenoMembraneQueen
+  parent: RMCWallXenoMembraneThick
+  id: RMCWallXenoMembraneQueen
   name: queen membrane wall
   description: A heavily reinforced membrane wall, built with the queen's enhanced abilities.
 
 - type: entity
-  parent: DoorXenoResinThick
-  id: DoorXenoResinQueen
+  parent: RMCDoorXenoResinThick
+  id: RMCDoorXenoResinQueen
   name: queen resin door
   description: A heavily reinforced resin door, built with the queen's enhanced abilities.

@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCAutomatedPersonalUniformCloset
   name: automated personal uniform closet
   description: An automated closet hooked up to a colossal storage of standard-issue dress uniform variants.

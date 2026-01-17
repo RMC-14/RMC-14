@@ -90,7 +90,7 @@
   - type: RMCXenoDamageVisuals
     prefix: praetorian
   - type: XenoSpit
-    projectileId: XenoSpitProjectilePraetorian
+    projectileId: RMCXenoSpitProjectilePraetorian
   - type: XenoSprayAcid
     barricadeDamage:
       types:

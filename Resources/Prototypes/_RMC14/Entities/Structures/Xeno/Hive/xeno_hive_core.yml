@@ -1,6 +1,6 @@
 - type: entity
-  parent: BaseHiveStructure
-  id: HiveCoreXeno
+  parent: RMCBaseHiveStructure
+  id: RMCHiveCoreXeno
   name: hive core
   description: A giant pulsating mound of mass. It looks very much alive.
   components:
@@ -54,7 +54,7 @@
   - type: XenoWeedsSpreading
   - type: XenoWeeds
     range: 7
-    spawns: XenoHiveWeedsCore
+    spawns: RMCXenoHiveWeedsCore
     level: 3
     blockOtherWeeds: true
     spreadsOnSemiWeedable: true
@@ -68,7 +68,7 @@
     deleteOnSpawn: false
     prototype: CMXenoLesserDrone
   - type: HiveConstructionLimited
-    id: HiveCoreXeno
+    id: RMCHiveCoreXeno
   - type: RoofingEntity
     range: 11.848 #rounded to 3 decimals
   - type: EvolutionBonus
@@ -88,8 +88,8 @@
     xenoVisible: true
 
 - type: entity
-  id: HiveCoreXenoConstructionNode
-  parent: BaseHiveStructureNode
+  id: RMCHiveCoreXenoConstructionNode
+  parent: RMCBaseHiveStructureNode
   name: hive core
   description: A strange wriggling lump. Looks like a marker for something.
   suffix: Construction
@@ -113,9 +113,9 @@
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 1000
-    spawn: HiveCoreXeno
+    spawn: RMCHiveCoreXeno
   - type: HiveConstructionLimited
-    id: HiveCoreXeno
+    id: RMCHiveCoreXeno
   - type: WarpPoint
     location: hive core
   - type: RMCAlternateSprite
@@ -125,8 +125,8 @@
     xenoVisible: true
 
 - type: entity
-  parent: BaseHiveStructure
-  id: HivePylonXeno
+  parent: RMCBaseHiveStructure
+  id: RMCHivePylonXeno
   name: hive pylon
   description: A towering spike of resin. Its base pulsates with large tendrils.
   components:
@@ -159,7 +159,7 @@
     canOrbitalBombard: true
   - type: XenoWeeds
     range: 5
-    spawns: XenoHiveWeedsCluster
+    spawns: RMCXenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
   - type: GhostRole
@@ -172,7 +172,7 @@
     deleteOnSpawn: false
     prototype: CMXenoLesserDrone
   - type: HiveConstructionLimited
-    id: HivePylonXeno
+    id: RMCHivePylonXeno
   - type: WarpPoint
     location: hive pylon
   - type: RMCAlternateSprite

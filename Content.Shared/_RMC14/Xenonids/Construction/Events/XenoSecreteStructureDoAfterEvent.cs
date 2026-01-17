@@ -12,7 +12,7 @@ public sealed partial class XenoSecreteStructureDoAfterEvent : SimpleDoAfterEven
     public NetCoordinates Coordinates;
 
     [DataField]
-    public EntProtoId StructureId = "WallXenoResin";
+    public EntProtoId StructureId = "RMCWallXenoResin";
 
     [DataField]
     public NetEntity? Effect;

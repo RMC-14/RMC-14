@@ -7,7 +7,7 @@
 
   - You've just woken up, so you're hungry. Head to the food vendor, dispense two meals from the machine and get them down your neck. If you have complaints about the food, you can address them to someone who gives a damn!
   <Box>
-    <GuideEntityEmbed Entity="ColMarTechFood"/>
+    <GuideEntityEmbed Entity="RMCColMarTechFood"/>
     <GuideEntityEmbed Entity="CMMarinePreparedMealChicken"/>
   </Box>
    - You can't bring those trays with you, so leave them on a nearby table or throw them into the disposals. God help you if I catch you throwing them anywhere else!
@@ -16,7 +16,7 @@
   </Box>
   - Haul your ass to the automated equipment vendor and get your uniform on. Click on the vending machine, and then click the "Standard Marine Apparel".
   - This will give you your uniform, including undersuit, boots, gloves, helmet, and headset - and you will wear them at ALL TIMES.
-  <GuideEntityEmbed Entity="ColMarTechEquipment"/>
+  <GuideEntityEmbed Entity="RMCColMarTechEquipment"/>
 
   - Take note of the colors on your helmet, they denote your squad:\n
   [color=#E61919]Red for Alpha[/color], [color=#FFC32D]Yellow for Bravo[/color], [color=#C864C8]Purple for Charlie[/color], and [color=#4148C8]Blue for Delta[/color].
@@ -33,7 +33,7 @@
   - Now you're ready for prom but you ain't leaving this house without a chaperone!
   - Head to the Automated Weapon rack and select your weapon. As before, recommended items are colored [color=green]Green[/color].
   <Box>
-  <GuideEntityEmbed Entity="ColMarTechGuns"/>
+  <GuideEntityEmbed Entity="RMCColMarTechGuns"/>
   </Box>
    - Meet your new best friend, the [bold]M54C Assault Rifle MK2[/bold]. Take some extra magazines and put them in your belt or pouches, and don't forget to load the gun.
    - Now you might be tempted to take your new buddy for a spin and get to know eachother a little better. Head to the firing range if you want to practice your aim.

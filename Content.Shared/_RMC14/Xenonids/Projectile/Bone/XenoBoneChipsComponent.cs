@@ -12,5 +12,5 @@ public sealed partial class XenoBoneChipsComponent : Component
     public float Speed = 20;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId ProjectileId = "XenoBoneChipsProjectile";
+    public EntProtoId ProjectileId = "RMCXenoBoneChipsProjectile";
 }

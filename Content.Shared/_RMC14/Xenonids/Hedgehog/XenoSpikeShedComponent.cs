@@ -34,7 +34,7 @@ public sealed partial class XenoSpikeShedComponent : Component
     public float ShedRadius = 4f;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoHedgehogSpikeProjectileSpread";
+    public EntProtoId Projectile = "RMCXenoHedgehogSpikeProjectileSpread";
 
     [DataField, AutoNetworkedField]
     public int ProjectileCount = 40;

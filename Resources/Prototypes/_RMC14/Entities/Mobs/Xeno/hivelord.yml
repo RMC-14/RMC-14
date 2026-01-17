@@ -123,16 +123,16 @@
   - type: XenoConstruction
     buildDelay: 1
     canBuild:
-    - WallXenoResinThick
-    - WallXenoMembraneThick
-    - DoorXenoResinThick
-    - XenoStickyResin
-    - XenoFastResin
+    - RMCWallXenoResinThick
+    - RMCWallXenoMembraneThick
+    - RMCDoorXenoResinThick
+    - RMCXenoStickyResin
+    - RMCXenoFastResin
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
     canUpgrade: true
   - type: XenoPlasma
     plasma: 1000
@@ -175,17 +175,17 @@
   - type: XenoConstruction
     buildDelay: 1
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
-    - XenoStickyResin
-    - XenoFastResin
-    - XenoWeedsSource
+    - RMCWallXenoResin
+    - RMCWallXenoMembrane
+    - RMCDoorXenoResin
+    - RMCXenoStickyResin
+    - RMCXenoFastResin
+    - RMCXenoWeedsSource
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
   - type: XenoPlasma
     plasma: 800
     maxPlasma: 800

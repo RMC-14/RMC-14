@@ -1,7 +1,7 @@
 - type: entity
   parent: WeaponRifleM4SPR
   name: M4SPR custom battle rifle
-  id: WeaponRifleM4SPRCustom
+  id: RMCWeaponRifleM4SPRCustom
   description: An improvement over the already great M4SPR. Able to take A19 rounds, as well as having better control and accuracy at the cost of being harder to use. Can take traditional M4SPR mags, at lower damage.
   components:
   - type: GuideHelp
@@ -208,7 +208,7 @@
     - Cartridge
     - RMCCartridgeRifleM4SPRA19
   - type: CartridgeAmmo
-    proto: BulletRifleM4SPRA19
+    proto: RMCBulletRifleM4SPRA19
 
 - type: entity
   parent: RMCCartridgeRifleM4SPRA19
@@ -221,7 +221,7 @@
     - Cartridge
     - RMCCartridgeRifleM4SPRA19Impact
   - type: CartridgeAmmo
-    proto: BulletRifleM4SPRA19Impact
+    proto: RMCBulletRifleM4SPRA19Impact
 
 - type: entity
   parent: RMCCartridgeRifleM4SPRA19
@@ -234,11 +234,11 @@
     - Cartridge
     - RMCCartridgeRifleM4SPRA19Incendiary
   - type: CartridgeAmmo
-    proto: BulletRifleM4SPRA19Incendiary
+    proto: RMCBulletRifleM4SPRA19Incendiary
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleM4SPRA19
+  id: RMCBulletRifleM4SPRA19
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -263,7 +263,7 @@
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleM4SPRA19Impact
+  id: RMCBulletRifleM4SPRA19Impact
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -297,7 +297,7 @@
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleM4SPRA19Incendiary
+  id: RMCBulletRifleM4SPRA19Incendiary
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

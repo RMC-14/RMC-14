@@ -1,6 +1,6 @@
 - type: entity
-  id: HiveRecoveryNodeXeno
-  parent: BaseHiveStructure
+  id: RMCHiveRecoveryNodeXeno
+  parent: RMCBaseHiveStructure
   name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum.
   components:
@@ -22,7 +22,7 @@
   - type: RecoveryNode
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
-    id: HiveRecoveryNodeXeno
+    id: RMCHiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: DoAfter
@@ -34,8 +34,8 @@
       state: recovery_node
 
 - type: entity
-  id: HiveRecoveryNodeXenoConstructionNode
-  parent: BaseHiveStructureNode
+  id: RMCHiveRecoveryNodeXenoConstructionNode
+  parent: RMCBaseHiveStructureNode
   name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   suffix: Construction
@@ -59,10 +59,10 @@
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 450
-    spawn: HiveRecoveryNodeXeno
+    spawn: RMCHiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
-    id: HiveRecoveryNodeXeno
+    id: RMCHiveRecoveryNodeXeno
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: WarpPoint

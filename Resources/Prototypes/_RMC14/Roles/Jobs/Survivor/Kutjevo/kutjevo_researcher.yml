@@ -13,7 +13,7 @@
   parent: RMCGearSurvivorScientist
   id: RMCGearSurvivorKutjevoResearcher
   equipment:
-    head: ArmorHelmetPMCKutjevo
+    head: RMCArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoDrysuit
     outerClothing: RMCLabcoat

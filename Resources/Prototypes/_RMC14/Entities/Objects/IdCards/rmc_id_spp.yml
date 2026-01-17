@@ -12,7 +12,7 @@
     - SPPCCT
 
 - type: entity
-  id: FactionHalcyon
+  id: RMCFactionHalcyon
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -40,7 +40,7 @@
   - type: PresetIdCard
     job: CMSurvivor
   - type: ItemIFF
-    faction: FactionSurvivor
+    faction: RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -50,7 +50,7 @@
   suffix: Halcyon
   components:
   - type: ItemIFF
-    faction: FactionHalcyon
+    faction: RMCFactionHalcyon
   - type: Access
     groups:
     - Colony

@@ -36,7 +36,7 @@
 - type: startingGear
   id: RMCGearRecruit
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlack
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman

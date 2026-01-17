@@ -1,5 +1,5 @@
 - type: entity
-  id: XenoResinHole
+  id: RMCXenoResinHole
   name: resin trap
   description: It looks like a hidey hole.
   placement:

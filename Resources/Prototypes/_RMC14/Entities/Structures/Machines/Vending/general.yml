@@ -1,6 +1,6 @@
 # GENERAL
 - type: entity
-  parent: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBaseAnchorable
   id: CMVendorCassettes
   name: Rec-Vend
   description: Contains We-Ya approved recreational items, like Cassette Players and Cards.

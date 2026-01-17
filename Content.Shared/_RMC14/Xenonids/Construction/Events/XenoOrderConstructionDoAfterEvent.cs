@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 public sealed partial class XenoOrderConstructionDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]
-    public EntProtoId StructureId = "HiveCoreXeno";
+    public EntProtoId StructureId = "RMCHiveCoreXeno";
 
     [DataField]
     public NetCoordinates Coordinates;

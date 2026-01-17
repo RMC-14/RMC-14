@@ -85,7 +85,7 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetDistressPMCDirector
-    head: ArmorHelmetPMCDirector
+    head: RMCArmorHelmetPMCDirector
     jumpsuit: RMCJumpsuitVeteranPMCDirector
     outerClothing: RMCArmorPMCDirector
     belt: RMCMatebaBeltLuxuriousFilled

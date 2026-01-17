@@ -110,7 +110,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: BonsaiTree01
+  id: RMCBonsaiTree01
   description: A small, leafy bush.
   name: Bush
   components:
@@ -120,7 +120,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: BonsaiTree02
+  id: RMCBonsaiTree02
   description: A small, leafy bush.
   name: Bush
   components:
@@ -130,7 +130,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: BonsaiTree03
+  id: RMCBonsaiTree03
   description: A small, leafy bush.
   name: Bush
   components:
@@ -140,7 +140,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: BonsaiTree04
+  id: RMCBonsaiTree04
   description: A small, leafy bush.
   name: Bush
   components:
@@ -150,7 +150,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: StalkyBush01
+  id: RMCStalkyBush01
   name: stalkybush
   components:
   - type: Sprite
@@ -159,7 +159,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: StalkyBush02
+  id: RMCStalkyBush02
   name: stalkybush
   components:
   - type: Sprite
@@ -168,7 +168,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: StalkyBush03
+  id: RMCStalkyBush03
   name: stalkybush
   components:
   - type: Sprite
@@ -177,7 +177,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: FernyBush01
+  id: RMCFernyBush01
   name: fernybush
   components:
   - type: Sprite
@@ -186,7 +186,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: FernyBush02
+  id: RMCFernyBush02
   name: fernybush
   components:
   - type: Sprite
@@ -195,7 +195,7 @@
 
 - type: entity
   parent: RMCBasePlant
-  id: FernyBush03
+  id: RMCFernyBush03
   name: fernybush
   components:
   - type: Sprite

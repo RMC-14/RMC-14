@@ -1,8 +1,8 @@
 # COMBAT TECHNICIAN
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSCTGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSCTGear
   name: ColMarTech squad comtech gear rack
   description: An automated gear rack for combat technicians.
   components:
@@ -202,8 +202,8 @@
         points: 3
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSCTEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSCTEquipment
   name: ColMarTech squad comtech equipment rack
   description: An automated rack hooked up to a colossal storage of combat technician standard-issue equipment.
   components:
@@ -328,8 +328,8 @@
       - id: RMCMaskRebreather
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSCTTools
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSCTTools
   name: ColMarTech squad comTech tools vendor
   description: A vending machine that stores various extra tools that are useful on the field.
   components:

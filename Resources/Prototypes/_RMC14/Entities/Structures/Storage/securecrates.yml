@@ -103,19 +103,19 @@
     - CMWeaponPistolM1984: CMMagazinePistolM1984
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
-    - WeaponShotgunCustomBuilt: CMShellShotgunBuckshot
+    - RMCWeaponShotgunCustomBuilt: CMShellShotgunBuckshot
     - RMCWeaponShotgunHG3712: CMShellShotgunBuckshot
     - RMCWeaponSMGMP27: RMCMagazineSMGMP27
     - RMCWeaponSMGType64: RMCMagazineSMGType64
-    - WeaponSMGMAC15: RMCMagazineSMGMAC15
+    - RMCWeaponSMGMAC15: RMCMagazineSMGMAC15
     - RMCWeaponSMGUZI: RMCMagazineSMGUZI
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
     - RMCWeaponRifleL42A: RMCMagazineRifleL42A
     - RMCWeaponSMGType19: RMCMagazineSMGType19
     - RMCWeaponRifleABR40: RMCMagazineRifleABR40
     - WeaponSMGMP5: CMMagazineSMGMP5
-    - WeaponRifleM16: RMCMagazineRifleM16
-    - WeaponRifleAR10: RMCMagazineRifleAR10
+    - RMCWeaponRifleM16: RMCMagazineRifleM16
+    - RMCWeaponRifleAR10: RMCMagazineRifleAR10
     - RMCWeaponRifleType71: RMCMagazineRifleType71
     - RMCWeaponSMGFP9000: RMCMagazineSMGFP9000
 
@@ -141,7 +141,7 @@
     - RMCWeaponPistolKT42: RMCMagazinePistolKT42
     - CMWeaponPistolM1984: CMMagazinePistolM1984
     - RMCWeaponRifleMAR30: RMCMagazineRifleMAR40
-    - WeaponRifleMAR40: RMCMagazineRifleMAR40
+    - RMCWeaponRifleMAR40: RMCMagazineRifleMAR40
     - RMCType88SniperRifle: RMCMagazineSniperType88
     - RMCWeaponSMGType19: RMCMagazineSMGType19
 
@@ -164,7 +164,7 @@
     prototypes:
     - CMWeaponPistolM1984: CMMagazinePistolM1984
     - RMCWeaponRifleM54C: CMMagazineRifleM54C
-    - WeaponShotgunM42A2: CMShellShotgunSlugs
+    - RMCWeaponShotgunM42A2: CMShellShotgunSlugs
     - WeaponSMGM63: CMMagazineSMGM63
 
 - type: entity

@@ -19,13 +19,13 @@ public sealed partial class XenoBombardComponent : Component
     public TimeSpan Delay = TimeSpan.FromSeconds(4.5);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId Projectile = "XenoBombardAcidProjectile";
+    public EntProtoId Projectile = "RMCXenoBombardAcidProjectile";
 
     [DataField, AutoNetworkedField]
     public EntProtoId[] Projectiles = new[]
     {
-        new EntProtoId("XenoBombardAcidProjectile"),
-        new EntProtoId("XenoBombardNeurotoxinProjectile"),
+        new EntProtoId("RMCXenoBombardAcidProjectile"),
+        new EntProtoId("RMCXenoBombardNeurotoxinProjectile"),
     };
 
     [DataField, AutoNetworkedField]

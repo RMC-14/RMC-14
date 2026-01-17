@@ -82,7 +82,7 @@
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMC
     gloves: RMCHandsVeteran
-    head: ArmorHelmetPMC
+    head: RMCArmorHelmetPMC
     shoes: RMCBootsPMCFilled
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC

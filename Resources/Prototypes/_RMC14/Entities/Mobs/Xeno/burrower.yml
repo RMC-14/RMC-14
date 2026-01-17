@@ -39,7 +39,7 @@
     - ActionXenoOrderConstruction
     - ActionXenoDigTunnel
     - ActionXenoPlantWeeds
-    - ActionXenoResinHole
+    - ActionRMCXenoResinHole
     - ActionXenoBurrow
     - ActionXenoTremor
     - ActionXenoDevolve
@@ -113,10 +113,10 @@
     spray: XenoAcidSprayTrapStrong
   - type: XenoConstruction
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: FixedIdentity

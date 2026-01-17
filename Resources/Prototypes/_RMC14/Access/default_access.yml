@@ -9,42 +9,42 @@
 - type: accessLevel
   id: RMCBaseHidden
   name: protobaseaccess UNMC Hidden
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Hidden
   hidden: true
 
 - type: accessLevel
   id: RMCBaseCommandAccess
   name: protobaseaccess UNMC Command
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Command
 
 - type: accessLevel
   id: RMCBaseMPAccess
   name: protobaseaccess UNMC Military Police
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Military Police
 
 - type: accessLevel
   id: RMCBaseMedicalAccess
   name: protobaseaccess UNMC Medical
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Medical
 
 - type: accessLevel
   id: RMCBaseEngineeringAccess
   name: protobaseaccess UNMC Engineering
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Engineering
 
 - type: accessLevel
   id: RMCBaseMarineAccess
   name: protobaseaccess UNMC Marine
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Marine Access
 
 - type: accessLevel
   id: RMCBaseSquadAccess
   name: protobaseaccess UNMC Squad
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Squad

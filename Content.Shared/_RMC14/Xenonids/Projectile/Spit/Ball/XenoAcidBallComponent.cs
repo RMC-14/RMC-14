@@ -18,7 +18,7 @@ public sealed partial class XenoAcidBallComponent : Component
     public TimeSpan Delay = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId ProjectileId = "XenoAcidBallProjectile";
+    public EntProtoId ProjectileId = "RMCXenoAcidBallProjectile";
 
     [DataField, AutoNetworkedField]
     public float MaxRange = 6;

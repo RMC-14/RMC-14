@@ -1,6 +1,6 @@
 # Military Police
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitMP
   name: military police jumpsuit
   description: Standard-issue Military Police uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.
@@ -32,7 +32,7 @@
 
 # Military Warden
 - type: entity
-  parent: JumpsuitMarine
+  parent: RMCJumpsuitMarine
   id: CMJumpsuitWarden
   name: military warden uniform
   description: Standard-issue Military Warden uniform. It has shards of light Kevlar to help protect against stabbing weapons and bullets.

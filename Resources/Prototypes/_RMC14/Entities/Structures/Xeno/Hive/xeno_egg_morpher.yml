@@ -1,6 +1,6 @@
 - type: entity
-  id: HiveEggMorpherXeno
-  parent: BaseHiveStructure
+  id: RMCHiveEggMorpherXeno
+  parent: RMCBaseHiveStructure
   name: egg morpher
   description: A disgusting biomass generator that reeks of rotting flesh. Capable of producing parasites on its own.
   components:
@@ -55,7 +55,7 @@
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
-    id: HiveEggMorpherXeno
+    id: RMCHiveEggMorpherXeno
   - type: UserInterface
     interfaces:
       enum.XenoReserveParasiteChangeUI.Key:
@@ -74,8 +74,8 @@
       state: morpher
 
 - type: entity
-  id: HiveEggMorpherXenoConstructionNode
-  parent: BaseHiveStructureNode
+  id: RMCHiveEggMorpherXenoConstructionNode
+  parent: RMCBaseHiveStructureNode
   name: Egg Morpher
   description: A disgusting biomass generator that reeks of rotting flesh. Looks like a marker for something.
   suffix: Construction
@@ -101,12 +101,12 @@
   - type: HiveConstructionNode
     initialPlasmaCost: 400
     plasmaCost: 450
-    spawn: HiveEggMorpherXeno
+    spawn: RMCHiveEggMorpherXeno
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionLimited
-    id: HiveEggMorpherXeno
+    id: RMCHiveEggMorpherXeno
   - type: WarpPoint
     location: egg morpher
   - type: RMCAlternateSprite

@@ -114,7 +114,7 @@
 
   [bold]Shotguns will likely be your main weapon as you are traversing the map due to their ability to stun and destroy out of place xenonids.[/bold]
 
-  <GuideEntityEmbed Entity="WeaponShotgunM42A2"/>
+  <GuideEntityEmbed Entity="RMCWeaponShotgunM42A2"/>
 
   The M42A2 pump shotgun is the most reliable weapon for a survivor. With a mounted bayonet, the pump shotgun is capable of brawling, breaking weeds, and beating back most foes. This weapon should be used one handed and loaded with buckshot. When using the pump shotgun, be extremely careful to not shoot your allies. A poorly placed buckshot can instantly kill anybody not wearing armor and deliver a lengthy stun to anybody who survives the hit. Fortunately, buckshot can also briefingly stun xenonids and slow them for an extended time after you land a stike. Weave around enemies and pick off weaker targets and provide openings for your allies.
 
@@ -122,7 +122,7 @@
 
   The HG 37-12 pump shotgun is a less reliable more specialized version of the M42A2 pump shotgun. The HG 37 is currently crippled by not having it's dual tube feature, allowing the user to swap on the go. The HG 37 should be wielded and loaded with the user's choice of ammo. If using slugs, the HG 37 is highly accurate. If you use buckshot, use the HG 37 similarly to the pump shotgun, but be sure to wield the weapon before firing it to prevent your target from dodging.
 
-  <GuideEntityEmbed Entity="WeaponShotgunCustomBuilt"/>
+  <GuideEntityEmbed Entity="RMCWeaponShotgunCustomBuilt"/>
 
   This is arguably the most deadly weapon obtainable without admin intervention. The custom built shotgun, often called the "custom" in character, is a shotgun with a 6 shell capacity. It sports a burst fire mode, capable of quickly firing two buckshot consecutively. This can kill almost any T1 instantly or greviously wound any T2 horribly. Be extremely careful when using this weapon around allies.
 
@@ -133,19 +133,19 @@
 
   [bold]Rifles are highly effective options, however many of the survivor exclusive rifles are not very useful unless used in a specific manner.[/bold]
 
-  <GuideEntityEmbed Entity="WeaponRifleAR10"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleAR10"/>
 
   The AR10 Assault Rifle is a weapon known for being laughably terrible by the survivor community, however it does have a few merits. In spite of it's low DPS, each bullet does a large amount of damage, making it very ammo efficient and good at keeping xenonids off of your barricades for an extended period. In addition, any AR10 on the map is [bold]guranteed[/bold] to start with attachments to strip and put onto a less terrible gun. Make use of what you have, even if it is an AR10.
 
-  <GuideEntityEmbed Entity="WeaponRifleM16"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleM16"/>
 
   The M16 is a direct upgrade to the AR10. It sports a higher fire rate, accuracy, and a similar damage per bullet to the AR10, making it a reliable weapon. The M16 has very far falloff as well and responds well to attachments. This is one of the most reliable guns that you can come across as a survivor and typically when it is present, ammo for it is plentiful. Use the M16 as a brawling gun in the backline of your group or to shoot xenonids attacking your cades with the intention to put serious hurt out.
 
-  <GuideEntityEmbed Entity="RMCWeaponRifleM54C"/> <GuideEntityEmbed Entity="RMCWeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleM54C"/> <GuideEntityEmbed Entity="RMCWeaponRifleM54CMK1"/> <GuideEntityEmbed Entity="RMCWeaponRifleM4SPRCustom"/>
 
   Highly standardized marine weapons. Ammo for these weapons is best conserved for bigger fights and the holding phase, however they are incredibly useful for brawling if used properly. The M4SPR allows full movement speed while wielded, the MK2 has high DPS, and the MK1 is like the MK2 but slighly better overall. Use these as you would as a marine but more conservatively. You cannot call requisitions for a supply drop... usually.
 
-  <GuideEntityEmbed Entity="WeaponRifleMAR40"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleMAR40"/>
 
   A highly unreliable weapon, contrary to the in game description. The MAR40 is laughably inaccurate and cannot be used outside of extremely close range, similar to that of a shotgun. If you are to use this weapon, use it because it has a surplus of ammo and can consistently put lead down range. In addition, a bipod and reflex sight allow this weapon to shoot fairly straight and take advantage of its powerful bullets. Use this weapon as a last resort, similar to the AR10, or whenever you are in a brawl and need to hurt something that cannot be stunned by a shotgun.
 

@@ -1,7 +1,7 @@
 # m10
 - type: entity
   parent: [RMCMarineHelmetBase, RMCFoldableHelmetBase]
-  id: ArmorHelmetM10
+  id: RMCArmorHelmetM10
   name: M10 pattern marine helmet
   description: A standard M10 Pattern Helmet. The inside label, along with washing information, reads, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'. There is a built-in camera on the right side.
   components:
@@ -18,7 +18,7 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/standard/urban.rsi
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM10MP
   name: M10 helmet MP
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the Marines.
@@ -37,7 +37,7 @@
 # TODO squad HUD visor should be security visor
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM10ChiefMP
   name: M10 helmet chief MP
   description: A special variant of the M10 Pattern Helmet worn by the Chief MP of the Marines.
@@ -55,7 +55,7 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/wo/urban.rsi
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetM10SO
   name: M10 pattern officer helmet
   description: A special variant of the M10 Pattern Helmet worn by Officers of the UNMC, attracting the attention of the grunts and sniper fire alike.
@@ -82,7 +82,7 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM10Medic
   name: M10 medic helmet
   description: A special variant of the M10 Pattern Helmet worn by the medic marines of the Marines. Comes with a built in medical display HUD.
@@ -167,7 +167,7 @@
     camouflageVariations: {}
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM10Tech
   name: M10 technician helmet
   description: A special variant of the M10 Pattern Helmet worn by the engineer marines of the Marines. Features a toggleable welding screen for protection.
@@ -194,7 +194,7 @@
     - RMCVisorWeldingIntegrated
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetM10Welding
   name: M10 welding helmet
   description: A modified M10 marine helmet, Features a toggleable welding screen for eye protection. Completely invisible while toggled off as opposed to the technician helmet.
@@ -211,7 +211,7 @@
 
 # M11
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM11
   name: M11 pattern leader helmet
   description: A slightly fancier helmet for marine leaders. This one contains a small built-in camera and has cushioning to protect your fragile brain.
@@ -229,7 +229,7 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM11CCO
   name: M11C pattern commanding officer helmet
   description: A special M11 Pattern Helmet worn by Commanding Officers of the UNMC. It reads on the label, 'The difference between an open-casket and closed-casket funeral. Wear on head for best results.'.
@@ -262,7 +262,7 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM11CGeneral
   name: M11C pattern ceremonial helmet
   description: A special M11 pattern ceremonial helmet worn occasionally by general officers of the UNMC.
@@ -282,7 +282,7 @@
 
 # M12
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM12
   name: M12 pattern dust helmet
   description: An experimental brain-bucket. A dust ruffle hangs from back. Moderately better at deflecting blunt objects at the cost of humiliation. But who will be laughing at the memorial? Not you, you'll be busy getting medals for your intel work or for your fantastic leadership.
@@ -310,7 +310,7 @@
 
 # M30
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM30
   name: M30 tactical helmet
   description: The M30 tactical helmet has an eyepiece filter used to filter tactical data. It is required to fly the dropships manually and in safety.
@@ -339,7 +339,7 @@
 
 # Press
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetPress
   name: press helmet
   description: A special helmet variant worn by the press.
@@ -355,7 +355,7 @@
 
 # M3-S Scout Spec
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetM3Scout
   name: M3-S helmet
   description: A custom helmet from the M3 series designed to be lightweight and used for recon missions.
@@ -402,7 +402,7 @@
 
 # M35 Pyro Spec
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: CMArmorHelmetM35
   name: M35 pyrotechnician helmet
   description: A helmet designed for UNMC Pyrotechnicians.
@@ -465,7 +465,7 @@
 
 # M3-T Demo Spec
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetM3TDemo
   name: M3-T bombardier helmet
   description: A custom-built helmet for explosive weaponry users. Comes with inbuilt ear blast protection, firing a rocket launcher without this is not recommended.

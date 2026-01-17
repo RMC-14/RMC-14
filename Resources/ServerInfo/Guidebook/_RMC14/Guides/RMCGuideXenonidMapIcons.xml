@@ -102,29 +102,29 @@
   ## Xenonid Structure Icons
   <Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HiveCoreXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHiveCoreXeno" Caption=""/>
       <GuideEntityEmbed Entity="RMCHiveCoreMapIcon"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HiveEggMorpherXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHiveEggMorpherXeno" Caption=""/>
       <GuideEntityEmbed Entity="RMCMorpherMapIcon"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HiveClusterXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHiveClusterXeno" Caption=""/>
       <GuideEntityEmbed Entity="RMCClusterMapIcon"/>
     </Box>
   </Box>
   <Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="XenoTunnel" Caption="" Margin="30 50 0 0"/>
+      <GuideEntityEmbed Entity="RMCXenoTunnel" Caption="" Margin="30 50 0 0"/>
       <GuideEntityEmbed Entity="RMCTunnelMapIcon" Margin="30 38 0 0"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HiveRecoveryNodeXeno" Caption="" Margin="35 20 0 0"/>
+      <GuideEntityEmbed Entity="RMCHiveRecoveryNodeXeno" Caption="" Margin="35 20 0 0"/>
       <GuideEntityEmbed Entity="RMCRecovNodeMapIcon" Margin="35 4 0 0"/>
     </Box>
     <Box Orientation="Vertical">
-      <GuideEntityEmbed Entity="HivePylonXeno" Caption=""/>
+      <GuideEntityEmbed Entity="RMCHivePylonXeno" Caption=""/>
       <GuideEntityEmbed Entity="RMCPylonMapIcon"/>
     </Box>
   </Box>

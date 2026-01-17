@@ -78,10 +78,10 @@
   - type: XenoConstruction
     buildDelay: 2
     canOrderConstruction:
-    - HiveCoreXenoConstructionNode
-    - HiveEggMorpherXenoConstructionNode
-    - HiveClusterXenoConstructionNode
-    - HiveRecoveryNodeXenoConstructionNode
+    - RMCHiveCoreXenoConstructionNode
+    - RMCHiveEggMorpherXenoConstructionNode
+    - RMCHiveClusterXenoConstructionNode
+    - RMCHiveRecoveryNodeXenoConstructionNode
   - type: XenoEvolution
     canEvolveWithoutGranter: true
     max: 200
@@ -136,11 +136,11 @@
     spray: XenoAcidSprayTrapWeak
   - type: XenoConstruction
     canBuild:
-    - WallXenoResin
-    - WallXenoMembrane
-    - DoorXenoResin
-    - XenoStickyResin
-    - XenoFastResin
+    - RMCWallXenoResin
+    - RMCWallXenoMembrane
+    - RMCDoorXenoResin
+    - RMCXenoStickyResin
+    - RMCXenoFastResin
   - type: VentCrawler
     ventCrawlIcon: drone
   - type: RMCActionOrder
@@ -207,11 +207,11 @@
     popup: rmc-xeno-gardener-popup
   - type: XenoFruitPlanter
     canPlant:
-    - XenoFruitGreater
-    - XenoFruitPlasma
-    - XenoFruitSpeed
-    - XenoFruitSpore
-    - XenoFruitUnstable
+    - RMCXenoFruitGreater
+    - RMCXenoFruitPlasma
+    - RMCXenoFruitSpeed
+    - RMCXenoFruitSpore
+    - RMCXenoFruitUnstable
     maxFruitAllowed: 6
     fruitPickingMultiplier: 0.5
     fruitFeedingMultiplier: 0.5
@@ -293,9 +293,9 @@
     description: rmc-xeno-healer-description
     popup: rmc-xeno-healer-popup
   - type: XenoFruitPlanter
-    fruitChoice: XenoFruitLesser
+    fruitChoice: RMCXenoFruitLesser
     canPlant:
-    - XenoFruitLesser
+    - RMCXenoFruitLesser
     maxFruitAllowed: 3
   - type: Tackle
     max: 4
