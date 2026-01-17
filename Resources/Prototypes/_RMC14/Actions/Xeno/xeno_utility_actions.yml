@@ -76,7 +76,7 @@
       components:
       - XenoConstruct
       - XenoFruit
-      - RMCXenoWeeds
+      - XenoWeeds
   - type: WorldTargetAction
     event: !type:XenoResinSurgeActionEvent
   - type: XenoResinSurgeAction
