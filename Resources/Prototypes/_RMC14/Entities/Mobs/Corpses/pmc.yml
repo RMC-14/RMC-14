@@ -13,7 +13,7 @@
   id: RMCCorpseWeYaPMCStandard
   components:
   - type: Loadout
-    prototypes: [ RMCGearCorpseWeYaPMCStandard ]
+    prototypes: [ RMCGearCorpseWeYaPMCStandard, RMCGearCorpseWeYaPMCStandardBulletproof ]
   - type: Rank
     rank: RMCRankWeYaOperator
   - type: Marine
@@ -22,16 +22,16 @@
       state: pmc_gun
 
 - type: startingGear
-  id: RMCGearCorpseWeYaPMCStandard # TODO RMC14 gasmask, lightpack, 50% chance to have bulletproof armor variant and black cap
+  id: RMCGearCorpseWeYaPMCStandard
   equipment:
     head: ArmorHelmetPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMCLight
     belt: RMCM77BeltPMCFilled
-    back: RMCSatchelLightpack
+    back: RMCSatchelLightpackWeYa
     gloves: RMCHandsVeteran
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava
+    mask: RMCMaskCoifPMC
     id: RMCIDCardPMCCorpse
     ears: RMCHeadsetDistressWeYa
     pocket1: RMCPouchFirstAidPMCFill
@@ -39,6 +39,13 @@
   storage:
     back:
     - RMCRadioHandheldColonyOff
+
+- type: startingGear
+  parent: RMCGearCorpseWeYaPMCStandard
+  id: RMCGearCorpseWeYaPMCStandardBulletproof
+  equipment:
+    head: RMCArmorHelmetPMCBlack
+    outerClothing: RMCArmorM4PMCBulletProof
 
 - type: randomHumanoidSettings
   parent: RMCCorpseWeYaPMCStandard
@@ -66,7 +73,7 @@
     head: ArmorHelmetPMCCorporate
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
-    back: RMCSatchelLightpack # TODO WeYa variant
+    back: RMCSatchelLightpackWeYa
     gloves: RMCHandsVeteran
     shoes: RMCBootsCorporate
     id: RMCIDCardPMCGoonCorpse

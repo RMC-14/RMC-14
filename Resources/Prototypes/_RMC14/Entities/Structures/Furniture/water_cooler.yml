@@ -31,16 +31,16 @@
       bin-container: !type:Container
   - type: Bin
     initialContents:
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
-    - DrinkWaterCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
+    - RMCPaperCup
     whitelist:
       requireAll: true
       components:

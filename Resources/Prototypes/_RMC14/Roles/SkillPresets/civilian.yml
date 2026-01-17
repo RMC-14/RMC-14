@@ -116,3 +116,98 @@
       RMCSkillEngineer: 1
       RMCSkillPowerLoader: 2
       RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaPMCStandard
+  name: Survivor PMC Standard
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaPMCMedic
+  name: Survivor PMC Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaPMCEngineer
+  name: Survivor PMC Engineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillPowerLoader: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaPMCLeader
+  name: Survivor PMC Team Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillLeadership: 2
+      RMCSkillOverwatch: 1
+      RMCSkillJtac: 2
+      RMCSkillIntel: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorWeYaPMCCommander
+  name: Survivor PMC Field Operations Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillPolice: 0 # RMC14
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillEndurance: 2
+      RMCSkillFirearms: 2
+      RMCSkillVehicles: 1
+      RMCSkillEngineer: 2
+      RMCSkillConstruction: 2
+      RMCSkillLeadership: 3 # Replace with 4 when skill change comes around
+      RMCSkillOverwatch: 1
+      RMCSkillJtac: 2
+      RMCSkillIntel: 2
