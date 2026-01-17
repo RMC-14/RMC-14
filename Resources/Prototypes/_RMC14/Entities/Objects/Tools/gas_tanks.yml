@@ -1,3 +1,15 @@
+# Gas Tanks /obj/item/tank/oxygen  # Base Gas Tank code/game/objects/items/tanks/tanks.dm
+
+# for future needs
+- type: entity
+  abstract: true
+  parent: GasTankBase
+  id: CMGasTankBase
+  components:
+  - type: PhysicalComposition
+    materialComposition: {}
+
+# Filled Resources/Prototypes/_RMC14/Catalog/Fills/Items/gas_tanks.yml
 - type: entity
   parent: CMGasTankBase
   id: CMAnestheticTank
@@ -12,97 +24,81 @@
   - type: GasTank
     outputPressure: 30.4
   - type: Clothing
-    sprite: Objects/Tanks/anesthetic.rsi
-
-# Gas Tanks /obj/item/reagent_container/glass/canister
-
-# for future needs
-- type: entity
-  abstract: true
-  parent: GasTankBase
-  id: CMGasTankBase
-  components:
-  - type: PhysicalComposition
-    materialComposition: {}
+    sprite: _RMC14/Objects/Tanks/anesthetic.rsi
 
 - type: entity
   parent: CMGasTankBase
-  id: CMGasTankHydrogen
-  name: hydrogen canister
-  description: A canister containing pressurized hydrogen. Can be used to refill storage tanks.
+  id: RMCGasTankOxygen
+  name: oxygen tank
+  description: A tank containing pressurized oxygen for breathing.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi
   - type: Item
-    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
-  # TODO RMC14 hydrogen fill
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi # TODO Update inhands
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/oxygen_tank.rsi # TODO Update back & suitstorage
 
 - type: entity
   parent: CMGasTankBase
-  id: CMGasTankAmmonia
-  name: ammonia canister
-  description: A canister containing pressurized ammonia. Can be used to refill storage tanks.
+  id: RMCEmergencyOxygenTank
+  name: emergency oxygen tank
+  description: An easily portable tank for emergencies. Contains very little oxygen, rated for survival use only. It can hold 0.66 L of gas.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
   - type: Item
-    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+    size: Tiny
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency.rsi
+    slots:
+    - Pocket
+    - Belt
+    - Back
+    - suitStorage
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
   - type: GasTank
-    outputPressure: 21.3
     air:
-      volume: 5
-      moles:
-        - 0 #         oxygen
-        - 0 #         nitrogen
-        - 0 #         CO2
-        - 0 #         plasma
-        - 0 #         tritium
-        - 0 #         water vapor
-        - 2.0513795 # ammonia
-        # 2.0513795   total
+      volume: 0.66
       temperature: 293.15
 
 - type: entity
-  parent: CMGasTankBase
-  id: CMGasTankMethane
-  name: methane canister
-  description: A canister containing pressurized methane. Can be used to refill storage tanks.
+  parent: RMCEmergencyOxygenTank
+  id: RMCExtendedEmergencyOxygenTank
+  name: extended-capacity emergency oxygen tank
+  description: An emergency tank with extended capacity. Technically rated for prolonged use. It can hold 1.5 L of gas.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Tanks/methane.rsi
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
   - type: Item
-    sprite: _RMC14/Objects/Tanks/methane.rsi
-  # TODO RMC14 methane fill
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankPacid
-  name: polytrinic acid canister
-  description: A canister containing pressurized polytrinic acid. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/pacid.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/pacid.rsi
-  # TODO RMC14 polyt acid fill
-
-- type: entity
-  parent: CMGasTankBase
-  id: CMGasTankOxygen
-  name: oxygen canister
-  description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/oxygen.rsi
-  - type: Item
-    sprite: _RMC14/Objects/Tanks/oxygen.rsi
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency_extended.rsi
   - type: GasTank
-    outputPressure: 21.3
     air:
-      volume: 5
-      moles:
-        - 2.0513795 # oxygen
-        # 2.0513795   total
+      volume: 1.5
+      temperature: 293.15
+
+- type: entity
+  parent: RMCEmergencyOxygenTank
+  id: RMCDoubleEmergencyOxygenTank
+  name: double emergency oxygen tank
+  description: A high-grade dual-tank emergency life support container. It holds a decent amount of oxygen for its small size. It can hold 2.5 L of gas.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/emergency_double.rsi
+  - type: GasTank
+    air:
+      volume: 2.5
       temperature: 293.15
 
 - type: entity
@@ -114,15 +110,192 @@
   - type: Sprite
     sprite: _RMC14/Objects/Tanks/phoron.rsi
   - type: Item
+    size: Normal
     sprite: _RMC14/Objects/Tanks/phoron.rsi
-  - type: GasTank
-    outputPressure: 21.3
-    air:
-      volume: 5
-      moles:
-        - 0 #         oxygen
-        - 0 #         nitrogen
-        - 0 #         CO2
-        - 2.0513795 # plasma
-        # 2.0513795   total
-      temperature: 293.15
+  - type: Clothing
+    sprite: _RMC14/Objects/Tanks/phoron.rsi
+
+
+# Reagent "Gas" Canisters /obj/item/reagent_container/glass/canister
+# Canisters can only transfer reagents OUT to reagent tanks, but CAN receive reagents from other containers.
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCReagentGasTankBase
+  components:
+  - type: Sprite
+    sprite: Objects/Tanks/generic.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: Objects/Tanks/generic.rsi
+  - type: Clothing
+    quickEquip: false
+    sprite: Objects/Tanks/generic.rsi
+    slots:
+    - suitStorage
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+  - type: SolutionTransfer
+    transferAmount: 100
+    minTransferAmount: 50
+    maxTransferAmount: 400
+    canChangeTransferAmount: true
+    transferAmounts:
+    - 50
+    - 100
+    - 200
+    - 300
+    - 400
+  - type: UserInterface
+    interfaces:
+      enum.TransferAmountUiKey.Key:
+        type: TransferAmountBoundUserInterface
+  - type: StaticPrice
+    price: 40
+  - type: Tag
+    tags:
+    - ChemDispensable
+  - type: MixableSolution
+    solution: beaker
+  - type: FitsInDispenser
+    solution: beaker
+  - type: RefillableSolution
+    solution: beaker
+  - type: DrainableSolution
+    solution: beaker
+  - type: ExaminableSolution
+    solution: beaker
+  - type: DrawableSolution
+    solution: beaker
+  - type: InjectableSolution
+    solution: beaker
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-canister-transfer-out-whitelist
+    sourceWhitelist: # Only allow transferring OUT from canister to reagent tanks.
+      tags:
+      - RMCTankReagent
+  - type: SolutionItemStatus
+    solution: beaker
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+          params:
+            volume: -4
+      - !type:SpillBehavior
+        solution: beaker
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: DamageOnHighSpeedImpact
+    minimumSpeed: 2
+    damage: {}
+  - type: DnaSubstanceTrace
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankHydrogen
+  name: hydrogen canister
+  description: A canister containing pressurized hydrogen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/hydrogen.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: RMCHydrogen
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankAmmonia
+  name: ammonia canister
+  description: A canister containing pressurized ammonia. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/ammonia.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: Ammonia # TODO RMCAmmonia
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankMethane
+  name: methane canister
+  description: A canister containing pressurized methane. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/methane.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: RMCMethane
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankPacid
+  name: polytrinic acid canister
+  description: A canister containing pressurized polytrinic acid. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/pacid.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: PolytrinicAcid # TODO RMCPolytrinicAcid
+          Quantity: 400
+
+- type: entity
+  parent: RMCReagentGasTankBase
+  id: RMCReagentGasTankOxygen
+  name: oxygen canister
+  description: A canister containing pressurized oxygen. Can be used to refill storage tanks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/oxygen_canister.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tanks/oxygen_canister.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 400
+        reagents:
+        - ReagentId: RMCOxygen
+          Quantity: 400

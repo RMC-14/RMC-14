@@ -96,6 +96,21 @@
 
 - type: entity
   parent: CMBaseMask
+  id: RMCMaskBreath
+  name: breath mask
+  description: A close-fitting mask that can be connected to an air supply.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/breath.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/breath.rsi
+    slots:
+    - Mask
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: CMBaseMask
   id: RMCMaskRebreather
   name: rebreather
   description: A close-fitting device that instantly heats or cools down air when you inhale so it doesn't damage your lungs.
