@@ -1,8 +1,10 @@
-﻿- type: entity
+﻿# Bases
+- type: entity
   parent: RMCBaseArmor
-  id: RMCSuitEVAUNMC # TODO make into a base
-  name: UNMC MK.35 pressure suit
-  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations.
+  id: RMCSuitEVABase
+  name: pressure suit
+  description: A heavy, bulky space suit.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
@@ -16,7 +18,7 @@
     tags:
     - Hardsuit
   - type: CMArmor
-    bio: 30 # TODO 30 rads aswel;
+    bio: 30 # RMC14 TODO: 30 rads aswell
     melee: 15
     bullet: 20
     explosionArmor: 10
@@ -31,10 +33,11 @@
 
 - type: entity
   parent: RMCHardHat
-  id: RMCHelmetEVAUNMC # TODO make into a base
+  id: RMCHelmetEVABase
   categories: [ HideSpawnMenu ]
-  name: UNMC MK.35 pressure helmet
-  description: A heavy space helmet, designed to be coupled with the MK.35 pressure suit utilized by the United Nations Marine Corps and a few other UN organizations. Feels like you could hotbox in here.
+  name: pressure helmet
+  description: A heavy space helmet, designed to be coupled with a pressure suit.
+  abstract: true
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
@@ -66,3 +69,33 @@
     netsync: false
     color: "#FFFFFF"
     mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+
+# UNMC
+- type: entity
+  parent: RMCSuitEVABase
+  id: RMCSuitEVAUNMC
+  name: UNMC MK.35 pressure suit
+  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ToggleableClothing
+    clothingPrototype: RMCHelmetEVAUNMC
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHelmetEVABase
+  categories: [ HideSpawnMenu ]
+  name: UNMC MK.35 pressure helmet
+  description: A heavy space helmet, designed to be coupled with the MK.35 pressure suit utilized by the United Nations Marine Corps and a few other UN organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
