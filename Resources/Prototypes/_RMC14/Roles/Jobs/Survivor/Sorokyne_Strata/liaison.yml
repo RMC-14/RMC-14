@@ -3,7 +3,6 @@
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
@@ -25,7 +24,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase
