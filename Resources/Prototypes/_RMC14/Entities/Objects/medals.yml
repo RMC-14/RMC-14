@@ -10,7 +10,9 @@
   - type: UniformAccessory
     category: Medal
     limit: 2
-    layerKey: "enum.MedalVisualLayers.Base"
+    layerKeys:
+    - "enum.MedalVisualLayers.Base"
+    - "enum.MedalVisualLayers.Base1"
     hasIconSprite: true
 
 # Marine medals
