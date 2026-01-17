@@ -43,7 +43,6 @@
   - type: StorageFill
     contents:
       - id: CMCrowbar
-      - id: CMWelderSmall
       - id: CMRadioHandheld
       - id: CMFireExtinguisherPortable
       # Random lighting item orGroup

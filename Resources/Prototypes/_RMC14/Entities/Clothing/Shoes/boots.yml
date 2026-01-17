@@ -1,6 +1,6 @@
 # Dress Shoes
 - type: entity
-  parent: RMCShoesLaceup
+  parent: RMCShoesLaceupDress
   id: CMShoesLaceupCommander
   name: commanding officer dress shoes
   description: Has special soles for better trampling those underneath.
