@@ -84,7 +84,7 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public int MaxTiming = 12;
 
     /// <summary>
-    ///     The offsets allowed to be used for a weapon during  a fire mission based on the <see cref="DropshipWeaponPointLocation"/>
+    ///     The offsets allowed to be used for a weapon during a fire mission based on the <see cref="DropshipWeaponPointLocation"/>
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<DropshipWeaponPointLocation, List<int?>> AllowedOffsets = new()

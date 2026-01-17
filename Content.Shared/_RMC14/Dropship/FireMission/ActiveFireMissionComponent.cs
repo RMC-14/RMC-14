@@ -79,7 +79,7 @@ public sealed partial class ActiveFireMissionComponent : Component
     };
 
     /// <summary>
-    ///     Has the missions duration passed the startDelay.
+    ///     The current <see cref="FireMissionPhase"/> of the mission.
     /// </summary>
     [DataField, AutoNetworkedField]
     public FireMissionPhase CurrentPhase = FireMissionPhase.Preparing;
@@ -96,9 +96,15 @@ public sealed partial class ActiveFireMissionComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan MissionCooldown = TimeSpan.FromSeconds(25);
 
+    /// <summary>
+    ///     The entity being watched by the terminal that started the mission.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? MissionEye;
 
+    /// <summary>
+    ///     The terminal that was used to start the mission.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? WatchingTerminal;
 }

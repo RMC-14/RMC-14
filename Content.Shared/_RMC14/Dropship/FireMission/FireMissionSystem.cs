@@ -41,9 +41,9 @@ public sealed class FireMissionSystem : EntitySystem
             // Mission has ended
             if (fireMission.CurrentPhase == FireMissionPhase.Cooldown)
             {
-                if (fireMission.StartTime + TimeSpan.FromSeconds(16) < _timing.CurTime) //TODO store the seconds on the component
+                if (fireMission.MissionEye != null)
                 {
-                    if (fireMission is { WatchingTerminal: { } watchingTerminal, MissionEye: { } missionEye })
+                    if (fireMission.WatchingTerminal is { } watchingTerminal)
                         _dropshipWeapon.TrySetCameraTarget(watchingTerminal, null);
 
                     Del(fireMission.MissionEye);

@@ -178,7 +178,6 @@ public sealed class DropshipTerminalWeaponsDeleteFireMissionMsg(bool first) : Bo
     public readonly bool First = first;
 }
 
-
 [Serializable, NetSerializable]
 public sealed class DropshipTerminalWeaponsSelectFireMissionMsg(bool first, int id) : BoundUserInterfaceMessage
 {

@@ -61,8 +61,7 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
             Text = $"{infoText}",
             HorizontalAlignment = HAlignment.Right,
             MinSize = new Vector2(0, 18),
-            Modulate =  Color.FromHex("#00FF36"),
-            //ModulateSelfOverride = Color.FromHex("#00FF36"),
+            ModulateSelfOverride = Color.FromHex("#00FF36"),
         });
 
         FireMissionGrid.AddChild(new PanelContainer()

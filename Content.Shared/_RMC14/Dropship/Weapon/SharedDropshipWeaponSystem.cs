@@ -1219,12 +1219,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         // Validate fire mission exists.
         FireMissionData? fireMission = null;
-        foreach (var t in ent.Comp.FireMissions)
+        foreach (var mission in ent.Comp.FireMissions)
         {
-            if (t.Id != fireMissionId)
+            if (mission.Id != fireMissionId)
                 continue;
 
-            fireMission = t;
+            fireMission = mission;
             break;
         }
 
@@ -1238,7 +1238,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 weaponOffsetsForWeapon.Add(wo);
         }
 
-        // Check if the sent timing is allowed.
+        // Check if the timing is allowed.
         if (step < ent.Comp.MinTiming || step > ent.Comp.MaxTiming)
         {
             suspicious = true;
@@ -1253,10 +1253,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!ent.Comp.AllowedOffsets.TryGetValue(location, out var validOffsets))
             return false;
 
-        // Check if the sent offset is allowed
+        // Check if the offset is allowed
         if (!validOffsets.Contains(offset))
         {
-            // This means the client sent an offset value that should be impossible to be sent through normal gameplay.
+            // This means the client sent an offset value that should be impossible to be set through normal gameplay.
             suspicious = true;
             return false;
         }
@@ -1264,12 +1264,12 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryComp(weaponEntity, out DropshipWeaponComponent? weaponComp))
             return false;
 
-        // Check if a weapons has ammo laoded that can't be used during a fire mission.
+        // Check if a weapons has ammo loaded that can't be used during a fire mission.
         if (TryGetWeaponAmmo((weaponEntity, weaponComp), out var ammo) &&
             ammo.Comp.FireMissionDelay == null)
         {
-            var cooldownMsg = Loc.GetString("rmc-dropship-firemission-invalid-ammo");
-            _popup.PopupCursor(cooldownMsg, user, PopupType.SmallCaution);
+            var msg = Loc.GetString("rmc-dropship-firemission-invalid-ammo");
+            _popup.PopupCursor(msg, user, PopupType.SmallCaution);
             return false;
         }
 
@@ -1822,7 +1822,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Makes sure an offset(null) exists for the given weapon in the given fire mission.
+    ///     Makes sure an offset exists for the given weapon in the given fire mission.
     /// </summary>
     /// <param name="uid">The weapons control entity</param>
     /// <param name="fireMission">The fire mission data</param>
@@ -1864,6 +1864,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     /// <param name="offset">The offset that will be applied to the target's location to determine the start location of the mission</param>
     /// <param name="user">The entity that tried to start the fire mission</param>
     /// <param name="missionData">The fire mission data, this determines when and where to shoot</param>
+    /// <param name="watchingTerminal">The terminal used to start the mission</param>
     /// <returns>True if a fire mission was successfully started</returns>
     public bool TryStartFireMission(Entity<DropshipComponent> dropship, EntityUid target, Direction strikeVector, int maxSteps, Vector2 offset, EntityUid user, FireMissionData missionData, EntityUid? watchingTerminal = null)
     {
@@ -1930,7 +1931,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     /// <param name="actor">The entity trying to shoot the weapon</param>
     /// <param name="terminalComp">The terminal used to shoot the weapon</param>
     /// <param name="weaponComp">The <see cref="DropshipWeaponComponent"/> of the shooting weapon</param>
-    /// <returns>True if the weapon was shot</returns>
+    /// <returns>True if the weapon was fired</returns>
     public bool TryFireWeapon(EntityUid weapon, EntityCoordinates targetCoordinates, DropshipWeaponStrikeType strikeType, EntityUid? actor = null, DropshipTerminalWeaponsComponent? terminalComp = null, DropshipWeaponComponent? weaponComp = null)
     {
         if (!_dropship.TryGetGridDropship(weapon, out var dropship))
@@ -1953,8 +1954,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     /// <param name="strikeType">The method through which the weapon is attempted to be fired</param>
     /// <param name="actor">The entity trying to fire the weapon</param>
     /// <param name="requiredShots">The amount of times the weapon should be able to shoot</param>
-    /// <param name="weapon"></param>
-    /// <returns>The <see cref="DropshipWeaponComponent"/> of the shooting weapon</returns>
+    /// <param name="weapon">The <see cref="DropshipWeaponComponent"/> of the shooting weapon</param>
+    /// <returns>True if the weapon is able to shoot</returns>
     private bool CanFire(EntityUid uid, DropshipWeaponStrikeType strikeType, EntityUid? actor = null, int requiredShots = 1, DropshipWeaponComponent? weapon = null)
     {
         if (!Resolve(uid, ref weapon, false))
