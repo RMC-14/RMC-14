@@ -26,12 +26,11 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null)
+        ProtoId<EntityPrototype>? commendationPrototypeId = null)
     {
         try
         {
-            base.GiveCommendation(giver, receiver, name, text, type, commendationPrototypeId, receiverEntity);
+            base.GiveCommendation(giver, receiver, name, text, type, commendationPrototypeId);
 
             if (!Resolve(giver, ref giver.Comp1, ref giver.Comp2, false) ||
                 !Resolve(receiver, ref receiver.Comp, false) ||
@@ -42,9 +41,8 @@ public sealed class CommendationSystem : SharedCommendationSystem
 
             var receiverId = Guid.Parse(receiver.Comp.LastPlayerId);
             var receiverName = GetNameWithRank(receiver);
-            var receiverLastPlayerId = receiver.Comp.LastPlayerId;
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity, receiverLastPlayerId);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiver);
         }
         catch (Exception e)
         {
@@ -59,12 +57,11 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null)
+        ProtoId<EntityPrototype>? commendationPrototypeId = null)
     {
         try
         {
-            base.GiveCommendationByLastPlayerId(giver, lastPlayerId, receiverName, name, text, type, commendationPrototypeId, receiverEntity);
+            base.GiveCommendationByLastPlayerId(giver, lastPlayerId, receiverName, name, text, type, commendationPrototypeId);
 
             if (!Resolve(giver, ref giver.Comp1, ref giver.Comp2, false))
                 return;
@@ -72,7 +69,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
             if (!Guid.TryParse(lastPlayerId, out var receiverId))
                 return;
 
-            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, receiverEntity, lastPlayerId);
+            await GiveCommendationInternal(giver, receiverId, receiverName, name, text, type, commendationPrototypeId, null);
         }
         catch (Exception e)
         {
@@ -88,8 +85,7 @@ public sealed class CommendationSystem : SharedCommendationSystem
         string text,
         CommendationType type,
         ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null,
-        string? receiverLastPlayerId = null)
+        Entity<CommendationReceiverComponent?>? receiver = null)
     {
         text = text.Trim();
         if (string.IsNullOrWhiteSpace(text))
@@ -109,6 +105,8 @@ public sealed class CommendationSystem : SharedCommendationSystem
         Dirty(giver, giver.Comp1);
 
         var commendation = new Commendation(giverName, receiverName, name, text, type, round);
+        var receiverLastPlayerId = receiverId.ToString();
+        NetEntity? receiverEntity = receiver.HasValue ? GetNetEntity(receiver.Value.Owner) : null;
         var entry = new RoundCommendationEntry(commendation, commendationPrototypeId, receiverEntity, receiverLastPlayerId);
         RoundCommendations.Add(entry);
         _commendation.CommendationAdded(giverId, new NetUserId(receiverId), commendation);

@@ -41,7 +41,7 @@ public sealed partial class MarineControlComputerComponent : Component
     public TimeSpan ShipAnnouncementCooldown = TimeSpan.FromSeconds(30);
 
     [DataField, AutoNetworkedField]
-    public bool CanPrintCommendations = false;
+    public bool CanPrintCommendations = true;
 
     [DataField, AutoNetworkedField]
     public TimeSpan PrintCommendationDelay = TimeSpan.FromSeconds(2);

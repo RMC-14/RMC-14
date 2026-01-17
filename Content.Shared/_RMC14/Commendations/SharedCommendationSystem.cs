@@ -84,8 +84,7 @@ public abstract class SharedCommendationSystem : EntitySystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null)
+        ProtoId<EntityPrototype>? commendationPrototypeId = null)
     {
     }
 
@@ -96,8 +95,7 @@ public abstract class SharedCommendationSystem : EntitySystem
         string name,
         string text,
         CommendationType type,
-        ProtoId<EntityPrototype>? commendationPrototypeId = null,
-        NetEntity? receiverEntity = null)
+        ProtoId<EntityPrototype>? commendationPrototypeId = null)
     {
     }
 

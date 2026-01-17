@@ -10,7 +10,7 @@ public sealed record MarineControlComputerMedalMessageEvent(
     NetEntity Actor,
     NetEntity? Marine,
     string Name,
+    ProtoId<EntityPrototype> CommendationPrototypeId,
     string Message = "",
-    string? LastPlayerId = null,
-    ProtoId<EntityPrototype>? CommendationPrototypeId = null
+    string? LastPlayerId = null
 ) : DialogInputEvent(Message);
