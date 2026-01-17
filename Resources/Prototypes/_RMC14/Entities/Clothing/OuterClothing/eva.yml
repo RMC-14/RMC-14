@@ -70,6 +70,17 @@
     color: "#FFFFFF"
     mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
 
+- type: entity
+  parent: RMCSuitEVAUNMC
+  id: RMCSuitEVASGO
+  name: smart gun compatable pressure suit
+  suffix: Smart Gun harness
+  description: A heavy space suit. For whatever reason, it seems this suit has the fittings for a smart weapon system.
+  abstract: true
+  components:
+  - type: ClothingBlockBackpack
+  - type: SmartGunArmor
+
 # UNMC
 - type: entity
   parent: RMCSuitEVABase
@@ -85,10 +96,27 @@
     unequipDelay: 2
   - type: ToggleableClothing
     clothingPrototype: RMCHelmetEVAUNMC
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
-  parent: RMCHardHat
-  id: RMCHelmetEVABase
+  parent: RMCSuitEVASGO
+  id: RMCSuitEVAUNMCSGO
+  name: UNMC MK.35 ML66A compatable pressure suit
+  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations. Seems this suit has the required fittings to be compatable with an ML66A Smart Gun.
+  components:
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
+
+- type: entity
+  parent: RMCHelmetEVABase
+  id: RMCHelmetEVAUNMC
   categories: [ HideSpawnMenu ]
   name: UNMC MK.35 pressure helmet
   description: A heavy space helmet, designed to be coupled with the MK.35 pressure suit utilized by the United Nations Marine Corps and a few other UN organizations.
@@ -99,3 +127,8 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/unmc.rsi
     equipSound: /Audio/Mecha/mechmove03.ogg
     unequipSound: /Audio/Mecha/mechmove03.ogg
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
