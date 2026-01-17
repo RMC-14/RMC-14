@@ -3,7 +3,7 @@
   parent: RMCBaseArmor
   id: RMCSuitEVABase
   name: pressure suit
-  description: A heavy, bulky space suit.
+  description: A heavy and bulky space suit.
   abstract: true
   components:
   - type: Sprite
@@ -75,7 +75,7 @@
   id: RMCSuitEVASGO
   name: smart gun compatable pressure suit
   suffix: Smart Gun harness
-  description: A heavy space suit. For whatever reason, it seems this suit has the fittings for a smart weapon system.
+  description: A heavy and bulky space suit. For whatever reason, it seems this suit has the fittings for a smart weapon system.
   abstract: true
   components:
   - type: ClothingBlockBackpack
@@ -86,7 +86,7 @@
   parent: RMCSuitEVABase
   id: RMCSuitEVAUNMC
   name: UNMC MK.35 pressure suit
-  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations.
+  description: A heavy and bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/unmc.rsi
@@ -106,7 +106,7 @@
   parent: RMCSuitEVASGO
   id: RMCSuitEVAUNMCSGO
   name: UNMC MK.35 ML66A compatable pressure suit
-  description: A heavy, bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations. Seems this suit has the required fittings to be compatable with an ML66A Smart Gun.
+  description: A heavy and bulky military-grade space suit utilized by the United Nations Marine Corps and a few other UN organizations. Seems this suit has the required fittings to be compatable with an ML66A Smart Gun.
   components:
   - type: ClothingRequireEquipped
     denyReason: rmc-armor-not-marine-jumpsuit
