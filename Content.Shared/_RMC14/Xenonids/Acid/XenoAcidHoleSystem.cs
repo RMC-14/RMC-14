@@ -659,7 +659,7 @@ public sealed class XenoAcidHoleSystem : EntitySystem
             return false;
         }
 
-        if (!_size.TryGetSize(user, out var size) || size > RMCSizes.SmallXeno)
+        if (!_size.TryGetSize(user, out var size) || size > RMCSizes.Xeno)
         {
             _popup.PopupEntity(Loc.GetString("rmc-acid-hole-too-large"), hole.Owner, user, PopupType.SmallCaution);
             return false;
