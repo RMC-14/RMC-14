@@ -137,10 +137,14 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: RMCRepairable
+    delay: 2
+  - type: NailgunRepairable
   - type: Corrodible
     isCorrodible: true
     structure: true
     meltTimeMult: 3
+  - type: XenoAcidHoleWall
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType

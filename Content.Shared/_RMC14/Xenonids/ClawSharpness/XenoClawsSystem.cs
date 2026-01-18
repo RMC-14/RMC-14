@@ -72,6 +72,12 @@ public sealed class XenoClawsSystem : EntitySystem
         }
     }
 
+    public bool HasClawStrength(EntityUid uid, XenoClawType minimum)
+    {
+        return _xenoClawsQuery.TryComp(uid, out var claws) &&
+               claws.ClawType.CompareTo(minimum) >= 0;
+    }
+
     private void OnAirlockReceiverDamageModify(Entity<AirlockReceiverXenoClawsComponent> ent, ref DamageModifyEvent args)
     {
         var xeno = args.Tool;

@@ -170,8 +170,10 @@
         !type:DamageTrigger
         damage: 9000
       behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts: [ "Breakage" ]
   - type: IconSmooth
     key: walls
     additionalKeys:
