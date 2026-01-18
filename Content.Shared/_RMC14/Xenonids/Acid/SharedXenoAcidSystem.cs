@@ -9,6 +9,8 @@ using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Coordinates;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
@@ -17,6 +19,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -36,6 +39,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -46,6 +50,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
     protected bool CorrosiveAcidInstant;
+    private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
     public override void Initialize()
     {
@@ -59,6 +64,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         SubscribeLocalEvent<InheritAcidComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
         SubscribeLocalEvent<TimedCorrodingComponent, GettingPickedUpAttemptEvent>(OnAcidPickupAttempt);
         SubscribeLocalEvent<DamageableCorrodingComponent, GettingPickedUpAttemptEvent>(OnAcidPickupAttempt);
+        SubscribeLocalEvent<TimedCorrodingComponent, VaporHitEvent>(OnAcidVaporHit);
+        SubscribeLocalEvent<DamageableCorrodingComponent, VaporHitEvent>(OnAcidVaporHit);
         SubscribeLocalEvent<PickupAttemptEvent>(OnPickupAttempt);
 
         Subs.CVar(_config,
@@ -224,6 +231,24 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Cancel();
         _popup.PopupClient(Loc.GetString("rmc-acid-pickup-blocked", ("target", args.Item)), args.User, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnAcidVaporHit<T>(Entity<T> ent, ref VaporHitEvent args) where T : Component
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<GunComponent>(ent.Owner))
+            return;
+
+        foreach (var (_, solution) in _solutionContainer.EnumerateSolutions(args.Solution))
+        {
+            if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
+                continue;
+
+            RemoveAcid(ent.Owner);
+            break;
+        }
     }
 
     private void OnPickupAttempt(PickupAttemptEvent args)

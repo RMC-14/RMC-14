@@ -689,13 +689,15 @@ public sealed class XenoAcidHoleSystem : EntitySystem
 
     private bool TryGetBreakData(EntityUid user, Entity<XenoAcidHoleWallComponent> wall, out ReceiverXenoClawsComponent receiver)
     {
-        receiver = default;
+        receiver = null!;
 
         if (!HasActiveHole(wall.Owner))
             return false;
 
-        if (!_receiverClawsQuery.TryComp(wall, out receiver))
+        if (!_receiverClawsQuery.TryComp(wall, out var tempReceiver))
             return false;
+
+        receiver = tempReceiver!;
 
         if (!_xenoQuery.TryComp(user, out var xeno) ||
             !HasRequiredClaws(receiver, user, xeno))
