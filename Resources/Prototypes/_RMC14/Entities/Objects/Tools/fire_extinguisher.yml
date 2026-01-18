@@ -81,7 +81,6 @@
   id: RMCExtinguisherSpray
   categories: [ HideSpawnMenu ]
   components:
-  #RMC allow extinguisher vapor to collide with items on the ground.
   - type: Fixtures
     fixtures:
       fix1:
@@ -93,6 +92,7 @@
         - FullTileMask
         - Opaque
         - ItemMask
+        - VaporMask
         layer:
         - ItemMask
   - type: Undisposable
