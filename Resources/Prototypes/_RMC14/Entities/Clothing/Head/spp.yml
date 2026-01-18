@@ -35,7 +35,15 @@
   - type: CMArmor
     melee: 25
     explosionArmor: 30
-  - type: EyeProtection
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated
 
 - type: entity
   parent: ArmorHelmetSPP
