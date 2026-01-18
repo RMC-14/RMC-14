@@ -886,6 +886,30 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolEIAF
+  name: EIAF paratrooper belt
+  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolSPP
   name: Type 47-S pistol holster rig
   description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.

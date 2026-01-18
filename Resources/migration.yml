@@ -1456,6 +1456,10 @@ RMCWeaponFlamerImprovised: RMCWeaponFlamerColony
 # 2026-1-03
 CMM77BeltFilled: RMCM77BeltFilled
 
+# 2025-01-04
+CMGasTankOxygen: RMCGasTankOxygenFilled
+RMCGasTankPhoron: RMCGasTankPhoronFilled
+
 # 2026-1-13
 RMCBoxMagazineRifleAK4047Empty: RMCBoxMagazineRifleType77Empty
 RMCBoxMagazineRifleAK4047: RMCBoxMagazineRifleType77
@@ -1466,3 +1470,4 @@ RMCMagazineRifleAK4047: RMCMagazineRifleType77
 RMCMagazineRifleAK4047AP: RMCMagazineRifleType77AP
 RMCMagazineRifleAK4047Incendiary: RMCMagazineRifleType77Incendiary
 RMCMagazineRifleAK4047HEAP: RMCMagazineRifleType77HEAP
+

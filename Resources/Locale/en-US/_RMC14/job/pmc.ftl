@@ -15,6 +15,8 @@ rmc-ghost-name-pmc-standard = We-Ya PMC Operator (Neutral)
 rmc-job-name-pmc-standard = Operator
 rmc-job-prefix-pmc-standard = OP
 
+rmc-job-description-pmc-pve-standard = Serve as the rank and file members of the PMC force.
+
 rmc-ghost-name-pmc-engineer = We-Ya PMC Corporate Technician (Neutral)
 rmc-job-name-pmc-engineer = Corporate Technician
 rmc-job-prefix-pmc-engineer = TEC
@@ -22,6 +24,8 @@ rmc-job-prefix-pmc-engineer = TEC
 rmc-ghost-name-pmc-medic = We-Ya PMC Corporate Medic (Neutral)
 rmc-job-name-pmc-medic = Corporate Medic
 rmc-job-prefix-pmc-medic = CM
+
+rmc-job-description-pmc-pve-medic = Ensure all members of the PMC team get home safely and as intact as possible.
 
 rmc-ghost-name-pmc-doctor = We-Ya PMC Trauma Surgeon (Neutral)
 rmc-job-name-pmc-doctor = Trauma Surgeon
@@ -39,6 +43,8 @@ rmc-ghost-name-pmc-gunner = We-Ya PMC Gunner (Neutral)
 rmc-job-name-pmc-gunner = Support Weapons Specialist
 rmc-job-prefix-pmc-gunner = SG
 
+rmc-job-description-pmc-pve-gunner = Use your heavy weapons system to lay down fire and support the rest of the team.
+
 rmc-ghost-name-pmc-sniper = We-Ya PMC Sniper (Neutral)
 rmc-job-name-pmc-sniper = Weapons Specialist
 rmc-job-prefix-pmc-sniper = Spc
@@ -54,6 +60,9 @@ rmc-job-prefix-pmc-xeno-handler = XH
 rmc-ghost-name-pmc-leader = We-Ya PMC Leader (Neutral)
 rmc-job-name-pmc-leader = Leader
 rmc-job-prefix-pmc-leader = SL
+
+rmc-job-name-pmc-field-operations-leader = Field Operations Leader
+rmc-job-prefix-pmc-field-operations-leader = FOL
 
 rmc-ghost-name-pmc-lead-investigator = We-Ya PMC Lead Investigator (Neutral)
 rmc-job-name-pmc-lead-investigator = Lead Investigator
@@ -81,9 +90,15 @@ rmc-job-name-pmc-corporate-goon-secguard = We-Ya Security Guard
 
 rmc-job-name-pmc-pve-team-leader = Team Leader
 rmc-job-prefix-pmc-pve-team-leader = TL
+rmc-job-description-pmc-pve-team-leader = Lighten the burden on the Force Leader. Ensure your team effectively carries out orders.
+
 rmc-job-name-pmc-pve-force-leader = Force Leader
 rmc-job-prefix-pmc-pve-force-leader = FL
+rmc-job-description-pmc-pve-force-leader = Command the Force groundside. Represent the will and needs of Force Command.
+
 rmc-job-name-pmc-pve-force-command = Force Command
+rmc-job-prefix-pmc-pve-force-command = FCO
+rmc-job-description-pmc-pve-force-command = Coordinate with both the Force Leader and Team Leaders to ensure your instructions are carried out and your team earns their pay.
 
 rmc-ghost-name-pmc-whiteout = We-Ya PMC Whiteout Combat Unit (!DEATHSQUAD!)
 rmc-job-name-pmc-whiteout = Whiteout Team Combat Unit
@@ -92,7 +107,6 @@ rmc-ghost-name-pmc-whiteout-gunner = We-Ya PMC Whiteout Combat Gunner Unit (!DEA
 rmc-job-name-pmc-whiteout-gunner = Whiteout Team Combat Gunner Unit
 
 rmc-job-prefix-pmc-whiteout = WO
-rmc-job-prefix-pmc-pve-force-command = FCO
 
 # Executives
 
