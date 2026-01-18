@@ -428,7 +428,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (stackType == "CMPlasteel")
             return repairable.Comp.RepairPlasteel;
 
-        if (stackType == "RMCPlankWood")
+        if (stackType == "RMCWood")
             return repairable.Comp.RepairWood;
 
         return 0;
@@ -447,7 +447,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (damageCap <= 0)
             return 0;
 
-        if (stackType == "RMCPlankWood")
+        if (stackType == "RMCWood")
             return damageCap * 0.075f;
 
         if (stackType == "CMSteel")
@@ -487,7 +487,7 @@ public sealed class RMCRepairableSystem : EntitySystem
     {
         return stackComponent.StackTypeId == "CMSteel" ||
                stackComponent.StackTypeId == "CMPlasteel" ||
-               stackComponent.StackTypeId == "RMCPlankWood";
+               stackComponent.StackTypeId == "RMCWood";
     }
 
     private void OnWelderInteractUsing(Entity<ReagentTankComponent> ent, ref InteractUsingEvent args)
