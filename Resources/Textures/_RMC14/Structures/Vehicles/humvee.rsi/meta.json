@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "humvee_base",
+      "directions": 4
+    },
+    {
+      "name": "WHEEL"
+    },
+    {
+      "name": "humvee_wheels_0",
+      "directions": 4
+    },
+    {
+      "name": "humvee_wheels_0",
+      "directions": 4,
+      "delays": [
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ],
+        [
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08,
+          0.08
+        ]
+      ]
+    },
+    {
+      "name": "humvee_wheels_1",
+      "directions": 4
+    },
+    {
+      "name": "PRIMARY"
+    },
+    {
+      "name": "humveeturret_0",
+      "directions": 4
+    },
+    {
+      "name": "humveecannon_0",
+      "directions": 4
+    },
+    {
+      "name": "humveeturret_1",
+      "directions": 4
+    },
+    {
+      "name": "humveecannon_1",
+      "directions": 4
+    },
+    {
+      "name": "SECONDARY"
+    },
+    {
+      "name": "humveelauncher_0",
+      "directions": 4
+    },
+    {
+      "name": "humveelauncher_1",
+      "directions": 4
+    },
+    {
+      "name": "humveelauncher_2",
+      "directions": 4
+    },
+    {
+      "name": "ATTACH"
+    },
+    {
+      "name": "snowplow_0",
+      "directions": 4
+    },
+    {
+      "name": "snowplow_1",
+      "directions": 4
+    },
+    {
+      "name": "overlight_0",
+      "directions": 4
+    },
+    {
+      "name": "overlight_1",
+      "directions": 4
+    },
+    {
+      "name": "overlight_off",
+      "directions": 4
+    },
+    {
+      "name": "overlight_on",
+      "directions": 4
+    },
+    {
+      "name": "humveehatch_0",
+      "directions": 4
+    },
+    {
+      "name": "OVERLAY"
+    },
+    {
+      "name": "damaged_frame",
+      "directions": 4
+    }
+  ]
+}

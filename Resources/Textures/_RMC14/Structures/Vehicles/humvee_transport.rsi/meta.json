@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 96,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "humvee_base",
+      "directions": 4
+    },
+    {
+      "name": "WHEEL"
+    },
+    {
+      "name": "humvee_wheels_0",
+      "directions": 4
+    },
+    {
+      "name": "humvee_wheels_0",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "humvee_wheels_1",
+      "directions": 4
+    },
+    {
+      "name": "ATTACH"
+    },
+    {
+      "name": "snowplow_0",
+      "directions": 4
+    },
+    {
+      "name": "snowplow_1",
+      "directions": 4
+    },
+    {
+      "name": "overlight_0",
+      "directions": 4
+    },
+    {
+      "name": "overlight_1",
+      "directions": 4
+    },
+    {
+      "name": "OVERLAY"
+    },
+    {
+      "name": "damaged_frame",
+      "directions": 4
+    }
+  ]
+}
