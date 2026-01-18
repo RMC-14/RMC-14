@@ -438,8 +438,8 @@ public sealed class RMCRepairableSystem : EntitySystem
     {
         var multiplier = _skills.GetSkillDelayMultiplier(user, ConstructionSkill);
         var damage = totalDamage.Float();
-        var scaled = MathF.Floor(damage / 5f) * multiplier;
-        return MathF.Max(5f, scaled);
+        var scaled = MathF.Floor(damage / 200f) * multiplier;
+        return MathF.Max(2f, scaled);
     }
 
     private float GetWallNailgunRepairValue(string stackType, float damageCap)

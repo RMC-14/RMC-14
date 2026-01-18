@@ -1,3 +1,11 @@
+- type: examinableDamage
+  id: RMCWallMessages
+  messages:
+    - rmc-wall-integrity-1
+    - rmc-wall-integrity-2
+    - rmc-wall-integrity-3
+    - rmc-wall-integrity-4
+
 # Standard
 - type: entity
   parent: CMBaseWall
