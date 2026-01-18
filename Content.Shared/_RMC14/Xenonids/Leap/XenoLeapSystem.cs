@@ -8,10 +8,15 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Movement;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids.Construction;
+using Content.Shared._RMC14.Xenonids.Egg;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Invisibility;
+using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Spray;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Coordinates;
@@ -88,6 +93,7 @@ public sealed class XenoLeapSystem : EntitySystem
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapActionEvent>(OnXenoLeapAction);
         SubscribeLocalEvent<XenoLeapComponent, XenoLeapDoAfterEvent>(OnXenoLeapDoAfter);
         SubscribeLocalEvent<XenoLeapComponent, MeleeHitEvent>(OnXenoLeapMelee);
+        SubscribeLocalEvent<XenoLeapComponent, RMCMeleeUserGetRangeEvent>(OnXenoLeapingMeleeGetRange);
 
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotEquippedHandEvent>(OnEquippedHand);
         SubscribeLocalEvent<RMCGrantLeapProtectionComponent, GotUnequippedHandEvent>(OnUnequippedHand);
@@ -254,8 +260,24 @@ public sealed class XenoLeapSystem : EntitySystem
                 RemComp<SlowedDownComponent>(xeno);
                 _movementSpeed.RefreshMovementSpeedModifiers(xeno);
             }
+
+            xeno.Comp.LastHit = null;
+            xeno.Comp.LastHitAt = null;
+            Dirty(xeno);
             break;
         }
+    }
+
+    private void OnXenoLeapingMeleeGetRange(Entity<XenoLeapComponent> ent, ref RMCMeleeUserGetRangeEvent args)
+    {
+        if (ent.Comp.LastHit == null ||
+            ent.Comp.LastHit != args.Target ||
+            _timing.CurTime > ent.Comp.LastHitAt + ent.Comp.MoveDelayTime)
+        {
+            return;
+        }
+
+        args.Range = ent.Comp.LastHitRange;
     }
 
     private void OnXenoLeapingDoHit(Entity<XenoLeapingComponent> xeno, ref StartCollideEvent args)
@@ -288,10 +310,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnXenoLeapHitAttempt(Entity<RMCLeapProtectionComponent> ent, ref XenoLeapHitAttempt args)
     {
-        if(args.Cancelled)
+        if (args.Cancelled)
             return;
 
-        if(!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
+        if (!TryComp(args.Leaper, out XenoLeapingComponent? leaping))
             return;
 
         args.Cancelled = AttemptBlockLeap(ent.Owner, ent.Comp.StunDuration, ent.Comp.BlockSound, args.Leaper, leaping.Origin, ent.Comp.FullProtection);
@@ -316,7 +338,7 @@ public sealed class XenoLeapSystem : EntitySystem
         if ((ent.Comp.Slots & args.SlotFlags) == 0)
             return;
 
-        if(!RemoveLeapProtection(args.Equipee, ent))
+        if (!RemoveLeapProtection(args.Equipee, ent))
             return;
 
         RemCompDeferred<RMCLeapProtectionComponent>(args.Equipee);
@@ -324,7 +346,7 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnEquippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotEquippedHandEvent args)
     {
-        if(!ent.Comp.ProtectsInHand)
+        if (!ent.Comp.ProtectsInHand)
             return;
 
         ApplyLeapProtection(args.User, ent);
@@ -332,10 +354,10 @@ public sealed class XenoLeapSystem : EntitySystem
 
     private void OnUnequippedHand(Entity<RMCGrantLeapProtectionComponent> ent, ref GotUnequippedHandEvent args)
     {
-        if(!ent.Comp.ProtectsInHand)
+        if (!ent.Comp.ProtectsInHand)
             return;
 
-        if(!RemoveLeapProtection(args.User, ent))
+        if (!RemoveLeapProtection(args.User, ent))
             return;
 
         RemCompDeferred<RMCLeapProtectionComponent>(args.User);
@@ -471,6 +493,14 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
+        if (HasComp<XenoParasiteComponent>(target) ||
+            HasComp<XenoFruitComponent>(target) ||
+            HasComp<XenoEggComponent>(target) ||
+            HasComp<XenoAcidSplatterComponent>(target))
+        {
+            return false;
+        }
+
         if (_standing.IsDown(target))
             return false;
 
@@ -478,6 +508,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         if (_size.TryGetSize(target, out var size) && size >= RMCSizes.Big)
+            return false;
+
+        if (size == RMCSizes.VerySmallXeno)
             return false;
 
         if (HasComp<XenoWeedsComponent>(target) || HasComp<XenoConstructComponent>(target))
@@ -513,6 +546,13 @@ public sealed class XenoLeapSystem : EntitySystem
 
         xeno.Comp.KnockedDown = true;
         Dirty(xeno);
+
+        if (TryComp(xeno, out XenoLeapComponent? leap))
+        {
+            leap.LastHit = target;
+            leap.LastHitAt = _timing.CurTime;
+            Dirty(xeno, leap);
+        }
 
         if (_physicsQuery.TryGetComponent(xeno, out var physics))
         {

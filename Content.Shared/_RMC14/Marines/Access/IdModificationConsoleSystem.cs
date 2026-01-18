@@ -79,6 +79,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        Dirty(uid.Value, access);
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -109,11 +111,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         idCard._jobTitle = "Civilian";
         Dirty(uid.Value, idCard);
+        Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
             _squad.RemoveSquad(idCard.OriginalOwner.Value, null);
-            _metaData.SetEntityName(uid.Value, $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
+            _metaData.SetEntityName(uid.Value,
+                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
         }
 
         _adminLogger.Add(LogType.RMCIdModify,
@@ -127,8 +131,10 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (!ent.Comp.Authenticated)
             return;
 
-        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || !TryComp(uid, out ItemIFFComponent? iff))
+        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) || uid == null)
             return;
+
+        EnsureComp<ItemIFFComponent>(uid.Value, out var iff);
 
         if (iff.Faction != ent.Comp.Faction && !args.Revoke)
         {
@@ -147,7 +153,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
         }
 
-
+        Dirty(uid.Value, iff);
         Dirty(ent);
     }
 
@@ -179,7 +185,10 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             ContainerInHandler(ent, args.Actor, ent.Comp.PrivilegedIdSlot);
             if (ent.Comp.Authenticated)
                 return;
-            _popup.PopupClient($"This id is missing the {Loc.GetString(ent.Comp.Access)}",
+            if (!_prototype.TryIndex(ent.Comp.Access, out var accessPrototype) || accessPrototype.Name == null)
+                return;
+
+            _popup.PopupClient($"This id is missing the {Loc.GetString(accessPrototype.Name)}",
                 args.Actor,
                 PopupType.MediumCaution);
         }
@@ -244,6 +253,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 break;
         }
 
+        Dirty(uid.Value, access);
         Dirty(ent);
     }
 
@@ -270,6 +280,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
         }
+
+        Dirty(uid.Value, access);
     }
 
     //TODO RMC14 add ranks tab

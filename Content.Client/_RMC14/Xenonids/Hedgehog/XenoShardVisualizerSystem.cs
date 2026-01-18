@@ -10,40 +10,26 @@ public sealed class XenoShardVisualizerSystem : VisualizerSystem<XenoShardCompon
     {
         var sprite = args.Sprite;
 
-        if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoShardVisuals.Level, out XenoShardLevel level))
+        if (sprite == null || !AppearanceSystem.TryGetData(uid, XenoShardVisuals.Level, out XenoShardLevel level) ||
+            !SpriteSystem.LayerMapTryGet((uid, sprite), XenoShardVisualLayers.Base, out var layer, true))
             return;
+
+        string layerState = $"hedgehog_{(int)level}";
 
         // Check if entity is dead first
         if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Dead, out bool dead) && dead)
         {
-            sprite.LayerSetState(0, "dead");
             return;
         }
-        
-        // Check if entity is in crit or resting state
-        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
+        else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
         {
-            sprite.LayerSetState(0, "crit");
-            return;
+            layerState += "_crit";
         }
-        
-        if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
+        else if (AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
         {
-            sprite.LayerSetState(0, "sleeping");
-            return;
+            layerState += "_resting";
         }
 
-        // Only use hedgehog scaling for normal alive state
-        string layerState = $"hedgehog_{(int)level}";
-
-        try
-        {
-            sprite.LayerSetState(0, layerState);
-        }
-        catch
-        {
-            // Fallback to alive if hedgehog sprite doesn't exist
-            sprite.LayerSetState(0, "alive");
-        }
+        SpriteSystem.LayerSetRsiState((uid, sprite), layer, layerState);
     }
 }

@@ -229,7 +229,7 @@ public abstract partial class SharedGunSystem
         }
 
         List<(EntityUid? Entity, IShootable Shootable)> ammo = new();
-        var evTakeAmmo = new TakeAmmoEvent(20, ammo, Transform(uid).Coordinates, args.User); // RMC14
+        var evTakeAmmo = new TakeAmmoEvent(Math.Clamp(target.Capacity - target.Count, 0, 20), ammo, Transform(uid).Coordinates, args.User); // RMC14
         RaiseLocalEvent(uid, evTakeAmmo);
 
         foreach (var (ent, _) in ammo)

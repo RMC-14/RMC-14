@@ -25,7 +25,7 @@
     - Burst
     - FullAuto
     soundGunshot:
-      collection: CMM54CShoot
+      collection: RMCType71Shoot
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -65,6 +65,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
+          - RMCAttachmentExtendedCompensator
           - RMCM5Bayonet
           - RMCAttachmentBarrelCharger
       rmc-aslot-rail:

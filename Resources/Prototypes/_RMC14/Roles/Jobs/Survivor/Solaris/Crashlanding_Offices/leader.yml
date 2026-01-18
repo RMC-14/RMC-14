@@ -1,0 +1,78 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorSolarisPMCLeader
+  name: rmc-job-name-pmc-leader
+  ranks:
+    RMCRankWeYaTeamLeader: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCLeader
+  icon: RMCJobIconPMCLeader
+  greeting: rmc-job-greeting-solaris-pmc-leader
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC Leader (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaPMCLeader
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: pmc_ld
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCBase
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-leader
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorPMCBase
+  id: RMCGearSurvivorPMCLeader
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCLeaderNoWebbingPatch
+    shoes: RMCBootsPMCFilled
+    gloves: RMCHandsVeteranPMC
+    mask: RMCMaskCoifPMC # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetHvHWeYaPMCLeader
+    head: ArmorHelmetPMCOfficer
+    outerClothing: CMArmorM4PMCLeader
+    back: RMCSatchelPMC
+    belt: RMCM77BeltPMCFilledNearEmpty
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+    # eyes: # TODO RMC14: SensorMate HUD
+  storage:
+    back:
+    - CMSheetMetal20
+    outerClothing:
+    - RMCMREWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCrashlandingOfficesLeader
+  name: special survivor crashlanding offices pmc leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisPMCLeader
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy

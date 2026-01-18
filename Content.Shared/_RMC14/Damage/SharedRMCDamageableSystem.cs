@@ -437,7 +437,6 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
             }
 
             equal = DistributeDamageCached(damageable, group.ID, left, equal);
-            amount = left;
         }
 
         return equal ?? new DamageSpecifier();

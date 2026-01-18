@@ -42,6 +42,7 @@
           - ProjectileBatteryAmmoProvider
           - Defibrillator
           - Visor
+          - PortableDialysis
           # SmartGun Battery
   - type: ItemMapper
     sprite: _RMC14/Structures/Power/recharger.rsi
@@ -54,3 +55,13 @@
         whitelist:
           components:
             - Stunbaton
+
+- type: entity
+  parent: RMCRecharger
+  id: RMCRechargerLocked
+  suffix: locked
+  components:
+  - type: Transform
+    anchored: true
+  - type: Anchorable
+    flags: None

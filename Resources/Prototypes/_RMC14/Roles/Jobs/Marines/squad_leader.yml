@@ -74,6 +74,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: leader
     - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearSquadLeader
@@ -185,7 +186,7 @@
   - type: Sprite
     sprite: _RMC14/Actions/marine_actions.rsi
     state: move
-    
+
 - type: entity
   id: RMCGuidebookActionHold
   name: Hold order

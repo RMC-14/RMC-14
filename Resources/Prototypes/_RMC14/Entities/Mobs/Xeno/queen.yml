@@ -28,6 +28,9 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
       state: hudeye
@@ -261,6 +264,9 @@
     value: 1.4
   - type: QueenEyeAction
   - type: StunFriendlyXenoOnStep
+    whitelist:
+      components:
+      - StunFriendlyXenoOnStep
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
@@ -269,6 +275,8 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartTQ
   - type: RMCTrackable
+  - type: ExcludedFromKingVote
+    canVote: true
 
 - type: entity
   parent: RMCXenoQueenBase

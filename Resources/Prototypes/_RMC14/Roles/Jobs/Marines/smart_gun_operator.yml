@@ -51,6 +51,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: smartgunner
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearSmartGunOperator
