@@ -16,10 +16,6 @@
     },
     {
       "name": "humvee_wheels_0",
-      "directions": 4
-    },
-    {
-      "name": "humvee_wheels_0",
       "directions": 4,
       "delays": [
         [
