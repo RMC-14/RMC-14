@@ -132,3 +132,75 @@
     whitelist:
       tags:
       - RMCUniformMarine
+
+# SPP
+- type: entity
+  parent: RMCSuitEVABase
+  id: RMCSuitEVASPP
+  name: SPP Type 2 pressure suit
+  description: A heavy and bulky military-grade space suit utilized by the Socialist Progressive People and a few other SPP organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/spp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/spp.rsi
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ToggleableClothing
+    clothingPrototype: RMCHelmetEVASPP
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
+
+- type: entity
+  parent: RMCHelmetEVABase
+  id: RMCHelmetEVASPP
+  categories: [ HideSpawnMenu ]
+  name: SPP Type 2 pressure helmet
+  description: A heavy space helmet, designed to be coupled with the Type 2 pressure suit utilized by the Socialist Progressive People and a few other SPP organizations.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/spp.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/spp.rsi
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+  - type: ClothingRequireEquipped
+    denyReason: rmc-armor-not-spp-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformSPP
+
+# Civilian/Generic
+- type: entity
+  parent: RMCSuitEVABase
+  id: RMCSuitEVACivilian
+  name: white pressure suit
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/white.rsi # TODO
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/EVA/white.rsi # TODO
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ToggleableClothing
+    clothingPrototype: RMCHelmetEVACivilian
+  - type: RMCBulkyArmor
+    isBulky: false
+
+- type: entity
+  parent: RMCHelmetEVABase
+  id: RMCHelmetEVACivilian
+  categories: [ HideSpawnMenu ]
+  name: white pressure helmet
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/white.rsi # TODO
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/EVA/white.rsi # TODO
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+
+# RMC14 TODO: Port the other colored hardsuits (Orange, Yellow, Cyan, Red)
