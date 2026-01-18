@@ -60,10 +60,11 @@
     sprite: _RMC14/Objects/Clothing/Head/Dutch/band.rsi
 
 # Iron Bear
+# I can't find this in cm?
 - type: entity
   parent: RMCArmorHelmetDutch
   id: RMCArmorHelmetBear
-  name: iron bear helmet # I can't find this in cm?
+  name: iron bear helmet
   description: Is good for winter, because it has hole to put vodka through.
   components:
   - type: Sprite
