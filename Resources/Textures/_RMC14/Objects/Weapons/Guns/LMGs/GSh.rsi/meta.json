@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Parts Taken/modified from https://github.com/RMC-14/RMC-14/tree/89ebe1e90700287469c59d01733c200d643d9287/Resources/Textures/Objects/Weapons/Guns/HMGs/minigun.rsi, https://github.com/RMC-14/RMC-14/tree/89ebe1e90700287469c59d01733c200d643d9287/Resources/Textures/_RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi. Colour sceme Taken from https://github.com/cmss13-devs/cmss13/blob/7a12b1ed65b6a16d35d24b1b89cd053a09c8643c/icons/obj/items/weapons/guns/guns_by_faction/event.dmi. Made by RavenCaat :3.",
+  "copyright": "Parts Taken/modified from https://github.com/RMC-14/RMC-14/tree/89ebe1e90700287469c59d01733c200d643d9287/Resources/Textures/Objects/Weapons/Guns/HMGs/minigun.rsi, https://github.com/RMC-14/RMC-14/tree/89ebe1e90700287469c59d01733c200d643d9287/Resources/Textures/_RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi. Colour sceme Taken from https://github.com/cmss13-devs/cmss13/blob/7a12b1ed65b6a16d35d24b1b89cd053a09c8643c/icons/obj/items/weapons/guns/guns_by_faction/event.dmi. Made by RavenCaat, Contributor Dygon (Discord) helped with the Inhand Sprites :3.",
   "size": {
     "x": 64,
     "y": 32
@@ -17,14 +17,6 @@
     },
     {
       "name": "inhand-right",
-      "directions": 4
-    },
-    {
-      "name": "wielded-inhand-left",
-      "directions": 4
-    },
-    {
-      "name": "wielded-inhand-right",
       "directions": 4
     },
     {
