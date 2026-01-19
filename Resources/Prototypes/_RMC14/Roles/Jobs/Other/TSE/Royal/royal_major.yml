@@ -13,6 +13,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - RoyalMarines
@@ -39,12 +40,20 @@
         RMCSkillSmartGun: 1
         RMCSkillExecution: 1
     - type: MarineOrders
+    - type: SquadArmorWearer
+      leader: true
+    - type: SquadLeader #due to this also being on the team leader and the lieutenant, be sure to spawn the one you want to be the squad leader first
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_commander
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-major
   hidden: true
+
+# should not need to be a ghost role and entity due to... well, its a fucking CO spawn, if you need it, make it yourself type shit <3
 
 - type: startingGear
   id: RMCGearRoyalMajor
@@ -58,10 +67,10 @@
     shoes: RMCBootsRoyalFilled
     suitstorage: RMCWeaponRifleL24
     id: RMCIDRoyalMarines
-    belt: RMCMatebaBeltLuxuriousFilled
-    back: RMCSatchelLightpackFilledRoyalMedic
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
-    pocket2: RMCPouchMedkitFillRoyal
+    belt: RMCMatebaBeltFilled
+    back: RMCSatchelLightpackFilledRoyalMajor
+    pocket1: RMCPouchToolsRCM
+    pocket2: RMCPouchMedkitFillRoyalMarineCommand
 
 - type: playTimeTracker
   id: RMCJobRoyalMajor

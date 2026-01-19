@@ -58,13 +58,19 @@
     job: CMRoyalMarinesMarksman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
+    eyes: CMGlassesM42ScoutSight # Royal Marine Commando marksmans goggles TODO RMC
     mask: RMCMaskScarfTan
     jumpsuit: RMCJumpsuitMarineRoyalMK80
     outerClothing: RMCArmorRoyalLightFilled
@@ -75,7 +81,7 @@
     belt: RMCL24BeltFilled
     back: RMCSatchelLightpackFilledRoyalMarksman # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledRoyalCommando
-    pocket2: RMCPouchMedkitFillRoyal
+    pocket2: RMCPouchMedkitFillRoyalMarine
 
 - type: playTimeTracker
   id: RMCJobRoyalMarksman
