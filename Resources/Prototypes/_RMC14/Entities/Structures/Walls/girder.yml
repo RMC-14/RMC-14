@@ -37,7 +37,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 125
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -92,7 +92,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 500
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -114,9 +114,7 @@
         sound:
           collection: MetalBreak
   - type: ReceiverXenoClaws
-    minimumClawStrength: VerySharp
     maxHealth: 500
-    minimumXenoTier: 2
   - type: StaticPrice
     price: 66
 
