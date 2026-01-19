@@ -93,10 +93,6 @@
         points: 6
       - id: CMMagazineRifleM4SPRExt
         points: 6
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 6
       - id: CMMagazineSMGM63Ext
@@ -109,6 +105,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #   points: 6
       - id: RMCSpeedLoader44Marksman
@@ -236,6 +236,7 @@
       choices: { CMArmor: 1 }
       entries:
       - id: RMCArmorVestSquad
+        name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor
       - id: RMCArmorM3MediumVariants
@@ -295,14 +296,14 @@
         name: electronics pouch (Full)
       - id: RMCPouchExplosive
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
       - id: RMCPouchGeneralMedium
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
-        name: Tools pouch (Full)
+        name: tools pouch (Full)
       - id: RMCPouchEngineerKit
     - name: Accessories
       choices: { CMAccessories: 1 }
