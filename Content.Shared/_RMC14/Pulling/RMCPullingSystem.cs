@@ -19,11 +19,16 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Whitelist;
+using Content.Shared._RMC14.Synth;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Xenonids.Crest;
+using Content.Shared._RMC14.Xenonids.Fortify;
+using Content.Shared._RMC14.Stun;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Shared._RMC14.Pulling;
 
@@ -45,6 +50,7 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
+    [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -105,6 +111,7 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         var user = args.PullerUid;
         var target = args.PulledUid;
+
         if (target != ent.Owner ||
             HasComp<ParalyzeOnPullAttemptImmuneComponent>(user) ||
             _mobState.IsDead(ent))
@@ -112,22 +119,97 @@ public sealed class RMCPullingSystem : EntitySystem
             return;
         }
 
+        // if entitity is on synth whitelist allow pull unless its defender with crest lowered or fortified
+        if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFrom) &&
+            immuneFrom.Whitelist != null &&
+            _whitelist.IsWhitelistPass(immuneFrom.Whitelist, ent.Owner))
+        {
+            var defenderHasActiveDefense =
+                (TryComp<XenoCrestComponent>(ent.Owner, out var crest) && crest.Lowered) ||
+                (TryComp<XenoFortifyComponent>(ent.Owner, out var fort) && fort.Fortified);
+
+            if (!defenderHasActiveDefense)
+                return;
+
+            // Defender fortified or crested - knockback and stun but allows for synth to cancel
+            args.Cancelled = true;
+
+            if (ent.Comp.Sound is { } sound)
+            {
+                var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+                _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+            }
+
+            var origin = _transform.GetMapCoordinates(ent.Owner);
+            _sizeStun.KnockBack(user, origin, knockBackPowerMin: 2f, knockBackPowerMax: 2f, knockBackSpeed: 10f, ignoreSize: true);
+
+            // Stun is here to prevent movement during knockback animation
+            _stun.TryParalyze(user, ent.Comp.Duration, true);
+
+            // Allow cancel on movement after minimum 0.5 seconds
+            var cancel = EnsureComp<SynthStunCancelOnMoveComponent>(user);
+            cancel.CancelAfter = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+
+            // Self-only popup using rmc-pull-paralyze-self
+            var selfMsg = Loc.GetString("rmc-pull-paralyze-self",
+                ("puller", user),
+                ("pulled", Identity.Name(target, EntityManager, user)));
+
+            _popup.PopupClient(selfMsg, user, user, PopupType.MediumCaution);
+
+            return;
+        }
+        else
+        {
+            // Enitity not on synths whitelist - knockback and stun but allows for synth to cancel
+            if (TryComp<ParalyzeImmuneFromComponent>(user, out var immuneFromNotWL) && immuneFromNotWL.Whitelist != null)
+            {
+                if (!_whitelist.IsWhitelistPass(immuneFromNotWL.Whitelist, ent.Owner))
+                {
+                    args.Cancelled = true;
+
+                    if (ent.Comp.Sound is { } sound)
+                    {
+                        var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+                        _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+                    }
+
+                    var origin = _transform.GetMapCoordinates(ent.Owner);
+                    _sizeStun.KnockBack(user, origin, knockBackPowerMin: 2f, knockBackPowerMax: 2f, knockBackSpeed: 10f, ignoreSize: true);
+
+                    // Stun is here to prevent movement during knockback animation
+                    _stun.TryParalyze(user, ent.Comp.Duration, true);
+
+                    // Allow cancel on movement after minimum 0.5 seconds
+                    var cancel = EnsureComp<SynthStunCancelOnMoveComponent>(user);
+                    cancel.CancelAfter = _timing.CurTime + TimeSpan.FromSeconds(0.5);
+
+                    // Self-only popup using rmc-pull-paralyze-self
+                    var selfMsg = Loc.GetString("rmc-pull-paralyze-self",
+                        ("puller", user),
+                        ("pulled", Identity.Name(target, EntityManager, user)));
+
+                    _popup.PopupClient(selfMsg, user, user, PopupType.MediumCaution);
+
+                    return;
+                }
+            }
+        }
+
+        // Default behaviour: cancel event and paralyze the puller.
         args.Cancelled = true;
 
-        if (ent.Comp.Sound is { } sound)
+        if (ent.Comp.Sound is { } sound2)
         {
-            var pitch = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
-            _audio.PlayPredicted(sound, ent, user, sound.Params.WithPitchScale(pitch));
+            var pitch2 = _random.NextFloat(ent.Comp.MinPitch, ent.Comp.MaxPitch);
+            _audio.PlayPredicted(sound2, ent, user, sound2.Params.WithPitchScale(pitch2));
         }
 
         _stun.TryParalyze(user, ent.Comp.Duration, true);
 
-        var puller = user;
-        var pulled = target;
-        var othersMessage = Loc.GetString("rmc-pull-paralyze-others", ("puller", puller), ("pulled", pulled));
-        var selfMessage = Loc.GetString("rmc-pull-paralyze-self", ("puller", puller), ("pulled", pulled));
-
-        _popup.PopupPredicted(selfMessage, othersMessage, puller, puller, PopupType.MediumCaution);
+        var othersMessage = Loc.GetString("rmc-pull-paralyze-others", ("puller", user), ("pulled", target));
+        var selfMessage = Loc.GetString("rmc-pull-paralyze-self", ("puller", user), ("pulled", Identity.Name(target, EntityManager, user)));
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user, PopupType.MediumCaution);
     }
 
     private void OnInfectOnPullAttempt(Entity<InfectOnPullAttemptComponent> ent, ref PullAttemptEvent args)
@@ -331,7 +413,7 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         TryStopPullsOn(pullie);
 
-       if (TryComp(pullie, out PullerComponent? puller) &&
+        if (TryComp(pullie, out PullerComponent? puller) &&
             puller.Pulling != null &&
             TryComp(puller.Pulling, out PullableComponent? pullable2))
         {
@@ -473,6 +555,23 @@ public sealed class RMCPullingSystem : EntitySystem
                 continue;
 
             _pulling.TryStopPull(uid, pullable);
+        }
+
+        // Synth stun/knockdown cancel via movementkeyinput from grabbing not whitlisted e.g T3 or fort
+        var cancelQuery = EntityQueryEnumerator<SynthStunCancelOnMoveComponent, InputMoverComponent>();
+        while (cancelQuery.MoveNext(out var uid, out var cancel, out var input))
+        {
+            if ((input.HeldMoveButtons & MoveButtons.AnyDirection) == 0)
+                continue;
+
+            if (_timing.CurTime < cancel.CancelAfter)
+                continue;
+
+            // Remove both paralyze and knockdown effects
+            _statusEffects.TryRemoveStatusEffect(uid, "Stun");
+            _statusEffects.TryRemoveStatusEffect(uid, "KnockedDown");
+
+            RemCompDeferred<SynthStunCancelOnMoveComponent>(uid);
         }
 
         var pullableQuery = EntityQueryEnumerator<BeingPulledComponent, PullableComponent>();

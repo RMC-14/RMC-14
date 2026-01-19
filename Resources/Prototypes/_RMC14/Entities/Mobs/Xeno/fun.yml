@@ -48,6 +48,9 @@
     description: roles-lesser-carrier-description
     raffle:
       settings: short
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Extras/lesser_carrier.rsi
     layers:
