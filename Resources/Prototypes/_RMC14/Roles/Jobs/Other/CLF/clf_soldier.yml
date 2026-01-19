@@ -20,7 +20,7 @@
       skills:
         RMCSkillFirearms: 1
         RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
         RMCSkillFireman: 1
         RMCSkillConstruction: 1
         RMCSkillEngineer: 1

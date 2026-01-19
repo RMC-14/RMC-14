@@ -18,7 +18,7 @@
         RMCSkillResearch: 1
         RMCSkillMeleeWeapons: 2
         RMCSkillPilot: 2
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 2
         RMCSkillVehicles: 2

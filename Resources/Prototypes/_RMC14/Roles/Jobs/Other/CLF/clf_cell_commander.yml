@@ -21,7 +21,7 @@
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
         RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 1
         RMCSkillVehicles: 2
