@@ -9,12 +9,27 @@
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_icon.rsi
       state: base
-      map: [ "enum.RMCMagazineVisuals.SlideOpen" ]
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: bolt-open }
+          False: { state: base }
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/m85a1/m85a1_inhands.rsi
     slots:
     - Back
     - suitStorage
+  - type: ShootUseDelay
+  - type: UseDelay
+  - type: BreechLoaded
+    openSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_open_chamber.ogg
+    closeSound:
+      path: /Audio/_RMC14/Weapons/Guns/Breech/pkd_close_chamber.ogg
+    toggleDelay: 1.1
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m79_shoot.ogg
