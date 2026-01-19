@@ -168,6 +168,11 @@
   name: mercenary Z7 engineer helmet
   description: A sturdy helmet worn by an unknown mercenary group. This one includes a protective welding visor.
   components:
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
   - type: IntegratedVisors
     visorsToAdd:
     - RMCVisorSquadIntegrated
