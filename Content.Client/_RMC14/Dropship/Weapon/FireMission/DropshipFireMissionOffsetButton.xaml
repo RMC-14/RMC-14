@@ -1,0 +1,5 @@
+<controls:DropshipFireMissionOffsetButton
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship.Weapon.FireMission"
+    HorizontalExpand="True" VerticalExpand="True" MaxSize="35, 20" StyleClasses="OpenBoth">
+</controls:DropshipFireMissionOffsetButton>

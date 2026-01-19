@@ -84,6 +84,12 @@ public sealed partial class DropshipAmmoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool MarkerWarning;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan MarkerDuration;
+
+    [DataField, AutoNetworkedField]
+    public int? FireMissionDelay;
 }
 
 [Serializable, NetSerializable]

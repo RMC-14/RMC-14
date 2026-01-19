@@ -15,10 +15,22 @@ public sealed partial class DropshipWeaponPointComponent : Component
 
     [DataField, AutoNetworkedField]
     public string DirOffset;
+
+    [DataField, AutoNetworkedField]
+    public DropshipWeaponPointLocation? Location;
 }
 
 [Serializable, NetSerializable]
 public enum DropshipWeaponPointLayers
 {
     Layer,
+}
+
+[Serializable, NetSerializable]
+public enum DropshipWeaponPointLocation
+{
+    PortWing = 1,
+    StarboardWing = 2,
+    PortFore = 3,
+    StarboardFore = 4,
 }
