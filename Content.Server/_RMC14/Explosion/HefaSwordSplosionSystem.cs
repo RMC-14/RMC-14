@@ -1,23 +1,98 @@
-using Content.Server.Explosion.EntitySystems;
+using Content.Server.Weapons.Ranged.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Explosion.Components;
+using Content.Shared.Weapons.Ranged.Events;
+using Robust.Shared.Map;
+using Robust.Shared.Random;
 
 namespace Content.Server._RMC14.Explosion;
 
 public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 {
     [Dependency] private readonly RMCExplosionSystem _rmcExplosion = default!;
-    [Dependency] private readonly TriggerSystem _trigger = default!;
+    [Dependency] private readonly GunSystem _gun = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
+    // Reusable lists to avoid allocations during explosions.
+    private readonly List<EntityUid> _spawned = new();
+    private readonly List<EntityUid> _hitEntities = new();
 
     protected override void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
     {
-        // Move sword to target so all effects spawn at target location.
-        TransformSystem.SetCoordinates(ent, Transform(target).Coordinates);
+        if (!TryComp(target, out TransformComponent? targetXform))
+            return;
 
-        // Set rotation to match user's facing direction so shrapnel launches correctly.
-        TransformSystem.SetLocalRotation(ent, Transform(user).LocalRotation);
+        if (!TryComp(ent, out ExplosiveComponent? explosive))
+            return;
 
-        // Trigger ProjectileGrenadeComponent for shrapnel.
-        _trigger.Trigger(ent, user);
-        _rmcExplosion.TriggerExplosive(ent, user: user);
+        // Get target's position for explosion and shrapnel spawning.
+        var targetCoords = TransformSystem.GetMapCoordinates(targetXform);
+
+        // Get user's facing direction for shrapnel cone.
+        var userRotation = Transform(user).LocalRotation;
+
+        // Spawn shrapnel at target's position in a cone facing the user's direction.
+        SpawnShrapnel(ent, user, targetCoords, userRotation);
+
+        // Trigger explosion at target's position.
+        _rmcExplosion.QueueExplosion(
+            targetCoords,
+            explosive.ExplosionType,
+            explosive.TotalIntensity,
+            explosive.IntensitySlope,
+            explosive.MaxIntensity,
+            user,
+            explosive.TileBreakScale,
+            explosive.MaxTileBreak,
+            explosive.CanCreateVacuum);
+
+        var ev = new CMExplosiveTriggeredEvent();
+        RaiseLocalEvent(ent, ref ev);
+
+        // Delete the sword after all effects are triggered.
+        QueueDel(ent);
+    }
+
+    private void SpawnShrapnel(
+        Entity<HefaSwordSplosionComponent> ent,
+        EntityUid user,
+        MapCoordinates coords,
+        Angle userRotation)
+    {
+        var comp = ent.Comp;
+
+        if (comp.ShrapnelCount <= 0)
+            return;
+
+        _spawned.Clear();
+        _hitEntities.Clear();
+
+        var shrapnelCount = comp.ShrapnelCount;
+        var halfSpread = comp.SpreadAngle / 2;
+        var segmentAngle = comp.SpreadAngle / shrapnelCount;
+
+        // Convert user rotation to the direction they're facing.
+        // Subtract 90 degrees because sprite rotation 0 points up (+Y), but we want forward direction.
+        var baseAngle = userRotation.Degrees - 90 - halfSpread;
+
+        for (var i = 0; i < shrapnelCount; i++)
+        {
+            var shrapnel = Spawn(comp.ShrapnelPrototype, coords);
+
+            // Calculate angle for even distribution across the cone.
+            var angle = Angle.FromDegrees(baseAngle + segmentAngle * (i + 0.5));
+            var direction = angle.ToVec().Normalized();
+            var velocity = _random.NextVector2(comp.MinVelocity, comp.MaxVelocity);
+
+            // Shoot projectile with user as the shooter (not the sword).
+            _gun.ShootProjectile(shrapnel, direction, velocity, user, user, comp.ProjectileSpeed);
+            _spawned.Add(shrapnel);
+        }
+
+        // Raise cluster spawned event for ClusterLimitHits to work.
+        var clusterEv = new CMClusterSpawnedEvent(_spawned, _hitEntities, user);
+        RaiseLocalEvent(ent, ref clusterEv);
+
+        RaiseLocalEvent(ent, new AmmoShotEvent { FiredProjectiles = _spawned });
     }
 }

@@ -6,7 +6,7 @@
   components:
   - type: Tag
     tags:
-    - RMCSwordHEFA #no scabbard/holster
+    - RMCSwordHEFA # Prevents using the machete scabbard/holster.
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
     state: icon
@@ -19,16 +19,7 @@
     maxIntensity: 8
     intensitySlope: 4
     totalIntensity: 110
-  # Reuses the ProjectileGrenade system for shrapnel.
-  - type: ProjectileGrenade
-    evenSpread: true
-    fillPrototype: CMProjectileShrapnel
-    capacity: 48
-    spreadAngle: 90
-    directHit: false
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
+    deleteAfterExplosion: false
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
