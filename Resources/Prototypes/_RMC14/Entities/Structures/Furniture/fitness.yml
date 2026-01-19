@@ -1,0 +1,67 @@
+﻿- type: entity
+  parent: CMSeatBase
+  id: RMCWeightLifter
+  name: weight-lifting machine
+  description: Just looking at this thing makes you feel tired.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fitness.rsi
+    state: fitnesslifter
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+
+- type: entity
+  parent: RMCWeightLifter
+  id: RMCWeightBench
+  name: weight bench
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fitness.rsi
+    state: fitnessweight
+
+
+- type: entity
+  id: RMCPunchingBag
+  parent: BaseStructureDynamic
+  name: punching bag
+  description: A punching bag. Can you get to speed level 4???
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/fitness.rsi
+    state: punchingbag
+  - type: DamagePopup
+    allowTypeChange: true
+    damagePopupType: Combined
+  - type: InteractionOutline
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 9999998
+      behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 9999999
+      behaviors:
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          CMSheetMetal1:
+            min: 5
+            max: 5
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static

@@ -697,3 +697,27 @@
   components:
   - type: Sprite
     state: small_truck_red_f
+
+# Ambulance Shuttle
+- type: entity
+  parent: RMCPropVehicleLargeBase
+  id: RMCAmbulanceShuttle
+  name: LWI-443 Riptide Ambulance Shuttle
+  description: A short-range shuttle designed for transportation of injured personnel. The entrance is located on the back, between the three thruster arms.
+  components:
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.05,-0.5,3,0.7"
+        density: 190
+        layer:
+        - MobMask
+  - type: Sprite
+    drawdepth: OverMobs
+    sprite: _RMC14/Structures/Vehicles/ambulanceshuttle.rsi
+    state: ambushuttle
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-riptide-ambulance-shuttle
+

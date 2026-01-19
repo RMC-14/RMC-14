@@ -1,0 +1,62 @@
+﻿- type: entity
+  id: RMCNewscaster
+  name: newscaster
+  description: A standard Weston-Yamada-licensed newsfeed handler for use in commercial space stations. All the news you absolutely have no use for, in one place!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+    arc: 360
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb {}
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: newscaster_normal
+
+- type: entity
+  parent: RMCNewscaster
+  id: RMCNewscasterAlt
+  name: newscaster
+  suffix: Alt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: newscaster_wanted
+
+- type: entity
+  parent: RMCNewscaster
+  id: RMCNewscasterOff
+  name: newscaster
+  suffix: "Off"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: newscaster_off
+
+- type: entity
+  parent: RMCNewscaster
+  id: RMCATM
+  name: We-Ya Automatic Teller Machine
+  description: For all your monetary needs!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm
+
+- type: entity
+  parent: RMCATM
+  id: RMCATMOff
+  suffix: "Off"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm_off
