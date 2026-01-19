@@ -11,6 +11,11 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/cap.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    bio: 10
+    explosionArmor: 20
+    # armor_energy = 15
+    # armor_internaldamage = 10
 
 - type: entity
   parent: ArmorHelmetPMC
@@ -41,6 +46,10 @@
       - state: equipped-HELMET-reptilian
       head-vulpkanin:
       - state: equipped-HELMET-vulpkanin
+  - type: CMArmor
+    bullet: 25
+    bio: 15
+    # armor_internaldamage = 15
   - type: HideLayerClothing
     slots:
     - Hair
@@ -72,6 +81,10 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/field_officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/field_officer.rsi
+  - type: CMArmor
+    bullet: 25
+    bio: 15
+    # armor_internaldamage = 15
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical
@@ -97,8 +110,18 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: CMArmor
+    melee: 45
+    bullet: 15
+    bio: 45
+    explosionArmor: 15
+    # armor_laser = 15
+    # armor_energy = 15
+    # armor_internaldamage = 30
   - type: Corrodible
     isCorrodible: false
+  - type: ParasiteResistance
+    maxCount: 100
   - type: RMCEarProtection
   - type: PointLight
     color: "#e41c1f"
@@ -215,7 +238,7 @@
     color: "#c51ce4"
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: CMHeadCap
   id: ArmorHelmetPMCDirector
   name: director's hat
   description: Belongs to someone very important. Has minor protection to all damage types.
@@ -224,9 +247,18 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/director.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 15
+    bio: 20
+    explosionArmor: 10
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_rad = 10
+    # armor_internaldamage = 20
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: ArmorHelmetPMCDirector
   id: RMCHeadCapManager
   name: manager's hat
   description: Belongs to someone very important. Has minor protection to all damage types.
@@ -238,8 +270,6 @@
   - type: CMArmor
     melee: 15
     bullet: 10
-    bio: 15
-    explosionArmor: 10
 
 - type: entity
   parent: RMCHeadCapFlippable

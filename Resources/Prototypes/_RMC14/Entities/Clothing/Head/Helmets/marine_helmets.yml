@@ -119,39 +119,13 @@
     - RMCVisorSquadIntegrated
 
 - type: entity
-  parent: RMCHelmetBase
+  parent: CMArmorHelmetM10Medic
   id: RMCArmorHelmetM10FieldDoctor
   name: M10-L field doctor helmet
   description: A special variant of the M10 Pattern Helmet worn by the field doctors of the Marines. Comes with a built in medical display HUD.
   components:
-  - type: CMArmor
-    melee: 20
-    bullet: 20
-    explosionArmor: 10
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
-  - type: ItemCamouflage
-    camouflageVariations:
-      Jungle: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/jungle.rsi
-      Desert: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/desert.rsi
-      Snow: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/snow.rsi
-      Classic: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/classic.rsi
-      Urban: _RMC14/Objects/Clothing/Head/Helmets/m10/medic/urban.rsi
-  - type: CycleableVisor
-    offIcon:
-      sprite: _RMC14/Objects/Clothing/helmet_visors.rsi
-      state: sight_up
-    containers:
-    - rmc_visor_one
-    - rmc_visor_two
-    - rmc_visor_three
-  - type: IntegratedVisors
-    startToggled: true
-    visorsToAdd:
-    - RMCVisorMedicalAdvancedIntegrated
-    - RMCVisorSquadIntegrated
+  - type: RMCBulkyArmor
+    isBulky: false
 
 - type: entity
   parent: CMArmorHelmetM10Medic
@@ -192,6 +166,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 - type: entity
   parent: ArmorHelmetM10
@@ -208,6 +183,7 @@
     visorsToAdd:
     - RMCVisorSquadIntegrated
     - RMCVisorWeldingIntegrated
+  - type: RMCEarProtection
 
 # M11
 - type: entity
@@ -227,6 +203,8 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m11/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m11/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m11/urban.rsi
+  - type: CMArmor
+    bio: 25
 
 - type: entity
   parent: ArmorHelmetM10
@@ -242,7 +220,6 @@
     melee: 25
     bullet: 30
     bio: 25
-    explosionArmor: 10 #same as base m10 helmet
     #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations:
@@ -262,7 +239,7 @@
     - RMCVisorMedicalAdvancedIntegrated
 
 - type: entity
-  parent: ArmorHelmetM10
+  parent: CMArmorHelmetM11CCO
   id: CMArmorHelmetM11CGeneral
   name: M11C pattern ceremonial helmet
   description: A special M11 pattern ceremonial helmet worn occasionally by general officers of the UNMC.
@@ -271,12 +248,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m11/ceremonial.rsi
-  - type: CMArmor
-    melee: 25
-    bullet: 30
-    bio: 25
-    explosionArmor: 10 #same as base m10 helmet
-    #todo RMC: energy armor: 15
   - type: ItemCamouflage
     camouflageVariations: { }
 
@@ -300,7 +271,6 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m12/urban.rsi
   - type: CMArmor
     melee: 25
-    bullet: 25
     bio: 25
   - type: CycleableVisor
     containers:
@@ -326,6 +296,10 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m30/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m30/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m30/urban.rsi
+  - type: CMArmor
+    melee: 15
+    explosionArmor: 15
+    # armor_internaldamage = 15
   - type: CycleableVisor
     containers:
     - rmc_visor_one
@@ -374,7 +348,7 @@
 
 # M3-G4 Grenadier Spec
 - type: entity
-  parent: RMCArmorHelmetM3Scout
+  parent: ArmorHelmetM10
   id: RMCArmorHelmetM3G4
   name: M3-G4 grenadier helmet
   description: Pairs with the M3-G4 heavy grenadier plating. A distant cousin of the experimental B18 defensive helmet. # As such, it also resists some parasite latching attempts.
@@ -386,7 +360,10 @@
   - type: CMArmor
     melee: 25
     bullet: 25
+    bio: 25
     explosionArmor: 50
+    # armor_rad = 30
+    # armor_internaldamage = 30
   - type: ParasiteResistance
     maxCount: 6
   - type: ItemCamouflage
@@ -444,6 +421,10 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m45/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m45/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m45/urban.rsi
+  - type: CMArmor
+    bio: 10
+    explosionArmor: 20
+    # armor_internaldamage = 15
   - type: SquadArmor
     layer: Helmet
     slot: HEAD
@@ -474,7 +455,6 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
-  - type: RMCEarProtection
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/jungle.rsi
@@ -482,6 +462,9 @@
       Snow: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/snow.rsi
       Classic: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/classic.rsi
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m3/demo/urban.rsi
+  - type: CMArmor
+    explosionArmor: 30
+  - type: RMCEarProtection
 
 - type: entity
   parent: CMArmorHelmetM12

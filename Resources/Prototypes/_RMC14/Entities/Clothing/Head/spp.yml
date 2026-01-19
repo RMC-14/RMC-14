@@ -11,9 +11,17 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    bullet: 30
+    bio: 15
+    explosionArmor: 20
+    # armor_energy = 20
+    # armor_rad = 15
+    # armor_internaldamage = 30
+  - type: RMCEarProtection
 
 - type: entity
-  parent: CMArmorHelmetM10Tech
+  parent: ArmorHelmetSPP
   id: ArmorHelmetSPPEngineer
   name: SPP UM4-V helmet
   description: This version of the UM4 helmet has a ballistic-glass visor, allowing for the SPP Engineers to safely weld, but by some reports hindering sight in the process.
@@ -24,6 +32,18 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/engi.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    explosionArmor: 30
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorSquadIntegrated
+    - RMCVisorWeldingIntegrated
 
 - type: entity
   parent: ArmorHelmetSPP
@@ -35,6 +55,12 @@
     sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/heavy.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 35
+    bio: 20
+    explosionArmor: 30
+    # armor_internaldamage = 35
 
 - type: entity
   parent: ArmorHelmetSPP
