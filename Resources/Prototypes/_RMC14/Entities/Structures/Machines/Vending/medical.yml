@@ -300,7 +300,7 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: ColMarTechMarineMedical
-  name: ColMarTech MarineMed
+  name: ASRS MarineMed
   description: Medical Pharmaceutical dispenser with basic medical supplies for marines.
   components:
   - type: Fixtures
