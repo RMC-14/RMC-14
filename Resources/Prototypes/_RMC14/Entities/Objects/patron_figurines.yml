@@ -1968,7 +1968,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronZaydenSoapKirkson
   name: Zayden 'Soap' Kirkson figurine
-  description: "BATTLE, WE SHALL GIVE THEM WAR!"
+  description: "Zayden 'Soap' Kirkson Collectible Figurine!\n\nFrom brig bound to shelf ready, this unserious MP is finally here! Rumored to have finally conquered his PTSD, Soap arrives with his trademark stare and his infamous habit of devouring soap..? possibly with unlimited resistance!\n\nGet yours today before he eats the rest of the stock!"
   components:
   - type: Sprite
     state: zayden_soap_kirkson
@@ -2007,3 +2007,113 @@
     state: kaizer_deathwish_valentine
   - type: PatronFigurine
     id: 2cd412a9-6316-4163-8a33-637c63b2cd38
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronLost-In-Stars
+  name: Lost-In-Stars figurine
+  description: "The laziest, most irresponsible purple lizard of the requisition crew. Wonder where he got that giant poppy from..."
+  components:
+  - type: Sprite
+    state: lost-in-stars
+  - type: PatronFigurine
+    id: 5024804a-2912-4f89-b64e-8932488afa50
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMothroach
+  name: Luxi La Lustriana figurine
+  description: "At a glance it catches your eye, a strange looking moth... Looking closer, it seems to not just be a moth... but also some sort of insect... Like a moth... roach...? You think a bit more about it... How could it be a moth... and a roach... At the same time? It seems contradictory...\n\nLooking at it further... it seems to invoke some emotion... Like... you want to give everything you have to the moth... Your eyes can't look away from it... Drawn to it... like a moth to a flame... How ironic..."
+  components:
+  - type: Sprite
+    state: luxi_la_lustriana
+  - type: PatronFigurine
+    id: 615015b0-91bb-44d1-bc69-9a6bd8d5db18
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArtemisLua
+  name: Artemis Lua figurine
+  description: "Moff loaded. . . Clear for SADAR!!"
+  components:
+  - type: Sprite
+    state: artemis_lua
+  - type: PatronFigurine
+    id: 41e41d1d-4144-46ea-b03d-6a29ddede029
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZoeyMarz
+  name: Zoey Marz figurine
+  description: "Looks like there's a crudely taped label on the figure's leg that says, '#1 Technician'."
+  components:
+  - type: Sprite
+    state: zoey_marz
+  - type: PatronFigurine
+    id: b6f6ada7-cd38-4ba9-b2a2-8e5a5ef44b8f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronGreedyJamie
+  name: Greedy Jamie figurine
+  description: "Always gets too Greedy."
+  components:
+  - type: Sprite
+    state: greedy_jamie
+  - type: PatronFigurine
+    id: e16782f6-f11f-4381-b74e-d9ffde8f17df
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBailey
+  name: Bailey figurine
+  description: "1 of 100. The figure smells eerily like napthal, high-combustion napalm, and CLF3. The burn marks are very apparent and the M34 incinerator toy does not come off. Ever."
+  components:
+  - type: Sprite
+    state: bailey
+  - type: PatronFigurine
+    id: 833ab8ba-7fa1-41a5-b342-07190ed2029f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVickyHowlitzer
+  name: Vicky Howlitzer figurine
+  description: "The local irritable 50 year-old Delta SGO Vulp. The figure itself has a few knicks and marks from the constant handling over time and has a faint smell of magnolias, reflecting its owner. Vicky says she looks more youthful than the figurine. She does not."
+  components:
+  - type: Sprite
+    state: vicky_howlitzer
+  - type: PatronFigurine
+    id: 75c30413-9e78-4767-b9bc-a05e3b677f8e
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIgnisNightfireNyx
+  name: Ignis 'Nightfire' Nyx figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: ignis_nightfire_nyx
+  - type: PatronFigurine
+    id: fdcfa5a0-80bb-45d1-9214-2753eab83006
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHethrynCliffton
+  name: Hethryn Cliffton figurine
+  description: "It's just intuition. My sources? How about my gut feeling, huh? How am I supposed to explain that?"
+  components:
+  - type: Sprite
+    state: hethryn_cliffton
+  - type: PatronFigurine
+    id: a87df95b-8419-42c3-899f-796fd1410ec2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSenecaArchibald
+  name: Seneca Archibald figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: seneca_archibald
+  - type: PatronFigurine
+    id: 6708071b-dbe6-4e54-9129-d7db177bff62
