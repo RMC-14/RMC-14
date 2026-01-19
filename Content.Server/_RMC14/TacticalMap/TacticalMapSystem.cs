@@ -15,6 +15,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -52,6 +53,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
     private EntityQuery<MarineMapTrackedComponent> _marineMapTrackedQuery;
@@ -591,7 +593,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         var tileCoords = new Vector2(position.X, position.Y);
-        var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
+        var coords = new EntityCoordinates(map.Owner, tileCoords * grid.TileSize);
+        if (!_xenoWeeds.IsOnWeeds((map.Owner, grid), coords))
+            return;
+
+        var worldPos = _transform.ToMapCoordinates(coords);
 
         _transform.SetWorldPosition(eye, worldPos.Position);
     }
