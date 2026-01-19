@@ -136,6 +136,21 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnerRandomConfiscatedWeaponry
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedWeaponryTable
+
+- type: entity
+  parent: MarkerBase
   id: RMCSpawnerRandomHalyconGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
@@ -297,6 +312,14 @@
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomConfiscatedEquipment
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedWeaponry # TODO crate heat 15 and dollar cost 45
+  name: seized foreign weaponry crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedWeaponry
 
 # Black market end
 

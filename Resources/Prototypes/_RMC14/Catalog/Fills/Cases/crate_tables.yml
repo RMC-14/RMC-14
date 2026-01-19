@@ -40,3 +40,47 @@
       - id: RMCSunglassesBig
       - id: CMJumpsuitTShirtGray
       - id: CMArmorM3VLBallistics
+
+- type: entityTable
+  id: RMCConfiscatedWeaponryTable
+  table: !type:GroupSelector
+    rolls: 2 # The crate gives two guns
+    children:
+    - !type:AllSelector # # PMC
+      children:
+      - id: RMCWeaponSMGFP9000
+      - id: RMCMagazineSMGFP9000
+        amount: 4
+    - !type:AllSelector # Pizza
+      children:
+      - id: RMCWeaponPistolHoldout
+      - id: RMCMagazinePistolHoldout
+    - !type:GroupSelector # CLF
+      children:
+      - !type:AllSelector # Either uzi or mac15
+        children:
+        - id: RMCWeaponSMGUZI
+        - id: RMCMagazineSMGUZI
+          amount: 2
+        - id: RMCMagazineSMGUZIExt
+      - !type:AllSelector
+        children:
+        - id: WeaponSMGMAC15
+        - id: RMCMagazineSMGMAC15
+          amount: 2
+        - id: RMCMagazineSMGMAC15Ext
+    - !type:AllSelector # SPP
+      children:
+      - id: RMCWeaponShotgunType23
+      - id: RMCShellShotgunHeavyBeanbag
+        amount: 2
+      - id: RMCShellShotgunHeavyFlechette
+        amount: 2
+      - id: RMCShellShotgunHeavySlugs
+        amount: 2
+    - !type:AllSelector # Freelancer
+      children:
+      - id: WeaponRifleMAR40
+      - id: RMCMagazineRifleMAR40Ext
+      - id: RMCMagazineRifleMAR40
+        amount: 2
