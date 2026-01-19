@@ -321,6 +321,30 @@
   iconColor: "#7c4c1b"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: pistol ammunition box (10x20mm-APC)
+  id: RMCBoxBulletsPistolEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBulletsPistolEmpty
+  category: construction-category-cm-box-magazine
+  description: A 10x20mm-APC ammunition box. Used to refill M13 regular, extended and drum magazines. It comes with a leather strap allowing to wear it on the back.
+  iconColor: "#727e90"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: pistol ammunition box (10x20mm-APC (AP))
+  id: RMCBoxBulletsPistolAPEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBulletsPistolAPEmpty
+  category: construction-category-cm-box-magazine
+  description: A 10x20mm-APC armor-piercing ammunition box. Used to refill M13 regular, extended and drum AP magazines. It comes with a leather strap allowing to wear it on the back.
+  iconColor: "#727e90"
+  objectType: Item
+
 # M34 Incinerator
 
 - type: construction
@@ -633,6 +657,18 @@
         amount: 1
         doAfter: 0.25
 
+    - to: RMCBoxBulletsPistolEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxBulletsPistolAPEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M16
     - to: RMCBoxMagazineRifleM16Empty
       steps:
@@ -828,6 +864,10 @@
     entity: RMCBoxMagazinePistolM13ExtAPEmpty
   - node: RMCBoxMagazinePistolM13DrumAPEmpty
     entity: RMCBoxMagazinePistolM13DrumAPEmpty
+  - node: RMCBoxBulletsPistolEmpty
+    entity: RMCBoxBulletsPistolEmpty
+  - node: RMCBoxBulletsPistolAPEmpty
+    entity: RMCBoxBulletsPistolAPEmpty
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty
