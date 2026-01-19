@@ -2,11 +2,9 @@ using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Explosion;
 
@@ -15,7 +13,6 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     public override void Initialize()
@@ -50,6 +47,10 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
         if (!args.IsHit || !ent.Comp.Primed)
             return;
         if (_net.IsClient)
+            return;
+
+        // Validate user has a transform component (prevents crash with admin ghost).
+        if (!HasComp<TransformComponent>(args.User))
             return;
 
         // Only triggers on mobs.

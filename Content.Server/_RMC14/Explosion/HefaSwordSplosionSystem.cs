@@ -19,13 +19,16 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 
     protected override void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
     {
+        // Validate user exists (e.g., not admin ghost with invalid entity).
+        if (!TryComp(user, out TransformComponent? userXform))
+            return;
         if (!TryComp(target, out TransformComponent? targetXform))
             return;
         if (!TryComp(ent, out ExplosiveComponent? explosive))
             return;
 
         var targetCoords = TransformSystem.GetMapCoordinates(targetXform);
-        var userRotation = Transform(user).LocalRotation;
+        var userRotation = userXform.LocalRotation;
 
         SpawnShrapnel(ent, user, targetCoords, userRotation);
         _rmcExplosion.QueueExplosion(
@@ -76,12 +79,13 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(comp.MinVelocity, comp.MaxVelocity);
 
-            // Shoot projectile with user as the shooter (not the sword).
+            // Shoot projectile with user as the shooter.
             _gun.ShootProjectile(shrapnel, direction, velocity, user, user, comp.ProjectileSpeed);
             _spawned.Add(shrapnel);
         }
 
         // Raise cluster spawned event for ClusterLimitHits to work.
+        // Use user as origin entity since it's validated to exist.
         var clusterEv = new CMClusterSpawnedEvent(_spawned, _hitEntities, user);
         RaiseLocalEvent(ent, ref clusterEv);
         RaiseLocalEvent(ent, new AmmoShotEvent { FiredProjectiles = _spawned });
