@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: shibechef
-  changes:
-  - message: The mou53 has a delay of 1.1 seconds for toggling it's breech.
-    type: Tweak
-  id: 2304
-  time: '2025-09-06T08:03:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7802
 - author: noctyrnal
   changes:
   - message: Adds the UNMC officer uniform and the Commanding Officer's gray formal
@@ -4749,5 +4742,15 @@
   id: 2806
   time: '2026-01-19T01:03:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8386
+- author: wheelwrightt
+  changes:
+  - message: Recharger sprite now changes corresponding to the charge level of the
+      item inside.
+    type: Add
+  - message: NV visor now displays charge level upon examining in the recharger.
+    type: Fix
+  id: 2807
+  time: '2026-01-19T03:22:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8557
 Name: RMC14
 Order: -1
