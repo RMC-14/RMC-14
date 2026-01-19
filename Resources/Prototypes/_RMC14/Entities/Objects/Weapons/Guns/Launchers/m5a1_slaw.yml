@@ -85,3 +85,48 @@
         Blunt: 5
     soundHit:
       collection: GenericHit
+
+- type: entity
+  parent: RMCWeaponLauncherDisposable
+  id: RMCWeaponLauncherDisposableHE
+  name: M5A2 SHEL
+  suffix: PVE, HE
+  description: The M5A2 SHEL is a lightweight, single-shot, shoulder-mounted launcher equipped with a high-explosive payload. Much like the M5A1, the launcher is discarded after firing and folded when stowed.
+  components:
+  - type: BallisticAmmoProvider
+    proto: RMCRocket84mm
+    cycleable: false
+    whitelist:
+      tags: []
+  - type: RMCFoldableGun
+    foldDelay: 2
+    foldText: rmc-gun-foldable-launcher-fold-self
+    foldTextOthers: rmc-gun-foldable-launcher-fold-others
+    finishText: rmc-gun-foldable-launcher-fold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-fold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposableHEFolded
+
+- type: entity
+  parent: RMCWeaponLauncherDisposableFolded
+  id: RMCWeaponLauncherDisposableHEFolded
+  name: M5A2 SHEL
+  description: An M5A2 SHEL High-Explosive RPG, compacted for easier storage.
+  suffix: Folded
+  components:
+  - type: RMCFoldableGun
+    foldDelay: 4
+    foldText: rmc-gun-foldable-launcher-unfold-self
+    foldTextOthers: rmc-gun-foldable-launcher-unfold-others
+    finishText: rmc-gun-foldable-launcher-unfold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-unfold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposableHE
+    examineText: rmc-gun-foldable-launcher-examine-unfold
+    onActivate: true
