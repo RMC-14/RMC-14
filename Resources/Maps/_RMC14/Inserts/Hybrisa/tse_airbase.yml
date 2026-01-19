@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/08/2026 22:52:36
-  entityCount: 1207
-maps:
-- 1206
+  time: 01/16/2026 21:11:03
+  entityCount: 1206
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   0: Space
@@ -97,7 +97,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 1206
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -1192,16 +1192,6 @@ entities:
         5,3: RMCAreaLv759IndoorsOutpostSouterMainHall
         5,2: RMCAreaLv759IndoorsOutpostSouterMainHall
         29,22: RMCAreaLv759IndoorsOutpostSouterHangar
-  - uid: 1206
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: OccluderTree
 - proto: BedrollFolded
   entities:
   - uid: 653
