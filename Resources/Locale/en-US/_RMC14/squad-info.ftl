@@ -16,6 +16,7 @@ rmc-squad-info-fireteam = [font size=16][bold]Fireteam {$fireteam}[/bold][/font]
 rmc-squad-info-tracking-selection = Tracking Selection
 rmc-squad-info-tracking-choose = Choose a new tracking target.
 rmc-squad-info-change-tracker = Change Tracker
+rmc-squad-info-none = none
 
 rmc-squad-info-CommandingOfficer = Commanding Officer
 rmc-squad-info-ExecutiveOfficer = Executive Officer
