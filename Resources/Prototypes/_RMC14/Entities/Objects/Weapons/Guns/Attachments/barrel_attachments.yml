@@ -231,6 +231,10 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
 
 - type: entity
   parent: RMCBarrelAttachmentBase

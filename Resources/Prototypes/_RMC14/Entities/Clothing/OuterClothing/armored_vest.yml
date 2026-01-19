@@ -44,6 +44,27 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/security_armor.rsi
 
 - type: entity
+  parent: RMCArmorVest
+  id: RMCArmorBulletproof
+  name: bulletproof vest
+  description: A vest that excels in protecting the wearer against high-velocity solid projectiles.
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/bulletproof/vest.rsi
+  - type: CMArmor # TODO 20 internal damage armor
+    bullet: 30
+
+- type: entity
+  parent: RMCArmorBulletproof
+  id: RMCArmorBulletproofBadge
+  suffix: RMC, Badge
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/bulletproof/badge.rsi
+
+# M3-XL
+- type: entity
   parent: [ClothingOuterBase, RMCAllowSuitStorageClothingArmorMP, BaseStorageItem, RMCBaseUniformAccessoryItemOuterClothing]
   id: RMCArmorVestXLBase
   abstract: true
@@ -66,6 +87,16 @@
     blacklist:
       components:
       - Xeno
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
