@@ -27,41 +27,153 @@
 
 - type: entity
   parent: RMCResearchThingies
-  id: RMCAlienTank
+  id: RMCBaseAlienTank
   name: cryo tank
-  description: There is something big inside...
+  abstract: true
   components:
   - type: Clickable
   - type: Sprite
     state: tank_alien
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: GlassSmack
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: InteractionOutline
 
 - type: entity
-  parent: RMCAlienTank
+  parent: RMCBaseAlienTank
+  id: RMCAlienTankEmpty
+  description: It is empty.
+  suffix: Empty
+  components:
+  - type: Sprite
+    state: tank_empty
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 250 # excessive damage destroys our inhabitant
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 75
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              RMCAlienTankBroken:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+
+- type: entity
+  parent: RMCBaseAlienTank
   id: RMCAlienTankBroken
   suffix: Broken
   components:
   - type: Sprite
     state: tank_broken
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 250
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
 
 - type: entity
-  parent: RMCAlienTank
-  id: RMCAlienTankEmpty
-  suffix: Empty
+  parent: RMCAlienTankEmpty
+  id: RMCAlienTank
+  description: There is something big inside...
+  suffix: Alien
   components:
   - type: Sprite
-    state: tank_empty
+    state: tank_alien
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 250 # excessive damage destroys our inhabitant
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 75
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              RMCAlienTankBroken:
+                min: 1
+                max: 1
+              RMCXenoEmbryo:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
 
 - type: entity
   parent: RMCAlienTank
   id: RMCAlienTankParasite
+  description: There is something spider-like inside...
   suffix: Parasite
   components:
   - type: Sprite
     state: tank_hugger
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 250 # excessive damage destroys our inhabitant
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 75
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              RMCAlienTankBroken:
+                min: 1
+                max: 1
+              RMCXenoParasitePrimeHiveAssign:
+                min: 1
+                max: 1
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
 
 - type: entity
   parent: RMCAlienTank
   id: RMCAlienTankLarva
+  description: There is something worm-like inside...
   suffix: Larva
   components:
   - type: Sprite

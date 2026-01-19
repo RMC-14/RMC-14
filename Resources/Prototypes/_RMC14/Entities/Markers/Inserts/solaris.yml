@@ -275,6 +275,7 @@
     replaceAreas: false
 
 - type: entity
+  parent: RMCMapInsertSolarisBase
   id: RMCMapInsertSolarisCrashlandingEva
   name: Crashlanding Eva
   suffix: Insert Solaris
