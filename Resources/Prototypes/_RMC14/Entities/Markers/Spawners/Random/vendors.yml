@@ -13,6 +13,7 @@
     - CMVendorSnack
     - CMVendorCola
     - CMVendorCoffee
+    - RMCVendorSoda
     chance: 0.95
     rarePrototypes:
     - CMVendorSodaSoviet
