@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Toggling label modes
-    type: Fix
-  id: 2300
-  time: '2025-09-06T01:38:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7800
 - author: Spaghetti
   changes:
   - message: Fixed warriors being able to heal through lifesteal while on fire.
@@ -4743,5 +4736,12 @@
   id: 2802
   time: '2026-01-17T13:17:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8855
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Hybrisa pizza driver survivor not having vehicles 1.
+    type: Fix
+  id: 2803
+  time: '2026-01-19T01:00:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9018
 Name: RMC14
 Order: -1
