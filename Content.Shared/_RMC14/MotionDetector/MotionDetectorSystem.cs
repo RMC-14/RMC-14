@@ -15,6 +15,7 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -25,6 +26,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -104,9 +106,13 @@ public sealed class MotionDetectorSystem : EntitySystem
         if (!ent.Comp.HandToggleable)
             return;
 
-        if (!_hands.IsHolding(args.User, ent) &&
-            !_inventory.InSlotWithFlags(ent.Owner, SlotFlags.BELT) &&
-            !_inventory.InSlotWithFlags(ent.Owner, SlotFlags.SUITSTORAGE))
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (!_hands.IsHolding(args.User, ent.Owner) &&
+            HasComp<StorageComponent>(container.Owner) &&
+            !_hands.IsHolding(args.User, container.Owner) &&
+            !_inventory.InSlotWithFlags(container.Owner, SlotFlags.BACK))
             return;
 
         args.Handled = true;
