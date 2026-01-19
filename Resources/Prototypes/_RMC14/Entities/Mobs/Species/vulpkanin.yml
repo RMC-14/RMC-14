@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Vulpkanin
     hideLayersOnEquip:
+    - UndergarmentTop
     - Snout
     - HeadTop
     - HeadSide

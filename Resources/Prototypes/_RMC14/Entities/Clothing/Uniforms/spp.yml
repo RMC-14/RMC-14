@@ -1,14 +1,43 @@
+# Sleeves Only
 - type: entity
   parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
-  id: CMJumpsuitSPP
-  name: SPP fatigues
-  description: A set of SPP fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
+  id: CMJumpsuitSPPOfficer
+  name: SPP officer fatigues
+  description: A set of SPP officer fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/uniform.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPP
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: CMJumpsuitSPPMP
+  name: SPP military police fatigues
+  description: A set of SPP military police fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mp.rsi
+
+# Sleeves and Jacket
+
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: RMCJumpsuitSPPPaP
+  name: PaP service uniform
+  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchSPP
@@ -17,8 +46,44 @@
     - RMCUniformSPP
 
 - type: entity
+  parent: RMCJumpsuitSPPPaP
+  id: RMCJumpsuitSPPArmy
+  name: SPP army fatigues
+  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialitsts Progressive Peoples. A rare sight, especially in TSE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
+
+- type: entity
+  parent: RMCJumpsuitSPPArmy
+  id: RMCJumpsuitSPPArmyAlt
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
+
+# Sleeves and Jacket (hides undergarment top)
+- type: entity
+  parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
+  id: CMJumpsuitSPP
+  name: SPP fatigues
+  description: A set of SPP fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/uniform.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchSPP
+  - type: HideLayerClothing
+    slots:
+    - UndergarmentTop
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+- type: entity
   parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPWebbing
+  suffix: Webbing
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbing
@@ -26,6 +91,7 @@
 - type: entity
   parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPWebbingVestBlack
+  suffix: Webbing, Black
   components:
   - type: WebbingClothing
     startingWebbing: CMWebbingBlack
@@ -33,6 +99,7 @@
 - type: entity
   parent: CMJumpsuitSPP
   id: RMCJumpsuitSPPWebbingTools
+  suffix: Filled, Tool Webbing
   components:
   - type: WebbingClothing
     startingWebbing: RMCToolWebbingFilled
@@ -54,49 +121,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/engi.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: CMJumpsuitSPPMP
-  name: SPP military police fatigues
-  description: A set of SPP military police fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mp.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: CMJumpsuitSPPOfficer
-  name: SPP officer fatigues
-  description: A set of SPP officer fatigues, mass produced for the armed-forces of the Socialist Progressive Peoples.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officer.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPPaP
-  name: PaP service uniform
-  description: A pair of blue-grey slacks coupled with a blue shirt, featuring venlar armor inserts at critical areas to protect from blades and low caliber ballistics.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/pap.rsi
-
-- type: entity
-  parent: CMJumpsuitSPP
-  id: RMCJumpsuitSPPArmy
-  name: SPP army fatigues
-  description: A set of SPP fatigues, mass produced for the Armed Collective of the Socialist Progressive Peoples. A rare sight, especially in 3WE zones. This particular set sports the standard SPP pattern of the SPP Army's 202nd Infantry Regiment.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army.rsi
-
-- type: entity
-  parent: RMCJumpsuitSPPArmy
-  id: RMCJumpsuitSPPArmyAlt
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/army_alt.rsi
 
 # Civilians
 - type: entity

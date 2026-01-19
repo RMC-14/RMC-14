@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Rodentia
     hideLayersOnEquip:
+    - UndergarmentTop
     - Hair
     - HeadTop
     - HeadSide
