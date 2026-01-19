@@ -7,6 +7,7 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -56,6 +57,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, ExaminedEvent>(OnMotionDetectorExamined);
+        SubscribeLocalEvent<MotionDetectorComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, ToggleableMotionDetectorActionEvent>(OnToggleAction);
@@ -85,6 +87,26 @@ public sealed class MotionDetectorSystem : EntitySystem
             return;
 
         if (!_hands.IsHolding(args.User, ent))
+            return;
+
+        args.Handled = true;
+        Toggle(ent);
+
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
+    }
+
+    private void OnActivateInWorld(Entity<MotionDetectorComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (!ent.Comp.HandToggleable)
+            return;
+
+        if (!_hands.IsHolding(args.User, ent) &&
+            !_inventory.InSlotWithFlags(ent.Owner, SlotFlags.BELT) &&
+            !_inventory.InSlotWithFlags(ent.Owner, SlotFlags.SUITSTORAGE))
             return;
 
         args.Handled = true;
@@ -129,7 +151,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
     }
-    
+
     private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
     {
         DisableDetectorsOnMob(ent.Target);
