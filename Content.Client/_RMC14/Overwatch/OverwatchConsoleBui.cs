@@ -178,6 +178,14 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 monitor.TransferMarineButton.Label.ModulateSelfOverride = Color.Black;
                 monitor.TransferMarineButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleTransferMarineBuiMsg());
 
+                monitor.InsubordinationButton.OnPressed += _ => SendPredictedMessage(new OverwatchConsoleInsubordinateMarineBuiMsg());
+                monitor.InsubordinationButton.StyleClasses.Add("InsubordinationButton");
+                monitor.InsubordinationButton.ModulateSelfOverride = Color.FromHex("#FF0000");
+                monitor.InsubordinationButton.Text = null;
+                var insubRichLabel = new RichTextLabel();
+                insubRichLabel.SetMarkupPermissive("[bold][color=#000000]Insubordination[/color][/bold]");
+                monitor.InsubordinationButton.AddChild(insubRichLabel);
+
                 if (EntMan.TryGetComponent(Owner, out SupplyDropComputerComponent? supplyDrop))
                 {
                     monitor.Longitude.Value = supplyDrop.Coordinates.X;
@@ -232,6 +240,23 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     window.OpenCentered();
                 };
 
+                 monitor.MessageSquadLeaderButton.OnPressed += _ =>
+                {
+                    var window = new OverwatchTextInputWindow();
+                    window.Title = "Squad Leader Message";
+
+                    void SendSquadLeaderMessage()
+                    {
+                        SendPredictedMessage(new OverwatchConsoleSendMessageSquadLeaderBuiMsg(window.MessageBox.Text));
+                        window.Close();
+                    }
+
+                    window.MessageBox.OnTextEntered += _ => SendSquadLeaderMessage();
+                    window.OkButton.OnPressed += _ => SendSquadLeaderMessage();
+                    window.CancelButton.OnPressed += _ => window.Close();
+                    window.OpenCentered();
+                };
+
                 var canSupplyDrop = EntMan.HasComponent<SupplyDropComputerComponent>(Owner) && squad.CanSupplyDrop;
                 TabContainer.SetTabVisible(monitor.SupplyDrop, canSupplyDrop);
 
@@ -239,6 +264,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                 {
                     TabContainer.SetTabVisible(monitor.OrbitalBombardment, overwatch.CanOrbitalBombardment);
                     monitor.MessageSquadButton.Visible = overwatch.CanMessageSquad;
+                    monitor.MessageSquadLeaderButton.Visible = overwatch.CanMessageSquad;
                 }
                 else
                 {
