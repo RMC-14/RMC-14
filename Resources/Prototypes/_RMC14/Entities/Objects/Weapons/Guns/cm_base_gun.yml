@@ -5,7 +5,7 @@
   components:
   - type: UsableWhileDevoured
     canUnequip: true
-  - type: GunUnskilledPenalty
+  - type: GunSkilledScatter
   - type: GunIFF
     enabled: false
   - type: RMCWeaponDamageFalloff
