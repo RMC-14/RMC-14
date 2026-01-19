@@ -1,26 +1,60 @@
 - type: entity
   parent: BaseItem
-  id: RMClogisticsofficerGuideBook
+  id: RMCLogisticsofficerGuideBook
   name: logistics Officers symbol
   description: The Logistics Officers sumbol
   suffix: (GuideBookEntity)
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: logistics officer
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_ro
 
 - type: entity
   parent: BaseItem
   id: RMCCargotechGuideBook
-  name: Cargo Technicians symbol
+  name: Requisitions Technicians symbol
   description: The Cargo Technicians symbol
   suffix: (GuideBookEntity)
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: tech
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_ct
+
+- type: entity
+  parent: RMCPaperRequisitionInvoice
+  id: RMCGuidebookPaperRequisitionsWritten
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: paper_words
+    map: ["enum.PaperVisualLayers.Writing"]
+    color: "#9ef5ff"
+    visible: true
+
+- type: entity
+  parent: RMCPaperRequisitionInvoice
+  id: RMCGuidebookPaperRequisitionsStamped
+  suffix: (GuideBookEntity)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Paper
+    stampState: paper_stamp-approve
+    stampedBy:
+        - stampedColor: '#164600FF'
+          stampedName: stamp-component-stamped-name-cm-approve
+  - type: Sprite
+    layers:
+    - state: paper_words
+      map: ["enum.PaperVisualLayers.Writing"]
+      color: "#9ef5ff"
+      visible: true
+    - state: paper_stamped
+      map: ["enum.PaperVisualLayers.Stamp"]
+      visible: false
 
 - type: entity
   parent: BaseItem
@@ -31,7 +65,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    sprite: _RMC14/Objects/RMCreqguide/reqguidepit.rsi
     state: pitrased
 
 - type: entity
@@ -43,44 +77,8 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
+    sprite: _RMC14/Objects/RMCreqguide/reqguidepit.rsi
     state: pitlowerd
-
-- type: entity
-  parent: BaseItem
-  id: RMCStampGuideBook
-  name: approval stamp
-  description: a approval stamp
-  suffix: (GuideBookEntity)
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: stamp
-
-- type: entity
-  parent: BaseItem
-  id: RMCInvoiceBlankGuideBook
-  name: Blank invoice
-  description: a Blank invoice
-  suffix: (GuideBookEntity)
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: invoiceblank
-
-- type: entity
-  parent: BaseItem
-  id: RMCInvoiceApprovedBook
-  name: approved invoice
-  description: a approved invoice
-  suffix: (GuideBookEntity)
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: invoiceapproved
 
 - type: entity
   parent: BaseItem
@@ -93,7 +91,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/padsjpg.rsi
     state: pads
-  
+
 - type: entity
   parent: BaseItem
   id: RMCTheLineGuideBook
@@ -105,7 +103,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/linejpg.rsi
     state: line
-  
+
 - type: entity
   parent: BaseItem
   id: RMCASRSinterfaceGuideBook
