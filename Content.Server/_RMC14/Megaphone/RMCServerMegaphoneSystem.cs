@@ -1,11 +1,14 @@
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Megaphone;
+using Content.Shared.Ghost;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Speech;
 using Robust.Server.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using static Content.Server.Chat.Systems.ChatSystem;
 
 namespace Content.Server._RMC14.Megaphone;
 
@@ -13,11 +16,14 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IServerConsoleHost _console = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<ActorComponent, MegaphoneInputEvent>(OnMegaphoneInput);
         SubscribeLocalEvent<RMCMegaphoneUserComponent, EntitySpokeEvent>(OnEntitySpoke);
+        SubscribeLocalEvent<ExpandICChatRecipientsEvent>(OnExpandRecipients);
     }
 
     private void OnMegaphoneInput(Entity<ActorComponent> ent, ref MegaphoneInputEvent ev)
@@ -31,6 +37,8 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         var user = GetEntity(ev.Actor);
         EnsureComp<RMCSpeechBubbleSpecificStyleComponent>(user);
         var userComp = EnsureComp<RMCMegaphoneUserComponent>(user);
+        userComp.VoiceRange = ev.VoiceRange;
+        Dirty(user, userComp);
 
         if (TryComp<SpeechComponent>(user, out var speech))
         {
@@ -63,5 +71,45 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         // Remove components after the message is sent
         RemComp<RMCMegaphoneUserComponent>(ent);
         RemComp<RMCSpeechBubbleSpecificStyleComponent>(ent);
+    }
+
+    private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
+    {
+        if (!TryComp<RMCMegaphoneUserComponent>(ev.Source, out var megaphoneUser))
+            return;
+
+        var megaphoneRange = megaphoneUser.VoiceRange;
+        if (ev.VoiceRange >= megaphoneRange)
+            return;
+
+        var sourceTransform = Transform(ev.Source);
+        var sourcePos = _transform.GetWorldPosition(sourceTransform);
+        var xforms = GetEntityQuery<TransformComponent>();
+        var ghostHearing = GetEntityQuery<GhostHearingComponent>();
+
+        // Add recipients within megaphone range but outside normal range
+        foreach (var player in _playerManager.Sessions)
+        {
+            if (player.AttachedEntity is not { Valid: true } playerEntity)
+                continue;
+
+            if (ev.Recipients.ContainsKey(player))
+                continue;
+
+            var transformEntity = xforms.GetComponent(playerEntity);
+
+            if (transformEntity.MapID != sourceTransform.MapID)
+                continue;
+
+            var recipientPos = _transform.GetWorldPosition(transformEntity, xforms);
+            var distance = (sourcePos - recipientPos).Length();
+
+            // Add if within megaphone range but outside normal range
+            if (distance < megaphoneRange && distance >= ev.VoiceRange)
+            {
+                var observer = ghostHearing.HasComponent(playerEntity);
+                ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
+            }
+        }
     }
 }

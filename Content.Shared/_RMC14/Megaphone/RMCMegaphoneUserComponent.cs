@@ -54,4 +54,10 @@ public sealed partial class RMCMegaphoneUserComponent : Component
         { "chat-speech-verb-suffix-stutter", "Megaphone" },
         { "chat-speech-verb-suffix-mumble", "Megaphone" },
     };
+
+    /// <summary>
+    /// Extended voice range for megaphone. Used to expand chat recipients.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float VoiceRange = 15f;
 }
