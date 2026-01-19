@@ -72,7 +72,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointQuartermaster
-  name: Logistics Officer spawn point
+  name: Requisitions Officer spawn point
   components:
   - type: SpawnPoint
     job_id: CMQuartermaster
@@ -87,7 +87,7 @@
   parent: CMGuidebookRole
   id: RMCGuidebookRoleQM
   name: The LO
-  description: The Logistics Officer.
+  description: The Requisitions Officer.
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
