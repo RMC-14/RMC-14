@@ -437,6 +437,15 @@
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
 
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RMCJumpsuitPilotAlt
+  name: tactical pilot officer flightsuit
+  description: A flightsuit worn by pilot officers of the UNMC, with plenty of leather straps, pouches, and other essential gear you will never use. Looks badass.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Auxiliary/pilot_alt.rsi
+
 # Dropship Crew Chief
 - type: entity
   parent: [RMCMarineUniformBase, RMCAlternateFoldableUniformBase]
