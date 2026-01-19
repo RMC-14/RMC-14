@@ -136,6 +136,31 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/SPP/scout_cloak.rsi
 
 - type: entity
+  parent: RMCBackpackScout
+  id: RMCBackpackPID
+  name: P68 thermal cloak
+  suffix: Provost
+  description: A thermo-optic camouflage cloak used by provost special agents. This advanced variant renders the user fully invisible.
+  components:
+  - type: Sprite # TODO RMC14: Possible new sprite. (Less Bulky)
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/Other/provost_cloak.rsi
+  - type: ThermalCloak
+    opacity: 0
+    restrictWeapons: true
+
+- type: entity
+  parent: RMCBackpackPID
+  id: RMCBackpackPIDFilled
+  suffix: Provost, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponTaser
+    - id: RMCPacketGrenadeFlashBang
+    #- id: RMCTabletCO
+    - id: RMCProvostJacket
+
+- type: entity
   parent: CMSatchel
   id: CMSatchelEngineer
   name: industrial satchel
@@ -257,6 +282,17 @@
     - id: CMSheetMetal20
     - id: RMCArmorHelmetM10CMB
     - id: RMCVisorSWAT
+
+- type: entity
+  parent: CMSatchelSecurity
+  suffix: Provost
+  id: CMSatchelSecurityFilledPID
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCArmorProvostAgent # TODO RMC14 provost office handheld beacon
+    - id: RMCWeaponTaser
+    - id: RMCTabletCO
 
 - type: entity
   parent: CMSatchelSecurity
