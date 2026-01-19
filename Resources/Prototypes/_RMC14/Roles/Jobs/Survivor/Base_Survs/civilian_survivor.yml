@@ -41,6 +41,7 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: ClothingFactionLockIgnore
   greeting: rmc-job-greeting-survivor
   hasIcon: false
   useLoadoutOfJob: CMSurvivor # for inheritance
