@@ -33,10 +33,20 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:Nutritious
-        potency: 2
-        nutFactor: 15
-        nutMetabolism: 0.1
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold # ReagentCondition on next upstream merge
+          reagent: Vitamin
+          min: 5
+        reagent: Vitamin
+        amount: -5
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold # ReagentCondition
+          reagent: Vitamin
+          min: 5
+        reagent: Nutriment
+        amount: 5.1
   # Lets plants benefit too
   plantMetabolism:
   - !type:PlantAdjustNutrition
@@ -57,10 +67,20 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:Nutritious
-        potency: 2
-        nutFactor: 15
-        nutMetabolism: 0.1
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold # ReagentCondition
+          reagent: Vitamin
+          min: 5
+        reagent: Vitamin
+        amount: -5
+      - !type:AdjustReagent
+        conditions:
+        - !type:ReagentThreshold # ReagentCondition
+          reagent: Vitamin
+          min: 5
+        reagent: Nutriment
+        amount: 5.1
   pricePerUnit: 3
 
 - type: reagent
