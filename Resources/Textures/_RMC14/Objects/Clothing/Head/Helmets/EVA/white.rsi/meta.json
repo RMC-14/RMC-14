@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/2550250608085a8418995ece0b9fe56f74132085/icons/obj/items/clothing/cm_hats.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/2550250608085a8418995ece0b9fe56f74132085/icons/mob/humans/onmob/head_1.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon_on"
+    },
+    {
+      "name": "on-equipped-HELMET",
+      "directions": 4
+    },
+    {
+      "name": "off-equipped-HELMET",
+      "directions": 4
+    }
+  ]
+}
