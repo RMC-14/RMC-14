@@ -147,7 +147,7 @@ public sealed class SentrySystem : EntitySystem
     private void OnSentryActivateInWorld(Entity<SentryComponent> sentry, ref ActivateInWorldEvent args)
     {
         ref var mode = ref sentry.Comp.Mode;
-        if (mode == SentryMode.Item)
+        if (mode == SentryMode.Item || sentry.Comp.IsLocked)
             return;
 
         args.Handled = true;
@@ -208,6 +208,9 @@ public sealed class SentrySystem : EntitySystem
 
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
     {
+        if (sentry.Comp.IsLocked)
+            return;
+
         var user = args.User;
         var used = args.Used;
         if (TryComp(used, out SentryUpgradeItemComponent? upgrade))
@@ -330,8 +333,11 @@ public sealed class SentrySystem : EntitySystem
                 args.PushMarkup(rot);
             }
 
-            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-            args.PushMarkup(msg);
+            if (!ent.Comp.IsLocked)
+            {
+                var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
+            }
 
             if (ent.Comp.Mode == SentryMode.Off)
             {
@@ -543,6 +549,24 @@ public sealed class SentrySystem : EntitySystem
         sentry.Comp.Mode = mode;
         UpdateState(sentry);
         Dirty(sentry, sentry.Comp);
+        return true;
+    }
+
+    public bool TryGetSentryAmmo(EntityUid sentry, [NotNullWhen(true)] out int? ammoCount, [NotNullWhen(true)] out int? ammoCapacity, SentryComponent? sentryComponent = null)
+    {
+        ammoCount = null;
+        ammoCapacity = null;
+        if (!Resolve(sentry, ref sentryComponent, false))
+            return false;
+
+        if (!_container.TryGetContainer(sentry, sentryComponent.ContainerSlotId, out var container) ||  container.Count == 0)
+            return false;
+
+        var ammoEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(container.ContainedEntities[0], ref ammoEv);
+
+        ammoCount = ammoEv.Count;
+        ammoCapacity = ammoEv.Capacity;
         return true;
     }
 
