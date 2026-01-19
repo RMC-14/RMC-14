@@ -35,7 +35,7 @@
       effects:
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold # ReagentCondition on next upstream merge
+        - !type:ReagentThreshold # ReagentCondition
           reagent: Vitamin
           min: 5
         reagent: Vitamin
@@ -70,14 +70,14 @@
       - !type:AdjustReagent
         conditions:
         - !type:ReagentThreshold # ReagentCondition
-          reagent: Vitamin
+          reagent: Protein
           min: 5
-        reagent: Vitamin
+        reagent: Protein
         amount: -5
       - !type:AdjustReagent
         conditions:
         - !type:ReagentThreshold # ReagentCondition
-          reagent: Vitamin
+          reagent: Protein
           min: 5
         reagent: Nutriment
         amount: 5.1
