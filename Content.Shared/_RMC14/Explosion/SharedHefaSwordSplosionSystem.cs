@@ -18,8 +18,6 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
-    private static readonly ProtoId<TagPrototype> SwordTag = "RMCSwordHEFA";
-
     public override void Initialize()
     {
         SubscribeLocalEvent<HefaSwordSplosionComponent, UseInHandEvent>(OnUseInHand, before: [typeof(ClothingSystem)]);
@@ -28,8 +26,6 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
 
     private void OnUseInHand(Entity<HefaSwordSplosionComponent> ent, ref UseInHandEvent args)
     {
-        if (!_tag.HasTag(ent, SwordTag))
-            return;
         if (args.Handled)
             return;
 
@@ -51,8 +47,6 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
 
     private void OnMeleeHit(Entity<HefaSwordSplosionComponent> ent, ref MeleeHitEvent args)
     {
-        if (!_tag.HasTag(ent, SwordTag))
-            return;
         if (!args.IsHit || !ent.Comp.Primed)
             return;
         if (_net.IsClient)

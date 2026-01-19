@@ -21,20 +21,13 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
     {
         if (!TryComp(target, out TransformComponent? targetXform))
             return;
-
         if (!TryComp(ent, out ExplosiveComponent? explosive))
             return;
 
-        // Get target's position for explosion and shrapnel spawning.
         var targetCoords = TransformSystem.GetMapCoordinates(targetXform);
-
-        // Get user's facing direction for shrapnel cone.
         var userRotation = Transform(user).LocalRotation;
 
-        // Spawn shrapnel at target's position in a cone facing the user's direction.
         SpawnShrapnel(ent, user, targetCoords, userRotation);
-
-        // Trigger explosion at target's position.
         _rmcExplosion.QueueExplosion(
             targetCoords,
             explosive.ExplosionType,
@@ -49,7 +42,6 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
         var ev = new CMExplosiveTriggeredEvent();
         RaiseLocalEvent(ent, ref ev);
 
-        // Delete the sword after all effects are triggered.
         QueueDel(ent);
     }
 
@@ -92,7 +84,6 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
         // Raise cluster spawned event for ClusterLimitHits to work.
         var clusterEv = new CMClusterSpawnedEvent(_spawned, _hitEntities, user);
         RaiseLocalEvent(ent, ref clusterEv);
-
         RaiseLocalEvent(ent, new AmmoShotEvent { FiredProjectiles = _spawned });
     }
 }
