@@ -1,4 +1,4 @@
-﻿chat-speech-verb-name-xeno = Xeno
+chat-speech-verb-name-xeno = Xeno
 
 chat-speech-verb-name-vulpkanin = Vulpkanin
 chat-speech-verb-vulpkanin-1 = yips
@@ -27,3 +27,5 @@ chat-speech-verb-skrell-4 = chirps
 chat-speech-verb-name-megaphone = Megaphone
 chat-speech-verb-megaphone-1 = broadcasts
 chat-speech-verb-megaphone-2 = announces
+
+rmc-whisper-only-can-only-whisper = You can only whisper!

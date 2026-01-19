@@ -1,0 +1,8 @@
+# Forces entity to only whisper instead of speaking normally (RMC14)
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectWhisperOnly
+  name: whisper only
+  components:
+  - type: StatusEffect
+    alert: RMCWhisperOnly

@@ -291,8 +291,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             }
         }
 
+        // RMC14: Allow systems to modify the chat type before sending
+        var modifyEv = new Shared._RMC14.Chat.Events.RMCChatTypeModifyEvent(source, message, (byte)desiredType);
+        RaiseLocalEvent(source, ref modifyEv);
+        var finalType = modifyEv.ModifiedType.HasValue ? (InGameICChatType)modifyEv.ModifiedType.Value : desiredType;
+
         // Otherwise, send whatever type.
-        switch (desiredType)
+        switch (finalType) // RMC14
         {
             case InGameICChatType.Speak:
                 SendEntitySpeak(source, message, range, nameOverride, hideLog, ignoreActionBlocker);
