@@ -1,3 +1,5 @@
+using Content.Shared._RMC14.Intel.Detector;
+using Content.Shared._RMC14.MotionDetector;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Hands.Components;
@@ -28,6 +30,8 @@ public sealed class SmartEquipSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
+    [Dependency] private readonly MotionDetectorSystem _motionDetectorSystem = default!;
+    [Dependency] private readonly IntelDetectorSystem _intelDetectorSystem = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -118,6 +122,22 @@ public sealed class SmartEquipSystem : EntitySystem
             if (!_inventory.CanEquip(uid, handItem.Value, equipmentSlot, out var reason))
             {
                 _popup.PopupClient(Loc.GetString(reason), uid, uid);
+                return;
+            }
+
+            if (TryComp<MotionDetectorComponent>(handItem.Value, out var motionDetector) && motionDetector.Enabled)
+            {
+                _hands.TryDrop((uid, hands), hands.ActiveHandId!);
+                _inventory.TryEquip(uid, handItem.Value, equipmentSlot, predicted: true, checkDoafter: true);
+                _motionDetectorSystem.Toggle((handItem.Value, motionDetector));
+                return;
+            }
+
+            if (TryComp<IntelDetectorComponent>(handItem.Value, out var intelDetector) && intelDetector.Enabled)
+            {
+                _hands.TryDrop((uid, hands), hands.ActiveHandId!);
+                _inventory.TryEquip(uid, handItem.Value, equipmentSlot, predicted: true, checkDoafter: true);
+                _intelDetectorSystem.Toggle((handItem.Value, intelDetector));
                 return;
             }
 

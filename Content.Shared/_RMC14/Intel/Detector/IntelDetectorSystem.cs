@@ -134,7 +134,7 @@ public sealed class IntelDetectorSystem : EntitySystem
         }
     }
 
-    private void Toggle(Entity<IntelDetectorComponent> ent)
+    public void Toggle(Entity<IntelDetectorComponent> ent)
     {
         ref var enabled = ref ent.Comp.Enabled;
         enabled = !enabled;
