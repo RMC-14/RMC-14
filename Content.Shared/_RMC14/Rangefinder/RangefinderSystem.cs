@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Skills;
@@ -16,6 +16,7 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Timing;
 using static Content.Shared._RMC14.Rangefinder.RangefinderMode;
 
 namespace Content.Shared._RMC14.Rangefinder;
@@ -28,6 +29,7 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -38,6 +40,9 @@ public sealed class RangefinderSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
+
+    private static readonly TimeSpan LosCheckInterval = TimeSpan.FromSeconds(5);
+    private TimeSpan _nextLosCheck = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -344,6 +349,82 @@ public sealed class RangefinderSystem : EntitySystem
             _audio.PlayPredicted(rangefinder.Comp.TargetSound, rangefinder, user);
 
             rangefinder.Comp.DoAfter = ev.DoAfter;
+        }
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (_net.IsClient)
+            return;
+
+        var curTime = _timing.CurTime;
+        if (curTime < _nextLosCheck)
+            return;
+
+        _nextLosCheck = curTime + LosCheckInterval;
+
+        // Check LOS for active rangefinder doafter
+        var doAfterQuery = EntityQueryEnumerator<DoAfterComponent>();
+        while (doAfterQuery.MoveNext(out var userUid, out var doAfterComp))
+        {
+            foreach (var doAfter in doAfterComp.DoAfters.Values)
+            {
+                // Skip if already cancelled or completed
+                if (doAfter.Cancelled || doAfter.Completed)
+                    continue;
+
+                if (doAfter.Args.Event is not LaserDesignatorDoAfterEvent laserEvent)
+                    continue;
+
+                var coordinates = GetCoordinates(laserEvent.Coordinates);
+                if (!coordinates.IsValid(EntityManager))
+                    continue;
+
+                var userCoords = _transform.GetMapCoordinates(userUid);
+                var targetCoords = _transform.ToMapCoordinates(coordinates);
+
+                // Check if on same map
+                if (userCoords.MapId != targetCoords.MapId)
+                {
+                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
+                    continue;
+                }
+
+                // Check line of sight, ignoring the user and rangefinder
+                SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == userUid || uid == doAfter.Args.Used;
+                if (!_examine.InRangeUnOccluded(userCoords, targetCoords, float.MaxValue, predicate))
+                {
+                    _doAfter.Cancel(userUid, doAfter.Index, doAfterComp);
+                }
+            }
+        }
+
+        var query = EntityQueryEnumerator<ActiveLaserDesignatorComponent, RangefinderComponent>();
+        while (query.MoveNext(out var rangefinderUid, out var active, out var rangefinder))
+        {
+            // Skip if no target
+            if (active.Target == null || !Exists(active.Target.Value))
+                continue;
+
+            // Get origin and target coordinates
+            var originCoords = _transform.ToMapCoordinates(active.Origin);
+            var targetCoords = _transform.GetMapCoordinates(active.Target.Value);
+
+            // Check if on same map
+            if (originCoords.MapId != targetCoords.MapId)
+            {
+                RemCompDeferred<ActiveLaserDesignatorComponent>(rangefinderUid);
+                continue;
+            }
+
+            // Check line of sight, ignoring the rangefinder and target entities
+            SharedInteractionSystem.Ignored predicate = (EntityUid uid) => uid == rangefinderUid || uid == active.Target.Value;
+            if (!_examine.InRangeUnOccluded(originCoords, targetCoords, rangefinder.Range, predicate))
+            {
+                RemCompDeferred<ActiveLaserDesignatorComponent>(rangefinderUid);
+            }
         }
     }
 }
