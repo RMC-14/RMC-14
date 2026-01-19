@@ -97,6 +97,9 @@
       3: rmc-xeno-elder-larva
       4: rmc-xeno-elder-larva
       5: rmc-xeno-elder-larva
+      6: rmc-xeno-elder-larva
+      7: rmc-xeno-elder-larva
+      8: rmc-xeno-elder-larva
   - type: FixedIdentity
     name: cm-job-name-xeno-larva
   - type: VentCrawler
