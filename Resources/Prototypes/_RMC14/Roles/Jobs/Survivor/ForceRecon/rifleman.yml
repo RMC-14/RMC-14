@@ -33,6 +33,7 @@
       prefix: cm-job-prefix-rifleman
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForecon
+    - type: RMCAllowSuitStorage
     - type: SpotterWhitelist
   hidden: true
 

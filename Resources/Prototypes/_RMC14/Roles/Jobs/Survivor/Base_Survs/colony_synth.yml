@@ -65,6 +65,7 @@
       damage:
         types:
           Blunt: 35
+    - type: RMCAllowSuitStorage
     - type: Synth
       generation: rmc-species-synth-generation-second
   hidden: true
