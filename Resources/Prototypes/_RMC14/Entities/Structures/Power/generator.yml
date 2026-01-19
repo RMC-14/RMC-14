@@ -87,6 +87,28 @@
           Fifty: { state: "on-50" }
           SeventyFive: { state: "on-75" }
           Hundred: { state: "on-100" }
+  - type: MarineMapTracked
+  - type: XenoMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: generator
+
+- type: entity
+  parent: RMCGeneratorFusionColony
+  id: RMCGeneratorFusionColonyNoMapIcon
+  suffix: No Map Icon
+  components:
+  - type: RemoveComponents
+    components:
+    - type: MarineMapTracked
+    - type: XenoMapTracked
+    - type: TacticalMapTracked
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
 
 - type: entity
   parent: BaseItem
