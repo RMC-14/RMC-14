@@ -2,6 +2,7 @@
 
 rmc-ui-options-cassettes-volume = Cassette volume:
 rmc-ui-options-hijack-song-volume = Hijack song volume:
+rmc-ui-options-xeno-ability-previews = Show xeno ability previews
 
 rmc-ui-voicelines = Voicelines
 rmc-ui-options-tab-voicelines = Voicelines
