@@ -20,7 +20,7 @@
         mask:
         - MachineMask
         layer:
-        - MobMask
+        - MachineLayer
   - type: Clickable
   - type: InteractionOutline
   - type: Damageable
