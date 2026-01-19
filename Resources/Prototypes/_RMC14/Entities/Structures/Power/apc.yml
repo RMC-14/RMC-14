@@ -131,6 +131,11 @@
           Charging: { state: display-charging }
           FullCharge: { state: display-full }
   - type: RMCMesonsNonviewable
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-apc
+    whitelist:
+      components:
+      - Xeno
 
 # APC under construction
 - type: entity

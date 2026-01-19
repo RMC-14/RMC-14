@@ -52,11 +52,17 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
+cm-chatsan-word-signal-flare = signal flare
+cm-chatsan-replacement-signal-flare = green stick
+
+cm-chatsan-word-signal-flares = signal flares
+cm-chatsan-replacement-signal-flares = green sticks
+
 cm-chatsan-word-flare = flare
-cm-chatsan-replacement-flare = glow stick
+cm-chatsan-replacement-flare = red stick
 
 cm-chatsan-word-flares = flares
-cm-chatsan-replacement-flares = glow sticks
+cm-chatsan-replacement-flares = red sticks
 
 cm-chatsan-word-synth = synth
 cm-chatsan-replacement-synth = fake host
@@ -461,6 +467,12 @@ cm-chatsan-word-sentries = sentries
 cm-chatsan-word-turrets = turrets
 cm-chatsan-replacement-sentries = auto spitters
 
+cm-chatsan-word-tesla = tesla
+cm-chatsan-replacement-tesla = shock emitter
+
+cm-chatsan-word-teslas = teslas
+cm-chatsan-replacement-teslas = shock emitters
+
 cm-chatsan-word-squad = squad
 cm-chatsan-replacement-squad = caste
 
@@ -595,6 +607,12 @@ cm-chatsan-word-barricades = barricades
 cm-chatsan-word-cades = cades
 cm-chatsan-replacement-barricades = metal resin
 
+cm-chatsan-word-plasteel-barricade = plasteel barricade
+cm-chatsan-word-plasteel-cade = plasteel cade
+cm-chatsan-word-plasteel-barricades = plasteel barricades
+cm-chatsan-word-plasteel-cades = plasteel cades
+cm-chatsan-replacement-plasteel-barricades = hard metal resin
+
 cm-chatsan-word-barbed = barbed
 cm-chatsan-replacement-barbed = spiked
 
@@ -602,6 +620,9 @@ cm-chatsan-word-barbs = barbs
 cm-chatsan-word-barbed-wire = barbed wire
 cm-chatsan-word-barbed-wires = barbed wires
 cm-chatsan-replacement-barbed-wires = spikes
+
+cm-chatsan-word-plasteel = plasteel
+cm-chatsan-replacement-plasteel = hard metal
 
 cm-chatsan-word-medal = medal
 cm-chatsan-replacement-medal = jelly

@@ -5,6 +5,11 @@
   name: turret
   components:
   - type: Sentry
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -243,6 +248,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-sniper-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
@@ -353,6 +363,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 2
     accuracyMultiplierUnwielded: 2
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-shotgun-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTurret
@@ -386,6 +401,7 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
+
 - type: entity
   parent: RMCSentry
   id: RMCSentryMiniFire
@@ -453,6 +469,11 @@
     upgrades: null
     startingMagazine: RMCMagazineSentryFire
     magazineTag: RMCMagazineSentryFire
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseSentry
@@ -488,6 +509,11 @@
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCSentry
@@ -551,6 +577,11 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-fire-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCTurretGaussDumb
