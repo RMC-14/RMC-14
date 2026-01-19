@@ -30,7 +30,7 @@ public sealed class MarineCommunicationsComputerBui(EntityUid owner, Enum uiKey)
         if (EntMan.TryGetComponent(Owner, out MarineCommunicationsComputerComponent? communications) &&
             communications.CanGiveMedals)
         {
-            _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerMedalMsg());
+            _window.MedalButton.OnPressed += _ => SendPredictedMessage(new MarineControlComputerOpenMedalsPanelMsg());
             _window.MedalButton.Visible = true;
         }
         else

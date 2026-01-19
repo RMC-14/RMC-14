@@ -101,6 +101,7 @@
       - map: [ "outerClothing" ]
       - map: [ "enum.WebbingVisualLayers.Base" ]
       - map: [ "enum.MedalVisualLayers.Base" ]
+      - map: [ "enum.MedalVisualLayers.Base1" ]
       - map: [ "eyes" ]
       - map: [ "belt" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ] #in the utopian future we should probably have a wings enum inserted here so everyhting doesn't break

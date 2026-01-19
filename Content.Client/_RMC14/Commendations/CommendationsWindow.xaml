@@ -1,8 +1,14 @@
-﻿<controls:CommendationsWindow
+<controls:CommendationsWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Commendations"
-    Title="Medals" MinSize="700 300">
-    <ScrollContainer HScrollEnabled="False" VScrollEnabled="True">
-        <BoxContainer Name="Commendations" Access="Public" Orientation="Vertical" />
-    </ScrollContainer>
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="{Loc 'rmc-commendation-window'}" MinSize="700 450">
+    <TabContainer Name="TabContainer" Access="Public" VerticalExpand="True" HorizontalExpand="True">
+        <TabContainer.PanelStyleBoxOverride>
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#141414" />
+        </TabContainer.PanelStyleBoxOverride>
+    </TabContainer>
 </controls:CommendationsWindow>
