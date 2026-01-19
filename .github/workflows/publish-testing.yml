@@ -27,6 +27,8 @@ jobs:
         cd RobustToolbox
         git fetch --depth=1
 
+    - name: Apply RobustToolbox ARM64 patch
+      run: git apply Tools/patches/arm64.patch
     - name: Install dependencies
       run: dotnet restore
 

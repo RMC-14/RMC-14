@@ -18,6 +18,8 @@ jobs:
       run: |
         cd RobustToolbox/
         git submodule update --init --recursive
+    - name: Apply RobustToolbox ARM64 patch
+      run: git apply Tools/patches/arm64.patch
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v4.1.0
       with:

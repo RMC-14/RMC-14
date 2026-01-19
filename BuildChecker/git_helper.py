@@ -38,6 +38,21 @@ def run_command(command: List[str], capture: bool = False) -> subprocess.Complet
     return completed
 
 
+def patch_arm64():
+    """
+    Applies the ARM64 patch if it is not already applied.
+    """
+    patchPath = "Tools/patches/arm64.patch"
+    checkResult = subprocess.run(
+        ["git", "apply", "-R", "--check", patchPath],
+        cwd="..",
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    if checkResult.returncode != 0:
+        subprocess.run(["git", "apply", patchPath], cwd="..", check=True)
+
+
 def update_submodules():
     """
     Updates all submodules.
@@ -123,3 +138,4 @@ if __name__ == '__main__':
     check_for_zip_download()
     install_hooks()
     update_submodules()
+    patch_arm64()
