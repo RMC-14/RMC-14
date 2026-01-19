@@ -8,6 +8,10 @@
   - type: Sprite
     sprite: _RMC14/Objects/Fun/plushies.rsi
     state: debug
+  - type: Clothing
+    quickEquip: false
+    slots:
+    - HEAD
   - type: UseDelay
     delay: 120
   - type: EmitSoundOnLand
@@ -16,6 +20,11 @@
   - type: EmitSoundOnCollide
     sound:
       collection: ToyFall
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieBaseAdmin
+  suffix: RMC, DO NOT MAP.
 
 - type: entity
   parent: PlushieMoth
@@ -161,14 +170,16 @@
     state: rouny_plushie
 
 - type: entity
-  parent: CMPlushieBase
+  parent: RMCPlushieBaseAdmin
   id: RMCPlushieAlec
   name: conspicuous plush
   description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hypoallergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
-  suffix: DO NOT MAP
   components:
   - type: Sprite
-    state: alec_plushie
+    sprite: _RMC14/Objects/Fun/alec_plushie.rsi
+    state: icon
+  - type: Clothing
+    sprite: _RMC14/Objects/Fun/alec_plushie.rsi
   - type: EmitSoundOnUse
     sound:
       collection: bottleOpenSounds
@@ -177,11 +188,10 @@
       collection: bottleOpenSounds
 
 - type: entity
-  parent: CMPlushieBase
+  parent: RMCPlushieBaseAdmin
   id: RMCPlushieNyx
   name: accursed plush
   description: It's rumoured if you ask this plushie for metal, your soul gets trapped in the pit. It's also rumoured that this plushie was made with 99% cotton.
-  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: plushie_moth
@@ -216,11 +226,10 @@
     state: plushie_wawa
 
 - type: entity
-  parent: CMPlushieBase
+  parent: RMCPlushieBaseAdmin
   id: RMCPlushieXippy
   name: xippy
   description: An accursed agent of chaos and violence.
-  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: xippy
@@ -260,11 +269,10 @@
     state: gnarp_alt
 
 - type: entity
-  parent: CMPlushieBase
+  parent: RMCPlushieBaseAdmin
   id: RMCPlushieProvost
   name: intimidating plush
   description: An icon for all avid tax payers and law enforcement personnel - Don't let anyone know that this plushie is actually behind on their taxes.
-  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: provost
@@ -294,11 +302,10 @@
       path: /Audio/Items/Toys/weh.ogg
 
 - type: entity
-  parent: CMPlushieBase
+  parent: RMCPlushieBaseAdmin
   id: RMCPlushieCrow
   name: crow plushie
   description: hello cro
-  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: crow
