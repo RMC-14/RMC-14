@@ -168,9 +168,27 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(CMKeyFunctions.RMCInteractWithOtherHand);
             AddButton(CMKeyFunctions.RMCRest);
 
+            AddHeader("ui-options-header-rmc-emote");
+            AddButton(CMKeyFunctions.RMCHumanoidEmote1);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote2);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote3);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote4);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote5);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote6);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote7);
+            AddButton(CMKeyFunctions.RMCHumanoidEmote8);
+
             AddHeader("ui-options-header-rmc-xeno");
             AddButton(CMKeyFunctions.CMXenoWideSwing);
             AddButton(CMKeyFunctions.RMCXenoRest);
+            AddButton(CMKeyFunctions.RMCXenoEmote1);
+            AddButton(CMKeyFunctions.RMCXenoEmote2);
+            AddButton(CMKeyFunctions.RMCXenoEmote3);
+            AddButton(CMKeyFunctions.RMCXenoEmote4);
+            AddButton(CMKeyFunctions.RMCXenoEmote5);
+            AddButton(CMKeyFunctions.RMCXenoEmote6);
+            AddButton(CMKeyFunctions.RMCXenoEmote7);
+            AddButton(CMKeyFunctions.RMCXenoEmote8);
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);

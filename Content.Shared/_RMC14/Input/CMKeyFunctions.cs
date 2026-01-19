@@ -24,4 +24,22 @@ public sealed class CMKeyFunctions
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
+
+    // Emotes
+    public static readonly BoundKeyFunction RMCHumanoidEmote1 = "RMCHumanoidEmote1";
+    public static readonly BoundKeyFunction RMCHumanoidEmote2 = "RMCHumanoidEmote2";
+    public static readonly BoundKeyFunction RMCHumanoidEmote3 = "RMCHumanoidEmote3";
+    public static readonly BoundKeyFunction RMCHumanoidEmote4 = "RMCHumanoidEmote4";
+    public static readonly BoundKeyFunction RMCHumanoidEmote5 = "RMCHumanoidEmote5";
+    public static readonly BoundKeyFunction RMCHumanoidEmote6 = "RMCHumanoidEmote6";
+    public static readonly BoundKeyFunction RMCHumanoidEmote7 = "RMCHumanoidEmote7";
+    public static readonly BoundKeyFunction RMCHumanoidEmote8 = "RMCHumanoidEmote8";
+    public static readonly BoundKeyFunction RMCXenoEmote1 = "RMCXenoEmote1";
+    public static readonly BoundKeyFunction RMCXenoEmote2 = "RMCXenoEmote2";
+    public static readonly BoundKeyFunction RMCXenoEmote3 = "RMCXenoEmote3";
+    public static readonly BoundKeyFunction RMCXenoEmote4 = "RMCXenoEmote4";
+    public static readonly BoundKeyFunction RMCXenoEmote5 = "RMCXenoEmote5";
+    public static readonly BoundKeyFunction RMCXenoEmote6 = "RMCXenoEmote6";
+    public static readonly BoundKeyFunction RMCXenoEmote7 = "RMCXenoEmote7";
+    public static readonly BoundKeyFunction RMCXenoEmote8 = "RMCXenoEmote8";
 }
