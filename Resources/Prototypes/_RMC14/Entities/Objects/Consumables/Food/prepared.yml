@@ -130,7 +130,7 @@
         - ReagentId: Nutriment
           Quantity: 2
 
-# SPP Tray Meals 
+# SPP Tray Meals
 
 - type: entity
   parent: CMMarinePreparedMealBase
@@ -301,6 +301,88 @@
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
     state: spp_tray
+
+# PMC
+- type: entity
+  parent: CMMarinePreparedMealBase
+  id: RMCMarinePreparedMealPMCIkanBakar
+  name: PMC prepared meal (Ikan Bakar)
+  description: A chunk of grilled fish, Gado-Gado with 2 hard-boiled eggs, and a fermented soybean cake fill this tray.
+  components:
+  - type: Sprite
+    state: pmc_ikanbakar
+  - type: Food
+    transferAmount: 5
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 50
+        reagents:
+        - ReagentId: Nutriment
+          Quantity: 15
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCSoba
+  name: PMC prepared meal (Soba Noodles)
+  description: Soba Noodles with Sesame seeds, 2 pieces of Onigiri, and a bowl of Miso soup with surprisingly okay tofu chunks.
+  components:
+  - type: Sprite
+    state: pmc_soba
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCAlooGobi
+  name: PMC prepared meal (Aloo Gobi Curry)
+  description: A tray filled with Aloo Gobi curry, A thick piece of Paratha flatbread, and a few greasy vegetable Pekoras. A foremost vegetarian option for PMCs.
+  components:
+  - type: Sprite
+    state: pmc_aloogobi
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCFishAndChips
+  name: PMC prepared meal (Fish & Chips)
+  description: A tray filled with a piece of crispy fried fish, 3 dry Yorkshire puddings, and a few spoonfuls of runny Baked Beans.
+  components:
+  - type: Sprite
+    state: pmc_fishandchips
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCButterChicken
+  name: PMC prepared meal (Butter Chicken)
+  description: A helping of Butter Chicken loaded onto a bed of fluffy rice, alongside a few Samosas and Aloo Tikki with Tamarind sauce.
+  components:
+  - type: Sprite
+    state: pmc_butterchicken
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCBirria
+  name: PMC prepared meal (Birria)
+  description: A tray filled with a piece of Birria, alongside a few spoonfuls of Orange Rice and some consommé for dipping.
+  components:
+  - type: Sprite
+    state: pmc_birria
+
+- type: entity
+  parent: RMCMarinePreparedMealPMCIkanBakar
+  id: RMCMarinePreparedMealPMCBobotie
+  name: PMC prepared meal (Bobotie)
+  description: A tray filled with a slice of Bobotie, a large Roosterkoek breadroll, and spicy Chakalaka.
+  components:
+  - type: Sprite
+    state: pmc_bobotie
+
+- type: entity
+  parent: RMCTrayEmpty
+  id: RMCTrayEmptyPMC
+  description: A standard WEYA-produced plastic tray, built for PMCs, by PMCs, to help PMCs meet their nutrient requirements.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/prepared.rsi
+    state: pmc_tray
 
 # Festive
 

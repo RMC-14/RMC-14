@@ -487,7 +487,7 @@
 
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerPMCTeamLeader
+  id: SquadTrackerTeamLeader
   category: SquadTracker
   icons:
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -510,7 +510,6 @@
     state: trackon-west_tl
   - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
     state: trackon-southwest_tl
-  name: We-Ya Squad Tracker
   description: Tracks the Team Leader
 
 - type: alert

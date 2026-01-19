@@ -18,6 +18,8 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Shared.DoAfter;
+using Content.Shared.Nutrition.Components;
+using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Shared._RMC14.Medical.Refill;
@@ -57,10 +59,15 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<RMCFlushableSolutionComponent, ContainerFlushDoAfterEvent>(OnFlushableSolutionFlush);
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
+
+        SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse);
     }
 
     private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
     {
+        if (ent.Comp.Reagents.Count == 0)
+            return;
+
         using (args.PushGroup(nameof(CMRefillableSolutionComponent)))
         {
             args.PushMarkup("[color=cyan]This can be refilled by clicking on a medical vendor with it![/color]");
@@ -411,5 +418,61 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         _solution.RemoveAllSolution(solution.Value);
         if (TryComp<AppearanceComponent>(ent, out var appearance))
             _appearance.QueueUpdate(ent, appearance);
+    }
+
+    private void OnSmartRefillInteractUse(Entity<RMCSmartRefillTankComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        if (!TryComp<CMRefillableSolutionComponent>(args.Used, out var refillableSolutionComponent) ||
+            !_solution.TryGetSolution(args.Used, refillableSolutionComponent.Solution, out var penSolutionComp) ||
+            !_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var tankSolutionComp))
+            return;
+
+        args.Handled = true;
+        var penSolution = penSolutionComp.Value.Comp.Solution;
+        var tankSolution = tankSolutionComp.Value.Comp.Solution;
+        if (penSolution.AvailableVolume == FixedPoint2.Zero)
+        {
+            _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", args.Used)), args.User, args.User);
+            return;
+        }
+
+        Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> missing = [];
+        var notEnough = false;
+        foreach (var (reagent, amount) in refillableSolutionComponent.Reagents)
+        {
+            var toFill = FixedPoint2.Max(amount - penSolution.GetTotalPrototypeQuantity(reagent.Id), FixedPoint2.Zero);
+            if (toFill == FixedPoint2.Zero)
+                continue;
+
+            missing.Add(reagent, toFill);
+            if (tankSolution.GetTotalPrototypeQuantity(reagent.Id) < toFill)
+            {
+                notEnough = true;
+                break;
+            }
+        }
+
+        if (notEnough)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-smart-refill-not-enough", ("tank", ent.Owner)), args.User, args.User, PopupType.SmallCaution);
+            return;
+        }
+
+        if (missing.Count == 0)
+            return;
+
+        foreach (var (reagent, amount) in missing)
+        {
+            _solution.RemoveReagent(tankSolutionComp.Value, reagent.Id, amount);
+            _solution.TryAddReagent(penSolutionComp.Value, reagent.Id, amount);
+        }
+
+        Dirty(ent);
+        var ev = new RefilledSolutionEvent();
+        RaiseLocalEvent(args.Used, ref ev);
+        _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", args.Used)), args.User, args.User);
     }
 }
