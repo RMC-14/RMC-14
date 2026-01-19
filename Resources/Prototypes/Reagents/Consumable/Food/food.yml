@@ -23,14 +23,22 @@
 
 - type: reagent
   id: Vitamin #Anything "healthy"
-  parent: Nutriment
   name: reagent-name-vitamin
   group: Foods
   desc: reagent-desc-vitamin
   physicalDesc: reagent-physical-desc-chalky
   flavor: vitamin
   color: "#D3D3D3"
-  plantMetabolism: # Lets plants benefit too
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 15
+        nutMetabolism: 0.1
+  # Lets plants benefit too
+  plantMetabolism:
   - !type:PlantAdjustNutrition
     amount: 0.5
   - !type:PlantAdjustHealth
@@ -39,13 +47,20 @@
 
 - type: reagent
   id: Protein #Meat and beans
-  parent: Nutriment
   name: reagent-name-protein
   group: Foods
   desc: reagent-desc-protein
   physicalDesc: reagent-physical-desc-clumpy
   flavor: protein
   color: "#FFFFE5"
+  metabolisms:
+    Food:
+      metabolismRate: 0.1
+      effects:
+      - !type:Nutritious
+        potency: 2
+        nutFactor: 15
+        nutMetabolism: 0.1
   pricePerUnit: 3
 
 - type: reagent
