@@ -44,15 +44,15 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 50
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 50
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 50
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 50
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 20
     - name: Restricted Firearms
       entries:
@@ -558,11 +558,11 @@
       - id: RMCBoxBulletsSMG
         name: SMG HV ammunition box (10x20mm) (M63)
         box: CMMagazineSMGM63
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsSMGAP
         name: SMG ammunition box (10x20mm AP) (M63)
         box: CMMagazineSMGM63AP
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsRifle
         name: rifle ammunition box (10x24mm) (M4SPR)
         box: CMMagazineRifleM4SPR
