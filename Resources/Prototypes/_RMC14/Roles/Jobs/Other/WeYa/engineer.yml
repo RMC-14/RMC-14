@@ -34,6 +34,13 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

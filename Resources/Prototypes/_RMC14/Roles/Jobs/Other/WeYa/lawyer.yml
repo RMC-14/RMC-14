@@ -27,6 +27,13 @@
         RMCSkillEndurance: 0
         RMCSkillVehicles: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_spec
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: playTimeTracker
   id: RMCJobWeYaLawyer

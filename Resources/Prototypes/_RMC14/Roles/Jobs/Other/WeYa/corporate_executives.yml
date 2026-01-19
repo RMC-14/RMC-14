@@ -22,6 +22,13 @@
       skills:
         RMCSkillVehicles: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_super
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -93,6 +100,13 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_spec
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -161,6 +175,13 @@
       skills:
         RMCSkillVehicles: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_super
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -232,6 +253,13 @@
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: ass_man
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -306,6 +334,13 @@
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: div_man
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -368,6 +403,13 @@
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: chief_man
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -433,6 +475,13 @@
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: dep_director
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 
@@ -510,6 +559,13 @@
         RMCSkillIntel: 2
         RMCSkillFirearms: 1
     - type: RMCTrackable
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: director
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   hasIcon: true
   hidden: true
 

@@ -54,6 +54,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: cl
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
     - type: RMCTrackable
 
 - type: startingGear

@@ -33,6 +33,13 @@
       whitelist:
         tags:
         - RMCSquadPMC
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
