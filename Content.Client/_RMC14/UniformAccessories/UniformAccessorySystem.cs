@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.UniformAccessories;
 using Content.Shared._RMC14.Xenonids;
@@ -18,6 +18,7 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedItemSystem _item = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly RMCHumanoidAppearanceSystem _rmcHumanoid = default!;
 
@@ -38,8 +39,6 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
     {
         if (_rmcHumanoid.HidePlayerIdentities && HasComp<XenoComponent>(_player.LocalEntity))
             return;
-
-        var clothingSprite = CompOrNull<SpriteComponent>(ent);
 
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
@@ -63,12 +62,12 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
             if (ent.Comp.HideAccessories && accessoryComp.HiddenByJacketRolling)
                 continue;
 
-            if (clothingSprite != null && accessoryComp.HasIconSprite)
+            if (accessoryComp.HasIconSprite)
             {
-                var clothingLayer = clothingSprite.LayerMapReserveBlank(layer);
-                clothingSprite.LayerSetVisible(clothingLayer, !accessoryComp.Hidden);
-                clothingSprite.LayerSetRSI(clothingLayer, sprite.RsiPath);
-                clothingSprite.LayerSetState(clothingLayer, sprite.RsiState);
+                var clothingLayer = _sprite.LayerMapReserve(ent.Owner, layer);
+                _sprite.LayerSetVisible(ent.Owner, clothingLayer, !accessoryComp.Hidden);
+                _sprite.LayerSetRsi(ent.Owner, clothingLayer, sprite.RsiPath);
+                _sprite.LayerSetRsiState(ent.Owner, clothingLayer, sprite.RsiState);
             }
 
             if (args.Layers.Any(t => t.Item1 == layer))
@@ -115,8 +114,8 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
         var layer = GetKey(item, accessoryComp, index);
 
-        if (TryComp(ent.Owner, out SpriteComponent? clothingSprite) && clothingSprite.LayerMapTryGet(layer, out var clothingLayer))
-            clothingSprite.LayerSetVisible(clothingLayer, false);
+        if (_sprite.LayerMapTryGet(ent.Owner, layer, out var clothingLayer, false))
+            _sprite.LayerSetVisible(ent.Owner, clothingLayer, false);
 
         _item.VisualsChanged(ent);
     }
@@ -129,12 +128,15 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
         if (!_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             return;
 
-        var key = string.Empty;
+        var user = args.Equipee;
+
         foreach (var accessory in container.ContainedEntities)
         {
             if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
-                return;
+                continue;
 
+            if (accessoryComp.LayerKey is not { } key)
+                continue;
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))
             {
                 accessoryComp.PlayerSprite = new(accessorySprite.BaseRSI?.Path ?? new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
@@ -142,28 +144,22 @@ public sealed class UniformAccessorySystem : SharedUniformAccessorySystem
 
             if (accessoryComp.LayerKey != null)
                 key = accessoryComp.LayerKey;
+
+            if (!args.RevealedLayers.Contains(key))
+                continue;
+
+            if (!_sprite.LayerMapTryGet(user, key, out var layer, false) ||
+                !_sprite.TryGetLayer(user, layer, out var layerData, false))
+            {
+                continue;
+            }
+
+            var data = layerData.ToPrototypeData();
+            _sprite.RemoveLayer(user, layer);
+
+            layer = _sprite.LayerMapReserve(user, key);
+            _sprite.LayerSetData(user, layer, data);
         }
-
-        if (key == string.Empty)
-            return;
-
-        if (!args.RevealedLayers.Contains(key))
-            return;
-
-        if (!TryComp(args.Equipee, out SpriteComponent? sprite))
-            return;
-
-        if (!sprite.LayerMapTryGet(key, out var layer) ||
-            !sprite.TryGetLayer(layer, out var layerData))
-        {
-            return;
-        }
-
-        var data = layerData.ToPrototypeData();
-        sprite.RemoveLayer(layer);
-
-        layer = sprite.LayerMapReserveBlank(key);
-        sprite.LayerSetData(layer, data);
     }
 
     private string GetKey(EntityUid uid, UniformAccessoryComponent component, int index)

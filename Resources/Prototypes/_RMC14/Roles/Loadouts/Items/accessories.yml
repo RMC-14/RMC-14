@@ -15,6 +15,72 @@
     - RMCSquadArmband
 
 - type: loadout
+  id: WatchCheapRMC
+  storage:
+    back:
+    - RMCWatchCheap
+
+- type: loadout
+  id: WatchBasicRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobRifleman
+        time: 90000 # 25 hrs
+  storage:
+    back:
+    - RMCWatchCaseBasic
+
+- type: loadout
+  id: WatchSurvRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobSurvivor
+        time: 36000 # 10 hrs
+  storage:
+    back:
+    - RMCWatchCaseSurv
+
+- type: loadout
+  id: WatchPilotRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobPilotDropship
+        time: 43200 # 12 hrs
+  storage:
+    back:
+    - RMCWatchCasePilot
+
+- type: loadout
+  id: WatchLiaisonRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: CMJobLiaison
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseLiaison
+
+- type: loadout
+  id: WatchSynthRMC
+  effects:
+    - !type:JobRequirementLoadoutEffect
+      requirement:
+        !type:RoleTimeRequirement
+        role: RMCJobSynthetic
+        time: 126000 # 35 hrs
+  storage:
+    back:
+    - RMCWatchCaseSynth
+
+- type: loadout
   id: PatchPeaceRMC
   cost: 1
   storage:
