@@ -38,7 +38,7 @@ public sealed partial class PowerChargerVisualsComponent : Component
     };
 
     /// RMC14 - If null, charge level visualization is disabled and status lights are used instead.
-    [DataField("chargeLevelState")]
+    [DataField]
     [ViewVariables(VVAccess.ReadWrite)]
     public string? ChargeLevelState = null;
 }
