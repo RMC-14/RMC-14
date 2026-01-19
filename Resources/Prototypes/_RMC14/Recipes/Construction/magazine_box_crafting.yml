@@ -184,6 +184,18 @@
   iconColor: "#b2976e"
   objectType: Item
 
+- type: construction
+  parent: RMC
+  name: Magazine Box (M1984 HP)
+  id: RMCBoxMagazinePistolM1984HP
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxMagazinePistolM1984HPEmpty
+  category: construction-category-cm-box-magazine
+  description: A magazine box that can contain hollow point M1984 mags.
+  iconColor: "#b2976e"
+  objectType: Item
+
 # 88 mod 4 / 88m4
 - type: construction
   parent: RMC
@@ -653,6 +665,12 @@
         amount: 1
         doAfter: 0.25
 
+    - to: RMCBoxMagazinePistolM1984HPEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M77AP
     - to: RMCBoxMagazinePistolM77APEmpty
       steps:
@@ -838,6 +856,8 @@
     entity: RMCBoxMagazinePistolM1984Empty
   - node: RMCBoxMagazinePistolM1984APEmpty
     entity: RMCBoxMagazinePistolM1984APEmpty
+  - node: RMCBoxMagazinePistolM1984HPEmpty
+    entity: RMCBoxMagazinePistolM1984HPEmpty
 
   # M77AP
   - node: RMCBoxMagazinePistolM77APEmpty
