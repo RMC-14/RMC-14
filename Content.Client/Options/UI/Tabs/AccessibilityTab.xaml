@@ -1,11 +1,15 @@
-<Control xmlns="https://spacestation14.io"
-         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-         xmlns:ui="clr-namespace:Content.Client.Options.UI">
+<tabs:AccessibilityTab xmlns="https://spacestation14.io"
+          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+          xmlns:tabs="clr-namespace:Content.Client.Options.UI.Tabs"
+          xmlns:ui="clr-namespace:Content.Client.Options.UI"> <!-- RMC14 -->
     <BoxContainer Orientation="Vertical">
         <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
             <BoxContainer Orientation="Vertical" Margin="8">
                 <Label Text="{Loc 'cm-ui-rmc14'}"
                         StyleClasses="LabelKeyText"/>
+                <BoxContainer Name="NightVisionOptionContainer"
+                              Orientation="Horizontal"
+                              SeparationOverride="4" />
                 <CheckBox Name="RMCChatSquadColorModeCheckBox" Text="{Loc 'rmc-ui-options-chat-squad-color-mode'}" />
                 <CheckBox Name="RMCUseAlternateSpritesCheckBox" Text="{Loc 'rmc-ui-options-alternate-sprites'}" />
                 <Label Text="{Loc 'ui-options-accessability-header-visuals'}"
@@ -18,8 +22,8 @@
                 <ui:OptionSlider Name="SpeechBubbleSpeakerOpacitySlider" Title="{Loc 'ui-options-speech-bubble-speaker-opacity'}" />
                 <ui:OptionSlider Name="SpeechBubbleBackgroundOpacitySlider" Title="{Loc 'ui-options-speech-bubble-background-opacity'}" />
                 <CheckBox Name="AutoFillHighlightsCheckBox" Text="{Loc 'ui-options-auto-fill-highlights'}" />
-                <ui:OptionColorSlider Name="HighlightsColorSlider" 
-                    Title="{Loc 'ui-options-highlights-color'}" 
+                <ui:OptionColorSlider Name="HighlightsColorSlider"
+                    Title="{Loc 'ui-options-highlights-color'}"
                     Example="{Loc 'ui-options-highlights-color-example'}"/>
                 <Label Text="{Loc 'ui-options-accessability-header-content'}"
                        StyleClasses="LabelKeyText"/>
@@ -28,4 +32,4 @@
         </ScrollContainer>
         <ui:OptionsTabControlRow Name="Control" Access="Public" />
     </BoxContainer>
-</Control>
+</tabs:AccessibilityTab>
