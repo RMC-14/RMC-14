@@ -121,6 +121,21 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCSpawnerRandomConfiscatedEquipment
+  name: random crate loot spawner
+  description: This is a random crate loot spawner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    layers:
+    - state: random_toolbox
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RMCConfiscatedEquipmentTable
+
+- type: entity
+  parent: MarkerBase
   id: RMCSpawnerRandomHalyconGuns
   name: random crate loot spawner
   description: This is a random crate loot spawner
@@ -256,6 +271,7 @@
     spawn: RMCSpawnerRandomHalyconGuns
 #Todo RMC14: Make it so it does it 3 times
 
+# Black market
 - type: entity
   parent: RMCCrateLarge
   id: RMCCrateBlackmarketFireArms
@@ -273,6 +289,16 @@
   components:
   - type: SpawnOnTerminate
     spawn: RMCSpawnerRandomMERCGuns
+
+- type: entity
+  parent: RMCCrateLarge
+  id: RMCCrateBlackmarketConfiscatedEquipment # TODO crate heat 10 and dollar cost 70
+  name: seized foreign equipment crate
+  components:
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomConfiscatedEquipment
+
+# Black market end
 
 - type: entity
   parent: RMCCrateLarge # TDLR (randomized spawn does not work with crateopenable spawn a object that uses Spawnonterminate for it) Part of UNMC Guns Crate

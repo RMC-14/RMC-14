@@ -1,0 +1,42 @@
+- type: entityTable
+  id: RMCConfiscatedEquipmentTable
+  table: !type:GroupSelector
+    children:
+    - !type:AllSelector # # PMC
+      children:
+      - id: RMCJumpsuitVeteranPMCNoWebbing
+      - id: ArmorHelmetPMC
+      - id: CMArmorM4PMCLight
+      - id: RMCHandsVeteran
+      - id: RMCMaskCoifPMC
+      - id: RMCSatchelPMC
+    - !type:AllSelector # Pizza
+      children:
+      - id: RMCHeadCapPizzaGalaxy
+      - id: RMCJumpsuitPizzaGalaxy
+    - !type:AllSelector # CLF
+      children:
+      - id: RMCJumpsuitCLFSoldier
+      - id: RMCCoatMilitia
+      - id: RMCHeadMilitiaHood
+      - id: RMCHandsVeteran
+      - id: RMCSatchelLightpack5Slot
+    - !type:AllSelector # SPP
+      children:
+      - id: ArmorHelmetSPP
+      - id: CMJumpsuitSPP
+      - id: RMCArmorSPPRifleman
+      - id: RMCCombatUtilityKnifeB
+      - id: RMCHandsVeteranSPP
+      - id: RMCSatchelLightpack5Slot
+    - !type:AllSelector # Freelancer
+      children:
+      - id: RMCJumpsuitFreelancer
+      - id: CMArmorFreelancer
+      - id: RMCHandsVeteran
+      - id: RMCSatchelLightpack5Slot
+    - !type:AllSelector # VAIPO
+      children:
+      - id: RMCSunglassesBig
+      - id: CMJumpsuitTShirtGray
+      - id: CMArmorM3VLBallistics
