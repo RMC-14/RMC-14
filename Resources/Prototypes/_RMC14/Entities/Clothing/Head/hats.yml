@@ -1072,3 +1072,12 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
       state: helmet
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadFoil
+  name: foil hat
+  description: Keeps the government, aliens, and your in-laws from reading your thoughts. Probably.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/foil.rsi

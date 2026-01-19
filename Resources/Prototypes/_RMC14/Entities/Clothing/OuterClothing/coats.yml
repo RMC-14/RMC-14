@@ -824,7 +824,7 @@
 # Hybrisa
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBlue
   name: dark blue worn parka
   description: An old worn blue Parka, has seen better days...
@@ -835,7 +835,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboGreen
   name: dark green worn parka
   description: An old worn green Parka, has seen better days...
@@ -846,7 +846,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_green.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboBrown
   name: dark brown worn polyester jacket
   description: An old worn brown polyester jacket, has seen better days...
@@ -857,7 +857,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_brown.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboDarkBlue
   name: dark blue worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...
@@ -868,7 +868,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/hobocoat_dark_blue.rsi
 
 - type: entity
-  parent: RMCBaseJacket
+  parent: RMCCoatSnow
   id: RMCCoatHoboRed
   name: dark red worn polyester jacket
   description: An old worn blue polyester jacket, has seen better days...

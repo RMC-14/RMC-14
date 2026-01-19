@@ -35,3 +35,17 @@
       jungle: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/jungle.rsi
       snow: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/snow.rsi
       urban: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/urban.rsi
+
+- type: entity
+  parent: RMCBoonie
+  id: RMCBoonieFisherman
+  name: fisherman's boonie hat
+  description: A floppy boonie hat with hooks, lines, and sinkers tucked around the band—clearly the choice of a seasoned angler. Offers shade from the sun and some rain protection.
+  suffix: Fisherman
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/boonie_fisher.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
