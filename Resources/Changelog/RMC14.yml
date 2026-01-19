@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: Spaghetti
-  changes:
-  - message: Fixed warriors being able to heal through lifesteal while on fire.
-    type: Fix
-  id: 2301
-  time: '2025-09-06T01:41:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7792
-- author: Spaghetti-bit
-  changes:
-  - message: Fixed defenders being unable to tail slam while fortified.
-    type: Fix
-  id: 2302
-  time: '2025-09-06T01:43:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7760
-- author: yagwog
-  changes:
-  - message: Wheelchairs
-    type: Add
-  id: 2303
-  time: '2025-09-06T07:52:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6939
 - author: shibechef
   changes:
   - message: The mou53 has a delay of 1.1 seconds for toggling it's breech.
@@ -4743,5 +4722,32 @@
   id: 2803
   time: '2026-01-19T01:00:47.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9018
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the PMC crashed ship on solaris insert not deleting walls.
+    type: Fix
+  - message: Fixed the Lazarus Landing corporate dome scenario not allowing scientist
+      survivors. They will roll as a medic goon now.
+    type: Fix
+  id: 2804
+  time: '2026-01-19T01:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8997
+- author: SharkSnake98
+  changes:
+  - message: Added PMC Premade Meals and their vendor
+    type: Add
+  - message: Changed the Hauchefant's premade meal vendor to the PMC one.
+    type: Tweak
+  id: 2805
+  time: '2026-01-19T01:03:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8990
+- author: Ian321
+  changes:
+  - message: Hospital Corpsman can now acquire the "MS-11 Smart Refill Tank" that
+      can be used to refill injectors in the field.
+    type: Add
+  id: 2806
+  time: '2026-01-19T01:03:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8386
 Name: RMC14
 Order: -1
