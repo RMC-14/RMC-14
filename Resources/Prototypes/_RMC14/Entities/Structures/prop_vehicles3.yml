@@ -697,3 +697,39 @@
   components:
   - type: Sprite
     state: small_truck_red_f
+
+# Digger
+- type: entity
+  parent: RMCPropBase
+  id: RMCPropDiggerOrange
+  name: Model 30 Light Excavator
+  description: Weston-Yamada Corporation's Model 30 Light Excavator. Despite looking like a massive beast, the Model 30 is fairly light when compared to other WE-YA terraforming excavators. It's designed to be able to be disassembled for transport and re-assembled on site. This one is a nice orange color.
+  suffix: Orange
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/digger.rsi
+    state: digger_orange
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-3.5,3,2.6"
+        density: 190
+        layer:
+        - MobMask
+
+- type: entity
+  parent: RMCPropDiggerOrange
+  id: RMCPropDiggerGrey
+  name: Model 30 Light Excavator
+  description: Weston-Yamada Corporation's Model 30 Light Excavator. Despite looking like a massive beast, the Model 30 is fairly light when compared to other WE-YA terraforming excavators. It's designed to be able to be disassembled for transport and re-assembled on site. This one is a nice grey color.
+  suffix: Grey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/digger.rsi
+    state: digger_grey
