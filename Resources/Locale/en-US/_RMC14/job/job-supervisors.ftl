@@ -20,3 +20,4 @@ cm-job-supervisors-company-command = Company Command
 cm-job-supervisors-royal-tl = the Team Leader
 cm-job-supervisors-royal-officer = the Lieutenant
 cm-job-supervisors-royal-major = the Major
+rmc-job-supervisors-robotic = ARES and HERMES
