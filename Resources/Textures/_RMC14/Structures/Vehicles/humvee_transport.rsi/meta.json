@@ -15,7 +15,7 @@
       "name": "WHEEL"
     },
     {
-      "name": "humvee_wheels_0",
+      "name": "wheels_0",
       "directions": 4,
       "delays": [
         [
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "name": "humvee_wheels_1",
+      "name": "wheels_1",
       "directions": 4
     },
     {

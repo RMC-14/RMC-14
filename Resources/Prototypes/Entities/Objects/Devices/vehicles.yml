@@ -1097,14 +1097,14 @@
       state: ATTACH
       visible: false
     - map: [ rmc-wheels ]
-      state: humvee_wheels_1
+      state: wheels_1
   - type: SpriteMovement
     movementLayers:
       rmc-wheels:
-        state: humvee_wheels_0
+        state: wheels_0
     noMovementLayers:
       rmc-wheels:
-        state: humvee_wheels_1
+        state: wheels_1
   - type: PointLight
     enabled: false
     radius: 12
@@ -1184,7 +1184,7 @@
       state: ATTACH
       visible: false
     - map: [ rmc-wheels ]
-      state: humvee_wheels_1
+      state: wheels_1
   - type: RMCHardpointSlots
     slots:
     - id: support
@@ -1223,7 +1223,7 @@
       state: ATTACH
       visible: false
     - map: [ rmc-wheels ]
-      state: humvee_wheels_1
+      state: wheels_1
   - type: RMCHardpointSlots
     slots:
     - id: support
