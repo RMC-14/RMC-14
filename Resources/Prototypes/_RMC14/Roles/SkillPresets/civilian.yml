@@ -224,3 +224,13 @@
       RMCSkillOverwatch: 1
       RMCSkillJtac: 2
       RMCSkillIntel: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorPizzaGalaxyDriver
+  name: Survivor Pizza Galaxy Delivery Driver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillVehicles: 1
