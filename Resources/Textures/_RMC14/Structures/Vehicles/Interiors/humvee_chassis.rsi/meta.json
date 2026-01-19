@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 160,
+    "y": 96
+  },
+  "states": [
+    {
+      "name": "humvee_chassis"
+    },
+    {
+      "name": "humvee_chassis_medical"
+    },
+    {
+      "name": "humvee_chassis_transport"
+    }
+  ]
+}

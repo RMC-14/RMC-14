@@ -6,6 +6,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: OverMobs
     layers:
     - state: bullet
       shader: unshaded

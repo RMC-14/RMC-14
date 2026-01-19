@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tires"
+    },
+    {
+      "name": "humveecannon"
+    },
+    {
+      "name": "humveeturret"
+    },
+    {
+      "name": "humveelauncher"
+    },
+    {
+      "name": "humveelauncher_installed"
+    },
+    {
+      "name": "snowplow"
+    },
+    {
+      "name": "overlight"
+    },
+    {
+      "name": "humveehatch"
+    }
+  ]
+}

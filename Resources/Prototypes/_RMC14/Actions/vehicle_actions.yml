@@ -1,0 +1,9 @@
+- type: entity
+  id: ActionRMCVehicleToggleView
+  name: Toggle View
+  description: Switch between the interior and exterior view.
+  components:
+  - type: InstantAction
+    event: !type:RMCVehicleToggleViewActionEvent
+  - type: Action
+    itemIconStyle: BigItem

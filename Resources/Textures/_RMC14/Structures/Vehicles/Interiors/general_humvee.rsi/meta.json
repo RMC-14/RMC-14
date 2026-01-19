@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "weapons_loader"
+    },
+    {
+      "name": "car_seat",
+      "directions": 4
+    },
+    {
+      "name": "car_seat_destroyed",
+      "directions": 4
+    },
+    {
+      "name": "small_viewport"
+    },
+    {
+      "name": "exit_door"
+    },
+    {
+      "name": "exit_door1",
+      "directions": 4
+    },
+    {
+      "name": "medical_backdoor1"
+    },
+    {
+      "name": "medical_backdoor2"
+    },
+    {
+      "name": "carrier_backdoor1"
+    },
+    {
+      "name": "carrier_backdoor2"
+    },
+    {
+      "name": "VIEWPORT"
+    },
+    {
+      "name": "small_viewport_window"
+    },
+    {
+      "name": "viewport_door"
+    },
+    {
+      "name": "viewport_frontwindow_north"
+    },
+    {
+      "name": "viewport_frontwindow_south"
+    },
+    {
+      "name": "MEDICAL"
+    },
+    {
+      "name": "locker_med"
+    },
+    {
+      "name": "locker_open"
+    },
+    {
+      "name": "blood"
+    },
+    {
+      "name": "blood_vend",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mini_blood_denied",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mini_blood_off"
+    },
+    {
+      "name": "mini_blood_panel"
+    }
+  ]
+}
