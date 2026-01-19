@@ -2,7 +2,7 @@
   id: RMCConfiscatedEquipmentTable
   table: !type:GroupSelector
     children:
-    - !type:AllSelector # # PMC
+    - !type:AllSelector # PMC
       children:
       - id: RMCJumpsuitVeteranPMCNoWebbing
       - id: ArmorHelmetPMC
