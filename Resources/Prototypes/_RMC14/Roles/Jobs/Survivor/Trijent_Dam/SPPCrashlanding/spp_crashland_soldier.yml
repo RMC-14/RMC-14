@@ -1,0 +1,43 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandSoldier
+  name: rmc-job-name-crashland-soldier
+  icon: "RMCJobIconSPPRifleman"
+  spawnMenuRoleName: SPP Airborne Rifleman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-soldier
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashland
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandRifleman
+  name: spp crashland rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandSoldier
+  - type: Sprite
+    state: spp_spawn

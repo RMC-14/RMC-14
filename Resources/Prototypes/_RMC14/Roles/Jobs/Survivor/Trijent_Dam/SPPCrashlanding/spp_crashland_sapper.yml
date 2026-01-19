@@ -1,0 +1,54 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandSapper
+  name: rmc-job-name-crashland-sapper
+  startingGear: RMCGearSPPCrashlandSapper
+  ranks:
+    RMCRankSPPMladshiySerzhant: []
+  icon: "RMCJobIconSPPEngineer"
+  spawnMenuRoleName: SPP Airborne Sapper (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillEngineer: 3
+        RMCSkillConstruction: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillCqc: 1
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-sapper
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashlandNoBelt
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandSapper
+  equipment:
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+    belt: CMBeltUtilityFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandSapper
+  name: spp crashland sapper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandSapper
+  - type: Sprite
+    state: spp_spawn
