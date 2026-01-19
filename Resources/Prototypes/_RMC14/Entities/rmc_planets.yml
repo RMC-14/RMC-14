@@ -196,19 +196,21 @@
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
     survivorJobScenarios:
-      riot_in_progress:
+      riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCO, the rest as supporting officers.
+        - CMSurvivorSecurity: 1
+        - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      riot_in_progress: # Riot In Progress Riot Officers
         CMSurvivorSecurity:
         - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: 1
-        CMSurvivorCorporate:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
-        CMSurvivorDoctor:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
-        CMSurvivorEngineer:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
-        CMSurvivorScientist:
-        - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
         CMSurvivor:
         - RMCSurvivorFiorinaRiotInProgressUNRiotOfficer: -1
+    survivorJobOverrideScenarios:
+      riot_in_progress: # Riot In Progress job overrides.
+        CMSurvivorCorporate: CMSurvivor
+        CMSurvivorEngineer: CMSurvivor
+        CMSurvivorDoctor: CMSurvivor
+        CMSurvivorScientist: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent
