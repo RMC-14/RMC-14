@@ -90,6 +90,9 @@
       interfaces:
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
+    - type: Tag
+      tags:
+      - RMCSheetMetal
 
 - type: entity
   parent: CMSheetMetal
