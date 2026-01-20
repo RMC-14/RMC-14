@@ -38,6 +38,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         EnsureComp<RMCSpeechBubbleSpecificStyleComponent>(user);
         var userComp = EnsureComp<RMCMegaphoneUserComponent>(user);
         userComp.VoiceRange = ev.VoiceRange;
+        userComp.Amplifying = ev.Amplifying;
         Dirty(user, userComp);
 
         if (TryComp<SpeechComponent>(user, out var speech))
@@ -76,6 +77,9 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
     private void OnExpandRecipients(ExpandICChatRecipientsEvent ev)
     {
         if (!TryComp<RMCMegaphoneUserComponent>(ev.Source, out var megaphoneUser))
+            return;
+
+        if (!megaphoneUser.Amplifying)
             return;
 
         var megaphoneRange = megaphoneUser.VoiceRange;

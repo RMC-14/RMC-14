@@ -60,4 +60,10 @@ public sealed partial class RMCMegaphoneUserComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float VoiceRange = 15f;
+
+    /// <summary>
+    /// Whether the megaphone amplifies voice range. If false, range extension is disabled.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Amplifying = true;
 }

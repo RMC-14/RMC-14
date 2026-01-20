@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Megaphone;
@@ -11,4 +12,16 @@ public sealed partial class RMCMegaphoneComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float VoiceRange = 15f;
+
+    /// <summary>
+    /// Whether the megaphone amplifies voice range. Can be toggled via verb.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool Amplifying = true;
+
+    /// <summary>
+    /// Sound played when toggling amplifying mode.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/Machines/switch.ogg");
 }
