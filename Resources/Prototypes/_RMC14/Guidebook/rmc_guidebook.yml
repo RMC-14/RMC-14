@@ -35,14 +35,14 @@
   id: RMCGuideRoleRifleman
   priority: 1
   name: "Rifleman Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleRifleman.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCGuideRoleRifleman.xml"
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleDrone
   priority: 2
   name: "Drone Guide"
-  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCGuideRoleDrone.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCGuideRoleDrone.xml"
 
 # Humanoid Roles
 - type: guideEntry
@@ -72,7 +72,7 @@
   id: RMCSurvivor
   priority: 1
   name: "Survivor"
-  text: "/ServerInfo/Guidebook/_RMC14/NewPlayerGuide/RMCSurvivor.xml"
+  text: "/ServerInfo/Guidebook/_RMC14/RMCSurvivor.xml"
 
 - type: guideEntry
   parent: RMC
