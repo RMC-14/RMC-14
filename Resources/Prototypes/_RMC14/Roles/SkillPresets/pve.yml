@@ -46,3 +46,24 @@
         RMCSkillFirearms: 2
         RMCSkillPolice: 2
         RMCSkillOverwatch: 1
+
+- type: entity
+  id: RMCSkillPresetPVESquadLeader
+  name: Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 2
+        RMCSkillPilot: 1
+        RMCSkillPolice: 2
+        RMCSkillCqc: 1
+        RMCSkillMedical: 1
