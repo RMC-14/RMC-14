@@ -111,8 +111,7 @@ public sealed class MotionDetectorSystem : EntitySystem
 
         if (!_hands.IsHolding(args.User, ent.Owner) &&
             HasComp<StorageComponent>(container.Owner) &&
-            !_hands.IsHolding(args.User, container.Owner) &&
-            !_inventory.InSlotWithFlags(container.Owner, SlotFlags.BACK))
+            !_container.TryGetContainingContainer(container.Owner, out _))
             return;
 
         args.Handled = true;
