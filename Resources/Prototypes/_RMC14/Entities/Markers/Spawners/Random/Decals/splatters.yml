@@ -26,6 +26,9 @@
     - RMCDecalBloodFloor5
     - RMCDecalBloodFloor6
     - RMCDecalBloodFloor7
+    radius: 0.7
+    prob: 0.5
+    maxDecalsPerTile: 4
 
 - type: entity
   parent: RMCDecalSpawnerBase
