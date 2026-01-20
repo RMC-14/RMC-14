@@ -51,6 +51,7 @@
       types:
         Slash: 75
   - type: EggMorpher
+  - type: XenoFriendly
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: HiveConstructionRequiresHiveCore
