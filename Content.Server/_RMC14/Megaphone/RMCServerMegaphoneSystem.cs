@@ -2,6 +2,7 @@ using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Megaphone;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Speech;
@@ -23,6 +24,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
     [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> LeadershipSkill = "RMCSkillLeadership";
     private static readonly EntProtoId HushedStatusEffect = "RMCStatusEffectHushed";
@@ -103,6 +105,9 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                                  megaphoneUser.HushedEffectDuration > TimeSpan.Zero &&
                                  _skills.GetSkill(ev.Source, LeadershipSkill) >= 1;
 
+        // Get source faction for friendly check (only needed for hushed effect)
+        var hasSourceFaction = _gunIFF.TryGetFaction(ev.Source, out var sourceFaction);
+
         // Add recipients within megaphone range but outside normal range
         foreach (var player in _playerManager.Sessions)
         {
@@ -127,9 +132,12 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                 }
             }
 
-            // Apply hushed effect if within megaphone range and conditions are met
             if (shouldApplyHushed && distance < megaphoneRange)
             {
+                // Check if recipient is friendly (same faction)
+                if (!hasSourceFaction || !_gunIFF.IsInFaction(playerEntity, sourceFaction))
+                    continue;
+
                 var recipientLeadershipLevel = _skills.GetSkill(playerEntity, LeadershipSkill);
                 if (recipientLeadershipLevel < 1)
                 {
