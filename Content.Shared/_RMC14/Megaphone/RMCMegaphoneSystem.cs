@@ -1,5 +1,6 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Serialization;
@@ -31,7 +32,13 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 
     private void OnExamined(Entity<RMCMegaphoneComponent> ent, ref ExaminedEvent args)
     {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
         args.PushMarkup(Loc.GetString("rmc-megaphone-examine"));
+        args.PushMarkup(Loc.GetString(ent.Comp.Amplifying
+            ? "rmc-megaphone-examine-amplifying-enabled"
+            : "rmc-megaphone-examine-amplifying-disabled"));
     }
 
     private void OnGetVerbs(Entity<RMCMegaphoneComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
