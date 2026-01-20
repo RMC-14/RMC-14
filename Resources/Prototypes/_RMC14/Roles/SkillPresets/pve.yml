@@ -67,3 +67,28 @@
         RMCSkillPolice: 2
         RMCSkillCqc: 1
         RMCSkillMedical: 1
+
+- type: entity
+  id: RMCSkillPresetPVECorpsman
+  name: Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillFirearms: 1
+        RMCSkillVehicles: 1
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+
+
+# SGO
+
+# Rifleman
