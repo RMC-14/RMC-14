@@ -187,7 +187,7 @@ rmc-job-greeting-new-varadero-cmb-technician = You are a CMB Technician!
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-new-varadero-cmb-supervisor = You are an ICB Supervisor!
+rmc-job-greeting-new-varadero-icb-supervisor = You are an ICB Supervisor!
 
   You are aware of the xenomorph threat.
 

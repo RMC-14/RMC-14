@@ -9,7 +9,7 @@
   startingGear: RMCGearSurvivorICBSupervisor
   icon: "RMCJobIconICBSupervisor"
   hasIcon: true
-  greeting: rmc-job-greeting-new-varadero-cmb-supervisor
+  greeting: rmc-job-greeting-new-varadero-icb-supervisor
   playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: Interstellar Commerce Bureau Supervisor (New Varadero special commander)
   special:
