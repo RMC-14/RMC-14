@@ -530,4 +530,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCNewResinPreventCollideTimeSeconds =
         CVarDef.Create("rmc.new_resin_prevent_collide_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCChemMasterPresets =
+        CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
 }
