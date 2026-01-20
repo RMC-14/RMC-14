@@ -6,3 +6,4 @@
   components:
   - type: StatusEffect
     alert: RMCHushed
+  - type: RMCHushedStatusEffect

@@ -1,10 +1,13 @@
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Megaphone;
 using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Speech;
+using Content.Shared.StatusEffectNew;
 using Robust.Server.Console;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -18,6 +21,11 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
     [Dependency] private readonly IServerConsoleHost _console = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
+
+    private static readonly EntProtoId<SkillDefinitionComponent> LeadershipSkill = "RMCSkillLeadership";
+    private static readonly EntProtoId HushedStatusEffect = "RMCStatusEffectHushed";
 
     public override void Initialize()
     {
@@ -39,6 +47,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         var userComp = EnsureComp<RMCMegaphoneUserComponent>(user);
         userComp.VoiceRange = ev.VoiceRange;
         userComp.Amplifying = ev.Amplifying;
+        userComp.HushedEffectDuration = ev.HushedEffectDuration;
         Dirty(user, userComp);
 
         if (TryComp<SpeechComponent>(user, out var speech))
@@ -83,21 +92,21 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             return;
 
         var megaphoneRange = megaphoneUser.VoiceRange;
-        if (ev.VoiceRange >= megaphoneRange)
-            return;
 
         var sourceTransform = Transform(ev.Source);
         var sourcePos = _transform.GetWorldPosition(sourceTransform);
         var xforms = GetEntityQuery<TransformComponent>();
         var ghostHearing = GetEntityQuery<GhostHearingComponent>();
 
+        // Check if we should apply hushed effect (user has leadership skill and amplifying is enabled)
+        var shouldApplyHushed = megaphoneUser.Amplifying &&
+                                 megaphoneUser.HushedEffectDuration > TimeSpan.Zero &&
+                                 _skills.GetSkill(ev.Source, LeadershipSkill) >= 1;
+
         // Add recipients within megaphone range but outside normal range
         foreach (var player in _playerManager.Sessions)
         {
             if (player.AttachedEntity is not { Valid: true } playerEntity)
-                continue;
-
-            if (ev.Recipients.ContainsKey(player))
                 continue;
 
             var transformEntity = xforms.GetComponent(playerEntity);
@@ -111,8 +120,21 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             // Add if within megaphone range but outside normal range
             if (distance < megaphoneRange && distance >= ev.VoiceRange)
             {
-                var observer = ghostHearing.HasComponent(playerEntity);
-                ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
+                if (!ev.Recipients.ContainsKey(player))
+                {
+                    var observer = ghostHearing.HasComponent(playerEntity);
+                    ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
+                }
+            }
+
+            // Apply hushed effect if within megaphone range and conditions are met
+            if (shouldApplyHushed && distance < megaphoneRange)
+            {
+                var recipientLeadershipLevel = _skills.GetSkill(playerEntity, LeadershipSkill);
+                if (recipientLeadershipLevel < 1)
+                {
+                    _statusEffects.TrySetStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
+                }
             }
         }
     }

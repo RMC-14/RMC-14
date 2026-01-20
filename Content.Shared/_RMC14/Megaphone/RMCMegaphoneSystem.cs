@@ -25,7 +25,7 @@ public sealed class RMCMegaphoneSystem : EntitySystem
     {
         args.Handled = true;
 
-        var ev = new MegaphoneInputEvent(GetNetEntity(args.User), VoiceRange: ent.Comp.VoiceRange, Amplifying: ent.Comp.Amplifying);
+        var ev = new MegaphoneInputEvent(GetNetEntity(args.User), VoiceRange: ent.Comp.VoiceRange, Amplifying: ent.Comp.Amplifying, HushedEffectDuration: ent.Comp.HushedEffectDuration);
         _dialog.OpenInput(args.User, Loc.GetString("rmc-megaphone-ui-text"), ev, largeInput: false, characterLimit: 150);
     }
 
@@ -61,4 +61,4 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 }
 
 [Serializable, NetSerializable]
-public sealed record MegaphoneInputEvent(NetEntity Actor, string Message = "", float VoiceRange = 15f, bool Amplifying = true) : DialogInputEvent(Message);
+public sealed record MegaphoneInputEvent(NetEntity Actor, string Message = "", float VoiceRange = 15f, bool Amplifying = true, TimeSpan HushedEffectDuration = default) : DialogInputEvent(Message);

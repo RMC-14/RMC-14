@@ -66,4 +66,10 @@ public sealed partial class RMCMegaphoneUserComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool Amplifying = true;
+
+    /// <summary>
+    /// Duration of RMCStatusEffectHushed applied to recipients when user has leadership skill.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan HushedEffectDuration = TimeSpan.FromSeconds(4);
 }
