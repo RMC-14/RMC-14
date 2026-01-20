@@ -44,6 +44,7 @@ using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Storage;
 using Content.Shared._RMC14.Cryostorage;
+using Content.Shared.Verbs;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -92,6 +93,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetAlternativeVerbs);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
@@ -287,6 +289,103 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("cm-vending-machine-access-denied"), vendor, args.User);
         args.Cancel();
+    }
+
+    private bool CanRestockItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item)
+    {
+        if (Prototype(item) is not { } prototype)
+            return false;
+
+        foreach (var section in vendor.Comp.Sections)
+        {
+            foreach (var entry in section.Entries)
+            {
+                if (entry.Id == prototype.ID)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool TryRestockVendor(Entity<CMAutomatedVendorComponent> vendor, EntityUid usedItem, EntityUid user)
+    {
+        // Find the entry that matches this item
+        CMVendorEntry? matchingEntry = null;
+        if (Prototype(usedItem) is { } prototype)
+        {
+            foreach (var section in vendor.Comp.Sections)
+            {
+                foreach (var entry in section.Entries)
+                {
+                    if (entry.Id == prototype.ID)
+                    {
+                        matchingEntry = entry;
+                        break;
+                    }
+                }
+                if (matchingEntry != null)
+                    break;
+            }
+        }
+
+        if (matchingEntry == null)
+            return false; // Item is not vendable by this vendor
+
+        // Check if vendor can accept more of this item
+        if (matchingEntry.Amount >= matchingEntry.Max)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-restock-full", ("vendor", vendor), ("item", usedItem)), vendor, user, PopupType.SmallCaution);
+            return true; // We handled the interaction, even though restocking failed
+        }
+
+        // Store the item name for the popup before any potential issues
+        var itemName = Name(usedItem);
+
+        // Remove the item from player's inventory
+        if (!_hands.TryDrop(user, usedItem, doDropInteraction: false))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-restock-cannot-drop"), vendor, user, PopupType.SmallCaution);
+            return true;
+        }
+
+        // Delete the item (it's now "in" the vendor)
+        QueueDel(usedItem);
+
+        // Increase vendor stock
+        matchingEntry.Amount++;
+        Dirty(vendor);
+
+        // Update any box entries if needed
+        AmountUpdated(vendor, matchingEntry);
+
+        _popup.PopupClient(Loc.GetString("rmc-vending-machine-restock-success", ("vendor", vendor), ("item", itemName)), vendor, user);
+
+        return true;
+    }
+
+    private void OnGetAlternativeVerbs(Entity<CMAutomatedVendorComponent> vendor, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+
+        var user = args.User;
+
+        // Check if the user has any items that could be restocked
+        foreach (var heldItem in _hands.EnumerateHeld(user))
+        {
+            // Check if this item can be restocked in this vendor
+            if (CanRestockItem(vendor, heldItem))
+            {
+                args.Verbs.Add(new AlternativeVerb
+                {
+                    Text = Loc.GetString("rmc-vending-machine-restock-verb", ("item", Name(heldItem))),
+                    Act = () => TryRestockVendor(vendor, heldItem, user),
+                    Priority = 1,
+                });
+                break;
+            }
+        }
     }
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)

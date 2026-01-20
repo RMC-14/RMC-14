@@ -7,3 +7,7 @@ rmc-vending-machine-hack-no-skill = You do not understand how to tweak the acces
 rmc-vending-machine-hack-start = You start tweaking access restrictions in {THE($vendor)}
 rmc-vending-machine-hack-finish-remove = You have successfully removed access restrictions in {THE($vendor)}
 rmc-vending-machine-hack-finish-restore = You have restored access restrictions in {THE($vendor)}
+rmc-vending-machine-restock-verb = Restock {$item}
+rmc-vending-machine-restock-success = You restock {$item} into {THE($vendor)}.
+rmc-vending-machine-restock-full = {THE($vendor)} is already full of {$item}.
+rmc-vending-machine-restock-cannot-drop = You cannot drop {$item} to restock it.
