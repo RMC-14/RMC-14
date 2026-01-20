@@ -1,7 +1,7 @@
 ﻿- type: entity
   parent: RMCAreaProtectionFour
   id: RMCAreaOCPMaintsLevel
-  name: OCP Maints Level
+  name: OCP-583 Alpha Spire Floor 171 (Maintenance)
   suffix: OCP Area
   components:
   - type: Sprite
@@ -37,7 +37,7 @@
 - type: entity
   parent: RMCAreaOCPMaintsLevel
   id: RMCAreaOCPMainLevel
-  name: OCP Main Level
+  name: OCP-583 Alpha Spire Floor 172 (Main Floor)
   suffix: OCP Area
   components:
   - type: Sprite
@@ -117,6 +117,78 @@
     state: cmb
   - type: Area
     minimapColor: '#a22a27'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPApartments
+  name: OCP Apartments
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: apartments
+  - type: Area
+    minimapColor: '#20a86f'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperLevel
+  name: OCP-583 Alpha Spire Floor 173 (Upper Floor)
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_upper_level
+  - type: Area
+    minimapColor: '#35a430'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperMed
+  name: OCP Upper Medical
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_med
+  - type: Area
+    minimapColor: '#203fa8'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperOffice
+  name: OCP Upper Office
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_office
+  - type: Area
+    minimapColor: '#b5a93d'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperResearch
+  name: OCP Upper Research
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_research
+  - type: Area
+    minimapColor: '#8344bc'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPComms
+  name: OCP-583 Alpha Spire Communications Grid
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: comms
+  - type: Area
+    minimapColor: '#44bcb9'
 
 - type: entity
   parent: RMCAreaPVE

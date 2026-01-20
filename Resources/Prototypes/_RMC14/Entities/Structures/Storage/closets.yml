@@ -95,18 +95,6 @@
   - type: Physics
     bodyType: Dynamic
 
-
-- type: entity
-  parent: RMCCabinetBase
-  id: RMCCabinetBaseUnanchored
-  suffix: Unanchored
-  components:
-  - type: Anchorable
-  - type: Transform
-    anchored: false
-  - type: Physics
-    bodyType: Dynamic
-
 - type: entity
   parent: CMClosetBase
   id: RMCClosetChest
