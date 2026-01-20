@@ -140,4 +140,4 @@ rmc-tips-139 = You can move an item out of the way by dragging it by using CRTL 
 rmc-tips-140 = Bleeding is no joke. If you've been shot or received any other major injury, make sure to treat it quickly by using gauze, trauma kits, or surgical line on yourself.
 rmc-tips-141 = You can click on the names of items to pick them up in the right click menu, instead of hovering over the item and then selecting pick up.
 rmc-tips-142 = Welding without proper eye protection can cause eye damage, which must be cured with imidazoline.
-rmc-tips-143 = If you drag a dead larva to the hivecore it opens a new burrowed larva slot so a new sister can be born.
+rmc-tips-143 = If you drag a dead larva to the hivecore it opens a burrowed larva slot so a new sister can be born.
