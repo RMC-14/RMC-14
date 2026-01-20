@@ -56,6 +56,7 @@
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
     randomEmptyChance: 0.25 # 25% chance
+    allowRestocking: true
     sections:
     - name: Field supplies
       entries:
@@ -519,6 +520,7 @@
     - [ "CMAccessMedical" ]
   - type: CMAutomatedVendor
     hackable: true
+    allowRestocking: true
     sections:
     - name: Blood Packs
       entries:

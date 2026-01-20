@@ -81,4 +81,10 @@ public sealed partial class CMAutomatedVendorComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool EjectContentsOnDestruction = false;
+
+    /// <summary>
+    ///     Whether this vendor allows players to restock items by alt-clicking.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AllowRestocking = false;
 }

@@ -369,6 +369,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        // Only allow restocking for vendors that have it enabled
+        if (!vendor.Comp.AllowRestocking)
+            return;
+
         var user = args.User;
 
         // Check if the user has any items that could be restocked
