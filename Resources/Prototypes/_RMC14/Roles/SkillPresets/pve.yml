@@ -88,7 +88,23 @@
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
 
-
-# SGO
+- type: entity
+  id: RMCSkillPresetPVESGO
+  name: Smartgun Operator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillSmartGun: 1
+        RMCSkillCqc: 1
+        RMCSkillPilot: 1
 
 # Rifleman
