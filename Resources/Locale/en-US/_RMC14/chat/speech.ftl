@@ -28,4 +28,4 @@ chat-speech-verb-name-megaphone = Megaphone
 chat-speech-verb-megaphone-1 = broadcasts
 chat-speech-verb-megaphone-2 = announces
 
-rmc-whisper-only-can-only-whisper = You can only whisper!
+rmc-hushed-can-only-whisper = You can only whisper!

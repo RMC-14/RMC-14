@@ -8,5 +8,5 @@ rmc-alerts-stamina-desc = Slows you if low, and knocks you unconscious you if it
 rmc-alerts-unconscious-name = Unconscious
 rmc-alerts-unconscious-desc = Prevents you from moving, acting, seeing, speaking, and hearing.
 
-rmc-alerts-whisper-only-name = Whisper Only
-rmc-alerts-whisper-only-desc = You can only whisper, not speak normally.
+rmc-alerts-hushed-name = Hushed
+rmc-alerts-hushed-desc = You can only whisper, not speak normally.

@@ -23,7 +23,7 @@
   description: alerts-muted-desc
 
 - type: alert
-  id: RMCWhisperOnly
+  id: RMCHushed
   icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
-  name: rmc-alerts-whisper-only-name
-  description: rmc-alerts-whisper-only-desc
+  name: rmc-alerts-hushed-name
+  description: rmc-alerts-hushed-desc
