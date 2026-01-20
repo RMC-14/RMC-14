@@ -201,6 +201,33 @@
       ballistic-ammo: !type:Container
         ents: []
 
+- type: entity # TODO - Revolver trick functionality?
+  parent: RMCWeaponRevolverMateba
+  id: RMCWeaponRevolverMateba2006M
+  name: Spearhead 2006M autorevolver
+  description: A high calibre revolver produced by Spearhead Armaments. This one has a black stainless steel finish.
+  components:
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/mateba_2006m.ogg
+  - type: RevolverAmmoProvider
+    soundEject:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_open_chamber.ogg
+    soundInsert:
+      path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mateba2006m_speed_loader.ogg
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba2006m.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/mateba2006m.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: AttachableHolder
+    slots:
+      rmc-bslot-barrel:
+        startingAttachable: null
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-mateba-2006m
+
 - type: entity
   parent: RMCBaseSpeedLoaderMateba #Normal Loader
   id: RMCSpeedLoaderMateba

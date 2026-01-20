@@ -44,6 +44,19 @@
   id: RMCRankICBAgent
   name: Interstellar Commerce Bureau Agent
   prefix: Agent
+  paygrade: ICB-A
+
+- type: rank
+  id: RMCRankICBSupervisor
+  name: Interstellar Commerce Bureau Supervisor
+  prefix: Spvsr.
+  paygrade: ICB-SPR
+
+- type: rank
+  id: RMCRankCMBTechnician
+  name: CMB Technician
+  prefix: Tech.
+  paygrade: CMB-T
 
 - type: rank
   id: RMCRankICBCorporateLiaison

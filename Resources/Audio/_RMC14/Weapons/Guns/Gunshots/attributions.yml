@@ -297,3 +297,8 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/28bf8164895c60155d482b9e435c3e728c6f090f/sound/weapons/gun_shotgun_choke.ogg"
+
+- files: ["mateba_2006m.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/Blundir/cmss13/blob/6ace80f348505c85d18ec67d06017436200b13ad/sound/weapons/gun_mateba_2006m.ogg"
