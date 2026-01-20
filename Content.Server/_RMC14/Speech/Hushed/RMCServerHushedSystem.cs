@@ -1,6 +1,7 @@
 using Content.Server.Popups;
-using Content.Shared._RMC14.Chat.Events;
+using Content.Server._RMC14.Chat.Events;
 using Content.Shared._RMC14.Speech.Hushed;
+using Content.Server.Chat.Systems;
 
 namespace Content.Server._RMC14.Speech.Hushed;
 
@@ -20,13 +21,11 @@ public sealed class RMCServerHushedSystem : EntitySystem
 
     private void OnChatTypeModify(Entity<RMCHushedComponent> ent, ref RMCChatTypeModifyEvent args)
     {
-        // Only convert Speak (0) to Whisper (2), leave other types unchanged
-        if (args.DesiredType != 0) // 0 = InGameICChatType.Speak
+        // Only convert Speak to Whisper, leave other types unchanged
+        if (args.DesiredType != InGameICChatType.Speak)
             return;
 
-        args.ModifiedType = 2; // 2 = InGameICChatType.Whisper
-
-        if (args.ShowPopup)
-            _popupSystem.PopupEntity(Loc.GetString("rmc-hushed-can-only-whisper"), ent, ent);
+        args.ModifiedType = InGameICChatType.Whisper;
+        _popupSystem.PopupEntity(Loc.GetString("rmc-hushed-can-only-whisper"), ent, ent);
     }
 }
