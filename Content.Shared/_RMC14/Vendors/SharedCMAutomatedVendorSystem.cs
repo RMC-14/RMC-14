@@ -336,7 +336,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (matchingEntry.Amount >= matchingEntry.Max)
         {
             _popup.PopupClient(Loc.GetString("rmc-vending-machine-restock-full", ("vendor", vendor), ("item", usedItem)), vendor, user, PopupType.SmallCaution);
-            return true; // We handled the interaction, even though restocking failed
+            return true;
         }
 
         // Store the item name for the popup before any potential issues
