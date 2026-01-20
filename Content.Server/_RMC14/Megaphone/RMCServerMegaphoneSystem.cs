@@ -98,7 +98,6 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         var sourceTransform = Transform(ev.Source);
         var sourcePos = _transform.GetWorldPosition(sourceTransform);
         var xforms = GetEntityQuery<TransformComponent>();
-        var ghostHearing = GetEntityQuery<GhostHearingComponent>();
 
         // Check if we should apply hushed effect (user has leadership skill and amplifying is enabled)
         var shouldApplyHushed = megaphoneUser.Amplifying &&
@@ -127,7 +126,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             {
                 if (!ev.Recipients.ContainsKey(player))
                 {
-                    var observer = ghostHearing.HasComponent(playerEntity);
+                    var observer = HasComp<GhostHearingComponent>(playerEntity);
                     ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
                 }
             }
