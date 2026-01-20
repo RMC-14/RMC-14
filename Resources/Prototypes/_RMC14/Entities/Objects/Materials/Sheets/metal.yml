@@ -93,6 +93,8 @@
     - type: Tag
       tags:
       - RMCSheetMetal
+      - Sheet
+      - Metal
 
 - type: entity
   parent: CMSheetMetal
