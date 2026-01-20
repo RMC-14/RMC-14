@@ -10,7 +10,7 @@
   icon: "RMCJobIconCMBTechnician"
   hasIcon: true
   greeting: rmc-job-greeting-new-varadero-cmb-technician
-  playTimeTracker: RMCJobSurvivorEngineer
+  playTimeTracker: CMJobSurvivorEngineer
   spawnMenuRoleName: CMB Technician (New Varadero special survivor)
   special:
   - !type:AddComponentSpecial
