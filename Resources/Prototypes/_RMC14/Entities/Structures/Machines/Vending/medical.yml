@@ -16,7 +16,6 @@
   - type: CMMedicalSupplyLink
   - type: RMCMesonsNonviewable
 
-
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorMedicalAllAccess
