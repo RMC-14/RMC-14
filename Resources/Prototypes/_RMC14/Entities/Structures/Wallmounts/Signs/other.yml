@@ -11,7 +11,7 @@
     snapCardinals: false
     drawdepth: Overdoors
   - type: PointLight
-    color: "#baac93"
+    color: "#D2E3EC"
     energy: 1
     radius: 5
     softness: 1
