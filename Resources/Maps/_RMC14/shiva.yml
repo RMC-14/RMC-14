@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/30/2025 23:40:17
-  entityCount: 17349
+  time: 01/04/2026 23:24:37
+  entityCount: 17350
 maps:
 - 1
 grids:
@@ -116319,6 +116319,13 @@ entities:
     components:
     - type: Transform
       pos: 123.5,21.5
+      parent: 1
+- proto: RMCMapInsertShivaCLFRaid
+  entities:
+  - uid: 17350
+    components:
+    - type: Transform
+      pos: 95.5,63.5
       parent: 1
 - proto: RMCMapInsertShivaSouthCaves
   entities:
