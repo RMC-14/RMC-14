@@ -1,8 +1,19 @@
 namespace Content.Shared._RMC14.Chemistry;
 
+/// <summary>
+/// Event to start the vomit process (vomit() proc).
+/// This starts the delayed vomit sequence with nausea, warning, then actual vomit.
+/// </summary>
 [ByRefEvent]
-public readonly record struct RMCVomitEvent(
+public readonly record struct RMCVomitEvent(EntityUid Target);
+
+/// <summary>
+/// Event to perform the actual vomit immediately (do_vomit() proc).
+/// </summary>
+[ByRefEvent]
+public readonly record struct RMCDoVomitEvent(
     EntityUid Target,
-    float ThirstAmount = -8f,
-    float HungerAmount = -8f
+    TimeSpan StunDuration,
+    float HungerLoss,
+    float ToxinHeal
 );

@@ -7,6 +7,7 @@
   physicalDesc: reagent-physical-desc-opaque
   flavor: nutriment
   color: "#664330"
+  overdose: 60
   metabolisms:
     Food:
       metabolismRate: 0.1
@@ -19,6 +20,7 @@
         nutMetabolism: 0.1
       - !type:Hemogenic
         potency: 1
+      - !type:NutrimentOverdose
   pricePerUnit: 2
 
 - type: reagent
@@ -33,20 +35,7 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold # ReagentCondition
-          reagent: Vitamin
-          min: 5
-        reagent: Vitamin
-        amount: -5
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold # ReagentCondition
-          reagent: Vitamin
-          min: 5
-        reagent: Nutriment
-        amount: 5.1
+      - !type:ConvertToNutriment
   # Lets plants benefit too
   plantMetabolism:
   - !type:PlantAdjustNutrition
@@ -67,20 +56,7 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold # ReagentCondition
-          reagent: Protein
-          min: 5
-        reagent: Protein
-        amount: -5
-      - !type:AdjustReagent
-        conditions:
-        - !type:ReagentThreshold # ReagentCondition
-          reagent: Protein
-          min: 5
-        reagent: Nutriment
-        amount: 5.1
+      - !type:ConvertToNutriment
   pricePerUnit: 3
 
 - type: reagent
