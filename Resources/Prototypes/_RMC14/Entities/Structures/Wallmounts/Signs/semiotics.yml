@@ -807,8 +807,6 @@
   - type: Sprite
     state: 9
 
-# New Semiotics
-
 - type: entity
   parent: CMSemioticBase
   id: RMCSemioticAIRoom
