@@ -266,10 +266,11 @@ public abstract partial class SharedMoverController : VirtualController
             var sprintSpeed = moveSpeedComponent?.CurrentSprintSpeed ?? MovementSpeedModifierComponent.DefaultBaseSprintSpeed;
 
             // RMC14
-            // Ignore slows while walking if sprint speed is higher than walking speed
-            if (MovementSpeedModifierComponent.DefaultBaseWalkSpeed < sprintSpeed)
-                walkSpeed = MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
-            // If you are slowed so much that sprinting is slower than walking, make walking speed the same as sprint speed.
+            var baseWalkSpeed = moveSpeedComponent?.BaseWalkSpeed ?? MovementSpeedModifierComponent.DefaultBaseWalkSpeed;
+            // Keep the walk speed unchanged if the modified sprint speed is higher than the base walk speed.
+            if (baseWalkSpeed < sprintSpeed)
+                walkSpeed = baseWalkSpeed;
+            // If the sprint speed drops below the walk speed, lower the walk speed to match the sprint speed.
             else
                 walkSpeed = sprintSpeed;
 
