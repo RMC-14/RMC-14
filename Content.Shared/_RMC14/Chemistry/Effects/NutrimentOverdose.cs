@@ -10,6 +10,9 @@ namespace Content.Shared._RMC14.Chemistry.Effects;
 
 public sealed partial class NutrimentOverdose : RMCChemicalEffect
 {
+    [DataField]
+    public TimeSpan SlowdownDuration = TimeSpan.FromSeconds(2);
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return "Overdoses cause [color=yellow]vomiting[/color] and [color=red]slowdown[/color]. Removes [color=green]10%[/color] or [color=green]5u[/color] per second.";
@@ -29,9 +32,7 @@ public sealed partial class NutrimentOverdose : RMCChemicalEffect
 
         // Calculate and remove nutriment
         var nutrimentVolume = source.GetTotalPrototypeQuantity("Nutriment");
-        var percentRemovalAmount = nutrimentVolume * 0.1f;
-        var minRemovalAmount = FixedPoint2.New(5);
-        var removalAmount = FixedPoint2.Max(percentRemovalAmount, minRemovalAmount) * args.Scale;
+        var removalAmount = FixedPoint2.Max(nutrimentVolume * 0.1f, 5f) * args.Scale;
         source.RemoveReagent("Nutriment", removalAmount);
 
         // Check if we should apply vomiting (still overdosing after initial removal)
@@ -43,11 +44,8 @@ public sealed partial class NutrimentOverdose : RMCChemicalEffect
         if (entityManager.HasComponent<RMCVomitComponent>(target))
             return;
 
-        var overdoseComp = entityManager.EnsureComponent<NutrimentOverdoseComponent>(target);
-        overdoseComp.RemainingVolume = remainingVolume.Float();
-
         var stunSystem = entityManager.System<SharedStunSystem>();
-        stunSystem.TrySlowdown(target, overdoseComp.SlowdownDuration, true, 0.5f, 0.5f);
+        stunSystem.TrySlowdown(target, SlowdownDuration, true, 0.5f, 0.5f);
 
         // Trigger vomit - RMCVomitSystem handles all the delays and cooldowns
         var vomitEvent = new RMCVomitEvent(target);

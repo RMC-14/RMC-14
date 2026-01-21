@@ -5,10 +5,14 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects;
 
-public sealed partial class ConvertToNutriment : EntityEffect
+public sealed partial class ConvertToReagent : EntityEffect
 {
+    [DataField(required: true)]
+    public ProtoId<ReagentPrototype> TargetReagent;
     [DataField]
-    public ProtoId<ReagentPrototype> TargetReagent = "Nutriment";
+    public FixedPoint2 PercentRate = 0.1;
+    [DataField]
+    public FixedPoint2 MinimumRate = 5;
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
@@ -31,9 +35,7 @@ public sealed partial class ConvertToNutriment : EntityEffect
         if (currentQuantity <= FixedPoint2.Zero)
             return;
 
-        var percentageAmount = currentQuantity * 0.1f;
-        var minAmount = FixedPoint2.New(5);
-        var amountToConvert = FixedPoint2.Max(percentageAmount, minAmount) * reagentArgs.Scale;
+        var amountToConvert = FixedPoint2.Max(currentQuantity * PercentRate, MinimumRate) * reagentArgs.Scale;
 
         source.RemoveReagent(reagentArgs.Reagent!.ID, amountToConvert);
         source.AddReagent(TargetReagent, amountToConvert);

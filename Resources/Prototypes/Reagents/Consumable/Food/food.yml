@@ -35,7 +35,8 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:ConvertToNutriment
+      - !type:ConvertToReagent
+        targetReagent: Nutriment
   # Lets plants benefit too
   plantMetabolism:
   - !type:PlantAdjustNutrition
@@ -56,7 +57,8 @@
     Food:
       metabolismRate: 0.1
       effects:
-      - !type:ConvertToNutriment
+      - !type:ConvertToReagent
+        targetReagent: Nutriment
   pricePerUnit: 3
 
 - type: reagent
