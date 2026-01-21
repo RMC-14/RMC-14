@@ -148,7 +148,7 @@
     head: CMHeadBeretCOBlack
     gloves: RMCHandsBlack
     shoes: CMBootsBlackFilled
-    outerClothing: RMCCoatPilot # M70B1 light flak jacket from a separate PR
+    outerClothing: RMCCoatPilot
     jumpsuit: RMCJumpsuitCOTurtleneck
     eyes: RMCGlassesAviators
 
