@@ -96,4 +96,5 @@
   - type: SpawnPoint
     job_id: RMCWeYaExecutiveBodyguard
   - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
     state: wyeb_spawn
