@@ -9,5 +9,5 @@ public sealed partial class NutrimentOverdoseComponent : Component
     public float RemainingVolume;
 
     [DataField]
-    public TimeSpan SlowdownDuration = TimeSpan.FromSeconds(1);
+    public TimeSpan SlowdownDuration = TimeSpan.FromSeconds(1.1);
 }

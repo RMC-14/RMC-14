@@ -12,8 +12,7 @@ public sealed partial class NutrimentOverdose : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Overdoses cause [color=yellow]vomiting[/color] and [color=red]slowdown[/color].\n" +
-               $"Removes [color=green]max(volume/10, 5)u[/color] per second.";
+        return "Overdoses cause [color=yellow]vomiting[/color] and [color=red]slowdown[/color]. Removes [color=green]10%[/color] or [color=green]5u[/color] per second.";
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -30,9 +29,9 @@ public sealed partial class NutrimentOverdose : RMCChemicalEffect
 
         // Calculate and remove nutriment
         var nutrimentVolume = source.GetTotalPrototypeQuantity("Nutriment");
-        var percentageRemoval = nutrimentVolume * 0.1f;
+        var percentRemovalAmount = nutrimentVolume * 0.1f;
         var minRemovalAmount = FixedPoint2.New(5);
-        var removalAmount = FixedPoint2.Max(percentageRemoval, minRemovalAmount) * args.Scale;
+        var removalAmount = FixedPoint2.Max(percentRemovalAmount, minRemovalAmount) * args.Scale;
         source.RemoveReagent("Nutriment", removalAmount);
 
         // Check if we should apply vomiting (still overdosing after initial removal)
