@@ -90,9 +90,6 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         if (!TryComp<RMCMegaphoneUserComponent>(ev.Source, out var megaphoneUser))
             return;
 
-        if (!megaphoneUser.Amplifying)
-            return;
-
         var megaphoneRange = megaphoneUser.VoiceRange;
 
         var sourceTransform = Transform(ev.Source);
@@ -105,7 +102,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                                  _skills.GetSkill(ev.Source, LeadershipSkill) >= 1;
 
         // Get source faction for friendly check (only needed for hushed effect)
-        var hasSourceFaction = _gunIFF.TryGetFaction(ev.Source, out var sourceFaction);
+        var hasSourceFaction = shouldApplyHushed && _gunIFF.TryGetFaction(ev.Source, out var sourceFaction);
 
         // Add recipients within megaphone range but outside normal range
         foreach (var player in _playerManager.Sessions)
@@ -131,6 +128,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                 }
             }
 
+            // Apply hushed effect only if amplifying is enabled
             if (shouldApplyHushed && distance < megaphoneRange)
             {
                 // Check if recipient is friendly (same faction)
