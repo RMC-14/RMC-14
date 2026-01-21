@@ -11,7 +11,7 @@
   parent: RMCDropshipDoorAftBase
   id: RMCOCPLargeDoorDarkGlass
   name: large door
-  suffix: OCP-583, Glass
+  suffix: OCP-583, Glass, 3 Tiles
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Triple/ocp_large_dark_glass.rsi
