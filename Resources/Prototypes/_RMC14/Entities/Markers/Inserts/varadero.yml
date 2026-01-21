@@ -20,3 +20,17 @@
     - spawn: "/Maps/_RMC14/Inserts/Varadero/clf_raid.yml"
       probability: 1
       nightmareScenario: clfraid_varadero
+
+- type: entity
+  parent: RMCMapInsertVaraderoBase
+  id: RMCMapInsertVaraderoPoolParty
+  name: Varadero Pool Party
+  suffix: Insert Varadero
+  components:
+  - type: MapInsert
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Varadero/varadero_pool_party.yml"
+      probability: 0.15
