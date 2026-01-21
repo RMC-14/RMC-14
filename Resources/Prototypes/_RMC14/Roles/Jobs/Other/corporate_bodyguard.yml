@@ -1,10 +1,10 @@
 ﻿# Corporate Bodyguard
 - type: job
   parent: RMCJobNametagBase
-  id: RMCWeYaCorporateBodyguard
-  name: rmc-job-name-corporate-bodyguard
-  description: rmc-job-description-corporate-bodyguard
-  playTimeTracker: RMCJobWeYaCorporateBodyguard
+  id: RMCWeYaExecutiveBodyguard
+  name: rmc-job-name-executive-bodyguard
+  description: rmc-job-description-executive-bodyguard
+  playTimeTracker: RMCJobWeYaExecutiveBodyguard
   requirements:
   - !type:DepartmentTimeRequirement
     department: CMMilitaryPolice
@@ -15,18 +15,18 @@
   ranks:
     RMCRankWeYaBodyguardPPC:
     - !type:RoleTimeRequirement
-      role: RMCJobWeYaCorporateBodyguard
+      role: RMCJobWeYaExecutiveBodyguard
       time: 630000 # 175 hours
     RMCRankWeYaBodyguardPPS:
     - !type:RoleTimeRequirement
-      role: RMCJobWeYaCorporateBodyguard
+      role: RMCJobWeYaExecutiveBodyguard
       time: 252000 # 70 hours
     RMCRankWeYaBodyguardPPO:
     - !type:RoleTimeRequirement
-      role: RMCJobWeYaCorporateBodyguard
+      role: RMCJobWeYaExecutiveBodyguard
       time: 36000 # 10 hours
     RMCRankWeYaBodyguardTPPO: []
-  startingGear: RMCJobWeYaCorporateBodyguard
+  startingGear: RMCJobWeYaExecutiveBodyguard
   icon: "RMCJobIconPMCGoonStandard"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-cl
@@ -42,7 +42,7 @@
       factions:
       - WeYa
     - type: JobPrefix
-      prefix: rmc-job-prefix-corporate-bodyguard
+      prefix: rmc-job-prefix-executive-bodyguard
     - type: Skills
       skills:
         RMCSkillCqc: 2
@@ -60,11 +60,11 @@
         state: background_goon
 
 - type: playTimeTracker
-  id: RMCJobWeYaCorporateBodyguard
+  id: RMCJobWeYaExecutiveBodyguard
   isHumanoid: true
 
 - type: startingGear
-  id: RMCJobWeYaCorporateBodyguard
+  id: RMCJobWeYaExecutiveBodyguard
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetLiaison
@@ -73,13 +73,13 @@
     eyes: RMCGlassesSecurityBlue
     shoes: RMCBootsPMCFilled
     back: RMCSatchelBlack
-    pocket1: RMCPouchFirstAidPMCFill # Might not be the right one?
+    pocket1: RMCPouchFirstAidWEYA
     pocket2: RMCPouchSecurityTools
   storage:
     back:
     - RMCBoxZiptie
     - CMCrowbar
-    - CMMRE # TODO RMC14: WEYA colony ration
+    - RMCMREWeYa
     - RMCPaperBodyguardInstructions
     pocket2:
     - CMStunbaton
@@ -90,10 +90,10 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointCorporateBodyguard
+  id: RMCSpawnPointExecutiveBodyguard
   name: weston-yamada executive bodyguard spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCWeYaCorporateBodyguard
+    job_id: RMCWeYaExecutiveBodyguard
   - type: Sprite
-    state: cs_spawn
+    state: wyeb_spawn

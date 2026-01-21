@@ -3,14 +3,14 @@
   #Clothes Rack
 - type: entity
   parent: ColMarTechWardrobeCorp
-  id: ColMarTechWardrobePPO
+  id: ColMarTechWardrobeWYEB
   name: Corporate Security Clothes Rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
-  suffix: Corp. Bodyguard
+  suffix: Exec. Bodyguard
   components:
   - type: CMAutomatedVendor
     jobs:
-    - RMCWeYaCorporateBodyguard
+    - RMCWeYaExecutiveBodyguard
     sections:
     - name: Standard Equipment
       takeAll: CMStandard
@@ -56,16 +56,16 @@
    # PPO Gear
 - type: entity
   parent: ColMarTechBase
-  id: ColMarTechGearRackCB
+  id: ColMarTechGearRackWYEB
   name: Corporate Security Gear Rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue gear.
-  suffix: Corp. Bodyguard
+  suffix: Exec. Bodyguard
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/equipment.rsi
   - type: CMAutomatedVendor
     jobs:
-      - RMCWeYaCorporateBodyguard
+      - RMCWeYaExecutiveBodyguard
     sections:
     # ////////////////////////////////////
     # JR PPO

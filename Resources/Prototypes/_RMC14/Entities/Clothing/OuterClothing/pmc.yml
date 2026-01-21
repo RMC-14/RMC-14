@@ -266,6 +266,14 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_armor.rsi
+  - type: RemoveComponents
+    components:
+    - type: ClothingRequireEquipped
+      autoUnequip: true
+      denyReason: rmc-armor-not-pmc-jumpsuit
+      whitelist:
+        tags:
+        - RMCUniformPMC
 
 - type: entity
   parent: CMArmorM4PMCLight
@@ -282,3 +290,11 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
     walkModifier: 0.949
     sprintModifier: 0.949
+  - type: RemoveComponents
+    components:
+    - type: ClothingRequireEquipped
+      autoUnequip: true
+      denyReason: rmc-armor-not-pmc-jumpsuit
+      whitelist:
+        tags:
+        - RMCUniformPMC
