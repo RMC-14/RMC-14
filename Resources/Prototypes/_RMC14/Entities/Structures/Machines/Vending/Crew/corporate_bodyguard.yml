@@ -3,7 +3,7 @@
   #Clothes Rack
 - type: entity
   parent: ColMarTechWardrobeCorp
-  id: ColMarTechWardrobeCB
+  id: ColMarTechWardrobePPO
   name: Corporate Security Clothes Rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
   suffix: Corp. Bodyguard
