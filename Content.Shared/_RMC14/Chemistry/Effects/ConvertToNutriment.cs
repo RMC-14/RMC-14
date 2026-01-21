@@ -31,7 +31,9 @@ public sealed partial class ConvertToNutriment : EntityEffect
         if (currentQuantity <= FixedPoint2.Zero)
             return;
 
-        var amountToConvert = currentQuantity * reagentArgs.Scale;
+        var percentageAmount = currentQuantity * 0.1f;
+        var minAmount = FixedPoint2.New(5);
+        var amountToConvert = FixedPoint2.Max(percentageAmount, minAmount) * reagentArgs.Scale;
 
         source.RemoveReagent(reagentArgs.Reagent!.ID, amountToConvert);
         source.AddReagent(TargetReagent, amountToConvert);

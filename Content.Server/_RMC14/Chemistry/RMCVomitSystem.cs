@@ -86,7 +86,7 @@ public sealed class RMCVomitSystem : EntitySystem
         var vomitComp = EnsureComp<RMCVomitComponent>(uid);
         vomitComp.IsVomiting = true;
 
-        _popup.PopupEntity(Loc.GetString("rmc-nutriment-overdose-nausea"), uid, uid);
+        _popup.PopupEntity(Loc.GetString("rmc-vomit-nausea"), uid, uid);
 
         // Warning message after 15 seconds
         Timer.Spawn(vomitComp.WarningDelay,
@@ -96,7 +96,7 @@ public sealed class RMCVomitSystem : EntitySystem
                 return;
             if (!HasComp<RMCVomitComponent>(uid))
                 return;
-            _popup.PopupEntity(Loc.GetString("rmc-nutriment-overdose-warning"), uid, uid);
+            _popup.PopupEntity(Loc.GetString("rmc-vomit-warning"), uid, uid);
         });
 
         // Actual vomit after 25 seconds
