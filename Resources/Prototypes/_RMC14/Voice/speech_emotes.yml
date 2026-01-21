@@ -174,6 +174,29 @@
     - whined.
     - whined!
     - whining.
+      
+- type: emote
+  id: Yip
+  name: rmc-emote-name-yip
+  category: Vocal
+  available: false
+  icon: _RMC14/Actions/species_emotes.rsi/bark.png
+  whitelist:
+    components:
+      - Vocal
+  blacklist:
+    components:
+      - BorgChassis
+  chatMessages: ["rmc-emote-yip"]
+  chatTriggers:
+    - yip
+    - yip.
+    - yip?
+    - yip!
+    - yips
+    - yips.
+    - yips?
+    - yips!
 
 - type: emote
   id: Gnash

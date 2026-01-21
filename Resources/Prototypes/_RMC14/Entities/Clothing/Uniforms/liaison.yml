@@ -1,7 +1,7 @@
 # Corporate Liaison
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCUniformBase
   id: CMJumpsuitLiaison
   name: liaison's tan suit
   description: A stiff, stylish tan suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.

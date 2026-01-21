@@ -5,7 +5,11 @@
   description: rmc-job-description-synth
   playTimeTracker: RMCJobSynthetic
   ranks:
-    RMCRankMasterSergeant: [ ]
+    RMCRankChiefWarrantOfficer:
+    - !type:RoleTimeRequirement
+      role: RMCJobSynthetic
+      time: 270000 # 75 hours
+    RMCRankWarrantOfficer: [ ]
   startingGear: RMCGearSyntheticEquipped
   dummyStartingGear: RMCGearSyntheticEquipped
   icon: "RMCJobIconSynth"
@@ -43,6 +47,8 @@
     - type: CMVendorUser
       id: RMCJobSynthetic
       points: 45
+      extraPoints:
+        ExperimentalTools: 30
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
