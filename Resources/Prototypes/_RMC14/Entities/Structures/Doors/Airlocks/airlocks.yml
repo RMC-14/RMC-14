@@ -257,7 +257,7 @@
 - type: entity
   parent: CMAirlockGlass
   id: RMCAirlockOCPGenericGlass
-  suffix: OCP-583
+  suffix: OCP-583, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/ocp_generic_glass.rsi
