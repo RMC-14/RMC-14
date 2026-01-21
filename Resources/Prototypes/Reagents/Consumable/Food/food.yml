@@ -7,7 +7,6 @@
   physicalDesc: reagent-physical-desc-opaque
   flavor: nutriment
   color: "#664330"
-  overdose: 60
   metabolisms:
     Food:
       metabolismRate: 0.1
