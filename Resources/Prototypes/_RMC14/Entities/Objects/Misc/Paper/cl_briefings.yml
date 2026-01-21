@@ -21,3 +21,59 @@
   components:
   - type: Paper
     content: cl-briefing-kutjevo
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingLV624
+  suffix: LV-624 Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-lv624
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingFiorina
+  suffix: Fiorina Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-fiorina
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingHybrisa
+  suffix: Hybrisa Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-hybrisa
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingChances
+  suffix: Chances Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-chances
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingVaradero
+  suffix: Varadero Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-varadero
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingShivas
+  suffix: Shiva's Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-shivas
+
+- type: entity
+  parent: RMCPaperWeYaLiaisonBriefingBase
+  id: RMCPaperWeYaLiaisonBriefingSorokyne
+  suffix: Sorokyne Briefing
+  components:
+  - type: Paper
+    content: cl-briefing-sorokyne
