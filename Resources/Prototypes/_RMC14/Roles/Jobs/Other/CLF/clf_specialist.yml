@@ -63,9 +63,6 @@
     - !type:RoleTimeRequirement
       role: CMJobWeaponsSpecialist
       time: 18000 # 5 Hours
-    - !type:RoleTimeRequirement
-      role: CMJobMilitaryPolice
-      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
