@@ -46,6 +46,9 @@ public sealed class RMCMegaphoneSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract)
             return;
 
+        if (HasComp<XenoComponent>(args.User))
+            return;
+
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
