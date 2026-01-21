@@ -92,6 +92,7 @@ cl-briefing-lv624 =
     Currently, the exact origin of these structures are unknown, although current theories suggest the existence of an interstellar civilization before modern times. R&D's Archeological Department has a large presence on the colony.
 
     Furthermore, the United Nations "Whisky Outpost" military base is also located on LV-624, although interactions between the base and the colony are practically nonexistant
+
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     Damage to the archeological structures should be minimized wherever and whenever possible.
@@ -125,6 +126,7 @@ cl-briefing-fiorina =
     Fiorina Science Annex was initially founded by Weston-Yamada to take advantage of the rich platinum veins located on the planet of Fiorina 161. However the sustainability of this operation was overestimated; after less then a decade, extraction of platinum was deemed to be more expensive then could be recouped.
 
     In order to prevent serious loss of profit, Weston-Yamada partnered with the United Nations to establish Fiorina Science Annex, dedicated to the housing of High-Security inmates, as well as scientific research. Current estimates expect ~300 prisoners and ~120 employees to be on the station. Currently, the decommission of the station is being discussed by Weston-Yamada higher ups due to high operation costs for little gain.
+
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     Onboard military personnel are to retrieve any notable research material from Research Cellblocks.
