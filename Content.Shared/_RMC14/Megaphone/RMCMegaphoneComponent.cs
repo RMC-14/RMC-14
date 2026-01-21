@@ -23,7 +23,7 @@ public sealed partial class RMCMegaphoneComponent : Component
     /// Sound played when toggling amplifying mode.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/Machines/switch.ogg");
+    public SoundSpecifier? ToggleSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
 
     /// <summary>
     /// Duration of RMCStatusEffectHushed applied to recipients when user has leadership skill level 1+ and amplifying is enabled.

@@ -140,7 +140,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                 var recipientLeadershipLevel = _skills.GetSkill(playerEntity, LeadershipSkill);
                 if (recipientLeadershipLevel < 1)
                 {
-                    _statusEffects.TrySetStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
+                    _statusEffects.TryUpdateStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
                 }
             }
         }
