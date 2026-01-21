@@ -46,7 +46,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: hudsquad_tc  # TODO RMC14: Replace with job icon entity when it comes around maybe?
+    state: hudsquad_tc
 
 - type: entity
   id: RMCLoadoutDummyCareerPathEngineering
