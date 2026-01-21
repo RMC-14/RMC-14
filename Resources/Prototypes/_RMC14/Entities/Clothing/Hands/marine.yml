@@ -1,6 +1,6 @@
 - type: entity
   parent: ClothingHandsBase
-  id: CMHandsBlackMarineColorless
+  id: CMHandsBlackMarineColorless # TODO RMC14 armor
   name: marine black combat gloves
   description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'."
   components:
@@ -15,7 +15,7 @@
 
 - type: entity
   parent: CMHandsBlackMarineColorless
-  id: CMHandsBlackMarine # TODO RMC14 armor
+  id: CMHandsBlackMarine
   name: marine combat gloves
   components:
   - type: SquadArmor

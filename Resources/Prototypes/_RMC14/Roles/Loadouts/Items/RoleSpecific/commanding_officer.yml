@@ -109,7 +109,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobIntelOfficer
-      time: 72000 # 20 hours
+      time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: CMHandsBlackMarineColorless
@@ -126,7 +126,7 @@
     requirement:
       !type:TotalJobsTimeRequirement
       group: CMJobsMedical
-      time: 72000 # 20 hours
+      time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretCOWhite
     gloves: CMHandsWhite
@@ -143,7 +143,7 @@
   #   requirement:
   #     !type:TotalJobsTimeRequirement
   #     group: CMJobsDropship
-  #     time: 72000 # 20 hours
+  #     time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretCOBlack
     gloves: RMCHandsBlack
@@ -161,7 +161,7 @@
 #   #   requirement:
 #   #     !type:TotalJobsTimeRequirement
 #   #     group: CMTanker
-#   #     time: 72000 # 20 hours
+#   #     time: 36000 # 10 hours
 #   equipment:
 #     head: RMCHeadCapQuartermaster
 #     gloves: RMCHandsBlack
@@ -179,7 +179,7 @@
     requirement:
       !type:TotalJobsTimeRequirement
       group: CMJobsEngineering
-      time: 72000 # 20 hours
+      time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretEngineer
     gloves: CMHandsInsulated
@@ -196,7 +196,7 @@
     requirement:
       !type:DepartmentTimeRequirement
       department: CMRequisitions
-      time: 72000 # 20 hours
+      time: 36000 # 10 hours
   equipment:
     head: CMHeadBeretTan
     gloves: CMHandsInsulated
