@@ -2,5 +2,4 @@
   parent: CMTileBaseUnpryable
   id: RMCFloorOCPPit
   name: pit
-  suffix: RMC
   sprite: /Textures/_RMC14/Tiles/OCP/pit.png
