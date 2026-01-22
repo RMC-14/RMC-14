@@ -23,18 +23,31 @@
 
   Many of these guides are also accessible by examining the role or item they're related to!
 
-  ### Marines
+  ### Marines and Related
 
   [bold]Roles[/bold]
+  - [textlink="Survivor" link="RMCSurvivor"]
   - [textlink="Medical" link="RMCMedical"]
   - [textlink="Requisitions" link="RMCRequisitions"]
+  - [textlink="Intelligence Officer" link="RMCIntel"]
+  - [textlink="Military Police" link="RMCGuideRoleMilitaryPolice"]
   - [textlink="Combat Technician" link="RMCGuideRoleCombatTechnician"]
   - [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"]
-  - [textlink="Survivor" link="RMCSurvivor"]
   - [textlink="Smart Gun Operator" link="RMCGuideRoleSGO"]
+  - [textlink="Specialists" link="RMCGuideRoleSpec"]
+  - [textlink="Corporate Liaison" link="RMCGuideCorporateLiaison"]
+  - [textlink="Squad Leader" link="RMCGuideSquadLeader"]
+
+  [bold]General[/bold]
+  - [textlink="Who is in Command?" link="RMCGuideCommandRoles"]
+  - [textlink="Dropships and CAS" link="RMCGuideRoleCAS"]
+  - [textlink="Marine Communications" link="RMCGuideMarineCommunications"]
+  - [textlink="Drink Recipes" link="RMCGuideDrinks"]
+  - [textlink="Cooking Recipes" link="RMCGuideFood"]
 
   [bold]Structures[/bold]
   - [textlink="Communications towers and sensor towers" link="RMCGuideCommunicationsTowers"]
+  - Mortar[textlink="Mortar" link="RMCGuideRoleMortar"]
 
   ### Xenonids
 
@@ -44,5 +57,8 @@
   [bold]Structures[/bold]
   - [textlink="Hive Structures" link="RMCGuideHiveStructures"]
   - [textlink="Resin Holes" link="RMCGuideResinHoles"]
+
+  [bold]General[/bold]
+  - [textlink="Xenonid Map Icons" link="RMCGuideXenonidMap"]
 
 </Document>
