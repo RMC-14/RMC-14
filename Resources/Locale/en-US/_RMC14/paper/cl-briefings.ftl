@@ -167,7 +167,7 @@ cl-briefing-hybrisa =
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
     Ensure the safety of both recovered personnel in the Ironrot district, as well as across the capital and all outlying colonies through evacuation if necessary.
     Ascertain the cause of emergency, and report back to Weston-Yamada.
-    Minimize damage to the crashed vessel, and work with military intel forces to discover more about the R&D operations on the colony.
+    Minimize damage to the excavated vessel, and work with military intel forces to discover more about the R&D operations on the colony.
 
     {"[head=3]Potential Threats[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
