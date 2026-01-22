@@ -250,7 +250,7 @@
 - type: entity
   parent: CMDoubleDoorBase
   id: RMCDoubleDoorOCPGenericGlass
-  suffix: OCP
+  suffix: OCP, Glass
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/Double/ocp_generic_glass.rsi
