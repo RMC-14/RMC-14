@@ -91,7 +91,7 @@ cl-briefing-lv624 =
 
     Currently, the exact origin of these structures are unknown, although current theories suggest the existence of an interstellar civilization before modern times. R&D's Archeological Department has a large presence on the colony.
 
-    Furthermore, the United Nations "Whisky Outpost" military base is also located on LV-624, although interactions between the base and the colony are practically non-existant.
+    Furthermore, the United Nations "Whiskey Outpost" military base is also located on LV-624, although interactions between the base and the colony are practically non-existant.
 
     {"[head=3]Company Priorities[/head]"}
     ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
