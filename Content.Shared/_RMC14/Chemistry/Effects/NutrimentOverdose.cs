@@ -18,7 +18,7 @@ public sealed partial class NutrimentOverdose : EntityEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         return $"Overdoses above [color=yellow]{OverdoseThreshold}u[/color] causes [color=yellow]vomiting[/color] and [color=red]slowdown[/color]. " +
-               "Removes [color=green]10%[/color] or [color=green]5u[/color] per second.";
+               "Removes [color=green]10%[/color] or [color=green]5u[/color] of Nutriment per second, whichever is greater.";
     }
 
     public override void Effect(EntityEffectBaseArgs args)

@@ -130,7 +130,7 @@ public sealed class RMCVomitSystem : EntitySystem
         if (TryComp<MobStateComponent>(uid, out var mobState) && mobState.CurrentState == MobState.Dead)
             return;
 
-        // Apply stun - apply_effect(5, STUN)
+        // Apply stun
         if (stunDuration > TimeSpan.Zero)
             _stun.TryStun(uid, stunDuration, true);
 
