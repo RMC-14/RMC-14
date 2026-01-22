@@ -88,6 +88,7 @@
   - type: Corrodible
     isCorrodible: false
   - type: GunRequiresWield
+  - type: GunUnskilledUsable
 
 - type: entity
   parent: CMMagazineRifleBase
