@@ -234,7 +234,7 @@ public abstract partial class SharedScopeSystem : EntitySystem
 
         if (HasComp<OverwatchWatchingComponent>(user))
         {
-            var msgError = Loc.GetString("cm-action-popup-scoping-user-cannot-view-cameras", ("scope", ent));
+            var msgError = Loc.GetString("rmc-action-popup-scoping-user-cannot-view-cameras", ("scope", ent));
             _popup.PopupClient(msgError, user, user);
             return false;
         }
