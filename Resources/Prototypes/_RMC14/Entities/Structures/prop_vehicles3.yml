@@ -698,7 +698,7 @@
   - type: Sprite
     state: small_truck_red_f
 
-# Digger
+# Excavators
 - type: entity
   parent: RMCPropBase
   id: RMCPropDiggerOrange
