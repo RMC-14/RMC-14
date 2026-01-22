@@ -536,4 +536,8 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCLarvaQueueWaitSeconds =
         CVarDef.Create("rmc.larva_queue_wait_seconds", 300, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCChemMasterPresets =
+        CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
+
 }
