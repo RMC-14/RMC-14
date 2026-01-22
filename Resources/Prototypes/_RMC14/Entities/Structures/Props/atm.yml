@@ -30,3 +30,22 @@
   - type: Sprite
     sprite: _RMC14/Structures/Props/atm.rsi
     state: atm_off
+
+- type: entity
+  parent: RMCNewscaster
+  id: RMCATM
+  name: We-Ya Automatic Teller Machine
+  description: For all your monetary needs!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm
+
+- type: entity
+  parent: RMCATM
+  id: RMCATMOff
+  suffix: "Off"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm_off

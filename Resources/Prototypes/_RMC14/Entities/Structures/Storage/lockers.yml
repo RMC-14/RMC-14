@@ -543,7 +543,7 @@
   id: RMCLockerPersonalUnanchored
   name: personal locker
   description: A white locker, featuring both English and Japanese text on the front.
-  suffix: Unanchored
+  suffix: Unanchored #To avoid snapping to grid
   components:
   - type: Transform
     anchored: false

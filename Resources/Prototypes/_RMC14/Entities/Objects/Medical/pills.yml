@@ -323,6 +323,7 @@
 - type: entity
   parent: CMPill
   id: RMCPillMethylphenidate
+  suffix: Pill
   components:
   - type: SolutionContainerManager
     solutions:
@@ -339,6 +340,7 @@
 - type: entity
   parent: CMPill
   id: RMCPillCitalopram
+  suffix: Pill
   components:
   - type: SolutionContainerManager
     solutions:
@@ -355,6 +357,7 @@
 - type: entity
   parent: CMPill
   id: RMCPillParoxetine
+  suffix: Pill
   components:
   - type: SolutionContainerManager
     solutions:
