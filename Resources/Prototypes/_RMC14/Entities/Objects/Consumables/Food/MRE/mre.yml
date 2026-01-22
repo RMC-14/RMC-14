@@ -114,16 +114,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Consumable/Food/mre_weya_colony.rsi
-  - type: Openable
-    sound:
-      collection: CMFoodRip
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.OpenableVisuals.Opened:
-        enum.OpenableVisuals.Layer:
-          True: { state: "open" }
-          False: { state: "closed" }
 
 - type: entity
   parent: CMMRE
