@@ -104,64 +104,45 @@
   prefix: Adm. Syn.
   paygrade: WYS3
 
-# Corporate Security
-- type: rank
-  id: RMCRankWeYaSecurityOfficer
-  name: Corporate Security Officer
-  prefix: Off.
-  paygrade: WY-SEC
-
-- type: rank
-  id: RMCRankWeYaSecuritySpecialist
-  name: Senior Corporate Security Officer
-  prefix: Sr. Off.
-  paygrade: WY-SEC-SPEC
-
-- type: rank
-  id: RMCRankWeYaSecurityLead
-  name: Corporate Security Sergeant
-  prefix: CSSgt.
-  paygrade: WY-SEC-LEAD
-
   #TTPO
 - type: rank
   id: RMCRankWeYaBodyguardTPPO
   name: Trainee Personal Protection Officer
   prefix: TPPO.
-  paygrade: WY-SEC-TPPO
+  paygrade: WY-SEC-1
 
 - type: rank
   id: RMCRankWeYaBodyguardPPO
   name: Personal Protection Officer
   prefix: PPO.
-  paygrade: WY-SEC-PPO
+  paygrade: WY-SEC-2
 
 - type: rank
   id: RMCRankWeYaBodyguardPPS
   name: Personal Protection Specialist
   prefix: PPS.
-  paygrade: WY-SEC-PPS
+  paygrade: WY-SEC-3
 
 - type: rank
   id: RMCRankWeYaBodyguardPPC
   name: Personal Protection Coordinator
   prefix: PPC.
-  paygrade: WY-SEC-PPC
+  paygrade: WY-SEC-4
 
 - type: rank
   id: RMCRankWeYaBodyguardDPO
   name: Directorate Protection Officer
   prefix: DPO.
-  paygrade: WY-SEC-DPO
+  paygrade: WY-SEC-5
 
 - type: rank
   id: RMCRankWeYaBodyguardDPS
   name: Directorate Protection Specialist
   prefix: DPS.
-  paygrade: WY-SEC-DPS
+  paygrade: WY-SEC-6
 
 - type: rank
   id: RMCRankWeYaBodyguardDPC
   name: Directorate Protection Coordinator
   prefix: DPC.
-  paygrade: WY-SEC-DPC
+  paygrade: WY-SEC-7
