@@ -157,6 +157,3 @@
     arc: 360
   - type: Clickable
   - type: InteractionOutline
-  - type: EmitSoundOnTrigger
-    sound:
-      path: /Audio/Weapons/flash.ogg
