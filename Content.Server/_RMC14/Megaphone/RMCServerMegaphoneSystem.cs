@@ -117,13 +117,13 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
 
             var recipientPos = _transform.GetWorldPosition(transformEntity, xforms);
             var distance = (sourcePos - recipientPos).Length();
+            var observer = HasComp<GhostComponent>(playerEntity);
 
             // Add if within megaphone range but outside normal range
             if (distance < megaphoneRange && distance >= ev.VoiceRange)
             {
                 if (!ev.Recipients.ContainsKey(player))
                 {
-                    var observer = HasComp<GhostHearingComponent>(playerEntity);
                     ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
                 }
             }
@@ -131,6 +131,9 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             // Apply hushed effect only if amplifying is enabled
             if (shouldApplyHushed && distance < megaphoneRange)
             {
+                if (observer)
+                    continue;
+
                 // Check if recipient is friendly (same faction)
                 if (!hasSourceFaction || !_gunIFF.IsInFaction(playerEntity, sourceFaction))
                     continue;
