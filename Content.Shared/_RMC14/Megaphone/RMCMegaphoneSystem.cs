@@ -1,6 +1,7 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
 using Content.Shared.Popups;
@@ -100,8 +101,9 @@ public sealed class RMCMegaphoneSystem : EntitySystem
                             : Loc.GetString("rmc-megaphone-verb-hushed-range-desc", ("range", (int) value)),
                         Act = () =>
                         {
-                            // Check leadership skill before changing hush radius.
-                            if (!_skills.HasSkill(user, LeadershipSkill, 1))
+                            // Check leadership skill or squad leader status before changing hush radius.
+                            if (!_skills.HasSkill(user, LeadershipSkill, 1) &&
+                                !HasComp<SquadLeaderComponent>(user))
                             {
                                 var msg = Loc.GetString("rmc-megaphone-no-skill");
                                 _popup.PopupClient(msg, user, user, PopupType.SmallCaution);

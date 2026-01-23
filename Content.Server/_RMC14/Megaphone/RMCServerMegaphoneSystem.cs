@@ -1,10 +1,10 @@
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Megaphone;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Ghost;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Speech;
 using Content.Shared.StatusEffectNew;
 using Robust.Server.Console;
@@ -97,10 +97,11 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         var sourcePos = _transform.GetWorldPosition(sourceTransform);
         var xforms = GetEntityQuery<TransformComponent>();
 
-        // Check if we should apply hushed effect (user has leadership skill and hushed range is not zero)
+        // Check if we should apply hushed effect (user has leadership skill or is squad leader and hushed range is not zero)
+        var hasLeadership = _skills.HasSkill(ev.Source, LeadershipSkill, 1) || HasComp<SquadLeaderComponent>(ev.Source);
         var shouldApplyHushed = megaphoneUser.HushedEffectRange > 0 &&
                                  megaphoneUser.HushedEffectDuration > TimeSpan.Zero &&
-                                 _skills.GetSkill(ev.Source, LeadershipSkill) >= 1;
+                                 hasLeadership;
 
         // Get source faction for friendly check (only needed for hushed effect)
         var hasSourceFaction = shouldApplyHushed && _gunIFF.TryGetFaction(ev.Source, out var sourceFaction);
@@ -124,7 +125,6 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             if (distance < megaphoneRange && distance >= ev.VoiceRange && !ev.Recipients.ContainsKey(player))
                 ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
 
-            // Apply hushed effect only if amplifying is enabled
             if (shouldApplyHushed && distance < hushedRange)
             {
                 if (observer)
@@ -134,7 +134,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                 if (!hasSourceFaction || !_gunIFF.IsInFaction(playerEntity, sourceFaction))
                     continue;
 
-                if (!_skills.HasSkill(playerEntity, LeadershipSkill, 1))
+                if (!_skills.HasSkill(playerEntity, LeadershipSkill, 1) && !HasComp<SquadLeaderComponent>(playerEntity))
                     _statusEffects.TryUpdateStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
             }
         }
