@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: You can now authorize evac and cancel evac via the Command Tablet.
-    type: Add
-  id: 2307
-  time: '2025-09-06T08:26:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7761
 - author: DummeHytteOst
   changes:
   - message: Parasite(s) should now correctly be translated into Child or Children
@@ -4750,5 +4743,13 @@
   id: 2809
   time: '2026-01-23T03:41:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9020
+- author: Whisper
+  changes:
+  - message: Xenonids, by default, are immune to becoming zombies. This can change
+      during a round, however.
+    type: Tweak
+  id: 2810
+  time: '2026-01-23T03:56:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9042
 Name: RMC14
 Order: -1
