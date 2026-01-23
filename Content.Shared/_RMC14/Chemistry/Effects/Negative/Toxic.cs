@@ -28,7 +28,7 @@ public sealed partial class Toxic : RMCChemicalEffect
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var damage = new DamageSpecifier();
-        damage.DamageDict[PoisonType] = potency * 2f; //delta_time
+        damage.DamageDict[PoisonType] = potency * 2f; // delta_time
         damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
     }
 
