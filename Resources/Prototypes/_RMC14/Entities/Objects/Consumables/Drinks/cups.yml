@@ -126,6 +126,21 @@
 
 - type: entity
   parent: RMCCoffeeCup
+  id: RMCThreeSunEmpireCup
+  name: TSE mug
+  description: A well-crafted, sleek mug with the icon of the Three Sun Empire on it's side. Excellent for those who serve and live under the Empress and her Empire.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: _RMC14/Objects/Consumable/Drinks/tsecup.rsi
+        state: base
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
+        state: icon-3
+        visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
   id: RMCColonyLiberationFrontCup
   name: CLF mug
   description: A tough, well-worn cup marked with the CLF sigil born from the defiance sparked by the Slaughter of Xibou.
@@ -138,3 +153,29 @@
         sprite: _RMC14/Objects/Consumable/Drinks/coffee_cup.rsi
         state: icon-3
         visible: false
+
+- type: entity
+  parent: RMCCoffeeCup
+  id: RMCPaperCup
+  name: paper cup
+  description: A paper water cup.
+  suffix: RMC
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 10
+  - type: Drink
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Drinks/water_cup.rsi
+    layers:
+      - state: icon-0
+      - map: ["enum.SolutionContainerLayers.Fill"]
+        state: icon-3
+        visible: false
+  - type: Tag
+    tags:
+    - DrinkGlass
+    - Trash
+  - type: TrashOnSolutionEmpty
+    solution: drink

@@ -75,6 +75,7 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
     private const int AttackMask = (int) (CollisionGroup.MobMask | CollisionGroup.Opaque);
 
     private static readonly EntProtoId DisarmEffect = "RMCWeaponArcDisarm"; // RMC14
+    private const float ArtificialMeleeDelay = 0.1f; //RMC14
 
     /// <summary>
     /// Maximum amount of targets allowed for a wide-attack.
@@ -153,7 +154,18 @@ public abstract class SharedMeleeWeaponSystem : EntitySystem
 
         // If someone swaps to this weapon then reset its cd.
         var curTime = Timing.CurTime;
-        var minimum = curTime + TimeSpan.FromSeconds(1 / attackRate);
+        var minimum = curTime + TimeSpan.FromSeconds(ArtificialMeleeDelay); // RMC14 No attack delay reset, A tiny delay is still needed so you don't attack and grab a weapon at the same time while in harm mode.
+
+        // RMC14, Prevent dual wielded melee weapons from having separate attack delays when swapping hands.
+        var heldItems = _hands.EnumerateHeld(args.User);
+        foreach (var item in heldItems)
+        {
+            if (item == uid || !TryComp(item, out MeleeWeaponComponent? weapon))
+                continue;
+
+            if (minimum < weapon.NextAttack)
+                minimum = weapon.NextAttack;
+        }
 
         if (minimum < component.NextAttack)
             return;

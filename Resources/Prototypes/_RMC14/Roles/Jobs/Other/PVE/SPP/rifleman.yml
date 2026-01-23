@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPRiflemanPVE
   name: rmc-job-name-spp-rifleman
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-rifleman-pve
   playTimeTracker: RMCJobSPPRiflemanPVE
   ranks:
    RMCRankSPPRyadovoy: []
@@ -33,6 +33,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-rifleman-pve
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
