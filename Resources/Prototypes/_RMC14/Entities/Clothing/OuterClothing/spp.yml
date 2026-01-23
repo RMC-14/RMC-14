@@ -60,7 +60,7 @@
   parent: RMCArmorSPPSupport
   id: RMCArmorSPPSupportSynth
   name: SPP UL6 synthetic personal armor
-  description: Modified variant of the UL6 personel armor system intended to be useable by Synthetic units. Offers no protection but very little movement impairment.
+  description: Modified variant of the UL6 personal armor system intended to be usable by Synthetic units. Offers no protection but very little movement impairment.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/SPP/support.rsi

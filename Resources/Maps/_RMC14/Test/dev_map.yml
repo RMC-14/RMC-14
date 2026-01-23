@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/22/2025 22:08:44
-  entityCount: 1474
+  time: 12/01/2025 22:17:20
+  entityCount: 1475
 maps:
 - 1
 grids:
@@ -3971,6 +3971,13 @@ entities:
     components:
     - type: Transform
       pos: -1.5,0.5
+      parent: 2
+- proto: RMCSpawnPointFieldDoctor
+  entities:
+  - uid: 1475
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
       parent: 2
 - proto: CMSpawnPointFireteamLeader
   entities:

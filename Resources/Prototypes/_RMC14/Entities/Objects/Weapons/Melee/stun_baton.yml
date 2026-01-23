@@ -35,6 +35,7 @@
     energyPerUse: 50
   - type: RMCStaminaDamageOnHit
     damage: 100
+    jitterDuration: 2
   - type: MeleeRequiresSkill
     skills:
       RMCSkillPolice: 1
@@ -57,6 +58,14 @@
       params:
         variation: 0.250
   - type: ItemToggleMeleeWeapon
+    activatedSoundOnHit:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
+    activatedSoundOnHitNoDamage:
+      path: /Audio/Weapons/egloves.ogg
+      params:
+        variation: 0.2
     activatedDamage:
       types:
         Blunt: 0
@@ -68,12 +77,8 @@
     bluntStaminaDamageFactor: 2.0
     angle: 60
     animation: WeaponArcThrust
-  - type: StaminaDamageOnHit
+  - type: RMCStaminaDamageOnCollide
     damage: 35
-    sound: /Audio/Weapons/egloves.ogg
-  - type: StaminaDamageOnCollide
-    damage: 35
-    sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
     maxCharge: 1000

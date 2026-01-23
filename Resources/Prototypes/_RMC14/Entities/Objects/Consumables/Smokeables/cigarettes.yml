@@ -60,6 +60,8 @@
     tags:
     - CigPack
     - Trash
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: CigPackBase
@@ -183,6 +185,8 @@
     rsi:
       sprite: _RMC14/Objects/Clothing/HelmetGarb/Smoking/CigPacks/sloths.rsi
       state: helmet
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: Cigarette
