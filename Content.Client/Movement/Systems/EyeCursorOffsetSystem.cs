@@ -19,21 +19,36 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
     // This value is here to make sure the user doesn't have to move their mouse
     // all the way out to the edge of the screen to get the full offset.
     static private float _edgeOffset = 0.9f;
+    private const float zoomAmount = 1.2f;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<EyeCursorOffsetComponent, GetEyeOffsetEvent>(OnGetEyeOffsetEvent);
+        SubscribeLocalEvent<EyeCursorOffsetComponent, GetEyeZoomEvent>(OnGetEyeZoomEvent);
     }
 
     private void OnGetEyeOffsetEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeOffsetEvent args)
     {
+        if (component.DisableMouseOffset)
+        {
+            args.Offset += component.CurrentPosition;
+            return;
+        }
         var offset = OffsetAfterMouse(uid, component);
         if (offset == null)
             return;
 
         args.Offset += offset.Value;
+    }
+
+    private void OnGetEyeZoomEvent(EntityUid uid, EyeCursorOffsetComponent component, ref GetEyeZoomEvent args)
+    {
+        if (component.DisableMouseOffset && (component.CurrentPosition != Vector2.Zero || component.TargetPosition != Vector2.Zero))
+            args.Zoom = new Vector2(zoomAmount, zoomAmount);
+        else
+            args.Zoom = Vector2.One;
     }
 
     public Vector2? OffsetAfterMouse(EntityUid uid, EyeCursorOffsetComponent? component)

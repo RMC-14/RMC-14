@@ -147,6 +147,13 @@ public sealed class OverwatchConsoleOrbitalCommentBuiMsg(int index, string comme
 }
 
 [Serializable, NetSerializable]
+public sealed class OverwatchCameraAdjustOffsetMsg(NetEntity actor, OverwatchDirection direction) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Actor = actor;
+    public readonly OverwatchDirection Direction = direction;
+}
+
+[Serializable, NetSerializable]
 public sealed class OverwatchConsoleSendMessageBuiMsg(string message) : BoundUserInterfaceMessage
 {
     public readonly string Message = message;

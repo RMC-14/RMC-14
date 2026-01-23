@@ -40,6 +40,23 @@
                         <Button Name="HideSquadInfoButton" Access="Public" Text="Hide Squad Info"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
+                            <BoxContainer Orientation="Horizontal">
+                                <Control HorizontalExpand="True" />
+                                <Button Name="OffsetUpButton" Access="Public" StyleClasses="OpenBoth"
+                                    SetSize="28 29" MaxWidth="40" />
+                                <Control HorizontalExpand="True" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" HorizontalAlignment="Center">
+                                <Button Name="OffsetLeftButton" Access="Public" StyleClasses="OpenBoth" MinWidth="28" MaxWidth="28" />
+                                <Button Name="ResetOffsetButton" Access="Public" StyleClasses="OpenBoth" MinWidth="40" MaxWidth="40" />
+                                <Button Name="OffsetRightButton" Access="Public" StyleClasses="OpenBoth" MinWidth="28" MaxWidth="28" />
+                            </BoxContainer>
+                            <BoxContainer Orientation="Horizontal">
+                                <Control HorizontalExpand="True" />
+                                <Button Name="OffsetDownButton" Access="Public" StyleClasses="OpenBoth"
+                                    SetSize="28 29" MaxWidth="40" />
+                                <Control HorizontalExpand="True" />
+                            </BoxContainer>
                     </BoxContainer>
                     <BoxContainer Name="RolesContainer" Access="Public" Orientation="Vertical" HorizontalExpand="True" />
                 </BoxContainer>

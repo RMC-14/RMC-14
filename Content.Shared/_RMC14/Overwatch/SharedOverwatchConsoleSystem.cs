@@ -78,6 +78,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
+    private const float offsetAmount = 7f;
 
     public override void Initialize()
     {
@@ -110,6 +111,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleTransferMarineBuiMsg>(OnOverwatchTransferMarineBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
+            subs.Event<OverwatchCameraAdjustOffsetMsg>(OnCameraAdjustOffset);
             subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
             subs.Event<OverwatchConsoleSupplyDropLongitudeBuiMsg>(OnOverwatchSupplyDropLongitudeBui);
             subs.Event<OverwatchConsoleSupplyDropLatitudeBuiMsg>(OnOverwatchSupplyDropLatitudeBui);
@@ -569,7 +571,38 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
+        // Reset eye offset when no longer watching cameras
+        _eye.SetOffset(watcher, Vector2.Zero);
         _eye.SetTarget(watcher, null);
+    }
+
+    private void OnCameraAdjustOffset(Entity<OverwatchConsoleComponent> ent, ref OverwatchCameraAdjustOffsetMsg args)
+    {
+        if (!TryGetEntity(args.Actor, out var watchedUid) || !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye))
+            return;
+
+        Vector2 offsetDelta = args.Direction switch
+        {
+            OverwatchDirection.North => new Vector2(0, offsetAmount),
+            OverwatchDirection.South => new Vector2(0, -offsetAmount),
+            OverwatchDirection.East => new Vector2(offsetAmount, 0),
+            OverwatchDirection.West => new Vector2(-offsetAmount, 0),
+            _ => Vector2.Zero
+        };
+
+        if (offsetDelta == Vector2.Zero)
+        {
+            _eye.SetOffset(eye.Owner, Vector2.Zero);
+            return;
+        }
+
+        var offsetLimit = new Vector2(offsetAmount, offsetAmount);
+        offsetDelta = new Vector2(
+            Math.Clamp(offsetDelta.X, -offsetLimit.X, offsetLimit.X),
+            Math.Clamp(offsetDelta.Y, -offsetLimit.Y, offsetLimit.Y)
+        );
+
+        _eye.SetOffset(eye.Owner, offsetDelta);
     }
 
     private OverwatchConsoleBuiState GetOverwatchBuiState(Entity<OverwatchConsoleComponent> console)
