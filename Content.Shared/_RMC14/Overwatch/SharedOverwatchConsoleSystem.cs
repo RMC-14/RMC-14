@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Vendors;
@@ -381,6 +382,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
             return;
+
+        if (HasComp<ScopingComponent>(args.Actor))
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
+            }
+            return;
+        }
 
         Watch(args.Actor, camera);
     }

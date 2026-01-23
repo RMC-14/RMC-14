@@ -41,7 +41,7 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCNoWebbingPatch
     shoes: RMCBootsPMCFilled
-    gloves: CMHandsBlackMarine
+    gloves: RMCHandsVeteran
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetHvHWeYaPMCMedic
     head: ArmorHelmetPMC
