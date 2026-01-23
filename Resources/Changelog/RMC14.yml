@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: Fixed the plasma cost of new xeno constructs not scaling with how many
-      existing constructs there are in an area if they exceed a threshold of 40% of
-      the buildable tiles in an area.
-    type: Fix
-  id: 2320
-  time: '2025-09-06T11:14:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6288
 - author: Shromply
   changes:
   - message: Added CLF PVE roles.
@@ -4715,5 +4706,20 @@
   id: 2822
   time: '2026-01-23T10:15:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8321
+- author: to4no_fix
+  changes:
+  - message: Squads now have a Primary and Secondary objective, which can be changed
+      through the squad's Overwatch console. Objectives are announced in chat when
+      updating or canceling and are displayed in the squad tracker menu and tactical
+      map. They are also announced when joining a round (if set) and when transferring
+      from one squad to another.
+    type: Add
+  - message: The regular supply drop and orbital cannon firing buttons in the Overwatch
+      console and Supply drop console  have been replaced with confirmation buttons
+      that require a confirmation click to prevent accidental pressing.
+    type: Tweak
+  id: 2823
+  time: '2026-01-23T10:21:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8917
 Name: RMC14
 Order: -1
