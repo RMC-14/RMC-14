@@ -118,6 +118,15 @@
       "name": "laser_spotter"
     },
     {
+      "name": "laser_cas_mono"
+    },
+    {
+      "name": "laser_range_mono"
+    },
+    {
+      "name": "laser_spotter_mono"
+    },
+    {
       "name": "spotter_overlay"
     },
     {
@@ -279,6 +288,12 @@
     {
       "name": "u_rangefinder_eyes-inhand-left",
       "directions": 4
+    },
+    {
+      "name": "monocular"
+    },
+    {
+      "name": "advanced_monocular"
     }
   ]
 }

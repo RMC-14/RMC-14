@@ -63,7 +63,7 @@
     - Trash
   - type: PhysicalComposition
     materialComposition:
-      CMGlass: 3
+      CMGlass: 100
   - type: SpaceGarbage
 
 - type: entity
