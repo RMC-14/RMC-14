@@ -1,0 +1,60 @@
+- type: job
+  parent: CMSurvivorCorporate
+  id: RMCSurvivorSolarisCorporateSupervisor
+  name: rmc-job-name-survivor-solaris-corporate-supervisor
+  ranks:
+    RMCRankWeYaExecutiveSupervisor: []
+  accessGroups:
+  - ColonistPMC
+  access:
+  - CMAccessIllegal
+  icon: CMJobIconExecSpec
+  greeting: rmc-job-greeting-solaris-pmc-supervisor
+  spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
+  startingGear: RMCGearSurvivorSolarisCorporateSupervisor
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaManager
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCGun # TODO RMC14: CL Survivor Loot preset
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: JobPrefix
+      prefix: rmc-job-prefix-survivor-solaris-corporate-supervisor
+  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorSolarisCorporateSupervisor
+  equipment:
+    outerClothing: RMCJacketCorporateManager
+    jumpsuit: RMCJumpsuitLiaisonManager
+    shoes: RMCShoesLaceupDress
+    head: RMCHeadCapManager
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+    # TODO RMC14: research_notes/grant
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisCorporateSupervisor
+  name: special survivor crashlanding offices coporate supervisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisCorporateSupervisor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy

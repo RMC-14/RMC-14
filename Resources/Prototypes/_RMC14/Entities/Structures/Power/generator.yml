@@ -71,6 +71,22 @@
     watts: 100000
     randomizeDamage: true
   - type: IntelPowerObjective
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Power/geothermal_generator.rsi
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCFusionReactorLayers.Layer:
+        base:
+          Off: { state: "off" }
+          Weld: { state: "weld" }
+          Wire: { state: "wire" }
+          Wrench: { state: "wrench" }
+          Ten: { state: "on-10" }
+          TwentyFive: { state: "on-25" }
+          Fifty: { state: "on-50" }
+          SeventyFive: { state: "on-75" }
+          Hundred: { state: "on-100" }
 
 - type: entity
   parent: BaseItem

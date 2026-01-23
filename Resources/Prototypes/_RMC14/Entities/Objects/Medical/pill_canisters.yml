@@ -82,6 +82,9 @@
       - RMCBeltMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 500
 
 - type: entity
   parent: RMCPillCanisterNoSkill

@@ -69,7 +69,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -773,7 +773,7 @@
         recommended: true
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -1126,7 +1126,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1229,7 +1229,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled
@@ -1376,7 +1376,7 @@
       entries:
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
       - id: RMCM44BeltFilled
         name: M44 revolver
@@ -1513,7 +1513,7 @@
       - id: RMCM1984BeltFilled
         name: M1984 service pistol
         recommended: true
-      - id: CMM77BeltFilled
+      - id: RMCM77BeltFilled
         name: M77 pistol
         recommended: true
       - id: RMCM44BeltFilled

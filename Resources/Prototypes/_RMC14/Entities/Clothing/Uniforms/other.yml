@@ -79,7 +79,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitMercenaryHeavy
   name: mercenary fatigues
-  description: A thick, beige suit with a red armband. There is an unknown symbol is emblazed on the suit.
+  description: A thick, beige suit with a red armband. There is an unknown symbol emblazed on the suit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
@@ -90,7 +90,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitMercenaryMiner
   name: mercenary miner fatigues
-  description: A beige suit with a red armband. It looks a little thin, like it wasn't designed for protection. There is an unknown symbol is emblazed on the suit.
+  description: A beige suit with a red armband. It looks a little thin, like it wasn't designed for protection. There is an unknown symbol emblazed on the suit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
@@ -101,7 +101,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitMercenaryEngineer
   name: mercenary engineer fatigues
-  description: A blue suit with yellow accents, used by engineers. There is an unknown symbol is emblazed on the suit.
+  description: A blue suit with yellow accents, used by engineers. There is an unknown symbol emblazed on the suit.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
@@ -291,7 +291,7 @@
   parent: RMCMarineUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts
-  description: A ratty pair of red shorts. Smells of ciggarettes.
+  description: A ratty pair of red shorts. Smells of cigarettes.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
@@ -346,7 +346,7 @@
   parent: RMCJumpsuitCivilian
   id: RMCJumpsuitSteward
   name: steward utilities
-  description: A stylish brown vest and shorts - uniforms like this are often worn by clerks and shop stewards
+  description: A stylish brown vest and shorts - uniforms like this are often worn by clerks and shop stewards.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi

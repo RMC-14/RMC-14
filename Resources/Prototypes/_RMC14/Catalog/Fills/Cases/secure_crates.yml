@@ -59,6 +59,17 @@
 
 - type: entity
   parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedTSEMRE
+  name: TSE ORP rations crate (x60)
+  description: A supply crate containing sixty TSE ORP ration packets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMRETSE
+      amount: 60
+
+- type: entity
+  parent: RMCSecureCaseStrapped
   id: RMCSecureCaseStrappedSandbag
   name: sandbag supply crate (x100)
   description: A supply crate containing four piles of twenty-five sandbags.
