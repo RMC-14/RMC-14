@@ -99,6 +99,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
     private static readonly EntProtoId DropshipTargetMarker = "RMCLaserDropshipTarget";
     private const string SpotlightState = "spotlights_";
+    private const float DefaultMarkerDuration = 1;
 
     public bool CasDebug { get; private set; }
     private readonly HashSet<Entity<DamageableComponent>> _damageables = new();
@@ -2016,17 +2017,19 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         return true;
     }
 
-    public void TrySetCameraTarget(EntityUid terminal, EntityUid? newTarget, DropshipTerminalWeaponsComponent? terminalComp = null)
+    public bool TrySetCameraTarget(EntityUid terminal, EntityUid? newTarget, DropshipTerminalWeaponsComponent? terminalComp = null)
     {
         if (!Resolve(terminal, ref terminalComp, false))
-            return;
+            return false;
 
         if (newTarget == terminalComp.CameraTarget)
-            return;
+            return false;
 
         terminalComp.Offset = Vector2i.Zero;
         terminalComp.CameraTarget = newTarget;
         Dirty(terminal, terminalComp);
+
+        return true;
     }
 
     private void FireWeapon(EntityUid weapon, EntityCoordinates targetCoordinates, DropshipWeaponStrikeType strikeType, EntityUid dropship,  EntityUid? actor = null, DropshipTerminalWeaponsComponent? terminalComp = null, DropshipWeaponComponent? weaponComp = null)
@@ -2039,8 +2042,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var time = _timing.CurTime;
         var travelTime = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero : ammo.Comp.TravelTime;
-        var targetSpread = strikeType == DropshipWeaponStrikeType.FireMission ? ammo.Comp.TargetSpread / 2: ammo.Comp.TargetSpread;
-        var markerDuration = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero: TimeSpan.FromSeconds(1);
+        var targetSpread = strikeType == DropshipWeaponStrikeType.FireMission ? ammo.Comp.TargetSpread / 2 : ammo.Comp.TargetSpread;
+        var markerDuration = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero : TimeSpan.FromSeconds(DefaultMarkerDuration);
+        var groundSound = strikeType == DropshipWeaponStrikeType.FireMission ? ammo.Comp.SoundCockpit : ammo.Comp.SoundGround;
+        var soundTravelTime = strikeType == DropshipWeaponStrikeType.FireMission ? TimeSpan.Zero : ammo.Comp.SoundTravelTime;
 
         var ev = new DropshipWeaponShotEvent(
             targetSpread,
@@ -2050,10 +2055,10 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.ShotsPerVolley,
             ammo.Comp.Damage,
             ammo.Comp.ArmorPiercing,
-            ammo.Comp.SoundTravelTime,
+            soundTravelTime,
             ammo.Comp.SoundCockpit,
             ammo.Comp.SoundMarker,
-            ammo.Comp.SoundGround,
+            groundSound,
             ammo.Comp.SoundImpact,
             ammo.Comp.SoundWarning,
             ammo.Comp.MarkerWarning,
