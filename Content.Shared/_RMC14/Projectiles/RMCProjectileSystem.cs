@@ -34,6 +34,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<DeleteOnCollideComponent, StartCollideEvent>(OnDeleteOnCollideStartCollide);
         SubscribeLocalEvent<ModifyTargetOnHitComponent, ProjectileHitEvent>(OnModifyTargetOnHit);
         SubscribeLocalEvent<ProjectileMaxRangeComponent, MapInitEvent>(OnProjectileMaxRangeMapInit);
+        SubscribeLocalEvent<ProjectileMaxRangeComponent, PreventCollideEvent>(OnProjectileMaxRangePreventCollide);
 
         SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, MapInitEvent>(OnFalloffProjectileMapInit);
         SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, ProjectileHitEvent>(OnFalloffProjectileHit);
@@ -248,6 +249,24 @@ public sealed class RMCProjectileSystem : EntitySystem
             _physics.SetLinearVelocity(ent, Vector2.Zero);
             RemCompDeferred<ProjectileMaxRangeComponent>(ent);
         }
+    }
+
+    private void OnProjectileMaxRangePreventCollide(Entity<ProjectileMaxRangeComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (ent.Comp.Origin is not { } origin)
+            return;
+
+        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(args.OtherEntity), out var distance))
+            return;
+
+        if (distance < ent.Comp.Max)
+            return;
+
+        args.Cancelled = true;
+        StopProjectile(ent);
     }
 
     public override void Update(float frameTime)
