@@ -141,6 +141,10 @@ public sealed class RadioSystem : EntitySystem
         {
             radioFontSize += headsetComp.RadioTextIncrease ?? 0;
         }
+        else if (TryComp<RMCInnateRadioTextIncreaseComponent>(messageSource, out var innateRadioIncrease))
+        {
+            radioFontSize += innateRadioIncrease.RadioTextIncrease;
+        }
 
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-radio-message-wrap-bold" : "chat-radio-message-wrap",
             ("color", channel.Color),

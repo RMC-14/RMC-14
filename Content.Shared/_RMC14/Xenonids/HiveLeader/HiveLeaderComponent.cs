@@ -14,4 +14,7 @@ public sealed partial class HiveLeaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan FriendlyStunTime = TimeSpan.FromSeconds(1.25);
+
+    [DataField, AutoNetworkedField]
+    public int? GrantRadioTextIncrease = 2;
 }

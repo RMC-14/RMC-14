@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -143,6 +144,13 @@ public sealed class HiveLeaderSystem : EntitySystem
 
         EnsureComp<RMCTrackableComponent>(watching);
 
+        var radioTextIncrease = EnsureComp<RMCInnateRadioTextIncreaseComponent>(watching);
+        if (leaderComp.GrantRadioTextIncrease != null)
+        {
+            radioTextIncrease.RadioTextIncrease = leaderComp.GrantRadioTextIncrease.Value;
+            Dirty(watching, radioTextIncrease);
+        }
+
         leaderComp.Granter = ent;
         Dirty(watching, leaderComp);
 
@@ -276,6 +284,9 @@ public sealed class HiveLeaderSystem : EntitySystem
 
         RemCompDeferred<HiveLeaderComponent>(leader);
 
+        if (TryComp<RMCInnateRadioTextIncreaseComponent>(leader.Owner, out var radioIncrease) && !radioIncrease.Instrinsic)
+            RemCompDeferred<RMCInnateRadioTextIncreaseComponent>(leader.Owner);
+
         if (!TryComp(leader.Comp.Granter, out HiveLeaderGranterComponent? granter))
             return;
 
@@ -294,6 +305,14 @@ public sealed class HiveLeaderSystem : EntitySystem
         }
 
         EnsureComp<RMCTrackableComponent>(newXeno);
+
+        var radioTextIncrease = EnsureComp<RMCInnateRadioTextIncreaseComponent>(newXeno);
+        if (oldLeader.GrantRadioTextIncrease != null)
+        {
+            radioTextIncrease.RadioTextIncrease = oldLeader.GrantRadioTextIncrease.Value;
+            Dirty(newXeno, radioTextIncrease);
+        }
+
         var newLeader = EnsureComp<HiveLeaderComponent>(newXeno);
         newLeader.Granter = oldLeader.Granter;
         granter.Leaders.Remove(oldXeno);
