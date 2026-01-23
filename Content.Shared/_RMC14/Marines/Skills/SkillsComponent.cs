@@ -11,5 +11,5 @@ public sealed partial class SkillsComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> Skills = new();
 
     [DataField, AutoNetworkedField]
-    public ProtoId<SkillPresetPrototype>? Preset;
+    public EntProtoId<SkillPresetComponent>? Preset;
 }

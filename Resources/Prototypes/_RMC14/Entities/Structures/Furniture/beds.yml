@@ -107,6 +107,14 @@
   - type: Construction
 
 - type: entity
+  parent: RMCBedBunkGreen
+  id: RMCBedBunkGreenUnanchored
+  suffix: Unanchored
+  components:
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMBed
   id: RMCBedBunkRed
   name: red bunk-bed

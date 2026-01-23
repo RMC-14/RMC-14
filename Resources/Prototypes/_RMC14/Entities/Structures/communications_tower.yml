@@ -183,3 +183,25 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: RMCCommunicationsTowerProp
+  id: RMCCommunicationsTowerPropAlt0
+  name: destroyed comms tower
+  description: An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/communications_tower_dish.rsi
+    state: comm_tower_broken
+
+- type: entity
+  parent: RMCCommunicationsTowerProp
+  id: RMCCommunicationsTowerPropAlt1
+  name: destroyed comms tower
+  description: An old company comms tower used to transmit communications between subspace bodies. Looks like this one has seen better days.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/communications_tower_dish.rsi
+    state: comm_tower_off
