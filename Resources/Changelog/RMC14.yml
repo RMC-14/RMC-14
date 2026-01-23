@@ -1,29 +1,6 @@
 ﻿Entries:
 - author: Dygon
   changes:
-  - message: The Dropship part fabricator can now print the AGM-227 'Banshee' for
-      300 points. It has a 6-second travel time and creates a medium-sized explosion,
-      along with a short-lived, star-shaped area of high-intensity fire.
-    type: Add
-  - message: The Dropship part fabricator can now print the AGM-184 'Harpoon II' for
-      200 points. It has a 5-second travel time and creates a medium-sized explosion
-      with relatively low damage.
-    type: Add
-  - message: The Dropship part fabricator can now print the BLU-200 'Dragon's Breath'
-      for 300 points. It has a 5-second travel time and creates an area of high-intensity
-      fire, along with a large non-damaging implosion that pulls entities toward its
-      epicenter.
-    type: Add
-  - message: Fixed the AGM-99 'Napalm' not creating 2 additional fire tiles towards
-      every cardinal direction.
-    type: Fix
-  - message: Fire created by the AGM-99 'Napalm' now deals less damage per second.
-    type: Fix
-  id: 2313
-  time: '2025-09-06T08:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7350
-- author: Dygon
-  changes:
   - message: The Dropship Part Fabricator can now print the AN/AAQ-178 Weapon Targeting
       System, which can be installed in the dropship's electronic system slot. It
       boosts weapon accuracy and reduces projectile travel time.
@@ -4739,5 +4716,13 @@
   id: 2815
   time: '2026-01-23T04:05:34.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9015
+- author: Arykh
+  changes:
+  - message: Tweaked status effect duration applied by reagents to match parity. Notably,
+      Inaprovaline OD won't completely round remove you.
+    type: Tweak
+  id: 2816
+  time: '2026-01-23T05:35:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9052
 Name: RMC14
 Order: -1
