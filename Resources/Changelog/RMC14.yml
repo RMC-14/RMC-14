@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: Added acid blood to xeno. Damage and death causes it to spray. If you
-      are close enough, damage will be dealt depending on the type of xeno.
-    type: Add
-  id: 2319
-  time: '2025-09-06T10:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7413
 - author: Dygon
   changes:
   - message: Fixed the plasma cost of new xeno constructs not scaling with how many
@@ -4716,5 +4708,12 @@
   id: 2821
   time: '2026-01-23T10:08:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8771
+- author: Ian321
+  changes:
+  - message: Moved the label on pills and injectors to the left.
+    type: Tweak
+  id: 2822
+  time: '2026-01-23T10:15:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8321
 Name: RMC14
 Order: -1
