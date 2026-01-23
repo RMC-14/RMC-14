@@ -31,7 +31,6 @@
         RMCSkillMedical: 2
         RMCSkillSurgery: 1
         RMCSkillEndurance: 3
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
   hidden: true
@@ -87,13 +86,13 @@
     gloves: RMCHandsVeteranPMC
     head: ArmorHelmetPMC
     shoes: RMCBootsPMCFilled
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelPMCMedic
     belt: RMCBeltMedicBagPMCFilled
     suitstorage: RMCWeaponSMGM63B2
     pocket1: RMCPouchMedkitPMCFilled
-    pocket2: RMCPouchMagazineLarge # TODO RMC14: PMC re-sprite
+    pocket2: RMCPouchMagazineLargePMC
   storage:
     outerClothing:
     - CMMagazineSMGM63Ext

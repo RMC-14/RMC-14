@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPRiflemanPVE
   name: rmc-job-name-spp-rifleman
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-rifleman-pve
   playTimeTracker: RMCJobSPPRiflemanPVE
   ranks:
    RMCRankSPPRyadovoy: []
@@ -33,6 +33,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-rifleman-pve
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -42,6 +46,7 @@
 
 
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointSPPRiflemanPVE
   name: spp rifleman spawn point
   suffix: PVE
@@ -56,9 +61,6 @@
   id: RMCJobSPPRiflemanPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPRiflemanPVE

@@ -168,3 +168,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Smartpacks/V42A1/smartpack_white.rsi
+
+- type: entity
+  parent: RMCSmartpackA1White
+  id: RMCPMCSyntheticSmartpack
+  suffix: Filled, PMC Synthetic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMDefibrillator # "Upgraded" defib used. TODO RMC14 upgraded/advanced defibs
+    - id: RMCSynthResetKey
+    - id: RMCNailgunCompact
+    - id: CMFireExtinguisherPortable
+    - id: CMRollerBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
+  # - id: RMCPortableCrewMonitor // TODO RMC14 handheld crew monitors

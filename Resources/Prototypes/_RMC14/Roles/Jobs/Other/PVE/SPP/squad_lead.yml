@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPSquadLeadPVE
   name: rmc-job-name-spp-squadlead
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-squadlead
   playTimeTracker: RMCJobSPPSquadLeadPVE
   ranks:
     RMCRankSPPSerzhant: []
@@ -37,6 +37,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-squadlead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -50,22 +54,19 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointSPPSquadLeadPVE
-  name: weya pmc team lead spawn point
+  name: spp squad lead spawn point
   suffix: PVE
   components:
   - type: SpawnPoint
     job_id: RMCSPPSquadLeadPVE
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
-    state: pmc_spawn
+    state: spp_spawn
 
 - type: startingGear
   id: RMCJobSPPSquadLeadPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPSquadLeadPVE

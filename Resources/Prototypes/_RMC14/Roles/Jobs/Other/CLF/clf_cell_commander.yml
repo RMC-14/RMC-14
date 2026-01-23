@@ -9,6 +9,7 @@
   startingGear: RMCGearCLFCellCommander
   icon: RMCJobIconCLFCellCommander
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Cell Commander
   special:
   - !type:AddComponentSpecial
     components:
@@ -20,7 +21,7 @@
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
         RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 1 # RMC14
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 1
         RMCSkillVehicles: 2
@@ -71,16 +72,21 @@
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
+    mask: RMCCombatUtilityKnifeB
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
-    shoes: CMBootsBlackFilled # TODO RMC14
+    shoes: RMCShoesCombat
     suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
-    belt: RMCMatebaBeltFilled # TODO RMC14
+    belt: RMCBeltSmartGunOperatorPistolCLF
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchFirstAidInjectors
+  storage:
+    outerClothing:
+    - RMCSpeedLoaderMatebaHighImpact
+    - RMCSpeedLoaderMatebaHighImpact
 
 - type: playTimeTracker
   id: CMJobCLFCellCommander

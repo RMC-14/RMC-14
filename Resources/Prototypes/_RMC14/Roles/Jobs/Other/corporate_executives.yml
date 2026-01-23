@@ -1,14 +1,14 @@
-﻿# Executive Supervisor
+﻿# Executive Supervisor (Legal)
 - type: job
   parent: CMJobBase
-  id: CMCorporateExecutiveSupervisor
-  name: rmc-job-name-corp-exec-supervisor
+  id: CMCorporateExecutiveSupervisorLegal
+  name: rmc-job-name-corp-exec-supervisor-legal
   description: rmc-ghost-role-information-corp-exec-description
-  playTimeTracker: RMCJobCorporateExecutiveSupervisor
+  playTimeTracker: RMCJobCorporateLegalSupervisor
   ranks:
-    RMCRankWeYaExecutiveSupervisor: [ ]
-  startingGear: RMCGearCorporateExecutiveSupervisor
-  icon: "CMJobIconEmpty"
+    RMCRankWeYaLegalSupervisor: [ ]
+  startingGear: RMCGearCorporateExecutiveSupervisorLegal
+  icon: "CMJobIconExecSuper"
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYaExec
@@ -21,10 +21,147 @@
     - type: Skills
       skills:
         RMCSkillVehicles: 1
-    - type: JobPrefix
-      prefix: rmc-job-prefix-corp-exec-supervisor
     - type: RMCTrackable
-  hasIcon: false
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateExecutiveSupervisorLegal
+  name: corporate legal supervisor ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateExecutiveSupervisorLegal
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateExecutiveSupervisorLegal
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-supervisor-legal
+    description: rmc-ghost-role-information-corp-legal-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateExecutiveSupervisorLegal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCorporateExecutiveSupervisorLegal
+  equipment:
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlack
+    outerClothing: RMCJacketCorporateBlack
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSupervisor
+    pocket2: CMClipboard # TODO RMC14 notepad
+  inhand:
+  - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
+
+- type: playTimeTracker
+  id: RMCJobCorporateLegalSupervisor
+
+# Executive Specialist (Legal)
+- type: job
+  parent: CMJobBase
+  id: CMCorporateExecutiveSpecialistLegal
+  name: rmc-job-name-corp-exec-specialist-legal
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateExecutiveSpecialist
+  ranks:
+    RMCRankWeYaLegalSpecialist: [ ]
+  startingGear: RMCGearCorporateExecutiveSpecialistLegal
+  icon: "CMJobIconExecSpec"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 1
+    - type: RMCTrackable
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateExecutiveSpecialistLegal
+  name: corporate legal specialist ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateExecutiveSpecialistLegal
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateExecutiveSpecialistLegal
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-supervisor-legal
+    description: rmc-ghost-role-information-corp-legal-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateExecutiveSpecialistLegal
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCorporateExecutiveSpecialistLegal
+  equipment:
+    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
+    back: CMSatchel
+    jumpsuit: CMJumpsuitLiaisonBlue
+    outerClothing: RMCJacketCorporateBlue
+    shoes: RMCShoesLaceup
+    id: RMCIDCardExecutiveCorporateSpecialist
+    pocket2: CMClipboard # TODO RMC14 notepad
+  inhand:
+  - CMPaper
+
+- type: playTimeTracker
+  id: RMCJobCorporateExecutiveSpecialist
+
+# Executive Supervisor
+- type: job
+  parent: CMJobBase
+  id: CMCorporateExecutiveSupervisor
+  name: rmc-job-name-corp-exec-supervisor
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateExecutiveSupervisor
+  ranks:
+    RMCRankWeYaExecutiveSupervisor: [ ]
+  startingGear: RMCGearCorporateExecutiveSupervisor
+  icon: "CMJobIconExecSuper"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillVehicles: 1
+    - type: RMCTrackable
+  hasIcon: true
   hidden: true
 
 - type: entity
@@ -55,30 +192,26 @@
 - type: startingGear
   id: RMCGearCorporateExecutiveSupervisor
   equipment:
-    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
-    back: CMSatchel
-    jumpsuit: CMJumpsuitLiaisonBlack
-    outerClothing: RMCJacketCorporateBlack
+    jumpsuit: CMJumpsuitLiaisonIvy
     shoes: RMCShoesLaceup
-    id: RMCIDCardExecutiveCorporateSupervisor
-    pocket2: CMClipboard # TODO RMC14 notepad
-  inhand:
-  - RMCBriefcasePaperPen # TODO RMC14 secure briefcase
+    back: CMSatchel
+    id: CMIDCardPMCExecutive
+    ears: RMCHeadsetDistressWeYa
 
 - type: playTimeTracker
   id: RMCJobCorporateExecutiveSupervisor
 
-# Executive Specialist
+# Assistant Manager
 - type: job
   parent: CMJobBase
-  id: CMCorporateExecutiveSpecialist
-  name: rmc-job-name-corp-exec-specialist
+  id: CMCorporateAssistantManager
+  name: rmc-job-name-corp-exec-ass-man
   description: rmc-ghost-role-information-corp-exec-description
-  playTimeTracker: RMCJobCorporateExecutiveSpecialist
+  playTimeTracker: RMCJobCorporateAssistantManager
   ranks:
-    RMCRankWeYaExecutiveSpecialist: [ ]
-  startingGear: RMCGearCorporateExecutiveSpecialist
-  icon: "CMJobIconEmpty"
+    RMCRankWeYaAssistantManager: [ ]
+  startingGear: RMCGearCorporateAssistantManager
+  icon: "CMJobIconExecAssMan"
   joinNotifyCrew: false
   accessGroups:
   - RMCWeYaExec
@@ -90,53 +223,326 @@
       - WeYa
     - type: Skills
       skills:
-        RMCSkillConstruction: 1
         RMCSkillEndurance: 2
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+        RMCSkillIntel: 2
         RMCSkillFirearms: 1
-        RMCSkillFireman: 1
-    - type: JobPrefix
-      prefix: rmc-job-prefix-corp-exec-specialist
     - type: RMCTrackable
-  hasIcon: false
+  hasIcon: true
   hidden: true
 
 - type: entity
-  id: RMCRandomHumanoidCorporateExecutiveSpecialist
-  name: corporate executive specialist ghost role
+  id: RMCRandomHumanoidCorporateAssistantManager
+  name: corporate assistant manager ghost role
   suffix: Spawner, Player, Neutral
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
     state: icon
   - type: RandomHumanoidSpawner
-    settings: RMCCorporateExecutiveSpecialist
+    settings: RMCCorporateAssistantManager
 
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
-  id: RMCCorporateExecutiveSpecialist
+  id: RMCCorporateAssistantManager
   components:
   - type: GhostRole
-    name: rmc-ghost-name-corp-exec-specialist
+    name: rmc-ghost-name-corp-exec-ass-man
     description: rmc-ghost-role-information-corp-exec-description
     rules: rmc-ghost-role-information-corp-exec-rules
     reregister: false
-    job: CMCorporateExecutiveSpecialist
+    job: CMCorporateAssistantManager
     raffle:
       settings: short
   - type: GhostRoleApplySpecial
 
 - type: startingGear
-  id: RMCGearCorporateExecutiveSpecialist
+  id: RMCGearCorporateAssistantManager
   equipment:
-    ears: RMCHeadsetDistressWeYa # TODO RMC14 tape recorder
-    back: CMSatchel
-    jumpsuit: CMJumpsuitLiaisonBlue
-    outerClothing: RMCJacketCorporateBlue
+    jumpsuit: RMCJumpsuitLiaisonManager
     shoes: RMCShoesLaceup
-    id: RMCIDCardExecutiveCorporateSpecialist
-    pocket2: CMClipboard # TODO RMC14 notepad
-  inhand:
-  - CMPaper
+    back: CMSatchel
+    belt: RMCBeltHolsterPistolWeYaMK80Fill
+    outerClothing: RMCJacketCorporateManager
+    id: CMIDCardPMCExecutive
+    ears: RMCHeadsetDistressPMCDirector
+    head: RMCHeadCapManager
 
 - type: playTimeTracker
-  id: RMCJobCorporateExecutiveSpecialist
+  id: RMCJobCorporateAssistantManager
+
+# Manager
+- type: job
+  parent: CMJobBase
+  id: CMCorporateDivisionManager
+  name: rmc-job-name-corp-exec-div-man
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateDivisionManager
+  ranks:
+    RMCRankWeYaDivisionManager: [ ]
+  startingGear: RMCGearCorporateAssistantManager
+  icon: "CMJobIconExecDivMan"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+        RMCSkillIntel: 2
+        RMCSkillFirearms: 1
+    - type: RMCTrackable
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateDivisionManager
+  name: corporate division manager ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateDivisionManager
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateDivisionManager
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-div-man
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateDivisionManager
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobCorporateDivisionManager
+
+# Chief Executive
+- type: job
+  parent: CMJobBase
+  id: CMCorporateChiefExecutive
+  name: rmc-job-name-corp-exec-chief
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateChiefExecutive
+  ranks:
+    RMCRankWeYaChiefExecutive: [ ]
+  startingGear: RMCGearCorporateAssistantManager
+  icon: "CMJobIconExecChief"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+        RMCSkillIntel: 2
+        RMCSkillFirearms: 1
+    - type: RMCTrackable
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateChiefExecutive
+  name: corporate chief executive ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateChiefExecutive
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateChiefExecutive
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-exec-chief
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateChiefExecutive
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: playTimeTracker
+  id: RMCJobCorporateChiefExecutive
+
+# Deputy Director
+- type: job
+  parent: CMJobBase
+  id: CMCorporateDeputyDirector
+  name: rmc-job-name-corp-dep-director
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateDeputyDirector
+  ranks:
+    RMCRankWeYaDeputyDirector: [ ]
+  startingGear: RMCGearCorporateDeputyDirector
+  icon: "CMJobIconDepDirector"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+        RMCSkillExecution: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 1
+        RMCSkillIntel: 2
+        RMCSkillFirearms: 1
+    - type: RMCTrackable
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateDeputyDirector
+  name: corporate deputy director ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateDeputyDirector
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateDeputyDirector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-dep-director
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateDeputyDirector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearCorporateDeputyDirector
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCDirector
+    shoes: RMCShoesLaceup
+    back: CMSatchel
+    belt: GoldHandcannonBeltFilled
+    outerClothing: RMCArmorPMCDirector
+    id: CMIDCardPMCExecutive
+    ears: RMCHeadsetDistressPMCDirector
+    head: ArmorHelmetPMCDirector
+
+- type: playTimeTracker
+  id: RMCJobCorporateDeputyDirector
+
+# Director
+- type: job
+  parent: CMJobBase
+  id: CMCorporateDirector
+  name: rmc-job-name-corp-director
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateDirector
+  ranks:
+    RMCRankWeYaDirector: [ ]
+  startingGear: RMCGearCorporateDirector
+  icon: "CMJobIconDirector"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+        RMCSkillExecution: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 1
+        RMCSkillIntel: 2
+        RMCSkillFirearms: 1
+    - type: RMCTrackable
+  hasIcon: true
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidCorporateDirector
+  name: corporate director ghost role
+  suffix: Spawner, Player, Neutral
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/bureau_cap.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCCorporateDirector
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorporateDirector
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-director
+    description: rmc-ghost-role-information-corp-exec-description
+    rules: rmc-ghost-role-information-corp-exec-rules
+    reregister: false
+    job: CMCorporateDirector
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  parent: RMCGearCorporateDeputyDirector
+  id: RMCGearCorporateDirector
+  equipment:
+    belt: RMCMatebaBeltLuxuriousFilledWEYA
+
+- type: playTimeTracker
+  id: RMCJobCorporateDirector

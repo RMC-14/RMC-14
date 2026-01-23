@@ -364,7 +364,7 @@ public abstract partial class SharedXenoArtifactSystem
     /// </remarks>
     public HashSet<Entity<XenoArtifactNodeComponent>> GetDirectPredecessorNodes(Entity<XenoArtifactComponent?> ent, EntityUid node)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (!Resolve(ent, ref ent.Comp, false))
             return new();
 
         if (!TryGetIndex(ent, node, out var index))

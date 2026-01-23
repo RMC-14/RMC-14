@@ -1,5 +1,8 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Xenonids.Leap;
+using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids.Rest;
 using Content.Shared.Actions;
 using Content.Shared.Camera;
 using Content.Shared.DoAfter;
@@ -13,7 +16,7 @@ public sealed class XenoZoomSystem : EntitySystem
     [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     public override void Initialize()
     {
@@ -21,6 +24,8 @@ public sealed class XenoZoomSystem : EntitySystem
         SubscribeLocalEvent<XenoZoomComponent, XenoZoomDoAfterEvent>(OnXenoZoomDoAfter);
         SubscribeLocalEvent<XenoZoomComponent, GetEyeOffsetEvent>(OnXenoZoomGetEyeOffset);
         SubscribeLocalEvent<XenoZoomComponent, RefreshMovementSpeedModifiersEvent>(OnXenoZoomRefreshSpeed);
+        SubscribeLocalEvent<XenoZoomComponent, XenoLeapAttemptEvent>(OnLeapAttempt);
+        SubscribeLocalEvent<XenoZoomComponent, XenoRestEvent>(OnRest);
     }
 
     private void OnXenoZoomAction(Entity<XenoZoomComponent> xeno, ref XenoZoomActionEvent args)
@@ -74,5 +79,31 @@ public sealed class XenoZoomSystem : EntitySystem
     {
         if (ent.Comp.Enabled)
             args.ModifySpeed(ent.Comp.Speed, ent.Comp.Speed);
+    }
+
+    private void OnLeapAttempt(Entity<XenoZoomComponent> ent, ref XenoLeapAttemptEvent args)
+    {
+        if (ent.Comp.Enabled && ent.Comp.BlockLeaps)
+            args.Cancelled = true;
+    }
+
+    private void OnRest(Entity<XenoZoomComponent> ent, ref XenoRestEvent args)
+    {
+        if (!ent.Comp.Enabled)
+            return;
+
+        ent.Comp.Enabled = false;
+        _contentEye.ResetZoom(ent);
+        ent.Comp.Offset = Vector2.Zero;
+        Dirty(ent);
+        _movementSpeed.RefreshMovementSpeedModifiers(ent);
+
+        if (TryComp(ent, out EyeComponent? eye))
+            _contentEye.UpdateEyeOffset((ent.Owner, eye));
+
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(ent))
+        {
+            _actions.SetToggled((action, action), ent.Comp.Enabled);
+        }
     }
 }

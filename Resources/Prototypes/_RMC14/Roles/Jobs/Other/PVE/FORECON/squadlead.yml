@@ -38,6 +38,14 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-squad-lead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: leader
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -48,15 +56,14 @@
     - type: PyroWhitelist
   hidden: true
 
-
 - type: entity
+  parent: CMSpawnPointJobBase
   id: RMCSpawnPointFORECONPVESquadLead
   name: forecon squad lead spawn point
   suffix: PVE
   components:
   - type: Sprite
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: marine_spawn
+    state: so_spawn
   - type: SpawnPoint
     job_id: RMCFORECONPVESquadLead
 

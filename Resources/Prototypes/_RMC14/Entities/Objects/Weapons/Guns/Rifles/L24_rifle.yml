@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleL24
   name: L24 rifle
-  description: A rare sight, this rifle is seen most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M41A MK2, it has noticeably improved handling and vastly improved performance. This one is painted in The Royal Marines Commando purple-blue camouflage.
+  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in the purple-blue camouflage of the RCM.
   suffix: Filled
   components:
   - type: Sprite
@@ -82,6 +82,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
         random:
@@ -186,7 +187,7 @@
 - type: entity
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24HEAP
-  description: "A magazine of armor-piercing 8.88x51mm rounds for use in the L24 rifle."
+  description: "A magazine of high-explosive armor-piercing 8.88x51mm rounds for use in the L24 rifle."
   name: L24 HEAP Magazine (8.88x51mm)
   suffix: HEAP
   components:
@@ -242,7 +243,7 @@
 - type: entity
   parent: RMCMagazineRifleL24
   id: RMCMagazineRifleL24Extended
-  description: "A Extended magazine 8.88x51mm rounds for use in the L24 rifle."
+  description: "An extended magazine of 8.88x51mm rounds for use in the L24 rifle."
   name: L24 Extended Magazine (8.88x51mm)
   suffix: Extended
   components:

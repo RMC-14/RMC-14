@@ -44,8 +44,19 @@
   job: CMSquadLeader
 
 - type: trackerMode
+  id: SectionSergeant
+  job: CMPVESectionSergeant
+  alert: SquadTrackerSunRiders
+
+- type: trackerMode
   id: FireteamLeader
   job: CMFireteamLeader
+  alert: SquadTrackerTeamLeader
+
+- type: trackerMode
+  id: PVESquadLeader
+  job: CMPVESquadLeader
+  alert: SquadTrackerSunRiders
 
 - type: trackerMode
   id: Rifleman
@@ -58,7 +69,17 @@
 - type: trackerMode
   id: LeaderPmc
   job: RMCPMCLeader
-  alert: SquadTrackerPMCTeamLeader
+  alert: SquadTrackerTeamLeader
+
+- type: trackerMode
+  id: LeaderPmcPVE
+  job: CMPMCForceLeadPVE
+  alert: SquadTrackerPMCForceLeader
+
+- type: trackerMode
+  id: TeamLeaderPmcPVE
+  job: CMPMCTeamLeadPVE
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: CorporateLiaison
@@ -79,11 +100,11 @@
 
 - type: trackerMode
   id: SupervisorWeYaExecutive
-  job: CMCorporateExecutiveSupervisor
+  job: CMCorporateExecutiveSupervisorLegal
 
 - type: trackerMode
   id: SupervisorWeYaSpecialist
-  job: CMCorporateExecutiveSpecialist
+  job: CMCorporateExecutiveSpecialistLegal
 
 - type: trackerMode
   id: ProvostMarshal

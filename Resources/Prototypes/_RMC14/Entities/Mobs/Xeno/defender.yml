@@ -73,7 +73,6 @@
         params:
           variation: 0.15
     hitAnimationId: RMCEffectSlam
-
   - type: Tackle
     max: 4
   - type: Fixtures
@@ -134,6 +133,8 @@
   - type: XenoEvolution
     strains:
     - CMXenoDefenderSteelcrest
+  - type: RMCActionOrder
+    id: CMXenoDefender
 
 - type: entity
   parent: CMXenoDefenderBase
@@ -180,3 +181,5 @@
         Blunt: 37.5
   - type: XenoSoak
   - type: XenoHidden
+  - type: RMCActionOrder
+    id: CMXenoDefenderSteelcrest

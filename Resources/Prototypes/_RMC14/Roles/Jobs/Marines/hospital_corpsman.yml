@@ -47,6 +47,8 @@
     - type: CMVendorUser
       id: CMHospitalCorpsman
       points: 45
+      extraPoints:
+        Chemicals: 120
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: cm-job-prefix-hospital-corpsman
@@ -54,6 +56,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: medic
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearHospitalCorpsman
@@ -146,3 +149,14 @@
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleHM
+  name: Hospital Corpsman
+  description: Hospital Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: hospital_corpsman

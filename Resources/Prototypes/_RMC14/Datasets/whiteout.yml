@@ -1,0 +1,11 @@
+﻿- type: localizedDataset
+  id: RMCNamesGreek
+  values:
+    prefix: rmc-name-greek-
+    count: 24
+
+- type: localizedDataset
+  id: RMCNamesNumbers
+  values:
+    prefix: rmc-name-number-
+    count: 24

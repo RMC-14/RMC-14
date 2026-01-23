@@ -65,6 +65,11 @@
   name: UN-577 spaceborne gauss turret
   description: A fully-automated defence turret with mid-range targeting capabilities. Armed with a modified M32-S Autocannon and an internal belt feed.
   components:
+  - type: Gun
+    fireRate: 15
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
   - type: InteractionPopup
     interactDelay: 0.2
     successChance: 0.8

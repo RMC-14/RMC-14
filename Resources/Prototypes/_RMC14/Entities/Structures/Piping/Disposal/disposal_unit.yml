@@ -42,6 +42,9 @@
           collection: MetalBreak
           params:
             volume: -6
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: ApcPowerReceiver
     powerLoad: 0
     needsPower: false

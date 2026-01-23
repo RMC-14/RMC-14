@@ -83,6 +83,61 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
+    - name: Magazine Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxShellsFlechette
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsBuckshot
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxMagazineRifleM4SPR
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineSMGM63
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRifleM54C
+        box: CMMagazineRifleM54C
+      - id: RMCBoxMagazinePistolM77AP
+        box: CMMagazinePistolM77AP
+      - id: RMCBoxMagazineRevolverM44
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazinePistolM1984
+        box: CMMagazinePistolM1984
+      - id: RMCBoxMagazinePistolM13
+        box: RMCMagazinePistolM13
+    - name: Ammunition Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+    - name: Other Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxPackFlare
+        box: CMPackFlare
 
 - type: entity
   parent: ColMarTechBase
@@ -140,8 +195,12 @@
         amount: 1
       - id: CMWebbingHolster
         amount: 1
+      - id: RMCWebbingHolsterBlack
+        amount: 1
     - name: Armor
       entries:
+      - id: RMCArmorVestSquad
+        amount: 15
       - id: RMCArmorM3MediumCarrier
         amount: 15
       - id: RMCArmorM3MediumPadded
@@ -250,8 +309,8 @@
         amount: 2
       - id: RMCPouchTools
         amount: 1
-#      - id: Sling Pouch
-#        amount: 1
+      - id: RMCPouchSling
+        amount: 1
     - name: Mask
       entries:
       - id: CMMaskGas
@@ -339,6 +398,10 @@
       entries:
       - id: CMMagazineRifleM4SPRAP
         amount: 4
+      - id: RMCMagazinePistolM13AP
+        amount: 4
+      - id: RMCMagazinePistolM13ExtAP
+        amount: 2
       - id: CMMagazineSMGM63AP
         amount: 3
       - id: CMMagazineRifleM54CAP
@@ -352,9 +415,7 @@
       - id: CMMagazineRifleM54CExt
         amount: 2
       - id: RMCMagazinePistolM13Ext
-        amount: 2
-      - id: RMCMagazinePistolM13Drum
-        amount: 2
+        amount: 4
     - name: Special Ammunition
       entries:
       - id: RMCMagazineSmartGun
@@ -467,7 +528,7 @@
 - type: entity
   parent: ColMarTechBase
   id: CMVendorAttachments
-  name: Aegis Armaments squad attachments vendor
+  name: AEGIS Armaments squad attachments vendor
   description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.
   components:
   - type: AccessReader
@@ -486,9 +547,15 @@
       entries:
       - id: RMCAttachmentExtendedBarrel
         amount: 3
+      - id: RMCAttachmentExtendedCompensator
+        amount: 3
       - id: RMCAttachmentRecoilCompensator
         amount: 3
+      - id: RMCAttachmentRecoilCompensatorM13
+        amount: 3
       - id: RMCAttachmentSuppressor
+        amount: 3
+      - id: RMCAttachmentSuppressorCompact
         amount: 3
       - id: RMCAttachmentShotgunChoke
         amount: 2
@@ -501,6 +568,8 @@
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
       - id: RMCAttachmentS5RedDotSight
+        amount: 3
+      - id: RMCAttachmentS5MicroRedDotSight
         amount: 3
       - id: RMCAttachmentS6ReflexSight
         amount: 3
@@ -518,6 +587,8 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
+      - id: RMCAttachmentMicroLaserSight
+        amount: 2
       - id: RMCAttachmentMiniFlamethrower
         amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
@@ -530,11 +601,15 @@
         amount: 3
     - name: Stock
       entries:
+      - id: RMCAttachmentM13StockSolid
+        amount: 2
+      - id: RMCAttachmentM13StockCollapsible
+        amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
-      - id: RMCAttachmentM63ArmBrace
-        amount: 2
       - id: RMCAttachmentM63Stock
+        amount: 2
+      - id: RMCAttachmentM63ArmBrace
         amount: 2
       - id: RMCAttachmentM54CStockSolid
         amount: 2

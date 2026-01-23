@@ -9,11 +9,13 @@
   startingGear: RMCGearCLFMedic
   icon: RMCJobIconCLFMedic
   joinNotifyCrew: false
+  spawnMenuRoleName: CLF Medic
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillMedical: 2
         RMCSkillSurgery: 2
@@ -56,10 +58,11 @@
 - type: startingGear
   id: RMCGearCLFMedic
   equipment:
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
-    jumpsuit: RMCJumpsuitCLFWebbing
+    head: CMHeadBandRed
+    jumpsuit: RMCJumpsuitCLFWebbingSurgical
     outerClothing: RMCCoatMilitiaVest
     gloves: CMHandsBlackMarine
     shoes: RMCShoesBrown
@@ -75,15 +78,21 @@
     - RMCGrenadeIED
     - CMAdvFirstAidKitFilled
     - CMAdvFirstAidKitFilled
-    - CMPortableSurgicalBedSpawnFolded
-    - RMCCigarettePackLuckySloths
-    - CMMRE
+    - RMCPacketGrenadeSmokeFilled
+    - RMCMRECLF
     - CMSynthGraft
     - CMCrowbar
     pocket2:
     - RMCMagazineSMGMAC15
     - RMCMagazineSMGMAC15
     - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+    - RMCMagazineSMGMAC15
+    belt:
+    - CMDefibrillator
+    - CMHealthAnalyzer
+    - CMRollerBedSpawnFolded
+    outerClothing:
     - RMCMagazineSMGMAC15
     - RMCMagazineSMGMAC15
 

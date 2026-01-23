@@ -141,12 +141,13 @@
   - SmockRMC
   - SmockCamoRMC
   - NeckerchiefSquadRMC
-  - NeckerchiefTanRMC
+  - NeckerchiefRedRMC
   - NeckerchiefBlackRMC
-  - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-
+  
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
@@ -214,6 +215,7 @@
   maxLimit: 10
   loadouts:
   - FakeNVGRMC
+  - FakeNVGPVERMC
   - NettingRMC
   - NettingUrbanRMC
   - NettingDesertRMC
@@ -251,7 +253,8 @@
   name: rmc-loadout-group-helmet-garbs
   minLimit: 0
   maxLimit: 2
-  loadouts: # no CAG night vision sorry LARPers
+  loadouts:
+  - FakeNVGPVERMC
   - BuckshotSpentRMC
   - FlechetteSpentRMC
   - SlugSpentRMC
@@ -285,6 +288,25 @@
   loadouts:
   - UNMCSquadPatchRMC
   - SquadArmbandRMC
+  - PatchPeaceRMC
+
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMCPVE
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintUNRMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
 
 # Paperwork
 - type: loadoutGroup
@@ -341,6 +363,19 @@
   - D20DiceRMC
   - D6DiceRMC
 
+# Melee Weapons
+- type: loadoutGroup
+  id: MeleeWeaponsRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
 
 # Weapons
 - type: loadoutGroup
@@ -416,6 +451,8 @@
   - ExecutiveSelectPackRMC
   - TarbackTubeRMC
   - TarbacksCaseRMC
+  - ShioRoyalsTubeRMC
+  - ShioRoyalsCaseRMC
   - PremiumCigarRMC
   - ZippoRMC
   - ZippoExecRMC
@@ -518,14 +555,25 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+- type: loadoutGroup
+  id: CommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  loadouts:
+  - MatebaRMC
+  - HandcannonRMC
+  - GoldMatebaRMC
+  - GoldHandcannonRMC
+
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC
   name: rmc-loadout-group-role-specific
   minLimit: 0
-  maxLimit: 1
+  maxLimit: 3
   loadouts:
-  - DrinkCanAleRMC
+  - RMCWeYaClipboard
+  - RMCWeYaThermos
+  - RMCJacketWindbreakerWEYA
 
 # Chief MP
 - type: loadoutGroup
@@ -709,6 +757,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+  - NeckerchiefRedRMC
 
 # Civilian
 - type: loadoutGroup
@@ -723,6 +772,7 @@
   - PatchWeYaRMCFury161
   - PatchTSERMC
   - PatchCECRMC
+  - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
   - HeadCowboyHatLightRMC
@@ -747,3 +797,13 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+
+# Provost Inspector
+- type: loadoutGroup
+  id: ProvostRoleSpecificOuterwearRMC
+  name: rmc-loadout-group-provost-role-specific-outerwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ProvostJacketFilledRMC
+  - ProvostCoatFilledRMC

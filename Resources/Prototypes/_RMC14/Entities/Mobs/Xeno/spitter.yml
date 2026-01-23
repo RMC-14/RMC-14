@@ -116,3 +116,5 @@
     item: RMCOrganXenoHeartT2
   - type: VentCrawler
     ventCrawlIcon: spitter
+  - type: RMCActionOrder
+    id: CMXenoSpitter

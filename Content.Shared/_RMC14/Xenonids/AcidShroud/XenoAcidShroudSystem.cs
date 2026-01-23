@@ -10,7 +10,7 @@ namespace Content.Shared._RMC14.Xenonids.AcidShroud;
 public sealed class XenoAcidShroudSystem : EntitySystem
 {
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     public override void Initialize()

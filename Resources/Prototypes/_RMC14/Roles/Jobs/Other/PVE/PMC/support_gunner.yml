@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: CMPMCGunnerPVE
   name: rmc-job-name-pmc-gunner
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-gunner
   playTimeTracker: CMJobPMCGunnerPVE
   ranks:
     RMCRankWeYaSupportSpecialist: []
@@ -33,14 +33,24 @@
         RMCSkillJtac: 1
         RMCSkillPilot: 1
         RMCSkillPowerLoader: 1
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-gunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

@@ -29,6 +29,7 @@
     - map: [ "gloves" ]
     - map: [ "enum.SquadArmorLayers.Gloves" ]
     - map: [ "shoes" ]
+    - map: [ "id" ] # RMC14 re-arrange id slot
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "outerClothing" ]
@@ -37,14 +38,13 @@
     - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
     - map: [ "back" ]
-    - map: [ "id" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
-    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "enum.SquadArmorLayers.Helmet" ]
     - map: [ "enum.VisorVisualLayers.Base" ]
@@ -345,20 +345,20 @@
       visible: false
     - map: [ "gloves" ]
     - map: [ "shoes" ]
+    - map: [ "id" ] # RMC14 re-arrange id slot
     - map: [ "ears" ]
     - map: [ "eyes" ]
     - map: [ "belt" ]
-    - map: [ "id" ]
     - map: [ "outerClothing" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "enum.HumanoidVisualLayers.Hair" ]
     - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
     - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
     - map: [ "enum.HumanoidVisualLayers.Tail" ]
     - map: [ "mask" ]
-    - map: [ "neck" ] # RMC14 re-arrange neck slot
     - map: [ "head" ]
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
