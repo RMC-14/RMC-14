@@ -109,7 +109,7 @@ public sealed class CommendationsManager : IPostInjectInit
         window.OnClose += onClose;
         window.OpenCentered();
 
-        var spriteSystem = IoCManager.Resolve<IEntitySystemManager>().GetEntitySystem<SpriteSystem>();
+        var spriteSystem = IoCManager.Resolve<IEntityManager>().System<SpriteSystem>();
 
         foreach (var commendation in commendations)
         {
