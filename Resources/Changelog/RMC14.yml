@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed the scout spec's custom battle rifle having burst.
-    type: Fix
-  id: 2317
-  time: '2025-09-06T09:16:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6856
 - author: Dutch-VanDerLinde
   changes:
   - message: Added meson functionality to the weapon specialist NVGs. Meson goggles
@@ -4713,5 +4706,16 @@
   id: 2819
   time: '2026-01-23T08:46:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9005
+- author: SharkSnake98
+  changes:
+  - message: Added the Cold Drinks vendor
+    type: Add
+  - message: Added WEYA Sequoia Beer to the Booze-O-Mat
+    type: Add
+  - message: Edited the sprite of the WEYA Cap
+    type: Tweak
+  id: 2820
+  time: '2026-01-23T09:51:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8817
 Name: RMC14
 Order: -1
