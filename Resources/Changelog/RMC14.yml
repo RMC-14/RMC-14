@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: Binbagg
-  changes:
-  - message: Xenonid tunnels are now more visible
-    type: Tweak
-  id: 2310
-  time: '2025-09-06T08:33:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7741
-- author: blueDev2
-  changes:
-  - message: Fixed leaping parasites colliding with the resin door they start under.
-    type: Fix
-  - message: Fixed parasites not becoming visible over doors during leap doafters.
-      This makes them able to be hit by bullets and melee attacks.
-    type: Fix
-  id: 2311
-  time: '2025-09-06T08:33:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7664
 - author: Vermidia
   changes:
   - message: Fixed attack rate and damage while devoured to be more accurate.
@@ -4744,5 +4727,19 @@
   id: 2812
   time: '2026-01-23T04:01:45.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8215
+- author: RosySaturniidae
+  changes:
+  - message: new slime noises!
+    type: Add
+  id: 2813
+  time: '2026-01-23T04:03:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9047
+- author: shibechef
+  changes:
+  - message: Xenonid leaps are no longer stopped by boiler fog
+    type: Fix
+  id: 2814
+  time: '2026-01-23T04:03:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9048
 Name: RMC14
 Order: -1
