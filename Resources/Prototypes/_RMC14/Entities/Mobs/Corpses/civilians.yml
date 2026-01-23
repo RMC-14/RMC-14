@@ -261,6 +261,33 @@
     - RMCM5Bayonet
     - RMCRadioHandheldColonyOff
 
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNPeacekeeper
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNPeacekeeper ]
+  - type: Rank
+    rank: RMCRankCivilianOfficer
+
+- type: startingGear
+  id: RMCGearCorpseUNPeacekeeper
+  equipment:
+    head: ArmorHelmetPMCRiotShield
+    jumpsuit: RMCJumpsuitUNSecurity
+    outerClothing: RMCArmorPMCRiot
+    back: CMSatchelSecurity
+    shoes: RMCShoesJackboots
+    eyes: CMGlassesSecurity
+    gloves: CMHandsBlackMarine
+    id: CMIDCardColonistSecurity
+    ears: CMHeadsetColony
+    belt: CMBeltSecurityMPFilled
+  storage:
+    back:
+    - RMCM5Bayonet
+    - RMCRadioHandheldColonyOff
+
 # Corporate Liaison
 - type: randomHumanoidSettings
   parent: RMCCorpseWeYa
@@ -385,6 +412,65 @@
   id: RMCCorpseColonistKutjevoBurst
   components:
   - type: VictimBurst
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseColonistBeachBum
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseColonistBeachBum ]
+
+- type: startingGear
+  id: RMCGearCorpseColonistBeachBum
+  equipment:
+    jumpsuit: RMCJumpsuitRedShorts
+    back: CMSatchel
+    head: RMCBoonie
+    mask: RMCCigarette
+    shoes: RMCShoesSandals
+    gloves: CMHandsBrown
+    id: CMIDCardColonist
+    ears: CMHeadsetColony
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseVaraderoTechnician
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseVaraderoTechnician ]
+
+- type: startingGear
+  id: RMCGearCorpseVaraderoTechnician
+  equipment:
+    head: RMCHardhatBlue
+    jumpsuit: RMCJumpsuitCivilian
+    outerClothing: RMCHazardVestBlue
+    back: CMSatchelEngineer
+    shoes: CMBootsBlackFilled
+    eyes: RMCWeldingGoggles
+    gloves: CMHandsInsulated
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    belt: CMBeltUtilityFilled
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseCargoTechnician
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseCargoTechnician ]
+
+- type: startingGear
+  id: RMCGearCorpseCargoTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitCivilianBrown
+    back: CMSatchelMarineTechSurvivorFill
+    head: RMCHeadBeanieTan
+    shoes: RMCShoesJackboots
+    gloves: CMHandsBrown
+    id: CMIDCardColonistEngineer
+    ears: CMHeadsetColony
+    pocket2: RMCPouchToolsFill
 
 # Guidebook Colonist
 - type: entity
