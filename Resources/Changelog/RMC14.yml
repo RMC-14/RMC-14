@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: Dygon
-  changes:
-  - message: The Dropship Part Fabricator can now print the AN/AAQ-178 Weapon Targeting
-      System, which can be installed in the dropship's electronic system slot. It
-      boosts weapon accuracy and reduces projectile travel time.
-    type: Add
-  - message: The Dropship Part Fabricator can now print the AN/AVD-60 LZ Detector.
-      Installing this device in the dropship enables pilots to watch the area around
-      the landing zones through the Dropship Camera Control Console.
-    type: Add
-  - message: The Dropship Part Fabricator can now print the AN/LEN-15 Spotlight, installing
-      this provides light around the dropship's cockpit.
-    type: Add
-  id: 2314
-  time: '2025-09-06T08:51:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7328
 - author: RavenCaat
   changes:
   - message: Added The Weapons L24 and the L24B for the Royal Marines and there respective
@@ -4724,5 +4708,12 @@
   id: 2816
   time: '2026-01-23T05:35:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9052
+- author: CatAndHats
+  changes:
+  - message: Generator locations now have an icon on the tactical map
+    type: Add
+  id: 2817
+  time: '2026-01-23T07:02:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8992
 Name: RMC14
 Order: -1
