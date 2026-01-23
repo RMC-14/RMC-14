@@ -87,11 +87,10 @@
         conditions:
         - !type:ReagentThreshold #TODO 2 brain damage/s at 50 OD
           min: 50
-        # TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
         key: Unconscious
         component: RMCUnconscious
         type: Add
-        time: 10
+        time: 40
         refresh: true
 
 - type: reagent
