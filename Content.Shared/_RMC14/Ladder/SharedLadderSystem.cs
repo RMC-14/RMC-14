@@ -131,7 +131,8 @@ public abstract class SharedLadderSystem : EntitySystem
         if (ent.Comp.LastDoAfterEnt is { } lastEnt &&
             ent.Comp.LastDoAfterId is { } lastId &&
             time - ent.Comp.LastDoAfterTime < ent.Comp.Delay * 5 &&
-            _doAfter.GetStatus(new DoAfterId(lastEnt, lastId)) == DoAfterStatus.Running)
+            _doAfter.GetStatus(new DoAfterId(lastEnt, lastId)) == DoAfterStatus.Running &&
+            !HasComp<GhostComponent>(user))
         {
             if (ent.Comp.LastDoAfterEnt != user)
             {
@@ -183,6 +184,9 @@ public abstract class SharedLadderSystem : EntitySystem
         {
             args.Cancel();
         }
+
+        if (Transform(user).Anchored)
+            args.Cancel();
     }
 
     private void OnLadderDoAfter(Entity<LadderComponent> ent, ref LadderDoAfterEvent args)

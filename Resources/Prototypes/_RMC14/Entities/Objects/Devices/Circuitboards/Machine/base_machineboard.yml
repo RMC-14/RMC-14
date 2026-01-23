@@ -11,3 +11,9 @@
   - type: Tag
     tags:
     - RMCCircuitboard
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 50
+    chemicalComposition:
+      RMCSilicon: 20

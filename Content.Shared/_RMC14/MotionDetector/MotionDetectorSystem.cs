@@ -7,6 +7,7 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
@@ -14,6 +15,7 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -24,6 +26,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -56,6 +59,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, ExaminedEvent>(OnMotionDetectorExamined);
+        SubscribeLocalEvent<MotionDetectorComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, ToggleableMotionDetectorActionEvent>(OnToggleAction);
@@ -85,6 +89,29 @@ public sealed class MotionDetectorSystem : EntitySystem
             return;
 
         if (!_hands.IsHolding(args.User, ent))
+            return;
+
+        args.Handled = true;
+        Toggle(ent);
+
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
+    }
+
+    private void OnActivateInWorld(Entity<MotionDetectorComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (!ent.Comp.HandToggleable)
+            return;
+
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (!_hands.IsHolding(args.User, ent.Owner) &&
+            HasComp<StorageComponent>(container.Owner) &&
+            !_container.TryGetContainingContainer(container.Owner, out _))
             return;
 
         args.Handled = true;
@@ -129,7 +156,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
     }
-    
+
     private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
     {
         DisableDetectorsOnMob(ent.Target);
