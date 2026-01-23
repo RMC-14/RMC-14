@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Adds the UNMC officer uniform and the Commanding Officer's gray formal
-      uniform. Both can be found in the CO clothing vendor.
-    type: Add
-  id: 2305
-  time: '2025-09-06T08:04:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7803
 - author: crazy1112345
   changes:
   - message: Added lore blurbs on select weaponry, and a small selection of misc items.
@@ -4752,5 +4744,12 @@
   id: 2807
   time: '2026-01-19T03:22:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8557
+- author: SharkSnake98
+  changes:
+  - message: Fixed testfails from TSE Airbase Insert
+    type: Fix
+  id: 2808
+  time: '2026-01-23T03:40:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9007
 Name: RMC14
 Order: -1
