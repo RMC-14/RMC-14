@@ -32,7 +32,7 @@ public sealed partial class Ketogenic : RMCChemicalEffect
         var hungerSystem = entityManager.System<HungerSystem>();
 
         hungerSystem.ModifyHunger(target, PotencyPerSecond * -5);
-        // TODO RMC14: M.overeatduration = 0
+        // TODO RMC14 M.overeatduration = 0
 
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         var alcoholRemoved = bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
