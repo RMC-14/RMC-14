@@ -1,0 +1,45 @@
+- type: entity
+  parent: [ BaseItem, RMCPowerCellSlotUnremovable ]
+  id: RMCPortableDialysis
+  name: portable dialysis machine
+  description: A man-portable dialysis machine, with a small internal battery that can be recharged. Filters out all foreign compounds from the bloodstream of whoever it's attached to, but also typically ends up removing some blood as well.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/portable_dialysis.rsi
+    layers:
+    - state: portadialysis
+    - state: unhooked
+      map: [ "enum.DialysisVisualLayers.Attachment" ]
+    - state: draining
+      map: [ "enum.DialysisVisualLayers.Effect" ]
+      visible: false
+    - state: filtering
+      map: [ "enum.DialysisVisualLayers.Filtering" ]
+      visible: false
+    - state: battery0
+      map: [ "enum.DialysisVisualLayers.Battery" ]
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.DialysisVisuals.BatteryLevel:
+        DialysisVisualLayers.Battery:
+          Empty: { state: battery0 }
+          VeryLow: { state: battery15 }
+          Low: { state: battery30 }
+          Medium: { state: battery45 }
+          High: { state: battery60 }
+          VeryHigh: { state: battery85 }
+          Full: { state: battery100 }
+  - type: Item
+    size: Normal
+  - type: PortableDialysis
+    ripDamage:
+      types:
+        Piercing: 3
+  - type: PowerCellDraw
+    enabled: false
+    drawRate: 10
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
