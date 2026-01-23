@@ -56,6 +56,9 @@
   id: Pouch
 
 - type: Tag
+  id: SurvivalPouch
+
+- type: Tag
   id: LauncherCompatibleGrenade
 
 - type: Tag
@@ -84,6 +87,9 @@
 
 - type: Tag
   id: RMCWeaponRevolverM44
+
+- type: Tag
+  id: RMCSheetMetal
 
 - type: Tag
   id: RMCGlass
