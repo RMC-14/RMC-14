@@ -37,9 +37,10 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 
         var ev = new MegaphoneInputEvent(
             GetNetEntity(args.User),
-            VoiceRange: ent.Comp.VoiceRange,
+            VoiceRangeMultiplier: ent.Comp.VoiceRangeMultiplier,
             HushedEffectDuration: ent.Comp.HushedEffectDuration,
-            HushedEffectRange: ent.Comp.HushedEffectRange);
+            MaxHushedEffectRange: ent.Comp.MaxHushedEffectRange,
+            CurrentHushedEffectRange: ent.Comp.CurrentHushedEffectRange);
         _dialog.OpenInput(args.User, Loc.GetString("rmc-megaphone-ui-text"), ev, largeInput: false, characterLimit: 150);
     }
 
@@ -49,8 +50,8 @@ public sealed class RMCMegaphoneSystem : EntitySystem
             return;
 
         args.PushMarkup(Loc.GetString("rmc-megaphone-examine"));
-        
-        var radius = MathF.Min(ent.Comp.HushedEffectRange, ent.Comp.VoiceRange);
+
+        var radius = MathF.Min(ent.Comp.CurrentHushedEffectRange, ent.Comp.MaxHushedEffectRange);
         if (radius <= 0.1f)
         {
             args.PushMarkup(Loc.GetString("rmc-megaphone-examine-hushed-range-off"));
@@ -71,8 +72,8 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 
         var user = args.User;
 
-        // Add verbs to set hushed effect range in 5-tile steps up to voice range, including 0 (disabled).
-        var maxRange = ent.Comp.VoiceRange;
+        // Add verbs to set hushed effect range in 5-tile steps up to max hushed range, including 0 (disabled).
+        var maxRange = ent.Comp.MaxHushedEffectRange;
         if (maxRange >= Step)
         {
             var options = new List<float>();
@@ -110,7 +111,7 @@ public sealed class RMCMegaphoneSystem : EntitySystem
                                 return;
                             }
 
-                            ent.Comp.HushedEffectRange = value;
+                            ent.Comp.CurrentHushedEffectRange = value;
                             Dirty(ent, ent.Comp);
 
                             if (ent.Comp.ToggleSound != null)
@@ -130,6 +131,7 @@ public sealed class RMCMegaphoneSystem : EntitySystem
 public sealed record MegaphoneInputEvent(
     NetEntity Actor,
     string Message = "",
-    float VoiceRange = 15f,
+    float VoiceRangeMultiplier = 1.5f,
     TimeSpan HushedEffectDuration = default,
-    float HushedEffectRange = 15f) : DialogInputEvent(Message);
+    float MaxHushedEffectRange = 15f,
+    float CurrentHushedEffectRange = 15f) : DialogInputEvent(Message);

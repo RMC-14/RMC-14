@@ -47,8 +47,9 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         var user = GetEntity(ev.Actor);
         EnsureComp<RMCSpeechBubbleSpecificStyleComponent>(user);
         var userComp = EnsureComp<RMCMegaphoneUserComponent>(user);
-        userComp.VoiceRange = ev.VoiceRange;
-        userComp.HushedEffectRange = ev.HushedEffectRange;
+        userComp.VoiceRangeMultiplier = ev.VoiceRangeMultiplier;
+        userComp.MaxHushedEffectRange = ev.MaxHushedEffectRange;
+        userComp.CurrentHushedEffectRange = Math.Min(ev.CurrentHushedEffectRange, ev.MaxHushedEffectRange);
         userComp.HushedEffectDuration = ev.HushedEffectDuration;
         Dirty(user, userComp);
 
@@ -90,8 +91,8 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         if (!TryComp<RMCMegaphoneUserComponent>(ev.Source, out var megaphoneUser))
             return;
 
-        var megaphoneRange = megaphoneUser.VoiceRange;
-        var hushedRange = Math.Min(megaphoneRange, megaphoneUser.HushedEffectRange);
+        var megaphoneRange = ev.VoiceRange * megaphoneUser.VoiceRangeMultiplier;
+        var hushedRange = Math.Min(megaphoneRange, Math.Min(megaphoneUser.CurrentHushedEffectRange, megaphoneUser.MaxHushedEffectRange));
 
         var sourceTransform = Transform(ev.Source);
         var sourcePos = _transform.GetWorldPosition(sourceTransform);
@@ -99,7 +100,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
 
         // Check if we should apply hushed effect (user has leadership skill or is squad leader and hushed range is not zero)
         var hasLeadership = _skills.HasSkill(ev.Source, LeadershipSkill, 1) || HasComp<SquadLeaderComponent>(ev.Source);
-        var shouldApplyHushed = megaphoneUser.HushedEffectRange > 0 &&
+        var shouldApplyHushed = megaphoneUser.CurrentHushedEffectRange > 0 &&
                                  megaphoneUser.HushedEffectDuration > TimeSpan.Zero &&
                                  hasLeadership;
 
