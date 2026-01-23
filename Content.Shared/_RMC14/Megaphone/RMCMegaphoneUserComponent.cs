@@ -62,10 +62,11 @@ public sealed partial class RMCMegaphoneUserComponent : Component
     public float VoiceRange = 15f;
 
     /// <summary>
-    /// Whether the megaphone amplifies voice range. If false, range extension is disabled.
+    /// Radius in tiles within which hushed effect is applied.
+    /// Must not exceed voice range and is configured in 5-tile steps.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Amplifying = true;
+    public float HushedEffectRange = 15f;
 
     /// <summary>
     /// Duration of RMCStatusEffectHushed applied to recipients when user has leadership skill.

@@ -14,11 +14,11 @@ public sealed partial class RMCMegaphoneComponent : Component
     public float VoiceRange = 15f;
 
     /// <summary>
-    /// Whether the hushed effect is applied to recipients. Can be toggled via verb.
-    /// Voice range extension always works regardless of this setting.
+    /// Current radius in tiles within which hushed effect is applied.
+    /// Must not exceed voice range and is configured in 5-tile steps.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Amplifying = true;
+    public float HushedEffectRange = 15f;
 
     /// <summary>
     /// Sound played when toggling amplifying mode.

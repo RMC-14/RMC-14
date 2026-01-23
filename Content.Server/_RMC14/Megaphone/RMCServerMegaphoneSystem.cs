@@ -48,7 +48,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
         EnsureComp<RMCSpeechBubbleSpecificStyleComponent>(user);
         var userComp = EnsureComp<RMCMegaphoneUserComponent>(user);
         userComp.VoiceRange = ev.VoiceRange;
-        userComp.Amplifying = ev.Amplifying;
+        userComp.HushedEffectRange = ev.HushedEffectRange;
         userComp.HushedEffectDuration = ev.HushedEffectDuration;
         Dirty(user, userComp);
 
@@ -91,13 +91,14 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             return;
 
         var megaphoneRange = megaphoneUser.VoiceRange;
+        var hushedRange = Math.Min(megaphoneRange, megaphoneUser.HushedEffectRange);
 
         var sourceTransform = Transform(ev.Source);
         var sourcePos = _transform.GetWorldPosition(sourceTransform);
         var xforms = GetEntityQuery<TransformComponent>();
 
-        // Check if we should apply hushed effect (user has leadership skill and amplifying is enabled)
-        var shouldApplyHushed = megaphoneUser.Amplifying &&
+        // Check if we should apply hushed effect (user has leadership skill and hushed range is not zero)
+        var shouldApplyHushed = megaphoneUser.HushedEffectRange > 0 &&
                                  megaphoneUser.HushedEffectDuration > TimeSpan.Zero &&
                                  _skills.GetSkill(ev.Source, LeadershipSkill) >= 1;
 
@@ -120,16 +121,11 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
             var observer = HasComp<GhostComponent>(playerEntity);
 
             // Add if within megaphone range but outside normal range
-            if (distance < megaphoneRange && distance >= ev.VoiceRange)
-            {
-                if (!ev.Recipients.ContainsKey(player))
-                {
-                    ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
-                }
-            }
+            if (distance < megaphoneRange && distance >= ev.VoiceRange && !ev.Recipients.ContainsKey(player))
+                ev.Recipients.TryAdd(player, new ICChatRecipientData(distance, observer));
 
             // Apply hushed effect only if amplifying is enabled
-            if (shouldApplyHushed && distance < megaphoneRange)
+            if (shouldApplyHushed && distance < hushedRange)
             {
                 if (observer)
                     continue;
@@ -138,11 +134,8 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                 if (!hasSourceFaction || !_gunIFF.IsInFaction(playerEntity, sourceFaction))
                     continue;
 
-                var recipientLeadershipLevel = _skills.GetSkill(playerEntity, LeadershipSkill);
-                if (recipientLeadershipLevel < 1)
-                {
+                if (!_skills.HasSkill(playerEntity, LeadershipSkill, 1))
                     _statusEffects.TryUpdateStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
-                }
             }
         }
     }
