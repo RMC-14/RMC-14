@@ -122,7 +122,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         var weapon = SpawnInContainerOrDrop(ent.Comp.FixedWeaponPrototype, ent, ent.Comp.WeaponSlotId);
         ent.Comp.MountedEntity = weapon;
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.MountedEntity));
 
         if (!TryComp(weapon, out MountableWeaponComponent? mountedWeapon))
             return;
@@ -283,7 +283,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
         _rmcFoldable.TryLockFold(ent, true);
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.MountedEntity));
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.RotateSound, ent, args.User);
@@ -331,7 +331,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         _collisionWake.SetEnabled(ent, true);
         _item.SetSize(ent, ent.Comp.MountSize);
         _rmcFoldable.TryLockFold(ent, false);
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.MountedEntity));
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.DetachSound, ent, args.User);
@@ -763,7 +763,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     {
         TryComp(ent, out FoldableComponent? foldable);
         ent.Comp.Broken = true;
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.Broken));
 
         // The mount can be melted while broken
         if (TryComp(ent, out CorrodibleComponent? corrodible))

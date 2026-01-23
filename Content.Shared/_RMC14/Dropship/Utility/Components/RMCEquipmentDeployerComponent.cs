@@ -1,5 +1,4 @@
 using Content.Shared._RMC14.AlertLevel;
-using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -9,7 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Components;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class RMCEquipmentDeployerComponent : Component
 {
     /// <summary>
@@ -108,10 +107,10 @@ public sealed partial class RMCEquipmentDeployerComponent : Component
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? ElectronicDeployedSprite;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundSpecifier DeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_1.ogg");
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public SoundSpecifier UnDeployAudio = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_2.ogg");
 }
 

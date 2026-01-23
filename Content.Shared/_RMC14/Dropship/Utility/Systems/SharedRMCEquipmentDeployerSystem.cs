@@ -50,7 +50,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
             return;
 
         ent.Comp.DeployEntity = GetNetEntity(SpawnInContainerOrDrop(ent.Comp.DeployPrototype, ent, ent.Comp.DeploySlotId));
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.DeployEntity));
     }
 
     private void OnInteract(Entity<RMCEquipmentDeployerComponent> ent, ref InteractHandEvent args)
@@ -87,7 +87,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         if (HasComp<PowerLoaderComponent>(args.Container.Owner))
         {
             ent.Comp.IsDeployable = false;
-            Dirty(ent);
+            DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.IsDeployable));
             return;
         }
 
@@ -95,7 +95,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
             ent.Comp.AutoUnDeploy = true;
 
         ent.Comp.IsDeployable = true;
-        Dirty(ent);
+        DirtyField(ent.Owner, ent.Comp, nameof(RMCEquipmentDeployerComponent.IsDeployable));
     }
 
     private void OnRemovedFromContainer(Entity<RMCEquipmentDeployerComponent> ent, ref EntGotRemovedFromContainerMessage args)
@@ -109,7 +109,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         ent.Comp.IsDeployed = false;
         ent.Comp.AutoDeploy = false;
         ent.Comp.AutoUnDeploy = false;
-        Dirty(ent);
+        DirtyFields(ent.Owner, ent.Comp, null, nameof(RMCEquipmentDeployerComponent.DeployEntity), nameof(RMCEquipmentDeployerComponent.IsDeployed), nameof(RMCEquipmentDeployerComponent.AutoDeploy), nameof(RMCEquipmentDeployerComponent.AutoUnDeploy));
     }
 
     private void UpdateAppearance(Entity<RMCEquipmentDeployerComponent> ent, bool deployed)
@@ -231,7 +231,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         }
 
         equipmentDeployerComponent.IsDeployed = deploy;
-        Dirty(deployer, equipmentDeployerComponent);
+        DirtyField(deployer, equipmentDeployerComponent, nameof(RMCEquipmentDeployerComponent.IsDeployed));
 
         UpdateAppearance((deployer, equipmentDeployerComponent), deploy);
 

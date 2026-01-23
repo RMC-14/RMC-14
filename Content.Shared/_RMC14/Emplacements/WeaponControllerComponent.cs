@@ -6,6 +6,7 @@ namespace Content.Shared._RMC14.Emplacements;
 ///     Can be used to shoot a weapon remotely.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(RMCSharedWeaponControllerSystem), typeof(SharedWeaponMountSystem))]
 public sealed partial class WeaponControllerComponent : Component
 {
     /// <summary>

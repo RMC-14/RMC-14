@@ -37,7 +37,9 @@ public sealed class WeaponMountSystem : SharedWeaponMountSystem
 
         TryComp(mount, out FoldableComponent? foldable);
 
-        if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Mounted, out var mountLayer, false))
+        var mountSprite = (mount, sprite);
+
+        if (_sprite.LayerMapTryGet(mountSprite, WeaponMountComponentVisualLayers.Mounted, out var mountLayer, false))
         {
             var state = mount.Comp.MountedEntity != null;
 
@@ -47,59 +49,59 @@ public sealed class WeaponMountSystem : SharedWeaponMountSystem
             }
 
             // Gradually increase/decrease the visibility of the overheat sprite based on the current amount of heat.
-            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Overheated, out var hotLayer, false) &&
+            if (_sprite.LayerMapTryGet(mountSprite, WeaponMountComponentVisualLayers.Overheated, out var hotLayer, false) &&
                 TryComp(mount.Comp.MountedEntity, out OverheatComponent? overheat))
             {
-                _sprite.LayerSetVisible((mount,sprite), hotLayer, state);
+                _sprite.LayerSetVisible(mountSprite, hotLayer, state);
                 var alpha = Math.Clamp(overheat.Heat / overheat.MaxHeat, 0f, 1f);
-                _sprite.LayerSetColor((mount, sprite), hotLayer, sprite.Color.WithAlpha(alpha));
+                _sprite.LayerSetColor(mountSprite, hotLayer, sprite.Color.WithAlpha(alpha));
             }
 
             // Only show the mounted ammo sprite if the mount is not folded.
             if (foldable != null && foldable.IsFolded)
-                _sprite.LayerSetVisible((mount,sprite), WeaponMountComponentVisualLayers.MountedAmmo, false);
+                _sprite.LayerSetVisible(mountSprite, WeaponMountComponentVisualLayers.MountedAmmo, false);
 
             if (foldable == null || !foldable.IsFolded)
-                    UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.MountedAmmo);
+                    UpdateAmmoVisual(mount, mountSprite, WeaponMountComponentVisualLayers.MountedAmmo);
 
             // Enable the mounted layer if the mount is deployed
-            _sprite.LayerSetVisible((mount,sprite), mountLayer, state);
+            _sprite.LayerSetVisible(mountSprite, mountLayer, state);
 
             // Show broken state
-            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
-                _sprite.LayerSetVisible((mount,sprite), brokenLayer, mount.Comp.Broken);
+            if (_sprite.LayerMapTryGet(mountSprite, WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
+                _sprite.LayerSetVisible(mountSprite, brokenLayer, mount.Comp.Broken);
         }
 
-        if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Folded, out var transportLayer, false) &&
+        if (_sprite.LayerMapTryGet(mountSprite, WeaponMountComponentVisualLayers.Folded, out var transportLayer, false) &&
             foldable != null)
         {
             // Only show the folded ammo sprite if the mount is folded
             if (foldable.IsFolded)
-                UpdateAmmoVisual(mount, (mount, sprite), WeaponMountComponentVisualLayers.FoldedAmmo);
+                UpdateAmmoVisual(mount, mountSprite, WeaponMountComponentVisualLayers.FoldedAmmo);
             else
             {
-                _sprite.LayerSetVisible((mount, sprite), WeaponMountComponentVisualLayers.FoldedAmmo, false);
+                _sprite.LayerSetVisible(mountSprite, WeaponMountComponentVisualLayers.FoldedAmmo, false);
             }
 
             var folded = foldable.IsFolded && !mount.Comp.Broken;
 
             // Set the folded state based on if the mount is folded and has a mounted entity.
-            _sprite.LayerSetVisible((mount,sprite), transportLayer, folded && mount.Comp.MountedEntity != null);
+            _sprite.LayerSetVisible(mountSprite, transportLayer, folded && mount.Comp.MountedEntity != null);
 
             // Disable the folded layer from the FoldedComponent
-            if (_sprite.LayerMapTryGet((mount, sprite), FoldedLayer, out var foldedLayer, false))
-                _sprite.LayerSetVisible((mount,sprite), foldedLayer, folded && mount.Comp.MountedEntity == null);
+            if (_sprite.LayerMapTryGet(mountSprite, FoldedLayer, out var foldedLayer, false))
+                _sprite.LayerSetVisible(mountSprite, foldedLayer, folded && mount.Comp.MountedEntity == null);
 
             // Show broken state
-            if (_sprite.LayerMapTryGet((mount, sprite), WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
-                _sprite.LayerSetVisible((mount,sprite), brokenLayer, mount.Comp.Broken);
+            if (_sprite.LayerMapTryGet(mountSprite, WeaponMountComponentVisualLayers.Broken, out var brokenLayer, false))
+                _sprite.LayerSetVisible(mountSprite, brokenLayer, mount.Comp.Broken);
         }
 
         // Set the draw depth based on the mount's assembly/folded state
         if (mount.Comp.MountedEntity == null || foldable != null && foldable.IsFolded)
-            _sprite.SetDrawDepth((mount,sprite), (int)DrawDepth.Items);
+            _sprite.SetDrawDepth(mountSprite, (int)DrawDepth.Items);
         else
-            _sprite.SetDrawDepth((mount,sprite), (int)DrawDepth.Mobs);
+            _sprite.SetDrawDepth(mountSprite, (int)DrawDepth.Mobs);
     }
 
     /// <summary>
@@ -120,6 +122,6 @@ public sealed class WeaponMountSystem : SharedWeaponMountSystem
                 hasAmmo = true;
         }
 
-        _sprite.LayerSetVisible((mount,sprite), mountAmmoLayer, hasAmmo);
+        _sprite.LayerSetVisible(sprite, mountAmmoLayer, hasAmmo);
     }
 }
