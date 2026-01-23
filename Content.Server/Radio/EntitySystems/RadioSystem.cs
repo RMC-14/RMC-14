@@ -123,6 +123,11 @@ public sealed class RadioSystem : EntitySystem
                 name = $"({prefixText}) {name}";
             }
         }
+        else if (TryComp(messageSource, out RMCRadioPrefixComponent? radioPrefix))
+        {
+            var prefixText = Loc.GetString(radioPrefix.Prefix);
+            name = $"({prefixText}) {name}";
+        }
 
         SpeechVerbPrototype speech;
         if (evt.SpeechVerb != null && _prototype.TryIndex(evt.SpeechVerb, out var evntProto))

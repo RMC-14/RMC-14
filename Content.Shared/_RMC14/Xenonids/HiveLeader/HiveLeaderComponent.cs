@@ -17,4 +17,7 @@ public sealed partial class HiveLeaderComponent : Component
 
     [DataField, AutoNetworkedField]
     public int? GrantRadioTextIncrease = 2;
+
+    [DataField, AutoNetworkedField]
+    public LocId LeaderPrefix = "rmc-xeno-name-leader";
 }
