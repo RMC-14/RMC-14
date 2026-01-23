@@ -67,3 +67,24 @@
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+
+# EIAF
+- type: entity
+  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineEIAFNo8
+  name: EIAF No.8 combat uniform
+  description: Standard issue No.8 Pattern BDU used by the Extrasolar Imperial Airborne Force. Identical in cut and protection to the Royal Crown Marine variant, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchTSEMarines
+    - RMCPatchTSE
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+  - type: FoldableClothing
+    foldedEquippedPrefix: sleeves

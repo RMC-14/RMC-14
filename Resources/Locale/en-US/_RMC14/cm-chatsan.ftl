@@ -786,6 +786,7 @@ cm-chatsan-word-batonged = batonged
 cm-chatsan-word-replacement-batonged = daze spitted
 
 cm-chatsan-word-xover = xover
+cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
 
 cm-chatsan-word-m13 = m13
@@ -855,6 +856,8 @@ cm-chatsan-word-evos = evos
 cm-chatsan-replacement-evos = evolutions
 
 cm-chatsan-word-tax = tax
+cm-chatsan-word-taxx = taxx
+cm-chatsan-word-taxxx = taxxx
 cm-chatsan-word-xax = xax
 cm-chatsan-replacement-tax = build
 
@@ -863,6 +866,7 @@ cm-chatsan-word-xaxes = xaxes
 cm-chatsan-replacement-taxes = building
 
 cm-chatsan-word-taxing = taxing
+cm-chatsan-word-taxxing = taxxing
 cm-chatsan-word-xaxing = xaxing
 cm-chatsan-replacement-taxing = building
 
@@ -882,3 +886,7 @@ cm-chatsan-replacement-slopcade = bad cades
 
 cm-chatsan-word-clanker = clanker
 cm-chatsan-replacement-clanker = synthetic
+
+cm-chatsan-word-rwall = rwall
+cm-chatsan-replacement-rwall = reinforced wall
+
