@@ -208,7 +208,7 @@
       CMSteel: 150
 
 - type: entity
-  parent: Crowbar
+  parent: [Crowbar, RMCBaseMeleeWeapon]
   id: CMCrowbar
   components:
   - type: Sprite
@@ -262,6 +262,25 @@
   - type: Item
     heldPrefix: red
     storedSprite: null
+
+- type: entity
+  parent: CMCrowbar
+  id: RMCTacticalPrybar
+  name: tactical prybar
+  description: Holding this makes you want to raid a townhouse filled with terrorists. Also doubles as a blunt weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/tac_prybar.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 25
+    soundHit:
+      path: /Audio/_RMC14/Weapons/genhit3.ogg
 
 - type: entity
   parent: HandLabeler

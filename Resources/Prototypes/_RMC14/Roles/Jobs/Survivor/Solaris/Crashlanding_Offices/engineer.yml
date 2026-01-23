@@ -1,0 +1,72 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorSolarisPMCEngineer
+  name: rmc-job-name-pmc-engineer
+  ranks:
+    RMCRankWeYaCorporateTechnician: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCEngineer
+  icon: RMCJobIconPMCEngineer
+  greeting: rmc-job-greeting-solaris-pmc-engineer
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC Engineer (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaPMCEngineer
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetPMCBase
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-engineer
+  useLoadoutOfJob: CMSurvivorEngineer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorPMCBase
+  id: RMCGearSurvivorPMCEngineer
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCEngineerNoWebbingPatch
+    shoes: RMCBootsPMCFilled
+    gloves: RMCHandsVeteranPMC
+    mask: RMCMaskCoifPMC
+    ears: RMCHeadsetHvHWeYaPMCEngineer
+    head: ArmorHelmetPMCEngineer
+    outerClothing: RMCArmorM4PMCEngineer
+    back: RMCBackpackWelderPMC
+    belt: RMCM77BeltPMCFilledNearEmpty
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMSheetPlasteel20
+    outerClothing:
+    - RMCMREWeYa
+  inhand:
+  - CMBeltUtilityFilled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCrashlandingOfficesEngineer
+  name: special survivor crashlanding offices pmc engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisPMCEngineer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy

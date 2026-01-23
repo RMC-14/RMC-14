@@ -13,6 +13,16 @@
     camouflageVariations: { }
 
 - type: entity
+  parent: ArmorHelmetPMC
+  id: RMCArmorHelmetPMCBlack
+  name: PMC black tactical cap
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/black_cap.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/black_cap.rsi
+
+- type: entity
   parent: [ArmorHelmetPMC, RMCMarineHelmetWithLightBase]
   id: RMCArmorHelmetPMCTactical
   name: tactical helmet
@@ -51,6 +61,17 @@
     sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/PMC/officer.rsi
+
+- type: entity
+  parent: ArmorHelmetPMC
+  id: ArmorHelmetPMCFieldOfficer
+  name: PMC field officer beret
+  description: The pinnacle of fashion for any aspiring mercenary leader. Designed to protect the head from light impacts.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/PMC/field_officer.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/field_officer.rsi
 
 - type: entity
   parent: RMCArmorHelmetPMCTactical

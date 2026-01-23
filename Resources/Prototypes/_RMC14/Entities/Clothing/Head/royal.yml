@@ -38,6 +38,28 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/beret_tl.rsi
 
+- type: entity
+  parent: RMCHeadRoyalBeret
+  id: RMCHeadEIAFBeret
+  name: EIAF beret
+  description: A distinctive crimson beret worn by the Extrasolar Imperial Airborne Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapPeakedEIAF
+  name: EIAF officer's service cap
+  description: A distinguished service cap worn by officers of the Extrasolar Imperial Airborne Forces. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
+
 # Royal marine helmets
 - type: entity
   parent: ArmorHelmetPMC
@@ -51,7 +73,7 @@
     sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
 
 - type: entity
-  parent: ArmorHelmetPMC
+  parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalHelmetBallistic
   name: royal L5A3 ballistic helmet
   description: A High-cut ballistic helmet featuring an attached mandible. Designed to be used by Royal Crown Marines as part of the kestrel armour system.
@@ -61,3 +83,34 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
 
+- type: entity
+  parent: RMCHeadRoyalHelmet
+  id: RMCHeadRoyalL1HelmetBallistic
+  name: L1 ballistic helmet
+  description: A versatile ballistic helmet designed by Weston-Yamada for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
+
+- type: entity
+  parent: RMCHeadRoyalHelmet
+  id: RMCHeadRoyalFlightHelmet
+  name: PH-4 'Spitfire' flight helmet
+  description: Standard flight helmet used across the Three Suns Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi
+  - type: CycleableVisor
+    containers:
+    - rmc_visor_one
+    - rmc_visor_two
+    - rmc_visor_three
+  - type: IntegratedVisors
+    visorsToAdd:
+    - RMCVisorMedicalAdvancedIntegrated
+    - RMCVisorSquadIntegrated
+    - RMCVisorPilotBlack
