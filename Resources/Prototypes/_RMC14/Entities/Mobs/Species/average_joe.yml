@@ -106,7 +106,7 @@
     deadThreshold: 200
     newDamageModifier: RMCJoeSynth
   - type: Skills
-    preset: AverageJoe
+    preset: RMCSkillPresetAverageJoe
   - type: RMCRandomName
     baseName: rmc-species-name-average-joe-1
     postFix: rmc-species-name-average-joe-postfix
