@@ -29,7 +29,6 @@
     blockOtherWeeds: true
     spreadsOnSemiWeedable: true
   - type: HiveCluster
-  - type: XenoFriendly
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionRequiresWeedableSurface

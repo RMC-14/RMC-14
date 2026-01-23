@@ -51,7 +51,6 @@
     intersectRatio: 0.1
   - type: HiveLesserSpawner
   - type: HiveCore
-  - type: XenoFriendly
   - type: XenoWeedsSpreading
   - type: XenoWeeds
     range: 7

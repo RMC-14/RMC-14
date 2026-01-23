@@ -20,7 +20,6 @@
       types:
         Slash: 100
   - type: RecoveryNode
-  - type: XenoFriendly
   - type: HiveConstructionRequiresHiveCore
   - type: HiveConstructionLimited
     id: HiveRecoveryNodeXeno
