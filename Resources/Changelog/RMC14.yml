@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: RavenCaat
-  changes:
-  - message: Added The Weapons L24 and the L24B for the Royal Marines and there respective
-      Ammunition.
-    type: Add
-  - message: Added The Weapon L83A3, L83A3F, L83A3M and there respective Ammunition
-    type: Add
-  id: 2315
-  time: '2025-09-06T09:06:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6774
 - author: VictorJob
   changes:
   - message: Updated the muzzle flash effect.
@@ -4715,5 +4705,13 @@
   id: 2817
   time: '2026-01-23T07:02:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8992
+- author: Vixting
+  changes:
+  - message: Adds overlay to flamers to visualize which tiles you will set on fire,
+      using solution color.
+    type: Add
+  id: 2818
+  time: '2026-01-23T08:42:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8987
 Name: RMC14
 Order: -1
