@@ -56,6 +56,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
+using Content.Shared.Damage.Prototypes;
+using Content.Server._RMC14.Damage;
 
 namespace Content.Server.Administration.Systems;
 
@@ -85,11 +87,18 @@ public sealed partial class AdminVerbSystem
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly SuperBonkSystem _superBonkSystem = default!;
     [Dependency] private readonly SlipperySystem _slipperySystem = default!;
+    //RMC-14
     [Dependency] private readonly SharedXenoParasiteSystem _xenoParasite = default!;
     [Dependency] private readonly RandomHumanoidSystem _randomHumanoid = default!;
+    [Dependency] private readonly MobStateSystem _mobstate = default!;
+    [Dependency] private readonly RMCDamageableSystem _rmcdamage = default!;
+    [Dependency] private readonly DamageableSystem _damage = default!;
 
     private static readonly EntProtoId MouseProto = "CMMobMouse";
     private static readonly ProtoId<RandomHumanoidSettingsPrototype> RiflemanProto = "RMCUnassignedRifleman";
+
+    private static readonly ProtoId<DamageGroupPrototype> CriticalDamage = "Brute";
+    //RMC-14
 
     // All smite verbs have names so invokeverb works.
     private void AddSmiteVerbs(GetVerbsEvent<Verb> args)
@@ -933,7 +942,7 @@ public sealed partial class AdminVerbSystem
             Message = string.Join(": ", omniaccentName, Loc.GetString("admin-smite-omni-accent-description"))
         };
         args.Verbs.Add(omniaccent);
-
+        //RMC-14
         Verb chestburst = new()
         {
             Text = "Chestburst into larva",
@@ -983,5 +992,102 @@ public sealed partial class AdminVerbSystem
             Message = "Chestburst into rifleman",
         };
         args.Verbs.Add(chestburstRifleman);
+
+        Verb forceCritical1 = new()
+        {
+            Text = "Force into critical state (100% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddefib"),
+            Act = () =>
+            {
+                Crit(args.Target, 1.0);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 100% of critical health",
+        };
+        args.Verbs.Add(forceCritical1);
+
+        Verb forceCritical2 = new()
+        {
+            Text = "Force into critical state (75% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeadclose"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.75);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 75% of critical health",
+        };
+        args.Verbs.Add(forceCritical2);
+
+        Verb forceCritical3 = new()
+        {
+            Text = "Force into critical state (50% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeadalmost"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.50);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 50% of critical health",
+        };
+        args.Verbs.Add(forceCritical3);
+
+        Verb forceCritical4 = new()
+        {
+            Text = "Force into critical state (25% Critical Health)",
+            Category = VerbCategory.Smite,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/health_hud.rsi"), "huddeaddnr"),
+            Act = () =>
+            {
+                Crit(args.Target, 0.25);
+            },
+            Impact = LogImpact.Extreme,
+            Message = "Forces mob into critical, no matter what its state before was, at 25% of critical health",
+        };
+        args.Verbs.Add(forceCritical4);
     }
+
+    private void Crit(EntityUid target, double criticalThresholdPercent)
+    {
+        if (!TryComp<DamageableComponent>(target, out var damage))
+            return;
+
+        if (!_mobThresholdSystem.TryGetIncapThreshold(target, out var threshold) || !_mobThresholdSystem.TryGetDeadThreshold(target, out var dead))
+            return;
+
+        var desiredThreshold = (threshold * criticalThresholdPercent) + (dead * (1 - criticalThresholdPercent));
+
+        if (!TryComp<MobStateComponent>(target, out var state))
+            return;
+
+        if (damage.TotalDamage > desiredThreshold)
+        {
+            //Revive + Heal
+            var heal = damage.TotalDamage.Double() - desiredThreshold.Value.Double();
+
+            if (heal < 0)
+                heal = 0;
+
+            var healing = _rmcdamage.DistributeTypesTotal((target, damage), heal);
+            _damage.TryChangeDamage(target, -healing, true);
+            if (state.CurrentState == MobState.Dead)
+                _mobstate.ChangeMobState(target, MobState.Critical);
+        }
+        else if (damage.TotalDamage < desiredThreshold)
+        {
+            //Just damage
+            var hurt = Math.Max(desiredThreshold.Value.Double() - damage.TotalDamage.Double(), 0);
+
+            if (!_prototypeManager.TryIndex(CriticalDamage, out var damageGroup))
+                return;
+
+            var damager = new DamageSpecifier(damageGroup, hurt);
+
+            var damaging = _damage.TryChangeDamage(target, damager, true);
+        }
+    }
+    //RMC-14
 }

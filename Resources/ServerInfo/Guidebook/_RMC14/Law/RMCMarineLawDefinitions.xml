@@ -51,7 +51,7 @@
 
   \n
 
-  [bold]Department heads[/bold]
+  [bold]Department Heads[/bold]
   - A person who is responsible for an entire department, which includes the [bold]Chief Engineer[/bold], [bold]Chief Medical Officer[/bold], [bold]Auxiliary Support Officer[/bold], [bold]Logistics Officer[/bold], [color=#8B0000][bold]Chief MP[/bold][/color].
 
   \n
@@ -72,9 +72,15 @@
   \n
 
   [bold]Lawful Orders[/bold]
-  - Personnel are required to follow all lawful orders from their superiors and are NOT-required to follow unlawful orders.
+  - Personnel are required to follow all lawful orders from their superiors and are not required to follow unlawful orders.
   - If personnel are refusing to follow an order, they must state why they believe it would break Marine Law, making it an unlawful order.
   - Valid NJPs are not unlawful orders in the case of neglected duties.
+
+  \n
+
+  [bold]Standard Issue Equipment[/bold]
+
+  - [bold]Standard Issue[/bold] equipment is defined as any military uniform, armor, weapon, or accessory personnel find in their crew vendors, as well as anything they emerge from hypersleep with or anything normally available from requisitions.
 
   \n
 
@@ -91,7 +97,6 @@
   [bold]FOB[/bold]
   - The Forward Operating Base.
   - Designated by the [color=#008000][bold]Commander[/bold][/color]. It is a reinforced area, usually being the primary landing zone.
-  - FOBs do not have to be placed adjacent to a landing zone. However, the primary landing zone itself must at least be properly defended and guarded.
 
   \n
 
@@ -101,7 +106,7 @@
   \n
 
   [bold]Secure Areas[/bold]
-  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or staff officers. It is a reinforced area, where there has been no recent combat or threats.
+  - Must be designated by the [color=#008000][bold]Commander[/bold][/color] or [bold]Staff Officer[/bold]s. It is a reinforced area, where there has been no recent combat or threats.
   - The [bold]FOB[/bold] is usually a secure area until it is attacked, for example.
   - The [color=#008000][bold]Commander[/bold][/color] or any [bold]CIC Personnel[/bold] at any point may designate an area no longer secure.
   - Areas that have been recently attacked are presumed no longer secure, and should be reported for safety.
@@ -123,11 +128,17 @@
 
   \n
 
+  [bold]Higher Ranking Officers[/bold]
+  - UNMC Officers ranked [bold]Major[/bold] or above.
+  - They may have some additional provisions, which can be found [textlink="in command non-modifiable SOP." link="RMCMarineSOPNONModCommand"]
+
+  \n
+
   [color=#ffa500][bold]Provost Marshal Office[/bold][/color]
   - Hold significant weight on how Marine Law is handled in their operational areas.
-  - In the event that Marine Law is being mishandled aboard a UNMC warship or within the AO of a UNMC warship, [color=#ffa500][bold]Provost Marshal Office[/bold][/color] may see fit to dispatch personnel.
+  - In the event that Marine Law is being mishandled aboard a UNMC warship or within the [bold]AO[/bold] of a UNMC warship, [color=#ffa500][bold]Provost Marshal Office[/bold][/color] may see fit to dispatch personnel.
   - Members of the [color=#ffa500][bold]Provost Marshal Office[/bold][/color] obey only their direct superiors and are not beholden to Marine command or officers.
   - Provost [bold]Marshals[/bold] are not required to follow Marine Law.
-  - Provost [bold]Inspectors[/bold] and above are the final word on Marine Law in their AO.
+  - Provost [bold]Inspectors[/bold] and above are the final word on Marine Law in their [bold]AO[/bold].
   - Provost [bold]Advisors[/bold] do not hold any direct authority themselves, however they are expected to ensure Marine Law is correctly handled.
 </Document>

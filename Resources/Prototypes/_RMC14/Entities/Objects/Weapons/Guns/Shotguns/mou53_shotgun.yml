@@ -11,6 +11,7 @@
   - type: Tag
     tags:
     - RMCWeaponShotgunMOU53
+    - RMCWeaponShotgun
   - type: Gun
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mou53.ogg
@@ -37,7 +38,7 @@
       - RMCShellShotgunIncendiary
       - RMCShellShotgunBeanbag
       - RMCShellShotgunFlechette
-    proto: CMShellShotgunSlugs
+    proto: CMShellShotgunFlechette
     capacity: 3 #It's a lovely triple barrel
     soundInsert:
       path: /Audio/_RMC14/Weapons/Guns/Reload/gun_mou_reload.ogg

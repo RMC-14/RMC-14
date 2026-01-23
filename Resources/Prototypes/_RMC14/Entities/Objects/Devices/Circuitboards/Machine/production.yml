@@ -108,6 +108,18 @@
 
 - type: entity
   parent: CMBaseMachineCircuitboard
+  id: RMCCircuitboardIndustrialChemMaster
+  name: chem master machine board
+  description: A machine printed circuit board for a industrial chem master.
+  components:
+  - type: Sprite
+    state: blank_mod
+  - type: MachineBoard
+    prototype: RMCChemMasterIndustrial
+    # TODO RMC14 material requirements
+
+- type: entity
+  parent: CMBaseMachineCircuitboard
   id: CMCircuitboardMicrowave
   name: microwave machine board
   description: A machine printed circuit board for a microwave.

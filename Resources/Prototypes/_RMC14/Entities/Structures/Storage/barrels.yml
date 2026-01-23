@@ -71,6 +71,8 @@
           collection: MetalBreak
   - type: CrateOpenable
   - type: RMCMesonsNonviewable
+  - type: SpawnOnTerminate
+    spawn: RMCSpawnerRandomCrateLoot
 
 - type: entity
   parent: RMCBarrelBase

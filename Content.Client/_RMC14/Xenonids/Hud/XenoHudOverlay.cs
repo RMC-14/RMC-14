@@ -273,7 +273,7 @@ public sealed class XenoHudOverlay : Overlay
         var ranks = _entity.EntityQueryEnumerator<XenoRankComponent, SpriteComponent, TransformComponent>();
         while (ranks.MoveNext(out var uid, out var comp, out var sprite, out var xform))
         {
-            if (comp.Rank < 2 || comp.Rank > 5 || _xenoMaturingQuery.HasComp(uid))
+            if (comp.Rank < 2 || comp.Rank > 6 || _xenoMaturingQuery.HasComp(uid))
                 continue;
 
             if (xform.MapID != args.MapId)
@@ -512,13 +512,20 @@ public sealed class XenoHudOverlay : Overlay
             return;
 
         var damage = damageable.TotalDamage;
-        var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
-        _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
-        _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
+
+        FixedPoint2? critThresholdNullable = null;
+        FixedPoint2? deadThresholdNullable = null;
+        if (_mobThresholdsQuery.TryComp(uid, out var mobThresholds))
+        {
+            _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out critThresholdNullable, mobThresholds);
+            _mobThresholds.TryGetDeadThreshold(uid, out deadThresholdNullable, mobThresholds);
+        }
 
         string state;
         if (_mobState.IsCritical(uid, mobState) ||
-            (_mobState.IsAlive(uid) && critThresholdNullable != null && damageable.TotalDamage > critThresholdNullable))
+            _mobState.IsAlive(uid) &&
+            critThresholdNullable != null &&
+            damageable.TotalDamage > critThresholdNullable)
         {
             if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
                 return;
@@ -590,9 +597,13 @@ public sealed class XenoHudOverlay : Overlay
         if (!_xenoShieldQuery.TryComp(uid, out var xenoShield))
             return;
 
-        var mobThresholds = _mobThresholdsQuery.CompOrNull(uid);
-        _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out var critThresholdNullable, mobThresholds);
-        _mobThresholds.TryGetDeadThreshold(uid, out var deadThresholdNullable, mobThresholds);
+        FixedPoint2? critThresholdNullable = null;
+        FixedPoint2? deadThresholdNullable = null;
+        if (_mobThresholdsQuery.TryComp(uid, out var mobThresholds))
+        {
+            _mobThresholds.TryGetThresholdForState(uid, MobState.Critical, out critThresholdNullable, mobThresholds);
+            _mobThresholds.TryGetDeadThreshold(uid, out deadThresholdNullable, mobThresholds);
+        }
 
         critThresholdNullable ??= deadThresholdNullable;
         if (critThresholdNullable == null)
