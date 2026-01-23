@@ -1,4 +1,5 @@
 using Content.Server.Chat.Systems;
+using Content.Server.Popups;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
@@ -7,6 +8,7 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Ghost;
 using Content.Shared.Speech;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Popups;
 using Robust.Server.Console;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
@@ -25,6 +27,7 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
     [Dependency] private readonly SharedStatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     private static readonly EntProtoId<SkillDefinitionComponent> LeadershipSkill = "RMCSkillLeadership";
     private static readonly EntProtoId HushedStatusEffect = "RMCStatusEffectHushed";
@@ -136,7 +139,13 @@ public sealed class RMCServerMegaphoneSystem : EntitySystem
                     continue;
 
                 if (!_skills.HasSkill(playerEntity, LeadershipSkill, 1) && !HasComp<SquadLeaderComponent>(playerEntity))
-                    _statusEffects.TryUpdateStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration);
+                {
+                    if (_statusEffects.TryUpdateStatusEffectDuration(playerEntity, HushedStatusEffect, megaphoneUser.HushedEffectDuration))
+                    {
+                        var popup = Loc.GetString("rmc-megaphone-hushed-popup", ("source", Name(ev.Source)));
+                        _popup.PopupEntity(popup, playerEntity, playerEntity, PopupType.SmallCaution);
+                    }
+                }
             }
         }
     }

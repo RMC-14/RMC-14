@@ -11,3 +11,4 @@ rmc-megaphone-verb-hushed-range-off = Disable hushed effect
 rmc-megaphone-verb-hushed-range-off-desc = Disable the hushed effect for megaphone recipients.
 
 rmc-megaphone-no-skill = You don't have enough skills for this!
+rmc-megaphone-hushed-popup = {$source} hushed you with their powerful speech!
