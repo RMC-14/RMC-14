@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed attack rate and damage while devoured to be more accurate.
-    type: Fix
-  - message: You can no longer click in harm mode to attack while devoured. Instead
-      moving or clicking (out of harm mode) will attempt to attack the devourer.
-    type: Fix
-  id: 2312
-  time: '2025-09-06T08:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6321
 - author: Dygon
   changes:
   - message: The Dropship part fabricator can now print the AGM-227 'Banshee' for
@@ -4741,5 +4731,13 @@
   id: 2814
   time: '2026-01-23T04:03:49.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9048
+- author: Dygon
+  changes:
+  - message: Data detectors and motion detectors can now be toggled with the interact
+      key.
+    type: Fix
+  id: 2815
+  time: '2026-01-23T04:05:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9015
 Name: RMC14
 Order: -1
