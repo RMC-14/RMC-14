@@ -160,7 +160,7 @@
   - type: AttachableWeaponRangedMods
     modifiers:
     - accuracyAddMult: 0.15
-      damageAddMult: 0.1
+      damageAddMult: 0.05
       recoilFlat: -2
     - conditions:
         unwieldedOnly: true
@@ -172,6 +172,8 @@
       Snow: s_m10_overcomp
       Classic: c_m10_overcomp
       Urban: u_m10_overcomp
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m13-extended-recoil-compensator
 
 - type: entity
   parent: RMCAttachmentRecoilCompensatorM13
