@@ -685,6 +685,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     {
         if (!TryGetEntity(args.Actor, out var watchedUid) || !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye))
             return;
+        
+        if (!HasComp<OverwatchWatchingComponent>(GetEntity(args.Actor)))
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-offset-no-camera"), GetEntity(args.Actor), PopupType.LargeCaution);
+                return;
+            }
+        }
 
         Vector2 offsetDelta = args.Direction switch
         {
