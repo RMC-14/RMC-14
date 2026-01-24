@@ -89,6 +89,9 @@
   id: RMCWeaponRevolverM44
 
 - type: Tag
+  id: RMCSheetMetal
+
+- type: Tag
   id: RMCGlass
 
 - type: Tag

@@ -308,6 +308,33 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/NutriCo/drink.rsi
     offset: 0, 0.5
 
+- type: entity
+  parent: CMVendor
+  id: RMCVendorSoda
+  name: Cold Drinks machine
+  description: A vending machine that contains cold drinks. This one appears to be produced by Tsumetai-Umi, a subsidairy of Neterai Foods International, which itself is subsidiary of Weston-Yamada.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/sodavend.rsi
+  - type: VendingMachine
+    pack: RMCVendorSoda
+
+- type: vendingMachineInventory
+  id: RMCVendorSoda
+  startingInventory: # TODO RMC14
+    CMDrinkCanCola: 10
+    CMDrinkCanMountainWind: 10
+    CMDrinkCanThirteenLoko: 10
+    CMDrinkCanDrGibb: 10
+    CMDrinkCanStarkist: 10
+    CMDrinkCanSpaceUp: 10
+    CMDrinkCanLemonLime: 10
+    CMDrinkCanIcedTea: 10
+    CMDrinkCanGrape: 10
+    CMDrinkCanTonic: 10
+    CMDrinkCanSoda: 10
+    CMDrinkCanFruitBeer: 10
+
 # Cigarettes
 - type: entity
   parent: CMVendor
