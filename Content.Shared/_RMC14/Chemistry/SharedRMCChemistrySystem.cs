@@ -363,11 +363,8 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
             if (storage.DynamicEnergyScaling && _scaling.TryGetScaling(out var scaling))
             {
                 var scale = scaling.Comp.MaxScale;
-                if (scale > 1)
-                {
-                    baseMax = FixedPoint2.New((double) baseMax * scale);
-                    baseRecharge = FixedPoint2.New((double) baseRecharge * scale);
-                }
+                baseMax *= scale;
+                baseRecharge *= scale;
             }
 
             storage.MaxEnergy = baseMax + storage.MaxPer * _dispensers.Count;
