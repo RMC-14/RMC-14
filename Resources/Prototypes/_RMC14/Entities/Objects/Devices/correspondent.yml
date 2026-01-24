@@ -11,3 +11,12 @@
   - type: Item
     size: Small
     sprite: Objects/Fun/Instruments/microphone.rsi
+  - type: RadioMicrophone
+    broadcastChannel: Handheld
+  - type: Speech
+    speechVerb: Robotic
+  - type: ChatRepeatIgnoreSender # RMC14
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
