@@ -141,7 +141,7 @@
       - id: RMCBeltHolsterPistolTSE
       - id: RMCBeltUtilityGeneral
     - name: Armor Webbing
-      choices: { CMAccessories: 1 } 
+      choices: { RMCArmorWebbing: 1 } 
       entries:
       - id: RMCArmorWebbingGrenade
       - id: RMCArmorWebbingDrum
@@ -219,7 +219,7 @@
       - id: RMCBeltHolsterPistolTSE
       - id: RMCBeltUtilityGeneral
     - name: Armor Webbing
-      choices: { CMAccessories: 1 } 
+      choices: { RMCArmorWebbing: 1 } 
       entries:
       - id: RMCArmorWebbingDrum
       - id: RMCArmorWebbingPouch
@@ -239,7 +239,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechSurplusRCMPVE
-  name: We-Ya Surplus Uniform Vendor
+  name: We-Ya Section Surplus Uniform Vendor
   description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
   suffix: PVE, RCM
   components:
@@ -255,7 +255,7 @@
       - id: RMCBootsRoyal
         name: Combat Boots
         amount: 15
-      - id: RMCJumpsuitMarineRoyal
+      - id: RMCJumpsuitMarineRoyalPVE
         amount: 15
       - id: RMCHandsVeteranRoyalMarine
         name: Combat Gloves

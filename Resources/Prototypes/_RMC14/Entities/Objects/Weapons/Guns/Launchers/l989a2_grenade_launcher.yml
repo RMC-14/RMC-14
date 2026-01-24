@@ -15,6 +15,9 @@
   - type: OnShootTriggerAmmoTimer
     timerStart: enum.TimerStartMode.OnHitGround
     delay: 0
+  - type: ShootAtFixedPoint
+    shootArcProj: true
+    maxFixedRange: 25
   - type: BallisticAmmoProvider
     capacity: 7
     proto: RMCGrenade20mmHE
@@ -22,3 +25,24 @@
       tags: 
       - LauncherCompatibleGrenade
       - RMCGrenade20mm
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - GrenadeSpecWhitelist
+  - type: ExplosionResistance
+    damageCoefficient: 0
+  - type: Corrodible
+    isCorrodible: false
+  - type: WieldableSpeedModifiers
+    base: 0.666
+    light: 0.921
+    medium: 0.865
+    heavy: 0.865
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCAttachmentScopeMGLIntegrated
+        whitelist:
+          tags:
+          - RMCAttachmentMGLIntegratedScope

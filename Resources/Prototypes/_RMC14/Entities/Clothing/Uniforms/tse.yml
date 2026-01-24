@@ -83,7 +83,7 @@
   id: RMCJumpsuitMarineRoyalPVE
   name: royal crown marine uniform
   description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
-  suffix: Filled, Royal
+  suffix: Royal, PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/standard.rsi
