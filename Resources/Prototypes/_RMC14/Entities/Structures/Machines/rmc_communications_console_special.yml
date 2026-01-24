@@ -59,3 +59,22 @@
   - type: Sprite
     overrideDir: South
     enableOverrideDir: false
+
+# RCM
+- type: entity
+  parent: RMCOverwatchConsole
+  id: RMCOverwatchConsoleRCM
+  suffix: RCM
+  components:
+  - type: OverwatchConsole
+    canOrbitalBombardment: false
+    group: Gamma Troop
+
+- type: entity
+  parent: RMCOverwatchConsoleRCM
+  id: RMCOverwatchConsoleRCMRotating
+  suffix: RCM, Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false

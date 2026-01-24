@@ -17,5 +17,14 @@
   - CMPVESquadLeader
   - CMPVESmartGunOperator
   - CMPVESectionSergeant
+  - CMRoyalMarinesTroopSargePVE
+  - CMRoyalMarinesSectionLeaderPVE
+  - CMRoyalMarinesTeamLeaderPVE
+  - CMRoyalMarinesAssaultEngineerPVE
+  - CMRoyalMarinesSmartgunnerPVE
+  - CMRoyalMarinesBombSpecPVE
+  - CMRoyalMarinesScoutSniperPVE
+  - CMRoyalMarinesMedicPVE
+  - CMRoyalMarinesRiflemanPVE
   departmentRadio: null
   headOfDepartment: CMSquadLeader

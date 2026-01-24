@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -9,9 +9,12 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Tag;
 using Content.Shared.Verbs;
+using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using static Content.Shared._RMC14.Webbing.WebbingTransferComponent;
 
 namespace Content.Shared._RMC14.Webbing;
@@ -25,6 +28,9 @@ public abstract class SharedWebbingSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
+    private ProtoId<TagPrototype> ArmorWebbingTag = "ArmorWebbing";
 
     public override void Initialize()
     {
@@ -183,12 +189,20 @@ public abstract class SharedWebbingSystem : EntitySystem
 
     public bool Attach(Entity<WebbingClothingComponent> clothing, EntityUid webbing, EntityUid? user, out bool handled)
     {
+        var whitelist = clothing.Comp.Whitelist;
+
         handled = false;
         if (!TryComp(webbing, out WebbingComponent? webbingComp) ||
             HasComp<StorageComponent>(clothing) ||
             !HasComp<StorageComponent>(webbing) ||
             !TryComp(clothing, out ItemComponent? clothingItem) ||
             !TryComp(webbing, out ItemComponent? webbingItem))
+        {
+            return false;
+        }
+
+        if ((whitelist is { } && !_whitelist.IsWhitelistPass(whitelist, webbing)) ||    //     if whitelist is not null, but the webbing is not whitelisted
+            (whitelist is not { } && _tag.HasTag(webbing, ArmorWebbingTag)))            // OR  if whitelist is null but the webbing has the ArmorWebbing tag
         {
             return false;
         }
