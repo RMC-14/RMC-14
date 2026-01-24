@@ -358,8 +358,6 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
 
             var baseMax = storage.BaseMax;
             var baseRecharge = storage.BaseRecharge;
-
-            // Apply marine population scaling to BASE values BEFORE adding per-dispenser bonuses.
             if (storage.DynamicEnergyScaling && _scaling.TryGetScaling(out var scaling))
             {
                 var scale = scaling.Comp.MaxScale;
