@@ -10,6 +10,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Tag;
+using Content.Shared._RMC14.Marines; // RMC14
+using Content.Shared._RMC14.Xenonids; // RMC14
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -59,6 +61,8 @@ public abstract partial class SharedMoverController : VirtualController
     protected EntityQuery<RelayInputMoverComponent> RelayQuery;
     protected EntityQuery<PullableComponent> PullableQuery;
     protected EntityQuery<TransformComponent> XformQuery;
+    protected EntityQuery<MarineComponent> MarineQuery; // RMC14
+    protected EntityQuery<XenoComponent> XenoQuery; // RMC14
 
     private static readonly ProtoId<TagPrototype> FootstepSoundTag = "FootstepSound";
 
@@ -90,6 +94,8 @@ public abstract partial class SharedMoverController : VirtualController
         FootstepModifierQuery = GetEntityQuery<FootstepModifierComponent>();
         MapGridQuery = GetEntityQuery<MapGridComponent>();
         MapQuery = GetEntityQuery<MapComponent>();
+        MarineQuery = GetEntityQuery<MarineComponent>(); // RMC14
+        XenoQuery = GetEntityQuery<XenoComponent>(); // RMC14
 
         SubscribeLocalEvent<MovementSpeedModifierComponent, TileFrictionEvent>(OnTileFriction);
 
@@ -294,6 +300,39 @@ public abstract partial class SharedMoverController : VirtualController
             Accelerate(ref velocity, in wishDir, accel, frameTime);
 
         SetWishDir((uid, mover), wishDir);
+
+        // RMC14 Prevent marines from "squeezing" through stationary xenos
+        if (MarineQuery.HasComponent(uid) && PhysicsQuery.TryComp(uid, out var marineBounds) && XformQuery.TryComp(uid, out var marineXform))
+        {
+            var xenos = _lookup.GetEntitiesInRange(uid, 0.7f); // Mob bounds overlap range
+
+            foreach (var xenoUid in xenos)
+            {
+                if (!XenoQuery.HasComponent(xenoUid))
+                    continue;
+
+                if (!PhysicsQuery.TryComp(xenoUid, out var xenoPhysics) || !XformQuery.TryComp(xenoUid, out var xenoXform))
+                    continue;
+
+                // RMC14 Check actual distance
+                var marinePos = _transform.GetWorldPosition(marineXform);
+                var xenoPos = _transform.GetWorldPosition(xenoXform);
+                var diff = xenoPos - marinePos; // Direction FROM marine TO xeno
+                var distance = diff.Length();
+
+                // RMC14 If xeno is stationary and they're overlapping, block movement toward the xeno
+                if (xenoPhysics.LinearVelocity == Vector2.Zero && distance < 0.7f && diff != Vector2.Zero)
+                {
+                    //RMC14 Check if moving toward xeno (positive dot product means moving toward)
+                    var movementDot = Vector2.Dot(velocity.Normalized(), diff.Normalized());
+                    if (movementDot > 0.1f) // Moving toward xeno with significant component
+                    {
+                        velocity = Vector2.Zero;
+                        break;
+                    }
+                }
+            }
+        }
 
         /*
          * SNAKING!!! >-( 0 ================>
