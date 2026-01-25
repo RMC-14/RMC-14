@@ -8,14 +8,12 @@ namespace Content.Client._RMC14.Roadmap;
 [GenerateTypedNameReferences]
 public sealed partial class RoadmapWindow : DefaultWindow
 {
-    private const int RoadmapYear = 2025;
-
     public RoadmapWindow()
     {
         RobustXamlLoader.Load(this);
+        var year = DateTime.UtcNow.Year;
         var msg = new FormattedMessage();
-        msg.AddMarkupOrThrow(
-            $"[font size=24]ROADMAP [bold]{RoadmapYear}[/bold][/font]");
+        msg.AddMarkupOrThrow($"[font size=24]ROADMAP [bold]{year}[/bold][/font]");
         Header.SetMessage(msg);
     }
 }
