@@ -402,10 +402,16 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (!HasComp<GunIgnoreContainerOwnerCollisionComponent>(component.Weapon.Value))
             return;
 
-        if (_container.TryGetContainingContainer((component.Weapon.Value, null), out var container) &&
-            args.OtherEntity == container.Owner)
+        var current = component.Weapon.Value;
+        while (_container.TryGetContainingContainer((current, null), out var container))
         {
-            args.Cancelled = true;
+            if (args.OtherEntity == container.Owner)
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            current = container.Owner;
         }
     }
 

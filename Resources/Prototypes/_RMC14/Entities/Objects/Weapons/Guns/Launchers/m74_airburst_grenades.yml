@@ -120,6 +120,14 @@
     deleteOnSpawn: true
     proto: RMCAirBurstProjectileSmoke
 
+- type: entity
+  parent: RMC40MMGrenadeM74AGMS
+  id: RMC40MMGrenadeM74AGMSVehicle
+  components:
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCAirBurstProjectileSmokeVehicle
+
 #PROJECTILES
 - type: entity
   abstract: true
@@ -277,6 +285,18 @@
   - type: SoundOnTrigger
     sound: /Audio/Effects/smoke.ogg
   - type: DeleteOnTrigger
+
+- type: entity
+  parent: RMCAirBurstProjectileSmoke
+  id: RMCAirBurstProjectileSmokeVehicle
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ProjectileSpread
+    proto: RMCAirBurstProjectileSmokeVehicle
+    count: 3
+    spread: 45
+  - type: TimedDespawn
+    lifetime: 2
 
 #Payload projectiles
 - type: entity

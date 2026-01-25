@@ -1,0 +1,9 @@
+- type: entity
+  id: RMCVehicleTurretVisual
+  name: vehicle turret visual
+  components:
+  - type: Sprite
+    drawdepth: OverMobs
+    sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
+    state: humveeturret
+  - type: VehicleTurretVisual

@@ -4,7 +4,7 @@
   name: humvee interior piece
   description: A decorative interior piece for the humvee.
   placement:
-    mode: SnapgridCenter
+    mode: PlaceFree
   components:
   - type: Transform
     anchored: true
@@ -19,13 +19,13 @@
   name: humvee interior chassis
   description: A chassis segment for the humvee interior.
   placement:
-    mode: SnapgridCenter
+    mode: PlaceFree
   components:
   - type: Transform
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/humvee_chassis.rsi
-    drawdepth: Overdoors
+    drawdepth: FloorTiles
   - type: InteractionTransparency
 
 - type: entity
@@ -53,6 +53,8 @@
   abstract: true
   parent: RMCVehicleHumveeInteriorBase
   id: RMCVehicleHumveeWallBase
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Physics
     bodyType: Static

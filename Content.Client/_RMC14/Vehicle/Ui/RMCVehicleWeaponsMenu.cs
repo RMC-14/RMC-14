@@ -31,34 +31,64 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 
         foreach (var hardpoint in hardpoints)
         {
-            var panel = new PanelContainer
+            var isTurretChild = RMCVehicleTurretSlotIds.TryParse(hardpoint.SlotId, out var parentSlotId, out var childSlotId);
+            var slotLabel = isTurretChild ? childSlotId : hardpoint.SlotId;
+
+            var panel = new ContainerButton
             {
                 HorizontalExpand = true,
-                MinSize = new Vector2(0, 42)
+                MinSize = new Vector2(0, 36),
+                Margin = isTurretChild ? new Thickness(14, 0, 0, 0) : default
             };
 
-            panel.PanelOverride = new StyleBoxFlat
+            var panelBorder = hardpoint.Selected
+                ? Color.FromHex("#53D188")
+                : isTurretChild ? Color.FromHex("#2A4E73") : Color.FromHex("#2D5E8E");
+
+            panel.StyleBoxOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0E1B2B"),
-                BorderColor = Color.FromHex("#2D5E8E"),
+                BackgroundColor = isTurretChild ? Color.FromHex("#0B1522") : Color.FromHex("#0E1B2B"),
+                BorderColor = panelBorder,
                 BorderThickness = new Thickness(1.5f)
             };
 
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                SeparationOverride = 8,
-                Margin = new Thickness(8, 8),
-                HorizontalExpand = true
+                SeparationOverride = 6,
+                Margin = new Thickness(6, 6),
+                HorizontalExpand = true,
+                MouseFilter = MouseFilterMode.Ignore
             };
 
             panel.AddChild(root);
+            panel.OnPressed += _ =>
+            {
+                if (hardpoint.Selectable)
+                    OnSelect?.Invoke(hardpoint.SlotId);
+            };
+
+            if (isTurretChild)
+            {
+                var bar = new PanelContainer
+                {
+                    MinSize = new Vector2(4, 0),
+                    VerticalExpand = true,
+                    Margin = new Thickness(0, 4, 0, 4),
+                    PanelOverride = new StyleBoxFlat
+                    {
+                        BackgroundColor = Color.FromHex("#2D7FB8")
+                    }
+                };
+
+                root.AddChild(bar);
+            }
 
             var spriteView = new SpriteView
             {
                 Stretch = SpriteView.StretchMode.Fill,
                 VerticalAlignment = Control.VAlignment.Center,
-                MinSize = new Vector2(56, 56),
+                MinSize = new Vector2(44, 44),
                 OverrideDirection = Direction.South
             };
 
@@ -75,11 +105,11 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
             var centerColumn = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 2,
+                SeparationOverride = 1,
                 HorizontalExpand = true
             };
 
-            var header = $"{hardpoint.SlotId} ({hardpoint.HardpointType})";
+            var header = $"{slotLabel} ({hardpoint.HardpointType})";
             var nameText = hardpoint.HasItem
                 ? hardpoint.InstalledName ?? header
                 : Loc.GetString("rmc-vehicle-weapons-ui-empty-slot");
@@ -90,38 +120,15 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
                 FontColorOverride = Color.FromHex("#E1EEFF")
             });
 
-            centerColumn.AddChild(new Label
+            var metaParts = new List<string>
             {
-                Text = hardpoint.HasItem ? header : $"Slot: {header}",
-                FontColorOverride = Color.FromHex("#8FA7C2")
-            });
+                isTurretChild
+                    ? Loc.GetString("rmc-vehicle-weapons-ui-turret-slot", ("slot", header))
+                    : Loc.GetString("rmc-vehicle-weapons-ui-slot", ("slot", header))
+            };
 
-            if (hardpoint.HasAmmo)
-            {
-                var chamberMax = hardpoint.MagazineSize > 0 ? hardpoint.MagazineSize : hardpoint.AmmoCapacity;
-                centerColumn.AddChild(new Label
-                {
-                    Text = Loc.GetString("rmc-vehicle-weapons-ui-chambered", ("current", hardpoint.AmmoCount), ("max", chamberMax)),
-                    FontColorOverride = Color.FromHex("#6BC7FF")
-                });
-            }
-            else
-            {
-                centerColumn.AddChild(new Label
-                {
-                    Text = Loc.GetString("rmc-vehicle-weapons-ui-ammo-none"),
-                    FontColorOverride = Color.FromHex("#6BC7FF")
-                });
-            }
-
-            if (hardpoint.HasMagazineData && hardpoint.MaxStoredMagazines > 0)
-            {
-                centerColumn.AddChild(new Label
-                {
-                    Text = Loc.GetString("rmc-vehicle-weapons-ui-stored", ("current", hardpoint.StoredMagazines), ("max", hardpoint.MaxStoredMagazines)),
-                    FontColorOverride = Color.FromHex("#6BC7FF")
-                });
-            }
+            if (isTurretChild)
+                metaParts.Add(Loc.GetString("rmc-vehicle-weapons-ui-mounted-to", ("slot", parentSlotId)));
 
             if (!string.IsNullOrWhiteSpace(hardpoint.OperatorName))
             {
@@ -129,43 +136,54 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
                     ? Loc.GetString("rmc-vehicle-weapons-ui-operator-self")
                     : Loc.GetString("rmc-vehicle-weapons-ui-operator", ("name", hardpoint.OperatorName));
 
-                centerColumn.AddChild(new Label
-                {
-                    Text = operatorText,
-                    FontColorOverride = Color.FromHex("#9DB5D1")
-                });
+                metaParts.Add(operatorText);
             }
+
+            centerColumn.AddChild(new Label
+            {
+                Text = string.Join(" | ", metaParts),
+                FontColorOverride = Color.FromHex("#8FA7C2")
+            });
+
+            var ammoParts = new List<string>();
+            if (hardpoint.HasAmmo)
+            {
+                var chamberMax = hardpoint.MagazineSize > 0 ? hardpoint.MagazineSize : hardpoint.AmmoCapacity;
+                ammoParts.Add(Loc.GetString("rmc-vehicle-weapons-ui-chambered", ("current", hardpoint.AmmoCount), ("max", chamberMax)));
+            }
+            else
+            {
+                ammoParts.Add(Loc.GetString("rmc-vehicle-weapons-ui-ammo-none"));
+            }
+
+            if (hardpoint.HasMagazineData && hardpoint.MaxStoredMagazines > 0)
+                ammoParts.Add(Loc.GetString("rmc-vehicle-weapons-ui-stored", ("current", hardpoint.StoredMagazines), ("max", hardpoint.MaxStoredMagazines)));
+
+            centerColumn.AddChild(new Label
+            {
+                Text = string.Join(" | ", ammoParts),
+                FontColorOverride = Color.FromHex("#6BC7FF")
+            });
 
             var rightColumn = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 6,
+                SeparationOverride = 4,
                 VerticalAlignment = Control.VAlignment.Center,
-                MinSize = new Vector2(130, 0)
+                MinSize = new Vector2(110, 0)
             };
 
-            var selectLabel = hardpoint.Selected
+            var statusText = hardpoint.Selected
                 ? Loc.GetString("rmc-vehicle-weapons-ui-selected")
                 : !hardpoint.Selectable && !string.IsNullOrWhiteSpace(hardpoint.OperatorName)
                     ? Loc.GetString("rmc-vehicle-weapons-ui-in-use")
-                    : Loc.GetString("rmc-vehicle-weapons-ui-select");
+                    : !hardpoint.Selectable && hardpoint.HasItem
+                        ? Loc.GetString("rmc-vehicle-weapons-ui-unavailable")
+                        : hardpoint.Selectable
+                            ? Loc.GetString("rmc-vehicle-weapons-ui-select")
+                            : Loc.GetString("rmc-vehicle-weapons-ui-empty-slot");
 
-            var select = new RMCHardpointButton
-            {
-                LabelText = selectLabel,
-                Disabled = !hardpoint.Selectable,
-                MinSize = new Vector2(98, 24)
-            };
-
-            if (hardpoint.Selected)
-            {
-                select.UnhoveredColor = Color.FromHex("#53D188");
-                select.HoveredColor = Color.FromHex("#6DE1A0");
-            }
-
-            select.OnPressed += _ => OnSelect?.Invoke(hardpoint.SlotId);
-
-            rightColumn.AddChild(select);
+            rightColumn.AddChild(BuildTag(statusText));
 
             root.AddChild(centerColumn);
             root.AddChild(rightColumn);
@@ -173,4 +191,34 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
             WeaponList.AddChild(panel);
         }
     }
+
+    private static PanelContainer BuildTag(string text)
+    {
+        var panel = new PanelContainer
+        {
+            MinSize = new Vector2(86, 22),
+            HorizontalAlignment = Control.HAlignment.Center,
+            VerticalAlignment = Control.VAlignment.Center,
+            MouseFilter = MouseFilterMode.Ignore
+        };
+
+        panel.PanelOverride = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#16273A"),
+            BorderColor = Color.FromHex("#2D5E8E"),
+            BorderThickness = new Thickness(1)
+        };
+
+        panel.AddChild(new Label
+        {
+            Text = text,
+            HorizontalAlignment = Control.HAlignment.Center,
+            VerticalAlignment = Control.VAlignment.Center,
+            FontColorOverride = Color.FromHex("#9DB5D1")
+        });
+
+        return panel;
+    }
 }
+
+

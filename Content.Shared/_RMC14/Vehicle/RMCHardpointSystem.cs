@@ -23,6 +23,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Examine;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -58,13 +59,15 @@ public sealed class RMCHardpointSystem : EntitySystem
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointInsertDoAfterEvent>(OnInsertDoAfter);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, GetVerbsEvent<InteractionVerb>>(OnGetRemoveVerbs);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, DamageModifyEvent>(OnVehicleDamageModify);
-        SubscribeLocalEvent<RMCHardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing);
+        SubscribeLocalEvent<RMCHardpointSlotsComponent, InteractUsingEvent>(OnSlotsInteractUsing, before: new[] { typeof(ItemSlotsSystem) });
         SubscribeLocalEvent<RMCHardpointSlotsComponent, BoundUIOpenedEvent>(OnHardpointUiOpened);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, BoundUIClosedEvent>(OnHardpointUiClosed);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveMessage>(OnHardpointRemoveMessage);
         SubscribeLocalEvent<RMCHardpointSlotsComponent, RMCHardpointRemoveDoAfterEvent>(OnHardpointRemoveDoAfter);
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, ComponentInit>(OnHardpointIntegrityInit);
-        SubscribeLocalEvent<RMCHardpointIntegrityComponent, InteractUsingEvent>(OnHardpointRepair);
+        SubscribeLocalEvent<RMCHardpointIntegrityComponent, InteractUsingEvent>(
+            OnHardpointRepair,
+            before: new[] { typeof(ItemSlotsSystem) });
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, ExaminedEvent>(OnHardpointExamined);
         SubscribeLocalEvent<RMCHardpointIntegrityComponent, RMCHardpointRepairDoAfterEvent>(OnHardpointRepairDoAfter);
     }
@@ -86,17 +89,35 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         ent.Comp.PendingRemovals.Clear();
 
+        var isAttachment = HasComp<VehicleTurretAttachmentComponent>(args.Entity);
+        var logAttachment = isAttachment ||
+                            slot.HardpointType.Equals("TurretWeapon", StringComparison.OrdinalIgnoreCase);
+        var itemType = TryComp<RMCHardpointItemComponent>(args.Entity, out var hardpointItem)
+            ? hardpointItem.HardpointType
+            : "<none>";
+
         if (!IsValidHardpoint(args.Entity, slot))
         {
+            if (logAttachment)
+            {
+                Log.Info($"[rmc-hardpoints] Insert rejected: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
+            }
+
             if (TryComp<ItemSlotsComponent>(ent.Owner, out var itemSlots))
                 _itemSlots.TryEject(ent.Owner, args.Container.ID, null, out _, itemSlots, excludeUserAudio: true);
 
             return;
         }
 
+        if (logAttachment)
+        {
+            Log.Info($"[rmc-hardpoints] Inserted: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
+        }
+
         RefreshCanRun(ent.Owner);
         UpdateHardpointUi(ent.Owner, ent.Comp);
         RaiseHardpointSlotsChanged(ent.Owner);
+        RaiseVehicleSlotsChanged(ent.Owner);
     }
 
     private void OnRemoved(Entity<RMCHardpointSlotsComponent> ent, ref EntRemovedFromContainerMessage args)
@@ -104,16 +125,31 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!TryGetSlot(ent.Comp, args.Container.ID, out _))
             return;
 
+        var isAttachment = HasComp<VehicleTurretAttachmentComponent>(args.Entity);
+        if (isAttachment)
+        {
+            Log.Info($"[rmc-hardpoints] Removed: owner={ToPrettyString(ent.Owner)} slot={args.Container.ID} item={ToPrettyString(args.Entity)} attachment=true stack={Environment.StackTrace}");
+        }
+
         RefreshCanRun(ent.Owner);
         ent.Comp.PendingRemovals.Remove(args.Container.ID);
         UpdateHardpointUi(ent.Owner, ent.Comp);
         RaiseHardpointSlotsChanged(ent.Owner);
+        RaiseVehicleSlotsChanged(ent.Owner);
     }
 
     private void RaiseHardpointSlotsChanged(EntityUid vehicle)
     {
         var ev = new RMCHardpointSlotsChangedEvent(vehicle);
         RaiseLocalEvent(vehicle, ev, broadcast: true);
+    }
+
+    private void RaiseVehicleSlotsChanged(EntityUid owner)
+    {
+        if (!TryGetContainingVehicle(owner, out var vehicle) || vehicle == owner)
+            return;
+
+        RaiseHardpointSlotsChanged(vehicle);
     }
 
     private void OnInsertAttempt(Entity<RMCHardpointSlotsComponent> ent, ref ItemSlotInsertAttemptEvent args)
@@ -313,6 +349,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         {
             if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
                 continue;
+            if (HasComp<RMCHardpointNoRemoveComponent>(itemSlot.Item!.Value))
+                continue;
+
             var user = args.User;
             var slotId = slot.Id;
             var verb = new InteractionVerb
@@ -326,12 +365,20 @@ public sealed class RMCHardpointSystem : EntitySystem
 
             args.Verbs.Add(verb);
         }
+
+        AddTurretRemoveVerbs(ent, ref args, itemSlots);
     }
 
     private void OnSlotsInteractUsing(Entity<RMCHardpointSlotsComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled || args.User == null)
             return;
+
+        if (TryInsertTurretAttachment(ent, args.User, args.Used))
+        {
+            args.Handled = true;
+            return;
+        }
 
         if (!_tool.HasQuality(args.Used, "Prying"))
             return;
@@ -696,6 +743,13 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
         }
 
+        if (HasComp<RMCHardpointNoRemoveComponent>(itemSlot.Item!.Value))
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-hardpoint-remove-blocked"), uid, user);
+            UpdateHardpointUi(uid, component, itemSlots);
+            return;
+        }
+
         if (component.PendingInserts.Contains(slotId) || component.CompletingInserts.Contains(slotId))
         {
             _popup.PopupEntity("Finish installing that hardpoint before removing it.", user, user);
@@ -729,6 +783,153 @@ public sealed class RMCHardpointSystem : EntitySystem
             component.PendingRemovals.Remove(slotId);
 
         UpdateHardpointUi(uid, component, itemSlots);
+    }
+
+    private bool TryInsertTurretAttachment(Entity<RMCHardpointSlotsComponent> ent, EntityUid user, EntityUid used)
+    {
+        if (!TryComp(used, out RMCHardpointItemComponent? hardpointItem))
+            return false;
+
+        if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
+            return false;
+
+        var requiresTurret = HasComp<VehicleTurretAttachmentComponent>(used);
+        var hasMatchingEmptySlot = false;
+
+        if (requiresTurret)
+        {
+            Log.Info($"[rmc-hardpoints] Attachment insert attempt: user={ToPrettyString(user)} vehicle={ToPrettyString(ent.Owner)} item={ToPrettyString(used)} itemType={hardpointItem.HardpointType}");
+        }
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!IsValidHardpoint(used, slot))
+                continue;
+
+            if (_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) &&
+                !vehicleSlot.HasItem)
+            {
+                hasMatchingEmptySlot = true;
+                break;
+            }
+        }
+
+        if (!requiresTurret && hasMatchingEmptySlot)
+            return false;
+
+        var handled = false;
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) || !vehicleSlot.HasItem)
+                continue;
+
+            var turretUid = vehicleSlot.Item!.Value;
+            if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (!IsValidHardpoint(used, turretSlot))
+                {
+                    if (requiresTurret)
+                    {
+                        Log.Info($"[rmc-hardpoints] Attachment rejected by turret slot: turret={ToPrettyString(turretUid)} slot={turretSlot.Id} slotType={turretSlot.HardpointType} itemType={hardpointItem.HardpointType}");
+                    }
+
+                    continue;
+                }
+
+                if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots))
+                    continue;
+
+                if (turretItemSlot.HasItem)
+                    continue;
+
+                handled = true;
+                var inserted = _itemSlots.TryInsertFromHand(turretUid, turretItemSlot, user);
+                if (requiresTurret)
+                {
+                    Log.Info($"[rmc-hardpoints] Attachment insert result: turret={ToPrettyString(turretUid)} slot={turretSlot.Id} success={inserted}");
+                }
+                return true;
+            }
+        }
+
+        if (requiresTurret)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-turret-no-base"), ent.Owner, user);
+            return true;
+        }
+
+        return handled;
+    }
+
+    private void AddTurretRemoveVerbs(
+        Entity<RMCHardpointSlotsComponent> ent,
+        ref GetVerbsEvent<InteractionVerb> args,
+        ItemSlotsComponent itemSlots)
+    {
+        foreach (var slot in ent.Comp.Slots)
+        {
+            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var vehicleSlot, itemSlots) || !vehicleSlot.HasItem)
+                continue;
+
+            var turretUid = vehicleSlot.Item!.Value;
+            if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
+                    !turretItemSlot.HasItem)
+                {
+                    continue;
+                }
+
+                if (HasComp<RMCHardpointNoRemoveComponent>(turretItemSlot.Item!.Value))
+                    continue;
+
+                var user = args.User;
+                var slotId = turretSlot.Id;
+                var verb = new InteractionVerb
+                {
+                    Act = () => TryStartHardpointRemoval(turretUid, turretSlots, user, slotId),
+                    Category = VerbCategory.Eject,
+                    Text = Loc.GetString("rmc-hardpoint-remove-verb", ("slot", Name(turretItemSlot.Item!.Value))),
+                    Priority = turretItemSlot.Priority,
+                    IconEntity = GetNetEntity(turretItemSlot.Item),
+                };
+
+                args.Verbs.Add(verb);
+            }
+        }
+    }
+
+    private bool TryGetContainingVehicle(EntityUid owner, out EntityUid vehicle)
+    {
+        vehicle = default;
+        var current = owner;
+
+        while (_containers.TryGetContainingContainer(current, out var container))
+        {
+            var containerOwner = container.Owner;
+            if (HasComp<VehicleComponent>(containerOwner) || HasComp<RMCHardpointSlotsComponent>(containerOwner))
+            {
+                vehicle = containerOwner;
+                return true;
+            }
+
+            current = containerOwner;
+        }
+
+        return false;
     }
 
     private void UpdateHardpointUi(EntityUid uid, RMCHardpointSlotsComponent? component = null, ItemSlotsComponent? itemSlots = null)

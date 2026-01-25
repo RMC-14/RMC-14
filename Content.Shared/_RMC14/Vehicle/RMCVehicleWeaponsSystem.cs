@@ -13,6 +13,7 @@ using Robust.Shared.Localization;
 using Robust.Shared.Network;
 using Robust.Shared.Containers;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Vehicle.Components;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -175,8 +176,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         }
 
         if (string.IsNullOrWhiteSpace(args.SlotId) ||
-            !_itemSlots.TryGetSlot(vehicleUid, args.SlotId, out var itemSlot, itemSlots) ||
-            !itemSlot.HasItem)
+            !TryGetSlotItem(vehicleUid, args.SlotId, itemSlots, out var item))
         {
             ClearOperatorSelections(weapons, args.Actor);
             weapons.SelectedWeapon = null;
@@ -184,8 +184,6 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
             return;
         }
-
-        var item = itemSlot.Item!.Value;
         if (!HasComp<VehicleTurretComponent>(item) || !HasComp<GunComponent>(item))
         {
             ClearOperatorSelections(weapons, args.Actor);
@@ -258,11 +256,32 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             if (string.IsNullOrWhiteSpace(slot.Id))
                 continue;
 
-            if (_itemSlots.TryGetSlot(vehicle, slot.Id, out var slotData, itemSlots) &&
-                slotData.HasItem &&
-                slotData.Item == selected)
-            {
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var slotData, itemSlots))
+                continue;
+
+            if (slotData.HasItem && slotData.Item == selected)
                 return true;
+
+            if (!slotData.HasItem || slotData.Item is not { } installed)
+                continue;
+
+            if (!TryComp(installed, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(installed, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                if (_itemSlots.TryGetSlot(installed, turretSlot.Id, out var turretItemSlot, turretItemSlots) &&
+                    turretItemSlot.HasItem &&
+                    turretItemSlot.Item == selected)
+                {
+                    return true;
+                }
             }
         }
 
@@ -274,14 +293,34 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+        if (!TryGetContainingVehicle(ent.Owner, out var vehicle))
             return;
 
-        if (!TryComp(container.Owner, out RMCVehicleWeaponsComponent? weapons))
+        if (!TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons))
             return;
 
         if (TryGetOperatorSeat(weapons, out var seat))
-            UpdateWeaponsUi(seat, container.Owner, weapons);
+            UpdateWeaponsUi(seat, vehicle, weapons);
+    }
+
+    private bool TryGetContainingVehicle(EntityUid owner, out EntityUid vehicle)
+    {
+        vehicle = default;
+        var current = owner;
+
+        while (_container.TryGetContainingContainer(current, out var container))
+        {
+            var containerOwner = container.Owner;
+            if (HasComp<VehicleComponent>(containerOwner) || HasComp<RMCVehicleWeaponsComponent>(containerOwner))
+            {
+                vehicle = containerOwner;
+                return true;
+            }
+
+            current = containerOwner;
+        }
+
+        return false;
     }
 
     private void UpdateWeaponsUi(
@@ -351,7 +390,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             var ammoCapacity = 0;
             var hasAmmo = false;
 
-            if (selectable && item != null)
+            if (item != null && HasComp<GunComponent>(item.Value))
             {
                 var ammoEv = new GetAmmoCountEvent();
                 RaiseLocalEvent(item.Value, ref ammoEv);
@@ -390,9 +429,107 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 hasMagazineData,
                 operatorName,
                 operatorIsSelf));
+
+            if (item != null)
+            {
+                AppendTurretEntries(entries, item.Value, slot.Id, weapons, operatorUid, operatorSlot);
+            }
         }
 
         _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key, new RMCVehicleWeaponsUiState(entries));
+    }
+
+    private void AppendTurretEntries(
+        List<RMCVehicleWeaponsUiEntry> entries,
+        EntityUid turretUid,
+        string parentSlotId,
+        RMCVehicleWeaponsComponent weapons,
+        EntityUid? operatorUid,
+        string? operatorSlot)
+    {
+        if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
+            !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+        {
+            return;
+        }
+
+        foreach (var turretSlot in turretSlots.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                continue;
+
+            var compositeId = RMCVehicleTurretSlotIds.Compose(parentSlotId, turretSlot.Id);
+            var hasItem = _itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots) &&
+                          turretItemSlot.HasItem;
+            EntityUid? item = hasItem ? turretItemSlot!.Item : null;
+            string? installedName = null;
+            NetEntity? installedEntity = null;
+
+            if (item != null)
+            {
+                installedName = Name(item.Value);
+                installedEntity = GetNetEntity(item.Value);
+            }
+
+            var operatorName = (string?) null;
+            var operatorIsSelf = false;
+            var hasOperator = weapons.HardpointOperators.TryGetValue(compositeId, out var slotOperator);
+            if (hasOperator)
+            {
+                operatorName = Name(slotOperator);
+                operatorIsSelf = operatorUid != null && slotOperator == operatorUid.Value;
+            }
+
+            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value) && HasComp<GunComponent>(item.Value);
+            if (selectable && hasOperator && !operatorIsSelf)
+                selectable = false;
+
+            var selected = operatorSlot != null && string.Equals(operatorSlot, compositeId, StringComparison.OrdinalIgnoreCase);
+
+            var ammoCount = 0;
+            var ammoCapacity = 0;
+            var hasAmmo = false;
+
+            if (item != null && HasComp<GunComponent>(item.Value))
+            {
+                var ammoEv = new GetAmmoCountEvent();
+                RaiseLocalEvent(item.Value, ref ammoEv);
+                ammoCount = ammoEv.Count;
+                ammoCapacity = ammoEv.Capacity;
+                hasAmmo = ammoEv.Capacity > 0;
+            }
+
+            var magazineSize = 0;
+            var storedMagazines = 0;
+            var maxStoredMagazines = 0;
+            var hasMagazineData = false;
+
+            if (item != null && TryComp(item.Value, out RMCVehicleHardpointAmmoComponent? hardpointAmmo))
+            {
+                magazineSize = Math.Max(1, hardpointAmmo.MagazineSize);
+                storedMagazines = hardpointAmmo.StoredMagazines;
+                maxStoredMagazines = hardpointAmmo.MaxStoredMagazines;
+                hasMagazineData = hardpointAmmo.MagazineSize > 0 || hardpointAmmo.MaxStoredMagazines > 0;
+            }
+
+            entries.Add(new RMCVehicleWeaponsUiEntry(
+                compositeId,
+                turretSlot.HardpointType,
+                installedName,
+                installedEntity,
+                hasItem,
+                selectable,
+                selected,
+                ammoCount,
+                ammoCapacity,
+                hasAmmo,
+                magazineSize,
+                storedMagazines,
+                maxStoredMagazines,
+                hasMagazineData,
+                operatorName,
+                operatorIsSelf));
+        }
     }
 
     private void ClearOperatorSelections(RMCVehicleWeaponsComponent weapons, EntityUid operatorUid)
@@ -419,12 +556,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         if (!Resolve(vehicle, ref hardpoints, logMissing: false))
             return;
 
-        var validSlots = new HashSet<string>();
-        foreach (var slot in hardpoints.Slots)
-        {
-            if (!string.IsNullOrWhiteSpace(slot.Id))
-                validSlots.Add(slot.Id);
-        }
+        var validSlots = GetAllSlotIds(vehicle, hardpoints, itemSlots);
 
         foreach (var entry in weapons.HardpointOperators.ToArray())
         {
@@ -445,6 +577,79 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         }
     }
 
+    private HashSet<string> GetAllSlotIds(
+        EntityUid vehicle,
+        RMCHardpointSlotsComponent? hardpoints,
+        ItemSlotsComponent? itemSlots)
+    {
+        var validSlots = new HashSet<string>();
+
+        if (!Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+            return validSlots;
+
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            validSlots.Add(slot.Id);
+
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            var installed = itemSlot.Item!.Value;
+            if (!TryComp(installed, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(installed, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                validSlots.Add(RMCVehicleTurretSlotIds.Compose(slot.Id, turretSlot.Id));
+            }
+        }
+
+        return validSlots;
+    }
+
+    private bool TryGetSlotItem(
+        EntityUid vehicle,
+        string slotId,
+        ItemSlotsComponent itemSlots,
+        out EntityUid item)
+    {
+        item = default;
+
+        if (RMCVehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
+        {
+            if (!_itemSlots.TryGetSlot(vehicle, parentSlotId, out var parentSlot, itemSlots) || !parentSlot.HasItem)
+                return false;
+
+            var turretUid = parentSlot.Item!.Value;
+            if (!TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+                return false;
+
+            if (!_itemSlots.TryGetSlot(turretUid, childSlotId, out var turretSlot, turretItemSlots) ||
+                !turretSlot.HasItem)
+            {
+                return false;
+            }
+
+            item = turretSlot.Item!.Value;
+            return true;
+        }
+
+        if (!_itemSlots.TryGetSlot(vehicle, slotId, out var slotData, itemSlots) || !slotData.HasItem)
+            return false;
+
+        item = slotData.Item!.Value;
+        return true;
+    }
+
     private bool TryGetOperatorSeat(RMCVehicleWeaponsComponent weapons, out EntityUid seat)
     {
         seat = default;
@@ -461,3 +666,4 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         return true;
     }
 }
+

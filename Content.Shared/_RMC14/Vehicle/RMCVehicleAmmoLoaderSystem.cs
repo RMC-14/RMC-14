@@ -321,6 +321,21 @@ public sealed class RMCVehicleAmmoLoaderSystem : EntitySystem
         ammo = default!;
         hardpointAmmo = default!;
 
+        if (!string.IsNullOrWhiteSpace(slotId) &&
+            RMCVehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
+        {
+            if (!TryGetTurretSlot(vehicle, parentSlotId, childSlotId, itemSlots, out var turretSlot, out var item))
+                return false;
+
+            if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
+                !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+
+            return TryGetAmmoProviderFromItem(item, box, out ammoUid, out ammo, out hardpointAmmo);
+        }
+
         foreach (var slot in hardpoints.Slots)
         {
             if (string.IsNullOrWhiteSpace(slot.Id))
@@ -342,22 +357,36 @@ public sealed class RMCVehicleAmmoLoaderSystem : EntitySystem
                 continue;
 
             var item = itemSlot.Item!.Value;
-            if (!TryComp(item, out BallisticAmmoProviderComponent? ammoProvider))
-                continue;
+            if (TryGetAmmoProviderFromItem(item, box, out ammoUid, out ammo, out hardpointAmmo))
+                return true;
 
-            if (!TryComp(item, out RMCVehicleHardpointAmmoComponent? hardpointAmmoComp))
-                continue;
-
-            if (!TryComp(item, out RefillableByBulletBoxComponent? refill) ||
-                refill.BulletType != box.BulletType)
+            if (!TryComp(item, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(item, out ItemSlotsComponent? turretItemSlots))
             {
                 continue;
             }
 
-            ammoUid = item;
-            ammo = ammoProvider;
-            hardpointAmmo = hardpointAmmoComp;
-            return true;
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                if (!string.IsNullOrWhiteSpace(loader.HardpointType) &&
+                    !string.Equals(turretSlot.HardpointType, loader.HardpointType, StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                if (!_itemSlots.TryGetSlot(item, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
+                    !turretItemSlot.HasItem)
+                {
+                    continue;
+                }
+
+                var turretItem = turretItemSlot.Item!.Value;
+                if (TryGetAmmoProviderFromItem(turretItem, box, out ammoUid, out ammo, out hardpointAmmo))
+                    return true;
+            }
         }
 
         return false;
@@ -425,9 +454,132 @@ public sealed class RMCVehicleAmmoLoaderSystem : EntitySystem
                 hardpointAmmo.StoredMagazines,
                 hardpointAmmo.MaxStoredMagazines,
                 canLoad));
+
+            AppendTurretAmmoEntries(entries, item, slot.Id, loaderComp, box);
         }
 
         _ui.SetUiState(loader, RMCVehicleAmmoLoaderUiKey.Key, new RMCVehicleAmmoLoaderUiState(entries, box.Amount, box.Max));
+    }
+
+    private void AppendTurretAmmoEntries(
+        List<RMCVehicleAmmoLoaderUiEntry> entries,
+        EntityUid turretUid,
+        string parentSlotId,
+        RMCVehicleAmmoLoaderComponent loaderComp,
+        BulletBoxComponent box)
+    {
+        if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
+            !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+        {
+            return;
+        }
+
+        foreach (var turretSlot in turretSlots.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                continue;
+
+            if (!string.IsNullOrWhiteSpace(loaderComp.HardpointType) &&
+                !string.Equals(turretSlot.HardpointType, loaderComp.HardpointType, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (!_itemSlots.TryGetSlot(turretUid, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
+                !turretItemSlot.HasItem)
+            {
+                continue;
+            }
+
+            var item = turretItemSlot.Item!.Value;
+            if (!TryGetAmmoProviderFromItem(item, box, out _, out var ammoProvider, out var hardpointAmmo))
+                continue;
+
+            var chambered = ammoProvider.Count;
+            var magazineSize = Math.Max(1, hardpointAmmo.MagazineSize);
+            var canLoad = box.Amount >= magazineSize &&
+                          (chambered == 0 || hardpointAmmo.StoredMagazines < hardpointAmmo.MaxStoredMagazines);
+
+            entries.Add(new RMCVehicleAmmoLoaderUiEntry(
+                RMCVehicleTurretSlotIds.Compose(parentSlotId, turretSlot.Id),
+                turretSlot.HardpointType,
+                Name(item),
+                GetNetEntity(item),
+                chambered,
+                magazineSize,
+                hardpointAmmo.StoredMagazines,
+                hardpointAmmo.MaxStoredMagazines,
+                canLoad));
+        }
+    }
+
+    private bool TryGetTurretSlot(
+        EntityUid vehicle,
+        string parentSlotId,
+        string childSlotId,
+        ItemSlotsComponent itemSlots,
+        out RMCHardpointSlot turretSlot,
+        out EntityUid item)
+    {
+        turretSlot = default!;
+        item = default;
+
+        if (!_itemSlots.TryGetSlot(vehicle, parentSlotId, out var parentSlot, itemSlots) || !parentSlot.HasItem)
+            return false;
+
+        var turretUid = parentSlot.Item!.Value;
+        if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
+            !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
+        {
+            return false;
+        }
+
+        foreach (var slot in turretSlots.Slots)
+        {
+            if (!string.Equals(slot.Id, childSlotId, StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            turretSlot = slot;
+            if (!_itemSlots.TryGetSlot(turretUid, slot.Id, out var turretItemSlot, turretItemSlots) ||
+                !turretItemSlot.HasItem)
+            {
+                return false;
+            }
+
+            item = turretItemSlot.Item!.Value;
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryGetAmmoProviderFromItem(
+        EntityUid item,
+        BulletBoxComponent box,
+        out EntityUid ammoUid,
+        out BallisticAmmoProviderComponent ammo,
+        out RMCVehicleHardpointAmmoComponent hardpointAmmo)
+    {
+        ammoUid = default;
+        ammo = default!;
+        hardpointAmmo = default!;
+
+        if (!TryComp(item, out BallisticAmmoProviderComponent? ammoProvider))
+            return false;
+
+        if (!TryComp(item, out RMCVehicleHardpointAmmoComponent? hardpointAmmoComp))
+            return false;
+
+        if (!TryComp(item, out RefillableByBulletBoxComponent? refill) ||
+            refill.BulletType != box.BulletType)
+        {
+            return false;
+        }
+
+        ammoUid = item;
+        ammo = ammoProvider;
+        hardpointAmmo = hardpointAmmoComp;
+        return true;
     }
 
 }

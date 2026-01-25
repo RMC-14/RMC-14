@@ -31,33 +31,27 @@
     state: humveeturret
   - type: RMCHardpointItem
     hardpointType: Primary
+  - type: RMCHardpointNoRemove
   - type: VehicleTurret
-  - type: GunUseGunOrigin
-  - type: GunIgnoreContainerOwnerCollision
-  - type: Gun
-    fireRate: 3
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
-    cameraRecoilScalar: 0
-  - type: BallisticAmmoProvider
-    cycleable: false
-    proto: CMCartridgeSentry10x50mm
-    capacity: 200
-  - type: RMCVehicleHardpointAmmo
-    magazineSize: 200
-    maxStoredMagazines: 2
-  - type: GunFireArc
-    arc: 180
-  - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxCupola
-  - type: GunMuzzleOffset
-    offset: "0,0"
-    muzzleOffset: "0,0"
-    useAimDirection: true
-  - type: RMCHardpointVisual
-    vehicleState: humveeturret_0
+    rotateToCursor: true
+    showOverlay: true
+    useDirectionalOffsets: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveeturret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-6,16"
+    pixelOffsetSouth: "0,15"
+    pixelOffsetWest: "6,16"
+  - type: RMCHardpointSlots
+    slots:
+    - id: turret-weapon
+      hardpointType: TurretWeapon
+      required: false
+      insertDelay: 2.0
+    - id: turret-weapon-2
+      hardpointType: TurretWeapon
+      required: false
+      insertDelay: 2.0
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -68,12 +62,21 @@
   - type: Sprite
     state: humveecannon
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: TurretWeapon
+  - type: VehicleTurretAttachment
   - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveecannon_0
+  - type: VehicleTurretMuzzle
+    alternate: true
+    useDirectionalOffsets: false
+    offsetLeft: "-0.30,0.55"
+    offsetRight: "0.30,0.55"
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 2.5
+    fireRate: 10
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -91,7 +94,7 @@
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxFrontal
   - type: GunMuzzleOffset
-    offset: "0.5,-1.5"
+    offset: "0,0"
     muzzleOffset: "0,0"
     useAimDirection: true
   - type: RMCHardpointVisual
@@ -106,8 +109,12 @@
   - type: Sprite
     state: humveelauncher
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: TurretWeapon
+  - type: VehicleTurretAttachment
   - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveelauncher_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIgnorePrediction
@@ -117,11 +124,13 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/rocket_launcher.ogg
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     cameraRecoilScalar: 0
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCRocket84mm
+    proto: RMC40MMGrenadeM74AGMSVehicle
     capacity: 6
   - type: RMCVehicleHardpointAmmo
     magazineSize: 6
@@ -129,13 +138,11 @@
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
-    bulletType: RMCVehicleAmmoBoxRocketLauncher
+    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
   - type: GunMuzzleOffset
     offset: "0,0"
     muzzleOffset: "0,0"
     useAimDirection: true
-  - type: RMCHardpointVisual
-    vehicleState: humveelauncher_0
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase

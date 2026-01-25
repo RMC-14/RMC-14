@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Vehicle Weapons"
-    MinSize="540 420">
+    MinSize="500 360">
 
     <PanelContainer HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer.PanelOverride>
@@ -13,10 +13,9 @@
                 BorderThickness="2"/>
         </PanelContainer.PanelOverride>
 
-        <BoxContainer Orientation="Vertical" Margin="12" SeparationOverride="8" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True">
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalExpand="True">
                 <Label Text="Vehicle Weapons" StyleClasses="LabelHeading"/>
-                <Label Text="Select a hardpoint to control." FontColorOverride="#9DB5D1"/>
             </BoxContainer>
 
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">
@@ -27,7 +26,7 @@
                         BorderThickness="1"/>
                 </PanelContainer.PanelOverride>
 
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="8">
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
                     <BoxContainer
                         Name="WeaponList"
                         Access="Public"

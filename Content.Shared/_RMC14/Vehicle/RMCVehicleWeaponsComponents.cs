@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
+using Robust.Shared.Maths;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -37,8 +39,43 @@ public sealed partial class VehicleWeaponsSeatComponent : Component
     public SkillWhitelist Skills = new();
 }
 
-[RegisterComponent, NetworkedComponent]
-[Access(typeof(RMCVehicleWeaponsSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(RMCVehicleWeaponsSystem), typeof(VehicleTurretSystem), typeof(VehicleTurretMuzzleSystem))]
 public sealed partial class VehicleTurretComponent : Component
 {
+    [DataField, AutoNetworkedField]
+    public bool RotateToCursor = false;
+
+    [DataField, AutoNetworkedField]
+    public bool ShowOverlay = false;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 PixelOffset = Vector2.Zero;
+
+    [DataField, AutoNetworkedField]
+    public string OverlayRsi = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public string OverlayState = string.Empty;
+
+    [DataField, AutoNetworkedField]
+    public bool UseDirectionalOffsets = false;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 PixelOffsetNorth = Vector2.Zero;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 PixelOffsetEast = Vector2.Zero;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 PixelOffsetSouth = Vector2.Zero;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 PixelOffsetWest = Vector2.Zero;
+
+    [DataField, AutoNetworkedField]
+    public Angle WorldRotation = Angle.Zero;
+
+    [NonSerialized]
+    public EntityUid? VisualEntity;
 }
