@@ -19,14 +19,11 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
 
     protected override void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
     {
-        // Validate user exists (e.g., not admin ghost with invalid entity).
-        if (!TryComp(user, out TransformComponent? userXform))
-            return;
-        if (!TryComp(target, out TransformComponent? targetXform))
-            return;
         if (!TryComp(ent, out ExplosiveComponent? explosive))
             return;
 
+        var userXform = Transform(user);
+        var targetXform = Transform(target);
         var targetCoords = TransformSystem.GetMapCoordinates(targetXform);
         var userRotation = userXform.LocalRotation;
 
@@ -73,9 +70,7 @@ public sealed class HefaSwordSplosionSystem : SharedHefaSwordSplosionSystem
         for (var i = 0; i < shrapnelCount; i++)
         {
             var shrapnel = Spawn(comp.ShrapnelPrototype, coords);
-
-            // Calculate angle for even distribution across the cone.
-            var angle = Angle.FromDegrees(baseAngle + segmentAngle * (i + 0.5));
+            var angle = Angle.FromDegrees(baseAngle + segmentAngle * (i + 0.5)); // Even distribution across cone.
             var direction = angle.ToVec().Normalized();
             var velocity = _random.NextVector2(comp.MinVelocity, comp.MaxVelocity);
 

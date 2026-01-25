@@ -49,10 +49,6 @@ public abstract class SharedHefaSwordSplosionSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        // Validate user has a transform component (prevents crash with admin ghost).
-        if (!HasComp<TransformComponent>(args.User))
-            return;
-
         // Only triggers on mobs.
         foreach (var hit in args.HitEntities)
         {
