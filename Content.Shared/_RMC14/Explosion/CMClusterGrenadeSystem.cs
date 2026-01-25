@@ -47,12 +47,7 @@ public sealed class CMClusterGrenadeSystem : EntitySystem
             return;
         }
 
-        // Check if the origin entity still exists before getting its NetEntity
-        var originNetEntity = Exists(ent.Comp.OriginEntity)
-            ? GetNetEntity(ent.Comp.OriginEntity)
-            : GetNetEntity(ent.Owner);
-
-        limit.HitBy.Add(new Hit(originNetEntity, _timing.CurTime + limit.Expire, ent.Comp.ExtraId));
+        limit.HitBy.Add(new Hit(GetNetEntity(ent.Comp.OriginEntity), _timing.CurTime + limit.Expire, ent.Comp.ExtraId));
         Dirty(args.Target, limit);
     }
 
