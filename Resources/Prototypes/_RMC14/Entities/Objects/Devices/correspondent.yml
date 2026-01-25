@@ -15,7 +15,7 @@
     broadcastChannel: Handheld
   - type: Speech
     speechVerb: Robotic
-  - type: ChatRepeatIgnoreSender # RMC14
+  - type: ChatRepeatIgnoreSender
   - type: InteractedBlacklist
     blacklist:
       components:
