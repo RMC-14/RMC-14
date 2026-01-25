@@ -32,7 +32,7 @@
         maxScatterModifier: 16
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
-        shotsToMaxScatter: 70 
+        shotsToMaxScatter: 70
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1
     accuracyMultiplierUnwielded: 1
@@ -59,7 +59,9 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
@@ -67,6 +69,7 @@
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
@@ -75,7 +78,6 @@
           - RMCAttachmentFlashlightGrip
           - RMCAttachmentGyroscopicStabilizer
           - RMCAttachmentLaserSight
-          - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0
@@ -85,7 +87,7 @@
     multiplier: 0.9
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGMAC15
   name: MAC-15 magazine (9mm)
   description: A 9mm magazine for the MAC-15.

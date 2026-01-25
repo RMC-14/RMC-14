@@ -3,12 +3,6 @@
   id: CMXenoDefender
   name: cm-job-name-xeno-defender
   playTimeTracker: CMJobXenoDefender
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: defender
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoDefender

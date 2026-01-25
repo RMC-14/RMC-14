@@ -2,14 +2,68 @@
   id: UNMC
   hostile:
   - RMCXeno
+  - CLF
 
 - type: npcFaction
   id: RMCXeno
   hostile:
   - UNMC
+  - SPP
+  - Halcyon
+  - WeYa
+  - Civilian
+  - CLF
+  - TSE
 
 - type: npcFaction
   id: RMCDumb
   hostile:
   - UNMC
+  - RMCXeno
+  - SPP
+  - Halcyon
+  - WeYa
+  - Civilian
+  - CLF
+  - TSE
+
+- type: npcFaction
+  id: SPP
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Halcyon
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: CLF
+  hostile:
+  - RMCXeno
+  - UNMC
+
+- type: npcFaction
+  id: WeYa
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Civilian
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: RoyalMarines
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: Bureau
+  hostile:
+  - RMCXeno
+
+- type: npcFaction
+  id: TSE
+  hostile:
   - RMCXeno

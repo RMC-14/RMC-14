@@ -1,0 +1,10 @@
+- type: entity
+  id: RMCPropGroundWire
+  name: ground wire
+  description: A small string of black wire hangs between two marker posts. Probably used to mark off an area.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/shiva_props.rsi
+    state: small_wire

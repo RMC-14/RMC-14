@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright":  "Made by Vermidia",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "surge-door",
+      "delays": [
+        [
+          1,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "surge-wall",
+      "delays": [
+        [
+          1,
+          0.2
+        ]
+      ]
+    }
+  ]
+}

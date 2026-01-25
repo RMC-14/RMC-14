@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13-pve at https://github.com/cmss13-devs/cmss13-pve/blob/master/icons/obj/items/candle.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "candle1"
+    },
+    {
+      "name": "candle1_lit",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "candle2"
+    },
+    {
+      "name": "candle2_lit",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "candle3"
+    },
+    {
+      "name": "candle3_lit",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "candle4"
+    },
+    {
+      "name": "inhand-left-flame",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-flame",
+      "directions": 4
+    }
+  ]
+}

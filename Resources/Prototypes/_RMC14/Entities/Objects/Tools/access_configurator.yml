@@ -27,7 +27,7 @@
     - CMAccessColonyCommand
     - CMAccessColonyChem
     # Resources/Prototypes/_RMC14/Access/command_access.yml
-    - CMAccessCommand
+    - RMCAccessCommand
     - CMAccessCMP
     - CMAccessQM
     - CMAccessSEA

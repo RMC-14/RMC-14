@@ -3,5 +3,5 @@
 namespace Content.Shared._RMC14.Hands;
 
 [RegisterComponent, NetworkedComponent]
-[Access(typeof(CMHandsSystem))]
+[Access(typeof(RMCHandsSystem))]
 public sealed partial class DropOnUseInHandComponent : Component;

@@ -1,0 +1,53 @@
+- type: job
+  parent: CMJobSquadBase
+  id: RMCRecruit
+  name: rmc-job-name-recruit
+  description: rmc-job-description-recruit
+  playTimeTracker: RMCJobRecruit
+  startingGear: RMCGearRecruit
+  icon: "CMJobIconEmpty"
+  joinNotifyCrew: false
+  marineAuthorityLevel: 0
+  supervisors: job-supervisors-everyone
+  ranks:
+    RMCRankRecruit: []
+  accessGroups:
+  - Rifleman
+  hasIcon: false
+  roleWeight: 1
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills: {} # No starting skills.
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-recruit
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: private
+    - type: MutinyEligible
+
+- type: playTimeTracker
+  id: RMCJobRecruit
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCGearRecruit
+  equipment:
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlack
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointRecruit
+  name: recruit spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCRecruit
+  - type: Sprite
+    state: recruit_spawn

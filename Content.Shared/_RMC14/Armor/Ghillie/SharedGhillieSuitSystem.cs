@@ -2,21 +2,16 @@ using Content.Shared.Whitelist;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.Inventory;
-using Content.Shared.Item.ItemToggle;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Movement.Events;
-using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared._RMC14.NightVision;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.Timing;
 using Content.Shared.Inventory.Events;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared.Weapons.Ranged.Components;
-using Content.Shared.Coordinates;
-using Robust.Shared.Network;
 using Content.Shared._RMC14.Armor.ThermalCloak;
 
 namespace Content.Shared._RMC14.Armor.Ghillie;
@@ -31,7 +26,6 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly ThermalCloakSystem _thermalCloak = default!;
 
     public override void Initialize()
@@ -165,12 +159,13 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             var activeInvisibility = EnsureComp<EntityActiveInvisibleComponent>(user);
             activeInvisibility.Opacity = comp.Opacity;
+            activeInvisibility.DisableMobCollision = true;
             Dirty(user, activeInvisibility);
 
             turnInvisible.UncloakTime = _timing.CurTime;
             Dirty(user, turnInvisible);
-
-            EnsureComp<EntityIFFComponent>(user);
+            if (ent.Comp.BlockFriendlyFire)
+                EnsureComp<EntityIFFComponent>(user);
             RemCompDeferred<RMCNightVisionVisibleComponent>(user);
 
             _thermalCloak.SpawnCloakEffects(user, comp.CloakEffect);
@@ -196,7 +191,8 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
 
             RemComp<RMCPassiveStealthComponent>(user);
             RemComp<EntityActiveInvisibleComponent>(user);
-            RemCompDeferred<EntityIFFComponent>(user);
+            if (ent.Comp.BlockFriendlyFire)
+                RemCompDeferred<EntityIFFComponent>(user);
         }
     }
 

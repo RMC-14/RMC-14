@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Strain;
 using Content.Shared.Eui;
 using Content.Shared.Humanoid.Prototypes;
+using Content.Shared.Prototypes;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
@@ -39,10 +40,6 @@ public sealed class RMCAdminEui : BaseEui
         _adminWindow.XenoTab.HiveList.OnItemSelected += OnHiveSelected;
         _adminWindow.XenoTab.CreateHiveButton.OnPressed += OnCreateHivePressed;
 
-        var humanoidRow = new RMCTransformRow();
-        humanoidRow.Label.Text = Loc.GetString("rmc-ui-humanoid");
-        _adminWindow.TransformTab.Container.AddChild(humanoidRow);
-
         var allSpecies = new SortedSet<SpeciesPrototype>(SpeciesComparer);
         foreach (var entity in _prototypes.EnumeratePrototypes<SpeciesPrototype>())
         {
@@ -52,13 +49,29 @@ public sealed class RMCAdminEui : BaseEui
             allSpecies.Add(entity);
         }
 
+        var humanoidRow = new RMCTransformRow();
+        humanoidRow.Label.Text = Loc.GetString("rmc-ui-humanoid");
+        _adminWindow.TransformTab.Container.AddChild(humanoidRow);
+
+        var i = 0;
         foreach (var species in allSpecies)
         {
+            if (i > 0 && i % 5 == 0)
+            {
+                humanoidRow.Container.Margin = new Thickness();
+                humanoidRow = new RMCTransformRow();
+                humanoidRow.Label.Visible = false;
+                humanoidRow.Separator.Visible = false;
+                _adminWindow.TransformTab.Container.AddChild(humanoidRow);
+            }
+
             var button = new RMCTransformButton { Type = TransformType.Humanoid };
             button.TransformName.Text = Loc.GetString(species.Name);
             button.OnPressed += _ => SendMessage(new RMCAdminTransformHumanoidMsg(species.ID));
 
             humanoidRow.Container.AddChild(button);
+
+            i++;
         }
 
         var tiers = new SortedDictionary<int, SortedSet<EntityPrototype>>();
@@ -67,8 +80,11 @@ public sealed class RMCAdminEui : BaseEui
             if (entity.Abstract || !entity.TryGetComponent(out XenoComponent? xeno, _compFactory))
                 continue;
 
-            if (entity.TryGetComponent(out XenoStrainComponent? strain, _compFactory))
+            if (entity.HasComponent<XenoStrainComponent>(_compFactory) ||
+                entity.HasComponent<XenoHiddenComponent>(_compFactory))
+            {
                 continue;
+            }
 
             if (!tiers.TryGetValue(xeno.Tier, out var xenos))
             {
@@ -128,7 +144,7 @@ public sealed class RMCAdminEui : BaseEui
 
     private void OnCreateHiveClosed()
     {
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
         _createHiveWindow = null;
     }
 
@@ -136,7 +152,7 @@ public sealed class RMCAdminEui : BaseEui
     {
         var msg = new RMCAdminCreateHiveMsg(args.Text);
         SendMessage(msg);
-        _createHiveWindow?.Dispose();
+        _createHiveWindow?.Close();
     }
 
     public override void HandleState(EuiStateBase state)
@@ -223,6 +239,6 @@ public sealed class RMCAdminEui : BaseEui
 
     public override void Closed()
     {
-        _adminWindow.Dispose();
+        _adminWindow.Close();
     }
 }

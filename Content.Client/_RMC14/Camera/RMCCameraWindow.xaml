@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Camera"
     xmlns:vp="clr-namespace:Content.Client.Viewport"
     Title="Ship Security Cameras">
-    <BoxContainer Orientation="Horizontal">
+    <BoxContainer Orientation="Horizontal" Name="Container">
         <BoxContainer Orientation="Vertical" VerticalExpand="True"
                       MinWidth="300">
             <LineEdit Name="SearchBar" Access="Public" PlaceHolder="Search for a camera"/>

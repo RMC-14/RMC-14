@@ -6,6 +6,7 @@
   components:
   - type: Item
     size: Small
+  - type: Animateable
   - type: Clickable
   - type: InteractionOutline
   - type: MovedByPressure
@@ -44,6 +45,7 @@
   - type: Pullable
   - type: DamageExaminable
   - type: RMCItemPickup
+  - type: RMCMesonsNonviewable
 
 - type: entity
   name: "storage item"

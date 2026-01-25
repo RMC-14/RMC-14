@@ -20,6 +20,9 @@
   - !type:DepartmentTimeRequirement
     department: CMCommand
     time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobIntelOfficer
+    time: 18000 # 5 hours
   ranks:
     RMCRankCaptain:
     - !type:RoleTimeRequirement
@@ -30,16 +33,11 @@
   startingGear: CMGearASO
   icon: "CMJobIconASO"
   requireAdminNotify: true
-  joinNotifyCrew: true
-  supervisors: cm-job-supervisors-co
+  joinNotifyCrew: false
+  marineAuthorityLevel: 12
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ASO
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: aso
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -47,6 +45,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 2
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 2
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -57,6 +56,7 @@
         RMCSkillNavigations: 1
         RMCSkillOverwatch: 1
         RMCSkillPilot: 2
+        RMCSkillResearch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
@@ -67,6 +67,15 @@
       prefix: cm-job-prefix-aso
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: aso
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearASO
@@ -98,7 +107,7 @@
 
 - type: entity
   parent: CMGuidebookRole
-  id: CMGuidebookRoleASO
+  id: RMCGuidebookRoleASO
   name: Auxiliary Support Officer
   categories: [ HideSpawnMenu ]
   components:

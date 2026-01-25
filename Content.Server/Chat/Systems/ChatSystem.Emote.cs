@@ -1,6 +1,9 @@
 using System.Collections.Frozen;
+using Content.Shared._RMC14.Voicelines;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Speech;
+using Robust.Shared.Audio;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -10,6 +13,8 @@ namespace Content.Server.Chat.Systems;
 public partial class ChatSystem
 {
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
+
+    [Dependency] private readonly HumanoidVoicelinesSystem _humanoidVoicelines = default!;
 
     protected override void OnPrototypeReload(PrototypesReloadedEventArgs obj)
     {
@@ -126,16 +131,16 @@ public partial class ChatSystem
     ///     Tries to find and play relevant emote sound in emote sounds collection.
     /// </summary>
     /// <returns>True if emote sound was played.</returns>
-    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, EmotePrototype emote)
+    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, EmotePrototype emote, AudioParams? audioParams = null)
     {
-        return TryPlayEmoteSound(uid, proto, emote.ID);
+        return TryPlayEmoteSound(uid, proto, emote.ID, audioParams);
     }
 
     /// <summary>
     ///     Tries to find and play relevant emote sound in emote sounds collection.
     /// </summary>
     /// <returns>True if emote sound was played.</returns>
-    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, string emoteId)
+    public bool TryPlayEmoteSound(EntityUid uid, EmoteSoundsPrototype? proto, string emoteId, AudioParams? audioParams = null)
     {
         if (proto == null)
             return false;
@@ -149,9 +154,17 @@ public partial class ChatSystem
                 return false;
         }
 
-        // if general params for all sounds set - use them
-        var param = proto.GeneralParams ?? sound.Params;
-        _audio.PlayPvs(sound, uid, param);
+        // optional override params > general params for all sounds in set > individual sound params
+        var param = audioParams ?? proto.GeneralParams ?? sound.Params;
+
+        // RMC14
+        var filter = Filter.Pvs(uid).RemoveWhere(s => !_humanoidVoicelines.ShouldPlayEmote(uid, s));
+        if (filter.Count == 0)
+            return false;
+
+        _audio.PlayEntity(sound, filter, uid, true, param);
+        // RMC14
+
         return true;
     }
     /// <summary>
@@ -199,16 +212,29 @@ public partial class ChatSystem
     /// <returns></returns>
     private bool AllowedToUseEmote(EntityUid source, EmotePrototype emote)
     {
-        if ((_whitelistSystem.IsWhitelistFail(emote.Whitelist, source) || _whitelistSystem.IsBlacklistPass(emote.Blacklist, source)))
-            return false;
+        // If emote is in AllowedEmotes, it will bypass whitelist and blacklist
+        if (TryComp<SpeechComponent>(source, out var speech) &&
+            speech.AllowedEmotes.Contains(emote.ID))
+        {
+            return true;
+        }
 
-        if (!emote.Available &&
-            TryComp<SpeechComponent>(source, out var speech) &&
-            !speech.AllowedEmotes.Contains(emote.ID))
+        // Check the whitelist and blacklist
+        if (_whitelistSystem.IsWhitelistFail(emote.Whitelist, source) ||
+            _whitelistSystem.IsBlacklistPass(emote.Blacklist, source))
+        {
             return false;
+        }
+
+        // Check if the emote is available for all
+        if (!emote.Available)
+        {
+            return false;
+        }
 
         return true;
     }
+
 
     private void InvokeEmoteEvent(EntityUid uid, EmotePrototype proto)
     {

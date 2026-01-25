@@ -1,0 +1,70 @@
+- type: entity
+  id: RMCIceSlabTrayBase
+  abstract: true
+  name: ice slab tray
+  description: It is a tray filled with slabs of dark ice.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/ice_slab_tray.rsi
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray1
+  components:
+  - type: Sprite
+    state: tray_1
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray2
+  components:
+  - type: Sprite
+    state: tray_2
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray3
+  components:
+  - type: Sprite
+    state: tray_3
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray4
+  components:
+  - type: Sprite
+    state: tray_4
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray5
+  components:
+  - type: Sprite
+    state: tray_5
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray6
+  components:
+  - type: Sprite
+    state: tray_6
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray7
+  components:
+  - type: Sprite
+    state: tray_7
+
+- type: entity
+  parent: RMCIceSlabTrayBase
+  id: RMCIceSlabTray8
+  components:
+  - type: Sprite
+    state: tray_8

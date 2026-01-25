@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/icons/obj/structures/props/server_equipment.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "rackframe"
+    },
+    {
+      "name": "rackframe_broken"
+    },
+    {
+      "name": "WY_server_on"
+    },
+    {
+      "name": "WY_server_broken"
+    },
+    {
+      "name": "WY_server_off"
+    },
+    {
+      "name": "laptop_closed"
+    },
+    {
+      "name": "laptop_off"
+    },
+    {
+      "name": "laptop_on"
+    },
+    {
+      "name": "laptop-gun"
+    },
+    {
+      "name": "blackbox"
+    },
+    {
+      "name": "blackbox_empty"
+    },
+    {
+      "name": "broadcast_receiver",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "broadcast_receiver_off"
+    },
+    {
+      "name": "broadcaster"
+    },
+    {
+      "name": "broadcaster_off"
+    },
+    {
+      "name": "broadcaster_send",
+      "delays": [
+        [
+          1,
+          0.1,
+          0.5,
+          0.1,
+          0.3,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "processor",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "processor_off"
+    },
+    {
+      "name": "bus",
+      "delays": [
+        [
+          0.3,
+          0.3,
+          0.3,
+          0.3
+        ]
+      ]
+    },
+    {
+      "name": "bus_off"
+    },
+    {
+      "name": "relay",
+      "delays": [
+        [
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "relay_off"
+    },
+    {
+      "name": "relay_broken"
+    },
+    {
+      "name": "hub",
+      "delays": [
+        [
+          0.5,
+          0.8,
+          0.5,
+          0.7,
+          0.8
+        ]
+      ]
+    },
+    {
+      "name": "hub_off"
+    }
+  ]
+}

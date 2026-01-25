@@ -25,8 +25,8 @@
           !type:DamageTrigger
           damage: 10
         behaviors:
-          - !type:DoActsBehavior
-            acts: [ "Destruction" ]
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
 
 - type: entity
   id: RMCCarpetBaseNonIconsmooth
@@ -489,3 +489,57 @@
     state: bcarpet09
   - type: Icon
     state: bcarpet09
+
+# Rug
+- type: entity
+  id: RMCBaseColourableRug
+  abstract: true
+  name: rug
+  components:
+  - type: Transform
+    anchored: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/Carpets/rug.rsi
+    drawdepth: FloorTiles
+    state: colorable_rug
+  - type: Clickable
+  - type: Physics
+    canCollide: false
+  - type: Fixtures
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 10
+        behaviors:
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+
+- type: entity
+  parent: RMCBaseColourableRug
+  id: RMCColourableRugGrey
+  name: rubber mat
+  suffix: Grey
+  components:
+  - type: Sprite
+    color: "#3d3d3d"
+
+- type: entity
+  parent: RMCBaseColourableRug
+  id: RMCColourableRugRed
+  name: rug
+  suffix: Red
+  components:
+  - type: Sprite
+    color: "#8c3c3c"
+
+- type: entity
+  parent: RMCBaseColourableRug
+  id: RMCColourableRugBlue
+  name: rug
+  suffix: Blue
+  components:
+  - type: Sprite
+    color: "#3c588c"

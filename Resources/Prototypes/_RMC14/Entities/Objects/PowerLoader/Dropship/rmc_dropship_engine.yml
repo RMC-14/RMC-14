@@ -1,0 +1,50 @@
+﻿- type: entity
+  abstract: true
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentEngine
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_attachments.rsi
+    offset: 0.5, 0.5
+  - type: DropshipFabricatorPrintable
+    category: Equipment
+    cost: 800
+  - type: PowerLoaderGrabbable
+    delay: 1
+  - type: DropshipEngine
+  - type: PowerLoaderAttachable
+    attachDelay: 7
+    attachableTypes:
+    - RMCDropshipEnginePoint
+  - type: PowerLoaderDetachable
+    detachDelay: 7
+
+- type: entity
+  parent: RMCDropshipAttachmentEngine
+  id: RMCDropshipAttachmentFuelEnhancer
+  name: fuel enhancer
+  description: A fuel enhancement system for dropships. It improves the thrust produced by the fuel combustion for faster travels. Fits inside the engine attach points. You need a powerloader to lift it.
+  components:
+  - type: Sprite
+    layers:
+    - state: fuel_enhancer
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: fuel_enhancer_installed
+  - type: DropshipFlightMultiplier
+
+- type: entity
+  parent: RMCDropshipAttachmentEngine
+  id: RMCDropshipAttachmentCoolingSystem
+  name: cooling system
+  description: A cooling system for dropships. It produces additional cooling reducing delays between launch. Fits inside the engine attach points. You need a powerloader to lift it.
+  components:
+  - type: Sprite
+    layers:
+    - state: cooling_system
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: cooling_system_installed
+  - type: DropshipRechargeMultiplier

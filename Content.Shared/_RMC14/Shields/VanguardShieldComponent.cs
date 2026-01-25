@@ -1,4 +1,4 @@
-﻿using Content.Shared.FixedPoint;
+using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Shields;
@@ -38,4 +38,7 @@ public sealed partial class VanguardShieldComponent : Component
 
     [DataField]
     public TimeSpan BuffExtraTime = TimeSpan.FromSeconds(0.7);
+
+    [DataField]
+    public float DecayThreshold = 5;
 }

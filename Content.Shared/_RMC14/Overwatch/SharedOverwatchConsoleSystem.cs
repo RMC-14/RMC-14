@@ -2,15 +2,22 @@
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Skills.Pamphlets;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Vendors;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Database;
@@ -48,6 +55,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedSupplyDropSystem _supplyDrop = default!;
     [Dependency] private readonly SharedTacticalMapSystem _tacticalMap = default!;
@@ -58,6 +66,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private EntityQuery<ActorComponent> _actor;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+    private EntityQuery<RankComponent> _rankQuery;
     private EntityQuery<OverwatchDataComponent> _overwatchDataQuery;
     private EntityQuery<RMCPlanetComponent> _planetQuery;
 
@@ -76,6 +85,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _actor = GetEntityQuery<ActorComponent>();
         _mobStateQuery = GetEntityQuery<MobStateComponent>();
         _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+        _rankQuery = GetEntityQuery<RankComponent>();
         _overwatchDataQuery = GetEntityQuery<OverwatchDataComponent>();
         _planetQuery = GetEntityQuery<RMCPlanetComponent>();
 
@@ -113,6 +123,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
             // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
+            subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
+            subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnOverwatchClearSquadObjectiveBui);
         });
 
         Subs.CVar(_config, RMCCVars.RMCOverwatchMaxProcessTimeMilliseconds, v => _maxProcessTime = TimeSpan.FromMilliseconds(v), true);
@@ -145,7 +157,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
@@ -164,7 +176,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             currentSquad = marineSquad;
         }
 
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         var options = new List<DialogOption>();
         foreach (var squad in state.Squads)
         {
@@ -174,7 +186,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             options.Add(new DialogOption(squad.Name, new OverwatchTransferMarineSquadEvent(args.Actor, args.Marine, squad.Id)));
         }
 
-        _dialog.OpenOptions(ent, actor.Value, "Squad Selection", options, "Choose the marine's new squad");
+        _dialog.OpenOptions(ent, actor.Value, Loc.GetString("rmc-overwatch-console-squad-selection"), options, Loc.GetString("rmc-overwatch-console-choose-marine-squad"));
     }
 
     private void OnTransferMarineSquad(Entity<OverwatchConsoleComponent> ent, ref OverwatchTransferMarineSquadEvent args)
@@ -186,41 +198,41 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
 
         var squadId = args.Squad;
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         if (!state.Squads.TryFirstOrNull(s => s.Id == squadId, out var squad))
         {
-            _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-cant-transfer-squad"), actor, PopupType.LargeCaution);
             return;
         }
 
         if (!TryGetEntity(args.Marine, out var marineId))
         {
-            _popup.PopupCursor("That marine is KIA.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-kia"), actor, PopupType.LargeCaution);
             return;
         }
 
         if (_mobState.IsDead(marineId.Value))
         {
-            _popup.PopupCursor($"{Name(marineId.Value)} is KIA.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-is-kia", ("marineName", Name(marineId.Value))), actor, PopupType.LargeCaution);
             return;
         }
 
         if (squad.Value.Leader != null && HasComp<SquadLeaderComponent>(marineId))
         {
-            _popup.PopupCursor($"Transfer aborted. {squad.Value.Name} can't have another Squad Leader.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-transfer-aborted-squad-leader", ("squadName", squad.Value.Name)), actor, PopupType.LargeCaution);
             return;
         }
 
         if (!TryGetEntity(squad.Value.Id, out var newSquadEnt))
         {
-            _popup.PopupCursor("You can't transfer marines to that squad!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-cant-transfer-squad"), actor, PopupType.LargeCaution);
             return;
         }
 
         if (_squad.TryGetMemberSquad(marineId.Value, out var currentSquad) &&
             currentSquad.Owner == GetEntity(args.Squad))
         {
-            _popup.PopupCursor($"{Name(marineId.Value)} is already in {Name(newSquadEnt.Value)}!", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-already-in-squad", ("marineName", Name(marineId.Value)), ("squadName", Name(newSquadEnt.Value))), actor, PopupType.LargeCaution);
             return;
         }
 
@@ -233,19 +245,19 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             if (_prototypes.TryIndex(job, out var jobProto))
                 jobName = Loc.GetString(jobProto.Name);
 
-            _popup.PopupCursor($"Transfer aborted. {Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-transfer-aborted-job", ("squadName", Name(newSquadEnt.Value)), ("jobName", jobName)), actor, PopupType.LargeCaution);
             return;
         }
 
-        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null);
-
-        var selfMsg = $"{Name(marineId.Value)} has been transfered from squad '{Name(currentSquad)}' to squad '{Name(newSquadEnt.Value)}'. Logging to enlistment file.";
+        var selfMsg = Loc.GetString("rmc-overwatch-console-marine-transferred", ("marineName", Name(marineId.Value)), ("oldSquad", Name(currentSquad)), ("newSquad", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(selfMsg, actor);
         _popup.PopupCursor(selfMsg, actor, PopupType.Large);
 
-        var targetMsg = $"You've been transfered to {Name(newSquadEnt.Value)}!";
+        var targetMsg = Loc.GetString("rmc-overwatch-console-you-transferred", ("squadName", Name(newSquadEnt.Value)));
         _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
         _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
+
+        _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null); //We do this later so that the announcement about transfer to another squad is before the text of the squad's objectives
     }
 
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
@@ -277,7 +289,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
 
         if (_net.IsServer)
-            _popup.PopupEntity("The pain kicked you out of the console!", ent, ent, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("rmc-overwatch-console-pain-kicked-out"), ent, ent, PopupType.MediumCaution);
     }
 
     private void OnOverwatchSelectSquadBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSelectSquadBuiMsg args)
@@ -346,7 +358,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (ent.Comp.Squad is not { } selectedSquad)
             return;
 
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         var options = new List<DialogOption>();
         if (state.Marines.TryGetValue(selectedSquad, out var marines))
         {
@@ -362,7 +374,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             }
         }
 
-        _dialog.OpenOptions(ent, args.Actor, "Transfer Marine", options, "Choose marine to transfer");
+        _dialog.OpenOptions(ent, args.Actor, Loc.GetString("rmc-overwatch-console-transfer-marine-title"), options, Loc.GetString("rmc-overwatch-console-choose-marine-transfer"));
     }
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)
@@ -372,6 +384,15 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
             return;
+
+        if (HasComp<ScopingComponent>(args.Actor))
+        {
+            if (_net.IsServer)
+            {
+                _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
+            }
+            return;
+        }
 
         Watch(args.Actor, camera);
     }
@@ -402,7 +423,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         Dirty(ent);
 
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
@@ -417,8 +438,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             return;
         }
 
-        _squad.PromoteSquadLeader((target.Value, member), args.Actor);
-        var state = GetOverwatchBuiState();
+        _squad.PromoteSquadLeader((target.Value, member), args.Actor, args.Icon);
+        var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
     }
 
@@ -442,7 +463,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         _supplyDrop.TryLaunchSupplyDropPopup((ent, computer), args.Actor);
 
-        var state = GetOverwatchBuiState();
+        var state = GetOverwatchBuiState(ent);
         _ui.SetUiState(ent.Owner, OverwatchConsoleUI.Key, state);
         Dirty(ent);
     }
@@ -491,6 +512,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnOverwatchOrbitalLaunchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleOrbitalLaunchBuiMsg args)
     {
+        if (!ent.Comp.CanOrbitalBombardment)
+            return;
+
         if (!_orbitalCannon.TryGetClosestCannon(ent, out var cannon))
             return;
 
@@ -524,6 +548,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (message.Length > 200)
             message = message[..200];
 
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
         if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
             Prototype(squad.Value) is not { } squadProto)
         {
@@ -534,7 +561,108 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
 
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
-        _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-message", ("operatorName", Name(args.Actor)), ("message", message)), squadProto.ID);
+
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+
+        var userMsg = Loc.GetString("rmc-overwatch-console-squad-message-sent", ("squadName", Name(squad.Value)), ("message", message));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
+    }
+
+    private void OnOverwatchSetSquadObjectiveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSetSquadObjectiveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastObjectiveUpdate + ent.Comp.MessageCooldown)
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            !TryComp(squad, out SquadTeamComponent? squadComp) ||
+            Prototype(squad.Value) is not { } squadProto)
+        {
+            return;
+        }
+
+        var objective = args.Objective;
+        if (objective.Length > 200)
+            objective = objective[..200];
+
+        _squad.SetSquadObjective((squad.Value, squadComp), args.Type, objective);
+
+        ent.Comp.LastObjectiveUpdate = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} set {args.Type} objective for {Name(squad.Value)} squad: {objective}");
+
+        var objectiveTypeName = args.Type switch
+        {
+            SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+            SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+            _ => args.Type.ToString()
+        };
+
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-updated", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", objective)), squadProto.ID);
+
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+
+        var userMsg = Loc.GetString("rmc-overwatch-console-objective-updated", ("squadName", Name(squad.Value)), ("objectiveType", objectiveTypeName), ("objective", objective));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
+    }
+
+    private void OnOverwatchClearSquadObjectiveBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleClearSquadObjectiveBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastObjectiveUpdate + ent.Comp.MessageCooldown)
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            !TryComp(squad, out SquadTeamComponent? squadComp) ||
+            Prototype(squad.Value) is not { } squadProto)
+        {
+            return;
+        }
+
+        var objectiveTypeName = args.Type switch
+        {
+            SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+            SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+            _ => args.Type.ToString()
+        };
+
+        // Get objective text before removing it
+        var cancelledObjective = string.Empty;
+        if (_squad.TryGetSquadObjective((squad.Value, squadComp), args.Type, out var objectiveText))
+        {
+            cancelledObjective = objectiveText;
+        }
+
+        _squad.RemoveSquadObjective((squad.Value, squadComp), args.Type);
+
+        ent.Comp.LastObjectiveUpdate = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} cancelled {args.Type} objective for {Name(squad.Value)} squad");
+
+        _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-objective-cancelled", ("operatorName", Name(args.Actor)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective)), squadProto.ID);
+
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+
+        var userMsg = Loc.GetString("rmc-overwatch-console-objective-cancelled", ("squadName", Name(squad.Value)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
 
     protected virtual void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
@@ -549,15 +677,23 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _eye.SetTarget(watcher, null);
     }
 
-    private OverwatchConsoleBuiState GetOverwatchBuiState()
+    private OverwatchConsoleBuiState GetOverwatchBuiState(Entity<OverwatchConsoleComponent> console)
+    {
+        return GetOverwatchBuiState(console.Comp);
+    }
+
+    private OverwatchConsoleBuiState GetOverwatchBuiState(OverwatchConsoleComponent console)
     {
         var squads = new List<OverwatchSquad>();
         var marines = new Dictionary<NetEntity, List<OverwatchMarine>>();
         var query = EntityQueryEnumerator<SquadTeamComponent>();
         while (query.MoveNext(out var uid, out var team))
         {
+            if (console.Group != "ADMINISTRATOR" && team.Group != console.Group)
+                continue;
+
             var netUid = GetNetEntity(uid);
-            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop);
+            var squad = new OverwatchSquad(netUid, Name(uid), team.Color, null, team.CanSupplyDrop, team.LeaderIcon, new Dictionary<SquadObjectiveType, string>(team.Objectives));
             var members = marines.GetOrNew(netUid);
 
             foreach (var member in team.Members)
@@ -631,11 +767,13 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                         var mobState = _mobStateQuery.CompOrNull(member)?.CurrentState ?? MobState.Alive;
                         var ssd = !_actor.HasComp(member);
                         var role = _originalRoleQuery.CompOrNull(member)?.Job;
+                        var rank = _rankQuery.CompOrNull(member)?.Rank;
                         var location = _planetQuery.HasComp(mapId) ? OverwatchLocation.Planet : OverwatchLocation.Ship;
                         var areaName = _area.TryGetArea(coords, out _, out var areaProto)
                             ? areaProto.Name
                             : string.Empty;
                         var netMember = GetNetEntity(member);
+                        var roleOverride = CompOrNull<RMCVendorRoleOverrideComponent>(member)?.GiveSquadRoleName ?? CompOrNull<UsedSkillPamphletComponent>(member)?.JobTitle;
 
                         Vector2? leaderDistance = null;
                         if (member != leader.Owner &&
@@ -657,7 +795,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
                             location == OverwatchLocation.Planet,
                             location,
                             areaName,
-                            leaderDistance
+                            leaderDistance,
+                            rank,
+                            roleOverride
                         );
                     }
 
@@ -703,12 +843,12 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         OverwatchConsoleBuiState? state = null;
         var query = EntityQueryEnumerator<OverwatchConsoleComponent>();
-        while (query.MoveNext(out var uid, out _))
+        while (query.MoveNext(out var uid, out var console))
         {
             if (!_ui.IsUiOpen(uid, OverwatchConsoleUI.Key))
                 continue;
 
-            state ??= GetOverwatchBuiState();
+            state ??= GetOverwatchBuiState(console);
             _ui.SetUiState(uid, OverwatchConsoleUI.Key, state);
         }
     }

@@ -95,7 +95,7 @@ public sealed partial class NPCCombatSystem
         // TODO: When I get parallel operators move this as NPC combat shouldn't be handling this.
         _steering.Register(uid, new EntityCoordinates(component.Target, Vector2.Zero), steering);
 
-        if (distance > weapon.Range)
+        if (distance > _rmcMeleeWeapon.GetUserLightAttackRange(uid, component.Target, weapon))
         {
             component.Status = CombatStatus.TargetOutOfRange;
             return;

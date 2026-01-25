@@ -3,12 +3,6 @@
   id: CMXenoLarva
   name: cm-job-name-xeno-larva
   playTimeTracker: CMJobXenoLarva
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: larva
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoLarva

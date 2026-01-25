@@ -4,6 +4,6 @@
     xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
     Orientation="Vertical">
     <Label Name="Label" Access="Public" />
-    <cc:VSeparator />
+    <cc:VSeparator Name="Separator" Access="Public" />
     <BoxContainer Orientation="Horizontal" Name="Container" Access="Public" Margin="0 0 0 20" />
 </controls:RMCTransformRow>

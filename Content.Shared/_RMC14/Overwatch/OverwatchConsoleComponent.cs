@@ -1,5 +1,6 @@
 ﻿using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Overwatch;
 
@@ -37,6 +38,9 @@ public sealed partial class OverwatchConsoleComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan MessageCooldown = TimeSpan.FromSeconds(0.5);
 
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
+    public TimeSpan LastObjectiveUpdate;
+
     [DataField, AutoNetworkedField]
     public bool CanMessageSquad = true;
 
@@ -48,4 +52,10 @@ public sealed partial class OverwatchConsoleComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextOrbitalLaunch;
+
+    [DataField]
+    public string Group = "UNMC";
+
+    [DataField, AutoNetworkedField]
+    public bool CanOrbitalBombardment = true;
 }

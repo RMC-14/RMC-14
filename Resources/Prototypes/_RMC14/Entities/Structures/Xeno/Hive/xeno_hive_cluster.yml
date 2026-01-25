@@ -1,7 +1,7 @@
 - type: entity
   id: HiveClusterXeno
   parent: BaseHiveStructure
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. It rhythmically pulses, as if its pumping something into the weeds below...
   components:
   - type: Sprite
@@ -27,35 +27,38 @@
     spawns: XenoHiveWeedsCluster
     level: 3
     blockOtherWeeds: true
-  - type: ReplaceWeedSourceOnWeeding
-    replacementPairs:
-      RMCCommunicationsTower: HivePylonXeno
+    spreadsOnSemiWeedable: true
+  - type: HiveCluster
   - type: XenoWeedsSpreading
   - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: RepairableXenoStructure
     plasmaCost: 300
-    repairLength: 15
-  - type: XenoMapTracked
+    repairLength: 4
+  - type: XenoStructureMapTracked
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: cluster
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_cluster_old.rsi
 
 
 - type: entity
   id: HiveClusterXenoConstructionNode
   parent: BaseHiveStructureNode
-  name: Hive Cluster
+  name: hive cluster
   description: A large clump of gooey mass. Looks like a marker for something.
   components:
   - type: Sprite
     color: '#FFFFFFAA'
+    sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
     layers:
-    - sprite: _RMC14/Structures/Xenos/hive_cluster.rsi
-      state: hive_cluster_idle
+    - state: hive_cluster_idle
     - sprite: _RMC14/Interface/xeno_hud.rsi
       state: xeno_structure_node_indicator
       scale: 0.8, 0.8
@@ -72,7 +75,11 @@
     plasmaCost: 300
     spawn: HiveClusterXeno
   - type: HiveConstructionRequiresHiveCore
+  - type: HiveConstructionRequiresWeedableSurface
   - type: HiveConstructionLimited
     id: HiveClusterXeno
   - type: WarpPoint
     location: hive cluster
+  - type: RMCAlternateSprite
+    normalSprite: _RMC14/Structures/Xenos/hive_cluster.rsi
+    alternateSprite: _RMC14/Structures/Xenos/hive_cluster_old.rsi

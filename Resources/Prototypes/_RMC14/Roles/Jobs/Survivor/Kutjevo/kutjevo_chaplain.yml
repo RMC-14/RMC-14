@@ -1,0 +1,59 @@
+﻿- type: job
+  parent: CMSurvivorPriest
+  id: RMCSurvivorKutjevoChaplain
+  name: rmc-job-name-survivor-kutjevo-chaplain
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoChaplain
+  spawnMenuRoleName: Kutjevo Chaplain (Kutjevo Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 2
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetKutjevoChaplain
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorEquipped
+  id: RMCGearSurvivorKutjevoChaplain
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: ArmorHelmetPMCKutjevo
+    mask: RMCMaskKutjevoRespirator
+    back: CMSatchelFillSurvivorPriest
+    shoes: RMCShoesJackboots
+    gloves: RMCHandsBlack
+    jumpsuit: RMCJumpsuitKutjevoJumper
+    outerClothing: RMCClothingHolidayRobes
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoChaplain
+  name: survivor kutjevo chaplain spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoChaplain
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
+  id: RMCGearSurvivorPresetKutjevoChaplain
+  name: kutjevo chaplain preset
+  categories: [ HideSpawnMenu ]

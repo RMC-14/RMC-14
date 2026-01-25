@@ -1,23 +1,11 @@
-- type: dataset
-  id: names_avali_unisex
+- type: localizedDataset
+  id: RMCNamesAvaliFirst
   values:
-  - Ko
-  - Nomi
-  - Jasyo
-  - Nesuli
-  - Eikii
-  - Runo
-  - Khauni
-  - Eilun
-  - Rhaun
-  - Halan
-  - Nahami
-  - Halyu
-  - Kala
-  - Renala
-  - Eitun
-  - Nesomi
-  - Ralomi
-  - Kazo
-  - Jasuni
-  - Ruko
+    prefix: rmc-name-avali-first-
+    count: 24
+
+- type: localizedDataset
+  id: RMCNamesAvaliLast
+  values:
+    prefix: rmc-name-avali-last-
+    count: 130

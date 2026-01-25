@@ -1,9 +1,8 @@
 - type: entity
-  parent: BaseStorageItem
-  id: RMCGunCaseBase
   abstract: true
-  name: base gun case
-  description: A gun case.
+  parent: BaseStorageItem
+  id: RMCCaseBase
+  name: case
   components:
   - type: Sprite
     noRot: true
@@ -34,7 +33,18 @@
       - Xeno
 
 - type: entity
-  parent: RMCGunCaseBase
+  parent: RMCCaseBase
+  id: RMCGunCaseBase
+  abstract: true
+  name: base gun case
+  description: A gun case.
+  components:
+  - type: RMCUnfoldCardboard
+    spawns:
+    - id: RMCSheetPlastic1
+
+- type: entity
+  parent: RMCCaseBase
   id: RMCBaseEquipmentCase
   abstract: true
   name: base equipment case

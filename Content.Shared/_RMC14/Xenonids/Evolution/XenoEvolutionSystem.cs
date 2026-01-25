@@ -178,7 +178,10 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         var ev = new XenoEvolutionDoAfterEvent(args.Choice);
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno);
+        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.EvolutionDelay, ev, xeno)
+        {
+            BreakOnRest = false,
+        };
 
         if (xeno.Comp.EvolutionDelay > TimeSpan.Zero)
             _popup.PopupClient(Loc.GetString("cm-xeno-evolution-start"), xeno, xeno);
@@ -534,6 +537,18 @@ public sealed class XenoEvolutionSystem : EntitySystem
         }
 
         return false;
+    }
+
+    public FixedPoint2 AddPointsCapped(Entity<XenoEvolutionComponent?> evolution, FixedPoint2 points)
+    {
+        if (!Resolve(evolution, ref evolution.Comp, false))
+            return FixedPoint2.Zero;
+
+        var oldPoints = evolution.Comp.Points;
+        evolution.Comp.Points += FixedPoint2.Min(evolution.Comp.Max, points);
+        Dirty(evolution);
+
+        return evolution.Comp.Points - oldPoints;
     }
 
     public void SetPoints(Entity<XenoEvolutionComponent> evolution, FixedPoint2 points)

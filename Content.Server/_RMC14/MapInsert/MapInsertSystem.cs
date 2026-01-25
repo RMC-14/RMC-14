@@ -1,10 +1,12 @@
 ﻿using System.Numerics;
+using Content.Server._RMC14.Rules;
 using Content.Server.Decals;
 using Content.Shared._RMC14.Areas;
-using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Decals;
 using Content.Shared.GameTicking;
 using Robust.Server.Physics;
+using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -12,40 +14,51 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.MapInsert;
 
 public sealed class MapInsertSystem : EntitySystem
 {
-    [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IComponentFactory _compFactory = default!;
-    [Dependency] private readonly SharedMapSystem _mapSystem = default!;
-    [Dependency] private readonly SharedRMCMapSystem _rmcMap = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly GridFixtureSystem _fixture = default!;
     [Dependency] private readonly AreaSystem _areas = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly DecalSystem _decals = default!;
+    [Dependency] private readonly GridFixtureSystem _fixture = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly MapLoaderSystem _mapLoader = default!;
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
 
-    private MapId? _map;
-    private int _index;
+    private float _mergeOffset = 999f;
 
     private readonly HashSet<EntityUid> _lookupEnts = new();
     private readonly HashSet<EntityUid> _immuneEnts = new();
 
-    public override void Initialize()
+    public string SelectMapScenario(List<RMCNightmareScenario> scenarioList)
     {
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
-    }
+        if (scenarioList.Count <= 0)
+        {
+            return string.Empty;
+        }
 
-    private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
-    {
-        _map = null;
-        _index = 0;
+        var randomProbability = _random.NextFloat();
+        var cumulativeProbability = 0f;
+
+        foreach (var scenario in scenarioList)
+        {
+            cumulativeProbability += scenario.ScenarioProbability;
+            if (cumulativeProbability >= randomProbability)
+            {
+                return scenario.ScenarioName;
+            }
+        }
+
+        return string.Empty;
     }
 
     public void ProcessMapInsert(Entity<MapInsertComponent> ent, bool forceSpawn = false)
@@ -66,12 +79,13 @@ public sealed class MapInsertSystem : EntitySystem
         foreach (var variation in ent.Comp.Variations)
         {
             cumulativeProbability += variation.Probability;
-            if (forceSpawn ||  cumulativeProbability >= randomProbability)
-            {
-                spawn = variation.Spawn;
-                spawnOffset = variation.Offset;
-                break;
-            }
+            if (!forceSpawn &&
+                ((variation.NightmareScenario != _distressSignal.ActiveNightmareScenario) ||
+                 cumulativeProbability < randomProbability))
+                continue;
+            spawn = variation.Spawn;
+            spawnOffset = variation.Offset;
+            break;
         }
 
         if (spawn == default)
@@ -80,20 +94,6 @@ public sealed class MapInsertSystem : EntitySystem
             return;
         }
 
-        if (_map == null)
-        {
-            _mapSystem.CreateMap(out var mapId);
-            _map = mapId;
-        }
-
-        var matrix = Matrix3x2.CreateTranslation(_index * 50, _index * 50);
-        _index++;
-
-        _rmcMap.TryLoad(_map.Value, spawn.ToString(), out var grids, matrix);
-        if (grids == null || grids.Count == 0)
-            return;
-
-        var insertGrid = grids[0];
         var xform = Transform(ent);
         var mainGrid = xform.GridUid;
         if (mainGrid == null)
@@ -101,6 +101,11 @@ public sealed class MapInsertSystem : EntitySystem
         var coordinates = _transform.GetMapCoordinates(ent, xform).Offset(new Vector2(-0.5f, -0.5f));
         coordinates = coordinates.Offset(spawnOffset);
         var coordinatesi = new Vector2i((int)coordinates.X, (int)coordinates.Y);
+
+        // _mergeOfset is needed to make sure the grid isn't overlapping the destination, otherwise merge causes issues
+        if (!_mapLoader.TryLoadGrid(xform.MapID, spawn, out var grid, offset: coordinatesi + new Vector2(_mergeOffset)))
+            return;
+        var insertGrid = grid.Value;
 
         //Replace areas
         if (ent.Comp.ReplaceAreas)
@@ -122,12 +127,7 @@ public sealed class MapInsertSystem : EntitySystem
         }
 
         // Clear all entities on map in insert area
-        _transform.SetMapCoordinates(insertGrid, coordinates);
         MapInsertSmimsh(insertGrid, (EntityUid)mainGrid, ent.Comp.ClearEntities, ent.Comp.ClearDecals);
-
-        // Merge grids
-        // Need to make sure the grid isn't overlapping where it's going to be merged to, otherwise exception
-        _transform.SetMapCoordinates(insertGrid, coordinates.Offset(new Vector2(999f)));
 
         //Decals not handled in Merge(), so do it here
         if (!TryComp(insertGrid, out DecalGridComponent? insertDecalGrid))
@@ -137,11 +137,16 @@ public sealed class MapInsertSystem : EntitySystem
         {
             foreach (var (decalUid, decal) in chunk.Decals)
             {
-                _decals.SetDecalPosition(insertGrid, decalUid, new(mainGrid.Value, decal.Coordinates + coordinatesi));
+                _decals.SetDecalPosition(insertGrid, decalUid, new EntityCoordinates(mainGrid.Value, decal.Coordinates + coordinatesi));
             }
         }
 
-        _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+        // Need delay to allow physics to settle, otherwise entities get pushed around
+        Timer.Spawn(TimeSpan.FromMilliseconds(50),
+            () =>
+            {
+                _fixture.Merge((EntityUid)mainGrid, insertGrid, coordinatesi, Angle.Zero);
+            });
 
         QueueDel(ent);
     }
@@ -156,14 +161,17 @@ public sealed class MapInsertSystem : EntitySystem
             return;
 
         // Flatten anything not parented to a grid.
+        var transform = _physics.GetRelativePhysicsTransform((uid, xform), xform.MapUid.Value);
+
         foreach (var fixture in manager.Fixtures.Values)
         {
             if (!fixture.Hard)
                 continue;
 
-            var aabb = _physics.GetWorldAABB(uid, xform: xform);
+            var aabb = fixture.Shape.ComputeAABB(transform, 0);
 
             aabb = aabb.Enlarged(-0.05f);
+            aabb = aabb.Translated(new Vector2(-_mergeOffset));
             _lookupEnts.Clear();
             _immuneEnts.Clear();
             // TODO: Ideally we'd query first BEFORE moving grid but needs adjustments above.

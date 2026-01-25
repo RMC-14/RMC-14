@@ -24,6 +24,7 @@ public sealed class RMCApcBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RMCApcWindow>();
 
         _window.CoverButton.OnPressed += _ => SendPredictedMessage(new RMCApcCoverBuiMsg());

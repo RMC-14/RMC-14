@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobSlimePerson
   name: Urist C.M McSlime
   suffix: RMC14
@@ -13,7 +13,7 @@
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
-    allowedEmotes: ['Squish']
+    allowedEmotes: ['Squish', 'RMCSlimeBubble', 'RMCSlimePop', 'RMCSlimeWobble']
   - type: TypingIndicator
     proto: slime
   - type: Vocal
@@ -28,3 +28,5 @@
         color: "#2cf274"
       Burn:
         sprite: Mobs/Effects/burn_damage.rsi
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-slime

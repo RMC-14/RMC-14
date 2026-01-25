@@ -2,60 +2,69 @@
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Tracker.SquadLeader"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Margin="0 0 0 40">
+    Margin="0 0 0 16">
     <PanelContainer>
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+            <graphics:StyleBoxFlat 
+                BorderColor="#3A3A3A" 
+                BorderThickness="1" 
+                BackgroundColor="#1A1A1A" />
         </PanelContainer.PanelOverride>
         <BoxContainer Name="MembersContainer" Access="Public" Orientation="Vertical">
             <PanelContainer HorizontalExpand="True">
                 <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+                    <graphics:StyleBoxFlat 
+                        BorderColor="#3A3A3A" 
+                        BorderThickness="0 0 0 1" 
+                        BackgroundColor="#252525" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Horizontal">
-                    <RichTextLabel Name="FireteamLabel" Access="Public" Margin="4" HorizontalExpand="True" />
+                <BoxContainer Orientation="Horizontal" Margin="4 2">
+                    <RichTextLabel Name="FireteamLabel" Access="Public" HorizontalExpand="True" />
                 </BoxContainer>
             </PanelContainer>
-            <BoxContainer Name="LeaderContainer" Access="Public" Orientation="Horizontal" Margin="4">
+            <BoxContainer Name="LeaderContainer" Access="Public" Orientation="Horizontal" Margin="4 2">
                 <RichTextLabel Name="LeaderLabel" Access="Public" />
                 <Control HorizontalExpand="True" />
-                <Button Name="RemoveLeaderButton" Access="Public" Text="x" StyleClasses="OpenBoth" />
+                <Button Name="RemoveLeaderButton" Access="Public" Text="✕" StyleClasses="SmallSquareButton" />
             </BoxContainer>
-            <BoxContainer Orientation="Horizontal">
+            <BoxContainer Orientation="Horizontal" StyleClasses="ColumnHeaderContainer">
                 <PanelContainer HorizontalExpand="True" MinWidth="66">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+                        <graphics:StyleBoxFlat 
+                            BorderColor="#3A3A3A" 
+                            BorderThickness="0 0 0 1" 
+                            BackgroundColor="#252525" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Horizontal" Margin="2">
                         <Control HorizontalExpand="True" />
-                        <RichTextLabel Text="{Loc rmc-squad-info-role}" />
+                        <RichTextLabel Text="{Loc rmc-squad-info-role}" StyleClasses="ColumnHeaderText" />
                         <Control HorizontalExpand="True" />
                     </BoxContainer>
                 </PanelContainer>
-                <!-- <PanelContainer HorizontalExpand="True" Visible="False"> -->
-                <!--     <PanelContainer.PanelOverride> -->
-                <!--         <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" /> -->
-                <!--     </PanelContainer.PanelOverride> -->
-                <!--     <RichTextLabel Text="{Loc rmc-squad-info-rank}" Margin="2" /> -->
-                <!-- </PanelContainer> -->
                 <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="9">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+                        <graphics:StyleBoxFlat 
+                            BorderColor="#3A3A3A" 
+                            BorderThickness="0 0 0 1" 
+                            BackgroundColor="#252525" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Horizontal" Margin="2">
                         <Control HorizontalExpand="True" />
-                        <RichTextLabel Text="{Loc rmc-squad-info-member}" />
+                        <RichTextLabel Text="{Loc rmc-squad-info-member}" StyleClasses="ColumnHeaderText" />
                         <Control HorizontalExpand="True" />
                     </BoxContainer>
                 </PanelContainer>
                 <PanelContainer HorizontalExpand="True" SizeFlagsStretchRatio="3">
                     <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BorderColor="#9B9C9F" BorderThickness="1" />
+                        <graphics:StyleBoxFlat 
+                            BorderColor="#3A3A3A" 
+                            BorderThickness="0 0 0 1" 
+                            BackgroundColor="#252525" />
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Horizontal" Margin="2">
                         <Control HorizontalExpand="True" />
                         <RichTextLabel Name="ActionsLabel" Access="Public"
-                                       Text="{Loc rmc-squad-info-assign-ft}" />
+                                       Text="{Loc rmc-squad-info-assign-ft}" StyleClasses="ColumnHeaderText" />
                         <Control HorizontalExpand="True" />
                     </BoxContainer>
                 </PanelContainer>

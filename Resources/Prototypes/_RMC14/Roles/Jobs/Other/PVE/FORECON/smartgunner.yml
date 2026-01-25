@@ -1,0 +1,71 @@
+- type: job
+  parent: CMJobBase
+  id: RMCFORECONPVESmartgunner
+  name: rmc-job-name-pve-forecon-smartgunner
+  description: cm-job-description-smart-gun-operator
+  playTimeTracker: CMJobFORECONPVESmartgunner
+  ranks:
+   RMCRankSergeant: []
+  startingGear: RMCJobFORECONPVESmartgunner
+  icon: "CMJobIconSmartGunOperator"
+  joinNotifyCrew: false
+  accessGroups:
+  - SmartGunOperator
+  spawnMenuRoleName: FORECON Smartgunner (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - UNMC
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 1
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 1
+        RMCSkillPilot: 1
+        RMCSkillSmartGun: 1
+        RMCSkillPowerLoader: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pve-forecon-smartgunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: smartgunner
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointFORECONPVESmartgunner
+  name: forecon smartgunner spawn point
+  suffix: PVE
+  components:
+  - type: Sprite
+    state: smartgunner_spawn
+  - type: SpawnPoint
+    job_id: RMCFORECONPVESmartgunner
+
+- type: startingGear
+  id: RMCJobFORECONPVESmartgunner
+  equipment:
+    id: CMDogtagRifleman
+    ears: RMCHeadsetMarine
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+
+- type: playTimeTracker
+  id: CMJobFORECONPVESmartgunner

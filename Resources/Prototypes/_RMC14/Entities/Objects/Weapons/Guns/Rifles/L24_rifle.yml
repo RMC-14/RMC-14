@@ -1,0 +1,400 @@
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleL24
+  name: L24 rifle
+  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marines units. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in the purple-blue camouflage of the RCM.
+  suffix: Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
+    - state: bolt-open
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    soundGunshot:
+      collection: RMCSSG45Shoot
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 3.4
+    recoilUnwielded: 4
+    scatterWielded: 2
+    scatterUnwielded: 20
+    baseFireRate: 2.75
+    burstScatterMult: 1
+    modifiers:
+      Burst:
+        fireDelay: 0.225
+        maxScatterModifier: 6
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        fireDelay: 0
+        maxScatterModifier: 6
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.75
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL24
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL24
+          - RMCMagazineRifleL24AP
+          - RMCMagazineRifleL24Extended
+          - RMCMagazineRifleL24HEAP
+          - RMCMagazineRifleL24Incendiary
+  - type: GunDamageModifier
+    multiplier: 1.0
+  - type: AttachableHolder
+    randomAttachmentChance: 1
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+        random:
+        - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS6ReflexSight
+        - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL24Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL24Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentU1GrenadeLauncher
+        random:
+        - RMCAttachmentU7UnderbarrelShotgun
+        - RMCAttachmentMiniFlamethrower
+        - RMCAttachmentU1GrenadeLauncher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.906, 0.03125
+      rmc-aslot-rail: -0.0175, 0.19
+      rmc-aslot-stock: -0.5, 0.01
+      rmc-aslot-underbarrel: 0.3125, -0.315
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL24
+  name: L24 Magazine (8.88x51mm)
+  description: "A magazine of 8.88x51mm rounds for use in the L24 rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL24
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL24
+    proto: RMCCartridgeRifleL24
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL24
+  id: RMCMagazineRifleL24AP
+  description: "A magazine of armor-piercing 8.88x51mm rounds for use in the L24 rifle."
+  name: L24 AP Magazine (8.88x51mm)
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL24
+    - RMCMagazineRifleL24AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL24AP
+    proto: RMCCartridgeRifleL24AP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL24
+  id: RMCMagazineRifleL24HEAP
+  description: "A magazine of high-explosive armor-piercing 8.88x51mm rounds for use in the L24 rifle."
+  name: L24 HEAP Magazine (8.88x51mm)
+  suffix: HEAP
+  components:
+    - type: Tag
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineRifleL24
+      - RMCMagazineRifleL24HEAP
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+        - RMCCartridgeRifleL24HEAP
+      proto: RMCCartridgeRifleL24HEAP
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+      layers:
+      - state: base
+        map: [ "enum.GunVisualLayers.Base" ]
+      - state: mag-1
+        map: [ "enum.GunVisualLayers.Mag" ]
+      - state: ammo_band
+        color: "#9C9A19"
+    - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL24
+  id: RMCMagazineRifleL24Incendiary
+  description: "A magazine of incendiary 8.88x51mm rounds for use in the L24 rifle."
+  name: L24 Incendiary Magazine (8.88x51mm)
+  suffix: Incendiary
+  components:
+    - type: Tag
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineRifleL24
+      - RMCMagazineRifleL24Incendiary
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+        - RMCCartridgeRifleL24Incendiary
+      proto: RMCCartridgeRifleL24Incendiary
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+      layers:
+      - state: base
+        map: [ "enum.GunVisualLayers.Base" ]
+      - state: mag-1
+        map: [ "enum.GunVisualLayers.Mag" ]
+      - state: ammo_band
+        color: "#771A10"
+    - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL24
+  id: RMCMagazineRifleL24Extended
+  description: "An extended magazine of 8.88x51mm rounds for use in the L24 rifle."
+  name: L24 Extended Magazine (8.88x51mm)
+  suffix: Extended
+  components:
+    - type: Tag
+      tags:
+      - CMMagazineRifle
+      - RMCMagazineRifleL24
+      - RMCMagazineRifleL24Extended
+    - type: BallisticAmmoProvider
+      whitelist:
+        tags:
+        - RMCCartridgeRifleL24
+      proto: RMCCartridgeRifleL24
+      capacity: 45
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/extendedL24.rsi
+      layers:
+      - state: base
+        map: [ "enum.GunVisualLayers.Base" ]
+      - state: mag-1
+        map: [ "enum.GunVisualLayers.Mag" ]
+    - type: Appearance
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL24
+  name: Cartridge (8.88x51mm)
+  description: A 8.88x51mm rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL24
+  - type: CartridgeAmmo
+    proto: BulletRifle888x51mm
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL24AP
+  name: AP Cartridge (8.88x51mm)
+  description: A 8.88x51mm AP rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL24AP
+  - type: CartridgeAmmo
+    proto: BulletRifle888x51mmAP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL24HEAP
+  name: HEAP Cartridge (8.88x51mm)
+  description: A 8.88x51mm HEAP rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL24HEAP
+  - type: CartridgeAmmo
+    proto: BulletRifle888x51mmHEAP
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL24Incendiary
+  name: Incendiary Cartridge (8.88x51mm)
+  description: A 8.88x51mm Incendiary rifle cartridge
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL24Incendiary
+  - type: CartridgeAmmo
+    proto: BulletRifle888x51mmIncendiary
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle888x51mmAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle888x51mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+       types:
+         Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle888x51mmHEAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+       types:
+         Piercing: 65
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: entity
+  parent: BulletRifle10x24mm
+  id: BulletRifle888x51mmIncendiary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+       types:
+         Piercing: 40
+  - type: CMArmorPiercing
+    amount: 10
+  - type: IgniteOnProjectileHit
+
+
+- type: Tag
+  id: RMCMagazineRifleL24
+
+- type: Tag
+  id: RMCMagazineRifleL24AP
+
+- type: Tag
+  id: RMCMagazineRifleL24HEAP
+
+- type: Tag
+  id: RMCMagazineRifleL24Incendiary
+
+- type: Tag
+  id: RMCMagazineRifleL24Extended
+
+- type: Tag
+  id: RMCCartridgeRifleL24
+
+- type: Tag
+  id: RMCCartridgeRifleL24AP
+
+- type: Tag
+  id: RMCCartridgeRifleL24HEAP
+
+- type: Tag
+  id: RMCCartridgeRifleL24Incendiary
+
+- type: Tag
+  id: RMCWeaponRifleL24

@@ -1,0 +1,20 @@
+﻿{
+    "version": 2,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Made by SharkSnake98 on Github",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "base"
+        },
+        {
+            "name": "mag-1"
+        },
+        {
+            "name": "ammo_band"
+        }
+    ]
+}

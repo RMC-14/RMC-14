@@ -3,12 +3,6 @@
   id: CMXenoCarrier
   name: cm-job-name-xeno-carrier
   playTimeTracker: CMJobXenoCarrier
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: carrier
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoCarrier

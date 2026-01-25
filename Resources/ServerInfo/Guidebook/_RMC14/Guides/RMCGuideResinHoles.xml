@@ -1,0 +1,28 @@
+<Document>
+  #Resin Holes
+
+  Resin holes can be created by the Burrower and Carrier, yet they can be filled by any caste with acid by clicking on them with harm mode off!
+
+  <Box>
+    <GuideEntityEmbed Entity="CMXenoBurrower"/>
+    <GuideEntityEmbed Entity="CMXenoCarrier"/>
+  </Box>
+  <Box>
+    <GuideEntityEmbed Entity="XenoResinHole"/>
+  </Box>
+
+  ##Where to place?
+  You can hide resin holes by planting them under debris such as planks and certain chairs, use this to your advantage to get the sneak up on any host and capture them, it is recommended to place these on the backline as they are easily destroyed by explosions which are common on the front.
+
+  Tip is to break wooden chairs and barricades to make planks so that you can hide your traps!
+
+  They also give off a alert when destroyed, this can be used to gather intel or to block off flank routes that hosts might use!
+
+  ##Variants
+  - [bold]Weak acid trap[/bold]: Filled by lesser drones, drones, and sentinels. This trap will do minimal damage and will NOT stun.
+  - [bold]Normal acid trap[/bold]: Filled by base praetorian, spitter, queen, and hivelord. Does a decent amount of damage with a short stun.
+  - [bold]Strong acid traps[/bold]: Filled by burrowers, has a long stun and high damage.
+  - [bold]Neurotoxin gas trap[/bold]: Filled by a boiler with the neurotoxin gas type selected, sprays out neurotoxin gas which gives them debuffs that disorient, stun and damage
+  - [bold]Acid gas trap[/bold]: Filled by boilers with acid gas selected, sprays out acid gas which does high damage to hosts.
+  - [bold]Parasite trap[/bold]: Stuns a host when they step on it. The parasite will then jump out and infect the host. Filled by any caste that can pick up a parasite, however most commonly made by carriers.
+</Document>

@@ -1,15 +1,18 @@
 using Content.Client._RMC14.LinkAccount;
+using Content.Client._RMC14.Lobby;
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
+using Content.Client.Playtime;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.Voting;
 using Content.Shared.CCVar;
 using Robust.Client;
 using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
+using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
@@ -17,7 +20,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Client.Lobby
 {
-    public sealed class LobbyState : Robust.Client.State.State
+    public sealed class LobbyState : State
     {
         [Dependency] private readonly IBaseClient _baseClient = default!;
         [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -27,6 +30,9 @@ namespace Content.Client.Lobby
         [Dependency] private readonly IUserInterfaceManager _userInterfaceManager = default!;
         [Dependency] private readonly IGameTiming _gameTiming = default!;
         [Dependency] private readonly IVoteManager _voteManager = default!;
+        [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
+
+        // RMC14
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
         private ClientGameTicker _gameTicker = default!;
@@ -74,6 +80,11 @@ namespace Content.Client.Lobby
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
+
+            // RMC14
+            Lobby.JoinXenoButton.OnPressed += _ =>
+                _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
+            Lobby.JoinXenoButton.AddStyleClass("OpenRight");
         }
 
         protected override void Shutdown()
@@ -191,6 +202,10 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.ToggleMode = false;
                 Lobby!.ReadyButton.Pressed = false;
                 Lobby!.ObserveButton.Disabled = false;
+
+                // RMC14
+                Lobby.ReadyButton.AddStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = true;
             }
             else
             {
@@ -200,12 +215,36 @@ namespace Content.Client.Lobby
                 Lobby!.ReadyButton.Disabled = false;
                 Lobby!.ReadyButton.Pressed = _gameTicker.AreWeReady;
                 Lobby!.ObserveButton.Disabled = true;
+
+                // RMC14
+                Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
+                Lobby.JoinXenoButton.Visible = false;
             }
 
             if (_gameTicker.ServerInfoBlob != null)
             {
                 Lobby!.ServerInfo.SetInfoBlob(_gameTicker.ServerInfoBlob);
             }
+
+            var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
+            if (minutesToday > 60)
+            {
+                Lobby!.PlaytimeComment.Visible = false; // RMC14
+
+                var hoursToday = Math.Round(minutesToday / 60f, 1);
+
+                var chosenString = minutesToday switch
+                {
+                    < 180 => "lobby-state-playtime-comment-normal",
+                    < 360 => "lobby-state-playtime-comment-concerning",
+                    < 720 => "lobby-state-playtime-comment-grasstouchless",
+                    _ => "lobby-state-playtime-comment-selfdestructive"
+                };
+
+                Lobby.PlaytimeComment.SetMarkup(Loc.GetString(chosenString, ("hours", hoursToday)));
+            }
+            else
+                Lobby!.PlaytimeComment.Visible = false;
         }
 
         private void UpdateLobbySoundtrackInfo(LobbySoundtrackChangedEvent ev)

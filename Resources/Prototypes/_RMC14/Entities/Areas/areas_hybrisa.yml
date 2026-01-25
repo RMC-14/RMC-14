@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: RMCAreaBase
   id: RMCAreaLv759
   name: LV-759 Hybrisa Prospera
@@ -23,8 +23,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759
@@ -38,6 +40,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -55,6 +58,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -62,6 +66,8 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759
@@ -77,6 +83,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -84,6 +91,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaLv759Bunker
@@ -97,6 +105,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -104,6 +113,7 @@
     noTunnel: true
     unweedable: false
     minimapColor: '#3A3A3AFF'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Bunker
@@ -117,6 +127,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -142,6 +153,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
@@ -165,6 +177,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     landingZone: true
@@ -184,10 +197,12 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     landingZone: true
     linkedLz: dropship_lz1
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Outdoors
@@ -206,6 +221,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -229,6 +245,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -247,6 +264,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -265,6 +283,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -283,6 +302,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -301,6 +321,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -319,6 +340,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -337,6 +359,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -355,6 +378,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -378,9 +402,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
@@ -396,6 +422,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#91BDCFE7'
@@ -415,6 +442,7 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#91BDCFE7'
@@ -434,6 +462,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#6C6767D8'
@@ -453,6 +482,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     avoidBioscan: false
@@ -474,6 +504,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -492,6 +523,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -510,6 +542,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -568,6 +601,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -586,6 +620,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -612,6 +647,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -638,6 +674,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -656,6 +693,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -674,6 +712,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#856600EE'
@@ -692,6 +731,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -715,6 +755,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#390192EE'
@@ -733,6 +774,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -743,7 +785,7 @@
   id: RMCAreaLv759IndoorsCavesNorthEastCavesSouth
   components:
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -759,6 +801,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -784,6 +827,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -802,6 +846,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#390192EE'
@@ -820,10 +865,11 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#00B3FFE7'
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
@@ -850,6 +896,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#390192EE'
@@ -868,6 +915,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#4E6D67AE'
@@ -930,6 +978,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -947,6 +996,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     minimapColor: '#00B3FFE7'
@@ -1157,6 +1207,7 @@
     state: wydropship
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsSpaceport
@@ -1167,6 +1218,18 @@
     state: wydropship
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
+
+- type: entity
+  parent: RMCAreaLv759IndoorsSpaceport
+  id: RMCAreaLv759IndoorsSpaceportDogbite
+  name: UD-9M 'Dogbite' Utility Dropship
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#525252D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759Indoors
@@ -1719,7 +1782,7 @@
   - type: Sprite
     state: mining
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
@@ -2292,7 +2355,7 @@
   - type: Sprite
     state: security_checkpoint_east
   - type: Area
-    linkedLz: list(dropship_lz1, dropship_lz2)
+    linkedLz: dropship_lz1, dropship_lz2
 
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
@@ -2309,6 +2372,11 @@
   components:
   - type: Sprite
     state: security_checkpoint_west
+
+- type: entity
+  parent: RMCAreaLv759IndoorsWySecurityCheckpointWest
+  id: RMCAreaLv759IndoorsWySecurityCheckpointWestCaves
+  name: Weston-Yamada Security Checkpoint - Caverns Entrance
 
 - type: entity
   parent: RMCAreaLv759IndoorsWySecurity
@@ -2332,6 +2400,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -2355,6 +2424,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -2511,6 +2581,7 @@
     state: wylab
   - type: Area
     minimapColor: '#6C6767D8'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaLv759IndoorsWyResearchComplex
@@ -2583,3 +2654,80 @@
   components:
   - type: Sprite
     state: wylab
+
+# TSE Airbase
+- type: entity
+  parent: RMCAreaLv759Indoors
+  id: RMCAreaLv759IndoorsOutpostSouterMainHall
+  name: EIAF Outpost Souter - Main Hall
+  components:
+  - type: Sprite
+    state: security_checkpoint_central
+  - type: Area
+    minimapColor: '#2364a1'
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterDorms
+  name: EIAF Outpost Souter - Dormitories
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterArmoury
+  name: EIAF Outpost Souter - Armoury
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterFlightMaints
+  name: EIAF Outpost Souter - Flight Maintenance Room
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterHangar
+  name: EIAF Outpost Souter - Hangar
+  components:
+  - type: Sprite
+    state: security_checkpoint_east
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterReception
+  name: EIAF Outpost Souter - Reception Office
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterEntrance
+  name: EIAF Outpost Souter - Entrance
+  components:
+  - type: Sprite
+    state: security_checkpoint_west
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterFlightControl
+  name: EIAF Outpost Souter - Flight Control
+  components:
+  - type: Sprite
+    state: security_hub
+
+- type: entity
+  parent: RMCAreaLv759IndoorsOutpostSouterMainHall
+  id: RMCAreaLv759IndoorsOutpostSouterUD4UK
+  name: TSE UD4-UK
+  components:
+  - type: Sprite
+    state: wydropship
+  - type: Area
+    minimapColor: '#6C6767D8'

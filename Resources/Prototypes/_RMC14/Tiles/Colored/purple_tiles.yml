@@ -68,3 +68,63 @@
   parent: CMFloorSteelPlanetPurpleBase
   id: CMFloorSteelPlanetPurpleFull
   sprite: /Textures/_RMC14/Tiles/floors/purplefull.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple1
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple2
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple3
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple4
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_4.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple5
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_5.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple6
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_6.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple7
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_7.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurple8
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurple_8.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurpleCorner1
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurplecorner_1.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurpleCorner2
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurplecorner_2.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurpleCorner3
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurplecorner_3.png
+
+- type: tile
+  parent: CMFloorSteelPlanetPurpleBase
+  id: CMFloorSteelPlanetWhitePurpleCorner4
+  sprite: /Textures/_RMC14/Tiles/floors/whitepurplecorner_4.png

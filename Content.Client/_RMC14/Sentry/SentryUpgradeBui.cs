@@ -33,9 +33,9 @@ public sealed class SentryUpgradeBui : BoundUserInterface
 
     protected override void Open()
     {
-        _menu = new SentryUpgradeMenu();
-        _menu.OnClose += Close;
+        base.Open();
 
+        _menu = this.CreateWindow<SentryUpgradeMenu>();
         if (EntMan.TryGetComponent(Owner, out SentryComponent? sentry) &&
             sentry.Upgrades is { } upgrades)
         {
@@ -70,11 +70,5 @@ public sealed class SentryUpgradeBui : BoundUserInterface
         var pos = _eye.WorldToScreen(_transform.GetMapCoordinates(Owner).Position) / vpSize;
 
         _menu.OpenCenteredAt(pos);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-            _menu?.Dispose();
     }
 }

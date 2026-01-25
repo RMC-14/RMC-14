@@ -25,19 +25,19 @@ public sealed class MarineOrdersSystem : SharedMarineOrdersSystem
         // All the SetUseDelay calls are required because even tho we set the cooldown on all of them once an order
         // is issued for some reason the order that was pressed uses its delays and does not care about its cooldown
         // being set.
-        _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
-        _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
-        _actions.AddAction(ent, ref comp.HoldActionEntity, comp.HoldAction);
-        _actions.SetUseDelay(comp.HoldActionEntity, comp.Cooldown);
         _actions.AddAction(ent, ref comp.MoveActionEntity, comp.MoveAction);
         _actions.SetUseDelay(comp.MoveActionEntity, comp.Cooldown);
+        _actions.AddAction(ent, ref comp.HoldActionEntity, comp.HoldAction);
+        _actions.SetUseDelay(comp.HoldActionEntity, comp.Cooldown);
+        _actions.AddAction(ent, ref comp.FocusActionEntity, comp.FocusAction);
+        _actions.SetUseDelay(comp.FocusActionEntity, comp.Cooldown);
     }
 
     private void OnOrdersShutdown(Entity<MarineOrdersComponent> ent, ref ComponentShutdown ev)
     {
-        _actions.RemoveAction(ent, ent.Comp.FocusActionEntity);
-        _actions.RemoveAction(ent, ent.Comp.HoldActionEntity);
-        _actions.RemoveAction(ent, ent.Comp.MoveActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.FocusActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.HoldActionEntity);
+        _actions.RemoveAction(ent.Owner, ent.Comp.MoveActionEntity);
     }
 
     protected override void OnAction(Entity<MarineOrdersComponent> ent, ref MoveActionEvent ev)

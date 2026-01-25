@@ -26,6 +26,7 @@
   parent: RMCPouchFirstAid
   id: RMCPouchFirstAidInjectors
   suffix: Injectors
+  description: Contains a variety of autoinjectors for quickly treating injuries.
   components:
   - type: StorageFill
     contents:
@@ -84,3 +85,36 @@
     - id: CMEmergencyAutoInjector
     - id: CMGauze10
 
+- type: entity
+  parent: RMCPouchFirstAid
+  id: RMCPouchFirstAidPMC
+  name: We-Ya first-aid pouch
+  description: Contains a variety of autoinjectors for quickly treating injuries.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_firstaid.rsi
+
+- type: entity
+  parent: RMCPouchFirstAidPMC
+  id: RMCPouchFirstAidPMCFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    #- id: CMTramadolAutoInjector
+    - id: CMEmergencyAutoInjector
+
+- type: entity
+  parent: RMCPouchFirstAidPMC
+  id: RMCPouchFirstAidSPPArmyFill
+  name: first-aid pouch
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    #- id: CMTramadolAutoInjector
+    - id: CMEmergencyAutoInjector

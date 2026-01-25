@@ -30,6 +30,8 @@ public sealed class RMCDoorVisualsSystem : EntitySystem
         if (_animation.HasRunningAnimation(entity.Value, ButtonAnimationKey))
             return;
 
+        var newState = ev.AnimationState;
+
         _animation.Play(entity.Value,
             new Animation
             {
@@ -41,9 +43,9 @@ public sealed class RMCDoorVisualsSystem : EntitySystem
                         LayerKey = RMCPodDoorButtonLayers.Animation,
                         KeyFrames =
                         {
-                            new KeyFrame(comp.OnState, 0),
-                            new KeyFrame(comp.OnState, 0.5f),
-                            new KeyFrame(comp.OnState, 1f),
+                            new KeyFrame(newState, 0),
+                            new KeyFrame(newState, 0.5f),
+                            new KeyFrame(newState, 1f),
                             new KeyFrame(comp.OffState, 1.25f),
                         },
                     },

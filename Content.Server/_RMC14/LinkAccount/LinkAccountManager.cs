@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Database;
 using Content.Shared._RMC14.LinkAccount;
@@ -21,7 +23,7 @@ public sealed class LinkAccountManager : IPostInjectInit
     private readonly Dictionary<NetUserId, TimeSpan> _lastRequest = new();
     private readonly TimeSpan _minimumWait = TimeSpan.FromSeconds(0.5);
     private readonly Dictionary<NetUserId, SharedRMCPatronFull> _connected = new();
-    private readonly List<SharedRMCPatron> _allPatrons = [];
+    private readonly Dictionary<NetUserId, SharedRMCPatron> _allPatrons = [];
     private readonly HashSet<Guid> _figurines = [];
 
     public event Action? PatronsReloaded;
@@ -126,7 +128,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             return;
 
         var user = message.MsgChannel.UserId;
-        if (GetPatron(user)?.Tier is not { LobbyMessage: true })
+        if (GetConnectedPatron(user)?.Tier is not { LobbyMessage: true })
             return;
 
         if (text.Length > SharedRMCLobbyMessage.CharacterLimit)
@@ -143,7 +145,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             return;
 
         var user = message.MsgChannel.UserId;
-        if (GetPatron(user)?.Tier is not { RoundEndShoutout: true })
+        if (GetConnectedPatron(user)?.Tier is not { RoundEndShoutout: true })
             return;
 
         if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
@@ -160,7 +162,7 @@ public sealed class LinkAccountManager : IPostInjectInit
             return;
 
         var user = message.MsgChannel.UserId;
-        if (GetPatron(user)?.Tier is not { RoundEndShoutout: true })
+        if (GetConnectedPatron(user)?.Tier is not { RoundEndShoutout: true })
             return;
 
         if (name.Length > SharedRMCRoundEndShoutouts.CharacterLimit)
@@ -172,7 +174,7 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     private void SetGhostColor(NetUserId user, Robust.Shared.Maths.Color? color)
     {
-        if (GetPatron(user)?.Tier is not { GhostColor: true })
+        if (GetConnectedPatron(user)?.Tier is not { GhostColor: true })
             return;
 
         Color? sysColor = color == null ? null : Color.FromArgb(color.Value.ToArgb());
@@ -199,7 +201,7 @@ public sealed class LinkAccountManager : IPostInjectInit
         _figurines.Clear();
         foreach (var patron in patrons)
         {
-            _allPatrons.Add(new SharedRMCPatron(patron.Player.LastSeenUserName, patron.Tier.Name));
+            _allPatrons[new NetUserId(patron.PlayerId)] = new SharedRMCPatron(patron.Player.LastSeenUserName, patron.Tier.Name);
 
             if (patron.Tier.Figurines)
                 _figurines.Add(patron.PlayerId);
@@ -210,24 +212,29 @@ public sealed class LinkAccountManager : IPostInjectInit
 
     public void SendPatronsToAll()
     {
-        var msg = new RMCPatronListMsg { Patrons = _allPatrons };
+        var msg = new RMCPatronListMsg { Patrons = _allPatrons.Values.ToList() };
         _net.ServerSendToAll(msg);
     }
 
-    public void SendPatrons(ICommonSession player)
+    private void SendPatrons(ICommonSession player)
     {
-        var msg = new RMCPatronListMsg { Patrons = _allPatrons };
+        var msg = new RMCPatronListMsg { Patrons = _allPatrons.Values.ToList() };
         _net.ServerSendMessage(msg, player.Channel);
     }
 
-    public SharedRMCPatronFull? GetPatron(ICommonSession player)
+    public SharedRMCPatronFull? GetConnectedPatron(ICommonSession player)
     {
-        return GetPatron(player.UserId);
+        return GetConnectedPatron(player.UserId);
     }
 
-    public SharedRMCPatronFull? GetPatron(NetUserId userId)
+    public SharedRMCPatronFull? GetConnectedPatron(NetUserId userId)
     {
         return _connected.GetValueOrDefault(userId);
+    }
+
+    public bool TryGetPatron(NetUserId userId, [NotNullWhen(true)] out SharedRMCPatron? tier)
+    {
+        return _allPatrons.TryGetValue(userId, out tier);
     }
 
     public IReadOnlySet<Guid> GetFigurines()

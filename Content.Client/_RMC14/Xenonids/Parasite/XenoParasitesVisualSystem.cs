@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Parasite;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Robust.Client.GameObjects;
 
@@ -15,9 +15,9 @@ public sealed class XenoParasitesVisualSystem : VisualizerSystem<XenoParasiteThr
 
         string layerState = "para_";
 
-        if(AppearanceSystem.TryGetData(uid, ParasiteOverlayVisuals.Downed, out bool downed) && downed)
+        if(AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out bool downed) && downed)
             layerState = "para_downed_";
-        else if(AppearanceSystem.TryGetData(uid, ParasiteOverlayVisuals.Resting, out bool resting) && resting)
+        else if(AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out bool resting) && resting)
             layerState = "para_rest_";
 
         foreach(var layer in Enum.GetValues<ParasiteOverlayLayers>())

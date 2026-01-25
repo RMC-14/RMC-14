@@ -24,6 +24,7 @@ public sealed class RangefinderBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RangefinderWindow>();
         _window.Header.SetMarkupPermissive(Loc.GetString("rmc-rangefinder-header"));
         Refresh();

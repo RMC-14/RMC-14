@@ -1,7 +1,12 @@
+using System.Linq;
 using System.Numerics;
+using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Systems;
+using Content.Shared.ParaDrop;
 using Content.Shared.StatusIcon.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -23,6 +28,7 @@ public sealed class MarineOverlay : Overlay
     private static readonly SpriteSpecifier.Rsi FireteamThreeRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft3");
     private static readonly SpriteSpecifier.Rsi FireteamLeaderRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ftl");
 
+    private readonly NpcFactionSystem _npcFaction;
     private readonly ContainerSystem _container;
     private readonly MarineSystem _marine;
     private readonly SpriteSystem _sprite;
@@ -30,9 +36,13 @@ public sealed class MarineOverlay : Overlay
 
     private readonly ShaderInstance _shader;
 
+    private readonly EntityQuery<NpcFactionMemberComponent> _npcFactionMemberQuery;
     private readonly EntityQuery<FireteamLeaderComponent> _fireteamLeaderQuery;
     private readonly EntityQuery<FireteamMemberComponent> _fireteamMemberQuery;
     private readonly EntityQuery<EntityActiveInvisibleComponent> _invisQuery;
+    private readonly EntityQuery<ShowMarineIconsComponent> _marineIconsQuery;
+    private readonly EntityQuery<ParaDroppingComponent> _paraDroppingQuery;
+    private readonly EntityQuery<CrashLandingComponent> _crashLandingQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
@@ -40,21 +50,26 @@ public sealed class MarineOverlay : Overlay
     {
         IoCManager.InjectDependencies(this);
 
+        _npcFaction = _entity.System<NpcFactionSystem>();
         _container = _entity.System<ContainerSystem>();
         _marine = _entity.System<MarineSystem>();
         _sprite = _entity.System<SpriteSystem>();
         _transform = _entity.System<TransformSystem>();
 
+        _npcFactionMemberQuery = _entity.GetEntityQuery<NpcFactionMemberComponent>();
         _fireteamLeaderQuery = _entity.GetEntityQuery<FireteamLeaderComponent>();
         _fireteamMemberQuery = _entity.GetEntityQuery<FireteamMemberComponent>();
         _invisQuery = _entity.GetEntityQuery<EntityActiveInvisibleComponent>();
+        _marineIconsQuery = _entity.GetEntityQuery<ShowMarineIconsComponent>();
+        _paraDroppingQuery = _entity.GetEntityQuery<ParaDroppingComponent>();
+        _crashLandingQuery = _entity.GetEntityQuery<CrashLandingComponent>();
 
         _shader = _prototype.Index<ShaderPrototype>("shaded").Instance();
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.HasComponent<ShowMarineIconsComponent>(_players.LocalEntity))
+        if (!_marineIconsQuery.TryComp(_players.LocalEntity, out var marineHudComp))
             return;
 
         var handle = args.WorldHandle;
@@ -97,11 +112,34 @@ public sealed class MarineOverlay : Overlay
             handle.SetTransform(matrix);
 
             var icon = _marine.GetMarineIcon(uid);
+            var factionIcons = _marine.GetFactionIcons(uid);
+
+            if (marineHudComp.Factions != null && !_npcFaction.IsMemberOfAny(uid, marineHudComp.Factions) && factionIcons != null)
+            {
+                if (_npcFactionMemberQuery.TryComp(uid, out var factionMember))
+                {
+                    // First faction is the entity's default faction
+                    if (factionIcons.TryGetValue(factionMember.Factions.First(), out var newIcon))
+                    {
+                        icon.Background = null;
+                        icon.Icon = newIcon;
+                    }
+                }
+            }
+
             if (icon.Icon != null)
             {
                 var texture = _sprite.Frame0(icon.Icon);
                 var yOffset = 0.1f + (bounds.Height + sprite.Offset.Y) / 2f - (float)texture.Height / EyeManager.PixelsPerMeter;
                 var xOffset = 0.1f + (bounds.Width + sprite.Offset.X) / 2f - (float)texture.Width / EyeManager.PixelsPerMeter;
+
+                //RMC14
+                if (_crashLandingQuery.HasComp(uid) || _paraDroppingQuery.HasComp(uid))
+                {
+                    yOffset = 0.1f + sprite.Offset.Y;
+                    xOffset = 0.1f + sprite.Offset.X;
+                }
+
                 var position = new Vector2(xOffset, yOffset);
                 if (icon.Icon != null && icon.Background != null)
                 {

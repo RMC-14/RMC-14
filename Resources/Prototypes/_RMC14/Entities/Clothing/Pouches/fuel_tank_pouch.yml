@@ -7,6 +7,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/fueltank.rsi
   - type: Storage
+    maxItemSize: Normal
     grid:
     - 0,0,3,1 #2 slots
     whitelist:
@@ -25,6 +26,7 @@
 - type: entity
   parent: RMCPouchFuelTank
   id: RMCPouchFuelTankFilledExtinguisher
+  suffix: Filled, Extinguishers
   components:
   - type: StorageFill
     contents:

@@ -17,6 +17,9 @@ public sealed partial class SkillPamphletComponent : Component
     public Dictionary<EntProtoId<SkillDefinitionComponent>, int> AddSkills = new();
 
     [DataField, AutoNetworkedField]
+    public Dictionary<EntProtoId<SkillDefinitionComponent>, int> SkillCap = new();
+
+    [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi? GiveIcon;
 
     [DataField, AutoNetworkedField]
@@ -24,6 +27,12 @@ public sealed partial class SkillPamphletComponent : Component
 
     [DataField, AutoNetworkedField]
     public LocId? GiveJobTitle;
+
+    [DataField, AutoNetworkedField]
+    public LocId? GivePrefix;
+
+    [DataField, AutoNetworkedField]
+    public bool IsAppendPrefix = false;
 
     [DataField, AutoNetworkedField]
     public bool BypassLimit;
@@ -43,4 +52,7 @@ public sealed partial class SkillPamphletComponent : Component
     public readonly record struct JobWhitelist(LocId Popup, ProtoId<JobPrototype> JobProto);
 
     public bool GaveSkill;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassSkill = false;
 }

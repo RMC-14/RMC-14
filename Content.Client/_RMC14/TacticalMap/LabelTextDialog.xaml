@@ -1,0 +1,33 @@
+<controls:LabelTextDialog
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.TacticalMap"
+    Title="Create Label"
+    SetSize="300 110">
+    <BoxContainer Orientation="Vertical" Margin="8">
+        <LineEdit Name="TextEdit" Access="Public"
+                  PlaceHolder="Label text..."
+                  HorizontalExpand="True"
+                  Margin="0 0 0 8"
+                  MinHeight="26" />
+        <BoxContainer Orientation="Horizontal">
+            <Button Name="OkButton" Access="Public"
+                    Text="OK"
+                    HorizontalExpand="True"
+                    Margin="0 0 4 0"
+                    MinHeight="24"
+                    MinWidth="50" />
+            <Button Name="CancelButton" Access="Public"
+                    Text="Cancel"
+                    HorizontalExpand="True"
+                    Margin="0 0 4 0"
+                    MinHeight="24"
+                    MinWidth="60" />
+            <Button Name="DeleteButton" Access="Public"
+                    Text="Delete"
+                    HorizontalExpand="True"
+                    Visible="False"
+                    MinHeight="24"
+                    MinWidth="60" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:LabelTextDialog>

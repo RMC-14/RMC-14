@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Robust.Server.Player;
 using Robust.Shared.Console;
+using Robust.Shared.Toolshed;
 using Robust.Shared.Toolshed.Errors;
 using Robust.Shared.Toolshed.Syntax;
 using Robust.Shared.Toolshed.TypeParsers;
@@ -29,7 +30,7 @@ public sealed class ToolshedPlayerTypeParser : TypeParser<ToolshedPlayer>
         return true;
     }
 
-    public override CompletionResult TryAutocomplete(ParserContext parserContext, string? argName)
+    public override CompletionResult? TryAutocomplete(ParserContext ctx, CommandArgument? arg)
     {
         var options = _playerManager.Sessions.Select(c => c.Name).OrderBy(c => c).ToArray();
         return CompletionResult.FromHintOptions(options, "Player");

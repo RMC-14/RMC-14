@@ -1,0 +1,8 @@
+- type: constructionGraph
+  id: RMCPlatformShivaDestructible
+  start: start
+  graph:
+  - node: start
+
+  - node: platformBroken
+    entity: RMCPlatformShivaBroken

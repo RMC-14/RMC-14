@@ -1,0 +1,109 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMMarineRaider
+  name: rmc-job-name-marine-raider
+  description: "" # TODO RMC14
+  playTimeTracker: CMJobMarineRaider
+  ranks:
+    RMCRankStaffSergeant: [ ]
+  startingGear: RMCGearMarineRaider
+  icon: RMCJobIconMarineRaider
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: MARSOC Raider
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillCqc: 5
+        RMCSkillFireman: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-marine-raider
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidMarineRaider
+  name: DEATHSQUAD marine raider ghost role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCMarineRaider
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCMarineRaider
+  components:
+  - type: GhostRole
+    name: rmc-job-name-marine-raider
+    description: rmc-ghost-role-information-sof-description
+    rules: rmc-ghost-role-information-sof-rules
+    reregister: false
+    job: CMMarineRaider
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSOF
+
+- type: startingGear
+  id: RMCGearMarineRaider
+  equipment:
+    head: RMCArmorHelmetMARSOC
+    mask: RMCMaskBalaclavaMARSOC
+    ears: RMCHeadsetMARSOC
+    jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
+    outerClothing: RMCArmorMARSOCXM40
+    gloves: CMHandsBlackMarine
+    shoes: CMBootsBlackFilled
+    suitstorage: RMCWeaponRifleXM40
+    id: RMCDogtagMarineRaider
+    belt: RMCWeaponShotgunXM38Filled
+    back: RMCSatchelMARSOC
+    pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
+    pocket2: RMCPouchToolsSocMarineRaiderFill
+  storage:
+    back:
+    - RMCVisorNightVision # TODO RMC14
+
+- type: playTimeTracker
+  id: CMJobMarineRaider
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconMarineRaider
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_soc
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagMarineRaider
+  name: Marine Raider's dogtags
+  components:
+  - type: PresetIdCard
+    job: CMMarineRaider
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagMarineRaider ]
+  id: RMCDogtagMarineRaiderHidden
+  categories: [ HideSpawnMenu ]

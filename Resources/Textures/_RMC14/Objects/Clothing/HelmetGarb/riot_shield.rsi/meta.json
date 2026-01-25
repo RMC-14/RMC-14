@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3161d3df2825c9e3eaeba5a71b2b17749dba67db/icons/mob/humans/onmob/clothing/helmet_garb/visors.dmi, https://github.com/cmss13-devs/cmss13/blob/260b6980e0586586046ea3e4d4d92db44b4684af/icons/obj/items/clothing/helmet_garb.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    }
+  ]
+}

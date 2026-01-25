@@ -1,0 +1,1150 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 251.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 07/05/2025 15:04:15
+  entityCount: 163
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  1: RMCFloorAsphaltTile
+  3: RMCFloorCementSunBleached1
+  4: RMCFloorCementSunBleached11
+  6: RMCFloorCementSunBleached14
+  17: RMCFloorCementSunBleached15
+  7: RMCFloorCementSunBleached2
+  2: RMCFloorCementSunBleached3
+  8: RMCFloorCementSunBleached4
+  9: RMCFloorCementSunBleached9
+  11: RMCPlanetDesertWaterShore1
+  14: RMCPlanetDesertWaterShore4
+  13: RMCPlanetDesertWaterShoreCorner11
+  12: RMCPlanetDesertWaterShoreCorner2
+  16: RMCPlanetDesertWaterShoreCorner4
+  10: RMCPlanetDesertWaterShoreEdge1
+  15: RMCPlanetDesertWaterShoreEdge7
+  5: RMCPlanetRedDesertDirt
+  18: RMCPlanetRedDesertRock
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: AQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAgAAAAAABAAAAAAABAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABgAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAABAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABwAAAAAABAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAACAAAAAAACQAAAAAAAAAAAAAAAAAAAAAACgAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAACwAAAAAAAQAAAAAAAgAAAAAAAwAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAADAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAADQAAAAAADgAAAAAADgAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAADQAAAAAADwAAAAAABQAAAAAABQAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAQAAAAAABgAAAAAAEQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAEAAAAAAABQAAAAAABQAAAAAABQAAAAAABQAAAAAAAQAAAAAAAgAAAAAAAwAAAAAAAQAAAAAABQAAAAAAEgAAAAAAEgAAAAAAEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+          version: 6
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        13,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        13,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        12,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        11,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        10,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        9,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        8,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        6,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        0,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        0,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        1,12: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        1,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        2,12: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        2,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        3,12: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        3,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        4,12: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        4,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        5,12: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,11: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,10: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,9: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,8: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,7: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,6: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,5: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,4: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,3: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,1: RMCAreaDesertDamExteriorRiverRiversideEast
+        5,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        6,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        6,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        6,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        6,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        6,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        6,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        7,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        7,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        4,2: RMCAreaDesertDamExteriorRiverRiversideEast
+        7,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        7,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        7,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        7,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        8,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        8,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        8,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        8,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        8,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        8,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        9,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        9,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        9,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        9,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        9,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        9,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        10,12: RMCAreaDesertDamExteriorValleyValleyBridge
+        10,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        10,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        10,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        10,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        10,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        11,12: RMCAreaDesertDamExteriorRock
+        11,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        11,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        11,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        11,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        11,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        12,12: RMCAreaDesertDamExteriorRock
+        12,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        12,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        12,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        12,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        12,0: RMCAreaDesertDamExteriorValleyValleyMedical
+        13,12: RMCAreaDesertDamExteriorRock
+        13,11: RMCAreaDesertDamExteriorValleyValleyBridge
+        13,3: RMCAreaDesertDamExteriorValleyValleyMedical
+        13,2: RMCAreaDesertDamExteriorValleyValleyMedical
+        13,1: RMCAreaDesertDamExteriorValleyValleyMedical
+        13,0: RMCAreaDesertDamExteriorValleyValleyMedical
+- proto: CMPlatform
+  entities:
+  - uid: 126
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,10.5
+      parent: 1
+  - uid: 127
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 11.5,10.5
+      parent: 1
+  - uid: 128
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,10.5
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,10.5
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      pos: 10.5,4.5
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      pos: 11.5,4.5
+      parent: 1
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      pos: 13.5,4.5
+      parent: 1
+  - uid: 146
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,3.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 2.5,1.5
+      parent: 1
+  - uid: 149
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 151
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,11.5
+      parent: 1
+- proto: CMPlatformCorner
+  entities:
+  - uid: 152
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,10.5
+      parent: 1
+  - uid: 153
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,12.5
+      parent: 1
+  - uid: 154
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.5,10.5
+      parent: 1
+  - uid: 155
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 156
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,4.5
+      parent: 1
+- proto: RMCEntityDesertWaterDeep
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 13.5,5.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 13.5,6.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 13.5,7.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 12.5,7.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 12.5,6.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 12.5,5.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 11.5,7.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 11.5,6.5
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 10.5,7.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 10.5,5.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 9.5,6.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 3.5,12.5
+      parent: 1
+  - uid: 58
+    components:
+    - type: Transform
+      pos: 3.5,11.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 4.5,11.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      pos: 5.5,11.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      pos: 2.5,10.5
+      parent: 1
+  - uid: 63
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 4.5,10.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 6.5,10.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 6.5,7.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 6.5,8.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 3.5,6.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 3.5,7.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 2.5,6.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 2.5,7.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      pos: 1.5,7.5
+      parent: 1
+- proto: RMCEntityDesertWaterShallow
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 9.5,10.5
+      parent: 1
+- proto: RMCEntityDesertWaterShallowCorner
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,10.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,11.5
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,12.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 10.5,8.5
+      parent: 1
+- proto: RMCEntityDesertWaterShallowCornerEdge
+  entities:
+  - uid: 6
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,4.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 26
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 10.5,9.5
+      parent: 1
+- proto: RMCEntityDesertWaterShallowEdge
+  entities:
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 3.5,4.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 9.5,4.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 10.5,4.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 11.5,4.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 13.5,4.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+  - uid: 24
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,12.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,10.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 11.5,8.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 13.5,8.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.5,10.5
+      parent: 1
+- proto: RMCHybrisaStairs
+  entities:
+  - uid: 118
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,2.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,1.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,0.5
+      parent: 1
+- proto: RMCPlatformCornerSmall
+  entities:
+  - uid: 157
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,4.5
+      parent: 1
+  - uid: 158
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 159
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,1.5
+      parent: 1
+  - uid: 160
+    components:
+    - type: Transform
+      pos: 1.5,11.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      pos: 2.5,12.5
+      parent: 1
+  - uid: 162
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,10.5
+      parent: 1
+  - uid: 163
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,2.5
+      parent: 1
+- proto: RMCPlatformStairLeft
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 6.5,2.5
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,0.5
+      parent: 1
+- proto: RMCPlatformStairRight
+  entities:
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,0.5
+      parent: 1
+- proto: RMCWallRockTrijent
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 12.5,12.5
+      parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 11.5,12.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 13.5,12.5
+      parent: 1
+- proto: RMCWaterCover
+  entities:
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 7.5,4.5
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 7.5,10.5
+      parent: 1
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 8.5,6.5
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 8.5,7.5
+      parent: 1
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 8.5,8.5
+      parent: 1
+  - uid: 116
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 8.5,10.5
+      parent: 1
+...

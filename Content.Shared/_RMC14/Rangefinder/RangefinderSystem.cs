@@ -52,7 +52,6 @@ public sealed class RangefinderSystem : EntitySystem
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, DroppedEvent>(OnLaserDesignatorDropped);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, RMCDroppedEvent>(OnLaserDesignatorDropped);
         SubscribeLocalEvent<ActiveLaserDesignatorComponent, GotUnequippedHandEvent>(OnLaserDesignatorDropped);
-        SubscribeLocalEvent<ActiveLaserDesignatorComponent, HandDeselectedEvent>(OnLaserDesignatorDropped);
 
         SubscribeLocalEvent<LaserDesignatorTargetComponent, ComponentRemove>(OnLaserDesignatorTargetRemove);
         SubscribeLocalEvent<LaserDesignatorTargetComponent, EntityTerminatingEvent>(OnLaserDesignatorTargetRemove);
@@ -111,17 +110,17 @@ public sealed class RangefinderSystem : EntitySystem
         if (delay < rangefinder.Comp.MinimumDelay)
             delay = rangefinder.Comp.MinimumDelay;
 
-        if (rangefinder.Comp.Mode == RangefinderMode.Rangefinder)
-        {
-            TryTarget(rangefinder, user, delay, coordinates);
-            return;
-        }
-
         var grid = _transform.GetGrid(coordinates);
         if (!HasComp<RMCPlanetComponent>(grid))
         {
             msg = Loc.GetString("rmc-laser-designator-not-surface");
             _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
+            return;
+        }
+
+        if (rangefinder.Comp.Mode == RangefinderMode.Rangefinder)
+        {
+            TryTarget(rangefinder, user, delay, coordinates);
             return;
         }
 
@@ -132,11 +131,15 @@ public sealed class RangefinderSystem : EntitySystem
             return;
         }
 
-        if (!_area.CanCAS(coordinates))
+        if (!_dropshipWeapon.CasDebug)
         {
-            msg = Loc.GetString("rmc-laser-designator-not-cas");
-            _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
-            return;
+            if (!_area.CanCAS(coordinates) ||
+                (rangefinder.Comp.Mode == Designator && !_area.CanLase(coordinates)))
+            {
+                msg = Loc.GetString("rmc-laser-designator-not-cas");
+                _popup.PopupClient(msg, coordinates, user, PopupType.SmallCaution);
+                return;
+            }
         }
 
         TryTarget(rangefinder, args.User, delay, coordinates);
@@ -166,6 +169,7 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var active = EnsureComp<ActiveLaserDesignatorComponent>(rangefinder);
+        active.BreakRange = rangefinder.Comp.BreakRange;
         QueueDel(active.Target);
 
         var modeLaser = rangefinder.Comp.Mode == Designator
@@ -248,6 +252,9 @@ public sealed class RangefinderSystem : EntitySystem
             return;
 
         var nextMode = rangefinder.Comp.Mode == RangefinderMode.Rangefinder ? Designator : RangefinderMode.Rangefinder;
+        if (nextMode == Designator && !rangefinder.Comp.CanDesignate)
+            return;
+
         args.Verbs.Add(new AlternativeVerb
         {
             Priority = 100,
@@ -326,7 +333,8 @@ public sealed class RangefinderSystem : EntitySystem
         {
             BreakOnMove = true,
             NeedHand = true,
-            BreakOnHandChange = true,
+            BreakOnHandChange = false,
+            MovementThreshold = 0.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))

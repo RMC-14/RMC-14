@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobHuman
   name: Urist C.M. McHands
   suffix: RMC14
@@ -10,3 +10,5 @@
       Male: RMCMaleHuman
       Unsexed: RMCMaleHuman #sorry fem-leaning enbies
       Female: RMCFemaleHuman
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-human

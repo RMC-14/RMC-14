@@ -49,7 +49,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     private void OnDoAfter(EntityUid uid, ToolComponent tool, ToolDoAfterEvent args)
     {
         if (!args.Cancelled)
-            PlayToolSound(uid, tool, args.User);
+            PlayToolSound(uid, tool, args.User, args.Predicted);
 
         var ev = args.WrappedEvent;
         ev.DoAfter = args.DoAfter;
@@ -88,12 +88,15 @@ public abstract partial class SharedToolSystem : EntitySystem
         args.PushMessage(message);
     }
 
-    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user)
+    public void PlayToolSound(EntityUid uid, ToolComponent tool, EntityUid? user, bool predicted = true)
     {
         if (tool.UseSound == null)
             return;
 
-        _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        if (predicted)
+            _audioSystem.PlayPredicted(tool.UseSound, uid, user);
+        else if (_net.IsServer)
+            _audioSystem.PlayPvs(tool.UseSound, uid);
     }
 
     /// <summary>
@@ -116,7 +119,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        IEnumerable<string> toolQualitiesNeeded,
+        [ForbidLiteral] IEnumerable<string> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null)
@@ -155,12 +158,13 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         TimeSpan delay,
-        IEnumerable<string> toolQualitiesNeeded,
+        [ForbidLiteral] IEnumerable<string> toolQualitiesNeeded,
         DoAfterEvent doAfterEv,
         out DoAfterId? id,
         float fuel = 0,
         ToolComponent? toolComponent = null,
-        DuplicateConditions duplicateCondition = DuplicateConditions.None)
+        DuplicateConditions duplicateCondition = DuplicateConditions.None,
+        bool predicted = true)
     {
         id = null;
         if (!Resolve(tool, ref toolComponent, false))
@@ -176,7 +180,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         if(ev.Handled)
             delay = ev.Delay;
 
-        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target));
+        var toolEvent = new ToolDoAfterEvent(fuel, doAfterEv, GetNetEntity(target)) { Predicted = predicted };
         var doAfterArgs = new DoAfterArgs(EntityManager, user, delay / toolComponent.SpeedModifier, toolEvent, tool, target: target, used: tool)
         {
             BreakOnDamage = true,
@@ -212,7 +216,7 @@ public abstract partial class SharedToolSystem : EntitySystem
         EntityUid user,
         EntityUid? target,
         float doAfterDelay,
-        string toolQualityNeeded,
+        [ForbidLiteral] string toolQualityNeeded,
         DoAfterEvent doAfterEv,
         float fuel = 0,
         ToolComponent? toolComponent = null,
@@ -232,7 +236,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     /// <summary>
     ///     Whether a tool entity has the specified quality or not.
     /// </summary>
-    public bool HasQuality(EntityUid uid, string quality, ToolComponent? tool = null)
+    public bool HasQuality(EntityUid uid, [ForbidLiteral] string quality, ToolComponent? tool = null)
     {
         return Resolve(uid, ref tool, false) && tool.Qualities.Contains(quality);
     }
@@ -241,7 +245,7 @@ public abstract partial class SharedToolSystem : EntitySystem
     ///     Whether a tool entity has all specified qualities or not.
     /// </summary>
     [PublicAPI]
-    public bool HasAllQualities(EntityUid uid, IEnumerable<string> qualities, ToolComponent? tool = null)
+    public bool HasAllQualities(EntityUid uid, [ForbidLiteral] IEnumerable<string> qualities, ToolComponent? tool = null)
     {
         return Resolve(uid, ref tool, false) && tool.Qualities.ContainsAll(qualities);
     }
@@ -292,6 +296,9 @@ public abstract partial class SharedToolSystem : EntitySystem
 
         [DataField("wrappedEvent")]
         public DoAfterEvent WrappedEvent = default!;
+
+        [DataField]
+        public bool Predicted = true;
 
         private ToolDoAfterEvent()
         {

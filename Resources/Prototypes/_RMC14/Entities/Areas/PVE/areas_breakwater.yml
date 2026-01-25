@@ -1,0 +1,23 @@
+﻿- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBreakwaterStrandExterior
+  name: Breakwater Exterior
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_breakwater.rsi
+    state: breakwater_exterior
+  - type: Area
+    powerNet: BreakwaterStrand
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaBreakwaterStrandInterior
+  name: Breakwater Interior
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_breakwater.rsi
+    state: breakwater_interior
+  - type: Area
+    powerNet: BreakwaterStrand
+    weatherEnabled: false

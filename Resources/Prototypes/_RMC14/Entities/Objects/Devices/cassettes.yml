@@ -1,0 +1,156 @@
+﻿- type: entity
+  parent: BaseItem
+  id: RMCCassettePlayer
+  name: cassette player
+  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    state: walkman
+  - type: Item
+    size: Small
+  - type: Clothing
+    slots:
+    - ears
+  - type: CassettePlayer
+  - type: ClothingLimit
+    slot: All
+    id: RMCCassettePlayer
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCCassetteTapeBase
+  name: cassette
+  description: A plastic cassette tape.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/cassette_player.rsi
+    state: cassette_blue
+  - type: Item
+    size: Small
+  - type: CassetteTape
+
+# RMC14
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeCustom
+  name: custom cassette
+  components:
+  - type: Sprite
+    state: cassette_rising_sun
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs: []
+    custom: true
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeWigWoo1
+  name: WigWoo1 cassette
+  components:
+  - type: Sprite
+    state: cassette_blue
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/Super_Nova_In_The_Catacombs.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeMendax
+  name: Mendax cassette
+  components:
+  - type: Sprite
+    state: cassette_orange_blue
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/shadowinthesilvernebula.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeNighty
+  name: Nighty cassette
+  components:
+  - type: Sprite
+    state: cassette_green
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/enemy_is_unknown.ogg
+    - /Audio/_RMC14/Lobby/Time_Is_Running_Out.ogg
+    - /Audio/_RMC14/Hijack/storm_the_iron_hive.ogg
+    - /Audio/_RMC14/Hijack/Last_Stand.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeGoodShowOldChap
+  name: GoodShowOldChap cassette
+  components:
+  - type: Sprite
+    state: cassette_ocean
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/Dire_Situation.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeRedQwesta
+  name: Qwesta cassette
+  components:
+  - type: Sprite
+    state: cassette_pink_stripe
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/Dropzone.ogg
+    - /Audio/_RMC14/Hijack/Gatecrashers.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeBolgarich
+  name: Bolgarich cassette
+  components:
+  - type: Sprite
+    state: cassette_gray
+  - type: Item
+    size: Small
+  - type: CassetteTape
+    songs:
+    - /Audio/_RMC14/Lobby/the_fallen_queen.ogg
+    - /Audio/_RMC14/Hijack/hiking_in_the_fog.ogg
+    - /Audio/_RMC14/Hijack/tango_with_bloodshed.ogg
+    - /Audio/_RMC14/Hijack/Destiny_of_Colonists.ogg
+    - /Audio/_RMC14/Hijack/GigaXO_we_lose.ogg
+
+# Upstream
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapeQwertyquerty
+  name: Qwertyquerty cassette
+  description: A plastic cassette tape.
+  components:
+  - type: Sprite
+    state: cassette_orange
+  - type: CassetteTape
+    songs:
+    - /Audio/Jukebox/constellations.ogg
+    - /Audio/Jukebox/drifting.ogg
+    - /Audio/Jukebox/starlight.ogg
+
+- type: entity
+  parent: RMCCassetteTapeBase
+  id: RMCCassetteTapePigeonBeans
+  name: PigeonBeans cassette
+  components:
+  - type: Sprite
+    state: cassette_red_stripe
+  - type: CassetteTape
+    songs:
+    - /Audio/Jukebox/sunset.ogg

@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Movement;
 using Content.Shared.Examine;
 using Content.Shared.Inventory;
 using Content.Shared.Item.ItemToggle;
@@ -54,8 +55,15 @@ public sealed class ClothingSpeedModifierSystem : EntitySystem
 
     private void OnRefreshMoveSpeed(EntityUid uid, ClothingSpeedModifierComponent component, InventoryRelayedEvent<RefreshMovementSpeedModifiersEvent> args)
     {
+        // RMC14
+        var ev = new RMCMovementSpeedRefreshedEvent(component.WalkModifier, component.SprintModifier);
+        RaiseLocalEvent(uid, ref ev);
+
+        var walkModifier = ev.WalkModifier;
+        var sprintModifier = ev.SprintModifier;
+
         if (_toggle.IsActivated(uid))
-            args.Args.ModifySpeed(component.WalkModifier, component.SprintModifier);
+            args.Args.ModifySpeed(walkModifier, sprintModifier);
     }
 
     private void OnClothingVerbExamine(EntityUid uid, ClothingSpeedModifierComponent component, GetVerbsEvent<ExamineVerb> args)

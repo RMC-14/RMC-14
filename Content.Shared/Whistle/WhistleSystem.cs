@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Stealth;
 using Content.Shared.Coordinates;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction.Events;
@@ -27,11 +28,10 @@ public sealed class WhistleSystem : EntitySystem
 
     public void OnUseInHand(EntityUid uid, WhistleComponent component, UseInHandEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
+        if (args.Handled || !_timing.IsFirstTimePredicted)
             return;
 
-        TryMakeLoudWhistle(uid, args.User, component);
-        args.Handled = true;
+        args.Handled = TryMakeLoudWhistle(uid, args.User, component);
     }
 
     public bool TryMakeLoudWhistle(EntityUid uid, EntityUid owner, WhistleComponent? component = null)
@@ -56,6 +56,11 @@ public sealed class WhistleSystem : EntitySystem
 
             //We don't want to ping user of whistle
             if (iterator.Owner == owner)
+                continue;
+
+            //RMC14
+            //Don't create an exclamation mark above invisible entities.
+            if(HasComp<EntityActiveInvisibleComponent>(iterator))
                 continue;
 
             ExclamateTarget(iterator, component);

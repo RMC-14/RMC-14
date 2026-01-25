@@ -1,5 +1,5 @@
 - type: entity
-  parent: CMBaseWeaponRifle
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: AR10 assault rifle
   id: WeaponRifleAR10
   description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
@@ -68,6 +68,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
         random:
@@ -106,6 +107,8 @@
       rmc-aslot-barrel: 0.75, 0.00
       rmc-aslot-rail: -0.23, 0.091
       rmc-aslot-underbarrel: 0.35, -0.3
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ar10-assault-rifle
 
 - type: entity
   parent: CMMagazineRifleBase

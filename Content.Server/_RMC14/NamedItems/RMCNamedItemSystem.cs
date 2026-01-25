@@ -12,7 +12,7 @@ using Content.Shared.Storage;
 
 namespace Content.Server._RMC14.NamedItems;
 
-public sealed class RMCNamedItemSystem : EntitySystem
+public sealed class RMCNamedItemSystem : SharedRMCNamedItemSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!;
@@ -22,20 +22,23 @@ public sealed class RMCNamedItemSystem : EntitySystem
 
     public override void Initialize()
     {
+        base.Initialize();
         _nameItemOnVendQuery = GetEntityQuery<RMCNameItemOnVendComponent>();
 
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
-        SubscribeLocalEvent<RMCUserNamedItemsComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVenderUser);
-        SubscribeLocalEvent<RMCNameItemOnVendComponent, SentryUpgradedEvent>(OnSentryUpgraded);
+        SubscribeLocalEvent<RMCUserNamedItemsComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVendorUser);
 
+        SubscribeLocalEvent<RMCNamedItemComponent, ComponentRemove>(OnItemRemove);
+        SubscribeLocalEvent<RMCNamedItemComponent, EntityTerminatingEvent>(OnItemRemove);
+        SubscribeLocalEvent<RMCNamedItemComponent, SentryUpgradedEvent>(OnSentryUpgraded);
         SubscribeLocalEvent<RMCNamedItemComponent, RMCArmorVariantCreatedEvent>(OnArmorVariantCreated);
         SubscribeLocalEvent<RMCNamedItemComponent, RefreshNameModifiersEvent>(OnItemRefreshNameModifiers);
     }
 
     private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
-        if (_linkAccount.GetPatron(ev.Player)?.Tier is not { NamedItems: true })
+        if (_linkAccount.GetConnectedPatron(ev.Player)?.Tier is not { NamedItems: true })
             return;
 
         var user = EnsureComp<RMCUserNamedItemsComponent>(ev.Mob);
@@ -43,10 +46,10 @@ public sealed class RMCNamedItemSystem : EntitySystem
         user.Names = new SharedRMCNamedItems(named.PrimaryGunName, named.SidearmName, named.HelmetName, named.ArmorName, named.SentryName);
     }
 
-    private void OnAutomatedVenderUser(Entity<RMCUserNamedItemsComponent> ent, ref RMCAutomatedVendedUserEvent args)
+    private void OnAutomatedVendorUser(Entity<RMCUserNamedItemsComponent> ent, ref RMCAutomatedVendedUserEvent args)
     {
         if (_nameItemOnVendQuery.TryComp(args.Item, out var itemComp) &&
-            TryNameItem(ent, (args.Item, itemComp)))
+            TryNameItem(ent, args.Item, itemComp.Item))
         {
             return;
         }
@@ -56,33 +59,47 @@ public sealed class RMCNamedItemSystem : EntitySystem
             foreach (var item in storage.StoredItems.Keys.ToList())
             {
                 if (_nameItemOnVendQuery.TryComp(item, out itemComp))
-                    TryNameItem(ent, (item, itemComp));
+                    TryNameItem(ent, item, itemComp.Item);
             }
         }
     }
 
-    private void OnSentryUpgraded(Entity<RMCNameItemOnVendComponent> ent, ref SentryUpgradedEvent args)
+    private void OnItemRemove<T>(Entity<RMCNamedItemComponent> ent, ref T args)
     {
-        if (!TryComp(args.OldSentry, out RMCNameItemOnVendComponent? nameComp) ||
-            nameComp.Name is not { } name)
+        if (TryComp(ent.Comp.User, out RMCUserNamedItemsComponent? user) &&
+            ent.Comp.Type is { } type)
+        {
+            var typeInt = (int) type;
+            if (typeInt >= 0 && typeInt < user.Entities.Length)
+                user.Entities[typeInt] = null;
+        }
+
+        if (!TerminatingOrDeleted(ent))
+            _nameModifier.RefreshNameModifiers(ent.Owner);
+    }
+
+    private void OnSentryUpgraded(Entity<RMCNamedItemComponent> ent, ref SentryUpgradedEvent args)
+    {
+        if (!TryComp(args.OldSentry, out RMCNamedItemComponent? nameComp) ||
+            nameComp.Name is not { } name ||
+            nameComp.Type is not { } type)
         {
             return;
         }
 
-        var newNameComp = EnsureComp<RMCNameItemOnVendComponent>(args.NewSentry);
-        newNameComp.Name = name;
-        NameItem(args.User, args.NewSentry, name);
+        RenameItem(args.NewSentry, name, args.User, type);
     }
 
     private void OnArmorVariantCreated(Entity<RMCNamedItemComponent> ent, ref RMCArmorVariantCreatedEvent args)
     {
-        if (!TryComp(args.Old, out RMCNamedItemComponent? old))
+        if (!TryComp(args.Old, out RMCNamedItemComponent? old) ||
+            old.User is not { } user ||
+            old.Type is not { } type)
+        {
             return;
+        }
 
-        var namedNew = EnsureComp<RMCNamedItemComponent>(args.New);
-        namedNew.Name = old.Name;
-
-        _nameModifier.RefreshNameModifiers(args.New);
+        RenameItem(args.New, old.Name, user, type);
     }
 
     private void OnItemRefreshNameModifiers(Entity<RMCNamedItemComponent> ent, ref RefreshNameModifiersEvent args)
@@ -90,34 +107,29 @@ public sealed class RMCNamedItemSystem : EntitySystem
         args.AddModifier("rmc-patron-named-item", extraArgs: ("name", ent.Comp.Name));
     }
 
-    private bool TryNameItem(Entity<RMCUserNamedItemsComponent> ent, Entity<RMCNameItemOnVendComponent> item)
+    protected override bool TryNameItem(Entity<RMCUserNamedItemsComponent> user, EntityUid item, RMCNamedItemType type)
     {
-        var names = ent.Comp.Names;
+        var names = user.Comp.Names;
         string? name;
-        switch (item.Comp.Item)
+        switch (type)
         {
             case RMCNamedItemType.PrimaryGun:
                 name = names.PrimaryGunName;
-                ent.Comp.Names = names with { PrimaryGunName = null };
                 break;
             case RMCNamedItemType.Sidearm:
                 name = names.SidearmName;
-                ent.Comp.Names = names with { SidearmName = null };
                 break;
             case RMCNamedItemType.Helmet:
                 name = names.HelmetName;
-                ent.Comp.Names = names with { HelmetName = null };
                 break;
             case RMCNamedItemType.Armor:
                 name = names.ArmorName;
-                ent.Comp.Names = names with { ArmorName = null };
                 break;
             case RMCNamedItemType.Sentry:
                 name = names.SentryName;
-                ent.Comp.Names = names with { SentryName = null };
                 break;
             default:
-                Log.Error($"Unknown named item type found by {ToPrettyString(ent)}: {item}");
+                Log.Error($"Unknown named item type found by {ToPrettyString(user)}: {item}");
                 name = null;
                 break;
         }
@@ -125,24 +137,31 @@ public sealed class RMCNamedItemSystem : EntitySystem
         if (name == null)
             return false;
 
-        NameItem(ent, item, name);
-        item.Comp.Name = name;
+        RenameItem(item, name, (user, user), type);
         return true;
     }
 
-    private void NameItem(EntityUid player, EntityUid item, string? name)
+    private void RenameItem(Entity<RMCNamedItemComponent?> item, string prefix, Entity<RMCUserNamedItemsComponent?> player, RMCNamedItemType type)
     {
-        if (string.IsNullOrWhiteSpace(name))
+        prefix = prefix.Trim();
+        if (string.IsNullOrWhiteSpace(prefix))
             return;
 
-        name = name.Trim();
-        var metaData = MetaData(item);
-        var newName = $"'{name}' {metaData.EntityName}";
+        player.Comp = EnsureComp<RMCUserNamedItemsComponent>(player);
+        var typeInt = (int) type;
+        if (typeInt >= 0 && typeInt < player.Comp.Entities.Length)
+        {
+            if (player.Comp.Entities[typeInt] is { } old)
+                RemComp<RMCNamedItemComponent>(old);
 
-        var named = EnsureComp<RMCNamedItemComponent>(item);
-        named.Name = name;
-        _nameModifier.RefreshNameModifiers(item);
+            player.Comp.Entities[typeInt] = item;
+        }
 
-        _adminLogs.Add(LogType.RMCNamedItem, $"{ToPrettyString(player):player} named item {ToPrettyString(item):item} with name {newName}");
+        item.Comp = EnsureComp<RMCNamedItemComponent>(item);
+        item.Comp.User = player;
+        item.Comp.Type = type;
+        item.Comp.Name = prefix;
+        _nameModifier.RefreshNameModifiers(item.Owner);
+        _adminLogs.Add(LogType.RMCNamedItem, $"{ToPrettyString(player):player} named item {ToPrettyString(item):item} with name {prefix}");
     }
 }

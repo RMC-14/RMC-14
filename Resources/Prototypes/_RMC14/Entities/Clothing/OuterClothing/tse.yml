@@ -1,0 +1,88 @@
+- type: entity
+  parent: RMCArmorVest
+  id: RMCArmorVestTSEPA
+  name: TSEPA armored vest
+  description: An TSEPA armored vest that protects against some damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/tsepa_police_vest.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/tsepa_police_vest.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 10
+
+- type: entity
+  id: RMCBaseTSEArmor
+  abstract: true
+  components:
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-tse-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformTSE
+
+- type: entity
+  parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]
+  id: RMCArmourM4TSEPA
+  name: M4 pattern light TSEPA armour
+  description: A modified variant of the M4R armor, stripped of additional riot plating for civilian officer use. A 'TSEPA' badge is sewn into the chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/standard.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+  - type: ClothingSpeedModifier
+    walkModifier: 0.897
+    sprintModifier: 0.897
+
+- type: entity
+  parent: [RMCBaseTSEArmor, RMCBaseMarineArmorLight]
+  id: RMCArmourM4TSEPAChief
+  name: M4 pattern inspector TSEPA armour
+  description: A modified variant of the M4 TSEPA armour to have the additional riot plating returned, featuring a golden insignia on the chestplate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/TSEPA/marshal.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    bio: 20
+    explosionArmor: 15
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: ClothingSpeedModifier
+    walkModifier: 0.666
+    sprintModifier: 0.666
+  - type: ExplosionResistance
+    damageCoefficient: 0
+    worn: false
+
+- type: entity
+  parent: [RMCJacketWindbreaker, RMCAllowSuitStorageClothingJacketMB]
+  id: RMCJacketEIAFCombatJacket
+  name: EIAF combat jacket
+  description: A rugged, all-weather combat jacket issued to the Extrasolar Imperial Airborne Force. Designed for versatility, it serves as both a field garment and a lightweight layer of protection. Reinforced with ballistic fibers and treated for weather resistance, it offers limited defense against shrapnel and small arms fire while keeping paratroopers comfortable in harsh conditions. Its deep green color and durable fabric make it a staple for both active deployment and off-duty wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 10

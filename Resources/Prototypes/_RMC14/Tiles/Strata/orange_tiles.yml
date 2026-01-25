@@ -3,6 +3,7 @@
   parent: CMTileBase
   id: CMFloorStrataOrangeBase
   name: tiles-cm-default-orange
+  suffix: Sorokyne
 
 - type: tile
   parent: CMFloorStrataWhiteBase

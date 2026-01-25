@@ -1277,3 +1277,35 @@
   sprites:
     - sprite: _RMC14/Mobs/Customization/human_hair.rsi
       state: hair_braid3
+
+- type: marking
+  id: RMCHumanHairLongMessy
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_longmessy
+
+- type: marking
+  id: RMCHumanHairPulatoLong
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_pulatolong
+
+- type: marking
+  id: RMCHumanHairPulatoLong2
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_pulatolong2
+
+- type: marking
+  id: RMCHumanHairPonytail9
+  bodyPart: Hair
+  markingCategory: Hair
+  sprites:
+    - sprite: _RMC14/Mobs/Customization/human_hair.rsi
+      state: hair_ponytail9

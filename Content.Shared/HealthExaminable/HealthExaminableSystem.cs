@@ -88,7 +88,7 @@ public sealed class HealthExaminableSystem : EntitySystem
             msg.AddMarkupOrThrow(chosenLocStr);
         }
 
-        if (msg.IsEmpty)
+        if (msg.IsEmpty && component.ExamineShowEmpty)
         {
             msg.AddMarkupOrThrow(Loc.GetString($"health-examinable-{component.LocPrefix}-none"));
         }

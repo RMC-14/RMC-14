@@ -6,23 +6,33 @@ using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
 using Content.Shared._RMC14.AlertLevel;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Announce;
+using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Timing;
+using Content.Shared.UserInterface;
 using Robust.Server.Audio;
+using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Physics.Components;
@@ -36,9 +46,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
+    [Dependency] private readonly PhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -49,6 +61,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
 
     private EntityQuery<DockingComponent> _dockingQuery;
     private EntityQuery<DoorComponent> _doorQuery;
@@ -58,6 +71,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private TimeSpan _flyByTime;
     private TimeSpan _hijackTravelTime;
 
+    private EntityUid _dropshipId;
+    private bool _hijack;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -66,12 +82,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         _doorQuery = GetEntityQuery<DoorComponent>();
         _doorBoltQuery = GetEntityQuery<DoorBoltComponent>();
 
-        SubscribeLocalEvent<DropshipNavigationComputerComponent, ActivateInWorldEvent>(OnActivateInWorld);
+        SubscribeLocalEvent<DropshipNavigationComputerComponent, DropshipLockoutDoAfterEvent>(OnNavigationLockout);
 
         SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
-        SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
@@ -79,39 +95,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
             subs =>
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
+                subs.Event<DropshipRemoteControlToggleMsg>(OnDropshipRemoteControlToggleMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
-    }
-
-    private void OnActivateInWorld(Entity<DropshipNavigationComputerComponent> ent, ref ActivateInWorldEvent args)
-    {
-        if (!HasComp<DropshipHijackerComponent>(args.User))
-            return;
-
-        if (!TryDropshipHijackPopup(ent, args.User, false))
-            return;
-
-        if (TryComp(ent, out TransformComponent? xform) &&
-            TryComp(xform.ParentUid, out DropshipComponent? dropship) &&
-            dropship.Crashed)
-        {
-            return;
-        }
-
-        args.Handled = true;
-
-        var destinations = new List<(NetEntity Id, string Name)>();
-        var query = EntityQueryEnumerator<DropshipHijackDestinationComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            destinations.Add((GetNetEntity(uid), Name(uid)));
-        }
-
-        _ui.OpenUi(ent.Owner, DropshipHijackerUiKey.Key, args.User);
-        _ui.SetUiState(ent.Owner, DropshipHijackerUiKey.Key, new DropshipHijackerBuiState(destinations));
     }
 
     private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
@@ -124,16 +113,45 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipLaunchedFromWarshipEvent(ent);
             RaiseLocalEvent(ent, ref ev, true);
         }
+
+        if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
+        {
+            int xenoCount = 0;
+            string dropshipName = string.Empty;
+            var dropship = EnsureComp<DropshipComponent>(_dropshipId);
+            var xenoQuery = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
+            while (xenoQuery.MoveNext(out var uid, out _, out var mobState, out var xform))
+            {
+                if (xform.GridUid == _dropshipId && mobState.CurrentState != MobState.Dead)
+                {
+                    xenoCount++;
+                    if (string.IsNullOrEmpty(dropshipName) && _area.TryGetArea(uid, out _, out var areaProto))
+                        dropshipName = areaProto.Name;
+                }
+            }
+
+            if (xenoCount > 0)
+            {
+                _alertLevelSystem.Set(RMCAlertLevels.Red, _dropshipId, false, false);
+                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-unidentified-lifesigns",
+                    ("name", dropshipName),
+                    ("count", xenoCount)),
+                    dropship.UnidentifledlifesignsSound);
+            }
+        }
     }
 
     private void OnFTLCompleted(Entity<DropshipComponent> ent, ref FTLCompletedEvent args)
     {
+        if (ent.Comp.RechargeTime is { } rechargeTime && TryComp(ent, out FTLComponent? ftl))
+            ftl.StateTime = StartEndTime.FromCurTime(_timing, rechargeTime);
+
         OnRefreshUI(ent, ref args);
 
         var map = args.MapUid;
         if (HasComp<RMCPlanetComponent>(map))
         {
-            var ev = new DropshipLandedOnPlanetEvent();
+            var ev = new DropshipLandedOnPlanetEvent(ent);
             RaiseLocalEvent(ref ev);
         }
 
@@ -142,6 +160,20 @@ public sealed class DropshipSystem : SharedDropshipSystem
             var ev = new DropshipHijackLandedEvent(map);
             RaiseLocalEvent(ref ev);
         }
+
+        ent.Comp.DepartureLocation = ent.Comp.Destination;
+        Dirty(ent);
+    }
+
+    private void OnFTLUpdated(Entity<DropshipComponent> ent, ref FTLUpdatedEvent args)
+    {
+        if (TryComp(ent, out FTLComponent? ftl))
+        {
+            ent.Comp.State = ftl.State;
+            Dirty(ent);
+        }
+
+        RefreshUI();
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
@@ -164,25 +196,77 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         if (TryComp(grid, out FTLComponent? ftl) &&
+            ftl.State is FTLState.Travelling or FTLState.Arriving &&
+            args.DoorLocation != DoorLocation.Aft)
+        {
+            return;
+        }
+
+        dropship.LastLocked.TryGetValue(args.DoorLocation, out var lastLocked);
+        var time = _timing.CurTime;
+        if (time < lastLocked + dropship.LockCooldown)
+            return;
+
+        if (!dropship.LastLocked.TryAdd(args.DoorLocation, time))
+            dropship.LastLocked[args.DoorLocation] = time;
+        Dirty(grid, dropship);
+
+        SetDocks(grid, args.DoorLocation);
+        OnRefreshUI((grid, dropship), ref args);
+    }
+
+    private void OnDropshipRemoteControlToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipRemoteControlToggleMsg args)
+    {
+        ent.Comp.RemoteControl = !ent.Comp.RemoteControl;
+        Dirty(ent, ent.Comp);
+        RefreshUI();
+    }
+
+    private void OnNavigationLockout(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLockoutDoAfterEvent args)
+    {
+        ent.Comp.LockedOutUntil = _timing.CurTime + ent.Comp.LockoutDuration;
+        ent.Comp.RemoteControl = false;
+        Dirty(ent);
+
+        _ui.CloseUis(ent.Owner);
+        UnlockAllDoors(ent);
+
+        _popup.PopupEntity(Loc.GetString("rmc-dropship-locked", ("minutes", (int)ent.Comp.LockoutDuration.TotalMinutes)), ent, args.User, PopupType.Medium);
+    }
+
+    private void UnlockAllDoors(Entity<DropshipNavigationComputerComponent> ent)
+    {
+        if (_transform.GetGrid(ent.Owner) is not { } grid ||
+            !TryComp(grid, out DropshipComponent? dropship) ||
+            dropship.Crashed)
+        {
+            return;
+        }
+
+        if (TryComp(grid, out FTLComponent? ftl) &&
             ftl.State is FTLState.Travelling or FTLState.Arriving)
         {
             return;
         }
 
-        var time = _timing.CurTime;
-        if (time < dropship.LastLocked + dropship.LockCooldown)
-            return;
+        var enumerator = Transform(grid).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (!_dockingQuery.HasComp(child) ||
+                !_doorBoltQuery.HasComp(child))
+                continue;
 
-        dropship.Locked = !dropship.Locked;
-        dropship.LastLocked = time;
-        SetAllDocks(grid, dropship.Locked);
+            UnlockDoor(child);
+        }
     }
 
-    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null)
+    public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
         base.FlyTo(computer, destination, user, hijack, startupTime, hyperspaceTime);
 
+        _hijack = hijack;
         var dropshipId = Transform(computer).GridUid;
+        _dropshipId = dropshipId ?? EntityUid.Invalid;
         if (!TryComp(dropshipId, out ShuttleComponent? shuttleComp))
         {
             Log.Warning($"Tried to launch {ToPrettyString(computer)} outside of a shuttle.");
@@ -241,7 +325,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
             {
                 var hasSkill = user != null && _skills.HasSkill(user.Value, computer.Comp.Skill, computer.Comp.MultiplierSkillLevel);
                 var rechargeMultiplier = hasSkill ? computer.Comp.SkillRechargeMultiplier : 1f;
-                if (dropship.Destination == destination)
+                var flyBy = dropship.Destination == destination;
+                if (flyBy)
                 {
                     hyperspaceTime = (float) _flyByTime.TotalSeconds;
                     if (hasSkill)
@@ -255,6 +340,29 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 }
 
                 dropship.RechargeTime = TimeSpan.FromSeconds(_config.GetCVar(CCVars.FTLCooldown) * rechargeMultiplier);
+
+                foreach (var point in dropship.AttachmentPoints)
+                {
+                    if (TryComp(point, out DropshipEnginePointComponent? engine) &&
+                        _container.TryGetContainer(point, engine.ContainerId, out var container))
+                    {
+                        foreach (var contained in container.ContainedEntities)
+                        {
+                            if (TryComp(contained, out DropshipFlightMultiplierComponent? flightMult))
+                            {
+                                if (flyBy)
+                                    hyperspaceTime /= flightMult.Multiplier;
+                                else
+                                    hyperspaceTime *= flightMult.Multiplier;
+                            }
+
+                            if (TryComp(contained, out DropshipRechargeMultiplierComponent? rechargeMult))
+                                dropship.RechargeTime *= rechargeMult.Multiplier;
+                        }
+                    }
+                }
+
+                hyperspaceTime += _config.GetCVar(CCVars.FTLArrivalTime);
             }
         }
 
@@ -264,10 +372,15 @@ public sealed class DropshipSystem : SharedDropshipSystem
         var destTransform = Transform(destination);
         var destCoords = _transform.GetMoverCoordinates(destination, destTransform);
         var rotation = destTransform.LocalRotation;
-        if (TryComp(dropshipId, out PhysicsComponent? physics))
-            destCoords = destCoords.Offset(-physics.LocalCenter);
 
-        destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
+        if (TryComp(dropshipId, out PhysicsComponent? physics))
+        {
+            _physics.SetLocalCenter(dropshipId.Value, physics, Vector2.Zero);
+            destCoords = destCoords.Offset(-physics.LocalCenter);
+        }
+
+        if (offset)
+            destCoords = destCoords.Offset(new Vector2(-0.5f, -0.5f));
 
         _shuttle.FTLToCoordinates(dropshipId.Value, shuttleComp, destCoords, rotation, startupTime: startupTime, hyperspaceTime: hyperspaceTime);
 
@@ -280,13 +393,13 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 _audio.PlayPvs(dropship.LocalHijackSound, dropshipId.Value);
 
                 var marineText = Loc.GetString("rmc-announcement-dropship-hijack");
-                _marineAnnounce.AnnounceARES(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
+                _marineAnnounce.AnnounceARESStaging(dropshipId.Value, marineText, dropship.MarineHijackSound, new LocId("rmc-announcement-dropship-message"));
 
                 var generalQuartersText = Loc.GetString("rmc-announcement-general-quarters");
                 Timer.Spawn(TimeSpan.FromSeconds(10), () =>
                 {
                     _alertLevelSystem.Set(RMCAlertLevels.Red, dropshipId.Value, false, false);
-                    _marineAnnounce.AnnounceARES(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
+                    _marineAnnounce.AnnounceARESStaging(dropshipId.Value, generalQuartersText, dropship.GeneralQuartersSound, null);
                 });
             }
 
@@ -308,6 +421,8 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (Transform(computer).GridUid is not { } grid)
             return;
+
+        var doorLockStatus = GetDoorLockStatus(grid);
 
         if (!TryComp(grid, out FTLComponent? ftl) ||
             !ftl.Running ||
@@ -334,23 +449,29 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations);
+            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl);
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
 
         var destinationName = string.Empty;
-        if (TryComp(grid, out DropshipComponent? dropship) &&
-            dropship.Destination is { } destinationUid)
+        var departureName = string.Empty;
+        if (TryComp(grid, out DropshipComponent? dropship))
         {
-            destinationName = Name(destinationUid);
-        }
-        else
-        {
-            Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            if (dropship.Destination is { } destinationUid)
+                destinationName = Name(destinationUid);
+            else
+            {
+                Log.Error($"Found in-travel dropship {ToPrettyString(grid)} with invalid destination");
+            }
+
+            if (dropship.DepartureLocation is { } departureUid)
+            {
+                departureName = Name(departureUid);
+            }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.RemoteControl);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 
@@ -373,19 +494,62 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
-    private void SetAllDocks(EntityUid dropship, bool locked)
+    private void SetDocks(EntityUid dropship, DoorLocation location)
     {
+        var shouldLock = false;
+        var doors = new HashSet<Entity<DoorBoltComponent>>();
+
+        // Lock all doors if at least one is unlocked.
         var enumerator = Transform(dropship).ChildEnumerator;
         while (enumerator.MoveNext(out var child))
         {
             if (!_dockingQuery.HasComp(child))
                 continue;
 
-            if (locked)
-                LockDoor(child);
-            else
-                UnlockDoor(child);
+            if (!_doorBoltQuery.TryComp(child, out var bolt))
+                continue;
+
+            doors.Add((child, bolt));
+
+            if (bolt.BoltsDown)
+                continue;
+
+            shouldLock = true;
         }
+
+        foreach (var door in doors)
+        {
+            if (location != DoorLocation.None)
+            {
+                // Only lock/unlock doors with the same location as the pressed button.
+                if (!_doorQuery.TryComp(door, out var doorComp) || doorComp.Location != location)
+                    continue;
+
+                shouldLock = !door.Comp.BoltsDown;
+            }
+
+            if (shouldLock)
+                LockDoor(door.Owner);
+            else
+                UnlockDoor(door.Owner);
+        }
+    }
+
+    private Dictionary<DoorLocation, bool> GetDoorLockStatus(EntityUid dropship)
+    {
+        var doorLockStatus = new Dictionary<DoorLocation, bool>();
+        var enumerator = Transform(dropship).ChildEnumerator;
+        while (enumerator.MoveNext(out var child))
+        {
+            if (_dockingQuery.HasComp(child) &&
+                _doorBoltQuery.TryComp(child, out var bolt) &&
+                _doorQuery.TryComp(child, out var door))
+            {
+                doorLockStatus.TryAdd(door.Location, bolt.BoltsDown);
+            }
+        }
+
+        return doorLockStatus;
     }
 
     public void LockDoor(Entity<DoorBoltComponent?> door)

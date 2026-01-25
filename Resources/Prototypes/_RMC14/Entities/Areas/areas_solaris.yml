@@ -38,9 +38,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredGround
@@ -523,9 +525,11 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#812DA2EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2CavesLambda
@@ -573,8 +577,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -590,9 +596,11 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#A22D2DEE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBase
@@ -617,6 +625,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: false
     supplyDrop: false
     resinAllowed: false
@@ -624,6 +633,8 @@
     noTunnel: true
     unweedable: true
     buildSpecial: false
+    weatherEnabled: false
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -639,6 +650,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -671,8 +683,10 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -748,9 +762,11 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#3F3C3CEF'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Caves
@@ -771,6 +787,7 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
 
@@ -788,6 +805,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
 
@@ -837,9 +855,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -855,9 +875,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -873,10 +895,12 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#A22D2DEE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -892,10 +916,12 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#3DBF75EE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -911,9 +937,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#2D3FA2EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -929,9 +957,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     minimapColor: '#C19504E7'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -947,10 +977,12 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#3DBF75EE'
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -966,8 +998,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -983,8 +1017,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1000,8 +1036,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1017,8 +1055,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1034,8 +1074,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1051,8 +1093,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1068,10 +1112,12 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz1
     landingZone: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1087,6 +1133,7 @@
     mortarFire: true
     lasing: true
     medevac: true
+    paradropping: true
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
@@ -1108,10 +1155,12 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
     landingZone: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideTelecomm
@@ -1185,9 +1234,11 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2OutsideEngineering
@@ -1211,8 +1262,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1228,8 +1281,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1245,8 +1300,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1262,8 +1319,10 @@
     mortarFire: true
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: true
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1279,8 +1338,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1296,8 +1357,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1313,9 +1376,11 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     minimapColor: '#2D1342EE'
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1331,8 +1396,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1348,8 +1415,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1365,8 +1434,10 @@
     mortarPlacement: false
     mortarFire: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2
@@ -1376,16 +1447,23 @@
     state: tcomsatcham
   - type: Area
     minimapColor: '#EBE5E5E3'
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaBigredv2Landing
   id: RMCAreaBigredv2LandingConsole
   name: LZ1 'Telecomms'
+  components:
+  - type: Area
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Landing
   id: RMCAreaBigredv2LandingConsole2
   name: LZ2 'Cargo'
+  components:
+  - type: Area
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1401,9 +1479,11 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1419,9 +1499,11 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz1
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1437,9 +1519,11 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1455,9 +1539,11 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
     linkedLz: dropship_lz2
+    weatherEnabled: false
 
 - type: entity
   parent: RMCAreaBigredv2Outside
@@ -1473,5 +1559,7 @@
     mortarFire: false
     lasing: false
     medevac: false
+    paradropping: false
     OB: true
     supplyDrop: false
+    weatherEnabled: false

@@ -1,23 +1,22 @@
 ﻿using System.Runtime.InteropServices;
+using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
 using Content.Client.Message;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Camera;
-using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Camera;
 
-public sealed class RMCCameraBui : BoundUserInterface
+public sealed class RMCCameraBui : RMCPopOutBui<RMCCameraWindow>
 {
-    [ViewVariables]
-    private RMCCameraWindow? _window;
-
     private EntityUid? _currentCamera;
     private Button? _currentCameraButton;
 
     private readonly EyeLerpingSystem _eyeLerping;
     private readonly RMCCameraSystem _system;
+
+    protected override RMCCameraWindow? Window { get; set; }
 
     public RMCCameraBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -27,39 +26,28 @@ public sealed class RMCCameraBui : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new RMCCameraWindow();
-        _window.OnClose += Close;
-        _window.SearchBar.OnTextChanged += _ => RefreshSearch();
-        _window.PreviousCameraButton.Text = "<";
-        _window.NextCameraButton.Text = ">";
-        _window.PreviousCameraButton.OnPressed += _ => SendPredictedMessage(new RMCCameraPreviousBuiMsg());
-        _window.NextCameraButton.OnPressed += _ => SendPredictedMessage(new RMCCameraNextBuiMsg());
+        base.Open();
+        Window = this.CreatePopOutableWindow<RMCCameraWindow>();
+        Window.SearchBar.OnTextChanged += _ => RefreshSearch();
+        Window.PreviousCameraButton.Text = "<";
+        Window.NextCameraButton.Text = ">";
+        Window.PreviousCameraButton.OnPressed += _ => SendPredictedMessage(new RMCCameraPreviousBuiMsg());
+        Window.NextCameraButton.OnPressed += _ => SendPredictedMessage(new RMCCameraNextBuiMsg());
 
         Refresh();
-
-        _window.OpenCentered();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-
-        if (disposing)
-            _window?.Dispose();
     }
 
     public void Refresh()
     {
-        if (_window == null)
+        if (Window == null)
             return;
 
         if (!EntMan.TryGetComponent(Owner, out RMCCameraComputerComponent? computer))
             return;
 
         if (computer.Title is { } title)
-            _window.Title = Loc.GetString(title);
+            Window.Title = Loc.GetString(title);
 
-        _window.CamerasContainer.DisposeAllChildren();
         var currentNetCamera = EntMan.GetNetEntity(computer.CurrentCamera);
         var ids = CollectionsMarshal.AsSpan(computer.CameraIds);
         var names = CollectionsMarshal.AsSpan(computer.CameraNames);
@@ -68,22 +56,23 @@ public sealed class RMCCameraBui : BoundUserInterface
             if (i >= names.Length)
                 continue;
 
+            RMCCameraButton button;
+            if (i < Window.CamerasContainer.ChildCount)
+            {
+                if (Window.CamerasContainer.GetChild(i) is not RMCCameraButton child)
+                    continue;
+
+                button = child;
+            }
+            else
+            {
+                button = new RMCCameraButton();
+                Window.CamerasContainer.AddChild(button);
+            }
+
             var id = ids[i];
             var name = names[i];
-            var buttonLabel = new RichTextLabel
-            {
-                RectClipContent = true,
-                HorizontalAlignment = Control.HAlignment.Left,
-            };
-            buttonLabel.SetMarkupPermissive($"[font size=11][color=white]{name}[/color][/font]");
-            var button = new Button
-            {
-                StyleClasses = { "OpenBoth" },
-                ToggleMode = true,
-                TextAlign = Label.AlignMode.Left,
-                Children = { buttonLabel },
-            };
-
+            button.Label.SetMarkupPermissive($"[font size=11][color=white]{name}[/color][/font]");
             button.Pressed = id == currentNetCamera;
             button.OnPressed += _ =>
             {
@@ -93,9 +82,11 @@ public sealed class RMCCameraBui : BoundUserInterface
                 _currentCameraButton = button;
                 SendPredictedMessage(new RMCCameraWatchBuiMsg(id));
             };
+        }
 
-            _window.CamerasContainer.AddChild(button);
-            button.TextAlign = Label.AlignMode.Left;
+        for (var i = Window.CamerasContainer.ChildCount - 1; i >= ids.Length; i--)
+        {
+            Window.CamerasContainer.RemoveChild(i);
         }
 
         RefreshSearch();
@@ -104,21 +95,21 @@ public sealed class RMCCameraBui : BoundUserInterface
 
     private void RefreshSearch()
     {
-        if (_window == null)
+        if (Window == null)
             return;
 
-        foreach (var control in _window.CamerasContainer.Children)
+        foreach (var control in Window.CamerasContainer.Children)
         {
             if (control is not Button button)
                 continue;
 
-            button.Visible = button.ChildrenContainText(_window.SearchBar.Text);
+            button.Visible = button.ChildrenContainText(Window.SearchBar.Text);
         }
     }
 
     private void RefreshCamera()
     {
-        if (_window is not { Disposed: false })
+        if (Window == null)
             return;
 
         if (!EntMan.TryGetComponent(Owner, out RMCCameraComputerComponent? computer))
@@ -134,9 +125,9 @@ public sealed class RMCCameraBui : BoundUserInterface
         _currentCamera = camera;
 
         if (EntMan.TryGetComponent(camera, out EyeComponent? eye))
-            _window.Viewport.Eye = eye.Eye;
+            Window.Viewport.Eye = eye.Eye;
 
         if (_system.GetComputerCameraName((Owner, computer), camera, out var name))
-            _window.CameraName.Text = name;
+            Window.CameraName.Text = name;
     }
 }

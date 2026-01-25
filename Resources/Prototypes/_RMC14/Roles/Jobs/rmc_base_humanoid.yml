@@ -1,0 +1,10 @@
+﻿- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCSettingsGhostRole
+  components:
+  - type: GhostRole
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: short
+  - type: GhostTakeoverAvailable
+  - type: RMCJobSpawner

@@ -16,4 +16,7 @@ public sealed partial class XenoPlantWeedsActionEvent : InstantActionEvent
     // TODO: do this properly
     [DataField]
     public bool UseOnSemiWeedable = false;
+
+    [DataField]
+    public bool LimitDistance = false;
 }

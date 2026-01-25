@@ -3,12 +3,6 @@
   id: CMXenoDrone
   name: cm-job-name-xeno-drone
   playTimeTracker: CMJobXenoDrone
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: drone
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoDrone

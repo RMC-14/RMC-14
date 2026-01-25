@@ -1,4 +1,14 @@
-﻿- type: damageModifierSet
+- type: damageModifierSet
   id: Resin # TODO RMC14 rebalance
   coefficients:
     Heat: 1.5
+
+- type: damageModifierSet
+  id: Weed
+  coefficients:
+    Blunt: 0.333
+    Slash: 0.333
+    Piercing: 0.333
+    Heat: 0.333
+    Shock: 0.333
+    Structural: 0.333

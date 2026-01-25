@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/fefae1127fffb3d0bf38ac66b10b233b63797646/icons/mob/humans/onmob/clothing/uniforms/uniforms_by_department/security.dmi, https://github.com/cmss13-devs/cmss13/blob/fefae1127fffb3d0bf38ac66b10b233b63797646/icons/obj/items/clothing/uniforms/uniforms_by_department/security.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

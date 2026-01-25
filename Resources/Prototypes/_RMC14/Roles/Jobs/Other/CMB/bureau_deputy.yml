@@ -1,0 +1,95 @@
+# CMB Deputy
+- type: job
+  parent: CMJobBase
+  id: CMBureauDeputy
+  name: rmc-job-name-bureau-deputy
+  description: rmc-ghost-role-information-bureau-marshal-description
+  playTimeTracker: RMCJobBureauDeputy
+  ranks:
+    RMCRankCMBDeputy: []
+  startingGear: RMCGearBureauDeputy
+  icon: "RMCJobIconBureauDeputy"
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillMedical: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 1
+        RMCSkillEndurance: 3
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-deputy
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidBureauDeputy
+  name: bureau ghost role deputy
+  suffix: Spawner, Player, Friendly
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Bureau/marshal.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCBureauDeputy
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCBureauDeputy
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-bureau-deputy
+    description: rmc-ghost-role-information-bureau-marshal-description
+    rules: rmc-ghost-role-information-bureau-rules
+    reregister: false
+    job: CMBureauDeputy
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearBureauDeputy
+  equipment:
+    head: RMCHeadCapBureau
+    # face cigar
+    # shoulder holster with revolver and two magazines
+    eyes: CMGlassesSecurity
+    ears: RMCHeadsetDistressBureau
+    back: CMSatchelSecurity
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauDeputy # add telebaton binoculars/range
+    belt: CMBeltSecurityMarshalFilled
+    shoes: RMCBootsPMCFilled
+    id: RMCIDCardCMBDeputy
+    pocket1: RMCPouchFirstAidERTFill
+    pocket2: RMCPouchShotgunLargeBuckshot
+    suitstorage: RMCWeaponShotgunM3717
+
+- type: playTimeTracker
+  id: RMCJobBureauDeputy
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconBureauDeputy
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: cmb_dep

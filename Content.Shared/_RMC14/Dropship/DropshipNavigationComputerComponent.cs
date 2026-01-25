@@ -25,4 +25,16 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SkillRechargeMultiplier = 0.75f;
+
+    [DataField, AutoNetworkedField]
+    public bool Hijackable = true;
+
+    [DataField, AutoNetworkedField]
+    public bool RemoteControl = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LockoutDuration = TimeSpan.FromMinutes(10);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LockedOutUntil = TimeSpan.Zero;
 }

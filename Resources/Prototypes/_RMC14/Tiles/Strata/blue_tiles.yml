@@ -3,6 +3,7 @@
   parent: CMTileBase
   id: RMCFloorStrataBlueBase
   name: tiles-cm-default-blue
+  suffix: Sorokyne
 
 - type: tile
   parent: RMCFloorStrataBlueBase

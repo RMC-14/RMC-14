@@ -1,9 +1,9 @@
-# added Felinids to the species restrictions list
+# added Felinids, Skrell to the species restrictions list
 - type: marking
   id: TattooHiveChest
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Felinid]
+  speciesRestriction: [Human, Dwarf, Felinid, Skrell]
   coloring:
     default:
       type:
@@ -17,7 +17,7 @@
   id: TattooNightlingChest
   bodyPart: Chest
   markingCategory: Chest
-  speciesRestriction: [Human, Dwarf, Felinid]
+  speciesRestriction: [Human, Dwarf, Felinid, Skrell]
   coloring:
     default:
       type:
@@ -138,3 +138,31 @@
   sprites:
   - sprite: Mobs/Customization/tattoos.rsi
     state: tattoo_eye_l
+
+- type: marking
+  id: TattooEyeMothRight
+  bodyPart: Eyes
+  markingCategory: Overlay
+  speciesRestriction: [Moth]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+          negative: true
+  sprites:
+  - sprite: Mobs/Customization/tattoos.rsi
+    state: tattoo_eye_moth_r
+
+- type: marking
+  id: TattooEyeMothLeft
+  bodyPart: Eyes
+  markingCategory: Overlay
+  speciesRestriction: [Moth]
+  coloring:
+    default:
+      type:
+        !type:EyeColoring
+          negative: true
+  sprites:
+  - sprite: Mobs/Customization/tattoos.rsi
+    state: tattoo_eye_moth_l

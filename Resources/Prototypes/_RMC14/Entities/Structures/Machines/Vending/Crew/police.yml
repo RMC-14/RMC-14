@@ -14,22 +14,27 @@
   - type: CMAutomatedVendor
     jobs:
     - CMMilitaryPolice
-    - CMChiefMP # TODO RMC14 chief mp vendor
     sections:
-    - name: Police Set (Mandatory)
-      takeAll: RMCMPSet
-      entries:
-      - id: RMCVendorBundleMilitaryPoliceApparel
     - name: Standard Equipment
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
       - id: CMHeadsetMPO
       - id: CMBootsBlackFilled
+      - id: CMGlassesSecurity
+      - id: CMBeltSecurityMPFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10MP
     - name: Armor
-      takeAll: CMArmor
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM2MP
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadBeretRed
     - name: Handgun Case
       choices: { CMGunCase: 1 }
@@ -70,8 +75,18 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
+      - id: RMCWebbingBlackSmall
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+        amount: 10
+      - id: RMCGuidebookSOP
+        amount: 10
 
 # WARDEN
 - type: entity
@@ -97,12 +112,20 @@
       takeAll: CMStandard
       entries:
       - id: CMHandsBlackMarine
-      - id: CMHeadsetCMP
+      - id: RMCHeadsetMW
       - id: CMBootsBlackFilled
+    - name: Helmet
+      choices: { CMHelmet: 1 }
+      entries:
+      - id: CMArmorHelmetM10MP
     - name: Armor
-      takeAll: CMArmor
+      choices: { CMArmor: 1 }
       entries:
       - id: CMArmorM3Warden
+      - id: RMCArmorVestMP
+    - name: Hat
+      choices: { CMHat: 1 }
+      entries:
       - id: CMHeadCapWarden
     - name: Handgun Case
       choices: { CMGunCase: 1 }
@@ -143,5 +166,14 @@
       entries:
       - id: CMWebbingBrown
       - id: CMWebbingBlack
-      #- id: CMShoulderHolster
+      - id: RMCWebbingLegPouch
+      - id: RMCWebbingLegPouchBlack
+      - id: CMWebbingHolster
+      - id: RMCWebbingHolsterBlack
       - id: CMWebbing
+    - name: Books
+      entries:
+      - id: RMCGuidebookLawMarine
+        amount: 10
+      - id: RMCGuidebookSOP
+        amount: 10

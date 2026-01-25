@@ -1,0 +1,195 @@
+﻿- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunHeavyBuckshot
+  name: handful of heavy buckshot shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_heavy_handfuls.rsi
+    layers:
+    - state: heavy_buckshot_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletHeavyShotgunBuckshot
+  - type: Stack
+    count: 4
+    stackType: RMCShellShotgunBuckshotHeavy
+    baseLayer: base
+    layerStates:
+    - heavy_buckshot_1
+    - heavy_buckshot_1
+    - heavy_buckshot_2
+    - heavy_buckshot_3
+    - heavy_buckshot_4
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunHeavyBuckshot
+
+- type: stack
+  id: RMCShellShotgunBuckshotHeavy
+  name: handful of heavy buckshot shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
+  spawn: RMCShellShotgunHeavyBuckshot
+  maxCount: 4
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunHeavySlugs
+  name: handful of heavy shotgun slugs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_heavy_handfuls.rsi
+    layers:
+    - state: heavy_slug_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletHeavyShotgunSlug
+  - type: Stack
+    count: 4
+    stackType: RMCShellShotgunSlugHeavy
+    baseLayer: base
+    layerStates:
+    - heavy_slug_1
+    - heavy_slug_1
+    - heavy_slug_2
+    - heavy_slug_3
+    - heavy_slug_4
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunHeavySlugs
+
+- type: stack
+  id: RMCShellShotgunSlugHeavy
+  name: handful of heavy slug shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
+  spawn: RMCShellShotgunHeavySlugs
+  maxCount: 4
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunHeavyBeanbag
+  name: handful of heavy beanbag slugs
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_heavy_handfuls.rsi
+    layers:
+    - state: heavy_beanbag_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletHeavyShotgunBeanbag
+  - type: Stack
+    count: 4
+    stackType: RMCShellShotgunBeanbagHeavy
+    baseLayer: base
+    layerStates:
+    - heavy_beanbag_1
+    - heavy_beanbag_1
+    - heavy_beanbag_2
+    - heavy_beanbag_3
+    - heavy_beanbag_4
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunHeavyBeanbag
+
+- type: stack
+  id: RMCShellShotgunBeanbagHeavy
+  name: handful of heavy slug shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
+  spawn: RMCShellShotgunHeavyBeanbag
+  maxCount: 4
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunHeavyFlechette
+  name: handful of heavy flechette shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_heavy_handfuls.rsi
+    layers:
+    - state: heavy_flechette_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletHeavyShotgunFlechette
+  - type: Stack
+    count: 4
+    stackType: RMCShellShotgunFlechetteHeavy
+    baseLayer: base
+    layerStates:
+    - heavy_flechette_1
+    - heavy_flechette_1
+    - heavy_flechette_2
+    - heavy_flechette_3
+    - heavy_flechette_4
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunHeavyFlechette
+
+- type: stack
+  id: RMCShellShotgunFlechetteHeavy
+  name: handful of heavy slug shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
+  spawn: RMCShellShotgunHeavyFlechette
+  maxCount: 4
+
+- type: entity
+  parent: CMShellShotgunBuckshot
+  id: RMCShellShotgunIncendiaryHeavyBuckshot
+  name: handful of heavy dragonbreath buckshot shells
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_heavy_handfuls.rsi
+    layers:
+    - state: heavy_dragonsbreath_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletHeavyShotgunIncendiaryBuckshot
+  - type: Stack
+    count: 4
+    stackType: RMCShellShotgunIncendiaryHeavyStack
+    baseLayer: base
+    layerStates:
+    - heavy_dragonsbreath_1
+    - heavy_dragonsbreath_1
+    - heavy_dragonsbreath_2
+    - heavy_dragonsbreath_3
+    - heavy_dragonsbreath_4
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunIncendiaryHeavyBuckshot
+
+- type: stack
+  id: RMCShellShotgunIncendiaryHeavyStack
+  name: handful of heavy slug shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: buckshot_shell_1 }
+  spawn: RMCShellShotgunIncendiaryHeavyBuckshot
+  maxCount: 4
+
+- type: Tag
+  id: RMCShellShotgunHeavyBuckshot
+
+- type: Tag
+  id: RMCShellShotgunHeavySlugs
+
+- type: Tag
+  id: RMCShellShotgunHeavyBeanbag
+
+- type: Tag
+  id: RMCShellShotgunHeavyFlechette
+
+- type: Tag
+  id: RMCShellShotgunIncendiaryHeavyBuckshot
+

@@ -1,0 +1,479 @@
+
+#Donuts
+
+- type: microwaveMealRecipe
+  id: RecipeDonut
+  name: donut recipe
+  result: RMCFoodDonut
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1 # created by rolling a dough slice.
+  reagents:
+    RMCSugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutFrosted
+  name: frosted donut recipe
+  result: RMCFoodDonutFrosted
+  time: 10
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    RMCSugar: 5
+    JuiceBerry: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutJelly
+  name: jelly donut recipe
+  result: RMCFoodDonutJelly
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    RMCSugar: 5
+    RMCCherryJelly: 5
+
+- type: microwaveMealRecipe
+  id: RecipeDonutJellyFrosted
+  name: frosted jelly donut recipe
+  result: RMCFoodDonutJellyFrosted
+  time: 15
+  group: Breads
+  solids:
+    FoodDoughRope: 1
+  reagents:
+    RMCSugar: 5
+    JuiceBerry: 5
+    RMCCherryJelly: 5
+
+#Misc
+
+- type: microwaveMealRecipe
+  id: RecipeHoneyBun
+  name: honey bun recipe
+  result: FoodBakedBunHoney
+  time: 10
+  group: Dessert
+  solids:
+    FoodDoughSlice: 1
+  reagents:
+    RMCSugar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeBeetSoup
+  name: beet soup recipe
+  result: FoodSoupBeet
+  time: 10
+  group: Soup
+  reagents:
+    Water: 10
+  solids:
+    FoodBowlBig: 1
+    FoodWhiteBeet: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipePlumpPie
+  name: plump pie recipe
+  result: FoodPiePlump
+  time: 15
+  group: Pie
+  solids:
+    FoodDoughPie: 1
+    FoodMushroomPlump: 3
+    FoodPlateTin: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCookiePeanutButter
+  name: peanut butter cookie recipe
+  result: RMCFoodCookiePeanutButter
+  time: 5
+  group: BarsAndCookies
+  reagents:
+    Flour: 5
+    RMCSugar: 5
+    RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeEggplantParm
+  name: eggplant parm recipe
+  result: FoodMealEggplantParm
+  time: 15
+  group: Savory
+  solids:
+    FoodCheeseSlice: 1
+    FoodEggplant: 1
+
+- type: microwaveMealRecipe
+  id: RecipeFriedChicken
+  name: fried chicken recipe
+  result: FoodMeatChickenFried
+  time: 15
+  group: Savory
+  solids:
+    FoodMeatChickenCutlet: 1
+  reagents:
+    RMCBatter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCVegetablePizza
+  name: RMC vegetable pizza recipe
+  result: RMCFoodPizzaVegetableFull
+  time: 30
+  group: Pizza
+  solids:
+    FoodDoughFlat: 1
+    FoodCheeseSlice: 1
+    FoodChiliPepper: 2
+    FoodOnionRedSlice: 1
+    FoodCorn: 1
+    FoodTomato: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPBJSandwich
+  name: peanut butter and jelly sandwich recipe
+  result: RMCFoodPBJSandwich
+  time: 5
+  group: Savory
+  solids:
+    FoodBreadPlainSlice: 2
+  reagents:
+    RMCCherryJelly: 5
+    RMCPeanutButter: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCOnigiri
+  name: onigiri recipe
+  result: RMCFoodOnigiri
+  time: 5
+  group: Savory
+  reagents:
+    TableSalt: 5
+    Vinegar: 5
+    RMCSugar: 5
+  solids:
+    FoodRiceBoiled: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCarbonara
+  name: carbonara recipe
+  result: RMCFoodCarbonara
+  time: 10
+  group: Pasta
+  solids:
+    FoodNoodlesBoiled: 1
+    FoodCheeseSlice: 1
+    FoodMeatBacon: 1
+  reagents:
+    Egg: 6
+
+- type: microwaveMealRecipe
+  id: RecipeRiceMango
+  name: mango recipe
+  result: FoodRiceMango
+  time: 15
+  group: Dessert
+  reagents:
+    Rice: 15
+    Milk: 10
+    RMCSugar: 5
+  solids:
+    FoodBowlBig: 1
+    RMCFoodMango: 1
+
+- type: microwaveMealRecipe
+  id: RecipeYorkshirePudding
+  name: yorkshire pudding recipe
+  result: FoodYorkshirePudding
+  time: 10
+  group: Breads
+  reagents:
+    Milk: 5
+    Flour: 5
+    Egg: 6
+    TableSalt: 5
+
+- type: microwaveMealRecipe
+  id: RecipeSausage
+  name: Sausage recipe
+  result: FoodMeatSausage
+  time: 5
+  group: Meat
+  solids:
+    FoodMeatCutlet: 1
+    FoodMeatMeatball: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHotDog
+  name: hot dog recipe
+  result: FoodHotDog
+  time: 10
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeHotDogCooked
+  name: cooked hot dog recipe
+  result: FoodHotDog
+  time: 5
+  group: Savory
+  solids:
+    FoodBreadBun: 1
+    FoodMeatSausageCooked: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCGrilledFish
+  name: grilled fish recipe
+  result: RMCFoodMeatFishGrilled
+  time: 10
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishAndChips
+  name: fish & chips recipe
+  result: RMCFoodMeatFishAndChips
+  time: 15
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+    FoodMealFries: 1
+  reagents:
+    RMCBatter: 5
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeRMCFishSushi
+  name: fish sushi roll recipe
+  result: RMCFoodMeatFishSushi
+  time: 5
+  group: Savory
+  solids:
+    RMCFoodMeatFish: 1
+  reagents:
+    Water: 5
+    Rice: 5
+
+#Cakes
+- type: microwaveMealRecipe
+  id: RecipeRMCSuppermatter
+  name: suppermatter recipe
+  result: FoodCakeSuppermatter
+  time: 30
+  solids:
+    FoodCakeBatter: 2
+  reagents:
+    RMCSugar: 30
+    RMCNitrogen: 10
+    RMCPhoron: 10
+
+- type: microwaveMealRecipe
+  id: RecipeBlackForest
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 5
+  solids:
+    FoodCakeChocolate: 1
+    FoodCherry: 1
+  reagents:
+    Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaSupreme
+  name: supreme pizza recipe
+  result: RMCFoodPizzaSupremeFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeat: 1
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionRedSlice: 1
+    FoodChiliPepper: 1
+    FoodMeatSausage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeRMCPizzaCalabresa
+  name: calabresa pizza recipe
+  result: RMCFoodPizzaCalabresaFull
+  time: 30
+  solids:
+    FoodDoughFlat: 1
+    FoodMeatSausage: 2
+    FoodCheeseSlice: 1
+    FoodTomato: 1
+    FoodOnionSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCakeBlackForest
+  name: black forest cake recipe
+  result: FoodCakeBlackForest
+  time: 5
+  solids:
+    FoodCakeChocolate: 1
+    FoodCherry: 1
+  reagents:
+    Cream: 10
+
+- type: microwaveMealRecipe
+  id: RecipeVanillaCake
+  name: vanilla cake recipe
+  result: FoodCakeVanilla
+  time: 5
+  group: Cake
+  reagents:
+    Milk: 5
+    RMCSugar: 5
+  solids:
+    FoodCakePlain: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTapsilog
+  name: tapsilog recipe
+  result: FoodTapsilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatCutlet: 1
+
+- type: microwaveMealRecipe
+  id: RecipeTocilog
+  name: tocilog recipe
+  result: FoodTocilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+    RMCSugar: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatBacon: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChicksilog
+  name: Chicksilog recipe
+  result: FoodChicksilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatChickenFried: 1
+
+- type: microwaveMealRecipe
+  id: RecipeCarpsilog
+  name: Carpsilog recipe
+  result: FoodCarpsilog
+  time: 10
+  group: Savory
+  reagents:
+    Rice: 5
+    Water: 5
+    Vinegar: 5
+  solids:
+    FoodMealFriedegg: 1
+    FoodGarlic: 1
+    FoodMeatFish: 1
+
+- type: microwaveMealRecipe
+  id: RecipeBangersMash
+  name: bangers and mash recipe
+  result: FoodBangersMash
+  time: 10
+  group: Savory
+  solids:
+    FoodOnionSlice: 1
+    FoodMeatSausage: 1
+    FoodPotato: 1
+
+- type: microwaveMealRecipe
+  id: RecipePieMash
+  name: pie and mash recipe
+  result: FoodPieMash
+  time: 10
+  group: Savory
+  solids:
+    FoodButterSlice: 1
+    FoodPieMeatSlice: 1
+    FoodPotato: 1
+
+# Sandvich
+
+- type: microwaveMealRecipe
+  id: RecipeBanhMi
+  name: banh mi recipe
+  result: FoodBanhMi
+  time: 15
+  group: Savory
+  reagents:
+    Mayo: 5
+  solids:
+    FoodBreadBaguette: 1
+    FoodCarrot: 1
+    FoodMeat: 1
+    FoodCabbage: 1
+
+- type: microwaveMealRecipe
+  id: RecipeChickenParm
+  name: chicken parm recipe
+  result: FoodChickenParmHero
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodTomato: 1
+    FoodMeatChickenFried: 1
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeMeatballSub
+  name: meatball sub recipe
+  result: FoodMeatballSub
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodTomato: 1
+    FoodMeatMeatball: 2
+    FoodCheeseSlice: 1
+
+- type: microwaveMealRecipe
+  id: RecipeGabagool
+  name: Gabagool sandwich recipe
+  result: FoodGabagool
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodChiliPepper: 1
+    FoodMeatCutlet: 2
+    FoodCheeseSlice: 1
+  reagents:
+    Vinegar: 5
+
+- type: microwaveMealRecipe
+  id: RecipeCheesesteak
+  name: cheesesteak recipe
+  result: FoodCheesesteak
+  time: 15
+  group: Savory
+  solids:
+    FoodBreadBaguette: 1
+    FoodMeatCutlet: 3
+    FoodCheeseSlice: 1

@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Humanoid.Prototypes;
@@ -29,6 +30,7 @@ public sealed partial class HumanoidSpeciesBaseSpritesPrototype : IPrototype
 ///     that sprite (or at least, the layer this sprite is on).
 /// </summary>
 [Prototype("humanoidBaseSprite")]
+[Serializable, NetSerializable]
 public sealed partial class HumanoidSpeciesSpriteLayer : IPrototype
 {
     [IdDataField]

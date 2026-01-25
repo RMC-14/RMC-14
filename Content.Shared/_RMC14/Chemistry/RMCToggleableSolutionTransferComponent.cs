@@ -8,4 +8,11 @@ public sealed partial class RMCToggleableSolutionTransferComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public string Solution;
+
+    [DataField, AutoNetworkedField]
+    public SolutionTransferDirection Direction = SolutionTransferDirection.Input;
+}
+public enum SolutionTransferDirection
+{
+    Input, Output,
 }

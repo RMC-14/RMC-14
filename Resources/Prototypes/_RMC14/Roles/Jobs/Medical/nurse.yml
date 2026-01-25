@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMNurse
-  name: cm-job-name-nurse
-  description: cm-job-description-nurse
+  name: rmc-job-name-nurse
+  description: rmc-job-description-nurse
   playTimeTracker: CMJobNurse
   requirements:
   - !type:TotalDepartmentsTimeRequirement
@@ -20,38 +20,40 @@
   supervisors: cm-job-supervisors-cmo
   accessGroups:
   - CMMedbay
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: nurse
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_shipside
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
       skills:
+        RMCSkillEndurance: 1
         RMCSkillFirearms: 0
         RMCSkillMedical: 3
         RMCSkillSurgery: 1
+        RMCSkillFireman: 1
     - type: RMCUserBulkyArmorIncapable
     - type: JobPrefix
-      prefix: cm-job-prefix-nurse
+      prefix: rmc-job-prefix-nurse
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: nurse
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearNurse
   equipment:
-    jumpsuit: RMCScrubsLightBlue
-    neck: RMCNurseArmband
-    shoes: ClothingShoesColorWhite
+    jumpsuit: RMCScrubsLightBlueArmband
+    shoes: RMCShoesWhite
     id: CMIDCardNurse
 
 - type: startingGear
   id: CMGearNurseEquipped
   equipment:
-    jumpsuit: RMCScrubsLightBlue
-    neck: RMCNurseArmband
+    jumpsuit: RMCScrubsLightBlueArmband
     gloves: CMHandsLatex
     shoes: RMCShoesWhite
     head: CMHeadCapSurgOrange

@@ -1,0 +1,27 @@
+<Document>
+  #Burrower, Tier 2
+
+  <GuideEntityEmbed Entity="CMXenoBurrower"/>
+
+  ##Playing as a Burrower
+
+  Use your resin holes to fill them with a special type of acid that stuns any hosts that enter a tile around it, this can be paired with stomp and multiple traps to easily capture hosts on the frontline and backline. Burrowers can also make tunnels that allow easy transportation of hosts from the frontline to nests, however, they suffer from a low plasma limit. It is suggested to work around recovery pheromones.
+
+  You can also use your burrow to burrow atop any host on a cadeline which will stun them, allowing you to melt their gun before using tremor and burrow to get away.
+
+  ##How to capture
+
+  To capture on the backlines, attempt to place your resin holes underneath any debris to hide them and fill them with acid. Once your traps are in place, stand behind a wall near them and lure a host close enough so that you can tremor and drag them into the trap while tackling them.
+
+  ##Abilities:
+  - [bold]Plant Weeds[/bold]: Places a resin node which spreads weeds across a large area.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantWeeds"/>
+  - [bold]Plant Resin Hole[/bold]: Places a hole on weeds which can then be filled by burrowers special acid by clicking on it with a empty hand, it can also be hidden under debris such as wooden planks or metal sheets.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoPlantResinHole"/>
+  - [bold]Tremor[/bold]: Causes targets in a large area around you to fall to the ground, works through walls and useful for escaping or capturing hosts.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoTremor"/>
+  - [bold]Dig Tunnel[/bold]: Dig a tunnel which can act as a fast travel point, you can also rename tunnels.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoDigTunnel"/>
+  - [bold]Burrow[/bold]: Burrow underground and wait for a short time, after which you can emerge by clicking on any tile around you to start unburrowing, if you unburrow on top of a host it will stun them for a long amount of time allowing you to capture them if alone and behind cades, this ability works through walls and the unburrow time is dependent on how far you click away.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoBurrow"/>
+</Document>

@@ -47,15 +47,26 @@ public sealed class RMCUnfoldCardboardSystem : EntitySystem
 
     private void UnfoldCardboard(Entity<RMCUnfoldCardboardComponent> ent, EntityUid user)
     {
-        if (_cmInventory.GetItemSlotsFilled(ent.Owner).Filled != 0)
+        void NotEmptyPopup()
         {
             _popup.PopupClient(Loc.GetString(ent.Comp.FailedNotEmptyText, ("entityName", ent.Owner)), ent, user);
+        }
+
+        if (_cmInventory.GetItemSlotsFilled(ent.Owner).Filled != 0)
+        {
+            NotEmptyPopup();
             return;
         }
 
         if (TryComp(ent, out BulletBoxComponent? bulletBox) && bulletBox.Amount > 0)
         {
-            _popup.PopupClient(Loc.GetString(ent.Comp.FailedNotEmptyText, ("entityName", ent.Owner)), ent, user);
+            NotEmptyPopup();
+            return;
+        }
+
+        if (TryComp(ent, out StorageComponent? storage) && storage.Container.Count > 0)
+        {
+            NotEmptyPopup();
             return;
         }
 

@@ -35,18 +35,14 @@
     RMCRankGunnerySergeant: []
   startingGear: CMGearSeniorEnlistedAdvisor
   icon: "CMJobIconSEA"
-  requireAdminNotify: true
   joinNotifyCrew: true
-  supervisors: cm-job-supervisors-co
+  latejoinArrivalSound:
+    path: /Audio/_RMC14/Announcements/ARES/attention_jingle.ogg
+  marineAuthorityLevel: 5
+  supervisors: rmc-job-supervisors-commander
   whitelisted: true
   accessGroups:
   - MarineMain
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: sea
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_medical
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -72,6 +68,7 @@
         RMCSkillVehicles: 2
     - type: MarineOrders
     - type: CMVendorUser
+      id: CMSeniorEnlistedAdvisor
       points: 45
     - type: RMCPointing
     - type: JobPrefix
@@ -79,6 +76,14 @@
     - type: SeeNewPlayers
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: sea
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_medical
+    - type: RMCTrackable
 
 - type: startingGear
   id: CMGearSeniorEnlistedAdvisor

@@ -18,6 +18,8 @@
         <BoxContainer Name="SpecialistSkills" Access="Public" Orientation="Horizontal" />
         <Label Text="{Loc 'rmc-ui-create-squad'}" Margin="0 20 0 0" />
         <ui:BlueHorizontalSeparator />
-        <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+        <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Name="Squads" Access="Public" Orientation="Vertical" />
+        </ScrollContainer>
     </BoxContainer>
 </controls:RMCMarineTab>

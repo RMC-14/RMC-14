@@ -19,7 +19,7 @@ public sealed partial class XenoEmpowerComponent : Component
     public FixedPoint2 Cost = 50;
 
     [DataField]
-    public float Range = 4;
+    public float Range = 5.078f;
 
     [DataField]
     public int InitialShield = 50;

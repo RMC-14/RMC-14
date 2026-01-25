@@ -17,6 +17,7 @@
   suffix: 1
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "1"
   - type: Icon
     state: "1"
@@ -27,6 +28,7 @@
   suffix: 2
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "2"
   - type: Icon
     state: "2"
@@ -37,6 +39,7 @@
   suffix: 3
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "3"
   - type: Icon
     state: "3"
@@ -47,6 +50,7 @@
   suffix: 4
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "4"
   - type: Icon
     state: "4"
@@ -57,6 +61,7 @@
   suffix: 5
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "5"
   - type: Icon
     state: "5"
@@ -67,6 +72,7 @@
   suffix: 6
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "6"
   - type: Icon
     state: "6"
@@ -77,6 +83,7 @@
   suffix: 7
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "7"
   - type: Icon
     state: "7"
@@ -87,6 +94,7 @@
   suffix: 8
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "8"
   - type: Icon
     state: "8"
@@ -97,6 +105,7 @@
   suffix: 9
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "9"
   - type: Icon
     state: "9"
@@ -107,6 +116,7 @@
   suffix: 10
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "10"
   - type: Icon
     state: "10"
@@ -117,6 +127,7 @@
   suffix: 11
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "11"
   - type: Icon
     state: "11"
@@ -127,6 +138,7 @@
   suffix: 12
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "12"
   - type: Icon
     state: "12"
@@ -137,6 +149,7 @@
   suffix: 13
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "13"
   - type: Icon
     state: "13"
@@ -147,6 +160,7 @@
   suffix: 14
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "14"
   - type: Icon
     state: "14"
@@ -157,6 +171,7 @@
   suffix: 15
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "15"
   - type: Icon
     state: "15"
@@ -167,6 +182,7 @@
   suffix: 16
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "16"
   - type: Icon
     state: "16"
@@ -177,6 +193,7 @@
   suffix: 17
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "17"
   - type: Icon
     state: "17"
@@ -187,6 +204,7 @@
   suffix: 18
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "18"
   - type: Icon
     state: "18"
@@ -197,6 +215,7 @@
   suffix: 19
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "19"
   - type: Icon
     state: "19"
@@ -207,6 +226,7 @@
   suffix: 20
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "20"
   - type: Icon
     state: "20"
@@ -217,6 +237,7 @@
   suffix: 21
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "21"
   - type: Icon
     state: "21"
@@ -227,6 +248,7 @@
   suffix: 22
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "22"
   - type: Icon
     state: "22"
@@ -237,6 +259,7 @@
   suffix: 23
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "23"
   - type: Icon
     state: "23"
@@ -247,6 +270,7 @@
   suffix: 24
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "24"
   - type: Icon
     state: "24"
@@ -257,6 +281,7 @@
   suffix: 25
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "25"
   - type: Icon
     state: "25"
@@ -267,6 +292,7 @@
   suffix: 26
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "26"
   - type: Icon
     state: "26"
@@ -277,6 +303,7 @@
   suffix: 27
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "27"
   - type: Icon
     state: "27"
@@ -287,6 +314,7 @@
   suffix: 28
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "28"
   - type: Icon
     state: "28"
@@ -297,6 +325,7 @@
   suffix: 29
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "29"
   - type: Icon
     state: "29"
@@ -307,6 +336,7 @@
   suffix: 30
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "30"
   - type: Icon
     state: "30"
@@ -317,6 +347,7 @@
   suffix: 31
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "31"
   - type: Icon
     state: "31"
@@ -327,6 +358,7 @@
   suffix: 32
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "32"
   - type: Icon
     state: "32"
@@ -337,6 +369,7 @@
   suffix: 33
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "33"
   - type: Icon
     state: "33"
@@ -347,6 +380,7 @@
   suffix: 34
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "34"
   - type: Icon
     state: "34"
@@ -357,6 +391,7 @@
   suffix: 35
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "35"
   - type: Icon
     state: "35"
@@ -367,6 +402,7 @@
   suffix: 36
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "36"
   - type: Icon
     state: "36"
@@ -377,6 +413,7 @@
   suffix: 37
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "37"
   - type: Icon
     state: "37"
@@ -387,6 +424,7 @@
   suffix: 38
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "38"
   - type: Icon
     state: "38"
@@ -397,6 +435,7 @@
   suffix: 39
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "39"
   - type: Icon
     state: "39"
@@ -407,6 +446,7 @@
   suffix: 40
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "40"
   - type: Icon
     state: "40"
@@ -417,6 +457,7 @@
   suffix: 41
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "41"
   - type: Icon
     state: "41"
@@ -427,6 +468,7 @@
   suffix: 42
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "42"
   - type: Icon
     state: "42"
@@ -437,6 +479,7 @@
   suffix: 43
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "43"
   - type: Icon
     state: "43"
@@ -447,6 +490,7 @@
   suffix: 44
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "44"
   - type: Icon
     state: "44"
@@ -457,6 +501,7 @@
   suffix: 45
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "45"
   - type: Icon
     state: "45"
@@ -467,9 +512,21 @@
   suffix: 46
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "46"
   - type: Icon
     state: "46"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall46a]
+  id: CMNormandyWall46a
+  suffix: 46a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "46a"
+  - type: Icon
+    state: "46a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall47]
@@ -477,6 +534,7 @@
   suffix: 47
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "47"
   - type: Icon
     state: "47"
@@ -487,6 +545,7 @@
   suffix: 48
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "48"
   - type: Icon
     state: "48"
@@ -497,9 +556,21 @@
   suffix: 49
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "49"
   - type: Icon
     state: "49"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall49a]
+  id: CMNormandyWall49a
+  suffix: 49a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "49a"
+  - type: Icon
+    state: "49a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall50]
@@ -507,6 +578,7 @@
   suffix: 50
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "50"
   - type: Icon
     state: "50"
@@ -517,6 +589,7 @@
   suffix: 51
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "51"
   - type: Icon
     state: "51"
@@ -527,6 +600,7 @@
   suffix: 52
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "52"
   - type: Icon
     state: "52"
@@ -537,6 +611,7 @@
   suffix: 53
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "53"
   - type: Icon
     state: "53"
@@ -547,6 +622,7 @@
   suffix: 54
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "54"
   - type: Icon
     state: "54"
@@ -557,6 +633,7 @@
   suffix: 55
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "55"
   - type: Icon
     state: "55"
@@ -567,6 +644,7 @@
   suffix: 56
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "56"
   - type: Icon
     state: "56"
@@ -577,6 +655,7 @@
   suffix: 57
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "57"
   - type: Icon
     state: "57"
@@ -587,6 +666,7 @@
   suffix: 58
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "58"
   - type: Icon
     state: "58"
@@ -597,6 +677,7 @@
   suffix: 59
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "59"
   - type: Icon
     state: "59"
@@ -607,6 +688,7 @@
   suffix: 60
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "60"
   - type: Icon
     state: "60"
@@ -619,12 +701,16 @@
   suffix: 61
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     layers:
     - state: "61"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
   - type: Icon
     state: "61"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall62]
@@ -632,6 +718,7 @@
   suffix: 62
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "62"
   - type: Icon
     state: "62"
@@ -642,6 +729,7 @@
   suffix: 63
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "63"
   - type: Icon
     state: "63"
@@ -652,6 +740,7 @@
   suffix: 64
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "64"
   - type: Icon
     state: "64"
@@ -664,12 +753,16 @@
   suffix: 65
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     layers:
     - state: "65"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
   - type: Icon
     state: "65"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall66]
@@ -677,6 +770,7 @@
   suffix: 66
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "66"
   - type: Icon
     state: "66"
@@ -687,6 +781,7 @@
   suffix: 67
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "67"
   - type: Icon
     state: "67"
@@ -697,6 +792,7 @@
   suffix: 68
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "68"
   - type: Icon
     state: "68"
@@ -707,6 +803,7 @@
   suffix: 69
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "69"
   - type: Icon
     state: "69"
@@ -717,6 +814,7 @@
   suffix: 70
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "70"
   - type: Icon
     state: "70"
@@ -727,6 +825,7 @@
   suffix: 71
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "71"
   - type: Icon
     state: "71"
@@ -737,6 +836,7 @@
   suffix: 72
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "72"
   - type: Icon
     state: "72"
@@ -747,6 +847,7 @@
   suffix: 73
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "73"
   - type: Icon
     state: "73"
@@ -757,6 +858,7 @@
   suffix: 74
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "74"
   - type: Icon
     state: "74"
@@ -767,6 +869,7 @@
   suffix: 75
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "75"
   - type: Icon
     state: "75"
@@ -777,6 +880,7 @@
   suffix: 76
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "76"
   - type: Icon
     state: "76"
@@ -787,6 +891,7 @@
   suffix: 77
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "77"
   - type: Icon
     state: "77"
@@ -797,6 +902,7 @@
   suffix: 78
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "78"
   - type: Icon
     state: "78"
@@ -807,6 +913,7 @@
   suffix: 79
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "79"
   - type: Icon
     state: "79"
@@ -817,6 +924,7 @@
   suffix: 80
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "80"
   - type: Icon
     state: "80"
@@ -827,6 +935,7 @@
   suffix: 81
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "81"
   - type: Icon
     state: "81"
@@ -837,6 +946,7 @@
   suffix: 82
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "82"
   - type: Icon
     state: "82"
@@ -847,6 +957,7 @@
   suffix: 83
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "83"
   - type: Icon
     state: "83"
@@ -859,12 +970,16 @@
   suffix: 84
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     layers:
     - state: "84"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
   - type: Icon
     state: "84"
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
   parent: [CMNormandyWall84, CMAlamoWall84Flipped]
@@ -874,33 +989,30 @@
   suffix: 84, Flipped
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     layers:
     - state: "84_flipped"
     - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
       offset: 0.5, 0.5
+  - type: Tag
+    tags:
+    - RMCDropshipWeaponPoint
 
 - type: entity
-  parent: [CMBaseNormandyWall, CMAlamoWall85]
+  parent: CMAlamoWall85
   id: CMNormandyWall85
-  name: electronic system attach point
-  description: A place where heavy equipment can be installed with a powerloader.
   suffix: 85
   components:
   - type: Sprite
-    state: "85"
-  - type: Icon
-    state: "85"
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
 
 - type: entity
-  parent: [CMNormandyWall85, CMAlamoWall85Flipped]
+  parent: CMAlamoWall85Flipped
   id: CMNormandyWall85Flipped
   suffix: 85, Flipped
   components:
   - type: Sprite
-    layers:
-    - state: "85_flipped"
-    - map: [ "enum.DropshipWeaponPointLayers.Layer" ]
-      offset: 0.5, 0.5
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall86]
@@ -908,9 +1020,32 @@
   suffix: 86
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "86"
   - type: Icon
     state: "86"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall86a]
+  id: CMNormandyWall86a
+  suffix: 86a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "86a"
+  - type: Icon
+    state: "86a"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall86b]
+  id: CMNormandyWall86b
+  suffix: 86b
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "86b"
+  - type: Icon
+    state: "86b"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall87]
@@ -918,6 +1053,7 @@
   suffix: 87
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "87"
   - type: Icon
     state: "87"
@@ -928,6 +1064,7 @@
   suffix: 88
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "88"
   - type: Icon
     state: "88"
@@ -938,9 +1075,32 @@
   suffix: 89
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "89"
   - type: Icon
     state: "89"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall89a]
+  id: CMNormandyWall89a
+  suffix: 89a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "89a"
+  - type: Icon
+    state: "89a"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall89b]
+  id: CMNormandyWall89b
+  suffix: 89b
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "89b"
+  - type: Icon
+    state: "89b"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall90]
@@ -948,6 +1108,7 @@
   suffix: 90
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "90"
   - type: Icon
     state: "90"
@@ -958,6 +1119,7 @@
   suffix: 91
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "91"
   - type: Icon
     state: "91"
@@ -968,6 +1130,7 @@
   suffix: 92
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "92"
   - type: Icon
     state: "92"
@@ -978,6 +1141,7 @@
   suffix: 93
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "93"
   - type: Icon
     state: "93"
@@ -988,6 +1152,7 @@
   suffix: 94
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "94"
   - type: Icon
     state: "94"
@@ -998,9 +1163,21 @@
   suffix: 95
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "95"
   - type: Icon
     state: "95"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall95a]
+  id: CMNormandyWall95a
+  suffix: 95a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "95a"
+  - type: Icon
+    state: "95a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall96]
@@ -1008,6 +1185,7 @@
   suffix: 96
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "96"
   - type: Icon
     state: "96"
@@ -1018,9 +1196,21 @@
   suffix: 97
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "97"
   - type: Icon
     state: "97"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall97a]
+  id: CMNormandyWall97a
+  suffix: 97a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "97a"
+  - type: Icon
+    state: "97a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall98]
@@ -1028,6 +1218,7 @@
   suffix: 98
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "98"
   - type: Icon
     state: "98"
@@ -1038,9 +1229,21 @@
   suffix: 99
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "99"
   - type: Icon
     state: "99"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall99a]
+  id: CMNormandyWall99a
+  suffix: 99a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "99a"
+  - type: Icon
+    state: "99a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall100]
@@ -1048,6 +1251,7 @@
   suffix: 100
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "100"
   - type: Icon
     state: "100"
@@ -1058,9 +1262,21 @@
   suffix: 101
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "101"
   - type: Icon
     state: "101"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall101a]
+  id: CMNormandyWall101a
+  suffix: 101a
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "101a"
+  - type: Icon
+    state: "101a"
 
 - type: entity
   parent: [CMBaseNormandyWall, CMAlamoWall102]
@@ -1068,6 +1284,29 @@
   suffix: 102
   components:
   - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
     state: "102"
   - type: Icon
     state: "102"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall103]
+  id: CMNormandyWall103
+  suffix: 103
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "103"
+  - type: Icon
+    state: "103"
+
+- type: entity
+  parent: [CMBaseNormandyWall, CMAlamoWall104]
+  id: CMNormandyWall104
+  suffix: 104
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    state: "104"
+  - type: Icon
+    state: "104"

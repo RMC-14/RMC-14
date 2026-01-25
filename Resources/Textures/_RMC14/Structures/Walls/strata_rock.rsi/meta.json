@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/icons/turf/walls/jungle_soro_rock_walls.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "strata_rock"
+    },
+    {
+      "name": "strata_rock0",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock1",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock2",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock3",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock4",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock5",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock6",
+      "directions": 4
+    },
+    {
+      "name": "strata_rock7",
+      "directions": 4
+    }
+  ]
+}

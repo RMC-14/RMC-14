@@ -2,6 +2,7 @@
 using Content.Client.Chemistry.Containers.EntitySystems;
 using Content.Client.UserInterface.ControlExtensions;
 using Content.Shared._RMC14.Chemistry;
+using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using JetBrains.Annotations;
@@ -23,7 +24,6 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
     private readonly ContainerSystem _container;
     private readonly SolutionContainerSystem _solution;
     private readonly List<(Button Button, FixedPoint2 Amount)> _dispenseButtons = new();
-    private readonly List<(Button Button, FixedPoint2 Amount)> _beakerButtons = new();
 
     public RMCChemicalDispenserBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -33,6 +33,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
 
     protected override void Open()
     {
+        base.Open();
         _window = this.CreateWindow<RMCChemicalDispenserWindow>();
         _window.EjectBeakerButton.OnPressed += _ => SendPredictedMessage(new RMCChemicalDispenserEjectBeakerBuiMsg());
 
@@ -43,7 +44,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
                 var row = new BoxContainer();
                 void AddButton(ProtoId<ReagentPrototype> reagentId)
                 {
-                    if (_prototypes.TryIndex(reagentId, out var reagentProto))
+                    if (_prototypes.TryIndexReagent(reagentId, out var reagentProto))
                     {
                         var reagentButton = new Button
                         {
@@ -94,7 +95,6 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
                 beakerButton.OnPressed += _ =>
                     SendPredictedMessage(new RMCChemicalDispenserBeakerBuiMsg(setting));
                 _window.BeakerContainer.AddChild(beakerButton);
-                _beakerButtons.Add((beakerButton, setting));
             }
         }
 
@@ -152,7 +152,7 @@ public sealed class RMCChemicalDispenserBui : BoundUserInterface
                 foreach (var reagent in solution.Contents)
                 {
                     var reagentName = reagent.Reagent.Prototype;
-                    if (_prototypes.TryIndex(reagentName, out ReagentPrototype? reagentProto))
+                    if (_prototypes.TryIndexReagent(reagentName, out ReagentPrototype? reagentProto))
                     {
                         reagentName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(reagentProto.LocalizedName);
                     }

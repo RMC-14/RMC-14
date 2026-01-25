@@ -10,6 +10,15 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCMPArmband
+  - type: Tag
+    tags:
+    - RMCUniformMarine
+    - RMCUniformMP
+    - RMCUniformWarden
+    - RMCUniformCMP
 
 - type: entity
   parent: CMJumpsuitProvost
@@ -47,4 +56,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Provost/agent.rsi
-
+  - type: Tag
+    tags:
+    - RMCUniformMarine
+    - RMCUniformMP
+    - RMCUniformWarden
+    - RMCUniformCMP

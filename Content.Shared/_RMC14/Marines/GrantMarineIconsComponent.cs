@@ -1,5 +1,7 @@
 ﻿using Content.Shared.Inventory;
+using Content.Shared.NPC.Prototypes;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines;
 
@@ -12,4 +14,10 @@ public sealed partial class GrantMarineIconsComponent : Component, IClothingSlot
 {
     [DataField, AutoNetworkedField]
     public SlotFlags Slots { get; set; } = SlotFlags.EARS;
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<NpcFactionPrototype>>? Factions;
+
+    [DataField, AutoNetworkedField]
+    public bool BypassFactionIcons = false;
 }

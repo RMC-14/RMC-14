@@ -1,0 +1,83 @@
+# Base
+
+- type: entity
+  parent: ExtinguisherCabinet
+  id: RMCExtinguisherCabinet
+  name: extinguisher cabinet
+  description: A small wall mounted cabinet designed to hold a fire extinguisher.
+  suffix: RMC14
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/Wallmounts/extinguisher_cabinet.rsi
+      layers:
+      - state: frame
+      - state: extinguisher
+        map: ["enum.ItemCabinetVisuals.Layer"]
+        visible: true
+      - state: closed
+        map: ["enum.OpenableVisuals.Layer"]
+
+- type: entity
+  parent: RMCExtinguisherCabinet
+  id: RMCExtinguisherCabinetOpen
+  suffix: RMC14, Open
+  components:
+  - type: Openable
+    opened: true
+
+- type: entity
+  parent: RMCExtinguisherCabinet
+  id: RMCExtinguisherCabinetFilled
+  suffix: RMC14, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisher
+
+- type: entity
+  parent: [RMCExtinguisherCabinetFilled, RMCExtinguisherCabinetOpen]
+  id: RMCExtinguisherCabinetFilledOpen
+  suffix: RMC14, Filled, Open
+
+# Alt
+
+- type: entity
+  parent: ExtinguisherCabinet
+  id: RMCExtinguisherCabinetAlt
+  name: extinguisher cabinet
+  description: A small wall mounted cabinet designed to hold a fire extinguisher.
+  suffix: RMC14, Alt
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/Wallmounts/extinguisher_cabinet_alt.rsi
+      layers:
+      - state: frame
+      - state: extinguisher
+        map: ["enum.ItemCabinetVisuals.Layer"]
+        visible: true
+      - state: closed
+        map: ["enum.OpenableVisuals.Layer"]
+
+- type: entity
+  parent: RMCExtinguisherCabinetAlt
+  id: RMCExtinguisherCabinetAltOpen
+  suffix: RMC14, Alt, Open
+  components:
+  - type: Openable
+    opened: true
+
+- type: entity
+  parent: RMCExtinguisherCabinetAlt
+  id: RMCExtinguisherCabinetAltFilled
+  suffix: RMC14, Alt, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      ItemCabinet:
+      - CMFireExtinguisher
+
+- type: entity
+  parent: [RMCExtinguisherCabinetAltFilled, RMCExtinguisherCabinetAltOpen]
+  id: RMCExtinguisherCabinetAltFilledOpen
+  suffix: RMC14, Alt, Filled, Open

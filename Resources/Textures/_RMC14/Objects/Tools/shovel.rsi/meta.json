@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/31b765e01f85e936b0124a0e82678737028e6649/icons/mob/humans/onmob/inhands/equipment/tools_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/31b765e01f85e936b0124a0e82678737028e6649/icons/mob/humans/onmob/inhands/equipment/tools_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/31b765e01f85e936b0124a0e82678737028e6649/icons/obj/items/tools.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+		},
+    {
+      "name": "inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    }
+  ]
+}

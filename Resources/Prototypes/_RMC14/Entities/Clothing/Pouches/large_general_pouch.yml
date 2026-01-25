@@ -1,0 +1,31 @@
+﻿- type: entity
+  parent: RMCPouchGeneral
+  id: RMCPouchGeneralLarge
+  name: large general pouch
+  description: A general-purpose pouch used to carry more differently sized items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/large_drop.rsi
+  - type: Storage
+    grid:
+    - 0,0,5,1 #6 slot
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledSmartGunDrums
+  suffix: Filled, Smart Gun Drums
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSmartGunHT
+      amount: 2
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledRoyalCommando
+  suffix: Filled, RoyalCommando
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalBeret
+    - id: CMMaskGas # TODO RMC14 royal marine gas masks

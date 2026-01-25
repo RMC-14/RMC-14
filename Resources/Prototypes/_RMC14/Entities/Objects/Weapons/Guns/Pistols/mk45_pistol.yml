@@ -1,8 +1,8 @@
 - type: entity
-  parent: CMWeaponPistolBase
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
   id: RMCWeaponPistolMK45
   name: "MK-45 'high-power' automagnum"
-  description: Originally designed as a replacement for the UNMC's M44 combat revolver, it was rejected at the last minute by a committee, citing its need to be cocked after every loaded magazine to be too cumbersone and antiquated.
+  description: Originally designed as a replacement for the UNMC's M44 combat revolver, it was rejected at the last minute by a committee, citing its need to be cocked after every loaded magazine to be too cumbersome and antiquated.
   suffix: Filled
   components:
   - type: RMCSelectiveFire
@@ -14,6 +14,9 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.2
     accuracyMultiplierUnwielded: 0.85
+  - type: Gun
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_kt42.ogg
   - type: PumpAction
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Cock/gun_pistol_cocked.ogg
@@ -25,9 +28,6 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/mk45.rsi
-  - type: MagazineAmmoProvider
-    autoEject: false
-    soundAutoEject: null
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -46,6 +46,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet
@@ -77,7 +78,7 @@
 - type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolMK45
-  name: mk-45 automagnum magazine (.45)
+  name: MK-45 automagnum magazine (.45)
   description: A pistol magazine.
   components:
   - type: Tag
@@ -117,6 +118,7 @@
   parent: CMBulletBase
   id: CMBulletPistolMK45
   name: high-powered pistol bullet (.45)
+  categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
     damage:

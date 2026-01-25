@@ -4,7 +4,7 @@
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="{Loc 'rmc-dropship-weapons-title'}"
     MinSize="1420 700">
-    <PanelContainer>
+    <PanelContainer Name="Panel" Access="Public">
         <PanelContainer.PanelOverride>
             <graphics:StyleBoxFlat BackgroundColor="#040404" />
         </PanelContainer.PanelOverride>

@@ -2,6 +2,7 @@
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Weapons.Ranged;
 
@@ -9,6 +10,7 @@ public sealed class SharedFireGroupSystem : EntitySystem
 {
     [Dependency] private readonly UseDelaySystem _delay = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -40,16 +42,31 @@ public sealed class SharedFireGroupSystem : EntitySystem
                 _delay.TryResetDelay(itemEnt, true, id: comp.UseDelayID);
             }
         }
+
+        var userGroup = EnsureComp<RMCUserFireGroupComponent>(args.User);
+        userGroup.LastFired[ent.Comp.Group] = _timing.CurTime;
+        userGroup.LastGun[ent.Comp.Group] = ent;
+        Dirty(args.User, userGroup);
     }
 
-    public void OnShotAttempt(Entity<RMCFireGroupComponent> ent, ref ShotAttemptedEvent args)
+    private void OnShotAttempt(Entity<RMCFireGroupComponent> ent, ref ShotAttemptedEvent args)
     {
-        if (!TryComp(ent.Owner, out UseDelayComponent? useDelayComponent) ||
-            !_delay.IsDelayed((ent.Owner, useDelayComponent), ent.Comp.UseDelayID))
+        if (args.Cancelled)
+            return;
+
+        if (TryComp(ent.Owner, out UseDelayComponent? useDelayComponent) &&
+            _delay.IsDelayed((ent.Owner, useDelayComponent), ent.Comp.UseDelayID))
         {
+            args.Cancel();
             return;
         }
 
-        args.Cancel();
+        if (TryComp(args.User, out RMCUserFireGroupComponent? fireGroup) &&
+            fireGroup.LastFired.TryGetValue(ent.Comp.Group, out var last) &&
+            _timing.CurTime < last + ent.Comp.Delay &&
+            fireGroup.LastGun.GetValueOrDefault(ent.Comp.Group) != ent.Owner)
+        {
+            args.Cancel();
+        }
     }
 }

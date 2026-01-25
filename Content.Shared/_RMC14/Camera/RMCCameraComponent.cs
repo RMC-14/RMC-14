@@ -9,4 +9,7 @@ public sealed partial class RMCCameraComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public EntProtoId? Id;
+
+    [DataField, AutoNetworkedField]
+    public bool Rename = true;
 }

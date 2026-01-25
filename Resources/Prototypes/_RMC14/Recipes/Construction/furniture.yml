@@ -8,9 +8,6 @@
   targetNode: chair
   category: construction-category-cm-furniture
   description: A basic chair for sitting.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: chair
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -26,27 +23,6 @@
   targetNode: stool
   category: construction-category-cm-furniture
   description: Apply butt.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: stool
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-    - !type:TileNotBlocked
-
-- type: construction
-  parent: RMC
-  name: comfy chair
-  id: CMChairComfy
-  graph: CMSeat
-  startNode: start
-  targetNode: chairComfy
-  category: construction-category-cm-furniture
-  description: A comfortable chair for sitting.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: comfychair
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -62,9 +38,6 @@
   targetNode: chairOfficeDark
   category: construction-category-cm-furniture
   description: An office chair for sitting.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: officechair_dark
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -80,9 +53,6 @@
   targetNode: chairOfficeWhite
   category: construction-category-cm-furniture
   description: An office chair for sitting.
-  icon:
-    sprite: _RMC14/Structures/Furniture/chairs.rsi
-    state: officechair_white
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -101,9 +71,6 @@
   startNode: start
   targetNode: Tan
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/standard.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -119,9 +86,6 @@
   startNode: start
   targetNode: Reinforced
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/reinforced.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -137,9 +101,6 @@
   startNode: start
   targetNode: Wood
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/wood.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -155,9 +116,6 @@
   startNode: start
   targetNode: PoorWood
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/poor_wood.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -173,9 +131,6 @@
   startNode: start
   targetNode: FancyWood
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/fancy_wood.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -191,9 +146,6 @@
   startNode: start
   targetNode: Gambling
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/gambling.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -209,9 +161,6 @@
   startNode: start
   targetNode: Almayer
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/Tables/almayer.rsi
-    state: full
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -229,9 +178,6 @@
   startNode: start
   targetNode: bed
   category: construction-category-cm-furniture
-  icon:
-    sprite: _RMC14/Structures/Furniture/bed.rsi
-    state: bed
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false
@@ -247,9 +193,6 @@
   targetNode: rack
   category: construction-category-cm-furniture
   description: A bunch of metal shelves stacked on top of each other. Excellent for storage purposes, less so as cover.
-  icon:
-    sprite: _RMC14/Structures/Storage/rack.rsi
-    state: rack
   objectType: Structure
   placementMode: SnapgridCenter
   canBuildInImpassable: false

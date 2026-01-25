@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids.Inhands;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Inhands;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 
@@ -13,19 +14,19 @@ public sealed class XenoInhandsVisualsSystem : VisualizerSystem<XenoInhandsCompo
         if (sprite == null)
             return;
 
-        if (!AppearanceSystem.TryGetData(uid, XenoInhandVisuals.Right, out string right))
+        if (!AppearanceSystem.TryGetData(uid, XenoInhandVisuals.RightHand, out string right))
             return;
 
-        if (!AppearanceSystem.TryGetData(uid, XenoInhandVisuals.Left, out string left))
+        if (!AppearanceSystem.TryGetData(uid, XenoInhandVisuals.LeftHand, out string left))
             return;
 
         bool downed = false;
         bool resting = false;
         bool ovi = false;
 
-        AppearanceSystem.TryGetData(uid, XenoInhandVisuals.Downed, out downed);
-        AppearanceSystem.TryGetData(uid, XenoInhandVisuals.Resting, out resting);
-        AppearanceSystem.TryGetData(uid, XenoInhandVisuals.Ovi, out ovi);
+        AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Downed, out downed);
+        AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Resting, out resting);
+        AppearanceSystem.TryGetData(uid, RMCXenoStateVisuals.Ovipositor, out ovi);
 
         string name = left;
         XenoInhandVisualLayers layerDef = XenoInhandVisualLayers.Left;

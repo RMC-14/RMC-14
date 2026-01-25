@@ -1,0 +1,9 @@
+﻿- type: reagent
+  parent: Blood
+  id: RMCSynthBlood
+  name: rmc-reagent-name-synth-blood
+  desc: rmc-reagent-desc-synth-blood
+  physicalDesc: reagent-physical-desc-oily
+  color: "#EEEEEE"
+  unknown: true
+  flavor: funny

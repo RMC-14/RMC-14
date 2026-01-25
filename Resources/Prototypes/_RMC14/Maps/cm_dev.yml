@@ -1,13 +1,13 @@
 ﻿- type: gameMap
   id: RMCDev
   mapName: RMCDev
-  mapPath: /Maps/_RMC14/dev_map.yml
+  mapPath: /Maps/_RMC14/Test/dev_map.yml
   minPlayers: 0
   maxRandomOffset: 0
   randomRotation: false
   stations:
     Dev:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardUNMCWarship
       components:
       - type: StationNameSetup
         mapNameTemplate: "Dev"
@@ -33,6 +33,7 @@
           CMWeaponsSpecialist: [ -1, -1 ]
           CMCMO: [ -1, -1 ]
           CMDoctor: [ -1, -1 ]
+          RMCFieldDoctor: [ -1, -1 ]
           CMNurse: [ -1, -1 ]
           CMResearcher: [ -1, -1 ]
           CMChiefMP: [ -1, -1 ]
@@ -45,3 +46,4 @@
           CMCargoTech: [ -1, -1 ]
           CMQuartermaster: [ -1, -1 ]
           CMSurvivor: [ -1, -1 ]
+          CMProvostInspector: [ -1, -1 ]

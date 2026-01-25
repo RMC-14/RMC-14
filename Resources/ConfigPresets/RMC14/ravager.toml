@@ -2,7 +2,7 @@
 server_name = "ravager"
 
 [game]
-desc = "Inspired by CMSS13 from Byond! Join and play as a marine, responding to a mysterious distress signal, or a xenonid, building out your hive and defending it from the marines."
+desc = "Join and play as a marine, responding to a mysterious distress signal, or a xenonid, building out your hive and defending it from the marines."
 hostname = "[EN][MRP] Rouny's Marine Corps Ravager [US East]"
 
 [hub]

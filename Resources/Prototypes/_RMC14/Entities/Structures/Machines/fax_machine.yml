@@ -7,6 +7,8 @@
   - type: ApcPowerReceiver
     needsPower: false # TODO RMC14
     powerLoad: 0
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-fax-machine
   - type: Sprite
     sprite: _RMC14/Structures/Machines/fax_machine.rsi
     drawdepth: SmallObjects
@@ -104,3 +106,48 @@
   - type: FaxMachine
     name: "Three Suns Empire"
     notifyAdmins: true
+
+- type: entity
+  parent: CMFax
+  id: RMCFaxLiaison
+  suffix: Corporate Liaison
+  components:
+  - type: FaxMachine
+    name: "Corporate Liaison"
+  - type: SpecialFax
+    faxId: Liaison
+
+- type: entity
+  parent: CMFax
+  id: RMCFaxColony #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
+  suffix: Colony, Unusable
+  description: This won't be much help to anyone.
+  components:
+  - type: RemoveComponents
+    components:
+    - type: ApcPowerReceiver
+      needsPower: false
+      powerLoad: 0
+    - type: FaxMachine
+      printPaperId: CMPaper
+      printOfficePaperId: CMPaper
+      paperSlot:
+        insertSound: /Audio/Machines/scanning.ogg
+        ejectSound: /Audio/Machines/tray_eject.ogg
+        whitelist:
+          components:
+          - FaxableObject #used to be PaperComponent - brainfood1183
+        blacklist:
+          components:
+          - CargoSlip
+    - type: ActivatableUI
+      key: enum.FaxUiKey.Key
+    - type: ActivatableUIRequiresPower
+    - type: UserInterface
+      interfaces:
+        enum.FaxUiKey.Key:
+          type: FaxBoundUi
+    - type: ItemSlots
+    - type: ContainerContainer
+    - type: DeviceNetworkRequiresPower
+    - type: DeviceNetwork

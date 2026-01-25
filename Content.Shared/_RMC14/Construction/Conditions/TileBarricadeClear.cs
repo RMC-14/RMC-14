@@ -20,7 +20,7 @@ public sealed partial class TileBarricadeClear : IConstructionCondition
     public bool Condition(EntityUid user, EntityCoordinates location, Direction direction)
     {
         var entities = IoCManager.Resolve<IEntityManager>();
-        var rmcMap = entities.System<SharedRMCMapSystem>();
+        var rmcMap = entities.System<RMCMapSystem>();
         return !rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(location, facing: direction.AsFlag());
     }
 }

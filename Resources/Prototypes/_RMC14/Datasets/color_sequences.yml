@@ -1,0 +1,69 @@
+- type: dataset
+  id: RMCColorSequenceSunsetWarm
+  values:
+  - "#e3a979"
+  - "#e29658"
+  - "#da8b4a"
+  - "#a9633c"
+  - "#90422d"
+  - "#68333a"
+  - "#4d2b35"
+  - "#231935"
+  - "#050c27"
+  - "#000000"
+
+- type: dataset
+  id: RMCColorSequenceSunsetCold
+  values:
+  - "#a8c3cf"
+  - "#7a9abb"
+  - "#6679a8"
+  - "#516a8b"
+  - "#38486e"
+  - "#2c2f4d"
+  - "#211b36"
+  - "#1f1b33"
+  - "#0c0a1b"
+  - "#000000"
+
+- type: dataset
+  id: RMCColorSequenceSunrise
+  values:
+  - "#000000"
+  - "#040712"
+  - "#111322"
+  - "#291642"
+  - "#3f2239"
+  - "#632c3d"
+  - "#b97034"
+
+- type: dataset
+  id: RMCColorSequenceLightningSharpPeak
+  values:
+  - "#000000"
+  - "#100c24"
+  - "#302d60"
+  - "#6a67c8"
+  - "#aab8ff"
+  - "#FFFFFF"
+  - "#d8e0ff"
+  - "#9fa8f0"
+  - "#555299"
+  - "#201d40"
+  - "#000000"
+
+- type: dataset
+  id: RMCColorSequenceLightningFlicker
+  values:
+  - "#000000"
+  - "#161624"
+  - "#38356e"
+  - "#7a77d9"
+  - "#e0e8ff"
+  - "#a0a8ff"
+  - "#FFFFFF"
+  - "#b9c8ff"
+  - "#7a77d9"
+  - "#38356e"
+  - "#000000"
+  

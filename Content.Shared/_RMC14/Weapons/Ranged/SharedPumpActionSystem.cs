@@ -3,6 +3,7 @@ using Content.Shared.Examine;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 
@@ -32,6 +33,12 @@ public abstract class SharedPumpActionSystem : EntitySystem
     {
         if (args.Cancelled)
             return;
+
+        if (TryComp<GunComponent>(ent.Owner, out var gun) &&
+            gun.BurstActivated)
+        {
+            return;
+        }
 
         if (!ent.Comp.Pumped)
             args.Cancelled = true;
@@ -65,6 +72,11 @@ public abstract class SharedPumpActionSystem : EntitySystem
 
     public bool Pump(Entity<PumpActionComponent> ent, EntityUid user)
     {
+        if (TryComp<GunComponent>(ent.Owner, out var gun) && gun.BurstActivated)
+        {
+            return true;
+        }
+
         var ammo = new GetAmmoCountEvent();
         RaiseLocalEvent(ent.Owner, ref ammo);
 

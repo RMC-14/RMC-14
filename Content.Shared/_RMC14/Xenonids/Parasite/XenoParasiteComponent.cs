@@ -11,6 +11,9 @@ public sealed partial class XenoParasiteComponent : Component
     public TimeSpan ManualAttachDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
+    public TimeSpan SelfAttachDelay = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
     public TimeSpan ParalyzeTime = TimeSpan.FromMinutes(1.5);
 
     [DataField, AutoNetworkedField]

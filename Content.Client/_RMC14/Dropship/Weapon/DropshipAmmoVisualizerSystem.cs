@@ -18,7 +18,10 @@ public sealed class DropshipAmmoVisualizerSystem : VisualizerSystem<DropshipAmmo
         if (!spriteComp.LayerMapTryGet(DropshipAmmoVisuals.Fill, out var layer))
             return;
 
-        int fillNum = Math.Clamp(fill / component.RoundsPerShot, 0, component.MaxRounds / component.RoundsPerShot);
+        if (component.AmmoType == null)
+            return;
+
+        var fillNum = Math.Clamp(fill / component.RoundsPerShot, 0, component.MaxRounds / component.RoundsPerShot);
         var state = component.AmmoType + "_" + fillNum;
 
         spriteComp.LayerSetState(layer, state);

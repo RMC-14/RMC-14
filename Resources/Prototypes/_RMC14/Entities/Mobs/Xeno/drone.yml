@@ -6,6 +6,8 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoDroneBase
   name: Drone
   description: An alien drone.
@@ -71,7 +73,7 @@
     prefix: drone
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: drone
   - type: XenoConstruction
     buildDelay: 2
@@ -95,11 +97,18 @@
     prefix: drone
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-drone
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoDroneBase
   id: CMXenoDrone
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDrone
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Drone/drone.rsi
   - type: Xeno
@@ -132,6 +141,10 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+  - type: VentCrawler
+    ventCrawlIcon: drone
+  - type: RMCActionOrder
+    id: CMXenoDrone
 
 - type: entity
   parent: CMXenoDroneBase
@@ -151,6 +164,21 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -169,10 +197,10 @@
     - ActionXenoResinSurge
     - ActionXenoTransferPlasma
     - ActionXenoDevolve
+  - type: XenoRegen
     critHealMultiplier: 0.3465  # 5% increased regeneration
     standHealingMultiplier: 0.42
     restHealMultiplier: 1.05
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-gardener-name
     description: rmc-xeno-gardener-description
@@ -185,7 +213,14 @@
     - XenoFruitSpore
     - XenoFruitUnstable
     maxFruitAllowed: 6
+    fruitPickingMultiplier: 0.5
+    fruitFeedingMultiplier: 0.5
   - type: XenoResinSurge
+  - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: gardener
+  - type: RMCActionOrder
+    id: CMXenoDroneGardener
 
 - type: entity
   parent: CMXenoDroneBase
@@ -205,6 +240,21 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
+      visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone
   - type: Xeno
@@ -222,7 +272,6 @@
     - ActionXenoHealerDroneTransferPlasma
     - ActionXenoSacrifice
     - ActionXenoDevolve
-    hidden: true
   - type: XenoPlasma
     plasma: 1000
     maxPlasma: 1000
@@ -261,3 +310,8 @@
     gainAttackDowned: 0
   - type: XenoAcid
   - type: XenoSalveVisuals
+  - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: healer
+  - type: RMCActionOrder
+    id: CMXenoDroneHealer

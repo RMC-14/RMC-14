@@ -31,6 +31,9 @@
     },
     {
       "name": "mag-0"
+    },
+    {
+      "name": "bolt-open"
     }
   ]
 }

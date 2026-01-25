@@ -31,7 +31,7 @@ public sealed partial class RMCChemicalStorageComponent : Component
     public FixedPoint2 Recharge;
 
     [DataField, AutoNetworkedField]
-    public FixedPoint2 BaseRecharge = 15;
+    public FixedPoint2 BaseRecharge = 10;
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 RechargePer = 5;

@@ -1,0 +1,156 @@
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowChigusa
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameChigusa
+    entity: RMCWindowFrameChigusa
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowChigusa
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowChigusa
+    entity: RMCWindowChigusa
+    edges:
+    - to: windowFrameChigusa
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing
+
+# Hangar
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowHangar
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameHangar
+    entity: RMCWindowFrameHangar
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowHangar
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowHangar
+    entity: RMCWindowHangar
+    edges:
+    - to: windowFrameHangar
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing
+
+# Bunker
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCWindowBunker
+  start: start
+  graph:
+  - node: start # not currently buildable
+
+  - node: windowFrameBunker
+    entity: RMCWindowFrameBunker
+    edges:
+    - to: start
+      completed:
+      - !type:SpawnPrototype
+        prototype: CMSheetMetal1
+        amount: 2
+      - !type:DeleteEntity
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Anchoring
+        doAfter: 2
+        duplicateConditions: All
+
+    - to: windowBunker
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - material: CMGlassReinforced
+        amount: 2
+        doAfter: 2
+
+  - node: windowBunker
+    entity: RMCWindowBunker
+    edges:
+    - to: windowFrameBunker
+      completed:
+      - !type:SnapToGrid
+        southRotation: true
+      - !type:SpawnPrototype
+        prototype: CMSheetGlassReinforced1
+        amount: 2
+      conditions:
+      - !type:EntityAnchored {}
+      steps:
+      - tool: Screwing
+      - tool: Prying
+      - tool: Screwing

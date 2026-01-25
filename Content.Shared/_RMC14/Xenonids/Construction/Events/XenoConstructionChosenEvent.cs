@@ -3,4 +3,4 @@
 namespace Content.Shared._RMC14.Xenonids.Construction.Events;
 
 [ByRefEvent]
-public readonly record struct XenoConstructionChosenEvent(EntProtoId Choice);
+public readonly record struct XenoConstructionChosenEvent(EntProtoId Choice, EntityUid User);

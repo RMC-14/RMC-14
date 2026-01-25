@@ -1,0 +1,63 @@
+# Used in Fiorina Science Annex
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorGangLeader
+  name: cm-job-name-survivor-gang-leader
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  startingGear: RMCGearSurvivorGangLeader
+  spawnMenuRoleName: Gang Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillCqc: 2
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 1
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetGangLeader
+    - type: MarineOrders
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+  useLoadoutOfJob: CMSurvivor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorBaseNoBackpack
+  id: RMCGearSurvivorGangLeader
+  equipment:
+    jumpsuit: RMCJumpsuitOrange
+    back: RMCSatchelCivilianFill
+    shoes: RMCShoesOrange
+    pocket2: RMCPouchGeneralMedium
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorGangLeader
+  name: survivor gang leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorGangLeader
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  parent: RMCSurvivorPresetCivilian
+  id: RMCGearSurvivorPresetGangLeader
+  name: gang leader survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ ArmorHelmetRiot ]
+    - [ RMCArmorVestCivilian ]

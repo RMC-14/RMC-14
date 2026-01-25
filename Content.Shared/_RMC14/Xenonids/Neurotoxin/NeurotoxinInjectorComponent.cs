@@ -1,4 +1,4 @@
-﻿using Content.Shared.Damage;
+using Content.Shared.Damage;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Xenonids.Neurotoxin;
@@ -12,7 +12,7 @@ public sealed partial class NeurotoxinInjectorComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan TimeBetweenGasInjects = TimeSpan.FromSeconds(1);
 
-	[DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool AffectsDead;
 
     [DataField, AutoNetworkedField]
@@ -29,6 +29,9 @@ public sealed partial class NeurotoxinInjectorComponent : Component
     [DataField, AutoNetworkedField]
     public DamageSpecifier CoughDamage = new();
 
-	[DataField, AutoNetworkedField]
-	public bool InjectInContact = true;
+    [DataField, AutoNetworkedField]
+    public bool InjectInContact = true;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DazeTime = TimeSpan.FromSeconds(6);
 }

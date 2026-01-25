@@ -8,5 +8,5 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
 public sealed partial class RefillableByBulletBoxComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId BulletType;
+    public EntProtoId? BulletType;
 }

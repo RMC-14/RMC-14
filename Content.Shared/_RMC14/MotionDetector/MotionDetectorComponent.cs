@@ -1,6 +1,5 @@
 ﻿using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -18,6 +17,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextScanAt;
+
+    [DataField, AutoNetworkedField]
+    public bool CanToggleRange = true;
 
     [DataField, AutoNetworkedField]
     public bool Short;
@@ -38,7 +40,7 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
     public TimeSpan MoveTime = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public List<MapCoordinates> Blips { get; set; } = new();
+    public List<Blip> Blips { get; set; } = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastScan { get; set; }
@@ -47,7 +49,7 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
     public TimeSpan ScanDuration { get; set; } = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public SoundSpecifier? ScanSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector.ogg");
+    public SoundSpecifier? ScanSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector.ogg", AudioParams.Default.WithMaxDistance(7f));
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ScanEmptySound = new SoundPathSpecifier("/Audio/_RMC14/Effects/motion_detector_none.ogg");
@@ -60,6 +62,9 @@ public sealed partial class MotionDetectorComponent : Component, IDetectorCompon
 
     [DataField, AutoNetworkedField]
     public bool DeactivateOnDrop = true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? LastUser;
 }
 
 [Serializable, NetSerializable]

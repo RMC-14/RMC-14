@@ -1,0 +1,169 @@
+﻿- type: entity
+  parent: CMBaseWeaponSMG
+  name: Type 64 submachine gun
+  id: RMCWeaponSMGType64
+  description: The standard submachinegun of the SPP, sporting an unusual 64 round helical magazine, it has a high fire-rate, but is unusually accurate. This one is bulky and unergonomic, denoting it as civilian use or as an export model.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type64.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/type64.rsi
+  - type: Gun
+    shotsPerBurst: 3
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type64.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - Burst
+    - FullAuto
+    recoilWielded: 1
+    recoilUnwielded: 1
+    scatterWielded: 14
+    scatterUnwielded: 14
+    baseFireRate: 6.667
+    burstScatterMult: 4
+    modifiers:
+      Burst:
+        fireDelay: 0.0999
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
+      FullAuto:
+        maxScatterModifier: 3
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.75
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSMGType64
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSMGType64
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.83875, 0.05125
+      rmc-aslot-rail: 0.032, 0.155
+      rmc-aslot-stock: -0.81, 0.032
+      rmc-aslot-underbarrel: 0.25, -0.25
+  - type: Tag
+    tags:
+    - RMCWeaponSMG
+    - RMCWeaponSMGType64
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-type-64-submachine-gun
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineSMGType64
+  name: "Type 64 magazine (10x20mm)"
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSmg
+    - RMCMagazineSMGType64
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeType64
+    proto: RMCCartridgeType64
+    capacity: 64
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/type64.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+    zeroOnlyOnEmpty: true
+  - type: Appearance
+
+- type: entity
+  parent: CMCartridgeSMGBase
+  id: RMCCartridgeType64
+  name: cartridge (10x20mm)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeType64
+  - type: CartridgeAmmo
+    proto: RMCBulletType64
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletType64
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 34
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 22
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 4
+      falloff: 6
+  - type: CMArmorPiercing
+    amount: 5
+  - type: RMCProjectileAccuracy
+    accuracy: 100
+    thresholds:
+    - range: 4
+      falloff: 10
+
+- type: Tag
+  id: RMCWeaponSMGType64
+
+- type: Tag
+  id: RMCMagazineSMGType64
+
+- type: Tag
+  id: RMCCartridgeType64

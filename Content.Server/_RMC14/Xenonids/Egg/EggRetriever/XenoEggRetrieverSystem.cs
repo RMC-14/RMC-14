@@ -5,7 +5,7 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Egg.EggRetriever;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared.Actions;
+using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
@@ -18,10 +18,8 @@ namespace Content.Server._RMC14.Xenonids.Egg.EggRetriever;
 
 public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSystem
 {
-    [Dependency] private readonly SharedActionsSystem _action = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedInteractionSystem _interact = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EntityManager _entities = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -30,16 +28,23 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedXenoAnnounceSystem _announce = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly XenoPlasmaSystem _plasma = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
+        SubscribeLocalEvent<XenoEggRetrieverComponent, MapInitEvent>(OnXenoRetrieverInit);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoRetrieveEggActionEvent>(OnXenoRetrieveEgg);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEggUseInHandEvent>(OnXenoRetrieverUseInHand);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoEvolutionDoAfterEvent>(OnXenoEvolveDoAfter);
         SubscribeLocalEvent<XenoEggRetrieverComponent, XenoDevolveBuiMsg>(OnXenoDevolveDoAfter);
         SubscribeLocalEvent<XenoEggRetrieverComponent, MobStateChangedEvent>(OnDeathMobStateChanged);
+    }
+
+    private void OnXenoRetrieverInit(Entity<XenoEggRetrieverComponent> eggRetriever, ref MapInitEvent args)
+    {
+        _appearance.SetData(eggRetriever, XenoEggStorageVisuals.Number, eggRetriever.Comp.CurEggs);
     }
 
     private void OnXenoRetrieveEgg(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoRetrieveEggActionEvent args)
@@ -84,10 +89,10 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             return;
         }
 
-        if (!_hands.TryGetEmptyHand(eggRetriever, out var _))
+        if (!_hands.TryGetEmptyHand(eggRetriever.Owner, out _))
             return;
 
-        if (RemoveEgg(eggRetriever) is not EntityUid newEgg)
+        if (RemoveEgg(eggRetriever) is not { } newEgg)
             return;
 
         _hive.SetSameHive(eggRetriever.Owner, newEgg);
@@ -95,7 +100,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         _hands.TryPickupAnyHand(eggRetriever, newEgg);
 
         var unstashMsg = Loc.GetString("cm-xeno-retrieve-egg-unstash-egg", ("cur_eggs", eggRetriever.Comp.CurEggs), ("max_eggs", eggRetriever.Comp.MaxEggs));
-        _popup.PopupEntity(unstashMsg, eggRetriever, eggRetriever);;
+        _popup.PopupEntity(unstashMsg, eggRetriever, eggRetriever);
     }
 
     private void OnXenoRetrieverUseInHand(Entity<XenoEggRetrieverComponent> eggRetriever, ref XenoEggUseInHandEvent args)
@@ -137,7 +142,6 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
         if (args.NewMobState != MobState.Dead)
             return;
         DropAllStoredEggs(eggRetriever, 0.75f);
-        RemCompDeferred<XenoEggRetrieverComponent>(eggRetriever.Owner);
     }
 
     private bool DropAllStoredEggs(Entity<XenoEggRetrieverComponent> xeno, float chance = 1.0f)
@@ -158,6 +162,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
             _throw.TryThrow(newEgg, _random.NextAngle().RotateVec(Vector2.One) * _random.NextFloat(0.15f, 0.7f), 3);
         }
         xeno.Comp.CurEggs = 0; // Just in case
+        _appearance.SetData(xeno, XenoEggStorageVisuals.Number, xeno.Comp.CurEggs);
         if (chance != 1.0 && eggDropped)
             _announce.AnnounceSameHive(xeno.Owner, Loc.GetString("rmc-xeno-egg-carrier-death", ("xeno", xeno)));
 
@@ -172,6 +177,7 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     private void AddEgg(EntityUid egg, Entity<XenoEggRetrieverComponent> xeno)
     {
         xeno.Comp.CurEggs++;
+        _appearance.SetData(xeno, XenoEggStorageVisuals.Number, xeno.Comp.CurEggs);
 
         Dirty(xeno);
 
@@ -185,9 +191,62 @@ public sealed partial class XenoEggRetrieverSystem : SharedXenoEggRetrieverSyste
     private EntityUid? RemoveEgg(Entity<XenoEggRetrieverComponent> xeno)
     {
         xeno.Comp.CurEggs--;
+        _appearance.SetData(xeno, XenoEggStorageVisuals.Number, xeno.Comp.CurEggs);
 
         Dirty(xeno);
 
         return Spawn(xeno.Comp.EggPrototype);
+    }
+
+    public override void Update(float frameTime)
+    {
+        var time = _timing.CurTime;
+
+        var query = EntityQueryEnumerator<XenoEggRetrieverComponent, XenoGenerateEggsComponent>();
+
+        while(query.MoveNext(out var uid, out var egg, out var produce))
+        {
+            if (!produce.Active)
+                continue;
+
+            if (egg.CurEggs >= egg.MaxEggs)
+            {
+                //Has to 'pause' when full
+                if ((produce.NextEgg != null && produce.NextDrain != null))
+                {
+                    produce.NextDrain = null;
+                    produce.NextEgg = null;
+                }
+                continue;
+            }
+
+            if (produce.NextDrain == null || produce.NextEgg == null)
+            {
+                produce.NextDrain = time + produce.DrainEvery;
+                produce.NextEgg = time + produce.EggEvery;
+                continue;
+            }
+
+            if (time >= produce.NextDrain)
+            {
+                if (!_plasma.TryRemovePlasma(uid, produce.PlasmaDrain))
+                {
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-no-plasma"), uid, uid, PopupType.SmallCaution);
+                    ToggleProduceEggs(uid, produce);
+                }
+
+                produce.NextDrain = time + produce.DrainEvery;
+            }
+
+            if (time >= produce.NextEgg)
+            {
+                egg.CurEggs++;
+                _appearance.SetData(uid, XenoEggStorageVisuals.Number, egg.CurEggs);
+                _popup.PopupEntity(Loc.GetString("rmc-xeno-produce-eggs-new-egg", ("cur_eggs", egg.CurEggs), ("max_eggs", egg.MaxEggs)), uid, uid);
+
+                Dirty(uid, egg);
+                produce.NextEgg = time + produce.EggEvery;
+            }
+        }
     }
 }

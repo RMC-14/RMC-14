@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Medical.HUD;
 using JetBrains.Annotations;
 using Robust.Client.Player;
+using Robust.Client.UserInterface;
 
 namespace Content.Client._RMC14.Medical.HUD.Holocard;
 
@@ -19,23 +20,19 @@ public sealed class HolocardChangeBoundUserInterface : BoundUserInterface
 
     protected override void Open()
     {
-        _window = new HolocardChangeWindow(this);
-        _window.OnClose += Close;
-        _window.OpenCentered();
-    }
+        base.Open();
+        _window = this.CreateWindow<HolocardChangeWindow>();
 
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (!disposing)
-            return;
+        _window.HolocardStateList.OnItemSelected += obj =>
+        {
+            var newSelectedHolocard = (HolocardStatus?) obj.ItemList[obj.ItemIndex].Metadata;
+            if (newSelectedHolocard is { } newHolocard)
+            {
+                if (_entities.GetNetEntity(_player.LocalEntity) is { } viewer)
+                    SendMessage(new HolocardChangeEvent(viewer, newHolocard));
 
-        _window?.Dispose();
-    }
-
-    public void ChangeHolocard(HolocardStatus newHolocardStatus)
-    {
-        if (_entities.GetNetEntity(_player.LocalEntity) is { } viewer)
-            SendMessage(new HolocardChangeEvent(viewer, newHolocardStatus));
+                Close();
+            }
+        };
     }
 }

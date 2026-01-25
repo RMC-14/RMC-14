@@ -17,7 +17,6 @@
       - RMCEngineerKit
       - RMCBoxStorage
 
-
 # Medium General Pouch
 - type: entity
   parent: RMCPouchGeneral
@@ -31,42 +30,6 @@
     grid:
     - 0,0,3,1 #4 slots
 
-
-# Large General Pouch
-- type: entity
-  parent: RMCPouchGeneral
-  id: RMCPouchGeneralLarge
-  name: large general pouch
-  description: A general-purpose pouch used to carry more differently sized items.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/large_drop.rsi
-  - type: Storage
-    grid:
-    - 0,0,5,1 #6 slot
-
-- type: entity
-  parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeBureauObserverFill
-  suffix: Bureau Observer, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMFireExtinguisherPortable
-    - id: CMRollerBedSpawnFolded # TODO RMC14 pepper spray
-
-- type: entity
-  parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeICBLiaison
-  suffix: Interstellar Commerce Bureau Liaison, Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCCigarettePackWeYaGold
-    - id: RMCZippo
-    - id: RMCSpaceCash1000
-    - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
-
 # Survival Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -75,7 +38,7 @@
   description: A pouch given to colonists in the event of an emergency.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/tools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_brown.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -92,22 +55,17 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
-  id: RMCPouchSurvivalFill
-  suffix: Filled
+  id: RMCPouchSurvivalBlack
   components:
-  - type: StorageFill
-    contents:
-    - id: RMCFlashlight
-    - id: CMCrowbarRed
-    - id: CMPacketPillsTricordrazine
-    - id: CMGauze10
-    - id: RMCRadioHandheldColony
-    - id: RMCM5Bayonet
-      # 5 splints
-
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
 
 # Survival Synth Pouch
 - type: entity
@@ -116,6 +74,8 @@
   name: synth survival pouch
   description: An emergency pouch given to silicons in the event of an emergency.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_grey.rsi
   - type: Storage
     grid:
     - 0,0,11,1 #6 slots
@@ -124,26 +84,11 @@
       - Flashlight
       - Crowbar
       - CableCoil
-      - Sheet
+      - RMCSheetMetal
       - Radio
       - Knife
       components:
       - Welder
-
-- type: entity
-  parent: RMCPouchSurvivalSynth
-  id: RMCPouchSurvivalSynthFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCFlashlight
-    - id: CMCrowbarRed
-    - id: CMWelder
-    - id: RMCCableCoil
-    - id: RadioHandheld
-    - id: RMCM5Bayonet
-
 
 # Command Pouch
 - type: entity
@@ -211,6 +156,16 @@
       tags:
       - Sidearm
 
+#Filled Command Pouch
+- type: entity
+  parent: RMCPouchCommand
+  id: RMCPouchCommandFill
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTabletCO
+    - id: RMCLaserDesignator
 
 # Magazine Pouch
 - type: entity
@@ -230,12 +185,12 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCShellShotgun
       # TODO RMC14 m60 mag
   - type: FixedItemSizeStorage
-
 
 # Large Magazine Pouch
 - type: entity
@@ -250,6 +205,23 @@
     grid:
     - 0,0,7,1 #4 slots
 
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargeMAR40
+  suffix: Filled, MAR40
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleMAR40
+      amount: 4
+
+- type: entity
+  parent: RMCPouchMagazineLarge
+  id: RMCPouchMagazineLargePMC
+  suffix: PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/large_ammo_mag_pmc.rsi
 
 # Pistol Magazine Pouch
 - type: entity
@@ -268,15 +240,6 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
 
-- type: entity
-  parent: RMCPouchMagazinePistol
-  id: RMCPouchMagazinePistolFilledMateba
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCSpeedLoaderMatebaHIAP
-      amount: 4
-
 # Large Pistol Magazine Pouch
 - type: entity
   parent: RMCPouchMagazinePistol
@@ -290,6 +253,15 @@
     grid:
     - 0,0,11,1 #6 slots
 
+- type: entity
+  parent: RMCPouchMagazinePistolLarge
+  id: RMCPouchMagazinePistolLargeFilledHighCommand
+  suffix: Filled, High Command
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 6
 
 # Shotgun Shell Pouch
 - type: entity
@@ -300,6 +272,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/medium_shotshells.rsi
+    layers:
+    - state: icon
+    - state: half
+      visible: false
+    - state: full
+      visible: false
   - type: Storage
     grid:
     - 0,0,9,1 #5 slots
@@ -312,7 +290,24 @@
     items:
       tags:
       - RMCShellShotgun
-
+  - type: Tag
+    tags:
+    - Pouch
+    - RMCPouchShotgunShells
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 # Large Shotgun Shell Pouch
 - type: entity
@@ -334,23 +329,28 @@
     items:
       tags:
       - RMCShellShotgun
+  - type: ItemMapper
+    mapLayers:
+      half:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      full:
+        minCount: 7
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
 
 - type: entity
   parent: RMCPouchShotgunLarge
-  id: RMCPouchShotgunLargeBeanbag
+  id: RMCPouchShotgunLargeBuckshot
   components:
   - type: StorageFill
     contents:
     - id: CMShellShotgunBeanbag
-      amount: 7
-
-- type: entity
-  parent: RMCPouchShotgunLarge
-  id: RMCPouchShotgunLargeSlugs
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMShellShotgunSlugs
       amount: 7
 
 # Large Documents Pouch
@@ -378,7 +378,6 @@
   - type: FixedItemSizeStorage
   - type: Dumpable
 
-
 # Small Documents Pouch
 - type: entity
   parent: RMCPouchDocument
@@ -389,7 +388,6 @@
   - type: Storage
     grid:
     - 0,0,13,1 #7 slots
-
 
 # Flare Pouch
 - type: entity
@@ -416,15 +414,6 @@
         tags:
         - Flare
 
-- type: entity
-  parent: RMCPouchFlare
-  id: RMCPouchFlareFilled
-  suffix: Filled
-  components:
-  - type: CMItemSlots
-    startingItem: CMFlare
-
-
 # Radio Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -441,7 +430,6 @@
       tags:
       - Radio
   - type: FixedItemSizeStorage
-
 
 # Electronics Pouch
 - type: entity
@@ -465,18 +453,6 @@
       - MachineBoard
       - SmartGunBattery
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchElectronics
-  id: RMCPouchElectronicsFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMAPCElectronics
-      amount: 3
-    - id: RMCPowerCellHigh
-      amount: 3
 
 # Engineer Kit Pouch
 - type: entity
@@ -504,7 +480,7 @@
       # - TODO RMC14 RMCAssembly
       # - TODO RMC14 RMCStockParts
       - RMCExplosiveBreachingCharge
-      # - TODO RMC14 RMCSynthResetKey
+      - RMCSynthResetKey
       components:
       - TrayScanner
       - ComputerBoard
@@ -524,7 +500,7 @@
         # - TODO RMC14 RMCAssembly
         # - TODO RMC14 RMCStockParts
         - RMCExplosiveBreachingCharge
-        # - TODO RMC14 RMCSynthResetKey
+        - RMCSynthResetKey
         components:
         - TrayScanner
         - ComputerBoard
@@ -533,7 +509,6 @@
         all:
           RMCSkillEngineer: 2
   - type: FixedItemSizeStorage
-
 
 # Tools Pouch
 - type: entity
@@ -560,6 +535,7 @@
       - Flashlight
       - RMCExplosiveBreachingCharge
       - CMFireExtinguisherPortable
+      - RMCCircuitboard
       components:
       - Welder
       - ComputerBoard
@@ -567,19 +543,6 @@
       - LightReplacer
       - EntrenchingTool
   - type: FixedItemSizeStorage
-
-- type: entity
-  parent: RMCPouchTools
-  id: RMCPouchToolsFill
-  suffix: Filled
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMScrewdriver
-    - id: CMWirecutter
-    - id: CMMultitool
-    - id: CMWrench
-
 
 # Tactical Tools Pouch
 - type: entity
@@ -596,44 +559,100 @@
 
 - type: entity
   parent: RMCPouchToolsSoc
-  id: RMCPouchToolsSocFill
-  suffix: Filled
+  id: RMCPouchToolsSocFilledSynthetic
+  suffix: Filled, Synthetic
   components:
   - type: StorageFill
     contents:
     - id: CMScrewdriver
-    - id: CMWirecutter
     - id: CMCrowbar
-    - id: RMCCableCoil
-    - id: CMMultitool
+    - id: CMWirecutter
     - id: CMWrench
-
+    - id: RMCCableCoil30
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    # Something about /item/tool/weldingtool/hugetank - leaving empty
 
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
   id: RMCPouchSling
-  name: sling strap # TODO RMC14 implement this
+  name: sling strap
   description: Keeps a single item attached to a strap.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/sling.rsi
+  - type: RMCStorageEjectHand
+    state: Last
   - type: Storage
     maxItemSize: Normal
-
+    whitelist:
+      components:
+      - Blowtorch
+      - Defibrillator
+      - Flash
+      - RMCMegaphone
+      - Whistle
+      tags:
+      - Binoculars
+      - CMFireExtinguisherPortable
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - FireExtinguisher
+      - Flashlight
+      - Multitool
+      - RMCDetector
+      - RMCPinpointer
+      - Screwdriver
+      - Shovel
+      - Wirecutter
+      - Wrench
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - Shovel
+  - type: FixedItemSizeStorage
+  - type: RMCSlingPouch
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # Cassetes Pouch
-#- type: entity
-#  parent: [RMCPouchStorage, RMCPouchOpenClosed]
-#  id: RMCPouchCassette
-#  name: cassette pouch
-#  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
-#  components:
-#  - type: Sprite
-#    sprite: _RMC14/Objects/Clothing/Pouches/cassette.rsi
-#  - type: Item
-#    size: small
-#  - type: Storage
-#    grid:
-#    - 0,0,2,1 #3 slots
-#whitelist: # TODO RMC14 add cassettes
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchCassette
+  name: cassette pouch
+  description: A finely crafted pouch, made specifically to keep cassettes safe during wartime.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/cassette.rsi
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      components:
+      - CassetteTape
+
+# Drum Pouch
+- type: entity
+  parent: [RMCPouchOpenClosed, RMCPouchStorage]
+  id: RMCPouchDrumPMC
+  name: smartgun drum pouch
+  description: A heavy pouch designed for carrying a surplus of smartgun drums.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_sgdrums_ammo.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,5,1 #3 slots
+    whitelist:
+      tags:
+      - RMCMagazineSmartGun
+      - RMCMagazineSmartGunirradiated
+  - type: FixedItemSizeStorage
+
+- type: Tag
+  id: RMCPouchShotgunShells

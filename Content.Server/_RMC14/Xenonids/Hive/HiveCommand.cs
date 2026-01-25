@@ -7,7 +7,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
-[ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
+[ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class HiveCommand : ToolshedCommand
 {
     [CommandImplementation("alldefault")]
@@ -39,6 +39,16 @@ public sealed class HiveCommand : ToolshedCommand
             amount++;
         }
 
+        var friendly = EntityManager.EntityQueryEnumerator<XenoFriendlyComponent>();
+        while (friendly.MoveNext(out var uid, out _))
+        {
+            if (hiveSystem.HasHive(uid))
+                continue;
+
+            hiveSystem.SetHive(uid, firstHive);
+            amount++;
+        }
+
         ctx.WriteLine($"Set the hive of {amount} rogue xenos to {firstHive}.");
     }
 
@@ -46,17 +56,11 @@ public sealed class HiveCommand : ToolshedCommand
     public EntityUid Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] EntityUid xeno,
-        [CommandArgument] EntityUid hive)
+        [CommandArgument] Entity<HiveComponent> hive)
     {
-        if (!HasComp<XenoComponent>(xeno))
+        if (!HasComp<XenoComponent>(xeno) && !HasComp<XenoFriendlyComponent>(xeno))
         {
-            ctx.WriteLine($"Entity {xeno} does not have {nameof(XenoComponent)}");
-            return xeno;
-        }
-
-        if (!HasComp<HiveComponent>(hive))
-        {
-            ctx.WriteLine($"Entity {hive} does not have {nameof(HiveComponent)}");
+            ctx.WriteLine($"Entity {xeno} does not have {nameof(XenoComponent)} or {nameof(XenoFriendlyComponent)}");
             return xeno;
         }
 
@@ -69,7 +73,7 @@ public sealed class HiveCommand : ToolshedCommand
     public IEnumerable<EntityUid> Set(
         [CommandInvocationContext] IInvocationContext ctx,
         [PipedArgument] IEnumerable<EntityUid> xenos,
-        [CommandArgument] EntityUid hive)
+        [CommandArgument] Entity<HiveComponent> hive)
     {
         return xenos.Select(xeno => Set(ctx, xeno, hive));
     }

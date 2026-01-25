@@ -1,4 +1,5 @@
 using Content.Client._RMC14.Commendations;
+using Content.Client._RMC14.RMCPlaytimeStats;
 using Content.Client.Info;
 using Content.Client.Info.PlaytimeStats;
 using Content.Client.Resources;
@@ -62,10 +63,12 @@ namespace Content.Client.Lobby.UI
             CharEditor.AddChild(profileEditor);
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
-            StatsButton.OnPressed += _ => new PlaytimeStatsWindow().OpenCentered();
+            StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered(); // RMC-PlaytimeStats-Tweak
 
-            CommendationsButton.OnPressed += _ =>
-                IoCManager.Resolve<CommendationsManager>().OpenWindow();
+            CommendationsReceivedButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
+            CommendationsGivenButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenGivenWindow();
 
             _cfg.OnValueChanged(CCVars.SeeOwnNotes, p => AdminRemarksButton.Visible = p, true);
         }

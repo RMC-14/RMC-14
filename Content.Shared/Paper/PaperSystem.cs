@@ -1,22 +1,30 @@
 using System.Linq;
-using Content.Shared._RMC14.Examine;
-using Content.Shared._RMC14.UserInterface;
 using Content.Shared.Administration.Logs;
+using Content.Shared.UserInterface;
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
-using Content.Shared.UserInterface;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
+using Content.Shared.IdentityManagement;
+using Content.Shared.IdentityManagement.Components;
+using Content.Shared.Mind.Components;
+using Content.Shared.Roles;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 
 namespace Content.Shared.Paper;
 
 public sealed class PaperSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
@@ -24,8 +32,12 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly CMExamineSystem _rmcExamine = default!;
-    [Dependency] private readonly RMCUserInterfaceSystem _rmcUI = default!;
+    [Dependency] private readonly SharedIdentitySystem _identitySystem = default!;
+
+    private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
+    private static readonly ProtoId<TagPrototype> WriteTag = "Write";
+
+    private EntityQuery<PaperComponent> _paperQuery;
 
     public override void Initialize()
     {
@@ -38,7 +50,12 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<PaperComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<PaperComponent, PaperInputTextMessage>(OnInputTextMessage);
 
+        SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
+
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
+        SubscribeLocalEvent<PaperComponent, PaperSignatureRequestMessage>(OnSignatureRequest);
+
+        _paperQuery = GetEntityQuery<PaperComponent>();
     }
 
     private void OnMapInit(Entity<PaperComponent> entity, ref MapInitEvent args)
@@ -75,9 +92,6 @@ public sealed class PaperSystem : EntitySystem
         if (!args.IsInDetailsRange)
             return;
 
-        if (!_rmcExamine.CanExamine(entity.Owner, args.Examiner))
-            return;
-
         using (args.PushGroup(nameof(PaperComponent)))
         {
             if (entity.Comp.Content != "")
@@ -106,24 +120,36 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInteractUsing(Entity<PaperComponent> entity, ref InteractUsingEvent args)
     {
-        if (!_rmcUI.CanOpenUI(entity.Owner, args.User, PaperUiKey.Key))
-            return;
-
         // only allow editing if there are no stamps or when using a cyberpen
-        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, "WriteIgnoreStamps");
-        if (_tagSystem.HasTag(args.Used, "Write"))
+        var editable = entity.Comp.StampedBy.Count == 0 || _tagSystem.HasTag(args.Used, WriteIgnoreStampsTag);
+        if (_tagSystem.HasTag(args.Used, WriteTag))
         {
             if (editable)
             {
                 if (entity.Comp.EditingDisabled)
                 {
                     var paperEditingDisabledMessage = Loc.GetString("paper-tamper-proof-modified-message");
-                    _popupSystem.PopupEntity(paperEditingDisabledMessage, entity, args.User);
+                    _popupSystem.PopupClient(paperEditingDisabledMessage, entity, args.User);
 
                     args.Handled = true;
                     return;
                 }
-                var writeEvent = new PaperWriteEvent(entity, args.User);
+
+                var ev = new PaperWriteAttemptEvent(entity.Owner);
+                RaiseLocalEvent(args.User, ref ev);
+                if (ev.Cancelled)
+                {
+                    if (ev.FailReason is not null)
+                    {
+                        var fileWriteMessage = Loc.GetString(ev.FailReason);
+                        _popupSystem.PopupClient(fileWriteMessage, entity.Owner, args.User);
+                    }
+
+                    args.Handled = true;
+                    return;
+                }
+
+                var writeEvent = new PaperWriteEvent(args.User, entity);
                 RaiseLocalEvent(args.Used, ref writeEvent);
 
                 entity.Comp.Mode = PaperAction.Write;
@@ -166,12 +192,19 @@ public sealed class PaperSystem : EntitySystem
 
     private void OnInputTextMessage(Entity<PaperComponent> entity, ref PaperInputTextMessage args)
     {
+        var ev = new PaperWriteAttemptEvent(entity.Owner);
+        RaiseLocalEvent(args.Actor, ref ev);
+        if (ev.Cancelled)
+            return;
+
         if (args.Text.Length <= entity.Comp.ContentSize)
         {
             SetContent(entity, args.Text);
 
+            var paperStatus = string.IsNullOrWhiteSpace(args.Text) ? PaperStatus.Blank : PaperStatus.Written;
+
             if (TryComp<AppearanceComponent>(entity, out var appearance))
-                _appearance.SetData(entity, PaperVisuals.Status, PaperStatus.Written, appearance);
+                _appearance.SetData(entity, PaperVisuals.Status, paperStatus, appearance);
 
             if (TryComp(entity, out MetaDataComponent? meta))
                 _metaSystem.SetEntityDescription(entity, "", meta);
@@ -187,6 +220,30 @@ public sealed class PaperSystem : EntitySystem
         UpdateUserInterface(entity);
     }
 
+    private void OnRandomPaperContentMapInit(Entity<RandomPaperContentComponent> ent, ref MapInitEvent args)
+    {
+        if (!_paperQuery.TryComp(ent, out var paperComp))
+        {
+            Log.Warning($"{ToPrettyString(ent)} has a {nameof(RandomPaperContentComponent)} but no {nameof(PaperComponent)}!");
+            RemCompDeferred(ent, ent.Comp);
+            return;
+        }
+        var dataset = _protoMan.Index(ent.Comp.Dataset);
+        // Intentionally not using the Pick overload that directly takes a LocalizedDataset,
+        // because we want to get multiple attributes from the same pick.
+        var pick = _random.Pick(dataset.Values);
+
+        // Name
+        _metaSystem.SetEntityName(ent, Loc.GetString(pick));
+        // Description
+        _metaSystem.SetEntityDescription(ent, Loc.GetString($"{pick}.desc"));
+        // Content
+        SetContent((ent, paperComp), Loc.GetString($"{pick}.content"));
+
+        // Our work here is done
+        RemCompDeferred(ent, ent.Comp);
+    }
+
     private void OnPaperWrite(Entity<ActivateOnPaperOpenedComponent> entity, ref PaperWriteEvent args)
     {
         _interaction.UseInHandInteraction(args.User, entity);
@@ -200,6 +257,14 @@ public sealed class PaperSystem : EntitySystem
         if (!entity.Comp.StampedBy.Contains(stampInfo))
         {
             entity.Comp.StampedBy.Add(stampInfo);
+            
+            // Clean unfilled form and signature tags when stamping to finalize the document
+            var cleanedContent = CleanUnfilledTags(entity.Comp.Content);
+            if (cleanedContent != entity.Comp.Content)
+            {
+                SetContent(entity, cleanedContent);
+            }
+            
             Dirty(entity);
             if (entity.Comp.StampState == null && TryComp<AppearanceComponent>(entity, out var appearance))
             {
@@ -210,6 +275,32 @@ public sealed class PaperSystem : EntitySystem
             }
         }
         return true;
+    }
+
+    /// <summary>
+    ///     Copy any stamp information from one piece of paper to another.
+    /// </summary>
+    public void CopyStamps(Entity<PaperComponent?> source, Entity<PaperComponent?> target)
+    {
+        if (!Resolve(source, ref source.Comp) || !Resolve(target, ref target.Comp))
+            return;
+
+        target.Comp.StampedBy = new List<StampDisplayInfo>(source.Comp.StampedBy);
+        target.Comp.StampState = source.Comp.StampState;
+        Dirty(target);
+
+        if (TryComp<AppearanceComponent>(target, out var appearance))
+        {
+            // delete any stamps if the stamp state is null
+            _appearance.SetData(target, PaperVisuals.Stamp, target.Comp.StampState ?? "", appearance);
+        }
+    }
+
+    public void SetContent(EntityUid entity, string content)
+    {
+        if (!TryComp<PaperComponent>(entity, out var paper))
+            return;
+        SetContent((entity, paper), content);
     }
 
     public void SetContent(Entity<PaperComponent> entity, string content)
@@ -232,6 +323,116 @@ public sealed class PaperSystem : EntitySystem
     {
         _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode));
     }
+
+    private void OnSignatureRequest(Entity<PaperComponent> entity, ref PaperSignatureRequestMessage args)
+    {
+        var signature = GetPlayerSignature(args.Actor);
+        var newText = ReplaceNthSignatureTag(entity.Comp.Content, args.SignatureIndex, signature);
+        SetContent(entity, newText);
+
+        _adminLogger.Add(LogType.Chat, LogImpact.Low,
+            $"{ToPrettyString(args.Actor):player} signed {ToPrettyString(entity):entity} with signature: {signature}");
+    }
+
+    /// <summary>
+    /// Gets the player's signature using the identity system, including rank, name, and role.
+    /// </summary>
+    private string GetPlayerSignature(EntityUid player)
+    {
+        var name = string.Empty;
+        var rank = string.Empty;
+        var role = string.Empty;
+        
+        // Get the identity entity (ID card, etc.)
+        var identityEntity = player;
+        if (TryComp<IdentityComponent>(player, out var identity) &&
+            identity.IdentityEntitySlot.ContainedEntity is { } idEntity)
+        {
+            identityEntity = idEntity;
+        }
+        
+        // Get name from identity or fallback to entity name
+        name = MetaData(identityEntity).EntityName;
+        
+        // Get rank from RankComponent
+        if (TryComp<RankComponent>(player, out var rankComp))
+        {
+            var rankSystem = EntityManager.System<SharedRankSystem>();
+            rank = rankSystem.GetRankString(player, isShort: true) ?? string.Empty;
+        }
+        
+        // Get role from mind system
+        if (TryComp<MindContainerComponent>(player, out var mindContainer) &&
+            mindContainer.Mind != null)
+        {
+            var roleSystem = EntityManager.System<SharedRoleSystem>();
+            var roleInfo = roleSystem.MindGetAllRoleInfo((mindContainer.Mind.Value, null));
+            if (roleInfo.Count > 0)
+            {
+                role = Loc.GetString(roleInfo[0].Name);
+            }
+        }
+        
+        // Format: "Rank Name, Role" or fallback combinations
+        var signature = string.Empty;
+        if (!string.IsNullOrEmpty(rank) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(role))
+        {
+            signature = $"{rank} {name}, {role}";
+        }
+        else if (!string.IsNullOrEmpty(rank) && !string.IsNullOrEmpty(name))
+        {
+            signature = $"{rank} {name}";
+        }
+        else if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(role))
+        {
+            signature = $"{name}, {role}";
+        }
+        else
+        {
+            signature = name;
+        }
+        
+        return signature;
+    }
+
+    /// <summary>
+    /// Replaces the nth occurrence of [signature] tag with replacement text.
+    /// </summary>
+    private static string ReplaceNthSignatureTag(string text, int index, string replacement)
+    {
+        const string signatureTag = "[signature]";
+        var currentIndex = 0;
+        var pos = 0;
+
+        while (pos < text.Length)
+        {
+            var foundPos = text.IndexOf(signatureTag, pos);
+            if (foundPos == -1) break;
+
+            if (currentIndex == index)
+            {
+                return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + signatureTag.Length);
+            }
+
+            currentIndex++;
+            pos = foundPos + signatureTag.Length;
+        }
+
+        return text;
+    }
+
+    /// <summary>
+    /// Removes any unfilled [form] and [signature] tags, and converts [check] tags to ☐.
+    /// Called when the paper is stamped to finalize the document.
+    /// </summary>
+    /// <param name="text">The paper text to clean</param>
+    /// <returns>Text with unfilled tags cleaned</returns>
+    private static string CleanUnfilledTags(string text)
+    {
+        return text.Replace("[form]", string.Empty)
+                  .Replace("[signature]", string.Empty)
+                  .Replace("[check]", "☐");
+    }
 }
 
 /// <summary>
@@ -239,3 +440,10 @@ public sealed class PaperSystem : EntitySystem
 /// </summary>
 [ByRefEvent]
 public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
+
+/// <summary>
+/// Cancellable event for attempting to write on a piece of paper.
+/// </summary>
+/// <param name="paper">The paper that the writing will take place on.</param>
+[ByRefEvent]
+public record struct PaperWriteAttemptEvent(EntityUid Paper, string? FailReason = null, bool Cancelled = false);

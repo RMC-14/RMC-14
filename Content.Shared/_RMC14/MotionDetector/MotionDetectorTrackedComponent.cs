@@ -8,4 +8,7 @@ public sealed partial class MotionDetectorTrackedComponent : Component
 {
     [DataField]
     public TimeSpan LastMove;
+
+    [DataField]
+    public bool IsQueenEye;
 }

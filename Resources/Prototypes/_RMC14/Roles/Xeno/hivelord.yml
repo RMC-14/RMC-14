@@ -3,12 +3,6 @@
   id: CMXenoHivelord
   name: cm-job-name-xeno-hivelord
   playTimeTracker: CMJobXenoHivelord
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: hivelord
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_xeno
 
 - type: playTimeTracker
   id: CMJobXenoHivelord

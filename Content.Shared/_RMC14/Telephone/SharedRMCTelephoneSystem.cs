@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared.Actions;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Audio;
+using Content.Shared.Database;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -17,6 +19,7 @@ namespace Content.Shared._RMC14.Telephone;
 
 public abstract class SharedRMCTelephoneSystem : EntitySystem
 {
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
@@ -55,6 +58,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             subs =>
             {
                 subs.Event<RMCTelephoneCallBuiMsg>(OnTelephoneCallMsg);
+                subs.Event<RMCTelephoneDndBuiMsg>(OnTelephoneDndMsg);
             });
     }
 
@@ -154,7 +158,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (GetEntity(args.Id) is not { Valid: true } target  ||
+        if (GetEntity(args.Id) is not { Valid: true } target ||
             ent.Owner == target ||
             !TryComp(target, out RotaryPhoneComponent? targetRotaryPhone))
         {
@@ -179,10 +183,12 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         }
 
         // Emit the popup on a successful call.
-        // Check for the marine component cause we don't want walls calling phones.
-        if (TryComp<MarineComponent>(user, out var marine) && TryComp(user, out MetaDataComponent? marinemeta) && TryComp(ent, out MetaDataComponent? phonemeta))
+        // Check for the marine component because we don't want walls calling phones.
+        if (HasComp<MarineComponent>(user) &&
+            TryComp(user, out MetaDataComponent? marineMeta) &&
+            TryComp(ent, out MetaDataComponent? phoneMeta))
         {
-            _popup.PopupEntity($"{marinemeta.EntityName} dials a number on the {phonemeta.EntityName}.", ent);
+            _popup.PopupEntity($"{marineMeta.EntityName} dials a number on the {phoneMeta.EntityName}.", ent);
         }
 
         ent.Comp.Idle = false;
@@ -205,6 +211,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetSound(ent, dialingSound, selfSound);
                 _ambientSound.SetRange(ent, 16, selfSound);
                 _ambientSound.SetVolume(ent, dialingSound.Params.Volume, selfSound);
+                _ambientSound.SetAmbience(ent, true, selfSound);
             }
 
             if (ent.Comp.ReceivingSound is { } receivingSound)
@@ -213,8 +220,9 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 _ambientSound.SetSound(target, receivingSound, otherSound);
                 _ambientSound.SetRange(target, 16, otherSound);
                 _ambientSound.SetVolume(target, receivingSound.Params.Volume, otherSound);
-                var ev = new RMCTelephoneRingEvent(target);
-                RaiseLocalEvent<RMCTelephoneRingEvent>(ref ev);
+                _ambientSound.SetAmbience(target, true, otherSound);
+                var ev = new RMCTelephoneRingEvent(target, ent, args.Actor);
+                RaiseLocalEvent(ref ev);
             }
         }
 
@@ -223,11 +231,27 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
         UpdateAppearance((ent, ent));
         UpdateAppearance((target, targetRotaryPhone));
+
+        _adminLog.Add(LogType.RMCTelephone, $"{ToPrettyString(args.Actor)} started calling {ToPrettyString(target)} using {ToPrettyString(ent)}");
+    }
+
+
+    private void OnTelephoneDndMsg(Entity<RotaryPhoneComponent> ent, ref RMCTelephoneDndBuiMsg args)
+    {
+        if (args.Dnd && ent.Comp.CanDnd)
+        {
+            EnsureComp<RotaryPhoneDndComponent>(ent);
+        }
+        else
+        {
+            RemComp<RotaryPhoneDndComponent>(ent);
+        }
+        SendUIState(ent);
     }
 
     private bool IsPhoneBusy(EntityUid ent)
     {
-        return HasComp<RotaryPhoneDialingComponent>(ent) || HasComp<RotaryPhoneReceivingComponent>(ent);
+        return HasComp<RotaryPhoneDialingComponent>(ent) || HasComp<RotaryPhoneReceivingComponent>(ent) || HasComp<RotaryPhoneDndComponent>(ent);
     }
 
     private void UpdateAppearance(Entity<RotaryPhoneComponent?> phone, bool forceNotRinging = false)
@@ -280,7 +304,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         }
     }
 
-    private void HangUp(EntityUid self, EntityUid other)
+    private void HangUp(EntityUid self, EntityUid other, EntityUid? user)
     {
         StopSound(self);
 
@@ -295,6 +319,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         {
             _ambientSound.SetSound(other, BusySound);
             _ambientSound.SetVolume(other, BusySound.Params.Volume);
+            _ambientSound.SetAmbience(other, true);
         }
 
         if (!HasPickedUp(other))
@@ -302,11 +327,13 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
         if (_net.IsServer)
             _audio.PlayPvs(RemoteHangupSound, other);
+
+        _adminLog.Add(LogType.RMCTelephone, $"{ToPrettyString(user)} hung up {ToPrettyString(self)} while calling {ToPrettyString(other)}");
     }
 
     private void StopSound(EntityUid ent)
     {
-        _ambientSound.SetSound(ent, new SoundPathSpecifier(""));
+        _ambientSound.SetAmbience(ent, false);
     }
 
     private void PlayGrabSound(EntityUid rotary)
@@ -382,8 +409,10 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
             var name = GetPhoneName((otherId, otherComp));
             phones.Add(new RMCPhone(GetNetEntity(otherId), otherComp.Category, name));
         }
+        var canDnd = Comp<RotaryPhoneComponent>(phone).CanDnd;
+        var dnd = HasComp<RotaryPhoneDndComponent>(phone);
 
-        _ui.SetUiState(phone, RMCTelephoneUiKey.Key, new RMCTelephoneBuiState(phones));
+        _ui.SetUiState(phone, RMCTelephoneUiKey.Key, new RMCTelephoneBuiState(phones, canDnd, dnd));
     }
 
     private void PickupReceiving(Entity<RotaryPhoneReceivingComponent> receiving, EntityUid user)
@@ -405,11 +434,18 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         }
 
         UpdateAppearance((receiving, rotaryPhone));
+        _adminLog.Add(LogType.RMCTelephone, $"{ToPrettyString(user)} picked up {ToPrettyString(receiving)}");
     }
 
     protected string GetPhoneName(Entity<RotaryPhoneComponent?> phone)
     {
         var name = Name(phone);
+        if (!Resolve(phone, ref phone.Comp, false))
+            return name;
+
+        if (!phone.Comp.TryGetHolderName)
+            return name;
+
         if (!TryGetPhoneBackpackHolder(phone, out var holder))
             return name;
 
@@ -435,7 +471,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
         if (ent.Comp.Other is { } other)
         {
             StopSound(other);
-            HangUp(ent, other);
+            HangUp(ent, other, user);
 
             if (!HasPickedUp(other))
             {
@@ -466,7 +502,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
                 Dirty(other, dialing);
             }
 
-            HangUp(ent, other);
+            HangUp(ent, other, user);
 
             if (!HasPickedUp(other))
                 RemCompDeferred<RotaryPhoneReceivingComponent>(other);
@@ -496,6 +532,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
                 _ambientSound.SetSound(uid, BusySound);
                 _ambientSound.SetVolume(uid, BusySound.Params.Volume);
+                _ambientSound.SetAmbience(uid, true);
             }
 
             if (dialing.Other is not { } other)
@@ -540,6 +577,7 @@ public abstract class SharedRMCTelephoneSystem : EntitySystem
 
                 _ambientSound.SetSound(uid, sound);
                 _ambientSound.SetVolume(uid, sound.Params.Volume);
+                _ambientSound.SetAmbience(uid, true);
             }
         }
 

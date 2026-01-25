@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Rest;
+using Content.Shared._RMC14.TrainingDummy;
 using Content.Shared.Mobs;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
@@ -19,10 +20,6 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAciderGenerationComponent, MeleeHitEvent>(OnMeleeHit);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, XenoRestEvent>(OnVisualsRest);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, KnockedDownEvent>(OnVisualsKnockedDown);
-        SubscribeLocalEvent<XenoAciderGenerationComponent, StatusEffectEndedEvent>(OnVisualsStatusEffectEnded);
     }
 
     private void OnMeleeHit(Entity<XenoAciderGenerationComponent> xeno, ref MeleeHitEvent args)
@@ -32,6 +29,9 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
         {
             if (!_xeno.CanAbilityAttackTarget(xeno, hit))
                 continue;
+
+            if (HasComp<RMCTrainingDummyComponent>(hit))
+                return;
 
             startGenerating = true;
             break;
@@ -43,39 +43,6 @@ public sealed class XenoAciderGenerationSystem : EntitySystem
         _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Generating, true);
         xeno.Comp.ExpireAt = _timing.CurTime + xeno.Comp.ExpireDuration;
         Dirty(xeno);
-    }
-
-    private void OnMobStateChanged(Entity<XenoAciderGenerationComponent> xeno, ref MobStateChangedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, args.NewMobState != MobState.Alive);
-    }
-
-    private void OnVisualsRest(Entity<XenoAciderGenerationComponent> xeno, ref XenoRestEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Resting, args.Resting);
-    }
-
-    private void OnVisualsKnockedDown(Entity<XenoAciderGenerationComponent> xeno, ref KnockedDownEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, true);
-    }
-
-    private void OnVisualsStatusEffectEnded(Entity<XenoAciderGenerationComponent> xeno, ref StatusEffectEndedEvent args)
-    {
-        if (_timing.ApplyingState)
-            return;
-
-        if (args.Key == "KnockedDown")
-            _appearance.SetData(xeno, XenoAcidGeneratingVisuals.Downed, false);
     }
 
     public override void Update(float frameTime)

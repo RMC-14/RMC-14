@@ -34,6 +34,9 @@
   - type: Storage
     grid:
     - 0,0,15,1
+  - type: Occluder
+    enabled: false
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: RMCBookcase

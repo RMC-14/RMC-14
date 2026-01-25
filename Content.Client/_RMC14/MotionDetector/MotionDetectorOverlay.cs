@@ -16,10 +16,10 @@ public sealed class MotionDetectorOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
 
     private TimeSpan _last;
-    private readonly List<Vector2> _blips = new();
+    private readonly List<(Vector2 Pos, bool QueenEye)> _blips = new();
 
-    private MotionDetectorOverlaySystem _motionDetector;
-    private SpriteSystem _sprite;
+    private readonly MotionDetectorOverlaySystem _motionDetector;
+    private readonly SpriteSystem _sprite;
 
     public MotionDetectorOverlay()
     {
@@ -31,6 +31,7 @@ public sealed class MotionDetectorOverlay : Overlay
     protected override void Draw(in OverlayDrawArgs args)
     {
         var frame = _sprite.GetFrame(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Objects/Tools/motion_detector.rsi"), "detector_blip"), _timing.CurTime);
-        _motionDetector.DrawBlips<MotionDetectorComponent>(args.WorldHandle, ref _last, _blips, frame);
+        var queenEyeFrame = _sprite.GetFrame(new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Objects/Tools/motion_detector.rsi"), "queen_eye_blip"), _timing.CurTime);
+        _motionDetector.DrawBlips<MotionDetectorComponent>(args.WorldHandle, ref _last, _blips, frame, queenEyeFrame);
     }
 }

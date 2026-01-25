@@ -18,12 +18,16 @@ namespace Content.Client.Guidebook.Controls;
 [UsedImplicitly, GenerateTypedNameReferences]
 public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
 {
+    [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+
+    private readonly ISawmill _sawmill;
 
     public GuideReagentGroupEmbed()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+        _sawmill = _logManager.GetSawmill("guidebook.reagent_group");
         MouseFilter = MouseFilterMode.Stop;
     }
 
@@ -43,11 +47,18 @@ public sealed partial class GuideReagentGroupEmbed : BoxContainer, IDocumentTag
         control = null;
         if (!args.TryGetValue("Group", out var group))
         {
-            Logger.Error("Reagent group embed tag is missing group argument");
+            _sawmill.Error("Reagent group embed tag is missing group argument");
             return false;
         }
 
-        var prototypes = _prototype.EnumerateCM<ReagentPrototype>()
+        var includeUpstream = false;
+        if (args.TryGetValue("IncludeUpstream", out var includeUpstreamStr) &&
+            bool.TryParse(includeUpstreamStr, out var include))
+        {
+            includeUpstream = include;
+        }
+
+        var prototypes = (includeUpstream ? _prototype.EnumeratePrototypes<ReagentPrototype>() : _prototype.EnumerateCM<ReagentPrototype>())
             .Where(p => p.Group.Equals(group)).OrderBy(p => p.LocalizedName);
         foreach (var reagent in prototypes)
         {

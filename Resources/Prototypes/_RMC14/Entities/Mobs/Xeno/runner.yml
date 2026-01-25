@@ -6,6 +6,8 @@
   - CMXenoFlammable
   - RMCXenoSpeechSounds
   - RMCXenoCommendationReceiver
+  - RMCXenoMobCollision
+  - RMCXenoVentCrawler
   id: CMXenoRunnerBase
   name: Runner
   description: A small red alien that looks like it could run fairly quickly...
@@ -26,6 +28,7 @@
     tier: 1
     hudOffset: -0.15,0.6
     unlockAt: 300 # 5 minutes
+  - type: XenoRegen
     restHealMultiplier:  1.75
   - type: Fixtures
     fixtures:
@@ -33,19 +36,20 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 185
+        density: 85
         mask:
         - Impassable
         - HighImpassable
         - LowImpassable
         - BarbedBarricade
+        - BarricadeImpassable
         layer:
         - MobLayer
       fix2:
         shape:
           !type:PhysShapeCircle
           radius: 0.40
-        density: 185
+        density: 85
         layer:
         - BulletImpassable
   - type: XenoLight
@@ -104,18 +108,27 @@
     prefix: runner
   - type: TacticalMapIcon
     icon:
-      sprite: _RMC14/Interface/map_blips.rsi
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: runner
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.55
     baseSprintSpeed: 10
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
+  - type: MobCollision
+    minimumSpeedModifier: 0.1
+  - type: FixedIdentity
+    name: cm-job-name-xeno-runner
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT1
 
 - type: entity
   parent: CMXenoRunnerBase
   id: CMXenoRunner
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleRunner
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -143,6 +156,10 @@
   - type: XenoEvolution
     strains:
     - RMCXenoRunnerAcider
+  - type: VentCrawler
+    ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: CMXenoRunner
 
 - type: entity
   parent: CMXenoRunnerBase
@@ -157,6 +174,21 @@
     - map: [ "enum.RMCDamageVisualLayers.Base" ]
       visible: false
     - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
+      visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
+    - map: [ "focused" ]
+      sprite: _RMC14/Interface/xeno_hud.rsi
+      state: hudeye
+      visible: false
+    - map: [ "targetedDirection" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_direction
+      visible: false
+    - map: [ "targetedDirectionIntense" ]
+      sprite: _RMC14/Effects/targeted.rsi
+      state: sniper_lockon_intense_direction
       visible: false
   - type: MobThresholds
     thresholds:
@@ -173,13 +205,12 @@
     - ActionXenoAcidAcider
     - ActionXenoForTheHive
     - ActionXenoDevolve
-    hidden: true
   - type: XenoStrain
     name: rmc-xeno-acider-name
     description: rmc-xeno-acider-description
     popup: rmc-xeno-acider-popup
   - type: CMArmor
-    armor: 15
+    xenoArmor: 15
   - type: MovementSpeedModifier
     baseWalkSpeed: 3.5
     baseSprintSpeed: 6.5
@@ -222,6 +253,10 @@
         types:
           Heat: 1
   - type: XenoAciderGeneration
+  - type: AcidTrap
+    trapLevel: 3
+    cost: 75
+    spray: XenoAcidSprayTrapStrong
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59
@@ -236,6 +271,8 @@
       whitelist:
         components:
         - XenoHeavy
-
-
-
+  - type: XenoHidden
+  - type: VentCrawler
+    ventCrawlIcon: runner
+  - type: RMCActionOrder
+    id: RMCXenoRunnerAcider

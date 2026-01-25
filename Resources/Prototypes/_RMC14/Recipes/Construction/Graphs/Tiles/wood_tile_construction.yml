@@ -1,0 +1,28 @@
+﻿- type: construction
+  parent: RMC
+  id: RMCTileWood
+  name: wooden floor tile
+  description: An easy to fit wooden floor tile.
+  graph: RMCTileWood
+  startNode: start
+  targetNode: RMCTileWood
+  category: construction-category-cm-materials
+  objectType: Item
+
+- type: constructionGraph
+  parent: RMC
+  id: RMCTileWood
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: RMCTileWood
+      completed:
+      - !type:SetStackCount
+        amount: 4
+      steps:
+      - material: RMCWood
+        amount: 1
+
+  - node: RMCTileWood
+    entity: CMTileItemWood

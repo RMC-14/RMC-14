@@ -24,8 +24,8 @@
         crate: RMCCrateBoxMagazineRifleM54CAP
       - cost: 3000
         crate: RMCCrateBoxMagazineRifleM54CExt
-#      - cost: 2000
-#        crate: RMCCrateMagazineRifleM54CE2
+      - cost: 2000
+        crate: RMCCrateMagazineRifleM54CE2
       - cost: 3000
         crate: RMCCrateMagazineRifleM54CE2HT
       - cost: 2000
@@ -71,15 +71,25 @@
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
+        crate: RMCCrateMagazineBGel
+      - cost: 4000
+        crate: RMCCrateMagazineFlamerMixed
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFire
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireBlue
+      - cost: 4000
+        crate: RMCCrateBoxMagazineSentryFireSmoke
     - name: Attachments
       entries:
       - cost: 3000
         crate: RMCCrateAttachmentSmartScope
       - cost: 2000
         crate: RMCCrateAttachmentRailFlashlight
-#      - cost: 3000
-#        crate: RMCCrateAttachmentRedDot
+      - cost: 3000
+        crate: RMCCrateAttachmentRedDot
       - cost: 3000
         crate: RMCCrateAttachmentTelescopicScope
       - cost: 3000
@@ -100,10 +110,10 @@
         crate: RMCCrateAttachmentBipod
       - cost: 3000
         crate: RMCCrateAttachmentUnderbarrelShotgun
-#      - cost: 3000
-#        crate: RMCCrateAttachmentUnderbarrelExtinguisher
-#      - cost: 3000
-#        crate: RMCCrateAttachmentUnderbarrelFlamer
+      - cost: 3000
+        crate: RMCCrateAttachmentUnderbarrelExtinguisher
+      - cost: 3000
+        crate: RMCCrateAttachmentUnderbarrelFlamer
       - cost: 3000
         crate: RMCCrateAttachmentBurstfire
       - cost: 6000
@@ -125,13 +135,19 @@
       - cost: 2000
         crate: RMCCrateClothingWebbing
       - cost: 2000
+        crate: RMCCrateClothingWebbingBlack
+      - cost: 2000
         crate: RMCCrateClothingWebbingVest
       - cost: 2000
         crate: RMCCrateClothingWebbingKnife
       - cost: 3000
         crate: RMCCrateClothingWebbingHolster
       - cost: 2000
-        crate: RMCCrateClothingWebbingPouch
+        crate: RMCCrateClothingWebbingHolsterBlack
+      - cost: 2000
+        crate: RMCCrateClothingDropPouch
+      - cost: 3000
+        crate: RMCCrateClothingDropPouchBlack
       - cost: 3000
         crate: RMCCrateClothingOfficerOutfit
     - name: Engineering
@@ -156,8 +172,8 @@
         crate: RMCCrateElectricalMaintenance
       - cost: 2000
         crate: RMCCrateMechanicalMaintenance
-#      - cost: 2000
-#        crate: RMCCrateInflatableBarriers
+      - cost: 2000
+        crate: RMCCrateInflatableBarriers
       - cost: 2000
         crate: RMCCrateReplacementLights
       - cost: 3000
@@ -188,7 +204,11 @@
       - cost: 10000
         crate: RMCCrateGrenadesHighExplosiveBox
       - cost: 10000
+        crate: RMCCrateGrenadesBoxHEFA
+      - cost: 10000
         crate: RMCCrateGrenadesAirburstFragBox
+      - cost: 10000
+        crate: RMCCrateBoxAGMI
       - cost: 4000
         crate: RMCCrateGrenadesAirburstFrag
       - cost: 4000
@@ -223,19 +243,25 @@
         crate: RMCCrateGearPackFlareCAS
       - cost: 2000
         crate: RMCCrateGearFulton
+      - cost: 4000
+        crate: RMCCrateGearParachute
     - name: Medical
       entries:
-      - cost: 3200
+      - cost: 2500
         crate: RMCCrateMedicalSurgery
-      - cost: 2000
+      - cost: 3500
+        crate: RMCCrateFieldDoctor
+        entities:
+        - CMIV # TODO RMC14 Make IV fit in crate.
+      - cost: 700
         crate: RMCCrateMedicalBodyBag
-      - cost: 1200
+      - cost: 1500
         crate: RMCCrateMedicalStasisBag
-      - cost: 1600
+      - cost: 1100
         crate: RMCCrateMedicalFirstAid
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalFilled
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalPill
     - name: Mortar
       entries:
@@ -249,8 +275,10 @@
         crate: RMCCrateMortarShellFlare
 #    - name: Operations
 #      entries: []
-#    - name: Reagent tanks
-#      entries: []
+    - name: Reagent tanks
+      entries:
+      - cost: 2000
+        crate: RMCTankReagentFuel
     - name: Research
       entries:
       - cost: 3000
@@ -263,12 +291,14 @@
         crate: RMCCrateRestrictedEquipmentArmorM4
       - cost: 2000
         crate: RMCCrateRestrictedEquipmentArmorB12
+      - cost: 2000
+        crate: RMCCrateRestrictedEquipmentIntelSupportKit
     - name: Supplies
       entries:
       - cost: 2000
         crate: RMCCrateSupplyInternals
-#      - cost: 1000
-#        crate: RMCCrateSupplyEvacuation
+      - cost: 1000
+        crate: RMCCrateSupplyEvacuation
       - cost: 1000
         crate: RMCCrateSuppliesBoxes
       - cost: 1000
@@ -279,8 +309,6 @@
 #      entries: []
     - name: Weapons
       entries:
-      - cost: 10000
-        crate: RMCCrateSmartGunSet
       - cost: 4000
         crate: RMCCrateM54CE2
       - cost: 3000
@@ -298,7 +326,7 @@
       - cost: 3000
         crate: RMCCrateXM51
       - cost: 4000
-        crate: RMCCrateM79
+        crate: RMCCrateM85A1
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -309,6 +337,8 @@
         crate: RMCCrateMagazineM96SFlak
       - cost: 3000
         crate: RMCCrateMagazineM96SIncendiary
+      - cost: 3000
+        crate: RMCCrateMagazineXM43E1Standard
       - cost: 3000
         crate: RMCCrateM5DemoSpecMixed
       - cost: 3000
@@ -325,7 +355,14 @@
         crate: RMCCrateMagazineM4SPRCustomImpact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
-#      - cost: 4000
+      - cost: 6000
+        crate: RMCCratePyroTankMixed
+      - cost: 3000
+        crate: RMCCratePyroTankExtended
+      - cost: 3000
+        crate: RMCCratePyroTankTypeB
+      - cost: 4000
+        crate: RMCCratePyroTankTypeX
 
 
 

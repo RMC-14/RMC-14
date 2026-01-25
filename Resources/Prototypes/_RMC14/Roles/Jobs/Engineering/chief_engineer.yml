@@ -18,16 +18,11 @@
   startingGear: CMGearChiefEngineer
   icon: "CMJobIconChiefEngineer"
   requireAdminNotify: true
-  joinNotifyCrew: true
+  joinNotifyCrew: false
+  marineAuthorityLevel: 9
   supervisors: cm-job-supervisors-aso
   accessGroups:
   - CMCE
-  minimapIcon:
-    sprite: _RMC14/Interface/map_blips.rsi
-    state: ce
-  minimapBackground:
-   sprite: _RMC14/Interface/map_blips.rsi
-   state: background_command
   roleWeight: 0.25
   special:
   - !type:AddComponentSpecial
@@ -35,6 +30,7 @@
     - type: Skills
       skills:
         RMCSkillConstruction: 3
+        RMCSkillEndurance: 1
         RMCSkillEngineer: 3
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
@@ -45,12 +41,25 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+        RMCSkillVehicles: 1
+    - type: CMVendorUser
+      id: CMChiefEngineer
+      points: 45
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
       prefix: cm-job-prefix-chief-engineer
     - type: ViewIntelObjectives
     - type: CommandAccent
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: ce
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_command
+    - type: RMCTrackable
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearChiefEngineer
@@ -76,3 +85,13 @@
 - type: playTimeTracker
   id: CMJobChiefEngineer
   isHumanoid: true
+
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCE
+  name: The CE
+  description: The Chief Engineer.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: chief_engineer

@@ -3,6 +3,7 @@
   id: CMPlushieBase
   name: generic plushie
   description: perfectly generic
+  suffix: RMC
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Fun/plushies.rsi
@@ -19,6 +20,7 @@
 - type: entity
   parent: PlushieMoth
   id: RMCPlushieMoth
+  suffix: RMC
   components:
   - type: UseDelay
     delay: 120
@@ -32,6 +34,7 @@
 - type: entity
   parent: PlushieSharkGrey
   id: RMCPlushieSharkGrey
+  suffix: RMC
   components:
   - type: UseDelay
     delay: 120
@@ -41,6 +44,51 @@
   - type: EmitSoundOnCollide
     sound:
       collection: ToyFall
+
+- type: entity
+  parent: PlushieSharkBlue
+  id: RMCPlushieSharkBlue
+  suffix: RMC
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: PlushieSharkPink
+  id: RMCPlushieSharkPink
+  suffix: RMC
+  components:
+  - type: UseDelay
+    delay: 120
+  - type: EmitSoundOnLand
+    sound:
+      collection: ToyFall
+  - type: EmitSoundOnCollide
+    sound:
+      collection: ToyFall
+
+- type: entity
+  parent: RMCPlushieSharkBlue
+  id: RMCShorkMedicalOfficer
+  name: Shork medical officer plushie
+  description: The Shork Medical Officer is dissapointed to see you in surgery yet again. Maybe you should take better care of yourself?
+  suffix: RMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/smo.rsi
+    state: SMO
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: SMO-inhand-left
+      right:
+      - state: SMO-inhand-right
 
 - type: entity
   parent: CMPlushieBase
@@ -116,7 +164,8 @@
   parent: CMPlushieBase
   id: RMCPlushieAlec
   name: conspicuous plush
-  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hyper allergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  description: You can almost feel spite emanating from it. On it's back is a small tag listing the several cheap and hypoallergenic textiles it's made of. At the very bottom is the name of the maker, Drake Industries.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: alec_plushie
@@ -132,6 +181,7 @@
   id: RMCPlushieNyx
   name: accursed plush
   description: It's rumoured if you ask this plushie for metal, your soul gets trapped in the pit. It's also rumoured that this plushie was made with 99% cotton.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: plushie_moth
@@ -156,10 +206,21 @@
       path: /Audio/Voice/Moth/moth_chitter.ogg
 
 - type: entity
+  parent: RMCPlushieNyx
+  id: RMCPlushieMotivationalMoth
+  name: motivational marine moth
+  description: A soft, fluffy little marine companion for those who just need a little motivation to make it across the finish line. You can do it, yesyes! It chitters happily when squeezed!
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: plushie_wawa
+
+- type: entity
   parent: CMPlushieBase
   id: RMCPlushieXippy
   name: xippy
   description: An accursed agent of chaos and violence.
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     state: xippy
@@ -178,3 +239,66 @@
   - type: MeleeWeapon
     soundHit:
       collection: XenoHelp
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieGnarpGnarp
+  name: gnarp plush
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp
+
+- type: entity
+  parent: RMCPlushieGnarpGnarp
+  id: RMCPlushieGnarpGnarpAlt
+  name: gnarp plush
+  suffix: Alternate
+  description: gnarp gnarp.
+  components:
+  - type: Sprite
+    state: gnarp_alt
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieProvost
+  name: intimidating plush
+  description: An icon for all avid tax payers and law enforcement personnel - Don't let anyone know that this plushie is actually behind on their taxes.
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: provost
+  - type: StunOnHit
+    whitelist:
+      components:
+      - Marine
+  - type: StaminaDamageOnHit
+    damage: 100
+  - type: MeleeRequiresSkill
+    skills:
+      RMCSkillPolice: 1
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnActivate
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: EmitSoundOnTrigger
+    sound:
+      path: /Audio/Items/Toys/weh.ogg
+  - type: MeleeWeapon
+    soundHit:
+      path: /Audio/Items/Toys/weh.ogg
+
+- type: entity
+  parent: CMPlushieBase
+  id: RMCPlushieCrow
+  name: crow plushie
+  description: hello cro
+  suffix: DO NOT MAP
+  components:
+  - type: Sprite
+    state: crow

@@ -1,0 +1,20 @@
+﻿<Document>
+  #Defender, Tier 1
+  <GuideEntityEmbed Entity="CMXenoDefender"/>
+  ##Playing as a Defender
+  You can work both on defense and offense with your high armor. This can include charging in with headbutt to deliver a tailsweep or lowering your crest to protect retreating sisters and in some situations fortifying to break cades or cover for Boilers.
+
+  They are also efficent cap carriers, as they can tackle and keep down hosts to devour and bring to a nest.
+
+  For new players, using headbutt to propel yourself into hosts and then tailsweeping and then disengaging is enough, remember to toggle your crest after tailsweeping to not get stunned by shotguns.
+
+  ##Abilities:
+  - [bold]Headbutt[/bold]: Launches you into the target dealing low damage and knocking them back, if your crest is lowered then it will knock them back further.
+   <GuideEntityEmbed Entity="RMCGuidebookActionXenoHeadbutt"/>
+  - [bold]Tail Sweep[/bold]: Spin around and uses your tail to cause all targets within a one tile range around you be knocked down and thrown, deals a small amount of damage.
+   <GuideEntityEmbed Entity="RMCGuidebookActionXenoTailSweep"/>
+  - [bold]Toggle Crest Defence[/bold]: Lowering your crest will increase your armor pool and make you immune to most forms of stun such as shotgun and grenades, however this will slow you down.
+   <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleCrestDefence"/>
+  - [bold]Fortify[/bold]: Locks you into a tile increasing your armor pool heavily and granting explosive resistance at the cost of being immobile.
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoFortify"/>
+</Document>

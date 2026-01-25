@@ -36,18 +36,20 @@
   isSubfloor: true
   footstepSounds:
     collection: FootstepPlating
-  friction: 0.2
+  friction: 1
   heatCapacity: 10000
 
 - type: tile
   parent: CMFloorPlatingPrison
   id: CMFloorPlatingPrisonScorched
   sprite: /Textures/_RMC14/Tiles/prison/panelscorched.png
+  friction: 1
 
 - type: tile
   parent: CMFloorPlatingPrison
   id: CMFloorPlatingPrisonDamaged
   sprite: /Textures/_RMC14/Tiles/prison/platingdmg.png
+  friction: 1
   variants: 3
   placementVariants:
   - 1.0

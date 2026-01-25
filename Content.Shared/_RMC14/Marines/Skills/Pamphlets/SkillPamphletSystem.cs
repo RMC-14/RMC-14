@@ -32,7 +32,9 @@ public sealed class SkillPamphletSystem : EntitySystem
         args.Handled = true;
 
         // Then see if they've reached the limit (or if it applies at all)
-        if (!ent.Comp.BypassLimit && HasComp<UsedSkillPamphletComponent>(args.User))
+        if (!ent.Comp.BypassLimit &&
+            TryComp(args.User, out UsedSkillPamphletComponent? used) &&
+            used.Used)
         {
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-limit-reached"), ent, args.User);
             return;
@@ -84,27 +86,47 @@ public sealed class SkillPamphletSystem : EntitySystem
         // Add any unknown skills
         foreach (var skill in ent.Comp.AddSkills)
         {
-            if (_skills.HasSkill(args.User, skill.Key, skill.Value))
+            var cap = ent.Comp.SkillCap.TryGetValue(skill.Key, out var skillCap) ? skillCap : skill.Value;
+            if (_skills.HasSkill(args.User, skill.Key, cap))
                 continue;
 
-            _skills.SetSkill(args.User, skill.Key, skill.Value);
+            var level = _skills.GetSkill(args.User, skill.Key) + skill.Value;
+            level = Math.Min(level, cap);
+            _skills.SetSkill(args.User, skill.Key, level);
             ent.Comp.GaveSkill = true;
         }
 
-        if (ent.Comp.GaveSkill)
+        if (ent.Comp.GaveSkill || ent.Comp.BypassSkill)
         {
             _popup.PopupClient(Loc.GetString("rmc-pamphlets-reading"), args.User, args.User);
 
             var usedSkillComp = EnsureComp<UsedSkillPamphletComponent>(args.User);
-            usedSkillComp.Icon = ent.Comp.GiveIcon;
-            usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
+            if (ent.Comp.GiveIcon != null)
+                usedSkillComp.Icon = ent.Comp.GiveIcon;
+            if (ent.Comp.GiveJobTitle != null)
+                usedSkillComp.JobTitle = ent.Comp.GiveJobTitle;
+            if (!ent.Comp.BypassLimit)
+                usedSkillComp.Used = true;
+
             Dirty(args.User, usedSkillComp);
 
             var mapBlip = EnsureComp<MapBlipIconOverrideComponent>(args.User);
-            mapBlip.Icon = ent.Comp.GiveMapBlip;
+            if (ent.Comp.GiveMapBlip != null)
+                mapBlip.Icon = ent.Comp.GiveMapBlip;
             Dirty(args.User, mapBlip);
 
             _squads.UpdateSquadTitle(args.User);
+
+            if (ent.Comp.GivePrefix != null)
+            {
+                var jobPrefix = EnsureComp<JobPrefixComponent>(args.User);
+                if (ent.Comp.IsAppendPrefix)
+                    jobPrefix.AdditionalPrefix = ent.Comp.GivePrefix.Value;
+                else
+                    jobPrefix.Prefix = ent.Comp.GivePrefix.Value;
+
+                Dirty(args.User, jobPrefix);
+            }
 
             if (!_net.IsClient)
                 QueueDel(ent);

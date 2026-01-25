@@ -17,3 +17,11 @@
     contents:
     - id: CMArmorB12
     - id: CMArmorHelmetM11
+- type: entity
+  id: RMCCrateRestrictedEquipmentIntelSupportKit
+  parent: RMCCrateBase
+  name: Field Intelligence Support Kit crate (x1 fulton, x1 data detector, 1x intel pamphlet, 1x large document pouch, 1x intel radio key)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCKitIntel

@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Xenonids.Damage;
@@ -17,9 +17,6 @@ public sealed partial class RMCXenoDamageVisualsComponent : Component
 [Serializable, NetSerializable]
 public enum RMCDamageVisuals
 {
-    Resting,
-    Downed,
-    Fortified,
     State,
 }
 

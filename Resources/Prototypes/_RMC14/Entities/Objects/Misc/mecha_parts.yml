@@ -1,0 +1,34 @@
+- type: entity
+  parent: BaseItem
+  id: RMCMechPropBase
+  abstract: true
+  suffix: Prop
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Misc/mech_props.rsi
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropDrill
+  name: drill
+  description: This is the drill that'll pierce the heavens!
+  components:
+    - type: Sprite
+      state: mecha_drill
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropClamp
+  name: Hydraulic Clamp
+  components:
+    - type: Sprite
+      state: mecha_clamp
+
+- type: entity
+  parent: RMCMechPropBase
+  id: RMCMechPropArmorBooster
+  name: "Armor Booster Module (Close Combat Weaponry)"
+  description: Boosts exosuit armor against armed melee attacks. Requires energy to operate.
+  components:
+    - type: Sprite
+      state: mecha_abooster_ccw

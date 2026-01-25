@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/2314793744d0b4ae00e330a9c9fdb7662e67b2de/icons/obj/items/walkman.dmi, https://github.com/cmss13-devs/cmss13/blob/925b704ac6622abaa972fd2a1c8d6348340bbb51/icons/mob/humans/onmob/clothing/ears.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "cassette_flip"
+    },
+    {
+      "name": "empty"
+    },
+    {
+      "name": "walkman"
+    },
+    {
+      "name": "walkman_1"
+    },
+    {
+      "name": "walkman_2"
+    },
+    {
+      "name": "walkman_3"
+    },
+    {
+      "name": "walkman_4"
+    },
+    {
+      "name": "walkman_5"
+    },
+    {
+      "name": "playing",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cassette_blue"
+    },
+    {
+      "name": "cassette_gray"
+    },
+    {
+      "name": "cassette_green"
+    },
+    {
+      "name": "cassette_orange"
+    },
+    {
+      "name": "cassette_pink_stripe"
+    },
+    {
+      "name": "cassette_purple"
+    },
+    {
+      "name": "cassette_rainbow"
+    },
+    {
+      "name": "cassette_red_black"
+    },
+    {
+      "name": "cassette_red_stripe"
+    },
+    {
+      "name": "cassette_camo"
+    },
+    {
+      "name": "cassette_orange_blue"
+    },
+    {
+      "name": "cassette_ocean"
+    },
+    {
+      "name": "cassette_aesthetic"
+    },
+    {
+      "name": "cassette_solaris"
+    },
+    {
+      "name": "cassette_ice"
+    },
+    {
+      "name": "cassette_lz"
+    },
+    {
+      "name": "cassette_dam"
+    },
+    {
+      "name": "cassette_worstmap"
+    },
+    {
+      "name": "cassette_weya"
+    },
+    {
+      "name": "cassette_regulation"
+    },
+    {
+      "name": "ribbon_overlay"
+    },
+    {
+      "name": "taperecorder_idle"
+    },
+    {
+      "name": "taperecorder_empty"
+    },
+    {
+      "name": "taperecorder_recording",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "taperecorder_playing",
+      "delays": [
+        [
+          0.15,
+          0.15,
+          0.15,
+          0.15
+        ]
+      ]
+    },
+    {
+      "name": "mob_overlay",
+      "directions": 4
+    },
+    {
+      "name": "music",
+      "directions": 4,
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ],
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "cassette_rising_sun"
+    }
+  ]
+}

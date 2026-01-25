@@ -11,6 +11,8 @@
     size: Huge
   - type: Wieldable
   - type: Eye
+    zoom: 0.5, 0.5
+  - type: RMCStaticZoomLevel
   - type: SurveillanceCameraMicrophone
     blacklist:
       components:
@@ -20,17 +22,8 @@
         - Xeno
   - type: ActiveListener
     range: 10
-  - type: UserInterface
-    interfaces:
-      enum.SurveillanceCameraSetupUiKey.Camera:
-        type: SurveillanceCameraSetupBoundUi
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: SurveillanceCameraEntertainment
-    transmitFrequencyId: SurveillanceCamera
-  - type: SurveillanceCamera
-    networkSet: true
-    setupAvailableNetworks:
-      - SurveillanceCameraEntertainment
+  - type: RMCCamera
+    id: RMCTelevision
+    rename: false
   - type: Corrodible
     isCorrodible: false

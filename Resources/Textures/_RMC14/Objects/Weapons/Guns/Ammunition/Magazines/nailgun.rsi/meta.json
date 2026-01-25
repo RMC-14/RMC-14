@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/168c8a79a3d858a8c531ff7ed0bc3033e47d1d16/icons/obj/items/weapons/guns/ammo_by_faction/colony.dmi",
+  "copyright": "Sprites by VictorJob.",
   "size": {
     "x": 32,
     "y": 32
@@ -12,6 +12,21 @@
     },
     {
       "name": "mag-1"
+    },
+    {
+      "name": "mag-2"
+    },
+    {
+      "name": "mag-3"
+    },
+    {
+      "name": "mag-4"
+    },
+    {
+      "name": "mag-5"
+    },
+    {
+      "name": "mag-6"
     }
   ]
 }

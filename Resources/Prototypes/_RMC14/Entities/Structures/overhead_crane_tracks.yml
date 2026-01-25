@@ -1,0 +1,133 @@
+﻿- type: entity
+  id: RMCOverheadCraneTracks
+  abstract: true
+  name: cargo crane track
+  description: A track for a cargo crane to move along.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: SpriteFade
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/overhead_crane_track.rsi
+    state: cross
+    drawdepth: Overdoors
+    offset: 0,0.45
+  - type: Icon
+    sprite: _RMC14/Structures/overhead_crane_track.rsi
+    state: cross
+  - type: Anchorable
+  - type: Clickable
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack1
+  components:
+  - type: Sprite
+    state: horizontal
+  - type: Icon
+    state: horizontal
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack2
+  components:
+  - type: Sprite
+    state: vertical
+  - type: Icon
+    state: vertical
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack3
+  components:
+  - type: Sprite
+    state: t-joint
+  - type: Icon
+    state: t-joint
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack4
+  components:
+  - type: Sprite
+    state: t-joint2
+  - type: Icon
+    state: t-joint2
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack5
+  components:
+  - type: Sprite
+    state: t-joint3
+  - type: Icon
+    state: t-joint3
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack6
+  components:
+  - type: Sprite
+    state: cross
+  - type: Icon
+    state: cross
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack7
+  components:
+  - type: Sprite
+    state: corner
+  - type: Icon
+    state: corner
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack8
+  components:
+  - type: Sprite
+    state: horizontal_endcap1
+  - type: Icon
+    state: horizontal_endcap1
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack9
+  components:
+  - type: Sprite
+    state: horizontal_endcap2
+  - type: Icon
+    state: horizontal_endcap2
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack10
+  components:
+  - type: Sprite
+    state: vertical_endcap1
+  - type: Icon
+    state: vertical_endcap1
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack11
+  components:
+  - type: Sprite
+    state: vertical_endcap2
+  - type: Icon
+    state: vertical_endcap2
+
+- type: entity
+  parent: RMCOverheadCraneTracks
+  id: RMCOverheadCraneTrack12
+  components:
+  - type: Sprite
+    state: t-joint4
+  - type: Icon
+    state: t-joint4
+
+

@@ -21,4 +21,28 @@ public sealed partial class RMCDoorButtonComponent : Component
 
     [DataField, AutoNetworkedField]
     public string OnState = "doorctrl1";
+
+    [DataField, AutoNetworkedField]
+    public string DeniedState = "doorctrl-denied";
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan? MinimumRoundTimeToPress;
+
+    [DataField, AutoNetworkedField]
+    public bool Used = false;
+
+    [DataField, AutoNetworkedField]
+    public bool UseOnlyOnce = false;
+
+    [DataField, AutoNetworkedField]
+    public LocId NoTimeMessage = "rmc-machines-button-cannot-be-lifted-weya";
+
+    [DataField, AutoNetworkedField]
+    public LocId AlreadyUsedMessage = "rmc-machines-button-already-lifted-weya";
+
+    [DataField, AutoNetworkedField]
+    public LocId? MarineAnnouncement;
+
+    [DataField, AutoNetworkedField]
+    public LocId MarineAnnouncementAuthor = "rmc-announcement-author";
 }

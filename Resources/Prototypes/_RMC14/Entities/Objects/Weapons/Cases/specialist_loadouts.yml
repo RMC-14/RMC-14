@@ -12,23 +12,49 @@
     - id: CMMagazineSniperM96S
     - id: CMMagazineSniperM96SIncendiary
       amount: 2
-    - id: CMMagazineSniperM96S # TODO rmc14 CMMagazineSniperM96SFlak
+    - id: CMMagazineSniperM96SFlak
+      amount: 2
     - id: CMBackpackSniper
     - id: RMCMK80
     - id: CMMagazinePistolMK80
       amount: 2
     - id: CMM96SSniperRifle
+    - id: RMCKitSpotter
 #    - id: CMFacepaintSniper
-#    - id: CMSpotter
   - type: CMChangeUserOnVend
     addComponents:
     - type: SniperWhitelist
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCKitSpotter
+
+- type: entity
+  parent: CMSniperEquipmentCase
+  id: RMCAntiMaterielEquipmentCase
+  name: anti-materiel sniper equipment case
+  description: "A large case containing your very own long-range XM43E1 anti-materiel sniper rifle, M45 ghillie armor and helmet, M42 scout sight, ammunition, spotter equipment, and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: RMCMagazineSniperXM43E1AntiMateriel
+      amount: 2
+    - id: CMBackpackSniper
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCXM43E1AntiMaterielRifle
+    - id: RMCKitSpotter
+  #    - id: CMFacepaintSniper
 
 - type: entity
   parent: RMCBaseEquipmentCase
   id: RMCGrenadeSpecEquipmentCase
   name: heavy grenadier equipment case
-  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various M40 grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
+  description: "A large case containing a heavy-duty multi-shot M83 grenade launcher, M3-G4 grenadier armor and helmet, significant amount of various 30mm grenades and additional pieces of equipment.\n\nNOTE: You cannot put items back inside this case."
   components:
   - type: Sprite
     layers:
@@ -143,6 +169,40 @@
     - type: ScoutWhitelist
 
 - type: entity
+  parent: RMCBaseEquipmentCase
+  id: RMCPyroSpecEquipmentCase
+  name: pyrotechnician equipment case
+  description: "A large case containing M34-T incinerator unit, M35 pyrotechnician armor and helmet, Broiler-T flexible refueling system and additional pieces of equipment.\nNOTE: You cannot put items back inside this case."
+  components:
+  - type: Sprite
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: pyro
+      map: [ label ]
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,3
+  - type: StorageFill
+    contents:
+    - id: CMArmorM35
+    - id: CMArmorHelmetM35
+    - id: RMCBackpackBroiler
+    - id: RMCWeaponFlamerSpec
+    - id: RMCTankFlamerLarge
+    - id: RMCPouchFuelTank
+    - id: CMFireExtinguisher
+    - id: CMFireExtinguisherPortable
+    - id: RMCMK80
+    - id: CMMagazinePistolMK80
+      amount: 2
+    - id: RMCBinoculars
+  - type: CMChangeUserOnVend
+    addComponents:
+    - type: PyroWhitelist
+
+- type: entity
   parent: RMCKitBase
   id: RMCKitLoader
   name: loader kit
@@ -168,6 +228,11 @@
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
   - type: Icon
     sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: loader
+      map: [ label ]
   - type: StorageFill
     contents:
     - id: RMCArmorM3TDemo
@@ -189,5 +254,38 @@
     tags:
     - RMCKitLoader
 
+- type: entity
+  parent: RMCKitBase
+  id: RMCKitSpotter
+  name: spotter kit
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,11,1
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: spotter
+      map: [ label ]
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+    - id: CMArmorM45
+    - id: CMArmorHelmetM45
+    - id: CMGlassesM42ScoutSight
+    - id: CMBackpackSniper
+    - id: RMCLaserDesignatorSpotter
+    - id: CMPamphletSpotter
+  - type: Tag
+    tags:
+    - RMCKitSpotter
+
 - type: Tag
   id: RMCKitLoader
+
+- type: Tag
+  id: RMCKitSpotter

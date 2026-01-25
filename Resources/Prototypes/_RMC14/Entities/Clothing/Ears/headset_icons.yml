@@ -1,0 +1,62 @@
+- type: entity
+  abstract: true
+  parent: CMHeadset
+  id: RMCHeadsetIcons
+  components:
+  - type: GrantMarineIcons
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsWeYa
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - WeYa
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsUNMC
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - UNMC
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsSPP
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - SPP
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsTSE
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - RoyalMarines
+    - TSE
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsCLF
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - CLF
+
+- type: entity
+  abstract: true
+  parent: RMCHeadsetIcons
+  id: RMCHeadsetIconsCMB
+  components:
+  - type: GrantMarineIcons
+    factions:
+    - Bureau
+    - UNMC

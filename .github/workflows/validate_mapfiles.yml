@@ -12,7 +12,7 @@ jobs:
     if: github.actor != 'PJBot' && github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.6.0
+    - uses: actions/checkout@v4.2.2
     - name: Setup Submodule
       run: git submodule update --init
     - name: Pull engine updates
@@ -22,4 +22,4 @@ jobs:
         schema: RobustToolbox/Schemas/mapfile.yml
         path_pattern: .*Resources/Maps/.*
         validators_path: RobustToolbox/Schemas/mapfile_validators.py
-        validators_requirements: RobustToolbox/Schemas/mapfile_requirements.txt
+        validators_requirements: .github/Schemas/mapfile_requirements.txt

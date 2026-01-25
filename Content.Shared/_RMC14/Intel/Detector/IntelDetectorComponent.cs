@@ -1,7 +1,6 @@
 ﻿using Content.Shared._RMC14.MotionDetector;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Map;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -36,7 +35,7 @@ public sealed partial class IntelDetectorComponent : Component, IDetectorCompone
     public TimeSpan LongRefresh = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
-    public List<MapCoordinates> Blips { get; set; } = new();
+    public List<Blip> Blips { get; set; } = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan LastScan { get; set; }

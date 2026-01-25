@@ -1,13 +1,7 @@
-- type: entity
-  parent: CMMobHuman
-  id: RMCHumanCorpse
-  save: false
-  name: unidentified corpse
-  description: I think they're dead.
-  suffix: RMC14, Dead
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCCorpse
   components:
-  - type: RandomHumanoidAppearance
-    randomizeName: false
   - type: Damageable
     damage:
       types:
@@ -15,6 +9,8 @@
         Asphyxiation: 44
         Slash: 77
         Blunt: 43
+  - type: Rank
+    rank: RMCRankCivilian
 #  - type: Loadout # it seems that cm-ss13 doesnt use this loadout
 #    prototypes: [ RMCGearCorpse ]
 

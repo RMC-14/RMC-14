@@ -13,6 +13,15 @@ namespace Content.IntegrationTests.Tests.Chemistry
     [TestOf(typeof(ReactionPrototype))]
     public sealed class TryAllReactionsTest
     {
+        // RMC14
+        private static readonly string[] NoCheckFinalSolution =
+        {
+            // These recipes create H2O, which almost instantly gets turned into Water.
+            // Stress on the almost, as before that happens it can trigger a higher priority reaction.
+            "RMCNapalm",
+            "RMCCLF3"
+        };
+
         [TestPrototypes]
         private const string Prototypes = @"
 - type: entity
@@ -59,6 +68,30 @@ namespace Content.IntegrationTests.Tests.Chemistry
 #pragma warning restore NUnit2045
                     }
 
+                    //Get all possible reactions with the current reagents
+                    var possibleReactions = prototypeManager.EnumeratePrototypes<ReactionPrototype>()
+                        .Where(x => x.Reactants.All(id => solution.Contents.Any(s => s.Reagent.Prototype == id.Key)))
+                        .ToList();
+
+                    //Check if the reaction is the first to occur when heated
+                    foreach (var possibleReaction in possibleReactions.OrderBy(r => r.MinimumTemperature))
+                    {
+                        if (possibleReaction.MinimumTemperature < reactionPrototype.MinimumTemperature && possibleReaction.MixingCategories == reactionPrototype.MixingCategories)
+                        {
+                            Assert.Fail($"The {possibleReaction.ID} reaction may occur before {reactionPrototype.ID} when heated.");
+                        }
+                    }
+
+                    //Check if the reaction is the first to occur when freezing
+                    foreach (var possibleReaction in possibleReactions.OrderBy(r => r.MaximumTemperature))
+                    {
+                        if (possibleReaction.MaximumTemperature > reactionPrototype.MaximumTemperature && possibleReaction.MixingCategories == reactionPrototype.MixingCategories)
+                        {
+                            Assert.Fail($"The {possibleReaction.ID} reaction may occur before {reactionPrototype.ID} when freezing.");
+                        }
+                    }
+
+                    //Now safe set the temperature and mix the reagents
                     solutionContainerSystem.SetTemperature(solutionEnt.Value, reactionPrototype.MinimumTemperature);
 
                     if (reactionPrototype.MixingCategories != null)
@@ -74,6 +107,10 @@ namespace Content.IntegrationTests.Tests.Chemistry
 
                 await server.WaitAssertion(() =>
                 {
+                    // RMC14:
+                    if (NoCheckFinalSolution.Contains(reactionPrototype.ID))
+                        return;
+
                     //you just got linq'd fool
                     //(i'm sorry)
                     var foundProductsMap = reactionPrototype.Products

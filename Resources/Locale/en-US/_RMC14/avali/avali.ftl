@@ -26,7 +26,7 @@ marking-AvaliHairPunk = Punk
 marking-AvaliHairPunk-avali_crest_punk_primary = Primary
 marking-AvaliHairPunk-avali_crest_punk_secondary = Secondary
 
-marking-AvaliEarsBase = (Base) Avali Ears 
+marking-AvaliEarsBase = (Base) Avali Ears
 marking-AvaliEarsBase-ears_avalibase_primary = Top Ears
 marking-AvaliEarsBase-ears_avalibase_secondary = Bottom Ears
 marking-AvaliTailBase = (Base) Avali Tail
@@ -128,3 +128,6 @@ marking-AvaliTailTrimTwo = (Type Two) Trimmed Avali Tail
 marking-AvaliTailTrimTwo-tail_avalibase = Tail Base
 marking-AvaliTailTrimTwo-tail_avali_primary = Primary
 marking-AvaliTailTrimTwo-tail_avali_secondary = Secondary
+marking-AvaliTailAnimated = (Base,wag) Avali tail
+
+rmc-namepreset-firstlastcombined = {$first}{$last}

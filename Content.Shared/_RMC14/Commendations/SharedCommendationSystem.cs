@@ -1,12 +1,18 @@
-﻿using Content.Shared.Database;
+﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared.Database;
 using Content.Shared.GameTicking;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Commendations;
 
 public abstract class SharedCommendationSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _config = default!;
+
     protected readonly List<Commendation> RoundCommendations = new();
+
+    public int CharacterLimit { get; private set; }
 
     public override void Initialize()
     {
@@ -14,6 +20,8 @@ public abstract class SharedCommendationSystem : EntitySystem
 
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<CommendationReceiverComponent, PlayerAttachedEvent>(OnCommendationReceiverPlayerAttached);
+
+        Subs.CVar(_config, RMCCVars.RMCCommendationMaxLength, v => CharacterLimit = v, true);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -48,6 +56,16 @@ public abstract class SharedCommendationSystem : EntitySystem
     public virtual void GiveCommendation(
         Entity<CommendationGiverComponent?, ActorComponent?> giver,
         Entity<CommendationReceiverComponent?> receiver,
+        string name,
+        string text,
+        CommendationType type)
+    {
+    }
+
+    public virtual void GiveCommendationByLastPlayerId(
+        Entity<CommendationGiverComponent?, ActorComponent?> giver,
+        string lastPlayerId,
+        string receiverName,
         string name,
         string text,
         CommendationType type)

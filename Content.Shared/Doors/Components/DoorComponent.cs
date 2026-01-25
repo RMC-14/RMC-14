@@ -256,6 +256,7 @@ public sealed partial class DoorComponent : Component
     #endregion
 
     [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [AutoNetworkedField]
     public bool CanPry = true;
 
     [DataField]
@@ -314,7 +315,6 @@ public enum DoorState : byte
 public enum DoorVisuals : byte
 {
     State,
-    Powered,
     BoltLights,
     EmergencyLights,
     ClosedLights,

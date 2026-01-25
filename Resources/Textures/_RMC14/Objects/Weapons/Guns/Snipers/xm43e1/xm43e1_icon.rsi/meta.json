@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/4047c473d4d2f3e58e68efdec5aa95d0676bf4d1/icons/obj/items/weapons/guns/guns_by_faction/uscm.dmi, https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/guns_by_map/desert/guns_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/guns_by_map/desert/guns_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/fc1e2e5e26259773038df05c5405cb80441b8cc2/icons/obj/items/weapons/guns/guns_by_map/desert/suit_slot.dmi, https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/items/weapons/guns/guns_by_map/desert/back.dmi, edited by github noctyrnal",
+  "size": {
+    "x": 64,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "bolt-open"
+    },
+    {
+      "name": "mag-0"
+    }
+  ]
+}

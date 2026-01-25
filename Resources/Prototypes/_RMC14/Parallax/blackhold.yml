@@ -1,0 +1,14 @@
+- type: parallax
+  id: RMCParallaxBlackhold
+  layers:
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_RMC14/Parallaxes/land.png"
+      slowness: 0.98
+      scale: 1.5,1.5
+    - texture:
+        !type:ImageParallaxTextureSource
+        path: "/Textures/_RMC14/Parallaxes/noise.png"
+      slowness: 0.95
+      scale: "2, 2"
+      scrolling: "0.1, -0.05"

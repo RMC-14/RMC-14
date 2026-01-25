@@ -14,6 +14,7 @@ public sealed class RemoveInvalidWeedsCommand : ToolshedCommand
     public void Run([CommandInvocationContext] IInvocationContext ctx)
     {
         var mapSystem = GetSys<SharedMapSystem>();
+        var turfSystem = GetSys<TurfSystem>();
         var blockQuery = EntityManager.GetEntityQuery<BlockWeedsComponent>();
         var weeds = EntityManager.AllEntityQueryEnumerator<XenoWeedsComponent, TransformComponent>();
         var removed = 0;
@@ -27,7 +28,7 @@ public sealed class RemoveInvalidWeedsCommand : ToolshedCommand
 
             var tile = mapSystem.CoordinatesToTile(gridId, grid, xform.Coordinates);
             var anchored = mapSystem.GetAnchoredEntitiesEnumerator(xform.GridUid.Value, grid, tile);
-            if (mapSystem.TryGetTileRef(gridId, grid, tile, out var tileRef) && !tileRef.GetContentTileDefinition().WeedsSpreadable)
+            if (mapSystem.TryGetTileRef(gridId, grid, tile, out var tileRef) && !turfSystem.GetContentTileDefinition(tileRef).WeedsSpreadable)
             {
                 EntityManager.QueueDeleteEntity(uid);
                 removed++;

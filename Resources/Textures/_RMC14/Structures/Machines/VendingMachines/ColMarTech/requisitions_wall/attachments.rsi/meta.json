@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/structures/machinery/vending.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/5f522ad80e0d57ba86dd2ed43fc896a431ea44ab/icons/obj/structures/machinery/vending.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -11,21 +11,44 @@
       "name": "base"
     },
     {
-      "name": "off"
-    },
-    {
-      "name": "broken"
-    },
-    {
-      "name": "panel"
-    },
-    {
       "name": "vend",
       "delays": [
         [
-          0.1,
-          0.1,
-          0.1
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033,
+          0.033
         ]
       ]
     },
@@ -38,6 +61,15 @@
           0.1
         ]
       ]
+    },
+    {
+      "name": "off"
+    },
+    {
+      "name": "broken"
+    },
+    {
+      "name": "panel"
     }
   ]
 }

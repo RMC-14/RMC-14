@@ -1,7 +1,9 @@
 using System.Numerics;
 using Content.Server.Movement.Components;
 using Content.Server.Physics.Controllers;
+using Content.Shared._RMC14.Fireman;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Conveyor;
 using Content.Shared.Gravity;
 using Content.Shared.Input;
 using Content.Shared.Movement.Pulling.Components;
@@ -84,7 +86,7 @@ public sealed class PullController : VirtualController
     {
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.MovePulledObject, new PointerInputCmdHandler(OnRequestMovePulledObject))
-            .Register<PullingSystem>();
+            .Register<PullController>();
 
         _physicsQuery = GetEntityQuery<PhysicsComponent>();
         _pullableQuery = GetEntityQuery<PullableComponent>();
@@ -122,19 +124,28 @@ public sealed class PullController : VirtualController
 
         var pulled = pullerComp.Pulling;
 
+        // See update statement; this thing overwrites so many systems, DOESN'T EVEN LERP PROPERLY.
+        // We had a throwing version but it occasionally had issues.
+        // We really need the throwing version back.
+        if (TryComp(pulled, out ConveyedComponent? conveyed) && conveyed.Conveying)
+            return false;
+
         if (!_pullableQuery.TryComp(pulled, out var pullable))
             return false;
 
         if (_container.IsEntityInContainer(player))
             return false;
 
+        if (HasComp<BeingFiremanCarriedComponent>(pulled))
+            return false;
+
         pullerComp.NextThrow = _timing.CurTime + pullerComp.ThrowCooldown;
 
         // Cap the distance
         var range = 2f;
-        var fromUserCoords = coords.WithEntityId(player, EntityManager);
+        var fromUserCoords = _transformSystem.WithEntityId(coords, player);
         var userCoords = new EntityCoordinates(player, Vector2.Zero);
-        
+
         if (!_transformSystem.InRange(coords, userCoords, range))
         {
             var direction = fromUserCoords.Position - userCoords.Position;
@@ -150,7 +161,7 @@ public sealed class PullController : VirtualController
             }
 
             fromUserCoords = new EntityCoordinates(player, direction.Normalized() * (range - 0.01f));
-            coords = fromUserCoords.WithEntityId(coords.EntityId);
+            coords = _transformSystem.WithEntityId(fromUserCoords, coords.EntityId);
         }
 
         var moving = EnsureComp<PullMovingComponent>(pulled!.Value);
@@ -229,6 +240,14 @@ public sealed class PullController : VirtualController
 
         while (movingQuery.MoveNext(out var pullableEnt, out var mover, out var pullable, out var pullableXform))
         {
+            // RMC14
+            if (HasComp<BeingFiremanCarriedComponent>(pullableEnt))
+            {
+                RemCompDeferred<PullMovingComponent>(pullableEnt);
+                continue;
+            }
+            // RMC14
+
             if (!mover.MovingTo.IsValid(EntityManager))
             {
                 RemCompDeferred<PullMovingComponent>(pullableEnt);
@@ -241,7 +260,7 @@ public sealed class PullController : VirtualController
             var pullerXform = _xformQuery.Get(puller);
             var pullerPosition = TransformSystem.GetMapCoordinates(pullerXform);
 
-            var movingTo = mover.MovingTo.ToMap(EntityManager, TransformSystem);
+            var movingTo = TransformSystem.ToMapCoordinates(mover.MovingTo);
 
             if (movingTo.MapId != pullerPosition.MapId)
             {
@@ -252,6 +271,13 @@ public sealed class PullController : VirtualController
             if (!TryComp<PhysicsComponent>(pullableEnt, out var physics) ||
                 physics.BodyType == BodyType.Static ||
                 movingTo.MapId != pullableXform.MapID)
+            {
+                RemCompDeferred<PullMovingComponent>(pullableEnt);
+                continue;
+            }
+
+            // TODO: This whole thing is slop and really needs to be throwing again
+            if (TryComp(pullableEnt, out ConveyedComponent? conveyed) && conveyed.Conveying)
             {
                 RemCompDeferred<PullMovingComponent>(pullableEnt);
                 continue;

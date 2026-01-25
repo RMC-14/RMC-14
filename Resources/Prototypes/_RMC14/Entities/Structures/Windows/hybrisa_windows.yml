@@ -9,7 +9,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -27,7 +29,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -47,7 +51,9 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Repairable
@@ -81,6 +87,10 @@
   - type: Construction
     graph: RMCWindowHybrisa
     node: windowHybrisa
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHybrisa
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindow
@@ -95,7 +105,9 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
   - type: Repairable
@@ -126,12 +138,16 @@
                 min: 1
                 max: 1
           - !type:ChangeConstructionNodeBehavior
-            node: windowFrameHybrisa
+            node: windowFrameHybrisaReinforced
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
   - type: Construction
-    graph: RMCWindowHybrisa
-    node: windowHybrisa
+    graph: RMCWindowHybrisaReinforced
+    node: windowHybrisaReinforced
+  - type: DestroyOnXenoPierceScissor
+    spawnPrototype: RMCWindowFrameHybrisa
+    sound:
+      collection: WindowShatter
 
 - type: entity
   parent: CMBaseWindowIndestructible
@@ -139,6 +155,8 @@
   name: hull window
   description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.
   components:
+  - type: Corrodible
+    isCorrodible: false
   - type: Sprite
     sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
     state: strata_window0
@@ -146,7 +164,9 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
 
@@ -164,7 +184,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_medical.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -183,9 +205,39 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window_medical.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaMedicalReinforced
   - type: Construction
     graph: RMCWindowHybrisaMedicalReinforced
     node: windowHybrisaMedicalReinforced
@@ -204,7 +256,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_engineering.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -223,9 +277,39 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window_engineering.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaEngiReinforced
   - type: Construction
     graph: RMCWindowHybrisaEngiReinforced
     node: windowHybrisaEngiReinforced
@@ -244,7 +328,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_office.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -263,9 +349,39 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window_office.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaOfficeReinforced
   - type: Construction
     graph: RMCWindowHybrisaOfficeReinforced
     node: windowHybrisaOfficeReinforced
@@ -284,7 +400,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
     state: prison_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -303,9 +421,39 @@
     sprite: _RMC14/Structures/Windows/spaceport_window.rsi
     state: prison_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePort
   - type: Construction
     graph: RMCWindowHybrisaSpacePort
     node: windowHybrisaSpacePort
@@ -322,7 +470,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
     state: prison_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -341,9 +491,39 @@
     sprite: _RMC14/Structures/Windows/rspaceport_window.rsi
     state: prison_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePortReinforced
   - type: Construction
     graph: RMCWindowHybrisaSpacePortReinforced
     node: windowHybrisaSpacePortReinforced
@@ -360,7 +540,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_spaceport_frame.rsi
     state: prison_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_frame
     mode: CardinalFlags
   - type: Construction
@@ -379,9 +561,39 @@
     sprite: _RMC14/Structures/Windows/spaceport_cellwindow.rsi
     state: prison_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: prison_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaSpacePortCell
   - type: Construction
     graph: RMCWindowHybrisaSpacePortCell
     node: windowHybrisaSpacePortCell
@@ -400,7 +612,9 @@
     sprite: _RMC14/Structures/Windows/Frames/hybrisa_frame_research.rsi
     state: strata_frame0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_frame
     mode: CardinalFlags
   - type: Construction
@@ -419,9 +633,39 @@
     sprite: _RMC14/Structures/Windows/hybrisa_window_research.rsi
     state: strata_window0
   - type: IconSmooth
-    key: walls
+    key: windows
+    additionalKeys:
+    - doors
     base: strata_window
     mode: CardinalFlags
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 600 # excessive damage destroys window and frame
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+      - trigger:
+          !type:DamageTrigger
+          damage: 100
+        behaviors:
+          - !type:PlaySoundBehavior
+            sound:
+              collection: WindowShatter
+          - !type:SpawnEntitiesBehavior
+            spawn:
+              CMShardGlass:
+                min: 1
+                max: 1
+              CMRodMetal:
+                min: 1
+                max: 1
+          - !type:ChangeConstructionNodeBehavior
+            node: windowFrameHybrisaResearchReinforced
   - type: Construction
     graph: RMCWindowHybrisaResearchReinforced
     node: windowHybrisaResearchReinforced

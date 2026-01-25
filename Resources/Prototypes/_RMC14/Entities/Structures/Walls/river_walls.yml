@@ -1,0 +1,170 @@
+# River
+
+- type: entity
+  abstract: true
+  id: RMCWallRiverBase
+  description: A huge chunk of metal used to separate rooms.
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: Walls
+  - type: PlacementReplacement
+    key: walls
+  - type: Airtight
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+        density: 1000
+  - type: RMCDropshipBlocked
+  - type: MinimapColor
+    color: "#ebe5e5ee"
+  - type: IsRoof
+  - type: SunShadowCast
+  - type: Tag
+    tags:
+    - Wall
+  - type: RequireProjectileTarget
+
+- type: entity
+  parent: RMCWallRiverBase
+  id: RMCWallRiver
+  name: river wall
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/river_wall.rsi
+    state: river_1
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/river_wall.rsi
+    state: river_1
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver2
+  components:
+  - type: Sprite
+    state: river_2
+  - type: Icon
+    state: river_2
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver3
+  components:
+  - type: Sprite
+    state: river_3
+  - type: Icon
+    state: river_3
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver4
+  components:
+  - type: Sprite
+    state: river_4
+  - type: Icon
+    state: river_4
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver5
+  components:
+  - type: Sprite
+    state: river_5
+  - type: Icon
+    state: river_5
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver6
+  components:
+  - type: Sprite
+    state: river_6
+  - type: Icon
+    state: river_6
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver7
+  components:
+  - type: Sprite
+    state: river_7
+  - type: Icon
+    state: river_7
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver8
+  suffix: alternative
+  components:
+  - type: Sprite
+    state: river_8
+  - type: Icon
+    state: river_8
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver9
+  suffix: alternative
+  components:
+  - type: Sprite
+    state: river_9
+  - type: Icon
+    state: river_9
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver10
+  components:
+  - type: Sprite
+    state: river_10
+  - type: Icon
+    state: river_10
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver11
+  components:
+  - type: Sprite
+    state: river_11
+  - type: Icon
+    state: river_11
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver12
+  components:
+  - type: Sprite
+    state: river_12
+  - type: Icon
+    state: river_12
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver13
+  components:
+  - type: Sprite
+    state: river_13
+  - type: Icon
+    state: river_13
+
+- type: entity
+  parent: RMCWallRiver
+  id: RMCWallRiver14
+  components:
+  - type: Sprite
+    state: river_14
+  - type: Icon
+    state: river_14

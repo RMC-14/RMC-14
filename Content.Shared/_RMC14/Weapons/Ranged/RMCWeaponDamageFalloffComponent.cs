@@ -16,4 +16,10 @@ public sealed partial class RMCWeaponDamageFalloffComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 ModifiedFalloffMultiplier = 1;
+
+    [DataField, AutoNetworkedField]
+    public float RangeFlat;
+
+    [DataField, AutoNetworkedField]
+    public float RangeFlatModified;
 }

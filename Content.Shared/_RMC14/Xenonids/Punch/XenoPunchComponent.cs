@@ -13,7 +13,10 @@ public sealed partial class XenoPunchComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 1; // 1 tile from start
+    public float Range = 1;
+
+    [DataField, AutoNetworkedField]
+    public float ThrowSpeed = 10;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";

@@ -164,3 +164,162 @@
       state: m_tail_tiger_secondary
     - sprite: _RMC14/Mobs/Felinids/tiger_tail.rsi
       state: m_tail_tiger_tertiary
+
+- type: marking
+  id: FelinidLeopard
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/leopard_tail.rsi
+      state: m_tail_leopard_primary
+    - sprite: _RMC14/Mobs/Felinids/leopard_tail.rsi
+      state: m_tail_leopard_tertiary
+
+- type: marking
+  id: FelinidCatBig
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/catbig_tail.rsi
+      state: m_tail_catbig_primary
+
+- type: marking
+  id: FelinidTigerDouble
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_secondary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_tail_tiger2_tertiary
+
+- type: marking
+  id: FelinidDouble
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/double_tail.rsi
+      state: m_tail_twocat
+
+#Animated Tails
+
+- type: marking
+  id: FelinidTailBasicAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+
+- type: marking
+  id: FelinidTailBasicWithBowAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bow_wag
+
+- type: marking
+  id: FelinidTailBasicWithBellAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bell_wag
+
+- type: marking
+  id: FelinidTailBasicWithBowAndBellAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_tip_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_even_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_tail_stripes_odd_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bow_wag
+  - sprite: _RMC14/Mobs/Felinids/felinid_tails.rsi
+    state: basic_bell_wag
+
+- type: marking
+  id: FelinidLeopardAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/leopard_tail.rsi
+    state: m_tail_leopard_primary_wag
+  - sprite: _RMC14/Mobs/Felinids/leopard_tail.rsi
+    state: m_tail_leopard_tertiary_wag
+
+- type: marking
+  id: FelinidCatBigAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+  - sprite: _RMC14/Mobs/Felinids/catbig_tail.rsi
+    state: m_tail_catbig_primary_wag
+
+- type: marking
+  id: FelinidTigerDoubleAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_primary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_secondary
+    - sprite: _RMC14/Mobs/Felinids/tigerdouble_tail.rsi
+      state: m_waggingtail_tiger2_tertiary
+
+- type: marking
+  id: FelinidDoubleAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/double_tail.rsi
+      state: m_waggingtail_twocat
+
+# Snout
+
+- type: marking
+  id: FelinidCatSnout
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [Felinid]
+  sprites:
+    - sprite: _RMC14/Mobs/Felinids/felinid_snouts.rsi
+      state: snout_cat
+    - sprite: _RMC14/Mobs/Felinids/felinid_snouts.rsi
+      state: snout_cat_nose

@@ -1,6 +1,7 @@
 cm-xeno-egg-clear = We clear the hatched egg.
 cm-xeno-egg-not-developed = The egg is not developed yet.
 
+cm-xeno-egg-failed-must-weeds = The egg must be planted on weeds.
 cm-xeno-egg-failed-must-hive-weeds = The egg must be planted on hive weeds.
 cm-xeno-egg-failed-plant-outside = Best not to plant this thing outside of a containment cell.
 cm-xeno-egg-failed-already-there = There's already an egg there.
@@ -28,3 +29,5 @@ rmc-xeno-egg-plant-self = We start planting the egg.
 rmc-xeno-egg-plant = {CAPITALIZE($user)} starts planting an egg.
 
 rmc-xeno-egg-carrier-death = {CAPITALIZE(THE($xeno))} has dropped some precious eggs!
+
+rmc-xeno-fragile-egg-prefix = fragile {$baseName}

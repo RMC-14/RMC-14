@@ -11,7 +11,7 @@
   - For beginners, becoming a drone is recommended. Drones are responsible for building the hive defenses.
 
   <Box>
-    <GuideEntityEmbed Entity="CMGuidebookActionXenoEvolve"/>
+    <GuideEntityEmbed Entity="RMCGuidebookActionXenoEvolve"/>
     <GuideEntityEmbed Entity="CMXenoDrone"/>
   </Box>\n
 
@@ -26,7 +26,7 @@
   - Another important job of the Drone is to plant weeds.
   - Weeds allow us to rest to regain our health and energy!
   - We can also only construct the hive on weeds.
-  <GuideEntityEmbed Entity="CMGuidebookActionXenoRest"/>
+  <GuideEntityEmbed Entity="RMCGuidebookActionXenoRest"/>
   <Box>
     <GuideEntityEmbed Entity="XenoWeeds"/>
     <GuideEntityEmbed Entity="XenoWeedsSource"/>
@@ -34,20 +34,25 @@
   </Box>\n
 
   - Our final goal is to protect the Queen and plant her eggs so our hive may grow!
-  - Eggs can be placed on weeds, and contain parasites.
+  - Eggs can be placed on hive weeds, and contain parasites.
   - Parasites can be extracted from the eggs, but be wary that parasites have short lifespans away from the weeds!
 
   <Box>
     <GuideEntityEmbed Entity="CMXenoQueen"/>
     <GuideEntityEmbed Entity="XenoEgg"/>
-    <GuideEntityEmbed Entity="XenoWeeds"/>
+    <GuideEntityEmbed Entity="XenoHiveWeeds"/>
     <GuideEntityEmbed Entity="CMXenoParasite"/>
   </Box>\n
 
+  - We can also devour captures and transport them to the hive for nesting!
+  - Find a tall and tackle them by right clicking on them with harm mode enabled.
+  - Once they are restrained, click and drag their sprite into yours to start devouring them, remember to keep tackling after!
+  - After devouring, walk to the closest hive to infect them on a egg, then to nest them do the same motion onto a wall.
+
   - When a parasite is placed on a living host, a new larva will be born! Rejoice!
-  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall as soon as possible.
+  - Hosts that hold the growing larva are very precious, and should be secured to a resin wall supported by hive weeds as soon as possible.
   <Box>
-    <GuideEntityEmbed Entity="SalvageHumanCorpse"/>
+    <GuideEntityEmbed Entity="RMCGuidebookCorpseColonistBurst"/>
     <GuideEntityEmbed Entity="CMXenoLarva"/>
   </Box>\n
 

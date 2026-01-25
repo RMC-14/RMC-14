@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMProvostDeputyMarshal
-  name: rmc-job-name-provost-deputy-marshal
-  description: rmc-job-description-provost-deputy-marshal
+  name: rmc-job-name-corp-provost-deputy-marshal
+  description: rmc-ghost-role-information-provost-description
   playTimeTracker: CMJobProvostDeputyMarshal
   ranks:
     RMCRankProvostDeputyMarshal: []
@@ -33,77 +33,41 @@
         RMCSkillPowerLoader: 2
         RMCSkillSmartGun: 1
         RMCSkillVehicles: 2
-    - type: JobPrefix
-      prefix: rmc-job-prefix-provost-deputy-marshal
     - type: MarineOrders
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-deputy-marshal
+    - type: RMCTrackable
   hidden: true
-
-- type: entity
-  parent: MarkerBase
-  id: RMCSpawnerProvostDeputyMarshal
-  name: provost spawner deputy marshal
-  suffix: Spawner, Whitelisted COs
-  components:
-  - type: Sprite
-    layers:
-    - state: red
-  - type: ConditionalSpawner
-    prototypes:
-    - RMCRandomHumanoidProvostDeputyMarshal
 
 - type: entity
   id: RMCRandomHumanoidProvostDeputyMarshal
   name: provost ghost role deputy marshal
-  suffix: Role, Whitelisted COs
+  suffix: Spawner, Player, Friendly, Whitelisted COs
   components:
   - type: Sprite
-    sprite: Markers/cross.rsi
-    state: red
+    sprite: _RMC14/Objects/CMIDs/provost.rsi
+    state: provost
   - type: RandomHumanoidSpawner
     settings: RMCProvostDeputyMarshal
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid
+  parent: RMCEventHumanoid
   id: RMCProvostDeputyMarshal
   components:
   - type: GhostRole
-    name: rmc-ghost-role-information-provost-deputy-marshal-name
-    description: rmc-ghost-role-information-provost-deputy-marshal-description
-    rules: ghost-role-information-nonantagonist-rules
+    name: rmc-job-name-corp-provost-deputy-marshal
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostDeputyMarshal
     raffle:
       settings: short
-  - type: Loadout
-    prototypes: [ RMCGearProvostDeputyMarshal ]
-  - type: Skills
-    skills:
-      RMCSkillConstruction: 2
-      RMCSkillCqc: 1
-      RMCSkillEndurance: 5
-      RMCSkillEngineer: 2
-      RMCSkillExecution: 1
-      RMCSkillFirearms: 1
-      RMCSkillFireman: 2
-      RMCSkillIntel: 2
-      RMCSkillJtac: 4
-      RMCSkillLeadership: 3
-      RMCSkillMedical: 3
-      RMCSkillMeleeWeapons: 1
-      RMCSkillOverwatch: 1
-      RMCSkillPolice: 2
-      RMCSkillPowerLoader: 2
-      RMCSkillSmartGun: 1
-      RMCSkillVehicles: 2
-  - type: MarineOrders
-  - type: DemoSpecWhitelist
-  - type: GrenadeSpecWhitelist
-  - type: ScoutWhitelist
-  - type: SniperWhitelist
-  - type: PyroWhitelist
+  - type: GhostRoleApplySpecial
 
 - type: startingGear
   id: RMCGearProvostDeputyMarshal
@@ -123,19 +87,3 @@
 
 - type: playTimeTracker
   id: CMJobProvostDeputyMarshal
-
-- type: entity
-  parent: CMIDCardGold # TODO RMC14 provost id
-  id: RMCIDCardProvostDeputyMarshal
-  name: provost deputy marshal ID card
-  description: Issued to members of the Provost Office.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-    state: provost
-  - type: Clothing
-    slots:
-    - idcard
-    sprite: _RMC14/Objects/CMIDs/provost.rsi
-  - type: PresetIdCard
-    job: CMProvostDeputyMarshal

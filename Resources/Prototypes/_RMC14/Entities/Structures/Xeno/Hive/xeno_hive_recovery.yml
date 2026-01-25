@@ -1,7 +1,7 @@
 - type: entity
   id: HiveRecoveryNodeXeno
   parent: BaseHiveStructure
-  name: Recovery Node
+  name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum.
   components:
   - type: Sprite
@@ -26,11 +26,17 @@
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: DoAfter
+  - type: XenoStructureMapTracked
+  - type: TacticalMapTracked
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: recovery_node
 
 - type: entity
   id: HiveRecoveryNodeXenoConstructionNode
   parent: BaseHiveStructureNode
-  name: Recovery Node
+  name: recovery node
   description: A warm, soothing light source that pulsates with a faint hum. Looks like a marker for something.
   suffix: Construction
   components:

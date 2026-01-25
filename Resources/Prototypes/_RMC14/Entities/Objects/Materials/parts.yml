@@ -31,7 +31,18 @@
   - type: RMCRefinable
     spawn:
     - id: CMSheetMetal1
-    #RMC TODO: Lattice
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 1875
+  - type: RMCConstructionItem
+    buildable:
+    - RMCGrilleBuild
+    - RMCFenceBuild
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMRodMetal
@@ -64,7 +75,7 @@
   components:
   - type: PhysicalComposition
     materialComposition:
-      CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+      CMPlasteel: 3750
   - type: Stack
     count: 60
     stackType: CMRodPlasteel
@@ -81,6 +92,10 @@
     node: CMRodPlasteel
   - type: StackPrice
     price: 15
+  - type: RMCRefinable
+    amount: 2
+    spawn:
+    - id: CMSheetPlasteel1
 
 - type: entity
   parent: CMRodPlasteel

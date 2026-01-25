@@ -63,3 +63,9 @@
   name: Private
   prefix: PVT.
   paygrade: E1
+
+- type: rank
+  id: RMCRankRecruit
+  name: Recruit
+  prefix: Rct.
+  paygrade: E0
