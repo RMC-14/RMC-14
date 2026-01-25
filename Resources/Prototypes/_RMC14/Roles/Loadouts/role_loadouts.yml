@@ -563,6 +563,7 @@
   points: 7
   groups:
   - ProvostRoleSpecificOuterwearRMC
+  - ProvostWeaponRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
