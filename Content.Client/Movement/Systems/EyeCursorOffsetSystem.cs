@@ -19,7 +19,7 @@ public sealed partial class EyeCursorOffsetSystem : EntitySystem
     // This value is here to make sure the user doesn't have to move their mouse
     // all the way out to the edge of the screen to get the full offset.
     static private float _edgeOffset = 0.9f;
-    private const float zoomAmount = 1.2f;
+    private const float zoomAmount = 1.5f;
 
     public override void Initialize()
     {

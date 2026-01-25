@@ -79,7 +79,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
-    private const float offsetAmount = 7f;
+    private const float offsetAmount = 10f;
 
     public override void Initialize()
     {

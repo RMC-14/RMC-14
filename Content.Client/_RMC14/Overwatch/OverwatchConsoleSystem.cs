@@ -7,6 +7,7 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Map;
 using Content.Client.Movement.Components;
+using Content.Shared.Movement.Components;
 using System.Numerics;
 using Content.Shared.Movement.Systems;
 
@@ -25,7 +26,8 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     private readonly Vector2 _offsetLimit = new(offsetAmount, offsetAmount);
     private EntityUid? _overwatchActor = null;
     private OverwatchDirection? _pendingOffsetDirection = null;
-    private const float offsetAmount = 7f;
+    private const float offsetAmount = 10f;
+    private const float zoomAmount = 1.5f;
     public override void Initialize()
     {
         base.Initialize();
@@ -150,8 +152,10 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             comp.CurrentPosition = comp.TargetPosition;
             Dirty(_overwatchActor.Value, comp);
             var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
-            if (_player.LocalEntity != null)
-                eyeSystem.UpdateZoom(_player.LocalEntity.Value);
+            // Set zoom back to default if there's no active offset
+            float zoom = (comp.CurrentPosition != Vector2.Zero) ? zoomAmount : 1.0f;
+            if (_player.LocalEntity != null && TryComp(_player.LocalEntity.Value, out ContentEyeComponent? eyeComp))
+                eyeSystem.SetZoom(_player.LocalEntity.Value, new Vector2(zoom, zoom), ignoreLimits: true, eye: eyeComp);
 
             if (_pendingOffsetDirection != null && comp.CurrentPosition == Vector2.Zero)
             {
@@ -200,8 +204,8 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
             Dirty(_overwatchActor.Value, comp);
             var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
-            if (_player.LocalEntity != null)
-                eyeSystem.UpdateZoom(_player.LocalEntity.Value);
+            if (_player.LocalEntity != null && TryComp(_player.LocalEntity.Value, out ContentEyeComponent? eyeComp))
+                eyeSystem.SetZoom(_player.LocalEntity.Value, new Vector2(zoomAmount, zoomAmount), ignoreLimits: true, eye: eyeComp);
         }
     }
 
