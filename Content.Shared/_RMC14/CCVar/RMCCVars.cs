@@ -504,6 +504,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCChatSquadColorMode =
         CVarDef.Create("rmc.chat_squad_color_mode", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
+        CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);
 
@@ -539,4 +542,7 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<int> RMCNewResinPreventCollideTimeSeconds =
         CVarDef.Create("rmc.new_resin_prevent_collide_time_seconds", 5, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<string> RMCChemMasterPresets =
+        CVarDef.Create("rmc.chemmaster_presets", "", CVar.CLIENT | CVar.ARCHIVE);
 }
