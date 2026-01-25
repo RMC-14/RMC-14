@@ -57,7 +57,7 @@
   parent: RMCMarineUniformBase
   id: CMJumpsuitWardenBlue
   name: blue warden uniform
-  description: The insignia on this uniform tells you that this uniform belongs to the Warden..
+  description: The insignia on this uniform tells you that this uniform belongs to the Warden.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/MP/Warden/blue.rsi

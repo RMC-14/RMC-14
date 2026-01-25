@@ -114,6 +114,34 @@
     # TODO RMC14 tramadol and perixadon pills, splint
 
 - type: entity
+  parent: RMCBeltMedicBagSPP
+  id: RMCBeltMedicBagSPPFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBurnKit10
+      amount: 2
+    - id: CMTraumaKit10
+      amount: 2
+    - id: CMEpinephrineAutoInjector
+      amount: 1
+    - id: CMDexalinPlusAutoInjector
+      amount: 1
+    # TODO RMC14 oxycodone autoinjector
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+
+- type: entity
   parent: RMCBeltGrenade
   id: RMCBeltGrenadeFilled
   suffix: Filled
@@ -357,6 +385,7 @@
     - id: WeaponNailgun
       amount: 1
 
+# Pistol Holsters
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolHandcannonFilled
@@ -367,3 +396,58 @@
     - id: RMCMagazinePistolHandcannon
       amount: 6
     - id: RMCWeaponPistolHandcannon
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM77BeltFilled
+  suffix: Filled, M77
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilled
+  suffix: Filled, M77, PMC
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 6
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCM77BeltPMCFilledNearEmpty
+  suffix: Filled, M77, PMC, Near Empty
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM77AP
+      amount: 3
+    - id: RMCWeaponPistolM77
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
