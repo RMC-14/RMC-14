@@ -145,6 +145,28 @@
     - RMCWeaponPistolHandcannonWyvern
 
 - type: entity
+  parent: RMCWeaponPistolHandcannonGold
+  id: RMCWeaponPistolHandcannonProvost
+  name: provost handcannon
+  description: A heavily modified Peregrine Handcannon custom crafted for a dedicated member of the Provost Marshal Office, a reminder that every law has an enforcer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_provost.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/handcannon_provost.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolHandcannonProvost
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 2
+
+- type: entity
   parent: CMBaseMagazinePistol
   id: RMCMagazinePistolHandcannon
   name: peregrine handcannon magazine (.50)
@@ -317,6 +339,9 @@
 
 - type: Tag
   id: RMCWeaponPistolHandcannonWyvern
+
+- type: Tag
+  id: RMCWeaponPistolHandcannonProvost
 
 - type: Tag
   id: RMCMagazinePistolHandcannon
