@@ -20,8 +20,6 @@ public sealed class TargetingOverlay : Overlay
     private readonly IGameTiming _timing;
     private readonly TransformSystem _transform;
 
-    private static readonly ResPath TargetRsiPath = new("/Textures/_RMC14/Effects/targeted.rsi");
-
     // Animation timer
     private float _animTime;
 
@@ -33,6 +31,10 @@ public sealed class TargetingOverlay : Overlay
         _transform = entManager.System<TransformSystem>();
     }
 
+    /// <summary>
+    ///     Draws a line between any targeted entities and the entities targeting them.
+    ///     Also draws a targeting visual on the targeted entity.
+    /// </summary>
     protected override void Draw(in OverlayDrawArgs args)
     {
         var query = _entManager.EntityQueryEnumerator<RMCTargetedComponent>();
@@ -77,7 +79,6 @@ public sealed class TargetingOverlay : Overlay
                 worldHandle.DrawRect(rotated, color.WithAlpha(alpha));
             }
 
-
             if (!xformQuery.TryGetComponent(uid, out var targetXform))
                 continue;
 
@@ -102,14 +103,14 @@ public sealed class TargetingOverlay : Overlay
                     break;
             }
 
-            var lockOnRsi = _sprite.GetState(new SpriteSpecifier.Rsi(TargetRsiPath, lockOnState));
+            var lockOnRsi = _sprite.GetState(new SpriteSpecifier.Rsi(targeted.RsiPath, lockOnState));
             var time = _animTime % lockOnRsi.AnimationLength;
-            var sum = 0f;
+            var delay = 0f;
             var frameIndex = 0;
             for (var i = 0; i < lockOnRsi.DelayCount; i++)
             {
-                sum += lockOnRsi.GetDelay(i);
-                if (!(time < sum))
+                delay += lockOnRsi.GetDelay(i);
+                if (!(time < delay))
                     continue;
 
                 frameIndex = i;
@@ -119,7 +120,6 @@ public sealed class TargetingOverlay : Overlay
             var lockonTexture = lockOnRsi.GetFrames(RsiDirection.South)[frameIndex];
             var centerOffset = new Vector2(lockonTexture.Width / 2f / EyeManager.PixelsPerMeter, lockonTexture.Height / 2f / EyeManager.PixelsPerMeter);
             worldHandle.DrawTexture(lockonTexture, worldPosCross - centerOffset);
-
 
             if (directionState == null || !targeted.ShowDirection)
                 continue;
@@ -137,7 +137,7 @@ public sealed class TargetingOverlay : Overlay
                 _ => RsiDirection.South,
             };
 
-            var directionRsi = _sprite.GetState(new SpriteSpecifier.Rsi(TargetRsiPath, directionState));
+            var directionRsi = _sprite.GetState(new SpriteSpecifier.Rsi(targeted.RsiPath, directionState));
             var directionTexture = directionRsi.GetFrame(rsiDirection, 0);
             worldHandle.DrawTexture(directionTexture, worldPosCross - centerOffset);
         }
