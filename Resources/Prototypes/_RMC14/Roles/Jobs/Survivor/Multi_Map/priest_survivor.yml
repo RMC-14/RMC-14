@@ -11,7 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills: RMCSkillPresetSurvivorChaplain
+      preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetPriest
     - type: MarineOrders
