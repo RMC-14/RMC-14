@@ -149,7 +149,7 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
 
-            // Only while watching overwatch cameras
+            // Only while viewing overwatch cameras
             var overwatch = contexts.New("overwatch", human);
             overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustNorth);
             overwatch.AddFunction(CMKeyFunctions.RMCCameraAdjustWest);

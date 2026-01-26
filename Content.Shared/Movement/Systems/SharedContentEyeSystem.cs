@@ -183,16 +183,6 @@ public abstract class SharedContentEyeSystem : EntitySystem
         _eye.SetPvsScale((uid, eye), 1 + ev.Scale + evRelayed.Scale);
     }
 
-    public void UpdateZoom(EntityUid uid, ContentEyeComponent? contentEye = null, EyeComponent? eye = null)
-    {
-        if (!Resolve(uid, ref contentEye) || !Resolve(uid, ref eye))
-            return;
-
-        var ev = new GetEyeZoomEvent(Vector2.One);
-        RaiseLocalEvent(uid, ref ev);
-        _eye.SetZoom(uid, ev.Zoom, eye);
-    }
-
     /// <summary>
     /// Sendable from client to server to request a target zoom.
     /// </summary>

@@ -79,7 +79,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
-    private const float offsetAmount = 10f;
+    private const float offsetAmount = 10f; // 10 matches binoculars offset
 
     public override void Initialize()
     {
@@ -678,7 +678,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        // Reset eye offset when no longer watching cameras
+        // Reset eye offset when no longer viewing cameras
         _eye.SetOffset(watcher, Vector2.Zero);
         _eye.SetTarget(watcher, null);
     }
