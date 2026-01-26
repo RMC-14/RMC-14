@@ -1,4 +1,3 @@
-using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -6,20 +5,8 @@ namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedHefaKnightsExplosionSystem))]
-public sealed partial class HefaSwordSplosionComponent : Component
+public sealed partial class HefaHelmetComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public bool Primed;
-
-    [DataField]
-    public SoundSpecifier? PrimeSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/click.ogg");
-
-    [DataField]
-    public LocId PrimedPopup = "rmc-hefa-sword-primed";
-
-    [DataField]
-    public LocId DeprimedPopup = "rmc-hefa-sword-deprimed";
-
     [DataField]
     public EntProtoId ShrapnelPrototype = "CMProjectileShrapnel";
 
@@ -27,7 +14,7 @@ public sealed partial class HefaSwordSplosionComponent : Component
     public int ShrapnelCount = 48;
 
     [DataField]
-    public float SpreadAngle = 90f;
+    public float SpreadAngle = 360f;
 
     [DataField]
     public float ProjectileSpeed = 20f;
@@ -37,4 +24,11 @@ public sealed partial class HefaSwordSplosionComponent : Component
 
     [DataField]
     public float MaxVelocity = 6f;
+
+    /// <summary>
+    /// The entity wearing this helmet, tracked for proper explosion origin.
+    /// Set when equipped, cleared when unequipped.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Wearer;
 }

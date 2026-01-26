@@ -138,7 +138,7 @@
 
 # HEFA
 - type: entity
-  parent: RMCArmorHelmetM3G4
+  parent: [RMCArmorHelmetM3G4, CMGrenadeBase]
   id: RMCArmorHelmetHEFA
   name: HEFA helmet
   description: For some reason, seeing this helmet causes you to feel extremely distressed.
@@ -153,44 +153,34 @@
     quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: {}
-  # Uses same explosion components as CMGrenadeFrag
-  - type: ExplodeOnTrigger
+  # Uses custom HefaHelmet component instead of ProjectileGrenade to properly handle equipped explosions.
+  # No ExplodeOnTrigger - HefaHelmet handles both explosion and shrapnel via TriggerEvent.
   - type: Explosive
-    explosionType: RMC
-    maxIntensity: 8
+    maxIntensity: 8 # max 40 brute 40 burn
     intensitySlope: 4
     totalIntensity: 110
-    deleteAfterExplosion: true
-  - type: ProjectileGrenade
-    fillPrototype: CMProjectileShrapnel
-    capacity: 48
-    directHit: false
-  - type: ContainerContainer
-    containers:
-      cluster-payload: !type:Container
+    deleteAfterExplosion: false
+  - type: HefaHelmet
+    shrapnelPrototype: CMProjectileShrapnel
+    shrapnelCount: 48
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
-  - type: OnUseTimerTrigger
-    delay: 4
-    beepSound:
-      path: "/Audio/_RMC14/Explosion/armbomb.ogg"
-      params:
-        volume: -5
-    initialBeepDelay: 0
-    beepInterval: 10
-    doPopup: false
-  - type: ChangeItemSizeOnTimerTrigger
-  - type: CancelUseWithCloak
-  - type: Appearance
-  - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - RMCHelmetHEFA
+  - type: GenericVisualizer
+    visuals: {}
   - type: TimerTriggerVisuals
     primingSprite: icon-up
     unprimedSprite: icon
   - type: TimerTriggerClothingVisuals
     primedPrefix: up
+
+- type: Tag
+  id: RMCHelmetHEFA
 
 # CBRN
 - type: entity
