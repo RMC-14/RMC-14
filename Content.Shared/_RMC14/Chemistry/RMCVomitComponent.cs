@@ -1,4 +1,7 @@
+using Content.Shared.Chemistry.Reagent;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry;
 
@@ -45,4 +48,17 @@ public sealed partial class RMCVomitComponent : Component
 
     [DataField]
     public float ToxinHeal = 3f;
+
+    /// <summary>
+    /// Multiplier for how much of the chemical solution gets added to vomit (default 10%).
+    /// </summary>
+    [DataField]
+    public float ChemMultiplier = 0.1f;
+
+    [DataField]
+    public ProtoId<ReagentPrototype> VomitPrototype = "Vomit";
+
+    [DataField]
+    public SoundSpecifier VomitSound = new SoundCollectionSpecifier("Vomit",
+        AudioParams.Default.WithVariation(0.2f).WithVolume(-4f));
 }

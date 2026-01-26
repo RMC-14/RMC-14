@@ -1,8 +1,3 @@
-using Content.Server.Body.Systems;
-using Content.Server.Fluids.EntitySystems;
-using Content.Server.Forensics;
-using Content.Server.Popups;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Synth;
 using Content.Shared.Body.Components;
@@ -12,30 +7,33 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Fluids;
+using Content.Shared.Forensics;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
+using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Robust.Server.Audio;
-using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Chemistry;
+namespace Content.Shared._RMC14.Chemistry;
 
 public sealed class RMCVomitSystem : EntitySystem
 {
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly BloodstreamSystem _bloodstream = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly ForensicsSystem _forensics = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly PuddleSystem _puddle = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
 
@@ -74,8 +72,7 @@ public sealed class RMCVomitSystem : EntitySystem
         if (HasComp<SynthComponent>(uid))
             return;
 
-        // Corpses don't puke
-        if (TryComp<MobStateComponent>(uid, out var mobState) && mobState.CurrentState == MobState.Dead)
+        if (_mobState.IsDead(uid))
             return;
 
         // Check if already vomiting (lastpuke check)
@@ -127,22 +124,14 @@ public sealed class RMCVomitSystem : EntitySystem
     /// </summary>
     public void DoVomit(EntityUid uid, TimeSpan stunDuration, float hungerLoss = -40f, float toxinHeal = 3f)
     {
-        if (TryComp<MobStateComponent>(uid, out var mobState) && mobState.CurrentState == MobState.Dead)
+        if (_mobState.IsDead(uid))
             return;
 
-        // Apply stun
         if (stunDuration > TimeSpan.Zero)
             _stun.TryStun(uid, stunDuration, true);
 
-        _popup.PopupEntity(
-            Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))),
-            uid);
-        _popup.PopupEntity(
-            Loc.GetString("rmc-vomit-self"),
-            uid,
-            uid);
-
-        _audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/Fluids/splat.ogg"), uid);
+        // Get or ensure component for accessing configuration values
+        var vomitComp = EnsureComp<RMCVomitComponent>(uid);
 
         // Create vomit solution
         var solution = new Solution();
@@ -163,27 +152,26 @@ public sealed class RMCVomitSystem : EntitySystem
         // Add 10% of chemicals from bloodstream to the vomit - code from upstream VomitSystem
         if (TryComp<BloodstreamComponent>(uid, out var bloodStream))
         {
-            const float chemMultiplier = 0.1f;
-
             if (_solutionContainer.ResolveSolution(uid, bloodStream.ChemicalSolutionName, ref bloodStream.ChemicalSolution))
             {
                 var vomitChemstreamAmount = _solutionContainer.SplitSolution(bloodStream.ChemicalSolution.Value, vomitAmount);
-                vomitChemstreamAmount.ScaleSolution(chemMultiplier);
+                vomitChemstreamAmount.ScaleSolution(vomitComp.ChemMultiplier);
                 solution.AddSolution(vomitChemstreamAmount, _proto);
 
                 vomitAmount -= (float) vomitChemstreamAmount.Volume;
             }
 
-            solution.AddReagent(new ReagentId("Vomit", _bloodstream.GetEntityBloodData(uid)), vomitAmount);
+            solution.AddReagent(new ReagentId(vomitComp.VomitPrototype, _bloodstream.GetEntityBloodData(uid)), vomitAmount);
         }
         else
         {
-            solution.AddReagent(new ReagentId("Vomit", null), vomitAmount);
+            solution.AddReagent(new ReagentId(vomitComp.VomitPrototype, null), vomitAmount);
         }
 
         if (_puddle.TrySpillAt(uid, solution, out var puddle, false))
         {
-            _forensics.TransferDna(puddle, uid, false);
+            var ev = new TransferDnaEvent { Donor = uid, Recipient = puddle, CanDnaBeCleaned = false };
+            RaiseLocalEvent(uid, ref ev);
         }
 
         if (TryComp<HungerComponent>(uid, out var hunger))
@@ -195,5 +183,12 @@ public sealed class RMCVomitSystem : EntitySystem
             var healing = rmcDamageable.DistributeHealingCached(uid, ToxinGroup, toxinHeal);
             _damageable.TryChangeDamage(uid, healing, true, interruptsDoAfters: false);
         }
+
+        if (!_netManager.IsServer)
+            return;
+
+        _audio.PlayPvs(vomitComp.VomitSound, uid);
+        _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
+        _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
     }
 }
