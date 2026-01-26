@@ -109915,8 +109915,7 @@ entities:
       pos: 166.5,84.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13841
@@ -109925,8 +109924,7 @@ entities:
       pos: 167.5,83.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13842
@@ -109935,8 +109933,7 @@ entities:
       pos: 167.5,82.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13843
@@ -109945,8 +109942,7 @@ entities:
       pos: 167.5,81.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13844
@@ -109955,8 +109951,7 @@ entities:
       pos: 166.5,80.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13845
@@ -109965,8 +109960,7 @@ entities:
       pos: 165.5,80.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13847
@@ -109975,8 +109969,7 @@ entities:
       pos: 186.5,133.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13848
@@ -109985,8 +109978,7 @@ entities:
       pos: 187.5,133.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13849
@@ -109995,8 +109987,7 @@ entities:
       pos: 188.5,136.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13850
@@ -110005,8 +109996,7 @@ entities:
       pos: 188.5,138.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13851
@@ -110015,8 +110005,7 @@ entities:
       pos: 188.5,139.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13852
@@ -110025,8 +110014,7 @@ entities:
       pos: 188.5,137.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13853
@@ -110035,8 +110023,7 @@ entities:
       pos: 186.5,139.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13854
@@ -110045,8 +110032,7 @@ entities:
       pos: 186.5,137.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13855
@@ -110055,8 +110041,7 @@ entities:
       pos: 186.5,136.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13857
@@ -110065,8 +110050,7 @@ entities:
       pos: 187.5,142.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13858
@@ -110075,8 +110059,7 @@ entities:
       pos: 186.5,142.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13859
@@ -110085,8 +110068,7 @@ entities:
       pos: 55.5,154.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
   - uid: 13861
@@ -110095,8 +110077,7 @@ entities:
       pos: 59.5,154.5
       parent: 1
     missingComponents:
-    - MarineMapTracked
-    - XenoMapTracked
+    - TacticalMapLayerTracked
     - TacticalMapTracked
     - TacticalMapIcon
 - proto: RMCGlassesJensen
