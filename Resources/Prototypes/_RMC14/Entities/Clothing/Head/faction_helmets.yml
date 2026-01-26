@@ -207,6 +207,16 @@
 - type: Tag
   id: RMCHelmetHEFA
 
+- type: entity
+  parent: RMCArmorHelmetHEFA
+  id: RMCArmorHelmetHEFAFilled
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 2
+
 # CBRN
 - type: entity
   parent: ArmorHelmetM10
