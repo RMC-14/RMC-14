@@ -69,9 +69,13 @@
     netsync: false
     color: "#FFFFFF"
     mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: RemoveComponents
+    components:
+    - type: Storage
+    - type: LimitedStorage
 
 - type: entity
-  parent: RMCSuitEVAUNMC
+  parent: RMCSuitEVABase
   id: RMCSuitEVASGO
   name: smart gun compatable pressure suit
   suffix: Smart Gun harness
