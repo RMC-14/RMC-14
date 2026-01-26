@@ -93,8 +93,7 @@ public sealed class LineSystem : EntitySystem
             for (var j = 0; j < coords.Count; j++)
             {
                 var entityCoords = coords[j];
-                var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
-                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, direction, hitBlocker, out blocker, out var hitBlockerOverride);
+                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride);
                 hitBlocker = hitBlockerOverride;
 
                 if (j == 0 && blocked && !hitBlocker)
@@ -136,7 +135,7 @@ public sealed class LineSystem : EntitySystem
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, Angle angle, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride)
     {
         blocker = default;
         hitBlockerOverride = hitBlocker;
@@ -153,7 +152,6 @@ public sealed class LineSystem : EntitySystem
                     continue;
 
                 var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
-                var direction = angle.GetDir();
                 if (_directionalBlock.IsBehindTarget(uid.Value, coords.EntityId, previousCoords))
                 {
                     blocker = uid.Value;
@@ -164,24 +162,6 @@ public sealed class LineSystem : EntitySystem
                     blocker = uid.Value;
                     hitBlockerOverride = false;
                     return true;
-                }
-
-                if (!direction.IsCardinal())
-                {
-                    var blocked = direction switch
-                    {
-                        Direction.SouthEast => barricadeDir is Direction.North or Direction.West,
-                        Direction.NorthEast => barricadeDir is Direction.South or Direction.West,
-                        Direction.NorthWest => barricadeDir is Direction.South or Direction.East,
-                        Direction.SouthWest => barricadeDir is Direction.North or Direction.East,
-                        _ => false,
-                    };
-
-                    if (blocked)
-                    {
-                        blocker = uid.Value;
-                        return true;
-                    }
                 }
             }
             else if (_doorQuery.TryComp(uid, out var door))
