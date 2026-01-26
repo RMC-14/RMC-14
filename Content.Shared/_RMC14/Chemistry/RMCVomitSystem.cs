@@ -28,7 +28,6 @@ public sealed class RMCVomitSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedBloodstreamSystem _bloodstream = default!;
-    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly HungerSystem _hunger = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
@@ -135,41 +134,41 @@ public sealed class RMCVomitSystem : EntitySystem
 
         // Create vomit solution
         var solution = new Solution();
-        var vomitAmount = MathF.Abs(hungerLoss) / 4f;
+        var solutionSize = MathF.Abs(hungerLoss) / 3f;
 
-        // Empty the stomach contents into the vomit - code from upstream VomitSystem
-        var stomachList = _body.GetBodyOrganEntityComps<StomachComponent>(uid);
-        foreach (var stomach in stomachList)
-        {
-            if (_solutionContainer.ResolveSolution(stomach.Owner, StomachSystem.DefaultSolutionName, ref stomach.Comp1.Solution, out var stomachSol))
-            {
-                solution.AddSolution(stomachSol, _proto);
-                stomachSol.RemoveAllSolution();
-                _solutionContainer.UpdateChemicals(stomach.Comp1.Solution.Value);
-            }
-        }
-
-        // Add 10% of chemicals from bloodstream to the vomit - code from upstream VomitSystem
+        // Adds a tiny amount of the chem stream from earlier along with vomit -- Code from upstream VomitSystem
         if (TryComp<BloodstreamComponent>(uid, out var bloodStream))
         {
+            var vomitAmount = solutionSize;
+
+            // Flushes small portion of the chemicals removed from the bloodstream // TODO RMC14 Update to BloodSolutionName, BloodSolution
             if (_solutionContainer.ResolveSolution(uid, bloodStream.ChemicalSolutionName, ref bloodStream.ChemicalSolution))
             {
                 var vomitChemstreamAmount = _solutionContainer.SplitSolution(bloodStream.ChemicalSolution.Value, vomitAmount);
                 vomitChemstreamAmount.ScaleSolution(vomitComp.ChemMultiplier);
                 solution.AddSolution(vomitChemstreamAmount, _proto);
 
-                vomitAmount -= (float) vomitChemstreamAmount.Volume;
+                vomitAmount -= (float)vomitChemstreamAmount.Volume;
+                /* // TODO RMC14 Replace above with this when BloodstreamSystem is updated
+                var vomitChemstreamAmount = _bloodstream.FlushChemicals((uid, bloodStream), vomitAmount);
+
+                if (vomitChemstreamAmount != null)
+                {
+                    vomitChemstreamAmount.ScaleSolution(ChemMultiplier);
+                    solution.AddSolution(vomitChemstreamAmount, _proto);
+                    vomitAmount -= (float)vomitChemstreamAmount.Volume;
+                }
+                */
             }
 
+            // Makes a vomit solution the size of 90% of the chemicals removed from the chemstream // TODO RMC14 ((uid, bloodStream))), vomitAmount)
             solution.AddReagent(new ReagentId(vomitComp.VomitPrototype, _bloodstream.GetEntityBloodData(uid)), vomitAmount);
-        }
-        else
-        {
-            solution.AddReagent(new ReagentId(vomitComp.VomitPrototype, null), vomitAmount);
         }
 
         if (_puddle.TrySpillAt(uid, solution, out var puddle, false))
         {
+            // TODO RMC14 SharedForensicsSystem Dependency Injection
+            // _forensics.TransferDna(puddle, uid, false);
             var ev = new TransferDnaEvent { Donor = uid, Recipient = puddle, CanDnaBeCleaned = false };
             RaiseLocalEvent(uid, ref ev);
         }
