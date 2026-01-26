@@ -6,8 +6,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
     drawdepth: Overdoors
@@ -21,8 +19,6 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Transform
-    anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/humvee_chassis.rsi
     drawdepth: FloorTiles
@@ -54,7 +50,7 @@
   parent: RMCVehicleHumveeInteriorBase
   id: RMCVehicleHumveeWallBase
   placement:
-    mode: SnapgridCenter
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -79,9 +75,13 @@
 
 - type: entity
   abstract: true
-  parent: RMCVehicleHumveeWallBase
+  parent: RMCVehicleHumveeInteriorBase
   id: RMCVehicleHumveeDoorBase
+  placement:
+    mode: PlaceFree
   components:
+  - type: Sprite
+    drawdepth: Items
   - type: Clickable
 
 - type: entity
@@ -105,13 +105,12 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Transform
-    anchored: true
   - type: Physics
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
     state: car_seat
+    drawdepth: BelowMobs
 
 - type: entity
   parent: RMCSeatHumveeBase
@@ -329,3 +328,43 @@
   components:
   - type: Sprite
     state: mini_blood_panel
+
+- type: entity
+  parent: RMCVehicleHumveeWallBase
+  id: RMCVehicleHumveeInvisibleWall
+  name: humvee invisible wall (blocks vision)
+  description: An invisible blocking wall for humvee interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Sprite
+    visible: false
+
+- type: entity
+  parent: RMCVehicleHumveeInteriorBase
+  id: RMCVehicleHumveeInvisibleWallNoVision
+  name: humvee invisible wall (no vision block)
+  description: An invisible blocking wall for humvee interiors that does not block vision or light.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
+  - type: Sprite
+    visible: false

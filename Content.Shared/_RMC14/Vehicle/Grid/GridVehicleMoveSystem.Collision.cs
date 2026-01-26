@@ -60,7 +60,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
         var blocked = false;
-        var mobHits = new Dictionary<EntityUid, Box2>();
+        var mobHits = new Dictionary<EntityUid, (Box2 Aabb, Vector2 Push)>();
 
         foreach (var other in hits)
         {
@@ -155,7 +155,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
 
             if (!_net.IsClient && isMob && mob != null)
-                mobHits[other] = otherAabb;
+            {
+                if (TryGetMobPush(uid, other, aabb, otherAabb, out var push))
+                    mobHits[other] = (otherAabb, push);
+            }
         }
 
         if (blocked)
@@ -163,14 +166,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (!_net.IsClient)
         {
-            foreach (var (mobUid, mobAabb) in mobHits)
+            foreach (var (mobUid, data) in mobHits)
             {
                 if (!TryComp(mobUid, out MobStateComponent? mob))
                     continue;
 
                 HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
                 if (!HasComp<XenoComponent>(mobUid))
-                    PushMobOutOfVehicle(uid, mobUid, aabb, mobAabb);
+                    ApplyMobPush(mobUid, data.Push);
             }
         }
 
@@ -354,6 +357,31 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (xform.Anchored)
             return;
 
+        if (!TryGetMobPush(vehicle, mob, vehicleAabb, mobAabb, out var push))
+            return;
+
+        ApplyMobPush(mob, push);
+    }
+
+    private void ApplyMobPush(EntityUid mob, Vector2 push)
+    {
+        if (push == Vector2.Zero)
+            return;
+
+        var newWorldPosition = transform.GetWorldPosition(mob) + push;
+        transform.SetWorldPosition(mob, newWorldPosition);
+
+        if (physicsQ.TryComp(mob, out var mobBody))
+        {
+            physics.SetLinearVelocity(mob, Vector2.Zero, body: mobBody);
+            physics.SetAngularVelocity(mob, 0f, body: mobBody);
+        }
+    }
+
+    private bool TryGetMobPush(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb, out Vector2 push)
+    {
+        push = Vector2.Zero;
+
         var vehicleHalf = vehicleAabb.Size / 2f;
         var mobHalf = mobAabb.Size / 2f;
 
@@ -365,26 +393,73 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var overlapY = vehicleHalf.Y + mobHalf.Y - Math.Abs(diff.Y);
 
         if (overlapX <= 0f || overlapY <= 0f)
-            return;
+            return false;
 
-        var push = overlapX < overlapY
+        var pushX = overlapX > 0f
             ? new Vector2(Math.Sign(diff.X == 0f ? 1f : diff.X) * overlapX, 0f)
-            : new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY);
+            : Vector2.Zero;
+        var pushY = overlapY > 0f
+            ? new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY)
+            : Vector2.Zero;
 
         var pushMultiplier = HasComp<XenoComponent>(mob) ? 2.25f : 1.5f;
-        push *= pushMultiplier;
 
-        if (IsPushBlocked(vehicle, mob, mobAabb, push))
-            return;
+        var candidates = new Vector2[4];
+        var count = 0;
 
-        var newWorldPosition = transform.GetWorldPosition(mob) + push;
-        transform.SetWorldPosition(mob, newWorldPosition);
-
-        if (physicsQ.TryComp(mob, out var mobBody))
+        static void AddCandidate(Vector2[] candidates, ref int count, Vector2 candidate)
         {
-            physics.SetLinearVelocity(mob, Vector2.Zero, body: mobBody);
-            physics.SetAngularVelocity(mob, 0f, body: mobBody);
+            if (candidate == Vector2.Zero || count >= candidates.Length)
+                return;
+
+            for (var i = 0; i < count; i++)
+            {
+                if (candidates[i] == candidate)
+                    return;
+            }
+
+            candidates[count++] = candidate;
         }
+
+        Vector2 moveVec = Vector2.Zero;
+        if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
+        {
+            var moveDir = mover.CurrentDirection;
+            if (moveDir != Vector2i.Zero)
+            {
+                moveVec = new Vector2(moveDir.X, moveDir.Y);
+                if (moveDir.X != 0)
+                    AddCandidate(candidates, ref count, pushY);
+                else if (moveDir.Y != 0)
+                    AddCandidate(candidates, ref count, pushX);
+            }
+        }
+
+        var minPush = overlapX < overlapY ? pushX : pushY;
+        AddCandidate(candidates, ref count, minPush);
+        AddCandidate(candidates, ref count, pushX);
+        AddCandidate(candidates, ref count, pushY);
+
+        for (var i = 0; i < count; i++)
+        {
+            var candidate = candidates[i] * pushMultiplier;
+            if (candidate == Vector2.Zero)
+                continue;
+
+            if (moveVec != Vector2.Zero && Vector2.Dot(candidate, moveVec) > 0f)
+                continue;
+
+            var normalized = candidate.Normalized();
+            candidate += normalized * Clearance;
+
+            if (IsPushBlocked(vehicle, mob, mobAabb, candidate))
+                continue;
+
+            push = candidate;
+            return true;
+        }
+
+        return false;
     }
 
     private bool IsPushBlocked(EntityUid vehicle, EntityUid mob, Box2 mobAabb, Vector2 push)
