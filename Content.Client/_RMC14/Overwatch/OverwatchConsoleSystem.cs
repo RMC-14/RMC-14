@@ -310,16 +310,23 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
     private void ResetOverwatchOffset()
     {
-        if (_overwatchActor != null)
+        if (_overwatchActor == null)
+            return;
+
+        if (TerminatingOrDeleted(_overwatchActor.Value))
         {
-            var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
-            comp.CurrentPosition = Vector2.Zero;
-            comp.TargetPosition = Vector2.Zero;
-            comp.DisableMouseOffset = true;
-            Dirty(_overwatchActor.Value, comp);
-            var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
             _overwatchTargetOffset = null;
             _overwatchActor = null;
+            return;
         }
+
+        var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
+        comp.CurrentPosition = Vector2.Zero;
+        comp.TargetPosition = Vector2.Zero;
+        comp.DisableMouseOffset = true;
+        Dirty(_overwatchActor.Value, comp);
+        var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+        _overwatchTargetOffset = null;
+        _overwatchActor = null;
     }
 }
