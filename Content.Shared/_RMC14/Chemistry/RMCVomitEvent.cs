@@ -5,7 +5,11 @@ namespace Content.Shared._RMC14.Chemistry;
 /// Vomit sequence: nausea -> warning -> actual vomit
 /// </summary>
 [ByRefEvent]
-public readonly record struct RMCVomitEvent(EntityUid Target);
+public readonly record struct RMCVomitEvent(
+    EntityUid Target,
+    float HungerLoss = -40f,
+    float ToxinHeal = 3f
+);
 
 /// <summary>
 /// Event to perform the actual vomit immediately. do_vomit() proc
@@ -13,7 +17,6 @@ public readonly record struct RMCVomitEvent(EntityUid Target);
 [ByRefEvent]
 public readonly record struct RMCDoVomitEvent(
     EntityUid Target,
-    TimeSpan StunDuration,
     float HungerLoss = -40f,
     float ToxinHeal = 3f
 );

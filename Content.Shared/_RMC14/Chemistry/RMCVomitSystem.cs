@@ -50,7 +50,7 @@ public sealed class RMCVomitSystem : EntitySystem
     /// </summary>
     private void OnRMCVomit(ref RMCVomitEvent args)
     {
-        StartVomit(args.Target);
+        StartVomit(args.Target, args.HungerLoss, args.ToxinHeal);
     }
 
     /// <summary>
@@ -58,14 +58,14 @@ public sealed class RMCVomitSystem : EntitySystem
     /// </summary>
     private void OnRMCDoVomit(ref RMCDoVomitEvent args)
     {
-        DoVomit(args.Target, args.StunDuration, args.HungerLoss, args.ToxinHeal);
+        DoVomit(args.Target, args.HungerLoss, args.ToxinHeal);
     }
 
     /// <summary>
     /// Start the vomit process.
     /// Shows nausea message, schedules warning and actual vomit.
     /// </summary>
-    public void StartVomit(EntityUid uid)
+    public void StartVomit(EntityUid uid, float hungerLoss = -40f, float toxinHeal = 3f)
     {
         // Synthetics don't throw up
         if (HasComp<SynthComponent>(uid))
@@ -101,36 +101,25 @@ public sealed class RMCVomitSystem : EntitySystem
         {
             if (!Exists(uid))
                 return;
-            if (!TryComp<RMCVomitComponent>(uid, out var comp))
+            if (!HasComp<RMCVomitComponent>(uid))
                 return;
 
-            // Perform the actual vomit
-            DoVomit(uid, comp.VomitStunDuration, comp.HungerLoss, comp.ToxinHeal);
-
-            // Reset cooldown 35 seconds after DoVomit
-            Timer.Spawn(comp.CooldownAfterVomit,
-                () =>
-            {
-                if (!Exists(uid))
-                    return;
-                RemComp<RMCVomitComponent>(uid);
-            });
+            DoVomit(uid, hungerLoss, toxinHeal);
         });
     }
 
     /// <summary>
     /// Make an entity vomit immediately.
     /// </summary>
-    public void DoVomit(EntityUid uid, TimeSpan stunDuration, float hungerLoss = -40f, float toxinHeal = 3f)
+    public void DoVomit(EntityUid uid, float hungerLoss = -40f, float toxinHeal = 3f)
     {
         if (_mobState.IsDead(uid))
             return;
 
+        var vomitComp = EnsureComp<RMCVomitComponent>(uid);
+        var stunDuration = vomitComp.VomitStunDuration;
         if (stunDuration > TimeSpan.Zero)
             _stun.TryStun(uid, stunDuration, true);
-
-        // Get or ensure component for accessing configuration values
-        var vomitComp = EnsureComp<RMCVomitComponent>(uid);
 
         // Create vomit solution
         var solution = new Solution();
@@ -141,7 +130,7 @@ public sealed class RMCVomitSystem : EntitySystem
         {
             var vomitAmount = solutionSize;
 
-            // Flushes small portion of the chemicals removed from the bloodstream // TODO RMC14 Update to BloodSolutionName, BloodSolution
+            // Flushes small portion of the chemicals removed from the bloodstream // TODO RMC14 (uid, bloodStream.BloodSolutionName, ref bloodStream.BloodSolution)
             if (_solutionContainer.ResolveSolution(uid, bloodStream.ChemicalSolutionName, ref bloodStream.ChemicalSolution))
             {
                 var vomitChemstreamAmount = _solutionContainer.SplitSolution(bloodStream.ChemicalSolution.Value, vomitAmount);
@@ -189,5 +178,14 @@ public sealed class RMCVomitSystem : EntitySystem
         _audio.PlayPvs(vomitComp.VomitSound, uid);
         _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
         _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
+
+        // Reset cooldown 35 seconds after vomit
+        Timer.Spawn(vomitComp.CooldownAfterVomit,
+            () =>
+        {
+            if (!Exists(uid))
+                return;
+            RemComp<RMCVomitComponent>(uid);
+        });
     }
 }

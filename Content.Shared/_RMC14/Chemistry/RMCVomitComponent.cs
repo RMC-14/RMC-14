@@ -43,12 +43,6 @@ public sealed partial class RMCVomitComponent : Component
     [DataField]
     public TimeSpan VomitStunDuration = TimeSpan.FromSeconds(10);
 
-    [DataField]
-    public float HungerLoss = -40f;
-
-    [DataField]
-    public float ToxinHeal = 3f;
-
     /// <summary>
     /// Multiplier for how much of the chemical solution gets added to vomit (default 10%).
     /// </summary>
