@@ -36,9 +36,6 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
             return;
 
         args.TargetedEffect = TargetedEffects.TargetedIntense;
-
-        if (args.DirectionEffect == DirectionTargetedEffects.DirectionTargeted)
-            args.DirectionEffect = DirectionTargetedEffects.DirectionTargetedIntense;
     }
     /// <summary>
     ///     Change the focus counter when an aimed shot is performed.
