@@ -225,6 +225,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (mob != null)
                     {
                         var actor = EntMan.GetNetEntity(mob.Value);
+                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.North);
                         SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.North));
                     }
                 };
@@ -237,6 +238,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (mob != null)
                     {
                         var actor = EntMan.GetNetEntity(mob.Value);
+                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.West);
                         SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.West));
                     }
                 };
@@ -249,6 +251,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (mob != null)
                     {
                         var actor = EntMan.GetNetEntity(mob.Value);
+                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.East);
                         SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.East));
                     }
                 };
@@ -261,6 +264,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (mob != null)
                     {
                         var actor = EntMan.GetNetEntity(mob.Value);
+                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.South);
                         SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.South));
                     }
                 };
@@ -272,6 +276,7 @@ public sealed class OverwatchConsoleBui : RMCPopOutBui<OverwatchConsoleWindow>
                     if (mob != null)
                     {
                         var actor = EntMan.GetNetEntity(mob.Value);
+                        _overwatchConsole.ApplyCameraOffset(actor, OverwatchDirection.Reset);
                         SendPredictedMessage(new OverwatchCameraAdjustOffsetMsg(actor, OverwatchDirection.Reset));
                     }
                 };

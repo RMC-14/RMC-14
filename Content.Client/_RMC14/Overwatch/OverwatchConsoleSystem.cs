@@ -7,6 +7,7 @@ using Robust.Shared.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
 using Robust.Shared.Input.Binding;
+using Robust.Client.Input;
 using Robust.Shared.Map;
 using Content.Client.Movement.Components;
 using Content.Shared._RMC14.Input;
@@ -20,6 +21,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] public readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly List<(Entity<AudioComponent, OverwatchRelayedSoundComponent> Audio, EntityCoordinates Position)> _toRelay = new();
@@ -30,6 +32,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     private OverwatchDirection? _pendingOffsetDirection = null;
     private const float offsetAmount = 10f;
     private const float zoomAmount = 1.5f;
+    private string? _previousContext;
     public override void Initialize()
     {
         base.Initialize();
@@ -46,7 +49,8 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                     if (_player.LocalEntity is { } player)
                     {
                         var netEntity = EntityManager.GetNetEntity(player);
-                       OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.North));
+                        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.North));
+                        RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.North));
                     }
                 }, handle: false))
             .Bind(CMKeyFunctions.RMCCameraAdjustWest,
@@ -56,6 +60,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                     {
                         var netEntity = EntityManager.GetNetEntity(player);
                         OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.West));
+                        RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.West));
                     }
                 }, handle: false))
             .Bind(CMKeyFunctions.RMCCameraAdjustSouth,
@@ -65,6 +70,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                     {
                         var netEntity = EntityManager.GetNetEntity(player);
                         OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.South));
+                        RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.South));
                     }
                 }, handle: false))
             .Bind(CMKeyFunctions.RMCCameraAdjustEast,
@@ -74,6 +80,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                     {
                         var netEntity = EntityManager.GetNetEntity(player);
                         OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.East));
+                        RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.East));
                     }
                 }, handle: false))
             .Bind(CMKeyFunctions.RMCCameraReset,
@@ -83,6 +90,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                     {
                         var netEntity = EntityManager.GetNetEntity(player);
                         OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.Reset));
+                        RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.Reset));
                     }
                 }, handle: false))
             .Register<OverwatchConsoleSystem>();
@@ -107,10 +115,45 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         }
     }
 
+    protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
+    {
+        base.Watch(watcher, toWatch);
+
+        // Add overwatch context to enable offset control keybinds
+        if (_player.LocalEntity is { } local && watcher.Owner == local)
+        {
+            var contexts = _input?.Contexts;
+            if (contexts != null)
+            {
+                _previousContext = contexts.ActiveContext?.Name;
+                if (contexts.Exists("overwatch"))
+                    contexts.SetActiveContext("overwatch");
+            }
+        }
+    }
+
     protected override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
     {
         ResetOverwatchOffset();
         base.Unwatch(watcher, player);
+
+        // Restore previous context, preventing offset control keybinds from interfering with normal movement
+        if (_player.LocalEntity is { } local && watcher.Owner == local)
+        {
+            var contexts = _input?.Contexts;
+            if (contexts != null)
+            {
+                if (!string.IsNullOrEmpty(_previousContext) && contexts.Exists(_previousContext))
+                {
+                    contexts.SetActiveContext(_previousContext);
+                    _previousContext = null;
+                }
+                else if (contexts.Exists("human"))
+                {
+                    contexts.SetActiveContext("human");
+                }
+            }
+        }
     }
 
     private void OnRelayedRemove<T>(Entity<OverwatchRelayedSoundComponent> ent, ref T args)
@@ -257,6 +300,12 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             if (_player.LocalEntity != null && TryComp(_player.LocalEntity.Value, out ContentEyeComponent? eyeComp))
                 eyeSystem.SetZoom(_player.LocalEntity.Value, new Vector2(zoomAmount, zoomAmount), ignoreLimits: true, eye: eyeComp);
         }
+    }
+
+    // Applies offset from UI controls immediately, makes the zoom transition smoother
+    public void ApplyCameraOffset(NetEntity actorNetEntity, OverwatchDirection direction)
+    {
+        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(actorNetEntity, direction));
     }
 
     private void ResetOverwatchOffset()

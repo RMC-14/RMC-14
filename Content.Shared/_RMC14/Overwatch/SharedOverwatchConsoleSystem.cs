@@ -100,6 +100,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
 
+        SubscribeNetworkEvent<OverwatchCameraAdjustOffsetEvent>(OnCameraAdjustOffsetEvent);
+
         Subs.BuiEvents<OverwatchConsoleComponent>(OverwatchConsoleUI.Key, subs =>
         {
             subs.Event<OverwatchConsoleSelectSquadBuiMsg>(OnOverwatchSelectSquadBui);
@@ -683,12 +685,22 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnCameraAdjustOffset(Entity<OverwatchConsoleComponent> ent, ref OverwatchCameraAdjustOffsetMsg args)
     {
-        if (!TryGetEntity(args.Actor, out var watchedUid) ||
+        ApplyCameraOffset(args.Actor, args.Direction);
+    }
+
+    private void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
+    {
+        ApplyCameraOffset(args.Actor, args.Direction);
+    }
+
+    private void ApplyCameraOffset(NetEntity actorNetEntity, OverwatchDirection direction)
+    {
+        if (!TryGetEntity(actorNetEntity, out var watchedUid) ||
             !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye) ||
-            !HasComp<OverwatchWatchingComponent>(GetEntity(args.Actor)))
+            !HasComp<OverwatchWatchingComponent>(GetEntity(actorNetEntity)))
             return;
 
-        Vector2 offsetDelta = args.Direction switch
+        Vector2 offsetDelta = direction switch
         {
             OverwatchDirection.North => new Vector2(0, offsetAmount),
             OverwatchDirection.South => new Vector2(0, -offsetAmount),
