@@ -110,6 +110,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
                 spotters = true;
         }
 
+        targeted.TargetType = highestMark;
+        Dirty(target, targeted);
+
         // Remove the spotted component if none of the targeting lasers is a spotter
         if (!spotters)
             RemComp<SpottedComponent>(target);
