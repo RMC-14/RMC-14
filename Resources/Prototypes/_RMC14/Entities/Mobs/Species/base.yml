@@ -270,10 +270,6 @@
         hooked:
           True: { visible: true }
           False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true }
-          False: { visible: false }
   - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest

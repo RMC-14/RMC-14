@@ -18,7 +18,7 @@ public sealed class TargetingOverlay : Overlay
     private readonly IEntityManager _entManager;
     private readonly SpriteSystem _sprite;
     private readonly IGameTiming _timing;
-    private readonly TransformSystem _transform;
+    private readonly SharedTransformSystem _transform;
 
     // Animation timer
     private float _animTime;
@@ -28,7 +28,7 @@ public sealed class TargetingOverlay : Overlay
         _entManager = entManager;
         _sprite = entManager.System<SpriteSystem>();
         _timing = timing;
-        _transform = entManager.System<TransformSystem>();
+        _transform = entManager.System<SharedTransformSystem>();
     }
 
     /// <summary>
@@ -41,7 +41,6 @@ public sealed class TargetingOverlay : Overlay
         var xformQuery = _entManager.GetEntityQuery<TransformComponent>();
         var targetingLaserQuery = _entManager.GetEntityQuery<TargetingLaserComponent>();
         var worldHandle = args.WorldHandle;
-        var xformSystem = _entManager.System<SharedTransformSystem>();
 
         _animTime += (float)_timing.FrameTime.TotalSeconds;
 
@@ -60,8 +59,8 @@ public sealed class TargetingOverlay : Overlay
                 if (xform.MapID != gunXform.MapID)
                     continue;
 
-                var worldPos = xformSystem.GetWorldPosition(xform, xformQuery);
-                var gunWorldPos = xformSystem.GetWorldPosition(gunXform, xformQuery);
+                var worldPos = _transform.GetWorldPosition(xform, xformQuery);
+                var gunWorldPos = _transform.GetWorldPosition(gunXform, xformQuery);
                 var diff = worldPos - gunWorldPos;
                 var angle = diff.ToWorldAngle();
                 var length = diff.Length() / 2f;
@@ -82,7 +81,7 @@ public sealed class TargetingOverlay : Overlay
             if (!xformQuery.TryGetComponent(uid, out var targetXform))
                 continue;
 
-            var worldPosCross = xformSystem.GetWorldPosition(targetXform, xformQuery);
+            var worldPosCross = _transform.GetWorldPosition(targetXform, xformQuery);
 
             if (targeted.TargetType == TargetedEffects.None)
                 continue;

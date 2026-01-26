@@ -41,7 +41,7 @@ public sealed partial class RMCTargetedComponent : Component
     public string LockOnStateDirection = "sniper_lockon_direction";
 
     [DataField]
-    public string LockOnStateIntense = "_sniper_lockon_intense";
+    public string LockOnStateIntense = "sniper_lockon_intense";
 
     [DataField]
     public string LockOnStateIntenseDirection = "sniper_lockon_intense_direction";

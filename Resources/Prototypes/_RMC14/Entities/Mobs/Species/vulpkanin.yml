@@ -88,10 +88,6 @@
         sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
         state: hooked
         visible: false
-      - map: [ "focused" ]
-        sprite: _RMC14/Interface/xeno_hud.rsi
-        state: hudeye
-        visible: false
   - type: FixedIdentity
     name: cm-chatsan-replacement-vulpkanin
 

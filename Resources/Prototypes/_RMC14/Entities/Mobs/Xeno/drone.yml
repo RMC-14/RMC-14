@@ -167,10 +167,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -234,10 +230,6 @@
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
       visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone

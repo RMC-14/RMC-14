@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Targeting;
+using Content.Shared._RMC14.Targeting.Focused;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.AimedShot.FocusedShooting;
 
@@ -45,7 +46,18 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         var focusCounter = ent.Comp.FocusCounter;
         var currentTarget = ent.Comp.CurrentTarget;
         var user = _transform.GetParentUid(ent);
-        var focusing = EnsureComp<RMCFocusingComponent>(user);
+        if (currentTarget != args.Target && TryComp(currentTarget, out RMCBeingFocusedComponent? beingFocused))
+        {
+            beingFocused.FocusedBy.Remove(user);
+            Dirty(currentTarget.Value, beingFocused);
+
+            if (beingFocused.FocusedBy.Count == 0)
+                RemComp<RMCBeingFocusedComponent>(currentTarget.Value);
+        }
+
+        var focused = EnsureComp<RMCBeingFocusedComponent>(args.Target);
+        focused.FocusedBy.Add(user);
+        Dirty(args.Target, focused);
 
         if (currentTarget == args.Target)
         {
@@ -54,15 +66,9 @@ public sealed class RMCFocusedShootingSystem : EntitySystem
         }
         else
         {
-            if (ent.Comp.CurrentTarget != null)
-                focusing.OldTarget = focusing.FocusTarget;
-
             ent.Comp.CurrentTarget = args.Target;
             focusCounter = 0;
         }
-
-        focusing.FocusTarget = args.Target;
-        Dirty(user, focusing);
 
         ent.Comp.FocusCounter = Math.Min(focusCounter + 1, 3);
         Dirty(ent);

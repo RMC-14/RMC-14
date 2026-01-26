@@ -96,9 +96,5 @@
       visible: false
     - map: [ "enum.NewPlayerLayers.Layer" ]
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
   - type: FixedIdentity
     name: cm-chatsan-replacement-moth
