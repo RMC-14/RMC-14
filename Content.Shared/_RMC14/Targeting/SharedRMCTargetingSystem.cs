@@ -143,8 +143,9 @@ public abstract class SharedRMCTargetingSystem : EntitySystem
 
         var targeted = EnsureComp<RMCTargetedComponent>(target);
         targeted.TargetedBy.Add(equipment);
-        targeted.TargetType = targetedEffect;
         targeted.ShowDirection = showDirection;
+        if (targetedEffect > targeted.TargetType)
+            targeted.TargetType = targetedEffect;
         Dirty(target, targeted);
 
         var targeting = EnsureComp<TargetingComponent>(equipment);
