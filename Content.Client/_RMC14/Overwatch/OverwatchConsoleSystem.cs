@@ -1,14 +1,16 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Overwatch;
 using Robust.Client.Audio;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
 using Robust.Shared.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
+using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Content.Client.Movement.Components;
+using Content.Shared._RMC14.Input;
 using Content.Shared.Movement.Components;
-using System.Numerics;
 using Content.Shared.Movement.Systems;
 
 namespace Content.Client._RMC14.Overwatch;
@@ -36,6 +38,54 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         SubscribeLocalEvent<OverwatchCameraAdjustOffsetMsg>(OnCameraAdjustOffset);
         SubscribeLocalEvent<OverwatchRelayedSoundComponent, ComponentRemove>(OnRelayedRemove);
         SubscribeLocalEvent<OverwatchRelayedSoundComponent, EntityTerminatingEvent>(OnRelayedRemove);
+
+        CommandBinds.Builder
+            .Bind(CMKeyFunctions.RMCCameraAdjustNorth,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (_player.LocalEntity is { } player)
+                    {
+                        var netEntity = EntityManager.GetNetEntity(player);
+                       OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.North));
+                    }
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCCameraAdjustWest,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (_player.LocalEntity is { } player)
+                    {
+                        var netEntity = EntityManager.GetNetEntity(player);
+                        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.West));
+                    }
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCCameraAdjustSouth,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (_player.LocalEntity is { } player)
+                    {
+                        var netEntity = EntityManager.GetNetEntity(player);
+                        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.South));
+                    }
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCCameraAdjustEast,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (_player.LocalEntity is { } player)
+                    {
+                        var netEntity = EntityManager.GetNetEntity(player);
+                        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.East));
+                    }
+                }, handle: false))
+            .Bind(CMKeyFunctions.RMCCameraReset,
+                InputCmdHandler.FromDelegate(session =>
+                {
+                    if (_player.LocalEntity is { } player)
+                    {
+                        var netEntity = EntityManager.GetNetEntity(player);
+                        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.Reset));
+                    }
+                }, handle: false))
+            .Register<OverwatchConsoleSystem>();
     }
 
     private void OnOverwatchAfterState(Entity<OverwatchConsoleComponent> ent, ref AfterAutoHandleStateEvent args)

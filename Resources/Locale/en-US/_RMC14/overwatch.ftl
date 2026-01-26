@@ -83,7 +83,6 @@ rmc-overwatch-console-pain-kicked-out = The pain kicked you out of the console!
 
 # Camera offset
 rmc-overwatch-console-offset-calibration = Camera Offset
-rmc-overwatch-console-offset-no-camera = You need to be watching a camera!
 
 # Squad message announcements
 rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Overwatch:[/bold] { $operatorName } transmits: [font size=16][bold]{ $message }[/bold][/font][/color]

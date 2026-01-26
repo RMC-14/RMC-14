@@ -13,6 +13,12 @@ ui-options-function-cm-holster-tertiary = Unholster tertiary
 ui-options-function-cm-holster-quaternary = Unholster quaternary
 ui-options-function-rmc-pick-up-dropped-items = Pick up dropped items
 ui-options-function-rmc-interact-with-other-hand = Interact with other hand
+ui-options-function-rmc-overwatch-camera-adjustment = Overwatch Camera Adjustment
+ui-options-function-rmc-camera-adjust-north = Adjust north
+ui-options-function-rmc-camera-adjust-west = Adjust west
+ui-options-function-rmc-camera-adjust-south = Adjust south
+ui-options-function-rmc-camera-adjust-east = Adjust east
+ui-options-function-rmc-camera-reset = Reset camera
 ui-options-function-rmc-rest = Rest
 
 ui-options-header-rmc-xeno = Xenonid

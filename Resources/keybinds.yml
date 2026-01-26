@@ -682,3 +682,23 @@ binds:
   type: State
   key: R
   mod1: Shift
+- function: RMCCameraAdjustNorth
+  type: State
+  key: W
+  mod1: Shift
+- function: RMCCameraAdjustWest
+  type: State
+  key: A
+  mod1: Shift
+- function: RMCCameraAdjustSouth
+  type: State
+  key: S
+  mod1: Shift
+- function: RMCCameraAdjustEast
+  type: State
+  key: D
+  mod1: Shift
+- function: RMCCameraReset
+  type: State
+  key: Space
+  mod1: Shift

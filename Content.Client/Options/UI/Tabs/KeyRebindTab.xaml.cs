@@ -263,6 +263,13 @@ namespace Content.Client.Options.UI.Tabs
                 AddButton(boundKey);
             }
 
+            AddHeader("ui-options-function-rmc-overwatch-camera-adjustment");
+            AddButton(CMKeyFunctions.RMCCameraAdjustNorth);
+            AddButton(CMKeyFunctions.RMCCameraAdjustWest);
+            AddButton(CMKeyFunctions.RMCCameraAdjustSouth);
+            AddButton(CMKeyFunctions.RMCCameraAdjustEast);
+            AddButton(CMKeyFunctions.RMCCameraReset);
+
             AddHeader("ui-options-header-shuttle");
             AddButton(ContentKeyFunctions.ShuttleStrafeUp);
             AddButton(ContentKeyFunctions.ShuttleStrafeRight);

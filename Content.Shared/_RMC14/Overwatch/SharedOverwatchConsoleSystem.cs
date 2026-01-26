@@ -683,17 +683,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnCameraAdjustOffset(Entity<OverwatchConsoleComponent> ent, ref OverwatchCameraAdjustOffsetMsg args)
     {
-        if (!TryGetEntity(args.Actor, out var watchedUid) || !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye))
+        if (!TryGetEntity(args.Actor, out var watchedUid) ||
+            !EntityManager.TryGetComponent<EyeComponent>(watchedUid.Value, out var eye) ||
+            !HasComp<OverwatchWatchingComponent>(GetEntity(args.Actor)))
             return;
-        
-        if (!HasComp<OverwatchWatchingComponent>(GetEntity(args.Actor)))
-        {
-            if (_net.IsServer)
-            {
-                _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-offset-no-camera"), GetEntity(args.Actor), PopupType.LargeCaution);
-                return;
-            }
-        }
 
         Vector2 offsetDelta = args.Direction switch
         {

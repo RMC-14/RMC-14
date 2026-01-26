@@ -147,6 +147,11 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.CMHolsterQuaternary);
             human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
+            human.AddFunction(CMKeyFunctions.RMCCameraAdjustNorth);
+            human.AddFunction(CMKeyFunctions.RMCCameraAdjustWest);
+            human.AddFunction(CMKeyFunctions.RMCCameraAdjustSouth);
+            human.AddFunction(CMKeyFunctions.RMCCameraAdjustEast);
+            human.AddFunction(CMKeyFunctions.RMCCameraReset);
             human.AddFunction(CMKeyFunctions.RMCRest);
 
             //Xenonid

@@ -21,6 +21,13 @@ public sealed class CMKeyFunctions
     public static readonly BoundKeyFunction RMCInteractWithOtherHand = "RMCInteractWithOtherHand";
     public static readonly BoundKeyFunction RMCRest = "RMCRest";
 
+    // Overwatch
+    public static readonly BoundKeyFunction RMCCameraAdjustNorth = "RMCCameraAdjustNorth";
+    public static readonly BoundKeyFunction RMCCameraAdjustWest = "RMCCameraAdjustWest";
+    public static readonly BoundKeyFunction RMCCameraAdjustSouth = "RMCCameraAdjustSouth";
+    public static readonly BoundKeyFunction RMCCameraAdjustEast = "RMCCameraAdjustEast";
+    public static readonly BoundKeyFunction RMCCameraReset = "RMCCameraReset";
+
     // Xeno
     public static readonly BoundKeyFunction CMXenoWideSwing = "CMXenoWideSwing";
     public static readonly BoundKeyFunction RMCXenoRest = "RMCXenoRest";
