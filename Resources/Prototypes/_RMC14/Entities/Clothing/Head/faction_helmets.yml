@@ -153,6 +153,31 @@
     quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: {}
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCLighter
+      - RMCFlask
+      - CMScalpel
+      - Figurine
+      - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
+      tags:
+      - CigPack
+      - Cigarette
+      #      - TODO RMC14 cards
+      - Slice
+      #      - TODO RMC14 glasses (eyewear)
+      - Pen
+      - Crayon
+      - RMCHandful
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
+      - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
   # Uses custom HefaHelmet component instead of ProjectileGrenade to properly handle equipped explosions.
   # No ExplodeOnTrigger - HefaHelmet handles both explosion and shrapnel via TriggerEvent.
   - type: Explosive
