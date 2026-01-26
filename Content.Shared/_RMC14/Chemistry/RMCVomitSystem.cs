@@ -67,14 +67,10 @@ public sealed class RMCVomitSystem : EntitySystem
     /// </summary>
     public void StartVomit(EntityUid uid, float hungerLoss = -40f, float toxinHeal = 3f)
     {
-        // Synthetics don't throw up
-        if (HasComp<SynthComponent>(uid))
-            return;
-
         if (_mobState.IsDead(uid))
             return;
-
-        // Check if already vomiting (lastpuke check)
+        if (HasComp<SynthComponent>(uid))
+            return;
         if (HasComp<RMCVomitComponent>(uid))
             return;
 
@@ -115,8 +111,13 @@ public sealed class RMCVomitSystem : EntitySystem
     {
         if (_mobState.IsDead(uid))
             return;
+        if (HasComp<SynthComponent>(uid))
+            return;
 
         var vomitComp = EnsureComp<RMCVomitComponent>(uid);
+        if (!vomitComp.IsVomiting)
+            vomitComp.IsVomiting = true;
+
         var stunDuration = vomitComp.VomitStunDuration;
         if (stunDuration > TimeSpan.Zero)
             _stun.TryStun(uid, stunDuration, true);
@@ -172,12 +173,12 @@ public sealed class RMCVomitSystem : EntitySystem
             _damageable.TryChangeDamage(uid, healing, true, interruptsDoAfters: false);
         }
 
-        if (!_netManager.IsServer)
-            return;
-
-        _audio.PlayPvs(vomitComp.VomitSound, uid);
-        _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
-        _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
+        if (_netManager.IsServer)
+        {
+            _audio.PlayPvs(vomitComp.VomitSound, uid);
+            _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
+            _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
+        }
 
         // Reset cooldown 35 seconds after vomit
         Timer.Spawn(vomitComp.CooldownAfterVomit,
