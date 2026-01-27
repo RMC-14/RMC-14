@@ -386,9 +386,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
-        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
-            return;
-
         if (HasComp<ScopingComponent>(args.Actor))
         {
             if (_net.IsServer)
@@ -397,6 +394,17 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             }
             return;
         }
+
+        if (_net.IsClient)
+        {
+            // When trying to watch someone who's on a different map, the camera component isn't detected right away.
+            // So without this Watch(), you need to click twice to watch a marine before actually getting "overwatch" context.
+            Watch(args.Actor, default);
+            return;
+        }
+
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
+            return;
 
         Watch(args.Actor, camera);
     }

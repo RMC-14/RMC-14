@@ -686,19 +686,24 @@ binds:
   type: State
   key: W
   mod1: Shift
+  priority: -1
 - function: RMCCameraAdjustWest
   type: State
   key: A
   mod1: Shift
+  priority: -1
 - function: RMCCameraAdjustSouth
   type: State
   key: S
   mod1: Shift
+  priority: -1
 - function: RMCCameraAdjustEast
   type: State
   key: D
   mod1: Shift
+  priority: -1
 - function: RMCCameraReset
   type: State
   key: Space
   mod1: Shift
+  priority: -1
