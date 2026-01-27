@@ -36,9 +36,11 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/red_couch.rsi
     state: couch_mid
+  - type: Transform
+    anchored: false
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndLowerRed
   name: red couch
   suffix: End, Lower
@@ -48,7 +50,7 @@
     state: couch_end_lower
 
 - type: entity
-  parent: RMCCouchMid
+  parent: RMCCouchMidRed
   id: RMCCouchEndUpperRed
   name: red couch
   suffix: End, Upper

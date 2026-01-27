@@ -433,3 +433,60 @@
   - type: StorageSkillRequired
     skills:
       RMCSkillMedical: 2
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterMethylphenidate
+  name: Methylphenidate pill bottle
+  suffix: Methylphenidate, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister3
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillMethylphenidate
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterCitalopram
+  name: Citalopram pill bottle
+  suffix: Citalopram, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister7
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillCitalopram
+      amount: 16
+
+- type: entity
+  parent: CMPillCanister
+  id: RMCPillCanisterParoxetine
+  name: Paroxetine pill bottle
+  suffix: Paroxetine, 16
+  components:
+  - type: Sprite
+    layers:
+    - state: pill_canister6
+      map: [ "bottleSurfaceLayer" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: StorageFill
+    contents:
+    - id: RMCPillParoxetine
+      amount: 16
