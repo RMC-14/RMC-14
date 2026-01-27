@@ -5,6 +5,10 @@
   name: turret
   components:
   - type: Sentry
+  - type: Eye
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -71,6 +75,13 @@
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - UNMC
+    originalFaction: UNMC
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: normal_uac_sentry_handheld
@@ -78,7 +89,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: XenoCrusherChargable
     setDamage:
       types:
@@ -163,11 +175,16 @@
   name: We-Ya 512-M mini sentry
   description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field. This one has been modified for use by the mercenaries employed by Weston-Yamada.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - WeYa
+    originalFaction: WeYa
   - type: NpcFactionMember
     factions:
     - WeYa
   - type: UserIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Tag
     tags:
     - RMCSentryWeYa
@@ -178,11 +195,16 @@
   name: SPP SDS-R8 light sentry
   description: A compact version of the SPP defense sentry SDS-R7. Designed for deployment in the field.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - SPP
+    originalFaction: SPP
   - type: NpcFactionMember
     factions:
     - SPP
   - type: UserIFF
-    faction: FactionSPP
+    factions:
+    - FactionSPP
 
 - type: entity
   parent: RMCSentry
@@ -482,7 +504,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
     homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
