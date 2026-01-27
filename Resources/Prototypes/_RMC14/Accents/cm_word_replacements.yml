@@ -38,7 +38,10 @@
     cm-chatsan-word-admins-xeno: cm-chatsan-replacement-admins-xeno
     cm-chatsan-word-eorg-xeno: cm-chatsan-replacement-eorg-xeno
     cm-chatsan-word-sniper: cm-chatsan-replacement-sniper
+    cm-chatsan-word-signal-flare: cm-chatsan-replacement-signal-flare
+    cm-chatsan-word-signal-flares: cm-chatsan-replacement-signal-flares
     cm-chatsan-word-flare: cm-chatsan-replacement-flare
+    cm-chatsan-word-flares: cm-chatsan-replacement-flares
     cm-chatsan-word-synth: cm-chatsan-replacement-synth
     cm-chatsan-word-synthetic: cm-chatsan-replacement-synthetic
     cm-chatsan-word-synths: cm-chatsan-replacement-synths
@@ -168,12 +171,13 @@
     cm-chatsan-word-turret: cm-chatsan-replacement-sentry
     cm-chatsan-word-sentries: cm-chatsan-replacement-sentries
     cm-chatsan-word-turrets: cm-chatsan-replacement-sentries
+    cm-chatsan-word-tesla: cm-chatsan-replacement-tesla
+    cm-chatsan-word-teslas: cm-chatsan-replacement-teslas
     cm-chatsan-word-shotgun: cm-chatsan-replacement-shotgun
     cm-chatsan-word-squad: cm-chatsan-replacement-squad
     cm-chatsan-word-squads: cm-chatsan-replacement-squads
     cm-chatsan-word-sg: cm-chatsan-replacement-sg
     cm-chatsan-word-sgs: cm-chatsan-replacement-sgs
-    cm-chatsan-word-flares: cm-chatsan-replacement-flares
     cm-chatsan-word-nade: cm-chatsan-replacement-nade
     cm-chatsan-word-nades: cm-chatsan-replacement-nades
     cm-chatsan-word-nuke: cm-chatsan-replacement-nuke
@@ -216,6 +220,10 @@
     cm-chatsan-word-parasite: cm-chatsan-replacement-parasite
     cm-chatsan-word-paras: cm-chatsan-replacement-parasites
     cm-chatsan-word-parasites: cm-chatsan-replacement-parasites
+    cm-chatsan-word-plasteel-barricade: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-cade: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-barricades: cm-chatsan-replacement-plasteel-barricades
+    cm-chatsan-word-plasteel-cades: cm-chatsan-replacement-plasteel-barricades
     cm-chatsan-word-barricade: cm-chatsan-replacement-barricades
     cm-chatsan-word-cade: cm-chatsan-replacement-barricades
     cm-chatsan-word-barricades: cm-chatsan-replacement-barricades
@@ -224,6 +232,7 @@
     cm-chatsan-word-barbs: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wire: cm-chatsan-replacement-barbed-wires
     cm-chatsan-word-barbed-wires: cm-chatsan-replacement-barbed-wires
+    cm-chatsan-word-plasteel: cm-chatsan-replacement-plasteel
     cm-chatsan-word-medal: cm-chatsan-replacement-medal
     cm-chatsan-word-fob: cm-chatsan-replacement-fob
     cm-chatsan-word-rifle: cm-chatsan-replacement-rifle

@@ -58,6 +58,11 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-sentry
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBaseTurret

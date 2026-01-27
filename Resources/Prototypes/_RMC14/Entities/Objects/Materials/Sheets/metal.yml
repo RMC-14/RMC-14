@@ -231,6 +231,11 @@
       interfaces:
         enum.RMCConstructionUiKey.Key:
           type: RMCConstructionBui
+    - type: FixedIdentity
+      name: rmc-xeno-style-name-plasteel
+      whitelist:
+        components:
+        - Xeno
 
 - type: entity
   parent: CMSheetPlasteel

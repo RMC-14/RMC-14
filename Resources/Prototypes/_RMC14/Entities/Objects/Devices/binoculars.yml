@@ -214,6 +214,11 @@
     enabled: true
     radius: 3
   - type: RMCNightVisionVisibleInView
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-laser
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCRangefinderTarget

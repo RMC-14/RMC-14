@@ -92,6 +92,11 @@
     blacklist:
       components:
       - Xeno
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-name-communications-tower
+    whitelist:
+      components:
+      - Xeno
   - type: RMCMesonsNonviewable
 
 - type: entity

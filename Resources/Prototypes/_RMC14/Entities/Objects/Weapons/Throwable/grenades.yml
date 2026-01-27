@@ -26,6 +26,11 @@
     thresholds: []
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-boom-nade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: true
@@ -69,6 +74,11 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-flash-nade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -124,6 +134,11 @@
     - RMCGrenadeM40
     - RMCGrenadeRiot
   - type: Ammo
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-smoke-nade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: Smoke
@@ -296,6 +311,11 @@
     - RMCGrenadeTraining
     - RMCGrenadeM40
   - type: Ammo
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-training-nade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent:
@@ -314,6 +334,11 @@
     spawn: RMCTileFireGreen
     sound:
       path: /Audio/_RMC14/Weapons/Guns/Flamer/gun_flamethrower2.ogg
+  - type: FixedIdentity
+    name: rmc-xeno-style-name-incendiary-nade
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCGrenadeIncendiary
