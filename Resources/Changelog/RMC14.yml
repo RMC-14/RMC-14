@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added the UNS Endeavour, a new shipmap for PVE to replace the Golden
-      Arrow.
-    type: Add
-  - message: PVE Sun Rider roles now have their correct skills.
-    type: Fix
-  - message: Fixed telecomms having a weird extra sprite ontop of the intended sprite.
-    type: Fix
-  - message: Overhead Pipes will now spritefade like other overhead props.
-    type: Add
-  id: 2322
-  time: '2025-09-06T11:24:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7773
 - author: Spaghetti
   changes:
   - message: Fixed AI Hermes console name.
@@ -4717,5 +4703,33 @@
   id: 2824
   time: '2026-01-27T21:38:36.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8251
+- author: Vixting
+  changes:
+  - message: Sentry Laptop accessible to Engineers. Sentries can be connected to a
+      laptop using a tuner. Laptop must be placed onto a table to access. Connected
+      sentries can be viewed from the laptop, have their IFF settings changed, display
+      ammo & health bars, will show text popup alerts when engaging enemies & when
+      being damaged.
+    type: Add
+  - message: Sentry laptop to engineering & requisition vendors
+    type: Add
+  - message: Many survivor jobs that only had marine IFF now have both survivor &
+      marine IFF.
+    type: Add
+  - message: Sentries will now only inherit the IFF / targeting of the Item IFF of
+      the person who placed it.
+    type: Tweak
+  - message: Identification console IFF will add / remove the marine faction without
+      removing existing faction(s).
+    type: Tweak
+  - message: Sentry targeting is now based on itemIFF (id cards)
+    type: Tweak
+  - message: People with IFF blocking a sentries LOS
+    type: Fix
+  - message: corpses no longer block sentry LOS
+    type: Fix
+  id: 2825
+  time: '2026-01-27T21:45:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8566
 Name: RMC14
 Order: -1
