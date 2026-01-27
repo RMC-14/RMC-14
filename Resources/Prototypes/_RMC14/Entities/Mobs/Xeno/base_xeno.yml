@@ -33,6 +33,7 @@
   abstract: true
   save: false
   components: # TODO RMC14 camera recoil from large explosions? check 13
+  - type: ZombieImmune
   - type: BlockEntityStorage
     whitelist:
       components:

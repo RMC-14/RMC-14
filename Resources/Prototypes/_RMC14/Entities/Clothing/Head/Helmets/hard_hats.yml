@@ -82,6 +82,9 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
 # TODO heat protection and stuff
 
 - type: entity

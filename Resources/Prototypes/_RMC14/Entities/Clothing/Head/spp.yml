@@ -40,7 +40,7 @@
   parent: ArmorHelmetSPP
   id: RMCArmorHelmetSPPArmy
   name: 6B82 combat helmet
-  description: An older version of the SPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important
+  description: An older version of the SPP Army's 6B92 combat helmet, still worn by certain units on planets the SPP deems less important.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/SPP/army_helmet.rsi

@@ -456,6 +456,7 @@
     vaporAmount: 3
     sprayDistance: 5
     sprayVelocity: 5
+    pushbackAmount: 0
     spraySound:
       path: /Audio/Effects/extinguish.ogg
   - type: RefillableSolution

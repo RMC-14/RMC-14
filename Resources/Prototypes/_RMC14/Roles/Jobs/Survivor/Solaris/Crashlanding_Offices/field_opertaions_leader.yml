@@ -1,0 +1,87 @@
+- type: job
+  parent: RMCSurvivorPMCBase
+  id: RMCSurvivorSolarisPMCCommander
+  name: rmc-job-name-pmc-field-operations-leader
+  whitelistParent: CMCommandingOfficer
+  ranks:
+    RMCRankWeYaFieldOperaionsLeader: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorPMCCommander
+  icon: RMCJobIconPMCCommander
+  greeting: rmc-job-greeting-solaris-pmc-commander
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Survivor — PMC Field Operations Leader (Solaris Ridge special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorWeYaPMCCommander
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
+    - type: JobPrefix
+      prefix: rmc-job-prefix-pmc-leader
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorPMCBase
+  id: RMCGearSurvivorPMCCommander
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCLeaderHolsterPatch
+    shoes: RMCBootsPMCFilled
+    gloves: RMCHandsVeteranPMC
+    mask: RMCMaskCoifPMC # TODO RMC14: M8 pattern armored balaclava
+    ears: RMCHeadsetHvHWeYaPMCLeader
+    head: ArmorHelmetPMCFieldOfficer
+    outerClothing: CMArmorM4PMCLeader
+    back: RMCBackpackRTOPMCBroken
+    belt: RMCHolsterSMGPouchFilledExtended # TODO RMC14: Corporate variant of M63
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchMedkitPMCFullAdvanced
+  storage:
+    back:
+    - CMSheetMetal20
+    - CMSheetPlasteel20
+    - RMCAttachmentFlashlightGrip
+    - RMCAttachmentS6ReflexSight
+    - CMDefibrillator
+    # TODO RMC14: Crew monitor
+    outerClothing:
+    - RMCMREWeYa
+    - RMCRangefinder
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCrashlandingOfficesFOL
+  name: special survivor crashlanding offices pmc field operations leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSolarisPMCCommander
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_fol
