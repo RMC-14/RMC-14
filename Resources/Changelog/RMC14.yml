@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Added the M1984 and M77 as secondary weapon choices for Senior Enlisted
-      Advisors.
-    type: Add
-  id: 2328
-  time: '2025-09-06T13:21:15.485520+00:00'
-  url: null
-- author: crazy1112345
-  changes:
-  - message: Fixed marines having SPP loadout guns.
-    type: Fix
-  id: 2329
-  time: '2025-09-06T21:37:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7808
 - author: Ian321
   changes:
   - message: The ID of ghost roles are now linked to their original owner.
@@ -4698,5 +4683,20 @@
   id: 2830
   time: '2026-01-27T22:00:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8862
+- author: CatAndHats
+  changes:
+  - message: Placed an extra turret to the south-eastern side of the north shiva LZ
+    type: Tweak
+  id: 2831
+  time: '2026-01-27T22:03:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9073
+- author: CatAndHats
+  changes:
+  - message: The Kutjevo south LZ alternative layout map insert now has turrets on
+      the south-eastern side.
+    type: Fix
+  id: 2832
+  time: '2026-01-27T22:02:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9074
 Name: RMC14
 Order: -1
