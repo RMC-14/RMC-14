@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Map-specific survivor jobs added to Fiorina Science Annex.
-    type: Add
-  id: 2325
-  time: '2025-09-06T12:04:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7437
 - author: DrSmugleaf
   changes:
   - message: Fixed wooden barricades taking no damage from a charger crusher slamming
@@ -4683,5 +4676,13 @@
   id: 2827
   time: '2026-01-27T21:46:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8900
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Survivor liaisons, ICB liaisons, ILRO observers, PMCs, WeYa goons, ERT
+      CMB, and ERT WeYa Execs now have tactical map icons.
+    type: Tweak
+  id: 2828
+  time: '2026-01-27T21:56:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9004
 Name: RMC14
 Order: -1
