@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: Shromply
-  changes:
-  - message: Added CLF PVE roles.
-    type: Add
-  - message: Added CLF PVE clothing and utility racks.
-    type: Add
-  - message: Added the MAR50 locker for the CLF PVE gunner.
-    type: Add
-  id: 2321
-  time: '2025-09-06T11:25:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7710
 - author: noctyrnal
   changes:
   - message: Added the UNS Endeavour, a new shipmap for PVE to replace the Golden
@@ -4721,5 +4710,12 @@
   id: 2823
   time: '2026-01-23T10:21:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8917
+- author: J C Denton
+  changes:
+  - message: CL Escape Pod Controller now requires WeYa access.
+    type: Tweak
+  id: 2824
+  time: '2026-01-27T21:38:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8251
 Name: RMC14
 Order: -1
