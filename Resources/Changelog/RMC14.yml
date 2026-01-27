@@ -1,67 +1,4 @@
 ﻿Entries:
-- author: Spaghetti
-  changes:
-  - message: Fixed AI Hermes console name.
-    type: Fix
-  id: 2323
-  time: '2025-09-06T11:57:36.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7793
-- author: DrSmugleaf
-  changes:
-  - message: Add a window to show medals and jellies given instead of received, in
-      character customize.
-    type: Add
-  - message: Added shipside announcements to the Almayer control console.
-    type: Add
-  - message: Added gun chambering. A bullet can be chambered with spacebar by default
-      (unique gun action keybind), if a magazine isn't loaded.
-    type: Add
-  - message: Added M1984 hollowpoint magazines.
-    type: Add
-  - message: Added OCP-specific chemical dispensers and storage.
-    type: Add
-  - message: Added an animation and vending sound to Requisitions vendors.
-    type: Add
-  - message: Fixed being able to send empty command announcements, and added a character
-      counter to it.
-    type: Fix
-  - message: Fixed M34 flamers not getting Patreon custom names on vend.
-    type: Fix
-  - message: Fixed transferring chemicals from the beaker and buffer on the chem master
-      not preserving the order of the chemicals.
-    type: Fix
-  - message: Fixed buckling pulled bodies instantly unbuckling them.
-    type: Fix
-  - message: Fixed medical vendors sometimes not recharging reagents.
-    type: Fix
-  - message: Fixed Kutjevo Refinery lacking landing zone turrets from some angles.
-    type: Fix
-  - message: Fixed being able to print infinite patches as command roles.
-    type: Fix
-  - message: Fixed being able to get CMP armor, helmet, and beret as any command role.
-    type: Fix
-  - message: Fixed searching in automated vendors showing choices available only to
-      other roles.
-    type: Fix
-  - message: Fixed the mateba not stunning marines for 4 seconds in 1 shot.
-    type: Fix
-  - message: Fixed being able to disarm xenos as a marine to make them drop their
-      pull.
-    type: Fix
-  - message: Fixed not showing all health information on base examines without having
-      to click the icon. Damage examines now are color-coded depending on their type
-      again, and condensed to a single line per damage group.
-    type: Fix
-  - message: Fixed being able to wield another gun while having an active arm brace.
-    type: Fix
-  - message: Made entity-targeted actions like the Warrior's lag compensated (accounts
-      for the user's ping).
-    type: Tweak
-  - message: Made the hypospray lag compensated (accounts for the user's ping).
-    type: Tweak
-  id: 2324
-  time: '2025-09-06T12:01:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7806
 - author: J C Denton
   changes:
   - message: Map-specific survivor jobs added to Fiorina Science Annex.
@@ -4731,5 +4668,20 @@
   id: 2825
   time: '2026-01-27T21:45:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8566
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Swapped the flash's direct hit paralyze time and stun baton's paralyze
+      time. The flash now stuns for 12 seconds and the baton for 20 seconds.
+    type: Tweak
+  id: 2826
+  time: '2026-01-27T21:47:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8999
+- author: TadJohnson00
+  changes:
+  - message: SPP and RCM uniforms can now be folded - sleeves and jackets.
+    type: Tweak
+  id: 2827
+  time: '2026-01-27T21:46:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8900
 Name: RMC14
 Order: -1
