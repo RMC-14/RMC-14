@@ -1,0 +1,215 @@
+﻿- type: entity
+  parent: [ RMCBaseWeaponShotgun, RMCBaseAttachableHolder ]
+  name: PK-10 quasar electrostatic shockgun
+  id: RMCWeaponShotgunPK10
+  description: An archaic electrostatic 20ga shotgun design based on old Earth designs, albeit modernized for its time period. Being a dual-mode system, it is capable of firing semi-auto and pump-action modes, although this particular model is strictly semi-auto only. It can only accept MX24 slugs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/pk10.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/pk10.rsi
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_es4.ogg
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-pk10
+  - type: ShootUseDelay
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 5
+    scatterUnwielded: 10
+    baseFireRate: 0.75
+    burstScatterMult: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24
+    capacity: 7
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.825, 0.06
+      rmc-aslot-rail: -0.025, 0.125
+      rmc-aslot-underbarrel: 0.30, -0.31
+
+# Electrostatic Shells
+- type: entity
+  parent: RMCBoxShotgunBeanbag
+  id: RMCBoxShotgunMX24Electrostatic
+  name: box of MX24 electrostatic shells
+  description: A box filled with MX24 electrostatic shells used for non-lethal crowd control. 20 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24Electrostatic
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunMX24Electrostatic
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#578e75"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#578e75"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#578e75"
+
+- type: entity
+  parent: CMShellShotgunBeanbag
+  id: RMCShellShotgunMX24Electrostatic
+  name: handful of MX24 electostatic slugs
+  description: A handful of Weston-Yamada produced Electostatic Slugs, often used in the PK-10 Quasar Shockgun.
+  components:
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunMX24Electrostatic
+  - type: Stack
+    count: 5
+    stackType: RMCShellShotgunMX24ElectrostaticStack
+    baseLayer: base
+    layerStates:
+    - shock_slug_1
+    - shock_slug_1
+    - shock_slug_2
+    - shock_slug_3
+    - shock_slug_4
+    - shock_slug_5
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunMX24
+    - RMCShellShotgunMX24Electrostatic
+
+- type: stack
+  id: RMCShellShotgunMX24ElectrostaticStack
+  name: handful of MX24 electrostatic slugs
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: shock_slug_1 }
+  spawn: RMCPelletShotgunMX24Electrostatic
+  maxCount: 5
+
+- type: entity
+  parent: CMPelletShotgunBeanbag
+  id: RMCPelletShotgunMX24Electrostatic
+  name: MX24 electrostatic slug
+  components:
+  - type: RMCStaminaDamageOnCollide
+    damage: 65
+
+- type: Tag
+  id: RMCShellShotgunMX24Electrostatic
+
+- type: Tag
+  id: RMCShellShotgunMX24
+
+# Lethal Shells
+- type: entity
+  parent: RMCBoxShotgunSlugs
+  id: RMCBoxShotgunMX24Lethal
+  name: box of MX24 lethal shells
+  description: A box filled with MX24 electrostatic shells used for handling hostiles. 20 Gauge.
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCShellShotgunMX24Lethal
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunMX24Lethal
+      amount: 5
+  - type: Sprite
+    layers:
+    - state: smallshell_box
+      color: "#85361e"
+    - state: shell_box_buckshot
+      color: "#e0d5c2"
+    - state: smallshell_ammo_full_12g_base
+      color: "#ffffff"
+    - state: smallshell_ammo_full_12g_color
+      color: "#85361e"
+      map: [ "full" ]
+    - state: smallshell_empty
+      map: [ "empty" ]
+      color: "#85361e"
+
+- type: entity
+  parent: CMShellShotgunSlugs
+  id: RMCShellShotgunMX24Lethal
+  name: handful of MX24 lethal slugs
+  description: A handful of Weston-Yamada produced Lethal Slugs, often used in the PK-10 Quasar Shockgun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: pk10_slug_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunMX24Lethal
+  - type: Stack
+    count: 5
+    stackType: RMCShellShotgunMX24LethalStack
+    baseLayer: base
+    layerStates:
+    - pk10_slug_1
+    - pk10_slug_1
+    - pk10_slug_2
+    - pk10_slug_3
+    - pk10_slug_4
+    - pk10_slug_5
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunSlugs
+    - RMCShellShotgunMX24
+    - RMCShellShotgunMX24Lethal
+
+- type: stack
+  id: RMCShellShotgunMX24LethalStack
+  name: handful of MX24 lethal slugs
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: pk10_slug_1 }
+  spawn: RMCShellShotgunMX24Lethal
+  maxCount: 5
+
+- type: entity
+  parent: CMPelletShotgunSlug
+  id: RMCPelletShotgunMX24Lethal
+  name: MX24 slug
+
+- type: Tag
+  id: RMCShellShotgunMX24Lethal
