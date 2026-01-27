@@ -1,21 +1,6 @@
 ﻿Entries:
 - author: DrSmugleaf
   changes:
-  - message: Fixed wooden barricades taking no damage from a charger crusher slamming
-      against them.
-    type: Fix
-  id: 2326
-  time: '2025-09-06T12:09:41.838484+00:00'
-  url: null
-- author: MetalSage
-  changes:
-  - message: Fixed the amount of energy in the chemical dispenser
-    type: Add
-  id: 2327
-  time: '2025-09-06T12:56:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7747
-- author: DrSmugleaf
-  changes:
   - message: Added the M1984 and M77 as secondary weapon choices for Senior Enlisted
       Advisors.
     type: Add
@@ -4684,5 +4669,34 @@
   id: 2828
   time: '2026-01-27T21:56:18.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9004
+- author: J C Denton
+  changes:
+  - message: Fixed the M13 autopistol having a lower damage multiplier than intended,
+      of 0.65 times instead of 0.75 times. The extended recoil compensator now gives
+      the correct amount of plus 0.05, instead of plus 0.10, for a total of 0.75 without,
+      and 0.8 with, instead of 0.65 without, and 0.75 with.
+    type: Fix
+  - message: Fixed the M13 autopistol having a higher damage fall-off range than intended,
+      falling off at 4 tiles instead of the intended 3 tiles.
+    type: Fix
+  - message: Fixed the M13 autopistol having a higher accurate range than intended,
+      losing accuracy at 4 tiles instead of the intended 2 tiles.
+    type: Fix
+  - message: M13 ammo is now stored in a pistol ammunition box (10x20-APC) with 984
+      bullets, instead of the standard smg ammunition box (10x20).
+    type: Tweak
+  - message: Fixed being able to transfer ammo between M63 and M13 magazines via (10x20)
+      ammunition box.
+    type: Fix
+  id: 2829
+  time: '2026-01-27T21:59:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8808
+- author: noctyrnal
+  changes:
+  - message: You can now put RMC plushies on your head!
+    type: Add
+  id: 2830
+  time: '2026-01-27T22:00:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8862
 Name: RMC14
 Order: -1
