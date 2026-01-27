@@ -18,15 +18,31 @@ namespace Content.Client._RMC14.Vehicle.Ui;
 public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 {
     public event Action<string>? OnSelect;
+    public event Action<bool>? OnToggleStabilization;
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
+    private bool _suppressStabilization;
 
     public RMCVehicleWeaponsMenu()
     {
         RobustXamlLoader.Load(this);
+
+        StabilizationToggle.OnToggled += args =>
+        {
+            if (_suppressStabilization)
+                return;
+
+            OnToggleStabilization?.Invoke(args.Pressed);
+        };
     }
 
-    public void Update(IReadOnlyList<RMCVehicleWeaponsUiEntry> hardpoints)
+    public void Update(IReadOnlyList<RMCVehicleWeaponsUiEntry> hardpoints, bool canToggleStabilization, bool stabilizationEnabled)
     {
+        _suppressStabilization = true;
+        StabilizationToggle.Disabled = !canToggleStabilization;
+        StabilizationToggle.Pressed = stabilizationEnabled;
+        StabilizationToggle.Text = stabilizationEnabled ? "Stabilization: On" : "Stabilization: Off";
+        _suppressStabilization = false;
+
         WeaponList.DisposeAllChildren();
 
         foreach (var hardpoint in hardpoints)

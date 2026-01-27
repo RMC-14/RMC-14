@@ -1038,10 +1038,10 @@
   - type: RMCVehicleSound
     runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
     runningSoundCooldown: 2
-    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornSound: /Audio/Effects/Vehicle/sound_vehicles_humvee_horn.ogg
     hornCooldown: 1
-    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
-    collisionSoundCooldown: 0.4
+#    collisionSound: /Audio/_RMC14/Structures/metalhit.ogg
+#    collisionSoundCooldown: 0.4
     mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
   - type: RMCVehicleSpotlight
     radius: 6
@@ -1162,9 +1162,19 @@
     maxPassengers: 4
     maxXenos: 2
     entryPoints:
-    - offset: 0,1.5
-      radius: 0.7
-      interiorCoords: 2.5,-1.5
+    - offset: -1,0.8
+      radius: 0.45
+      interiorCoords: 1.61, -2.15
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 2.47, -2.15
+    - offset: 1,0.8
+      radius: 0.45
+      interiorCoords: 1.6, -1.35
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 2.41,-1.35
+
 
 - type: entity
   parent: RMCVehicleHumvee

@@ -29,7 +29,6 @@ public sealed class GridVehicleMoverOverlay : Overlay
     private readonly EntityQuery<PhysicsComponent> _physicsQ;
     private readonly EntityQuery<VehicleEnterComponent> _enterQ;
     private readonly EntityQuery<VehicleExitComponent> _exitQ;
-
     private readonly Color[] _colors =
     {
         Color.Red, Color.Green, Color.Blue, Color.Yellow, Color.Magenta, Color.Cyan, Color.Orange
@@ -179,7 +178,7 @@ public sealed class GridVehicleMoverOverlay : Overlay
             for (var i = 0; i < enter.EntryPoints.Count; i++)
             {
                 var point = enter.EntryPoints[i];
-                var color = _colors[i % _colors.Length];
+                var color = GetEntryColor(i);
                 var world = basePos + rot.RotateVec(point.Offset);
                 var radius = Math.Max(0.05f, point.Radius);
 
@@ -203,11 +202,21 @@ public sealed class GridVehicleMoverOverlay : Overlay
                 continue;
 
             var pos = _transform.GetWorldPosition(xform);
-            var color = _colors[Math.Abs(exit.EntryIndex) % _colors.Length];
+            var color = GetEntryColor(exit.EntryIndex);
 
             h.DrawCircle(pos, 0.12f, color.WithAlpha(0.2f), true);
             h.DrawCircle(pos, 0.12f, color.WithAlpha(0.9f), false);
+
         }
+    }
+
+    private Color GetEntryColor(int entryIndex)
+    {
+        var index = entryIndex;
+        if (index < 0)
+            index = Math.Abs(index);
+        index %= _colors.Length;
+        return _colors[index];
     }
 
     private void DrawCollisions(DrawingHandleWorld h, MapId mapId)

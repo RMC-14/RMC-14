@@ -118,3 +118,46 @@
   - type: VehiclePortGunSeat
     skills:
       all: {}
+
+- type: entity
+  abstract: true
+  parent: CMSeatBase
+  id: RMCSeatHumveeBase
+  name: humvee seat
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    state: car_seat
+    drawdepth: BelowMobs
+  - type: RMCStrapNoDrawDepthChange
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveePassenger
+  name: humvee passenger seat
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeDriver
+  name: humvee driver seat
+  components:
+  - type: VehicleDriverSeat
+    skills:
+      all: {}
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeWeaponsOperator
+  name: humvee gunner seat
+  components:
+  - type: VehicleWeaponsSeat
+    skills:
+      all: {}
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface

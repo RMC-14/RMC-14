@@ -113,7 +113,11 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (direction.LengthSquared() <= 0.0001f)
             return;
 
-        targetTurret.WorldRotation = direction.ToWorldAngle();
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        if (targetTurret.StabilizedRotation)
+            targetTurret.WorldRotation = direction.ToWorldAngle();
+        else
+            targetTurret.WorldRotation = (direction.ToWorldAngle() - vehicleRot).Reduced();
         Dirty(targetUid, targetTurret);
 
         UpdateTurretTransforms(targetUid, targetTurret, vehicle, targetUid, targetTurret);
@@ -158,7 +162,13 @@ public sealed class VehicleTurretSystem : EntitySystem
         var direction = GetVehicleDirection(vehicle);
         var vehicleRot = _transform.GetWorldRotation(vehicle);
         var anchorLocalOffset = (-vehicleRot).RotateVec(GetPixelOffset(anchorTurret, direction) / PixelsPerMeter);
-        var localRot = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation - vehicleRot : Angle.Zero;
+        var localRot = Angle.Zero;
+        if (anchorTurret.RotateToCursor)
+        {
+            localRot = anchorTurret.StabilizedRotation
+                ? anchorTurret.WorldRotation - vehicleRot
+                : anchorTurret.WorldRotation;
+        }
 
         EntityCoordinates turretCoords;
         Angle turretLocalRot;
@@ -346,7 +356,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if ((!turret.RotateToCursor && !turret.ShowOverlay) || turret.WorldRotation != Angle.Zero)
             return;
 
-        turret.WorldRotation = _transform.GetWorldRotation(vehicle);
+        turret.WorldRotation = turret.StabilizedRotation ? _transform.GetWorldRotation(vehicle) : Angle.Zero;
         Dirty(turretUid, turret);
     }
 

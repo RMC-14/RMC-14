@@ -14,8 +14,9 @@
         </PanelContainer.PanelOverride>
 
         <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Vertical" SeparationOverride="2" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
                 <Label Text="Vehicle Weapons" StyleClasses="LabelHeading"/>
+                <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization" HorizontalExpand="True" HorizontalAlignment="Right"/>
             </BoxContainer>
 
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">

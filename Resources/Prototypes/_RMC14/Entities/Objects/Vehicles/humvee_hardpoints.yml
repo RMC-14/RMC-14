@@ -34,6 +34,7 @@
   - type: RMCHardpointNoRemove
   - type: VehicleTurret
     rotateToCursor: true
+    stabilizedRotation: true
     showOverlay: true
     useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
@@ -80,7 +81,7 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    soundGunshot: /Audio/Effects/Vehicle/sound_weapons_humvee_cannon.ogg
     cameraRecoilScalar: 0
   - type: BallisticAmmoProvider
     cycleable: false

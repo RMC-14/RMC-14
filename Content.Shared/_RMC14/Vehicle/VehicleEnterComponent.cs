@@ -46,11 +46,11 @@ public sealed partial class VehicleEnterComponent : Component
     public Vector2 ExitOffset = Vector2.Zero;
 }
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCVehicleSystem))]
 public sealed partial class VehicleExitComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int EntryIndex;
 }
 

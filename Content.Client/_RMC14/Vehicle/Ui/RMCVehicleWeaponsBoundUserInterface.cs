@@ -27,6 +27,7 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
             _menu.Title = metadata.EntityName;
 
         _menu.OnSelect += slotId => SendMessage(new RMCVehicleWeaponsSelectMessage(slotId));
+        _menu.OnToggleStabilization += enabled => SendMessage(new RMCVehicleWeaponsStabilizationMessage(enabled));
         _menu.OpenCenteredAt(new Vector2(0.1f, 0.9f));
     }
 
@@ -56,6 +57,6 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
         }
 
         Logger.Info($"[RMCVehicleWeapons:UI] UpdateState entries={weaponsState.Hardpoints.Count}");
-        _menu?.Update(weaponsState.Hardpoints);
+        _menu?.Update(weaponsState.Hardpoints, weaponsState.CanToggleStabilization, weaponsState.StabilizationEnabled);
     }
 }

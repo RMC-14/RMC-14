@@ -76,6 +76,30 @@
 - type: entity
   abstract: true
   parent: RMCVehicleHumveeInteriorBase
+  id: RMCVehicleHumveeRoofBase
+  name: humvee interior roof
+  description: A removable roof section for the humvee interior.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleHumveeInteriorBase
   id: RMCVehicleHumveeDoorBase
   placement:
     mode: PlaceFree
@@ -83,61 +107,6 @@
   - type: Sprite
     drawdepth: Items
   - type: Clickable
-
-- type: entity
-  abstract: true
-  parent: RMCVehicleHumveeWallBase
-  id: RMCVehicleHumveeViewportBase
-  placement:
-    mode: PlaceFree
-  components:
-  - type: WallMount
-    arc: 360
-  - type: Clickable
-  - type: InteractionOutline
-  - type: RMCVehicleViewport
-
-- type: entity
-  abstract: true
-  parent: CMSeatBase
-  id: RMCSeatHumveeBase
-  name: humvee seat
-  placement:
-    mode: PlaceFree
-  components:
-  - type: Physics
-    bodyType: Static
-  - type: Sprite
-    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
-    state: car_seat
-    drawdepth: BelowMobs
-
-- type: entity
-  parent: RMCSeatHumveeBase
-  id: RMCSeatHumveePassenger
-  name: humvee passenger seat
-
-- type: entity
-  parent: RMCSeatHumveeBase
-  id: RMCSeatHumveeDriver
-  name: humvee driver seat
-  components:
-  - type: VehicleDriverSeat
-    skills:
-      all: {}
-
-- type: entity
-  parent: RMCSeatHumveeBase
-  id: RMCSeatHumveeWeaponsOperator
-  name: humvee gunner seat
-  components:
-  - type: VehicleWeaponsSeat
-    skills:
-      all: {}
-  - type: UserInterface
-    interfaces:
-      enum.RMCVehicleWeaponsUiKey.Key:
-        type: RMCVehicleWeaponsBoundUserInterface
 
 - type: entity
   parent: RMCVehicleHumveeInteriorBase
@@ -162,11 +131,14 @@
         type: RMCVehicleAmmoLoaderBoundUserInterface
 
 - type: entity
-  parent: RMCVehicleHumveeDoorBase
+  parent: RMCVehicleHumveeRoofBase
   id: RMCVehicleHumveeExitDoor
   components:
   - type: Sprite
-    state: exit_door
+    layers:
+    - state: exit_door
+      map: [ "roof" ]
+  - type: Clickable
 
 - type: entity
   parent: RMCVehicleHumveeDoorBase
@@ -202,48 +174,6 @@
   components:
   - type: Sprite
     state: carrier_backdoor2
-
-- type: entity
-  parent: RMCVehicleHumveeDoorBase
-  id: RMCVehicleHumveeViewportDoor
-  components:
-  - type: Sprite
-    state: viewport_door
-
-- type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportLarge
-  components:
-  - type: Sprite
-    state: VIEWPORT
-
-- type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportSmall
-  components:
-  - type: Sprite
-    state: small_viewport
-
-- type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportSmallWindow
-  components:
-  - type: Sprite
-    state: small_viewport_window
-
-- type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportFrontNorth
-  components:
-  - type: Sprite
-    state: viewport_frontwindow_north
-
-- type: entity
-  parent: RMCVehicleHumveeViewportBase
-  id: RMCVehicleHumveeViewportFrontSouth
-  components:
-  - type: Sprite
-    state: viewport_frontwindow_south
 
 - type: entity
   parent: RMCVehicleHumveeInteriorBase
@@ -337,6 +267,24 @@
   placement:
     mode: PlaceFree
   components:
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
   - type: Sprite
     visible: false
 
@@ -348,6 +296,9 @@
   placement:
     mode: PlaceFree
   components:
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -365,6 +316,5 @@
         - HighImpassable
         - MidImpassable
         - LowImpassable
-        - InteractImpassable
   - type: Sprite
     visible: false

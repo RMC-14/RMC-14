@@ -26,6 +26,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly RMCVehicleSystem _vehicleSystem = default!;
+    [Dependency] private readonly VehicleTurretSystem _turretSystem = default!;
     [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
     [Dependency] private readonly INetManager _net = default!;
 
@@ -38,6 +39,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, BoundUIOpenedEvent>(OnWeaponsUiOpened);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, BoundUIClosedEvent>(OnWeaponsUiClosed);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsSelectMessage>(OnWeaponsSelect);
+        SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsStabilizationMessage>(OnWeaponsStabilization);
 
         SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
@@ -140,8 +142,6 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     {
         if (!Equals(args.UiKey, RMCVehicleWeaponsUiKey.Key))
             return;
-
-        // No state cleanup yet; selection is tied to the vehicle operator.
     }
 
     private void OnWeaponsSelect(Entity<VehicleWeaponsSeatComponent> ent, ref RMCVehicleWeaponsSelectMessage args)
@@ -220,6 +220,55 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         }
 
         Dirty(vehicleUid, weapons);
+        UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
+    }
+
+    private void OnWeaponsStabilization(Entity<VehicleWeaponsSeatComponent> ent, ref RMCVehicleWeaponsStabilizationMessage args)
+    {
+        if (!Equals(args.UiKey, RMCVehicleWeaponsUiKey.Key))
+            return;
+
+        if (args.Actor == default || !Exists(args.Actor))
+            return;
+
+        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+            return;
+
+        var vehicleUid = vehicle.Value;
+        if (!TryComp(vehicleUid, out RMCVehicleWeaponsComponent? weapons) || weapons.Operator != args.Actor)
+            return;
+
+        if (!TryComp(args.Actor, out BuckleComponent? buckle) || buckle.BuckledTo != ent.Owner)
+            return;
+
+        RMCHardpointSlotsComponent? hardpoints = null;
+        ItemSlotsComponent? itemSlots = null;
+        if (!Resolve(vehicleUid, ref hardpoints, logMissing: false) ||
+            !Resolve(vehicleUid, ref itemSlots, logMissing: false))
+        {
+            return;
+        }
+
+        if (!weapons.OperatorSelections.TryGetValue(args.Actor, out var operatorSlot) ||
+            string.IsNullOrWhiteSpace(operatorSlot))
+        {
+            return;
+        }
+
+        if (itemSlots == null ||
+            !TryGetSlotItem(vehicleUid, operatorSlot, itemSlots, out var item))
+            return;
+
+        if (HasComp<VehicleTurretAttachmentComponent>(item))
+            return;
+
+        if (!TryComp(item, out VehicleTurretComponent? turret) ||
+            !_turretSystem.TryResolveRotationTarget(item, out var targetUid, out var targetTurret))
+            return;
+
+        targetTurret.StabilizedRotation = args.Enabled;
+        Dirty(targetUid, targetTurret);
+
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
     }
 
@@ -436,7 +485,19 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             }
         }
 
-        _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key, new RMCVehicleWeaponsUiState(entries));
+        var canToggleStabilization = false;
+        var stabilizationEnabled = false;
+
+        if (operatorUid != null && operatorSlot != null &&
+            TryGetSlotItem(vehicle, operatorSlot, itemSlots, out var selectedItem) &&
+            TryComp(selectedItem, out VehicleTurretComponent? selectedTurret) &&
+            _turretSystem.TryResolveRotationTarget(selectedItem, out var targetUid, out var targetTurret))
+        {
+            stabilizationEnabled = targetTurret.StabilizedRotation;
+            canToggleStabilization = !HasComp<VehicleTurretAttachmentComponent>(selectedItem);
+        }
+
+        _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key, new RMCVehicleWeaponsUiState(entries, canToggleStabilization, stabilizationEnabled));
     }
 
     private void AppendTurretEntries(
