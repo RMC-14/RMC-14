@@ -41,6 +41,7 @@ public sealed class RMCVomitSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<RMCVomitEvent>(OnRMCVomit);
         SubscribeLocalEvent<RMCDoVomitEvent>(OnRMCDoVomit);
     }
@@ -88,6 +89,7 @@ public sealed class RMCVomitSystem : EntitySystem
                 return;
             if (!HasComp<RMCVomitComponent>(uid))
                 return;
+
             _popup.PopupEntity(Loc.GetString("rmc-vomit-warning"), uid, uid);
         });
 
@@ -118,9 +120,8 @@ public sealed class RMCVomitSystem : EntitySystem
         if (!vomitComp.IsVomiting)
             vomitComp.IsVomiting = true;
 
-        var stunDuration = vomitComp.VomitStunDuration;
-        if (stunDuration > TimeSpan.Zero)
-            _stun.TryStun(uid, stunDuration, true);
+        if (vomitComp.VomitStunDuration > TimeSpan.Zero)
+            _stun.TryStun(uid, vomitComp.VomitStunDuration, true);
 
         // Create vomit solution
         var solution = new Solution();
@@ -173,12 +174,11 @@ public sealed class RMCVomitSystem : EntitySystem
             _damageable.TryChangeDamage(uid, healing, true, interruptsDoAfters: false);
         }
 
+        _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
+        _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
+
         if (_netManager.IsServer)
-        {
             _audio.PlayPvs(vomitComp.VomitSound, uid);
-            _popup.PopupEntity(Loc.GetString("rmc-vomit-others", ("person", Identity.Entity(uid, EntityManager))), uid);
-            _popup.PopupEntity(Loc.GetString("rmc-vomit-self"), uid, uid);
-        }
 
         // Reset cooldown 35 seconds after vomit
         Timer.Spawn(vomitComp.CooldownAfterVomit,

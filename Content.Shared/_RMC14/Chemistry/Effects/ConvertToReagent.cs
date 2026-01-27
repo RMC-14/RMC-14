@@ -9,8 +9,10 @@ public sealed partial class ConvertToReagent : EntityEffect
 {
     [DataField(required: true)]
     public ProtoId<ReagentPrototype> TargetReagent;
+
     [DataField]
     public FixedPoint2 PercentRate = 0.1;
+
     [DataField]
     public FixedPoint2 MinimumRate = 5;
 
@@ -24,20 +26,17 @@ public sealed partial class ConvertToReagent : EntityEffect
         if (args is not EntityEffectReagentArgs reagentArgs)
             return;
 
-        var source = reagentArgs.Source;
-        if (source == null)
+        if (reagentArgs.Source == null)
             return;
 
         if (reagentArgs.Reagent?.ID == TargetReagent.Id)
             return;
 
-        var currentQuantity = reagentArgs.Quantity;
-        if (currentQuantity <= FixedPoint2.Zero)
+        if (reagentArgs.Quantity <= FixedPoint2.Zero)
             return;
 
-        var amountToConvert = FixedPoint2.Max(currentQuantity * PercentRate, MinimumRate) * reagentArgs.Scale;
-
-        source.RemoveReagent(reagentArgs.Reagent!.ID, amountToConvert);
-        source.AddReagent(TargetReagent, amountToConvert);
+        var amountToConvert = FixedPoint2.Max(reagentArgs.Quantity * PercentRate, MinimumRate) * reagentArgs.Scale;
+        reagentArgs.Source.RemoveReagent(reagentArgs.Reagent!.ID, amountToConvert);
+        reagentArgs.Source.AddReagent(TargetReagent, amountToConvert);
     }
 }
