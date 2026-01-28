@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMIDCardSilver
   id: CMIDCardSeniorEnlistedAdvisor
   name: senior enlisted advisor ID card
@@ -22,7 +22,8 @@
   - type: PresetIdCard
     job: CMSurvivor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -32,7 +33,8 @@
   - type: PresetIdCard
     job: CMSurvivorDoctor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -42,7 +44,8 @@
   - type: PresetIdCard
     job: CMSurvivorEngineer
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -52,7 +55,8 @@
   - type: PresetIdCard
     job: CMSurvivorScientist
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -67,7 +71,8 @@
   - type: PresetIdCard
     job: CMSurvivorSecurity
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -79,7 +84,8 @@
   - type: Sprite
     state: corporate_liaison
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -93,7 +99,8 @@
   - type: Sprite
     state: pmc
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
 
 - type: entity
   parent: CMIDCardLiaison
@@ -105,7 +112,8 @@
   - type: Sprite
     state: pmc
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -114,6 +122,10 @@
   id: CMIDCardLiaisonColony
   name: liaison ID card
   components:
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCorporate
 
@@ -180,7 +192,8 @@
   - type: PresetIdCard
     job: CMBureauMarshal
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -191,7 +204,8 @@
   - type: PresetIdCard
     job: CMBureauDeputy
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -200,7 +214,8 @@
   description: A corporate holo-badge. It has a unique uncapped bottom.
   components:
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Access
     groups:
     - Colony
@@ -317,7 +332,8 @@
   - type: PresetIdCard
     job: RMCJobSyntheticColony
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   id: RMCIDCardAegis
