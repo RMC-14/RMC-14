@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed dropping a fireman carry not dropping the person you are carrying.
-    type: Fix
-  - message: Fixed duplicating shells by manually chambering shotguns.
-    type: Fix
-  - message: Fixed showing ghosts the xeno version of the parasite name.
-    type: Fix
-  - message: Fixed the chatbox bouncing when a message is repeated.
-    type: Fix
-  - message: Fixed sequoia beers being free on the corporate liaison briefcase vendor.
-    type: Fix
-  - message: Fixed xeno roundstart corpses starting with their radios on.
-    type: Fix
-  - message: Fixed the new lizards screams not being mono and sounding like they are
-      playing from inside your skull.
-    type: Fix
-  - message: Removed mesons until it's fixed to not lag out your game.
-    type: Remove
-  id: 2331
-  time: '2025-09-06T23:06:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7814
 - author: Vermidia
   changes:
   - message: Fixed xenos sometimes getting stuck in pipes when ventcrawling
@@ -4696,5 +4674,17 @@
   id: 2833
   time: '2026-01-27T22:04:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9077
+- author: Arykh
+  changes:
+  - message: Added missing armor values to multiple helmets. This will not make you
+      any tankier than before, it is in preparation for limb damage.
+    type: Fix
+  - message: Fixed Combat Technician helmets missing their hearing protection.
+    type: Fix
+  - message: Fixed SPP helmets missing their hearing protection.
+    type: Fix
+  id: 2834
+  time: '2026-01-28T01:43:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9001
 Name: RMC14
 Order: -1
