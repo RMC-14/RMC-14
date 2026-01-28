@@ -11,6 +11,8 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
+using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -49,6 +51,10 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         SubscribeLocalEvent<HiveComponent, MapInitEvent>(OnMapInit);
 
         SubscribeLocalEvent<XenoEvolutionGranterComponent, MobStateChangedEvent>(OnGranterMobStateChanged);
+
+        SubscribeLocalEvent<AutoAssignHiveComponent, ComponentStartup>(OnAutoAssignHiveAdded);
+
+        SubscribeLocalEvent<HiveGunComponent, AmmoShotEvent>(OnHiveGunShot);
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -130,6 +136,19 @@ public abstract class SharedXenoHiveSystem : EntitySystem
             return null;
 
         return (uid, comp);
+    }
+
+    public Entity<HiveComponent>? GetHiveByName(string hiveName)
+    {
+        var query = EntityQueryEnumerator<HiveComponent>();
+
+        while (query.MoveNext(out var uid, out var hive))
+        {
+            if (MetaData(uid).EntityName == hiveName)
+                return (uid, hive);
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -376,6 +395,27 @@ public abstract class SharedXenoHiveSystem : EntitySystem
         _adminLog.Add(LogType.RMCBurrowedLarva, $"{session.Name:player} took a burrowed larva from hive {ToPrettyString(hive):hive}.");
 
         return true;
+    }
+
+    private void OnAutoAssignHiveAdded(Entity<AutoAssignHiveComponent> ent, ref ComponentStartup args)
+    {
+        var hive = GetHiveByName(ent.Comp.Hive);
+
+        if (hive == null)
+        {
+            Log.Debug($"Tried to auto assign hive to {ent.Comp.Hive}, but no such hive was found");
+            return;
+        }
+
+        SetHive(ent.Owner, hive);
+    }
+
+    private void OnHiveGunShot(Entity<HiveGunComponent> ent, ref AmmoShotEvent args)
+    {
+        foreach (var bullet in args.FiredProjectiles)
+        {
+            SetSameHive(ent.Owner, bullet);
+        }
     }
 }
 
