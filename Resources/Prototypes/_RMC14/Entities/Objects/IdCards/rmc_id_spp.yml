@@ -33,7 +33,8 @@
   description: A SPP officer's ID card.
   components:
   - type: ItemIFF
-    faction: FactionSPP
+    factions:
+    - FactionSPP
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/spp_id.rsi
     state: spp
