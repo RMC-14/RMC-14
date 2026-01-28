@@ -229,7 +229,7 @@
         name: Flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun

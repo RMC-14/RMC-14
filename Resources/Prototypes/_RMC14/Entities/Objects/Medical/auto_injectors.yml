@@ -40,8 +40,11 @@
     delay: 0.333
   - type: IconLabel
     textColor: White
-    storedOffset: 0, 12
+    storedOffset: -12, 12
   - type: RMCSmartFridgeInsertable
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 300
 
 - type: entity
   parent: CMAutoInjectorBase

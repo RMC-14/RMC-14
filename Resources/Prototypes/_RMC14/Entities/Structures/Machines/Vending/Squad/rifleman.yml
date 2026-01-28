@@ -202,8 +202,8 @@
         points: 5
       - id: RMCWeldingGoggles
         points: 5
-    #- id: CMSlingPouch
-    #  points: 15
+      - id: RMCPouchSling
+        points: 15
       - id: RMCPouchGeneralLarge
         points: 15
     - name: Utilities

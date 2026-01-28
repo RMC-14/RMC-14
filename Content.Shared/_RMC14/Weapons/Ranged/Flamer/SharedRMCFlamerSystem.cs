@@ -24,6 +24,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -48,6 +49,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {
@@ -116,7 +118,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     private void OnAttemptShoot(Entity<RMCFlamerAmmoProviderComponent> ent, ref AttemptShootEvent args)
     {
         if (args.ToCoordinates is not { } toCoordinates ||
-            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out _, out _, out _))
+            CanShootFlamer(ent, args.FromCoordinates, toCoordinates, out _, out var solution, out _, out _))
         {
             return;
         }
@@ -130,6 +132,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         ent.Comp.CantShootPopupLast = time;
         Dirty(ent);
+
+        if (solution is not { } sol || sol.Comp.Solution.Volume < ent.Comp.CostPer)
+        {
+            args.Message = Loc.GetString("rmc-flamer-empty");
+            return;
+        }
 
         args.Message = Loc.GetString("rmc-flamer-too-close");
     }
@@ -299,8 +307,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (reagent.FireSpread && cost > 2)
             cost = (int)Math.Ceiling(cost / 3.0f);
 
-        solution.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * cost);
-        _solution.UpdateChemicals(solution);
+        solution.Value.Comp.Solution.RemoveSolution(flamer.Comp.CostPer * cost);
+        _solution.UpdateChemicals(solution.Value);
 
         if (_net.IsClient)
             return;
@@ -316,23 +324,41 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         Dirty(chain, chainComp);
     }
 
+    public bool TryGetPreviewTiles(
+        Entity<RMCFlamerAmmoProviderComponent> flamer,
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates,
+        [NotNullWhen(true)] out List<LineTile>? tiles)
+    {
+        return CanShootFlamer(flamer, fromCoordinates, toCoordinates, out tiles, out _, out _, out _);
+    }
+
+    public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
+    {
+        color = default;
+        if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
+            return false;
+
+        color = solutionEnt.Value.Comp.Solution.GetColor(_prototypes);
+        return true;
+    }
+
     private bool CanShootFlamer(
         Entity<RMCFlamerAmmoProviderComponent> flamer,
         EntityCoordinates fromCoordinates,
         EntityCoordinates toCoordinates,
         [NotNullWhen(true)] out List<LineTile>? tiles,
-        out Entity<SolutionComponent> solution,
+        [NotNullWhen(true)] out Entity<SolutionComponent>? solution,
         [NotNullWhen(true)] out ReagentPrototype? reagent,
         [NotNullWhen(true)] out Entity<RMCFlamerTankComponent>? tank)
     {
         tiles = null;
-        solution = default;
         reagent = null;
-        if (!TryGetTankSolution(flamer, out var solutionEnt, out tank))
+        if (!TryGetTankSolution(flamer, out solution, out tank))
             return false;
 
-        var volume = solutionEnt.Value.Comp.Solution.Volume;
-        if (volume <= flamer.Comp.CostPer)
+        var volume = solution.Value.Comp.Solution.Volume;
+        if (volume < flamer.Comp.CostPer)
             return false;
 
         if (!fromCoordinates.TryDelta(EntityManager, _transform, toCoordinates, out var delta))
@@ -346,7 +372,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         // to prevent hitting yourself
         fromCoordinates = fromCoordinates.Offset(normalized * 0.23f);
 
-        if (!solutionEnt.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))
+        if (!solution.Value.Comp.Solution.TryFirstOrNull(out var firstReagent))
             return false;
 
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
@@ -363,7 +389,6 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             return false;
         }
 
-        solution = solutionEnt.Value;
         return true;
     }
 
@@ -376,7 +401,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         if (user == null)
             return;
 
-        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates));
+        _rmcSpray.Spray(spray, user.Value, _transform.ToMapCoordinates(toCoordinates), spray.Comp.HitUser);
     }
 
     /// <summary>
@@ -441,7 +466,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void Transfer(EntityUid source,
         Entity<SolutionComponent> sourceSolutionEnt,
-        EntityUid target,
+        Entity<RMCFlamerTankComponent> target,
         Entity<SolutionComponent> targetSolutionEnt,
         EntityUid user)
     {
@@ -449,6 +474,11 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         var targetSolution = sourceSolutionEnt.Comp.Solution;
         foreach (var content in targetSolution.Contents)
         {
+            if (target.Comp.ReagentWhitelist is { } whitelist && !whitelist.Contains(content.Reagent.Prototype))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-flamer-tank-not-whitelisted", ("tank", target)), source, user);
+                return;
+            }
             if (_reagent.TryIndex(content.Reagent.Prototype, out var reagent) &&
                 (reagent.Intensity <= 0 || reagent.Duration <= 0 || reagent.Radius <= 0))
             {
