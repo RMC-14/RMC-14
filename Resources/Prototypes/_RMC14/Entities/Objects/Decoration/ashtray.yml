@@ -12,6 +12,10 @@
   - type: StorageFillVisualizer
     fillBaseName: icon
     maxFillLevels: 2
+  - type: PhysicalComposition
+    materialComposition: # "Plastic" ¯\_(ツ)_/¯
+      CMSteel: 30
+      CMGlass: 30
 
 - type: entity
   parent: RMCAshtray
@@ -24,6 +28,9 @@
     layers:
       - state: icon-0
         map: ["enum.StorageFillLayers.Fill"]
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 80
 
 - type: entity
   parent: RMCAshtray
@@ -36,3 +43,6 @@
     layers:
       - state: icon-0
         map: ["enum.StorageFillLayers.Fill"]
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 60

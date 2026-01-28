@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPSquadLeadPVE
   name: rmc-job-name-spp-squadlead
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-squadlead
   playTimeTracker: RMCJobSPPSquadLeadPVE
   ranks:
     RMCRankSPPSerzhant: []
@@ -37,6 +37,10 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-squadlead
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
@@ -63,9 +67,6 @@
   id: RMCJobSPPSquadLeadPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPSquadLeadPVE
