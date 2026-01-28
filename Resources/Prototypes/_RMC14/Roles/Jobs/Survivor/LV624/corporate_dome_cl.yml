@@ -14,7 +14,7 @@
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaManager
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CorporateLiaison
+      preset: RMCSurvivorPresetCorporate
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -24,6 +24,13 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: exec_spec
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-cl
 
 - type: entity
