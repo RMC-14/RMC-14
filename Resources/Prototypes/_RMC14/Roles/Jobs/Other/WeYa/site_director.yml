@@ -39,6 +39,13 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sd
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity

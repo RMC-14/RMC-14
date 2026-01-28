@@ -1,0 +1,38 @@
+﻿- type: entity
+  parent: BaseStructureDynamic
+  id: RMCCoffeeMachine
+  name: coffee machine
+  description: A coffee machine
+  components: #TODO: Make the coffee machine actually function
+  - type: Transform
+    noRot: true
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/coffee_machine.rsi
+    state: coffee_empty_on
+    noRot: true
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.03
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - MobMask
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Appearance

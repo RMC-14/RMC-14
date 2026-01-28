@@ -6,7 +6,7 @@
   ranks:
     RMCRankTSEPASergeant:
     - !type:RoleTimeRequirement
-      role: CMJobSurvivorSecurity # TODO allow jobs to support multiple playtime trackers
+      role: CMJobSurvivorSecurity
       time: 630000 # 175 hours
     RMCRankTSEPASeniorConstable:
     - !type:RoleTimeRequirement
@@ -24,16 +24,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
+      preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaConstable
     - type: RMCSurvivor

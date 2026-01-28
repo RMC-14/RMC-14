@@ -177,6 +177,8 @@
     rebounds: true
     capacity: 16
     spreadAngle: 40
+  - type: ClusterLimitHits
+    limit: 5
 
 - type: entity
   parent: RMCBaseAirBurstProjectile

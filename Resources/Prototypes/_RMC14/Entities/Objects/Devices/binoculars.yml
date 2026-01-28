@@ -24,9 +24,13 @@
   - type: EmitSoundOnPickup
     sound:
       path: /Audio/_RMC14/Handling/wirecutter_pickup.ogg
+      params:
+        volume: -6
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
+      params:
+        volume: -4
   - type: Clothing
     quickEquip: false
     slots:

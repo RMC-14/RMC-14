@@ -18,9 +18,18 @@
   - type: EmitSoundOnPickup
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       path: /Audio/_RMC14/Machines/armor_equip.ogg
@@ -59,6 +68,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCXM51Holster
       - RMCDetector
       - RMCMatebaHolster
@@ -129,6 +139,7 @@
       - CMMagazineSmg
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSniper
 
 - type: entity
@@ -159,6 +170,7 @@
       - RMCSMGPouchHolster
       - RMCGeneralPistolHolster
       - RMCGeneralRevolverHolster
+      - RMCBeltHolsterM13
       - RMCMatebaHolster
       - RMCCeremonialSword
       - RMCDetector
@@ -215,6 +227,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - CMMagazinePistol
@@ -242,9 +255,15 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
       state: sql-armor
   - type: RMCStorageEjectHand
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-marine-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformMarine
 
 - type: entity
-  parent: RMCBaseMarineArmorNoAccessory
+  parent: [ RMCBaseMarineArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmor
   abstract: true
 
@@ -330,7 +349,7 @@
     autoRechargeRate: 2 #recharge of 2 makes total drain 1w / s so max charge is 1:1 with time. Time to fully charge should be 5 minutes. Having recharge gives light an extended flicker period which gives you some warning to return to light area.
 
 - type: entity
-  parent: RMCBaseMarineArmorLightNoAccessory
+  parent: [ RMCBaseMarineArmorLightNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmorLight
   abstract: true
 
