@@ -64,7 +64,7 @@
     - PillCanister
   - type: IconLabel
     textColor: White
-    storedOffset: 3, 12
+    storedOffset: -12, 12
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
