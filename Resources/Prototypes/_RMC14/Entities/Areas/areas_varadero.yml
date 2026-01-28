@@ -638,3 +638,13 @@
     state: predship
   - type: Area
     minimapColor: '#885A04E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorUnregisteredShuttle
+  name: New Varadero - Unregistered Shuttle
+  components:
+  - type: Sprite
+    state: offices0
+  - type: Area
+    minimapColor: '#39b2b5EE'

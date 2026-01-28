@@ -1,8 +1,8 @@
 ﻿- type: job
   parent: CMJobBase
   id: CMCMO
-  name: cm-job-name-cmo
-  description: cm-job-description-cmo
+  name: rmc-job-name-cmo
+  description: rmc-job-description-cmo
   playTimeTracker: CMJobCMO
   requirements:
   - !type:TotalJobsTimeRequirement
@@ -48,7 +48,7 @@
     - type: MarineOrders
     - type: RMCPointing
     - type: JobPrefix
-      prefix: cm-job-prefix-cmo
+      prefix: rmc-job-prefix-cmo
     - type: ViewIntelObjectives
     - type: CommandAccent
     - type: TacticalMapIcon
