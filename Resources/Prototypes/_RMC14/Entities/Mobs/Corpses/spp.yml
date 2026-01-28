@@ -5,7 +5,6 @@
   components:
   - type: Loadout
     prototypes: [ RMCGearCorpseSPPSoldier ]
-  - type: VictimBurst
   - type: Rank
     rank: RMCRankSPPEfreitor
   - type: Marine
