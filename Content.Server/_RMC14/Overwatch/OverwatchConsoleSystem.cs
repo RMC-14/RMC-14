@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Overwatch;
+using Content.Shared.Ghost;
 using Robust.Server.GameObjects;
+using Robust.Shared.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
@@ -65,11 +67,26 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);
 
-        _pvsOverride.AddForceSend(toWatch.Owner, watcher.Comp1.PlayerSession);
-        RemoveWatcher(watcher);
-        EnsureComp<OverwatchWatchingComponent>(watcher).Watching = toWatch;
+        var watchSession = watcher.Comp1.PlayerSession;
+        var isCameraForced = false;
+        if (watchSession != null && watchSession.AttachedEntity is not null)
+        {
+            try
+            {
+                _pvsOverride.AddForceSend(toWatch.Owner, watchSession);
+                isCameraForced = true;
+            }
+            catch
+            {
+            }
+        }
 
-        // Only force-send nearby entities if extra zoom/offset is active, and the watcher and watched are on different maps
+        RemoveWatcher(watcher);
+        var watchingComp = EnsureComp<OverwatchWatchingComponent>(watcher);
+        watchingComp.Watching = toWatch;
+        watchingComp.isForceSent = isCameraForced;
+
+        // Only force-sends nearby entities if extra zoom/offset is active, and the watcher and watched are on different maps
         var forced = new List<EntityUid>();
         var offsetActive = watcher.Comp2 != null && watcher.Comp2.Offset != Vector2.Zero;
         var watchingCrossMap = false;
@@ -97,12 +114,17 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
                     try
                     {
-                        _pvsOverride.AddForceSend(ent, watcher.Comp1.PlayerSession);
-                        forced.Add(ent);
+                        if (watchSession != null)
+                        {
+                            if (TryComp(ent, out GhostComponent? _))
+                                continue;
+
+                            _pvsOverride.AddForceSend(ent, watchSession);
+                            forced.Add(ent);
+                        }
                     }
                     catch
                     {
-                        
                     }
                 }
             }
@@ -112,8 +134,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             }
         }
 
-        var watchingComp = EnsureComp<OverwatchWatchingComponent>(watcher);
-        watchingComp.Watching = toWatch;
         watchingComp.ForcedEntities = forced.Count > 0 ? forced : null;
         toWatch.Comp.Watching.Add(watcher);
     }
@@ -130,7 +150,16 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (oldTarget != null && oldTarget != watcher.Owner)
         {
             _viewSubscriber.RemoveViewSubscriber(oldTarget.Value, player);
-            _pvsOverride.RemoveForceSend(oldTarget.Value, player);
+            if (TryComp(watcher, out OverwatchWatchingComponent? watchingComp) && watchingComp.isForceSent)
+            {
+                try
+                {
+                    _pvsOverride.RemoveForceSend(oldTarget.Value, player);
+                }
+                catch
+                {
+                }
+            }
         }
 
         RemoveWatcher(watcher);
@@ -144,29 +173,32 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (TryComp(watching.Watching, out OverwatchCameraComponent? watched))
             watched.Watching.Remove(toRemove);
 
-        // Remove any entities that were force-sent to the watcher
+        // Removes any entities that were force-sent to the watcher
         if (TryComp(toRemove, out ActorComponent? actor) && watched != null)
         {
-            try
+            var session = actor?.PlayerSession;
+            if (session != null)
             {
-                _pvsOverride.RemoveForceSend(watched.Owner, actor.PlayerSession);
-            }
-            catch
-            {
-
-            }
-
-            if (watching.ForcedEntities != null)
-            {
-                foreach (var ent in watching.ForcedEntities)
+                try
                 {
-                    try
+                    if (watching.isForceSent)
+                        _pvsOverride.RemoveForceSend(watched.Owner, session);
+                }
+                catch
+                {
+                }
+
+                if (watching.ForcedEntities != null)
+                {
+                    foreach (var ent in watching.ForcedEntities)
                     {
-                        _pvsOverride.RemoveForceSend(ent, actor.PlayerSession);
-                    }
-                    catch
-                    {
-                        
+                        try
+                        {
+                            _pvsOverride.RemoveForceSend(ent, session);
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
             }
@@ -189,8 +221,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (!TryComp(watched, out OverwatchCameraComponent? camComp))
             return;
 
-        var offsetActive = args.Direction != OverwatchDirection.Reset;
-
         foreach (var watcher in camComp.Watching.ToArray())
         {
             if (TerminatingOrDeleted(watcher) ||
@@ -198,20 +228,30 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                 !TryComp(watcher, out ActorComponent? actor))
                 continue;
 
-            // Remove force-sent entities when the camera zoom/offset is reset
-            if (!offsetActive)
+            var session = actor.PlayerSession;
+            var watcherOffsetActive = false;
+            try
             {
-                if (watchingComp.ForcedEntities != null)
+                if (TryComp(watcher, out EyeComponent? watcherEye))
+                    watcherOffsetActive = watcherEye.Offset != Vector2.Zero;
+            }
+            catch
+            {
+            }
+
+            // Removes force-sent entities when the camera zoom/offset is reset
+            if (!watcherOffsetActive)
+            {
+                if (watchingComp.ForcedEntities != null && session != null)
                 {
                     foreach (var ent in watchingComp.ForcedEntities)
                     {
                         try
                         {
-                            _pvsOverride.RemoveForceSend(ent, actor.PlayerSession);
+                            _pvsOverride.RemoveForceSend(ent, session);
                         }
                         catch
                         {
-                            
                         }
                     }
 
@@ -221,7 +261,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                 continue;
             }
 
-            // Only force-send nearby entities when the watcher and watched are on different maps
+            // Only force-sends nearby entities when the watcher and watched are on different maps
             var watchingCrossMap = false;
             try
             {
@@ -248,18 +288,24 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 
                         try
                         {
-                            _pvsOverride.AddForceSend(ent, actor.PlayerSession);
-                            forced.Add(ent);
+                            if (session != null)
+                            {
+                                if (TryComp(ent, out GhostComponent? _))
+                                {
+                                    continue;
+                                }
+
+                                _pvsOverride.AddForceSend(ent, session);
+                                forced.Add(ent);
+                            }
                         }
                         catch
                         {
-                            
                         }
                     }
                 }
                 catch
                 {
-                    
                 }
 
                 watchingComp.ForcedEntities = forced.Count > 0 ? forced : null;
