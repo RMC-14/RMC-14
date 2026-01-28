@@ -401,3 +401,8 @@
     whitelist:
       tags:
       - SurvivalPouch
+  - type: HumanoidAppearance
+    species: Human
+    hideLayersOnEquip:
+    - UndergarmentTop
+    - Hair

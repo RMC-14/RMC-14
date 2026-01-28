@@ -63,3 +63,26 @@
   - type: ExplosionResistance
     damageCoefficient: 0
     worn: false
+
+- type: entity
+  parent: [RMCJacketWindbreaker, RMCAllowSuitStorageClothingJacketMB]
+  id: RMCJacketEIAFCombatJacket
+  name: EIAF combat jacket
+  description: A rugged, all-weather combat jacket issued to the Extrasolar Imperial Airborne Force. Designed for versatility, it serves as both a field garment and a lightweight layer of protection. Reinforced with ballistic fibers and treated for weather resistance, it offers limited defense against shrapnel and small arms fire while keeping paratroopers comfortable in harsh conditions. Its deep green color and durable fabric make it a staple for both active deployment and off-duty wear.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+      visible: true
+    - state: jacket-icon
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 15
+    bio: 10
+    explosionArmor: 10

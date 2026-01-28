@@ -13,7 +13,7 @@
   - type: Speech
     speechVerb: Slime
     speechSounds: Slime
-    allowedEmotes: ['Squish']
+    allowedEmotes: ['Squish', 'RMCSlimeBubble', 'RMCSlimePop', 'RMCSlimeWobble']
   - type: TypingIndicator
     proto: slime
   - type: Vocal

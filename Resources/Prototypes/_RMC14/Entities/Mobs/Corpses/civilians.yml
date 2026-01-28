@@ -502,3 +502,23 @@
   storage:
     back:
     - RMCRadioHandheldColonyOff
+
+# CLF
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseCLF
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseCLF ]
+
+- type: startingGear
+  id: RMCGearCorpseCLF
+  equipment:
+    head: RMCHeadMilitiaHood
+    ears: CMHeadsetColony
+    jumpsuit: RMCJumpsuitCLFSoldier
+    outerClothing: RMCCoatMilitiaVest
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFSoldier
+    pocket1: RMCFlashlight
