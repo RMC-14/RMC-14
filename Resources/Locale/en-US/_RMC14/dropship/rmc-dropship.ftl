@@ -109,3 +109,10 @@ rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
 rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
 rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
 rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
+
+rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
+rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
+    {$loaded}
+    Ammo: {current} / {$max}
+
+

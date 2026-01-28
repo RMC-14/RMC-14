@@ -16,6 +16,7 @@ rmc-power-loader-full-ammo = {CAPITALIZE(THE($ammo))} is full!
 
 rmc-power-loader-occupied-weapon = There's already a weapon installed there!
 rmc-power-loader-occupied-ammo = You need to unload the ammo crate inside first!
+rmc-power-loader-occupied-deployable = You need to unload the ordnance inside first!
 rmc-power-loader-ammo-no-weapon = You need to install a weapon first!
 
 rmc-power-loader-occupied = There's already something installed there!

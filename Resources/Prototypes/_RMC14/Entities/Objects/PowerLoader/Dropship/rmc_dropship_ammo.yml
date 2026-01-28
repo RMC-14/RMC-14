@@ -314,3 +314,22 @@
     fire:
       type: RMCTileFireMiniMike
       range: 1
+
+- type: entity
+  parent: RMCDropshipAttachmentBase
+  id: RMCDropshipAttachmentAmmoLaunchableSentry
+  name: A/C-49-P Air Deployable Sentry
+  description: An omni-directional sentry, capable of defending an area from lightly armored hostile incursion. Can be loaded into the LAG-14 Internal Sentry Launcher.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_ammo.rsi
+    state: launchable_sentry
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipUtilityPoint
+  - type: PowerLoaderDetachable
+  - type: Appearance
+  - type: RMCOrbitalDeployable
+    deployPrototype: RMCSentryDropship

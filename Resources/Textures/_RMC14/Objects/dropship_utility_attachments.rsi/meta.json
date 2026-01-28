@@ -67,6 +67,12 @@
     },
     {
       "name": "paradrop_system"
+    },
+    {
+      "name": "launch_bay"
+    },
+    {
+      "name": "launch_bay_deployed"
     }
   ]
 }

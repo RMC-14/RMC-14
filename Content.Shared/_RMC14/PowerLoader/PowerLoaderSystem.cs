@@ -348,7 +348,28 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnPointActivateInWorld(Entity<DropshipUtilityPointComponent> ent, ref ActivateInWorldEvent args)
     {
-        TryStartPointDetach(ent, ent.Comp.UtilitySlotId, ref args);
+        if (!TryComp(args.User, out PowerLoaderComponent? loader))
+            return;
+
+        var user = new Entity<PowerLoaderComponent?>(args.User, loader);
+        ContainerSlot container;
+
+        if (CanDetachPopup(ref user, ent, ent.Comp.DeployableContainerSlotId, false, out var deployableSlot) &&
+            deployableSlot.ContainedEntity != null)
+        {
+            container = deployableSlot;
+        }
+        else if (CanDetachPopup(ref user, ent, ent.Comp.UtilitySlotId, true, out var weaponSlot) &&
+                 weaponSlot.ContainedEntity != null)
+        {
+            container = weaponSlot;
+        }
+        else
+        {
+            return;
+        }
+
+        StartPointDetach(ent, container, (user, loader), args.Target);
     }
 
     private void OnEngineActivateInWorld(Entity<DropshipEnginePointComponent> ent, ref ActivateInWorldEvent args)
@@ -399,7 +420,23 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnGetSlot(Entity<DropshipUtilityPointComponent> ent, ref GetAttachmentSlotEvent args)
     {
-        TryGetSlot(ent, ent.Comp.UtilitySlotId, ref args);
+        var user = new Entity<PowerLoaderComponent?>(GetEntity(args.User), null);
+        if (!TryGetEntity(args.Used, out var used))
+            return;
+
+        ContainerSlot? slot;
+        if (args.BeingAttached)
+        {
+            args.CanUse = CanAttachPopup(ref user, ent, used.Value, out slot);
+        }
+        else
+        {
+            args.CanUse = CanDetachPopup(ref user, ent, ent.Comp.DeployableContainerSlotId, false, out slot) ||
+                          CanDetachPopup(ref user, ent, ent.Comp.UtilitySlotId, false, out slot);
+        }
+
+        if (slot != null)
+            args.SlotId = slot.ID;
     }
 
     private void OnGetSlot(Entity<DropshipEnginePointComponent> ent, ref GetAttachmentSlotEvent args)
@@ -424,7 +461,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (!TryGetPointContainer(args, out var user, out var container, out var contained, out var slot))
-            return;
+            return; //
 
         if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
             utilityComp.AttachmentPoint = container;
@@ -480,7 +517,37 @@ public sealed class PowerLoaderSystem : EntitySystem
 
     private void OnDropshipDetach(Entity<DropshipUtilityPointComponent> ent, ref DropshipDetachDoAfterEvent args)
     {
-        DetachPoint(ref args);
+        if (!TryGetPointContainer(args, out var user, out _, out var contained, out var slot))
+            return;
+
+        _container.Remove(contained, slot);
+
+        if (TryComp(contained, out RMCOrbitalDeployableComponent? deployable))
+        {
+            if (deployable.RemainingDeployCount <= 0)
+            {
+                QueueDel(contained);
+
+                var msg = Loc.GetString("rmc-power-loader-discard-empty", ("ammo", contained));
+                foreach (var buckled in GetBuckled(user))
+                {
+                    _popup.PopupClient(msg, buckled, PopupType.Medium);
+                }
+            }
+        }
+        else
+        {
+            if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
+            {
+                utilityComp.AttachmentPoint = null;
+
+                var ev = new DropShipAttachmentDetachedEvent(contained);
+                RaiseLocalEvent(slot.Owner, ref ev);
+            }
+        }
+
+        PickUp((user, user.Comp), contained);
+        SyncHands((user, user.Comp));
         SyncAppearance(ent, ent.Comp.UtilitySlotId);
     }
 
@@ -645,7 +712,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         return false;
     }
 
-    private void CanAttachPopup(ref Entity<PowerLoaderComponent?> user,
+    private bool CanAttachPopup(ref Entity<PowerLoaderComponent?> user,
         EntityUid target,
         string container,
         EntityUid used,
@@ -653,7 +720,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     {
         slot = null;
         if (!Resolve(user, ref user.Comp, false))
-            return;
+            return false;
 
         string slotId;
         string msg;
@@ -664,14 +731,19 @@ public sealed class PowerLoaderSystem : EntitySystem
             slotId = container;
             msg = Loc.GetString("rmc-power-loader-occupied");
         }
+        else if (HasComp<RMCOrbitalDeployableComponent>(used))
+        {
+            slotId = container;
+            msg = Loc.GetString("rmc-power-loader-occupied-deployable");
+        }
         else
         {
-            return;
+            return false;
         }
 
         slot = _container.EnsureContainer<ContainerSlot>(target, slotId);
         if (slot.ContainedEntity == null)
-            return;
+            return true;
 
         foreach (var buckled in GetBuckled(user))
         {
@@ -679,6 +751,19 @@ public sealed class PowerLoaderSystem : EntitySystem
         }
 
         slot = null;
+        return false;
+    }
+
+    private bool CanAttachPopup(ref Entity<PowerLoaderComponent?> user,
+        Entity<DropshipUtilityPointComponent> target,
+        EntityUid used,
+        [NotNullWhen(true)] out ContainerSlot? slot)
+    {
+        var slotId = target.Comp.UtilitySlotId;
+        if (HasComp<RMCOrbitalDeployableComponent>(used))
+            slotId = target.Comp.DeployableContainerSlotId;
+
+        return CanAttachPopup(ref user, target, slotId, used, out slot);
     }
 
     private bool CanDetachPopup(

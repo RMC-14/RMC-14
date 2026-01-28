@@ -85,6 +85,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
+    [Dependency] private readonly RMCOrbitalDeployerSystem _rmcOrbitalDeployable = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -140,6 +141,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
                 subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
                 subs.Event<DropshipTerminalWeaponsChooseSpotlightMsg>(OnWeaponsChooseSpotlightMsg);
+                subs.Event<DropshipTerminalWeaponsChooseLaunchBayMsg>(OnWeaponsChooseLaunchBayMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -157,6 +159,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
                 subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
+                subs.Event<DropShipTerminalWeaponsLaunchOrdnanceMsg>(OnWeaponsLaunchOrdnance);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -510,6 +513,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnWeaponsChooseSpotlightMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseSpotlightMsg args)
     {
         SetScreenUtility<DropshipSpotlightComponent>(ent, args.First, Spotlight, args.Slot);
+    }
+
+    private void OnWeaponsChooseLaunchBayMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseLaunchBayMsg args)
+    {
+        SetScreenUtility<DropshipSpotlightComponent>(ent, args.First, Launch);
     }
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
@@ -990,6 +998,25 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         Dirty(ent);
         RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsLaunchOrdnance(Entity<DropshipTerminalWeaponsComponent> ent, ref DropShipTerminalWeaponsLaunchOrdnanceMsg args)
+    {
+        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (ent.Comp.Target is not { } target)
+            return;
+
+        if (!IsValidTarget(target))
+            return;
+
+        if (!TryComp(selectedSystem, out RMCOrbitalDeployerComponent? deployer))
+            return;
+
+        _rmcOrbitalDeployable.TryDeploy(selectedSystem.Value, target, deployer);
     }
 
     private void OnRefreshNameModifier(Entity<ActiveFlareSignalComponent> ent, ref RefreshNameModifiersEvent args)

@@ -23,6 +23,7 @@ public enum DropshipTerminalWeaponsScreen
     Paradrop,
     Spotlight,
     TacMap,
+    Launch,
 }
 
 [Serializable, NetSerializable]
@@ -143,4 +144,16 @@ public sealed class DropShipTerminalWeaponsParaDropTargetSelectMsg(bool on) : Bo
 public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool on) : BoundUserInterfaceMessage
 {
     public readonly bool On = on;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsChooseLaunchBayMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropShipTerminalWeaponsLaunchOrdnanceMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
 }

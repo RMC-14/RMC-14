@@ -82,3 +82,21 @@
       sprite: _RMC14/Objects/dropship_utility_attachments.rsi
       state: paradrop_system_deployed
   - type: RMCParaDrop
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentLaunchBay
+  name: LAG-14 internal sentry launcher
+  description: A launch bay to drop special ordnance. Fits inside the dropship's crew weapon emplacement. Moving this will require some sort of lifter. Accepts the A/C-49-P Air Deployable Sentry as ammunition.
+  components:
+  - type: Sprite
+    layers:
+    - state: launch_bay
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipUtility
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: launch_bay_deployed
+  - type: RMCOrbitalDeployer
