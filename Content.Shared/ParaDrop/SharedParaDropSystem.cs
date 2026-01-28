@@ -48,6 +48,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     {
         SubscribeLocalEvent<CrashLandOnTouchComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
         SubscribeLocalEvent<MapGridComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
+        SubscribeLocalEvent<CrashLandableComponent, AttemptCrashLandEvent>(OnAttemptCrashLand);
 
         SubscribeLocalEvent<GrantParaDroppableComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantParaDroppableComponent, GotUnequippedEvent>(OnGotUnEquipped);
@@ -98,7 +99,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
 
         args.Cancelled = true;
 
-        AttemptParaDrop((dropShip, paraDrop), args.Crashing);
+        AttemptParaDrop(args.Crashing, paraDrop?.DropTarget);
     }
 
     private void OnAttemptCrashLand(Entity<MapGridComponent> ent, ref AttemptCrashLandEvent args)
@@ -106,13 +107,28 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (!_dropship.TryGetGridDropship(ent, out var dropShip))
             return;
 
-        if (!TryComp(dropShip, out ActiveParaDropComponent? paraDrop) &&
-            !HasComp<ParaDroppableComponent>(args.Crashing))
+        EntityUid? target = null;
+
+        if (TryComp(dropShip, out ActiveParaDropComponent? paraDrop))
+            target = paraDrop.DropTarget;
+
+        if (target == null && !HasComp<ParaDroppableComponent>(args.Crashing))
             return;
 
         args.Cancelled = true;
 
-        AttemptParaDrop((dropShip, paraDrop), args.Crashing);
+        AttemptParaDrop(args.Crashing, target);
+    }
+
+    private void OnAttemptCrashLand(Entity<CrashLandableComponent> ent, ref AttemptCrashLandEvent args)
+    {
+        var target = args.Target;
+        if (target == null && !HasComp<ParaDroppableComponent>(args.Crashing))
+            return;
+
+        args.Cancelled = true;
+
+        AttemptParaDrop(args.Crashing, target);
     }
 
     private void OnMapInit(Entity<ParaDroppingComponent> ent, ref MapInitEvent args)
@@ -146,6 +162,9 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             _physics.SetCollisionLayer(ent, fixture.Key, fixture.Value, originalLayer);
             _physics.SetCollisionMask(ent, fixture.Key, fixture.Value, originalMask);
         }
+
+        var ev = new ParaDropFinishedEvent();
+        RaiseLocalEvent(ent, ref ev);
     }
 
     private void OnComponentShutdown(Entity<SkyFallingComponent> ent, ref ComponentShutdown args)
@@ -195,22 +214,17 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Try to do a paradrop, if the dropShip has no <see cref="ActiveParaDropComponent"/> the drop location will be random.
+    ///     Try to do a paradrop, if no target is given the drop location will be random.
     /// </summary>
-    /// <param name="dropShip">The entity that decides the target of the drop</param>
     /// <param name="dropping">The entity that is trying to paradrop</param>
-    private void AttemptParaDrop(Entity<ActiveParaDropComponent?> dropShip, EntityUid dropping)
+    /// <param name="dropTarget">The target entity</param>
+    private void AttemptParaDrop(EntityUid dropping, EntityUid? dropTarget = null)
     {
         if (_net.IsClient)
             return;
 
         if (HasComp<ParaDroppingComponent>(dropping))
             return;
-
-        EntityUid? dropTarget = null;
-
-        if (dropShip.Comp?.DropTarget != null)
-            dropTarget = dropShip.Comp.DropTarget;
 
         // Drop at a random location.
         if (dropTarget == null)
@@ -351,3 +365,6 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct ParaDropFinishedEvent;

@@ -7,4 +7,7 @@ public sealed partial class RMCOrbitalDeployerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string DeployableContainerSlotId = "rmc_orbital_deployer_deployable_container_slot";
+
+    [DataField, AutoNetworkedField]
+    public int DropScatter;
 }

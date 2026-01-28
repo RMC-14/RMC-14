@@ -182,3 +182,4 @@
     angleTolerance: 5
     rotationSpeed: 180
     simple4DirMode: false
+  - type: SleepNPC

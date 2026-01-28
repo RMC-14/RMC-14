@@ -112,7 +112,9 @@ rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
 
 rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
 rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
-    {$loaded}
-    Ammo: {current} / {$max}
+
+    Loaded: {$loaded}
+
+    Ammo: {$current} / {$max}
 
 
