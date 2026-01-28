@@ -108,6 +108,45 @@
         amount: 10
 
 - type: entity
+  parent: RMCNutriCoVendor
+  id: RMCVendorNutriCoFoodPMC
+  name: food dispenser
+  suffix: PMC
+  description: A food dispenser, capable of distributing food containing all the essential vitamins and nutrients anyone could ever need.
+  components:
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Prepared Meals
+      entries:
+      - id: RMCMREWeYa
+        name: PMC Combat Ration
+        amount: 15
+      - id: RMCMarinePreparedMealPMCIkanBakar
+        amount: 15
+      - id: RMCMarinePreparedMealPMCSoba
+        amount: 15
+      - id: RMCMarinePreparedMealPMCAlooGobi
+        amount: 15
+      - id: RMCMarinePreparedMealPMCFishAndChips
+        amount: 15
+      - id: RMCMarinePreparedMealPMCButterChicken
+        amount: 15
+      - id: RMCMarinePreparedMealPMCBirria
+        amount: 15
+      - id: RMCMarinePreparedMealPMCBobotie
+        amount: 15
+    - name: Flasks
+      entries:
+      - id: CMCanteen
+        amount: 10
+      - id: CMMetalFlask
+        name: metal flask (empty)
+        amount: 10
+      - id: CMWEYAFlask
+        amount: 10
+
+- type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBooze
   name: Booze-O-Mat
@@ -138,6 +177,9 @@
         amount: 6
       - id: CMDrinkCanBeerLite
         name: beer
+        amount: 6
+      - id: RMCDrinkCanSequoiaBeer
+        name: sequoia beer
         amount: 6
       - id: RMCDrinkAlcoholGrenadine
         amount: 5

@@ -24,8 +24,8 @@
   description: A soldier dog tag.
   components:
   - type: ItemIFF
-    faction: FactionSPP
-
+    factions:
+    - FactionSPP
 - type: entity
   parent: CMIDCardBase
   id: RMCIDSPPCard
@@ -54,8 +54,8 @@
   - type: PresetIdCard
     job: CMSurvivor
   - type: ItemIFF
-    faction: FactionSurvivor
-
+    factions:
+    - FactionSurvivor
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardHalcyon
@@ -64,7 +64,8 @@
   suffix: Halcyon
   components:
   - type: ItemIFF
-    faction: FactionHalcyon
+    factions:
+    - FactionHalcyon
   - type: Access
     groups:
     - Colony
