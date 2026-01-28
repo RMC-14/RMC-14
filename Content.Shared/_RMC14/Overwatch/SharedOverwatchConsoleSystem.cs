@@ -693,10 +693,10 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
     private void OnCameraAdjustOffset(Entity<OverwatchConsoleComponent> ent, ref OverwatchCameraAdjustOffsetMsg args)
     {
-        ApplyCameraOffset(args.Actor, args.Direction);
+        OnCameraAdjustOffsetEvent(new OverwatchCameraAdjustOffsetEvent(args.Actor, args.Direction));
     }
 
-    private void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
+    protected virtual void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
     {
         ApplyCameraOffset(args.Actor, args.Direction);
     }
