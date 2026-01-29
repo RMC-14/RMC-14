@@ -38,6 +38,10 @@
                         <Button Name="MessageSquadButton" Access="Public" Text="{Loc rmc-overwatch-console-message-squad}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="MessageSquadLeaderButton" Access="Public" Text="Message Squad Leader"
+                                StyleClasses="ActionButton" VerticalAlignment="Top"
+                                Margin="0 10 0 0" MinWidth="250" />
+                        <Button Name="HideSquadInfoButton" Access="Public" Text="Hide Squad Info"
                         <Button Name="SquadObjectivesButton" Access="Public" Text="{Loc rmc-overwatch-console-squad-objectives}"
                                 StyleClasses="ActionButton" VerticalAlignment="Top"
                                 Margin="0 10 0 0" MinWidth="250" />
@@ -102,6 +106,9 @@
                                             <Button Name="TransferMarineButton" Access="Public"
                                                     Text="{Loc rmc-overwatch-console-transfer-marine}" StyleClasses="ActionButton"
                                                     ModulateSelfOverride="#D3B400" />
+                                            <Button Name="InsubordinationButton" Access="Public" Text="Insubordination"
+                                                    StyleClasses="ActionButton" ModulateSelfOverride="#D3B400">
+                                            </Button>
                                         </BoxContainer>
                                     </PanelContainer>
                                     <BoxContainer Orientation="Vertical" Margin="5"
