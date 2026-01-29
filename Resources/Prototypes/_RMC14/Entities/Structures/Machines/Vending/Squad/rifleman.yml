@@ -74,7 +74,7 @@
         name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
         recommended: true
       - id: RMCPouchDocumentSmall
       - id: RMCPouchMagazine
@@ -133,10 +133,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -149,6 +145,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       #- id: M44 Heavy Speedloader
       #  points: 10
       - id: RMCSpeedLoader44Marksman
