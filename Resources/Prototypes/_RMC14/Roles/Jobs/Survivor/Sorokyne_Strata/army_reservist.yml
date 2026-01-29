@@ -50,7 +50,7 @@
   parent: RMCGearSurvivorBase
   id: RMCGearSurvivorArmyReservist
   equipment:
-    suitstorage: RMCWeaponRifleAK4047
+    suitstorage: RMCWeaponRifleType77
     jumpsuit: RMCJumpsuitSPPArmy
     shoes: CMBootsBlackFilled
     gloves: RMCHandsVeteran
