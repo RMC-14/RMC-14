@@ -5,7 +5,7 @@
 - type: accessGroup
   id: RMCBaseHidden
   name: protobaseaccess UNMC Hidden
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Hidden
   hidden: true
   tags:
@@ -14,7 +14,7 @@
 - type: accessGroup
   id: RMCBaseCommandJob
   name: protobaseaccess UNMC Command
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Command
   tags:
   - RMCMarineDefaultAccess
@@ -22,7 +22,7 @@
 - type: accessGroup
   id: RMCBaseAuxiliaryJob
   name: protobaseaccess UNMC Auxiliary
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Auxiliary
   tags:
   - RMCMarineDefaultAccess
@@ -30,7 +30,7 @@
 - type: accessGroup
   id: RMCBaseMiscellaneousJob
   name: protobaseaccess UNMC Miscellaneous
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Miscellaneous
   tags:
   - RMCMarineDefaultAccess
@@ -38,7 +38,7 @@
 - type: accessGroup
   id: RMCBaseMPJob
   name: protobaseaccess UNMC Military Police
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Military Police
   tags:
   - RMCMarineDefaultAccess
@@ -46,7 +46,7 @@
 - type: accessGroup
   id: RMCBaseEngineeringJob
   name: protobaseaccess UNMC Engineering
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Engineering
   tags:
   - RMCMarineDefaultAccess
@@ -54,7 +54,7 @@
 - type: accessGroup
   id: RMCBaseRequisitionsJob
   name: protobaseaccess UNMC Requisitions
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Requisitions
   tags:
   - RMCMarineDefaultAccess
@@ -62,7 +62,7 @@
 - type: accessGroup
   id: RMCBaseMedicalJob
   name: protobaseaccess UNMC Medical
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Medical
   tags:
   - RMCMarineDefaultAccess
@@ -70,7 +70,7 @@
 - type: accessGroup
   id: RMCBaseMarinesJob
   name: protobaseaccess UNMC Marines
-  faction: FactionMarine
+  faction: RMCFactionMarine
   accessGroup: UNMC Marines
   tags:
   - RMCMarineDefaultAccess

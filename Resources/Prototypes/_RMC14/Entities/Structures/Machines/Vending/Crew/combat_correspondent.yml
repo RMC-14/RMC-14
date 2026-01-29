@@ -1,8 +1,8 @@
 # EQUIPMENT VENDOR
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCrewCombatCorrespondent
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCrewCombatCorrespondent
   name: ColMarTech Combat Correspondent Equipment Rack
   description: An automated rack hooked up to a colossal storage of Reporter standard-issue equipment.
   components:

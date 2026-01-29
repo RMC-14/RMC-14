@@ -48,7 +48,7 @@
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
     gloves: RMCHandsVeteranPMC
-    head: ArmorHelmetPMCCorporate
+    head: RMCArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack # TODO RMC14: PMC combat backpack
     belt: RMCM77BeltPMCFilled

@@ -70,7 +70,7 @@
   equipment:
     id: CMDogtagRifleman
     ears: RMCHeadsetMarine
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlackFilled
 
 - type: playTimeTracker

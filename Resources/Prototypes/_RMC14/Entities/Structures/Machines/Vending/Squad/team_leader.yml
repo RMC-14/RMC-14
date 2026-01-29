@@ -1,8 +1,8 @@
 # FIRE TEAM LEADER
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechFLGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechFLGear
   name: ColMarTech fireteam leader gear rack
   description: An automated gear rack for fireteam leaders.
   components:
@@ -162,8 +162,8 @@
         points: 5
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechFLEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechFLEquipment
   name: ColMarTech fireteam leader equipment rack
   description: An automated rack hooked up to a colossal storage of fireteam leader standard-issue equipment.
   components:

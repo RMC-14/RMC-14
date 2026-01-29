@@ -41,5 +41,5 @@
 
 - type: entity
   parent: BaseSpeciesDummy
-  id: MobAvaliDummy
+  id: RMCMobAvaliDummy
   categories: [ HideSpawnMenu ]

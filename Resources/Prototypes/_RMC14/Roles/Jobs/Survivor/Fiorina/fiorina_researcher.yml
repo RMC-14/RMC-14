@@ -36,7 +36,7 @@
   id: RMCGearSurvivorFiorinaResearcher
   equipment:
     jumpsuit: RMCJumpsuitLiaisonPinkWorkwear
-    head: ArmorHelmetPMCOfficer
+    head: RMCArmorHelmetPMCOfficer
     outerClothing: RMCLabcoatScience
     gloves: CMHandsLatex
     mask: CMMaskSterile

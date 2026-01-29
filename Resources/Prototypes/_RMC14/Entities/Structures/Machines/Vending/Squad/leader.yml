@@ -1,8 +1,8 @@
 # SQUAD LEADER
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSLGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSLGear
   name: ColMarTech squad leader gear rack
   description: An automated gear rack for Squad Leaders.
   components:
@@ -218,8 +218,8 @@
         points: 3
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSLEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSLEquipment
   name: ColMarTech squad leader equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Leader standard-issue equipment.
   components:

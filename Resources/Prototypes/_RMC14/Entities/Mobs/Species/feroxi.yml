@@ -97,7 +97,7 @@
 - type: entity
   parent: BaseSpeciesDummy
   name: Feroxi Dummy
-  id: MobFeroxiDummy
+  id: RMCMobFeroxiDummy
   categories: [ HideSpawnMenu ]
   description: A dummy feroxi meant to be used in character setup.
   components:

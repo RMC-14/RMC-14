@@ -2,8 +2,8 @@
 
 # Equipment Rack
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechDropshipCrewEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechDropshipCrewEquipment
   name: ColMarTech Dropship Crew Equipment Rack
   description: An automated equipment vendor for Dropship Crew
   components:
@@ -200,8 +200,8 @@
 
 # Weapon Rack
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechDropshipCrewWeapon
+  parent: RMCColMarTechBase
+  id: RMCColMarTechDropshipCrewWeapon
   name: ColMarTech Dropship Crew Weapon Rack
   description: An automated combat equipment vendor for Dropship Crew
   components:
@@ -222,7 +222,7 @@
         amount: 4
       - id: WeaponSMGM63
         amount: 4
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A2
         amount: 4
       - id: RMCWeaponRifleM54C
         amount: 4

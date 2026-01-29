@@ -455,7 +455,7 @@
       - RMCBeltSOCOM
   - type: StorageFill
     contents:
-    - id: WeaponRifleXM88
+    - id: RMCWeaponRifleXM88
     - id: RMCAttachmentXM88Stock
     - id: RMCAttachmentXS-9
     - id: RMCBox458SOCOM
@@ -616,7 +616,7 @@
       - RMCHandful
   - type: StorageFill
     contents:
-    - id: WeaponShotgunM42A2
+    - id: RMCWeaponShotgunM42A2
     # Group 1
     - id: CMShellShotgunBuckshot # Spawn 3 handfuls of shells, each group being random
       prob: 0.25

@@ -1,6 +1,6 @@
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCrewMaintTech
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCrewMaintTech
   name: ColMarTech Maintenance Technician Equipment Rack
   description: An automated rack hooked up to a colossal storage of Maintenance Technician standard-issue equipment.
   components:

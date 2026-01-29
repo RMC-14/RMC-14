@@ -28,7 +28,7 @@
           !type:IsBarbed
         action:
           !type:SpawnPrototype
-          prototype: BarbedWire1
+          prototype: RMCBarbedWire1
       - !type:DeleteEntity
       conditions:
       - !type:EntityAnchored

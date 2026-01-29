@@ -94,7 +94,7 @@
 - type: startingGear
   id: RMCGearSPPSpecialist
   equipment:
-    head: ArmorHelmetSPPHeavy
+    head: RMCArmorHelmetSPPHeavy
     ears: RMCHeadsetSPP
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPHeavySpecialist

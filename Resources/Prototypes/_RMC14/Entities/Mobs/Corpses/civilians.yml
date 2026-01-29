@@ -370,7 +370,7 @@
   parent: RMCGearCorpseColonist
   equipment:
     eyes: RMCGogglesKutjevo
-    head: ArmorHelmetPMCKutjevo
+    head: RMCArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoJumper
 
@@ -428,7 +428,7 @@
 - type: startingGear
   id: RMCGearCorpseUnitedNationsRiotOfficer
   equipment:
-    head: ArmorHelmetPMCRiotShield
+    head: RMCArmorHelmetPMCRiotShield
     jumpsuit: RMCJumpsuitUNSecurity
     outerClothing: RMCArmorPMCRiot
     belt: CMStunbaton

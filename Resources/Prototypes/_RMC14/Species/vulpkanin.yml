@@ -8,7 +8,7 @@
   sprites: MobVulpkaninSprites
   defaultSkinTone: "#985629"
   markingLimits: MobVulpkaninMarkingLimits
-  dollPrototype: MobVulpkaninDummy
+  dollPrototype: RMCMobVulpkaninDummy
   skinColoration: Hues
   maleFirstNames: names_vulpkanin_male
   femaleFirstNames: names_vulpkanin_female

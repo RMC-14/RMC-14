@@ -6,7 +6,7 @@
   sprites: MobRodentiaSprites
   defaultSkinTone: "#747474"
   markingLimits: MobRodentiaMarkingLimits
-  dollPrototype: MobRodentiaDummy
+  dollPrototype: RMCMobRodentiaDummy
   skinColoration: Hues
   maleFirstNames: names_rodentia_male
   femaleFirstNames: names_rodentia_female

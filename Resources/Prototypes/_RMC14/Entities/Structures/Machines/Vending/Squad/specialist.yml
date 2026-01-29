@@ -136,8 +136,8 @@
         points: 40
 
 - type: entity
-  parent: [ColMarTechBase, RMCVendorWeaponsSpecialistGearBase]
-  id: ColMarTechSWSGear
+  parent: [RMCColMarTechBase, RMCVendorWeaponsSpecialistGearBase]
+  id: RMCColMarTechSWSGear
   name: ColMarTech squad weapons specialist gear rack
   description: An automated gear rack for Squad Weapons Specialists.
   components:
@@ -174,8 +174,8 @@
     - CMWeaponsSpecialist
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSWSEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSWSEquipment
   name: ColMarTech squad weapons specialist equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Weapons Specialist standard-issue equipment.
   components:

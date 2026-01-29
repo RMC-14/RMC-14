@@ -50,8 +50,8 @@
     sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
   - type: ItemIFF
     factions:
-    - FactionMarine
-    - FactionSurvivor
+    - RMCFactionMarine
+    - RMCFactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCMBDeputy
 
@@ -70,5 +70,5 @@
     sprite: _RMC14/Objects/CMIDs/cmb_marshal.rsi
   - type: ItemIFF
     factions:
-    - FactionMarine
-    - FactionSurvivor
+    - RMCFactionMarine
+    - RMCFactionSurvivor

@@ -97,7 +97,7 @@
   equipment:
     back: RMCSatchelLightpackFreelancerStandard
     belt: RMCMAR40BeltFilled
-    suitstorage: WeaponRifleMAR40
+    suitstorage: RMCWeaponRifleMAR40
     gloves: RMCHandsVeteranPMC
     jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer

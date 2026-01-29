@@ -27,5 +27,5 @@
 
 - type: entity
   parent: BaseSpeciesDummy
-  id: MobFelinidDummy
+  id: RMCMobFelinidDummy
   categories: [ HideSpawnMenu ]

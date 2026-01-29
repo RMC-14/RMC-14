@@ -35,14 +35,14 @@
         startingItem: RMCPressurizedCanister
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
   - type: ItemMapper
     mapLayers:
       loaded:
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
   - type: RMCStorageEjectHand
     state: Last
   - type: RMCRefillSolutionOnStore
@@ -82,7 +82,7 @@
         startingItem: RMCPressurizedCanisterBicaridine
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
 
 - type: entity
@@ -100,7 +100,7 @@
         startingItem: RMCPressurizedCanisterKelotane
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
 
 - type: entity
@@ -118,7 +118,7 @@
         startingItem: RMCPressurizedCanisterTricordrazineRevival
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
 
 - type: entity
@@ -136,7 +136,7 @@
         startingItem: RMCPressurizedCanisterTricordrazine
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
 
 - type: entity
@@ -154,7 +154,7 @@
         startingItem: RMCPressurizedCanisterMeraBic
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true
 
 - type: entity
@@ -172,5 +172,5 @@
         startingItem: RMCPressurizedCanisterKeloDerm
         whitelist:
           tags:
-          - PressurizedCanister
+          - RMCPressurizedCanister
         insertOnInteract: true

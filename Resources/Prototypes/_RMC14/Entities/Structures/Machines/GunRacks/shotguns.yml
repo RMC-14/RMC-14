@@ -50,9 +50,9 @@
   - type: ContainerFill
     containers:
       item_1:
-      - WeaponShotgunM42A2
+      - RMCWeaponShotgunM42A2
       item_2:
-      - WeaponShotgunM42A2
+      - RMCWeaponShotgunM42A2
 
 - type: entity
   parent: RMCGunRackM42A2Empty
