@@ -6,6 +6,9 @@
   - type: Tag
     tags:
     - RMCUniformPMC
+  - type: ClothingFactionLocked
+    whitelist:
+    - WeYa
 
 - type: entity
   parent: [RMCVeteranUniformBase, RMCAlternateFoldableUniformBase]
@@ -207,3 +210,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/PMC/director.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - WeYa
