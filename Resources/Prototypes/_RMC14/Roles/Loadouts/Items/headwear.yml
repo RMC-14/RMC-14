@@ -101,3 +101,15 @@
   storage:
     back:
     - RMCHeadUNMCHeadset
+
+- type: loadout
+  id: HeadCowboyHatLightRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCowboyHatLight
+
+- type: loadout
+  id: HeadCowboyHatDarkRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCowboyHatDark
