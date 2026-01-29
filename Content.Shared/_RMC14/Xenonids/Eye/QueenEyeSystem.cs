@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
@@ -25,14 +26,18 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _weeds = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private SeedJob _seedJob;
     private ViewJob _job;
 
     private readonly HashSet<Entity<QueenEyeVisionComponent>> _seeds = new();
+    private readonly HashSet<SeedSignature> _seedSignatures = new();
+    private readonly Dictionary<EntityUid, ViewCache> _viewCache = new();
 
     private readonly HashSet<Vector2i> _singleTiles = new();
+    private readonly HashSet<EntityUid> _queenEyeMoveCorrection = new();
 
     public override void Initialize()
     {
@@ -61,6 +66,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
+        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -148,10 +154,34 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetTarget(queen, ent);
     }
 
+    private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
+    {
+        if (_queenEyeMoveCorrection.Contains(ent.Owner))
+            return;
+
+        if (IsOnWeeds(args.NewPosition))
+            return;
+
+        if (IsOnWeeds(args.OldPosition))
+        {
+            _queenEyeMoveCorrection.Add(ent.Owner);
+            _transform.SetCoordinates(ent.Owner, args.OldPosition);
+            _queenEyeMoveCorrection.Remove(ent.Owner);
+            return;
+        }
+
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Queen is { } queen && TryComp(queen, out QueenEyeActionComponent? queenEye))
+            RemoveQueenEye((queen, queenEye));
+    }
+
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
     public void GetView(Entity<BroadphaseComponent, MapGridComponent> grid, Box2Rotated worldBounds, HashSet<Vector2i> visibleTiles, float expansionSize = 29)
     {
         _seeds.Clear();
+        _seedSignatures.Clear();
 
         // TODO: Would be nice to be able to run this while running the other stuff.
         _seedJob.Grid = (grid.Owner, grid.Comp2);
@@ -159,19 +189,45 @@ public sealed class QueenEyeSystem : EntitySystem
         var enlargedLocalAabb = invMatrix.TransformBox(worldBounds.Enlarged(expansionSize));
         _seedJob.ExpandedBounds = enlargedLocalAabb;
         _parallel.ProcessNow(_seedJob);
-        _job.Data.Clear();
 
+        foreach (var seed in _seeds)
+        {
+            var seedXform = EntityManager.GetComponent<TransformComponent>(seed);
+            var tile = _map.CoordinatesToTile(grid.Owner, grid.Comp2, seedXform.Coordinates);
+            _seedSignatures.Add(new SeedSignature(seed.Owner, tile, seed.Comp.Range));
+        }
+
+        var cache = GetViewCache(grid.Owner);
+        if (cache.Seeds.SetEquals(_seedSignatures))
+        {
+            visibleTiles.Clear();
+            visibleTiles.UnionWith(cache.VisibleTiles);
+            return;
+        }
+
+        if (_seeds.Count == 0)
+        {
+            visibleTiles.Clear();
+            cache.Seeds.Clear();
+            cache.VisibleTiles.Clear();
+            return;
+        }
+
+        _job.Data.Clear();
         foreach (var seed in _seeds)
         {
             _job.Data.Add(seed);
         }
 
-        if (_seeds.Count == 0)
-            return;
-
         _job.Grid = (grid.Owner, grid.Comp2);
         _job.VisibleTiles = visibleTiles;
+        visibleTiles.Clear();
         _parallel.ProcessNow(_job, _job.Data.Count);
+
+        cache.Seeds.Clear();
+        cache.Seeds.UnionWith(_seedSignatures);
+        cache.VisibleTiles.Clear();
+        cache.VisibleTiles.UnionWith(visibleTiles);
     }
 
     /// <summary>
@@ -268,6 +324,36 @@ public sealed class QueenEyeSystem : EntitySystem
 
         var targetTile = _map.CoordinatesToTile(gridId, grid, target);
         return IsAccessible((gridId, broadphase, grid), targetTile);
+    }
+
+    private bool IsOnWeeds(EntityCoordinates coordinates)
+    {
+        if (_transform.GetGrid(coordinates) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+        {
+            return false;
+        }
+
+        return _weeds.IsOnWeeds((gridId, grid), coordinates);
+    }
+
+    private ViewCache GetViewCache(EntityUid gridId)
+    {
+        if (!_viewCache.TryGetValue(gridId, out var cache))
+        {
+            cache = new ViewCache();
+            _viewCache[gridId] = cache;
+        }
+
+        return cache;
+    }
+
+    private readonly record struct SeedSignature(EntityUid Seed, Vector2i Tile, float Range);
+
+    private sealed class ViewCache
+    {
+        public readonly HashSet<SeedSignature> Seeds = new();
+        public readonly HashSet<Vector2i> VisibleTiles = new();
     }
 
     /// <summary>
