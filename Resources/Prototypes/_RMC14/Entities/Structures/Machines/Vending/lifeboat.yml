@@ -51,6 +51,7 @@
     layers:
     - state: "supplycab"
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: false
     sections:
     - name: Food and beverage
