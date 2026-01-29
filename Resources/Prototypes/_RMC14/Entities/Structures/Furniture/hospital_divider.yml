@@ -24,10 +24,10 @@
         mask:
         - MachineMask
         layer:
-        - MobMask
+        - MachineLayer
   - type: Damageable
     damageContainer: StructuralMarine
-    damageModifierSet: StructuralMarine 
+    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:
