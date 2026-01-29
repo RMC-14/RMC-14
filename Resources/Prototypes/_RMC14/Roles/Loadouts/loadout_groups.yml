@@ -807,3 +807,12 @@
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
+
+- type: loadoutGroup
+  id: ProvostWeaponRMC
+  name: rmc-loadout-group-provost-weapon
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RMCWeaponPistolHandcannon
+  - RMCWeaponPistolHandcannonProvost

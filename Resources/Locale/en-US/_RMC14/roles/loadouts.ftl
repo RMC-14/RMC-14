@@ -1,4 +1,4 @@
-﻿rmc-loadout-group-backpack = Backpack
+rmc-loadout-group-backpack = Backpack
 rmc-loadout-group-eyewear = Eyewear
 rmc-loadout-group-masks = Masks and scarves
 rmc-loadout-group-headwear = Headwear
@@ -24,6 +24,7 @@ rmc-loadout-group-civilian = Civilian only (Restricted)
 rmc-loadout-group-role-specific-ID = Commanding Officer (ID)
 rmc-loadout-group-role-specific-weapon = Commanding Officer (Sidearm)
 rmc-loadout-group-provost-role-specific-outerwear = Provost Inspector (Filled Outerwear)
+rmc-loadout-group-provost-weapon = Provost Inspector (Sidearm)
 rmc-loadout-group-synthetic-uniform = Synthetic Uniforms
 rmc-loadout-group-synthetic-accessories = Synthetic Uniform Accessories
 rmc-loadout-group-synthetic-glasses = Synthetic Glasses
