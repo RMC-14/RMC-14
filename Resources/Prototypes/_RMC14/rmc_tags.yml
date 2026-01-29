@@ -162,3 +162,6 @@
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
