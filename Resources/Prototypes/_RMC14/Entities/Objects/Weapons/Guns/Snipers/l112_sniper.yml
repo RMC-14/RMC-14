@@ -1,0 +1,330 @@
+﻿- type: entity
+  parent: RMCBaseWeaponSniperRifle
+  id: RMCL112SniperRifle
+  name: L112A2 designated marksman rifle
+  suffix: PVE
+  description: The L112A2 DMR, a more modular variation on the A1 model. This one foregoes the integral suppressor in favor of a threaded barrel, and features an attachment rail to install foregrips.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/l112.rsi
+    layers:
+    - state: base
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Item
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Snipers/l112.rsi
+  - type: Tag
+    tags:
+    - RMCL112SniperRifle
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+  - type: Gun
+    shotsPerBurst: 1
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_type88.ogg
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 1
+    scatterWielded: 4
+    baseFireRate: 3.8
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+  - type: WieldDelay
+    baseDelay: 0.4
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperL112
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperL112
+          - RMCMagazineSniperL112SH
+  - type: GunUserWhitelist
+    whitelist:
+      components:
+      - SniperWhitelist
+  - type: GunRequiresWield
+  - type: GunDualWielding
+    weaponGroup: Rifle
+  - type: GunPointBlank
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/sniper_mouse.rsi
+      state: all
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCL112IntegratedScope
+        whitelist:
+          tags:
+          - RMCL112IntegratedScope
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentBipod
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.05, 0.205
+      rmc-aslot-barrel: 0.90, 0.064
+      rmc-aslot-underbarrel: 0.39, -0.23
+  - type: AimedShot
+    aimDuration: 0.6
+    aimedShotCooldown: 1.2
+  - type: RMCGunChamber
+    enabled: false
+
+- type: entity
+  parent: RMCL112SniperRifle
+  id: RMCL112SniperRifleSuppressed
+  name: L112A1 designated marksman rifle
+  suffix: PVE, Suppressed
+  description: The L112A1 DMR, adopted by the TSE's Royal Crown Marines following a recognised need for long-range firepower on reconnaissance and covert operations and developed in tandem with the 7.7x56mmR HESH round.
+  components:
+  - type: Tag
+    tags:
+    - RMCL112SniperRifleSuppressed
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        locked: true
+        startingAttachable: RMCL112IntegratedScope
+        whitelist:
+          tags:
+          - RMCL112IntegratedScope
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RMCAttachmentSuppressorL112
+        whitelist:
+          tags:
+          - RMCAttachmentSuppressorL112
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.05, 0.205
+      rmc-aslot-barrel: 0.38, 0.065
+      rmc-aslot-underbarrel: 0.39, -0.23
+
+# HESH-filled variants
+
+- type: entity
+  parent: RMCL112SniperRifle
+  id: RMCL112SniperRifleSH
+  suffix: Filled, squash-head
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperL112SH
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperL112
+          - RMCMagazineSniperL112SH
+
+- type: entity
+  parent: RMCL112SniperRifleSuppressed
+  id: RMCL112SniperRifleSuppressedSH
+  suffix: Filled, squash-head
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSniperL112SH
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mar40_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSniperL112
+          - RMCMagazineSniperL112SH
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: RMCMagazineSniperL112
+  name: "L112 magazine (7.7x56mmR)"
+  description: A 25-round magazine of 7.7x56mm rimmed cartridges.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperL112
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniper77x56mmR
+    proto: RMCCartridgeSniper77x56mmR
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l112.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMMagazineSniperM96S
+  id: RMCMagazineSniperL112SH
+  name: "L112 squash-head magazine (7.7x56mmR)"
+  description: A 25-round magazine of 7.7x56mm rimmed squash-head cartridges.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineSniper
+    - RMCMagazineSniperL112SH
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeSniper77x56mmRSH
+    proto: RMCCartridgeSniper77x56mmRSH
+    capacity: 25
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l112.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#FF744F"
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeSniper77x56mmR
+  name: cartridge (7.7x56mmR)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniper77x56mmR
+  - type: CartridgeAmmo
+    proto: RMCBulletSniper77x56mmR
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeSniper77x56mmRSH
+  name: squash-head cartridge (7.7x56mmR)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeSniper77x56mmRSH
+  - type: CartridgeAmmo
+    proto: RMCBulletSniper77x56mmRSH
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletSniper77x56mmR
+  name: bullet (7.7x56mmR)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 10
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCBulletSniper77x56mmRSH
+  name: squash-head bullet (7.7x56mmR)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 60
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 24
+      falloff: 9999
+      ignoreModifiers: true
+  - type: CMArmorPiercing
+    amount: 30
+
+- type: Tag
+  id: RMCL112SniperRifle
+
+- type: Tag
+  id: RMCL112SniperRifleSuppressed
+
+- type: Tag
+  id: RMCMagazineSniperL112
+
+- type: Tag
+  id: RMCCartridgeSniper77x56mmR
+
+- type: Tag
+  id: RMCMagazineSniperL112SH
+
+- type: Tag
+  id: RMCCartridgeSniper77x56mmRSH

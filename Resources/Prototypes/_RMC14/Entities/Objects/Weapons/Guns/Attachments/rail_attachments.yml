@@ -562,6 +562,27 @@
     actionDesc: Lets you see further.
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCL112IntegratedScope
+  name: L112O1 integrated scope
+  description: Blimey! I don't think that bit was supposed to come off the rifle...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    state: l112_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCL112IntegratedScope
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+      state: l112_scope
+    actionName: Look through the L112 Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -661,6 +682,9 @@
 
 - type: Tag
   id: RMCType88IntegratedScope
+
+- type: Tag
+  id: RMCL112IntegratedScope
 
 - type: Tag
   id: RMCAttachmentXS-9
