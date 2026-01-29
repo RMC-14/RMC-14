@@ -163,7 +163,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
     private void OnActivateLarvaSurge(HiveBoonActivateLarvaSurgeEvent ev)
     {
-        _hive.IncreaseBurrowedLarva(ev.Hive, 5);
+        _hive.ChangeBurrowedLarva(ev.Hive, 5);
         _xenoAnnounce.AnnounceSameHiveDefaultSound(ev.Boon, "The Queen has awakened 5 extra burrowed larva to join the hive!");
     }
 
