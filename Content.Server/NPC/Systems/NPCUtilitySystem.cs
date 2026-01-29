@@ -102,6 +102,11 @@ public sealed class NPCUtilitySystem : EntitySystem
     {
         // TODO: PickHostilesop or whatever needs to juse be UtilityQueryOperator
 
+        // RMC14 prevent shooting while inside a container
+        var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (_container.TryGetContainingContainer(owner, out _))
+            return UtilityResult.Empty;
+
         var weh = _proto.Index<UtilityQueryPrototype>(proto);
         var ents = _entPool.Get();
 
