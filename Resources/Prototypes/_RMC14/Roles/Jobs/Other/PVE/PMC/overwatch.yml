@@ -24,23 +24,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillCqc: 1
-        RMCSkillLeadership: 3
-        RMCSkillOverwatch: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 4
-        RMCSkillExecution: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
-        RMCSkillSurgery: 2
+      preset: RMCSkillPresetPVEPlatoonCommander
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-force-command
     - type: MarineOrders

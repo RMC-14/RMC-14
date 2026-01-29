@@ -20,21 +20,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 1
-        RMCSkillLeadership: 1
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 1
-        RMCSkillJtac: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVESquadLeader
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-team-leader
     - type: AssignSquad
