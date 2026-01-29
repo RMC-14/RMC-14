@@ -39,8 +39,8 @@
 - type: entity
   parent: CMPacketPills
   id: CMPacketPillsTricordrazine
-  name: tricordazine pill packet
-  description: This packet contains tricordazine pills. Heals all types of damage slightly. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
+  name: tricordrazine pill packet
+  description: This packet contains tricordrazine pills. Heals all types of damage slightly. Once you take them out, they don't go back in. Don't take more than 2 pills in a short period.
   components:
   - type: Sprite
     state: tricordrazine_packet
