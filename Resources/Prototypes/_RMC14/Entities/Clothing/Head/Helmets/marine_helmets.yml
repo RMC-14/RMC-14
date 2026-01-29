@@ -310,9 +310,9 @@
   description: A special helmet variant worn by the press.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: RMCBulkyArmor
@@ -326,9 +326,9 @@
   description: A special helmet variant worn by the press.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi/press-helmet-blue.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press-helmet-blue.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi/press-helmet-blue.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press-helmet-blue.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: RMCBulkyArmor
