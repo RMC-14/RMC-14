@@ -14,111 +14,145 @@
     hackable: false
     ejectContentsOnDestruction: true # Players should not be afraid that everything they put into vending machines for storage will disappear when the tent is destroyed
     sections:
-    - name: Primary firearms
+    - name: Building materials
       entries:
-      - id: WeaponRifleM4SPR
-        amount: 2
-      - id: WeaponShotgunM42A2
-        amount: 3
-      - id: WeaponSMGM63
-        amount: 3
-      - id: RMCWeaponRifleM54C
-        amount: 4
-    - name: Primary ammunition
-      entries:
-      - id: RMCBoxShotgunFlechette
+      - id: RMCSheetCardboard10
+        name: Cardboard x10
+        amount: 1
+      - id: BarbedWire10
+        name: Barbed Wire x10
         amount: 0
+      - id: CMSheetMetal10
+        name: Metal x10
+        amount: 0
+      - id: CMSheetPlasteel10
+        name: Plasteel x10
+        amount: 0
+      - id: CMSandbagEmpty10
+        name: Sandbags (empty) x10
+        amount: 0
+      - id: CMSandbagFull5
+        name: Sandbags (full) x5
+        amount: 0
+    - name: Ammunition
+      entries:
       - id: RMCBoxShotgunBuckshot
+        amount: 0
+      - id: RMCBoxShotgunFlechette
         amount: 0
       - id: RMCBoxShotgunSlugs
         amount: 0
       - id: CMMagazineRifleM4SPR
         amount: 0
-      - id: CMMagazineSMGM63
-        amount: 0
       - id: CMMagazineRifleM54C
         amount: 0
-    - name: Sidearms
-      entries:
-      - id: RMCWeaponPistolM77Empty
-        amount: 2
-      - id: RMCWeaponRevolverM44Empty
-        amount: 2
-      - id: CMWeaponPistolM1984Empty
-        amount: 3
-    - name: Sidearm ammunition
-      entries:
-      - id: CMMagazinePistolM77AP
+      - id: CMMagazineSMGM63
         amount: 0
       - id: RMCSpeedLoaderM44
         amount: 0
       - id: CMMagazinePistolM1984
         amount: 0
-      - id: RMCMagazinePistolM13
-        amount: 0
-    - name: Explosives
-      entries:
-      - id: CMGrenadeFragOld
-        amount: 0
-      - id: CMGrenadeHighExplosive
-        amount: 0
-      - id: RMCGrenadeIncendiary
-        amount: 0
-      - id: CMGrenadeSmoke
-        amount: 1
-      - id: RMC40MMGrenadeM74AGMF
-        amount: 0
-      - id: RMC40MMGrenadeM74AGMI
-        amount: 0
-      - id: RMC40MMGrenadeM74AGMS
-        amount: 0
-    - name: Ammunition boxes
-      entries:
-      - id: RMCBoxShellsBuckshot
-        amount: 0
-      - id: RMCBoxShellsFlechette
-        amount: 0
-      - id: RMCBoxShellsSlugs
-        amount: 0
-      - id: RMCBoxMagazineRifleM4SPR
-        amount: 0
-      - id: RMCBoxMagazineRifleM4SPRAP
-        amount: 0
-      - id: RMCBoxMagazineSMGM63
-        amount: 0
-      - id: RMCBoxMagazineSMGM63AP
-        amount: 0
-    - name: Building materials
-      entries:
-      - id: RMCSheetCardboard1
-        amount: 10
-      - id: BarbedWire1
-        amount: 0
-      - id: CMSheetMetal1
-        amount: 0
-      - id: CMSheetPlasteel1
-        amount: 0
-      - id: CMSandbagEmpty10
-        amount: 0
-      - id: CMSandbagFull5
-        amount: 0
+#      - id: M56D Drum Magazine
+#        amount: 0
+#      - id: M2C Box Magazine
+#        amount: 0
     - name: Armor
       entries:
       - id: ArmorHelmetM10
         amount: 0
       - id: RMCArmorM3MediumCarrier
         amount: 0
+      - id: RMCArmorM3MediumPadded
+        amount: 0
+      - id: RMCArmorM3MediumPadless
+        amount: 0
+      - id: RMCArmorM3MediumRidged
+        amount: 0
+      - id: RMCArmorM3MediumSkull
+        amount: 0
+      - id: RMCArmorM3MediumSmooth
+        amount: 0
+      - id: RMCArmorM3HeavyPadded
+        amount: 0
+      - id: RMCArmorM3LightPadded
+        amount: 0
     - name: Miscellaneous
       entries:
       - id: RMCBoxMRE
-        amount: 2
+        amount: 0
       - id: RMCBoxPackFlare
-        amount: 2
-      - id: CMEntrenchingTool
-        amount: 2
-      - id: RMCM5Bayonet
-        amount: 5
-      - id: RMCPackFlareCAS
         amount: 0
       - id: CMPackFlare
+        amount: 0
+      - id: RMCPackFlareCAS
+        amount: 0
+      - id: RMCFlashlight
         amount: 1
+#      - id: RMC Folding Barricades (Use the 3-stack prototype id)
+#        name: MB-6 Folding Barricades (x3)
+#        amount: 0
+      - id: CMEntrenchingTool
+        amount: 0
+      - id: CMRollerBedSpawnFolded
+        amount: 0
+      - id: RMCTablePartTan
+        amount: 3
+      - id: RMCRackParts
+        amount: 3
+      - id: CMClipboard
+        amount: 4
+      - id: CMPen
+        amount: 4
+      - id: CMChairFolded
+        amount: 2
+    - name: Ammunition boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxShellsBuckshot
+        name: Magazine Box (Buckshot x 100)
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsFlechette
+        name: Magazine Box (Flechette x 100)
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        name: Magazine Box (Slugs x 100)
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
+    - name: Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM54C
+        name: Magazine Box (M54C x 10)
+        box: CMMagazineRifleM54C
+      - id: RMCBoxMagazineSMGM63
+        name: Magazine Box (M63 x 12)
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRevolverM44
+        name: Magazine Box (M44 x 16)
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazinePistolM1984
+        name: Magazine Box (M1984 x 16)
+        box: CMMagazinePistolM1984
+#      - name: Magazine Box (M56D x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M2C x 8)
+#        box: CMMagazineSMGM63
+# TODO: Box of M89 Signal Flare Packs (CAS Flare Box)
+# TODO: Box of Flashlights
