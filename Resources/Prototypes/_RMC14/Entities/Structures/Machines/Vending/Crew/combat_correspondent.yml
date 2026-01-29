@@ -62,7 +62,7 @@
       - id: CMArmorHelmetPress
         name: Combat Correspondent's Helmet
         recommended: true
-      - id: CMArmorHelmetPressBlue
+      - id: RMCArmorHelmetPressBlue
         name: Combat Correspondent's Helmet
       - id: RMCHeadCapCorrespondent
         name: Combat Correspondent's Cap
