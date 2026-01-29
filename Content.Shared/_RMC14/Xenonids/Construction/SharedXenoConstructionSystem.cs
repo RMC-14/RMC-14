@@ -253,7 +253,59 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
-        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+        EntityCoordinates coordinates;
+
+        // If in Queen Eye mode, plant at the eye's location (requires being on weeds)
+        if (TryComp(xeno.Owner, out QueenEyeActionComponent? eyeAction) &&
+            eyeAction.Eye is { } eye)
+        {
+            coordinates = _transform.GetMoverCoordinates(eye).SnapToGrid(EntityManager, _map);
+
+            if (_transform.GetGrid(coordinates) is not { } eyeGridUid ||
+                !TryComp(eyeGridUid, out MapGridComponent? eyeGridComp))
+            {
+                return;
+            }
+
+            var eyeGrid = new Entity<MapGridComponent>(eyeGridUid, eyeGridComp);
+
+            // Queen Eye must be on weeds to plant
+            if (!_xenoWeeds.IsOnWeeds(eyeGrid, coordinates))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-plant-requires-weeds"), eye, xeno.Owner);
+                return;
+            }
+
+            if (_xenoWeeds.IsOnWeeds(eyeGrid, coordinates, true))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), eye, xeno.Owner);
+                return;
+            }
+
+            var eyeTile = _mapSystem.CoordinatesToTile(eyeGridUid, eyeGridComp, coordinates);
+            if (!_xenoWeeds.CanSpreadWeedsPopup(eyeGrid, eyeTile, xeno, args.UseOnSemiWeedable, true))
+                return;
+
+            if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, eyeGrid, coordinates, args.LimitDistance))
+                return;
+
+            if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+                return;
+
+            args.Handled = true;
+            if (_net.IsServer)
+            {
+                var weeds = Spawn(args.Prototype, coordinates);
+                _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates} via Queen Eye");
+                _hive.SetSameHive(xeno.Owner, weeds);
+            }
+
+            _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
+            return;
+        }
+
+        // Normal plant weeds behavior
+        coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
         if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? gridComp))
         {

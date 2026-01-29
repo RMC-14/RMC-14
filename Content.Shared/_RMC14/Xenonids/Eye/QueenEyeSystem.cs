@@ -1,6 +1,7 @@
-﻿using System.Numerics;
+using System.Numerics;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
@@ -25,6 +26,7 @@ public sealed class QueenEyeSystem : EntitySystem
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private SeedJob _seedJob;
@@ -33,6 +35,8 @@ public sealed class QueenEyeSystem : EntitySystem
     private readonly HashSet<Entity<QueenEyeVisionComponent>> _seeds = new();
 
     private readonly HashSet<Vector2i> _singleTiles = new();
+
+    private bool _isRevertingMove;
 
     public override void Initialize()
     {
@@ -61,6 +65,7 @@ public sealed class QueenEyeSystem : EntitySystem
         SubscribeLocalEvent<QueenEyeActionComponent, XenoOvipositorChangedEvent>(OnQueenEyeOvipositorChanged);
 
         SubscribeLocalEvent<QueenEyeComponent, XenoUnwatchEvent>(OnQueenEyeUnwatch);
+        SubscribeLocalEvent<QueenEyeComponent, MoveEvent>(OnQueenEyeMove);
     }
 
     private void OnQueenEyeActionMapInit(Entity<QueenEyeActionComponent> ent, ref MapInitEvent args)
@@ -146,6 +151,43 @@ public sealed class QueenEyeSystem : EntitySystem
             return;
 
         _eye.SetTarget(queen, ent);
+    }
+
+    private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
+    {
+        // Skip if we're already reverting (prevent infinite recursion)
+        if (_isRevertingMove)
+            return;
+
+        // Skip if entity is being deleted
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        // Check if new position is too far from any weed
+        var newCoords = args.NewPosition;
+
+        // Find the nearest weed to the new position
+        var nearbyWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(newCoords, ent.Comp.MaxWeedDistance);
+
+        if (nearbyWeeds.Count == 0)
+        {
+            _isRevertingMove = true;
+
+            // Check if old position still has weeds nearby (weed might have been deleted)
+            var oldWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(args.OldPosition, ent.Comp.MaxWeedDistance);
+            if (oldWeeds.Count > 0)
+            {
+                // Old position still valid, revert to it
+                _transform.SetCoordinates(ent, args.OldPosition);
+            }
+            else if (ent.Comp.Queen is { } queen && !TerminatingOrDeleted(queen))
+            {
+                // Weed leash was deleted, teleport back to queen
+                _transform.SetCoordinates(ent, Transform(queen).Coordinates);
+            }
+
+            _isRevertingMove = false;
+        }
     }
 
     /// <param name="expansionSize">How much to expand the bounds before to find vision intersecting it. Makes this the largest vision size + 1 tile.</param>
