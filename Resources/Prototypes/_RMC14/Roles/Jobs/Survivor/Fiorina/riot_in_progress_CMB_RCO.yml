@@ -1,0 +1,80 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  name: rmc-job-name-bureau-riot-control-officer
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  accessGroups:
+  - ColonistSec
+  spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
+  icon: "RMCJobIconBureauDeputy"
+  hasIcon: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorRiotControlOfficer
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+    - type: JobPrefix
+      prefix: rmc-job-prefix-bureau-riot-control-officer
+  greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
+
+- type: startingGear
+  parent: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
+  id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  equipment:
+    jumpsuit: RMCSwatCMBUniformSpearhead
+    outerClothing: RMCArmorM4RMedium
+    mask: RMCMaskSWAT
+    head: RMCArmorHelmetM10CMBVisorSWAT
+    back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
+    eyes: RMCGlassesSecuritySwat
+
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  name: special survivor fiorina riot in progress colony marshal bureau riot control officer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
+
+- type: entity
+  id: RMCSurvivorPresetRiotInProgressCMBRCO
+  name: riot in progress UN RO preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    primaryWeaponChance: 1

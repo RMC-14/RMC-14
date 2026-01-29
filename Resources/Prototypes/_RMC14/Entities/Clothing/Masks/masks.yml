@@ -330,6 +330,8 @@
     toggledRsi:
       sprite: _RMC14/Objects/Clothing/Mask/swat_shield.rsi
       state: helmet-down
+  - type: ItemToggle
+    activated: true
 
 
 # Keffiyehs
