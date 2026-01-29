@@ -1,0 +1,32 @@
+# CMB Deputy
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseSPPSoldier
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseSPPSoldier ]
+  - type: Rank
+    rank: RMCRankSPPEfreitor
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: upp_pvt
+  - type: NpcFactionMember
+    factions:
+    - SPP
+    - Civilian
+
+- type: startingGear
+  id: RMCGearCorpseSPPSoldier
+  equipment:
+    jumpsuit: CMJumpsuitSPP
+    back: RMCSatchelSPPRifleman
+    outerClothing: RMCArmorSPP
+    gloves: RMCHandsVeteranSPP
+    shoes: RMCBootsSPPFilled
+    head: ArmorHelmetSPP
+    id: RMCIDSPPRifleman
+    ears: RMCHeadsetSPP
+  storage:
+    outerClothing:
+    - RMCBinoculars
