@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._RMC14.Movement;
 using Content.Client.IconSmoothing;
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Shared._RMC14.Sentry;
@@ -31,6 +32,7 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using static Content.Shared.Physics.CollisionGroup;
 
 namespace Content.Client._RMC14.Xenonids.Construction;
@@ -48,6 +50,8 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
 
     private SharedTransformSystem _transform = default!;
     private SharedMapSystem _mapSystem = default!;
@@ -75,6 +79,9 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
+
+    private TimeSpan _upgradeCooldown = TimeSpan.FromSeconds(0.1f);
+    private TimeSpan _lastUpgradeAttempt = TimeSpan.Zero;
 
     public override void Initialize()
     {
@@ -177,6 +184,25 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
 
         var (buildChoice, isConstructionActive) = GetConstructionState(player.Value);
         var isBuilding = IsBuilding(player.Value);
+        var hasQueenBuildingBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(player.Value);
+
+        var isMouseDown = _inputManager.IsKeyDown(Keyboard.Key.MouseLeft);
+        var upgradeTargetUnderMouse = hasQueenBuildingBoost && HasUpgradeableStructureUnderMouse();
+
+        if (isMouseDown &&
+            isConstructionActive &&
+            !string.IsNullOrEmpty(buildChoice) &&
+            (!isBuilding || upgradeTargetUnderMouse) &&
+            TryComp(player.Value, out XenoConstructionComponent? construction) &&
+            !construction.OrderConstructionTargeting)
+        {
+            var now = _timing.CurTime;
+            if (now - _lastUpgradeAttempt >= _upgradeCooldown)
+            {
+                TryConstructionAtMousePosition(player.Value, upgradeTargetUnderMouse);
+                _lastUpgradeAttempt = now;
+            }
+        }
 
         var shouldShowGhost = isConstructionActive && !string.IsNullOrEmpty(buildChoice) && !isBuilding;
 
@@ -198,6 +224,106 @@ public sealed class XenoConstructionGhostSystem : EntitySystem
             ClearCurrentGhost();
         }
     }
+
+    private void TryConstructionAtMousePosition(EntityUid player, bool upgradeOnly = false)
+    {
+        if (!TryComp(player, out XenoConstructionComponent? construction))
+            return;
+
+        var mouseScreenPos = _inputManager.MouseScreenPosition;
+        var coords = SnapToGrid(mouseScreenPos);
+
+        if (!coords.IsValid(EntityManager))
+            return;
+
+        var snapped = coords.SnapToGrid(EntityManager, _mapManager);
+
+        if (_transform.GetGrid(snapped) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+            return;
+
+        var tile = _mapSystem.CoordinatesToTile(gridId, grid, snapped);
+
+        EntityUid? upgradeableEntity = null;
+        XenoStructureUpgradeableComponent? upgradeableComp = null;
+
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (TryComp(uid, out XenoStructureUpgradeableComponent? comp))
+            {
+                upgradeableEntity = uid;
+                upgradeableComp = comp;
+                break;
+            }
+        }
+
+        var hasBoost = EntityManager.HasComponent<QueenBuildingBoostComponent>(player);
+
+        if (upgradeableEntity != null && upgradeableComp != null && upgradeableComp.To != null)
+        {
+            if (!construction.CanUpgrade && !hasBoost)
+                return;
+
+            var inRange = _queenEye.IsInQueenEye(player) ||
+                        (hasBoost && TryComp(player, out QueenBuildingBoostComponent? boost)
+                            ? _transform.InRange(_transform.GetMoverCoordinates(player), coords, boost.RemoteUpgradeRange)
+                            : _interaction.InRangeUnobstructed(player, upgradeableEntity.Value, popup: false));
+
+            if (!inRange)
+                return;
+        }
+        else
+        {
+            if (upgradeOnly)
+                return;
+
+            if (construction.BuildChoice == null)
+                return;
+
+            if (!CanSecreteOnTile((player, construction), construction.BuildChoice, coords, true, true))
+                return;
+        }
+
+        var actionController = _uiManager.GetUIController<ActionUIController>();
+        if (actionController.SelectingTargetFor is not { } selectedActionId)
+            return;
+
+        if (!TryComp<XenoConstructionActionComponent>(selectedActionId, out _))
+            return;
+
+        var request = new RequestPerformActionEvent(GetNetEntity(selectedActionId), null, GetNetCoordinates(coords), _rmcLagCompensation.GetLastRealTick(null));
+        RaisePredictiveEvent(request);
+    }
+
+    private bool HasUpgradeableStructureUnderMouse()
+    {
+        var mouseScreenPos = _inputManager.MouseScreenPosition;
+        var coords = SnapToGrid(mouseScreenPos);
+
+        if (!coords.IsValid(EntityManager))
+            return false;
+
+        var snapped = coords.SnapToGrid(EntityManager, _mapManager);
+
+        if (_transform.GetGrid(snapped) is not { } gridId ||
+            !TryComp(gridId, out MapGridComponent? grid))
+            return false;
+
+        var tile = _mapSystem.CoordinatesToTile(gridId, grid, snapped);
+
+        var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(gridId, grid, tile);
+        while (anchored.MoveNext(out var uid))
+        {
+            if (TryComp(uid, out XenoStructureUpgradeableComponent? comp) && comp.To != null)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     private (string? buildChoice, bool isActive) GetConstructionState(EntityUid player)
     {
