@@ -60701,15 +60701,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: -46.5,-4.5
       parent: 1
-- proto: RMCGrenadeMolotov
-  entities:
-  - uid: 3371
-    components:
-    - type: Transform
-      parent: 3369
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCHandcuffs
   entities:
   - uid: 7033
