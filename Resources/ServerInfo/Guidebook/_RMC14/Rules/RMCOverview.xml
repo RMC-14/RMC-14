@@ -25,6 +25,8 @@
   - [textlink="(SOP, Equipment)" link="RMCMarineSOPEquipment"] Added regulations for the command tablet.
   - [textlink="(Character Names)" link="RMCCharacterNames"] Added guidelines for Skrell and Feroxi.
   - [textlink="(Rules, Core 5)" link="RMCKindness"] Added a notice that if behavior in the Military Police role does not meet community standards, rolebans may be applied less leniently. This may not be an indication of a bad player, but it is an indication that a player doesn't have the understanding required to play MP.
+  - [textlink="(SOP, Prisoners of War)" link="RMCMarineSOPNONModThirdparty"] POWs now get one warning if they attempt to escape. Any further attempts may now strip their rights as a POW at the discretion of MPs.
+  - [textlink="(SOP, Prisoners of War)" link="RMCMarineSOPNONModThirdparty"] POWs must now be read their rights for them to be eligible to lose them.
 
   ## Admin Decisions Are Final.
   - Rules are enforced as intended. Every example of a rule break cannot be written, thus enforcement is subject to admin interpretation of the rule's intention.
