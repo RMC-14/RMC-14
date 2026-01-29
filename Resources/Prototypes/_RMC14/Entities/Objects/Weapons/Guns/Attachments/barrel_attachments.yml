@@ -160,11 +160,10 @@
   - type: AttachableWeaponRangedMods
     modifiers:
     - accuracyAddMult: 0.15
-      damageAddMult: 0.1
+      damageAddMult: 0.05
       recoilFlat: -2
     - conditions:
         unwieldedOnly: true
-      recoilFlat: 2
       accuracyAddMult: -0.2
   - type: ItemCamouflage
     states:
@@ -173,6 +172,8 @@
       Snow: s_m10_overcomp
       Classic: c_m10_overcomp
       Urban: u_m10_overcomp
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m13-extended-recoil-compensator
 
 - type: entity
   parent: RMCAttachmentRecoilCompensatorM13
@@ -232,6 +233,10 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
 
 - type: entity
   parent: RMCBarrelAttachmentBase

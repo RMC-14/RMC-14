@@ -26,6 +26,12 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-pmc-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformPMC
 
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
@@ -51,12 +57,34 @@
 
 - type: entity
   parent: CMArmorM4PMCLight
+  id: RMCArmorM4PMCBulletProof
+  name: M4 pattern PMC bulletproof armor
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This set is designed for protecting against ballistics, and has minimal protection against blades and biohazards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/bulletproof.rsi
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bullet: 30 # CLOTHING_ARMOR_HIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+
+- type: entity
+  parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]
   id: CMArmorM4PMCCorporate
   name: M1 pattern corporate security armor
   description: A basic vest with a We-Ya badge on the right breast. This is commonly worn by low-level guards protecting We-Ya facilities.
+  suffix: ""
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 20 # CLOTHING_ARMOR_MEDIUM
+    explosionArmor: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
     walkModifier: 0.725
     sprintModifier: 0.725
@@ -65,6 +93,7 @@
   parent: CMArmorM4PMCCorporate
   id: CMArmorM4PMCCorporateLead
   description: A basic vest with a We-Ya badge on the right breast. This variant is worn by low-level guards that have elevated in rank due to 'good conduct in the field', also known as corporate bootlicking.
+  suffix: Leader
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/corporate_lead.rsi

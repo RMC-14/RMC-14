@@ -63,7 +63,7 @@
     - ChemDispensable
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 50
+      CMSteel: 2000
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -91,6 +91,9 @@
     solutions:
       bucket:
         maxVol: 240
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 4000
 
 - type: entity
   parent: RMCBucket
@@ -135,6 +138,9 @@
     - 240
     - 300
     - 500
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 8000
 
 - type: entity
   parent: RMCBucketJanitorial
@@ -143,7 +149,7 @@
   description: A large jug made of non-reactive plastic, capable of carrying large amounts of diverse chemicals to wherever they are needed. Holds 500 units.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Medical/reagentjug.rsi
+    sprite: _RMC14/Objects/Chemistry/reagent_jug.rsi
     layers:
     - state: reagentjug
     - map: [ "enum.SolutionContainerLayers.Fill" ]
@@ -153,7 +159,7 @@
       map: ["enum.OpenableVisuals.Layer"]
       visible: false
   - type: Item
-    sprite: _RMC14/Objects/Medical/reagentjug.rsi
+    sprite: _RMC14/Objects/Chemistry/reagent_jug.rsi
     size: Normal
   - type: SolutionContainerVisuals
     maxFillLevels: 5

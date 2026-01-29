@@ -240,7 +240,7 @@
     state: bobda
 
 - type: entity
-  parent: CMPosterBase
+  parent: CMPosterArt1
   id: CMPosterArt2
   name: "art?"
   description: "This poster depicts outsider geometric postmodern ascetic abject social expressionism art...you think."
@@ -249,7 +249,7 @@
     state: art_2
 
 - type: entity
-  parent: CMPosterBase
+  parent: CMPosterArt1
   id: CMPosterArt3
   name: "art?"
   description: "This poster depicts some curved lines that some pretentious art snob valued at over $12,000,000. Too bad this is just a low-resolution print."
@@ -277,24 +277,6 @@
 
 - type: entity
   parent: CMPosterBase
-  id: CMPosterSafetyGuidance
-  name: "safety guidance"
-  description: "This poster depicts a man operating a grinding wheel and reads 'SAFETY GUIDANCE stay focused in the lab'. There was a recent debate on whether it is pronounced gwee-dince or is it pro-nounced gw-eye-dance, some were worried it might've gotten physical."
-  components:
-  - type: Sprite
-    state: safety_guidance
-
-- type: entity
-  parent: CMPosterBase
-  id: CMPosterSafetyGoggles1
-  name: "safety goggles"
-  description: "This poster depicts a minimalist head wearing a hardhat with contrasting safety goggles. It reads 'Protect Your Eyes'"
-  components:
-  - type: Sprite
-    state: safety_goggles_1
-
-- type: entity
-  parent: CMPosterBase
   id: CMPosterMissFebruary
   name: "'Miss February' pinup"
   description: "This poster features Miranda Noel. She was the February 2180 centerfold in House Bunny Gentleman's Magazine. Don't ask how you know that."
@@ -310,15 +292,6 @@
   components:
   - type: Sprite
     state: proper_lifting
-
-- type: entity
-  parent: CMPosterBase
-  id: CMPosterSafetyGoggles2
-  name: "safety goggles"
-  description: "This poster depicts a minimalist man with glowing goggle lenses. It reads 'SAVE YOUR EYES USE YOUR GOGGLES"
-  components:
-  - type: Sprite
-    state: safety_goggles_2
 
 - type: entity
   parent: CMPosterBase
@@ -445,3 +418,573 @@
   components:
   - type: Sprite
     state: horizon
+
+- type: entity
+  parent: CMPosterElectro
+  id: CMPosterElectroMan
+  description: "Electro Golds - lovingly machine rolled for YOUR pleasure."
+  components:
+  - type: Sprite
+    state: electroman
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterPizzaGalaxy
+  name: "Pizza Galaxy poster"
+  description: "This poster depicts a delicious looking slice of Pizza, Yum."
+  components:
+  - type: Sprite
+    state: pizza_galaxy
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterTartarus
+  name: "Tartarus Mining co. poster"
+  description: "A simplified version of the Tartarus Mining co. logo. The Tartarus Mining Company is owned by Prospectia, a sub-division of the San Rei Corporation, which is in turn owned by the Weston-Yamada Corporation."
+  components:
+  - type: Sprite
+    state: tartarus
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterEATBlue
+  name: "EAT"
+  description: "This is less of a poster and more of an advertisement for those gross power bars."
+  components:
+  - type: Sprite
+    state: eat_blue
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterCola
+  name: "classic cola poster"
+  description: "This poster depicts a classic cola can. With a taste that's been around for centuries. Nobody can beat it."
+  components:
+  - type: Sprite
+    state: cola
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterCMB1
+  name: "Colonial Marshals poster"
+  description: "To live, to serve, wherever humanity roams."
+  components:
+  - type: Sprite
+    state: CMB_1
+
+- type: entity
+  parent: CMPosterCMB1
+  id: CMPosterCMB2
+  name: "Colonial Marshals poster"
+  description: "The laws of Earth stretch beyond the Sol: The Colonial Marshals."
+  components:
+  - type: Sprite
+    state: CMB_2
+
+- type: entity
+  parent: CMPosterElectro
+  id: CMPosterElectroCyan
+  name: "Electro Gold"
+  description: "Electro Golds, lovingly machine rolled for YOUR pleasure."
+  components:
+  - type: Sprite
+    state: electro_cyan
+
+- type: entity
+  parent: CMPosterArt1
+  id: CMPosterArt4
+  name: "art?"
+  description: "This poster depicts some curved lines that some pretentious art snob valued at over $12,000,000. Too bad this is just a low-resolution print."
+  components:
+  - type: Sprite
+    state: art_4
+
+- type: entity
+  parent: CMPosterArt1
+  id: CMPosterArt5
+  name: "art?"
+  description: "This poster depicts outsider geometric postmodern ascetic abject social expressionism art...you think."
+  components:
+  - type: Sprite
+    state: art_5
+
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterDavenportGin
+  name: "Davenport gin poster"
+  description: "On your way back home? Toast your return with Davenport gin."
+  components:
+  - type: Sprite
+    state: davenport_gin
+
+- type: entity
+  parent: CMPosterBobda
+  id: CMPosterBobdaBlue
+  name: "Bobda Blue"
+  description: "Bobda Blue. If you don't drink Bobda, you probably do stuff like floss and value your kidneys...wimp. Printed in Havana."
+  components:
+  - type: Sprite
+    state: bobda_blue
+
+- type: entity
+  parent: CMPosterBobda
+  id: CMPosterBobdaLime
+  name: "Bobda Lime"
+  description: "Bobda Lime. If you don't drink Bobda, you probably do stuff like floss and value your kidneys...wimp. Printed in Havana."
+  components:
+  - type: Sprite
+    state: bobda_lime
+
+# Safety Posters
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterSafetyGuidance
+  name: "safety guidance"
+  description: "This poster depicts a man operating a grinding wheel and reads 'SAFETY GUIDANCE stay focused in the lab'. There was a recent debate on whether it is pronounced gwee-dince or is it pro-nounced gw-eye-dance, some were worried it might've gotten physical."
+  components:
+  - type: Sprite
+    state: safety_guidance
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyGoggles1
+  name: "safety goggles"
+  description: "This poster depicts a minimalist head wearing a hardhat with contrasting safety goggles. It reads 'Protect Your Eyes'"
+  components:
+  - type: Sprite
+    state: safety_goggles_1
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyGoggles2
+  name: "safety goggles"
+  description: "This poster depicts a minimalist man with glowing goggle lenses. It reads 'SAVE YOUR EYES USE YOUR GOGGLES"
+  components:
+  - type: Sprite
+    state: safety_goggles_2
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyWaste
+  name: "safety poster"
+  description: "WASTE damages PROFIT - Think On!"
+  components:
+  - type: Sprite
+    state: safety_waste
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetySilence
+  name: "safety poster"
+  description: "Silence is not a Virtue - Do Not Share Sensitive Information..."
+  components:
+  - type: Sprite
+    state: safety_silence
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetySwitch
+  name: "safety poster"
+  description: "Save Resources! Switch Off Before You Clock Off."
+  components:
+  - type: Sprite
+    state: safety_switch
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyClearhead
+  name: "safety poster"
+  description: "Clutter Clouds the Mind - Clean Workstation = Clear Head!"
+  components:
+  - type: Sprite
+    state: safety_clearhead
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyCheck
+  name: "safety poster"
+  description: "REMEMBER - Check Once, Twice, Thrice!"
+  components:
+  - type: Sprite
+    state: safety_check
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetySusObject
+  name: "safety poster"
+  description: "DO NOT APPROACH SUSPICIOUS OBJECTS - CALL SECURITY."
+  components:
+  - type: Sprite
+    state: safety_susobject
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyClean
+  name: "safety poster"
+  description: "CLEAN UP AFTER YOURSELF! CLEAN SPACE - CLEAR MIND."
+  components:
+  - type: Sprite
+    state: safety_clean
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyForeign
+  name: "safety poster"
+  description: "NO foreign objects allowed - that means YOU Smokey Joe!"
+  components:
+  - type: Sprite
+    state: safety_foreign
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyContainer
+  name: "safety poster"
+  description: "DON'T OPEN UNKNOWN CONTAINERS - AVOID VERMIN!"
+  components:
+  - type: Sprite
+    state: safety_container
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetyQuiet
+  name: "safety poster"
+  description: "THIS IS A QUIET ZONE - PLEASE TALK SOFTLY."
+  components:
+  - type: Sprite
+    state: safety_quiet
+
+- type: entity
+  parent: CMPosterSafetyGuidance
+  id: CMPosterSafetySoap
+  name: "safety poster"
+  description: "GERMS HATE SOAP - DON'T forget to wash your hands."
+  components:
+  - type: Sprite
+    state: safety_soap
+
+# Weston-Yamada
+- type: entity
+  parent: CMPosterBase
+  id: RMCPosterWEYA1
+  name: Weston-Yamada poster
+  description: "A Weston-Yamada logo featuring a stylized wireframe planet and the company slogan: The Future is Now."
+  components:
+  - type: Sprite
+    state: weya_1
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterWEYA2
+  name: "Weston-Yamada poster"
+  description: "You don't have much choice in brand loyalty when there's basically only one brand."
+  components:
+  - type: Sprite
+    state: weya_2
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterWEYA3
+  components:
+  - type: Sprite
+    state: weya_3
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterWEYA4
+  name: "Weston-Yamada propaganda poster"
+  description: "TOGETHER - EXTRASOLAR COLONIZATION - WEAPON - PROTECTION - HIGH TECHNOLOGY - MANUFACTURING SYNTHETICS - FUTURE - SPACE STATION. Weston-Yamada - The Future is Now."
+  components:
+  - type: Sprite
+    state: weya_4
+
+- type: entity
+  parent: RMCPosterWEYA1
+  id: RMCPosterWEYA5
+  name: "Weston-Yamada propaganda poster"
+  description: "LET'S WORK - TOGETHER WE BUILD A BETTER FUTURE."
+  components:
+  - type: Sprite
+    state: weya_5
+
+# Daniel
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterDaniel1
+  name: "Synthetic 'Daniel' poster"
+  description: "An ominous forward facing profile of the Synthetic model 'Daniel'. Not quite a second generation model but something inbetween, suited for the needs of colonists. The poster is more art then an advertisement."
+  components:
+  - type: Sprite
+    state: daniel_1
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel2
+  name: "Synthetic 'Daniel' poster"
+  description: "An ominous side facing profile of the Synthetic model 'Daniel'. Not quite a second generation model but something inbetween, suited for the needs of colonists. The poster is more art then an advertisement."
+  components:
+  - type: Sprite
+    state: daniel_2
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel3
+  name: "Weston-Yamada - 'Daniel' Model Synthetic poster"
+  description: "A poster depicting a child in the arms of a Weston-Yamada 'Daniel' model Synthetic, Who thought this was a good idea?"
+  components:
+  - type: Sprite
+    state: daniel_3
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel4
+  name: "Synthetic 'Daniel' poster"
+  description: "An ominous forward facing profile of the Synthetic model 'Daniel'. Not quite a second generation model but something inbetween, suited for the needs of colonists. The poster is more art then an advertisement."
+  components:
+  - type: Sprite
+    state: daniel_4
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel5
+  name: "Synthetic 'Daniel' poster"
+  description: "An ominous side facing profile of the Synthetic model 'Daniel'. Not quite a second generation model but something inbetween, suited for the needs of colonists. The poster is more art then an advertisement."
+  components:
+  - type: Sprite
+    state: daniel_5
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel6
+  name: "Weston-Yamada - 'Daniel' Model Synthetic poster"
+  description: "A poster depicting a child in the arms of a Weston-Yamada 'Daniel' model Synthetic, Who thought this was a good idea?"
+  components:
+  - type: Sprite
+    state: daniel_6
+
+- type: entity
+  parent: CMPosterDaniel1
+  id: CMPosterDaniel7
+  name: "Weston-Yamada - 'Daniel' Model Synthetic poster"
+  description: "All that matters is YOUR comfort. Our Artificial Humans are watching your back."
+  components:
+  - type: Sprite
+    state: daniel_7
+
+# UNMC Marine Corp
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterMarineCorp1
+  name: "marine corp poster"
+  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  components:
+  - type: Sprite
+    state: marine_corp_1
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp2
+  name: "marine corp poster"
+  description: "Join the Marine Corp. Enlist today, protect tomorrow!"
+  components:
+  - type: Sprite
+    state: marine_corp_2
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp3
+  name: "marine corp poster"
+  description: "Every Paycheck a Fortune! Every Formation a Parade! - Join the Colonial Marines!"
+  components:
+  - type: Sprite
+    state: marine_corp_3
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp4
+  name: "marine corp poster"
+  description: "This poster depicts the logo of the UN Marine Corps, Oorah!"
+  components:
+  - type: Sprite
+    state: marine_corp_4
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp5
+  name: "UN marine corp poster"
+  description: "YOU GIVE US WINGS, WINGS OF LIBERTY - United Nations Marine Corp."
+  components:
+  - type: Sprite
+    state: marine_corp_5
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp6
+  name: "UN marine corp poster"
+  description: "UNMC MARINES - FIRST TO FIGHT."
+  components:
+  - type: Sprite
+    state: marine_corp_6
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterMarineCorp7
+  name: "UN marine corp poster"
+  description: "No one stands alone with the United Nations Marine Corp - JOIN US!"
+  components:
+  - type: Sprite
+    state: marine_corp_7
+
+- type: entity
+  parent: CMPosterMarineCorp1
+  id: CMPosterFORECON
+  name: "UN marine corp poster"
+  description: "Join the elite 'Recon Division of the United Nations Marine Corps', and become the unseen force that strikes fear into the hearts of our enemies. Harness your instinct, adaptability, and unwavering focus as you navigate hostile territories on distant planets."
+  components:
+  - type: Sprite
+    state: forecon
+
+# ZSPA
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterZSPA1
+  name: "ZSPA poster"
+  description: "A recruitment poster for the ZSPA. Integrity, Justice, Unity—Together, We Keep the Peace."
+  components:
+  - type: Sprite
+    state: ZSPA_1
+
+- type: entity
+  parent: CMPosterZSPA1
+  id: CMPosterZSPA2
+  name: "ZSPA poster"
+  description: "A recruitment poster for the ZSPA. Serve with Honor, Protect with Strength."
+  components:
+  - type: Sprite
+    state: ZSPA_2
+
+- type: entity
+  parent: CMPosterZSPA1
+  id: CMPosterZSPA3
+  name: "ZSPA poster"
+  description: "A recruitment poster for the ZSPA. One Law, One Duty, One Force—Join the ZSPA."
+  components:
+  - type: Sprite
+    state: ZSPA_3
+
+# SPP
+- type: entity
+  parent: CMPosterBase
+  id: CMPosterSPP1
+  name: "The Stars Are Ours"
+  description: "A giant man wearing an EVA suit holds fast with a waving flag of the SPP."
+  components:
+  - type: Sprite
+    state: SPP_1
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP2
+  name: "The Stars Are Ours"
+  description: "A stylized depiction of the SPP home system and the stars"
+  components:
+  - type: Sprite
+    state: SPP_2
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP3
+  name: "Trust In The Strength Of The Union"
+  description: "A stylized depiction of the SPP star."
+  components:
+  - type: Sprite
+    state: SPP_3
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP4
+  name: "Through The Union Our Power Is Secured"
+  description: "A stylized depiction of the SPP's flag and the words, 'Our Unity is the dream of all Peoples. Trust in the strength of their Union.'"
+  components:
+  - type: Sprite
+    state: SPP_4
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP5
+  name: "We Forge A Path Into the Stars"
+  description: "The head of a man in a SPPAC EVA suit smiles looking not at you, but up to the right of the poster."
+  components:
+  - type: Sprite
+    state: SPP_5
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP6
+  name: "Our Militaries Secures Our Future"
+  description: "A SPPAC Ground Forces soldier stands, rifle at the ready with a defiant and steel-eyed look on his face. The SPP star is in the background."
+  components:
+  - type: Sprite
+    state: SPP_6
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP7
+  name: "The People's Armed Collective Is Our Backbone"
+  description: "SPPAC Ground Forces soldiers, one of whom is a woman and none of whom have a clear race, stare forward stoically."
+  components:
+  - type: Sprite
+    state: SPP_7
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP8
+  name: "The People's Armed Collective Is Our Backbone"
+  description: "SPPAC Ground Forces soldiers, one of whom is a woman and none of whom have a clear race, stare forward stoically. The poster reads, 'The People's Armed Collective represent us all in the sacred war of liberation and defense of the People's Union."
+  components:
+  - type: Sprite
+    state: SPP_8
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP9
+  name: "Ever Vigilant Against Capitalist Forces"
+  description: "A warped screaming eagle made to look like a vulture bears its talons over the SPP homeworld which has the SPP roundel super-imposed over it. The poster reads, 'The UN will not break the resolve of the people.'"
+  components:
+  - type: Sprite
+    state: SPP_9
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP10
+  name: "Ever Vigilant Against The Stooges of Capitalism and Imperialism"
+  description: "A decrepit and desiccated, near claw-like hand reaches towards a stylized solar star shaped into the SPP star. The poster reads, 'Even in its death throes, we must remain vigilant of the encroachment of capitalist forces.'"
+  components:
+  - type: Sprite
+    state: SPP_10
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP11
+  name: "The Stars Are Ours"
+  description: "A giant man wearing an EVA suit holds fast with a waving flag of the SPP."
+  components:
+  - type: Sprite
+    state: SPP_11
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP12
+  name: "The Stars Are Ours"
+  description: "A stylized depiction of the SPP home system and the stars"
+  components:
+  - type: Sprite
+    state: SPP_12
+
+- type: entity
+  parent: CMPosterSPP1
+  id: CMPosterSPP13
+  name: "We Forge A Path Into the Stars"
+  description: "The head of a man in a SPPAC EVA suit smiles looking not at you, but up to the right of the poster."
+  components:
+  - type: Sprite
+    state: SPP_13

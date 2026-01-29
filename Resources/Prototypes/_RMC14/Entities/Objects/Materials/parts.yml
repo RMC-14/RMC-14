@@ -34,7 +34,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 50
+      CMSteel: 1875
   - type: RMCConstructionItem
     buildable:
     - RMCGrilleBuild
@@ -75,7 +75,7 @@
   components:
   - type: PhysicalComposition
     materialComposition:
-      CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+      CMPlasteel: 3750
   - type: Stack
     count: 60
     stackType: CMRodPlasteel

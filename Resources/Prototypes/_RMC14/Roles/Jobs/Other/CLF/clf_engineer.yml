@@ -61,7 +61,7 @@
   id: RMCGearCLFEngineer
   equipment:
     head: RMCHelmetWelding
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
   #  eyes: RMCMesonGoggles TODO RMC14
     jumpsuit: RMCJumpsuitCLFWebbingBuckshot
@@ -83,7 +83,7 @@
     - RMCExplosiveBreachingCharge
     - RMCExplosivePlastic
     - RMCGrenadeMolotov
-    - CMMRE
+    - RMCMRECLF
     - RMCFlashlight
     - CMShellShotgunBuckshot
     - CMShellShotgunBuckshot
