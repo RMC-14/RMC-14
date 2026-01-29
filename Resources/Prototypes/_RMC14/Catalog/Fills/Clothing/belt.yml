@@ -181,7 +181,7 @@
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
-      amount: 17
+      amount: 18
 
 - type: entity
   parent: CMBeltSmartGunOperator

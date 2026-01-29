@@ -301,6 +301,16 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: RMCArmorMercenaryHEFA
+  id: RMCArmorMercenaryHEFAFilled
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 3
+
 # Riot armor
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]

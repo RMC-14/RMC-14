@@ -179,17 +179,20 @@
     - RMCVisorWeldingIntegrated
 
 # HEFA
-# TODO: actually implement this
 - type: entity
-  parent: RMCArmorHelmetM3G4
+  parent: [RMCArmorHelmetM3G4, CMGrenadeBase]
   id: RMCArmorHelmetHEFA
   name: HEFA helmet
   description: For some reason, seeing this helmet causes you to feel extremely distressed.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    layers:
+    - state: icon
+      map: ["enum.TriggerVisualLayers.Base"]
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Mercenary/hefa.rsi
+    quickEquip: false
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: CMArmor
@@ -199,6 +202,69 @@
     explosionArmor: 70
     # armor_rad = 30
     # armor_internaldamage = 30
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - RMCLighter
+      - RMCFlask
+      - CMScalpel
+      - Figurine
+      - HelmetAccessory
+      - CassettePlayer
+      - CassetteTape
+      tags:
+      - CigPack
+      - Cigarette
+      #      - TODO RMC14 cards
+      - Slice
+      #      - TODO RMC14 glasses (eyewear)
+      - Pen
+      - Crayon
+      - RMCHandful
+      - Flashlight
+      - Brutepack
+      - CMOintment
+      - CMAutoInjector
+      - PillPacket
+      - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
+  # Uses custom HefaHelmet component instead of ProjectileGrenade to properly handle equipped explosions.
+  # No ExplodeOnTrigger - HefaHelmet handles both explosion and shrapnel via TriggerEvent.
+  - type: Explosive
+    maxIntensity: 8 # max 40 brute 40 burn
+    intensitySlope: 4
+    totalIntensity: 110
+    deleteAfterExplosion: false
+  - type: HefaHelmet
+    shrapnelPrototype: CMProjectileShrapnel
+    shrapnelCount: 48
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - RMCHelmetHEFA
+  - type: GenericVisualizer
+    visuals: {}
+  - type: TimerTriggerVisuals
+    primingSprite: icon-up
+    unprimedSprite: icon
+  - type: TimerTriggerClothingVisuals
+    primedPrefix: up
+
+- type: Tag
+  id: RMCHelmetHEFA
+
+- type: entity
+  parent: RMCArmorHelmetHEFA
+  id: RMCArmorHelmetHEFAFilled
+  suffix: HEFA, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
+      amount: 2
 
 # CBRN
 - type: entity
