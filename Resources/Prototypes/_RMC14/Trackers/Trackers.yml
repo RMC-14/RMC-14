@@ -139,6 +139,10 @@
   job: CMFreelancerLeader
 
 - type: trackerMode
+  id: RoyalMarinesTeamLeader
+  job: CMRoyalMarinesTeamlead
+
+- type: trackerMode
   id: SeniorConstableTSEPA
   job: RMCTSEPASeniorConstable
 

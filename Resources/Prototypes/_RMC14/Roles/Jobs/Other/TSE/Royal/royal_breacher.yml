@@ -64,12 +64,14 @@
       role: CMJobCombatTech
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalBreacher
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
+    eyes: RMCWeldingGogglesSuperior
     jumpsuit: RMCJumpsuitMarineRoyal
     outerClothing: RMCArmorRoyalPointmanFilled
     gloves: RMCHandsVeteranRoyalMarine
@@ -77,9 +79,9 @@
     suitstorage: RMCWeaponRifleL24B
     id: RMCIDRoyalMarinesBreacher
     belt: RMCBeltUtiliyGeneralFilledRoyal
-    # back: RMCShieldBallistic // TODO RMC14 proper ballistic shields
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
-    pocket2: RMCPouchMedkitFillRoyal
+    # back: RMCShieldBallistic // TODO RMC14 FBS-B Ballistic shield
+    pocket1: RMCPouchToolsSocRCMBreacher
+    pocket2: RMCPouchMedkitFillRoyalMarine
 
 - type: playTimeTracker
   id: RMCJobRoyalBreacher

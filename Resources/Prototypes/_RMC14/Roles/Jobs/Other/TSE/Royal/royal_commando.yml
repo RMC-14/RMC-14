@@ -58,7 +58,12 @@
     job: CMRoyalMarinesCommando
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalCommando
@@ -74,7 +79,7 @@
     belt: RMCL83A3BeltFilled
     back: RMCSatchelLightpackFilledRoyalCommando # TODO RMC14 lightweight rmc backpack
     pocket1: RMCPouchGeneralLargeFilledRoyalCommando
-    pocket2: RMCPouchMedkitFillRoyal
+    pocket2: RMCPouchMedkitFillRoyalMarine
 
 - type: playTimeTracker
   id: RMCJobRoyalCommando

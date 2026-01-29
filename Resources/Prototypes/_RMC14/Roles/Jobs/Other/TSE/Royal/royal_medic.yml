@@ -62,8 +62,9 @@
     requirements:
     - !type:RoleTimeRequirement
       role: CMJobHospitalCorpsman
-      time: 18000 # 5 Hours
+      time: 54000 # 15 Hours, ive been disappointed one too many times, im upping the time by 5 hours
   - type: GhostRoleApplySpecial
+    squad: SquadRoyalMarines
 
 - type: startingGear
   id: RMCGearRoyalMedic
@@ -80,7 +81,7 @@
     belt: RMCBeltMedicBagRoyal
     back: RMCSatchelLightpackFilledRoyalMedic
     pocket1: RMCPouchReagentCanisterTricordrazineRevival
-    pocket2: RMCPouchMedkitFillRoyal
+    pocket2: RMCPouchMedkitFillRoyalMarineMedic
 
 - type: playTimeTracker
   id: RMCJobRoyalMedic
