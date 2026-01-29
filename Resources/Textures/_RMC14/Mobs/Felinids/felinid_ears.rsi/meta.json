@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "copyright": "@Vordenburg",
+    "copyright": "@Vordenburg. flat & flat_inner created for RMC-14/RMC-14 by @TadJohnson00 (GitHub).",
     "license": "CC-BY-SA-4.0",
     "size": {
         "x": 32,
@@ -69,6 +69,14 @@
         },
         {
             "name": "wide_outer",
+            "directions": 4
+        },
+        {
+            "name": "flat",
+            "directions": 4
+        },
+        {
+            "name": "flat_inner",
             "directions": 4
         }
     ]
