@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 264.0.0
+  engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/18/2025 14:16:12
+  time: 01/28/2026 18:09:07
   entityCount: 97
 maps: []
 grids:
@@ -14,8 +14,11 @@ orphans:
 nullspace: []
 tilemap:
   3: Space
+  14: CMFloorCorsatBasicOfficeTiles
   1: CMFloorPlating
+  13: CMShuttleTileInvisible
   10: CMShuttleTileRasputin1
+  15: CMShuttleTileRasputin11
   2: CMShuttleTileRasputin14
   8: CMShuttleTileRasputin15
   12: CMShuttleTileRasputin2
@@ -40,7 +43,19 @@ entities:
       chunks:
         0,0:
           ind: 0,0
-          tiles: AAAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAABAAAAAAAAAUAAAAAAAAGAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAABAAAAAAAAAQAAAAAAAAcAAAAAAAAIAAAAAAAABwAAAAAAAAEAAAAAAAABAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAEAAAAAAAAHAAAAAAAACAAAAAAAAAcAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAACAAAAAAAABwAAAAAAAAgAAAAAAAAHAAAAAAAAAgAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAACAAAAAAAAAgAAAAAAAAcAAAAAAAAIAAAAAAAABwAAAAAAAAIAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAIAAAAAAAAJAAAAAAAACgAAAAAAAAsAAAAAAAACAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAAAAAAAAAABAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAAAHAAAAAAAACAAAAAAAAAEAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAEAAAAAAAAIAAAAAAAABwAAAAAAAAgAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAMAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          tiles: CAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAA0AAAAAAAADAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAgAAAAAAAAHAAAAAAAACAAAAAAAAAEAAAAAAAABAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAIAAAAAAAABwAAAAAAAAgAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAwAAAAAAAABAAAAAAAADQAAAAAAAA0AAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAAOAAAAAAAAAQAAAAAAAA0AAAAAAAANAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAANAAAAAAAAAQAAAAAAAA0AAAAAAAANAAAAAAAADQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
+        0,-1:
+          ind: 0,-1
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAADgAAAAAAAA4AAAAAAAAOAAAAAAAAAQAAAAAAAA0AAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAQAAAAAAAAFAAAAAAAABgAAAAAAAAEAAAAAAAANAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAHAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAABwAAAAAAAAgAAAAAAAAHAAAAAAAACAAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAcAAAAAAAAIAAAAAAAABwAAAAAAAAgAAAAAAAAOAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAAJAAAAAAAADwAAAAAAAAsAAAAAAAAIAAAAAAAADgAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAACAAAAAAAAAcAAAAAAAAIAAAAAAAAAQAAAAAAAA0AAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          version: 7
+        -1,-1:
+          ind: -1,-1
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAANAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAADQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAEAAAAAAAAIAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAABAAAAAAAACAAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAADgAAAAAAAAgAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA4AAAAAAAAIAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAANAAAAAAAAAQAAAAAAAA==
+          version: 7
+        -1,0:
+          ind: -1,0
+          tiles: AwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAANAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAADQAAAAAAAAEAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA0AAAAAAAABAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAANAAAAAAAADQAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAADQAAAAAAAA0AAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA0AAAAAAAANAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
           version: 7
     - type: Broadphase
     - type: Physics
@@ -163,593 +178,659 @@ entities:
         0,2: RMCAreaShuttleERT
         0,1: RMCAreaShuttleERT
         0,0: RMCAreaShuttleERT
-- proto: CMAdvFirstAidKitFilled
-  entities:
-  - uid: 74
-    components:
-    - type: Transform
-      pos: 5.5,4.5
-      parent: 1
+        4,-3: RMCAreaShuttleERT
+        4,-5: RMCAreaShuttleERT
+        3,-2: RMCAreaShuttleERT
+        1,-5: RMCAreaShuttleERT
+        -1,5: RMCAreaShuttleERT
+        0,-2: RMCAreaShuttleERT
+        0,-5: RMCAreaShuttleERT
+        3,-1: RMCAreaShuttleERT
+        3,-3: RMCAreaShuttleERT
+        2,-1: RMCAreaShuttleERT
+        -2,5: RMCAreaShuttleERT
+        0,-4: RMCAreaShuttleERT
+        1,-3: RMCAreaShuttleERT
+        1,-2: RMCAreaShuttleERT
+        0,-3: RMCAreaShuttleERT
+        0,-1: RMCAreaShuttleERT
+        1,-1: RMCAreaShuttleERT
+        1,-4: RMCAreaShuttleERT
+        -2,4: RMCAreaShuttleERT
+        4,-4: RMCAreaShuttleERT
+        4,-1: RMCAreaShuttleERT
+        4,-2: RMCAreaShuttleERT
+        -1,4: RMCAreaShuttleERT
+        2,-5: RMCAreaShuttleERT
+        2,-2: RMCAreaShuttleERT
+        3,-4: RMCAreaShuttleERT
+        2,-4: RMCAreaShuttleERT
+        2,-3: RMCAreaShuttleERT
+        3,-5: RMCAreaShuttleERT
+        -1,3: RMCAreaShuttleERT
+        -1,2: RMCAreaShuttleERT
+        -1,1: RMCAreaShuttleERT
+        -1,0: RMCAreaShuttleERT
+        -1,-1: RMCAreaShuttleERT
+        -1,-2: RMCAreaShuttleERT
+        -1,-3: RMCAreaShuttleERT
+        -1,-4: RMCAreaShuttleERT
+        -1,-5: RMCAreaShuttleERT
+        -2,3: RMCAreaShuttleERT
+        -2,2: RMCAreaShuttleERT
+        -2,1: RMCAreaShuttleERT
+        -2,0: RMCAreaShuttleERT
+        -2,-1: RMCAreaShuttleERT
+        -2,-2: RMCAreaShuttleERT
+        -2,-3: RMCAreaShuttleERT
+        -2,-4: RMCAreaShuttleERT
+        -2,-5: RMCAreaShuttleERT
+        -2,-7: RMCAreaShuttleERT
+        -2,-6: RMCAreaShuttleERT
+        -1,-7: RMCAreaShuttleERT
+        -1,-6: RMCAreaShuttleERT
+        0,-7: RMCAreaShuttleERT
+        0,-6: RMCAreaShuttleERT
+        1,-7: RMCAreaShuttleERT
+        1,-6: RMCAreaShuttleERT
+        2,-7: RMCAreaShuttleERT
+        2,-6: RMCAreaShuttleERT
+        3,-7: RMCAreaShuttleERT
+        3,-6: RMCAreaShuttleERT
+        4,-7: RMCAreaShuttleERT
+        4,-6: RMCAreaShuttleERT
 - proto: CMBeltMedicBagFilled
   entities:
-  - uid: 92
+  - uid: 14
     components:
     - type: Transform
-      pos: 1.5,4.5
+      pos: -0.48163652,-3.421577
+      parent: 1
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 3.5526156,-3.405952
       parent: 1
 - proto: CMComputerDropshipNavigationERT
   entities:
-  - uid: 90
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,12.5
-      parent: 1
-- proto: CMHealthAnalyzer
-  entities:
-  - uid: 75
-    components:
-    - type: Transform
-      pos: 5.5,4.5
-      parent: 1
-  - uid: 91
+  - uid: 54
     components:
     - type: Transform
       pos: 1.5,4.5
       parent: 1
-- proto: RMCLightFixture
+- proto: CMFirstAidKitFilled
   entities:
-  - uid: 93
+  - uid: 15
     components:
     - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,9.5
-      parent: 1
-  - uid: 94
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,9.5
-      parent: 1
-  - uid: 95
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,2.5
-      parent: 1
-  - uid: 96
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,2.5
-      parent: 1
-- proto: RMCLightFixtureSmall
-  entities:
-  - uid: 97
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,11.5
-      parent: 1
-- proto: CMNormandyDoor
-  entities:
-  - uid: 2
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 0.5,5.5
-      parent: 1
-  - uid: 44
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 6.5,5.5
-      parent: 1
-- proto: CMNormandyDoorAft
-  entities:
-  - uid: 18
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,0.5
-      parent: 1
-- proto: CMPlatform
-  entities:
-  - uid: 76
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,2.5
-      parent: 1
-  - uid: 77
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,3.5
-      parent: 1
-  - uid: 78
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,3.5
-      parent: 1
-  - uid: 83
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,3.5
-      parent: 1
-  - uid: 84
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,3.5
-      parent: 1
-- proto: CMRack
-  entities:
-  - uid: 60
-    components:
-    - type: Transform
-      pos: 1.5,4.5
-      parent: 1
-  - uid: 61
-    components:
-    - type: Transform
-      pos: 5.5,4.5
+      pos: 3.5213408,-3.515327
       parent: 1
   - uid: 62
     components:
     - type: Transform
-      pos: 1.5,6.5
+      pos: -0.5129094,-3.530952
       parent: 1
-  - uid: 63
-    components:
-    - type: Transform
-      pos: 5.5,6.5
-      parent: 1
-- proto: CMSeatPassenger
+- proto: CMHealthAnalyzer
   entities:
-  - uid: 10
+  - uid: 44
     components:
     - type: Transform
-      pos: 2.7709599,11
+      pos: -0.46600008,-3.452827
       parent: 1
-  - uid: 12
+  - uid: 81
     components:
     - type: Transform
-      pos: 2.2397099,11
+      pos: 3.5526156,-3.468452
       parent: 1
-  - uid: 16
-    components:
-    - type: Transform
-      pos: 4.7943974,11
-      parent: 1
-  - uid: 17
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.77096,10
-      parent: 1
-  - uid: 19
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 4.2475224,10
-      parent: 1
-  - uid: 20
-    components:
-    - type: Transform
-      pos: 4.23971,11
-      parent: 1
-  - uid: 58
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.7631474,10
-      parent: 1
-  - uid: 59
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.2709599,10
-      parent: 1
+- proto: CMNormandyDoorAft
+  entities:
   - uid: 64
     components:
     - type: Transform
-      pos: 2.2553349,9.5
-      parent: 1
-  - uid: 65
-    components:
-    - type: Transform
-      pos: 2.7787724,9.5
-      parent: 1
-  - uid: 66
-    components:
-    - type: Transform
-      pos: 4.255335,9.5
-      parent: 1
-  - uid: 67
-    components:
-    - type: Transform
-      pos: 4.755335,9.5
-      parent: 1
-  - uid: 70
-    components:
-    - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 4.5,7.5
+      pos: 1.5,-6.5
       parent: 1
-  - uid: 71
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 4.5,8.5
-      parent: 1
-  - uid: 72
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,7.5
-      parent: 1
-  - uid: 73
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 2.5,8.5
-      parent: 1
-- proto: CMSeatPilot
+- proto: CMNormandyDoorPort
   entities:
   - uid: 89
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,11.5
+      pos: -1.5,-2.5
       parent: 1
-- proto: RMCBoxZiptie
+- proto: CMNormandyDoorStarboard
   entities:
-  - uid: 69
+  - uid: 56
     components:
     - type: Transform
-      pos: 1.5,6.5
+      pos: 4.5,-2.5
       parent: 1
-- proto: RMCERTShuttleEngineLeft01
-  entities:
-  - uid: 9
-    components:
-    - type: Transform
-      pos: 0.5,0.5
-      parent: 1
-- proto: RMCERTShuttleEngineLeft02
+- proto: CMPlatform
   entities:
   - uid: 30
     components:
     - type: Transform
-      pos: 0.5,1.5
+      rot: 3.141592653589793 rad
+      pos: 1.5,-4.5
       parent: 1
-- proto: RMCERTShuttleEngineLeft03
+- proto: CMRack
   entities:
-  - uid: 29
-    components:
-    - type: Transform
-      pos: 0.5,2.5
-      parent: 1
-- proto: RMCERTShuttleEngineRight01
-  entities:
-  - uid: 49
-    components:
-    - type: Transform
-      pos: 6.5,0.5
-      parent: 1
-- proto: RMCERTShuttleEngineRight02
-  entities:
-  - uid: 51
-    components:
-    - type: Transform
-      pos: 6.5,1.5
-      parent: 1
-- proto: RMCERTShuttleEngineRight03
-  entities:
-  - uid: 25
-    components:
-    - type: Transform
-      pos: 6.5,2.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard12
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      pos: 1.5,0.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard14
-  entities:
-  - uid: 47
-    components:
-    - type: Transform
-      pos: 5.5,0.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard15
-  entities:
-  - uid: 11
-    components:
-    - type: Transform
-      pos: 0.5,4.5
-      parent: 1
-  - uid: 22
-    components:
-    - type: Transform
-      pos: 1.5,10.5
-      parent: 1
   - uid: 24
     components:
     - type: Transform
-      pos: 1.5,9.5
+      pos: 3.5,-3.5
       parent: 1
-  - uid: 31
+  - uid: 25
     components:
     - type: Transform
-      pos: 0.5,6.5
+      pos: 2.5,-0.5
       parent: 1
-  - uid: 38
+  - uid: 69
     components:
     - type: Transform
-      pos: 1.5,8.5
+      pos: -0.5,-3.5
       parent: 1
-  - uid: 46
+  - uid: 70
     components:
     - type: Transform
-      pos: 1.5,2.5
+      pos: 0.5,-0.5
       parent: 1
-  - uid: 48
-    components:
-    - type: Transform
-      pos: 1.5,1.5
-      parent: 1
-  - uid: 55
-    components:
-    - type: Transform
-      pos: 2.5,12.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard16
+- proto: CMSeatPassenger
   entities:
-  - uid: 3
+  - uid: 12
     components:
     - type: Transform
-      pos: 6.5,4.5
+      pos: 2.301228,1.5
       parent: 1
-  - uid: 32
+  - uid: 13
     components:
     - type: Transform
-      pos: 5.5,9.5
+      pos: 0.25282907,3
       parent: 1
-  - uid: 34
+  - uid: 18
     components:
     - type: Transform
-      pos: 5.5,2.5
+      rot: 3.141592653589793 rad
+      pos: 1.7179012,-3.5
       parent: 1
-  - uid: 41
+  - uid: 21
     components:
     - type: Transform
-      pos: 5.5,8.5
+      rot: 3.141592653589793 rad
+      pos: 0.77189636,0.5
+      parent: 1
+  - uid: 23
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.26846552,2
+      parent: 1
+  - uid: 27
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.7890224,0.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 0.7844739,1.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 2.2699552,3
       parent: 1
   - uid: 43
     components:
     - type: Transform
-      pos: 6.5,6.5
+      pos: 0.28410196,1.5
       parent: 1
-  - uid: 54
+  - uid: 49
     components:
     - type: Transform
-      pos: 5.5,1.5
+      rot: 3.141592653589793 rad
+      pos: 2.304287,0.5
       parent: 1
-  - uid: 56
+  - uid: 61
     components:
     - type: Transform
-      pos: 5.5,10.5
+      pos: 2.770327,3
       parent: 1
-  - uid: 57
+  - uid: 66
     components:
     - type: Transform
-      pos: 4.5,12.5
+      rot: 3.141592653589793 rad
+      pos: 1.2644386,-3.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.770327,2
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.76883745,2
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.2543168,2
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 2.7546906,1.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.30279732,0.5
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 0.76883745,3
+      parent: 1
+- proto: CMSeatPilot
+  entities:
+  - uid: 17
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCAlmayerStairs
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 2.5,-3.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 0.5,-3.5
+      parent: 1
+- proto: RMCBoxZiptie
+  entities:
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 0.5295162,-0.5
+      parent: 1
+- proto: RMCERTShuttleEngineLeft01
+  entities:
+  - uid: 50
+    components:
+    - type: Transform
+      pos: -1.5,-6.5
+      parent: 1
+- proto: RMCERTShuttleEngineLeft03
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      pos: -1.5,-5.5
+      parent: 1
+- proto: RMCERTShuttleEngineRight01
+  entities:
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 4.5,-6.5
+      parent: 1
+- proto: RMCERTShuttleEngineRight03
+  entities:
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 4.5,-5.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard12
+  entities:
+  - uid: 51
+    components:
+    - type: Transform
+      pos: -0.5,-6.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard14
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 3.5,-6.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard15
+  entities:
+  - uid: 33
+    components:
+    - type: Transform
+      pos: -0.5,2.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: -0.5,0.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      pos: -1.5,-3.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: -0.5,1.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: -0.5,-5.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard16
+  entities:
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 3.5,-5.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 4.5,-3.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 3.5,1.5
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 3.5,0.5
       parent: 1
 - proto: RMCERTShuttleWallStandard17
   entities:
   - uid: 40
     components:
     - type: Transform
-      pos: 1.5,3.5
+      pos: -0.5,-4.5
       parent: 1
 - proto: RMCERTShuttleWallStandard18
   entities:
-  - uid: 50
+  - uid: 41
     components:
     - type: Transform
-      pos: 5.5,3.5
+      pos: 3.5,-4.5
       parent: 1
 - proto: RMCERTShuttleWallStandard19
   entities:
-  - uid: 4
+  - uid: 32
     components:
     - type: Transform
-      pos: 0.5,7.5
+      pos: 0.5,5.5
       parent: 1
-  - uid: 8
+  - uid: 58
     components:
     - type: Transform
-      pos: 1.5,11.5
+      pos: -0.5,3.5
       parent: 1
-  - uid: 28
+  - uid: 68
     components:
     - type: Transform
-      pos: 2.5,13.5
+      pos: -1.5,-0.5
       parent: 1
 - proto: RMCERTShuttleWallStandard21
   entities:
-  - uid: 27
-    components:
-    - type: Transform
-      pos: 2.5,11.5
-      parent: 1
-  - uid: 52
-    components:
-    - type: Transform
-      pos: 1.5,7.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard22
-  entities:
-  - uid: 33
-    components:
-    - type: Transform
-      pos: 5.5,7.5
-      parent: 1
-  - uid: 39
-    components:
-    - type: Transform
-      pos: 4.5,11.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard23
-  entities:
-  - uid: 21
-    components:
-    - type: Transform
-      pos: 6.5,7.5
-      parent: 1
-  - uid: 23
-    components:
-    - type: Transform
-      pos: 5.5,11.5
-      parent: 1
-  - uid: 53
-    components:
-    - type: Transform
-      pos: 4.5,13.5
-      parent: 1
-- proto: RMCERTShuttleWallStandard24
-  entities:
-  - uid: 45
-    components:
-    - type: Transform
-      pos: 3.5,13.5
-      parent: 1
-- proto: RMCERTShuttleWallStandardEngineLeft
-  entities:
-  - uid: 36
+  - uid: 8
     components:
     - type: Transform
       pos: 0.5,3.5
       parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      pos: -0.5,-0.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard22
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 3.5,-0.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard23
+  entities:
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 3.5,3.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 4.5,-0.5
+      parent: 1
+- proto: RMCERTShuttleWallStandard24
+  entities:
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 1.5,5.5
+      parent: 1
+- proto: RMCERTShuttleWallStandardEngineLeft
+  entities:
+  - uid: 97
+    components:
+    - type: Transform
+      pos: -1.5,-4.5
+      parent: 1
 - proto: RMCERTShuttleWallStandardEngineRight
   entities:
-  - uid: 37
+  - uid: 88
     components:
     - type: Transform
-      pos: 6.5,3.5
+      pos: 4.5,-4.5
       parent: 1
-- proto: RMCPlatformCornerSmall
+- proto: RMCLightFixtureOffset
   entities:
-  - uid: 79
+  - uid: 2
     components:
     - type: Transform
-      pos: 4.5,2.5
+      rot: 3.141592653589793 rad
+      pos: -0.5,-1.5
       parent: 1
-  - uid: 80
+  - uid: 47
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,-1.5
+      parent: 1
+  - uid: 55
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 2.5,2.5
+      pos: 0.5,1.5
       parent: 1
-  - uid: 81
+  - uid: 65
     components:
     - type: Transform
-      pos: 2.5,2.5
+      rot: 1.5707963267948966 rad
+      pos: 2.5,1.5
+      parent: 1
+- proto: RMCLightFixtureRedOffset
+  entities:
+  - uid: 3
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -0.5,4.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,4.5
+      parent: 1
+- proto: RMCLightFixtureSmallOffset
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCPlatformCornerSmall
+  entities:
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 2.5,-4.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      pos: 0.5,-5.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-4.5
       parent: 1
   - uid: 82
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 4.5,2.5
+      pos: 2.5,-5.5
       parent: 1
-- proto: RMCStairs
+- proto: RMCPlatformStairLeft
   entities:
-  - uid: 85
+  - uid: 10
     components:
     - type: Transform
-      pos: 2.5,3.5
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-3.5
       parent: 1
-  - uid: 86
+  - uid: 80
     components:
     - type: Transform
-      pos: 4.5,3.5
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-3.5
       parent: 1
-- proto: RMCToolboxMechanicalGreenFilled
+- proto: RMCPlatformStairRight
   entities:
-  - uid: 68
-    components:
-    - type: Transform
-      pos: 5.5,6.5
-      parent: 1
-- proto: RMCTornadoEngineLeft61
-  entities:
-  - uid: 13
-    components:
-    - type: Transform
-      pos: 0.5,8.5
-      parent: 1
-- proto: RMCTornadoEngineLeft66
-  entities:
-  - uid: 6
-    components:
-    - type: Transform
-      pos: 0.5,9.5
-      parent: 1
   - uid: 7
     components:
     - type: Transform
-      pos: 0.5,10.5
+      rot: 1.5707963267948966 rad
+      pos: 0.5,-3.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-4.5
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,-4.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-3.5
+      parent: 1
+- proto: RMCToolboxSyndicateFilled
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 2.499733,-0.43498772
+      parent: 1
+- proto: RMCTornadoEngineLeft61
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: -1.5,0.5
+      parent: 1
+- proto: RMCTornadoEngineLeft66
+  entities:
+  - uid: 9
+    components:
+    - type: Transform
+      pos: -1.5,2.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      pos: -1.5,1.5
       parent: 1
 - proto: RMCTornadoEngineLeft71
   entities:
-  - uid: 42
+  - uid: 96
     components:
     - type: Transform
-      pos: 0.5,11.5
+      pos: -1.5,3.5
       parent: 1
 - proto: RMCTornadoEngineRight65
   entities:
-  - uid: 35
+  - uid: 86
     components:
     - type: Transform
-      pos: 6.5,8.5
+      pos: 4.5,0.5
       parent: 1
 - proto: RMCTornadoEngineRight70
   entities:
-  - uid: 15
+  - uid: 22
     components:
     - type: Transform
-      pos: 6.5,9.5
+      pos: 4.5,1.5
       parent: 1
-  - uid: 26
+  - uid: 77
     components:
     - type: Transform
-      pos: 6.5,10.5
+      pos: 4.5,2.5
       parent: 1
 - proto: RMCTornadoEngineRight74
   entities:
-  - uid: 14
+  - uid: 53
     components:
     - type: Transform
-      pos: 6.5,11.5
-      parent: 1
-- proto: RMCUtilityAttachmentPoint
-  entities:
-  - uid: 87
-    components:
-    - type: Transform
-      pos: 3.5,3.5
-      parent: 1
-  - uid: 88
-    components:
-    - type: Transform
-      pos: 3.5,5.5
+      pos: 4.5,3.5
       parent: 1
 ...
