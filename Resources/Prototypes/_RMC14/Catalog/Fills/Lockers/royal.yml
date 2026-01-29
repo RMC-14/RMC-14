@@ -20,7 +20,7 @@
     children:
     - id: RMCSmartGunRCMPVE
     - id: RMCPowerCellSmartgun
-    - id: RMCArmorRoyalHarnessNoBackpack
+    - id: RMCArmorRoyalHarnessNoBackpack # RMC14 TODO: This can be changed to the new(er) ID once PR #8946 gets merged, with this current entity being fully removed.
     - id: RMCMagazineSmartGunHT
       amount: 3
     - id: RMCGlassesSmartGunSight
