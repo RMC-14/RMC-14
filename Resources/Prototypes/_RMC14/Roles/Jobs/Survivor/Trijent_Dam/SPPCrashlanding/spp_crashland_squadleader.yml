@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCSurvivorSPPCrashlandBase
+  id: RMCSurvivorSPPCrashlandSL
+  name: rmc-job-name-crashland-sl
+  startingGear: RMCGearSPPCrashlandSL
+  ranks:
+    RMCRankSPPStarshiySerzhant: []
+  icon: "RMCJobIconSPPLeader"
+  spawnMenuRoleName: SPP Airborne Squad Leader (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 2
+        RMCSkillFireman: 1
+        RMCSkillJtac: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillSpecialistWeapons: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+    - type: MarineOrders
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
+    - type: JobPrefix
+      prefix: rmc-job-prefix-crashland-sl
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: upp_sl_a
+    - type: RMCTrackable
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSPPCrashlandWeaponOnly
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearSPPCrashlandBase
+  id: RMCGearSPPCrashlandSL
+  equipment:
+    back: RMCSatchelSPP
+    belt: RMCBeltHolsterRevolverZHNK72Fill
+    outerClothing: RMCCoatSPPSurvivorFill
+    head: CMHeadCapSPPBeret
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPCrashlandSL
+  name: spp crashland squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPCrashlandSL
+  - type: Sprite
+    state: spp_spawn
