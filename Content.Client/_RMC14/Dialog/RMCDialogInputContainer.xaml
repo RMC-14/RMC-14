@@ -4,7 +4,7 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Orientation="Vertical" Margin="5">
     <Control VerticalExpand="True" MinHeight="25" />
-    <Label Name="MessageLabel" Access="Public" />
+    <RichTextLabel Name="MessageLabel" Access="Public" /> <!-- If MessageTextEdit, then it has MaxWidth 500 in code -->
     <ui:BlueHorizontalSeparator />
     <LineEdit Name="MessageLineEdit" Access="Public" />
     <TextEdit Name="MessageTextEdit" Access="Public" VerticalExpand="True" MinSize="500 150" />

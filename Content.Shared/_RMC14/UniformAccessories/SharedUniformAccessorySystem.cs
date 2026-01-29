@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
@@ -26,6 +27,8 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
         SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GotEquippedEvent>(OnHolderGotEquipped);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, GetVerbsEvent<EquipmentVerb>>(OnHolderGetEquipmentVerbs);
+
+        SubscribeLocalEvent<UniformAccessoryComponent, ExaminedEvent>(OnAccessoryExamined);
 
         Subs.BuiEvents<UniformAccessoryHolderComponent>(UniformAccessoriesUi.Key,
             subs =>
@@ -170,6 +173,21 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             var state = new UniformAccessoriesBuiState();
             _ui.SetUiState(ent.Owner, UniformAccessoriesUi.Key, state);
         }
+    }
+
+    private void OnAccessoryExamined(Entity<UniformAccessoryComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<XenoComponent>(args.Examiner))
+            return;
+
+        if (ent.Comp.User == null)
+            return;
+
+        if (!TryGetEntity(ent.Comp.User, out var owner))
+            return;
+
+        var ownerName = Name(owner.Value);
+        args.PushMarkup(Loc.GetString("rmc-uniform-accessory-owner", ("owner", ownerName)));
     }
 
     public bool BelongsToUser(NetEntity user, EntityUid target)
