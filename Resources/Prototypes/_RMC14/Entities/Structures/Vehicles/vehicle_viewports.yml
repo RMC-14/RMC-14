@@ -15,6 +15,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: RMCVehicleViewport
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleViewport
@@ -49,6 +52,9 @@
   - type: Clickable
   - type: InteractionOutline
   - type: RMCVehicleViewport
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -56,6 +62,7 @@
   components:
   - type: Sprite
     state: VIEWPORT
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -63,6 +70,7 @@
   components:
   - type: Sprite
     state: small_viewport
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -70,6 +78,7 @@
   components:
   - type: Sprite
     state: small_viewport_window
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -77,6 +86,7 @@
   components:
   - type: Sprite
     state: viewport_frontwindow_north
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -84,6 +94,7 @@
   components:
   - type: Sprite
     state: viewport_frontwindow_south
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleHumveeViewportBase
@@ -91,4 +102,4 @@
   components:
   - type: Sprite
     state: viewport_door
-    drawdepth: Items
+    drawdepth: Overdoors

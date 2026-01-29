@@ -368,6 +368,10 @@
     state: interior_door
     drawdepth: Walls
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -417,6 +421,10 @@
     reactToMouse: false
     fadeOnSharedGrid: true
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehiclePizzaVanInteriorBase

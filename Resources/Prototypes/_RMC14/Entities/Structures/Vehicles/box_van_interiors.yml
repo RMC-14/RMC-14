@@ -367,6 +367,10 @@
   - type: Sprite
     state: interior_door
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleBoxVanInteriorBase
@@ -380,6 +384,10 @@
     reactToMouse: false
     fadeOnSharedGrid: true
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleBoxVanInteriorBase
@@ -393,6 +401,10 @@
     reactToMouse: false
     fadeOnSharedGrid: true
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleBoxVanInteriorBase

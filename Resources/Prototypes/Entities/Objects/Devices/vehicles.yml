@@ -1211,10 +1211,20 @@
     maxPassengers: 4
     maxXenos: 2
     entryPoints:
-    - offset: 0,1.5
-      radius: 0.7
-      interiorCoords: 2.5,-1.5
 
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89, -0.57
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 0.89,-1.35
+
+    - offset: -1,-0.2
+      radius: 0.5
+      interiorCoords: 3.01, -1.23
+    - offset: 1,-0.2
+      radius: 0.5
+      interiorCoords: 2.94, -0.44
 - type: entity
   parent: RMCVehicleHumvee
   id: RMCVehicleHumveeTransport
@@ -1250,7 +1260,37 @@
     maxPassengers: 6
     maxXenos: 2
     entryPoints:
-    - offset: 0,1.5
-      radius: 0.7
-      interiorCoords: 2.5,-1.5
+    - offset: 0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48, -0.35
+    - offset: -0.45,1.6
+      radius: 0.5
+      interiorCoords: 1.48,-1.17
 
+    - offset: -1,-0.1
+      radius: 0.45
+      interiorCoords: 3.55, -1.36
+
+    - offset: 1,-0.1
+      radius: 0.45
+      interiorCoords: 3.56,-0.36
+
+- type: entity
+  parent: RMCVehicleHumvee
+  id: RMCVehicleHumveeARC
+  name: humvee (arc)
+  description: A humvee configured for ARC interior layout.
+  components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: -1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56,-1.42
+    - offset: 1,-0.1
+      radius: 0.5
+      interiorCoords: 3.56, -0.42

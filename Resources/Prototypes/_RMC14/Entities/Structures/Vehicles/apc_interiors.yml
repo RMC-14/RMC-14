@@ -72,6 +72,10 @@
   id: RMCVehicleAPCDoorBase
   components:
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleAPCWallBase

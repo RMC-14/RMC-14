@@ -107,6 +107,10 @@
   - type: Sprite
     drawdepth: Items
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleHumveeInteriorBase
@@ -139,6 +143,10 @@
     - state: exit_door
       map: [ "roof" ]
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleHumveeDoorBase

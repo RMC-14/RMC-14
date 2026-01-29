@@ -78,6 +78,25 @@ entities:
       chunkCollection:
         version: 2
         nodes: []
+    - type: MapAtmosphere
+      space: False
+      mixture:
+        volume: 2500
+        immutable: True
+        temperature: 290
+        moles:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
     - type: GridAtmosphere
       version: 2
       data:
