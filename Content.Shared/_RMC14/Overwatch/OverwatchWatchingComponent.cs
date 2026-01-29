@@ -9,8 +9,8 @@ public sealed partial class OverwatchWatchingComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? Watching;
 
-    // List of entities from tiles within view of the zoomed out camera to force-send to the watcher
-    public List<EntityUid>? ForcedEntities;
-    // Keeps track of which entities were force-sent, so that entities are removed from the correct watcher
-    public bool isForceSent;
+    // List of overridden entities from tiles within view of the zoomed out camera to be loaded for the watcher
+    public List<EntityUid>? OverriddenEntities;
+    // Keeps track of which entities are overridden to be loaded for which watcher, so that entities are unloaded for the correct watcher
+    public bool isOverridden;
 }
