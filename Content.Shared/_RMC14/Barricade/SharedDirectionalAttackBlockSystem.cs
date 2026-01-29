@@ -82,9 +82,7 @@ public abstract class SharedDirectionalAttackBlockSystem : EntitySystem
 
     private sbyte GetRelativeDiff(EntityUid blocker, EntityUid target, EntityCoordinates? originCoordinates = null)
     {
-        var targetCoordinates = _transform.GetMoverCoordinates(target);
-        if (originCoordinates != null)
-            targetCoordinates = originCoordinates.Value;
+        var targetCoordinates = originCoordinates ?? _transform.GetMoverCoordinates(target);
 
         var blockerCoordinates = _transform.GetMoverCoordinateRotation(blocker, Transform(blocker));
         var diff = targetCoordinates.Position - blockerCoordinates.Coords.Position;
