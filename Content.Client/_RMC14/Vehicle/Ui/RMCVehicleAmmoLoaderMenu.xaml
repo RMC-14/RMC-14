@@ -1,0 +1,62 @@
+<controls:RMCVehicleAmmoLoaderMenu
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    Title="Ammo Loader"
+    MinSize="680 500">
+
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#070E18"
+                BorderColor="#6BC7FF"
+                BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True">
+                <PanelContainer MinSize="118 118" VerticalAlignment="Center">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BackgroundColor="#0D2235"
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+
+                    <SpriteView
+                        Name="LoaderIcon"
+                        Access="Public"
+                        MinSize="118 118"
+                        Stretch="Fill"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="10"/>
+                </PanelContainer>
+
+                <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
+                    <Label Text="Ammo Loader" StyleClasses="LabelHeading"/>
+                    <Label Text="Select a hardpoint to load." FontColorOverride="#9DB5D1"/>
+                    <Label Name="AmmoCountLabel" Access="Public" Text="Ammo: --/--" FontColorOverride="#6BC7FF"/>
+                </BoxContainer>
+            </BoxContainer>
+
+            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#0B131F"
+                        BorderColor="#1E3450"
+                        BorderThickness="1"/>
+                </PanelContainer.PanelOverride>
+
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="10">
+                    <BoxContainer
+                        Name="HardpointList"
+                        Access="Public"
+                        Orientation="Vertical"
+                        SeparationOverride="10"
+                        HorizontalExpand="True"/>
+                </ScrollContainer>
+            </PanelContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCVehicleAmmoLoaderMenu>
