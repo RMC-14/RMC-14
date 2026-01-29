@@ -1,0 +1,17 @@
+﻿- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorSPPPrivate
+  name: Survivor SPP Private
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillConstruction: 1
+      RMCSkillEndurance: 2
+      RMCSkillMedical: 1
+      RMCSkillCqc: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillJtac: 1
