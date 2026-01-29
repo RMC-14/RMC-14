@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
@@ -13,6 +14,7 @@ using Content.Shared.Stunnable;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Fling;
 
@@ -28,6 +30,7 @@ public sealed class XenoFlingSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly SharedXenoHealSystem _xenoHeal = default!;
     [Dependency] private readonly XenoRageSystem _rage = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
@@ -87,6 +90,8 @@ public sealed class XenoFlingSystem : EntitySystem
             healAmount += xeno.Comp.EnragedHealAmount;
             daze = true;
         }
+
+        _rmcDamageable.DoLethalDamage(targetId, origin: xeno);
 
         var origin = _transform.GetMapCoordinates(xeno);
 
