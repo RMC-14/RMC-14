@@ -33,6 +33,13 @@
       whitelist:
         tags:
         - RMCSquadPMC
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   useLoadoutOfJob: CMSurvivor # for inheritance
 
 - type: startingGear
@@ -41,7 +48,7 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCNoWebbingPatch
     shoes: RMCBootsPMCFilled
-    gloves: CMHandsBlackMarine
+    gloves: RMCHandsVeteran
     mask: RMCMaskCoifPMC
     ears: RMCHeadsetHvHWeYaPMC
     back: RMCSatchelPMC
@@ -78,6 +85,6 @@
       - RMCJumpsuitVeteranPMCNoWebbingPatch
       - RMCJumpsuitVeteranPMCNoWebbingPatchFolded
     randomOutfits:
-    - [ CMArmorM4PMCLight, ArmorHelmetPMC]
-    - [ CMArmorM4PMCLight, ArmorHelmetPMC] # TODO RMC14: PMC bulletproof armor, black tactical cap
-    - [ WeaponSMGM63, ArmorHelmetPMC] # TODO RMC14: PMC helmet (enclosed)
+    - [ CMArmorM4PMCLight, ArmorHelmetPMC ]
+    - [ RMCArmorM4PMCBulletProof, RMCArmorHelmetPMCBlack ]
+    - [ WeaponSMGM63, ArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)

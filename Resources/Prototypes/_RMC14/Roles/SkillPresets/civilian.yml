@@ -36,7 +36,7 @@
       RMCSkillMedical: 1
       RMCSkillCqc: 2
       RMCSkillFirearms: 2
-      RMCSkillPolice: 0 # RMC14
+      RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
       RMCSkillFireman: 2
 
 - type: entity
@@ -51,7 +51,7 @@
       RMCSkillMedical: 1
       RMCSkillCqc: 1
       RMCSkillFirearms: 2
-      RMCSkillPolice: 0 # RMC14
+      RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
       RMCSkillFireman: 2
       RMCSkillVehicles: 1
 
@@ -87,7 +87,7 @@
   components:
   - type: SkillPreset
     skills:
-      RMCSkillPolice: 2
+      RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
       RMCSkillFireman: 2
       RMCSkillConstruction: 2
       RMCSkillEngineer: 2
@@ -211,3 +211,13 @@
       RMCSkillOverwatch: 1
       RMCSkillJtac: 2
       RMCSkillIntel: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorPizzaGalaxyDriver
+  name: Survivor Pizza Galaxy Delivery Driver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillVehicles: 1

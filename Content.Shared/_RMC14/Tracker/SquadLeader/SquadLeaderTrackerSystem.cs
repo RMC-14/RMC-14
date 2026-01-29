@@ -57,6 +57,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
         SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
         SubscribeLocalEvent<SquadMemberRemovedEvent>(OnSquadMemberRemoved);
+        SubscribeLocalEvent<SquadTeamComponent, SquadObjectivesChangedEvent>(OnSquadObjectivesChanged);
 
         SubscribeLocalEvent<GrantSquadLeaderTrackerComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<GrantSquadLeaderTrackerComponent, GotUnequippedEvent>(OnGotUnequipped);
@@ -153,6 +154,20 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
     private void OnSquadLeaderTrackerClicked(Entity<SquadLeaderTrackerComponent> ent, ref SquadLeaderTrackerClickedEvent args)
     {
         _ui.TryOpenUi(ent.Owner, SquadLeaderTrackerUI.Key, ent);
+
+        // Set BUI state with squad objectives
+        if (_net.IsClient)
+            return;
+
+        Dictionary<SquadObjectiveType, string> objectives = new();
+        if (_squadMemberQuery.TryComp(ent, out var squadMember) &&
+            squadMember.Squad != null &&
+            TryComp(squadMember.Squad.Value, out SquadTeamComponent? squadTeam))
+        {
+            objectives = new Dictionary<SquadObjectiveType, string>(squadTeam.Objectives);
+        }
+
+        _ui.SetUiState(ent.Owner, SquadLeaderTrackerUI.Key, new SquadLeaderTrackerBoundUserInterfaceState(objectives));
     }
 
     private void OnSquadLeaderTrackerChangeMode(Entity<SquadLeaderTrackerComponent> ent, ref SquadLeaderTrackerChangeModeEvent args)
@@ -635,7 +650,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                     TryComp(targetSquad, out SquadTeamComponent? team) &&
                     _squad.TryGetSquadLeader((targetSquad, team), out var leader))
                 {
-                    SetTarget((uid,tracker),leader );
+                    SetTarget((uid, tracker), leader);
                     targetSquadName = Name(targetSquad);
                     var targetCoordinates = _transform.GetMapCoordinates(tracker.Target.Value);
 
@@ -658,8 +673,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
                         continue;
                     }
                 }
-                else if(tracker.Mode == SquadLeaderMode &&
-                        _squadLeaders.TryGetValue(squad, out var squadLeader))
+                else if (tracker.Mode == SquadLeaderMode && _squadLeaders.TryGetValue(squad, out var squadLeader))
                 {
                     targetSquadName = Name(squad);
 
@@ -694,7 +708,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             while (trackableQuery.MoveNext(out var trackableUid, out _))
             {
                 _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
-                if(trackerMode == null)
+                if (trackerMode == null)
                     continue;
 
                 if (trackerMode.Component != null)
@@ -726,6 +740,23 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             }
 
             UpdateDirection((uid, tracker));
+        }
+    }
+
+    private void OnSquadObjectivesChanged(Entity<SquadTeamComponent> ent, ref SquadObjectivesChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Update BUI state for all squad members
+        var objectives = new Dictionary<SquadObjectiveType, string>(ent.Comp.Objectives);
+        foreach (var member in ent.Comp.Members)
+        {
+            if (!_squadLeaderTrackerQuery.TryComp(member, out var tracker))
+                continue;
+
+            _ui.SetUiState(member, SquadLeaderTrackerUI.Key, 
+                new SquadLeaderTrackerBoundUserInterfaceState(objectives));
         }
     }
 }

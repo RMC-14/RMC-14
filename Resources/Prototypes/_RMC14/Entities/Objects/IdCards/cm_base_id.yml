@@ -23,7 +23,8 @@
     fullNameLocId: cm-access-dogtags-component-owner-full-name-job-title-text
     canMicrowave: false
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: TakeableTags
   - type: Appearance
   - type: Foldable
@@ -174,7 +175,8 @@
     tags:
     - DoorBumpOpener
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Corrodible
     isCorrodible: false
 
