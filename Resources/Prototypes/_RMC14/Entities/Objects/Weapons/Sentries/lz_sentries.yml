@@ -58,6 +58,7 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: PointLight
 
 - type: entity
   parent: RMCBaseTurret

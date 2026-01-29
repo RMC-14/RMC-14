@@ -284,7 +284,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
 }
 
 [ByRefEvent]
-public record struct AttemptCrashLandEvent(EntityUid Crashing, bool Cancelled = false);
+public record struct AttemptCrashLandEvent(EntityUid Crashing, EntityUid? Target = null, bool Cancelled = false);
 
 [ByRefEvent]
 public record struct CrashLandStartedEvent;
