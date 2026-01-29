@@ -14,6 +14,23 @@
     - id: CMMultitool
 
 - type: entity
+  parent: CMBeltUtility
+  id: RMCBeltUtilityJoeFilled
+  suffix: Filled, Average Joe
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: CMWelder
+    - id: CMCrowbar
+    - id: CMWirecutter
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: RMCLightReplacer
+    - id: RMCSynthResetKey # TODO Joe reset key
+
+- type: entity
   parent: CMBeltUtilityCombat
   id: CMBeltUtilityCombatFilled
   suffix: Filled

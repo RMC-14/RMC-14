@@ -7,3 +7,23 @@
     Heat: 0.9
     Shock: 0.9
     Cold: 0.9
+
+- type: damageModifierSet
+  id: RMCColonialSynth
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Heat: 0.8
+    Shock: 0.8
+    Cold: 0.8
+
+- type: damageModifierSet
+  id: RMCJoeSynth
+  coefficients:
+    Blunt: 0.5
+    Slash: 0.5
+    Piercing: 0.5
+    Heat: 0.65
+    Shock: 0.65
+    Cold: 0.65
