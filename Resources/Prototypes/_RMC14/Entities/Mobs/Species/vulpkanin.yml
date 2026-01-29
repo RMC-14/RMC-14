@@ -75,12 +75,12 @@
       - map: [ "belt" ]
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "neck" ] # RMC14 re-arrange back slot
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ]
       - map: [ "mask" ]
-      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
