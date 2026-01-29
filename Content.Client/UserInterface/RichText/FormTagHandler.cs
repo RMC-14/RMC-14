@@ -5,7 +5,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface;
 using Robust.Shared.Utility;
 using Content.Client.Paper.UI;
-using Robust.Client.Graphics;
 
 namespace Content.Client.UserInterface.RichText;
 
@@ -16,15 +15,8 @@ public sealed class FormTagHandler : IMarkupTagHandler
 {
     public string Name => "form";
 
-    public bool CanHandle(MarkupNode node)
-    {
-        return node.Name == "form" || node.Value.StringValue?.StartsWith("__FORM_") == true;
-    }
-
     private static int _formCounter = 0;
-    private static readonly Dictionary<string, int> _formPositions = new();
-    private static string _lastText = "";
-    
+
     /// <summary>
     /// Font line height set by PaperWindow to ensure buttons match text height
     /// </summary>
@@ -81,25 +73,6 @@ public sealed class FormTagHandler : IMarkupTagHandler
         }
     }
 
-    /// <summary>
-    /// Caches form tag positions to avoid recalculating on every render.
-    /// </summary>
-    public static void SetFormText(string text)
-    {
-        if (_lastText != text)
-        {
-            _formPositions.Clear();
-            _lastText = text;
-            var pos = 0;
-            var index = 0;
-            while ((pos = text.IndexOf("[form]", pos)) != -1)
-            {
-                _formPositions[pos.ToString()] = index++;
-                pos += 6;
-            }
-        }
-    }
-
     public void PushDrawContext(MarkupNode node, MarkupDrawingContext context) { }
     public void PopDrawContext(MarkupNode node, MarkupDrawingContext context) { }
     public string TextBefore(MarkupNode node) => "";
@@ -113,9 +86,9 @@ public sealed class FormTagHandler : IMarkupTagHandler
         var btn = new Button
         {
             Text = "Fill",
-            MinSize = new Vector2(32, FontLineHeight + 2),
-            MaxSize = new Vector2(32, FontLineHeight + 2),
-            Margin = new Thickness(1, 0, 1, 0),
+            MinSize = new Vector2(32, FontLineHeight + 4),
+            MaxSize = new Vector2(32, FontLineHeight + 4),
+            Margin = new Thickness(1, 2, 1, 2),
             StyleClasses = { "ButtonSquare" },
             TextAlign = Label.AlignMode.Center
         };

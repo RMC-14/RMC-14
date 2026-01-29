@@ -20,7 +20,6 @@ namespace Content.Client.Paper.UI
     [GenerateTypedNameReferences]
     public sealed partial class PaperWindow : BaseWindow
     {
-        private PaperComponent.PaperBoundUserInterfaceState _currentState = default!;
         private string _currentRawText = string.Empty;
         [Dependency] private readonly IInputManager _inputManager = default!;
         [Dependency] private readonly IResourceCache _resCache = default!;
@@ -41,7 +40,7 @@ namespace Content.Client.Paper.UI
         // If paper limits the size in one or both axes, it'll affect whether
         // we're able to resize this UI or not. Default to everything enabled:
         private DragMode _allowedResizeModes = ~DragMode.None;
-        
+
         // Store original margin to restore when switching modes
         private Thickness _originalContentMargin;
 
@@ -233,7 +232,7 @@ namespace Content.Client.Paper.UI
             if (WrittenTextLabel.TryGetStyleProperty<Font>("font", out var font))
             {
                 float fontLineHeight = font.GetLineHeight(1.0f);
-                
+
                 // Set the font line height in tag handlers so buttons match text height
                 FormTagHandler.FontLineHeight = fontLineHeight;
                 SignatureTagHandler.FontLineHeight = fontLineHeight;
@@ -266,7 +265,6 @@ namespace Content.Client.Paper.UI
         /// <param name="state">Current paper state containing text, mode, and stamp information</param>
         public void Populate(PaperComponent.PaperBoundUserInterfaceState state)
         {
-            _currentState = state;
             _currentRawText = state.Text;
             var isEditing = state.Mode == PaperComponent.PaperAction.Write;
 
@@ -281,7 +279,7 @@ namespace Content.Client.Paper.UI
             {
                 // Reset margin to original when editing (no tag buttons visible)
                 PaperContent.Margin = _originalContentMargin;
-                    
+
                 // Initialize the text input field with server content if it's currently empty
                 // This allows editing existing documents while preserving any text the user has already typed
                 var shouldCopy = Input.TextLength == 0 && state.Text.Length > 0;
@@ -298,9 +296,12 @@ namespace Content.Client.Paper.UI
                 return;
             }
 
+            // Clear the input field when switching to read mode
+            Input.TextRope = Rope.Leaf.Empty;
+            Input.CursorPosition = new TextEdit.CursorPos();
+
             // Reset form, signature, and check counters before processing to ensure consistent indexing
             // This is crucial because the tag handlers maintain state between renders
-            FormTagHandler.SetFormText(state.Text);
             FormTagHandler.ResetFormCounter();
             SignatureTagHandler.ResetSignatureCounter();
             CheckTagHandler.ResetCheckCounter();
@@ -310,11 +311,11 @@ namespace Content.Client.Paper.UI
             var fm = new FormattedMessage();
             fm.AddMarkupPermissive(state.Text);
             WrittenTextLabel.SetMessage(fm, _allowedTags, DefaultTextColor);
-            
-            // Add extra bottom margin based on tag count to prevent cutoff (only in read mode)
-            var tagCount = CountTags(state.Text);
-            var extraBottomMargin = tagCount * 3.0f; // 3 pixels per tag for extra height
-            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top, 
+
+            // Add extra bottom margin based on lines with tags to prevent cutoff (only in read mode)
+            var linesWithTags = CountLinesWithTags(state.Text);
+            var extraBottomMargin = linesWithTags * 8.0f; // 8 pixels per line with tags
+            PaperContent.Margin = new Thickness(_originalContentMargin.Left, _originalContentMargin.Top,
                 _originalContentMargin.Right, _originalContentMargin.Bottom + extraBottomMargin);
 
             // Add stamps that have been applied to this paper
@@ -410,7 +411,7 @@ namespace Content.Client.Paper.UI
             var formButton = FindFormButton(formIndex);
             if (formButton != null)
                 formButton.ModulateSelfOverride = Color.LightBlue;
-                
+
             // Create the popup dialog structure
             var popup = new Popup();
             var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, Margin = new Thickness(10) };
@@ -480,7 +481,7 @@ namespace Content.Client.Paper.UI
         {
             return FindButtonRecursive(WrittenTextLabel, "Fill", formIndex);
         }
-        
+
         /// <summary>
         /// Finds a check button by index for visual feedback.
         /// </summary>
@@ -488,7 +489,7 @@ namespace Content.Client.Paper.UI
         {
             return FindCheckButtonRecursive(WrittenTextLabel, checkIndex);
         }
-        
+
         /// <summary>
         /// Finds check buttons (which can have different text: ☐, ✔, ✖).
         /// </summary>
@@ -497,7 +498,7 @@ namespace Content.Client.Paper.UI
             var currentIndex = 0;
             return FindCheckButtonRecursiveHelper(control, targetIndex, ref currentIndex);
         }
-        
+
         private Button? FindCheckButtonRecursiveHelper(Control control, int targetIndex, ref int currentIndex)
         {
             if (control is Button btn && (btn.Text == "☐" || btn.Text == "✔" || btn.Text == "✖"))
@@ -506,17 +507,17 @@ namespace Content.Client.Paper.UI
                     return btn;
                 currentIndex++;
             }
-            
+
             foreach (Control child in control.Children)
             {
                 var result = FindCheckButtonRecursiveHelper(child, targetIndex, ref currentIndex);
                 if (result != null)
                     return result;
             }
-            
+
             return null;
         }
-        
+
         /// <summary>
         /// Recursively searches for a button with specific text and index.
         /// </summary>
@@ -525,7 +526,7 @@ namespace Content.Client.Paper.UI
             var currentIndex = 0;
             return FindButtonRecursiveHelper(control, buttonText, targetIndex, ref currentIndex);
         }
-        
+
         private Button? FindButtonRecursiveHelper(Control control, string buttonText, int targetIndex, ref int currentIndex)
         {
             if (control is Button btn && btn.Text == buttonText)
@@ -534,14 +535,14 @@ namespace Content.Client.Paper.UI
                     return btn;
                 currentIndex++;
             }
-            
+
             foreach (Control child in control.Children)
             {
                 var result = FindButtonRecursiveHelper(child, buttonText, targetIndex, ref currentIndex);
                 if (result != null)
                     return result;
             }
-            
+
             return null;
         }
 
@@ -565,7 +566,7 @@ namespace Content.Client.Paper.UI
 
         private Popup? _activeCheckPopup;
         private Button? _activeCheckButton;
-        
+
         /// <summary>
         /// Opens a modal dialog allowing the user to select a check state.
         /// </summary>
@@ -579,40 +580,40 @@ namespace Content.Client.Paper.UI
                     _activeCheckButton.ModulateSelfOverride = null;
                 _activeCheckPopup.Close();
             }
-            
+
             // Find and highlight the check button
             var checkButton = FindCheckButton(checkIndex);
             if (checkButton != null)
                 checkButton.ModulateSelfOverride = Color.LightBlue;
             _activeCheckButton = checkButton;
-            
+
             var popup = new Popup();
             _activeCheckPopup = popup;
             var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical, Margin = new Thickness(10) };
             var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-            
+
             var blankBtn = new Button { Text = "☐ Blank", MinWidth = 80 };
             var checkBtn = new Button { Text = "✔ Check", MinWidth = 80 };
             var crossBtn = new Button { Text = "✖ Cross", MinWidth = 80 };
-            
+
             blankBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "☐");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             checkBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✔");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             crossBtn.OnPressed += _ => {
                 var newText = ReplaceNthCheckTag(_currentRawText, checkIndex, "✖");
                 OnSaved?.Invoke(newText);
                 CloseCheckDialog();
             };
-            
+
             hbox.AddChild(blankBtn);
             hbox.AddChild(checkBtn);
             hbox.AddChild(crossBtn);
@@ -621,7 +622,7 @@ namespace Content.Client.Paper.UI
             AddChild(popup);
             popup.Open();
         }
-        
+
         private void CloseCheckDialog()
         {
             if (_activeCheckButton != null)
@@ -631,7 +632,7 @@ namespace Content.Client.Paper.UI
             _activeCheckButton = null;
             _activeCheckPopup = null;
         }
-        
+
         /// <summary>
         /// Replaces the nth occurrence of [check] tag with replacement symbol.
         /// </summary>
@@ -695,65 +696,23 @@ namespace Content.Client.Paper.UI
         }
 
         /// <summary>
-        /// Replaces the nth occurrence of [signature] tag with replacement text.
-        /// Uses IndexOf for efficient searching rather than splitting the entire string.
+        /// Counts the number of lines that contain interactive tags.
+        /// This prevents over-allocation when multiple tags appear on the same line.
         /// </summary>
-        /// <param name="text">The text containing signature tags</param>
-        /// <param name="index">Zero-based index of which signature tag to replace</param>
-        /// <param name="replacement">Text to replace the signature tag with</param>
-        /// <returns>Text with the specified signature tag replaced, or original text if index not found</returns>
-        private static string ReplaceNthSignatureTag(string text, int index, string replacement)
+        private static int CountLinesWithTags(string text)
         {
-            const string signatureTag = "[signature]";
-            var currentIndex = 0;
-            var pos = 0;
+            var lines = text.Split('\n');
+            var linesWithTags = 0;
 
-            // Search through the text for signature tags
-            while (pos < text.Length)
+            foreach (var line in lines)
             {
-                var foundPos = text.IndexOf(signatureTag, pos);
-                if (foundPos == -1) break; // No more tags found
-
-                // Check if this is the tag we want to replace
-                if (currentIndex == index)
+                if (line.Contains("[form]") || line.Contains("[signature]") || line.Contains("[check]"))
                 {
-                    // Replace this specific occurrence: text before + replacement + text after
-                    return text.Substring(0, foundPos) + replacement + text.Substring(foundPos + signatureTag.Length);
+                    linesWithTags++;
                 }
-
-                // Move to the next tag
-                currentIndex++;
-                pos = foundPos + signatureTag.Length;
             }
 
-            // Index not found, return original text unchanged
-            return text;
-        }
-        
-        /// <summary>
-        /// Counts the total number of interactive tags that create taller buttons.
-        /// </summary>
-        private static int CountTags(string text)
-        {
-            var formCount = CountOccurrences(text, "[form]");
-            var signatureCount = CountOccurrences(text, "[signature]");
-            var checkCount = CountOccurrences(text, "[check]");
-            return formCount + signatureCount + checkCount;
-        }
-        
-        /// <summary>
-        /// Counts occurrences of a substring in text.
-        /// </summary>
-        private static int CountOccurrences(string text, string substring)
-        {
-            var count = 0;
-            var pos = 0;
-            while ((pos = text.IndexOf(substring, pos)) != -1)
-            {
-                count++;
-                pos += substring.Length;
-            }
-            return count;
+            return linesWithTags;
         }
     }
 }

@@ -44,12 +44,6 @@ public sealed class PaperBoundUserInterface : BoundUserInterface
     private void InputOnTextEntered(string text)
     {
         SendMessage(new PaperInputTextMessage(text));
-
-        if (_window != null)
-        {
-            _window.Input.TextRope = Rope.Leaf.Empty;
-            _window.Input.CursorPosition = new TextEdit.CursorPos(0, TextEdit.LineBreakBias.Top);
-        }
     }
 
     private void OnSignatureRequested(int signatureIndex)
