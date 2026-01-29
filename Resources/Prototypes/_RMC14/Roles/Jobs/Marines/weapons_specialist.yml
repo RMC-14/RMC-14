@@ -45,6 +45,7 @@
         RMCSkillJtac: 1
         RMCSkillMeleeWeapons: 1
         RMCSkillSpecialistWeapons: 1
+        RMCSkillGrenadeStorage: 1
     - type: CMVendorUser
       id: CMWeaponsSpecialist
       points: 45

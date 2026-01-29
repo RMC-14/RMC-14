@@ -481,7 +481,7 @@
   name: UNMC IMP M63A1 grenade satchel
   description: A satchel specially designed to maximize grenade carrying capacity while minimizing the risks of secondary ignition.
   components:
-  # TODO ID locking feature + make lights green when unlocked.
+  # Make lights green when unlocked.
   - type: ExplosionResistance
     damageCoefficient: 0
   - type: Sprite
@@ -494,6 +494,9 @@
       tags:
       - Grenade
   - type: FixedItemSizeStorage
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillGrenadeStorage: 1
 
 - type: entity
   parent: CMSatchel

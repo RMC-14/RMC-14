@@ -39,6 +39,7 @@
         RMCSkillOverwatch: 1
         RMCSkillPolice: 1
         RMCSkillPowerLoader: 2
+        RMCSkillGrenadeStorage: 1
     - type: CMVendorUser
       id: CMQuartermaster
       points: 45
