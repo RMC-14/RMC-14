@@ -64,7 +64,7 @@
 - type: entity
   parent: RMCSpawnerERTShuttle
   id: RMCSpawnerERTShuttleCLF
-  suffix: ERT CLF
+  suffix: ERT CLFw
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ert_clf_shuttle.yml"
