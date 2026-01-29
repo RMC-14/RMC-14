@@ -270,6 +270,17 @@
     camouflageVariations: { }
 
 - type: entity
+  parent: CMJumpsuitCO
+  id: RMCJumpsuitCOTurtleneck
+  name: commanding officer's turtleneck unifrom
+  description: A well-ironed UNMC officer uniform intended for more formal or somber events. Wear this with pride.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/turtleneck.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
+- type: entity
   parent: CMJumpsuitCOService
   id: RMCJumsuitWhiteService
   name: white service uniform
@@ -285,6 +296,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Command/CO/jumpsuit.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+
+- type: entity
+  parent: RMCJumpsuitCOUniform
+  id: RMCJumpsuitCOUniformTools
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCToolWebbing
 
 - type: entity
   parent: CMJumpsuitCO
