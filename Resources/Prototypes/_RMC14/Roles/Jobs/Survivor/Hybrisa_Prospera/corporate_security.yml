@@ -10,7 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoon
+      preset: RMCSkillPresetSurvivorGoon
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetHybrisaCorporateSecurity
     - type: RMCSurvivor
@@ -21,6 +21,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_standard
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: startingGear
   parent: RMCGearSurvivorBase
@@ -44,6 +51,6 @@
     - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
     primaryWeaponChance: 1
     randomOutfits:
-    - [ RMCHeadCapWestonYamadaDark, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
-    - [ RMCArmorHelmetPMCCorporateHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisa ]
-    - [ RMCArmorHelmetPMCCorporateLeadHybrisa, CMArmorM4PMCCorporateLead, RMCJumpsuitVeteranPMCHybrisaLead ]
+    - [ RMCHeadCapWestonYamadaDark, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
+    - [ RMCArmorHelmetPMCCorporateHybrisa, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
+    - [ RMCArmorHelmetPMCCorporateLeadHybrisa, RMCJumpsuitVeteranPMCHybrisaLead, CMArmorM4PMCCorporateLead ]

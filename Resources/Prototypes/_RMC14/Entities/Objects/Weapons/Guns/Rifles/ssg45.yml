@@ -274,6 +274,14 @@
       color: "#9C9A19"
 
 - type: entity
+  parent: RMCMagazineRifleSSG45HEAP
+  id: RMCMagazineRifleSSG45HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45Incend
   name: "SSG45 Incendiary magazine (7x62mm)"

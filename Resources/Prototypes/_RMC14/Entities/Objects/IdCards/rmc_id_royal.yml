@@ -13,8 +13,8 @@
   name: royal marine dogtags
   components:
   - type: ItemIFF
-    faction: FactionRoyalMarines
-
+    factions:
+    - FactionRoyalMarines
 - type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDRoyalMarines ]
   id: RMCIDRoyalMarinesHidden

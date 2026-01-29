@@ -55,7 +55,7 @@
     contents:
     - id: RMCRangefinder
     - id: RMCExplosiveBreachingCharge
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
 
 - type: entity
   parent: RMCArmorRoyalPadded
@@ -84,7 +84,7 @@
     contents:
     - id: RMCRangefinder
     - id: RMCExplosiveBreachingCharge
-    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCTacticalPrybar
 
 - type: entity
   parent: RMCArmorRoyalLight
@@ -139,3 +139,25 @@
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24
+
+#EIAF
+- type: entity
+  parent: RMCArmorRoyal
+  id: RMCArmorEIAFVest
+  name: goshawk airborne vest
+  description: A lightweight, high-mobility flak vest designed for the Extrasolar Imperial Airborne Force’s troops. Developed by Weston-Yamada, the Goshawk offers crucial protection while ensuring paratroopers retain full freedom of movement during high-risk insertions. Advanced composite plating and reinforced webbing make it effective against shrapnel and small-arms fire, striking the perfect balance between defense and agility for those who strike fast and strike hard.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/eiaf_vest.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20 # CLOTHING_ARMOR_MEDIUMHIGH
+    explosionArmor: 15 # CLOTHING_ARMOR_MEDIUM
+  - type: RMCArmorSpeedTier
+    speedTier: light
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
