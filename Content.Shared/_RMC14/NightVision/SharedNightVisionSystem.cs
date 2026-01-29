@@ -150,7 +150,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
         {
             ActionId = null,
             SlotFlags = SlotFlags.HEAD,
-            Green = true,
+            Color = NightVisionColor.Green, // Default to green for visors
             BlockScopes = true,
         };
         AddComp(args.CycleableVisor, comp, true);
@@ -257,7 +257,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
             {
                 nightVision = EnsureComp<NightVisionComponent>(user);
                 nightVision.State = NightVisionState.Full;
-                nightVision.Green = item.Comp.Green;
+                nightVision.Color = item.Comp.Color;
                 nightVision.Mesons = item.Comp.Mesons;
                 nightVision.BlockScopes = item.Comp.BlockScopes;
                 Dirty(user, nightVision);
@@ -267,7 +267,7 @@ public abstract class SharedNightVisionSystem : EntitySystem
                 nightVision = new NightVisionComponent()
                 {
                     State = NightVisionState.Full,
-                    Green = item.Comp.Green,
+                    Color = item.Comp.Color,
                     Mesons = item.Comp.Mesons,
                     BlockScopes = item.Comp.BlockScopes,
                 };
