@@ -82,6 +82,8 @@
         crate: RMCCrateBoxMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
+      - cost: 6000
+        crate: RMCCrateMagazineAmmoSurplus
     - name: Attachments
       entries:
       - cost: 3000
