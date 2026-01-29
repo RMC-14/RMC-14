@@ -59,6 +59,18 @@
 #    - id: CMPacketPillsTramadol # TODO RMC14
 #    - id: CMPacketPillsTramadol # TODO RMC14
 
+- type: entity
+  parent: RMCPouchFirstAid
+  id: RMCPouchFirstAidWEYA
+  name: first-aid pouch
+  description: It can contain autoinjectors, ointments, and bandages. This one has some extra room.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,9,1 #5 slots
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Pouches/wy_firstaid.rsi
+
 
 # First Aid ERT
 - type: entity

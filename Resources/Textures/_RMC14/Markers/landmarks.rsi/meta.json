@@ -514,6 +514,15 @@
     },
     {
       "name": "clf_spawn"
+    },
+    {
+      "name": "random_bombsupply"
+    },
+    {
+      "name": "field_doc_spawn"
+    },
+    {
+      "name": "wyeb_spawn"
     }
   ]
 }

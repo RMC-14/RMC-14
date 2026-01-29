@@ -61,6 +61,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
 
+# PPO
+- type: entity
+  parent: RMCHandsVeteran
+  id: RMCHandsVeteranPPO
+  name: WeYa PPO gloves
+  description: Standard issue kevlon fiber gloves manufactured for and by the Weston-Yamada Personal Protection division. They are insulated against electrical shock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/ppo.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/ppo.rsi
+
 # Royal Marine
 - type: entity
   parent: RMCHandsVeteran
