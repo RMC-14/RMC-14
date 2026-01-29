@@ -20,8 +20,9 @@ namespace Content.Client.Options.UI
             Tabs.SetTabTitle(2, Loc.GetString("ui-options-tab-controls"));
             Tabs.SetTabTitle(3, Loc.GetString("ui-options-tab-audio"));
             Tabs.SetTabTitle(4, Loc.GetString("rmc-ui-options-tab-voicelines")); // RMC14
-            Tabs.SetTabTitle(5, Loc.GetString("ui-options-tab-accessibility"));
-            Tabs.SetTabTitle(6, Loc.GetString("ui-options-tab-admin"));
+            Tabs.SetTabTitle(5, Loc.GetString("rmc-ui-options-tab-emote-bindings")); // RMC14
+            Tabs.SetTabTitle(6, Loc.GetString("ui-options-tab-accessibility"));
+            Tabs.SetTabTitle(7, Loc.GetString("ui-options-tab-admin"));
 
             UpdateTabs();
         }
@@ -36,6 +37,7 @@ namespace Content.Client.Options.UI
             AccessibilityTab.Control.ReloadValues();
             AudioTab.Control.ReloadValues();
             VoicelinesTab.Control.ReloadValues();
+            EmoteBindingTab.Control.ReloadValues();
             AdminOptionsTab.Control.ReloadValues();
         }
     }
