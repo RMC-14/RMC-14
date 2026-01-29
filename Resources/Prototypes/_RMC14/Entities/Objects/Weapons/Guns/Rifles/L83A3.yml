@@ -1,8 +1,8 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL83A3   #In cm13 the L42
+  id: RMCWeaponRifleL83A3   #In cm13 the L42
   name: L83A3 rifle
-  description: The L83A3 Battle Rifle, found commonly in Three Sun Empires armories.
+  description: The L83A3 Battle Rifle, found commonly in Three Suns Empires armories.
   suffix: Filled
   components:
   - type: Sprite
@@ -55,7 +55,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder
@@ -67,6 +67,7 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
           - RMCM5Bayonet
         random:
         - RMCAttachmentSuppressor
@@ -107,6 +108,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -124,6 +126,68 @@
       rmc-aslot-underbarrel: 0.3, -0.30
 
 - type: entity
+  parent: RMCWeaponRifleL83A3
+  id: RMCWeaponRifleL83A3Stripped
+  suffix: Stripped
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL83A3
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL83A3
+          - RMCMagazineRifleL83A3AP
+          - RMCMagazineRifleL83A3HEAP
+          - RMCMagazineRifleL83A3Incendiary
+          - RMCMagazineRifleL83A3Extended
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCAttachmentRecoilCompensator
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL83A3Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL83A3Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
+
+- type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleL83A3
   name: L83A3 Magazine (5.56x45mm)
@@ -137,8 +201,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - RMCCartridgeRifleL83A
-    proto: RMCCartridgeRifleL83A
+      - RMCCartridgeRifleL83A # Whoever implemented the L83s did it in a really annoying way
+    proto: RMCCartridgeRifleL83A # Cross-compatible cartridges are L83A to let them fit in either mag
     capacity: 25
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L83A3.rsi
@@ -179,7 +243,7 @@
 
 - type: entity
   parent: RMCMagazineRifleL83A3
-  id: RMCMagazineRifleL83A3extended
+  id: RMCMagazineRifleL83A3Extended
   description: "An extended magazine for the L83A3 rifle."
   name: L83A3 Extended Magazine (5.56x45mm)
   suffix: Extended
@@ -188,7 +252,7 @@
     tags:
     - CMMagazineRifle
     - RMCMagazineRifleL83A3
-    - RMCMagazineRifleL83A3extended
+    - RMCMagazineRifleL83A3Extended
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -273,7 +337,6 @@
   - type: CartridgeAmmo
     proto: BulletRifle556x45mmHEAP
 
-
 - type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeRifleL83AIncendiary
@@ -308,10 +371,6 @@
           Piercing: 30
   - type: IgniteOnProjectileHit
 
-
-
-
-
 - type: Tag
   id: RMCMagazineRifleL83A3
 
@@ -319,7 +378,7 @@
   id: RMCMagazineRifleL83A3AP
 
 - type: Tag
-  id: RMCMagazineRifleL83A3extended
+  id: RMCMagazineRifleL83A3Extended
 
 - type: Tag
   id: RMCMagazineRifleL83A3HEAP
@@ -339,7 +398,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3F
   name: L83A3F rifle
-  description: A variant of the L83A3 with a heavily modified firing mechanism, giving it a burst-fire option.
+  description: A variant of the L83A3 with a heavily modified firing mechanism, which grants it a burst-fire option.
   suffix: Filled
   components:
   - type: Sprite
@@ -402,7 +461,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.5
   - type: AttachableHolder
@@ -415,6 +474,7 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
         random:
         - RMCAttachmentSuppressor
         - RMCM5Bayonet
@@ -454,6 +514,7 @@
           - RMCAttachmentU7UnderbarrelShotgun
           - RMCAttachmentLaserSight
           - RMCAttachmentM203GrenadeLauncher
+          - RMCAttachmentExtinguisher
         random:
         - RMCAttachmentAngledGrip
         - RMCAttachmentVerticalGrip
@@ -470,12 +531,75 @@
       rmc-aslot-stock: -0.87, 0.03
       rmc-aslot-underbarrel: 0.3, -0.30
 
+- type: entity
+  parent: WeaponRifleL83A3F
+  id: RMCWeaponRifleL83A3FStripped
+  suffix: Stripped
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL83A3
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL83A3
+          - RMCMagazineRifleL83A3AP
+          - RMCMagazineRifleL83A3HEAP
+          - RMCMagazineRifleL83A3Incendiary
+          - RMCMagazineRifleL83A3Extended
+  - type: GunDamageModifier
+    multiplier: 1.5
+  - type: AttachableHolder
+    randomAttachmentChance: 0.42
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentL83A3Stock
+        whitelist:
+          tags:
+          - RMCAttachmentL83A3Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
+          - RMCAttachmentLaserSight
+          - RMCAttachmentM203GrenadeLauncher
+
 # Marksman L83A3 Variant will call it L83A3M (M for Marksman)
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3M
   name: L83A3M rifle
-  description: The L83A3M Battle Rifle, a modification sold to the Three Sun Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
+  description: The L83A3M Battle Rifle is a modification sold to the Three Suns Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
   suffix: Filled
   components:
   - type: Sprite
@@ -528,7 +652,7 @@
           - RMCMagazineRifleL83A3AP
           - RMCMagazineRifleL83A3HEAP
           - RMCMagazineRifleL83A3Incendiary
-          - RMCMagazineRifleL83A3extended
+          - RMCMagazineRifleL83A3Extended
   - type: GunDamageModifier
     multiplier: 1.7
   - type: AttachableHolder

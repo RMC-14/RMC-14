@@ -1,0 +1,80 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesBombSpecPVE
+  name: rmc-job-name-rcm-pve-bombardment-specialist
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalBombSpecPVE
+  ranks:
+    RMCRankTSELanceCorporal: [ ]
+  startingGear: RMCGearRoyalBombSpecPVE
+  icon: "RMCJobIconRoyalBombSpecPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+  - WeaponSpec
+  spawnMenuRoleName: RCM Bombardment Specialist (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1  
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: CMVendorUser
+      extraPoints:
+        Specialist: 120
+    - type: GrenadeSpecWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-bombardment-specialist
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarinesPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_breacher_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalBombSpecPVE
+  equipment:
+    id: RMCIDRoyalMarinesBombSpecPVE
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEBombSpec
+  name: RCM bombardment specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesBombSpecPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
+- type: playTimeTracker
+  id: RMCJobRoyalBombSpecPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalBombSpecPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_breacher_pve
