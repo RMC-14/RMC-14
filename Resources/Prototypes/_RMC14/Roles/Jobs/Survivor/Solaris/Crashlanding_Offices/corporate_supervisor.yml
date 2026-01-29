@@ -33,6 +33,13 @@
     - type: RMCAllowSuitStorage
     - type: JobPrefix
       prefix: rmc-job-prefix-survivor-solaris-corporate-supervisor
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: ass_man
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
