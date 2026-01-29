@@ -552,7 +552,7 @@
   - type: RMCBulkyArmor
     isBulky: false
   - type: Sprite
-    sprite: /_RMC14/Objects/Clothing/OuterClothing/Armor/press/press.rsi
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press/press.rsi
   - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
     camouflageVariations: { }
 
