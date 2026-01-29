@@ -56,6 +56,10 @@
             collection: MetalBreak
         - !type:DoActsBehavior
           acts: ["Destruction"]
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCAirScrubberStationary
