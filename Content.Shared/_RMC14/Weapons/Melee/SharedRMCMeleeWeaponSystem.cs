@@ -7,6 +7,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
@@ -26,6 +27,7 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
@@ -76,6 +78,9 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     private void OnStunOnHitMeleeHit(Entity<StunOnHitComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit)
+            return;
+
+        if (!_itemToggle.IsActivated(ent.Owner))
             return;
 
         foreach (var hit in args.HitEntities)
