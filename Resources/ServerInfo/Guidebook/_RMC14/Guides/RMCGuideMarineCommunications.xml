@@ -28,6 +28,10 @@ This guide  will not talk about why someone makes a choice, but how to best make
 
 The UNMC has two main types of communication tools that every leadership role has access to. These are the radio system and the telephone system.
 
+<Box>
+  <GuideEntityEmbed Entity="CMHeadsetAlphaTeamLeader" Caption="Alpha Headset"/>
+  <GuideEntityEmbed Entity="RMCBackpackRTO" Caption="Radio Backpack"/>
+</Box>
 
 ###The Radio System
 

@@ -54,7 +54,7 @@
   No auxiliary pouches are provided by default, so equip these as needed.
 
   ### Key Equipment Notes:
-  - You [italic]must[/italic] wear the [bold]ML66A Combat Harness[/bold] to holster the Smartgun on your back. Remove any belt items before equipping it.
+  - You [italic]must[/italic] wear the [bold]ML66A Combat Harness[/bold] to holster the Smartgun on your back. [color=#249fde][bold]Remove any belt items before equipping it.[/bold][/color]
   <Box>
     <GuideEntityEmbed Entity="CMArmorSmartGunCombatHarness" Caption="ML66A Combat Harness"/>
   </Box>
