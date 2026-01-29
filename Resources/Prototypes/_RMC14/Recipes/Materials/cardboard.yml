@@ -252,6 +252,7 @@
   listed:
   - RMCBoxMagazinePistolM1984EmptyBuild
   - RMCBoxMagazinePistolM1984APEmptyBuild
+  - RMCBoxMagazinePistolM1984HPEmptyBuild
   - RMCDividerConstruction
   - RMCBoxMagazinePistolMK80EmptyBuild
   - RMCDividerConstruction
@@ -280,6 +281,12 @@
   id: RMCBoxMagazinePistolM1984APEmptyBuild
   name: M1984 magazine box (AP)
   prototype: RMCBoxMagazinePistolM1984APEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCBoxMagazinePistolM1984HPEmptyBuild
+  name: M1984 magazine box (HP)
+  prototype: RMCBoxMagazinePistolM1984HPEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase

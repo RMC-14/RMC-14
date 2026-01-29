@@ -456,49 +456,67 @@
       - id: RMCBoxMagazinePistolM13
         name: Magazine Box (M13 x 22)
         box: RMCMagazinePistolM13
+
       - id: RMCBoxMagazinePistolM13Ext
         name: Magazine Box (Ext M13 x 14)
         box: RMCMagazinePistolM13Ext
+
       - id: RMCBoxMagazinePistolM13AP
         name: Magazine Box (M13 AP x 22)
         box: RMCMagazinePistolM13AP
+
       - id: RMCBoxMagazinePistolM13ExtAP
         name: Magazine Box (Ext M13 AP x 14)
         box: RMCMagazinePistolM13ExtAP
+
       - id: RMCBoxMagazineSMGM63
         name: Magazine Box (M63 x 12)
         box: CMMagazineSMGM63
+
       - id: RMCBoxMagazineSMGM63AP
         name: Magazine Box (AP M63 x 12)
         box: CMMagazineSMGM63AP
+
       - id: RMCBoxMagazineSMGM63Ext
         name: Magazine Box (Ext M63 x 10)
         box: CMMagazineSMGM63Ext
+
       - id: RMCBoxMagazineRifleM54C
         name: Magazine Box (M54C x 10)
         box: CMMagazineRifleM54C
+
       - id: RMCBoxMagazineRifleM54CAP
         name: Magazine Box (AP M54C x 10)
         box: CMMagazineRifleM54CAP
+
       - id: RMCBoxMagazineRifleM54CExt
         name: Magazine Box (Ext M54C x 8)
         box: CMMagazineRifleM54CExt
+
       - id: RMCBoxMagazinePistolM1984
         name: Magazine Box (M1984 x 16)
         box: CMMagazinePistolM1984
-#      - name: Magazine Box (AP M1984 x 16)
-#        box: CMMagazinePistolM1984AP
-#      - name: Magazine Box (HP M1984 x 16)
-#        box: CMMagazineSMGM63
+
+      - id: RMCBoxMagazinePistolM1984AP
+        name: Magazine Box (AP M1984 x 16)
+        box: RMCMagazinePistolM1984AP
+
+      - id: RMCBoxMagazinePistolM1984HP
+        name: Magazine Box (HP M1984 x 16)
+        box: RMCMagazinePistolM1984HP
+
       - id: RMCBoxMagazineRifleM4SPR
         name: Magazine Box (M4SPR x 16)
         box: CMMagazineRifleM4SPR
+
       - id: RMCBoxMagazineRifleM4SPRAP
         name: Magazine Box (AP M4SPR x 16)
         box: CMMagazineRifleM4SPRAP
+
       - id: RMCBoxMagazineRifleM4SPRExt
         name: Magazine Box (Ext M4SPR x 16)
         box: CMMagazineRifleM4SPRExt
+
 #      - name: Magazine Box (M54CE2 x 8)
 #        box: RMCCrateMagazineRifleM54CE2
 #      - name: Magazine Box (M54CE2 Holo-Target x 8)
@@ -511,27 +529,34 @@
         name: Magazine Box (Buckshot x 100)
         box: RMCBoxShotgunBuckshot
         boxAmount: 4
+
       - id: RMCBoxShellsFlechette
         name: Magazine Box (Flechette x 100)
         box: RMCBoxShotgunFlechette
         boxAmount: 4
+
       - id: RMCBoxShellsSlugs
         name: Magazine Box (Slugs x 100)
         box: RMCBoxShotgunSlugs
         boxAmount: 4
+
       - id: RMCBoxShellsBreaching
         name: Magazine Box (16g) (Breaching x 120)
         box: RMCBoxShotgunBreaching
         boxAmount: 4
+
       - id: RMCBoxMagazinePistolM77AP
         name: Magazine Box (M77 AP x 16)
         box: CMMagazinePistolM77AP
+
       - id: RMCBoxMagazinePistolSU6
         name: Magazine Box (SU-6 x 16)
         box: RMCMagazinePistolSU6
+
       - id: RMCBoxMagazinePistolMK80
         name: Magazine Box (MK80 x 16)
         box: CMMagazinePistolMK80
+
 #      - name: Magazine Box (XM51 x 8)
 #        box: RMCMagazineShotgunXM51
 #      - name: Magazine Box (.458 SOCOM x 300) # TODO RMC14
@@ -542,16 +567,20 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56D x 8)
 #        box: CMMagazineSMGM63
+
       - id: RMCBoxMagazineRevolverM44
         name: Magazine Box (M44 x 16)
         box: RMCSpeedLoaderM44
+
       - id: RMCBoxMagazineRevolverM44Marksman
         name: Magazine Box (Marksman M44 x 16)
         box: RMCSpeedLoader44Marksman
+
 #      - name: Magazine Box (Heavy M44 x 16)
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (UT-Napthal Fuel x 8)
 #        box: CMMagazineSMGM63
+
     - name: Ammunition Boxes
       hasBoxes: true
       entries:
