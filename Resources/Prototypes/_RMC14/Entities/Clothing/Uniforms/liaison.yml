@@ -13,6 +13,14 @@
 
 - type: entity
   parent: CMJumpsuitLiaison
+  id: RMCJumpsuitLiaisonShoulderHolster
+  suffix: Shoulder Holster
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingHolster
+
+- type: entity
+  parent: CMJumpsuitLiaison
   id: CMJumpsuitLiaisonCharcoal
   name: liaison's charcoal suit
   description: A stiff, stylish charcoal suit commonly worn by businessmen from the We-Ya corporation. Expertly crafted to make you look like a prick.

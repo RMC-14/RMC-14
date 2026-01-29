@@ -78,9 +78,19 @@
   parent: RMCHandsVeteran
   id: RMCHandsVeteranCBRN
   name: M3 MOPP gloves
-  description: M3 MOPP gloves are made of treated venlar designed to protect the user’s hands against contamination whilst working in CBRN environments. Special care has been taken to give the user’s hands enough dexterity to fully service a rifle or utilize most handheld tools, while circular adhesive patterns on the fingers provide the user with enhanced grips. Standard CBRN protocol dictates that the gloves are expected to have a lifespan of maximum effectiveness of around twenty-four hours once exposed to moderate levels of contamination and that users are recommended to discard and replace them afterwards.
+  description: M3 MOPP gloves are made of treated venlar designed to protect the user's hands against contamination whilst working in CBRN environments. Special care has been taken to give the user's hands enough dexterity to fully service a rifle or utilize most handheld tools, while circular adhesive patterns on the fingers provide the user with enhanced grips. Standard CBRN protocol dictates that the gloves are expected to have a lifespan of maximum effectiveness of around twenty-four hours once exposed to moderate levels of contamination and that users are recommended to discard and replace them afterwards.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/cbrn.rsi
+
+- type: entity
+  parent: RMCHandsVeteranCBRN
+  id: RMCHandsVeteranCBRNLessArmored
+  suffix: Less Armored
+  components:
+  - type: CMArmor
+    melee: 20
+    bullet: 20
+    explosionArmor: 15
