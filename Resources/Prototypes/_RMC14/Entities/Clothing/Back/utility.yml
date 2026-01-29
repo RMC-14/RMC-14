@@ -34,3 +34,49 @@
   - type: TimedDespawn
     lifetime: 3.5
   - type: Appearance
+
+# Fuel tank
+- type: entity
+  parent: ClothingBackpack
+  id: RMCWeldingKit
+  name: welding kit
+  description: A heavy-duty, portable welding fluid carrier.
+  components:
+  - type: Item
+    size: Huge
+  - type: Clothing
+    slots:
+    - back
+  - type: ClothingIgnoreBlockBackpack
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/welderpack.rsi
+  - type: ExaminableSolution
+    solution: tank
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 600 # TODO RMC14 100 when welders are fixed
+        reagents:
+        - ReagentId: WeldingFuel
+          Quantity: 600
+  - type: ReagentTank
+    tankType: Fuel
+  - type: DrainableSolution
+    solution: tank
+  - type: SolutionTransfer
+    transferAmount: 50
+    maxTransferAmount: 100
+    minTransferAmount: 10
+    canChangeTransferAmount: true
+  - type: RefillableSolution
+    solution: tank
+  - type: DrawableSolution
+    solution: tank
+  - type: RMCSolutionTransferWhitelist
+    popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
+    sourceWhitelist:
+      components:
+      - Welder
+    targetWhitelist:
+      tags:
+      - RMCTankFuel
