@@ -41,6 +41,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Fax;
+using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -610,6 +611,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _parasite.SetHive((corpseMob, victimInfected), comp.Hive);
                     _parasite.SpawnLarva((corpseMob, victimInfected), out var newXeno);
                     _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
+
+                    // Allow xenos to see their character that they bursted out of
+                    RemCompDeferred<HiddenAppearanceComponent>(corpseMob);
 
                     _xeno.MakeXeno(newXeno);
 
