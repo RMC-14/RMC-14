@@ -21,6 +21,9 @@
           map: ["enum.AegisCrateVisualLayers.Base"]
     - type: AegisCrate
       openSound: /Audio/_RMC14/Structures/secure_box_opening/secure_box_opening.ogg
+    - type: WeedKillerAura
+      blockRadius: 2
+      blockDuration: 3600 # 60 minutes
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
