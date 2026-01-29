@@ -62,9 +62,6 @@ public sealed partial class SentryComponent : Component
     public EntProtoId<SkillDefinitionComponent> DelaySkill = "RMCSkillConstruction";
 
     [DataField, AutoNetworkedField]
-    public bool HomingShots = true;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? Camera;
 
     [DataField, AutoNetworkedField]
@@ -99,4 +96,3 @@ public enum SentryLayers
 {
     Layer,
 }
-
