@@ -27,11 +27,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     private readonly List<(Entity<AudioComponent, OverwatchRelayedSoundComponent> Audio, EntityCoordinates Position)> _toRelay = new();
 
     private Vector2? _overwatchTargetOffset = null;
-    private readonly Vector2 _offsetLimit = new(offsetAmount, offsetAmount);
+    private readonly Vector2 _offsetLimit = new(OverwatchWatchingComponent.offsetAmount, OverwatchWatchingComponent.offsetAmount);
     private EntityUid? _overwatchActor = null;
     private OverwatchDirection? _pendingOffsetDirection = null;
-    private const float offsetAmount = 10f; // 10 matches binoculars offset
-    private const float zoomAmount = 1.5f; // 1.5 matches binoculars zoom
+    private float offsetAmount = OverwatchWatchingComponent.offsetAmount;
+    private float zoomAmount = OverwatchWatchingComponent.zoomAmount;
     private string? _previousContext;
 
     public override void Initialize()

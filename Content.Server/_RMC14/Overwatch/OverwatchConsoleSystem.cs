@@ -17,9 +17,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    // Camera radius while zoomed out, this is used to load entities within visible tiles for the watcher.
-    // 28f radius is almost always enough with zoom: 1.5f and offset: 10f
-    private const float cameraRadius = 28f;
+    private float cameraRadius = OverwatchWatchingComponent.cameraRadius;
 
     public override void Initialize()
     {

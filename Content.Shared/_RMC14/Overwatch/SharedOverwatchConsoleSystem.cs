@@ -79,7 +79,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
-    private const float offsetAmount = 10f; // 10 matches binoculars offset
+    private float offsetAmount = OverwatchWatchingComponent.offsetAmount;
 
     public override void Initialize()
     {
@@ -397,7 +397,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
 
         if (_net.IsClient)
         {
-            // When trying to watch someone who's on a different map, the camera component isn't detected right away.
+            // When trying to watch someone who's on a different map or just far away, the camera component isn't detected right away.
             // So without this Watch(), you need to click twice to watch a marine before actually getting "overwatch" context.
             Watch(args.Actor, default);
             return;
@@ -686,7 +686,6 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (!Resolve(watcher, ref watcher.Comp))
             return;
 
-        // Reset eye offset when no longer viewing cameras
         _eye.SetOffset(watcher, Vector2.Zero);
         _eye.SetTarget(watcher, null);
     }
