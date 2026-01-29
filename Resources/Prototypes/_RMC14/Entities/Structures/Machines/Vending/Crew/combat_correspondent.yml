@@ -43,7 +43,10 @@
     - name: Armor
       choices: { CMArmor: 1 }
       entries:
-      - id: CMArmorPress
+      - id: RMCArmorPress
+        name: Combat Correspondent's Armor
+        recommended: true
+      - id: RMCArmorPressBlue
         name: Combat Correspondent's Armor
         recommended: true
       - id: RMCCoatCorrespondentBlue
@@ -58,6 +61,9 @@
       choices: { CMHelmet: 1 }
       entries:
       - id: CMArmorHelmetPress
+        name: Combat Correspondent's Helmet
+        recommended: true
+      - id: CMArmorHelmetPressBlue
         name: Combat Correspondent's Helmet
         recommended: true
       - id: RMCHeadCapCorrespondent
