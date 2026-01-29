@@ -1,4 +1,5 @@
 using System.Collections.Frozen;
+using System.Linq;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
@@ -91,6 +92,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        Dirty(uid.Value, access);
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -121,6 +124,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         idCard._jobTitle = "Civilian";
         Dirty(uid.Value, idCard);
+        Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
@@ -144,24 +148,40 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             return;
 
         EnsureComp<ItemIFFComponent>(uid.Value, out var iff);
+        var targetFaction = ent.Comp.Faction;
 
-        if (iff.Faction != ent.Comp.Faction && !args.Revoke)
+        if (!args.Revoke)
         {
-            _iff.SetIdFaction((uid.Value, iff), ent.Comp.Faction);
-            ent.Comp.HasIFF = true;
+            if (!iff.Factions.Contains(targetFaction))
+                iff.Factions.Add(targetFaction);
+
+            Dirty(uid.Value, iff);
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Medium,
-                $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
-        }
-        else if (args.Revoke)
-        {
-            _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
-            ent.Comp.HasIFF = false;
-            _adminLogger.Add(LogType.RMCIdModify,
-                LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
-        }
+                $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
 
+            ent.Comp.HasIFF = true;
+        }
+        else
+        {
+            var removed = iff.Factions.Remove(targetFaction);
+
+            if (iff.Factions.Count == 0)
+            {
+                _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+            }
+            else if (removed)
+                Dirty(uid.Value, iff);
+
+            ent.Comp.HasIFF = false;
+
+            if (removed)
+            {
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Low,
+                    $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
+            }
+        }
 
         Dirty(ent);
     }
@@ -262,6 +282,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 break;
         }
 
+        Dirty(uid.Value, access);
         Dirty(ent);
     }
 
@@ -288,6 +309,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
         }
+
+        Dirty(uid.Value, access);
     }
 
     //TODO RMC14 add ranks tab
@@ -360,8 +383,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (accessComponent.Tags.Contains(ent.Comp.Access) && containerType == ent.Comp.PrivilegedIdSlot)
             ent.Comp.Authenticated = true;
 
+        ent.Comp.HasIFF = false;
         if (TryComp(handItem, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
-            ent.Comp.HasIFF = iff.Faction == ent.Comp.Faction;
+            ent.Comp.HasIFF = iff.Factions.Contains(ent.Comp.Faction);
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         _container.Insert(handItem.Value, container);
@@ -450,12 +474,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 else
                     groupList.Add(accessGroup);
             }
-            // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
-            // {
-            //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
-            //         groupListHidden.Add(accessGroup);
-            // }
         }
+        // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
+        // {
+        //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
+        //         groupListHidden.Add(accessGroup);
+        // }
 
         ent.Comp.JobGroups = groupGroups;
         ent.Comp.JobList = groupList;

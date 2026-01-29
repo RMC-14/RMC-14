@@ -73,7 +73,9 @@ public sealed class XenoTailSeizeSystem : EntitySystem
         if (!origin.TryDistance(EntityManager, target, out var dis))
             return;
 
-        var knockBackDistance = -Math.Max(dis - 2, 0.5f); //Lands right in front
+        var knockBackDistance = dis < hook.Comp.TargetStopDistance
+            ? -(dis - hook.Comp.MinimumHookDistance)
+            : -(dis - hook.Comp.TargetStopDistance);
         _obstacleSlamming.MakeImmune(args.Target);
         _size.KnockBack(args.Target, mapCoords, knockBackDistance, knockBackDistance, 10);
         EnsureComp<VictimTailSeizedComponent>(args.Target);
