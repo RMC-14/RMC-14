@@ -163,7 +163,7 @@ cm-job-name-survivor-medical-technician = New Varadero Medical Technician
 
 cm-job-name-survivor-technician = New Varadero Engineering Technician
 
-cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
+cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
