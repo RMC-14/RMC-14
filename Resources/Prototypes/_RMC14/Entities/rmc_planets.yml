@@ -277,6 +277,9 @@
       Telecommunications Array: Repairs required
 
       No further information available at this time."
+    nightmareScenarios:
+    - scenarioName: surveillancecenter_varadero
+      scenarioProbability: 0.1
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -303,6 +306,23 @@
       - CMSurvivorUNPeacekeeper: 2
       CMSurvivorScientist:
       - RMCSurvivorNewVaraderoResearcher: 2
+    survivorJobScenarios:
+      surveillancecenter_varadero:
+      - CMSurvivorSecurity: 2
+      - RMCSurvivorCommandingOfficer: 1
+      - CMSurvivor: -1
+      - CMSurvivorCorporate: 2
+      - CMSurvivorDoctor: 3
+      - CMSurvivorEngineer: 4
+      - CMSurvivorScientist: 2
+    survivorJobVariantScenarios:
+      surveillancecenter_varadero:
+        CMSurvivorEngineer:
+        - RMCSurvivorNewVaraderoCMBTechnician: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorNewVaraderoICBAgent: 2
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorNewVaraderoICBSupervisor: 1
 
 - type: entity
   id: RMCPlanetKutjevo

@@ -1,0 +1,10 @@
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolver357Snubnose
+  name: .357 snubnose revolver # RMC14 - reskinned spearhead for ICB insert
+  description: An offshoot design of the .38 revolver with various improvements made to accommodate a higher caliber and to improve accuracy. Rarely produced and issued to ICB field agents for self-defence.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/snubnose357.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/snubnose357.rsi

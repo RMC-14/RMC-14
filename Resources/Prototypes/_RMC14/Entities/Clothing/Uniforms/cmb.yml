@@ -35,3 +35,12 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_marshal_uniform.rsi
   - type: Appearance
+
+- type: entity
+  parent: RMCCMBUniformBase
+  id: RMCSwatICBUniform
+  name: ICB tactical uniform
+  description: A dark set of CMB tactical fatigues, marked with ICB insignia.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/CMB/icb_uniform.rsi

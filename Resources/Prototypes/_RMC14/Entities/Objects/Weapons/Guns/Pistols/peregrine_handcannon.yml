@@ -77,6 +77,20 @@
 
 - type: entity
   parent: RMCWeaponPistolHandcannon
+  id: RMCWeaponPistolHandcannonTactical
+  suffix: Tactical
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
+
+- type: entity
+  parent: RMCWeaponPistolHandcannon
   id: RMCWeaponPistolHandcannonGold
   name: golden peregrine handcannon
   description: A Peregrine Handcannon anodized in gold and adorned with rosewood grips. The living definition of ostentatious, it's flashy, unwieldy, tremendously heavy, and kicks like a mule. But as a symbol of power, there's nothing like it.
