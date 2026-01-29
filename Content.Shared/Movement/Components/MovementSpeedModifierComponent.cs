@@ -27,6 +27,7 @@ namespace Content.Shared.Movement.Components
         // movement
         public const float DefaultBaseWalkSpeed = 2.5f;
         public const float DefaultBaseSprintSpeed = 4.5f;
+        public const float DefaultBaseRotationSpeed = 2.5f; // RMC addition.
 
         #endregion
 
@@ -40,6 +41,10 @@ namespace Content.Shared.Movement.Components
 
         [DataField, AutoNetworkedField]
         public float BaseSprintSpeed = DefaultBaseSprintSpeed;
+
+        // RMC change!
+        [DataField, AutoNetworkedField]
+        public float BaseRotationSpeed = DefaultBaseRotationSpeed;
 
         /// <summary>
         /// The acceleration applied to mobs when moving. If this is ever less than Friction the mob will be slower.
@@ -67,6 +72,8 @@ namespace Content.Shared.Movement.Components
         public float CurrentWalkSpeed => WalkSpeedModifier * BaseWalkSpeed;
         [ViewVariables]
         public float CurrentSprintSpeed => SprintSpeedModifier * BaseSprintSpeed;
+        [ViewVariables]
+        public float CurrentRotationSpeed => RotationSpeedModifier * BaseRotationSpeed; // RMC addition.
 
         /// <summary>
         /// The acceleration applied to mobs when moving. If this is ever less than Friction the mob will be slower.
@@ -96,6 +103,9 @@ namespace Content.Shared.Movement.Components
         [AutoNetworkedField, ViewVariables]
         public float SprintSpeedModifier = 1.0f;
 
+        [AutoNetworkedField, ViewVariables]
+        public float RotationSpeedModifier = 1.0f; // RMC addition.
+
         #endregion
 
         #region Weightless
@@ -120,6 +130,9 @@ namespace Content.Shared.Movement.Components
         public float WeightlessWalkSpeed => WeightlessModifier * BaseWalkSpeed;
         [ViewVariables]
         public float WeightlessSprintSpeed => WeightlessModifier * BaseSprintSpeed;
+
+        [ViewVariables]
+        public float WeightlessRotationSpeed => WeightlessModifier * BaseRotationSpeed; // RMC addition.
 
         /// <summary>
         /// The acceleration applied to mobs when moving and weightless.
