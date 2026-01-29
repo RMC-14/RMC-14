@@ -10,6 +10,9 @@
                 <Control HorizontalExpand="True" />
                 <Button Name="SelectAllButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc rmc-chem-master-select-all}" Visible="False" Margin="0 0 5 0" />
+                <CheckBox Name="AutoSelectButton" Access="Public" StyleClasses="OpenBoth"
+                        Text="{Loc rmc-chem-master-auto-select}" Margin="0 0 5 0"
+                        ToggleMode="True" />
                 <Button Name="PresetsButton" Access="Public" StyleClasses="OpenBoth"
                         Text="{Loc rmc-chem-master-presets}" />
             </BoxContainer>

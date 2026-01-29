@@ -61,7 +61,6 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 subs.Event<RMCChemMasterPillBottleLabelMsg>(OnPillBottleLabelMsg);
                 subs.Event<RMCChemMasterPillBottleColorMsg>(OnPillBottleColorMsg);
                 subs.Event<RMCChemMasterPillBottleFillMsg>(OnPillBottleFillMsg);
-                subs.Event<RMCChemMasterPillBottleSelectAllMsg>(OnPillBottleSelectAllMsg);
                 subs.Event<RMCChemMasterPillBottleTransferMsg>(OnPillBottleTransferMsg);
                 subs.Event<RMCChemMasterPillBottleEjectMsg>(OnPillBottleEjectMsg);
                 subs.Event<RMCChemMasterBeakerEjectMsg>(OnBeakerEjectMsg);
@@ -73,6 +72,8 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
                 subs.Event<RMCChemMasterSetPillAmountMsg>(OnSetPillAmountMsg);
                 subs.Event<RMCChemMasterSetPillTypeMsg>(OnSetPillTypeMsg);
                 subs.Event<RMCChemMasterCreatePillsMsg>(OnCreatePillsMsg);
+                subs.Event<RMCChemMasterPillBottleSelectAllMsg>(OnPillBottleSelectAllMsg);
+                subs.Event<RMCChemMasterAutoSelectToggleMsg>(OnAutoSelectToggleMsg);
                 subs.Event<RMCChemMasterApplyPresetMsg>(OnApplyPresetMsg);
             });
     }
@@ -130,6 +131,17 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     protected virtual void OnEntInsertedIntoContainer(Entity<RMCChemMasterComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (args.Container.ID == ent.Comp.PillBottleContainer)
+        {
+            if (ent.Comp.AutoSelectPillBottles)
+            {
+                ent.Comp.SelectedBottles.Add(args.Entity);
+            }
+
+            Dirty(ent);
+            return;
+        }
+
         if (args.Container.ID != ent.Comp.BufferSolutionId)
             return;
 
@@ -138,6 +150,13 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
 
     protected virtual void OnEntRemovedFromContainer(Entity<RMCChemMasterComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        if (args.Container.ID == ent.Comp.PillBottleContainer)
+        {
+            ent.Comp.SelectedBottles.Remove(args.Entity);
+            Dirty(ent);
+            return;
+        }
+
         if (args.Container.ID != ent.Comp.BufferSolutionId)
             return;
 
@@ -485,6 +504,13 @@ public abstract class SharedRMCChemMasterSystem : EntitySystem
             ent.Comp.SelectedBottles.Clear();
         }
 
+        Dirty(ent);
+        RefreshUIs(ent);
+    }
+
+    private void OnAutoSelectToggleMsg(Entity<RMCChemMasterComponent> ent, ref RMCChemMasterAutoSelectToggleMsg args)
+    {
+        ent.Comp.AutoSelectPillBottles = !ent.Comp.AutoSelectPillBottles;
         Dirty(ent);
         RefreshUIs(ent);
     }
