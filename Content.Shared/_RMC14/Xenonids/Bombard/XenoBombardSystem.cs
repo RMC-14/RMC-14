@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Actions;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
@@ -58,11 +59,19 @@ public sealed class XenoBombardSystem : EntitySystem
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
-            var selfMessage = Loc.GetString("rmc-glob-start-self");
-            _popup.PopupClient(selfMessage, ent, ent);
 
-            var othersMessage = Loc.GetString("rmc-glob-start-others", ("user", ent));
-            _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
+            var selfMsg = Loc.GetString("rmc-glob-start-self");
+            _popup.PopupClient(selfMsg, ent, ent);
+
+            var xenoMsg = Loc.GetString("rmc-glob-start-xenos", ("user", ent));
+            var xenoFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
+                .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+            _popup.PopupPredicted(xenoMsg, ent, null, xenoFilter, true, PopupType.MediumCaution);
+
+            var marineMsg = Loc.GetString("rmc-glob-start-marines");
+            var marineFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
+                .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
+            _popup.PopupPredicted(marineMsg, ent, null, marineFilter, true, PopupType.MediumCaution);
         }
     }
 
@@ -110,11 +119,18 @@ public sealed class XenoBombardSystem : EntitySystem
 
         _rmcActions.ActivateSharedCooldown(action, ent);
 
-        var selfMessage = Loc.GetString("rmc-glob-shoot-self");
-        _popup.PopupClient(selfMessage, ent, ent);
+        var selfMsg = Loc.GetString("rmc-glob-shoot-self");
+        _popup.PopupClient(selfMsg, ent, ent);
 
-        var othersMessage = Loc.GetString("rmc-glob-shoot-others", ("user", ent));
-        _popup.PopupEntity(othersMessage, ent, Filter.PvsExcept(ent), true, PopupType.MediumCaution);
+        var xenoMsg = Loc.GetString("rmc-glob-shoot-xenos", ("user", ent));
+        var xenoFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
+            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<XenoComponent>(uid));
+        _popup.PopupPredicted(xenoMsg, ent, null, xenoFilter, true, PopupType.MediumCaution);
+
+        var marineMsg = Loc.GetString("rmc-glob-shoot-marines");
+        var marineFilter = Filter.PvsExcept(ent, entityManager: EntityManager)
+            .RemoveWhereAttachedEntity(uid => !EntityManager.HasComponent<MarineComponent>(uid));
+        _popup.PopupPredicted(marineMsg, ent, null, marineFilter, true, PopupType.MediumCaution);
     }
 
     private void OnToggleType(Entity<XenoBombardComponent> ent, ref XenoGasToggleActionEvent args)
