@@ -17,7 +17,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
 
-    // Camera radius while zoomed out, this is used to load entities within visible tiles to the watcher.
+    // Camera radius while zoomed out, this is used to load entities within visible tiles for the watcher.
     // 28f radius is almost always enough with zoom: 1.5f and offset: 10f
     private const float cameraRadius = 28f;
 
@@ -85,22 +85,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         watchingComp.Watching = toWatch;
         watchingComp.isOverridden = isCameraOverridden;
 
-        // Only overrides nearby entities if extra zoom/offset is active, and the watcher and watched are on different maps
+        // Only overrides nearby entities if extra zoom/offset is active
         var overridden = new List<EntityUid>();
         var offsetActive = watcher.Comp2 != null && watcher.Comp2.Offset != Vector2.Zero;
-        var watchingCrossMap = false;
-        try
-        {
-            var watchMap = Transform(toWatch.Owner).MapUid;
-            if (watchMap != null && watcher.Comp1.PlayerSession.AttachedEntity is { } attached && Transform(attached).MapUid != watchMap)
-                watchingCrossMap = true;
-        }
-        catch
-        {
-            
-        }
 
-        if (offsetActive && watchingCrossMap)
+        if (offsetActive)
         {
             try
             {
@@ -126,7 +115,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             }
             catch
             {
-                
             }
         }
 
@@ -257,54 +245,34 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                 continue;
             }
 
-            // Only overrides nearby entities when the watcher and watched are on different maps
-            var watchingCrossMap = false;
+            var overridden = new List<EntityUid>();
             try
             {
-                var watchMap = Transform(watched).MapUid;
-                if (watchMap != null && actor.PlayerSession.AttachedEntity is { } attached && Transform(attached).MapUid != watchMap)
-                    watchingCrossMap = true;
+                var mapCoords = _transform.GetMapCoordinates(watched);
+                var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+                foreach (var ent in nearby)
+                {
+                    if (ent == watcher)
+                        continue;
+
+                    try
+                    {
+                        if (session != null)
+                        {
+                            _pvsOverride.AddSessionOverride(ent, session);
+                            overridden.Add(ent);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
             }
             catch
             {
-                
             }
 
-            if (watchingCrossMap)
-            {
-                var overridden = new List<EntityUid>();
-                try
-                {
-                    var mapCoords = _transform.GetMapCoordinates(watched);
-                    var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
-                    foreach (var ent in nearby)
-                    {
-                        if (ent == watcher)
-                            continue;
-
-                        try
-                        {
-                            if (session != null)
-                            {
-                                _pvsOverride.AddSessionOverride(ent, session);
-                                overridden.Add(ent);
-                            }
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-                catch
-                {
-                }
-
-                watchingComp.OverriddenEntities = overridden.Count > 0 ? overridden : null;
-            }
-            else
-            {
-                watchingComp.OverriddenEntities = null;
-            }
+            watchingComp.OverriddenEntities = overridden.Count > 0 ? overridden : null;
         }
     }
 }
