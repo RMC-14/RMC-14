@@ -2,6 +2,7 @@
   parent: RMCBaseWeaponLauncher
   id: RMCWeaponLauncherDisposable
   name: M5A1 SLAW
+  suffix: AP
   description: The M5A1 SLAW is a lightweight one-shot anti-armor weapon capable of engaging enemy vehicles at ranges up to 1,000m. Fully disposable, the rocket's launcher is discarded after firing. When stowed, the SLAW system consists of a watertight carbon-fiber composite blast tube, inside of which is an aluminum launch tube containing the missile. The weapon is fired by pushing a charge button on the trigger grip. It is sighted and fired from the shoulder.
   components:
   - type: Sprite
@@ -35,7 +36,7 @@
   id: RMCWeaponLauncherDisposableFolded
   name: M5A1 SLAW
   description: An M5A1 SLAW Anti-Tank RPG, compacted for easier storage.
-  suffix: Folded
+  suffix: AP, folded
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/RocketLaunchers/m5a1_disposable.rsi
@@ -85,3 +86,48 @@
         Blunt: 5
     soundHit:
       collection: GenericHit
+
+- type: entity
+  parent: RMCWeaponLauncherDisposable
+  id: RMCWeaponLauncherDisposableHE
+  name: M5A2 SHEL
+  suffix: HE
+  description: The M5A2 SHEL is a lightweight, single-shot, shoulder-mounted launcher equipped with a high-explosive payload. Much like the M5A1, the launcher is discarded after firing and folded when stowed.
+  components:
+  - type: BallisticAmmoProvider
+    proto: RMCRocket84mm
+    cycleable: false
+    whitelist:
+      tags: []
+  - type: RMCFoldableGun
+    foldDelay: 2
+    foldText: rmc-gun-foldable-launcher-fold-self
+    foldTextOthers: rmc-gun-foldable-launcher-fold-others
+    finishText: rmc-gun-foldable-launcher-fold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-fold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposableHEFolded
+
+- type: entity
+  parent: RMCWeaponLauncherDisposableFolded
+  id: RMCWeaponLauncherDisposableHEFolded
+  name: M5A2 SHEL
+  description: An M5A2 SHEL High-Explosive RPG, compacted for easier storage.
+  suffix: HE, folded
+  components:
+  - type: RMCFoldableGun
+    foldDelay: 4
+    foldText: rmc-gun-foldable-launcher-unfold-self
+    foldTextOthers: rmc-gun-foldable-launcher-unfold-others
+    finishText: rmc-gun-foldable-launcher-unfold-finish-self
+    finishTextOthers: rmc-gun-foldable-launcher-unfold-finish-others
+    toggleFoldSound:
+      path: /Audio/_RMC14/Weapons/Handling/component_pickup.ogg
+      params:
+        variation: 0.2
+    foldedEntity: RMCWeaponLauncherDisposableHE
+    examineText: rmc-gun-foldable-launcher-examine-unfold
+    onActivate: true
