@@ -1,4 +1,5 @@
 using Content.Server.Explosion.Components;
+using Content.Server.Explosion.EntitySystems;
 using Content.Shared._RMC14.Armor;
 using Content.Shared._RMC14.Explosion;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -12,7 +13,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Explosion.EntitySystems;
+namespace Content.Server._RMC14.Explosion;
 
 public sealed class RMCProjectileGrenadeSystem : EntitySystem
 {
@@ -118,7 +119,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 continue;
 
             _hitEntities.Add(entity);
-            limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire, null));
+            limit.HitBy.Add(new Hit(ent.Owner.Id, _timing.CurTime + limit.Expire, null));
             Dirty(entity,limit);
 
             if(projectileCount == 0)
@@ -130,8 +131,8 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
 
     public override void Update(float frametime)
     {
-        var query = EntityQueryEnumerator<ProjectileGrenadeComponent, PhysicsComponent>();
-        while (query.MoveNext(out var projectileUid, out _, out var physics))
+        var query = EntityQueryEnumerator<ProjectileGrenadeComponent, PhysicsComponent, ProjectileComponent>();
+        while (query.MoveNext(out var projectileUid, out _, out var physics, out _))
         {
             _transform.SetWorldRotationNoLerp(projectileUid, physics.LinearVelocity.ToWorldAngle());
         }
