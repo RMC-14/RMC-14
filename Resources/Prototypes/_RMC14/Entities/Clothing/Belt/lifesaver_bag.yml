@@ -17,6 +17,7 @@
       - DiscreteHealthAnalyzer
       - BodyBag
       - Bottle
+      - PillPacket
       - PillCanister
       - Syringe
       - CMAutoInjector
@@ -36,6 +37,7 @@
     items:
       tags:
       - PillCanister
+      - PillPacket
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Belt/medicbag/jungle-classic.rsi

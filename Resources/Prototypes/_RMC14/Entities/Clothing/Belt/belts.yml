@@ -389,6 +389,7 @@
       - Dropper
       - GlassBeaker
       - Bottle
+      - PillPacket
       - PillCanister
       - Syringe
       - CMSurgicalLine

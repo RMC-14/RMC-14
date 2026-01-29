@@ -1,4 +1,4 @@
-﻿# MedKit Pouch
+# MedKit Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchMedkit
@@ -14,6 +14,7 @@
         - DiscreteHealthAnalyzer
         - Dropper
         - Pill
+        - PillPacket
         - Bottle
         - Syringe
         - PillCanister
@@ -47,6 +48,7 @@
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
+      - PillPacket
       - Bottle
       - Syringe
       - PillCanister
