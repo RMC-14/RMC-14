@@ -15,6 +15,10 @@
     - RMCGuideRoleQueen
   - type: GhostRole
     name: cm-job-name-xeno-queen
+    requirements:
+    - !type:TotalJobsTimeRequirement
+      group: CMJobsXeno
+      time: 36000 # 10 hours
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Queen/queen.rsi
     layers:
