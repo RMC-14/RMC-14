@@ -46,6 +46,34 @@
     hijackable: false
 
 - type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERTTSE
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_computer_props.rsi
+    state: blacksensor_comp2
+  - type: DropshipNavigationComputer
+    hijackable: false
+  - type: Transform
+    anchored: false
+
+- type: entity
+  parent: CMComputerDropshipNavigation
+  id: CMComputerDropshipNavigationERTCLF
+  name: transport shuttle
+  description: A transport shuttle flight computer.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/clf.rsi
+    state: 93
+  - type: DropshipNavigationComputer
+    hijackable: false
+  - type: Transform
+    anchored: false
+
+- type: entity
   parent: CMComputerDropship
   id: CMComputerDropshipNavigationPlanetside
   name: dropship navigation computer
