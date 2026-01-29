@@ -38,6 +38,7 @@
     rounds: 400
     maxRounds: 400
     roundsPerShot: 40
+    fireMissionDelay: 1
     damage:
       groups:
         Brute: 105
@@ -126,6 +127,7 @@
     targetSpread: 3 # TODO RMC14 max 6 when no longer lased
     bulletSpread: 0
     travelTime: 6
+    fireMissionDelay: 3
     weapon: RMCDropshipAttachmentGuidedMissileLauncher
     soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
     soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg #IncommingRocket.ogg sounds better, and more accurate, but this is what is used in parity, i believe it to be a mistake in the original PR, but we can change it in the future
@@ -274,6 +276,7 @@
     roundsPerShot: 1
     bulletSpread: 0
     travelTime: 8
+    fireMissionDelay: 2
     weapon: RMCDropshipAttachmentRocketPod
     soundCockpit: /Audio/_RMC14/Effects/rocketpod_fire.ogg
     soundMarker: /Audio/_RMC14/Effects/rocketpod_fire.ogg
