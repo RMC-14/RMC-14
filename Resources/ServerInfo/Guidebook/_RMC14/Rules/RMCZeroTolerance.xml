@@ -35,7 +35,13 @@
   - Attempting to evade job bans through promotions or similar will result in significantly worse bans.
 
   ### Exploits and External Programs
-  - Don't use exploits of bugs or external programs to gain an advantage, or disrupt the server in any way.\nUsing an external program to calculate coordinate locations is permitted.\nUsing an external program to read text on the screen for accessibility purposes is permitted.
+  - Don't use exploits of bugs or external programs to gain an advantage, or disrupt the server in any way.
+
+  Exceptions:
+
+  - Using an external program to calculate coordinate locations is permitted.
+  - Using an external program to read text on the screen for accessibility purposes is permitted.
+  - Using an external program to write text from speech is permitted, but be wary of rule breaks as a result of loose speech.
 
   ### Advertising and Spam
   - Do not promote/advertise external communities or servers. Exposure to unmoderated spaces has consistently introduced toxic behavior into our own, harming the healthy culture we work hard to build and maintain. Out-of-character toxicity observed can and should be reported under the context of [textlink="core rule 5." link="RMCKindness"]
