@@ -235,6 +235,11 @@ public sealed partial class ChatSystem : SharedChatSystem
             _chatManager.EnsurePlayer(player.UserId).AddEntity(GetNetEntity(source));
         }
 
+        // RMC14: Allow systems to modify the chat type before sending
+        var modifyEv = new _RMC14.Chat.Events.RMCChatTypeModifyEvent(source, message, desiredType);
+        RaiseLocalEvent(source, ref modifyEv);
+        desiredType = modifyEv.ModifiedType.HasValue ? modifyEv.ModifiedType.Value : desiredType;
+
         if (desiredType == InGameICChatType.Speak && message.StartsWith(LocalPrefix))
         {
             // prevent radios and remove prefix.

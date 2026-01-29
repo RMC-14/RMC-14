@@ -54,4 +54,29 @@ public sealed partial class RMCMegaphoneUserComponent : Component
         { "chat-speech-verb-suffix-stutter", "Megaphone" },
         { "chat-speech-verb-suffix-mumble", "Megaphone" },
     };
+
+    /// <summary>
+    /// Multiplier applied to the base voice range when using a megaphone.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float VoiceRangeMultiplier = 1.5f;
+
+    /// <summary>
+    /// Maximum radius in tiles within which hushed effect can be applied.
+    /// Configured in 5-tile steps.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float MaxHushedEffectRange = 15f;
+
+    /// <summary>
+    /// Radius in tiles within which hushed effect is applied.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float CurrentHushedEffectRange = 15f;
+
+    /// <summary>
+    /// Duration of RMCStatusEffectHushed applied to recipients when user has leadership skill.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan HushedEffectDuration = TimeSpan.FromSeconds(5);
 }

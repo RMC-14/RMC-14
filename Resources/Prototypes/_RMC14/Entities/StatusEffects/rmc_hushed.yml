@@ -1,0 +1,9 @@
+# Forces entity to only whisper instead of speaking normally (RMC14)
+- type: entity
+  parent: MobStatusEffectBase
+  id: RMCStatusEffectHushed
+  name: hushed
+  components:
+  - type: StatusEffect
+    alert: RMCHushed
+  - type: RMCHushedStatusEffect
