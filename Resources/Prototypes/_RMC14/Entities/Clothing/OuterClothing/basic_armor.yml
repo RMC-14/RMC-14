@@ -32,6 +32,8 @@
   description: A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement.
   suffix: Civilian
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/riot_civilian.rsi
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_HEAVY
     walkModifier: 0.62
     sprintModifier: 0.62
