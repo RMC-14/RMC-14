@@ -5,6 +5,8 @@ rmc-jelly-3 = Royal jelly of sabotage
 rmc-jelly-4 = Royal jelly of proliferation
 rmc-jelly-5 = Royal jelly of rejuvenation
 
+rmc-jelly-special-1 = Queen Mother Royal jelly of supremacy
+
 # Jelly UI
 rmc-jelly-recipient = Jelly Recipient
 rmc-jelly-recipient-prompt = Who do you want to award a jelly to?
