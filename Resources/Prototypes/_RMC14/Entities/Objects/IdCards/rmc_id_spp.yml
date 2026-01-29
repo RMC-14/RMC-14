@@ -1,17 +1,4 @@
 ﻿- type: entity
-  id: FactionSPP
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: IFFFaction
-  - type: FactionFrequencies
-    channels:
-    - SPP
-    - SPPCommand
-    - SPPEngi
-    - SPPMed
-    - SPPCCT
-
-- type: entity
   id: FactionHalcyon
   categories: [ HideSpawnMenu ]
   components:
@@ -26,6 +13,7 @@
   - type: ItemIFF
     factions:
     - FactionSPP
+
 - type: entity
   parent: [ RMCIDCardStandardDogtagHidden, RMCIDSPP ]
   id: RMCIDSPPHidden
@@ -42,6 +30,8 @@
   - type: ItemIFF
     factions:
     - FactionSurvivor
+    - FactionSPP
+
 - type: entity
   parent: CMIDCardSilver
   id: RMCIDCardHalcyon
