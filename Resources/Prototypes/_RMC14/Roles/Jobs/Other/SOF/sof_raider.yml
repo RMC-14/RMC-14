@@ -11,7 +11,7 @@
   joinNotifyCrew: false
   accessGroups:
   - ShipMasterAccess
-  spawnMenuRoleName: MARSOC Raider
+  spawnMenuRoleName: MARSOC Raider (DEATHSQUAD)
   special:
   - !type:AddComponentSpecial
     components:
@@ -33,6 +33,13 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: sof_sg
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_sof
   hidden: true
 
 - type: entity
@@ -71,19 +78,16 @@
     head: RMCArmorHelmetMARSOC
     mask: RMCMaskBalaclavaMARSOC
     ears: RMCHeadsetMARSOC
-    jumpsuit: RMCJumpsuitMarsocWebbingBuckshot
+    jumpsuit: RMCJumpsuitMarsocWebbingGrenades
     outerClothing: RMCArmorMARSOCXM40
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     suitstorage: RMCWeaponRifleXM40
     id: RMCDogtagMarineRaider
-    belt: RMCWeaponShotgunXM38Filled
+    belt: RMCBeltMOU482Filled
     back: RMCSatchelMARSOC
     pocket1: RMCPouchMedicalSocMarineRaiderFill # TODO RMC14
     pocket2: RMCPouchToolsSocMarineRaiderFill
-  storage:
-    back:
-    - RMCVisorNightVision # TODO RMC14
 
 - type: playTimeTracker
   id: CMJobMarineRaider

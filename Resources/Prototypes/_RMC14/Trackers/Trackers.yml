@@ -155,6 +155,10 @@
   id: MARSOCLeader
   job: CMMarineRaiderLeader
 
+- type: trackerMode
+  id: MARSOCOfficer
+  job: CMMarineRaiderOfficer
+
 # Humanoid component trackers
 
 - type: trackerMode

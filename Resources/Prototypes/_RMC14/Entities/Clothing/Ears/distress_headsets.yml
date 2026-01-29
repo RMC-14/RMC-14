@@ -280,3 +280,4 @@
     defaultMode: MARSOCLeader
     trackerModes:
     - MARSOCLeader
+    - MARSOCOfficer
