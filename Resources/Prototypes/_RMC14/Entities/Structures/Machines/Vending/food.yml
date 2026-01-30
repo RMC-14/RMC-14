@@ -178,6 +178,9 @@
       - id: CMDrinkCanBeerLite
         name: beer
         amount: 6
+      - id: RMCDrinkCanSequoiaBeer
+        name: sequoia beer
+        amount: 6
       - id: RMCDrinkAlcoholGrenadine
         amount: 5
       - id: RMCDrinkAlcoholTequila
