@@ -155,7 +155,7 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
     {
-        // Skip if we're already reverting (prevent infinite recursion)
+        // Skip if we're already reverting; prevents infitnite loop then crash.
         if (_isRevertingMove)
             return;
 
