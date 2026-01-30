@@ -83,37 +83,32 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         watchingComp.Watching = toWatch;
         watchingComp.isOverridden = isCameraOverridden;
 
-        // Only overrides nearby entities if extra zoom/offset is active
         var overridden = new List<EntityUid>();
-        var offsetActive = watcher.Comp2 != null && watcher.Comp2.Offset != Vector2.Zero;
 
-        if (offsetActive)
+        try
         {
-            try
+            var mapCoords = _transform.GetMapCoordinates(toWatch.Owner);
+            var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+            foreach (var ent in nearby)
             {
-                var mapCoords = _transform.GetMapCoordinates(toWatch.Owner);
-                var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
-                foreach (var ent in nearby)
-                {
-                    if (ent == watcher.Owner)
-                        continue;
+                if (ent == watcher.Owner)
+                    continue;
 
-                    try
+                try
+                {
+                    if (watchSession != null)
                     {
-                        if (watchSession != null)
-                        {
-                            _pvsOverride.AddSessionOverride(ent, watchSession);
-                            overridden.Add(ent);
-                        }
-                    }
-                    catch
-                    {
+                        _pvsOverride.AddSessionOverride(ent, watchSession);
+                        overridden.Add(ent);
                     }
                 }
+                catch
+                {
+                }
             }
-            catch
-            {
-            }
+        }
+        catch
+        {
         }
 
         watchingComp.OverriddenEntities = overridden.Count > 0 ? overridden : null;
@@ -211,37 +206,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
                 continue;
 
             var session = actor.PlayerSession;
-            var watcherOffsetActive = false;
-            try
-            {
-                if (TryComp(watcher, out EyeComponent? watcherEye))
-                    watcherOffsetActive = watcherEye.Offset != Vector2.Zero;
-            }
-            catch
-            {
-            }
-
-            // Removes overridden entities when the camera zoom/offset is reset
-            if (!watcherOffsetActive)
-            {
-                if (watchingComp.OverriddenEntities != null && session != null)
-                {
-                    foreach (var ent in watchingComp.OverriddenEntities)
-                    {
-                        try
-                        {
-                            _pvsOverride.RemoveSessionOverride(ent, session);
-                        }
-                        catch
-                        {
-                        }
-                    }
-
-                    watchingComp.OverriddenEntities = null;
-                }
-
-                continue;
-            }
 
             var overridden = new List<EntityUid>();
             try
