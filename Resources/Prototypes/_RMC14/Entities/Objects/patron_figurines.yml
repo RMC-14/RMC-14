@@ -2089,7 +2089,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronIgnisNightfireNyx
   name: Ignis 'Nightfire' Nyx figurine
-  #description: ""
+  description: "You can almost smell the ash and fire of the flames that this pyromaniac uses..."
   components:
   - type: Sprite
     state: ignis_nightfire_nyx
