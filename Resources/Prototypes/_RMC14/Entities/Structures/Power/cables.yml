@@ -28,6 +28,48 @@
     state: cable_4
 
 - type: entity
+  parent: RMCCableTerminal
+  id: RMCCableBlue
+  name: power cable
+  suffix: Blue
+  description: This cable is tough. It cannot be cut with simple hand tools.
+  components:
+  - type: Cable
+    cuttingQuality: null
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactblue
+  - type: Icon
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactblue
+
+- type: entity
+  parent: RMCCableBlue
+  id: RMCCableRed
+  name: power cable
+  suffix: Red
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactred
+  - type: Icon
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactred
+
+- type: entity
+  parent: RMCCableBlue
+  id: RMCCableYellow
+  name: power cable
+  suffix: Yellow
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactyellow
+  - type: Icon
+    sprite: _RMC14/Structures/Power/cables_thin.rsi
+    state: intactyellow
+
+- type: entity
   parent: CableTerminal
   id: RMCCableTerminal
   suffix: RMC

@@ -64,7 +64,7 @@
     - PillCanister
   - type: IconLabel
     textColor: White
-    storedOffset: 3, 12
+    storedOffset: -12, 12
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -82,6 +82,9 @@
       - RMCBeltMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 500
 
 - type: entity
   parent: RMCPillCanisterNoSkill

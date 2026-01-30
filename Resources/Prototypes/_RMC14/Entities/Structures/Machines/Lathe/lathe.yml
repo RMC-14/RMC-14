@@ -38,8 +38,8 @@
     - RMCRecipesLathe
   - type: MaterialStorage
     storage:
-      CMSteel: 800
-      CMGlass: 53
+      CMSteel: 30000
+      CMGlass: 2000
     whitelist:
       components:
       - FloorTile
@@ -104,7 +104,7 @@
   - CMCrowbar
   - CMMultitool
   - CMTRayScanner
-  - CMWelderSmall
+  - RMCWelderEmpty
   - CMScrewdriver
   - CMWirecutter
   - CMWrench
