@@ -49,6 +49,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {
@@ -321,6 +322,25 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
 
         Dirty(chain, chainComp);
+    }
+
+    public bool TryGetPreviewTiles(
+        Entity<RMCFlamerAmmoProviderComponent> flamer,
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates,
+        [NotNullWhen(true)] out List<LineTile>? tiles)
+    {
+        return CanShootFlamer(flamer, fromCoordinates, toCoordinates, out tiles, out _, out _, out _);
+    }
+
+    public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
+    {
+        color = default;
+        if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
+            return false;
+
+        color = solutionEnt.Value.Comp.Solution.GetColor(_prototypes);
+        return true;
     }
 
     private bool CanShootFlamer(

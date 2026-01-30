@@ -1456,6 +1456,9 @@ RMCWeaponFlamerImprovised: RMCWeaponFlamerColony
 # 2026-1-03
 CMM77BeltFilled: RMCM77BeltFilled
 
-# 2025-01-04
+# 2026-01-04
 CMGasTankOxygen: RMCGasTankOxygenFilled
 RMCGasTankPhoron: RMCGasTankPhoronFilled
+
+# 2026-1-15
+ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
