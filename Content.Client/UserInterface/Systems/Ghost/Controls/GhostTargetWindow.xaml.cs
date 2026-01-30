@@ -15,35 +15,27 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
     [GenerateTypedNameReferences]
     public sealed partial class GhostTargetWindow : DefaultWindow
     {
+        private const string HeadingIndicatorCollapsed = "+";
+        private const string HeadingIndicatorExpanded = "-";
         private record SortOption(string Label, string Tooltip, string TypeLabel);
-
-        private sealed record FilterOption(
-            string Label,
-            string Tooltip,
-            Func<IEnumerable<GhostWarp>, IEnumerable<GhostWarp>> Apply,
-            Func<IEnumerable<GhostWarp>, IOrderedEnumerable<GhostWarp>> Order) : SortOption(Label, Tooltip, "ghost-target-window-type-filter-button");
-
-        private sealed record SortTypeOption(
-            string Label,
-            string Tooltip,
-            Func<GhostWarp, string> KeySelector,
-            Func<IOrderedEnumerable<GhostWarp>, IOrderedEnumerable<GhostWarp>> Apply)
-            : SortOption(Label, Tooltip, "ghost-target-window-type-sort-by-button");
 
         private sealed record SortOrderOption(
             string Label,
             string Tooltip,
-            Func<IOrderedEnumerable<GhostWarp>, SortTypeOption, IOrderedEnumerable<GhostWarp>> Apply)
+            Func<IOrderedEnumerable<GhostWarp>, Func<GhostWarp, string>, Comparer<string>, IOrderedEnumerable<GhostWarp>> Apply)
             : SortOption(Label, Tooltip, "ghost-target-window-type-sort-dir-button");
 
-        private readonly IPrototypeManager _prototypeManager = default!;
+        private record WarpCategory(
+            string Label,
+            Func<IEnumerable<GhostWarp>, IEnumerable<GhostWarp>> Filter,
+            Func<GhostWarp, string> DisplayName,
+            bool WarpsToEnd = true);
+
+        private readonly IPrototypeManager _prototypeManager;
         private List<GhostWarp> _warps = new();
-        // ? Loc.GetString("ghost-target-window-current-button", ("name", w.entityName))
         private string _searchText = string.Empty;
 
         private int _sortOrder;
-        private int _sortType;
-        private int _filter;
 
         private static readonly Regex RoleRegex = new(@"\(([^)]+)\)\s*$", RegexOptions.Compiled);
 
@@ -51,13 +43,13 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             Comparer<string>.Create((x, y) => string.Compare(x, y, StringComparison.OrdinalIgnoreCase));
 
         private readonly SortOrderOption[] _sortOrderOptions;
-        private readonly SortTypeOption[] _sortTypeOptions;
-        private readonly FilterOption[] _filterOptions;
+
+        private WarpCategory? _selectedCategory;
+        private readonly List<(WarpCategory Category, BaseButton Button)> _categoryButtons = new();
+        private readonly string[] _jobXenoTranslations;
 
         public event Action<NetEntity>? WarpClicked;
         public event Action? OnGhostnadoClicked;
-
-        private string[] jobXenoTranslations = default!;
 
         public GhostTargetWindow()
         {
@@ -68,54 +60,22 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             _prototypeManager = IoCManager.Resolve<IPrototypeManager>();
 
-            jobXenoTranslations = _prototypeManager.EnumeratePrototypes<JobPrototype>()
+            _jobXenoTranslations = _prototypeManager.EnumeratePrototypes<JobPrototype>()
                 .Where(j => j.Parents != null && j.Parents.Contains("CMJobXenoBase"))
                 .Select(j => j.LocalizedName)
                 .ToArray();
 
             _sortOrderOptions =
             [
-                new("↑",
+                new("\u2191",
                     "ghost-target-window-type-sort-dir-asc-title",
-                    (w, sortType) => w.ThenBy(sortType.KeySelector, OrdinalIgnoreCaseComparer)),
-                new("↓",
+                    (ordered, key, comp) => ordered.ThenBy(key, comp)),
+                new("\u2193",
                     "ghost-target-window-type-sort-dir-desc-title",
-                    (w, sortType) => w.ThenByDescending(sortType.KeySelector, OrdinalIgnoreCaseComparer)),
+                    (ordered, key, comp) => ordered.ThenByDescending(key, comp)),
             ];
 
-            _sortTypeOptions =
-            [
-                new("N",
-                    "ghost-target-window-type-sort-by-name-title",
-                    w => w.,
-                    e => e),
-                new("R",
-                    "ghost-target-window-type-sort-by-role-title",
-                    w => ExtractRole(w.Name),
-                    e => e.ThenBy(w => !string.IsNullOrEmpty(ExtractRole(w.Name)))),
-            ];
-
-            _filterOptions =
-            [
-                new("A",
-                    "ghost-target-window-type-filter-all-title",
-                    w => w,
-                    e => e.OrderBy(w => w.IsWarp)),
-                new("M",
-                    "ghost-target-window-type-filter-marines-title",
-                    w => w.Where(e => !e.IsWarp && !jobXenoTranslations.Any(j =>
-                        string.Equals(j, ExtractRole(e.Name), StringComparison.OrdinalIgnoreCase))),
-                    e => e.OrderBy(w => 0)),
-                new("X",
-                    "ghost-target-window-type-filter-xeno-title",
-                    w => w.Where(e => !e.IsWarp && jobXenoTranslations.Any(j =>
-                        string.Equals(j, ExtractRole(e.Name), StringComparison.OrdinalIgnoreCase))),
-                    e => e.OrderBy(w => 0)),
-                new("W",
-                    "ghost-target-window-type-filter-warps-title",
-                    w => w.Where(e => e.IsWarp),
-                    e => e.OrderBy(w => 0)),
-            ];
+            _selectedCategory = null;
 
             UpdateSortButtonAppearance();
 
@@ -125,27 +85,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 UpdateSortButtonAppearance();
                 Populate();
             };
-
-            SortTypeButton.OnPressed += _ =>
-            {
-                _sortType = (_sortType + 1) % _sortTypeOptions.Length;
-                UpdateSortButtonAppearance();
-                Populate();
-            };
-
-            FilterButton.OnPressed += _ =>
-            {
-                _filter = (_filter + 1) % _filterOptions.Length;
-                UpdateSortButtonAppearance();
-                Populate();
-            };
         }
 
         private void UpdateSortButtonAppearance()
         {
             ApplyOption(SortOrderButton, _sortOrderOptions[_sortOrder]);
-            ApplyOption(SortTypeButton, _sortTypeOptions[_sortType]);
-            ApplyOption(FilterButton, _filterOptions[_filter]);
         }
 
         private static void ApplyOption(Button button, SortOption option)
@@ -153,19 +97,220 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             button.Text = option.Label;
             button.HideTooltip();
             var tooltip = new Tooltip();
-            tooltip.SetMessage(FormattedMessage.FromUnformatted(Loc.GetString(option.TypeLabel, ("type", Loc.GetString(option.Tooltip)))));
+            tooltip.SetMessage(FormattedMessage.FromUnformatted(
+                Loc.GetString(option.TypeLabel, ("type", Loc.GetString(option.Tooltip)))));
             button.TooltipSupplier = _ => tooltip;
         }
 
-        private static string ExtractRole(string name)
+        private static string PlayerDisplayName(GhostWarp w) =>
+            w is PlayerGhostWarp { jobName: { Length: > 0 } job } pgw
+                ? $"{pgw.entityName} ({job})"
+                : w.entityName;
+
+        private static string WarpPointDisplayName(GhostWarp w) =>
+            Loc.GetString("ghost-target-window-current-button", ("name", w.entityName));
+
+        private static string DefaultDisplayName(GhostWarp w) => w switch
         {
-            var match = RoleRegex.Match(name);
-            return match.Success ? match.Groups[1].Value : string.Empty;
-        }
+            PlayerGhostWarp pgw => PlayerDisplayName(pgw),
+            _ => WarpPointDisplayName(w),
+        };
 
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
             _warps = warps.ToList();
+            PopulateCategories();
+
+            // Clear selection if the category no longer exists
+            if (_selectedCategory != null &&
+                !_categoryButtons.Any(cb => cb.Category.Label == _selectedCategory.Label))
+            {
+                _selectedCategory = null;
+            }
+        }
+
+        private void PopulateCategories()
+        {
+            _categoryButtons.Clear();
+            CategoryContainer.DisposeAllChildren();
+
+            var players = _warps.OfType<PlayerGhostWarp>().ToList();
+
+            // Marines: players whose job is NOT in xeno translations
+            var marineJobs = players
+                .Where(p => !_jobXenoTranslations.Any(j =>
+                    string.Equals(j, p.jobName, StringComparison.OrdinalIgnoreCase)))
+                .Select(p => p.jobName)
+                .Distinct(new CaseInsensitiveComparer())
+                .OrderBy(j => j, OrdinalIgnoreCaseComparer)
+                .ToArray();
+
+            if (marineJobs.Length > 0)
+            {
+                var jobs = marineJobs;
+                var marineCategory = new WarpCategory(
+                    "ghost-target-window-type-filter-marines-title",
+                    w => w.Where(e => e is PlayerGhostWarp pgw &&
+                        jobs.Any(j => string.Equals(j, pgw.jobName, StringComparison.OrdinalIgnoreCase))),
+                    PlayerDisplayName);
+                AddCollapsibleCategory(marineCategory, marineJobs, _selectedCategory?.Label == marineCategory.Label);
+            }
+
+            // Xenos: players whose job IS in xeno translations
+            var xenoJobs = players
+                .Where(p => _jobXenoTranslations.Any(j =>
+                    string.Equals(j, p.jobName, StringComparison.OrdinalIgnoreCase)))
+                .Select(p => p.jobName)
+                .Distinct(new CaseInsensitiveComparer())
+                .OrderBy(j => j, OrdinalIgnoreCaseComparer)
+                .ToArray();
+
+            if (xenoJobs.Length > 0)
+            {
+                var jobs = xenoJobs;
+                var xenoCategory = new WarpCategory(
+                     "ghost-target-window-type-filter-xeno-title",
+                    w => w.Where(e => e is PlayerGhostWarp pgw &&
+                        jobs.Any(j => string.Equals(j, pgw.jobName, StringComparison.OrdinalIgnoreCase))),
+                    PlayerDisplayName);
+                AddCollapsibleCategory(xenoCategory, xenoJobs, _selectedCategory?.Label == xenoCategory.Label);
+            }
+
+            if (!_warps.Any(w => w.isWarpPoint))
+                return;
+
+            var warpsCategory = new WarpCategory(
+                "ghost-target-window-type-filter-warps-title",
+                w => w.Where(e => e.isWarpPoint),
+                WarpPointDisplayName,
+                WarpsToEnd: false);
+            AddCategoryButton(warpsCategory, _selectedCategory?.Label == warpsCategory.Label);
+        }
+
+        private void SelectCategory(WarpCategory? category)
+        {
+            _selectedCategory = _selectedCategory?.Label == category?.Label ? null : category;
+            UpdateCategorySelection();
+            Populate();
+        }
+
+        private void UpdateCategorySelection()
+        {
+            foreach (var (cat, btn) in _categoryButtons)
+            {
+                if (btn is Button button)
+                    button.Pressed = _selectedCategory?.Label == cat.Label;
+            }
+        }
+
+        private void AddCategoryButton(WarpCategory category, bool selected)
+        {
+            var button = new Button
+            {
+                Text = Loc.GetString(category.Label),
+                HorizontalExpand = true,
+                TextAlign = Label.AlignMode.Left,
+                ToggleMode = true,
+                Pressed = selected,
+            };
+
+            button.OnPressed += _ => SelectCategory(category);
+
+            _categoryButtons.Add((category, button));
+            CategoryContainer.AddChild(button);
+        }
+
+        private void AddCollapsibleCategory(WarpCategory category, string[] jobs, bool selected)
+        {
+            var heading = new CollapsibleHeading(Loc.GetString(category.Label));
+            // heading.AddStyleClass(ContainerButton.StyleClassButton);
+            heading.HorizontalExpand = true;
+            heading.Label.HorizontalAlignment = HAlignment.Left;
+            heading.Label.HorizontalExpand = true;
+            heading.SetHeight = 29;
+
+            heading.ChevronVisible = false;
+            var indicator = new Label { Text = HeadingIndicatorCollapsed };
+            if (heading.GetChild(0) is BoxContainer box)
+                box.AddChild(indicator);
+
+            heading.OnToggled += args =>
+            {
+                indicator.Text = args.Pressed ? HeadingIndicatorExpanded : HeadingIndicatorCollapsed;
+            };
+
+            var body = new CollapsibleBody
+            {
+                Margin = new Thickness(8, 5, 0, 0),
+            };
+
+            var jobList = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                SeparationOverride = 5,
+            };
+
+            if (jobs.Length > 1)
+            {
+                // Group filter button (filters by entire category)
+                var groupButton = new Button
+                {
+                    Text = Loc.GetString("ghost-target-window-type-filter-all-title"),
+                    HorizontalExpand = true,
+                    TextAlign = Label.AlignMode.Left,
+                    ToggleMode = true,
+                    Pressed = selected,
+                    MaxWidth = 340,
+                };
+                groupButton.OnPressed += _ => SelectCategory(category);
+                _categoryButtons.Add((category, groupButton));
+                jobList.AddChild(groupButton);
+            }
+
+            // Individual job buttons
+            foreach (var job in jobs)
+            {
+                var capturedJob = job;
+                var jobCategory = new WarpCategory(
+                    capturedJob,
+                    w => w.Where(e => e is PlayerGhostWarp pgw &&
+                        string.Equals(pgw.jobName, capturedJob, StringComparison.OrdinalIgnoreCase)),
+                    PlayerDisplayName);
+
+                var jobButton = new Button
+                {
+                    Text = capturedJob,
+                    HorizontalExpand = true,
+                    TextAlign = Label.AlignMode.Left,
+                    ToggleMode = true,
+                    Pressed = _selectedCategory?.Label == capturedJob,
+                    ClipText = true,
+                    MaxWidth = 340,
+                };
+                jobButton.OnPressed += _ => SelectCategory(jobCategory);
+                _categoryButtons.Add((jobCategory, jobButton));
+                jobList.AddChild(jobButton);
+            }
+
+            body.AddChild(jobList);
+
+            var collapsible = new Collapsible(heading, body)
+            {
+                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                HorizontalExpand = true,
+            };
+
+            // Restore expanded state if the selected category is within this group
+            var shouldExpand = _selectedCategory != null &&
+                (_selectedCategory.Label == category.Label ||
+                 jobs.Any(j => string.Equals(j, _selectedCategory.Label, StringComparison.OrdinalIgnoreCase)));
+            if (shouldExpand)
+            {
+                collapsible.BodyVisible = true;
+                indicator.Text = HeadingIndicatorExpanded;
+            }
+
+            CategoryContainer.AddChild(collapsible);
         }
 
         public void Populate()
@@ -176,16 +321,17 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private IEnumerable<GhostWarp> GetSortedWarps()
         {
-            var filterOption = _filterOptions[_filter];
-            var filtered = filterOption.Apply(_warps);
+            var filtered = _selectedCategory != null
+                ? _selectedCategory.Filter(_warps)
+                : _warps.AsEnumerable();
 
-            var baseOrder = filterOption.Order(filtered);
-
-            var sortTypeOption = _sortTypeOptions[_sortType];
-            baseOrder = sortTypeOption.Apply(baseOrder);
+            var warpsToEnd = _selectedCategory?.WarpsToEnd ?? true;
+            var baseOrder = warpsToEnd
+                ? filtered.OrderBy(w => w.isWarpPoint)
+                : filtered.OrderBy(_ => 0);
 
             var sortOrderOption = _sortOrderOptions[_sortOrder];
-            return sortOrderOption.Apply(baseOrder, sortTypeOption);
+            return sortOrderOption.Apply(baseOrder, w => w.entityName, OrdinalIgnoreCaseComparer);
         }
 
         private void AddButtons()
@@ -194,7 +340,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             {
                 var currentButtonRef = new Button
                 {
-                    Text = entry.Name,
+                    Text = (_selectedCategory?.DisplayName ?? DefaultDisplayName)(entry),
                     TextAlign = Label.AlignMode.Right,
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Center,
@@ -203,7 +349,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     ClipText = true,
                 };
 
-                currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(entry.Entity);
+                currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(entry.entity);
                 currentButtonRef.Visible = ButtonIsVisible(currentButtonRef);
 
                 ButtonContainer.AddChild(currentButtonRef);
@@ -212,7 +358,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         private bool ButtonIsVisible(Button button)
         {
-            return string.IsNullOrEmpty(_searchText) || button.Text == null || button.Text.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
+            return string.IsNullOrEmpty(_searchText) || button.Text == null ||
+                   button.Text.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
         }
 
         private void UpdateVisibleButtons()
@@ -229,8 +376,16 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             _searchText = args.Text;
 
             UpdateVisibleButtons();
-            // Reset scroll bar so they can see the relevant results.
             GhostScroll.SetScrollValue(Vector2.Zero);
+        }
+
+        private sealed class CaseInsensitiveComparer : IEqualityComparer<string>
+        {
+            public bool Equals(string? x, string? y) =>
+                string.Equals(x, y, StringComparison.OrdinalIgnoreCase);
+
+            public int GetHashCode(string obj) =>
+                obj.ToUpperInvariant().GetHashCode();
         }
     }
 }

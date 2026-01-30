@@ -120,6 +120,11 @@ namespace Content.Shared.Ghost
     [Serializable, NetSerializable]
     public record GhostWarp(NetEntity entity, string entityName, bool isWarpPoint);
 
+    /// <summary>
+    /// A player a ghost can warp to.
+    /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
+    /// </summary>
+    [Serializable, NetSerializable]
     public record PlayerGhostWarp(NetEntity entity, string entityName, string jobName) : GhostWarp(entity, entityName, false);
 
     /// <summary>
