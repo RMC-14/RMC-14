@@ -2131,7 +2131,7 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronSquealerSqueak
+  id: RMCFigurinePatronTheLazySlothComu
   name: figurine
   description: "They don't know how they got turned into a marketable mini figure..."
   components:
