@@ -2150,3 +2150,14 @@
     state: anne_artichoke_powell
   - type: PatronFigurine
     id: aedb33a3-d3b1-4bec-a90a-9c718fa7bef0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVexsZirnita
+  name: Vexs Zirnita figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: vexs_zirnita
+  - type: PatronFigurine
+    id: 77c0299b-d5ac-4841-8a96-68935faa91ed
