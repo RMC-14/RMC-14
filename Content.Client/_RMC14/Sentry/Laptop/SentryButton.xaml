@@ -1,0 +1,9 @@
+﻿<cc:SentryButton
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Sentry.Laptop"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
+    <PanelContainer.PanelOverride>
+        <graphics:StyleBoxFlat />
+    </PanelContainer.PanelOverride>
+    <cc:SentryInnerButton Name="Button" Access="Public" StyleClasses="OpenBoth" />
+</cc:SentryButton>

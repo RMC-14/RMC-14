@@ -90,7 +90,7 @@
     - RMCTankFlamerColony
 
 - type: entity
-  parent: BaseItem
+  parent: RMCBaseTankFlamer
   id: RMCTankFlamerColony
   name: LC9 flamer tank
   description: A fuel tank used to store fuel for use in the LC9 incinerator unit. Handle with care.
@@ -113,13 +113,11 @@
   - type: RMCSolutionTransferWhitelist
     popup: rmc-solution-transfer-whitelist-failed-not-reagent-tank
     targetWhitelist:
+      components:
+      - RMCFlamerBackpack
       tags:
       - RMCTankReagent
       - RMCBackpackFlamer
-  - type: RefillableSolution
-    solution: rmc_flamer_tank
-  - type: DetailedExaminableSolution
-    solution: rmc_flamer_tank
   - type: NoMixingReagents
   - type: Appearance
   - type: SolutionStorageFillable

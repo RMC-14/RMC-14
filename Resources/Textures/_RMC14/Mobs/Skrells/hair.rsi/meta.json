@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/0f40ce0385e9ee74005ac5b78e6df3c418969f5c/icons/mob/human_races/species/skrell/hair.dmi",
+  "copyright": "Taken from Baystation12 at https://github.com/Baystation12/Baystation12/blob/0f40ce0385e9ee74005ac5b78e6df3c418969f5c/icons/mob/human_races/species/skrell/hair.dmi, and Aurorastation at https://github.com/Aurorastation/Aurora.3/blob/e106fbefecfc8806fc6ec4ebda489a3a45868db1/icons/mob/human_face/skrell_hair.dmi, skrell_fluff_hair was inspired by zeke_fluff_hair_s at https://github.com/ParadiseSS13/Paradise/blob/f9815fac410eda828448e1e438021e7bba37f575/icons/mob/sprite_accessories/skrell/skrell_hair.dmi and resprited to work within SS14 by Monotheonist alongside skrell_hair_short, skrell_hair_long and the respective tips / hairties / hoops",
   "size": {
     "x": 32,
     "y": 32
@@ -12,7 +12,79 @@
       "directions": 4
     },
     {
+      "name": "skrell_hair_f_s_tips",
+      "directions": 4
+    },
+    {
       "name": "skrell_hair_m_s",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_short",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_hair_long_tips",
+      "directions": 4
+    },
+    {
+      "name": "skrell_fluff_hair",
+      "directions": 4
+    },
+    {
+      "name": "skrell_long_tuux",
+      "directions": 4
+    },
+    {
+      "name": "skrell_short_tuux",
+      "directions": 4
+    },
+    {
+      "name": "skrell_straight_tuux",
+      "directions": 4
+    },
+    {
+      "name": "skrell_straight_tuux_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_mid_bun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_mid_bun_hairtie",
+      "directions": 4
+    },
+    {
+      "name": "skrell_long_mid_bun",
+      "directions": 4
+    },
+    {
+      "name": "skrell_loose_braid",
+      "directions": 4
+    },
+    {
+      "name": "skrell_left_emo",
+      "directions": 4
+    },
+    {
+      "name": "skrell_right_emo",
+      "directions": 4
+    },
+    {
+      "name": "skrell_left_emo_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_right_emo_long",
+      "directions": 4
+    },
+    {
+      "name": "skrell_mullet",
       "directions": 4
     }
   ]
