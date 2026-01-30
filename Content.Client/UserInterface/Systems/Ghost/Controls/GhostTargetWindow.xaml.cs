@@ -15,31 +15,30 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
     [GenerateTypedNameReferences]
     public sealed partial class GhostTargetWindow : DefaultWindow
     {
-        private sealed record WarpEntry(string Name, NetEntity Entity, bool IsWarp);
-
         private record SortOption(string Label, string Tooltip, string TypeLabel);
 
         private sealed record FilterOption(
             string Label,
             string Tooltip,
-            Func<IEnumerable<WarpEntry>, IEnumerable<WarpEntry>> Apply,
-            Func<IEnumerable<WarpEntry>, IOrderedEnumerable<WarpEntry>> Order) : SortOption(Label, Tooltip, "ghost-target-window-type-filter-button");
+            Func<IEnumerable<GhostWarp>, IEnumerable<GhostWarp>> Apply,
+            Func<IEnumerable<GhostWarp>, IOrderedEnumerable<GhostWarp>> Order) : SortOption(Label, Tooltip, "ghost-target-window-type-filter-button");
 
         private sealed record SortTypeOption(
             string Label,
             string Tooltip,
-            Func<WarpEntry, string> KeySelector,
-            Func<IOrderedEnumerable<WarpEntry>, IOrderedEnumerable<WarpEntry>> Apply)
+            Func<GhostWarp, string> KeySelector,
+            Func<IOrderedEnumerable<GhostWarp>, IOrderedEnumerable<GhostWarp>> Apply)
             : SortOption(Label, Tooltip, "ghost-target-window-type-sort-by-button");
 
         private sealed record SortOrderOption(
             string Label,
             string Tooltip,
-            Func<IOrderedEnumerable<WarpEntry>, SortTypeOption, IOrderedEnumerable<WarpEntry>> Apply)
+            Func<IOrderedEnumerable<GhostWarp>, SortTypeOption, IOrderedEnumerable<GhostWarp>> Apply)
             : SortOption(Label, Tooltip, "ghost-target-window-type-sort-dir-button");
 
         private readonly IPrototypeManager _prototypeManager = default!;
-        private List<WarpEntry> _warps = new();
+        private List<GhostWarp> _warps = new();
+        // ? Loc.GetString("ghost-target-window-current-button", ("name", w.entityName))
         private string _searchText = string.Empty;
 
         private int _sortOrder;
@@ -88,7 +87,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             [
                 new("N",
                     "ghost-target-window-type-sort-by-name-title",
-                    w => w.Name,
+                    w => w.,
                     e => e),
                 new("R",
                     "ghost-target-window-type-sort-by-role-title",
@@ -166,17 +165,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
-            // Server COULD send these sorted but how about we just use the client to do it instead
-            _warps = warps
-                .Select(w =>
-                {
-                    var name = w.IsWarpPoint
-                        ? Loc.GetString("ghost-target-window-current-button", ("name", w.DisplayName))
-                        : w.DisplayName;
-
-                    return new WarpEntry(name, w.Entity, w.IsWarpPoint);
-                })
-                .ToList();
+            _warps = warps.ToList();
         }
 
         public void Populate()
@@ -185,7 +174,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             AddButtons();
         }
 
-        private IEnumerable<WarpEntry> GetSortedWarps()
+        private IEnumerable<GhostWarp> GetSortedWarps()
         {
             var filterOption = _filterOptions[_filter];
             var filtered = filterOption.Apply(_warps);
