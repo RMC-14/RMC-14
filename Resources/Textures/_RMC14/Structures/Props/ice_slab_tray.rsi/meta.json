@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/cmss13-devs/cmss13/blob/7cb618c69b75873f3ce893022fe08d1233b3152d/icons/obj/structures/props/ice_colony/props.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "tray_1"
+    },
+    {
+      "name": "tray_2"
+    },
+    {
+      "name": "tray_3"
+    },
+    {
+      "name": "tray_4"
+    },
+    {
+      "name": "tray_5"
+    },
+    {
+      "name": "tray_6"
+    },
+    {
+      "name": "tray_7"
+    },
+    {
+      "name": "tray_8"
+    }
+  ]
+}

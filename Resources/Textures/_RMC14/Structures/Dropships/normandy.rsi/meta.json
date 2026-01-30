@@ -189,6 +189,9 @@
       "directions": 4
     },
     {
+      "name": "46a"
+    },
+    {
       "name": "47",
       "directions": 4
     },
@@ -199,6 +202,9 @@
     {
       "name": "49",
       "directions": 4
+    },
+    {
+      "name": "49a"
     },
     {
       "name": "50",
@@ -352,6 +358,12 @@
       "directions": 4
     },
     {
+      "name": "86a"
+    },
+    {
+      "name": "86b"
+    },
+    {
       "name": "87"
     },
     {
@@ -360,6 +372,12 @@
     {
       "name": "89",
       "directions": 4
+    },
+    {
+      "name": "89a"
+    },
+    {
+      "name": "89b"
     },
     {
       "name": "90",
@@ -391,12 +409,18 @@
       "directions": 4
     },
     {
+      "name": "95a"
+    },
+    {
       "name": "96",
       "directions": 4
     },
     {
       "name": "97",
       "directions": 4
+    },
+    {
+      "name": "97a"
     },
     {
       "name": "98",
@@ -407,6 +431,9 @@
       "directions": 4
     },
     {
+      "name": "99a"
+    },
+    {
       "name": "100",
       "directions": 4
     },
@@ -415,8 +442,17 @@
       "directions": 4
     },
     {
+      "name": "101a"
+    },
+    {
       "name": "102",
       "directions": 4
+    },
+    {
+      "name": "103"
+    },
+    {
+      "name": "104"
     },
     {
       "name": "panel_open"

@@ -1,4 +1,5 @@
-﻿using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.TacticalMap;
 
 namespace Content.Client._RMC14.Dropship.Weapon;
 

@@ -83,6 +83,26 @@
       "directions": 4
     },
     {
+      "name": "minirocket_pod_loaded_5",
+      "directions": 4
+    },
+    {
+      "name": "minirocket_pod_loaded_4",
+      "directions": 4
+    },
+    {
+      "name": "minirocket_pod_loaded_3",
+      "directions": 4
+    },
+    {
+      "name": "minirocket_pod_loaded_2",
+      "directions": 4
+    },
+    {
+      "name": "minirocket_pod_loaded_1",
+      "directions": 4
+    },
+    {
       "name": "fatty"
     },
     {
@@ -106,36 +126,6 @@
     {
       "name": "laser_beam_loaded",
       "directions": 4
-    },
-    {
-      "name": "cannon_tray"
-    },
-    {
-      "name": "cannon_tray_explosive"
-    },
-    {
-      "name": "cannon_tray_incendiary"
-    },
-    {
-      "name": "cannon_tray_cluster"
-    },
-    {
-      "name": "cannon_tray_1"
-    },
-    {
-      "name": "cannon_tray_2"
-    },
-    {
-      "name": "cannon_tray_3"
-    },
-    {
-      "name": "cannon_tray_4"
-    },
-    {
-      "name": "cannon_tray_5"
-    },
-    {
-      "name": "cannon_tray_6"
     },
     {
       "name": "rocket_pod_loadeds",

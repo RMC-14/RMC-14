@@ -1,0 +1,66 @@
+- type: job
+  parent: CMJobBase
+  id: RMCCLFHeavyGunnerPVE
+  name: rmc-job-name-clf-pve-heavy-gunner
+  description: rmc-ghost-role-information-clf-pve-description
+  playTimeTracker: CMJobCLFHeavyGunnerPVE
+  ranks:
+    RMCRankCivilian: []
+  startingGear: RMCJobCLFHeavyGunnerPVE
+  icon: RMCJobIconCLFSpecialist
+  joinNotifyCrew: false
+  accessGroups:
+  - Colony
+  - SmartGunOperator
+  spawnMenuRoleName: CLF Heavy Gunner (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - CLF
+    - type: Skills
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillSmartGun: 1
+        RMCSkillEndurance: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-clf-pve-heavy-gunner
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointCLFCHeavyGunnerPVE
+  name: clf heavy gunner spawn point
+  suffix: PVE
+  components:
+  - type: SpawnPoint
+    job_id: RMCCLFHeavyGunnerPVE
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: clf_spawn
+
+- type: startingGear
+  id: RMCJobCLFHeavyGunnerPVE
+  equipment:
+    id: RMCIDCardCLFHeavyGunnerPVE
+    jumpsuit: RMCJumpsuitCLFSoldier
+    shoes: RMCShoesJackbootsFilled
+    ears: RMCHeadsetDistressCLF
+
+- type: playTimeTracker
+  id: CMJobCLFHeavyGunnerPVE

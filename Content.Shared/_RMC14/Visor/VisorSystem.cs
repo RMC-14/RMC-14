@@ -24,6 +24,7 @@ namespace Content.Shared._RMC14.Visor;
 
 public sealed class VisorSystem : EntitySystem
 {
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -32,7 +33,6 @@ public sealed class VisorSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
 
     public override void Initialize()
     {
@@ -43,7 +43,6 @@ public sealed class VisorSystem : EntitySystem
         SubscribeLocalEvent<CycleableVisorComponent, CycleVisorActionEvent>(OnCycleableVisorAction);
         SubscribeLocalEvent<CycleableVisorComponent, InteractUsingEvent>(OnCycleableVisorInteractUsing, before: [typeof(SharedStorageSystem)]);
         SubscribeLocalEvent<CycleableVisorComponent, InventoryRelayedEvent<ScopedEvent>>(OnCycleableVisorScoped);
-        SubscribeLocalEvent<CycleableVisorComponent, ExaminedEvent>(OnCycleableVisorExamined);
         SubscribeLocalEvent<CycleableVisorComponent, GotEquippedEvent>(OnCycleableVisorEquipped);
 
         SubscribeLocalEvent<VisorComponent, ActivateVisorAttemptEvent>(OnVisorAttemptActivate);
@@ -78,8 +77,8 @@ public sealed class VisorSystem : EntitySystem
             if (!TryComp<VisorComponent>(currentContainer.ContainedEntities.FirstOrDefault(), out var visorComp))
                 return;
 
-            if (ent.Comp.Action != null)
-                ChangeActionIcon(ent.Comp.Action.Value, visorComp.OnIcon);
+            if (ent.Comp.Action is { } action)
+                _actions.SetIcon(action, visorComp.OnIcon);
         }
     }
 
@@ -117,18 +116,8 @@ public sealed class VisorSystem : EntitySystem
             Visible = true,
         }));
 
-        if (ent.Comp.Action != null)
-            ChangeActionIcon(ent.Comp.Action.Value, visorComp.OnIcon);
-    }
-
-    private void ChangeActionIcon(EntityUid action, SpriteSpecifier.Rsi icon)
-    {
-        if (!TryComp<InstantActionComponent>(action, out var instant))
-            return;
-
-        instant.Icon = icon;
-
-        Dirty(action, instant);
+        if (ent.Comp.Action is { } action)
+            _actions.SetIcon(action, visorComp.OnIcon);
     }
 
     private void OnCycleableVisorAction(Entity<CycleableVisorComponent> ent, ref CycleVisorActionEvent args)
@@ -200,8 +189,9 @@ public sealed class VisorSystem : EntitySystem
         if (startedNull && current == null)
             _popup.PopupClient(Loc.GetString("rmc-no-visors-to-swap"), ent, args.Performer, PopupType.SmallCaution);
 
-        if (ent.Comp.Action != null && current == null)
-            ChangeActionIcon(ent.Comp.Action.Value, ent.Comp.OffIcon);
+        if (ent.Comp.Action is { } action && current == null)
+            _actions.SetIcon(action, ent.Comp.OffIcon);
+
         _item.VisualsChanged(ent);
     }
 
@@ -236,8 +226,9 @@ public sealed class VisorSystem : EntitySystem
 
                 current = null;
                 _item.VisualsChanged(ent);
-                if (ent.Comp.Action != null)
-                    ChangeActionIcon(ent.Comp.Action.Value, ent.Comp.OffIcon);
+                if (ent.Comp.Action is { } action)
+                    _actions.SetIcon(action, ent.Comp.OffIcon);
+
                 _popup.PopupClient(Loc.GetString("rmc-skills-no-training", ("target", newContained)), args.Equipee, args.Equipee, PopupType.SmallCaution);
             }
         }
@@ -322,26 +313,6 @@ public sealed class VisorSystem : EntitySystem
         args.Args = ev.Event;
     }
 
-    private void OnCycleableVisorExamined(Entity<CycleableVisorComponent> ent, ref ExaminedEvent args)
-    {
-        //TODO RMC14 show the current visor that's down
-        using (args.PushGroup(nameof(CycleableVisorComponent)))
-        {
-            if (ent.Comp.CurrentVisor != null)
-            {
-                if (!ent.Comp.Containers.TryGetValue(ent.Comp.CurrentVisor.Value, out var currentId))
-                    return;
-
-                if (!_container.TryGetContainer(ent, currentId, out var currentContainer))
-                    return;
-
-                args.PushMarkup(Loc.GetString("rmc-visor-down", ("visor", currentContainer.ContainedEntities.FirstOrDefault())));
-            }
-
-            args.PushMarkup("Use a [color=cyan]screwdriver[/color] on this to take out any visors!");
-        }
-    }
-
     private void OnVisorAttemptActivate(Entity<VisorComponent> ent, ref ActivateVisorAttemptEvent args)
     {
         if (ent.Comp.SkillsRequired == null || _skills.HasSkills(args.User, ent.Comp.SkillsRequired))
@@ -352,14 +323,13 @@ public sealed class VisorSystem : EntitySystem
 
     private void OnVisorActivate(Entity<VisorComponent> ent, ref ActivateVisorEvent args)
     {
-        if (args.CycleableVisor.Comp.Action != null)
-            ChangeActionIcon(args.CycleableVisor.Comp.Action.Value, ent.Comp.OnIcon);
+        if (args.CycleableVisor.Comp.Action is { } action)
+            _actions.SetIcon(action, ent.Comp.OnIcon);
 
         if (!HasComp<PowerCellSlotComponent>(ent))
             return;
 
         _powerCell.SetDrawEnabled(ent.Owner, true);
-        _powerCell.QueueUpdate(ent.Owner);
     }
 
     private void OnVisorDeactivate(Entity<VisorComponent> ent, ref DeactivateVisorEvent args)

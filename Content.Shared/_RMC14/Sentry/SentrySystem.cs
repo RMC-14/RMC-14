@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Map;
@@ -6,6 +6,8 @@ using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.NPC;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.Homing;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -52,6 +54,9 @@ public sealed class SentrySystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedToolSystem _tools = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
+    [Dependency] private readonly GunIFFSystem _gunIFF = default!;
+    [Dependency] private readonly SharedPointLightSystem _pointLight = default!;
 
     private readonly HashSet<EntityUid> _toUpdate = new();
 
@@ -69,7 +74,6 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, SentryDisassembleDoAfterEvent>(OnSentryDisassembleDoAfter);
         SubscribeLocalEvent<SentryComponent, ExaminedEvent>(OnSentryExamined);
         SubscribeLocalEvent<SentryComponent, CombatModeShouldHandInteractEvent>(OnSentryShouldInteract);
-
         SubscribeLocalEvent<SentrySpikesComponent, AttackedEvent>(OnSentrySpikesAttacked);
 
         Subs.BuiEvents<SentryComponent>(SentryUiKey.Key,
@@ -132,6 +136,9 @@ public sealed class SentrySystem : EntitySystem
         _transform.AnchorEntity(sentry, xform);
 
         _rmcInteraction.SetMaxRotation(sentry.Owner, angle, sentry.Comp.MaxDeviation);
+
+        _targeting.ApplyDeployerFactions(sentry.Owner, args.User);
+
         UpdateState(sentry);
     }
 
@@ -148,7 +155,7 @@ public sealed class SentrySystem : EntitySystem
         {
             case SentryMode.Off:
             {
-                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange)) // TODO RMC14 more general defense check
+                foreach (var defense in _entityLookup.GetEntitiesInRange<SentryComponent>(_transform.GetMapCoordinates(sentry), sentry.Comp.DefenseCheckRange))
                 {
                     if (sentry != defense && defense.Comp.Mode == SentryMode.On)
                     {
@@ -378,6 +385,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Item);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.Off:
                 if (fixture != null)
@@ -385,6 +393,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.SleepNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.Off);
+                _pointLight.SetEnabled(sentry, false);
                 break;
             case SentryMode.On:
                 if (fixture != null)
@@ -392,6 +401,7 @@ public sealed class SentrySystem : EntitySystem
 
                 _rmcNpc.WakeNPC(sentry);
                 _appearance.SetData(sentry, SentryLayers.Layer, SentryMode.On);
+                _pointLight.SetEnabled(sentry, true);
                 break;
         }
     }
@@ -404,8 +414,6 @@ public sealed class SentrySystem : EntitySystem
     {
         coordinates = default;
         rotation = default;
-        if (!HasSkillPopup(sentry, user))
-            return false;
 
         var moverCoordinates = _transform.GetMoverCoordinateRotation(user, Transform(user));
         coordinates = moverCoordinates.Coords;
@@ -430,8 +438,6 @@ public sealed class SentrySystem : EntitySystem
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
         slot = null;
-        if (!HasSkillPopup(sentry, user))
-            return false;
 
         slot = _container.EnsureContainer<ContainerSlot>(sentry, sentry.Comp.ContainerSlotId);
         if (!_container.CanInsert(used, slot, true))
@@ -451,16 +457,6 @@ public sealed class SentrySystem : EntitySystem
         }
 
         return true;
-    }
-
-    private bool HasSkillPopup(Entity<SentryComponent> sentry, EntityUid user)
-    {
-        if (_skills.HasSkill(user, sentry.Comp.Skill, sentry.Comp.SkillLevel))
-            return true;
-
-        var msg = Loc.GetString("rmc-skills-no-training", ("target", sentry));
-        _popup.PopupClient(msg, sentry, user, PopupType.SmallCaution);
-        return false;
     }
 
     private void OpenUpgradeMenu(
@@ -545,6 +541,24 @@ public sealed class SentrySystem : EntitySystem
         sentry.Comp.Mode = mode;
         UpdateState(sentry);
         Dirty(sentry, sentry.Comp);
+        return true;
+    }
+
+    public bool TryGetSentryAmmo(EntityUid sentry, [NotNullWhen(true)] out int? ammoCount, [NotNullWhen(true)] out int? ammoCapacity, SentryComponent? sentryComponent = null)
+    {
+        ammoCount = null;
+        ammoCapacity = null;
+        if (!Resolve(sentry, ref sentryComponent, false))
+            return false;
+
+        if (!_container.TryGetContainer(sentry, sentryComponent.ContainerSlotId, out var container) ||  container.Count == 0)
+            return false;
+
+        var ammoEv = new GetAmmoCountEvent();
+        RaiseLocalEvent(container.ContainedEntities[0], ref ammoEv);
+
+        ammoCount = ammoEv.Count;
+        ammoCapacity = ammoEv.Capacity;
         return true;
     }
 

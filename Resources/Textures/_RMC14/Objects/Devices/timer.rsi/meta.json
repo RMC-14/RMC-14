@@ -1,0 +1,24 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from https://github.com/cmss13-devs/cmss13/blob/794d6668d4d1d1f767241c70b2171cbe92215421/icons/obj/items/new_assemblies.dmi, https://github.com/cmss13-devs/cmss13/blob/678d63ad96b75b1ac639436b2a9fdd7bd8009b70/icons/mob/humans/onmob/inhands/equipment/devices_lefthand.dmi, https://github.com/cmss13-devs/cmss13/blob/678d63ad96b75b1ac639436b2a9fdd7bd8009b70/icons/mob/humans/onmob/inhands/equipment/devices_righthand.dmi",
+
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "timer",
+            "directions": 1
+        },
+        {
+            "name": "inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "inhand-right",
+            "directions": 4
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+- type: job
+  parent: CMSurvivorGoon
+  id: CMSurvivorLV624CorporateDomeGoon
+  name: rmc-job-name-pmc-corporate-goon
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivor
+  spawnMenuRoleName: We-Ya Goon (Survivor Special)
+  icon: "RMCJobIconPMCGoonStandard"
+  greeting: rmc-job-greeting-corporate-dome-goon
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624CorporateDomeGoon
+  name: special survivor lv624 goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624CorporateDomeGoon
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_wy
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetLV624CorporateDomeGoon
+  name: lv624 colonist preset

@@ -30,7 +30,7 @@ public sealed class EntrenchingToolVisualsSystem : EntitySystem
         if (!TryComp(tool, out SpriteComponent? sprite))
             return;
 
-        if (_appearance.TryGetData(tool, ToggleVisuals.Toggled, out bool toggled) && toggled)
+        if (_appearance.TryGetData(tool, ToggleableVisuals.Enabled, out bool toggled) && toggled)
         {
             if (sprite.LayerMapTryGet(Base, out var baseLayer))
                 sprite.LayerSetVisible(baseLayer, true);

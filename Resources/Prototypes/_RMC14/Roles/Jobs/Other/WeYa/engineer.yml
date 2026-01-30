@@ -13,6 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Engineer
   special:
   - !type:AddComponentSpecial
     components:
@@ -31,9 +32,15 @@
         RMCSkillJtac: 2
         RMCSkillCqc: 1
         RMCSkillPowerLoader: 2
-    - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
     - type: RMCGhostWarpGroupMember
       group: RMCPMC
   hidden: true
@@ -49,6 +56,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCEngineer
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCEngineer
+  name: weya pmc engineer spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCEngineer
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCEngineer
@@ -61,6 +79,10 @@
     job: RMCPMCEngineer
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadPMC
 
@@ -69,15 +91,15 @@
   equipment:
     id: RMCIDCardPMC
     head: ArmorHelmetPMCEngineer
-    mask: RMCMaskBalaclava # TODO RMC14: M8 pattern armored balaclava
+    mask: RMCMaskCoifPMC
     ears: RMCHeadsetDistressPMC
-    jumpsuit: RMCJumpsuitMercenaryEngineer
+    jumpsuit: RMCJumpsuitVeteranPMCEngineer
     outerClothing: RMCArmorM4PMCEngineer
-    belt: CMBeltMarine
+    belt: RMCBeltPMC
     gloves: RMCHandsVeteranPMC
     shoes: RMCBootsPMCFilled
-    suitstorage: WeaponRifleSSG45
-    back: RMCBackpackWelderPMC
+    suitstorage: RMCWeaponRifleSSG45
+    back: RMCSatchelWelderPMC
     pocket1: RMCPouchToolsSocFill
     pocket2: RMCPouchConstructionFillFull
   storage:
@@ -89,7 +111,7 @@
     - RMCMagazineRifleSSG45AP
     outerClothing:
     - RMCExplosiveBreachingCharge
-    - MetalFoamGrenade # TODO RMC14: This is upstream version
+    - RMCGrenadeCustomMetalFoam
     back:
     - RMCSentryMiniWeYa
     - RMCSentryMiniWeYa
@@ -101,7 +123,7 @@
     pocket1:
     - CMWelder
     - CMEntrenchingTool
-    - CMLightReplacer
+    - RMCLightReplacer
 
 - type: playTimeTracker
   id: RMCJobPMCEngineer

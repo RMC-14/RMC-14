@@ -1,7 +1,6 @@
 ﻿- type: entity
   id: CMVendorHeadsetSquad
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -14,8 +13,7 @@
 
 - type: entity
   id: CMVendorHeadsetSquadLeader
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -28,8 +26,7 @@
 
 - type: entity
   id: CMVendorHeadsetSquadFTL
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -42,8 +39,7 @@
 
 - type: entity
   id: CMVendorHeadsetSquadComTech
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:
@@ -56,8 +52,7 @@
 
 - type: entity
   id: CMVendorHeadsetSquadCorpsman
-  categories:
-  - HideSpawnMenu
+  categories: [ HideSpawnMenu ]
   components:
   - type: CMVendorMapToSquad
     map:

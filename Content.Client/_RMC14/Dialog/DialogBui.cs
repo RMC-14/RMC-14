@@ -98,6 +98,15 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.MessageLabel.Text = s.Message.Text;
         container.MessageLineEdit.Visible = !s.LargeInput;
         container.MessageTextEdit.Visible = s.LargeInput;
+
+        // Activate input field if AutoFocus is enabled
+        if (s.AutoFocus)
+        {
+            if (!s.LargeInput)
+                container.MessageLineEdit.GrabKeyboardFocus();
+            else
+                container.MessageTextEdit.GrabKeyboardFocus();
+        }
     }
 
     private void UpdateConfirm(DialogComponent s)

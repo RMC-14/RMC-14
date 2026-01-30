@@ -59,7 +59,9 @@
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
           - RMCM5Bayonet
       rmc-aslot-rail:
         whitelist:
@@ -67,6 +69,7 @@
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
@@ -84,7 +87,7 @@
     multiplier: 0.9
 
 - type: entity
-  parent: BaseMagazineRifle
+  parent: CMMagazineRifleBase
   id: RMCMagazineSMGMAC15
   name: MAC-15 magazine (9mm)
   description: A 9mm magazine for the MAC-15.

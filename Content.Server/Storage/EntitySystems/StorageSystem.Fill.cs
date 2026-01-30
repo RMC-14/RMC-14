@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server.Spawners.Components;
 using Content.Server.Storage.Components;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared._RMC14.Storage;
 using Content.Shared.Item;
 using Content.Shared.Prototypes;
@@ -65,8 +66,7 @@ public sealed partial class StorageSystem
         }
 
         // we order the items from biggest to smallest to try and reduce poor placement in the grid.
-        var sortedItems = items
-            .OrderByDescending(x => ItemSystem.GetItemShape(x.Comp).GetArea());
+        var sortedItems = items; // RMC 14
 
         ClearCantFillReasons();
         foreach (var ent in sortedItems)
@@ -86,7 +86,10 @@ public sealed partial class StorageSystem
                     reason += $", {reasons}";
             }
 
-            Log.Error($"Tried to StorageFill {ToPrettyString(ent)} inside {ToPrettyString(uid)} but can't. reason: {reason}");
+            // RMC14
+            if (CMPrototypeExtensions.FilterCM)
+                Log.Error($"Tried to StorageFill {ToPrettyString(ent)} inside {ToPrettyString(uid)} but can't. reason: {reason}");
+
             ClearCantFillReasons();
             Del(ent);
         }

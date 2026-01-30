@@ -1,0 +1,12 @@
+- type: accessLevel
+  id: CMAccessAegis
+  name: Aegis
+
+- type: accessGroup
+  id: CMAccessAegis
+  tags:
+    - CMAccessAegis
+
+- type: accessLevel
+  id: CMAccessIllegal # "The generic "I'm a bad guy" access"
+  name: Illegal

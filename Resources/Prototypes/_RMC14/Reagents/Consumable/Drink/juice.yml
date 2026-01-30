@@ -1,0 +1,14 @@
+- type: reagent
+  id: RMCJuiceMango
+  name: rmc-reagent-name-juice-mango
+  parent: BaseJuice
+  desc: rmc-reagent-desc-juice-mango
+  physicalDesc: reagent-physical-desc-citric
+  flavor: rmcmango
+  color: "#FFBF34"
+  metamorphicSprite:
+    sprite: Objects/Consumable/Drinks/orangejuiceglass.rsi
+    state: icon_empty
+  metamorphicMaxFillLevels: 5
+  metamorphicFillBaseName: fill-
+  metamorphicChangeColor: false

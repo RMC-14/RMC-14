@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/8e8d26bbb4f1617ea1b1ffc17ffffca552ce8c11/icons/turf/floors/ice_colony/shiva_floor.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/aa8d7929c5e4f06c725897f33aea3959b0dbf665/icons/turf/floors/ice_colony/shiva_floor.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -34,83 +34,7 @@
       ]
     },
     {
-      "name": "multi_tiles",
-      "directions": 8
-    },
-    {
       "name": "snow_mat",
-      "directions": 4
-    },
-    {
-      "name": "bluefull",
-      "directions": 4
-    },
-    {
-      "name": "blue",
-      "directions": 8
-    },
-    {
-      "name": "bluecorners",
-      "directions": 4
-    },
-    {
-      "name": "greenfull",
-      "directions": 4
-    },
-    {
-      "name": "green",
-      "directions": 8
-    },
-    {
-      "name": "greencorners",
-      "directions": 4
-    },
-    {
-      "name": "redfull",
-      "directions": 4
-    },
-    {
-      "name": "red",
-      "directions": 8
-    },
-    {
-      "name": "redcorners",
-      "directions": 4
-    },
-    {
-      "name": "yellowfull",
-      "directions": 4
-    },
-    {
-      "name": "yellow",
-      "directions": 8
-    },
-    {
-      "name": "yellowcorners",
-      "directions": 4
-    },
-    {
-      "name": "purplefull",
-      "directions": 4
-    },
-    {
-      "name": "purple",
-      "directions": 8
-    },
-    {
-      "name": "purplecorners",
-      "directions": 4
-    },
-    {
-      "name": "wredfull",
-      "directions": 4
-    },
-    {
-      "name": "wred",
-      "directions": 8
-    },
-    {
-      "name": "wredcorners",
       "directions": 4
     },
     {

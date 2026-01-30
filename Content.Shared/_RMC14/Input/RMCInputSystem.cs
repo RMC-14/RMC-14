@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 
 namespace Content.Shared._RMC14.Input;
@@ -8,6 +9,7 @@ namespace Content.Shared._RMC14.Input;
 public sealed class RMCInputSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private bool _activeInputMoverEnabled;
 
@@ -26,7 +28,7 @@ public sealed class RMCInputSystem : EntitySystem
 
     private void OnActiveMapInit(Entity<ActiveInputMoverComponent> ent, ref MapInitEvent args)
     {
-        if (!_activeInputMoverEnabled)
+        if (!_activeInputMoverEnabled || _net.IsClient)
             return;
 
         if (_actorQuery.HasComp(ent))

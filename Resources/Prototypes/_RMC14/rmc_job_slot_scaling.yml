@@ -22,9 +22,9 @@
         min: 4
         max: 8
       CMStaffOfficer:
-        factor: 40
+        factor: 160
         c: 1
-        min: 2
+        min: 4
         max: 5
       CMDoctor:
         factor: 25

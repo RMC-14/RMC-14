@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: RMCMobSkrell
   name: Urist R McFrog
   suffix: RMC14
@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Skrell
   - type: Speech
+    speechVerb: Skrell
     allowedEmotes: [ 'RMCSkrellPeep', 'RMCSkrellAnger', 'RMCSkrellTrill', 'RMCSkrellWarble' ]
   - type: Vocal
     sounds:
@@ -19,6 +20,10 @@
       Brute:
         sprite: Mobs/Effects/brute_damage.rsi
         color: "#1d2cbf"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-skrell
 
 - type: entity
   parent: BaseSpeciesDummy

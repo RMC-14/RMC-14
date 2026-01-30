@@ -49,6 +49,7 @@
     sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
     drawdepth: FloorObjects
     layers:
+    - state: trapbackground
     - state: trap
       map: [ "enum.XenoResinHoleLayers.Base" ]
   - type: GenericVisualizer
@@ -63,9 +64,11 @@
           Acid2: {state: trapacid2}
           Acid3: {state: trapacid3}
   - type: Appearance
+  - type: RMCMesonsNonviewable
   - type: XenoResinHole
   - type: XenoAnnounceStructureDestruction
     messageID: rmc-xeno-construction-resin-hole-destroyed
+    structureName: empty
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible

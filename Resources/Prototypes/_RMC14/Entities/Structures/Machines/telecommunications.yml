@@ -70,6 +70,14 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
 
 - type: entity
+  id: RMCTelecomBroadcasterDD
+  parent: RMCTelecomBroadcaster
+  suffix: DrawDepth
+  components:
+  - type: Sprite
+    drawdepth: "1"
+
+- type: entity
   id: RMCTelecomRelay #gets put ontop of stuff
   parent: RMCTelecomBusMainframe
   name: Telecomms Relay
@@ -83,6 +91,14 @@
       map: ["enum.PowerDeviceVisualLayers.Powered"]
 
 - type: entity
+  id: RMCTelecomRelayDD
+  parent: RMCTelecomRelay
+  suffix: DrawDepth
+  components:
+  - type: Sprite
+    drawdepth: "1"
+
+- type: entity
   id: RMCTelecomProcessorUnit #gets put ontop of stuff
   parent: RMCTelecomBusMainframe
   name: Processor Unit
@@ -94,6 +110,14 @@
     - state: processor_off
     - state: processor
       map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCTelecomProcessorUnitDD #gets put ontop of stuff
+  parent: RMCTelecomProcessorUnit
+  suffix: DrawDepth
+  components:
+  - type: Sprite
+    drawdepth: "1"
 
 - type: entity
   id: RMCTelecomHub
@@ -144,6 +168,14 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+
+- type: entity
+  id: RMCTelecomBlackBoxDD
+  parent: RMCTelecomBlackBox
+  suffix: DrawDepth
+  components:
+  - type: Sprite
+    drawdepth: "1"
 
 - type: entity
   id: RMCTelecomSensorComputer
@@ -224,6 +256,56 @@
     isCorrodible: true
 
 - type: entity
+  id: RMCTelecomMappingComputer
+  parent: RMCTelecomBusMainframe
+  name: CMPS II computer
+  description: The Common Mapping Production System version II allows for sensory input from satellites and ship systems to derive planetary maps in a standardized fashion for all UNMC pilots.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    layers:
+    - state: techweb
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCTelecomMissionPlanningSystem
+  parent: RMCTelecomBusMainframe
+  name: MPS IV computer
+  description: The Mission Planning System IV (MPS IV), an enhancement in mission planning and charting for dropship pilots across the UNMC. Fully capable of customizing their flight paths and loadouts to suit their combat needs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    layers:
+    - state: mps_off
+    - state: mps
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
   id: RMCTelecomServerRack
   parent: RMCTelecomBusMainframe
   name: server rack
@@ -246,3 +328,121 @@
         acts: [ "Destruction" ]
   - type: Corrodible
     isCorrodible: true
+
+# Hybrisa
+
+- type: entity
+  id: RMCBlackMappingComputer
+  parent: RMCTelecomSensorComputer
+  name: computer
+  description: ""
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/hybrisa_computer_props.rsi
+    layers:
+    - state: blackmapping_comp_off
+    - state: blackmapping_comp
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Metallic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Corrodible
+    isCorrodible: true
+
+- type: entity
+  id: RMCBlackMPSComputer
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: blackmps_off
+    - state: blackmps
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCBlackSensorComputer
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: blacksensor_comp1_off
+    - state: blacksensor_comp1
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCBlackSensorComputer2
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: blacksensor_comp2_off
+    - state: blacksensor_comp2
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCBlackSensorComputer3
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: blacksensor_comp3_off
+    - state: blacksensor_comp3
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCWhiteMappingComputer
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: mapping_comp_off
+    - state: mapping_comp
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCWhiteMPSComputer
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: mps_off
+    - state: mps
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCWhiteSensorComputer
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: sensor_comp1_off
+    - state: sensor_comp1
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCWhiteSensorComputer2
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: sensor_comp2_off
+    - state: sensor_comp2
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+
+- type: entity
+  id: RMCWhiteSensorComputer3
+  parent: RMCBlackMappingComputer
+  components:
+  - type: Sprite
+    layers:
+    - state: sensor_comp3_off
+    - state: sensor_comp3
+      map: ["enum.PowerDeviceVisualLayers.Powered"]

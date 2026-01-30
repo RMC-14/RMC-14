@@ -122,3 +122,13 @@
   license: "CC-BY-SA-3.0"
   copyright: "The CM-SS13 development team"
   source: "https://github.com/cmss13-devs/cmss13/blob/7853d79df1827a2a4907fb3162b6319662dbc1ba/sound/handling/hud_off.ogg"
+
+- files: ["click_2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/2837f2685e5f6c0366bd91ecace79be4fe218046/sound/handling/click_2.ogg"
+
+- files: ["suitlight_crank.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Mix of click_2 and suitlight_on from cmss13 by FeelFlows"
+  source: "https://github.com/cmss13-devs/cmss13/tree/47ac37f65536e0f72f1e918a6bbabd16affca832/sound/handling"

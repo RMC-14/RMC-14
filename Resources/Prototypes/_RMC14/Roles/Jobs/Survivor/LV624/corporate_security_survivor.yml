@@ -1,0 +1,57 @@
+- type: job
+  parent: CMSurvivorSecurity
+  id: CMSurvivorLV624SecurityGuard
+  name: rmc-job-name-pmc-corporate-goon-secguard
+  startingGear: RMCGearSurvivorLV624SecurityGuard
+  hasIcon: true
+  icon: RMCJobIconWeYaSec
+  spawnMenuRoleName: WeYa Security Guard (LV624 Survivor)
+  accessGroups:
+  - ColonistSec
+  - ColonistCorporate
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSecurity
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmp
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorLV624SecurityGuard
+  equipment:
+    head: RMCArmorHelmetPMCDark
+    jumpsuit: RMCJumsuitWhiteService
+    outerClothing: RMCArmorVestWeYa
+    ears: RMCHeadsetDistressWeYa
+    id: CMIDCardLiaisonColony
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorLV624SecurityGuard
+  name: survivor lv624 weya secguard spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorLV624SecurityGuard
+  - type: Sprite # TODO: Replace with landmark sprite
+    layers:
+    - sprite: Markers/jobs.rsi
+      state: green
+    - sprite: _RMC14/Markers/cm_jobs.rsi
+      state: survivor

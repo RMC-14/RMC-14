@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a5990526c258405745260c0b2f8fac01c84261a3/icons/obj/cryobag.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a5990526c258405745260c0b2f8fac01c84261a3/icons/obj/cryobag.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_righthand.dmi, https://github.com/cmss13-devs/cmss13/blob/master/icons/mob/humans/onmob/inhands/equipment/medical_lefthand.dmi, holocard sprites by Vermidia",
   "size": {
     "x": 32,
     "y": 32
@@ -29,6 +29,18 @@
     {
       "name": "inhand-right",
       "directions": 4
+    },
+    {
+      "name": "bodybag_holoorange"
+    },
+    {
+      "name": "bodybag_holoblack"
+    },
+    {
+      "name": "bodybag_holopurple"
+    },
+    {
+      "name": "bodybag_holored"
     }
   ]
 }

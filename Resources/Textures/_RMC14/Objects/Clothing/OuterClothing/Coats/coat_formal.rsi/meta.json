@@ -11,12 +11,15 @@
       "name": "icon"
     },
     {
+      "name": "icon-open"
+    },
+    {
       "name": "equipped-OUTERCLOTHING",
       "directions": 4
-    }, 
+    },
     {
-     "name": "jacket-equipped-OUTERCLOTHING",
+     "name": "open-equipped-OUTERCLOTHING",
      "directions": 4
     }
- ] 
+ ]
 }

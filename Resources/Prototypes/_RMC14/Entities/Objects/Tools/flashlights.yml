@@ -27,7 +27,8 @@
         minValue: 0.1
         maxValue: 2.0
         isLooped: true
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
   - type: Battery
     maxCharge: 600
@@ -55,6 +56,10 @@
     - belt
     - suitstorage
   - type: NoHandsInteractionBlocked
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 50
+      CMGlass: 20
 
 - type: entity
   parent: RMCBoxMagazineSupplyBase
@@ -82,7 +87,7 @@
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#b2bdc4"
     - state: supply_box_flashlight
-      color: "#e0d5c2"
+      color: "#887b67"
     - state: supply_lid_closed
       map: [ "lid" ]
       color: "#887b67"
@@ -141,6 +146,10 @@
     - suitstorage
   - type: PointLight
     radius: 1.75
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 10
+      CMGlass: 5
 
 - type: Tag
   id: RMCPenlight

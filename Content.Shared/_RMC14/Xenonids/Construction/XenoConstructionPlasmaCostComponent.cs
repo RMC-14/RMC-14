@@ -8,4 +8,7 @@ public sealed partial class XenoConstructionPlasmaCostComponent : Component
 {
     [DataField, AutoNetworkedField]
     public FixedPoint2 Plasma;
+
+    [DataField, AutoNetworkedField]
+    public bool ScalingCost;
 }

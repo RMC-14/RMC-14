@@ -34,8 +34,15 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMSteel: 50
-    #RMC TODO: Lattice
+      CMSteel: 1875
+  - type: RMCConstructionItem
+    buildable:
+    - RMCGrilleBuild
+    - RMCFenceBuild
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMRodMetal
@@ -68,7 +75,7 @@
   components:
   - type: PhysicalComposition
     materialComposition:
-      CMPlasteel: 50 #Half of a regular plasteel sheet to reflect the crafting recipe
+      CMPlasteel: 3750
   - type: Stack
     count: 60
     stackType: CMRodPlasteel

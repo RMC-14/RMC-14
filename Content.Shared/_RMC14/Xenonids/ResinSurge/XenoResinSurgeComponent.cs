@@ -11,7 +11,7 @@ public sealed partial class XenoResinSurgeComponent : Component
 {
     // Amount of time to deduct from fruit growth timer
     [DataField, AutoNetworkedField]
-    public TimeSpan FruitGrowth = TimeSpan.FromSeconds(5);
+    public TimeSpan FruitGrowth = TimeSpan.FromSeconds(60);
 
     // Amount of hitpoints to reinforce structure by
     [DataField, AutoNetworkedField]
@@ -44,4 +44,13 @@ public sealed partial class XenoResinSurgeComponent : Component
 
     [DataField, AutoNetworkedField]
     public int Range = 7;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan FruitCooldownDivisor = TimeSpan.FromSeconds(3);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SurgeWallEffect = "XenoSurgeResinWall";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId SurgeDoorEffect = "XenoSurgeResinDoor";
 }

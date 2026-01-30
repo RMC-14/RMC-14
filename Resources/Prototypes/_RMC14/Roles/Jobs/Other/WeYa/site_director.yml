@@ -13,9 +13,11 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  spawnMenuRoleName: WEYA PMC Site Director
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCTrackable
     - type: NpcFactionMember
       factions:
       - WeYa
@@ -33,8 +35,16 @@
         RMCSkillEndurance: 3
         RMCSkillJtac: 4
         RMCSkillExecution: 1
+    - type: MarineOrders
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_sd
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
     - type: RMCGhostWarpGroupMember
       group: RMCPMC
   hidden: true
@@ -50,6 +60,17 @@
   - type: RandomHumanoidSpawner
     settings: RMCPMCDirector
 
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointPMCSiteDirector
+  name: weya pmc director spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCPMCDirector
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: pmc_spawn
+
 - type: randomHumanoidSettings
   parent: RMCEventHumanoid
   id: RMCPMCDirector
@@ -62,6 +83,10 @@
     job: RMCPMCDirector
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear

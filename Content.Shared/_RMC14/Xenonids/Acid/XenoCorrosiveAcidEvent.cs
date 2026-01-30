@@ -10,6 +10,9 @@ public sealed partial class XenoCorrosiveAcidEvent : EntityTargetActionEvent
     public EntProtoId AcidId = "XenoAcidNormal";
 
     [DataField]
+    public XenoAcidStrength Strength = XenoAcidStrength.Normal;
+
+    [DataField]
     public FixedPoint2 PlasmaCost = 100;
 
     [DataField]

@@ -1,13 +1,14 @@
 - type: entity
   save: false
   name: Urist C.M McPlants
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobDiona
   suffix: RMC14
   components:
   - type: HumanoidAppearance
     species: Diona
     hideLayersOnEquip:
+    - UndergarmentTop
     - HeadTop
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi
@@ -22,6 +23,8 @@
   - type: Speech
     speechVerb: Plant
     allowedEmotes: ['Chirp']
+  - type: TypingIndicator
+    proto: diona
   - type: Vocal
     sounds:
       Male: RMCMaleDiona
@@ -29,3 +32,5 @@
       Unsexed: UnisexDiona
   - type: BodyEmotes
     soundsId: DionaBodyEmotes
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-diona

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
 using Content.Shared.Maps;
@@ -89,6 +90,15 @@ public sealed class RMCMapSystem : EntitySystem
         return GetAnchoredEntitiesEnumerator((gridId, gridComp), indices, offset, facing);
     }
 
+    public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
+    {
+        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+            return RMCAnchoredEntitiesEnumerator.Empty;
+
+        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
+        return GetAnchoredEntitiesEnumerator((gridId, gridComp), indices, offset, facing);
+    }
+
     public RMCAnchoredEntitiesEnumerator GetAnchoredEntitiesEnumerator(Entity<MapGridComponent> grid, Vector2i indices, Direction? offset = null, DirectionFlag facing = DirectionFlag.None)
     {
         if (offset != null)
@@ -96,6 +106,41 @@ public sealed class RMCMapSystem : EntitySystem
 
         var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
         return new RMCAnchoredEntitiesEnumerator(_transform, anchored, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(EntityUid ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        return GetAnchoredEntitiesEnumerator<T>(ent.ToCoordinates(), offset, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(EntityCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        if (_transform.GetGrid(coords) is not { } gridId ||
+            !_mapGridQuery.TryComp(gridId, out var gridComp))
+        {
+            return RMCAnchoredEntitiesEnumerator<T>.Empty;
+        }
+
+        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
+        return GetAnchoredEntitiesEnumerator<T>((gridId, gridComp), indices, offset, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(MapCoordinates coords, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        if (!_mapManager.TryFindGridAt(coords, out var gridId, out var gridComp))
+            return RMCAnchoredEntitiesEnumerator<T>.Empty;
+
+        var indices = _map.CoordinatesToTile(gridId, gridComp, coords);
+        return GetAnchoredEntitiesEnumerator<T>((gridId, gridComp), indices, offset, facing);
+    }
+
+    public RMCAnchoredEntitiesEnumerator<T> GetAnchoredEntitiesEnumerator<T>(Entity<MapGridComponent> grid, Vector2i indices, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
+    {
+        if (offset != null)
+            indices = indices.Offset(offset.Value);
+
+        var anchored = _map.GetAnchoredEntitiesEnumerator(grid, grid, indices);
+        return new RMCAnchoredEntitiesEnumerator<T>(EntityManager, _transform, anchored, facing);
     }
 
     public bool HasAnchoredEntityEnumerator<T>(EntityCoordinates coords, out Entity<T> ent, Direction? offset = null, DirectionFlag facing = DirectionFlag.None) where T : IComponent
@@ -139,7 +184,7 @@ public sealed class RMCMapSystem : EntitySystem
 
     public bool IsTileBlocked(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
     {
-        if (!coordinates.TryGetTileRef(out var turf, EntityManager, _mapManager))
+        if (!_turf.TryGetTileRef(coordinates, out var turf))
             return false;
 
         return _turf.IsTileBlocked(turf.Value, group);
@@ -192,5 +237,25 @@ public sealed class RMCMapSystem : EntitySystem
     public bool CanBuildOn(EntityCoordinates coordinates, CollisionGroup group = CollisionGroup.Impassable)
     {
         return !IsTileBlocked(coordinates, group) && !TileHasStructure(coordinates);
+    }
+
+    public EntityCoordinates SnapToGrid(EntityCoordinates coordinates)
+    {
+        var gridId = _transform.GetGrid(coordinates);
+        if (gridId == null || !TryComp(gridId, out MapGridComponent? grid))
+        {
+            var mapPos = _transform.ToMapCoordinates(coordinates);
+            var mapX = (int)Math.Floor(mapPos.X) + 0.5f;
+            var mapY = (int)Math.Floor(mapPos.Y) + 0.5f;
+            mapPos = new MapCoordinates(new Vector2(mapX, mapY), mapPos.MapId);
+            return _transform.ToCoordinates(coordinates.EntityId, mapPos);
+        }
+
+        var tileSize = grid.TileSize;
+        var localPos = _transform.WithEntityId(coordinates, gridId.Value).Position;
+        var x = (int)Math.Floor(localPos.X / tileSize) + tileSize / 2f;
+        var y = (int)Math.Floor(localPos.Y / tileSize) + tileSize / 2f;
+        var gridPos = new EntityCoordinates(gridId.Value, new Vector2(x, y));
+        return _transform.WithEntityId(gridPos, coordinates.EntityId);
     }
 }

@@ -36,7 +36,7 @@ public sealed class RMCSpawnerSystem : EntitySystem
         if (ent.Comp.RequireEvacuation && !_evacuation.IsEvacuationInProgress())
         {
             // TODO RMC14 code red or above
-            _popup.PopupEntity(Loc.GetString("rmc-sentry-not-emergency", ("deployer", ent)), ent);
+            _popup.PopupEntity(Loc.GetString("rmc-sentry-not-emergency", ("deployer", ent)), ent, user);
             return;
         }
 

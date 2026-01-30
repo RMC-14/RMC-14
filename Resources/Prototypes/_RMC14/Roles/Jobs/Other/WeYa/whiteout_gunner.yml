@@ -1,0 +1,60 @@
+- type: job
+  parent: RMCPMCWhiteout
+  id: RMCPMCWhiteoutGunner
+  name: rmc-job-name-pmc-whiteout-gunner
+  startingGear: RMCPMCWhiteoutGunner
+  spawnMenuRoleName: WEYA Whiteout Combat Gunner Unit
+
+- type: entity
+  parent: RMCRandomHumanoidPMCWhiteout
+  id: RMCRandomHumanoidPMCWhiteoutGunner
+  name: DEATHSQUAD pmc ghost role whiteout gunner
+  components:
+  - type: RandomHumanoidSpawner
+    settings: RMCPMCWhiteoutGunner
+
+- type: randomHumanoidSettings
+  parent: RMCPMCWhiteout
+  id: RMCPMCWhiteoutGunner
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-pmc-whiteout-gunner
+    job: RMCPMCWhiteoutGunner
+
+- type: startingGear
+  id: RMCPMCWhiteoutGunner
+  equipment:
+    id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCCommando
+    outerClothing: CMArmorM4PMCSmartGunHarnessCommando
+    gloves: RMCHandsVeteranPMCCommando
+    head: ArmorHelmetPMCCommando
+    shoes: RMCBootsPMCCommandoFilled
+    mask: RMCMaskCoifPMC
+    ears: RMCHeadsetDistressPMC
+    back: RMCSatchelPMC
+    pocket1: RMCPouchDrumPMC
+    pocket2: RMCPouchDrumPMC
+    suitstorage: RMCSmartGunWhiteOut
+  storage:
+    back:
+    - RMCExplosivePlastic
+    - RMCExplosivePlastic
+    - RMCExplosiveBreachingCharge
+    - RMCExplosiveBreachingCharge
+    - CMCrowbar # TODO RMC14 - Tactical Crowbar
+    # TODO RMC14 - Nanopaste
+    # TODO RMC14 - Whiteout Medkit
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    outerClothing:
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    pocket1:
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    pocket2:
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated
+    - RMCMagazineSmartGunirradiated

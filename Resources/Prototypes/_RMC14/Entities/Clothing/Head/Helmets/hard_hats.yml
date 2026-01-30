@@ -22,10 +22,16 @@
   - type: CMArmor
     melee: 20
     bullet: 10
-    explosionArmor: 0
+    bio: 10
+    explosionArmor: 10
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_rad = 10
+    # armor_internaldamage = 20
   - type: CMHardArmor
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
     spriteLayer: light
     clothingVisuals:
       head:
@@ -81,6 +87,9 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/red.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
 # TODO heat protection and stuff
 
 - type: entity
@@ -110,3 +119,18 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white.rsi
 # TODO heat protection...for some reason
+
+- type: entity
+  parent: RMCHardHat
+  id: RMCHardhatWhiteAlt
+  name: "Chǎnyè Combine mining helmet"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/Hardhats/white_alt.rsi
+
+- type: entity
+  parent: RMCHardhatRed
+  id: RMCHardhatRedTMCC
+  name: tartarus-mining hard hat

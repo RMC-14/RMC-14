@@ -4,7 +4,7 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Xenonids.GasToggle;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
-using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -22,7 +22,7 @@ public sealed class XenoBombardSystem : EntitySystem
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCProjectileSystem _rmcProjectile = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
@@ -49,12 +49,12 @@ public sealed class XenoBombardSystem : EntitySystem
 
         var direction = target.Position - source.Position;
         if (direction.Length() > ent.Comp.Range)
-            target = target.Offset(direction.Normalized() * ent.Comp.Range);
+            target = source.Offset(direction.Normalized() * ent.Comp.Range);
 
         _audio.PlayPredicted(ent.Comp.PrepareSound, ent, ent);
 
         var ev = new XenoBombardDoAfterEvent { Coordinates = target, };
-        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true };
+        var doAfter = new DoAfterArgs(EntityManager, ent, ent.Comp.Delay, ev, ent, args.Action) { BreakOnMove = true, RootEntity = true };
         if (_doAfter.TryStartDoAfter(doAfter))
         {
             _rmcActions.DisableSharedCooldownEvents(args.Action.Owner, ent);
@@ -69,7 +69,8 @@ public sealed class XenoBombardSystem : EntitySystem
     private void OnBombardDoAfterAttempt(Entity<XenoBombardComponent> ent, ref DoAfterAttemptEvent<XenoBombardDoAfterEvent> args)
     {
         if (args.Event.Target is { } action &&
-            TryComp(action, out InstantActionComponent? actionComponent) &&
+            HasComp<InstantActionComponent>(action) &&
+            TryComp(action, out ActionComponent? actionComponent) &&
             !actionComponent.Enabled)
         {
             _rmcActions.EnableSharedCooldownEvents(action, ent);

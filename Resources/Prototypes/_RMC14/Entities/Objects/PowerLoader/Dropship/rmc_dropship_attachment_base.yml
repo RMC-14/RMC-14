@@ -1,12 +1,15 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: CMBaseStructure
   id: RMCDropshipAttachmentBase
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCAS
   - type: Transform
     anchored: true
   - type: Corrodible
-    isCorrodible: false
+    isCorrodible: true
   - type: Sprite
     sprite: _RMC14/Objects/dropship_attachments.rsi
   - type: Physics
@@ -41,4 +44,7 @@
     virtualRight: RMCVirtualDropshipGearRight
     virtualLeft: RMCVirtualDropshipGearLeft
   - type: Item
+  - type: XenoCrusherChargable
+    instantDestroy: true
+  - type: VisiblyAcidOutsideContainer
 # TODO RMC14 make these climbable when we have single climb technology

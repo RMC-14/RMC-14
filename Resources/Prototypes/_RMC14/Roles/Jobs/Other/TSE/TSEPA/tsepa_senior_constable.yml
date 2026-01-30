@@ -11,26 +11,18 @@
   icon: "RMCJobIconTSEPASeniorConstable"
   joinNotifyCrew: false
   accessGroups:
-  - ColonistSec
+  - ColonistTSEPABrig
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillConstruction: 1
-        RMCSkillMedical: 1
-        RMCSkillEndurance: 2
-        RMCSkillCqc: 2
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 0
-        RMCSkillFireman: 2
+      preset: RMCSkillPresetSurvivorMarshal
     - type: NpcFactionMember
       factions:
       - TSE
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-senior-constable
+    - type: RMCTrackable
     - type: RMCGhostWarpGroupMember
       group: RMCTSE
   hidden: true
@@ -41,18 +33,12 @@
     head: RMCHeadBeretTSEPA
     ears: RMCHeadsetTSEPA
     jumpsuit: RMCJumpsuitTSEPA
-    outerClothing: RMCArmourM4TSEPA
+    outerClothing: RMCCoatTSEPA
     gloves: RMCHandsVeteran
     shoes: CMBootsBlackFilled
-    suitstorage: WeaponRifleL83A2
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPASilverGold
     belt: RMCBeltHolsterRevolverSpearheadFill
     back: RMCSatchelTSEPA
-  storage:
-    back:
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2
-    - RMCMagazineRifleL83A2
 
 - type: entity
   parent: CMSpawnPointJobBase

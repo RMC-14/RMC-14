@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/mob/humans/onmob/clothing/suits/windbreakers.dmi, https://github.com/cmss13-devs/cmss13/blob/HEAD/icons/obj/items/clothing/suits/windbreakers.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-equipped-OUTERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "icon"
+    },
+    {
+      "name": "jacket-icon"
+    }
+  ]
+}

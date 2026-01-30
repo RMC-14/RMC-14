@@ -1,0 +1,13 @@
+﻿<controls:RMCSmartFridgeWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Chemistry.SmartFridge"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    MinSize="300 300">
+    <BoxContainer Orientation="Vertical">
+        <RichTextLabel Text="{Loc rmc-smart-fridge-contents}" />
+        <ui:BlueHorizontalSeparator />
+        <Label Name="ContentsEmptyLabel" Access="Public"
+               Text="{Loc rmc-smart-fridge-contents-empty}" />
+        <TabContainer Name="ContentsTabs" Access="Public" />
+    </BoxContainer>
+</controls:RMCSmartFridgeWindow>

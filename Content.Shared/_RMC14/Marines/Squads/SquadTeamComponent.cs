@@ -19,7 +19,13 @@ public sealed partial class SquadTeamComponent : Component
     [DataField(required: true), AutoNetworkedField]
     public Color Color;
 
-    [DataField(required: true), AutoNetworkedField]
+    /// <summary>
+    ///     More accessible color option <see cref = "Color" /> if it is not visible enough in certain situations.
+    /// </summary>
+    [DataField]
+    public Color? AccessibleColor;
+
+    [DataField(required: true)]
     public ProtoId<RadioChannelPrototype>? Radio;
 
     [DataField(required: true), AutoNetworkedField]
@@ -55,4 +61,10 @@ public sealed partial class SquadTeamComponent : Component
 
     [DataField, AutoNetworkedField]
     public SpriteSpecifier.Rsi LeaderIcon = new(new ResPath("_RMC14/Interface/cm_job_icons.rsi"), "hudsquad_leader_a");
+
+    /// <summary>
+    /// Squad objectives assigned to this squad. Key is the objective type, value is the objective text.
+    /// </summary>
+    [DataField]
+    public Dictionary<SquadObjectiveType, string> Objectives = new();
 }

@@ -13,7 +13,7 @@ public sealed partial class XenoFlingComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 3.5f; // 4 tiles from start
+    public float Range = 4;
 
     [DataField, AutoNetworkedField]
     public float EnragedRange = 0f;
@@ -22,10 +22,13 @@ public sealed partial class XenoFlingComponent : Component
     public float ThrowSpeed = 10f;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(2);
+    public TimeSpan ParalyzeTime = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan SlowTime = TimeSpan.FromSeconds(8);
+    public TimeSpan SlowTime = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan DazeTime = TimeSpan.Zero;
 
     [DataField, AutoNetworkedField]
     public EntProtoId Effect = "CMEffectPunch";

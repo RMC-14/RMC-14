@@ -1,0 +1,6 @@
+- type: reagent
+  id: RMCSpecialBlendWhiskey
+  name: rmc-reagent-name-special-whiskey
+  parent: Whiskey
+  desc: rmc-reagent-desc-special-whiskey
+  flavor: rmcwhiskey

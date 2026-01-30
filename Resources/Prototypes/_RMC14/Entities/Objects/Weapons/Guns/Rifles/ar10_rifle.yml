@@ -68,6 +68,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
         random:
@@ -106,6 +107,8 @@
       rmc-aslot-barrel: 0.75, 0.00
       rmc-aslot-rail: -0.23, 0.091
       rmc-aslot-underbarrel: 0.35, -0.3
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-ar10-assault-rifle
 
 - type: entity
   parent: CMMagazineRifleBase

@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Server._RMC14.NPC;
 using Content.Server.Fluids.EntitySystems;
+using Content.Server.Hands.Systems;
 using Content.Server.NPC.Queries;
 using Content.Server.NPC.Queries.Considerations;
 using Content.Server.NPC.Queries.Curves;
@@ -8,6 +9,7 @@ using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Server.Storage.Components;
+using Content.Server.Temperature.Components;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Construction;
@@ -17,6 +19,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Atmos.Components;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -53,6 +56,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly DrinkSystem _drink = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly FoodSystem _food = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
@@ -62,6 +66,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _sentryTargeting = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
     [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
@@ -243,6 +248,9 @@ public sealed class NPCUtilitySystem : EntitySystem
             {
                 if (_container.TryGetContainingContainer(targetUid, out var container))
                 {
+                    if (container.Owner == owner)
+                        return 0f;
+
                     if (TryComp<EntityStorageComponent>(container.Owner, out var storageComponent))
                     {
                         if (storageComponent is { Open: false } && _weldable.IsWelded(container.Owner))
@@ -264,8 +272,9 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case TargetAmmoMatchesCon:
             {
-                if (!blackboard.TryGetValue(NPCBlackboard.ActiveHand, out Hand? activeHand, EntityManager) ||
-                    !TryComp<BallisticAmmoProviderComponent>(activeHand.HeldEntity, out var heldGun))
+                if (!blackboard.TryGetValue(NPCBlackboard.ActiveHand, out string? activeHand, EntityManager) ||
+                    !_hands.TryGetHeldItem(owner, activeHand, out var heldEntity) ||
+                    !TryComp<BallisticAmmoProviderComponent>(heldEntity, out var heldGun))
                 {
                     return 0f;
                 }
@@ -383,6 +392,13 @@ public sealed class NPCUtilitySystem : EntitySystem
                         return 1f;
 
                     return 0f;
+                }
+            case TargetLowTempCon con:
+                {
+                    if (!TryComp<TemperatureComponent>(targetUid, out var temperature))
+                        return 0f;
+
+                    return temperature.CurrentTemperature <= con.MinTemp ? 1f : 0f;
                 }
             case TargetIsNotDeadCon:
             {
@@ -533,9 +549,21 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case NearbyHostilesQuery:
             {
-                foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
+                // Begin RMC
+                if (TryComp<SentryTargetingComponent>(owner, out var targeting))
                 {
-                    entities.Add(ent);
+                    foreach (var ent in _sentryTargeting.GetNearbyIffHostiles((owner, targeting), vision))
+                    {
+                        entities.Add(ent);
+                    }
+                }
+                else
+                {
+                    foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
+                    {
+                        entities.Add(ent);
+                    }
+                    // End RMC
                 }
                 break;
             }

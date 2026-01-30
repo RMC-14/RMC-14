@@ -1,0 +1,47 @@
+# Desert
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetDesert
+  name: tiles-cm-desert
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert.png
+  variants: 6
+  placementVariants:
+  - 90.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+
+- type: tile
+  parent: CMPlanetBase
+  id: CMPlanetDesert1
+  name: tiles-cm-desert
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_0.png
+  minimapColor: "#9c906dc2"
+
+- type: tile
+  parent: CMPlanetDesert1
+  id: CMPlanetDesert2
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_1.png
+
+- type: tile
+  parent: CMPlanetDesert1
+  id: CMPlanetDesert3
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_2.png
+
+- type: tile
+  parent: CMPlanetDesert1
+  id: CMPlanetDesert4
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_3.png
+
+- type: tile
+  parent: CMPlanetDesert1
+  id: CMPlanetDesert5
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_4.png
+
+- type: tile
+  parent: CMPlanetDesert1
+  id: CMPlanetDesert6
+  sprite: /Textures/_RMC14/Tiles/planet/desert/desert_5.png

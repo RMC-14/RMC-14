@@ -37,5 +37,5 @@ public sealed partial class XenoHighGallopComponent : Component
     public ProtoId<TagPrototype> Flingable = "Grenade";
 
     [DataField, AutoNetworkedField]
-    public float FlingDistance = 2; //3 Tiles from start
+    public float FlingDistance = 3;
 }

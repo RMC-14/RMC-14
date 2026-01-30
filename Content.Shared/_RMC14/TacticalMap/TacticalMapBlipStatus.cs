@@ -7,5 +7,8 @@ public enum TacticalMapBlipStatus
 {
     Alive = 0,
     Defibabble,
+    Defibabble2,
+    Defibabble3,
+    Defibabble4,
     Undefibabble,
 }

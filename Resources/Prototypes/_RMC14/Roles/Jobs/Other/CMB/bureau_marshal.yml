@@ -1,4 +1,4 @@
-# Bureau Marshal
+# CMB Marshal
 - type: job
   parent: CMJobBase
   id: CMBureauMarshal
@@ -38,6 +38,13 @@
     - type: RMCPointing
     - type: MarineOrders
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: xo
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
     - type: RMCGhostWarpGroupMember
       group: RMCCMB
   hidden: true
@@ -65,6 +72,10 @@
     job: CMBureauMarshal
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobMilitaryPolice
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
 
 - type: startingGear
@@ -77,15 +88,14 @@
     ears: RMCHeadsetDistressBureau
     back: CMSatchelSecurity
     gloves: RMCHandsVeteran
-    jumpsuit: RMCJumpsuitMarshal
+    jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauMarshal # add telebaton binoculars/range
-    # /obj/item/weapon/gun/shotgun/pump/dual_tube/cmb/m3717
     belt: CMBeltSecurityMarshalFilled
     shoes: RMCBootsPMCFilled
-    id: RMCIDCardMarshal
+    id: RMCIDCardCMBMarshal
     pocket1: RMCPouchFirstAidERTFill
-    pocket2: RMCPouchMagazineLargeMP5
-    suitstorage: WeaponSMGMP5
+    pocket2: RMCPouchShotgunLargeBuckshot
+    suitstorage: RMCWeaponShotgunM3717
 
 - type: playTimeTracker
   id: RMCJobBureauMarshal

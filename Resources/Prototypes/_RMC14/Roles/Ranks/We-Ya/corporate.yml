@@ -1,17 +1,26 @@
 - type: rank
+  id: RMCRankWeYaTrainee
+  name: Trainee
+  prefix: Trn.
+  paygrade: WYC1
+
+- type: rank
   id: RMCRankWeYaJuniorExecutive
   name: Junior Executive
   prefix: Jr. Exec.
+  paygrade: WYC2
 
 - type: rank
   id: RMCRankWeYaExecutive
   name: Executive
   prefix: Exec.
+  paygrade: WYC3
 
 - type: rank
   id: RMCRankWeYaSeniorExecutive
   name: Senior Executive
   prefix: Sr. Exec.
+  paygrade: WYC4
 
 - type: rank
   id: RMCRankWeYaExecutiveSpecialist
@@ -29,34 +38,68 @@
   id: RMCRankWeYaAssistantManager
   name: Assistant Manager
   prefix: Assis. Mng.
+  paygrade: WYC7
 
 - type: rank
   id: RMCRankWeYaDivisionManager
   name: Division Manager
   prefix: Div. Mng.
+  paygrade: WYC8
 
 - type: rank
   id: RMCRankWeYaChiefExecutive
   name: Chief Executive
   prefix: Chief. Exec.
+  paygrade: WYC9
 
 - type: rank
   id: RMCRankWeYaDeputyDirector
   name: Deputy Director
   prefix: Dep. Director
+  paygrade: WYC10
 
 - type: rank
   id: RMCRankWeYaDirector
   name: Director
   prefix: Director
+  paygrade: WYC11
 
 # Lawyers
 - type: rank
   id: RMCRankWeYaLegalSpecialist
   name: Legal Specialist
   prefix: Legal Spc.
+  paygrade: WYC5
 
 - type: rank
   id: RMCRankWeYaLegalSupervisor
   name: Legal Supervisor
   prefix: Legal Spvsr.
+  paygrade: WYC6
+
+# Pilots
+- type: rank
+  id: RMCRankWeYaPilotOfficer
+  name: Captain
+  prefix: Capt
+  paygrade: WYPO2
+
+# Synthetics
+# A/N: probably not particularly useful, but I want some variety 
+- type: rank
+  id: RMCRankWeYaUtilitySynth # Simple labor synths (drivers, cargo haulers, repairmen)
+  name: Utility Synthetic
+  prefix: U. Syn.
+  paygrade: WYS1
+  
+- type: rank
+  id: RMCRankWeYaAssistantSynth # Secretaries, data entry, analysis, PR, etc.
+  name: Assistant Synthetic
+  prefix: Assis. Syn.
+  paygrade: WYS2
+  
+- type: rank
+  id: RMCRankWeYaAdministrativeSynth # Project managers, directors, overseers (with organic oversight obv)
+  name: Administrative Synthetic
+  prefix: Adm. Syn.
+  paygrade: WYS3

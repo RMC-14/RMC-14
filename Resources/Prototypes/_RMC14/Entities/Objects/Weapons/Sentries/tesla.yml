@@ -49,6 +49,7 @@
     sprite: _RMC14/Objects/Weapons/Sentries/tesla.rsi
     state: normal_tesla_coil_handheld
   - type: Appearance
+  - type: Eye
   - type: GenericVisualizer
     visuals:
       enum.SentryLayers.Layer:
@@ -77,6 +78,9 @@
     interfaces:
       enum.SentryUiKey.Key:
         type: SentryUpgradeBui
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
   - type: HealthExaminable
     locPrefix: sentry
     examinableTypes:
@@ -86,6 +90,10 @@
     - Heat
     - Shock
   - type: ShortExamine
+  - type: SentryTargeting
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Sentry
     upgrades:
     - RMCTeslaMicro
@@ -102,6 +110,11 @@
   - type: RMCRepairable
   - type: RMCNameItemOnVend
     item: Sentry
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Blunt: 40
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseTesla
@@ -116,7 +129,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: RMCTesla
@@ -171,7 +185,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
     deployDelay: 0.75
     undeployDelay: 0.75
@@ -214,7 +229,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
     upgrades: null
   - type: RMCTeslaCoil

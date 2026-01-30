@@ -32,6 +32,12 @@ public sealed class SquadInfoBui : BoundUserInterface
         Refresh();
     }
 
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+        Refresh();
+    }
+
     public void Refresh()
     {
         if (_window is not { IsOpen: true })
@@ -54,6 +60,38 @@ public sealed class SquadInfoBui : BoundUserInterface
             : Loc.GetString("rmc-squad-info-squad-leader-name", ("leader", tracker.Fireteams.SquadLeader));
         _window.SquadLeaderLabel.Text = squadLeader;
         _window.ChangeTrackerButton.OnPressed += _ => SendPredictedMessage(new SquadLeaderTrackerChangeTrackedMsg());
+
+        // Get squad objectives from state
+        Dictionary<SquadObjectiveType, string> objectives = new();
+        if (State is SquadLeaderTrackerBoundUserInterfaceState state)
+        {
+            objectives = new Dictionary<SquadObjectiveType, string>(state.Objectives);
+        }
+
+        // Display objectives
+        _window.ObjectivesContainer.DisposeAllChildren();
+        foreach (SquadObjectiveType objectiveType in Enum.GetValues<SquadObjectiveType>())
+        {
+            var objectiveText = objectives.GetValueOrDefault(objectiveType, string.Empty);
+            var objectiveLabel = new RichTextLabel
+            {
+                HorizontalExpand = true
+            };
+
+            var objectiveName = objectiveType switch
+            {
+                SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+                SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+                _ => objectiveType.ToString()
+            };
+
+            var displayText = string.IsNullOrWhiteSpace(objectiveText)
+                ? $"{objectiveName}: {Loc.GetString("rmc-squad-info-none")}"
+                : $"{objectiveName}: {FormattedMessage.EscapeText(objectiveText)}";
+
+            objectiveLabel.Text = displayText;
+            _window.ObjectivesContainer.AddChild(objectiveLabel);
+        }
 
         _window.FireteamsContainer.DisposeAllChildren();
         for (var i = 0; i < tracker.Fireteams.Fireteams.Length; i++)
@@ -86,11 +124,12 @@ public sealed class SquadInfoBui : BoundUserInterface
                 {
                     MaxWidth = 25,
                     MaxHeight = 25,
-                    VerticalAlignment = Control.VAlignment.Top,
+                    VerticalAlignment = Control.VAlignment.Center,
                     StyleClasses = { "OpenBoth" },
                     Text = "^",
                     TextAlign = Label.AlignMode.Center,
                     ToolTip = Loc.GetString("rmc-squad-info-promote-team-leader"),
+                    Margin = new Thickness(0, 0, 2, 0)
                 };
 
                 promoteButton.Visible = isSquadLeader;
@@ -103,11 +142,12 @@ public sealed class SquadInfoBui : BoundUserInterface
                 {
                     MaxWidth = 25,
                     MaxHeight = 25,
-                    VerticalAlignment = Control.VAlignment.Top,
+                    VerticalAlignment = Control.VAlignment.Center,
                     StyleClasses = { "OpenBoth" },
                     Text = "x",
                     TextAlign = Label.AlignMode.Center,
                     ToolTip = Loc.GetString("rmc-squad-info-unassign-fireteam"),
+                    Margin = new Thickness(0, 0, 2, 0)
                 };
 
                 unassignButton.Visible = isSquadLeader;
@@ -162,7 +202,9 @@ public sealed class SquadInfoBui : BoundUserInterface
         if (member.Role is { } role &&
             _prototype.TryIndex(role, out var job))
         {
-            if (_prototype.TryIndex(job.Icon, out var icon))
+            if (member.IconOverride != null)
+                row.RoleIcon.Texture = _sprite.Frame0(member.IconOverride);
+            else if (_prototype.TryIndex(job.Icon, out var icon))
                 row.RoleIcon.Texture = _sprite.Frame0(icon.Icon);
 
             row.RoleBackground.Texture = background;

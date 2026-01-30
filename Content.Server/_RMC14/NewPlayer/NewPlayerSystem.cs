@@ -22,6 +22,7 @@ public sealed class NewPlayerSystem : EntitySystem
 
     private TimeSpan _newPlayerTimeTotal;
     private TimeSpan _newPlayerTimeJob;
+    private TimeSpan _brandNewPlayerTimeJob;
 
     public override void Initialize()
     {
@@ -33,6 +34,7 @@ public sealed class NewPlayerSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCNewPlayerTimeTotalHours, v => _newPlayerTimeTotal = TimeSpan.FromHours(v), true);
         Subs.CVar(_config, RMCCVars.RMCNewPlayerTimeJobHours, v => _newPlayerTimeJob = TimeSpan.FromHours(v), true);
+        Subs.CVar(_config, RMCCVars.RMCBrandNewPlayerTimeJobHours, v => _brandNewPlayerTimeJob = TimeSpan.FromHours(v), true);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs ev)
@@ -63,7 +65,10 @@ public sealed class NewPlayerSystem : EntitySystem
             var jobTime = times.GetValueOrDefault(job.PlayTimeTracker);
             var newTotal = totalTime < _newPlayerTimeTotal;
             var newJob = jobTime <= _newPlayerTimeJob;
-            if (newTotal && newJob) // red
+            var brandNewJob = jobTime <= _brandNewPlayerTimeJob;
+            if (brandNewJob) // purple
+                _appearance.SetData(ent, NewPlayerLayers.Layer, NewPlayerVisuals.Four);
+            else if (newTotal && newJob) // red
                 _appearance.SetData(ent, NewPlayerLayers.Layer, NewPlayerVisuals.One);
             else if (newTotal) // yellow
                 _appearance.SetData(ent, NewPlayerLayers.Layer, NewPlayerVisuals.Two);

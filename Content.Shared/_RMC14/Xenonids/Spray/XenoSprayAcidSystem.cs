@@ -1,9 +1,11 @@
+using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Atmos;
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.OnCollide;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Actions;
 using Content.Shared.Chemistry.EntitySystems;
@@ -11,11 +13,9 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
-using Content.Shared.Interaction;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
-using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -31,12 +31,13 @@ public sealed class XenoSprayAcidSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
     private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
 
@@ -95,15 +96,14 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        foreach (var (actionId, action) in _actions.GetActions(xeno))
+        foreach (var action in _rmcActions.GetActionsWithEvent<XenoSprayAcidActionEvent>(xeno))
         {
-            if (action.BaseEvent is XenoSprayAcidActionEvent)
-                _actions.StartUseDelay(actionId);
+            _actions.StartUseDelay(action.AsNullable());
         }
 
         var start = xeno.Owner.ToCoordinates();
         var end = GetCoordinates(args.Coordinates);
-        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, out var blocker);
+        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, xeno.Comp.Range, out var blocker);
         var active = EnsureComp<ActiveAcidSprayingComponent>(xeno);
         active.Blocker = blocker;
         active.Acid = xeno.Comp.Acid;
@@ -180,6 +180,7 @@ public sealed class XenoSprayAcidSystem : EntitySystem
 
                 var spawned = Spawn(active.Acid, acid.Coordinates);
                 var splatter = EnsureComp<XenoAcidSplatterComponent>(spawned);
+                _hive.SetSameHive(uid, spawned);
                 splatter.Xeno = uid;
                 Dirty(spawned, splatter);
 

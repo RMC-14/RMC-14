@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: CMIDCardSilver
   id: CMIDCardSeniorEnlistedAdvisor
   name: senior enlisted advisor ID card
@@ -22,7 +22,8 @@
   - type: PresetIdCard
     job: CMSurvivor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -32,7 +33,8 @@
   - type: PresetIdCard
     job: CMSurvivorDoctor
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -42,7 +44,19 @@
   - type: PresetIdCard
     job: CMSurvivorEngineer
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
+
+- type: entity
+  parent: CMIDCardSilver
+  id: RMCIDCardColonistScientist
+  name: researcher colonist ID card
+  components:
+  - type: PresetIdCard
+    job: CMSurvivorScientist
+  - type: ItemIFF
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -57,15 +71,49 @@
   - type: PresetIdCard
     job: CMSurvivorSecurity
   - type: ItemIFF
-    faction: FactionSurvivor
+    factions:
+    - FactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
   id: CMIDCardLiaison
-  name: liaison ID card
+  name: corporate holo-badge
+  description: A corporate holo-badge. It's a unique Corporate orange and white.
+  suffix: WeYa
   components:
+  - type: Sprite
+    state: corporate_liaison
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
+  - type: PresetIdCard
+    job: CMLiaison
+
+- type: entity
+  parent: CMIDCardSilver
+  id: CMIDCardPMC
+  name: pmc holo-badge
+  description: A corporate holo-badge. It has a unique uncapped bottom.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: CMIDCardPMCExecutive
+  name: corporate holo-badge
+  description: A corporate holo-badge in standard corporate orange and white. It has a unique uncapped bottom. It is fingerprint locked with 5-X clearance level. Commonly held by corporate managers.
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: pmc
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -74,16 +122,28 @@
   id: CMIDCardLiaisonColony
   name: liaison ID card
   components:
+  - type: ItemIFF
+    factions:
+    - FactionWeYa
+    - FactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCorporate
 
 - type: entity
-  parent: CMIDCardLiaison
-  id: RMCIDCardExecutiveCorporateSpecialist
-  name: executive corporate specialist ID card
+  parent: CMIDCardLiaisonColony
+  id: RMCIDCardWeYaCorporateSecurity
+  name: we-ya corporate security ID card
   components:
   - type: PresetIdCard
-    job: CMCorporateExecutiveSpecialist
+    job: CMSurvivorGoon
+
+- type: entity
+  parent: CMIDCardLiaison
+  id: RMCIDCardExecutiveCorporateSpecialist
+  name: executive legal specialist ID card
+  components:
+  - type: PresetIdCard
+    job: CMCorporateExecutiveSupervisorLegal
 
 - type: entity
   parent: CMIDCardLiaison
@@ -131,6 +191,9 @@
   components:
   - type: PresetIdCard
     job: CMBureauMarshal
+  - type: ItemIFF
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -140,6 +203,9 @@
   components:
   - type: PresetIdCard
     job: CMBureauDeputy
+  - type: ItemIFF
+    factions:
+    - FactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -148,7 +214,8 @@
   description: A corporate holo-badge. It has a unique uncapped bottom.
   components:
   - type: ItemIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Access
     groups:
     - Colony
@@ -156,6 +223,7 @@
 
 - type: entity
   id: FactionWeYa
+  categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
   - type: FactionFrequencies
@@ -263,3 +331,43 @@
   components:
   - type: PresetIdCard
     job: RMCJobSyntheticColony
+  - type: ItemIFF
+    factions:
+    - FactionSurvivor
+
+- type: entity
+  id: RMCIDCardAegis
+  name: AEGIS Access Badge
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates.
+  components:
+  - type: WarpPoint
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: keycard
+    drawdepth: SmallObjects
+  - type: Item
+    size: Tiny
+  - type: Clothing
+    slots:
+      - idcard
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Access
+    groups:
+      - CMAccessAegis
+  - type: AegisTrackable
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
+  parent: RMCIDCardAegis
+  id: RMCIDCardAegisIntel
+  name: AEGIS Access Badge
+  suffix: Intel-giving
+  description: High-Level AEGIS Access Badge, granting access to many of their restricted areas and equipment. Required to unlock AEGIS crates. It has some blood on it.
+  components:
+  - type: IntelRescueSurvivorObjective
+    value: 2
+  - type: Sprite
+    sprite: _RMC14/Objects/CMIDs/aegis.rsi
+    state: bloody

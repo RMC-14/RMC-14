@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
+using Content.Shared._RMC14.Xenonids.Projectile.Spit.Charge;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
@@ -22,6 +22,9 @@ public sealed class XenoAcidSlashSystem : EntitySystem
         foreach (var hit in args.HitEntities)
         {
             if (!_xeno.CanAbilityAttackTarget(xeno.Owner, hit))
+                continue;
+
+            if (HasComp<XenoComponent>(hit))
                 continue;
 
             if (xeno.Comp.Acid is { } add)

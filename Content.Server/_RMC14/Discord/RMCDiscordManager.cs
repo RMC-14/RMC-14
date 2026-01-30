@@ -175,6 +175,16 @@ public sealed class RMCDiscordManager : IPostInjectInit
         return $"**{msg.Author}:** {msg.Message}";
     }
 
+    public async Task Restart()
+    {
+        await _client.StopAsync();
+        await _client.DisposeAsync();
+        _ready = 0;
+        _running = true;
+        await _discordThread;
+        Initialize();
+    }
+
     public void PostInject()
     {
         Initialize();

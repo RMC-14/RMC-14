@@ -1,0 +1,48 @@
+﻿- type: job
+  parent: CMSurvivorDoctor
+  id: CMSurvivorSolarisDoctor
+  name: rmc-job-name-survivor-solaris-doctor
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorSolarisDoctor
+  spawnMenuRoleName: Solaris Doctor (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 1
+        RMCSkillEndurance: 2
+        RMCSkillFireman: 1
+        RMCSkillFirearms: 1
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetDoctor
+  useLoadoutOfJob: CMSurvivorDoctor # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorDoctor
+  id: RMCGearSurvivorSolarisDoctor
+  equipment:
+    head: CMHeadCapCMO
+    jumpsuit: RMCScrubsLightBlue
+    shoes: RMCShoesLaceup
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisDoctor
+  name: survivor solaris doctor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisDoctor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

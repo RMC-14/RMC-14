@@ -82,7 +82,7 @@ public sealed class DialogSystem : EntitySystem
         OpenOptions(actor, actor, title, options, message);
     }
 
-    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200)
+    public void OpenInput(EntityUid target, EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
     {
         var dialog = EnsureComp<DialogComponent>(target);
         dialog.DialogType = DialogType.Input;
@@ -90,15 +90,16 @@ public sealed class DialogSystem : EntitySystem
         dialog.InputEvent = ev;
         dialog.LargeInput = largeInput;
         dialog.CharacterLimit = characterLimit;
+        dialog.AutoFocus = autoFocus;
 
         Dirty(target, dialog);
 
         _ui.TryOpenUi(target, DialogUiKey.Key, actor);
     }
 
-    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200)
+    public void OpenInput(EntityUid actor, string message, DialogInputEvent? ev, bool largeInput = false, int characterLimit = 200, bool autoFocus = true)
     {
-        OpenInput(actor, actor, message, ev, largeInput, characterLimit);
+        OpenInput(actor, actor, message, ev, largeInput, characterLimit, autoFocus);
     }
 
     public void OpenConfirmation(EntityUid target, EntityUid actor, string title, string message, object ev)

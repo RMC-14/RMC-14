@@ -1,18 +1,19 @@
 - type: job
-  parent: CMSurvivor
+  parent: RMCSurvivorMilitary
   id: RMCSurvivorForeconBase
   name: rmc-job-name-forecon
   description: rmc-job-description-forecon
   ranks:
     RMCRankSergeant: []
-  supervisors: cm-job-supervisors-co
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - ColonistEngi
   joinNotifyCrew: false
   startingGear: RMCGearForeconBase
-  hasIcon: false
+  hasIcon: true
   greeting: rmc-job-greeting-forecon
-  playTimeTracker: RMCSurvivorForecon
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: FORECON Survivor (Base)
   hidden: true
 
 - type: startingGear
@@ -26,9 +27,7 @@
     ears: RMCHeadsetForecon
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
-
-- type: playTimeTracker
-  id: RMCSurvivorForecon
+    suitstorage: RMCFlashlight
 
 - type: entity
   id: RMCSurvivorPresetForeconNoPrimary
@@ -36,10 +35,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # TODO durag and grey beanie
+    randomOutfits:
     - [ RMCHeadCapFlippable ]
     - [ RMCBoonieTan ]
     - [ ArmorHelmetM10 ]
+    - [ RMCHeadBeanie ]
+    - [ RMCHeadDurag ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
@@ -51,6 +52,7 @@
     - [ RMCM1984BeltFilled ]
     - [ RMCHolsterSMGPouchFilledExtended ]
     - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
 
 - type: entity
   parent: RMCSurvivorPresetForeconNoPrimary

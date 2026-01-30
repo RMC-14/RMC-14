@@ -40,6 +40,14 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseScientistAegis
+  name: Corpse Spawner - Aegis Scientist
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseScientistAegis
+
+- type: entity
+  parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseMiner
   name: Corpse Spawner - Shaft Miner
   components:
@@ -53,14 +61,6 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseSecurity
-
-- type: entity
-  parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseDeputy
-  name: Corpse Spawner - Bureau Deputy
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseDeputy
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -114,36 +114,20 @@
 
 - type: entity
   parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaGoon
-  name: Corpse Spawner - We-Ya Goon
+  id: RMCSpawnerCorpseUNRiotOfficer
+  name: Corpse Spawner - United Nations Riot Officer
   components:
   - type: CorpseSpawner
-    spawn: RMCCorpseWeYaGoon
+    spawn: RMCCorpseUnitedNationsRiotOfficer
 
 - type: entity
-  parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaGoonKutjevo
-  name: Corpse Spawner - We-Ya Goon Kutjevo
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseWeYaGoonKutjevo
-
-- type: entity
-  parent: RMCSpawnerCorpse
-  id: RMCSpawnerCorpseWeYaPMC
-  name: Corpse Spawner - We-Ya PMC Standard
-  components:
-  - type: CorpseSpawner
-    spawn: RMCCorpseWeYaPMCStandard
-
-- type: entity
-  parent: RMCSpawnerCorpseWeYaPMC
-  id: RMCSpawnerCorpseWeYaPMCStandardBurst
-  name: Corpse Spawner - We-Ya PMC Standard
+  parent: RMCSpawnerCorpseUNRiotOfficer
+  id: RMCSpawnerCorpseUNRiotOfficerBurst
+  name: Corpse Spawner - United Nations Riot Officer
   suffix: RMC14, Burst
   components:
   - type: CorpseSpawner
-    spawn: RMCCorpseWeYaPMCStandardBurst
+    spawn: RMCCorpseUnitedNationsRiotOfficerBurst
 
 - type: entity
   parent: RMCSpawnerCorpse
@@ -152,3 +136,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseWeYaManager
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseCLF
+  name: Corpse Spawner - CLF Soldier
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseCLF

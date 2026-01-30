@@ -6,6 +6,7 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.Friction;
 using Content.Shared.Gravity;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
@@ -27,16 +28,14 @@ public sealed class ThrowingSystem : EntitySystem
 {
     public const float ThrowAngularImpulse = 5f;
 
-    /// <summary>
-    /// Speed cap on rotation in case of click-spam.
-    /// </summary>
-    public const float ThrowAngularCap = 3f * MathF.PI;
-
     public const float PushbackDefault = 2f;
 
     public const float FlyTimePercentage = 0.8f;
 
+    private const float TileFrictionMod = 1.5f;
+
     private float _frictionModifier;
+    private float _airDamping;
 
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly SharedGravitySystem _gravity = default!;
@@ -61,6 +60,7 @@ public sealed class ThrowingSystem : EntitySystem
         base.Initialize();
 
         Subs.CVar(_configManager, CCVars.TileFrictionModifier, value => _frictionModifier = value, true);
+        Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);
     }
 
     public void TryThrow(
@@ -177,7 +177,7 @@ public sealed class ThrowingSystem : EntitySystem
         };
 
         // if not given, get the default friction value for distance calculation
-        var tileFriction = friction ?? _frictionModifier * TileFrictionController.DefaultFriction;
+        var tileFriction = friction ?? _frictionModifier * TileFrictionMod;
 
         if (tileFriction == 0f)
             compensateFriction = false; // cannot calculate this if there is no friction
@@ -220,6 +220,7 @@ public sealed class ThrowingSystem : EntitySystem
         // else let the item land on the cursor and from where it slides a little further.
         // This is an exact formula we get from exponentially decaying velocity after landing.
         // If someone changes how tile friction works at some point, this will have to be adjusted.
+        // This doesn't actually compensate for air friction, but it's low enough it shouldn't matter.
         var throwSpeed = compensateFriction ? direction.Length() / (flyTime + 1 / tileFriction) : baseThrowSpeed;
         var impulseVector = direction.Normalized() * throwSpeed * physics.Mass;
         _physics.ApplyLinearImpulse(uid, impulseVector, body: physics);
@@ -267,7 +268,16 @@ public sealed class ThrowingSystem : EntitySystem
                 _physics.ApplyLinearImpulse(user.Value, -impulseVector / physics.Mass * pushbackRatio * MathF.Min(massLimit, physics.Mass), body: userPhysics);
         }
 
-        var popup = Loc.GetString("throwing-user-threw-others", ("user", user), ("thrown", uid));
-        _popup.PopupEntity(popup, user.Value, Filter.PvsExcept(user.Value), true, PopupType.SmallCaution);
+        var others = Filter.PvsExcept(user.Value);
+        foreach (var other in others.Recipients)
+        {
+            if (other.AttachedEntity is not { } otherEnt)
+                continue;
+
+            var popup = Loc.GetString("throwing-user-threw-others",
+                ("user", Identity.Name(user.Value, EntityManager, otherEnt)),
+                ("thrown", Identity.Name(uid, EntityManager, otherEnt)));
+            _popup.PopupEntity(popup, user.Value, otherEnt, PopupType.SmallCaution);
+        }
     }
 }

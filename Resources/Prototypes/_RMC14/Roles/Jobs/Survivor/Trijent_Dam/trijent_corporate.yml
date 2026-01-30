@@ -1,0 +1,25 @@
+﻿- type: job
+  parent: CMSurvivorCorporate
+  id: CMSurvivorTrijentCorporate
+  name: cm-job-name-survivor-trijent-corporate
+  description: cm-job-description-survivor
+  spawnMenuRoleName: Trijent Corporation Liaison (Trijent Survivor)
+  startingGear: RMCGearSurvivorTrijentCorporate
+
+- type: startingGear
+  parent: RMCGearSurvivorCorporate
+  id: RMCGearSurvivorTrijentCorporate
+  equipment:
+    jumpsuit: CMJumpsuitLiaisonIvy
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorTrijentCorporate
+  name: survivor trijent liaison spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivor
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

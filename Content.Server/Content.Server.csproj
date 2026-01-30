@@ -9,13 +9,14 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <OutputType Condition="'$(FullRelease)' != 'True'">Exe</OutputType>
     <NoWarn>1998</NoWarn>
-    <WarningsAsErrors>nullable</WarningsAsErrors>
+    <WarningsAsErrors>RA0032;nullable</WarningsAsErrors>
     <Nullable>enable</Nullable>
     <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Discord.Net" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+    <PackageReference Include="NetCord" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Content.Packaging\Content.Packaging.csproj" />
@@ -28,4 +29,8 @@
     <ProjectReference Include="..\Content.Shared\Content.Shared.csproj" />
   </ItemGroup>
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Content.Analyzers\Content.Analyzers.csproj" Condition="'$(SkipRobustAnalyzer)' != 'true'" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 </Project>

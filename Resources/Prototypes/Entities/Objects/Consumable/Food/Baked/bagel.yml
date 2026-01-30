@@ -61,7 +61,7 @@
   - type: Sprite
     state: bagel-cottondough
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true -Disabled for RMC
   - type: Tag
     tags:
     - ClothMade

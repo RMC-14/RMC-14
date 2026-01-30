@@ -1,0 +1,50 @@
+- type: entity
+  parent: BaseItem
+  id: RMCOrganXenoHeart
+  name: acidic heart
+  description: Acidic heart removed from a xenonid. It spews droplets of acid every so often.
+  components:
+  - type: XenoHeart
+  - type: Corrodible
+    isCorrodible: false
+  - type: Organ
+  - type: Sprite
+    sprite: _RMC14/Objects/Xeno/xeno_organs.rsi
+    state: heart_t1
+
+- type: entity
+  parent: RMCOrganXenoHeart
+  id: RMCOrganXenoHeartT1
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    state: heart_t1
+
+- type: entity
+  parent: RMCOrganXenoHeart
+  id: RMCOrganXenoHeartT2
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    state: heart_t2
+
+- type: entity
+  parent: RMCOrganXenoHeart
+  id: RMCOrganXenoHeartT3
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    state: heart_t3
+
+- type: entity
+  parent: RMCOrganXenoHeart
+  id: RMCOrganXenoHeartTQ
+  components:
+  - type: Item
+    size: Large
+  - type: Sprite
+    state: heart_t3
+    scale: 1.25, 1.25

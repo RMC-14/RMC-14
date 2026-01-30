@@ -55,6 +55,7 @@
     blacklist:
       components:
       - Xeno
+  - type: RMCMesonsNonviewable
 
 - type: entity
   parent: BaseItem
@@ -108,6 +109,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 500
 
 - type: entity
   parent: CMBloodPack

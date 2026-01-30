@@ -7,7 +7,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server._RMC14.Xenonids.Hive;
 
-[ToolshedCommand, AdminCommand(AdminFlags.VarEdit)]
+[ToolshedCommand, AdminCommand(AdminFlags.Admin)]
 public sealed class HiveCommand : ToolshedCommand
 {
     [CommandImplementation("alldefault")]

@@ -1,6 +1,6 @@
 - type: entity
   save: false
-  parent: CMBaseMobSpeciesOrganic
+  parent: RMCBaseMobSpeciesOrganic
   id: CMMobFelinid
   name: Urist McFelinid
   suffix: RMC14
@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Felinid
     hideLayersOnEquip:
+    - UndergarmentTop
     - Hair
     - HeadTop
   - type: Sprite
@@ -21,6 +22,8 @@
       Female: RMCFemaleFelinid
   - type: Speech
     allowedEmotes: ['Hiss', 'Meow', 'Mew', 'Growl', 'Purr']
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-felinid
 
 - type: entity
   parent: BaseSpeciesDummy

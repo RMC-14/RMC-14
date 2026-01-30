@@ -31,7 +31,7 @@ public sealed class GunToggleableLaserSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if(ToggleLaser(ent, args.Performer))
+        if (ToggleLaser(ent, args.Performer))
             args.Handled = true;
     }
 
@@ -54,12 +54,8 @@ public sealed class GunToggleableLaserSystem : EntitySystem
 
         var setting = ent.Comp.Settings[settingIndex];
 
-        if (_actions.TryGetActionData(ent.Comp.Action, out var action))
-        {
-            action.Icon = setting.Icon;
-            Dirty(ent.Comp.Action.Value, action);
-            _actions.UpdateAction(ent.Comp.Action, action);
-        }
+        if (ent.Comp.Action is { } action)
+            _actions.SetIcon(action, setting.Icon);
 
         Dirty(ent);
         return true;

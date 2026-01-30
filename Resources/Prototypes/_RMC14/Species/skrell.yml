@@ -17,15 +17,17 @@
 - type: speciesBaseSprites
   id: MobSkrellSprites
   sprites:
+    Special: MobHumanoidAnyMarking
     Head: MobSkrellHead
     Hair: MobHumanoidAnyMarking
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     Chest: MobSkrellTorso
-    Underwear: MobHumanoidAnyMarking
-    Undershirt: MobHumanoidAnyMarking
+    UndergarmentTop: MobHumanoidAnyMarking
+    UndergarmentBottom: MobHumanoidAnyMarking
     Eyes: MobSkrellEyes
     HeadTop: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
     LArm: MobSkrellLArm
     RArm: MobSkrellRArm
     LHand: MobSkrellLHand
@@ -38,9 +40,15 @@
 - type: markingPoints
   id: MobSkrellMarkingLimits
   points:
+    Special: # For headdresses specifically
+      points: 1 # So you can't stack them all at once
+      required: true
     Hair:
       points: 0
       required: false
+    Tail:
+      points: 1
+      required: true
     FacialHair:
       points: 0
       required: false
@@ -54,11 +62,11 @@
     Chest:
       points: 1
       required: false
-    Underwear:
+    UndergarmentBottom:
       points: 1
       required: true
       defaultMarkings: [ RMCUnderwearBoxersBlue ]
-    Undershirt:
+    UndergarmentTop:
       points: 1
       required: true
       defaultMarkings: [ RMCUndershirtStandard ]
@@ -72,7 +80,7 @@
 - type: humanoidBaseSprite
   id: MobSkrellEyes
   baseSprite:
-    sprite: _RMC14/Mobs/Avali/parts.rsi
+    sprite: _RMC14/Mobs/Skrells/parts.rsi
     state: eyes
 
 - type: humanoidBaseSprite

@@ -5,7 +5,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponRifleM54CMK1
+      - id: RMCWeaponRifleM54CMK1
         amount: 2
       - id: CMMagazineRifleM54CMK1
         amount: 2
@@ -96,10 +96,10 @@
 
 - type: entity
   parent: RMCCrateWeapons
-  id: RMCCrateM79
-  name: M79 Grenade Launcher Crate (x2)
+  id: RMCCrateM85A1
+  name: M85A1 Grenade Launcher Crate (x2)
   components:
   - type: StorageFill
     contents:
-    - id: RMCM79Case
+    - id: RMCM85A1Case
       amount: 2

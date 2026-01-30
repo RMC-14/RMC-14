@@ -14,7 +14,7 @@ public sealed class MobsterAccentSystem : EntitySystem
     private static readonly Regex RegexUpperAr = new(@"(?<=\w)A[Rr](?=\w)");
     private static readonly Regex RegexFirstWord = new(@"^(\S+)");
     private static readonly Regex RegexLastWord = new(@"(\S+)$");
-
+    private static readonly Regex RegexLastPunctuation = new(@"([.!?]+$)(?!.*[.!?])|(?<![.!?])$");
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ReplacementAccentSystem _replacement = default!;
 
@@ -90,7 +90,7 @@ public sealed class MobsterAccentSystem : EntitySystem
             else if (msg.EndsWith("."))
                 msg = msg[..^1];
 
-            msg += suffix;
+            msg = RegexLastPunctuation.Replace(msg, suffix);
         }
 
         return msg;

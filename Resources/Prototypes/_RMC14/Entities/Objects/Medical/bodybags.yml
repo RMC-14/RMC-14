@@ -1,8 +1,9 @@
 - type: entity
   parent: BaseDeployFoldable
-  id: CMBodyBag
-  name: body bag
-  description: A folded bag designed for the storage and transportation of cadavers.
+  id: RMCBaseStorageBag
+  abstract: true
+  name: storage bag
+  description: A foldable storage container.
   components:
   - type: Item
     size: Small
@@ -104,7 +105,25 @@
       - CMRollerItem
   - type: Foldable
     fitIntoEntityStorage: true
+  - type: CrashLandable
+  - type: AnimationPlayer
+  - type: RMCContainerEmptyOnDestruction
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
 
+# Body bag
+- type: entity
+  parent: RMCBaseStorageBag
+  id: CMBodyBag
+  name: body bag
+  description: A folded bag designed for the storage and transportation of cadavers.
+  components:
+  - type: InsertBlacklist
+    whitelistedMobStates:
+    - Dead
+
+# Folded body bag
 - type: entity
   parent: CMBodyBag
   id: CMBodyBagFolded
@@ -113,8 +132,18 @@
   - type: Foldable
     folded: true
 
+# Open Body bag
 - type: entity
   parent: CMBodyBag
+  id: RMCBodyBagOpen
+  suffix: Open
+  components:
+  - type: EntityStorage
+    open: True
+
+# Stasis bag
+- type: entity
+  parent: RMCBaseStorageBag
   id: CMStasisBag
   name: stasis bag
   description: A folded, reusable bag designed to prevent additional damage to an occupant.
@@ -130,6 +159,8 @@
       visible: false
     - state: bodybag_open
       map: ["enum.StorageVisualLayers.Door"]
+    - map: ["enum.HolocardContainerVisualLayers.Base"]
+      visible: false
     - state: paper
       sprite: _RMC14/Objects/Medical/bodybags.rsi
       map: ["enum.PaperLabelVisuals.Layer"]
@@ -149,7 +180,9 @@
       - MedevacStretcher
       tags:
       - CMRollerItem
+  - type: HolocardContainer
 
+# Folded stasis bag
 - type: entity
   parent: CMStasisBag
   id: CMStasisBagFolded
@@ -158,6 +191,7 @@
   - type: Foldable
     folded: true
 
+# Used stasis bag
 - type: entity
   parent: BaseItem
   id: RMCStasisBagUsed
@@ -174,9 +208,53 @@
     tags:
     - Trash
 
-
+# V2 thermal tarp
 - type: entity
-  parent: CMBodyBag
+  parent: RMCBaseStorageBag
+  id: RMCThermalTarpV2
+  name: V2 reactive thermal tarp
+  description: A tarp carried by some UNMC infantry. This updated tarp is capable of blending into its environment nearly flawlessly, given that it can properly collate data once deployed. The tarp is able to hide the wearer's heat signature.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    layers:
+    - state: reactivetarp_closed
+      map: ["unfoldedLayer", "enum.StorageVisualLayers.Base"]
+    - state: reactivetarp_folded
+      map: ["foldedLayer"]
+      visible: false
+    - state: reactivetarp_open
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: paper
+      sprite: _RMC14/Objects/Medical/bodybags.rsi
+      map: ["enum.PaperLabelVisuals.Layer"]
+  - type: Icon
+    sprite: _RMC14/Objects/Medical/bodybags.rsi
+    state: reactivetarp_closed
+  - type: RMCPassiveStealth
+    toggleable: true
+    minOpacity: 0.30
+    delay: 15
+    unCloakDelay: 3
+    whitelist:
+      components:
+      - Marine
+  - type: RMCHideParasiteInfectionContainerPopup
+  - type: EntityStorageVisuals
+    stateDoorOpen: reactivetarp_open
+
+# Folded V2 thermal tarp
+- type: entity
+  parent: RMCThermalTarpV2
+  id: RMCThermalTarpV2Folded
+  suffix: folded
+  components:
+  - type: Foldable
+    folded: true
+
+# V3 thermal tarp
+- type: entity
+  parent: RMCBaseStorageBag
   id: RMCThermalTarp
   name: V3 reactive thermal tarp
   description: A more compact and improved version of the V2 thermal tarp, intended primarily for the transportation of deceased or wounded marines. It has improved cloaking technology than earlier models, allowing it to cloak to a greater degree and faster, but can only be used with special training.
@@ -201,12 +279,15 @@
     toggleable: true
     minOpacity: 0.05
     delay: 1.5
+    unCloakDelay: 1.5
     whitelist:
       components:
       - ScoutWhitelist
+  - type: RMCHideParasiteInfectionContainerPopup
   - type: EntityStorageVisuals
     stateDoorOpen: scouttarp_open
 
+# Folded V3 thermal tarp
 - type: entity
   parent: RMCThermalTarp
   id: RMCThermalTarpFolded

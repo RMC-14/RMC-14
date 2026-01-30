@@ -9,12 +9,26 @@ public sealed class CommendationsMsg : NetMessage
 {
     public override MsgGroups MsgGroup => MsgGroups.Core;
 
-    public List<Commendation> Commendations = new();
+    public List<Commendation> CommendationsReceived = new();
+    public List<Commendation> CommendationsGiven = new();
 
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
-        Commendations.Clear();
+        CommendationsReceived.Clear();
+        CommendationsGiven.Clear();
 
+        ReadCommendations(buffer, CommendationsReceived);
+        ReadCommendations(buffer, CommendationsGiven);
+    }
+
+    public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
+    {
+        WriteCommendations(buffer, CommendationsReceived);
+        WriteCommendations(buffer, CommendationsGiven);
+    }
+
+    private void ReadCommendations(NetIncomingMessage buffer, List<Commendation> commendations)
+    {
         var length = buffer.ReadInt32();
         for (var i = 0; i < length; i++)
         {
@@ -24,14 +38,14 @@ public sealed class CommendationsMsg : NetMessage
             var text = buffer.ReadString();
             var type = (CommendationType) buffer.ReadInt32();
             var round = buffer.ReadInt32();
-            Commendations.Add(new Commendation(giver, receiver, name, text, type, round));
+            commendations.Add(new Commendation(giver, receiver, name, text, type, round));
         }
     }
 
-    public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
+    private void WriteCommendations(NetOutgoingMessage buffer, List<Commendation> commendations)
     {
-        buffer.Write(Commendations.Count);
-        foreach (var commendation in Commendations)
+        buffer.Write(commendations.Count);
+        foreach (var commendation in commendations)
         {
             buffer.Write(commendation.Giver);
             buffer.Write(commendation.Receiver);

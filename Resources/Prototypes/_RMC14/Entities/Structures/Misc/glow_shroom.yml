@@ -1,0 +1,27 @@
+- type: entity
+  id: RMCGlowshroom
+  name: glowshroom
+  description: ""
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Clickable
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: False
+  - type: Sprite
+    sprite: _RMC14/Structures/glowshroom.rsi
+    layers:
+    - state: glowshroomf
+      shader: unshaded
+  - type: Appearance
+  - type: PointLight
+    enabled: true
+    radius: 1.25
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#cff593"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png

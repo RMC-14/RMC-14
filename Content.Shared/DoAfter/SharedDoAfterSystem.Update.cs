@@ -16,7 +16,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly RMCDoafterSystem _rmcDoafter = default!;
+    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
 
     private DoAfter[] _doAfters = Array.Empty<DoAfter>();
 
@@ -95,7 +95,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
             }
 
             // RMC14
-            if (_rmcDoafter.ShouldCancel(doAfter))
+            if (_rmcDoAfter.ShouldCancel(doAfter))
             {
                 InternalCancel(doAfter, comp);
                 dirty = true;
@@ -258,7 +258,7 @@ public abstract partial class SharedDoAfterSystem : EntitySystem
                     return true;
 
             // If the user changes which hand is active at all, interrupt the do-after
-            if (args.BreakOnHandChange && hands.ActiveHand?.Name != doAfter.InitialHand)
+            if (args.BreakOnHandChange && hands.ActiveHandId != doAfter.InitialHand)
                 return true;
         }
 

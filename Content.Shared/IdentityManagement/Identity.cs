@@ -15,44 +15,47 @@ public static class Identity
     /// <summary>
     ///     Returns the name that should be used for this entity for identity purposes.
     /// </summary>
-    public static string Name(EntityUid uid, IEntityManager ent, EntityUid? viewer=null)
+    public static IdentityEntity Name(EntityUid uid, IEntityManager ent, EntityUid? viewer=null)
     {
         if (!uid.IsValid())
-            return string.Empty;
+            return new IdentityEntity(uid, string.Empty);
 
         var meta = ent.GetComponent<MetaDataComponent>(uid);
         if (meta.EntityLifeStage <= EntityLifeStage.Initializing)
-            return meta.EntityName; // Identity component and such will not yet have initialized and may throw NREs
+            return new IdentityEntity(uid, meta.EntityName); // Identity component and such will not yet have initialized and may throw NREs
 
         var uidName = meta.EntityName;
 
         var whitelistSystem = ent.System<EntityWhitelistSystem>();
         if (viewer != null &&
             ent.TryGetComponent(uid, out FixedIdentityComponent? fixedIdentity) &&
-            fixedIdentity.Name is { } name &&
+            fixedIdentity.Name is { } nameId &&
             whitelistSystem.IsWhitelistPass(fixedIdentity.Whitelist, viewer.Value))
         {
-            return name;
+            var name = Loc.GetString(nameId);
+            var ev = new RMCGetFixedIdentityEvent(name);
+            ent.EventBus.RaiseLocalEvent(uid, ref ev);
+            return new IdentityEntity(uid, ev.Name);
         }
 
         if (!ent.TryGetComponent<IdentityComponent>(uid, out var identity))
-            return uidName;
+            return new IdentityEntity(uid, uidName);
 
         var ident = identity.IdentityEntitySlot.ContainedEntity;
         if (ident is null)
-            return uidName;
+            return new IdentityEntity(uid, uidName);
 
         var identName = ent.GetComponent<MetaDataComponent>(ident.Value).EntityName;
         if (viewer == null || !CanSeeThroughIdentity(uid, viewer.Value, ent))
         {
-            return identName;
+            return new IdentityEntity(uid, identName);
         }
         if (uidName == identName)
         {
-            return uidName;
+            return new IdentityEntity(uid, uidName);
         }
 
-        return $"{uidName} ({identName})";
+        return new IdentityEntity(uid, $"{uidName} ({identName})");
     }
 
     /// <summary>

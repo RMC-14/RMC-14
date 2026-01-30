@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/elevator.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "elevator_1"
+        },
+        {
+            "name": "elevator_2"
+        },
+        {
+            "name": "elevator_3"
+        },
+        {
+            "name": "elevator_4"
+        },
+        {
+            "name": "elevator_5"
+        },
+        {
+            "name": "elevator_6"
+        },
+        {
+            "name": "elevator_7"
+        },
+        {
+            "name": "elevator_8"
+        }
+    ]
+}

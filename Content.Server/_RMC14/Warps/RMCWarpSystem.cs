@@ -1,5 +1,5 @@
-﻿using Content.Server.Warps;
-using Content.Shared._RMC14.Warps;
+﻿using Content.Shared._RMC14.Warps;
+using Content.Shared.Warps;
 
 namespace Content.Server._RMC14.Warps;
 

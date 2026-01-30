@@ -12,5 +12,10 @@
   - CMSmartGunOperator
   - CMHospitalCorpsman
   - CMCombatTech
+  - CMPVERifleman
+  - CMPVEHospitalCorpsman
+  - CMPVESquadLeader
+  - CMPVESmartGunOperator
+  - CMPVESectionSergeant
   departmentRadio: null
   headOfDepartment: CMSquadLeader

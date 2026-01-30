@@ -1,0 +1,23 @@
+- type: statusEffect
+  id: Deaf
+
+- type: statusEffect
+  id: Dazed
+
+- type: statusEffect
+  id: Blinded
+
+- type: statusEffect
+  id: Unconscious
+  alert: RMCUnconscious
+
+- type: statusEffect
+  id: RMCMuted
+  alwaysAllowed: true
+  alert: RMCMuted
+
+- type: alert
+  id: RMCMuted
+  icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
+  name: alerts-muted-name
+  description: alerts-muted-desc

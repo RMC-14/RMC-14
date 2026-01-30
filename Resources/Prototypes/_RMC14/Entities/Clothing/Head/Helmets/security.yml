@@ -12,7 +12,9 @@
   - type: CMArmor
     melee: 30
     bullet: 10
-    explosionArmor: 0
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_internaldamage = 25
   - type: CMHardArmor
 
 - type: entity
@@ -37,6 +39,12 @@
   description: Standard security gear. Protects the head from impacts.
   components:
   - type: Sprite
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/security.rsi
   - type: Clothing
-    sprite: Clothing/Head/Helmets/security.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/security.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 15
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_internaldamage = 20

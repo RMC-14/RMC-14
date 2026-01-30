@@ -1,8 +1,8 @@
-using Content.Shared.Actions;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Map;
-using Content.Shared.Physics;
+using Content.Shared.Actions.Components;
 using Content.Shared.DoAfter;
+using Content.Shared.Physics;
+using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server._RMC14.NPC.Components;
 

@@ -1,131 +1,154 @@
-﻿# Divide original costs by 37.5 each - except plastic which is 20
+# Items are more expensive to produce than they are to recycle.
+# For all non-sheet items, multiply original costs by 1.25 rounded down. Sheets are all under /obj/item/stack/sheet
+# Example: Syringe is 150 x 1.25 = 187
 - type: latheRecipe
   id: CMSyringe
   result: CMSyringe
   completetime: 4
   materials:
-    CMGlass: 4 # 150
+    CMGlass: 187 # 150
 
 - type: latheRecipe
   id: RMCDropper
   result: RMCDropper
   completetime: 4
   materials:
-    RMCPlastic: 8 # 150
+    RMCPlastic: 187 # 150
 
 - type: latheRecipe
   id: CMHypospray
   result: CMHyposprayWithVial
   completetime: 4
   materials:
-    RMCPlastic: 63 # 1250
-    CMGlass: 7 # 250
+    RMCPlastic: 1562 # 1250
+    CMGlass: 312 # 250
 
 - type: latheRecipe
   id: CMBloodPack
   result: CMBloodPack
   completetime: 4
   materials:
-    RMCPlastic: 25 # 500
+    RMCPlastic: 625 # 500
 
 - type: latheRecipe
   id: RMCBeakerHighCapacity
   result: RMCBeakerHighCapacity
   completetime: 4
   materials:
-    CMGlass: 267 # 10000
+    CMGlass: 12500 # 10000
 
 - type: latheRecipe
   id: CMBonesetter
   result: CMBonesetter
   completetime: 4
   materials:
-    RMCPlastic: 375 # 7500
+    RMCPlastic: 9375 # 7500
 
 - type: latheRecipe
   id: CMStasisBag
   result: CMStasisBagFolded
   completetime: 4
   materials:
-    RMCPlastic: 375 # 7500
+    RMCPlastic: 9375 # 7500
 
 - type: latheRecipe
   id: CMRollerBed
   result: CMRollerBedSpawnFolded
   completetime: 4
   materials:
-    RMCPlastic: 250 # 5000
+    RMCPlastic: 6250 # 5000
 
 - type: latheRecipe
   id: CMPillCanister
   result: CMPillCanister
   completetime: 4
   materials:
-    RMCPlastic: 25 # 500
+    RMCPlastic: 625 # 500
 
 - type: latheRecipe
   id: CMFirstAidKit
   result: CMFirstAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: CMBurnAidKit
   result: CMBurnAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: CMToxinAidKit
   result: CMToxinAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: CMAdvFirstAidKit
   result: CMAdvFirstAidKit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: CMFirstAidO2Kit
   result: CMFirstAidO2Kit
   completetime: 4
   materials:
-    RMCPlastic: 50 # 1000
+    RMCPlastic: 2500 # 2000
+
+- type: latheRecipe
+  id: RMCRadiationAidKit
+  result: RMCRadiationAidKit
+  completetime: 4
+  materials:
+    RMCPlastic: 2500 # 2000
+
+- type: latheRecipe
+  id: RMCSyringeCase
+  result: RMCSyringeCase
+  completetime: 4
+  materials:
+    RMCPlastic: 1250 # 1000
+
+- type: latheRecipe
+  id: CMSurgicalCase
+  result: CMSurgicalCase
+  completetime: 4
+  materials:
+    RMCPlastic: 1250 # 1000
 
 - type: latheRecipe
   id: RMCVialBox
   result: RMCVialBox
   completetime: 4
   materials:
-    RMCPlastic: 100 # 2000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: RMCSurgicalTrayEmpty
   result: RMCSurgicalTrayEmpty
   completetime: 4
   materials:
-    RMCPlastic: 150 # 3000
+    RMCPlastic: 3750 # 3000
 
 - type: latheRecipe
   id: RMCPouchReagentCanister
   result: RMCPouchReagentCanister
   completetime: 4
   materials:
-    CMGlass: 67 # 2500
-    RMCPlastic: 125 # 2500
+    CMGlass: 2500 # 2000
+    RMCPlastic: 2500 # 2000
 
 - type: latheRecipe
   id: RMCPressurizedCanister
   result: RMCPressurizedCanister
   completetime: 4
   materials:
-    CMGlass: 67 # 2500
+    CMGlass: 2500 # 2000
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ1
@@ -133,7 +156,7 @@
   result: RMCMedicAutoInjectorEZ1
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ5
@@ -141,7 +164,7 @@
   result: RMCMedicAutoInjectorEZ5
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ10
@@ -149,7 +172,7 @@
   result: RMCMedicAutoInjectorEZ10
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ15
@@ -157,7 +180,7 @@
   result: RMCMedicAutoInjectorEZ15
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ30
@@ -165,7 +188,7 @@
   result: RMCMedicAutoInjectorEZ30
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ45
@@ -173,7 +196,7 @@
   result: RMCMedicAutoInjectorEZ45
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjectorEZ60
@@ -181,7 +204,7 @@
   result: RMCMedicAutoInjectorEZ60
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjector15
@@ -189,7 +212,7 @@
   result: RMCMedicAutoInjector15
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
 
 - type: latheRecipe
   id: RMCMedicAutoInjector30
@@ -197,4 +220,36 @@
   result: RMCMedicAutoInjector30
   completetime: 4
   materials:
-    RMCPlastic: 19 # 375
+    RMCPlastic: 375 # 300
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom5
+  name: rmc-autoinjector-custom-5
+  result: RMCMedicAutoInjectorCS5
+  completetime: 4
+  materials:
+    RMCPlastic: 375 # 300
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom15
+  name: rmc-autoinjector-custom-15
+  result: RMCMedicAutoInjectorCS15
+  completetime: 4
+  materials:
+    RMCPlastic: 375 # 300
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom30
+  name: rmc-autoinjector-custom-30
+  result: RMCMedicAutoInjectorCS30
+  completetime: 4
+  materials:
+    RMCPlastic: 375 # 300
+
+- type: latheRecipe
+  id: RMCMedicAutoInjectorCustom60
+  name: rmc-autoinjector-custom-60
+  result: RMCMedicAutoInjectorCS60
+  completetime: 4
+  materials:
+    RMCPlastic: 375 # 300

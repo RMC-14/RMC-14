@@ -1,5 +1,4 @@
 ﻿using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Stacks;
@@ -11,6 +10,7 @@ public sealed partial class StackPrototype : IPrototype
     [IdDataField]
     public string ID { get; private set; } = default!;
 
+    // RMC14 until localized
     /// <summary>
     ///     Human-readable name for this stack type e.g. "Steel"
     /// </summary>

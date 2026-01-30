@@ -13,6 +13,8 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: StaticPrice
+    price: 24
 
 # Retractor
 - type: entity
@@ -32,6 +34,10 @@
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/retractor.rsi
   - type: CMRetractor
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 10000
+      CMGlass: 5000
 
 # - Predator
 - type: entity
@@ -60,6 +66,10 @@
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/hemostat.rsi
   - type: CMHemostat
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 5000
+      CMGlass: 2500
 
 # - Predator
 - type: entity
@@ -97,6 +107,10 @@
     soundHit:
       path: /Audio/Effects/lightburn.ogg
   - type: CMCautery
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 5000
+      CMGlass: 2500
 
 # - Predator
 - type: entity
@@ -131,6 +145,12 @@
     soundHit:
       path: /Audio/Items/drill_hit.ogg
   - type: CMSurgicalDrill
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 15000
+      CMGlass: 10000
+  - type: StaticPrice
+    price: 40
 
 # - Bonedrill
 - type: entity
@@ -179,6 +199,10 @@
   - type: Tag
     tags:
     - RMCScalpel
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 10000
+      CMGlass: 5000
 
 # - Predator
 - type: entity
@@ -199,7 +223,7 @@
   - type: Sprite
     layers:
     - state: scalpel_laser
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: MeleeWeapon
     damage:
       types:
@@ -215,8 +239,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_on }
           False: { state: scalpel_laser }
 
@@ -230,11 +254,11 @@
   - type: Sprite
     layers:
     - state: scalpel_laser_2
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_2_on }
           False: { state: scalpel_laser_2 }
 
@@ -248,11 +272,11 @@
   - type: Sprite
     layers:
     - state: scalpel_laser_3
-      map: [ "enum.ToggleVisuals.Layer" ]
+      map: [ "enum.ToggleableVisuals.Layer" ]
   - type: GenericVisualizer
     visuals:
-      enum.ToggleVisuals.Toggled:
-        enum.ToggleVisuals.Layer:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
           True: { state: scalpel_laser_3_on }
           False: { state: scalpel_laser_3 }
 
@@ -304,6 +328,12 @@
     - Sawing
     speedModifier: 1.5
   - type: CMBoneSaw
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 20000
+      CMGlass: 10000
+  - type: StaticPrice
+    price: 47
 
 # - Predator
 - type: entity
@@ -329,6 +359,11 @@
   - type: Item
     sprite: _RMC14/Objects/Medical/Surgery/bonesetter.rsi
   - type: CMBoneSetter
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 7500
+  - type: StaticPrice
+    price: 75
 
 # - Predator
 - type: entity
@@ -383,6 +418,13 @@
     sprite: _RMC14/Objects/Medical/Surgery/bone_gel.rsi
     state: bone-gel
   - type: CMBoneGel
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-bottle-of-bone-gel
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 7500
+  - type: StaticPrice
+    price: 75
 
 - type: entity
   parent: CMBoneGel

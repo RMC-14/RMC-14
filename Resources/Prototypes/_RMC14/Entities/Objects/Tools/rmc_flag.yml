@@ -29,6 +29,10 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Flags/un_flag.rsi
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-un-flag
+    factions:
+    - UNMC
 
 - type: entity
   parent: RMCFlagCarriableBase

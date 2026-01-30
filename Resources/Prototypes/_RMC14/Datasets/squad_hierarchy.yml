@@ -1,0 +1,10 @@
+- type: dataset
+  id: RMCMarineSquadHierarchy
+  values:
+  - "SquadFoxtrot"
+  - "SquadEcho"
+  - "SquadIntel"
+  - "SquadDelta"
+  - "SquadCharlie"
+  - "SquadBravo"
+  - "SquadAlpha"
