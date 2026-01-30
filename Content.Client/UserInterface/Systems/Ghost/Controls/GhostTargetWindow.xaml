@@ -1,6 +1,16 @@
 <DefaultWindow xmlns="https://spacestation14.io" Title="{Loc 'ghost-target-window-title'}" MinSize="450 450" SetSize="450 450">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="0.4">
-        <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" HorizontalAlignment="Center" Margin="0 4" />
+        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="1">
+                <Button Name="FilterButton" Margin="0 0 0 0" />
+            </BoxContainer>
+            <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" Margin="0 0 0 0" />
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" SizeFlagsStretchRatio="1" HorizontalAlignment="Right">
+                <Control HorizontalExpand="True" />
+                <Button Name="SortTypeButton" Margin="4 0 0 0" />
+                <Button Name="SortOrderButton" Margin="0 0 0 0" />
+            </BoxContainer>
+        </BoxContainer>
         <LineEdit Name="SearchBar" PlaceHolder="Search" HorizontalExpand="True" Margin="0 4" />
         <ScrollContainer Name="GhostScroll" VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">
             <BoxContainer Name="ButtonContainer" Orientation="Vertical" VerticalExpand="True" SeparationOverride="5">
