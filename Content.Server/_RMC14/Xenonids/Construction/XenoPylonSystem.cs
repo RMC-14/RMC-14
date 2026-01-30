@@ -13,6 +13,7 @@ using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Popups;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -28,6 +29,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
     [Dependency] private readonly GhostRoleSystem _ghostRole = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCDamageableSystem _rmcDamageable = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
@@ -161,6 +163,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", tripper)), core);
             _hive.IncreaseBurrowedLarva(1);
             QueueDel(tripper);
         }
