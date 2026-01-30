@@ -2117,3 +2117,14 @@
     state: seneca_archibald
   - type: PatronFigurine
     id: 6708071b-dbe6-4e54-9129-d7db177bff62
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKeeganRockwell
+  name: Keegan Rockwell figurine
+  description: "Faux Chaplain of the Fobbit religion, alcoholic and smells faintly like cheap grog and heavy smoke. Someone glued a rum bottle mini to her hand, and someone wrote on the underside of the figure's stand \"Who ahara mazda?\""
+  components:
+  - type: Sprite
+    state: keegan_rockwell
+  - type: PatronFigurine
+    id: 4524c58d-895d-48a8-a83b-519dcc192085
