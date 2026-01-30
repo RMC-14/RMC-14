@@ -59,6 +59,13 @@
       whitelist:
         tags:
         - RMCSquadPMC
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_syn
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: startingGear
