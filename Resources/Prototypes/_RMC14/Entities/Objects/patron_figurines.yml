@@ -2128,3 +2128,14 @@
     state: keegan_rockwell
   - type: PatronFigurine
     id: 4524c58d-895d-48a8-a83b-519dcc192085
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSquealerSqueak
+  name: figurine
+  description: "They don't know how they got turned into a marketable mini figure..."
+  components:
+  - type: Sprite
+    state: TheLazySlothComu
+  - type: PatronFigurine
+    id: e7594a1a-b602-4916-a155-6fe6201f81d0
