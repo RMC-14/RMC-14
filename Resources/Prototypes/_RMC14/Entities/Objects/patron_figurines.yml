@@ -2139,3 +2139,14 @@
     state: TheLazySlothComu
   - type: PatronFigurine
     id: e7594a1a-b602-4916-a155-6fe6201f81d0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAnneArtichokePowell
+  name: Anne 'Artichoke' Powell figurine
+  description: "CLOSE THE DAMN CADES!"
+  components:
+  - type: Sprite
+    state: anne_artichoke_powell
+  - type: PatronFigurine
+    id: aedb33a3-d3b1-4bec-a90a-9c718fa7bef0
