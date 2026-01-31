@@ -54060,7 +54060,6 @@ entities:
           occludes: True
           ents:
           - 3370
-          - 3371
           - 3372
         paper_label: !type:ContainerSlot
           showEnts: False
