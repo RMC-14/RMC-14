@@ -8,5 +8,5 @@
     <RichTextLabel Name="Status" Access="Public" Margin="0 0 10 0" />
     <Button Name="Auto" Access="Public" Text="{Loc 'rmc-apc-channel-row-auto'}" StyleClasses="OpenBoth" />
     <Button Name="On" Access="Public" Text="{Loc 'rmc-apc-channel-row-on'}" StyleClasses="OpenBoth" />
-    <Button Name="Off" Access="Public" Text="{Loc 'rmc-apc-channel-row-off}'" StyleClasses="OpenBoth" />
+    <Button Name="Off" Access="Public" Text="{Loc 'rmc-apc-channel-row-off'}" StyleClasses="OpenBoth" />
 </controls:RMCApcChannelRow>
