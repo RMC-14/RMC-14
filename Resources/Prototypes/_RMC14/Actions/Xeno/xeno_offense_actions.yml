@@ -283,6 +283,10 @@
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoHeadbuttActionEvent
+    whitelist:
+      components:
+      - Marine
+      - Xeno
   - type: XenoOffensiveAction
 
 - type: entity
