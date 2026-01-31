@@ -95,4 +95,6 @@ rmc-lore-examinable-atmospheric-composition-scanner = A handheld piece of heavy-
 
 rmc-lore-examinable-spp-survival-ration = Mass produced as emergency rations, they are available in abundance anywhere in the Progressive Peoples, and are packed with nutritional additives. They are commonplace in the diets of many citizens of the Peoples who eat them out of convenience in place of more flavourful nutrient bars, or as nutritional additives to dishes. Despite popular myths in the UN, they are not the standard MRE of the SPP's Naval Infantry, but are utilized in scenarios where the actual MRE supply has been depleted, as one would expect of survival food.
 
+rmc-lore-examinable-m13-extended-recoil-compensator = A limited-production muzzle device developed by AEGIS Armaments. The compensator channels muzzle gases to counteract recoil and slightly increase bullet velocity through focused pressure, marginally improving ballistic performance.
+
 rmc-lore-examinable-pk10 = Despite receiving very little upgrades over its service period both within the Weston Corporation and later the Weston-Yamada Corporation, it remains popular with mercenaries and security firms because it was designed with security and law enforcement use in mind.

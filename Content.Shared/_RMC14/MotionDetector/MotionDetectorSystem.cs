@@ -7,13 +7,17 @@ using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
+using Robust.Shared.Prototypes;
+using System.Linq;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -24,6 +28,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GunIFFSystem _gunIFF = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -36,11 +41,12 @@ public sealed class MotionDetectorSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private EntityQuery<MotionDetectorComponent> _detectorQuery;
-    private EntityQuery<StorageComponent> _storageQuery;
+    private EntityQuery<MotionDetectorComponent> _detectorQuery = default!;
+    private EntityQuery<StorageComponent> _storageQuery = default!;
 
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _toUpdate = new();
     private readonly HashSet<Entity<MotionDetectorTrackedComponent>> _tracked = new();
+    private readonly HashSet<EntProtoId<IFFFactionComponent>> _userFactions = new();
 
     public override void Initialize()
     {
@@ -56,6 +62,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         SubscribeLocalEvent<MotionDetectorComponent, DroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, RMCDroppedEvent>(OnMotionDetectorDropped);
         SubscribeLocalEvent<MotionDetectorComponent, ExaminedEvent>(OnMotionDetectorExamined);
+        SubscribeLocalEvent<MotionDetectorComponent, ActivateInWorldEvent>(OnActivateInWorld);
 
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, GetItemActionsEvent>(OnGetItemActions);
         SubscribeLocalEvent<ToggleableMotionDetectorComponent, ToggleableMotionDetectorActionEvent>(OnToggleAction);
@@ -85,6 +92,29 @@ public sealed class MotionDetectorSystem : EntitySystem
             return;
 
         if (!_hands.IsHolding(args.User, ent))
+            return;
+
+        args.Handled = true;
+        Toggle(ent);
+
+        var user = args.User;
+        ent.Comp.LastUser = user;
+        Dirty(ent);
+
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, user);
+    }
+
+    private void OnActivateInWorld(Entity<MotionDetectorComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (!ent.Comp.HandToggleable)
+            return;
+
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (!_hands.IsHolding(args.User, ent.Owner) &&
+            HasComp<StorageComponent>(container.Owner) &&
+            !_container.TryGetContainingContainer(container.Owner, out _))
             return;
 
         args.Handled = true;
@@ -129,7 +159,7 @@ public sealed class MotionDetectorSystem : EntitySystem
         UpdateAppearance(ent);
         MotionDetectorUpdated(ent);
     }
-    
+
     private void OnMotionDetectorDevoured(ref XenoDevouredEvent ent)
     {
         DisableDetectorsOnMob(ent.Target);
@@ -148,7 +178,7 @@ public sealed class MotionDetectorSystem : EntitySystem
     {
         if (ent.Comp.Slots != SlotFlags.All &&
             (args.InHands ||
-            (args.SlotFlags & ent.Comp.Slots) == 0))
+             (args.SlotFlags & ent.Comp.Slots) == 0))
         {
             return;
         }
@@ -297,6 +327,14 @@ public sealed class MotionDetectorSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.Enabled;
     }
 
+    public bool IsEnabled(EntityUid uid)
+    {
+        if (!TryComp<MotionDetectorComponent>(uid, out var comp))
+            return false;
+
+        return comp.Enabled;
+    }
+
     public override void Update(float frameTime)
     {
         if (_net.IsClient)
@@ -332,20 +370,20 @@ public sealed class MotionDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
+            var userUid = Transform(uid).ParentUid;
+            var hasFaction = _gunIFF.TryGetFactions((userUid, null), _userFactions);
+
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Owner == detector.LastUser) // User of the MD isn't tracked
+                if (tracked.Owner == detector.LastUser)
                     continue;
 
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
                     continue;
 
-                if (detector.LastUser is { } lastUser && _gunIFF.TryGetFaction(lastUser, out var userFaction))
-                {
-                    if (_gunIFF.IsInFaction(tracked.Owner, userFaction))
-                        continue;
-                }
+                if (hasFaction && _userFactions.Any(f => _gunIFF.IsInFaction(tracked.Owner, f)))
+                    continue;
 
                 detector.Blips.Add(new Blip(_transform.GetMapCoordinates(tracked), tracked.Comp.IsQueenEye));
             }
