@@ -62,9 +62,9 @@ health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))
 rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
 rmc-sentry-deploy = You deploy {THE($spawned)}
 
-rmc-sentry-laptop-ui-name = [color=#88C7FA][bold]UN 571-C Sentry Gun[/color][/bold]
-rmc-sentry-laptop-ui-status-online = [color=#229132][ONLINE[/color]
-rmc-sentry-laptop-ui-name = NAME
+rmc-sentry-laptop-ui-name = [color=#88C7FA][bold] UN 571-C Sentry Gun: [/color][/bold]
+rmc-sentry-laptop-ui-status-online = [color=#229132][ONLINE][/color]
+rmc-sentry-laptop-ui-name2 = NAME
 rmc-sentry-laptop-ui-healthbar = HEALTH
 rmc-sentry-laptop-ui-ammobar = AMMO
 rmc-sentry-laptop-ui-mode-label = MODE

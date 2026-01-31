@@ -39,4 +39,4 @@ rmc-medical-scanner-ui-holocard = Holocard:
 rmc-medical-scanner-ui-body-temp = Body Temperature:
 rmc-medical-scanner-ui-pulse = Pulse:
 rmc-medical-scanner-ui-chemical-contents = Chemical Contents
-rmc-medical-scanner-ui-medical=advice = Medical Advice
+rmc-medical-scanner-ui-medical-advice = Medical Advice

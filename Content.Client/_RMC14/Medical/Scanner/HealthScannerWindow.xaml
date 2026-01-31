@@ -85,7 +85,7 @@
             </PanelContainer>
             <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical" />
         </BoxContainer>
-        <Label Name="MedicalAdviceLabel" Access="Public" Text="{Loc 'rmc-medical-scanner-ui-medical=advice'}" Margin="0 20 0 0" />
+        <Label Name="MedicalAdviceLabel" Access="Public" Text="{Loc 'rmc-medical-scanner-ui-medical-advice'}" Margin="0 20 0 0" />
         <cc:HSeparator Name="MedicalAdviceSeparator" Access="Public" Color="#4972A1" Margin="0 0 0 5" />
         <BoxContainer Orientation="Vertical">
             <BoxContainer Name="AdviceContainer" Access="Public" Orientation="Vertical" />

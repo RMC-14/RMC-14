@@ -20,7 +20,7 @@
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
-                <Label Text="{Loc 'rmc-sentry-laptop-ui-name'}:" MinWidth="60" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                <Label Text="{Loc 'rmc-sentry-laptop-ui-name2'}" MinWidth="60" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
                 <LineEdit Name="NameLineEdit" Access="Public"
                          HorizontalExpand="True"
                          Margin="5 0 0 0"
