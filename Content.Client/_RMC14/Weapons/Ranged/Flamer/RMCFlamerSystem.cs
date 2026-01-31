@@ -2,6 +2,7 @@
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Client.Graphics;
 using Robust.Client.Input;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
@@ -9,7 +10,20 @@ namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
 public sealed class RMCFlamerSystem : SharedRMCFlamerSystem
 {
     [Dependency] private readonly IInputManager _input = default!;
+    [Dependency] private readonly IOverlayManager _overlay = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        _overlay.AddOverlay(new RMCFlamerPreviewOverlay(EntityManager));
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        _overlay.RemoveOverlay<RMCFlamerPreviewOverlay>();
+    }
 
     protected override void OnIgniterAttemptShoot(Entity<RMCIgniterComponent> ent, ref AttemptShootEvent args)
     {

@@ -1,205 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The M54C magazines have received minor visual tweaks.
-    type: Tweak
-  id: 2299
-  time: '2025-09-06T01:35:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7799
-- author: Vixting
-  changes:
-  - message: Toggling label modes
-    type: Fix
-  id: 2300
-  time: '2025-09-06T01:38:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7800
-- author: Spaghetti
-  changes:
-  - message: Fixed warriors being able to heal through lifesteal while on fire.
-    type: Fix
-  id: 2301
-  time: '2025-09-06T01:41:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7792
-- author: Spaghetti-bit
-  changes:
-  - message: Fixed defenders being unable to tail slam while fortified.
-    type: Fix
-  id: 2302
-  time: '2025-09-06T01:43:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7760
-- author: yagwog
-  changes:
-  - message: Wheelchairs
-    type: Add
-  id: 2303
-  time: '2025-09-06T07:52:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6939
-- author: shibechef
-  changes:
-  - message: The mou53 has a delay of 1.1 seconds for toggling it's breech.
-    type: Tweak
-  id: 2304
-  time: '2025-09-06T08:03:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7802
-- author: noctyrnal
-  changes:
-  - message: Adds the UNMC officer uniform and the Commanding Officer's gray formal
-      uniform. Both can be found in the CO clothing vendor.
-    type: Add
-  id: 2305
-  time: '2025-09-06T08:04:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7803
-- author: crazy1112345
-  changes:
-  - message: Added lore blurbs on select weaponry, and a small selection of misc items.
-      Happy soul hunting.
-    type: Add
-  id: 2306
-  time: '2025-09-06T08:18:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6998
-- author: noctyrnal
-  changes:
-  - message: You can now authorize evac and cancel evac via the Command Tablet.
-    type: Add
-  id: 2307
-  time: '2025-09-06T08:26:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7761
-- author: DummeHytteOst
-  changes:
-  - message: Parasite(s) should now correctly be translated into Child or Children
-      for xenonids, it will remain as parasite for non xenonids.
-    type: Fix
-  - message: renamed Carrier's "Throw parasite" ability to "Carrier's Bond".
-    type: Tweak
-  id: 2308
-  time: '2025-09-06T08:27:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7702
-- author: Shromply
-  changes:
-  - message: Gave the SPP and PMC PVE roles powerloader skill.
-    type: Tweak
-  - message: Gave the SPP and PMC PVE roles smartgun skill.
-    type: Tweak
-  - message: Gave the SPP and PMC PVE roles the abillity to use special weapons.
-    type: Tweak
-  id: 2309
-  time: '2025-09-06T08:34:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7756
-- author: Binbagg
-  changes:
-  - message: Xenonid tunnels are now more visible
-    type: Tweak
-  id: 2310
-  time: '2025-09-06T08:33:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7741
-- author: blueDev2
-  changes:
-  - message: Fixed leaping parasites colliding with the resin door they start under.
-    type: Fix
-  - message: Fixed parasites not becoming visible over doors during leap doafters.
-      This makes them able to be hit by bullets and melee attacks.
-    type: Fix
-  id: 2311
-  time: '2025-09-06T08:33:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7664
-- author: Vermidia
-  changes:
-  - message: Fixed attack rate and damage while devoured to be more accurate.
-    type: Fix
-  - message: You can no longer click in harm mode to attack while devoured. Instead
-      moving or clicking (out of harm mode) will attempt to attack the devourer.
-    type: Fix
-  id: 2312
-  time: '2025-09-06T08:44:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6321
-- author: Dygon
-  changes:
-  - message: The Dropship part fabricator can now print the AGM-227 'Banshee' for
-      300 points. It has a 6-second travel time and creates a medium-sized explosion,
-      along with a short-lived, star-shaped area of high-intensity fire.
-    type: Add
-  - message: The Dropship part fabricator can now print the AGM-184 'Harpoon II' for
-      200 points. It has a 5-second travel time and creates a medium-sized explosion
-      with relatively low damage.
-    type: Add
-  - message: The Dropship part fabricator can now print the BLU-200 'Dragon's Breath'
-      for 300 points. It has a 5-second travel time and creates an area of high-intensity
-      fire, along with a large non-damaging implosion that pulls entities toward its
-      epicenter.
-    type: Add
-  - message: Fixed the AGM-99 'Napalm' not creating 2 additional fire tiles towards
-      every cardinal direction.
-    type: Fix
-  - message: Fire created by the AGM-99 'Napalm' now deals less damage per second.
-    type: Fix
-  id: 2313
-  time: '2025-09-06T08:47:37.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7350
-- author: Dygon
-  changes:
-  - message: The Dropship Part Fabricator can now print the AN/AAQ-178 Weapon Targeting
-      System, which can be installed in the dropship's electronic system slot. It
-      boosts weapon accuracy and reduces projectile travel time.
-    type: Add
-  - message: The Dropship Part Fabricator can now print the AN/AVD-60 LZ Detector.
-      Installing this device in the dropship enables pilots to watch the area around
-      the landing zones through the Dropship Camera Control Console.
-    type: Add
-  - message: The Dropship Part Fabricator can now print the AN/LEN-15 Spotlight, installing
-      this provides light around the dropship's cockpit.
-    type: Add
-  id: 2314
-  time: '2025-09-06T08:51:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7328
-- author: RavenCaat
-  changes:
-  - message: Added The Weapons L24 and the L24B for the Royal Marines and there respective
-      Ammunition.
-    type: Add
-  - message: Added The Weapon L83A3, L83A3F, L83A3M and there respective Ammunition
-    type: Add
-  id: 2315
-  time: '2025-09-06T09:06:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6774
-- author: VictorJob
-  changes:
-  - message: Updated the muzzle flash effect.
-    type: Tweak
-  id: 2316
-  time: '2025-09-06T09:13:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7571
-- author: Vermidia
-  changes:
-  - message: Fixed the scout spec's custom battle rifle having burst.
-    type: Fix
-  id: 2317
-  time: '2025-09-06T09:16:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6856
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Added meson functionality to the weapon specialist NVGs. Meson goggles
-      allow you to see a room's layout.
-    type: Add
-  id: 2318
-  time: '2025-09-06T09:22:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/5387
-- author: N0lim
-  changes:
-  - message: Added acid blood to xeno. Damage and death causes it to spray. If you
-      are close enough, damage will be dealt depending on the type of xeno.
-    type: Add
-  id: 2319
-  time: '2025-09-06T10:14:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7413
-- author: Dygon
-  changes:
-  - message: Fixed the plasma cost of new xeno constructs not scaling with how many
-      existing constructs there are in an area if they exceed a threshold of 40% of
-      the buildable tiles in an area.
-    type: Fix
-  id: 2320
-  time: '2025-09-06T11:14:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6288
 - author: Shromply
   changes:
   - message: Added CLF PVE roles.
@@ -4738,5 +4537,189 @@
   id: 2801
   time: '2026-01-16T01:31:21.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8914
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The FTL tracker now has a special sprite when you switch to that mode.
+    type: Add
+  - message: Fixed FORECON Squad leader tracker not being functional.
+    type: Fix
+  - message: Fixed Xenos hive tracker resetting each time you evolve. The hive tracker
+      not automatically setting to queen has also been fixed.
+    type: Fix
+  id: 2802
+  time: '2026-01-17T13:17:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8855
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Hybrisa pizza driver survivor not having vehicles 1.
+    type: Fix
+  id: 2803
+  time: '2026-01-19T01:00:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9018
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the PMC crashed ship on solaris insert not deleting walls.
+    type: Fix
+  - message: Fixed the Lazarus Landing corporate dome scenario not allowing scientist
+      survivors. They will roll as a medic goon now.
+    type: Fix
+  id: 2804
+  time: '2026-01-19T01:02:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8997
+- author: SharkSnake98
+  changes:
+  - message: Added PMC Premade Meals and their vendor
+    type: Add
+  - message: Changed the Hauchefant's premade meal vendor to the PMC one.
+    type: Tweak
+  id: 2805
+  time: '2026-01-19T01:03:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8990
+- author: Ian321
+  changes:
+  - message: Hospital Corpsman can now acquire the "MS-11 Smart Refill Tank" that
+      can be used to refill injectors in the field.
+    type: Add
+  id: 2806
+  time: '2026-01-19T01:03:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8386
+- author: wheelwrightt
+  changes:
+  - message: Recharger sprite now changes corresponding to the charge level of the
+      item inside.
+    type: Add
+  - message: NV visor now displays charge level upon examining in the recharger.
+    type: Fix
+  id: 2807
+  time: '2026-01-19T03:22:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8557
+- author: SharkSnake98
+  changes:
+  - message: Fixed testfails from TSE Airbase Insert
+    type: Fix
+  id: 2808
+  time: '2026-01-23T03:40:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9007
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Hybrisa has received a passover. Changed up loot, new props, more soul.
+    type: Add
+  id: 2809
+  time: '2026-01-23T03:41:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9020
+- author: Whisper
+  changes:
+  - message: Xenonids, by default, are immune to becoming zombies. This can change
+      during a round, however.
+    type: Tweak
+  id: 2810
+  time: '2026-01-23T03:56:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9042
+- author: Whisper
+  changes:
+  - message: All airlocks should now be able to be properly deconstructed into metal.
+    type: Fix
+  id: 2811
+  time: '2026-01-23T03:58:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9050
+- author: YO0teacher
+  changes:
+  - message: Fixed being able to use optics while viewing overwatch cameras.
+    type: Fix
+  id: 2812
+  time: '2026-01-23T04:01:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8215
+- author: RosySaturniidae
+  changes:
+  - message: new slime noises!
+    type: Add
+  id: 2813
+  time: '2026-01-23T04:03:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9047
+- author: shibechef
+  changes:
+  - message: Xenonid leaps are no longer stopped by boiler fog
+    type: Fix
+  id: 2814
+  time: '2026-01-23T04:03:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9048
+- author: Dygon
+  changes:
+  - message: Data detectors and motion detectors can now be toggled with the interact
+      key.
+    type: Fix
+  id: 2815
+  time: '2026-01-23T04:05:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9015
+- author: Arykh
+  changes:
+  - message: Tweaked status effect duration applied by reagents to match parity. Notably,
+      Inaprovaline OD won't completely round remove you.
+    type: Tweak
+  id: 2816
+  time: '2026-01-23T05:35:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9052
+- author: CatAndHats
+  changes:
+  - message: Generator locations now have an icon on the tactical map
+    type: Add
+  id: 2817
+  time: '2026-01-23T07:02:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8992
+- author: Vixting
+  changes:
+  - message: Adds overlay to flamers to visualize which tiles you will set on fire,
+      using solution color.
+    type: Add
+  id: 2818
+  time: '2026-01-23T08:42:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8987
+- author: Vixting
+  changes:
+  - message: Adds overlay to bombard, spray acid, burrow
+    type: Add
+  id: 2819
+  time: '2026-01-23T08:46:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9005
+- author: SharkSnake98
+  changes:
+  - message: Added the Cold Drinks vendor
+    type: Add
+  - message: Added WEYA Sequoia Beer to the Booze-O-Mat
+    type: Add
+  - message: Edited the sprite of the WEYA Cap
+    type: Tweak
+  id: 2820
+  time: '2026-01-23T09:51:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8817
+- author: BadaBoomie
+  changes:
+  - message: Fixed grinding phoron in a mixer giving half the intended amount.
+    type: Fix
+  id: 2821
+  time: '2026-01-23T10:08:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8771
+- author: Ian321
+  changes:
+  - message: Moved the label on pills and injectors to the left.
+    type: Tweak
+  id: 2822
+  time: '2026-01-23T10:15:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8321
+- author: to4no_fix
+  changes:
+  - message: Squads now have a Primary and Secondary objective, which can be changed
+      through the squad's Overwatch console. Objectives are announced in chat when
+      updating or canceling and are displayed in the squad tracker menu and tactical
+      map. They are also announced when joining a round (if set) and when transferring
+      from one squad to another.
+    type: Add
+  - message: The regular supply drop and orbital cannon firing buttons in the Overwatch
+      console and Supply drop console  have been replaced with confirmation buttons
+      that require a confirmation click to prevent accidental pressing.
+    type: Tweak
+  id: 2823
+  time: '2026-01-23T10:21:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8917
 Name: RMC14
 Order: -1
