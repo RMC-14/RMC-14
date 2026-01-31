@@ -109,7 +109,7 @@
   name: "Combat Technician"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleCombatTechnician.xml"
 
-- type: guideEntry
+- type: guideEntry # by Kynthos on Discord
   parent: RMC
   id: RMCGuideRoleMaintenanceTechnician
   priority: 7
