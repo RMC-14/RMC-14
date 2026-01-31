@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Moth
     hideLayersOnEquip:
+    - UndergarmentTop
     - HeadTop
   - type: MothAccent
   - type: ZombieAccentOverride
