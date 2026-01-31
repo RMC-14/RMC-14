@@ -41,6 +41,13 @@
         - RMCSquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-leader
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_ld
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
