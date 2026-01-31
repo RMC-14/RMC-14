@@ -6,31 +6,31 @@
     MinSize="400 350">
     <BoxContainer Orientation="Vertical" Margin="5">
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Planet: " />
+            <Label Text="{Loc 'rmc-marines-announce-planet'}: " />
             <Label Name="PlanetName" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Operation: " />
+            <Label Text="{Loc 'rmc-marines-announce-operation'}: " />
             <Label Name="OperationName" Access="Public" />
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
-        <Button Name="MedalButton" Access="Public" Text="Give a medal" StyleClasses="OpenBoth" />
-        <Button Name="TacticalMapButton" Access="Public" Text="Tactical Map" StyleClasses="OpenBoth" />
-        <Button Name="OverwatchButton" Access="Public" Text="Overwatch" StyleClasses="OpenBoth" />
+        <Button Name="MedalButton" Access="Public" Text="{Loc 'rmc-marines-announce-ui-give-medal'}" StyleClasses="OpenBoth" />
+        <Button Name="TacticalMapButton" Access="Public" Text="{Loc 'rmc-marines-announce-ui-tactical-map'}" StyleClasses="OpenBoth" />
+        <Button Name="OverwatchButton" Access="Public" Text="{Loc 'rmc-marines-announce-ui-overwatch'}" StyleClasses="OpenBoth" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
-        <Button Name="EchoButton" Access="Public" Text="Designate Echo Squad" StyleClasses="OpenBoth" />
+        <Button Name="EchoButton" Access="Public" Text="{Loc 'rmc-marines-announce-ui-echo-designate'}" StyleClasses="OpenBoth" />
         <cc:HSeparator Name="EchoSeparator" Access="Public" Color="#4972A1" Margin="0 5" />
         <Button Name="EvacuationButton" Access="Public" HorizontalExpand="True"
                 StyleClasses="OpenBoth" TextAlign="Left" />
         <cc:HSeparator Color="#4972A1" Margin="0 5" />
         <BoxContainer Name="LandingZonesSection" Access="Public" Orientation="Vertical">
-            <Label Text="Designate Primary LZ" />
+            <Label Text="rmc-marines-announce-ui-primary-lz" />
             <BoxContainer Name="LandingZonesContainer" Access="Public" Orientation="Vertical" />
             <cc:HSeparator Color="#4972A1" Margin="0 5" />
         </BoxContainer>
         <TextEdit Name="Text" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
         <Label Name="CharacterCount" Access="Public" />
-        <Button Name="Send" Access="Public" Text="Send" HorizontalExpand="True"
+        <Button Name="Send" Access="Public" Text="{Loc 'rmc-marines-announce-ui-send'}" HorizontalExpand="True"
                 StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:MarineCommunicationsComputerWindow>

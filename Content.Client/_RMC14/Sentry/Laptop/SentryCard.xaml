@@ -10,17 +10,17 @@
         <BoxContainer Orientation="Vertical" Margin="10">
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
                 <RichTextLabel Name="SentryName" Access="Public"
-                             Text="[color=#88C7FA][bold]UN 571-C Sentry Gun[/bold][/color]"
+                             Text="[color=#88C7FA][bold]{Loc 'rmc-sentry-laptop-ui-name'}[/bold][/color]"
                              VerticalAlignment="Center"
                              HorizontalExpand="True"/>
                 <RichTextLabel Name="SentryStatus" Access="Public"
-                             Text="[color=#229132][ONLINE][/color]"
+                             Text="[color=#229132][{Loc 'rmc-sentry-laptop-ui-status-online'}][/color]"
                              VerticalAlignment="Center"
                              Margin="5 0 0 0"/>
             </BoxContainer>
 
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
-                <Label Text="NAME:" MinWidth="60" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                <Label Text="{Loc 'rmc-sentry-laptop-ui-name'}:" MinWidth="60" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
                 <LineEdit Name="NameLineEdit" Access="Public"
                          HorizontalExpand="True"
                          Margin="5 0 0 0"
@@ -32,7 +32,7 @@
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 0 5 0">
                     <BoxContainer Orientation="Horizontal" Margin="0 3">
-                        <Label Text="HEALTH" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                        <Label Text="{Loc 'rmc-sentry-laptop-ui-healthbar'}" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
                         <ProgressBar Name="HealthBar" Access="Public"
                                    MinSize="160 20"
                                    MaxSize="160 20"
@@ -50,7 +50,7 @@
                     </BoxContainer>
 
                     <BoxContainer Orientation="Horizontal" Margin="0 3">
-                        <Label Text="AMMO" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                        <Label Text="{Loc 'rmc-sentry-laptop-ui-ammobar'}" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
                         <ProgressBar Name="AmmoBar" Access="Public"
                                    MinSize="160 20"
                                    MaxSize="160 20"
@@ -68,20 +68,20 @@
                     </BoxContainer>
 
                     <BoxContainer Orientation="Horizontal" Margin="0 3">
-                        <Label Text="MODE" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
-                        <RichTextLabel Name="ModeLabel" Access="Public" Text="[color=#229132]Active[/color]" VerticalAlignment="Center" Margin="5 0"/>
+                        <Label Text="{Loc 'rmc-sentry-laptop-ui-mode-label'}" MinWidth="70" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                        <RichTextLabel Name="ModeLabel" Access="Public" Text="[color=#229132]{Loc 'rmc-sentry-laptop-ui-mode-active'}[/color]" VerticalAlignment="Center" Margin="5 0"/>
                     </BoxContainer>
                 </BoxContainer>
 
                 <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="5 0 0 0">
                     <BoxContainer Orientation="Horizontal" Margin="0 3">
-                        <Label Text="LOCATION" MinWidth="80" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
-                        <Label Name="LocationLabel" Access="Public" Text="Unknown" VerticalAlignment="Center" Margin="5 0"/>
+                        <Label Text="{Loc 'rmc-sentry-laptop-ui-location'}" MinWidth="80" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                        <Label Name="LocationLabel" Access="Public" Text="{Loc 'rmc-sentry-laptop-ui-location-unknown'}" VerticalAlignment="Center" Margin="5 0"/>
                     </BoxContainer>
 
                     <BoxContainer Orientation="Horizontal" Margin="0 3">
-                        <Label Text="TARGET" MinWidth="80" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
-                        <RichTextLabel Name="TargetLabel" Access="Public" Text="[color=#B0B0B0]None[/color]" VerticalAlignment="Center" Margin="5 0"/>
+                        <Label Text="{Loc 'rmc-sentry-laptop-ui-target'}" MinWidth="80" FontColorOverride="#88C7FA" VerticalAlignment="Center"/>
+                        <RichTextLabel Name="TargetLabel" Access="Public" Text="[color=#B0B0B0]{Loc 'rmc-sentry-laptop-ui-target-none'}[/color]" VerticalAlignment="Center" Margin="5 0"/>
                     </BoxContainer>
                 </BoxContainer>
             </BoxContainer>
@@ -95,11 +95,11 @@
                             SetWidth="24"
                             SetHeight="24"
                             VerticalAlignment="Center"/>
-                    <Label Text="IFF TARGETING CONTROLS" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="5 0 0 0" HorizontalExpand="True"/>
+                    <Label Text="{Loc 'rmc-sentry-laptop-ui-iff-target-controls'}" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="5 0 0 0" HorizontalExpand="True"/>
                     <controls:SentryButton Name="ResetTargetingButton" Access="Public"
                                          BackgroundColor="#1A3D5C"
                                          BorderColor="#88C7FA" BorderThickness="1"
-                                         Text="RESET TO DEFAULT" />
+                                         Text="{Loc 'rmc-sentry-laptop-ui-iff-target-controls-reset'}" />
                 </BoxContainer>
 
                 <PanelContainer Name="IFFPanel" Access="Public" MinHeight="120" MaxHeight="120" Visible="False">
@@ -124,16 +124,16 @@
                                      Margin="0 0 5 0"
                                      BackgroundColor="#1A3D5C"
                                      BorderColor="#88C7FA" BorderThickness="1"
-                                     Text="TOGGLE POWER" />
+                                     Text="{Loc 'rmc-sentry-laptop-ui-toggle-power'}" />
                 <controls:SentryButton Name="ViewButton" Access="Public"
                                      Margin="0 0 5 0"
                                      BackgroundColor="#1A3D5C"
                                      BorderColor="#88C7FA" BorderThickness="1"
-                                     Text="VIEW CAM" />
+                                     Text="{Loc 'rmc-sentry-laptop-ui-view-cam'}" />
                 <controls:SentryButton Name="UnlinkButton" Access="Public"
                                      BackgroundColor="#5C1A1A"
                                      BorderColor="#A42625" BorderThickness="1"
-                                     Text="UNLINK" />
+                                     Text="{Loc 'rmc-sentry-laptop-ui-unlink'}" />
             </BoxContainer>
         </BoxContainer>
     </PanelContainer>

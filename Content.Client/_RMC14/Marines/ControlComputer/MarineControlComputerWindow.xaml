@@ -4,13 +4,13 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Almayer Control Console" MinSize="350 350">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]Ship Control[/bold]" />
+        <RichTextLabel Text="[bold]{Loc 'rmc-marines-control-computer-ui-ship-control'}[/bold]" />
         <ui:BlueHorizontalSeparator />
         <Button Name="AlertButton" Access="Public" Text="{Loc rmc-alert-change-level}"
                 StyleClasses="OpenBoth" />
-        <Button Name="ShipAnnouncementButton" Access="Public" Text="Make a shipwide announcement"
+        <Button Name="ShipAnnouncementButton" Access="Public" Text="{Loc 'rmc-marines-control-computer-ui-ship-announcement'}"
                 StyleClasses="OpenBoth" />
-        <Button Name="MedalButton" Access="Public" Text="Give a medal"
+        <Button Name="MedalButton" Access="Public" Text="{Loc 'rmc-marines-announce-ui-give-medal'}"
                 StyleClasses="OpenBoth" />
         <RichTextLabel Text="[bold]Emergency measures[/bold]" Margin="0 20 0 0" />
         <ui:BlueHorizontalSeparator />

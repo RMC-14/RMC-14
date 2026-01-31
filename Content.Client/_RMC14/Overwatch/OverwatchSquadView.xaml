@@ -300,7 +300,7 @@
                                                 </BoxContainer>
                                                 <BoxContainer Orientation="Vertical">
                                                     <RichTextLabel Name="OrbitalStatus" Access="Public"
-                                                                   Text="[color=red][bold]No warhead loaded[/bold][/color]" />
+                                                                   Text="[color=red][bold]{Loc rmc-overwatch-console-not-loaded-orbital-bombardment}[/bold][/color]" />
                                                     <Label Text="{Loc rmc-overwatch-console-status}" HorizontalAlignment="Center" />
                                                 </BoxContainer>
                                             </BoxContainer>

@@ -16,7 +16,7 @@
                         <BoxContainer Name="Players" Access="Public" Orientation="Vertical"
                                       VerticalExpand="True" />
                     </ScrollContainer>
-                    <Button Name="DeMentorButton" Access="Public" Text="De-Mentor"
+                    <Button Name="DeMentorButton" Access="Public" Text="{Loc 'rmc-mentor-dementor'}"
                             StyleClasses="OpenBoth" />
                 </BoxContainer>
         </PanelContainer>
@@ -29,7 +29,7 @@
             <BoxContainer Orientation="Horizontal">
                 <LineEdit Name="Chat" Access="Public" HorizontalExpand="True"
                           Editable="False" />
-                <Button Name="ClaimButton" Access="Public" Text="Claim"
+                <Button Name="ClaimButton" Access="Public" Text="{Loc 'rmc-mentor-claim'}"
                         StyleClasses="OpenBoth" Visible="False" />
             </BoxContainer>
         </BoxContainer>

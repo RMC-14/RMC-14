@@ -61,3 +61,31 @@ health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))
 
 rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
 rmc-sentry-deploy = You deploy {THE($spawned)}
+
+rmc-sentry-laptop-ui-name = UN 571-C Sentry Gun
+rmc-sentry-laptop-ui-status-online = ONLINE
+rmc-sentry-laptop-ui-name = NAME
+rmc-sentry-laptop-ui-healthbar = HEALTH
+rmc-sentry-laptop-ui-ammobar = AMMO
+rmc-sentry-laptop-ui-mode-label = MODE
+rmc-sentry-laptop-ui-mode-active = Active
+rmc-sentry-laptop-ui-location = LOCATION
+rmc-sentry-laptop-ui-location-unknown = Unknown
+rmc-sentry-laptop-ui-target = TARGET
+rmc-sentry-laptop-ui-target-none = None
+rmc-sentry-laptop-ui-iff-target-controls = IFF TARGETING CONTROLS
+rmc-sentry-laptop-ui-iff-target-controls-reset = RESET TO DEFAULT
+rmc-sentry-laptop-ui-toggle-power = TOGGLE POWER
+rmc-sentry-laptop-ui-view-cam = VIEW CAM
+rmc-sentry-laptop-ui-unlink = UNLINK
+rmc-sentry-laptop-ui-global-iff = GLOBAL IFF
+rmc-sentry-laptop-ui-refresh = REFRESH
+rmc-sentry-laptop-ui-unlink-all = UNLINK ALL
+rmc-sentry-laptop-window-ui-status = Status: No sentries linked
+rmc-sentry-laptop-window-ui-search = SEARCH
+rmc-sentry-laptop-window-ui-global-iff-target-controls = GLOBAL IFF TARGETING CONTROLS
+rmc-sentry-laptop-window-ui-global-iff-target-controls-reset-all = RESET ALL TO DEFAULT
+rmc-sentry-laptop-window-ui-global-power-on = POWER ALL ON
+rmc-sentry-laptop-window-ui-global-power-off = POWER ALL OFF
+rmc-sentry-laptop-window-ui-camera-view = CAMERA VIEW
+rmc-sentry-laptop-window-ui-camera-view-close = CLOSE

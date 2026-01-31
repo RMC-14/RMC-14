@@ -68,3 +68,12 @@ rmc-chem-master-preset-quick-access-slot = Quick Access Slot:
 rmc-chem-master-preset-button-text = Button Text:
 rmc-chem-master-preset-edit-title = Edit Preset: {$name}
 rmc-chem-master-preset-clear-selection = Clear Selection
+
+rmc-chemicaldispenser-ui-status = Status
+rmc-chemicaldispenser-ui-energy-bar = energy
+rmc-chemicaldispenser-ui-dispence-container = Dispense
+rmc-chemicaldispenser-ui-beaker = Beaker
+rmc-chemicaldispenser-ui-no-beaker = No beaker loaded!
+rmc-chemicaldispenser-ui-eject = Eject
+rmc-chemicaldispenser-ui-content = Contents
+
