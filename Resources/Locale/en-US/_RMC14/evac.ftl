@@ -1,7 +1,7 @@
-rmc-marines-evac-ui-inform-display = Information display
+rmc-marines-evac-ui-inform-display = [bold]Information display[/bold]
 rmc-marines-evac-ui-status-label = Escape Pod Status: NO EVACUATION
 rmc-marines-evac-ui-hatch-label = Docking Hatch: UNSECURED
-rmc-marines-evac-ui-pod-control = Pod controls
+rmc-marines-evac-ui-pod-control = [bold]Pod controls[/bold]
 rmc-marines-evac-ui-unlock-door = Unlock door
 rmc-marines-evac-ui-eject-button = Manual eject
 rmc-marines-evac-ui-delay-button = Delay launch

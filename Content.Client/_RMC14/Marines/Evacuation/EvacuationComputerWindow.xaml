@@ -4,11 +4,11 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Escape Pod Controller">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]{Loc 'rmc-marines-evac-ui-inform-display'}[/bold]" />
+        <RichTextLabel Text="{Loc 'rmc-marines-evac-ui-inform-display'}" />
         <ui:BlueHorizontalSeparator />
         <Label Name="StatusLabel" Access="Public" Text="{Loc 'rmc-marines-evac-ui-status-label'}" />
         <Label Name="HatchLabel" Access="Public" Text="{Loc 'rmc-marines-evac-ui-hatch-label'}" />
-        <RichTextLabel Text="[bold]{Loc 'rmc-marines-evac-ui-pod-control'}[/bold]" Margin="0 10 0 0" />
+        <RichTextLabel Text="{Loc 'rmc-marines-evac-ui-pod-control'}" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
         <Button Name="DoorButton" Access="Public" Text="{Loc 'rmc-marines-evac-ui-unlock-door'}" StyleClasses="OpenBoth" />
         <Button Name="EjectButton" Access="Public" Text="{Loc 'rmc-marines-evac-ui-eject-button'}" StyleClasses="OpenBoth" />

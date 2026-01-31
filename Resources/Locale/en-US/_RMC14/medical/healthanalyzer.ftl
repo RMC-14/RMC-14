@@ -33,10 +33,10 @@ rmc-health-analyzer-advice-bicaridine = [color=#ed4847][font="Emoji"]💉[/font]
 rmc-health-analyzer-advice-kelotane = [color=#f5e123][font="Emoji"]💉[/font][/color] Administer a single dose of kelotane.
 rmc-health-analyzer-advice-dylovene = [color=#3fc92a][font="Emoji"]💉[/font][/color] Administer a single dose of dylovene.
 
-rmc-medical-scanner-ui-health = Health
-rmc-medical-scanner-ui-damage = Damage
-rmc-medical-scanner-ui-holocard = Holocard
-rmc-medical-scanner-ui-body-temp = Body Temperature
-rmc-medical-scanner-ui-pulse = Pulse
+rmc-medical-scanner-ui-health = Health:
+rmc-medical-scanner-ui-damage = Damage:
+rmc-medical-scanner-ui-holocard = Holocard:
+rmc-medical-scanner-ui-body-temp = Body Temperature:
+rmc-medical-scanner-ui-pulse = Pulse:
 rmc-medical-scanner-ui-chemical-contents = Chemical Contents
 rmc-medical-scanner-ui-medical=advice = Medical Advice

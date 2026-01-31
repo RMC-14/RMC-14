@@ -10,11 +10,11 @@
         <BoxContainer Orientation="Vertical" Margin="10">
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 8">
                 <RichTextLabel Name="SentryName" Access="Public"
-                             Text="[color=#88C7FA][bold]{Loc 'rmc-sentry-laptop-ui-name'}[/bold][/color]"
+                             Text="{Loc 'rmc-sentry-laptop-ui-name'}"
                              VerticalAlignment="Center"
                              HorizontalExpand="True"/>
                 <RichTextLabel Name="SentryStatus" Access="Public"
-                             Text="[color=#229132][{Loc 'rmc-sentry-laptop-ui-status-online'}][/color]"
+                             Text="{Loc 'rmc-sentry-laptop-ui-status-online'}"
                              VerticalAlignment="Center"
                              Margin="5 0 0 0"/>
             </BoxContainer>

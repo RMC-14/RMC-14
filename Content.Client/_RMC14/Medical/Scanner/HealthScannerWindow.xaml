@@ -12,14 +12,14 @@
         </BoxContainer>
         <cc:HSeparator Color="#4972A1" Margin="0 0 0 5" />
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-            <Label Text="{Loc 'rmc-medical-scanner-ui-health'}:" MinWidth="80" Modulate="#5B88B0" />
+            <Label Text="{Loc 'rmc-medical-scanner-ui-health'}" MinWidth="80" Modulate="#5B88B0" />
             <ProgressBar Name="HealthBar" Access="Public"
                          HorizontalExpand="True">
                 <Label Name="HealthBarText" Access="Public" Align="Right" Margin="0 0 5 0" />
             </ProgressBar>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal" Margin="0 0 0 20">
-            <Label Text="{Loc 'rmc-medical-scanner-ui-damage'}:" MinWidth="80" Modulate="#5B88B0" />
+            <Label Text="{Loc 'rmc-medical-scanner-ui-damage'}" MinWidth="80" Modulate="#5B88B0" />
             <PanelContainer Margin="0 0 5 0">
                 <PanelContainer.PanelOverride>
                     <graphics:StyleBoxFlat BorderColor="#4972A1" BorderThickness="2" />
@@ -52,7 +52,7 @@
             </PanelContainer>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="{Loc 'rmc-medical-scanner-ui-holocard'}:" MinWidth="80" Modulate="#5B88B0" />
+            <Label Text="{Loc 'rmc-medical-scanner-ui-holocard'}" MinWidth="80" Modulate="#5B88B0" />
 			<PanelContainer Name="HolocardPanel" Access="Public" Visible="True" Margin="2 5">
 				<PanelContainer.PanelOverride>
 					<graphics:StyleBoxFlat BackgroundColor="#984A16" />
@@ -67,11 +67,11 @@
             <RichTextLabel Name="Bleeding" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="{Loc 'rmc-medical-scanner-ui-body-temp'}:" MinWidth="160" Modulate="#5B88B0" />
+            <Label Text="{Loc 'rmc-medical-scanner-ui-body-temp'}" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="BodyTemperatureLabel" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal" Visible="False">
-            <Label Text="{Loc 'rmc-medical-scanner-ui-pulse'}:" MinWidth="160" Modulate="#5B88B0" />
+            <Label Text="{Loc 'rmc-medical-scanner-ui-pulse'}" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="PulseLabel" Access="Public" />
         </BoxContainer>
         <Label Name="ChemicalContentsLabel" Access="Public" Text="{Loc 'rmc-medical-scanner-ui-chemical-contents'}" Margin="0 20 0 0" />

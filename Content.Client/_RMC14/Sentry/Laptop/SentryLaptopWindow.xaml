@@ -111,7 +111,7 @@
             <BoxContainer Orientation="Vertical" Margin="5">
                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                     <RichTextLabel Name="CameraTitle" Access="Public"
-                                 Text="[color=#88C7FA][bold]{Loc 'rmc-sentry-laptop-window-ui-camera-view'}[/bold][/color]"
+                                 Text="{Loc 'rmc-sentry-laptop-window-ui-camera-view'}"
                                  VerticalAlignment="Center"
                                  HorizontalExpand="True"/>
                     <controls:SentryButton Name="CloseCameraButton" Access="Public"
