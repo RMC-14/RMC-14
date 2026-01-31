@@ -3,6 +3,7 @@ rmc-marines-announce-operation = Operation:
 rmc-marines-announce-ui-give-medal = Give a medal
 rmc-marines-announce-ui-tactical-map = Tactical Map
 rmc-marines-announce-ui-overwatch = Overwatch
+rmc-marines-announce-ui-echo-designate = Designate Echo Squad
 rmc-marines-announce-ui-primary-lz = Designate Primary LZ
 rmc-marines-announce-ui-send = Send
 rmc-marines-control-computer-ui-ship-control = [bold]Ship Control[/bold]
