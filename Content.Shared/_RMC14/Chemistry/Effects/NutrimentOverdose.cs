@@ -16,10 +16,16 @@ public sealed partial class NutrimentOverdose : EntityEffect
     [DataField]
     public TimeSpan SlowdownDuration = TimeSpan.FromSeconds(2);
 
+    [DataField]
+    public FixedPoint2 PercentRate = 0.1;
+
+    [DataField]
+    public FixedPoint2 MinimumRate = 5;
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Overdoses above [color=yellow]{OverdoseThreshold}u[/color] causes [color=yellow]vomiting[/color] and [color=red]slowdown[/color]. " +
-               "Removes [color=green]10%[/color] or [color=green]5u[/color] of Nutriment per second, whichever is greater.";
+        return $"Causes [color=yellow]vomiting[/color] and [color=red]slowdown[/color] above [color=yellow]{OverdoseThreshold}u[/color].\n" +
+               $"Removes [color=green]{PercentRate * 100}%[/color] or [color=green]{MinimumRate}u[/color] of Nutriment per second while above [color=yellow]{OverdoseThreshold}u[/color]";
     }
 
     public override void Effect(EntityEffectBaseArgs args)
@@ -40,7 +46,7 @@ public sealed partial class NutrimentOverdose : EntityEffect
             return;
 
         // Calculate and remove nutriment
-        var removalAmount = FixedPoint2.Max(nutVolume * 0.1f, 5) * reagentArgs.Scale;
+        var removalAmount = FixedPoint2.Max(nutVolume * PercentRate, MinimumRate) * reagentArgs.Scale;
         reagentArgs.Source.RemoveReagent("Nutriment", removalAmount);
 
         // Check if we should apply vomiting (still overdosing)

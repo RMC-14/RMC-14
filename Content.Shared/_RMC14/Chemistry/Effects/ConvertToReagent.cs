@@ -18,7 +18,7 @@ public sealed partial class ConvertToReagent : EntityEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Becomes [color=green]{TargetReagent}[/color] while in the body.";
+        return $"Converts to {TargetReagent} at {PercentRate * 100}% or {MinimumRate}u per second while in the body";
     }
 
     public override void Effect(EntityEffectBaseArgs args)

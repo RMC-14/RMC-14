@@ -152,7 +152,7 @@ public sealed class RMCVomitSystem : EntitySystem
                 */
             }
 
-            // Makes a vomit solution the size of 90% of the chemicals removed from the chemstream // TODO RMC14 ((uid, bloodStream))), vomitAmount)
+            // Makes a vomit solution the size of 90% of the chemicals removed from the chemstream // TODO RMC14 ((uid, bloodStream))), vomitAmount);
             solution.AddReagent(new ReagentId(vomitComp.VomitPrototype, _bloodstream.GetEntityBloodData(uid)), vomitAmount);
         }
 
