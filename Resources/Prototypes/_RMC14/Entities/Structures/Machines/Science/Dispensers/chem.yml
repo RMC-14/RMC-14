@@ -164,7 +164,7 @@
   components:
   - type: RMCChemicalStorage
     network: RMCChemStorageMedbay
-    dynamicEnergyScaling: true
+    populationEnergyScaling: true
 
 - type: entity
   parent: RMCChemStorageBase

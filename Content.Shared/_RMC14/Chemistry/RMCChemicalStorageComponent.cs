@@ -43,5 +43,5 @@ public sealed partial class RMCChemicalStorageComponent : Component
     public bool Updated;
 
     [DataField, AutoNetworkedField]
-    public bool DynamicEnergyScaling;
+    public bool PopulationEnergyScaling;
 }
