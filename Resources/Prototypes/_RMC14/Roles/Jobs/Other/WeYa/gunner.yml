@@ -41,8 +41,6 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_pmc
-    - type: RMCGhostWarpGroupMember
-      group: RMCPMC
   hidden: true
 
 - type: entity

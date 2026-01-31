@@ -40,8 +40,6 @@
         state: clf_cellcom
     - type: RMCPointing
     - type: MarineOrders
-    - type: RMCGhostWarpGroupMember
-      group: RMCCLF
   hidden: true
 
 - type: entity

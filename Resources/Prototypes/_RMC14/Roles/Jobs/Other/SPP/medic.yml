@@ -30,8 +30,6 @@
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-medic
-    - type: RMCGhostWarpGroupMember
-      group: RMCSPP
   hidden: true
 
 - type: entity

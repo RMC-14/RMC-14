@@ -15,6 +15,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Provost
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -25,8 +28,6 @@
         RMCSkillPolice: 2
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-enforcer
-    - type: RMCGhostWarpGroupMember
-      group: RMCProvost
   hidden: true
 
 - type: entity

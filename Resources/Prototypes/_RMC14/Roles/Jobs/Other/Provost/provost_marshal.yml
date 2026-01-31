@@ -14,6 +14,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Provost
     - type: Skills
       skills:
         RMCSkillConstruction: 2
@@ -42,8 +45,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-marshal
     - type: RMCTrackable
-    - type: RMCGhostWarpGroupMember
-      group: RMCProvost
   hidden: true
 
 - type: randomHumanoidSettings

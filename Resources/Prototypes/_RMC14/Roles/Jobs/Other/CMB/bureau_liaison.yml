@@ -23,8 +23,6 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-icb
-    - type: RMCGhostWarpGroupMember
-      group: RMCCMB
     - type: RMCTrackable
     - type: TacticalMapIcon
       icon:

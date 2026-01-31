@@ -21,6 +21,9 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: NpcFactionMember
+      factions:
+      - Provost
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -34,8 +37,6 @@
         RMCSkillOverwatch: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-provost-chief
-    - type: RMCGhostWarpGroupMember
-      group: RMCProvost
     - type: RMCTrackable
       hidden: true
     - type: MarineOrders

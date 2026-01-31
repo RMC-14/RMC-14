@@ -23,8 +23,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-senior-constable
     - type: RMCTrackable
-    - type: RMCGhostWarpGroupMember
-      group: RMCTSE
   hidden: true
 
 - type: startingGear

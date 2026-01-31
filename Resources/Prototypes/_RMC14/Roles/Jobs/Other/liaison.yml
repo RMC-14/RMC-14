@@ -58,8 +58,6 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
     - type: RMCTrackable
-    - type: RMCGhostWarpGroupMember
-      group: RMCWeYa
 
 - type: startingGear
   id: CMGearLiaison

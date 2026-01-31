@@ -36,8 +36,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-tsepa-inspector
     - type: RMCTrackable
-    - type: RMCGhostWarpGroupMember
-      group: RMCTSE
   hidden: true
 
 - type: startingGear

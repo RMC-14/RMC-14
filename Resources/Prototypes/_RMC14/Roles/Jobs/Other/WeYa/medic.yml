@@ -33,8 +33,6 @@
         RMCSkillEndurance: 3
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
-    - type: RMCGhostWarpGroupMember
-      group: RMCPMC
   hidden: true
 
 - type: entity
