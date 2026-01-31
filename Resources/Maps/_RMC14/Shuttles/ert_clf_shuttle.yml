@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 23:31:08
-  entityCount: 95
+  time: 01/31/2026 20:32:12
+  entityCount: 96
 maps: []
 grids:
 - 1
@@ -370,6 +370,14 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 2.7586415,1.5
+      parent: 1
+- proto: CMSeatPilot
+  entities:
+  - uid: 96
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,4.5
       parent: 1
 - proto: RMCAlmayerStairs
   entities:
