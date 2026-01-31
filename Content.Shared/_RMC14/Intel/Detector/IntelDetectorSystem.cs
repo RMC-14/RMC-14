@@ -4,12 +4,14 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Coordinates;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Storage;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -19,6 +21,7 @@ public sealed class IntelDetectorSystem : EntitySystem
 {
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedCMInventorySystem _rmcInventory = default!;
@@ -41,6 +44,7 @@ public sealed class IntelDetectorSystem : EntitySystem
         SubscribeLocalEvent<MobStateChangedEvent>(OnMobStateChanged);
 
         SubscribeLocalEvent<IntelDetectorComponent, UseInHandEvent>(OnUseInHand);
+        SubscribeLocalEvent<IntelDetectorComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<IntelDetectorComponent, GetVerbsEvent<AlternativeVerb>>(OnGetVerbs);
         SubscribeLocalEvent<IntelDetectorComponent, DroppedEvent>(OnDisable);
         SubscribeLocalEvent<IntelDetectorComponent, RMCDroppedEvent>(OnDisable);
@@ -62,6 +66,21 @@ public sealed class IntelDetectorSystem : EntitySystem
 
     private void OnUseInHand(Entity<IntelDetectorComponent> ent, ref UseInHandEvent args)
     {
+        args.Handled = true;
+        Toggle(ent);
+        _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
+    }
+
+    private void OnActivateInWorld(Entity<IntelDetectorComponent> ent, ref ActivateInWorldEvent args)
+    {
+        if (!_container.TryGetContainingContainer(ent.Owner, out var container))
+            return;
+
+        if (!_hands.IsHolding(args.User, ent.Owner) &&
+            HasComp<StorageComponent>(container.Owner) &&
+            !_container.TryGetContainingContainer(container.Owner, out _))
+            return;
+
         args.Handled = true;
         Toggle(ent);
         _audio.PlayPredicted(ent.Comp.ToggleSound, ent, args.User);
