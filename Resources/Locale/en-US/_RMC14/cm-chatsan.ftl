@@ -834,7 +834,7 @@ cm-chatsan-word-replacement-foxtrot = brown hosts
 cm-chatsan-word-thru = thru
 cm-chatsan-replacement-thru = through
 
-cm-chatsan-word-tho = th
+cm-chatsan-word-tho = tho
 cm-chatsan-replacement-tho = though
 
 cm-chatsan-word-t1 = t1
