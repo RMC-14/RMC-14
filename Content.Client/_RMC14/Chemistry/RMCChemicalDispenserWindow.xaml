@@ -4,10 +4,10 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Chemical Dispenser" MinSize="470 550">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]Status[/bold]" />
+        <RichTextLabel Text="{Loc 'rmc-chemicaldispenser-ui-status'}" />
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Margin="0 5">
-            <Label Text="Energy:" Margin="0 0 5 0" />
+            <Label Text="{Loc 'rmc-chemicaldispenser-ui-energy-bar'}" Margin="0 0 5 0" />
             <ProgressBar Name="EnergyBar" Access="Public" HorizontalExpand="True">
                 <Label Name="EnergyLabel" Access="Public" HorizontalAlignment="Right"
                        Margin="0 0 5 0" />
@@ -15,25 +15,25 @@
         </BoxContainer>
         <BoxContainer Name="DispenseContainer" Access="Public" Orientation="Horizontal"
                       Margin="0 5 0 0">
-            <RichTextLabel Text="[bold]Dispense[/bold]" />
+            <RichTextLabel Text="{Loc 'rmc-chemicaldispenser-ui-dispence-container'}" />
             <Control HorizontalExpand="True" />
         </BoxContainer>
         <ui:BlueHorizontalSeparator />
         <BoxContainer Name="ChemicalsContainer" Access="Public" Orientation="Vertical"
                       Margin="0 3 0 15" />
         <BoxContainer Name="BeakerContainer" Access="Public" Orientation="Horizontal">
-            <RichTextLabel Text="[bold]Beaker[/bold]" />
+            <RichTextLabel Text="{Loc 'rmc-chemicaldispenser-ui-beaker-cont'}" />
             <Control HorizontalExpand="True" />
         </BoxContainer>
         <ui:BlueHorizontalSeparator />
         <BoxContainer Orientation="Horizontal" Margin="0 5 0 0">
-            <Label Text="Beaker:" MinWidth="100" />
-            <Label Name="BeakerStatus" Access="Public" Text="No beaker loaded!" />
+            <Label Text="{Loc 'rmc-chemicaldispenser-ui-beaker-status'}" MinWidth="100" />
+            <Label Name="BeakerStatus" Access="Public" Text="{Loc 'rmc-chemicaldispenser-ui-no-beacker'}" />
             <Control HorizontalExpand="True" />
-            <Button Name="EjectBeakerButton" Access="Public" Text="Eject" StyleClasses="OpenBoth" />
+            <Button Name="EjectBeakerButton" Access="Public" Text="{Loc 'rmc-chemicaldispenser-ui-eject'}" StyleClasses="OpenBoth" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Contents:" MinWidth="100" VerticalAlignment="Top" />
+            <Label Text="{Loc 'rmc-chemicaldispenser-ui-content'}" MinWidth="100" VerticalAlignment="Top" />
             <Label Name="ContentsNone" Access="Public" Text="N/A" />
             <BoxContainer Name="BeakerContents" Access="Public" Orientation="Vertical" />
         </BoxContainer>

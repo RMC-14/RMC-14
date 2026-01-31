@@ -19,15 +19,15 @@
                         <controls:SentryButton Name="GlobalIFFButton" Access="Public"
                                              Margin="1" BackgroundColor="#1A3D5C"
                                              BorderColor="#88C7FA" BorderThickness="1"
-                                             Text="GLOBAL IFF" />
+                                             Text="{Loc 'rmc-sentry-laptop-ui-global-iff'}" />
                         <controls:SentryButton Name="RefreshButton" Access="Public"
                                              Margin="1" BackgroundColor="#1A3D5C"
                                              BorderColor="#88C7FA" BorderThickness="1"
-                                             Text="REFRESH" />
+                                             Text="{Loc 'rmc-sentry-laptop-ui-refresh'}" />
                         <controls:SentryButton Name="UnlinkAllButton" Access="Public"
                                              Margin="1" BackgroundColor="#5C1A1A"
                                              BorderColor="#A42625" BorderThickness="1"
-                                             Text="UNLINK ALL" />
+                                             Text="{Loc 'rmc-sentry-laptop-ui-unlink-all'}" />
                     </BoxContainer>
                 </BoxContainer>
 
@@ -35,7 +35,7 @@
 
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
                     <Label Name="StatusLabel" Access="Public"
-                           Text="Status: No sentries linked"
+                           Text="{Loc 'rmc-sentry-laptop-window-ui-status'}"
                            VerticalAlignment="Center"
                            FontColorOverride="#88C7FA"
                            HorizontalExpand="True"/>
@@ -44,7 +44,7 @@
                 <cc:HSeparator Color="#88C7FA" />
 
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="8 5 8 5">
-                    <Label Text="SEARCH:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <Label Text="{Loc 'rmc-sentry-laptop-window-ui-search'}:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 5 0"/>
                     <LineEdit Name="SearchBar" Access="Public"
                              HorizontalExpand="True"
                              PlaceHolder="Search sentries by name or location..."/>
@@ -59,7 +59,7 @@
                     </PanelContainer.PanelOverride>
                     <BoxContainer Orientation="Vertical" Margin="10">
                         <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                            <Label Text="GLOBAL IFF TARGETING CONTROLS" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
+                            <Label Text="{Loc 'rmc-sentry-laptop-window-ui-global-iff-target-controls'}" FontColorOverride="#88C7FA" VerticalAlignment="Center" HorizontalExpand="True"/>
                             <controls:SentryButton Name="GlobalApplyIFFButton" Access="Public"
                                                  Margin="0 0 5 0"
                                                  BackgroundColor="#1A3D5C"
@@ -68,7 +68,7 @@
                             <controls:SentryButton Name="GlobalResetTargetingButton" Access="Public"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
-                                                 Text="RESET ALL TO DEFAULT" />
+                                                 Text="{Loc 'rmc-sentry-laptop-window-ui-global-iff-target-controls-reset-all'}" />
                         </BoxContainer>
                         <cc:HSeparator Color="#4AA3E8" Margin="0 5"/>
                         <ScrollContainer MaxHeight="200" MinHeight="140" HorizontalExpand="True">
@@ -84,11 +84,11 @@
                                                  Margin="0 0 5 0"
                                                  BackgroundColor="#1A3D5C"
                                                  BorderColor="#88C7FA" BorderThickness="1"
-                                                 Text="POWER ALL ON" />
+                                                 Text="{Loc 'rmc-sentry-laptop-window-ui-global-power-on'}" />
                             <controls:SentryButton Name="GlobalPowerOffButton" Access="Public"
                                                  BackgroundColor="#5C1A1A"
                                                  BorderColor="#A42625" BorderThickness="1"
-                                                 Text="POWER ALL OFF" />
+                                                 Text="{Loc 'rmc-sentry-laptop-window-ui-global-power-off'}" />
                         </BoxContainer>
                     </BoxContainer>
                 </PanelContainer>
@@ -111,13 +111,13 @@
             <BoxContainer Orientation="Vertical" Margin="5">
                 <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                     <RichTextLabel Name="CameraTitle" Access="Public"
-                                 Text="[color=#88C7FA][bold]CAMERA VIEW[/bold][/color]"
+                                 Text="{Loc 'rmc-sentry-laptop-window-ui-camera-view'}"
                                  VerticalAlignment="Center"
                                  HorizontalExpand="True"/>
                     <controls:SentryButton Name="CloseCameraButton" Access="Public"
                                          BackgroundColor="#5C1A1A"
                                          BorderColor="#A42625" BorderThickness="1"
-                                         Text="CLOSE" />
+                                         Text="{Loc 'rmc-sentry-laptop-window-ui-camera-view-close'}" />
                 </BoxContainer>
                 <cc:HSeparator Color="#88C7FA" Margin="0 0 0 5"/>
                 <Control HorizontalExpand="True" VerticalExpand="True">

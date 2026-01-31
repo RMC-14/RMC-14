@@ -17,7 +17,7 @@
                     <controls:DropshipButton Name="SummonButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="Summon" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-ui-summon'}" Disabled="True" />
                 </BoxContainer>
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />

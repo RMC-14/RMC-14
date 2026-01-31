@@ -109,3 +109,8 @@ rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
 rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
 rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
 rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
+
+rmc-dropship-ui-cancel = Cancel
+rmc-dropship-ui-launch = Launch
+rmc-dropship-ui-summon = Summon
+

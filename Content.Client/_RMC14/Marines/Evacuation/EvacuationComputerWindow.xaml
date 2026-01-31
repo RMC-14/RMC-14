@@ -4,14 +4,14 @@
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     Title="Escape Pod Controller">
     <BoxContainer Orientation="Vertical">
-        <RichTextLabel Text="[bold]Information display[/bold]" />
+        <RichTextLabel Text="{Loc 'rmc-marines-evac-ui-inform-display'}" />
         <ui:BlueHorizontalSeparator />
-        <Label Name="StatusLabel" Access="Public" Text="Escape Pod Status: NO EVACUATION" />
-        <Label Name="HatchLabel" Access="Public" Text="Docking Hatch: UNSECURED" />
-        <RichTextLabel Text="[bold]Pod controls[/bold]" Margin="0 10 0 0" />
+        <Label Name="StatusLabel" Access="Public" Text="{Loc 'rmc-marines-evac-ui-status-label'}" />
+        <Label Name="HatchLabel" Access="Public" Text="{Loc 'rmc-marines-evac-ui-hatch-label'}" />
+        <RichTextLabel Text="{Loc 'rmc-marines-evac-ui-pod-control'}" Margin="0 10 0 0" />
         <ui:BlueHorizontalSeparator />
-        <Button Name="DoorButton" Access="Public" Text="Unlock door" StyleClasses="OpenBoth" />
-        <Button Name="EjectButton" Access="Public" Text="Manual eject" StyleClasses="OpenBoth" />
-        <Button Name="DelayButton" Access="Public" Text="Delay launch" StyleClasses="OpenBoth" />
+        <Button Name="DoorButton" Access="Public" Text="{Loc 'rmc-marines-evac-ui-unlock-door'}" StyleClasses="OpenBoth" />
+        <Button Name="EjectButton" Access="Public" Text="{Loc 'rmc-marines-evac-ui-eject-button'}" StyleClasses="OpenBoth" />
+        <Button Name="DelayButton" Access="Public" Text="{Loc 'rmc-marines-evac-ui-delay-button'}" StyleClasses="OpenBoth" />
     </BoxContainer>
 </controls:EvacuationComputerWindow>

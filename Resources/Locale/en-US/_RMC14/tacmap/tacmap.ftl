@@ -40,3 +40,8 @@ ui-tactical-map-follow-player-inactive = Centre
 ui-tactical-map-cooldown-seconds = {$seconds}
 
 ui-tactical-map-tunnel-info = Tunnel: {$name}
+
+rmc-tactical-map-cancel = Cancel
+rmc-tactical-map-ui-delete = Delete
+rmc-tactical-map-ui-blip-size = Blip Size: 1.0x
+rmc-tactical-map-ui-line-width = Line Width: 2.0px

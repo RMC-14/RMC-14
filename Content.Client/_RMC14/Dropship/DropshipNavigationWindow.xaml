@@ -17,11 +17,11 @@
                     <controls:DropshipButton Name="CancelButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="Cancel" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-ui-cancel'}" Disabled="True" />
                     <controls:DropshipButton Name="LaunchButton" Access="Public"
                                              Margin="1" BackgroundColor="#004E25"
                                              BorderColor="#02E74E" BorderThickness="1"
-                                             Text="Launch" Disabled="True" />
+                                             Text="{Loc 'rmc-dropship-ui-launch'}" Disabled="True" />
                 </BoxContainer>
             </BoxContainer>
             <cc:HSeparator Color="#02E74E" />
