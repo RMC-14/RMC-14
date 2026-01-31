@@ -127,11 +127,8 @@ public sealed class CommendationSystem : SharedCommendationSystem
     /// </summary>
     private string GetNameWithRank(EntityUid uid)
     {
-        if (TryComp<XenoNameComponent>(uid, out var xenoName) && !string.IsNullOrEmpty(xenoName.Rank))
-        {
-            var baseName = Name(uid);
-            return $"{xenoName.Rank} {baseName}";
-        }
+        if (HasComp<XenoNameComponent>(uid))
+            return Name(uid);
 
         var rankName = _rank.GetSpeakerFullRankName(uid);
         return rankName ?? Name(uid);
