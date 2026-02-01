@@ -5,6 +5,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Doors.Systems;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Stun;
@@ -36,6 +37,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
     [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;

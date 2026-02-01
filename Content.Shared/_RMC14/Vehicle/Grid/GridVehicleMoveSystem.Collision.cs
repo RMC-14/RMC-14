@@ -60,7 +60,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var hits = lookup.GetEntitiesIntersecting(world.MapId, aabb, LookupFlags.Dynamic | LookupFlags.Static);
         var playedCollisionSound = false;
         var blocked = false;
-        var mobHits = new Dictionary<EntityUid, (Box2 Aabb, Vector2 Push)>();
+        var mobHits = new HashSet<EntityUid>();
 
         foreach (var other in hits)
         {
@@ -125,6 +125,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 continue;
             }
 
+            if (isMob && _standing.IsDown(other))
+                continue;
+
             if (hasDoor && !_net.IsClient)
             {
                 _door.TryOpen(other, door, operatorUid);
@@ -155,10 +158,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             }
 
             if (!_net.IsClient && isMob && mob != null)
-            {
-                if (TryGetMobPush(uid, other, aabb, otherAabb, out var push))
-                    mobHits[other] = (otherAabb, push);
-            }
+                mobHits.Add(other);
         }
 
         if (blocked)
@@ -166,14 +166,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (!_net.IsClient)
         {
-            foreach (var (mobUid, data) in mobHits)
+            foreach (var mobUid in mobHits)
             {
                 if (!TryComp(mobUid, out MobStateComponent? mob))
                     continue;
 
                 HandleMobCollision(uid, mobUid, mob, ref playedCollisionSound);
-                if (!HasComp<XenoComponent>(mobUid))
-                    ApplyMobPush(mobUid, data.Push);
             }
         }
 
@@ -343,6 +341,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return;
 
         _stun.TryKnockdown(target, MobCollisionKnockdown, true);
+        var runover = EnsureComp<RMCVehicleRunoverComponent>(target);
+        runover.Vehicle = vehicle;
+        runover.Duration = MobCollisionKnockdown;
+        runover.ExpiresAt = now + runover.Duration;
+        Dirty(target, runover);
 
         if (physicsQ.TryComp(target, out var targetBody))
         {
@@ -357,30 +360,35 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (xform.Anchored)
             return;
 
-        if (!TryGetMobPush(vehicle, mob, vehicleAabb, mobAabb, out var push))
+        if (!TryGetMobPush(vehicle, mob, vehicleAabb, mobAabb, out var target))
             return;
 
-        ApplyMobPush(mob, push);
+        ApplyMobPush(mob, target);
     }
 
-    private void ApplyMobPush(EntityUid mob, Vector2 push)
+    private void ApplyMobPush(EntityUid mob, EntityCoordinates target)
     {
-        if (push == Vector2.Zero)
+        if (target == EntityCoordinates.Invalid)
             return;
 
-        var newWorldPosition = transform.GetWorldPosition(mob) + push;
-        transform.SetWorldPosition(mob, newWorldPosition);
+        var mobMap = transform.GetMapCoordinates(mob);
+        var targetMap = transform.ToMapCoordinates(target);
+        if (mobMap.MapId != targetMap.MapId)
+            return;
 
         if (physicsQ.TryComp(mob, out var mobBody))
         {
             physics.SetLinearVelocity(mob, Vector2.Zero, body: mobBody);
             physics.SetAngularVelocity(mob, 0f, body: mobBody);
         }
+
+        var mobXform = Transform(mob);
+        transform.SetCoordinates(mob, mobXform, target);
     }
 
-    private bool TryGetMobPush(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb, out Vector2 push)
+    private bool TryGetMobPush(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb, out EntityCoordinates target)
     {
-        push = Vector2.Zero;
+        target = EntityCoordinates.Invalid;
 
         var vehicleHalf = vehicleAabb.Size / 2f;
         var mobHalf = mobAabb.Size / 2f;
@@ -402,64 +410,53 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ? new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY)
             : Vector2.Zero;
 
-        var pushMultiplier = HasComp<XenoComponent>(mob) ? 2.25f : 1.5f;
+        var vehicleBounds = vehicleAabb.Enlarged(Clearance);
+        var first = overlapX < overlapY ? pushX : pushY;
+        var second = overlapX < overlapY ? pushY : pushX;
 
-        var candidates = new Vector2[4];
-        var count = 0;
-
-        static void AddCandidate(Vector2[] candidates, ref int count, Vector2 candidate)
-        {
-            if (candidate == Vector2.Zero || count >= candidates.Length)
-                return;
-
-            for (var i = 0; i < count; i++)
-            {
-                if (candidates[i] == candidate)
-                    return;
-            }
-
-            candidates[count++] = candidate;
-        }
-
-        Vector2 moveVec = Vector2.Zero;
-        if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
-        {
-            var moveDir = mover.CurrentDirection;
-            if (moveDir != Vector2i.Zero)
-            {
-                moveVec = new Vector2(moveDir.X, moveDir.Y);
-                if (moveDir.X != 0)
-                    AddCandidate(candidates, ref count, pushY);
-                else if (moveDir.Y != 0)
-                    AddCandidate(candidates, ref count, pushX);
-            }
-        }
-
-        var minPush = overlapX < overlapY ? pushX : pushY;
-        AddCandidate(candidates, ref count, minPush);
-        AddCandidate(candidates, ref count, pushX);
-        AddCandidate(candidates, ref count, pushY);
-
-        for (var i = 0; i < count; i++)
-        {
-            var candidate = candidates[i] * pushMultiplier;
-            if (candidate == Vector2.Zero)
-                continue;
-
-            if (moveVec != Vector2.Zero && Vector2.Dot(candidate, moveVec) > 0f)
-                continue;
-
-            var normalized = candidate.Normalized();
-            candidate += normalized * Clearance;
-
-            if (IsPushBlocked(vehicle, mob, mobAabb, candidate))
-                continue;
-
-            push = candidate;
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, first, out target))
             return true;
-        }
+
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, second, out target))
+            return true;
 
         return false;
+    }
+
+    private bool TryGetSidePushTarget(
+        EntityUid vehicle,
+        EntityUid mob,
+        Box2 mobAabb,
+        Box2 vehicleBounds,
+        Vector2 push,
+        out EntityCoordinates target)
+    {
+        target = EntityCoordinates.Invalid;
+        if (push == Vector2.Zero)
+            return false;
+
+        var adjusted = push;
+        if (Math.Abs(adjusted.X) > 0f)
+            adjusted.X += Math.Sign(adjusted.X) * Clearance;
+        if (Math.Abs(adjusted.Y) > 0f)
+            adjusted.Y += Math.Sign(adjusted.Y) * Clearance;
+
+        var targetAabb = mobAabb.Translated(adjusted);
+        if (targetAabb.Intersects(vehicleBounds))
+            return false;
+
+        if (IsPushBlocked(vehicle, mob, mobAabb, adjusted))
+            return false;
+
+        var mobMap = transform.GetMapCoordinates(mob);
+        var mapCoords = new MapCoordinates(mobMap.Position + adjusted, mobMap.MapId);
+        var mobXform = Transform(mob);
+        if (mobXform.GridUid is { } grid)
+            target = transform.ToCoordinates(grid, mapCoords);
+        else
+            target = transform.ToCoordinates(mapCoords);
+
+        return target != EntityCoordinates.Invalid;
     }
 
     private bool IsPushBlocked(EntityUid vehicle, EntityUid mob, Box2 mobAabb, Vector2 push)
@@ -476,7 +473,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return false;
 
         var shifted = mobAabb.Translated(push);
-        var hits = lookup.GetEntitiesIntersecting(mapId, shifted, LookupFlags.Dynamic | LookupFlags.Static);
+        var swept = mobAabb.Union(shifted);
+        var hits = lookup.GetEntitiesIntersecting(mapId, swept, LookupFlags.Dynamic | LookupFlags.Static);
         foreach (var other in hits)
         {
             if (other == mob || other == vehicle)
