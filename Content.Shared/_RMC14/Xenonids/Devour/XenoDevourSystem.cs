@@ -502,6 +502,7 @@ public sealed class XenoDevourSystem : EntitySystem
 
     private bool CanDevour(EntityUid xeno, EntityUid victim, [NotNullWhen(true)] out XenoDevourComponent? devour, bool popup = false)
     {
+        var targetName = Identity.Name(victim, EntityManager, xeno);
         devour = default;
         if (xeno == victim ||
             !TryComp(xeno, out devour) ||
@@ -540,7 +541,7 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-roting", ("target", targetName)), victim, xeno);
             }
 
             return false;
@@ -561,12 +562,18 @@ public sealed class XenoDevourSystem : EntitySystem
         {
             if (popup)
             {
-                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", victim)), victim, xeno);
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-buckled", ("strap", strap), ("target", targetName)), victim, xeno);
             }
         }
 
         if (!_rmcPulling.IsPulling(xeno, victim))
+        {
+            if (popup)
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-devour-failed-target-not-grabbed", ("target", targetName)), victim, xeno);
+            }
             return false;
+        }
 
         return true;
     }

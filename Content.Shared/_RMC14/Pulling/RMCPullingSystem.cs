@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
@@ -46,6 +47,8 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
     [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+
+    private const float BarricadeCheckRange = 2.5f;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -223,9 +226,11 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
+        var targetName = Identity.Name(args.PulledUid, EntityManager, ent);
+
         if (!CanPullDead(ent, args.PulledUid))
         {
-            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
+            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", targetName)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
         }
     }
@@ -265,7 +270,7 @@ public sealed class RMCPullingSystem : EntitySystem
 
         var pulledUid = args.PulledUid;
         var attackEvent = new LightAttackEvent(GetNetEntity(pulledUid), GetNetEntity(ent), GetNetCoordinates(pulledUid.ToCoordinates()));
-        if (_rmcMelee.AttemptOverrideAttack(pulledUid, ent, ent, attackEvent, out var attack, out var cancelled))
+        if (_rmcMelee.AttemptOverrideAttack(pulledUid, ent, ent, attackEvent, out var attack, out var cancelled, BarricadeCheckRange))
         {
             if (attack is LightAttackEvent { Target: not null } light)
             {
