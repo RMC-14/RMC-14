@@ -344,7 +344,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var runover = EnsureComp<RMCVehicleRunoverComponent>(target);
         runover.Vehicle = vehicle;
         runover.Duration = MobCollisionKnockdown;
-        runover.ExpiresAt = now + runover.Duration;
+        runover.ExpiresAt = now + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
         Dirty(target, runover);
 
         if (physicsQ.TryComp(target, out var targetBody))

@@ -1,3 +1,4 @@
+using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
@@ -12,15 +13,38 @@ public sealed class RMCVehicleRunoverSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
 
+    public static readonly TimeSpan StandUpGrace = TimeSpan.FromSeconds(0.6);
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCVehicleRunoverComponent, PreventCollideEvent>(OnPreventCollide);
+        SubscribeLocalEvent<RMCVehicleRunoverComponent, StoodEvent>(OnRunoverStood);
     }
 
     private void OnPreventCollide(Entity<RMCVehicleRunoverComponent> ent, ref PreventCollideEvent args)
     {
         if (args.OtherEntity == ent.Comp.Vehicle)
             args.Cancelled = true;
+    }
+
+    private void OnRunoverStood(Entity<RMCVehicleRunoverComponent> ent, ref StoodEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TerminatingOrDeleted(ent.Comp.Vehicle))
+        {
+            RemCompDeferred<RMCVehicleRunoverComponent>(ent);
+            return;
+        }
+
+        var time = _timing.CurTime;
+        var graceUntil = time + StandUpGrace;
+        if (ent.Comp.ExpiresAt < graceUntil)
+        {
+            ent.Comp.ExpiresAt = graceUntil;
+            Dirty(ent);
+        }
     }
 
     public override void Update(float frameTime)
@@ -43,7 +67,7 @@ public sealed class RMCVehicleRunoverSystem : EntitySystem
                 if (comp.Duration == TimeSpan.Zero)
                     comp.Duration = TimeSpan.FromSeconds(1.5);
 
-                comp.ExpiresAt = time + comp.Duration;
+                comp.ExpiresAt = time + comp.Duration + StandUpGrace;
                 _stun.TryKnockdown(uid, comp.Duration, true);
                 continue;
             }
