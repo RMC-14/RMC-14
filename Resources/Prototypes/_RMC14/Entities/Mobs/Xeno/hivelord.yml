@@ -213,7 +213,7 @@
   components:
   - type: GuideHelp
     guides:
-    - RMCGuideDesignerHivelord
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
   - type: Xeno
