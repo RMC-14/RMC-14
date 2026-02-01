@@ -179,6 +179,7 @@
       nodeType: Optimized
       optimizedBuildTimeMultiplier: 0.5
       designMark: wall_mark_optimized
+      overlayPrototype: DesignNodeMarkOptimizedWall
     - type: XenoConstructionPlasmaCost
       plasma: 50
       scalingCost: false
@@ -202,6 +203,7 @@
       nodeType: Optimized
       optimizedBuildTimeMultiplier: 0.5
       designMark: door_mark_optimized
+      overlayPrototype: DesignNodeMarkOptimizedDoor
     - type: XenoConstructionPlasmaCost
       plasma: 50
       scalingCost: false
@@ -226,6 +228,7 @@
       nodeType: Flexible
       flexiblePlasmaCostMultiplier: 0.5
       designMark: wall_mark_flex
+      overlayPrototype: DesignNodeMarkFlexibleWall
     - type: XenoConstructionPlasmaCost
       plasma: 60
       scalingCost: false
@@ -249,6 +252,7 @@
       nodeType: Flexible
       flexiblePlasmaCostMultiplier: 0.5
       designMark: door_mark_flex
+      overlayPrototype: DesignNodeMarkFlexibleDoor
     - type: XenoConstructionPlasmaCost
       plasma: 60
       scalingCost: false
@@ -272,6 +276,7 @@
     - type: DesignNode
       nodeType: Construct
       designMark: wall_mark_construct
+      overlayPrototype: DesignNodeMarkConstructWall
     - type: XenoConstructionPlasmaCost
       plasma: 70
       scalingCost: false
@@ -294,6 +299,12 @@
     - type: DesignNode
       nodeType: Construct
       designMark: door_mark_construct
+      overlayPrototype: DesignNodeMarkConstructDoor
+      constructIsDoor: true
+      constructWeedbound: DoorXenoResinWeedbound
+      constructWeedboundThick: DoorXenoResinThickWeedbound
+      constructAnimationEffect: RMCEffectDoorXenoResin
+      constructAnimationEffectThick: RMCEffectDoorXenoResinThick
     - type: XenoConstructionPlasmaCost
       plasma: 70
       scalingCost: false

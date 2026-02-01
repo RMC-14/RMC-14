@@ -1,17 +1,25 @@
+using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
+
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-[RegisterComponent]
+[Access(typeof(SharedXenoConstructionSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignerRemoteThickenResinComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int PlasmaCost = 60;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float Cooldown = 0.5f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float DoAfter = 1f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float Range = 10f;
 }

@@ -1,8 +1,13 @@
+using Content.Shared.FixedPoint;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Robust.Shared.Audio;
+using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-
+[Access(typeof(SharedXenoConstructionSystem), typeof(DesignerNodeBindingSystem))]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignNodeComponent : Component
 {
@@ -31,6 +36,36 @@ public sealed partial class DesignNodeComponent : Component
     [DataField, AutoNetworkedField]
     public string DesignMark = "resin-wall";
 
+    [DataField, AutoNetworkedField]
+    public EntProtoId? OverlayPrototype;
+
     // Used for enforcing "oldest node is deleted" when exceeding the cap.
     public int PlacedOrder;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ConstructBuildTime = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 ConstructPlasmaCost = FixedPoint2.New(70);
+
+    [DataField, AutoNetworkedField]
+    public bool ConstructIsDoor;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ConstructWeedbound = "WallXenoResinWeedbound";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ConstructWeedboundThick = "WallXenoResinThickWeedbound";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ConstructAnimationEffect = "RMCEffectWallXenoResin";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId ConstructAnimationEffectThick = "RMCEffectWallXenoResinThick";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier ConstructBuildSound = new SoundCollectionSpecifier("RMCResinBuild")
+    {
+        Params = AudioParams.Default.WithVolume(-8f),
+    };
 }

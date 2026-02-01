@@ -1,6 +1,10 @@
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
+using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Xenonids.Projectile.Parasite;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared.Coordinates;
 using Content.Shared.FixedPoint;
@@ -35,29 +39,73 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private static readonly TimeSpan ConstructBuildTime = TimeSpan.FromSeconds(4);
-    private static readonly FixedPoint2 ConstructNodePlasmaCost = FixedPoint2.New(70);
-    private const string XenoStructuresAnimation = "RMCEffect";
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
 
     private readonly HashSet<EntityUid> _buildingNodes = new();
 
-    private static readonly SoundSpecifier BuildSound = new SoundCollectionSpecifier("RMCResinBuild")
-    {
-        Params = AudioParams.Default.WithVolume(-10f),
-    };
+    private readonly Dictionary<EntityUid, ConstructNodeBuild> _constructBuilds = new();
+
+    private readonly record struct ConstructNodeBuild(EntityUid User, TimeSpan EndTime);
+
 
     public override void Initialize()
     {
         _xenoQuery = GetEntityQuery<XenoComponent>();
         _plasmaQuery = GetEntityQuery<XenoPlasmaComponent>();
 
-        SubscribeLocalEvent<DesignNodeComponent, Content.Shared.Interaction.ActivateInWorldEvent>(OnDesignNodeActivate);
+        SubscribeLocalEvent<DesignNodeComponent, ActivateInWorldEvent>(OnDesignNodeActivate);
         SubscribeLocalEvent<DesignNodeComponent, GettingInteractedWithAttemptEvent>(OnDesignNodeGettingInteractedWithAttempt);
         SubscribeLocalEvent<DesignNodeComponent, EntityTerminatingEvent>(OnDesignNodeTerminating);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        if (!_net.IsServer || _constructBuilds.Count == 0)
+            return;
+
+        var now = _timing.CurTime;
+        List<(EntityUid Node, EntityUid User)>? completed = null;
+        List<EntityUid>? removed = null;
+
+        foreach (var (node, build) in _constructBuilds)
+        {
+            if (!Exists(node))
+            {
+                removed ??= new List<EntityUid>(4);
+                removed.Add(node);
+                continue;
+            }
+
+            if (now < build.EndTime)
+                continue;
+
+            removed ??= new List<EntityUid>(4);
+            removed.Add(node);
+
+            completed ??= new List<(EntityUid, EntityUid)>(4);
+            completed.Add((node, build.User));
+        }
+
+        if (removed != null)
+        {
+            foreach (var node in removed)
+            {
+                _constructBuilds.Remove(node);
+            }
+        }
+
+        if (completed != null)
+        {
+            foreach (var (node, user) in completed)
+            {
+                CompleteConstructNodeBuild(node, user);
+            }
+        }
     }
 
     private void OnDesignNodeGettingInteractedWithAttempt(Entity<DesignNodeComponent> node, ref GettingInteractedWithAttemptEvent args)
@@ -66,7 +114,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnDesignNodeActivate(Entity<DesignNodeComponent> node, ref Content.Shared.Interaction.ActivateInWorldEvent args)
+    private void OnDesignNodeActivate(Entity<DesignNodeComponent> node, ref ActivateInWorldEvent args)
     {
         if (args.Handled)
             return;
@@ -123,71 +171,69 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         if (!_buildingNodes.Add(node.Owner))
             return false;
 
-        if (!_plasmaQuery.TryComp(user, out var plasma) || !_xenoPlasma.TryRemovePlasmaPopup((user, plasma), ConstructNodePlasmaCost))
+        if (!_plasmaQuery.TryComp(user, out var plasma) || !_xenoPlasma.TryRemovePlasmaPopup((user, plasma), node.Comp.ConstructPlasmaCost))
         {
             _buildingNodes.Remove(node.Owner);
             return false;
         }
 
-        // Lunge the activator towards the node (no tile/arc sprite).
+        // Lunge the activator towards the node
         PlayConstructNodeLunge(user, node.Owner);
 
-        var coords = Transform(node.Owner).Coordinates;
-        _audio.PlayPredicted(BuildSound, coords, user);
+        if (!TryComp(node.Owner, out TransformComponent? nodeTransform))
+        {
+            _buildingNodes.Remove(node.Owner);
+            return false;
+        }
+
+        var coords = nodeTransform.Coordinates;
+        _audio.PlayPredicted(node.Comp.ConstructBuildSound, coords, user);
 
         if (!_net.IsServer)
             return true;
 
         // Play the same construction animation used by normal xeno construction.
-        // Animation effects are named as RMCEffect + <structure proto id>.
-        var isDoor = node.Comp.DesignMark.Contains("door", StringComparison.OrdinalIgnoreCase);
-        var isThickVariant = _xenoQuery.TryComp(user, out var xeno) && CanBuildThickFromConstructNode(user, xeno.Role);
-        var animationChoice = (isDoor, isThickVariant) switch
-        {
-            (true, true) => "DoorXenoResinThick",
-            (true, false) => "DoorXenoResin",
-            (false, true) => "WallXenoResinThick",
-            (false, false) => "WallXenoResin",
-        };
+        // The effect prototypes are provided by the node component (YAML-configurable).
+        var isThickVariant = CanBuildThickFromConstructNode(user);
 
-        var effectId = XenoStructuresAnimation + animationChoice;
+        var effectId = isThickVariant ? node.Comp.ConstructAnimationEffectThick : node.Comp.ConstructAnimationEffect;
         if (_prototype.HasIndex(effectId))
         {
             var effect = Spawn(effectId, coords);
             RaiseNetworkEvent(
-                new XenoConstructionAnimationStartEvent(GetNetEntity(effect), GetNetEntity(user), ConstructBuildTime),
+                new XenoConstructionAnimationStartEvent(GetNetEntity(effect), GetNetEntity(user), node.Comp.ConstructBuildTime),
                 Filter.PvsExcept(effect)
             );
         }
 
-        var nodeUid = node.Owner;
-        Timer.Spawn(
-            ConstructBuildTime,
-            () => CompleteConstructNodeBuild(nodeUid, user)
-        );
+        _constructBuilds[node.Owner] = new ConstructNodeBuild(user, _timing.CurTime + node.Comp.ConstructBuildTime);
 
         return true;
     }
 
     private void PlayConstructNodeLunge(EntityUid user, EntityUid nodeUid)
     {
-        if (!TryComp(user, out TransformComponent? userXform))
+        if (!TryComp(user, out TransformComponent? userTransform))
             return;
 
-        var mapPos = _transform.ToMapCoordinates(Transform(nodeUid).Coordinates).Position;
-        var invMatrix = _transform.GetInvWorldMatrix(userXform);
+        if (!TryComp(nodeUid, out TransformComponent? nodeTransform))
+            return;
+
+        var mapPos = _transform.ToMapCoordinates(nodeTransform.Coordinates).Position;
+        var invMatrix = _transform.GetInvWorldMatrix(userTransform);
         var localPos = Vector2.Transform(mapPos, invMatrix);
 
         if (localPos.LengthSquared() <= 0f)
             return;
 
-        localPos = userXform.LocalRotation.RotateVec(localPos);
+        localPos = userTransform.LocalRotation.RotateVec(localPos);
         _melee.DoLunge(user, user, Angle.Zero, localPos, animation: null);
     }
 
     private void CompleteConstructNodeBuild(EntityUid nodeUid, EntityUid user)
     {
         _buildingNodes.Remove(nodeUid);
+        _constructBuilds.Remove(nodeUid);
 
         if (!TryComp(nodeUid, out DesignNodeComponent? nodeComp))
             return;
@@ -212,26 +258,18 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             return;
         }
 
-        // Determine wall variant based on xeno role
-        var xeno = Comp<XenoComponent>(user);
-        var isThickVariant = CanBuildThickFromConstructNode(user, xeno.Role);
+        // Determine wall variant based on xeno components
+        var isThickVariant = CanBuildThickFromConstructNode(user);
 
         // If the construct node is on hive weeds, always build thick weedbound resin.
-        var coords = Transform(nodeUid).Coordinates;
+        if (!TryComp(nodeUid, out TransformComponent? nodeTransform))
+            return;
+
+        var coords = nodeTransform.Coordinates;
         if (_transform.GetGrid(coords) is { } gridUid && TryComp<MapGridComponent>(gridUid, out var gridComp))
             isThickVariant |= _weeds.IsOnHiveWeeds((gridUid, gridComp!), coords);
 
-        // Builds walls or doors based on design mark.
-        var isDoor = nodeComp.DesignMark.Contains("door", StringComparison.OrdinalIgnoreCase);
-
-        var proto = (isDoor, isThickVariant) switch
-        {
-            (true, true) => "DoorXenoResinThickWeedbound",
-            (true, false) => "DoorXenoResinWeedbound",
-            (false, true) => "WallXenoResinThickWeedbound",
-            (false, false) => "WallXenoResinWeedbound",
-        };
-
+        var proto = isThickVariant ? nodeComp.ConstructWeedboundThick : nodeComp.ConstructWeedbound;
         var spawned = EntityManager.SpawnEntity(proto, coords);
 
         var weedbound = EnsureComp<WeedboundWallComponent>(spawned);
@@ -246,18 +284,13 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
     private void OnDesignNodeTerminating(Entity<DesignNodeComponent> node, ref EntityTerminatingEvent args)
     {
         _buildingNodes.Remove(node.Owner);
+        _constructBuilds.Remove(node.Owner);
     }
 
-    // Drone evos (except designer) build thick walls/doors from construct nodes.
-    private bool CanBuildThickFromConstructNode(EntityUid user, string roleId)
+    // Some castes build thick walls/doors from construct nodes.
+    private bool CanBuildThickFromConstructNode(EntityUid user)
     {
-        if (HasComp<ResinWhispererComponent>(user) || roleId == "CMXenoCarrier" || roleId == "CMXenoBurrower" || roleId == "CMXenoQueen")
-            return true;
-
-        if (HasComp<DesignerStrainComponent>(user))
-            return false;
-
-        return roleId is "CMXenoHivelord";
+        return HasComp<CanBuildThickFromConstructNodeComponent>(user);
     }
 
 }

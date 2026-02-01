@@ -99,6 +99,7 @@
   parent: CMXenoHivelordBase
   id: CMXenoHivelord
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleHivelord
@@ -156,6 +157,7 @@
   id: CMXenoHivelordResinWhisperer
   suffix: Resin Whisperer
   components:
+  - type: CanBuildThickFromConstructNode
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/resin_whisperer_hivelord.rsi
   - type: Xeno
@@ -209,6 +211,9 @@
   id: CMXenoHivelordDesigner
   suffix: Designer
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideDesignerHivelord
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
   - type: Xeno
@@ -230,6 +235,12 @@
     - ActionXenoDevolve
     - ActionXenoZoom
   - type: DesignerStrain
+    greaterResinSurgePlasmaCost: 250
+    greaterResinSurgeCooldown: 30
+    greaterResinSurgeRange: 7
+    greaterResinSurgeBuildTime: 1
+    greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
+    greaterResinSurgeWallPrototype: WallXenoResinThickSurge
   - type: XenoConstruction
     buildRange: 15
     buildDelay: 0.25

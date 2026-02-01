@@ -6,6 +6,7 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 
 // Marks a wall or door as bound to weeds.
 // When the bound weeds are destroyed, this wall collapses.
+[Access(typeof(DesignerConstructNodeSystem))]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class WeedboundWallComponent : Component
 {

@@ -1,5 +1,6 @@
 using Content.Shared.FixedPoint;
-using Content.Shared.DoAfter;
+using Content.Shared._RMC14.Xenonids.Construction;
+using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -13,6 +14,7 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 // - Design nodes can be walls or doors (cosmetic only; both allow same structures).
 // - Designers can remotely thicken walls/doors within range of their nodes every 60 seconds.
 // - Greater Resin Surge: Converts all nearby nodes into unstable resin. TODO: Make this reflective resin
+[Access(typeof(SharedXenoConstructionSystem), typeof(DesignerGreaterResinSurgeSystem), typeof(DesignerNodeBindingSystem))]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignerStrainComponent : Component
 {
@@ -25,9 +27,30 @@ public sealed partial class DesignerStrainComponent : Component
     [DataField, AutoNetworkedField]
     public bool BuildDoorNodes;
 
+    [DataField, AutoNetworkedField]
     public int NextDesignNodeOrder;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan NextRemoteThickenAt;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan NextGreaterResinSurgeAt;
-    public DoAfterId? GreaterResinSurgeDoAfter;
-    public readonly List<EntityUid> GreaterResinSurgeEffects = new();
+
+    [DataField, AutoNetworkedField]
+    public FixedPoint2 GreaterResinSurgePlasmaCost = 250;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan GreaterResinSurgeCooldown = TimeSpan.FromSeconds(30);
+
+    [DataField, AutoNetworkedField]
+    public float GreaterResinSurgeRange = 7f;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan GreaterResinSurgeBuildTime = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId GreaterResinSurgeAnimationEffect = "RMCEffectWallXenoResinThick";
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId GreaterResinSurgeWallPrototype = "WallXenoResinThickSurge";
 }

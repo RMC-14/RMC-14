@@ -129,6 +129,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         SubscribeLocalEvent<XenoConstructionComponent, XenoChooseStructureActionEvent>(OnXenoChooseStructureAction);
 
+        SubscribeLocalEvent<DesignerStrainComponent, DesignerSelectedDesignToggleActionEvent>(OnDesignerSelectedDesignToggle);
+
         SubscribeLocalEvent<XenoConstructionComponent, XenoSecreteStructureActionEvent>(OnXenoSecreteStructureAction);
         SubscribeLocalEvent<XenoConstructionComponent, XenoSecreteStructureDoAfterEvent>(OnXenoSecreteStructureDoAfter);
 
@@ -1729,6 +1731,24 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             "DesignNodeConstructWall" or "DesignNodeConstructDoor" => wantDoor ? "DesignNodeConstructDoor" : "DesignNodeConstructWall",
             _ => choice,
         };
+    }
+
+    private void OnDesignerSelectedDesignToggle(Entity<DesignerStrainComponent> ent, ref DesignerSelectedDesignToggleActionEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        ent.Comp.BuildDoorNodes = !ent.Comp.BuildDoorNodes;
+        _actions.SetToggled(args.Action.AsNullable(), ent.Comp.BuildDoorNodes);
+
+        var msg = ent.Comp.BuildDoorNodes
+            ? "We will now place door markers."
+            : "We will now place wall markers.";
+        _popup.PopupClient(msg, ent, ent, PopupType.Small);
+
+        Dirty(ent);
     }
 
     private float GetDesignNodeBuildTimeMultiplier(EntityUid user, EntityCoordinates target, EntProtoId buildChoice)
