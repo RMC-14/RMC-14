@@ -150,23 +150,23 @@
 - type: entity
   parent: DoorXenoResin
   id: DoorXenoResinWeedbound
-  name: weedbound resin door
+  name: Weedbound Resin Door
   description: That's a resin door, bound to weeds.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
     layers:
-    - state: "weedbound resin"
+    - state: "weedbound_resin"
       map: ["enum.DoorVisualLayers.Base"]
     - state: "closed_unlit"
       map: ["enum.DoorVisualLayers.BaseUnlit"]
     - state: "closed_unlit"
       map: ["enum.DoorVisualLayers.BaseBolted"]
   - type: Door
-    openSpriteState: "weedbound resinopen"
-    closedSpriteState: "weedbound resin"
-    openingSpriteState: "weedbound resinopening"
-    closingSpriteState: "weedbound resinclosing"
+    openSpriteState: "weedbound_resinopen"
+    closedSpriteState: "weedbound_resin"
+    openingSpriteState: "weedbound_resinopening"
+    closingSpriteState: "weedbound_resinclosing"
   - type: XenoStructureUpgradeable
     to: DoorXenoResinThickWeedbound
     cost: 25
@@ -175,22 +175,22 @@
 - type: entity
   parent: DoorXenoResinThick
   id: DoorXenoResinThickWeedbound
-  name: thick weedbound resin door
+  name: Thick Weedbound Resin Door
   description: A thick resin door, bound to weeds.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
     layers:
-    - state: "thick weedbound resin"
+    - state: "thick_weedbound_resin"
       map: ["enum.DoorVisualLayers.Base"]
     - state: "closed_unlit"
       map: ["enum.DoorVisualLayers.BaseUnlit"]
     - state: "closed_unlit"
       map: ["enum.DoorVisualLayers.BaseBolted"]
   - type: Door
-    openSpriteState: "thick weedbound resinopen"
-    closedSpriteState: "thick weedbound resin"
-    openingSpriteState: "thick weedbound resinopening"
-    closingSpriteState: "thick weedbound resinclosing"
+    openSpriteState: "thick_weedbound_resinopen"
+    closedSpriteState: "thick_weedbound_resin"
+    openingSpriteState: "thick_weedbound_resinopening"
+    closingSpriteState: "thick_weedbound_resinclosing"
   - type: WeedboundWall
     isThickVariant: true

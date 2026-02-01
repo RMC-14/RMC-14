@@ -382,4 +382,4 @@
   components:
     - type: Sprite
       sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
-      state: "weedbound resin"
+      state: weedbound_resin

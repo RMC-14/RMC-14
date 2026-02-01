@@ -8,40 +8,13 @@
     },
     "states": [
         {
-            "name": "weedbound resin",
-            "directions": 4
+            "name": "weedbound_resin",
+            "directions": 1
         },
         {
-            "name": "weedbound resinclosing",
-            "directions": 4,
+            "name": "weedbound_resinclosing",
+            "directions": 1,
             "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
                 [
                     0.1,
                     0.1,
@@ -54,40 +27,13 @@
             ]
         },
         {
-            "name": "weedbound resinopen",
-            "directions": 4
+            "name": "weedbound_resinopen",
+            "directions": 1
         },
         {
-            "name": "weedbound resinopening",
-            "directions": 4,
+            "name": "weedbound_resinopening",
+            "directions": 1,
             "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
                 [
                     0.1,
                     0.1,
@@ -100,40 +46,13 @@
             ]
         },
         {
-            "name": "thick weedbound resin",
-            "directions": 4
+            "name": "thick_weedbound_resin",
+            "directions": 1
         },
         {
-            "name": "thick weedbound resinclosing",
-            "directions": 4,
+            "name": "thick_weedbound_resinclosing",
+            "directions": 1,
             "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
                 [
                     0.1,
                     0.1,
@@ -146,40 +65,13 @@
             ]
         },
         {
-            "name": "thick weedbound resinopen",
-            "directions": 4
+            "name": "thick_weedbound_resinopen",
+            "directions": 1
         },
         {
-            "name": "thick weedbound resinopening",
-            "directions": 4,
+            "name": "thick_weedbound_resinopening",
+            "directions": 1,
             "delays": [
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
-                [
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.1,
-                    0.5
-                ],
                 [
                     0.1,
                     0.1,
@@ -193,13 +85,7 @@
         },
         {
             "name": "closed_unlit",
-            "directions": 4
-        },
-        {
-            "name": "strong_nutriplasm"
-        },
-        {
-            "name": "weak_nutriplasm"
+            "directions": 1
         }
     ]
 }
