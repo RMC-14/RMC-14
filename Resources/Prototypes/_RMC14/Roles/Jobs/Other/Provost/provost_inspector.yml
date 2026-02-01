@@ -77,7 +77,7 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
     belt: RMCM1984BeltFilled
-    back: CMSatchelSecurityFilledProvostInspector
+    # Back packs handled in Loadout_Groups.yml not here
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
 
