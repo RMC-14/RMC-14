@@ -54,6 +54,11 @@
       state: all
   - type: InteractionActivateOnClick
   - type: GunSecondWind
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rifle
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: BaseBullet

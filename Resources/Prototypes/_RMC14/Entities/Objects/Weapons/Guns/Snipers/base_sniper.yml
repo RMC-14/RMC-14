@@ -34,6 +34,11 @@
     - icon:
         sprite: _RMC14/Actions/marine_sniper_actions.rsi
         state: sniper_toggle_laser_off
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-sniper
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMBaseCartridgeRifle

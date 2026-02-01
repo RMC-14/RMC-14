@@ -84,6 +84,12 @@
           tags:
           - RMCAttachmentBurstFireAssembly
           - RMCAttachmentLaserSight
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-revolver
+    whitelist:
+      components:
+      - Xeno
+
 
 - type: entity
   abstract: true

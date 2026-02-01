@@ -58,6 +58,9 @@ cm-chatsan-replacement-eorg-xeno = sister harm
 cm-chatsan-word-sniper = sniper
 cm-chatsan-replacement-sniper = long spitter
 
+cm-chatsan-replacement-xm43e1 = special wall-eating long spitter
+cm-chatsan-replacement-m96s = special long spitter
+
 cm-chatsan-word-flare = flare
 cm-chatsan-replacement-flare = glow stick
 
@@ -427,6 +430,8 @@ cm-chatsan-replacement-flamer = fire spitter
 cm-chatsan-word-flamethrower = flamethrower
 cm-chatsan-replacement-flamethrower = fire spitter
 
+cm-chatsan-replacement-m34t = special fire spitter
+
 cm-chatsan-word-sadar = sadar
 cm-chatsan-replacement-sadar = tuber
 
@@ -436,11 +441,15 @@ cm-chatsan-replacement-rocket = boom spit
 cm-chatsan-word-grenadier = grenadier
 cm-chatsan-replacement-grenadier = boomstick spitter
 
+cm-chatsan-replacement-m83 = special boomstick launcher
+
 cm-chatsan-word-scout = scout spec
 cm-chatsan-replacement-scout = tall lurker
 
 cm-chatsan-word-scout-specialist = scout specialist
 cm-chatsan-replacement-scout-specialist = tall lurker
+
+cm-chatsan-replacement-scout-m4spr = special spitter
 
 cm-chatsan-word-mortar = mortar
 cm-chatsan-replacement-mortar = skyboom
@@ -450,6 +459,9 @@ cm-chatsan-replacement-demo = boom tuber
 
 cm-chatsan-word-demolitionist = demolitionist
 cm-chatsan-replacement-demolitionist = boom tuber
+
+cm-chatsan-replacement-rocket-launcher = boom tube
+cm-chatsan-replacement-m5atl = special boom tube
 
 cm-chatsan-word-ws = ws
 cm-chatsan-replacement-ws = special tall

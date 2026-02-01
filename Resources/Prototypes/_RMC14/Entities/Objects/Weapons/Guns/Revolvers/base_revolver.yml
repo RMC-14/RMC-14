@@ -56,6 +56,11 @@
   - type: GunPointBlank
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 0.85
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-pistol
+    whitelist:
+      components:
+      - Xeno
 
 - type: Tag
   id: RMCMagazineRevolver

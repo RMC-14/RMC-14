@@ -65,6 +65,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-rocket-launcher
+    whitelist:
+      components:
+      - Xeno
 
 - type: entity
   parent: [RMCBaseWeaponLauncher, RMCBaseAttachableHolder]
@@ -91,6 +96,11 @@
   - type: Corrodible
     isCorrodible: false
   - type: RMCMagneticItem
+  - type: FixedIdentity
+    name: cm-chatsan-replacement-m5atl
+    whitelist:
+      components:
+      - Xeno
 
 # 84mm HE
 - type: entity
