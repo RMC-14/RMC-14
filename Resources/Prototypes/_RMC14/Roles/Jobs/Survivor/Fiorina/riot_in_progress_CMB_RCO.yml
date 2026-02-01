@@ -22,7 +22,7 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressUNRO
+      preset: RMCSurvivorPresetRiotInProgressCMBRCO
     - type: JobPrefix
       prefix: cm-job-prefix-survivor-riot-officer
     - type: TacticalMapIcon
@@ -59,8 +59,8 @@
       state: surv
 
 - type: entity
-  id: RMCSurvivorPresetRiotInProgressUNRO
-  name: riot in progress CMB RO preset
+  id: RMCSurvivorPresetRiotInProgressCMBRCO
+  name: riot in progress CMB RCO preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
