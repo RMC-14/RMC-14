@@ -1,4 +1,3 @@
-# TODO RMC14 text labels on the bottom right
 - type: entity
   parent: PillCanister
   id: RMCPillCanisterNoSkill
@@ -65,7 +64,7 @@
     - PillCanister
   - type: IconLabel
     textColor: White
-    storedOffset: 3, 12
+    storedOffset: -12, 12
   - type: UserInterface
     interfaces:
       enum.StorageUiKey.Key:
@@ -83,6 +82,9 @@
       - RMCBeltMedical
   - type: RMCSmartFridgeInsertable
     category: Pills
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 500
 
 - type: entity
   parent: RMCPillCanisterNoSkill
@@ -309,7 +311,7 @@
     heldPrefix: 7
   - type: Sprite
     layers:
-    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+    - state: pill_canister
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
@@ -353,7 +355,7 @@
     heldPrefix: 7
   - type: Sprite
     layers:
-    - state: pill_canister7 # TODO RMC14 idk which canister this uses
+    - state: pill_canister9
       map: [ "bottleSurfaceLayer" ]
     - state: open
       map: [ "openLayer" ]
