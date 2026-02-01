@@ -18,7 +18,7 @@
     base: strata_bare_outpost_
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallStrataReinforced
   name: ribbed outpost wall
   description: A thick and chunky metal wall covered in jagged ribs.
@@ -109,3 +109,11 @@
     - windows
     - doors
     base: strata_rock
+
+- type: entity
+  parent: RMCWallStrataRock
+  id: RMCWallStrataRockTimed
+  suffix: Timed
+  components:
+  - type: TimedDespawn
+    lifetime: 1200

@@ -1,0 +1,97 @@
+- type: reaction
+  id: RMCNapalm
+  priority: 10
+  reactants:
+    Water:
+      amount: 1
+    RMCPhoron:
+      amount: 1
+    RMCAluminum:
+      amount: 1
+    RMCSulphuricAcid:
+      amount: 1
+  products:
+    RMCNapalm: 1
+    RMCHydrogen: 2
+    RMCOxygen: 1
+
+- type: reaction
+  id: RMCNapalmBad
+  impact: High
+  priority: 5 # Before H2O to Water
+  reactants:
+    RMCPhoron:
+      amount: 1
+    RMCAluminum:
+      amount: 1
+    RMCSulphuricAcid:
+      amount: 1
+  effects:
+  - !type:ExplosionReactionEffect
+    explosionType: RMC
+    maxIntensity: 100
+    intensityPerUnit: 0.33
+    intensitySlope: 4
+    maxTotalIntensity: 100
+
+- type: reaction
+  id: RMCCLF3
+  priority: 10
+  reactants:
+    Water:
+      amount: 1
+    RMCChlorine:
+      amount: 1
+    RMCFluorine:
+      amount: 3
+  products:
+    RMCCLF3: 1
+    RMCHydrogen: 2
+    RMCOxygen: 1
+
+- type: reaction
+  id: RMCCLF3Bad
+  impact: High
+  priority: 5 # Before H2O to Water
+  reactants:
+    RMCChlorine:
+      amount: 1
+    RMCFluorine:
+      amount: 3
+  effects:
+  - !type:ExplosionReactionEffect
+    explosionType: RMC
+    maxIntensity: 100
+    intensityPerUnit: 0.25
+    intensitySlope: 4
+    maxTotalIntensity: 100
+
+- type: reaction
+  id: RMCNapalmHighCombustion
+  reactants:
+    RMCNapalm:
+      amount: 1
+    RMCCLF3:
+      amount: 1
+  products:
+    RMCNapalmHighCombustion: 1
+
+- type: reaction
+  id: RMCNapalmSticky
+  reactants:
+    RMCNapalm:
+      amount: 1
+    WeldingFuel:
+      amount: 1
+  products:
+    RMCNapalmSticky: 1
+
+- type: reaction
+  id: RMCMethane
+  reactants:
+    RMCHydrogen:
+      amount: 4
+    RMCCarbon:
+      amount: 1
+  products:
+    RMCMethane: 1

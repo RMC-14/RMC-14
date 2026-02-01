@@ -37,6 +37,7 @@
     shoes: RMCBootsSPP
     gloves: RMCHandsVeteranSPP
     back: RMCSatchelLightpack
+    mask: RMCMaskGasSPP
     head: RMCArmorHelmetSPPFirefighter
     outerClothing: RMCArmorSPPFirefighter
     ears: RMCHeadsetDistressSPP
@@ -58,7 +59,7 @@
       state: surv
 
 - type: entity
-  parent: RMCSurvivorPresetCivilian
+  parent: [RMCSurvivorPresetCivilianRareItem, RMCSurvivorPresetCivilian]
   id: RMCGearSurvivorPresetFireProtectionSpecialist
   name: fire protection specialist preset
   categories: [ HideSpawnMenu ]

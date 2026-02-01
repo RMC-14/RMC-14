@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by discord user CyberTropic, Crow(noctrn), designs by discord user Noisrevni(noisrevni)",
+  "copyright": "Sprites by discord user CyberTropic, Crow(noctrn), designs by discord user Noisrevni(noisrevni), WEYA flag and TSE_alt flag by AssKnuckles on Discord",
   "size": {
     "x": 96,
     "y": 32
@@ -42,6 +42,12 @@
     },
     {
       "name": "unflag_worn"
+    },
+    {
+      "name": "weyaflag"
+    },
+    {
+      "name": "tseflag_alt"
     }
   ]
 }

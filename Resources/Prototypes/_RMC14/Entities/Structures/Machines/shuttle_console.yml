@@ -25,7 +25,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+    access: [["CMAccessSquadLeaderPrep"], ["CMAccessDropship"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -55,16 +55,16 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_nav_computer.rsi
     state: on
-#  - type: ActivatableUI
-#    key: enum.DropshipNavigationUiKey.Key
-#  - type: AccessReader
-#    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO RMC14 make xeno queen just swipe
-#  - type: ActivatableUIRequiresAccess
+  - type: ActivatableUI
+    key: enum.DropshipTerminalUiKey.Key
+  - type: AccessReader
+    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
+  - type: ActivatableUIRequiresAccess
   - type: DropshipTerminal
-#  - type: UserInterface
-#    interfaces:
-#      enum.DropshipTerminalUiKey.Key:
-#        type: DropshipTerminalBui
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalUiKey.Key:
+        type: DropshipTerminalBui
 
 - type: entity
   parent: CMComputerDropship
@@ -171,6 +171,52 @@
     offset: "0,0"
     color: "#FFEFD2"
     mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+
+- type: entity
+  parent: CMBaseStructure
+  id: RMCComputerDropshipWeaponsSmall
+  name: weapons controls
+  description: A computer to manage equipment, weapons and simulations installed on the dropship.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    drawdepth: Objects
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    state: security_cam
+    layers: [ ]
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+  - type: AccessReader
+    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+  - type: PointLight
+    enabled: true
+    radius: 1.5
+    netsync: true
+    energy: 1
+    offset: "0,0"
+    color: "#FFEFD2"
+    mask: /Textures/_RMC14/Effects/LightMasks/quad_cone.png
+  - type: ActivatableUI
+    key: enum.DropshipTerminalWeaponsUi.Key
+  - type: ActivatableUIRequiresAccess
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalWeaponsUi.Key:
+        type: DropshipWeaponsBui
+  - type: DropshipTerminalWeapons
+  - type: TacticalMapComputer
 
 - type: entity
   parent: MarkerBase

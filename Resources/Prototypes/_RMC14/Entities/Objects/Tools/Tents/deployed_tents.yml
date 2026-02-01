@@ -100,11 +100,69 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
 
-
 # Standard Tents
 - type: entity
   parent: RMCTentBase
   id: RMCTentUNMCStandard
+
+- type: entity
+  parent: RMCTentBase
+  id: RMCTentUNMCBig
+  name: UNMC Big Tent
+  description: A standard UNMC Field Tent. This one is just a general purpose, large version. Unfold in a suitable location for micro-FOB vibes. ComTech not included. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tents/deployed_tents.rsi
+    layers:
+    - state: big_frame
+    - state: big_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: big_roof
+      map: [ "enum.ItemCamouflageLayers.Layer2", "standard_roof" ]
+  - type: Fixtures
+    fixtures:
+      fix1: # Left Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,-2.5,-1.4,1"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+      fix-2: # Right Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "1.4,-2.5,1.5,1"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+      fix-3: # Back Wall
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.5,0.4,1.5,1.5"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
 
 - type: entity
   parent: RMCTentBase

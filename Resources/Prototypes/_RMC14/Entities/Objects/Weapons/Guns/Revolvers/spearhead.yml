@@ -78,6 +78,19 @@
 
 - type: entity
   parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolverSpearheadTactitcal
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
+
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
   id: RMCWeaponRevolverSpearheadCustom
   name: Spearhead custom autorevolver
   description: An automatic revolver chambered in .357, custom made of darker metal and with a wooden handle, clearly made for a person with taste in mind.

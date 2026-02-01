@@ -440,7 +440,9 @@ public sealed class SharedXenoFruitSystem : EntitySystem
                 [FruitPlantDamageType] = args.HealthCost,
             },
         };
-        _damageable.TryChangeDamage(xeno.Owner, fruitDamage, ignoreResistances: true, interruptsDoAfters: false);
+
+        if (TryComp<DamageableComponent>(xeno, out var damage))
+            _damageable.AddDamage(xeno.Owner, damage, fruitDamage);
 
         // Apply cooldown
         args.Handled = true;

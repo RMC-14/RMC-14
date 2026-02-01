@@ -102,6 +102,8 @@
     - state: trashblue
       map: [ "enum.DisposalUnitVisualLayers.Base" ]
     - state: trashblue
+      map: [ "enum.DisposalUnitVisualLayers.BaseCharging" ]
+    - state: trashblue
       map: [ "enum.DisposalUnitVisualLayers.OverlayFlush" ]
     - state: trashblue
       map: [ "enum.DisposalUnitVisualLayers.OverlayCharging" ]
