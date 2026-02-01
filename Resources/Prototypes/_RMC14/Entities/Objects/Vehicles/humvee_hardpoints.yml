@@ -19,6 +19,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -30,11 +33,15 @@
   - type: Sprite
     state: humveeturret
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Turret
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointTurret
   - type: RMCHardpointNoRemove
   - type: VehicleTurret
     rotateToCursor: true
-    stabilizedRotation: true
+    stabilizedRotation: false
+    rotationSpeed: 180
     showOverlay: true
     useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
@@ -45,14 +52,20 @@
     pixelOffsetWest: "6,16"
   - type: RMCHardpointSlots
     slots:
-    - id: turret-weapon
-      hardpointType: TurretWeapon
+    - id: turret-cannon
+      hardpointType: Cannon
       required: false
       insertDelay: 2.0
-    - id: turret-weapon-2
-      hardpointType: TurretWeapon
+      whitelist:
+        tags:
+        - RMCVehicleHardpointCannon
+    - id: turret-launcher
+      hardpointType: Launcher
       required: false
       insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointLauncher
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase
@@ -63,7 +76,10 @@
   - type: Sprite
     state: humveecannon
   - type: RMCHardpointItem
-    hardpointType: TurretWeapon
+    hardpointType: Cannon
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointCannon
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
@@ -110,7 +126,10 @@
   - type: Sprite
     state: humveelauncher
   - type: RMCHardpointItem
-    hardpointType: TurretWeapon
+    hardpointType: Launcher
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointLauncher
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
@@ -154,7 +173,10 @@
   - type: Sprite
     state: snowplow
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: FrontAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointFrontAttachment
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
 
@@ -167,7 +189,10 @@
   - type: Sprite
     state: overlight
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: RoofAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointRoofAttachment
   - type: RMCHardpointVisual
     vehicleState: overlight_0
 
@@ -180,6 +205,9 @@
   - type: Sprite
     state: humveehatch
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: RoofAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointRoofAttachment
   - type: RMCHardpointVisual
     vehicleState: humveehatch_0

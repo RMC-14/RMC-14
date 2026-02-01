@@ -50,6 +50,9 @@ public sealed partial class VehicleTurretComponent : Component
     public bool StabilizedRotation = false;
 
     [DataField, AutoNetworkedField]
+    public float RotationSpeed = 0f;
+
+    [DataField, AutoNetworkedField]
     public bool ShowOverlay = false;
 
     [DataField, AutoNetworkedField]
@@ -78,6 +81,9 @@ public sealed partial class VehicleTurretComponent : Component
 
     [DataField, AutoNetworkedField]
     public Angle WorldRotation = Angle.Zero;
+
+    [DataField, AutoNetworkedField]
+    public Angle TargetRotation = Angle.Zero;
 
     [NonSerialized]
     public EntityUid? VisualEntity;

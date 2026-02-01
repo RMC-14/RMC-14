@@ -143,7 +143,15 @@ public sealed partial class RMCHardpointMenu : FancyWindow
                 HorizontalExpand = true
             };
 
-            var header = $"{hardpoint.SlotId} ({hardpoint.HardpointType})";
+            var displaySlot = hardpoint.SlotId;
+            string? parentSlot = null;
+            if (RMCVehicleTurretSlotIds.TryParse(hardpoint.SlotId, out var parentSlotId, out var childSlotId))
+            {
+                displaySlot = childSlotId;
+                parentSlot = parentSlotId;
+            }
+
+            var header = $"{displaySlot} ({hardpoint.HardpointType})";
             var nameText = hardpoint.HasItem
                 ? hardpoint.InstalledName ?? header
                 : Loc.GetString("rmc-hardpoint-ui-empty-slot");
@@ -154,9 +162,13 @@ public sealed partial class RMCHardpointMenu : FancyWindow
                 FontColorOverride = Color.FromHex("#E1EEFF")
             });
 
+            var slotLine = hardpoint.HasItem ? header : $"Slot: {header}";
+            if (parentSlot != null)
+                slotLine += $" | Turret: {parentSlot}";
+
             centerColumn.AddChild(new Label
             {
-                Text = hardpoint.HasItem ? header : $"Slot: {header}",
+                Text = slotLine,
                 FontColorOverride = Color.FromHex("#8FA7C2")
             });
 

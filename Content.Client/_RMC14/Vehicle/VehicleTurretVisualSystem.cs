@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Vehicle;
@@ -44,16 +45,22 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 
             var vehicleRot = _transform.GetWorldRotation(vehicle);
             var relativeRotation = (vehicleRot + eyeRotation).Reduced().FlipPositive();
-            var visualDir = relativeRotation.GetCardinalDir();
-            var offsetPixels = GetPixelOffset(anchorTurret, visualDir);
+            var offsetPixels = GetPixelOffset(anchorTurret, relativeRotation);
             if (anchorUid != turretUid)
-                offsetPixels += GetPixelOffset(turret, visualDir);
+                offsetPixels += GetPixelOffset(turret, relativeRotation);
             var offsetWorld = (-eyeRotation).RotateVec(offsetPixels / PixelsPerMeter);
-            var localOffset = (-vehicleRot).RotateVec(offsetWorld);
-            var coords = new EntityCoordinates(vehicle, localOffset);
+            var targetLocalOffset = (-vehicleRot).RotateVec(offsetWorld);
+
+            var targetLocalRotation = Angle.Zero;
+            if (anchorTurret.RotateToCursor)
+                targetLocalRotation = anchorTurret.WorldRotation;
+
+            var localOffset = targetLocalOffset;
+            var localRotation = targetLocalRotation;
 
             var visualXform = Transform(uid);
-            _transform.SetCoordinates(uid, visualXform, coords);
+            _transform.SetLocalRotationNoLerp(uid, localRotation, visualXform);
+            _transform.SetLocalPositionNoLerp(uid, localOffset, visualXform);
         }
     }
 
@@ -100,21 +107,36 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
         sprite.LayerSetVisible(0, true);
     }
 
-    private Vector2 GetPixelOffset(VehicleTurretComponent turret, Direction direction)
+
+    private Vector2 GetPixelOffset(VehicleTurretComponent turret, Angle facing)
     {
         if (!turret.UseDirectionalOffsets)
             return turret.PixelOffset;
 
-        var directional = direction switch
+        var baseOffset = turret.PixelOffset;
+        var normalized = facing.Theta % MathHelper.TwoPi;
+        if (normalized < 0)
+            normalized += MathHelper.TwoPi;
+
+        var segment = MathHelper.PiOver2;
+        var index = (int) Math.Floor(normalized / segment) & 3;
+        var t = (float) ((normalized - index * segment) / segment);
+
+        var current = baseOffset + GetDirectionalOffset(turret, index);
+        var next = baseOffset + GetDirectionalOffset(turret, (index + 1) & 3);
+        return Vector2.Lerp(current, next, t);
+    }
+
+    private static Vector2 GetDirectionalOffset(VehicleTurretComponent turret, int index)
+    {
+        return index switch
         {
-            Direction.North => turret.PixelOffsetNorth,
-            Direction.East => turret.PixelOffsetEast,
-            Direction.South => turret.PixelOffsetSouth,
-            Direction.West => turret.PixelOffsetWest,
+            0 => turret.PixelOffsetSouth,
+            1 => turret.PixelOffsetEast,
+            2 => turret.PixelOffsetNorth,
+            3 => turret.PixelOffsetWest,
             _ => Vector2.Zero
         };
-
-        return turret.PixelOffset + directional;
     }
 
     private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)

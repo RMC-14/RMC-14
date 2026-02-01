@@ -57,6 +57,9 @@ public sealed partial class RMCHardpointSlot
     public string HardpointType { get; set; } = string.Empty;
 
     [DataField]
+    public string VisualLayer { get; set; } = string.Empty;
+
+    [DataField]
     public bool Required { get; set; } = true;
 
     [DataField]

@@ -28,6 +28,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly RMCVehicleSystem _vehicleSystem = default!;
     [Dependency] private readonly VehicleTurretSystem _turretSystem = default!;
     [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
 
     public override void Initialize()
@@ -259,14 +260,20 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             !TryGetSlotItem(vehicleUid, operatorSlot, itemSlots, out var item))
             return;
 
-        if (HasComp<VehicleTurretAttachmentComponent>(item))
-            return;
-
         if (!TryComp(item, out VehicleTurretComponent? turret) ||
             !_turretSystem.TryResolveRotationTarget(item, out var targetUid, out var targetTurret))
             return;
 
+        if (!targetTurret.RotateToCursor)
+            return;
+
         targetTurret.StabilizedRotation = args.Enabled;
+        var vehicleRot = _transform.GetWorldRotation(vehicleUid);
+        var currentWorld = (targetTurret.WorldRotation + vehicleRot).Reduced();
+        if (args.Enabled)
+            targetTurret.TargetRotation = currentWorld;
+        else
+            targetTurret.TargetRotation = targetTurret.WorldRotation;
         Dirty(targetUid, targetTurret);
 
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
@@ -494,7 +501,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             _turretSystem.TryResolveRotationTarget(selectedItem, out var targetUid, out var targetTurret))
         {
             stabilizationEnabled = targetTurret.StabilizedRotation;
-            canToggleStabilization = !HasComp<VehicleTurretAttachmentComponent>(selectedItem);
+            canToggleStabilization = targetTurret.RotateToCursor;
         }
 
         _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key, new RMCVehicleWeaponsUiState(entries, canToggleStabilization, stabilizationEnabled));

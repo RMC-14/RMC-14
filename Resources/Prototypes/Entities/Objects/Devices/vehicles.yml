@@ -882,17 +882,29 @@
   - type: RMCHardpointSlots
     slots:
     - id: primary
-      hardpointType: Primary
+      hardpointType: Turret
+      visualLayer: primary
       insertDelay: 2.5
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTurret
     - id: secondary
-      hardpointType: Secondary
+      hardpointType: Cannon
+      visualLayer: secondary
       insertDelay: 2.5
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointCannon
     - id: support
-      hardpointType: Support
+      hardpointType: SupportAttachment
+      visualLayer: support
       insertDelay: 2.0
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointSupportAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
@@ -1096,6 +1108,9 @@
     - map: [ support ]
       state: ATTACH
       visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: SpriteMovement
@@ -1127,18 +1142,30 @@
   - type: ItemSlots
   - type: RMCHardpointSlots
     slots:
-    - id: primary
-      hardpointType: Primary
+    - id: turret
+      hardpointType: Turret
+      visualLayer: primary
       insertDelay: 2.0
       required: false
-    - id: secondary
-      hardpointType: Secondary
-      insertDelay: 2.0
-      required: false
-    - id: support
-      hardpointType: Support
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTurret
+    - id: roof
+      hardpointType: RoofAttachment
+      visualLayer: support
       insertDelay: 1.5
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointRoofAttachment
+    - id: front
+      hardpointType: FrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
@@ -1193,14 +1220,29 @@
     - map: [ support ]
       state: ATTACH
       visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: RMCHardpointSlots
     slots:
-    - id: support
-      hardpointType: Support
+    - id: roof
+      hardpointType: RoofAttachment
+      visualLayer: support
       insertDelay: 1.5
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointRoofAttachment
+    - id: front
+      hardpointType: FrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5
@@ -1242,14 +1284,29 @@
     - map: [ support ]
       state: ATTACH
       visible: false
+    - map: [ support-2 ]
+      state: ATTACH
+      visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: RMCHardpointSlots
     slots:
-    - id: support
-      hardpointType: Support
+    - id: roof
+      hardpointType: RoofAttachment
+      visualLayer: support
       insertDelay: 1.5
       required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointRoofAttachment
+    - id: front
+      hardpointType: FrontAttachment
+      visualLayer: support-2
+      insertDelay: 1.5
+      required: false
+      whitelist:
+        tags:
+        - RMCVehicleHardpointFrontAttachment
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 1.5

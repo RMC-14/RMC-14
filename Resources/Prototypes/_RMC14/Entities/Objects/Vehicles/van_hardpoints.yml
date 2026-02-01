@@ -11,5 +11,8 @@
     size: Large
   - type: RMCHardpointItem
     hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
   - type: RMCVehicleWheelItem
   - type: RMCHardpointIntegrity

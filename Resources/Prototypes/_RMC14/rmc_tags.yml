@@ -119,6 +119,27 @@
   id: RMCXenoLarva
 
 - type: Tag
+  id: RMCVehicleHardpointWheel
+
+- type: Tag
+  id: RMCVehicleHardpointTurret
+
+- type: Tag
+  id: RMCVehicleHardpointCannon
+
+- type: Tag
+  id: RMCVehicleHardpointLauncher
+
+- type: Tag
+  id: RMCVehicleHardpointFrontAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointRoofAttachment
+
+- type: Tag
+  id: RMCVehicleHardpointSupportAttachment
+
+- type: Tag
   id: RipOffOnInfection
 
 - type: Tag

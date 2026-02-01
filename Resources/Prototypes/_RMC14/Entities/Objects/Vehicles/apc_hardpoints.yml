@@ -19,6 +19,9 @@
     state: tires
   - type: RMCHardpointItem
     hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -30,7 +33,10 @@
   - type: Sprite
     state: front_cannon
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: Cannon
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointCannon
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -68,7 +74,10 @@
   - type: Sprite
     state: dual_cannon
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Turret
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointTurret
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -111,7 +120,10 @@
   - type: Sprite
     state: comms_relay
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: SupportAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: comms_relay_0
 
@@ -124,7 +136,10 @@
   - type: Sprite
     state: flare_launcher
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: SupportAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
   - type: VehicleTurret
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
@@ -170,7 +185,10 @@
   - type: Sprite
     state: freighter_storage
   - type: RMCHardpointItem
-    hardpointType: Support
+    hardpointType: SupportAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
   - type: RMCHardpointVisual
     vehicleState: freight_0
 

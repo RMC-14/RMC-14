@@ -1,27 +1,45 @@
 using Content.Shared._RMC14.Vehicle;
 using Robust.Client.GameObjects;
+using Robust.Shared.GameObjects;
+using Robust.Shared.GameStates;
 
 namespace Content.Client._RMC14.Vehicle;
 
-public sealed class RMCVehicleHardpointVisualizerSystem : VisualizerSystem<RMCVehicleHardpointVisualsComponent>
+public sealed class RMCVehicleHardpointVisualizerSystem : EntitySystem
 {
-    protected override void OnAppearanceChange(EntityUid uid, RMCVehicleHardpointVisualsComponent component, ref AppearanceChangeEvent args)
+    public override void Initialize()
     {
-        var sprite = args.Sprite;
-        if (sprite == null)
-            return;
-
-        UpdateLayer(uid, sprite, RMCVehicleHardpointLayers.Primary, RMCVehicleHardpointVisuals.PrimaryState);
-        UpdateLayer(uid, sprite, RMCVehicleHardpointLayers.Secondary, RMCVehicleHardpointVisuals.SecondaryState);
-        UpdateLayer(uid, sprite, RMCVehicleHardpointLayers.Support, RMCVehicleHardpointVisuals.SupportState);
+        SubscribeLocalEvent<RMCVehicleHardpointVisualsComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<RMCVehicleHardpointVisualsComponent, AfterAutoHandleStateEvent>(OnAfterState);
     }
 
-    private void UpdateLayer(EntityUid uid, SpriteComponent sprite, string layerMap, RMCVehicleHardpointVisuals key)
+    private void OnStartup(EntityUid uid, RMCVehicleHardpointVisualsComponent component, ref ComponentStartup args)
+    {
+        ApplyLayers(uid, component);
+    }
+
+    private void OnAfterState(EntityUid uid, RMCVehicleHardpointVisualsComponent component, ref AfterAutoHandleStateEvent args)
+    {
+        ApplyLayers(uid, component);
+    }
+
+    private void ApplyLayers(EntityUid uid, RMCVehicleHardpointVisualsComponent component)
+    {
+        if (!TryComp(uid, out SpriteComponent? sprite))
+            return;
+
+        foreach (var entry in component.Layers)
+        {
+            UpdateLayer(sprite, entry.Layer, entry.State);
+        }
+    }
+
+    private void UpdateLayer(SpriteComponent sprite, string layerMap, string state)
     {
         if (!sprite.LayerMapTryGet(layerMap, out var layer))
             return;
 
-        if (!AppearanceSystem.TryGetData(uid, key, out string? state) || string.IsNullOrWhiteSpace(state))
+        if (string.IsNullOrWhiteSpace(state))
         {
             sprite.LayerSetVisible(layer, false);
             return;
