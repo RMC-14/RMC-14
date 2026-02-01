@@ -22,7 +22,12 @@
   - type: CMArmor
     melee: 20
     bullet: 10
-    explosionArmor: 0
+    bio: 10
+    explosionArmor: 10
+    # armor_laser = 10
+    # armor_energy = 10
+    # armor_rad = 10
+    # armor_internaldamage = 20
   - type: CMHardArmor
   - type: Appearance
   - type: ItemTogglePointLight
