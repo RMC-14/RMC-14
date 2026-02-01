@@ -1,20 +1,18 @@
 - type: job
-  parent: CMSurvivorSecurity
+  parent: CMSurvivorFiorinaRiotOfficer
   id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
-  name: rmc-job-name-bureau-riot-control-officer
+  name: cm-job-name-survivor-riot-officer
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
   startingGear: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   accessGroups:
   - ColonistSec
   spawnMenuRoleName: CMB Riot Control Officer (Special Survivor)
-  icon: "RMCJobIconBureauDeputy"
-  hasIcon: true
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetSurvivorRiotControlOfficer
+      preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -24,34 +22,34 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetRiotInProgressCMBRCO
+      preset: RMCSurvivorPresetRiotInProgressUNRO
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-riot-officer
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: deputy
+        state: mp
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_cmb
-    - type: JobPrefix
-      prefix: rmc-job-prefix-bureau-riot-control-officer
   greeting: rmc-job-greeting-riot-in-progress-CMB-RCO
 
 - type: startingGear
-  parent: RMCGearSurvivorFiorinaRiotInProgressUNRiotOfficer
   id: RMCGearSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   equipment:
-    jumpsuit: RMCSwatCMBUniformSpearhead
-    outerClothing: RMCArmorM4RMedium
-    mask: RMCMaskSWAT
-    head: RMCArmorHelmetM10CMBVisorSWAT
-    back: RMCSatchelSecuritySurvivorFillRiotControlOfficer
-    eyes: RMCGlassesSecuritySwat
-
+    id: RMCIDCardCMBDeputySurvivor
+    back: CMSatchelSecuritySurvivorFill
+    outerClothing: RMCArmorPMCRiot
+    ears: RMCHeadsetDistressBureauDamaged
+    eyes: RMCGlassesSecurityBlue
+    gloves: CMHandsBlackMarine
+    shoes: RMCBootsPMCFilled
+    pocket1: RMCPouchSurvivalBlackFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
-  name: special survivor fiorina riot in progress colony marshal bureau riot control officer spawn point
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
+  name: special survivor fiorina riot in progress cmb riot control officer spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
@@ -61,20 +59,21 @@
       state: surv
 
 - type: entity
-  id: RMCSurvivorPresetRiotInProgressCMBRCO
-  name: riot in progress UN RO preset
+  id: RMCSurvivorPresetRiotInProgressUNRO
+  name: riot in progress CMB RO preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchShotgunFilledPolicing, RMCWeaponShotgunHG3712 ]
-    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledM16, RMCWeaponRifleM16A5, RMCExplosiveBreachingCharge ]
-    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
-    - [ RMCPouchMagazineFilledMP5, RMCWeaponSMGMP5Alt, RMCMotionDetectorCompact ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
+    - [ RMCJumpsuitUNSecurityM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCHeadBeanieGray ]
+    - [ RMCJumpsuitUNSecurityMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitUNSecurityMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
     primaryWeaponChance: 1
+

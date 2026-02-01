@@ -41,8 +41,8 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivorMarshal
-  id: RMCSkillPresetSurvivorRiotControlOfficer
-  name: Survivor CMB Riot Control Officer
+  id: RMCSkillPresetSurvivorRiotControlTeamLeader
+  name: Survivor CMB Riot Control Team Leader
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
