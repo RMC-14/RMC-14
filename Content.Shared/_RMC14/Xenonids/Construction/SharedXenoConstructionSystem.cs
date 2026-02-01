@@ -15,6 +15,8 @@ using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared._RMC14.Xenonids.Designer;
+using Content.Shared._RMC14.Xenonids.Designer.Events;
 using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
@@ -163,6 +165,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         Subs.BuiEvents<XenoConstructionComponent>(XenoChooseStructureUI.Key,
             subs =>
             {
+                subs.Event<BoundUIOpenedEvent>(OnXenoChooseStructureOpened);
                 subs.Event<XenoChooseStructureBuiMsg>(OnXenoChooseStructureBui);
             });
 
@@ -452,11 +455,23 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (xeno.Comp.BuildChoice is not { } choice ||
-            !CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
+        if (xeno.Comp.BuildChoice is not { } choice)
+            return;
+
+        if (TryHandleDesignerRemoteDeleteNodeChoice(xeno, choice, args.Target))
         {
+            args.Handled = true;
             return;
         }
+
+        if (TryHandleDesignerRemoteThickenResin(xeno, choice, args.Target))
+        {
+            args.Handled = true;
+            return;
+        }
+
+        if (!CanSecreteOnTilePopup(xeno, choice, args.Target, true, true))
+            return;
 
         var attempt = new XenoSecreteStructureAttemptEvent(args.Target);
         RaiseLocalEvent(xeno, ref attempt);
@@ -471,6 +486,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         EntityUid? effect = null;
 
         var buildMult = GetBuildSpeed(choice) ?? 1;
+        buildMult *= GetDesignNodeBuildTimeMultiplier(xeno.Owner, args.Target, choice);
 
         if (hasBoost && _queenBoostQuery.TryComp(xeno.Owner, out var boostComp))
             buildMult *= boostComp.BuildSpeedMultiplier;
@@ -543,6 +559,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 cost = GetDensityCost(area.Value, xeno, cost);
             }
 
+            var plasmaMult = GetDesignNodePlasmaCostMultiplier(xeno.Owner, coordinates, args.StructureId);
+            if (plasmaMult > 0f && plasmaMult != 1f)
+                cost = Math.Ceiling(cost.Float() * plasmaMult);
+
             if (!hasBoost && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, cost))
                 return;
         }
@@ -552,6 +572,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (_net.IsServer)
         {
             var structureToSpawn = args.StructureId;
+            structureToSpawn = ResolveDesignerDesignNodeChoice(xeno.Owner, structureToSpawn);
 
             if (hasBoost)
             {
@@ -564,6 +585,56 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             var structure = Spawn(structureToSpawn, coordinates);
             _hive.SetSameHive(xeno.Owner, structure);
+            if (TryComp(structure, out DesignNodeComponent? nodeComp))
+            {
+                nodeComp.BoundXeno = xeno.Owner;
+                if (TryComp(xeno.Owner, out DesignerStrainComponent? designerComp))
+                    nodeComp.PlacedOrder = designerComp.NextDesignNodeOrder++;
+
+                Dirty(structure, nodeComp);
+
+                if (TryComp(xeno.Owner, out DesignerStrainComponent? designer2))
+                {
+                    var nodes = new List<(EntityUid Uid, int Order)>();
+                    var query = EntityQueryEnumerator<DesignNodeComponent>();
+                    while (query.MoveNext(out var uid, out var node))
+                    {
+                        if (uid == structure)
+                            continue;
+
+                        if (node.BoundXeno != xeno.Owner)
+                            continue;
+
+                        nodes.Add((uid, node.PlacedOrder));
+                    }
+
+                    var total = nodes.Count + 1;
+                    var overflow = Math.Max(0, total - designer2.MaxDesignNodes);
+                    if (overflow > 0)
+                    {
+                        nodes.Sort(static (a, b) => a.Order.CompareTo(b.Order));
+                        for (var i = 0; i < overflow && i < nodes.Count; i++)
+                        {
+                            QueueDel(nodes[i].Uid);
+                        }
+                    }
+
+                    designer2.CurrentDesignNodes = total - overflow;
+                    Dirty(xeno.Owner, designer2);
+
+                    _ui.SetUiState(xeno.Owner, XenoChooseStructureUI.Key,
+                        new XenoChooseStructureBuiState(true, designer2.CurrentDesignNodes, designer2.MaxDesignNodes));
+                }
+            }
+
+            if (!HasComp<DesignNodeComponent>(structure))
+            {
+                using var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(coordinates);
+                while (anchoredNodes.MoveNext(out var nodeUid))
+                {
+                    QueueDel(nodeUid);
+                }
+            }
 
             if (HasComp<XenoRecentlyBuiltPreventCollisionsComponent>(structure))
             {
@@ -851,6 +922,13 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
+        if (construction.BuildChoice is { } buildChoice &&
+            _prototype.TryIndex(buildChoice, out var buildChoiceProto) &&
+            buildChoiceProto.HasComponent<DesignerRemoteThickenResinComponent>(_compFactory))
+        {
+            return;
+        }
+
         if (!CanSecreteOnTilePopup((args.User, construction), construction.BuildChoice, target, ent.Comp.CheckStructureSelected, ent.Comp.CheckWeeds))
         {
             args.Invalid = true;
@@ -1048,7 +1126,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoConstructMapInit(Entity<XenoConstructComponent> ent, ref MapInitEvent args)
     {
-        if (!_area.TryGetArea(ent, out var area , out _))
+        if (!_area.TryGetArea(ent, out var area, out _))
             return;
 
         area.Value.Comp.ResinConstructCount++;
@@ -1057,7 +1135,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoConstructRemoved(Entity<XenoConstructComponent> ent, ref EntityTerminatingEvent args)
     {
-        if (!_area.TryGetArea(ent, out var area , out _))
+        if (!_area.TryGetArea(ent, out var area, out _))
             return;
 
         area.Value.Comp.ResinConstructCount--;
@@ -1170,6 +1248,16 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         target = target.SnapToGrid(EntityManager, _map);
         var hasBoost = _queenBoostQuery.HasComp(xeno.Owner);
 
+        if (checkStructureSelected &&
+            buildChoice is { } nodeChoice &&
+            _prototype.TryIndex(nodeChoice, out var nodeChoiceProto) &&
+            nodeChoiceProto.HasComponent<DesignNodeComponent>() &&
+            _rmcMap.HasAnchoredEntityEnumerator<DesignNodeComponent>(target, out _))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
         if (checkWeeds && !_xenoWeeds.IsOnWeeds((gridId, grid), target))
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-need-weeds"), target, xeno);
@@ -1207,7 +1295,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (!HasComp<BarricadeComponent>(uid))
             {
-                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid))  &&
+                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid)) &&
                     !_tags.HasTag(uid.Value, PlatformTag) &&
                     !HasComp<DoorComponent>(uid) ||
                     TryComp(uid, out DoorComponent? door) &&
@@ -1522,7 +1610,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private FixedPoint2 GetDensityCost(Entity<AreaComponent> area, Entity<XenoConstructionComponent> xeno, FixedPoint2 cost)
     {
-        var density = (float) area.Comp.ResinConstructCount / area.Comp.BuildableTiles;
+        var density = (float)area.Comp.ResinConstructCount / area.Comp.BuildableTiles;
         if (density >= _densityThreshold)
             cost = Math.Ceiling(cost.Float() * (density + xeno.Comp.DensityConstructionCostModifier) * xeno.Comp.DensityConstructionCostMultiplier);
 
@@ -1557,5 +1645,266 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (comp.StopCollide.Count == 0)
                 RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
         }
+    }
+    private void OnXenoChooseStructureOpened(Entity<XenoConstructionComponent> xeno, ref BoundUIOpenedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        UpdateChooseStructureUiState(xeno.Owner);
+    }
+
+    private void UpdateChooseStructureUiState(EntityUid xenoUid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (TryComp(xenoUid, out DesignerStrainComponent? designer))
+        {
+            var count = GetDesignerNodeCount(xenoUid);
+            if (designer.CurrentDesignNodes != count)
+            {
+                designer.CurrentDesignNodes = count;
+                Dirty(xenoUid, designer);
+            }
+
+            _ui.SetUiState(xenoUid, XenoChooseStructureUI.Key,
+                new XenoChooseStructureBuiState(true, count, designer.MaxDesignNodes));
+        }
+        else
+        {
+            _ui.SetUiState(xenoUid, XenoChooseStructureUI.Key,
+                new XenoChooseStructureBuiState(false, 0, 0));
+        }
+    }
+
+    private int GetDesignerNodeCount(EntityUid designerUid)
+    {
+        var count = 0;
+        var query = EntityQueryEnumerator<DesignNodeComponent>();
+        while (query.MoveNext(out _, out var node))
+        {
+            if (node.BoundXeno == designerUid)
+                count++;
+        }
+
+        return count;
+    }
+
+    private EntityUid? GetOldestDesignerNode(EntityUid designerUid, EntityUid? exclude)
+    {
+        EntityUid? oldestUid = null;
+        var oldestOrder = int.MaxValue;
+
+        var query = EntityQueryEnumerator<DesignNodeComponent>();
+        while (query.MoveNext(out var uid, out var node))
+        {
+            if (node.BoundXeno != designerUid)
+                continue;
+
+            if (exclude != null && uid == exclude)
+                continue;
+
+            if (node.PlacedOrder < oldestOrder)
+            {
+                oldestOrder = node.PlacedOrder;
+                oldestUid = uid;
+            }
+        }
+
+        return oldestUid;
+    }
+
+    private EntProtoId ResolveDesignerDesignNodeChoice(EntityUid user, EntProtoId choice)
+    {
+        if (!TryComp(user, out DesignerStrainComponent? designer))
+            return choice;
+
+        var wantDoor = designer.BuildDoorNodes;
+
+        return choice.Id switch
+        {
+            "DesignNodeOptimizedWall" or "DesignNodeOptimizedDoor" => wantDoor ? "DesignNodeOptimizedDoor" : "DesignNodeOptimizedWall",
+            "DesignNodeFlexibleWall" or "DesignNodeFlexibleDoor" => wantDoor ? "DesignNodeFlexibleDoor" : "DesignNodeFlexibleWall",
+            "DesignNodeConstructWall" or "DesignNodeConstructDoor" => wantDoor ? "DesignNodeConstructDoor" : "DesignNodeConstructWall",
+            _ => choice,
+        };
+    }
+
+    private float GetDesignNodeBuildTimeMultiplier(EntityUid user, EntityCoordinates target, EntProtoId buildChoice)
+    {
+        if (_prototype.TryIndex(buildChoice, out var proto) && proto.HasComponent<DesignNodeComponent>())
+            return 1f;
+
+        var snapped = target.SnapToGrid(EntityManager, _map);
+        using var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(snapped);
+        while (anchoredNodes.MoveNext(out var nodeUid))
+        {
+            if (!TryComp(nodeUid, out DesignNodeComponent? nodeComp))
+                continue;
+
+            if (nodeComp.BoundXeno is { } bound)
+            {
+                var userHasHive = TryComp(user, out HiveMemberComponent? userHive) && userHive.Hive != null;
+                var boundHasHive = TryComp(bound, out HiveMemberComponent? boundHive) && boundHive.Hive != null;
+                if (userHasHive && boundHasHive && !_hive.FromSameHive(user, bound))
+                    continue;
+            }
+
+            if (nodeComp.NodeType != DesignNodeType.Optimized)
+                continue;
+
+            return nodeComp.OptimizedBuildTimeMultiplier;
+        }
+
+        return 1f;
+    }
+
+    private float GetDesignNodePlasmaCostMultiplier(EntityUid user, EntityCoordinates target, EntProtoId buildChoice)
+    {
+        if (_prototype.TryIndex(buildChoice, out var proto))
+        {
+            if (proto.HasComponent<DesignNodeComponent>())
+                return 1f;
+
+            if (proto.HasComponent<HiveConstructionLimitedComponent>(_compFactory))
+                return 1f;
+        }
+
+        var snapped = target.SnapToGrid(EntityManager, _map);
+        using var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(snapped);
+        while (anchoredNodes.MoveNext(out var nodeUid))
+        {
+            if (!TryComp(nodeUid, out DesignNodeComponent? nodeComp))
+                continue;
+
+            if (nodeComp.BoundXeno is { } bound)
+            {
+                var userHasHive = TryComp(user, out HiveMemberComponent? userHive) && userHive.Hive != null;
+                var boundHasHive = TryComp(bound, out HiveMemberComponent? boundHive) && boundHive.Hive != null;
+                if (userHasHive && boundHasHive && !_hive.FromSameHive(user, bound))
+                    continue;
+            }
+
+            if (nodeComp.NodeType != DesignNodeType.Flexible)
+                continue;
+
+            return nodeComp.FlexiblePlasmaCostMultiplier;
+        }
+
+        return 1f;
+    }
+    private bool TryHandleDesignerRemoteDeleteNodeChoice(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
+    {
+        if (!_prototype.TryIndex(choice, out var proto) ||
+            !proto.TryGetComponent(out DesignerDeleteDesignNodeComponent? deleteChoice, _compFactory))
+        {
+            return false;
+        }
+
+        if (_transform.GetGrid(target) is null)
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+            return true;
+        }
+
+        var rangeEv = new XenoConstructionRangeEvent(xeno.Comp.BuildRange);
+        RaiseLocalEvent(xeno, ref rangeEv);
+        if (rangeEv.Range > 0 && !_queenEye.IsInQueenEye(xeno.Owner))
+        {
+            if (!InRangePopup(xeno, target, rangeEv.Range.Float()))
+                return true;
+        }
+
+        var snapped = target.SnapToGrid(EntityManager, _map);
+        EntityUid? nodeUid = null;
+        DesignNodeComponent? nodeComp = null;
+
+        using (var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(snapped))
+        {
+            if (anchoredNodes.MoveNext(out var uid) && TryComp(uid, out nodeComp))
+                nodeUid = uid;
+        }
+
+        if (nodeUid is null || nodeComp is null)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-delete-node-none"), snapped, xeno, PopupType.SmallCaution);
+            return true;
+        }
+
+        if (deleteChoice.OnlyOwnNodes &&
+            nodeComp.BoundXeno != xeno.Owner)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-delete-node-not-owned"), snapped, xeno, PopupType.SmallCaution);
+            return true;
+        }
+
+        if (deleteChoice.PlasmaCost > 0 && !_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, deleteChoice.PlasmaCost))
+            return true;
+
+        if (_net.IsServer)
+            QueueDel(nodeUid.Value);
+
+        _audio.PlayPredicted(xeno.Comp.BuildSound, snapped, xeno);
+        return true;
+    }
+
+    private bool TryHandleDesignerRemoteThickenResin(Entity<XenoConstructionComponent> xeno, EntProtoId choice, EntityCoordinates target)
+    {
+        if (!_prototype.TryIndex(choice, out var proto) ||
+            !proto.TryGetComponent(out DesignerRemoteThickenResinComponent? thickenChoice, _compFactory))
+        {
+            return false;
+        }
+
+        if (!TryComp(xeno.Owner, out DesignerStrainComponent? designer))
+            return true;
+
+        if (_timing.CurTime < designer.NextRemoteThickenAt)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-cooldown"), xeno, xeno, PopupType.SmallCaution);
+            return true;
+        }
+
+        if (_transform.GetGrid(target) is null)
+        {
+            _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
+            return true;
+        }
+
+        if (thickenChoice.Range > 0 && !_queenEye.IsInQueenEye(xeno.Owner))
+        {
+            if (!InRangePopup(xeno.Owner, target, thickenChoice.Range))
+                return true;
+        }
+
+        var snapped = target.SnapToGrid(EntityManager, _map);
+        if (!_rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) ||
+            upgradeable.Comp.To is not { } to ||
+            !_prototype.HasIndex(to))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-none"), snapped, xeno, PopupType.SmallCaution);
+            return true;
+        }
+
+        if (HasComp<WeedboundWallComponent>(upgradeable.Owner))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-weedbound"), snapped, xeno, PopupType.SmallCaution);
+            return true;
+        }
+
+        designer.NextRemoteThickenAt = _timing.CurTime + TimeSpan.FromSeconds(thickenChoice.Cooldown);
+        Dirty(xeno.Owner, designer);
+
+        var ev = new DesignerRemoteThickenResinDoAfterEvent(thickenChoice.PlasmaCost);
+        var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, thickenChoice.DoAfter, ev, xeno.Owner, upgradeable.Owner)
+        {
+            BreakOnMove = true,
+            DistanceThreshold = thickenChoice.Range,
+            DuplicateCondition = DuplicateConditions.SameEvent | DuplicateConditions.SameTarget,
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+        return true;
     }
 }

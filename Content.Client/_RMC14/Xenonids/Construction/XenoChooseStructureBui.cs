@@ -112,4 +112,25 @@ public sealed class XenoChooseStructureBui : BoundUserInterface
             button.Button.Pressed = true;
         }
     }
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        base.UpdateState(state);
+
+        if (_window == null)
+            return;
+
+        if (state is XenoChooseStructureBuiState s && s.ShowNodeCount)
+        {
+            _window.NodeCountLabel.Visible = true;
+            _window.NodeCountLabel.Text = Loc.GetString(
+                "rmc-xeno-designer-ui-nodes-count",
+                ("count", s.NodeCount),
+                ("max", s.NodeMax));
+        }
+        else
+        {
+            _window.NodeCountLabel.Visible = false;
+            _window.NodeCountLabel.Text = string.Empty;
+        }
+    }
 }

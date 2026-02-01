@@ -143,6 +143,7 @@
   - type: XenoEvolution
     strains:
     - CMXenoHivelordResinWhisperer
+    - CMXenoHivelordDesigner
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.2
   - type: RMCSurgeryXenoHeart
@@ -201,3 +202,66 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordResinWhisperer
+
+# Designer Strain for Hivelord
+- type: entity
+  parent: CMXenoHivelordBase
+  id: CMXenoHivelordDesigner
+  suffix: Designer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
+  - type: Xeno
+    role: CMXenoHivelord
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoSecreteStructure
+    - ActionXenoDesignerSelectedDesign
+    - ActionXenoDesignerGreaterResinSurge
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoResinWalker
+    - ActionXenoDevolve
+    - ActionXenoZoom
+  - type: DesignerStrain
+  - type: XenoConstruction
+    buildRange: 15
+    buildDelay: 0.25
+    canBuild:
+    - DesignNodeOptimizedWall
+    - DesignNodeFlexibleWall
+    - DesignNodeConstructWall
+    - DesignNodeRemoteDelete
+    - DesignNodeRemoteThickenResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+  - type: XenoPlasma
+    plasma: 700
+    maxPlasma: 700
+    plasmaRegenOnWeeds: 5.5
+    plasmaTransferDelay: 0.5
+  - type: Tackle
+    max: 4
+    chance: 0.45
+    stunMin: 5
+    stunMax: 6
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.15
+    baseSprintSpeed: 3.9
+  - type: XenoZoom
+  - type: XenoStrain
+    name: rmc-xeno-designer-name
+    description: rmc-xeno-designer-description
+    popup: rmc-xeno-designer-popup
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: CMXenoHivelordDesigner

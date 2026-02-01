@@ -323,6 +323,15 @@
   priority: 4
   name: "Hivelord Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleHivelord.xml"
+  children:
+  - RMCGuideRoleDesigner
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleDesigner
+  priority: 1
+  name: "Designer Hivelord Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideDesignerHivelord.xml"
 
 - type: guideEntry
   parent: RMC

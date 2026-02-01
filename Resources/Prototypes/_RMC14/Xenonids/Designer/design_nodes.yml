@@ -1,0 +1,385 @@
+# # Design Node Entity Prototypes
+# # These are buildable node entities that provide modifiers for nearby construction
+# # Each node type comes in two mark variants (wall/door) for visual distinction
+# # Nodes are placed by Designer hivelords and can be interacted with to build walls
+
+# # OPTIMIZED NODES - 50% faster construction
+# # Plasma cost: 50, Placement time: 1 second
+
+- type: entity
+  id: DesignNodeBase
+  name: Design Node
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Transform
+      anchored: true
+    - type: Clickable
+      bounds:
+        all: "-0.5,-0.5,0.5,0.5"
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_constructnode
+    - type: Physics
+      bodyType: Static
+      canCollide: false
+    - type: Damageable
+      damageContainer: StructuralXeno
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 5
+          behaviors:
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+    - type: ImmuneToUnarmed
+    - type: MeleeSound
+      soundGroups:
+        Brute:
+          collection: XenoMove
+    - type: DesignNode
+      nodeType: Construct
+      boundXeno: null
+      boundWeed: null
+      hiveNumber: 0
+      designMark: ""
+    - type: DesignNodeOverlay
+
+- type: entity
+  id: DesignNodeRemoteDelete
+  name: Delete Design Node
+  description: Remotely deletes a placed design node on the targeted tile.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
+  components:
+    - type: DesignerDeleteDesignNode
+      plasmaCost: 25
+      onlyOwnNodes: true
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: remove_node
+    - type: XenoConstructionPlasmaCost
+      plasma: 25
+
+- type: entity
+  id: DesignNodeRemoteThickenResin
+  name: Remote Thickening
+  description: Remotely thickens resin walls, doors, and membranes into their thick variants.
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
+  components:
+    - type: DesignerRemoteThickenResin
+      plasmaCost: 60
+      cooldown: 0.5
+      doAfter: 1
+      range: 10
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: upgrade_resin
+    - type: XenoConstructionPlasmaCost
+      plasma: 60
+
+
+
+# Xeno-only overlay marks (wall/door intent). These are spawned as a child entity of the real node.
+- type: entity
+  id: DesignNodeMarkBase
+  name: Design Node Mark
+  abstract: true
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+    - type: Visibility
+      layer: 32768
+    - type: Tag
+      tags:
+        - HideContextMenu
+
+
+
+- type: entity
+  id: DesignNodeMarkOptimizedWall
+  parent: DesignNodeMarkBase
+  name: Optimized Wall
+  description: You sense that building on top of this node will speed up your construction speed by 50%
+  components:
+    - type: Sprite
+      state: wall_mark_optimized
+
+- type: entity
+  id: DesignNodeMarkOptimizedDoor
+  parent: DesignNodeMarkBase
+  name: Optimized Door
+  description: You sense that building on top of this node will speed up your construction speed by 50%
+  components:
+    - type: Sprite
+      state: door_mark_optimized
+
+- type: entity
+  id: DesignNodeMarkFlexibleWall
+  parent: DesignNodeMarkBase
+  name: Flexible Wall
+  description: You sense that building on top of this node will decrease plasma cost of basic resin structures by 50%
+  components:
+    - type: Sprite
+      state: wall_mark_flex
+
+- type: entity
+  id: DesignNodeMarkFlexibleDoor
+  parent: DesignNodeMarkBase
+  name: Flexible Door
+  description: You sense that building on top of this node will decrease plasma cost of basic resin structures by 50%
+  components:
+    - type: Sprite
+      state: door_mark_flex
+
+- type: entity
+  id: DesignNodeMarkConstructWall
+  parent: DesignNodeMarkBase
+  name: Construct Wall
+  description: You sense that feeding plasma with our hand to this node will secrete a weedbound wall
+  components:
+    - type: Sprite
+      state: wall_mark_construct
+
+- type: entity
+  id: DesignNodeMarkConstructDoor
+  parent: DesignNodeMarkBase
+  name: Construct Door
+  description: You sense that feeding plasma with our hand to this node will secrete a weedbound door
+  components:
+    - type: Sprite
+      state: door_mark_construct
+
+
+# Optimized Variants
+- type: entity
+  id: DesignNodeOptimizedWall
+  parent: DesignNodeBase
+  name: Optimized Node
+  description: This node looks like it has a big green oozing bulb at its center, making the weeds under it twitch...
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_optimizednode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_speednode
+    - type: DesignNode
+      nodeType: Optimized
+      optimizedBuildTimeMultiplier: 0.5
+      designMark: wall_mark_optimized
+    - type: XenoConstructionPlasmaCost
+      plasma: 50
+      scalingCost: false
+
+
+- type: entity
+  id: DesignNodeOptimizedDoor
+  parent: DesignNodeBase
+  name: Optimized Node
+  description: This node looks like it has a big green oozing bulb at its center, making the weeds under it twitch...
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_optimizednode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_speednode
+    - type: DesignNode
+      nodeType: Optimized
+      optimizedBuildTimeMultiplier: 0.5
+      designMark: door_mark_optimized
+    - type: XenoConstructionPlasmaCost
+      plasma: 50
+      scalingCost: false
+
+# Flexible Variants
+
+- type: entity
+  id: DesignNodeFlexibleWall
+  parent: DesignNodeBase
+  name: Flexible Node
+  description: This node looks like its made of smaller blue bulbs grown together, making the weeds under them look soft and squishy.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_flexnode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_costnode
+    - type: DesignNode
+      nodeType: Flexible
+      flexiblePlasmaCostMultiplier: 0.5
+      designMark: wall_mark_flex
+    - type: XenoConstructionPlasmaCost
+      plasma: 60
+      scalingCost: false
+
+
+- type: entity
+  id: DesignNodeFlexibleDoor
+  parent: DesignNodeBase
+  name: Flexible Node
+  description: This node looks like its made of smaller blue bulbs grown together, making the weeds under them look soft and squishy.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_flexnode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_costnode
+    - type: DesignNode
+      nodeType: Flexible
+      flexiblePlasmaCostMultiplier: 0.5
+      designMark: door_mark_flex
+    - type: XenoConstructionPlasmaCost
+      plasma: 60
+      scalingCost: false
+
+# Construct Variants
+
+- type: entity
+  id: DesignNodeConstructWall
+  parent: DesignNodeBase
+  name: Construct Node
+  description: This node looks like big blub composed of smaller purple glowing cups, pumping some strange liquid trough weeds.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_constructnode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_constructnode
+    - type: DesignNode
+      nodeType: Construct
+      designMark: wall_mark_construct
+    - type: XenoConstructionPlasmaCost
+      plasma: 70
+      scalingCost: false
+
+
+- type: entity
+  id: DesignNodeConstructDoor
+  parent: DesignNodeBase
+  name: Construct Node
+  description: This node looks like big blub composed of smaller purple glowing cups, pumping some strange liquid trough weeds.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: static_constructnode
+    - type: Icon
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_constructnode
+    - type: DesignNode
+      nodeType: Construct
+      designMark: door_mark_construct
+    - type: XenoConstructionPlasmaCost
+      plasma: 70
+      scalingCost: false
+
+# Guidebook action entries
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDesignerOptimizedNode
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_speednode
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDesignerFlexibleNode
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_costnode
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDesignerConstructNode
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: icon_constructnode
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoGreaterResinSurge
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: greater_resin_surge
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoToggleNodeType
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: design_mark_wall
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRemoteUpgrade
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: upgrade_resin
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoRemoveNodes
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Actions/designer_actions.rsi
+      state: remove_node
+
+- type: entity
+  parent: BaseItem
+  id: RMCGuidebookEntityWeedboundResinWall
+  name: weedbound resin wall
+  suffix: GuideBookEntity
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
+      state: weedboundresin
+
+- type: entity
+  parent: BaseItem
+  id: RMCGuidebookEntityWeedboundResinDoor
+  name: weedbound resin door
+  suffix: GuideBookEntity
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Sprite
+      sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
+      state: "weedbound resin"
