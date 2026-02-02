@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed some Inserts having Unknown Areas.
-    type: Fix
-  id: 2369
-  time: '2025-09-24T08:33:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7891
 - author: PursuitInAshes
   changes:
   - message: Increased the max length of subtle messages.
@@ -4655,5 +4648,20 @@
   id: 2871
   time: '2026-02-02T03:50:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8965
+- author: Arykh
+  changes:
+  - message: Added Dylovene autoinjectors to the We-Ya-Med Plus vendor.
+    type: Add
+  - message: Fixed the stock of some items in medical vendors being too low.
+    type: Fix
+  - message: Fixed the FOB Supplies Vendor having the wrong entries. (requisition
+      tent)
+    type: Fix
+  - message: Fixed sidearms in the pilot and requisitions weapon vendors having pre-loaded
+      ammo. They now vend empty.
+    type: Fix
+  id: 2872
+  time: '2026-02-02T03:52:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9000
 Name: RMC14
 Order: -1
