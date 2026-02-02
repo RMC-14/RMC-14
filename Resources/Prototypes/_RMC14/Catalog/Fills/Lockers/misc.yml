@@ -1,26 +1,63 @@
+- type: entityTable
+  id: CMClosetEmergencyFillTable
+  table: !type:GroupSelector
+    children:
+    - !type:AllSelector # "small" = 2 emergency O2 tanks, 2 breath masks, 2 gas masks
+      weight: 55
+      children:
+      - id: RMCEmergencyOxygenTankFilled
+        amount: 2
+      - id: RMCMaskBreath
+        amount: 2
+      - id: CMMaskGas
+        amount: 2
+    - !type:AllSelector # "aid" = 1 emergency O2 tank, 1 emergency toolbox, 1 O2 first aid kit, 1 gas mask
+      weight: 25
+      children:
+      - id: RMCEmergencyOxygenTankFilled
+      - id: RMCToolboxEmergencyFilled
+      - id: CMFirstAidO2KitFilled
+      - id: CMMaskGas
+    - !type:AllSelector # "tank" = 2 extended-capacity emergency O2 tanks, 1 breath mask, 1 gas mask
+      weight: 10
+      children:
+      - id: RMCExtendedEmergencyOxygenTankFilled
+        amount: 2
+      - id: RMCMaskBreath
+      - id: CMMaskGas
+    - !type:AllSelector # "both" = 1 toolbox, 1 extended-capacity emergency O2 tank, 2 gas masks, 1 O2 first aid kit
+      weight: 10
+      children:
+      - id: RMCToolboxEmergencyFilled
+      - id: RMCExtendedEmergencyOxygenTankFilled
+      - id: CMMaskGas
+        amount: 2
+      - id: CMFirstAidO2KitFilled
+    - !type:NoneSelector # "nothing" = empty closet
+      weight: 1
+
 - type: entity
   id: CMClosetEmergencyFilled
   parent: CMClosetEmergency
   suffix: Filled
   components:
-  - type: StorageFill
-    contents:
-      - id: CMMaskGas
-##      - id: EmergencyOxygenTankFilled
-      - id: CMFirstAidO2KitFilled
-      - id: CMFlare
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: CMClosetEmergencyFillTable
 
 - type: entity
   id: CMClosetFireFilled
   parent: CMClosetFire
   suffix: Filled
   components:
-    - type: StorageFill
-      contents:
-        - id: CMMaskGas
- ##       - id: EmergencyOxygenTankFilled
-        - id: CMFireExtinguisher
-        - id: CMBurnAidKitFilled
+  - type: StorageFill
+    contents:
+      - id: RMCHardhatRed
+      - id: RMCSuitFirefighter
+      - id: RMCReagentGasTankOxygen
+      - id: CMFireExtinguisher
+      - id: CMPackFlare
 
 - type: entity
   parent: CMLockerCommanderSecure
@@ -79,9 +116,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorVest #should be bulletproof vest from CM13.
+    - id: RMCArmorBulletproof
     - id: RMCSynthResetKeySMART
-      # ToDo: RMC14 2 WeYa ration packs
+    - id: RMCMREWeYa
+    - id: RMCMREWeYa
       # ToDo: RMC14 Platinum Coin
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000
@@ -89,3 +127,16 @@
     - id: RMCWeaponPistolPK7
     - id: RMCMagazinePistolPK7
     - id: RMCMagazinePistolPK7
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerFieldDoctor
+  suffix: Filled, Field Doctor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMArmorM3VLBallistics
+    - id: RMCArmorHelmetM10FieldDoctor
+    - id: RMCPatchMedic
+    - id: CMBootsBlack
+    - id: CMMRE

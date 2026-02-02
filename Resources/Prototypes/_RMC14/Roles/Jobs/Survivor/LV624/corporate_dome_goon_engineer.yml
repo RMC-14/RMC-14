@@ -8,11 +8,13 @@
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonEngi"
   hasIcon: true
+  ranks:
+    RMCRankCivilianOfficer: []
   special:
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoonTechnician
+      preset: RMCSkillPresetSurvivorGoonTechnician
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -21,6 +23,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_engi
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-engi
 
 - type: entity

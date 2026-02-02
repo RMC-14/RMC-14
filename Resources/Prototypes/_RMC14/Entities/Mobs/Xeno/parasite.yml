@@ -21,6 +21,9 @@
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -179,3 +182,10 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: RMCXenoParasiteWatcher
+
+- type: entity
+  parent: CMXenoParasite
+  id: RMCXenoParasitePrimeHiveAssign
+  suffix: Auto-Assign, Prime Hive
+  components:
+  - type: AutoAssignHive
