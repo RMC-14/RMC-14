@@ -50,7 +50,7 @@
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 10
     - name: Sidearm ammunition
       entries:
@@ -125,7 +125,7 @@
       - id: RMCBoxBulletsSMG
         name: SMG HV ammunition box (10x20mm) (M63)
         box: CMMagazineSMGM63
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsRifle
         name: rifle ammunition box (10x24mm) (M54C)
         box: CMMagazineRifleM54C

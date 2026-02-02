@@ -128,6 +128,7 @@
     item: Sentry
   - type: RequireProjectileTarget
   - type: RMCWeaponAccuracy
+  - type: HomingShots
 
 - type: entity
   parent: RMCBaseTurret
