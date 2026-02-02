@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: J C Denton
-  changes:
-  - message: Fixed armory lockers being destructible.
-    type: Fix
-  id: 2338
-  time: '2025-09-09T23:03:32.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7852
 - author: DimFlower
   changes:
   - message: Fixed 1984 Hollowpoint AP Values
@@ -4690,5 +4683,15 @@
   id: 2840
   time: '2026-02-02T02:26:30.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9026
+- author: Dygon
+  changes:
+  - message: Walking ignores slows until sprint speed drops below the base walk speed.
+    type: Tweak
+  - message: Walking is no longer slower than sprinting while sprint speed is lower
+      than the base walk speed.
+    type: Tweak
+  id: 2841
+  time: '2026-02-02T02:27:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9037
 Name: RMC14
 Order: -1
