@@ -37,6 +37,7 @@
     - map: [ "enum.SquadArmorLayers.Armor" ]
     - map: [ "enum.WebbingVisualLayers.Base" ]
     - map: [ "enum.MedalVisualLayers.Base" ]
+    - map: [ "enum.MedalVisualLayers.Base1" ]
     - map: [ "back" ]
     - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
     - map: [ "neck" ] # RMC14 re-arrange neck slot
