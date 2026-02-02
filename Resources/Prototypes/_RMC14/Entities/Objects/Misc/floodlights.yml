@@ -58,7 +58,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
 
 - type: entity
@@ -135,7 +135,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
   - type: ToggleableVisuals
     spriteLayer: light
@@ -178,7 +178,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # LZ Floodlights
 
@@ -249,7 +249,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
@@ -289,7 +289,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # Traffic light
 
@@ -329,7 +329,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Construction
     graph: RMCFloodlightBroken
     node: completed
