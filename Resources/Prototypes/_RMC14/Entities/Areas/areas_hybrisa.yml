@@ -207,7 +207,7 @@
 - type: entity
   parent: RMCAreaLv759Outdoors
   id: RMCAreaLv759OutdoorsLandingZone2
-  name: KMCC Interstellar Freight Hub - Landing Zone Two
+  name: TMCC Interstellar Freight Hub - Landing Zone Two
   components:
   - type: Sprite
     state: mining_lz2
@@ -234,7 +234,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubFlightControlRoom
-  name: KMCC Interstellar Freight Hub - Flight Control Room
+  name: TMCC Interstellar Freight Hub - Flight Control Room
   components:
   - type: Sprite
     state: hybrisa
@@ -253,7 +253,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubSecurity
-  name: KMCC Interstellar Freight Hub - Security Checkpoint Office
+  name: TMCC Interstellar Freight Hub - Security Checkpoint Office
   components:
   - type: Sprite
     state: security_checkpoint
@@ -272,7 +272,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeNorth
-  name: KMCC Interstellar Freight Hub - Passenger Departures - Lounge North
+  name: TMCC Interstellar Freight Hub - Passenger Departures - Lounge North
   components:
   - type: Sprite
     state: hybrisa
@@ -291,7 +291,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubFuel
-  name: KMCC Interstellar Freight Hub - Fuel Storage & Maintenance - North
+  name: TMCC Interstellar Freight Hub - Fuel Storage & Maintenance - North
   components:
   - type: Sprite
     state: hybrisa
@@ -310,7 +310,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeSouth
-  name: KMCC Interstellar Freight Hub - Passenger Departures - Lounge South
+  name: TMCC Interstellar Freight Hub - Passenger Departures - Lounge South
   components:
   - type: Sprite
     state: hybrisa
@@ -329,7 +329,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubLoungeHallway
-  name: KMCC Interstellar Freight Hub - Passenger Departures - Hallway
+  name: TMCC Interstellar Freight Hub - Passenger Departures - Hallway
   components:
   - type: Sprite
     state: hybrisa
@@ -348,7 +348,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubSouthOffice
-  name: KMCC Interstellar Freight Hub - Passenger Departures - South Office
+  name: TMCC Interstellar Freight Hub - Passenger Departures - South Office
   components:
   - type: Sprite
     state: hybrisa
@@ -367,7 +367,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubMaintenance
-  name: KMCC Interstellar Freight Hub - Passenger Departures - Maintenance
+  name: TMCC Interstellar Freight Hub - Passenger Departures - Maintenance
   components:
   - type: Sprite
     state: hybrisa
@@ -391,7 +391,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2KmccHub
   id: RMCAreaLv759IndoorsLandingZone2KmccHubLz2Console
-  name: KMCC Interstellar Freight Hub - Dropship Normandy Console
+  name: TMCC Interstellar Freight Hub - Dropship Normandy Console
   components:
   - type: Sprite
     state: hybrisa
@@ -411,7 +411,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubCargo
-  name: KMCC Interstellar Freight Hub - Cargo Processing Center
+  name: TMCC Interstellar Freight Hub - Cargo Processing Center
   components:
   - type: Sprite
     state: mining_cargo
@@ -431,7 +431,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsLandingZone2
   id: RMCAreaLv759IndoorsLandingZone2KmccHubMaintenanceNorth
-  name: KMCC Interstellar Freight Hub - Cargo Processing Center - Maintenance
+  name: TMCC Interstellar Freight Hub - Cargo Processing Center - Maintenance
   components:
   - type: Sprite
     state: mining
@@ -451,7 +451,7 @@
 - type: entity
   parent: RMCAreaLv759OutdoorsLandingZone2
   id: RMCAreaLv759OutdoorsLandingZone2KmccHubCargoEntranceSouth
-  name: KMCC Interstellar Freight Hub - Cargo Processing Center - Main Entrance & South Unloading Platform
+  name: TMCC Interstellar Freight Hub - Cargo Processing Center - Main Entrance & South Unloading Platform
   components:
   - type: Sprite
     state: mining
@@ -854,7 +854,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsCaves
   id: RMCAreaLv759IndoorsCavesNorthEastCavesComms
-  name: KMCC - Mining Outpost - East - Subspace-Communications
+  name: TMCC - Mining Outpost - East - Subspace-Communications
   components:
   - type: Sprite
     state: comms_1
@@ -1722,7 +1722,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostNorth
-  name: KMCC - Mining Outpost - North
+  name: TMCC - Mining Outpost - North
   components:
   - type: Sprite
     state: mining
@@ -1730,7 +1730,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostNorthMaint
-  name: KMCC - Mining Outpost - North - Maintenance
+  name: TMCC - Mining Outpost - North - Maintenance
   components:
   - type: Sprite
     state: mining
@@ -1738,7 +1738,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostNortheast
-  name: KMCC - Mining Outpost - Northeast
+  name: TMCC - Mining Outpost - Northeast
   components:
   - type: Sprite
     state: mining
@@ -1749,7 +1749,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostSouth
-  name: KMCC - Mining Outpost - Southeast
+  name: TMCC - Mining Outpost - Southeast
   components:
   - type: Sprite
     state: mining
@@ -1757,7 +1757,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostVehicledeployment
-  name: KMCC - Mining Outpost - South - Vehicle Deployment
+  name: TMCC - Mining Outpost - South - Vehicle Deployment
   components:
   - type: Sprite
     state: mining
@@ -1767,7 +1767,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostProcessing
-  name: KMCC - Mining Outpost - South - Processing & Storage
+  name: TMCC - Mining Outpost - South - Processing & Storage
   components:
   - type: Sprite
     state: mining
@@ -1777,7 +1777,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostEast
-  name: KMCC - Mining Outpost - East
+  name: TMCC - Mining Outpost - East
   components:
   - type: Sprite
     state: mining
@@ -1787,7 +1787,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostEastDorms
-  name: KMCC - Mining Outpost - East - Dorms
+  name: TMCC - Mining Outpost - East - Dorms
   components:
   - type: Sprite
     state: mining
@@ -1797,7 +1797,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostEastDeploymentbay
-  name: KMCC - Mining Outpost - East - Deployment Bay
+  name: TMCC - Mining Outpost - East - Deployment Bay
   components:
   - type: Sprite
     state: mining
@@ -1807,7 +1807,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostEastCommand
-  name: KMCC - Mining Outpost - East - Command Center
+  name: TMCC - Mining Outpost - East - Command Center
   components:
   - type: Sprite
     state: mining
@@ -1817,7 +1817,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsMiningOutpost
   id: RMCAreaLv759IndoorsMiningOutpostCargoMaint
-  name: KMCC - Mining Outpost - East - Maintenance
+  name: TMCC - Mining Outpost - East - Maintenance
   components:
   - type: Sprite
     state: mining
@@ -1830,7 +1830,7 @@
 - type: entity
   parent: RMCAreaLv759OutdoorsMiningOutpost
   id: RMCAreaLv759OutdoorsMiningOutpostSouthEntrance
-  name: KMCC - Mining Outpost - South - Vehicle Deployment Entrance
+  name: TMCC - Mining Outpost - South - Vehicle Deployment Entrance
   components:
   - type: Sprite
     state: mining

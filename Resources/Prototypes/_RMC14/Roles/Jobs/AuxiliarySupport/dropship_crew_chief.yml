@@ -3,6 +3,7 @@
   id: CMDropshipCrewChief
   name: cm-job-name-dcc
   description: cm-job-description-dcc
+  newToJobInfo: rmc-new-to-job-dcc
   playTimeTracker: CMJobDropshipCrewChief
   requirements:
   - !type:DepartmentTimeRequirement

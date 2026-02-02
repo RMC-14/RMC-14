@@ -326,8 +326,14 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCJelliesPerQueen =
         CVarDef.Create("rmc.jellies_per_queen", 5, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<int> RMCCommendationMinLength =
+        CVarDef.Create("rmc.commendation_min_length", 130, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCRecommendationMaxLength =
+        CVarDef.Create("rmc.recommendation_max_length", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
     /// <summary>
     /// Whether the no EORG popup is enabled.
@@ -511,6 +517,17 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLagCompensationMarginTiles =
         CVarDef.Create("rmc.lag_compensation_margin_tiles", 0.25f, CVar.REPLICATED | CVar.SERVER);
 
+    /// <summary>
+    /// Whether the new to job popup is enabled.
+    /// </summary>
+    public static readonly CVarDef<bool> RMCNewToJobPopup =
+        CVarDef.Create("game.new_to_job_popup_enabled", true, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// How long to display the new to job popup for.
+    /// </summary>
+    public static readonly CVarDef<float> RMCNewToJobPopupTime =
+        CVarDef.Create("game.new_to_job_popup_time", 15f, CVar.SERVER | CVar.REPLICATED);
     public static readonly CVarDef<bool> RMCGhostCanBoo =
         CVarDef.Create("rmc.ghosts_can_boo", true, CVar.SERVER | CVar.SERVERONLY);
 

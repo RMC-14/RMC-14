@@ -5,26 +5,6 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (LV624 Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetLV624CorporateLiaison
-    - type: RMCSurvivor
-    - type: MotionDetectorTracked
-    - type: NpcFactionMember
-      factions:
-      - WeYa
-      - Civilian
-    - type: IntelRescueSurvivorObjective
-    - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
@@ -46,8 +26,3 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
-
-- type: entity
-  parent: RMCSurvivorPresetCorporate
-  id: RMCGearSurvivorPresetLV624CorporateLiaison
-  name: lv624 colonist preset
