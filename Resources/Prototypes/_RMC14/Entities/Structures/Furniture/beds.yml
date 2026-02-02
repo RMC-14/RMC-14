@@ -17,20 +17,31 @@
   - type: Construction
     graph: RMCBed
     node: bed
+  - type: RMCMesonsNonviewable
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 51
+    otherMultiplier: 1
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 75
+        damage: 50
       behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
       - !type:SpawnEntitiesBehavior
         spawn:
           CMSheetMetal1:
             min: 1
             max: 1
-  - type: RMCMesonsNonviewable
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
 
 - type: entity
   parent: CMBed
