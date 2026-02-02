@@ -507,22 +507,22 @@
     - RMCUniformUNSecurity
 
 - type: entity
-  parent: RMCJumpsuitUNSecurity
-  id: RMCJumpsuitUNSecurityB92FS
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlB92FS
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHolsterBlackB92FS
 
 - type: entity
-  parent: RMCJumpsuitUNSecurity
-  id: RMCJumpsuitUNSecurityMK45
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlMK45
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHolsterBlackMK45
 
 - type: entity
-  parent: RMCJumpsuitUNSecurity
-  id: RMCJumpsuitUNSecurityM1984
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlM1984
   components:
   - type: WebbingClothing
     startingWebbing: RMCWebbingHolsterBlackM1984

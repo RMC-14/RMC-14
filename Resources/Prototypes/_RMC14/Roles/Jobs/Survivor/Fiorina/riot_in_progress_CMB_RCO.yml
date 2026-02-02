@@ -65,15 +65,15 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
-    - [ RMCJumpsuitUNSecurityM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCHeadBeanieGray ]
-    - [ RMCJumpsuitUNSecurityMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
-    - [ RMCJumpsuitUNSecurityMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlB92FS, RMCPouchMagazineFilledM16, WeaponRifleM16, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchShotgunFilledBeanbag, RMCWeaponShotgunM890Riot, RMCHeadCapBureau ]
+    - [ RMCJumpsuitRiotControlM1984, RMCPouchExplosiveFilledHIRR, RMCWeaponLauncherM85A1, RMCHeadBeanieGray ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
+    - [ RMCJumpsuitRiotControlMK45, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCMotionDetectorCompact, RMCExplosiveBreachingCharge, ArmorHelmetPMCRiotShield ]
     primaryWeaponChance: 1
 
