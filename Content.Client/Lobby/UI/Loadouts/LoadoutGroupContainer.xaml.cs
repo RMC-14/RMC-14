@@ -231,6 +231,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
 
         var cont = new LoadoutContainer(proto, !enabled, reason);
 
+        // RMC14
         if (proto.Cost == null || proto.Cost == 0)
         {
             cont.Text = loadoutSystem.GetName(proto);
@@ -239,6 +240,7 @@ public sealed partial class LoadoutGroupContainer : BoxContainer
         {
             cont.Text = ($"({proto.Cost}Pts) " + loadoutSystem.GetName(proto));
         }
+        // End RMC14
 
         cont.Select.Pressed = pressed;
 
