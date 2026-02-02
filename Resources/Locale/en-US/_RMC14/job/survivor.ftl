@@ -197,7 +197,7 @@ rmc-job-greeting-new-varadero-icb-supervisor = You are an ICB Supervisor!
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-new-varadero-icb-commissioner = You are an ICB Commissioner
+rmc-job-greeting-new-varadero-icb-commissioner = You are an ICB Commissioner!
 
   You are aware of the xenomorph threat.
 
