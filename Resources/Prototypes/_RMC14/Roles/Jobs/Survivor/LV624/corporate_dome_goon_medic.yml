@@ -11,16 +11,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 2
-        RMCSkillFirearms: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillVehicles: 1
-        RMCSkillCqc: 1
-        RMCSkillPolice: 0 # RMC14
+      preset: RMCSkillPresetSurvivorGoonMedic
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -29,6 +20,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_med
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
   greeting: rmc-job-greeting-corporate-dome-goon-medic
 
 - type: entity

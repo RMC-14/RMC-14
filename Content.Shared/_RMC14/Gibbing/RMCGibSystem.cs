@@ -1,8 +1,16 @@
+using Content.Shared.Body.Events;
+using Content.Shared.Body.Systems;
+using Content.Shared.Damage;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Robust.Shared.Network;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Gibbing;
+
 public sealed class RMCGibSystem : EntitySystem
 {
     private const float ItemLaunchImpulse = 8f;
@@ -12,6 +20,53 @@ public sealed class RMCGibSystem : EntitySystem
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
+    [Dependency] private readonly MobThresholdSystem _thresholds = default!;
+    [Dependency] private readonly INetManager _net = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<RMCSpawnEntitiesOnGibComponent, BeingGibbedEvent>(OnGibbed);
+        SubscribeLocalEvent<RMCGibOnDeathComponent, MobStateChangedEvent>(OnDeath);
+    }
+
+    private void OnGibbed(Entity<RMCSpawnEntitiesOnGibComponent> ent, ref BeingGibbedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        foreach (var protoId in ent.Comp.Entities)
+        {
+            var position = _transform.GetMoverCoordinates(ent);
+            var newEntity = Spawn(protoId, position);
+            _transform.AttachToGridOrMap(newEntity);
+        }
+    }
+
+    private void OnDeath(Entity<RMCGibOnDeathComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead)
+            return;
+
+        var gibProbability = ent.Comp.GibChance;
+
+        if (TryComp<MobThresholdsComponent>(ent, out var thresholds) && TryComp<DamageableComponent>(ent, out var damageable))
+        {
+            var damage = damageable.Damage.GetTotal();
+            var dead = _thresholds.GetThresholdForState(ent, MobState.Dead, thresholds);
+            gibProbability += (float)(damage - dead) * ent.Comp.DamageGibMultiplier;
+        }
+
+        if (_random.NextFloat() > gibProbability)
+            return;
+
+        if (_net.IsClient)
+            return;
+
+        _body.GibBody(ent, ent.Comp.DropOrgans);
+    }
 
     /// <summary>
     /// Scatters all inventory items from a target entity with physics impulses,

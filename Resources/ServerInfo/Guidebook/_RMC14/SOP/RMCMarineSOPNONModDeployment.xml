@@ -34,8 +34,8 @@
   - A [color=#90EE90][bold]Duty Officer[/bold][/color] may not deploy.
   - Civilians (Personnel that are not enlisted or officers of the UNMC) may deploy at their discretion, provided their landing zone is not in direct danger.
   - All recovered personnel defined by [textlink="NON-Modifiable Third-Party Personnel" link="RMCMarineSOPNONModThirdparty"] do not require permission to deploy.
-  - Department Heads may not deploy at all, except the [bold]Chief Engineer[/bold] under some conditions.
-  - All personnel that intend to deploy, including Staff Officers [bold]require permission[/bold] from either their head of department, or the [color=#008000][bold]Commander[/bold][/color].
+  - [bold]Department Heads[/bold] may not deploy at all, except the [bold]Chief Engineer[/bold] under some conditions.
+  - All personnel that intend to deploy, including [bold]Staff Officer[/bold]s require permission from either their head of department, or the [color=#008000][bold]Commander[/bold][/color].
   - The [color=#008000][bold]Commander[/bold][/color] may overrule the department head regarding deployment.
 
   [bold]Engineering[/bold]
@@ -53,13 +53,14 @@
 
   [bold]Military Police[/bold]
 
-  - [bold]CIC Personnel[/bold] may request up to four volunteers from the [color=#ff000d][bold]MP[/bold][/color] to be deployed to the [bold]FOB[/bold] and [bold]Secure Area[/bold]s to protect deployed shipside personnel and handle arrests.
+  See [textlink="Field Arrests" link="RMCMarineLawArresting"] for more information.
+
+  - [bold]CIC Personnel[/bold] may request up to four volunteers from the [color=#ff000d][bold]MP[/bold][/color] to be deployed to the [bold]AO[/bold], keeping within the [bold]FOB[/bold] and [bold]Secure Area[/bold]s to protect deployed shipside personnel and handle law.
   - This is unrelated to [color=#00CBFE][bold]Commanding Officer[/bold][/color] escorts, and can be overridden by either higher ranking personnel or the [color=#008000][bold]Commander[/bold][/color].
   - At least one [color=#ff000d][bold]MP[/bold][/color] must remain on the ship at all times. If the [color=#8B0000][bold]Chief MP[/bold][/color] is present, it must be them.
-  - The [bold]Warden[/bold] may deploy to perform requested arrests in the absence of [color=#ff000d][bold]MP[/bold][/color] officers, but must otherwise remain on the ship.
-  - Deployed [color=#ff000d][bold]MP[/bold][/color] may move between [bold]Secure Area[/bold]s and should be avoiding combat while doing so, unless in protection of non-combat personnel like doctors or themselves.
-  - [color=#ff000d][bold]MP[/bold][/color] must retreat and assist non-combat personnel in retreating from a [bold]Secure Area[/bold] if it is no longer secure.
-  - [color=#ff000d][bold]MP[/bold][/color] may be required to transfer a prisoner from the AO to the ship, and should, to the best of their ability, ensure the prisoner makes it to the ship safely.
+  - The [bold]Warden[/bold] may deploy to handle law in the absence of [color=#ff000d][bold]MP[/bold][/color] officers, but must otherwise remain on the ship.
+  - Deployed [color=#ff000d][bold]MP[/bold][/color] may move between any [bold]Secure Area[/bold]s and should be avoiding combat while doing so, unless it is in protection of non-combat personnel like doctors or themselves.
+  - [color=#ff000d][bold]MP[/bold][/color] must retreat and assist non-combat personnel in retreating from any [bold]Secure Area[/bold] or the [bold]FOB[/bold] if it is no longer secure.
 
 
 </Document>

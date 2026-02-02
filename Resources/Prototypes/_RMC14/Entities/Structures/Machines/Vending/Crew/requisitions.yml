@@ -214,8 +214,8 @@
         amount: 5
       - id: RMCPouchDocumentSmall
         amount: 2
-      #- id: RMCPouchSling
-      #  amount: 2
+      - id: RMCPouchSling
+        amount: 2
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
@@ -254,8 +254,8 @@
         amount: 1
       - id: RMCFulton20
         amount: 1
-      #- id: Sentry Gun Network Laptop
-      #   amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
     - name: Flare and Light
@@ -318,27 +318,27 @@
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMFFilled
-        name: M74AGM-F grenade packet
+        name: M74 AGM-F grenade packet
         box: RMC40MMGrenadeM74AGMF
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMIFilled
-        name: M74AGM-I grenade packet
+        name: M74 AGM-I grenade packet
         box: RMC40MMGrenadeM74AGMI
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMSFilled
-        name: M74AGM-S grenade packet
+        name: M74 AGM-S grenade packet
         box: RMC40MMGrenadeM74AGMS
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMSStarShellFilled
-        name: M74AGM-S Starshell grenade packet
+        name: M74 AGM-S Starshell grenade packet
         box: RMCStarShellM74AGMS
         boxAmount: 3
         boxSlots: 3
       - id: RMCPacketGrenadeM74AGMSHornetFilled
-        name: M74AGM-S Hornet grenade packet
+        name: M74 AGM-S Hornet grenade packet
         box: RMCHornetShellM74AGMS
         boxAmount: 3
         boxSlots: 3
@@ -670,9 +670,9 @@
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
-      - id: RMCAttachmentM63StockCollapsible
-        amount: 5
       - id: RMCAttachmentM63Stock
+        amount: 5
+      - id: RMCAttachmentM63StockCollapsible
         amount: 5
       - id: RMCAttachmentM54CStockSolid
         amount: 5

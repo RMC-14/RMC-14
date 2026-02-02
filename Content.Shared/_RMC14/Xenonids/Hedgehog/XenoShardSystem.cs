@@ -13,6 +13,7 @@ using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Robust.Shared.Audio.Systems;
 using Content.Shared._RMC14.Explosion;
+using Content.Shared.Coordinates;
 using Content.Shared.Projectiles;
 using Content.Shared._RMC14.Xenonids.Sweep;
 
@@ -177,6 +178,7 @@ public sealed class XenoShardSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-spike-shield-others", ("user", ent));
         _popup.PopupPredicted(selfMsg, othersMsg, ent, ent);
         _aura.GiveAura(ent, Color.Blue, ent.Comp.ShieldDuration, 2);
+        Spawn(ent.Comp.EffectId, ent.Owner.ToCoordinates());
 
         args.Handled = true;
     }

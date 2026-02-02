@@ -52,7 +52,7 @@
 
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        Neglect of duty
+        Neglect of Duty
       </Box>
     </ColorBox>
     <ColorBox>
@@ -89,7 +89,7 @@
     </ColorBox>
     <ColorBox>
       <Box HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="3">
-        To intentionally order the arrest of a person on false charges who is then found to be innocent, or to apply an improper or abusive NJP. This includes intentionally arresting a person on false charges, on ones own initiative without orders.
+        To intentionally arrest a person on false charges, on ones own initiative. To apply an improper or abusive NJP.
       </Box>
     </ColorBox>
     <ColorBox>

@@ -23,6 +23,9 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoRunner
     tier: 1
@@ -175,6 +178,9 @@
       visible: false
     - map: [ "enum.XenoAcidGeneratingVisualLayers.Base" ]
       visible: false
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
+      visible: false
     - map: [ "focused" ]
       sprite: _RMC14/Interface/xeno_hud.rsi
       state: hudeye
@@ -250,6 +256,10 @@
         types:
           Heat: 1
   - type: XenoAciderGeneration
+  - type: AcidTrap
+    trapLevel: 3
+    cost: 75
+    spray: XenoAcidSprayTrapStrong
   - type: SlowOnPull
     slowdowns:
     - multiplier: 0.59

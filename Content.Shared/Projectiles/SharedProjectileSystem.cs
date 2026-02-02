@@ -1,6 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids.Damage;
 using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
@@ -105,6 +106,18 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 tool: uid)
             : new DamageSpecifier(ev.Damage);
         var deleted = Deleted(target);
+
+        // RMC14 this is already done on the server in TryChangeDamage.
+        if (_net.IsClient)
+        {
+            var modifyEvent = new DamageModifyEvent(ev.Damage, component.Shooter, uid);
+            RaiseLocalEvent(target, modifyEvent);
+            modifiedDamage = modifyEvent.Damage;
+        }
+
+        var popupEv = new ProjectileDamageDealtEvent(component.Shooter, modifiedDamage);
+            RaiseLocalEvent(target, ref popupEv);
+        //
 
         var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
         if (_guns.GunPrediction)
