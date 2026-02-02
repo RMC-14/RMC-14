@@ -97,7 +97,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterBicaridineNoSkill
   name: bicaridine pill bottle
-  description: It's an airtight container for storing medication. It's labeled "Bicardine (15u, 2 pill OD) Used to treat brute damage."
+  description: It's an airtight container for storing medication. It's labeled "Bicaridine (15u, 2 pill OD) Used to treat brute damage."
   suffix: Bicaridine, 16, No Skill
   components:
   - type: Item
@@ -163,7 +163,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterDexalinNoSkill
   name: dexalin pill bottle
-  description: It's an airtight container for storing medication. It's labeled "Dexaline (15u, 2 pill OD) Used to treat oxygen deprivation."
+  description: It's an airtight container for storing medication. It's labeled "Dexalin (15u, 2 pill OD) Used to treat oxygen deprivation."
   suffix: Dexalin, 16, No Skill
   components:
   - type: Item
@@ -196,7 +196,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterDyloveneNoSkill
   name: dylovene pill bottle
-  description: It's an airtight container for storing medication. It's labeled "Dlyovene (15u, 2 pill OD) An anti-toxin medication. It neutralizes many common toxins, as well as treating toxin damage."
+  description: It's an airtight container for storing medication. It's labeled "Dylovene (15u, 2 pill OD) An anti-toxin medication. It neutralizes many common toxins, as well as treating toxin damage."
   suffix: Dylovene, 16, No Skill
   components:
   - type: Item
@@ -427,7 +427,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterDexalinPlusNoSkill
   name: dexalin plus pill bottle
-  description: It's an airtight container for storing medication. It's labeled "Dexaline Plus (10u, 15u OD) Used to instantly treat oxygen deprivation."
+  description: It's an airtight container for storing medication. It's labeled "Dexalin Plus (10u, 15u OD) Used to instantly treat oxygen deprivation."
   suffix: DexalinPlus, 16, No Skill
   components:
   - type: Item
