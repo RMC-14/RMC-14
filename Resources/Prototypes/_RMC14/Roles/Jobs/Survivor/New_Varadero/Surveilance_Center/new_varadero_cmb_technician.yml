@@ -47,7 +47,7 @@
     gloves: CMHandsBlackInsulated
     shoes: RMCShoesJackboots
     belt: CMBeltUtilityFilled
-    id: RMCIDCardCMBMarshalSurvivor
+    id: RMCIDCardCMBDeputySurvivor
     back: RMCSatchelMarineLogisticsBig
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazinePistolFilledCMBTechnician

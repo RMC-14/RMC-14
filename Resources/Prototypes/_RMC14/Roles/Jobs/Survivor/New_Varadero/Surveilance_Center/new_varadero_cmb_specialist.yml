@@ -46,7 +46,7 @@
     gloves: CMHandsBlackMarine
     shoes: RMCShoesJackboots
     belt: RMCBeltSmartGunOperatorPistolCMBSpecialistFilled
-    id: RMCIDCardCMBMarshalSurvivor
+    id: RMCIDCardCMBDeputySurvivor
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazinePistolFilledCMBSpecialist
     suitstorage: RMCSmartGun
