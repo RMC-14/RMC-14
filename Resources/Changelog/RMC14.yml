@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed not being able to access dropship engine points, and the alpha
-      overwatch console.
-    type: Fix
-  - message: Fixed the tactical map not working.
-    type: Fix
-  - message: Fixed not being able to build resin.
-    type: Fix
-  - message: Fixed xeno disarm popup.
-    type: Fix
-  id: 2333
-  time: '2025-09-07T00:58:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7817
 - author: monomethylhydrazine
   changes:
   - message: Fixed the most evil job on the Almayer having evil comms (Messtechs accidentally
@@ -4684,5 +4670,13 @@
   id: 2835
   time: '2026-02-02T02:10:51.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8755
+- author: Bobert-Brockson
+  changes:
+  - message: Added labels, dosage, and overdose information for all stock pills. Even
+      for the MB, KD, and FN for admins and mappers!
+    type: Add
+  id: 2836
+  time: '2026-02-02T02:14:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8822
 Name: RMC14
 Order: -1
