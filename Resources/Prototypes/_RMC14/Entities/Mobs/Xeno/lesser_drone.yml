@@ -25,6 +25,9 @@
     allowedStates:
     - Alive
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
