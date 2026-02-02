@@ -314,3 +314,4 @@
     fire:
       type: RMCTileFireMiniMike
       range: 1
+      cardinalRange: 2

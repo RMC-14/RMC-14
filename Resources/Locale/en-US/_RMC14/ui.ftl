@@ -92,6 +92,7 @@ rmc-other-credits-tab = Other
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
+rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
 
 rmc-area-info = {$area}{$restrictions}
 rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
@@ -106,3 +107,7 @@ rmc-tacmap-alert-no-area = Unknown area
 rmc-ui-options-alternate-sprites = Use non-trypophobia inducing sprites
 
 rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
+
+# Dialog input
+rmc-dialog-input-placeholder-default = Enter text
+rmc-dialog-input-placeholder-smart-check = More than 3 consecutive spaces will be trimmed
