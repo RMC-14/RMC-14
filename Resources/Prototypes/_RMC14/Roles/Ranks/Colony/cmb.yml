@@ -41,6 +41,11 @@
   prefix: Spec.
 
 - type: rank
+  id: RMCRankICBAgent
+  name: Interstellar Commerce Bureau Agent
+  prefix: Agent
+
+- type: rank
   id: RMCRankCMBSpecialist
   name: CMB Specialist
   prefix: Spec.
