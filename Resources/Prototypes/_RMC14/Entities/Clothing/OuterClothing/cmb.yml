@@ -49,6 +49,17 @@
   - type: RMCArmorSpeedTier
     speedTier: light
 
+- type: entity # RMC14 - reskinned SG harness for ICB surv insert
+  parent: CMArmorSmartGunCombatHarness
+  id: CMArmorSmartGunCombatHarnessCMB
+  name: ML66A-HMU combat harness
+  description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. The HMU (High Mobility Upgrade) designation is a lighter design issued to CMB SWAT teams, featuring minor tweaks to its' ergonomics to accommodate close quarters combat. This one has a Bureau patch emblazoned on its' front plate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a_hmu.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 - type: entity
   parent: [RMCBaseCMBArmor, RMCBaseMarineArmorLight]
   id: RMCArmorM4RMedium

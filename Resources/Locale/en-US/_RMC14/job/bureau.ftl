@@ -23,8 +23,11 @@ rmc-ghost-name-icb = Interstellar Commerce Bureau Liaison (Friendly)
 rmc-job-name-icb = Interstellar Commerce Bureau Liaison
 rmc-job-prefix-icb = ICB
 
-rmc-job-name-corp-icb-agent = Interstellar Commerce Bureau Agent
-rmc-job-prefix-corp-icb-agent = ICB-A
+rmc-job-name-corp-cmb-specialist = CMB Specialist
+rmc-job-prefix-corp-cmb-specialist = CMB-SPC
+
+rmc-job-name-corp-icb-commissioner = ICB Comissioner
+rmc-job-prefix-corp-icb-commissioner = ICB-COM
 
 rmc-job-name-corp-icb-supervisor = Interstellar Commerce Bureau Supervisor
 rmc-job-prefix-corp-icb-supervisor = ICB-SPR

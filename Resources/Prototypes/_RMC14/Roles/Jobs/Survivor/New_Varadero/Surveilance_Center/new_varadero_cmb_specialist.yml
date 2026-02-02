@@ -1,0 +1,124 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorNewVaraderoCMBSpecialist
+  name: rmc-job-name-corp-cmb-specialist
+  ranks:
+    RMCRankCMBSpecialist: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearSurvivorCMBSpecialist
+  icon: "RMCJobIconCMBSpecialist"
+  hasIcon: true
+  greeting: rmc-job-greeting-new-varadero-cmb-specialist
+  playTimeTracker: CMJobSurvivorSecurity
+  spawnMenuRoleName: CMB Specialist (New Varadero special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: Skills
+      preset: RMCSkillPresetCMBSpecialist
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBSpecialist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-cmb-specialist
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmb_specialist
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+
+- type: startingGear
+  id: RMCGearSurvivorCMBSpecialist
+  equipment:
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: RMCSwatCMBUniform
+    outerClothing: CMArmorSmartGunCombatHarnessCMBSurvivorFilled
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesJackboots
+    belt: RMCBeltSmartGunOperatorPistolCMBSpecialistFilled
+    id: RMCIDCardDeputy
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchMagazinePistolFilledCMBSpecialist
+    suitstorage: RMCSmartGun
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetCMBSpecialist
+  name: cmb technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - [ ]
+    primaryWeapons:
+    - [ ]
+    randomOutfits:
+    - [ RMCArmorHelmetM10CMB ]
+    - [ RMCArmorHelmetM10ICB ]
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCMBSpecialist
+  name: survivor cmb specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoCMBSpecialist
+  - type: Sprite
+    state: marine_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBSpecialist
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_cmbs
+
+- type: entity
+  parent: RMCBeltSmartGunOperatorPistol
+  id: RMCBeltSmartGunOperatorPistolCMBSpecialistFilled
+  suffix: Filled, CMB Specialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolver357Snubnose
+    - id: RMCSpeedLoader357
+      amount: 2
+    - id: RMCMagazineSmartGunDamaged
+
+- type: entity
+  parent: RMCMagazineSmartGun
+  id: RMCMagazineSmartGunDamaged
+  suffix: Half Capacity
+  description: This one seems to be damaged, limiting it's magazine capacity significantly.
+  components:
+  - type: BallisticAmmoProvider
+    capacity: 250
+
+- type: entity
+  parent: CMArmorSmartGunCombatHarnessCMB
+  id: CMArmorSmartGunCombatHarnessCMBSurvivorFilled
+  suffix: CMB Specialist, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCPowerCellSmartgun
+
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledCMBSpecialist
+  suffix: Filled, CMB Specialist
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoader357
+      amount: 2

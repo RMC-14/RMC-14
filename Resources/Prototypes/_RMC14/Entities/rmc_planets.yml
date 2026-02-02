@@ -320,7 +320,9 @@
         CMSurvivorEngineer:
         - RMCSurvivorNewVaraderoCMBTechnician: 1
         CMSurvivorSecurity:
-        - RMCSurvivorNewVaraderoICBAgent: 2
+        - RMCSurvivorNewVaraderoCMBSpecialist: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorNewVaraderoICBCommissioner: 1
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorNewVaraderoICBSupervisor: 1
 

@@ -197,7 +197,10 @@
             "name": "hudsquad_pve"
         },
         {
-            "name": "hudsquad_icba"
+            "name": "hudsquad_cmbs"
+        },
+        {
+            "name": "hudsquad_icbc"
         },
         {
             "name": "hudsquad_icbs"

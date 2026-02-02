@@ -1,21 +1,22 @@
 
 # Survivor Skills
 
-# ICB agent
+# CMB specialist
 - type: entity
-  id: RMCSkillPresetICBAgent
-  name: Interstellar Commerce Bureau Agent
+  id: RMCSkillPresetCMBSpecialist
+  name: CMB Specialist
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
     skills:
       RMCSkillConstruction: 1
-      RMCSkillCqc: 1
+      RMCSkillCqc: 2
       RMCSkillEndurance: 2
       RMCSkillEngineer: 1
       RMCSkillFirearms: 2
-      RMCSkillFireman: 1
+      RMCSkillFireman: 2
       RMCSkillMedical: 1
+      RMCSkillSmartGun: 1
 
 # CMB technician
 - type: entity
@@ -26,11 +27,11 @@
   - type: SkillPreset
     skills:
       RMCSkillConstruction: 2
-      RMCSkillCqc: 1
+      RMCSkillCqc: 2
       RMCSkillEndurance: 2
       RMCSkillEngineer: 2
       RMCSkillFirearms: 1
-      RMCSkillFireman: 1
+      RMCSkillFireman: 2
       RMCSkillMedical: 2
       RMCSkillMeleeWeapons: 1
       RMCSkillSurgery: 1
@@ -57,3 +58,18 @@
       RMCSkillPolice: 2
       RMCSkillPowerLoader: 1
       RMCSkillVehicles: 1
+
+# ICB commissioner
+- type: entity
+  id: RMCSkillPresetICBCommissioner
+  name: ICB Commissioner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillEndurance: 2
+      RMCSkillLeadership: 2
+      RMCSkillMedical: 1
+      RMCSkillOverwatch: 1

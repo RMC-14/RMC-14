@@ -1,0 +1,97 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorNewVaraderoICBCommissioner
+  name: rmc-job-name-corp-icb-commissioner
+  ranks:
+    RMCRankICBCommissioner: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearSurvivorICBCommissioner
+  icon: "RMCJobIconICBCommissioner"
+  hasIcon: true
+  greeting: rmc-job-greeting-new-varadero-icb-commissioner
+  playTimeTracker: CMJobSurvivorCorporate
+  spawnMenuRoleName: Interstellar Commerce Bureau Commissioner (New Varadero special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: Skills
+      preset: RMCSkillPresetICBCommissioner
+    - type: RMCSurvivor
+    - type: RMCPointing
+    - type: MarineOrders
+    - type: InnateCommandSpeech
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetICBCommissioner
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-icb-commissioner
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: icb_commissioner
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_icb
+
+- type: startingGear
+  id: RMCGearSurvivorICBCommissioner
+  equipment:
+    head: RMCHeadCapBureau
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: CMJumpsuitLiaisonIvyICBCommissioner
+    outerClothing: RMCArmorM4RI
+    shoes: RMCShoesLaceup
+    id: CMIDCardLiaisonColony
+    belt: RMC357SnubnoseBeltFilledICBCommissioner
+    back: RMCSatchelBlackFillSurvivorICB
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: CMClipboard
+
+- type: entity
+  parent: RMCSurvivorPresetNoGun
+  id: RMCGearSurvivorPresetICBCommissioner
+  name: interstellar commerce bureau commissioner preset
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMC357SnubnoseBeltFilledICBCommissioner
+  suffix: Filled, ICB Commissioner
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolver357Snubnose
+    - id: RMCSpeedLoader357
+      amount: 2
+
+- type: entity
+  parent: CMJumpsuitLiaisonIvy # so they can wear the CMB and ICB armor sets
+  id: CMJumpsuitLiaisonIvyICBCommissioner
+  components:
+    - type: Tag
+      tags:
+        - RMCUniformCMB
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorICBCommissioner
+  name: survivor interstellar commerce bureau commissioner spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoICBCommissioner
+  - type: Sprite
+    state: leader_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconICBCommissioner
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_icbc

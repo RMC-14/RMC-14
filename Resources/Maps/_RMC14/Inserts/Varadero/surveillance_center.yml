@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/19/2026 01:35:39
+  time: 02/02/2026 14:37:21
   entityCount: 238
 maps: []
 grids:
@@ -108,7 +108,7 @@ entities:
   - uid: 114
     components:
     - type: Transform
-      pos: -3.6182158,8.730183
+      pos: -3.6107247,8.626017
       parent: 1
 - proto: CMAdvFirstAidKitFilled
   entities:
@@ -1024,15 +1024,14 @@ entities:
   - uid: 175
     components:
     - type: Transform
-      pos: -3.5672646,10.02405
+      pos: -3.5690582,10.035337
       parent: 1
 - proto: RMCGrenadeIncendiary
   entities:
   - uid: 208
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -3.448506,8.344741
+      pos: -3.2669747,8.459234
       parent: 1
 - proto: RMCHeadsetDistressBureauDamaged
   entities:
@@ -1367,31 +1366,33 @@ entities:
     - type: Transform
       pos: -0.5,13.5
       parent: 1
+- proto: RMCSpawnPointSurvivorCMBSpecialist
+  entities:
+  - uid: 133
+    components:
+    - type: Transform
+      pos: 2.5,8.5
+      parent: 1
 - proto: RMCSpawnPointSurvivorCMBTechnician
   entities:
   - uid: 229
     components:
     - type: Transform
-      pos: 1.5,8.5
+      pos: 0.5,7.5
       parent: 1
-- proto: RMCSpawnPointSurvivorICBAgent
+- proto: RMCSpawnPointSurvivorICBCommissioner
   entities:
   - uid: 131
     components:
     - type: Transform
-      pos: -1.5,9.5
-      parent: 1
-  - uid: 132
-    components:
-    - type: Transform
-      pos: 2.5,7.5
+      pos: -2.5,9.5
       parent: 1
 - proto: RMCSpawnPointSurvivorICBSupervisor
   entities:
-  - uid: 133
+  - uid: 132
     components:
     - type: Transform
-      pos: 0.5,8.5
+      pos: 0.5,9.5
       parent: 1
 - proto: RMCSpeedLoader357
   entities:
