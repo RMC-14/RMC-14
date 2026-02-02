@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DimFlower
-  changes:
-  - message: Fixed 1984 Hollowpoint AP Values
-    type: Fix
-  id: 2339
-  time: '2025-09-09T23:03:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7854
 - author: NotInButiN
   changes:
   - message: Fixed Overall category on RMC Playtime Stats
@@ -4693,5 +4686,12 @@
   id: 2841
   time: '2026-02-02T02:27:56.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9037
+- author: noctyrnal
+  changes:
+  - message: Added the missing SPP soldier corpses to Sorokyne.
+    type: Add
+  id: 2842
+  time: '2026-02-02T02:32:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9085
 Name: RMC14
 Order: -1
