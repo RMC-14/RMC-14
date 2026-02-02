@@ -1,5 +1,4 @@
 using Content.Server._RMC14.Announce;
-using Content.Server._RMC14.Xenonids.Banish;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Admin;
@@ -27,7 +26,6 @@ namespace Content.Server._RMC14.Xenonids.Hive;
 public sealed class XenoHiveSystem : SharedXenoHiveSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly XenoBanishServerSystem _banish = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -109,18 +107,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
 
     private void OnJoinBurrowedLarvaAttempt(ref JoinBurrowedLarvaAttemptEvent ev)
     {
-        if (!_banish.CanTakeXenoRole(ev.Session.UserId))
-        {
-            var delay = _banish.GetDelayedLarvaTime(ev.Session.UserId);
-            var msg = delay.HasValue
-                ? Loc.GetString("rmc-banish-cant-take-role-time", ("seconds", (int)delay.Value.TotalSeconds))
-                : Loc.GetString("rmc-banish-cant-take-role");
-
-            if (ev.Session.AttachedEntity is { } ghost)
-                _popup.PopupEntity(msg, ghost, ghost);
-
-            ev.Cancelled = true;
-        }
+        // Banishment checking removed - handled by XenoServerBanishSystem
     }
 
     public override void Update(float frameTime)
