@@ -224,15 +224,6 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
-  - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
-    name: cm-xeno-name
-    description: cm-xeno-description
-    raffle:
-      settings: short
-    rules: cm-xeno-rules
   - type: StatusEffects
     allowed:
     - Stun

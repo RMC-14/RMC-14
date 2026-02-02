@@ -1,61 +1,41 @@
-using Content.Shared._RMC14.Dialog;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared._RMC14.Dialog;
 
 namespace Content.Shared._RMC14.Xenonids.Banish;
 
 [Serializable, NetSerializable]
-public sealed class ManageHiveBanishEvent : EntityEventArgs
+public sealed class ManageHiveBanishEvent : EntityEventArgs;
+
+[Serializable, NetSerializable]
+public sealed class ManageHiveBanishXenoEvent(NetEntity xeno) : EntityEventArgs
 {
+    public NetEntity Xeno = xeno;
 }
 
 [Serializable, NetSerializable]
-public sealed class ManageHiveBanishXenoEvent : EntityEventArgs
+public sealed record ManageHiveBanishReasonEvent(NetEntity Xeno, string Reason) : DialogInputEvent(Reason)
 {
-    public NetEntity Xeno;
-
-    public ManageHiveBanishXenoEvent(NetEntity xeno)
-    {
-        Xeno = xeno;
-    }
+    public string GetReason() => Message;
 }
 
 [Serializable, NetSerializable]
-public sealed class ManageHiveBanishConfirmEvent : EntityEventArgs
-{
-    public NetEntity Xeno;
+public sealed class ManageHiveReadmitEvent : EntityEventArgs;
 
-    public ManageHiveBanishConfirmEvent(NetEntity xeno)
-    {
-        Xeno = xeno;
-    }
+[Serializable, NetSerializable]
+public sealed class ManageHiveReadmitXenoEvent(NetEntity xeno) : EntityEventArgs
+{
+    public NetEntity Xeno = xeno;
 }
 
 [Serializable, NetSerializable]
-public sealed record ManageHiveBanishMessageEvent(NetEntity Xeno, string Message) : DialogInputEvent(Message);
-
-[Serializable, NetSerializable]
-public sealed class ManageHiveReadmitEvent : EntityEventArgs
+public sealed class ManageHiveReadmitConfirmEvent(NetEntity xeno) : EntityEventArgs
 {
+    public NetEntity Xeno = xeno;
 }
 
-[Serializable, NetSerializable]
-public sealed class ManageHiveReadmitXenoEvent : EntityEventArgs
-{
-    public NetEntity Xeno;
+[ByRefEvent]
+public record struct XenoBanishedEvent(EntityUid Banisher, EntityUid Banished, string Reason);
 
-    public ManageHiveReadmitXenoEvent(NetEntity xeno)
-    {
-        Xeno = xeno;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class ManageHiveReadmitConfirmEvent : EntityEventArgs
-{
-    public NetEntity Xeno;
-
-    public ManageHiveReadmitConfirmEvent(NetEntity xeno)
-    {
-        Xeno = xeno;
-    }
-}
+[ByRefEvent]
+public record struct XenoReadmittedEvent(EntityUid Readmitter, EntityUid Readmitted);

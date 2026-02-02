@@ -1,0 +1,21 @@
+rmc-banish-button = Banish Xenonid
+rmc-banish-title = Banish Xenonid
+rmc-banish-rules = Make sure you've read banishment rules!
+rmc-banish-confirm = Are you sure you want to banish {$name}?
+rmc-banish-reason-title = Reason for Banishment
+rmc-banish-no-reason = You must provide a reason for banishment.
+rmc-banish-not-xeno = Target is not a xenonid.
+rmc-banish-crit = Cannot banish critical xenonids.
+rmc-banish-already-banished = This xenonid is already banished.
+rmc-banish-announcement = {$name} has been banished by the Queen for: {$reason}
+rmc-banish-notification = You have been banished from the hive for: {$reason}
+rmc-banish-ghost-role-blocked = You are banished from this hive and cannot join as a xenonid.
+
+rmc-readmit-button = Readmit Xenonid
+rmc-readmit-title = Readmit Xenonid
+rmc-readmit-not-banished = This xenonid is not banished.
+rmc-readmit-too-soon = Cannot readmit yet. Wait {$minutes} more minutes.
+rmc-readmit-dead = Cannot readmit dead xenonids.
+rmc-readmit-confirm = Are you sure you want to readmit {$name}?
+rmc-readmit-announcement = {$name} has been readmitted to the hive by the Queen.
+rmc-readmit-notification = You have been readmitted to the hive.

@@ -29,4 +29,7 @@ public sealed partial class ManageHiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public FixedPoint2 ReadmitPlasmaCost = 100;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ReadmitMinTime = TimeSpan.FromMinutes(10);
 }

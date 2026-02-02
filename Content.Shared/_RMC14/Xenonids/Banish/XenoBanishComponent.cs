@@ -3,21 +3,17 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Banish;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(XenoBanishSystem))]
 public sealed partial class XenoBanishComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool Banished;
+    public bool CanDamageHive = false;
 
     [DataField, AutoNetworkedField]
     public TimeSpan BanishedAt;
 
     [DataField, AutoNetworkedField]
-    public string? BanishReason;
+    public string Reason = string.Empty;
 
     [DataField, AutoNetworkedField]
-    public string? BanishedBy;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan ReadmitAvailableAt;
+    public EntityUid? OriginalHive;
 }
