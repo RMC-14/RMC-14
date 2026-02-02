@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: blueDev2
-  changes:
-  - message: You can no longer hop over a barbed barricade by climbing or buckling
-      to an entity past it
-    type: Fix
-  id: 2372
-  time: '2025-09-24T08:52:26.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7931
 - author: Vermidia
   changes:
   - message: Fixed mortar kit being able to have items reinserted into it.
@@ -4692,5 +4684,16 @@
   id: 2874
   time: '2026-02-02T03:55:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9106
+- author: Dygon
+  changes:
+  - message: Fixed grab attempts not being blocked by barricades between a grabber
+      and its target at the same rate as melee attacks.
+    type: Fix
+  - message: Fixed xenonids being able to start devouring a target without grabbing
+      them first.
+    type: Fix
+  id: 2875
+  time: '2026-02-02T03:57:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9109
 Name: RMC14
 Order: -1
