@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Dispensing Requisitions items while manning the line now places those
-      items on the table automatically.
-    type: Add
-  id: 2356
-  time: '2025-09-22T13:27:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7970
-- author: CyberTropic
-  changes:
-  - message: Fixed objects drifting weirdly on map inserts sometimes.
-    type: Fix
-  id: 2357
-  time: '2025-09-22T13:29:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7952
 - author: noctyrnal
   changes:
   - message: Added a smart gun ammunition box for PVE.
@@ -4675,5 +4660,20 @@
   id: 2858
   time: '2026-02-02T03:17:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9076
+- author: Dygon
+  changes:
+  - message: Fixed fire dealing too much damage to barricades, now dealing 47% less
+      damage over time to them.
+    type: Fix
+  id: 2859
+  time: '2026-02-02T03:26:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9082
+- author: snebl
+  changes:
+  - message: Fixed layering for the Vulpkanin neck clothing slot.
+    type: Fix
+  id: 2860
+  time: '2026-02-02T03:26:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9006
 Name: RMC14
 Order: -1
