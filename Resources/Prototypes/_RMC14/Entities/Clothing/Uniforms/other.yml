@@ -291,7 +291,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts
   description: A ratty pair of red shorts. Smells of ciggarettes.
@@ -300,6 +300,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilian
@@ -357,7 +360,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/steward.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitWeyamart
   name: Weyamart uniform
   description: A pair of dark-grey slacks and an orange button-down shirt; a standard uniform for the Weston-Yamada branded supermarket 'Weyamart'.
@@ -366,9 +369,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitSanitation
   name: Weston-Yamada RFF - sanitation uniform
   description: A set of Weston-Yamada RFF - Sanitation fatigues, a green pair of work slacks and a grey polo-shirt with green reflecting stripes.
@@ -377,9 +383,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitPizzaGalaxy
   name: Pizza-Galaxy uniform
   description: A pair of red slacks and a white button-down shirt with a large 'Pizza-Galaxy' logo on the back; a standard uniform for a Pizza-Galaxy employee. Pizza-Galaxy! To infinity and beyond!
@@ -388,9 +397,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitDailyGrind
   name: The Daily Grind uniform
   description: A pair of black slacks and a white short-sleeved button-down shirt; a standard uniform for a 'The Daily Grind' employee. Are you ready for the daily grind?
@@ -399,9 +411,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitTMCC
   name: tartarus-mining uniform
   description: A set of Tartarus-Mining fatigues, a yellow pair of utility work slacks and a light-grey polo-shirt with red reflecting stripes.
@@ -410,6 +425,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilian
@@ -423,7 +441,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/doctor.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitEMT
   name: EMT - Paramedic uniform
   description: A set of EMT - Paramedic fatigues, this one is red.
@@ -432,6 +450,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitEMT
@@ -444,7 +465,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt_green.rsi
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitLaborersOveralls
   name: laborer's overalls
   description: A set of durable overalls for getting the job done.
@@ -453,10 +474,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 # Kutjevo
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitKutjevoJumper
   name: kutjevo jumper
   description: A heavy-duty jumpsuit worn by the workers on Kutjevo.
@@ -465,9 +489,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitKutjevoDrysuit
   name: kutjevo drysuit
   description: A heavy-duty drysuit worn by the workers on Kutjevo.
@@ -476,6 +503,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 # Security
 - type: entity
@@ -516,7 +546,7 @@
     - Civilian
 
 - type: entity
-  parent: [RMCJumpsuitCivilian, RMCAlternateFoldableUniformBase]
+  parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitCivilianJanitor
   name: janitor's jumpsuit
   description: It's the official uniform of the colony's janitor.
@@ -525,9 +555,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitCivilianEngineerWorker
   name: Weston-Yamada engineering utility uniform
   description: A set of Weston-Yamada engineering utility workers uniform, a orange pair of work slacks and a grey polo-shirt with orange reflecting stripes.
@@ -536,6 +569,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilianEngineerWorker
@@ -603,7 +639,7 @@
 
 # Frontier
 - type: entity
-  parent: RMCJumpsuitCivilian
+  parent: RMCUniformBase
   id: RMCJumpsuitCivilianFrontier
   name: frontier jumpsuit
   description: A cargo jumpsuit dressed down for full range of motion and state-of-the-art frontier temperature control. It's the best thing an engineer can wear in the Outer Veil.
@@ -612,3 +648,6 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
