@@ -58,6 +58,7 @@
   - type: GunIFF
     enabled: true
     intrinsic: true
+  - type: HomingShots
 
 - type: entity
   parent: RMCBaseTurret

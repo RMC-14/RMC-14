@@ -30,6 +30,10 @@
         type: StorageBoundUserInterface
       enum.UniformAccessoriesUi.Key:
         type: UniformAccessoryBui
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   abstract: True

@@ -66,6 +66,7 @@
     - type: RMCTrackable
     - type: RMCAwardRecommendation
       maxRecommendations: 4
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearExecutiveOfficer

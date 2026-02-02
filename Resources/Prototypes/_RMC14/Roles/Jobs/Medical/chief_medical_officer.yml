@@ -60,6 +60,7 @@
         state: background_command
     - type: RMCTrackable
     - type: RMCAwardRecommendation
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearCMO
