@@ -80,9 +80,10 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             EntityName = null;
         }
 
-        // Set loadout points and work out playtime point rewards.
+        // RMC14 - Set loadout points and work out playtime point rewards.
         int playtimeHours = GetPlaytimeHoursForRole(session, Role);
         roleProto.Points = CalculatePointsFromPlaytime(playtimeHours);
+        // End RMC14
 
         // Validate name length
         // TODO: Probably allow regex to be supplied?
@@ -239,13 +240,14 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             var loadouts = new List<Loadout>();
             SelectedLoadouts[group] = loadouts;
 
-            // Set loadout points and work out playtime point rewards.
+            // RMC14 - Set loadout points and work out playtime point rewards.
             int playtimeHours = 0;
             if (session != null)
             {
                 playtimeHours = GetPlaytimeHoursForRole(session, Role);
             };
             Points = CalculatePointsFromPlaytime(playtimeHours);
+            // End RMC14
 
             if (groupProto.MinLimit > 0)
             {
@@ -413,12 +415,15 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     {
         return HashCode.Combine(Role, SelectedLoadouts, Points);
     }
+
+    // RMC14
     private int CalculatePointsFromPlaytime(int playtimeHours)
     {
         // 250 hours = 1 addtional point + base amount 7
         int points = (int)(playtimeHours / 250) + 7;
         return points;
     }
+
     private int GetPlaytimeHoursForRole(ICommonSession session, ProtoId<RoleLoadoutPrototype> role)
     {
         var protoManager = IoCManager.Resolve<IPrototypeManager>();
@@ -448,4 +453,5 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         // Cast to round it down
         return (int)playtime.TotalHours;
     }
+    // End RMC14
 }
