@@ -589,4 +589,5 @@
     - CLF
   - type: UserIFF
     factions:
+    - FactionCLF
     - FactionSurvivor
