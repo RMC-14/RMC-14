@@ -161,6 +161,9 @@
     access:
     - [ "CMAccessKitchen" ]
     - [ "CMAccessColonyPublic" ]
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     access:
     - "CMAccessKitchen"
@@ -248,6 +251,9 @@
     layers:
     - state: "off"
     - state: "normal-unshaded"
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     hackable: true
     sections:

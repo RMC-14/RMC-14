@@ -94,14 +94,14 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 100
+        damage: 50
       behaviors:
       - !type:DoActsBehavior
         acts: ["Breakage"]
       - !type:EjectVendorItems
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 100
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -688,6 +688,9 @@
     layoutId: Vending
   - type: WiresPanel
   - type: WiresVisuals
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: CMAutomatedVendor
     scaling: false
     sections:
