@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 6 WEYA Corporate roles and changed the names of the original Executive
-      Spec/Supervisor to contain "legal"
-    type: Add
-  - message: Added the Manager's uniform, coat, hat, and WEYA holster.
-    type: Add
-  - message: Gave the Legal Spec/Supervisors the correct Paygrade relevant to their
-      rank
-    type: Add
-  id: 2365
-  time: '2025-09-24T08:20:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7489
 - author: noctyrnal
   changes:
   - message: Fixed Squad Trackers, Fireteam Assignment and Tacmap Icons for PVE PMCs
@@ -4666,5 +4653,16 @@
   id: 2867
   time: '2026-02-02T03:39:25.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8863
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed TSEPA constables Survivors on hybrisa not having Survivor IFF aswell
+      as TSE IFF.
+    type: Fix
+  - message: Fixed the Corporate Liaison not having Marine IFF. They now have both
+      Marine and WEYA IFF.
+    type: Fix
+  id: 2868
+  time: '2026-02-02T03:41:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9093
 Name: RMC14
 Order: -1
