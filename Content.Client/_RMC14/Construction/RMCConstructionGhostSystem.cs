@@ -134,47 +134,24 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         UpdateGhostFlashes(currentTime);
 
-        var playerForMap = _playerManager.LocalEntity;
-        if (playerForMap is { } playerUid)
-        {
-            var mapId = EntityManager.GetComponent<TransformComponent>(playerUid).MapID;
-            if (_lastPlayerMapId != MapId.Nullspace && mapId != _lastPlayerMapId)
-            {
-                StopPlacement();
-                ClearAllGhosts();
-            }
-
-            _lastPlayerMapId = mapId;
-        }
-        else
-        {
-            _lastPlayerMapId = MapId.Nullspace;
-        }
-
         var player = _playerManager.LocalEntity;
-        if (player == null)
+        UpdateMapState(player);
+
+        if (player == null || !_isPlacementActive || _currentPrototype == null || _currentConstructionItem == null)
         {
             ClearCurrentGhost();
             return;
         }
 
-        if (_isPlacementActive && _currentPrototype != null && _currentConstructionItem != null)
-        {
-            if (_currentPrototype.Type == RMCConstructionType.Structure)
-            {
-                if (_currentGhost == null)
-                    CreateCursorFollowingGhost();
-                UpdateGhostPosition();
-            }
-            else
-            {
-                ClearCurrentGhost();
-            }
-        }
-        else
+        if (_currentPrototype.Type != RMCConstructionType.Structure)
         {
             ClearCurrentGhost();
+            return;
         }
+
+        if (_currentGhost == null)
+            CreateCursorFollowingGhost();
+        UpdateGhostPosition();
     }
 
     private void HandleRotate(ICommonSession? session)
@@ -208,9 +185,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void OnLocalPlayerDetached(LocalPlayerDetachedEvent args)
     {
-        StopPlacement();
-        ClearAllGhosts();
-        _lastPlayerMapId = MapId.Nullspace;
+        ResetGhostState();
     }
 
     private void OnLocalPlayerAttached(LocalPlayerAttachedEvent args)
@@ -227,9 +202,30 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
     {
-        StopPlacement();
+        ResetGhostState();
+    }
+
+    private void ResetGhostState()
+    {
+        _isPlacementActive = false;
+        _currentConstructionItem = null;
         ClearAllGhosts();
         _lastPlayerMapId = MapId.Nullspace;
+    }
+
+    private void UpdateMapState(EntityUid? player)
+    {
+        if (player is not { } playerUid)
+        {
+            _lastPlayerMapId = MapId.Nullspace;
+            return;
+        }
+
+        var mapId = EntityManager.GetComponent<TransformComponent>(playerUid).MapID;
+        if (_lastPlayerMapId != MapId.Nullspace && mapId != _lastPlayerMapId)
+            ResetGhostState();
+
+        _lastPlayerMapId = mapId;
     }
 
     public override void Shutdown()
@@ -366,11 +362,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
     private void ClearCurrentGhost()
     {
-        if (_currentGhost != null)
-        {
-            if (EntityManager.EntityExists(_currentGhost.Value))
-                EntityManager.QueueDeleteEntity(_currentGhost.Value);
-        }
+        if (_currentGhost is { } ghost && EntityManager.EntityExists(ghost))
+            EntityManager.QueueDeleteEntity(ghost);
 
         _currentGhost = null;
         _lastPosition = EntityCoordinates.Invalid;
@@ -405,11 +398,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     {
         _ghostFlashes[ghostKey] = _timing.CurTime + FlashDuration;
 
-        if (TryGetGhostEntity(ghostKey, out var ghost) &&
-            EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
-        {
+        if (TryGetGhostSprite(ghostKey, out var sprite))
             sprite.Color = FlashColor.WithAlpha(sprite.Color.A);
-        }
     }
 
     private void HandleAckStructure(RMCAckStructureConstructionMessage msg)
@@ -637,9 +627,7 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     }
 
     public bool TrySpawnGhost(RMCConstructionPrototype prototype, EntityCoordinates loc, Direction dir, EntityUid constructionItem, [NotNullWhen(true)] out EntityUid? ghost)
-    {
-        return TrySpawnGhost(prototype, loc, dir, out ghost);
-    }
+        => TrySpawnGhost(prototype, loc, dir, out ghost);
 
     private void ConfigureGhostSprite(EntityUid ghost, RMCConstructionPrototype prototype, bool isCursor)
     {
@@ -662,13 +650,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             sprite.Color = color;
             sprite.DrawDepth = depth;
 
-            foreach (var (index, layer) in sprite.AllLayers.Select((layer, i) => (i, layer)))
-            {
+            foreach (var (index, _) in sprite.AllLayers.Select((layer, i) => (i, layer)))
                 sprite.LayerSetShader(index, "unshaded");
-                // Preserve layer visibility from the prototype to avoid showing folded/alt layers.
-                if (!layer.Visible)
-                    continue;
-            }
         }
     }
 
@@ -829,11 +812,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         _buildingGhosts.Remove(ghostKey);
         _ghostFlashes.Remove(ghostKey);
 
-        if (TryGetGhostEntity(ghostKey, out var ghost) &&
-            EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
-        {
+        if (TryGetGhostSprite(ghostKey, out var sprite))
             sprite.Color = StaticGhostColor;
-        }
     }
 
     private void UpdateGhostFlashes(TimeSpan currentTime)
@@ -845,22 +825,16 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         {
             if (currentTime < endTime)
             {
-                if (TryGetGhostEntity(ghostKey, out var ghost) &&
-                    EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
-                {
+                if (TryGetGhostSprite(ghostKey, out var sprite))
                     sprite.Color = FlashColor.WithAlpha(sprite.Color.A);
-                }
 
                 continue;
             }
 
             _ghostFlashes.Remove(ghostKey);
 
-            if (TryGetGhostEntity(ghostKey, out var restoreGhost) &&
-                EntityManager.TryGetComponent<SpriteComponent>(restoreGhost, out var restoreSprite))
-            {
+            if (TryGetGhostSprite(ghostKey, out var restoreSprite))
                 restoreSprite.Color = StaticGhostColor.WithAlpha(GetGhostAlpha(ghostKey, currentTime));
-            }
         }
     }
 
@@ -881,6 +855,15 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         }
 
         return StaticGhostColor.A;
+    }
+
+    private bool TryGetGhostSprite(RMCConstructionGhostKey ghostKey, out SpriteComponent sprite)
+    {
+        if (TryGetGhostEntity(ghostKey, out var ghost) && EntityManager.TryGetComponent(ghost, out sprite))
+            return true;
+
+        sprite = default!;
+        return false;
     }
 
     private bool TryGetGhostEntity(RMCConstructionGhostKey ghostKey, out EntityUid ghost)
