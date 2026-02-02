@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed Squad Trackers, Fireteam Assignment and Tacmap Icons for PVE PMCs
-      and Sun Riders.
-    type: Fix
-  id: 2366
-  time: '2025-09-24T08:21:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7990
 - author: Aurallianz
   changes:
   - message: admins can drag ghosts to entities to "possess them"
@@ -4664,5 +4656,12 @@
   id: 2868
   time: '2026-02-02T03:41:16.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9093
+- author: Neved4
+  changes:
+  - message: Roadmap header year now uses the current UTC year automatically.
+    type: Tweak
+  id: 2869
+  time: '2026-02-02T03:48:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9067
 Name: RMC14
 Order: -1
