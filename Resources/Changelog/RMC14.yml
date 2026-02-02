@@ -1,16 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed xenos sometimes getting stuck in pipes when ventcrawling
-    type: Fix
-  - message: Fixed xenos in acided pipes getting deleted. Applied this fix to lockers,
-      crates, and bodybags too.
-    type: Fix
-  - message: Fixed being unable to acid bodybags and stasisbags.
-    type: Fix
-  id: 2332
-  time: '2025-09-07T00:56:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7816
 - author: DrSmugleaf
   changes:
   - message: Fixed not being able to access dropship engine points, and the alpha
@@ -4686,5 +4674,15 @@
   id: 2834
   time: '2026-01-28T01:43:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9001
+- author: CatAndHats
+  changes:
+  - message: Fixed xenos being able to interact with or open the storages of; toolboxes,
+      hazard vests, jackets, dice bags, snap pop boxes, pizza boxes, donut boxes,
+      water coolers, SMESs, portable air scrubbers, and reagent tanks. They can still
+      break or melt these items.
+    type: Fix
+  id: 2835
+  time: '2026-02-02T02:10:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8755
 Name: RMC14
 Order: -1
