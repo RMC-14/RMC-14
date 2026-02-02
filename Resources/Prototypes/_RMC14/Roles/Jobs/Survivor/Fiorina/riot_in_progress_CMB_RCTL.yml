@@ -62,7 +62,7 @@
 
 - type: entity
   id: RMCSurvivorPresetRiotInProgressCMBRCTL
-  name: riot in progress UN RO preset
+  name: riot in progress CMB RCTL preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
