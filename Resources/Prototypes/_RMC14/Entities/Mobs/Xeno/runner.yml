@@ -23,6 +23,9 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoRunner
     tier: 1
@@ -177,18 +180,6 @@
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
       visible: false
   - type: MobThresholds
     thresholds:
