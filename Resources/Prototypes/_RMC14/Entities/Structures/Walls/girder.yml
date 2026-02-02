@@ -69,7 +69,7 @@
         Blunt: 40
   - type: XenoCrusherChargable
   - type: RMCGenericExamine
-    messageId: rmc-structure-girder-examine-tip
+    message: rmc-structure-girder-examine-tip # message not messageId :p
     whitelist:
       components:
       - Marine
@@ -131,7 +131,7 @@
   - type: Icon
     state: displaced
   - type: RMCGenericExamine
-    messageId: rmc-structure-displaced-examine-tip
+    message: rmc-structure-displaced-examine-tip
     whitelist:
       components:
       - Marine
