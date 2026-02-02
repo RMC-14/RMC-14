@@ -1,0 +1,43 @@
+- type: job # Basically same as NV version, should that one just be moved to multi-map?
+  parent: CMSurvivorSecurity
+  id: CMSurvivorSolarisILRCPeacekeeper
+  name: cm-job-name-survivor-un-peacekeeper
+  description: cm-job-description-survivor
+  playTimeTracker: CMJobSurvivorSecurity
+  startingGear: RMCGearSurvivorSolarisILRCPeacekeeper
+  spawnMenuRoleName: ILRC peacekeeper (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetSurvivorMarshal
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: NpcFactionMember
+      factions:
+      - Civilian
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetILRCPeacekeeper
+  useLoadoutOfJob: CMSurvivorSecurity # for inheritance
+
+- type: startingGear
+  parent: RMCGearSurvivorSecurity
+  id: RMCGearSurvivorSolarisILRCPeacekeeper
+  equipment:
+    jumpsuit: RMCJumpsuitRiotControl
+    outerClothing: RMCArmorVest
+    head: RMCHeadBeretOfficerHos
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
+  name: survivor solaris ILRC peacekeeper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisILRCPeacekeeper
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
