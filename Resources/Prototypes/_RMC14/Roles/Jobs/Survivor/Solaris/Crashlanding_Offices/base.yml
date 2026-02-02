@@ -50,7 +50,7 @@
     randomWeapon:
     - [ RMCWeaponRifleM54CWhiteNoLock, CMMagazineRifleM54C, CMMagazineRifleM54C]
     - [ RMCWeaponRifleSSG45NoLockStripped, RMCMagazineRifleSSG45, RMCMagazineRifleSSG45 ]
-    - [ CMBaseWeaponSMG, CMMagazineSMGM63, CMMagazineSMGM63 ]
+    - [ WeaponSMGM63, CMMagazineSMGM63, CMMagazineSMGM63 ]
     - [ RMCWeaponSMGFP9000PMC, RMCMagazineSMGFP9000, RMCMagazineSMGFP9000 ]
     - [ WeaponShotgunM890, CMShellShotgunBuckshot, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
     tryEquipRandomWeapon: true

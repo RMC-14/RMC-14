@@ -75,6 +75,7 @@
         state: leader
     - type: RMCTrackable
     - type: MutinyEligible
+    - type: SeeNewPlayers
 
 - type: startingGear
   id: CMGearSquadLeader

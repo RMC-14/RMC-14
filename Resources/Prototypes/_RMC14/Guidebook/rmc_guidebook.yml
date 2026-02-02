@@ -168,7 +168,7 @@
   parent: RMC
   id: RMCGuideRoleSpecSniper
   priority: 4
-  name: "Sniper Specialist"
+  name: "Sniper / AMR Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
 
 - type: guideEntry
