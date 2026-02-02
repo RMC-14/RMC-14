@@ -1,10 +1,12 @@
 using System.Numerics;
 using Content.Shared._RMC14.Fireman;
+using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Mobs.Systems;
@@ -18,11 +20,11 @@ using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Content.Shared._RMC14.Synth;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Network;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared._RMC14.Xenonids.Crest;
@@ -42,7 +44,6 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly SharedXenoParasiteSystem _parasite = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly PullingSystem _pulling = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
@@ -51,6 +52,9 @@ public sealed class RMCPullingSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RotateToFaceSystem _rotateTo = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly SharedRMCMeleeWeaponSystem _rmcMelee = default!;
+
+    private const float BarricadeCheckRange = 2.5f;
 
     private readonly SoundSpecifier _pullSound = new SoundPathSpecifier("/Audio/Effects/thudswoosh.ogg")
     {
@@ -111,7 +115,6 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         var user = args.PullerUid;
         var target = args.PulledUid;
-
         if (target != ent.Owner ||
             HasComp<ParalyzeOnPullAttemptImmuneComponent>(user) ||
             _mobState.IsDead(ent))
@@ -304,9 +307,11 @@ public sealed class RMCPullingSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.PulledUid)
             return;
 
+        var targetName = Identity.Name(args.PulledUid, EntityManager, ent);
+
         if (!CanPullDead(ent, args.PulledUid))
         {
-            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", args.PulledUid)), args.PulledUid, args.PullerUid);
+            _popup.PopupClient(Loc.GetString("cm-pull-whitelist-denied-dead", ("name", targetName)), args.PulledUid, args.PullerUid);
             args.Cancelled = true;
         }
     }
@@ -342,6 +347,22 @@ public sealed class RMCPullingSystem : EntitySystem
             return;
 
         if (ent.Comp.NextAttack > _timing.CurTime)
+            args.Cancelled = true;
+
+        var pulledUid = args.PulledUid;
+        var attackEvent = new LightAttackEvent(GetNetEntity(pulledUid), GetNetEntity(ent), GetNetCoordinates(pulledUid.ToCoordinates()));
+        if (_rmcMelee.AttemptOverrideAttack(pulledUid, ent, ent, attackEvent, out var attack, out var cancelled, BarricadeCheckRange))
+        {
+            if (attack is LightAttackEvent { Target: not null } light)
+            {
+                var target = GetEntity(light.Target.Value);
+                _melee.AttemptLightAttack(ent, ent, ent.Comp, target, false);
+            }
+
+            args.Cancelled = true;
+        }
+
+        if (cancelled)
             args.Cancelled = true;
     }
 
@@ -413,7 +434,7 @@ public sealed class RMCPullingSystem : EntitySystem
     {
         TryStopPullsOn(pullie);
 
-        if (TryComp(pullie, out PullerComponent? puller) &&
+       if (TryComp(pullie, out PullerComponent? puller) &&
             puller.Pulling != null &&
             TryComp(puller.Pulling, out PullableComponent? pullable2))
         {
