@@ -16,7 +16,6 @@
   - type: CMMedicalSupplyLink
   - type: RMCMesonsNonviewable
 
-
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorMedicalAllAccess
@@ -61,33 +60,37 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        amount: 10
       - id: CMGauze10
-        amount: 6
+        amount: 10
 #      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+#        amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        amount: 5
+      - id: RMCDyloveneAutoInjector
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
+        amount: 5
 #      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
 #      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
+        amount: 5
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
@@ -111,21 +114,23 @@
     - name: Pill bottles
       entries:
       - id: CMPillCanisterBicaridine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterKelotane
-        amount: 2
+        amount: 4
       - id: CMPillCanisterTricordrazine
-        amount: 2
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
+#        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
+#        amount: 4
     - name: Medical utilities
       entries:
       - id: CMDefibrillator
@@ -135,7 +140,7 @@
       - id: CMSynthGraft
         amount: 2
       - id: CMHyposprayFilledTricord
-        amount: 2
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
@@ -143,7 +148,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        amount: 3
       - id: CMSyringe
         amount: 7
 
@@ -165,33 +170,37 @@
     - name: Field supplies
       entries:
       - id: CMBurnKit10
-        amount: 6
+        amount: 10
       - id: CMTraumaKit10
-        amount: 6
+        amount: 10
       - id: CMOintment10
-        amount: 6
+        amount: 10
       - id: CMGauze10
-        amount: 6
+        amount: 10
 #      - id: CMSplints10 # TODO RMC14
-#        amount: 6
+#        amount: 10
     - name: Autoinjectors
       entries:
       - id: CMBicaridineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMDexalinPlusAutoInjector
-        amount: 3
+        amount: 5
+      - id: RMCDyloveneAutoInjector
+        amount: 5
       - id: CMEpinephrineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMInaprovalineAutoInjector
-        amount: 3
+        amount: 5
       - id: CMKelotaneAutoInjector
-        amount: 3
+        amount: 5
 #      - id: CMOxycodoneAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
+#      - id: CMPeridaxonAutoinjector # TODO RMC14
+#        amount: 5
 #      - id: CMTramadolAutoinjector # TODO RMC14
-#        amount: 3
+#        amount: 5
       - id: CMTricordrazineAutoInjector
-        amount: 3
+        amount: 5
     - name: Liquid bottles
       entries:
       - id: CMBottleBicaridine
@@ -215,23 +224,29 @@
     - name: Pill bottles
       entries:
       - id: RMCPillCanisterMeralyneBicaridine
-        amount: 2
+        amount: 4
       - id: CMPillCanisterKelotaneDermaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterTricordrazine
-        amount: 2
+        amount: 4
+      - id: CMPillCanisterBicaridine
+        amount: 4
       - id: CMPillCanisterDexalin
-        amount: 2
+        amount: 4
       - id: CMPillCanisterDylovene
-        amount: 2
+        amount: 4
       - id: CMPillCanisterInaprovaline
-        amount: 2
+        amount: 4
       - id: CMPillCanisterTricordrazine
-        amount: 2
+        amount: 4
+      - id: CMPillCanisterKelotane
+        amount: 4
+#      - id: CMPillCanisterOxycodone # TODO RMC14
+#        amount: 3
 #      - id: CMPillCanisterPeridaxon # TODO RMC14
-#        amount: 2
+#        amount: 3
 #      - id: CMPillCanisterTramadol # TODO RMC14
-#        amount: 2
+#        amount: 4
     - name: Medical utilities
       entries:
       - id: CMSurgicalLine
@@ -239,7 +254,7 @@
       - id: CMSynthGraft
         amount: 2
       - id: CMHyposprayFilledTricord
-        amount: 2
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
@@ -247,7 +262,7 @@
       - id: RMCGlassesMedicalHUDGlasses
         amount: 3
       - id: CMStasisBagFolded
-        amount: 2
+        amount: 3
       - id: CMSyringe
         amount: 7
 
@@ -285,13 +300,13 @@
       - id: CMBottleKelotane
         amount: 6
       - id: CMBottleTricordrazine
-        amount: 3
-    #      - id: CMBottleOxycodone # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottlePeridaxon # TODO RMC14
-    #        amount: 6
-    #      - id: CMBottleTramadol # TODO RMC14
-    #        amount: 6
+        amount: 6
+#      - id: CMBottleOxycodone # TODO RMC14
+#        amount: 6
+#      - id: CMBottlePeridaxon # TODO RMC14
+#        amount: 6
+#      - id: CMBottleTramadol # TODO RMC14
+#        amount: 6
     - name: Miscellaneous
       entries:
       - id: CMBeaker
@@ -349,7 +364,8 @@
       entries:
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 5
-    #- id: CMPainStopAutoinjector
+#      - id: CMPainStopAutoinjector
+#        amount: 5
     - name: Devices
       entries:
       - id: CMHealthAnalyzer
@@ -359,19 +375,19 @@
       - id: CMFireExtinguisherPortable
         amount: 5
       - id: CMOintment10
-        amount: 7
+        amount: 8
       - id: CMGauze10
-        amount: 7
+        amount: 8
 #      - id: CMMedicalSplints5
-#        amount: 7
+#        amount: 8
     - name: Pills
       entries:
       - id: CMPacketPillsTricordrazine
-        amount: 7
+        amount: 5
       - id: CMPacketPillsBicaridine
-        amount: 7
+        amount: 5
       - id: CMPacketPillsKelotane
-        amount: 7
+        amount: 5
 
 - type: entity
   parent: ColMarTechMarineMedical
@@ -424,20 +440,20 @@
     sections:
     - name: Supplies
       entries:
-      # - id: CMPainStopAutoinjector
-      #   amount: 2
       - id: CMTricordrazineAutoInjectorNoSkill
         amount: 2
+#      - id: CMPainStopAutoinjector
+#        amount: 2
       - id: CMGauze10
         amount: 4
       - id: CMOintment10
         amount: 4
-      # - id: CMMedicalSplints5
-      #   amount: 4
+#      - id: CMMedicalSplints5
+#        amount: 4
     - name: Utility
       entries:
       - id: CMHealthAnalyzer
-        amount: 3
+        amount: 2
     - name: Pills
       entries:
       - id: CMPacketPillsTricordrazine
@@ -446,7 +462,6 @@
         amount: 7
       - id: CMPacketPillsKelotane
         amount: 7
-
 
 - type: entity
   parent: RMCNanoMed
@@ -483,9 +498,9 @@
       - id: CMTricordrazineAutoInjectorNoSkill
         name: First-Aid Autoinjector
         amount: 2
-      #- id: CMPainStopAutoinjector
-      #  name: Pain-Stop Autoinjector
-      #  amount: 2
+#      - id: CMPainStopAutoinjector
+#        name: Pain-Stop Autoinjector
+#        amount: 2
       - id: CMGauze10
         name: Roll of Gauze
         amount: 4
@@ -551,10 +566,9 @@
     - name: Blood Packs
       entries:
       - id: CMBloodPackFull
-        amount: 30
+        amount: 30 # 6 blood types, 5 each
     - name: Miscellaneous
       entries:
       - id: CMBloodPack
         amount: 5
         name: empty blood pack
-

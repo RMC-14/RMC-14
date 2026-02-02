@@ -1,0 +1,55 @@
+- type: entity
+  parent: BaseItem
+  id: RMCSentryLaptop
+  name: sentry laptop
+  description: A ruggedized military laptop used for remote sentry gun control and monitoring. Can be placed on tables for easier access. Use a security access tuner to link sentries to the laptop network.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/sentrycomp.rsi
+    layers:
+    - state: sentrycomp_cl
+      map: ["enum.SentryLaptopVisualLayers.Base"]
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Devices/sentrycomp.rsi
+  - type: Clickable
+  - type: InteractionOutline
+  - type: CollisionWake
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.15,0.25,0.15"
+        density: 50
+        mask:
+        - ItemMask
+        restitution: 0.3
+        friction: 0.2
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SentryLaptopVisuals.State:
+        enum.SentryLaptopVisualLayers.Base:
+          Closed: { state: sentrycomp_cl }
+          Open: { state: sentrycomp_op }
+          Active: { state: sentrycomp_on }
+  - type: UserInterface
+    interfaces:
+      enum.SentryLaptopUiKey.Key:
+        type: SentryLaptopBui
+  - type: ActivatableUI
+    key: enum.SentryLaptopUiKey.Key
+    inHandsOnly: false
+  - type: DeviceNetwork
+  - type: DeviceLinkSource
+    ports: [ SentryControl ]
+  - type: SentryLaptop
+  - type: UseDelay
+    delay: 0.5
+  - type: RequiresSkill
+    skills:
+      RMCSkillEngineer: 2
+

@@ -160,7 +160,7 @@
   - type: AttachableWeaponRangedMods
     modifiers:
     - accuracyAddMult: 0.15
-      damageAddMult: 0.1
+      damageAddMult: 0.05
       recoilFlat: -2
     - conditions:
         unwieldedOnly: true
@@ -172,6 +172,8 @@
       Snow: s_m10_overcomp
       Classic: c_m10_overcomp
       Urban: u_m10_overcomp
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-m13-extended-recoil-compensator
 
 - type: entity
   parent: RMCAttachmentRecoilCompensatorM13
@@ -231,6 +233,10 @@
     - conditions:
         unwieldedOnly: true
       recoilFlat: 2
+  - type: AttachableSilencer
+    sound:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_shotgun_choke.ogg
+    hideMuzzleFlash: false
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -317,6 +323,26 @@
   - type: AttachableWeaponRangedMods
     modifiers:
     - damageFalloffAddMult: 0.1
+
+- type: entity
+  parent: RMCBarrelAttachmentBase
+  id: RMCAttachmentSuppressorL112
+  name: L112A1 integrated suppressor
+  description: Cor... I don't think you can put that one back on.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_barrel.rsi
+    state: suppressor_l112
+  - type: Tag
+    tags:
+    - RMCAttachmentBarrel
+    - RMCAttachmentSuppressorL112
+  - type: AttachableVisuals
+  - type: AttachableSilencer
+    sound:
+      collection: RMCL112Shoot
+      params:
+        maxDistance: 6
 
 - type: entity
   parent: RMCBarrelAttachmentBase
@@ -439,6 +465,9 @@
 
 - type: Tag
   id: RMCAttachmentSuppressorNPZ92
+
+- type: Tag
+  id: RMCAttachmentSuppressorL112
 
 - type: Tag
   id: RMCAttachmentBarrelCharger
