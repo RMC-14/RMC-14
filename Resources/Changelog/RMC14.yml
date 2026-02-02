@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Added a smart gun ammunition box for PVE.
-    type: Add
-  - message: Adjusted the ammunition box descriptions.
-    type: Tweak
-  id: 2358
-  time: '2025-09-22T13:29:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7871
 - author: CatAndHats
   changes:
   - message: AN/AVD-60 LZ Detector name fixed
@@ -4675,5 +4666,12 @@
   id: 2860
   time: '2026-02-02T03:26:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9006
+- author: NikidodikYT
+  changes:
+  - message: Paper can no longer be accidentally eaten via hotkeys/use
+    type: Fix
+  id: 2861
+  time: '2026-02-02T03:28:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9087
 Name: RMC14
 Order: -1
