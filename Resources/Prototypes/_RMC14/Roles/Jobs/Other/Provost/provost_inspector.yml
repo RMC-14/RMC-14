@@ -74,7 +74,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
-    shoes: CMBootsBlackFilled1
+    shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
     back: CMSatchelSecurityFilledProvostInspector
     #    pocket1: # TODO RMC14 tape recorder
