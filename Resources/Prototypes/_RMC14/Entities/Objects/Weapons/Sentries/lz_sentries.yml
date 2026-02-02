@@ -59,6 +59,7 @@
     enabled: true
     intrinsic: true
   - type: PointLight
+  - type: HomingShots
 
 - type: entity
   parent: RMCBaseTurret
