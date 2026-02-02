@@ -142,6 +142,12 @@ public abstract class SharedNeurotoxinSystem : EntitySystem
                     continue;
                 }
 
+                var ev = new NeurotoxinInjectAttemptEvent();
+                RaiseLocalEvent(marine, ref ev);
+
+                if (ev.Cancelled)
+                    continue;
+
                 if (!EnsureComp<NeurotoxinComponent>(marine, out var builtNeurotoxin))
                 {
                     builtNeurotoxin.LastMessage = time;

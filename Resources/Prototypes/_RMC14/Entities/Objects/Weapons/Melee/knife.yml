@@ -72,7 +72,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCCombatUtilityKnifeA
-  name: "'Druzhina' Combat Utility Knife"
+  name: "'Druzhina' combat utility knife"
   description: A heavy combat knife, designed for SPP special forces. Its heft and durability makes it popular for various uses in the field.
   components:
   - type: Clothing
@@ -182,7 +182,7 @@
 - type: entity
   parent: RMCM5Bayonet
   id: RMCSawtoothDaggerB # bayonet
-  name: "Fiore-Pattern trench dagger"
+  name: "Fiore-pattern trench dagger"
   description: This thin, yet rigid dagger is favored for its combination of elegant features and lethality in hand-to-hand combat.
   components:
   - type: Clothing

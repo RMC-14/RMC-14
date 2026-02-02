@@ -183,6 +183,7 @@
 - type: entity
   parent: RMCPodDoorIndestructible
   id: RMCPodDoorHybrisaIndestructibleUltra
+  description: A heavily reinforced metal-alloy door, designed to be virtually indestructible—nothing can penetrate its defenses.
   suffix: Indestructible
   components:
   - type: Sprite
@@ -191,6 +192,11 @@
     color: "#451e5eb8"
   - type: Corrodible
     isCorrodible: false
+  - type: ApcPowerReceiver
+    needsPower: false
+  - type: RMCPowerReceiver
+    idleLoad: 0
+    activeLoad: 0
 
 - type: entity
   parent: RMCPodDoorAlmayer

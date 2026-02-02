@@ -119,9 +119,13 @@
   - type: RMCRevivable
   - type: RMCMedicalExamine
   - type: FireVisuals
-    sprite: Mobs/Effects/onfire.rsi
-    normalState: Generic_mob_burning
-    alternateState: Standing
+    sprite: _RMC14/Mobs/Effects/on_fire.rsi
+    normalState: standing_weak
+    alternateState: standing_medium
+    fireStackAlternateState: 14 # 15 stacks or above uses alternate state
+    lightRadiusPerStack: 0.2 # Around 15 stacks to reach 3 radius
+    maxLightRadius: 3
+  - type: RMCFireColor
   - type: MeleeWeapon
     soundHit:
       collection: Punch
@@ -266,34 +270,6 @@
         hooked:
           True: { visible: true }
           False: { visible: false }
-      enum.TargetedVisuals.Targeted:
-        targeted:
-          None:
-            visible: false
-          Spotted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: spotter_lockon
-            visible: true
-          Targeted:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon
-            visible: true
-          TargetedIntense:
-            sprite: _RMC14/Effects/targeted.rsi
-            state: sniper_lockon_intense
-            visible: true
-      enum.TargetedVisuals.TargetedDirection:
-        targetedDirection:
-          True: { visible: true}
-          False: { visible: false}
-      enum.TargetedVisuals.TargetedDirectionIntense:
-        targetedDirectionIntense:
-          True: { visible: true }
-          False: { visible: false }
-      enum.FocusedVisuals.Focused:
-        focused:
-          True: { visible: true }
-          False: { visible: false }
   - type: Spottable
   - type: ActiveInputMover
   - type: DropItemsOnRest
@@ -393,3 +369,12 @@
     xenoVisible: true
   - type: RMCActionOrder
     id: RMCBaseMobSpeciesOrganic
+  - type: OpenStorageOnGearEquip
+    whitelist:
+      tags:
+      - SurvivalPouch
+  - type: HumanoidAppearance
+    species: Human
+    hideLayersOnEquip:
+    - UndergarmentTop
+    - Hair

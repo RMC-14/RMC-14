@@ -48,11 +48,16 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarineTech
+        replaceSlot: back
       - id: CMSatchelMarineTech
+        replaceSlot: back
       - id: CMBackpackWelder
+        replaceSlot: back
       - id: RMCSatchelWelder
+        replaceSlot: back
         recommended: true
       - id: RMCSatchelWelderChestrig
+        replaceSlot: back
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
