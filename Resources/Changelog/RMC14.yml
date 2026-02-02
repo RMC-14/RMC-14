@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Fixed the playtime tracker window duplicating some playtimes.
-    type: Fix
-  - message: Fixed the tactical map's default mode not showing area names.
-    type: Fix
-  id: 2349
-  time: '2025-09-10T01:41:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7877
 - author: UnicornOnLSD
   changes:
   - message: Added "Squad Leading 101" guidebook entry.
@@ -4671,5 +4662,14 @@
   id: 2851
   time: '2026-02-02T03:11:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9054
+- author: PursuitInAshes
+  changes:
+  - message: '[PvE] All roles have received a cleanup and tweak to their skills to
+      make them more consistent unless there is intentional deviation on a per faction
+      basis.'
+    type: Tweak
+  id: 2852
+  time: '2026-02-02T03:12:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9035
 Name: RMC14
 Order: -1
