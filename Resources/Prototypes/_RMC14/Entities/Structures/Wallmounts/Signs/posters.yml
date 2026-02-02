@@ -848,7 +848,7 @@
   parent: CMPosterBase
   id: RMCPosterTSEPA1
   name: "TSEPA poster"
-  description: "A recruitment poster for the TSEPA. Integrity, Justice, Unity—Together, We Keep the Peace."
+  description: "A recruitment poster for the TSEPA. Integrity, Justice, Unity. Together, We Keep the Peace."
   components:
   - type: Sprite
     state: ZSPA_1
