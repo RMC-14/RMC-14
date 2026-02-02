@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Corpsmen on PVE now get pre-made Meralyne-Bicaridine and Kelotane-Dermaline
-      instead of regular Bicardirdine and Dermaline to make their lives easier.
-    type: Tweak
-  - message: Corpsmen on PVE now get tricordazine pill canisters in their vendors
-      too.
-    type: Add
-  - message: Adjusted PVE Corpsmen's vendor contents to remove unwanted content.
-    type: Tweak
-  id: 2361
-  time: '2025-09-23T12:22:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7954
-- author: noctyrnal
-  changes:
-  - message: Added a new visor helmet garb for PVE - the old m1 multi-spectrum visor.
-    type: Add
-  - message: Fixed the PVE Platoon Commander having less loadout groups than intended.
-    type: Fix
-  - message: Increased the loadout points for PVE jobs to 20 instead of 7.
-    type: Add
-  id: 2362
-  time: '2025-09-23T20:28:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7983
 - author: Arykh
   changes:
   - message: Some health HUD icons have been rotated for visual clarity.
@@ -4669,5 +4645,25 @@
   id: 2863
   time: '2026-02-02T03:32:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8998
+- author: BreakpointDebug1234
+  changes:
+  - message: Update guidebook role sprites
+    type: Tweak
+  - message: Minor updates to the Combat Technician and Maintenance technician guidebook
+      entries.
+    type: Tweak
+  - message: Minor visual updates to Requisitions guidebook.
+    type: Tweak
+  id: 2864
+  time: '2026-02-02T03:33:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8921
+- author: blackknight954
+  changes:
+  - message: XX-121 and XX121 automatically turn into the word Xenonids when spoken
+      by Marines.
+    type: Tweak
+  id: 2865
+  time: '2026-02-02T03:33:59.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8993
 Name: RMC14
 Order: -1
