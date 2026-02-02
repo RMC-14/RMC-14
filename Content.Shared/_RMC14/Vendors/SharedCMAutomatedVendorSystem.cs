@@ -175,11 +175,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
+        ent.Comp.EntryByPrototype.Clear();
+        ent.Comp.EntryByStackType.Clear();
         foreach (var section in ent.Comp.Sections)
         {
             foreach (var entry in section.Entries)
             {
                 _entries.TryAdd(entry.Id, entry);
+                ent.Comp.EntryByPrototype.TryAdd(entry.Id, entry);
+
+                if (_prototypes.TryIndex(entry.Id, out var entryProto) &&
+                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                {
+                    ent.Comp.EntryByStackType.TryAdd(entryStack.StackTypeId, entry);
+                }
+
                 if (entry.Box != null)
                 {
                     _boxEntries.Add(entry);
@@ -317,6 +327,26 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         args.Cancel();
     }
 
+    private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
+    {
+        if (HasComp<MultitoolComponent>(args.Used))
+        {
+            args.Handled = true;
+            TryHackVendor(ent, args.User, args.Used);
+            return;
+        }
+
+        // Medical vendor restocking QoL - single items only
+        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent) || !ent.Comp.CanManualRestock)
+            return;
+        if (args.Handled) // CMRefillableSolutionSystem
+            return;
+        if (HasComp<StorageComponent>(args.Used)) // Use alt click for bulk restock
+            return;
+        if (TryRestockSingleItem(ent, args.Used, args.User))
+            args.Handled = true;
+    }
+
     // Better than drag and drop to restock.
     private void OnAltInteractRestockVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
@@ -355,26 +385,6 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 Priority = 2
             });
         }
-    }
-
-    private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
-    {
-        if (HasComp<MultitoolComponent>(args.Used))
-        {
-            args.Handled = true;
-            TryHackVendor(ent, args.User, args.Used);
-            return;
-        }
-
-        // Medical vendor restocking QoL - single items only
-        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent) || !ent.Comp.CanManualRestock)
-            return;
-        if (args.Handled) // CMRefillableSolutionSystem
-            return;
-        if (HasComp<StorageComponent>(args.Used)) // Use alt click for bulk restock
-            return;
-        if (TryRestockSingleItem(ent, args.Used, args.User))
-            args.Handled = true;
     }
 
     private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
@@ -1134,35 +1144,14 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var itemProto = MetaData(item).EntityPrototype?.ID;
         if (itemProto == null)
             return false;
-        // Get the item's stack type if it's a stack (used for matching split/merged stacks)
-        string? itemStackType = null;
-        if (TryComp<StackComponent>(item, out var itemStackComp))
-            itemStackType = itemStackComp.StackTypeId;
 
-        CMVendorEntry? matchingEntry = null;
-        foreach (var section in vendor.Comp.Sections)
+        // Try direct prototype match first
+        vendor.Comp.EntryByPrototype.TryGetValue(itemProto, out var matchingEntry);
+
+        // Try stack type match for split/merged stacks (e.g., CMTraumaKit1 matching CMTraumaKit10)
+        if (matchingEntry == null && TryComp<StackComponent>(item, out var itemStackComp))
         {
-            foreach (var entry in section.Entries)
-            {
-                // Direct prototype match
-                if (entry.Id == itemProto)
-                {
-                    matchingEntry = entry;
-                    break;
-                }
-                // Stack type match: if both items are stacks with the same stack type, they match
-                // This handles split/merged stacks (e.g., CMTraumaKit1 matching CMTraumaKit10)
-                if (itemStackType != null &&
-                    _prototypes.TryIndex(entry.Id, out var entryProto) &&
-                    entryProto.TryGetComponent(out StackComponent? entryStackComp, _compFactory) &&
-                    entryStackComp.StackTypeId == itemStackType)
-                {
-                    matchingEntry = entry;
-                    break;
-                }
-            }
-            if (matchingEntry != null)
-                break;
+            vendor.Comp.EntryByStackType.TryGetValue(itemStackComp.StackTypeId, out matchingEntry);
         }
 
         var ignoreBulkRestock = vendor.Comp.IgnoreBulkRestockById.Contains(itemProto) ||
@@ -1201,10 +1190,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         if (matchingEntry.Box is not { } boxId)
             return false;
 
-        var boxEntry = vendor.Comp.Sections
-            .SelectMany(section => section.Entries)
-            .FirstOrDefault(entry => entry.Id == boxId);
-        if (boxEntry == null)
+        if (!vendor.Comp.EntryByPrototype.TryGetValue(boxId, out var boxEntry))
             return false;
 
         var amountToAdd = GetBoxRemoveAmount(matchingEntry);
@@ -1574,7 +1560,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             }
         }
 
-        var actualTotal = storage.Container.ContainedEntities.Sum(contained => TryComp<StackComponent>(contained, out var stack) ? stack.Count : 1);
+        var actualTotal = 0;
+        foreach (var contained in storage.Container.ContainedEntities)
+        {
+            actualTotal += TryComp<StackComponent>(contained, out var stack) ? stack.Count : 1;
+        }
+
         if (actualTotal >= expectedTotal)
             return true;
         RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
