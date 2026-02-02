@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: N0lim
-  changes:
-  - message: Fixed stack overflow when two hiveless xeno damage each other with acid
-      blood
-    type: Fix
-  - message: Fixed wrong damage multiplier for acid blood splash in case xeno vs xeno
-    type: Fix
-  id: 2342
-  time: '2025-09-09T23:24:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7843
 - author: 4310V343k
   changes:
   - message: Marines in the crew manifest are now split into squads and sorted based
@@ -4694,5 +4684,13 @@
   id: 2844
   time: '2026-02-02T02:40:53.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9009
+- author: Arykh
+  changes:
+  - message: Added the Auto-Select toggle button to the ChemMaster! It lets you automatically
+      select inserted pill bottles.
+    type: Add
+  id: 2845
+  time: '2026-02-02T02:43:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9053
 Name: RMC14
 Order: -1
