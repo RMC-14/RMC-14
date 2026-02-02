@@ -49,7 +49,9 @@
     - idcard
     sprite: _RMC14/Objects/CMIDs/cmb_deputy.rsi
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
+    - FactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCMBDeputy
 
@@ -65,5 +67,8 @@
   - type: Clothing
     slots:
     - idcard
+    sprite: _RMC14/Objects/CMIDs/cmb_marshal.rsi
   - type: ItemIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
+    - FactionSurvivor
