@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/16/2026 08:40:49
-  entityCount: 17350
+  time: 01/25/2026 22:45:41
+  entityCount: 17351
 maps:
 - 1
 grids:
@@ -127608,6 +127608,12 @@ entities:
     components:
     - type: Transform
       pos: 17.5,135.5
+      parent: 1
+  - uid: 17351
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,128.5
       parent: 1
 - proto: RMCUtilityAttachmentPoint
   entities:
