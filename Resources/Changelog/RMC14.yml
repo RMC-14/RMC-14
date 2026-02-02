@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Fixed floodlights not turning on.
-    type: Fix
-  id: 2337
-  time: '2025-09-09T22:57:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7868
 - author: J C Denton
   changes:
   - message: Fixed armory lockers being destructible.
@@ -4685,5 +4678,17 @@
   id: 2839
   time: '2026-02-02T02:23:38.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8940
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Girders now have a tooltip telling you how to construct or deconstruct
+      it
+    type: Tweak
+  - message: Fixed reinforced girder having less health than intended
+    type: Tweak
+  - message: Fixed girder having more health than intended
+    type: Tweak
+  id: 2840
+  time: '2026-02-02T02:26:30.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9026
 Name: RMC14
 Order: -1
