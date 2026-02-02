@@ -111,6 +111,9 @@
     explosionArmor: 100
   - type: XenoWordQueen
   - type: InnateCommandSpeech
+  - type: RMCInnateRadioTextIncrease
+    radioTextIncrease: 3
+    instrinsic: true
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp

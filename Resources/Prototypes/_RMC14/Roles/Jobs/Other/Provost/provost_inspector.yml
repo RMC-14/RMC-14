@@ -76,7 +76,7 @@
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
-    belt: RMCM1984BeltFilled
+    belt: RMCBeltHolsterPistolHandcannonFilled
     back: CMSatchelSecurityFilledProvostInspector
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
