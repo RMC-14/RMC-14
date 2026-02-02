@@ -5,10 +5,12 @@ namespace Content.Shared._RMC14.Construction;
 [Serializable, NetSerializable]
 public sealed class RMCConstructionGhostBuildFailedMessage : EntityEventArgs
 {
-    public int GhostId { get; }
+    public RMCConstructionGhostKey GhostKey { get; }
+    public RMCConstructionFailureReason Reason { get; }
 
-    public RMCConstructionGhostBuildFailedMessage(int ghostId)
+    public RMCConstructionGhostBuildFailedMessage(RMCConstructionGhostKey ghostKey, RMCConstructionFailureReason reason = RMCConstructionFailureReason.Unknown)
     {
-        GhostId = ghostId;
+        GhostKey = ghostKey;
+        Reason = reason;
     }
 }

@@ -107,6 +107,9 @@ public sealed class RMCConstructionBui : BoundUserInterface
 
         if (build.StackAmounts is { } stackAmounts)
         {
+            control.StackPanel.Visible = true;
+            var totalStacks = stackAmounts.Count;
+            var index = 0;
             foreach (var stack in stackAmounts)
             {
                 var button = new Button()
@@ -114,12 +117,33 @@ public sealed class RMCConstructionBui : BoundUserInterface
                     Text = "x" + stack,
                     StyleClasses = { "OpenBoth" },
                     EnableAllKeybinds = true,
-                    SetWidth = 45,
-                    Margin = new Thickness(0, 0, 0, 3),
-                    HorizontalAlignment = Control.HAlignment.Right
+                    SetWidth = 34,
+                    SetHeight = 20,
+                    Margin = new Thickness(0, 0, 0, 0),
+                    HorizontalAlignment = Control.HAlignment.Center,
+                    VerticalAlignment = Control.VAlignment.Center
                 };
 
+                button.StyleClasses.Clear();
+                if (totalStacks == 1)
+                {
+                    button.StyleClasses.Add("OpenBoth");
+                }
+                else if (index == 0)
+                {
+                    button.StyleClasses.Add("OpenRight");
+                }
+                else if (index == totalStacks - 1)
+                {
+                    button.StyleClasses.Add("OpenLeft");
+                }
+                else
+                {
+                    button.StyleClasses.Add("OpenBoth");
+                }
+
                 control.StackAmountContainer.AddChild(button);
+                index++;
 
                 button.OnPressed += args =>
                 {
@@ -133,7 +157,6 @@ public sealed class RMCConstructionBui : BoundUserInterface
                     HandleConstruction(build, stack, directBuild);
                 };
 
-                control.Button.SetWidth = 250;
                 control.Button.HorizontalAlignment = Control.HAlignment.Left;
             }
         }

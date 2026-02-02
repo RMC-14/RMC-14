@@ -5,10 +5,10 @@ namespace Content.Shared._RMC14.Construction;
 [Serializable, NetSerializable]
 public sealed class RMCAckStructureConstructionMessage : EntityEventArgs
 {
-    public int GhostId { get; }
+    public RMCConstructionGhostKey GhostKey { get; }
 
-    public RMCAckStructureConstructionMessage(int ghostId)
+    public RMCAckStructureConstructionMessage(RMCConstructionGhostKey ghostKey)
     {
-        GhostId = ghostId;
+        GhostKey = ghostKey;
     }
 }

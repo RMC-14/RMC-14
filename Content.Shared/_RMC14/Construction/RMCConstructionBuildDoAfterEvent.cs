@@ -22,14 +22,14 @@ public sealed partial class RMCConstructionBuildDoAfterEvent : SimpleDoAfterEven
     public Direction Direction;
 
     [DataField]
-    public int? GhostId;
+    public RMCConstructionGhostKey? GhostKey;
 
-    public RMCConstructionBuildDoAfterEvent(RMCConstructionPrototype prototype, int amount, NetCoordinates coordinates, Direction direction, int? ghostId = null)
+    public RMCConstructionBuildDoAfterEvent(RMCConstructionPrototype prototype, int amount, NetCoordinates coordinates, Direction direction, RMCConstructionGhostKey? ghostKey = null)
     {
         Prototype = prototype;
         Amount = amount;
         Coordinates = coordinates;
         Direction = direction;
-        GhostId = ghostId;
+        GhostKey = ghostKey;
     }
 }

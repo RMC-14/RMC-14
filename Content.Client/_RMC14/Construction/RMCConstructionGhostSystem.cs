@@ -3,11 +3,10 @@ using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Construction.Prototypes;
-using Content.Shared._RMC14.Map;
 using Content.Shared.Coordinates;
-using Content.Shared.Examine;
 using Content.Shared.Input;
-using Content.Shared.Stacks;
+using Content.Shared.GameTicking;
+using Content.Shared.Popups;
 using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -15,11 +14,9 @@ using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Shared.Input;
 using Robust.Shared.Input.Binding;
-using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared._RMC14.Dropship;
 using Robust.Shared.Map.Components;
 using Content.Client.Clickable;
 using Robust.Shared.Timing;
@@ -31,18 +28,18 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ExamineSystemShared _examineSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
     [Dependency] private readonly IEyeManager _eyeManager = default!;
     [Dependency] private readonly IInputManager _inputManager = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCConstructionSystem _constructionSystem = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private SharedMapSystem _mapSystem = default!;
-    private RMCMapSystem _rmcMap = default!;
 
-    private readonly Dictionary<int, EntityUid> _ghosts = new();
-    private readonly Dictionary<int, BuildGhostState> _buildingGhosts = new();
+    private readonly Dictionary<RMCConstructionGhostKey, EntityUid> _ghosts = new();
+    private readonly Dictionary<RMCConstructionGhostKey, BuildGhostState> _buildingGhosts = new();
 
     private EntityUid? _currentGhost;
     private RMCConstructionPrototype? _currentPrototype;
@@ -53,12 +50,16 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
     private Direction _currentDirection = Direction.North;
     private bool _isFlashing = false;
     private TimeSpan _flashEndTime;
+    private MapId _lastPlayerMapId = MapId.Nullspace;
+    private readonly Dictionary<RMCConstructionGhostKey, TimeSpan> _ghostFlashes = new();
 
     private static readonly Color StaticGhostColor = new(136, 199, 250, 160);
     private static readonly Color CursorGhostValidColor = new(74, 163, 232, 140);
     private static readonly Color CursorGhostInvalidColor = new(206, 210, 43, 140);
+    private static readonly Color CursorGhostOverlapColor = new(255, 170, 90, 200);
     private static readonly Color FlashColor = new(164, 38, 37, 160);
     private static readonly TimeSpan FlashDuration = TimeSpan.FromMilliseconds(300);
+    private static readonly Vector2 CursorGhostOverlapScale = new(1.07f, 1.07f);
     private const float BuildFadeMinDuration = 0.05f;
     private const float BuildCancelDistance = 0.5f;
 
@@ -67,8 +68,6 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         base.Initialize();
 
         _mapSystem = EntityManager.System<SharedMapSystem>();
-        _rmcMap = EntityManager.System<RMCMapSystem>();
-
         UpdatesOutsidePrediction = true;
 
         CommandBinds.Builder
@@ -77,6 +76,9 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             .Bind(ContentKeyFunctions.EditorFlipObject, InputCmdHandler.FromDelegate(HandleRotate, outsidePrediction: true))
             .Register<RMCConstructionGhostSystem>();
 
+        SubscribeLocalEvent<LocalPlayerDetachedEvent>(OnLocalPlayerDetached);
+        SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnLocalPlayerAttached);
+        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeNetworkEvent<RMCAckStructureConstructionMessage>(HandleAckStructure);
         SubscribeNetworkEvent<RMCConstructionGhostBuildFailedMessage>(HandleBuildFailed);
     }
@@ -91,11 +93,12 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             _isFlashing = false;
 
         var userEntity = _playerManager.LocalEntity;
-        foreach (var (ghostId, state) in _buildingGhosts.ToList())
+        foreach (var (ghostKey, state) in _buildingGhosts.ToList())
         {
-            if (!_ghosts.TryGetValue(ghostId, out var ghost) || !EntityManager.EntityExists(ghost))
+            if (!_ghosts.TryGetValue(ghostKey, out var ghost) || !EntityManager.EntityExists(ghost))
             {
-                _buildingGhosts.Remove(ghostId);
+                _ghosts.Remove(ghostKey);
+                _buildingGhosts.Remove(ghostKey);
                 continue;
             }
 
@@ -103,16 +106,14 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             {
                 if (!userUid.IsValid() || userUid != state.User)
                 {
-                    Logger.Info($"RMCConstructionGhostSystem: Clearing ghost {ghostId} due to user mismatch. Expected {state.User}, got {userUid}.");
-                    ClearGhost(ghostId);
+                    HandleLocalBuildCancelled(ghostKey, state);
                     continue;
                 }
 
                 var currentPos = _transformSystem.GetWorldPosition(userUid);
                 if ((currentPos - state.UserStartWorldPosition).LengthSquared() > BuildCancelDistance * BuildCancelDistance)
                 {
-                    Logger.Info($"RMCConstructionGhostSystem: Clearing ghost {ghostId} due to movement. Start={state.UserStartWorldPosition} Current={currentPos}.");
-                    ClearGhost(ghostId);
+                    HandleLocalBuildCancelled(ghostKey, state);
                     continue;
                 }
             }
@@ -125,8 +126,29 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             var progress = Math.Clamp(elapsedSeconds / durationSeconds, 0f, 1f);
             sprite.Color = StaticGhostColor.WithAlpha(StaticGhostColor.A * progress);
 
+            ApplyGhostFlash(ghostKey, sprite);
+
             if (progress >= 1f)
-                _buildingGhosts.Remove(ghostId);
+                ClearGhost(ghostKey);
+        }
+
+        UpdateGhostFlashes(currentTime);
+
+        var playerForMap = _playerManager.LocalEntity;
+        if (playerForMap is { } playerUid)
+        {
+            var mapId = EntityManager.GetComponent<TransformComponent>(playerUid).MapID;
+            if (_lastPlayerMapId != MapId.Nullspace && mapId != _lastPlayerMapId)
+            {
+                StopPlacement();
+                ClearAllGhosts();
+            }
+
+            _lastPlayerMapId = mapId;
+        }
+        else
+        {
+            _lastPlayerMapId = MapId.Nullspace;
         }
 
         var player = _playerManager.LocalEntity;
@@ -184,6 +206,32 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         }
     }
 
+    private void OnLocalPlayerDetached(LocalPlayerDetachedEvent args)
+    {
+        StopPlacement();
+        ClearAllGhosts();
+        _lastPlayerMapId = MapId.Nullspace;
+    }
+
+    private void OnLocalPlayerAttached(LocalPlayerAttachedEvent args)
+    {
+        if (_playerManager.LocalEntity is not { } player)
+        {
+            _lastPlayerMapId = MapId.Nullspace;
+            return;
+        }
+
+        var xform = EntityManager.GetComponent<TransformComponent>(player);
+        _lastPlayerMapId = xform.MapID;
+    }
+
+    private void OnRoundRestartCleanup(RoundRestartCleanupEvent args)
+    {
+        StopPlacement();
+        ClearAllGhosts();
+        _lastPlayerMapId = MapId.Nullspace;
+    }
+
     public override void Shutdown()
     {
         base.Shutdown();
@@ -203,7 +251,8 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             EntityManager.RemoveComponent<ClickableComponent>(ghost);
 
         ConfigureGhostSprite(ghost, _currentPrototype, true);
-        SetGhostDirection(ghost, _currentDirection);
+        var direction = NormalizeDirection(_currentPrototype, _currentDirection);
+        SetGhostDirection(ghost, direction);
 
         _currentGhost = ghost;
         _lastPosition = EntityCoordinates.Invalid;
@@ -228,10 +277,17 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         if (EntityManager.TryGetComponent<SpriteComponent>(_currentGhost.Value, out var sprite))
         {
+            var overlapsGhost = IsOverlappingPlacedGhost(coords);
+            sprite.Scale = overlapsGhost ? CursorGhostOverlapScale : Vector2.One;
+
             Color color;
             if (_isFlashing)
             {
                 color = FlashColor;
+            }
+            else if (overlapsGhost)
+            {
+                color = CursorGhostOverlapColor;
             }
             else
             {
@@ -282,12 +338,30 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         try
         {
-            return CheckConstructionConditionsForGhost(_currentPrototype, coords, _currentDirection, player, _currentConstructionItem.Value);
+            var direction = NormalizeDirection(_currentPrototype, _currentDirection);
+            return TryValidateConstruction(_currentPrototype, _currentPrototype.Amount, coords, direction, player, _currentConstructionItem, requireSameTile: false, allowMissingMaterials: true, out _);
         }
         catch
         {
             return false;
         }
+    }
+
+    private bool IsOverlappingPlacedGhost(EntityCoordinates coords)
+    {
+        var targetTile = coords.ToVector2i(EntityManager, _mapManager, _transformSystem);
+        foreach (var ghost in _ghosts.Values)
+        {
+            if (!EntityManager.EntityExists(ghost))
+                continue;
+
+            var ghostCoords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
+            var ghostTile = ghostCoords.ToVector2i(EntityManager, _mapManager, _transformSystem);
+            if (ghostTile == targetTile)
+                return true;
+        }
+
+        return false;
     }
 
     private void ClearCurrentGhost()
@@ -327,16 +401,36 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         _flashEndTime = _timing.CurTime + FlashDuration;
     }
 
+    private void StartGhostFlash(RMCConstructionGhostKey ghostKey)
+    {
+        _ghostFlashes[ghostKey] = _timing.CurTime + FlashDuration;
+
+        if (TryGetGhostEntity(ghostKey, out var ghost) &&
+            EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+        {
+            sprite.Color = FlashColor.WithAlpha(sprite.Color.A);
+        }
+    }
+
     private void HandleAckStructure(RMCAckStructureConstructionMessage msg)
     {
-        Logger.Info($"RMCConstructionGhostSystem: Build ack received for ghost {msg.GhostId}.");
-        ClearGhost(msg.GhostId);
+        ClearGhost(msg.GhostKey);
     }
 
     private void HandleBuildFailed(RMCConstructionGhostBuildFailedMessage msg)
     {
-        Logger.Info($"RMCConstructionGhostSystem: Build failed for ghost {msg.GhostId}.");
-        ClearGhost(msg.GhostId);
+        if (msg.Reason == RMCConstructionFailureReason.Cancelled)
+        {
+            HandleServerBuildCancelled(msg.GhostKey);
+        }
+        else
+        {
+            EnsureGhostForFailure(msg.GhostKey);
+            StopBuildingGhost(msg.GhostKey);
+            StartGhostFlash(msg.GhostKey);
+        }
+
+        ShowFailurePopup(msg.Reason, msg.GhostKey, includeMissingMaterials: false);
 
         if (_currentGhost != null)
             StartFlash();
@@ -350,6 +444,9 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         var currentDirection = GetGhostDirection(ghost);
         var newDirection = currentDirection.GetClockwise90Degrees();
         SetGhostDirection(ghost, newDirection);
+
+        var coords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
+        TryUpdateGhostKey(ghost, ghostComp, coords, newDirection);
     }
 
     private bool HandleRightClick(in PointerInputCmdHandler.PointerInputCmdArgs args)
@@ -411,19 +508,17 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             return;
 
         var playerCoords = EntityManager.GetComponent<TransformComponent>(player.Value).Coordinates;
+        var direction = NormalizeDirection(_currentPrototype, _currentDirection);
+        var ghostKey = MakeGhostKey(_currentPrototype, playerCoords, direction);
 
-        if (!CheckConstructionConditionsForGhost(_currentPrototype, playerCoords, _currentDirection, player.Value, _currentConstructionItem.Value))
+        if (!TryValidateConstruction(_currentPrototype, _currentPrototype.Amount, playerCoords, direction, player.Value, _currentConstructionItem, out var reason))
         {
             StartFlash();
+            ShowFailurePopup(reason, ghostKey, includeMissingMaterials: true);
             return;
         }
 
-        var msg = new RMCConstructionGhostBuildMessage(
-            _currentPrototype.ID,
-            _currentPrototype.Amount,
-            GetNetCoordinates(playerCoords),
-            _currentDirection,
-            Random.Shared.Next());
+        var msg = new RMCConstructionGhostBuildMessage(_currentPrototype.Amount, ghostKey);
 
         RaiseNetworkEvent(msg);
         StopPlacement();
@@ -435,13 +530,16 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (player == null || _currentPrototype == null || _currentConstructionItem == null)
             return;
 
-        if (!CheckConstructionConditionsForGhost(_currentPrototype, coords, _currentDirection, player.Value, _currentConstructionItem.Value))
+        var direction = NormalizeDirection(_currentPrototype, _currentDirection);
+        var ghostKey = MakeGhostKey(_currentPrototype, coords, direction);
+        if (!TryValidateConstruction(_currentPrototype, _currentPrototype.Amount, coords, direction, player.Value, _currentConstructionItem, requireSameTile: false, allowMissingMaterials: true, out var reason))
         {
             StartFlash();
+            ShowFailurePopup(reason, ghostKey, includeMissingMaterials: true);
             return;
         }
 
-        if (!TrySpawnGhost(_currentPrototype, coords, _currentDirection, _currentConstructionItem.Value, out _))
+        if (!TrySpawnGhost(_currentPrototype, coords, direction, _currentConstructionItem.Value, out _))
             StartFlash();
 
         ClearCurrentGhost();
@@ -467,45 +565,40 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
 
         var playerTransform = EntityManager.GetComponent<TransformComponent>(player.Value);
         var coords = playerTransform.Coordinates;
-        Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer start for {prototype.ID} amount={amount} user={player.Value} coords={coords}.");
         var gridUid = _transformSystem.GetGrid(coords);
         if (gridUid != null && EntityManager.TryGetComponent<MapGridComponent>(gridUid.Value, out var grid))
         {
             var tileCoords = _mapSystem.CoordinatesToTile(gridUid.Value, grid, coords);
             coords = _mapSystem.GridTileToLocal(gridUid.Value, grid, tileCoords);
         }
-        var direction = playerTransform.LocalRotation.GetCardinalDir();
+        var direction = NormalizeDirection(prototype, playerTransform.LocalRotation.GetCardinalDir());
 
-        if (!CheckConstructionConditionsForGhost(prototype, coords, direction, player.Value, constructionItem))
+        if (!TryValidateConstruction(prototype, amount, coords, direction, player.Value, constructionItem, out var reason))
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer conditions failed for {prototype.ID} at {coords} dir={direction}.");
             StartFlash();
+            ShowFailurePopup(reason, MakeGhostKey(prototype, coords, direction), includeMissingMaterials: true);
             return false;
         }
 
         if (!TrySpawnGhost(prototype, coords, direction, constructionItem, out var ghost))
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer failed to spawn ghost for {prototype.ID} at {coords} dir={direction}.");
             StartFlash();
             return false;
         }
 
         if (!TryComp<RMCConstructionGhostComponent>(ghost, out var ghostComp))
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer missing ghost component for {prototype.ID} at {coords}.");
             return false;
         }
 
-        var msg = new RMCConstructionGhostBuildMessage(
-            prototype.ID,
-            amount,
-            GetNetCoordinates(coords),
-            direction,
-            ghostComp.GhostId);
+        var ghostKey = ghostComp.GhostKey ?? MakeGhostKey(prototype, coords, direction);
+        ghostComp.GhostKey = ghostKey;
+        _ghosts[ghostKey] = ghost.Value;
+
+        var msg = new RMCConstructionGhostBuildMessage(amount, ghostKey);
 
         RaiseNetworkEvent(msg);
-        Logger.Info($"RMCConstructionGhostSystem: TryBuildAtPlayer sent build msg for {prototype.ID} ghostId={ghostComp.GhostId} at {coords} dir={direction}.");
-        StartBuildingGhost(ghostComp.GhostId, player.Value, _transformSystem.GetWorldPosition(player.Value), GetBuildDuration(prototype));
+        StartBuildingGhost(ghostKey, player.Value, _transformSystem.GetWorldPosition(player.Value), GetBuildDuration(prototype), clearOnCancel: true);
         return true;
     }
 
@@ -525,16 +618,19 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (_playerManager.LocalEntity is not { } user || !user.IsValid())
             return false;
 
-        ClearGhostAtLocation(loc, dir);
+        var normalizedDirection = NormalizeDirection(prototype, dir);
+        if (prototype.NoRotate)
+            ClearGhostAtLocation(loc);
+        else
+            ClearGhostAtLocation(loc, normalizedDirection);
 
-        var ghostId = Random.Shared.Next();
         ghost = EntityManager.SpawnEntity("rmcconstructionghost", loc);
         var comp = EntityManager.GetComponent<RMCConstructionGhostComponent>(ghost.Value);
         comp.Prototype = prototype;
-        comp.GhostId = ghostId;
+        comp.GhostKey = MakeGhostKey(prototype, loc, normalizedDirection);
 
-        SetGhostDirection(ghost.Value, dir);
-        _ghosts.Add(comp.GhostId, ghost.Value);
+        SetGhostDirection(ghost.Value, normalizedDirection);
+        _ghosts[comp.GhostKey.Value] = ghost.Value;
         ConfigureGhostSprite(ghost.Value, prototype, false);
 
         return true;
@@ -566,55 +662,88 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
             sprite.Color = color;
             sprite.DrawDepth = depth;
 
-            foreach (var (index, _) in sprite.AllLayers.Select((layer, i) => (i, layer)))
+            foreach (var (index, layer) in sprite.AllLayers.Select((layer, i) => (i, layer)))
             {
                 sprite.LayerSetShader(index, "unshaded");
-                sprite.LayerSetVisible(index, true);
+                // Preserve layer visibility from the prototype to avoid showing folded/alt layers.
+                if (!layer.Visible)
+                    continue;
             }
         }
     }
 
-    private bool CheckConstructionConditionsForGhost(RMCConstructionPrototype prototype, EntityCoordinates loc, Direction dir, EntityUid user)
+    private bool TryValidateConstruction(RMCConstructionPrototype prototype, int amount, EntityCoordinates loc, Direction dir, EntityUid user, EntityUid? constructionItem, bool requireSameTile, bool allowMissingMaterials, out RMCConstructionFailureReason reason)
     {
-        var attempt = new RMCConstructionAttemptEvent(loc, prototype.Name);
-        RaiseLocalEvent(ref attempt);
+        reason = RMCConstructionFailureReason.Unknown;
 
-        if (attempt.Cancelled)
-            return false;
-
-        if (HasComp<DisableConstructionComponent>(user))
-            return false;
-
-        if (prototype.Type == RMCConstructionType.Structure)
+        if (constructionItem is not { } item || !item.IsValid())
         {
-            if (_transformSystem.GetGrid(loc) is { } gridId && HasComp<DropshipComponent>(gridId))
-                return false;
-
-            if (prototype.RestrictedTags != null && _rmcMap.TileHasAnyTag(loc, prototype.RestrictedTags))
-                return false;
+            reason = RMCConstructionFailureReason.MissingMaterials;
+            return allowMissingMaterials;
         }
 
-        return true;
-    }
-
-    private bool CheckConstructionConditionsForGhost(RMCConstructionPrototype prototype, EntityCoordinates loc, Direction dir, EntityUid user, EntityUid constructionItem)
-    {
-        if (!CheckConstructionConditionsForGhost(prototype, loc, dir, user))
-            return false;
-
-        if (TryComp<StackComponent>(constructionItem, out var stack))
+        if (!_constructionSystem.IsValidConstructionItemForPrototype(item, prototype, ignoreStack: true))
         {
-            if (prototype.MaterialCost.HasValue && stack.Count < prototype.MaterialCost.Value)
-                return false;
+            reason = RMCConstructionFailureReason.InvalidConstructionItem;
+            return false;
         }
 
-        return true;
+        if (_constructionSystem.TryValidateGhostBuild(user, item, prototype, amount, loc, dir, requireSameTile, out reason))
+            return true;
+
+        return allowMissingMaterials && reason == RMCConstructionFailureReason.MissingMaterials;
     }
 
-    private bool CheckConstructionConditions(RMCConstructionPrototype prototype, EntityCoordinates loc, Direction dir, EntityUid user, EntityUid constructionItem)
+    private bool TryValidateConstruction(RMCConstructionPrototype prototype, int amount, EntityCoordinates loc, Direction dir, EntityUid user, EntityUid? constructionItem, out RMCConstructionFailureReason reason)
     {
-        return _examineSystem.InRangeUnOccluded(user, loc, 1.5f) &&
-               CheckConstructionConditionsForGhost(prototype, loc, dir, user, constructionItem);
+        return TryValidateConstruction(prototype, amount, loc, dir, user, constructionItem, requireSameTile: true, allowMissingMaterials: false, out reason);
+    }
+
+    private RMCConstructionGhostKey MakeGhostKey(RMCConstructionPrototype prototype, EntityCoordinates coordinates, Direction direction)
+    {
+        var normalizedDirection = NormalizeDirection(prototype, direction);
+        return new RMCConstructionGhostKey(prototype.ID, GetNetCoordinates(coordinates), normalizedDirection);
+    }
+
+    private static Direction NormalizeDirection(RMCConstructionPrototype prototype, Direction direction)
+    {
+        return prototype.NoRotate ? Direction.North : direction;
+    }
+
+    private bool TryUpdateGhostKey(EntityUid ghost, RMCConstructionGhostComponent ghostComp, EntityCoordinates coordinates, Direction direction)
+    {
+        if (ghostComp.Prototype == null)
+            return false;
+
+        var newKey = MakeGhostKey(ghostComp.Prototype, coordinates, direction);
+        if (ghostComp.GhostKey.HasValue && ghostComp.GhostKey.Value.Equals(newKey))
+            return true;
+
+        if (ghostComp.GhostKey.HasValue)
+        {
+            var oldKey = ghostComp.GhostKey.Value;
+            if (_ghosts.Remove(oldKey))
+                _ghosts[newKey] = ghost;
+
+            if (_buildingGhosts.TryGetValue(oldKey, out var state))
+            {
+                _buildingGhosts.Remove(oldKey);
+                _buildingGhosts[newKey] = state;
+            }
+
+            if (_ghostFlashes.TryGetValue(oldKey, out var flashEnd))
+            {
+                _ghostFlashes.Remove(oldKey);
+                _ghostFlashes[newKey] = flashEnd;
+            }
+        }
+        else
+        {
+            _ghosts[newKey] = ghost;
+        }
+
+        ghostComp.GhostKey = newKey;
+        return true;
     }
 
     private void ClearGhostAtLocation(EntityCoordinates loc, Direction? direction = null)
@@ -636,63 +765,225 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         .Select(kvp => kvp.Key)
         .ToList();
 
-        foreach (var ghostId in ghostsToRemove)
-            ClearGhost(ghostId);
+        foreach (var ghostKey in ghostsToRemove)
+            ClearGhost(ghostKey);
     }
 
     public void TryStartConstruction(EntityUid ghostId, RMCConstructionGhostComponent? ghostComp = null)
     {
         if (!Resolve(ghostId, ref ghostComp) || ghostComp.Prototype == null)
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for entity {ghostId} (missing ghost component or prototype).");
             return;
         }
 
         var user = _playerManager.LocalEntity;
         if (user == null)
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for ghost {ghostComp.GhostId} (no local user).");
             return;
         }
 
         var transform = EntityManager.GetComponent<TransformComponent>(ghostId);
-        var direction = GetGhostDirection(ghostId);
+        var direction = NormalizeDirection(ghostComp.Prototype, GetGhostDirection(ghostId));
+        if (ghostComp.Prototype.NoRotate)
+            SetGhostDirection(ghostId, direction);
 
-        if (!CheckConstructionConditionsForGhost(ghostComp.Prototype, transform.Coordinates, direction, user.Value))
+        var constructionItem = _constructionSystem.FindValidConstructionItem(user.Value, ghostComp.Prototype.ID);
+        if (constructionItem == null)
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction conditions failed for ghost {ghostComp.GhostId} at {transform.Coordinates} dir={direction}.");
+            var missingKey = ghostComp.GhostKey ?? MakeGhostKey(ghostComp.Prototype, transform.Coordinates, direction);
+            StartGhostFlash(missingKey);
+            ShowFailurePopup(RMCConstructionFailureReason.MissingMaterials, missingKey, includeMissingMaterials: true);
             return;
         }
 
-        var userCoords = EntityManager.GetComponent<TransformComponent>(user.Value).Coordinates;
-        var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transformSystem);
-        var ghostTile = transform.Coordinates.ToVector2i(EntityManager, _mapManager, _transformSystem);
-        if (userTile != ghostTile)
+        if (!TryValidateConstruction(ghostComp.Prototype, ghostComp.Prototype.Amount, transform.Coordinates, direction, user.Value, constructionItem.Value, out var reason))
         {
-            Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction failed for ghost {ghostComp.GhostId} due to tile mismatch. UserTile={userTile} GhostTile={ghostTile}.");
+            var failKey = ghostComp.GhostKey ?? MakeGhostKey(ghostComp.Prototype, transform.Coordinates, direction);
+            StartGhostFlash(failKey);
+            ShowFailurePopup(reason, failKey, includeMissingMaterials: true);
             return;
         }
 
-        var msg = new RMCConstructionGhostBuildMessage(
-            ghostComp.Prototype.ID,
-            ghostComp.Prototype.Amount,
-            GetNetCoordinates(transform.Coordinates),
-            direction,
-            ghostComp.GhostId);
+        var ghostKey = ghostComp.GhostKey ?? MakeGhostKey(ghostComp.Prototype, transform.Coordinates, direction);
+        ghostComp.GhostKey = ghostKey;
+        _ghosts[ghostKey] = ghostId;
+
+        var msg = new RMCConstructionGhostBuildMessage(ghostComp.Prototype.Amount, ghostKey);
 
         RaiseNetworkEvent(msg);
-        Logger.Info($"RMCConstructionGhostSystem: TryStartConstruction sent build msg for ghost {ghostComp.GhostId} at {transform.Coordinates} dir={direction}.");
-        StartBuildingGhost(ghostComp.GhostId, user.Value, _transformSystem.GetWorldPosition(user.Value), GetBuildDuration(ghostComp.Prototype));
+        StartBuildingGhost(ghostKey, user.Value, _transformSystem.GetWorldPosition(user.Value), GetBuildDuration(ghostComp.Prototype), clearOnCancel: false);
     }
 
-    public void ClearGhost(int ghostId)
+    public void ClearGhost(RMCConstructionGhostKey ghostKey)
     {
-        if (!_ghosts.TryGetValue(ghostId, out var ghost))
+        if (TryGetGhostEntity(ghostKey, out var ghost))
+            EntityManager.QueueDeleteEntity(ghost);
+
+        _ghosts.Remove(ghostKey);
+        _buildingGhosts.Remove(ghostKey);
+        _ghostFlashes.Remove(ghostKey);
+    }
+
+    private void StopBuildingGhost(RMCConstructionGhostKey ghostKey)
+    {
+        _buildingGhosts.Remove(ghostKey);
+        _ghostFlashes.Remove(ghostKey);
+
+        if (TryGetGhostEntity(ghostKey, out var ghost) &&
+            EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+        {
+            sprite.Color = StaticGhostColor;
+        }
+    }
+
+    private void UpdateGhostFlashes(TimeSpan currentTime)
+    {
+        if (_ghostFlashes.Count == 0)
             return;
 
-        EntityManager.QueueDeleteEntity(ghost);
-        _ghosts.Remove(ghostId);
-        _buildingGhosts.Remove(ghostId);
+        foreach (var (ghostKey, endTime) in _ghostFlashes.ToList())
+        {
+            if (currentTime < endTime)
+            {
+                if (TryGetGhostEntity(ghostKey, out var ghost) &&
+                    EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+                {
+                    sprite.Color = FlashColor.WithAlpha(sprite.Color.A);
+                }
+
+                continue;
+            }
+
+            _ghostFlashes.Remove(ghostKey);
+
+            if (TryGetGhostEntity(ghostKey, out var restoreGhost) &&
+                EntityManager.TryGetComponent<SpriteComponent>(restoreGhost, out var restoreSprite))
+            {
+                restoreSprite.Color = StaticGhostColor.WithAlpha(GetGhostAlpha(ghostKey, currentTime));
+            }
+        }
+    }
+
+    private void ApplyGhostFlash(RMCConstructionGhostKey ghostKey, SpriteComponent sprite)
+    {
+        if (_ghostFlashes.TryGetValue(ghostKey, out var endTime) && _timing.CurTime < endTime)
+            sprite.Color = FlashColor.WithAlpha(sprite.Color.A);
+    }
+
+    private float GetGhostAlpha(RMCConstructionGhostKey ghostKey, TimeSpan currentTime)
+    {
+        if (_buildingGhosts.TryGetValue(ghostKey, out var state))
+        {
+            var durationSeconds = Math.Max((float) state.Duration.TotalSeconds, BuildFadeMinDuration);
+            var elapsedSeconds = (float) (currentTime - state.StartTime).TotalSeconds;
+            var progress = Math.Clamp(elapsedSeconds / durationSeconds, 0f, 1f);
+            return StaticGhostColor.A * progress;
+        }
+
+        return StaticGhostColor.A;
+    }
+
+    private bool TryGetGhostEntity(RMCConstructionGhostKey ghostKey, out EntityUid ghost)
+    {
+        if (_ghosts.TryGetValue(ghostKey, out ghost) && EntityManager.EntityExists(ghost))
+            return true;
+
+        var query = EntityQueryEnumerator<RMCConstructionGhostComponent, TransformComponent>();
+        while (query.MoveNext(out var uid, out var comp, out var xform))
+        {
+            if (comp.Prototype == null)
+                continue;
+
+            var key = comp.GhostKey ?? MakeGhostKey(comp.Prototype, xform.Coordinates, GetGhostDirection(uid));
+            if (!key.Equals(ghostKey))
+                continue;
+
+            comp.GhostKey = key;
+            ghost = uid;
+            _ghosts[ghostKey] = uid;
+            return true;
+        }
+
+        _ghosts.Remove(ghostKey);
+        ghost = default;
+        return false;
+    }
+
+    private void EnsureGhostForFailure(RMCConstructionGhostKey ghostKey)
+    {
+        if (TryGetGhostEntity(ghostKey, out _))
+            return;
+
+        if (!_prototypeManager.TryIndex<RMCConstructionPrototype>(ghostKey.Prototype, out var prototype))
+            return;
+
+        var coords = GetCoordinates(ghostKey.Coordinates);
+        if (!TrySpawnGhost(prototype, coords, ghostKey.Direction, out var ghost))
+            return;
+
+        if (!TryComp<RMCConstructionGhostComponent>(ghost.Value, out var comp))
+            return;
+
+        if (comp.GhostKey.HasValue && !comp.GhostKey.Value.Equals(ghostKey))
+            _ghosts.Remove(comp.GhostKey.Value);
+
+        comp.GhostKey = ghostKey;
+        _ghosts[ghostKey] = ghost.Value;
+    }
+
+    private void ShowFailurePopup(RMCConstructionFailureReason reason, RMCConstructionGhostKey? ghostKey, bool includeMissingMaterials)
+    {
+        if (reason == RMCConstructionFailureReason.Unknown ||
+            reason == RMCConstructionFailureReason.Cancelled ||
+            (!includeMissingMaterials && reason == RMCConstructionFailureReason.MissingMaterials))
+        {
+            return;
+        }
+
+        if (_playerManager.LocalEntity is not { } user)
+            return;
+
+        var message = GetFailurePopupMessage(reason, ghostKey);
+        if (string.IsNullOrEmpty(message))
+            return;
+
+        _popup.PopupClient(message, user, user, PopupType.SmallCaution);
+    }
+
+    private string? GetFailurePopupMessage(RMCConstructionFailureReason reason, RMCConstructionGhostKey? ghostKey)
+    {
+        var prototypeName = TryGetGhostPrototypeName(ghostKey);
+
+        return reason switch
+        {
+            RMCConstructionFailureReason.MissingMaterials => "You don't have the required materials.",
+            RMCConstructionFailureReason.InvalidConstructionItem => prototypeName != null
+                ? $"You don't have the correct item to build {prototypeName}."
+                : "You don't have the correct item to build that.",
+            RMCConstructionFailureReason.SkillMissing => prototypeName != null
+                ? $"You lack the skill to build {prototypeName}."
+                : "You lack the skill to build that.",
+            RMCConstructionFailureReason.NotOnSameTile => prototypeName != null
+                ? $"You need to stand on the same tile to build {prototypeName}."
+                : "You need to stand on the same tile to build that.",
+            RMCConstructionFailureReason.InvalidLocation => prototypeName != null
+                ? $"You can't build {prototypeName} here."
+                : "You can't build there.",
+            RMCConstructionFailureReason.ConstructionDisabled => "You cannot construct right now.",
+            _ => null
+        };
+    }
+
+    private string? TryGetGhostPrototypeName(RMCConstructionGhostKey? ghostKey)
+    {
+        if (ghostKey.HasValue &&
+            _prototypeManager.TryIndex<RMCConstructionPrototype>(ghostKey.Value.Prototype, out var proto))
+            return proto.Name;
+
+        if (_currentPrototype != null)
+            return _currentPrototype.Name;
+
+        return null;
     }
 
     public void DeleteGhost(EntityUid ghost)
@@ -700,7 +991,18 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         if (!TryComp<RMCConstructionGhostComponent>(ghost, out var ghostComp))
             return;
 
-        ClearGhost(ghostComp.GhostId);
+        if (ghostComp.GhostKey is { } ghostKey)
+        {
+            ClearGhost(ghostKey);
+            return;
+        }
+
+        var coords = EntityManager.GetComponent<TransformComponent>(ghost).Coordinates;
+        var direction = GetGhostDirection(ghost);
+        if (ghostComp.Prototype == null)
+            return;
+
+        ClearGhost(MakeGhostKey(ghostComp.Prototype, coords, direction));
     }
 
     public void ClearAllGhosts()
@@ -708,16 +1010,21 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         foreach (var ghost in _ghosts.Values)
             EntityManager.QueueDeleteEntity(ghost);
 
+        var query = EntityQueryEnumerator<RMCConstructionGhostComponent>();
+        while (query.MoveNext(out var uid, out _))
+            EntityManager.QueueDeleteEntity(uid);
+
         _ghosts.Clear();
         _buildingGhosts.Clear();
+        _ghostFlashes.Clear();
         ClearCurrentGhost();
     }
 
-    private void StartBuildingGhost(int ghostId, EntityUid user, Vector2 userStartWorldPosition, TimeSpan duration)
+    private void StartBuildingGhost(RMCConstructionGhostKey ghostKey, EntityUid user, Vector2 userStartWorldPosition, TimeSpan duration, bool clearOnCancel)
     {
-        _buildingGhosts[ghostId] = new BuildGhostState(_timing.CurTime, duration, user, userStartWorldPosition);
+        _buildingGhosts[ghostKey] = new BuildGhostState(_timing.CurTime, duration, user, userStartWorldPosition, clearOnCancel);
 
-        if (_ghosts.TryGetValue(ghostId, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
+        if (_ghosts.TryGetValue(ghostKey, out var ghost) && EntityManager.TryGetComponent<SpriteComponent>(ghost, out var sprite))
             sprite.Color = StaticGhostColor.WithAlpha(0f);
     }
 
@@ -735,13 +1042,39 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         public readonly TimeSpan Duration;
         public readonly EntityUid User;
         public readonly Vector2 UserStartWorldPosition;
+        public readonly bool ClearOnCancel;
 
-        public BuildGhostState(TimeSpan startTime, TimeSpan duration, EntityUid user, Vector2 userStartWorldPosition)
+        public BuildGhostState(TimeSpan startTime, TimeSpan duration, EntityUid user, Vector2 userStartWorldPosition, bool clearOnCancel)
         {
             StartTime = startTime;
             Duration = duration;
             User = user;
             UserStartWorldPosition = userStartWorldPosition;
+            ClearOnCancel = clearOnCancel;
         }
+    }
+
+    private void HandleLocalBuildCancelled(RMCConstructionGhostKey ghostKey, BuildGhostState state)
+    {
+        if (state.ClearOnCancel)
+        {
+            ClearGhost(ghostKey);
+            return;
+        }
+
+        StopBuildingGhost(ghostKey);
+        StartGhostFlash(ghostKey);
+    }
+
+    private void HandleServerBuildCancelled(RMCConstructionGhostKey ghostKey)
+    {
+        if (_buildingGhosts.TryGetValue(ghostKey, out var state) && state.ClearOnCancel)
+        {
+            ClearGhost(ghostKey);
+            return;
+        }
+
+        StopBuildingGhost(ghostKey);
+        StartGhostFlash(ghostKey);
     }
 }

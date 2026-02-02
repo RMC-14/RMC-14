@@ -3,52 +3,47 @@
     xmlns:cc="clr-namespace:Content.Client._RMC14.Construction"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Construction"
-    MinSize="300 300"
-    SetSize="450 500">
-    <PanelContainer HorizontalExpand="True" VerticalExpand="True" Margin="8">
+    MinSize="280 280"
+    SetSize="380 460">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
         <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat BackgroundColor="#0A1520"
-                                   BorderColor="#4AA3E8" BorderThickness="1" />
+            <graphics:StyleBoxFlat BackgroundColor="#0B1522"
+                                   BorderColor="#3B6A8B" BorderThickness="1" />
         </PanelContainer.PanelOverride>
-        <BoxContainer Orientation="Vertical" Margin="10">
-            <PanelContainer Margin="0 0 0 8">
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6">
+            <PanelContainer>
                 <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#050A0F"
-                                           BorderColor="#4AA3E8" BorderThickness="1" />
+                    <graphics:StyleBoxFlat BackgroundColor="#0A1220"
+                                           BorderColor="#355E7C" BorderThickness="1" />
                 </PanelContainer.PanelOverride>
-                <BoxContainer Orientation="Horizontal" Margin="6 4">
-                    <Label Text="SEARCH:" FontColorOverride="#88C7FA" VerticalAlignment="Center" Margin="0 0 6 0"/>
+                <BoxContainer Orientation="Horizontal" Margin="6 4" SeparationOverride="6">
                     <LineEdit Name="SearchBar" Access="Public"
                               HorizontalExpand="True"
-                              PlaceHolder="Search construction..."/>
+                              PlaceHolder="Search construction..."
+                              MinHeight="22"/>
                     <Button Name="CloseWindowButton" Access="Public"
                             Text="X"
                             SetWidth="24"
-                            SetHeight="24"
-                            Margin="6 0 0 0"
+                            SetHeight="22"
                             StyleClasses="OpenBoth" />
                 </BoxContainer>
             </PanelContainer>
 
-            <RichTextLabel Name="MaterialLabel" Access="Public" Margin="0 0 0 8"/>
-
-            <PanelContainer Margin="0 0 0 8">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#1A3D5C"
-                                           BorderColor="#88C7FA" BorderThickness="1" />
-                </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                <RichTextLabel Name="MaterialLabel" Access="Public" HorizontalExpand="True" VerticalAlignment="Center"/>
                 <Button Name="ClearGhostsButton" Access="Public"
-                        Text="Clear All Ghosts"
-                        HorizontalExpand="True"
+                        Text="Clear Ghosts"
+                        SetWidth="110"
+                        SetHeight="22"
                         StyleClasses="OpenBoth" />
-            </PanelContainer>
+            </BoxContainer>
 
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">
                 <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat BackgroundColor="#050A0F"
-                                           BorderColor="#4AA3E8" BorderThickness="1" />
+                    <graphics:StyleBoxFlat BackgroundColor="#0A1220"
+                                           BorderColor="#355E7C" BorderThickness="1" />
                 </PanelContainer.PanelOverride>
-                <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" Margin="6">
+                <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True" Margin="6 5">
                     <BoxContainer Orientation="Vertical" Name="ConstructionContainer" Access="Public" />
                 </ScrollContainer>
             </PanelContainer>

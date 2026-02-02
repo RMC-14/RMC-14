@@ -110,6 +110,7 @@
 - type: rmcConstruction
   id: RMCBedBuild
   name: bed
+  constructionType: Structure
   prototype: CMBed
   noRotate: true
   doAfterTime: 0.5
@@ -120,6 +121,7 @@
 - type: rmcConstruction
   id: RMCChairBuild
   name: chair
+  constructionType: Structure
   prototype: CMChair
   materialCost: 1
   restrictedTags: [RMCSeat]
@@ -181,6 +183,7 @@
 - type: rmcConstruction
   id: RMCSquadChairList
   name: squad chairs (2 metal sheets) #material cost written manually since the lists won't show costs
+  constructionType: Structure
   prototype: CMChairComfy
   listed:
   - RMCComfyChairAlphaBuild
@@ -191,6 +194,7 @@
 - type: rmcConstruction
   id: RMCComfyChairAlphaBuild
   name: alpha squad chair
+  constructionType: Structure
   prototype: CMChairComfyAlpha
   materialCost: 2
   restrictedTags: [RMCSeat]
@@ -198,6 +202,7 @@
 - type: rmcConstruction
   id: RMCComfyChairBravoBuild
   name: bravo squad chair
+  constructionType: Structure
   prototype: CMChairComfyBravo
   materialCost: 2
   restrictedTags: [RMCSeat]
@@ -205,6 +210,7 @@
 - type: rmcConstruction
   id: RMCComfyChairCharlieBuild
   name: charlie squad chair
+  constructionType: Structure
   prototype: CMChairComfyCharlie
   materialCost: 2
   restrictedTags: [RMCSeat]
@@ -212,6 +218,7 @@
 - type: rmcConstruction
   id: RMCComfyChairDeltaBuild
   name: delta squad chair
+  constructionType: Structure
   prototype: CMChairComfyDelta
   materialCost: 2
   restrictedTags: [RMCSeat]
@@ -220,6 +227,7 @@
 - type: rmcConstruction
   id: RMCOfficeChairList
   name: office chairs (5 metal sheets) #material cost written manually since the lists won't show costs
+  constructionType: Structure
   prototype: CMChairOfficeDark
   listed:
   - RMCOfficeChairDarkBuild
@@ -228,6 +236,7 @@
 - type: rmcConstruction
   id: RMCOfficeChairDarkBuild
   name: dark office chair
+  constructionType: Structure
   prototype: CMChairOfficeDark
   materialCost: 5
   restrictedTags: [RMCSeat]
@@ -235,6 +244,7 @@
 - type: rmcConstruction
   id: RMCOfficeChairWhiteBuild
   name: white office chair
+  constructionType: Structure
   prototype: CMChairOfficeWhite
   materialCost: 5
   restrictedTags: [RMCSeat]

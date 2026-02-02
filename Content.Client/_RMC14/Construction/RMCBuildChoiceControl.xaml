@@ -2,28 +2,34 @@
     xmlns="https://spacestation14.io"
     xmlns:ui="clr-namespace:Content.Client._RMC14.Construction"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
-    <BoxContainer Orientation="Horizontal">
-        <PanelContainer Name="ButtonPanel" Access="Public" Margin="0 0 0 6" HorizontalExpand="True">
+    <GridContainer Columns="2" HSeparationOverride="2">
+        <PanelContainer Name="ButtonPanel" Access="Public" Margin="0 0 0 4" HorizontalExpand="True">
             <PanelContainer.PanelOverride>
-                <graphics:StyleBoxFlat BackgroundColor="#1A3D5C"
-                                       BorderColor="#88C7FA" BorderThickness="1" />
+                <graphics:StyleBoxFlat BackgroundColor="#13293D"
+                                       BorderColor="#3B6A8B" BorderThickness="1" />
             </PanelContainer.PanelOverride>
             <Button Name="Button" Access="Public"
                     HorizontalExpand="True" VerticalExpand="False"
+                    MinHeight="24"
                     StyleClasses="OpenBoth"
                     EnableAllKeybinds="True">
-                <BoxContainer Orientation="Horizontal" Margin="8 6" SeparationOverride="6">
+                <BoxContainer Orientation="Horizontal" Margin="4 2" SeparationOverride="4">
                     <EntityPrototypeView Name="PrototypeView" Access="Public"
-                                         MinSize="32 32"
+                                         MinSize="16 16"
                                          HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          Stretch="Fill" />
-                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center"/>
+                    <RichTextLabel Name="NameLabel" Access="Public" VerticalAlignment="Center" LineHeightScale="0.9"/>
                 </BoxContainer>
             </Button>
         </PanelContainer>
-    </BoxContainer>
-    <BoxContainer Name="StackAmountContainer" Access="Public" Orientation="Horizontal" Margin="0 0 5 0">
-        <Control HorizontalExpand="True" MinWidth="2"/>
-    </BoxContainer>
+        <PanelContainer Name="StackPanel" Access="Public" Visible="False" HorizontalExpand="False" Margin="0 0 0 4">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#0E1F2F"
+                                       BorderColor="#3B6A8B" BorderThickness="1" />
+            </PanelContainer.PanelOverride>
+            <BoxContainer Name="StackAmountContainer" Access="Public" Orientation="Horizontal" Margin="2 2" SeparationOverride="0"
+                          VerticalAlignment="Center" />
+        </PanelContainer>
+    </GridContainer>
 </ui:RMCBuildChoiceControl>

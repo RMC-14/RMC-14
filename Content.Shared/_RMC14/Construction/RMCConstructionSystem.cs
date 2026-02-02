@@ -113,42 +113,44 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (user == null)
             return;
 
-        var buildCoords = GetCoordinates(msg.Coordinates);
+        var buildCoords = GetCoordinates(msg.GhostKey.Coordinates);
+        var prototypeId = msg.GhostKey.Prototype;
+        var direction = msg.GhostKey.Direction;
 
-        var constructionItem = FindValidConstructionItem(user.Value, msg.Prototype);
+        var constructionItem = FindValidConstructionItem(user.Value, prototypeId);
         if (constructionItem == null)
         {
             _popup.PopupEntity("You don't have the required materials.", user.Value, user.Value, PopupType.SmallCaution);
-            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostKey, RMCConstructionFailureReason.MissingMaterials);
             RaiseNetworkEvent(failMsg, args.SenderSession);
             return;
         }
 
         if (!EntityManager.TryGetComponent<RMCConstructionItemComponent>(constructionItem.Value, out var constructionComp))
         {
-            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostKey, RMCConstructionFailureReason.InvalidConstructionItem);
             RaiseNetworkEvent(failMsg, args.SenderSession);
             return;
         }
 
-        if (!ValidateGhostBuild(user.Value, constructionItem.Value, msg.Prototype, buildCoords, msg.Direction))
+        if (!TryValidateGhostBuild(user.Value, constructionItem.Value, prototypeId, msg.Amount, buildCoords, direction, requireSameTile: true, out var reason))
         {
-            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostKey, reason);
             RaiseNetworkEvent(failMsg, args.SenderSession);
             return;
         }
 
         var entity = (constructionItem.Value, constructionComp);
-        var success = BuildAtLocation(entity, user.Value, msg.Prototype, msg.Amount, buildCoords, msg.Direction, msg.GhostId);
+        var success = BuildAtLocation(entity, user.Value, prototypeId, msg.Amount, buildCoords, direction, msg.GhostKey);
 
         if (!success)
         {
-            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostId);
+            var failMsg = new RMCConstructionGhostBuildFailedMessage(msg.GhostKey);
             RaiseNetworkEvent(failMsg, args.SenderSession);
         }
     }
 
-    private EntityUid? FindValidConstructionItem(EntityUid user, ProtoId<RMCConstructionPrototype> protoId)
+    public EntityUid? FindValidConstructionItem(EntityUid user, ProtoId<RMCConstructionPrototype> protoId)
     {
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoId, out var proto))
             return null;
@@ -177,7 +179,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         return null;
     }
 
-    private bool IsValidConstructionItemForPrototype(EntityUid item, RMCConstructionPrototype proto)
+    public bool IsValidConstructionItemForPrototype(EntityUid item, RMCConstructionPrototype proto, bool ignoreStack = false)
     {
         if (!TryComp<RMCConstructionItemComponent>(item, out var constructionComp))
             return false;
@@ -204,7 +206,7 @@ public sealed class RMCConstructionSystem : EntitySystem
                 return false;
         }
 
-        if (proto.MaterialCost != null && TryComp<StackComponent>(item, out var stack))
+        if (!ignoreStack && proto.MaterialCost != null && TryComp<StackComponent>(item, out var stack))
         {
             return stack.Count >= proto.MaterialCost;
         }
@@ -212,47 +214,83 @@ public sealed class RMCConstructionSystem : EntitySystem
         return true;
     }
 
-    private bool ValidateGhostBuild(EntityUid user, EntityUid constructionItem, ProtoId<RMCConstructionPrototype> protoId, EntityCoordinates coordinates, Direction direction)
+    public bool TryValidateGhostBuild(EntityUid user, EntityUid constructionItem, ProtoId<RMCConstructionPrototype> protoId, int amount, EntityCoordinates coordinates, Direction direction, bool requireSameTile, out RMCConstructionFailureReason reason)
     {
         if (!_prototype.TryIndex<RMCConstructionPrototype>(protoId, out var proto))
+        {
+            reason = RMCConstructionFailureReason.Unknown;
             return false;
+        }
+
+        return TryValidateGhostBuild(user, constructionItem, proto, amount, coordinates, direction, requireSameTile, out reason);
+    }
+
+    public bool TryValidateGhostBuild(EntityUid user, EntityUid constructionItem, RMCConstructionPrototype proto, int amount, EntityCoordinates coordinates, Direction direction, bool requireSameTile, out RMCConstructionFailureReason reason)
+    {
+        reason = RMCConstructionFailureReason.Unknown;
 
         if (!CanConstruct(user))
+        {
+            reason = RMCConstructionFailureReason.ConstructionDisabled;
             return false;
+        }
 
-        var userCoords = EntityManager.GetComponent<TransformComponent>(user).Coordinates;
-        var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transform);
-        var buildTile = coordinates.ToVector2i(EntityManager, _mapManager, _transform);
+        if (requireSameTile && proto.Type == RMCConstructionType.Structure)
+        {
+            var userCoords = EntityManager.GetComponent<TransformComponent>(user).Coordinates;
+            var userTile = userCoords.ToVector2i(EntityManager, _mapManager, _transform);
+            var buildTile = coordinates.ToVector2i(EntityManager, _mapManager, _transform);
 
-        if (proto.Type == RMCConstructionType.Structure && userTile != buildTile)
-            return false;
+            if (userTile != buildTile)
+            {
+                reason = RMCConstructionFailureReason.NotOnSameTile;
+                return false;
+            }
+        }
 
         if (proto.Skill is { } skill && !_skills.HasSkill(user, skill, proto.RequiredSkillLevel))
+        {
+            reason = RMCConstructionFailureReason.SkillMissing;
             return false;
+        }
 
         if (proto.Type == RMCConstructionType.Structure)
         {
             if (!proto.IgnoreBuildRestrictions && !CanBuildAt(coordinates, proto.Name, out _, direction: direction, collision: proto.RestrictedCollisionGroup))
+            {
+                reason = RMCConstructionFailureReason.InvalidLocation;
                 return false;
+            }
 
             if (proto.RestrictedTags is { } tags && _rmcMap.TileHasAnyTag(coordinates, tags))
+            {
+                reason = RMCConstructionFailureReason.InvalidLocation;
                 return false;
+            }
         }
 
         var attempt = new RMCConstructionAttemptEvent(coordinates, proto.Name);
         RaiseLocalEvent(ref attempt);
         if (attempt.Cancelled)
+        {
+            reason = RMCConstructionFailureReason.InvalidLocation;
             return false;
+        }
 
         if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(constructionItem, out var stack))
         {
-            var cost = materialCost;
+            var totalAmount = amount / proto.Amount;
+            var cost = (amount == proto.Amount) ? materialCost : totalAmount * materialCost;
             if (stack.Count < cost)
+            {
+                reason = RMCConstructionFailureReason.MissingMaterials;
                 return false;
+            }
         }
 
         return true;
     }
+
 
     public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)
     {
@@ -268,7 +306,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         Build(ent, args.Actor, args.Build, args.Amount);
     }
 
-    public bool BuildAtLocation(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, EntityCoordinates coordinates, Direction direction, int? ghostId = null)
+    public bool BuildAtLocation(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, EntityCoordinates coordinates, Direction direction, RMCConstructionGhostKey? ghostKey = null)
     {
         if (_net.IsClient)
             return false;
@@ -319,7 +357,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             amount,
             GetNetCoordinates(coordinates),
             direction,
-            ghostId
+            ghostKey
         );
 
         var skillMultiplier = _skills.HasSkill(user, proto.DelaySkill, 2) ? 1 : 2;
@@ -343,7 +381,7 @@ public sealed class RMCConstructionSystem : EntitySystem
         return true;
     }
 
-    public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, int? ghostId = null)
+    public bool Build(Entity<RMCConstructionItemComponent> ent, EntityUid user, ProtoId<RMCConstructionPrototype> protoID, int amount, RMCConstructionGhostKey? ghostKey = null)
     {
         if (!TryComp(user, out TransformComponent? transform))
             return false;
@@ -359,7 +397,7 @@ public sealed class RMCConstructionSystem : EntitySystem
             coordinates = transform.Coordinates;
         }
 
-        return BuildAtLocation(ent, user, protoID, amount, coordinates, direction, ghostId);
+        return BuildAtLocation(ent, user, protoID, amount, coordinates, direction, ghostKey);
     }
 
     private void OnConstructionPreventCollide(Entity<RMCConstructionPreventCollideComponent> ent, ref PreventCollideEvent args)
@@ -399,9 +437,9 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         if (args.Cancelled)
         {
-            if (_net.IsServer && args.GhostId != null && TryComp(args.User, out ActorComponent? actor))
+            if (_net.IsServer && args.GhostKey != null && TryComp(args.User, out ActorComponent? actor))
             {
-                var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostId.Value);
+                var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostKey.Value, RMCConstructionFailureReason.Cancelled);
                 RaiseNetworkEvent(failMsg, actor.PlayerSession);
             }
 
@@ -427,9 +465,9 @@ public sealed class RMCConstructionSystem : EntitySystem
             {
                 var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", entry.Name));
                 _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);
-                if (args.GhostId != null && TryComp(args.User, out ActorComponent? actor))
+                if (args.GhostKey != null && TryComp(args.User, out ActorComponent? actor))
                 {
-                    var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostId.Value);
+                    var failMsg = new RMCConstructionGhostBuildFailedMessage(args.GhostKey.Value, RMCConstructionFailureReason.MissingMaterials);
                     RaiseNetworkEvent(failMsg, actor.PlayerSession);
                 }
                 return;
@@ -479,9 +517,9 @@ public sealed class RMCConstructionSystem : EntitySystem
             }
         }
 
-        if (args.GhostId != null)
+        if (args.GhostKey != null)
         {
-            var ackMsg = new RMCAckStructureConstructionMessage(args.GhostId.Value);
+            var ackMsg = new RMCAckStructureConstructionMessage(args.GhostKey.Value);
             RaiseNetworkEvent(ackMsg);
         }
     }
