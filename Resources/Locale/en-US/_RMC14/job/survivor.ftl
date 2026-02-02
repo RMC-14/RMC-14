@@ -71,7 +71,7 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
 # Misc variants
 cm-job-name-survivor-miner = Miner Colonist
 
-cm-job-name-surivor-priest = Priest Colonist
+cm-job-name-surivor-priest = Chaplain
 
 # FORECON survs
 

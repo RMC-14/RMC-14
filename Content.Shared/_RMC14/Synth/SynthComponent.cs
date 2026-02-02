@@ -8,6 +8,7 @@ using Content.Shared.StatusIcon;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Content.Shared.Whitelist;
 
 namespace Content.Shared._RMC14.Synth;
 
@@ -125,4 +126,6 @@ public sealed partial class SynthComponent : Component
 
     [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
+
 }
+
