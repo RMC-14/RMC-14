@@ -91,6 +91,7 @@ rmc-other-credits-tab = Other
 
 rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
+rmc-ui-ghost-appearance = Take ghost appearance from last dead character
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 
 rmc-area-info = {$area}{$restrictions}
