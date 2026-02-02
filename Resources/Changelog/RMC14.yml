@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: PursuitInAshes
-  changes:
-  - message: Increased the max length of subtle messages.
-    type: Tweak
-  id: 2370
-  time: '2025-09-24T08:33:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7894
 - author: CyberTropic
   changes:
   - message: Added Kutjevo survivor variants.
@@ -4663,5 +4656,40 @@
   id: 2872
   time: '2026-02-02T03:52:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9000
+- author: to4no_fix
+  changes:
+  - message: Added a marine medal recommendation system. Marines can be recommended
+      for awards via right-clicking a headset. The Commanding Officer can review grouped
+      recommendations per marine using a new Medals Panel on the command tablet or
+      console, and either approve them by issuing a medal or reject them to remove
+      the recommendation. Recommendation access is available to SLs (including acting
+      leaders and FORECON), SEA, CMO, CMP, CE, LO, ASO, SO, and CO (including FORECON).
+      All listed roles may submit up to two recommendations, except CO and XO, who
+      may submit up to four.
+    type: Add
+  - message: Using the new Medals Panel, the View Medals tab allows you to review
+      all medals awarded during the round and print them at the console as named physical
+      medals that can be physically presented to the recipient.
+    type: Add
+  - message: "Now, when selecting a medal to award, its sprite is displayed, and when\
+      \ specifying the reason for the award, the medal\u2019s description is shown."
+    type: Tweak
+  - message: Awarding medals or royal jelly now requires at least 130 characters in
+      the reason text.
+    type: Tweak
+  - message: Round-end results now display the rank of those who received a medal,
+      as well as the name and rank of the person who awarded the medal.
+    type: Tweak
+  - message: Commendations windows in the personalization settings have been redesigned
+      and now look significantly better. They display sprites of received/issued medals
+      with a tooltip showing the medal description on hover, separate received/issued
+      jelly and medals into tabs (previously mixed together), and show the ranks of
+      both the recipient and the issuer of a commendation (new commendations only).
+    type: Tweak
+  - message: Accessory owners are now listed in description.
+    type: Tweak
+  id: 2873
+  time: '2026-02-02T03:54:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8820
 Name: RMC14
 Order: -1
