@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added Kutjevo survivor variants.
-    type: Add
-  id: 2371
-  time: '2025-09-24T08:35:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7885
 - author: blueDev2
   changes:
   - message: You can no longer hop over a barbed barricade by climbing or buckling
@@ -4691,5 +4684,13 @@
   id: 2873
   time: '2026-02-02T03:54:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8820
+- author: Dygon
+  changes:
+  - message: Fixed the AGR-59-I creating a smaller fire area than intended, it now
+      extends one extra tile in each cardinal direction.
+    type: Fix
+  id: 2874
+  time: '2026-02-02T03:55:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9106
 Name: RMC14
 Order: -1
