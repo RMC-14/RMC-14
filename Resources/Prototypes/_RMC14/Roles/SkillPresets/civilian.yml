@@ -12,6 +12,16 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorChaplain
+  name: Survivor Chaplain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillLeadership: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetSurvivorWeYaManager
   name: Survivor WeYa Manager
   categories: [ HideSpawnMenu ]

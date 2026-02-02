@@ -23,23 +23,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 2
-        RMCSkillCqc: 1
-        RMCSkillLeadership: 3
-        RMCSkillOverwatch: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 4
-        RMCSkillExecution: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVEPlatoonCommander
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-overwatch
