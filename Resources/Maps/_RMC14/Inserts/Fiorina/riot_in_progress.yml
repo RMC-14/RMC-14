@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/13/2026 01:35:32
+  time: 02/02/2026 21:47:22
   entityCount: 544
 maps: []
 grids:
@@ -1602,7 +1602,7 @@ entities:
     - type: Transform
       pos: 7.5,-1.5
       parent: 1
-- proto: RMCJumpsuitUNSecurity
+- proto: RMCJumpsuitRiotControl
   entities:
   - uid: 454
     components:
@@ -2308,13 +2308,6 @@ entities:
     - type: Transform
       pos: 10.5,-5.5
       parent: 1
-- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
-  entities:
-  - uid: 531
-    components:
-    - type: Transform
-      pos: 10.5,-0.5
-      parent: 1
 - proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
   entities:
   - uid: 532
@@ -2330,12 +2323,12 @@ entities:
   - uid: 534
     components:
     - type: Transform
-      pos: 12.5,-1.5
+      pos: 14.5,2.5
       parent: 1
   - uid: 535
     components:
     - type: Transform
-      pos: 14.5,2.5
+      pos: 12.5,-1.5
       parent: 1
   - uid: 536
     components:
@@ -2351,6 +2344,13 @@ entities:
     components:
     - type: Transform
       pos: 5.5,-2.5
+      parent: 1
+- proto: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader
+  entities:
+  - uid: 531
+    components:
+    - type: Transform
+      pos: 10.5,-0.5
       parent: 1
 - proto: RMCStairs
   entities:
