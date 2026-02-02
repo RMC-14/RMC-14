@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: Spaghetti
-  changes:
-  - message: Added fireteam prefixes to squad comms.
-    type: Add
-  - message: Marines assigned to fireteams with an already existing FTL will have
-      their tracker set to the FTL.
-    type: Tweak
-  id: 2348
-  time: '2025-09-10T01:15:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7788
 - author: DrSmugleaf
   changes:
   - message: Fixed the playtime tracker window duplicating some playtimes.
@@ -4673,5 +4663,13 @@
   id: 2850
   time: '2026-02-02T03:09:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8725
+- author: efzapa
+  changes:
+  - message: POWs may now lose their POW status if they attempt escape several times
+      after a warning.
+    type: Tweak
+  id: 2851
+  time: '2026-02-02T03:11:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9054
 Name: RMC14
 Order: -1
