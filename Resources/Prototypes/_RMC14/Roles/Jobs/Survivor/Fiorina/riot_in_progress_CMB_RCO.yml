@@ -48,7 +48,7 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorFiorinaRiotInProgressCMBRiotControlOfficer
+  id: RMCSpawnPointSurvivorFiorinaRiotInProgressUNRiotOfficer
   name: special survivor fiorina riot in progress cmb riot control officer spawn point
   components:
   - type: SpawnPoint
