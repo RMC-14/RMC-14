@@ -44,7 +44,7 @@
   id: RMCRankCMBSpecialist
   name: CMB Specialist
   prefix: Spec.
-  paygrade: ICB-SPC
+  paygrade: CMB-SPC
 
 - type: rank
   id: RMCRankICBSupervisor
