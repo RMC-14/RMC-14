@@ -69,7 +69,7 @@
         Blunt: 40
   - type: XenoCrusherChargable
   - type: RMCGenericExamine
-    message: rmc-structure-girder-examine-tip # message not messageId :p
+    message: rmc-structure-girder-examine-tip
     whitelist:
       components:
       - Marine
