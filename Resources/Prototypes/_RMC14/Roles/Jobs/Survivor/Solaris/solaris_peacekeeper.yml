@@ -1,11 +1,11 @@
 - type: job # Basically same as NV version, should that one just be moved to multi-map?
   parent: CMSurvivorSecurity
-  id: CMSurvivorSolarisUNPeacekeeper
+  id: CMSurvivorSolarisILRCPeacekeeper
   name: cm-job-name-survivor-un-peacekeeper
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorSecurity
-  startingGear: RMCGearSurvivorSolarisUNPeacekeeper
-  spawnMenuRoleName: UN Peacekeeper (Solaris Survivor)
+  startingGear: RMCGearSurvivorSolarisILRCPeacekeeper
+  spawnMenuRoleName: ILRC peacekeeper (Solaris Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -19,24 +19,24 @@
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetUNPeacekeeper
+      preset: RMCGearSurvivorPresetILRCPeacekeeper
   useLoadoutOfJob: CMSurvivorSecurity # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorSecurity
-  id: RMCGearSurvivorSolarisUNPeacekeeper
+  id: RMCGearSurvivorSolarisILRCPeacekeeper
   equipment:
-    jumpsuit: RMCJumpsuitUNSecurity
+    jumpsuit: RMCJumpsuitRiotControl
     outerClothing: RMCArmorVest
     head: RMCHeadBeretOfficerHos
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorSolarisUNPeacekeeper
-  name: survivor solaris un peacekeeper spawn point
+  id: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
+  name: survivor solaris ILRC peacekeeper spawn point
   components:
   - type: SpawnPoint
-    job_id: CMSurvivorSolarisUNPeacekeeper
+    job_id: CMSurvivorSolarisILRCPeacekeeper
   - type: Sprite
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
