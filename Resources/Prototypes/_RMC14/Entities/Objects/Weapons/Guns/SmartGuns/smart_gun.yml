@@ -338,6 +338,40 @@
           components:
           - SmartGunBattery
 
+- type: entity # RMC14 - Reskinned SG for ICB insert
+  parent: RMCSmartGunNoCamo
+  id: RMCSmartGunCMB
+  name: ML66M "Spearhead" smart gun
+  description: A modification of the ML66 Smart Gun, manufactured under a license by Spearhead Armaments for limited use by CMB SWAT teams. Functionally identical to the variant currently provided to Marine Smart Gunners, save for the custom paint job, CMB insignia and some minor tweaks to the trigger assembly to allow for easier firing in cramped quarters.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_cmb.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_cmb.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a_cmb.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGunDamaged
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSmartGun
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
+
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSmartGun

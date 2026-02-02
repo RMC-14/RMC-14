@@ -49,7 +49,7 @@
     id: RMCIDCardCMBDeputySurvivor
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazinePistolFilledCMBSpecialist
-    suitstorage: RMCSmartGun
+    suitstorage: RMCSmartGunCMB
 
 - type: entity
   parent: RMCSurvivorPresetSecurity
