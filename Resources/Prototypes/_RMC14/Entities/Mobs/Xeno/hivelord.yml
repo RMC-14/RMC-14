@@ -260,6 +260,9 @@
     maxPlasma: 700
     plasmaRegenOnWeeds: 5.5
     plasmaTransferDelay: 0.5
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+    pheroSuffix: strong
   - type: Tackle
     max: 4
     chance: 0.45

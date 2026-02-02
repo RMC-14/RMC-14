@@ -52,6 +52,8 @@ public sealed class DesignerNodeBindingSystem : EntitySystem
         // Clean up node bookkeeping when a node dies.
         if (TryComp(uid, out DesignNodeComponent? nodeComp))
         {
+            _overlay.CleanupOverlay(uid, nodeComp);
+
             if (nodeComp.BoundXeno is { } placer && TryComp(placer, out DesignerStrainComponent? designer))
             {
                 designer.CurrentDesignNodes = CountDesignerNodes(placer, uid);

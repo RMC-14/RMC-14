@@ -47,7 +47,6 @@
       boundWeed: null
       hiveNumber: 0
       designMark: ""
-    - type: DesignNodeOverlay
 
 - type: entity
   id: DesignNodeRemoteDelete
