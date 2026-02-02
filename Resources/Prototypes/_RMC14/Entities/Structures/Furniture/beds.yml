@@ -142,7 +142,7 @@
   parent: [BaseItem, BaseFoldable]
   id: Bedroll
   name: bedroll
-suffix: RMC
+  suffix: RMC
   description: A foldable bedroll, just about the only thing of comfort in the field. You're generally supposed to unroll it before sleeping, but who needs rules?
   components:
   - type: Transform
