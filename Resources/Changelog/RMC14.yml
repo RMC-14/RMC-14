@@ -1,49 +1,4 @@
 ﻿Entries:
-- author: DrSmugleaf
-  changes:
-  - message: Started tracking total parasite infections per player, for a future date
-      when their rank is changed to account for total infections instead of play-time.
-    type: Add
-  - message: Fixed sniper rifles chambering a bullet when trying to use aimed shot.
-    type: Fix
-  - message: Fixed the XO only having 45 vendor points instead of 120.
-    type: Fix
-  - message: Fixed the winter wyvern not stunning marines in 1 hit.
-    type: Fix
-  - message: Fixed the scout specialist's thermal cloak having 21 slots of storage
-      instead of 15.
-    type: Fix
-  - message: Fixed explosions from dropship CAS weapons not working.
-    type: Fix
-  - message: Fixed girders being able to be moved, pulled, unanchored, and taking
-      too little damage.
-    type: Fix
-  - message: Unanchored folding barricades can now be lowered by xenos.
-    type: Tweak
-  - message: Unanchored barricades now take 3 times more damage.
-    type: Tweak
-  - message: Point blanks are now lag compensated (they take into account your ping
-      for distance calculations). This doesn't lag compensate projectile stun distance
-      checks, at least not yet.
-    type: Tweak
-  id: 2345
-  time: '2025-09-10T00:39:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7874
-- author: noctyrnal
-  changes:
-  - message: Added a PVE version of the M34 Incinerator Unit, which fires ~6 times
-      faster.
-    type: Add
-  id: 2346
-  time: '2025-09-10T01:14:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7873
-- author: DrSmugleaf
-  changes:
-  - message: Fixed multiple UIs having broken titles, text, etc.
-    type: Fix
-  id: 2347
-  time: '2025-09-10T01:13:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7876
 - author: Spaghetti
   changes:
   - message: Added fireteam prefixes to squad comms.
@@ -4694,5 +4649,29 @@
   id: 2847
   time: '2026-02-02T02:59:20.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8929
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed SPP Army Reservist on sorokyne not having the correct ranks. They
+      now have E1 at <70 hours, and E2 at 70+ hours.
+    type: Fix
+  id: 2848
+  time: '2026-02-02T03:10:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9068
+- author: Dutch-VanDerLinde
+  changes:
+  - message: As a xenonid, you can now see the appearance of your own character that
+      you bursted out of roundstart.
+    type: Tweak
+  id: 2849
+  time: '2026-02-02T03:10:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9063
+- author: PursuitinAshes
+  changes:
+  - message: '[SOP] Non-Modifiable Deployment now mandates some staff remain shipside,
+      which can be overwritten if required by the commander.'
+    type: Tweak
+  id: 2850
+  time: '2026-02-02T03:09:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8725
 Name: RMC14
 Order: -1
