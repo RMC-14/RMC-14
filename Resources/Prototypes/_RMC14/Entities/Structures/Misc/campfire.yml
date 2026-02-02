@@ -10,17 +10,34 @@
     layers:
       - state: brazier
       - state: burning
+        map: ["burning"]
+        visible: false
   - type: RMCMesonsNonviewable
+  - type: Campfire
+    fuelRequired: false
   - type: PointLight
+    enabled: false
     radius: 10
     energy: 3
     color: "#FFC90C"
   - type: AmbientSound
+    enabled: false
     volume: -5
     range: 5
     sound:
       path: /Audio/Ambience/Objects/fireplace.ogg
-  - type: AlwaysHot
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.CampfireVisuals.Lit:
+        burning:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Tag
+    tags: []
 
 - type: entity
   parent: CMBaseStructure

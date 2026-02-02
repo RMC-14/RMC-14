@@ -15,6 +15,12 @@ public sealed partial class CampfireComponent : Component
     [DataField]
     public SoundSpecifier? LitSound = new SoundPathSpecifier("/Audio/Effects/sparks4.ogg");
 
+    /// <summary>
+    /// If true, the campfire requires fuel to be lit and stay lit.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool FuelRequired = true;
+
     [DataField, AutoNetworkedField]
     public int Fuel;
 
@@ -29,9 +35,6 @@ public sealed partial class CampfireComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan? LitAt;
-
-    [DataField]
-    public EntProtoId FuelPrototype = "RMCPlankWood";
 
     [DataField]
     public TimeSpan ExtinguishDelay = TimeSpan.FromSeconds(2);

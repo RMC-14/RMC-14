@@ -30,9 +30,12 @@ public abstract class SharedCampfireSystem : EntitySystem
 
     private void OnStartup(Entity<CampfireComponent> ent, ref ComponentStartup args)
     {
-        // Start with full fuel
-        ent.Comp.Fuel = ent.Comp.MaxFuel;
-        Dirty(ent);
+        // Start with full fuel if fuel is required
+        if (ent.Comp.FuelRequired)
+        {
+            ent.Comp.Fuel = ent.Comp.MaxFuel;
+            Dirty(ent);
+        }
 
         UpdateAppearance(ent);
     }
@@ -44,7 +47,7 @@ public abstract class SharedCampfireSystem : EntitySystem
         var query = EntityQueryEnumerator<CampfireComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (!comp.Lit || comp.LitAt == null)
+            if (!comp.Lit || comp.LitAt == null || !comp.FuelRequired)
                 continue;
 
             var elapsed = _timing.CurTime - comp.LitAt.Value;
@@ -64,7 +67,7 @@ public abstract class SharedCampfireSystem : EntitySystem
                     // Out of fuel, extinguish
                     SetLit((uid, comp), false);
                     if (_net.IsServer)
-                        _popup.PopupEntity("The campfire goes out.", uid);
+                        _popup.PopupEntity("The fire goes out.", uid);
                 }
             }
         }
@@ -86,7 +89,7 @@ public abstract class SharedCampfireSystem : EntitySystem
         if (_doAfter.TryStartDoAfter(doAfterArgs))
         {
             if (_net.IsServer)
-                _popup.PopupEntity("You start extinguishing the campfire...", ent, args.User);
+                _popup.PopupEntity("You start extinguishing the fire...", ent, args.User);
         }
     }
 
@@ -99,7 +102,7 @@ public abstract class SharedCampfireSystem : EntitySystem
         SetLit(ent, false, args.User);
 
         if (_net.IsServer)
-            _popup.PopupEntity("You extinguish the campfire.", ent, args.User);
+            _popup.PopupEntity("You extinguish the fire.", ent, args.User);
     }
 
     private void OnInteractUsing(Entity<CampfireComponent> ent, ref InteractUsingEvent args)
@@ -107,26 +110,38 @@ public abstract class SharedCampfireSystem : EntitySystem
         if (args.Handled)
             return;
 
-        // Check if it's wood for refueling
-        if (TryComp<StackComponent>(args.Used, out var stack) && stack.StackTypeId == "RMCWood")
+        // Check if it's campfire fuel for refueling
+        if (TryComp<CampfireFuelComponent>(args.Used, out var fuelComp))
         {
+            // Skip refueling if this campfire doesn't use fuel
+            if (!ent.Comp.FuelRequired)
+                return;
+
             if (ent.Comp.Fuel >= ent.Comp.MaxFuel)
             {
                 if (_net.IsServer)
-                    _popup.PopupEntity("The campfire is already fully fueled.", ent, args.User);
+                    _popup.PopupEntity("It looks fully fueled.", ent, args.User);
                 return;
             }
 
             args.Handled = true;
 
-            var fuelToAdd = Math.Min(ent.Comp.FuelPerWood, ent.Comp.MaxFuel - ent.Comp.Fuel);
+            var fuelToAdd = Math.Min(fuelComp.FuelAmount, ent.Comp.MaxFuel - ent.Comp.Fuel);
             ent.Comp.Fuel += fuelToAdd;
             Dirty(ent);
 
-            _stack.Use(args.Used, 1, stack);
+            // Try to use from stack if it's a stack, otherwise delete the entity
+            if (TryComp<StackComponent>(args.Used, out var stack))
+            {
+                _stack.Use(args.Used, 1, stack);
+            }
+            else
+            {
+                QueueDel(args.Used);
+            }
 
             if (_net.IsServer)
-                _popup.PopupEntity("You add wood to the campfire.", ent, args.User);
+                _popup.PopupEntity("You add fuel to the fire.", ent, args.User);
 
             return;
         }
@@ -141,10 +156,10 @@ public abstract class SharedCampfireSystem : EntitySystem
         if (!isHotEvent.IsHot)
             return;
 
-        if (ent.Comp.Fuel <= 0)
+        if (ent.Comp.FuelRequired && ent.Comp.Fuel <= 0)
         {
             if (_net.IsServer)
-                _popup.PopupEntity("The campfire needs fuel. Add some wood first.", ent, args.User);
+                _popup.PopupEntity("The fire needs fuel. Add something to fuel it.", ent, args.User);
             return;
         }
 
@@ -179,7 +194,7 @@ public abstract class SharedCampfireSystem : EntitySystem
                 _audio.PlayPvs(ent.Comp.LitSound, ent);
 
             if (user != null)
-                _popup.PopupEntity("You light the campfire.", ent, user.Value);
+                _popup.PopupEntity("You light the fire.", ent, user.Value);
         }
 
         UpdateAppearance(ent);
