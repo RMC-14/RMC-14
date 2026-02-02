@@ -1,14 +1,14 @@
 - type: entity
   parent: BaseItem
   id: RMClogisticsofficerGuideBook
-  name: logistics Officers symbol
-  description: The Logistics Officers sumbol
+  name: requisitions Officers symbol
+  description: The Requisitions Officers sumbol
   suffix: (GuideBookEntity)
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/reqguidesymbols.rsi
-    state: logistics officer
+    state: requisitions officer
 
 - type: entity
   parent: BaseItem
@@ -93,7 +93,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/padsjpg.rsi
     state: pads
-  
+
 - type: entity
   parent: BaseItem
   id: RMCTheLineGuideBook
@@ -105,7 +105,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/RMCreqguide/linejpg.rsi
     state: line
-  
+
 - type: entity
   parent: BaseItem
   id: RMCASRSinterfaceGuideBook

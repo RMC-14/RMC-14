@@ -1,7 +1,7 @@
 ﻿# requisitions
-cm-job-name-quartermaster = Logistics Officer
+cm-job-name-quartermaster = Requisitions Officer
 cm-job-description-quartermaster = Your job is to manage the logistics of the ship, including requisitions and food.
-cm-job-prefix-quartermaster = LO
+cm-job-prefix-quartermaster = RO
 CMJobQuartermaster = Logistics Officer
 
 cm-job-name-cargotech = Requisitions Technician
