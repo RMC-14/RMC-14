@@ -45,7 +45,7 @@
     jumpsuit: RMCJumpsuitTSEPA
     belt: RMCBeltHolsterPistolTSEFilledL54
     shoes: RMCShoesLaceup
-    id: RMCIDCardTSEPA
+    id: RMCIDCardTSEPASurvivor
     back: RMCSatchelBlackFillSurvivorConstable
     ears: RMCHeadsetTSEPA
 

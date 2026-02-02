@@ -75,12 +75,12 @@
       - map: [ "belt" ]
       - map: [ "back" ]
       - map: [ "enum.HumanoidVisualLayers.FacialHair" ]
+      - map: [ "neck" ] # RMC14 re-arrange back slot
       - map: [ "enum.HumanoidVisualLayers.Hair" ]
       - map: [ "enum.HumanoidVisualLayers.HeadSide" ]
       - map: [ "enum.HumanoidVisualLayers.HeadTop" ]
       - map: [ "enum.HumanoidVisualLayers.Tail" ]
       - map: [ "mask" ]
-      - map: [ "neck" ] # RMC14 re-arrange neck slot
       - map: [ "head" ]
       - map: [ "pocket1" ]
       - map: [ "pocket2" ]
@@ -88,18 +88,6 @@
       - map: [ "hooked" ]
         sprite: "_RMC14/Effects/xeno_spray_acid.rsi"
         state: hooked
-        visible: false
-      - map: [ "focused" ]
-        sprite: _RMC14/Interface/xeno_hud.rsi
-        state: hudeye
-        visible: false
-      - map: [ "targetedDirection" ]
-        sprite: _RMC14/Effects/targeted.rsi
-        state: sniper_lockon_direction
-        visible: false
-      - map: [ "targetedDirectionIntense" ]
-        sprite: _RMC14/Effects/targeted.rsi
-        state: sniper_lockon_intense_direction
         visible: false
   - type: FixedIdentity
     name: cm-chatsan-replacement-vulpkanin
