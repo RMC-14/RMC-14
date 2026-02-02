@@ -74,6 +74,7 @@
 - type: entity
   parent: CMJumpsuitLiaisonIvy # so they can wear the CMB and ICB armor sets
   id: CMJumpsuitLiaisonIvyICBCommissioner
+  suffix: CMB Uniform Wearable
   components:
     - type: Tag
       tags:
