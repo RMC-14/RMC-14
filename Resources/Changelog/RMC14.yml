@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: NotInButiN
-  changes:
-  - message: Fixed Overall category on RMC Playtime Stats
-    type: Fix
-  id: 2340
-  time: '2025-09-09T23:08:21.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7795
 - author: Vixting
   changes:
   - message: preserve tacmap state
@@ -4693,5 +4686,12 @@
   id: 2842
   time: '2026-02-02T02:32:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9085
+- author: PursuitinAshes
+  changes:
+  - message: PvIs now spawn with a Peregrine Handcannon instead of a M1984.
+    type: Tweak
+  id: 2843
+  time: '2026-02-02T02:35:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8956
 Name: RMC14
 Order: -1
