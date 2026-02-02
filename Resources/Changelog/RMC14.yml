@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: yagwog
-  changes:
-  - message: Fixed wheelchair movement.
-    type: Fix
-  id: 2344
-  time: '2025-09-10T00:40:58.001958+00:00'
-  url: null
 - author: DrSmugleaf
   changes:
   - message: Started tracking total parasite infections per player, for a future date
@@ -4693,5 +4686,13 @@
   id: 2846
   time: '2026-02-02T02:45:03.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9060
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Department heads can now see new player icons like Senior enlisted advisors.
+      These icons can be toggled off, check your settings.
+    type: Tweak
+  id: 2847
+  time: '2026-02-02T02:59:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8929
 Name: RMC14
 Order: -1
