@@ -494,9 +494,7 @@ public sealed class XenoLeapSystem : EntitySystem
         }
 
         if (HasComp<XenoParasiteComponent>(target) ||
-            HasComp<XenoFruitComponent>(target) ||
-            HasComp<XenoEggComponent>(target) ||
-            HasComp<XenoAcidSplatterComponent>(target))
+            !HasComp<MobStateComponent>(target))
         {
             return false;
         }
@@ -511,9 +509,6 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
 
         if (size == RMCSizes.VerySmallXeno)
-            return false;
-
-        if (HasComp<XenoWeedsComponent>(target) || HasComp<XenoConstructComponent>(target))
             return false;
 
         return true;

@@ -36,6 +36,15 @@
     },
     {
       "name": "striped_corner_3"
+    },
+    {
+      "name": "cargo_arrow2"
+    },
+    {
+      "name": "door_warning"
+    },
+    {
+      "name": "door_warning2"
     }
   ]
 }
