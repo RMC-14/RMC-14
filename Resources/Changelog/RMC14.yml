@@ -1,22 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed mortar kit being able to have items reinserted into it.
-    type: Fix
-  - message: Mortar kit now has 1 rangefinder and 1 laser designator, instead of 2
-      rangefinders
-    type: Fix
-  id: 2373
-  time: '2025-09-24T09:23:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6326
-- author: Max_Power
-  changes:
-  - message: Fixed the mortar tube having a cooldown before allowing you to fire another
-      shell.
-    type: Fix
-  id: 2374
-  time: '2025-09-24T09:24:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7469
 - author: to4no_fix
   changes:
   - message: 'Added a second targeting mode to the mortar: laser targeting mode. Switch
@@ -4695,5 +4677,19 @@
   id: 2875
   time: '2026-02-02T03:57:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9109
+- author: x5tink
+  changes:
+  - message: Pvi can spawn loadout drip
+    type: Fix
+  id: 2876
+  time: '2026-02-02T03:59:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9111
+- author: Dygon
+  changes:
+  - message: Neurotoxin gas no longer affects entities that are paradropping.
+    type: Fix
+  id: 2877
+  time: '2026-02-02T04:00:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9115
 Name: RMC14
 Order: -1
