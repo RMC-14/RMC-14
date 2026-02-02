@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: preserve tacmap state
-    type: Add
-  id: 2341
-  time: '2025-09-09T23:19:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7424
 - author: N0lim
   changes:
   - message: Fixed stack overflow when two hiveless xeno damage each other with acid
@@ -4693,5 +4686,13 @@
   id: 2843
   time: '2026-02-02T02:35:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8956
+- author: YO0teacher
+  changes:
+  - message: Fixed motion detectors and data detectors turning off when equipped using
+      a keybind
+    type: Fix
+  id: 2844
+  time: '2026-02-02T02:40:53.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9009
 Name: RMC14
 Order: -1
