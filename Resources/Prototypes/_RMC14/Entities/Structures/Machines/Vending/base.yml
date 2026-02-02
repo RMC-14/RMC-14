@@ -81,3 +81,15 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   # - type: XenoCrusherChargable TODO knock over by crusher
+  - type: Fixtures #TODO remove this component(making it use the parent's fixtures) after vendor tipping is added.
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        - BulletImpassable

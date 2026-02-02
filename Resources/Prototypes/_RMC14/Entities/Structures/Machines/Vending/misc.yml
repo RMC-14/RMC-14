@@ -90,6 +90,24 @@
         amount: 0
     - name: Building materials
       entries:
+      - id: RMCSheetCardboard10
+        name: Cardboard x10
+        amount: 1
+      - id: RMCBarbedWire10
+        name: Barbed Wire x10
+        amount: 0
+      - id: CMSheetMetal10
+        name: Metal x10
+        amount: 0
+      - id: CMSheetPlasteel10
+        name: Plasteel x10
+        amount: 0
+      - id: CMSandbagEmpty10
+        name: Sandbags (empty) x10
+        amount: 0
+      - id: CMSandbagFull5
+        name: Sandbags (full) x5
+        amount: 0
       - id: RMCSheetCardboard1
         amount: 10
       - id: RMCBarbedWire1
@@ -98,15 +116,25 @@
         amount: 0
       - id: CMSheetPlasteel1
         amount: 0
-      - id: CMSandbagEmpty10
-        amount: 0
-      - id: CMSandbagFull5
-        amount: 0
     - name: Armor
       entries:
       - id: RMCArmorHelmetM10
         amount: 0
       - id: RMCArmorM3MediumCarrier
+        amount: 0
+      - id: RMCArmorM3MediumPadded
+        amount: 0
+      - id: RMCArmorM3MediumPadless
+        amount: 0
+      - id: RMCArmorM3MediumRidged
+        amount: 0
+      - id: RMCArmorM3MediumSkull
+        amount: 0
+      - id: RMCArmorM3MediumSmooth
+        amount: 0
+      - id: RMCArmorM3HeavyPadded
+        amount: 0
+      - id: RMCArmorM3LightPadded
         amount: 0
     - name: Miscellaneous
       entries:
@@ -122,3 +150,68 @@
         amount: 0
       - id: CMPackFlare
         amount: 1
+      - id: RMCFlashlight
+        amount: 1
+      - id: CMRollerBedSpawnFolded
+        amount: 0
+      - id: RMCTablePartTan
+        amount: 3
+      - id: RMCRackParts
+        amount: 3
+      - id: CMClipboard
+        amount: 4
+      - id: CMPen
+        amount: 4
+      - id: CMChairFolded
+        amount: 2
+    - name: Ammunition boxes (bulk)
+      hasBoxes: true
+      entries:
+      - id: RMCBoxShellsBuckshot
+        name: Magazine Box (Buckshot x 100)
+        box: RMCBoxShotgunBuckshot
+        boxAmount: 4
+      - id: RMCBoxShellsFlechette
+        name: Magazine Box (Flechette x 100)
+        box: RMCBoxShotgunFlechette
+        boxAmount: 4
+      - id: RMCBoxShellsSlugs
+        name: Magazine Box (Slugs x 100)
+        box: RMCBoxShotgunSlugs
+        boxAmount: 4
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
+    - name: Boxes
+      hasBoxes: true
+      entries:
+      - id: RMCBoxMagazineRifleM4SPR
+        name: Magazine Box (M4SPR x 16)
+        box: CMMagazineRifleM4SPR
+      - id: RMCBoxMagazineRifleM54C
+        name: Magazine Box (M54C x 10)
+        box: CMMagazineRifleM54C
+      - id: RMCBoxMagazineSMGM63
+        name: Magazine Box (M63 x 12)
+        box: CMMagazineSMGM63
+      - id: RMCBoxMagazineRevolverM44
+        name: Magazine Box (M44 x 16)
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazinePistolM1984
+        name: Magazine Box (M1984 x 16)
+        box: CMMagazinePistolM1984
+#      - name: Magazine Box (M56D x 8)
+#        box: CMMagazineSMGM63
+#      - name: Magazine Box (M2C x 8)
+#        box: CMMagazineSMGM63
+# TODO: Box of M89 Signal Flare Packs (CAS Flare Box)
+# TODO: Box of Flashlights

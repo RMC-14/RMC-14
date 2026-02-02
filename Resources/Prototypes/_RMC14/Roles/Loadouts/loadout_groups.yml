@@ -41,6 +41,14 @@
   loadouts:
   - MarineSecuritySatchel
 
+- type: loadoutGroup
+  id: ProvostSecurityBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ProvostSecuritySatchel
+
 # Eyewear
 - type: loadoutGroup
   id: EyewearRMC

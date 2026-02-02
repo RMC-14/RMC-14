@@ -86,6 +86,7 @@
   - type: ItemIFF
     factions:
     - RMCFactionWeYa
+    - RMCFactionMarine
   - type: PresetIdCard
     job: CMLiaison
 

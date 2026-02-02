@@ -86,7 +86,7 @@
   parent: RMCPlushieSharkBlue
   id: RMCShorkMedicalOfficer
   name: Shork medical officer plushie
-  description: The Shork Medical Officer is dissapointed to see you in surgery yet again. Maybe you should take better care of yourself?
+  description: The Shork Medical Officer is disappointed to see you in surgery yet again. Maybe you should take better care of yourself?
   suffix: RMC
   components:
   - type: Sprite
