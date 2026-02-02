@@ -1,19 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed the most evil job on the Almayer having evil comms (Messtechs accidentally
-      had command channel access)
-    type: Fix
-  id: 2334
-  time: '2025-09-07T11:35:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7820
-- author: CyberTropic
-  changes:
-  - message: Fixed survivor variants not spawning.
-    type: Fix
-  id: 2335
-  time: '2025-09-08T08:20:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7839
 - author: Vermidia
   changes:
   - message: Fixed air vents getting covered by weeds.
@@ -4678,5 +4663,24 @@
   id: 2836
   time: '2026-02-02T02:14:06.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8822
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the honor guard M890 not starting with buckshot.
+    type: Fix
+  - message: Fixed the M890 tactical shotgun not starting with slugs.
+    type: Fix
+  - message: Fixed the M890 riot shotgun not starting with beanbags
+    type: Fix
+  id: 2837
+  time: '2026-02-02T02:17:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8895
+- author: Thereisabear
+  changes:
+  - message: Synthetics ability to grab certain Xenos, large Xenos will knock back
+      the Synth however.
+    type: Add
+  id: 2838
+  time: '2026-02-02T02:16:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8857
 Name: RMC14
 Order: -1
