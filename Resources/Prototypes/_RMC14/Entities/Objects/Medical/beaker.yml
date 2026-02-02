@@ -221,78 +221,12 @@
     materialComposition:
       CMGlass: 10000
 
-# Minitank /obj/item/reagent_container/glass/minitank
-- type: entity
-  parent: CMBeakerBase
-  id: CMMiniTank
-  name: MS-11 Smart Refill Tank
-  description: A robust little tank capable of refilling autoinjectors that previously required a nanomed system to refill. Using the wonders of microchips, it automatically sorts the correct chemicals into most single reagent autoinjectors. It is unable to partially fill them however. A valve exists on the top to transfer reagents to another container or to flush it entirely.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/minitank.rsi
-    layers:
-    - state: icon
-    - state: minitank1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
-  - type: Item
-    size: Normal
-    sprite: _RMC14/Objects/Tanks/minitank.rsi
-  - type: SolutionContainerVisuals
-    maxFillLevels: 5
-    fillBaseName: minitank
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 180
-  - type: Spillable
-    solution: beaker
-  - type: StaticPrice
-    price: 20
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - none
-  - type: PhysicalComposition
-    materialComposition:
-      CMSteel: 500
-
-# Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
-# BaseBeaker has DrinkComponent which is undesirable. Most of BaseBeaker is overriden anyway.
+# Parent for containers that cannot be filled/drained by hand.
 - type: entity
   parent: BaseItem
-  id: RMCPressurizedCanister
-  name: pressurized canister
-  description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
+  id: RMCSealedChemicalContainer
+  abstract: true
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
-    layers:
-    - state: icon
-    - state: can1
-      map: ["enum.SolutionContainerLayers.Fill"]
-      visible: false
-  - type: Item
-    size: Large
-    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
-  - type: SolutionContainerManager
-    solutions:
-      beaker:
-        maxVol: 480
-  - type: SolutionContainerVisuals
-    maxFillLevels: 4
-    fillBaseName: can
-  - type: StaticPrice
-    price: 40
-  - type: Tag
-    tags:
-    - PressurizedCanister
-    - ChemDispensable
-  - type: Clothing
-    quickEquip: false
-    slots:
-    - none
-  # components from original parents
   - type: InteractedBlacklist
     blacklist:
       components:
@@ -341,6 +275,79 @@
     damageContainer: Inorganic
     damageModifierSet: Glass
   - type: DnaSubstanceTrace
+
+# Minitank /obj/item/reagent_container/glass/minitank
+- type: entity
+  parent: RMCSealedChemicalContainer
+  id: CMMiniTank
+  name: MS-11 Smart Refill Tank
+  description: A robust little tank capable of refilling autoinjectors that previously required a nanomed system to refill. Using the wonders of microchips, it automatically sorts the correct chemicals into most single reagent autoinjectors. It is unable to partially fill them however. A valve exists on the top to transfer reagents to another container or to flush it entirely.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/minitank.rsi
+    layers:
+    - state: icon
+    - state: minitank1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Objects/Tanks/minitank.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 180
+  - type: SolutionContainerVisuals
+    maxFillLevels: 5
+    fillBaseName: minitank
+  - type: StaticPrice
+    price: 20
+  - type: Tag
+    tags:
+    - RMCMiniTank
+    - ChemDispensable
+  - type: RMCSmartRefillTank
+    solution: beaker
+  - type: RMCFlushableSolution
+    solution: beaker
+    flushTime: 3
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 500
+
+- type: Tag
+  id: RMCMiniTank
+
+# Pressurised Canister /obj/item/reagent_container/glass/pressurized_canister
+- type: entity
+  parent: RMCSealedChemicalContainer
+  id: RMCPressurizedCanister
+  name: pressurized canister
+  description: A pressurized container. The inner part of a pressurized reagent canister pouch. Only compatible with its pouch, machinery or a storage tank.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
+    layers:
+    - state: icon
+    - state: can1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
+  - type: Item
+    size: Large
+    sprite: _RMC14/Objects/Tanks/pressurized_reagent_container.rsi
+  - type: SolutionContainerManager
+    solutions:
+      beaker:
+        maxVol: 480
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: can
+  - type: StaticPrice
+    price: 40
+  - type: Tag
+    tags:
+    - PressurizedCanister
+    - ChemDispensable
   - type: PhysicalComposition
     materialComposition:
       CMGlass: 2000
