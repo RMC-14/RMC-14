@@ -1,26 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: admins can drag ghosts to entities to "possess them"
-    type: Add
-  id: 2367
-  time: '2025-09-24T08:24:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7987
-- author: noctyrnal
-  changes:
-  - message: Visually "overhauled" PMCs, giving them consistent and up to date equipment,
-      along with some new toys for the 'Whiteout' Combat Units.
-    type: Add
-  - message: Implemented basic whiteout jobs.
-    type: Add
-  - message: PMC Smart Gun Operators no longer have the Whiteout SG, instead getting
-      their own weaker version.
-    type: Tweak
-  - message: Resprited the scout sight's worn sprite.
-    type: Add
-  id: 2368
-  time: '2025-09-24T08:30:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7982
 - author: CyberTropic
   changes:
   - message: Fixed some Inserts having Unknown Areas.
@@ -4663,5 +4641,19 @@
   id: 2869
   time: '2026-02-02T03:48:04.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9067
+- author: AlexisMoonlight
+  changes:
+  - message: Added time limit to NJPs.
+    type: Add
+  id: 2870
+  time: '2026-02-02T03:49:52.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9097
+- author: Dygon
+  changes:
+  - message: Projectiles now pass through most machines, except for vending machines.
+    type: Tweak
+  id: 2871
+  time: '2026-02-02T03:50:43.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8965
 Name: RMC14
 Order: -1
