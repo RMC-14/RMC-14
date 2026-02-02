@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed air vents getting covered by weeds.
-    type: Fix
-  id: 2336
-  time: '2025-09-08T11:49:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7823
 - author: CyberTropic
   changes:
   - message: Fixed floodlights not turning on.
@@ -4682,5 +4675,15 @@
   id: 2838
   time: '2026-02-02T02:16:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8857
+- author: Dutch-VanDerLinde
+  changes:
+  - message: As a marine, you can now right click on your tacmap to bring up a crew
+      manifest of everyone on your ship.
+    type: Tweak
+  - message: The crew manifest now shows the colored background for squad marines.
+    type: Tweak
+  id: 2839
+  time: '2026-02-02T02:23:38.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8940
 Name: RMC14
 Order: -1
