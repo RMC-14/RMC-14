@@ -866,7 +866,7 @@
   parent: RMCPosterTSEPA1
   id: RMCPosterTSEPA3
   name: "TSEPA poster"
-  description: "A recruitment poster for the TSEPA. One Law, One Duty, One Force—Join the TSEPA."
+  description: "A recruitment poster for the TSEPA. One Law, One Duty, One Force. Join the TSEPA."
   components:
   - type: Sprite
     state: ZSPA_3
