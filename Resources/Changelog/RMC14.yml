@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the PK-7 Electrostatic Pistol, hollow cane, cyanide, and cyanide
-      pill for the Corporate Liaison.
-    type: Add
-  - message: Gave the WEYA Fax Responder the dark cap instead of the PMC helmet
-    type: Tweak
-  - message: Added the Hollow Cane, PK-7 Magazine, and Cyanide to the WeYa Automated
-      Storage Briefcase
-    type: Tweak
-  id: 2360
-  time: '2025-09-23T04:55:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7041
 - author: noctyrnal
   changes:
   - message: Corpsmen on PVE now get pre-made Meralyne-Bicaridine and Kelotane-Dermaline
@@ -4674,5 +4661,13 @@
   id: 2862
   time: '2026-02-02T03:30:43.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8983
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Lazarus Corporate Dome Insert liaison not having the exec spec
+      icon
+    type: Fix
+  id: 2863
+  time: '2026-02-02T03:32:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8998
 Name: RMC14
 Order: -1
