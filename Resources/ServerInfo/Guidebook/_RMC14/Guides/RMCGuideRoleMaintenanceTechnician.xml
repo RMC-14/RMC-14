@@ -63,21 +63,21 @@
 
   In emergencies or when authorized, hacking your way through obstacles to access an inaccessible area may be required. For any hacking job, you will want to be wearing some [bold]insulated gloves[/bold] as well as be equipped with a screwdriver, wire cutters, and security access tuner. To begin hacking:
 
-  - Use a screwdriver to open the maintenance panel.
-   <Box>
-    <GuideEntityEmbed Entity="CMScrewdriver"/>
-  </Box>
-  - Access the machine to open the wire panel.
-  - [bold]While wearing insulated gloves[/bold] use a security access tuner or wire cutter to pulse or cut/repair the wires respectively. Each wire will correspond to a function of the machine you are hacking and interacting with each will disable or alter the way that function works. The wires that control each function will vary between operations.
   <Box>
     <GuideEntityEmbed Entity="CMHandsInsulated"/>
+    <GuideEntityEmbed Entity="CMScrewdriver"/>
+    <GuideEntityEmbed Entity="CMMultitool"/>
   </Box>
+
+  - Use a screwdriver to open the maintenance panel.
+  - Access the machine to open the wire panel.
+  - [bold]While wearing insulated gloves[/bold] use a security access tuner or wire cutter to pulse or cut/repair the wires respectively. Each wire will correspond to a function of the machine you are hacking and interacting with each will disable or alter the way that function works. The wires that control each function will vary between operations.
   - Once finished, use a screwdriver to close the maintenance panel.
 
   Most hacking exercises will occur on doors and vending machines. The most common applications are:
 
   - [Bold]Bolting or Unbolting a Door[/bolt]: Bolting a door is as simple as pulsing or cutting the wire that powers the bolt function. To unbolt a door, you will need to repair the power wires, and then pulse the wire that controls the bolt function. Repairing the wire will not unbolt the door.
-  - [bold]Hacking a door open[/bold]: To open a door you do not have access to, cut the two wires that controls the door power. Then use a crowbar to pry the depowered door open. Pulsing one of the power wires will temporarily disable power to the door.
+  - [bold]Hacking a door open[/bold]: To open a door you do not have access to, cut the two wires that controls the door power. Then use a crowbar to pry the unpowered door open. Pulsing one of the power wires will temporarily disable power to the door.
   - [bold]Accessing a locked vending machine[/bold]: To access a vending machine you do not have access to, cut the wire that controls the ID access check, which will allow anyone to dispense items. Pulsing this wire instead will only temporarily disable the ID access check.
 
 
