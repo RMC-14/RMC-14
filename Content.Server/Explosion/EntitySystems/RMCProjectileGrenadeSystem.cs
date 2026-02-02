@@ -74,7 +74,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
         {
             if (TryComp(ent.Owner, out ProjectileIFFComponent? grenadeIFFComponent))
             {
-                _gunIFF.GiveAmmoIFF(args.ContentUid, grenadeIFFComponent.Faction, grenadeIFFComponent.Enabled);
+                _gunIFF.GiveAmmoMultiFactionIFF(args.ContentUid, grenadeIFFComponent.Factions, grenadeIFFComponent.Enabled);
             }
         }
 
@@ -118,7 +118,7 @@ public sealed class RMCProjectileGrenadeSystem : EntitySystem
                 continue;
 
             _hitEntities.Add(entity);
-            limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire));
+            limit.HitBy.Add(new Hit(GetNetEntity(ent.Owner), _timing.CurTime + limit.Expire, null));
             Dirty(entity,limit);
 
             if(projectileCount == 0)

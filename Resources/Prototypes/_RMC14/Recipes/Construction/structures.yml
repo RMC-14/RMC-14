@@ -183,8 +183,8 @@
 - type: construction
   parent: RMC
   name: tube light fixture
-  id: CMLightTubeFixture
-  graph: CMLightFixture
+  id: RMCLightTubeFixture
+  graph: RMCLightFixture
   startNode: start
   targetNode: tubeLight
   category: construction-category-cm-structures
@@ -199,8 +199,8 @@
 - type: construction
   parent: RMC
   name: bulb light fixture
-  id: CMLightBulbFixture
-  graph: CMLightFixture
+  id: RMCLightBulbFixture
+  graph: RMCLightFixture
   startNode: start
   targetNode: bulbLight
   category: construction-category-cm-structures

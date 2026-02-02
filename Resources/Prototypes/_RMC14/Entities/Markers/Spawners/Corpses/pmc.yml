@@ -1,0 +1,76 @@
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoon
+  name: Corpse Spawner - We-Ya Goon
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoon
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonLead
+  name: Corpse Spawner - We-Ya Goon Lead
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonLead
+
+- type: entity
+  parent: RMCSpawnerCorpseWeYaGoonLead
+  id: RMCSpawnerCorpseWeYaGoonLeadBurst
+  name: Corpse Spawner - We-Ya Goon Lead
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonLeadBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaPMC
+  name: Corpse Spawner - We-Ya PMC Standard
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaPMCStandard
+
+- type: entity
+  parent: RMCSpawnerCorpseWeYaPMC
+  id: RMCSpawnerCorpseWeYaPMCStandardBurst
+  name: Corpse Spawner - We-Ya PMC Standard
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaPMCStandardBurst
+
+# Hybrisa
+- type: entity
+  parent: RMCSpawnerCorpseWeYaGoonLead
+  id: RMCSpawnerCorpseWeYaGoonLeadHybrisa
+  name: Corpse Spawner - We-Ya Goon Hybrisa Lead
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonHybrisaLead
+
+- type: entity
+  parent: RMCSpawnerCorpseWeYaGoonLead
+  id: RMCSpawnerCorpseWeYaGoonLeadHybrisaBurst
+  name: Corpse Spawner - We-Ya Goon Hybrisa Lead
+  suffix: RMC14, Burst
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonHybrisaLeadBurst
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonHybrisa
+  name: Corpse Spawner - We-Ya Goon Hybrisa
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonHybrisa
+
+# Kutjevo
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseWeYaGoonKutjevo
+  name: Corpse Spawner - We-Ya Goon Kutjevo
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseWeYaGoonKutjevo

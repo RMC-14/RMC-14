@@ -98,6 +98,12 @@
     mask: RMCMaskNeckerchiefWhite
 
 - type: loadout
+  id: NeckerchiefRedRMC
+  cost: 2
+  equipment:
+    mask: RMCMaskNeckerchiefRed
+
+- type: loadout
   id: TornScarfBlackRMC
   cost: 2
   equipment:

@@ -10,7 +10,9 @@
   - type: UniformAccessory
     category: Medal
     limit: 2
-    layerKey: "enum.MedalVisualLayers.Base"
+    layerKeys:
+    - "enum.MedalVisualLayers.Base"
+    - "enum.MedalVisualLayers.Base1"
     hasIconSprite: true
 
 # Marine medals
@@ -31,9 +33,37 @@
 
 - type: entity
   parent: RMCMedalBronze
+  id: RMCMedalBronzeDistinguishedConduct
+  name: distinguished conduct medal
+  description: A bronze medal awarded for distinguished conduct. Whilst a great honor, this is the most basic award given by the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalBronze
+  id: RMCMedalBronzeHeart
+  name: bronze heart medal
+  description: A bronze heart-shaped medal awarded for sacrifice. It is often awarded posthumously or for severe injury in the line of duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze_heart.rsi
+    state: bronze_heart
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze_heart.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronze
   id: RMCMedalBronzeService
   name: bronze service medal
-  description: A bronze medal awarded for a marine's service within the UNMC. It is a very common medal, and is typically the first medal a marine would receive.
+  description: A bronze medal awarded for a marine's service within the UNMC. While the most common of medals, it signifies someone's first few steps into their respective positions.
 
 - type: entity
   parent: RMCMedalBase
@@ -51,9 +81,23 @@
 
 - type: entity
   parent: RMCMedalSilver
+  id: RMCMedalSilverValor
+  name: medal of valor
+  description: A silver medal awarded for acts of exceptional valor. Normally given to those who outstand themselves from the ranks, either it be in Leadership skills or actions crucial to the mission success.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/silver.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/silver.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalSilver
   id: RMCMedalSilverService
   name: silver service medal
-  description: A shiny silver medal awarded for a marine's service within the UNMC. It is a somewhat common medal which signifies the amount of time a marine has spent in the line of duty.
+  description: A shiny silver medal awarded for a marine's service within the UNMC. While somewhat common, it signifies someone's growing expertise and time invested into their department and skills.
 
 - type: entity
   parent: RMCMedalBase
@@ -71,9 +115,23 @@
 
 - type: entity
   parent: RMCMedalGold
+  id: RMCMedalGoldExceptionalHeroism
+  name: medal of exceptional heroism
+  description: An extremely rare golden medal awarded only by the UNMC. To receive such a medal is the highest honor and as such, very few exist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalGold
   id: RMCMedalGoldService
   name: gold service medal
-  description: A prestigious gold medal awarded for a marine's service within the UNMC. It signifies the amount of time a marine has spent in the line of duty.
+  description: A reflective gold medal awarded for a marine's service within the UNMC. It represents the first major step of many a marine takes in becoming highly qualified in their positions.
 
 - type: entity
   parent: RMCMedalBase
@@ -93,7 +151,7 @@
   parent: RMCMedalPlatinum
   id: RMCMedalPlatinumService
   name: platinum service medal
-  description: An esteemed platinum medal awarded for a marine's service within the UNMC. It signifies the sheer amount of time a marine has spent in the line of duty.
+  description: A dark blue medal awarded for a marine's service within the UNMC. These medals are issued to those who have shown a clear passion for their position and its success.
 
 - type: entity
   parent: RMCMedalBase
@@ -113,7 +171,7 @@
   parent: RMCMedalRuby
   id: RMCMedalRubyService
   name: ruby service medal
-  description: An Exalted ruby medal awarded for a marine's service within the UNMC; such medals are hand-given by UNMC Generals directly to a marine. It signifies the excessive amount of time a marine has spent in the line of duty.
+  description: A deep crimson colored medal awarded for a marine's consistent service within the UNMC. This medal represent true dedication to one department and position.
 
 - type: entity
   parent: RMCMedalBase
@@ -133,7 +191,7 @@
   parent: RMCMedalAmethyst
   id: RMCMedalAmethystService
   name: amethyst service medal
-  description: A mythical amethyst medal awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the unreasonable amount of time a marine has spent in the line of duty.
+  description: A pale violet colored medal awarded for a marine's service within the UNMC. This medal and those after represent someone who has weathered countless long and difficult deployments but conquered and learned from them.
 
 - type: entity
   parent: RMCMedalBase
@@ -153,7 +211,7 @@
   parent: RMCMedalEmerald
   id: RMCMedalEmeraldService
   name: emerald service medal
-  description: A revered emerald awarded for a marine's service within the UNMC; such medals are hand-given by UNMC High Command directly to a marine. It signifies the exorbitant amount of time a marine has spent in the line of duty.
+  description: A bright emerald medal awarded for a marine's service within the UNMC. Emerald medals are awarded to represent a marine's multiple years of effort to grow and learn in their position, it is one of the final awards representing a marine's career through service medals.
 
 - type: entity
   parent: RMCMedalBase
@@ -173,7 +231,7 @@
   parent: RMCMedalPrismatic
   id: RMCMedalPrismaticService
   name: prismatic service medal
-  description: A legendary prismatic medal awarded for a marine's service within the UNMC, Whom this is awarded may be a god walking amongst mere mortals. It signifies the nigh on impossible amount of time a marine has spent in the line of duty.
+  description: A multi-colored prismatic medal awarded for a marine's service within the UNMC. Prismatic medals are traditionally awarded to those who have spent countless years of service in their position. Medals like these are generally issued directly by adjutants or staff representing members of UNMC Command as the final possible service medal.
 
 # Civilian Ribbons
 

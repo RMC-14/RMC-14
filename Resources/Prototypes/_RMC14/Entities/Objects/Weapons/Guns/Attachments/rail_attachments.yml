@@ -161,6 +161,28 @@
 
 - type: entity
   parent: RMCRailAttachmentBase
+  id: RMCAttachmentS5MicroRedDotSight
+  name: S5-Micro dot sight
+  description: A lightweight, low-profile dot optic designed for rapid target acquisition with minimal weight penalty. Optimized for submachine guns and sidearms, it's ideal for close-quarters combat where speed and agility matter most.
+  components:
+  - type: Sprite
+    state: reddot_small
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentS5MicroRedDotSight
+  - type: AttachableVisuals
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+      accuracyAddMult: 0.15
+    - conditions:
+        unwieldedOnly: true
+      accuracyAddMult: 0.05
+
+- type: entity
+  parent: RMCRailAttachmentBase
   id: RMCAttachmentS6ReflexSight # reflex
   name: S6 reflex sight
   description: An AEGIS S6 reflex sight. A zero-magnification alternative to iron sights with a more open optic window when compared to the S5 red-dot. Helps to reduce scatter during automated fire.
@@ -540,6 +562,27 @@
     actionDesc: Lets you see further.
 
 - type: entity
+  parent: RMCM96SIntegratedScope
+  id: RMCL112IntegratedScope
+  name: L112O1 integrated scope
+  description: Blimey! I don't think that bit was supposed to come off the rifle...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    state: l112_scope
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCL112IntegratedScope
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+      state: l112_scope
+    actionName: Look through the L112 Integrated Scope
+    actionDesc: Lets you see further.
+
+- type: entity
   parent: RMCAttachmentScopeBase
   id: RMCAttachmentXS-9
   name: XS-9 targeting relay
@@ -611,6 +654,9 @@
   id: RMCAttachmentS5RedDotSight
 
 - type: Tag
+  id: RMCAttachmentS5MicroRedDotSight
+
+- type: Tag
   id: RMCAttachmentS6ReflexSight
 
 - type: Tag
@@ -636,6 +682,9 @@
 
 - type: Tag
   id: RMCType88IntegratedScope
+
+- type: Tag
+  id: RMCL112IntegratedScope
 
 - type: Tag
   id: RMCAttachmentXS-9

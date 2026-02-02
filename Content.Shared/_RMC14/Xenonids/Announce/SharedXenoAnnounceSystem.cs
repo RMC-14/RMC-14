@@ -90,6 +90,16 @@ public abstract class SharedXenoAnnounceSystem : EntitySystem
         AnnounceToHive(xeno, hive, message, sound, popup, color, needsQueen);
     }
 
+    public void AnnounceSameHiveDefaultSound(Entity<HiveMemberComponent?> xeno,
+        string message,
+        PopupType? popup = null,
+        Color? color = null,
+        bool needsQueen = false)
+    {
+        var sound = new BioscanComponent().XenoSound;
+        AnnounceSameHive(xeno, message, sound, popup, color, needsQueen);
+    }
+
     public void AnnounceAll(EntityUid source,
         string message,
         SoundSpecifier? sound = null,

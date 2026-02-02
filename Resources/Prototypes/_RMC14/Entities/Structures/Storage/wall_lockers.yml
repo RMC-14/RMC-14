@@ -46,4 +46,4 @@
   table: !type:AllSelector
     children:
     - id: RMCTabletCO
-    - id: RMCHeadsetMarineCommand
+    - id: CMHeadsetSeniorCommand

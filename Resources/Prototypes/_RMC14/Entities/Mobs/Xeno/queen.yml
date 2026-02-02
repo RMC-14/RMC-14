@@ -28,17 +28,8 @@
       visible: false
     - map: [ "enum.XenoInhandVisualLayers.Right" ]
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
+    - map: [ "enum.RMCShieldVisuals.Base" ]
+      sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
   - type: MobState
     allowedStates:
@@ -107,6 +98,10 @@
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
+  - type: InnateCommandSpeech
+  - type: RMCInnateRadioTextIncrease
+    radioTextIncrease: 3
+    instrinsic: true
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp
@@ -167,7 +162,7 @@
     footstepSoundCollection:
       collection: XenoFootstepLarge
       params:
-        volume: -6
+        volume: 0
 #  - type: RandomSound
 #    sound:
 #      collection: XenoQueenBreath # TODO RMC14
@@ -260,6 +255,9 @@
     value: 1.4
   - type: QueenEyeAction
   - type: StunFriendlyXenoOnStep
+    whitelist:
+      components:
+      - StunFriendlyXenoOnStep
   - type: XenoToggleChargingKnockback
     enabled: false
   - type: XenoToggleChargingStop
@@ -268,11 +266,15 @@
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartTQ
   - type: RMCTrackable
+  - type: ExcludedFromKingVote
+    canVote: true
 
 - type: entity
   parent: RMCXenoQueenBase
   id: CMXenoQueen
-  #components:
+  components:
+  - type: RMCActionOrder
+    id: CMXenoQueen
   # - type: XenoEvolution #can be enabled for events like april fools.
   #   strains:
   #   - RMCXenoQueenMaid

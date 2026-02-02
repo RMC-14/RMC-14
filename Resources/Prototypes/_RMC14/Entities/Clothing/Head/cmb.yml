@@ -10,4 +10,10 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/cmb_helmet.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 10
+    explosionArmor: 25
+    # armor_energy = 30
   - type: RMCEarProtection

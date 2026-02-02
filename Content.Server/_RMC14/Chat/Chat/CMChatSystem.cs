@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Server.Chat.Managers;
+using Content.Server.Chat.Systems;
 using Content.Server.Speech.EntitySystems;
 using Content.Server.Speech.Prototypes;
 using Content.Shared._RMC14.Chat;
@@ -9,6 +10,7 @@ using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Robust.Shared.Console;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Robust.Shared.Network;
@@ -21,7 +23,7 @@ namespace Content.Server._RMC14.Chat.Chat;
 public sealed class CMChatSystem : SharedCMChatSystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
-    [Dependency] private readonly SharedChatSystem _chatSystem = default!;
+    [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -148,6 +150,31 @@ public sealed class CMChatSystem : SharedCMChatSystem
             colorOverride,
             audioPath,
             audioVolume
+        );
+    }
+
+    public override void Emote(
+        EntityUid source,
+        string message,
+        string? nameOverride = null,
+        bool checkRadioPrefix = true,
+        bool ignoreActionBlocker = false)
+    {
+        ICommonSession? player = null;
+        if (TryComp(source, out ActorComponent? actor))
+            player = actor.PlayerSession;
+
+        _chatSystem.TrySendInGameICMessage(
+            source,
+            message,
+            InGameICChatType.Emote,
+            ChatTransmitRange.Normal,
+            false,
+            null,
+            player,
+            nameOverride,
+            checkRadioPrefix,
+            ignoreActionBlocker
         );
     }
 

@@ -83,3 +83,14 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_pvtml
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRolePvM
+  name: Provost Marshal
+  description: Provost Marshal
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: provost_marshal

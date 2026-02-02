@@ -368,6 +368,25 @@ public sealed class AreaSystem : EntitySystem
         return area.Value.Comp.SupplyDrop;
     }
 
+    public void TrySetCanOrbitalBombardRoofing(Entity<RoofingEntityComponent?> roofing, bool ob)
+    {
+        if (!Resolve(roofing, ref roofing.Comp, false) ||
+            roofing.Comp.CanOrbitalBombard == ob)
+        {
+            return;
+        }
+
+        roofing.Comp.CanOrbitalBombard = ob;
+        Dirty(roofing);
+    }
+
+    public string GetAreaName(EntityUid coordinates)
+    {
+        return TryGetArea(coordinates.ToCoordinates(), out _, out var area)
+            ? area.Name
+            : Loc.GetString("rmc-tacmap-alert-no-area");
+    }
+
     public override void Update(float frameTime)
     {
         try

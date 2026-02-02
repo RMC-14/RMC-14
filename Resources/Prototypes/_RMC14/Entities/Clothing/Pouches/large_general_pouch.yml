@@ -19,3 +19,13 @@
     contents:
     - id: RMCMagazineSmartGunHT
       amount: 2
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledRoyalCommando
+  suffix: Filled, RoyalCommando
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHeadRoyalBeret
+    - id: CMMaskGas # TODO RMC14 royal marine gas masks

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Content.Shared.Database;
 using Microsoft.EntityFrameworkCore;
+using NpgsqlTypes;
 
 namespace Content.Server.Database;
 
@@ -235,4 +236,55 @@ public sealed class RMCPlayerStats
     public Player Player { get; set; } = default!;
 
     public int ParasiteInfects { get; set; }
+}
+
+[Table("rmc_player_action_order")]
+[PrimaryKey(nameof(PlayerId), nameof(Id))]
+public sealed class RMCPlayerActionOrder
+{
+    [ForeignKey("Player")]
+    public Guid PlayerId { get; set; }
+
+    public Player Player { get; set; } = default!;
+
+    public string Id { get; set; } = default!;
+
+    public List<string> Actions { get; set; } = default!;
+}
+
+[Table("rmc_chat_bans"), Index(nameof(PlayerId)), Index(nameof(Address))]
+public sealed class RMCChatBans
+{
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
+
+    [ForeignKey(nameof(Round))]
+    public int? RoundId { get; set; }
+    public Round? Round { get; set; }
+
+    [ForeignKey(nameof(Player))]
+    public Guid PlayerId { get; set; }
+    public Player Player { get; set; } = default!;
+    public NpgsqlInet? Address { get; set; }
+    public TypedHwid? HWId { get; set; }
+
+    public ChatType Type { get; set; }
+
+    public DateTime BannedAt { get; set; }
+
+    public DateTime? ExpiresAt { get; set; }
+
+    public string Reason { get; set; } = null!;
+
+    public Guid? BanningAdminId { get; set; }
+    public Player? BanningAdmin { get; set; }
+
+    public Guid? UnbanningAdminId { get; set; }
+    public Player? UnbanningAdmin { get; set; }
+    public DateTime? UnbannedAt { get; set; }
+
+    public Guid? LastEditedById { get; set; }
+    public Player? LastEditedBy { get; set; }
+    public DateTime? LastEditedAt { get; set; }
 }

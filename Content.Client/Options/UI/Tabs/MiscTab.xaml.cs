@@ -59,6 +59,7 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoEjectMagazines, RMCAutoEjectMagazines);
         Control.AddOptionCheckBox(RMCCVars.RMCDamageYourself, RMCDamageYourself);
+        Control.AddOptionCheckBox(RMCCVars.RMCShowNewPlayerIcons, RMCShowNewPlayerIcons);
 
         Control.Initialize();
     }

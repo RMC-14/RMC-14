@@ -1,6 +1,7 @@
 ﻿- type: entity
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
-  id: RMCSmartGunPVE
+  id: RMCSmartGunPVENoCamo
+  abstract: true
   name: ML66A heavy support gun
   description: The actual firearm in the Support Gun System. Essentially a heavy, mobile machinegun.
   suffix: PVE
@@ -36,9 +37,6 @@
     layers:
     - state: base
       sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
-    - state: camo
-      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
-      map: [ "enum.ItemCamouflageLayers.Layer" ]
     - state: mag-0
       sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
@@ -47,13 +45,6 @@
     slots:
     - suitStorage
     - Back
-  - type: ItemCamouflage
-    colors:
-      Jungle: "#ccd08d"
-      Desert: "#ffd2a6"
-      Snow: "#ddcbc9"
-      Classic: "#c7e7d9"
-      Urban: "#acb8c7"
   - type: MeleeWeapon
     damage:
       types:
@@ -152,6 +143,7 @@
           tags:
           - RMCAttachmentRailFlashlight
       rmc-aslot-harness:
+        locked: true
         startingAttachable: RMCAttachmentSmartgunHarness
         whitelist:
           tags:
@@ -159,18 +151,78 @@
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: -0.1875, 0.125
-      rmc-aslot-harness: -0.1875, 0.1
+      rmc-aslot-harness: -0.1475, 0.05
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
       state: all
 
 - type: entity
+  parent: RMCSmartGunPVENoCamo
+  id: RMCSmartGunPVE
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+    - state: camo
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml66a.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#ccd08d"
+      Desert: "#ffd2a6"
+      Snow: "#ddcbc9"
+      Classic: "#c7e7d9"
+      Urban: "#acb8c7"
+
+- type: entity
+  parent: RMCSmartGunPVENoCamo
+  id: RMCSmartGunPMCPVE
+  name: ML79A heavy support gun
+  description: The actual firearm in the Support Gun System, modified for We-Ya PMCs. Essentially a heavy, mobile machinegun.
+  suffix: PVE, PMC
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/SmartGuns/ml79a.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineSmartGunirradiated
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineSmartGunirradiated
+          - RMCMagazineSmartGun
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: RMCPowerCellSmartgun
+        whitelist:
+          components:
+          - SmartGunBattery
+
+- type: entity
   parent: RMCStockAttachmentCollapsibleBase
   id: RMCAttachmentSmartgunHarness # TODO RMC14 - This should remove GunRequiresWield when active
+  categories: [ HideSpawnMenu ]
   name: ML66A heavy support gun harness
   description: A specialized harness for the ML66A heavy support gun, assisting with recoil control and stability, while also allowing for easy manuvering of the weapon and even suspending it without a grip.
-  suffix: PVE, DO NOT MAP FOR PVP.
+  suffix: PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi

@@ -21,6 +21,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: XenoNestSurface
+  - type: XenoConstructionMinRange
   - type: XenoConstructionPlasmaCost
     plasma: 120
     scalingCost: true
@@ -94,6 +95,7 @@
         - GlassLayer
         density: 1000
   - type: XenoNestSurface
+  - type: XenoConstructionMinRange
   - type: XenoConstructionPlasmaCost
     plasma: 95
     scalingCost: true

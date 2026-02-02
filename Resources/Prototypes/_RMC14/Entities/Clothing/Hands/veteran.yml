@@ -54,7 +54,7 @@
   parent: RMCHandsVeteranPMC
   id: RMCHandsVeteranPMCCommando
   name: M5X gauntlets
-  description: A pair of heavily armored gloves made to complete the M5X exoskeleton armor
+  description: A pair of heavily armored gloves made to complete the M5X exoskeleton armor.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi

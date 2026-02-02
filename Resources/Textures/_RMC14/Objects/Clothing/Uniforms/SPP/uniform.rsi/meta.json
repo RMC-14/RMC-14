@@ -15,15 +15,15 @@
       "directions": 4
     },
     {
+      "name": "sleeves-equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
       "name": "jacket-equipped-INNERCLOTHING",
       "directions": 4
     },
     {
       "name": "upp_uniform_df",
-      "directions": 4
-    },
-    {
-      "name": "upp_uniform_dj",
       "directions": 4
     }
   ]

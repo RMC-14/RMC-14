@@ -15,3 +15,12 @@
   sprite:
     sprite: _RMC14/Decals/pve.rsi
     state: closed2
+
+- type: decal
+  id: RMCDecalPVEYellowSign
+  parent: CMDecalBase
+  tags: ["station", "markings"]
+  defaultCustomColor: true
+  sprite:
+    sprite: _RMC14/Decals/pve.rsi
+    state: yellow_sign

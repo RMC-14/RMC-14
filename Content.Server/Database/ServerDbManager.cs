@@ -389,6 +389,27 @@ namespace Content.Server.Database
 
         Task IncreaseInfects(Guid player);
 
+        Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
+
+        Task SetActionOrder(Guid player, string id, List<string> actions);
+
+        Task AddChatBan(
+            int? round,
+            NetUserId target,
+            (IPAddress, int)? addressRange,
+            ImmutableTypedHwid? hwid,
+            TimeSpan? duration,
+            ChatType type,
+            NetUserId admin,
+            string reason
+        );
+
+        Task<List<RMCChatBans>> GetAllChatBans(Guid player);
+
+        Task<List<RMCChatBans>> GetActiveChatBans(Guid player);
+
+        Task<Guid?> TryPardonChatBan(int id, Guid? admin);
+
         #endregion
 
         #region DB Notifications
@@ -1243,6 +1264,50 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.IncreaseInfects(player));
+        }
+
+        public Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetActionOrder(player));
+        }
+
+        public Task SetActionOrder(Guid player, string id, List<string> actions)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.SetActionOrder(player, id, actions));
+        }
+
+        public Task AddChatBan(
+            int? round,
+            NetUserId target,
+            (IPAddress, int)? addressRange,
+            ImmutableTypedHwid? hwid,
+            TimeSpan? duration,
+            ChatType type,
+            NetUserId admin,
+            string reason)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.AddChatBan(round, target, addressRange, hwid, duration, type, admin, reason));
+        }
+
+        public Task<List<RMCChatBans>> GetAllChatBans(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetAllChatBans(player));
+        }
+
+        public Task<List<RMCChatBans>> GetActiveChatBans(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetActiveChatBans(player));
+        }
+
+        public Task<Guid?> TryPardonChatBan(int id, Guid? admin)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.TryPardonChatBan(id, admin));
         }
 
         // Wrapper functions to run DB commands from the thread pool.

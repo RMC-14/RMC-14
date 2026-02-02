@@ -27,6 +27,7 @@
       - Slicing
     useSound:
       path: /Audio/Items/Culinary/chop.ogg
+  - type: DeleteOnExplosion
 
 - type: entity
   name: kitchen knife

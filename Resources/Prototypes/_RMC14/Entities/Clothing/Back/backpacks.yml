@@ -18,9 +18,16 @@
   - type: CMStorageVisualizer
     storageClosed: closedLayer
     storageOpen: openLayer
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: EmitSoundOnLand
     sound:
       collection: RMCEquipArmor
+      params:
+        volume: -4
   - type: Clothing
     equipSound:
       collection: storageRustle
@@ -232,6 +239,7 @@
     popup: rmc-solution-transfer-whitelist-failed-not-welding-tank
     sourceWhitelist:
       components:
+      - RMCFlamerTank
       - Welder
     targetWhitelist:
       tags:
@@ -260,8 +268,8 @@
     - state: ammo_pack-0
       map: ["enum.StorageFillLayers.Fill"]
   - type: ClothingSpeedModifier
-    walkModifier: 0.710
-    sprintModifier: 0.710
+    walkModifier: 0.910
+    sprintModifier: 0.850
   - type: HeldSpeedModifier
   - type: StorageFillVisualizer
     fillBaseName: ammo_pack

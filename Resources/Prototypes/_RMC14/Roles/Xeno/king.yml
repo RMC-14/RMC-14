@@ -1,0 +1,9 @@
+﻿- type: job
+  parent: CMJobXenoBase
+  id: RMCXenoKing
+  name: rmc-job-name-xeno-king
+  playTimeTracker: RMCJobXenoKing
+
+- type: playTimeTracker
+  id: RMCJobXenoKing
+  isXeno: true

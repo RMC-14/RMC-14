@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi, other sprites and weya logo decals by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -27,6 +27,51 @@
     },
     {
       "name": "almayer6"
+    },
+    {
+      "name": "engi0"
+    },
+    {
+      "name": "engi1"
+    },
+    {
+      "name": "med0"
+    },
+    {
+      "name": "med1"
+    },
+    {
+      "name": "smart0"
+    },
+    {
+      "name": "smart1"
+    },
+    {
+      "name": "ftl0"
+    },
+    {
+      "name": "ftl1"
+    },
+    {
+      "name": "sl0"
+    },
+    {
+      "name": "sl1"
+    },
+    {
+      "name": "spec0"
+    },
+    {
+      "name": "spec1"
+    },
+    {
+      "name": "weya_1"
+    },
+    {
+      "name": "weya_2"
+    },
+    {
+      "name": "weya_3"
     }
   ]
 }

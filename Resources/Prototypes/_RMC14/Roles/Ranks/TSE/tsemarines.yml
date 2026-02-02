@@ -103,97 +103,97 @@
 # The below ranks are for the JAPANESE TSE marines. What does that mean? Why do they have two sets of ranks? Why does this exist? Why must we suffer like this?
 
 - type: rank
-  id: RMCRankIASFNitoRikushi
+  id: RMCRankEIAFNitoRikushi
   name: Nito Rikushi
   prefix: Nt-Shi.
   paygrade: E2
 
 - type: rank
-  id: RMCRankIASFIttoRikushi
+  id: RMCRankEIAFIttoRikushi
   name: Itto Rikushi
   prefix: It-Shi.
   paygrade: E3
 
 - type: rank
-  id: RMCRankIASFRikushicho
+  id: RMCRankEIAFRikushicho
   name: Rikushicho
   prefix: Shi.
   paygrade: E4
 
 - type: rank
-  id: RMCRankIASFSantoRikuso
+  id: RMCRankEIAFSantoRikuso
   name: Santo Rikuso
   prefix: St-Rik.
   paygrade: E5
 
 - type: rank
-  id: RMCRankIASFNitoRikuso
+  id: RMCRankEIAFNitoRikuso
   name: Nito Rikuso
   prefix: Nt-Rik.
   paygrade: E6
 
 - type: rank
-  id: RMCRankIASFIttoRikuso
+  id: RMCRankEIAFIttoRikuso
   name: Itto Rikuso
   prefix: It-Rik.
   paygrade: E7
 
 - type: rank
-  id: RMCRankIASFRikusocho
+  id: RMCRankEIAFRikusocho
   name: Rikusocho
   prefix: Rik.
   paygrade: E8
 
 - type: rank
-  id: RMCRankIASFSantoKaii
+  id: RMCRankEIAFSantoKaii
   name: Santo Kaii
   prefix: St-Wei.
   paygrade: O1
 
 - type: rank
-  id: RMCRankIASFNitoKaii
+  id: RMCRankEIAFNitoKaii
   name: Nito Kaii
   prefix: Nt-Wei.
   paygrade: O2
 
 - type: rank
-  id: RMCRankIASFIttoKaii
+  id: RMCRankEIAFIttoKaii
   name: Itto Kaii
   prefix: It-Wei.
   paygrade: O3
 
 - type: rank
-  id: RMCRankIASFSantoKaisa
+  id: RMCRankEIAFSantoKaisa
   name: Santo Kaisa
   prefix: St-Sa.
   paygrade: O4
 
 - type: rank
-  id: RMCRankIASFNitoKaisa
+  id: RMCRankEIAFNitoKaisa
   name: Nito Kaisa
   prefix: Nt-Sa.
   paygrade: O5
 
 - type: rank
-  id: RMCRankIASFIttoKaisa
+  id: RMCRankEIAFIttoKaisa
   name: Itto Kaisa
   prefix: It-Sa.
   paygrade: O6
 
 - type: rank
-  id: RMCRankIASFKaishoHo
+  id: RMCRankEIAFKaishoHo
   name: Kaisho-ho
   prefix: It-Sho.
   paygrade: O7
 
 - type: rank
-  id: RMCRankIASFKaisho
+  id: RMCRankEIAFKaisho
   name: Kaisho
   prefix: Sho.
   paygrade: O8
 
 - type: rank
-  id: RMCRankIASFBakuryochotarusho
+  id: RMCRankEIAFBakuryochotarusho
   name: Bakuryōchō-taru-shō
   prefix: Bt-Sho.
   paygrade: O9

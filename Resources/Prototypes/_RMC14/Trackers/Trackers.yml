@@ -51,6 +51,7 @@
 - type: trackerMode
   id: FireteamLeader
   job: CMFireteamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: PVESquadLeader
@@ -68,7 +69,7 @@
 - type: trackerMode
   id: LeaderPmc
   job: RMCPMCLeader
-  alert: SquadTrackerPMCTeamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -78,7 +79,7 @@
 - type: trackerMode
   id: TeamLeaderPmcPVE
   job: CMPMCTeamLeadPVE
-  alert: SquadTrackerPMCTeamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: CorporateLiaison

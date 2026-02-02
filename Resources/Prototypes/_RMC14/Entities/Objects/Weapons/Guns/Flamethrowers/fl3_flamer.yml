@@ -52,10 +52,30 @@
 
 - type: entity
   parent: RMCWeaponFL3Flamer
+  id: RMCWeaponFL3FlamerPVE
+  suffix: PVE
+  components:
+  - type: RMCMagneticItem
+  - type: Gun
+    fireRate: 2
+
+- type: entity
+  parent: RMCWeaponFL3Flamer
   id: RMCWeaponFL3FlamerWhiteout
   suffix: Whiteout
   components:
   - type: RMCMagneticItem
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerFL3Whiteout
+        insertSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Flamer/wy_flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerFL3
 
 - type: entity
   parent: RMCTankFlamer
@@ -71,6 +91,9 @@
     - state: flametank_strip2
     - state: flametank_strip2
       map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: RMCFlamerTank
+    maxIntensity: 70
+    maxRange: 8
   - type: SolutionContainerManager
     solutions:
       rmc_flamer_tank:
@@ -84,6 +107,20 @@
   - type: Tag
     tags:
     - RMCTankFlamerFL3
+
+- type: entity
+  parent: RMCTankFlamerFL3
+  id: RMCTankFlamerFL3Whiteout
+  name: FW3 heavy incinerator tank (EX)
+  description: A heavy fuel tank of Ultra Thick Napthal Fuel type EX, a sticky combustible liquid chemical that burns so hot it melts straight through most flame-resistant materials, utilized by the Flammenwerfer 3 Heavy Incineration Unit. This has a blue, heat-resistant Weston-Yamada logo on it. Handle with care.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 300
+        reagents:
+        - ReagentId: RMCNapalmEX
+          Quantity: 300
 
 - type: Tag
   id: RMCWeaponIncineratorFL3

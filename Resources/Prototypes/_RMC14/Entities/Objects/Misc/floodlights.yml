@@ -9,8 +9,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-    flags:
-    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
@@ -60,8 +58,20 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
+
+- type: entity
+  parent: RMCSmallFloodlight
+  id: RMCSmallFloodlightUnanchored
+  name: small floodlight
+  description: A small bit of light in the darkness.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+      anchored: False
+    - type: Physics
+      bodyType: Dynamic
 
 - type: entity
   parent: BaseStructure
@@ -125,7 +135,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
   - type: ToggleableVisuals
     spriteLayer: light
@@ -168,7 +178,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # LZ Floodlights
 
@@ -239,7 +249,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
@@ -279,7 +289,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # Traffic light
 
@@ -319,7 +329,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Construction
     graph: RMCFloodlightBroken
     node: completed

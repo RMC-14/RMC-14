@@ -169,7 +169,7 @@ public sealed partial class DoAfterArgs
 
     /// <summary>
     ///     RMC14
-    ///     Whether or not to use the position compensated by lag for the target, with the user as the reference.
+    ///     Whether to use the position compensated by lag for the target, with the user as the reference.
     /// </summary>
     [DataField]
     public bool LagCompensated;

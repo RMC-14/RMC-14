@@ -1,0 +1,16 @@
+- type: entity
+  id: ActionMutineerRecruit
+  parent: ActionMarineBase
+  name: Recruit mutineer
+  description: Ask a marine to join the mutiny.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: hudmutineer
+    useDelay: 2
+  - type: TargetAction
+    range: 1.5
+  - type: EntityTargetAction
+    event: !type:MutineerRecruitActionEvent

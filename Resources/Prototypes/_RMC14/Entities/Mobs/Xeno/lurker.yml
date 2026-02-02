@@ -20,6 +20,9 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -119,6 +122,7 @@
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
+    resetMeleeCooldown: true
   - type: XenoTailStab
     tailDamage:
       groups:
@@ -128,6 +132,8 @@
     - RMCXenoLurkerVampire
   - type: VentCrawler
     ventCrawlIcon: lurker
+  - type: RMCActionOrder
+    id: CMXenoLurker
 
 - type: entity
   parent: RMCXenoLurkerBase
@@ -202,3 +208,5 @@
   - type: XenoHidden
   - type: VentCrawler
     ventCrawlIcon: vampire
+  - type: RMCActionOrder
+    id: RMCXenoLurkerVampire

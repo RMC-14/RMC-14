@@ -66,8 +66,10 @@
   - type: Appearance
   - type: RMCMesonsNonviewable
   - type: XenoResinHole
+  - type: XenoFriendly
   - type: XenoAnnounceStructureDestruction
     messageID: rmc-xeno-construction-resin-hole-destroyed
+    structureName: empty
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible

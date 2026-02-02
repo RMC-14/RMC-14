@@ -49,7 +49,7 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         SubscribeLocalEvent<ReagentTankComponent, InteractUsingEvent>(OnWelderInteractUsing);
     }
-//
+
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -96,6 +96,9 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
+        if (!CanRepairPopup(user, repairable))
+            return;
+
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
 
@@ -127,8 +130,14 @@ public sealed class RMCRepairableSystem : EntitySystem
 
         args.Handled = true;
 
-        if (args.Used == null || !UseFuel(args.Used.Value, args.User, repairable.Comp.FuelUsed))
+        if (!CanRepairPopup(args.User, repairable))
             return;
+
+        if (args.Used == null ||
+            !UseFuel(args.Used.Value, args.User, repairable.Comp.FuelUsed))
+        {
+            return;
+        }
 
         var heal = -_rmcDamageable.DistributeTypesTotal(repairable.Owner, repairable.Comp.Heal);
         _damageable.TryChangeDamage(repairable, heal, true);
@@ -138,6 +147,13 @@ public sealed class RMCRepairableSystem : EntitySystem
         var othersMsg = Loc.GetString("rmc-repairable-finish-others", ("user", user), ("target", repairable));
         _popup.PopupPredicted(selfMsg, othersMsg, user, user);
         _audio.PlayPredicted(repairable.Comp.Sound, repairable, user);
+
+        if (TryComp(repairable, out DamageableComponent? damageable) &&
+            damageable.TotalDamage > FixedPoint2.Zero &&
+            heal.GetTotal() != FixedPoint2.Zero)
+        {
+            args.Repeat = true;
+        }
     }
 
     public bool UseFuel(EntityUid tool, EntityUid user, FixedPoint2 fuelUsed, bool attempt = false)
@@ -367,5 +383,16 @@ public sealed class RMCRepairableSystem : EntitySystem
 
             args.Handled = true;
         }
+    }
+
+    private bool CanRepairPopup(EntityUid user, EntityUid target)
+    {
+        var ev = new RMCRepairableTargetAttemptEvent(user, target);
+        RaiseLocalEvent(target, ref ev);
+        if (!ev.Cancelled)
+            return true;
+
+        _popup.PopupClient(ev.Popup, user, user, PopupType.MediumCaution);
+        return false;
     }
 }

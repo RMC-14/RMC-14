@@ -11,8 +11,7 @@
     canCollide: false
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/bobda_streamers.rsi
-    layers:
-    - state: post
+    state: post
     drawdepth: Overdoors
   - type: Clickable
   - type: InteractionOutline
@@ -38,6 +37,8 @@
         sound:
           collection: MetalBreak
 
+# Bobda
+
 - type: entity
   parent: RMCStreamerBase
   id: RMCStreamerPole
@@ -51,8 +52,7 @@
   components:
   - type: Sprite
     offset: 0, 0.5
-    layers:
-    - state: post_off1
+    state: post_off1
 
 - type: entity
   parent: RMCStreamerPoleOffset1
@@ -60,16 +60,14 @@
   suffix: Offset, Connected
   components:
   - type: Sprite
-    layers:
-    - state: post_off2
+    state: post_off2
 
 - type: entity
   parent: RMCStreamerPoleOffset1
   id: RMCStreamerPoleOffset3
   components:
   - type: Sprite
-    layers:
-    - state: post_off3
+    state: post_off3
 
 - type: entity
   parent: RMCStreamerPoleOffset1
@@ -77,8 +75,7 @@
   suffix: Offset, Connected
   components:
   - type: Sprite
-    layers:
-    - state: post_off4
+    state: post_off4
 
 - type: entity
   parent: RMCStreamerBase
@@ -87,8 +84,7 @@
   description: They flutter softly. Poignant.
   components:
   - type: Sprite
-    layers:
-    - state: streamer
+    state: streamer
 
 - type: entity
   parent: RMCStreamerOrange
@@ -97,3 +93,60 @@
   components:
   - type: Sprite
     offset: 0, 0.5
+
+# Horizon
+
+- type: entity
+  parent: RMCStreamerPole
+  id: RMCStreamerPoleHorizon
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset1
+  id: RMCStreamerPoleHorizonOffset1
+  suffix: Offset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset2
+  id: RMCStreamerPoleHorizonOffset2
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset3
+  id: RMCStreamerPoleHorizonOffset3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerPoleOffset4
+  id: RMCStreamerPoleHorizonOffset4
+  suffix: Offset, Connected
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerOrange
+  id: RMCStreamerHorizon
+  name: horizon streamer
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi
+
+- type: entity
+  parent: RMCStreamerOrangeOffset
+  id: RMCStreamerHorizonOffset
+  name: horizon streamer
+  suffix: Offset
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/horizon_streamers.rsi

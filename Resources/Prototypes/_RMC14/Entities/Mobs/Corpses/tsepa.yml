@@ -1,0 +1,95 @@
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseTSE
+  abstract: true
+  components:
+  - type: NpcFactionMember
+    factions:
+    - TSE
+
+# Constable
+- type: randomHumanoidSettings
+  parent: RMCCorpseTSE
+  id: RMCCorpseTSEPAConstable
+  components:
+  - type: Loadout
+    prototypes:
+    - RMCGearCorpseTSEPAConstableOne
+    - RMCGearCorpseTSEPAConstableTwo
+    - RMCGearCorpseTSEPAConstableThree
+    - RMCGearCorpseTSEPAConstableFour
+    - RMCGearCorpseTSEPAConstableFive
+    - RMCGearCorpseTSEPAConstableSix
+  - type: Rank
+    rank: RMCRankTSEPAConstable
+  - type: Marine
+    icon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: tse_paconstable
+
+- type: randomHumanoidSettings
+  parent: RMCCorpseTSEPAConstable
+  id: RMCCorpseTSEPAConstableBurst
+  components:
+  - type: VictimBurst
+
+- type: startingGear
+  id: RMCGearCorpseTSEPAConstableBase
+  equipment:
+    eyes: RMCGlassesSecurityBlue
+    jumpsuit: RMCJumpsuitTSEPA
+    belt: RMCBeltHolsterPistolTSEFilledL54
+    shoes: RMCShoesLaceup
+    id: RMCIDCardConstableCorpse
+    back: RMCSatchelBlack
+    ears: RMCHeadsetTSEPA
+  storage:
+    back:
+    - RMCHandcuffs
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableBase
+  id: RMCGearCorpseTSEPAConstableOne
+  equipment:
+    head: RMCHeadCapTSEPAPeaked
+    outerClothing: RMCCoatTSEPA
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableOne
+  id: RMCGearCorpseTSEPAConstableTwo
+  equipment:
+    outerClothing: RMCCoatTSEPAFormal
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableOne
+  id: RMCGearCorpseTSEPAConstableThree
+  equipment:
+    outerClothing: RMCArmorVestTSEPA
+    suitstorage: RMCWeaponShotgunHG3712
+    pocket1: RMCPouchShotgunFilledConstable
+  storage:
+    back:
+    - RMCHandcuffs
+    - RMCExplosiveBreachingChargeRubberTSEPA
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableOne
+  id: RMCGearCorpseTSEPAConstableFour
+  equipment:
+    outerClothing: RMCCoatTSEPAHighVis
+    gloves: RMCHandsCombat
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableOne
+  id: RMCGearCorpseTSEPAConstableFive
+  equipment:
+    head: RMCHeadCapTSEPAPeakedGoldSilver
+    outerClothing: RMCCoatTSEPAHighVisVest
+    gloves: RMCHandsCombat
+
+- type: startingGear
+  parent: RMCGearCorpseTSEPAConstableTwo
+  id: RMCGearCorpseTSEPAConstableSix
+  equipment:
+    head: RMCHeadCapTSEPAPeakedGold
+    gloves: RMCHandsCombat

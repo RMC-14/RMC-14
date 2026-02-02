@@ -6,7 +6,7 @@
   name: materials-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/glass.rsi, state: glass }
   color: "#a8ccd7"
-  price: 0.075
+  price: 0.002
 
 - type: stack
   id: CMGlass
@@ -71,10 +71,14 @@
   description: Glass is a non-crystalline solid, made out of silicate, the primary constituent of sand. It is valued for its transparency, albeit it is not too resistant to damage.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowDirectionalBuild
+      # Full window
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMGlass: 100
+      CMGlass: 3750
   - type: Stack
     stackType: CMGlass
     count: 50
@@ -91,6 +95,10 @@
     layers:
       - state: glass_4
         map: ["base"]
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: CMSheetGlass
@@ -145,7 +153,7 @@
   name: materials-reinforced-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi, state: rglass }
   color: "#549bb0"
-  price: 0.16
+  price: 0.00284
 
 - type: stack
   id: CMGlassReinforced
@@ -161,10 +169,16 @@
   description: A sheet of reinforced glass.
   suffix: Filled
   components:
+  - type: RMCConstructionItem
+    buildable:
+      - RMCWindowReinforcedDirectionalBuild
+      # Full window
+      - RMCWindoorBuild
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMReinforcedGlass: 100
+      CMSteel: 1875
+      CMGlass: 3750
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/reinf_glass.rsi
     layers:
@@ -185,6 +199,11 @@
   - type: Construction
     graph: CMGlass
     node: SheetGlassReinforced
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
+
 
 - type: entity
   parent: CMSheetGlassReinforced
@@ -228,7 +247,7 @@
   name: materials-phoron-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi, state: phoronglass }
   color: "#b35989"
-  price: 0.30
+  price: 0.004
 
 - type: stack
   id: CMGlassPhoron
@@ -247,7 +266,7 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlass: 100
+      CMGlass: 7500
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/phoron_glass.rsi
     layers:
@@ -308,7 +327,7 @@
   name: materials-reinforced-phoron-glass
   icon: { sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi, state: phoronrglass }
   color: "#8c4069"
-  price: 0.40
+  price: 0.00426
 
 - type: stack
   id: CMGlassPhoronReinforced
@@ -327,7 +346,8 @@
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      CMPhoronGlassReinforced: 100
+      CMSteel: 1875
+      CMGlass: 7500
   - type: Sprite
     sprite: _RMC14/Objects/Materials/Sheets/phoron_reinf_glass.rsi
     layers:

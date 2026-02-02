@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3f12d8b58e7b1b15c1ecbcfbb0e50532e4bdbcf4/icons/landmarks.dmi, SPP PMC spawn sound and ambient by github noctynral, recruit_spawn is a modification of marine_spawn by github Ian321, random_bombsupply by CatAndHats (github) based on Multitool icon taken from https://github.com/cmss13-devs/cmss13/blob/bec6653d487a49aa2b5a8e0c97bed9612f620211/icons/obj/items/devices.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -115,6 +115,9 @@
     },
     {
       "name": "random_attachment"
+    },
+    {
+      "name": "random_bombsupply"
     },
     {
       "name": "random_cell_battery"
@@ -343,6 +346,9 @@
     },
     {
       "name": "engi_spawn_delta"
+    },
+    {
+      "name": "field_doc_spawn"
     },
     {
       "name": "medic_spawn"

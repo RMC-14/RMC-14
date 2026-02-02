@@ -31,6 +31,13 @@
         RMCSkillEndurance: 5
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-standard
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   hidden: true
 
 - type: entity
@@ -97,7 +104,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYaPMC
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
     - CMMagazineSMGM63AP
@@ -180,7 +187,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYaPMC
     - RMCMagazineRifleSSG45Extended
     - RMCMagazineRifleSSG45Extended
     pocket2:
@@ -261,7 +268,7 @@
     - RMCExplosivePlastic
     - CMStunbaton
     - CMCrowbar
-    - CMMRE # TODO RMC14: PMC CFR ration
+    - RMCMREWeYaPMC
     - CMMagazineRifleM54CAP
     - CMMagazineRifleM54CAP
     pocket2:

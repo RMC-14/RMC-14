@@ -1,0 +1,1391 @@
+﻿- type: entity
+  abstract: true
+  parent: CMBaseWallInvincible
+  id: RMCBaseCLFDropshipWall
+  name: UD-9M 'Dogbite' wall
+  components:
+  - type: Corrodible
+    isCorrodible: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/clf.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Dropships/clf.rsi
+  - type: Clickable
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall1
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 1
+  - type: Icon
+    state: 1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall2
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 2
+  - type: Icon
+    state: 2
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall3
+  components:
+  - type: Sprite
+    state: 3
+  - type: Icon
+    state: 3
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall4
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 4
+  - type: Icon
+    state: 4
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall5
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 5
+  - type: Icon
+    state: 5
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall6
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 6
+  - type: Icon
+    state: 6
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall7
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 7
+  - type: Icon
+    state: 7
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall8
+  name: UD-9M 'Dogbite' tail
+  components:
+  - type: Sprite
+    state: 8
+  - type: Icon
+    state: 8
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall9
+  components:
+  - type: Sprite
+    state: 9
+  - type: Icon
+    state: 9
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall9Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 9_alt
+  - type: Icon
+    state: 9_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall10
+  components:
+  - type: Sprite
+    state: 10
+  - type: Icon
+    state: 10
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall10Interior
+  suffix: Interior
+  components:
+  - type: Sprite
+    state: 10_interior
+  - type: Icon
+    state: 10_interior
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall10Interior1
+  suffix: Interior
+  components:
+  - type: Sprite
+    state: 10_interior_1
+  - type: Icon
+    state: 10_interior_1
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall11
+  components:
+  - type: Sprite
+    state: 11
+  - type: Icon
+    state: 11
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall12
+  components:
+  - type: Sprite
+    state: 12
+  - type: Icon
+    state: 12
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall13
+  components:
+  - type: Sprite
+    state: 13
+  - type: Icon
+    state: 13
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall14
+  components:
+  - type: Sprite
+    state: 14
+  - type: Icon
+    state: 14
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall15
+  components:
+  - type: Sprite
+    state: 15
+  - type: Icon
+    state: 15
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall15Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 15_alt
+  - type: Icon
+    state: 15_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall16
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 16
+  - type: Icon
+    state: 16
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall17
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 17
+  - type: Icon
+    state: 17
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall18
+  components:
+  - type: Sprite
+    state: 18
+  - type: Icon
+    state: 18
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall19
+  components:
+  - type: Sprite
+    state: 19
+  - type: Icon
+    state: 19
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall20
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 20
+  - type: Icon
+    state: 20
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall21
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 21
+  - type: Icon
+    state: 21
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall22
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 22
+  - type: Icon
+    state: 22
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall23
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 23
+  - type: Icon
+    state: 23
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall24
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 24
+  - type: Icon
+    state: 24
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall25
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 25
+  - type: Icon
+    state: 25
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall26
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 26
+  - type: Icon
+    state: 26
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall27
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 27
+  - type: Icon
+    state: 27
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall28
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 28
+  - type: Icon
+    state: 28
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall29
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 29
+  - type: Icon
+    state: 29
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall30
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 30
+  - type: Icon
+    state: 30
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall31
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 31
+  - type: Icon
+    state: 31
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall32
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 32
+  - type: Icon
+    state: 32
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall33
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 33
+  - type: Icon
+    state: 33
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall34
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 34
+  - type: Icon
+    state: 34
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall35
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 35
+  - type: Icon
+    state: 35
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall36
+  components:
+  - type: Sprite
+    state: 36
+  - type: Icon
+    state: 36
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall36Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 36_alt
+  - type: Icon
+    state: 36_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall37
+  components:
+  - type: Sprite
+    state: 37
+  - type: Icon
+    state: 37
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall37Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 37_alt
+  - type: Icon
+    state: 37_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall38
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 38
+  - type: Icon
+    state: 38
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall39
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 39
+  - type: Icon
+    state: 39
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall40
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 40
+  - type: Icon
+    state: 40
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall41
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 41
+  - type: Icon
+    state: 41
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall42
+  components:
+  - type: Sprite
+    state: 42
+  - type: Icon
+    state: 42
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall43
+  components:
+  - type: Sprite
+    state: 43
+  - type: Icon
+    state: 43
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall44
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 44
+  - type: Icon
+    state: 44
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall45
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: 45
+  - type: Icon
+    state: 45
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall46
+  components:
+  - type: Sprite
+    state: 46
+  - type: Icon
+    state: 46
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall47
+  components:
+  - type: Sprite
+    state: 47
+  - type: Icon
+    state: 47
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall48
+  components:
+  - type: Sprite
+    state: 48
+  - type: Icon
+    state: 48
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall49
+  components:
+  - type: Sprite
+    state: 49
+  - type: Icon
+    state: 49
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall50
+  components:
+  - type: Sprite
+    state: 50
+  - type: Icon
+    state: 50
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall51
+  components:
+  - type: Sprite
+    state: 51
+  - type: Icon
+    state: 51
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall52
+  components:
+  - type: Sprite
+    state: 52
+  - type: Icon
+    state: 52
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall53
+  components:
+  - type: Sprite
+    state: 53
+  - type: Icon
+    state: 53
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall54
+  components:
+  - type: Sprite
+    state: 54
+  - type: Icon
+    state: 54
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall55
+  components:
+  - type: Sprite
+    state: 55
+  - type: Icon
+    state: 55
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall56
+  components:
+  - type: Sprite
+    state: 56
+  - type: Icon
+    state: 56
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall57
+  components:
+  - type: Sprite
+    state: 57
+  - type: Icon
+    state: 57
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall58
+  components:
+  - type: Sprite
+    state: 58
+  - type: Icon
+    state: 58
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall59
+  components:
+  - type: Sprite
+    state: 59
+  - type: Icon
+    state: 59
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall60
+  components:
+  - type: Sprite
+    state: 60
+  - type: Icon
+    state: 60
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall61
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 61
+  - type: Icon
+    state: 61
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall62
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 62
+  - type: Icon
+    state: 62
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall63
+  components:
+  - type: Sprite
+    state: 63
+  - type: Icon
+    state: 63
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall64
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 64
+  - type: Icon
+    state: 64
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall65
+  components:
+  - type: Sprite
+    state: 65
+  - type: Icon
+    state: 65
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall66
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 66
+  - type: Icon
+    state: 66
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall67
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 67
+  - type: Icon
+    state: 67
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall68
+  components:
+  - type: Sprite
+    state: 68
+  - type: Icon
+    state: 68
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall69
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 69
+  - type: Icon
+    state: 69
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall70
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 70
+  - type: Icon
+    state: 70
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall71
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 71
+  - type: Icon
+    state: 71
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall72
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 72
+  - type: Icon
+    state: 72
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall73
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 73
+  - type: Icon
+    state: 73
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall74
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: 74
+  - type: Icon
+    state: 74
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall75
+  components:
+  - type: Sprite
+    state: 75
+  - type: Icon
+    state: 75
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall75Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 75_alt
+  - type: Icon
+    state: 75_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall76
+  components:
+  - type: Sprite
+    state: 76
+  - type: Icon
+    state: 76
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall77
+  components:
+  - type: Sprite
+    state: 77
+  - type: Icon
+    state: 77
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall78
+  components:
+  - type: Sprite
+    state: 78
+  - type: Icon
+    state: 78
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall79
+  components:
+  - type: Sprite
+    state: 79
+  - type: Icon
+    state: 79
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall80
+  components:
+  - type: Sprite
+    state: 80
+  - type: Icon
+    state: 80
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall81
+  components:
+  - type: Sprite
+    state: 81
+  - type: Icon
+    state: 81
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall82
+  components:
+  - type: Sprite
+    state: 82
+  - type: Icon
+    state: 82
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall83
+  components:
+  - type: Sprite
+    state: 83
+  - type: Icon
+    state: 83
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall83Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 83_alt
+  - type: Icon
+    state: 83_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall84
+  components:
+  - type: Sprite
+    state: 84
+  - type: Icon
+    state: 84
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall85
+  components:
+  - type: Sprite
+    state: 85
+  - type: Icon
+    state: 85
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall86
+  name: UD-9M 'Dogbite' window
+  components:
+  - type: Sprite
+    state: 86
+  - type: Icon
+    state: 86
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall89
+  components:
+  - type: Sprite
+    state: 89
+  - type: Icon
+    state: 89
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall90
+  components:
+  - type: Sprite
+    state: 90
+  - type: Icon
+    state: 90
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall91
+  components:
+  - type: Sprite
+    state: 91
+  - type: Icon
+    state: 91
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall92
+  components:
+  - type: Sprite
+    state: 92
+  - type: Icon
+    state: 92
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall92Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 92_alt
+  - type: Icon
+    state: 92_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall94Alt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: 94_alt
+  - type: Icon
+    state: 94_alt
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall95
+  components:
+  - type: Sprite
+    state: 95
+  - type: Icon
+    state: 95
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall96
+  components:
+  - type: Sprite
+    state: 96
+  - type: Icon
+    state: 96
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall97
+  components:
+  - type: Sprite
+    state: 97
+  - type: Icon
+    state: 97
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall98
+  components:
+  - type: Sprite
+    state: 98
+  - type: Icon
+    state: 98
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall99
+  components:
+  - type: Sprite
+    state: 99
+  - type: Icon
+    state: 99
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall100
+  components:
+  - type: Sprite
+    state: 100
+  - type: Icon
+    state: 100
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall101
+  components:
+  - type: Sprite
+    state: 101
+  - type: Icon
+    state: 101
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall102
+  components:
+  - type: Sprite
+    state: 102
+  - type: Icon
+    state: 102
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall103
+  components:
+  - type: Sprite
+    state: 103
+  - type: Icon
+    state: 103
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall104
+  components:
+  - type: Sprite
+    state: 104
+  - type: Icon
+    state: 104
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWall105
+  components:
+  - type: Sprite
+    state: 105
+  - type: Icon
+    state: 105
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall106
+  components:
+  - type: Sprite
+    state: 106
+  - type: Icon
+    state: 106
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall107
+  components:
+  - type: Sprite
+    state: 107
+  - type: Icon
+    state: 107
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall108
+  components:
+  - type: Sprite
+    state: 108
+  - type: Icon
+    state: 108
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall109
+  components:
+  - type: Sprite
+    state: 109
+  - type: Icon
+    state: 109
+
+- type: entity
+  parent: RMCCLFDropshipWall86
+  id: RMCCLFDropshipWall110
+  components:
+  - type: Sprite
+    state: 110
+  - type: Icon
+    state: 110
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing0
+  components:
+  - type: Sprite
+    state: zwing0
+  - type: Icon
+    state: zwing0
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing1
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing1
+  - type: Icon
+    state: zwing1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing2
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing2
+  - type: Icon
+    state: zwing2
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing3
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing3
+  - type: Icon
+    state: zwing3
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing4
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing4
+  - type: Icon
+    state: zwing4
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing5
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing5
+  - type: Icon
+    state: zwing5
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing6
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing6
+  - type: Icon
+    state: zwing6
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing7
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing7
+  - type: Icon
+    state: zwing7
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallZWing8
+  name: UD-9M 'Dogbite' wing
+  components:
+  - type: Sprite
+    state: zwing8
+  - type: Icon
+    state: zwing8
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallLeftEngine1
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: leftengine_1
+  - type: Icon
+    state: leftengine_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallLeftEngine2
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: leftengine_2
+  - type: Icon
+    state: leftengine_2
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallLeftEngine3
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: leftengine_3
+  - type: Icon
+    state: leftengine_3
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallRightEngine1
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: rightengine_1
+  - type: Icon
+    state: rightengine_1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallRightEngine2
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: rightengine_2
+  - type: Icon
+    state: rightengine_2
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallRightEngine3
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: rightengine_3
+  - type: Icon
+    state: rightengine_3
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallWY2
+  components:
+  - type: Sprite
+    state: wy2
+  - type: Icon
+    state: wy2
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallBrokenDropshipConsole1
+  name: UD-9M 'Dogbite' dropship console
+  components:
+  - type: Sprite
+    state: brokendropshipconsole1
+  - type: Icon
+    state: brokendropshipconsole1
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCCLFDropshipWallBrokenDropshipConsole1
+  id: RMCCLFDropshipWallBrokenDropshipConsole2
+  components:
+  - type: Sprite
+    state: brokendropshipconsole2
+  - type: Icon
+    state: brokendropshipconsole2
+
+- type: entity
+  parent: RMCCLFDropshipWallBrokenDropshipConsole1
+  id: RMCCLFDropshipWallBrokenDropshipConsole3
+  components:
+  - type: Sprite
+    state: brokendropshipconsole3
+  - type: Icon
+    state: brokendropshipconsole3
+
+- type: entity
+  parent: RMCCLFDropshipWallBrokenDropshipConsole1
+  id: RMCCLFDropshipWall93a
+  components:
+  - type: Sprite
+    state: 93a
+  - type: Icon
+    state: 93a
+
+- type: entity
+  parent: RMCCLFDropshipWallBrokenDropshipConsole1
+  id: RMCCLFDropshipWall93
+  components:
+  - type: Sprite
+    state: 93
+  - type: Icon
+    state: 93
+
+- type: entity
+  parent: RMCCLFDropshipWallBrokenDropshipConsole1
+  id: RMCCLFDropshipWall93b
+  components:
+  - type: Sprite
+    state: 93b
+  - type: Icon
+    state: 93b
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallWYLeftEngine
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: wy_leftengine
+  - type: Icon
+    state: wy_leftengine
+
+- type: entity
+  parent: RMCBaseCLFDropshipWall
+  id: RMCCLFDropshipWallWYRightEngine
+  name: UD-9M 'Dogbite' engine
+  components:
+  - type: Sprite
+    state: wy_rightengine
+  - type: Icon
+    state: wy_rightengine

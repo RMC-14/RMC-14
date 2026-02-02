@@ -154,6 +154,7 @@
     avoidBioscan: false
     noTunnel: true
     unweedable: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaVaraderoExterior
@@ -163,6 +164,7 @@
   - type: Area
     minimapColor: '#EBE5E5E3'
     landingZone: true
+    alwaysPowered: true
 
 - type: entity
   parent: RMCAreaVaraderoExteriorLz1Console
@@ -636,3 +638,13 @@
     state: predship
   - type: Area
     minimapColor: '#885A04E7'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorUnregisteredShuttle
+  name: New Varadero - Unregistered Shuttle
+  components:
+  - type: Sprite
+    state: offices0
+  - type: Area
+    minimapColor: '#39b2b5EE'

@@ -1,0 +1,92 @@
+﻿- type: entity
+  abstract: true
+  id: RMCHiveBoonBase
+  name: hive boon
+  components:
+  - type: HiveBoonDefinition
+    cost: 1
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonFireResistance
+  name: Boon of Fire Resistance
+  description: Makes all xenonids immune to fire for 5 minutes.
+  components:
+  - type: HiveBoonDefinition
+    duration: 5m
+    duplicateId: RMCHiveBoonFireResistance
+    event: !type:HiveBoonActivateFireResistanceEvent
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonLarvaSurge
+  name: Surge of Larva
+  description: Provides 5 larva instantly to the hive.
+  components:
+  - type: HiveBoonDefinition
+    cost: 5
+    reusable: false
+    duplicateId: RMCHiveBoonLarvaSurge
+    event: !type:HiveBoonActivateLarvaSurgeEvent
+
+- type: entity
+  parent: RMCHiveBoonBase
+  id: RMCHiveBoonKing
+  name: His Grace
+  description: A huge behemoth of a Xenonid which can tear its way through defences and flesh alike. Requires open space around the hive core to spawn.
+  components:
+  - type: HiveBoonDefinition
+    cost: 0
+    pylons: 2
+    cooldown: 15m
+    unlockAt: 90m
+    unlockAtRandomAdd: 25m
+    duplicateId: RMCHiveBoonKing
+    noLivingKing: true
+    requiresCore: true
+    event: !type:HiveBoonActivateKingEvent
+
+- type: entity
+  parent: BaseHiveStructure
+  id: RMCHiveCocoonKing
+  name: alien cocoon
+  description: A large pulsating cocoon.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        layer:
+        - BulletImpassable
+        density: 200
+      xeno_hive_core:
+        shape:
+          !type:PhysShapeCircle
+          radius: 1
+        hard: false
+        mask:
+        - SmallMobLayer
+  - type: CollisionWake
+    enabled: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/king_cocoon.rsi
+    state: growing
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 4000
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: WarpPoint
+    location: alien cocoon
+  - type: RMCTrackable
+  - type: HiveKingCocoon
+  - type: MeleeReceivedMultiplier
+    xenoDamage: {}

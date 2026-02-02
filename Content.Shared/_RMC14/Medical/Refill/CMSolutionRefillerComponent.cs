@@ -1,6 +1,7 @@
 ﻿using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -35,6 +36,12 @@ public sealed partial class CMSolutionRefillerComponent : Component
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan RechargeAt;
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? RefillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg")
+    {
+        Params = AudioParams.Default.WithVariation(0.125f),
+    };
 }
 
 [ByRefEvent]

@@ -2,15 +2,19 @@
   parent: CMJobBase
   id: CMPMCForceCommandPVE
   name: rmc-job-name-pmc-pve-force-command
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-force-command
   playTimeTracker: CMJobPMCForceCommandPVE
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 10800 # 3 hours
   ranks:
     RMCRankWeYaForceCommand: []
   startingGear: RMCJobPMCForceCommandPVE
   icon: RMCJobIconPMCDirector
   joinNotifyCrew: false
   accessGroups:
-  - Colony
+  - MarineMain
   - RMCWeYa
   spawnMenuRoleName: WEYA PMC Force Command (PVE)
   special:
@@ -20,22 +24,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillCqc: 1
-        RMCSkillLeadership: 3
-        RMCSkillOverwatch: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 4
-        RMCSkillExecution: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVEPlatoonCommander
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-pve-force-command
     - type: MarineOrders
@@ -71,6 +60,12 @@
   id: RMCJobPMCForceCommandPVE
   equipment:
     id: RMCIDCardPMC
+    jumpsuit: RMCJumpsuitVeteranPMCNoWebbing
+    shoes: RMCBootsPMC
+    head: ArmorHelmetPMC
+    ears: RMCHeadsetDistressPMCPVE
+    pocket1: RMCPouchGeneralLarge
+    pocket2: RMCPouchGeneralLarge
 
 - type: playTimeTracker
   id: CMJobPMCForceCommandPVE

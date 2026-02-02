@@ -2,7 +2,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3   #In cm13 the L42
   name: L83A3 rifle
-  description: The L42A3 Battle Rifle, found commonly in Three Sun Empires armories.
+  description: The L83A3 Battle Rifle, found commonly in Three Sun Empires armories.
   suffix: Filled
   components:
   - type: Sprite
@@ -180,7 +180,7 @@
 - type: entity
   parent: RMCMagazineRifleL83A3
   id: RMCMagazineRifleL83A3extended
-  description: "A extended magazine for the L83A3 rifle."
+  description: "An extended magazine for the L83A3 rifle."
   name: L83A3 Extended Magazine (5.56x45mm)
   suffix: Extended
   components:
@@ -339,7 +339,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3F
   name: L83A3F rifle
-  description: A Variant of the L83A3 with a heavily modified firing mechanism, giving it a burst-fire option.
+  description: A variant of the L83A3 with a heavily modified firing mechanism, giving it a burst-fire option.
   suffix: Filled
   components:
   - type: Sprite
@@ -475,7 +475,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: WeaponRifleL83A3M
   name: L83A3M rifle
-  description: The L42A3M Battle Rifle, modification sold to the Three Sun Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
+  description: The L83A3M Battle Rifle, a modification sold to the Three Sun Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
   suffix: Filled
   components:
   - type: Sprite

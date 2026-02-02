@@ -208,3 +208,13 @@
       state: sniper_aim
   - type: InstantAction
     event: !type:AimedShotActionEvent
+
+- type: entity
+  parent: ActionMarineBase
+  id: RMCActionBroiler
+  name: Switch Tank
+  description: Switch to a different fuel tank.
+  components:
+  - type: Action
+  - type: InstantAction
+    event: !type:RMCBroilerActionEvent
