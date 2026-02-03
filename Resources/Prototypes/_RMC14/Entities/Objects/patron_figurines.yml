@@ -2132,7 +2132,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronTheLazySlothComu
-  name: figurine
+  name: Sque 'Squealer Squeak' Pippin figurine
   description: "They don't know how they got turned into a marketable mini figure..."
   components:
   - type: Sprite
