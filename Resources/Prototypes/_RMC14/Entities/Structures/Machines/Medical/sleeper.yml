@@ -1,0 +1,117 @@
+# Sleeper Medical Pod
+# TODO RMC14: Add proper sleeper sprites (currently using hypersleep as placeholder)
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCSleeper
+  name: sleeper
+  description: A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/hypersleep.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: open
+      map: ["enum.SleeperVisualLayers.Base"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sleeper
+  - type: DragInsertContainer
+    containerId: sleeper
+  - type: ExitContainerOnMove
+    containerId: sleeper
+  - type: ContainerContainer
+    containers:
+      sleeper: !type:ContainerSlot {}
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SleeperVisuals.Occupied:
+        enum.SleeperVisualLayers.Base:
+          True: { state: closed }
+          False: { state: open }
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: NoStunOnExit
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCSleeperConsole
+  name: sleeper console
+  description: A console used to control the sleeper. Allows chemical injection and dialysis.
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/computer.rsi
+    noRot: true
+    layers:
+    - state: computer
+    - state: overwatch
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: SleeperConsole
+  - type: UserInterface
+    interfaces:
+      enum.SleeperUIKey.Key:
+        type: SleeperConsoleBui
+  - type: ActivatableUI
+    key: enum.SleeperUIKey.Key
+  - type: RMCMesonsNonviewable
+
+# Advanced Sleeper variant
+- type: entity
+  parent: RMCSleeper
+  id: RMCSleeperAdvanced
+  name: advanced sleeper
+  description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
+  components:
+  - type: Sleeper
+    availableChemicals:
+    - RMCInaprovaline
+    - RMCTramadol
+    - RMCDylovene
+    - RMCDexalinPlus
+    - RMCTricordrazine
+    - RMCAlkysine
+    - RMCImidazoline
+    emergencyChemicals:
+    - RMCInaprovaline
+    - RMCTramadol
+    - RMCDylovene
+    - RMCDexalinPlus
+    - RMCTricordrazine
+    - RMCOxycodone
+    - RMCBicaridine
+    - RMCKelotane
+    - RMCMeralyne
+    - RMCDermaline
+    - RMCAlkysine
+    - RMCImidazoline
+    reagentRemovalRate: 8
