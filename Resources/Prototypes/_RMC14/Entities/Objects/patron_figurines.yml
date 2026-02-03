@@ -2271,3 +2271,14 @@
     state: austin_austie_eventide
   - type: PatronFigurine
     id: 6ff41436-85a7-4c3b-bb39-b29738fedef5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronTrinityRathens
+  name: Trinity Rathens figurine
+  description: "Beaten and bloodied, Trinity holds out a cigar to share with a piercing stare and a smile on her face. You are unsure if the blood is hers or not, or if you should even accept the cigar, for she also has her hand resting on her pistol in its holster. Will you tempt fate?"
+  components:
+  - type: Sprite
+    state: trinity_rathens
+  - type: PatronFigurine
+    id: 590188a9-c7e1-4e17-af5d-5f6c042ccaa6
