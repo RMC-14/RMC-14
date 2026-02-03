@@ -224,9 +224,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         SoundSpecifier? sound = null)
     {
         var colorHex = squadColor.ToHex();
-        var senderName = Name(sender);
         var chatMessage =
-            $"[color={colorHex}][bold]Overwatch:[/bold] {senderName} transmits: [font size=16][bold]{message}[/bold][/font][/color]";
+            $"[color={colorHex}][bold]Overwatch:[/bold] transmits: [font size=16][bold]{message}[/bold][/font][/color]";
 
         AnnounceSquad(chatMessage, squad, sound);
 
@@ -239,7 +238,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
         var request = new AnnouncementRequest
         {
-            Message = $"{senderName} transmits: {message}",
+            Message = $"Overwatch transmits: {message}",
             Preset = "MarineCommand",
             Target = AnnouncementTarget.Marines,
             Title = title,

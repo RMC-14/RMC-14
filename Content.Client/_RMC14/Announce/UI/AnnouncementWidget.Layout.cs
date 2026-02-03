@@ -145,6 +145,12 @@ public sealed partial class AnnouncementWidget
             Logger.Info($"[AnnouncementWidget] Sizing -> screen {screenSize}, maxAllowedWidth {maxAllowedWidth}, hasTitle {_hasTitle}");
         }
         optimalWidth = Math.Min(maxAllowedWidth, optimalWidth);
+        var bodyResponsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
+            text.Length > 0 ? text : new[] { string.Empty },
+            style.FontSize,
+            maxAllowedWidth,
+            screenSize,
+            style);
 
         var totalLabels = text.Length + _titleOffset;
         _richTextLabels = new RichTextLabel[totalLabels];
@@ -232,7 +238,7 @@ public sealed partial class AnnouncementWidget
                 titleStack.AddChild(titleLabel);
                 titleStack.AddChild(underline);
                 textContainer.AddChild(titleStack);
-                var spacerHeight = Math.Max(2f, underlineThickness * 1.3f);
+                var spacerHeight = Math.Max(underlineThickness * 1.5f, bodyResponsiveFontSize * 0.35f);
                 var titleSpacer = new Control
                 {
                     MinHeight = spacerHeight,
