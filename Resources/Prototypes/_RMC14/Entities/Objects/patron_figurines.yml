@@ -2172,3 +2172,14 @@
     state: daniel_diversicolor
   - type: PatronFigurine
     id: c216d0da-da50-4fd4-a616-7b847492ddef
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMozaacVin
+  name: Mozaac Vin figurine
+  description: "\"That ain't very profit of you.\""
+  components:
+  - type: Sprite
+    state: mozaac_vin
+  - type: PatronFigurine
+    id: 82b1e5cc-a8dd-4f4a-973a-0acabb829d6c
