@@ -200,10 +200,13 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         if (_prototype.HasIndex(effectId))
         {
             var effect = Spawn(effectId, coords);
-            RaiseNetworkEvent(
-                new XenoConstructionAnimationStartEvent(GetNetEntity(effect), GetNetEntity(user), node.Comp.ConstructBuildTime),
-                Filter.PvsExcept(effect)
-            );
+            if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(user, out var netUser))
+            {
+                RaiseNetworkEvent(
+                    new XenoConstructionAnimationStartEvent(netEffect.Value, netUser.Value, node.Comp.ConstructBuildTime),
+                    Filter.PvsExcept(effect)
+                );
+            }
         }
 
         _constructBuilds[node.Owner] = new ConstructNodeBuild(user, _timing.CurTime + node.Comp.ConstructBuildTime);

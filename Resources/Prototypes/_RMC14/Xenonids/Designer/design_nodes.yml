@@ -115,6 +115,8 @@
   parent: DesignNodeMarkBase
   name: Optimized Wall
   description: You sense that building on top of this node will speed up your construction speed by 50%
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: wall_mark_optimized
@@ -124,6 +126,8 @@
   parent: DesignNodeMarkBase
   name: Optimized Door
   description: You sense that building on top of this node will speed up your construction speed by 50%
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: door_mark_optimized
@@ -133,6 +137,8 @@
   parent: DesignNodeMarkBase
   name: Flexible Wall
   description: You sense that building on top of this node will decrease plasma cost of basic resin structures by 50%
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: wall_mark_flex
@@ -142,6 +148,8 @@
   parent: DesignNodeMarkBase
   name: Flexible Door
   description: You sense that building on top of this node will decrease plasma cost of basic resin structures by 50%
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: door_mark_flex
@@ -151,6 +159,8 @@
   parent: DesignNodeMarkBase
   name: Construct Wall
   description: You sense that feeding plasma with our hand to this node will secrete a weedbound wall
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: wall_mark_construct
@@ -160,6 +170,8 @@
   parent: DesignNodeMarkBase
   name: Construct Door
   description: You sense that feeding plasma with our hand to this node will secrete a weedbound door
+  categories: [ HideSpawnMenu, DoNotMap ]
+  save: false
   components:
     - type: Sprite
       state: door_mark_construct

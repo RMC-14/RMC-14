@@ -191,10 +191,13 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
             {
                 var effect = Spawn(effectId, tileCenter);
                 effects.Add(effect);
-                RaiseNetworkEvent(
-                    new XenoConstructionAnimationStartEvent(GetNetEntity(effect), GetNetEntity(ent.Owner), ent.Comp.GreaterResinSurgeBuildTime),
-                    Filter.PvsExcept(effect)
-                );
+                if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(ent.Owner, out var netUser))
+                {
+                    RaiseNetworkEvent(
+                        new XenoConstructionAnimationStartEvent(netEffect.Value, netUser.Value, ent.Comp.GreaterResinSurgeBuildTime),
+                        Filter.PvsExcept(effect)
+                    );
+                }
             }
         }
 
