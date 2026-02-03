@@ -1395,17 +1395,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronAustinSpectreEventide
-  name: Austin 'Spectre' Eventide figurine
-  description: "\"Allan please add description\""
-  components:
-  - type: Sprite
-    state: austin_spectre_eventide
-  - type: PatronFigurine
-    id: 6ff41436-85a7-4c3b-bb39-b29738fedef5
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronShei-Teegla
   name: Shei-Teegla figurine
   #description: ""
@@ -2271,3 +2260,14 @@
     state: cassandra_reed
   - type: PatronFigurine
     id: 5e21ea69-d13b-4fa7-9826-434350d0cd71
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAustinAustieEventide
+  name: Austin 'Austie' Eventide figurine
+  description: "\"Allan please add description\""
+  components:
+  - type: Sprite
+    state: austin_austie_eventide
+  - type: PatronFigurine
+    id: 6ff41436-85a7-4c3b-bb39-b29738fedef5
