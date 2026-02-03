@@ -52,6 +52,10 @@
     whitelist:
       tags:
       - Donut
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBoxDonutEmpty
