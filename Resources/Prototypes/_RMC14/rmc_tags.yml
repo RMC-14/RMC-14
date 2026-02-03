@@ -125,6 +125,9 @@
   id: RMCVehicleHardpointTurret
 
 - type: Tag
+  id: RMCVehicleHardpointHumveeTurret
+
+- type: Tag
   id: RMCVehicleHardpointCannon
 
 - type: Tag

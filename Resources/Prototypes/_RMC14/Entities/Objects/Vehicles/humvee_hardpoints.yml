@@ -37,6 +37,7 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointTurret
+    - RMCVehicleHardpointHumveeTurret
   - type: VehicleTurret
     rotateToCursor: true
     stabilizedRotation: false

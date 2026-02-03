@@ -1149,7 +1149,7 @@
       required: false
       whitelist:
         tags:
-        - RMCVehicleHardpointTurret
+        - RMCVehicleHardpointHumveeTurret
     - id: roof
       hardpointType: RoofAttachment
       visualLayer: support
