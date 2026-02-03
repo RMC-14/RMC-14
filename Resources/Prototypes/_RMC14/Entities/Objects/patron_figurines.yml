@@ -2216,3 +2216,15 @@
     state: isaak_bennett
   - type: PatronFigurine
     id: 86390ca6-195d-4776-a0f7-23e8d0288338
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronVaelorGlowleaf
+  name: Vaelor Glowleaf figurine
+  description: "Thumph... Beep... WEH!"
+  components:
+  - type: Sprite
+    state: vaelor_glowleaf
+  - type: PatronFigurine
+    id: c2d51c68-a128-4144-85bc-13c72bd97405
+
