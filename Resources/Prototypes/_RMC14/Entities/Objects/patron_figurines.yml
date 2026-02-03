@@ -2238,3 +2238,14 @@
     state: kaitlin_zalack
   - type: PatronFigurine
     id: ab2e4c45-727a-4c80-8cab-4a4cfa8f4b9d
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIrisNadesMoondancer
+  name: Iris 'Nades' Moondancer figurine
+  description: "\"This Science Annex... To hold.....ME?\""
+  components:
+  - type: Sprite
+    state: iris_nades_moondancer
+  - type: PatronFigurine
+    id: e4bed181-95d8-46ca-8dad-c306f31c39e2
