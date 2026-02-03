@@ -1,8 +1,7 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                       Title="{Loc 'rmc-new-to-job-popup-title'}"
-                      MinSize="550 650"
-                      MaxSize="550 950">
+                      SetSize="950 950">
     <BoxContainer Orientation="Vertical" Margin="20">
         <Label Name="TitleLabel"
                StyleClasses="LabelBig"
