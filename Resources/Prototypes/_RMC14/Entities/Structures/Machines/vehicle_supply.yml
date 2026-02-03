@@ -1,0 +1,128 @@
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCVehicleSupplyConsole
+  name: vehicle supply console
+  description: A console for ordering vehicles and their hardpoints.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/asrs_console.rsi
+    layers:
+    - map: ["computerLayerBody"]
+      state: off
+    - map: ["computerLayerScreen"]
+      state: on
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.35,0.25,0.35"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ActivatableUI
+    key: enum.RMCVehicleSupplyUIKey.Key
+  - type: ActivatableUIRequiresAccess
+  - type: AccessReader
+    access: [ [ "CMAccessRequisitions" ] ]
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleSupplyUIKey.Key:
+        type: RMCVehicleSupplyBui
+  - type: RMCVehicleSupplyConsole
+    vehicles:
+    - name: humvee
+      vehicle: RMCVehicleHumvee
+      unlock: RMCVehicleHumvee
+    - name: humvee (medical)
+      vehicle: RMCVehicleHumveeMedical
+      unlock: RMCVehicleHumveeMedical
+    - name: humvee (transport)
+      vehicle: RMCVehicleHumveeTransport
+      unlock: RMCVehicleHumveeTransport
+    - name: apc
+      vehicle: RMCVehicleAPC
+      unlock: RMCVehicleAPC
+    - name: apc (medical)
+      vehicle: RMCVehicleAPCMed
+      unlock: RMCVehicleAPCMed
+    - name: apc (command)
+      vehicle: RMCVehicleAPCCommand
+      unlock: RMCVehicleAPCCommand
+    - name: humvee (arc)
+      vehicle: RMCVehicleHumveeARC
+      unlock: RMCVehicleHumveeARC
+      hardpoints:
+      - RMCVehicleHumveeTurret
+      - RMCVehicleHumveeCannon
+      - RMCVehicleHumveeLauncher
+      - RMCVehicleHumveeSnowplow
+      - RMCVehicleHumveeOverlight
+      - RMCVehicleHumveeHatch
+      - RMCVehicleHumveeWheel
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#b89f25"
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: Appearance
+  - type: LitOnPowered
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  id: RMCVehicleLift
+  name: vehicle lift
+  suffix: Lowered, Vehicle Supply
+  placement:
+    mode: SnapgridCenter
+    snap:
+    - Wall
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Effects/elevator.rsi
+    drawdepth: LowFloors
+    layers:
+    - state: supply_elevator_lowered
+      map: [ "enum.RMCVehicleSupplyLiftLayers.Base" ]
+  - type: Physics
+    bodyType: static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.3,-2.3,2.3,2.3"
+        layer:
+        - MidImpassable
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 1
+    blacklist:
+      tags:
+      - Catwalk
+  - type: RMCVehicleSupplyLift

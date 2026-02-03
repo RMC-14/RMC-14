@@ -5,10 +5,10 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class RMCVehicleHardpointVisualsComponent : Component
 {
-    [DataField, AutoNetworkedField]
+    [DataField]
     public List<RMCVehicleHardpointLayerState> Layers = new();
 }
 
@@ -25,5 +25,16 @@ public partial record struct RMCVehicleHardpointLayerState
     {
         Layer = layer;
         State = state;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCVehicleHardpointVisualsComponentState : ComponentState
+{
+    public readonly List<RMCVehicleHardpointLayerState> Layers;
+
+    public RMCVehicleHardpointVisualsComponentState(List<RMCVehicleHardpointLayerState> layers)
+    {
+        Layers = layers;
     }
 }

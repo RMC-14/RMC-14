@@ -65,6 +65,7 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
 
         SubscribeLocalEvent<RequisitionsComputerComponent, MapInitEvent>(OnComputerMapInit);
         SubscribeLocalEvent<RequisitionsComputerComponent, BeforeActivatableUIOpenEvent>(OnComputerBeforeActivatableUIOpen);
+        SubscribeLocalEvent<RequisitionsComputerComponent, RequisitionsSetCategoriesEvent>(OnSetCategories);
 
         Subs.BuiEvents<RequisitionsComputerComponent>(RequisitionsUIKey.Key, subs =>
         {
@@ -85,6 +86,13 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
     private void OnComputerBeforeActivatableUIOpen(Entity<RequisitionsComputerComponent> computer, ref BeforeActivatableUIOpenEvent args)
     {
         SetUILastInteracted(computer);
+        SendUIState(computer);
+    }
+
+    private void OnSetCategories(Entity<RequisitionsComputerComponent> computer, ref RequisitionsSetCategoriesEvent args)
+    {
+        computer.Comp.Categories = args.Categories;
+        Dirty(computer);
         SendUIState(computer);
     }
 
@@ -121,6 +129,9 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         elevator.Comp.Orders.Add(order);
         SendUIStateAll();
         _adminLogs.Add(LogType.RMCRequisitionsBuy, $"{ToPrettyString(args.Actor):actor} bought requisitions crate {order.Name} with crate {order.Crate} for {order.Cost}");
+
+        var placed = new RequisitionsOrderPlacedEvent(actor, args.Category, args.Order, order.Crate);
+        RaiseLocalEvent(computer.Owner, placed);
     }
 
     private void OnPlatform(Entity<RequisitionsComputerComponent> computer, ref RequisitionsPlatformMsg args)

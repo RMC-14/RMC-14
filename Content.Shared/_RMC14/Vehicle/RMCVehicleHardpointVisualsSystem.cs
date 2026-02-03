@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Content.Shared.Containers.ItemSlots;
+using Robust.Shared.GameStates;
 using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Vehicle;
@@ -14,6 +15,7 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
     {
         SubscribeLocalEvent<RMCVehicleHardpointVisualsComponent, ComponentInit>(OnInit);
         SubscribeLocalEvent<RMCVehicleHardpointVisualsComponent, MapInitEvent>(OnInit);
+        SubscribeLocalEvent<RMCVehicleHardpointVisualsComponent, ComponentGetState>(OnGetState);
         SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
     }
 
@@ -44,6 +46,15 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
         UpdateAppearance(args.Vehicle);
     }
 
+    private void OnGetState(Entity<RMCVehicleHardpointVisualsComponent> ent, ref ComponentGetState args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var layers = new List<RMCVehicleHardpointLayerState>(ent.Comp.Layers);
+        args.State = new RMCVehicleHardpointVisualsComponentState(layers);
+    }
+
     private void UpdateAppearance(
         EntityUid vehicle,
         RMCHardpointSlotsComponent? hardpoints = null,
@@ -58,13 +69,18 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
 
         foreach (var slot in hardpoints.Slots)
         {
-            var layer = slot.VisualLayer;
-            if (string.IsNullOrWhiteSpace(slot.Id) || string.IsNullOrWhiteSpace(layer))
+            if (string.IsNullOrWhiteSpace(slot.Id))
                 continue;
 
+            var layer = slot.VisualLayer;
             var layerKey = layer.ToLowerInvariant();
             var state = string.Empty;
-            if (_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) && itemSlot.HasItem)
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots))
+                continue;
+
+            var hasItem = itemSlot.HasItem;
+
+            if (hasItem)
             {
                 var item = itemSlot.Item!.Value;
                 if (TryComp(item, out RMCHardpointVisualComponent? visual) &&
@@ -74,6 +90,12 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
                 }
             }
 
+            if (string.IsNullOrWhiteSpace(layer))
+            {
+                continue;
+            }
+
+            layerKey = layer.ToLowerInvariant();
             if (indexByLayer.TryGetValue(layerKey, out var existingIndex))
             {
                 if (!string.IsNullOrWhiteSpace(state))
@@ -98,7 +120,9 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
             }
 
             if (unchanged)
+            {
                 return;
+            }
         }
 
         visuals.Layers = newLayers;

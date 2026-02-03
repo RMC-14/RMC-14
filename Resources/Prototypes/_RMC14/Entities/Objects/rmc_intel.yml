@@ -165,6 +165,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: IntelTechTree
+  - type: RMCVehicleSupplyTech
     tree:
       options:
       -
@@ -222,6 +223,15 @@
             sprite: _RMC14/Interface/tech_tree.rsi
             state: upgrade
       -
+        - name: Humvee ARC
+          description: Unlocks the ARC-configured humvee for vehicle supply.
+          cost: 5
+          events:
+          - !type:TechUnlockVehicleEvent
+            unlock: RMCVehicleHumveeARC
+          icon:
+            sprite: _RMC14/Interface/tech_tree.rsi
+            state: humvee
         - name: Additional OB projectiles - HE
           description: Highly explosive bombardment ammo, to be loaded into the orbital cannon.
           cost: 5

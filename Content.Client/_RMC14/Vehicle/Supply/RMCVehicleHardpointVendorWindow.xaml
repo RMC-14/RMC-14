@@ -1,0 +1,20 @@
+<controls:RMCVehicleHardpointVendorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Supply"
+    MinSize="450 300">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6" VerticalExpand="True">
+            <BoxContainer Orientation="Vertical" SizeFlagsStretchRatio="1" VerticalExpand="True">
+                <Label Text="Vehicles" />
+                <ItemList Name="VehicleList" Access="Public" VerticalExpand="True" />
+            </BoxContainer>
+            <BoxContainer Orientation="Vertical" SizeFlagsStretchRatio="1" VerticalExpand="True">
+                <Label Text="Hardpoints" />
+                <ItemList Name="HardpointList" Access="Public" VerticalExpand="True" />
+            </BoxContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+            <Button Name="PrintButton" Access="Public" Text="Print" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCVehicleHardpointVendorWindow>

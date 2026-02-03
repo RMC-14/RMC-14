@@ -1,0 +1,18 @@
+<controls:RMCVehicleSupplyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Supply"
+    MinSize="450 300">
+    <BoxContainer Orientation="Vertical" SeparationOverride="4">
+        <Label Name="StatusLabel" Access="Public" />
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+            <Label Text="Stored Vehicles" />
+            <ScrollContainer VerticalExpand="True">
+                <BoxContainer Name="AvailableRows" Access="Public" Orientation="Vertical" SeparationOverride="4" />
+            </ScrollContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+            <Button Name="RaiseButton" Access="Public" Text="Raise" />
+            <Button Name="LowerButton" Access="Public" Text="Lower" />
+        </BoxContainer>
+    </BoxContainer>
+</controls:RMCVehicleSupplyWindow>

@@ -2220,3 +2220,53 @@
   - type: AccessReader
     access: [["SyndicateAgent"]]
 
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCVehicleHardpointVendor
+  name: vehicle hardpoint printer
+  description: A machine for printing vehicle hardpoints.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+    layers:
+    - state: "vehicle_gear_off"
+    - state: "vehicle_gear"
+      map: [ "rmc_flick_animation" ]
+      shader: unshaded
+    - state: vehicle_gear_panel
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.45"
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        density: 200
+  - type: ActivatableUI
+    key: enum.CMAutomatedVendorUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.CMAutomatedVendorUI.Key:
+        type: CMAutomatedVendorBui
+  - type: CMAutomatedVendor
+    sound:
+      path: /Audio/_RMC14/Machines/vending_drop.ogg
+      params:
+        maxDistance: 2
+        volume: -4
+    baseSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear
+    animationSprite:
+      sprite: _RMC14/Structures/Machines/VendingMachines/vending_64x32.rsi
+      state: vehicle_gear_vend
+    sections: []
+  - type: RMCVehicleHardpointVendor
+  - type: InteractionOutline
+  - type: RequireProjectileTarget
+

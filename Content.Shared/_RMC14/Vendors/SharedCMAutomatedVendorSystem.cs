@@ -834,6 +834,12 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         Dirty(user);
     }
 
+    public void SetSections(Entity<CMAutomatedVendorComponent> vendor, List<CMVendorSection> sections)
+    {
+        vendor.Comp.Sections = sections;
+        Dirty(vendor);
+    }
+
     public void SetExtraPoints(Entity<CMVendorUserComponent> user, string key, int points)
     {
         user.Comp.ExtraPoints ??= new Dictionary<string, int>();
