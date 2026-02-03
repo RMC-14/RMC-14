@@ -71,7 +71,7 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
 # Misc variants
 cm-job-name-survivor-miner = Miner Colonist
 
-cm-job-name-surivor-priest = Priest Colonist
+cm-job-name-surivor-priest = Chaplain
 
 # FORECON survs
 
@@ -163,7 +163,7 @@ cm-job-name-survivor-medical-technician = New Varadero Medical Technician
 
 cm-job-name-survivor-technician = New Varadero Engineering Technician
 
-cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
+cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 

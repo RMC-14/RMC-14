@@ -97,7 +97,7 @@
       - CMSurvivorSolarisEngineer: -1
       CMSurvivorSecurity:
       - CMSurvivorSolarisCMBDeputy: -1
-      - CMSurvivorSolarisUNPeacekeeper: -1
+      - CMSurvivorSolarisILRCPeacekeeper: -1
       CMSurvivorScientist:
       - CMSurvivorSolarisScientist: -1
     survivorJobScenarios:
@@ -162,7 +162,7 @@
       - RMCSurvivorShivasEngineer: -1
       CMSurvivorSecurity:
       - RMCSurvivorShivasCMBDeputy: -1
-      - RMCSurvivorShivasUNPeacekeeper: -1
+      - RMCSurvivorShivasILRCPeacekeeper: -1
       CMSurvivorScientist:
       - RMCSurvivorShivasResearcher: -1
 
@@ -303,7 +303,7 @@
       - CMSurvivorTechnician: 2
       - CMSurvivorCargoTechnician: 2
       CMSurvivorSecurity:
-      - CMSurvivorUNPeacekeeper: 2
+      - CMSurvivorILRCPeacekeeper: 2
       CMSurvivorScientist:
       - RMCSurvivorNewVaraderoResearcher: 2
     survivorJobScenarios:

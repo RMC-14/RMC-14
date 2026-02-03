@@ -7,4 +7,14 @@
     "files": ["dogtag.png"],
     "license": "CC-BY-SA-3.0",
     "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/a2d5ca6e69725341f0fa261a4a3f89c737e843b3/icons/obj/items/card.dmi"
+},
+{
+    "files": ["check.svg", "check.png"],
+    "license": "CC-BY",
+    "copyright": "Created by chavonadelal [https://github.com/chavonadelal]. Attribution may be done by linking to the github profile"
+},
+{
+    "files": ["copy.svg", "copy.png"],
+    "license": "CC-BY",
+    "copyright": "Created by chavonadelal [https://github.com/chavonadelal]. Attribution may be done by linking to the github profile"
 }
