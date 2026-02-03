@@ -205,6 +205,7 @@ namespace Content.Server.Light.EntitySystems
                     // RMC14
                     if (TryComp<CartridgeAmmoComponent>(ent, out var cartridge))
                         cartridge.Spent = true;
+                        Dirty(ent,cartridge);
 
                     var ignite = new IgnitionEvent(false);
                     RaiseLocalEvent(ent, ref ignite);
