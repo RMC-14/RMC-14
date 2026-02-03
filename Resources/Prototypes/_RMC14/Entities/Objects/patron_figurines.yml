@@ -2228,3 +2228,13 @@
   - type: PatronFigurine
     id: c2d51c68-a128-4144-85bc-13c72bd97405
 
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaitlinZalack
+  name: Kaitlin Zalack figurine
+  description: "A tiny officer standing at attention, medical visor lowered and sidearm drawn. Though motionless, it stands with a steadfast courage, as if it would march into fire without hesitation."
+  components:
+  - type: Sprite
+    state: kaitlin_zalack
+  - type: PatronFigurine
+    id: ab2e4c45-727a-4c80-8cab-4a4cfa8f4b9d
