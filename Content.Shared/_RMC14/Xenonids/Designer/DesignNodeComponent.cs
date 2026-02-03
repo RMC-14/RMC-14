@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
-[Access(typeof(SharedXenoConstructionSystem), typeof(DesignerNodeBindingSystem), typeof(DesignerConstructNodeSystem), typeof(DesignerNodeOverlaySystem))]
+[Access(typeof(SharedXenoConstructionSystem), typeof(DesignerNodeBindingSystem), typeof(DesignerConstructNodeSystem))]
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignNodeComponent : Component
 {
@@ -33,17 +33,9 @@ public sealed partial class DesignNodeComponent : Component
     [DataField, AutoNetworkedField]
     public int HiveNumber = -1;
 
-    [DataField, AutoNetworkedField]
-    public string DesignMark = "resin-wall";
-
-    [DataField, AutoNetworkedField]
-    public EntProtoId? OverlayPrototype;
-
-    // Runtime-only spawned overlay entity. Not serialized or networked.
-    [Access(typeof(DesignerNodeOverlaySystem))]
-    public EntityUid OverlayEntity = EntityUid.Invalid;
 
     // Used for enforcing "oldest node is deleted" when exceeding the cap.
+    [DataField, AutoNetworkedField]
     public int PlacedOrder;
 
     [DataField, AutoNetworkedField]

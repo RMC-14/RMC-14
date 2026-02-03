@@ -46,7 +46,13 @@
       boundXeno: null
       boundWeed: null
       hiveNumber: 0
-      designMark: ""
+    - type: DesignNodeOverlay
+      optimizedWallProto: DesignNodeMarkOptimizedWall
+      optimizedDoorProto: DesignNodeMarkOptimizedDoor
+      flexibleWallProto: DesignNodeMarkFlexibleWall
+      flexibleDoorProto: DesignNodeMarkFlexibleDoor
+      constructWallProto: DesignNodeMarkConstructWall
+      constructDoorProto: DesignNodeMarkConstructDoor
 
 - type: entity
   id: DesignNodeRemoteDelete
@@ -177,8 +183,6 @@
     - type: DesignNode
       nodeType: Optimized
       optimizedBuildTimeMultiplier: 0.5
-      designMark: wall_mark_optimized
-      overlayPrototype: DesignNodeMarkOptimizedWall
     - type: XenoConstructionPlasmaCost
       plasma: 50
       scalingCost: false
@@ -201,8 +205,7 @@
     - type: DesignNode
       nodeType: Optimized
       optimizedBuildTimeMultiplier: 0.5
-      designMark: door_mark_optimized
-      overlayPrototype: DesignNodeMarkOptimizedDoor
+      constructIsDoor: true
     - type: XenoConstructionPlasmaCost
       plasma: 50
       scalingCost: false
@@ -226,8 +229,6 @@
     - type: DesignNode
       nodeType: Flexible
       flexiblePlasmaCostMultiplier: 0.5
-      designMark: wall_mark_flex
-      overlayPrototype: DesignNodeMarkFlexibleWall
     - type: XenoConstructionPlasmaCost
       plasma: 60
       scalingCost: false
@@ -250,8 +251,7 @@
     - type: DesignNode
       nodeType: Flexible
       flexiblePlasmaCostMultiplier: 0.5
-      designMark: door_mark_flex
-      overlayPrototype: DesignNodeMarkFlexibleDoor
+      constructIsDoor: true
     - type: XenoConstructionPlasmaCost
       plasma: 60
       scalingCost: false
@@ -274,8 +274,6 @@
       state: icon_constructnode
     - type: DesignNode
       nodeType: Construct
-      designMark: wall_mark_construct
-      overlayPrototype: DesignNodeMarkConstructWall
     - type: XenoConstructionPlasmaCost
       plasma: 70
       scalingCost: false
@@ -297,8 +295,6 @@
       state: icon_constructnode
     - type: DesignNode
       nodeType: Construct
-      designMark: door_mark_construct
-      overlayPrototype: DesignNodeMarkConstructDoor
       constructIsDoor: true
       constructWeedbound: DoorXenoResinWeedbound
       constructWeedboundThick: DoorXenoResinThickWeedbound
