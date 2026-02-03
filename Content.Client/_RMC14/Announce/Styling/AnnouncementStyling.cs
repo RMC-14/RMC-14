@@ -21,8 +21,6 @@ public static class AnnouncementStyling
             Animation = baseStyle.Animation,
             Position = baseStyle.Position,
             PrimaryColor = baseStyle.PrimaryColor,
-            SecondaryColor = baseStyle.SecondaryColor,
-            AccentColor = baseStyle.AccentColor,
 
             PrintSpeed = baseStyle.PrintSpeed,
             ShakeIntensity = baseStyle.ShakeIntensity * scaleFactor,
@@ -55,8 +53,6 @@ public static class AnnouncementStyling
             SpeakerNameFontSize = baseStyle.SpeakerNameFontSize * scaleFactor,
             SpeakerNamePosition = baseStyle.SpeakerNamePosition,
 
-            TextEnhancements = baseStyle.TextEnhancements,
-            BackgroundStyle = baseStyle.BackgroundStyle,
             AnimationEnhancements = baseStyle.AnimationEnhancements
         };
     }

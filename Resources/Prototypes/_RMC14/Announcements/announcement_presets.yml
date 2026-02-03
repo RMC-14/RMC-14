@@ -12,8 +12,6 @@
     backgroundAlpha: 0.7
     backgroundColor: "#0a1a2d"
     primaryColor: "#a8d6ff"
-    secondaryColor: "#c7d2e5"
-    accentColor: "#6ba3ff"
     font: "Cozette"
     fontSize: 20
     lineHeight: 48
@@ -86,22 +84,6 @@
         curvatureAmount: 0.3
         showChromaticAberration: true
         chromaticAmount: 1
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#000000"
-      outlineThickness: 2
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#0a1a2d"
-      gradientEnd: "#051122"
-      direction: Vertical
-    enableScreenShake: false
-    shakeDuration: 1
-    enableFlash: false
-    flashColor: "#ffffff"
-    flashDuration: 0.05
-    flashCount: 1
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
@@ -123,8 +105,6 @@
     backgroundAlpha: 0.7
     backgroundColor: "#0a1a2d"
     primaryColor: "#a8d6ff"
-    secondaryColor: "#c7d2e5"
-    accentColor: "#6ba3ff"
     font: "Cozette"
     fontSize: 20
     lineHeight: 48
@@ -176,22 +156,6 @@
       easingIn: EaseInOut
       easingOut: EaseInOut
       enableCRT: false
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#000000"
-      outlineThickness: 2
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#0a1a2d"
-      gradientEnd: "#051122"
-      direction: Vertical
-    enableScreenShake: false
-    shakeDuration: 1
-    enableFlash: false
-    flashColor: "#ffffff"
-    flashDuration: 0.05
-    flashCount: 1
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
@@ -213,8 +177,6 @@
     showBackground: false
     backgroundAlpha: 0.35
     backgroundColor: "#0d1320"
-    secondaryColor: "#c7d2e5"
-    accentColor: "#6ba3ff"
     primaryColor: "#a8d6ff"
     font: "Cozette"
     fontSize: 20
@@ -241,20 +203,6 @@
     titlePosition: Above
     animationEnhancements:
       enableCRT: false
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#0d1320"
-      gradientEnd: "#0b101a"
-      direction: Vertical
-    enableScreenShake: false
-    enableFlash: false
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#000000"
-      outlineThickness: 1.5
-    maxLineLength: 60
-    maxLines: 5
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 0.8
@@ -283,8 +231,6 @@
     backgroundAlpha: 0.7
     backgroundColor: "#0a1a2d"
     primaryColor: "#a8d6ff"
-    secondaryColor: "#c7d2e5"
-    accentColor: "#6ba3ff"
     font: "Cozette"
     fontSize: 20
     lineHeight: 48
@@ -316,18 +262,6 @@
       enableZoom: false
       enableBounce: false
       enableCRT: false
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#000000"
-      outlineThickness: 2
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#0a1a2d"
-      gradientEnd: "#051122"
-      direction: Vertical
-    enableScreenShake: false
-    enableFlash: false
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
@@ -346,8 +280,6 @@
     backgroundAlpha: 0.6
     backgroundColor: "#1a0a0a"
     primaryColor: "#ff4d4d"
-    secondaryColor: "#ff9999"
-    accentColor: "#ff0000"
     fontSize: 24
     lineHeight: 46
     printSpeed: 0.015
@@ -368,20 +300,6 @@
     titlePosition: Above
     animationEnhancements:
       enableCRT: false
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#1a0a0a"
-      gradientEnd: "#0f0505"
-      direction: Vertical
-    enableScreenShake: false
-    enableFlash: false
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#000000"
-      outlineThickness: 1.5
-    maxLineLength: 60
-    maxLines: 6
   sound:
     path: "/Audio/Misc/redalert.ogg"
     params:
@@ -412,8 +330,6 @@
     backgroundColor: "#0a0d12"
 
     primaryColor: "#c8f4ff"
-    secondaryColor: "#89dfff"
-    accentColor: "#89dfff"
 
     fontSize: 22
     lineHeight: 46
@@ -484,26 +400,6 @@
 
         showChromaticAberration: true
         chromaticAmount: 99
-
-    textEnhancements:
-      showOutline: true
-      outlineColor: "#89dfff"
-      outlineThickness: 2
-
-    backgroundStyle:
-      type: Gradient
-      showGradient: true
-      gradientStart: "#0b0e12"
-      gradientEnd: "#020508"
-      direction: Vertical
-
-    enableScreenShake: true
-    shakeDuration: 1
-
-    enableFlash: true
-    flashColor: "#ffffff"
-    flashDuration: 0.05
-    flashCount: 1
 
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"

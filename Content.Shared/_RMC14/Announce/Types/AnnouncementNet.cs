@@ -1,0 +1,54 @@
+using Robust.Shared.GameObjects;
+using Robust.Shared.Serialization;
+using System;
+using System.Numerics;
+
+namespace Content.Shared._RMC14.Announce;
+
+[Serializable, NetSerializable]
+public sealed class AnnouncementNetData
+{
+    public string[] Text { get; set; } = Array.Empty<string>();
+    public string ConfigId { get; set; } = string.Empty;
+    public float Priority { get; set; }
+    public bool CanInterrupt { get; set; }
+    public bool CanBeInterrupted { get; set; }
+    public AnnouncementStyle Style { get; set; } = new();
+    public AnnouncementStyleOverride? StyleOverride { get; set; }
+    public NetEntity? SpeakerEntity { get; set; }
+    public string? SpeakerName { get; set; }
+    public bool ShowSprite { get; set; } = true;
+    public float SpriteScale { get; set; } = 1.0f;
+    public Vector2 SpriteOffset { get; set; }
+    public Vector2 TextOffset { get; set; }
+    public string? Title { get; set; }
+    public string? DecalRsi { get; set; }
+    public string? DecalState { get; set; }
+    public AnnouncementDecalPlacement? DecalPlacement { get; set; }
+    public float DecalScale { get; set; } = 4f;
+    public float DecalAlpha { get; set; } = 1f;
+    public Vector2 DecalOffset { get; set; } = Vector2.Zero;
+    public bool IncognitoMask { get; set; }
+}
+
+[Serializable, NetSerializable]
+public sealed class AnnouncementNetMessage : EntityEventArgs
+{
+    public AnnouncementNetData Data { get; }
+
+    public AnnouncementNetMessage(AnnouncementNetData data)
+    {
+        Data = data;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class AnnouncementPreferenceNetMessage : EntityEventArgs
+{
+    public AnnouncementDisplayPreference Preference { get; }
+
+    public AnnouncementPreferenceNetMessage(AnnouncementDisplayPreference preference)
+    {
+        Preference = preference;
+    }
+}
