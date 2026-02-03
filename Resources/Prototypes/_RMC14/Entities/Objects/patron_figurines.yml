@@ -2183,3 +2183,14 @@
     state: mozaac_vin
   - type: PatronFigurine
     id: 82b1e5cc-a8dd-4f4a-973a-0acabb829d6c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHugs-The-Void
+  name: Hugs-The-Void figurine
+  description: "You could swear you've seen this blue lizard before.. but where at?\n\nIt seems dubious, evil even!.. But with a hint of blueberry fragrance.\n\nP.S do not add miniature soap to hands."
+  components:
+  - type: Sprite
+    state: hugs-the-void
+  - type: PatronFigurine
+    id: 60402dd8-cba7-4809-9dad-d6393d402a88
