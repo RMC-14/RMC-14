@@ -1462,3 +1462,9 @@ RMCGasTankPhoron: RMCGasTankPhoronFilled
 
 # 2026-1-15
 ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
+
+# 2026-01-27
+RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
+RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
+RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
+RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper
