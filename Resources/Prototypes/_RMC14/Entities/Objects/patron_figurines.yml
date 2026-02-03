@@ -2249,3 +2249,14 @@
     state: iris_nades_moondancer
   - type: PatronFigurine
     id: e4bed181-95d8-46ca-8dad-c306f31c39e2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEidu-Hughe
+  name: Eidu-Hughe figurine
+  description: "Number one Lizard in the sector, just don't tell that to anyone else."
+  components:
+  - type: Sprite
+    state: eidu-hughe
+  - type: PatronFigurine
+    id: e8957fdf-688f-4208-9453-4ceeaa446ed1
