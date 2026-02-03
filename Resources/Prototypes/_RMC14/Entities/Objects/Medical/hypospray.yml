@@ -60,6 +60,9 @@
     quickEquip: false
     slots:
     - suitstorage
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 1250
 
 - type: Tag
   id: Hypospray
@@ -73,9 +76,13 @@
     containers:
       vial:
       - RMCVial
+  - type: PhysicalComposition
+    materialComposition:
+      CMGlass: 250
+      RMCPlastic: 1250
 
 - type: entity
-  parent: CMHypospray
+  parent: CMHyposprayWithVial
   id: CMHyposprayFilledTricord
   suffix: Filled, Tricordrazine
   components:
@@ -83,5 +90,3 @@
     containers:
       vial:
       - RMCVialTricordrazine
-
-

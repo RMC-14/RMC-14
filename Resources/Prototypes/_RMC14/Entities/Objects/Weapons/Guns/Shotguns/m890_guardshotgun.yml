@@ -1,13 +1,15 @@
 - type: entity
   parent: WeaponShotgunM890
   id: WeaponShotgunM890Guard
-  description: A Weston-Yamada semi-automatic shotgun with a rapid fire rate. Holds 8 shotgun shells in the chamber. Equipped with a red handle to signify its use with Military Police Honor Guards.
+  description: The Weston-Yamada M890 Shotgun, a semi-automatic shotgun with a quick fire rate. Equipped with a red handle to signify its use with Military Police Honor Guards.
   suffix: Honor Guard
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m890_guard.rsi
+  - type: BallisticAmmoProvider
+    proto: CMShellShotgunBuckshot
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
