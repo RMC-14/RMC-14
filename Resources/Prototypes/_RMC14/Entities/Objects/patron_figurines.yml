@@ -2144,7 +2144,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAnneArtichokePowell
   name: Anne 'Artichoke' Powell figurine
-  description: "CLOSE THE DAMN CADES!"
+  description: "\"CLOSE THE DAMN CADES!\""
   components:
   - type: Sprite
     state: anne_artichoke_powell
