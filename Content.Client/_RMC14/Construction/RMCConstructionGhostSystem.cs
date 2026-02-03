@@ -857,12 +857,15 @@ public sealed class RMCConstructionGhostSystem : EntitySystem
         return StaticGhostColor.A;
     }
 
-    private bool TryGetGhostSprite(RMCConstructionGhostKey ghostKey, out SpriteComponent sprite)
+    private bool TryGetGhostSprite(
+        RMCConstructionGhostKey ghostKey,
+        [NotNullWhen(true)] out SpriteComponent? sprite)
     {
-        if (TryGetGhostEntity(ghostKey, out var ghost) && EntityManager.TryGetComponent(ghost, out sprite))
+        if (TryGetGhostEntity(ghostKey, out var ghost) &&
+            EntityManager.TryGetComponent(ghost, out sprite))
             return true;
 
-        sprite = default!;
+        sprite = null;
         return false;
     }
 
