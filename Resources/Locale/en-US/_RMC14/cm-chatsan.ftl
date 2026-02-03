@@ -34,6 +34,12 @@ cm-chatsan-replacement-admins-marine = high command
 cm-chatsan-word-eorg-marine = eorg
 cm-chatsan-replacement-eorg-marine = warcrimes
 
+cm-chatsan-word-xx121-marine = xx121
+cm-chatsan-replacement-xx121-marine = xenonids
+
+cm-chatsan-word-xx-121-marine = xx-121
+cm-chatsan-replacement-xx-121-marine = xenonids
+
 cm-chatsan-word-xenoid = xenoid
 cm-chatsan-replacement-xenoid = xenonid
 
@@ -834,7 +840,7 @@ cm-chatsan-word-replacement-foxtrot = brown hosts
 cm-chatsan-word-thru = thru
 cm-chatsan-replacement-thru = through
 
-cm-chatsan-word-tho = th
+cm-chatsan-word-tho = tho
 cm-chatsan-replacement-tho = though
 
 cm-chatsan-word-t1 = t1
