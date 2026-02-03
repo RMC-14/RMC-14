@@ -1704,17 +1704,6 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronAltairFlamecoat
-  name: Altair Flamecoat figurine
-  description: "The most chittery Close Air Support the Corps can offer."
-  components:
-  - type: Sprite
-    state: altair_flamecoat
-  - type: PatronFigurine
-    id: e3c176f8-b089-4897-98ae-e3365ea82426
-
-- type: entity
-  parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronRikkiNakesone
   name: Rikki Nakesone figurine
   description: "When one loaf of banana bread isn't enough."
@@ -2260,3 +2249,14 @@
     state: eidu-hughe
   - type: PatronFigurine
     id: e8957fdf-688f-4208-9453-4ceeaa446ed1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRuns-with-Boxes
+  name: Runs-with-Boxes figurine
+  description: "The E4 Mafia's most dedicated fobbit."
+  components:
+  - type: Sprite
+    state: runs-with-boxes
+  - type: PatronFigurine
+    id: e3c176f8-b089-4897-98ae-e3365ea82426
