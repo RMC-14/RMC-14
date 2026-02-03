@@ -11,7 +11,9 @@
             <BoxContainer Orientation="Vertical" Margin="10">
                 <RichTextLabel Name="NewToJobName" HorizontalAlignment="Center" />
                 <Control MinSize="0 5" />
-                <RichTextLabel Name="NewToJobLabel" HorizontalAlignment="Center" Margin="0 5 0 0" />
+                <ScrollContainer HScrollEnabled="False" VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True" MinSize="0 200" Margin="0 5 0 0">
+                    <RichTextLabel Name="NewToJobLabel" HorizontalAlignment="Left" Margin="0" />
+                </ScrollContainer>
                 <Control MinSize="0 5" />
                 <RichTextLabel Name="NewToJobAdditional" HorizontalAlignment="Center" Margin="0 5 0 0" />
             </BoxContainer>
