@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 18:09:07
+  time: 02/03/2026 22:46:29
   entityCount: 97
 maps: []
 grids:
@@ -282,28 +282,6 @@ entities:
     - type: Transform
       pos: 3.5526156,-3.468452
       parent: 1
-- proto: CMNormandyDoorAft
-  entities:
-  - uid: 64
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 1.5,-6.5
-      parent: 1
-- proto: CMNormandyDoorPort
-  entities:
-  - uid: 89
-    components:
-    - type: Transform
-      pos: -1.5,-2.5
-      parent: 1
-- proto: CMNormandyDoorStarboard
-  entities:
-  - uid: 56
-    components:
-    - type: Transform
-      pos: 4.5,-2.5
-      parent: 1
 - proto: CMPlatform
   entities:
   - uid: 30
@@ -462,6 +440,27 @@ entities:
     components:
     - type: Transform
       pos: 0.5295162,-0.5
+      parent: 1
+- proto: RMCERTDoorAft
+  entities:
+  - uid: 56
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,-6.5
+      parent: 1
+- proto: RMCERTDoorPort
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,-1.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: -1.5,-2.5
       parent: 1
 - proto: RMCERTShuttleEngineLeft01
   entities:

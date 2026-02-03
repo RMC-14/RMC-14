@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 23:31:49
+  time: 02/03/2026 22:56:41
   entityCount: 92
 maps: []
 grids:
@@ -256,56 +256,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-5.5
-      parent: 1
-- proto: RMCERTShuttleWallTSE01
-  entities:
-  - uid: 41
-    components:
-    - type: Transform
-      pos: -0.5,-5.5
-      parent: 1
-  - uid: 50
-    components:
-    - type: Transform
-      pos: -2.5,0.5
-      parent: 1
-- proto: RMCERTShuttleWallTSE02
-  entities:
-  - uid: 16
-    components:
-    - type: Transform
-      pos: -1.5,0.5
-      parent: 1
-  - uid: 20
-    components:
-    - type: Transform
-      pos: 2.5,0.5
-      parent: 1
-- proto: RMCERTShuttleWallTSE03
-  entities:
-  - uid: 43
-    components:
-    - type: Transform
-      pos: 1.5,-5.5
-      parent: 1
-  - uid: 51
-    components:
-    - type: Transform
-      pos: 3.5,0.5
-      parent: 1
-- proto: RMCERTShuttleWallTSE06
-  entities:
-  - uid: 40
-    components:
-    - type: Transform
-      pos: -0.5,-4.5
-      parent: 1
-- proto: RMCERTShuttleWallTSE07
-  entities:
-  - uid: 42
-    components:
-    - type: Transform
-      pos: 1.5,-4.5
       parent: 1
 - proto: RMCERTShuttleWallTSEEngineLeft
   entities:
@@ -567,16 +517,6 @@ entities:
       parent: 1
 - proto: RMCTSEDropshipWall39
   entities:
-  - uid: 17
-    components:
-    - type: Transform
-      pos: -1.5,-0.5
-      parent: 1
-  - uid: 18
-    components:
-    - type: Transform
-      pos: -2.5,1.5
-      parent: 1
   - uid: 36
     components:
     - type: Transform
@@ -598,11 +538,6 @@ entities:
       parent: 1
 - proto: RMCTSEDropshipWall46
   entities:
-  - uid: 19
-    components:
-    - type: Transform
-      pos: 3.5,1.5
-      parent: 1
   - uid: 21
     components:
     - type: Transform
@@ -612,6 +547,23 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-1.5
+      parent: 1
+  - uid: 43
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,-0.5
+      parent: 1
+  - uid: 50
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,1.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      pos: 3.5,1.5
       parent: 1
 - proto: RMCTSEDropshipWall47
   entities:
@@ -735,5 +687,57 @@ entities:
     components:
     - type: Transform
       pos: -0.5,5.5
+      parent: 1
+- proto: RMCTSEDropshipWallConnector1
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: -1.5,0.5
+      parent: 1
+- proto: RMCTSEDropshipWallConnector2
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+- proto: RMCTSEDropshipWallCornerLeftNorth
+  entities:
+  - uid: 41
+    components:
+    - type: Transform
+      pos: -0.5,-4.5
+      parent: 1
+- proto: RMCTSEDropshipWallCornerLeftSouth
+  entities:
+  - uid: 16
+    components:
+    - type: Transform
+      pos: -0.5,-5.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: -2.5,0.5
+      parent: 1
+- proto: RMCTSEDropshipWallCornerRightNorth
+  entities:
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 1.5,-4.5
+      parent: 1
+- proto: RMCTSEDropshipWallCornerRightSouth
+  entities:
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 1.5,-5.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 3.5,0.5
       parent: 1
 ...
