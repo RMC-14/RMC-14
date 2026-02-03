@@ -2194,3 +2194,14 @@
     state: hugs-the-void
   - type: PatronFigurine
     id: 60402dd8-cba7-4809-9dad-d6393d402a88
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronMarvinPotshotStange
+  name: Marvin 'Potshot' Stange figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: marvin_potshot_stange
+  - type: PatronFigurine
+    id: 70cbf5ca-2d70-4576-ad5e-5475f93acf51
