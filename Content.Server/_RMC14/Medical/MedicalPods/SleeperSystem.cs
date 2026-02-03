@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.MedicalPods;
 using Content.Shared.Body.Components;
@@ -150,9 +151,29 @@ public sealed class SleeperSystem : SharedSleeperSystem
             !TryComp(sleeperId, out SleeperComponent? sleeper))
         {
             var emptyState = new SleeperBuiState(
-                null, null, 0, 0, 0, 0, 0, 0, 0, 0,
-                false, 0, 0, 0, 0,
-                false, 0, 0, false, 0, 0, new List<SleeperChemicalData>(), new List<int>());
+                null,
+                null,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                0,
+                0,
+                0,
+                0,
+                false,
+                0,
+                0,
+                false,
+                0,
+                0,
+                [],
+                []);
             _ui.SetUiState(console.Owner, SleeperUIKey.Key, emptyState);
             return;
         }

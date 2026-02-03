@@ -27,36 +27,37 @@ public sealed partial class SleeperComponent : Component
     /// List of chemicals available to inject.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<ReagentPrototype>> AvailableChemicals = new()
-    {
-        "RMCInaprovaline",
-        "RMCParacetamol",
-        "RMCDylovene",
-        "RMCDexalin",
-        "RMCTricordrazine"
-    };
+    public ProtoId<ReagentPrototype>[] AvailableChemicals =
+    [
+        "CMInaprovaline",
+        //"RMCParacetamol",
+        "CMDylovene",
+        "CMDexalin",
+        "CMTricordrazine"
+    ];
 
     /// <summary>
-    /// List of chemicals that can be injected when occupant health is critical.
+    /// Chemicals that can be injected when occupant health is critical.
+    /// Uses HashSet for fast Contains() lookups.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<ReagentPrototype>> EmergencyChemicals = new()
-    {
-        "RMCInaprovaline",
-        "RMCParacetamol",
-        "RMCDylovene",
-        "RMCDexalin",
-        "RMCTricordrazine",
-        "RMCOxycodone",
-        "RMCBicaridine",
-        "RMCKelotane"
-    };
+    public HashSet<ProtoId<ReagentPrototype>> EmergencyChemicals =
+    [
+        "CMInaprovaline",
+        //"RMCParacetamol",
+        "CMDylovene",
+        "CMDexalin",
+        "CMTricordrazine",
+        //"RMCOxycodone",
+        "CMBicaridine",
+        "CMKelotane"
+    ];
 
     /// <summary>
     /// Amount options for chemical injection.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<int> InjectionAmounts = new() { 5, 10 };
+    public int[] InjectionAmounts = [5, 10];
 
     /// <summary>
     /// Maximum amount of any single chemical allowed in occupant.
@@ -86,7 +87,7 @@ public sealed partial class SleeperComponent : Component
     /// Reagents that cannot be removed by dialysis.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<ProtoId<ReagentPrototype>> NonTransferableReagents = new() { "Blood" };
+    public ProtoId<ReagentPrototype>[] NonTransferableReagents = ["Blood"];
 
     /// <summary>
     /// Whether to automatically eject occupant on death.

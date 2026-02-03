@@ -29,8 +29,8 @@ public sealed class SleeperBuiState : BoundUserInterfaceState
     public readonly bool AutoEjectDead;
     public readonly FixedPoint2 MaxChem;
     public readonly float MinHealth;
-    public readonly List<SleeperChemicalData> Chemicals;
-    public readonly List<int> InjectionAmounts;
+    public readonly IReadOnlyList<SleeperChemicalData> Chemicals;
+    public readonly IReadOnlyList<int> InjectionAmounts;
 
     public SleeperBuiState(
         NetEntity? occupant,
@@ -54,8 +54,8 @@ public sealed class SleeperBuiState : BoundUserInterfaceState
         bool autoEjectDead,
         FixedPoint2 maxChem,
         float minHealth,
-        List<SleeperChemicalData> chemicals,
-        List<int> injectionAmounts)
+        IReadOnlyList<SleeperChemicalData> chemicals,
+        IReadOnlyList<int> injectionAmounts)
     {
         Occupant = occupant;
         OccupantName = occupantName;
@@ -84,31 +84,13 @@ public sealed class SleeperBuiState : BoundUserInterfaceState
 }
 
 [Serializable, NetSerializable]
-public sealed class SleeperChemicalData
-{
-    public readonly string Name;
-    public readonly ProtoId<ReagentPrototype> Id;
-    public readonly FixedPoint2 OccupantAmount;
-    public readonly bool Injectable;
-    public readonly bool Overdosing;
-    public readonly bool OdWarning;
-
-    public SleeperChemicalData(
-        string name,
-        ProtoId<ReagentPrototype> id,
-        FixedPoint2 occupantAmount,
-        bool injectable,
-        bool overdosing,
-        bool odWarning)
-    {
-        Name = name;
-        Id = id;
-        OccupantAmount = occupantAmount;
-        Injectable = injectable;
-        Overdosing = overdosing;
-        OdWarning = odWarning;
-    }
-}
+public readonly record struct SleeperChemicalData(
+    string Name,
+    ProtoId<ReagentPrototype> Id,
+    FixedPoint2 OccupantAmount,
+    bool Injectable,
+    bool Overdosing,
+    bool OdWarning);
 
 [Serializable, NetSerializable]
 public enum SleeperUIKey
@@ -117,16 +99,10 @@ public enum SleeperUIKey
 }
 
 [Serializable, NetSerializable]
-public sealed class SleeperInjectChemicalBuiMsg : BoundUserInterfaceMessage
+public sealed class SleeperInjectChemicalBuiMsg(ProtoId<ReagentPrototype> chemical, int amount) : BoundUserInterfaceMessage
 {
-    public readonly ProtoId<ReagentPrototype> Chemical;
-    public readonly int Amount;
-
-    public SleeperInjectChemicalBuiMsg(ProtoId<ReagentPrototype> chemical, int amount)
-    {
-        Chemical = chemical;
-        Amount = amount;
-    }
+    public readonly ProtoId<ReagentPrototype> Chemical = chemical;
+    public readonly int Amount = amount;
 }
 
 [Serializable, NetSerializable]
@@ -136,14 +112,9 @@ public sealed class SleeperToggleFilterBuiMsg : BoundUserInterfaceMessage;
 public sealed class SleeperEjectBuiMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class SleeperAutoEjectDeadBuiMsg : BoundUserInterfaceMessage
+public sealed class SleeperAutoEjectDeadBuiMsg(bool enabled) : BoundUserInterfaceMessage
 {
-    public readonly bool Enabled;
-
-    public SleeperAutoEjectDeadBuiMsg(bool enabled)
-    {
-        Enabled = enabled;
-    }
+    public readonly bool Enabled = enabled;
 }
 
 [Serializable, NetSerializable]

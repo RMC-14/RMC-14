@@ -1,6 +1,5 @@
 # Sleeper Medical Pod
 # TODO RMC14: Add proper sleeper sprites (currently using hypersleep as placeholder)
-
 - type: entity
   parent: CMBaseStructureCorrodible
   id: RMCSleeper
@@ -94,24 +93,24 @@
   components:
   - type: Sleeper
     availableChemicals:
-    - RMCInaprovaline
-    - RMCTramadol
-    - RMCDylovene
-    - RMCDexalinPlus
-    - RMCTricordrazine
-    - RMCAlkysine
-    - RMCImidazoline
+    - CMInaprovaline
+    #- RMCTramadol
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    #- RMCAlkysine
+    - CMImidazoline
     emergencyChemicals:
-    - RMCInaprovaline
-    - RMCTramadol
-    - RMCDylovene
-    - RMCDexalinPlus
-    - RMCTricordrazine
-    - RMCOxycodone
-    - RMCBicaridine
-    - RMCKelotane
-    - RMCMeralyne
-    - RMCDermaline
-    - RMCAlkysine
-    - RMCImidazoline
+    - CMInaprovaline
+    #- RMCTramadol
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    #- RMCOxycodone
+    - CMBicaridine
+    - CMKelotane
+    - CMMeralyne
+    - CMDermaline
+    #- RMCAlkysine
+    - CMImidazoline
     reagentRemovalRate: 8
