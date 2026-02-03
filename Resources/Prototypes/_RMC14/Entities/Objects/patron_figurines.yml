@@ -2260,3 +2260,14 @@
     state: runs-with-boxes
   - type: PatronFigurine
     id: e3c176f8-b089-4897-98ae-e3365ea82426
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronCassandraReed
+  name: Cassandra Reed figurine
+  description: "A figurine depicting a human woman in a Chief MP uniform with black, straight hair and jade green eyes. Sports a forced looking smile. Regardless of the angle you look at the figure, it seems like the eyes are always staring directly at you."
+  components:
+  - type: Sprite
+    state: cassandra_reed
+  - type: PatronFigurine
+    id: 5e21ea69-d13b-4fa7-9826-434350d0cd71
