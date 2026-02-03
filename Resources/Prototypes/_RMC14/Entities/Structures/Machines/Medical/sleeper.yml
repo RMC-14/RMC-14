@@ -82,6 +82,10 @@
         type: SleeperConsoleBui
   - type: ActivatableUI
     key: enum.SleeperUIKey.Key
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
   - type: RMCMesonsNonviewable
 
 # Advanced Sleeper variant
