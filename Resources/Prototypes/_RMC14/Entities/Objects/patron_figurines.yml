@@ -2199,9 +2199,20 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronMarvinPotshotStange
   name: Marvin 'Potshot' Stange figurine
-  description: ""
+  description: "Somehow, this figurine appears to be looking at you with an disappointed, piercingly angry stare..."
   components:
   - type: Sprite
     state: marvin_potshot_stange
   - type: PatronFigurine
     id: 70cbf5ca-2d70-4576-ad5e-5475f93acf51
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronIsaakBennett
+  name: Isaak Bennett figurine
+  description: "This green vulpkanin comes with your standard Logistics Officer uniform, a perfect companion for any of your logistics needs!\n\nWooden crate accessory sold separately."
+  components:
+  - type: Sprite
+    state: isaak_bennett
+  - type: PatronFigurine
+    id: 86390ca6-195d-4776-a0f7-23e8d0288338
