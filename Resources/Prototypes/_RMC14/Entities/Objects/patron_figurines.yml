@@ -2304,3 +2304,14 @@
     state: kali_darland
   - type: PatronFigurine
     id: cf24b965-ac52-4b57-ae35-45739f636e62
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronJackieCrateheadTaylor
+  name: Jackie 'Cratehead' Taylor figurine
+  description: "SEVEN MEDICS! It took SEVEN to put you back together, Jackie. For gods sake watch the skies!"
+  components:
+  - type: Sprite
+    state: jackie_cratehead_taylor
+  - type: PatronFigurine
+    id: 280721a5-a2fa-47c2-ba94-c07fc13512a7
