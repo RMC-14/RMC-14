@@ -26,7 +26,6 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly CommendationManager _commendation = default!;
-    [Dependency] private readonly CommendationSystem _commendationSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IEntityManager _entities = default!;
@@ -44,8 +43,9 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         // Initialize datasets on first use
-        _medalIds ??= _commendationSystem.GetAwardableMedalIds();
-        _specialMedalIds ??= _commendationSystem.GetSpecialMedalIds();
+        var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
+        _medalIds ??= commendationSystem.GetAwardableMedalIds();
+        _specialMedalIds ??= commendationSystem.GetSpecialMedalIds();
         _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
         _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId);
 
@@ -165,7 +165,6 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
             // Add to round commendations only if it's for the current round
             if (targetRound == currentRound)
             {
-                var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
                 var commendationPrototypeId = commendationType == CommendationType.Medal
                     ? GetMedalPrototypeId(awardNum)
                     : null;
@@ -208,8 +207,9 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
         // Initialize datasets if needed
-        _medalIds ??= _commendationSystem.GetAwardableMedalIds();
-        _specialMedalIds ??= _commendationSystem.GetSpecialMedalIds();
+        var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
+        _medalIds ??= commendationSystem.GetAwardableMedalIds();
+        _specialMedalIds ??= commendationSystem.GetSpecialMedalIds();
         _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
         _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId);
 
