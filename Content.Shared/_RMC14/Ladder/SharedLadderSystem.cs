@@ -5,6 +5,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.GameTicking;
 using Content.Shared.Ghost;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -52,8 +53,11 @@ public abstract class SharedLadderSystem : EntitySystem
         SubscribeLocalEvent<LadderComponent, CanDropDraggedEvent>(OnLadderCanDropDragged);
         SubscribeLocalEvent<LadderComponent, CanDragEvent>(OnLadderCanDrag);
         SubscribeLocalEvent<LadderComponent, DragDropDraggedEvent>(OnLadderDragDropDragged);
+        SubscribeLocalEvent<LadderComponent, InteractUsingEvent>(OnInteractUsing);
 
         SubscribeLocalEvent<LadderWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
+
+        SubscribeLocalEvent<LadderThrowableComponent, LadderThrowDoAfterEvent>(OnLadderThrowDoAfter);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
@@ -210,11 +214,9 @@ public abstract class SharedLadderSystem : EntitySystem
         if (coordinates.MapId == MapId.Nullspace)
             return;
 
-        _transform.SetMapCoordinates(user, coordinates);
-
         var selfMessage = Loc.GetString("rmc-ladder-finish-climbing-self");
         var othersMessage = Loc.GetString("rmc-ladder-finish-climbing-others", ("user", user));
-        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+        TryMoveEntity(other, user, user, selfMessage, othersMessage);
 
         ent.Comp.LastDoAfterEnt = null;
         ent.Comp.LastDoAfterId = null;
@@ -276,6 +278,49 @@ public abstract class SharedLadderSystem : EntitySystem
         Watch(user, other);
     }
 
+    private void OnInteractUsing(Entity<LadderComponent> ent, ref InteractUsingEvent args)
+    {
+        if (!HasComp<LadderThrowableComponent>(args.Used))
+            return;
+
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.ItemThrowDuration, new LadderThrowDoAfterEvent(), args.Used, target: ent)
+        {
+            BreakOnMove = true,
+            NeedHand = true,
+        };
+
+        var directionText = GetDirectionPopup(ent);
+        var selfMessage = Loc.GetString("rmc-ladder-finish-throw-start-self", ("thrown", args.Used), ("direction", directionText), ("ladder", ent));
+        var othersMessage = Loc.GetString("rmc-ladder-finish-throw-start-others", ("user", args.User), ("thrown", args.Used), ("direction", directionText), ("ladder", ent));
+        _popup.PopupPredicted(selfMessage, othersMessage, args.User, args.User);
+
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnLadderThrowDoAfter(Entity<LadderThrowableComponent> ent, ref LadderThrowDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        if (!TryComp(args.Target, out LadderComponent? ladder))
+            return;
+
+        var directionText = GetDirectionPopup((args.Target.Value, ladder));
+        var selfMessage = Loc.GetString("rmc-ladder-finish-throw-self", ("thrown", ent), ("direction", directionText), ("ladder", args.Target));
+        var othersMessage = Loc.GetString("rmc-ladder-finish-throw-others", ("user", args.User), ("thrown", ent), ("direction", directionText), ("ladder", args.Target));
+        TryMoveEntity(ladder.Other, ent, args.User, selfMessage, othersMessage);
+    }
+
+    private string GetDirectionPopup(Entity<LadderComponent> ent)
+    {
+        return ent.Comp.Direction switch
+        {
+            LadderDirection.Up => "up",
+            LadderDirection.Down => "down",
+            _ => "",
+        };
+    }
+
     private void OnWatchingMoveInput(Entity<LadderWatchingComponent> ent, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
@@ -311,6 +356,24 @@ public abstract class SharedLadderSystem : EntitySystem
     {
         if (!_interaction.InRangeUnobstructed(user, ladder.Owner, popup: true))
             return false;
+
+        return true;
+    }
+
+    private bool TryMoveEntity(EntityUid? other, EntityUid moving, EntityUid user, string selfMessage, string othersMessage)
+    {
+        if (other is not { } target || TerminatingOrDeleted(target))
+            return false;
+
+        var coordinates = _transform.GetMapCoordinates(target);
+        if (coordinates.MapId == MapId.Nullspace)
+            return false;
+
+        _transform.SetMapCoordinates(moving, coordinates);
+        _popup.PopupPredicted(selfMessage, othersMessage, user, user);
+
+        var ev = new MovedByLadderEvent(user);
+        RaiseLocalEvent(moving, ref ev);
 
         return true;
     }
@@ -371,3 +434,6 @@ public abstract class SharedLadderSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct MovedByLadderEvent(EntityUid User);

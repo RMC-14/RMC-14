@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Ladder;
 using Content.Shared.Examine;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Light.Components;
@@ -20,6 +21,7 @@ namespace Content.Server.Light.EntitySystems
 
             SubscribeLocalEvent<ExpendableLightComponent, ExaminedEvent>(OnExpendableLightExamined);
             SubscribeLocalEvent<ExpendableLightComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
+            SubscribeLocalEvent<ExpendableLightComponent, MovedByLadderEvent>(OnMovedByLadder);
         }
 
         /// <summary>
@@ -35,6 +37,13 @@ namespace Content.Server.Light.EntitySystems
         ///     Turns on the light and makes it's body type static if enabled in the component.
         /// </summary>
         private void OnGrenadeContentThrown(Entity<ExpendableLightComponent> ent, ref GrenadeContentThrownEvent args)
+        {
+            if(!ent.Comp.PickupWhileOn)
+                _physics.SetBodyType(ent, BodyType.Static);
+            _light.TryActivate((ent.Owner,ent.Comp));
+        }
+
+        private void OnMovedByLadder(Entity<ExpendableLightComponent> ent, ref MovedByLadderEvent args)
         {
             if(!ent.Comp.PickupWhileOn)
                 _physics.SetBodyType(ent, BodyType.Static);
