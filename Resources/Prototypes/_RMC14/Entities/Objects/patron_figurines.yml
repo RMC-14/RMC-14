@@ -2282,3 +2282,14 @@
     state: trinity_rathens
   - type: PatronFigurine
     id: 590188a9-c7e1-4e17-af5d-5f6c042ccaa6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSethXi
+  name: Seth Xi figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: seth_xi
+  - type: PatronFigurine
+    id: 909c243e-6fb8-42ed-a477-d48571fccff2
