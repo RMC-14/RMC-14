@@ -114,7 +114,7 @@ namespace Content.Shared.Ghost
     }
 
     /// <summary>
-    /// A point a ghost can warp to.
+    /// An individual place a ghost can warp to.
     /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
     ///
     /// RMC14: Changed type to record
