@@ -1,0 +1,159 @@
+# Sleeper Medical Pod
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCSleeper
+  name: sleeper
+  description: A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner.
+  suffix: Spawns with Console
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/sleeper.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: sleeper_open
+      map: ["enum.SleeperVisualLayers.Base"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Sleeper
+    spawnConsolePrototype: RMCSleeperConsole
+    consoleSpawnOffset: 1, 0 # Spawns to the right (East), rotated with sleeper
+  - type: ApcPowerReceiver
+    powerLoad: 15 # 15 idle, 200 active
+    needsPower: false # TODO RMC14 power
+  - type: DragInsertContainer
+    containerId: sleeper
+  - type: ExitContainerOnMove
+    containerId: sleeper
+  - type: ContainerContainer
+    containers:
+      sleeper: !type:ContainerSlot {}
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.SleeperVisuals.Occupied:
+        enum.SleeperVisualLayers.Base:
+          True: { state: sleeper_closed }
+          False: { state: sleeper_open }
+      enum.SleeperVisuals.OccupantHealthState:
+        enum.SleeperVisualLayers.Base:
+          None: { state: sleeper_open }
+          Alive: { state: sleeper_closed }
+          Critical: { state: sleeper_closed_flashing }
+          Dead: { state: sleeper_closed_red }
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: NoStunOnExit
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCSleeper
+  id: RMCSleeperNoConsole
+  suffix: RMC14, No Console
+  components:
+  - type: Sleeper
+    spawnConsolePrototype: null
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCSleeperConsole
+  name: sleeper console
+  description: A console used to control the sleeper. Allows chemical injection and dialysis.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/sleeper.rsi
+    noRot: true
+    layers:
+    - state: sleeperconsole-p
+    - state: sleeperconsole
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        hard: false
+  - type: SleeperConsole
+  - type: UserInterface
+    interfaces:
+      enum.SleeperUIKey.Key:
+        type: SleeperConsoleBui
+  - type: ActivatableUI
+    key: enum.SleeperUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: ApcPowerReceiver
+    powerLoad: 40
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+# Advanced Sleeper variant
+- type: entity
+  parent: RMCSleeper
+  id: RMCSleeperAdvanced
+  name: advanced sleeper
+  description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
+  suffix: Spawns with Console
+  components:
+  - type: Sleeper
+    spawnConsolePrototype: RMCSleeperConsole
+    consoleSpawnOffset: 1, 0
+    availableChemicals:
+    - CMInaprovaline
+    #- RMCTramadol
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    #- RMCAlkysine
+    - CMImidazoline
+    emergencyChemicals:
+    - CMInaprovaline
+    #- RMCTramadol
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    #- RMCOxycodone
+    - CMBicaridine
+    - CMKelotane
+    - CMMeralyne
+    - CMDermaline
+    #- RMCAlkysine
+    - CMImidazoline
+    dialysisAmount: 8
