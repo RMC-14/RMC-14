@@ -165,7 +165,8 @@
     - UNMC
   - type: MarineIFF
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+      - FactionMarine
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
