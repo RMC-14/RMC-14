@@ -119,7 +119,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
-            _warps = warps.ToList(); // RMC14:
+            _warps = warps.ToList(); // RMC14: A warp list is now sorted and filtered in runtime with use of controls
             PrepareUI();
             ResetSelectedCategory();
         }
@@ -293,11 +293,11 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         {
             var displayName = _selectedCategory?.DisplayName ?? DefaultDisplayName;
 
-            foreach (var entry in GetSortedWarps())
+            foreach (var entry in GetSortedWarps()) // RMC14: Get sorted warps based on selected category and sort order
             {
                 var currentButtonRef = new Button
                 {
-                    Text = displayName(entry),
+                    Text = displayName(entry), // RMC14: Display name based on warp's type
                     TextAlign = Label.AlignMode.Right,
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Center,
@@ -306,7 +306,7 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                     ClipText = true,
                 };
 
-                currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(entry.entity);
+                currentButtonRef.OnPressed += _ => WarpClicked?.Invoke(entry.entity); // RMC14: warp target is now an entity property of GhostWarp
                 currentButtonRef.Visible = ButtonIsVisible(currentButtonRef);
 
                 ButtonContainer.AddChild(currentButtonRef);
