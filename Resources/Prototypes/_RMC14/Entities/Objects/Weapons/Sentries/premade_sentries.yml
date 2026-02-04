@@ -1,15 +1,15 @@
 ﻿- type: entity
   abstract: true
-  parent: BaseItem
   id: RMCSentryPremade
   name: turret
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: Physics
+    bodyType: Dynamic
+    fixedRotation: false
   - type: Corrodible
     timeToApply: 4
     structure: true
-  - type: Item
-    size: Normal
   - type: Clickable
   - type: InteractionOutline
   - type: Actions
@@ -129,3 +129,57 @@
   - type: RequireProjectileTarget
   - type: RMCWeaponAccuracy
   - type: HomingShots
+
+- type: entity
+  parent: RMCBaseTurret
+  id: RMCSentryDropship
+  name: UN 571-D omnidirectional sentry gun
+  description: A deployable, semi-automated turret with 360 degree range AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
+  suffix: Deployed
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: defense_base
+    - state: omni_uad_sentry_on
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 500
+  - type: HTN
+    rootTask:
+      task: RMCTurretCompound
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        5.5
+      AggroVisionRadius: !type:Single
+        5.5
+  - type: NpcFactionMember
+    factions:
+    - UNMC
+  - type: MarineIFF
+  - type: UserIFF
+    faction: FactionMarine
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: MouseRotator
+    angleTolerance: 5
+    rotationSpeed: 180
+    simple4DirMode: false
