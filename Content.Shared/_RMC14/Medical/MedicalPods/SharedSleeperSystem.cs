@@ -3,9 +3,12 @@ using Content.Shared._RMC14.Storage;
 using Content.Shared.DoAfter;
 using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
+using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
@@ -14,21 +17,30 @@ namespace Content.Shared._RMC14.Medical.MedicalPods;
 
 public abstract class SharedSleeperSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
+    [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
-    [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
+
+    private static readonly SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
+
+    private readonly HashSet<Entity<SleeperComponent>> _sleeperLinkBuffer = new();
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<SleeperComponent, ComponentInit>(OnSleeperInit);
+        SubscribeLocalEvent<SleeperComponent, MapInitEvent>(OnSleeperMapInit);
+        SubscribeLocalEvent<SleeperComponent, ComponentShutdown>(OnSleeperShutdown);
         SubscribeLocalEvent<SleeperComponent, EntInsertedIntoContainerMessage>(OnSleeperEntInserted);
         SubscribeLocalEvent<SleeperComponent, EntRemovedFromContainerMessage>(OnSleeperEntRemoved);
         SubscribeLocalEvent<SleeperComponent, InteractHandEvent>(OnSleeperInteractHand);
@@ -45,6 +57,47 @@ public abstract class SharedSleeperSystem : EntitySystem
     private void OnSleeperInit(Entity<SleeperComponent> sleeper, ref ComponentInit args)
     {
         _container.EnsureContainer<ContainerSlot>(sleeper, sleeper.Comp.ContainerId);
+    }
+
+    private void OnSleeperMapInit(Entity<SleeperComponent> sleeper, ref MapInitEvent args)
+    {
+        // Spawn the console at offset position and link it to this sleeper
+        if (_net.IsServer && sleeper.Comp.SpawnConsolePrototype != null)
+        {
+            var xform = Transform(sleeper);
+            var rotation = xform.LocalRotation;
+
+            // Apply rotation to the offset so console spawns in the correct relative position
+            var rotatedOffset = rotation.RotateVec(sleeper.Comp.ConsoleSpawnOffset);
+            var consoleCoords = _transform.GetMoverCoordinates(sleeper).Offset(rotatedOffset);
+
+            var consoleId = Spawn(sleeper.Comp.SpawnConsolePrototype.Value, consoleCoords);
+
+            // Set the console's rotation to match the sleeper
+            _transform.SetLocalRotation(consoleId, rotation);
+
+            if (TryComp(consoleId, out SleeperConsoleComponent? console))
+            {
+                sleeper.Comp.LinkedConsole = consoleId;
+                console.LinkedSleeper = sleeper;
+                Dirty(sleeper);
+                Dirty(consoleId, console);
+            }
+        }
+    }
+
+    private void OnSleeperShutdown(Entity<SleeperComponent> sleeper, ref ComponentShutdown args)
+    {
+        // Clean up linked console when sleeper is destroyed
+        if (sleeper.Comp.LinkedConsole is { } consoleId && TryComp(consoleId, out SleeperConsoleComponent? console))
+        {
+            console.LinkedSleeper = null;
+            Dirty(consoleId, console);
+
+            // Optionally delete the console when the sleeper is destroyed
+            if (_net.IsServer)
+                QueueDel(consoleId);
+        }
     }
 
     private void OnSleeperEntInserted(Entity<SleeperComponent> sleeper, ref EntInsertedIntoContainerMessage args)
@@ -65,7 +118,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (sleeper.Comp.Occupant == args.Entity)
         {
             sleeper.Comp.Occupant = null;
-            sleeper.Comp.Filtering = false;
+            sleeper.Comp.IsFiltering = false;
             sleeper.Comp.DialysisStartedReagentVolume = 0;
             Dirty(sleeper);
         }
@@ -181,7 +234,8 @@ public abstract class SharedSleeperSystem : EntitySystem
 
     private void OnConsoleInit(Entity<SleeperConsoleComponent> console, ref ComponentInit args)
     {
-        // Link to nearby sleeper
+        // Fallback: Try to link to nearby sleeper if not already linked
+        // This handles manually placed consoles on maps
         TryLinkToSleeper(console);
     }
 
@@ -190,7 +244,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (console.Comp.SkillRequired != null && !_skills.HasSkills(args.User, console.Comp.SkillRequired))
+        if (console.Comp.UseConsoleSkill != null && !_skills.HasSkills(args.User, console.Comp.UseConsoleSkill))
         {
             _popup.PopupClient(Loc.GetString("rmc-sleeper-no-skill"), args.User, args.User);
             args.Handled = true;
@@ -205,11 +259,11 @@ public abstract class SharedSleeperSystem : EntitySystem
         var xform = Transform(console);
         var coords = xform.Coordinates;
 
-        // Search adjacent tiles for a sleeper
-        var sleepers = new HashSet<Entity<SleeperComponent>>();
-        _lookup.GetEntitiesInRange(coords, 1.5f, sleepers);
+        // Search adjacent tiles for a sleeper using reusable buffer
+        _sleeperLinkBuffer.Clear();
+        _lookup.GetEntitiesInRange(coords, 1.5f, _sleeperLinkBuffer);
 
-        foreach (var sleeper in sleepers)
+        foreach (var sleeper in _sleeperLinkBuffer)
         {
             console.Comp.LinkedSleeper = sleeper;
             sleeper.Comp.LinkedConsole = console;
@@ -233,9 +287,9 @@ public abstract class SharedSleeperSystem : EntitySystem
             return;
         }
 
-        if (sleeper.Comp.EntryDelay > TimeSpan.Zero)
+        if (sleeper.Comp.InsertSelfDelay > TimeSpan.Zero)
         {
-            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.EntryDelay, new SleeperEntryDoAfterEvent(), sleeper, sleeper)
+            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.InsertSelfDelay, new SleeperEntryDoAfterEvent(), sleeper, sleeper)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -264,9 +318,9 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         _popup.PopupClient(Loc.GetString("rmc-sleeper-inserting", ("target", target), ("sleeper", sleeper)), user, user);
 
-        if (sleeper.Comp.PushInDelay > TimeSpan.Zero)
+        if (sleeper.Comp.InsertOthersDelay > TimeSpan.Zero)
         {
-            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.PushInDelay, new SleeperPushInDoAfterEvent(), sleeper, target)
+            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.InsertOthersDelay, new SleeperPushInDoAfterEvent(), sleeper, target)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
@@ -280,7 +334,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
     }
 
-    public void InsertOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
+    protected void InsertOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
     {
         if (!_container.TryGetContainer(sleeper, sleeper.Comp.ContainerId, out var container))
             return;
@@ -288,7 +342,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         _container.Insert(occupant, container);
     }
 
-    public void TryEjectOccupant(Entity<SleeperComponent> sleeper, EntityUid? user)
+    protected void TryEjectOccupant(Entity<SleeperComponent> sleeper, EntityUid? user)
     {
         if (sleeper.Comp.Occupant is not { } occupant)
             return;
@@ -302,12 +356,13 @@ public abstract class SharedSleeperSystem : EntitySystem
         EjectOccupant(sleeper, occupant);
     }
 
-    public void EjectOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
+    protected void EjectOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
     {
         if (!_container.TryGetContainer(sleeper, sleeper.Comp.ContainerId, out var container))
             return;
 
         _container.Remove(occupant, container);
+        _audio.PlayPvs(EjectSound, sleeper);
 
         if (sleeper.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(sleeper))
         {
@@ -323,22 +378,33 @@ public abstract class SharedSleeperSystem : EntitySystem
     private void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
     {
         var occupied = sleeper.Comp.Occupant != null;
-        _appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
+        Appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
+
+        var healthState = SleeperOccupantHealthState.Alive;
+        if (sleeper.Comp.Occupant is { } occupant)
+        {
+            if (_mobStateSystem.IsDead(occupant))
+                healthState = SleeperOccupantHealthState.Dead;
+            else if (_mobStateSystem.IsCritical(occupant))
+                healthState = SleeperOccupantHealthState.Critical;
+        }
+
+        Appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
     }
 
     public void ToggleDialysis(Entity<SleeperComponent> sleeper)
     {
         if (sleeper.Comp.Occupant == null)
         {
-            sleeper.Comp.Filtering = false;
+            sleeper.Comp.IsFiltering = false;
             sleeper.Comp.DialysisStartedReagentVolume = 0;
             return;
         }
 
-        sleeper.Comp.Filtering = !sleeper.Comp.Filtering;
-        if (sleeper.Comp.Filtering)
+        sleeper.Comp.IsFiltering = !sleeper.Comp.IsFiltering;
+        if (sleeper.Comp.IsFiltering)
         {
-            sleeper.Comp.NextDialysisTick = Timing.CurTime + sleeper.Comp.DialysisTickDelay;
+            sleeper.Comp.NextDialysisTick = _timing.CurTime + sleeper.Comp.DialysisTickDelay;
         }
         else
         {

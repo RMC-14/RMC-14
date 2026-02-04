@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.MedicalPods;
 using Content.Shared.Body.Components;
+using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -29,7 +30,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     private static readonly SoundSpecifier BuzzSound = new SoundPathSpecifier("/Audio/Machines/buzz-sigh.ogg");
-    private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Machines/ping.ogg");
+    private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = new();
 
@@ -47,10 +48,12 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
     private void OnSleeperMobStateChanged(Entity<SleeperComponent> sleeper, ref MobStateChangedEvent args)
     {
-        if (!sleeper.Comp.AutoEjectDead)
+        if (sleeper.Comp.Occupant != args.Target)
             return;
 
-        if (sleeper.Comp.Occupant != args.Target)
+        UpdateSleeperOccupantVisuals(sleeper);
+
+        if (!sleeper.Comp.AutoEjectDead)
             return;
 
         if (args.NewMobState == MobState.Dead)
@@ -58,6 +61,20 @@ public sealed class SleeperSystem : SharedSleeperSystem
             _audio.PlayPvs(BuzzSound, sleeper);
             EjectOccupant(sleeper, args.Target);
         }
+    }
+
+    private void UpdateSleeperOccupantVisuals(Entity<SleeperComponent> sleeper)
+    {
+        var healthState = SleeperOccupantHealthState.Alive;
+        if (sleeper.Comp.Occupant is { } occupant)
+        {
+            if (_mobState.IsDead(occupant))
+                healthState = SleeperOccupantHealthState.Dead;
+            else if (_mobState.IsCritical(occupant))
+                healthState = SleeperOccupantHealthState.Critical;
+        }
+
+        Appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
     }
 
     private void OnConsoleUIOpened(Entity<SleeperConsoleComponent> console, ref AfterActivatableUIOpenEvent args)
@@ -88,12 +105,12 @@ public sealed class SleeperSystem : SharedSleeperSystem
         // Check health threshold for non-emergency chemicals
         if (TryComp<DamageableComponent>(occupant, out var damageable))
         {
-            var health = damageable.TotalDamage;
+            var damage = damageable.TotalDamage;
             var maxHealth = _mobThreshold.TryGetThresholdForState(occupant, MobState.Dead, out var deadThreshold)
                 ? deadThreshold
                 : FixedPoint2.New(100);
 
-            var currentHealth = maxHealth - health;
+            var currentHealth = maxHealth - damage;
             if (currentHealth < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(args.Chemical))
                 return;
         }
@@ -246,15 +263,19 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 bloodMax = bloodSol.MaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
             }
+        }
 
-            if (_solution.TryGetSolution(occupant.Value, "chemicals", out _, out var chemSol))
-            {
-                totalReagents = chemSol.Volume;
-            }
+        // Cache chemical solution to avoid repeated lookups in the loop
+        Solution? cachedChemSol = null;
+        if (occupant != null)
+        {
+            _solution.TryGetSolution(occupant.Value, "chemicals", out _, out cachedChemSol);
+            if (cachedChemSol != null)
+                totalReagents = cachedChemSol.Volume;
         }
 
         // Build chemical list
-        var chemicals = new List<SleeperChemicalData>();
+        var chemicals = new List<SleeperChemicalData>(sleeper.AvailableChemicals.Length);
         foreach (var chemId in sleeper.AvailableChemicals)
         {
             if (!_reagent.TryIndex(chemId, out var reagentProto))
@@ -265,10 +286,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
             var overdosing = false;
             var odWarning = false;
 
-            if (occupant != null && _solution.TryGetSolution(occupant.Value, "chemicals", out _, out var chemSol))
+            if (cachedChemSol != null)
             {
                 var reagent = new ReagentId(chemId, null);
-                occupantAmount = chemSol.GetReagentQuantity(reagent);
+                occupantAmount = cachedChemSol.GetReagentQuantity(reagent);
 
                 // Check overdose
                 if (reagentProto.Overdose != null)
@@ -284,13 +305,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 }
 
                 // Check health threshold for non-emergency chemicals
-                if (TryComp<DamageableComponent>(occupant, out var dmg))
+                // Note: health is already calculated above, no need to fetch damageable again
+                if (health < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(chemId))
                 {
-                    var currentHealth = maxHealth - dmg.TotalDamage.Float();
-                    if (currentHealth < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(chemId))
-                    {
-                        injectable = false;
-                    }
+                    injectable = false;
                 }
             }
 
@@ -319,7 +337,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             bloodMax,
             bloodPercent,
             bodyTemp,
-            sleeper.Filtering,
+            sleeper.IsFiltering,
             totalReagents,
             sleeper.DialysisStartedReagentVolume,
             sleeper.AutoEjectDead,
@@ -340,7 +358,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
         while (sleepers.MoveNext(out var uid, out var sleeper))
         {
-            if (!sleeper.Filtering || sleeper.Occupant == null)
+            if (!sleeper.IsFiltering || sleeper.Occupant == null)
                 continue;
 
             if (time < sleeper.NextDialysisTick)
@@ -368,13 +386,13 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
                 foreach (var reagent in _reagentRemovalBuffer)
                 {
-                    _solution.RemoveReagent(chemSolEnt.Value, reagent, sleeper.ReagentRemovalRate);
+                    _solution.RemoveReagent(chemSolEnt.Value, reagent, sleeper.DialysisAmount);
                 }
 
                 // Check if dialysis is complete
                 if (chemSol.Volume <= 0)
                 {
-                    sleeper.Filtering = false;
+                    sleeper.IsFiltering = false;
                     sleeper.DialysisStartedReagentVolume = 0;
                     _audio.PlayPvs(PingSound, uid);
                 }

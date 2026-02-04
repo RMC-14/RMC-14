@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
@@ -11,17 +12,24 @@ namespace Content.Shared._RMC14.Medical.MedicalPods;
 [Access(typeof(SharedSleeperSystem))]
 public sealed partial class SleeperComponent : Component
 {
-    /// <summary>
-    /// The container ID for the occupant.
-    /// </summary>
     [DataField]
     public string ContainerId = "sleeper";
 
-    /// <summary>
-    /// The current occupant of the sleeper.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Occupant;
+
+    /// <summary>
+    /// The prototype to spawn the console. If null, no console is spawned.
+    /// </summary>
+    [DataField]
+    public EntProtoId<SleeperConsoleComponent>? SpawnConsolePrototype = "RMCSleeperConsole";
+
+    /// <summary>
+    /// Offset for spawning the console relative to the sleeper.
+    /// This is applied based on the sleeper's rotation.
+    /// </summary>
+    [DataField]
+    public Vector2 ConsoleSpawnOffset = new(1, 0);
 
     /// <summary>
     /// List of chemicals available to inject.
@@ -37,8 +45,7 @@ public sealed partial class SleeperComponent : Component
     ];
 
     /// <summary>
-    /// Chemicals that can be injected when occupant health is critical.
-    /// Uses HashSet for fast Contains() lookups.
+    /// Chemicals that can be injected when occupant health is below MinHealth.
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<ProtoId<ReagentPrototype>> EmergencyChemicals =
@@ -53,77 +60,23 @@ public sealed partial class SleeperComponent : Component
         "CMKelotane"
     ];
 
-    /// <summary>
-    /// Amount options for chemical injection.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public int[] InjectionAmounts = [5, 10];
 
-    /// <summary>
-    /// Maximum amount of any single chemical allowed in occupant.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public FixedPoint2 MaxChemical = 40;
 
     /// <summary>
-    /// Minimum health for normal chemical injection (below this, only emergency chems work).
+    /// Minimum health for normal chemicals. Emergency chemicals become available below this.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float MinHealth = 10f;
+    public float MinHealth = 90;
 
-    /// <summary>
-    /// Whether dialysis is currently active.
-    /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Filtering;
+    public bool IsFiltering;
 
-    /// <summary>
-    /// Reagent removal amount per second during dialysis.
-    /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 ReagentRemovalRate = FixedPoint2.New(3);
-
-    /// <summary>
-    /// Reagents that cannot be removed by dialysis.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public ProtoId<ReagentPrototype>[] NonTransferableReagents = ["Blood"];
-
-    /// <summary>
-    /// Whether to automatically eject occupant on death.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool AutoEjectDead;
-
-    /// <summary>
-    /// Duration of stun when exiting the sleeper.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
-
-    /// <summary>
-    /// Delay for entering the sleeper.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan EntryDelay = TimeSpan.FromSeconds(2);
-
-    /// <summary>
-    /// Delay for pushing someone else into the sleeper.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan PushInDelay = TimeSpan.FromSeconds(2);
-
-    /// <summary>
-    /// Skills required to operate the sleeper.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public SkillWhitelist? SkillRequired;
-
-    /// <summary>
-    /// The linked console entity.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? LinkedConsole;
+    public FixedPoint2 DialysisAmount = FixedPoint2.New(3);
 
     /// <summary>
     /// Time of next dialysis tick.
@@ -136,6 +89,36 @@ public sealed partial class SleeperComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan DialysisTickDelay = TimeSpan.FromSeconds(1);
+
+    /// <summary>
+    /// Reagents that cannot be removed by dialysis.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public ProtoId<ReagentPrototype>[] NonTransferableReagents = ["Blood"];
+
+    [DataField, AutoNetworkedField]
+    public bool AutoEjectDead;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan InsertSelfDelay = TimeSpan.FromSeconds(2);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan InsertOthersDelay = TimeSpan.FromSeconds(2);
+
+    /// <summary>
+    /// Skills required to operate the sleeper.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SkillWhitelist? SkillRequired;
+
+    /// <summary>
+    /// The linked console entity.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? LinkedConsole;
 
     /// <summary>
     /// Total reagent volume when dialysis started (for progress tracking).

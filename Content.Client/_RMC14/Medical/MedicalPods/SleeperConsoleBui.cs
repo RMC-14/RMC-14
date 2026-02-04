@@ -5,14 +5,10 @@ using Robust.Client.UserInterface;
 namespace Content.Client._RMC14.Medical.MedicalPods;
 
 [UsedImplicitly]
-public sealed class SleeperConsoleBui : BoundUserInterface
+public sealed class SleeperConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
     private SleeperConsoleWindow? _window;
-
-    public SleeperConsoleBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
-    {
-    }
 
     protected override void Open()
     {

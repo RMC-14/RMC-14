@@ -1,19 +1,19 @@
 # Sleeper Medical Pod
-# TODO RMC14: Add proper sleeper sprites (currently using hypersleep as placeholder)
 - type: entity
   parent: CMBaseStructureCorrodible
   id: RMCSleeper
   name: sleeper
   description: A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner.
+  suffix: RMC14, Sleeper + Console
   components:
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/hypersleep.rsi
+    sprite: _RMC14/Structures/Machines/Medical/sleeper.rsi
     drawdepth: Mobs
     noRot: true
     layers:
-    - state: open
+    - state: sleeper_open
       map: ["enum.SleeperVisualLayers.Base"]
   - type: InteractionOutline
   - type: Fixtures
@@ -28,6 +28,8 @@
         layer:
         - MachineLayer
   - type: Sleeper
+    spawnConsolePrototype: RMCSleeperConsole
+    consoleSpawnOffset: 1, 0 # Spawns to the right (East), rotated with sleeper
   - type: DragInsertContainer
     containerId: sleeper
   - type: ExitContainerOnMove
@@ -40,14 +42,27 @@
     visuals:
       enum.SleeperVisuals.Occupied:
         enum.SleeperVisualLayers.Base:
-          True: { state: closed }
-          False: { state: open }
+          True: { state: sleeper_closed }
+          False: { state: sleeper_open }
+      enum.SleeperVisuals.OccupantHealthState:
+        enum.SleeperVisualLayers.Base:
+          Alive: { state: sleeper_closed }
+          Critical: { state: sleeper_closed_flashing }
+          Dead: { state: sleeper_closed_red }
   - type: InsertBlacklist
     blacklist:
       components:
       - Xeno
   - type: NoStunOnExit
   - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCSleeper
+  id: RMCSleeperNoConsole
+  suffix: RMC14, No Console
+  components:
+  - type: Sleeper
+    spawnConsolePrototype: null
 
 - type: entity
   parent: CMBaseStructureCorrodible
@@ -58,11 +73,12 @@
   - type: Transform
     anchored: true
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/computer.rsi
+    sprite: _RMC14/Structures/Machines/Medical/sleeper.rsi
     noRot: true
     layers:
-    - state: computer
-    - state: overwatch
+    - state: sleeperconsole-p
+    - state: sleeperconsole
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
@@ -75,6 +91,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        hard: false
   - type: SleeperConsole
   - type: UserInterface
     interfaces:
@@ -82,6 +99,17 @@
         type: SleeperConsoleBui
   - type: ActivatableUI
     key: enum.SleeperUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: ApcPowerReceiver
+    powerLoad: 40
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
   - type: ActivatableUIBlacklist
     blacklist:
       components:
@@ -94,8 +122,11 @@
   id: RMCSleeperAdvanced
   name: advanced sleeper
   description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
+  suffix: RMC14, Advanced
   components:
   - type: Sleeper
+    spawnConsolePrototype: RMCSleeperConsole
+    consoleSpawnOffset: 1, 0
     availableChemicals:
     - CMInaprovaline
     #- RMCTramadol
@@ -117,4 +148,4 @@
     - CMDermaline
     #- RMCAlkysine
     - CMImidazoline
-    reagentRemovalRate: 8
+    dialysisAmount: 8

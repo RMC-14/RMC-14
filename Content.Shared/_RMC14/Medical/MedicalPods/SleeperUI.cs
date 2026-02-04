@@ -6,81 +6,55 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Medical.MedicalPods;
 
 [Serializable, NetSerializable]
-public sealed class SleeperBuiState : BoundUserInterfaceState
+public sealed class SleeperBuiState(
+    NetEntity? occupant,
+    string? occupantName,
+    int occupantStat,
+    float occupantHealth,
+    float occupantMaxHealth,
+    float occupantMinHealth,
+    float bruteLoss,
+    float burnLoss,
+    float toxinLoss,
+    float oxyLoss,
+    bool hasBlood,
+    FixedPoint2 bloodLevel,
+    FixedPoint2 bloodMax,
+    float bloodPercent,
+    float bodyTemperature,
+    bool filtering,
+    FixedPoint2 totalReagents,
+    FixedPoint2 reagentsWhenStarted,
+    bool autoEjectDead,
+    FixedPoint2 maxChem,
+    float minHealth,
+    IReadOnlyList<SleeperChemicalData> chemicals,
+    IReadOnlyList<int> injectionAmounts)
+    : BoundUserInterfaceState
 {
-    public readonly NetEntity? Occupant;
-    public readonly string? OccupantName;
-    public readonly int OccupantStat;
-    public readonly float OccupantHealth;
-    public readonly float OccupantMaxHealth;
-    public readonly float OccupantMinHealth;
-    public readonly float BruteLoss;
-    public readonly float BurnLoss;
-    public readonly float ToxinLoss;
-    public readonly float OxyLoss;
-    public readonly bool HasBlood;
-    public readonly FixedPoint2 BloodLevel;
-    public readonly FixedPoint2 BloodMax;
-    public readonly float BloodPercent;
-    public readonly float BodyTemperature;
-    public readonly bool Filtering;
-    public readonly FixedPoint2 TotalReagents;
-    public readonly FixedPoint2 ReagentsWhenStarted;
-    public readonly bool AutoEjectDead;
-    public readonly FixedPoint2 MaxChem;
-    public readonly float MinHealth;
-    public readonly IReadOnlyList<SleeperChemicalData> Chemicals;
-    public readonly IReadOnlyList<int> InjectionAmounts;
-
-    public SleeperBuiState(
-        NetEntity? occupant,
-        string? occupantName,
-        int occupantStat,
-        float occupantHealth,
-        float occupantMaxHealth,
-        float occupantMinHealth,
-        float bruteLoss,
-        float burnLoss,
-        float toxinLoss,
-        float oxyLoss,
-        bool hasBlood,
-        FixedPoint2 bloodLevel,
-        FixedPoint2 bloodMax,
-        float bloodPercent,
-        float bodyTemperature,
-        bool filtering,
-        FixedPoint2 totalReagents,
-        FixedPoint2 reagentsWhenStarted,
-        bool autoEjectDead,
-        FixedPoint2 maxChem,
-        float minHealth,
-        IReadOnlyList<SleeperChemicalData> chemicals,
-        IReadOnlyList<int> injectionAmounts)
-    {
-        Occupant = occupant;
-        OccupantName = occupantName;
-        OccupantStat = occupantStat;
-        OccupantHealth = occupantHealth;
-        OccupantMaxHealth = occupantMaxHealth;
-        OccupantMinHealth = occupantMinHealth;
-        BruteLoss = bruteLoss;
-        BurnLoss = burnLoss;
-        ToxinLoss = toxinLoss;
-        OxyLoss = oxyLoss;
-        HasBlood = hasBlood;
-        BloodLevel = bloodLevel;
-        BloodMax = bloodMax;
-        BloodPercent = bloodPercent;
-        BodyTemperature = bodyTemperature;
-        Filtering = filtering;
-        TotalReagents = totalReagents;
-        ReagentsWhenStarted = reagentsWhenStarted;
-        AutoEjectDead = autoEjectDead;
-        MaxChem = maxChem;
-        MinHealth = minHealth;
-        Chemicals = chemicals;
-        InjectionAmounts = injectionAmounts;
-    }
+    public readonly NetEntity? Occupant = occupant;
+    public readonly string? OccupantName = occupantName;
+    public readonly int OccupantStat = occupantStat;
+    public readonly float OccupantHealth = occupantHealth;
+    public readonly float OccupantMaxHealth = occupantMaxHealth;
+    public readonly float OccupantMinHealth = occupantMinHealth;
+    public readonly float BruteLoss = bruteLoss;
+    public readonly float BurnLoss = burnLoss;
+    public readonly float ToxinLoss = toxinLoss;
+    public readonly float OxyLoss = oxyLoss;
+    public readonly bool HasBlood = hasBlood;
+    public readonly FixedPoint2 BloodLevel = bloodLevel;
+    public readonly FixedPoint2 BloodMax = bloodMax;
+    public readonly float BloodPercent = bloodPercent;
+    public readonly float BodyTemperature = bodyTemperature;
+    public readonly bool Filtering = filtering;
+    public readonly FixedPoint2 TotalReagents = totalReagents;
+    public readonly FixedPoint2 ReagentsWhenStarted = reagentsWhenStarted;
+    public readonly bool AutoEjectDead = autoEjectDead;
+    public readonly FixedPoint2 MaxChem = maxChem;
+    public readonly float MinHealth = minHealth;
+    public readonly IReadOnlyList<SleeperChemicalData> Chemicals = chemicals;
+    public readonly IReadOnlyList<int> InjectionAmounts = injectionAmounts;
 }
 
 [Serializable, NetSerializable]
@@ -120,7 +94,16 @@ public sealed class SleeperAutoEjectDeadBuiMsg(bool enabled) : BoundUserInterfac
 [Serializable, NetSerializable]
 public enum SleeperVisuals : byte
 {
-    Occupied
+    Occupied,
+    OccupantHealthState
+}
+
+[Serializable, NetSerializable]
+public enum SleeperOccupantHealthState : byte
+{
+    Alive = 0,
+    Critical = 1,
+    Dead = 2
 }
 
 [Serializable, NetSerializable]
