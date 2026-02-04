@@ -14,6 +14,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
     [GenerateTypedNameReferences]
     public sealed partial class GhostTargetWindow : DefaultWindow
     {
+        private List<GhostWarp> _warps = new(); // RMC14: Change type of List to GhostWarp
+
         private const string HeadingIndicatorCollapsed = "+";
         private const string HeadingIndicatorExpanded = "-";
 
@@ -34,6 +36,18 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         private static readonly Comparer<string> OrdinalIgnoreCaseComparer =
             Comparer<string>.Create((x, y) => string.Compare(x, y, StringComparison.OrdinalIgnoreCase));
 
+        private sealed class CaseInsensitiveComparer : IEqualityComparer<string>
+        {
+            public bool Equals(string? x, string? y)
+            {
+                return string.Equals(x, y, StringComparison.OrdinalIgnoreCase);
+            }
+
+            public int GetHashCode(string obj)
+            {
+                return obj.ToUpperInvariant().GetHashCode();
+            }
+        }
         private static readonly CaseInsensitiveComparer JobComparer = new();
 
         private readonly IPrototypeManager _prototypeManager;
@@ -41,10 +55,9 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         private readonly List<(WarpCategory Category, BaseButton Button)> _categoryButtons = new();
         private readonly string[] _jobXenoTranslations;
 
-        private List<GhostWarp> _warps = new();
-        private string _searchText = string.Empty;
         private int _sortOrder;
         private WarpCategory? _selectedCategory;
+        private string _searchText = string.Empty;
 
         public event Action<NetEntity>? WarpClicked;
         public event Action? OnGhostnadoClicked;
@@ -65,10 +78,10 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             _sortOrderOptions =
             [
-                new("\u2191",
+                new SortOrderOption("\u2191",
                     "ghost-target-window-type-sort-dir-asc-title",
                     (ordered, key) => ordered.ThenBy(key, OrdinalIgnoreCaseComparer)),
-                new("\u2193",
+                new SortOrderOption("\u2193",
                     "ghost-target-window-type-sort-dir-desc-title",
                     (ordered, key) => ordered.ThenByDescending(key, OrdinalIgnoreCaseComparer)),
             ];
@@ -94,44 +107,24 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             SortOrderButton.TooltipSupplier = _ => tooltip;
         }
 
-        private static string PlayerDisplayName(GhostWarp w) =>
-            w is PlayerGhostWarp { jobName.Length: > 0 } pw
-                ? $"{pw.entityName} ({pw.jobName})"
-                : w.entityName;
-
-        private static string WarpPointDisplayName(GhostWarp w) =>
-            Loc.GetString("ghost-target-window-current-button", ("name", w.entityName));
-
-        private static string DefaultDisplayName(GhostWarp w) => w switch
+        private bool IsXenoJob(string jobName)
         {
-            PlayerGhostWarp => PlayerDisplayName(w),
-            _ => WarpPointDisplayName(w),
-        };
+            return _jobXenoTranslations.Any(j => JobEquals(j, jobName));
+        }
 
-        private static bool JobEquals(string a, string b) =>
-            string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
-
-        private bool IsXenoJob(string jobName) =>
-            _jobXenoTranslations.Any(j => JobEquals(j, jobName));
+        private static bool JobEquals(string a, string b)
+        {
+            return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
+        }
 
         public void UpdateWarps(IEnumerable<GhostWarp> warps)
         {
-            _warps = warps.ToList();
-            Populate2();
+            _warps = warps.ToList(); // RMC14:
+            PrepareUI();
             ResetSelectedCategory();
         }
 
-        private void ResetSelectedCategory()
-        {
-            if (_selectedCategory == null || _categoryButtons.Any(cb => cb.Category.Label == _selectedCategory.Label))
-            {
-                return;
-            }
-
-            _selectedCategory = null;
-        }
-
-        public void Populate2()
+        public void PrepareUI()
         {
             _categoryButtons.Clear();
             CategoryContainer.DisposeAllChildren();
@@ -169,46 +162,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
                 PlayerDisplayName);
 
             AddCollapsibleCategory(category, jobs);
-        }
-
-        private void SelectCategory(WarpCategory? category)
-        {
-            _selectedCategory = _selectedCategory?.Label == category?.Label ? null : category;
-            UpdateCategorySelection();
-            Populate();
-        }
-
-        private void UpdateCategorySelection()
-        {
-            foreach (var (cat, btn) in _categoryButtons)
-            {
-                if (btn is Button button)
-                    button.Pressed = _selectedCategory?.Label == cat.Label;
-            }
-        }
-
-        private Button CreateFilterButton(WarpCategory category, string text, bool pressed)
-        {
-            var button = new Button
-            {
-                Text = text,
-                HorizontalExpand = true,
-                TextAlign = Label.AlignMode.Left,
-                ToggleMode = true,
-                Pressed = pressed,
-                ClipText = true,
-                MaxWidth = 340,
-            };
-            button.OnPressed += _ => SelectCategory(category);
-            _categoryButtons.Add((category, button));
-            return button;
-        }
-
-        private void AddCategoryButton(WarpCategory category)
-        {
-            var selected = _selectedCategory?.Label == category.Label;
-            var button = CreateFilterButton(category, Loc.GetString(category.Label), selected);
-            CategoryContainer.AddChild(button);
         }
 
         private void AddCollapsibleCategory(WarpCategory category, string[] jobs)
@@ -269,8 +222,8 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             };
 
             var shouldExpand = _selectedCategory != null &&
-                (_selectedCategory.Label == category.Label ||
-                 jobs.Any(j => JobEquals(j, _selectedCategory.Label)));
+                               (_selectedCategory.Label == category.Label ||
+                                jobs.Any(j => JobEquals(j, _selectedCategory.Label)));
 
             if (shouldExpand)
             {
@@ -281,10 +234,59 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             CategoryContainer.AddChild(collapsible);
         }
 
+        private Button CreateFilterButton(WarpCategory category, string text, bool pressed)
+        {
+            var button = new Button
+            {
+                Text = text,
+                HorizontalExpand = true,
+                TextAlign = Label.AlignMode.Left,
+                ToggleMode = true,
+                Pressed = pressed,
+                ClipText = true,
+                MaxWidth = 340,
+            };
+            button.OnPressed += _ => SelectCategory(category);
+            _categoryButtons.Add((category, button));
+            return button;
+        }
+
+        private void SelectCategory(WarpCategory? category)
+        {
+            _selectedCategory = _selectedCategory?.Label == category?.Label ? null : category;
+            UpdateCategorySelection();
+            Populate();
+        }
+
+        private void UpdateCategorySelection()
+        {
+            foreach (var (cat, btn) in _categoryButtons)
+            {
+                if (btn is Button button)
+                    button.Pressed = _selectedCategory?.Label == cat.Label;
+            }
+        }
+
         public void Populate()
         {
             ButtonContainer.DisposeAllChildren();
             AddButtons();
+        }
+
+        private static string DefaultDisplayName(GhostWarp w)
+        {
+            return w switch
+            {
+                PlayerGhostWarp => PlayerDisplayName(w),
+                _ => WarpPointDisplayName(w),
+            };
+        }
+
+        private static string PlayerDisplayName(GhostWarp w)
+        {
+            return w is PlayerGhostWarp { jobName.Length: > 0 } pw
+                ? $"{pw.entityName} ({pw.jobName})"
+                : w.entityName;
         }
 
         private void AddButtons()
@@ -311,6 +313,26 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
             }
         }
 
+        private void AddCategoryButton(WarpCategory category)
+        {
+            var selected = _selectedCategory?.Label == category.Label;
+            var button = CreateFilterButton(category, Loc.GetString(category.Label), selected);
+            CategoryContainer.AddChild(button);
+        }
+
+        private static string WarpPointDisplayName(GhostWarp w) =>
+            Loc.GetString("ghost-target-window-current-button", ("name", w.entityName));
+
+        private void ResetSelectedCategory()
+        {
+            if (_selectedCategory == null || _categoryButtons.Any(cb => cb.Category.Label == _selectedCategory.Label))
+            {
+                return;
+            }
+
+            _selectedCategory = null;
+        }
+
         private IEnumerable<GhostWarp> GetSortedWarps()
         {
             var filtered = _selectedCategory?.Filter(_warps) ?? _warps.AsEnumerable();
@@ -325,15 +347,6 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
         private bool ButtonIsVisible(Button button)
         {
             return string.IsNullOrEmpty(_searchText) || button.Text == null || button.Text.Contains(_searchText, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private sealed class CaseInsensitiveComparer : IEqualityComparer<string>
-        {
-            public bool Equals(string? x, string? y) =>
-                string.Equals(x, y, StringComparison.OrdinalIgnoreCase);
-
-            public int GetHashCode(string obj) =>
-                obj.ToUpperInvariant().GetHashCode();
         }
 
         private void UpdateVisibleButtons()

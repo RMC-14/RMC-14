@@ -114,13 +114,17 @@ namespace Content.Shared.Ghost
     }
 
     /// <summary>
-    /// An individual place a ghost can warp to.
+    /// A point a ghost can warp to.
     /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
+    ///
+    /// RMC14: Changed type to record
     /// </summary>
     [Serializable, NetSerializable]
     public record GhostWarp(NetEntity entity, string entityName, bool isWarpPoint);
 
     /// <summary>
+    /// RMC14: New ghost warp type
+    ///
     /// A player a ghost can warp to.
     /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
     /// </summary>

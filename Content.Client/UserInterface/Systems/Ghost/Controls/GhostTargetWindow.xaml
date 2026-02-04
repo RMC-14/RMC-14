@@ -1,13 +1,13 @@
-<DefaultWindow xmlns="https://spacestation14.io" Title="{Loc 'ghost-target-window-title'}" MinSize="550 450" SetSize="550 450">
-    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True">
-        <ScrollContainer Name="CategoryScroll" HorizontalExpand="True" SizeFlagsStretchRatio="1" VerticalExpand="True" HScrollEnabled="False" Margin="0 75 0 0">
+<DefaultWindow xmlns="https://spacestation14.io" Title="{Loc 'ghost-target-window-title'}" MinSize="450 450" SetSize="450 450">
+    <BoxContainer Orientation="Horizontal" HorizontalExpand="True" VerticalExpand="True"> <!-- RMC14 Group children containers -->
+        <ScrollContainer Name="CategoryScroll" HorizontalExpand="True" SizeFlagsStretchRatio="1" VerticalExpand="True" HScrollEnabled="False" Margin="0 75 0 0"> <!-- RMC14 Container for warps categories -->
             <BoxContainer Name="CategoryContainer" Orientation="Vertical" SeparationOverride="5" HorizontalExpand="True" >
                 <!-- Category buttons get added here by code -->
             </BoxContainer>
         </ScrollContainer>
-        <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="3" Margin="4 0 0 0">
-            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4">
-                <Control HorizontalExpand="True" />
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" SizeFlagsStretchRatio="3" Margin="4 0 0 0"> <!-- RMC14 outer margin for old container -->
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="0 4"> <!-- RMC14 group old top row to position warp button centered against search bar -->
+                <Control HorizontalExpand="True" /> <!-- RMC14 position warp button centered against search bar -->
                 <Button Name="GhostnadoButton" Text="{Loc 'ghost-target-window-warp-to-most-followed'}" HorizontalAlignment="Center" />
                 <Control HorizontalExpand="True">
                     <Button Name="SortOrderButton" HorizontalAlignment="Right" />
