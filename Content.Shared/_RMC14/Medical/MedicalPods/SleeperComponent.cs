@@ -1,7 +1,7 @@
 using System.Numerics;
-using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -79,16 +79,22 @@ public sealed partial class SleeperComponent : Component
     public FixedPoint2 DialysisAmount = FixedPoint2.New(3);
 
     /// <summary>
+    /// Delay between dialysis ticks.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan DialysisTickDelay = TimeSpan.FromSeconds(1);
+
+    /// <summary>
     /// Time of next dialysis tick.
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan NextDialysisTick;
 
     /// <summary>
-    /// Delay between dialysis ticks.
+    /// Total reagent volume when dialysis started (for progress tracking).
     /// </summary>
     [DataField, AutoNetworkedField]
-    public TimeSpan DialysisTickDelay = TimeSpan.FromSeconds(1);
+    public FixedPoint2 DialysisStartedReagentVolume;
 
     /// <summary>
     /// Reagents that cannot be removed by dialysis.
@@ -109,20 +115,26 @@ public sealed partial class SleeperComponent : Component
     public TimeSpan InsertOthersDelay = TimeSpan.FromSeconds(2);
 
     /// <summary>
-    /// Skills required to operate the sleeper.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public SkillWhitelist? SkillRequired;
-
-    /// <summary>
     /// The linked console entity.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
     /// <summary>
-    /// Total reagent volume when dialysis started (for progress tracking).
+    /// Sound played when ejecting an occupant.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public FixedPoint2 DialysisStartedReagentVolume;
+    [DataField]
+    public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
+
+    /// <summary>
+    /// Sound played when auto-ejecting a dead occupant.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier AutoEjectDeadSound = new SoundPathSpecifier("/Audio/Machines/buzz-sigh.ogg");
+
+    /// <summary>
+    /// Sound played when dialysis is complete.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier DialysisCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 }

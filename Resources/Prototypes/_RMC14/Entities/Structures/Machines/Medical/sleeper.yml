@@ -4,7 +4,9 @@
   id: RMCSleeper
   name: sleeper
   description: A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner.
-  suffix: RMC14, Sleeper + Console
+  suffix: Spawns with Console
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Transform
     anchored: true
@@ -30,6 +32,9 @@
   - type: Sleeper
     spawnConsolePrototype: RMCSleeperConsole
     consoleSpawnOffset: 1, 0 # Spawns to the right (East), rotated with sleeper
+  - type: ApcPowerReceiver
+    powerLoad: 15 # 15 idle, 200 active
+    needsPower: false # TODO RMC14 power
   - type: DragInsertContainer
     containerId: sleeper
   - type: ExitContainerOnMove
@@ -46,6 +51,7 @@
           False: { state: sleeper_open }
       enum.SleeperVisuals.OccupantHealthState:
         enum.SleeperVisualLayers.Base:
+          None: { state: sleeper_open }
           Alive: { state: sleeper_closed }
           Critical: { state: sleeper_closed_flashing }
           Dead: { state: sleeper_closed_red }
@@ -69,6 +75,8 @@
   id: RMCSleeperConsole
   name: sleeper console
   description: A console used to control the sleeper. Allows chemical injection and dialysis.
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Transform
     anchored: true
@@ -122,7 +130,7 @@
   id: RMCSleeperAdvanced
   name: advanced sleeper
   description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
-  suffix: RMC14, Advanced
+  suffix: Spawns with Console
   components:
   - type: Sleeper
     spawnConsolePrototype: RMCSleeperConsole

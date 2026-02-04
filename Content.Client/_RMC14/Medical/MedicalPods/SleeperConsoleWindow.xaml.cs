@@ -73,15 +73,12 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.MinValue = state.OccupantMinHealth;
         HealthBarText.Text = state.OccupantHealth.ToString("F0");
 
-        // Set health bar color
-        if (healthPercent >= 0.5f)
-            HealthBar.Modulate = Color.FromHex("#00AA00");
-        else if (healthPercent >= 0)
-            HealthBar.Modulate = Color.FromHex("#AAAA00");
-        else
-            HealthBar.Modulate = Color.FromHex("#AA0000");
-
-        // Status
+        HealthBar.Modulate = healthPercent switch
+        {
+            >= 0.5f => Color.FromHex("#00AA00"),
+            >= 0 => Color.FromHex("#AAAA00"),
+            _ => Color.FromHex("#AA0000")
+        };
         StatusLabel.Text = state.OccupantStat switch
         {
             0 => Loc.GetString("rmc-sleeper-status-alive"),
@@ -103,7 +100,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
         UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
 
-        // Blood
+        // Blood level
         BloodSection.Visible = state.HasBlood;
         if (state.HasBlood)
         {
@@ -111,23 +108,23 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             BloodBar.MaxValue = 100;
             BloodBarText.Text = $"{state.BloodPercent:F1}%, {state.BloodLevel}u";
 
-            if (state.BloodPercent >= 90)
-                BloodBar.Modulate = Color.FromHex("#00AA00");
-            else if (state.BloodPercent >= 60)
-                BloodBar.Modulate = Color.FromHex("#AAAA00");
-            else
-                BloodBar.Modulate = Color.FromHex("#AA0000");
+            BloodBar.Modulate = state.BloodPercent switch
+            {
+                >= 90 => Color.FromHex("#00AA00"),
+                >= 60 => Color.FromHex("#AAAA00"),
+                _ => Color.FromHex("#AA0000")
+            };
         }
 
         // Chemicals
         ChemicalsContainer.DisposeAllChildren();
-        foreach (var chem in state.Chemicals)
+        foreach (var (name, chemId, occupantAmount, injectable, overdosing, odWarning) in state.Chemicals)
         {
             var row = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
 
             var nameLabel = new Label
             {
-                Text = chem.Name,
+                Text = name,
                 MinWidth = 120
             };
             row.AddChild(nameLabel);
@@ -135,24 +132,24 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             var amountBar = new ProgressBar
             {
                 MinWidth = 100,
-                Value = chem.OccupantAmount.Float(),
+                Value = occupantAmount.Float(),
                 MaxValue = state.MaxChem.Float()
             };
             var amountLabel = new Label
             {
-                Text = $"{chem.OccupantAmount}/{state.MaxChem}u",
+                Text = $"{occupantAmount}/{state.MaxChem}u",
                 Margin = new Thickness(0, 0, 5, 0),
                 HorizontalAlignment = HAlignment.Right
             };
             amountBar.AddChild(amountLabel);
 
-            if (chem.Overdosing)
+            if (overdosing)
             {
                 amountBar.Modulate = Color.FromHex("#AA0000");
                 var warningLabel = new Label { Text = " ⚠", Modulate = Color.FromHex("#AA0000") };
                 row.AddChild(warningLabel);
             }
-            else if (chem.OdWarning)
+            else if (odWarning)
             {
                 amountBar.Modulate = Color.FromHex("#AAAA00");
             }
@@ -164,10 +161,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
                 var injectButton = new Button
                 {
                     Text = Loc.GetString("rmc-sleeper-inject", ("amount", amount)),
-                    Disabled = !chem.Injectable || chem.OccupantAmount + amount > state.MaxChem || state.OccupantStat == 2,
+                    Disabled = !injectable || occupantAmount + amount > state.MaxChem || state.OccupantStat == 2,
                     Margin = new Thickness(5, 0, 0, 0)
                 };
-                var chemId = chem.Id;
                 var injectAmount = amount;
                 injectButton.OnPressed += _ => _bui?.InjectChemical(chemId, injectAmount);
                 row.AddChild(injectButton);

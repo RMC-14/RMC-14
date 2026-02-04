@@ -13,7 +13,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -28,9 +27,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
-
-    private static readonly SoundSpecifier BuzzSound = new SoundPathSpecifier("/Audio/Machines/buzz-sigh.ogg");
-    private static readonly SoundSpecifier PingSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = new();
 
@@ -58,20 +54,22 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
         if (args.NewMobState == MobState.Dead)
         {
-            _audio.PlayPvs(BuzzSound, sleeper);
+            _audio.PlayPvs(sleeper.Comp.AutoEjectDeadSound, sleeper);
             EjectOccupant(sleeper, args.Target);
         }
     }
 
     private void UpdateSleeperOccupantVisuals(Entity<SleeperComponent> sleeper)
     {
-        var healthState = SleeperOccupantHealthState.Alive;
+        var healthState = SleeperOccupantHealthState.None;
         if (sleeper.Comp.Occupant is { } occupant)
         {
             if (_mobState.IsDead(occupant))
                 healthState = SleeperOccupantHealthState.Dead;
             else if (_mobState.IsCritical(occupant))
                 healthState = SleeperOccupantHealthState.Critical;
+            else
+                healthState = SleeperOccupantHealthState.Alive;
         }
 
         Appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
@@ -94,38 +92,30 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (_mobState.IsDead(occupant))
             return;
 
-        // Check if chemical is in available list
         if (!sleeper.AvailableChemicals.Contains(args.Chemical))
             return;
 
-        // Check if amount is valid
         if (!sleeper.InjectionAmounts.Contains(args.Amount))
             return;
 
         // Check health threshold for non-emergency chemicals
-        if (TryComp<DamageableComponent>(occupant, out var damageable))
+        if (!sleeper.EmergencyChemicals.Contains(args.Chemical) &&
+            TryComp<DamageableComponent>(occupant, out var damageable) &&
+            _mobThreshold.TryGetThresholdForState(occupant, MobState.Dead, out var deadThreshold))
         {
-            var damage = damageable.TotalDamage;
-            var maxHealth = _mobThreshold.TryGetThresholdForState(occupant, MobState.Dead, out var deadThreshold)
-                ? deadThreshold
-                : FixedPoint2.New(100);
-
-            var currentHealth = maxHealth - damage;
-            if (currentHealth < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(args.Chemical))
+            var currentHealth = deadThreshold - damageable.TotalDamage;
+            if (currentHealth < sleeper.MinHealth)
                 return;
         }
 
-        // Try to get the chemical solution
         if (!_solution.TryGetSolution(occupant, "chemicals", out var chemSolEnt, out var chemSol))
             return;
 
-        // Check current amount
         var reagent = new ReagentId(args.Chemical, null);
         var currentAmount = chemSol.GetReagentQuantity(reagent);
         if (currentAmount + args.Amount > sleeper.MaxChemical)
             return;
 
-        // Add the chemical
         _solution.TryAddReagent(chemSolEnt.Value, args.Chemical, args.Amount);
 
         UpdateUI(console);
@@ -200,8 +190,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
         string? occupantName = null;
         var stat = 0;
         var health = 0f;
-        var maxHealth = 100f;
-        var minHealth = -100f;
+        var maxHealth = 200f;
+        var minHealth = 0f;
         var bruteLoss = 0f;
         var burnLoss = 0f;
         var toxinLoss = 0f;
@@ -305,7 +295,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 }
 
                 // Check health threshold for non-emergency chemicals
-                // Note: health is already calculated above, no need to fetch damageable again
                 if (health < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(chemId))
                 {
                     injectable = false;
@@ -394,7 +383,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 {
                     sleeper.IsFiltering = false;
                     sleeper.DialysisStartedReagentVolume = 0;
-                    _audio.PlayPvs(PingSound, uid);
+                    _audio.PlayPvs(sleeper.DialysisCompleteSound, uid);
                 }
             }
 

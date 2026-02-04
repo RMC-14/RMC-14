@@ -1,4 +1,3 @@
-using Content.Shared._RMC14.Marines.Skills;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared._RMC14.Medical.MedicalPods;
@@ -9,7 +8,4 @@ public sealed partial class SleeperConsoleComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedSleeper;
-
-    [DataField, AutoNetworkedField]
-    public SkillWhitelist? UseConsoleSkill;
 }

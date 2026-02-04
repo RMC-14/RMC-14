@@ -101,9 +101,10 @@ public enum SleeperVisuals : byte
 [Serializable, NetSerializable]
 public enum SleeperOccupantHealthState : byte
 {
-    Alive = 0,
-    Critical = 1,
-    Dead = 2
+    None = 0,
+    Alive = 1,
+    Critical = 2,
+    Dead = 3
 }
 
 [Serializable, NetSerializable]
