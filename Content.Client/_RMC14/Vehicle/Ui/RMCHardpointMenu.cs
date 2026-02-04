@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Vehicle;
@@ -10,11 +11,14 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
+using Robust.Client.Utility;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Log;
+using Robust.Shared.Graphics.RSI;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
@@ -27,6 +31,44 @@ public sealed partial class RMCHardpointMenu : FancyWindow
     private bool _vehicleIconSet;
     private float _vehicleSpin;
     private const float VehicleSpinSpeed = MathHelper.TwoPi / 6f;
+    private const float PixelsPerMeter = 32f;
+    private const float DebugLogInterval = 0.5f;
+    private const float DebugOffsetEpsilon = 0.001f;
+    private float _debugTimer;
+    private Direction? _lastDebugDir;
+    private readonly Dictionary<EntityUid, Vector2> _lastOverlayOffsets = new();
+    private readonly List<PreviewOverlay> _previewOverlays = new();
+
+    private sealed class PreviewOverlay
+    {
+        public EntityUid Entity;
+        public SpriteComponent Sprite = default!;
+        public SpriteView View = default!;
+        public PreviewOffset Offset;
+        public string State = string.Empty;
+        public string Rsi = string.Empty;
+        public int DirectionCount;
+    }
+
+    private readonly struct PreviewOffset
+    {
+        public readonly Vector2 Base;
+        public readonly bool UseDirectional;
+        public readonly Vector2 North;
+        public readonly Vector2 East;
+        public readonly Vector2 South;
+        public readonly Vector2 West;
+
+        public PreviewOffset(Vector2 baseOffset, bool useDirectional, Vector2 north, Vector2 east, Vector2 south, Vector2 west)
+        {
+            Base = baseOffset;
+            UseDirectional = useDirectional;
+            North = north;
+            East = east;
+            South = south;
+            West = west;
+        }
+    }
 
     public RMCHardpointMenu()
     {
@@ -39,6 +81,7 @@ public sealed partial class RMCHardpointMenu : FancyWindow
 
         TrySetVehicleIcon();
         SpinVehicleIcon(args.DeltaSeconds);
+        _debugTimer += args.DeltaSeconds;
     }
 
     private void SpinVehicleIcon(float frameTime)
@@ -51,7 +94,9 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         if (_vehicleSpin > MathHelper.TwoPi)
             _vehicleSpin -= MathHelper.TwoPi;
 
-        VehicleIcon.OverrideDirection = new Angle(_vehicleSpin).GetDir();
+        var dir = new Angle(_vehicleSpin).GetDir();
+        VehicleIcon.OverrideDirection = dir;
+        UpdatePreviewOffsets(dir);
     }
 
     private void TrySetVehicleIcon()
@@ -75,6 +120,7 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         bool hasFrameIntegrity)
     {
         TrySetVehicleIcon();
+        UpdatePreviewOverlays(hardpoints);
 
         HardpointList.DisposeAllChildren();
 
@@ -244,6 +290,300 @@ public sealed partial class RMCHardpointMenu : FancyWindow
 
             HardpointList.AddChild(panel);
         }
+    }
+
+    private void UpdatePreviewOverlays(IReadOnlyList<RMCHardpointUiEntry> hardpoints)
+    {
+        ClearPreviewOverlays();
+
+        if (VehiclePreview == null)
+            return;
+
+        if (VehicleEntity is not { } vehicle || !_entManager.EntityExists(vehicle))
+            return;
+
+        if (!_entManager.TryGetComponent(vehicle, out SpriteComponent? vehicleSprite))
+            return;
+
+        var vehicleRsi = vehicleSprite.BaseRSI?.Path.ToString() ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(vehicleRsi))
+            return;
+
+        var turretOffsets = new Dictionary<string, PreviewOffset>();
+        foreach (var hardpoint in hardpoints)
+        {
+            if (!hardpoint.HasItem || hardpoint.InstalledEntity is not { } installedNet)
+                continue;
+
+            if (!_entManager.TryGetEntity(installedNet, out var installed))
+                continue;
+
+            if (RMCVehicleTurretSlotIds.TryParse(hardpoint.SlotId, out _, out _))
+                continue;
+
+            if (TryGetTurretOffset((EntityUid) installed, out var offset))
+                turretOffsets[hardpoint.SlotId] = offset;
+        }
+
+        var overlays = new List<(int Order, string Rsi, string State, PreviewOffset Offset)>();
+        foreach (var hardpoint in hardpoints)
+        {
+            if (!hardpoint.HasItem || hardpoint.InstalledEntity is not { } installedNet)
+                continue;
+
+            if (!_entManager.TryGetEntity(installedNet, out var installed))
+                continue;
+
+            if (!TryGetOverlaySpec((EntityUid) installed, vehicleRsi, out var rsi, out var state))
+                continue;
+
+            var hasOffset = TryGetTurretOffset((EntityUid) installed, out var offset);
+            if (RMCVehicleTurretSlotIds.TryParse(hardpoint.SlotId, out var parentSlotId, out _) &&
+                turretOffsets.TryGetValue(parentSlotId, out var parentOffset))
+            {
+                offset = hasOffset ? CombineOffsets(parentOffset, offset) : parentOffset;
+                hasOffset = true;
+            }
+
+            if (!hasOffset)
+                offset = default;
+
+            var order = RMCVehicleTurretSlotIds.TryParse(hardpoint.SlotId, out _, out _)
+                ? 1
+                : 0;
+            overlays.Add((order, rsi, state, offset));
+        }
+
+        overlays.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+        var seen = new HashSet<string>();
+        foreach (var overlay in overlays)
+        {
+            var key = $"{overlay.Rsi}|{overlay.State}".ToLowerInvariant();
+            if (!seen.Add(key))
+                continue;
+
+            var overlayEnt = _entManager.Spawn(null);
+            var sprite = _entManager.AddComponent<SpriteComponent>(overlayEnt);
+            var spec = new SpriteSpecifier.Rsi(new ResPath(overlay.Rsi), overlay.State);
+            var spriteSystem = _entManager.System<SpriteSystem>();
+            var layer = spriteSystem.AddLayer((overlayEnt, sprite), spec);
+            if (layer >= 0)
+                spriteSystem.LayerSetVisible((overlayEnt, sprite), layer, true);
+            var dirCount = spriteSystem.LayerGetDirectionCount((overlayEnt, sprite), 0);
+
+            var view = new SpriteView
+            {
+                MinSize = VehicleIcon.MinSize,
+                Stretch = VehicleIcon.Stretch,
+                VerticalAlignment = VehicleIcon.VerticalAlignment,
+                HorizontalAlignment = VehicleIcon.HorizontalAlignment,
+                Margin = VehicleIcon.Margin,
+                OverrideDirection = VehicleIcon.OverrideDirection,
+                SpriteOffset = true
+            };
+            view.SetEntity(overlayEnt);
+            VehiclePreview.AddChild(view);
+            _previewOverlays.Add(new PreviewOverlay
+            {
+                Entity = overlayEnt,
+                Sprite = sprite,
+                View = view,
+                Offset = overlay.Offset,
+                State = overlay.State,
+                Rsi = overlay.Rsi,
+                DirectionCount = dirCount
+            });
+
+            Logger.Log(LogLevel.Info,
+                $"[rmc-hardpoint-preview] overlay state='{overlay.State}' rsi='{overlay.Rsi}' order={overlay.Order} " +
+                $"offsetBase={overlay.Offset.Base} dirOffsets=({overlay.Offset.North},{overlay.Offset.East},{overlay.Offset.South},{overlay.Offset.West}) " +
+                $"useDir={overlay.Offset.UseDirectional}");
+        }
+
+        UpdatePreviewOffsets(VehicleIcon.OverrideDirection ?? Direction.South);
+    }
+
+    private bool TryGetOverlaySpec(EntityUid item, string fallbackRsi, out string rsi, out string state)
+    {
+        rsi = string.Empty;
+        state = string.Empty;
+
+        if (_entManager.TryGetComponent(item, out VehicleTurretComponent? turret) &&
+            turret.ShowOverlay &&
+            !string.IsNullOrWhiteSpace(turret.OverlayState))
+        {
+            rsi = string.IsNullOrWhiteSpace(turret.OverlayRsi) ? fallbackRsi : turret.OverlayRsi;
+            state = turret.OverlayState;
+            return !string.IsNullOrWhiteSpace(rsi);
+        }
+
+        return false;
+    }
+
+    private bool TryGetTurretOffset(EntityUid item, out PreviewOffset offset)
+    {
+        offset = default;
+        if (!_entManager.TryGetComponent(item, out VehicleTurretComponent? turret))
+            return false;
+
+        if (!turret.ShowOverlay)
+            return false;
+
+        offset = new PreviewOffset(
+            turret.PixelOffset,
+            turret.UseDirectionalOffsets,
+            turret.PixelOffsetNorth,
+            turret.PixelOffsetEast,
+            turret.PixelOffsetSouth,
+            turret.PixelOffsetWest);
+        return true;
+    }
+
+    private static PreviewOffset CombineOffsets(PreviewOffset a, PreviewOffset b)
+    {
+        var useDirectional = a.UseDirectional || b.UseDirectional;
+        var north = (a.UseDirectional ? a.North : Vector2.Zero) + (b.UseDirectional ? b.North : Vector2.Zero);
+        var east = (a.UseDirectional ? a.East : Vector2.Zero) + (b.UseDirectional ? b.East : Vector2.Zero);
+        var south = (a.UseDirectional ? a.South : Vector2.Zero) + (b.UseDirectional ? b.South : Vector2.Zero);
+        var west = (a.UseDirectional ? a.West : Vector2.Zero) + (b.UseDirectional ? b.West : Vector2.Zero);
+        return new PreviewOffset(a.Base + b.Base, useDirectional, north, east, south, west);
+    }
+
+    private void UpdatePreviewOffsets(Direction dir)
+    {
+        if (_previewOverlays.Count == 0)
+            return;
+
+        var spriteSystem = _entManager.System<SpriteSystem>();
+        var canLog = _debugTimer >= DebugLogInterval;
+        var logged = 0;
+
+        if (canLog && (!_lastDebugDir.HasValue || _lastDebugDir.Value != dir))
+        {
+            if (VehicleEntity is { } vehicle && _entManager.TryGetComponent(vehicle, out SpriteComponent? baseSprite))
+            {
+                var layerOffset = Vector2.Zero;
+                var layerState = string.Empty;
+                var layerDirs = 0;
+                if (baseSprite.AllLayers.FirstOrDefault() is SpriteComponent.Layer layer)
+                {
+                    layerOffset = layer.Offset;
+                    layerState = layer.State.ToString();
+                    layerDirs = spriteSystem.LayerGetDirectionCount((vehicle, baseSprite), 0);
+                }
+
+                Logger.Log(LogLevel.Info,
+                    $"[rmc-hardpoint-preview] base dir={dir} vehicleOffset={baseSprite.Offset} " +
+                    $"layer0Offset={layerOffset} layer0State='{layerState}' layer0Dirs={layerDirs} " +
+                    $"spriteOffset={VehicleIcon.SpriteOffset}");
+            }
+        }
+
+        foreach (var overlay in _previewOverlays)
+        {
+            var effectiveDir = GetEffectiveDirection(dir, overlay.DirectionCount);
+            overlay.View.OverrideDirection = effectiveDir;
+            var offsetPixels = GetOffsetPixels(overlay.Offset, effectiveDir);
+            var offsetMeters = offsetPixels / PixelsPerMeter;
+            spriteSystem.SetOffset((overlay.Entity, overlay.Sprite), offsetMeters);
+
+            if (!canLog)
+                continue;
+
+            var shouldLog = !_lastDebugDir.HasValue || _lastDebugDir.Value != dir;
+            if (!shouldLog && _lastOverlayOffsets.TryGetValue(overlay.Entity, out var last))
+                shouldLog = (offsetMeters - last).LengthSquared() > DebugOffsetEpsilon * DebugOffsetEpsilon;
+            else if (!shouldLog)
+                shouldLog = true;
+
+            if (!shouldLog)
+                continue;
+
+            Logger.Log(LogLevel.Info,
+                $"[rmc-hardpoint-preview] offset dir={dir} effectiveDir={effectiveDir} dirs={overlay.DirectionCount} " +
+                $"overlay='{overlay.State}' rsi='{overlay.Rsi}' " +
+                $"offsetPixels={offsetPixels} offsetMeters={offsetMeters}");
+
+            _lastOverlayOffsets[overlay.Entity] = offsetMeters;
+            logged++;
+
+            if (logged >= 3)
+                break;
+        }
+
+        if (logged > 0)
+        {
+            _debugTimer = 0f;
+            _lastDebugDir = dir;
+        }
+    }
+
+    private static Vector2 GetOffsetPixels(PreviewOffset offset, Direction dir)
+    {
+        if (!offset.UseDirectional)
+            return offset.Base;
+
+        var angle = dir.ToAngle();
+        var normalized = angle.Theta % MathHelper.TwoPi;
+        if (normalized < 0f)
+            normalized += MathHelper.TwoPi;
+
+        var segment = MathHelper.PiOver2;
+        var index = (int) Math.Floor(normalized / segment) & 3;
+        var t = (float) ((normalized - index * segment) / segment);
+
+        var current = offset.Base + GetDirectionalOffset(offset, index);
+        var next = offset.Base + GetDirectionalOffset(offset, (index + 1) & 3);
+        return Vector2.Lerp(current, next, t);
+    }
+
+    private static Direction GetEffectiveDirection(Direction dir, int directionCount)
+    {
+        if (directionCount <= 1)
+            return Direction.South;
+
+        if (directionCount <= 4)
+            return dir.Convert(RsiDirectionType.Dir4).Convert();
+
+        return dir;
+    }
+
+    private static Vector2 GetDirectionalOffset(PreviewOffset offset, int index)
+    {
+        return index switch
+        {
+            0 => offset.South,
+            1 => offset.East,
+            2 => offset.North,
+            3 => offset.West,
+            _ => Vector2.Zero
+        };
+    }
+
+    private void ClearPreviewOverlays()
+    {
+        foreach (var overlay in _previewOverlays)
+        {
+            if (!overlay.View.Disposed)
+            {
+                overlay.View.Orphan();
+                overlay.View.Dispose();
+            }
+
+            if (_entManager.EntityExists(overlay.Entity))
+                _entManager.DeleteEntity(overlay.Entity);
+        }
+
+        _previewOverlays.Clear();
+        _lastOverlayOffsets.Clear();
+        _lastDebugDir = null;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+        ClearPreviewOverlays();
     }
 
     private static StyleBoxFlat CreateIntegrityStyle(float percent)

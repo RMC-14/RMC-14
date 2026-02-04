@@ -1,5 +1,7 @@
 using System.Numerics;
+using Content.Client._RMC14.Vehicle.Ui;
 using Content.Shared._RMC14.Vehicle.Supply;
+using Robust.Client.Graphics;
 using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
@@ -16,10 +18,10 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
     private readonly List<string> _availableVehicleIds = new();
     private readonly Dictionary<string, int> _availableCounts = new();
     private readonly Dictionary<string, int> _selectedCopyIndices = new();
-    private readonly Dictionary<string, Button> _selectButtons = new();
-    private readonly Dictionary<string, Button> _copyToggleButtons = new();
+    private readonly Dictionary<string, RMCHardpointButton> _selectButtons = new();
+    private readonly Dictionary<string, RMCHardpointButton> _copyToggleButtons = new();
     private readonly Dictionary<string, BoxContainer> _copyContainers = new();
-    private readonly Dictionary<string, List<Button>> _copyButtons = new();
+    private readonly Dictionary<string, List<RMCHardpointButton>> _copyButtons = new();
     private readonly HashSet<string> _copyExpanded = new();
 
     public RMCVehicleSupplyBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -31,9 +33,10 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
         base.Open();
         _window = this.CreateWindow<RMCVehicleSupplyWindow>();
 
-        if (EntMan.TryGetComponent(Owner, out MetaDataComponent? metaData))
-            _window.Title = metaData.EntityName;
+        if (_window == null)
+            return;
 
+        _window.Title = string.Empty;
         _window.RaiseButton.OnPressed += _ => SendMessage(new RMCVehicleSupplyLiftMsg(true));
         _window.LowerButton.OnPressed += _ => SendMessage(new RMCVehicleSupplyLiftMsg(false));
     }
@@ -48,6 +51,7 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
         _suppressEvents = true;
         UpdateStatus(uiState);
         UpdateLists(uiState);
+        _window.SetPreview(uiState.Preview);
         _suppressEvents = false;
     }
 
@@ -61,6 +65,12 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
         var busyText = state.Busy ? "busy" : "idle";
 
         _window.StatusLabel.Text = $"Lift: {modeText} | Status: {busyText} | Active: {activeText}";
+
+        var raising = state.LiftMode == RMCVehicleSupplyLiftMode.Raising;
+        var lowering = state.LiftMode == RMCVehicleSupplyLiftMode.Lowering;
+        _window.RaiseButton.Pulse = raising;
+        _window.LowerButton.Pulse = lowering;
+        _window.SetLiftActivity(state.LiftMode, state.Busy);
     }
 
     private void UpdateLists(RMCVehicleSupplyBuiState state)
@@ -82,17 +92,21 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
             return;
         }
 
+        _selectedVehicleId = state.SelectedVehicleId;
         var hasSelected = false;
-        foreach (var entry in state.Available)
+        if (!string.IsNullOrWhiteSpace(_selectedVehicleId))
         {
-            if (_selectedVehicleId != null && entry.Id == _selectedVehicleId)
+            foreach (var entry in state.Available)
             {
-                hasSelected = true;
-                break;
+                if (entry.Id == _selectedVehicleId)
+                {
+                    hasSelected = true;
+                    break;
+                }
             }
         }
 
-        if (!hasSelected)
+        if (!hasSelected && state.Available.Count > 0)
             _selectedVehicleId = state.Available[0].Id;
 
         foreach (var entry in state.Available)
@@ -108,10 +122,9 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
                 HorizontalExpand = true
             };
 
-            var select = new Button
+            var select = new RMCHardpointButton
             {
-                Text = label,
-                ToggleMode = true,
+                LabelText = label,
                 HorizontalExpand = true
             };
 
@@ -121,20 +134,19 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
                 if (_suppressEvents)
                     return;
 
-                SelectVehicle(vehicleId);
+                SelectVehicle(vehicleId, _selectedCopyIndices.TryGetValue(vehicleId, out var copy) ? copy : 0);
             };
 
-            if (_selectedVehicleId == vehicleId)
-                select.Pressed = true;
+            ApplySelectionStyle(select, _selectedVehicleId == vehicleId);
 
             row.AddChild(select);
             _selectButtons[vehicleId] = select;
 
             if (entry.Count > 1)
             {
-                var copyToggle = new Button
+                var copyToggle = new RMCHardpointButton
                 {
-                    Text = _copyExpanded.Contains(vehicleId) ? "Copies v" : "Copies >",
+                    LabelText = _copyExpanded.Contains(vehicleId) ? "Copies v" : "Copies >",
                     MinSize = new Vector2(110, 0)
                 };
 
@@ -149,10 +161,9 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
                 for (var i = 0; i < entry.Count; i++)
                 {
                     var copyIndex = i;
-                    var copyButton = new Button
+                    var copyButton = new RMCHardpointButton
                     {
-                        Text = $"    #{i + 1}",
-                        ToggleMode = true,
+                        LabelText = $"    #{i + 1}",
                         HorizontalExpand = true
                     };
 
@@ -163,13 +174,13 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
 
                         _selectedCopyIndices[vehicleId] = copyIndex;
                         UpdateCopySelection(vehicleId);
-                        SelectVehicle(vehicleId);
+                        SelectVehicle(vehicleId, copyIndex);
                     };
 
                     copies.AddChild(copyButton);
                     if (!_copyButtons.TryGetValue(vehicleId, out var list))
                     {
-                        list = new List<Button>();
+                        list = new List<RMCHardpointButton>();
                         _copyButtons[vehicleId] = list;
                     }
 
@@ -215,7 +226,9 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
             if (count <= 1)
                 continue;
 
-            if (!_selectedCopyIndices.TryGetValue(vehicleId, out var index) || index < 0 || index >= count)
+            if (vehicleId == _selectedVehicleId)
+                _selectedCopyIndices[vehicleId] = state.SelectedCopyIndex;
+            else if (!_selectedCopyIndices.TryGetValue(vehicleId, out var index) || index < 0 || index >= count)
                 _selectedCopyIndices[vehicleId] = 0;
 
             UpdateCopySelection(vehicleId);
@@ -223,24 +236,24 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
         }
     }
 
-    private void SelectVehicle(string vehicleId)
+    private void SelectVehicle(string vehicleId, int copyIndex)
     {
         if (_selectedVehicleId == vehicleId)
         {
-            SendMessage(new RMCVehicleSupplySelectMsg(vehicleId));
+            SendMessage(new RMCVehicleSupplySelectMsg(vehicleId, copyIndex));
             return;
         }
 
         _selectedVehicleId = vehicleId;
         UpdateSelectionVisuals();
-        SendMessage(new RMCVehicleSupplySelectMsg(vehicleId));
+        SendMessage(new RMCVehicleSupplySelectMsg(vehicleId, copyIndex));
     }
 
     private void UpdateSelectionVisuals()
     {
         foreach (var (id, button) in _selectButtons)
         {
-            button.Pressed = id == _selectedVehicleId;
+            ApplySelectionStyle(button, id == _selectedVehicleId);
         }
     }
 
@@ -254,7 +267,7 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
 
         for (var i = 0; i < buttons.Count; i++)
         {
-            buttons[i].Pressed = i == selected;
+            ApplySelectionStyle(buttons[i], i == selected);
         }
     }
 
@@ -268,6 +281,21 @@ public sealed class RMCVehicleSupplyBui : BoundUserInterface
 
         var expanded = _copyExpanded.Contains(vehicleId);
         container.Visible = expanded;
-        toggle.Text = expanded ? "Copies v" : "Copies >";
+        toggle.LabelText = expanded ? "Copies v" : "Copies >";
+    }
+
+    private static void ApplySelectionStyle(RMCHardpointButton button, bool selected)
+    {
+        button.Selected = selected;
+        button.SelectedColor = RMCHardpointButton.DefaultUnhoveredColor;
+        button.UnhoveredColor = Color.FromHex("#1A3D5C");
+        button.HoveredColor = RMCHardpointButton.DefaultHoveredColor;
+        button.DisabledColor = RMCHardpointButton.DefaultDisabledColor;
+        button.TextColor = selected
+            ? RMCHardpointButton.DefaultTextColor
+            : RMCHardpointButton.DefaultUnselectedTextColor;
+        button.DisabledTextColor = RMCHardpointButton.DefaultDisabledTextColor;
+
+        button.RefreshStyle();
     }
 }

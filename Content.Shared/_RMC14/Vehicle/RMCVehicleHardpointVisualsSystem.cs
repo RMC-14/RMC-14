@@ -75,25 +75,23 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
             var layer = slot.VisualLayer;
             var layerKey = layer.ToLowerInvariant();
             var state = string.Empty;
+            var usesOverlay = false;
             if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots))
                 continue;
 
-            var hasItem = itemSlot.HasItem;
-
-            if (hasItem)
+            if (itemSlot.HasItem)
             {
                 var item = itemSlot.Item!.Value;
-                if (TryComp(item, out RMCHardpointVisualComponent? visual) &&
-                    !string.IsNullOrWhiteSpace(visual.VehicleState))
-                {
-                    state = visual.VehicleState;
-                }
+                state = ResolveVisualState(item, out usesOverlay);
             }
 
             if (string.IsNullOrWhiteSpace(layer))
             {
                 continue;
             }
+
+            if (usesOverlay)
+                state = string.Empty;
 
             layerKey = layer.ToLowerInvariant();
             if (indexByLayer.TryGetValue(layerKey, out var existingIndex))
@@ -127,5 +125,48 @@ public sealed class RMCVehicleHardpointVisualsSystem : EntitySystem
 
         visuals.Layers = newLayers;
         Dirty(vehicle, visuals);
+    }
+
+    private string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
+    {
+        usesOverlay = false;
+        if (depth > 2)
+            return string.Empty;
+
+        if (TryComp(item, out VehicleTurretComponent? turret) && turret.ShowOverlay)
+            usesOverlay = true;
+
+        if (TryComp(item, out RMCHardpointSlotsComponent? attachedSlots) &&
+            TryComp(item, out ItemSlotsComponent? attachedItemSlots))
+        {
+            foreach (var slot in attachedSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(slot.Id))
+                    continue;
+
+                if (!_itemSlots.TryGetSlot(item, slot.Id, out var itemSlot, attachedItemSlots) || !itemSlot.HasItem)
+                    continue;
+
+                var child = itemSlot.Item!.Value;
+                var childState = ResolveVisualState(child, out var childOverlay, depth + 1);
+                usesOverlay |= childOverlay;
+                if (!string.IsNullOrWhiteSpace(childState))
+                    return childState;
+            }
+        }
+
+        if (TryComp(item, out RMCHardpointVisualComponent? visual) &&
+            !string.IsNullOrWhiteSpace(visual.VehicleState))
+        {
+            return visual.VehicleState;
+        }
+
+        if (TryComp(item, out VehicleTurretComponent? turretOverlay) &&
+            !string.IsNullOrWhiteSpace(turretOverlay.OverlayState))
+        {
+            return turretOverlay.OverlayState;
+        }
+
+        return string.Empty;
     }
 }

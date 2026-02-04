@@ -16,4 +16,16 @@ public sealed partial class RMCVehicleSpotlightComponent : Component
 
     [DataField, AutoNetworkedField]
     public float Softness = 2f;
+
+    [NonSerialized]
+    public bool BaseInitialized;
+
+    [NonSerialized]
+    public float BaseRadius;
+
+    [NonSerialized]
+    public float BaseEnergy;
+
+    [NonSerialized]
+    public float BaseSoftness;
 }

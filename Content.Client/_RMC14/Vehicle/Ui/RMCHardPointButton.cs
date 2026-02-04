@@ -16,6 +16,7 @@ public sealed partial class RMCHardpointButton : Button
     public static readonly Color DefaultDisabledColor = Color.FromHex("#1A3D5C");
     public static readonly Color DefaultTextColor = Color.Black;
     public static readonly Color DefaultDisabledTextColor = Color.FromHex("#4AA3E8");
+    public static readonly Color DefaultUnselectedTextColor = Color.FromHex("#C7D7EA");
 
     private bool _initialized;
     private string? _text;
@@ -23,6 +24,8 @@ public sealed partial class RMCHardpointButton : Button
     private float _pulseTimer;
     private int _pulseDots = 1;
 
+    public bool Selected { get; set; }
+    public Color SelectedColor { get; set; } = DefaultUnhoveredColor;
     public Color HoveredColor { get; set; } = DefaultHoveredColor;
     public Color UnhoveredColor { get; set; } = DefaultUnhoveredColor;
     public Color DisabledColor { get; set; } = DefaultDisabledColor;
@@ -65,11 +68,12 @@ public sealed partial class RMCHardpointButton : Button
 
     private void UpdateColor()
     {
+        var baseColor = Selected ? SelectedColor : UnhoveredColor;
         ModulateSelfOverride = (Disabled, IsHovered) switch
         {
             (true, _) => DisabledColor,
             (_, true) => HoveredColor,
-            _ => UnhoveredColor
+            _ => baseColor
         };
 
         UpdateText();
@@ -113,6 +117,11 @@ public sealed partial class RMCHardpointButton : Button
         }
 
         _initialized = true;
+        UpdateColor();
+    }
+
+    public void RefreshStyle()
+    {
         UpdateColor();
     }
 }

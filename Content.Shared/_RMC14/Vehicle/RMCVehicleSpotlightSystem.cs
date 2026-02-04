@@ -1,3 +1,4 @@
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Input;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
@@ -13,10 +14,12 @@ public sealed class RMCVehicleSpotlightSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly RMCVehicleSystem _rmcVehicles = default!;
     [Dependency] private readonly SharedPointLightSystem _lights = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
 
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCVehicleSpotlightComponent, ComponentStartup>(OnSpotlightStartup);
+        SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
         if (_net.IsClient)
         {
@@ -49,7 +52,24 @@ public sealed class RMCVehicleSpotlightSystem : EntitySystem
 
     private void OnSpotlightStartup(Entity<RMCVehicleSpotlightComponent> ent, ref ComponentStartup args)
     {
+        EnsureBase(ent.Comp);
+        if (_net.IsServer)
+            RecalculateFromHardpoints(ent.Owner, ent.Comp);
+
         ApplySpotlight(ent.Owner, ent.Comp);
+    }
+
+    private void OnHardpointSlotsChanged(RMCHardpointSlotsChangedEvent args)
+    {
+        if (!_net.IsServer)
+            return;
+
+        if (!TryComp(args.Vehicle, out RMCVehicleSpotlightComponent? spotlight))
+            return;
+
+        RecalculateFromHardpoints(args.Vehicle, spotlight);
+        ApplySpotlight(args.Vehicle, spotlight);
+        Dirty(args.Vehicle, spotlight);
     }
 
     private void OnSpotlightToggleRequest(RMCVehicleSpotlightToggleRequestEvent ev, EntitySessionEventArgs args)
@@ -82,6 +102,54 @@ public sealed class RMCVehicleSpotlightSystem : EntitySystem
         _lights.SetEnergy(uid, spotlight.Energy, light);
         _lights.SetSoftness(uid, spotlight.Softness, light);
         _lights.SetEnabled(uid, spotlight.Enabled, light);
+    }
+
+    private static void EnsureBase(RMCVehicleSpotlightComponent spotlight)
+    {
+        if (spotlight.BaseInitialized)
+            return;
+
+        spotlight.BaseInitialized = true;
+        spotlight.BaseRadius = spotlight.Radius;
+        spotlight.BaseEnergy = spotlight.Energy;
+        spotlight.BaseSoftness = spotlight.Softness;
+    }
+
+    private void RecalculateFromHardpoints(
+        EntityUid vehicle,
+        RMCVehicleSpotlightComponent spotlight,
+        RMCHardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        EnsureBase(spotlight);
+
+        var radius = spotlight.BaseRadius;
+        var energy = spotlight.BaseEnergy;
+        var softness = spotlight.BaseSoftness;
+
+        if (Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+        {
+            foreach (var slot in hardpoints.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(slot.Id))
+                    continue;
+
+                if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                    continue;
+
+                var item = itemSlot.Item!.Value;
+                if (!TryComp(item, out RMCVehicleSpotlightModifierComponent? modifier))
+                    continue;
+
+                radius = radius * modifier.RadiusMultiplier + modifier.RadiusAdd;
+                energy = energy * modifier.EnergyMultiplier + modifier.EnergyAdd;
+                softness = softness * modifier.SoftnessMultiplier + modifier.SoftnessAdd;
+            }
+        }
+
+        spotlight.Radius = radius;
+        spotlight.Energy = energy;
+        spotlight.Softness = softness;
     }
 }
 

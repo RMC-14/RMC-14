@@ -23,14 +23,17 @@
                             BorderThickness="2"/>
                     </PanelContainer.PanelOverride>
 
-                    <SpriteView
-                        Name="VehicleIcon"
-                        Access="Public"
-                        MinSize="118 118"
-                        Stretch="Fill"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Margin="10"/>
+                    <PanelContainer Name="VehiclePreview">
+                        <SpriteView
+                            Name="VehicleIcon"
+                            Access="Public"
+                            MinSize="118 118"
+                            SpriteOffset="True"
+                            Stretch="Fill"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="10"/>
+                    </PanelContainer>
                 </PanelContainer>
 
                 <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Vehicle.Supply;
 using Content.Shared._RMC14.Vendors;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Tag;
@@ -13,6 +15,7 @@ using Robust.Server.Audio;
 using Robust.Server.GameObjects;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -28,12 +31,22 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedCMAutomatedVendorSystem _vendor = default!;
+    [Dependency] private readonly RMCVehicleSystem _rmcVehicles = default!;
 
     private readonly Dictionary<string, List<HardpointItemInfo>> _hardpointItemsByType = new();
     private readonly Dictionary<string, List<string>> _hardpointsByVehicleCache = new();
+
+    private readonly record struct PreviewOffset(
+        Vector2 Base,
+        bool UseDirectional,
+        Vector2 North,
+        Vector2 East,
+        Vector2 South,
+        Vector2 West);
 
     public override void Initialize()
     {
@@ -87,6 +100,104 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
             lift.Stored[key] = next;
 
         return true;
+    }
+
+    private static void AddStoredEntity(RMCVehicleSupplyLiftComponent lift, string key, EntityUid vehicle)
+    {
+        if (!lift.StoredEntities.TryGetValue(key, out var list))
+        {
+            list = new List<EntityUid>();
+            lift.StoredEntities[key] = list;
+        }
+
+        list.Add(vehicle);
+    }
+
+    private bool TryPopStoredEntity(RMCVehicleSupplyLiftComponent lift, string key, out EntityUid vehicle)
+    {
+        vehicle = default;
+        if (!lift.StoredEntities.TryGetValue(key, out var list))
+            return false;
+
+        for (var i = list.Count - 1; i >= 0; i--)
+        {
+            var candidate = list[i];
+            list.RemoveAt(i);
+            if (Deleted(candidate))
+                continue;
+
+            if (list.Count == 0)
+                lift.StoredEntities.Remove(key);
+
+            vehicle = candidate;
+            return true;
+        }
+
+        if (list.Count == 0)
+            lift.StoredEntities.Remove(key);
+
+        return false;
+    }
+
+    private bool TryTakeStoredEntity(RMCVehicleSupplyLiftComponent lift, string key, int index, out EntityUid vehicle)
+    {
+        vehicle = default;
+        if (!lift.StoredEntities.TryGetValue(key, out var list) || list.Count == 0)
+            return false;
+
+        if (index < 0 || index >= list.Count)
+            index = list.Count - 1;
+
+        for (var attempts = 0; attempts < list.Count; attempts++)
+        {
+            var takeIndex = index;
+            var candidate = list[takeIndex];
+            list.RemoveAt(takeIndex);
+
+            if (Deleted(candidate))
+            {
+                if (list.Count == 0)
+                    break;
+
+                index = Math.Min(index, list.Count - 1);
+                continue;
+            }
+
+            if (list.Count == 0)
+                lift.StoredEntities.Remove(key);
+
+            vehicle = candidate;
+            return true;
+        }
+
+        if (list.Count == 0)
+            lift.StoredEntities.Remove(key);
+
+        return false;
+    }
+
+    private bool TryGetStoredEntity(RMCVehicleSupplyLiftComponent lift, string key, int index, out EntityUid vehicle)
+    {
+        vehicle = default;
+        if (!lift.StoredEntities.TryGetValue(key, out var list) || list.Count == 0)
+            return false;
+
+        if (index < 0 || index >= list.Count)
+            return false;
+
+        var candidate = list[index];
+        if (!Deleted(candidate))
+        {
+            vehicle = candidate;
+            return true;
+        }
+
+        list.RemoveAt(index);
+
+        if (list.Count == 0)
+            lift.StoredEntities.Remove(key);
+
+        return false;
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -219,9 +330,6 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
 
         var id = entry.Vehicle.Id;
         var idKey = Normalize(id);
-        if (lift.Comp.Deployed.Contains(idKey))
-            return;
-
         if (Normalize(lift.Comp.PendingVehicle) == idKey)
             return;
 
@@ -229,6 +337,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
             return;
 
         ent.Comp.SelectedVehicle = id;
+        ent.Comp.SelectedVehicleCopyIndex = Math.Max(0, args.CopyIndex);
         SendConsoleStateAll();
     }
 
@@ -253,26 +362,46 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         {
             if (comp.Mode == RMCVehicleSupplyLiftMode.Raised)
                 return;
-
-            if (string.IsNullOrWhiteSpace(console.Comp.SelectedVehicle))
-                return;
-
             var selected = console.Comp.SelectedVehicle;
-            var key = Normalize(selected);
-            if (GetStoredCount(comp, key) <= 0)
-                return;
+            var canQueueVehicle = false;
+            string? nextVehicle = null;
 
-            if (!_prototypes.TryIndex<EntityPrototype>(selected, out _))
-                return;
+            if (!string.IsNullOrWhiteSpace(selected))
+            {
+                if (TryGetEntry(console.Comp, selected, out var entry))
+                {
+                    var unlocked = BuildUnlockedSet();
+                    if (IsEntryUnlocked(entry, unlocked))
+                    {
+                        var key = Normalize(selected);
+                        if (GetStoredCount(comp, key) > 0 && _prototypes.TryIndex<EntityPrototype>(selected, out _))
+                        {
+                            if (TryRemoveStored(comp, key))
+                            {
+                                canQueueVehicle = true;
+                                nextVehicle = selected;
+                                comp.PendingVehicleEntity = null;
+                                if (TryTakeStoredEntity(comp, key, console.Comp.SelectedVehicleCopyIndex, out var pendingEntity))
+                                    comp.PendingVehicleEntity = pendingEntity;
 
-            if (!TryRemoveStored(comp, key))
-                return;
+                                console.Comp.SelectedVehicle = string.Empty;
+                                console.Comp.SelectedVehicleCopyIndex = 0;
+                                UpdateVendorSectionsAll();
+                            }
+                        }
+                    }
+                }
+            }
 
-            var nextVehicle = selected;
-            console.Comp.SelectedVehicle = string.Empty;
-
-            comp.PendingVehicle = nextVehicle;
-            UpdateVendorSectionsAll();
+            if (canQueueVehicle && nextVehicle != null)
+            {
+                comp.PendingVehicle = nextVehicle;
+            }
+            else
+            {
+                comp.PendingVehicle = string.Empty;
+                comp.PendingVehicleEntity = null;
+            }
         }
         else
         {
@@ -290,6 +419,18 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
 
     private bool IsLoweringBlocked(Entity<RMCVehicleSupplyLiftComponent> lift)
     {
+        if (lift.Comp.ActiveVehicle is { } active &&
+            IsOnLift(lift, active) &&
+            _rmcVehicles.TryGetInteriorMapId(active, out var interiorMap))
+        {
+            var actorQuery = EntityQueryEnumerator<ActorComponent, TransformComponent>();
+            while (actorQuery.MoveNext(out _, out _, out var xform))
+            {
+                if (xform.MapID == interiorMap)
+                    return true;
+            }
+        }
+
         var mask = (int) (CollisionGroup.MobLayer | CollisionGroup.MobMask);
         foreach (var entity in _physics.GetEntitiesIntersectingBody(lift, mask, false))
         {
@@ -432,21 +573,50 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         if (string.IsNullOrWhiteSpace(pending))
             return;
 
+        var key = Normalize(pending);
+        if (comp.PendingVehicleEntity is { } pendingEntity && Exists(pendingEntity))
+        {
+            var moverCoords = _transform.GetMoverCoordinates(lift);
+            var mapCoords = _transform.ToMapCoordinates(moverCoords);
+            _transform.SetMapCoordinates(pendingEntity, mapCoords);
+
+            comp.ActiveVehicle = pendingEntity;
+            comp.ActiveVehicleId = pending;
+            comp.PendingVehicle = string.Empty;
+            comp.PendingVehicleEntity = null;
+            comp.Deployed.Add(key);
+            return;
+        }
+
+        comp.PendingVehicleEntity = null;
+        if (TryPopStoredEntity(comp, key, out var stored))
+        {
+            var moverCoords = _transform.GetMoverCoordinates(lift);
+            var mapCoords = _transform.ToMapCoordinates(moverCoords);
+            _transform.SetMapCoordinates(stored, mapCoords);
+
+            comp.ActiveVehicle = stored;
+            comp.ActiveVehicleId = pending;
+            comp.PendingVehicle = string.Empty;
+            comp.Deployed.Add(key);
+            return;
+        }
+
         if (!_prototypes.TryIndex<EntityPrototype>(pending, out _))
         {
-            AddStored(comp, Normalize(pending));
+            AddStored(comp, key);
             comp.PendingVehicle = string.Empty;
             UpdateVendorSectionsAll();
             return;
         }
 
-        var coords = _transform.GetMoverCoordinates(lift);
-        var vehicle = SpawnAtPosition(pending, coords);
+        var spawnCoords = _transform.GetMoverCoordinates(lift);
+        var vehicle = SpawnAtPosition(pending, spawnCoords);
 
         comp.ActiveVehicle = vehicle;
         comp.ActiveVehicleId = pending;
         comp.PendingVehicle = string.Empty;
-        comp.Deployed.Add(Normalize(pending));
+        comp.Deployed.Add(key);
     }
 
     private void StoreVehicle(Entity<RMCVehicleSupplyLiftComponent> lift)
@@ -464,9 +634,10 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
             var key = Normalize(comp.ActiveVehicleId);
             comp.Deployed.Remove(key);
             AddStored(comp, key);
+            AddStoredEntity(comp, key, active);
         }
 
-        QueueDel(active);
+        _transform.SetParent(active, EntityUid.Invalid);
         comp.ActiveVehicle = null;
         comp.ActiveVehicleId = string.Empty;
         UpdateVendorSectionsAll();
@@ -509,6 +680,9 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         RMCVehicleSupplyLiftMode? mode = null;
         var busy = false;
         string? activeId = null;
+        string? selectedId = string.IsNullOrWhiteSpace(console.SelectedVehicle) ? null : console.SelectedVehicle;
+        var selectedCopyIndex = console.SelectedVehicleCopyIndex;
+        RMCVehicleSupplyPreviewState? preview = null;
 
         var hasLift = TryGetLift(uid, console, out var lift);
         if (hasLift)
@@ -517,6 +691,19 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
             busy = lift.Comp.Busy;
             activeId = string.IsNullOrWhiteSpace(lift.Comp.ActiveVehicleId) ? null : lift.Comp.ActiveVehicleId;
 
+            if (!string.IsNullOrWhiteSpace(selectedId))
+            {
+                var key = Normalize(selectedId);
+                var layers = new List<RMCVehicleHardpointLayerState>();
+                var overlays = new List<RMCVehicleSupplyPreviewOverlay>();
+                if (TryGetStoredEntity(lift.Comp, key, selectedCopyIndex, out var stored))
+                {
+                    layers = BuildPreviewLayers(stored);
+                    overlays = BuildPreviewOverlays(stored);
+                }
+
+                preview = new RMCVehicleSupplyPreviewState(selectedId, selectedCopyIndex, layers, overlays);
+            }
         }
 
         foreach (var entry in console.Vehicles)
@@ -538,7 +725,7 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
             available.Add(new RMCVehicleSupplyEntryState(entry.Vehicle.Id, GetEntryName(entry), 1));
         }
 
-        var state = new RMCVehicleSupplyBuiState(mode, busy, activeId, available);
+        var state = new RMCVehicleSupplyBuiState(mode, busy, activeId, selectedId, selectedCopyIndex, preview, available);
         _ui.SetUiState(uid, RMCVehicleSupplyUIKey.Key, state);
     }
 
@@ -907,6 +1094,209 @@ public sealed class RMCVehicleSupplySystem : EntitySystem
         var tree = _intel.EnsureTechTree();
         var tech = EnsureComp<RMCVehicleSupplyTechComponent>(tree.Owner);
         return (tree.Owner, tech);
+    }
+
+    private List<RMCVehicleHardpointLayerState> BuildPreviewLayers(
+        EntityUid vehicle,
+        RMCHardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        if (!Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+            return new List<RMCVehicleHardpointLayerState>();
+
+        var layers = new List<RMCVehicleHardpointLayerState>(hardpoints.Slots.Count);
+        var indexByLayer = new Dictionary<string, int>();
+
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            var layer = slot.VisualLayer;
+            if (string.IsNullOrWhiteSpace(layer))
+                continue;
+
+            var state = string.Empty;
+            var usesOverlay = false;
+            if (_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) && itemSlot.HasItem)
+            {
+                var item = itemSlot.Item!.Value;
+                state = ResolveVisualState(item, out usesOverlay);
+            }
+
+            var key = layer.ToLowerInvariant();
+            if (indexByLayer.TryGetValue(key, out var existingIndex))
+            {
+                if (!string.IsNullOrWhiteSpace(state))
+                    layers[existingIndex] = new RMCVehicleHardpointLayerState(layer, state);
+                continue;
+            }
+
+            indexByLayer[key] = layers.Count;
+            if (usesOverlay)
+                state = string.Empty;
+            layers.Add(new RMCVehicleHardpointLayerState(layer, state));
+        }
+
+        return layers;
+    }
+
+    private List<RMCVehicleSupplyPreviewOverlay> BuildPreviewOverlays(
+        EntityUid vehicle,
+        RMCHardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        if (!Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+            return new List<RMCVehicleSupplyPreviewOverlay>();
+
+        var overlays = new List<RMCVehicleSupplyPreviewOverlay>();
+        var turretOffsets = new Dictionary<string, PreviewOffset>();
+
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            var item = itemSlot.Item!.Value;
+            if (TryGetTurretOverlay(item, 0, out var overlay, out var offset))
+            {
+                overlays.Add(overlay);
+                turretOffsets[slot.Id] = offset;
+            }
+
+            if (!TryComp(item, out RMCHardpointSlotsComponent? attachedSlots) ||
+                !TryComp(item, out ItemSlotsComponent? attachedItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in attachedSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                if (!_itemSlots.TryGetSlot(item, turretSlot.Id, out var turretItemSlot, attachedItemSlots) ||
+                    !turretItemSlot.HasItem)
+                {
+                    continue;
+                }
+
+                var child = turretItemSlot.Item!.Value;
+                if (!TryGetTurretOverlay(child, 1, out var childOverlay, out var childOffset))
+                    continue;
+
+                if (turretOffsets.TryGetValue(slot.Id, out var parentOffset))
+                {
+                    var combined = CombineOffsets(parentOffset, childOffset);
+                    childOverlay = new RMCVehicleSupplyPreviewOverlay(
+                        childOverlay.Rsi,
+                        childOverlay.State,
+                        childOverlay.Order,
+                        combined.Base,
+                        combined.UseDirectional,
+                        combined.North,
+                        combined.East,
+                        combined.South,
+                        combined.West);
+                }
+
+                overlays.Add(childOverlay);
+            }
+        }
+
+        return overlays;
+    }
+
+    private bool TryGetTurretOverlay(
+        EntityUid item,
+        int order,
+        out RMCVehicleSupplyPreviewOverlay overlay,
+        out PreviewOffset offset)
+    {
+        overlay = default!;
+        offset = default;
+
+        if (!TryComp(item, out VehicleTurretComponent? turret))
+            return false;
+
+        if (!turret.ShowOverlay || string.IsNullOrWhiteSpace(turret.OverlayState) || string.IsNullOrWhiteSpace(turret.OverlayRsi))
+            return false;
+
+        offset = new PreviewOffset(
+            turret.PixelOffset,
+            turret.UseDirectionalOffsets,
+            turret.PixelOffsetNorth,
+            turret.PixelOffsetEast,
+            turret.PixelOffsetSouth,
+            turret.PixelOffsetWest);
+
+        overlay = new RMCVehicleSupplyPreviewOverlay(
+            turret.OverlayRsi,
+            turret.OverlayState,
+            order,
+            offset.Base,
+            offset.UseDirectional,
+            offset.North,
+            offset.East,
+            offset.South,
+            offset.West);
+        return true;
+    }
+
+    private static PreviewOffset CombineOffsets(PreviewOffset a, PreviewOffset b)
+    {
+        var useDirectional = a.UseDirectional || b.UseDirectional;
+        var north = (a.UseDirectional ? a.North : Vector2.Zero) + (b.UseDirectional ? b.North : Vector2.Zero);
+        var east = (a.UseDirectional ? a.East : Vector2.Zero) + (b.UseDirectional ? b.East : Vector2.Zero);
+        var south = (a.UseDirectional ? a.South : Vector2.Zero) + (b.UseDirectional ? b.South : Vector2.Zero);
+        var west = (a.UseDirectional ? a.West : Vector2.Zero) + (b.UseDirectional ? b.West : Vector2.Zero);
+        return new PreviewOffset(a.Base + b.Base, useDirectional, north, east, south, west);
+    }
+
+    private string ResolveVisualState(EntityUid item, out bool usesOverlay, int depth = 0)
+    {
+        usesOverlay = false;
+        if (depth > 2)
+            return string.Empty;
+
+        if (TryComp(item, out VehicleTurretComponent? turretOverlay) && turretOverlay.ShowOverlay)
+            usesOverlay = true;
+
+        if (TryComp(item, out RMCHardpointSlotsComponent? attachedSlots) &&
+            TryComp(item, out ItemSlotsComponent? attachedItemSlots))
+        {
+            foreach (var slot in attachedSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(slot.Id))
+                    continue;
+
+                if (!_itemSlots.TryGetSlot(item, slot.Id, out var itemSlot, attachedItemSlots) || !itemSlot.HasItem)
+                    continue;
+
+                var child = itemSlot.Item!.Value;
+                var childState = ResolveVisualState(child, out var childOverlay, depth + 1);
+                usesOverlay |= childOverlay;
+                if (!string.IsNullOrWhiteSpace(childState))
+                    return childState;
+            }
+        }
+
+        if (TryComp(item, out RMCHardpointVisualComponent? visual) &&
+            !string.IsNullOrWhiteSpace(visual.VehicleState))
+        {
+            return visual.VehicleState;
+        }
+
+        if (TryComp(item, out VehicleTurretComponent? turret) &&
+            !string.IsNullOrWhiteSpace(turret.OverlayState))
+        {
+            return turret.OverlayState;
+        }
+
+        return string.Empty;
     }
 
     private HashSet<string> BuildUnlockedSet()

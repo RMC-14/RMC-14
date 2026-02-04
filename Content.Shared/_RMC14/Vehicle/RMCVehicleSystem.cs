@@ -575,4 +575,14 @@ public sealed class RMCVehicleSystem : EntitySystem
         vehicle = vehicleUid;
         return true;
     }
+
+    public bool TryGetInteriorMapId(EntityUid vehicle, out MapId mapId)
+    {
+        mapId = MapId.Nullspace;
+        if (!_vehicleInteriors.TryGetValue(vehicle, out var interior))
+            return false;
+
+        mapId = interior.MapId;
+        return mapId != MapId.Nullspace;
+    }
 }

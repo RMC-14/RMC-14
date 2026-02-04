@@ -34,6 +34,9 @@ public sealed partial class RMCVehicleSupplyConsoleComponent : Component
 
     [DataField]
     public string SelectedVehicle = string.Empty;
+
+    [DataField]
+    public int SelectedVehicleCopyIndex;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

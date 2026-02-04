@@ -38,21 +38,60 @@
     - name: humvee
       vehicle: RMCVehicleHumvee
       unlock: RMCVehicleHumvee
+      hardpoints:
+      - RMCVehicleHumveeTurret
+      - RMCVehicleHumveeCannon
+      - RMCVehicleHumveeLauncher
+      - RMCVehicleHumveeSnowplow
+      - RMCVehicleHumveeOverlight
+      - RMCVehicleHumveeHatch
+      - RMCVehicleHumveeWheel
     - name: humvee (medical)
       vehicle: RMCVehicleHumveeMedical
       unlock: RMCVehicleHumveeMedical
+      hardpoints:
+      - RMCVehicleHumveeSnowplow
+      - RMCVehicleHumveeOverlight
+      - RMCVehicleHumveeHatch
+      - RMCVehicleHumveeWheel
     - name: humvee (transport)
       vehicle: RMCVehicleHumveeTransport
       unlock: RMCVehicleHumveeTransport
+      hardpoints:
+      - RMCVehicleHumveeSnowplow
+      - RMCVehicleHumveeOverlight
+      - RMCVehicleHumveeHatch
+      - RMCVehicleHumveeWheel
     - name: apc
       vehicle: RMCVehicleAPC
       unlock: RMCVehicleAPC
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
     - name: apc (medical)
       vehicle: RMCVehicleAPCMed
       unlock: RMCVehicleAPCMed
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
     - name: apc (command)
       vehicle: RMCVehicleAPCCommand
       unlock: RMCVehicleAPCCommand
+      hardpoints:
+      - RMCAPCDualCannon
+      - RMCAPCFrontCannon
+      - RMCAPCCommsRelay
+      - RMCAPCFlareLauncher
+      - RMCAPCFreightStorage
+      - RMCAPCWheel
     - name: humvee (arc)
       vehicle: RMCVehicleHumveeARC
       unlock: RMCVehicleHumveeARC

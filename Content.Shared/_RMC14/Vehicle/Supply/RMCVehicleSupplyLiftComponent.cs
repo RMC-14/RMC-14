@@ -68,6 +68,9 @@ public sealed partial class RMCVehicleSupplyLiftComponent : Component
     public string PendingVehicle = string.Empty;
 
     [NonSerialized]
+    public EntityUid? PendingVehicleEntity;
+
+    [NonSerialized]
     public EntityUid? ActiveVehicle;
 
     [NonSerialized]
@@ -78,6 +81,9 @@ public sealed partial class RMCVehicleSupplyLiftComponent : Component
 
     [NonSerialized]
     public readonly Dictionary<string, int> Stored = new();
+
+    [NonSerialized]
+    public readonly Dictionary<string, List<EntityUid>> StoredEntities = new();
 }
 
 [Serializable, NetSerializable]
