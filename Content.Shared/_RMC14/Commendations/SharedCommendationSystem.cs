@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared.Database;
 using Content.Shared.GameTicking;
@@ -131,8 +131,8 @@ public abstract class SharedCommendationSystem : EntitySystem
         return RoundCommendations;
     }
 
-    public void AddRoundCommendation(Commendation commendation)
+    public void AddRoundCommendation(RoundCommendationEntry entry)
     {
-        RoundCommendations.Add(commendation);
+        RoundCommendations.Add(entry);
     }
 }

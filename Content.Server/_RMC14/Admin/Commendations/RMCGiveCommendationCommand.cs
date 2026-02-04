@@ -29,6 +29,7 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     [Dependency] private readonly CommendationSystem _commendationSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private readonly IEntityManager _entities = default!;
 
     private LocalizedDatasetPrototype? _jelliesDataset;
     private LocalizedDatasetPrototype? _jelliesSpecialDataset;
@@ -165,7 +166,16 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
             if (targetRound == currentRound)
             {
                 var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
-                commendationSystem.AddRoundCommendation(commendation);
+                var commendationPrototypeId = commendationType == CommendationType.Medal
+                    ? GetMedalPrototypeId(awardNum)
+                    : null;
+
+                var entry = new RoundCommendationEntry(
+                    commendation,
+                    commendationPrototypeId,
+                    null, // We deliberately do not link the award to the player so as not to confuse the admins with the fact that it can be given to someone who deserved the award in one role, but now plays in another to avoid confusion (the marine died and took on the role of a drone, the admin accidentally links the award to the drone).
+                    receiverId.ToString());
+                commendationSystem.AddRoundCommendation(entry);
             }
 
             // Log admin action
@@ -375,5 +385,20 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         }
 
         return options.ToArray();
+    }
+
+    private ProtoId<EntityPrototype>? GetMedalPrototypeId(int awardNum)
+    {
+        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+
+        if (awardNum <= medalIds.Count)
+            return medalIds[awardNum - 1];
+
+        var specialAwardNum = awardNum - medalIds.Count;
+        if (specialAwardNum <= 0 || specialAwardNum > specialMedalIds.Count)
+            return null;
+
+        return specialMedalIds[specialAwardNum - 1];
     }
 }
