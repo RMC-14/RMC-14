@@ -76,7 +76,7 @@
 - type: startingGear
   id: RMCGearProvostChiefInspector
   equipment:
-    head: RMCProvostCommandBeret
+    head: RMCProvostSeniorBeret
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform

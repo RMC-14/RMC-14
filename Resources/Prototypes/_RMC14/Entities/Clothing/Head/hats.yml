@@ -687,8 +687,8 @@
 
 - type: entity
   parent: CMHeadBeret
-  id: RMCProvostCommandBeret
-  name: UNMC provost command beret
+  id: RMCProvostSeniorBeret
+  name: UNMC provost senior beret
   description: A beret with the UNMC Military Police insignia emblazoned on it.
   components:
   - type: Sprite
