@@ -269,7 +269,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  suffix: Provost
+  suffix: Provost Inspector
   id: CMSatchelSecurityFilledProvostInspector
   components:
   - type: StorageFill
