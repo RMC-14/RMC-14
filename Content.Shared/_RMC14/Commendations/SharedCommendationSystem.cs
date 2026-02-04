@@ -30,6 +30,20 @@ public abstract class SharedCommendationSystem : EntitySystem
         new ProtoId<EntityPrototype>("RMCMedalBronzeHeart")
     };
 
+    /// <summary>
+    /// List of entity prototype IDs for special medals that can be awarded.
+    /// </summary>
+    protected static readonly IReadOnlyList<ProtoId<EntityPrototype>> SpecialMedalIds = new[]
+    {
+        new ProtoId<EntityPrototype>("RMCMedalHighCommandHonor")
+    };
+
+    /// <summary>
+    /// Dataset IDs for commendation jellies.
+    /// </summary>
+    public const string JellyDatasetId = "RMCXenoJellies";
+    public const string JellySpecialDatasetId = "RMCXenoJelliesSpecial";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -47,6 +61,14 @@ public abstract class SharedCommendationSystem : EntitySystem
     public IReadOnlyList<ProtoId<EntityPrototype>> GetAwardableMedalIds()
     {
         return AwardableMedalIds;
+    }
+
+    /// <summary>
+    /// Gets the list of entity prototype IDs for special medals.
+    /// </summary>
+    public IReadOnlyList<ProtoId<EntityPrototype>> GetSpecialMedalIds()
+    {
+        return SpecialMedalIds;
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)

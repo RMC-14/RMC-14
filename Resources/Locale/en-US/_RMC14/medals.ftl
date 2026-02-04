@@ -1,11 +1,3 @@
-# Medal Types
-rmc-medal-1 = Distinguished conduct medal
-rmc-medal-2 = Bronze heart medal
-rmc-medal-3 = Medal of valor
-rmc-medal-4 = Medal of exceptional heroism
-
-rmc-medal-special-1 = UNMC High Command Medal of honor
-
 # Medal UI
 rmc-medal-recipient = Medal Recipient
 rmc-medal-recipient-prompt = Who do you want to award a medal to?

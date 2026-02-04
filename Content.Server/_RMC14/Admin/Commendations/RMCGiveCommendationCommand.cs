@@ -26,26 +26,27 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IServerDbManager _db = default!;
     [Dependency] private readonly CommendationManager _commendation = default!;
+    [Dependency] private readonly CommendationSystem _commendationSystem = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IChatManager _chat = default!;
 
-    private LocalizedDatasetPrototype? _medalsDataset;
     private LocalizedDatasetPrototype? _jelliesDataset;
-    private LocalizedDatasetPrototype? _medalsSpecialDataset;
     private LocalizedDatasetPrototype? _jelliesSpecialDataset;
+    private IReadOnlyList<ProtoId<EntityPrototype>>? _medalIds;
+    private IReadOnlyList<ProtoId<EntityPrototype>>? _specialMedalIds;
 
     public override string Command => "rmcgivecommendation";
 
-    private int MedalCount => (_medalsDataset?.Values.Count ?? 0) + (_medalsSpecialDataset?.Values.Count ?? 0);
+    private int MedalCount => (_medalIds?.Count ?? 0) + (_specialMedalIds?.Count ?? 0);
     private int JellyCount => (_jelliesDataset?.Values.Count ?? 0) + (_jelliesSpecialDataset?.Values.Count ?? 0);
 
     public override async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
         // Initialize datasets on first use
-        _medalsDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedals");
-        _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJellies");
-        _medalsSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedalsSpecial");
-        _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJelliesSpecial");
+        _medalIds ??= _commendationSystem.GetAwardableMedalIds();
+        _specialMedalIds ??= _commendationSystem.GetSpecialMedalIds();
+        _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
+        _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId);
 
         if (args.Length < 6)
         {
@@ -81,8 +82,8 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         {
             case "medal":
                 commendationType = CommendationType.Medal;
-                regularDataset = _medalsDataset;
-                specialDataset = _medalsSpecialDataset;
+                regularDataset = null;
+                specialDataset = null;
                 maxAwardType = MedalCount;
                 break;
             case "jelly":
@@ -107,22 +108,28 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         }
 
         // Get localized name from dataset (regular awards first, then special awards)
-        LocId locId;
+        string awardName;
         var regularCount = regularDataset?.Values.Count ?? 0;
 
-        if (awardNum <= regularCount)
+        if (commendationType == CommendationType.Medal)
         {
-            // Regular award
-            locId = regularDataset!.Values[awardNum - 1];
+            awardName = GetMedalAwardName(awardNum);
         }
         else
         {
-            // Special award (offset by regular count)
-            var specialAwardNum = awardNum - regularCount;
-            locId = specialDataset!.Values[specialAwardNum - 1];
-        }
+            LocId locId;
+            if (awardNum <= regularCount)
+            {
+                locId = regularDataset!.Values[awardNum - 1];
+            }
+            else
+            {
+                var specialAwardNum = awardNum - regularCount;
+                locId = specialDataset!.Values[specialAwardNum - 1];
+            }
 
-        var awardName = Loc.GetString(locId);
+            awardName = Loc.GetString(locId);
+        }
 
         // Validate citation
         citation = citation.Trim();
@@ -191,10 +198,10 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
         // Initialize datasets if needed
-        _medalsDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedals");
-        _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJellies");
-        _medalsSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCMarineMedalsSpecial");
-        _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJelliesSpecial");
+        _medalIds ??= _commendationSystem.GetAwardableMedalIds();
+        _specialMedalIds ??= _commendationSystem.GetSpecialMedalIds();
+        _jelliesDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
+        _jelliesSpecialDataset ??= _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellySpecialDatasetId);
 
         if (args.Length == 1)
         {
@@ -262,7 +269,7 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
             if (type == "medal")
             {
-                var options = GetAwardCompletionOptions(_medalsDataset, _medalsSpecialDataset);
+                var options = GetMedalCompletionOptions();
                 return CompletionResult.FromHintOptions(options,
                     Loc.GetString("cmd-rmcgivecommendation-hint-medal-type", ("count", MedalCount)));
             }
@@ -327,6 +334,44 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
                 var awardNum = regularCount + i;
                 options.Add(new CompletionOption(awardNum.ToString(), name));
             }
+        }
+
+        return options.ToArray();
+    }
+
+    private string GetMedalAwardName(int awardNum)
+    {
+        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+
+        if (awardNum <= medalIds.Count)
+        {
+            var proto = _prototype.Index<EntityPrototype>(medalIds[awardNum - 1]);
+            return proto.Name;
+        }
+
+        var specialAwardNum = awardNum - medalIds.Count;
+        var specialProto = _prototype.Index<EntityPrototype>(specialMedalIds[specialAwardNum - 1]);
+        return specialProto.Name;
+    }
+
+    private CompletionOption[] GetMedalCompletionOptions()
+    {
+        var options = new List<CompletionOption>();
+        var medalIds = _medalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+        var specialMedalIds = _specialMedalIds ?? Array.Empty<ProtoId<EntityPrototype>>();
+
+        for (var i = 0; i < medalIds.Count; i++)
+        {
+            var proto = _prototype.Index<EntityPrototype>(medalIds[i]);
+            options.Add(new CompletionOption((i + 1).ToString(), proto.Name));
+        }
+
+        var offset = medalIds.Count;
+        for (var i = 0; i < specialMedalIds.Count; i++)
+        {
+            var proto = _prototype.Index<EntityPrototype>(specialMedalIds[i]);
+            options.Add(new CompletionOption((offset + i + 1).ToString(), proto.Name));
         }
 
         return options.ToArray();
