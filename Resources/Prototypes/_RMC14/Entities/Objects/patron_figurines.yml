@@ -2282,3 +2282,14 @@
     state: seth_xi
   - type: PatronFigurine
     id: 909c243e-6fb8-42ed-a477-d48571fccff2
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEats-The-Crayons
+  name: Eats-The-Crayons figurine
+  #description: ""
+  components:
+  - type: Sprite
+    state: eats-the-crayons
+  - type: PatronFigurine
+    id: a825851d-a9e6-48db-b7d2-2307fef49ff5
