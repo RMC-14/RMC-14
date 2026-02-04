@@ -2315,3 +2315,16 @@
     state: jackie_cratehead_taylor
   - type: PatronFigurine
     id: 280721a5-a2fa-47c2-ba94-c07fc13512a7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEinukoTwitchSteelfeather
+  name: Einuko 'Twitch' Steelfeather figurine
+  description: "\/Made in collaboration with the Avalon Defence Forces.\/\n\"Feet first into hell. Always forward. Unto death.\"\n\n\"The patron saint of 'Bird JTAC' (and bad ideas.)\"\nA skilled forward observer with several medals for service and military achievements, see box for details.\n\nThis one comes with an optional parachute attachment stored under the base!\n/Clip to chest before dropping for best results./\n\n-!!- WARNING - DO NOT IGNITE -!!-"
+  components:
+  - type: Sprite
+    state: einuko_twitch_steelfeather
+  - type: PatronFigurine
+    id: a440be4b-5667-44f7-a375-cfc151fdf8f7
+  - type: ParaDroppable
+    dropScatter: 1
