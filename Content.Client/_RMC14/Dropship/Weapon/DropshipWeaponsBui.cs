@@ -237,16 +237,15 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         var spotlightToggleOn = ButtonAction("enable",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(first, true)));
         var spotlightToggleOff = ButtonAction("disable",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(false)));
-        var equipmentDeploy = ButtonAction("deploy",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(true)));
-        var equipmentRetract = ButtonAction("retract",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(false)));
-        var equipmentAutoDeployOn = ButtonAction("auto-deploy",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(true)));
-        var equipmentAutoDeployOff = ButtonAction("auto-deploy",
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(false)));
             _ => SendPredictedMessage(new DropShipTerminalWeaponsSpotlightToggleMsg(first, false)));
+        var equipmentDeploy = ButtonAction("deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(first, true)));
+        var equipmentRetract = ButtonAction("retract",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentDeployToggleMsg(first, false)));
+        var equipmentAutoDeployOn = ButtonAction("auto-deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(first, true)));
+        var equipmentAutoDeployOff = ButtonAction("auto-deploy",
+            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(first, false)));
         var launch = ButtonAction("fire",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsLaunchOrdnanceMsg(first)));
 
@@ -485,7 +484,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             }
             case EquipmentDeployer:
             {
-                var equipmentPoint = EntMan.GetEntity(terminal.SelectedSystem);
+                var equipmentPoint = EntMan.GetEntity(compScreen.System);
                 screen.TopRow.SetData(equip);
                 screen.BottomRow.SetData(exit);
 

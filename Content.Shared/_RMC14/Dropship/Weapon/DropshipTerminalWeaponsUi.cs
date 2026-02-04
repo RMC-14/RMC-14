@@ -163,14 +163,16 @@ public sealed class DropShipTerminalWeaponsSpotlightToggleMsg(bool first, bool o
 }
 
 [Serializable, NetSerializable]
-public sealed class DropShipTerminalWeaponsEquipmentDeployToggleMsg(bool deploy) : BoundUserInterfaceMessage
+public sealed class DropShipTerminalWeaponsEquipmentDeployToggleMsg(bool first, bool deploy) : BoundUserInterfaceMessage
 {
+    public readonly bool First = first;
     public readonly bool Deploy = deploy;
 }
 
 [Serializable, NetSerializable]
-public sealed class DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(bool autoDeploy) : BoundUserInterfaceMessage
+public sealed class DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(bool first, bool autoDeploy) : BoundUserInterfaceMessage
 {
+    public readonly bool First = first;
     public readonly bool AutoDeploy = autoDeploy;
 }
 

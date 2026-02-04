@@ -1019,7 +1019,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnEquipmentDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
         ref DropShipTerminalWeaponsEquipmentDeployToggleMsg args)
     {
-        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
             return;
@@ -1044,7 +1045,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnEquipmentToggleAutoDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
         ref DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg args)
     {
-        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
             return;
