@@ -11,6 +11,9 @@
   id: CMCartridgePistol9mmAP
 
 - type: Tag
+  id: RMCCartridgePistol9mmHP
+
+- type: Tag
   id: RMCCartridgeRevolver44
 
 - type: Tag
