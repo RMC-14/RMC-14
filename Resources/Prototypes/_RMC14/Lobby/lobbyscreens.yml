@@ -77,3 +77,7 @@
 - type: lobbyBackground
   id: goodhits
   background: /Textures/_RMC14/Lobby/good_hits.png
+
+- type: lobbyBackground
+  id: HisHighness
+  background: /Textures/_RMC14/Lobby/his_highness.png

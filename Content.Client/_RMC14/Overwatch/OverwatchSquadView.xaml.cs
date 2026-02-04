@@ -107,7 +107,7 @@ public sealed partial class OverwatchSquadView : Control
     {
         _squadInfoHidden = !_squadInfoHidden;
         ApplySquadInfoVisibilityState();
-        HideSquadInfoButton.Text = _squadInfoHidden ? "Show Squad Info" : "Hide Squad Info";
+        HideSquadInfoButton.Text = _squadInfoHidden ? Loc.GetString("rmc-overwatch-console-show-squad-info") : Loc.GetString("rmc-overwatch-console-hide-squad-info");
     }
 
     private void MakeAllVisible(Control control)
@@ -282,7 +282,7 @@ public sealed partial class OverwatchSquadView : Control
         var supplyTimeLeft = NextLaunchAt - time;
         if (supplyTimeLeft > TimeSpan.Zero)
         {
-            CrateStatus.Text = $"[color=#D3B400][bold]\\ [ COOLDOWN - {(int)supplyTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
+            CrateStatus.Text = Loc.GetString("rmc-overwatch-console-cooldown", ("seconds", (int)supplyTimeLeft.TotalSeconds));
             LaunchButton.Disabled = true;
         }
         else
@@ -293,7 +293,7 @@ public sealed partial class OverwatchSquadView : Control
         var orbitalTimeLeft = NextOrbitalAt - time;
         if (orbitalTimeLeft > TimeSpan.Zero)
         {
-            OrbitalStatus.Text = $"[color=#D3B400][bold]\\ [ COOLDOWN - {(int)orbitalTimeLeft.TotalSeconds} SECONDS \\][/bold][/color]";
+            OrbitalStatus.Text = Loc.GetString("rmc-overwatch-console-cooldown", ("seconds", (int)orbitalTimeLeft.TotalSeconds));
             OrbitalFireButton.Disabled = true;
         }
         else
