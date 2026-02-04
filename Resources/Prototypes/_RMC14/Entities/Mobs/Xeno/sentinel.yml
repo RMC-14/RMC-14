@@ -28,6 +28,9 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSentinel
     actionIds:
