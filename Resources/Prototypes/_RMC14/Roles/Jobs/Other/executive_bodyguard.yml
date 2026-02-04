@@ -1,9 +1,10 @@
-﻿# Corporate Bodyguard
+﻿# Executive Bodyguard
 - type: job
   parent: RMCJobNametagBase
   id: RMCWeYaExecutiveBodyguard
   name: rmc-job-name-executive-bodyguard
   description: rmc-job-description-executive-bodyguard
+  newToJobInfo: rmc-new-to-job-wyeb
   playTimeTracker: RMCJobWeYaExecutiveBodyguard
   requirements:
   - !type:DepartmentTimeRequirement
