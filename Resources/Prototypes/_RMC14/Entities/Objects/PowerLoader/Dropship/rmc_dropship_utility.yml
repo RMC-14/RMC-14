@@ -85,6 +85,83 @@
 
 - type: entity
   parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentDoorGun
+  name: MTU-4B Door Gunner Hardpoint System
+  description: A box that deploys a crew-served scoped M56D heavy machine gun. Fits on both the external weapon and crew compartment attach points of dropships.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+    layers:
+    - state: mg_system
+  - type: DropshipFabricatorPrintable
+    cost: 50
+  - type: DropshipUtility
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: mg_system_installed
+    weaponSlotSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: mg_system_installed
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipUtilityPoint
+    - RMCDropshipWeaponPoint
+  - type: RMCEquipmentDeployer
+    isDeployableByHand: true
+    utilityDeployedSprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: mg_system_deployed
+    weaponDeployedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: mg_system_deployed
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
+  id: RMCDropshipAttachmentSentryDefenseSystem
+  name: A/A-32-P Sentry Defense System
+  description: A box that deploys a sentry turret. Fits on both the external weapon and crew compartment attach points of dropships.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+    layers:
+    - state: sentry_system
+  - type: DropshipFabricatorPrintable
+    cost: 200
+  - type: DropshipUtility
+  - type: DropshipAttachedSprite
+    sprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: sentry_system_installed
+    weaponSlotSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: sentry_system_installed
+  - type: PowerLoaderAttachable
+    attachableTypes:
+    - RMCDropshipUtilityPoint
+    - RMCDropshipWeaponPoint
+  - type: RMCEquipmentDeployer
+    deployPrototype: RMCSentryDropship
+    dropShipWindowButtonText: Sentry
+    starboardForeDeployDirection: 0, 1
+    portForeDeployDirection: 0, 1
+    starboardWingDeployDirection: 1, 0
+    portWingDeployDirection: -1, 0
+    utilityDeployedSprite:
+      sprite: _RMC14/Objects/dropship_utility_attachments.rsi
+      state: sentry_system_deployed
+    weaponDeployedSprite:
+      sprite: _RMC14/Objects/dropship_attachments.rsi
+      state: sentry_system_deployed
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
+  parent: RMCDropshipAttachmentUtility
   id: RMCDropshipAttachmentLaunchBay
   name: LAG-14 internal sentry launcher
   description: A launch bay to drop special ordnance. Fits inside the dropship's crew weapon emplacement. Moving this will require some sort of lifter. Accepts the A/C-49-P Air Deployable Sentry as ammunition.

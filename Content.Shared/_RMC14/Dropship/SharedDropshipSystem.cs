@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
+using Content.Shared._RMC14.Dropship.Utility.Components;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Evacuation;
 using Content.Shared._RMC14.Marines.Announce;
@@ -63,6 +64,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipWeaponPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipWeaponPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipWeaponPointComponent, ExaminedEvent>(OnAttachmentExamined);
+        SubscribeLocalEvent<DropshipWeaponPointComponent, InteractHandEvent>(OnInteract);
 
         SubscribeLocalEvent<DropshipUtilityPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipUtilityPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
@@ -74,6 +76,7 @@ public abstract class SharedDropshipSystem : EntitySystem
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, MapInitEvent>(OnAttachmentPointMapInit);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, EntityTerminatingEvent>(OnAttachmentPointRemove);
         SubscribeLocalEvent<DropshipElectronicSystemPointComponent, ExaminedEvent>(OnElectronicSystemExamined);
+        SubscribeLocalEvent<DropshipElectronicSystemPointComponent, InteractHandEvent>(OnInteract);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -533,6 +536,35 @@ public abstract class SharedDropshipSystem : EntitySystem
             var ev = new DropshipHijackStartEvent(xform.ParentUid);
             RaiseLocalEvent(ref ev);
         }
+    }
+
+    /// <summary>
+    ///     Relay interaction events to the entity stored within the Weapon Point.
+    /// </summary>
+    private void OnInteract(Entity<DropshipWeaponPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.WeaponContainerSlotId);
+        RelayInteractToContained(slot, ref args);
+    }
+
+    /// <summary>
+    ///     Relay interaction events to the entity stored within the Electronic Point.
+    /// </summary>
+    private void OnInteract(Entity<DropshipElectronicSystemPointComponent> ent, ref InteractHandEvent args)
+    {
+        var slot = _container.EnsureContainer<ContainerSlot>(ent, ent.Comp.ContainerId);
+        RelayInteractToContained(slot, ref args);
+    }
+
+    private void RelayInteractToContained(ContainerSlot slot, ref InteractHandEvent args)
+    {
+        var deployer= slot.ContainedEntity;
+        if (!HasComp<RMCEquipmentDeployerComponent>(deployer))
+            return;
+
+        var ev = new InteractHandEvent(args.User, args.Target);
+        RaiseLocalEvent(deployer.Value, ev);
+        args.Handled = ev.Handled;
     }
 
     public virtual bool FlyTo(Entity<DropshipNavigationComputerComponent> computer,
