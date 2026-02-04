@@ -11,7 +11,7 @@
     department: CMMilitaryPolice
     time: 18000 # 5 hours
   - !type:RoleTimeRequirement
-    role: CMLiaison
+    role: CMJobLiaison
     time: 90000 # 25 hours
   ranks:
     RMCRankWeYaBodyguardPPC:
