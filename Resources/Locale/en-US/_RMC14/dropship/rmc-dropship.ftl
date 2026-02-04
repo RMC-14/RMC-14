@@ -44,6 +44,9 @@ rmc-dropship-weapons-lock = LOCK
 rmc-dropship-weapons-clear = CLEAR
 rmc-dropship-weapons-enable = ENABLE
 rmc-dropship-weapons-disable = DISABLE
+rmc-dropship-weapons-deploy = DEPLOY
+rmc-dropship-weapons-retract = RETRACT
+rmc-dropship-weapons-auto-deploy = AUTO-DEPLOY
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -114,3 +117,16 @@ rmc-dropship-ui-cancel = Cancel
 rmc-dropship-ui-launch = Launch
 rmc-dropship-ui-summon = Summon
 
+rmc-dropship-equipment-deployer-text = {$deployName}
+rmc-dropship-equipment-deployer-health = Condition: {$status}
+rmc-dropship-equipment-deployer-ammo = Ammo: {$ammoCount} / {$totalAmmoCount}
+rmc-dropship-equipment-deployer-status = Deploy Status: {$deployed}
+rmc-dropship-equipment-deployer-auto-deploy = Auto-Deploy: {$autoDeploy}
+
+rmc-dropship-equipment-enabled = ENABLED
+rmc-dropship-equipment-disabled = DISABLED
+rmc-dropship-equipment-deployed = DEPLOYED
+rmc-dropship-equipment-undeployed = UNDEPLOYED
+rmc-dropship-equipment-operational = OPERATIONAL
+rmc-dropship-equipment-damaged = DAMAGED
+rmc-dropship-equipment-destroyed = DESTROYED

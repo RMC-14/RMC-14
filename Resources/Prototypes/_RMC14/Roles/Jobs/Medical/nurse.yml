@@ -3,6 +3,7 @@
   id: CMNurse
   name: rmc-job-name-nurse
   description: rmc-job-description-nurse
+  newToJobInfo: rmc-new-to-job-nurse
   playTimeTracker: CMJobNurse
   requirements:
   - !type:TotalDepartmentsTimeRequirement
