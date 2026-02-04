@@ -80,7 +80,7 @@
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior # TODO RMC14 provost command uniform
-    outerClothing: RMCProvostCommandJacketFilled
+    outerClothing: RMCProvostSeniorJacketFilled
     gloves: CMHandsBlackMarine # TODO RMC14 black gloves
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostChiefInspector

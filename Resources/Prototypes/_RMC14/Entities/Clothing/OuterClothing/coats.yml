@@ -676,8 +676,8 @@
 
 - type: entity
   parent: CMCoatOfficer
-  id: RMCProvostCommandJacket
-  name: Provost Command Jacket
+  id: RMCProvostSeniorJacket
+  name: Provost Senior Jacket
   description: A crisp jacket with the Provost sigil.
   components:
   - type: Sprite
@@ -696,8 +696,8 @@
     - id: RMCHandcuffs
 
 - type: entity
-  parent: RMCProvostCommandJacket
-  id: RMCProvostCommandJacketFilled
+  parent: RMCProvostSeniorJacket
+  id: RMCProvostSeniorJacketFilled
   suffix: Filled
   components:
   - type: StorageFill

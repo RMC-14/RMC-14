@@ -41,7 +41,7 @@
     eyes: CMGlassesSecurity # TODO: replace with sec hud
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
-    outerClothing: RMCProvostCommandJacket
+    outerClothing: RMCProvostSeniorJacket
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostResponder
