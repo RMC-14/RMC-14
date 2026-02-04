@@ -137,6 +137,8 @@
         amount: 2
       - id: CMHyposprayWithVial
         amount: 3
+      - id: RMCVialTricordrazine
+        amount: 3
       - id: CMHealthAnalyzer
         amount: 5
       - id: CMBeltMedical
