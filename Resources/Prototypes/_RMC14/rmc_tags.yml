@@ -89,6 +89,9 @@
   id: RMCWeaponRevolverM44
 
 - type: Tag
+  id: RMCSheetMetal
+
+- type: Tag
   id: RMCGlass
 
 - type: Tag
@@ -159,3 +162,6 @@
 
 - type: Tag
   id: RMCXenoParasitePreparingLeap
+
+- type: Tag
+  id: RMCSynthGrabbable # whitelist tag for synths being able to grab particular xenos
