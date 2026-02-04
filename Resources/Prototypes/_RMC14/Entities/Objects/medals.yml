@@ -131,14 +131,14 @@
   parent: RMCMedalGold
   id: RMCMedalHighCommandHonor
   name: UNMC High Command Medal of honor
-  description: A golden medal awarded directly by UNMC High Command for extraordinary service and sacrifice.
+  description: A star-shaped golden medal bestowed solely by UNMC High Command. It is not earned through valor alone, but granted by command authority for deeds that transcend recognized heroism. As the UNMC’s ultimate distinction, it eclipses every other commendation. Its recipients are known to history, not statistics.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Medals/gold.rsi
-    state: icon_co
+    sprite: _RMC14/Objects/Medals/gold_star.rsi
+    state: icon
   - type: UniformAccessory
     playerSprite:
-      sprite: _RMC14/Objects/Medals/gold.rsi
+      sprite: _RMC14/Objects/Medals/gold_star.rsi
       state: equipped_co
 
 - type: entity
