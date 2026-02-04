@@ -35,7 +35,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
 
     private readonly Dictionary<EntityUid, MapCoordinates> _squadLeaders = new();
     private readonly Dictionary<EntityUid, MapCoordinates>?[] _fireteamLeaders =
-        new Dictionary<EntityUid, MapCoordinates>?[3];
+        new Dictionary<EntityUid, MapCoordinates>?[5];
 
     private EntityQuery<FireteamLeaderComponent> _fireteamLeaderQuery;
     private EntityQuery<FireteamMemberComponent> _fireteamMemberQuery;
@@ -755,7 +755,7 @@ public sealed class SquadLeaderTrackerSystem : EntitySystem
             if (!_squadLeaderTrackerQuery.TryComp(member, out var tracker))
                 continue;
 
-            _ui.SetUiState(member, SquadLeaderTrackerUI.Key, 
+            _ui.SetUiState(member, SquadLeaderTrackerUI.Key,
                 new SquadLeaderTrackerBoundUserInterfaceState(objectives));
         }
     }

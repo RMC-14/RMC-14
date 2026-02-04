@@ -26,6 +26,8 @@ public sealed class MarineOverlay : Overlay
     private static readonly SpriteSpecifier.Rsi FireteamOneRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft1");
     private static readonly SpriteSpecifier.Rsi FireteamTwoRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft2");
     private static readonly SpriteSpecifier.Rsi FireteamThreeRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft3");
+    private static readonly SpriteSpecifier.Rsi FireteamFourthRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft4");
+    private static readonly SpriteSpecifier.Rsi FireteamFifthRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ft5");
     private static readonly SpriteSpecifier.Rsi FireteamLeaderRsi = new(new ResPath("_RMC14/Interface/marine_hud.rsi"), "hudsquad_ftl");
 
     private readonly NpcFactionSystem _npcFaction;
@@ -85,6 +87,8 @@ public sealed class MarineOverlay : Overlay
         var fireteamOneIcon = _sprite.Frame0(FireteamOneRsi);
         var fireteamTwoIcon = _sprite.Frame0(FireteamTwoRsi);
         var fireteamThreeIcon = _sprite.Frame0(FireteamThreeRsi);
+        var fireteamFourthIcon = _sprite.Frame0(FireteamFourthRsi);
+        var fireteamFifthIcon = _sprite.Frame0(FireteamFifthRsi);
         var fireteamLeaderIcon = _sprite.Frame0(FireteamLeaderRsi);
 
         var marineQuery = _entity.AllEntityQueryEnumerator<MarineComponent, StatusIconComponent, SpriteComponent, TransformComponent>();
@@ -157,6 +161,8 @@ public sealed class MarineOverlay : Overlay
                     0 => fireteamOneIcon,
                     1 => fireteamTwoIcon,
                     2 => fireteamThreeIcon,
+                    3 => fireteamFourthIcon,
+                    4 => fireteamFifthIcon,
                     _ => null,
                 };
 
