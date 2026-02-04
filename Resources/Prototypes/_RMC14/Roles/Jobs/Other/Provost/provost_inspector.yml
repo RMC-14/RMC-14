@@ -77,7 +77,6 @@
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
     belt: RMCBeltHolsterPistolHandcannonFilled
-    back: CMSatchelSecurityFilledProvostInspector
     #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
 
