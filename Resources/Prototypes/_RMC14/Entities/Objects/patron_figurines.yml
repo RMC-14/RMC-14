@@ -2293,3 +2293,14 @@
     state: eats-the-crayons
   - type: PatronFigurine
     id: a825851d-a9e6-48db-b7d2-2307fef49ff5
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaliDarland
+  name: Kali Darland figurine
+  description: "This is a young martian felinid. All craftsmanship is of the highest quality.\nShe holds her rifle slung over her shoulder, striking a smug, triumphant pose. Ninth time's the charm, darling."
+  components:
+  - type: Sprite
+    state: kali_darland
+  - type: PatronFigurine
+    id: cf24b965-ac52-4b57-ae35-45739f636e62
