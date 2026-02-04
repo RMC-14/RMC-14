@@ -166,7 +166,7 @@
   - type: MarineIFF
   - type: UserIFF
     factions:
-      - FactionMarine
+    - FactionMarine
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
