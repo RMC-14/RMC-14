@@ -250,8 +250,20 @@ public sealed class RMCRepairableSystem : EntitySystem
             damageable.TotalDamage > FixedPoint2.Zero &&
             heal.GetTotal() != FixedPoint2.Zero)
         {
-            args.Repeat = true;
-            args.DoAfter.Args.Delay = TimeSpan.FromSeconds(GetWeldRepairDelaySeconds(args.User, damageable.TotalDamage));
+            if (args.Used is not { } used)
+                return;
+
+            var delay = TimeSpan.FromSeconds(GetWeldRepairDelaySeconds(args.User, damageable.TotalDamage));
+            var ev = new RMCRepairableDoAfterEvent();
+            var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, repairable, used: used)
+            {
+                NeedHand = true,
+                BreakOnMove = true,
+                BlockDuplicate = true,
+                DuplicateCondition = DuplicateConditions.SameEvent
+            };
+
+            _doAfter.TryStartDoAfter(doAfter);
         }
     }
 
