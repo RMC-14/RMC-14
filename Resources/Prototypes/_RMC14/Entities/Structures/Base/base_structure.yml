@@ -141,7 +141,8 @@
     messages: RMCWallMessages
   - type: RMCIntegrityExamine
   - type: RMCRepairable
-    delay: 2
+    heal: 1000
+    delay: 1
   - type: NailgunRepairable
   - type: RMCGenericExamine
     message: rmc-structure-wall-repair-examine-tip
