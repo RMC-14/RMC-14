@@ -14,8 +14,6 @@ public sealed class WeedboundWallSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
-    private readonly Dictionary<EntityUid, HashSet<EntityUid>> _structuresByWeed = new();
-    private readonly Dictionary<EntityUid, EntityUid> _weedByStructure = new();
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
 
     public override void Initialize()
@@ -26,7 +24,7 @@ public sealed class WeedboundWallSystem : EntitySystem
         SubscribeLocalEvent<WeedboundWallComponent, ComponentStartup>(OnWeedboundStartup);
         SubscribeLocalEvent<WeedboundWallComponent, MapInitEvent>(OnWeedboundMapInit);
         SubscribeLocalEvent<WeedboundWallComponent, EntityTerminatingEvent>(OnWeedboundTerminating);
-        SubscribeLocalEvent<EntityTerminatingEvent>(OnAnyEntityTerminating);
+        SubscribeLocalEvent<WeedboundWallComponent, ComponentRemove>(OnWeedboundRemove);
     }
 
     private void OnWeedboundStartup(Entity<WeedboundWallComponent> ent, ref ComponentStartup args)
@@ -44,10 +42,32 @@ public sealed class WeedboundWallSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        // Clean-slate: don't trust any serialized association.
+        ent.Comp.BoundWeedUid = null;
+
         var coords = Transform(ent.Owner).Coordinates;
         using var weeds = _rmcMap.GetAnchoredEntitiesEnumerator<XenoWeedsComponent>(coords);
         if (weeds.MoveNext(out var boundWeedUid) && Exists(boundWeedUid))
             RegisterWeedboundStructure(ent.Owner, boundWeedUid);
+    }
+
+    public void RebuildWeedboundForWeeds(EntityUid weedsUid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!_weedsQuery.TryComp(weedsUid, out var weedsComp))
+            return;
+
+        // Clean-slate: maps may serialize runtime associations; clear and rebuild.
+        weedsComp.WeedboundStructures.Clear();
+
+        var coords = Transform(weedsUid).Coordinates;
+        using var structures = _rmcMap.GetAnchoredEntitiesEnumerator<WeedboundWallComponent>(coords);
+        while (structures.MoveNext(out var structureUid) && Exists(structureUid))
+        {
+            RegisterWeedboundStructure(structureUid, weedsUid);
+        }
     }
 
     public void RegisterWeedboundStructure(EntityUid structure, EntityUid weed)
@@ -58,21 +78,32 @@ public sealed class WeedboundWallSystem : EntitySystem
         if (!Exists(structure) || !Exists(weed))
             return;
 
-        if (!_structuresByWeed.TryGetValue(weed, out var set))
+        if (!TryComp(structure, out WeedboundWallComponent? weedboundWall))
+            return;
+
+        if (!_weedsQuery.TryComp(weed, out var weedsComp))
+            return;
+
+        // If this structure was previously registered to a different weeds entity, clean that up first.
+        if (weedboundWall.BoundWeedUid is { } oldWeed && oldWeed != weed)
         {
-            set = new HashSet<EntityUid>();
-            _structuresByWeed[weed] = set;
+            UnregisterWeedboundStructure(structure, weedboundWall);
         }
 
-        set.Add(structure);
-        _weedByStructure[structure] = weed;
+        if (!weedsComp.WeedboundStructures.Contains(structure))
+            weedsComp.WeedboundStructures.Add(structure);
+
+        weedboundWall.BoundWeedUid = weed;
     }
 
     private void SpawnResinResidue(EntityUid structure, EntityCoordinates coords)
     {
-        var residueProto = TryComp(structure, out WeedboundWallComponent? weedbound) && weedbound.IsThickVariant
-            ? "XenoStickyResin"
-            : "XenoStickyResinWeak";
+        if (!TryComp(structure, out WeedboundWallComponent? weedbound))
+            return;
+
+        var residueProto = weedbound.IsThickVariant
+            ? weedbound.ThickResiduePrototype
+            : weedbound.ResiduePrototype;
 
         var residue = Spawn(residueProto, coords);
 
@@ -84,7 +115,8 @@ public sealed class WeedboundWallSystem : EntitySystem
             return;
         }
 
-        if (_weedByStructure.TryGetValue(structure, out var boundWeed) &&
+        if (TryComp(structure, out WeedboundWallComponent? wall) &&
+            wall.BoundWeedUid is { } boundWeed && Exists(boundWeed) &&
             TryComp(boundWeed, out HiveMemberComponent? weedHive) && weedHive.Hive != null)
         {
             _hive.SetSameHive(boundWeed, residue);
@@ -116,44 +148,79 @@ public sealed class WeedboundWallSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        if (!_weedByStructure.TryGetValue(ent.Owner, out var weed))
-            return;
-
-        if (!_structuresByWeed.TryGetValue(weed, out var set))
-            return;
-
-        set.Remove(ent.Owner);
-        if (set.Count == 0)
-            _structuresByWeed.Remove(weed);
-
-        _weedByStructure.Remove(ent.Owner);
+        UnregisterWeedboundStructure(ent.Owner, ent.Comp);
     }
 
-    private void OnAnyEntityTerminating(ref EntityTerminatingEvent args)
+    private void OnWeedboundRemove(Entity<WeedboundWallComponent> ent, ref ComponentRemove args)
     {
         if (_net.IsClient)
             return;
 
-        var uid = args.Entity.Owner;
+        UnregisterWeedboundStructure(ent.Owner, ent.Comp);
+    }
 
-        if (!_weedsQuery.HasComp(uid))
+    private void UnregisterWeedboundStructure(EntityUid structure, WeedboundWallComponent? weedbound = null)
+    {
+        if (!Resolve(structure, ref weedbound, false))
             return;
 
-        if (!_structuresByWeed.TryGetValue(uid, out var set))
+        var weed = weedbound.BoundWeedUid;
+        weedbound.BoundWeedUid = null;
+
+        if (weed is not { } weedUid || !Exists(weedUid))
             return;
 
-        foreach (var structure in set.ToArray())
+        if (!_weedsQuery.TryComp(weedUid, out var weeds))
+            return;
+
+        weeds.WeedboundStructures.Remove(structure);
+    }
+
+    public void HandleWeedsTerminating(EntityUid weedsUid, XenoWeedsComponent weedsComp)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (weedsComp.WeedboundStructures.Count == 0)
+            return;
+
+        foreach (var structure in weedsComp.WeedboundStructures.ToArray())
         {
             if (!Exists(structure))
                 continue;
+
+            // Defensive: WeedboundStructures is runtime bookkeeping and can become stale due to pooling/serialization.
+            // Never delete arbitrary entities unless they are actually weedbound to these weeds.
+            if (!TryComp(structure, out WeedboundWallComponent? weedbound) || weedbound.BoundWeedUid != weedsUid)
+            {
+                weedsComp.WeedboundStructures.Remove(structure);
+                continue;
+            }
 
             // If supporting weeds are destroyed, the weedbound structure collapses and leaves sticky resin.
             var coords = Transform(structure).Coordinates;
             SpawnResinResidue(structure, coords);
             QueueDel(structure);
-            _weedByStructure.Remove(structure);
         }
 
-        _structuresByWeed.Remove(uid);
+        weedsComp.WeedboundStructures.Clear();
+    }
+
+    public void HandleWeedsShutdown(EntityUid weedsUid, XenoWeedsComponent weedsComp)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Ensure structures don't keep a stale weed reference if weeds are removed first.
+        foreach (var structure in weedsComp.WeedboundStructures.ToArray())
+        {
+            if (!TryComp(structure, out WeedboundWallComponent? weedbound))
+                continue;
+
+            if (weedbound.BoundWeedUid == weedsUid)
+                weedbound.BoundWeedUid = null;
+        }
+
+        weedsComp.WeedboundStructures.Clear();
     }
 }

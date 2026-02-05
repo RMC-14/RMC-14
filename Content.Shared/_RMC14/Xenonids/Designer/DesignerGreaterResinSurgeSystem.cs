@@ -20,18 +20,6 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
 {
     private const float EffectSearchPaddingMultiplier = 2f;
 
-    private readonly record struct PendingSurge(
-        TimeSpan EndTime,
-        EntityCoordinates Origin,
-        EntityUid Grid,
-        float Range,
-        EntProtoId AnimationEffect,
-        EntProtoId WallPrototype,
-        TimeSpan BuildTime,
-        List<EntityCoordinates> TileCenters,
-        List<EntityUid> Effects
-    );
-
     [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -44,8 +32,6 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
 
-    private readonly Dictionary<EntityUid, PendingSurge> _pending = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<DesignerStrainComponent, DesignerGreaterResinSurgeActionEvent>(OnAction);
@@ -56,48 +42,26 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        if (!_net.IsServer || _pending.Count == 0)
+        if (!_net.IsServer)
             return;
 
         var now = _timing.CurTime;
-        List<EntityUid>? completed = null;
-        List<EntityUid>? removed = null;
-
-        foreach (var (uid, pending) in _pending)
+        var pendingQuery = EntityQueryEnumerator<DesignerGreaterResinSurgePendingComponent>();
+        while (pendingQuery.MoveNext(out var uid, out var pending))
         {
-            if (!Exists(uid))
+            if (!Exists(pending.Designer))
             {
-                removed ??= new List<EntityUid>(4);
-                removed.Add(uid);
+                CleanupEffects(pending);
+                QueueDel(uid);
                 continue;
             }
 
             if (now < pending.EndTime)
                 continue;
 
-            completed ??= new List<EntityUid>(4);
-            completed.Add(uid);
-        }
-
-        if (removed != null)
-        {
-            foreach (var uid in removed)
-            {
-                if (_pending.Remove(uid, out var pending))
-                    CleanupEffects(pending);
-            }
-        }
-
-        if (completed != null)
-        {
-            foreach (var uid in completed)
-            {
-                if (!_pending.Remove(uid, out var pending))
-                    continue;
-
-                CleanupEffects(pending);
-                CompleteSurge(uid, pending);
-            }
+            CleanupEffects(pending);
+            CompleteSurge(pending.Designer, pending);
+            QueueDel(uid);
         }
     }
 
@@ -114,8 +78,12 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
         }
 
         // One surge wind-up at a time.
-        if (_pending.ContainsKey(ent.Owner))
-            return;
+        var pendingQuery = EntityQueryEnumerator<DesignerGreaterResinSurgePendingComponent>();
+        while (pendingQuery.MoveNext(out _, out var pending))
+        {
+            if (pending.Designer == ent.Owner)
+                return;
+        }
 
         // Server-authoritative cooldown gate (action useDelay is UI-side).
         if (_timing.CurTime < ent.Comp.NextGreaterResinSurgeAt)
@@ -136,10 +104,9 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
             !TryComp<MapGridComponent>(gridId, out var grid) ||
             grid == null)
             return;
-
         // Determine what tiles are eligible at activation time (so user movement doesn't matter).
         var range = ent.Comp.GreaterResinSurgeRange;
-        var tileCenters = new List<EntityCoordinates>();
+        var tileCenters = new List<NetCoordinates>();
         foreach (var turf in _sharedMap.GetTilesIntersecting(gridId, grid,
                      Box2.CenteredAround(userCoords.Position, new(range * EffectSearchPaddingMultiplier, range * EffectSearchPaddingMultiplier)), false))
         {
@@ -168,7 +135,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
             }
 
             if (hasEligibleNode)
-                tileCenters.Add(tileCenter);
+                tileCenters.Add(GetNetCoordinates(tileCenter));
         }
 
         if (tileCenters.Count == 0)
@@ -189,7 +156,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
         {
             foreach (var tileCenter in tileCenters)
             {
-                var effect = Spawn(effectId, tileCenter);
+                var effect = Spawn(effectId, GetCoordinates(tileCenter));
                 effects.Add(effect);
                 if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(ent.Owner, out var netUser))
                 {
@@ -201,29 +168,35 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
             }
         }
 
-        _pending[ent.Owner] = new PendingSurge(
-            _timing.CurTime + ent.Comp.GreaterResinSurgeBuildTime,
-            userCoords,
-            gridId,
-            range,
-            ent.Comp.GreaterResinSurgeAnimationEffect,
-            ent.Comp.GreaterResinSurgeWallPrototype,
-            ent.Comp.GreaterResinSurgeBuildTime,
-            tileCenters,
-            effects
-        );
+        var pendingUid = Spawn(null, MapCoordinates.Nullspace);
+        var pendingComp = new DesignerGreaterResinSurgePendingComponent
+        {
+            Designer = ent.Owner,
+            EndTime = _timing.CurTime + ent.Comp.GreaterResinSurgeBuildTime,
+            Origin = GetNetCoordinates(userCoords),
+            Grid = gridId,
+            Range = range,
+            AnimationEffect = ent.Comp.GreaterResinSurgeAnimationEffect,
+            WallPrototype = ent.Comp.GreaterResinSurgeWallPrototype,
+            BuildTime = ent.Comp.GreaterResinSurgeBuildTime,
+            TileCenters = tileCenters,
+            Effects = effects,
+        };
+
+        AddComp(pendingUid, pendingComp, true);
 
         args.Handled = true;
     }
 
-    private void CompleteSurge(EntityUid user, PendingSurge pending)
+    private void CompleteSurge(EntityUid user, DesignerGreaterResinSurgePendingComponent pending)
     {
         if (!TryComp(user, out DesignerStrainComponent? designer))
             return;
 
         var affected = 0;
-        foreach (var tileCenter in pending.TileCenters)
+        foreach (var netTileCenter in pending.TileCenters)
         {
+            var tileCenter = GetCoordinates(netTileCenter);
             var nodesToConvert = new List<EntityUid>();
             using (var anchoredNodes = _rmcMap.GetAnchoredEntitiesEnumerator<DesignNodeComponent>(tileCenter))
             {
@@ -246,7 +219,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
                 continue;
 
             // Spawn after the enumerator is disposed to avoid modifying anchored entity collections mid-iteration.
-            var spawned = Spawn(designer.GreaterResinSurgeWallPrototype, tileCenter.SnapToGrid(EntityManager, _map));
+            var spawned = Spawn(pending.WallPrototype, tileCenter.SnapToGrid(EntityManager, _map));
             _hive.SetSameHive(user, spawned);
 
             foreach (var nodeUid in nodesToConvert)
@@ -262,7 +235,7 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("rmc-xeno-designer-greater-surge-success", ("count", affected)), user, user, PopupType.Small);
     }
 
-    private void CleanupEffects(PendingSurge pending)
+    private void CleanupEffects(DesignerGreaterResinSurgePendingComponent pending)
     {
         foreach (var effect in pending.Effects)
         {
@@ -276,7 +249,14 @@ public sealed class DesignerGreaterResinSurgeSystem : EntitySystem
         if (!_net.IsServer)
             return;
 
-        if (_pending.Remove(ent.Owner, out var pending))
+        var pendingQuery = EntityQueryEnumerator<DesignerGreaterResinSurgePendingComponent>();
+        while (pendingQuery.MoveNext(out var uid, out var pending))
+        {
+            if (pending.Designer != ent.Owner)
+                continue;
+
             CleanupEffects(pending);
+            QueueDel(uid);
+        }
     }
 }

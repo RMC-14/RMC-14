@@ -21,5 +21,5 @@ public sealed partial class DesignerRemoteThickenResinComponent : Component
     public float DoAfter = 1f;
 
     [DataField, AutoNetworkedField]
-    public float Range = 10f;
+    public float Range = 15f;
 }

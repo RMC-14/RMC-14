@@ -33,7 +33,9 @@ public sealed class RMCUpstreamTileAndPlatingCheck
             foreach (var file in files)
             {
                 var relative = Path.GetRelativePath(relativePath, file);
-                relativeFiles.Add(relative.Replace('\\', '/'));
+                relativeFiles.Add(relative
+                    .Replace(Path.DirectorySeparatorChar, ResPath.Separator)
+                    .Replace(Path.AltDirectorySeparatorChar, ResPath.Separator));
             }
 
             return relativeFiles;

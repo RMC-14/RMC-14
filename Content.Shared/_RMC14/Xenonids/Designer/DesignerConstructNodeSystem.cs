@@ -44,12 +44,6 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
     private EntityQuery<XenoComponent> _xenoQuery;
     private EntityQuery<XenoPlasmaComponent> _plasmaQuery;
 
-    private readonly HashSet<EntityUid> _buildingNodes = new();
-
-    private readonly Dictionary<EntityUid, ConstructNodeBuild> _constructBuilds = new();
-
-    private readonly record struct ConstructNodeBuild(EntityUid User, TimeSpan EndTime);
-
 
     public override void Initialize()
     {
@@ -58,59 +52,43 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
         SubscribeLocalEvent<DesignNodeComponent, ActivateInWorldEvent>(OnDesignNodeActivate);
         SubscribeLocalEvent<DesignNodeComponent, GettingInteractedWithAttemptEvent>(OnDesignNodeGettingInteractedWithAttempt);
-        SubscribeLocalEvent<DesignNodeComponent, EntityTerminatingEvent>(OnDesignNodeTerminating);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
 
-        if (!_net.IsServer || _constructBuilds.Count == 0)
+        if (!_net.IsServer)
             return;
 
         var now = _timing.CurTime;
-        List<(EntityUid Node, EntityUid User)>? completed = null;
-        List<EntityUid>? removed = null;
 
-        foreach (var (node, build) in _constructBuilds)
+        List<(EntityUid Node, EntityUid User)>? completed = null;
+        var buildQuery = EntityQueryEnumerator<DesignerConstructNodeBuildingComponent>();
+        while (buildQuery.MoveNext(out var node, out var build))
         {
-            if (!Exists(node))
-            {
-                removed ??= new List<EntityUid>(4);
-                removed.Add(node);
+            if (Deleted(node) || Terminating(node))
                 continue;
-            }
 
             if (now < build.EndTime)
                 continue;
-
-            removed ??= new List<EntityUid>(4);
-            removed.Add(node);
 
             completed ??= new List<(EntityUid, EntityUid)>(4);
             completed.Add((node, build.User));
         }
 
-        if (removed != null)
-        {
-            foreach (var node in removed)
-            {
-                _constructBuilds.Remove(node);
-            }
-        }
+        if (completed == null)
+            return;
 
-        if (completed != null)
+        foreach (var (node, user) in completed)
         {
-            foreach (var (node, user) in completed)
-            {
-                CompleteConstructNodeBuild(node, user);
-            }
+            CompleteConstructNodeBuild(node, user);
         }
     }
 
     private void OnDesignNodeGettingInteractedWithAttempt(Entity<DesignNodeComponent> node, ref GettingInteractedWithAttemptEvent args)
     {
-        if (_buildingNodes.Contains(node.Owner))
+        if (HasComp<DesignerConstructNodeBuildingComponent>(node.Owner))
             args.Cancelled = true;
     }
 
@@ -120,7 +98,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             return;
 
         // While the node is mid-build, it should not be interactable.
-        if (_buildingNodes.Contains(node.Owner))
+        if (HasComp<DesignerConstructNodeBuildingComponent>(node.Owner))
             return;
 
         var user = args.User;
@@ -168,23 +146,17 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
     private bool StartConstructNodeBuild(Entity<DesignNodeComponent> node, EntityUid user)
     {
-        if (!_buildingNodes.Add(node.Owner))
+        if (HasComp<DesignerConstructNodeBuildingComponent>(node.Owner))
             return false;
 
         if (!_plasmaQuery.TryComp(user, out var plasma) || !_xenoPlasma.TryRemovePlasmaPopup((user, plasma), node.Comp.ConstructPlasmaCost))
-        {
-            _buildingNodes.Remove(node.Owner);
             return false;
-        }
 
         // Lunge the activator towards the node
         PlayConstructNodeLunge(user, node.Owner);
 
         if (!TryComp(node.Owner, out TransformComponent? nodeTransform))
-        {
-            _buildingNodes.Remove(node.Owner);
             return false;
-        }
 
         var coords = nodeTransform.Coordinates;
         _audio.PlayPredicted(node.Comp.ConstructBuildSound, coords, user);
@@ -192,10 +164,19 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         if (!_net.IsServer)
             return true;
 
-        // Play the same construction animation used by normal xeno construction.
-        // The effect prototypes are provided by the node component (YAML-configurable).
+        // Determine build choices at activation time.
+        // (So they persist even if the user changes state during the wind-up.)
         var isThickVariant = CanBuildThickFromConstructNode(user);
 
+        var build = EnsureComp<DesignerConstructNodeBuildingComponent>(node.Owner);
+        build.User = user;
+        build.BuildTime = node.Comp.ConstructBuildTime;
+        build.EndTime = _timing.CurTime + node.Comp.ConstructBuildTime;
+        build.ThickVariant = isThickVariant;
+        Dirty(node.Owner, build);
+
+        // Play the same construction animation used by normal xeno construction.
+        // The effect prototypes are provided by the node component (YAML-configurable).
         var effectId = isThickVariant ? node.Comp.ConstructAnimationEffectThick : node.Comp.ConstructAnimationEffect;
         if (_prototype.HasIndex(effectId))
         {
@@ -208,8 +189,6 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
                 );
             }
         }
-
-        _constructBuilds[node.Owner] = new ConstructNodeBuild(user, _timing.CurTime + node.Comp.ConstructBuildTime);
 
         return true;
     }
@@ -235,8 +214,11 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
     private void CompleteConstructNodeBuild(EntityUid nodeUid, EntityUid user)
     {
-        _buildingNodes.Remove(nodeUid);
-        _constructBuilds.Remove(nodeUid);
+        var wasThickVariant = false;
+        if (TryComp(nodeUid, out DesignerConstructNodeBuildingComponent? build))
+            wasThickVariant = build.ThickVariant;
+
+        RemComp<DesignerConstructNodeBuildingComponent>(nodeUid);
 
         if (!TryComp(nodeUid, out DesignNodeComponent? nodeComp))
             return;
@@ -261,8 +243,9 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
             return;
         }
 
-        // Determine wall variant based on xeno components
-        var isThickVariant = CanBuildThickFromConstructNode(user);
+        // Determine wall variant based on the activation-time choice.
+        // Hive weeds always force thick regardless.
+        var isThickVariant = wasThickVariant;
 
         // If the construct node is on hive weeds, always build thick weedbound resin.
         if (!TryComp(nodeUid, out TransformComponent? nodeTransform))
@@ -282,12 +265,6 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
         EntityManager.DeleteEntity(nodeUid);
         _popup.PopupEntity("You infuse the node with plasma", spawned, PopupType.Small);
-    }
-
-    private void OnDesignNodeTerminating(Entity<DesignNodeComponent> node, ref EntityTerminatingEvent args)
-    {
-        _buildingNodes.Remove(node.Owner);
-        _constructBuilds.Remove(node.Owner);
     }
 
     // Some castes build thick walls/doors from construct nodes.

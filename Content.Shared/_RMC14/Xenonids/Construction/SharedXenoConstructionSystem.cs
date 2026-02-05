@@ -591,23 +591,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             {
                 nodeComp.BoundXeno = xeno.Owner;
                 if (TryComp(xeno.Owner, out DesignerStrainComponent? designerComp))
+                {
                     nodeComp.PlacedOrder = designerComp.NextDesignNodeOrder++;
+                    designerComp.DesignNodes.Add(structure);
+                }
 
                 Dirty(structure, nodeComp);
 
                 if (TryComp(xeno.Owner, out DesignerStrainComponent? designer2))
                 {
-                    var nodes = new List<(EntityUid Uid, int Order)>();
-                    var query = EntityQueryEnumerator<DesignNodeComponent>();
-                    while (query.MoveNext(out var uid, out var node))
+                    PruneDesignerNodeList(xeno.Owner, designer2);
+
+                    var nodes = new List<(EntityUid Uid, int Order)>(designer2.DesignNodes.Count);
+                    foreach (var uid in designer2.DesignNodes)
                     {
                         if (uid == structure)
                             continue;
 
-                        if (node.BoundXeno != xeno.Owner)
+                        if (!TryComp(uid, out DesignNodeComponent? otherNode))
                             continue;
 
-                        nodes.Add((uid, node.PlacedOrder));
+                        nodes.Add((uid, otherNode.PlacedOrder));
                     }
 
                     var total = nodes.Count + 1;
@@ -1663,7 +1667,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if (TryComp(xenoUid, out DesignerStrainComponent? designer))
         {
-            var count = GetDesignerNodeCount(xenoUid);
+            PruneDesignerNodeList(xenoUid, designer);
+            var count = designer.DesignNodes.Count;
             if (designer.CurrentDesignNodes != count)
             {
                 designer.CurrentDesignNodes = count;
@@ -1682,29 +1687,28 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private int GetDesignerNodeCount(EntityUid designerUid)
     {
-        var count = 0;
-        var query = EntityQueryEnumerator<DesignNodeComponent>();
-        while (query.MoveNext(out _, out var node))
-        {
-            if (node.BoundXeno == designerUid)
-                count++;
-        }
+        if (!TryComp(designerUid, out DesignerStrainComponent? designer))
+            return 0;
 
-        return count;
+        PruneDesignerNodeList(designerUid, designer);
+        return designer.DesignNodes.Count;
     }
 
     private EntityUid? GetOldestDesignerNode(EntityUid designerUid, EntityUid? exclude)
     {
+        if (!TryComp(designerUid, out DesignerStrainComponent? designer))
+            return null;
+
+        PruneDesignerNodeList(designerUid, designer);
+
         EntityUid? oldestUid = null;
         var oldestOrder = int.MaxValue;
-
-        var query = EntityQueryEnumerator<DesignNodeComponent>();
-        while (query.MoveNext(out var uid, out var node))
+        foreach (var uid in designer.DesignNodes)
         {
-            if (node.BoundXeno != designerUid)
+            if (exclude != null && uid == exclude)
                 continue;
 
-            if (exclude != null && uid == exclude)
+            if (!TryComp(uid, out DesignNodeComponent? node))
                 continue;
 
             if (node.PlacedOrder < oldestOrder)
@@ -1715,6 +1719,30 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         }
 
         return oldestUid;
+    }
+
+    private void PruneDesignerNodeList(EntityUid designerUid, DesignerStrainComponent designer)
+    {
+        if (designer.DesignNodes.Count == 0)
+            return;
+
+        List<EntityUid>? stale = null;
+        foreach (var nodeUid in designer.DesignNodes)
+        {
+            if (!TryComp(nodeUid, out DesignNodeComponent? node) || node.BoundXeno != designerUid)
+            {
+                stale ??= new List<EntityUid>(4);
+                stale.Add(nodeUid);
+            }
+        }
+
+        if (stale == null)
+            return;
+
+        foreach (var nodeUid in stale)
+        {
+            designer.DesignNodes.Remove(nodeUid);
+        }
     }
 
     private EntProtoId ResolveDesignerDesignNodeChoice(EntityUid user, EntProtoId choice)
@@ -1916,12 +1944,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         designer.NextRemoteThickenAt = _timing.CurTime + TimeSpan.FromSeconds(thickenChoice.Cooldown);
         Dirty(xeno.Owner, designer);
 
-        var ev = new DesignerRemoteThickenResinDoAfterEvent(thickenChoice.PlasmaCost);
-        var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, thickenChoice.DoAfter, ev, xeno.Owner, upgradeable.Owner)
+        var ev = new DesignerRemoteThickenResinDoAfterEvent(thickenChoice.PlasmaCost, GetNetEntity(upgradeable.Owner), thickenChoice.Range);
+        var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, thickenChoice.DoAfter, ev, xeno.Owner)
         {
             BreakOnMove = true,
-            DistanceThreshold = thickenChoice.Range,
-            DuplicateCondition = DuplicateConditions.SameEvent | DuplicateConditions.SameTarget,
+            DuplicateCondition = DuplicateConditions.SameEvent,
         };
 
         _doAfter.TryStartDoAfter(doAfter);

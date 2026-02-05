@@ -3,6 +3,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Robust.Shared.GameObjects;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using System.Collections.Generic;
 
 namespace Content.Shared._RMC14.Xenonids.Designer;
 
@@ -18,6 +19,10 @@ namespace Content.Shared._RMC14.Xenonids.Designer;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class DesignerStrainComponent : Component
 {
+    // Runtime bookkeeping for placed design nodes.
+    // Not networked: clients only need the count via CurrentDesignNodes.
+    public readonly HashSet<EntityUid> DesignNodes = new();
+
     [DataField, AutoNetworkedField]
     public int MaxDesignNodes = 36;
 

@@ -22,13 +22,28 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
 
     private void OnDoAfter(Entity<DesignerStrainComponent> ent, ref DesignerRemoteThickenResinDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || args.Target is not { } target)
+        if (args.Handled || args.Cancelled)
             return;
 
         args.Handled = true;
 
         if (_net.IsClient)
             return;
+
+        var target = GetEntity(args.Target);
+        if (!target.Valid || Deleted(target) || Terminating(target))
+            return;
+
+        if (args.Range > 0)
+        {
+            var origin = _transform.GetMoverCoordinates(ent.Owner);
+            var targetCoords = Transform(target).Coordinates;
+            if (!_transform.InRange(origin, targetCoords, args.Range))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-cant-reach-there"), ent.Owner, ent.Owner, PopupType.SmallCaution);
+                return;
+            }
+        }
 
         if (HasComp<WeedboundWallComponent>(target))
         {

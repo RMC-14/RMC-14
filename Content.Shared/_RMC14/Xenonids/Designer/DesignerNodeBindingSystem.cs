@@ -24,7 +24,7 @@ public sealed class DesignerNodeBindingSystem : EntitySystem
     {
         SubscribeLocalEvent<DesignNodeComponent, ComponentStartup>(OnNodeStartup);
         SubscribeLocalEvent<DesignNodeComponent, MapInitEvent>(OnNodeMapInit);
-        SubscribeLocalEvent<EntityTerminatingEvent>(OnAnyEntityTerminating);
+        SubscribeLocalEvent<DesignNodeComponent, EntityTerminatingEvent>(OnNodeTerminating);
     }
 
     private void OnNodeStartup(Entity<DesignNodeComponent> node, ref ComponentStartup args)
@@ -39,39 +39,42 @@ public sealed class DesignerNodeBindingSystem : EntitySystem
         _overlay.EnsureOverlay(node.Owner, node.Comp);
     }
 
-    private void OnAnyEntityTerminating(ref EntityTerminatingEvent args)
+    private void OnNodeTerminating(Entity<DesignNodeComponent> node, ref EntityTerminatingEvent args)
+    {
+        CleanupNode(node.Owner, node.Comp);
+    }
+
+    public void CleanupNode(EntityUid uid, DesignNodeComponent nodeComp)
     {
         if (_net.IsClient)
             return;
 
-        var uid = args.Entity.Owner;
+        _overlay.CleanupOverlay(uid, nodeComp);
 
-        // Clean up node bookkeeping when a node dies.
-        if (TryComp(uid, out DesignNodeComponent? nodeComp))
+        if (nodeComp.BoundXeno is { } placer && TryComp(placer, out DesignerStrainComponent? designer))
         {
-            _overlay.CleanupOverlay(uid, nodeComp);
+            designer.DesignNodes.Remove(uid);
+            designer.CurrentDesignNodes = designer.DesignNodes.Count;
+            Dirty(placer, designer);
 
-            if (nodeComp.BoundXeno is { } placer && TryComp(placer, out DesignerStrainComponent? designer))
-            {
-                designer.CurrentDesignNodes = CountDesignerNodes(placer, uid);
-                Dirty(placer, designer);
-
-                _ui.SetUiState(placer, XenoChooseStructureUI.Key,
-                    new XenoChooseStructureBuiState(true, designer.CurrentDesignNodes, designer.MaxDesignNodes));
-            }
-
-            if (nodeComp.BoundWeed is { } boundWeed)
-            {
-                if (_nodesByWeed.TryGetValue(boundWeed, out var set))
-                {
-                    set.Remove(uid);
-                    if (set.Count == 0)
-                        _nodesByWeed.Remove(boundWeed);
-                }
-            }
+            _ui.SetUiState(placer, XenoChooseStructureUI.Key,
+                new XenoChooseStructureBuiState(true, designer.CurrentDesignNodes, designer.MaxDesignNodes));
         }
 
-        if (!HasComp<XenoWeedsComponent>(uid))
+        if (nodeComp.BoundWeed is not { } boundWeed)
+            return;
+
+        if (_nodesByWeed.TryGetValue(boundWeed, out var set))
+        {
+            set.Remove(uid);
+            if (set.Count == 0)
+                _nodesByWeed.Remove(boundWeed);
+        }
+    }
+
+    public void CleanupWeeds(EntityUid uid)
+    {
+        if (_net.IsClient)
             return;
 
         if (!_nodesByWeed.TryGetValue(uid, out var nodes))
@@ -84,22 +87,6 @@ public sealed class DesignerNodeBindingSystem : EntitySystem
         }
 
         _nodesByWeed.Remove(uid);
-    }
-
-    private int CountDesignerNodes(EntityUid designerUid, EntityUid? exclude)
-    {
-        var count = 0;
-        var query = EntityQueryEnumerator<DesignNodeComponent>();
-        while (query.MoveNext(out var uid, out var node))
-        {
-            if (exclude != null && uid == exclude)
-                continue;
-
-            if (node.BoundXeno == designerUid)
-                count++;
-        }
-
-        return count;
     }
 
     private void BindToWeeds(Entity<DesignNodeComponent> node)
