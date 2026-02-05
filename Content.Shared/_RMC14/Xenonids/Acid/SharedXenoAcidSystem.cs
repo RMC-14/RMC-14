@@ -30,6 +30,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Physics;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared._RMC14.Chemistry;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -146,7 +147,6 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (CorrosiveAcidInstant)
         {
             delay = TimeSpan.Zero;
-            doAfterEvent.Time = TimeSpan.Zero;
         }
 
         var doAfter = new DoAfterArgs(EntityManager, xeno, delay, doAfterEvent, xeno, target)
@@ -255,6 +255,16 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         {
             if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
                 continue;
+
+            if (HasComp<GunComponent>(ent.Owner) &&
+                (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind))
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
+                    ent.Owner,
+                    PopupType.SmallCaution);
+                return;
+            }
 
             RemoveAcid(ent.Owner);
             break;
@@ -392,11 +402,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
 
-            var ev = new BeforeMeltedEvent();
-            RaiseLocalEvent(uid, ref ev);
-
             if (TryConsumeGunSecondWind(uid))
                 continue;
+
+            var ev = new BeforeMeltedEvent();
+            RaiseLocalEvent(uid, ref ev);
 
             if (_acidHole.TryCreateHoleFromMelt(uid))
             {

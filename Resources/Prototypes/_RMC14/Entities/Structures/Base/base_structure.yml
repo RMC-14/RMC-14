@@ -143,6 +143,11 @@
   - type: RMCRepairable
     delay: 2
   - type: NailgunRepairable
+  - type: RMCGenericExamine
+    message: rmc-structure-wall-repair-examine-tip
+    whitelist:
+      components:
+      - Marine
   - type: Corrodible
     isCorrodible: true
     structure: true
