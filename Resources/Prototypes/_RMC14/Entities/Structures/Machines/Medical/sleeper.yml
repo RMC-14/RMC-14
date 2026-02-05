@@ -144,16 +144,9 @@
     #- RMCAlkysine
     - CMImidazoline
     emergencyChemicals:
-    - CMInaprovaline
-    #- RMCTramadol
-    - CMDylovene
-    - CMDexalinPlus
-    - CMTricordrazine
     #- RMCOxycodone
     - CMBicaridine
     - CMKelotane
     - CMMeralyne
     - CMDermaline
-    #- RMCAlkysine
-    - CMImidazoline
     dialysisAmount: 8
