@@ -83,6 +83,16 @@
   - type: NpcFactionMember
     factions:
     - UNMC
+  - type: HTN
+    rootTask:
+      task: RMCTurretCompoundLZ
+    blackboard:
+      SoundTargetInLOS: !type:SoundPathSpecifier
+        path: /Audio/Effects/double_beep.ogg
+      VisionRadius: !type:Single
+        10.0
+      AggroVisionRadius: !type:Single
+        10.0
   - type: TimedDespawnOnLanding
   - type: MarineIFF
   - type: SleepNPC
@@ -122,6 +132,39 @@
     - !type:HTNCompoundTask
       task: IdleSpinCompound
 
+- type: htnCompound
+  id: RMCTurretCompoundLZ
+  branches:
+  - tasks:
+    - !type:HTNPrimitiveTask
+      operator: !type:UtilityOperator
+        proto: RMCNearbyGunTargetsLZ
+
+    - !type:HTNPrimitiveTask
+      preconditions:
+      - !type:KeyExistsPrecondition
+        key: Target
+      - !type:TargetInRangePrecondition
+        targetKey: Target
+        # TODO: Non-scuffed
+        rangeKey: RangedRange
+      - !type:TargetInLOSPrecondition
+        targetKey: Target
+        rangeKey: RangedRange
+      operator: !type:GunOperator
+        targetKey: Target
+        requireLOS: true
+        targetState: Critical
+      services:
+      - !type:UtilityService
+        id: RangedService
+        proto: RMCNearbyGunTargetsLZ
+        key: Target
+
+  - tasks:
+    - !type:HTNCompoundTask
+      task: IdleSpinCompound
+
 - type: utilityQuery
   id: RMCNearbyGunTargets
   query:
@@ -139,5 +182,23 @@
   - !type:CanFaceCon
     curve: !type:BoolCurve
   - !type:TargetNotBurrowedCon
+    curve: !type:BoolCurve
+
+# LZ turrets target burrowed entities
+- type: utilityQuery
+  id: RMCNearbyGunTargetsLZ
+  query:
+  - !type:NearbyHostilesQuery
+  considerations:
+  - !type:TargetIsNotDeadCon
+    curve: !type:BoolCurve
+  - !type:TargetDistanceCon
+    curve: !type:PresetCurve
+      preset: TargetDistance
+  - !type:TargetAccessibleCon
+    curve: !type:BoolCurve
+  - !type:TargetInLOSOrCurrentCon
+    curve: !type:BoolCurve
+  - !type:CanFaceCon
     curve: !type:BoolCurve
 
