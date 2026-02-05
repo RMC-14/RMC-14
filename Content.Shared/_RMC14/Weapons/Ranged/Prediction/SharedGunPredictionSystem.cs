@@ -39,7 +39,7 @@ public abstract class SharedGunPredictionSystem : EntitySystem
         gun.Target = GetEntity(target);
 #pragma warning restore RA0002
         if (continuous)
-            gun.ShotCounter = 0;
+            _gun.ResetShotCounter(ent, gun);
         return _gun.AttemptShoot(user.Value, ent, gun, projectiles, session);
     }
 }

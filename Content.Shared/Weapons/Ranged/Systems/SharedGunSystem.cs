@@ -218,6 +218,15 @@ public abstract partial class SharedGunSystem : EntitySystem
         DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
     }
 
+    public void ResetShotCounter(EntityUid uid, GunComponent gun)
+    {
+        if (gun.ShotCounter == 0)
+            return;
+
+        gun.ShotCounter = 0;
+        DirtyField(uid, gun, nameof(GunComponent.ShotCounter));
+    }
+
     // RMC14 Needed to check if the attempted shot actually shot any projectiles.
     /// <summary>
     ///     Attempts to shoot at the target coordinates. Resets the shot counter after every shot.
