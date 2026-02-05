@@ -1,0 +1,68 @@
+- type: entity
+  id: RMCSkillPresetEIAFParatrooper
+  name: EIAF - Paratrooper
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SkillPreset
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillConstruction: 1
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillMedical: 1
+        RMCSkillPolice: 0 #RMC Change: Should be 2
+        RMCSkillVehicles: 1
+        
+- type: entity
+  parent: RMCSkillPresetEIAFParatrooper
+  id: RMCSkillPresetEIAFPilot
+  name: EIAF - Paratrooper - Pilot
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SkillPreset
+      skills:
+        RMCSkillPilot: 2
+        
+- type: entity
+  parent: RMCSkillPresetEIAFParatrooper
+  id: RMCSkillPresetEIAFEngineer
+  name: EIAF - Paratrooper - Engineer
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SkillPreset
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillPowerLoader: 1
+        
+- type: entity
+  parent: RMCSkillPresetEIAFParatrooper
+  id: RMCSkillPresetEIAFMedic
+  name: EIAF - Paratrooper - Medic
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SkillPreset
+      skills:
+        RMCSkillFireman: 3
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        
+- type: entity
+  parent: RMCSkillPresetEIAFParatrooper
+  id: RMCSkillPresetEIAFLeader
+  name: EIAF - Paratrooper - Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SkillPreset
+      skills:
+        RMCSkillFireman: 3
+        RMCSkillEngineer: 2
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillPilot: 1
+        RMCSkillIntel: 1
+        
