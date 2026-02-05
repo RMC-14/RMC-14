@@ -87,7 +87,7 @@
 - type: tile
   parent: RMCFloorVehicleInteriorBase
   id: RMCFloorVehicleInteriorWithBars
-  sprite: "/Textures/Tiles/vehicle_interior.rsi/with bars.png"
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/with_bars.png"
 
 - type: tile
   parent: RMCFloorVehicleInteriorBase
@@ -247,7 +247,7 @@
 - type: tile
   parent: RMCFloorVehicleInteriorBase
   id: RMCFloorVehicleInteriorDarkType
-  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark type.png"
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_type.png"
 
 - type: tile
   parent: RMCFloorVehicleInteriorBase
@@ -332,7 +332,7 @@
 - type: tile
   parent: RMCFloorVehicleInteriorBase
   id: RMCFloorVehicleInteriorDarkTypeWithBars
-  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark type with bars.png"
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_type_with_bars.png"
 
 - type: tile
   parent: RMCFloorVehicleInteriorBase
@@ -492,7 +492,7 @@
 - type: tile
   parent: RMCFloorVehicleInteriorBase
   id: RMCFloorVehicleInteriorMedType
-  sprite: "/Textures/Tiles/vehicle_interior.rsi/med type.png"
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/med_type.png"
 
 - type: tile
   parent: RMCFloorVehicleInteriorBase

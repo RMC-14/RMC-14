@@ -56,7 +56,7 @@
       "name": "floor_0_1_15"
     },
     {
-      "name": "with bars"
+      "name": "with_bars"
     },
     {
       "name": "floor_1"
@@ -152,7 +152,7 @@
       "name": "floor_1_14"
     },
     {
-      "name": "dark type"
+      "name": "dark_type"
     },
     {
       "name": "floor_2"
@@ -203,7 +203,7 @@
       "name": "floor_2_15"
     },
     {
-      "name": "dark type with bars"
+      "name": "dark_type_with_bars"
     },
     {
       "name": "floor_3"
@@ -299,7 +299,7 @@
       "name": "floor_3_14"
     },
     {
-      "name": "med type"
+      "name": "med_type"
     },
     {
       "name": "dark_sterile"
