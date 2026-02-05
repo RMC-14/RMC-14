@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/05/2026 04:31:35
+  time: 02/05/2026 05:17:50
   entityCount: 9074
 maps:
 - 1
@@ -32989,6 +32989,24 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 19,98.5
       parent: 1
+- proto: RMCLockerFridgeDry
+  entities:
+  - uid: 5146
+    components:
+    - type: Transform
+      pos: -24.5,25.5
+      parent: 1
+    missingComponents:
+    - AccessReader
+- proto: RMCLockerFridgeGroceries
+  entities:
+  - uid: 5210
+    components:
+    - type: Transform
+      pos: -23.5,25.5
+      parent: 1
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerFridgeMeat
   entities:
   - uid: 3767
@@ -32996,6 +33014,8 @@ entities:
     - type: Transform
       pos: -27.5,31.5
       parent: 1
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerFridgeOrganic
   entities:
   - uid: 3768
@@ -33003,6 +33023,8 @@ entities:
     - type: Transform
       pos: -27.5,30.5
       parent: 1
+    missingComponents:
+    - AccessReader
 - proto: RMCLockerSmartGunOperatorSPPOne
   entities:
   - uid: 3769
@@ -41202,11 +41224,6 @@ entities:
     - type: Transform
       pos: -22.5,28.5
       parent: 1
-  - uid: 5146
-    components:
-    - type: Transform
-      pos: -23.5,25.5
-      parent: 1
   - uid: 5147
     components:
     - type: Transform
@@ -41559,11 +41576,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,30.5
-      parent: 1
-  - uid: 5210
-    components:
-    - type: Transform
-      pos: -24.396786,25.471792
       parent: 1
   - uid: 5211
     components:
