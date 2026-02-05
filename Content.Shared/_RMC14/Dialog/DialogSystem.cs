@@ -127,21 +127,7 @@ public sealed class DialogSystem : EntitySystem
             return text.Length;
         }
 
-        var length = 0;
-        var previousSpace = false;
-
-        foreach (var ch in text)
-        {
-            var isSpace = ch == ' ';
-
-            if (isSpace && previousSpace)
-                continue;
-
-            length++;
-            previousSpace = isSpace;
-        }
-
-        return length;
+        return AppendSmartChars(text, null, int.MaxValue);
     }
 
     public string TrimToLimit(ReadOnlySpan<char> text, int maxLength, bool smartCheck = false)
@@ -158,45 +144,53 @@ public sealed class DialogSystem : EntitySystem
         }
 
         var builder = new StringBuilder(text.Length);
+        AppendSmartChars(text, builder, maxLength);
+        return builder.ToString();
+    }
+
+    private static int AppendSmartChars(ReadOnlySpan<char> text, StringBuilder? builder, int maxLength)
+    {
         var length = 0;
+        var previousChar = '\0';
+        var hasPrevious = false;
         var consecutiveSpaces = 0;
-        var previousSpace = false;
+        var consecutivePunctuation = 0;
+        var consecutiveSymbols = 0;
+        var consecutiveSame = 0;
 
         foreach (var ch in text)
         {
             var isSpace = ch == ' ';
+            var isPunctuation = char.IsPunctuation(ch);
+            var isSymbol = char.IsSymbol(ch);
 
-            if (isSpace)
-            {
-                if (previousSpace)
-                {
-                    consecutiveSpaces++;
-                    // Skip 4th and subsequent consecutive spaces
-                    if (consecutiveSpaces >= 3)
-                        continue;
-                }
-                else
-                {
-                    consecutiveSpaces = 1;
-                }
-            }
+            if (hasPrevious && ch == previousChar)
+                consecutiveSame++;
             else
+                consecutiveSame = 1;
+
+            consecutiveSpaces = isSpace ? consecutiveSpaces + 1 : 0;
+            consecutivePunctuation = isPunctuation ? consecutivePunctuation + 1 : 0;
+            consecutiveSymbols = isSymbol ? consecutiveSymbols + 1 : 0;
+
+            var skip = consecutiveSpaces > 1
+                || consecutiveSame > 3
+                || consecutivePunctuation > 3
+                || consecutiveSymbols > 3;
+
+            if (!skip)
             {
-                consecutiveSpaces = 0;
+                if (length >= maxLength)
+                    break;
+
+                length++;
+                builder?.Append(ch);
             }
 
-            var countsTowardsLimit = !(isSpace && previousSpace);
-
-            if (countsTowardsLimit && length >= maxLength)
-                break;
-
-            if (countsTowardsLimit)
-                length++;
-
-            builder.Append(ch);
-            previousSpace = isSpace;
+            hasPrevious = true;
+            previousChar = ch;
         }
 
-        return builder.ToString();
+        return length;
     }
 }

@@ -110,4 +110,4 @@ rmc-ui-options-chat-squad-color-mode = Colorize names of the speaker by squads
 
 # Dialog input
 rmc-dialog-input-placeholder-default = Enter text
-rmc-dialog-input-placeholder-smart-check = More than 3 consecutive spaces will be trimmed
+rmc-dialog-input-placeholder-smart-check = Ignored characters aren’t counted and will be trimmed. If there are any, the length counter turns red.
