@@ -98,7 +98,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         TemperatureBar.Value = state.BodyTemperature;
         TemperatureBarText.Text = $"{tempCelsius:F0}ºC, {tempFahrenheit:F0}ºF";
 
-        TemperatureBar.Modulate = tempCelsius switch
+        TemperatureBar.Modulate = tempCelsius switch // TODO RMC14 species-specific temperatureSuitability thresholds?
         {
             >= 36 and <= 38 => Color.FromHex("#00AA00"), // Normal
             >= 34 and < 36 or > 38 and <= 40 => Color.FromHex("#AAAA00"), // Mild hypo/hyperthermia
