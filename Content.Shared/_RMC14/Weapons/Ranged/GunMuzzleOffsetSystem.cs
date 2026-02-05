@@ -10,7 +10,6 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<GunMuzzleOffsetComponent, AttemptShootEvent>(OnAttemptShoot);
@@ -25,10 +24,12 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             return;
 
         var baseUid = ent.Owner;
+        EntityUid? containerOwner = null;
         if (ent.Comp.UseContainerOwner &&
             _container.TryGetContainingContainer((ent.Owner, null), out var container))
         {
             baseUid = container.Owner;
+            containerOwner = container.Owner;
         }
 
         var baseCoords = _transform.GetMoverCoordinates(baseUid);
@@ -37,17 +38,18 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
         var fromCoords = rotateOffset
             ? baseCoords.Offset(baseRotation.RotateVec(offset))
             : baseCoords.Offset(offset);
-
+        var muzzleRotation = baseRotation;
         if (ent.Comp.MuzzleOffset != Vector2.Zero)
         {
-            var muzzleRotation = baseRotation;
             if (ent.Comp.UseAimDirection && args.ToCoordinates != null)
             {
                 var pivotMap = _transform.ToMapCoordinates(fromCoords);
                 var targetMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);
                 var direction = targetMap.Position - pivotMap.Position;
                 if (direction.LengthSquared() > 0.0001f)
+                {
                     muzzleRotation = direction.ToWorldAngle() + ent.Comp.AngleOffset;
+                }
             }
 
             fromCoords = fromCoords.Offset(muzzleRotation.RotateVec(ent.Comp.MuzzleOffset));

@@ -18,7 +18,6 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
     {
         base.Open();
 
-        Logger.Info($"[RMCVehicleWeapons:UI] Open Owner={EntMan.ToPrettyString(Owner)}", Direction.South);
         _menu = new RMCVehicleWeaponsMenu();
         _menu.OnClose += Close;
 
@@ -28,6 +27,7 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
 
         _menu.OnSelect += slotId => SendMessage(new RMCVehicleWeaponsSelectMessage(slotId));
         _menu.OnToggleStabilization += enabled => SendMessage(new RMCVehicleWeaponsStabilizationMessage(enabled));
+        _menu.OnToggleAutoTurret += enabled => SendMessage(new RMCVehicleWeaponsAutoModeMessage(enabled));
         _menu.OpenCenteredAt(new Vector2(0.1f, 0.9f));
     }
 
@@ -38,7 +38,6 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
         if (!disposing)
             return;
 
-        Logger.Info($"[RMCVehicleWeapons:UI] Dispose Owner={EntMan.ToPrettyString(Owner)}", Direction.South);
         if (_menu != null)
             _menu.OnClose -= Close;
 
@@ -52,11 +51,14 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
 
         if (state is not RMCVehicleWeaponsUiState weaponsState)
         {
-            Logger.Info($"[RMCVehicleWeapons:UI] UpdateState unexpected state {state?.GetType().Name ?? "null"}", Direction.South);
             return;
         }
 
-        Logger.Info($"[RMCVehicleWeapons:UI] UpdateState entries={weaponsState.Hardpoints.Count}", Direction.South);
-        _menu?.Update(weaponsState.Hardpoints, weaponsState.CanToggleStabilization, weaponsState.StabilizationEnabled);
+        _menu?.Update(
+            weaponsState.Hardpoints,
+            weaponsState.CanToggleStabilization,
+            weaponsState.StabilizationEnabled,
+            weaponsState.CanToggleAuto,
+            weaponsState.AutoEnabled);
     }
 }

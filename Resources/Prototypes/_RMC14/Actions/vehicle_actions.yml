@@ -7,3 +7,13 @@
     event: !type:RMCVehicleToggleViewActionEvent
   - type: Action
     itemIconStyle: BigItem
+
+- type: entity
+  id: ActionRMCVehicleDeploy
+  name: Deploy Vehicle
+  description: Deploy or retract the vehicle.
+  components:
+  - type: InstantAction
+    event: !type:RMCVehicleDeployActionEvent
+  - type: Action
+    itemIconStyle: BigItem

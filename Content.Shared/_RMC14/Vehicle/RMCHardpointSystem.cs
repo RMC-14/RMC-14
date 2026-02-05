@@ -23,7 +23,9 @@ using Content.Shared.Interaction;
 using Content.Shared.Examine;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Utility;
+using Content.Shared.Weapons.Ranged.Components;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -46,6 +48,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private readonly SharedGunSystem _guns = default!;
 
     public override void Initialize()
     {
@@ -114,6 +117,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         {
             Log.Info($"[rmc-hardpoints] Inserted: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
         }
+
+        if (TryComp(args.Entity, out GunComponent? gun))
+            _guns.RefreshModifiers((args.Entity, gun));
 
         RefreshCanRun(ent.Owner);
         UpdateHardpointUi(ent.Owner, ent.Comp);

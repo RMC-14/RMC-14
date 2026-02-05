@@ -19,8 +19,10 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 {
     public event Action<string>? OnSelect;
     public event Action<bool>? OnToggleStabilization;
+    public event Action<bool>? OnToggleAutoTurret;
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
     private bool _suppressStabilization;
+    private bool _suppressAuto;
 
     public RMCVehicleWeaponsMenu()
     {
@@ -33,15 +35,34 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 
             OnToggleStabilization?.Invoke(args.Pressed);
         };
+
+        AutoTurretToggle.OnToggled += args =>
+        {
+            if (_suppressAuto)
+                return;
+
+            OnToggleAutoTurret?.Invoke(args.Pressed);
+        };
     }
 
-    public void Update(IReadOnlyList<RMCVehicleWeaponsUiEntry> hardpoints, bool canToggleStabilization, bool stabilizationEnabled)
+    public void Update(
+        IReadOnlyList<RMCVehicleWeaponsUiEntry> hardpoints,
+        bool canToggleStabilization,
+        bool stabilizationEnabled,
+        bool canToggleAuto,
+        bool autoEnabled)
     {
         _suppressStabilization = true;
         StabilizationToggle.Disabled = !canToggleStabilization;
         StabilizationToggle.Pressed = stabilizationEnabled;
         StabilizationToggle.Text = stabilizationEnabled ? "Stabilization: On" : "Stabilization: Off";
         _suppressStabilization = false;
+
+        _suppressAuto = true;
+        AutoTurretToggle.Disabled = !canToggleAuto;
+        AutoTurretToggle.Pressed = autoEnabled;
+        AutoTurretToggle.Text = autoEnabled ? "Auto Turret: On" : "Auto Turret: Off";
+        _suppressAuto = false;
 
         WeaponList.DisposeAllChildren();
 

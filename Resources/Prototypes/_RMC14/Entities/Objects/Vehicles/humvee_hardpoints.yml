@@ -94,9 +94,18 @@
     - FullAuto
     soundGunshot: /Audio/Effects/Vehicle/sound_weapons_humvee_cannon.ogg
     cameraRecoilScalar: 0
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: CMCartridgeSentry10x50mm
+    proto: RMCVehicleCartridgeSentry10x50mm
     capacity: 200
   - type: RMCVehicleHardpointAmmo
     magazineSize: 200
@@ -107,8 +116,9 @@
     bulletType: RMCVehicleAmmoBoxFrontal
   - type: GunMuzzleOffset
     offset: "0,0"
-    muzzleOffset: "0,1.2"
+    muzzleOffset: "0,-1.2"
     useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: humveecannon_0
 
@@ -143,8 +153,11 @@
     - SemiAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
   - type: OnShootTriggerAmmoTimer
-    delay: 0.2
+    delay: 0.2FV
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMC40MMGrenadeM74AGMSVehicle
@@ -156,10 +169,6 @@
     arc: 120
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxGrenadeLauncher
-  - type: GunMuzzleOffset
-    offset: "0,0"
-    muzzleOffset: "0,0.5"
-    useAimDirection: true
 
 - type: entity
   parent: RMCVehicleHumveeHardpointBase

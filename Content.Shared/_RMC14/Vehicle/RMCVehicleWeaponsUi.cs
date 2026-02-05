@@ -74,15 +74,21 @@ public sealed class RMCVehicleWeaponsUiState : BoundUserInterfaceState
     public readonly List<RMCVehicleWeaponsUiEntry> Hardpoints;
     public readonly bool CanToggleStabilization;
     public readonly bool StabilizationEnabled;
+    public readonly bool CanToggleAuto;
+    public readonly bool AutoEnabled;
 
     public RMCVehicleWeaponsUiState(
         List<RMCVehicleWeaponsUiEntry> hardpoints,
         bool canToggleStabilization,
-        bool stabilizationEnabled)
+        bool stabilizationEnabled,
+        bool canToggleAuto,
+        bool autoEnabled)
     {
         Hardpoints = hardpoints;
         CanToggleStabilization = canToggleStabilization;
         StabilizationEnabled = stabilizationEnabled;
+        CanToggleAuto = canToggleAuto;
+        AutoEnabled = autoEnabled;
     }
 }
 
@@ -103,6 +109,17 @@ public sealed class RMCVehicleWeaponsStabilizationMessage : BoundUserInterfaceMe
     public readonly bool Enabled;
 
     public RMCVehicleWeaponsStabilizationMessage(bool enabled)
+    {
+        Enabled = enabled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCVehicleWeaponsAutoModeMessage : BoundUserInterfaceMessage
+{
+    public readonly bool Enabled;
+
+    public RMCVehicleWeaponsAutoModeMessage(bool enabled)
     {
         Enabled = enabled;
     }

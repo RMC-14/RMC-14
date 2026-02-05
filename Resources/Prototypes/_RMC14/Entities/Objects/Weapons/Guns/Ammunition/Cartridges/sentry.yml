@@ -12,6 +12,16 @@
     proto: CMBulletSentry10x50mm
 
 - type: entity
+  parent: CMCartridgeSentry10x50mm
+  id: RMCVehicleCartridgeSentry10x50mm
+  name: cartridge (10x50mm)
+  components:
+  - type: CartridgeAmmo
+    proto: CMBulletSentry10x50mm
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
   parent: CMBaseCartridgeRifle
   id: RMCCartridgeSentry
   name: cartridge (10x28mm)

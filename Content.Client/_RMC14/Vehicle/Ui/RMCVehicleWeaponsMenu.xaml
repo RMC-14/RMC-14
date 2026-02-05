@@ -16,7 +16,10 @@
         <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
                 <Label Text="Vehicle Weapons" StyleClasses="LabelHeading"/>
-                <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization" HorizontalExpand="True" HorizontalAlignment="Right"/>
+                <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True" HorizontalAlignment="Right">
+                    <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="Auto Turret" HorizontalAlignment="Right"/>
+                    <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization" HorizontalAlignment="Right"/>
+                </BoxContainer>
             </BoxContainer>
 
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">

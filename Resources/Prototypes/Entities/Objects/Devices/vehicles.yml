@@ -1338,6 +1338,15 @@
   name: humvee (arc)
   description: A humvee configured for ARC interior layout.
   components:
+  - type: RMCVehicleDeployable
+    deployTime: 5
+    undeployTime: 5
+    autoTargetRange: 20
+    autoTargetCooldown: 0.2
+    autoTurretEnabled: true
+  - type: RMCVehicleDeployGatedHardpoints
+    blockedHardpoints:
+    - Cannon
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
     enterDoAfter: 1.0

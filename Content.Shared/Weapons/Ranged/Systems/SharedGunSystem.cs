@@ -183,6 +183,16 @@ public abstract partial class SharedGunSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Sets the current gun target, returning the previous value.
+    /// </summary>
+    public EntityUid? SwapTarget(Entity<GunComponent> gun, EntityUid? target)
+    {
+        var previous = gun.Comp.Target;
+        gun.Comp.Target = target;
+        return previous;
+    }
+
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
         if (TryComp(entity, out VehiclePortGunOperatorComponent? portGunOperator) &&

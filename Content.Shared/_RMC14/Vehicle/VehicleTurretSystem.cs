@@ -393,6 +393,75 @@ public sealed class VehicleTurretSystem : EntitySystem
         return false;
     }
 
+    public bool TryAimAtTarget(EntityUid turretUid, EntityUid target, out EntityCoordinates targetCoords)
+    {
+        targetCoords = default;
+
+        if (!TryResolveRotationTarget(turretUid, out var targetUid, out var targetTurret))
+            return false;
+
+        if (!targetTurret.RotateToCursor)
+            return false;
+
+        if (!TryGetVehicle(targetUid, out var vehicle))
+            return false;
+
+        if (!TryGetTurretOrigin(targetUid, targetTurret, out var originCoords))
+            return false;
+
+        targetCoords = Transform(target).Coordinates;
+        var originMap = _transform.ToMapCoordinates(originCoords);
+        var targetMap = _transform.ToMapCoordinates(targetCoords);
+        var direction = targetMap.Position - originMap.Position;
+        if (direction.LengthSquared() <= 0.0001f)
+            return false;
+
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var desiredRotation = targetTurret.StabilizedRotation
+            ? direction.ToWorldAngle()
+            : (direction.ToWorldAngle() - vehicleRot).Reduced();
+
+        targetTurret.TargetRotation = desiredRotation;
+        if (targetTurret.RotationSpeed <= 0f)
+        {
+            var desiredLocal = targetTurret.StabilizedRotation
+                ? (desiredRotation - vehicleRot).Reduced()
+                : desiredRotation;
+            targetTurret.WorldRotation = desiredLocal;
+        }
+
+        Dirty(targetUid, targetTurret);
+        UpdateTurretTransforms(targetUid, targetTurret, vehicle, targetUid, targetTurret);
+        return true;
+    }
+
+    public bool TrySetTargetRotationWorld(EntityUid turretUid, Angle worldRotation)
+    {
+        if (!TryResolveRotationTarget(turretUid, out var targetUid, out var targetTurret))
+            return false;
+
+        if (!TryGetVehicle(targetUid, out var vehicle))
+            return false;
+
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var desiredRotation = targetTurret.StabilizedRotation
+            ? worldRotation
+            : (worldRotation - vehicleRot).Reduced();
+
+        targetTurret.TargetRotation = desiredRotation;
+        if (targetTurret.RotationSpeed <= 0f)
+        {
+            var desiredLocal = targetTurret.StabilizedRotation
+                ? (desiredRotation - vehicleRot).Reduced()
+                : desiredRotation;
+            targetTurret.WorldRotation = desiredLocal;
+        }
+
+        Dirty(targetUid, targetTurret);
+        UpdateTurretTransforms(targetUid, targetTurret, vehicle, targetUid, targetTurret);
+        return true;
+    }
+
     private void InitializeRotation(EntityUid turretUid, VehicleTurretComponent turret, EntityUid vehicle)
     {
         if (_net.IsClient)
@@ -486,6 +555,27 @@ public sealed class VehicleTurretSystem : EntitySystem
             return;
 
         var vehicleRot = _transform.GetWorldRotation(vehicle);
+
+        if (args.ToCoordinates != null &&
+            TryGetTurretOrigin(targetUid, targetTurret, out var originCoords))
+        {
+            var originMap = _transform.ToMapCoordinates(originCoords);
+            var targetMap = _transform.ToMapCoordinates(args.ToCoordinates.Value);
+            var direction = targetMap.Position - originMap.Position;
+            if (direction.LengthSquared() > 0.0001f)
+            {
+                var desiredWorldRotation = direction.ToWorldAngle();
+                var currentWorldRotation = (targetTurret.WorldRotation + vehicleRot).Reduced();
+                var desiredDelta = Angle.ShortestDistance(currentWorldRotation, desiredWorldRotation);
+                if (Math.Abs(desiredDelta.Theta) > MathHelper.DegreesToRadians(FireAlignmentToleranceDegrees))
+                {
+                    args.Cancelled = true;
+                    args.ResetCooldown = true;
+                    return;
+                }
+            }
+        }
+
         var worldRotation = (targetTurret.WorldRotation + vehicleRot).Reduced();
         var targetWorldRotation = targetTurret.StabilizedRotation
             ? targetTurret.TargetRotation

@@ -41,6 +41,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, BoundUIClosedEvent>(OnWeaponsUiClosed);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsSelectMessage>(OnWeaponsSelect);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsStabilizationMessage>(OnWeaponsStabilization);
+        SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsAutoModeMessage>(OnWeaponsAutoMode);
 
         SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
@@ -279,6 +280,35 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
     }
 
+    private void OnWeaponsAutoMode(Entity<VehicleWeaponsSeatComponent> ent, ref RMCVehicleWeaponsAutoModeMessage args)
+    {
+        if (!Equals(args.UiKey, RMCVehicleWeaponsUiKey.Key))
+            return;
+
+        if (args.Actor == default || !Exists(args.Actor))
+            return;
+
+        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+            return;
+
+        var vehicleUid = vehicle.Value;
+        if (!TryComp(vehicleUid, out RMCVehicleWeaponsComponent? weapons) || weapons.Operator != args.Actor)
+            return;
+
+        if (!TryComp(args.Actor, out BuckleComponent? buckle) || buckle.BuckledTo != ent.Owner)
+            return;
+
+        if (!TryComp(vehicleUid, out RMCVehicleDeployableComponent? deployable))
+            return;
+
+        deployable.AutoTurretEnabled = args.Enabled;
+        Dirty(vehicleUid, deployable);
+
+        RMCHardpointSlotsComponent? hardpoints = null;
+        ItemSlotsComponent? itemSlots = null;
+        UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
+    }
+
     private void OnHardpointSlotsChanged(RMCHardpointSlotsChangedEvent args)
     {
         if (_net.IsClient)
@@ -494,6 +524,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         var canToggleStabilization = false;
         var stabilizationEnabled = false;
+        var canToggleAuto = false;
+        var autoEnabled = false;
 
         if (operatorUid != null && operatorSlot != null &&
             TryGetSlotItem(vehicle, operatorSlot, itemSlots, out var selectedItem) &&
@@ -504,7 +536,14 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             canToggleStabilization = targetTurret.RotateToCursor;
         }
 
-        _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key, new RMCVehicleWeaponsUiState(entries, canToggleStabilization, stabilizationEnabled));
+        if (TryComp(vehicle, out RMCVehicleDeployableComponent? deployable))
+        {
+            canToggleAuto = true;
+            autoEnabled = deployable.AutoTurretEnabled;
+        }
+
+        _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key,
+            new RMCVehicleWeaponsUiState(entries, canToggleStabilization, stabilizationEnabled, canToggleAuto, autoEnabled));
     }
 
     private void AppendTurretEntries(
