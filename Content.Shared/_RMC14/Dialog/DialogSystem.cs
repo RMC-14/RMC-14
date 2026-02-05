@@ -157,24 +157,34 @@ public sealed class DialogSystem : EntitySystem
         var consecutivePunctuation = 0;
         var consecutiveSymbols = 0;
         var consecutiveSame = 0;
+        var consecutiveSameDigits = 0;
 
         foreach (var ch in text)
         {
             var isSpace = ch == ' ';
             var isPunctuation = char.IsPunctuation(ch);
             var isSymbol = char.IsSymbol(ch);
+            var isDigit = char.IsDigit(ch);
 
             if (hasPrevious && ch == previousChar)
                 consecutiveSame++;
             else
                 consecutiveSame = 1;
 
+            if (isDigit && hasPrevious && ch == previousChar)
+                consecutiveSameDigits++;
+            else if (isDigit)
+                consecutiveSameDigits = 1;
+            else
+                consecutiveSameDigits = 0;
+
             consecutiveSpaces = isSpace ? consecutiveSpaces + 1 : 0;
             consecutivePunctuation = isPunctuation ? consecutivePunctuation + 1 : 0;
             consecutiveSymbols = isSymbol ? consecutiveSymbols + 1 : 0;
 
             var skip = consecutiveSpaces > 1
-                || consecutiveSame > 3
+                || (!isDigit && consecutiveSame > 3)
+                || consecutiveSameDigits > 5
                 || consecutivePunctuation > 3
                 || consecutiveSymbols > 3;
 
