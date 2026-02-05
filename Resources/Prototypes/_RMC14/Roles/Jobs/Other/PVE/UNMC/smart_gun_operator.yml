@@ -19,16 +19,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillEngineer: 3
-        RMCSkillConstruction: 2
-        RMCSkillFireman: 3
-        RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
-        RMCSkillJtac: 1
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVESGO
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

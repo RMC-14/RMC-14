@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Explosion.EntitySystems;
@@ -562,5 +561,8 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         _fixtures.DestroyFixture(uid, AcidVaporFixtureId, manager: fixtures);
     }
 
-
+    public void SetCorrodible(CorrodibleComponent component, bool isCorrodible)
+    {
+        component.IsCorrodible = isCorrodible;
+    }
 }

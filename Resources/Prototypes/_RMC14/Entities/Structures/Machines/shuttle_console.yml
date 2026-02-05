@@ -25,7 +25,7 @@
   - type: ActivatableUI
     key: enum.DropshipNavigationUiKey.Key
   - type: AccessReader
-    access: [ ["CMAccessSquadLeaderPrep"], [ "CMAccessDropship" ] ]
+    access: [["CMAccessSquadLeaderPrep"], ["CMAccessDropship"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
   - type: ActivatableUIRequiresAccess
   - type: UserInterface
     interfaces:
@@ -55,16 +55,16 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/dropship_nav_computer.rsi
     state: on
-#  - type: ActivatableUI
-#    key: enum.DropshipNavigationUiKey.Key
-#  - type: AccessReader
-#    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXenoQueen"]] # TODO RMC14 make xeno queen just swipe
-#  - type: ActivatableUIRequiresAccess
+  - type: ActivatableUI
+    key: enum.DropshipTerminalUiKey.Key
+  - type: AccessReader
+    access: [["CMAccessDropship"], ["CMAccessSquadLeaderPrep"], ["CMAccessXeno"]] # Xeno have access as to not cause the "Access denied!" popup.
+  - type: ActivatableUIRequiresAccess
   - type: DropshipTerminal
-#  - type: UserInterface
-#    interfaces:
-#      enum.DropshipTerminalUiKey.Key:
-#        type: DropshipTerminalBui
+  - type: UserInterface
+    interfaces:
+      enum.DropshipTerminalUiKey.Key:
+        type: DropshipTerminalBui
 
 - type: entity
   parent: CMComputerDropship

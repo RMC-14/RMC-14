@@ -44,6 +44,9 @@ rmc-dropship-weapons-lock = LOCK
 rmc-dropship-weapons-clear = CLEAR
 rmc-dropship-weapons-enable = ENABLE
 rmc-dropship-weapons-disable = DISABLE
+rmc-dropship-weapons-deploy = DEPLOY
+rmc-dropship-weapons-retract = RETRACT
+rmc-dropship-weapons-auto-deploy = AUTO-DEPLOY
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -104,3 +107,22 @@ rmc-dropship-paradrop-lock-target-not-flying = You can only enable the paradrop 
 rmc-dropship-medevac-system-screen-text = RMU-4M Medevac System
 
 rmc-dropship-fulton-system-screen-text = RMU-19 Fulton Recovery System
+
+rmc-dropship-locked= This bird is now ours for the next {$minutes} minutes.
+rmc-dropship-locked-out = The shuttle is not responding, try again in {$minutes} minutes.
+rmc-dropship-locked-out-bypass = You partially bypassed the lockout, try again!
+rmc-dropship-locked-out-bypass-complete = You successfully removed the lockout!
+
+rmc-dropship-equipment-deployer-text = {$deployName}
+rmc-dropship-equipment-deployer-health = Condition: {$status}
+rmc-dropship-equipment-deployer-ammo = Ammo: {$ammoCount} / {$totalAmmoCount}
+rmc-dropship-equipment-deployer-status = Deploy Status: {$deployed}
+rmc-dropship-equipment-deployer-auto-deploy = Auto-Deploy: {$autoDeploy}
+
+rmc-dropship-equipment-enabled = ENABLED
+rmc-dropship-equipment-disabled = DISABLED
+rmc-dropship-equipment-deployed = DEPLOYED
+rmc-dropship-equipment-undeployed = UNDEPLOYED
+rmc-dropship-equipment-operational = OPERATIONAL
+rmc-dropship-equipment-damaged = DAMAGED
+rmc-dropship-equipment-destroyed = DESTROYED
