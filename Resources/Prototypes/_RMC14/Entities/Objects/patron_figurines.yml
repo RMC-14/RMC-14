@@ -1304,7 +1304,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHaileyMorgan
-  name: Hailey Morgan figurine
+  name: Hailey Ayako-Morgan figurine
   description: "\"Oh my gawd, bestie, I loooove your outfit.\""
   components:
   - type: Sprite
