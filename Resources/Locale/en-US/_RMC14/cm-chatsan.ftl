@@ -801,8 +801,8 @@ cm-chatsan-word-replacement-m13 = fast spitter
 cm-chatsan-word-m63 = m63
 cm-chatsan-word-replacement-m63 = fast spitter
 
-cm-chatsan-word-p90 = p90
-cm-chatsan-word-replacement-p90 = fast spitter
+cm-chatsan-word-pdw90 = pdw90
+cm-chatsan-word-replacement-pdw90 = fast spitter
 
 cm-chatsan-word-m54c = m54c
 cm-chatsan-word-replacement-m54c = spitter

@@ -5446,7 +5446,7 @@ entities:
     - type: Transform
       pos: 7.2478848,4.312557
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: RMCMagazineSMGPDW90
   entities:
   - uid: 705
     components:
@@ -8446,7 +8446,7 @@ entities:
           endTime: 7911.1872773
           startTime: 7927.7587389
           length: 0.4
-- proto: RMCWeaponSMGP90
+- proto: RMCWeaponSMGPDW90
   entities:
   - uid: 703
     components:

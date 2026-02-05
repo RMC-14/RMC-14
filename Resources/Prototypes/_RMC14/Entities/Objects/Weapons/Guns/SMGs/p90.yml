@@ -1,23 +1,23 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
-  name: FN P90 submachinegun
-  id: RMCWeaponSMGP90
-  description: The FN P90 submachine gun. An archaic design, but still widely used by corporate and mercenary groups, sometimes seen in the hands of civilian populations. This weapon only accepts 5.7×28mm rounds.
+  name: FN PDW90 submachinegun
+  id: RMCWeaponSMGPDW90
+  description: The FN PDW90 submachine gun. An archaic design, but still widely used by corporate and mercenary groups, sometimes seen in the hands of civilian populations. This weapon only accepts 5.7×28mm rounds.
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pdw90.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-0
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/SMGs/p90.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/SMGs/pdw90.rsi
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -56,13 +56,13 @@
     slots:
       gun_magazine:
         name: Magazine
-        startingItem: RMCMagazineSMGP90
+        startingItem: RMCMagazineSMGPDW90
         insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
         ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
         priority: 2
         whitelist:
           tags:
-          - RMCMagazineSMGP90
+          - RMCMagazineSMGPDW90
   - type: AttachableHolder
     randomAttachmentChance: 0.1
     slots:
@@ -93,14 +93,14 @@
 
 - type: entity
   parent: CMMagazineRifleBase
-  id: RMCMagazineSMGP90
-  name: "FN P90 magazine (5.7×28mm)"
-  description: "A 5.7×28mm magazine for the FN P90."
+  id: RMCMagazineSMGPDW90
+  name: "FN PDW90 magazine (5.7×28mm)"
+  description: "A 5.7×28mm magazine for the FN PDW90."
   components:
   - type: Tag
     tags:
     - CMMagazineSmg
-    - RMCMagazineSMGP90
+    - RMCMagazineSMGPDW90
   - type: BallisticAmmoProvider
     mayTransfer: True
     whitelist:
@@ -109,7 +109,7 @@
     proto: RMCCartridge57x28mm
     capacity: 50
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/p90.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/pdw90.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -126,7 +126,7 @@
   parent: CMCartridge10x20mm
   id: RMCCartridge57x28mm
   name: cartridge (57×28mm SMG)
-  description: A 5.7×28mm magazine for the FN P90.
+  description: A 5.7×28mm magazine for the FN PDW90.
   components:
   - type: Tag
     tags:
@@ -155,7 +155,7 @@
     amount: 10
 
 - type: Tag
-  id: RMCMagazineSMGP90
+  id: RMCMagazineSMGPDW90
 
 - type: Tag
   id: RMCCartridge57x28mm

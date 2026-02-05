@@ -1468,3 +1468,7 @@ RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
 RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
 RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
 RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper
+
+# 2026-02-05
+RMCWeaponSMGP90: RMCWeaponSMGPDW90
+RMCMagazineSMGP90: RMCMagazineSMGPDW90
