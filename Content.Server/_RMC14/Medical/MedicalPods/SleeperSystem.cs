@@ -109,17 +109,19 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (_mobState.IsDead(occupant))
             return;
 
-        if (!sleeper.AvailableChemicals.Contains(args.Chemical))
-            return;
-
         if (!sleeper.InjectionAmounts.Contains(args.Amount))
             return;
 
-        // Crisis mode when damage exceeds MinHealth threshold
-        if (!sleeper.EmergencyChemicals.Contains(args.Chemical) &&
-            TryComp<DamageableComponent>(occupant, out var damageable))
+        var isAvailable = sleeper.AvailableChemicals.Contains(args.Chemical);
+        var isEmergency = sleeper.EmergencyChemicals.Contains(args.Chemical);
+        if (!isAvailable && !isEmergency)
+            return;
+
+        // Emergency chemicals only work in crisis mode
+        if (isEmergency && !isAvailable)
         {
-            if (damageable.TotalDamage > sleeper.CrisisMinDamage)
+            if (!TryComp<DamageableComponent>(occupant, out var damageable) ||
+                damageable.TotalDamage <= sleeper.CrisisMinDamage)
                 return;
         }
 
@@ -179,7 +181,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var occupant = sleeper.Occupant;
         NetEntity? netOccupant = null;
         string? occupantName = null;
-        var stat = 0;
+        var occupantState = 0;
         var health = 150f;
         var maxHealth = 150f;
         var minHealth = -50f;
@@ -201,9 +203,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
             occupantName = Identity.Name(occupant.Value, EntityManager);
 
             if (_mobState.IsDead(occupant.Value))
-                stat = 2;
+                occupantState = 2;
             else if (_mobState.IsCritical(occupant.Value))
-                stat = 1;
+                occupantState = 1;
 
             totalDamage = damageable.TotalDamage;
 
@@ -244,55 +246,30 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 totalReagents = cachedChemSol.Volume;
         }
 
-        // Build chemical list
-        var chemicals = new List<SleeperChemicalData>(sleeper.AvailableChemicals.Length);
+        var inCrisis = totalDamage > sleeper.CrisisMinDamage;
+        var totalChemCount = sleeper.AvailableChemicals.Length;
+        if (inCrisis)
+            totalChemCount += sleeper.EmergencyChemicals.Length;
+
+        // Build chemical list - always show AvailableChemicals
+        var chemicals = new List<SleeperChemicalData>(totalChemCount);
         foreach (var chemId in sleeper.AvailableChemicals)
         {
-            if (!_reagent.TryIndex(chemId, out var reagentProto))
-                continue;
+            AddChemicalToList(chemicals, chemId, occupant, cachedChemSol, true);
+        }
 
-            FixedPoint2 occupantAmount = 0;
-            var injectable = occupant != null;
-            var overdosing = false;
-            var odWarning = false;
-
-            if (cachedChemSol != null)
+        if (inCrisis)
+        {
+            foreach (var chemId in sleeper.EmergencyChemicals)
             {
-                var reagent = new ReagentId(chemId, null);
-                occupantAmount = cachedChemSol.GetReagentQuantity(reagent);
-
-                if (reagentProto.Overdose != null)
-                {
-                    if (occupantAmount >= reagentProto.Overdose)
-                    {
-                        overdosing = true;
-                    }
-                    else if (occupantAmount + 10 > reagentProto.Overdose)
-                    {
-                        odWarning = true;
-                    }
-                }
-
-                // Crisis mode when damage exceeds MinHealth threshold
-                if (totalDamage > sleeper.CrisisMinDamage && !sleeper.EmergencyChemicals.Contains(chemId))
-                {
-                    injectable = false;
-                }
+                AddChemicalToList(chemicals, chemId, occupant, cachedChemSol, true);
             }
-
-            chemicals.Add(new SleeperChemicalData(
-                reagentProto.LocalizedName,
-                chemId,
-                occupantAmount,
-                injectable,
-                overdosing,
-                odWarning));
         }
 
         var state = new SleeperBuiState(
             netOccupant,
             occupantName,
-            stat,
+            occupantState,
             health,
             maxHealth,
             minHealth,
@@ -373,5 +350,45 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 UpdateUI((consoleId, console));
             }
         }
+    }
+
+    private void AddChemicalToList(
+        List<SleeperChemicalData> chemicals,
+        ProtoId<ReagentPrototype> chemId,
+        EntityUid? occupant,
+        Solution? cachedChemSol,
+        bool injectable)
+    {
+        if (!_reagent.TryIndex(chemId, out var reagentProto))
+            return;
+
+        FixedPoint2 occupantAmount = 0;
+        var overdosing = false;
+        var odWarning = false;
+        if (cachedChemSol != null)
+        {
+            var reagent = new ReagentId(chemId, null);
+            occupantAmount = cachedChemSol.GetReagentQuantity(reagent);
+
+            if (reagentProto.Overdose != null)
+            {
+                if (occupantAmount >= reagentProto.Overdose)
+                {
+                    overdosing = true;
+                }
+                else if (occupantAmount + 10 > reagentProto.Overdose)
+                {
+                    odWarning = true;
+                }
+            }
+        }
+
+        chemicals.Add(new SleeperChemicalData(
+            reagentProto.LocalizedName,
+            chemId,
+            occupantAmount,
+            injectable && occupant != null,
+            overdosing,
+            odWarning));
     }
 }

@@ -45,16 +45,11 @@ public sealed partial class SleeperComponent : Component
     ];
 
     /// <summary>
-    /// Chemicals that can be injected when occupant health is below MinHealth.
+    /// Additional chemicals that become available when in crisis mode.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public HashSet<ProtoId<ReagentPrototype>> EmergencyChemicals =
+    public ProtoId<ReagentPrototype>[] EmergencyChemicals =
     [
-        "CMInaprovaline",
-        //"RMCParacetamol",
-        "CMDylovene",
-        "CMDexalin",
-        "CMTricordrazine",
         //"RMCOxycodone",
         "CMBicaridine",
         "CMKelotane"
@@ -67,8 +62,8 @@ public sealed partial class SleeperComponent : Component
     public FixedPoint2 MaxChemical = 40;
 
     /// <summary>
-    /// Damage threshold for crisis mode. When total damage exceeds this, emergency chemicals become available.
-    /// 0 = healthy, 200 = dead.
+    /// Damage threshold for crisis mode. When total damage exceeds this, EmergencyChemicals become available to use.
+    /// 0 = healthy, 150 = crit, 200 = dead
     /// </summary>
     [DataField, AutoNetworkedField]
     public float CrisisMinDamage = 90;
