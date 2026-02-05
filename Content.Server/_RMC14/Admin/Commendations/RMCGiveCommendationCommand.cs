@@ -9,6 +9,8 @@ using Content.Shared.Database;
 using Content.Shared.Dataset;
 using Content.Shared.Mind;
 using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Xenonids.Name;
 using Robust.Server.Player;
 using Robust.Shared.Console;
 using Robust.Shared.Network;
@@ -250,7 +252,8 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
 
                 if (mindSystem.TryGetMind(session, out _, out var mind) && !string.IsNullOrWhiteSpace(mind.CharacterName))
                 {
-                    characterNames.Add(new CompletionOption(mind.CharacterName, $"{session.Name} as {mind.CharacterName}"));
+                    var completionName = GetCompletionCharacterName(mind.CurrentEntity, mind.CharacterName);
+                    characterNames.Add(new CompletionOption(completionName, $"{session.Name} as {mind.CharacterName}"));
                 }
             }
 
@@ -312,6 +315,18 @@ public sealed class RMCGiveCommendationCommand : LocalizedCommands
         }
 
         return CompletionResult.Empty;
+    }
+
+    private string GetCompletionCharacterName(EntityUid? entity, string characterName)
+    {
+        if (entity == null)
+            return characterName;
+
+        if (_entities.HasComponent<XenoNameComponent>(entity.Value))
+            return characterName;
+
+        var rankSystem = _systems.GetEntitySystem<SharedRankSystem>();
+        return rankSystem.GetSpeakerFullRankName(entity.Value) ?? characterName;
     }
 
     private CompletionOption[] GetAwardCompletionOptions(
