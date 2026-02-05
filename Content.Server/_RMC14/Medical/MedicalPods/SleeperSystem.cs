@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.MedicalPods;
+using Content.Shared._RMC14.Temperature;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -25,10 +26,42 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedRMCTemperatureSystem _temperature = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = new();
+
+    private const string BruteGroup = "Brute";
+    private const string BurnGroup = "Burn";
+    private const string ToxinGroup = "Toxin";
+    private const string AirlossGroup = "Airloss";
+    private const string GeneticGroup = "Genetic";
+
+    // Empty state used when no sleeper is connected - cached for performance
+    private static readonly SleeperBuiState EmptyState = new(
+        null,
+        null,
+        0,
+        150, // health (critThreshold with 0 damage)
+        150, // maxHealth (critThreshold)
+        -50, // minHealth (critThreshold - deadThreshold = 150 - 200)
+        0,
+        0,
+        0,
+        0,
+        0,
+        false,
+        0,
+        0,
+        0,
+        false,
+        0,
+        0,
+        false,
+        0,
+        [],
+        []);
 
     public override void Initialize()
     {
@@ -47,7 +80,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (sleeper.Comp.Occupant != args.Target)
             return;
 
-        UpdateSleeperOccupantVisuals(sleeper);
+        UpdateSleeperVisuals(sleeper);
 
         if (!sleeper.Comp.AutoEjectDead)
             return;
@@ -57,22 +90,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
             _audio.PlayPvs(sleeper.Comp.AutoEjectDeadSound, sleeper);
             EjectOccupant(sleeper, args.Target);
         }
-    }
-
-    private void UpdateSleeperOccupantVisuals(Entity<SleeperComponent> sleeper)
-    {
-        var healthState = SleeperOccupantHealthState.None;
-        if (sleeper.Comp.Occupant is { } occupant)
-        {
-            if (_mobState.IsDead(occupant))
-                healthState = SleeperOccupantHealthState.Dead;
-            else if (_mobState.IsCritical(occupant))
-                healthState = SleeperOccupantHealthState.Critical;
-            else
-                healthState = SleeperOccupantHealthState.Alive;
-        }
-
-        Appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
     }
 
     private void OnConsoleUIOpened(Entity<SleeperConsoleComponent> console, ref AfterActivatableUIOpenEvent args)
@@ -98,13 +115,11 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (!sleeper.InjectionAmounts.Contains(args.Amount))
             return;
 
-        // Check health threshold for non-emergency chemicals
+        // Crisis mode when damage exceeds MinHealth threshold
         if (!sleeper.EmergencyChemicals.Contains(args.Chemical) &&
-            TryComp<DamageableComponent>(occupant, out var damageable) &&
-            _mobThreshold.TryGetThresholdForState(occupant, MobState.Dead, out var deadThreshold))
+            TryComp<DamageableComponent>(occupant, out var damageable))
         {
-            var currentHealth = deadThreshold - damageable.TotalDamage;
-            if (currentHealth < sleeper.MinHealth)
+            if (damageable.TotalDamage > sleeper.CrisisMinDamage)
                 return;
         }
 
@@ -157,31 +172,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (console.Comp.LinkedSleeper is not { } sleeperId ||
             !TryComp(sleeperId, out SleeperComponent? sleeper))
         {
-            var emptyState = new SleeperBuiState(
-                null,
-                null,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                false,
-                0,
-                0,
-                0,
-                0,
-                false,
-                0,
-                0,
-                false,
-                0,
-                0,
-                [],
-                []);
-            _ui.SetUiState(console.Owner, SleeperUIKey.Key, emptyState);
+            _ui.SetUiState(console.Owner, SleeperUIKey.Key, EmptyState);
             return;
         }
 
@@ -189,18 +180,19 @@ public sealed class SleeperSystem : SharedSleeperSystem
         NetEntity? netOccupant = null;
         string? occupantName = null;
         var stat = 0;
-        var health = 0f;
-        var maxHealth = 200f;
-        var minHealth = 0f;
+        var health = 150f;
+        var maxHealth = 150f;
+        var minHealth = -50f;
+        var totalDamage = FixedPoint2.Zero;
         var bruteLoss = 0f;
         var burnLoss = 0f;
         var toxinLoss = 0f;
         var oxyLoss = 0f;
+        var geneticLoss = 0f;
         var hasBlood = false;
         FixedPoint2 bloodLevel = 0;
-        FixedPoint2 bloodMax = 0;
         var bloodPercent = 0f;
-        var bodyTemp = 310f;
+        var bodyTemp = 0f;
         FixedPoint2 totalReagents = 0;
 
         if (occupant != null && TryComp<DamageableComponent>(occupant, out var damageable))
@@ -213,36 +205,21 @@ public sealed class SleeperSystem : SharedSleeperSystem
             else if (_mobState.IsCritical(occupant.Value))
                 stat = 1;
 
-            var totalDamage = damageable.TotalDamage;
-            if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
+            totalDamage = damageable.TotalDamage;
+
+            if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold) &&
+                _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
             {
-                maxHealth = (float) deadThreshold;
-                minHealth = 0f;
+                maxHealth = (float) critThreshold;
+                minHealth = (float) (critThreshold - deadThreshold);
+                health = (float) (critThreshold - totalDamage);
             }
 
-            health = maxHealth - totalDamage.Float();
-
-            if (damageable.Damage.DamageDict.TryGetValue("Blunt", out var blunt))
-                bruteLoss += blunt.Float();
-            if (damageable.Damage.DamageDict.TryGetValue("Slash", out var slash))
-                bruteLoss += slash.Float();
-            if (damageable.Damage.DamageDict.TryGetValue("Piercing", out var piercing))
-                bruteLoss += piercing.Float();
-
-            if (damageable.Damage.DamageDict.TryGetValue("Heat", out var heat))
-                burnLoss += heat.Float();
-            if (damageable.Damage.DamageDict.TryGetValue("Cold", out var cold))
-                burnLoss += cold.Float();
-            if (damageable.Damage.DamageDict.TryGetValue("Shock", out var shock))
-                burnLoss += shock.Float();
-
-            if (damageable.Damage.DamageDict.TryGetValue("Poison", out var poison))
-                toxinLoss += poison.Float();
-            if (damageable.Damage.DamageDict.TryGetValue("Radiation", out var radiation))
-                toxinLoss += radiation.Float();
-
-            if (damageable.Damage.DamageDict.TryGetValue("Asphyxiation", out var asphyx))
-                oxyLoss = asphyx.Float();
+            bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
+            burnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
+            toxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
+            oxyLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
+            geneticLoss = damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup).Float();
 
             if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
                 blood.BloodSolution != null &&
@@ -250,9 +227,12 @@ public sealed class SleeperSystem : SharedSleeperSystem
             {
                 hasBlood = true;
                 bloodLevel = bloodSol.Volume;
-                bloodMax = bloodSol.MaxVolume;
+                var bloodMax = bloodSol.MaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
             }
+
+            if (_temperature.TryGetCurrentTemperature(occupant.Value, out var temp))
+                bodyTemp = temp;
         }
 
         // Cache chemical solution to avoid repeated lookups in the loop
@@ -281,7 +261,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 var reagent = new ReagentId(chemId, null);
                 occupantAmount = cachedChemSol.GetReagentQuantity(reagent);
 
-                // Check overdose
                 if (reagentProto.Overdose != null)
                 {
                     if (occupantAmount >= reagentProto.Overdose)
@@ -294,8 +273,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
                     }
                 }
 
-                // Check health threshold for non-emergency chemicals
-                if (health < sleeper.MinHealth && !sleeper.EmergencyChemicals.Contains(chemId))
+                // Crisis mode when damage exceeds MinHealth threshold
+                if (totalDamage > sleeper.CrisisMinDamage && !sleeper.EmergencyChemicals.Contains(chemId))
                 {
                     injectable = false;
                 }
@@ -321,9 +300,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
             burnLoss,
             toxinLoss,
             oxyLoss,
+            geneticLoss,
             hasBlood,
             bloodLevel,
-            bloodMax,
             bloodPercent,
             bodyTemp,
             sleeper.IsFiltering,
@@ -331,7 +310,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.DialysisStartedReagentVolume,
             sleeper.AutoEjectDead,
             sleeper.MaxChemical,
-            sleeper.MinHealth,
             chemicals,
             sleeper.InjectionAmounts);
 

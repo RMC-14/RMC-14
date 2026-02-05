@@ -15,6 +15,7 @@ namespace Content.Shared._RMC14.Medical.MedicalPods;
 
 public abstract class SharedSleeperSystem : EntitySystem
 {
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
@@ -25,7 +26,6 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
 
     private readonly HashSet<Entity<SleeperComponent>> _sleeperLinkBuffer = new();
 
@@ -46,7 +46,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, DragDropTargetEvent>(OnSleeperDragDrop);
 
         SubscribeLocalEvent<SleeperConsoleComponent, ComponentInit>(OnConsoleInit);
-        SubscribeLocalEvent<SleeperConsoleComponent, ActivateInWorldEvent>(OnConsoleActivate);
     }
 
     private void OnSleeperInit(Entity<SleeperComponent> sleeper, ref ComponentInit args)
@@ -80,7 +79,7 @@ public abstract class SharedSleeperSystem : EntitySystem
 
     private void OnSleeperShutdown(Entity<SleeperComponent> sleeper, ref ComponentShutdown args)
     {
-        // Clean up linked console when sleeper is destroyed
+        // Clean up linked console
         if (sleeper.Comp.LinkedConsole is { } consoleId && TryComp(consoleId, out SleeperConsoleComponent? console))
         {
             console.LinkedSleeper = null;
@@ -188,7 +187,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         _popup.PopupClient(Loc.GetString("rmc-sleeper-inserted-other", ("target", target), ("sleeper", sleeper)), args.User, args.User);
     }
 
-    private void OnSleeperCanDrop(Entity<SleeperComponent> sleeper, ref CanDropTargetEvent args)
+    private static void OnSleeperCanDrop(Entity<SleeperComponent> sleeper, ref CanDropTargetEvent args)
     {
         if (sleeper.Comp.Occupant != null)
             return;
@@ -226,10 +225,6 @@ public abstract class SharedSleeperSystem : EntitySystem
     private void OnConsoleInit(Entity<SleeperConsoleComponent> console, ref ComponentInit args)
     {
         TryLinkToSleeper(console);
-    }
-
-    private void OnConsoleActivate(Entity<SleeperConsoleComponent> console, ref ActivateInWorldEvent args)
-    {
     }
 
     private void TryLinkToSleeper(Entity<SleeperConsoleComponent> console)
@@ -336,10 +331,10 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
     }
 
-    private void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
+    protected void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
     {
         var occupied = sleeper.Comp.Occupant != null;
-        Appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
+        _appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
 
         var healthState = SleeperOccupantHealthState.None;
         if (sleeper.Comp.Occupant is { } occupant)
@@ -352,7 +347,7 @@ public abstract class SharedSleeperSystem : EntitySystem
                 healthState = SleeperOccupantHealthState.Alive;
         }
 
-        Appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
+        _appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
     }
 
     protected void ToggleDialysis(Entity<SleeperComponent> sleeper)

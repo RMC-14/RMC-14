@@ -67,10 +67,11 @@ public sealed partial class SleeperComponent : Component
     public FixedPoint2 MaxChemical = 40;
 
     /// <summary>
-    /// Minimum health for normal chemicals. Emergency chemicals become available below this.
+    /// Damage threshold for crisis mode. When total damage exceeds this, emergency chemicals become available.
+    /// 0 = healthy, 200 = dead.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float MinHealth = 90;
+    public float CrisisMinDamage = 90;
 
     [DataField, AutoNetworkedField]
     public bool IsFiltering;

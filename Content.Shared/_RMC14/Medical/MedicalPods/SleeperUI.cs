@@ -9,17 +9,17 @@ namespace Content.Shared._RMC14.Medical.MedicalPods;
 public sealed class SleeperBuiState(
     NetEntity? occupant,
     string? occupantName,
-    int occupantStat,
-    float occupantHealth,
-    float occupantMaxHealth,
-    float occupantMinHealth,
+    int occupantState,
+    float health,
+    float maxHealth,
+    float minHealth,
     float bruteLoss,
     float burnLoss,
     float toxinLoss,
     float oxyLoss,
+    float geneticLoss,
     bool hasBlood,
     FixedPoint2 bloodLevel,
-    FixedPoint2 bloodMax,
     float bloodPercent,
     float bodyTemperature,
     bool filtering,
@@ -27,24 +27,23 @@ public sealed class SleeperBuiState(
     FixedPoint2 reagentsWhenStarted,
     bool autoEjectDead,
     FixedPoint2 maxChem,
-    float minHealth,
     IReadOnlyList<SleeperChemicalData> chemicals,
     IReadOnlyList<int> injectionAmounts)
     : BoundUserInterfaceState
 {
     public readonly NetEntity? Occupant = occupant;
     public readonly string? OccupantName = occupantName;
-    public readonly int OccupantStat = occupantStat;
-    public readonly float OccupantHealth = occupantHealth;
-    public readonly float OccupantMaxHealth = occupantMaxHealth;
-    public readonly float OccupantMinHealth = occupantMinHealth;
+    public readonly int OccupantState = occupantState;
+    public readonly float Health = health;
+    public readonly float MaxHealth = maxHealth;
+    public readonly float MinHealth = minHealth;
     public readonly float BruteLoss = bruteLoss;
     public readonly float BurnLoss = burnLoss;
     public readonly float ToxinLoss = toxinLoss;
     public readonly float OxyLoss = oxyLoss;
+    public readonly float GeneticLoss = geneticLoss;
     public readonly bool HasBlood = hasBlood;
     public readonly FixedPoint2 BloodLevel = bloodLevel;
-    public readonly FixedPoint2 BloodMax = bloodMax;
     public readonly float BloodPercent = bloodPercent;
     public readonly float BodyTemperature = bodyTemperature;
     public readonly bool Filtering = filtering;
@@ -52,7 +51,6 @@ public sealed class SleeperBuiState(
     public readonly FixedPoint2 ReagentsWhenStarted = reagentsWhenStarted;
     public readonly bool AutoEjectDead = autoEjectDead;
     public readonly FixedPoint2 MaxChem = maxChem;
-    public readonly float MinHealth = minHealth;
     public readonly IReadOnlyList<SleeperChemicalData> Chemicals = chemicals;
     public readonly IReadOnlyList<int> InjectionAmounts = injectionAmounts;
 }

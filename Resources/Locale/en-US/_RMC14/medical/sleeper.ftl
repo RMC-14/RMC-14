@@ -28,12 +28,14 @@ rmc-sleeper-status-label = Status:
 rmc-sleeper-status-alive = Alive
 rmc-sleeper-status-critical = Critical
 rmc-sleeper-status-dead = DEAD
+rmc-sleeper-temperature = Temperature:
 
 rmc-sleeper-damage-header = Damage
 rmc-sleeper-brute = Brute:
 rmc-sleeper-burn = Burn:
 rmc-sleeper-toxin = Toxin:
 rmc-sleeper-oxygen = Oxygen:
+rmc-sleeper-genetic = Clone:
 
 rmc-sleeper-blood-level = Blood Level:
 

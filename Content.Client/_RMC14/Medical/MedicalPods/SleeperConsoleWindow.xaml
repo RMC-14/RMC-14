@@ -38,13 +38,27 @@
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                 <Label Text="{Loc rmc-sleeper-health-label}" MinWidth="80" Modulate="#5B88B0" />
-                <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="-100" MaxValue="100">
+                <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="-50" MaxValue="150">
                     <Label Name="HealthBarText" Align="Right" Margin="0 0 5 0" />
                 </ProgressBar>
             </BoxContainer>
             <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
                 <Label Text="{Loc rmc-sleeper-status-label}" MinWidth="80" Modulate="#5B88B0" />
                 <Label Name="StatusLabel" Text="" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                <Label Text="{Loc rmc-sleeper-temperature}" MinWidth="80" Modulate="#5B88B0" />
+                <ProgressBar Name="TemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="400">
+                    <Label Name="TemperatureBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Name="BloodSection" Orientation="Vertical">
+                <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
+                    <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="80" Modulate="#5B88B0" />
+                    <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100">
+                        <Label Name="BloodBarText" Align="Right" Margin="0 0 5 0" />
+                    </ProgressBar>
+                </BoxContainer>
             </BoxContainer>
 
             <!-- Damage Section -->
@@ -74,15 +88,11 @@
                     <Label Name="OxygenBarText" Align="Right" Margin="0 0 5 0" />
                 </ProgressBar>
             </BoxContainer>
-
-            <!-- Blood Section -->
-            <BoxContainer Name="BloodSection" Orientation="Vertical" Margin="0 10 0 0">
-                <BoxContainer Orientation="Horizontal" Margin="0 0 0 5">
-                    <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="80" Modulate="#5B88B0" />
-                    <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100">
-                        <Label Name="BloodBarText" Align="Right" Margin="0 0 5 0" />
-                    </ProgressBar>
-                </BoxContainer>
+            <BoxContainer Name="GeneticSection" Orientation="Horizontal" Margin="0 0 0 5" Visible="False">
+                <Label Text="{Loc rmc-sleeper-genetic}" MinWidth="80" Modulate="#5B88B0" />
+                <ProgressBar Name="GeneticBar" HorizontalExpand="True" MinValue="0" MaxValue="100">
+                    <Label Name="GeneticBarText" Align="Right" Margin="0 0 5 0" />
+                </ProgressBar>
             </BoxContainer>
 
             <!-- Chemicals Section -->
