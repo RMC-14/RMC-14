@@ -184,3 +184,32 @@
     sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/security_solid.rsi
   - type: Occluder
     boundingBox: "-0.5,-0.5,0.5,1.5"
+
+# SPP
+- type: entity
+  parent: RMCDoubleDoorBase
+  id: RMCDoubleDoorSPPShipGlass
+  suffix: SPP, Glass
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/spp_grey_door_glass.rsi
+
+- type: entity
+  parent: RMCDoubleDoorSPPShipGlass
+  id: RMCDoubleDoorSPPShipSolid
+  suffix: SPP, Solid
+  components:
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,0.5,1.5"
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/spp_grey_door.rsi
+
+- type: entity
+  parent: RMCDoubleDoorSPPShipSolid
+  id: RMCDoubleDoorSPPShipSolidUtility
+  suffix: SPP, Solid, Utility
+  components:
+  - type: Occluder
+    boundingBox: "-0.5,-0.5,0.5,1.5"
+  - type: Sprite
+    sprite: _RMC14/Structures/Doors/Airlocks/DoubleDoor/spp_utility_door.rsi

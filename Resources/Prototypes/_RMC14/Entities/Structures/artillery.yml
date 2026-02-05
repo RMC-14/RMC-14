@@ -48,3 +48,39 @@
   components:
   - type: Sprite
     state: anti_air_cannon_f
+
+- type: entity
+  id: RMCMissileTubeProp
+  name: Mk 33 ASAT launcher system
+  description: Cold launch tubes that can fire a few varieties of missiles out of them, the most common being the ASAT-21 Rapier IV missile used against satellites and other spacecraft and the BGM-227 Sledgehammer missile which is used for ground attack.
+  suffix: Prop
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-1.2,1.6,-0.8,-1.5"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+  - type: Sprite
+    sprite: _RMC14/Structures/missile_tubes.rsi
+    state: missiletubenorth
+  - type: Clickable
+
+- type: entity
+  parent: RMCMissileTubeProp
+  id: RMCMissileTubePropFlipped
+  suffix: Prop, Flipped
+  components:
+  - type: Sprite
+    state: missiletubesouth
