@@ -1,0 +1,32 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorEIAFBase
+  name: rmc-job-name-eiaf
+  description: rmc-job-description-eiaf
+  ranks:
+    RMCRankEIAFPrivateSecondClass: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+    - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearEIAFBase
+  hasIcon: true
+  greeting: rmc-job-greeting-eiaf
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: EIAF Survivor (Base)
+  hidden: true
+
+- type: startingGear
+  id: RMCGearEIAFBase
+  equipment:
+    head: RMCHeadEIAFBeret
+    jumpsuit: RMCJumpsuitMarineEIAFNo8
+    #back: RMCSatchelMarineForeconSurvivorFill //Need backpack ported
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    outerClothing: RMCArmorEIAFVestFilledF90
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetEIAF
+    pocket1: RMCPouchFirstAidInjectors #Need to check what is firstaid/full/alternate
+    pocket2: RMCPouchFlareFilled
+    #suitstorage: RMCFlashlight //Whatever the F90 is called

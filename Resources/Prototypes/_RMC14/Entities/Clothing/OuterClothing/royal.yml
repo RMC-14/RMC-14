@@ -176,3 +176,25 @@
     - type: Storage
       grid:
         - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCArmorEIAFVest
+  id: RMCArmorEIAFVestFilledF90
+  suffix: Filled, F90
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMCrowbar
+        #- id: RMCMagazineRifleF90
+        #- id: RMCMagazineRifleF90
+        
+- type: entity
+  parent: RMCArmorEIAFVest
+  id: RMCArmorEIAFVestFilledPDW90AP
+  suffix: Filled, PDW90AP
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMCrowbar
+        - id: RMCMagazineSMGPDW90AP
+        - id: RMCMagazineSMGPDW90AP
