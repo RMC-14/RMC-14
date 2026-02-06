@@ -280,10 +280,10 @@ public abstract class SharedLadderSystem : EntitySystem
 
     private void OnInteractUsing(Entity<LadderComponent> ent, ref InteractUsingEvent args)
     {
-        if (!HasComp<LadderThrowableComponent>(args.Used))
+        if (!TryComp(args.Used, out LadderThrowableComponent? throwable))
             return;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.ItemThrowDuration, new LadderThrowDoAfterEvent(), args.Used, target: ent)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, throwable.DoAfterDuration, new LadderThrowDoAfterEvent(), args.Used, target: ent)
         {
             BreakOnMove = true,
             NeedHand = true,
@@ -315,8 +315,8 @@ public abstract class SharedLadderSystem : EntitySystem
     {
         return ent.Comp.Direction switch
         {
-            LadderDirection.Up => "up",
-            LadderDirection.Down => "down",
+            LadderDirection.Up => Loc.GetString("rmc-ladder-direction-up"),
+            LadderDirection.Down => Loc.GetString("rmc-ladder-direction-down"),
             _ => "",
         };
     }

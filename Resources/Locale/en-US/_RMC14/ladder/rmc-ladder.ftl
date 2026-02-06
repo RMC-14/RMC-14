@@ -8,4 +8,6 @@ rmc-ladder-look-through = Look Through
 rmc-ladder-finish-throw-start-self = You take position to throw the {$thrown} {$direction} the {$ladder}.
 rmc-ladder-finish-throw-start-others = {$user} takes position to throw the {$thrown} {$direction} the {$ladder}.
 rmc-ladder-finish-throw-self = You throw the {$thrown} {$direction} the {$ladder}.
-rmc-ladder-finish-throw-other = {$user} throws the {$thrown} {$direction} the {$ladder}.
+rmc-ladder-finish-throw-others = {$user} throws the {$thrown} {$direction} the {$ladder}.
+rmc-ladder-direction-up = up
+rmc-ladder-direction-down = down
