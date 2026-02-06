@@ -19,7 +19,7 @@ public sealed partial class WeedboundWallComponent : Component
     public NetEntity? BoundWeed;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId ResiduePrototype = "XenoStickyResinWeak";
+    public EntProtoId ResiduePrototype = "XenoStickyResinWeakWeedbound";
 
     [DataField, AutoNetworkedField]
     public EntProtoId ThickResiduePrototype = "XenoStickyResin";

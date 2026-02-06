@@ -30,7 +30,7 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var target = GetEntity(args.Target);
+        var target = GetEntity(args.TargetEntity);
         if (!target.Valid || Deleted(target) || Terminating(target))
             return;
 

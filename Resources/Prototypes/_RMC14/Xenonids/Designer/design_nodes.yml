@@ -186,6 +186,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeOptimizedWall
+      door: DesignNodeOptimizedDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_optimizednode
@@ -208,6 +211,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeOptimizedWall
+      door: DesignNodeOptimizedDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_optimizednode
@@ -232,6 +238,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeFlexibleWall
+      door: DesignNodeFlexibleDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_flexnode
@@ -254,6 +263,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeFlexibleWall
+      door: DesignNodeFlexibleDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_flexnode
@@ -278,6 +290,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeConstructWall
+      door: DesignNodeConstructDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_constructnode
@@ -299,6 +314,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: DesignerDesignNodeVariant
+      wall: DesignNodeConstructWall
+      door: DesignNodeConstructDoor
     - type: Sprite
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: static_constructnode

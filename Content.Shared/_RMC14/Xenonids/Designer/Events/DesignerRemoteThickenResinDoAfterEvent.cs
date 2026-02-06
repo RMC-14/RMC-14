@@ -11,7 +11,7 @@ public sealed partial class DesignerRemoteThickenResinDoAfterEvent : SimpleDoAft
     public int PlasmaCost;
 
     [DataField]
-    public new NetEntity Target;
+    public NetEntity TargetEntity;
 
     [DataField]
     public float Range;
@@ -19,7 +19,7 @@ public sealed partial class DesignerRemoteThickenResinDoAfterEvent : SimpleDoAft
     public DesignerRemoteThickenResinDoAfterEvent(int plasmaCost, NetEntity target, float range)
     {
         PlasmaCost = plasmaCost;
-        Target = target;
+        TargetEntity = target;
         Range = range;
     }
 }

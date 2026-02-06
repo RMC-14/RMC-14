@@ -1752,13 +1752,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var wantDoor = designer.BuildDoorNodes;
 
-        return choice.Id switch
+        if (!_prototype.TryIndex(choice, out var proto) ||
+            !proto.TryGetComponent(out DesignerDesignNodeVariantComponent? variants, _compFactory))
         {
-            "DesignNodeOptimizedWall" or "DesignNodeOptimizedDoor" => wantDoor ? "DesignNodeOptimizedDoor" : "DesignNodeOptimizedWall",
-            "DesignNodeFlexibleWall" or "DesignNodeFlexibleDoor" => wantDoor ? "DesignNodeFlexibleDoor" : "DesignNodeFlexibleWall",
-            "DesignNodeConstructWall" or "DesignNodeConstructDoor" => wantDoor ? "DesignNodeConstructDoor" : "DesignNodeConstructWall",
-            _ => choice,
-        };
+            return choice;
+        }
+
+        var resolved = wantDoor ? variants.Door : variants.Wall;
+        return _prototype.HasIndex(resolved) ? resolved : choice;
     }
 
     private void OnDesignerSelectedDesignToggle(Entity<DesignerStrainComponent> ent, ref DesignerSelectedDesignToggleActionEvent args)
