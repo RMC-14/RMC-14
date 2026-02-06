@@ -71,7 +71,7 @@
 - type: startingGear
   id: RMCGearPMCSynthetic
   equipment:
-    head: ArmorHelmetPMCOfficer # Why the shit is the PMC beret a HELMET???
+    head: RMCArmorHelmetPMCOfficer # Why the shit is the PMC beret a HELMET???
     ears: RMCHeadsetDistressPMC
     # eyes: RMCGogglesMeson // TODO RMC14 mesons
     back: RMCPMCSyntheticSmartpack

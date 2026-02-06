@@ -24,7 +24,7 @@
     outerClothing: RMCArmorSPP
     gloves: RMCHandsVeteranSPP
     shoes: RMCBootsSPPFilled
-    head: ArmorHelmetSPP
+    head: RMCArmorHelmetSPP
     id: RMCIDSPPRifleman
     ears: RMCHeadsetSPP
   storage:

@@ -39,7 +39,7 @@
     outerClothing: RMCArmorM3LightVariants
     shoes: CMBootsBlackFilled
     back: CMSatchelFillSurvivor # remake to be marine satchel
-    head: ArmorHelmetM10
+    head: RMCArmorHelmetM10
     gloves: CMHandsBlackMarine
     pocket2: RMCPouchFlareFilled
 

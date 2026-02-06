@@ -92,7 +92,7 @@
 - type: startingGear
   id: RMCGearSPPEngineer
   equipment:
-    head: ArmorHelmetSPPEngineer
+    head: RMCArmorHelmetSPPEngineer
     ears: RMCHeadsetSPPEngineer
     eyes: RMCWeldingGoggles
     mask: CMMaskGas

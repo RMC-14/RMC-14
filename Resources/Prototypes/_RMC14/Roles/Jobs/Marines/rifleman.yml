@@ -55,7 +55,7 @@
   equipment:
     jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10
+    head: RMCArmorHelmetM10
     outerClothing: RMCArmorM3MediumVariants
     gloves: CMHandsBlackMarine
     id: CMDogtagRifleman

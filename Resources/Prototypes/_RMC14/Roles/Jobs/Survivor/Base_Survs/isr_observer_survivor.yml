@@ -47,7 +47,7 @@
     jumpsuit: CMJumpsuitLiaisonBrown
     shoes: RMCShoesLaceupBrown
     back: CMSatchelFillSurvivor
-    head: ArmorHelmetM10
+    head: RMCArmorHelmetM10
     pocket2: CMClipboard # RMC14, replace with document pouch when fixed
 
 - type: entity

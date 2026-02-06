@@ -279,7 +279,7 @@
   id: ArmorHelmetM10RMC
   storage:
     back:
-    - ArmorHelmetM10
+    - RMCArmorHelmetM10
 
 - type: loadout
   id: HardHatRMC

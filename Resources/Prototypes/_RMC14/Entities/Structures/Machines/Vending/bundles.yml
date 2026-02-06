@@ -9,7 +9,7 @@
     state: generic_headset
   - type: CMVendorBundle
     bundle:
-    - ArmorHelmetM10
+    - RMCArmorHelmetM10
     - CMVendorHeadsetSquad
     - RMCJumpsuitMarinePatch
     - CMHandsBlackMarine

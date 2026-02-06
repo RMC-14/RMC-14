@@ -24,7 +24,7 @@
 - type: startingGear
   id: RMCGearCorpseWeYaPMCStandard
   equipment:
-    head: ArmorHelmetPMC
+    head: RMCArmorHelmetPMC
     jumpsuit: RMCJumpsuitVeteranPMC
     outerClothing: CMArmorM4PMCLight
     belt: RMCM77BeltPMCFilled
@@ -70,7 +70,7 @@
 - type: startingGear
   id: RMCGearCorpseWeYaGoon
   equipment:
-    head: ArmorHelmetPMCCorporate
+    head: RMCArmorHelmetPMCCorporate
     jumpsuit: RMCJumpsuitVeteranPMCCorporate
     outerClothing: CMArmorM4PMCCorporate
     back: RMCSatchelLightpackWeYa
@@ -105,7 +105,7 @@
   parent: RMCGearCorpseWeYaGoon
   id: RMCGearCorpseWeYaGoonLead
   equipment:
-    head: ArmorHelmetPMCCorporateLead
+    head: RMCArmorHelmetPMCCorporateLead
     jumpsuit: RMCJumpsuitVeteranPMCCorporateLead
     outerClothing: CMArmorM4PMCCorporateLead
     id: RMCIDCardPMCGoonLeadCorpse

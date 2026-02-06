@@ -1,6 +1,6 @@
 # Marine raider
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetMARSOC
   name: SOF operator helmet
   description: A special variant of the M10 Pattern Helmet worn by UNMC SOF.
@@ -19,7 +19,7 @@
 
 # Dutch's Dozen
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetDutch
   name: dutch's dozen helmet
   description: A protective helmet worn by some seriously experienced mercs.
@@ -107,7 +107,7 @@
 
 # Mercenaries
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetMercenary
   name: mercenary K12 ceramic helmet
   description: A sturdy helmet worn by an unknown mercenary group.
@@ -202,7 +202,7 @@
 
 # CBRN
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCArmorHelmetCBRN
   name: CBRN M3 MOPP mask
   description: The M3 MOPP mask includes a full covering cowl that securely attaches to the MOPP suit. The mask filters out harmful particles in the air to allow the wearer to breathe safely in the field. Depending on the hostility of the contaminated area the mask’s filter will last an average of 12 hours or less.

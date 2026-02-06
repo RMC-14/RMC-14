@@ -62,7 +62,7 @@
     id: RMCIDCardPMC
     jumpsuit: RMCJumpsuitVeteranPMCNoWebbing
     shoes: RMCBootsPMC
-    head: ArmorHelmetPMC
+    head: RMCArmorHelmetPMC
     ears: RMCHeadsetDistressPMCPVE
     pocket1: RMCPouchGeneralLarge
     pocket2: RMCPouchGeneralLarge

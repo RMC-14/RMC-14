@@ -63,7 +63,7 @@
   equipment:
     jumpsuit: JumpsuitMarine
     shoes: CMBootsBlackFilled
-    head: ArmorHelmetM10
+    head: RMCArmorHelmetM10
     outerClothing: CMArmorSmartGunCombatHarness
     gloves: CMHandsBlackMarine
     id: CMDogtagSmartGunOperator

@@ -1069,7 +1069,7 @@ WeaponM96SSniperRifleCamo: CMM96SSniperRifle
 WeaponLauncherM83Camo: WeaponLauncherM83
 RMCBinocularsCamo: RMCBinoculars
 RMCMortarKitCamo: RMCMortarKit
-ArmorHelmetM10Camo: ArmorHelmetM10
+ArmorHelmetM10Camo: RMCArmorHelmetM10
 
 # 2024-12-29
 CMWeaponPistolMK80: RMCMK80
@@ -1479,3 +1479,23 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+
+# 2026-02-10 - Prefix RMC entities (Armor)
+ArmorHelmetM10: RMCArmorHelmetM10
+ArmorHelmetPMC: RMCArmorHelmetPMC
+ArmorHelmetPMCCommando: RMCArmorHelmetPMCCommando
+ArmorHelmetPMCCorporate: RMCArmorHelmetPMCCorporate
+ArmorHelmetPMCCorporateLead: RMCArmorHelmetPMCCorporateLead
+ArmorHelmetPMCDirector: RMCArmorHelmetPMCDirector
+ArmorHelmetPMCEngineer: RMCArmorHelmetPMCEngineer
+ArmorHelmetPMCFieldOfficer: RMCArmorHelmetPMCFieldOfficer
+ArmorHelmetPMCGunner: RMCArmorHelmetPMCGunner
+ArmorHelmetPMCKutjevo: RMCArmorHelmetPMCKutjevo
+ArmorHelmetPMCOfficer: RMCArmorHelmetPMCOfficer
+ArmorHelmetPMCRiot: RMCArmorHelmetPMCRiot
+ArmorHelmetPMCRiotShield: RMCArmorHelmetPMCRiotShield
+ArmorHelmetRiot: RMCArmorHelmetRiot
+ArmorHelmetRiotOld: RMCArmorHelmetRiotOld
+ArmorHelmetSPP: RMCArmorHelmetSPP
+ArmorHelmetSPPEngineer: RMCArmorHelmetSPPEngineer
+ArmorHelmetSPPHeavy: RMCArmorHelmetSPPHeavy
