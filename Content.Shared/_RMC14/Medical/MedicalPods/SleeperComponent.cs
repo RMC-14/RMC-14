@@ -110,27 +110,15 @@ public sealed partial class SleeperComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan InsertOthersDelay = TimeSpan.FromSeconds(2);
 
-    /// <summary>
-    /// The linked console entity.
-    /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
-    /// <summary>
-    /// Sound played when ejecting an occupant.
-    /// </summary>
     [DataField]
     public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
 
-    /// <summary>
-    /// Sound played when auto-ejecting a dead occupant.
-    /// </summary>
     [DataField]
     public SoundSpecifier AutoEjectDeadSound = new SoundPathSpecifier("/Audio/Machines/buzz-sigh.ogg");
 
-    /// <summary>
-    /// Sound played when dialysis is complete.
-    /// </summary>
     [DataField]
     public SoundSpecifier DialysisCompleteSound = new SoundPathSpecifier("/Audio/Effects/Cargo/ping.ogg");
 }
