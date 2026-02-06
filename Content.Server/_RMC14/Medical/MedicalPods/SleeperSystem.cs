@@ -31,6 +31,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
     private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = new();
+    private readonly HashSet<string> _emergencyChemLookup = new();
+    private readonly HashSet<string> _nonTransferableLookup = new();
 
     private const string BruteGroup = "Brute";
     private const string BurnGroup = "Burn";
@@ -60,6 +62,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         0,
         false,
         0,
+        90,
         [],
         []);
 
@@ -112,8 +115,15 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (!sleeper.InjectionAmounts.Contains(args.Amount))
             return;
 
+        // Build emergency chem lookup for O(1) checks
+        _emergencyChemLookup.Clear();
+        foreach (var chem in sleeper.EmergencyChemicals)
+        {
+            _emergencyChemLookup.Add(chem);
+        }
+
         var isAvailable = sleeper.AvailableChemicals.Contains(args.Chemical);
-        var isEmergency = sleeper.EmergencyChemicals.Contains(args.Chemical);
+        var isEmergency = _emergencyChemLookup.Contains(args.Chemical);
         if (!isAvailable && !isEmergency)
             return;
 
@@ -246,6 +256,13 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 totalReagents = cachedChemSol.Volume;
         }
 
+        // Build emergency chem lookup for O(1) checks
+        _emergencyChemLookup.Clear();
+        foreach (var chem in sleeper.EmergencyChemicals)
+        {
+            _emergencyChemLookup.Add(chem);
+        }
+
         var inCrisis = totalDamage > sleeper.CrisisMinDamage;
         var totalChemCount = sleeper.AvailableChemicals.Length;
         if (inCrisis)
@@ -262,6 +279,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
         {
             foreach (var chemId in sleeper.EmergencyChemicals)
             {
+                // Skip any duplicates in EmergencyChemicals that are already in AvailableChemicals
+                if (sleeper.AvailableChemicals.Contains(chemId))
+                    continue;
+
                 AddChemicalToList(chemicals, chemId, occupant, cachedChemSol, true);
             }
         }
@@ -287,6 +308,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.DialysisStartedReagentVolume,
             sleeper.AutoEjectDead,
             sleeper.MaxChemical,
+            sleeper.CrisisMinDamage,
             chemicals,
             sleeper.InjectionAmounts);
 
@@ -318,11 +340,18 @@ public sealed class SleeperSystem : SharedSleeperSystem
                     sleeper.DialysisStartedReagentVolume = chemSol.Volume;
                 }
 
+                // Build non-transferable lookup for O(1) checks
+                _nonTransferableLookup.Clear();
+                foreach (var reagent in sleeper.NonTransferableReagents)
+                {
+                    _nonTransferableLookup.Add(reagent);
+                }
+
                 _reagentRemovalBuffer.Clear();
 
                 foreach (var reagentQuantity in chemSol.Contents)
                 {
-                    if (!sleeper.NonTransferableReagents.Contains(reagentQuantity.Reagent.Prototype))
+                    if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype))
                     {
                         _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
                     }
@@ -334,7 +363,18 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 }
 
                 // Check if dialysis is complete
-                if (chemSol.Volume <= 0)
+                var hasTransferableReagents = false;
+                foreach (var reagentQuantity in chemSol.Contents)
+                {
+                    if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype) &&
+                        reagentQuantity.Quantity > 0)
+                    {
+                        hasTransferableReagents = true;
+                        break;
+                    }
+                }
+
+                if (!hasTransferableReagents)
                 {
                     sleeper.IsFiltering = false;
                     sleeper.DialysisStartedReagentVolume = 0;

@@ -71,10 +71,10 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.MinValue = state.MinHealth;
         HealthBarText.Text = state.Health.ToString("F0");
 
-        var healthPercent = state.MaxHealth > 0 ? state.Health / state.MaxHealth : 0;
-        HealthBar.Modulate = healthPercent switch
+        var crisisHealthThreshold = state.MaxHealth - state.CrisisMinDamage;
+        HealthBar.Modulate = state.Health switch
         {
-            >= 0.4f => Color.FromHex("#00AA00"),
+            _ when state.Health >= crisisHealthThreshold => Color.FromHex("#00AA00"),
             >= 0 => Color.FromHex("#AAAA00"),
             _ => Color.FromHex("#AA0000")
         };
