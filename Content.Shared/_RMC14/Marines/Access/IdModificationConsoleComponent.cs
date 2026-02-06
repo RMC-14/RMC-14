@@ -25,7 +25,7 @@ public sealed partial class IdModificationConsoleComponent : Component
     public bool Authenticated;
 
     [DataField] [AutoNetworkedField]
-    public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
+    public EntProtoId<IFFFactionComponent> Faction = "RMCFactionMarine";
 
     [DataField] [AutoNetworkedField]
     public bool HasIFF;

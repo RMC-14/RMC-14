@@ -24,7 +24,7 @@
     canMicrowave: false
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: TakeableTags
   - type: Appearance
   - type: Foldable
@@ -176,7 +176,7 @@
     - DoorBumpOpener
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: Corrodible
     isCorrodible: false
 
@@ -224,3 +224,46 @@
     slots:
     - idcard
     sprite: _RMC14/Objects/CMIDs/lanyard.rsi
+
+- type: entity
+  id: RMCFactionMarine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - MarineCommand
+    - MarineMedical
+    - MarineEngineer
+    - MarineMilitaryPolice
+#    - TODO RMC14 sentry
+    - MarineAlpha
+    - MarineBravo
+    - MarineCharlie
+    - MarineDelta
+    - MarineEcho
+    - MarineFoxtrot
+    - MarineRequisition
+    - MarineJTAC
+    - MarineIntel
+    - MarineSOF
+    - WEYA
+
+- type: entity
+  id: RMCFactionSurvivor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+
+- type: entity
+  id: RMCFactionTSE
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - TSE

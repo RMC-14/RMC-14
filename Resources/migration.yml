@@ -1479,3 +1479,9 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+ 
+# 2026-02-12 - Prefix RMC entities (Factions)
+FactionMarine: RMCFactionMarine
+FactionSurvivor: RMCFactionSurvivor
+FactionTSE: RMCFactionTSE
+FactionWeYa: RMCFactionWeYa

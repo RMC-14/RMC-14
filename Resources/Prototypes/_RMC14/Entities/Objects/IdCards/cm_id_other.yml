@@ -23,7 +23,7 @@
     job: CMSurvivor
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -34,7 +34,7 @@
     job: CMSurvivorDoctor
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -45,7 +45,7 @@
     job: CMSurvivorEngineer
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -56,7 +56,7 @@
     job: CMSurvivorScientist
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardLanyard
@@ -72,7 +72,7 @@
     job: CMSurvivorSecurity
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   parent: CMIDCardSilver
@@ -85,8 +85,8 @@
     state: corporate_liaison
   - type: ItemIFF
     factions:
-    - FactionWeYa
-    - FactionMarine
+    - RMCFactionWeYa
+    - RMCFactionMarine
   - type: PresetIdCard
     job: CMLiaison
 
@@ -101,7 +101,7 @@
     state: pmc
   - type: ItemIFF
     factions:
-    - FactionWeYa
+    - RMCFactionWeYa
 
 - type: entity
   parent: CMIDCardLiaison
@@ -114,7 +114,7 @@
     state: pmc
   - type: ItemIFF
     factions:
-    - FactionWeYa
+    - RMCFactionWeYa
   - type: PresetIdCard
     job: CMLiaison
 
@@ -125,8 +125,8 @@
   components:
   - type: ItemIFF
     factions:
-    - FactionWeYa
-    - FactionSurvivor
+    - RMCFactionWeYa
+    - RMCFactionSurvivor
   - type: PresetIdCard
     job: CMSurvivorCorporate
 
@@ -194,7 +194,7 @@
     job: CMBureauMarshal
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -206,7 +206,7 @@
     job: CMBureauDeputy
   - type: ItemIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
 
 - type: entity
   parent: CMIDCardSilver
@@ -216,11 +216,21 @@
   components:
   - type: ItemIFF
     factions:
-    - FactionWeYa
+    - RMCFactionWeYa
   - type: Access
     groups:
     - Colony
     - RMCWeYa
+
+- type: entity
+  id: RMCFactionWeYa
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IFFFaction
+  - type: FactionFrequencies
+    channels:
+    - Colony
+    - WEYA
 
 - type: entity
   parent: CMIDCardLanyard
@@ -324,7 +334,7 @@
     job: RMCJobSyntheticColony
   - type: ItemIFF
     factions:
-    - FactionSurvivor
+    - RMCFactionSurvivor
 
 - type: entity
   id: RMCIDCardAegis
