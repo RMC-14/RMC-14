@@ -764,9 +764,25 @@ public sealed class PowerLoaderSystem : EntitySystem
         EntityUid used,
         [NotNullWhen(true)] out ContainerSlot? slot)
     {
+        slot = null;
         var slotId = target.Comp.UtilitySlotId;
         if (HasComp<RMCOrbitalDeployableComponent>(used))
+        {
+            if (!_container.TryGetContainer(target, target.Comp.UtilitySlotId, out var utilityContainer))
+                return false;
+
+            var hasDeployer = false;
+            foreach (var containedEntity in utilityContainer.ContainedEntities)
+            {
+                if (HasComp<RMCOrbitalDeployerComponent>(containedEntity))
+                    hasDeployer = true;
+            }
+
+            if (!hasDeployer)
+                return false;
+
             slotId = target.Comp.DeployableContainerSlotId;
+        }
 
         return CanAttachPopup(ref user, target, slotId, used, out slot);
     }
