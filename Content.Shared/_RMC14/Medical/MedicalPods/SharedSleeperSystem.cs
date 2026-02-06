@@ -58,8 +58,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         // Spawn the console at offset position and link it to this sleeper
         if (_net.IsServer && sleeper.Comp.SpawnConsolePrototype != null)
         {
-            var xform = Transform(sleeper);
-            var rotation = xform.LocalRotation;
+            var rotation = Transform(sleeper).LocalRotation;
             var rotatedOffset = rotation.RotateVec(sleeper.Comp.ConsoleSpawnOffset);
             var consoleCoords = _transform.GetMoverCoordinates(sleeper).Offset(rotatedOffset);
             var consoleId = Spawn(sleeper.Comp.SpawnConsolePrototype.Value, consoleCoords);
@@ -203,22 +202,19 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         args.Handled = true;
 
-        var target = args.Dragged;
-        var user = args.User;
-
         if (sleeper.Comp.Occupant != null)
         {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), user, user);
+            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), args.User, args.User);
             return;
         }
 
-        if (target == user)
+        if (args.Dragged == args.User)
         {
-            TryEnterSleeper(sleeper, user);
+            TryEnterSleeper(sleeper, args.User);
         }
         else
         {
-            TryPushIntoSleeper(sleeper, user, target);
+            TryPushIntoSleeper(sleeper, args.User, args.Dragged);
         }
     }
 
@@ -232,8 +228,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (console.Comp.LinkedSleeper != null)
             return;
 
-        var xform = Transform(console);
-        var coords = xform.Coordinates;
+        var coords = Transform(console).Coordinates;
         _sleeperLinkBuffer.Clear();
         _lookup.GetEntitiesInRange(coords, 1.5f, _sleeperLinkBuffer);
 
@@ -279,7 +274,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
 
         _popup.PopupClient(Loc.GetString("rmc-sleeper-inserting", ("target", target), ("sleeper", sleeper)), user, user);
-
         if (sleeper.Comp.InsertOthersDelay > TimeSpan.Zero)
         {
             var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.InsertOthersDelay, new SleeperPushInDoAfterEvent(), sleeper, target)

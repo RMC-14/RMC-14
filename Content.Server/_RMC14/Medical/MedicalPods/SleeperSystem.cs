@@ -319,18 +319,16 @@ public sealed class SleeperSystem : SharedSleeperSystem
     {
         base.Update(frameTime);
 
-        var time = _timing.CurTime;
         var sleepers = EntityQueryEnumerator<SleeperComponent>();
-
         while (sleepers.MoveNext(out var uid, out var sleeper))
         {
             if (!sleeper.IsFiltering || sleeper.Occupant == null)
                 continue;
 
-            if (time < sleeper.NextDialysisTick)
+            if (_timing.CurTime < sleeper.NextDialysisTick)
                 continue;
 
-            sleeper.NextDialysisTick = time + sleeper.DialysisTickDelay;
+            sleeper.NextDialysisTick = _timing.CurTime + sleeper.DialysisTickDelay;
 
             // Perform dialysis
             if (_solution.TryGetSolution(sleeper.Occupant.Value, "chemicals", out var chemSolEnt, out var chemSol))
@@ -348,7 +346,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 }
 
                 _reagentRemovalBuffer.Clear();
-
                 foreach (var reagentQuantity in chemSol.Contents)
                 {
                     if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype))

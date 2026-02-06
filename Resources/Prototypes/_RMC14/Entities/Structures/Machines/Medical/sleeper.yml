@@ -30,10 +30,8 @@
         layer:
         - MachineLayer
   - type: Sleeper
-    spawnConsolePrototype: RMCSleeperConsole
-    consoleSpawnOffset: 1, 0 # Spawns to the right (East), rotated with sleeper
   - type: ApcPowerReceiver
-    powerLoad: 15 # 15 idle, 200 active
+    powerLoad: 200 # 15 idle, 200 active
     needsPower: false # TODO RMC14 power
   - type: DragInsertContainer
     containerId: sleeper
@@ -133,8 +131,7 @@
   suffix: Spawns with Console
   components:
   - type: Sleeper
-    spawnConsolePrototype: RMCSleeperConsole
-    consoleSpawnOffset: 1, 0
+    dialysisAmount: 8
     availableChemicals:
     - CMInaprovaline
     #- RMCTramadol
@@ -149,4 +146,3 @@
     - CMKelotane
     - CMMeralyne
     - CMDermaline
-    dialysisAmount: 8

@@ -114,7 +114,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         GeneticSection.Visible = state.GeneticLoss > 0;
         if (state.GeneticLoss > 0)
         {
-            UpdateDamageBar(GeneticBar, GeneticBarText, state.GeneticLoss, Color.FromHex("#02c9c0"));
+            UpdateDamageBar(GeneticBar, GeneticBarText, state.GeneticLoss);
         }
 
         // Blood level
@@ -138,7 +138,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         foreach (var (name, chemId, occupantAmount, injectable, overdosing, odWarning) in state.Chemicals)
         {
             var row = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
-
             var nameLabel = new Label
             {
                 Text = name,
@@ -152,6 +151,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
                 Value = occupantAmount.Float(),
                 MaxValue = state.MaxChem.Float()
             };
+
             var amountLabel = new Label
             {
                 Text = $"{occupantAmount}/{state.MaxChem}u",
@@ -170,7 +170,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             {
                 amountBar.Modulate = Color.FromHex("#AAAA00");
             }
-
             row.AddChild(amountBar);
 
             foreach (var amount in state.InjectionAmounts)
@@ -202,13 +201,5 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             < 50 => Color.FromHex("#AAAA00"),
             _ => Color.FromHex("#AA0000")
         };
-    }
-
-    private static void UpdateDamageBar(ProgressBar bar, Label label, float damage, Color fixedColor)
-    {
-        bar.Value = damage;
-        bar.MaxValue = 100;
-        label.Text = damage.ToString("F0");
-        bar.Modulate = fixedColor;
     }
 }
