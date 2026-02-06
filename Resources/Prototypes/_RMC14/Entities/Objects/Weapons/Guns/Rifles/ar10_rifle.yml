@@ -1,7 +1,7 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   name: AR10 assault rifle
-  id: WeaponRifleAR10
+  id: RMCWeaponRifleAR10
   description: An earlier version of the more widespread M16 rifle. Considered to be the father of the 20th century rifle. How one of these ended up here is a mystery of its own. It is chambered in 7.62x51mm.
   suffix: Filled
   components:
@@ -146,11 +146,11 @@
     - Cartridge
     - RMCCartridgeRifleAR10
   - type: CartridgeAmmo
-    proto: BulletRifleAR10
+    proto: RMCBulletRifleAR10
 
 - type: entity
   parent: RMCBaseBullet
-  id: BulletRifleAR10
+  id: RMCBulletRifleAR10
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

@@ -76,7 +76,7 @@
     pocket1: RMCFlashlight
     pocket2: RMCPouchMagazineLarge
   inhand:
-  - WeaponSMGMAC15  # TODO RMC14 - Make randomized
+  - RMCWeaponSMGMAC15  # TODO RMC14 - Make randomized
   storage:
     back:
     - RMCGrenadeIED

@@ -100,7 +100,7 @@
     eyes: RMCGlassesMedicalHUDGlasses
     back: RMCSatchelLightpackFreelancerMedic
     belt: CMBeltMedicBagFilled
-    suitstorage: WeaponRifleMAR40
+    suitstorage: RMCWeaponRifleMAR40
     pocket1: RMCPouchMedicalERT
     pocket2: RMCPouchMagazineLargeMAR40
     gloves: RMCHandsVeteranPMC

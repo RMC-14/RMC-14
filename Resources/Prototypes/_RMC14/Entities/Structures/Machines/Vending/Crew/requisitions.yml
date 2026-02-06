@@ -34,7 +34,7 @@
     sections:
     - name: Primary firearms
       entries:
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A2
         amount: 30
       - id: WeaponSMGM63
         amount: 60

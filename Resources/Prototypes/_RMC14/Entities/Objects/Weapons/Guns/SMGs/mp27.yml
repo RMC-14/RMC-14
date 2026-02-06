@@ -170,7 +170,7 @@
     proto: RMCBullet46x30mm
 
 - type: entity
-  parent: Bullet10x20mm
+  parent: RMCBullet10x20mm
   id: RMCBullet46x30mm
   categories: [ HideSpawnMenu ]
   components:

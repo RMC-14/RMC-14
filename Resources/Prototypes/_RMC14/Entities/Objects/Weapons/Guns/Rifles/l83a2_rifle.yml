@@ -229,7 +229,7 @@
     - Cartridge
     - RMCCartridgeRifleL83A
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mm
+    proto: RMCBulletRifle556x45mm
 
 - type: entity
   parent: RMCMagazineRifleL83A2
@@ -355,11 +355,11 @@
     - Cartridge
     - RMCCartridgeRifleL83AAP
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mmAP
+    proto: RMCBulletRifle556x45mmAP
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle556x45mmAP
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifle556x45mmAP
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

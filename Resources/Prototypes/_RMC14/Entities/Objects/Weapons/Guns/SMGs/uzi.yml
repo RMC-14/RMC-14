@@ -143,11 +143,11 @@
     - Cartridge
     - RMCCartridge9x21mmSMGUZI
   - type: CartridgeAmmo
-    proto: Bullet9x21mmUZI
+    proto: RMCBullet9x21mmUZI
 
 - type: entity
-  parent: Bullet10x20mm
-  id: Bullet9x21mmUZI
+  parent: RMCBullet10x20mm
+  id: RMCBullet9x21mmUZI
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

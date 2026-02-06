@@ -98,7 +98,7 @@
     - UNMC
   - type: UserIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: XenoCrusherChargable
     setDamage:
       types:
@@ -199,7 +199,7 @@
     - WeYa
   - type: UserIFF
     factions:
-    - FactionWeYa
+    - RMCFactionWeYa
   - type: Tag
     tags:
     - RMCSentryWeYa
@@ -492,7 +492,7 @@
     magazineTag: RMCMagazineSentryFire
 
 - type: entity
-  parent: RMCSentry
+  parent: RMCBaseSentry
   id: RMCSentryFire
   name: UN 55-FA assault sentry flamer
   description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
@@ -520,7 +520,7 @@
     - UNMC
   - type: UserIFF
     factions:
-    - FactionMarine
+    - RMCFactionMarine
   - type: Sentry
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
@@ -606,4 +606,4 @@
   - type: UserIFF
     factions:
     - FactionCLF
-    - FactionSurvivor
+    - RMCFactionSurvivor

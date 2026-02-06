@@ -78,7 +78,7 @@
     pocket1: RMCFlashlight
     pocket2: RMCPouchFirstAidERTFill
   inhand:
-  - WeaponRifleMAR40
+  - RMCWeaponRifleMAR40
   storage:
     outerClothing:
     - RMCMagazineRifleMAR40

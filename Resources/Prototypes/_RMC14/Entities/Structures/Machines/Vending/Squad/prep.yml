@@ -19,7 +19,7 @@
       entries:
       - id: WeaponRifleM4SPR
         amount: 10
-      - id: WeaponShotgunM42A2
+      - id: RMCWeaponShotgunM42A2
         amount: 15
       - id: WeaponSMGM63
         amount: 30

@@ -446,7 +446,7 @@ CMMagazinePistolVP78: CMMagazinePistolMK80
 #CMMagazineRifleM4RAAP: CMMagazineRifleM4DMRAP
 #CMMagazineRifleM4RAExt: CMMagazineRifleM4DMRExt
 #WeaponRifleM4RA: WeaponRifleM4DMR
-WeaponShotgunM37A2: WeaponShotgunM42A2
+WeaponShotgunM37A2: RMCWeaponShotgunM42A2
 CMCrateBoxMagazineSMGM39: RMCCrateBoxMagazineSMGM63
 CMCrateBoxMagazineSMGM39AP: RMCCrateBoxMagazineSMGM63AP
 CMCrateBoxMagazineSMGM39Ext: RMCCrateBoxMagazineSMGM63Ext
@@ -1064,7 +1064,7 @@ WaterTankFull: RMCTankReagentWater
 #WeaponRifleM54CE2Camo: WeaponRifleM54CE2
 WeaponRifleM4SPRCamo: WeaponRifleM4SPR
 WeaponSMGM63Camo: WeaponSMGM63
-WeaponShotgunM42A2Camo: WeaponShotgunM42A2
+WeaponShotgunM42A2Camo: RMCWeaponShotgunM42A2
 WeaponM96SSniperRifleCamo: CMM96SSniperRifle
 WeaponLauncherM83Camo: WeaponLauncherM83
 RMCBinocularsCamo: RMCBinoculars
@@ -1096,7 +1096,7 @@ RMCCrateBoxMagazineM44RevolverMarksman: RMCCrateBoxMagazineRevolverM44Marksman
 RMCCrateM54C: RMCCrateM54CMK1
 
 # 2025-02-10
-BulletRifle5.56x45mm: BulletRifle556x45mm
+BulletRifle5.56x45mm: RMCBulletRifle556x45mm
 CMBulletPistol.22mm: CMBulletPistol22mm
 CMCartridgePistol.22mm: CMCartridgePistol22mm
 
@@ -1479,3 +1479,46 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+ 
+# 2026-02-16 - Prefix RMC entities (Weapons)
+Bullet10x20mm: RMCBullet10x20mm
+Bullet10x20mmAP: RMCBullet10x20mmAP
+Bullet10x20mmRubber: RMCBullet10x20mmRubber
+Bullet9x21mmUZI: RMCBullet9x21mmUZI
+BulletRifle10x24mm: RMCBulletRifle10x24mm
+BulletRifle10x24mmAP: RMCBulletRifle10x24mmAP
+BulletRifle10x24mmHT: RMCBulletRifle10x24mmHT
+BulletRifle10x24mmRubber: RMCBulletRifle10x24mmRubber
+BulletRifle556x45mm: RMCBulletRifle556x45mm
+BulletRifle556x45mmAP: RMCBulletRifle556x45mmAP
+BulletRifle556x45mmHEAP: RMCBulletRifle556x45mmHEAP
+BulletRifle556x45mmIncendiary: RMCBulletRifle556x45mmIncendiary
+BulletRifle888x51mm: RMCBulletRifle888x51mm
+BulletRifle888x51mmAP: RMCBulletRifle888x51mmAP
+BulletRifle888x51mmHEAP: RMCBulletRifle888x51mmHEAP
+BulletRifle888x51mmIncendiary: RMCBulletRifle888x51mmIncendiary
+BulletRifleAR10: RMCBulletRifleAR10
+BulletRifleM4SPRA19: RMCBulletRifleM4SPRA19
+BulletRifleM4SPRA19Impact: RMCBulletRifleM4SPRA19Impact
+BulletRifleM4SPRA19Incendiary: RMCBulletRifleM4SPRA19Incendiary
+BulletRifleM5SPRHVHIP: RMCBulletRifleM5SPRHVHIP
+BulletRifleM5SPRHVP: RMCBulletRifleM5SPRHVP
+BulletRifleMAR40: RMCBulletRifleMAR40
+RCMBulletPistol9mmSquashHead: RMCBulletPistol9mmSquashHead
+RMCSentryConstruct: RMCSentry
+WeaponRifleAR10: RMCWeaponRifleAR10
+WeaponRifleL83A3F: RMCWeaponRifleL83A3F
+WeaponRifleL83A3M: RMCWeaponRifleL83A3M
+WeaponRifleM16: RMCWeaponRifleM16
+WeaponRifleM4SPRCustom: RMCWeaponRifleM4SPRCustom
+WeaponRifleM4SPRFilled: RMCWeaponRifleM4SPRFilled
+WeaponRifleM5SPR: RMCWeaponRifleM5SPR
+WeaponRifleM5SPR2: RMCWeaponRifleM5SPR2
+WeaponRifleMAR40: RMCWeaponRifleMAR40
+WeaponRifleXM88: RMCWeaponRifleXM88
+WeaponSMGMAC15: RMCWeaponSMGMAC15
+WeaponShotgunCustomBuilt: RMCWeaponShotgunCustomBuilt
+WeaponShotgunM42A1: RMCWeaponShotgunM42A1
+WeaponShotgunM42A2: RMCWeaponShotgunM42A2
+WeaponShotgunM890Guard: RMCWeaponShotgunM890Guard
+XenoSpikeProjectile: RMCXenoSpikeProjectile

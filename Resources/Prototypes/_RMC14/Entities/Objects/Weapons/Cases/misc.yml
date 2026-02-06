@@ -21,7 +21,7 @@
     # - id: CMPacketPillsOxycodone    TODO: Pain system
     - id: CMPacketPillsKelotane
     - id: CMPacketPillsBicaridine
-    - id: WeaponShotgunM890Guard
+    - id: RMCWeaponShotgunM890Guard
     - id: RMCPouchGeneralLarge
     - id: CMShellShotgunBuckshot
     - id: CMShellShotgunBuckshot

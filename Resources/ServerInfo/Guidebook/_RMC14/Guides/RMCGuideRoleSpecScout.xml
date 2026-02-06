@@ -9,7 +9,7 @@
 
   ## Standard Issue Kit
   The Scout deploys equipped with the following important equipment:
-  <Box> <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom"/> <GuideEntityEmbed Entity="RMCBackpackScout"/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout"/></Box>
+  <Box> <GuideEntityEmbed Entity="RMCWeaponRifleM4SPRCustom"/> <GuideEntityEmbed Entity="RMCBackpackScout"/> <GuideEntityEmbed Entity="RMCLaserDesignatorScout"/></Box>
 
   ## Core Capabilities & Equipment
 
@@ -28,7 +28,7 @@
   - You [bold]can laze targets[/bold] for Close Air Support (CAS) or Orbital Bombardment (OB).
 
   ### M4SPR Custom Battle Rifle: The Surgical Tool
-  <GuideEntityEmbed Entity="WeaponRifleM4SPRCustom" HorizontalAlignment="Left"/>
+  <GuideEntityEmbed Entity="RMCWeaponRifleM4SPRCustom" HorizontalAlignment="Left"/>
   While not necessarily the highest raw damage dealer, the M4SPR Custom Battle Rifle is prized for its accuracy, versatility, and crippling effects. Its unique ammo and attachment compatibility allow for tailored performance.
 
   <Box>[bold]Ammunition Types[/bold]:</Box>
