@@ -113,7 +113,7 @@
   description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life.\nOn the box is the Weston-Yamada logo, with a slogan surrounding it:\nWESTON-YAMADA. FEEDING BETTER WORLDS."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Consumable/Food/mre_weya_colony.rsi
+    sprite: _RMC14/Objects/Consumable/Food/mre_weya.rsi
 
 - type: entity
   parent: CMMRE
