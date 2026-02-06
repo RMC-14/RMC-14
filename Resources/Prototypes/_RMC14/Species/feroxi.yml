@@ -8,7 +8,7 @@
   sprites: MobFeroxiSprites
   defaultSkinTone: "#985629"
   markingLimits: MobFeroxiMarkingLimits
-  dollPrototype: MobFeroxiDummy
+  dollPrototype: RMCMobFeroxiDummy
   skinColoration: Hues
   maleFirstNames: names_feroxi_male
   femaleFirstNames: names_feroxi_female

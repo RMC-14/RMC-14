@@ -1,5 +1,5 @@
 ﻿- type: entity
-  id: FactionHalcyon
+  id: FactionSPP
   categories: [ HideSpawnMenu ]
   components:
   - type: IFFFaction
@@ -53,7 +53,7 @@
   components:
   - type: ItemIFF
     factions:
-    - FactionHalcyon
+    - FactionSPP
   - type: Access
     groups:
     - Colony

@@ -171,7 +171,7 @@
 - type: entity
   name: sticky mango rice
   parent: FoodBowlBase
-  id: FoodRiceMango
+  id: RMCFoodRiceMango
   description: It's a grand gesture that isn't the least bit grand.
   components:
   - type: FlavorProfile
@@ -187,7 +187,7 @@
 - type: entity
   name: banh mi
   parent: CMFoodBase
-  id: FoodBanhMi
+  id: RMCFoodBanhMi
   description: Banh Mi, for Banh You
   components:
   - type: Sprite
@@ -208,13 +208,13 @@
         - ReagentId: Nutriment
           Quantity: 30
   - type: SliceableFood
-    slice: FoodBanhMiHalf
+    slice: RMCFoodBanhMiHalf
     count: 2
 
 - type: entity
   name: banh mi half
   parent: CMFoodBase
-  id: FoodBanhMiHalf
+  id: RMCFoodBanhMiHalf
   description: That's a symphony in a sandwich!
   components:
   - type: Sprite
@@ -238,7 +238,7 @@
 - type: entity
   name: chicken parm hero
   parent: CMFoodBase
-  id: FoodChickenParmHero
+  id: RMCFoodChickenParmHero
   description: Now thats a sandwich, fuggedaboutit!
   components:
   - type: Sprite
@@ -262,13 +262,13 @@
         - ReagentId: Protein
           Quantity: 10
   - type: SliceableFood
-    slice: FoodChickenParmHalf
+    slice: RMCFoodChickenParmHalf
     count: 2
 
 - type: entity
   name: chicken parm half
   parent: CMFoodBase
-  id: FoodChickenParmHalf
+  id: RMCFoodChickenParmHalf
   description: Better than eating a grilled cheese off the radiator.
   components:
   - type: Sprite
@@ -295,7 +295,7 @@
 - type: entity
   name: meatball sub
   parent: CMFoodBase
-  id: FoodMeatballSub
+  id: RMCFoodMeatballSub
   description: Made with the secrets of Death Kwon Do!
   components:
   - type: Sprite
@@ -319,13 +319,13 @@
         - ReagentId: Protein
           Quantity: 10
   - type: SliceableFood
-    slice: FoodMeatballSubHalf
+    slice: RMCFoodMeatballSubHalf
     count: 2
 
 - type: entity
   name: meatball sub half
   parent: CMFoodBase
-  id: FoodMeatballSubHalf
+  id: RMCFoodMeatballSubHalf
   description: It's enough to make a grown marine cry.
   components:
   - type: Sprite
@@ -352,7 +352,7 @@
 - type: entity
   name: gabagool sandwich
   parent: CMFoodBase
-  id: FoodGabagool
+  id: RMCFoodGabagool
   description: Woke up this morning, got yourself a sandwich.
   components:
   - type: Sprite
@@ -374,13 +374,13 @@
         - ReagentId: Nutriment
           Quantity: 30
   - type: SliceableFood
-    slice: FoodGabagoolHalf
+    slice: RMCFoodGabagoolHalf
     count: 2
 
 - type: entity
   name: gabagool sandwich half
   parent: CMFoodBase
-  id: FoodGabagoolHalf
+  id: RMCFoodGabagoolHalf
   description: Gabagool? Over here!!
   components:
   - type: Sprite
@@ -405,7 +405,7 @@
 - type: entity
   name: cheesesteak
   parent: CMFoodBase
-  id: FoodCheesesteak
+  id: RMCFoodCheesesteak
   description: If your hands aren't greasy holding it, is it really a cheesesteak?
   components:
   - type: Sprite
@@ -428,13 +428,13 @@
         - ReagentId: Protein
           Quantity: 10
   - type: SliceableFood
-    slice: FoodCheesesteakHalf
+    slice: RMCFoodCheesesteakHalf
     count: 2
 
 - type: entity
   name: cheesesteak half
   parent: CMFoodBase
-  id: FoodCheesesteakHalf
+  id: RMCFoodCheesesteakHalf
   description: Served wit-out onions.
   components:
   - type: Sprite
@@ -460,7 +460,7 @@
 - type: entity
   name: yorkshire pudding
   parent: CMFoodBase
-  id: FoodYorkshirePudding
+  id: RMCFoodYorkshirePudding
   description: What a delightful pastry!
   components:
   - type: Tag
@@ -490,7 +490,7 @@
 - type: entity
   name: black forest cake
   parent: CMFoodBase
-  id: FoodCakeBlackForest
+  id: RMCFoodCakeBlackForest
   description: The cake is a lie no more!
   components:
   - type: Sprite
@@ -511,13 +511,13 @@
         - ReagentId: Nutriment
           Quantity: 30
   - type: SliceableFood
-    slice: FoodBlackForestSlice
+    slice: RMCFoodBlackForestSlice
     count: 6
 
 - type: entity
   name: black forest cake slice
   parent: CMFoodBase
-  id: FoodBlackForestSlice
+  id: RMCFoodBlackForestSlice
   description: Now without fish-shaped ethyl benzene!
   components:
   - type: Sprite
@@ -543,7 +543,7 @@
 - type: entity
   name: uncooked sausage
   parent: CMFoodBase
-  id: FoodMeatSausage
+  id: RMCFoodMeatSausage
   description: A piece of mixed, long meat.
   components:
   - type: Sprite
@@ -562,13 +562,13 @@
         - ReagentId: Protein
           Quantity: 4
   - type: Construction
-    graph: FoodMeatSausage
+    graph: RMCFoodMeatSausage
     node: start
 
 - type: entity
   name: cooked sausage
   parent: CMFoodBase
-  id: FoodMeatSausageCooked
+  id: RMCFoodMeatSausageCooked
   description: This snagger looks like it just came off the barbie!
   components:
   - type: Sprite
@@ -592,7 +592,7 @@
 - type: entity
   name: hot dog
   parent: CMFoodBase
-  id: FoodHotDog
+  id: RMCFoodHotDog
   description: Life is tasting pretty good! Oh yes!
   components:
   - type: Sprite
@@ -617,7 +617,7 @@
 - type: entity
   name: tapsilog
   parent: CMFoodBase
-  id: FoodTapsilog
+  id: RMCFoodTapsilog
   description: It's like steak and eggs, but better!
   components:
   - type: Sprite
@@ -644,7 +644,7 @@
 - type: entity
   name: carpsilog
   parent: CMFoodBase
-  id: FoodCarpsilog
+  id: RMCFoodCarpsilog
   description: Drenched in enough vinegar to make you forget about that carpotoxin!
   components:
   - type: Sprite
@@ -672,7 +672,7 @@
 - type: entity
   name: chicksilog
   parent: CMFoodBase
-  id: FoodChicksilog
+  id: RMCFoodChicksilog
   description: Now I know you asked for tonkatsu, but this is all we got today.
   components:
   - type: Sprite
@@ -699,7 +699,7 @@
 - type: entity
   name: tocilog
   parent: CMFoodBase
-  id: FoodTocilog
+  id: RMCFoodTocilog
   description: Looks nothing like bacon, but just as great!
   components:
   - type: Sprite
@@ -726,7 +726,7 @@
 - type: entity
   name: bangers and mash
   parent: CMFoodBase
-  id: FoodBangersMash
+  id: RMCFoodBangersMash
   description: Goes together like fish and chips, beans and.... nevermind.
   components:
   - type: Sprite
@@ -751,7 +751,7 @@
 - type: entity
   name: pie and mash
   parent: CMFoodBase
-  id: FoodPieMash
+  id: RMCFoodPieMash
   description: Goes together like fish and chips, beans and.... nevermind.
   components:
   - type: Sprite
