@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechSurplus
+  parent: RMCColMarTechSurplus
   id: RMCSPPSurplusPVE
   name: H-Tech Surplus Uniform Vendor
   description: An automated supply rack hooked up to a small storage of standard UPP uniforms.
@@ -142,7 +142,7 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechUtilities
+  parent: RMCColMarTechUtilities
   id: RMCSPPUtilitiesPVE
   suffix: PVE, SPP
   name: H-Tech Automated Utilities Squad Vendor

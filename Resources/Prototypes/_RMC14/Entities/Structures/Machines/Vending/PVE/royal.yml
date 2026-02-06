@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCRoyalAssaultEngineerVendor
   name: We-Ya section engineering equipment rack
   suffix: PVE, RCM
@@ -48,7 +48,7 @@
         name: Drop Pouch
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCRoyalMedicalAssistantVendor
   name: We-Ya section medical equipment rack
   suffix: PVE, RCM
@@ -101,7 +101,7 @@
         name: Drop Pouch
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCRoyalBombSpecVendor
   name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity.
   description: An automated rack hooked up to a colossal storage of bombardment specialist standard-issue equipment.
@@ -152,7 +152,7 @@
 
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCColMarTechSurplusRCMPVE
   name: We-Ya Surplus Uniform Vendor
   description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
@@ -260,7 +260,7 @@
         amount: 10
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: RMCColMarTechUtilitiesRCMPVE
   suffix: PVE, RCM
   name: We-Ya Automated Utilities Section Vendor
@@ -346,4 +346,3 @@
         amount: 5
       - id: RMCTantoA
         amount: 25
-

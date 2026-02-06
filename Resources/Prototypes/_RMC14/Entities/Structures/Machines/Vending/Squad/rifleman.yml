@@ -1,8 +1,8 @@
 # RIFLEMAN
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechEquipment
   name: ColMarTech automated marine equipment rack
   description: An automated rack hooked up to a colossal storage of Marine Rifleman standard-issue equipment.
   components:

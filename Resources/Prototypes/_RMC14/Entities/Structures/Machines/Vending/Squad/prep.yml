@@ -1,7 +1,7 @@
 # SQUAD PREPARATION
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechGuns
+  parent: RMCColMarTechBase
+  id: RMCColMarTechGuns
   name: ColMarTech automated weapons rack
   description: An automated weapon rack hooked up to a big storage of standard-issue weapons.
   components:
@@ -140,8 +140,8 @@
         box: CMPackFlare
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSurplus
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSurplus
   name: ColMarTech surplus uniform vendor
   description: An automated rack hooked up to a small storage of standard marine uniforms.
   components:
@@ -377,8 +377,8 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechMunitions
+  parent: RMCColMarTechBase
+  id: RMCColMarTechMunitions
   name: ColMarTech automated munition squad vendor
   description: An automated supply rack hooked up to a small storage of various ammunition types. Can be accessed by any Marine Rifleman.
   components:
@@ -448,8 +448,8 @@
         amount: 4
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechUtilities
+  parent: RMCColMarTechBase
+  id: RMCColMarTechUtilities
   name: ColMarTech automated utilities squad vendor
   description: An automated supply rack hooked up to a small storage of various utilities and tools. Can be accessed by any Marine Rifleman.
   components:
@@ -526,7 +526,7 @@
         amount: 2
 
 - type: entity
-  parent: ColMarTechBase
+  parent: RMCColMarTechBase
   id: CMVendorAttachments
   name: AEGIS Armaments squad attachments vendor
   description: An automated supply rack hooked up to a small storage of weapons attachments. Can be accessed by any Marine Rifleman.

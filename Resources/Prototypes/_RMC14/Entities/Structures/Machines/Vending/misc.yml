@@ -1,7 +1,7 @@
 # TODO RMC14: It will be more useful when the mechanics of manual replenishment of vending machines will be implemented
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechFOBSupplies
+  parent: RMCColMarTechBase
+  id: RMCColMarTechFOBSupplies
   name: ColMarTech Automated FOB Supplies Vendor
   description: An automated restockable storage vendor for use in organizing FOB supplies.
   components:

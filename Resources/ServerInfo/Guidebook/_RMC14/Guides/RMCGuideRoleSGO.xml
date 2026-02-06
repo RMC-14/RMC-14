@@ -22,7 +22,7 @@
   Your [bold]prep room[/bold] will always be the second-to-last door before entering the [bold]main prep area[/bold] in each barracks section. Here, you will find two vendors supplying both essential and optional equipment for your deployment. [bold]Remember[/bold]: your ammo belt is provided by the [bold]uniform vendor[/bold], while the [bold]weapons vendor[/bold] contains the gun, ammunition, and harness.
 
   <Box>
-    <GuideEntityEmbed Entity="ColMarTechSGEquipment" Caption="Uniform vendor"/>
+    <GuideEntityEmbed Entity="RMCColMarTechSGEquipment" Caption="Uniform vendor"/>
     <GuideEntityEmbed Entity="CMBeltSmartGunOperatorFilled" Caption="ML66A ammo belt"/>
   </Box>
 
@@ -36,7 +36,7 @@
   Your [bold]Smartgunner Weapons Vendor[/bold] provides a crate containing:
 
   <Box>
-  <GuideEntityEmbed Entity="ColMarTechSGGear" Caption="Weapons vendor"/>
+  <GuideEntityEmbed Entity="RMCColMarTechSGGear" Caption="Weapons vendor"/>
     <GuideEntityEmbed Entity="CMSmartGunOperatorEquipmentCase" Caption="ML66A Smartgun case"/>
   </Box>
 
@@ -72,7 +72,7 @@
   After suiting up, check the [bold]special ammo vendor[/bold] on your squad's side of the prep room for [bold]extra free drums[/bold]. Additional ammunition becomes available as more marines wake up, so check back before deployment.
 
   <Box>
-    <GuideEntityEmbed Entity="ColMarTechMunitions" Caption="Special ammo vendor"/>
+    <GuideEntityEmbed Entity="RMCColMarTechMunitions" Caption="Special ammo vendor"/>
   </Box>
 
   For more ammo, visit [bold]requisitions[/bold], where you can request up to [bold]two (2) additional drums[/bold]. The [bold]LO[/bold] may approve extra requests, but do not count on it—ammo is limited, and resupply groundside will take time and coordination.

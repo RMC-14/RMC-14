@@ -1,6 +1,6 @@
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCrewSynthetic
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCrewSynthetic
   name: ColMarTech Synthetic Equipment Rack
   description: An automated rack hooked up to a colossal storage of various equipment. Can be accessed only by synthetic units.
   components:
@@ -151,8 +151,8 @@
       - id: CMMaskSterile
 
 - type: entity
-  parent: ColMarTechCrewSynthetic
-  id: ColMarTechCrewSyntheticColony
+  parent: RMCColMarTechCrewSynthetic
+  id: RMCColMarTechCrewSyntheticColony
   name: ColMarTech Synthetic Equipment Rack
   suffix: Colony Synth Access
   components:
@@ -161,8 +161,8 @@
     - RMCJobSyntheticColony
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCrewSyntheticGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCrewSyntheticGear
   name: ColMarTech Synthetic Auxiliary Gear Rack
   description: An automated gear rack hooked up to a colossal storage of various medical and engineering supplies. Can be accessed only by synthetic units.
   components:
@@ -305,8 +305,8 @@
         points: 2
 
 - type: entity
-  parent: ColMarTechBase
-  id: WeYaExperimentalToolsVendor
+  parent: RMCColMarTechBase
+  id: RMCWeYaExperimentalToolsVendor
   name: We-Ya Experimental Tools Vendor
   description: A smaller vendor hooked up to a cache of specially provisioned, experimental tools and equipment provided by the We-Ya Research and Development Division(TM). Handle with care.
   components:

@@ -2,7 +2,7 @@
 # TODO RMC14 deny and vend states
 - type: entity
   abstract: true
-  id: ColMarTechBase
+  id: RMCColMarTechBase
   name: ColMarTech vendor
   placement:
     mode: SnapgridCenter
@@ -61,8 +61,8 @@
 
 - type: entity
   abstract: true
-  parent: ColMarTechBase
-  id: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBase
+  id: RMCColMarTechBaseAnchorable
   components:
   - type: Transform
     anchored: true
