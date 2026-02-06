@@ -76,4 +76,7 @@ public sealed partial class RMCChemMasterComponent : Component
 
     [DataField, AutoNetworkedField]
     public int MaxQuickAccessSlots = 9;
+
+    [DataField, AutoNetworkedField]
+    public bool AutoSelectPillBottles;
 }
