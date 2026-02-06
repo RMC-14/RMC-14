@@ -24,6 +24,9 @@
       0: Alive
       500: Critical
       600: Dead
+  - type: Tag
+    tags:
+    - RMCSynthGrabbable
   - type: MeleeWeapon
     damage:
       groups:
@@ -167,18 +170,6 @@
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
       visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
-      visible: false
   - type: XenoFruitPlanterVisuals
     rsi: _RMC14/Mobs/Xenonids/Drone/gardener_drone.rsi
     prefix: gardener
@@ -242,18 +233,6 @@
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
       visible: false
   - type: RMCXenoDamageVisuals
     prefix: drone

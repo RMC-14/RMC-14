@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
+using Content.Shared._RMC14.Radio;
 using Content.Shared._RMC14.Tracker;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
@@ -141,7 +142,7 @@ public sealed class HiveLeaderSystem : EntitySystem
             return;
         }
 
-        EnsureComp<RMCTrackableComponent>(watching);
+        AddLeader((watching, leaderComp), ent);
 
         leaderComp.Granter = ent;
         Dirty(watching, leaderComp);
@@ -154,9 +155,6 @@ public sealed class HiveLeaderSystem : EntitySystem
         msg = $"{Name(ent)} has selected you as a Hive Leader. The other Xenonids must listen to you. You will also act as a beacon for the Queen's pheromones.";
         _popup.PopupClient(msg, watching, watching, PopupType.Medium);
         _rmcChat.ChatMessageToOne(msg, watching);
-        var ev = new HiveLeaderStatusChangedEvent(true);
-        RaiseLocalEvent(watching, ref ev);
-        SyncPheromones(ent);
     }
 
     private void OnGranterWatch(Entity<HiveLeaderGranterComponent> ent, ref HiveLeaderWatchEvent args)
@@ -263,6 +261,27 @@ public sealed class HiveLeaderSystem : EntitySystem
         }
     }
 
+    private void AddLeader(Entity<HiveLeaderComponent> leader, Entity<HiveLeaderGranterComponent> granter)
+    {
+        EnsureComp<RMCTrackableComponent>(leader);
+
+        var prefix = EnsureComp<RMCRadioPrefixComponent>(leader);
+        prefix.Prefix = leader.Comp.LeaderPrefix;
+        Dirty(leader, prefix);
+
+        var radioTextIncrease = EnsureComp<RMCInnateRadioTextIncreaseComponent>(leader);
+        if (leader.Comp.GrantRadioTextIncrease != null)
+        {
+            radioTextIncrease.RadioTextIncrease = leader.Comp.GrantRadioTextIncrease.Value;
+            Dirty(leader, radioTextIncrease);
+        }
+
+        var ev = new HiveLeaderStatusChangedEvent(true);
+        RaiseLocalEvent(leader, ref ev);
+
+        SyncPheromones(granter);
+    }
+
     private void RemoveLeader(Entity<HiveLeaderComponent> leader)
     {
         if (_timing.ApplyingState)
@@ -275,6 +294,9 @@ public sealed class HiveLeaderSystem : EntitySystem
         }
 
         RemCompDeferred<HiveLeaderComponent>(leader);
+
+        if (TryComp<RMCInnateRadioTextIncreaseComponent>(leader.Owner, out var radioIncrease) && !radioIncrease.Instrinsic)
+            RemCompDeferred<RMCInnateRadioTextIncreaseComponent>(leader.Owner);
 
         if (!TryComp(leader.Comp.Granter, out HiveLeaderGranterComponent? granter))
             return;
@@ -293,13 +315,11 @@ public sealed class HiveLeaderSystem : EntitySystem
             return;
         }
 
-        EnsureComp<RMCTrackableComponent>(newXeno);
         var newLeader = EnsureComp<HiveLeaderComponent>(newXeno);
         newLeader.Granter = oldLeader.Granter;
         granter.Leaders.Remove(oldXeno);
         granter.Leaders.Add(newXeno);
-
-        SyncPheromones((oldLeader.Granter.Value, granter));
+        AddLeader((newXeno, newLeader), (oldLeader.Granter.Value, granter));
     }
 
     public bool IsLeader(EntityUid leader, [NotNullWhen(true)] out HiveLeaderComponent? leaderComp)
