@@ -355,7 +355,7 @@
 
 
 - type: entity
-  id: XenoWeedsWall
+  id: RMCXenoWeedsWall
   name: weeds
   placement:
     mode: SnapgridCenter

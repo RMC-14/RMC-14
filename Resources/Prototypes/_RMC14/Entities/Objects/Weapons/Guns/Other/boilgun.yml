@@ -21,13 +21,13 @@
     soundGunshot:
       path: /Audio/_RMC14/Xeno/blobattack.ogg
   - type: ProjectileBatteryAmmoProvider
-    proto: XenoBombardAcidProjectile
+    proto: RMCXenoBombardAcidProjectile
     fireCost: 1
   - type: BatteryWeaponFireModes
     fireModes:
-    - proto: XenoBombardAcidProjectile
+    - proto: RMCXenoBombardAcidProjectile
       fireCost: 1
-    - proto: XenoBombardNeurotoxinProjectile
+    - proto: RMCXenoBombardNeurotoxinProjectile
       fireCost: 1
   - type: Battery
     maxCharge: 10

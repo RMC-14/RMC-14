@@ -1479,3 +1479,8 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+
+# 2026-02-17 - Prefix RMC entities (Xeno)
+XenoBombardAcidProjectile: RMCXenoBombardAcidProjectile
+XenoBombardNeurotoxinProjectile: RMCXenoBombardNeurotoxinProjectile
+XenoWeedsWall: RMCXenoWeedsWall

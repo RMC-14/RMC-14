@@ -210,7 +210,7 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: XenoBombardAcidProjectile
+  id: RMCXenoBombardAcidProjectile
   name: glob of acid gas
   categories: [ HideSpawnMenu ]
   components:
@@ -266,7 +266,7 @@
 
 - type: entity
   parent: XenoBaseProjectile
-  id: XenoBombardNeurotoxinProjectile
+  id: RMCXenoBombardNeurotoxinProjectile
   name: glob of neurotoxin gas
   categories: [ HideSpawnMenu ]
   components:
@@ -470,4 +470,3 @@
         - BulletImpassable
         - XenoProjectileImpassable
         - BarricadeImpassable
-
