@@ -10,25 +10,30 @@ using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Survivor;
+using Content.Shared.Audio;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Ghost;
+using Content.Shared.Prototypes;
 using Content.Shared.Radio;
-using Robust.Server.Audio;
+using Robust.Server.GameObjects;
+using Robust.Server.GameStates;
+using Robust.Server.Player;
 using Robust.Shared.Audio;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Marines;
 
 public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -116,11 +121,65 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         if (excludeSurvivors)
             filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
-        // Apply garbling if groundside
-        var garbledMessage = ApplyGarbling(message);
+        // Get all recipient entities
+        var recipients = new List<EntityUid>();
+        var marineQuery = EntityQueryEnumerator<MarineComponent>();
+        while (marineQuery.MoveNext(out var uid, out _))
+        {
+            if (excludeSurvivors && HasComp<RMCSurvivorComponent>(uid))
+                continue;
+            recipients.Add(uid);
+        }
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, garbledMessage, garbledMessage, default, false, true, null);
+        var ghostQuery = EntityQueryEnumerator<GhostComponent>();
+        while (ghostQuery.MoveNext(out var uid, out _))
+        {
+            recipients.Add(uid);
+        }
+
+        // Find encryption component for garbling
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (!encryptionQuery.MoveNext(out _, out var encryptionComp))
+        {
+            // No encryption system, send clear messages to all
+            foreach (var recipient in recipients)
+            {
+                if (TryComp(recipient, out ActorComponent? actor))
+                    _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+            }
+            _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+            return;
+        }
+
+        // Send messages to each recipient, garbling based on location
+        foreach (var recipient in recipients)
+        {
+            var recipientMessage = message;
+
+            // Only garble for groundside recipients when encryption is active
+            if (encryptionComp.IsGroundside && IsRecipientGroundside(recipient))
+            {
+                var garblePercent = _encryption.GetGarblePercentage(encryptionComp);
+                recipientMessage = _encryption.GarbleMessage(message, garblePercent);
+            }
+
+            if (TryComp(recipient, out ActorComponent? actor))
+                _chatManager.ChatMessageToOne(ChatChannel.Radio, recipientMessage, recipientMessage, default, false, actor.PlayerSession.Channel);
+        }
+
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    private bool IsRecipientGroundside(EntityUid recipient)
+    {
+        // Check if recipient is on the planet map by comparing map names
+        if (TryComp<TransformComponent>(recipient, out var xform) &&
+            xform.MapUid is { } mapUid &&
+            TryComp<MetaDataComponent>(mapUid, out var metadata))
+        {
+            return metadata.EntityName == _distressSignal.SelectedPlanetMapName;
+        }
+        return false;
     }
 
     public override void AnnounceHighCommand(
