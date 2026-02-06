@@ -83,3 +83,24 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+
+- type: entity
+  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineEIAFNo2
+  name: EIAF No.2 service uniform
+  description: A formal No.2 service uniform worn by EIAF officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf_officer.rsi
+    - type: UniformAccessoryHolder
+      startingAccessories:
+        - RMCPatchTSEMarines
+        - RMCPatchTSE
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: Foldable
+      unfoldVerbText: rmc-sleeves-verb-unfold
+      foldVerbText: rmc-sleeves-verb-fold
+    - type: FoldableClothing
+      foldedEquippedPrefix: sleeves
+      
