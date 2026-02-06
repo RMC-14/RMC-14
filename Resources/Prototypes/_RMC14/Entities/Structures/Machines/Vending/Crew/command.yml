@@ -573,6 +573,7 @@
       entries:
       - id: RMCD50WinterWyvernBeltFilledAmmo
       - id: RMCMatebaBeltFilledAmmo
+      - id: RMCM1984MatchBeltFilledAmmo
     - name: Ceremonial Weapon
       choices: { CMCeremonial: 1 }
       entries:
@@ -601,6 +602,10 @@
       - id: RMCMagazinePistolHandcannonHI
         points: 15
       - id: RMCMagazinePistolHandcannonHIAP
+        points: 20
+      - id: RMCMagazinePistolM1984HI
+        points: 15
+      - id: RMCMagazinePistolM1984HIAP
         points: 20
     - name: Shotgun Ammunition
       entries:

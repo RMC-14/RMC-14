@@ -1364,6 +1364,18 @@
     - id: CMWeaponPistolM1984
 
 - type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1984MatchBeltFilledAmmo
+  suffix: M1984 Match, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolM1984HI
+      amount: 4
+    - id: RMCMagazinePistolM1984HIAP
+      amount: 2
+
+- type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCM44BeltFilled
   suffix: Filled

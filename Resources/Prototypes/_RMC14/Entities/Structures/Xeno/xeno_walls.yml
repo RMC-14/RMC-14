@@ -178,3 +178,36 @@
     lifetime: 5.0
   - type: XenoStructureUpgradeable
     to: null
+
+- type: entity
+  parent: CMBaseWallXeno
+  id: WallXenoResinReflect
+  name: resin wall
+  description: Weird slime solidified into a wall. This wall reflects projectiles.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Xenos/xeno_resin_wall.rsi
+    state: resin
+  - type: IconSmooth
+    key: walls
+    base: resin
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: XenoNestSurface
+  - type: XenoConstructionMinRange
+  - type: XenoConstructionPlasmaCost
+    plasma: 120
+  - type: MeleeReceivedMultiplier
+    xenoDamage:
+      types:
+        Slash: 300
+  - type: Reflect
+    reflectProb: 1

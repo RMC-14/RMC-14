@@ -80,6 +80,75 @@
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
 
+#CO M1984
+- type: entity
+  parent: CMWeaponPistolM1984
+  id: RMCWeaponPistolM1984Match
+  name: M1984 Custom Match
+  description: A customized version of the time-honored M1984. Featuring an elongated slide, a full-length frame and a bobtail grip, this weapon exhibits the deadliness and elegance fit for a commanding officer.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolM1984Match
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984match.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/m1984match.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCM1984MatchShoot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM1984
+          - RMCMagazinePistolM1984HI
+          - RMCMagazinePistolM1984HIAP
+          - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984Rubber
+        startingItem: RMCMagazinePistolM1984HI
+  - type: RMCBattleExecute
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
+
+- type: Tag
+  id: RMCWeaponPistolM1984Match
+
+- type: entity
+  parent: RMCWeaponPistolM1984Match
+  id: CMWeaponPistolM1984MatchEmpty
+  suffix: Empty
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_88m4_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolM1984
+          - RMCMagazinePistolM1984HI
+          - RMCMagazinePistolM1984HIAP
+          - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984Rubber
+
 #9mm
 - type: entity
   parent: CMBaseMagazinePistol
@@ -212,3 +281,127 @@
 
 - type: Tag
   id: RMCCartridgePistol9mmHP
+
+#9mm HI
+
+- type: entity
+  parent: CMMagazinePistolM1984
+  id: RMCMagazinePistolM1984HI
+  name: M1984 high impact magazine (9mm)
+  description: A high-impact 9mm pistol magazine for the M1984. These rounds can stun their targets. Designed for use only with the M1984 Match.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984HI
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmHI
+    proto: RMCCartridgePistol9mmHI
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#00CDEA"
+
+- type: entity
+  parent: CMCartridgePistol9mm
+  id: RMCCartridgePistol9mmHI
+  name: cartridge (9mm HI)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmHI
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmHI
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol9mmHI
+  name: bullet (9mm HI)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
+
+- type: Tag
+  id: RMCMagazinePistolM1984HI
+
+- type: Tag
+  id: RMCCartridgePistol9mmHI
+
+#9mm HIAP
+
+- type: entity
+  parent: CMMagazinePistolM1984
+  id: RMCMagazinePistolM1984HIAP
+  name: M1984 high impact armor piercing magazine (9mm)
+  description: A high-impact, armor-piercing 9mm pistol magazine for the M1984. These rounds can stun their targets while also providing impressive armor penetration. Designed for use only with the M1984 Match.
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984HIAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgePistol9mmHIAP
+    proto: RMCCartridgePistol9mmHIAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#d4bc44"
+
+- type: entity
+  parent: CMCartridgePistol9mm
+  id: RMCCartridgePistol9mmHIAP
+  name: cartridge (9mm HIAP)
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgePistol9mmHIAP
+  - type: CartridgeAmmo
+    proto: RMCBulletPistol9mmHIAP
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletPistol9mmHIAP
+  name: bullet (9mm HIAP)
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 40
+  - type: CMArmorPiercing
+    amount: 100
+  - type: RMCStunOnHit
+    stuns:
+    - whitelist:
+        minMobSize: VerySmallXeno
+      maxRange: 4.5
+      stunTime: 1
+
+- type: Tag
+  id: RMCMagazinePistolM1984HIAP
+
+- type: Tag
+  id: RMCCartridgePistol9mmHIAP
