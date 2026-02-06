@@ -66,7 +66,7 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
 
-rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. Your are subject to Marine Law and are expected not to break it.
+rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
 
                                              Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
 
