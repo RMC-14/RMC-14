@@ -364,7 +364,7 @@
       - id: RMCPatchUnitedNationsSquare
         name: United Nations flag shoulder patch
         amount: 15
-      - id: BedrollFolded
+      - id: RMCBedrollFolded
         amount: 20
       - id: RMCM5CameraGear
         amount: 10

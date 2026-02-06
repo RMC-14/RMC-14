@@ -54,7 +54,7 @@
           !type:IsBarbed
         action:
           !type:SpawnPrototype
-          prototype: BarbedWire1
+          prototype: RMCBarbedWire1
           amount: 1
       - !type:DeleteEntity
       conditions:

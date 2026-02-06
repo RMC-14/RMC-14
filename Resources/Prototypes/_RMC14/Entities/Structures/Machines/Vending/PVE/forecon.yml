@@ -161,6 +161,6 @@
         amount: 15
       - id: RMCPatchUNMC
         amount: 15
-      - id: BedrollFolded
-        name: LRRP Bedroll
+      - id: RMCBedrollFolded
+        name: LRRP RMCBedroll
         amount: 15

@@ -136,11 +136,11 @@
     state: bunk_red
   - type: Construction
 
-# Bedroll
+# RMCBedroll
 
 - type: entity
   parent: [BaseItem, BaseFoldable]
-  id: Bedroll
+  id: RMCBedroll
   name: bedroll
   suffix: RMC
   description: A foldable bedroll, just about the only thing of comfort in the field. You're generally supposed to unroll it before sleeping, but who needs rules?
@@ -207,8 +207,8 @@
           False: {visible: true}
 
 - type: entity
-  parent: Bedroll
-  id: BedrollFolded
+  parent: RMCBedroll
+  id: RMCBedrollFolded
   suffix: folded
   components:
   - type: Foldable

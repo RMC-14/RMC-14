@@ -1,6 +1,6 @@
 - type: entity
   abstract: true
-  id: BarbedWireBase
+  id: RMCBarbedWireBase
   parent: BaseItem
   name: barbed wire
   suffix: Filled
@@ -38,8 +38,8 @@
   - type: BarbedWire
 
 - type: entity
-  parent: BarbedWireBase
-  id: BarbedWire10
+  parent: RMCBarbedWireBase
+  id: RMCBarbedWire10
   suffix: "10"
   components:
   - type: Sprite
@@ -49,8 +49,8 @@
     count: 10
 
 - type: entity
-  parent: BarbedWireBase
-  id: BarbedWire15
+  parent: RMCBarbedWireBase
+  id: RMCBarbedWire15
   suffix: "15"
   components:
   - type: Sprite
@@ -60,8 +60,8 @@
     count: 15
 
 - type: entity
-  parent: BarbedWireBase
-  id: BarbedWire1
+  parent: RMCBarbedWireBase
+  id: RMCBarbedWire1
   suffix: Single
   components:
   - type: Sprite
