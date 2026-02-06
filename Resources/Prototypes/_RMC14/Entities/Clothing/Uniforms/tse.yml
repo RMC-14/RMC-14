@@ -76,6 +76,8 @@
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+  - type: WebbingClothing
+    startingWebbing: RMCEEIAFWebbing
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: Foldable
@@ -83,7 +85,7 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
-
+    
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineEIAFNo2

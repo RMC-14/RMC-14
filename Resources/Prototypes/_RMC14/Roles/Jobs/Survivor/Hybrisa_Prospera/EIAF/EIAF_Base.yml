@@ -21,12 +21,12 @@
   equipment:
     head: RMCHeadEIAFBeret
     jumpsuit: RMCJumpsuitMarineEIAFNo8
-    #back: RMCSatchelMarineForeconSurvivorFill //Need backpack ported
+    #back:  //Need backpack ported
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     outerClothing: RMCArmorEIAFVestFilledF90
     id: CMIDCardStandardDogtag
     ears: RMCHeadsetEIAF
-    pocket1: RMCPouchFirstAidInjectors #Need to check what is firstaid/full/alternate
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment 
     pocket2: RMCPouchFlareFilled
-    #suitstorage: RMCFlashlight //Whatever the F90 is called
+    #suitstorage:  F90//Whatever the F90 is called
