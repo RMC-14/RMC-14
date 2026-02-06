@@ -698,7 +698,7 @@
     sections:
     - name: Uniform
       entries:
-      - id: JumpsuitMarine
+      - id: RMCJumpsuitMarine
         amount: 20
       - id: CMJumpsuitMarineEngineer
         amount: 5

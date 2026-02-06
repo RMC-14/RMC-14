@@ -67,7 +67,7 @@
 - type: startingGear
   id: CMGearWeaponsSpecialistEquipped
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlackFilled
     head: ArmorHelmetM10
     gloves: CMHandsBlackMarine

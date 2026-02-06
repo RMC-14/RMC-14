@@ -29,7 +29,7 @@
 - type: startingGear
   id: RMCGearTrainingDummy
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
     shoes: CMBootsBlack
 
 - type: entity

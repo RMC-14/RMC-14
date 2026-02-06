@@ -26,7 +26,7 @@
       - id: RMCJumpsuitSynthetic
         # mandatory: true, TODO allow vendors to mark entries as mandatory
         # /obj/item/clothing/under/rank/synthetic/old
-      - id: JumpsuitMarine
+      - id: RMCJumpsuitMarine
       - id: CMJumpsuitMarineMedic
     - name: Webbing
       choices: { CMAccessories: 1 }
