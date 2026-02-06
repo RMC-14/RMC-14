@@ -1,13 +1,16 @@
 using Content.Shared._RMC14.CrashLand;
 using Content.Shared._RMC14.Dropship.Utility.Components;
+using Content.Shared.Coordinates;
 using Content.Shared.ParaDrop;
 using Robust.Shared.Containers;
+using Robust.Shared.Spawners;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
 public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 {
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedMapSystem _map = default!;
 
     /// <summary>
     ///     Tries to paradrop an entity to the target's coordinates.
@@ -42,21 +45,32 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             Dirty(deployableEnt, deployable);
         }
 
-        Deploy(deploying, target,  deployerComp.DropScatter);
+        Deploy(deploying, target,  deployerComp.DropScatter, deployable, deployable.UseParachute);
         return true;
     }
 
-    private void Deploy(EntityUid deployable, EntityUid target, int dropScatter, bool parachute = true)
+    private void Deploy(EntityUid deployable, EntityUid target, int dropScatter, RMCOrbitalDeployableComponent deployableComp, bool parachute = true)
     {
-        EnsureComp<CrashLandableComponent>(deployable);
+        var crashLandable = EnsureComp<CrashLandableComponent>(deployable);
+        var travelTime = crashLandable.CrashDuration;
         if (parachute)
         {
             var paraDroppable = EnsureComp<ParaDroppableComponent>(deployable);
             paraDroppable.DropScatter = dropScatter;
             Dirty(deployable, paraDroppable);
+
+            travelTime = paraDroppable.DropDuration;
         }
 
-        var ev = new AttemptCrashLandEvent(deployable, target);
+        var dropLocation =_map.AlignToGrid(target.ToCoordinates());
+        if (deployableComp.LandingEffectId != null)
+        {
+            var deployEffect = Spawn(deployableComp.LandingEffectId, dropLocation);
+            var timer = EnsureComp<TimedDespawnComponent>(deployEffect);
+            timer.Lifetime = travelTime + SkyFallingComponent.DefaultFallDuration;
+        }
+
+        var ev = new AttemptCrashLandEvent(deployable, dropLocation);
         RaiseLocalEvent(deployable, ref ev);
     }
 }

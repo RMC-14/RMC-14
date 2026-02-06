@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
@@ -101,7 +102,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
 
         args.Cancelled = true;
 
-        AttemptParaDrop(args.Crashing, paraDrop?.DropTarget);
+        EntityCoordinates? target = null;
+        if (paraDrop?.DropTarget != null)
+            target = paraDrop.DropTarget.Value.ToCoordinates();
+
+        AttemptParaDrop(args.Crashing, target);
     }
 
     private void OnAttemptCrashLand(Entity<MapGridComponent> ent, ref AttemptCrashLandEvent args)
@@ -109,10 +114,10 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         if (!_dropship.TryGetGridDropship(ent, out var dropShip))
             return;
 
-        EntityUid? target = null;
+        EntityCoordinates? target = null;
 
-        if (TryComp(dropShip, out ActiveParaDropComponent? paraDrop))
-            target = paraDrop.DropTarget;
+        if (TryComp(dropShip, out ActiveParaDropComponent? paraDrop) && paraDrop.DropTarget != null)
+            target = paraDrop.DropTarget.Value.ToCoordinates();
 
         if (target == null && !HasComp<ParaDroppableComponent>(args.Crashing))
             return;
@@ -224,8 +229,8 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     ///     Try to do a paradrop, if no target is given the drop location will be random.
     /// </summary>
     /// <param name="dropping">The entity that is trying to paradrop</param>
-    /// <param name="dropTarget">The target entity</param>
-    private void AttemptParaDrop(EntityUid dropping, EntityUid? dropTarget = null)
+    /// <param name="dropTarget">The target entity coordinates</param>
+    private void AttemptParaDrop(EntityUid dropping, EntityCoordinates? dropTarget = null)
     {
         if (_net.IsClient)
             return;

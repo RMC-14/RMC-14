@@ -29,4 +29,10 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int RemainingDeployCount = 1;
+
+    /// <summary>
+    ///     The effect to display at the landing location during the drop.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId? LandingEffectId = "RMCEffectAlert";
 }

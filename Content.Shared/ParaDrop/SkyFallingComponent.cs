@@ -7,6 +7,9 @@ namespace Content.Shared.ParaDrop;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class SkyFallingComponent : Component
 {
+    // This should be the same value as the RemainingTIme default value.
+    public const float DefaultFallDuration = 1.5f;
+
     /// <summary>
     ///     The remaining duration of the animation.
     /// </summary>
