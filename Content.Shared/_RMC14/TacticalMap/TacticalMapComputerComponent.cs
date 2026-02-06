@@ -35,4 +35,6 @@ public sealed partial class TacticalMapComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int SkillLevel = 2;
+
+    public EntityUid? ObjectivesSquad;
 }

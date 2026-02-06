@@ -6,7 +6,9 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Network;
 using JetBrains.Annotations;
@@ -24,6 +26,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     private string? _currentMapId;
     private IReadOnlyList<TacticalMapMapInfo> _availableMaps = new List<TacticalMapMapInfo>();
     private NetEntity _activeMap = NetEntity.Invalid;
+    private Dictionary<SquadObjectiveType, string> _objectives = new();
 
     protected override void Open()
     {
@@ -50,9 +53,12 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
+        Window.Wrapper.UpdateObjectives(_objectives);
 
         Window.Wrapper.SetupUpdateButton(msg => SendPredictedMessage(msg));
         Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
+        Window.Wrapper.Map.OnBlipEntityClicked = OnXenoWatchBlipClicked;
+        Window.Wrapper.Canvas.OnBlipEntityClicked = OnXenoWatchBlipClicked;
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -61,7 +67,9 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         {
             _availableMaps = tacticalState.Maps;
             _activeMap = tacticalState.ActiveMap;
+            _objectives = new Dictionary<SquadObjectiveType, string>(tacticalState.Objectives);
             ApplyMapState();
+            Window?.Wrapper.UpdateObjectives(_objectives);
         }
     }
 
@@ -92,6 +100,8 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             Window.Wrapper.MapSelected -= OnMapSelected;
             Window.Wrapper.LayerSelected -= OnLayerSelected;
             Window.Wrapper.CloseRequested -= Close;
+            Window.Wrapper.Map.OnBlipEntityClicked = null;
+            Window.Wrapper.Canvas.OnBlipEntityClicked = null;
         }
 
         base.Dispose(disposing);
@@ -106,6 +116,17 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
     {
         var layerId = layer?.Id;
         SendPredictedMessage(new TacticalMapSelectLayerMsg(layerId));
+    }
+
+    private void OnXenoWatchBlipClicked(Vector2i indices, int? entityId)
+    {
+        if (entityId is null || entityId.Value <= 0)
+            return;
+
+        if (!EntMan.HasComponent<XenoComponent>(Owner))
+            return;
+
+        SendPredictedMessage(new TacticalMapXenoWatchBlipMsg(new NetEntity(entityId.Value)));
     }
 
     private void ApplyMapState()

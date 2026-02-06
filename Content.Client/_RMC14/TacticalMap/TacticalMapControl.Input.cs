@@ -70,10 +70,18 @@ public sealed partial class TacticalMapControl
 
     private bool HandleBlipClick(GUIBoundKeyEventArgs args)
     {
-        TacticalMapBlip? clickedBlip = GetBlipAtPosition(args.RelativePosition);
-        if (clickedBlip != null && !Drawing && !QueenEyeMode)
+        var blipIndex = GetBlipIndexAtPosition(args.RelativePosition);
+        var allowBlipClick = !QueenEyeMode &&
+            (!Drawing || (!StraightLineMode && !SquareMode && !EraserMode && !LabelEditMode));
+
+        if (blipIndex != null && _blips != null && allowBlipClick)
         {
-            OnBlipClicked?.Invoke(clickedBlip.Value.Indices);
+            var blip = _blips[blipIndex.Value];
+            OnBlipClicked?.Invoke(blip.Indices);
+            var entityId = _blipEntityIds != null && blipIndex.Value < _blipEntityIds.Length
+                ? _blipEntityIds[blipIndex.Value]
+                : (int?)null;
+            OnBlipEntityClicked?.Invoke(blip.Indices, entityId);
             args.Handle();
             return true;
         }
@@ -391,6 +399,15 @@ public sealed partial class TacticalMapControl
 
     private TacticalMapBlip? GetBlipAtPosition(Vector2 controlPosition)
     {
+        var index = GetBlipIndexAtPosition(controlPosition);
+        if (index == null || _blips == null)
+            return null;
+
+        return _blips[index.Value];
+    }
+
+    private int? GetBlipIndexAtPosition(Vector2 controlPosition)
+    {
         if (_blips == null || Texture == null)
             return null;
 
@@ -398,8 +415,9 @@ public sealed partial class TacticalMapControl
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
         float clickTolerance = ClickTolerance * overlayScale;
 
-        foreach (TacticalMapBlip blip in _blips)
+        for (var i = 0; i < _blips.Length; i++)
         {
+            var blip = _blips[i];
             Vector2 blipPosition = IndicesToPosition(blip.Indices) * overlayScale + actualTopLeft;
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
 
@@ -409,7 +427,7 @@ public sealed partial class TacticalMapControl
             );
 
             if (blipRect.Contains(pixelPosition))
-                return blip;
+                return i;
         }
 
         return null;

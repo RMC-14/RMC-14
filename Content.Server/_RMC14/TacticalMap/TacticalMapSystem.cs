@@ -5,16 +5,23 @@ using Content.Server._RMC14.Announce;
 using Content.Server._RMC14.Marines;
 using Content.Server.Administration.Logs;
 using Content.Server.GameTicking.Events;
+using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
+using Content.Server._RMC14.Overwatch;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
+using Content.Shared.Popups;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
@@ -31,6 +38,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
@@ -39,6 +47,7 @@ namespace Content.Server._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
+
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -49,12 +58,15 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly OverwatchConsoleSystem _overwatch = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
+    [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
     [Dependency] private readonly RMCUnrevivableSystem _unrevivableSystem = default!;
 
     private EntityQuery<ActiveTacticalMapTrackedComponent> _activeTacticalMapTrackedQuery;
@@ -103,6 +115,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
         SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
         SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
+        SubscribeLocalEvent<SquadObjectivesChangedEvent>(OnSquadObjectivesChanged);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -135,6 +148,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapSelectLayerMsg>(OnUserSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
                 subs.Event<TacticalMapQueenEyeMoveMsg>(OnUserQueenEyeMoveMsg);
+                subs.Event<TacticalMapXenoWatchBlipMsg>(OnUserXenoWatchBlipMsg);
             });
 
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
@@ -144,6 +158,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapSelectMapMsg>(OnComputerSelectMapMsg);
                 subs.Event<TacticalMapSelectLayerMsg>(OnComputerSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
+                subs.Event<TacticalMapOverwatchBlipMsg>(OnOverwatchBlipMsg);
             });
 
         Subs.CVar(_config,
@@ -436,7 +451,38 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
         RefreshComputerVisibleLayers(ent);
+        if (_squad.TryGetMemberSquad(args.Actor, out var squad))
+            ent.Comp.ObjectivesSquad = squad.Owner;
+        else
+            ent.Comp.ObjectivesSquad = null;
+
         UpdateTacticalMapComputerState(ent);
+    }
+
+    private void OnSquadObjectivesChanged(ref SquadObjectivesChangedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        var squad = args.Squad;
+        foreach (var member in squad.Comp.Members)
+        {
+            if (!_ui.IsUiOpen(member, TacticalMapUserUi.Key))
+                continue;
+
+            if (TryComp(member, out TacticalMapUserComponent? user))
+                UpdateTacticalMapState((member, user));
+        }
+
+        var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
+        while (computers.MoveNext(out var computerId, out var computer))
+        {
+            if (computer.ObjectivesSquad != squad.Owner)
+                continue;
+
+            if (_ui.IsUiOpen(computerId, TacticalMapComputerUi.Key))
+                UpdateTacticalMapComputerState((computerId, computer));
+        }
     }
 
     private void OnUserSelectMapMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapSelectMapMsg args)
@@ -505,6 +551,90 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateMapData(ent, map.Comp);
     }
 
+    private void OnOverwatchBlipMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapOverwatchBlipMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(ent.Owner, out OverwatchConsoleComponent? console))
+        {
+            _popup.PopupCursor("This map is not linked to an overwatch console.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (args.Target == NetEntity.Invalid || !TryGetEntity(args.Target, out var target))
+        {
+            _popup.PopupCursor("That blip is not a valid overwatch target.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        var bypassSquadCheck = HasComp<MarineCommunicationsComputerComponent>(ent.Owner);
+        if (!bypassSquadCheck)
+        {
+            if (console.Squad is not { } squadNet ||
+                !TryGetEntity(squadNet, out var squadEnt) ||
+                !TryComp(squadEnt, out SquadTeamComponent? squadComp))
+            {
+                _popup.PopupCursor("No squad selected on the overwatch console.", args.Actor, PopupType.MediumCaution);
+                return;
+            }
+
+            if (!squadComp.Members.Contains(target.Value))
+            {
+                _popup.PopupCursor("That marine is not in the selected squad.", args.Actor, PopupType.MediumCaution);
+                return;
+            }
+        }
+
+        if (!console.ShowHidden && console.Hidden.Contains(args.Target))
+        {
+            _popup.PopupCursor("That marine is hidden on the overwatch console.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!_overwatch.TryWatchTarget(args.Actor, target.Value))
+        {
+            return;
+        }
+    }
+
+    private void OnUserXenoWatchBlipMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapXenoWatchBlipMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!ent.Comp.LiveUpdate)
+        {
+            _popup.PopupCursor("The tactical map is not live right now.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (args.Target == NetEntity.Invalid || !TryGetEntity(args.Target, out var target))
+        {
+            _popup.PopupCursor("That blip is not a valid watch target.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!HasComp<XenoComponent>(args.Actor))
+        {
+            _popup.PopupCursor("Only xenos can spectate from the tactical map.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!HasComp<XenoComponent>(target.Value))
+        {
+            _popup.PopupCursor("That blip is not a xeno.", args.Actor, PopupType.MediumCaution);
+            return;
+        }
+
+        TryComp(args.Actor, out HiveMemberComponent? watcherHive);
+        TryComp(args.Actor, out ActorComponent? watcherActor);
+        TryComp(args.Actor, out EyeComponent? watcherEye);
+        TryComp(target.Value, out HiveMemberComponent? targetHive);
+
+        _xenoWatch.Watch((args.Actor, watcherHive, watcherActor, watcherEye), (target.Value, targetHive));
+    }
+
     private void UpdateTacticalMapState(Entity<TacticalMapUserComponent> ent)
     {
         var maps = BuildMapList();
@@ -512,7 +642,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (TryResolveUserMap(ent, out var map))
             activeMap = GetNetEntity(map.Owner);
 
-        var state = new TacticalMapBuiState(activeMap, maps);
+        var objectives = BuildObjectiveStateForUser(ent.Owner);
+        var state = new TacticalMapBuiState(activeMap, maps, objectives);
         _ui.SetUiState(ent.Owner, TacticalMapUserUi.Key, state);
     }
 
@@ -523,8 +654,44 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (TryResolveComputerMap(computer, out var map))
             activeMap = GetNetEntity(map.Owner);
 
-        var state = new TacticalMapBuiState(activeMap, maps);
+        var objectives = BuildObjectiveStateForComputer(computer);
+        var state = new TacticalMapBuiState(activeMap, maps, objectives);
         _ui.SetUiState(computer.Owner, TacticalMapComputerUi.Key, state);
+    }
+
+    private Dictionary<SquadObjectiveType, string> BuildObjectiveState(SquadTeamComponent squad)
+    {
+        var objectives = new Dictionary<SquadObjectiveType, string>();
+        foreach (var type in Enum.GetValues<SquadObjectiveType>())
+        {
+            objectives[type] = string.Empty;
+        }
+
+        foreach (var (type, objective) in squad.Objectives)
+        {
+            objectives[type] = objective ?? string.Empty;
+        }
+
+        return objectives;
+    }
+
+    private Dictionary<SquadObjectiveType, string> BuildObjectiveStateForUser(EntityUid viewer)
+    {
+        if (_squad.TryGetMemberSquad(viewer, out var squad))
+            return BuildObjectiveState(squad.Comp);
+
+        return new Dictionary<SquadObjectiveType, string>();
+    }
+
+    private Dictionary<SquadObjectiveType, string> BuildObjectiveStateForComputer(Entity<TacticalMapComputerComponent> computer)
+    {
+        if (computer.Comp.ObjectivesSquad != null &&
+            TryComp(computer.Comp.ObjectivesSquad.Value, out SquadTeamComponent? squad))
+        {
+            return BuildObjectiveState(squad);
+        }
+
+        return new Dictionary<SquadObjectiveType, string>();
     }
 
     private void RefreshUserVisibleLayers(Entity<TacticalMapUserComponent> user)
@@ -743,6 +910,9 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var user = args.Actor;
+        if (!HasComp<MarineCommunicationsComputerComponent>(ent.Owner))
+            return;
+
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
@@ -979,6 +1149,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     {
         if (!Resolve(computer, ref computer.Comp, false))
             return;
+
+        if (_squad.TryGetMemberSquad(user, out var squad))
+            computer.Comp.ObjectivesSquad = squad.Owner;
+        else
+            computer.Comp.ObjectivesSquad = null;
 
         _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
         UpdateMapData((computer, computer.Comp));
@@ -1289,6 +1464,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         AddSelfBlip(user.Owner, map, blips);
+        FilterXenoBlipsForHive(user.Owner, blips);
         user.Comp.Blips = blips;
 
         var combinedLines = new List<TacticalMapLine>();
@@ -1312,6 +1488,42 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         Dirty(user);
         Dirty(user, lines);
         Dirty(user, labels);
+    }
+
+    private void FilterXenoBlipsForHive(EntityUid viewer, Dictionary<int, TacticalMapBlip> blips)
+    {
+        if (!HasComp<XenoComponent>(viewer))
+            return;
+
+        TryComp(viewer, out HiveMemberComponent? viewerHive);
+        var viewerHiveId = viewerHive?.Hive;
+
+        var toRemove = new List<int>();
+        foreach (var (entityId, _) in blips)
+        {
+            if (entityId == viewer.Id)
+                continue;
+
+            var target = new EntityUid(entityId);
+            if (TerminatingOrDeleted(target))
+                continue;
+
+            if (!HasComp<XenoComponent>(target))
+                continue;
+
+            if (!TryComp(target, out HiveMemberComponent? targetHive) ||
+                viewerHiveId == null ||
+                targetHive.Hive == null ||
+                targetHive.Hive != viewerHiveId)
+            {
+                toRemove.Add(entityId);
+            }
+        }
+
+        foreach (var entityId in toRemove)
+        {
+            blips.Remove(entityId);
+        }
     }
 
     private TacticalMapBlip? FindBlipInMap(int entityId, TacticalMapComponent map)

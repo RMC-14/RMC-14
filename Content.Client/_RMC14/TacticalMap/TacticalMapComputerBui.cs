@@ -2,7 +2,10 @@ using System.Collections.Generic;
 using System.Numerics;
 using Content.Client._RMC14.UserInterface;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using Robust.Shared.Prototypes;
 using JetBrains.Annotations;
@@ -21,6 +24,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
     private string? _currentMapId;
     private IReadOnlyList<TacticalMapMapInfo> _availableMaps = new List<TacticalMapMapInfo>();
     private NetEntity _activeMap = NetEntity.Invalid;
+    private Dictionary<SquadObjectiveType, string> _objectives = new();
 
     protected override void Open()
     {
@@ -29,6 +33,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         var computer = EntMan.GetComponentOrNull<TacticalMapComputerComponent>(Owner);
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
         var canDraw = computer != null &&
+            EntMan.HasComponent<MarineCommunicationsComputerComponent>(Owner) &&
             _player.LocalEntity is { } player &&
             EntMan.System<SkillsSystem>().HasSkill(player, computer.Skill, computer.SkillLevel);
         Window.Wrapper.SetCanvasAccess(canDraw);
@@ -51,6 +56,13 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
+        Window.Wrapper.UpdateObjectives(_objectives);
+
+        if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
+        {
+            Window.Wrapper.Map.OnBlipEntityClicked = OnOverwatchBlipClicked;
+            Window.Wrapper.Canvas.OnBlipEntityClicked = OnOverwatchBlipClicked;
+        }
 
         Window.Wrapper.UpdateCanvasButton.Button.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines, Window.Wrapper.Canvas.TacticalLabels));
     }
@@ -61,7 +73,9 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         {
             _availableMaps = tacticalState.Maps;
             _activeMap = tacticalState.ActiveMap;
+            _objectives = new Dictionary<SquadObjectiveType, string>(tacticalState.Objectives);
             ApplyMapState();
+            Window?.Wrapper.UpdateObjectives(_objectives);
         }
     }
 
@@ -92,6 +106,8 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             Window.Wrapper.MapSelected -= OnMapSelected;
             Window.Wrapper.LayerSelected -= OnLayerSelected;
             Window.Wrapper.CloseRequested -= Close;
+            Window.Wrapper.Map.OnBlipEntityClicked = null;
+            Window.Wrapper.Canvas.OnBlipEntityClicked = null;
         }
 
         base.Dispose(disposing);
@@ -132,6 +148,14 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
     {
         var layerId = layer?.Id;
         SendPredictedMessage(new TacticalMapSelectLayerMsg(layerId));
+    }
+
+    private void OnOverwatchBlipClicked(Vector2i indices, int? entityId)
+    {
+        if (entityId is null || entityId.Value <= 0)
+            return;
+
+        SendPredictedMessage(new TacticalMapOverwatchBlipMsg(new NetEntity(entityId.Value)));
     }
 
     private void ApplyMapState()

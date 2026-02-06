@@ -167,6 +167,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public bool QueenEyeMode { get; set; }
 
     public Action<Vector2i>? OnBlipClicked;
+    public Action<Vector2i, int?>? OnBlipEntityClicked;
     public Action<Vector2i, string>? OnBlipRightClicked;
     public Action<TacticalMapControl, Vector2i, Vector2>? OnContextMenuRequested;
     public Action? OnUserInteraction;

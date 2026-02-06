@@ -30,6 +30,12 @@ public sealed class TacticalMapSelectLayerMsg(string? layerId) : BoundUserInterf
 }
 
 [Serializable, NetSerializable]
+public sealed class TacticalMapOverwatchBlipMsg(NetEntity target) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Target = target;
+}
+
+[Serializable, NetSerializable]
 public sealed class TacticalMapQueenEyeMoveMsg(Vector2i position) : BoundUserInterfaceMessage
 {
     public readonly Vector2i Position = position;

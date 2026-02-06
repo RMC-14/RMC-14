@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.TacticalMap;
@@ -117,6 +118,7 @@ public sealed partial class TacticalMapWrapper : Control
 
     private bool _settingsVisible = false;
     private bool _overlaysVisible = false;
+    private bool _objectivesVisible = true;
     private DrawingMode _currentDrawingMode = DrawingMode.None;
     private RadiusOverlayMode _radiusOverlayMode = RadiusOverlayMode.None;
     private float _orbitalRadiusTiles = DefaultOrbitalRadiusTiles;
@@ -365,6 +367,59 @@ public sealed partial class TacticalMapWrapper : Control
         _suppressMapSelection = false;
     }
 
+    public void UpdateObjectives(Dictionary<SquadObjectiveType, string> objectives)
+    {
+        ObjectivesList.DisposeAllChildren();
+
+        if (objectives.Count == 0)
+        {
+            ObjectivesContainer.Visible = false;
+            return;
+        }
+
+        ObjectivesContainer.Visible = true;
+        ObjectivesList.Visible = _objectivesVisible;
+        SetObjectivesToggleText();
+
+        foreach (var objectiveType in Enum.GetValues<SquadObjectiveType>())
+        {
+            var objectiveText = objectives.GetValueOrDefault(objectiveType, string.Empty);
+            var objectiveName = objectiveType switch
+            {
+                SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+                SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+                _ => objectiveType.ToString()
+            };
+
+            var displayText = string.IsNullOrWhiteSpace(objectiveText)
+                ? $"{objectiveName}: {Loc.GetString("rmc-squad-info-none")}"
+                : $"{objectiveName}: {FormattedMessage.EscapeText(objectiveText)}";
+
+            var objectiveLabel = new RichTextLabel
+            {
+                HorizontalExpand = true,
+                Text = displayText,
+                Margin = new Thickness(0, 0, 0, 2),
+                StyleClasses = { "LabelSmall" }
+            };
+
+            ObjectivesList.AddChild(objectiveLabel);
+        }
+    }
+
+    private void ToggleObjectivesVisibility()
+    {
+        _objectivesVisible = !_objectivesVisible;
+        ObjectivesList.Visible = _objectivesVisible;
+        SetObjectivesToggleText();
+    }
+
+    private void SetObjectivesToggleText()
+    {
+        var text = _objectivesVisible ? "Hide" : "Show";
+        SetButtonText(ObjectivesToggleButton, text, DefaultButtonTextColor);
+    }
+
     public void UpdateLayerList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, ProtoId<TacticalMapLayerPrototype>? activeLayer)
     {
         _suppressLayerSelection = true;
@@ -482,6 +537,7 @@ public sealed partial class TacticalMapWrapper : Control
         CloseButton.Button.OnPressed += _ => CloseRequested?.Invoke();
         PopoutButton.BorderThickness = new Thickness(0);
         PopoutButton.BorderColor = Color.Transparent;
+        ObjectivesToggleButton.Button.OnPressed += _ => ToggleObjectivesVisibility();
 
         Map.OnUserInteraction += OnUserInteraction;
         Canvas.OnUserInteraction += OnUserInteraction;

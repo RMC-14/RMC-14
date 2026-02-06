@@ -24,6 +24,8 @@
                                         Margin="0 0 6 0" MinWidth="50" MinHeight="26" />
             <controls:TacticalMapButton Name="ResetViewButton" Access="Public" Text="{Loc ui-tactical-map-reset-button}"
                                         Margin="0 0 6 0" MinWidth="50" MinHeight="26" />
+            <controls:TacticalMapButton Name="ObjectivesToggleButton" Access="Public" Text="Hide"
+                                        Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
             <TextureRect Name="HoverAreaIcon" Access="Public"
                          MinSize="16 16" MaxSize="16 16" Stretch="KeepAspectCentered"
                          Margin="0 0 4 0" Visible="False" />
@@ -38,6 +40,10 @@
                                         Margin="0 0 6 0" MinWidth="60" MinHeight="26" />
             <controls:TacticalMapButton Name="CloseButton" Access="Public" Text="Close"
                                         MinWidth="60" MinHeight="26" />
+        </BoxContainer>
+
+        <BoxContainer Name="ObjectivesContainer" Access="Public" Orientation="Vertical" Margin="2 2 2 0" Visible="False">
+            <BoxContainer Name="ObjectivesList" Access="Public" Orientation="Vertical" Margin="0 2 0 0" />
         </BoxContainer>
 
         <BoxContainer Name="OverlayContainer" Access="Public" Orientation="Horizontal" Margin="2 0 2 0" Visible="False" HorizontalExpand="True">
