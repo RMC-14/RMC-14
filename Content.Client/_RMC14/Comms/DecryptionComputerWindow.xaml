@@ -1,0 +1,21 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                      Title="Decryption Computer">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <Label Text="Current Challenge Code:" />
+        <Label Name="ChallengeCodeLabel" Text="ABCD1234" Margin="0,0,0,10" />
+
+        <Label Text="Enter decryption code:" />
+        <BoxContainer Orientation="Horizontal" Margin="0,5,0,10">
+            <LineEdit Name="CodeInput" HorizontalExpand="True" />
+            <Button Name="SubmitButton" Text="Decrypt" />
+        </BoxContainer>
+
+        <Button Name="QuickRestoreButton" Text="Quick Restore (+5% Clarity)" Margin="0,0,0,10" />
+
+        <Label Name="GracePeriodLabel" Text="Grace Period: 120s remaining" Visible="False" Margin="0,0,0,10" />
+
+        <Label Text="Status:" />
+        <Label Name="StatusLabel" Text="Ready for decryption" />
+    </BoxContainer>
+</controls:FancyWindow>

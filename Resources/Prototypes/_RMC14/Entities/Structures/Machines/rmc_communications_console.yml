@@ -52,6 +52,7 @@
   - type: OverwatchConsole
     canMessageSquad: false
   - type: TacticalMapComputer
+  - type: CommsEncryption
   - type: GuideHelp
     guides:
     - RMCGuideMarineCommunications

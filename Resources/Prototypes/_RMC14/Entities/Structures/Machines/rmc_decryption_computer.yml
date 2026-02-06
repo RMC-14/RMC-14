@@ -1,0 +1,36 @@
+- type: entity
+  parent: CMBaseStructure
+  id: RMCDecryptionComputer
+  name: decryption computer
+  description: Used by CIC to restore communications clarity by decrypting challenge codes.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
+    state: on
+    layers: [ ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: WallMount
+    arc: 360
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: ActivatableUI
+    key: enum.DecryptionComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.DecryptionComputerUI.Key:
+        type: DecryptionComputerBui
+  - type: DecryptionComputer
+  - type: AccessReader
+    access: [ [ "RMCAccessSeniorCommand" ] ]

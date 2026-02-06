@@ -1,0 +1,20 @@
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                      Title="Encryption Coder Computer">
+    <BoxContainer Orientation="Vertical" Margin="10">
+        <Label Text="Submit an encoding to check announcement clarity:" />
+        <BoxContainer Orientation="Horizontal" Margin="0,5,0,10">
+            <LineEdit Name="CodeInput" HorizontalExpand="True" />
+            <Button Name="SubmitButton" Text="Submit" />
+        </BoxContainer>
+
+        <Label Text="Last Submitted Code:" />
+        <Label Name="LastSubmittedCodeLabel" Text="None" Margin="0,0,0,10" />
+
+        <Label Text="Known Letters of PONG:" />
+        <Label Name="KnownLettersLabel" Text="0" Margin="0,0,0,10" />
+
+        <Label Text="Announcement Clarity:" />
+        <Label Name="ClarityDescriptionLabel" Text="unknown" />
+    </BoxContainer>
+</controls:FancyWindow>

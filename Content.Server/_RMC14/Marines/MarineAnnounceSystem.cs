@@ -1,7 +1,9 @@
-﻿using Content.Server._RMC14.Rules;
+﻿using Content.Server._RMC14.Comms;
+using Content.Server._RMC14.Rules;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
+using Content.Shared._RMC14.Comms;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
@@ -30,6 +32,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly CommsEncryptionSystem _encryption = default!;
 
     public override void Initialize()
     {
@@ -113,7 +116,10 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         if (excludeSurvivors)
             filter.RemoveWhereAttachedEntity(HasComp<RMCSurvivorComponent>);
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        // Apply garbling if groundside
+        var garbledMessage = ApplyGarbling(message);
+
+        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, garbledMessage, garbledMessage, default, false, true, null);
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
@@ -179,5 +185,19 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
 
         _audio.PlayEntity(sound, receiver, receiver, AudioParams.Default.WithVolume(-2f));
+    }
+
+    private string ApplyGarbling(string message)
+    {
+        // Find the encryption component
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (!encryptionQuery.MoveNext(out _, out var comp))
+            return message;
+
+        if (!comp.IsGroundside)
+            return message;
+
+        var garblePercent = _encryption.GetGarblePercentage(comp);
+        return _encryption.GarbleMessage(message, garblePercent);
     }
 }
