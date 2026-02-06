@@ -294,6 +294,8 @@
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
+  - type: AccessReader
+    access: [ [ "RMCAccessWeYa" ] ]
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
