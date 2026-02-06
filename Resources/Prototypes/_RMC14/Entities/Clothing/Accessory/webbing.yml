@@ -293,6 +293,17 @@
     - type: StoreAfterFailedInteract
     - type: RMCStorageEjectHand
       state: Open
+      
+- type: entity
+  parent: CMWebbingBase
+  id: RMCEEIAFWebbing
+  name: EIAF airborne webbing
+  description: A durable harness system issued to EIAF airborne forces, designed to distribute weight evenly for comfort and mobility. Fitted with reinforced pouches for carrying essential gear during high-risk insertions.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Webbing/eiaf_webbing.rsi
+      state: webbing
+    - type: Appearance
 
 - type: entity
   parent: CMWebbingHolster
