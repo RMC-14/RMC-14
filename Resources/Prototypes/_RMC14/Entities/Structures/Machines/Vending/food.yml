@@ -67,6 +67,7 @@
 - type: entity
   parent: ColMarTechFood
   id: RMCNutriCoVendorRCM
+  suffix: PVE
   name: We-Ya Section AutoChef
   description: A repurposed NutriCo machine refilled with recipes and components for Three Suns Empire cuisine by Weston-Yamada. Equally as inedible as its Nations counterpart, but at least it looks more appealing. Slightly.
   components:

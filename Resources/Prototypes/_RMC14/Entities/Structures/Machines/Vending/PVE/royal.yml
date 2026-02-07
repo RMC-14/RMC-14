@@ -244,7 +244,7 @@
   suffix: PVE, RCM
   components:
   - type: Sprite
-    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/pmc.rsi
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/squad_prep.rsi
   - type: CMAutomatedVendor
     access:
     - "CMAccessMarinePrep"
@@ -329,8 +329,8 @@
         amount: 10
       - id: RMCPouchExplosive
         amount: 10
-      # -id: RMCPouchSling // TODO RMC14 implement sling pouch
-      #  amount: 10
+      - id: RMCPouchSling
+        amount: 10
     - name: Mask
       entries:
       - id: CMMaskGas # TODO RMC14 TWE L7 gas mask

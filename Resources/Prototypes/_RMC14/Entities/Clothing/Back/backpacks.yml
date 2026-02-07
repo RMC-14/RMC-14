@@ -292,7 +292,7 @@
   parent: RMCBackpackAmmo
   id: RMCBackpackAmmoRCM
   name: RCM carry frame
-  description: A backpack specifically designed to hold equipment for commandos.
+  description: A backpack specifically designed to hold equipment for RCM commandos.
   components:
   - type: Storage
     grid:
