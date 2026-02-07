@@ -1,0 +1,140 @@
+- type: entity
+  parent: [RMCBaseSlideMagazineVisuals, CMWeaponPistolBase]
+  id: RMCWeaponPistolL14
+  name: L14 combat pistol
+  suffix: PVE
+  description: The L14 is the standard issue sidearm of the Royal Crown Marines, and the product of an inordinate amount of time and capital investment by the TSE. It is a compact but accurate high-capacity combat pistol chambered in 9mm, capable of tight two-round bursts. This piece can usually be found on junior officers and supporting roles within the RCM.
+  components:
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCWeaponPistolL14
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l14.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l14.rsi
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 8
+  - type: Gun
+    burstCooldown: 0.33
+    shotsPerBurst: 2
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l14.ogg
+  - type: RMCSelectiveFire
+    scatterWielded: 6
+    scatterUnwielded: 6
+    baseFireRate: 6
+    burstScatterMult: 6
+    modifiers:
+      Burst:
+        fireDelay: 0.01
+        maxScatterModifier: 2
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazinePistolL14
+          - RMCMagazinePistolL14AP
+        startingItem: RMCMagazinePistolL14
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
+          - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBurstFireAssembly
+          - RMCAttachmentLaserSight
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.650, 0.093
+      rmc-aslot-rail: -0.217, 0.127
+      rmc-aslot-underbarrel: 0.275, -0.275
+
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolL14
+  name: L14 magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolL14
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mm
+    proto: CMCartridgePistol9mm
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l14.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: MagazineVisuals
+    magState: mag
+
+- type: entity
+  parent: RMCMagazinePistolL14
+  id: RMCMagazinePistolL14AP
+  name: L14 AP magazine (9mm)
+  components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolL14AP
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - CMCartridgePistol9mmAP
+    proto: CMCartridgePistolM77AP
+    capacity: 16
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l14.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: MagazineVisuals
+    magState: mag
+
+- type: Tag
+  id: RMCWeaponPistolL14
+
+- type: Tag
+  id: RMCMagazinePistolL14
+
+- type: Tag
+  id: RMCMagazinePistolL14AP
