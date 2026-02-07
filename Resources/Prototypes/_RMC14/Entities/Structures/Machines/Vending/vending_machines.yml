@@ -27,6 +27,7 @@
         - MachineMask
         layer:
         - MachineLayer
+        - BulletImpassable #TODO Remove this after vendor tipping is added
         density: 200
   - type: Repairable
     doAfterDelay: 8
