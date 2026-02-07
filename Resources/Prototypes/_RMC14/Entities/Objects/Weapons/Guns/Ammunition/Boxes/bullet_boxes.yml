@@ -354,4 +354,4 @@
   suffix: Empty
   components:
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleTS
+    bulletType: RMCBoxBulletsRifleTSE
