@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: Updated visuals for SGO guide
-    type: Tweak
-  - message: Military Police guide by WithinElysium
-    type: Add
-  id: 2377
-  time: '2025-10-02T17:27:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7750
-- author: CatAndHats
-  changes:
-  - message: Squad Leader vendor m34 pyrotechnician support kit now has a description
-    type: Fix
-  id: 2378
-  time: '2025-10-02T17:30:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8011
 - author: Monotheonist
   changes:
   - message: Added a new lobby screen, entitled "A Push Too Far." Watch out for Ravagers,
@@ -4690,5 +4674,21 @@
   id: 2879
   time: '2026-02-06T00:06:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9145
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the L14 combat pistol for use by Royal Crown Marines.'
+    type: Add
+  id: 2880
+  time: '2026-02-07T22:14:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8899
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Adds armour webbing for use by the UNMC Sun Riders.'
+    type: Add
+  - message: '[PVE] Adds Kestrel modular vests for use by the TSE''s RCM.'
+    type: Add
+  id: 2881
+  time: '2026-02-07T22:14:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8946
 Name: RMC14
 Order: -1
