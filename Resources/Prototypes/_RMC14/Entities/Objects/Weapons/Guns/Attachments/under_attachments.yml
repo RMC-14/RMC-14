@@ -404,6 +404,21 @@
       state: all
 
 - type: entity
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentUnderbarrelShotgunL24B
+  categories: [ HideSpawnMenu ]
+  name: L24B underbarrel shotgun
+  description: ""
+  components:
+  - type: Sprite
+    state: ""
+  - type: AttachableVisuals
+    suffix: ""
+  - type: AttachableToggleable
+    actionIconStyle: NoItem
+    actionName: Switch to the L24B underbarrel shotgun
+
+- type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentUnderbarrelExtinguisher
   name: HME-12 underbarrel extinguisher
@@ -848,6 +863,9 @@
 
 - type: Tag
   id: RMCAttachmentU7UnderbarrelShotgun
+
+- type: Tag
+  id: RMCAttachmentUnderbarrelShotgunL24B
 
 - type: Tag
   id: RMCAttachmentU1GrenadeLauncher

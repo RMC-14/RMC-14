@@ -6,18 +6,15 @@
   suffix: Filled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/inhand.rsi
     layers:
     - state: base
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
-    - state: bolt-open
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
-      map: [ "enum.GunVisualLayers.Base" ]
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/L24_Icon.rsi
     - state: mag-0
-      sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/L24_Icon.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/L24_Icon.rsi
       map: [ "enum.GunVisualLayers.Mag" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L24/inhand.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/inhand.rsi
   - type: Gun
     shotsPerBurst: 3
     selectedMode: FullAuto
@@ -72,8 +69,6 @@
           - RMCMagazineRifleL24Extended
           - RMCMagazineRifleL24HEAP
           - RMCMagazineRifleL24Incendiary
-  - type: GunDamageModifier
-    multiplier: 1.0
   - type: AttachableHolder
     randomAttachmentChance: 1
     slots:
@@ -92,7 +87,6 @@
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
-          - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS84xTelescopicScope
@@ -100,12 +94,6 @@
         random:
         - RMCAttachmentS6ReflexSight
         - RMCAttachmentS42xTelescopicMiniscope
-      rmc-aslot-stock:
-        locked: true
-        startingAttachable: RMCAttachmentL24Stock
-        whitelist:
-          tags:
-          - RMCAttachmentL24Stock
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -125,10 +113,98 @@
         - RMCAttachmentU1GrenadeLauncher
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.906, 0.03125
-      rmc-aslot-rail: -0.0175, 0.19
-      rmc-aslot-stock: -0.5, 0.01
-      rmc-aslot-underbarrel: 0.3125, -0.315
+      rmc-aslot-barrel: 0.965, 0.065
+      rmc-aslot-rail: 0.125, 0.215
+      rmc-aslot-underbarrel: 0.5605, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL24
+  id: RMCWeaponRifleL24B
+  name: L24B rifle
+  description: A rare sight, this rifle is most commonly seen in the hands of the Three Suns Empire Royal Crown Marine units. This particular model was modified to facilitate RMC operations in tight quarters, allowing for it to be fired one-handed. This however crippled its stopping power due to a shorter barrel needed to make it compact. Burst fire still kicks like a mule. Compared to the M54C MK2, it has noticeably improved handling and vastly improved performance. This one is painted in RCM's purple-blue camouflage
+  suffix: Filled
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/L24B_Icon.rsi
+    - state: mag-0
+      sprite: _RMC14/Objects/Weapons/Guns/Rifles/l24/L24B_Icon.rsi
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: RMCSelectiveFire
+    recoilWielded: 2
+    recoilUnwielded: 2
+    scatterWielded: 3
+    scatterUnwielded: 10
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.3
+    accuracyMultiplierUnwielded: 0.90
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL24
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL24
+          - RMCMagazineRifleL24AP
+          - RMCMagazineRifleL24Extended
+          - RMCMagazineRifleL24HEAP
+          - RMCMagazineRifleL24Incendiary
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCM5Bayonet
+        random:
+        - RMCM5Bayonet
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS42xTelescopicMiniscope
+        random:
+        - RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentUnderbarrelShotgunL24B
+        whitelist:
+          tags:
+          - RMCAttachmentUnderbarrelShotgunL24B
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.845, 0.065
+      rmc-aslot-rail: 0.125, 0.215
+      rmc-aslot-underbarrel: 0.5605, -0.25
+
+- type: entity
+  parent: RMCWeaponRifleL24
+  id: RMCWeaponRifleL24PVE
+  suffix: PVE
+  components:
+  - type: RMCSelectiveFire
+    baseFireRate: 3.25
+  - type: AttachableHolder
+    randomAttachmentChance: 0
+
+- type: entity
+  parent: RMCWeaponRifleL24B
+  id: RMCWeaponRifleL24BPVE
+  suffix: PVE
+  components:
+  - type: RMCSelectiveFire
+    baseFireRate: 4
+  - type: AttachableHolder
+    randomAttachmentChance: 0
 
 - type: entity
   parent: CMMagazineRifleBase
@@ -148,7 +224,7 @@
     proto: RMCCartridgeRifleL24
     capacity: 30
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
@@ -174,7 +250,6 @@
       - RMCCartridgeRifleL24AP
     proto: RMCCartridgeRifleL24AP
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
     layers:
     - state: base
       map: [ "enum.GunVisualLayers.Base" ]
@@ -182,7 +257,6 @@
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: ammo_band
       color: "#1F951F"
-  - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -202,7 +276,6 @@
         - RMCCartridgeRifleL24HEAP
       proto: RMCCartridgeRifleL24HEAP
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -210,7 +283,6 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: ammo_band
         color: "#9C9A19"
-    - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -230,7 +302,6 @@
         - RMCCartridgeRifleL24Incendiary
       proto: RMCCartridgeRifleL24Incendiary
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/L24.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
@@ -238,7 +309,6 @@
         map: [ "enum.GunVisualLayers.Mag" ]
       - state: ammo_band
         color: "#771A10"
-    - type: Appearance
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -259,13 +329,12 @@
       proto: RMCCartridgeRifleL24
       capacity: 45
     - type: Sprite
-      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/extendedL24.rsi
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l24e.rsi
       layers:
       - state: base
         map: [ "enum.GunVisualLayers.Base" ]
       - state: mag-1
         map: [ "enum.GunVisualLayers.Mag" ]
-    - type: Appearance
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -368,7 +437,6 @@
     amount: 10
   - type: IgniteOnProjectileHit
 
-
 - type: Tag
   id: RMCMagazineRifleL24
 
@@ -398,3 +466,7 @@
 
 - type: Tag
   id: RMCWeaponRifleL24
+
+- type: Tag
+  id: RMCWeaponRifleL24B
+
