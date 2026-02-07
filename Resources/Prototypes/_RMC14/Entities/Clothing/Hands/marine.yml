@@ -90,3 +90,13 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsBlackFireResistance
+  name: fire resistant black gloves
+  description: "These gloves are fire-resistant."
+  components:
+  - type: TemperatureProtection
+    heatingCoefficient: 0.01
+    coolingCoefficient: 1

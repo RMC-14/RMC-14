@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostEnforcer
   icon: RMCJobIconProvostEnforcer
   joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-provost-marshal
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: Provost Enforcer
@@ -68,7 +69,7 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvost
     outerClothing: RMCArmorProvost
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     suitstorage: WeaponShotgunM890
     id: RMCIDCardProvostEnforcer

@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostDeputyMarshal
   icon: RMCJobIconProvostMarshal
   joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-provost-sector-marshal
   accessGroups:
   - ShipMasterAccess
   special:
@@ -77,7 +78,7 @@
     ears: CMHeadsetHighCommand
     jumpsuit: CMJumpsuitProvostMarshal
     outerClothing: RMCProvostCoatMarshalFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostDeputyMarshal
     belt: RMCMatebaBeltLuxuriousFilled

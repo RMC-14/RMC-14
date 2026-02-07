@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostTeamLeader
   icon: RMCJobIconProvostTeamLeader
   joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-provost-marshal
   accessGroups:
   - ShipMasterAccess
   spawnMenuRoleName: Provost Team Leader
@@ -82,7 +83,7 @@
     ears: RMCHeadsetHighCommandProvostLead
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCArmorProvostSeniorFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     suitstorage: WeaponShotgunM890
     id: RMCIDCardProvostTeamLeader

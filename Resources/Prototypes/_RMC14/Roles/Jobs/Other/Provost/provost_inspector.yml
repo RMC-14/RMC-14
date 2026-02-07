@@ -23,6 +23,7 @@
   startingGear: RMCGearProvostInspector
   icon: RMCJobIconProvostInspector
   joinNotifyCrew: true
+  supervisors: rmc-job-supervisors-provost-chief-inspector
   marineAuthorityLevel: 0
   supervisors: cm-job-supervisors-marine-high-command
   accessGroups:
@@ -73,7 +74,7 @@
     eyes: CMGlassesSecurity
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostInspector
     belt: RMCBeltHolsterPistolHandcannonFilled

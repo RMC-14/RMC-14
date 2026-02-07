@@ -265,7 +265,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostFlexi # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostFlexi
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -276,6 +278,7 @@
     contents:
     - id: RMCArmorProvostFlexi
     - id: RMCStampProvostInspector
+    - id: RMCProvostClipboard
 
 - type: entity
   parent: CMSatchelSecurity
@@ -284,7 +287,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -293,8 +298,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -303,8 +310,10 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCArmorProvostMarshal # TODO RMC14 provost office handheld beacon
+    - id: RMCArmorProvostMarshal
+    - id: RMCProvostClipboard
     - id: RMCTabletCO
+    # TODO RMC14 provost office handheld beacon
 
 - type: entity
   parent: CMSatchelSecurity
@@ -314,7 +323,8 @@
   - type: StorageFill
     contents:
     - id: RMCPacketGrenadeFlashBang
-    - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
+    - id: RMCWeaponTaser
+    # TODO RMC14 4 tear gas grenades
 
 - type: entity
   parent: CMSatchel
@@ -328,13 +338,24 @@
     - id: CMStampDenied
 
 - type: entity
+  parent: CMSatchel
+  id: RMCSatchelFilledFaxResponderHighComm
+  suffix: Fax Responder
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCProvostPen
+    - id: CMStampApproved
+    - id: CMStampDenied
+
+- type: entity
   parent: CMSatchelSecurity
   id: CMSatchelSecurityFilledFaxResponder
   suffix: Fax Responder
   components:
   - type: StorageFill
     contents:
-    - id: CMPenFountain
+    - id: RMCProvostPen
     - id: CMStampApproved
     - id: CMStampDenied
 
