@@ -2328,3 +2328,14 @@
     id: a440be4b-5667-44f7-a375-cfc151fdf8f7
   - type: ParaDroppable
     dropScatter: 1
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaraHathaway
+  name: Kara Hathaway figurine
+  description: "\"You got a sandwich in there?\""
+  components:
+  - type: Sprite
+    state: kara_hathaway
+  - type: PatronFigurine
+    id: 6e7476de-f328-4764-834c-7ac2478a5aab
