@@ -238,8 +238,8 @@
   - type: LandingLight
   - type: PointLight
     color: "#FF1A1A"
-    energy: 0.25
-    radius: 3
+    energy: 1
+    radius: 2
     softness: 1
     offset: "0, -0.5"
     enabled: false
@@ -292,6 +292,20 @@
   - type: LandingLight
     onState: landingstripe3
 
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightStanding
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: lz_spoke_light
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: lz_spoke_light_1
+      visible: false
+  - type: LandingLight
+    onState: lz_spoke_light_1
 
 # Engineer Ship Light
 
