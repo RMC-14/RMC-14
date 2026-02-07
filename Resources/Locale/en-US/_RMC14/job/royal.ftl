@@ -29,6 +29,7 @@ rmc-ghost-name-rcm-teamlead = Royal Crown Marines Team Leader (Friendly)
 rmc-job-name-rcm-teamlead = Royal Marines Team Leader
 rmc-job-prefix-rcm-teamlead = RCM TL
 
+rmc-ghost-name-rcm-lieutenant = Royal Crown Marines Lieutenant (Friendly)
 rmc-job-name-rcm-lieutenant = Royal Marines Lieutenant
 rmc-job-prefix-rcm-lieutenant = RCM LT
 
