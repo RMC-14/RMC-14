@@ -271,7 +271,7 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  suffix: Provost
+  suffix: Provost, Inspector
   id: CMSatchelSecurityFilledProvostInspector
   components:
   - type: StorageFill
@@ -340,7 +340,7 @@
 - type: entity
   parent: CMSatchel
   id: RMCSatchelFilledFaxResponderHighComm
-  suffix: Fax Responder
+  suffix: Fax Responder, HComm
   components:
   - type: StorageFill
     contents:
@@ -350,8 +350,8 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  id: CMSatchelSecurityFilledFaxResponder
-  suffix: Fax Responder
+  id: CMSatchelSecurityFilledFaxResponderProvost
+  suffix: Fax Responder, Provost
   components:
   - type: StorageFill
     contents:
