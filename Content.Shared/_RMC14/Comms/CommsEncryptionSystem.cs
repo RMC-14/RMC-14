@@ -71,10 +71,15 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
         var garbledChars = (int)(chars.Length * garblePercent);
         var indices = new List<int>();
 
-        // Select random characters to garble
+        // Select random characters to garble, skipping markup
+        bool inTag = false;
         for (var i = 0; i < chars.Length; i++)
         {
-            if (char.IsLetterOrDigit(chars[i]))
+            if (chars[i] == '[')
+                inTag = true;
+            else if (chars[i] == ']')
+                inTag = false;
+            else if (!inTag && char.IsLetterOrDigit(chars[i]))
                 indices.Add(i);
         }
 

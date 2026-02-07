@@ -4,7 +4,9 @@ using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
 using Content.Server.Radio.EntitySystems;
 using Content.Shared._RMC14.Comms;
+using Content.Shared._RMC14.Communications;
 using Content.Shared._RMC14.Dropship;
+using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Squads;
@@ -19,10 +21,12 @@ using Content.Shared.Radio;
 using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
+using Robust.Shared;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.GameObjects;
 
 namespace Content.Server._RMC14.Marines;
 
@@ -33,6 +37,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     [Dependency] private readonly IChatManager _chatManager = default!;
     [Dependency] private readonly CMDistressSignalRuleSystem _distressSignal = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly IntelSystem _intel = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
@@ -156,8 +161,8 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         {
             var recipientMessage = message;
 
-            // Only garble for groundside recipients when encryption is active
-            if (encryptionComp.IsGroundside && IsRecipientGroundside(recipient))
+            // Only garble for groundside recipients when encryption is active and no comms towers are up
+            if (encryptionComp.IsGroundside && IsRecipientGroundside(recipient) && !IsAnyCommsTowerActive())
             {
                 var garblePercent = _encryption.GetGarblePercentage(encryptionComp);
                 recipientMessage = _encryption.GarbleMessage(message, garblePercent);
@@ -168,6 +173,17 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         }
 
         _audio.PlayGlobal(sound ?? DefaultAnnouncementSound, filter, true, AudioParams.Default.WithVolume(-2f));
+    }
+
+    private bool IsAnyCommsTowerActive()
+    {
+        var towers = EntityQueryEnumerator<CommunicationsTowerComponent>();
+        while (towers.MoveNext(out _, out var tower))
+        {
+            if (tower.State == CommunicationsTowerState.On)
+                return true;
+        }
+        return false;
     }
 
     private bool IsRecipientGroundside(EntityUid recipient)
@@ -254,6 +270,10 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
             return message;
 
         if (!comp.IsGroundside)
+            return message;
+
+        // Check if any comms towers are active
+        if (IsAnyCommsTowerActive())
             return message;
 
         var garblePercent = _encryption.GetGarblePercentage(comp);

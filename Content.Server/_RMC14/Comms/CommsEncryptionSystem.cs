@@ -1,5 +1,6 @@
 using Content.Server._RMC14.Rules;
 using Content.Shared._RMC14.Comms;
+using Content.Shared._RMC14.Communications;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.Comms;
@@ -41,6 +42,18 @@ public sealed class CommsEncryptionSystem : SharedCommsEncryptionSystem
             if (!comp.IsGroundside)
                 continue;
 
+            // Restore clarity if comms towers are active
+            if (IsAnyCommsTowerActive() && comp.Clarity < comp.MaxClarity)
+            {
+                comp.Clarity = comp.MaxClarity;
+                Dirty(uid, comp);
+                continue;
+            }
+
+            // Only degrade if no comms towers are active
+            if (IsAnyCommsTowerActive())
+                continue;
+
             if (comp.HasGracePeriod && _timing.CurTime < comp.GracePeriodEnd)
             {
                 // During grace period, degrade from 100% to 95%
@@ -59,5 +72,16 @@ public sealed class CommsEncryptionSystem : SharedCommsEncryptionSystem
                 Dirty(uid, comp);
             }
         }
+    }
+
+    private bool IsAnyCommsTowerActive()
+    {
+        var towers = EntityQueryEnumerator<CommunicationsTowerComponent>();
+        while (towers.MoveNext(out _, out var tower))
+        {
+            if (tower.State == CommunicationsTowerState.On)
+                return true;
+        }
+        return false;
     }
 }
