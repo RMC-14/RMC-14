@@ -16,7 +16,6 @@
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-provost-marshal
   marineAuthorityLevel: 0
-  supervisors: cm-job-supervisors-marine-high-command
   accessGroups:
   - ShipMasterAccess
   special:

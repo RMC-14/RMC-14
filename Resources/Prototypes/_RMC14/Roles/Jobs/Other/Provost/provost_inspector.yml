@@ -25,7 +25,6 @@
   joinNotifyCrew: true
   supervisors: rmc-job-supervisors-provost-chief-inspector
   marineAuthorityLevel: 0
-  supervisors: cm-job-supervisors-marine-high-command
   accessGroups:
   - ShipMasterAccess
   special:
