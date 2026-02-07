@@ -589,6 +589,34 @@
     - id: CMMultitool
     # Something about /item/tool/weldingtool/hugetank - leaving empty
 
+- type: entity
+  parent: RMCPouchTools
+  id: RMCPouchToolsFilledRCM
+  suffix: Filled, RCM
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMFireExtinguisherPortable
+    - id: CMMultitool
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledTactical
+  suffix: Filled, Tactical
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver # TODO RMC14 tactical screwdriver??
+    - id: CMWirecutter # TODO RMC14 tactical wirecutters??
+    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
+
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
