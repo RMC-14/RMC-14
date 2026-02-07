@@ -28,7 +28,7 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
         AddRow("Consumption:", weapons.Select(w => w.AmmoConsumption.ToString()).ToList());
         AddRow("", new List<string>());
 
-        for (var timing = minTiming - 1; timing < maxDuration; timing++)
+        for (var timing = minTiming ; timing <= maxDuration; timing++)
         {
             var weaponTexts = new List<string>();
 
@@ -50,7 +50,7 @@ public sealed partial class DropshipFireMissionViewScreen : PanelContainer
                 weaponTexts.Add(text);
             }
 
-            AddRow((timing + 1).ToString(), weaponTexts);
+            AddRow(timing.ToString(), weaponTexts);
         }
     }
 
