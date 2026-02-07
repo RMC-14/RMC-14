@@ -1,6 +1,39 @@
 ## Rifle magazines
 
 - type: entity
+  parent: CMMagazineRifleM54CMK1
+  id: RMCMagazineRifleM54CMK1Rubber
+  name: "M54C MK1 rubber magazine (10x24mm)"
+  description: "A magazine of less-lethal rubber 10x24mm rounds for use in the M54C battle rifle."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - CMMagazineRifleM54CMK1
+    - RMCMagazineRifleM54CMK1Rubber
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifle10x24mmRubber
+    proto: RMCCartridgeRifle10x24mmRubber
+    capacity: 95
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54cmk1.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
+  - type: MagazineVisuals
+    magState: mag
+    steps: 2
+    zeroVisible: false
+  - type: Appearance
+
+- type: entity
   parent: CMMagazineRifleM54C
   id: RMCMagazineRifleM54CRubber
   name: "M54C rubber magazine (10x24mm)"
@@ -19,12 +52,14 @@
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 40
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54ceriot.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m54c.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
   - type: MagazineVisuals
     magState: mag
     steps: 2
@@ -50,7 +85,14 @@
     proto: RMCCartridgeRifle10x24mmRubber
     capacity: 25
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4sprriot.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m4spr.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#0A00C8"
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -98,12 +140,14 @@
     proto: RMCCartridge10x20mmRubber
     capacity: 48
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63eriot.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m63.rsi
     layers:
     - state: base
-      map: ["enum.GunVisualLayers.Base"]
+      map: [ "enum.GunVisualLayers.Base" ]
     - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#0A00C8"
   - type: Tag
     tags:
     - CMMagazineSmg
@@ -161,12 +205,14 @@
     proto: RMCCartridgePistol9mmRubber
     capacity: 12
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984riot.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+    - state: ammo_band
+      color: "#0A00C8"
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -227,6 +273,9 @@
 
 - type: Tag
   id: RMCMagazinePistolM77Rubber
+
+- type: Tag
+  id: RMCMagazineRifleM54CMK1Rubber
 
 - type: Tag
   id: RMCMagazineRifleM54CRubber
