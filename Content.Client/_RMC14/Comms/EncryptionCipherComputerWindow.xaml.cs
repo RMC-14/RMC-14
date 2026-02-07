@@ -30,6 +30,12 @@ public sealed partial class EncryptionCipherComputerWindow : FancyWindow
         set => WordLabel.Text = value;
     }
 
+    public bool ValidWord
+    {
+        get => ValidLabel.Text == "Valid Word: Yes";
+        set => ValidLabel.Text = "Valid Word: " + (value ? "Yes" : "No");
+    }
+
     public string StatusMessage
     {
         get => StatusLabel.Text ?? "Ready for input";

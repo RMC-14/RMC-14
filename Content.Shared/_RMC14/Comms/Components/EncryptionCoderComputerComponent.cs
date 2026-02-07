@@ -13,4 +13,13 @@ public sealed partial class EncryptionCoderComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public string ClarityDescription = "unknown";
+
+    [DataField, AutoNetworkedField]
+    public string CurrentWord = "";
+
+    [DataField, AutoNetworkedField]
+    public int CurrentOffset;
+
+    [DataField, AutoNetworkedField]
+    public int PunchcardCount = 10;
 }

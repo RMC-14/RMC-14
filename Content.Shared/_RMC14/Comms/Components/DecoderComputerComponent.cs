@@ -9,6 +9,9 @@ public sealed partial class DecoderComputerComponent : Component
     public string CurrentChallengeCode = "ABCD1234";
 
     [DataField, AutoNetworkedField]
+    public string CurrentChallengeWord = "";
+
+    [DataField, AutoNetworkedField]
     public bool HasGracePeriod;
 
     [DataField, AutoNetworkedField]

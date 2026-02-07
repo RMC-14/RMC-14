@@ -1,7 +1,7 @@
 - type: entity
   parent: CMBaseStructure
   id: RMCEncryptionCoderComputer
-  name: encryption coder computer
+  name: encoder
   description: Used to check announcement clarity by submitting encodings.
   components:
   - type: Transform

@@ -17,6 +17,8 @@ public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : Bo
             return;
 
         _window = this.CreateWindow<EncryptionCoderComputerWindow>();
+        _window.ChangeOffset += delta => SendPredictedMessage(new EncryptionCoderChangeOffsetMsg(delta));
+        _window.SubmitCode += () => SendPredictedMessage(new EncryptionCoderComputerSubmitCodeMsg(""));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -27,5 +29,7 @@ public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : Bo
         _window.LastSubmittedCode = s.LastSubmittedCode;
         _window.KnownLetters = s.KnownLetters;
         _window.ClarityDescription = s.ClarityDescription;
+        _window.CurrentWord = s.CurrentWord;
+        _window.CurrentOffset = s.CurrentOffset;
     }
 }

@@ -15,9 +15,6 @@ public sealed class DecoderComputerSubmitCodeMsg(string code) : BoundUserInterfa
 }
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerQuickRestoreMsg : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
 public sealed class DecoderComputerPrintMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]

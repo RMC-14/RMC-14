@@ -35,7 +35,8 @@ public sealed class EncryptionCipherComputerBuiState(
     int cipherSetting,
     string decipheredWord,
     string statusMessage,
-    int punchcardCount
+    int punchcardCount,
+    bool validWord
 ) : BoundUserInterfaceState
 {
     public readonly string InputCode = inputCode;
@@ -43,4 +44,5 @@ public sealed class EncryptionCipherComputerBuiState(
     public readonly string DecipheredWord = decipheredWord;
     public readonly string StatusMessage = statusMessage;
     public readonly int PunchcardCount = punchcardCount;
+    public readonly bool ValidWord = validWord;
 }

@@ -7,13 +7,11 @@
 
         <Button Name="GenerateButton" Text="Decode Current Stream" Margin="0,0,0,10" />
 
-        <Label Text="Enter challenge code:" />
+        <Label Text="Enter decoded word:" />
         <BoxContainer Orientation="Horizontal" Margin="0,5,0,10">
             <LineEdit Name="CodeInput" HorizontalExpand="True" />
             <Button Name="SubmitButton" Text="Submit" />
         </BoxContainer>
-
-        <Button Name="QuickRestoreButton" Text="Quick Restore (+5% Clarity)" Margin="0,0,0,10" />
 
         <Button Name="PrintButton" Text="Print Punchcard" Margin="0,0,0,10" />
 

@@ -12,7 +12,6 @@ public sealed partial class DecoderComputerWindow : FancyWindow
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public event Action<string>? SubmitCode;
-    public event Action? QuickRestore;
     public event Action? Print;
     public event Action? Refill;
     public event Action? Generate;
@@ -80,8 +79,6 @@ public sealed partial class DecoderComputerWindow : FancyWindow
                 CodeInput.Text = "";
             }
         };
-
-        QuickRestoreButton.OnPressed += _ => QuickRestore?.Invoke();
 
         PrintButton.OnPressed += _ => Print?.Invoke();
 

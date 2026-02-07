@@ -1,7 +1,9 @@
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
+using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
 
@@ -10,6 +12,13 @@ public sealed class DecoderComputerSystem : EntitySystem
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
+    private static readonly string[] ChallengePhrases = [
+        "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
+        "WHISKEY", "CHARLIE", "FOXTROT", "JULIETT", "MARINES", "TRACTOR", "UNIFORM",
+        "RAIDERS", "ROSETTA", "SCANNER", "SHADOWS", "SHUTTLE", "TACHYON", "WARSHIP", "ROSTOCK"
+    ];
 
     public override void Initialize()
     {
@@ -21,7 +30,6 @@ public sealed class DecoderComputerSystem : EntitySystem
             subs =>
             {
                 subs.Event<DecoderComputerSubmitCodeMsg>(OnSubmitCode);
-                subs.Event<DecoderComputerQuickRestoreMsg>(OnQuickRestore);
                 subs.Event<DecoderComputerPrintMsg>(OnPrint);
                 subs.Event<DecoderComputerRefillMsg>(OnRefill);
                 subs.Event<DecoderComputerGenerateMsg>(OnGenerate);
@@ -44,12 +52,6 @@ public sealed class DecoderComputerSystem : EntitySystem
         UpdateDecoderState(ent);
     }
 
-    private void OnQuickRestore(Entity<DecoderComputerComponent> ent, ref DecoderComputerQuickRestoreMsg args)
-    {
-        QuickRestore(ent);
-        UpdateDecoderState(ent);
-    }
-
     private void OnPrint(Entity<DecoderComputerComponent> ent, ref DecoderComputerPrintMsg args)
     {
         if (ent.Comp.PunchcardCount <= 0)
@@ -64,6 +66,19 @@ public sealed class DecoderComputerSystem : EntitySystem
         {
             punchComp.Data = ent.Comp.CurrentChallengeCode;
             Dirty(punchcard, punchComp);
+
+            // Mispunch chance: 1/7
+            if (_random.Next(7) == 0)
+            {
+                var parts = punchComp.Data.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length > 0)
+                {
+                    var index = _random.Next(parts.Length);
+                    parts[index] = "0x00";
+                    punchComp.Data = string.Join(" ", parts);
+                    Dirty(punchcard, punchComp);
+                }
+            }
         }
 
         ent.Comp.PunchcardCount--;
@@ -104,7 +119,7 @@ public sealed class DecoderComputerSystem : EntitySystem
 
     public bool AttemptDecode(Entity<DecoderComputerComponent> ent, string submittedCode)
     {
-        if (submittedCode.ToUpper() != ent.Comp.CurrentChallengeCode.ToUpper())
+        if (submittedCode.ToUpper() != ent.Comp.CurrentChallengeWord.ToUpper())
         {
             ent.Comp.StatusMessage = "Decode failed. Invalid code.";
             Dirty(ent);
@@ -133,40 +148,51 @@ public sealed class DecoderComputerSystem : EntitySystem
         return true;
     }
 
-    public bool QuickRestore(Entity<DecoderComputerComponent> ent)
-    {
-        // Find the encryption component
-        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
-        if (!encryptionQuery.MoveNext(out var uid, out var encryptionComp))
-        {
-            ent.Comp.StatusMessage = "No encryption system found.";
-            Dirty(ent);
-            return false;
-        }
-
-        // Quick restore +5%
-        _encryption.RestoreClarity((uid, encryptionComp), false);
-        ent.Comp.StatusMessage = "Quick restoration applied. +5% clarity.";
-        Dirty(ent);
-
-        return true;
-    }
-
     private void GenerateNewChallenge(Entity<DecoderComputerComponent> ent)
     {
-        // Generate a random 8-character hex code
-        var chars = "0123456789ABCDEF";
+        // Generate a random challenge phrase
         var random = new Random();
-        var code = "";
-        for (var i = 0; i < 8; i++)
-        {
-            code += chars[random.Next(chars.Length)];
-        }
+        var word = ChallengePhrases[random.Next(ChallengePhrases.Length)];
+        var offset = random.Next(26);
+        var shifted = ShiftWord(word, offset);
+        var hexCodes = ToHexCodes(shifted);
 
-        ent.Comp.CurrentChallengeCode = code;
+        ent.Comp.CurrentChallengeCode = hexCodes;
+        ent.Comp.CurrentChallengeWord = word;
         ent.Comp.StatusMessage = "Ready for decode";
         ent.Comp.HasGracePeriod = false;
         Dirty(ent);
+
+        // Set the global challenge phrase
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (encryptionQuery.MoveNext(out var uid, out var encryptionComp))
+        {
+            encryptionComp.ChallengePhrase = hexCodes;
+            Dirty(uid, encryptionComp);
+        }
+    }
+
+    private string ShiftWord(string word, int offset)
+    {
+        var result = "";
+        foreach (var c in word)
+        {
+            if (char.IsUpper(c))
+            {
+                var shifted = (c - 'A' + offset) % 26 + 'A';
+                result += (char)shifted;
+            }
+            else
+            {
+                result += c;
+            }
+        }
+        return result;
+    }
+
+    private string ToHexCodes(string s)
+    {
+        return string.Join(" ", s.Select(c => $"0x{(int)c:X2}"));
     }
 
     private void UpdateDecoderState(Entity<DecoderComputerComponent> ent)

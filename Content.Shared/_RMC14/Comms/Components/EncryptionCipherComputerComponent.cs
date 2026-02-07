@@ -19,4 +19,7 @@ public sealed partial class EncryptionCipherComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int PunchcardCount = 10;
+
+    [DataField, AutoNetworkedField]
+    public bool ValidWord;
 }

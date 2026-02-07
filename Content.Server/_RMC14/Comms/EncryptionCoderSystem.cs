@@ -1,9 +1,8 @@
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
-using Content.Shared._RMC14.Comms;
-using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
 
@@ -12,12 +11,29 @@ public sealed class EncryptionCoderSystem : EntitySystem
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private static readonly string[] ChallengePhrases = [
+        "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
+        "WHISKEY", "CHARLIE", "FOXTROT", "JULIETT", "MARINES", "TRACTOR", "UNIFORM",
+        "RAIDERS", "ROSETTA", "SCANNER", "SHADOWS", "SHUTTLE", "TACHYON", "WARSHIP", "ROSTOCK"
+    ];
+
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<EncryptionCoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+
+        Subs.BuiEvents<EncryptionCoderComputerComponent>(EncryptionCoderComputerUI.Key,
+            subs =>
+            {
+                subs.Event<EncryptionCoderComputerSubmitCodeMsg>(OnSubmitCode);
+                subs.Event<EncryptionCoderComputerQuickRestoreMsg>(OnQuickRestore);
+                subs.Event<EncryptionCoderComputerPrintMsg>(OnPrint);
+                subs.Event<EncryptionCoderComputerRefillMsg>(OnRefill);
+                subs.Event<EncryptionCoderComputerGenerateMsg>(OnGenerate);
+                subs.Event<EncryptionCoderChangeOffsetMsg>(OnChangeOffset);
+            });
     }
 
     private void OnBUIOpened(Entity<EncryptionCoderComputerComponent> ent, ref BoundUIOpenedEvent args)
@@ -33,37 +49,199 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
     public void SubmitCode(Entity<EncryptionCoderComputerComponent> ent, string code)
     {
-        ent.Comp.LastSubmittedCode = code.ToUpper();
-
-        // Find the encryption component (should be global)
-        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
-        if (!encryptionQuery.MoveNext(out _, out var encryptionComp))
-            return;
-
-        var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
-        ent.Comp.KnownLetters = knownLetters;
-
-        // Create the display string showing known letters of PONG
-        var pongDisplay = "";
-        var pong = encryptionComp.ChallengePhrase;
-        for (var i = 0; i < pong.Length; i++)
+        CommsEncryptionComponent? encryptionComp = null;
+        if (!string.IsNullOrEmpty(ent.Comp.CurrentWord))
         {
-            if (i < knownLetters)
-                pongDisplay += pong[i];
+            var shifted = ShiftWord(ent.Comp.CurrentWord, ent.Comp.CurrentOffset);
+            var hex = ToHexCodes(shifted);
+
+            // Find the encryption component
+            var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+            if (!encryptionQuery.MoveNext(out var uid, out encryptionComp))
+            {
+                ent.Comp.LastSubmittedCode = "PING -> No encryption system found";
+                Dirty(ent);
+                return;
+            }
+
+            var challenge = "PONG";
+            var pong = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? challenge : new string('?', challenge.Length);
+            ent.Comp.LastSubmittedCode = $"PING -> {pong}";
+            ent.Comp.KnownLetters = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? challenge.Length : 0;
+
+            if (ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()))
+            {
+                _encryption.RestoreClarity((uid, encryptionComp), true);
+            }
             else
-                pongDisplay += "?";
+            {
+                _encryption.RestoreClarity((uid, encryptionComp), false);
+            }
         }
-
-        if (code.ToUpper() == encryptionComp.ChallengePhrase.ToUpper())
+        else
         {
-            _encryption.RestoreClarity((ent.Owner, encryptionComp), true);
-            pongDisplay = pong; // full
+            // Old logic for backward compatibility
+            ent.Comp.LastSubmittedCode = code.ToUpper();
+
+            // Find the encryption component
+            var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+            if (!encryptionQuery.MoveNext(out _, out encryptionComp))
+                return;
+
+            var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
+            ent.Comp.KnownLetters = knownLetters;
+
+            // Create the display string
+            var pongDisplay = "";
+            var pong = encryptionComp.ChallengePhrase;
+            for (var i = 0; i < pong.Length; i++)
+            {
+                if (i < knownLetters)
+                    pongDisplay += pong[i];
+                else
+                    pongDisplay += "?";
+            }
+
+            if (code.ToUpper() == encryptionComp.ChallengePhrase.ToUpper())
+            {
+                _encryption.RestoreClarity((ent.Owner, encryptionComp), true);
+                pongDisplay = pong;
+            }
+
+            ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplay}";
         }
 
-        ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplay}";
-        ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
-
+        if (encryptionComp != null)
+        {
+            ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
+        }
         Dirty(ent);
+    }
+
+    private string ShiftWord(string word, int offset)
+    {
+        var result = "";
+        foreach (var c in word)
+        {
+            if (char.IsUpper(c))
+            {
+                var shifted = (c - 'A' + offset) % 26 + 'A';
+                result += (char)shifted;
+            }
+            else
+            {
+                result += c;
+            }
+        }
+        return result;
+    }
+
+    private string ToHexCodes(string s)
+    {
+        return string.Join(" ", s.Select(c => $"0x{(int)c:X2}"));
+    }
+
+    public bool QuickRestore(Entity<EncryptionCoderComputerComponent> ent)
+    {
+        // Find the encryption component
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (!encryptionQuery.MoveNext(out var uid, out var encryptionComp))
+        {
+            return false;
+        }
+
+        // Quick restore +5%
+        _encryption.RestoreClarity((uid, encryptionComp), false);
+
+        return true;
+    }
+
+    private void GenerateNewWord(Entity<EncryptionCoderComputerComponent> ent)
+    {
+        ent.Comp.CurrentWord = "PONG";
+        ent.Comp.CurrentOffset = 0;
+        Dirty(ent);
+    }
+
+    private string GetPongDisplay(string submitted, string challenge)
+    {
+        var minLen = Math.Min(submitted.Length, challenge.Length);
+        var result = "";
+        for (var i = 0; i < minLen; i++)
+        {
+            if (submitted[i] == challenge[i])
+                result += challenge[i];
+            else
+                result += "?";
+        }
+        return result;
+    }
+
+    private void OnChangeOffset(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderChangeOffsetMsg args)
+    {
+        ent.Comp.CurrentOffset = (ent.Comp.CurrentOffset + args.Delta + 26) % 26;
+        UpdateCoderState(ent);
+    }
+
+    private void OnSubmitCode(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerSubmitCodeMsg args)
+    {
+        SubmitCode(ent, args.Code);
+        UpdateCoderState(ent);
+    }
+
+    private void OnQuickRestore(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerQuickRestoreMsg args)
+    {
+        QuickRestore(ent);
+        UpdateCoderState(ent);
+    }
+
+    private void OnPrint(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerPrintMsg args)
+    {
+        if (ent.Comp.PunchcardCount <= 0)
+        {
+            // TODO: status message
+            UpdateCoderState(ent);
+            return;
+        }
+
+        var punchcard = EntityManager.SpawnEntity("RMCPunchcard", Transform(ent).Coordinates);
+        if (TryComp<PunchcardComponent>(punchcard, out var punchComp))
+        {
+            punchComp.Data = ToHexCodes(ShiftWord(ent.Comp.CurrentWord, ent.Comp.CurrentOffset));
+            Dirty(punchcard, punchComp);
+        }
+
+        ent.Comp.PunchcardCount--;
+        Dirty(ent);
+        UpdateCoderState(ent);
+    }
+
+    private void OnRefill(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerRefillMsg args)
+    {
+        if (!TryComp<StorageComponent>(ent, out var storage))
+        {
+            UpdateCoderState(ent);
+            return;
+        }
+
+        foreach (var item in storage.Container.ContainedEntities)
+        {
+            if (TryComp<PunchcardStackComponent>(item, out var stack))
+            {
+                ent.Comp.PunchcardCount += stack.Count;
+                EntityManager.QueueDeleteEntity(item);
+                Dirty(ent);
+                break;
+            }
+        }
+
+        UpdateCoderState(ent);
+    }
+
+    private void OnGenerate(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerGenerateMsg args)
+    {
+        GenerateNewWord(ent);
+        UpdateCoderState(ent);
     }
 
     private void UpdateCoderState(Entity<EncryptionCoderComputerComponent> ent)
@@ -78,7 +256,9 @@ public sealed class EncryptionCoderSystem : EntitySystem
         var state = new EncryptionCoderComputerBuiState(
             ent.Comp.LastSubmittedCode,
             ent.Comp.KnownLetters,
-            ent.Comp.ClarityDescription
+            ent.Comp.ClarityDescription,
+            ent.Comp.CurrentWord,
+            ent.Comp.CurrentOffset
         );
         _ui.SetUiState(ent.Owner, EncryptionCoderComputerUI.Key, state);
         Dirty(ent);
@@ -91,7 +271,28 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
         if (TryComp<PunchcardComponent>(args.Entity, out var punchcard))
         {
-            SubmitCode(ent, punchcard.Data);
+            if (punchcard.Data.Contains(':'))
+            {
+                var parts = punchcard.Data.Split(':');
+                if (parts.Length >= 2 && int.TryParse(parts[1], out var offset))
+                {
+                    ent.Comp.CurrentWord = parts[0].ToUpper();
+                    ent.Comp.CurrentOffset = offset;
+                }
+                else
+                {
+                    ent.Comp.CurrentWord = punchcard.Data.ToUpper();
+                }
+            }
+            else if (punchcard.Data.All(c => char.IsLetter(c) || c == '_'))
+            {
+                ent.Comp.CurrentWord = punchcard.Data.ToUpper();
+            }
+            else
+            {
+                // Old logic for hex codes
+                SubmitCode(ent, punchcard.Data);
+            }
             UpdateCoderState(ent);
         }
     }

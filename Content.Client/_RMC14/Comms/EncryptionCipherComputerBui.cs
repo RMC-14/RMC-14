@@ -32,5 +32,6 @@ public sealed class EncryptionCipherComputerBui(EntityUid owner, Enum uiKey) : B
         _window.DecipheredWord = s.DecipheredWord;
         _window.StatusMessage = s.StatusMessage;
         _window.PunchcardCount = s.PunchcardCount;
+        _window.ValidWord = s.ValidWord;
     }
 }

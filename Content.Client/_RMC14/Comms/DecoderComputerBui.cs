@@ -18,7 +18,6 @@ public sealed class DecoderComputerBui(EntityUid owner, Enum uiKey) : BoundUserI
 
         _window = this.CreateWindow<DecoderComputerWindow>();
         _window.SubmitCode += code => SendPredictedMessage(new DecoderComputerSubmitCodeMsg(code));
-        _window.QuickRestore += () => SendPredictedMessage(new DecoderComputerQuickRestoreMsg());
         _window.Print += () => SendPredictedMessage(new DecoderComputerPrintMsg());
         _window.Refill += () => SendPredictedMessage(new DecoderComputerRefillMsg());
         _window.Generate += () => SendPredictedMessage(new DecoderComputerGenerateMsg());

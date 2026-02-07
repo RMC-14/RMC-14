@@ -1,13 +1,22 @@
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
+using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
 
 public sealed class EncryptionCipherComputerSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
+    private static readonly string[] ChallengePhrases = [
+        "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
+        "WHISKEY", "CHARLIE", "FOXTROT", "JULIETT", "MARINES", "TRACTOR", "UNIFORM",
+        "RAIDERS", "ROSETTA", "SCANNER", "SHADOWS", "SHUTTLE", "TACHYON", "WARSHIP", "ROSTOCK"
+    ];
 
     public override void Initialize()
     {
@@ -63,8 +72,21 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         var punchcard = EntityManager.SpawnEntity("RMCPunchcard", Transform(ent).Coordinates);
         if (TryComp<PunchcardComponent>(punchcard, out var punchComp))
         {
-            punchComp.Data = ent.Comp.DecipheredWord;
+            punchComp.Data = $"{ent.Comp.DecipheredWord}:{ent.Comp.CipherSetting}";
             Dirty(punchcard, punchComp);
+
+            // Mispunch chance: 1/7
+            if (_random.Next(7) == 0)
+            {
+                var chars = punchComp.Data.ToCharArray();
+                if (chars.Length > 0)
+                {
+                    var index = _random.Next(chars.Length);
+                    chars[index] = '0';
+                    punchComp.Data = new string(chars);
+                    Dirty(punchcard, punchComp);
+                }
+            }
         }
 
         ent.Comp.PunchcardCount--;
@@ -97,19 +119,22 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         UpdateCipherState(ent);
     }
 
-    private string DecipherCode(string code, int setting)
+    private string DecipherCode(string hexCode, int setting)
     {
-        if (string.IsNullOrEmpty(code))
+        var text = ParseHexCodes(hexCode);
+        if (string.IsNullOrEmpty(text))
             return "";
 
         var result = "";
-        foreach (var c in code)
+        foreach (var c in text)
         {
             if (char.IsLetter(c))
             {
                 var baseChar = char.IsUpper(c) ? 'A' : 'a';
-                var shifted = (c - baseChar + setting) % 26 + baseChar;
-                result += (char)shifted;
+                var shift = (c - baseChar - setting) % 26;
+                if (shift < 0) shift += 26;
+                var shifted = (char)(baseChar + shift);
+                result += shifted;
             }
             else
             {
@@ -119,14 +144,37 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         return result;
     }
 
+    private string ParseHexCodes(string hex)
+    {
+        if (string.IsNullOrEmpty(hex)) return "";
+        var parts = hex.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var result = "";
+        foreach (var part in parts)
+        {
+            if (part.StartsWith("0x") && int.TryParse(part[2..], System.Globalization.NumberStyles.HexNumber, null, out var val))
+            {
+                result += (char)val;
+            }
+            else
+            {
+                // fallback, assume it's char
+                result += part;
+            }
+        }
+        return result;
+    }
+
     private void UpdateCipherState(Entity<EncryptionCipherComputerComponent> ent)
     {
+        ent.Comp.ValidWord = ChallengePhrases.Contains(ent.Comp.DecipheredWord.ToUpper());
+
         var state = new EncryptionCipherComputerBuiState(
             ent.Comp.InputCode,
             ent.Comp.CipherSetting,
             ent.Comp.DecipheredWord,
             ent.Comp.StatusMessage,
-            ent.Comp.PunchcardCount
+            ent.Comp.PunchcardCount,
+            ent.Comp.ValidWord
         );
 
         _ui.SetUiState(ent.Owner, EncryptionCipherComputerUI.Key, state);
