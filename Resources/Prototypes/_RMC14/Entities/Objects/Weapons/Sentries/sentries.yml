@@ -5,6 +5,10 @@
   name: turret
   components:
   - type: Sentry
+  - type: Eye
+  - type: DeviceNetwork
+  - type: DeviceLinkSink
+    ports: [ SentryControl ]
 
 - type: htnCompound
   id: RMCSentryCompound
@@ -67,10 +71,17 @@
 
 - type: entity
   parent: RMCBaseSentry
-  id: RMCSentry
+  id: RMCSentryConstruct
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - UNMC
+    originalFaction: UNMC
+    targetedFactions:
+    - RMCXeno
+    - CLF
   - type: Icon
     sprite: _RMC14/Objects/Weapons/Sentries/sentry.rsi
     state: normal_uac_sentry_handheld
@@ -78,7 +89,8 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: XenoCrusherChargable
     setDamage:
       types:
@@ -86,6 +98,14 @@
   - type: Tag
     tags:
     - RMCSentry
+  - type: PointLight
+
+- type: entity
+  parent: [RMCSentryConstruct, BaseItem]
+  id: RMCSentry
+  components:
+  - type: Item
+    size: Normal
 
 - type: Tag
   id: RMCSentry
@@ -162,11 +182,16 @@
   name: We-Ya 512-M mini sentry
   description: A compact version of the UNMC defenses. Designed for quick deployment of the associated type in the field. This one has been modified for use by the mercenaries employed by Weston-Yamada.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - WeYa
+    originalFaction: WeYa
   - type: NpcFactionMember
     factions:
     - WeYa
   - type: UserIFF
-    faction: FactionWeYa
+    factions:
+    - FactionWeYa
   - type: Tag
     tags:
     - RMCSentryWeYa
@@ -177,11 +202,16 @@
   name: SPP SDS-R8 light sentry
   description: A compact version of the SPP defense sentry SDS-R7. Designed for deployment in the field.
   components:
+  - type: SentryTargeting
+    friendlyFactions:
+    - SPP
+    originalFaction: SPP
   - type: NpcFactionMember
     factions:
     - SPP
   - type: UserIFF
-    faction: FactionSPP
+    factions:
+    - FactionSPP
 
 - type: entity
   parent: RMCSentry
@@ -385,6 +415,7 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
+
 - type: entity
   parent: RMCSentry
   id: RMCSentryMiniFire
@@ -446,7 +477,6 @@
         - BulletImpassable
         hard: false
   - type: Sentry
-    homingShots: false
     deployDelay: 0.75
     undeployDelay: 0.75
     upgrades: null
@@ -454,7 +484,7 @@
     magazineTag: RMCMagazineSentryFire
 
 - type: entity
-  parent: RMCBaseSentry
+  parent: RMCSentry
   id: RMCSentryFire
   name: UN 55-FA assault sentry flamer
   description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
@@ -481,9 +511,9 @@
     factions:
     - UNMC
   - type: UserIFF
-    faction: FactionMarine
+    factions:
+    - FactionMarine
   - type: Sentry
-    homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
@@ -542,7 +572,6 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    homingShots: false
     deployDelay: 2
     upgrades: null
     startingMagazine: RMCMagazineSentryFireSmoke
@@ -550,3 +579,23 @@
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
+
+- type: entity
+  parent: RMCTurretGaussDumb
+  id: RMCTurretGaussModifiedCLF
+  name: modified UN-577 gauss turret
+  description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a high-capacity drum magazine. This one's IFF system has been fried via acid damage, and it will open fire on any targets within range.
+  components:
+  - type: Gun
+    fireRate: 2.5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCCartridgeSentry
+    capacity: 500
+  - type: NpcFactionMember
+    factions:
+    - CLF
+  - type: UserIFF
+    factions:
+    - FactionCLF
+    - FactionSurvivor

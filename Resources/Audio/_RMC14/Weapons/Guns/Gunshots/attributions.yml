@@ -292,3 +292,13 @@
   license: "CC-BY-4.0"
   copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"
+
+- files: ["gun_silenced_l112.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/desert-eagle-50-ae-close-single-gunshot-a-wwwfesliyanstudios-8831/"
+
+- files: ["gun_shotgun_choke.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/28bf8164895c60155d482b9e435c3e728c6f090f/sound/weapons/gun_shotgun_choke.ogg"

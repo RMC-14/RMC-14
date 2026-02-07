@@ -19,6 +19,7 @@ using Content.Shared._RMC14.Xenonids.Construction.ResinHole;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Atmos.Components;
+using Content.Shared._RMC14.Sentry;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
@@ -65,6 +66,7 @@ public sealed class NPCUtilitySystem : EntitySystem
     [Dependency] private readonly SharedSolutionContainerSystem _solutions = default!;
     [Dependency] private readonly WeldableSystem _weldable = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
+    [Dependency] private readonly SharedSentryTargetingSystem _sentryTargeting = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MobThresholdSystem _thresholdSystem = default!;
     [Dependency] private readonly TurretTargetSettingsSystem _turretTargetSettings = default!;
@@ -99,6 +101,11 @@ public sealed class NPCUtilitySystem : EntitySystem
         bool bestOnly = true)
     {
         // TODO: PickHostilesop or whatever needs to juse be UtilityQueryOperator
+
+        // RMC14 prevent shooting while inside a container
+        var owner = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        if (_container.TryGetContainingContainer(owner, out _))
+            return UtilityResult.Empty;
 
         var weh = _proto.Index<UtilityQueryPrototype>(proto);
         var ents = _entPool.Get();
@@ -547,9 +554,21 @@ public sealed class NPCUtilitySystem : EntitySystem
             }
             case NearbyHostilesQuery:
             {
-                foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
+                // Begin RMC
+                if (TryComp<SentryTargetingComponent>(owner, out var targeting))
                 {
-                    entities.Add(ent);
+                    foreach (var ent in _sentryTargeting.GetNearbyIffHostiles((owner, targeting), vision))
+                    {
+                        entities.Add(ent);
+                    }
+                }
+                else
+                {
+                    foreach (var ent in _npcFaction.GetNearbyHostiles(owner, vision))
+                    {
+                        entities.Add(ent);
+                    }
+                    // End RMC
                 }
                 break;
             }

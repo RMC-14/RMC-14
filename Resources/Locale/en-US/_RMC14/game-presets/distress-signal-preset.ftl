@@ -1,4 +1,4 @@
-﻿rmc-distress-signal-title = Distress Signal
+rmc-distress-signal-title = Distress Signal
 rmc-distress-signal-description = Respond to a distress signal sent by a nearby planet.
 
 cm-distress-signal-majormarinevictory = [color=green]The last of the xenonids were purged. It’s safe to breathe again... for now.[/color]
@@ -28,6 +28,6 @@ rmc-distress-signal-fallen = In memoriam of our fallen soldiers:
 cm-distress-signal-medals = Medal Awards:
 cm-distress-signal-jellies = Royal Jelly Awards:
 
-rmc-distress-signal-got-medal = {$receiver} is awarded the {$award}: '{$awardDescription}'
+rmc-distress-signal-got-medal = {$receiver} is awarded the {$award}: '{$awardDescription}' by {$giver}
 
 rmc-distress-signal-got-jelly = {$receiver} is awarded the {$award}: '{$awardDescription}' by {$giver}

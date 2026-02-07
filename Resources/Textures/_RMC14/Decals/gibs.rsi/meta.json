@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Drone state by Dutch-VanDerLinde",
+  "copyright": "Drone and lesser drone state by Dutch-VanDerLinde",
   "size": {
     "x": 64,
     "y": 64
@@ -9,6 +9,9 @@
   "states": [
     {
       "name": "drone"
+    },
+    {
+      "name": "lesser_drone"
     }
   ]
 }

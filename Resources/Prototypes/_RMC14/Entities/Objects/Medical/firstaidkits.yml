@@ -20,6 +20,7 @@
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
+      - PillPacket
       - Bottle
       - Syringe
       - PillCanister
@@ -59,6 +60,7 @@
   - type: IgnoreContentsSize
     items:
       tags:
+      - PillPacket
       - PillCanister
       - CMSurgicalCase
       - RMCSyringeCase
@@ -70,6 +72,9 @@
     skills:
       all:
         RMCSkillMedical: 2
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 2000
 
 - type: entity
   parent: CMFirstAidKit
