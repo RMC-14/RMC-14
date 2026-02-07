@@ -2099,7 +2099,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2119,7 +2121,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2139,7 +2143,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2160,7 +2166,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2176,7 +2184,9 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2193,10 +2203,12 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .ToListAsync();
         }
 
-        public async Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false)
+        public async Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2211,7 +2223,10 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             if (commendation == null)
                 return null;
 
-            db.DbContext.RMCCommendations.Remove(commendation);
+            commendation.Deleted = true;
+            commendation.DeletedById = deletedBy;
+            commendation.DeletedAt = deletedAt.UtcDateTime;
+
             await db.DbContext.SaveChangesAsync();
             return commendation;
         }
@@ -2219,12 +2234,16 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
         public async Task<List<RMCCommendation>> DeleteCommendationsByRound(
             int roundId,
             CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
             Guid? giverId = null,
             Guid? receiverId = null,
             bool includePlayers = false)
         {
             await using var db = await GetDb();
-            var query = db.DbContext.RMCCommendations.AsQueryable();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
 
             if (includePlayers)
             {
@@ -2246,7 +2265,13 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             if (commendations.Count == 0)
                 return commendations;
 
-            db.DbContext.RMCCommendations.RemoveRange(commendations);
+            foreach (var commendation in commendations)
+            {
+                commendation.Deleted = true;
+                commendation.DeletedById = deletedBy;
+                commendation.DeletedAt = deletedAt.UtcDateTime;
+            }
+
             await db.DbContext.SaveChangesAsync();
             return commendations;
         }

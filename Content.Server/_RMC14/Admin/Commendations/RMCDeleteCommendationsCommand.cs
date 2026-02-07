@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using Content.Server.Administration;
@@ -41,7 +42,15 @@ public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
                 return;
             }
 
-            var commendation = await _db.DeleteCommendationById(commendationId, includePlayers: true);
+            if (shell.Player == null)
+            {
+                shell.WriteError("This command must be run by an admin player.");
+                return;
+            }
+
+            var deletedBy = shell.Player.UserId.UserId;
+            var deletedAt = DateTimeOffset.UtcNow;
+            var commendation = await _db.DeleteCommendationById(commendationId, deletedBy, deletedAt, includePlayers: true);
 
             if (commendation == null)
             {
@@ -131,7 +140,15 @@ public sealed class RMCDeleteCommendationsCommand : LocalizedCommands
                 }
             }
 
-            var commendations = await _db.DeleteCommendationsByRound(roundId, filterType, giverId, receiverId, includePlayers: true);
+            if (shell.Player == null)
+            {
+                shell.WriteError("This command must be run by an admin player.");
+                return;
+            }
+
+            var deletedBy = shell.Player.UserId.UserId;
+            var deletedAt = DateTimeOffset.UtcNow;
+            var commendations = await _db.DeleteCommendationsByRound(roundId, filterType, deletedBy, deletedAt, giverId, receiverId, includePlayers: true);
 
             if (commendations.Count == 0)
             {

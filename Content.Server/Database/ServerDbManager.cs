@@ -393,11 +393,13 @@ namespace Content.Server.Database
 
         Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false);
 
-        Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false);
+        Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false);
 
         Task<List<RMCCommendation>> DeleteCommendationsByRound(
             int roundId,
             CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
             Guid? giverId = null,
             Guid? receiverId = null,
             bool includePlayers = false);
@@ -1293,21 +1295,23 @@ namespace Content.Server.Database
             return RunDbCommand(() => _db.GetCommendationsByRound(roundId, filterType, includePlayers));
         }
 
-        public Task<RMCCommendation?> DeleteCommendationById(int commendationId, bool includePlayers = false)
+        public Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.DeleteCommendationById(commendationId, includePlayers));
+            return RunDbCommand(() => _db.DeleteCommendationById(commendationId, deletedBy, deletedAt, includePlayers));
         }
 
         public Task<List<RMCCommendation>> DeleteCommendationsByRound(
             int roundId,
             CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
             Guid? giverId = null,
             Guid? receiverId = null,
             bool includePlayers = false)
         {
             DbWriteOpsMetric.Inc();
-            return RunDbCommand(() => _db.DeleteCommendationsByRound(roundId, type, giverId, receiverId, includePlayers));
+            return RunDbCommand(() => _db.DeleteCommendationsByRound(roundId, type, deletedBy, deletedAt, giverId, receiverId, includePlayers));
         }
 
         public Task IncreaseInfects(Guid player)
