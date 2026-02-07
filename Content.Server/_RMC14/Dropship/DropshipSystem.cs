@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Linq;
+using System.Numerics;
 using Content.Server._RMC14.Marines;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
@@ -21,6 +22,7 @@ using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
+using Content.Shared.Coordinates;
 using Content.Shared.Database;
 using Content.Shared.Doors.Components;
 using Content.Shared.Interaction;
@@ -36,6 +38,7 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
@@ -45,13 +48,16 @@ namespace Content.Server._RMC14.Dropship;
 public sealed class DropshipSystem : SharedDropshipSystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly AppearanceSystem _appearance = default!;
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly ContainerSystem _container = default!;
     [Dependency] private readonly DoorSystem _door = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly PhysicsSystem _physics = default!;
+    [Dependency] private readonly PointLightSystem _pointLight = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly ShuttleSystem _shuttle = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
@@ -75,6 +81,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private EntityUid _dropshipId;
     private bool _hijack;
 
+    private const float DepartureLocationSearchRange = 12;
+
+
     public override void Initialize()
     {
         base.Initialize();
@@ -85,12 +94,16 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         SubscribeLocalEvent<DropshipNavigationComputerComponent, DropshipLockoutDoAfterEvent>(OnNavigationLockout);
 
-        SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnRefreshUI);
+        SubscribeLocalEvent<DropshipComponent, FTLRequestEvent>(OnFtlRequested);
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
+
+        SubscribeLocalEvent<DropshipDestinationComponent, DropshipRelayedEvent<FTLStartedEvent>>(OnDepartureLocationFTLStarted);
+        SubscribeLocalEvent<DropshipDestinationComponent, DropshipRelayedEvent<FTLCompletedEvent>>(OnDestinationLocationFTLCompleted);
+        SubscribeLocalEvent<DropshipDestinationComponent, DropshipRelayedEvent<FTLUpdatedEvent>>(OnDestinationLocationFTLUpdated);
 
         Subs.BuiEvents<DropshipNavigationComputerComponent>(DropshipNavigationUiKey.Key,
             subs =>
@@ -116,6 +129,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RelayToMountedEntities(ent, args);
+        RelayToDropshipDepartureLocation(ent, args);
 
         if (!_hijack) // TODO RMC14: Check for locked dropship by queen and friendliness of xenos onboard
         {
@@ -165,6 +179,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
 
         RelayToMountedEntities(ent, args);
+        RelayToDropshipDestination(ent, args);
 
         ent.Comp.DepartureLocation = ent.Comp.Destination;
         Dirty(ent);
@@ -184,6 +199,21 @@ public sealed class DropshipSystem : SharedDropshipSystem
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
     {
         RefreshUI();
+    }
+
+    private void OnFtlRequested<T>(Entity<DropshipComponent> ent, ref T args)
+    {
+        OnRefreshUI(ent, ref args);
+
+        var departureLocations = _entityLookup.GetEntitiesInRange<DropshipDestinationComponent>(ent.Owner.ToCoordinates(), DepartureLocationSearchRange);
+
+        if (departureLocations.Count <= 0)
+            return;
+
+        ent.Comp.DepartureLocation = departureLocations.FirstOrDefault();
+        Dirty(ent);
+
+        ToggleLandingLights(ent.Comp.DepartureLocation.Value, true);
     }
 
     private void OnInFlyByFTLCompleted(Entity<DropshipInFlyByComponent> ent, ref FTLCompletedEvent args)
@@ -237,6 +267,33 @@ public sealed class DropshipSystem : SharedDropshipSystem
         UnlockAllDoors(ent);
 
         _popup.PopupEntity(Loc.GetString("rmc-dropship-locked", ("minutes", (int)ent.Comp.LockoutDuration.TotalMinutes)), ent, args.User, PopupType.Medium);
+    }
+
+    private void OnDepartureLocationFTLStarted(Entity<DropshipDestinationComponent> ent, ref DropshipRelayedEvent<FTLStartedEvent> args)
+    {
+        ToggleLandingLights(ent, false);
+    }
+
+    private void OnDestinationLocationFTLCompleted(Entity<DropshipDestinationComponent> ent, ref DropshipRelayedEvent<FTLCompletedEvent> args)
+    {
+        if (ent.Comp.Ship != args.Relayer)
+            return;
+
+        ToggleLandingLights(ent, false);
+    }
+
+    private void OnDestinationLocationFTLUpdated(Entity<DropshipDestinationComponent> ent, ref DropshipRelayedEvent<FTLUpdatedEvent> args)
+    {
+        if (ent.Comp.Ship != args.Relayer)
+            return;
+
+        if (!TryComp(ent.Comp.Ship, out FTLComponent? ftl))
+            return;
+
+        if (ftl.State is not FTLState.Arriving)
+            return;
+
+        ToggleLandingLights(ent, true);
     }
 
     private void UnlockAllDoors(Entity<DropshipNavigationComputerComponent> ent)
@@ -586,6 +643,53 @@ public sealed class DropshipSystem : SharedDropshipSystem
         }
     }
 
+    /// <summary>
+    ///     Relays events to the dropship's destination.
+    /// </summary>
+    /// <param name="ent">The dropship entity that received the event that will be relayed</param>
+    /// <param name="args">The raised event that is forwarded</param>
+    /// <typeparam name="TEvent">The type of the event</typeparam>
+    private void RelayToDropshipDestination<TEvent>(Entity<DropshipComponent> ent, TEvent args) where TEvent : struct
+    {
+        if (ent.Comp.Destination is not { } destination)
+            return;
+
+        var relayedEvent = new DropshipRelayedEvent<TEvent>(args, ent);
+        RaiseLocalEvent(destination, ref relayedEvent);
+    }
+
+    /// <summary>
+    ///     Relays events to the dropship's destination.
+    /// </summary>
+    /// <param name="ent">The dropship entity that received the event that will be relayed</param>
+    /// <param name="args">The raised event that is forwarded</param>
+    /// <typeparam name="TEvent">The type of the event</typeparam>
+    private void RelayToDropshipDepartureLocation<TEvent>(Entity<DropshipComponent> ent, TEvent args) where TEvent : struct
+    {
+        if (ent.Comp.DepartureLocation is not { } departureLocation)
+            return;
+
+        var relayedEvent = new DropshipRelayedEvent<TEvent>(args, ent);
+        RaiseLocalEvent(departureLocation, ref relayedEvent);
+    }
+
+    private void ToggleLandingLights(EntityUid destination, bool enable, DropshipDestinationComponent? destinationComponent = null)
+    {
+        if (!Resolve(destination, ref destinationComponent, false))
+            return;
+
+        var lights = _entityLookup.GetEntitiesInRange<LandingLightComponent>(destination.ToCoordinates(), destinationComponent.LightSearchRadius);
+        foreach (var light in lights)
+        {
+            if (!HasComp<LandingLightComponent>(light))
+                continue;
+
+            var toggle = enable ? LandingLightState.On : LandingLightState.Off;
+            _appearance.SetData(light, LandingLightVisuals.State, toggle);
+            _pointLight.SetEnabled(light, enable);
+        }
+    }
+
     public void LockDoor(Entity<DoorBoltComponent?> door)
     {
         if (_doorQuery.TryComp(door, out var doorComp) &&
@@ -614,6 +718,11 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         var ev = new FTLUpdatedEvent();
         RaiseLocalEvent(shuttle, ref ev);
+
+        if (!TryComp(shuttle, out DropshipComponent? dropship))
+            return;
+
+        RelayToDropshipDestination((shuttle, dropship), ev);
     }
 
     public bool AnyHijacked()

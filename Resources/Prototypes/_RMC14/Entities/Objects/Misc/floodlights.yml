@@ -215,6 +215,73 @@
   - type: Appearance
   - type: Eye
 
+- type: entity
+  id: LandingZoneLightBase
+  name: landing light
+  description: A landing light, if it's flashing stay clear!
+  suffix: 1
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["light"]
+      state: landingstripe
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.LandingLightVisuals.State:
+        light:
+          Off: { state: landingstripe }
+          On:  { state: landingstripe0 }
+  - type: Clickable
+  - type: LandingLight
+  - type: PointLight
+    color: "#FF1A1A"
+    energy: 0.25
+    radius: 3
+    softness: 1
+    offset: "0, -0.5"
+    enabled: false
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightTwo
+  suffix: 2
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.LandingLightVisuals.State:
+        light:
+          Off: { state: landingstripe }
+          On:  { state: landingstripe1 }
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightThree
+  suffix: 3
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.LandingLightVisuals.State:
+        light:
+          Off: { state: landingstripe }
+          On:  { state: landingstripe2 }
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightFour
+  suffix: 4
+  components:
+  - type: GenericVisualizer
+    visuals:
+      enum.LandingLightVisuals.State:
+        light:
+          Off: { state: landingstripe }
+          On:  { state: landingstripe3 }
+
+
 # Engineer Ship Light
 
 - type: entity
