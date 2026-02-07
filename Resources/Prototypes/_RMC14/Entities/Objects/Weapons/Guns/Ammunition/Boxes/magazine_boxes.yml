@@ -1805,6 +1805,92 @@
         tags:
         - RMCMagazinePistolNP92
 
+# L14 REG
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolL14Empty
+  name: magazine box (L14 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#3a3a4b"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#ffc000"
+    - state: pistol_box_14
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#7c4c1b"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolL14
+
+- type: entity
+  parent: RMCBoxMagazinePistolL14Empty
+  id: RMCBoxMagazinePistolL14
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolL14
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolL14AP
+
+# L14 AP
+- type: entity
+  parent: RMCBoxMagazinePistolBase
+  id: RMCBoxMagazinePistolL14APEmpty
+  name: magazine box (AP L14 x 16)
+  components:
+  - type: Sprite
+    layers:
+    - state: pistol_box
+      color: "#3a3a4b"
+    - state: pistol_ammo_full
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+      color: "#318b11"
+    - state: pistol_box_14
+      color: "#ffcb26"
+    - state: pistol_box_marking
+      color: "#318b11"
+    - state: pistol_lid
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: pistol_lid_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolL14AP
+
+- type: entity
+  parent: RMCBoxMagazinePistolL14APEmpty
+  id: RMCBoxMagazinePistolL14AP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazinePistolL14AP
+    count: 16
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazinePistolL14AP
+
 # -- MISC AMMO BOXES --
 
 - type: entity
