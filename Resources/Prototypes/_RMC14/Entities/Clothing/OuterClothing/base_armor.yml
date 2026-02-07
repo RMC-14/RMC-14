@@ -263,6 +263,105 @@
       - RMCUniformMarine
 
 - type: entity
+  parent: RMCBaseArmorNoAccessory
+  id: RMCBaseArmorPVE
+  abstract: true
+  components:
+  - type: Item
+    heldPrefix: off
+  - type: Sprite
+    layers:
+    - state: icon
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-off
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+      state: lamp-on
+      visible: false
+      map: [ "light" ]
+  - type: Clothing
+    equipDelay: 2
+    unequipDelay: 2
+    equippedPrefix: off
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-off
+  - type: RMCArmorSpeedTier
+    speedTier: medium
+  - type: RMCNameItemOnVend
+    item: Armor
+  - type: CMHardArmor
+  - type: RMCBulkyArmor
+  - type: RMCMagneticArmor
+  - type: Appearance
+  - type: ItemTogglePointLight
+  - type: ToggleableVisuals
+    spriteLayer: light
+    clothingVisuals:
+      outerClothing:
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/armor_overlays.rsi
+        state: lamp-on
+  - type: RMCSuitLight
+  - type: PointLight
+    enabled: false
+    radius: 5
+    offset: 0,-0.85
+    rotation: 90
+    softness: 5
+    autoRot: true
+    netsync: false
+    color: "#FFFFFF"
+    mask: /Textures/_RMC14/Effects/LightMasks/wide_ellipsis.png
+  - type: PointLightRotation
+    rotation: 90
+  - type: HandheldLight
+    addPrefix: true
+    blinkingBehaviourId: blinking
+    radiatingBehaviourId: radiating
+    turnOffSound:
+      path: /Audio/_RMC14/Handling/suitlight_crank.ogg
+    turnOnSound:
+      path: /Audio/_RMC14/Machines/suitlight_on.ogg
+  - type: NoHandsInteractionBlocked
+  - type: LightBehaviour
+    behaviours:
+    - !type:FadeBehaviour
+      id: radiating
+      interpolate: Linear
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+      property: Radius
+      enabled: false
+  - type: Battery
+    maxCharge: 600
+    startingCharge: 600
+  - type: BatterySelfRecharger
+    autoRecharge: true
+    autoRechargeRate: 2
+  - type: WebbingClothing
+    whitelist:
+      tags:
+      - ArmorWebbing
+  - type: Tag
+    tags:
+    - RMCPVEArmor
+
+
+- type: entity
   parent: [ RMCBaseMarineArmorNoAccessory, RMCBaseUniformAccessoryItemOuterClothing ]
   id: RMCBaseMarineArmor
   abstract: true
