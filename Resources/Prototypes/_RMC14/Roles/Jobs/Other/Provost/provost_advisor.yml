@@ -65,7 +65,7 @@
     gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostAdvisor
-    belt: CMBeltSecurityMPFilled
+    belt: RMCM77BeltFilled
     back: CMSatchelSecurityFilledProvost
 #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices
