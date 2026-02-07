@@ -58,7 +58,6 @@
     closeSound:
       path: /Audio/Machines/shutter.ogg
   - type: Weldable
-    fuel: 1
     time: 3
   - type: Appearance
   - type: UserInterface

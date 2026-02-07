@@ -3,7 +3,6 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
-using Content.Shared.Tools.Components;
 
 namespace Content.Shared.Placeable;
 
@@ -63,10 +62,6 @@ public sealed class PlaceableSurfaceSystem : EntitySystem
         // 99% of the time they want to dump the stuff inside on the table, they can manually place with q if they really need to.
         // Just causes prediction CBT otherwise.
         if (HasComp<DumpableComponent>(args.Used))
-            return;
-
-        // RMC14: Don't drop tools - they need to stay in hand to execute their action (e.g., welding DoAfter)
-        if (HasComp<ToolComponent>(args.Used))
             return;
 
         if (!_handsSystem.TryDrop(args.User, args.Used))

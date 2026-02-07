@@ -67,7 +67,7 @@
     denySound:
       path: /Audio/Machines/airlock_deny.ogg
   - type: Weldable
-    fuel: 5
+    fuel: 10
     time: 10
   - type: Airlock
   - type: NavMapDoor

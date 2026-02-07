@@ -12,7 +12,7 @@ namespace Content.Shared.Construction.Steps
         [DataField("tool", required:true, customTypeSerializer:typeof(PrototypeIdSerializer<ToolQualityPrototype>))]
         public string Tool { get; private set; } = string.Empty;
 
-        [DataField("fuel")] public float Fuel { get; private set; } = 2.5f; // RMC14
+        [DataField("fuel")] public float Fuel { get; private set; } = 10;
 
         [DataField("examine")] public string ExamineOverride { get; private set; } = string.Empty;
 

@@ -61,7 +61,6 @@
       entity_storage: !type:Container
       paper_label: !type:ContainerSlot
   - type: Weldable
-    fuel: 1
   - type: PlaceableSurface
     placeCentered: true
     isPlaceable: false

@@ -23,7 +23,7 @@ public sealed partial class WeldableComponent : Component
     ///     How much fuel does it take to weld/unweld entity.
     /// </summary>
     [DataField]
-    public float Fuel = 1f; // RMC14
+    public float Fuel = 3f;
 
     /// <summary>
     ///     Shown when welded entity is examined.

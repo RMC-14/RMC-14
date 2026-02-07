@@ -101,7 +101,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Weldable
-    fuel: 1
   - type: ResistLocker
 
 - type: entity

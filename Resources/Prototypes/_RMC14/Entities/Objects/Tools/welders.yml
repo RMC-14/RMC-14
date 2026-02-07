@@ -114,6 +114,7 @@
   - type: IgnitionSource
     temperature: 700
   - type: Blowtorch
+  - type: RMCBlowtorchWeldFuel
   - type: Clothing
     quickEquip: false
     slots:
