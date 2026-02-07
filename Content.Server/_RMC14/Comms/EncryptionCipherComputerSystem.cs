@@ -1,4 +1,6 @@
 using Content.Shared._RMC14.Comms;
+using Content.Shared.Storage;
+using Robust.Shared.Containers;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server._RMC14.Comms;
@@ -12,13 +14,15 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<EncryptionCipherComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCipherComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<EncryptionCipherComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<EncryptionCipherComputerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
 
         Subs.BuiEvents<EncryptionCipherComputerComponent>(EncryptionCipherComputerUI.Key,
             subs =>
             {
-                subs.Event<EncryptionCipherSetInputMsg>(OnSetInput);
                 subs.Event<EncryptionCipherChangeSettingMsg>(OnChangeSetting);
-                subs.Event<EncryptionCipherPrintOutputMsg>(OnPrintOutput);
+                subs.Event<EncryptionCipherPrintMsg>(OnPrint);
+                subs.Event<EncryptionCipherRefillMsg>(OnRefill);
             });
     }
 
@@ -47,10 +51,49 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         UpdateCipherState(ent);
     }
 
-    private void OnPrintOutput(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherPrintOutputMsg args)
+    private void OnPrint(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherPrintMsg args)
     {
-        // TODO: Print punchcard
-        ent.Comp.StatusMessage = "Output printed.";
+        if (ent.Comp.PunchcardCount <= 0)
+        {
+            ent.Comp.StatusMessage = "No punchcards left.";
+            UpdateCipherState(ent);
+            return;
+        }
+
+        var punchcard = EntityManager.SpawnEntity("RMCPunchcard", Transform(ent).Coordinates);
+        if (TryComp<PunchcardComponent>(punchcard, out var punchComp))
+        {
+            punchComp.Data = ent.Comp.DecipheredWord;
+            Dirty(punchcard, punchComp);
+        }
+
+        ent.Comp.PunchcardCount--;
+        ent.Comp.StatusMessage = "Punchcard printed.";
+        Dirty(ent);
+        UpdateCipherState(ent);
+    }
+
+    private void OnRefill(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherRefillMsg args)
+    {
+        if (!TryComp<StorageComponent>(ent, out var storage))
+        {
+            ent.Comp.StatusMessage = "No storage component.";
+            UpdateCipherState(ent);
+            return;
+        }
+
+        foreach (var item in storage.Container.ContainedEntities)
+        {
+            if (TryComp<PunchcardStackComponent>(item, out var stack))
+            {
+                ent.Comp.PunchcardCount += stack.Count;
+                EntityManager.QueueDeleteEntity(item);
+                ent.Comp.StatusMessage = $"Refilled with {stack.Count} punchcards.";
+                Dirty(ent);
+                break;
+            }
+        }
+
         UpdateCipherState(ent);
     }
 
@@ -82,10 +125,37 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
             ent.Comp.InputCode,
             ent.Comp.CipherSetting,
             ent.Comp.DecipheredWord,
-            ent.Comp.StatusMessage
+            ent.Comp.StatusMessage,
+            ent.Comp.PunchcardCount
         );
 
         _ui.SetUiState(ent.Owner, EncryptionCipherComputerUI.Key, state);
         Dirty(ent);
+    }
+
+    private void OnEntInserted(Entity<EncryptionCipherComputerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp<StorageComponent>(ent, out var storage) || args.Container != storage.Container)
+            return;
+
+        if (TryComp<PunchcardComponent>(args.Entity, out var punchcard))
+        {
+            ent.Comp.InputCode = punchcard.Data;
+            ent.Comp.DecipheredWord = DecipherCode(ent.Comp.InputCode, ent.Comp.CipherSetting);
+            UpdateCipherState(ent);
+        }
+    }
+
+    private void OnEntRemoved(Entity<EncryptionCipherComputerComponent> ent, ref EntRemovedFromContainerMessage args)
+    {
+        if (!TryComp<StorageComponent>(ent, out var storage) || args.Container != storage.Container)
+            return;
+
+        if (TryComp<PunchcardComponent>(args.Entity, out var punchcard))
+        {
+            ent.Comp.InputCode = "";
+            ent.Comp.DecipheredWord = "";
+            UpdateCipherState(ent);
+        }
     }
 }

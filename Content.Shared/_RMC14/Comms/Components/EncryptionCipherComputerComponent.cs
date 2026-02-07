@@ -16,4 +16,7 @@ public sealed partial class EncryptionCipherComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public string StatusMessage = "Ready for input";
+
+    [DataField, AutoNetworkedField]
+    public int PunchcardCount = 10;
 }

@@ -17,9 +17,9 @@ public sealed class EncryptionCipherComputerBui(EntityUid owner, Enum uiKey) : B
             return;
 
         _window = this.CreateWindow<EncryptionCipherComputerWindow>();
-        _window.SetInput += code => SendPredictedMessage(new EncryptionCipherSetInputMsg(code));
         _window.ChangeSetting += delta => SendPredictedMessage(new EncryptionCipherChangeSettingMsg(delta));
-        _window.PrintOutput += () => SendPredictedMessage(new EncryptionCipherPrintOutputMsg());
+        _window.Print += () => SendPredictedMessage(new EncryptionCipherPrintMsg());
+        _window.Refill += () => SendPredictedMessage(new EncryptionCipherRefillMsg());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -31,5 +31,6 @@ public sealed class EncryptionCipherComputerBui(EntityUid owner, Enum uiKey) : B
         _window.CipherSetting = s.CipherSetting;
         _window.DecipheredWord = s.DecipheredWord;
         _window.StatusMessage = s.StatusMessage;
+        _window.PunchcardCount = s.PunchcardCount;
     }
 }

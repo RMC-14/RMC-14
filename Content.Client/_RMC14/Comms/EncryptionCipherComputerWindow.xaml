@@ -2,13 +2,8 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
                       Title="Encryption Cipher Computer">
     <BoxContainer Orientation="Vertical" Margin="10">
-        <Label Text="Challenge Token Input:" />
-        <BoxContainer Orientation="Horizontal" Margin="0,5,0,10">
-            <LineEdit Name="InputLineEdit" HorizontalExpand="True" />
-            <Button Name="SetInputButton" Text="Set" />
-        </BoxContainer>
-
-        <Label Text="Cipher Setting:" />
+        <Label Text="Input Code:" />
+        <Label Name="InputCodeLabel" Text="" Margin="0,0,0,10" />
         <BoxContainer Orientation="Horizontal" Margin="0,5,0,10">
             <Button Name="DecreaseButton" Text="&lt;" />
             <Label Name="SettingLabel" Text="0" HorizontalAlignment="Center" MinWidth="50" />
@@ -18,7 +13,11 @@
         <Label Text="Deciphered Word:" />
         <Label Name="WordLabel" Text="" Margin="0,0,0,10" />
 
-        <Button Name="PrintButton" Text="Print Output" Margin="0,0,0,10" />
+        <Button Name="PrintButton" Text="Print Punchcard" Margin="0,0,0,10" />
+
+        <Button Name="RefillButton" Text="Refill from Stack" Margin="0,0,0,10" />
+
+        <Label Name="PunchcardCountLabel" Text="Punchcards: 10" Margin="0,0,0,10" />
 
         <Label Text="Status:" />
         <Label Name="StatusLabel" Text="Ready for input" />

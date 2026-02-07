@@ -1,4 +1,8 @@
 using Content.Shared._RMC14.Comms;
+using Content.Shared.Storage;
+using Content.Shared._RMC14.Comms;
+using Content.Shared.Storage;
+using Robust.Shared.Containers;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Server._RMC14.Comms;
@@ -13,12 +17,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<EncryptionCoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
-
-        Subs.BuiEvents<EncryptionCoderComputerComponent>(EncryptionCoderComputerUI.Key,
-            subs =>
-            {
-                subs.Event<EncryptionCoderSubmitCodeMsg>(OnSubmitCode);
-            });
+        SubscribeLocalEvent<EncryptionCoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
     }
 
     private void OnBUIOpened(Entity<EncryptionCoderComputerComponent> ent, ref BoundUIOpenedEvent args)
@@ -31,11 +30,6 @@ public sealed class EncryptionCoderSystem : EntitySystem
         UpdateCoderState(ent);
     }
 
-    private void OnSubmitCode(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderSubmitCodeMsg args)
-    {
-        SubmitCode(ent, args.Code);
-        UpdateCoderState(ent);
-    }
 
     public void SubmitCode(Entity<EncryptionCoderComputerComponent> ent, string code)
     {
@@ -60,7 +54,13 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 pongDisplay += "?";
         }
 
-        ent.Comp.LastSubmittedCode = $"{code} -> {pongDisplay}";
+        if (code.ToUpper() == encryptionComp.ChallengePhrase.ToUpper())
+        {
+            _encryption.RestoreClarity((ent.Owner, encryptionComp), true);
+            pongDisplay = pong; // full
+        }
+
+        ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplay}";
         ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
 
         Dirty(ent);
@@ -80,8 +80,19 @@ public sealed class EncryptionCoderSystem : EntitySystem
             ent.Comp.KnownLetters,
             ent.Comp.ClarityDescription
         );
-
         _ui.SetUiState(ent.Owner, EncryptionCoderComputerUI.Key, state);
         Dirty(ent);
+    }
+
+    private void OnEntInserted(Entity<EncryptionCoderComputerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        if (!TryComp<StorageComponent>(ent, out var storage) || args.Container != storage.Container)
+            return;
+
+        if (TryComp<PunchcardComponent>(args.Entity, out var punchcard))
+        {
+            SubmitCode(ent, punchcard.Data);
+            UpdateCoderState(ent);
+        }
     }
 }

@@ -8,14 +8,14 @@ namespace Content.Client._RMC14.Comms;
 [GenerateTypedNameReferences]
 public sealed partial class EncryptionCipherComputerWindow : FancyWindow
 {
-    public event Action<string>? SetInput;
     public event Action<int>? ChangeSetting;
-    public event Action? PrintOutput;
+    public event Action? Print;
+    public event Action? Refill;
 
     public string InputCode
     {
-        get => InputLineEdit.Text ?? "";
-        set => InputLineEdit.Text = value;
+        get => InputCodeLabel.Text ?? "";
+        set => InputCodeLabel.Text = value;
     }
 
     public int CipherSetting
@@ -36,21 +36,21 @@ public sealed partial class EncryptionCipherComputerWindow : FancyWindow
         set => StatusLabel.Text = value;
     }
 
+    public int PunchcardCount
+    {
+        get => int.TryParse(PunchcardCountLabel.Text?.Replace("Punchcards: ", ""), out var c) ? c : 10;
+        set => PunchcardCountLabel.Text = $"Punchcards: {value}";
+    }
+
     public EncryptionCipherComputerWindow()
     {
         RobustXamlLoader.Load(this);
 
-        SetInputButton.OnPressed += _ =>
-        {
-            if (!string.IsNullOrWhiteSpace(InputLineEdit.Text))
-            {
-                SetInput?.Invoke(InputLineEdit.Text.ToUpper());
-            }
-        };
-
         DecreaseButton.OnPressed += _ => ChangeSetting?.Invoke(-1);
         IncreaseButton.OnPressed += _ => ChangeSetting?.Invoke(1);
 
-        PrintButton.OnPressed += _ => PrintOutput?.Invoke();
+        PrintButton.OnPressed += _ => Print?.Invoke();
+
+        RefillButton.OnPressed += _ => Refill?.Invoke();
     }
 }

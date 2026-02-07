@@ -9,12 +9,6 @@ public enum EncryptionCoderComputerUI
 }
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderSubmitCodeMsg(string code) : BoundUserInterfaceMessage
-{
-    public readonly string Code = code;
-}
-
-[Serializable, NetSerializable]
 public sealed class EncryptionCoderComputerBuiState(
     string lastSubmittedCode,
     int knownLetters,

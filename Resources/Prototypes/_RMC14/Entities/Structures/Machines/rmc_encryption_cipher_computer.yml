@@ -34,3 +34,15 @@
   - type: EncryptionCipherComputer
   - type: AccessReader
     access: [ [ "RMCAccessCommand" ] ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCPunchcardStack
+      components:
+      - Punchcard
+  - type: RequiresSkill
+    skills:
+      RMCSkillIntel: 1

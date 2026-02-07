@@ -8,17 +8,15 @@ namespace Content.Client._RMC14.Comms;
 [GenerateTypedNameReferences]
 public sealed partial class EncryptionCoderComputerWindow : FancyWindow
 {
-    public event Action<string>? SubmitCode;
-
     public string LastSubmittedCode
     {
-        get => LastSubmittedCodeLabel.Text ?? "";
+        get => LastSubmittedCodeLabel.Text ?? "None";
         set => LastSubmittedCodeLabel.Text = value;
     }
 
     public int KnownLetters
     {
-        get => int.TryParse(KnownLettersLabel.Text ?? "0", out var letters) ? letters : 0;
+        get => int.TryParse(KnownLettersLabel.Text, out var i) ? i : 0;
         set => KnownLettersLabel.Text = value.ToString();
     }
 
@@ -31,23 +29,5 @@ public sealed partial class EncryptionCoderComputerWindow : FancyWindow
     public EncryptionCoderComputerWindow()
     {
         RobustXamlLoader.Load(this);
-
-        CodeInput.OnTextEntered += args =>
-        {
-            if (!string.IsNullOrWhiteSpace(args.Text))
-            {
-                SubmitCode?.Invoke(args.Text.ToUpper());
-                CodeInput.Text = "";
-            }
-        };
-
-        SubmitButton.OnPressed += _ =>
-        {
-            if (!string.IsNullOrWhiteSpace(CodeInput.Text))
-            {
-                SubmitCode?.Invoke(CodeInput.Text.ToUpper());
-                CodeInput.Text = "";
-            }
-        };
     }
 }

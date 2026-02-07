@@ -9,12 +9,6 @@ public enum EncryptionCipherComputerUI
 }
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCipherSetInputMsg(string code) : BoundUserInterfaceMessage
-{
-    public readonly string Code = code;
-}
-
-[Serializable, NetSerializable]
 public sealed class EncryptionCipherChangeSettingMsg(int delta) : BoundUserInterfaceMessage
 {
     public readonly int Delta = delta;
@@ -24,15 +18,29 @@ public sealed class EncryptionCipherChangeSettingMsg(int delta) : BoundUserInter
 public sealed class EncryptionCipherPrintOutputMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class EncryptionCipherPrintMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
+public sealed class EncryptionCipherSetInputMsg(string code) : BoundUserInterfaceMessage
+{
+    public readonly string Code = code;
+}
+
+[Serializable, NetSerializable]
+public sealed class EncryptionCipherRefillMsg : BoundUserInterfaceMessage;
+
+[Serializable, NetSerializable]
 public sealed class EncryptionCipherComputerBuiState(
     string inputCode,
     int cipherSetting,
     string decipheredWord,
-    string statusMessage
+    string statusMessage,
+    int punchcardCount
 ) : BoundUserInterfaceState
 {
     public readonly string InputCode = inputCode;
     public readonly int CipherSetting = cipherSetting;
     public readonly string DecipheredWord = decipheredWord;
     public readonly string StatusMessage = statusMessage;
+    public readonly int PunchcardCount = punchcardCount;
 }

@@ -7,12 +7,15 @@ using Robust.Shared.Timing;
 namespace Content.Client._RMC14.Comms;
 
 [GenerateTypedNameReferences]
-public sealed partial class DecryptionComputerWindow : FancyWindow
+public sealed partial class DecoderComputerWindow : FancyWindow
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
     public event Action<string>? SubmitCode;
     public event Action? QuickRestore;
+    public event Action? Print;
+    public event Action? Refill;
+    public event Action? Generate;
 
     public string CurrentChallengeCode
     {
@@ -42,14 +45,20 @@ public sealed partial class DecryptionComputerWindow : FancyWindow
 
     public string StatusMessage
     {
-        get => StatusLabel.Text ?? "Ready for decryption";
+        get => StatusLabel.Text ?? "Ready for decode";
         set => StatusLabel.Text = value;
+    }
+
+    public int PunchcardCount
+    {
+        get => int.TryParse(PunchcardCountLabel.Text?.Replace("Punchcards: ", ""), out var c) ? c : 10;
+        set => PunchcardCountLabel.Text = $"Punchcards: {value}";
     }
 
     private bool _hasGracePeriod;
     private TimeSpan _gracePeriodEnd;
 
-    public DecryptionComputerWindow()
+    public DecoderComputerWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -73,6 +82,12 @@ public sealed partial class DecryptionComputerWindow : FancyWindow
         };
 
         QuickRestoreButton.OnPressed += _ => QuickRestore?.Invoke();
+
+        PrintButton.OnPressed += _ => Print?.Invoke();
+
+        RefillButton.OnPressed += _ => Refill?.Invoke();
+
+        GenerateButton.OnPressed += _ => Generate?.Invoke();
     }
 
     protected override void FrameUpdate(FrameEventArgs args)

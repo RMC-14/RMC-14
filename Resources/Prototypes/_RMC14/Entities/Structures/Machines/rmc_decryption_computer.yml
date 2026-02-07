@@ -1,8 +1,8 @@
 - type: entity
   parent: CMBaseStructure
-  id: RMCDecryptionComputer
-  name: decryption computer
-  description: Used by CIC to restore communications clarity by decrypting challenge codes.
+  id: RMCDecoderComputer
+  name: decoder computer
+  description: Used to generate challenge tokens from the current encryption stream.
   components:
   - type: Transform
     anchored: false
@@ -26,11 +26,21 @@
       params:
         volume: -1
   - type: ActivatableUI
-    key: enum.DecryptionComputerUI.Key
+    key: enum.DecoderComputerUI.Key
   - type: UserInterface
     interfaces:
-      enum.DecryptionComputerUI.Key:
-        type: DecryptionComputerBui
-  - type: DecryptionComputer
+      enum.DecoderComputerUI.Key:
+        type: DecoderComputerBui
+  - type: DecoderComputer
   - type: AccessReader
     access: [ [ "RMCAccessSeniorCommand" ] ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCPunchcardStack
+  - type: RequiresSkill
+    skills:
+      RMCSkillIntel: 1

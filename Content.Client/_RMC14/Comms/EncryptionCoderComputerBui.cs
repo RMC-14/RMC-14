@@ -17,7 +17,6 @@ public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : Bo
             return;
 
         _window = this.CreateWindow<EncryptionCoderComputerWindow>();
-        _window.SubmitCode += code => SendPredictedMessage(new EncryptionCoderSubmitCodeMsg(code));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
