@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Monotheonist
-  changes:
-  - message: Added a new lobby screen, entitled "A Push Too Far." Watch out for Ravagers,
-      guys!
-    type: Add
-  id: 2379
-  time: '2025-10-03T21:10:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8009
 - author: AutoOtter
   changes:
   - message: New lobby screen! Will our moth heroes survive? (no.)
@@ -4690,5 +4682,20 @@
   id: 2881
   time: '2026-02-07T22:14:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8946
+- author: RavenCaat
+  changes:
+  - message: Added Glory to the RCM!
+    type: Add
+  - message: Added L7A3 RCM SMG and its Squash head 9mm ammo
+    type: Add
+  - message: Removed fun for SPP!
+    type: Remove
+  - message: Changed  the power levels between SPP and RCM what fun!
+    type: Tweak
+  - message: Fixed  SPP having fun!
+    type: Fix
+  id: 2882
+  time: '2026-02-07T22:16:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8754
 Name: RMC14
 Order: -1
