@@ -1,0 +1,35 @@
+using JetBrains.Annotations;
+using Content.Shared._RMC14.Comms;
+using Robust.Client.UserInterface;
+
+namespace Content.Client._RMC14.Comms;
+
+[UsedImplicitly]
+public sealed class EncryptionCipherComputerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+{
+    [ViewVariables]
+    private EncryptionCipherComputerWindow? _window;
+
+    protected override void Open()
+    {
+        base.Open();
+        if (_window != null)
+            return;
+
+        _window = this.CreateWindow<EncryptionCipherComputerWindow>();
+        _window.SetInput += code => SendPredictedMessage(new EncryptionCipherSetInputMsg(code));
+        _window.ChangeSetting += delta => SendPredictedMessage(new EncryptionCipherChangeSettingMsg(delta));
+        _window.PrintOutput += () => SendPredictedMessage(new EncryptionCipherPrintOutputMsg());
+    }
+
+    protected override void UpdateState(BoundUserInterfaceState state)
+    {
+        if (state is not EncryptionCipherComputerBuiState s || _window == null)
+            return;
+
+        _window.InputCode = s.InputCode;
+        _window.CipherSetting = s.CipherSetting;
+        _window.DecipheredWord = s.DecipheredWord;
+        _window.StatusMessage = s.StatusMessage;
+    }
+}

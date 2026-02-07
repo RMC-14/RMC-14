@@ -1,0 +1,36 @@
+- type: entity
+  parent: CMBaseStructure
+  id: RMCEncryptionCipherComputer
+  name: encryption cipher computer
+  description: Used to decipher challenge tokens into words using a cipher phrase.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    drawdepth: SmallObjects
+    sprite: _RMC14/Structures/Machines/rmc_groundside_communications_console.rsi
+    state: on
+    layers: [ ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: WallMount
+    arc: 360
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: ActivatableUI
+    key: enum.EncryptionCipherComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.EncryptionCipherComputerUI.Key:
+        type: EncryptionCipherComputerBui
+  - type: EncryptionCipherComputer
+  - type: AccessReader
+    access: [ [ "RMCAccessCommand" ] ]
