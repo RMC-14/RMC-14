@@ -2,6 +2,7 @@ using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
@@ -10,6 +11,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 {
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -64,10 +66,28 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 return;
             }
 
-            var challenge = "PONG";
-            var pong = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? challenge : new string('?', challenge.Length);
+            var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
+
+            // Check if challenge has expired
+            var decoderQuery = EntityQueryEnumerator<DecoderComputerComponent>();
+            if (!decoderQuery.MoveNext(out _, out var decoderComp) || _timing.CurTime >= decoderComp.ChallengeExpiry)
+            {
+                var pongChallengeExpired = "PONG";
+                var pongDisplayExpired = "";
+                for (var i = 0; i < pongChallengeExpired.Length; i++)
+                {
+                    pongDisplayExpired += i < knownLetters ? pongChallengeExpired[i] : '?';
+                }
+                ent.Comp.LastSubmittedCode = $"PING -> {pongDisplayExpired}";
+                ent.Comp.KnownLetters = knownLetters;
+                Dirty(ent);
+                return;
+            }
+
+            var pongChallenge = "PONG";
+            var pong = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? pongChallenge : new string('?', pongChallenge.Length);
             ent.Comp.LastSubmittedCode = $"PING -> {pong}";
-            ent.Comp.KnownLetters = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? challenge.Length : 0;
+            ent.Comp.KnownLetters = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? pongChallenge.Length : 0;
 
             if (ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()))
             {
@@ -88,16 +108,33 @@ public sealed class EncryptionCoderSystem : EntitySystem
             if (!encryptionQuery.MoveNext(out _, out encryptionComp))
                 return;
 
+            // Check if challenge has expired
+            var decoderQuery = EntityQueryEnumerator<DecoderComputerComponent>();
+            if (!decoderQuery.MoveNext(out _, out var decoderComp) || _timing.CurTime >= decoderComp.ChallengeExpiry)
+            {
+                var knownLettersExpired = _encryption.GetKnownPongLetters(encryptionComp);
+                var pongChallengeExpired = "PONG";
+                var pongDisplayExpired = "";
+                for (var i = 0; i < pongChallengeExpired.Length; i++)
+                {
+                    pongDisplayExpired += i < knownLettersExpired ? pongChallengeExpired[i] : "?";
+                }
+                ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplayExpired}";
+                ent.Comp.KnownLetters = knownLettersExpired;
+                Dirty(ent);
+                return;
+            }
+
             var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
             ent.Comp.KnownLetters = knownLetters;
 
             // Create the display string
             var pongDisplay = "";
-            var pong = encryptionComp.ChallengePhrase;
-            for (var i = 0; i < pong.Length; i++)
+            var pongChallenge = "PONG";
+            for (var i = 0; i < pongChallenge.Length; i++)
             {
                 if (i < knownLetters)
-                    pongDisplay += pong[i];
+                    pongDisplay += pongChallenge[i];
                 else
                     pongDisplay += "?";
             }
@@ -105,7 +142,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
             if (code.ToUpper() == encryptionComp.ChallengePhrase.ToUpper())
             {
                 _encryption.RestoreClarity((ent.Owner, encryptionComp), true);
-                pongDisplay = pong;
+                pongDisplay = pongChallenge;
             }
 
             ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplay}";

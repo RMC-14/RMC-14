@@ -41,11 +41,16 @@ public sealed class CommsEncryptionSystem : SharedCommsEncryptionSystem
             if (!comp.IsGroundside)
                 continue;
 
-            // Check grace period
             if (comp.HasGracePeriod && _timing.CurTime < comp.GracePeriodEnd)
+            {
+                // During grace period, degrade from 100% to 95%
+                if (comp.Clarity > comp.MaxClarity)
+                {
+                    comp.Clarity = Math.Max(comp.Clarity - comp.DegradationAmount, comp.MaxClarity);
+                    Dirty(uid, comp);
+                }
                 continue;
-
-            comp.HasGracePeriod = false;
+            }
 
             // Degrade clarity
             if (comp.Clarity > comp.MinClarity)

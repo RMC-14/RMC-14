@@ -22,4 +22,7 @@ public sealed partial class DecoderComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int PunchcardCount = 10;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan ChallengeExpiry;
 }

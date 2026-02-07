@@ -159,6 +159,7 @@ public sealed class DecoderComputerSystem : EntitySystem
 
         ent.Comp.CurrentChallengeCode = hexCodes;
         ent.Comp.CurrentChallengeWord = word;
+        ent.Comp.ChallengeExpiry = _timing.CurTime + TimeSpan.FromSeconds(30);
         ent.Comp.StatusMessage = "Ready for decode";
         ent.Comp.HasGracePeriod = false;
         Dirty(ent);

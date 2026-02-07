@@ -17,8 +17,10 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
 
     private void OnMapInit(Entity<CommsEncryptionComponent> ent, ref MapInitEvent args)
     {
-        // Initialize clarity to maximum
-        ent.Comp.Clarity = ent.Comp.MaxClarity;
+        // Initialize clarity to 100% with grace period
+        ent.Comp.Clarity = 1.0f;
+        ent.Comp.HasGracePeriod = true;
+        ent.Comp.GracePeriodEnd = _timing.CurTime + ent.Comp.GracePeriodDuration;
         ent.Comp.LastDecryptionTime = _timing.CurTime;
         ent.Comp.DegradationStartTime = _timing.CurTime;
         Dirty(ent);
@@ -26,7 +28,7 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
 
     public float GetGarblePercentage(CommsEncryptionComponent comp)
     {
-        // Garble = 1 - Clarity, but clamped
+        // Garble = 1 - Clarity, clamped to 0-55%
         return Math.Clamp(1f - comp.Clarity, 0f, 1f - comp.MinClarity);
     }
 
@@ -101,10 +103,8 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
     {
         if (fullRestore)
         {
-            ent.Comp.Clarity = ent.Comp.MaxClarity;
+            ent.Comp.Clarity = ent.Comp.MaxClarity; // Restore to 95%
             ent.Comp.LastDecryptionTime = _timing.CurTime;
-            ent.Comp.HasGracePeriod = true;
-            ent.Comp.GracePeriodEnd = _timing.CurTime + ent.Comp.GracePeriodDuration;
         }
         else
         {
