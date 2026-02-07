@@ -297,7 +297,7 @@
 
 - type: entity
   parent: RMCBoxBulletsBase
-  id: RMCBoxBulletsRifleL90
+  id: RMCBoxBulletsRifle
   name: rifle ammunition box (7x43mm)
   description: A 7x43mm ammunition box. Used to refill L90/91 magazines. It comes with a leather strap allowing someone to wear it on their back.
   components:
