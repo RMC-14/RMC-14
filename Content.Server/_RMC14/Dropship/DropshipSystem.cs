@@ -678,14 +678,22 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (!Resolve(destination, ref destinationComponent, false))
             return;
 
+        var time = _timing.CurTime;
         var lights = _entityLookup.GetEntitiesInRange<LandingLightComponent>(destination.ToCoordinates(), destinationComponent.LightSearchRadius);
         foreach (var light in lights)
         {
-            if (!HasComp<LandingLightComponent>(light))
+            if (!TryComp<LandingLightComponent>(light, out var lightComp))
                 continue;
 
-            var toggle = enable ? LandingLightState.On : LandingLightState.Off;
-            _appearance.SetData(light, LandingLightVisuals.State, toggle);
+            lightComp.Enabled = enable;
+            if (enable)
+                lightComp.StartTime = time;
+
+            Dirty(light, lightComp);
+
+            _appearance.SetData(light, LandingLightVisuals.Off, !enable);
+            _appearance.SetData(light, LandingLightVisuals.On, enable);
+
             _pointLight.SetEnabled(light, enable);
         }
     }

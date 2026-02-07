@@ -220,21 +220,20 @@
   name: landing light
   description: A landing light, if it's flashing stay clear!
   suffix: 1
+  placement:
+    mode: SnapgridCenter
   components:
   - type: Transform
     anchored: true
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
     layers:
-    - map: ["light"]
+    - map: ["enum.LandingLightVisuals.Off"]
       state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe0
+      visible: false
   - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.LandingLightVisuals.State:
-        light:
-          Off: { state: landingstripe }
-          On:  { state: landingstripe0 }
   - type: Clickable
   - type: LandingLight
   - type: PointLight
@@ -250,36 +249,48 @@
   id: LandingZoneLightTwo
   suffix: 2
   components:
-  - type: GenericVisualizer
-    visuals:
-      enum.LandingLightVisuals.State:
-        light:
-          Off: { state: landingstripe }
-          On:  { state: landingstripe1 }
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe1
+      visible: false
+  - type: LandingLight
+    onState: landingstripe1
 
 - type: entity
   parent: LandingZoneLightBase
   id: LandingZoneLightThree
   suffix: 3
   components:
-  - type: GenericVisualizer
-    visuals:
-      enum.LandingLightVisuals.State:
-        light:
-          Off: { state: landingstripe }
-          On:  { state: landingstripe2 }
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe2
+      visible: false
+  - type: LandingLight
+    onState: landingstripe2
 
 - type: entity
   parent: LandingZoneLightBase
   id: LandingZoneLightFour
   suffix: 4
   components:
-  - type: GenericVisualizer
-    visuals:
-      enum.LandingLightVisuals.State:
-        light:
-          Off: { state: landingstripe }
-          On:  { state: landingstripe3 }
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe3
+      visible: false
+  - type: LandingLight
+    onState: landingstripe3
 
 
 # Engineer Ship Light
