@@ -295,6 +295,8 @@
     bulletType: RMCBoxBulletsPistolAP
     amount: 0
 
+# 8.88x51mm
+
 - type: entity
   parent: RMCBoxBulletsBase
   id: RMCBoxBulletsRifleTSE
@@ -355,3 +357,67 @@
   components:
   - type: BulletBox
     bulletType: RMCBoxBulletsRifleTSE
+
+# 7x43mm
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleL90
+  name: rifle ammunition box (7x43mm)
+  description: A 7x43mm ammunition box. Used to refill L90/91 magazines. It comes with a leather strap allowing someone to wear it on their back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#3a3a4b"
+    - state: rifle_box_marking
+      color: "#7c4c1b"
+    - state: rifle_box_generic
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#ffc000"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleL90
+
+- type: entity
+  parent: RMCBoxBulletsRifleL90
+  id: RMCBoxBulletsRifleL90Empty
+  suffix: Empty
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleL90
+    amount: 0
+
+- type: entity
+  parent: RMCBoxBulletsBase
+  id: RMCBoxBulletsRifleL90AP
+  name: rifle ammunition box (7x43mm AP)
+  description: A 7x43mm armor-piercing ammunition box. Used to refill L90/91 AP magazines. It comes with a leather strap allowing someone to wear it on their back.
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#3a3a4b"
+    - state: rifle_box_marking
+      color: "#318b11"
+    - state: rifle_box_generic
+      color: "#7c4c1b"
+    - state: rifle_ammo_full_rounds_base
+      map: [ "enum.BulletBoxLayers.Fill" ]
+    - state: rifle_ammo_full_rounds_color
+      map: [ "enum.BulletBoxLayers2.Fill" ]
+      color: "#318b11"
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
+
+- type: entity
+  parent: RMCBoxBulletsRifleL90AP
+  id: RMCBoxBulletsRifleL90APEmpty
+  suffix: Empty
+  components:
+  - type: BulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
+    amount: 0

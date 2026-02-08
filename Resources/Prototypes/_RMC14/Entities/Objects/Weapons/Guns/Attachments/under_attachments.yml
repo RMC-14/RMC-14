@@ -822,6 +822,100 @@
         unwieldedOnly: true
       scatterFlat: -4
 
+- type: entity
+  parent: RMCAttachmentBipod
+  id: RMCAttachmentL91Bipod
+  categories: [ HideSpawnMenu ]
+  name: "L91 SWS integrated bipod"
+  description: "Blimey! This should be bolted to your rifle, you twat - put it back on and get back to it, mate!"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: bipod-l91
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL91Bipod
+  - type: AttachableToggleable
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: bipod-l91
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: bipod-l91-on
+    actionName: Deploy Bipod
+    actionDesc: Deploy the bipod and get into a firing position.
+  - type: AttachableWeaponMeleeMods
+    modifiers:
+    - bonusDamage:
+        types:
+          Blunt: 0
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.2
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - conditions:
+        wieldedOnly: true
+        activeOnly: true
+      accuracyAddMult: 0.25
+      burstScatterAddMult: -1.16
+      scatterFlat: -4
+
+- type: entity
+  parent: RMCAttachmentU1GrenadeLauncher
+  id: RMCAttachmentL90GL
+  name: L90U3 grenade launcher
+  description: A grenade launcher designed specifically for L90 pattern rifles. Holds three 30mm grenades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    layers:
+    - state: grenade-l90
+      map: [ "enum.BreechVisuals.Open" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.BreechVisuals.Open:
+        enum.BreechVisuals.Open:
+          True: { state: grenade-l90-open }
+          False: { state: grenade-l90 }
+  - type: AttachableToggleable
+    actionName: Switch to the L90U3 Grenade Launcher
+    actionDesc: Switch to using the underbarrel grenade launcher.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-l90
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: grenade-l90-on
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL90GL
+
+- type: entity
+  parent: RMCAttachmentU7UnderbarrelShotgun
+  id: RMCAttachmentL90UBS
+  name: L90U1 underbarrel shotgun
+  description: An underbarrel shotgun designed specifically for L90 pattern rifles, capable of loading up to five buckshot shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: ubs-l90
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL90UBS
+  - type: AttachableToggleable
+    actionName: Switch to the L90U1 underbarrel shotgun
+    actionDesc: Switch to using the underbarrel shotgun.
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: ubs-l90
+    iconActive:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+      state: ubs-l90-on
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -872,3 +966,12 @@
 
 - type: Tag
   id: RMCAttachmentExtinguisher
+
+- type: Tag
+  id: RMCAttachmentL90GL
+
+- type: Tag
+  id: RMCAttachmentL90UBS
+
+- type: Tag
+  id: RMCAttachmentL91Bipod
