@@ -8,18 +8,6 @@
   },
   "states": [
     {
-      "name": "sasos",
-      "delays": [
-        [
-          0.2,
-          0.2
-        ]
-      ]
-    },
-    {
-      "name": "sasos_a"
-    },
-    {
       "name": "l112_scope"
     },
     {
