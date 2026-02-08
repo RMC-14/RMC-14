@@ -375,7 +375,7 @@
   parent: CMBackpack
   id: RMCBackpackRCMLarge
   name: heavyweight RCM backpack
-  description: "The heavy-carry pack of the RMC forces. Designed to lug the most amount of gear into the battlefield."
+  description: "The heavy-carry pack of the RCM forces. Designed to lug the most amount of gear into the battlefield."
   components: 
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/large.rsi
