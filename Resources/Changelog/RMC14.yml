@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: QuietlyWhisper
-  changes:
-  - message: Fixed being able to store underbarrel attachment guns in the ammo load
-      rig.
-    type: Fix
-  id: 2384
-  time: '2025-10-05T02:09:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7930
 - author: blueisdumb
   changes:
   - message: Added new tails
@@ -4711,5 +4703,12 @@
   id: 2885
   time: '2026-02-08T03:03:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8854
+- author: noctyrnal
+  changes:
+  - message: Fixed dropships landing one tile too high on Shiva Snowball's North LZ.
+    type: Fix
+  id: 2886
+  time: '2026-02-08T08:23:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9164
 Name: RMC14
 Order: -1
