@@ -450,6 +450,7 @@
   parent: CMPacketBase
   id: RMCPacketGrenade20mmHE
   name: L109A1 HE grenade packet
+  suffix: PVE
   description: It contains eight L109A1 20mm HE grenades.
   components:
   - type: Tag
@@ -472,7 +473,7 @@
 - type: entity
   parent: RMCPacketGrenade20mmHE
   id: RMCPacketGrenade20mmHEFilled
-  suffix: Filled
+  suffix: PVE, Filled
   components:
   - type: StorageFill
     contents:
@@ -483,6 +484,7 @@
   parent: CMPacketBase
   id: RMCPacketGrenade20mmIncendiary
   name: L109A2 Incendiary grenade packet
+  suffix: PVE
   description: It contains eight L109A2 20mm incendiary grenades.
   components:
   - type: Tag
@@ -505,7 +507,7 @@
 - type: entity
   parent: RMCPacketGrenade20mmIncendiary
   id: RMCPacketGrenade20mmIncendiaryFilled
-  suffix: Filled
+  suffix: PVE, Filled
   components:
   - type: StorageFill
     contents:
