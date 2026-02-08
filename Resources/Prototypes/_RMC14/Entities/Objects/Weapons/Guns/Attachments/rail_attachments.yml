@@ -701,7 +701,6 @@
       state: collisight
     actionName: Look through collimator sight
     actionDesc: Lets you see further and rain down explosives on the enemy without hitting your fellow Marines.
-  - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
     - zoom: 1
