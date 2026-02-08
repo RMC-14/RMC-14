@@ -63,7 +63,7 @@
 - type: entity
   parent: RMCSleeper
   id: RMCSleeperNoConsole
-  suffix: RMC14, No Console
+  suffix: No Console
   components:
   - type: Sleeper
     spawnConsolePrototype: null
@@ -122,10 +122,10 @@
       - Xeno
   - type: RMCMesonsNonviewable
 
-# Advanced Sleeper variant
+# Advanced Sleeper
 - type: entity
   parent: RMCSleeper
-  id: RMCSleeperAdvanced
+  id: RMCSleeperAdvanced # TODO RMC14 /obj/item/research_upgrades/sleeper
   name: advanced sleeper
   description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
   suffix: Spawns with Console
