@@ -3,6 +3,7 @@
   hostile:
   - RMCXeno
   - CLF
+  - HEFA
 
 - type: npcFaction
   id: RMCXeno
@@ -14,6 +15,7 @@
   - Civilian
   - CLF
   - TSE
+  - HEFA
 
 - type: npcFaction
   id: RMCDumb
@@ -26,6 +28,7 @@
   - Civilian
   - CLF
   - TSE
+  - HEFA
 
 - type: npcFaction
   id: SPP
@@ -67,3 +70,11 @@
   id: TSE
   hostile:
   - RMCXeno
+
+- type: npcFaction
+  id: HEFA
+  hostile:
+  - RMCXeno
+  - UNMC
+  - TSE
+  - SPP
