@@ -272,27 +272,6 @@
       trackerModes:
         - SquadLeader
         - EIAFCommander
-    
-- type: entity
-  parent: RMCHeadsetEIAF
-  id: RMCHeadsetEIAFTeamLead
-  name: EIAF team lead headset
-  description: A sleek headset used by the EIAF. Low profile enough to fit under any headgear.
-  suffix: Survivor
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/headsets.rsi
-      state: vai_headset
-    - type: ContainerFill
-      containers:
-        key_slots:
-          - CMEncryptionKeyColony
-    - type: RMCHeadset
-      channels:
-        - RoyalMarine
-      radioTextIncrease: 2
-    - type: GrantSquadLeaderTracker
-      defaultMode: EIAFCommander
 
 - type: entity
   parent: RMCHeadsetEIAF
