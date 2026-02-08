@@ -299,11 +299,14 @@
         amount: 15
       - id: RMCPVEArmorKneeGuardKestrel
         amount: 15
-    - name: Backpack
+    - name: Backpacks
       entries: 
       - id: RMCBackpackRCMSmall
+        amount: 15
       - id: RMCBackpackRCMMedium
+        amount: 15
       - id: RMCBackpackRCMLarge
+        amount: 15
     - name: Belts
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
