@@ -363,7 +363,6 @@
     - RMCGrenadeIED
 
 # RCM grenades for PVE
-
 - type: entity
   parent: CMGrenadeBase
   id: RMCGrenade20mmIncendiary
