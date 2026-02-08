@@ -2,26 +2,29 @@
   parent: RMCSurvivorEIAFBase
   id: RMCSurvivorEIAFParatrooper
   name: rmc-job-name-eiaf-paratrooper
-  icon: "RMCJobIconRoyalBreacher"
+  icon: "RMCJobIconRoyalRifleman"
   spawnMenuRoleName: EIAF Paratrooper (Survivor)
   special:
-  - !type:AddComponentSpecial
-    components:
-    - type: Skills
-      presets: RMCSkillPresetEIAFParatrooper
-    - type: TacticalMapIcon
-      icon:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: rmc_breacher
-    - type: IntelRescueSurvivorObjective
-    - type: AssignSquad
-      whitelist:
-        tags:
-        - SquadEIAF
-    - type: JobPrefix
-      prefix: rmc-job-prefix-eiaf-paratrooper
-    - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetEIAF
+    - !type:AddComponentSpecial
+      components:
+        - type: Skills
+          presets: RMCSkillPresetEIAFParatrooper
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: rmc_rifleman
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_eiaf
+        - type: IntelRescueSurvivorObjective
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadEIAF
+        - type: JobPrefix
+          prefix: rmc-job-prefix-eiaf-paratrooper
+        - type: EquipSurvivorPreset
+          preset: RMCGearSurvivorPresetEIAF
   hidden: true
 
 - type: entity
@@ -29,10 +32,10 @@
   id: RMCSpawnPointEIAFParatrooper
   name: eiaf paratrooper spawn point
   components:
-  - type: SpawnPoint
-    job_id: RMCSurvivorEIAFParatrooper
+    - type: SpawnPoint
+      job_id: RMCSurvivorEIAFParatrooper
   layers:
-    - sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
+    - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
 
 - type: jobIcon
@@ -40,4 +43,5 @@
   id: RMCJobIconEIAFParatrooper
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_breacher
+    state: rmc_rifleman
+    

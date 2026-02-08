@@ -3,19 +3,19 @@
   name: EIAF - Paratrooper
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillConstruction: 1
-        RMCSkillFirearms: 2
-        RMCSkillFireman: 2
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 1
-        RMCSkillMeleeWeapons: 1
-        RMCSkillJtac: 1
-        RMCSkillMedical: 1
-        RMCSkillPolice: 0 #RMC Change: Should be 2
-        RMCSkillVehicles: 1
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillConstruction: 1
+      RMCSkillFirearms: 2
+      MCSkillFireman: 2
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillJtac: 1
+      RMCSkillMedical: 1
+      RMCSkillPolice: 0 #RMC Change: Should be 2
+      RMCSkillVehicles: 1
         
 - type: entity
   parent: RMCSkillPresetEIAFParatrooper
@@ -23,9 +23,9 @@
   name: EIAF - Paratrooper - Pilot
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillPilot: 2
+  - type: SkillPreset
+    skills:
+      RMCSkillPilot: 2
         
 - type: entity
   parent: RMCSkillPresetEIAFParatrooper
@@ -33,11 +33,11 @@
   name: EIAF - Paratrooper - Engineer
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillPowerLoader: 1
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillPowerLoader: 1
         
 - type: entity
   parent: RMCSkillPresetEIAFParatrooper
@@ -45,11 +45,11 @@
   name: EIAF - Paratrooper - Medic
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillFireman: 3
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+  - type: SkillPreset
+    skills:
+      RMCSkillFireman: 3
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
         
 - type: entity
   parent: RMCSkillPresetEIAFParatrooper
@@ -57,37 +57,37 @@
   name: EIAF - Paratrooper - Squad Leader
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillFireman: 3
-        RMCSkillEngineer: 2
-        RMCSkillJtac: 2
-        RMCSkillLeadership: 1
-        RMCSkillPilot: 1
-        RMCSkillIntel: 1
+  - type: SkillPreset
+    skills:
+      RMCSkillFireman: 3
+      RMCSkillEngineer: 2
+      RMCSkillJtac: 2
+      RMCSkillLeadership: 1
+      RMCSkillPilot: 1
+      RMCSkillIntel: 1
         
 - type: entity
   id: RMCSkillPresetEIAFSynth
   name: EIAF - Paratrooper - Synthetic
   categories: [ HideSpawnMenu ]
   components:
-    - type: SkillPreset
-      skills:
-        RMCSkillCqc: 3
-        RMCSkillEngineer: 4
-        RMCSkillConstruction: 3
-        RMCSkillFirearms: 2
-        RMCSkillOverwatch: 1
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
-        RMCSkillResearch: 1
-        RMCSkillMeleeWeapons: 2
-        RMCSkillPilot: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 3
-        RMCSkillPowerLoader: 2
-        RMCSkillVehicles: 2
-        RMCSkillJtac: 1
-        RMCSkillIntel: 1
-        RMCSkillDomestics: 2
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 3
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillOverwatch: 1
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2
+      RMCSkillResearch: 1
+      RMCSkillMeleeWeapons: 2
+      RMCSkillPilot: 2
+      RMCSkillPolice: 2
+      RMCSkillFireman: 3
+      RMCSkillPowerLoader: 2
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 1
+      RMCSkillIntel: 1
+      RMCSkillDomestics: 2
         

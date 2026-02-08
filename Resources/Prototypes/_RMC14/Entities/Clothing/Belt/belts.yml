@@ -1112,6 +1112,25 @@
           prob: 0.5
           
 - type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFCustom
+  suffix: Filled, L54 Custom
+  name: EIAF custom paratrooper belt
+  description: A modified EIAF paratrooper belt featuring a black leather holster with gold inlay, a large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for EIAF airborne forces dropping into hostile territory.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+    - type: ItemCamouflage
+      camouflageVariations: { }
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponPistolL54Custom
+        - id: RMCMagazinePistolL54Custom
+          amount: 7
+          
+- type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
   name: M276 pattern M63 holster rig
