@@ -324,7 +324,6 @@
     camouflageVariations: {}
 
 # PVE RCM backpacks
-
 - type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMSmall
