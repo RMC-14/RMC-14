@@ -1,59 +1,4 @@
 ﻿Entries:
-- author: BreakpointDebug1234
-  changes:
-  - message: Updated visuals for SGO guide
-    type: Tweak
-  - message: Military Police guide by WithinElysium
-    type: Add
-  id: 2377
-  time: '2025-10-02T17:27:33.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7750
-- author: CatAndHats
-  changes:
-  - message: Squad Leader vendor m34 pyrotechnician support kit now has a description
-    type: Fix
-  id: 2378
-  time: '2025-10-02T17:30:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8011
-- author: Monotheonist
-  changes:
-  - message: Added a new lobby screen, entitled "A Push Too Far." Watch out for Ravagers,
-      guys!
-    type: Add
-  id: 2379
-  time: '2025-10-03T21:10:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8009
-- author: AutoOtter
-  changes:
-  - message: New lobby screen! Will our moth heroes survive? (no.)
-    type: Add
-  id: 2380
-  time: '2025-10-03T21:13:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7984
-- author: DummeHytteOst
-  changes:
-  - message: onigiri now gives a bowl back when eaten.
-    type: Fix
-  id: 2381
-  time: '2025-10-05T01:55:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8035
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new shuttles, two for ERT and two for PvE/Admin events
-    type: Add
-  - message: Added spawners for the new shuttles
-    type: Add
-  id: 2382
-  time: '2025-10-05T02:04:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7533
-- author: QuietlyWhisper
-  changes:
-  - message: Fixed being able to store underbarrel attachment guns in the ammo load
-      rig.
-    type: Fix
-  id: 2384
-  time: '2025-10-05T02:09:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7930
 - author: blueisdumb
   changes:
   - message: Added new tails
@@ -4690,5 +4635,80 @@
   id: 2879
   time: '2026-02-06T00:06:58.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9145
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the L14 combat pistol for use by Royal Crown Marines.'
+    type: Add
+  id: 2880
+  time: '2026-02-07T22:14:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8899
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Adds armour webbing for use by the UNMC Sun Riders.'
+    type: Add
+  - message: '[PVE] Adds Kestrel modular vests for use by the TSE''s RCM.'
+    type: Add
+  id: 2881
+  time: '2026-02-07T22:14:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8946
+- author: RavenCaat
+  changes:
+  - message: Added Glory to the RCM!
+    type: Add
+  - message: Added L7A3 RCM SMG and its Squash head 9mm ammo
+    type: Add
+  - message: Removed fun for SPP!
+    type: Remove
+  - message: Changed  the power levels between SPP and RCM what fun!
+    type: Tweak
+  - message: Fixed  SPP having fun!
+    type: Fix
+  id: 2882
+  time: '2026-02-07T22:16:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8754
+- author: monomethylhydrazine
+  changes:
+  - message: Added vendors and some equipment for RCM PVE roles.
+    type: Add
+  id: 2883
+  time: '2026-02-07T22:24:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8265
+- author: monomethylhydrazine
+  changes:
+  - message: Added a TSE Captain role.
+    type: Add
+  - message: Fixed tool pouches for various TSE roles and the Lieutenant having the
+      wrong rank.
+    type: Fix
+  - message: Fixed RCM ERT medic having some of the wrong items.
+    type: Fix
+  - message: Fixed various typos, grammar errors, and messy syntax in TSE flavor text.
+    type: Fix
+  - message: Added PVE roles for the Three Suns Empire Royal Crown Marines.
+    type: Add
+  - message: Added magazine boxes for the L24 and L83A3.
+    type: Add
+  - message: Added trackers for both PVE and PVP ERT RCM roles.
+    type: Add
+  - message: Added stripped variants of the L24 and L83A3.
+    type: Add
+  id: 2884
+  time: '2026-02-07T23:40:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8076
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the L90A1, L90A2, and L91SWS for use by Royal Crown Marines,
+      alongside relevant attachments and ammunition.'
+    type: Add
+  id: 2885
+  time: '2026-02-08T03:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8854
+- author: noctyrnal
+  changes:
+  - message: Fixed dropships landing one tile too high on Shiva Snowball's North LZ.
+    type: Fix
+  id: 2886
+  time: '2026-02-08T08:23:48.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9164
 Name: RMC14
 Order: -1
