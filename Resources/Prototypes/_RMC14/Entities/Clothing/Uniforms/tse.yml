@@ -87,6 +87,22 @@
     foldedEquippedPrefix: sleeves
     
 - type: entity
+  parent: RMCJumpsuitMarineEIAFNo8
+  id: RMCJumpsuitMarineEIAFNo8F90
+  suffix: webbing. F90
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCEEIAFWebbingF90
+    
+- type: entity
+  parent: RMCJumpsuitMarineEIAFNo8
+  id: RMCJumpsuitMarineEIAFNo8PDW90
+  suffix: webbing. PDW90AP
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCEEIAFWebbingPDW90AP
+    
+- type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineEIAFNo2
   name: EIAF No.2 service uniform

@@ -1,0 +1,43 @@
+- type: job
+  parent: RMCSurvivorEIAFBase
+  id: RMCSurvivorEIAFParatrooper
+  name: rmc-job-name-eiaf-paratrooper
+  icon: "RMCJobIconRoyalBreacher"
+  spawnMenuRoleName: EIAF Paratrooper (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      presets: RMCSkillPresetEIAFParatrooper
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_breacher
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - SquadEIAF
+    - type: JobPrefix
+      prefix: rmc-job-prefix-eiaf-paratrooper
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetEIAF
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointEIAFParatrooper
+  name: eiaf paratrooper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFParatrooper
+  layers:
+    - sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
+      state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEIAFParatrooper
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_breacher

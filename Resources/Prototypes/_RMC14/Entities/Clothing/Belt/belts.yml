@@ -1096,7 +1096,21 @@
         - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
         - id: RMCSpeedLoaderM44
           amount: 7
-
+          
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFM44Random
+  suffix: Random, M44
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
+        - id: RMCSpeedLoaderM44
+        - id: RMCSpeedLoaderM44
+          prob: 0.5
+        - id: RMCSpeedLoaderM44
+          prob: 0.5
+          
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG

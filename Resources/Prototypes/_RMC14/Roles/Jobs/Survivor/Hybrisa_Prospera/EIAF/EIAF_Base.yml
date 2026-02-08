@@ -20,13 +20,25 @@
   id: RMCGearEIAFBase
   equipment:
     head: RMCHeadEIAFBeret
-    jumpsuit: RMCJumpsuitMarineEIAFNo8
-    #back:  //Need backpack ported
+    jumpsuit: RMCJumpsuitMarineEIAFNo8F90
+    back: RMCSatchelLightpackFilledEIAF
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
-    outerClothing: RMCArmorEIAFVestFilledF90
     id: CMIDCardStandardDogtag
     ears: RMCHeadsetEIAF
+    belt: RMCBeltHolsterPistolEIAFM44Random
     pocket1: RMCPouchFirstAidSplintsGauzeOintment 
     pocket2: RMCPouchFlareFilled
     #suitstorage:  F90//Whatever the F90 is called
+    
+- type: entity
+  id: RMCGearSurvivorPresetEIAF
+  name: EIAF preset
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SurvivorPreset
+      randomOutfits:
+        - [ RMCArmorEIAFVest ]
+        - [ RMCArmorEIAFVest ]
+        - [ RMCJacketEIAFCombatJacket ]
+        - []
