@@ -186,6 +186,12 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             ent.Comp.State = ftl.State;
             Dirty(ent);
+
+            if (ftl.State == FTLState.Arriving && ent.Comp.Destination is { } destination)
+            {
+                var audio = _audio.PlayPvs(ent.Comp.ArrivalSound, destination);
+                _audio.SetGridAudio(audio);
+            }
         }
 
         RefreshUI();

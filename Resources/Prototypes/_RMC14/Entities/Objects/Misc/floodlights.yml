@@ -313,8 +313,8 @@
     onState: lz_spoke_light1
   - type: PointLight
     color: "#FF1A1A"
-    energy: 1
-    radius: 3
+    energy: 1.5
+    radius: 4
     softness: 1
     enabled: false
 
