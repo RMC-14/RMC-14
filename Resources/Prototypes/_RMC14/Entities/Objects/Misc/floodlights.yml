@@ -311,6 +311,12 @@
       visible: false
   - type: LandingLight
     onState: lz_spoke_light1
+  - type: PointLight
+    color: "#FF1A1A"
+    energy: 1
+    radius: 3
+    softness: 1
+    enabled: false
 
 # Engineer Ship Light
 
