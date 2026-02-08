@@ -694,7 +694,6 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
     state: collisight
-  - type: AttachableVisuals
   - type: AttachableToggleable
     breakOnMove: false
     icon:
