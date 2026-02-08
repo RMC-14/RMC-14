@@ -293,6 +293,11 @@
   copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"
 
+- files: ["gun_l14.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay (content license at https://pixabay.com/service/license-summary/) and modified by @TadJohnson00 (GitHub)."
+  source: "https://pixabay.com/sound-effects/single-pistol-gunshot-42-40781/"
+
 - files: ["gun_silenced_l112.ogg"]
   license: "CC-BY-4.0"
   copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
