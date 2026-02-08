@@ -158,7 +158,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (!_ui.IsUiOpen(console.Owner, SleeperUIKey.Key))
             return;
 
-        // If no sleeper is connected, the UI shouldn't open (handled by ActivatableUIOpenAttemptEvent)
+        // If no sleeper is connected, the UI shouldn't be open (handled by ActivatableUIOpenAttemptEvent)
         if (console.Comp.LinkedSleeper is not { } sleeperId || !TryComp(sleeperId, out SleeperComponent? sleeper))
             return;
 
@@ -295,16 +295,27 @@ public sealed class SleeperSystem : SharedSleeperSystem
     {
         base.Update(frameTime);
 
+        var time = _timing.CurTime;
+        var consoles = EntityQueryEnumerator<SleeperConsoleComponent>();
+        while (consoles.MoveNext(out var uid, out var console))
+        {
+            if (time < console.UpdateAt)
+                continue;
+
+            console.UpdateAt = time + console.UpdateCooldown;
+            UpdateUI((uid, console));
+        }
+
         var sleepers = EntityQueryEnumerator<SleeperComponent>();
         while (sleepers.MoveNext(out var uid, out var sleeper))
         {
             if (!sleeper.IsFiltering || sleeper.Occupant == null)
                 continue;
 
-            if (_timing.CurTime < sleeper.NextDialysisTick)
+            if (time < sleeper.NextDialysisTick)
                 continue;
 
-            sleeper.NextDialysisTick = _timing.CurTime + sleeper.DialysisTickDelay;
+            sleeper.NextDialysisTick = time + sleeper.DialysisTickDelay;
 
             // Perform dialysis
             if (_solution.TryGetSolution(sleeper.Occupant.Value, "chemicals", out var chemSolEnt, out var chemSol))
@@ -356,12 +367,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
             }
 
             Dirty(uid, sleeper);
-
-            // Update linked console UI
-            if (sleeper.LinkedConsole is { } consoleId && TryComp<SleeperConsoleComponent>(consoleId, out var console))
-            {
-                UpdateUI((consoleId, console));
-            }
         }
     }
 
