@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 4 new shuttles, two for ERT and two for PvE/Admin events
-    type: Add
-  - message: Added spawners for the new shuttles
-    type: Add
-  id: 2382
-  time: '2025-10-05T02:04:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7533
 - author: QuietlyWhisper
   changes:
   - message: Fixed being able to store underbarrel attachment guns in the ammo load
@@ -4712,5 +4703,13 @@
   id: 2884
   time: '2026-02-07T23:40:28.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8076
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] Added the L90A1, L90A2, and L91SWS for use by Royal Crown Marines,
+      alongside relevant attachments and ammunition.'
+    type: Add
+  id: 2885
+  time: '2026-02-08T03:03:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8854
 Name: RMC14
 Order: -1

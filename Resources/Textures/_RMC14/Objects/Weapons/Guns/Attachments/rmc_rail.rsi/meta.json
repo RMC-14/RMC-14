@@ -24,6 +24,18 @@
     },
     {
       "name": "l112_scope_a"
+    },
+    {
+      "name": "sasos",
+      "delays": [
+        [
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "sasos_a"
     }
   ]
 }
