@@ -5,26 +5,6 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Corporate Liaison (Solaris Survivor)
   startingGear: RMCGearSurvivorSolarisCorporateLiaison
-  special:
-  - !type:AddComponentSpecial
-    components:
-    - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-    - type: EquipSurvivorPreset
-      preset: RMCSurvivorPresetCorporate
-    - type: RMCSurvivor
-    - type: MotionDetectorTracked
-    - type: NpcFactionMember
-      factions:
-      - WeYa
-      - Civilian
-    - type: IntelRescueSurvivorObjective
-    - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorCorporate
