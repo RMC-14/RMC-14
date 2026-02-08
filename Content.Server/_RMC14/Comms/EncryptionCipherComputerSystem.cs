@@ -1,6 +1,10 @@
+using Content.Server.Interaction;
+using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using System.Linq;
@@ -11,6 +15,7 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -23,6 +28,7 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<EncryptionCipherComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCipherComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<EncryptionCipherComputerComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<EncryptionCipherComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
         SubscribeLocalEvent<EncryptionCipherComputerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
 
@@ -45,11 +51,16 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         UpdateCipherState(ent);
     }
 
+    private void OnActivate(Entity<EncryptionCipherComputerComponent> ent, ref ActivateInWorldEvent args)
+    {
+        _ui.TryOpenUi(ent.Owner, EncryptionCipherComputerUI.Key, args.User);
+    }
+
     private void OnSetInput(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherSetInputMsg args)
     {
         ent.Comp.InputCode = args.Code.ToUpper();
         ent.Comp.DecipheredWord = DecipherCode(ent.Comp.InputCode, ent.Comp.CipherSetting);
-        ent.Comp.StatusMessage = "Input set. Adjust cipher setting.";
+        ent.Comp.StatusMessage = _loc.GetString("rmc-ui-cipher-input-set");
         UpdateCipherState(ent);
     }
 

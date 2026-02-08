@@ -1,5 +1,9 @@
+using Content.Server.Interaction;
+using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
@@ -13,6 +17,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -25,6 +30,7 @@ public sealed class DecoderComputerSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<DecoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DecoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<DecoderComputerComponent, ActivateInWorldEvent>(OnActivate);
 
         Subs.BuiEvents<DecoderComputerComponent>(DecoderComputerUI.Key,
             subs =>
@@ -38,12 +44,17 @@ public sealed class DecoderComputerSystem : EntitySystem
 
     private void OnMapInit(Entity<DecoderComputerComponent> ent, ref MapInitEvent args)
     {
-        GenerateNewChallenge(ent);
+        ent.Comp.StatusMessage = "Ready to decode current stream.";
     }
 
     private void OnBUIOpened(Entity<DecoderComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateDecoderState(ent);
+    }
+
+    private void OnActivate(Entity<DecoderComputerComponent> ent, ref ActivateInWorldEvent args)
+    {
+        _ui.TryOpenUi(ent.Owner, DecoderComputerUI.Key, args.User);
     }
 
     private void OnSubmitCode(Entity<DecoderComputerComponent> ent, ref DecoderComputerSubmitCodeMsg args)
@@ -56,7 +67,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     {
         if (ent.Comp.PunchcardCount <= 0)
         {
-            ent.Comp.StatusMessage = "No punchcards left.";
+            ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-no-punchcards");
             UpdateDecoderState(ent);
             return;
         }
@@ -82,7 +93,7 @@ public sealed class DecoderComputerSystem : EntitySystem
         }
 
         ent.Comp.PunchcardCount--;
-        ent.Comp.StatusMessage = "Punchcard printed.";
+        ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-punchcard-printed");
         Dirty(ent);
         UpdateDecoderState(ent);
     }
@@ -91,7 +102,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     {
         if (!TryComp<StorageComponent>(ent, out var storage))
         {
-            ent.Comp.StatusMessage = "No storage component.";
+            ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-no-storage");
             UpdateDecoderState(ent);
             return;
         }
@@ -102,7 +113,7 @@ public sealed class DecoderComputerSystem : EntitySystem
             {
                 ent.Comp.PunchcardCount += stack.Count;
                 EntityManager.QueueDeleteEntity(item);
-                ent.Comp.StatusMessage = $"Refilled with {stack.Count} punchcards.";
+                ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-refilled-punchcards", ("count", stack.Count));
                 Dirty(ent);
                 break;
             }
@@ -121,7 +132,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     {
         if (submittedCode.ToUpper() != ent.Comp.CurrentChallengeWord.ToUpper())
         {
-            ent.Comp.StatusMessage = "Decode failed. Invalid code.";
+            ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-decode-failed-invalid");
             Dirty(ent);
             return false;
         }
@@ -130,14 +141,14 @@ public sealed class DecoderComputerSystem : EntitySystem
         var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
         if (!encryptionQuery.MoveNext(out var uid, out var encryptionComp))
         {
-            ent.Comp.StatusMessage = "No encryption system found.";
+            ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-no-encryption-system");
             Dirty(ent);
             return false;
         }
 
         // Restore clarity
         _encryption.RestoreClarity((uid, encryptionComp), true);
-        ent.Comp.StatusMessage = "Decode successful. Communications clarity restored.";
+        ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-decode-successful");
         ent.Comp.HasGracePeriod = true;
         ent.Comp.GracePeriodEnd = _timing.CurTime + TimeSpan.FromMinutes(2); // 2 minutes total grace
         Dirty(ent);
@@ -160,7 +171,7 @@ public sealed class DecoderComputerSystem : EntitySystem
         ent.Comp.CurrentChallengeCode = hexCodes;
         ent.Comp.CurrentChallengeWord = word;
         ent.Comp.ChallengeExpiry = _timing.CurTime + TimeSpan.FromSeconds(30);
-        ent.Comp.StatusMessage = "Ready for decode";
+        ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-decoding");
         ent.Comp.HasGracePeriod = false;
         Dirty(ent);
 
@@ -194,6 +205,20 @@ public sealed class DecoderComputerSystem : EntitySystem
     private string ToHexCodes(string s)
     {
         return string.Join(" ", s.Select(c => $"0x{(int)c:X2}"));
+    }
+
+    public override void Update(float frameTime)
+    {
+        var query = EntityQueryEnumerator<DecoderComputerComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.ChallengeExpiry != default && _timing.CurTime > comp.ChallengeExpiry)
+            {
+                comp.StatusMessage = _loc.GetString("rmc-ui-decoder-transmission-lost");
+                Dirty(uid, comp);
+                UpdateDecoderState((uid, comp));
+            }
+        }
     }
 
     private void UpdateDecoderState(Entity<DecoderComputerComponent> ent)

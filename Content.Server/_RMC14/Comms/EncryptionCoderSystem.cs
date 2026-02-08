@@ -1,6 +1,10 @@
+using Content.Server.Interaction;
+using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Localization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -11,6 +15,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 {
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
     private static readonly string[] ChallengePhrases = [
@@ -24,6 +29,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<EncryptionCoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<EncryptionCoderComputerComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
 
         Subs.BuiEvents<EncryptionCoderComputerComponent>(EncryptionCoderComputerUI.Key,
@@ -41,6 +47,11 @@ public sealed class EncryptionCoderSystem : EntitySystem
     private void OnBUIOpened(Entity<EncryptionCoderComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateCoderState(ent);
+    }
+
+    private void OnActivate(Entity<EncryptionCoderComputerComponent> ent, ref ActivateInWorldEvent args)
+    {
+        _ui.TryOpenUi(ent.Owner, EncryptionCoderComputerUI.Key, args.User);
     }
 
     private void OnMapInit(Entity<EncryptionCoderComputerComponent> ent, ref MapInitEvent args)
@@ -61,7 +72,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
             var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
             if (!encryptionQuery.MoveNext(out var uid, out encryptionComp))
             {
-                ent.Comp.LastSubmittedCode = "PING -> No encryption system found";
+                ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {_loc.GetString("rmc-ui-decoder-no-encryption-system")}";
                 Dirty(ent);
                 return;
             }
@@ -78,7 +89,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 {
                     pongDisplayExpired += i < knownLetters ? pongChallengeExpired[i] : '?';
                 }
-                ent.Comp.LastSubmittedCode = $"PING -> {pongDisplayExpired}";
+                ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {pongDisplayExpired}";
                 ent.Comp.KnownLetters = knownLetters;
                 Dirty(ent);
                 return;
@@ -86,7 +97,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
             var pongChallenge = "PONG";
             var pong = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? pongChallenge : new string('?', pongChallenge.Length);
-            ent.Comp.LastSubmittedCode = $"PING -> {pong}";
+            ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {pong}";
             ent.Comp.KnownLetters = ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()) ? pongChallenge.Length : 0;
 
             if (ChallengePhrases.Contains(ent.Comp.CurrentWord.ToUpper()))
@@ -119,7 +130,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 {
                     pongDisplayExpired += i < knownLettersExpired ? pongChallengeExpired[i] : "?";
                 }
-                ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplayExpired}";
+                ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {_loc.GetString("rmc-ui-coder-pong-colon")} {pongDisplayExpired}";
                 ent.Comp.KnownLetters = knownLettersExpired;
                 Dirty(ent);
                 return;
@@ -145,7 +156,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 pongDisplay = pongChallenge;
             }
 
-            ent.Comp.LastSubmittedCode = $"PING -> PONG: {pongDisplay}";
+            ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {_loc.GetString("rmc-ui-coder-pong-colon")} {pongDisplay}";
         }
 
         if (encryptionComp != null)

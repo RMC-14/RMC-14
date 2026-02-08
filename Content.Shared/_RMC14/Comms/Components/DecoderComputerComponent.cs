@@ -6,7 +6,7 @@ namespace Content.Shared._RMC14.Comms;
 public sealed partial class DecoderComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string CurrentChallengeCode = "ABCD1234";
+    public string CurrentChallengeCode = "Awaiting current stream...";
 
     [DataField, AutoNetworkedField]
     public string CurrentChallengeWord = "";
