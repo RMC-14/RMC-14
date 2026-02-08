@@ -216,10 +216,10 @@
   - type: Eye
 
 - type: entity
+  abstract: true
   id: LandingZoneLightBase
   name: landing light
   description: A landing light, if it's flashing stay clear!
-  suffix: 1
   placement:
     mode: SnapgridCenter
   components:
@@ -243,6 +243,11 @@
     softness: 1
     offset: "0, -0.5"
     enabled: false
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightOne
+  suffix: 1
 
 - type: entity
   parent: LandingZoneLightBase
@@ -302,10 +307,10 @@
     - map: ["enum.LandingLightVisuals.Off"]
       state: lz_spoke_light
     - map: [ "enum.LandingLightVisuals.On" ]
-      state: lz_spoke_light_1
+      state: lz_spoke_light1
       visible: false
   - type: LandingLight
-    onState: lz_spoke_light_1
+    onState: lz_spoke_light1
 
 # Engineer Ship Light
 
