@@ -423,6 +423,23 @@
   - type: Tag
     tags:
     - RMCBeltMedical
+      
+- type: entity
+  parent: CMBeltMedical
+  id: RMCRCMMedical
+  name: L75 pattern medical storage rig
+  description: The L75 is the standard load-bearing equipment of the RCM. It consists of a modular belt with various clips. This version is designed to transport medical supplies and pistol ammunition.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,13,4 # 21 slots
+      whitelist:
+        - CMMagazinePistol
 
 - type: entity
   parent: CMBeltBaseStorage

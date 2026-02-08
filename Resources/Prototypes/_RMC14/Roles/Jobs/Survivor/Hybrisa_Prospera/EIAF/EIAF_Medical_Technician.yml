@@ -15,7 +15,7 @@
           - Civilian
           - TSE
       - type: Skills
-        presets: RMCSkillPresetEIAFMedic
+        preset: RMCSkillPresetEIAFMedic
       - type: TacticalMapIcon
         icon:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -37,6 +37,7 @@
   id: RMCGearEIAFMedicalTechnician
   equipment:
     jumpsuit: RMCJumpsuitMarineEIAFNo8PDW90
+    back: RMCSatchelLightpackFilledEIAFMedic
     eyes: RMCGlassesMedicalHUDGlasses
     belt: CMBeltUtilityFilled
     outerClothing: RMCArmorEIAFVest
