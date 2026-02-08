@@ -161,9 +161,9 @@
     - id: CMPillCanisterDexalin
     # - id: CMPillCanisterAlkysine
     - id: RMCPillCanisterImidazoline
-    - id: CMUpgradedTraumaKit10
+    - id: CMTraumaKit10
       amount: 3
-    - id: CMUpgradedBurnKit10
+    - id: CMBurnKit10
       amount: 3
     # - id: RMCSplint
     - id: CMDexalinPlusAutoInjector

@@ -42970,7 +42970,7 @@ entities:
     - type: MetaData
       name: 'LZ2: Research Landing Zone'
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 1168
     components:
@@ -116916,7 +116916,7 @@ entities:
     - type: MetaData
       name: LZ2
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 14821
     components:
@@ -117228,7 +117228,7 @@ entities:
   - uid: 14872
     components:
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
 - proto: RMCMotionDetector
   entities:
