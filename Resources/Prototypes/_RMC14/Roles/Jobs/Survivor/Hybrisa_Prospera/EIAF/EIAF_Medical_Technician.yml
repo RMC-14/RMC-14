@@ -5,11 +5,15 @@
   ranks:
     RMCRankEIAFLanceCorporal: [ ]
   startingGear: RMCGearEIAFMedicalTechnician
-  icon: "RMCJobIconRoyalMedic"
+  icon: RMCJobIconEIAFMedicalTechnican
   spawnMenuRoleName: EIAF Paratrooper (Combat Medical Technician) (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
+      - type: NpcFactionMember
+        factions:
+          - Civilian
+          - TSE
       - type: Skills
         presets: RMCSkillPresetEIAFMedic
       - type: TacticalMapIcon
@@ -51,8 +55,8 @@
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconEIAFCombatEngineer
+  id: RMCJobIconEIAFMedicalTechnican
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_medic
+    state: eiaf_medic
     

@@ -386,9 +386,6 @@
             "name": "cmb_obs"
         },
         {
-            "name": "eiaf_pilot"
-        },
-        {
             "name": "rmc_breacher"
         },
         {
@@ -450,6 +447,51 @@
         },
         {
             "name": "rmc_teamleader_pve"
+        },
+        {
+            "name": "eiaf_commander"
+        },
+        {
+            "name": "eiaf_commander_alt"
+        },
+        {
+            "name": "eiaf_engi"
+        },
+        {
+            "name": "eiaf_general"
+        },
+        {
+            "name": "eiaf_lieutenant"
+        },
+        {
+            "name": "eiaf_lieutenant_alt"
+        },
+        {
+            "name": "eiaf_medic"
+        },
+        {
+            "name": "eiaf_pilot"
+        },
+        {
+            "name": "eiaf_rifleman"
+        },
+        {
+            "name": "eiaf_smartgunner"
+        },
+        {
+            "name": "eiaf_sniper"
+        },
+        {
+            "name": "eiaf_spec"
+        },
+        {
+            "name": "eiaf_synth"
+        },
+        {
+            "name": "eiaf_teamleader"
+        },
+        {
+            "name": "eiaf_teamleader_alt"
         },
         {
             "name": "hudsquad_vo"

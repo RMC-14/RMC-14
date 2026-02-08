@@ -251,7 +251,7 @@
       
 # EIAF Hybrisa survivor insert
 - type: entity
-  parent: RMCHeadsetIconsTSE
+  parent: RMCHeadsetIconsEIAF
   id: RMCHeadsetEIAF
   name: EIAF headset
   description: A sleek headset used by the EIAF. Low profile enough to fit under any headgear.

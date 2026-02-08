@@ -2,29 +2,33 @@
   parent: RMCSurvivorEIAFBase
   id: RMCSurvivorEIAFParatrooper
   name: rmc-job-name-eiaf-paratrooper
-  icon: "RMCJobIconRoyalRifleman"
+  icon: RMCJobIconEIAFParatrooper
   spawnMenuRoleName: EIAF Paratrooper (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
-        - type: Skills
-          presets: RMCSkillPresetEIAFParatrooper
-        - type: TacticalMapIcon
-          icon:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_rifleman
-          background:
-            sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: background_eiaf
-        - type: IntelRescueSurvivorObjective
-        - type: AssignSquad
-          whitelist:
-            tags:
-              - SquadEIAF
-        - type: JobPrefix
-          prefix: rmc-job-prefix-eiaf-paratrooper
-        - type: EquipSurvivorPreset
-          preset: RMCGearSurvivorPresetEIAF
+      - type: NpcFactionMember
+        factions:
+          - Civilian
+          - TSE
+      - type: Skills
+        presets: RMCSkillPresetEIAFParatrooper
+      - type: TacticalMapIcon
+        icon:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: rmc_rifleman
+        background:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: background_eiaf
+      - type: IntelRescueSurvivorObjective
+      - type: AssignSquad
+        whitelist:
+          tags:
+            - SquadEIAF
+      - type: JobPrefix
+        prefix: rmc-job-prefix-eiaf-paratrooper
+      - type: EquipSurvivorPreset
+        preset: RMCGearSurvivorPresetEIAF
   hidden: true
 
 - type: entity
@@ -43,5 +47,5 @@
   id: RMCJobIconEIAFParatrooper
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: rmc_rifleman
+    state: eiaf_rifleman
     

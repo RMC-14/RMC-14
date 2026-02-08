@@ -14,14 +14,6 @@
   greeting: rmc-job-greeting-eiaf
   playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: EIAF Survivor (Base)
-  special:
-    - !type:AddComponentSpecial
-      components:
-        - type: NpcFactionMember
-          factions:
-            - RoyalMarines
-            - TSE
-            - Civilian
   hidden: true
 
 - type: startingGear
