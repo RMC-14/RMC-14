@@ -290,28 +290,28 @@
   id: SquadEIAF
   name: EIAF
   components:
-    - type: SquadTeam
-      color: "#3D6F43"
-      background:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: empty
-      blacklistedSquadArmor:
-        - Helmet
-        - Goggles
-        - Armor
-        - Gloves
-      radio: TSE
-      minimapBackground:
-        sprite: /Textures/_RMC14/Interface/map_blips.rsi
-        state: background_eiaf
-      canSupplyDrop: false
-      group: Royal Marines
-      leaderIcon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi
-        state: rmc_teamleader
-    - type: Tag
-      tags:
-        - SquadEIAF
+  - type: SquadTeam
+    color: "#3D6F43"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_eiaf
+    canSupplyDrop: false
+    group: EAIF
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_teamleader
+  - type: Tag
+    tags:
+      - SquadEIAF
 
 - type: Tag
   id: SquadEIAF
