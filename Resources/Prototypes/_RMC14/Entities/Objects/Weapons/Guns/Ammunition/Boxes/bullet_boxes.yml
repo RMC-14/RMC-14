@@ -377,7 +377,7 @@
       map: [ "enum.BulletBoxLayers2.Fill" ]
       color: "#ffc000"
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleTSE
+    bulletType: RMCBoxBulletsRifleL24
 
 - type: entity
   parent: RMCBoxBulletsRifleL24
@@ -385,7 +385,7 @@
   suffix: Empty
   components:
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleTSE
+    bulletType: RMCBoxBulletsRifleL24
     amount: 0
 
 - type: entity
@@ -408,7 +408,7 @@
       map: [ "enum.BulletBoxLayers2.Fill" ]
       color: "#318b11"
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleTSEAP
+    bulletType: RMCBoxBulletsRifleL24AP
 
 - type: entity
   parent: RMCBoxBulletsRifleL24AP
@@ -416,4 +416,4 @@
   suffix: Empty
   components:
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleTSE
+    bulletType: RMCBoxBulletsRifleL24AP
