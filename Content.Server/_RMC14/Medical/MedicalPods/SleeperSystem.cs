@@ -40,32 +40,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
     private const string AirlossGroup = "Airloss";
     private const string GeneticGroup = "Genetic";
 
-    // Empty state used when no sleeper is connected - cached for performance
-    private static readonly SleeperBuiState EmptyState = new(
-        null,
-        null,
-        0,
-        150, // health (critThreshold with 0 damage)
-        150, // maxHealth (critThreshold)
-        -50, // minHealth (critThreshold - deadThreshold = 150 - 200)
-        0,
-        0,
-        0,
-        0,
-        0,
-        false,
-        0,
-        0,
-        0,
-        false,
-        0,
-        0,
-        false,
-        0,
-        90,
-        [],
-        []);
-
     public override void Initialize()
     {
         base.Initialize();
@@ -181,17 +155,17 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
     private void UpdateUI(Entity<SleeperConsoleComponent> console)
     {
-        if (console.Comp.LinkedSleeper is not { } sleeperId ||
-            !TryComp(sleeperId, out SleeperComponent? sleeper))
-        {
-            _ui.SetUiState(console.Owner, SleeperUIKey.Key, EmptyState);
+        if (!_ui.IsUiOpen(console.Owner, SleeperUIKey.Key))
             return;
-        }
+
+        // If no sleeper is connected, the UI shouldn't open (handled by ActivatableUIOpenAttemptEvent)
+        if (console.Comp.LinkedSleeper is not { } sleeperId || !TryComp(sleeperId, out SleeperComponent? sleeper))
+            return;
 
         var occupant = sleeper.Occupant;
         NetEntity? netOccupant = null;
         string? occupantName = null;
-        var occupantState = 0;
+        var occupantState = SleeperOccupantMobState.None;
         var health = 150f;
         var maxHealth = 150f;
         var minHealth = -50f;
@@ -213,9 +187,11 @@ public sealed class SleeperSystem : SharedSleeperSystem
             occupantName = Identity.Name(occupant.Value, EntityManager);
 
             if (_mobState.IsDead(occupant.Value))
-                occupantState = 2;
+                occupantState = SleeperOccupantMobState.Dead;
             else if (_mobState.IsCritical(occupant.Value))
-                occupantState = 1;
+                occupantState = SleeperOccupantMobState.Critical;
+            else
+                occupantState = SleeperOccupantMobState.Alive;
 
             totalDamage = damageable.TotalDamage;
 

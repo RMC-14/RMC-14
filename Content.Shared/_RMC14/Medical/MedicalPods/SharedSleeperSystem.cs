@@ -5,6 +5,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -46,6 +47,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, DragDropTargetEvent>(OnSleeperDragDrop);
 
         SubscribeLocalEvent<SleeperConsoleComponent, ComponentInit>(OnConsoleInit);
+        SubscribeLocalEvent<SleeperConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
     }
 
     private void OnSleeperInit(Entity<SleeperComponent> sleeper, ref ComponentInit args)
@@ -223,6 +225,18 @@ public abstract class SharedSleeperSystem : EntitySystem
         TryLinkToSleeper(console);
     }
 
+    private void OnConsoleUIOpenAttempt(Entity<SleeperConsoleComponent> console, ref ActivatableUIOpenAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (console.Comp.LinkedSleeper is not { } sleeperId || !HasComp<SleeperComponent>(sleeperId))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-sleeper-no-sleeper-connected"), console, args.User);
+            args.Cancel();
+        }
+    }
+
     private void TryLinkToSleeper(Entity<SleeperConsoleComponent> console)
     {
         if (console.Comp.LinkedSleeper != null)
@@ -330,18 +344,18 @@ public abstract class SharedSleeperSystem : EntitySystem
         var occupied = sleeper.Comp.Occupant != null;
         _appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
 
-        var healthState = SleeperOccupantHealthState.None;
+        var occupantState = SleeperOccupantMobState.None;
         if (sleeper.Comp.Occupant is { } occupant)
         {
             if (_mobStateSystem.IsDead(occupant))
-                healthState = SleeperOccupantHealthState.Dead;
+                occupantState = SleeperOccupantMobState.Dead;
             else if (_mobStateSystem.IsCritical(occupant))
-                healthState = SleeperOccupantHealthState.Critical;
+                occupantState = SleeperOccupantMobState.Critical;
             else
-                healthState = SleeperOccupantHealthState.Alive;
+                occupantState = SleeperOccupantMobState.Alive;
         }
 
-        _appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, healthState);
+        _appearance.SetData(sleeper, SleeperVisuals.OccupantHealthState, occupantState);
     }
 
     protected void ToggleDialysis(Entity<SleeperComponent> sleeper)

@@ -9,7 +9,7 @@ namespace Content.Shared._RMC14.Medical.MedicalPods;
 public sealed class SleeperBuiState(
     NetEntity? occupant,
     string? occupantName,
-    int occupantState,
+    SleeperOccupantMobState occupantState,
     float health,
     float maxHealth,
     float minHealth,
@@ -34,7 +34,7 @@ public sealed class SleeperBuiState(
 {
     public readonly NetEntity? Occupant = occupant;
     public readonly string? OccupantName = occupantName;
-    public readonly int OccupantState = occupantState;
+    public readonly SleeperOccupantMobState OccupantState = occupantState;
     public readonly float Health = health;
     public readonly float MaxHealth = maxHealth;
     public readonly float MinHealth = minHealth;
@@ -99,7 +99,7 @@ public enum SleeperVisuals : byte
 }
 
 [Serializable, NetSerializable]
-public enum SleeperOccupantHealthState : byte
+public enum SleeperOccupantMobState : byte
 {
     None = 0,
     Alive = 1,

@@ -71,25 +71,25 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.MinValue = state.MinHealth;
         HealthBarText.Text = state.Health.ToString("F0");
 
-        var crisisHealthThreshold = state.MaxHealth - state.CrisisMinDamage;
+        var crisisDamageThreshold = state.MaxHealth - state.CrisisMinDamage;
         HealthBar.Modulate = state.Health switch
         {
-            _ when state.Health >= crisisHealthThreshold => Color.FromHex("#00AA00"),
+            _ when state.Health >= crisisDamageThreshold => Color.FromHex("#00AA00"),
             >= 0 => Color.FromHex("#AAAA00"),
             _ => Color.FromHex("#AA0000")
         };
         StatusLabel.Text = state.OccupantState switch
         {
-            0 => Loc.GetString("rmc-sleeper-status-alive"),
-            1 => Loc.GetString("rmc-sleeper-status-critical"),
-            2 => Loc.GetString("rmc-sleeper-status-dead"),
+            SleeperOccupantMobState.Alive => Loc.GetString("rmc-sleeper-status-alive"),
+            SleeperOccupantMobState.Critical => Loc.GetString("rmc-sleeper-status-critical"),
+            SleeperOccupantMobState.Dead => Loc.GetString("rmc-sleeper-status-dead"),
             _ => ""
         };
         StatusLabel.Modulate = state.OccupantState switch
         {
-            0 => Color.FromHex("#00AA00"),
-            1 => Color.FromHex("#AAAA00"),
-            2 => Color.FromHex("#AA0000"),
+            SleeperOccupantMobState.Alive => Color.FromHex("#00AA00"),
+            SleeperOccupantMobState.Critical => Color.FromHex("#AAAA00"),
+            SleeperOccupantMobState.Dead => Color.FromHex("#AA0000"),
             _ => Color.White
         };
 
@@ -177,7 +177,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
                 var injectButton = new Button
                 {
                     Text = Loc.GetString("rmc-sleeper-inject", ("amount", amount)),
-                    Disabled = !injectable || occupantAmount + amount > state.MaxChem || state.OccupantState == 2,
+                    Disabled = !injectable || occupantAmount + amount > state.MaxChem || state.OccupantState == SleeperOccupantMobState.Dead,
                     Margin = new Thickness(5, 0, 0, 0)
                 };
                 var injectAmount = amount;

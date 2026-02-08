@@ -4,6 +4,7 @@ rmc-sleeper-enter-verb = Enter Pod
 rmc-sleeper-eject-verb = Eject Occupant
 
 rmc-sleeper-already-occupied = {$sleeper} is already occupied!
+rmc-sleeper-no-sleeper-connected = No sleeper connected to this console.
 rmc-sleeper-inserting = You start putting {$target} into {$sleeper}...
 rmc-sleeper-inserted-other = You move {$target} into {$sleeper}.
 rmc-sleeper-ejected = {$entity} pops out of the sleeper!
