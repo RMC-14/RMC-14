@@ -14,16 +14,32 @@ public sealed class RMCInputSystem : EntitySystem
     private bool _activeInputMoverEnabled;
 
     private EntityQuery<ActorComponent> _actorQuery;
+    private EntityQuery<InputMoverComponent> _inputMoverQuery;
 
     public override void Initialize()
     {
         _actorQuery = GetEntityQuery<ActorComponent>();
+        _inputMoverQuery = GetEntityQuery<InputMoverComponent>();
 
         SubscribeLocalEvent<ActiveInputMoverComponent, MapInitEvent>(OnActiveMapInit);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveAttached);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
 
+        // Clear RelativeEntity references when the referenced entity is deleted
+        SubscribeLocalEvent<EntityTerminatingEvent>(OnEntityTerminating);
+
         Subs.CVar(_config, RMCCVars.RMCActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
+    }
+
+    private void OnEntityTerminating(ref EntityTerminatingEvent ev)
+    {
+        // When an entity is deleted, clear any InputMoverComponent.RelativeEntity references to it
+        var query = EntityQueryEnumerator<InputMoverComponent>();
+        while (query.MoveNext(out var mover))
+        {
+            if (mover.RelativeEntity == ev.Entity)
+                mover.RelativeEntity = null;
+        }
     }
 
     private void OnActiveMapInit(Entity<ActiveInputMoverComponent> ent, ref MapInitEvent args)
