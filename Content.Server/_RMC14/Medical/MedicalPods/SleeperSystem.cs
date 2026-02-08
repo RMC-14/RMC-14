@@ -299,6 +299,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var consoles = EntityQueryEnumerator<SleeperConsoleComponent>();
         while (consoles.MoveNext(out var uid, out var console))
         {
+            if (!_ui.IsUiOpen(uid, SleeperUIKey.Key))
+                continue;
+
             if (time < console.UpdateAt)
                 continue;
 
@@ -318,55 +321,55 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.NextDialysisTick = time + sleeper.DialysisTickDelay;
 
             // Perform dialysis
-            if (_solution.TryGetSolution(sleeper.Occupant.Value, "chemicals", out var chemSolEnt, out var chemSol))
+            if (!_solution.TryGetSolution(sleeper.Occupant.Value, "chemicals", out var chemSolEnt, out var chemSol))
+                continue;
+
+            if (sleeper.DialysisStartedReagentVolume == 0)
             {
-                if (sleeper.DialysisStartedReagentVolume == 0)
-                {
-                    sleeper.DialysisStartedReagentVolume = chemSol.Volume;
-                }
+                sleeper.DialysisStartedReagentVolume = chemSol.Volume;
+                Dirty(uid, sleeper);
+            }
 
-                // Build non-transferable lookup for O(1) checks
-                _nonTransferableLookup.Clear();
-                foreach (var reagent in sleeper.NonTransferableReagents)
-                {
-                    _nonTransferableLookup.Add(reagent);
-                }
+            // Build non-transferable lookup for O(1) checks
+            _nonTransferableLookup.Clear();
+            foreach (var reagent in sleeper.NonTransferableReagents)
+            {
+                _nonTransferableLookup.Add(reagent);
+            }
 
-                _reagentRemovalBuffer.Clear();
-                foreach (var reagentQuantity in chemSol.Contents)
+            _reagentRemovalBuffer.Clear();
+            foreach (var reagentQuantity in chemSol.Contents)
+            {
+                if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype))
                 {
-                    if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype))
-                    {
-                        _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
-                    }
-                }
-
-                foreach (var reagent in _reagentRemovalBuffer)
-                {
-                    _solution.RemoveReagent(chemSolEnt.Value, reagent, sleeper.DialysisAmount);
-                }
-
-                // Check if dialysis is complete
-                var hasTransferableReagents = false;
-                foreach (var reagentQuantity in chemSol.Contents)
-                {
-                    if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype) &&
-                        reagentQuantity.Quantity > 0)
-                    {
-                        hasTransferableReagents = true;
-                        break;
-                    }
-                }
-
-                if (!hasTransferableReagents)
-                {
-                    sleeper.IsFiltering = false;
-                    sleeper.DialysisStartedReagentVolume = 0;
-                    _audio.PlayPvs(sleeper.DialysisCompleteSound, uid);
+                    _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
                 }
             }
 
-            Dirty(uid, sleeper);
+            foreach (var reagent in _reagentRemovalBuffer)
+            {
+                _solution.RemoveReagent(chemSolEnt.Value, reagent, sleeper.DialysisAmount);
+            }
+
+            // Check if dialysis is complete
+            var hasTransferableReagents = false;
+            foreach (var reagentQuantity in chemSol.Contents)
+            {
+                if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype) &&
+                    reagentQuantity.Quantity > 0)
+                {
+                    hasTransferableReagents = true;
+                    break;
+                }
+            }
+
+            if (!hasTransferableReagents)
+            {
+                sleeper.IsFiltering = false;
+                sleeper.DialysisStartedReagentVolume = 0;
+                _audio.PlayPvs(sleeper.DialysisCompleteSound, uid);
+                Dirty(uid, sleeper);
+            }
         }
     }
 
