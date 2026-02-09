@@ -5,6 +5,7 @@ using Robust.Shared.GameStates;
 namespace Content.Shared._RMC14.Xenonids.Construction.PlasmaTree;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[Access(typeof(PlasmaTreeSystem))]
 public sealed partial class PlasmaTreeComponent : Component
 {
     [DataField, AutoNetworkedField]

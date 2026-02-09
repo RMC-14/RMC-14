@@ -1077,12 +1077,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
     {
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
-        while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
+        while (hiveStructures.MoveNext(out var id, out _, out var xform))
         {
-            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(hiveStructure);
+            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(id);
 
-            if (transformComp.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(hiveStructure.ToCoordinates()))
-                _destruction.DestroyEntity(hiveStructure);
+            if (xform.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(id.ToCoordinates()))
+                _destruction.DestroyEntity(id);
+        }
+
+        var xenoLimitedStructures = EntityQueryEnumerator<XenoSecretionLimitedComponent, TransformComponent>();
+        while (xenoLimitedStructures.MoveNext(out var id, out _, out var xform))
+        {
+            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(id);
+
+            if (xform.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(id.ToCoordinates()))
+                _destruction.DestroyEntity(id);
         }
 
         var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();
