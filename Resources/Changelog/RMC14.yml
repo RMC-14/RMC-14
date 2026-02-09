@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: monomethylhydrazine
-  changes:
-  - message: Added a variety of Three Suns Empire marine roles (rifleman, breacher,
-      medical technician, marksman, team lead, lieutenant, and major), for admin,
-      PVE, and/or ERT uses. God save the Suns!
-    type: Add
-  id: 2391
-  time: '2025-10-05T03:00:08.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7864
 - author: yagwog
   changes:
   - message: Added Parasite Watcher strain.
@@ -4727,5 +4718,13 @@
   id: 2892
   time: '2026-02-09T05:38:32.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9162
+- author: RerBreab
+  changes:
+  - message: Fixed incinerator fire initial burst of damage on direct hit dealing
+      3 times less damage than intended.
+    type: Fix
+  id: 2893
+  time: '2026-02-09T05:45:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8911
 Name: RMC14
 Order: -1
