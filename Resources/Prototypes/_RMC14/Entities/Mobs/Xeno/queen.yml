@@ -10,6 +10,7 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleQueen
@@ -81,11 +82,13 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
