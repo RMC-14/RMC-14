@@ -185,6 +185,9 @@
   name: weedbound resin wall
   description: Weird slime solidified into a wall, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
   - type: Icon
@@ -204,6 +207,9 @@
   name: thick weedbound resin wall
   description: Weird slime solidified into a thick wall, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
   - type: Icon
