@@ -2079,7 +2079,7 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronHudsonDemuth
-  name: Hudson Demuth
+  name: Hudson 'Hungry' Demuth
   description: "Your local Charlie crusty Gunny that's hungry for MREs and Queens!  He may or may not steal all your food and FN pills, for his pushes drain him of all of his blood!"
   components:
   - type: Sprite
