@@ -187,4 +187,46 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             : Loc.GetString("rmc-playing-card-hand-name");
         _meta.SetEntityName(hand, name);
     }
+
+    protected override void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
+    {
+        if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
+            QueueDel(card);
+            return;
+        }
+
+        deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
+        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
+        Dirty(deck);
+
+        QueueDel(card);
+
+        _popup.PopupEntity(Loc.GetString("rmc-playing-card-added-to-deck"), deck, user);
+        _audio.PlayPvs(deck.Comp.DrawSound, deck);
+    }
+
+    protected override void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
+    {
+        var added = 0;
+        foreach (var encoded in hand.Comp.Cards)
+        {
+            if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+                break;
+
+            deck.Comp.CardOrder.Add(encoded);
+            deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
+            added++;
+        }
+
+        Dirty(deck);
+        QueueDel(hand);
+
+        if (added > 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-added-cards-to-deck", ("count", added)), deck, user);
+            _audio.PlayPvs(deck.Comp.DrawSound, deck);
+        }
+    }
 }

@@ -1,8 +1,10 @@
+using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
+using Content.Shared.Timing;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -17,12 +19,19 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private readonly UseDelaySystem _useDelay = default!;
+
+    private const float AreaPickupRadius = 1f;
+    private const float AreaPickupDelayPerCard = 0.1f;
 
     public override void Initialize()
     {
@@ -37,9 +46,12 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         // Deck events
         SubscribeLocalEvent<PlayingCardDeckComponent, UseInHandEvent>(OnDeckUseInHand);
         SubscribeLocalEvent<PlayingCardDeckComponent, ActivateInWorldEvent>(OnDeckActivateInWorld);
+        SubscribeLocalEvent<PlayingCardDeckComponent, AfterInteractEvent>(OnDeckAfterInteract);
         SubscribeLocalEvent<PlayingCardDeckComponent, ExaminedEvent>(OnDeckExamined);
         SubscribeLocalEvent<PlayingCardDeckComponent, GetVerbsEvent<AlternativeVerb>>(OnDeckGetAltVerbs);
         SubscribeLocalEvent<PlayingCardDeckComponent, MapInitEvent>(OnDeckMapInit);
+        SubscribeLocalEvent<PlayingCardDeckComponent, InteractUsingEvent>(OnDeckInteractUsing);
+        SubscribeLocalEvent<PlayingCardDeckComponent, PlayingCardDeckPickupDoAfterEvent>(OnDeckPickupDoAfter);
 
         // Hand of cards events
         SubscribeLocalEvent<PlayingCardHandComponent, UseInHandEvent>(OnHandUseInHand);
@@ -190,6 +202,134 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             },
             Priority = 1
         });
+    }
+
+    private void OnDeckInteractUsing(Entity<PlayingCardDeckComponent> ent, ref InteractUsingEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        // Add single card to deck
+        if (TryComp<PlayingCardComponent>(args.Used, out var card))
+        {
+            if (_net.IsServer)
+                AddCardToDeck(ent, (args.Used, card), args.User);
+            args.Handled = true;
+            return;
+        }
+
+        // Add hand of cards to deck
+        if (TryComp<PlayingCardHandComponent>(args.Used, out var hand))
+        {
+            if (_net.IsServer)
+                AddHandToDeck(ent, (args.Used, hand), args.User);
+            args.Handled = true;
+        }
+    }
+
+    private void OnDeckAfterInteract(Entity<PlayingCardDeckComponent> ent, ref AfterInteractEvent args)
+    {
+        if (args.Handled || !args.CanReach)
+            return;
+
+        if (!_useDelay.TryResetDelay(ent, checkDelayed: true))
+            return;
+
+        if (args.Target != null && (HasComp<PlayingCardComponent>(args.Target) || HasComp<PlayingCardHandComponent>(args.Target)))
+            return;
+
+        // Find all cards and hands in range
+        var cards = new List<EntityUid>();
+        var cardSet = _entityLookup.GetEntitiesInRange<PlayingCardComponent>(args.ClickLocation, AreaPickupRadius);
+        var handSet = _entityLookup.GetEntitiesInRange<PlayingCardHandComponent>(args.ClickLocation, AreaPickupRadius);
+
+        foreach (var card in cardSet)
+        {
+            if (!_interaction.InRangeUnobstructed(args.User, card.Owner))
+                continue;
+
+            // Skip cards in containers
+            if (_container.IsEntityInContainer(card.Owner))
+                continue;
+
+            cards.Add(card.Owner);
+        }
+
+        foreach (var hand in handSet)
+        {
+            if (!_interaction.InRangeUnobstructed(args.User, hand.Owner))
+                continue;
+
+            // Skip hands in containers
+            if (_container.IsEntityInContainer(hand.Owner))
+                continue;
+
+            cards.Add(hand.Owner);
+        }
+
+        if (cards.Count == 0)
+            return;
+
+        var delay = cards.Count * AreaPickupDelayPerCard;
+        var doAfterArgs = new DoAfterArgs(EntityManager, args.User, delay, new PlayingCardDeckPickupDoAfterEvent(GetNetEntityList(cards)), ent, target: ent)
+        {
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            NeedHand = true,
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+        args.Handled = true;
+    }
+
+    private void OnDeckPickupDoAfter(Entity<PlayingCardDeckComponent> ent, ref PlayingCardDeckPickupDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        if (_net.IsClient)
+            return;
+
+        var added = 0;
+        foreach (var netEntity in args.Entities)
+        {
+            var entity = GetEntity(netEntity);
+            if (!Exists(entity))
+                continue;
+
+            if (TryComp<PlayingCardComponent>(entity, out var card))
+            {
+                if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+                    break;
+
+                ent.Comp.CardOrder.Add(EncodeCard(card.Suit, card.Rank));
+                ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
+                QueueDel(entity);
+                added++;
+            }
+            else if (TryComp<PlayingCardHandComponent>(entity, out var hand))
+            {
+                foreach (var encoded in hand.Cards)
+                {
+                    if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+                        break;
+
+                    ent.Comp.CardOrder.Add(encoded);
+                    ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
+                    added++;
+                }
+                QueueDel(entity);
+            }
+        }
+
+        if (added > 0)
+        {
+            Dirty(ent);
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-pickup", ("count", added)), ent, args.User);
+            _audio.PlayPvs(ent.Comp.DrawSound, ent);
+        }
     }
 
     #endregion
@@ -399,6 +539,14 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     }
 
     protected virtual void DrawCard(Entity<PlayingCardDeckComponent> deck, EntityUid user)
+    {
+    }
+
+    protected virtual void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)
+    {
+    }
+
+    protected virtual void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
     }
 

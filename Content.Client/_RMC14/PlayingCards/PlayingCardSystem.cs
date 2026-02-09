@@ -104,10 +104,12 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         var state = ent.Comp.CardsRemaining switch
         {
             0 => "deck_empty",
-            <= 26 => "deck_open",
-            _ => "deck"
+            52 => "deck",
+            _ => "deck_open"
         };
 
+        var rsiPath = new ResPath("_RMC14/Objects/Fun/playing_cards.rsi");
+        _sprite.LayerSetRsi((ent.Owner, sprite), 0, rsiPath);
         _sprite.LayerSetRsiState((ent.Owner, sprite), 0, state);
     }
 
@@ -136,7 +138,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        // Remove any card layers we previously added in REVERSE order to avoid index shifting issues
+        // Remove REVERSE order to avoid shifting issues
         for (var i = MaxVisibleCards - 1; i >= 1; i--)
         {
             var key = $"card_{i}";

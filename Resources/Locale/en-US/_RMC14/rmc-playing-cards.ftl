@@ -27,7 +27,11 @@ rmc-playing-card-add-to-hand = You add the card to the hand. ({$count} cards tot
 # Deck actions
 rmc-playing-card-deck-examine = The deck has {$count} cards remaining.
 rmc-playing-card-deck-empty = The deck is empty!
+rmc-playing-card-deck-full = The deck is full!
 rmc-playing-card-deck-shuffle = You shuffle {THE($deck)}.
+rmc-playing-card-added-to-deck = You add the card to the deck.
+rmc-playing-card-added-cards-to-deck = You add {$count} cards to the deck.
+rmc-playing-card-deck-pickup = You pick up {$count} cards into the deck.
 
 # Hand of cards
 rmc-playing-card-hand-name = hand of cards
