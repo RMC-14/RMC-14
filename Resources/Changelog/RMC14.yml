@@ -1,21 +1,4 @@
 ﻿Entries:
-- author: UnicornOnLSD
-  changes:
-  - message: Added gas mask camo variants & fixed the inhands
-    type: Add
-  id: 2406
-  time: '2025-10-05T04:12:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7899
-- author: monomethylhydrazine
-  changes:
-  - message: Added the Corporate Synthetic, a generic We-Ya noncombatant synth role.
-    type: Add
-  - message: Added the PMC Support Synthetic, a kitted-out technician and medic for
-      We-Ya PMC teams.
-    type: Add
-  id: 2407
-  time: '2025-10-05T05:02:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7579
 - author: NotInButIn
   changes:
   - message: Fixed the ability to upgrade barricades in acid
@@ -4452,30 +4435,6 @@
   url: https://github.com/RMC-14/RMC-14/pull/9117
 - author: Dygon
   changes:
-  - message: The ML66D heavy machine gun can now be acquired through requisitions,
-      the combat engineer vendor, and the squad leader vendor. The ML66D is a
-      machine-gun emplacement with IFF capability that requires tools to assemble or
-      disassemble.
-    type: Add
-  - message: The M2C heavy machine gun is now available through requisitions.
-      The M2C is a rapidly deployable machine-gun emplacement that can be
-      rotated, set up, and packed up without tools. Firing it for too long
-      without allowing it to cool will cause it to overheat and take damage.
-      It can be repaired with a welder.
-    type: Add
-  - message: The dropship part fabricator can now print the A/A-32-P Sentry
-      Defense System (200 points) and the MTU-4B Door Gunner Hardpoint System
-      (50 points). These can be installed in a dropship’s weapon or utility slots
-      and deploy either an omnidirectional sentry gun or a scoped heavy machine-gun nest.
-    type: Add
-  - message: Fuel pump sentries can now be deployed on red alert or higher,
-      and can be undeployed.
-    type: Tweak
-  id: 2908
-  time: '2026-02-06T00:06:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8496
-- author: Dygon
-  changes:
   - message: The medevac system cooldown now starts after you successfully grab a
       target, instead of when you activate it.
     type: Fix
@@ -4769,5 +4728,37 @@
   id: 2907
   time: '2026-02-09T08:57:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9158
+- author: Dygon
+  changes:
+  - message: The ML66D heavy machine gun can now be acquired through requisitions,
+      the combat engineer vendor, and the squad leader vendor. The ML66D is a machine-gun
+      emplacement with IFF capability that requires tools to assemble or disassemble.
+    type: Add
+  - message: The M2C heavy machine gun is now available through requisitions. The
+      M2C is a rapidly deployable machine-gun emplacement that can be rotated, set
+      up, and packed up without tools. Firing it for too long without allowing it
+      to cool will cause it to overheat and take damage. It can be repaired with a
+      welder.
+    type: Add
+  - message: "The dropship part fabricator can now print the A/A-32-P Sentry Defense\
+      \ System (200 points) and the MTU-4B Door Gunner Hardpoint System (50 points).\
+      \ These can be installed in a dropship\u2019s weapon or utility slots and deploy\
+      \ either an omnidirectional sentry gun or a scoped heavy machine-gun nest."
+    type: Add
+  - message: Fuel pump sentries can now be deployed on red alert or higher, and can
+      be undeployed.
+    type: Tweak
+  id: 2908
+  time: '2026-02-06T00:06:55.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8496
+- author: DrSmugleaf
+  changes:
+  - message: Try to fix buggy behaviour with storages, specially when quickly switching
+      hands and using belt quick-insert keybinds, specially with the medical storage
+      rig.
+    type: Fix
+  id: 2909
+  time: '2026-02-09T12:04:27.512916+00:00'
+  url: null
 Name: RMC14
 Order: -1
