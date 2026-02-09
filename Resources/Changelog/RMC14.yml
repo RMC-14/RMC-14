@@ -1,15 +1,4 @@
 ﻿Entries:
-- author: blueisdumb
-  changes:
-  - message: Added new tails
-    type: Add
-  - message: Slightly changed Leopard tail and the wag animation
-    type: Tweak
-  - message: Fixed dragon wings marking displaying incorrect name
-    type: Fix
-  id: 2385
-  time: '2025-10-05T02:11:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8016
 - author: Monotheonist
   changes:
   - message: Changed around some beret icons (most notably the tan and green berets.)
@@ -4710,5 +4699,13 @@
   id: 2886
   time: '2026-02-08T08:23:48.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9164
+- author: Miyugi and Pgriha
+  changes:
+  - message: New xenonids structure, Plasma Tree! It replenishes plasma to nearby
+      xenos every few seconds, works like the Recovery Node.
+    type: Add
+  id: 2887
+  time: '2026-02-09T00:42:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8830
 Name: RMC14
 Order: -1
