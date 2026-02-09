@@ -212,7 +212,7 @@
     - RMCEngineerKitRCMPVEFilled
     - RMCPouchToolsSocRCMPVEAssaultEngi
     - RMCToolWebbingSmallFilledRCMPVEAssaultEngi
-    - RMCTesla # TODO RMC14 THIS HAS UNMC IFF!!!!! FIX WITH PROPER IMPLEMENTATION
+    - RMCTeslaTSE
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
