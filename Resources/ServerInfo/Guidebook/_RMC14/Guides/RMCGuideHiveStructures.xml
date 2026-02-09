@@ -13,11 +13,13 @@
   <Box>
     <GuideEntityEmbed Entity="HiveClusterXeno"/>
     <GuideEntityEmbed Entity="HiveRecoveryNodeXeno"/>
+    <GuideEntityEmbed Entity="HivePlasmaTreeXeno"/>
   </Box>
   ##Each have limits!
   - 1 Hive Core
   - 6 Egg Morphers
-  - 6 Recovery Nodes
+  - 6 Recovery nodes
+  - 3 Plasma Trees
   - 8 Hive Clusters
   - 2 Hive Pylons
 
@@ -33,10 +35,14 @@
 
   [bold]Recovery Node[/bold]: Recovery Node allows for Xenonids resting near it to be healed. Only one Xenonid can be healed at a time.
 
+  [bold]Plasma Tree[/bold]: Plasma Trees are just like Recovery Nodes but give plasma instead of healing to Xenonids.
+
   ##Where to place!
   Since they are limited it is always best to communicate with your hive when you are placing one.
 
   Hive clusters can be used at the frontline to stall host pushes or at the backline for nesting spots, usually accompanied by a tunnel, these nesting spots will also have 2 or more egg morphers.
 
   Recovery nodes should be put at the frontline near a hive cluster to help sisters fight extended battles.
+
+  Plasma trees can be used both at frontline (for healers and frontline builders) and at backline (for backline builders).
 </Document>
