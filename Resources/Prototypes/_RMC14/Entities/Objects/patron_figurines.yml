@@ -433,7 +433,7 @@
   - type: PointLight
     enabled: true
     radius: 1.1
-    color: green
+    color: "#BE2521"
 
 - type: entity
   parent: [ RMCBaseFigurinePatron, CMCanteenBase ]
@@ -1572,13 +1572,21 @@
 - type: entity
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronAtlasWolfySnowlight
-  name: Atlas 'Wolfy' Snowlight figurine
-  #description: ""
+  name: Katerina AW Dragunov figurine
+  description: "A short figure depicting one of the poster child of the success of the Artificial Womb program. Katerina ability to inspire her fellow marines and fear in the enemies of the UN resulted in WE-YA making her into a figure, despite her objections. As many have learn to their dismay her bite is stronger than her bark. It smells like strawberries."
   components:
   - type: Sprite
-    state: atlas_wolfy_snowlight
+    state: katerina_aw_dragunov
   - type: PatronFigurine
     id: 6ca6e4f7-0951-4298-bbf2-f4de50fb025b
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Voice/Vulpkanin/dog_bark3.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1798,6 +1806,14 @@
     state: minji_failsafe_kilgrim
   - type: PatronFigurine
     id: fbecf0e4-fe0c-41fc-a136-12804f260378
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Effects/Chemistry/bubbles.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -1974,6 +1990,231 @@
     state: kaizer_deathwish_valentine
   - type: PatronFigurine
     id: 2cd412a9-6316-4163-8a33-637c63b2cd38
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronZozieWristwatch
+  name: Zozie Wristwatch figurine
+  description: This particularly tall figurine looks hand-made. Her glasses seem hastily glued to her face, and the paint-job seems unfinished.
+  components:
+  - type: Sprite
+    state: zozie_wristwatch
+  - type: PatronFigurine
+    id: d139ab96-4207-4187-b390-a153c0fab6e6
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKyrissSnowWinters
+  name: Kyriss 'Snow' Winters
+  description: The figurine looks determined as if she is searching for something or someone.
+  components:
+  - type: Sprite
+    state: kyriss_snow_winters
+  - type: PatronFigurine
+    id: 14400651-5f3b-4bfb-b2b6-f6e3fe60452a
+  - type: EmitSoundOnThrow
+    sound: /Audio/Animals/fox_squeak.ogg
+    cooldown: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNatoAchMenoe
+  name: Nato Ach-Menoe
+  description: Little gremlin of a Siberian forest cat, they seem to love fire and citrus fruits, better make way for them!
+  components:
+  - type: Sprite
+    state: nato_ach_menoe
+  - type: PatronFigurine
+    id: 4615fda9-a12c-4ca8-901a-69b606b3a552
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/_RMC14/Weapons/Handling/flamer_ignition.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNatoAchMenoe
+  name: Emmalise Isabel Chambers
+  description: "You could swear those pointy ears twitch when you make a noise, even across the room."
+  components:
+  - type: Sprite
+    state: emmalise_isabel_chambers
+  - type: PatronFigurine
+    id: 01d832a7-2e12-4e2c-9319-251d641adf5a
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAmeliaFields
+  name: Amelia Fields figurine
+  description: "A chipped figurine surrounded by dust.
+
+    Taped to the underside is a yellow sticky note. The first line is neat, the second sloppy.
+
+    \"Not missing.\"
+
+    \"i put it here.\"
+
+    No further explanation is provided."
+  components:
+  - type: Sprite
+    state: amelia_fields
+  - type: PatronFigurine
+    id: f607ca3a-f672-458f-925b-b82393570fc7
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRosemaryShenaniganizerSmox
+  name: Rosemary 'Shenaniganizer' Smox
+  description: "It may not fit in this world, but it hopes to make a difference."
+  components:
+  - type: Sprite
+    state: rosemary_shenaniganizer_smox
+  - type: PatronFigurine
+    id: fc961c06-3e00-43b5-8a47-a74b92e9666f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronHudsonDemuth
+  name: Hudson Demuth
+  description: "Your local Charlie crusty Gunny that's hungry for MREs and Queens!  He may or may not steal all your food and FN pills, for his pushes drain him of all of his blood!"
+  components:
+  - type: Sprite
+    state: hudson_demuth
+  - type: PatronFigurine
+    id: 3d975395-a30b-4ea4-b565-3052ee2e9dca
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAtreiyaVuctoiris
+  name: Atreiya Vuctoiris
+  description: "Is it a plane? Is it a bug? No it's a Moff!"
+  components:
+  - type: Sprite
+    state: atreiya_vuctoiris
+  - type: PatronFigurine
+    id: d7993fc8-015f-4780-8f65-66486ef78d51
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronNitrumNJucundus
+  name: Nitrum 'N' Jucundus figurine
+  components:
+  - type: Sprite
+    state: nitrum_n_jucundus
+  - type: PatronFigurine
+    id: a63335b4-df8f-42ae-83a6-260f5cf3a44f
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronPepper
+  name: Pepper figurine
+  description: "It's Pepper!"
+  components:
+  - type: Sprite
+    state: pepper
+  - type: PatronFigurine
+    id: 24884ede-8a57-4d3e-9d99-862e04fd37e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronAlbrechAlbyHerrmann
+  name: Albrecht 'Alby' Herrmann figurine
+  description: "dead"
+  components:
+  - type: Sprite
+    state: albrecht_alby_herrmann
+  - type: PatronFigurine
+    id: 24884ede-8a57-4d3e-9d99-862e04fd37e0
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronOliveOrr
+  name: Olive Orr figurine
+  description: "Hello!"
+  components:
+  - type: Sprite
+    state: olive_orr
+  - type: PatronFigurine
+    id: e1c32e3b-05ae-4684-beec-50b3ee32a5d8
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEvadEsrever
+  name: Evad Esrever figurine
+  components:
+  - type: Sprite
+    state: evad_esrever
+  - type: PatronFigurine
+    id: 5adc5d79-f861-4224-8889-dd83d9487520
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEvadEsrever
+  name: Evad Esrever figurine
+  components:
+  - type: Sprite
+    state: evad_esrever
+  - type: PatronFigurine
+    id: 5adc5d79-f861-4224-8889-dd83d9487520
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronArdyApeManGuy
+  name: Ardy 'Ape Man' Guy figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: ardy_ape_man_guy
+  - type: PatronFigurine
+    id: 73fe7fbd-21a2-4d01-beb0-063d45dbb211
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronRhysHendricks
+  name: Rhys Hendricks figurine
+  description: "You feel an evil aura coming from this figurine..."
+  components:
+  - type: Sprite
+    state: rhys_hendricks
+  - type: PatronFigurine
+    id: e3ac1971-357a-4cfb-94ca-d4826b14c3f9
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKeenanFoolishHoundEpiolos
+  name: Keenan 'Foolish Hound' Epiolos figurine
+  description: "A foolish hound, perhaps too foolish."
+  components:
+  - type: Sprite
+    state: keenan_foolish_hound_epiolos
+  - type: PatronFigurine
+    id: 0872eebf-8599-49e6-8333-cd521be66842
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronOleenStarseeker
+  name: Oleen-Starseeker figurine
+  description: "Your favorite Corporate Liaison, now in blood red!"
+  components:
+  - type: Sprite
+    state: oleen_starseeker
+  - type: PatronFigurine
+    id: ce8400b4-871b-4f0d-93ee-1e7ca3823b4c
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronEvadEsrever
+  name: Evad Esrever figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: evad_esrever
+  - type: PatronFigurine
+    id: 5adc5d79-f861-4224-8889-dd83d9487520
 
 - type: entity
   parent: RMCBaseFigurinePatron
