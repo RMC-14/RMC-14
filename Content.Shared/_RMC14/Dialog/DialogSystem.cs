@@ -159,8 +159,37 @@ public sealed class DialogSystem : EntitySystem
         var consecutiveSame = 0;
         var consecutiveSameDigits = 0;
 
-        foreach (var ch in text)
+        var consecutivePair = 0;
+        var lastPairFirst = '\0';
+        var lastPairSecond = '\0';
+        var skipPairSecond = false;
+
+        for (var i = 0; i < text.Length; i++)
         {
+            var ch = text[i];
+            var skipPair = false;
+
+            if (skipPairSecond)
+            {
+                skipPair = true;
+                skipPairSecond = false;
+            }
+            else if (i % 2 == 0 && i + 1 < text.Length)
+            {
+                var pairFirst = ch;
+                var pairSecond = text[i + 1];
+                consecutivePair = pairFirst == lastPairFirst && pairSecond == lastPairSecond
+                    ? consecutivePair + 1
+                    : 1;
+                lastPairFirst = pairFirst;
+                lastPairSecond = pairSecond;
+                if (consecutivePair > 2)
+                {
+                    skipPair = true;
+                    skipPairSecond = true;
+                }
+            }
+
             var isSpace = ch == ' ';
             var isPunctuation = char.IsPunctuation(ch);
             var isSymbol = char.IsSymbol(ch);
@@ -182,7 +211,8 @@ public sealed class DialogSystem : EntitySystem
             consecutivePunctuation = isPunctuation ? consecutivePunctuation + 1 : 0;
             consecutiveSymbols = isSymbol ? consecutiveSymbols + 1 : 0;
 
-            var skip = consecutiveSpaces > 1
+            var skip = skipPair
+                || consecutiveSpaces > 1
                 || (!isDigit && consecutiveSame > 3)
                 || consecutiveSameDigits > 5
                 || consecutivePunctuation > 3
