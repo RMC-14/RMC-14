@@ -1,0 +1,81 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/xenos/effects.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "weedboundresin"
+        },
+        {
+            "name": "weedboundresin0",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin1",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin2",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin3",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin4",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin5",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin6",
+            "directions": 4
+        },
+        {
+            "name": "weedboundresin7",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin"
+        },
+        {
+            "name": "thickweedboundresin0",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin1",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin2",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin3",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin4",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin5",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin6",
+            "directions": 4
+        },
+        {
+            "name": "thickweedboundresin7",
+            "directions": 4
+        }
+    ]
+}
