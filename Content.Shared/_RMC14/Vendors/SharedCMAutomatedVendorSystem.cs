@@ -1042,32 +1042,25 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         failedItems ??= [];
 
         var items = storage.Container.ContainedEntities;
-        while (items.Count > 0)
+        var itemCount = items.Count;
+        for (var i = 0; i < itemCount; i++)
         {
-            var item = items[0];
+            var item = items[i];
             var netItem = GetNetEntity(item);
-
             if (failedItems.Contains(netItem))
-            {
-                _container.Remove(item, storage.Container);
-                _container.Insert(item, storage.Container);
-
-                if (items.All(i => failedItems.Contains(GetNetEntity(i))))
-                    break;
-
                 continue;
-            }
 
             if (!EntityManager.EntityExists(item))
             {
                 _container.Remove(item, storage.Container);
+                i--;
+                itemCount--;
                 continue;
             }
+
             // Skip nested storage containers to prevent recursive processing
-            if (TryComp<StorageComponent>(item, out _))
+            if (HasComp<StorageComponent>(item))
             {
-                _container.Remove(item, storage.Container);
-                _container.Insert(item, storage.Container);
                 failedItems.Add(netItem);
                 continue;
             }
@@ -1156,7 +1149,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         var ignoreBulkRestock = vendor.Comp.IgnoreBulkRestockById.Contains(itemProto) ||
                                 IgnoreBulkRestockByComponent(item);
-        if (matchingEntry == null || TryComp<StorageComponent>(item, out _) && !TryComp<ClothingComponent>(item, out _) && !ignoreBulkRestock)
+        if (matchingEntry == null || HasComp<StorageComponent>(item) && !HasComp<ClothingComponent>(item) && !ignoreBulkRestock)
         {
             RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", vendor, user, ("item", item));
             return false;
