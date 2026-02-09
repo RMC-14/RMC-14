@@ -342,6 +342,8 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 4
     fillBaseName: can
+  - type: SolutionTransfer
+    transferAmount: 100
   - type: StaticPrice
     price: 40
   - type: Tag
