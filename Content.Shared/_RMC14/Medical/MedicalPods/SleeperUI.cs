@@ -31,7 +31,7 @@ public sealed class SleeperBuiState(
     float crisisMinDamage,
     SleeperChemicalData[] chemicals,
     int[] injectionAmounts)
-    : BoundUserInterfaceMessage
+    : BoundUserInterfaceState
 {
     public readonly NetEntity? Occupant = occupant;
     public readonly string? OccupantName = occupantName;

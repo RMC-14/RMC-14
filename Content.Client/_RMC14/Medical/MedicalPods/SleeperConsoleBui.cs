@@ -17,13 +17,16 @@ public sealed class SleeperConsoleBui(EntityUid owner, Enum uiKey) : BoundUserIn
         _window = this.CreateWindow<SleeperConsoleWindow>();
         _window.Title = Loc.GetString("rmc-sleeper-window-title");
         _window.SetBui(this);
+
+        if (State is SleeperBuiState state)
+            _window.UpdateState(state);
     }
 
-    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    protected override void UpdateState(BoundUserInterfaceState state)
     {
-        base.ReceiveMessage(message);
+        base.UpdateState(state);
 
-        if (message is SleeperBuiState sleeperState)
+        if (state is SleeperBuiState sleeperState)
             _window?.UpdateState(sleeperState);
     }
 

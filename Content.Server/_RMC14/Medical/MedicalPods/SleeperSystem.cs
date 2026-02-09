@@ -294,7 +294,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             chemicals.ToArray(),
             sleeper.InjectionAmounts.ToArray());
 
-        _ui.ServerSendUiMessage(console.Owner, SleeperUIKey.Key, state);
+        _ui.SetUiState(console.Owner, SleeperUIKey.Key, state);
     }
 
     public override void Update(float frameTime)
