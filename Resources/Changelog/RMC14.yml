@@ -1,36 +1,4 @@
 ﻿Entries:
-- author: yagwog
-  changes:
-  - message: Added Parasite Watcher strain.
-    type: Add
-  - message: Fixed being able to use runner and boiler zoom while resting.
-    type: Fix
-  id: 2392
-  time: '2025-10-05T03:23:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8012
-- author: DummeHytteOst
-  changes:
-  - message: Fixed the Custom barrel shotgun having an incorrect list of attachment
-      whitelists.
-    type: Fix
-  id: 2393
-  time: '2025-10-05T03:25:54.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8006
-- author: CatAndHats
-  changes:
-  - message: Fixed SOP and MLAW minor spelling errors.
-    type: Fix
-  id: 2394
-  time: '2025-10-05T03:25:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8017
-- author: CatAndHats
-  changes:
-  - message: Added Bed, Foldable Chair, Squad Chairs, and Office Chairs to the RMC
-      Construction menu
-    type: Add
-  id: 2395
-  time: '2025-10-05T03:29:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7972
 - author: crazy1112345
   changes:
   - message: The D18 Hummingbird no longer mentions CLF in its description.
@@ -4726,5 +4694,42 @@
   id: 2893
   time: '2026-02-09T05:45:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8911
+- author: to4no_fix
+  changes:
+  - message: Added the rmcgivecommendation, rmclistcommendations, and rmcdeletcommendations
+      admin commands, which allow you to manage commendations by issuing, viewing,
+      and deleting commendations using different command modes. Use help command for
+      details.
+    type: Add
+  - message: Added the UNMC High Command Medal of honor for Marines and the Queen
+      Mother Royal jelly of supremacy for Xenos as the highest awards that can be
+      given out by admins. The UNMC High Command Medal of Honor can be printed using
+      the Medals Panel.
+    type: Add
+  id: 2894
+  time: '2026-02-09T05:53:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8953
+- author: Ian321
+  changes:
+  - message: The specialization of weapons specialists now gets freed up correctly
+      upon entering cryosleep.
+    type: Fix
+  id: 2895
+  time: '2026-02-09T05:53:22.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9160
+- author: TheLuggage05
+  changes:
+  - message: Fixed a typo in the movie ticket helmet garb description.
+    type: Fix
+  id: 2896
+  time: '2026-02-09T05:53:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9127
+- author: Vixting
+  changes:
+  - message: Change Default transfer on pcan to 100u
+    type: Tweak
+  id: 2897
+  time: '2026-02-09T05:54:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9126
 Name: RMC14
 Order: -1
