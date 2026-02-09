@@ -238,6 +238,21 @@ public sealed class HealthScannerBui : BoundUserInterface
 
         _window.BodyTemperatureLabel.SetMessage(temperatureMsg);
 
+        var pulseMsg = new FormattedMessage();
+        switch (uiState.Pulse)
+        {
+            case 0:
+                pulseMsg.AddText(Loc.GetString("rmc-pulse-bpm", ("value", 0)));
+                break;
+            case >= 250:
+                pulseMsg.AddText(Loc.GetString("rmc-pulse-thready-machine"));
+                break;
+            default:
+                pulseMsg.AddText(Loc.GetString("rmc-pulse-bpm", ("value", uiState.Pulse)));
+                break;
+        }
+        _window.PulseLabel.SetMessage(pulseMsg);
+
         _window.AdviceContainer.DisposeAllChildren();
         //Medication Advice
         if (!isPermaDead)

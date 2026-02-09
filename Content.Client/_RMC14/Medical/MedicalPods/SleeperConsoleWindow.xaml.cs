@@ -141,8 +141,12 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
                 _ => Color.FromHex("#FF0000")
             };
 
-            // TODO RMC14 Pulse
-            PulseLabel.Text = Loc.GetString("rmc-sleeper-pulse-unavailable");
+            PulseLabel.Text = state.Pulse switch
+            {
+                0 => Loc.GetString("rmc-pulse-bpm", ("value", 0)),
+                >= 250 => Loc.GetString("rmc-pulse-thready-machine"),
+                _ => Loc.GetString("rmc-pulse-bpm", ("value", state.Pulse))
+            };
         }
 
         // Chemicals

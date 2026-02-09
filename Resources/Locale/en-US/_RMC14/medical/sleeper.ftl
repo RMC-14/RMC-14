@@ -39,7 +39,6 @@ rmc-sleeper-genetic = Clone:
 
 rmc-sleeper-blood-level = Blood Level:
 rmc-sleeper-pulse = Pulse:
-rmc-sleeper-pulse-bpm = {$value} BPM
 
 rmc-sleeper-chemicals-header = Occupant Chemicals
 rmc-sleeper-inject = Inject {$amount}u

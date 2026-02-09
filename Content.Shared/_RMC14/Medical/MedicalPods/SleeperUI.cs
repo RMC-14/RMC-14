@@ -21,6 +21,7 @@ public sealed class SleeperBuiState(
     bool hasBlood,
     FixedPoint2 bloodLevel,
     float bloodPercent,
+    int pulse,
     float bodyTemperature,
     bool filtering,
     FixedPoint2 totalReagents,
@@ -46,6 +47,7 @@ public sealed class SleeperBuiState(
     public readonly bool HasBlood = hasBlood;
     public readonly FixedPoint2 BloodLevel = bloodLevel;
     public readonly float BloodPercent = bloodPercent;
+    public readonly int Pulse = pulse;
     public readonly float BodyTemperature = bodyTemperature;
     public readonly bool Filtering = filtering;
     public readonly FixedPoint2 TotalReagents = totalReagents;

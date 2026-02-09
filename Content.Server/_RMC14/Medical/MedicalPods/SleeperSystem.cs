@@ -1,6 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.MedicalPods;
+using Content.Shared._RMC14.Mobs.Pulse;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -24,6 +25,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+    [Dependency] private readonly RMCPulseSystem _pulse = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _temperature = default!;
@@ -178,6 +180,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var hasBlood = false;
         FixedPoint2 bloodLevel = 0;
         var bloodPercent = 0f;
+        var pulse = 0;
         var bodyTemp = 0f;
         FixedPoint2 totalReagents = 0;
 
@@ -217,6 +220,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 bloodLevel = bloodSol.Volume;
                 var bloodMax = bloodSol.MaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
+
+                pulse = _pulse.GetPulseValue(occupant.Value, byMachine: true);
             }
 
             if (_temperature.TryGetCurrentTemperature(occupant.Value, out var temp))
@@ -278,6 +283,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             hasBlood,
             bloodLevel,
             bloodPercent,
+            pulse,
             bodyTemp,
             sleeper.IsFiltering,
             totalReagents,
