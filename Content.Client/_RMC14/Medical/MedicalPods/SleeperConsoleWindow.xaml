@@ -25,7 +25,9 @@
                             <Label Name="DialysisProgressLabel" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </ProgressBar>
                     </BoxContainer>
-                    <Label Name="DialysisStatusLabel" Text="" Visible="False" />
+                    <PanelContainer Name="DialysisStatusContainer" StyleClasses="AngleBorderRect" Visible="False">
+                        <Label Name="DialysisStatusLabel" Text="" Margin="5" />
+                    </PanelContainer>
                 </BoxContainer>
             </PanelContainer>
 
@@ -60,11 +62,17 @@
                             <Label Name="TemperatureBarText" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </ProgressBar>
                     </BoxContainer>
-                    <BoxContainer Name="BloodSection" Orientation="Horizontal" Margin="0 2 0 2">
-                        <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="100" Modulate="#5B88B0" />
-                        <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="18">
-                            <Label Name="BloodBarText" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </ProgressBar>
+                    <BoxContainer Name="BloodSection" Orientation="Vertical" Margin="0 2 0 2" Visible="False">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="100" Modulate="#5B88B0" />
+                            <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="18">
+                                <Label Name="BloodBarText" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </ProgressBar>
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" Margin="0 2 0 0">
+                            <Label Text="{Loc rmc-sleeper-pulse}" MinWidth="100" Modulate="#5B88B0" />
+                            <Label Name="PulseLabel" Text="" />
+                        </BoxContainer>
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>

@@ -8,14 +8,13 @@ rmc-sleeper-no-sleeper-connected = No sleeper connected to this console.
 rmc-sleeper-inserting = You start putting {$target} into {$sleeper}...
 rmc-sleeper-inserted-other = You move {$target} into {$sleeper}.
 rmc-sleeper-ejected = {$entity} pops out of the sleeper!
-
 rmc-sleeper-no-occupant = No occupant detected.
+
 rmc-sleeper-dialysis-header = Dialysis
-rmc-sleeper-dialysis-label = Dialysis:
 rmc-sleeper-dialysis-active = Active
 rmc-sleeper-dialysis-inactive = Inactive
-rmc-sleeper-dialysis-progress = Reagents left: {$current}/{$total}u
-rmc-sleeper-dialysis-no-chemicals = Occupant has no chemicals to remove.
+rmc-sleeper-dialysis-no-chemicals = Occupant has no chemicals to remove!
+rmc-sleeper-dialysis-ready = Dialysis inactive!
 
 rmc-sleeper-occupant-header = Occupant
 rmc-sleeper-auto-eject-dead = Auto-eject if dead:
@@ -31,7 +30,7 @@ rmc-sleeper-status-critical = Critical
 rmc-sleeper-status-dead = DEAD
 rmc-sleeper-temperature = Temperature:
 
-rmc-sleeper-damage-header = Damage
+rmc-sleeper-damage-header = Occupant Damage
 rmc-sleeper-brute = Brute:
 rmc-sleeper-burn = Burn:
 rmc-sleeper-toxin = Toxin:
@@ -39,6 +38,8 @@ rmc-sleeper-oxygen = Oxygen:
 rmc-sleeper-genetic = Clone:
 
 rmc-sleeper-blood-level = Blood Level:
+rmc-sleeper-pulse = Pulse:
+rmc-sleeper-pulse-bpm = {$value} BPM
 
-rmc-sleeper-chemicals-header = Chemicals
+rmc-sleeper-chemicals-header = Occupant Chemicals
 rmc-sleeper-inject = Inject {$amount}u

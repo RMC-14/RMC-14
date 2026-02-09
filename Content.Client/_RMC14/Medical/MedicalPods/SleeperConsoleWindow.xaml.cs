@@ -20,8 +20,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         EjectButton.OnPressed += _ => _bui?.Eject();
         AutoEjectDeadButton.OnPressed += _ =>
         {
-            // When OnPressed fires, the button's Pressed state has already been toggled
-            // So we send the current Pressed state (which is the new desired state)
             _bui?.SetAutoEjectDead(AutoEjectDeadButton.Pressed);
         };
     }
@@ -46,29 +44,29 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             ? Loc.GetString("rmc-sleeper-dialysis-active")
             : Loc.GetString("rmc-sleeper-dialysis-inactive");
 
-        // Show progress bar with reagent amounts when dialysis is active
         if (state.Filtering && state.ReagentsWhenStarted > 0)
         {
             DialysisProgressContainer.Visible = true;
             DialysisProgressBar.Value = (state.TotalReagents / state.ReagentsWhenStarted).Float();
-            DialysisProgressLabel.Text = $"{state.TotalReagents.Int()}/{state.ReagentsWhenStarted.Int()}";
-            DialysisStatusLabel.Visible = false;
+            DialysisProgressLabel.Text = $"{state.TotalReagents:F2}/{state.ReagentsWhenStarted:F2}";
+            DialysisStatusContainer.Visible = false;
         }
         else
         {
             DialysisProgressContainer.Visible = false;
             if (state.TotalReagents <= 0)
             {
-                DialysisStatusLabel.Visible = true;
+                DialysisStatusContainer.Visible = true;
                 DialysisStatusLabel.Text = Loc.GetString("rmc-sleeper-dialysis-no-chemicals");
             }
             else
             {
-                DialysisStatusLabel.Visible = false;
+                DialysisStatusContainer.Visible = true;
+                DialysisStatusLabel.Text = Loc.GetString("rmc-sleeper-dialysis-ready");
             }
         }
 
-        // Auto-eject - set the button state to match the server state
+        // Auto-eject
         AutoEjectDeadButton.Pressed = state.AutoEjectDead;
         AutoEjectDeadButton.Text = state.AutoEjectDead
             ? Loc.GetString("rmc-sleeper-on")
@@ -134,7 +132,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         {
             BloodBar.Value = state.BloodPercent;
             BloodBar.MaxValue = 100;
-            BloodBarText.Text = $"{state.BloodPercent:F1}%, {state.BloodLevel}u";
+            BloodBarText.Text = $"{state.BloodPercent:F2}%, {state.BloodLevel}cl";
 
             BloodBar.Modulate = state.BloodPercent switch
             {
@@ -142,6 +140,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
                 >= 60 => Color.FromHex("#FFFF00"),
                 _ => Color.FromHex("#FF0000")
             };
+
+            // TODO RMC14 Pulse
+            PulseLabel.Text = Loc.GetString("rmc-sleeper-pulse-unavailable");
         }
 
         // Chemicals
