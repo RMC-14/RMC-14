@@ -119,6 +119,14 @@
 
 - type: entity
   parent: CMFax
+  id: CMFaxPressTent
+  components:
+  - type: FaxMachine
+    name: "Correspondent Tent"
+    notifyAdmins: false
+
+- type: entity
+  parent: CMFax
   id: RMCFaxColony #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
   suffix: Colony, Unusable
   description: This won't be much help to anyone.

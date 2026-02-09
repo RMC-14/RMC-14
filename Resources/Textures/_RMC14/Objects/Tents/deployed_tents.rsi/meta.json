@@ -54,5 +54,9 @@
     {
       "name": "mp_extension_roof"
     }
+    ,
+    {
+      "name": "correspondent_extension_roof"
+    }
   ]
 }

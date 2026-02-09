@@ -385,3 +385,32 @@
     - "standard_roof"
     - "extension_roof"
     - "mp_extension_roof"
+
+- type: entity
+  parent: RMCTentUNMCExtended
+  id: RMCTentUNMCExtendedCorrespondent
+  name: Correspondent Field Tent
+  description: A standard civilian tent. This one is equipped for news on the go. Unfold in a suitable location for interviews. ENTRANCE TO THE SOUTH.
+  components:
+  - type: Sprite
+    layers:
+    - state: standard_frame
+    - state: standard_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer" ]
+    - state: extension_frame
+    - state: extension_canvas
+      map: [ "enum.ItemCamouflageLayers.Layer2" ]
+    - state: standard_roof
+      map: [ "enum.ItemCamouflageLayers.Layer3", "standard_roof" ]
+    - state: extension_roof
+      map: [ "enum.ItemCamouflageLayers.Layer4", "extension_roof" ]
+    - state: correspondent_extension_roof
+      map: [ "correspondent_extension_roof" ]
+  - type: RMCSpriteFade
+    targetAlpha: 0.0
+    changeRate: 6.0
+    reactToMouse: false
+    fadeLayers:
+    - "standard_roof"
+    - "extension_roof"
+    - "correspondent_extension_roof"
