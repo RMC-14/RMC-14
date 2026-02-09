@@ -14,7 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorMarshal
+      preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -33,7 +33,7 @@
   parent: RMCGearSurvivorCMBDeputy
   id: RMCGearSurvivorFiorinaRiotOfficer
   equipment:
-    jumpsuit: RMCJumpsuitUNSecurity
+    jumpsuit: RMCJumpsuitRiotControl
     back: CMSatchelSecuritySurvivorFillRiotOfficer
     outerClothing: RMCArmorPMCRiot
     head: ArmorHelmetPMCRiot
