@@ -861,7 +861,7 @@
     - id: RMCMagazineRifleL24
     - id: CMPackFlare
 
-- type: entity #Replace Medic bag with RCM medic bag and move both to the PVP varients of both bags
+- type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledEIAF
   suffix: Filled, EIAF
@@ -873,6 +873,21 @@
           
 - type: entity
   parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledEIAFSynth
+  suffix: Filled, EIAF, Synth
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: CMRollerBedSpawnFolded
+        - id: CMMultitool
+        - id: RMCCableCoil30
+        - id: CMHealthAnalyzer
+        - id: RMCSynthResetKey
+          
+- type: entity
+  parent: RMCSatchelLightpack5Slot #Replace Medic bag with RCM medic bag and move to the PVP varients of both bags
   id: RMCSatchelLightpackFilledEIAFMedic
   suffix: Filled, EIAF, Medic
   components:

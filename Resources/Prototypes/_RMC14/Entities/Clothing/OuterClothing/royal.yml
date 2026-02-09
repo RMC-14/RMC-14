@@ -188,3 +188,13 @@
     - type: Storage
       grid:
         - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCArmorEIAFSynthVest
+  id: RMCArmorEIAFSynthVestFill
+  suffix: Synth, EIAF, Synth
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCFlashlight
+        - id: CMScrewdriver

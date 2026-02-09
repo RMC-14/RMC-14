@@ -50,11 +50,11 @@
   id: RMCSpawnPointEIAFMedicalTechnician
   name: eiaf paratrooper combat medical technician spawn point
   components:
-    - type: SpawnPoint
-      job_id: RMCSurvivorEIAFCombatEngineer
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFMedicalTechnician
   layers:
-    - sprite: Sprite
-      state: surv
+  - sprite: Sprite
+    state: surv
 
 - type: jobIcon
   parent: CMJobIconBase

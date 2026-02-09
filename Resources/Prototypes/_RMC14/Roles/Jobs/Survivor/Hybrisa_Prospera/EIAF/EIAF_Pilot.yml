@@ -51,8 +51,8 @@
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFPilot
   layers:
-    - sprite: Sprite
-      state: surv
+  - sprite: Sprite
+    state: surv
 
 - type: jobIcon
   parent: CMJobIconBase

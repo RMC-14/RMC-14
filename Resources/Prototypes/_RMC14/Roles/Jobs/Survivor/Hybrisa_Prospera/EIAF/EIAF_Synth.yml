@@ -1,0 +1,85 @@
+- type: job
+  parent: RMCSurvivorEIAFBase
+  id: RMCSurvivorEIAFSupportSynthetic
+  name: rmc-job-name-eiaf-synth 
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  startingGear: RMCGearEIAFSupportSynthetic
+  icon: RMCJobIconEIAFSupportSynthetic
+  spawnMenuRoleName: EIAF Support Synthetic (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - Civilian
+            - TSE
+        - type: RMCAllowSuitStorage
+        - type: IntelRescueSurvivorObjective
+        - type: MotionDetectorTracked
+        - type: Skills
+          preset: RMCSkillPresetEIAFSynth
+        - type: DemoSpecWhitelist
+        - type: GrenadeSpecWhitelist
+        - type: ScoutWhitelist
+        - type: SniperWhitelist
+        - type: PyroWhitelist
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: synth
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_eiaf
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadEIAF
+        - type: JobPrefix
+          prefix: rmc-job-prefix-eiaf-synth
+        - type: MeleeWeapon
+          soundHit:
+            path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+            params:
+              variation: 0.15
+              volume: -1
+          angle: 30
+          animation: WeaponArcFist
+          attackRate: 1
+          damage:
+            types:
+              Blunt: 35
+        - type: Synth
+          generation: rmc-species-synth-generation-second
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearEIAFBase
+  id: RMCGearEIAFSupportSynthetic
+  equipment:
+    jumpsuit: RMCJumpsuitMarineEIAFNo8
+    back: RMCSatchelLightpackFilledEIAFSynth
+    belt: RMCL75MedicalFillEIAF
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchElectronics
+    outerClothing: RMCArmorEIAFSynthVestFill
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointEIAFSupportSynthetic
+  name: eiaf paratrooper support synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFSupportSynthetic
+  layers:
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEIAFSupportSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: eiaf_synth
+    
