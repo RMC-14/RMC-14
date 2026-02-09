@@ -1,8 +1,7 @@
 # Playing Cards - RMC14
-# Based on CMSS13 playing cards implementation
-
 - type: entity
   abstract: true
+  noSpawn: true
   parent: BaseItem
   id: RMCPlayingCardBase
   name: playing card
@@ -23,29 +22,11 @@
   id: RMCPlayingCard
   noSpawn: true
 
-# Deck of playing cards
-- type: entity
-  parent: BaseItem
-  id: RMCPlayingCardDeck
-  name: Deck of Cards
-  description: I swear the game was called Goldfish!
-  components:
-  - type: PlayingCardDeck
-    cardsRemaining: 52
-    cardPrototype: RMCPlayingCard
-  - type: Sprite
-    sprite: _RMC14/Objects/Fun/playing_cards.rsi
-    state: deck
-  - type: Item
-    size: Small
-  - type: UseDelay
-    delay: 0.5
-
 # Hand of cards
 - type: entity
   parent: BaseItem
   id: RMCPlayingCardHand
-  name: hand of cards
+  name: Hand of cards
   description: A hand of playing cards.
   noSpawn: true
   components:
@@ -62,3 +43,21 @@
     interfaces:
       enum.PlayingCardHandUi.Key:
         type: PlayingCardHandBui
+
+# Deck of cards
+- type: entity
+  parent: BaseItem
+  id: RMCPlayingCardDeck
+  name: Deck of cards
+  description: I swear the game was called Goldfish!
+  components:
+  - type: PlayingCardDeck
+    cardsRemaining: 52
+    cardPrototype: RMCPlayingCard
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: deck
+  - type: Item
+    size: Small
+  - type: UseDelay
+    delay: 0.1
