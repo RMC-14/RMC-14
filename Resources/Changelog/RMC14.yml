@@ -1,47 +1,4 @@
 ﻿Entries:
-- author: crazy1112345
-  changes:
-  - message: The D18 Hummingbird no longer mentions CLF in its description.
-    type: Tweak
-  id: 2396
-  time: '2025-10-05T03:30:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7690
-- author: Aurallianz
-  changes:
-  - message: Fixed Requisitions Echo supply drop console cooldown being too high (500
-      seconds > 300 seconds).
-    type: Fix
-  id: 2397
-  time: '2025-10-05T03:35:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8001
-- author: SharkSnake98
-  changes:
-  - message: Added Shio Royal Cigars, cigar box, and cigar tube
-    type: Add
-  - message: Added Shio Royals to the WEYA cigarette machine, WEYA Automated Storage
-      Briefcase, and loadout cigarette options
-    type: Add
-  id: 2398
-  time: '2025-10-05T03:38:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7909
-- author: Gabrote42
-  changes:
-  - message: Xenonids can no longer interact with the Orbital Bombardment Console.
-    type: Fix
-  - message: HE, Incendiary and Cluster Orbital Warheads now have descriptions.
-    type: Tweak
-  id: 2399
-  time: '2025-10-05T03:46:24.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7887
-- author: Whisper
-  changes:
-  - message: Following up on consistent issues and reports of bad faith usage, roleplaying
-      chemicals and drugs have been disabled, until they can be better designed to
-      fit RMC.
-    type: Remove
-  id: 2400
-  time: '2025-10-05T03:48:31.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7928
 - author: noctyrnal
   changes:
   - message: FTLs now get an RTO for free with their essential bundle.
@@ -4731,5 +4688,40 @@
   id: 2897
   time: '2026-02-09T05:54:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9126
+- author: Whisper
+  changes:
+  - message: New Horizon Day now appears in game.
+    type: Add
+  id: 2898
+  time: '2026-02-09T05:58:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9138
+- author: Vixting
+  changes:
+  - message: CMO now spawns with their headset
+    type: Tweak
+  id: 2899
+  time: '2026-02-09T05:57:01.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9152
+- author: CatAndHats
+  changes:
+  - message: the King's tactical map icon is no longer broken
+    type: Fix
+  id: 2900
+  time: '2026-02-09T05:57:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9156
+- author: Thereisabear
+  changes:
+  - message: Benos can now one hit more items, sod those chairs in particular.
+    type: Add
+  id: 2901
+  time: '2026-02-09T05:55:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9118
+- author: PursuitInAshes
+  changes:
+  - message: The gauss turrets in the fio scavenger ship now have the correct name
+    type: Fix
+  id: 2902
+  time: '2026-02-09T05:56:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9155
 Name: RMC14
 Order: -1
