@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Thermal tarps breaking on movement eject
-    type: Fix
-  id: 2376
-  time: '2025-09-24T09:30:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7932
 - author: BreakpointDebug1234
   changes:
   - message: Updated visuals for SGO guide
@@ -4683,5 +4676,19 @@
   id: 2878
   time: '2026-02-02T04:25:39.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9117
+- author: Dygon
+  changes:
+  - message: The medevac system cooldown now starts after you successfully grab a
+      target, instead of when you activate it.
+    type: Fix
+  - message: Fixed the medevac system sometimes grabbing a different target than the
+      one originally selected.
+    type: Fix
+  - message: Fixed the medevac stretcher sometimes playing its lift animation when
+      no medevac was in progress.
+    type: Fix
+  id: 2879
+  time: '2026-02-06T00:06:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9145
 Name: RMC14
 Order: -1
