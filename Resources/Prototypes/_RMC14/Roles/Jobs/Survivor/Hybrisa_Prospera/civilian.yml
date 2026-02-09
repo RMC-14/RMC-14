@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -59,3 +66,5 @@
     - [ RMCCoatBomber, RMCJumpsuitLiaisonPinkWorkwear, RMCShoesBrown, CMSatchelEngineer]
     - [ RMCHeadCapTruckerRed, RMCCoatBomberRed, RMCJumpsuitLiaisonGreyWorkwear, RMCShoesRed, RMCSatchelNorm]
     - [ RMCHeadBeanieTSE, RMCCoatBomberBlack, RMCJumpsuitSteward, RMCBootsRoyal, CMBackpack]
+
+

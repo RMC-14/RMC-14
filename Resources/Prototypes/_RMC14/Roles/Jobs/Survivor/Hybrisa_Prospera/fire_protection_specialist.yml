@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -56,5 +63,7 @@
     - [ RMCHeadCapCargo, CMMaskGas, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, RMCFireAxe]
     - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
     - [ RMCArmorHelmetFirefighter, RMCJumpsuitCivilian, RMCArmorFirefighter, RMCHandsCombat, RMCShoesCombat, RMCSatchelLightpack, RMCAttachmentUnderbarrelExtinguisher, CMFireExtinguisherPortable]
+
+
 
 

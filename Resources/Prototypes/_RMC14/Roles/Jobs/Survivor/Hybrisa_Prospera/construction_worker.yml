@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -56,3 +63,5 @@
     -
       - [ CMBeltUtilityFilled ]
       - [ RMCBeltHolsterNailgun ]
+
+

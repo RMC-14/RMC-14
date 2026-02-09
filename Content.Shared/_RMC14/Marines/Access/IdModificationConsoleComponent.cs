@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Robust.Shared.GameStates;
@@ -53,6 +54,9 @@ public sealed partial class IdModificationConsoleComponent : Component
 
     [DataField] [AutoNetworkedField]
     public List<IdModificationConsoleSquads>? Squads;
+
+    [DataField] [AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> TacticalMapLayers = new();
 }
 
 [Serializable] [NetSerializable]

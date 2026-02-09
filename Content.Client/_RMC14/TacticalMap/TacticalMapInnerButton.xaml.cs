@@ -15,8 +15,8 @@ public sealed partial class TacticalMapInnerButton : Button
     public static readonly Color DefaultUnhoveredColor = Color.White;
     public static readonly Color DefaultTextColor = Color.FromHex("#8AB4FF");
     public static readonly Color DefaultHoveredTextColor = Color.FromHex("#A3C5FF");
-    public static readonly Color DefaultDisabledColor = Color.White;
-    public static readonly Color DefaultDisabledTextColor = Color.FromHex("#6FB7FF");
+    public static readonly Color DefaultDisabledColor = Color.FromHex("#7D8A9A");
+    public static readonly Color DefaultDisabledTextColor = Color.FromHex("#5A6A80");
 
     private bool _initialized;
     private string? _text;
@@ -78,7 +78,19 @@ public sealed partial class TacticalMapInnerButton : Button
         if (NameScope != null)
         {
             var color = Disabled ? DisabledTextColor : (IsHovered ? HoveredTextColor : TextColor);
-            Label.SetMarkup($"[color={color.ToHex()}][bold]{LabelText ?? string.Empty}[/bold][/color]");
+            var text = LabelText ?? string.Empty;
+            if (Disabled)
+            {
+                Label.SetMarkup($"[color={color.ToHex()}]{text}[/color]");
+            }
+            else if (IsHovered)
+            {
+                Label.SetMarkup($"[color={color.ToHex()}][bold][underline]{text}[/underline][/bold][/color]");
+            }
+            else
+            {
+                Label.SetMarkup($"[color={color.ToHex()}][bold]{text}[/bold][/color]");
+            }
         }
     }
 

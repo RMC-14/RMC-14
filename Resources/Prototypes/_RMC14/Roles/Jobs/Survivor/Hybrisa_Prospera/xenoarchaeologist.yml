@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -59,3 +66,5 @@
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, CMHandsBrown, RMCShoesBrown, RMCHoodBioWeYaAlt, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCExplosivePlastic, RMCFlashlightLantern ]
     - [ RMCSatchelLightpack, RMCSuitBioWeYa, RMCHandsVeteranCBRN, RMCBootsCBRN, RMCHoodBioWeYa, RMCGlassesReagentHUDGlasses, RMCToolSpade, RMCToolSpade, RMCFlashlightLantern ]
+
+

@@ -15,10 +15,17 @@
   joinNotifyCrew: false
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor â€” PMC (Base)
+  spawnMenuRoleName: Survivor — PMC (Base)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -60,3 +67,5 @@
   id: RMCGearSurvivorPresetPMCBase
   name: pmc base survivor preset
   categories: [ HideSpawnMenu ]
+
+

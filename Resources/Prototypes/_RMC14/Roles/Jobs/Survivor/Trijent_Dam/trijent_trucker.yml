@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorTrucker
   id: CMSurvivorTrijentTrucker
   name: cm-job-name-survivor-trijent-trucker
@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
@@ -47,3 +54,5 @@
   id: RMCGearSurvivorPresetTrijentTrucker
   name: trijent trucker colonist preset
   categories: [ HideSpawnMenu ]
+
+

@@ -17,6 +17,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
@@ -93,3 +100,5 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorSecurity
+
+

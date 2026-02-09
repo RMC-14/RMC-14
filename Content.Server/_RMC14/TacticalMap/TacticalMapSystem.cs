@@ -9,6 +9,7 @@ using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Marines.Announce;
+using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Medical.Unrevivable;
@@ -16,13 +17,14 @@ using Content.Server._RMC14.Overwatch;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.Popups;
-using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Eye;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
+using Content.Shared.Ghost;
 using Content.Shared.Actions;
 using Content.Shared.Atmos.Rotting;
 using Content.Shared.Database;
@@ -40,6 +42,8 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -47,12 +51,13 @@ namespace Content.Server._RMC14.TacticalMap;
 
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
+    private static readonly ProtoId<TacticalMapLayerPrototype> GlobalMarineLayer = "Marines";
 
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly XenoEvolutionSystem _evolution = default!;
-    [Dependency] private readonly GunIFFSystem _gunIff = default!;
+    [Dependency] private readonly TacticalMapLayerAccessSystem _layerAccess = default!;
     [Dependency] private readonly MarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -63,6 +68,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly TacticalMapReplaySystem _replay = default!;
     [Dependency] private readonly XenoAnnounceSystem _xenoAnnounce = default!;
@@ -116,6 +122,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
         SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
         SubscribeLocalEvent<SquadObjectivesChangedEvent>(OnSquadObjectivesChanged);
+        SubscribeLocalEvent<TacticalMapLayerTrackedComponent, SquadMemberUpdatedEvent>(OnLayerTrackedSquadMemberUpdated);
 
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, ComponentRemove>(OnActiveRemove);
         SubscribeLocalEvent<ActiveTacticalMapTrackedComponent, EntityTerminatingEvent>(OnActiveRemove);
@@ -149,6 +156,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnUserUpdateCanvasMsg);
                 subs.Event<TacticalMapQueenEyeMoveMsg>(OnUserQueenEyeMoveMsg);
                 subs.Event<TacticalMapXenoWatchBlipMsg>(OnUserXenoWatchBlipMsg);
+                subs.Event<TacticalMapSetVisibleLayersMsg>(OnUserSetVisibleLayersMsg);
             });
 
         Subs.BuiEvents<TacticalMapComputerComponent>(TacticalMapComputerUi.Key,
@@ -159,6 +167,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapSelectLayerMsg>(OnComputerSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
                 subs.Event<TacticalMapOverwatchBlipMsg>(OnOverwatchBlipMsg);
+                subs.Event<TacticalMapSetVisibleLayersMsg>(OnComputerSetVisibleLayersMsg);
             });
 
         Subs.CVar(_config,
@@ -372,6 +381,34 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             UpdateIcon(ent);
     }
 
+    private void OnLayerTrackedSquadMemberUpdated(Entity<TacticalMapLayerTrackedComponent> ent, ref SquadMemberUpdatedEvent args)
+    {
+        if (!_squadTeamQuery.TryComp(args.Squad, out var squad) || squad.TacticalMapLayer == null)
+            return;
+
+        var changed = false;
+        var allSquadLayers = GetAllSquadLayers();
+        foreach (var layer in allSquadLayers)
+        {
+            if (ent.Comp.Layers.Remove(layer))
+                changed = true;
+        }
+
+        var squadLayer = squad.TacticalMapLayer.Value;
+        if (!ent.Comp.Layers.Contains(squadLayer))
+        {
+            ent.Comp.Layers.Add(squadLayer);
+            changed = true;
+        }
+
+        if (changed)
+        {
+            Dirty(ent);
+            if (_activeTacticalMapTrackedQuery.TryComp(ent.Owner, out var active))
+                UpdateTracked((ent.Owner, active));
+        }
+    }
+
     private void OnActiveMobStateChanged(Entity<ActiveTacticalMapTrackedComponent> ent, ref MobStateChangedEvent args)
     {
         UpdateIcon(ent);
@@ -465,13 +502,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         var squad = args.Squad;
-        foreach (var member in squad.Comp.Members)
+        var users = EntityQueryEnumerator<TacticalMapUserComponent>();
+        while (users.MoveNext(out var member, out var user))
         {
             if (!_ui.IsUiOpen(member, TacticalMapUserUi.Key))
                 continue;
 
-            if (TryComp(member, out TacticalMapUserComponent? user))
-                UpdateTacticalMapState((member, user));
+            if (!_squad.IsInSquad((member, (SquadMemberComponent?) null), squad.Owner))
+                continue;
+
+            UpdateTacticalMapState((member, user));
         }
 
         var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
@@ -507,13 +547,34 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         RefreshUserVisibleLayers(ent);
-        var visibleLayers = GetVisibleLayers(ent.Comp.VisibleLayers);
-        if (selected != null && !visibleLayers.Contains(selected.Value))
+        var options = ent.Comp.LayerOptions;
+        if (selected != null && !options.Contains(selected.Value))
             return;
 
         ent.Comp.ActiveLayer = selected;
+        ApplyVisibleLayerSelection(ent, options);
         Dirty(ent);
 
+        if (TryResolveUserMap(ent, out var map))
+            UpdateUserData(ent, map.Comp);
+    }
+
+    private void OnUserSetVisibleLayersMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapSetVisibleLayersMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        RefreshUserVisibleLayers(ent);
+        var options = ent.Comp.LayerOptions;
+        var selected = new List<ProtoId<TacticalMapLayerPrototype>>();
+        foreach (var layerId in args.LayerIds)
+        {
+            if (_prototypes.HasIndex<TacticalMapLayerPrototype>(layerId) && options.Contains(layerId))
+                selected.Add(layerId);
+        }
+
+        ent.Comp.VisibleLayers = selected;
+        ApplyVisibleLayerSelection(ent, options);
         if (TryResolveUserMap(ent, out var map))
             UpdateUserData(ent, map.Comp);
     }
@@ -540,13 +601,34 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             return;
 
         RefreshComputerVisibleLayers(ent);
-        var visibleLayers = GetVisibleLayers(ent.Comp.VisibleLayers);
-        if (selected != null && !visibleLayers.Contains(selected.Value))
+        var options = ent.Comp.LayerOptions;
+        if (selected != null && !options.Contains(selected.Value))
             return;
 
         ent.Comp.ActiveLayer = selected;
+        ApplyVisibleLayerSelection(ent, options);
         Dirty(ent);
 
+        if (TryResolveComputerMap(ent, out var map))
+            UpdateMapData(ent, map.Comp);
+    }
+
+    private void OnComputerSetVisibleLayersMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapSetVisibleLayersMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        RefreshComputerVisibleLayers(ent);
+        var options = ent.Comp.LayerOptions;
+        var selected = new List<ProtoId<TacticalMapLayerPrototype>>();
+        foreach (var layerId in args.LayerIds)
+        {
+            if (_prototypes.HasIndex<TacticalMapLayerPrototype>(layerId) && options.Contains(layerId))
+                selected.Add(layerId);
+        }
+
+        ent.Comp.VisibleLayers = selected;
+        ApplyVisibleLayerSelection(ent, options);
         if (TryResolveComputerMap(ent, out var map))
             UpdateMapData(ent, map.Comp);
     }
@@ -579,14 +661,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 return;
             }
 
-            if (!squadComp.Members.Contains(target.Value))
+            if (!_squad.IsInSquad((target.Value, (SquadMemberComponent?) null), squadEnt.Value))
             {
                 _popup.PopupCursor("That marine is not in the selected squad.", args.Actor, PopupType.MediumCaution);
                 return;
             }
         }
 
-        if (!console.ShowHidden && console.Hidden.Contains(args.Target))
+        if (!console.ShowHidden && _overwatch.IsHidden((ent.Owner, console), args.Target))
         {
             _popup.PopupCursor("That marine is hidden on the overwatch console.", args.Actor, PopupType.MediumCaution);
             return;
@@ -697,15 +779,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private void RefreshUserVisibleLayers(Entity<TacticalMapUserComponent> user)
     {
         var baseLayers = EnsureBaseLayers(user);
-        var ordered = BuildVisibleLayers(user.Owner, baseLayers, includeIff: true);
-        ApplyVisibleLayers(user, ordered);
+        var allowDefaults = !HasComp<RMCSurvivorComponent>(user.Owner);
+        var options = BuildLayerOptions(user.Owner, baseLayers, includeLayerAccess: true, includeAllSquads: false, allowDefaultVisible: allowDefaults);
+        ApplyLayerOptions(user, options);
+        ApplyVisibleLayerSelection(user, options);
     }
 
     private void RefreshComputerVisibleLayers(Entity<TacticalMapComputerComponent> computer)
     {
         var baseLayers = EnsureBaseLayers(computer);
-        var ordered = BuildVisibleLayers(computer.Owner, baseLayers, includeIff: false);
-        ApplyVisibleLayers(computer, ordered);
+        var options = BuildLayerOptions(computer.Owner, baseLayers, includeLayerAccess: false, includeAllSquads: true);
+        ApplyLayerOptions(computer, options);
+        ApplyVisibleLayerSelection(computer, options);
+        EnsureOverwatchDrawLayer(computer);
     }
 
     private IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> EnsureBaseLayers(Entity<TacticalMapUserComponent> user)
@@ -730,32 +816,100 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         return computer.Comp.BaseLayers;
     }
 
-    private List<ProtoId<TacticalMapLayerPrototype>> BuildVisibleLayers(
+    private List<ProtoId<TacticalMapLayerPrototype>> BuildLayerOptions(
         EntityUid? viewer,
         IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseLayers,
-        bool includeIff)
+        bool includeLayerAccess,
+        bool includeAllSquads,
+        bool allowDefaultVisible = true)
     {
-        var baseOrder = GetVisibleLayers(baseLayers);
+        var baseOrder = allowDefaultVisible
+            ? GetVisibleLayers(baseLayers)
+            : new List<ProtoId<TacticalMapLayerPrototype>>(baseLayers);
         var layers = new HashSet<ProtoId<TacticalMapLayerPrototype>>(baseOrder);
 
-        if (includeIff && viewer != null)
-            AddIffLayers(viewer.Value, layers);
+        if (includeLayerAccess && viewer != null)
+            AddLayerAccessLayers(viewer.Value, layers);
+
+        if (includeAllSquads)
+            AddAllSquadLayers(layers);
+        else if (viewer != null)
+            AddViewerSquadLayer(viewer.Value, layers);
 
         return OrderLayers(layers, baseOrder);
     }
 
-    private void AddIffLayers(EntityUid user, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
+    private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _layerAccessBuffer = new();
+
+    private void AddLayerAccessLayers(EntityUid user, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
     {
-        if (!_gunIff.TryGetFaction(user, out var faction))
+        if (!_layerAccess.TryGetLayers(user, _layerAccessBuffer))
             return;
 
-        foreach (var layer in _prototypes.EnumeratePrototypes<TacticalMapLayerPrototype>())
+        foreach (var layer in _layerAccessBuffer)
         {
-            if (layer.IffFactions == null || !layer.IffFactions.Contains(faction))
-                continue;
-
-            layers.Add(layer.ID);
+            layers.Add(layer);
         }
+    }
+
+    private void AddViewerSquadLayer(EntityUid viewer, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
+    {
+        if (!_squad.TryGetMemberSquad(viewer, out var squad) ||
+            !TryComp(squad, out SquadTeamComponent? squadComp) ||
+            squadComp.TacticalMapLayer == null)
+        {
+            return;
+        }
+
+        layers.Add(squadComp.TacticalMapLayer.Value);
+    }
+
+    private void AddAllSquadLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
+    {
+        var squads = EntityQueryEnumerator<SquadTeamComponent>();
+        while (squads.MoveNext(out _, out var squad))
+        {
+            if (squad.TacticalMapLayer != null)
+                layers.Add(squad.TacticalMapLayer.Value);
+        }
+    }
+
+    private HashSet<ProtoId<TacticalMapLayerPrototype>> GetAllSquadLayers()
+    {
+        var layers = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
+        AddAllSquadLayers(layers);
+        return layers;
+    }
+
+    private void EnsureOverwatchDrawLayer(Entity<TacticalMapComputerComponent> computer)
+    {
+        if (HasComp<MarineCommunicationsComputerComponent>(computer.Owner))
+            return;
+
+        if (!TryComp(computer.Owner, out OverwatchConsoleComponent? console))
+            return;
+
+        if (console.Squad is not { } squadNet ||
+            !TryGetEntity(squadNet, out var squadEnt) ||
+            !_squadTeamQuery.TryComp(squadEnt.Value, out var squadComp) ||
+            squadComp.TacticalMapLayer == null)
+        {
+            return;
+        }
+
+        var layer = squadComp.TacticalMapLayer.Value;
+        if (!computer.Comp.VisibleLayers.Contains(layer))
+        {
+            computer.Comp.VisibleLayers.Add(layer);
+            ApplyVisibleLayerSelection(computer, computer.Comp.LayerOptions);
+        }
+
+        if (computer.Comp.ActiveLayer != layer)
+        {
+            computer.Comp.ActiveLayer = layer;
+        }
+
+        Dirty(computer);
     }
 
     private List<ProtoId<TacticalMapLayerPrototype>> OrderLayers(
@@ -786,34 +940,101 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         return compare != 0 ? compare : string.CompareOrdinal(a.Id, b.Id);
     }
 
-    private void ApplyVisibleLayers(Entity<TacticalMapUserComponent> user, List<ProtoId<TacticalMapLayerPrototype>> ordered)
+    private void ApplyLayerOptions(Entity<TacticalMapUserComponent> user, List<ProtoId<TacticalMapLayerPrototype>> options)
     {
+        if (!options.SequenceEqual(user.Comp.LayerOptions))
+        {
+            user.Comp.LayerOptions = options;
+            Dirty(user);
+        }
+    }
+
+    private void ApplyLayerOptions(Entity<TacticalMapComputerComponent> computer, List<ProtoId<TacticalMapLayerPrototype>> options)
+    {
+        if (!options.SequenceEqual(computer.Comp.LayerOptions))
+        {
+            computer.Comp.LayerOptions = options;
+            Dirty(computer);
+        }
+    }
+
+    private void ApplyVisibleLayerSelection(Entity<TacticalMapUserComponent> user, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
+    {
+        var selected = user.Comp.VisibleLayers.Count == 0
+            ? new List<ProtoId<TacticalMapLayerPrototype>>(options)
+            : new List<ProtoId<TacticalMapLayerPrototype>>(user.Comp.VisibleLayers);
+
+        selected = selected.Distinct().Where(options.Contains).ToList();
+        if (selected.Count == 0 && options.Count > 0)
+            selected.Add(options[0]);
+
+        var ordered = OrderLayers(new HashSet<ProtoId<TacticalMapLayerPrototype>>(selected), options);
         if (!ordered.SequenceEqual(user.Comp.VisibleLayers))
         {
             user.Comp.VisibleLayers = ordered;
             Dirty(user);
         }
 
-        if (user.Comp.ActiveLayer != null && !user.Comp.VisibleLayers.Contains(user.Comp.ActiveLayer.Value))
-        {
-            user.Comp.ActiveLayer = null;
-            Dirty(user);
-        }
+        EnsureActiveLayer(user, options);
     }
 
-    private void ApplyVisibleLayers(Entity<TacticalMapComputerComponent> computer, List<ProtoId<TacticalMapLayerPrototype>> ordered)
+    private void ApplyVisibleLayerSelection(Entity<TacticalMapComputerComponent> computer, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
     {
+        var selected = computer.Comp.VisibleLayers.Count == 0
+            ? new List<ProtoId<TacticalMapLayerPrototype>>(options)
+            : new List<ProtoId<TacticalMapLayerPrototype>>(computer.Comp.VisibleLayers);
+
+        selected = selected.Distinct().Where(options.Contains).ToList();
+        if (selected.Count == 0 && options.Count > 0)
+            selected.Add(options[0]);
+
+        var ordered = OrderLayers(new HashSet<ProtoId<TacticalMapLayerPrototype>>(selected), options);
         if (!ordered.SequenceEqual(computer.Comp.VisibleLayers))
         {
             computer.Comp.VisibleLayers = ordered;
             Dirty(computer);
         }
 
-        if (computer.Comp.ActiveLayer != null && !computer.Comp.VisibleLayers.Contains(computer.Comp.ActiveLayer.Value))
+        EnsureActiveLayer(computer, options);
+    }
+
+    private void EnsureActiveLayer(Entity<TacticalMapUserComponent> user, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
+    {
+        if (user.Comp.ActiveLayer != null && options.Contains(user.Comp.ActiveLayer.Value))
+            return;
+
+        ProtoId<TacticalMapLayerPrototype>? fallback = null;
+        if (options.Count > 0)
+            fallback = options[0];
+
+        user.Comp.ActiveLayer = user.Comp.VisibleLayers.Count > 0
+            ? user.Comp.VisibleLayers[0]
+            : fallback;
+        Dirty(user);
+    }
+
+    private void EnsureActiveLayer(Entity<TacticalMapComputerComponent> computer, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
+    {
+        if (computer.Comp.ActiveLayer != null && options.Contains(computer.Comp.ActiveLayer.Value))
+            return;
+
+        ProtoId<TacticalMapLayerPrototype>? fallback = null;
+        if (options.Count > 0)
+            fallback = options[0];
+
+        if (HasComp<MarineCommunicationsComputerComponent>(computer.Owner) &&
+            options.Contains(GlobalMarineLayer))
         {
-            computer.Comp.ActiveLayer = null;
-            Dirty(computer);
+            computer.Comp.ActiveLayer = GlobalMarineLayer;
         }
+        else
+        {
+            computer.Comp.ActiveLayer = computer.Comp.VisibleLayers.Count > 0
+                ? computer.Comp.VisibleLayers[0]
+                : fallback;
+        }
+
+        Dirty(computer);
     }
 
     private bool TryGetSelectedLayer(string? layerId, out ProtoId<TacticalMapLayerPrototype>? selected)
@@ -827,6 +1048,39 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         selected = layerId;
         return true;
+    }
+
+    private bool TryGetDrawLayer(
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
+        ProtoId<TacticalMapLayerPrototype>? activeLayer,
+        out ProtoId<TacticalMapLayerPrototype> drawLayer)
+    {
+        if (activeLayer != null)
+        {
+            drawLayer = activeLayer.Value;
+            return true;
+        }
+
+        var fallback = GetVisibleLayers(visibleLayers);
+        if (fallback.Count == 0)
+        {
+            drawLayer = default;
+            return false;
+        }
+
+        drawLayer = fallback[0];
+        return true;
+    }
+
+    private List<ProtoId<TacticalMapLayerPrototype>> GetEffectiveVisibleLayers(
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
+        ProtoId<TacticalMapLayerPrototype>? activeLayer,
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
+    {
+        var effective = new List<ProtoId<TacticalMapLayerPrototype>>(GetVisibleLayers(visibleLayers));
+        if (activeLayer != null && options.Contains(activeLayer.Value) && !effective.Contains(activeLayer.Value))
+            effective.Add(activeLayer.Value);
+        return effective;
     }
 
     private List<TacticalMapMapInfo> BuildMapList()
@@ -901,16 +1155,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         ent.Comp.NextAnnounceAt = nextAnnounce;
         Dirty(ent);
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateCanvas(map, lines, labels, layer, user, ent.Comp.Sound);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        var updateBlips = !HasComp<MarineComponent>(user);
+        UpdateCanvas(map, lines, labels, layer, user, updateBlips, ent.Comp.Sound);
     }
 
     private void OnComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var user = args.Actor;
-        if (!HasComp<MarineCommunicationsComputerComponent>(ent.Owner))
+        var isGroundside = HasComp<MarineCommunicationsComputerComponent>(ent.Owner);
+        var isOverwatch = HasComp<OverwatchConsoleComponent>(ent.Owner);
+        if (!isGroundside && !isOverwatch)
             return;
 
         if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
@@ -926,26 +1183,29 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         var labels = args.Labels;
 
-        var time = _timing.CurTime;
-        if (time < ent.Comp.NextAnnounceAt)
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
             return;
 
-        var nextAnnounce = time + _announceCooldown;
-        ent.Comp.NextAnnounceAt = nextAnnounce;
-        Dirty(ent);
-
-        var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
-        while (computers.MoveNext(out var uid, out var computer))
+        var updateBlips = isGroundside && layer == GlobalMarineLayer;
+        var time = _timing.CurTime;
+        if (updateBlips)
         {
-            computer.LastAnnounceAt = time;
-            computer.NextAnnounceAt = nextAnnounce;
-            Dirty(uid, computer);
-        }
+            if (time < ent.Comp.NextAnnounceAt)
+                return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateCanvas(map, lines, labels, layer, user);
+            var nextAnnounce = time + _announceCooldown;
+            ent.Comp.NextAnnounceAt = nextAnnounce;
+            Dirty(ent);
+
+            var computers = EntityQueryEnumerator<TacticalMapComputerComponent>();
+            while (computers.MoveNext(out var uid, out var computer))
+            {
+                computer.LastAnnounceAt = time;
+                computer.NextAnnounceAt = nextAnnounce;
+                Dirty(uid, computer);
+            }
         }
+        UpdateCanvas(map, lines, labels, layer, user, updateBlips);
     }
 
     private void OnUserCreateLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapCreateLabelMsg args)
@@ -962,10 +1222,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
     }
 
     private void OnUserEditLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapEditLabelMsg args)
@@ -982,10 +1242,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
     }
 
     private void OnUserDeleteLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapDeleteLabelMsg args)
@@ -1002,10 +1262,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
     }
 
     private void OnUserMoveLabelMsg(Entity<TacticalMapUserComponent> ent, ref TacticalMapMoveLabelMsg args)
@@ -1022,10 +1282,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
     }
 
     private void OnComputerCreateLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapCreateLabelMsg args)
@@ -1042,10 +1302,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, args.Text, args.Color, user, LabelOperation.Create);
     }
 
     private void OnComputerEditLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapEditLabelMsg args)
@@ -1062,10 +1322,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, args.NewText, null, user, LabelOperation.Edit);
     }
 
     private void OnComputerDeleteLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapDeleteLabelMsg args)
@@ -1082,10 +1342,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateIndividualLabel(map, layer, args.Position, string.Empty, null, user, LabelOperation.Delete);
     }
 
     private void OnComputerMoveLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapMoveLabelMsg args)
@@ -1102,10 +1362,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (time < ent.Comp.NextAnnounceAt)
             return;
 
-        foreach (var layer in GetActiveLayers(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer))
-        {
-            UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
-        }
+        if (!TryGetDrawLayer(ent.Comp.VisibleLayers, ent.Comp.ActiveLayer, out var layer))
+            return;
+
+        UpdateMoveLabel(map, layer, args.OldPosition, args.NewPosition, user);
     }
 
     private enum LabelOperation
@@ -1122,6 +1382,25 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void HandleQueenEyeMove(Entity<TacticalMapUserComponent> user, EntityUid actor, Vector2i position)
     {
+        if (HasComp<GhostComponent>(actor))
+        {
+            if (!TryResolveUserMap(user, out var ghostMap) ||
+                !_mapGridQuery.TryComp(ghostMap.Owner, out var ghostGrid))
+            {
+                return;
+            }
+
+            var ghostTileCoords = new Vector2(position.X, position.Y);
+            var coords = new EntityCoordinates(ghostMap.Owner, ghostTileCoords * ghostGrid.TileSize);
+            _transform.SetCoordinates(actor, coords);
+            _transform.AttachToGridOrMap(actor);
+
+            if (TryComp(actor, out PhysicsComponent? physics))
+                _physics.SetLinearVelocity(actor, Vector2.Zero, body: physics);
+
+            return;
+        }
+
         if (!TryComp<QueenEyeActionComponent>(actor, out var queenEyeComp) ||
             queenEyeComp.Eye == null)
             return;
@@ -1158,6 +1437,30 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         _ui.TryOpenUi(computer.Owner, TacticalMapComputerUi.Key, user);
         UpdateMapData((computer, computer.Comp));
         UpdateTacticalMapComputerState((computer.Owner, computer.Comp));
+    }
+
+    public override void SetComputerDrawLayerFromSquad(EntityUid computer, EntityUid squad)
+    {
+        if (!TryComp(computer, out TacticalMapComputerComponent? mapComp))
+            return;
+
+        if (!_squadTeamQuery.TryComp(squad, out var squadComp) || squadComp.TacticalMapLayer == null)
+            return;
+
+        var layer = squadComp.TacticalMapLayer.Value;
+        if (!mapComp.LayerOptions.Contains(layer))
+            mapComp.LayerOptions.Add(layer);
+
+        if (!mapComp.VisibleLayers.Contains(layer))
+            mapComp.VisibleLayers.Add(layer);
+
+        mapComp.ActiveLayer = layer;
+        Dirty(computer, mapComp);
+
+        ApplyVisibleLayerSelection((computer, mapComp), mapComp.LayerOptions);
+
+        if (TryResolveComputerMap((computer, mapComp), out var map))
+            UpdateMapData((computer, mapComp), map.Comp);
     }
 
     private void UpdateIndividualLabel(
@@ -1427,7 +1730,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             }
         }
 
-        AddIffLayers(ent.Owner, layerIds);
+        AddLayerAccessLayers(ent.Owner, layerIds);
 
         foreach (var layerId in layerIds)
         {
@@ -1446,7 +1749,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
 
         RefreshUserVisibleLayers(user);
-        var visibleLayers = GetActiveLayers(user.Comp.VisibleLayers, user.Comp.ActiveLayer);
+        var visibleLayers = GetEffectiveVisibleLayers(user.Comp.VisibleLayers, user.Comp.ActiveLayer, user.Comp.LayerOptions);
         var blips = new Dictionary<int, TacticalMapBlip>();
 
         foreach (var layer in visibleLayers)
@@ -1485,9 +1788,32 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         lines.Lines = combinedLines;
         labels.Labels = combinedLabels;
 
+        var activeLines = EnsureComp<TacticalMapActiveLayerLinesComponent>(user);
+        var activeLabels = EnsureComp<TacticalMapActiveLayerLabelsComponent>(user);
+        var activeLayers = GetActiveLayers(visibleLayers, user.Comp.ActiveLayer);
+        var activeLayerLines = new List<TacticalMapLine>();
+        var activeLayerLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
+
+        foreach (var layer in activeLayers)
+        {
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            activeLayerLines.AddRange(layerData.Lines);
+            foreach (var (pos, label) in layerData.Labels)
+            {
+                activeLayerLabels[pos] = label;
+            }
+        }
+
+        activeLines.Lines = activeLayerLines;
+        activeLabels.Labels = activeLayerLabels;
+
         Dirty(user);
         Dirty(user, lines);
         Dirty(user, labels);
+        Dirty(user, activeLines);
+        Dirty(user, activeLabels);
     }
 
     private void FilterXenoBlipsForHive(EntityUid viewer, Dictionary<int, TacticalMapBlip> blips)
@@ -1549,27 +1875,30 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         blips[user.Id] = blip.Value;
     }
 
-    private void UpdateCanvas(Entity<TacticalMapComponent> map, List<TacticalMapLine> lines, Dictionary<Vector2i, TacticalMapLabelData> labels, ProtoId<TacticalMapLayerPrototype> layer, EntityUid user, SoundSpecifier? sound = null)
+    private void UpdateCanvas(Entity<TacticalMapComponent> map, List<TacticalMapLine> lines, Dictionary<Vector2i, TacticalMapLabelData> labels, ProtoId<TacticalMapLayerPrototype> layer, EntityUid user, bool updateBlips, SoundSpecifier? sound = null)
     {
         var layerData = EnsureLayer(map.Comp, layer);
         map.Comp.MapDirty = true;
 
         layerData.Lines = lines;
         layerData.Labels = new Dictionary<Vector2i, TacticalMapLabelData>(labels);
-        layerData.LastUpdateBlips = layerData.Blips.ToDictionary();
-
-        var snapshotLayers = ApplyLayerVisibilityRules(user, new[] { layer });
-        foreach (var extraLayer in snapshotLayers)
+        if (updateBlips)
         {
-            if (extraLayer == layer)
-                continue;
+            layerData.LastUpdateBlips = layerData.Blips.ToDictionary();
 
-            if (!map.Comp.Layers.TryGetValue(extraLayer, out var extraLayerData))
-                continue;
-
-            foreach (var blip in extraLayerData.Blips)
+            var snapshotLayers = ApplyLayerVisibilityRules(user, new[] { layer });
+            foreach (var extraLayer in snapshotLayers)
             {
-                layerData.LastUpdateBlips.TryAdd(blip.Key, blip.Value);
+                if (extraLayer == layer)
+                    continue;
+
+                if (!map.Comp.Layers.TryGetValue(extraLayer, out var extraLayerData))
+                    continue;
+
+                foreach (var blip in extraLayerData.Blips)
+                {
+                    layerData.LastUpdateBlips.TryAdd(blip.Key, blip.Value);
+                }
             }
         }
 
@@ -1601,7 +1930,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     protected override void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
         RefreshComputerVisibleLayers(computer);
-        var visibleLayers = GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer);
+        var visibleLayers = GetEffectiveVisibleLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer, computer.Comp.LayerOptions);
         var blipLayers = ApplyLayerVisibilityRules(computer.Owner, visibleLayers);
 
         var blips = new Dictionary<int, TacticalMapBlip>();
@@ -1640,8 +1969,31 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         lines.Lines = combinedLines;
         labels.Labels = combinedLabels;
 
+        var activeLines = EnsureComp<TacticalMapActiveLayerLinesComponent>(computer);
+        var activeLabels = EnsureComp<TacticalMapActiveLayerLabelsComponent>(computer);
+        var activeLayers = GetActiveLayers(visibleLayers, computer.Comp.ActiveLayer);
+        var activeLayerLines = new List<TacticalMapLine>();
+        var activeLayerLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
+
+        foreach (var layer in activeLayers)
+        {
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            activeLayerLines.AddRange(layerData.Lines);
+            foreach (var (pos, label) in layerData.Labels)
+            {
+                activeLayerLabels[pos] = label;
+            }
+        }
+
+        activeLines.Lines = activeLayerLines;
+        activeLabels.Labels = activeLayerLabels;
+
         Dirty(computer, lines);
         Dirty(computer, labels);
+        Dirty(computer, activeLines);
+        Dirty(computer, activeLabels);
     }
 
     public override void Update(float frameTime)

@@ -11,10 +11,17 @@
   icon: RMCJobIconPMCEngineer
   greeting: rmc-job-greeting-solaris-pmc-engineer
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor â€” PMC Engineer (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor — PMC Engineer (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCEngineer
     - type: RMCSurvivor
@@ -77,3 +84,5 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv_wy
+
+

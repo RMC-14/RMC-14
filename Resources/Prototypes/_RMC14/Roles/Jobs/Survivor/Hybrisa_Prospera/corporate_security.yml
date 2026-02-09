@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorGoon
   id: RMCSurvivorHybrisaCorporateSecurity
   name: rmc-job-name-pmc-corporate-goon
@@ -9,6 +9,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorGoon
     - type: EquipSurvivorPreset
@@ -54,3 +61,5 @@
     - [ RMCHeadCapWestonYamadaDark, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
     - [ RMCArmorHelmetPMCCorporateHybrisa, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]
     - [ RMCArmorHelmetPMCCorporateLeadHybrisa, RMCJumpsuitVeteranPMCHybrisaLead, CMArmorM4PMCCorporateLead ]
+
+

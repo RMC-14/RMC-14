@@ -1,5 +1,5 @@
-﻿- type: job
-  parent: CMJobBase
+- type: job
+  parent: RMCJobMarineBase
   id: CMNurse
   name: rmc-job-name-nurse
   description: rmc-job-description-nurse
@@ -25,6 +25,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [Marines]
+      visibleLayers: [Marines]
+      activeLayer: Marines
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1

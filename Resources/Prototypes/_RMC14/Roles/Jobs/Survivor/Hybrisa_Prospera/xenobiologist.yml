@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -57,4 +64,6 @@
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, CMHandsLatex, RMCLabcoat, RMCGlassesMarineRpg, RMCShoesLaceup ]
     - [ CMSatchel, RMCJumpsuitCivilianScientist, RMCHandsVeteranCBRN, RMCArmorVestCivilian, RMCGlassesReagentHUDGlasses, RMCShoesBrown, CMHeadBandTan, RMCWeaponFlamerColony ]
+
+
 

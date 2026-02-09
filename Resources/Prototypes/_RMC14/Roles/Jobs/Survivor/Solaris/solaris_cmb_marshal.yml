@@ -16,6 +16,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillPolice: 2
@@ -99,3 +106,5 @@
     job_id: CMSurvivorSolarisCMBMarshal
   - type: Sprite
     state: co_spawn
+
+

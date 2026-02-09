@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorDoctor
   id: RMCSurvivorKutjevoDoctor
   name: rmc-job-name-survivor-kutjevo-doctor
@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -54,3 +61,5 @@
   id: RMCGearSurvivorPresetKutjevoDoctor
   name: kutjevo doctor colonist preset
   categories: [ HideSpawnMenu ]
+
+

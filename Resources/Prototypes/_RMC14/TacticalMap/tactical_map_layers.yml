@@ -9,6 +9,72 @@
   iffFactions: [FactionMarine]
 
 - type: tacticalMapLayer
+  id: SquadAlpha
+  name: ui-tactical-map-layer-squad-alpha
+  logName: squad alpha
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadBravo
+  name: ui-tactical-map-layer-squad-bravo
+  logName: squad bravo
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadCharlie
+  name: ui-tactical-map-layer-squad-charlie
+  logName: squad charlie
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadDelta
+  name: ui-tactical-map-layer-squad-delta
+  logName: squad delta
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadEcho
+  name: ui-tactical-map-layer-squad-echo
+  logName: squad echo
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadFoxtrot
+  name: ui-tactical-map-layer-squad-foxtrot
+  logName: squad foxtrot
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadIntel
+  name: ui-tactical-map-layer-squad-intel
+  logName: squad intel
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadSPP
+  name: ui-tactical-map-layer-squad-spp
+  logName: squad spp
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadRoyalMarines
+  name: ui-tactical-map-layer-squad-royal-marines
+  logName: squad royal marines
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadProvost
+  name: ui-tactical-map-layer-squad-provost
+  logName: squad provost
+  sortOrder: 5
+
+- type: tacticalMapLayer
+  id: SquadFORECON
+  name: ui-tactical-map-layer-squad-forecon
+  logName: squad forecon
+  sortOrder: 5
+
+- type: tacticalMapLayer
   id: Xenos
   name: ui-tactical-map-layer-xenos
   logName: xenonid

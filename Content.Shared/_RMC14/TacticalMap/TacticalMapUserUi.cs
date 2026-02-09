@@ -29,3 +29,9 @@ public sealed class TacticalMapXenoWatchBlipMsg(NetEntity target) : BoundUserInt
 {
     public readonly NetEntity Target = target;
 }
+
+[Serializable, NetSerializable]
+public sealed class TacticalMapSetVisibleLayersMsg(List<string> layerIds) : BoundUserInterfaceMessage
+{
+    public readonly List<string> LayerIds = layerIds;
+}

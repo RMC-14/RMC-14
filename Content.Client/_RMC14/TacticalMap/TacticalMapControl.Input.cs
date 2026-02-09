@@ -71,8 +71,7 @@ public sealed partial class TacticalMapControl
     private bool HandleBlipClick(GUIBoundKeyEventArgs args)
     {
         var blipIndex = GetBlipIndexAtPosition(args.RelativePosition);
-        var allowBlipClick = !QueenEyeMode &&
-            (!Drawing || (!StraightLineMode && !SquareMode && !EraserMode && !LabelEditMode));
+        var allowBlipClick = !QueenEyeMode && !Drawing;
 
         if (blipIndex != null && _blips != null && allowBlipClick)
         {

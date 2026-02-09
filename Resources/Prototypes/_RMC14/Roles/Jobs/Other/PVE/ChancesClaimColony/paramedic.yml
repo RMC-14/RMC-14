@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorDoctor
   id: CMSurvivorChancesParamedic
   name: rmc-job-name-colonist-chances-paramedic

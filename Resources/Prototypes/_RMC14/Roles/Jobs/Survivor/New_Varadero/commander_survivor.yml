@@ -15,6 +15,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders
@@ -79,3 +86,5 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_nv_co
+
+

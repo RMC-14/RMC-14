@@ -1,4 +1,4 @@
-﻿- type: jobIcon
+- type: jobIcon
   parent: CMJobIconBase
   id: CMJobIconStaffOfficer
   icon:

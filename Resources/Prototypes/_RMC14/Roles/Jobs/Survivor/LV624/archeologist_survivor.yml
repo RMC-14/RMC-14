@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -58,3 +65,5 @@
   parent: RMCSurvivorPresetScientist
   id: RMCGearSurvivorPresetLV624Archeologist
   name: lv624 archeologist colonist preset # TODO RMC14 random research notes
+
+

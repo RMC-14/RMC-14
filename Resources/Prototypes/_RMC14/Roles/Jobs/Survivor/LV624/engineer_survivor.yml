@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -54,3 +61,5 @@
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetLV624Engineer
   name: LV624Engineer colonist preset
+
+

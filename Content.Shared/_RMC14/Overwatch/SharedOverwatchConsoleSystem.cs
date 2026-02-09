@@ -310,6 +310,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.Squad = args.Squad;
         ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
         Dirty(ent);
+
+        if (_net.IsServer && args.Squad != null && TryGetEntity(args.Squad, out var squadEnt))
+            _tacticalMap.SetComputerDrawLayerFromSquad(ent.Owner, squadEnt.Value);
     }
 
     private void OnOverwatchViewTacticalMapBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchViewTacticalMapBuiMsg args)

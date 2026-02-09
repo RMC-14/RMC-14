@@ -348,19 +348,28 @@ public sealed partial class TacticalMapControl
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
             UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
-            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
-            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
+            var staleAlpha = Math.Clamp(BlipStaleAlpha, 0f, 1f);
+            if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length &&
+                _blipEntityIds[i] == _localPlayerEntityId.Value)
+            {
+                staleAlpha = 1f;
+            }
+            var blipColor = staleAlpha >= 0.999f ? blip.Color : blip.Color.WithAlpha(blip.Color.A * staleAlpha);
+            var overlayColor = staleAlpha >= 0.999f ? Color.White : Color.White.WithAlpha(staleAlpha);
+
+            handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blipColor);
+            handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect, overlayColor);
 
             if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
                 if (_blipEntityIds[i] == _localPlayerEntityId.Value)
                 {
-                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, blip.Color);
+                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, blipColor);
                 }
             }
 
             if (blip.HiveLeader)
-                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect);
+                handle.DrawTextureRect(system.GetFrame(hiveLeaderRsi, curTime), rect, overlayColor);
 
             var defibTexture = blip.Status switch
             {
@@ -372,7 +381,7 @@ public sealed partial class TacticalMapControl
                 _ => null,
             };
             if (defibTexture != null)
-                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
+                handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect, overlayColor);
         }
     }
 

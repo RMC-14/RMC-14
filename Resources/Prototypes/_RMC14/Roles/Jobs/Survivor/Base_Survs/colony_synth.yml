@@ -19,6 +19,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -101,3 +108,5 @@
   id: RMCJobSyntheticColony
   name: rmc-playtime-tracker-job-name-survivor-synth
   isHumanoid: true
+
+

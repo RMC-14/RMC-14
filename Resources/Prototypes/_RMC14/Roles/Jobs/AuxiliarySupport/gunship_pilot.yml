@@ -1,5 +1,5 @@
-﻿- type: job
-  parent: CMJobBase
+- type: job
+  parent: RMCJobMarineBase
   id: CMPilotGunship
   name: cm-job-name-gunship-pilot
   description: cm-job-description-gunship-pilot
@@ -29,6 +29,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [Marines]
+      visibleLayers: [Marines]
+      activeLayer: Marines
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillEndurance: 1

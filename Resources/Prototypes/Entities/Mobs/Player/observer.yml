@@ -89,6 +89,7 @@
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
     visibleLayers: [Marines, Xenos]
+    liveUpdate: true
   - type: ViewIntelObjectives
   - type: VentSight
   - type: IgnoreInteractionRange

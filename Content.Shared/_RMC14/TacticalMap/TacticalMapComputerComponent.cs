@@ -22,6 +22,9 @@ public sealed partial class TacticalMapComputerComponent : Component
     public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
 
     [DataField, AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> LayerOptions = new();
+
+    [DataField, AutoNetworkedField]
     public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

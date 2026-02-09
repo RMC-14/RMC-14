@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorTrijentEngiHydro
   name: cm-job-name-survivor-trijent-engi-hydro
@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -53,3 +60,5 @@
   id: RMCGearSurvivorPresetTrijentEngiHydro
   name: hydro electric engineer colonist preset
   categories: [ HideSpawnMenu ]
+
+

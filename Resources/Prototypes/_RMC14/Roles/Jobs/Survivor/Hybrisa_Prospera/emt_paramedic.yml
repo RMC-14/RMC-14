@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -77,3 +84,5 @@
     - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
     - [ RMCJumpsuitEMTGreen, RMCHazardVestEMTGreen, RMCBeltMedicalDefibAnalyzerFilled, CMHandsLatex ]
     - [ RMCCoatParamedic, RMCJumpsuitEMT, RMCArmorHelmetParamedic, RMCBeltMedicalDefibAnalyzerFilled, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
+
+

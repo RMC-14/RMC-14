@@ -13,6 +13,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorGoonTechnician
     - type: RMCSurvivor
@@ -57,3 +64,5 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: weya_goon_engi
+
+

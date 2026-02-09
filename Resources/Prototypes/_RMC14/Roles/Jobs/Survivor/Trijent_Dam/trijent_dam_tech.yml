@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorTrijentDamTech
   name: cm-job-name-survivor-trijent-dam-tech
@@ -8,6 +8,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2
@@ -53,3 +60,5 @@
   id: RMCGearSurvivorPresetTrijentDamTech
   name: dam maintenance technician colonist preset
   categories: [ HideSpawnMenu ]
+
+

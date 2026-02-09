@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivor
   id: CMSurvivorOperationsSupervisor
   name: rmc-job-name-colonist-operations-supervisor

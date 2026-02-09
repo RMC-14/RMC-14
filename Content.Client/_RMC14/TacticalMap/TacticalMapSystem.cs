@@ -16,6 +16,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapComputerComponent, AfterAutoHandleStateEvent>(OnComputerState);
         SubscribeLocalEvent<TacticalMapLinesComponent, AfterAutoHandleStateEvent>(OnLinesState);
         SubscribeLocalEvent<TacticalMapLabelsComponent, AfterAutoHandleStateEvent>(OnLabelsState);
+        SubscribeLocalEvent<TacticalMapActiveLayerLinesComponent, AfterAutoHandleStateEvent>(OnActiveLinesState);
+        SubscribeLocalEvent<TacticalMapActiveLayerLabelsComponent, AfterAutoHandleStateEvent>(OnActiveLabelsState);
     }
 
     private void RefreshUser(EntityUid ent)
@@ -79,6 +81,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     }
 
     private void OnLabelsState(Entity<TacticalMapLabelsComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(ent))
+            RefreshUser(ent);
+
+        if (HasComp<TacticalMapComputerComponent>(ent))
+            RefreshComputer(ent);
+    }
+
+    private void OnActiveLinesState(Entity<TacticalMapActiveLayerLinesComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        if (HasComp<TacticalMapUserComponent>(ent))
+            RefreshUser(ent);
+
+        if (HasComp<TacticalMapComputerComponent>(ent))
+            RefreshComputer(ent);
+    }
+
+    private void OnActiveLabelsState(Entity<TacticalMapActiveLayerLabelsComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (HasComp<TacticalMapUserComponent>(ent))
             RefreshUser(ent);

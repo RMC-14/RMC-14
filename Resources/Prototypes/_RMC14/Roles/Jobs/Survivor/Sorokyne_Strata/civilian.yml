@@ -9,6 +9,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
@@ -101,3 +108,5 @@
     -
       - [ CMSheetMetal20, RMCMaskGasSPP ]
     tryEquipRandomOtherGear: false
+
+

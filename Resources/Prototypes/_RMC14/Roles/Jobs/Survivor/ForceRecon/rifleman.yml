@@ -7,6 +7,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -52,3 +59,5 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_rifleman
+
+

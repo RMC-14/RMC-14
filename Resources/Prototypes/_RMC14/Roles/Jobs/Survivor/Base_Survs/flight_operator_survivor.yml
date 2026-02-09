@@ -12,6 +12,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillFireman: 1
@@ -78,3 +85,5 @@
   id: RMCGearSurvivorPresetFlightOperator
   name: flight operator colonist preset
   categories: [ HideSpawnMenu ]
+
+

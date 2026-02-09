@@ -108,6 +108,24 @@ public sealed class TacticalMapSettingsManager
             },
             new TacticalMapSettingRegistration
             {
+                Key = "ObjectivesVisible",
+                Value = true,
+                PlanetId = null
+            },
+            new TacticalMapSettingRegistration
+            {
+                Key = "OverlaysVisible",
+                Value = false,
+                PlanetId = null
+            },
+            new TacticalMapSettingRegistration
+            {
+                Key = "LabelsEnabled",
+                Value = true,
+                PlanetId = null
+            },
+            new TacticalMapSettingRegistration
+            {
                 Key = "LabelMode",
                 Value = (int) TacticalMapControl.LabelMode.All,
                 PlanetId = null
@@ -345,6 +363,9 @@ public sealed class TacticalMapSettingsManager
             LineThickness = GetSettingValue<float>("LineThickness", planetId, 2.0f),
             SelectedColorIndex = GetSettingValue<int>("SelectedColorIndex", planetId, 0),
             SettingsVisible = GetSettingValue<bool>("SettingsVisible", planetId, false),
+            ObjectivesVisible = GetSettingValue<bool>("ObjectivesVisible", planetId, true),
+            OverlaysVisible = GetSettingValue<bool>("OverlaysVisible", planetId, false),
+            LabelsEnabled = GetSettingValue<bool>("LabelsEnabled", planetId, true),
             LabelMode = (TacticalMapControl.LabelMode)GetSettingValue<int>("LabelMode", planetId, (int) TacticalMapControl.LabelMode.All),
             WindowSize = new Vector2(
                 GetSettingValue<float>("WindowWidth", planetId, 1000.0f),
@@ -442,6 +463,9 @@ public sealed class TacticalMapSettingsManager
         SetSettingValue("LineThickness", settings.LineThickness, planetId);
         SetSettingValue("SelectedColorIndex", settings.SelectedColorIndex, planetId);
         SetSettingValue("SettingsVisible", settings.SettingsVisible, planetId);
+        SetSettingValue("ObjectivesVisible", settings.ObjectivesVisible, planetId);
+        SetSettingValue("OverlaysVisible", settings.OverlaysVisible, planetId);
+        SetSettingValue("LabelsEnabled", settings.LabelsEnabled, planetId);
         SetSettingValue("LabelMode", (int)settings.LabelMode, planetId);
         SetSettingValue("WindowWidth", settings.WindowSize.X, planetId);
         SetSettingValue("WindowHeight", settings.WindowSize.Y, planetId);
@@ -604,7 +628,40 @@ public struct TacticalMapSettings()
     public float LineThickness;
     public int SelectedColorIndex;
     public bool SettingsVisible;
+    public bool ObjectivesVisible;
+    public bool OverlaysVisible;
+    public bool LabelsEnabled;
     public TacticalMapControl.LabelMode LabelMode = TacticalMapControl.LabelMode.All;
     public Vector2 WindowSize;
     public Vector2 WindowPosition;
+
+    public bool NearlyEquals(TacticalMapSettings other, float epsilon = 0.001f)
+    {
+        if (MathF.Abs(ZoomFactor - other.ZoomFactor) > epsilon)
+            return false;
+        if ((PanOffset - other.PanOffset).LengthSquared() > epsilon * epsilon)
+            return false;
+        if (MathF.Abs(BlipSizeMultiplier - other.BlipSizeMultiplier) > epsilon)
+            return false;
+        if (MathF.Abs(LineThickness - other.LineThickness) > epsilon)
+            return false;
+        if (SelectedColorIndex != other.SelectedColorIndex)
+            return false;
+        if (SettingsVisible != other.SettingsVisible)
+            return false;
+        if (ObjectivesVisible != other.ObjectivesVisible)
+            return false;
+        if (OverlaysVisible != other.OverlaysVisible)
+            return false;
+        if (LabelsEnabled != other.LabelsEnabled)
+            return false;
+        if (LabelMode != other.LabelMode)
+            return false;
+        if ((WindowSize - other.WindowSize).LengthSquared() > epsilon * epsilon)
+            return false;
+        if ((WindowPosition - other.WindowPosition).LengthSquared() > epsilon * epsilon)
+            return false;
+
+        return true;
+    }
 }

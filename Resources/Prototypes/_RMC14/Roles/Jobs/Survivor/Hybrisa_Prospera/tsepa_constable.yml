@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: RMCSurvivorHybrisaTSEPAConstable
   name: rmc-job-name-tsepa-constable
@@ -23,6 +23,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
@@ -64,3 +71,5 @@
     - [ RMCHeadCapTSEPAPeaked, RMCCoatTSEPAHighVis, RMCPouchMagazineFilledMP5, WeaponSMGMP5, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGoldSilver, RMCCoatTSEPAHighVisVest, RMCPouchShotgunFilledConstable, RMCWeaponShotgunHG3712, RMCHandsCombat ]
     - [ RMCHeadCapTSEPAPeakedGold, RMCCoatTSEPAFormal, RMCPouchShotgunFilledConstable, RMCHandsCombat ]
+
+

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   id: CMSeniorEnlistedAdvisor
   name: cm-job-name-senior-enlisted-advisor
   description: cm-job-description-senior-enlisted-advisor
@@ -47,6 +47,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [Marines]
+      visibleLayers: [Marines]
+      activeLayer: Marines
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 2

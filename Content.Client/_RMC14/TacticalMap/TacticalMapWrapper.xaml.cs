@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Areas;
@@ -8,6 +9,7 @@ using Content.Shared._RMC14.OrbitalCannon;
 using Content.Shared._RMC14.Mortar;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Xenonids.Eye;
+using Content.Shared.Ghost;
 using Content.Shared.Administration;
 using Content.Shared.Explosion.Components;
 using Content.Shared.Ghost;
@@ -71,6 +73,12 @@ public sealed partial class TacticalMapWrapper : Control
     private const int DefaultMortarMaxRange = 65;
     private const float DefaultHiveCoreRangeTiles = 11.848f;
     private const float DefaultHivePylonRangeTiles = 8.463f;
+    private const float BlipStaleFadeStartSeconds = 60f;
+    private const float BlipStaleFadeEndSeconds = 300f;
+    private const float BlipStaleMinAlpha = 0.35f;
+    private const float UpdateFeedbackSeconds = 1.2f;
+    private const float LayerVisibilityButtonMinWidth = 80f;
+    private static readonly ProtoId<TacticalMapLayerPrototype> GlobalMarineLayer = "Marines";
 
     private static readonly Color CrtTintColor = Color.FromHex("#0B1B2E").WithAlpha(0.08f);
     private static readonly Color CrtMinorGridColor = Color.FromHex("#2C4F7B").WithAlpha(0.07f);
@@ -83,6 +91,7 @@ public sealed partial class TacticalMapWrapper : Control
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;
@@ -90,6 +99,7 @@ public sealed partial class TacticalMapWrapper : Control
     public Action<Vector2i>? OnQueenEyeMove;
     public event Action<NetEntity>? MapSelected;
     public event Action<ProtoId<TacticalMapLayerPrototype>?>? LayerSelected;
+    public event Action<IReadOnlyList<ProtoId<TacticalMapLayerPrototype>>>? VisibleLayersChanged;
     public event Action? PopoutRequested;
     public event Action? CloseRequested;
 
@@ -137,14 +147,36 @@ public sealed partial class TacticalMapWrapper : Control
     private bool _mapIdSet = false;
     private bool _suppressMapSelection;
     private bool _suppressLayerSelection;
+    private bool _suppressLayerVisibilitySelection;
+    private bool _canDraw;
+    private bool _focusModeEnabled;
+    private bool _focusHovered = true;
+    private bool _layerVisibilityExpanded;
+    private string _layerVisibilitySummary = string.Empty;
+    private Thickness _rootMarginDefault;
+    private Thickness _mapMarginDefault;
+    private const float FocusHoverGrace = 12f;
+
+    private readonly List<ProtoId<TacticalMapLayerPrototype>> _availableLayers = new();
+    private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _visibleLayerSet = new();
+    private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastDrawLayers = new();
+    private readonly Dictionary<ProtoId<TacticalMapLayerPrototype>, TacticalMapButton> _layerVisibilityButtons = new();
+    private ProtoId<TacticalMapLayerPrototype>? _lastActiveLayer;
+
+    private bool _blipStaleEnabled;
+    private TimeSpan _blipStaleSince;
+    private float _blipStaleAlpha = 1f;
 
     private float _currentBlipSizeMultiplier = 0.9f;
     private float _currentLineThickness = 2.0f;
     private int _currentSelectedColorIndex = 0;
+    private bool _colorSelected;
+    private bool _drawingEnabled;
     private float _currentZoomFactor = 1.0f;
     private Vector2 _currentPanOffset = Vector2.Zero;
     private TacticalMapContextPopup? _contextPopup;
     private TacticalMapOverlayLegendPopup? _overlayLegendPopup;
+    private TimeSpan _updateFeedbackUntil = TimeSpan.Zero;
     private Vector2i? _enteredCoordinates;
     private Vector2i? _coordinateOffset;
     private bool _crtEffectEnabled = true;
@@ -154,6 +186,7 @@ public sealed partial class TacticalMapWrapper : Control
     private bool _roof2OverlayEnabled;
     private bool _roof3OverlayEnabled;
     private bool _roof4OverlayEnabled;
+    private bool _canvasDirty;
 
     public TacticalMapWrapper()
     {
@@ -177,6 +210,8 @@ public sealed partial class TacticalMapWrapper : Control
 
         UpdatePlayerFollowing(args.DeltaSeconds);
         UpdateCooldownBar();
+        UpdateBlipStaleAlpha();
+        UpdateFocusHoverState();
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -195,6 +230,9 @@ public sealed partial class TacticalMapWrapper : Control
             LineThickness = _currentLineThickness,
             SelectedColorIndex = _currentSelectedColorIndex,
             SettingsVisible = _settingsVisible,
+            ObjectivesVisible = _objectivesVisible,
+            OverlaysVisible = _overlaysVisible,
+            LabelsEnabled = _labelsEnabled,
             LabelMode = _currentLabelState,
             WindowSize = Vector2.Zero,
             WindowPosition = Vector2.Zero
@@ -292,21 +330,34 @@ public sealed partial class TacticalMapWrapper : Control
 
             if (settings.SelectedColorIndex >= 0 && settings.SelectedColorIndex < _colors.Count)
             {
-                SelectColorButton(settings.SelectedColorIndex);
+                _currentSelectedColorIndex = settings.SelectedColorIndex;
+                Canvas.Color = _colors[settings.SelectedColorIndex].Color;
             }
+            _colorSelected = false;
+            _drawingEnabled = false;
+            _canvasDirty = false;
+            UpdateColorButtonAppearance();
+            UpdateCanvasDrawingState();
 
             _settingsVisible = settings.SettingsVisible;
             UpdateSettingsVisibility();
 
+            _objectivesVisible = settings.ObjectivesVisible;
+            ObjectivesList.Visible = _objectivesVisible;
+            SetObjectivesToggleText();
+
+            _overlaysVisible = settings.OverlaysVisible;
+            UpdateOverlayVisibility();
+
             if (settings.LabelMode == TacticalMapControl.LabelMode.None)
             {
-                _currentLabelState = TacticalMapControl.LabelMode.All;
                 _labelsEnabled = false;
+                _currentLabelState = TacticalMapControl.LabelMode.All;
                 ApplyLabelMode();
             }
             else
             {
-                _labelsEnabled = true;
+                _labelsEnabled = settings.LabelsEnabled;
                 SetLabelState(settings.LabelMode, saveToConfig: false);
             }
 
@@ -326,7 +377,15 @@ public sealed partial class TacticalMapWrapper : Control
         UpdateCanvasButton.Button.OnPressed += _ => {
             Dictionary<Vector2i, TacticalMapLabelData> canvasLabels = new(Canvas.TacticalLabels);
             sendMessage(new TacticalMapUpdateCanvasMsg(Canvas.Lines, canvasLabels));
+            NotifyCanvasUpdated();
         };
+    }
+
+    public void NotifyCanvasUpdated()
+    {
+        var time = IoCManager.Resolve<IGameTiming>();
+        _updateFeedbackUntil = time.CurTime + TimeSpan.FromSeconds(UpdateFeedbackSeconds);
+        MarkCanvasSynced();
     }
 
     public void UpdateTexture(Entity<AreaGridComponent> grid)
@@ -358,7 +417,7 @@ public sealed partial class TacticalMapWrapper : Control
                 selectedId = i;
         }
 
-        MapSelectionRow.Visible = maps.Count > 0;
+        MapSelectionRow.Visible = maps.Count > 1;
         MapSelectButton.Disabled = maps.Count <= 1;
 
         if (maps.Count > 0)
@@ -371,7 +430,8 @@ public sealed partial class TacticalMapWrapper : Control
     {
         ObjectivesList.DisposeAllChildren();
 
-        if (objectives.Count == 0)
+        var hasAnyObjective = objectives.Any(pair => !string.IsNullOrWhiteSpace(pair.Value));
+        if (objectives.Count == 0 || !hasAnyObjective)
         {
             ObjectivesContainer.Visible = false;
             return;
@@ -420,10 +480,25 @@ public sealed partial class TacticalMapWrapper : Control
         SetButtonText(ObjectivesToggleButton, text, DefaultButtonTextColor);
     }
 
-    public void UpdateLayerList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, ProtoId<TacticalMapLayerPrototype>? activeLayer)
+    public void UpdateDrawLayerList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, ProtoId<TacticalMapLayerPrototype>? activeLayer)
     {
+        _lastDrawLayers.Clear();
+        _lastDrawLayers.AddRange(layers);
+        var activeChanged = _lastActiveLayer != activeLayer;
+        _lastActiveLayer = activeLayer;
+        if (activeChanged)
+            MarkCanvasSynced();
+
         _suppressLayerSelection = true;
         LayerSelectButton.Clear();
+        UpdateActiveLayerIndicator(layers, activeLayer);
+
+        if (!_canDraw || layers.Count == 0)
+        {
+            LayerSelectionRow.Visible = false;
+            _suppressLayerSelection = false;
+            return;
+        }
 
         if (layers.Count <= 1)
         {
@@ -437,6 +512,36 @@ public sealed partial class TacticalMapWrapper : Control
         var selectedId = 0;
         var id = 0;
 
+        foreach (var layer in layers)
+        {
+            LayerSelectButton.AddItem(GetLayerName(layer), id);
+            LayerSelectButton.SetItemMetadata(id, layer);
+            if (activeLayer == layer)
+                selectedId = id;
+            id++;
+        }
+
+        LayerSelectButton.SelectId(selectedId);
+        _suppressLayerSelection = false;
+    }
+
+    public void UpdateLayerList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, ProtoId<TacticalMapLayerPrototype>? activeLayer)
+    {
+        _suppressLayerSelection = true;
+        LayerSelectButton.Clear();
+        UpdateActiveLayerIndicator(layers, activeLayer);
+
+        if (layers.Count <= 1)
+        {
+            LayerSelectionRow.Visible = false;
+            _suppressLayerSelection = false;
+            return;
+        }
+
+        LayerSelectionRow.Visible = true;
+
+        var selectedId = 0;
+        var id = 0;
         LayerSelectButton.AddItem(Loc.GetString("ui-tactical-map-layer-all"), id);
         id++;
 
@@ -451,6 +556,88 @@ public sealed partial class TacticalMapWrapper : Control
 
         LayerSelectButton.SelectId(selectedId);
         _suppressLayerSelection = false;
+    }
+
+    public void UpdateLayerVisibilityList(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
+    {
+        var incomingLayers = layers.ToList();
+        var wasExpanded = _layerVisibilityExpanded || LayerVisibilityGrid.Visible;
+        var sameLayerList = _availableLayers.Count == incomingLayers.Count;
+        if (sameLayerList)
+        {
+            for (var i = 0; i < incomingLayers.Count; i++)
+            {
+                if (_availableLayers[i] != incomingLayers[i])
+                {
+                    sameLayerList = false;
+                    break;
+                }
+            }
+        }
+
+        _availableLayers.Clear();
+        _availableLayers.AddRange(incomingLayers);
+        _visibleLayerSet.Clear();
+        foreach (var layer in visibleLayers)
+        {
+            _visibleLayerSet.Add(layer);
+        }
+
+        _suppressLayerVisibilitySelection = true;
+        if (!sameLayerList)
+        {
+            LayerVisibilityGrid.RemoveAllChildren();
+            _layerVisibilityButtons.Clear();
+        }
+
+        if (incomingLayers.Count <= 1)
+        {
+            LayerVisibilityContainer.Visible = false;
+            UpdateLayerVisibilityToggle();
+            _suppressLayerVisibilitySelection = false;
+            return;
+        }
+
+        LayerVisibilityContainer.Visible = true;
+        _layerVisibilityExpanded = wasExpanded;
+
+        var summary = Loc.GetString("ui-tactical-map-layer-visibility-summary",
+            ("selected", _visibleLayerSet.Count),
+            ("total", incomingLayers.Count));
+        _layerVisibilitySummary = summary;
+        UpdateLayerVisibilityColumns();
+
+        foreach (var layer in incomingLayers)
+        {
+            if (!_layerVisibilityButtons.TryGetValue(layer, out var button))
+            {
+                button = new TacticalMapButton
+                {
+                    MinHeight = 20,
+                    MinWidth = LayerVisibilityButtonMinWidth
+                };
+
+                button.Button.OnPressed += _ =>
+                {
+                    if (_suppressLayerVisibilitySelection)
+                        return;
+
+                    ToggleVisibleLayer(layer);
+                };
+
+                _layerVisibilityButtons[layer] = button;
+                LayerVisibilityGrid.AddChild(button);
+            }
+
+            var selected = _visibleLayerSet.Contains(layer);
+            var prefix = selected ? "✓ " : "• ";
+            var text = prefix + GetLayerName(layer);
+            var color = selected ? Color.Green : DefaultButtonTextColor;
+            SetButtonText(button, text, color);
+        }
+
+        UpdateLayerVisibilityToggle();
+        _suppressLayerVisibilitySelection = false;
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)
@@ -483,13 +670,21 @@ public sealed partial class TacticalMapWrapper : Control
         Canvas.LineLimit = limit;
     }
 
+    public void SetBlipStaleState(bool enabled, TimeSpan lastUpdateAt)
+    {
+        _blipStaleEnabled = enabled;
+        _blipStaleSince = lastUpdateAt;
+    }
+
     public void SetCanvasAccess(bool canDraw)
     {
-        CanvasToolsContainer.Visible = canDraw;
-        Canvas.Visible = canDraw;
-        Map.Visible = !canDraw;
-        Canvas.Drawing = canDraw;
-        Map.Drawing = false;
+        _canDraw = canDraw;
+        if (!canDraw)
+            _canvasDirty = false;
+        UpdateCanvasDrawingState();
+        ApplyFocusVisibility();
+        if (_lastDrawLayers.Count > 0)
+            UpdateDrawLayerList(_lastDrawLayers, _lastActiveLayer);
     }
 
     public void OnUserInteraction()
@@ -507,6 +702,7 @@ public sealed partial class TacticalMapWrapper : Control
         ClearCanvasButton.Button.OnPressed += _ => {
             Canvas.Lines.Clear();
             Canvas.LineThicknesses.Clear();
+            MarkCanvasDirty();
         };
         UndoButton.Button.OnPressed += _ => OnUndoPressed();
         Canvas.Color = Color.Black;
@@ -516,6 +712,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         SetupMapSelector();
         SetupLayerSelector();
+        SetupLayerVisibilitySelector();
         SetupColorButtons();
         SetupAreaLabels();
         SetupBlipSize();
@@ -533,6 +730,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         FollowPlayerButton.Button.OnPressed += _ => ToggleFollowPlayer();
         ResetViewButton.Button.OnPressed += _ => ResetView();
+        FocusModeButton.Button.OnPressed += _ => ToggleFocusMode();
         PopoutButton.Button.OnPressed += _ => PopoutRequested?.Invoke();
         CloseButton.Button.OnPressed += _ => CloseRequested?.Invoke();
         PopoutButton.BorderThickness = new Thickness(0);
@@ -540,7 +738,11 @@ public sealed partial class TacticalMapWrapper : Control
         ObjectivesToggleButton.Button.OnPressed += _ => ToggleObjectivesVisibility();
 
         Map.OnUserInteraction += OnUserInteraction;
-        Canvas.OnUserInteraction += OnUserInteraction;
+        Canvas.OnUserInteraction += () =>
+        {
+            OnUserInteraction();
+            MarkCanvasDirty();
+        };
         Map.OnContextMenuRequested += OnContextMenuRequested;
         Canvas.OnContextMenuRequested += OnContextMenuRequested;
 
@@ -553,6 +755,10 @@ public sealed partial class TacticalMapWrapper : Control
             _currentZoomFactor = zoom;
             _currentPanOffset = pan;
         });
+
+        _rootMarginDefault = RootContainer.Margin;
+        _mapMarginDefault = MapContainer.Margin;
+        UpdateFocusModeButton();
     }
 
     private void SetupQueenEyeMode()
@@ -572,6 +778,7 @@ public sealed partial class TacticalMapWrapper : Control
             var labelData = new TacticalMapLabelData(text, _colors[_currentSelectedColorIndex].Color);
             Canvas.TacticalLabels[position] = labelData;
             Map.TacticalLabels[position] = labelData;
+            MarkCanvasDirty();
         };
 
         Map.OnEditLabel += (position, text) => {
@@ -588,6 +795,7 @@ public sealed partial class TacticalMapWrapper : Control
             var labelData = new TacticalMapLabelData(text, color);
             Canvas.TacticalLabels[position] = labelData;
             Map.TacticalLabels[position] = labelData;
+            MarkCanvasDirty();
         };
 
         Map.OnDeleteLabel += position => {
@@ -597,6 +805,7 @@ public sealed partial class TacticalMapWrapper : Control
         Canvas.OnDeleteLabel += position => {
             Canvas.TacticalLabels.Remove(position);
             Map.TacticalLabels.Remove(position);
+            MarkCanvasDirty();
         };
 
         Map.OnMoveLabel += (oldPos, newPos) => {
@@ -614,6 +823,7 @@ public sealed partial class TacticalMapWrapper : Control
                 Canvas.TacticalLabels[newPos] = data;
                 Map.TacticalLabels.Remove(oldPos);
                 Map.TacticalLabels[newPos] = data;
+                MarkCanvasDirty();
             }
         };
 
@@ -648,12 +858,195 @@ public sealed partial class TacticalMapWrapper : Control
         };
     }
 
+    private void SetupLayerVisibilitySelector()
+    {
+        LayerVisibilityToggleButton.Button.OnPressed += _ =>
+        {
+            _layerVisibilityExpanded = !_layerVisibilityExpanded;
+            UpdateLayerVisibilityToggle();
+        };
+    }
+
+    private void ToggleVisibleLayer(ProtoId<TacticalMapLayerPrototype> layer)
+    {
+        _layerVisibilityExpanded = true;
+        if (_visibleLayerSet.Contains(layer))
+        {
+            if (_visibleLayerSet.Count <= 1)
+                return;
+
+            _visibleLayerSet.Remove(layer);
+        }
+        else
+        {
+            _visibleLayerSet.Add(layer);
+        }
+
+        UpdateLayerVisibilityList(_availableLayers, _visibleLayerSet.ToList());
+        VisibleLayersChanged?.Invoke(_visibleLayerSet.ToList());
+    }
+
+    private void UpdateLayerVisibilityToggle()
+    {
+        LayerVisibilityGrid.Visible = _layerVisibilityExpanded;
+        var actionText = _layerVisibilityExpanded
+            ? Loc.GetString("ui-tactical-map-layer-visibility-hide")
+            : Loc.GetString("ui-tactical-map-layer-visibility-show");
+        var text = string.IsNullOrWhiteSpace(_layerVisibilitySummary)
+            ? actionText
+            : $"{_layerVisibilitySummary} {actionText}";
+        SetButtonText(LayerVisibilityToggleButton, text, DefaultButtonTextColor);
+    }
+
+    private void UpdateLayerVisibilityColumns()
+    {
+        var availableWidth = LayerVisibilityContainer.Width;
+        var columns = 3;
+        if (availableWidth > 0f)
+        {
+            const float separation = 4f;
+            var cellWidth = LayerVisibilityButtonMinWidth + separation;
+            columns = Math.Clamp((int)MathF.Floor((availableWidth + separation) / cellWidth), 2, 6);
+        }
+
+        LayerVisibilityGrid.Columns = columns;
+    }
+
+    private void ToggleFocusMode()
+    {
+        _focusModeEnabled = !_focusModeEnabled;
+        UpdateFocusModeButton();
+        if (_focusModeEnabled)
+            UpdateFocusHoverState();
+        else
+            ApplyFocusVisibility();
+    }
+
+    private void UpdateFocusModeButton()
+    {
+        var color = _focusModeEnabled ? Color.Green : DefaultButtonTextColor;
+        SetButtonText(FocusModeButton, Loc.GetString("ui-tactical-map-focus-button"), color);
+    }
+
+    private void ApplyFocusVisibility()
+    {
+        var showUi = !_focusModeEnabled || _focusHovered;
+        HeaderContainer.Visible = showUi;
+        CanvasToolsContainer.Visible = showUi && _canDraw;
+        RootContainer.Margin = showUi ? _rootMarginDefault : new Thickness(0);
+        MapContainer.Margin = showUi ? _mapMarginDefault : new Thickness(0);
+    }
+
+    private void UpdateCanvasDrawingState()
+    {
+        if (!_canDraw)
+        {
+            Canvas.Visible = false;
+            Map.Visible = true;
+            Canvas.Drawing = false;
+            Map.Drawing = false;
+            return;
+        }
+
+        var showCanvas = _drawingEnabled || _canvasDirty || _currentDrawingMode == DrawingMode.LabelEdit;
+        Canvas.Visible = showCanvas;
+        Map.Visible = !showCanvas;
+        Canvas.Drawing = _drawingEnabled;
+        Map.Drawing = false;
+    }
+
+    private void MarkCanvasDirty()
+    {
+        if (!_canDraw)
+            return;
+
+        if (_canvasDirty)
+            return;
+
+        _canvasDirty = true;
+        UpdateCanvasDrawingState();
+    }
+
+    public void MarkCanvasSynced()
+    {
+        if (!_canvasDirty)
+            return;
+
+        _canvasDirty = false;
+        UpdateCanvasDrawingState();
+    }
+
+    public bool CanApplyCanvasSnapshot()
+    {
+        return !_canvasDirty;
+    }
+
+    private void UpdateFocusHoverState()
+    {
+        if (!_focusModeEnabled)
+            return;
+
+        var mousePos = _uiManager.MousePositionScaled.Position;
+        var rect = RootContainer.GlobalRect;
+
+        var dx = 0f;
+        if (mousePos.X < rect.Left)
+            dx = rect.Left - mousePos.X;
+        else if (mousePos.X > rect.Right)
+            dx = mousePos.X - rect.Right;
+
+        var dy = 0f;
+        if (mousePos.Y < rect.Top)
+            dy = rect.Top - mousePos.Y;
+        else if (mousePos.Y > rect.Bottom)
+            dy = mousePos.Y - rect.Bottom;
+
+        var distance = MathF.Sqrt(dx * dx + dy * dy);
+        var nowHovered = distance <= FocusHoverGrace;
+
+        if (nowHovered == _focusHovered)
+            return;
+
+        _focusHovered = nowHovered;
+        ApplyFocusVisibility();
+    }
+
+    private static bool IsDescendantOf(Control? control, Control ancestor)
+    {
+        for (var current = control; current != null; current = current.Parent)
+        {
+            if (current == ancestor)
+                return true;
+        }
+
+        return false;
+    }
+
     private string GetLayerName(ProtoId<TacticalMapLayerPrototype> layer)
     {
         if (_prototypes.TryIndex(layer, out var prototype))
             return Loc.GetString(prototype.Name);
 
         return layer.Id;
+    }
+
+    private void UpdateActiveLayerIndicator(
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers,
+        ProtoId<TacticalMapLayerPrototype>? activeLayer)
+    {
+        ProtoId<TacticalMapLayerPrototype>? displayLayer = activeLayer;
+        if (displayLayer == null && layers.Count > 0)
+            displayLayer = layers[0];
+
+        if (displayLayer == null)
+        {
+            ActiveLayerRow.Visible = false;
+            return;
+        }
+
+        ActiveLayerRow.Visible = true;
+        ActiveLayerLabel.Text = Loc.GetString("ui-tactical-map-layer-viewing",
+            ("layer", GetLayerName(displayLayer.Value)));
     }
 
     private void SetupColorButtons()
@@ -669,8 +1062,8 @@ public sealed partial class TacticalMapWrapper : Control
 
             var button = new TacticalMapButton
             {
-                MinSize = new Vector2(26, 26),
-                MaxSize = new Vector2(26, 26),
+                MinSize = new Vector2(22, 22),
+                MaxSize = new Vector2(22, 22),
                 Margin = new Thickness(2),
                 Text = string.Empty,
             };
@@ -685,7 +1078,9 @@ public sealed partial class TacticalMapWrapper : Control
             ColorButtonsContainer.AddChild(button);
         }
 
-        SelectColorButton(0);
+        _colorSelected = false;
+        _drawingEnabled = false;
+        UpdateColorButtonAppearance();
     }
 
     private void SelectColorButton(int index)
@@ -693,13 +1088,27 @@ public sealed partial class TacticalMapWrapper : Control
         if (index < 0 || index >= _colors.Count || index >= _colorButtons.Count)
             return;
 
-        _currentSelectedColorIndex = index;
-        Canvas.Color = _colors[index].Color;
-        Color defaultBorder = Color.FromHex("#2C3440");
+        if (_colorSelected && _currentSelectedColorIndex == index)
+        {
+            _drawingEnabled = !_drawingEnabled;
+            UpdateCanvasDrawingState();
+            return;
+        }
 
+        _currentSelectedColorIndex = index;
+        _colorSelected = true;
+        _drawingEnabled = true;
+        Canvas.Color = _colors[index].Color;
+        UpdateColorButtonAppearance();
+        UpdateCanvasDrawingState();
+    }
+
+    private void UpdateColorButtonAppearance()
+    {
+        Color defaultBorder = Color.FromHex("#2C3440");
         for (int i = 0; i < _colorButtons.Count; i++)
         {
-            bool selected = i == index;
+            bool selected = _drawingEnabled && _colorSelected && i == _currentSelectedColorIndex;
             _colorButtons[i].BorderColor = selected ? Color.White : defaultBorder;
         }
     }
@@ -1255,6 +1664,7 @@ public sealed partial class TacticalMapWrapper : Control
 
         ApplyDrawingMode();
         UpdateDrawingModeAppearance();
+        UpdateCanvasDrawingState();
     }
 
     private void ApplyDrawingMode()
@@ -1336,6 +1746,7 @@ public sealed partial class TacticalMapWrapper : Control
             Canvas.Lines.RemoveAt(Canvas.Lines.Count - 1);
             if (Canvas.LineThicknesses.Count > 0)
                 Canvas.LineThicknesses.RemoveAt(Canvas.LineThicknesses.Count - 1);
+            MarkCanvasDirty();
         }
     }
 
@@ -1603,11 +2014,22 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void UpdateCooldownBar()
     {
+        if (!_canDraw || !IsGlobalDrawLayer())
+        {
+            if (UpdateUpdateFeedback())
+                return;
+            UpdateCanvasButton.Disabled = false;
+            CooldownBar.Visible = false;
+            return;
+        }
+
         IGameTiming time = IoCManager.Resolve<IGameTiming>();
         TimeSpan cooldown = NextUpdateAt - time.CurTime;
 
         if (cooldown < TimeSpan.Zero)
         {
+            if (UpdateUpdateFeedback())
+                return;
             UpdateCanvasButton.Disabled = false;
             CooldownBar.Visible = false;
             return;
@@ -1621,9 +2043,70 @@ public sealed partial class TacticalMapWrapper : Control
         CooldownLabel.Text = Loc.GetString("ui-tactical-map-cooldown-seconds", ("seconds", (int)cooldown.TotalSeconds));
     }
 
+    private bool UpdateUpdateFeedback()
+    {
+        if (_updateFeedbackUntil == TimeSpan.Zero)
+            return false;
+
+        var time = IoCManager.Resolve<IGameTiming>();
+        if (time.CurTime >= _updateFeedbackUntil)
+        {
+            _updateFeedbackUntil = TimeSpan.Zero;
+            return false;
+        }
+
+        CooldownBar.Visible = true;
+        CooldownBar.MinValue = 0f;
+        CooldownBar.MaxValue = UpdateFeedbackSeconds;
+        var remaining = (float)(_updateFeedbackUntil - time.CurTime).TotalSeconds;
+        CooldownBar.Value = remaining;
+        CooldownLabel.Text = Loc.GetString("ui-tactical-map-updated");
+        UpdateCanvasButton.Disabled = false;
+        return true;
+    }
+
+    private bool IsGlobalDrawLayer()
+    {
+        ProtoId<TacticalMapLayerPrototype>? layer = _lastActiveLayer;
+        if (layer == null && _lastDrawLayers.Count > 0)
+            layer = _lastDrawLayers[0];
+
+        return layer != null && layer.Value == GlobalMarineLayer;
+    }
+
+    private void UpdateBlipStaleAlpha()
+    {
+        float alpha = 1f;
+
+        if (_blipStaleEnabled)
+        {
+            IGameTiming time = IoCManager.Resolve<IGameTiming>();
+            var ageSeconds = MathF.Max(0f, (float)(time.CurTime - _blipStaleSince).TotalSeconds);
+
+            if (ageSeconds <= BlipStaleFadeStartSeconds)
+                alpha = 1f;
+            else if (ageSeconds >= BlipStaleFadeEndSeconds)
+                alpha = BlipStaleMinAlpha;
+            else
+            {
+                var t = (ageSeconds - BlipStaleFadeStartSeconds) / (BlipStaleFadeEndSeconds - BlipStaleFadeStartSeconds);
+                alpha = 1f - (1f - BlipStaleMinAlpha) * t;
+            }
+        }
+
+        if (MathF.Abs(alpha - _blipStaleAlpha) < 0.01f)
+            return;
+
+        _blipStaleAlpha = alpha;
+        Map.BlipStaleAlpha = alpha;
+        Canvas.BlipStaleAlpha = alpha;
+    }
+
     private void DrawCrtOverlay(DrawingHandleScreen handle)
     {
         if (!_crtEffectEnabled)
+            return;
+        if (_focusModeEnabled && !_focusHovered)
             return;
 
         Vector2 size = new(PixelWidth, PixelHeight);
@@ -1666,6 +2149,9 @@ public sealed partial class TacticalMapWrapper : Control
 
         if (player == null)
             return false;
+
+        if (entMan.HasComponent<GhostComponent>(player.Value))
+            return true;
 
         if (!entMan.TryGetComponent<QueenEyeActionComponent>(player.Value, out QueenEyeActionComponent? queenEyeComp))
             return false;

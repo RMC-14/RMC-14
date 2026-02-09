@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorFiorinaPrisonGuard
   name: rmc-job-name-pmc-corporate-goon-secguard
@@ -14,6 +14,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: EquipSurvivorPreset
@@ -46,3 +53,5 @@
     gloves: RMCHandsVeteran
     shoes: RMCShoesJackboots
     id: CMIDCardLiaisonColony
+
+

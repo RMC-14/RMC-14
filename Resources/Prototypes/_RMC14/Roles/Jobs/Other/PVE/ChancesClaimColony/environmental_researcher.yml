@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorScientist
   id: CMSurvivorChancesEnvironmentalResearcher
   name: rmc-job-name-colonist-environmental-researcher

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorGoon
   id: RMCSurvivorKutjevoGoon
   name: rmc-job-name-pmc-corporate-goon

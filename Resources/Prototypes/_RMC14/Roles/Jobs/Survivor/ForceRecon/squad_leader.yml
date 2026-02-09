@@ -17,6 +17,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -71,3 +78,5 @@
   - type: SurvivorPreset
     primaryWeapons:
     - [ WeaponShotgunM42A2, RMCBoxShotgunSlugs ]
+
+

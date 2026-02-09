@@ -21,6 +21,11 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
+    private string? _lastCanvasLayerId;
+    private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastLayerOptions = new();
+    private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastVisibleLayers = new();
+    private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastDrawOptions = new();
+    private ProtoId<TacticalMapLayerPrototype>? _lastActiveLayer;
     private string? _currentMapId;
     private IReadOnlyList<TacticalMapMapInfo> _availableMaps = new List<TacticalMapMapInfo>();
     private NetEntity _activeMap = NetEntity.Invalid;
@@ -32,8 +37,10 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         var computer = EntMan.GetComponentOrNull<TacticalMapComputerComponent>(Owner);
         Window = this.CreatePopOutableWindow<TacticalMapWindow>();
+        Window.OnFinalClose += SaveSettings;
         var canDraw = computer != null &&
-            EntMan.HasComponent<MarineCommunicationsComputerComponent>(Owner) &&
+            (EntMan.HasComponent<MarineCommunicationsComputerComponent>(Owner) ||
+             EntMan.HasComponent<OverwatchConsoleComponent>(Owner)) &&
             _player.LocalEntity is { } player &&
             EntMan.System<SkillsSystem>().HasSkill(player, computer.Skill, computer.SkillLevel);
         Window.Wrapper.SetCanvasAccess(canDraw);
@@ -52,7 +59,8 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         Window.Wrapper.MapSelected += OnMapSelected;
         Window.Wrapper.LayerSelected += OnLayerSelected;
-        Window.Wrapper.CloseRequested += Close;
+        Window.Wrapper.VisibleLayersChanged += OnVisibleLayersChanged;
+        Window.Wrapper.CloseRequested += OnCloseRequested;
         ApplyMapState();
         TryUpdateTextureFromComponent();
         Refresh();
@@ -64,7 +72,11 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             Window.Wrapper.Canvas.OnBlipEntityClicked = OnOverwatchBlipClicked;
         }
 
-        Window.Wrapper.UpdateCanvasButton.Button.OnPressed += _ => SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines, Window.Wrapper.Canvas.TacticalLabels));
+        Window.Wrapper.UpdateCanvasButton.Button.OnPressed += _ =>
+        {
+            SendPredictedMessage(new TacticalMapUpdateCanvasMsg(Window.Wrapper.Canvas.Lines, Window.Wrapper.Canvas.TacticalLabels));
+            Window.Wrapper.NotifyCanvasUpdated();
+        };
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
@@ -81,31 +93,16 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing && Window?.Wrapper != null)
-        {
-            try
-            {
-                var settingsManager = IoCManager.Resolve<TacticalMapSettingsManager>();
-                var currentSettings = Window.Wrapper.GetCurrentSettings();
-
-                currentSettings.WindowSize = new Vector2(Window.SetSize.X, Window.SetSize.Y);
-                currentSettings.WindowPosition = new Vector2(Window.Position.X, Window.Position.Y);
-
-                var existingSettings = settingsManager.LoadSettings(_currentMapId);
-                if (!AreSettingsEqual(existingSettings, currentSettings))
-                    settingsManager.SaveSettings(currentSettings, _currentMapId);
-            }
-            catch (Exception ex)
-            {
-                Logger.GetSawmill("tactical_map_settings").Error($"Failed to save tactical map settings during disposal for map '{_currentMapId}': {ex}");
-            }
-        }
+        if (disposing)
+            SaveSettings();
 
         if (disposing && Window?.Wrapper != null)
         {
             Window.Wrapper.MapSelected -= OnMapSelected;
             Window.Wrapper.LayerSelected -= OnLayerSelected;
-            Window.Wrapper.CloseRequested -= Close;
+            Window.Wrapper.VisibleLayersChanged -= OnVisibleLayersChanged;
+            Window.Wrapper.CloseRequested -= OnCloseRequested;
+            Window.OnFinalClose -= SaveSettings;
             Window.Wrapper.Map.OnBlipEntityClicked = null;
             Window.Wrapper.Canvas.OnBlipEntityClicked = null;
         }
@@ -113,41 +110,56 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         base.Dispose(disposing);
     }
 
-    private static bool AreSettingsEqual(TacticalMapSettings existing, TacticalMapSettings current)
-    {
-        const float epsilon = 0.001f;
-
-        if (MathF.Abs(existing.ZoomFactor - current.ZoomFactor) > epsilon)
-            return false;
-        if ((existing.PanOffset - current.PanOffset).LengthSquared() > epsilon * epsilon)
-            return false;
-        if (MathF.Abs(existing.BlipSizeMultiplier - current.BlipSizeMultiplier) > epsilon)
-            return false;
-        if (MathF.Abs(existing.LineThickness - current.LineThickness) > epsilon)
-            return false;
-        if (existing.SelectedColorIndex != current.SelectedColorIndex)
-            return false;
-        if (existing.SettingsVisible != current.SettingsVisible)
-            return false;
-        if (existing.LabelMode != current.LabelMode)
-            return false;
-        if ((existing.WindowSize - current.WindowSize).LengthSquared() > epsilon * epsilon)
-            return false;
-        if ((existing.WindowPosition - current.WindowPosition).LengthSquared() > epsilon * epsilon)
-            return false;
-
-        return true;
-    }
 
     private void OnMapSelected(NetEntity map)
     {
         SendPredictedMessage(new TacticalMapSelectMapMsg(map));
     }
 
+    private void OnCloseRequested()
+    {
+        SaveSettings();
+        Close();
+    }
+
+    private void SaveSettings()
+    {
+        if (Window?.Wrapper == null)
+            return;
+
+        try
+        {
+            var settingsManager = IoCManager.Resolve<TacticalMapSettingsManager>();
+            var currentSettings = Window.Wrapper.GetCurrentSettings();
+
+            currentSettings.WindowSize = new Vector2(Window.SetSize.X, Window.SetSize.Y);
+            currentSettings.WindowPosition = new Vector2(Window.Position.X, Window.Position.Y);
+
+            var existingSettings = settingsManager.LoadSettings(_currentMapId);
+            if (!existingSettings.NearlyEquals(currentSettings))
+                settingsManager.SaveSettings(currentSettings, _currentMapId);
+        }
+        catch (Exception ex)
+        {
+            Logger.GetSawmill("tactical_map_settings").Error($"Failed to save tactical map settings for map '{_currentMapId}': {ex}");
+        }
+    }
+
     private void OnLayerSelected(ProtoId<TacticalMapLayerPrototype>? layer)
     {
         var layerId = layer?.Id;
         SendPredictedMessage(new TacticalMapSelectLayerMsg(layerId));
+    }
+
+    private void OnVisibleLayersChanged(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers)
+    {
+        var ids = new List<string>(layers.Count);
+        foreach (var layer in layers)
+        {
+            ids.Add(layer.Id);
+        }
+
+        SendPredictedMessage(new TacticalMapSetVisibleLayersMsg(ids));
     }
 
     private void OnOverwatchBlipClicked(Vector2i indices, int? entityId)
@@ -187,9 +199,74 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             return;
 
         if (EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
-            Window.Wrapper.UpdateLayerList(computer.VisibleLayers, computer.ActiveLayer);
+        {
+            var options = computer.LayerOptions.Count > 0 ? computer.LayerOptions : computer.VisibleLayers;
+            var drawOptions = options;
+            if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner) &&
+                !EntMan.HasComponent<MarineCommunicationsComputerComponent>(Owner))
+            {
+                drawOptions = computer.ActiveLayer != null
+                    ? new List<ProtoId<TacticalMapLayerPrototype>> { computer.ActiveLayer.Value }
+                    : new List<ProtoId<TacticalMapLayerPrototype>>();
+            }
+
+            var activeLayerId = computer.ActiveLayer?.Id;
+            if (_lastCanvasLayerId != activeLayerId)
+            {
+                _lastCanvasLayerId = activeLayerId;
+                _refreshed = false;
+                Window.Wrapper.Canvas.Lines.Clear();
+                Window.Wrapper.Canvas.TacticalLabels.Clear();
+            }
+
+            var optionsChanged = !AreLayersEqual(options, _lastLayerOptions);
+            var visibleChanged = !AreLayersEqual(computer.VisibleLayers, _lastVisibleLayers);
+            var drawOptionsChanged = !AreLayersEqual(drawOptions, _lastDrawOptions);
+            var activeChanged = _lastActiveLayer != computer.ActiveLayer;
+
+            if (drawOptionsChanged || activeChanged)
+                Window.Wrapper.UpdateDrawLayerList(drawOptions, computer.ActiveLayer);
+
+            if (optionsChanged || visibleChanged)
+                Window.Wrapper.UpdateLayerVisibilityList(options, computer.VisibleLayers);
+
+            if (optionsChanged)
+                ReplaceLayers(_lastLayerOptions, options);
+            if (visibleChanged)
+                ReplaceLayers(_lastVisibleLayers, computer.VisibleLayers);
+            if (drawOptionsChanged)
+                ReplaceLayers(_lastDrawOptions, drawOptions);
+            if (activeChanged)
+                _lastActiveLayer = computer.ActiveLayer;
+        }
         else
-            Window.Wrapper.UpdateLayerList(new List<ProtoId<TacticalMapLayerPrototype>>(), null);
+        {
+            Window.Wrapper.UpdateDrawLayerList(new List<ProtoId<TacticalMapLayerPrototype>>(), null);
+            Window.Wrapper.UpdateLayerVisibilityList(new List<ProtoId<TacticalMapLayerPrototype>>(), new List<ProtoId<TacticalMapLayerPrototype>>());
+        }
+    }
+
+    private static bool AreLayersEqual(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> first, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> second)
+    {
+        if (first.Count != second.Count)
+            return false;
+
+        for (var i = 0; i < first.Count; i++)
+        {
+            if (first[i] != second[i])
+                return false;
+        }
+
+        return true;
+    }
+
+    private static void ReplaceLayers(List<ProtoId<TacticalMapLayerPrototype>> target, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> source)
+    {
+        target.Clear();
+        for (var i = 0; i < source.Count; i++)
+        {
+            target.Add(source[i]);
+        }
     }
 
     private bool TryGetActiveMapInfo(out TacticalMapMapInfo mapInfo)
@@ -242,6 +319,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         {
             Window.Wrapper.LastUpdateAt = computer.LastAnnounceAt;
             Window.Wrapper.NextUpdateAt = computer.NextAnnounceAt;
+            Window.Wrapper.SetBlipStaleState(false, computer.LastAnnounceAt);
         }
 
         Window.Wrapper.Map.Lines.Clear();
@@ -250,11 +328,14 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         if (lines != null)
             Window.Wrapper.Map.Lines.AddRange(lines.Lines);
 
-        if (_refreshed)
-            return;
-
-        if (lines != null)
-            Window.Wrapper.Canvas.Lines.AddRange(lines.Lines);
+        var canApplyCanvas = Window.Wrapper.CanApplyCanvasSnapshot();
+        if (canApplyCanvas)
+        {
+            Window.Wrapper.Canvas.Lines.Clear();
+            var activeLines = EntMan.GetComponentOrNull<TacticalMapActiveLayerLinesComponent>(Owner);
+            if (activeLines != null)
+                Window.Wrapper.Canvas.Lines.AddRange(activeLines.Lines);
+        }
 
         _refreshed = true;
     }
@@ -299,14 +380,16 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         if (labels != null)
         {
             Window.Wrapper.Map.UpdateTacticalLabels(labels.Labels);
-            if (!_refreshed)
-                Window.Wrapper.Canvas.UpdateTacticalLabels(labels.Labels);
         }
         else
         {
             Window.Wrapper.Map.UpdateTacticalLabels(new Dictionary<Vector2i, TacticalMapLabelData>());
-            if (!_refreshed)
-                Window.Wrapper.Canvas.UpdateTacticalLabels(new Dictionary<Vector2i, TacticalMapLabelData>());
+        }
+
+        if (Window.Wrapper.CanApplyCanvasSnapshot())
+        {
+            var activeLabels = EntMan.GetComponentOrNull<TacticalMapActiveLayerLabelsComponent>(Owner);
+            Window.Wrapper.Canvas.UpdateTacticalLabels(activeLabels?.Labels ?? new Dictionary<Vector2i, TacticalMapLabelData>());
         }
     }
 }

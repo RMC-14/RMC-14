@@ -163,6 +163,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public float HivePylonRangeTiles { get; set; }
     public Color Color;
     public float BlipSizeMultiplier { get; set; } = 0.9f;
+    public float BlipStaleAlpha { get; set; } = 1f;
     public float LineThickness { get; set; } = 2.0f;
     public bool QueenEyeMode { get; set; }
 

@@ -13,10 +13,17 @@
   hasIcon: true
   greeting: rmc-job-greeting-solaris-pmc
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: Survivor â€” PMC Standard (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor — PMC Standard (Solaris Ridge special survivor)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -88,3 +95,5 @@
     - [ CMArmorM4PMCLight, ArmorHelmetPMC ]
     - [ RMCArmorM4PMCBulletProof, RMCArmorHelmetPMCBlack ]
     - [ WeaponSMGM63, ArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)
+
+

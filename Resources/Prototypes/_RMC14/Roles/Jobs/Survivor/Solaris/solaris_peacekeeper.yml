@@ -9,6 +9,13 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      baseLayers: [FactionSurvivor]
+      visibleLayers: [FactionSurvivor]
+      activeLayer: FactionSurvivor
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
@@ -41,3 +48,5 @@
     layers:
     - sprite: _RMC14/Markers/landmarks.rsi
       state: surv
+
+

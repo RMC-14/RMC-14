@@ -51,7 +51,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     protected IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> GetVisibleLayers(IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers)
     {
-        return layers.Count > 0 ? layers : GetDefaultLayers();
+        return layers;
     }
 
     protected IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> GetActiveLayers(
@@ -133,7 +133,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
 
     protected virtual void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
-        var layers = ApplyLayerVisibilityRules(computer.Owner, GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer));
+        var layers = ApplyLayerVisibilityRules(computer.Owner, GetVisibleLayers(computer.Comp.VisibleLayers));
 
         var blips = new Dictionary<int, TacticalMapBlip>();
         foreach (var layer in layers)
@@ -154,7 +154,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);
         var labels = EnsureComp<TacticalMapLabelsComponent>(computer);
 
-        var visibleLayers = GetActiveLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer);
+        var visibleLayers = GetVisibleLayers(computer.Comp.VisibleLayers);
         var combinedLines = new List<TacticalMapLine>();
         var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
 
@@ -186,6 +186,10 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     }
 
     public virtual void UpdateUserData(Entity<TacticalMapUserComponent> user, TacticalMapComponent map)
+    {
+    }
+
+    public virtual void SetComputerDrawLayerFromSquad(EntityUid computer, EntityUid squad)
     {
     }
 
