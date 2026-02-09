@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: Vixting
-  changes:
-  - message: Lighting to half nightvision mode
-    type: Add
-  id: 2403
-  time: '2025-10-05T03:57:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7935
 - author: OmerF-afk
   changes:
   - message: Added Knockback to Basira Hunting Rifle.
@@ -4720,5 +4713,16 @@
   id: 2904
   time: '2026-02-09T06:04:46.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8931
+- author: Vixting
+  changes:
+  - message: Xenos can now set their default vision mode in settings, default half
+      light.
+    type: Add
+  - message: SGO / WS sights now default to half light, can be switched to full bright
+      using verb.
+    type: Add
+  id: 2905
+  time: '2026-02-09T06:36:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9123
 Name: RMC14
 Order: -1
