@@ -2037,7 +2037,7 @@
 
 - type: entity
   parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronNatoAchMenoe
+  id: RMCFigurinePatronEmmaliseIsabelChambers
   name: Emmalise Isabel Chambers
   description: "You could swear those pointy ears twitch when you make a noise, even across the room."
   components:
@@ -2128,7 +2128,7 @@
   - type: Sprite
     state: albrecht_alby_herrmann
   - type: PatronFigurine
-    id: 24884ede-8a57-4d3e-9d99-862e04fd37e0
+    id: 847528ab-68c1-419c-9ca9-d55d41e85f7d
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -2140,26 +2140,6 @@
     state: olive_orr
   - type: PatronFigurine
     id: e1c32e3b-05ae-4684-beec-50b3ee32a5d8
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronEvadEsrever
-  name: Evad Esrever figurine
-  components:
-  - type: Sprite
-    state: evad_esrever
-  - type: PatronFigurine
-    id: 5adc5d79-f861-4224-8889-dd83d9487520
-
-- type: entity
-  parent: RMCBaseFigurinePatron
-  id: RMCFigurinePatronEvadEsrever
-  name: Evad Esrever figurine
-  components:
-  - type: Sprite
-    state: evad_esrever
-  - type: PatronFigurine
-    id: 5adc5d79-f861-4224-8889-dd83d9487520
 
 - type: entity
   parent: RMCBaseFigurinePatron
