@@ -1442,6 +1442,10 @@ CMLightFixtureEmpty: RMCLightFixtureEmpty
 # 2025-11-14
 ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
 
+# 2025-11-24
+WeaponRifleL83A2: RMCWeaponRifleL83A2
+WeaponRifleL83A3: RMCWeaponRifleL83A3
+
 # 2025-11-27
 RMCToolWebbingSmallERT: RMCToolWebbing
 RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
@@ -1456,6 +1460,15 @@ RMCWeaponFlamerImprovised: RMCWeaponFlamerColony
 # 2026-1-03
 CMM77BeltFilled: RMCM77BeltFilled
 
-# 2025-01-04
+# 2026-01-04
 CMGasTankOxygen: RMCGasTankOxygenFilled
 RMCGasTankPhoron: RMCGasTankPhoronFilled
+
+# 2026-1-15
+ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
+
+# 2026-01-27
+RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
+RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
+RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
+RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper

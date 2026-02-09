@@ -138,3 +138,36 @@
     - state: chestdrawerwood
     - state: chestdrawerwood-open
       map: [ "openLayer" ]
+
+- type: entity
+  parent: CMFilingCabinetBase
+  id: CMFilingCabinetChestAngled
+  name: chest drawer
+  suffix: Angled
+  components:
+  - type: Sprite
+    state: sidecabinet
+    noRot: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.22,-0.26,0.22,0"
+        density: 210
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: RequireProjectileTarget
+  - type: WallMount
+    arc: 360
+  - type: Storage
+    grid:
+    - 0,0,7,2
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - Document
+        - Folder
+        - Write

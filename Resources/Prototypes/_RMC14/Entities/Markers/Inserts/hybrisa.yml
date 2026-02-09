@@ -20,3 +20,14 @@
     - spawn: "/Maps/_RMC14/Inserts/Hybrisa/clf_spaceport.yml"
       probability: 1
       nightmareScenario: clfspaceport
+
+- type: entity
+  parent: RMCMapInsertHybrisaBase
+  id: RMCMapInsertHybrisaTSEAirbase
+  name: TSE Airbase
+  suffix: Insert Hybrisa
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase.yml"
+      probability: 0.28
