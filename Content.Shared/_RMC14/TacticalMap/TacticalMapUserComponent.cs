@@ -26,6 +26,9 @@ public sealed partial class TacticalMapUserComponent : Component
     [DataField]
     public List<ProtoId<TacticalMapLayerPrototype>> BaseLayers = new();
 
+    [DataField]
+    public List<ProtoId<TacticalMapLayerSetPrototype>> LayerSets = new();
+
     [DataField, AutoNetworkedField]
     public List<ProtoId<TacticalMapLayerPrototype>> VisibleLayers = new();
 

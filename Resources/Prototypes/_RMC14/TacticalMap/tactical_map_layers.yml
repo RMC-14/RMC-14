@@ -4,6 +4,11 @@
   logName: marine
   defaultVisible: true
   sortOrder: 0
+  kind: Global
+  group: Marines
+  canDraw: true
+  canUpdateBlips: true
+  canContainBlips: true
   updateAnnouncement: The UNMC tactical map has been updated.
   announcementTarget: Marines
   iffFactions: [FactionMarine]
@@ -13,72 +18,165 @@
   name: ui-tactical-map-layer-squad-alpha
   logName: squad alpha
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadAlpha
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadBravo
   name: ui-tactical-map-layer-squad-bravo
   logName: squad bravo
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadBravo
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadCharlie
   name: ui-tactical-map-layer-squad-charlie
   logName: squad charlie
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadCharlie
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadDelta
   name: ui-tactical-map-layer-squad-delta
   logName: squad delta
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadDelta
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadEcho
   name: ui-tactical-map-layer-squad-echo
   logName: squad echo
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadEcho
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadFoxtrot
   name: ui-tactical-map-layer-squad-foxtrot
   logName: squad foxtrot
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadFoxtrot
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadIntel
   name: ui-tactical-map-layer-squad-intel
   logName: squad intel
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadIntel
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadSPP
   name: ui-tactical-map-layer-squad-spp
   logName: squad spp
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadSPP
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadRoyalMarines
   name: ui-tactical-map-layer-squad-royal-marines
   logName: squad royal marines
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadRoyalMarines
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadProvost
   name: ui-tactical-map-layer-squad-provost
   logName: squad provost
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadProvost
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: SquadFORECON
   name: ui-tactical-map-layer-squad-forecon
   logName: squad forecon
   sortOrder: 5
+  kind: Squad
+  group: Marines
+  parentLayer: Marines
+  requiresParentVisible: true
+  visibility: SquadMembers
+  squadId: SquadFORECON
+  canDraw: true
+  canContainBlips: false
 
 - type: tacticalMapLayer
   id: Xenos
   name: ui-tactical-map-layer-xenos
   logName: xenonid
   sortOrder: 10
+  kind: Global
+  group: Xenos
+  canDraw: true
+  canUpdateBlips: true
+  canContainBlips: true
   updateAnnouncement: The Xenonid tactical map has been updated.
   announcementTarget: Xenos
 
@@ -87,6 +185,10 @@
   name: ui-tactical-map-layer-survivors
   logName: survivor
   sortOrder: 20
+  kind: Faction
+  group: Survivors
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionSurvivor]
 
 - type: tacticalMapLayer
@@ -94,6 +196,10 @@
   name: ui-tactical-map-layer-tse
   logName: tse
   sortOrder: 30
+  kind: Faction
+  group: TSE
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionTSE]
 
 - type: tacticalMapLayer
@@ -101,6 +207,10 @@
   name: ui-tactical-map-layer-weya
   logName: weya
   sortOrder: 40
+  kind: Faction
+  group: WeYa
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionWeYa]
 
 - type: tacticalMapLayer
@@ -108,6 +218,10 @@
   name: ui-tactical-map-layer-royal-marines
   logName: royal marines
   sortOrder: 50
+  kind: Faction
+  group: RoyalMarines
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionRoyalMarines]
 
 - type: tacticalMapLayer
@@ -115,6 +229,10 @@
   name: ui-tactical-map-layer-spp
   logName: spp
   sortOrder: 60
+  kind: Faction
+  group: SPP
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionSPP]
 
 - type: tacticalMapLayer
@@ -122,4 +240,8 @@
   name: ui-tactical-map-layer-halcyon
   logName: halcyon
   sortOrder: 70
+  kind: Faction
+  group: Halcyon
+  canDraw: true
+  canContainBlips: true
   iffFactions: [FactionHalcyon]

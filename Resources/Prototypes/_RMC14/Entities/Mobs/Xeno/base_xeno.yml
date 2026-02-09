@@ -314,7 +314,7 @@
   - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
-    visibleLayers: [Xenos]
+    layerSets: [TacticalMapSetXeno]
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked

@@ -13,9 +13,7 @@
     components:
     - type: TacticalMapUser
       actionId: RMCActionOpenTacticalMapMarine
-      baseLayers: [FactionSurvivor]
-      visibleLayers: [FactionSurvivor]
-      activeLayer: FactionSurvivor
+      layerSets: [TacticalMapSetSurvivor]
     - type: TacticalMapLayerTracked
       layers: [FactionSurvivor]
     - type: Skills

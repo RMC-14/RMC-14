@@ -86,6 +86,7 @@ public sealed partial class TacticalMapWrapper : Control
     private static readonly Color OrbitalRadiusColor = Color.FromHex("#F2C94C");
     private static readonly Color MortarRadiusColor = Color.FromHex("#4FC3FF");
     private static readonly Color MortarRangeColor = Color.FromHex("#43B581");
+    private static readonly Color DisabledLayerTextColor = Color.FromHex("#D64545");
 
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -153,6 +154,7 @@ public sealed partial class TacticalMapWrapper : Control
     private bool _focusHovered = true;
     private bool _layerVisibilityExpanded;
     private string _layerVisibilitySummary = string.Empty;
+    private float _lastLayerVisibilityWidth = -1f;
     private Thickness _rootMarginDefault;
     private Thickness _mapMarginDefault;
     private const float FocusHoverGrace = 12f;
@@ -212,6 +214,7 @@ public sealed partial class TacticalMapWrapper : Control
         UpdateCooldownBar();
         UpdateBlipStaleAlpha();
         UpdateFocusHoverState();
+        UpdateLayerVisibilityColumnsIfNeeded();
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -630,14 +633,28 @@ public sealed partial class TacticalMapWrapper : Control
             }
 
             var selected = _visibleLayerSet.Contains(layer);
-            var prefix = selected ? "✓ " : "• ";
+            var prefix = selected ? "[X] " : "[ ] ";
             var text = prefix + GetLayerName(layer);
-            var color = selected ? Color.Green : DefaultButtonTextColor;
+            var color = selected ? Color.Green : DisabledLayerTextColor;
+            button.Button.HoveredTextColor = color;
             SetButtonText(button, text, color);
         }
 
         UpdateLayerVisibilityToggle();
         _suppressLayerVisibilitySelection = false;
+    }
+
+    private void UpdateLayerVisibilityColumnsIfNeeded()
+    {
+        if (!LayerVisibilityContainer.Visible)
+            return;
+
+        var width = LayerVisibilityContainer.Width;
+        if (MathF.Abs(width - _lastLayerVisibilityWidth) < 0.5f)
+            return;
+
+        _lastLayerVisibilityWidth = width;
+        UpdateLayerVisibilityColumns();
     }
 
     public void UpdateBlips(TacticalMapBlip[]? blips)

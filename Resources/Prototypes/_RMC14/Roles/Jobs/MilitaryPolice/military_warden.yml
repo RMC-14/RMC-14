@@ -32,9 +32,7 @@
     components:
     - type: TacticalMapUser
       actionId: RMCActionOpenTacticalMapMarine
-      baseLayers: [Marines]
-      visibleLayers: [Marines]
-      activeLayer: Marines
+      layerSets: [TacticalMapSetMarine]
     - type: TacticalMapLayerTracked
       layers: [Marines]
     - type: Skills

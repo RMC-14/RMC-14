@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Maths;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Client._RMC14.TacticalMap;
 
@@ -79,17 +80,18 @@ public sealed partial class TacticalMapInnerButton : Button
         {
             var color = Disabled ? DisabledTextColor : (IsHovered ? HoveredTextColor : TextColor);
             var text = LabelText ?? string.Empty;
+            var safeText = FormattedMessage.EscapeText(text);
             if (Disabled)
             {
-                Label.SetMarkup($"[color={color.ToHex()}]{text}[/color]");
+                Label.SetMarkup($"[color={color.ToHex()}]{safeText}[/color]");
             }
             else if (IsHovered)
             {
-                Label.SetMarkup($"[color={color.ToHex()}][bold][underline]{text}[/underline][/bold][/color]");
+                Label.SetMarkup($"[color={color.ToHex()}][bold][underline]{safeText}[/underline][/bold][/color]");
             }
             else
             {
-                Label.SetMarkup($"[color={color.ToHex()}][bold]{text}[/bold][/color]");
+                Label.SetMarkup($"[color={color.ToHex()}][bold]{safeText}[/bold][/color]");
             }
         }
     }

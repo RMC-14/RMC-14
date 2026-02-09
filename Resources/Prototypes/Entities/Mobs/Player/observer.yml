@@ -88,7 +88,7 @@
         requireInputValidation: false
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapGhost
-    visibleLayers: [Marines, Xenos]
+    layerSets: [TacticalMapSetGhost]
     liveUpdate: true
   - type: ViewIntelObjectives
   - type: VentSight

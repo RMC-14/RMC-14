@@ -10,16 +10,14 @@
   - CMAccessIllegal
   icon: "CMJobIconExecAssMan"
   greeting: rmc-job-greeting-solaris-pmc-supervisor
-  spawnMenuRoleName: Survivor — Corporate Supervisor (Solaris Ridge special survivor)
+  spawnMenuRoleName: Survivor â€” Corporate Supervisor (Solaris Ridge special survivor)
   startingGear: RMCGearSurvivorSolarisCorporateSupervisor
   special:
   - !type:AddComponentSpecial
     components:
     - type: TacticalMapUser
       actionId: RMCActionOpenTacticalMapMarine
-      baseLayers: [FactionSurvivor]
-      visibleLayers: [FactionSurvivor]
-      activeLayer: FactionSurvivor
+      layerSets: [TacticalMapSetSurvivor]
     - type: TacticalMapLayerTracked
       layers: [FactionSurvivor]
     - type: Skills
