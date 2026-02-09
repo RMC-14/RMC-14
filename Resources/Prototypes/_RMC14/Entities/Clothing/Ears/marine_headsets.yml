@@ -11,6 +11,7 @@
     - PrimaryLandingZone
   - type: GrantTacMapAlert
   - type: HeadsetAutoSquad
+  - type: RMCStaticDefaultChannel
 
 # Alpha
 - type: entity
