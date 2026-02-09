@@ -15,6 +15,9 @@
     <GuideEntityEmbed Entity="HiveRecoveryNodeXeno"/>
     <GuideEntityEmbed Entity="HivePlasmaTreeXeno"/>
   </Box>
+  <Box>
+    <GuideEntityEmbed Entity="HiveAcidPillarXeno"/>
+  </Box>
   ##Each have limits!
   - 1 Hive Core
   - 6 Egg Morphers
@@ -24,7 +27,7 @@
   - 2 Hive Pylons
   - 1 Acid Pillar per Hivelord or Queen
 
-  ##What do they do?
+  ## What do they do?
 
   [bold]Egg Morphers[/bold]: Egg morphers act as a large egg that launch parasites upon any host that enters its vicinity. Gradually produces up to 6 parasites and stores 12 which can be retrieved by Xenonids.
 
@@ -38,7 +41,9 @@
 
   [bold]Plasma Tree[/bold]: Plasma Trees are just like Recovery Nodes but give plasma instead of healing to Xenonids.
 
-  ##Where to place!
+  [bold]Acid Pillar[/bold]: Extinguishes nearby fires.
+
+  ## Where to place!
   Since they are limited it is always best to communicate with your hive when you are placing one.
 
   Hive clusters can be used at the frontline to stall host pushes or at the backline for nesting spots, usually accompanied by a tunnel, these nesting spots will also have 2 or more egg morphers.
