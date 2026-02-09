@@ -1,14 +1,4 @@
 ﻿Entries:
-- author: 4310V343k
-  changes:
-  - message: Fixed pamphlets not modifying your radio prefix.
-    type: Fix
-  - message: Fixed using a second pamphlet that shouldn't give a job name or icon
-      would still overwriting or resetting the job name and icon from the first one.
-    type: Fix
-  id: 2402
-  time: '2025-10-05T03:53:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7956
 - author: Vixting
   changes:
   - message: Lighting to half nightvision mode
@@ -4723,5 +4713,12 @@
   id: 2903
   time: '2026-02-09T06:01:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8910
+- author: Vexerot
+  changes:
+  - message: Queen gib no longer exposes marine identities to xenonids and vice-versa.
+    type: Fix
+  id: 2904
+  time: '2026-02-09T06:04:46.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8931
 Name: RMC14
 Order: -1
