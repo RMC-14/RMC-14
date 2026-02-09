@@ -379,6 +379,8 @@
     - MarineFoxtrot
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineIntel
   - type: GrantSquadLeaderTracker
     defaultMode: AuxiliarySupportOfficer
     trackerModes:

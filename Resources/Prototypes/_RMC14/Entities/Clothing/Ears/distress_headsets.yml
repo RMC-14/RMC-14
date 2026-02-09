@@ -243,6 +243,8 @@
   - type: RMCHeadset
     channels:
     - MarineSOF
+  - type: EncryptionKeyHolder
+    defaultChannel: MarineSOF
   - type: GrantSquadLeaderTracker
     defaultMode: SquadLeader
     trackerModes:
