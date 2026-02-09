@@ -2096,20 +2096,184 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
             await db.DbContext.SaveChangesAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsReceived(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
                 .Where(c => c.ReceiverId == player)
                 .ToListAsync();
         }
 
-        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player)
+        public async Task<List<RMCCommendation>> GetCommendationsGiven(Guid player, CommendationType? filterType = null, bool includePlayers = false)
         {
             await using var db = await GetDb();
-            return await db.DbContext.RMCCommendations
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
                 .Where(c => c.GiverId == player)
                 .ToListAsync();
+        }
+
+        public async Task<List<RMCCommendation>> GetLastCommendations(int count, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
+                .OrderByDescending(c => c.Id)
+                .Take(count)
+                .ToListAsync();
+        }
+
+        public async Task<RMCCommendation?> GetCommendationById(int commendationId, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            return await query
+                .FirstOrDefaultAsync(c => c.Id == commendationId);
+        }
+
+        public async Task<List<RMCCommendation>> GetCommendationsByRound(int roundId, CommendationType? filterType = null, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            if (filterType.HasValue)
+                query = query.Where(c => c.Type == filterType.Value);
+
+            return await query
+                .Where(c => c.RoundId == roundId)
+                .ToListAsync();
+        }
+
+        public async Task<RMCCommendation?> DeleteCommendationById(int commendationId, Guid deletedBy, DateTimeOffset deletedAt, bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            var commendation = await query
+                .FirstOrDefaultAsync(c => c.Id == commendationId);
+
+            if (commendation == null)
+                return null;
+
+            commendation.Deleted = true;
+            commendation.DeletedById = deletedBy;
+            commendation.DeletedAt = deletedAt.UtcDateTime;
+
+            await db.DbContext.SaveChangesAsync();
+            return commendation;
+        }
+
+        public async Task<List<RMCCommendation>> DeleteCommendationsByRound(
+            int roundId,
+            CommendationType type,
+            Guid deletedBy,
+            DateTimeOffset deletedAt,
+            Guid? giverId = null,
+            Guid? receiverId = null,
+            bool includePlayers = false)
+        {
+            await using var db = await GetDb();
+            var query = db.DbContext.RMCCommendations
+                .Where(c => !c.Deleted)
+                .AsQueryable();
+
+            if (includePlayers)
+            {
+                query = query
+                    .Include(c => c.Giver)
+                    .Include(c => c.Receiver);
+            }
+
+            query = query.Where(c => c.RoundId == roundId && c.Type == type);
+
+            if (giverId.HasValue)
+                query = query.Where(c => c.GiverId == giverId.Value);
+
+            if (receiverId.HasValue)
+                query = query.Where(c => c.ReceiverId == receiverId.Value);
+
+            var commendations = await query.ToListAsync();
+
+            if (commendations.Count == 0)
+                return commendations;
+
+            foreach (var commendation in commendations)
+            {
+                commendation.Deleted = true;
+                commendation.DeletedById = deletedBy;
+                commendation.DeletedAt = deletedAt.UtcDateTime;
+            }
+
+            await db.DbContext.SaveChangesAsync();
+            return commendations;
         }
 
         public async Task IncreaseInfects(Guid player)
