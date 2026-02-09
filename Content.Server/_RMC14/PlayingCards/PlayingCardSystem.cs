@@ -88,7 +88,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         _hands.TryPickup(user, hand, handId);
 
         UpdateHandName((hand, handComp));
-        _popup.PopupEntity(Loc.GetString("rmc-playing-card-combine", ("count", 2)), hand, user);
+        TryPopup((hand, handComp), Loc.GetString("rmc-playing-card-add-to-hand", ("count", handComp.Cards.Count)), user);
     }
 
     protected override void AddCardToHand(Entity<PlayingCardHandComponent> hand, Entity<PlayingCardComponent> card, EntityUid user)
@@ -166,8 +166,36 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-draw-hidden"), hand, user);
         }
 
-        // If the hand is empty, delete it
-        if (hand.Comp.Cards.Count == 0)
+        // If the hand has only one card left, convert back to a single card
+        if (hand.Comp.Cards.Count == 1)
+        {
+            var lastEncoded = hand.Comp.Cards[0];
+            var (lastSuit, lastRank) = DecodeCard(lastEncoded);
+
+            // Find what hand slot is holding this hand of cards
+            _hands.IsHolding(user, hand, out var heldHandSlot);
+
+            var lastCardCoords = _transform.GetMapCoordinates(hand);
+            var lastCard = Spawn("RMCPlayingCard", lastCardCoords);
+
+            if (TryComp<PlayingCardComponent>(lastCard, out var lastCardComp))
+            {
+                lastCardComp.Suit = lastSuit;
+                lastCardComp.Rank = lastRank;
+                lastCardComp.FaceUp = hand.Comp.FaceUp;
+                Dirty(lastCard, lastCardComp);
+            }
+
+            UpdateCardAppearance(lastCard, lastSuit, lastRank, hand.Comp.FaceUp);
+
+            // Drop the hand and delete it
+            _hands.TryDrop(user, hand);
+            QueueDel(hand);
+
+            // Put the last card in the same hand slot
+            _hands.TryPickup(user, lastCard, heldHandSlot);
+        }
+        else if (hand.Comp.Cards.Count == 0)
         {
             QueueDel(hand);
         }
