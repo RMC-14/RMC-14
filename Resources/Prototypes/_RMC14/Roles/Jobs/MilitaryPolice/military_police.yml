@@ -6,6 +6,9 @@
   newToJobInfo: rmc-new-to-job-military-police
   playTimeTracker: CMJobMilitaryPolice
   requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 3600 # 1 hours
   - !type:DepartmentTimeRequirement
     department: CMSquad
     time: 72000 # 20 hours
