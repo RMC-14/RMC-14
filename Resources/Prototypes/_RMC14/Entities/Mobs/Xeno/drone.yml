@@ -26,6 +26,7 @@
       600: Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: MeleeWeapon
     damage:

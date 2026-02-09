@@ -1,0 +1,12 @@
+﻿author: DrSmugleaf
+changes:
+- type: Fix
+  message: Fix xenos not being able to open doors by bumping into them instead of left clicking them.
+- type: Fix
+  message: Fixed not being able to build hive structures far away from the hive core.
+- type: Fix
+  message: Fixed xenos not being able to destroy their hive structures.
+- type: Fix
+  message: Fixed popup spam as designer hivelord when mousing over nodes.
+- type: Tweak
+  message: Updated the roadmap.
