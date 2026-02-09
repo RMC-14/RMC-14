@@ -70,7 +70,7 @@ public sealed class ManageHiveSystem : EntitySystem
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaSacrificeTimeMinutes, v => _burrowedLarvaSacrificeTime = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCBurrowedLarvaEvolutionPointsPer, v => _burrowedLarvaEvolutionPointsPer = v, true);
 
-        _jelliesDataset = _prototype.Index<LocalizedDatasetPrototype>("RMCXenoJellies");
+        _jelliesDataset = _prototype.Index<LocalizedDatasetPrototype>(SharedCommendationSystem.JellyDatasetId);
     }
 
     private void OnManageHiveAction(Entity<ManageHiveComponent> manage, ref ManageHiveActionEvent args)

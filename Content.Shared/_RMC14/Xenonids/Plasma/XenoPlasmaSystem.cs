@@ -181,10 +181,13 @@ public sealed class XenoPlasmaSystem : EntitySystem
         return xeno.Comp.Plasma >= plasma;
     }
 
-    public bool HasPlasmaPopup(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 plasma, bool predicted = true)
+    public bool HasPlasmaPopup(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 plasma, bool predicted = true, bool doPopup = true)
     {
         void DoPopup()
         {
+            if (!doPopup)
+                return;
+
             var popup = Loc.GetString("cm-xeno-not-enough-plasma");
             if (predicted)
                 _popup.PopupClient(popup, xeno, xeno);
