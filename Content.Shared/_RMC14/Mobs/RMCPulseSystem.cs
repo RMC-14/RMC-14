@@ -26,7 +26,7 @@ public sealed class RMCPulseSystem : EntitySystem
 
     /// <param name="uid">The entity to get a pulse value from.</param>
     /// <param name="byMachine">True for machine readings (more accurate), false for hand readings (less accurate).</param>
-    /// <returns>The pulse value in BPM, or 0 if dead/no pulse.</returns>
+    /// <returns>The pulse value in bpm, or 0 if dead/no pulse.</returns>
     public int GetPulseValue(EntityUid uid, bool byMachine)
     {
         if (!TryComp<RMCPulseComponent>(uid, out var pulse))

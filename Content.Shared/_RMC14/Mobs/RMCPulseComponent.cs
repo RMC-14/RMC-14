@@ -12,7 +12,7 @@ public sealed partial class RMCPulseComponent : Component
     public PulseState State = PulseState.Normal;
 
     /// <summary>
-    /// The last calculated pulse value in BPM.
+    /// The last calculated pulse value in bpm.
     /// For thready pulse, this will be 250+.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -21,33 +21,14 @@ public sealed partial class RMCPulseComponent : Component
 
 public enum PulseState : byte
 {
-    /// <summary>
-    /// No pulse - dead or species without blood.
-    /// </summary>
-    None = 0,
+    None = 0, // Dead or species without blood.
+    Slow = 1, // 40-60 bpm
+    Normal = 2, // 60-90 bpm
+    Fast = 3, // 90-120 bpm
+    VeryFast = 4, // 120-160 bpm
 
     /// <summary>
-    /// Slow pulse - 40-60 BPM.
-    /// </summary>
-    Slow = 1,
-
-    /// <summary>
-    /// Normal pulse - 60-90 BPM.
-    /// </summary>
-    Normal = 2,
-
-    /// <summary>
-    /// Fast pulse - 90-120 BPM.
-    /// </summary>
-    Fast = 3,
-
-    /// <summary>
-    /// Very fast pulse - 120-160 BPM.
-    /// </summary>
-    VeryFast = 4,
-
-    /// <summary>
-    /// Thready pulse - extremely weak and fast, >250 BPM.
+    /// Thready pulse - extremely weak and fast, >250 bpm.
     /// Occurs when blood volume is critically low.
     /// </summary>
     Thready = 5
