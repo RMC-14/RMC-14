@@ -1,7 +1,7 @@
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
-using Content.Shared._RMC14.Mobs.Pulse;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -180,7 +180,7 @@ public sealed class HealthScannerSystem : EntitySystem
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
 
-        var pulse = _rmcPulse.GetPulseValue(target, byMachine: true);
+        var pulse = _rmcPulse.GetPulseValue(target, true);
         var bleeding = _rmcBloodstream.IsBleeding(target);
         var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding);
 

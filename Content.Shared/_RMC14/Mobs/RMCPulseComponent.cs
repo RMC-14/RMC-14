@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Mobs.Pulse;
+namespace Content.Shared._RMC14.Mobs;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RMCPulseComponent : Component

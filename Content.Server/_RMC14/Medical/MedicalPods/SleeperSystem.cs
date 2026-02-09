@@ -1,7 +1,7 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Medical.MedicalPods;
-using Content.Shared._RMC14.Mobs.Pulse;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.Components;
@@ -221,7 +221,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 var bloodMax = bloodSol.MaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
-                pulse = _pulse.GetPulseValue(occupant.Value, byMachine: true);
+                pulse = _pulse.GetPulseValue(occupant.Value, true);
             }
 
             if (_temperature.TryGetCurrentTemperature(occupant.Value, out var temp))
