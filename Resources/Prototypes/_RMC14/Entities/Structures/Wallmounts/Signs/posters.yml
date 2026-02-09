@@ -475,8 +475,8 @@
 - type: entity
   parent: CMPosterCMB1
   id: CMPosterCMB2
-  name: "Colonial Marshals poster"
-  description: "The laws of Earth stretch beyond the Sol: The Colonial Marshals."
+  name: "Colony Marshal poster"
+  description: "Justice, authority, and protection in the outer rim."
   components:
   - type: Sprite
     state: CMB_2
@@ -843,30 +843,30 @@
   - type: Sprite
     state: forecon
 
-# ZSPA
+# TSEPA
 - type: entity
   parent: CMPosterBase
-  id: CMPosterZSPA1
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. Integrity, Justice, Unity—Together, We Keep the Peace."
+  id: RMCPosterTSEPA1
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. Integrity, Justice, Unity. Together, We Keep the Peace."
   components:
   - type: Sprite
     state: ZSPA_1
 
 - type: entity
-  parent: CMPosterZSPA1
-  id: CMPosterZSPA2
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. Serve with Honor, Protect with Strength."
+  parent: RMCPosterTSEPA1
+  id: RMCPosterTSEPA2
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. Serve with Honor, Protect with Strength."
   components:
   - type: Sprite
     state: ZSPA_2
 
 - type: entity
-  parent: CMPosterZSPA1
-  id: CMPosterZSPA3
-  name: "ZSPA poster"
-  description: "A recruitment poster for the ZSPA. One Law, One Duty, One Force—Join the ZSPA."
+  parent: RMCPosterTSEPA1
+  id: RMCPosterTSEPA3
+  name: "TSEPA poster"
+  description: "A recruitment poster for the TSEPA. One Law, One Duty, One Force. Join the TSEPA."
   components:
   - type: Sprite
     state: ZSPA_3
