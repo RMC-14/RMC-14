@@ -124,6 +124,10 @@
       <GuideEntityEmbed Entity="RMCRecovNodeMapIcon" Margin="35 4 0 0"/>
     </Box>
     <Box Orientation="Vertical">
+      <GuideEntityEmbed Entity="HivePlasmaTreeXeno" Caption="" Margin="35 20 0 0"/>
+      <GuideEntityEmbed Entity="RMCRecovNodeMapIcon" Caption="Plasma Tree" Margin="35 4 0 0"/>
+    </Box>
+    <Box Orientation="Vertical">
       <GuideEntityEmbed Entity="HivePylonXeno" Caption=""/>
       <GuideEntityEmbed Entity="RMCPylonMapIcon"/>
     </Box>

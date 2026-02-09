@@ -1472,3 +1472,10 @@ RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
 RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
 RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
 RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper
+
+# 2026-2-1
+CMPosterZSPA1: RMCPosterTSEPA1
+CMPosterZSPA2: RMCPosterTSEPA2
+CMPosterZSPA3: RMCPosterTSEPA3
+RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
+RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
