@@ -10,7 +10,9 @@
   - type: UniformAccessory
     category: Medal
     limit: 2
-    layerKey: "enum.MedalVisualLayers.Base"
+    layerKeys:
+    - "enum.MedalVisualLayers.Base"
+    - "enum.MedalVisualLayers.Base1"
     hasIconSprite: true
 
 # Marine medals
@@ -27,6 +29,34 @@
   - type: UniformAccessory
     playerSprite:
       sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped
+
+- type: entity
+  parent: RMCMedalBronze
+  id: RMCMedalBronzeDistinguishedConduct
+  name: distinguished conduct medal
+  description: A bronze medal awarded for distinguished conduct. Whilst a great honor, this is the most basic award given by the UNMC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalBronze
+  id: RMCMedalBronzeHeart
+  name: bronze heart medal
+  description: A bronze heart-shaped medal awarded for sacrifice. It is often awarded posthumously or for severe injury in the line of duty.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/bronze_heart.rsi
+    state: bronze_heart
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/bronze_heart.rsi
       state: equipped
 
 - type: entity
@@ -51,6 +81,20 @@
 
 - type: entity
   parent: RMCMedalSilver
+  id: RMCMedalSilverValor
+  name: medal of valor
+  description: A silver medal awarded for acts of exceptional valor. Normally given to those who outstand themselves from the ranks, either it be in Leadership skills or actions crucial to the mission success.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/silver.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/silver.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalSilver
   id: RMCMedalSilverService
   name: silver service medal
   description: A shiny silver medal awarded for a marine's service within the UNMC. While somewhat common, it signifies someone's growing expertise and time invested into their department and skills.
@@ -68,6 +112,34 @@
     playerSprite:
       sprite: _RMC14/Objects/Medals/gold.rsi
       state: equipped
+
+- type: entity
+  parent: RMCMedalGold
+  id: RMCMedalGoldExceptionalHeroism
+  name: medal of exceptional heroism
+  description: An extremely rare golden medal awarded only by the UNMC. To receive such a medal is the highest honor and as such, very few exist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold.rsi
+    state: icon_co
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold.rsi
+      state: equipped_co
+
+- type: entity
+  parent: RMCMedalGold
+  id: RMCMedalHighCommandHonor
+  name: UNMC High Command Medal of honor
+  description: A star-shaped golden medal bestowed solely by UNMC High Command. It is not earned through valor alone, but granted by command authority for deeds that transcend recognized heroism. As the UNMC’s ultimate distinction, it eclipses every other commendation. Its recipients are known to history, not statistics.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Medals/gold_star.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Medals/gold_star.rsi
+      state: equipped_co
 
 - type: entity
   parent: RMCMedalGold
@@ -418,6 +490,5 @@
   id: RMCMedalPlatinumNametagService
   name: executive specialist name badge
   description: An engraved gold-and-black badge, containing the wearer's name, rank, and department. The highest rank most executives can reach within their lifetimes, it signifies ones influence, skill, and importance to the Weston-Yamada Corporation.
-
 
 

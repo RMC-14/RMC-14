@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.NightVision;
 using Robust.Shared;
 using Robust.Shared.Configuration;
 
@@ -325,8 +326,14 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCJelliesPerQueen =
         CVarDef.Create("rmc.jellies_per_queen", 5, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<int> RMCCommendationMinLength =
+        CVarDef.Create("rmc.commendation_min_length", 130, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
     public static readonly CVarDef<int> RMCCommendationMaxLength =
         CVarDef.Create("rmc.commendation_max_length", 1000, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> RMCRecommendationMaxLength =
+        CVarDef.Create("rmc.recommendation_max_length", 300, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
     /// <summary>
     /// Whether the no EORG popup is enabled.
@@ -500,6 +507,9 @@ public sealed partial class RMCCVars : CVars
 
     public static readonly CVarDef<bool> RMCXenoAbilityPreviews =
         CVarDef.Create("rmc.xeno_ability_previews", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> RMCXenoDefaultNightVision =
+        CVarDef.Create("rmc.xeno_default_night_vision", (int) NightVisionState.Half, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     public static readonly CVarDef<int> RMCLagCompensationMilliseconds =
         CVarDef.Create("rmc.lag_compensation_milliseconds", 750, CVar.REPLICATED | CVar.SERVER);

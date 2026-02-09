@@ -59,6 +59,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_command
     - type: RMCTrackable
+    - type: RMCAwardRecommendation
     - type: SeeNewPlayers
 
 - type: startingGear
@@ -67,6 +68,7 @@
     jumpsuit: CMJumpsuitCMO
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
+    ears: CMHeadsetCMO
     # TODO RMC14 random chemical synthesis note
 
 - type: startingGear
