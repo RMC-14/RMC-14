@@ -279,6 +279,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
 
         weapon.MountedTo = GetNetEntity(ent);
+        Dirty(args.Used.Value, weapon);
+
         ent.Comp.MountedEntity = args.Used;
         _collisionWake.SetEnabled(ent, false);
         _item.SetSize(ent, ent.Comp.MountedWeaponSize);
@@ -315,9 +317,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
 
         _container.EmptyContainer(container);
-        if (TryComp(ent.Comp.MountedEntity, out MountableWeaponComponent? attachedWeapon))
+        if (TryComp(ent.Comp.MountedEntity, out MountableWeaponComponent? mountableWeapon))
         {
-            attachedWeapon.MountedTo = GetNetEntity(ent);
+            mountableWeapon.MountedTo = null;
+            Dirty(ent.Comp.MountedEntity.Value, mountableWeapon);
         }
 
         if (TryComp(ent.Comp.MountedEntity, out MetaDataComponent? mountedMeta) && mountedMeta.EntityPrototype != null)

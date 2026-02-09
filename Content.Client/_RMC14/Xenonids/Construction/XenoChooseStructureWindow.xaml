@@ -4,6 +4,9 @@
     Title="{Loc cm-xeno-choose-resin-structure}"
     MinSize="300 300">
     <ScrollContainer HScrollEnabled="False" HorizontalExpand="True" VerticalExpand="True">
-        <BoxContainer Orientation="Vertical" Name="StructureContainer" Access="Public" />
+        <BoxContainer Orientation="Vertical">
+            <Label Name="NodeCountLabel" Access="Public" Text="" Visible="False" />
+            <BoxContainer Orientation="Vertical" Name="StructureContainer" Access="Public" />
+        </BoxContainer>
     </ScrollContainer>
 </cc:XenoChooseStructureWindow>

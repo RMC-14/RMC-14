@@ -622,3 +622,171 @@
       - RMCWeaponRifleType71PVE
       item_6:
       - RMCWeaponRifleType71PVE
+
+# L90A1
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackL90A1Empty
+  name: L90A1 gun rack
+  suffix: L90A1, Empty
+  description: A large, heavy-duty rack designed to store L90A1 rifles - locked, loaded, waiting to be fired at a moment's notice. Officially, RCM legislations advise against this practice, but it doesn't stop many armories from keeping their rifles stowed in such a condition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/l90_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: L90A1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      item_2:
+        name: L90A1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      item_3:
+        name: L90A1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      item_4:
+        name: L90A1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      item_5:
+        name: L90A1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCRifleL90A1
+
+- type: entity
+  parent: RMCGunRackL90A1Empty
+  id: RMCGunRackL90A1Filled
+  suffix: L90A1, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleL90A1FilledSemiStripped
+      item_2:
+      - RMCWeaponRifleL90A1FilledSemiStripped
+      item_3:
+      - RMCWeaponRifleL90A1FilledSemiStripped
+      item_4:
+      - RMCWeaponRifleL90A1FilledSemiStripped
+      item_5:
+      - RMCWeaponRifleL90A1FilledSemiStripped
+
+# L90A2
+
+- type: entity
+  parent: RMCGunRackBase
+  id: RMCGunRackL90A2Empty
+  name: L90A2 gun rack
+  suffix: L90A2, Empty
+  description:  A large, heavy-duty rack designed to store L90A2 rifles - locked, loaded, waiting to be fired at a moment's notice. Officially, RCM legislations advise against this practice, but it doesn't stop many armories from keeping their rifles stowed in such a condition.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/GunRacks/l90_rack.rsi
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: L90A2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      item_2:
+        name: L90A2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      item_3:
+        name: L90A2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      item_4:
+        name: L90A2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      item_5:
+        name: L90A2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      fill_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      fill_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+      fill_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCRifleL90A2
+
+- type: entity
+  parent: RMCGunRackL90A2Empty
+  id: RMCGunRackL90A2Filled
+  suffix: L90A2, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponRifleL90A2FilledSemiStripped
+      item_2:
+      - RMCWeaponRifleL90A2FilledSemiStripped
+      item_3:
+      - RMCWeaponRifleL90A2FilledSemiStripped
+      item_4:
+      - RMCWeaponRifleL90A2FilledSemiStripped
+      item_5:
+      - RMCWeaponRifleL90A2FilledSemiStripped
