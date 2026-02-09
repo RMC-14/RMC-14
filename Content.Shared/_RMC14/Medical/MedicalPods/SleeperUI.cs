@@ -28,8 +28,8 @@ public sealed class SleeperBuiState(
     bool autoEjectDead,
     FixedPoint2 maxChem,
     float crisisMinDamage,
-    List<SleeperChemicalData> chemicals,
-    List<int> injectionAmounts)
+    SleeperChemicalData[] chemicals,
+    int[] injectionAmounts)
     : BoundUserInterfaceMessage
 {
     public readonly NetEntity? Occupant = occupant;
@@ -53,8 +53,8 @@ public sealed class SleeperBuiState(
     public readonly bool AutoEjectDead = autoEjectDead;
     public readonly FixedPoint2 MaxChem = maxChem;
     public readonly float CrisisMinDamage = crisisMinDamage;
-    public readonly List<SleeperChemicalData> Chemicals = chemicals;
-    public readonly List<int> InjectionAmounts = injectionAmounts;
+    public readonly SleeperChemicalData[] Chemicals = chemicals;
+    public readonly int[] InjectionAmounts = injectionAmounts;
 }
 
 [Serializable, NetSerializable]

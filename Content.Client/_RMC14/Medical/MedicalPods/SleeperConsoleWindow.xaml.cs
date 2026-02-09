@@ -18,7 +18,12 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
         DialysisToggleButton.OnPressed += _ => _bui?.ToggleFilter();
         EjectButton.OnPressed += _ => _bui?.Eject();
-        AutoEjectDeadButton.OnPressed += _ => _bui?.SetAutoEjectDead(!AutoEjectDeadButton.Pressed);
+        AutoEjectDeadButton.OnPressed += _ =>
+        {
+            // When OnPressed fires, the button's Pressed state has already been toggled
+            // So we send the current Pressed state (which is the new desired state)
+            _bui?.SetAutoEjectDead(AutoEjectDeadButton.Pressed);
+        };
     }
 
     public void SetBui(SleeperConsoleBui bui)
@@ -41,23 +46,29 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             ? Loc.GetString("rmc-sleeper-dialysis-active")
             : Loc.GetString("rmc-sleeper-dialysis-inactive");
 
+        // Show progress bar with reagent amounts when dialysis is active
         if (state.Filtering && state.ReagentsWhenStarted > 0)
         {
-            DialysisProgressBar.Visible = true;
+            DialysisProgressContainer.Visible = true;
             DialysisProgressBar.Value = (state.TotalReagents / state.ReagentsWhenStarted).Float();
-            DialysisStatusLabel.Text = Loc.GetString("rmc-sleeper-dialysis-progress",
-                ("current", state.TotalReagents.Int()),
-                ("total", state.ReagentsWhenStarted.Int()));
+            DialysisProgressLabel.Text = $"{state.TotalReagents.Int()}/{state.ReagentsWhenStarted.Int()}";
+            DialysisStatusLabel.Visible = false;
         }
         else
         {
-            DialysisProgressBar.Visible = false;
-            DialysisStatusLabel.Text = state.TotalReagents <= 0
-                ? Loc.GetString("rmc-sleeper-dialysis-no-chemicals")
-                : "";
+            DialysisProgressContainer.Visible = false;
+            if (state.TotalReagents <= 0)
+            {
+                DialysisStatusLabel.Visible = true;
+                DialysisStatusLabel.Text = Loc.GetString("rmc-sleeper-dialysis-no-chemicals");
+            }
+            else
+            {
+                DialysisStatusLabel.Visible = false;
+            }
         }
 
-        // Auto-eject and occupant info
+        // Auto-eject - set the button state to match the server state
         AutoEjectDeadButton.Pressed = state.AutoEjectDead;
         AutoEjectDeadButton.Text = state.AutoEjectDead
             ? Loc.GetString("rmc-sleeper-on")
@@ -69,14 +80,14 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.Value = state.Health;
         HealthBar.MaxValue = state.MaxHealth;
         HealthBar.MinValue = state.MinHealth;
-        HealthBarText.Text = state.Health.ToString("F0");
+        HealthBarText.Text = $"{state.Health:F0}";
 
         var crisisDamageThreshold = state.MaxHealth - state.CrisisMinDamage;
         HealthBar.Modulate = state.Health switch
         {
-            _ when state.Health >= crisisDamageThreshold => Color.FromHex("#00AA00"),
-            >= 0 => Color.FromHex("#AAAA00"),
-            _ => Color.FromHex("#AA0000")
+            _ when state.Health >= crisisDamageThreshold => Color.FromHex("#00FF00"),
+            >= 0 => Color.FromHex("#FFFF00"),
+            _ => Color.FromHex("#FF0000")
         };
         StatusLabel.Text = state.OccupantState switch
         {
@@ -87,22 +98,22 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         };
         StatusLabel.Modulate = state.OccupantState switch
         {
-            SleeperOccupantMobState.Alive => Color.FromHex("#00AA00"),
-            SleeperOccupantMobState.Critical => Color.FromHex("#AAAA00"),
-            SleeperOccupantMobState.Dead => Color.FromHex("#AA0000"),
+            SleeperOccupantMobState.Alive => Color.FromHex("#00FF00"),
+            SleeperOccupantMobState.Critical => Color.FromHex("#FFFF00"),
+            SleeperOccupantMobState.Dead => Color.FromHex("#FF0000"),
             _ => Color.White
         };
 
         var tempCelsius = TemperatureHelpers.KelvinToCelsius(state.BodyTemperature);
         var tempFahrenheit = TemperatureHelpers.KelvinToFahrenheit(state.BodyTemperature);
         TemperatureBar.Value = state.BodyTemperature;
-        TemperatureBarText.Text = $"{tempCelsius:F0}ºC, {tempFahrenheit:F0}ºF";
+        TemperatureBarText.Text = $"{tempCelsius:F0}°C, {tempFahrenheit:F0}°F";
 
-        TemperatureBar.Modulate = tempCelsius switch // TODO RMC14 species-specific temperatureSuitability thresholds?
+        TemperatureBar.Modulate = tempCelsius switch
         {
-            >= 36 and <= 38 => Color.FromHex("#00AA00"), // Normal
-            >= 34 and < 36 or > 38 and <= 40 => Color.FromHex("#AAAA00"), // Mild hypo/hyperthermia
-            _ => Color.FromHex("#AA0000") // Severe
+            >= 36 and <= 38 => Color.FromHex("#00FF00"),
+            >= 34 and < 36 or > 38 and <= 40 => Color.FromHex("#FFFF00"),
+            _ => Color.FromHex("#FF0000")
         };
 
         // Damage bars
@@ -127,9 +138,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
             BloodBar.Modulate = state.BloodPercent switch
             {
-                >= 90 => Color.FromHex("#00AA00"),
-                >= 60 => Color.FromHex("#AAAA00"),
-                _ => Color.FromHex("#AA0000")
+                >= 90 => Color.FromHex("#00FF00"),
+                >= 60 => Color.FromHex("#FFFF00"),
+                _ => Color.FromHex("#FF0000")
             };
         }
 
@@ -137,7 +148,12 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         ChemicalsContainer.DisposeAllChildren();
         foreach (var (name, chemId, occupantAmount, injectable, overdosing, odWarning) in state.Chemicals)
         {
-            var row = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
+            var row = new BoxContainer
+            {
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                Margin = new Thickness(0, 2, 0, 2)
+            };
+
             var nameLabel = new Label
             {
                 Text = name,
@@ -147,7 +163,8 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
             var amountBar = new ProgressBar
             {
-                MinWidth = 100,
+                HorizontalExpand = true,
+                MinHeight = 18,
                 Value = occupantAmount.Float(),
                 MaxValue = state.MaxChem.Float()
             };
@@ -155,20 +172,18 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             var amountLabel = new Label
             {
                 Text = $"{occupantAmount}/{state.MaxChem}u",
-                Margin = new Thickness(0, 0, 5, 0),
-                HorizontalAlignment = HAlignment.Right
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Center
             };
             amountBar.AddChild(amountLabel);
 
             if (overdosing)
             {
-                amountBar.Modulate = Color.FromHex("#AA0000");
-                var warningLabel = new Label { Text = " ⚠", Modulate = Color.FromHex("#AA0000") };
-                row.AddChild(warningLabel);
+                amountBar.Modulate = Color.FromHex("#FF0000");
             }
             else if (odWarning)
             {
-                amountBar.Modulate = Color.FromHex("#AAAA00");
+                amountBar.Modulate = Color.FromHex("#FFFF00");
             }
             row.AddChild(amountBar);
 
@@ -197,9 +212,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
         bar.Modulate = damage switch
         {
-            < 25 => Color.FromHex("#00AA00"),
-            < 50 => Color.FromHex("#AAAA00"),
-            _ => Color.FromHex("#AA0000")
+            < 25 => Color.FromHex("#00FF00"),
+            < 50 => Color.FromHex("#FFFF00"),
+            _ => Color.FromHex("#FF0000")
         };
     }
 }

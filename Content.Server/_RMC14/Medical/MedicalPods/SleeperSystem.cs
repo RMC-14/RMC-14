@@ -285,8 +285,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.AutoEjectDead,
             sleeper.MaxChemical,
             sleeper.CrisisMinDamage,
-            chemicals,
-            sleeper.InjectionAmounts.ToList());
+            chemicals.ToArray(),
+            sleeper.InjectionAmounts.ToArray());
 
         _ui.ServerSendUiMessage(console.Owner, SleeperUIKey.Key, state);
     }
