@@ -113,6 +113,9 @@ public sealed partial class SleeperComponent : Component
     [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
+    [DataField, AutoNetworkedField]
+    public EntityUid? SpawnedConsole;
+
     [DataField]
     public SoundSpecifier EjectSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/hydraulics_3.ogg");
 

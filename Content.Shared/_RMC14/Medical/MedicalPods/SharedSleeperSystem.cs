@@ -47,6 +47,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, DragDropTargetEvent>(OnSleeperDragDrop);
 
         SubscribeLocalEvent<SleeperConsoleComponent, ComponentInit>(OnConsoleInit);
+        SubscribeLocalEvent<SleeperConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<SleeperConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
     }
 
@@ -70,8 +71,10 @@ public abstract class SharedSleeperSystem : EntitySystem
 
             if (TryComp(consoleId, out SleeperConsoleComponent? console))
             {
+                sleeper.Comp.SpawnedConsole = consoleId;
                 sleeper.Comp.LinkedConsole = consoleId;
                 console.LinkedSleeper = sleeper;
+                console.SpawnedBySleeper = sleeper;
                 Dirty(sleeper);
                 Dirty(consoleId, console);
             }
@@ -80,14 +83,22 @@ public abstract class SharedSleeperSystem : EntitySystem
 
     private void OnSleeperShutdown(Entity<SleeperComponent> sleeper, ref ComponentShutdown args)
     {
-        // Clean up linked console
-        if (sleeper.Comp.LinkedConsole is { } consoleId && TryComp(consoleId, out SleeperConsoleComponent? console))
+        // Unlink the currently linked console (if any)
+        if (sleeper.Comp.LinkedConsole is { } linkedConsoleId && TryComp(linkedConsoleId, out SleeperConsoleComponent? linkedConsole))
         {
-            console.LinkedSleeper = null;
-            Dirty(consoleId, console);
+            linkedConsole.LinkedSleeper = null;
+            Dirty(linkedConsoleId, linkedConsole);
+        }
 
-            if (_net.IsServer)
-                QueueDel(consoleId);
+        // Only delete the console that was SPAWNED by this sleeper
+        if (_net.IsServer &&
+            sleeper.Comp.SpawnedConsole is { } spawnedConsoleId &&
+            TryComp(spawnedConsoleId, out SleeperConsoleComponent? spawnedConsole))
+        {
+            if (spawnedConsole.SpawnedBySleeper == sleeper.Owner)
+            {
+                QueueDel(spawnedConsoleId);
+            }
         }
     }
 
@@ -225,6 +236,38 @@ public abstract class SharedSleeperSystem : EntitySystem
         TryLinkToSleeper(console);
     }
 
+    private void OnConsoleShutdown(Entity<SleeperConsoleComponent> console, ref ComponentShutdown args)
+    {
+        // Clean up the sleeper's reference to this console
+        if (console.Comp.LinkedSleeper is { } linkedSleeperId && TryComp(linkedSleeperId, out SleeperComponent? linkedSleeper))
+        {
+            if (linkedSleeper.LinkedConsole == console.Owner)
+            {
+                linkedSleeper.LinkedConsole = null;
+                Dirty(linkedSleeperId, linkedSleeper);
+            }
+
+            // Also clear SpawnedConsole if this console was spawned by that sleeper
+            if (linkedSleeper.SpawnedConsole == console.Owner)
+            {
+                linkedSleeper.SpawnedConsole = null;
+                Dirty(linkedSleeperId, linkedSleeper);
+            }
+        }
+
+        // Also check WasSpawnedBySleeper in case it's different from LinkedSleeper
+        if (console.Comp.SpawnedBySleeper is { } spawnedBySleeperId &&
+            spawnedBySleeperId != console.Comp.LinkedSleeper &&
+            TryComp(spawnedBySleeperId, out SleeperComponent? spawnerSleeper))
+        {
+            if (spawnerSleeper.SpawnedConsole == console.Owner)
+            {
+                spawnerSleeper.SpawnedConsole = null;
+                Dirty(spawnedBySleeperId, spawnerSleeper);
+            }
+        }
+    }
+
     private void OnConsoleUIOpenAttempt(Entity<SleeperConsoleComponent> console, ref ActivatableUIOpenAttemptEvent args)
     {
         if (args.Cancelled)
@@ -248,6 +291,10 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         foreach (var sleeper in _sleeperLinkBuffer)
         {
+            // Don't steal links from other consoles - only link to unlinked sleepers
+            if (sleeper.Comp.LinkedConsole != null)
+                continue;
+
             console.Comp.LinkedSleeper = sleeper;
             sleeper.Comp.LinkedConsole = console;
             Dirty(console);

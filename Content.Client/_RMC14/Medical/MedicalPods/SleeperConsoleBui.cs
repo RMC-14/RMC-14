@@ -14,28 +14,17 @@ public sealed class SleeperConsoleBui(EntityUid owner, Enum uiKey) : BoundUserIn
     {
         base.Open();
 
-        if (State is SleeperBuiState state)
-            UpdateState(state);
+        _window = this.CreateWindow<SleeperConsoleWindow>();
+        _window.Title = Loc.GetString("rmc-sleeper-window-title");
+        _window.SetBui(this);
     }
 
-    protected override void UpdateState(BoundUserInterfaceState state)
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
     {
-        base.UpdateState(state);
+        base.ReceiveMessage(message);
 
-        if (state is SleeperBuiState sleeperState)
-            UpdateState(sleeperState);
-    }
-
-    private void UpdateState(SleeperBuiState state)
-    {
-        if (_window == null)
-        {
-            _window = this.CreateWindow<SleeperConsoleWindow>();
-            _window.Title = Loc.GetString("rmc-sleeper-window-title");
-            _window.SetBui(this);
-        }
-
-        _window.UpdateState(state);
+        if (message is SleeperBuiState sleeperState)
+            _window?.UpdateState(sleeperState);
     }
 
     public void InjectChemical(string chemicalId, int amount)
