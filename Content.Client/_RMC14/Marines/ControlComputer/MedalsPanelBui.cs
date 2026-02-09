@@ -402,8 +402,9 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
 
         var commendationSystem = _systems.GetEntitySystem<SharedCommendationSystem>();
         var awardableMedals = commendationSystem.GetAwardableMedalIds();
+        var specialMedals = commendationSystem.GetSpecialMedalIds();
 
-        foreach (var medalId in awardableMedals)
+        foreach (var medalId in awardableMedals.Concat(specialMedals))
         {
             if (!_prototype.TryIndex(medalId, out var medalProto))
                 continue;
@@ -566,4 +567,3 @@ public sealed class MedalsPanelBui(EntityUid owner, Enum uiKey) : BoundUserInter
         }
     }
 }
-
