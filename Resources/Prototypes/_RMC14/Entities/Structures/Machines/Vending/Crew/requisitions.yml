@@ -600,6 +600,8 @@
     sections:
     - name: Barrel
       entries:
+      - id: RMCAttachmentBarrelCharger
+        amount: 2
       - id: RMCAttachmentExtendedBarrel
         amount: 7
       - id: RMCM5Bayonet
