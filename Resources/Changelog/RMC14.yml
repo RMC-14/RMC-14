@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: Aurallianz
-  changes:
-  - message: Added the ability to have headsets that read a comms channel, but are
-      not able to talk through it.
-    type: Add
-  id: 2410
-  time: '2025-10-05T06:48:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8043
 - author: to4no_fix
   changes:
   - message: "Ported UNMC tents! Added Standard Tent, Command Tent (unfolds Overwatch\
@@ -4756,5 +4748,12 @@
   id: 2911
   time: '2026-02-09T21:33:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9154
+- author: Ian321
+  changes:
+  - message: Squad assignment via the ID computer now correctly updates the job title.
+    type: Fix
+  id: 2912
+  time: '2026-02-09T23:16:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9177
 Name: RMC14
 Order: -1
