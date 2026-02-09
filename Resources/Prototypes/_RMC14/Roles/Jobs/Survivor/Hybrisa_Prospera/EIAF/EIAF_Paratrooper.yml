@@ -36,11 +36,11 @@
   id: RMCSpawnPointEIAFParatrooper
   name: eiaf paratrooper spawn point
   components:
-    - type: SpawnPoint
-      job_id: RMCSurvivorEIAFParatrooper
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFParatrooper
   layers:
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv
 
 - type: jobIcon
   parent: CMJobIconBase

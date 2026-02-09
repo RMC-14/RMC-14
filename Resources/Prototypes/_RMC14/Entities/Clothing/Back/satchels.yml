@@ -881,7 +881,7 @@
         - id: RMCRadioHandheldColony
         - id: RMCHeadRoyalL1HelmetBallistic
         - id: CMFireExtinguisherPortable
-        - id: RMCDefibrillator
+        - id: CMDefibrillator
         - id: CMHealthAnalyzer
 
 - type: entity

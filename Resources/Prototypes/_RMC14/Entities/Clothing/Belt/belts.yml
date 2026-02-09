@@ -423,23 +423,6 @@
   - type: Tag
     tags:
     - RMCBeltMedical
-      
-- type: entity
-  parent: CMBeltMedical
-  id: RMCRCMMedical
-  name: L75 pattern medical storage rig
-  description: The L75 is the standard load-bearing equipment of the RCM. It consists of a modular belt with various clips. This version is designed to transport medical supplies and pistol ammunition.
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
-    - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
-    - type: Storage
-      maxItemSize: Normal
-      grid:
-        - 0,0,13,4 # 21 slots
-      whitelist:
-        - CMMagazinePistol
 
 - type: entity
   parent: CMBeltBaseStorage
@@ -1057,95 +1040,6 @@
     - id: RMCSpeedLoaderZHNK72
       amount: 6
     - id: RMCWeaponRevolverZHNK72
-      
-- type: entity
-  parent: RMCBeltHolsterPistol
-  id: RMCBeltHolsterPistolEIAF
-  name: EIAF paratrooper belt
-  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
-    - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
-    - type: ItemCamouflage
-      camouflageVariations: {}
-    - type: Storage # holds up to 7 mags plus gun
-      maxItemSize: Normal
-      grid:
-        - 0,0,15,1 # 8 slots
-      whitelist:
-        tags:
-          - Sidearm
-          - CMMagazinePistol
-          - RMCRevolver
-          - RMCMagazineRevolver
-      blacklist:
-        tags:
-          - RMCSmartPistol
-          - RMCMagazinePistolSU6
-    - type: FixedItemSizeStorage
-    - type: LimitedStorage
-      limits:
-        - popup: rmc-storage-limit-one-gun
-          whitelist:
-            tags:
-              - Sidearm
-              - RMCRevolver
-        - popup: rmc-storage-limit-max-loaders
-          count: 7
-          whitelist:
-            tags:
-              - CMMagazinePistol
-              - RMCMagazineRevolver
-    - type: CMHolster
-      whitelist:
-        tags:
-          - Sidearm
-
-- type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFM44
-  suffix: Filled, M44
-  components:
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
-        - id: RMCSpeedLoaderM44
-          amount: 7
-          
-- type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFM44Random
-  suffix: Random, M44
-  components:
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
-        - id: RMCSpeedLoaderM44
-        - id: RMCSpeedLoaderM44
-          prob: 0.5
-        - id: RMCSpeedLoaderM44
-          prob: 0.5
-          
-- type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFCustom
-  suffix: Filled, L54 Custom
-  name: EIAF custom paratrooper belt
-  description: A modified EIAF paratrooper belt featuring a black leather holster with gold inlay, a large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for EIAF airborne forces dropping into hostile territory.
-  components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
-    - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
-    - type: ItemCamouflage
-      camouflageVariations: { }
-    - type: StorageFill
-      contents:
-        - id: RMCWeaponPistolL54Custom
-        - id: RMCMagazinePistolL54Custom
-          amount: 7
           
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
@@ -2051,6 +1945,166 @@
   - type: Tag
     tags:
     - RMCMachineGunnerRig
+      
+# RCM/EIAF Belts
+
+- type: entity
+  parent: CMBeltMedical
+  id: RMCL75Medical
+  name: L75 pattern medical storage rig
+  description: The L75 is the standard load-bearing equipment of the RCM. It consists of a modular belt with various clips. This version is designed to transport medical supplies and pistol ammunition.
+  suffix: RCM, Medical
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,13,5 # 21 slots
+      whitelist:
+        tags:
+          - CMMagazinePistol
+          - DiscreteHealthAnalyzer
+          - Dropper
+          - GlassBeaker
+          - Bottle
+          - PillPacket
+          - PillCanister
+          - Syringe
+          - CMSurgicalLine
+          - CMSynthGraft
+          - Brutepack
+          - CMBloodPack
+          - Gauze
+          - Ointment
+          - CMOintment
+          - CMTraumaKit
+          - CMBurnKit
+          #      - # TODO RMC14 splints
+          - CMAutoInjector
+          - CMRollerItem
+          - BodyBag
+          - RMCGlovesLatex
+          - SterileMask
+          - Hypospray
+          - CigPack
+          - RMCPenlight
+          - Flare
+          - RMCMiniTank
+          #      - # TODO RMC14 reagent analyzer
+          #      - # TODO RMC14 plant analyzer
+        components:
+          - Hypospray
+          - Defibrillator
+          - Pill
+          - RMCLighter
+            
+- type: entity
+  parent: RMCL75Medical
+  id: RMCL75MedicalFillEIAF
+  suffix: Filled, EIAF, Survivor
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMPillCanisterBicaridine
+        - id: CMPillCanisterKelotane
+        # - id: CMPillCanisterTramadol
+        - id: CMPillCanisterTricordrazine
+        - id: CMTraumaKit10
+        - id: CMBurnKit10
+        # - id: 5 splints
+        - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolEIAF
+  name: EIAF paratrooper belt
+  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: Storage # holds up to 7 mags plus gun
+      maxItemSize: Normal
+      grid:
+        - 0,0,15,1 # 8 slots
+      whitelist:
+        tags:
+          - Sidearm
+          - CMMagazinePistol
+          - RMCRevolver
+          - RMCMagazineRevolver
+      blacklist:
+        tags:
+          - RMCSmartPistol
+          - RMCMagazinePistolSU6
+    - type: FixedItemSizeStorage
+    - type: LimitedStorage
+      limits:
+        - popup: rmc-storage-limit-one-gun
+          whitelist:
+            tags:
+              - Sidearm
+              - RMCRevolver
+        - popup: rmc-storage-limit-max-loaders
+          count: 7
+          whitelist:
+            tags:
+              - CMMagazinePistol
+              - RMCMagazineRevolver
+    - type: CMHolster
+      whitelist:
+        tags:
+          - Sidearm
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFM44
+  suffix: Filled, M44
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
+        - id: RMCSpeedLoaderM44
+          amount: 7
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFM44Random
+  suffix: Random, M44
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
+        - id: RMCSpeedLoaderM44
+        - id: RMCSpeedLoaderM44
+          prob: 0.5
+        - id: RMCSpeedLoaderM44
+          prob: 0.5
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFCustom
+  suffix: Filled, L54 Custom
+  name: EIAF custom paratrooper belt
+  description: A modified EIAF paratrooper belt featuring a black leather holster with gold inlay, a large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for EIAF airborne forces dropping into hostile territory.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+    - type: ItemCamouflage
+      camouflageVariations: { }
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponPistolL54Custom
+        - id: RMCMagazinePistolL54Custom
+          amount: 7
 
 - type: Tag
   id: RMCNailgunHolster

@@ -1,0 +1,67 @@
+- type: job
+  parent: RMCSurvivorEIAFBase
+  id: RMCSurvivorEIAFSquadLeader
+  name: rmc-job-name-eiaf-squad-leader
+  ranks:
+    RMCRankEIAFSergeant: [ ]
+  startingGear: RMCGearEIAFSquadLeader
+  icon: RMCJobIconEIAFSquadLeader
+  spawnMenuRoleName: EIAF Paratrooper (Squad Leader) (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - Civilian
+            - TSE
+        - type: Skills
+          preset: RMCSkillPresetEIAFLeader
+        - type: MarineOrders
+        - type: RMCPointing
+        - type: CommandAccent
+        - type: RMCTrackable
+        - type: SquadLeader
+          icon:
+            sprite: _RMC14/Interface/cm_job_icons.rsi
+            state: eiaf_teamleader_alt
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: rmc_teamleader
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_eiaf
+        - type: IntelRescueSurvivorObjective
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadEIAF
+        - type: JobPrefix
+          prefix: rmc-job-prefix-eiaf-squad-leader
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearEIAFBase
+  id: RMCGearEIAFSquadLeader
+  equipment:
+    head: RMCHeadEIAFBeretLead
+    outerClothing: RMCArmorEIAFVest
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointEIAFSquadLeader
+  name: eiaf paratrooper squad leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFSquadLeader
+  layers:
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEIAFSquadLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: eiaf_teamleader_alt
+    

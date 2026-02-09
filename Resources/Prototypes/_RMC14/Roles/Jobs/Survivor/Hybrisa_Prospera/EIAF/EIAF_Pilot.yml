@@ -1,0 +1,61 @@
+- type: job
+  parent: RMCSurvivorEIAFBase
+  id: RMCSurvivorEIAFPilot
+  name: rmc-job-name-eiaf-pilot
+  ranks:
+    RMCRankEIAFCorporal: [ ]
+  startingGear: RMCGearEIAFPilot
+  icon: RMCJobIconEIAFPilot
+  spawnMenuRoleName: EIAF Fleet Air Arm (Dropship Pilot) (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - Civilian
+            - TSE
+        - type: Skills
+          preset: RMCSkillPresetEIAFPilot
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: rmc_marksman
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_eiaf
+        - type: IntelRescueSurvivorObjective
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadEIAF
+        - type: JobPrefix
+          prefix: rmc-job-prefix-eiaf-pilot
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearEIAFBase
+  id: RMCGearEIAFPilot
+  equipment:
+    head: RMCHeadRoyalFlightHelmet
+    jumpsuit: RMCJumpsuitMarineEIAFNo8PDW90
+    outerClothing: RMCArmorEIAFVest
+    suitstorage: RMCWeaponSMGPDW90TSE
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointEIAFPilot
+  name: eiaf paratrooper dropship pilot spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFPilot
+  layers:
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEIAFPilot
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: eiaf_pilot
+    

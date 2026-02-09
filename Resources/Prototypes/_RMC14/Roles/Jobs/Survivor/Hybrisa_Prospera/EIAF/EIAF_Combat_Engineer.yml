@@ -45,11 +45,11 @@
   id: RMCSpawnPointEIAFCombatEngineer
   name: eiaf paratrooper combat engineer spawn point
   components:
-    - type: SpawnPoint
-      job_id: RMCSurvivorEIAFCombatEngineer
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFCombatEngineer
   layers:
-    - sprite: _RMC14/Markers/landmarks.rsi
-      state: surv
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv
 
 - type: jobIcon
   parent: CMJobIconBase
