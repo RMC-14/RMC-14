@@ -33,5 +33,5 @@ public sealed partial class AcidPillarComponent : Component
     public SpriteSpecifier.Rsi? IdleSprite = new(new ResPath("_RMC14/Structures/Xenos/xeno_acid_pillar.rsi"), "idle");
 
     [DataField, AutoNetworkedField]
-    public SpriteSpecifier.Rsi? FiringSprite = new(new ResPath("_RMC14/Structures/Xenos/xeno_acid_pillar.rsi"), "firing");
+    public SpriteSpecifier.Rsi? FiringSprite = new(new ResPath("_RMC14/Structures/Xenos/xeno_acid_pillar.rsi"), "attack");
 }
