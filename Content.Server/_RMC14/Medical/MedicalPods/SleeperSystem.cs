@@ -25,10 +25,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
-    [Dependency] private readonly RMCPulseSystem _pulse = default!;
-    [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
+    [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
+    [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private readonly SharedRMCTemperatureSystem _temperature = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
@@ -221,10 +221,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 var bloodMax = bloodSol.MaxVolume;
                 bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
-                pulse = _pulse.GetPulseValue(occupant.Value, true);
+                pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
             }
 
-            if (_temperature.TryGetCurrentTemperature(occupant.Value, out var temp))
+            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var temp))
                 bodyTemp = temp;
         }
 
@@ -386,7 +386,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         Solution? cachedChemSol,
         bool injectable)
     {
-        if (!_reagent.TryIndex(chemId, out var reagentProto))
+        if (!_rmcReagent.TryIndex(chemId, out var reagentProto))
             return;
 
         FixedPoint2 occupantAmount = 0;
