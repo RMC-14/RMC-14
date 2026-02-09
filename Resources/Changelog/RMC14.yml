@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: FTLs now get an RTO for free with their essential bundle.
-    type: Add
-  id: 2401
-  time: '2025-10-05T03:49:23.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7100
 - author: 4310V343k
   changes:
   - message: Fixed pamphlets not modifying your radio prefix.
@@ -4723,5 +4716,12 @@
   id: 2902
   time: '2026-02-09T05:56:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9155
+- author: Scyarah
+  changes:
+  - message: Make turrets no longer target burrowed xenos
+    type: Fix
+  id: 2903
+  time: '2026-02-09T06:01:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8910
 Name: RMC14
 Order: -1
