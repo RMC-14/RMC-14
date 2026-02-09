@@ -4,11 +4,11 @@
   ##Playing as a Designer
   As a designer you give up your ability to directly place resin walls and doors, in exchange for making the hive building experience better for your sisters. This strain aims at helping to reward the time for other builders by making their life, and the hives, easier.
 
-  You acommplish this by placing different nodes down that other hive builders can use to quickly build walls and doors, This allows you to focus on making sure the hive is built up quickly and efficiently, while your sisters can focus on getting resin down and defending the hive.
+  You accomplish this by placing different nodes down that other hive builders can use to quickly build walls and doors, This allows you to focus on making sure the hive is built up quickly and efficiently, while your sisters can focus on getting resin down and defending the hive.
 
   You can build nodes at a far range and do not need direct line of sight (Although it helps!).
 
-  You also gain stronger pheromones at a T3 rating and your tackles stun talls for longer!
+  You also gain stronger pheromones at a T3 rating and your tackles stun hosts for longer!
 
   ##Node Types - Up to 36 nodes can exist at the same time:
   -[bold]Construction Node[/bold]: This that allows sisters to build weedbound walls and doors quickly. Any xeno with plasma can interact with these nodes to summon a weedbound wall in 4 seconds.
@@ -30,7 +30,7 @@
   ##Designer Abilities:
   -[bold]Toggle Long-Range Sight[/bold]: Increases your vision to see more of the battlefield. You can place nodes as far as the eye can see!
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleLongRangeSight"/>
-  -[bold]Greater Resin Surge[/bold]: Transform all nodes within 7 tiles of you into unstable thick resin walls. They decay in 13 seconds. They can soak tall spits, but will break in 1 melee hit. (In the future, it will create weak reflective resin walls)
+  -[bold]Greater Resin Surge[/bold]: Transform all nodes within 7 tiles of you into unstable thick resin walls. They decay in 13 seconds. They can soak host spits, but will break in 1 melee hit. (In the future, it will create weak reflective resin walls)
   <GuideEntityEmbed Entity="RMCGuidebookActionXenoGreaterResinSurge"/>
   -[bold]Toggle Node Type[/bold]: Switches between placing wall nodes and door nodes. This only affects construction nodes. For Flexible and Optimized nodes, it's a way to show your design intentions with your sisters.
     <GuideEntityEmbed Entity="RMCGuidebookActionXenoToggleNodeType"/>
@@ -47,15 +47,15 @@
 
 
   [bold]Alone[/bold]
-  This one is not recommended, designer is intended to cooperate with anyone, but if you just hate everyone or the hive lacks anyone to help you; you can layout construct nodes around and wait for marines. Then you can use the construction nodes to create instant mazes for your retreating sisters or to trap talls.
+  This one is not recommended, designer is intended to cooperate with anyone, but if you just hate everyone or the hive lacks anyone to help you; you can layout construct nodes around and wait for marines. Then you can use the construction nodes to create instant mazes for your retreating sisters or to trap hosts.
 
   [bold]With Other Builders[/bold]
-  This is intended way to play this strain, you cooperate with any other builder caste. Cooperating style should be different depeneding on "who" you are cooperating with and "where":
+  This is intended way to play this strain, you cooperate with any other builder caste. Cooperating style should be different depending on "who" you are cooperating with and "where":
 
   -[bold]Lesser Drones:[/bold]: Working with lessers, node use depends on the situation. If you are close to frontline and have lesser drones that are trying to build walls/doors, you can help them out by placing optimized nodes and remote thicken their structures. If you two are somewhere safe, then use flexible nodes. Due to the low plasma pool that lessers have, it allows them to construct more structures.
-  -[bold]Drones[/bold]: If you are cooperating with drones, it's recommended to use speed nodes to make construct quicker and it synergizes with your ability to remote thicken structures. Alternatively, the use of cost nodes are slightly more expensive, but they decrease use of plasma by 50%, so if you are thickening their structures and run out of plasma, they can supply you with the plasma that got saved from using plasma nodes.
-  -[bold]Hivelords[/bold]: This one situation dependent, its highly recommended to use flexible nodes, because they can construct way more walls/doors than usual. Optimized nodes are recommended only when you are close to battlefield and need to very quickly made walls to stop enemy progression.
-  -[bold]Queen[/bold]: For the first 30 minutes queen has no plasma cost for constructions, so if you pair it up with your optimized nodes, you can make twice as many defences. When you run out of plasma, since the Queen does not spend plasma, she can remotely transfer you plasma (unless other sisters are dying to planet talls). Post-drop is different, you still should prefer speed nodes, but if queen struggles with plasma reserves its good to switch for cost nodes if there are no other builders present nearby to cooperate with you.
+  -[bold]Drones[/bold]: If you are cooperating with drones, it's recommended to use speed nodes to make construct quicker, and it synergies with your ability to remote thicken structures. Alternatively, the use of cost nodes are slightly more expensive, but they decrease use of plasma by 50%, so if you are thickening their structures and run out of plasma, they can supply you with the plasma that got saved from using plasma nodes.
+  -[bold]Hivelords[/bold]: This one situation dependent, it's highly recommended to use flexible nodes, because they can construct way more walls/doors than usual. Optimized nodes are recommended only when you are close to battlefield and need to very quickly made walls to stop enemy progression.
+  -[bold]Queen[/bold]: For the first 30 minutes queen has no plasma cost for constructions, so if you pair it up with your optimized nodes, you can make twice as many defences. When you run out of plasma, since the Queen does not spend plasma, she can remotely transfer you plasma (unless other sisters are dying to planet hosts). Post-drop is different, you still should prefer speed nodes, but if queen struggles with plasma reserves its good to switch for cost nodes if there are no other builders present nearby to cooperate with you.
   -[bold]Other castes with plasma[/bold]: This is a special case, where you can cooperate with anyone who has plasma thanks to construct nodes. They allow you to make walls/doors depending on what marker is shown on top of it. Keep in mind, anyone who donates plasma will create "weedbound" variants that cannot be upgraded and will break if weeds are gone, so its better to use it in case of emergency, or if you lack anyone nearby to help you. You can donate your own plasma to build it, but it's better if you cooperate with someone because you pay 70 plasma to make node and 70 to make it auto-build by itself.
 
 </Document>
