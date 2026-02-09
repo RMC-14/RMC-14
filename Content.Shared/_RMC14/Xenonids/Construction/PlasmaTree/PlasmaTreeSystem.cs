@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Rest;
-using Content.Shared.Coordinates;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -10,15 +9,10 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content.Shared._RMC14.Xenonids.Construction.PlasmaTree;
 
-public sealed partial class PlasmaTreeSystem : EntitySystem
+public sealed class PlasmaTreeSystem : EntitySystem
 {
     [Dependency] private readonly IGameTiming _time = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
@@ -29,12 +23,12 @@ public sealed partial class PlasmaTreeSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mob = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedDoAfterSystem _doafter = default!;
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<PlasmaTreeComponent, PlasmaTreeRecoverDoAfterEvent>(OnRecoveryDoAfter);
-
     }
 
     public override void Update(float frameTime)
@@ -54,9 +48,9 @@ public sealed partial class PlasmaTreeSystem : EntitySystem
         }
     }
 
-    private void TryGivePlasmaRandomXeno(Entity<PlasmaTreeComponent> PlasmaTree)
+    private void TryGivePlasmaRandomXeno(Entity<PlasmaTreeComponent> plasmaTree)
     {
-        var (ent, comp) = PlasmaTree;
+        var (ent, comp) = plasmaTree;
         var nearbyEntities = _lookup.GetEntitiesInRange(ent, comp.PlasmaRange);
         var possibleTargets = new List<EntityUid>();
         foreach (var nearbyEntity in nearbyEntities)
@@ -75,13 +69,18 @@ public sealed partial class PlasmaTreeSystem : EntitySystem
             possibleTargets.Add(nearbyEntity);
         }
 
-        PlasmaTree.Comp.NextPlasmaAt = _time.CurTime + PlasmaTree.Comp.PlasmaCooldown;
+        plasmaTree.Comp.NextPlasmaAt = _time.CurTime + plasmaTree.Comp.PlasmaCooldown;
 
         if (possibleTargets.Count == 0)
             return;
 
         var selectedTarget = _random.Pick(possibleTargets);
-        var recover = new DoAfterArgs(EntityManager, PlasmaTree, PlasmaTree.Comp.PlasmaCooldown, new PlasmaTreeRecoverDoAfterEvent(), PlasmaTree, selectedTarget)
+        var recover = new DoAfterArgs(EntityManager,
+            plasmaTree,
+            plasmaTree.Comp.PlasmaCooldown,
+            new PlasmaTreeRecoverDoAfterEvent(),
+            plasmaTree,
+            selectedTarget)
         {
             BreakOnMove = true,
             MovementThreshold = 0.5f,
@@ -91,19 +90,25 @@ public sealed partial class PlasmaTreeSystem : EntitySystem
 
         if (_doafter.TryStartDoAfter(recover, out var id))
         {
-            PlasmaTree.Comp.PlasmaDoAfter = id;
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"), selectedTarget, selectedTarget);
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-other", ("target", selectedTarget)), selectedTarget, Filter.PvsExcept(selectedTarget), true);
+            plasmaTree.Comp.PlasmaDoAfter = id;
+            _popup.PopupEntity(Loc.GetString("rmc-xeno-construction-recovery-node-heal-target"),
+                selectedTarget,
+                selectedTarget);
+            _popup.PopupEntity(
+                Loc.GetString("rmc-xeno-construction-recovery-node-heal-other", ("target", selectedTarget)),
+                selectedTarget,
+                Filter.PvsExcept(selectedTarget),
+                true);
         }
     }
 
-    private void OnRecoveryDoAfter(Entity<PlasmaTreeComponent> PlasmaTree, ref PlasmaTreeRecoverDoAfterEvent args)
+    private void OnRecoveryDoAfter(Entity<PlasmaTreeComponent> plasmaTree, ref PlasmaTreeRecoverDoAfterEvent args)
     {
-        PlasmaTree.Comp.PlasmaDoAfter = null;
+        plasmaTree.Comp.PlasmaDoAfter = null;
 
         if (args.Handled || args.Cancelled || args.Target == null)
             return;
 
-        _plasma.RegenPlasma(args.Target.Value, PlasmaTree.Comp.PlasmaAmount);
+        _plasma.RegenPlasma(args.Target.Value, plasmaTree.Comp.PlasmaAmount);
     }
 }
