@@ -1,0 +1,437 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/playing_cards.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "deck"
+        },
+        {
+            "name": "deck_open"
+        },
+        {
+            "name": "deck_empty"
+        },
+        {
+            "name": "deck_uno"
+        },
+        {
+            "name": "deck_uno_open"
+        },
+        {
+            "name": "deck_uno_empty"
+        },
+        {
+            "name": "back_deck"
+        },
+        {
+            "name": "back_deck_uno"
+        },
+        {
+            "name": "empty"
+        },
+        {
+            "name": "clubs_ace"
+        },
+        {
+            "name": "clubs_two"
+        },
+        {
+            "name": "clubs_three"
+        },
+        {
+            "name": "clubs_four"
+        },
+        {
+            "name": "clubs_five"
+        },
+        {
+            "name": "clubs_six"
+        },
+        {
+            "name": "clubs_seven"
+        },
+        {
+            "name": "clubs_eight"
+        },
+        {
+            "name": "clubs_nine"
+        },
+        {
+            "name": "clubs_ten"
+        },
+        {
+            "name": "clubs_jack"
+        },
+        {
+            "name": "clubs_queen"
+        },
+        {
+            "name": "clubs_king"
+        },
+        {
+            "name": "spades_ace"
+        },
+        {
+            "name": "spades_two"
+        },
+        {
+            "name": "spades_three"
+        },
+        {
+            "name": "spades_four"
+        },
+        {
+            "name": "spades_five"
+        },
+        {
+            "name": "spades_six"
+        },
+        {
+            "name": "spades_seven"
+        },
+        {
+            "name": "spades_eight"
+        },
+        {
+            "name": "spades_nine"
+        },
+        {
+            "name": "spades_ten"
+        },
+        {
+            "name": "spades_jack"
+        },
+        {
+            "name": "spades_queen"
+        },
+        {
+            "name": "spades_king"
+        },
+        {
+            "name": "diamonds_ace"
+        },
+        {
+            "name": "diamonds_two"
+        },
+        {
+            "name": "diamonds_three"
+        },
+        {
+            "name": "diamonds_four"
+        },
+        {
+            "name": "diamonds_five"
+        },
+        {
+            "name": "diamonds_six"
+        },
+        {
+            "name": "diamonds_seven"
+        },
+        {
+            "name": "diamonds_eight"
+        },
+        {
+            "name": "diamonds_nine"
+        },
+        {
+            "name": "diamonds_ten"
+        },
+        {
+            "name": "diamonds_jack"
+        },
+        {
+            "name": "diamonds_queen"
+        },
+        {
+            "name": "diamonds_king"
+        },
+        {
+            "name": "hearts_ace"
+        },
+        {
+            "name": "hearts_two"
+        },
+        {
+            "name": "hearts_three"
+        },
+        {
+            "name": "hearts_four"
+        },
+        {
+            "name": "hearts_five"
+        },
+        {
+            "name": "hearts_six"
+        },
+        {
+            "name": "hearts_seven"
+        },
+        {
+            "name": "hearts_eight"
+        },
+        {
+            "name": "hearts_nine"
+        },
+        {
+            "name": "hearts_ten"
+        },
+        {
+            "name": "hearts_jack"
+        },
+        {
+            "name": "hearts_queen"
+        },
+        {
+            "name": "hearts_king"
+        },
+        {
+            "name": "wild"
+        },
+        {
+            "name": "wild-draw-four"
+        },
+        {
+            "name": "red_zero"
+        },
+        {
+            "name": "red_one"
+        },
+        {
+            "name": "red_two"
+        },
+        {
+            "name": "red_three"
+        },
+        {
+            "name": "red_four"
+        },
+        {
+            "name": "red_five"
+        },
+        {
+            "name": "red_six"
+        },
+        {
+            "name": "red_seven"
+        },
+        {
+            "name": "red_eight"
+        },
+        {
+            "name": "red_nine"
+        },
+        {
+            "name": "red_draw-two"
+        },
+        {
+            "name": "red_skip"
+        },
+        {
+            "name": "red_reverse"
+        },
+        {
+            "name": "yellow_zero"
+        },
+        {
+            "name": "yellow_one"
+        },
+        {
+            "name": "yellow_two"
+        },
+        {
+            "name": "yellow_three"
+        },
+        {
+            "name": "yellow_four"
+        },
+        {
+            "name": "yellow_five"
+        },
+        {
+            "name": "yellow_six"
+        },
+        {
+            "name": "yellow_seven"
+        },
+        {
+            "name": "yellow_eight"
+        },
+        {
+            "name": "yellow_nine"
+        },
+        {
+            "name": "yellow_draw-two"
+        },
+        {
+            "name": "yellow_skip"
+        },
+        {
+            "name": "yellow_reverse"
+        },
+        {
+            "name": "purple_zero"
+        },
+        {
+            "name": "purple_one"
+        },
+        {
+            "name": "purple_two"
+        },
+        {
+            "name": "purple_three"
+        },
+        {
+            "name": "purple_four"
+        },
+        {
+            "name": "purple_five"
+        },
+        {
+            "name": "purple_six"
+        },
+        {
+            "name": "purple_seven"
+        },
+        {
+            "name": "purple_eight"
+        },
+        {
+            "name": "purple_nine"
+        },
+        {
+            "name": "purple_draw-two"
+        },
+        {
+            "name": "purple_skip"
+        },
+        {
+            "name": "purple_reverse"
+        },
+        {
+            "name": "blue_zero"
+        },
+        {
+            "name": "blue_one"
+        },
+        {
+            "name": "blue_two"
+        },
+        {
+            "name": "blue_three"
+        },
+        {
+            "name": "blue_four"
+        },
+        {
+            "name": "blue_five"
+        },
+        {
+            "name": "blue_six"
+        },
+        {
+            "name": "blue_seven"
+        },
+        {
+            "name": "blue_eight"
+        },
+        {
+            "name": "blue_nine"
+        },
+        {
+            "name": "blue_draw-two"
+        },
+        {
+            "name": "blue_skip"
+        },
+        {
+            "name": "blue_reverse"
+        },
+        {
+            "name": "trading_red"
+        },
+        {
+            "name": "trading_red_1"
+        },
+        {
+            "name": "trading_red_2"
+        },
+        {
+            "name": "trading_red_3"
+        },
+        {
+            "name": "trading_red_4"
+        },
+        {
+            "name": "trading_red_5"
+        },
+        {
+            "name": "trading_green"
+        },
+        {
+            "name": "trading_green_1"
+        },
+        {
+            "name": "trading_green_2"
+        },
+        {
+            "name": "trading_green_3"
+        },
+        {
+            "name": "trading_green_4"
+        },
+        {
+            "name": "trading_green_5"
+        },
+        {
+            "name": "trading_blue"
+        },
+        {
+            "name": "trading_blue_1"
+        },
+        {
+            "name": "trading_blue_2"
+        },
+        {
+            "name": "trading_blue_3"
+        },
+        {
+            "name": "trading_blue_4"
+        },
+        {
+            "name": "trading_blue_5"
+        },
+        {
+            "name": "trading_red_pack_closed"
+        },
+        {
+            "name": "trading_red_pack_open"
+        },
+        {
+            "name": "trading_red_pack_empty"
+        },
+        {
+            "name": "trading_green_pack_closed"
+        },
+        {
+            "name": "trading_green_pack_open"
+        },
+        {
+            "name": "trading_green_pack_empty"
+        },
+        {
+            "name": "trading_blue_pack_closed"
+        },
+        {
+            "name": "trading_blue_pack_open"
+        },
+        {
+            "name": "trading_blue_pack_empty"
+        }
+    ]
+}

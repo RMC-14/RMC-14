@@ -1,0 +1,63 @@
+# Playing Cards - RMC14
+# Based on CMSS13 playing cards implementation
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCPlayingCardBase
+  name: playing card
+  description: A standard playing card.
+  components:
+  - type: PlayingCard
+    suit: Spades
+    rank: Ace
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: spades_ace
+  - type: Item
+    size: Tiny
+
+# Individual card (spawned from deck)
+- type: entity
+  parent: RMCPlayingCardBase
+  id: RMCPlayingCard
+  noSpawn: true
+  suffix: Generic
+
+# Deck of playing cards
+- type: entity
+  parent: BaseItem
+  id: RMCPlayingCardDeck
+  name: deck of cards
+  description: A standard 52-card deck. Perfect for poker night in the barracks.
+  components:
+  - type: PlayingCardDeck
+    cardsRemaining: 52
+    cardPrototype: RMCPlayingCard
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: deck
+  - type: Item
+    size: Small
+
+# Hand of cards
+- type: entity
+  parent: BaseItem
+  id: RMCPlayingCardHand
+  name: hand of cards
+  description: A hand of playing cards.
+  noSpawn: true
+  components:
+  - type: PlayingCardHand
+    maxCards: 52
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: back_deck
+  - type: Item
+    size: Small
+  - type: UseDelay
+    delay: 0.1
+  - type: UserInterface
+    interfaces:
+      enum.PlayingCardHandUi.Key:
+        type: PlayingCardHandBui
