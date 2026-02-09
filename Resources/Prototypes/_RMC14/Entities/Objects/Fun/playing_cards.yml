@@ -49,6 +49,7 @@
   parent: BaseItem
   id: RMCPlayingCardDeck
   name: Deck of cards
+  suffix: RMC
   description: I swear the game was called Goldfish!
   components:
   - type: PlayingCardDeck

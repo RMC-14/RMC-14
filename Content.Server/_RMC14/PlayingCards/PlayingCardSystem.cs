@@ -4,6 +4,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
+using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PlayingCards;
 
@@ -13,6 +14,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private const int StackThreshold = 5;
@@ -97,7 +99,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         QueueDel(card);
 
         UpdateHandName(hand);
-        _popup.PopupEntity(Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), hand, user);
+        TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
 
     protected override void MergeHands(Entity<PlayingCardHandComponent> hand1, Entity<PlayingCardHandComponent> hand2, EntityUid user)
@@ -109,7 +111,7 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         QueueDel(hand2);
 
         UpdateHandName(hand1);
-        _popup.PopupEntity(Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), hand1, user);
+        TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
 
     protected override void DrawFromHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
@@ -186,6 +188,16 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
             ? Loc.GetString("rmc-playing-card-stack-name")
             : Loc.GetString("rmc-playing-card-hand-name");
         _meta.SetEntityName(hand, name);
+    }
+
+    private void TryPopup(Entity<PlayingCardHandComponent> hand, string message, EntityUid user)
+    {
+        var curTime = _timing.CurTime;
+        if (curTime < hand.Comp.LastPopupTime + TimeSpan.FromSeconds(hand.Comp.PopupCooldown))
+            return;
+
+        hand.Comp.LastPopupTime = curTime;
+        _popup.PopupEntity(message, hand, user);
     }
 
     protected override void AddCardToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardComponent> card, EntityUid user)

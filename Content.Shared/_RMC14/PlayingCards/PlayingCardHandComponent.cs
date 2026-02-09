@@ -1,5 +1,6 @@
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.PlayingCards;
 
@@ -19,4 +20,12 @@ public sealed partial class PlayingCardHandComponent : Component
     /// Whether the hand is face up or face down by default.
     [DataField, AutoNetworkedField]
     public bool FaceUp;
+
+    /// Cooldown between popups in seconds.
+    [DataField]
+    public float PopupCooldown = 2f;
+
+    /// Last time a popup was shown.
+    [ViewVariables]
+    public TimeSpan LastPopupTime;
 }
