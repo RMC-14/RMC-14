@@ -38,7 +38,7 @@
                         <Label Text="{Loc rmc-sleeper-occupant-header}" StyleClasses="LabelHeading" />
                         <Control HorizontalExpand="True" />
                         <Label Text="{Loc rmc-sleeper-auto-eject-dead}" Margin="0 0 5 0" />
-                        <Button Name="AutoEjectDeadButton" Text="{Loc rmc-sleeper-off}" ToggleMode="True" MinWidth="50" />
+                        <Button Name="AutoEjectDeadButton" Text="{Loc rmc-sleeper-auto-eject-dead-off}" ToggleMode="True" MinWidth="50" />
                         <Button Name="EjectButton" Text="{Loc rmc-sleeper-eject}" MinWidth="60" Margin="10 0 0 0" />
                     </BoxContainer>
                     <cc:HSeparator Color="#4972A1" Margin="0 5 0 5" />

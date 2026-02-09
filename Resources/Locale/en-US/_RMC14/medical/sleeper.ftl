@@ -18,8 +18,8 @@ rmc-sleeper-dialysis-ready = Dialysis inactive!
 
 rmc-sleeper-occupant-header = Occupant
 rmc-sleeper-auto-eject-dead = Auto-eject if dead:
-rmc-sleeper-on = On
-rmc-sleeper-off = Off
+rmc-sleeper-auto-eject-dead-on = On
+rmc-sleeper-auto-eject-dead-off = Off
 rmc-sleeper-eject = Eject
 
 rmc-sleeper-name-label = Name:

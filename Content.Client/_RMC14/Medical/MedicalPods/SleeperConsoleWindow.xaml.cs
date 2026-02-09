@@ -69,8 +69,8 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         // Auto-eject
         AutoEjectDeadButton.Pressed = state.AutoEjectDead;
         AutoEjectDeadButton.Text = state.AutoEjectDead
-            ? Loc.GetString("rmc-sleeper-on")
-            : Loc.GetString("rmc-sleeper-off");
+            ? Loc.GetString("rmc-sleeper-auto-eject-dead-on")
+            : Loc.GetString("rmc-sleeper-auto-eject-dead-off");
 
         OccupantNameLabel.Text = state.OccupantName ?? "";
 
