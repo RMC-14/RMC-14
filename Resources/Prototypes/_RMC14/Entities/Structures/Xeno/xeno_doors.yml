@@ -98,6 +98,7 @@
     stageLoss: 2
     destroy: true
   - type: XenoRecentlyBuiltPreventCollisions
+  - type: PreventCollideWithDead
 
 - type: entity
   parent: DoorXenoResin

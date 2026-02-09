@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.CCVar;
@@ -10,6 +11,7 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.Xenonids.Announce;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
+using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Eye;
@@ -20,6 +22,7 @@ using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.EntitySystems;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
@@ -28,21 +31,28 @@ using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
+using Content.Shared.Doors;
 using Content.Shared.Doors.Components;
+using Content.Shared.Doors.Systems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Prototypes;
 using Content.Shared.Tag;
+using Content.Shared.Timing;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -81,6 +91,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly ITileDefinitionManager _tile = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
+    [Dependency] private readonly SharedDoorSystem _door = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     private static readonly ProtoId<TagPrototype> AirlockTag = "Airlock";
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
@@ -108,6 +121,24 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
     private TimeSpan _newResinPreventCollideTime;
 
     private readonly HashSet<EntityUid> _intersectingResin = new();
+
+    // Multiplier force to push out corpses
+    private const float ResinDoorCorpsePushForce = 10f;
+
+    private static readonly List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
+
+    // Multiplier force to push out corpses
+    private const float ResinDoorCorpsePushForce = 10f;
+
+    private static readonly List<Vector2i> adjacentDirections = new List<Vector2i>
+        {   new Vector2i(1,0),
+            new Vector2i(-1,0),
+            new Vector2i(0,1),
+            new Vector2i(0,-1)};
 
     public override void Initialize()
     {
@@ -151,6 +182,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         SubscribeLocalEvent<XenoAnnounceStructureDestructionComponent, DestructionEventArgs>(OnXenoStructureDestruction);
 
         SubscribeLocalEvent<DeleteXenoResinOnHitComponent, ProjectileHitEvent>(OnDeleteXenoResinHit);
+
+        SubscribeLocalEvent<ResinDoorComponent, DoorStateChangedEvent>(OnXenoDoorStateChange);
 
         SubscribeNetworkEvent<XenoOrderConstructionClickEvent>(OnXenoOrderConstructionClick);
         SubscribeNetworkEvent<XenoOrderConstructionCancelEvent>(OnXenoOrderConstructionCancel);
@@ -1069,7 +1102,77 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (ent.Comp.StopCollide.Contains(args.OtherEntity))
             args.Cancelled = true;
     }
+    private void OnXenoDoorStateChange(Entity<ResinDoorComponent> resinDoor, ref DoorStateChangedEvent args)
+    {
+        if (args.State != DoorState.Closed)
+        {
+            return;
+        }
+        if (_turf.GetTileRef(resinDoor.Owner.ToCoordinates()) is not { } doorTile ||
+            _transform.GetGrid(resinDoor.Owner) is not { } grid ||
+            !TryComp<MapGridComponent>(grid, out var gridComp))
+        {
+            return;
+        }
+        MapCoordinates resinDoorCoords = _transform.GetMapCoordinates(resinDoor);
+        var resinDoorIndices = _mapSystem.TileIndicesFor(grid, gridComp, resinDoorCoords);
+        Dictionary<Vector2, MapCoordinates> freeTiles = new();
 
+        foreach (var dir in adjacentDirections)
+        {
+            Vector2i adjacentTileIndices = resinDoorIndices + dir;
+
+            var adjacentTile = _mapSystem.GetTileRef((grid, gridComp), adjacentTileIndices);
+            if (!_turf.IsTileBlocked(adjacentTile, CollisionGroup.MobMask))
+            {
+                freeTiles.Add(dir, _transform.ToMapCoordinates(_turf.GetTileCenter(adjacentTile)));
+            }
+        }
+
+        var collidingBodies = resinDoor.Comp.CollidingBodies;
+        collidingBodies.Clear();
+        foreach (var ent in _lookup.GetEntitiesIntersecting(resinDoor))
+        {
+            if (_mobState.IsDead(ent))
+            {
+                collidingBodies.Add(ent);
+            }
+        }
+
+        // Apply velocity towards the nearest free tile
+        foreach (var body in collidingBodies)
+        {
+            MapCoordinates bodyCoords = _transform.GetMapCoordinates(body);
+
+            MapCoordinates? closestCoords = null;
+            float? closestFreeTileDistance = null;
+            foreach (var (dir, coords) in freeTiles)
+            {
+                float distance = (bodyCoords.Position - coords.Position).Length();
+                if (closestFreeTileDistance is null)
+                {
+                    closestFreeTileDistance = distance;
+                    closestCoords = coords;
+                    continue;
+                }
+
+                if (closestFreeTileDistance > distance)
+                {
+                    closestFreeTileDistance = distance;
+                    closestCoords = coords;
+                    continue;
+                }
+            }
+
+            if (closestCoords is null || !TryComp<PhysicsComponent>(body, out var bodyPhysicsComp))
+            {
+                continue;
+            }
+            var moveDir = (closestCoords.Value.Position - bodyCoords.Position).Normalized();
+            _physics.ApplyLinearImpulse(body, moveDir * bodyPhysicsComp.Mass * ResinDoorCorpsePushForce);
+            _door.TryOpen(resinDoor);
+        }
+    }
     public FixedPoint2? GetStructurePlasmaCost(EntProtoId prototype)
     {
         if (_prototype.TryIndex(prototype, out var buildChoice) &&
@@ -1207,7 +1310,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (!HasComp<BarricadeComponent>(uid))
             {
-                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid))  &&
+                if ((_tags.HasAnyTag(uid.Value, StructureTag) || HasComp<StrapComponent>(uid) || HasComp<ClimbableComponent>(uid)) &&
                     !_tags.HasTag(uid.Value, PlatformTag) &&
                     !HasComp<DoorComponent>(uid) ||
                     TryComp(uid, out DoorComponent? door) &&
@@ -1456,6 +1559,10 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         return true;
     }
 
+    public bool IsResinDoorCollidable(EntityUid collidingBody)
+    {
+        return _mobState.IsDead(collidingBody);
+    }
     public bool CanPlaceXenoStructure(EntityUid user, EntityCoordinates coords, [NotNullWhen(false)] out string? popupType, bool needsWeeds = true)
     {
         popupType = null;
@@ -1558,4 +1665,5 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 RemCompDeferred<XenoRecentlyConstructedComponent>(uid);
         }
     }
+
 }
