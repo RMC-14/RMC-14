@@ -44,15 +44,15 @@
         amount: 20
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolM77Empty
         amount: 50
-      - id: RMCWeaponRevolverM44
+      - id: RMCWeaponRevolverM44Empty
         amount: 50
-      - id: CMWeaponPistolM1984
+      - id: CMWeaponPistolM1984Empty
         amount: 50
-      - id: RMCWeaponPistolM13
+      - id: RMCWeaponPistolM13Empty
         amount: 50
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 20
     - name: Restricted Firearms
       entries:
@@ -68,10 +68,10 @@
         amount: 3
       - id: RMCM54CMK1Case
         amount: 3
-      #- id: M56D Heavy Machine Gun
-      #  amount: 2
-      #- id: M2C Heavy Machine Gun
-      #  amount: 2
+      - id: RMCML66DCase
+        amount: 2
+      - id: RMCM2CCase
+        amount: 2
       - id: RMCCaseFlamer
         amount: 2
       - id: RMCM85A1Case
@@ -84,8 +84,8 @@
       entries:
       - id: CMGrenadeFragOld
         amount: 2
-      #- id: M20 Claymore Anti-Personnel Mine
-      #  amount: 4
+      - id: RMCExplosiveClaymoreMine
+        amount: 4
       - id: CMGrenadeHighExplosive
         amount: 25
       - id: RMCGrenadeIncendiary
@@ -214,8 +214,8 @@
         amount: 5
       - id: RMCPouchDocumentSmall
         amount: 2
-      #- id: RMCPouchSling
-      #  amount: 2
+      - id: RMCPouchSling
+        amount: 2
       - id: RMCPouchMacheteFilled
         name: machete pouch (Full)
         amount: 1
@@ -254,8 +254,8 @@
         amount: 1
       - id: RMCFulton20
         amount: 1
-      #- id: Sentry Gun Network Laptop
-      #   amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       #- id: Spare PDT/L Battle Buddy Kit
       #  amount: 4
     - name: Flare and Light
@@ -444,10 +444,10 @@
         amount: 5
       - id: CMMagazineRifleM54CMK1AP
         amount: 2
-      #- id: M56D Drum Magazine
-      #  amount: 2
-      #- id: M2C Box Magazine
-      #  amount: 2
+      - id: RMCMagazineML66D
+        amount: 2
+      - id: RMCMagazineM2C
+        amount: 2
       - id: RMCMagazineShotgunXM51
         amount: 3
     - name: Magazine Boxes
@@ -540,7 +540,7 @@
 #        box: CMMagazineSMGM63
 #      - name: Magazine Box (M56B x 8)
 #        box: CMMagazineSMGM63
-#      - name: Magazine Box (M56D x 8)
+#      - name: Magazine Box (ML66D x 8)
 #        box: CMMagazineSMGM63
       - id: RMCBoxMagazineRevolverM44
         name: Magazine Box (M44 x 16)
@@ -558,11 +558,11 @@
       - id: RMCBoxBulletsSMG
         name: SMG HV ammunition box (10x20mm) (M63)
         box: CMMagazineSMGM63
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsSMGAP
         name: SMG ammunition box (10x20mm AP) (M63)
         box: CMMagazineSMGM63AP
-        boxSlots: 13 # 600 / 48, yes we loose half a mag to the void
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
       - id: RMCBoxBulletsRifle
         name: rifle ammunition box (10x24mm) (M4SPR)
         box: CMMagazineRifleM4SPR
@@ -670,9 +670,9 @@
         amount: 5
       - id: RMCAttachmentM63ArmBrace
         amount: 5
-      - id: RMCAttachmentM63StockCollapsible
-        amount: 5
       - id: RMCAttachmentM63Stock
+        amount: 5
+      - id: RMCAttachmentM63StockCollapsible
         amount: 5
       - id: RMCAttachmentM54CStockSolid
         amount: 5

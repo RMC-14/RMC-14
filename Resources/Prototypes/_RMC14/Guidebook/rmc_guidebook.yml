@@ -168,7 +168,7 @@
   parent: RMC
   id: RMCGuideRoleSpecSniper
   priority: 4
-  name: "Sniper Specialist"
+  name: "Sniper / AMR Specialist"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleSpecSniper.xml"
 
 - type: guideEntry
@@ -323,6 +323,15 @@
   priority: 4
   name: "Hivelord Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleHivelord.xml"
+  children:
+  - RMCGuideRoleDesigner
+
+- type: guideEntry
+  parent: RMC
+  id: RMCGuideRoleDesigner
+  priority: 1
+  name: "Designer Hivelord Guide"
+  text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideDesignerHivelord.xml"
 
 - type: guideEntry
   parent: RMC
