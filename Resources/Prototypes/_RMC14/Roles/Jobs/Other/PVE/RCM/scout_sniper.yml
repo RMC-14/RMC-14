@@ -1,0 +1,77 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesScoutSniperPVE
+  name: rmc-job-name-rcm-pve-scout-sniper
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalScoutSniperPVE
+  ranks:
+    RMCRankTSELanceCorporal: [ ]
+  startingGear: RMCGearRoyalScoutSniperPVE
+  icon: "RMCJobIconRoyalScoutSniperPVE"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+  - WeaponSpec
+  spawnMenuRoleName: RCM Scout Sniper (PVE)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 1 
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 1
+        RMCSkillEngineer: 1
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1  
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillSpecialistWeapons: 1
+    - type: SniperWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-pve-scout-sniper
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarinesPVE
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_marksman_pve
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+- type: startingGear
+  id: RMCGearRoyalScoutSniperPVE
+  equipment:
+    id: RMCIDRoyalMarinesScoutSniperPVE
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointRCMPVEScoutSniper
+  name: RCM scout sniper spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMRoyalMarinesScoutSniperPVE
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+
+- type: playTimeTracker
+  id: RMCJobRoyalScoutSniperPVE
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalScoutSniperPVE
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_marksman_pve

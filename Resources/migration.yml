@@ -1442,6 +1442,10 @@ CMLightFixtureEmpty: RMCLightFixtureEmpty
 # 2025-11-14
 ClothingUniformJumpsuitColorOrange: RMCJumpsuitOrange
 
+# 2025-11-24
+WeaponRifleL83A2: RMCWeaponRifleL83A2
+WeaponRifleL83A3: RMCWeaponRifleL83A3
+
 # 2025-11-27
 RMCToolWebbingSmallERT: RMCToolWebbing
 RMCToolWebbingSmallERTFilled: RMCToolWebbingFilled
@@ -1474,3 +1478,15 @@ RMCMagazineRifleAK4047HEAP: RMCMagazineRifleType77HEAP
 # 2026-1-15
 ClothingUniformJumpsuitPrisoner: RMCJumpsuitOrange
 
+# 2026-01-27
+RMCJumpsuitUNSecurity: RMCJumpsuitRiotControl
+RMCSpawnPointSurvivorShivasUNPeacekeeper: RMCSpawnPointSurvivorShivasILRCPeacekeeper
+RMCSpawnPointSurvivorSolarisUNPeacekeeper: RMCSpawnPointSurvivorSolarisILRCPeacekeeper
+RMCSpawnPointSurvivorUNPeacekeeper: RMCSpawnPointSurvivorILRCPeacekeeper
+
+# 2026-2-1
+CMPosterZSPA1: RMCPosterTSEPA1
+CMPosterZSPA2: RMCPosterTSEPA2
+CMPosterZSPA3: RMCPosterTSEPA3
+RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
+RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA

@@ -713,6 +713,21 @@
 
 - type: entity
   parent: RMCAttachableBase
+  id: RMCAttachmentLPO80Stock
+  name: LPO80 stock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    state: lpo80-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentLPO80Stock
+
+- type: entity
+  parent: RMCAttachableBase
   id: RMCAttachmentM16Stock
   name: M16 bump stock
   description: Technically illegal in the state of California.
@@ -1325,3 +1340,6 @@
 
 - type: Tag
   id: RMCAttachmentM13StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentLPO80Stock
