@@ -468,4 +468,30 @@ public sealed class BarricadeSystem : EntitySystem
 
         return false;
     }
+
+    /// <summary>
+    ///     Check if a barricade is anchored near the given coordinates.
+    /// </summary>
+    /// <param name="grid">The map grid being checked.</param>
+    /// <param name="user">The entity performing the search</param>
+    /// <param name="coordinates">The coordinates used as the center</param>
+    /// <param name="range">The radius of the search area</param>
+    /// <returns>True if an anchored entity with a <see cref="BarricadeComponent"/> within the specified range</returns>
+    public bool HasBarricadeNearbyPopup(Entity<MapGridComponent> grid, EntityUid user, EntityCoordinates coordinates, int range)
+    {
+        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
+        var checkArea = new Box2(position.X - range, position.Y - range, position.X + range, position.Y + range);
+        var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
+
+        foreach (var anchored in enumerable)
+        {
+            if (HasComp<BarricadeComponent>(anchored))
+            {
+                var msg = Loc.GetString("barricade-anchored-too-close", ("barricade", anchored));
+                _popup.PopupClient(msg, user, user, PopupType.SmallCaution );
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -262,3 +262,46 @@
     containers:
       entity_storage: !type:NestedSelector
         tableId: RMCClosetSPPGearFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMGear
+  suffix: PVE, RCM
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMTroopSgtGear
+  name: troop sergeant locker
+  suffix: PVE, RCM, Troop Sergeant
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMTroopSgtFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMSectionLeaderGear
+  name: section leader locker
+  suffix: PVE, RCM, Section Leader
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMSectionLeaderFill
+
+- type: entity
+  parent: RMCClosetGoldenArrowGear
+  id: RMCClosetRCMGPMGGear
+  name: GPMG gunner locker
+  suffix: PVE, RCM, GPMG Gunner
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RMCClosetRCMGPMGFill

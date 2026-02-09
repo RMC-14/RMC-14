@@ -1463,7 +1463,7 @@
   parent: ActionXenoBase
   id: ActionXenoSpikeShed
   name: Spike Shed (all shards)
-  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 150 shards minimum
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 50 shards minimum
   components:
   - type: Action
     itemIconStyle: NoItem
