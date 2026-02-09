@@ -1,0 +1,4 @@
+﻿author: DrSmugleaf
+changes:
+- type: Fix
+  message: Try to fix buggy behaviour with storages, specially when quickly switching hands and using belt quick-insert keybinds, specially with the medical storage rig.
