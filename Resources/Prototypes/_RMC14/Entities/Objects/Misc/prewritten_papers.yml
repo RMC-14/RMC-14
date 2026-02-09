@@ -575,3 +575,43 @@
 
       [color=#AAAAAA]===================================================[/color]
       [italic][color=#E41B1B]Use of this document inconsistent with UCMJ regulations and UNMC policy MIL-891 is a violation of federal law and will result in prosecution.[/color][/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperCLFVaradero
+  name: SOS!
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#444]██████████████████████████████
+      ██[color=#eee]████[color=#666]██[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#444]██
+      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]██[color=#666]██████[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#444]██
+      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██████[color=#eee]██[color=#666]████[color=#444]██
+      ██[color=#ddd]████[color=#666]██[color=#ddd]████[color=#666]██[color=#ddd]██[color=#666]████[color=#ddd]██[color=#666]██[color=#ddd]██[color=#666]██[color=#ddd]██[color=#444]██
+      ██████████████████████████████
+      [color=#666]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+                     [bolditalic]AUTHENTICATION CODE: [/bolditalic][color=red]DAVID-103-EB-9[/color]
+      [color=#666]▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀[/color][color=#000]
+      [italic]Mayday! Mayday! To all nearby CLF frequencies, we are under attack! Unknown creatures have overrun New Varadero Outpost and our shuttle is damaged beyond repair! We ne-[/italic]
+
+- type: entity
+  parent: CMPaper
+  id: RMCPaperCLFRocinante
+  name: Captain's Log
+  components:
+  - type: Paper
+    contentSize: 20000
+    content: |
+      [color=#444]██████████████████████████████
+      ██[color=#eee]████[color=#666]██[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#eee]██[color=#444]██
+      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]██[color=#666]██████[color=#eee]██[color=#666]██[color=#eee]██[color=#666]██[color=#444]██
+      ██[color=#eee]██[color=#666]████[color=#eee]██[color=#666]████[color=#eee]████[color=#666]██████[color=#eee]██[color=#666]████[color=#444]██
+      ██[color=#ddd]████[color=#666]██[color=#ddd]████[color=#666]██[color=#ddd]██[color=#666]████[color=#ddd]██[color=#666]██[color=#ddd]██[color=#666]██[color=#ddd]██[color=#444]██
+      ██████████████████████████████
+      [color=#666]▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄[/color]
+
+      [head=2]Captain's Log[/head]
+      # 103
+
+      [italic]We found him. His location, anyway. Figures that he'd end up in the Fop, given our reputation. As good an escape artist he is, he ain't getting out by himself. Too many security measures, and no way off without a ship. They're prepared for anything coming from inside. They AREN'T prepared for a "tramp freighter" ramming straight through their hull. Hang tight, Jack. We're coming for you.[/italic]

@@ -14,7 +14,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: SurvivorGoon
+      preset: RMCSkillPresetSurvivorGoon
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -23,6 +23,13 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_standard
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
 
 - type: startingGear
   id: RMCGearSurvivorGoon
@@ -35,7 +42,7 @@
     head: ArmorHelmetPMCCorporate
     shoes: RMCBootsPMCFilled
     back: RMCSatchelLightpack
-    belt: CMM77BeltFilled # TODO RMC14: PMC re-sprite
+    belt: RMCM77BeltPMCFilled
     suitstorage: RMCWeaponRifleM54CWhite
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchFirstAidPMCFill
