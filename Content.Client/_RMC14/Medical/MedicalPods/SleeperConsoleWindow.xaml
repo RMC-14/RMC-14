@@ -20,6 +20,7 @@
                         <Control HorizontalExpand="True" />
                         <Button Name="DialysisToggleButton" Text="{Loc rmc-sleeper-dialysis-inactive}" ToggleMode="True" MinWidth="100" />
                     </BoxContainer>
+                    <cc:HSeparator Color="#4972A1" Margin="0 0 0 3" />
                     <BoxContainer Name="DialysisProgressContainer" Orientation="Vertical" Visible="False">
                         <ProgressBar Name="DialysisProgressBar" HorizontalExpand="True" MinValue="0" MaxValue="1" MinHeight="20">
                             <Label Name="DialysisProgressLabel" HorizontalAlignment="Center" VerticalAlignment="Center" />
