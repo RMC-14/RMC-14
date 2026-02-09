@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added Knockback to Basira Hunting Rifle.
-    type: Add
-  id: 2404
-  time: '2025-10-05T04:01:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7890
 - author: Vixting
   changes:
   - message: Fixed body bags accepting live bodies.
@@ -4724,5 +4717,32 @@
   id: 2905
   time: '2026-02-09T06:36:33.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9123
+- author: DrSmugleaf
+  changes:
+  - message: Added the acid pillar, buildable by base not strained Hivelords, and
+      Queen. It sprays acid at nearby marines and at nearby ignited xenos to put them
+      out. One can be built per xeno that is able to build them, through the Choose
+      Resin Structure action, NOT the order construction action!
+    type: Add
+  - message: Fixed not getting all 8 FTLs round-start, and getting 4 less Comtech
+      and 4 less Corpsmen late-join slots than intended at high pop if not all of
+      them are filled round-start.
+    type: Fix
+  - message: Fixed hedgehog spike shed giving more speed than intended (50% > 20%),
+      and its description mentioning the wrong amount of required minimum spikes.
+    type: Fix
+  - message: Fixed a rare bug with fire never going out.
+    type: Fix
+  - message: Fixed Warrior and other targeted abilities such as Valk Prae's tail fountain
+      targeting the wrong target, potentially across the map.
+    type: Fix
+  - message: Fixed a rare bug with dropships getting stuck travelling forever.
+    type: Fix
+  - message: The toggle ammo type action for smart gun operators now mentions the
+      hotkey by default to activate it, Spacebar by default!
+    type: Tweak
+  id: 2906
+  time: '2026-02-09T08:15:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9170
 Name: RMC14
 Order: -1
