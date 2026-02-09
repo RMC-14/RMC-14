@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.PlayingCards;
+using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -31,6 +32,11 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         SubscribeLocalEvent<PlayingCardComponent, ComponentStartup>(OnCardStartup);
         SubscribeLocalEvent<PlayingCardDeckComponent, ComponentStartup>(OnDeckStartup);
         SubscribeLocalEvent<PlayingCardHandComponent, ComponentStartup>(OnHandStartup);
+
+        SubscribeLocalEvent<PlayingCardComponent, GotEquippedHandEvent>(OnCardEquippedHand);
+        SubscribeLocalEvent<PlayingCardComponent, GotUnequippedHandEvent>(OnCardUnequippedHand);
+        SubscribeLocalEvent<PlayingCardHandComponent, GotEquippedHandEvent>(OnHandEquippedHand);
+        SubscribeLocalEvent<PlayingCardHandComponent, GotUnequippedHandEvent>(OnHandUnequippedHand);
     }
 
     private void OnCardStartup(Entity<PlayingCardComponent> ent, ref ComponentStartup args)
@@ -43,12 +49,32 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         UpdateCardSprite(ent);
     }
 
+    private void OnCardEquippedHand(Entity<PlayingCardComponent> ent, ref GotEquippedHandEvent args)
+    {
+        UpdateCardSprite(ent);
+    }
+
+    private void OnCardUnequippedHand(Entity<PlayingCardComponent> ent, ref GotUnequippedHandEvent args)
+    {
+        UpdateCardSprite(ent);
+    }
+
     private void UpdateCardSprite(Entity<PlayingCardComponent> ent)
     {
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        if (ent.Comp.FaceUp)
+        // Check if card sprite should be hidden (when held by someone else)
+        var showFaceUp = ent.Comp.FaceUp;
+        if (showFaceUp &&
+            _container.TryGetContainingContainer(ent.Owner, out var container) &&
+            container.Owner != _player.LocalEntity &&
+            _hands.IsHolding(container.Owner, ent.Owner))
+        {
+            showFaceUp = false;
+        }
+
+        if (showFaceUp)
         {
             var stateName = GetCardStateName(ent.Comp.Suit, ent.Comp.Rank);
             _sprite.LayerSetRsiState((ent.Owner, sprite), 0, stateName);
@@ -91,6 +117,16 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     }
 
     private void OnHandStateChanged(Entity<PlayingCardHandComponent> ent, ref AfterAutoHandleStateEvent args)
+    {
+        UpdateHandSprite(ent);
+    }
+
+    private void OnHandEquippedHand(Entity<PlayingCardHandComponent> ent, ref GotEquippedHandEvent args)
+    {
+        UpdateHandSprite(ent);
+    }
+
+    private void OnHandUnequippedHand(Entity<PlayingCardHandComponent> ent, ref GotUnequippedHandEvent args)
     {
         UpdateHandSprite(ent);
     }

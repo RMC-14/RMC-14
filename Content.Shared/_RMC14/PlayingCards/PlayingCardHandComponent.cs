@@ -4,7 +4,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Shared._RMC14.PlayingCards;
 
 /// Component for a hand of playing cards that can be combined.
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 [Access(typeof(SharedPlayingCardSystem))]
 public sealed partial class PlayingCardHandComponent : Component
 {
