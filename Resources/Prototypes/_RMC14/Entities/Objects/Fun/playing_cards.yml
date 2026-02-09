@@ -1,10 +1,10 @@
 # Playing Cards - RMC14
 - type: entity
   abstract: true
-  noSpawn: true
   parent: BaseItem
   id: RMCPlayingCardBase
-  name: playing card
+  categories: [ HideSpawnMenu ]
+  name: Playing card
   description: A standard playing card.
   components:
   - type: PlayingCard
@@ -20,7 +20,7 @@
 - type: entity
   parent: RMCPlayingCardBase
   id: RMCPlayingCard
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
 
 # Hand of cards
 - type: entity
@@ -28,7 +28,7 @@
   id: RMCPlayingCardHand
   name: Hand of cards
   description: A hand of playing cards.
-  noSpawn: true
+  categories: [ HideSpawnMenu ]
   components:
   - type: PlayingCardHand
     maxCards: 52
