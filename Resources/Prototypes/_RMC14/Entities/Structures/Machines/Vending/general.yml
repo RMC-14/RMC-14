@@ -39,7 +39,7 @@
         amount: 20
     - name: Cards
       entries:
-        - id: RMCPlayingCardDeck
+      - id: RMCPlayingCardDeck
         amount: 10
     - name: Magazines
       entries:
