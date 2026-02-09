@@ -10,3 +10,21 @@
   cost: 1
   equipment:
     outerClothing: RMCProvostCoatFilled
+
+- type: loadout
+  id: RMCWeaponPistolHandcannon
+  cost: 0
+  equipment:
+    belt: RMCBeltHolsterPistolHandcannonFilled
+
+- type: loadout
+  id: RMCWeaponPistolHandcannonProvost
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobProvostInspector
+      time: 540000 # 150 hrs
+  equipment:
+    belt: RMCBeltHolsterPistolHandcannonProvostFilled

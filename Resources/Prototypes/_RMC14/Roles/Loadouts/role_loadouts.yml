@@ -564,6 +564,7 @@
   groups:
   - ProvostSecurityBackpack
   - ProvostRoleSpecificOuterwearRMC
+  - ProvostWeaponRMC
   - HeadwearRMC
   - EyewearRMC
   - MasksRMC
