@@ -41,7 +41,7 @@
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
       params:
-        volume: -2 # TODO Remove this if the replacement sound is not as loud as the M60 one
+        volume: -4 # TODO Remove this if the replacement sound is not as loud as the M60 one
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
