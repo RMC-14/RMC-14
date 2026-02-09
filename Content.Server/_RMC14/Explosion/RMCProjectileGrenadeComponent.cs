@@ -1,3 +1,4 @@
+// Resharper disable once CheckNameSpace
 namespace Content.Server.Explosion.Components;
 
 /// <summary>
