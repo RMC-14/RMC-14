@@ -827,11 +827,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     foreach (var (job, players) in survivorCandidates)
                     {
                         var list = players[i];
+                        Log.Info($"Rolling survivor job {job} with priority {i} and players {string.Join(", ", list.Select(id => ev.Profiles.GetValueOrDefault(id)?.Name ?? id.ToString()))}");
                         var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
                         while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
                         {
                             if (SpawnSurvivor(job, list, out var stop) is { } id)
                             {
+                                Log.Info($"Spawned survivor job {job} with name/id {ev.Profiles.GetValueOrDefault(id)?.Name ?? id.ToString()}, ignore limit: {ignoreLimit}");
                                 foreach (var (_, otherPlayersLists) in survivorCandidates)
                                 {
                                     foreach (var otherPlayers in otherPlayersLists)
@@ -845,7 +847,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                             }
 
                             if (stop)
+                            {
+                                Log.Info($"Stopped rolling survivor job {job}");
                                 break;
+                            }
                         }
                     }
                 }
