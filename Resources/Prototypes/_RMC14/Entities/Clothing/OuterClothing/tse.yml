@@ -97,11 +97,9 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf_co.rsi
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf_co.rsi
-    - type: CMArmor # Not 100% sure if it supposed to get armor or not, will need to have someone check
-      melee: 15
-      bullet: 15
-      bio: 10
-      explosionArmor: 10
+    - type: CMArmor
+      melee: 10
+      bullet: 10
       
 - type: entity
   parent: RMCJacketEIAFCOJacket

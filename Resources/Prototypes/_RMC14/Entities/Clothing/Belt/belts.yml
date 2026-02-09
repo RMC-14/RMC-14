@@ -2016,6 +2016,38 @@
         - id: CMBurnKit10
         # - id: 5 splints
         - id: CMHealthAnalyzer
+          
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltRCM
+  name: L70 pattern ammo load rig
+  description: Good for carrying around extra ammo in the heat of the jungle. Made of special rot-resistant fabric.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}         
+      
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltUtilityGeneralRCM
+  name: RCM general utility belt
+  description: A small, lightweight pouch that can be clipped onto armor to provide additional storage. This new RCM model, while uncomfortable, can also be clipped around the waist.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,9,1 # 9 slots
+      blacklist:
+        tags:
+          - CMFirstAidKit
+          - RMCEngineerKit
 
 - type: entity
   parent: RMCBeltHolsterPistol

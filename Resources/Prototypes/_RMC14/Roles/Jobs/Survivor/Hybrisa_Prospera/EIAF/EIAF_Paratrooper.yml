@@ -11,6 +11,9 @@
         factions:
           - Civilian
           - TSE
+      - type: RMCAllowSuitStorage
+      - type: IntelRescueSurvivorObjective
+      - type: MotionDetectorTracked
       - type: Skills
         preset: RMCSkillPresetEIAFParatrooper
       - type: TacticalMapIcon
@@ -20,7 +23,6 @@
         background:
           sprite: /Textures/_RMC14/Interface/map_blips.rsi
           state: background_eiaf
-      - type: IntelRescueSurvivorObjective
       - type: AssignSquad
         whitelist:
           tags:
@@ -39,7 +41,7 @@
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFParatrooper
   layers:
-  - sprite: _RMC14/Markers/landmarks.rsi
+  - sprite: Sprite
     state: surv
 
 - type: jobIcon
