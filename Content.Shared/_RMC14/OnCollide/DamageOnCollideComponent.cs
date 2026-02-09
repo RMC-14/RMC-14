@@ -62,6 +62,9 @@ public sealed partial class DamageOnCollideComponent : Component
     public int AcidComboResists;
 
     [DataField]
+    public int DirectHitMultiplier = 3;
+
+    [DataField]
     public TimeSpan Paralyze;
 
     [DataField]
