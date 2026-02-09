@@ -1,28 +1,4 @@
 ﻿Entries:
-- author: Monotheonist
-  changes:
-  - message: Changed around some beret icons (most notably the tan and green berets.)
-    type: Tweak
-  id: 2386
-  time: '2025-10-05T02:15:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8014
-- author: CatAndHats
-  changes:
-  - message: Renamed Cargo Technician to Requisitions Technician.
-    type: Tweak
-  id: 2387
-  time: '2025-10-05T02:23:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7958
-- author: Whisper
-  changes:
-  - message: Added the Logistics Officer, who replaces the former Quartermaster.
-    type: Add
-  - message: Removed ASO's authority in the requisitions department. The head of requisitions
-      is now an officer.
-    type: Remove
-  id: 2388
-  time: '2025-10-05T02:40:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7929
 - author: leon-krol
   changes:
   - message: Updated the Requisitions guide.
@@ -4707,5 +4683,43 @@
   id: 2887
   time: '2026-02-09T00:42:40.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8830
+- author: Ian321
+  changes:
+  - message: The SOCOM box can now also be crafted from the construction menu.
+    type: Tweak
+  id: 2888
+  time: '2026-02-09T05:36:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9168
+- author: Dygon
+  changes:
+  - message: "The M20 Claymore anti-personnel mine is now available through requisitions\
+      \ and squad role vendors. It inherits the placer\u2019s IFF signal and detonates\
+      \ when anyone without a matching IFF steps in front of it, releasing shrapnel\
+      \ in a forward cone."
+    type: Add
+  - message: Shrapnel grenades spawn shrapnel again.
+    type: Fix
+  id: 2889
+  time: '2026-02-09T05:36:16.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8683
+- author: LeoKarz
+  changes:
+  - message: The designer hivelord strain is here! A cooperative support/anti-push
+      T2 strain.
+    type: Add
+  - message: Added an entry to guidebook for designer hivelord.
+    type: Add
+  - message: Added weedbound resin walls & doors. Structures that get destroyed when
+      weeds beneath them are broken leaving sticky resin in its place.
+    type: Add
+  - message: Designer can place 3 different node types (construction, optimized, and
+      flexible), remote upgrade resin, and remotely remove nodes.
+    type: Add
+  - message: Greater Resin Surge converts all nearby nodes into unstable thick resin.
+      It's resistant to bullets but weak to melee.
+    type: Add
+  id: 2890
+  time: '2026-02-09T05:35:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9110
 Name: RMC14
 Order: -1
