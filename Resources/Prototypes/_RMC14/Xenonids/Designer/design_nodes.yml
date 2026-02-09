@@ -13,6 +13,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleDesigner
     - type: Transform
       anchored: true
     - type: Clickable
