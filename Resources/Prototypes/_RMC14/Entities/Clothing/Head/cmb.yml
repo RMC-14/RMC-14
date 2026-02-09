@@ -28,3 +28,12 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
+
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisor
+  suffix: Visor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT

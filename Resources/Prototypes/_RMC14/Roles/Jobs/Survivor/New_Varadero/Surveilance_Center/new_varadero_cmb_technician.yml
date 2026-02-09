@@ -40,7 +40,6 @@
 - type: startingGear
   id: RMCGearSurvivorCMBTechnician
   equipment:
-    eyes: RMCSunglasses
     ears: RMCHeadsetDistressBureauDamaged
     jumpsuit: RMCSwatICBUniform
     outerClothing: RMCArmorM4RI
@@ -48,7 +47,7 @@
     shoes: RMCShoesJackboots
     belt: CMBeltUtilityFilled
     id: RMCIDCardCMBDeputySurvivor
-    back: RMCSatchelMarineLogisticsBig
+    back: RMCSatchelLightpack5Slot
     pocket1: RMCPouchSurvivalBlackFilled
     pocket2: RMCPouchMagazinePistolFilledCMBTechnician
   storage:
@@ -71,8 +70,9 @@
     - [ RMCBeltHolsterPistolHandcannonFilledCMBTechnician ]
     primaryWeaponChance: 1
     randomOutfits:
-    - [ RMCArmorHelmetM10ICB, RMCMaskScarfTanDown ]
-    - [ RMCArmorHelmetM10ICB, RMCMaskScarfBlackDown ]
+    - [ RMCBoonieTan, RMCMaskNeckerchiefTan ]
+    - [ RMCHeadBeanieTan, RMCMaskNeckerchiefTan ]
+    - [ RMCHeadCapBureau, RMCMaskNeckerchiefBlack ]
 
 - type: entity
   parent: RMCBeltHolsterPistol

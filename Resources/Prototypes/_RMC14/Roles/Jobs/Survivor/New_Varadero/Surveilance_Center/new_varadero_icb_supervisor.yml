@@ -44,10 +44,9 @@
   id: RMCGearSurvivorICBSupervisor
   equipment:
     head: RMCHeadBeretAgent
-    eyes: RMCSunglasses
     ears: RMCHeadsetDistressBureauDamaged
-    jumpsuit: RMCSwatICBUniform
-    outerClothing: RMCArmorM4RI
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauTrenchCoatGrey
     gloves: CMHandsBlackInsulated
     shoes: RMCShoesJackboots
     id: CMIDCardLiaisonColony
@@ -65,6 +64,9 @@
   - type: SurvivorPreset
     randomWeapon: [ ]
     primaryWeapons: [ ]
+    randomOutfits:
+    - [ ]
+    - [ RMCSunglassesBig ]
 
 - type: entity
   parent: RMCMatebaBelt

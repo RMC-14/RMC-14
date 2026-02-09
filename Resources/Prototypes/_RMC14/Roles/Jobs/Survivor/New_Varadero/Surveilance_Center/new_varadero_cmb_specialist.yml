@@ -63,8 +63,8 @@
     primaryWeapons:
     - [ ]
     randomOutfits:
-    - [ RMCArmorHelmetM10CMB ]
-    - [ RMCArmorHelmetM10ICB ]
+    - [ RMCArmorHelmetM10CMBVisor, RMCSwatCMBUniform ]
+    - [ RMCArmorHelmetM10ICB, RMCSwatICBUniform ]
 
 - type: entity
   parent: CMSpawnPointJobBase
