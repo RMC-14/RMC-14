@@ -475,8 +475,8 @@
 - type: entity
   parent: CMPosterCMB1
   id: CMPosterCMB2
-  name: "Colonial Marshals poster"
-  description: "The laws of Earth stretch beyond the Sol: The Colonial Marshals."
+  name: "Colony Marshal poster"
+  description: "Justice, authority, and protection in the outer rim."
   components:
   - type: Sprite
     state: CMB_2
