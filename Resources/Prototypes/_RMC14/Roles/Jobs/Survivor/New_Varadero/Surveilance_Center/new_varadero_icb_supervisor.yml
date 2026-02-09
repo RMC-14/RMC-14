@@ -43,7 +43,7 @@
 - type: startingGear
   id: RMCGearSurvivorICBSupervisor
   equipment:
-    head: RMCHeadBeretAgent
+    head: RMCArmorHelmetPMCBlack
     ears: RMCHeadsetDistressBureauDamaged
     jumpsuit: RMCMarshalCMBUniform
     outerClothing: RMCCoatBureauTrenchCoatGrey
