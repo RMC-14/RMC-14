@@ -27,6 +27,7 @@ using Content.Shared.Interaction.Events;
 using Content.Shared.Item;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Prototypes;
 using Content.Shared.Tools.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Weapons.Ranged.Components;
@@ -37,6 +38,8 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -53,6 +56,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly BarricadeSystem _barricade = default!;
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
     [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
+    [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
@@ -63,6 +67,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedItemSystem _item = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
@@ -428,7 +433,10 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {
-            if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, coordinates, ent.Comp.MountExclusionAreaSize))
+            if (!TryComp(ent, out MetaDataComponent? metaData))
+                return false;
+
+            if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), coordinates, ent.Owner, ent.Comp.MountExclusionAreaSize, user))
                 return false;
 
             if (ent.Comp.BarricadeExclusionAreaSize != 0 &&
@@ -609,29 +617,87 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Check if a weapon mount is anchored near the given coordinates..
+    ///     Check if a weapon mount is anchored near the given coordinates.
+    /// </summary>
+    /// <param name="grid">The map grid being checked.</param>
+    /// <param name="coordinates">The coordinates used as the center</param>
+    /// <param name="range">The radius of the search area</param>
+    /// <param name="checking">The <see cref="EntityPrototype"/> requiring the check</param>
+    /// <param name="user">The entity performing the search</param>
+    /// <returns>True if an anchored entity with a <see cref="WeaponMountComponent"/> within the specified range</returns>
+    public bool HasWeaponMountNearbyPopup(Entity<MapGridComponent> grid, EntityCoordinates coordinates, EntityPrototype? checking = null, float range = 1.5f, EntityUid? user = null)
+    {
+        var hasNearbyMounts = TryGetNearbyMounts(grid, coordinates, out var mounts, range);
+
+        if (checking == null)
+            return hasNearbyMounts;
+
+        hasNearbyMounts = false;
+
+        if (checking.TryGetComponent(out WeaponMountComponent? mountComp, _componentFactory))
+        {
+            foreach (var mount in mounts)
+            {
+                if (TryComp(mount, out MetaDataComponent? metaData) &&
+                    metaData.EntityPrototype == checking &&
+                    mountComp.MountExclusionAreaSize > 0)
+                {
+                    hasNearbyMounts = true;
+                }
+            }
+        }
+
+        if (checking.HasComponent<BarricadeComponent>())
+        {
+            foreach (var mount in mounts)
+            {
+                if (mount.Comp.BarricadeExclusionAreaSize > 0)
+                    hasNearbyMounts = true;
+            }
+        }
+
+        if (hasNearbyMounts && user != null && _net.IsServer)
+        {
+            var msg = Loc.GetString("emplacement-mount-too-close", ("mount", mounts[0]));
+            _popup.PopupEntity(msg, user.Value, user.Value, PopupType.SmallCaution );
+        }
+
+        return hasNearbyMounts;
+    }
+
+    /// <summary>
+    ///     Check if a weapon mount is anchored near the given coordinates.
     /// </summary>
     /// <param name="grid">The map grid being checked.</param>
     /// <param name="user">The entity performing the search</param>
     /// <param name="coordinates">The coordinates used as the center</param>
     /// <param name="range">The radius of the search area</param>
+    /// <param name="checking">The EntityUid of the entity requiring the check</param>
     /// <returns>True if an anchored entity with a <see cref="WeaponMountComponent"/> within the specified range</returns>
-    public bool HasWeaponMountsNearbyPopup(Entity<MapGridComponent> grid, EntityUid user, EntityCoordinates coordinates, int range)
+    public bool HasWeaponMountNearbyPopup(Entity<MapGridComponent> grid, EntityCoordinates coordinates, EntityUid checking, float range = 1.5f, EntityUid? user = null)
     {
+        if (!TryComp(checking, out MetaDataComponent? metaData) || metaData.EntityPrototype is not { } prototype)
+            return false;
+
+        return HasWeaponMountNearbyPopup(grid, coordinates, prototype, range, user);
+    }
+
+    private bool TryGetNearbyMounts(Entity<MapGridComponent> grid, EntityCoordinates coordinates, out List<Entity<WeaponMountComponent>> mounts, float range = 1.5f)
+    {
+        mounts = new List<Entity<WeaponMountComponent>>();
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
-        var checkArea = new Box2(position.X - range, position.Y - range, position.X + range, position.Y + range);
+        var checkArea = new Box2(position.X - range + 1, position.Y - range + 1, position.X + range, position.Y + range);
         var enumerable = _mapSystem.GetLocalAnchoredEntities(grid, grid, checkArea);
 
         foreach (var anchored in enumerable)
         {
-            if (TryComp(anchored, out WeaponMountComponent? mount) && mount.MountedEntity != null)
-            {
-                var msg = Loc.GetString("emplacement-mount-too-close", ("mount", anchored));
-                _popup.PopupClient(msg, user, user, PopupType.SmallCaution );
-                return true;
-            }
+            if (!TryComp(anchored, out WeaponMountComponent? mount) || mount.MountedEntity == null)
+                continue;
+
+            mounts.Add((anchored, mount));
         }
-        return false;
+
+        return mounts.Count > 0;
     }
 
     /// <summary>
@@ -640,7 +706,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     /// <param name="ent">The mount being assembled</param>
     /// <param name="user">The entity attempting to assemble the mount.</param>
     /// <returns>True if the mount can be assembled</returns>
-
     private bool CanAssembleMount(Entity<WeaponMountComponent> ent, EntityUid user)
     {
         if (ent.Comp.MountExclusionAreaSize == 0)
@@ -650,7 +715,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (!TryComp(grid, out MapGridComponent? mapGrid))
             return true;
 
-        if (HasWeaponMountsNearbyPopup((grid.Value, mapGrid), user, _transform.GetMoverCoordinates(ent), ent.Comp.MountExclusionAreaSize))
+        if (HasWeaponMountNearbyPopup((grid.Value, mapGrid), _transform.GetMoverCoordinates(ent), ent.Owner, ent.Comp.MountExclusionAreaSize, user))
             return false;
 
         return true;
