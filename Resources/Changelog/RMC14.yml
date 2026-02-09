@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: leon-krol
-  changes:
-  - message: Updated the Requisitions guide.
-    type: Tweak
-  id: 2389
-  time: '2025-10-05T02:44:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6806
-- author: yagwog
-  changes:
-  - message: Added pre-mapped-in standardized MP forms.
-    type: Add
-  id: 2390
-  time: '2025-10-05T02:53:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8044
 - author: monomethylhydrazine
   changes:
   - message: Added a variety of Three Suns Empire marine roles (rifleman, breacher,
@@ -4721,5 +4707,25 @@
   id: 2890
   time: '2026-02-09T05:35:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9110
+- author: Thereisabear
+  changes:
+  - message: The campfires can now be lit, Bravo calls for Aid. They can be lit, extinguished
+      and require fuel to maintain.
+    type: Add
+  id: 2891
+  time: '2026-02-09T05:39:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8869
+- author: Dygon
+  changes:
+  - message: Landing pads now have lights that light up when a dropship is arriving
+      from FTL or preparing to enter FTL. Stay clear of the pad while the lights are
+      on.
+    type: Tweak
+  - message: Dropships arriving from FTL no longer create a visual effect on the tiles
+      where they will land.
+    type: Tweak
+  id: 2892
+  time: '2026-02-09T05:38:32.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9162
 Name: RMC14
 Order: -1
