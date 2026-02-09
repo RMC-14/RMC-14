@@ -102,7 +102,7 @@
   name: "Military Police"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/RMCGuideRoleMilitaryPolice.xml"
 
-- type: guideEntry
+- type: guideEntry # by Kynthos on Discord
   parent: RMC
   id: RMCGuideRoleCombatTechnician
   priority: 6

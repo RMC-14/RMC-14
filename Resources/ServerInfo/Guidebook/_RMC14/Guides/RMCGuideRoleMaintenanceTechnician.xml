@@ -10,34 +10,14 @@
 
   #Maintaining Power
 
-  Power both on the Almayer and in the AO requires generators.
+  Power on the Almayer requires generators.
 
   <Box>
     <GuideEntityEmbed Entity="RMCGeneratorFusion"/>
     <GuideEntityEmbed Entity="RMCGeneratorFusionColony"/>
   </Box>
 
-  Aboard the Almayer, power is supplied by the [bold]S-52 Fusion Reactors[/bold]. These start fully operational and powered at the beginning of each operation, and will be completely fine if left unattended.
-
-  In the AO, power is supplied by [bold]G-11 Geothermal Generators[/bold]. These will be unpowered and broken when marines land in the AO, and it will usually be the job of the Combat Technicians to get these repaired. The amount of work required will depend on the extent of the damage. To repair a generator:
-
-  - First use a [bold]blowtorch[/bold] to weld the panels back together
-  - Then use [bold]wire cutters[/bold] to mend the wires.
-  - Finally use a [bold]wrench[/bold] to secure the machine in place.
-
-  <Box>
-    <GuideEntityEmbed Entity="CMWelder"/>
-    <GuideEntityEmbed Entity="CMWirecutter"/>
-    <GuideEntityEmbed Entity="CMWrench"/>
-  </Box>
-
-  When the blue screen turns on the generator is working and supplying power.
-
-  Power generated will be automatically distributed to APCs, which will store a small amount of power within its installed power cell in case the generators fail. Power is then distributed to nearby electronics in the area, such as doors, lights, and vendors. The total power draw will be listed on the APC’s interface. If the local APC is destroyed, or its power cell depleted, the immediate area will become unpowered.
-
-    To replace the power cell of an APC, first swipe your Engineering ID card or Dogtags to unlock the interface and disengage the cover lock. Then use a crowbar to force the cover open, allowing access to the power cell, which can be removed with an empty hand and replaced with a charged power cell. Once swapped, use a crowbar to close the panel, engage the cover lock, and swipe your ID to lock the APC interface again. This can be used to temporarily keep a small area powered in case despite the lack of power generation.
-
-    If the APC is destroyed, it can be reassembled by using a screwdriver.
+  Aboard the Almayer, power is supplied by the [bold]S-52 Fusion Reactors[/bold]. These start fully operational and powered at the beginning of each operation, and will be completely fine if left unattended in most cases.
 
     #Reloading the Orbital Cannon
 
