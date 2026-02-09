@@ -23,7 +23,6 @@
     layers:
     - state: idle
       map: [ "rmc_flick_animation" ]
-  - type: Clickable
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible
