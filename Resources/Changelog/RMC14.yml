@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: Max_Power
-  changes:
-  - message: Chance's Claim and Fiorina Science Annex now use 'Classic' camo again.
-    type: Tweak
-  id: 2416
-  time: '2025-10-05T08:31:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7436
-- author: yagwog
-  changes:
-  - message: Added the Hedgehog Ravager strain.
-    type: Add
-  id: 2417
-  time: '2025-10-05T11:46:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7996
 - author: DrSmugleaf
   changes:
   - message: Made xeno projectiles predicted and lag compensated, meaning they account
@@ -4729,5 +4715,19 @@
   id: 2917
   time: '2026-02-10T02:39:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9188
+- author: Ian321
+  changes:
+  - message: The smart refill tank can now be filled and emptied like a beaker.
+    type: Tweak
+  id: 2918
+  time: '2026-02-10T02:41:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9185
+- author: CatAndHats
+  changes:
+  - message: Accentless trait now correctly removes Vulpkanin default accent
+    type: Fix
+  id: 2919
+  time: '2026-02-10T02:41:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9183
 Name: RMC14
 Order: -1
