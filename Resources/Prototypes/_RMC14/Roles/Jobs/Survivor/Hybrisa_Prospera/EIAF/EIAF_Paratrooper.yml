@@ -42,7 +42,7 @@
     job_id: RMCSurvivorEIAFParatrooper
   layers:
   - sprite: Sprite
-    state: surv
+    state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase

@@ -52,7 +52,7 @@
     job_id: RMCSurvivorEIAFPilot
   layers:
   - sprite: Sprite
-    state: surv
+    state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase

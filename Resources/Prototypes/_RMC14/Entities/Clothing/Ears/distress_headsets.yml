@@ -271,7 +271,7 @@
       defaultMode: SquadLeader
       trackerModes:
         - SquadLeader
-        - EIAFCommander
+        - RMCSurvivorEIAFCommander
 
 - type: entity
   parent: RMCHeadsetEIAF
@@ -285,7 +285,7 @@
         - RoyalMarine
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
-      defaultMode: EIAFCommander
+      defaultMode: RMCSurvivorEIAFCommander
           
 - type: entity
   parent: RMCHeadsetEIAF

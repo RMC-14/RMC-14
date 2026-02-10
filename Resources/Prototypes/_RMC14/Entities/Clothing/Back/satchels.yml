@@ -50,6 +50,16 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
+      
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillEIAFCO
+  suffix: Filled, EIAF, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCTieBlack
 
 - type: entity
   parent: CMSatchel

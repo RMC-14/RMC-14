@@ -1,12 +1,14 @@
 - type: job
   parent: RMCSurvivorEIAFBase
-  id: RMCSurvivorEIAFSquadLeader
-  name: rmc-job-name-eiaf-squad-leader
+  id: RMCSurvivorEIAFCommander
+  name: rmc-job-name-eiaf-commander
   ranks:
-    RMCRankEIAFSergeant: [ ]
-  startingGear: RMCGearEIAFSquadLeader
-  icon: RMCJobIconEIAFSquadLeader
-  spawnMenuRoleName: EIAF Paratrooper (Squad Leader) (Survivor)
+    RMCRankEIAFLieutenantColonel: [ ]
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  startingGear: RMCGearEIAFCommander
+  icon: RMCJobIconEIAFCommander
+  spawnMenuRoleName: EIAF Commander (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -15,7 +17,7 @@
             - Civilian
             - TSE
         - type: Skills
-          preset: RMCSkillPresetEIAFLeader
+          preset: RMCSkillPresetCommander
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked
@@ -23,14 +25,10 @@
         - type: RMCPointing
         - type: CommandAccent
         - type: RMCTrackable
-        - type: SquadLeader
-          icon:
-            sprite: _RMC14/Interface/cm_job_icons.rsi
-            state: eiaf_teamleader_alt
         - type: TacticalMapIcon
           icon:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
-            state: rmc_teamleader
+            state: rmc_commander
           background:
             sprite: /Textures/_RMC14/Interface/map_blips.rsi
             state: background_eiaf
@@ -39,31 +37,39 @@
             tags:
               - SquadEIAF
         - type: JobPrefix
-          prefix: rmc-job-prefix-eiaf-squad-leader
+          prefix: rmc-job-prefix-eiaf-commander
   hidden: true
 
 - type: startingGear
   parent: RMCGearEIAFBase
-  id: RMCGearEIAFSquadLeader
+  id: RMCGearEIAFCommander
   equipment:
-    head: RMCHeadEIAFBeretLead
-    outerClothing: RMCArmorEIAFVest
+    id: CMIDCardGold
+    jumpsuit: RMCJumpsuitMarineEIAFNo2
+    head: RMCHeadCapPeakedEIAF
+    ears: RMCHeadsetEIAFOfficer
+    eyes: RMCGlassesAviators
+    outerClothing: RMCJacketEIAFCOJacketFilled
+    belt: RMCBeltHolsterPistolEIAFCustom
+    back: RMCSatchelBlackFillEIAFCO
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneralLargeFilledEIAFCO
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointEIAFSquadLeader
+  id: RMCSpawnPointEIAFCommander
   name: eiaf paratrooper squad leader spawn point
   components:
-  - type: SpawnPoint
-    job_id: RMCSurvivorEIAFSquadLeader
+    - type: SpawnPoint
+      job_id: RMCSurvivorEIAFCommander
   layers:
-  - sprite: Sprite
-    state: surv_tse
+    - sprite: Sprite
+      state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconEIAFSquadLeader
+  id: RMCJobIconEIAFCommander
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: eiaf_teamleader_alt
+    state: eiaf_commander_alt
     

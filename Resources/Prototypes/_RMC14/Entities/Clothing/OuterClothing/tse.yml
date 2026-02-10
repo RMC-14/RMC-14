@@ -111,3 +111,12 @@
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf_co_alt.rsi
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/eiaf_co_alt.rsi
+      
+- type: entity
+  parent: RMCJacketEIAFCOJacket
+  id: RMCJacketEIAFCOJacketFilled
+  suffix: Filled, EIAF, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar

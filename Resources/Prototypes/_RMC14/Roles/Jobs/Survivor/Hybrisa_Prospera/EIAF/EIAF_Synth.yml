@@ -74,7 +74,7 @@
     job_id: RMCSurvivorEIAFSupportSynthetic
   layers:
   - sprite: _RMC14/Markers/landmarks.rsi
-    state: surv
+    state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase

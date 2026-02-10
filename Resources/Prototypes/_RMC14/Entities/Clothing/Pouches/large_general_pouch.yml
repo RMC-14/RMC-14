@@ -29,3 +29,14 @@
     contents:
     - id: RMCHeadRoyalBeret
     - id: CMMaskGas # TODO RMC14 royal marine gas masks
+      
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledEIAFCO
+  suffix: Filled, EIAF, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMClipboard #notepad
+        - id: CMPenFountain 
+          

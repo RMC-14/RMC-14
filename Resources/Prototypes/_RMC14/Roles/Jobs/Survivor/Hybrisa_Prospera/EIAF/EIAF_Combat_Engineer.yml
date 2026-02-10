@@ -51,7 +51,7 @@
     job_id: RMCSurvivorEIAFCombatEngineer
   layers:
   - sprite: Sprite
-    state: surv
+    state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase
