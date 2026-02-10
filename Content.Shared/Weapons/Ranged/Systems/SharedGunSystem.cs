@@ -241,9 +241,10 @@ public abstract partial class SharedGunSystem : EntitySystem
         }
 
         //RMC14
-        if (_rmcSharedWeaponController.TryGetControlledWeapon(entity, out var weapon, out gunComp))
+        if (_rmcSharedWeaponController.TryGetControlledWeapon(entity, out var weapon, out gun))
         {
             gunEntity = weapon.Value;
+            gunComp = gun;
             return true;
         }
         //

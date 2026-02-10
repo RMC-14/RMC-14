@@ -245,6 +245,7 @@
     isWeaponLocked: true
     canRotateWithoutTool: true
     mountOnDeploy: true
+    mountExclusionAreaSize: 0
     barricadeExclusionAreaSize: 2
     assembleDelay: 0.5
     undeploySound: null

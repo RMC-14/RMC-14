@@ -118,8 +118,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBoxx4mines
-    #   points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     # - id: CMM40MFHSMetalFoamGrenade
     #   points: 5
     # - id: RMCElectroshockGrenadex3
