@@ -245,12 +245,24 @@
     greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
     greaterResinSurgeWallPrototype: WallXenoResinThickSurge
   - type: DesignerCrosshair
-    wallRsi:
+    optimizedWallRsi:
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: wall_mark_optimized
-    doorRsi:
+    optimizedDoorRsi:
       sprite: _RMC14/Structures/designer_nodes.rsi
       state: door_mark_optimized
+    flexibleWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_flex
+    flexibleDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_flex
+    constructWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_construct
+    constructDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_construct
   - type: XenoConstruction
     buildRange: 15
     buildDelay: 0.25
