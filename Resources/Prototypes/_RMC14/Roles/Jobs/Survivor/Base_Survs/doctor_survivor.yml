@@ -104,5 +104,3 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorDoctor
-
-

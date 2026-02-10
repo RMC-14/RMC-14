@@ -96,5 +96,3 @@
   components:
   - type: RMCJobSpawner
     job: CMSurvivorEngineer
-
-
