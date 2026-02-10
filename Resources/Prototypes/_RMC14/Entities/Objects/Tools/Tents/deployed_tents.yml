@@ -414,3 +414,10 @@
     - "standard_roof"
     - "extension_roof"
     - "correspondent_extension_roof"
+  - type: ItemCamouflage
+    colors:
+      Jungle: "#699393"
+      Desert: "#699393"
+      Snow: "#699393"
+      Classic: "#699393"
+      Urban: "#699393"

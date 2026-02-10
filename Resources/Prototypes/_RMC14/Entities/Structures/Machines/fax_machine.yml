@@ -119,6 +119,7 @@
 
 - type: entity
   parent: CMFax
+  suffix: Correspondent
   id: CMFaxPressTent
   components:
   - type: FaxMachine

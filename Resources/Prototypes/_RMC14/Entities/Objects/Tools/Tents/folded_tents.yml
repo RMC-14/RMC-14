@@ -342,7 +342,7 @@
   parent: BaseItem
   id: RMCTentUNMCExtendedCorrespondentFolded
   name: folded Correspondent Field Tent
-  description: A standard UNMC military tent. This one is equipped for news on the go. Unfold in a suitable location for interviews. ENTRANCE TO THE SOUTH.
+  description: A standard civilian tent. This one is equipped for news on the go. Unfold in a suitable location for interviews. ENTRANCE TO THE SOUTH.
   components:
     - type: Item
       size: Huge
@@ -394,6 +394,6 @@
         - prototype: RMCLamp
           offset: 1.5, -0.5
           neverRedeployableSetup: true
-       # - prototype: CMFaxPressTent
-        #  offset: 1,5, -0.5
+        - prototype: CMFaxPressTent
+          offset: -1.5, 0.5
          
