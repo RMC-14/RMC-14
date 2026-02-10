@@ -1461,6 +1461,8 @@
         amount: 15
       - id: CMHeadsetResearcher
         amount: 15
+      - id: RMCCPRDummy
+        amount: 5
     # ////////////////////////////////////
     # Auxiliary Support Officer
     # ////////////////////////////////////
