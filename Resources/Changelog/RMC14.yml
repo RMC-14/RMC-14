@@ -1,24 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added 3 New Liaison Uniforms, 2 New Liaison Jackets, and 2 New Patches
-    type: Add
-  - message: Added the 2 new patches to the Civilian and Uniform Accessory loadout
-      menus respectively.
-    type: Add
-  - message: Added all new Liaison items to the CL wardrobe
-    type: Add
-  id: 2414
-  time: '2025-10-05T08:13:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7481
-- author: monomethylhydrazine
-  changes:
-  - message: increased intel officer unlock requirements to 10 hours of squad time
-      and 1 hour each of combat technician and FTL playtime
-    type: Tweak
-  id: 2415
-  time: '2025-10-05T08:30:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6796
 - author: Max_Power
   changes:
   - message: Chance's Claim and Fiorina Science Annex now use 'Classic' camo again.
@@ -4734,5 +4714,20 @@
   id: 2915
   time: '2026-02-10T00:43:51.599298+00:00'
   url: null
+- author: Dygon
+  changes:
+  - message: Fixed the dropship arrival sound not playing right before a dropship
+      lands.
+    type: Fix
+  id: 2916
+  time: '2026-02-10T02:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9186
+- author: Dygon
+  changes:
+  - message: Fixed being able to place multiple machine guns on the same tile.
+    type: Fix
+  id: 2917
+  time: '2026-02-10T02:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9188
 Name: RMC14
 Order: -1
