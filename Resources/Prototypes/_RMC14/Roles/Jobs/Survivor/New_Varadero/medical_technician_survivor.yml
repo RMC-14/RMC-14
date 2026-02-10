@@ -57,5 +57,3 @@
   id: RMCGearSurvivorPresetMedicalTechnician
   name: medical technician colonist preset
   categories: [ HideSpawnMenu ]  # TODO RMC14 random research notes
-
-
