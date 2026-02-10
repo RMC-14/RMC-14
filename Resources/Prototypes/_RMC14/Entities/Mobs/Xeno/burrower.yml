@@ -26,6 +26,7 @@
     - Dead
   - type: Tag
     tags:
+    - DoorBumpOpener
     - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
