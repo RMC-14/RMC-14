@@ -264,7 +264,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         _weedbound.RegisterWeedboundStructure(spawned, boundWeed);
 
         EntityManager.DeleteEntity(nodeUid);
-        _popup.PopupEntity("You infuse the node with plasma", spawned, PopupType.Small);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-designer-infuse-node"), user, user, PopupType.Small);
     }
 
     // Some castes build thick walls/doors from construct nodes.

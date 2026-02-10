@@ -244,6 +244,13 @@
     greaterResinSurgeBuildTime: 1
     greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
     greaterResinSurgeWallPrototype: WallXenoResinThickSurge
+  - type: DesignerCrosshair
+    wallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_optimized
+    doorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_optimized
   - type: XenoConstruction
     buildRange: 15
     buildDelay: 0.25
