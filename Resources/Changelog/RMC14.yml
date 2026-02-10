@@ -1,295 +1,4 @@
 ﻿Entries:
-- author: NotInButIn
-  changes:
-  - message: Fixed the ability to upgrade barricades in acid
-    type: Fix
-  - message: Fixed the ability to melt the mount for dropship modules; now the module
-      inside melts
-    type: Fix
-  id: 2408
-  time: '2025-10-05T06:26:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7968
-- author: SharkSnake98
-  changes:
-  - message: Added the CL safe and it's filled variant.
-    type: Add
-  - message: Added the SMART WeYa Synthetic Reset Key
-    type: Add
-  id: 2409
-  time: '2025-10-05T06:40:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7991
-- author: Aurallianz
-  changes:
-  - message: Added the ability to have headsets that read a comms channel, but are
-      not able to talk through it.
-    type: Add
-  id: 2410
-  time: '2025-10-05T06:48:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8043
-- author: to4no_fix
-  changes:
-  - message: "Ported UNMC tents! Added Standard Tent, Command Tent (unfolds Overwatch\
-      \ console, phone, 2 tables and chairs), Medical Tent (unfolds ColMarTech MarineMed,\
-      \ IV and roller bed, in the future will give a bonus to the speed of operations\
-      \ and pain reduction), Requisitions Tent (unfolds 2 tables, chair, phone, ASRS\
-      \ console and ColMarTech Automated FOB Supplies Vendor primarily for manual\
-      \ filling and storage, which will be possible in the future), Mess Tent (unfolds\
-      \ 3 tables, phone, microwave and other inventory necessary for you to be able\
-      \ to cook anything), Military Police Tent (unfolds 2 tables, chair, telephone,\
-      \ 2 closets, detention cell and camera console)! You can unfold them on the\
-      \ planet in an empty space using in your hand or fold them using the entrenching\
-      \ tool. Be careful with tents, as they are very fragile and a small pressure\
-      \ or grenade explosion is enough to break not only the tent, but also some of\
-      \ the equipment that was deployed with the tent! Tents can be found in these\
-      \ locations in Almayer: Command Tent \u2014 CIC armory; Medical Tent \u2014\
-      \ Medical Block storage (northeast of the first floor Medical Block); Requisitions\
-      \ tent \u2014 Requisition storage (southeast of Requisition); Mess tent \u2014\
-      \ Technical corridor south of the mess technicals rooms; Military Police Tent\
-      \ \u2014 Military Police armory; Standard and Extended Tents \u2014 squad bedrooms.\
-      \ Tents will simplify the organization of bases and increase their convenience."
-    type: Add
-  - message: The tents are now one piece and can be destroyed.
-    type: Tweak
-  - message: ColMarTech Automated FOB Supplies Vendor and ColMarTech MarineMed now
-      eject all contents when destroyed.
-    type: Add
-  - message: Added strong reinforced window.
-    type: Add
-  id: 2411
-  time: '2025-10-05T07:53:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7232
-- author: noctyrnal
-  changes:
-  - message: Podlocks can now be pried open when unpowered.
-    type: Fix
-  - message: Xenonids now take 4 seconds to pry open podlocks and shutters.
-    type: Fix
-  - message: Xenonids now have a unique sound when prying open things.
-    type: Fix
-  - message: Xenonids cannot pry doors closed anymore.
-    type: Fix
-  id: 2412
-  time: '2025-10-05T07:56:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6959
-- author: BramvanZijp
-  changes:
-  - message: The Xeno Queen, XO, CO, and Survivor Commanders now get the bold chat
-      font that SLs and HLs have.
-    type: Add
-  id: 2413
-  time: '2025-10-05T08:06:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7900
-- author: SharkSnake98
-  changes:
-  - message: Added 3 New Liaison Uniforms, 2 New Liaison Jackets, and 2 New Patches
-    type: Add
-  - message: Added the 2 new patches to the Civilian and Uniform Accessory loadout
-      menus respectively.
-    type: Add
-  - message: Added all new Liaison items to the CL wardrobe
-    type: Add
-  id: 2414
-  time: '2025-10-05T08:13:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7481
-- author: monomethylhydrazine
-  changes:
-  - message: increased intel officer unlock requirements to 10 hours of squad time
-      and 1 hour each of combat technician and FTL playtime
-    type: Tweak
-  id: 2415
-  time: '2025-10-05T08:30:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6796
-- author: Max_Power
-  changes:
-  - message: Chance's Claim and Fiorina Science Annex now use 'Classic' camo again.
-    type: Tweak
-  id: 2416
-  time: '2025-10-05T08:31:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7436
-- author: yagwog
-  changes:
-  - message: Added the Hedgehog Ravager strain.
-    type: Add
-  id: 2417
-  time: '2025-10-05T11:46:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7996
-- author: DrSmugleaf
-  changes:
-  - message: Made xeno projectiles predicted and lag compensated, meaning they account
-      for your ping and happen immediately on your screen.
-    type: Add
-  - message: Made most interactions and actions, including all warrior abilities and
-      runner/lurker leaps, lag compensated, meaning they account for your ping.
-    type: Add
-  - message: Action order is now preserved for marines and between spawns of the same
-      xeno caste. If you reorder your actions one way as that caste, that ordering
-      will stay the next time you become it. Unassigned actions are appended to the
-      end. Each different caste and strain will keep their ordering separately. Default
-      ordering is used otherwise.
-    type: Add
-  - message: Added a command to disable and enable a player's prediction before banning
-      them for spreading misinformation.
-    type: Add
-  - message: Added admin logs to rotary phones.
-    type: Add
-  - message: Added Dead/LOOC/OOC chat bans for admins.
-    type: Add
-  - message: Fixed not being able to hear sounds happening around you while watching
-      someone else in overwatch.
-    type: Fix
-  - message: Fixed sentinel spits making an acid sound on hit.
-    type: Fix
-  - message: Fixed tactical map updates not being announced if the sensor tower is
-      on.
-    type: Fix
-  - message: Fixed turning invisible if you rest while running towards a door and
-      holding something in your off-hand, reported by Verification.
-    type: Fix
-  - message: Fixed the tactical map window starting big and then shrinking immediately.
-    type: Fix
-  - message: Fixed xenos not being able to melee chairs.
-    type: Fix
-  - message: Fixed Queen being ignited by incendiary ammo.
-    type: Fix
-  - message: Fixed dying not removing acid on you.
-    type: Fix
-  - message: Fixed being able to print infinite Marine Law and SOP books from the
-      vendor.
-    type: Fix
-  - message: Fixed syringe cases not fitting into armor vests, armor, external webbing,
-      jackets, and hazard vests.
-    type: Fix
-  - message: Fixed armor vests not protecting contents from explosions.
-    type: Fix
-  - message: Fixed being able to send empty squad announcements through the overwatch
-      console.
-    type: Fix
-  - message: Fixed some windows on the Almayer not deconstructing when hijack lands.
-    type: Fix
-  - message: Fixed not being able to wear a single 120 shell box on your backpack
-      slot.
-    type: Fix
-  - message: Fixed xenos healing 3 times faster than intended while in crit.
-    type: Fix
-  - message: Fixed parasites not being stunned through walls by Queen screech.
-    type: Fix
-  - message: Fixed vaulting while fireman carrying offsetting who you are carrying.
-    type: Fix
-  - message: Fixed Patron figurines taking up the dedicated helmet slots instead of
-      those dedicated for vanity items.
-    type: Fix
-  - message: Fixed Warrior abilities not showing interaction outlines while targeting.
-    type: Fix
-  - message: Fixed surgical line and synth graft being interrupted by damage.
-    type: Fix
-  - message: Fixed upstream tips showing on the login screen.
-    type: Fix
-  - message: Fixed megaphone speak sound being heard by others from distances greater
-      than 1.5 tiles.
-    type: Fix
-  - message: Fixed being able to pull move someone while fireman carrying them.
-    type: Fix
-  - message: Fixed transferring bullets between magazines being slower than intended.
-      It now transfers 20 bullets in the same amount of time as before.
-    type: Fix
-  - message: Fixed upstream knives not being deleted by explosions.
-    type: Fix
-  - message: Fixed shotgun slugs slowing for too long (6 > 3 seconds) and superslowing
-      for too long (2 > 1 seconds).
-    type: Fix
-  - message: Fixed ammo stuns applying to marines, and some stun/slow times being
-      incorrect.
-    type: Fix
-  - message: Fixed not being able to sit on couches.
-    type: Fix
-  - message: Fixed some items spawning outside of crates instead of inside.
-    type: Fix
-  - message: Fixed not being able to place roller beds on catwalks, stairs, grates,
-      and carpet.
-    type: Fix
-  - message: Fixed not being able to press Z to deploy a roller bed.
-    type: Fix
-  - message: Fixed pulling someone on a roller bed pulling them off instead of pulling
-      the roller bed, and transfer pulls when buckling onto roller beds.
-    type: Fix
-  - message: Fixed not being able to put magazine boxes on stairs.
-    type: Fix
-  - message: Fixed the common encryption key not being intrinsic in all ship headsets.
-    type: Fix
-  - message: Fixed some interactions that ignore range not using the correct range,
-      such as the overwatch console and attaching weapons to dropship points with
-      the power loader.
-    type: Fix
-  - message: Fixed fireman carry and pointing popups not using the player's correct
-      identity.
-    type: Fix
-  - message: Fixed aciding crates and closets deleting things inside them, and deleting
-      a storage item deleting non-corrodible items inside them instead of dropping
-      them onto the ground.
-    type: Fix
-  - message: Fixed Carriers being able to pick up dead parasites.
-    type: Fix
-  - message: Fixed fortified defenders blocking the Queen's movement.
-    type: Fix
-  - message: Fixed squad max hospital corpsmen and combat technicians not being set
-      depending on pop, alongside the total count.
-    type: Fix
-  - message: Fixed resin whisperer hivelords not being able to open doors by just
-      left clicking.
-    type: Fix
-  - message: Fixed ghosts not being able to left click ladders to go through them.
-    type: Fix
-  - message: Fixed flamers, Oppressor Praetorian abduct, Vanguard Praetorian pierce,
-      Valkyrie Praetorian retrieve, and spray acid sometimes getting an extra tile
-      of range.
-    type: Fix
-  - message: Fixed non-MP roles being able to strip multiple items at the same time.
-    type: Fix
-  - message: Fixed not being able to CPR stunned dead marines.
-    type: Fix
-  - message: Fixed tile fire layering under tall grass.
-    type: Fix
-  - message: Fixed nettle soup healing marines.
-    type: Fix
-  - message: Fixed CPRing crit marines having a cooldown.
-    type: Fix
-  - message: Fixed closing a tech tree option on the tech tree console closing both
-      windows.
-    type: Fix
-  - message: Fixed a bug with aggressively grabbing someone that is fireman carrying
-      someone else.
-    type: Fix
-  - message: Fixed tactical smock neck worn sprite being incorrect.
-    type: Fix
-  - message: Fixed epinephrine healing running after the defibrillator revival check.
-    type: Fix
-  - message: Fixed defib, surgical line, and synth graft use times not scaling with
-      medical skill, and surgical line/synth graft not being slower when used on yourself.
-    type: Fix
-  - message: Fixed some base survivor role playtimes not showing up.
-    type: Fix
-  - message: Fixed being able to put resin holes and structures on couches.
-    type: Fix
-  - message: Fixed hypospray injections not happening instantly on your screen, with
-      the required skill.
-    type: Fix
-  - message: Fixed sentinel, spitter, and praetorian spits inheriting your velocity
-      instead of shooting at a constant speed.
-    type: Fix
-  - message: Fixed Queen footsteps being too quiet.
-    type: Fix
-  - message: Made lag compensation a lot more consistent.
-    type: Tweak
-  - message: Added current points to the main tech tree console window.
-    type: Tweak
-  - message: Made loose bullet boxes deployable, and able to be picked up with left
-      click.
-    type: Tweak
-  - message: Updated the roadmap.
-    type: Tweak
-  id: 2418
-  time: '2025-10-05T12:09:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8050
 - author: noctyrnal
   changes:
   - message: The PMC PVE Shipmap, the UNCSS Haurchefant has recieved a large update.
@@ -4759,6 +4468,100 @@
     type: Fix
   id: 2909
   time: '2026-02-09T12:04:27.512916+00:00'
+  url: null
+- author: CatAndHats
+  changes:
+  - message: Claymores will now fit into explosive pouches and the heavygunner storage
+      rigs
+    type: Fix
+  id: 2910
+  time: '2026-02-09T21:34:12.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9172
+- author: PursuitinAshes
+  changes:
+  - message: Removed the All Hostile gauss turret in the Chance's Claim admin building.
+    type: Remove
+  id: 2911
+  time: '2026-02-09T21:33:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9154
+- author: Ian321
+  changes:
+  - message: Squad assignment via the ID computer now correctly updates the job title.
+    type: Fix
+  id: 2912
+  time: '2026-02-09T23:16:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9177
+- author: DrSmugleaf
+  changes:
+  - message: Fix xenos not being able to open doors by bumping into them instead of
+      left clicking them.
+    type: Fix
+  - message: Fixed not being able to build hive structures far away from the hive
+      core.
+    type: Fix
+  - message: Fixed xenos not being able to destroy their hive structures.
+    type: Fix
+  - message: Fixed popup spam as designer hivelord when mousing over nodes.
+    type: Fix
+  - message: Updated the roadmap.
+    type: Tweak
+  id: 2913
+  time: '2026-02-09T23:21:41.467674+00:00'
+  url: null
+- author: Dygon
+  changes:
+  - message: Fixed being able to scope with the ML66D on your back.
+    type: Fix
+  id: 2914
+  time: '2026-02-10T00:40:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9180
+- author: DrSmugleaf
+  changes:
+  - message: Fixed Designer Hivelord weedbound walls and doors getting deleted if
+      their weeds are replaced by hardy or hive weeds.
+    type: Fix
+  id: 2915
+  time: '2026-02-10T00:43:51.599298+00:00'
+  url: null
+- author: Dygon
+  changes:
+  - message: Fixed the dropship arrival sound not playing right before a dropship
+      lands.
+    type: Fix
+  id: 2916
+  time: '2026-02-10T02:39:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9186
+- author: Dygon
+  changes:
+  - message: Fixed being able to place multiple machine guns on the same tile.
+    type: Fix
+  id: 2917
+  time: '2026-02-10T02:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9188
+- author: Ian321
+  changes:
+  - message: The smart refill tank can now be filled and emptied like a beaker.
+    type: Tweak
+  id: 2918
+  time: '2026-02-10T02:41:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9185
+- author: CatAndHats
+  changes:
+  - message: Accentless trait now correctly removes Vulpkanin default accent
+    type: Fix
+  id: 2919
+  time: '2026-02-10T02:41:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9183
+- author: DrSmugleaf
+  changes:
+  - message: Fixed M2C and ML66D magazines disappearing when transferring between
+      them.
+    type: Fix
+  - message: Fixed the sticky resin left behind by destroyed weedbound resin slowing
+      down xenos of the same hive.
+    type: Fix
+  id: 2920
+  time: '2026-02-10T02:57:13.062736+00:00'
   url: null
 Name: RMC14
 Order: -1

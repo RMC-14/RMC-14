@@ -24,7 +24,7 @@ public sealed partial class ScopeComponent : Component
     public EntityUid? User;
 
     [DataField, AutoNetworkedField]
-    public EntProtoId ScopingToggleAction = "CMActionToggleScope";
+    public EntProtoId? ScopingToggleAction = "CMActionToggleScope";
 
     [DataField, AutoNetworkedField]
     public EntityUid? ScopingToggleActionEntity;
