@@ -79,7 +79,6 @@
   components:
     - type: DesignerRemoteThickenResin
       plasmaCost: 60
-      cooldown: 0.5
       doAfter: 1
       range: 10
     - type: Icon

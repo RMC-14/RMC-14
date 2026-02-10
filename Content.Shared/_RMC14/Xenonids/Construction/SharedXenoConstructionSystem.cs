@@ -223,6 +223,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, construction.OrderConstructionDelay, doAfterEvent, user)
         {
             BreakOnMove = true,
+            BlockDuplicate = false,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -2068,12 +2069,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!TryComp(xeno.Owner, out DesignerStrainComponent? designer))
             return true;
 
-        if (_timing.CurTime < designer.NextRemoteThickenAt)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-cooldown"), xeno, xeno, PopupType.SmallCaution);
-            return true;
-        }
-
         if (_transform.GetGrid(target) is null)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
@@ -2101,14 +2096,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return true;
         }
 
-        designer.NextRemoteThickenAt = _timing.CurTime + TimeSpan.FromSeconds(thickenChoice.Cooldown);
-        Dirty(xeno.Owner, designer);
-
         var ev = new DesignerRemoteThickenResinDoAfterEvent(thickenChoice.PlasmaCost, GetNetEntity(upgradeable.Owner), thickenChoice.Range);
         var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, thickenChoice.DoAfter, ev, xeno.Owner)
         {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
+            BreakOnMove = false,
+            BlockDuplicate = false,
+            CancelDuplicate = false,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
