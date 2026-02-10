@@ -360,7 +360,7 @@
         bounds: "-0.4,0.6,3.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
       collapseToolPrototype: CMEntrenchingTool
       areaBlockedCheck: true
-      failIfNotSurface: false
+      failIfNotSurface: true
       deploySetups:
         - prototype: RMCTentUNMCExtendedCorrespondent
           neverRedeployableSetup: false
