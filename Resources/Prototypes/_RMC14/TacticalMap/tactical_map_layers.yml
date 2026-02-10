@@ -154,20 +154,6 @@
   canContainBlips: true
 
 - type: tacticalMapLayer
-  id: SquadFORECON
-  name: ui-tactical-map-layer-squad-forecon
-  logName: squad forecon
-  sortOrder: 5
-  kind: Squad
-  group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
-  visibility: SquadMembers
-  squadId: SquadFORECON
-  canDraw: true
-  canContainBlips: true
-
-- type: tacticalMapLayer
   id: Xenos
   name: ui-tactical-map-layer-xenos
   logName: xenonid

@@ -19,7 +19,7 @@
       actionId: RMCActionOpenTacticalMapMarine
       layerSets: [TacticalMapSetSurvivor]
     - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
+      layers: [FactionSurvivor, Marines]
     - type: Skills
       preset: RMCSkillPresetCommander
     - type: MarineOrders

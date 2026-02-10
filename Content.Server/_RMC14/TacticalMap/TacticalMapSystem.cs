@@ -52,11 +52,6 @@ namespace Content.Server._RMC14.TacticalMap;
 public sealed class TacticalMapSystem : SharedTacticalMapSystem
 {
     private static readonly ProtoId<TacticalMapLayerPrototype> GlobalMarineLayer = "Marines";
-    private static readonly HashSet<string> DefaultMarineSquadGroups = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "UNMC"
-    };
-
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IAdminLogManager _adminLog = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
@@ -406,6 +401,16 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             if (!ent.Comp.Layers.Contains(squadLayer))
             {
                 ent.Comp.Layers.Add(squadLayer);
+                changed = true;
+            }
+        }
+
+        if (_squadTeamQuery.TryComp(args.Squad, out var squadTeam) &&
+            string.Equals(squadTeam.Group, "FORECON", StringComparison.OrdinalIgnoreCase))
+        {
+            if (!ent.Comp.Layers.Contains(GlobalMarineLayer))
+            {
+                ent.Comp.Layers.Add(GlobalMarineLayer);
                 changed = true;
             }
         }
@@ -909,6 +914,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         FilterSquadGroups(layers, allowedSquadGroups);
         ApplyLayerVisibilityRules(viewer, layers, accessLayers, includeAllSquads);
+        FilterEmptySquadLayers(layers);
         EnsureParentLayers(layers);
 
         return OrderLayers(layers, baseOrder);
@@ -966,13 +972,13 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private IReadOnlySet<string>? GetAllowedSquadGroups(EntityUid computerOwner)
     {
-        if (HasComp<MarineCommunicationsComputerComponent>(computerOwner) ||
-            HasComp<OverwatchConsoleComponent>(computerOwner))
-        {
-            return DefaultMarineSquadGroups;
-        }
+        if (!TryComp(computerOwner, out TacticalMapComputerComponent? computer))
+            return null;
 
-        return null;
+        if (computer.AllowedSquadGroups.Count == 0)
+            return null;
+
+        return new HashSet<string>(computer.AllowedSquadGroups, StringComparer.OrdinalIgnoreCase);
     }
 
     private void FilterSquadGroups(HashSet<ProtoId<TacticalMapLayerPrototype>> layers, IReadOnlySet<string>? allowedSquadGroups)
@@ -987,6 +993,33 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 continue;
 
             if (group == null || !allowedSquadGroups.Contains(group))
+                toRemove.Add(layerId);
+        }
+
+        foreach (var remove in toRemove)
+        {
+            layers.Remove(remove);
+        }
+    }
+
+    private void FilterEmptySquadLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
+    {
+        if (layers.Count == 0)
+            return;
+
+        var toRemove = new List<ProtoId<TacticalMapLayerPrototype>>();
+        foreach (var layerId in layers)
+        {
+            if (!_prototypes.TryIndex(layerId, out var layer) || layer.SquadId == null)
+                continue;
+
+            if (!_squad.TryGetSquad(layer.SquadId.Value, out var squad))
+            {
+                toRemove.Add(layerId);
+                continue;
+            }
+
+            if (_squad.GetSquadMembersAlive(squad) <= 0)
                 toRemove.Add(layerId);
         }
 

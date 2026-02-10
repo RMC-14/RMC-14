@@ -30,6 +30,9 @@ public sealed partial class TacticalMapComputerComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<TacticalMapLayerPrototype>? ActiveLayer;
 
+    [DataField]
+    public List<string> AllowedSquadGroups = new();
+
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]
     public TimeSpan LastAnnounceAt;
 

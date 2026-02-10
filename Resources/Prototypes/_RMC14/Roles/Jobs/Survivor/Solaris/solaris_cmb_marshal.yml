@@ -20,7 +20,7 @@
       actionId: RMCActionOpenTacticalMapMarine
       layerSets: [TacticalMapSetSurvivor]
     - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
+      layers: [FactionSurvivor, Marines]
     - type: Skills
       skills:
         RMCSkillPolice: 2
