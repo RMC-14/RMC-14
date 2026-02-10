@@ -1355,6 +1355,39 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCMK80BeltFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistolPMC
+  id: RMCMK80BeltPMCFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCMK80BeltRoyalFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
   components:
@@ -1923,7 +1956,7 @@
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
       - RMCNailgunTactical
-      # - claymore
+      - RMCExplosiveClaymoreMine
       components:
       - Welder
       - EntrenchingTool

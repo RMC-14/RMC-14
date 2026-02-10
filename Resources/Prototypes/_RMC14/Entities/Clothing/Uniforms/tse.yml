@@ -48,7 +48,7 @@
     startingWebbing: CMWebbingSurgicalBlue
 
 - type: entity
-  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
+  parent: RMCJumpsuitTSEPA
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine uniform
   description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
@@ -62,6 +62,14 @@
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+
+- type: entity
+  parent: RMCJumpsuitMarineRoyal
+  id: RMCJumpsuitMarineRoyalDropPouch
+  suffix: Filled, Royal, Drop Pouch
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingDropPouchRoyal
 
 # EIAF
 - type: entity

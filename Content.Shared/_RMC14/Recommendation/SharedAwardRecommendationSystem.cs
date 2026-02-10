@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Marines.ControlComputer;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.Radio;
+using Content.Shared._RMC14.Survivor;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -94,6 +95,9 @@ public sealed class SharedAwardRecommendationSystem : EntitySystem
                 continue;
 
             if (receiver.LastPlayerId == null)
+                continue;
+
+            if (HasComp<XenoComponent>(uid) || HasComp<RMCSurvivorComponent>(uid))
                 continue;
 
             // Skip players that have already been recommended
