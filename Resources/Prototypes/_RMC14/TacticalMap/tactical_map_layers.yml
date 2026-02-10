@@ -11,7 +11,6 @@
   canContainBlips: true
   updateAnnouncement: The UNMC tactical map has been updated.
   announcementTarget: Marines
-  iffFactions: [FactionMarine]
 
 - type: tacticalMapLayer
   id: SquadAlpha
@@ -175,7 +174,6 @@
   group: Survivors
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionSurvivor]
 
 - type: tacticalMapLayer
   id: FactionTSE
@@ -186,7 +184,6 @@
   group: TSE
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionTSE]
 
 - type: tacticalMapLayer
   id: FactionWeYa
@@ -197,7 +194,6 @@
   group: WeYa
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionWeYa]
 
 - type: tacticalMapLayer
   id: FactionRoyalMarines
@@ -208,7 +204,6 @@
   group: RoyalMarines
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionRoyalMarines]
 
 - type: tacticalMapLayer
   id: FactionSPP
@@ -219,7 +214,6 @@
   group: SPP
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionSPP]
 
 - type: tacticalMapLayer
   id: FactionHalcyon
@@ -230,4 +224,3 @@
   group: Halcyon
   canDraw: true
   canContainBlips: true
-  iffFactions: [FactionHalcyon]

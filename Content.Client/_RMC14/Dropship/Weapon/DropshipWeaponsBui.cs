@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
@@ -20,6 +20,7 @@ using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen
 using static Robust.Client.UserInterface.Control;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using MedevacComponent = Content.Shared._RMC14.Dropship.Utility.Components.MedevacComponent;
+using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Dropship.Weapon;
 

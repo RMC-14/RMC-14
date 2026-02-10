@@ -9,6 +9,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Control;
+using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Xenonids.Construction.Tunnel;
 
