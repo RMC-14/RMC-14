@@ -1,4 +1,0 @@
-﻿author: DrSmugleaf
-changes:
-- type: Fix
-  message: Fixed Designer Hivelord weedbound walls and doors getting deleted if their weeds are replaced by hardy or hive weeds.
