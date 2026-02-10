@@ -20,7 +20,7 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   marineAuthorityLevel: 9
-  supervisors: cm-job-supervisors-aso
+  supervisors: rmc-job-supervisors-commander
   accessGroups:
   - CMCE
   roleWeight: 0.25
