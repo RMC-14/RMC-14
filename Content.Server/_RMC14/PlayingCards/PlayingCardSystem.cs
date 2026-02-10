@@ -3,7 +3,6 @@ using Content.Shared._RMC14.PlayingCards;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
 namespace Content.Server._RMC14.PlayingCards;
@@ -19,39 +18,34 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     private const int StackThreshold = 5;
 
+    private EntityUid SpawnCard(string prototype, EntityUid source, CardSuit suit, CardRank rank, bool faceUp)
+    {
+        var card = Spawn(prototype, _transform.GetMapCoordinates(source));
+        if (TryComp<PlayingCardComponent>(card, out var comp))
+        {
+            comp.Suit = suit;
+            comp.Rank = rank;
+            comp.FaceUp = faceUp;
+            Dirty(card, comp);
+        }
+        return card;
+    }
+
     protected override void DrawCard(Entity<PlayingCardDeckComponent> deck, EntityUid user)
     {
-        if (deck.Comp.CardsRemaining <= 0 || deck.Comp.CardOrder.Count == 0)
+        if (deck.Comp.CardOrder.Count == 0)
         {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-empty"), deck, user);
             return;
         }
 
-        // Take the top card
         var cardIndex = deck.Comp.CardOrder.Count - 1;
-        var encoded = deck.Comp.CardOrder[cardIndex];
+        var (suit, rank) = DecodeCard(deck.Comp.CardOrder[cardIndex]);
         deck.Comp.CardOrder.RemoveAt(cardIndex);
         deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
 
-        var (suit, rank) = DecodeCard(encoded);
-
-        // Spawn the card
-        var coords = _transform.GetMapCoordinates(deck);
-        var card = Spawn(deck.Comp.CardPrototype, coords);
-
-        if (TryComp<PlayingCardComponent>(card, out var cardComp))
-        {
-            cardComp.Suit = suit;
-            cardComp.Rank = rank;
-            cardComp.FaceUp = false;
-            Dirty(card, cardComp);
-        }
-
-        // Update card appearance
-        UpdateCardAppearance(card, suit, rank, false);
-
-        // Give to user
+        var card = SpawnCard(deck.Comp.CardPrototype, deck, suit, rank, false);
         _hands.TryPickupAnyHand(user, card);
 
         _popup.PopupEntity(Loc.GetString("rmc-playing-card-draw-deck"), deck, user);
@@ -60,33 +54,25 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     protected override void CombineCards(Entity<PlayingCardComponent> card1, Entity<PlayingCardComponent> card2, EntityUid user)
     {
-        // Gets hand holding the card
         _hands.IsHolding(user, card2, out var handId);
 
-        var coords = _transform.GetMapCoordinates(card1);
-
-        // Create a new hand of cards
-        var hand = Spawn("RMCPlayingCardHand", coords);
+        var hand = Spawn("RMCPlayingCardHand", _transform.GetMapCoordinates(card1));
         if (!TryComp<PlayingCardHandComponent>(hand, out var handComp))
         {
             QueueDel(hand);
             return;
         }
 
-        // Add both cards to the hand
         handComp.Cards.Add(EncodeCard(card1.Comp.Suit, card1.Comp.Rank));
         handComp.Cards.Add(EncodeCard(card2.Comp.Suit, card2.Comp.Rank));
         handComp.FaceUp = card1.Comp.FaceUp;
         Dirty(hand, handComp);
 
-        // For creating the hand of cards in the same slot
         _hands.TryDrop(user, card2);
         QueueDel(card1);
         QueueDel(card2);
 
-        // Give to user in the same hand that was holding card
         _hands.TryPickup(user, hand, handId);
-
         UpdateHandName((hand, handComp));
         TryPopup((hand, handComp), Loc.GetString("rmc-playing-card-add-to-hand", ("count", handComp.Cards.Count)), user);
     }
@@ -95,29 +81,22 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
     {
         hand.Comp.Cards.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         Dirty(hand);
-
         QueueDel(card);
-
         UpdateHandName(hand);
         TryPopup(hand, Loc.GetString("rmc-playing-card-add-to-hand", ("count", hand.Comp.Cards.Count)), user);
     }
 
     protected override void MergeHands(Entity<PlayingCardHandComponent> hand1, Entity<PlayingCardHandComponent> hand2, EntityUid user)
     {
-        // Add all cards from hand2 to hand1
         hand1.Comp.Cards.AddRange(hand2.Comp.Cards);
         Dirty(hand1);
-
         QueueDel(hand2);
-
         UpdateHandName(hand1);
         TryPopup(hand1, Loc.GetString("rmc-playing-card-merge-hands", ("count", hand1.Comp.Cards.Count)), user);
     }
 
     protected override void DrawFromHand(Entity<PlayingCardHandComponent> hand, EntityUid user)
-    {
-        DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
-    }
+        => DrawSpecificCard(hand, user, hand.Comp.Cards.Count - 1);
 
     protected override void DrawSpecificCard(Entity<PlayingCardHandComponent> hand, EntityUid user, int index)
     {
@@ -130,84 +109,32 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         if (index < 0 || index >= hand.Comp.Cards.Count)
             return;
 
-        // Take the specified card
-        var encoded = hand.Comp.Cards[index];
+        var (suit, rank) = DecodeCard(hand.Comp.Cards[index]);
         hand.Comp.Cards.RemoveAt(index);
         Dirty(hand);
 
-        var (suit, rank) = DecodeCard(encoded);
-
-        // Spawn the card
-        var coords = _transform.GetMapCoordinates(hand);
-        var card = Spawn("RMCPlayingCard", coords);
-
-        if (TryComp<PlayingCardComponent>(card, out var cardComp))
-        {
-            cardComp.Suit = suit;
-            cardComp.Rank = rank;
-            cardComp.FaceUp = hand.Comp.FaceUp;
-            Dirty(card, cardComp);
-        }
-
-        UpdateCardAppearance(card, suit, rank, hand.Comp.FaceUp);
-
-        // Give to user
+        var card = SpawnCard("RMCPlayingCard", hand, suit, rank, hand.Comp.FaceUp);
         _hands.TryPickupAnyHand(user, card);
 
-        // Only show value in popup if hand was face up
         if (hand.Comp.FaceUp)
-        {
-            var suitName = GetSuitDisplayName(suit);
-            var rankName = GetRankDisplayName(rank);
-            _popup.PopupEntity(Loc.GetString("rmc-playing-card-draw", ("rank", rankName), ("suit", suitName)), hand, user);
-        }
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-draw", ("rank", GetRankDisplayName(rank)), ("suit", GetSuitDisplayName(suit))), hand, user);
         else
-        {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-draw-hidden"), hand, user);
-        }
 
-        // If the hand has only one card left, convert back to a single card
         if (hand.Comp.Cards.Count == 1)
         {
-            var lastEncoded = hand.Comp.Cards[0];
-            var (lastSuit, lastRank) = DecodeCard(lastEncoded);
-
-            // Find what hand slot is holding this hand of cards
+            var (lastSuit, lastRank) = DecodeCard(hand.Comp.Cards[0]);
             _hands.IsHolding(user, hand, out var heldHandSlot);
+            var lastCard = SpawnCard("RMCPlayingCard", hand, lastSuit, lastRank, hand.Comp.FaceUp);
 
-            var lastCardCoords = _transform.GetMapCoordinates(hand);
-            var lastCard = Spawn("RMCPlayingCard", lastCardCoords);
-
-            if (TryComp<PlayingCardComponent>(lastCard, out var lastCardComp))
-            {
-                lastCardComp.Suit = lastSuit;
-                lastCardComp.Rank = lastRank;
-                lastCardComp.FaceUp = hand.Comp.FaceUp;
-                Dirty(lastCard, lastCardComp);
-            }
-
-            UpdateCardAppearance(lastCard, lastSuit, lastRank, hand.Comp.FaceUp);
-
-            // Drop the hand and delete it
             _hands.TryDrop(user, hand);
             QueueDel(hand);
-
-            // Put the last card in the same hand slot
             _hands.TryPickup(user, lastCard, heldHandSlot);
         }
         else if (hand.Comp.Cards.Count == 0)
-        {
             QueueDel(hand);
-        }
         else
-        {
             UpdateHandName(hand);
-        }
-    }
-
-    private void UpdateCardAppearance(EntityUid card, CardSuit suit, CardRank rank, bool faceUp)
-    {
-
     }
 
     private void UpdateHandName(Entity<PlayingCardHandComponent> hand)
@@ -233,14 +160,12 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
         if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
         {
             _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
-            QueueDel(card);
             return;
         }
 
         deck.Comp.CardOrder.Add(EncodeCard(card.Comp.Suit, card.Comp.Rank));
         deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
-
         QueueDel(card);
 
         _popup.PopupEntity(Loc.GetString("rmc-playing-card-added-to-deck"), deck, user);
@@ -249,19 +174,37 @@ public sealed class PlayingCardSystem : SharedPlayingCardSystem
 
     protected override void AddHandToDeck(Entity<PlayingCardDeckComponent> deck, Entity<PlayingCardHandComponent> hand, EntityUid user)
     {
+        if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), deck, user);
+            return;
+        }
+
         var added = 0;
-        foreach (var encoded in hand.Comp.Cards)
+        var cardsToRemove = new List<int>();
+        for (var i = 0; i < hand.Comp.Cards.Count; i++)
         {
             if (deck.Comp.CardsRemaining >= deck.Comp.MaxCards)
                 break;
 
-            deck.Comp.CardOrder.Add(encoded);
+            deck.Comp.CardOrder.Add(hand.Comp.Cards[i]);
             deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
+            cardsToRemove.Add(i);
             added++;
         }
 
+        // Remove added cards from hand in reverse order
+        for (var i = cardsToRemove.Count - 1; i >= 0; i--)
+        {
+            hand.Comp.Cards.RemoveAt(cardsToRemove[i]);
+        }
+
         Dirty(deck);
-        QueueDel(hand);
+
+        if (hand.Comp.Cards.Count == 0)
+            QueueDel(hand);
+        else
+            Dirty(hand);
 
         if (added > 0)
         {

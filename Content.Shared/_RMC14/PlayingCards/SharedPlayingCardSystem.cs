@@ -145,6 +145,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     private void OnDeckMapInit(Entity<PlayingCardDeckComponent> ent, ref MapInitEvent args)
     {
+        InitializeDeck(ent);
         ShuffleDeck(ent);
     }
 
@@ -152,7 +153,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         if (args.Handled)
             return;
-
         if (_net.IsServer)
             DrawCard(ent, args.User);
         args.Handled = true;
@@ -162,7 +162,6 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         if (args.Handled)
             return;
-
         if (_net.IsServer)
             DrawCard(ent, args.User);
         args.Handled = true;
@@ -292,6 +291,12 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-playing-card-deck-full"), ent, args.User);
+            return;
+        }
+
         var added = 0;
         foreach (var netEntity in args.Entities)
         {
@@ -299,11 +304,11 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             if (!Exists(entity))
                 continue;
 
+            if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
+                break;
+
             if (TryComp<PlayingCardComponent>(entity, out var card))
             {
-                if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
-                    break;
-
                 ent.Comp.CardOrder.Add(EncodeCard(card.Suit, card.Rank));
                 ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
                 QueueDel(entity);
@@ -311,16 +316,28 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             }
             else if (TryComp<PlayingCardHandComponent>(entity, out var hand))
             {
-                foreach (var encoded in hand.Cards)
+                var cardsToRemove = new List<int>();
+                for (var i = 0; i < hand.Cards.Count; i++)
                 {
                     if (ent.Comp.CardsRemaining >= ent.Comp.MaxCards)
                         break;
 
-                    ent.Comp.CardOrder.Add(encoded);
+                    ent.Comp.CardOrder.Add(hand.Cards[i]);
                     ent.Comp.CardsRemaining = ent.Comp.CardOrder.Count;
+                    cardsToRemove.Add(i);
                     added++;
                 }
-                QueueDel(entity);
+
+                // Remove added cards from hand in reverse order
+                for (var i = cardsToRemove.Count - 1; i >= 0; i--)
+                {
+                    hand.Cards.RemoveAt(cardsToRemove[i]);
+                }
+
+                if (hand.Cards.Count == 0)
+                    QueueDel(entity);
+                else
+                    Dirty(entity, hand);
             }
         }
 
@@ -340,17 +357,9 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         if (args.Handled)
             return;
-
-        // If face up, open radial menu to select card
         if (ent.Comp.FaceUp && ent.Comp.Cards.Count > 0)
-        {
             _ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
-            args.Handled = true;
-            return;
-        }
-
-        // Draw a card from the hand (face down = draw from top)
-        if (_net.IsServer)
+        else if (_net.IsServer)
             DrawFromHand(ent, args.User);
         args.Handled = true;
     }
@@ -359,17 +368,9 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     {
         if (args.Handled)
             return;
-
-        // If face up; pressing E opens radial menu to select card
         if (ent.Comp.FaceUp && ent.Comp.Cards.Count > 0)
-        {
             _ui.OpenUi(ent.Owner, PlayingCardHandUi.Key, args.User);
-            args.Handled = true;
-            return;
-        }
-
-        // Pressing E draws a card from the hand (face down = draw from top)
-        if (_net.IsServer)
+        else if (_net.IsServer)
             DrawFromHand(ent, args.User);
         args.Handled = true;
     }
@@ -514,7 +515,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     #region Deck Logic
 
-    public void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
+    public void InitializeDeck(Entity<PlayingCardDeckComponent> deck)
     {
         deck.Comp.CardOrder.Clear();
 
@@ -527,14 +528,19 @@ public abstract class SharedPlayingCardSystem : EntitySystem
             }
         }
 
-        // Fisher-Yates shuffle
+        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
+        Dirty(deck);
+    }
+
+    public void ShuffleDeck(Entity<PlayingCardDeckComponent> deck)
+    {
+        // Fisher-Yates shuffle of remaining cards only
         for (var i = deck.Comp.CardOrder.Count - 1; i > 0; i--)
         {
             var j = _random.Next(i + 1);
             (deck.Comp.CardOrder[i], deck.Comp.CardOrder[j]) = (deck.Comp.CardOrder[j], deck.Comp.CardOrder[i]);
         }
 
-        deck.Comp.CardsRemaining = deck.Comp.CardOrder.Count;
         Dirty(deck);
     }
 
@@ -583,15 +589,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         return rank switch
         {
             CardRank.Ace => Loc.GetString("rmc-playing-card-rank-ace"),
-            CardRank.Two => "2",
-            CardRank.Three => "3",
-            CardRank.Four => "4",
-            CardRank.Five => "5",
-            CardRank.Six => "6",
-            CardRank.Seven => "7",
-            CardRank.Eight => "8",
-            CardRank.Nine => "9",
-            CardRank.Ten => "10",
+            >= CardRank.Two and <= CardRank.Ten => ((int)rank).ToString(),
             CardRank.Jack => Loc.GetString("rmc-playing-card-rank-jack"),
             CardRank.Queen => Loc.GetString("rmc-playing-card-rank-queen"),
             CardRank.King => Loc.GetString("rmc-playing-card-rank-king"),
@@ -601,25 +599,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
 
     public static string GetCardStateName(CardSuit suit, CardRank rank)
     {
-        var suitName = suit.ToString().ToLowerInvariant();
-        var rankName = rank switch
-        {
-            CardRank.Ace => "ace",
-            CardRank.Two => "two",
-            CardRank.Three => "three",
-            CardRank.Four => "four",
-            CardRank.Five => "five",
-            CardRank.Six => "six",
-            CardRank.Seven => "seven",
-            CardRank.Eight => "eight",
-            CardRank.Nine => "nine",
-            CardRank.Ten => "ten",
-            CardRank.Jack => "jack",
-            CardRank.Queen => "queen",
-            CardRank.King => "king",
-            _ => ((int)rank).ToString()
-        };
-        return $"{suitName}_{rankName}";
+        return $"{suit.ToString().ToLowerInvariant()}_{rank.ToString().ToLowerInvariant()}";
     }
 
     #endregion
