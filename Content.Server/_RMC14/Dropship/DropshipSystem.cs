@@ -186,12 +186,6 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             ent.Comp.State = ftl.State;
             Dirty(ent);
-
-            if (ftl.State == FTLState.Arriving && ent.Comp.Destination is { } destination)
-            {
-                var audio = _audio.PlayPvs(ent.Comp.ArrivalSound, destination);
-                _audio.SetGridAudio(audio);
-            }
         }
 
         RefreshUI();
@@ -280,6 +274,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (ent.Comp.Ship != args.Relayer)
             return;
 
+        QueueDel(ent.Comp.ArrivalSoundEntity);
+        ent.Comp.ArrivalSoundEntity = null;
+        Dirty(ent);
+
         ToggleLandingLights(ent, false);
     }
 
@@ -293,6 +291,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (ftl.State is not FTLState.Arriving)
             return;
+
+        if (TryComp<DropshipComponent>(ent.Comp.Ship, out var dropship) &&
+            ftl.State == FTLState.Arriving &&
+            dropship.Destination is { } destination)
+        {
+            var audio = _audio.PlayPvs(dropship.ArrivalSound, destination);
+            if (audio != null)
+            {
+                ent.Comp.ArrivalSoundEntity = audio.Value.Entity;
+                Dirty(ent);
+            }
+        }
 
         ToggleLandingLights(ent, true);
     }
