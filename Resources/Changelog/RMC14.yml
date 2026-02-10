@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Podlocks can now be pried open when unpowered.
-    type: Fix
-  - message: Xenonids now take 4 seconds to pry open podlocks and shutters.
-    type: Fix
-  - message: Xenonids now have a unique sound when prying open things.
-    type: Fix
-  - message: Xenonids cannot pry doors closed anymore.
-    type: Fix
-  id: 2412
-  time: '2025-10-05T07:56:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6959
 - author: BramvanZijp
   changes:
   - message: The Xeno Queen, XO, CO, and Survivor Commanders now get the bold chat
@@ -4740,5 +4727,12 @@
   id: 2913
   time: '2026-02-09T23:21:41.467674+00:00'
   url: null
+- author: Dygon
+  changes:
+  - message: Fixed being able to scope with the ML66D on your back.
+    type: Fix
+  id: 2914
+  time: '2026-02-10T00:40:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9180
 Name: RMC14
 Order: -1
