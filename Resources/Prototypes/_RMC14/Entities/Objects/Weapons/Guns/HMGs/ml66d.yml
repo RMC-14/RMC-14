@@ -104,6 +104,7 @@
       offset: 7
       doAfter: 0
       allowMovement: true
+    scopingToggleAction: null
   - type: Tag
     tags:
     - RMCSmartGunMounted
@@ -151,12 +152,13 @@
         whitelist:
           tags:
           - RMCMagazineML66DLarge
-  - type: Scope
+  - type: Scope #
     zoomLevels:
     - zoom: 1
       offset: 12
       doAfter: 0
       allowMovement: true
+    scopingToggleAction: null
   - type: GunRequiresSkills
     skills:
       RMCSkillEngineer: 0

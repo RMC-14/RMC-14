@@ -16,6 +16,8 @@ public sealed class WeedboundWallSystem : EntitySystem
 
     private EntityQuery<XenoWeedsComponent> _weedsQuery;
 
+    private readonly HashSet<Entity<WeedboundWallComponent>> _toDelete = new();
+
     public override void Initialize()
     {
         _weedsQuery = GetEntityQuery<XenoWeedsComponent>();
@@ -197,10 +199,7 @@ public sealed class WeedboundWallSystem : EntitySystem
                 continue;
             }
 
-            // If supporting weeds are destroyed, the weedbound structure collapses and leaves sticky resin.
-            var coords = Transform(structure).Coordinates;
-            SpawnResinResidue(structure, coords);
-            QueueDel(structure);
+            _toDelete.Add((structure, weedbound));
         }
 
         weedsComp.WeedboundStructures.Clear();
@@ -222,5 +221,39 @@ public sealed class WeedboundWallSystem : EntitySystem
         }
 
         weedsComp.WeedboundStructures.Clear();
+    }
+
+    public override void Update(float frameTime)
+    {
+        try
+        {
+            if (_net.IsClient)
+                return;
+
+            foreach (var toDelete in _toDelete)
+            {
+                if (TerminatingOrDeleted(toDelete))
+                    continue;
+
+                // Try to rebind to new weeds
+                BindAndRegister(toDelete);
+
+                // New weeds replaced the old ones, don't delete
+                if (!TerminatingOrDeleted(toDelete.Comp.BoundWeedUid))
+                    continue;
+
+                // If supporting weeds are destroyed, the weedbound structure collapses and leaves sticky resin.
+                if (!TryComp(toDelete, out TransformComponent? xform))
+                    continue;
+
+                var coords = xform.Coordinates;
+                SpawnResinResidue(toDelete, coords);
+                QueueDel(toDelete);
+            }
+        }
+        finally
+        {
+            _toDelete.Clear();
+        }
     }
 }
