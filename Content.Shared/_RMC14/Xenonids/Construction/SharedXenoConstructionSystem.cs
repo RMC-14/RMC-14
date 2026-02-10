@@ -1328,7 +1328,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             nodeChoiceProto.HasComponent<DesignNodeComponent>() &&
             _rmcMap.HasAnchoredEntityEnumerator<DesignNodeComponent>(target, out _))
         {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+            if (popup)
+                _popup.PopupClient(Loc.GetString("rmc-xeno-construction-blocked-structure"), xeno, xeno, PopupType.SmallCaution);
+
             return false;
         }
 
@@ -1484,7 +1486,8 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 }
             }
 
-            if (choiceProto.HasComponent<HiveConstructionRequiresHiveCoreComponent>(_compFactory))
+            if (choiceProto.HasComponent<HiveConstructionRequiresHiveCoreComponent>(_compFactory) &&
+                _net.IsServer)
             {
                 if (_hive.GetHive(xeno.Owner) is { } hiveEnt)
                 {

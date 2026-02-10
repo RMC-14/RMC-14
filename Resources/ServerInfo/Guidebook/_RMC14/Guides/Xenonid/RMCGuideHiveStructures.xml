@@ -15,6 +15,9 @@
     <GuideEntityEmbed Entity="HiveRecoveryNodeXeno"/>
     <GuideEntityEmbed Entity="HivePlasmaTreeXeno"/>
   </Box>
+  <Box>
+    <GuideEntityEmbed Entity="HiveAcidPillarXeno"/>
+  </Box>
   ##Each have limits!
   - 1 Hive Core
   - 6 Egg Morphers
@@ -24,11 +27,11 @@
   - 2 Hive Pylons
   - 1 Acid Pillar per Hivelord or Queen
 
-  ##What do they do?
+  ## What do they do?
 
   [bold]Egg Morphers[/bold]: Egg morphers act as a large egg that launch parasites upon any host that enters its vicinity. Gradually produces up to 6 parasites and stores 12 which can be retrieved by Xenonids.
 
-  [bold]Hive Core[/bold]: This is constructed at the start of the match usually by the Queen to designate where the hive will be located and allows other hive structures to be built. Once constructed it will provide bonus evolution point gain rate, energy to produce Lesser Drones, hive weeds, and roofing protection from skyfire (orbital bombardment) and skyspit (close air support). If the hivecore is destroyed then a 5 minute penalty will be incurred before another hivecore can be made, so be sure to protect it!
+  [bold]Hive Core[/bold]: This is constructed at the start of the match usually by the Queen to designate where the hive will be located and allows other hive structures to be built. Once constructed it will provide bonus evolution point gain rate, energy to produce Lesser Drones, hive weeds, and roofing protection from skyfire (orbital bombardment) and skyspit (close air support). If a dead larva is taken to the hivecore it will grant a burrowed larva so a new sister can be born! If the hivecore is destroyed then a 5 minute penalty will be incurred before another hivecore can be made, so be sure to protect it!
 
   [bold]Hive Pylon[/bold]: These are created by planting a hive cluster near a signal tower and then filling it, once it reaches the tower with its weeds it will convert to a Pylon. These generate lesser drones and have roofing protection from skyspit.
 
@@ -38,7 +41,9 @@
 
   [bold]Plasma Tree[/bold]: Plasma Trees are just like Recovery Nodes but give plasma instead of healing to Xenonids.
 
-  ##Where to place!
+  [bold]Acid Pillar[/bold]: Extinguishes nearby fires.
+
+  ## Where to place!
   Since they are limited it is always best to communicate with your hive when you are placing one.
 
   Hive clusters can be used at the frontline to stall host pushes or at the backline for nesting spots, usually accompanied by a tunnel, these nesting spots will also have 2 or more egg morphers.
