@@ -379,14 +379,16 @@
           offset: -1.5, 0.5
         - prototype: CMTable
           offset: 0.5, 0.5
+        - prototype: CMTable
+          offset: -1.5, -0.5
         - prototype: CMRack
           offset: 0.5, -1.5
         - prototype: RMCDigitalClock
-          offset: 0.5, 0.5
-          angle: 0
+          offset: -1.5, -0.5
+          angle: 90
           neverRedeployableSetup: true
-        - prototype: CMPaperBin5
-          offset: 1.5, 0.5
+        - prototype: RMCRotaryPhoneCorrespondentTent
+          offset: 0.5, 0.5
           neverRedeployableSetup: true
         - prototype: CMFilingCabinetTall
           offset: -0.5, 0.5
@@ -394,6 +396,8 @@
         - prototype: RMCLamp
           offset: 1.5, -0.5
           neverRedeployableSetup: true
-        - prototype: CMFaxPressTent
+        - prototype: CMFaxPressTent 
           offset: -1.5, 0.5
+        - prototype: CMPaperBin10
+          offset: 1.5, 0.5
          
