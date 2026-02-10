@@ -102,7 +102,6 @@
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Limb damage" Text="Each limb on a marine will be able to take damage separately, being able to detach upon receiving too much damage and requiring individual treatment" />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Fractures and internal bleeding" Text="Fractures are caused to a body part through physical damage. Internal bleeding is also caused by physical damage but also by moving with unsplinted fractures." />
                     <controls:RoadmapItem ItemState="InProgress" HeaderText="Pain and painkillers" Text="Wounds will cause pain which can be dulled with painkillers" />
-                    <controls:RoadmapItem ItemState="InProgress" HeaderText="Mounted Weapons" Text="Mounted heavy machine guns are placeable machine guns with a high ammo count, usually placed behind barricades" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Blood types" />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="Organ damage" Text="Caused by physical damage to unarmored parts, moving with unsplinted fractures, and overdoses." />
                     <controls:RoadmapItem ItemState="Planned" HeaderText="More surgeries" Text="Foreign object removal, internal bleeding surgery, fractures" />

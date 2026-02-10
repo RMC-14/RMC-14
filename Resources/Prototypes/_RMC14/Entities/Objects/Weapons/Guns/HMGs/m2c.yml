@@ -120,7 +120,7 @@
       - RMCCartridgeHMG10x28mmTungsten
     proto: RMCCartridgeHMG10x28mmTungsten
     capacity: 125
-    deleteWhenEmpty: true
+    deleteWhenEmpty: false
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/m2c.rsi
     layers:
