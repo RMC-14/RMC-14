@@ -1,6 +1,0 @@
-﻿author: DrSmugleaf
-changes:
-- type: Fix
-  message: Fixed M2C and ML66D magazines disappearing when transferring between them.
-- type: Fix
-  message: Fixed the sticky resin left behind by destroyed weedbound resin slowing down xenos of the same hive.
