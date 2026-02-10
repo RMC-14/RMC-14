@@ -1,0 +1,91 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cfa259bbd2d627ed94a359fa8c0dec63006f49fa/icons/mob/xenos/effects.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "weedbound_resin",
+            "directions": 1
+        },
+        {
+            "name": "weedbound_resinclosing",
+            "directions": 1,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "weedbound_resinopen",
+            "directions": 1
+        },
+        {
+            "name": "weedbound_resinopening",
+            "directions": 1,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "thick_weedbound_resin",
+            "directions": 1
+        },
+        {
+            "name": "thick_weedbound_resinclosing",
+            "directions": 1,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "thick_weedbound_resinopen",
+            "directions": 1
+        },
+        {
+            "name": "thick_weedbound_resinopening",
+            "directions": 1,
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.5
+                ]
+            ]
+        },
+        {
+            "name": "closed_unlit",
+            "directions": 1
+        }
+    ]
+}

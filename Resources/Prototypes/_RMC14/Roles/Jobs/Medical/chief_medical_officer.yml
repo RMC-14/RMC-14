@@ -73,6 +73,7 @@
     jumpsuit: CMJumpsuitCMO
     shoes: ClothingShoesColorWhite
     id: CMIDCardCMO
+    ears: CMHeadsetCMO
     # TODO RMC14 random chemical synthesis note
 
 - type: startingGear
