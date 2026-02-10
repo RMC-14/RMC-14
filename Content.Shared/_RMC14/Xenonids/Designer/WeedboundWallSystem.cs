@@ -96,6 +96,11 @@ public sealed class WeedboundWallSystem : EntitySystem
             weedsComp.WeedboundStructures.Add(structure);
 
         weedboundWall.BoundWeedUid = weed;
+
+        if (!TryComp(weed, out HiveMemberComponent? weedHiveMember))
+            return;
+
+        _hive.SetHive(structure, weedHiveMember.Hive);
     }
 
     private void SpawnResinResidue(EntityUid structure, EntityCoordinates coords)

@@ -430,6 +430,13 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
+        if (_rmcMap.HasAnchoredEntityEnumerator<WeaponMountComponent>(coordinates))
+        {
+            var msg = Loc.GetString("rmc-sentry-need-open-area", ("sentry", ent));
+            _popup.PopupClient(msg, user, user, PopupType.SmallCaution);
+            return false;
+        }
+
         var grid = _transform.GetGrid((user, Transform(user)));
         if (TryComp(grid, out MapGridComponent? mapGrid))
         {

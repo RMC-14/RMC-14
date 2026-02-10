@@ -182,7 +182,7 @@
       - RMCCartridgeHMG10x28mm
     proto: RMCCartridgeHMG10x28mm
     capacity: 700
-    deleteWhenEmpty: true
+    deleteWhenEmpty: false
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/ml66d.rsi
     layers:
