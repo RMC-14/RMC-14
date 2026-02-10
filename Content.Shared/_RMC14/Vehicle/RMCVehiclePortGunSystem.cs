@@ -334,12 +334,13 @@ public sealed class RMCVehiclePortGunSystem : EntitySystem
 
         gunUid = slot.Item.Value;
 
-        if (!TryComp(gunUid, out portGun) || !TryComp(gunUid, out GunComponent? _))
+        if (!TryComp(gunUid, out VehiclePortGunComponent? portGunComp) || !TryComp(gunUid, out GunComponent? _))
         {
             _popup.PopupClient(Loc.GetString("rmc-vehicle-portgun-no-gun"), ent, user);
             return false;
         }
 
+        portGun = portGunComp;
         return true;
     }
 

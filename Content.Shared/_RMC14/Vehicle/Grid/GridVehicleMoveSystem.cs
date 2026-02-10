@@ -19,9 +19,11 @@ using Robust.Shared.Maths;
 using Robust.Shared.Network;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Physics;
 
 namespace Content.Shared.Vehicle;
 
@@ -51,6 +53,13 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private static readonly TimeSpan MobCollisionKnockdown = TimeSpan.FromSeconds(1.5);
     private static readonly TimeSpan MobCollisionCooldown = TimeSpan.FromSeconds(0.75);
     private static readonly ProtoId<DamageTypePrototype> CollisionDamageType = "Blunt";
+    private const int GridVehicleStaticBlockerMask =
+        (int) (CollisionGroup.Impassable |
+               CollisionGroup.HighImpassable |
+               CollisionGroup.LowImpassable |
+               CollisionGroup.MidImpassable |
+               CollisionGroup.BarricadeImpassable |
+               CollisionGroup.DropshipImpassable);
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
@@ -76,6 +85,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentStartup>(OnMoverStartup);
         SubscribeLocalEvent<GridVehicleMoverComponent, ComponentShutdown>(OnMoverShutdown);
         SubscribeLocalEvent<GridVehicleMoverComponent, VehicleCanRunEvent>(OnMoverCanRun);
+        SubscribeLocalEvent<GridVehicleMoverComponent, PreventCollideEvent>(OnMoverPreventCollide);
     }
 
     private void OnMoverStartup(Entity<GridVehicleMoverComponent> ent, ref ComponentStartup args)
@@ -119,6 +129,27 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (!CanXenoMoveVehicle(ent.Comp, operatorUid))
             args.CanRun = false;
+    }
+
+    private void OnMoverPreventCollide(Entity<GridVehicleMoverComponent> ent, ref PreventCollideEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!TryComp(ent.Owner, out VehicleComponent? vehicle) || vehicle.MovementKind != VehicleMovementKind.Grid)
+            return;
+
+        if (args.OtherEntity == ent.Owner)
+            return;
+
+        if (args.OtherBody.BodyType != BodyType.Static)
+            return;
+
+        if ((args.OtherFixture.CollisionLayer & GridVehicleStaticBlockerMask) == 0)
+            return;
+
+        // Prevent physics solver push against static blockers; grid movement handles blocking manually.
+        args.Cancelled = true;
     }
 
     public override void Update(float frameTime)

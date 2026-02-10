@@ -11,6 +11,8 @@ namespace Content.Shared.Vehicle;
 
 public sealed partial class GridVehicleMoverSystem : EntitySystem
 {
+    private const int MaxTileStepsPerFrame = 4;
+
     private void UpdateMovement(
         EntityUid uid,
         GridVehicleMoverComponent mover,
@@ -128,28 +130,41 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             mover.CurrentSpeed = MathF.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
 
         var speedMag = MathF.Abs(mover.CurrentSpeed);
-        var moveAmount = speedMag * frameTime;
+        var remaining = speedMag * frameTime;
+        var steps = 0;
 
-        if (distToTarget <= 0.0001f || moveAmount >= distToTarget)
+        while (true)
         {
-            mover.Position = targetCenter;
-            mover.CurrentTile = mover.TargetTile;
+            if (distToTarget <= 0.0001f || remaining >= distToTarget)
+            {
+                mover.Position = targetCenter;
+                mover.CurrentTile = mover.TargetTile;
+                remaining -= distToTarget;
 
-            if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
-            {
-                mover.IsCommittedToMove = false;
-                mover.IsPushMove = false;
-                mover.CurrentSpeed = 0f;
-            }
-            else
-            {
+                if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
+                {
+                    mover.IsCommittedToMove = false;
+                    mover.IsPushMove = false;
+                    mover.CurrentSpeed = 0f;
+                    break;
+                }
+
                 CommitPushTile(uid, mover, grid, gridComp, inputDir);
+                if (!mover.IsCommittedToMove)
+                    break;
+
+                if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
+                    break;
+
+                targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
+                toTarget = targetCenter - mover.Position;
+                distToTarget = toTarget.Length();
+                continue;
             }
-        }
-        else
-        {
+
             var dir = toTarget / distToTarget;
-            mover.Position += dir * moveAmount;
+            mover.Position += dir * remaining;
+            break;
         }
 
         mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
@@ -236,27 +251,40 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             mover.CurrentSpeed = MathF.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
 
         var speedMag = MathF.Abs(mover.CurrentSpeed);
-        var moveAmount = speedMag * frameTime;
+        var remaining = speedMag * frameTime;
+        var steps = 0;
 
-        if (distToTarget <= 0.0001f || moveAmount >= distToTarget)
+        while (true)
         {
-            mover.Position = targetCenter;
-            mover.CurrentTile = mover.TargetTile;
+            if (distToTarget <= 0.0001f || remaining >= distToTarget)
+            {
+                mover.Position = targetCenter;
+                mover.CurrentTile = mover.TargetTile;
+                remaining -= distToTarget;
 
-            if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
-            {
-                mover.IsCommittedToMove = false;
-                mover.CurrentSpeed = 0f;
-            }
-            else
-            {
+                if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
+                {
+                    mover.IsCommittedToMove = false;
+                    mover.CurrentSpeed = 0f;
+                    break;
+                }
+
                 CommitNextTile(uid, mover, grid, gridComp, inputDir);
+                if (!mover.IsCommittedToMove)
+                    break;
+
+                if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
+                    break;
+
+                targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
+                toTarget = targetCenter - mover.Position;
+                distToTarget = toTarget.Length();
+                continue;
             }
-        }
-        else
-        {
+
             var dir = toTarget / distToTarget;
-            mover.Position += dir * moveAmount;
+            mover.Position += dir * remaining;
+            break;
         }
         mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
         if (mover.IsMoving)

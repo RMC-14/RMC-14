@@ -253,6 +253,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (TryComp(vehicle, out GridVehicleMoverComponent? mover))
             ApplySmashSlowdown(vehicle, mover, smashable);
 
+        if (_net.IsClient)
+        {
+            if (smashable.DeleteOnHit && physicsQ.TryComp(vehicle, out var vehicleBody) && vehicleBody.Predict)
+                PredictedQueueDel(target);
+
+            return true;
+        }
+
         if (!_net.IsClient)
         {
             if (smashable.SmashSound != null)
