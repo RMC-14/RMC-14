@@ -94,8 +94,10 @@ public sealed partial class TacticalMapControl : TextureRect
     private readonly Dictionary<int, VectorFont> _labelFontCache = new();
 
     public readonly List<TacticalMapLine> Lines = new();
+    public readonly List<TacticalMapLine> BackgroundLines = new();
     public readonly List<float> LineThicknesses = new();
     public readonly Dictionary<Vector2i, TacticalMapLabelData> TacticalLabels = new();
+    public readonly Dictionary<Vector2i, TacticalMapLabelData> BackgroundLabels = new();
 
     private TacticalMapBlip[]? _blips;
     private int[]? _blipEntityIds;

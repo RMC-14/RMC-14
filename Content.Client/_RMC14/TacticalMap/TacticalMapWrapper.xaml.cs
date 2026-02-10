@@ -87,6 +87,7 @@ public sealed partial class TacticalMapWrapper : Control
     private static readonly Color MortarRadiusColor = Color.FromHex("#4FC3FF");
     private static readonly Color MortarRangeColor = Color.FromHex("#43B581");
     private static readonly Color DisabledLayerTextColor = Color.FromHex("#D64545");
+    private static readonly Color ActiveLayerOverrideTextColor = Color.FromHex("#4FC3FF");
 
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
@@ -632,16 +633,37 @@ public sealed partial class TacticalMapWrapper : Control
                 LayerVisibilityGrid.AddChild(button);
             }
 
-            var selected = _visibleLayerSet.Contains(layer);
-            var prefix = selected ? "[X] " : "[ ] ";
-            var text = prefix + GetLayerName(layer);
-            var color = selected ? Color.Green : DisabledLayerTextColor;
-            button.Button.HoveredTextColor = color;
-            SetButtonText(button, text, color);
+            UpdateLayerVisibilityButton(layer, button);
         }
 
         UpdateLayerVisibilityToggle();
         _suppressLayerVisibilitySelection = false;
+    }
+
+    private void UpdateLayerVisibilityButton(ProtoId<TacticalMapLayerPrototype> layer, TacticalMapButton button)
+    {
+        var selected = _visibleLayerSet.Contains(layer);
+        var activeOverride = _canDraw && _drawingEnabled && !selected &&
+            _lastActiveLayer != null && _lastActiveLayer.Value == layer;
+        var prefix = selected ? "[X] " : "[ ] ";
+        var text = prefix + GetLayerName(layer);
+        var color = selected
+            ? Color.Green
+            : (activeOverride ? ActiveLayerOverrideTextColor : DisabledLayerTextColor);
+        button.Button.HoveredTextColor = color;
+        SetButtonText(button, text, color);
+    }
+
+    private void RefreshLayerVisibilityButtonColors()
+    {
+        if (_availableLayers.Count == 0 || _layerVisibilityButtons.Count == 0)
+            return;
+
+        foreach (var layer in _availableLayers)
+        {
+            if (_layerVisibilityButtons.TryGetValue(layer, out var button))
+                UpdateLayerVisibilityButton(layer, button);
+        }
     }
 
     private void UpdateLayerVisibilityColumnsIfNeeded()
@@ -680,6 +702,37 @@ public sealed partial class TacticalMapWrapper : Control
     public void UpdateLabels(Dictionary<Vector2i, TacticalMapLabelData> labels)
     {
         UpdateTacticalLabels(labels);
+    }
+
+    public void UpdateCanvasBackground()
+    {
+        Canvas.BackgroundLines.Clear();
+        if (Map.Lines.Count > 0)
+        {
+            if (Canvas.Lines.Count == 0)
+            {
+                Canvas.BackgroundLines.AddRange(Map.Lines);
+            }
+            else
+            {
+                var activeSet = new HashSet<TacticalMapLine>(Canvas.Lines);
+                foreach (var line in Map.Lines)
+                {
+                    if (!activeSet.Contains(line))
+                        Canvas.BackgroundLines.Add(line);
+                }
+            }
+        }
+
+        Canvas.BackgroundLabels.Clear();
+        if (Map.TacticalLabels.Count > 0)
+        {
+            foreach (var (pos, label) in Map.TacticalLabels)
+            {
+                if (!Canvas.TacticalLabels.ContainsKey(pos))
+                    Canvas.BackgroundLabels[pos] = label;
+            }
+        }
     }
 
     public void SetLineLimit(int limit)
@@ -962,6 +1015,7 @@ public sealed partial class TacticalMapWrapper : Control
             Map.Visible = true;
             Canvas.Drawing = false;
             Map.Drawing = false;
+            RefreshLayerVisibilityButtonColors();
             return;
         }
 
@@ -970,6 +1024,7 @@ public sealed partial class TacticalMapWrapper : Control
         Map.Visible = !showCanvas;
         Canvas.Drawing = _drawingEnabled;
         Map.Drawing = false;
+        RefreshLayerVisibilityButtonColors();
     }
 
     private void MarkCanvasDirty()

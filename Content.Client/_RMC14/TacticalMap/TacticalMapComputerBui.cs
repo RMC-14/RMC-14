@@ -227,7 +227,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
             if (drawOptionsChanged || activeChanged)
                 Window.Wrapper.UpdateDrawLayerList(drawOptions, computer.ActiveLayer);
 
-            if (optionsChanged || visibleChanged)
+            if (optionsChanged || visibleChanged || activeChanged)
                 Window.Wrapper.UpdateLayerVisibilityList(options, computer.VisibleLayers);
 
             if (optionsChanged)
@@ -337,6 +337,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
                 Window.Wrapper.Canvas.Lines.AddRange(activeLines.Lines);
         }
 
+        Window.Wrapper.UpdateCanvasBackground();
         _refreshed = true;
     }
 

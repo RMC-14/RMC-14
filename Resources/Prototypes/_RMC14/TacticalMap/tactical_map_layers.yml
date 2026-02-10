@@ -25,7 +25,7 @@
   visibility: SquadMembers
   squadId: SquadAlpha
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadBravo
@@ -39,7 +39,7 @@
   visibility: SquadMembers
   squadId: SquadBravo
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadCharlie
@@ -53,7 +53,7 @@
   visibility: SquadMembers
   squadId: SquadCharlie
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadDelta
@@ -67,7 +67,7 @@
   visibility: SquadMembers
   squadId: SquadDelta
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadEcho
@@ -81,7 +81,7 @@
   visibility: SquadMembers
   squadId: SquadEcho
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadFoxtrot
@@ -95,7 +95,7 @@
   visibility: SquadMembers
   squadId: SquadFoxtrot
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadIntel
@@ -109,7 +109,7 @@
   visibility: SquadMembers
   squadId: SquadIntel
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadSPP
@@ -123,7 +123,7 @@
   visibility: SquadMembers
   squadId: SquadSPP
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadRoyalMarines
@@ -137,7 +137,7 @@
   visibility: SquadMembers
   squadId: SquadRoyalMarines
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadProvost
@@ -151,7 +151,7 @@
   visibility: SquadMembers
   squadId: SquadProvost
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: SquadFORECON
@@ -165,7 +165,7 @@
   visibility: SquadMembers
   squadId: SquadFORECON
   canDraw: true
-  canContainBlips: false
+  canContainBlips: true
 
 - type: tacticalMapLayer
   id: Xenos

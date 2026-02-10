@@ -207,7 +207,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
             if (optionsChanged || activeChanged)
                 Window.Wrapper.UpdateDrawLayerList(options, user.ActiveLayer);
 
-            if (optionsChanged || visibleChanged)
+            if (optionsChanged || visibleChanged || activeChanged)
                 Window.Wrapper.UpdateLayerVisibilityList(options, user.VisibleLayers);
 
             if (optionsChanged)
@@ -310,6 +310,7 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
                 Window.Wrapper.Canvas.Lines.AddRange(activeLines.Lines);
         }
 
+        Window.Wrapper.UpdateCanvasBackground();
         var user = EntMan.GetComponentOrNull<TacticalMapUserComponent>(Owner);
         Window.Wrapper.SetCanvasAccess(user?.CanDraw ?? false);
 

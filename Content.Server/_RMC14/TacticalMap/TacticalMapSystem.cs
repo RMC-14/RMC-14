@@ -1241,7 +1241,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void EnsureActiveLayer(Entity<TacticalMapUserComponent> user, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
     {
-        if (user.Comp.ActiveLayer != null && user.Comp.VisibleLayers.Contains(user.Comp.ActiveLayer.Value))
+        if (user.Comp.ActiveLayer != null && options.Contains(user.Comp.ActiveLayer.Value))
             return;
 
         ProtoId<TacticalMapLayerPrototype>? fallback = null;
@@ -1256,7 +1256,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void EnsureActiveLayer(Entity<TacticalMapComputerComponent> computer, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
     {
-        if (computer.Comp.ActiveLayer != null && computer.Comp.VisibleLayers.Contains(computer.Comp.ActiveLayer.Value))
+        if (computer.Comp.ActiveLayer != null && options.Contains(computer.Comp.ActiveLayer.Value))
             return;
 
         ProtoId<TacticalMapLayerPrototype>? fallback = null;
@@ -1264,7 +1264,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             fallback = options[0];
 
         if (HasComp<MarineCommunicationsComputerComponent>(computer.Owner) &&
-            computer.Comp.VisibleLayers.Contains(GlobalMarineLayer))
+            options.Contains(GlobalMarineLayer))
         {
             computer.Comp.ActiveLayer = GlobalMarineLayer;
         }
@@ -1342,10 +1342,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         ProtoId<TacticalMapLayerPrototype>? activeLayer,
         IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
     {
-        var effective = new List<ProtoId<TacticalMapLayerPrototype>>(GetVisibleLayers(visibleLayers));
-        if (activeLayer != null && options.Contains(activeLayer.Value) && !effective.Contains(activeLayer.Value))
-            effective.Add(activeLayer.Value);
-        return effective;
+        return new List<ProtoId<TacticalMapLayerPrototype>>(GetVisibleLayers(visibleLayers));
     }
 
     private List<TacticalMapMapInfo> BuildMapList()
@@ -1815,6 +1812,42 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
     }
 
+    private void AddMarineBlipsFromVisibleSquads(
+        EntityUid viewer,
+        TacticalMapComponent map,
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
+        Dictionary<int, TacticalMapBlip> blips,
+        bool liveUpdate)
+    {
+        if (!_squad.TryGetMemberSquad(viewer, out _))
+            return;
+
+        var squadLayers = new HashSet<ProtoId<TacticalMapLayerPrototype>>();
+        foreach (var layer in visibleLayers)
+        {
+            if (_prototypes.TryIndex(layer, out var proto) &&
+                proto.Kind == TacticalMapLayerKind.Squad)
+            {
+                squadLayers.Add(layer);
+            }
+        }
+
+        if (squadLayers.Count == 0)
+            return;
+
+        foreach (var layer in squadLayers)
+        {
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            var sourceBlips = liveUpdate ? layerData.Blips : layerData.LastUpdateBlips;
+            foreach (var (id, blip) in sourceBlips)
+            {
+                blips.TryAdd(id, blip);
+            }
+        }
+    }
+
     private bool TryGetGridCoordinates(Vector2i tacticalPosition, out EntityCoordinates coordinates)
     {
         coordinates = default;
@@ -2040,6 +2073,12 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         AddSelfBlip(user.Owner, map, blips);
         FilterXenoBlipsForHive(user.Owner, blips);
+
+        if (HasComp<MarineComponent>(user.Owner))
+        {
+            AddMarineBlipsFromVisibleSquads(user.Owner, map, visibleLayers, blips, user.Comp.LiveUpdate);
+        }
+
         user.Comp.Blips = blips;
 
         var combinedLines = new List<TacticalMapLine>();

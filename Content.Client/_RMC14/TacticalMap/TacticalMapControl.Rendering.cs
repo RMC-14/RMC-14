@@ -421,13 +421,27 @@ public sealed partial class TacticalMapControl
 
     private void DrawLines(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)
     {
+        DrawLineSet(handle, overlayScale, actualTopLeft, BackgroundLines, null);
+        DrawLineSet(handle, overlayScale, actualTopLeft, Lines, LineThicknesses);
+    }
+
+    private void DrawLineSet(
+        DrawingHandleScreen handle,
+        float overlayScale,
+        Vector2 actualTopLeft,
+        IReadOnlyList<TacticalMapLine> lines,
+        IReadOnlyList<float>? thicknesses)
+    {
+        if (lines.Count == 0)
+            return;
+
         int i = 0;
         float joinEpsilonSquared = LineJoinEpsilon * LineJoinEpsilon;
 
-        while (i < Lines.Count)
+        while (i < lines.Count)
         {
-            TacticalMapLine line = Lines[i];
-            float thickness = GetLineThickness(i, line);
+            TacticalMapLine line = lines[i];
+            float thickness = GetLineThicknessForList(thicknesses, i, line);
             Color color = line.Color;
 
             if (!line.Smooth)
@@ -439,10 +453,10 @@ public sealed partial class TacticalMapControl
 
             var points = new List<Vector2> { line.Start, line.End };
             int j = i + 1;
-            for (; j < Lines.Count; j++)
+            for (; j < lines.Count; j++)
             {
-                TacticalMapLine next = Lines[j];
-                float nextThickness = GetLineThickness(j, next);
+                TacticalMapLine next = lines[j];
+                float nextThickness = GetLineThicknessForList(thicknesses, j, next);
 
                 if (next.Color != color || MathF.Abs(nextThickness - thickness) > 0.001f)
                     break;
@@ -479,6 +493,17 @@ public sealed partial class TacticalMapControl
 
             i = j;
         }
+    }
+
+    private static float GetLineThicknessForList(IReadOnlyList<float>? thicknesses, int index, TacticalMapLine line)
+    {
+        if (line.Thickness > 0f)
+            return line.Thickness;
+
+        if (thicknesses != null && index < thicknesses.Count)
+            return thicknesses[index];
+
+        return 2.0f;
     }
 
     private void DrawPreviewLine(DrawingHandleScreen handle, float overlayScale, Vector2 actualTopLeft)
@@ -557,12 +582,12 @@ public sealed partial class TacticalMapControl
                 position = position with { Y = position.Y - LabelYOffset * overlayScale };
                 DrawLabelAtPosition(handle, label, position, overlayScale, AreaLabelColor, AreaLabelBackground, false);
 
-                if (TacticalLabels.TryGetValue(indices, out var tacticalData) &&
+                if (TryGetCombinedLabel(indices, out var tacticalData, out var isActive) &&
                     !string.IsNullOrWhiteSpace(tacticalData.Text))
                 {
                     Vector2 tacticalPosition = position + new Vector2(0f, LabelStackOffset * overlayScale);
                     var tacticalColor = GetTacticalLabelColor(tacticalData);
-                    if (_draggingLabel == indices && _currentDragPosition != null)
+                    if (isActive && _draggingLabel == indices && _currentDragPosition != null)
                     {
                         DrawLabelAtPosition(handle, tacticalData.Text, _currentDragPosition.Value, overlayScale, tacticalColor, TacticalLabelBackground, true);
                     }
@@ -573,7 +598,7 @@ public sealed partial class TacticalMapControl
                 }
             }
 
-            foreach ((Vector2i indices, TacticalMapLabelData data) in TacticalLabels)
+            foreach ((Vector2i indices, TacticalMapLabelData data) in BackgroundLabels)
             {
                 if (_areaLabels.ContainsKey(indices))
                     continue;
@@ -581,17 +606,18 @@ public sealed partial class TacticalMapControl
                 if (string.IsNullOrWhiteSpace(data.Text))
                     continue;
 
-                var tacticalColor = GetTacticalLabelColor(data);
-                if (_draggingLabel == indices && _currentDragPosition != null)
-                {
-                    DrawLabelAtPosition(handle, data.Text, _currentDragPosition.Value, overlayScale, tacticalColor, TacticalLabelBackground, true);
-                }
-                else
-                {
-                    Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
-                    position = position with { Y = position.Y - LabelYOffset * overlayScale };
-                    DrawLabelAtPosition(handle, data.Text, position, overlayScale, tacticalColor, TacticalLabelBackground, false);
-                }
+                if (TacticalLabels.ContainsKey(indices))
+                    continue;
+
+                DrawTacticalLabel(handle, indices, data, overlayScale, actualTopLeft, false);
+            }
+
+            foreach ((Vector2i indices, TacticalMapLabelData data) in TacticalLabels)
+            {
+                if (_areaLabels.ContainsKey(indices))
+                    continue;
+
+                DrawTacticalLabel(handle, indices, data, overlayScale, actualTopLeft, true);
             }
 
             return;
@@ -599,22 +625,20 @@ public sealed partial class TacticalMapControl
 
         if (CurrentLabelMode == LabelMode.Tactical)
         {
-            foreach ((Vector2i indices, TacticalMapLabelData data) in TacticalLabels)
+            foreach ((Vector2i indices, TacticalMapLabelData data) in BackgroundLabels)
             {
                 if (string.IsNullOrWhiteSpace(data.Text))
                     continue;
 
-                var tacticalColor = GetTacticalLabelColor(data);
-                if (_draggingLabel == indices && _currentDragPosition != null)
-                {
-                    DrawLabelAtPosition(handle, data.Text, _currentDragPosition.Value, overlayScale, tacticalColor, TacticalLabelBackground, true);
-                }
-                else
-                {
-                    Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
-                    position = position with { Y = position.Y - LabelYOffset * overlayScale };
-                    DrawLabelAtPosition(handle, data.Text, position, overlayScale, tacticalColor, TacticalLabelBackground, false);
-                }
+                if (TacticalLabels.ContainsKey(indices))
+                    continue;
+
+                DrawTacticalLabel(handle, indices, data, overlayScale, actualTopLeft, false);
+            }
+
+            foreach ((Vector2i indices, TacticalMapLabelData data) in TacticalLabels)
+            {
+                DrawTacticalLabel(handle, indices, data, overlayScale, actualTopLeft, true);
             }
 
             return;
@@ -626,6 +650,48 @@ public sealed partial class TacticalMapControl
             position = position with { Y = position.Y - LabelYOffset * overlayScale };
             DrawLabelAtPosition(handle, label, position, overlayScale, AreaLabelColor, AreaLabelBackground, false);
         }
+    }
+
+    private bool TryGetCombinedLabel(Vector2i indices, out TacticalMapLabelData data, out bool isActive)
+    {
+        if (TacticalLabels.TryGetValue(indices, out data))
+        {
+            isActive = true;
+            return true;
+        }
+
+        if (BackgroundLabels.TryGetValue(indices, out data))
+        {
+            isActive = false;
+            return true;
+        }
+
+        isActive = false;
+        data = default;
+        return false;
+    }
+
+    private void DrawTacticalLabel(
+        DrawingHandleScreen handle,
+        Vector2i indices,
+        TacticalMapLabelData data,
+        float overlayScale,
+        Vector2 actualTopLeft,
+        bool isActive)
+    {
+        if (string.IsNullOrWhiteSpace(data.Text))
+            return;
+
+        var tacticalColor = GetTacticalLabelColor(data);
+        if (isActive && _draggingLabel == indices && _currentDragPosition != null)
+        {
+            DrawLabelAtPosition(handle, data.Text, _currentDragPosition.Value, overlayScale, tacticalColor, TacticalLabelBackground, true);
+            return;
+        }
+
+        Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+        position = position with { Y = position.Y - LabelYOffset * overlayScale };
+        DrawLabelAtPosition(handle, data.Text, position, overlayScale, tacticalColor, TacticalLabelBackground, false);
     }
 
     private void DrawLabelAtPosition(

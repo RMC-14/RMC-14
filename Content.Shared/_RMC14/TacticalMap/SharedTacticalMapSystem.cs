@@ -61,11 +61,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         var visible = GetVisibleLayers(layers);
         if (activeLayer == null)
             return visible;
-
-        if (visible.Contains(activeLayer.Value))
-            return new List<ProtoId<TacticalMapLayerPrototype>> { activeLayer.Value };
-
-        return visible;
+        return new List<ProtoId<TacticalMapLayerPrototype>> { activeLayer.Value };
     }
 
     protected HashSet<ProtoId<TacticalMapLayerPrototype>> ApplyLayerVisibilityRules(
