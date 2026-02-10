@@ -32,13 +32,11 @@ public sealed class TacticalMapLayerAccessSystem : EntitySystem
 
     private void OnInventoryLayerAccessGet(Entity<InventoryComponent> ent, ref GetTacticalMapLayerAccessEvent args)
     {
-        Logger.InfoS(LogTag, $"Relay layer access from inventory on {ToPrettyString(ent.Owner)} (slots={args.TargetSlots})");
         _inventory.RelayEvent(ent, ref args);
     }
 
     private void OnHandsLayerAccessGet(Entity<HandsComponent> ent, ref GetTacticalMapLayerAccessEvent args)
     {
-        Logger.InfoS(LogTag, $"Relay layer access from hands on {ToPrettyString(ent.Owner)}");
         foreach (var held in _hands.EnumerateHeld((ent, ent)))
         {
             RaiseLocalEvent(held, ref args);
@@ -51,7 +49,6 @@ public sealed class TacticalMapLayerAccessSystem : EntitySystem
             return;
 
         args.Args.Layers.UnionWith(ent.Comp.Layers);
-        Logger.InfoS(LogTag, $"Layer access from item {ToPrettyString(ent.Owner)} -> [{string.Join(", ", ent.Comp.Layers)}]");
     }
 
     public bool TryGetLayers(
@@ -65,12 +62,10 @@ public sealed class TacticalMapLayerAccessSystem : EntitySystem
         RaiseLocalEvent(user, ref ev);
         if (ev.Layers.Count == 0)
         {
-            Logger.InfoS(LogTag, $"No layers found for {ToPrettyString(user)}");
             return false;
         }
 
         layers.UnionWith(ev.Layers);
-        Logger.InfoS(LogTag, $"Resolved layers for {ToPrettyString(user)} -> [{string.Join(", ", layers)}]");
         return true;
     }
 }
