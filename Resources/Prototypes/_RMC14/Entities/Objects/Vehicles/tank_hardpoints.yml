@@ -1,0 +1,312 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleTankHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/tank.rsi
+  - type: Item
+    size: Large
+  - type: RMCHardpointIntegrity
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTreads
+  name: tank treads
+  description: Heavy duty tank treads.
+  components:
+  - type: Sprite
+    state: treads
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
+  - type: RMCVehicleWheelItem
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTires
+  name: tank tires
+  description: Reinforced tank tires.
+  components:
+  - type: Sprite
+    state: tires
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
+  - type: RMCVehicleWheelItem
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankArmorBallistic
+  name: ballistic armor plating
+  description: Ballistic armor plating for a tank.
+  components:
+  - type: Sprite
+    state: ballistic_armor
+  - type: RMCHardpointItem
+    hardpointType: Armor
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointArmor
+  - type: RMCHardpointVisual
+    vehicleState: ballistic_armor_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankArmorConcussive
+  name: concussive armor plating
+  description: Concussive armor plating for a tank.
+  components:
+  - type: Sprite
+    state: concussive_armor
+  - type: RMCHardpointItem
+    hardpointType: Armor
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointArmor
+  - type: RMCHardpointVisual
+    vehicleState: concussive_armor_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankArmorCaustic
+  name: caustic armor plating
+  description: Caustic armor plating for a tank.
+  components:
+  - type: Sprite
+    state: caustic_armor
+  - type: RMCHardpointItem
+    hardpointType: Armor
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointArmor
+  - type: RMCHardpointVisual
+    vehicleState: caustic_armor_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankArmorPaladin
+  name: paladin armor plating
+  description: Paladin armor plating for a tank.
+  components:
+  - type: Sprite
+    state: paladin_armor
+  - type: RMCHardpointItem
+    hardpointType: Armor
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointArmor
+  - type: RMCHardpointVisual
+    vehicleState: paladin_armor_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankSnowplow
+  name: tank snowplow
+  description: A reinforced snowplow attachment for a tank.
+  components:
+  - type: Sprite
+    state: snowplow
+  - type: RMCHardpointItem
+    hardpointType: Armor
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointArmor
+  - type: RMCHardpointVisual
+    vehicleState: snowplow_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankLTBCannon
+  name: LTB cannon
+  description: A light tank cannon hardpoint.
+  components:
+  - type: Sprite
+    state: ltb_cannon
+  - type: RMCHardpointItem
+    hardpointType: Primary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointPrimary
+  - type: RMCHardpointVisual
+    vehicleState: ltb_cannon_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankLTAAAPMinigun
+  name: LTAAAP minigun
+  description: A light anti-air minigun hardpoint.
+  components:
+  - type: Sprite
+    state: ltaaap_minigun
+  - type: RMCHardpointItem
+    hardpointType: Primary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointPrimary
+  - type: RMCHardpointVisual
+    vehicleState: ltaaap_minigun_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankAceAutocannon
+  name: ACE autocannon
+  description: An ACE autocannon hardpoint.
+  components:
+  - type: Sprite
+    state: ace_autocannon
+  - type: RMCHardpointItem
+    hardpointType: Primary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointPrimary
+  - type: RMCHardpointVisual
+    vehicleState: ace_autocannon_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankDragonFlamer
+  name: DRGN flamer
+  description: A DRGN flamer hardpoint.
+  components:
+  - type: Sprite
+    state: drgn_flamer
+  - type: RMCHardpointItem
+    hardpointType: Primary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointPrimary
+  - type: RMCHardpointVisual
+    vehicleState: drgn_flamer_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankFlamer
+  name: tank flamer
+  description: A tank-mounted flamethrower hardpoint.
+  components:
+  - type: Sprite
+    state: flamer
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSecondary
+  - type: RMCHardpointVisual
+    vehicleState: flamer_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankGrenadeLauncher
+  name: tank grenade launcher
+  description: A tank-mounted grenade launcher hardpoint.
+  components:
+  - type: Sprite
+    state: glauncher
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSecondary
+  - type: RMCHardpointVisual
+    vehicleState: glauncher_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTowLauncher
+  name: tank TOW launcher
+  description: A tank-mounted TOW launcher hardpoint.
+  components:
+  - type: Sprite
+    state: tow_launcher
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSecondary
+  - type: RMCHardpointVisual
+    vehicleState: towlauncher_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankM56Cupola
+  name: M56 cupola
+  description: A cupola-mounted weapon hardpoint.
+  components:
+  - type: Sprite
+    state: m56_cupola
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSecondary
+  - type: RMCHardpointVisual
+    vehicleState: m56cupola_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankWarningArray
+  name: warning array
+  description: A warning array support attachment for a tank.
+  components:
+  - type: Sprite
+    state: warray
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
+  - type: RMCHardpointVisual
+    vehicleState: warray_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankOverdriveEnhancer
+  name: overdrive enhancer
+  description: An overdrive enhancer support attachment for a tank.
+  components:
+  - type: Sprite
+    state: odrive_enhancer
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
+  - type: RMCHardpointVisual
+    vehicleState: odrive_enhancer_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankRocketLauncher
+  name: rocket launcher
+  description: A rocket launcher support attachment for a tank.
+  components:
+  - type: Sprite
+    state: slauncher_0
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
+  - type: RMCHardpointVisual
+    vehicleState: slauncher_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankArtilleryModule
+  name: artillery module
+  description: An artillery support module for a tank.
+  components:
+  - type: Sprite
+    state: artillery
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
+  - type: RMCHardpointVisual
+    vehicleState: artillerymod_0

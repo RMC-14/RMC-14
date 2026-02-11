@@ -10,6 +10,7 @@ using Content.Shared.Vehicle.Components;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Physics;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -119,8 +120,12 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 }
 
                 PlayMobCollisionSound(uid, ref playedCollisionSound);
-                if (!_net.IsClient)
-                    PushMobOutOfVehicle(uid, other, aabb, otherAabb);
+                if (!PushMobOutOfVehicle(uid, other, aabb, otherAabb))
+                {
+                    ApplyWheelCollisionDamage(uid, mover, wheelDamage);
+                    DebugCollisions.Add(new DebugCollision(uid, other, aabb, otherAabb, 0f, 0f, clearance, world.MapId));
+                    return false;
+                }
 
                 continue;
             }
@@ -143,6 +148,9 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
             if (isFoldable && !hardCollidable)
                 continue;
+
+            if (_net.IsClient && isMob && !isXeno && mob != null && ShouldPredictVehicleInteractions(uid))
+                PredictRunover(uid, other, mob);
 
             if (TrySmash(other, uid, ref playedCollisionSound))
                 continue;
@@ -362,16 +370,42 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         }
     }
 
-    private void PushMobOutOfVehicle(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb)
+    private bool PushMobOutOfVehicle(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb)
     {
         var xform = Transform(mob);
         if (xform.Anchored)
-            return;
+        {
+            return false;
+        }
 
-        if (!TryGetMobPush(vehicle, mob, vehicleAabb, mobAabb, out var target))
-            return;
+        var centeredAabb = GetCenteredMobAabb(mob, mobAabb);
 
-        ApplyMobPush(mob, target);
+        if (!TryGetMobPush(vehicle, mob, vehicleAabb, centeredAabb, out var target, out var reason))
+        {
+            return false;
+        }
+
+        if (_net.IsClient)
+        {
+            if (ShouldPredictVehicleInteractions(vehicle))
+                ApplyMobPush(mob, target);
+        }
+        else
+        {
+            ApplyMobPush(mob, target);
+        }
+
+        return true;
+    }
+
+    private Box2 GetCenteredMobAabb(EntityUid mob, Box2 mobAabb)
+    {
+        var mobPos = transform.GetWorldPosition(mob);
+        var delta = mobAabb.Center - mobPos;
+        if (delta.LengthSquared() <= 0.0001f)
+            return mobAabb;
+
+        return Box2.CenteredAround(mobPos, mobAabb.Size);
     }
 
     private void ApplyMobPush(EntityUid mob, EntityCoordinates target)
@@ -394,9 +428,53 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         transform.SetCoordinates(mob, mobXform, target);
     }
 
-    private bool TryGetMobPush(EntityUid vehicle, EntityUid mob, Box2 vehicleAabb, Box2 mobAabb, out EntityCoordinates target)
+    private bool ShouldPredictVehicleInteractions(EntityUid vehicle)
+    {
+        if (!_net.IsClient || !_timing.InPrediction)
+            return false;
+
+        if (!physicsQ.TryComp(vehicle, out var vehicleBody) || !vehicleBody.Predict)
+            return false;
+
+        if (!TryComp(vehicle, out VehicleComponent? vehicleComp))
+            return false;
+
+        return vehicleComp.Operator != null && vehicleComp.Operator == _player.LocalEntity;
+    }
+
+    private void PredictRunover(EntityUid vehicle, EntityUid mob, MobStateComponent mobState)
+    {
+        if (!ShouldPredictVehicleInteractions(vehicle))
+            return;
+
+        if (_mobState.IsDead(mob, mobState) || _standing.IsDown(mob))
+            return;
+
+        _stun.TryKnockdown(mob, MobCollisionKnockdown, true);
+
+        var runover = EnsureComp<RMCVehicleRunoverComponent>(mob);
+        runover.Vehicle = vehicle;
+        runover.Duration = MobCollisionKnockdown;
+        runover.ExpiresAt = _timing.CurTime + runover.Duration + RMCVehicleRunoverSystem.StandUpGrace;
+        Dirty(mob, runover);
+
+        if (physicsQ.TryComp(mob, out var mobBody))
+        {
+            physics.SetLinearVelocity(mob, Vector2.Zero, body: mobBody);
+            physics.SetAngularVelocity(mob, 0f, body: mobBody);
+        }
+    }
+
+    private bool TryGetMobPush(
+        EntityUid vehicle,
+        EntityUid mob,
+        Box2 vehicleAabb,
+        Box2 mobAabb,
+        out EntityCoordinates target,
+        out string reason)
     {
         target = EntityCoordinates.Invalid;
+        reason = "unknown";
 
         var vehicleHalf = vehicleAabb.Size / 2f;
         var mobHalf = mobAabb.Size / 2f;
@@ -409,7 +487,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         var overlapY = vehicleHalf.Y + mobHalf.Y - Math.Abs(diff.Y);
 
         if (overlapX <= 0f || overlapY <= 0f)
+        {
+            reason = $"no overlap overlapX={overlapX:F3} overlapY={overlapY:F3}";
             return false;
+        }
+
+        if (overlapX <= PushOverlapEpsilon && overlapY <= PushOverlapEpsilon)
+        {
+            reason = $"overlap below epsilon overlapX={overlapX:F3} overlapY={overlapY:F3}";
+            return false;
+        }
 
         var pushX = overlapX > 0f
             ? new Vector2(Math.Sign(diff.X == 0f ? 1f : diff.X) * overlapX, 0f)
@@ -418,16 +505,31 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             ? new Vector2(0f, Math.Sign(diff.Y == 0f ? 1f : diff.Y) * overlapY)
             : Vector2.Zero;
 
-        var vehicleBounds = vehicleAabb.Enlarged(Clearance);
-        var first = overlapX < overlapY ? pushX : pushY;
-        var second = overlapX < overlapY ? pushY : pushX;
+        var vehicleBounds = vehicleAabb;
+        var useX = overlapX < overlapY;
+        if (MathF.Abs(overlapX - overlapY) <= PushAxisHysteresis &&
+            _lastMobPushAxis.TryGetValue(mob, out var lastUseX))
+        {
+            useX = lastUseX;
+        }
 
-        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, first, out target))
+        var first = useX ? pushX : pushY;
+        var second = useX ? pushY : pushX;
+
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, first, out target, out reason))
+        {
+            _lastMobPushAxis[mob] = useX;
             return true;
+        }
 
-        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, second, out target))
+        var firstReason = reason;
+        if (TryGetSidePushTarget(vehicle, mob, mobAabb, vehicleBounds, second, out target, out reason))
+        {
+            _lastMobPushAxis[mob] = !useX;
             return true;
+        }
 
+        reason = $"first={firstReason} second={reason}";
         return false;
     }
 
@@ -437,11 +539,16 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         Box2 mobAabb,
         Box2 vehicleBounds,
         Vector2 push,
-        out EntityCoordinates target)
+        out EntityCoordinates target,
+        out string reason)
     {
         target = EntityCoordinates.Invalid;
+        reason = "unknown";
         if (push == Vector2.Zero)
+        {
+            reason = "push zero";
             return false;
+        }
 
         var adjusted = push;
         if (Math.Abs(adjusted.X) > 0f)
@@ -451,20 +558,132 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         var targetAabb = mobAabb.Translated(adjusted);
         if (targetAabb.Intersects(vehicleBounds))
+        {
+            reason = "target intersects vehicle bounds";
             return false;
+        }
 
         if (IsPushBlocked(vehicle, mob, mobAabb, adjusted))
+        {
+            reason = "swept push blocked";
             return false;
+        }
 
         var mobMap = transform.GetMapCoordinates(mob);
         var mapCoords = new MapCoordinates(mobMap.Position + adjusted, mobMap.MapId);
         var mobXform = Transform(mob);
-        if (mobXform.GridUid is { } grid)
-            target = transform.ToCoordinates(grid, mapCoords);
-        else
-            target = transform.ToCoordinates(mapCoords);
+        if (mobXform.GridUid is { } grid && gridQ.TryComp(grid, out var gridComp))
+        {
+            var coords = transform.ToCoordinates(grid, mapCoords);
+            var indices = map.TileIndicesFor(grid, gridComp, coords);
+            if (IsPushTileBlocked(grid, gridComp, indices, vehicle, mob, out var blocker))
+            {
+                reason = $"tile blocked by {ToPrettyString(blocker)}";
+                return false;
+            }
 
-        return target != EntityCoordinates.Invalid;
+            target = transform.ToCoordinates(grid, mapCoords);
+        }
+        else
+        {
+            target = transform.ToCoordinates(mapCoords);
+        }
+
+        if (target == EntityCoordinates.Invalid)
+        {
+            reason = "invalid target";
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool IsPushTileBlocked(
+        EntityUid gridUid,
+        MapGridComponent gridComp,
+        Vector2i indices,
+        EntityUid vehicle,
+        EntityUid mob,
+        out EntityUid blocker)
+    {
+        blocker = EntityUid.Invalid;
+        var gridXform = Transform(gridUid);
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var (gridPos, gridRot, matrix) = transform.GetWorldPositionRotationMatrix(gridXform, xformQuery);
+
+        var size = gridComp.TileSize;
+        var localPos = new Vector2(indices.X * size + (size / 2f), indices.Y * size + (size / 2f));
+        var worldPos = Vector2.Transform(localPos, matrix);
+
+        var tileAabb = Box2.UnitCentered.Scale(0.95f * size);
+        var worldBox = new Box2Rotated(tileAabb.Translated(worldPos), gridRot, worldPos);
+        tileAabb = tileAabb.Translated(localPos);
+
+        var tileArea = tileAabb.Width * tileAabb.Height;
+        var minIntersectionArea = tileArea * PushTileBlockFraction;
+        foreach (var ent in lookup.GetEntitiesIntersecting(gridUid, worldBox, LookupFlags.Dynamic | LookupFlags.Static))
+        {
+            if (ent == vehicle || ent == mob)
+                continue;
+
+            if (IsDescendantOf(ent, vehicle) || IsDescendantOf(ent, mob))
+                continue;
+
+            if (!fixtureQ.TryComp(ent, out var fixtures))
+                continue;
+
+            var (pos, rot) = transform.GetWorldPositionRotation(xformQuery.GetComponent(ent), xformQuery);
+            rot -= gridRot;
+            pos = (-gridRot).RotateVec(pos - gridPos);
+            var entXform = new Transform(pos, (float) rot.Theta);
+
+            foreach (var fixture in fixtures.Fixtures.Values)
+            {
+                if (!fixture.Hard)
+                    continue;
+
+                if ((fixture.CollisionLayer & (int) GridVehiclePushBlockMask) == 0)
+                    continue;
+
+                for (var i = 0; i < fixture.Shape.ChildCount; i++)
+                {
+                    var intersection = fixture.Shape.ComputeAABB(entXform, i).Intersect(tileAabb);
+                    var intersectionArea = intersection.Width * intersection.Height;
+                    if (intersectionArea > minIntersectionArea)
+                    {
+                        blocker = ent;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsDescendantOf(EntityUid ent, EntityUid root)
+    {
+        if (ent == root)
+            return true;
+
+        var current = ent;
+        while (current.IsValid())
+        {
+            var xform = Transform(current);
+            var parent = xform.ParentUid;
+            if (!parent.IsValid())
+                return false;
+
+            if (parent == root)
+                return true;
+
+            if (parent == xform.GridUid || parent == xform.MapUid)
+                return false;
+
+            current = parent;
+        }
+
+        return false;
     }
 
     private bool IsPushBlocked(EntityUid vehicle, EntityUid mob, Box2 mobAabb, Vector2 push)
@@ -480,26 +699,64 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!physicsQ.TryComp(mob, out var mobBody) || !fixtureQ.TryComp(mob, out var mobFixtures))
             return false;
 
-        var shifted = mobAabb.Translated(push);
-        var swept = mobAabb.Union(shifted);
-        var hits = lookup.GetEntitiesIntersecting(mapId, swept, LookupFlags.Dynamic | LookupFlags.Static);
+        var targetAabb = mobAabb.Translated(push);
+        var checkAabb = targetAabb.Enlarged(-PushWallSkin);
+        if (!checkAabb.IsValid())
+            checkAabb = targetAabb;
+
+        var hits = lookup.GetEntitiesIntersecting(mapId, checkAabb, LookupFlags.Dynamic | LookupFlags.Static);
         foreach (var other in hits)
         {
             if (other == mob || other == vehicle)
+                continue;
+
+            if (IsDescendantOf(other, vehicle) || IsDescendantOf(other, mob))
                 continue;
 
             if (!physicsQ.TryComp(other, out var otherBody) || !otherBody.CanCollide)
                 continue;
 
             var otherXform = Transform(other);
-            if (otherXform.Anchored || otherBody.BodyType == BodyType.Static)
-                return true;
-
             if (!fixtureQ.TryComp(other, out var otherFixtures))
                 continue;
 
+            if (HasComp<MobStateComponent>(other))
+                continue;
+
+            var wallLike = false;
+            var overlaps = false;
+            var otherTx = physics.GetPhysicsTransform(other, otherXform);
+            foreach (var fixture in otherFixtures.Fixtures.Values)
+            {
+                if (!fixture.Hard)
+                    continue;
+
+                if ((fixture.CollisionLayer & (int) CollisionGroup.Impassable) != 0)
+                {
+                    wallLike = true;
+                    for (var i = 0; i < fixture.Shape.ChildCount; i++)
+                    {
+                        var otherAabb = fixture.Shape.ComputeAABB(otherTx, i);
+                        var intersection = otherAabb.Intersect(checkAabb);
+                        if (Box2.Area(intersection) > PushWallOverlapArea)
+                        {
+                            overlaps = true;
+                            break;
+                        }
+                    }
+
+                    if (overlaps)
+                        break;
+                }
+            }
+
+            if (!wallLike || !overlaps)
+                continue;
+
             if (physics.IsHardCollidable((mob, mobFixtures, mobBody), (other, otherFixtures, otherBody)))
+            {
                 return true;
+            }
         }
 
         return false;

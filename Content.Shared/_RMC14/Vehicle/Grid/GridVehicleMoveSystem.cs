@@ -25,7 +25,6 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Log;
 using Content.Shared.Physics;
 
 namespace Content.Shared.Vehicle;
@@ -75,7 +74,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private const float PushWallSkin = 0.1f;
     private const float PushWallOverlapArea = 0.01f;
 
-    private static readonly ISawmill Sawmill = Logger.GetSawmill("rmc_vehicle_push");
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
