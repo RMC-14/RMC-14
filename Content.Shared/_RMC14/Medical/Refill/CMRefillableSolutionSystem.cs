@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Vendors;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
@@ -47,7 +48,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         SubscribeLocalEvent<CMRefillableSolutionComponent, ExaminedEvent>(OnRefillableSolutionExamined);
 
         SubscribeLocalEvent<CMSolutionRefillerComponent, MapInitEvent>(OnRefillerMapInit);
-        SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing);
+        SubscribeLocalEvent<CMSolutionRefillerComponent, InteractUsingEvent>(OnRefillerInteractUsing,
+            before: [typeof(SharedCMAutomatedVendorSystem)]);
 
         SubscribeLocalEvent<RMCRefillSolutionOnStoreComponent, EntInsertedIntoContainerMessage>(OnRefillSolutionOnStoreInserted);
 
@@ -100,9 +102,9 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (!TryComp(fillable, out CMRefillableSolutionComponent? refillable))
             return;
 
+        args.Handled = true;
         if (!_whitelist.IsValid(ent.Comp.Whitelist, fillable))
         {
-            args.Handled = true;
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-cannot-refill", ("user", ent.Owner), ("target", fillable)), args.User, args.User, PopupType.SmallCaution);
             return;
         }
@@ -116,7 +118,6 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-full", ("target", fillable)), args.User, args.User);
             return;
         }
-        args.Handled = true;
 
         var anyRefilled = false;
         foreach (var (reagent, amount) in refillable.Reagents)

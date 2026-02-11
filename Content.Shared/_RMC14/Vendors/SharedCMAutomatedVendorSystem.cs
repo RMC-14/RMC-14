@@ -339,7 +339,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         // Medical vendor restocking QoL - single items only
         if (!HasComp<RMCMedLinkPortReceiverComponent>(ent) || !ent.Comp.CanManualRestock)
             return;
-        if (args.Handled) // CMRefillableSolutionSystem
+        if (args.Handled) // CMRefillableSolutionSystem runs first (via event ordering)
             return;
         if (HasComp<StorageComponent>(args.Used)) // Use alt click for bulk restock
             return;
