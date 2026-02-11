@@ -1,42 +1,4 @@
 ﻿Entries:
-- author: Arykh
-  changes:
-  - message: Added Antihallucinogenic, Biocidic, and Hypoxemic chemical properties.
-    type: Add
-  id: 2421
-  time: '2025-10-06T07:22:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8037
-- author: SharkSnake98
-  changes:
-  - message: Added 14 Colonist jobs
-    type: Add
-  - message: Added 3 Variants of the "Catering Technician" job
-    type: Add
-  - message: Added WEYA Coat and rainjacket, as well as a blue-grey administrative
-      uniform
-    type: Add
-  - message: Added the ACS-930 Atmospheric Composition Scanner, an RMC14 version of
-      the gas analyzer.
-    type: Add
-  id: 2422
-  time: '2025-10-06T07:45:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7201
-- author: noctyrnal
-  changes:
-  - message: You can now wear pride pins on your uniform and armor.
-    type: Add
-  - message: Added pride pins to the Rec-Vend.
-    type: Add
-  id: 2423
-  time: '2025-10-06T07:45:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8052
-- author: SharkSnake98
-  changes:
-  - message: Added the WEYA Lobby screen
-    type: Add
-  id: 2424
-  time: '2025-10-06T07:47:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8034
 - author: noctyrnal
   changes:
   - message: Lights will now offset into walls.
@@ -4567,5 +4529,35 @@
   id: 2922
   time: '2026-02-11T08:21:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9213
+- author: Dygon
+  changes:
+  - message: Fixed barricade upgrades taking too much fire damage over time
+    type: Fix
+  id: 2923
+  time: '2026-02-11T08:22:54.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9197
+- author: Dygon
+  changes:
+  - message: Fixed an undeployed M2C not being able to be acided while not broken.
+    type: Fix
+  - message: Night vision visors no longer turn off when you mount an HMG.
+    type: Fix
+  id: 2924
+  time: '2026-02-11T08:22:33.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9199
+- author: Dygon
+  changes:
+  - message: Fixed invisible scouts and snipers being hit by friendly fire while invisible.
+    type: Fix
+  id: 2925
+  time: '2026-02-11T08:23:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9191
+- author: Vixting
+  changes:
+  - message: Fix UBF not having overlay
+    type: Add
+  id: 2926
+  time: '2026-02-11T08:23:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9193
 Name: RMC14
 Order: -1
