@@ -70,11 +70,14 @@ public abstract class SharedMedevacSystem : EntitySystem
             _appearance.SetData(args.Target, DropshipUtilityVisuals.State, MedevacComponent.AnimationState);
             ent.Comp.IsActivated = true;
             _useDelay.TryResetDelay(ent.Owner, id: MedevacComponent.AnimationDelay);
+            ent.Comp.Target = utilComp.Target;
         }
         else
         {
             _popup.PopupClient(Loc.GetString("rmc-medevac-stretcher-failure"), targetCoord, args.User);
+            ent.Comp.IsActivated = false;
         }
+        Dirty(ent);
     }
 
     private void AfterMedevac(Entity<MedevacComponent> ent)
@@ -82,7 +85,7 @@ public abstract class SharedMedevacSystem : EntitySystem
         if (!TryComp(ent.Owner, out DropshipUtilityComponent? utilComp))
             return;
 
-        var target = utilComp.Target;
+        var target = ent.Comp.Target;
         if (target == null)
             return;
 
@@ -101,8 +104,17 @@ public abstract class SharedMedevacSystem : EntitySystem
             _appearance.SetData(utilId.Value, DropshipUtilityVisuals.State, sprite.Sprite.RsiState);
         }
 
-        _stretcher.Medevac(stretcherEnt, ent.Owner);
-        _dropshipUtility.ResetActivationCooldown(utilEnt);
+        if (_stretcher.TryMedevac(stretcherEnt, ent.Owner))
+        {
+            _dropshipUtility.ResetActivationCooldown(utilEnt);
+            ent.Comp.Target = null;
+            Dirty(ent);
+        }
+        else
+        {
+            var ev = new MedevacFailedEvent();
+            RaiseLocalEvent(target.Value, ref ev);
+        }
     }
 
     public override void Update(float frameTime)
@@ -123,3 +135,6 @@ public abstract class SharedMedevacSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct MedevacFailedEvent;
