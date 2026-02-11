@@ -1,18 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: The PMC PVE Shipmap, the UNCSS Haurchefant has recieved a large update.
-    type: Add
-  id: 2419
-  time: '2025-10-06T05:05:01.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8031
-- author: noctyrnal
-  changes:
-  - message: Fixed the FORECON CO and Riflemen not spawning on Chances Claim.
-    type: Fix
-  id: 2420
-  time: '2025-10-06T07:20:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8058
 - author: Arykh
   changes:
   - message: Added Antihallucinogenic, Biocidic, and Hypoxemic chemical properties.
@@ -4563,5 +4549,23 @@
   id: 2920
   time: '2026-02-10T02:57:13.062736+00:00'
   url: null
+- author: Dygon
+  changes:
+  - message: Fixed Tail Seize looking like it shot twice in a row with a single use.
+    type: Fix
+  - message: The Oppressor's Abduct ability now pulls it's targets slightly closer
+      to the Oppressor's location.
+    type: Fix
+  id: 2921
+  time: '2026-02-11T08:20:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9214
+- author: Arykh
+  changes:
+  - message: Stopped the MedVend refill sound from being queued/desynced/delayed when
+      spamming refills. Also lowered the volume a little.
+    type: Fix
+  id: 2922
+  time: '2026-02-11T08:21:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9213
 Name: RMC14
 Order: -1
