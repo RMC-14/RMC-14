@@ -116,6 +116,27 @@
 
 - type: entity
   parent: WeaponSMGM63
+  id: RMCWeaponSMGM63Filled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/smg_unload.ogg
+        priority: 2
+        startingItem: CMMagazineSMGM63
+        whitelist:
+          tags:
+          - CMMagazineSMGM63
+          - CMMagazineSMGM63AP
+          - CMMagazineSMGM63Ext
+          - RMCMagazineSMGM63Rubber
+          - RMCMagazineSMGM63HEAP
+
+- type: entity
+  parent: WeaponSMGM63
   id: RMCWeaponSMGM63ExtendedFilled
   suffix: Filled, Extended
   components:
