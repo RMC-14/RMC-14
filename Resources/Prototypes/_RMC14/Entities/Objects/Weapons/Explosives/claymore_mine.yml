@@ -18,9 +18,9 @@
           bounds: "-0.25,-1.5,0.25,0"
         hard: false
         layer:
-        - MidImpassable
+        - Opaque
         mask:
-        - SmallMobLayer
+        - MobLayer
       hitbox:
         shape:
           !type:PhysShapeAabb

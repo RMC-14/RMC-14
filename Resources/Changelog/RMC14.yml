@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: The starting orbital bombardment warheads can no longer be two of the
-      same type.
-    type: Tweak
-  id: 2428
-  time: '2025-10-06T08:08:40.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8042
-- author: noctyrnal
-  changes:
-  - message: Fixed the CLF jobs having the wrong equipment.
-    type: Fix
-  id: 2429
-  time: '2025-10-06T08:24:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8059
-- author: DummeHytteOst
-  changes:
-  - message: Fixed disposal units taking less damage than intended.
-    type: Fix
-  - message: Fixed trash bins being indestructible.
-    type: Fix
-  id: 2430
-  time: '2025-10-06T10:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8051
-- author: x5tink
-  changes:
-  - message: Added the black shoulder holster.
-    type: Add
-  - message: Shoulder holsters has storage method switches now.
-    type: Tweak
-  id: 2431
-  time: '2025-10-06T10:20:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8053
 - author: CatAndHats
   changes:
   - message: Correspondents now have the Command, JTAC, and Intel channels as read-only.
@@ -4558,5 +4525,33 @@
   id: 2929
   time: '2026-02-11T10:46:42.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9215
+- author: Dygon
+  changes:
+  - message: Oppressors can now pull a marine through a weapon mount.
+    type: Fix
+  id: 2930
+  time: '2026-02-11T22:29:09.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9220
+- author: Dygon
+  changes:
+  - message: The queen no longer has a chance to gib when killed.
+    type: Fix
+  id: 2931
+  time: '2026-02-11T22:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9219
+- author: Dygon
+  changes:
+  - message: Fire now only damages resin holes and claymores on a direct hit.
+    type: Fix
+  id: 2932
+  time: '2026-02-11T22:30:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9217
+- author: kleinerstation13
+  changes:
+  - message: Changed the M2C's firing sound
+    type: Tweak
+  id: 2933
+  time: '2026-02-11T22:32:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9223
 Name: RMC14
 Order: -1
