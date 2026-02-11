@@ -1,0 +1,266 @@
+- type: entity
+  abstract: true
+  id: RMCBaseWeaponMount
+  name: weapon mount
+  description: A mount to place a weapon on
+  components:
+  - type: Appearance
+  - type: Corrodible
+    isCorrodible: false
+  - type: Strap
+    whitelist: { components: [ Marine ] }
+    position: Stand
+    buckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
+    unbuckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
+    buckledAlertType: null
+    buckleOffset: "0,0.5"
+  - type: WeaponMount
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49, 0.05"
+        density: 5
+        mask:
+        - FullTileMask
+        layer:
+        - BarricadeImpassable
+  - type: RMCRepairable
+    heal: 40
+    skill: RMCSkillConstruction
+    delay: 8
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Animateable
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCMesonsNonviewable
+  - type: DamageExaminable
+  - type: Sprite
+    drawdepth: Mobs
+    noRot: true
+
+- type: entity
+  parent: RMCBaseWeaponMount
+  id: RMCML66DNestSandbag
+  name: scoped ML66D heavy machine gun nest
+  description: A scoped ML66D heavy machine gun mounted upon a small reinforced post with sandbags to provide a small machine gun nest for all your defensive needs.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
+    state: towergun
+  - type: Transform
+    anchored: true
+  - type: RMCLungeProtection
+  - type: DirectionalAttackBlocker
+  - type: RMCLeapProtection
+    inherentStunDuration: 3
+    fullProtection: true
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMountedStatic"
+    isWeaponSecured: true
+    isWeaponLocked: true
+  - type: Physics
+    bodyType: Static
+
+- type: entity
+  parent: RMCML66DNestSandbag
+  id: RMCML66DNestMetal
+  name: scoped ML66D heavy machine gun
+  description: A scoped ML66D heavy machine gun mounted behind a metal shield.
+  components:
+  - type: Sprite
+    state: towergun_folding
+
+- type: entity
+  parent: [RMCBaseWeaponMount, BaseDeployFoldable, BaseItem]
+  id: RMCML66DMount
+  name: ML66D mount
+  description: A foldable mount for the ML66D, provides stability to the ML66D.
+  suffix: Folded
+  components:
+  - type: Item
+    size: Small
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
+    state: folded_mount
+    layers:
+    - state: ml66d_mount
+      map: [ "unfoldedLayer" ]
+    - state: folded_mount
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: ml66d
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: false
+    - state: ml66d_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: false
+    - state: ml66d_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: ml66d_gun_mount_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+  - type: Foldable
+    folded: true
+    enableStrapOnUnfold: false
+  - type: Anchorable
+    tool: Screwing
+  - type: Rotatable
+  - type: Strap
+    enabled: false
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:EmptyContainersBehaviour
+        containers:
+        - weapon
+  - type: CollisionWake
+  - type: Tag
+    tags:
+    - ML66DMount
+  - type: WeaponMount
+    mountableWhitelist:
+      tags:
+        - RMCSmartGunMounted
+
+- type: entity
+  parent: RMCML66DMount
+  id: RMCML66DMountAssembled
+  name: ML66D heavy machine gun
+  description: A deployable, heavy machine gun. It fires specialized tungsten rounds for increased armor penetration.
+  suffix: Folded, Assembled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/mount.rsi
+    state: folded_mount
+    layers:
+    - state: ml66d_mount
+      map: [ "unfoldedLayer" ]
+      visible: false
+    - state: folded_mount
+      map: [ "foldedLayer" ]
+      visible: false
+    - state: ml66d
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: true
+    - state: ml66d_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: true
+    - state: ml66d_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: ml66d_gun_mount_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMounted"
+  - type: Item
+    size: Huge
+
+- type: entity
+  parent: RMCML66DMountAssembled
+  id: RMCML66DMountWeaponAssembledLoaded
+  suffix: Folded, Assembled, Loaded
+  components:
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCSmartGunMountedLoaded"
+
+- type: entity
+  parent: [RMCBaseWeaponMount, BaseItem]
+  id: RMCM2CMount
+  name: M2C heavy machine gun
+  description: The disassembled M2C HMG, with its telescopic tripods folded up and unable to fire.
+  components:
+  - type: Item
+    size: Huge
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/m2c.rsi
+    state: m2c_gun_mount
+    layers:
+    - state: m2c
+      map: [ "enum.WeaponMountComponentVisualLayers.Mounted" ]
+      visible: false
+    - state: m2c_magazine
+      map: [ "enum.WeaponMountComponentVisualLayers.MountedAmmo" ]
+      visible: false
+    - state: m2c_gun_mount
+      map: [ "enum.WeaponMountComponentVisualLayers.Folded" ]
+      visible: false
+    - state: m2c_gun_mount_broken
+      map: [ "enum.WeaponMountComponentVisualLayers.Broken" ]
+      visible: false
+    - state: mag-0
+      map: [ "enum.WeaponMountComponentVisualLayers.FoldedAmmo" ]
+      visible: false
+    - state: m2c_overheat
+      map: [ "enum.WeaponMountComponentVisualLayers.Overheated" ]
+      visible: false
+  - type: Strap
+    enabled: false
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 230
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+  - type: CollisionWake
+  - type: WeaponMount
+    fixedWeaponPrototype: "RMCMachineGunM2C"
+    isWeaponSecured: true
+    isWeaponLocked: true
+    canRotateWithoutTool: true
+    mountOnDeploy: true
+    mountExclusionAreaSize: 0
+    barricadeExclusionAreaSize: 2
+    assembleDelay: 0.5
+    undeploySound: null
+    acidableWhileUndeployed: true
+  - type: Tag
+    tags:
+    - M2CMount
+  - type: Foldable
+    folded: true
+    isLocked: true
+  - type: Corrodible
+    isCorrodible: true
+
+- type: Tag
+  id: ML66DMount
+
+- type: Tag
+  id: M2CMount
