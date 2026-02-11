@@ -23,5 +23,5 @@ public sealed partial class RMCTetherComponent : Component
     public string TetherState = "oppressor_tail";
 
     [DataField]
-    public float TetherWidth = 1;
+    public float TetherWidth = 0.5f;
 }
