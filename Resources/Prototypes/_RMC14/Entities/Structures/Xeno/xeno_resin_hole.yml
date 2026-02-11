@@ -86,7 +86,7 @@
         damage: 10
       behaviors:
       - !type:BurnBodyBehavior { }
-  - type: StepTrigger #$
+  - type: StepTrigger
     requiredTriggeredSpeed: 0
     intersectRatio: 0.1
   - type: RMCNightVisionVisible
