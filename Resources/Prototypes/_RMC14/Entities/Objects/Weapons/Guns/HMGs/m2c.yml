@@ -1,0 +1,193 @@
+- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem]
+  id: RMCMachineGunM2C
+  categories: [ HideSpawnMenu ]
+  name: M2C heavy machine gun
+  description: The top half of a M2C heavy machine gun post. However it ain't much use without a tripod.
+  components:
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/m2c.rsi
+    layers:
+    - state: m2c_gun_mount
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
+      params:
+        volume: -4 # TODO Remove this if the replacement sound is not as loud as the M60 one
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    recoilUnwielded: 0
+    scatterUnwielded: 0
+    baseFireRate: 10
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 0
+        useBurstScatterMult: false
+        unwieldedScatterMultiplier: 0
+        shotsToMaxScatter: 125
+  - type: RMCWeaponAccuracy
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineM2C
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillEngineer: 1
+  - type: GunSkilledRecoil
+    setRecoil: 0
+    skills:
+      RMCSkillFirearms: 0
+    mustBeWielded: false
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/lmg_mouse.rsi
+      state: all
+  - type: MountableWeapon
+  - type: GunUnskilledPenalty
+    firearms: 0
+    angleIncrease: 0
+    accuracyAddMult: 0
+  - type: Scope
+    scopePopup: null
+    unScopePopup: null
+    canUseInsideContainer: true
+    zoomLevels:
+    - zoom: 1
+      offset: 7
+      doAfter: 0
+      allowMovement: true
+  - type: Tag
+    tags:
+    - RMCMachineGunM2C
+  - type: Overheat
+
+# Magazines
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineM2C
+  name: M2C Ammunition Box (10x28mm tungsten rounds)
+  description: A box of 125, 10x28mm caseless tungsten rounds for the M2C heavy machine gun system.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineM2C
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeHMG10x28mmTungsten
+    proto: RMCCartridgeHMG10x28mmTungsten
+    capacity: 125
+    deleteWhenEmpty: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/m2c.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    slots:
+    - suitStorage
+
+# Cartridges
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeHMG10x28mmTungsten
+  name: cartridge (10x28mm Tungsten)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCBulletHMG10x28mmTungsten
+  - type: Tag
+    tags:
+    - RMCCartridgeHMG10x28mmTungsten
+
+# Projectiles
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletHMG10x28mmTungsten
+  name: bullet (10x28mm Tungsten)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: CMArmorPiercing
+    amount: 30
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 2 # cm13 code says 7 but after testing it looks like it starts losing damage after the first tile
+      falloff: 3
+    - range: 15
+      falloff: 9999
+  - type: RMCProjectileAccuracy
+    accuracy: 75
+    thresholds:
+    - range: 6 # porting this 1:1, which is what the component mentions, from cm13(10), makes it too accurate at high ranges so I lowered it
+      falloff: 5
+
+# Tags
+- type: Tag
+  id: RMCMagazineM2C
+
+- type: Tag
+  id: RMCMachineGunM2C
+
+- type: Tag
+  id: RMCCartridgeHMG10x28mmTungsten
+

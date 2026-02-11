@@ -68,33 +68,45 @@ public sealed class RMCShuttleSystem : SharedRMCShuttleSystem
 
     private void BeforeFTLFinished(Entity<FTLComponent> ent, ref BeforeFTLFinishedEvent args)
     {
-        var mapGrid = Transform(ent.Comp.TargetCoordinates.EntityId).GridUid;
-        if (mapGrid == null)
-            return;
-
-        // Create a box that has the width and height of the FTLing grid.
-        var shuttleAABB = Comp<MapGridComponent>(ent).LocalAABB;
-        var shuttleHeight = (float)Math.Floor(shuttleAABB.Height / 2f);
-        var shuttleWidth = (float)Math.Floor(shuttleAABB.Width / 2f);
-        var expansionHeight = shuttleAABB.Height % 2 == 0 ? shuttleHeight - 1 : shuttleHeight;
-        var expansionWidth = shuttleAABB.Width % 2 == 0 ? shuttleWidth - 1 : shuttleWidth;
-
-        // Center the box around the destination.
-        var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.One);
-        var extinguishArea = new Box2(targetLocalAABB.Left - expansionWidth,
-            targetLocalAABB.Bottom - expansionHeight,
-            targetLocalAABB.Right + expansionWidth,
-            targetLocalAABB.Top + expansionHeight);
-        var targetLocalAABBExpanded = _transform.GetWorldMatrix(Transform(mapGrid.Value)).TransformBox(extinguishArea);
-
-        // Delete all tile fires inside the box.
-        var lookupEntities = new HashSet<EntityUid>();
-        _lookup.GetLocalEntitiesIntersecting(mapGrid.Value, targetLocalAABBExpanded, lookupEntities, LookupFlags.Uncontained);
-
-        foreach (var entity in lookupEntities)
+        try
         {
-            if (HasComp<TileFireComponent>(entity))
-                Del(entity);
+            if (!TryComp(ent.Comp.TargetCoordinates.EntityId, out TransformComponent? targetTransform) ||
+                targetTransform.GridUid is not { } mapGrid)
+            {
+                return;
+            }
+
+            // Create a box that has the width and height of the FTLing grid.
+            var shuttleAABB = Comp<MapGridComponent>(ent).LocalAABB;
+            var shuttleHeight = (float)Math.Floor(shuttleAABB.Height / 2f);
+            var shuttleWidth = (float)Math.Floor(shuttleAABB.Width / 2f);
+            var expansionHeight = shuttleAABB.Height % 2 == 0 ? shuttleHeight - 1 : shuttleHeight;
+            var expansionWidth = shuttleAABB.Width % 2 == 0 ? shuttleWidth - 1 : shuttleWidth;
+
+            // Center the box around the destination.
+            var targetLocalAABB = Box2.CenteredAround(ent.Comp.TargetCoordinates.Position, Vector2.One);
+            var extinguishArea = new Box2(targetLocalAABB.Left - expansionWidth,
+                targetLocalAABB.Bottom - expansionHeight,
+                targetLocalAABB.Right + expansionWidth,
+                targetLocalAABB.Top + expansionHeight);
+            var targetLocalAABBExpanded = _transform.GetWorldMatrix(Transform(mapGrid)).TransformBox(extinguishArea);
+
+            // Delete all tile fires inside the box.
+            var lookupEntities = new HashSet<EntityUid>();
+            _lookup.GetLocalEntitiesIntersecting(mapGrid,
+                targetLocalAABBExpanded,
+                lookupEntities,
+                LookupFlags.Uncontained);
+
+            foreach (var entity in lookupEntities)
+            {
+                if (HasComp<TileFireComponent>(entity))
+                    Del(entity);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error extinguishing fires under shuttle:\n{e}");
         }
     }
 }
