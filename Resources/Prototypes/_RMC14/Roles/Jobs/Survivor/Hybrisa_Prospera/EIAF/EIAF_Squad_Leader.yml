@@ -12,7 +12,6 @@
       components:
         - type: NpcFactionMember
           factions:
-            - Civilian
             - TSE
         - type: Skills
           preset: RMCSkillPresetEIAFLeader
@@ -57,7 +56,7 @@
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFSquadLeader
   layers:
-  - sprite: Sprite
+  - sprite: _RMC14/Markers/landmarks.rsi
     state: surv_tse
 
 - type: jobIcon

@@ -216,17 +216,17 @@ rmc-job-name-eiaf = EIAF Survivor
 rmc-job-description-eiaf = You are a stranded TSE EIAF paratrooper. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
 
 rmc-job-name-eiaf-paratrooper = Paratrooper
-rmc-job-prefix-eiaf-paratrooper = 24/PARA
 rmc-job-name-eiaf-pilot = Fleet Air Arm (Dropship Pilot)
-rmc-job-prefix-eiaf-pilot = 24/PARA
 rmc-job-name-eiaf-engineer = Paratrooper (Combat Engineer)
-rmc-job-prefix-eiaf-engineer = 24/PARA
 rmc-job-name-eiaf-medic = Paratrooper (Combat Medical Technician)
-rmc-job-prefix-eiaf-medic = 24/PARA
+rmc-job-prefix-eiaf-paratrooper = 24/PARA
+
 rmc-job-name-eiaf-squad-leader = Paratrooper (Squad Leader)
 rmc-job-prefix-eiaf-squad-leader = 24/PARA SL
+
 rmc-job-name-eiaf-synth = Support Synthetic
 rmc-job-prefix-eiaf-synth = 24/PARA Syn
+
 rmc-job-name-eiaf-commander = Commander
 rmc-job-prefix-eiaf-commander = EIAF CDR
 

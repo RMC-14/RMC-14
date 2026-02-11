@@ -14,7 +14,6 @@
       components:
         - type: NpcFactionMember
           factions:
-            - Civilian
             - TSE
         - type: Skills
           preset: RMCSkillPresetCommander
@@ -60,11 +59,11 @@
   id: RMCSpawnPointEIAFCommander
   name: eiaf paratrooper squad leader spawn point
   components:
-    - type: SpawnPoint
-      job_id: RMCSurvivorEIAFCommander
+  - type: SpawnPoint
+    job_id: RMCSurvivorEIAFCommander
   layers:
-    - sprite: Sprite
-      state: surv_tse
+  - sprite: _RMC14/Markers/landmarks.rsi
+    state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase

@@ -12,7 +12,6 @@
       components:
       - type: NpcFactionMember
         factions:
-          - Civilian
           - TSE
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective
@@ -31,7 +30,7 @@
           tags:
             - SquadEIAF
       - type: JobPrefix
-        prefix: rmc-job-prefix-eiaf-medic
+        prefix: rmc-job-prefix-eiaf-paratrooper
   hidden: true
 
 - type: startingGear
@@ -53,7 +52,7 @@
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFMedicalTechnician
   layers:
-  - sprite: Sprite
+  - sprite: _RMC14/Markers/landmarks.rs
     state: surv_tse
 
 - type: jobIcon

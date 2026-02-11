@@ -268,10 +268,10 @@
       channels:
         - RoyalMarine
     - type: GrantSquadLeaderTracker
-      defaultMode: SquadLeader
+      defaultMode: EIAFSquadLeader
       trackerModes:
-        - SquadLeader
-        - RMCSurvivorEIAFCommander
+        - EIAFSquadLeader
+        - EIAFCommander
 
 - type: entity
   parent: RMCHeadsetEIAF
@@ -285,7 +285,7 @@
         - RoyalMarine
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
-      defaultMode: RMCSurvivorEIAFCommander
+      defaultMode: EIAFCommander
           
 - type: entity
   parent: RMCHeadsetEIAF
@@ -299,7 +299,7 @@
         - RoyalMarine
       radioTextIncrease: 3
     - type: GrantSquadLeaderTracker
-      defaultMode: SquadLeader
+      defaultMode: EIAFSquadLeader
 
 #for UNMC personnel
 - type: entity

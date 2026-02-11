@@ -9,7 +9,6 @@
       components:
       - type: NpcFactionMember
         factions:
-          - Civilian
           - TSE
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective
@@ -41,7 +40,7 @@
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFParatrooper
   layers:
-  - sprite: Sprite
+  - sprite: _RMC14/Markers/landmarks.rsi
     state: surv_tse
 
 - type: jobIcon

@@ -12,7 +12,6 @@
       components:
         - type: NpcFactionMember
           factions:
-            - Civilian
             - TSE
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
