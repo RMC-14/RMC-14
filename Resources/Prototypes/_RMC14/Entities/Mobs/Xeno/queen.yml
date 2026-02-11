@@ -271,6 +271,9 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
 
 - type: entity
   parent: RMCXenoQueenBase
