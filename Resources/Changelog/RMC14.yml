@@ -1,25 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Lights will now offset into walls.
-    type: Tweak
-  id: 2425
-  time: '2025-10-06T07:49:29.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/6833
-- author: SharkSnake98
-  changes:
-  - message: Added a WeYa Clipboard, WeYa Thermos, and WEYA Windbreaker unlocked in
-      the CL loadout at Executive, Senior Executive, & Executive Specialist respectively.
-      Also added a WEYA beret
-    type: Add
-  - message: Changed the WEYA Pen to use a custom sprite, instead of the normal pen
-      sprite
-    type: Tweak
-  - message: Changed the Dark Weston-Yamada cap's sprite
-    type: Tweak
-  id: 2426
-  time: '2025-10-06T07:51:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7937
 - author: SharkSnake98
   changes:
   - message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
@@ -4559,5 +4538,31 @@
   id: 2926
   time: '2026-02-11T08:23:10.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9193
+- author: LeoKarz
+  changes:
+  - message: Added a cursor overlay for selected design and node type for designer
+      hivelord
+    type: Add
+  - message: Changed wall sprite from greater resin surge from thick resin to bone
+      resin for clarity.
+    type: Tweak
+  - message: Fixed construction node infusal message to be for the client only, not
+      everyone.
+    type: Fix
+  - message: You can now stack remote thicken resin actions, allowing you to upgrade
+      your entire screen at once.
+    type: Fix
+  - message: Breaking construction nodes will cancel the wall animation
+    type: Fix
+  id: 2927
+  time: '2026-02-11T08:24:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9189
+- author: Whisper
+  changes:
+  - message: Added guidebook links to designer hivelord entities.
+    type: Add
+  id: 2928
+  time: '2026-02-11T08:25:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9179
 Name: RMC14
 Order: -1
