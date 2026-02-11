@@ -497,14 +497,23 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) ||
             !TryComp(uid, out IdCardComponent? idCard) ||
-            idCard.OriginalOwner is not { } marineId)
+            idCard.OriginalOwner is not { } marineId ||
+            !_originalRoleQuery.TryComp(marineId, out var role) ||
+            role.Job is not { } job)
             return;
+
+        var jobName = job.Id;
+        if (_prototype.TryIndex(job, out var jobProto))
+            jobName = Loc.GetString(jobProto.Name);
 
         if (args.Squad is not { } squadNetEnt)
         {
             _squad.RemoveSquad(marineId, null);
             _metaData.SetEntityName(uid.Value,
-                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({idCard._jobTitle})");
+                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({jobName})");
+
+            idCard._jobTitle = jobName;
+            Dirty(uid.Value, idCard);
 
             var selfMsgUnassign = $"{Name(marineId)} has been unassigned.";
             _marineAnnounce.AnnounceSingle(selfMsgUnassign, actor);
@@ -527,14 +536,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         }
 
         if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
-            _originalRoleQuery.TryComp(marineId, out var role) &&
-            role.Job is { } job &&
             !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
         {
-            var jobName = job.Id;
-            if (_prototype.TryIndex(job, out var jobProto))
-                jobName = Loc.GetString(jobProto.Name);
-
             _popup.PopupCursor($"{Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
             return;
         }
@@ -545,10 +548,15 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             return;
         }
 
+        var newSquadName = Name(newSquadEnt.Value);
+
         RemComp<SquadLeaderComponent>(marineId);
         _squad.AssignSquad(marineId, newSquadEnt.Value, null);
         _metaData.SetEntityName(uid.Value,
-            $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({Name(newSquadEnt.Value)} {idCard._jobTitle})");
+            $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({newSquadName} {jobName})");
+
+        idCard._jobTitle = $"{newSquadName} {jobName}";
+        Dirty(uid.Value, idCard);
 
         var selfMsg = $"{Name(marineId)} has been assigned to {Name(newSquadEnt.Value)}.";
         _marineAnnounce.AnnounceSingle(selfMsg, actor);

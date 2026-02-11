@@ -12,6 +12,7 @@ using Content.Server.Storage.Components;
 using Content.Server.Temperature.Components;
 using Content.Shared._RMC14.Interaction;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Burrow;
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.EggMorpher;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
@@ -456,6 +457,10 @@ public sealed class NPCUtilitySystem : EntitySystem
             case TargetAvailibleEggMorpherCon:
             {
                 return TryComp<EggMorpherComponent>(targetUid, out var eggmorpher) && eggmorpher.CurParasites < eggmorpher.MaxParasites ? 1f : 0f;
+            }
+            case TargetNotBurrowedCon:
+            {
+                return !TryComp<XenoBurrowComponent>(targetUid, out var burrow) || !burrow.Active ? 1f : 0f;
             }
             default:
                 throw new NotImplementedException();
