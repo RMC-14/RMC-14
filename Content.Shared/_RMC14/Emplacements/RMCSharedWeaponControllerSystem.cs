@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Buckle;
+using Content.Shared.Mobs;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 
@@ -16,6 +17,7 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
     {
         SubscribeLocalEvent<WeaponControllerComponent, BeforeAttemptShootEvent>(OnAdjustShotOrigin);
         SubscribeLocalEvent<WeaponControllerComponent, DismountActionEvent>(OnDismountAction);
+        SubscribeLocalEvent<WeaponControllerComponent, MobStateChangedEvent>(OnMobStateChanged);
     }
 
     private void OnAdjustShotOrigin(Entity<WeaponControllerComponent> ent, ref BeforeAttemptShootEvent args)
@@ -41,6 +43,14 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
         _buckle.Unbuckle(ent.Owner, ent);
     }
 
+    private void OnMobStateChanged(Entity<WeaponControllerComponent> ent, ref MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Alive)
+            return;
+
+        _buckle.Unbuckle(ent.Owner, ent);
+    }
+
     /// <summary>
     ///     Tries to get EntityUid of the weapon the entity is currently controlling.
     /// </summary>
@@ -61,5 +71,17 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
 
         gunComp = gunComponent;
         return true;
+    }
+
+    /// <summary>
+    ///     Allows the given entity to shoot the given weapon remotely.
+    /// </summary>
+    /// <param name="controller">The entity controlling the weapon</param>
+    /// <param name="weapon">The weapon being controlled</param>
+    public void StartControllingWeapon(EntityUid controller, EntityUid weapon)
+    {
+        var weaponController = EnsureComp<WeaponControllerComponent>(controller);
+        weaponController.ControlledWeapon = GetNetEntity(weapon);
+        Dirty(controller, weaponController);
     }
 }

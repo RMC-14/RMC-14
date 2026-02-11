@@ -75,6 +75,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private const string AmmoExamineColor = "yellow";
@@ -476,16 +477,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     private void OnStrapped(Entity<WeaponMountComponent> ent, ref StrappedEvent args)
     {
         ent.Comp.User = args.Buckle;
-        if (ent.Comp.MountedEntity == null)
+        if (ent.Comp.MountedEntity is not { } weapon)
             return;
 
-        var weaponController = EnsureComp<WeaponControllerComponent>(args.Buckle);
-        weaponController.ControlledWeapon = GetNetEntity(ent.Comp.MountedEntity.Value);
-        Dirty(args.Buckle, weaponController );
+        _weaponController.StartControllingWeapon(args.Buckle, weapon);
 
-        if (TryComp(ent.Comp.MountedEntity.Value, out ScopeComponent? scope))
+        if (TryComp(weapon, out ScopeComponent? scope))
         {
-            _scope.StartScoping((ent.Comp.MountedEntity.Value, scope), args.Buckle);
+            _scope.StartScoping((weapon, scope), args.Buckle);
         }
 
         _actions.AddAction(args.Buckle, ref ent.Comp.DismountActionEntity, ent.Comp.DismountAction, args.Buckle);
