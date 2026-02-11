@@ -39,7 +39,7 @@ public sealed partial class CMSolutionRefillerComponent : Component
     [DataField, AutoNetworkedField]
     public SoundSpecifier? RefillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg")
     {
-        Params = AudioParams.Default.WithVariation(0.125f).WithVolume(-5f),
+        Params = AudioParams.Default.WithVariation(0.125f).WithVolume(-6f),
     };
 }
 
