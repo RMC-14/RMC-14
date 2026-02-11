@@ -94,6 +94,10 @@
     prefix: hivelord
   - type: FixedIdentity
     name: cm-job-name-xeno-hivelord
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -147,10 +151,6 @@
     strains:
     - CMXenoHivelordResinWhisperer
     - CMXenoHivelordDesigner
-  - type: IntelRecoverCorpseObjectiveOnDeath
-    value: 0.2
-  - type: RMCSurgeryXenoHeart
-    item: RMCOrganXenoHeartT2
   - type: RMCActionOrder
     id: CMXenoHivelord
 
