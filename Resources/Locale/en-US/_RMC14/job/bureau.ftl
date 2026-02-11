@@ -26,7 +26,7 @@ rmc-job-prefix-icb = ICB
 rmc-job-name-corp-cmb-specialist = CMB Specialist
 rmc-job-prefix-corp-cmb-specialist = CMB-SPC
 
-rmc-job-name-corp-icb-commissioner = ICB Comissioner
+rmc-job-name-corp-icb-commissioner = Interstellar Commerce Bureau Commissioner
 rmc-job-prefix-corp-icb-commissioner = ICB-COM
 
 rmc-job-name-corp-icb-supervisor = Interstellar Commerce Bureau Supervisor
