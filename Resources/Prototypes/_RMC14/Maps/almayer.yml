@@ -42,7 +42,7 @@
 
           #Medical
           CMCMO: [1, 1]
-          CMDoctor: [4, 6]
+          CMDoctor: [6, 6]
           CMNurse: [4, 6]
 #          CMResearcher: [2, 2]
 
@@ -53,11 +53,11 @@
 
           #Marines
           CMSquadLeader: [4, 4]
-          CMFireteamLeader: [4, 8]
+          CMFireteamLeader: [8, 8]
           CMSmartGunOperator: [4, 4]
           CMWeaponsSpecialist: [4, 4]
-          CMCombatTech: [8, 12]
-          CMHospitalCorpsman: [8, 16]
+          CMCombatTech: [8, 16]
+          CMHospitalCorpsman: [8, 20]
           CMRifleman: [ -1, -1 ]
 
           #Civilians

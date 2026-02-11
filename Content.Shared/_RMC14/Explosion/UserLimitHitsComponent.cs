@@ -17,7 +17,7 @@ public sealed partial class UserLimitHitsComponent : Component
 [DataRecord]
 [Serializable, NetSerializable]
 public partial record struct Hit(
-    NetEntity Id,
+    int Id,
     [field: DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
     TimeSpan ExpireAt,
     int? ExtraId
