@@ -157,7 +157,7 @@
     accuracyMultiplier: 5
     accuracyMultiplierUnwielded: 5
   - type: OnShootTriggerAmmoTimer
-    delay: 0.2FV
+    delay: 0.2
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMC40MMGrenadeM74AGMSVehicle

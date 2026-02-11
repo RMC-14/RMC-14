@@ -8,6 +8,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
 using Content.Shared.Vehicle.Components;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Xenonids;
@@ -21,8 +22,10 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Robust.Shared.Log;
 using Content.Shared.Physics;
 
 namespace Content.Shared.Vehicle;
@@ -39,9 +42,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly RMCSizeStunSystem _size = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCVehicleWheelSystem _wheels = default!;
 
     private EntityQuery<MapGridComponent> gridQ;
@@ -60,11 +65,23 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                CollisionGroup.MidImpassable |
                CollisionGroup.BarricadeImpassable |
                CollisionGroup.DropshipImpassable);
+    private const CollisionGroup GridVehiclePushBlockMask =
+        CollisionGroup.MobMask |
+        CollisionGroup.BarricadeImpassable |
+        CollisionGroup.DropshipImpassable;
+    private const float PushTileBlockFraction = 0.005f;
+    private const float PushOverlapEpsilon = 0.05f;
+    private const float PushAxisHysteresis = 0.05f;
+    private const float PushWallSkin = 0.1f;
+    private const float PushWallOverlapArea = 0.01f;
+
+    private static readonly ISawmill Sawmill = Logger.GetSawmill("rmc_vehicle_push");
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
     public static readonly List<DebugCollision> DebugCollisions = new();
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
+    private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
 
     public readonly record struct DebugCollision(
         EntityUid Tested,
@@ -148,7 +165,6 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if ((args.OtherFixture.CollisionLayer & GridVehicleStaticBlockerMask) == 0)
             return;
 
-        // Prevent physics solver push against static blockers; grid movement handles blocking manually.
         args.Cancelled = true;
     }
 

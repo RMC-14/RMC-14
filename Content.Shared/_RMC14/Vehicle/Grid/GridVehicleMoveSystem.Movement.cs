@@ -188,6 +188,25 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             return;
         }
 
+        if (inputDir != Vector2i.Zero)
+        {
+            var stepDir = new Vector2i(Math.Sign(tileDelta.X), Math.Sign(tileDelta.Y));
+            if (stepDir != Vector2i.Zero && inputDir == -stepDir && MathF.Abs(mover.CurrentSpeed) > 0.01f)
+            {
+                var tileAtPos = GetTile(grid, gridComp, mover.Position);
+                mover.CurrentTile = tileAtPos;
+                mover.TargetTile = tileAtPos;
+                mover.IsCommittedToMove = false;
+                mover.IsPushMove = false;
+                mover.CurrentSpeed = 0f;
+                mover.IsMoving = false;
+                SetGridPosition(uid, grid, mover.Position);
+                physics.WakeBody(uid);
+                Dirty(uid, mover);
+                return;
+            }
+        }
+
         var maxSpeed = mover.MaxSpeed;
         var maxReverseSpeed = mover.MaxReverseSpeed;
 
@@ -263,6 +282,18 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 remaining -= distToTarget;
 
                 if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
+                {
+                    mover.IsCommittedToMove = false;
+                    mover.CurrentSpeed = 0f;
+                    break;
+                }
+
+                var changingDirection =
+                    MathF.Abs(mover.CurrentSpeed) > 0.01f &&
+                    ((reversing && mover.CurrentSpeed > 0f) ||
+                     (!reversing && mover.CurrentSpeed < 0f));
+
+                if (changingDirection)
                 {
                     mover.IsCommittedToMove = false;
                     mover.CurrentSpeed = 0f;
