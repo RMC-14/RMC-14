@@ -372,6 +372,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
         }
 
+        XenoAcid.SetCorrodible(ent, ent.Comp.AcidableWhileDeployed);
+
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.DeploySound, ent, args.User);
     }
@@ -403,6 +405,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         if (TryComp(user, out HandsComponent? hands))
             _hands.TryPickupAnyHand(user.Value, ent, handsComp: hands);
+
+        XenoAcid.SetCorrodible(ent, ent.Comp.AcidableWhileUndeployed);
 
         UpdateAppearance(ent);
         _audio.PlayPredicted(ent.Comp.UndeploySound, ent, user);
@@ -839,10 +843,6 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         TryComp(ent, out FoldableComponent? foldable);
         ent.Comp.Broken = true;
         DirtyField(ent.Owner, ent.Comp, nameof(WeaponMountComponent.Broken));
-
-        // The mount can be melted while broken
-        if (TryComp(ent, out CorrodibleComponent? corrodible))
-            XenoAcid.SetCorrodible(corrodible, true);
 
         UndeployMount(ent, null, foldable);
         UpdateAppearance(ent);

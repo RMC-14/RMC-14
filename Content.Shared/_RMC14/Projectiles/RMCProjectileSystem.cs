@@ -289,3 +289,6 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct ProjectileShotEvent(EntityUid? Shooter, bool Predicted = true);

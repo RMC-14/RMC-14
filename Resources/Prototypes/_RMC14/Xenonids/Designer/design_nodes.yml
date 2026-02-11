@@ -13,6 +13,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleDesigner
     - type: Transform
       anchored: true
     - type: Clickable
@@ -79,7 +82,6 @@
   components:
     - type: DesignerRemoteThickenResin
       plasmaCost: 60
-      cooldown: 0.5
       doAfter: 1
       range: 10
     - type: Icon
