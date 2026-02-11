@@ -39,9 +39,10 @@
     availableModes:
     - FullAuto
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m60.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m2c2.ogg
       params:
-        volume: -9 # TODO Remove this if the replacement sound is not as loud as the M60 one
+        volume: -2
+        variation: 0.05
     soundEmpty:
       path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
   - type: RMCSelectiveFire
