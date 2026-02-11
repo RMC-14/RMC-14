@@ -25,6 +25,7 @@
                     <controls:RoadmapVersionHeader Text="Current version" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="PvE" Text="A separate player vs AI gamemode on a second server with campaigns ran by the community." />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Whiskey Outpost gamemode" Text="A different PvP gamemode with infinite waves of xenos fighting against a team of marines." />
+                    <controls:RoadmapItem ItemState="Partial" HeaderText="Flamethrowers" Text="Werfs flammen" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Intelligence officer" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Engineering skill" Text="Allows you to repair and hack more advanced constructs" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno strains" Text="Variations of a xeno caste with different stats and abilities" />
@@ -36,7 +37,6 @@
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Specialist's Demolitionist Kit" Text="M5-ATL!!!" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Requisitions" Text="Department that buys supplies for the rest of the marines" />
                     <controls:RoadmapItem ItemState="Partial" HeaderText="Xeno Queen" Text="Head caste of the xenonids" />
-                    <controls:RoadmapItem ItemState="Complete" HeaderText="Flamethrowers" Text="Werfs flammen" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Specialist's Sniper Kit" Text="Sniper loadout for the squad weapons specialist. On completion, its ghillie suit will let you become partially cloaked, and the rifle will have special actions" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Mortars" />
                     <controls:RoadmapItem ItemState="Complete" HeaderText="Dropship modifications" />
