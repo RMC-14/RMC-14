@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Added the black shoulder holster.
-    type: Add
-  - message: Shoulder holsters has storage method switches now.
-    type: Tweak
-  id: 2431
-  time: '2025-10-06T10:20:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8053
 - author: CatAndHats
   changes:
   - message: Correspondents now have the Command, JTAC, and Intel channels as read-only.
@@ -4555,5 +4546,12 @@
   id: 2932
   time: '2026-02-11T22:30:19.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9217
+- author: kleinerstation13
+  changes:
+  - message: Changed the M2C's firing sound
+    type: Tweak
+  id: 2933
+  time: '2026-02-11T22:32:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9223
 Name: RMC14
 Order: -1
