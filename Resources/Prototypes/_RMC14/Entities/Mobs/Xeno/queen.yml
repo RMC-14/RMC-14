@@ -273,7 +273,7 @@
     canVote: true
   - type: RemoveComponents
     components:
-    - type: RMCGibOnDeath
+    - type: Gibbable
 
 - type: entity
   parent: RMCXenoQueenBase
