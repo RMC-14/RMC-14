@@ -1,17 +1,4 @@
 ﻿Entries:
-- author: SharkSnake98
-  changes:
-  - message: Added the SSV Deyneka, a SPP Shipmap, and all relevant areas
-    type: Add
-  - message: Added cases for a bunch of SPP guns and turrets, as well as ammo boxes
-      for the mainline SPP guns, and the SPP Shotgun rack.
-    type: Add
-  - message: Fixed the SPP Squad Leader using the name and sprite of the PMC Team
-      Lead
-    type: Fix
-  id: 2427
-  time: '2025-10-06T08:00:29.048192+00:00'
-  url: null
 - author: DoguhanOzgurAkca
   changes:
   - message: The starting orbital bombardment warheads can no longer be two of the
@@ -4564,5 +4551,12 @@
   id: 2928
   time: '2026-02-11T08:25:17.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9179
+- author: Ian321
+  changes:
+  - message: Hivelord strains now give intel and have a heart.
+    type: Fix
+  id: 2929
+  time: '2026-02-11T10:46:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9215
 Name: RMC14
 Order: -1
