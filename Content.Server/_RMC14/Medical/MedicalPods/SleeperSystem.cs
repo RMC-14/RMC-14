@@ -211,21 +211,20 @@ public sealed class SleeperSystem : SharedSleeperSystem
             toxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
             oxyLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
             geneticLoss = damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup).Float();
+        }
 
-            if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
-                blood.BloodSolution != null &&
-                _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
-            {
-                hasBlood = true;
-                bloodLevel = bloodSol.Volume;
-                var bloodMax = bloodSol.MaxVolume;
-                bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
+        if (occupant != null &&
+            TryComp<BloodstreamComponent>(occupant, out var blood) &&
+            blood.BloodSolution != null &&
+            _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
+        {
+            hasBlood = true;
+            bloodLevel = bloodSol.Volume;
+            var bloodMax = bloodSol.MaxVolume;
+            bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
-                pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
-            }
-
-            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var temp))
-                bodyTemp = temp;
+            pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
+            _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
         }
 
         // Cache chemical solution to avoid repeated lookups in the loop

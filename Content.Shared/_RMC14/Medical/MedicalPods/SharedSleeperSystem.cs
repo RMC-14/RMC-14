@@ -282,6 +282,9 @@ public abstract class SharedSleeperSystem : EntitySystem
 
     private void TryLinkToSleeper(Entity<SleeperConsoleComponent> console)
     {
+        if (_net.IsClient)
+            return;
+
         if (console.Comp.LinkedSleeper != null)
             return;
 
