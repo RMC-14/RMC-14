@@ -51,8 +51,7 @@
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFMedicalTechnician
-  layers:
-  - sprite: _RMC14/Markers/landmarks.rs
+  - type: Sprite
     state: surv_tse
 
 - type: jobIcon

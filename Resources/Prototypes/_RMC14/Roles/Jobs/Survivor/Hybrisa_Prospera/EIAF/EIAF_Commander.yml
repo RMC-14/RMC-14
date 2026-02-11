@@ -57,12 +57,11 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointEIAFCommander
-  name: eiaf paratrooper squad leader spawn point
+  name: eiaf commander spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFCommander
-  layers:
-  - sprite: _RMC14/Markers/landmarks.rsi
+  - type: Sprite
     state: surv_tse
 
 - type: jobIcon

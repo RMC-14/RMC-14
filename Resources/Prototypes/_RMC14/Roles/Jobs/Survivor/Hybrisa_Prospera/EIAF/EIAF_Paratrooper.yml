@@ -39,8 +39,7 @@
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorEIAFParatrooper
-  layers:
-  - sprite: _RMC14/Markers/landmarks.rsi
+  - type: Sprite
     state: surv_tse
 
 - type: jobIcon

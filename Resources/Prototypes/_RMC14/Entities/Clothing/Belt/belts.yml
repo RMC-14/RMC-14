@@ -2115,9 +2115,9 @@
         - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
         - id: RMCSpeedLoaderM44
         - id: RMCSpeedLoaderM44
-          prob: 0.5
+          prob: 0.66
         - id: RMCSpeedLoaderM44
-          prob: 0.5
+          prob: 0.33
 
 - type: entity
   parent: RMCBeltHolsterPistolEIAF
