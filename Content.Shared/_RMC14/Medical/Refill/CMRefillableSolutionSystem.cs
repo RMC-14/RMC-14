@@ -64,7 +64,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         SubscribeLocalEvent<RMCPressurizedSolutionComponent, AfterInteractEvent>(OnPressurizedRefillAttempt);
 
-        SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse);
+        SubscribeLocalEvent<RMCSmartRefillTankComponent, InteractUsingEvent>(OnSmartRefillInteractUse,
+            before: [typeof(SharedCMAutomatedVendorSystem)]);
     }
 
     private void OnRefillableSolutionExamined(Entity<CMRefillableSolutionComponent> ent, ref ExaminedEvent args)
