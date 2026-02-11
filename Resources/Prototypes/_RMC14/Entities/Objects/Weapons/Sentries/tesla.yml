@@ -243,6 +243,7 @@
   parent: RMCTesla
   id: RMCTeslaTSE
   name: L10D tesla coil
+  suffix: PVE, RCM IFF
   components:
   - type: UserIFF
     factions:
