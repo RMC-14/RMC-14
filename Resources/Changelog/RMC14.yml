@@ -1,20 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Fixed the CLF jobs having the wrong equipment.
-    type: Fix
-  id: 2429
-  time: '2025-10-06T08:24:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8059
-- author: DummeHytteOst
-  changes:
-  - message: Fixed disposal units taking less damage than intended.
-    type: Fix
-  - message: Fixed trash bins being indestructible.
-    type: Fix
-  id: 2430
-  time: '2025-10-06T10:00:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8051
 - author: x5tink
   changes:
   - message: Added the black shoulder holster.
@@ -4557,5 +4541,19 @@
   id: 2930
   time: '2026-02-11T22:29:09.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9220
+- author: Dygon
+  changes:
+  - message: The queen no longer has a chance to gib when killed.
+    type: Fix
+  id: 2931
+  time: '2026-02-11T22:30:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9219
+- author: Dygon
+  changes:
+  - message: Fire now only damages resin holes and claymores on a direct hit.
+    type: Fix
+  id: 2932
+  time: '2026-02-11T22:30:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9217
 Name: RMC14
 Order: -1
