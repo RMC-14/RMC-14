@@ -562,6 +562,20 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
+  id: RMCToolWebbingSmallFilledRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWrench
+    - id: RMCWelderIndustrial
+    - id: CMCrowbar
+    - id: RMCCableCoil30
+    - id: CMMultitool
+
+- type: entity
+  parent: RMCToolWebbingSmall
   id: RMCToolWebbing
   name: tool webbing
   description: A brown synthcotton webbing that is similar in function to civilian tool aprons, but is more durable for field usage.

@@ -1,0 +1,53 @@
+- type: entity
+  parent: RMCPVEArmorPadsBase
+  id: RMCPVEArmorPadsKestrel
+  name: Kestrel Pauldrons
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against overhead strikes.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/pads.rsi
+
+- type: entity
+  parent: RMCPVEArmorBracersBase
+  id: RMCPVEArmorBracersKestrel
+  name: Kestrel Vambraces
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against shattered forearms.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/bracer.rsi
+
+- type: entity
+  parent: RMCPVEArmorNeckGuardBase
+  id: RMCPVEArmorNeckGuardKestrel
+  name: Kestrel Gorget
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against slit throats.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/neckguard.rsi
+
+- type: entity
+  parent: RMCPVEArmorGroinPlateBase
+  id: RMCPVEArmorGroinPlateKestrel
+  name: Kestrel Lap Panel
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against sneak attacks.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/groinplate.rsi
+
+- type: entity
+  parent: RMCPVEArmorShinGuardBase
+  id: RMCPVEArmorShinGuardKestrel
+  name: Kestrel Greaves
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against bruised shins.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/shinguards.rsi
+
+- type: entity
+  parent: RMCPVEArmorKneeGuardBase
+  id: RMCPVEArmorKneeGuardKestrel
+  name: Kestrel Kneepads
+  description: Attachable supplementary armor for L3 Kestrel modular vests. Protects against grazed knees.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/thighguards.rsi

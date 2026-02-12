@@ -1,0 +1,949 @@
+# Rifles (Empty)
+
+- type: entity
+  parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
+  id: RMCWeaponRifleL90A1
+  name: L90A1 infantry carbine
+  description: The L90A1 infantry carbine. While lacking in modularity and noticeably less ergonomic than later models, it still packs a punch. Chambered in 7x43mm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a1.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a1.rsi
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l90.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 3
+    recoilUnwielded: 3
+    scatterWielded: 8
+    scatterUnwielded: 24
+    baseFireRate: 2.5
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.2
+    accuracyMultiplierUnwielded: 0.8
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.9, 0.063
+      rmc-aslot-rail: -0.07, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
+  - type: Tag
+    tags:
+    - RMCRifleL90
+    - RMCRifleL90A1
+
+- type: entity
+  parent: RMCWeaponRifleL90A1
+  id: RMCWeaponRifleL90A2
+  name: L90A2 infantry carbine
+  description: The L90A2 infantry carbine. Highly modular, easy to handle, and hard-hitting, the A2 is widely regarded as a quality rifle by its users. Chambered in 7x43mm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a2.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l90a2.rsi
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l90.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilWielded: 2.5
+    recoilUnwielded: 2.5
+    scatterWielded: 6
+    scatterUnwielded: 18
+    baseFireRate: 4
+    burstScatterMult: 0.23
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.87, 0.063
+      rmc-aslot-rail: -0.06, 0.15
+      rmc-aslot-underbarrel: 0.38, -0.25
+  - type: Tag
+    tags:
+    - RMCRifleL90
+    - RMCRifleL90A2
+
+- type: entity
+  parent: RMCWeaponRifleL90A2
+  id: RMCWeaponRifleL91SWS
+  name: L91 SWS
+  description: The L91 Support Weapon System features a significantly longer and heavier barrel than the L90. While this makes it more unwieldy, the added length, weight, and durability enable accurate and sustained fire from a stationary position. Chambered in 7x43mm.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/l91.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: ItemMapper
+    mapLayers:
+      mag-0:
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+      mag-1:
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Rifles/L91.rsi
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l90.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    - FullAuto
+    recoilWielded: 3
+    recoilUnwielded: 4.5
+    scatterWielded: 4
+    scatterUnwielded: 16
+    baseFireRate: 2
+    burstScatterMult: 1.54
+    modifiers:
+      FullAuto:
+        fireDelay: -0.25
+        maxScatterModifier: 10.4
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 3
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.75
+  - type: RMCWeaponDamageFalloff
+    falloffMultiplier: 0
+  - type: MagazineAmmoProvider
+    autoEject: false
+    soundAutoEject: null
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: GunDamageModifier
+    multiplier: 1.4
+  - type: GunRequiresWield
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentSASOS
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentL91Bipod
+        whitelist:
+          tags:
+          - RMCAttachmentL91Bipod
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 1.12, 0.063
+      rmc-aslot-rail: -0.03, 0.15
+      rmc-aslot-underbarrel: 0.69, -0.20
+  - type: Tag
+    tags:
+    - RMCRifleL91SWS
+
+# Rifles (Filled)
+
+- type: entity
+  parent: RMCWeaponRifleL90A1
+  id: RMCWeaponRifleL90A1Filled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL90
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+
+- type: entity
+  parent: RMCWeaponRifleL90A1Filled
+  id: RMCWeaponRifleL90A1FilledSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+
+- type: entity
+  parent: RMCWeaponRifleL90A2
+  id: RMCWeaponRifleL90A2Filled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL90
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90GL
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+
+- type: entity
+  parent: RMCWeaponRifleL90A2Filled
+  id: RMCWeaponRifleL90A2FilledSemiStripped
+  suffix: No UGL, Filled
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+
+- type: entity
+  parent: RMCWeaponRifleL90A2Filled
+  id: RMCWeaponRifleL90A2Breacher
+  suffix: Breacher
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCTantoA
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentSuppressor
+          - RMCM5Bayonet
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentL90UBS
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentVerticalGrip
+          - RMCAttachmentFlashlightGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentBipod
+          - RMCAttachmentExtinguisher
+          - RMCAttachmentFlamer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentL90GL
+          - RMCAttachmentL90UBS
+
+- type: entity
+  parent: RMCWeaponRifleL91SWS
+  id: RMCWeaponRifleL91SWSFilled
+  suffix: Filled
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineRifleL90
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineRifleL90
+          - RMCMagazineRifleL90AP
+          - RMCMagazineRifleL90HEAP
+          - RMCMagazineRifleL90Incendiary
+          - RMCMagazineRifleL90Drum
+          - RMCMagazineRifleL90DrumAP
+          - RMCMagazineRifleL90DrumHEAP
+          - RMCMagazineRifleL90DrumIncendiary
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentSuppressor
+        whitelist:
+          tags:
+          - RMCAttachmentBarrelCharger
+          - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
+          - RMCAttachmentSuppressor
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentSASOS
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+          - RMCAttachmentSASOS
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentL91Bipod
+        whitelist:
+          tags:
+          - RMCAttachmentL91Bipod
+
+# Magazines
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineRifleL90
+  name: L90 magazine (7x43mm)
+  description: "A magazine of 7x43mm rounds for use in L90 pattern rifles."
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90
+  - type: BallisticAmmoProvider
+    mayTransfer: True
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90
+    proto: RMCCartridgeRifleL90
+    capacity: 30
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90
+
+- type: entity
+  parent: RMCMagazineRifleL90
+  id: RMCMagazineRifleL90Drum
+  name: L90 drum magazine (7x43mm)
+  description: "A drum magazine of 7x43mm rounds for use in L90 pattern rifles."
+  suffix: Drum
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90Drum
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90
+    proto: RMCCartridgeRifleL90
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90drum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90
+
+- type: entity
+  parent: RMCMagazineRifleL90
+  id: RMCMagazineRifleL90AP
+  name: L90 AP magazine (7x43mm)
+  description: "A magazine of armor-piercing 7x43mm rounds for use in L90 pattern rifles."
+  suffix: AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90AP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90AP
+    proto: RMCCartridgeRifleL90AP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
+
+- type: entity
+  parent: RMCMagazineRifleL90AP
+  id: RMCMagazineRifleL90DrumAP
+  name: L90 AP drum magazine (7x43mm)
+  description: "A drum magazine of armor-piercing 7x43mm rounds for use in L90 pattern rifles."
+  suffix: Drum, AP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90DrumAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90AP
+    proto: RMCCartridgeRifleL90AP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90drum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#1F951F"
+  - type: Appearance
+  - type: RefillableByBulletBox
+    bulletType: RMCBoxBulletsRifleL90AP
+
+- type: entity
+  parent: RMCMagazineRifleL90
+  id: RMCMagazineRifleL90HEAP
+  name: L90 HEAP magazine (7x43mm)
+  description: "A magazine of HEAP 7x43mm rounds for use in L90 pattern rifles."
+  suffix: HEAP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90HEAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90HEAP
+    proto: RMCCartridgeRifleL90HEAP
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL90AP
+  id: RMCMagazineRifleL90DrumHEAP
+  name: L90 HEAP drum magazine (7x43mm)
+  description: "A drum magazine of HEAP 7x43mm rounds for use in L90 pattern rifles."
+  suffix: Drum, HEAP
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90DrumHEAP
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90HEAP
+    proto: RMCCartridgeRifleL90HEAP
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90drum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#9C9A19"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL90
+  id: RMCMagazineRifleL90Incendiary
+  name: L90 incendiary magazine (7x43mm)
+  description: "A magazine of incendiary 7x43mm rounds for use in L90 pattern rifles."
+  suffix: Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90Incendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90Incendiary
+    proto: RMCCartridgeRifleL90Incendiary
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
+  - type: Appearance
+
+- type: entity
+  parent: RMCMagazineRifleL90Incendiary
+  id: RMCMagazineRifleL90DrumIncendiary
+  name: L90 incendiary drum magazine (7x43mm)
+  description: "A drum magazine of incendiary 7x43mm rounds for use in L90 pattern rifles."
+  suffix: Drum, Incendiary
+  components:
+  - type: Tag
+    tags:
+    - CMMagazineRifle
+    - RMCMagazineRifleL90DrumIncendiary
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeRifleL90Incendiary
+    proto: RMCCartridgeRifleL90Incendiary
+    capacity: 60
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l90drum.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+    - state: ammo_band
+      color: "#771A10"
+  - type: Appearance
+
+# Cartridges
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL90
+  name: cartridge (7x43mm)
+  description: A 7x43mm rifle cartridge designed for L90 pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL90
+  - type: CartridgeAmmo
+    proto: BulletRifle7x43mm
+
+- type: entity
+  parent: RMCBaseBullet
+  id: BulletRifle7x43mm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 50
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 30
+      falloff: 9999
+      ignoreModifiers: true
+    - range: 10
+      falloff: 4
+  - type: CMArmorPiercing
+    amount: 10
+  - type: RMCProjectileAccuracy
+    accuracy: 120
+    thresholds:
+    - range: 20
+      falloff: 10
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL90AP
+  name: AP cartridge (7x43mm)
+  description: A 7x43mm AP rifle cartridge designed for L90 pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL90AP
+  - type: CartridgeAmmo
+    proto: BulletRifle7x43mmAP
+
+- type: entity
+  parent: BulletRifle7x43mm
+  id: BulletRifle7x43mmAP
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 35
+  - type: CMArmorPiercing
+    amount: 40
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL90HEAP
+  name: HEAP cartridge (7x43mm)
+  description: A 7x43mm HEAP rifle cartridge designed for L90 pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL90HEAP
+  - type: CartridgeAmmo
+    proto: BulletRifle7x43mmHEAP
+
+- type: entity
+  parent: BulletRifle7x43mm
+  id: BulletRifle7x43mmHEAP
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 70
+  - type: CMArmorPiercing
+    amount: 50
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeRifleL90Incendiary
+  name: incendiary cartridge (7x43mm)
+  description: A 7x43mm incendiary rifle cartridge designed for L90 pattern rifles.
+  components:
+  - type: Tag
+    tags:
+    - Cartridge
+    - RMCCartridgeRifleL90Incendiary
+  - type: CartridgeAmmo
+    proto: BulletRifle7x43mmIncendiary
+
+- type: entity
+  parent: BulletRifle7x43mm
+  id: BulletRifle7x43mmIncendiary
+  components:
+  - type: Projectile
+    damage:
+       types:
+          Piercing: 30
+  - type: IgniteOnProjectileHit
+
+# Tags
+
+- type: Tag
+  id: RMCRifleL90
+
+- type: Tag
+  id: RMCRifleL90A1
+
+- type: Tag
+  id: RMCRifleL90A2
+
+- type: Tag
+  id: RMCRifleL91SWS
+
+- type: Tag
+  id: RMCMagazineRifleL90
+
+- type: Tag
+  id: RMCMagazineRifleL90AP
+
+- type: Tag
+  id: RMCMagazineRifleL90HEAP
+
+- type: Tag
+  id: RMCMagazineRifleL90Incendiary
+
+- type: Tag
+  id: RMCMagazineRifleL90Drum
+
+- type: Tag
+  id: RMCMagazineRifleL90DrumAP
+
+- type: Tag
+  id: RMCMagazineRifleL90DrumHEAP
+
+- type: Tag
+  id: RMCMagazineRifleL90DrumIncendiary
+
+- type: Tag
+  id: RMCCartridgeRifleL90
+
+- type: Tag
+  id: RMCCartridgeRifleL90AP
+
+- type: Tag
+  id: RMCCartridgeRifleL90HEAP
+
+- type: Tag
+  id: RMCCartridgeRifleL90Incendiary

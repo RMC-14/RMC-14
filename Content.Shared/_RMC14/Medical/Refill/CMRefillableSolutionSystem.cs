@@ -18,9 +18,9 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Shared.DoAfter;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio.Systems;
+using Content.Shared.Tag;
 
 namespace Content.Shared._RMC14.Medical.Refill;
 
@@ -33,6 +33,7 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SolutionTransferSystem _solutionTransfer = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
@@ -135,15 +136,12 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         if (anyRefilled)
         {
+            Dirty(ent);
             var ev = new RefilledSolutionEvent();
             RaiseLocalEvent(args.Used, ref ev);
 
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", fillable)), args.User, args.User);
-
-            if (_net.IsServer)
-                _audio.PlayPvs(ent.Comp.RefillSound, ent.Owner);
-
-            Dirty(ent);
+            _audio.PlayPredicted(ent.Comp.RefillSound, ent.Owner, args.User);
         }
         else
         {
@@ -425,7 +423,8 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!TryComp<CMRefillableSolutionComponent>(args.Used, out var refillableSolutionComponent) ||
+        if (!_tag.HasTag(args.Used, ent.Comp.OnlyFillThis) ||
+            !TryComp<CMRefillableSolutionComponent>(args.Used, out var refillableSolutionComponent) ||
             !_solution.TryGetSolution(args.Used, refillableSolutionComponent.Solution, out var penSolutionComp) ||
             !_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out var tankSolutionComp))
             return;

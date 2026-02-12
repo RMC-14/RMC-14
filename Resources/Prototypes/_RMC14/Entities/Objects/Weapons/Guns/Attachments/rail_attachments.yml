@@ -638,6 +638,53 @@
       Classic: c_boomslang-scope
       Urban: u_boomslang-scope
 
+- type: entity
+  parent: RMCAttachmentScopeBase
+  id: RMCAttachmentSASOS
+  name: L91O1 SASOS
+  description: The TSE-produced Small Arms Smart Optical Sight, or SASOS, is an experimental, next-gen IFF-enabling optic designed for use as part of the L91 Support Weapon System.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    state: sasos
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-sasos
+  - type: AttachableVisuals
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+      state: sasos
+    actionName: Look through SASOS
+    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+  - type: AttachableToggleableSimpleActivate
+  - type: Scope
+    zoomLevels:
+    - zoom: 1
+      offset: 13
+      allowMovement: true
+      doAfter: 0
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: AttachableWieldDelayMods
+    modifiers:
+    - delay: 0.5
+  - type: AttachableIFF
+  - type: AttachableWeaponRangedMods
+    modifiers:
+    - damageAddMult: -0.2
+    - conditions:
+        inactiveOnly: true
+      accuracyAddMult: -0.2
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentSASOS
+
 - type: Tag
   id: RMCAttachmentRail
 
@@ -694,3 +741,6 @@
 
 - type: Tag
   id: RMCAttachmentFP9000Scope
+
+- type: Tag
+  id: RMCAttachmentSASOS

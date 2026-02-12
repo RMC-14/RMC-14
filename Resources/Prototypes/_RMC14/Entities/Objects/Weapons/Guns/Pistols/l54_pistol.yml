@@ -2,7 +2,7 @@
   parent: CMWeaponPistolM1984
   id: RMCWeaponPistolL54
   name: L54 service pistol # TSE service pistol - same stats as the M1984
-  description: Standard issue semi-automatic service pistol of the TSEPA. Chambered in 9mm, it is comparable to the popular M1984 pistol utilized by the UNMC.
+  description: The standard issue semi-automatic service pistol of the TSEPA. Chambered in 9mm, it is comparable to the popular M1984 pistol utilized by the UNMC.
   components:
   - type: Tag
     tags:
