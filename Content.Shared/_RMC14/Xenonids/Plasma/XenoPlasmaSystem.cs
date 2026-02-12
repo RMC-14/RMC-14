@@ -117,25 +117,25 @@ public sealed class XenoPlasmaSystem : EntitySystem
             return;
 
         args.Handled = true;
-        RegenPlasma(target, args.Amount);
+        var restored = RegenPlasma(target, args.Amount);
 
         if (args.TargetPercentage is { } percentage)
-            RegenPlasma(target, otherXeno.MaxPlasma * percentage);
-
-        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
+            restored += RegenPlasma(target, otherXeno.MaxPlasma * percentage);
 
         // for some reason the popup will sometimes not show for the predicting client here
         if (_net.IsClient)
             return;
 
+        _jitter.DoJitter(target, TimeSpan.FromSeconds(1), true, 80, 8, true);
+
         var selfMsg = Loc.GetString("cm-xeno-plasma-transferred-to-other",
-            ("plasma", args.Amount),
+            ("plasma", restored),
             ("target", target),
             ("total", self.Comp.Plasma));
         _popup.PopupEntity(selfMsg, target, self);
 
         var targetMsg = Loc.GetString("cm-xeno-plasma-transferred-to-self",
-            ("plasma", args.Amount),
+            ("plasma", restored),
             ("target", self.Owner),
             ("total", otherXeno.Plasma));
         _popup.PopupEntity(targetMsg, target, target);
@@ -233,19 +233,20 @@ public sealed class XenoPlasmaSystem : EntitySystem
         return true;
     }
 
-    public void RegenPlasma(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 amount)
+    public FixedPoint2 RegenPlasma(Entity<XenoPlasmaComponent?> xeno, FixedPoint2 amount)
     {
         if (!_xenoPlasmaQuery.Resolve(xeno, ref xeno.Comp, false))
-            return;
+            return FixedPoint2.Zero;
 
         var old = xeno.Comp.Plasma;
         xeno.Comp.Plasma = FixedPoint2.Min(xeno.Comp.Plasma + amount, xeno.Comp.MaxPlasma);
 
         if (old == xeno.Comp.Plasma)
-            return;
+            return FixedPoint2.Zero;
 
         Dirty(xeno);
         UpdateAlert((xeno, xeno.Comp));
+        return xeno.Comp.Plasma - old;
     }
 
     public void RemovePlasma(Entity<XenoPlasmaComponent> xeno, FixedPoint2 plasma)
