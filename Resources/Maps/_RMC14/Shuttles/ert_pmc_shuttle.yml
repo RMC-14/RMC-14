@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 23:30:21
+  time: 02/12/2026 13:43:12
   entityCount: 89
 maps: []
 grids:
@@ -219,28 +219,6 @@ entities:
     - type: Transform
       pos: 1.5004945,-2.4902544
       parent: 1
-- proto: CMNormandyDoor
-  entities:
-  - uid: 82
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -3.5,-1.5
-      parent: 1
-  - uid: 85
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,-1.5
-      parent: 1
-- proto: CMNormandyDoorAft
-  entities:
-  - uid: 45
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -0.5,-4.5
-      parent: 1
 - proto: CMRack
   entities:
   - uid: 43
@@ -382,6 +360,28 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -0.5,0.5
+      parent: 1
+- proto: RMCPMCCrewHatch
+  entities:
+  - uid: 45
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -3.5,-1.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,-1.5
+      parent: 1
+- proto: RMCPMCDoorAft
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -0.5,-4.5
       parent: 1
 - proto: RMCSeatDark
   entities:

@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/31/2026 20:32:12
+  time: 02/12/2026 13:42:14
   entityCount: 96
 maps: []
 grids:
@@ -257,24 +257,6 @@ entities:
       parent: 1
 - proto: CMNormandyDoor
   entities:
-  - uid: 80
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,0.5
-      parent: 1
-  - uid: 81
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,0.5
-      parent: 1
-  - uid: 82
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-4.5
-      parent: 1
   - uid: 83
     components:
     - type: Transform
@@ -397,6 +379,26 @@ entities:
     components:
     - type: Transform
       pos: -1.5,-0.5
+      parent: 1
+- proto: RMCCLFCrewHatch
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -2.5,0.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-4.5
       parent: 1
 - proto: RMCCLFDropshipWall103
   entities:

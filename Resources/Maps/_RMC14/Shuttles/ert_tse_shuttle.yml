@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/03/2026 22:56:41
+  time: 02/12/2026 13:40:40
   entityCount: 92
 maps: []
 grids:
@@ -199,24 +199,6 @@ entities:
       parent: 1
 - proto: CMNormandyDoor
   entities:
-  - uid: 48
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,2.5
-      parent: 1
-  - uid: 49
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 3.5,2.5
-      parent: 1
-  - uid: 70
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,-5.5
-      parent: 1
   - uid: 75
     components:
     - type: Transform
@@ -256,20 +238,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-5.5
-      parent: 1
-- proto: RMCERTShuttleWallTSEEngineLeft
-  entities:
-  - uid: 39
-    components:
-    - type: Transform
-      pos: -1.5,-4.5
-      parent: 1
-- proto: RMCERTShuttleWallTSEEngineRight
-  entities:
-  - uid: 38
-    components:
-    - type: Transform
-      pos: 2.5,-4.5
       parent: 1
 - proto: RMCLightFixtureBlueOffset
   entities:
@@ -441,6 +409,26 @@ entities:
     components:
     - type: Transform
       pos: 1.5060295,1.4630156
+      parent: 1
+- proto: RMCTSECrewHatch
+  entities:
+  - uid: 48
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -2.5,2.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,-5.5
       parent: 1
 - proto: RMCTSEDropshipWall21
   entities:
@@ -690,14 +678,14 @@ entities:
       parent: 1
 - proto: RMCTSEDropshipWallConnector1
   entities:
-  - uid: 18
+  - uid: 39
     components:
     - type: Transform
       pos: -1.5,0.5
       parent: 1
 - proto: RMCTSEDropshipWallConnector2
   entities:
-  - uid: 19
+  - uid: 38
     components:
     - type: Transform
       pos: 2.5,0.5
@@ -739,5 +727,19 @@ entities:
     components:
     - type: Transform
       pos: 3.5,0.5
+      parent: 1
+- proto: RMCTSEDropshipWallEngine1
+  entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: -1.5,-4.5
+      parent: 1
+- proto: RMCTSEDropshipWallEngine2
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 2.5,-4.5
       parent: 1
 ...

@@ -31,3 +31,44 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Dropships/Airlocks/spp_cargo.rsi
+
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCTSEDoorAft
+  name: TSE cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/tse_cargo.rsi
+
+- type: entity
+  parent: CMAlamoDoorAft
+  id: RMCPMCDoorAft
+  name: PMC cargo door
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/pmc_cargo.rsi
+
+# Single Doors
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCTSECrewHatch
+  name: TSE crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/tse_airlock.rsi
+
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCCLFCrewHatch
+  name: CLF crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/clf_airlock.rsi
+
+- type: entity
+  parent: CMAlamoDoor
+  id: RMCPMCCrewHatch
+  name: PMC crew hatch
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/Airlocks/pmc_airlock.rsi
