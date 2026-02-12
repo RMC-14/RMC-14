@@ -49,7 +49,7 @@
   equipment:
     belt: RMCBeltHolsterRevolverZHNK72Fill
     outerClothing: RMCArmorSPPSOFPlated
-    head: CMHeadCapSPPBeret
+    head: RMCHeadCapSPPSOF
   storage:
     back:
     - ArmorHelmetSPPHeavy

@@ -62,6 +62,24 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity
+  parent: ArmorHelmetSPP
+  id: RMCArmorHelmetSPPSOF
+  name: CCC5-L composite helmet
+  description: A SPP-manufactured combat helmet with a distinctive spherical design. Made from a reinforced polymer composite, it offers ballistic protection while incorporating an integrated HUD, encrypted comms, and a rebreather system. Its limited visor visibility is a tradeoff for enhanced durability.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/composite_helmet.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: CMArmor
+    melee: 25
+    bullet: 35
+    bio: 20
+    explosionArmor: 30
+
 # SPP hats
 - type: entity
   parent: CMHeadCap
@@ -175,3 +193,14 @@
       visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/SPP/ushanka_civ.rsi
+
+- type: entity
+  parent: CMHeadCapSPP
+  id: RMCHeadCapSPPSOF
+  name: SOF beret
+  description: A finely crafted beret worn by members of the SPP Space Operations Forces. It signifies service in the void, from deep-space missions to planetary operations, and is a mark of discipline and camaraderie among its wearers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret_sof.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/SPP/beret_sof.rsi
