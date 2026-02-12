@@ -223,6 +223,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var doAfter = new DoAfterArgs(EntityManager, user, construction.OrderConstructionDelay, doAfterEvent, user)
         {
             BreakOnMove = true,
+            BlockDuplicate = false,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -384,25 +385,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
+        Entity<XenoWeedsComponent> adjacent = default;
         if (existing == null)
         {
-            var hasAdjacent = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (!_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, direction))
-                    continue;
-
-                hasAdjacent = true;
-                break;
+                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
+                    break;
             }
 
-            if (!hasAdjacent)
+            if (adjacent == default)
             {
-                // TODO RMC14
+                _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
+
+                return;
             }
         }
 
@@ -414,15 +417,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
             return;
 
         args.Handled = true;
         if (_net.IsServer)
         {
-            var weeds = Spawn(toSpawn, coordinates);
-            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
-            _hive.SetSameHive(xeno.Owner, weeds);
+            var newWeeds = Spawn(toSpawn, coordinates);
+            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(newWeeds):weeds} at {coordinates}");
+            _hive.SetSameHive(xeno.Owner, newWeeds);
+
+            if (existing == null)
+                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
         }
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
@@ -2120,12 +2127,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!TryComp(xeno.Owner, out DesignerStrainComponent? designer))
             return true;
 
-        if (_timing.CurTime < designer.NextRemoteThickenAt)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-cooldown"), xeno, xeno, PopupType.SmallCaution);
-            return true;
-        }
-
         if (_transform.GetGrid(target) is null)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-construction-failed-cant-build"), target, xeno);
@@ -2153,14 +2154,12 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return true;
         }
 
-        designer.NextRemoteThickenAt = _timing.CurTime + TimeSpan.FromSeconds(thickenChoice.Cooldown);
-        Dirty(xeno.Owner, designer);
-
         var ev = new DesignerRemoteThickenResinDoAfterEvent(thickenChoice.PlasmaCost, GetNetEntity(upgradeable.Owner), thickenChoice.Range);
         var doAfter = new DoAfterArgs(EntityManager, xeno.Owner, thickenChoice.DoAfter, ev, xeno.Owner)
         {
-            BreakOnMove = true,
-            DuplicateCondition = DuplicateConditions.SameEvent,
+            BreakOnMove = false,
+            BlockDuplicate = false,
+            CancelDuplicate = false,
         };
 
         _doAfter.TryStartDoAfter(doAfter);
