@@ -51,6 +51,7 @@
 - type: trackerMode
   id: FireteamLeader
   job: CMFireteamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: PVESquadLeader
@@ -68,7 +69,7 @@
 - type: trackerMode
   id: LeaderPmc
   job: RMCPMCLeader
-  alert: SquadTrackerPMCTeamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: LeaderPmcPVE
@@ -78,7 +79,7 @@
 - type: trackerMode
   id: TeamLeaderPmcPVE
   job: CMPMCTeamLeadPVE
-  alert: SquadTrackerPMCTeamLeader
+  alert: SquadTrackerTeamLeader
 
 - type: trackerMode
   id: CorporateLiaison
@@ -149,6 +150,36 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
+
+- type: trackerMode
+  id: RCMPVESectionLead
+  job: CMRoyalMarinesSectionLeaderPVE
+  alert: SquadTrackerRCMPVESectionLead
+
+- type: trackerMode
+  id: RCMPVETroopSergeant
+  job: CMRoyalMarinesTroopSargePVE
+  alert: SquadTrackerRCMPVETroopSergeant
+
+- type: trackerMode
+  id: RCMPVETeamLead
+  job: CMRoyalMarinesTeamLeaderPVE
+  alert: SquadTrackerRCMPVETeamLead
+
+- type: trackerMode
+  id: RCMPVETroopCommander
+  job: CMRoyalMarinesTroopCommanderPVE
+  alert: SquadTrackerRCMPVETroopCommander
+
+- type: trackerMode
+  id: RCMTeamLead
+  job: CMRoyalMarinesTeamlead
+  alert: SquadTrackerRCMTeamLead
+
+- type: trackerMode
+  id: RCMLieutenant
+  job: CMRoyalMarinesLieutenant
+  alert: SquadTrackerRCMLieutenant
 
 - type: trackerMode
   id: MARSOCLeader

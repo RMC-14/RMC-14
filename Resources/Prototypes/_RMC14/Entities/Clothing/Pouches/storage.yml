@@ -55,6 +55,10 @@
       components:
       - Pill
   - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - Pouch
+    - SurvivalPouch
 
 - type: entity
   parent: RMCPouchSurvival
@@ -80,7 +84,7 @@
       - Flashlight
       - Crowbar
       - CableCoil
-      - Sheet
+      - RMCSheetMetal
       - Radio
       - Knife
       components:
@@ -410,6 +414,22 @@
         tags:
         - Flare
 
+- type: entity
+  parent: RMCPouchFlare
+  id: RMCPouchFlareL96
+  name: L96 flare pouch
+  description: A pouch designed to hold flares used by the Royal Crown Marines. Refillable with an L96 flare pack.
+  components:
+  - type: CMItemSlots
+    cooldown: 1
+    cooldownPopup: You need to wait before taking another flare!
+    count: 16
+    slot:
+      name: RMCFlareL96
+      whitelist:
+        tags:
+        - RMCFlareL96
+
 # Radio Pouch
 - type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
@@ -570,6 +590,18 @@
     # Something about /item/tool/weldingtool/hugetank - leaving empty
 
 - type: entity
+  parent: RMCPouchTools
+  id: RMCPouchToolsFilledRCM
+  suffix: Filled, RCM
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: CMWirecutter
+    - id: CMFireExtinguisherPortable
+    - id: CMMultitool
+
+- type: entity
   parent: RMCPouchToolsSoc
   id: RMCPouchToolsSocFilledSOF
   suffix: Filled, SOF
@@ -584,18 +616,66 @@
     - id: CMMultitool
     - id: CMWelder
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledTactical
+  suffix: Filled, Tactical
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver # TODO RMC14 tactical screwdriver??
+    - id: CMWirecutter # TODO RMC14 tactical wirecutters??
+    - id: CMCrowbar # TODO RMC14 tactical prybar
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: CMWrench
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
+
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
   id: RMCPouchSling
-  name: sling strap # TODO RMC14 implement this
+  name: sling strap
   description: Keeps a single item attached to a strap.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/sling.rsi
+  - type: RMCStorageEjectHand
+    state: Last
   - type: Storage
     maxItemSize: Normal
-
+    whitelist:
+      components:
+      - Blowtorch
+      - Defibrillator
+      - Flash
+      - RMCMegaphone
+      - Whistle
+      tags:
+      - Binoculars
+      - CMFireExtinguisherPortable
+      - Crowbar
+      - DiscreteHealthAnalyzer
+      - FireExtinguisher
+      - Flashlight
+      - Multitool
+      - RMCDetector
+      - RMCPinpointer
+      - Screwdriver
+      - Shovel
+      - Wirecutter
+      - Wrench
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - Shovel
+  - type: FixedItemSizeStorage
+  - type: RMCSlingPouch
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 # Cassetes Pouch
 - type: entity
@@ -610,7 +690,7 @@
     maxItemSize: Small
     grid:
     - 0,0,5,1 #3 slots
-    whitelist: 
+    whitelist:
       components:
       - CassetteTape
 
@@ -619,7 +699,7 @@
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchDrumPMC
   name: smartgun drum pouch
-  description: A heavy pouch designed for carrying a surplus of smargun drums.
+  description: A heavy pouch designed for carrying a surplus of smartgun drums.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_sgdrums_ammo.rsi
@@ -635,3 +715,19 @@
 
 - type: Tag
   id: RMCPouchShotgunShells
+
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMEntrenchingTool
+    - id: RMCExplosivePlastic
+    - id: RMCExplosivePlastic
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: RMCNailgunCompact
+    - id: CMMultitool

@@ -70,7 +70,15 @@
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
     layers:
     - state: icon
+    - state: sixth
+      visible: false
+    - state: third
+      visible: false
     - state: half
+      visible: false
+    - state: twothirds
+      visible: false
+    - state: fivesixths
       visible: false
     - state: full
       visible: false
@@ -102,8 +110,32 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: ItemMapper
     mapLayers:
-      half:
+      sixth:
         minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      third:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      half:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      twothirds:
+        minCount: 9
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      fivesixths:
+        minCount: 12
         whitelist:
           tags:
           - RMCShellShotgun
@@ -357,6 +389,7 @@
       - Dropper
       - GlassBeaker
       - Bottle
+      - PillPacket
       - PillCanister
       - Syringe
       - CMSurgicalLine
@@ -378,7 +411,7 @@
       - CigPack
       - RMCPenlight
       - Flare
-      #      - # TODO RMC14 minitank (needs full implementation and a tag to fit it in here, but the item exists as CMMiniTank)
+      - RMCMiniTank
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
       components:
@@ -854,6 +887,30 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolEIAF
+  name: EIAF paratrooper belt
+  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolSPP
   name: Type 47-S pistol holster rig
   description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
@@ -1319,6 +1376,17 @@
     - id: RMCMK80
 
 - type: entity
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCMK80BeltRoyalFilled
+  suffix: Filled, MK80
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolMK80
+      amount: 6
+    - id: RMCMK80
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCM1984BeltFilled
   suffix: Filled
@@ -1328,28 +1396,6 @@
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
-
-- type: entity
-  parent: RMCBeltHolsterPistol
-  id: CMM77BeltFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
-
-- type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCM77BeltPMCFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
 
 - type: entity
   parent: RMCBeltHolsterRevolver
@@ -1510,7 +1556,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1883,6 +1929,47 @@
     - id: RMCMagazineRifleAK4047
       amount: 2
 
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltMachineGunner
+  name: M804 heavygunner storage rig
+  description: The M804 heavygunner storage rig is an M276 pattern toolbelt rig modified to carry ammunition for heavy machinegun systems, and engineering tools for the gunner.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - Wrench
+      - Screwdriver
+      - Crowbar
+      - Wirecutter
+      - CMFireExtinguisherPortable
+      - RMCMagazineML66D
+      - RMCMagazineM2C
+      - CableCoil
+      - Multitool
+      - RMCExplosiveBreachingCharge
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      - RMCExplosiveClaymoreMine
+      components:
+      - Welder
+      - EntrenchingTool
+      - BarbedWire
+      - EmptySandbag
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+  - type: Tag
+    tags:
+    - RMCMachineGunnerRig
+
 - type: Tag
   id: RMCNailgunHolster
 
@@ -1894,3 +1981,6 @@
 
 - type: Tag
   id: RMCM82FHolster
+
+- type: Tag
+  id: RMCMachineGunnerRig

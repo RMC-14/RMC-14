@@ -1,8 +1,9 @@
 ﻿- type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: RMCWallSPPReinforced
-  name: reinforced walls
+  name: reinforced wall
   description: A thick and chunky metal wall. The surface is barren and imposing.
+  suffix: SPP
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Walls/spp_wall.rsi
