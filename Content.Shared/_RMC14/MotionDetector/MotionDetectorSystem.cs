@@ -371,6 +371,10 @@ public sealed class MotionDetectorSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
             var userUid = Transform(uid).ParentUid;
+            if (!HasComp<UserIFFComponent>(userUid))
+                userUid = Transform(userUid).ParentUid;
+
+            _userFactions.Clear();
             var hasFaction = _gunIFF.TryGetFactions((userUid, null), _userFactions);
 
             detector.Blips.Clear();
