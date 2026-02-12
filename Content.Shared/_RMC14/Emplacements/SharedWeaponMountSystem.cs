@@ -370,7 +370,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             var ammoCountEvent = new GetAmmoCountEvent();
             RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
             if (ammoCountEvent.Count > 0)
+            {
+                if (!HasHandsFreePopup(args.User, ent))
+                    return;
+
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
+            }
         }
 
         XenoAcid.SetCorrodible(ent, ent.Comp.AcidableWhileDeployed);
@@ -468,6 +473,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private void OnStrapAttempt(Entity<WeaponMountComponent> ent, ref StrapAttemptEvent args)
     {
+        if (!HasHandsFreePopup(args.Buckle, ent, args.Popup))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (args.User == args.Buckle)
             return;
 
@@ -955,6 +966,22 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         ammoCount = ammoEv.Count;
         ammoCapacity = ammoEv.Capacity;
         return true;
+    }
+
+    private bool HasHandsFreePopup(EntityUid user, EntityUid mount, bool popup = true)
+    {
+        if (_hands.CountFreeHands(user) >= _hands.GetHandCount(user))
+            return true;
+
+        if (popup)
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-need-hands-free"),
+                mount,
+                user,
+                PopupType.MediumCaution);
+        }
+
+        return false;
     }
 }
 
