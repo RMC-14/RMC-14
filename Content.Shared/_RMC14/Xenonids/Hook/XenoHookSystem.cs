@@ -1,5 +1,7 @@
+using Content.Shared._RMC14.Emplacements;
 using Content.Shared._RMC14.Tether;
 using Content.Shared.Throwing;
+using Robust.Shared.Physics.Events;
 
 namespace Content.Shared._RMC14.Xenonids.Hook;
 
@@ -13,6 +15,7 @@ public sealed partial class XenoHookSystem : EntitySystem
         SubscribeLocalEvent<XenoHookComponent, EntityTerminatingEvent>(OnHookDelete);
         SubscribeLocalEvent<XenoHookedComponent, StopThrowEvent>(OnHookedStop);
         SubscribeLocalEvent<XenoHookedComponent, ComponentShutdown>(OnHookedRemoved);
+        SubscribeLocalEvent<XenoHookedComponent, PreventCollideEvent>(OnHookedPreventCollide);
     }
 
     private void OnHookSourceMove(Entity<XenoHookComponent> xeno, ref MoveEvent args)
@@ -57,6 +60,12 @@ public sealed partial class XenoHookSystem : EntitySystem
     private void OnHookedRemoved(Entity<XenoHookedComponent> ent, ref ComponentShutdown args)
     {
         RemCompDeferred<RMCTetherComponent>(ent);
+    }
+
+    private void OnHookedPreventCollide(Entity<XenoHookedComponent> ent, ref PreventCollideEvent args)
+    {
+        if (HasComp<WeaponMountComponent>(args.OtherEntity))
+            args.Cancelled = true;
     }
 
     public bool TryHookTarget(Entity<XenoHookComponent> xeno, EntityUid target)

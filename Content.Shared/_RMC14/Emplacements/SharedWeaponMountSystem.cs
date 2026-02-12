@@ -75,6 +75,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
+    [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     private const string AmmoExamineColor = "yellow";
@@ -369,7 +370,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             var ammoCountEvent = new GetAmmoCountEvent();
             RaiseLocalEvent(ent.Comp.MountedEntity.Value, ref ammoCountEvent);
             if (ammoCountEvent.Count > 0)
+            {
+                if (!HasHandsFreePopup(args.User, ent))
+                    return;
+
                 _buckle.TryBuckle(args.User, args.User, ent, popup: false);
+            }
         }
 
         XenoAcid.SetCorrodible(ent, ent.Comp.AcidableWhileDeployed);
@@ -467,6 +473,12 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private void OnStrapAttempt(Entity<WeaponMountComponent> ent, ref StrapAttemptEvent args)
     {
+        if (!HasHandsFreePopup(args.Buckle, ent, args.Popup))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (args.User == args.Buckle)
             return;
 
@@ -476,16 +488,14 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     private void OnStrapped(Entity<WeaponMountComponent> ent, ref StrappedEvent args)
     {
         ent.Comp.User = args.Buckle;
-        if (ent.Comp.MountedEntity == null)
+        if (ent.Comp.MountedEntity is not { } weapon)
             return;
 
-        var weaponController = EnsureComp<WeaponControllerComponent>(args.Buckle);
-        weaponController.ControlledWeapon = GetNetEntity(ent.Comp.MountedEntity.Value);
-        Dirty(args.Buckle, weaponController );
+        _weaponController.StartControllingWeapon(args.Buckle, weapon);
 
-        if (TryComp(ent.Comp.MountedEntity.Value, out ScopeComponent? scope))
+        if (TryComp(weapon, out ScopeComponent? scope))
         {
-            _scope.StartScoping((ent.Comp.MountedEntity.Value, scope), args.Buckle);
+            _scope.StartScoping((weapon, scope), args.Buckle);
         }
 
         _actions.AddAction(args.Buckle, ref ent.Comp.DismountActionEntity, ent.Comp.DismountAction, args.Buckle);
@@ -956,6 +966,22 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         ammoCount = ammoEv.Count;
         ammoCapacity = ammoEv.Capacity;
         return true;
+    }
+
+    private bool HasHandsFreePopup(EntityUid user, EntityUid mount, bool popup = true)
+    {
+        if (_hands.CountFreeHands(user) >= _hands.GetHandCount(user))
+            return true;
+
+        if (popup)
+        {
+            _popup.PopupClient(Loc.GetString("emplacement-mount-need-hands-free"),
+                mount,
+                user,
+                PopupType.MediumCaution);
+        }
+
+        return false;
     }
 }
 

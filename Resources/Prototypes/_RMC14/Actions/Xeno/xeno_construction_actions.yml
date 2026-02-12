@@ -261,10 +261,11 @@
       state: plant_weeds
     useDelay: 0.5
   - type: TargetAction
+    checkCanAccess: false
+    range: -1
+    deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoExpandWeedsActionEvent
-  - type: XenoActionPlasma
-    cost: 50
 
 - type: entity
   id: ActionXenoDesignerSelectedDesign

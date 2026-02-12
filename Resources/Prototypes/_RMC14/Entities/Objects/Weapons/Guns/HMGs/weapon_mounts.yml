@@ -51,6 +51,7 @@
   - type: Sprite
     drawdepth: Mobs
     noRot: true
+  - type: RequireProjectileTarget
 
 - type: entity
   parent: RMCBaseWeaponMount
