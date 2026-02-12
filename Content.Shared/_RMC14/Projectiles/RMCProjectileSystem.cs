@@ -126,6 +126,13 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        var netOther = GetNetEntity(args.OtherEntity);
+        if (projectile.Comp.Dodged.Contains(netOther))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
             return;
 
@@ -174,6 +181,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+
+        projectile.Comp.Dodged.Add(netOther);
+        Dirty(projectile);
     }
 
     private bool IsProjectileTargetFriendly(EntityUid projectile, EntityUid target)

@@ -97,6 +97,7 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
