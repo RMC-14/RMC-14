@@ -245,15 +245,19 @@
     isWeaponLocked: true
     canRotateWithoutTool: true
     mountOnDeploy: true
+    mountExclusionAreaSize: 0
     barricadeExclusionAreaSize: 2
     assembleDelay: 0.5
     undeploySound: null
+    acidableWhileUndeployed: true
   - type: Tag
     tags:
     - M2CMount
   - type: Foldable
     folded: true
     isLocked: true
+  - type: Corrodible
+    isCorrodible: true
 
 - type: Tag
   id: ML66DMount

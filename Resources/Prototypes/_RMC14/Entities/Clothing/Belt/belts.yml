@@ -1945,7 +1945,7 @@
       - RMCExplosiveBreachingCharge
       - RMCNailgunCompact
       - RMCNailgunTactical
-      # - claymore
+      - RMCExplosiveClaymoreMine
       components:
       - Welder
       - EntrenchingTool

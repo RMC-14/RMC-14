@@ -2000,7 +2000,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsColonialMarshals
-  name: NSPA - Ironbridge Precinct
+  name: TSEPA - Ironbridge Precinct
   components:
   - type: Sprite
     state: security_hub
@@ -2010,22 +2010,22 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsPrisonersCells
-  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Cells
+  name: TSEPA - Ironbridge Precinct - Maximum Security Ward - Cells
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsPrisonersFoyer
-  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Foyer
+  name: TSEPA - Ironbridge Precinct - Maximum Security Ward - Foyer
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsPrisonersRecreationArea
-  name: NSPA - Ironbridge Precinct - Maximum Security Ward - Recreation Area & Shower Room
+  name: TSEPA - Ironbridge Precinct - Maximum Security Ward - Recreation Area & Shower Room
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsGarage
-  name: NSPA - Ironbridge Precinct - Vehicle Deployment & Maintenace
+  name: TSEPA - Ironbridge Precinct - Vehicle Deployment & Maintenace
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2033,32 +2033,32 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsArmoryFoyer
-  name: NSPA - Ironbridge Precinct - Armory Foyer
+  name: TSEPA - Ironbridge Precinct - Armory Foyer
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsArmory
-  name: NSPA - Ironbridge Precinct - Armory
+  name: TSEPA - Ironbridge Precinct - Armory
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsArmoryFiringrange
-  name: NSPA - Ironbridge Precinct - Firing Range
+  name: TSEPA - Ironbridge Precinct - Firing Range
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsArmoryEvidenceroom
-  name: NSPA - Ironbridge Precinct - Evidence Room
+  name: TSEPA - Ironbridge Precinct - Evidence Room
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsOffice
-  name: NSPA - Ironbridge Precinct - Office
+  name: TSEPA - Ironbridge Precinct - Office
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsReception
-  name: NSPA - Ironbridge Precinct - Reception Office
+  name: TSEPA - Ironbridge Precinct - Reception Office
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2066,7 +2066,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHallwayCentral
-  name: NSPA - Ironbridge Precinct - Central Hallway
+  name: TSEPA - Ironbridge Precinct - Central Hallway
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2074,12 +2074,12 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHallwaySouth
-  name: NSPA - Ironbridge Precinct - South Hallway
+  name: TSEPA - Ironbridge Precinct - South Hallway
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHallwayReception
-  name: NSPA - Ironbridge Precinct - Reception Hallway
+  name: TSEPA - Ironbridge Precinct - Reception Hallway
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2087,7 +2087,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHallwayNorth
-  name: NSPA - Ironbridge Precinct - North Hallway
+  name: TSEPA - Ironbridge Precinct - North Hallway
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2095,12 +2095,12 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHallwayNorthLocker
-  name: NSPA - Ironbridge Precinct - North Hallway - Locker Room
+  name: TSEPA - Ironbridge Precinct - North Hallway - Locker Room
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHoldingCells
-  name: NSPA - Ironbridge Precinct - Holding Cells
+  name: TSEPA - Ironbridge Precinct - Holding Cells
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2108,7 +2108,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsHeadOffice
-  name: NSPA - Ironbridge Precinct - Forensics Office
+  name: TSEPA - Ironbridge Precinct - Forensics Office
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2116,7 +2116,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsNorthOffice
-  name: NSPA - Ironbridge Precinct - North Office
+  name: TSEPA - Ironbridge Precinct - North Office
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2124,17 +2124,17 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsWardensOffice
-  name: NSPA - Ironbridge Precinct - Wardens Office
+  name: TSEPA - Ironbridge Precinct - Wardens Office
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsInterrogation
-  name: NSPA - Ironbridge Precinct - Interrogation
+  name: TSEPA - Ironbridge Precinct - Interrogation
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsPressRoom
-  name: NSPA - Ironbridge Precinct - Court Room
+  name: TSEPA - Ironbridge Precinct - Court Room
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2142,17 +2142,17 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsChangingRoom
-  name: NSPA - Ironbridge Precinct - Changing Room
+  name: TSEPA - Ironbridge Precinct - Changing Room
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsRestroom
-  name: NSPA - Ironbridge Precinct - Restroom & Showers
+  name: TSEPA - Ironbridge Precinct - Restroom & Showers
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsSouthMaintenance
-  name: NSPA - Ironbridge Precinct - Maintenance - South
+  name: TSEPA - Ironbridge Precinct - Maintenance - South
   components:
   - type: Area
     linkedLz: dropship_lz2
@@ -2160,12 +2160,12 @@
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsNorthMaintenance
-  name: NSPA - Ironbridge Precinct - Maintenance - North
+  name: TSEPA - Ironbridge Precinct - Maintenance - North
 
 - type: entity
   parent: RMCAreaLv759IndoorsColonialMarshals
   id: RMCAreaLv759IndoorsColonialMarshalsSouthwestMaintenance
-  name: NSPA - Ironbridge Precinct - Maintenance - Southwest
+  name: TSEPA - Ironbridge Precinct - Maintenance - Southwest
 
 - type: entity
   parent: RMCAreaLv759Indoors
