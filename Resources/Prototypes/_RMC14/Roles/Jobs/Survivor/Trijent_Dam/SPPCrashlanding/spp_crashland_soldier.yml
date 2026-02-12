@@ -35,9 +35,11 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSPPCrashlandRifleman
-  name: spp crashland rifleman spawn point
+  name: special survivor spp crashland rifleman spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorSPPCrashlandSoldier
   - type: Sprite
-    state: spp_spawn
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv_spp
