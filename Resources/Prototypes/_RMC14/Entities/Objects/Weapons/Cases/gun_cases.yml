@@ -393,6 +393,16 @@
   name: N58 service pistol case
   description: A case containing a loaded N58 and two magazines for it.
   components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # Needs proper 'closed' Sprites, Open/Closed are identical atm
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
     - type: Storage
       maxItemSize: Huge
       grid:

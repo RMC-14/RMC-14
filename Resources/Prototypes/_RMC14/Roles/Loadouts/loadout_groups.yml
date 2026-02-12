@@ -155,7 +155,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-  
+
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
@@ -397,6 +397,7 @@
   - CustomM44RMC
   - HG45AguilaCaseRMC
   - HG45MarinaCaseRMC
+  - N58CaseRMC
 
 # SPP Weapons
 - type: loadoutGroup
