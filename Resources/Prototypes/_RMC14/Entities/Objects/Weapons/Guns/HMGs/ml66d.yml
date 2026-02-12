@@ -99,6 +99,7 @@
     scopePopup: null
     unScopePopup: null
     canUseInsideContainer: true
+    canUseNightVision: true
     zoomLevels:
     - zoom: 1
       offset: 7
@@ -152,7 +153,7 @@
         whitelist:
           tags:
           - RMCMagazineML66DLarge
-  - type: Scope #
+  - type: Scope
     zoomLevels:
     - zoom: 1
       offset: 12

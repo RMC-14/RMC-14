@@ -114,9 +114,9 @@ rmc-xeno-designer-node-needs-weed = There are no weeds to create a connection!
 
 rmc-xeno-designer-thicken-none = There's no resin structure here to thicken.
 rmc-xeno-designer-thicken-weedbound = We can't thicken weedbound resin.
-rmc-xeno-designer-thicken-cooldown = We need to wait before thickening again.
 rmc-xeno-designer-thicken-success = We thicken the resin.
 
 rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater Resin Surge again.
 rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
 rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into thick resin walls.
+rmc-xeno-designer-infuse-node = You infuse the node with plasma.

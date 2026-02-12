@@ -231,6 +231,22 @@
     cost: 600
 
 - type: entity
+  parent: ActionXenoTransferPlasma
+  id: ActionXenoTransferPlasmaQueen
+  name: Give Plasma (400) # TODO RMC14 proper plasma costs
+  description: Remotely restores 75% of a single xenonid's max plasma.
+  components:
+  - type: TargetAction
+    checkCanAccess: false
+    range: -1
+  - type: EntityTargetAction
+    event: !type:XenoTransferPlasmaActionEvent
+      cost: 400
+      amount: 0
+      targetPercentage: 0.75
+      range: null
+
+- type: entity
   parent: ActionXenoBase
   id: ActionXenoApplySalve
   name: Apply Salve (200)
@@ -367,7 +383,7 @@
   parent: ActionXenoBase
   id: ActionXenoSpikeShield
   name: Spike Shield (150 shards)
-  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds. 
+  description: Expend shards to gain a temporary shield that lasts for a short amount of time. Whenever the shield is damaged, spray bone shards around you in a 5x5 AoE centered on yourself. Shield lasts for 2 seconds.
   components:
   - type: Action
     itemIconStyle: NoItem
