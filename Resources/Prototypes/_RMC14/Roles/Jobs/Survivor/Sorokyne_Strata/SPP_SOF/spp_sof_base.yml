@@ -21,6 +21,7 @@
     Silver: RMCMedalSilverService
     Gold: RMCMedalGoldService
     Platinum: RMCMedalPlatinumService
+  abstract: true
   hidden: true
 
 - type: startingGear
