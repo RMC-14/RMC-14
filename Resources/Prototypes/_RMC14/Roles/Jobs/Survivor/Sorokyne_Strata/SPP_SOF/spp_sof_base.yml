@@ -26,7 +26,7 @@
 - type: startingGear
   id: RMCGearSPPSOFBase
   equipment:
-    jumpsuit: CMJumpsuitSPP # TODO RMC14 SPP SOF uniform
+    jumpsuit: RMCJumpsuitSPPSOF
     outerClothing: RMCArmorSPPSOFFilled
     back: RMCSatchelLightpackBlack
     shoes: RMCBootsSPPFilled
