@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -14,43 +15,28 @@ public sealed class RMCInputSystem : EntitySystem
     private bool _activeInputMoverEnabled;
 
     private EntityQuery<ActorComponent> _actorQuery;
-    private EntityQuery<InputMoverComponent> _inputMoverQuery;
-    private EntityQuery<InputMoverRelativeTargetComponent> _relativeTargetQuery;
 
     public override void Initialize()
     {
         _actorQuery = GetEntityQuery<ActorComponent>();
-        _inputMoverQuery = GetEntityQuery<InputMoverComponent>();
-        _relativeTargetQuery = GetEntityQuery<InputMoverRelativeTargetComponent>();
 
         SubscribeLocalEvent<ActiveInputMoverComponent, MapInitEvent>(OnActiveMapInit);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveAttached);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
-        SubscribeLocalEvent<InputMoverRelativeTargetComponent, EntityTerminatingEvent>(OnRelativeTargetTerminating);
 
-        // Clear RelativeEntity references when one of the target entities is deleted
+        // Clean up RelativeEntity refs when grids/maps are deleted.
+        SubscribeLocalEvent<MapGridComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
+        SubscribeLocalEvent<MapComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
+
         Subs.CVar(_config, RMCCVars.RMCActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
     }
 
-    public override void Update(float frameTime)
+    private void OnGridOrMapTerminating(EntityUid uid, Component comp, ref EntityTerminatingEvent args)
     {
-        base.Update(frameTime);
-
         var query = EntityQueryEnumerator<InputMoverComponent>();
-        while (query.MoveNext(out var mover))
+        while (query.MoveNext(out _, out var mover))
         {
-            if (mover.RelativeEntity is { } relative && !_relativeTargetQuery.HasComp(relative))
-                EnsureComp<InputMoverRelativeTargetComponent>(relative);
-        }
-    }
-
-    private void OnRelativeTargetTerminating(Entity<InputMoverRelativeTargetComponent> ent, ref EntityTerminatingEvent args)
-    {
-        // When entity with comp is deleted, clear references
-        var query = EntityQueryEnumerator<InputMoverComponent>();
-        while (query.MoveNext(out var mover))
-        {
-            if (mover.RelativeEntity == ent.Owner)
+            if (mover.RelativeEntity == uid)
                 mover.RelativeEntity = null;
         }
     }
