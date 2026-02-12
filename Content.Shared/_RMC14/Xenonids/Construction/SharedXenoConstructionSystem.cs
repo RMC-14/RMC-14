@@ -333,25 +333,27 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), xeno.Owner, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
+        Entity<XenoWeedsComponent> adjacent = default;
         if (existing == null)
         {
-            var hasAdjacent = false;
             foreach (var direction in _rmcMap.CardinalDirections)
             {
-                if (!_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, direction))
-                    continue;
-
-                hasAdjacent = true;
-                break;
+                if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
+                    break;
             }
 
-            if (!hasAdjacent)
+            if (adjacent == default)
             {
-                // TODO RMC14
+                _popup.PopupClient("You can only plant weeds if there is a nearby node.",
+                    args.Target,
+                    xeno,
+                    PopupType.MediumCaution);
+
+                return;
             }
         }
 
@@ -363,15 +365,19 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, grid, coordinates, false))
             return;
 
-        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+        var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
+        if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
             return;
 
         args.Handled = true;
         if (_net.IsServer)
         {
-            var weeds = Spawn(toSpawn, coordinates);
-            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates}");
-            _hive.SetSameHive(xeno.Owner, weeds);
+            var newWeeds = Spawn(toSpawn, coordinates);
+            _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(newWeeds):weeds} at {coordinates}");
+            _hive.SetSameHive(xeno.Owner, newWeeds);
+
+            if (existing == null)
+                _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
         }
 
         _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
