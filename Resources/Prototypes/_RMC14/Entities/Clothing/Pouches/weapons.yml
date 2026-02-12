@@ -153,16 +153,16 @@
           - RMCWeaponRevolverM44
       peregine_fill:
         whitelist:
-            tags:
-            - RMCWeaponPistolHandcannon
+          tags:
+          - RMCWeaponPistolHandcannon
       g_peregine_fill:
         whitelist:
-            tags:
-            - RMCWeaponPistolHandcannonGold
+          tags:
+          - RMCWeaponPistolHandcannonGold
       taser_fill:
         whitelist:
-            tags:
-            - Taser
+          tags:
+          - Taser
             
   - type: Storage
     maxItemSize: Normal
