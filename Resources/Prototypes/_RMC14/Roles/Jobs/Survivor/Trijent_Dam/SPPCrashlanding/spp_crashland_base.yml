@@ -14,7 +14,6 @@
   greeting: rmc-job-greeting-crashland
   spawnMenuRoleName: SPP Airborne Survivor (Base)
   abstract: true
-  abstract: true
   hidden: true
 
 - type: startingGear
