@@ -73,6 +73,6 @@ public sealed partial class Hemogenic : RMCChemicalEffect
         var target = args.TargetEntity;
         var hungerSystem = entityManager.System<HungerSystem>();
 
-        hungerSystem.ModifyHunger(target, -PotencyPerSecond * 5);
+        hungerSystem.ModifyHunger(target, PotencyPerSecond * -5);
     }
 }

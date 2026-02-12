@@ -31,5 +31,8 @@ public sealed partial class RMCIgniteOnCollideComponent : Component
     public EntityWhitelist? ArmorWhitelist;
 
     [DataField, AutoNetworkedField]
-    public CollisionGroup Collision = CollisionGroup.FullTileLayer;
+    public CollisionGroup Collision = CollisionGroup.HighImpassable | CollisionGroup.MidImpassable | CollisionGroup.LowImpassable | CollisionGroup.BulletImpassable | CollisionGroup.InteractImpassable;
+
+    [DataField, AutoNetworkedField]
+    public Color BurnColor = Color.Orange;
 }

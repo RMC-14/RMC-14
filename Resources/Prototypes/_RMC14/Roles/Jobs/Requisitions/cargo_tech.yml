@@ -3,6 +3,7 @@
   id: CMCargoTech
   name: cm-job-name-cargotech
   description: cm-job-description-cargotech
+  newToJobInfo: rmc-new-to-job-req-tech
   playTimeTracker: CMJobCargoTech
   requirements:
   - !type:DepartmentTimeRequirement

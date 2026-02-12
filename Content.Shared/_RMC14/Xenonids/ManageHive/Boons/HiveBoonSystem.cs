@@ -80,7 +80,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
     private EntityQuery<ExcludedFromKingVoteComponent> _excludedFromKingVoteQuery;
 
-    private readonly HashSet<ProtoId<JobPrototype>> _xenoJobs = new();
+    private readonly HashSet<ProtoId<PlayTimeTrackerPrototype>> _xenoJobs = new();
 
     public override void Initialize()
     {
@@ -178,13 +178,12 @@ public sealed class HiveBoonSystem : EntitySystem
         if (ev.Core is not { } core)
             return;
 
-        var cocoon = SpawnAtPosition(KingCocoonId, core.Owner.ToCoordinates());
-
+        var cocoon = SpawnAtPosition(KingCocoonId, core.ToCoordinates());
         _hive.SetHive(cocoon, ev.Hive);
 
         var areaName = _area.GetAreaName(core);
         _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-boon-king-announcement-marine", ("area", areaName)));
-        _xenoAnnounce.AnnounceSameHiveDefaultSound(core.Owner, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
+        _xenoAnnounce.AnnounceSameHiveDefaultSound(core, Loc.GetString("rmc-boon-king-announcement-xenos", ("area", areaName)));
     }
 
     private void OnGetTileFireImmunity(Entity<XenoComponent> xeno, ref RMCGetFireImmunityEvent ev)
@@ -354,7 +353,7 @@ public sealed class HiveBoonSystem : EntitySystem
     private void StartKingVote(Entity<HiveKingCocoonComponent> cocoon)
     {
         _xenoJobs.Clear();
-        foreach (var prototype in _prototype.EnumeratePrototypes<JobPrototype>())
+        foreach (var prototype in _prototype.EnumeratePrototypes<PlayTimeTrackerPrototype>())
         {
             if (prototype.IsXeno)
                 _xenoJobs.Add(prototype.ID);
@@ -621,6 +620,7 @@ public sealed class HiveBoonSystem : EntitySystem
 
         ev.Boon = boonEnt;
         ev.Hive = hive;
+        ev.Core = _hive.GetHiveCore(hive);
         RaiseLocalEvent((object) ev);
     }
 

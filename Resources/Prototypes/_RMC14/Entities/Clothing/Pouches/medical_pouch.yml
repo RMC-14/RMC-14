@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   parent: [RMCPouchOpenClosed, RMCPouchStorage]
   id: RMCPouchMedical
   name: medical pouch
