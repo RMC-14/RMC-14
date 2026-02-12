@@ -65,8 +65,8 @@
           - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
-      rmc-aslot-barrel: 0.655, 0.17
-      rmc-aslot-rail: -0.16, 0.225
+      rmc-aslot-barrel: 0.654, 0.159
+      rmc-aslot-rail: -0.191, 0.189
       rmc-aslot-underbarrel: 0.31, -0.22
   - type: Tag
     tags:
@@ -90,7 +90,7 @@
     proto: CMCartridgePistol9mm
     capacity: 10
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1984.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/n58.rsi
     layers:
     - state: base
       map: ["enum.GunVisualLayers.Base"]

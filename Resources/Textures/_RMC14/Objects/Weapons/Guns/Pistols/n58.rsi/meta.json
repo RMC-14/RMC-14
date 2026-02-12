@@ -1,7 +1,7 @@
 ﻿{
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "this is an amalgamation of the regular mk58 and hg45, totally gonna do sprites later",
+  "copyright": "created by gnusnotutopia, based on the mk58 by desertrose at https://github.com/DesertRose2/desertrose/commit/120961e254d7f83a6e00a02c76e734f9e5019345, https://github.com/DesertRose2/desertrose/blob/master/icons/obj/guns/projectile.dmi",
   "size": {
     "x": 32,
     "y": 32
