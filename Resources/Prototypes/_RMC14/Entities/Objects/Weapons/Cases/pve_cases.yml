@@ -288,15 +288,17 @@
   - type: Storage
     maxItemSize: Ginormous
     grid:
-    - 0,0,3,1
+    - 0,0,5,1
     whitelist:
       tags:
       - RMCSentry
       - RMCMagazineSentry
+      - RMCSentryLaptop
   - type: StorageFill
     contents:
     - id: RMCSentry
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
   - type: ItemMapper
     mapLayers:
       gun:
@@ -314,6 +316,7 @@
     contents:
     - id: RMCSentryMiniSPP
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
 
 - type: entity
   parent: RMCPVECaseSentry
@@ -326,10 +329,12 @@
       tags:
       - RMCSentryWeYa
       - RMCMagazineSentry
+      - RMCSentryLaptop
   - type: StorageFill
     contents:
     - id: RMCSentryMiniWeYa
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
   - type: ItemMapper
     mapLayers:
       gun:
