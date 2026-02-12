@@ -79,11 +79,17 @@ public sealed class GunIFFSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!ent.Comp.Enabled)
-            return;
-
         foreach (var faction in ent.Comp.Factions)
         {
+            if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            if (!ent.Comp.Enabled)
+                continue;
+
             if (IsInFaction(args.OtherEntity, faction))
             {
                 args.Cancelled = true;
@@ -232,6 +238,11 @@ public sealed class GunIFFSystem : EntitySystem
         else if (_container.TryGetOuterContainer(gun, Transform(gun), out var container))
         {
             owner = container.Owner;
+            var gunUserEvent = new GetIFFGunUserEvent();
+            RaiseLocalEvent(container.Owner, ref gunUserEvent);
+
+            if (gunUserEvent.GunUser != null)
+                owner = gunUserEvent.GunUser.Value;
         }
         else
         {
@@ -285,3 +296,6 @@ public sealed class GunIFFSystem : EntitySystem
         Dirty(uid, projectileIFFComponent);
     }
 }
+
+[ByRefEvent]
+public record struct GetIFFGunUserEvent(EntityUid? GunUser);

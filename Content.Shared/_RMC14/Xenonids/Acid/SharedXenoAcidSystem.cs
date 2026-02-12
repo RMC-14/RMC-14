@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
@@ -360,5 +359,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
-
+    /// <summary>
+    ///     Set the entity's corrodible status.
+    /// </summary>
+    /// <param name="entity">The entity whose corrodible state is being changed</param>
+    /// <param name="isCorrodible">The new corrodible value</param>
+    public void SetCorrodible(EntityUid entity, bool isCorrodible)
+    {
+        var corrodible = EnsureComp<CorrodibleComponent>(entity);
+        corrodible.IsCorrodible = isCorrodible;
+        Dirty(entity, corrodible);
+    }
 }

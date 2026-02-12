@@ -65,3 +65,11 @@ rmc-squad-info-MARSOCLeader = Marine Raider Team Leader
 rmc-squad-info-MARSOCOfficer = Marine Raider Platoon Leader
 
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
+
+rmc-squad-info-RCMPVESectionLead = Section Leader
+rmc-squad-info-RCMPVETeamLead = Team Leader
+rmc-squad-info-RCMPVETroopSergeant = Troop Sergeant
+rmc-squad-info-RCMPVETroopCommander = Troop Commander
+
+rmc-squad-info-RCMTeamLead = Team Leader
+rmc-squad-info-RCMLieutenant = Lieutenant
