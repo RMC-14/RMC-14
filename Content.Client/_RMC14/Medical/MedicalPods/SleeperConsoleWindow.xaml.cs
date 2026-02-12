@@ -162,7 +162,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             var nameLabel = new Label
             {
                 Text = name,
-                MinWidth = 120,
+                MinWidth = 120
             };
             row.AddChild(nameLabel);
 
