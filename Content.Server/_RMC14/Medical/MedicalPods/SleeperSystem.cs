@@ -168,10 +168,10 @@ public sealed class SleeperSystem : SharedSleeperSystem
         NetEntity? netOccupant = null;
         string? occupantName = null;
         var occupantState = SleeperOccupantMobState.None;
-        var health = 150f;
-        var maxHealth = 150f;
-        var minHealth = -50f;
-        var totalDamage = FixedPoint2.Zero;
+        var health = 0f;
+        var maxHealth = 0f;
+        var minHealth = 0f;
+        FixedPoint2 totalDamage = 0;
         var bruteLoss = 0f;
         var burnLoss = 0f;
         var toxinLoss = 0f;
@@ -182,9 +182,13 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var bloodPercent = 0f;
         var pulse = 0;
         var bodyTemp = 0f;
+        var temperatureSuitability = 0f;
         FixedPoint2 totalReagents = 0;
 
-        if (occupant != null && TryComp<DamageableComponent>(occupant, out var damageable))
+        if (occupant == null)
+            return;
+
+        if (TryComp<DamageableComponent>(occupant, out var damageable))
         {
             netOccupant = GetNetEntity(occupant.Value);
             occupantName = Identity.Name(occupant.Value, EntityManager);
@@ -202,7 +206,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
             {
                 maxHealth = (float) critThreshold;
-                minHealth = (float) (critThreshold - deadThreshold);
+                minHealth = (float) deadThreshold;
                 health = (float) (critThreshold - totalDamage);
             }
 
@@ -213,8 +217,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             geneticLoss = damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup).Float();
         }
 
-        if (occupant != null &&
-            TryComp<BloodstreamComponent>(occupant, out var blood) &&
+        if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
             blood.BloodSolution != null &&
             _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
         {
@@ -224,17 +227,41 @@ public sealed class SleeperSystem : SharedSleeperSystem
             bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
 
             pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
-            _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
+        }
+
+        if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var currentTemperature))
+        {
+            // TODO RMC14 RMCTemperatureSystem => put these in RMCTemperatureComponent
+            var coldLevel1 = 260.15f;
+            var coldLevel2 = 240f;
+            var coldLevel3 = 120f;
+
+            var heatLevel1 = 373.15f;
+            var heatLevel2 = 400f;
+            var heatLevel3 = 800f;
+
+            bodyTemp = currentTemperature;
+
+            if (bodyTemp < coldLevel3)
+                temperatureSuitability = -3;
+            else if (bodyTemp < coldLevel2)
+                temperatureSuitability = -2;
+            else if (bodyTemp < coldLevel1)
+                temperatureSuitability = -1;
+            else if (bodyTemp > heatLevel3)
+                temperatureSuitability = 3;
+            else if (bodyTemp > heatLevel2)
+                temperatureSuitability = 2;
+            else if (bodyTemp > heatLevel1)
+                temperatureSuitability = 1;
+            else
+                temperatureSuitability = 0;
         }
 
         // Cache chemical solution to avoid repeated lookups in the loop
-        Solution? cachedChemSol = null;
-        if (occupant != null)
-        {
-            _solution.TryGetSolution(occupant.Value, "chemicals", out _, out cachedChemSol);
-            if (cachedChemSol != null)
-                totalReagents = cachedChemSol.Volume;
-        }
+        _solution.TryGetSolution(occupant.Value, "chemicals", out _, out var cachedChemSol);
+        if (cachedChemSol != null)
+            totalReagents = cachedChemSol.Volume;
 
         // Build emergency chem lookup for O(1) checks
         _emergencyChemLookup.Clear();
@@ -284,6 +311,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             bloodPercent,
             pulse,
             bodyTemp,
+            temperatureSuitability,
             sleeper.IsFiltering,
             totalReagents,
             sleeper.DialysisStartedReagentVolume,

@@ -23,6 +23,7 @@ public sealed class SleeperBuiState(
     float bloodPercent,
     int pulse,
     float bodyTemperature,
+    float temperatureSuitability,
     bool filtering,
     FixedPoint2 totalReagents,
     FixedPoint2 reagentsWhenStarted,
@@ -49,6 +50,7 @@ public sealed class SleeperBuiState(
     public readonly float BloodPercent = bloodPercent;
     public readonly int Pulse = pulse;
     public readonly float BodyTemperature = bodyTemperature;
+    public readonly float TemperatureSuitability = temperatureSuitability;
     public readonly bool Filtering = filtering;
     public readonly FixedPoint2 TotalReagents = totalReagents;
     public readonly FixedPoint2 ReagentsWhenStarted = reagentsWhenStarted;
