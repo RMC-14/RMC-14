@@ -56,6 +56,9 @@ public sealed partial class VehicleTurretComponent : Component
     public bool ShowOverlay = false;
 
     [DataField, AutoNetworkedField]
+    public bool OffsetRotatesWithTurret = false;
+
+    [DataField, AutoNetworkedField]
     public Vector2 PixelOffset = Vector2.Zero;
 
     [DataField, AutoNetworkedField]

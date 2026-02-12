@@ -188,10 +188,6 @@
     },
     {
       "name": "treads_0",
-      "directions": 4
-    },
-    {
-      "name": "treads_0",
       "directions": 4,
       "delays": [
         [
@@ -218,6 +214,36 @@
     },
     {
       "name": "treads_1",
+      "directions": 4
+    },
+    {
+      "name": "wheels_0",
+      "directions": 4,
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ],
+        [
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "wheels_1",
       "directions": 4
     },
     {

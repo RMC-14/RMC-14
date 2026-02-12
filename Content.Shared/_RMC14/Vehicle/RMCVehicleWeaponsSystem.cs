@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Shared.Movement.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -30,6 +31,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly RMCVehicleViewToggleSystem _viewToggle = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
 
     public override void Initialize()
     {
@@ -87,6 +89,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             _viewToggle.EnableViewToggle(args.Buckle.Owner, vehicleUid, ent.Owner, insideTarget: null, isOutside: true);
         }
 
+        UpdateArtilleryView(args.Buckle.Owner, vehicleUid);
+
         _ui.OpenUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons);
     }
@@ -117,6 +121,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
         _ui.CloseUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
+        UpdateArtilleryView(args.Buckle.Owner, vehicleUid, removeOnly: true);
 
         if (TryComp(args.Buckle.Owner, out EyeComponent? eye) && eye.Target == vehicleUid)
             _eye.SetTarget(args.Buckle.Owner, null, eye);
@@ -333,6 +338,24 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         if (TryGetOperatorSeat(weapons, out var seat))
             UpdateWeaponsUi(seat, args.Vehicle, weapons, hardpoints, itemSlots);
+
+        if (weapons.Operator != null)
+            UpdateArtilleryView(weapons.Operator.Value, args.Vehicle);
+    }
+
+    private void UpdateArtilleryView(EntityUid user, EntityUid vehicle, bool removeOnly = false)
+    {
+        if (!removeOnly && TryComp(vehicle, out RMCVehicleArtilleryViewComponent? artillery) && artillery.PvsScale > 0f)
+        {
+            var view = EnsureComp<RMCVehicleArtilleryViewUserComponent>(user);
+            view.PvsScale = artillery.PvsScale;
+            Dirty(user, view);
+            _eyeSystem.UpdatePvsScale(user);
+            return;
+        }
+
+        if (RemCompDeferred<RMCVehicleArtilleryViewUserComponent>(user))
+            _eyeSystem.UpdatePvsScale(user);
     }
 
     private bool IsSelectedWeaponInstalled(EntityUid vehicle, EntityUid selected, RMCHardpointSlotsComponent hardpoints, ItemSlotsComponent itemSlots)
@@ -466,7 +489,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf = operatorUid != null && slotOperator == operatorUid.Value;
             }
 
-            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value) && HasComp<GunComponent>(item.Value);
+            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value);
             if (selectable && hasOperator && !operatorIsSelf)
                 selectable = false;
 
@@ -587,7 +610,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf = operatorUid != null && slotOperator == operatorUid.Value;
             }
 
-            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value) && HasComp<GunComponent>(item.Value);
+            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value);
             if (selectable && hasOperator && !operatorIsSelf)
                 selectable = false;
 

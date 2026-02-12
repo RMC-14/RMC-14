@@ -11,6 +11,58 @@
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTurret
+  name: tank turret
+  description: A tank turret hardpoint.
+  components:
+  - type: Sprite
+    state: ltb_cannon
+  - type: RMCHardpointItem
+    hardpointType: Turret
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointTurret
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 60
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: tank_turret_0
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: RMCHardpointSlots
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      required: false
+      insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointCannon
+    - id: turret-launcher
+      hardpointType: Launcher
+      required: false
+      insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointLauncher
+
+- type: entity
+  parent: RMCVehicleTankTurret
+  id: RMCVehicleTankMarineTurret
+  name: marine tank turret
+  description: A marine tank turret hardpoint.
+  components:
+  - type: VehicleTurret
+    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    overlayState: tank_turret_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
   id: RMCVehicleTankTreads
   name: tank treads
   description: Heavy duty tank treads.
@@ -49,9 +101,9 @@
     state: ballistic_armor
   - type: RMCHardpointItem
     hardpointType: Armor
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointArmor
+  - type: RMCVehicleArmorHardpoint
+    modifierSets:
+    - RMCVehicleArmorBallistic
   - type: RMCHardpointVisual
     vehicleState: ballistic_armor_0
 
@@ -65,9 +117,8 @@
     state: concussive_armor
   - type: RMCHardpointItem
     hardpointType: Armor
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointArmor
+  - type: RMCVehicleArmorHardpoint
+    explosionCoefficient: 0.5
   - type: RMCHardpointVisual
     vehicleState: concussive_armor_0
 
@@ -81,9 +132,9 @@
     state: caustic_armor
   - type: RMCHardpointItem
     hardpointType: Armor
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointArmor
+  - type: RMCVehicleArmorHardpoint
+    modifierSets:
+    - RMCVehicleArmorCaustic
   - type: RMCHardpointVisual
     vehicleState: caustic_armor_0
 
@@ -97,9 +148,10 @@
     state: paladin_armor
   - type: RMCHardpointItem
     hardpointType: Armor
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointArmor
+  - type: RMCVehicleArmorHardpoint
+    modifierSets:
+    - RMCVehicleArmorPaladin
+    explosionCoefficient: 0.5
   - type: RMCHardpointVisual
     vehicleState: paladin_armor_0
 
@@ -113,9 +165,6 @@
     state: snowplow
   - type: RMCHardpointItem
     hardpointType: Armor
-  - type: Tag
-    tags:
-    - RMCVehicleHardpointArmor
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
 
@@ -128,12 +177,66 @@
   - type: Sprite
     state: ltb_cannon
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Cannon
   - type: Tag
     tags:
-    - RMCVehicleHardpointPrimary
+    - RMCVehicleHardpointCannon
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,30"
+    pixelOffsetEast: "40,0"
+    pixelOffsetSouth: "0,-50"
+    pixelOffsetWest: "-40,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: ltb_cannon_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 0.9
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeLTBCannon
+    capacity: 4
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 4
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxLTBCannon
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    rotateDirectionalOffsets: true
+    offsetNorth: "0,-2"
+    offsetEast: "0,-1.8"
+    offsetSouth: "0,-2"
+    offsetWest: "0,-2"
+    useAimDirection: true
+    muzzleOffset: "0,0"
+
   - type: RMCHardpointVisual
     vehicleState: ltb_cannon_0
+
+- type: entity
+  parent: RMCVehicleTankLTBCannon
+  id: RMCVehicleTankMarineLTBCannon
+  name: marine LTB cannon
+  description: A marine light tank cannon hardpoint.
+  components:
+  - type: VehicleTurret
+    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    overlayState: ltb_cannon_0
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -144,10 +247,51 @@
   - type: Sprite
     state: ltaaap_minigun
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Cannon
   - type: Tag
     tags:
-    - RMCVehicleHardpointPrimary
+    - RMCVehicleHardpointCannon
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: ltaaap_minigun_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 12
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMCartridge10x20mmAP
+    capacity: 100
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 100
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 140
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxLTAA
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: ltaaap_minigun_0
 
@@ -160,10 +304,46 @@
   - type: Sprite
     state: ace_autocannon
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Cannon
   - type: Tag
     tags:
-    - RMCVehicleHardpointPrimary
+    - RMCVehicleHardpointCannon
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: ace_autocannon_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 4
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeAceAutocannon
+    capacity: 10
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 10
+    maxStoredMagazines: 3
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxAceAutocannon
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: ace_autocannon_0
 
@@ -176,10 +356,55 @@
   - type: Sprite
     state: drgn_flamer
   - type: RMCHardpointItem
-    hardpointType: Primary
+    hardpointType: Cannon
   - type: Tag
     tags:
-    - RMCVehicleHardpointPrimary
+    - RMCVehicleHardpointCannon
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: drgn_flamer_0
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,25"
+    pixelOffsetEast: "40,0"
+    pixelOffsetSouth: "0,-40"
+    pixelOffsetWest: "-40,0"
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 1.2
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
+  - type: ShootAtFixedPoint
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeDragonFlame
+    capacity: 100
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 100
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxDragonFlameTank
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: drgn_flamer_0
 
@@ -192,10 +417,55 @@
   - type: Sprite
     state: flamer
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: Launcher
   - type: Tag
     tags:
-    - RMCVehicleHardpointSecondary
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: flamer_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 1.0
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 4
+    accuracyMultiplierUnwielded: 4
+  - type: ShootAtFixedPoint
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeTankFlamer
+    capacity: 60
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 60
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxDragonFlameTank
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: flamer_0
 
@@ -208,10 +478,55 @@
   - type: Sprite
     state: glauncher
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: Launcher
   - type: Tag
     tags:
-    - RMCVehicleHardpointSecondary
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: glauncher_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.7
+    projectileSpeed: 18
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    cameraRecoilScalar: 0
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: CMGrenadeHighExplosive
+    capacity: 4
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 4
+    maxStoredMagazines: 3
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: glauncher_0
 
@@ -224,10 +539,56 @@
   - type: Sprite
     state: tow_launcher
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: Launcher
   - type: Tag
     tags:
-    - RMCVehicleHardpointSecondary
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: towlauncher_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.5
+    projectileSpeed: 18
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
+    cameraRecoilScalar: 0
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCRocket84mmAntiArmor
+    capacity: 1
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 1
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxRocketLauncher
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: towlauncher_0
 
@@ -240,18 +601,128 @@
   - type: Sprite
     state: m56_cupola
   - type: RMCHardpointItem
-    hardpointType: Secondary
+    hardpointType: Launcher
   - type: Tag
     tags:
-    - RMCVehicleHardpointSecondary
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: m56cupola_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 6
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeSentry10x50mm
+    capacity: 100
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 100
+    maxStoredMagazines: 3
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxCupola
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
+  - type: RMCHardpointVisual
+    vehicleState: m56cupola_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankRERE700
+  name: RE-RE700 cupola
+  description: A dual-barrel cupola-mounted weapon hardpoint with integrated IFF.
+  components:
+  - type: Sprite
+    state: m56_cupola
+  - type: RMCHardpointItem
+    hardpointType: Launcher
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: m56cupola_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 9
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeSentry10x50mm
+    capacity: 100
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 100
+    maxStoredMagazines: 3
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxCupola
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: m56cupola_0
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
   id: RMCVehicleTankWarningArray
-  name: warning array
-  description: A warning array support attachment for a tank.
+  name: integrated weapons sensor array
+  description: An integrated sensor array that improves accuracy and fire rate of onboard weapons.
   components:
   - type: Sprite
     state: warray
@@ -260,6 +731,9 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
+  - type: RMCVehicleWeaponSupportAttachment
+    accuracyMultiplier: 1.2
+    fireRateMultiplier: 1.15
   - type: RMCHardpointVisual
     vehicleState: warray_0
 
@@ -276,14 +750,16 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
+  - type: RMCVehicleSpeedModifierAttachment
+    speedMultiplier: 1.2
   - type: RMCHardpointVisual
     vehicleState: odrive_enhancer_0
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
   id: RMCVehicleTankRocketLauncher
-  name: rocket launcher
-  description: A rocket launcher support attachment for a tank.
+  name: smoke launcher
+  description: A smoke launcher support attachment for a tank.
   components:
   - type: Sprite
     state: slauncher_0
@@ -292,8 +768,103 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
+  - type: VehicleTurret
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.6
+    projectileSpeed: 18
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    cameraRecoilScalar: 0
+  - type: ShootAtFixedPoint
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMC40MMGrenadeM74AGMSVehicle
+    capacity: 6
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 6
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 360
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: slauncher_0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankFlareModule
+  name: flare module
+  description: A flare launcher support attachment for a tank.
+  components:
+  - type: Sprite
+    state: slauncher_1
+  - type: RMCHardpointItem
+    hardpointType: Support
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointSupportAttachment
+  - type: VehicleTurret
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.5
+    projectileSpeed: 20
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+    cameraRecoilScalar: 0
+  - type: ShootAtFixedPoint
+  - type: BallisticAmmoProvider
+    cycleable: false
+    capacity: 8
+    whitelist:
+      tags:
+      - Flare
+      - RMCFlare
+      - RMCFlareCAS
+    proto: CMFlare
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 8
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 360
+  - type: RefillableByBulletBox
+    bulletType: RMCFlarePackAmmo
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetEast: "0,0.2"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
+  - type: RMCHardpointVisual
+    vehicleState: slauncher_1
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -308,5 +879,7 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
+  - type: RMCVehicleArtilleryViewAttachment
+    pvsScale: 0.35
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0

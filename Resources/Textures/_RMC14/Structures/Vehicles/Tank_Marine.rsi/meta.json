@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 128,
+    "y": 128
+  },
+  "states": [
+    {
+      "name": "tank_base",
+      "directions": 4
+    },
+    {
+      "name": "tank_turret_0",
+      "directions": 4
+    },
+    {
+      "name": "ltb_cannon_0",
+      "directions": 4
+    },
+    {
+      "name": "loaded_mg",
+      "directions": 4
+    },
+    {
+      "name": "warray",
+      "directions": 4
+    },
+    {
+      "name": "treads_0",
+      "directions": 4
+    },
+    {
+      "name": "treads_1",
+      "directions": 4
+    },
+    {
+      "name": "wheels_0",
+      "directions": 4
+    },
+    {
+      "name": "wheels_1",
+      "directions": 4
+    }
+  ]
+}

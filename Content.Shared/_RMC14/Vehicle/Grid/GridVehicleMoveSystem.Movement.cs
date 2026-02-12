@@ -103,6 +103,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (TryComp<RMCVehicleOverchargeComponent>(uid, out var overcharge) && _timing.CurTime < overcharge.ActiveUntil)
             maxSpeed *= overcharge.SpeedMultiplier;
+        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+            maxSpeed *= speedMod.SpeedMultiplier;
 
         var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
         var toTarget = targetCenter - mover.Position;
@@ -218,6 +220,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         {
             maxSpeed *= overcharge.SpeedMultiplier;
             maxReverseSpeed *= overcharge.SpeedMultiplier;
+        }
+        if (TryComp<RMCVehicleSpeedModifierComponent>(uid, out var speedMod))
+        {
+            maxSpeed *= speedMod.SpeedMultiplier;
+            maxReverseSpeed *= speedMod.SpeedMultiplier;
         }
 
         var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);

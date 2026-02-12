@@ -13,6 +13,9 @@ public sealed partial class GunMuzzleOffsetComponent : Component
     public bool UseDirectionalOffsets = false;
 
     [DataField, AutoNetworkedField]
+    public bool RotateDirectionalOffsets = false;
+
+    [DataField, AutoNetworkedField]
     public Vector2 OffsetNorth = Vector2.Zero;
 
     [DataField, AutoNetworkedField]

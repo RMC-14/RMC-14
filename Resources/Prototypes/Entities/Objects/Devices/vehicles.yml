@@ -1480,7 +1480,7 @@
       insertDelay: 2.5
       required: false
     - id: primary
-      hardpointType: Primary
+      hardpointType: Turret
       visualLayer: primary
       insertDelay: 3.0
       required: false
@@ -1513,3 +1513,153 @@
     heal: 250
     fuelUsed: 8
   - type: Appearance
+
+- type: entity
+  id: RMCVehicleTankMarine
+  name: marine tank
+  description: A heavy armored tank built for battlefield dominance.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: Clickable
+  - type: GridVehicleMover
+    maxSpeed: 6
+    acceleration: 3
+    deceleration: 8
+    pushCooldown: 2
+    xenoBlockMinimumSize: Immobile
+    xenoMoveMinimumSize: Immobile
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.3
+    duration: 3
+    cooldown: 20
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSoundCooldown: 0.5
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+  - type: RMCVehicleSpotlight
+    radius: 8
+    energy: 3
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1.2,-1.6,1.2,1.6
+        density: 1500
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1.2,-1.6,1.2,1.6
+        density: 1500
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    layers:
+    - map: [ base ]
+      state: tank_base
+    - map: [ primary ]
+      state: tank_turret_0
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 3
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface
+  - type: RMCVehicleWeapons
+  - type: RMCVehicleHardpointVisuals
+  - type: InputMover
+  - type: ItemSlots
+    slots:
+      primary:
+        startingItem: RMCVehicleTankMarineTurret
+        whitelist:
+          tags:
+          - RMCVehicleHardpointTurret
+  - type: RMCHardpointSlots
+    slots:
+    - id: primary
+      hardpointType: Turret
+      visualLayer: primary
+      insertDelay: 3.0
+      required: false
+    - id: secondary
+      hardpointType: Secondary
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: wheel-1
+      hardpointType: Wheel
+      insertDelay: 2.0
+    - id: wheel-2
+      hardpointType: Wheel
+      insertDelay: 2.0
+  - type: RMCVehicleWheelSlots
+    slotCount: 2
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 600
+    repairFuelCost: 20
+    bypassEntryOnZero: true
+    repairTimePerIntegrity: 0.04
+    repairTimeMax: 12
+  - type: RMCRepairable
+    delay: 10
+    heal: 250
+    fuelUsed: 8
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: -1,-0.1
+      radius: 1
+      interiorCoords: 3.56,-1.42
+    - offset: 1,-0.1
+      radius: 1
+      interiorCoords: 3.56, -0.42

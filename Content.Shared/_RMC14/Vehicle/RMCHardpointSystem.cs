@@ -24,8 +24,13 @@ using Content.Shared.Examine;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Weapons.Ranged.Systems;
+using Content.Shared.Damage.Components;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Explosion.Components;
 using Robust.Shared.Utility;
 using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Prototypes;
+using Content.Shared.FixedPoint;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -49,6 +54,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedGunSystem _guns = default!;
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -121,6 +127,9 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (TryComp(args.Entity, out GunComponent? gun))
             _guns.RefreshModifiers((args.Entity, gun));
 
+        ApplyArmorHardpointModifiers(ent.Owner, args.Entity, adding: true);
+        RefreshSupportModifiers(ent.Owner);
+
         RefreshCanRun(ent.Owner);
         UpdateHardpointUi(ent.Owner, ent.Comp);
         UpdateContainingVehicleUi(ent.Owner);
@@ -132,6 +141,9 @@ public sealed class RMCHardpointSystem : EntitySystem
     {
         if (!TryGetSlot(ent.Comp, args.Container.ID, out _))
             return;
+
+        ApplyArmorHardpointModifiers(ent.Owner, args.Entity, adding: false);
+        RefreshSupportModifiers(ent.Owner);
 
         var isAttachment = HasComp<VehicleTurretAttachmentComponent>(args.Entity);
         if (isAttachment)
@@ -145,6 +157,215 @@ public sealed class RMCHardpointSystem : EntitySystem
         UpdateContainingVehicleUi(ent.Owner);
         RaiseHardpointSlotsChanged(ent.Owner);
         RaiseVehicleSlotsChanged(ent.Owner);
+    }
+
+    private void RefreshSupportModifiers(EntityUid owner)
+    {
+        var vehicle = owner;
+        if (!HasComp<VehicleComponent>(vehicle) && !TryGetContainingVehicleFrame(owner, out vehicle))
+            return;
+
+        if (!TryComp(vehicle, out RMCHardpointSlotsComponent? hardpoints) ||
+            !TryComp(vehicle, out ItemSlotsComponent? itemSlots))
+        {
+            return;
+        }
+
+        if (_net.IsClient)
+        {
+            RefreshVehicleGunModifiers(vehicle, hardpoints, itemSlots);
+            return;
+        }
+
+        var accuracyMult = FixedPoint2.New(1);
+        var fireRateMult = 1f;
+        var speedMult = 1f;
+        var viewScale = 0f;
+        var hasWeaponMods = false;
+        var hasSpeedMods = false;
+        var hasViewMods = false;
+
+        void Accumulate(EntityUid item)
+        {
+            if (TryComp(item, out RMCVehicleWeaponSupportAttachmentComponent? weaponMod))
+            {
+                accuracyMult *= weaponMod.AccuracyMultiplier;
+                fireRateMult *= weaponMod.FireRateMultiplier;
+                hasWeaponMods = true;
+            }
+
+            if (TryComp(item, out RMCVehicleSpeedModifierAttachmentComponent? speedMod))
+            {
+                speedMult *= speedMod.SpeedMultiplier;
+                hasSpeedMods = true;
+            }
+
+            if (TryComp(item, out RMCVehicleArtilleryViewAttachmentComponent? viewMod))
+            {
+                viewScale = Math.Max(viewScale, viewMod.PvsScale);
+                hasViewMods = true;
+            }
+        }
+
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            var item = itemSlot.Item!.Value;
+            Accumulate(item);
+
+            if (!TryComp(item, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(item, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                if (!_itemSlots.TryGetSlot(item, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
+                    !turretItemSlot.HasItem)
+                {
+                    continue;
+                }
+
+                Accumulate(turretItemSlot.Item!.Value);
+            }
+        }
+
+        if (hasWeaponMods)
+        {
+            var mods = EnsureComp<RMCVehicleWeaponSupportModifierComponent>(vehicle);
+            mods.AccuracyMultiplier = accuracyMult;
+            mods.FireRateMultiplier = fireRateMult;
+            Dirty(vehicle, mods);
+        }
+        else
+        {
+            RemCompDeferred<RMCVehicleWeaponSupportModifierComponent>(vehicle);
+        }
+
+        if (hasSpeedMods)
+        {
+            var speed = EnsureComp<RMCVehicleSpeedModifierComponent>(vehicle);
+            speed.SpeedMultiplier = speedMult;
+            Dirty(vehicle, speed);
+        }
+        else
+        {
+            RemCompDeferred<RMCVehicleSpeedModifierComponent>(vehicle);
+        }
+
+        if (hasViewMods && viewScale > 0f)
+        {
+            var view = EnsureComp<RMCVehicleArtilleryViewComponent>(vehicle);
+            view.PvsScale = viewScale;
+            Dirty(vehicle, view);
+        }
+        else
+        {
+            RemCompDeferred<RMCVehicleArtilleryViewComponent>(vehicle);
+        }
+
+        RefreshVehicleGunModifiers(vehicle, hardpoints, itemSlots);
+    }
+
+    private void RefreshVehicleGunModifiers(EntityUid vehicle, RMCHardpointSlotsComponent hardpoints, ItemSlotsComponent itemSlots)
+    {
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            RefreshGunModifiers(itemSlot.Item!.Value);
+
+            if (!TryComp(itemSlot.Item.Value, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(itemSlot.Item.Value, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                if (_itemSlots.TryGetSlot(itemSlot.Item.Value, turretSlot.Id, out var turretItemSlot, turretItemSlots) &&
+                    turretItemSlot.HasItem)
+                {
+                    RefreshGunModifiers(turretItemSlot.Item!.Value);
+                }
+            }
+        }
+    }
+
+    private void RefreshGunModifiers(EntityUid item)
+    {
+        if (TryComp(item, out GunComponent? gun))
+            _guns.RefreshModifiers((item, gun));
+    }
+
+    private void ApplyArmorHardpointModifiers(EntityUid vehicle, EntityUid hardpointItem, bool adding)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(hardpointItem, out RMCVehicleArmorHardpointComponent? armor))
+            return;
+
+        if (armor.ModifierSets.Count > 0)
+        {
+            var buff = EnsureComp<DamageProtectionBuffComponent>(vehicle);
+
+            foreach (var setId in armor.ModifierSets)
+            {
+                if (!_prototypeManager.TryIndex(setId, out var modifier))
+                    continue;
+
+                if (adding)
+                {
+                    buff.Modifiers[setId] = modifier;
+                }
+                else
+                {
+                    buff.Modifiers.Remove(setId);
+                }
+            }
+
+            if (!adding && buff.Modifiers.Count == 0)
+            {
+                RemComp<DamageProtectionBuffComponent>(vehicle);
+            }
+            else
+            {
+                Dirty(vehicle, buff);
+            }
+        }
+
+        if (armor.ExplosionCoefficient != null)
+        {
+            if (adding)
+            {
+                var resistance = EnsureComp<ExplosionResistanceComponent>(vehicle);
+                resistance.DamageCoefficient = armor.ExplosionCoefficient.Value;
+                resistance.Worn = false;
+                Dirty(vehicle, resistance);
+            }
+            else if (TryComp(vehicle, out ExplosionResistanceComponent? resistance) &&
+                     MathF.Abs(resistance.DamageCoefficient - armor.ExplosionCoefficient.Value) < 0.0001f)
+            {
+                RemComp<ExplosionResistanceComponent>(vehicle);
+            }
+        }
     }
 
     private void RaiseHardpointSlotsChanged(EntityUid vehicle)

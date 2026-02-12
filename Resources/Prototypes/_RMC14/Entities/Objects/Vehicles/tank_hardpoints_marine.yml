@@ -1,0 +1,26 @@
+- type: entity
+  parent: RMCVehicleTankTurret
+  id: RMCVehicleTankMarineTurret
+  name: marine tank turret
+  description: A marine tank turret hardpoint.
+  components:
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: RMCVehicleTankMarineLTBCannon
+        whitelist:
+          tags:
+          - RMCVehicleHardpointCannon
+  - type: VehicleTurret
+    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    overlayState: tank_turret_0
+
+- type: entity
+  parent: RMCVehicleTankLTBCannon
+  id: RMCVehicleTankMarineLTBCannon
+  name: marine LTB cannon
+  description: A marine light tank cannon hardpoint.
+  components:
+  - type: VehicleTurret
+    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    overlayState: ltb_cannon_0

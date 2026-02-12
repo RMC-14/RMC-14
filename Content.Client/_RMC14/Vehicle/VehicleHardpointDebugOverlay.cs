@@ -17,6 +17,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
 
+    private const float PixelsPerMeter = 32f;
+
     public bool Enabled { get; set; }
 
     private readonly IEntityManager _ents;
@@ -89,6 +91,23 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             if (rightRadius > 0f)
                 handle.DrawCircle(rightPos, 0.08f, rightColor);
             handle.DrawLine(turretBasePos, basePos, new Color(0.4f, 0.9f, 1f, 0.5f));
+        }
+
+        var turretQuery = _ents.EntityQueryEnumerator<VehicleTurretComponent>();
+        while (turretQuery.MoveNext(out var uid, out var turret))
+        {
+            if (!TryGetTurretOverlayPositions(uid, turret, args.MapId, out var basePos, out var anchorPos, out var turretPos))
+                continue;
+
+            handle.DrawCircle(basePos, 0.06f, new Color(0.7f, 0.7f, 0.7f, 0.8f));
+            handle.DrawLine(basePos, anchorPos, new Color(0.2f, 0.8f, 0.95f, 0.7f));
+            handle.DrawCircle(anchorPos, 0.07f, new Color(0.2f, 0.8f, 0.95f, 0.9f));
+
+            if (anchorPos != turretPos)
+            {
+                handle.DrawLine(anchorPos, turretPos, new Color(1f, 0.7f, 0.2f, 0.8f));
+                handle.DrawCircle(turretPos, 0.08f, new Color(1f, 0.7f, 0.2f, 0.95f));
+            }
         }
     }
 
@@ -248,6 +267,119 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         return true;
     }
 
+    private bool TryGetTurretOverlayPositions(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        MapId mapId,
+        out Vector2 basePos,
+        out Vector2 anchorPos,
+        out Vector2 turretPos)
+    {
+        basePos = default;
+        anchorPos = default;
+        turretPos = default;
+
+        if (!TryGetVehicle(turretUid, out var vehicle))
+            return false;
+
+        var baseCoords = _transform.GetMoverCoordinates(vehicle);
+        var baseMap = _transform.ToMapCoordinates(baseCoords);
+        if (baseMap.MapId != mapId)
+            return false;
+
+        TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
+
+        var vehicleRot = _transform.GetWorldRotation(vehicle);
+        var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
+        var anchorFacingAngle = GetOffsetFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle);
+        var anchorLocalOffset = (-vehicleRot).RotateVec(GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter);
+        var anchorCoords = baseCoords.Offset(anchorLocalOffset);
+
+        basePos = baseMap.Position;
+        anchorPos = _transform.ToMapCoordinates(anchorCoords).Position;
+
+        if (anchorUid == turretUid)
+        {
+            turretPos = anchorPos;
+            return true;
+        }
+
+        var localRot = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation : Angle.Zero;
+        var turretFacingAngle = GetOffsetFacing(turret, anchorTurret, vehicleRot, baseFacingAngle);
+        var worldOffset = GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
+        Vector2 relativeAnchorOffset;
+        Vector2 turretLocalOffset;
+
+        if (turret.OffsetRotatesWithTurret)
+        {
+            if (turret.UseDirectionalOffsets)
+            {
+                var dir = GetDirectionalDir(turretFacingAngle);
+                var snappedAngle = GetDirectionalAngle(dir);
+                relativeAnchorOffset = (-snappedAngle).RotateVec(worldOffset);
+                turretLocalOffset = (localRot - snappedAngle).RotateVec(worldOffset);
+            }
+            else
+            {
+                relativeAnchorOffset = worldOffset;
+                turretLocalOffset = localRot.RotateVec(relativeAnchorOffset);
+            }
+        }
+        else
+        {
+            turretLocalOffset = (-vehicleRot).RotateVec(worldOffset);
+            relativeAnchorOffset = (-localRot).RotateVec(turretLocalOffset);
+        }
+        var turretCoords = new EntityCoordinates(anchorUid, relativeAnchorOffset);
+        var turretMap = _transform.ToMapCoordinates(turretCoords);
+        if (turretMap.MapId != mapId)
+            return false;
+
+        turretPos = turretMap.Position;
+        return true;
+    }
+
+    private Vector2 GetPixelOffset(VehicleTurretComponent turret, Angle facing)
+    {
+        if (!turret.UseDirectionalOffsets)
+            return turret.PixelOffset;
+
+        var baseOffset = turret.PixelOffset;
+        var normalized = facing.Theta % MathHelper.TwoPi;
+        if (normalized < 0)
+            normalized += MathHelper.TwoPi;
+
+        var dir = GetDirectionalDir((float) normalized);
+        return baseOffset + GetDirectionalOffset(turret, dir);
+    }
+
+    private static Vector2 GetDirectionalOffset(VehicleTurretComponent turret, Direction dir)
+    {
+        return dir switch
+        {
+            Direction.South => turret.PixelOffsetSouth,
+            Direction.East => turret.PixelOffsetEast,
+            Direction.North => turret.PixelOffsetNorth,
+            Direction.West => turret.PixelOffsetWest,
+            _ => Vector2.Zero
+        };
+    }
+
+    private static Direction GetDirectionalDir(Angle facing)
+    {
+        return facing.GetCardinalDir();
+    }
+
+    private static Direction GetDirectionalDir(float normalized)
+    {
+        return new Angle(normalized).GetCardinalDir();
+    }
+
+    private static Angle GetDirectionalAngle(Direction dir)
+    {
+        return dir.ToAngle();
+    }
+
     private Vector2 GetTurretOffset(VehicleTurretMuzzleComponent muzzle, Angle turretRotation, bool useRight)
     {
         if (!muzzle.UseDirectionalOffsets)
@@ -307,6 +439,26 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         return rotation + angleOffset;
     }
 
+    private Angle GetVehicleFacingAngle(EntityUid vehicle, Angle vehicleRot)
+    {
+        if (_moverQ.TryComp(vehicle, out var mover) && mover.CurrentDirection != Vector2i.Zero)
+            return new Vector2(mover.CurrentDirection.X, mover.CurrentDirection.Y).ToWorldAngle();
+
+        return vehicleRot;
+    }
+
+    private Angle GetOffsetFacing(
+        VehicleTurretComponent turret,
+        VehicleTurretComponent anchorTurret,
+        Angle vehicleRot,
+        Angle baseFacingAngle)
+    {
+        if (!turret.OffsetRotatesWithTurret)
+            return baseFacingAngle;
+
+        return (vehicleRot + anchorTurret.WorldRotation).Reduced();
+    }
+
     private (Vector2 Offset, bool Rotate) GetOffset(
         GunMuzzleOffsetComponent muzzle,
         EntityUid baseUid,
@@ -325,7 +477,7 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             _ => muzzle.Offset,
         };
 
-        return (offset, false);
+        return (offset, muzzle.RotateDirectionalOffsets);
     }
 
     private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
@@ -334,5 +486,69 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             return mover.CurrentDirection.AsDirection();
 
         return baseRotation.GetCardinalDir();
+    }
+
+    private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)
+    {
+        vehicle = default;
+        var current = turretUid;
+
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            var owner = container.Owner;
+            if (_ents.HasComponent<VehicleComponent>(owner))
+            {
+                vehicle = owner;
+                return true;
+            }
+
+            current = owner;
+        }
+
+        return false;
+    }
+
+    private void TryGetAnchorTurret(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        out EntityUid anchorUid,
+        out VehicleTurretComponent anchorTurret)
+    {
+        anchorUid = turretUid;
+        anchorTurret = turret;
+
+        if (!_ents.HasComponent<VehicleTurretAttachmentComponent>(turretUid))
+            return;
+
+        if (!TryGetParentTurret(turretUid, out var parentUid, out var parentTurret))
+            return;
+
+        anchorUid = parentUid;
+        anchorTurret = parentTurret;
+    }
+
+    private bool TryGetParentTurret(
+        EntityUid turretUid,
+        out EntityUid parentUid,
+        out VehicleTurretComponent parentTurret)
+    {
+        parentUid = default;
+        parentTurret = default!;
+        var current = turretUid;
+
+        while (_container.TryGetContainingContainer((current, null), out var container))
+        {
+            var owner = container.Owner;
+            if (_turretQ.TryComp(owner, out var turret))
+            {
+                parentUid = owner;
+                parentTurret = turret;
+                return true;
+            }
+
+            current = owner;
+        }
+
+        return false;
     }
 }

@@ -85,7 +85,7 @@ public sealed class GunMuzzleOffsetSystem : EntitySystem
             _ => muzzle.Offset,
         };
 
-        return (offset, false);
+        return (offset, muzzle.RotateDirectionalOffsets);
     }
 
     private Direction GetBaseDirection(EntityUid baseUid, Angle baseRotation)
