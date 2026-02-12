@@ -9,7 +9,7 @@
   startingGear: RMCGearRoyalTeamlead
   icon: "RMCJobIconRoyalTeamlead"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-royal-officer
+  supervisors: cm-job-supervisors-royal-lieutenant
   spawnMenuRoleName: RCM Team Leader
   special:
   - !type:AddComponentSpecial
@@ -38,8 +38,20 @@
     - type: RMCPointing
     - type: CommandAccent
     - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon: 
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: rmc_teamleader
+    - type: RMCTrackable
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-teamlead
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_teamleader
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -70,7 +82,8 @@
       role: CMJobSquadLeader
       time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
-
+    squad: SquadRoyalMarines
+  
 - type: startingGear
   id: RMCGearRoyalTeamlead
   equipment:
@@ -84,7 +97,7 @@
     id: RMCIDRoyalMarinesTeamlead
     belt: RMCBeltHolsterPistolFilledL54
     back: RMCSatchelLightpackFilledRoyalTeamlead
-    pocket1: RMCPouchToolsSoc # TODO RMC14 I think there are like 3 different PRs adding the full version of this so fix that when one of those is merged
+    pocket1: RMCPouchToolsFilledRCM
     pocket2: RMCPouchMedkitFillRoyal
 
 - type: playTimeTracker

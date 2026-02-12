@@ -159,3 +159,21 @@ rmc-xeno-hedgehog-popup = This one's hide bristles with deadly spines. Let them 
 rmc-xeno-watcher-name = Watcher
 rmc-xeno-watcher-description = You lose your ability to hide, but gain enhanced vision. You can toggle between normal enhanced vision and greatly enhanced vision.
 rmc-xeno-watcher-popup = You are now a Watcher. You have enhanced vision but cannot hide.
+
+rmc-xeno-designer-name = Designer
+rmc-xeno-designer-description = You lose:
+    - Direct resin building
+    - Lose some plasma and health
+    You gain:
+    - A bit of speed and stronger pheromones
+    - Longer vision
+    - The ability to place up to 36 design nodes:
+        - Optimized nodes boost building speed by 50%
+        - Flexible nodes reduce plasma cost by 50%
+        - Construct nodes allow anyone to donate plasma to build weedbound resin walls or doors
+        - Drone evolutions create thick weedbound variants
+    - Can mark nodes as walls or doors
+    - Remotely upgrade resin
+    - Greater Resin Surge turns design nodes into weaker reflective walls
+    - Slightly stronger tackle
+rmc-xeno-designer-popup = You are hive's designer, go and expand the hive beyond its limit.
