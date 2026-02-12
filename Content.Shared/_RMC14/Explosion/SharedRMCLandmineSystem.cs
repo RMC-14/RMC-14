@@ -131,7 +131,7 @@ public abstract partial class SharedRMCLandmineSystem : EntitySystem
 
     private void OnPreventCollide(Entity<RMCLandmineComponent> ent, ref PreventCollideEvent args)
     {
-        if (!HasComp<XenoProjectileComponent>(args.OtherEntity) && !HasComp<MobStateComponent>(args.OtherEntity))
+        if (ent.Comp.Armed && !HasComp<XenoProjectileComponent>(args.OtherEntity) && !HasComp<MobStateComponent>(args.OtherEntity))
             args.Cancelled = true;
     }
 
