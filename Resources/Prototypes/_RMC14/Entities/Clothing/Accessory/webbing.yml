@@ -821,7 +821,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMPillCanisterDylovene
+    - id: CMMRE
     - id: CMEpinephrineAutoInjector
     - id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
     - id: RMCMedicAutoInjectorMeraBic15
