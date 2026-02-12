@@ -102,12 +102,19 @@ public sealed class XenoPlasmaSystem : EntitySystem
 
         if (self.Owner == target ||
             HasComp<XenoAttachedOvipositorComponent>(args.Target) ||
-            !TryComp(target, out XenoPlasmaComponent? otherXeno) ||
-            otherXeno.Plasma == otherXeno.MaxPlasma ||
-            !TryRemovePlasma((self, self), args.Cost + args.Amount))
+            !TryComp(target, out XenoPlasmaComponent? otherXeno))
         {
             return;
         }
+
+        if (otherXeno.Plasma == otherXeno.MaxPlasma)
+        {
+            _popup.PopupClient("That xeno already has max plasma!", args.Target.Value, self, PopupType.MediumCaution);
+            return;
+        }
+
+        if (!TryRemovePlasmaPopup((self, self), args.Cost + args.Amount, popupOn: args.Target.Value.ToCoordinates()))
+            return;
 
         args.Handled = true;
         RegenPlasma(target, args.Amount);

@@ -236,6 +236,8 @@
   name: Give Plasma (400) # TODO RMC14 proper plasma costs
   description: Remotely restores 75% of a single xenonid's max plasma.
   components:
+  - type: Action
+    useDelay: 12
   - type: TargetAction
     checkCanAccess: false
     range: -1
