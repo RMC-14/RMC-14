@@ -302,6 +302,11 @@
         box: CMGrenadeFragOld
         boxAmount: 3
         boxSlots: 3
+      - id: RMCBoxClaymoreMineFilled
+        name: M20 Claymore anti-personnel mine box
+        box: RMCExplosiveClaymoreMine
+        boxAmount: 5
+        boxSlots: 5
       - id: CMPacketGrenadeHighExplosiveFilled
         name: 30mm HEDP grenade packet
         box: CMGrenadeHighExplosive

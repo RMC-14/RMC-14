@@ -173,3 +173,23 @@
     contents:
     - id: RMCBoxClaymoreMineFilled
       amount: 2
+
+- type: entity
+  parent: RMCCrateExplosives
+  id: RMCCrateExplosivesSurplus
+  name: surplus explosives crate (claymore mine x5, 30mm HEDP x2, 30mm HIDP x2, M15 Frag x2, M12 Blast x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBoxClaymoreMineFilled
+      amount: 1
+    - id: CMGrenadeHighExplosive
+      amount: 2
+    - id: RMCGrenadeIncendiary
+      amount: 2
+    - id: CMGrenadeFragOld
+      amount: 2
+    - id: RMCGrenadeBlastM12
+      amount: 2
+    # - id: M40 MFHS Metal Foam Grenade
+    #   amount: 2
