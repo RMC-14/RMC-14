@@ -162,14 +162,15 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             var nameLabel = new Label
             {
                 Text = name,
-                MinWidth = 120
+                MinWidth = 120,
+                FontColorOverride = Color.White
             };
             row.AddChild(nameLabel);
 
             var amountBar = new ProgressBar
             {
                 HorizontalExpand = true,
-                MinHeight = 18,
+                MinHeight = 16,
                 Value = occupantAmount.Float(),
                 MaxValue = state.MaxChem.Float()
             };
