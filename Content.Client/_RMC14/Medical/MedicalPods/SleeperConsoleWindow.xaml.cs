@@ -114,18 +114,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             _ => Color.FromHex("#FF0000")
         };
 
-        // Damage bars
-        UpdateDamageBar(BruteBar, BruteBarText, state.BruteLoss);
-        UpdateDamageBar(BurnBar, BurnBarText, state.BurnLoss);
-        UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
-        UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
-
-        GeneticSection.Visible = state.GeneticLoss > 0;
-        if (state.GeneticLoss > 0)
-        {
-            UpdateDamageBar(GeneticBar, GeneticBarText, state.GeneticLoss);
-        }
-
         // Blood level
         BloodSection.Visible = state.HasBlood;
         if (state.HasBlood)
@@ -149,6 +137,18 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             };
         }
 
+        // Damage bars
+        UpdateDamageBar(BruteBar, BruteBarText, state.BruteLoss);
+        UpdateDamageBar(BurnBar, BurnBarText, state.BurnLoss);
+        UpdateDamageBar(ToxinBar, ToxinBarText, state.ToxinLoss);
+        UpdateDamageBar(OxygenBar, OxygenBarText, state.OxyLoss);
+
+        GeneticSection.Visible = state.GeneticLoss > 0;
+        if (state.GeneticLoss > 0)
+        {
+            UpdateDamageBar(GeneticBar, GeneticBarText, state.GeneticLoss);
+        }
+
         // Chemicals
         ChemicalsContainer.DisposeAllChildren();
         foreach (var (name, chemId, occupantAmount, injectable, overdosing, odWarning) in state.Chemicals)
@@ -163,7 +163,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             {
                 Text = name,
                 MinWidth = 120,
-                FontColorOverride = Color.White
             };
             row.AddChild(nameLabel);
 
@@ -178,8 +177,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             var amountLabel = new Label
             {
                 Text = $"{occupantAmount}/{state.MaxChem}u",
-                HorizontalAlignment = HAlignment.Center,
-                VerticalAlignment = VAlignment.Center
+                HorizontalAlignment = HAlignment.Right,
+                VerticalAlignment = VAlignment.Center,
+                FontColorOverride = Color.White
             };
             amountBar.AddChild(amountLabel);
 
@@ -213,7 +213,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
     private static void UpdateDamageBar(ProgressBar bar, Label label, float damage)
     {
         bar.Value = damage;
-        bar.MaxValue = 100;
+        bar.MaxValue = 150;
         label.Text = damage.ToString("F0");
 
         bar.Modulate = damage switch

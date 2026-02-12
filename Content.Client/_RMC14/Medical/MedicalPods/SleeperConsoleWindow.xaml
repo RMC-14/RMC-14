@@ -22,7 +22,7 @@
                 <cc:HSeparator Color="#4972A1" Margin="0 0 0 3" />
                 <BoxContainer Name="DialysisProgressContainer" Orientation="Vertical" Visible="False">
                     <ProgressBar Name="DialysisProgressBar" HorizontalExpand="True" MinValue="0" MaxValue="1" MinHeight="18">
-                        <Label Name="DialysisProgressLabel" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="DialysisProgressLabel" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <PanelContainer Name="DialysisStatusContainer" StyleClasses="AngleBorderRect" Visible="False">
@@ -47,7 +47,7 @@
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-health-label}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="HealthBar" HorizontalExpand="True" MinValue="-50" MaxValue="150" MinHeight="16">
-                        <Label Name="HealthBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="HealthBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
@@ -57,14 +57,14 @@
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-temperature}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="TemperatureBar" HorizontalExpand="True" MinValue="250" MaxValue="400" MinHeight="16">
-                        <Label Name="TemperatureBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="TemperatureBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Name="BloodSection" Orientation="Vertical" Margin="0 2 0 2" Visible="False">
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="100" Modulate="#5B88B0" />
                         <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                            <Label Name="BloodBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <Label Name="BloodBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                         </ProgressBar>
                     </BoxContainer>
                     <BoxContainer Orientation="Horizontal" Margin="0 2 0 0">
@@ -81,31 +81,31 @@
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-brute}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="BruteBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="BruteBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="BruteBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-burn}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="BurnBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="BurnBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="BurnBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-toxin}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="ToxinBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="ToxinBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="ToxinBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-oxygen}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="OxygenBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="OxygenBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="OxygenBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Name="GeneticSection" Orientation="Horizontal" Margin="0 2 0 2" Visible="False">
                     <Label Text="{Loc rmc-sleeper-genetic}" MinWidth="100" Modulate="#5B88B0" />
                     <ProgressBar Name="GeneticBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
-                        <Label Name="GeneticBarText" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        <Label Name="GeneticBarText" FontColorOverride="#ffffff" HorizontalAlignment="Right" VerticalAlignment="Center" />
                     </ProgressBar>
                 </BoxContainer>
             </BoxContainer>
