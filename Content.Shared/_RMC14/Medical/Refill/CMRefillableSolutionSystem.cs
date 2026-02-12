@@ -1,7 +1,6 @@
 using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Rules;
-using Content.Shared._RMC14.Vendors;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
