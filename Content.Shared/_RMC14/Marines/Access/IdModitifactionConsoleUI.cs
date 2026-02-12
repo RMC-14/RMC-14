@@ -48,3 +48,9 @@ public sealed class IdModificationConsoleJobChangeBuiMsg(ProtoId<AccessGroupProt
 
 [Serializable] [NetSerializable]
 public sealed class IdModificationConsoleTerminateConfirmBuiMsg : BoundUserInterfaceMessage;
+
+[Serializable] [NetSerializable]
+public sealed class IdModificationConsoleAssignSquadMsg(NetEntity? squad) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity? Squad = squad;
+}

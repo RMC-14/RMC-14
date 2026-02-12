@@ -52,3 +52,17 @@
     skills:
       all:
         RMCSkillEngineer: 2
+
+- type: entity
+  parent: RMCEngineerKit
+  id: RMCEngineerKitRCMPVEFilled
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCCableCoil30
+    - id: CMAPCElectronics
+      amount: 3
+    - id: RMCPowerCellAPC
+    - id: RMCPowerCellAPC
+    - id: RMCExplosivePlastic
