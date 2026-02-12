@@ -7,7 +7,7 @@ using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Speech.EntitySystems;
 using Content.Shared.Speech.Muting;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
@@ -32,12 +32,12 @@ public sealed partial class Focusing : RMCChemicalEffect
         var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
         var drunkSystem = args.EntityManager.System<SharedDrunkSystem>();
         var stutterSystem = args.EntityManager.System<SharedStutteringSystem>();
-        var statusEffects = args.EntityManager.System<StatusEffectsSystem>();
+        var statusEffects = args.EntityManager.System<SharedStatusEffectsSystem>();
 
         bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
         drunkSystem.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
         stutterSystem.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
-        statusEffects.TryRemoveTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * 2));
+        statusEffects.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2));
         // ReduceEyeBlur(PotencyPerSecond * 2) but BlurryVisionComponent is sealed so only healing the eyes will remove blur.
 
         if (!(ActualPotency >= 3))

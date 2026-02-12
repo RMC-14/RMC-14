@@ -164,6 +164,9 @@
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: upp_sl_a
 
+- type: Tag
+  id: RMCSquadSPP
+
 - type: entity
   parent: SquadBase
   id: SquadPMC
@@ -244,6 +247,43 @@
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: rmc_teamleader
+  - type: Tag
+    tags:
+    - RMCSquadRoyalMarines
+
+- type: Tag
+  id: RMCSquadRoyalMarines
+
+- type: entity # Duplicate entry for PVE to get unique icons + orange color palette
+  parent: SquadBase
+  id: SquadRoyalMarinesPVE
+  name: Gamma Troop
+  components:
+  - type: SquadTeam
+    color: "#AA740F"
+    background:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: empty
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TSE
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: Gamma Troop
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: rmc_troopleader_pve
+  - type: Tag
+    tags:
+    - RMCSquadRoyalMarinesPVE
+
+- type: Tag
+  id: RMCSquadRoyalMarinesPVE
 
 - type: entity
   parent: SquadBase

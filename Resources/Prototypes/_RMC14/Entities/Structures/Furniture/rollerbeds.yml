@@ -80,6 +80,9 @@
     fitIntoEntityStorage: true
   - type: RMCStrapNoDrawDepthChange
   - type: RMCRetargetBucklePull
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 5000
 
 - type: entity
   parent: CMRollerBed
@@ -112,6 +115,9 @@
   - type: Appearance
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 6000
 
 - type: entity
   parent: CMPortableSurgicalBed
@@ -202,6 +208,10 @@
     - CMRollerItem
   - type: ReceiverXenoClaws
     minimumClawStrength: ImpossiblySharp
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 5000
+      RMCPlastic: 5000
 
 - type: entity
   parent: RMCMedevacStretcher
@@ -212,7 +222,6 @@
     folded: true
   - type: Strap
     enabled: false
-# TODO RMC14 medevac stretcher
 
 # Hospital Bed
 

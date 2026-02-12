@@ -39,6 +39,9 @@ public sealed partial class NightVisionItemComponent : Component
     public bool BlockScopes;
 
     [DataField, AutoNetworkedField]
+    public NightVisionState DefaultState = NightVisionState.Full;
+
+    [DataField, AutoNetworkedField]
     public SoundSpecifier? SoundOn = new SoundPathSpecifier("/Audio/_RMC14/Handling/toggle_nv1.ogg");
 
     [DataField, AutoNetworkedField]
