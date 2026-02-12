@@ -16,6 +16,7 @@ rmc-squad-info-fireteam = [font size=16][bold]Fireteam {$fireteam}[/bold][/font]
 rmc-squad-info-tracking-selection = Tracking Selection
 rmc-squad-info-tracking-choose = Choose a new tracking target.
 rmc-squad-info-change-tracker = Change Tracker
+rmc-squad-info-none = none
 
 rmc-squad-info-CommandingOfficer = Commanding Officer
 rmc-squad-info-ExecutiveOfficer = Executive Officer
@@ -61,3 +62,11 @@ rmc-squad-info-InspectorTSEPA = TSEPA Inspector
 rmc-squad-info-SeniorConstableTSEPA = TSEPA Senior Constable
 
 rmc-squad-info-PrimaryLandingZone = Primary Landing Zone
+
+rmc-squad-info-RCMPVESectionLead = Section Leader
+rmc-squad-info-RCMPVETeamLead = Team Leader
+rmc-squad-info-RCMPVETroopSergeant = Troop Sergeant
+rmc-squad-info-RCMPVETroopCommander = Troop Commander
+
+rmc-squad-info-RCMTeamLead = Team Leader
+rmc-squad-info-RCMLieutenant = Lieutenant

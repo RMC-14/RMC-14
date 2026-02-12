@@ -1,0 +1,28 @@
+<controls:DropshipTerminalWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Dropship"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
+    Title="Dropship Terminal"
+    MinSize="400 200">
+    <PanelContainer>
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat BackgroundColor="#011905"
+                                   BorderColor="#02E74E" BorderThickness="2" />
+        </PanelContainer.PanelOverride>
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Margin="5">
+                <RichTextLabel Name="Header" Access="Public" />
+                <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Align="End">
+                    <controls:DropshipButton Name="SummonButton" Access="Public"
+                                             Margin="1" BackgroundColor="#004E25"
+                                             BorderColor="#02E74E" BorderThickness="1"
+                                             Text="Summon" Disabled="True" />
+                </BoxContainer>
+            </BoxContainer>
+            <cc:HSeparator Color="#02E74E" />
+            <BoxContainer Name="DropshipContainer" Access="Public" Orientation="Vertical"
+                          Margin="5" />
+        </BoxContainer>
+    </PanelContainer>
+</controls:DropshipTerminalWindow>
