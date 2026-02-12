@@ -1,18 +1,19 @@
 ﻿- type: entity
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
-  id: RMCWeaponRevolverWebley
-  name: Webley MkX TBR
-  description: "For centuries, the Webley top-break revolver has marched at the side of brave officers into the fray. Now, the Mark 10 top-break revolver, chambered in .454, carries that legacy into the modern age."
+  id: RMCWeaponRevolverWarwick
+  name: Warwick MkX TBR
+  suffix: DO NOT MAP
+  description: "For centuries, the Warwick accompanied officers of the TSE into battle, known ubiquitously as being 'the gentleman's sidearm'. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/webley.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwickmkx.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Weapons/Guns/Pistols/webley.rsi
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwickmkx.rsi
   - type: Tag
     tags:
     - Sidearm
     - RMCRevolver
-    - RMCWeaponRevolverWebley
+    - RMCWeaponRevolverWarwick
   - type: Corrodible
     isCorrodible: false
   - type: RevolverAmmoProvider
@@ -63,8 +64,8 @@
   - type: RMCBattleExecute
 
 - type: entity
-  parent: RMCWeaponRevolverWebley
-  id: RMCWeaponRevolverWebleyEmpty
+  parent: RMCWeaponRevolverWarwick
+  id: RMCWeaponRevolverWarwickEmpty
   suffix: Empty
   components:
   - type: RevolverAmmoProvider
@@ -78,4 +79,4 @@
     - null
 
 - type: Tag
-  id: RMCWeaponRevolverWebley
+  id: RMCWeaponRevolverWarwick

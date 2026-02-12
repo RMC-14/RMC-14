@@ -1355,10 +1355,10 @@
 
 - type: entity
   parent: CMBeltBaseStorage
-  id: RMCWebleyBelt
-  name: L16 pattern Webley revolver holster
+  id: RMCWarwickBelt
+  name: L16 pattern Warwick revolver holster
   suffix: PVE, CO
-  description: A beautiful dark chocolate brown leather belt designed to fit the Webley top-break revolver. Available to senior officers of the RCM by back order only.
+  description: A beautiful dark chocolate brown leather belt designed to fit the Warwick top-break revolver. Available to senior officers of the RCM by back order only.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
@@ -1387,7 +1387,7 @@
       - RMCSpeedLoaderMatebaHE
       - RMCSpeedLoaderMatebaHIAP
       - RMCSpeedLoaderMatebaHighImpact
-      - RMCWeaponRevolverWebley
+      - RMCWeaponRevolverWarwick
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -1401,14 +1401,14 @@
         - Gun
   - type: Tag
     tags:
-    - RMCWebleyBelt
+    - RMCWarwickBelt
 
 - type: Tag
-  id: RMCWebleyBelt
+  id: RMCWarwickBelt
 
 - type: entity
-  parent: RMCWebleyBelt
-  id: RMCWebleyBeltFilled
+  parent: RMCWarwickBelt
+  id: RMCWarwickBeltFilled
   suffix: PVE, Filled
   components:
   - type: StorageFill
@@ -1417,7 +1417,7 @@
       amount: 3
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
-    - id: RMCWeaponRevolverWebley
+    - id: RMCWeaponRevolverWarwick
 
 - type: entity
   parent: RMCBeltHolsterPistol
