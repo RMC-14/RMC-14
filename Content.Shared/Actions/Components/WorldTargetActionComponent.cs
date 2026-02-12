@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Xenonids.Eye; // RMC14
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -10,7 +11,7 @@ namespace Content.Shared.Actions.Components;
 /// <remarks>
 /// Requires <see cref="TargetActionComponent"/>.
 /// </remarks>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(QueenEyeSystem))] // RMC14
 [EntityCategory("Actions")]
 [AutoGenerateComponentState]
 public sealed partial class WorldTargetActionComponent : Component

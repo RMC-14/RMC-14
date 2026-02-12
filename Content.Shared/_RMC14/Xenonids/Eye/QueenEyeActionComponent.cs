@@ -22,4 +22,8 @@ public sealed partial class QueenEyeActionComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntityUid? Eye;
+
+    // The plant weeds action swapped from instant to world-target mode.
+    [DataField, AutoNetworkedField]
+    public EntityUid? SwappedPlantWeedsAction;
 }

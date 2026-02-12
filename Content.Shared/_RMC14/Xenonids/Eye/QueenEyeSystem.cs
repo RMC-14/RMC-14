@@ -1,7 +1,10 @@
 using System.Numerics;
+using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
@@ -19,14 +22,15 @@ public sealed class QueenEyeSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly SharedXenoWeedsSystem _xenoWeeds = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private SeedJob _seedJob;
@@ -105,6 +109,10 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetTarget(ent, ent.Comp.Eye, eye);
         _eye.SetDrawFov(ent, false);
         _mover.SetRelay(ent, ent.Comp.Eye.Value);
+
+        // When queen eye is activated while on ovi, swap plant weeds to world-target expand weeds
+        if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
+            SwapPlantWeedsToWorldTarget(ent);
     }
 
     private void OnQueenEyeActionGetVisMask(Entity<QueenEyeActionComponent> ent, ref GetVisMaskEvent args)
@@ -216,9 +224,7 @@ public sealed class QueenEyeSystem : EntitySystem
         _parallel.ProcessNow(_job, _job.Data.Count);
     }
 
-    /// <summary>
-    /// Returns whether a tile is accessible based on vision.
-    /// </summary>
+    // Returns whether a tile is accessible based on vision.
     private bool IsAccessible(Entity<BroadphaseComponent, MapGridComponent> grid, Vector2i tile, float expansionSize = 29)
     {
         _seeds.Clear();
@@ -263,10 +269,77 @@ public sealed class QueenEyeSystem : EntitySystem
 
         RemComp<RelayInputMoverComponent>(ent);
 
+        // Swap plant weeds action back to instant mode
+        SwapPlantWeedsToInstant(ent);
+
         var ev = new QueenEyeActionUpdated(ent);
         RaiseLocalEvent(ent, ref ev);
 
         return true;
+    }
+
+    // Swaps plant weeds action from instant to world-target mode when queen eye activates while ovi
+    private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
+    {
+        foreach (var (actionId, _) in _actions.GetActions(queen.Owner))
+        {
+            if (!TryComp<InstantActionComponent>(actionId, out var instant) ||
+                instant.Event is not XenoPlantWeedsActionEvent)
+            {
+                continue;
+            }
+
+            // Store which action we swapped
+            queen.Comp.SwappedPlantWeedsAction = actionId;
+            Dirty(queen);
+
+            // Remove instant action component
+            RemComp<InstantActionComponent>(actionId);
+
+            // Add target action components for world targeting
+            var targetAction = EnsureComp<TargetActionComponent>(actionId);
+            targetAction.CheckCanAccess = false;
+            targetAction.Range = -1;
+            targetAction.DeselectOnMiss = false;
+            targetAction.Repeat = false;
+            Dirty(actionId, targetAction);
+
+            var worldTarget = EnsureComp<WorldTargetActionComponent>(actionId);
+            worldTarget.Event = new XenoExpandWeedsActionEvent();
+            Dirty(actionId, worldTarget);
+
+            // Update name and description to reflect expand weeds behavior
+            _metaData.SetEntityName(actionId, "Expand Weeds (50)");
+            _metaData.SetEntityDescription(actionId, "Expand existing weeds or turn a weed tile into a node.");
+
+            break;
+        }
+    }
+
+    // Swaps plant weeds action back from world-target to instant mode when queen eye deactivates.
+    private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
+    {
+        if (queen.Comp.SwappedPlantWeedsAction is not { } actionId ||
+            TerminatingOrDeleted(actionId))
+        {
+            queen.Comp.SwappedPlantWeedsAction = null;
+            return;
+        }
+
+        queen.Comp.SwappedPlantWeedsAction = null;
+        Dirty(queen);
+
+        // Remove world target components
+        RemComp<WorldTargetActionComponent>(actionId);
+        RemComp<TargetActionComponent>(actionId);
+
+        // Add instant action component back
+        var instant = EnsureComp<InstantActionComponent>(actionId);
+        instant.Event = new XenoPlantWeedsActionEvent();
+
+        // Restore original name and description
+        _metaData.SetEntityName(actionId, "Plant Weeds (75)");
+        _metaData.SetEntityDescription(actionId, "Plant a weed node that will spread more weeds.");
     }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
@@ -312,9 +385,7 @@ public sealed class QueenEyeSystem : EntitySystem
         return IsAccessible((gridId, broadphase, grid), targetTile);
     }
 
-    /// <summary>
-    /// Gets the relevant vision seeds for later.
-    /// </summary>
+    // Gets the relevant vision seeds for later.
     private record struct SeedJob : IRobustJob
     {
         public required QueenEyeSystem System;
