@@ -3,3 +3,9 @@
   values:
     prefix: rmc-jelly-
     count: 5
+
+- type: localizedDataset
+  id: RMCXenoJelliesSpecial
+  values:
+    prefix: rmc-jelly-special-
+    count: 1

@@ -44,6 +44,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(ent, out var bloodstream) && bloodstream.BleedAmount > 0)
         {
             msg.AddMarkupOrThrow(Loc.GetString(ent.Comp.BleedText, ("victim", ent.Owner)));
+            msg.PushNewline();
         }
 
         LocId? stateText = null;

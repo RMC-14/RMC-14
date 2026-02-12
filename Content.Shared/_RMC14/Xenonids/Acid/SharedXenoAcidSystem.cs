@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Chemistry;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
@@ -221,6 +220,13 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             return false;
         }
 
+        var hasRequiredAcidStrength = newStrength.CompareTo(corrodible.MinimumAcidStrength) >= 0;
+        if (!hasRequiredAcidStrength)
+        {
+            _popup.PopupClient(Loc.GetString("rmc-xeno-acid-too-weak", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
         time = corrodible.TimeToApply;
         mult = corrodible.MeltTimeMult;
 
@@ -246,7 +252,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (!inherit)
             time += _timing.CurTime;
 
-        var ev = new CorrodingEvent(acid, dps, lightDps);
+        var ev = new CorrodingEvent(acid, dps, lightDps, strength);
         RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
             return;
@@ -325,7 +331,7 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     {
         // Get existing acid strength from the component
         XenoAcidStrength? existingStrength = null;
-        
+
         if (TryComp<TimedCorrodingComponent>(target, out var timedCorroding))
             existingStrength = timedCorroding.Strength;
         else if (TryComp<DamageableCorrodingComponent>(target, out var damageableCorroding))
@@ -353,5 +359,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
-
+    /// <summary>
+    ///     Set the entity's corrodible status.
+    /// </summary>
+    /// <param name="entity">The entity whose corrodible state is being changed</param>
+    /// <param name="isCorrodible">The new corrodible value</param>
+    public void SetCorrodible(EntityUid entity, bool isCorrodible)
+    {
+        var corrodible = EnsureComp<CorrodibleComponent>(entity);
+        corrodible.IsCorrodible = isCorrodible;
+        Dirty(entity, corrodible);
+    }
 }
