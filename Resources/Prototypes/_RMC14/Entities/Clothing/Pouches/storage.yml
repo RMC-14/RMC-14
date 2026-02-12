@@ -577,7 +577,7 @@
   - type: StorageFill
     contents:
     - id: CMScrewdriver
-    - id: CMCrowbar
+    - id: RMCTacticalPrybar
     - id: CMWirecutter
     - id: CMWrench
     - id: RMCCableCoil30

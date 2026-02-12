@@ -183,7 +183,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMCrowbar
+    - id: RMCTacticalPrybar
     - id: RMCMagazineRifleAK4047
     - id: RMCMagazineRifleAK4047
 
