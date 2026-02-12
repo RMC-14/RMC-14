@@ -1049,6 +1049,7 @@
   parent: RMCBoxMagazineRifleBase
   id: RMCBoxBullets458Empty
   name: bullet bundle box (.458 SOCOM x 297) # Used to say 300 when it was, infact, not 300 rounds.
+  description: A box of bundled .458 SOCOM rounds.
   components:
   - type: Construction
     graph: RMCBoxMagazine

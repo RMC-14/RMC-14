@@ -3,6 +3,9 @@
   abstract: true
   id: RMCBaseTesla
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Corrodible
     timeToApply: 4
     structure: true
@@ -243,6 +246,7 @@
   parent: RMCTesla
   id: RMCTeslaTSE
   name: L10D tesla coil
+  suffix: PVE, RCM IFF
   components:
   - type: UserIFF
     factions:
