@@ -16,6 +16,7 @@
     - id: RMCHeadRoyalBeretLead
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
+    - id: RMCBackpackRTOTSE
 
 - type: entityTable
   id: RMCClosetRCMGPMGFill
@@ -56,6 +57,7 @@
     - id: RMCWhistle
     - id: RMCBeltHolsterPistolRCM
     - id: RMCPVEArmorCaseRoyalLight
+    - id: RMCBackpackRTOTSE
 
 - type: entityTable
   id: RMCClosetRCMSapperFill
