@@ -186,6 +186,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             {
                 Text = $"{occupantAmount}/{state.MaxChem}u",
                 Align = Label.AlignMode.Right,
+                Margin = new Thickness(0, 0, 5, 0),
                 FontColorOverride = Color.White
             };
             amountBar.AddChild(amountLabel);
