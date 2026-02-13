@@ -64,7 +64,10 @@
     noRot: true
   - type: RequireProjectileTarget
   - type: XenoToggleChargingDamage
-    sound: /Audio/_RMC14/Effects/metal_crash.ogg
+    sound: !type:SoundPathSpecifier
+      params:
+        volume: -7
+      path:  /Audio/_RMC14/Effects/metal_crash.ogg
     stageLoss: 1
     damage:
       types:
