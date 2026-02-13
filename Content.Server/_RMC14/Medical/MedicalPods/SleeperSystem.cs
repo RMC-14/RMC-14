@@ -11,12 +11,10 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
-using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -25,7 +23,6 @@ namespace Content.Server._RMC14.Medical.MedicalPods;
 public sealed class SleeperSystem : SharedSleeperSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
@@ -57,35 +54,11 @@ public sealed class SleeperSystem : SharedSleeperSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MobStateComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<SleeperConsoleComponent, AfterActivatableUIOpenEvent>(OnConsoleUIOpened);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperInjectChemicalBuiMsg>(OnConsoleInjectChemical);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperToggleFilterBuiMsg>(OnConsoleToggleFilter);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperEjectBuiMsg>(OnConsoleEject);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperAutoEjectDeadBuiMsg>(OnConsoleAutoEjectDead);
-    }
-
-    private void OnMobStateChanged(Entity<MobStateComponent> mob, ref MobStateChangedEvent args)
-    {
-        if (!_container.TryGetContainingContainer((mob, null), out var container))
-            return;
-
-        if (!TryComp<SleeperComponent>(container.Owner, out var sleeper))
-            return;
-
-        if (sleeper.Occupant != mob.Owner)
-            return;
-
-        UpdateSleeperVisuals((container.Owner, sleeper));
-
-        if (!sleeper.AutoEjectDead)
-            return;
-
-        if (args.NewMobState == MobState.Dead)
-        {
-            _audio.PlayPvs(sleeper.AutoEjectDeadSound, container.Owner);
-            EjectOccupant((container.Owner, sleeper), mob.Owner);
-        }
     }
 
     private void OnConsoleUIOpened(Entity<SleeperConsoleComponent> console, ref AfterActivatableUIOpenEvent args)
@@ -355,7 +328,17 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var sleepers = EntityQueryEnumerator<SleeperComponent>();
         while (sleepers.MoveNext(out var uid, out var sleeper))
         {
-            if (!sleeper.IsFiltering || sleeper.Occupant == null)
+            if (sleeper.Occupant == null)
+                continue;
+
+            if (sleeper.AutoEjectDead && _mobState.IsDead(sleeper.Occupant.Value))
+            {
+                _audio.PlayPvs(sleeper.AutoEjectDeadSound, uid);
+                EjectOccupant((uid, sleeper), sleeper.Occupant.Value);
+                continue;
+            }
+
+            if (!sleeper.IsFiltering)
                 continue;
 
             if (time < sleeper.NextDialysisTick)
@@ -398,8 +381,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             var hasTransferableReagents = false;
             foreach (var reagentQuantity in chemSol.Contents)
             {
-                if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype) &&
-                    reagentQuantity.Quantity > 0)
+                if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype) && reagentQuantity.Quantity > 0)
                 {
                     hasTransferableReagents = true;
                     break;

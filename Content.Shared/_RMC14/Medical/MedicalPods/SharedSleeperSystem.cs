@@ -20,15 +20,12 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-
-    private readonly HashSet<Entity<SleeperComponent>> _sleeperLinkBuffer = new();
 
     public override void Initialize()
     {
@@ -46,7 +43,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, CanDropTargetEvent>(OnSleeperCanDrop);
         SubscribeLocalEvent<SleeperComponent, DragDropTargetEvent>(OnSleeperDragDrop);
 
-        SubscribeLocalEvent<SleeperConsoleComponent, ComponentInit>(OnConsoleInit);
         SubscribeLocalEvent<SleeperConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<SleeperConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
     }
@@ -231,11 +227,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
     }
 
-    private void OnConsoleInit(Entity<SleeperConsoleComponent> console, ref ComponentInit args)
-    {
-        TryLinkToSleeper(console);
-    }
-
     private void OnConsoleShutdown(Entity<SleeperConsoleComponent> console, ref ComponentShutdown args)
     {
         // Clean up the sleeper's reference to this console
@@ -277,32 +268,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         {
             _popup.PopupClient(Loc.GetString("rmc-sleeper-no-sleeper-connected"), console, args.User);
             args.Cancel();
-        }
-    }
-
-    private void TryLinkToSleeper(Entity<SleeperConsoleComponent> console)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (console.Comp.LinkedSleeper != null)
-            return;
-
-        var coords = Transform(console).Coordinates;
-        _sleeperLinkBuffer.Clear();
-        _lookup.GetEntitiesInRange(coords, 1.5f, _sleeperLinkBuffer);
-
-        foreach (var sleeper in _sleeperLinkBuffer)
-        {
-            // Don't steal links from other consoles - only link to unlinked sleepers
-            if (sleeper.Comp.LinkedConsole != null)
-                continue;
-
-            console.Comp.LinkedSleeper = sleeper;
-            sleeper.Comp.LinkedConsole = console;
-            Dirty(console);
-            Dirty(sleeper);
-            return;
         }
     }
 
@@ -389,7 +354,7 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
     }
 
-    protected void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
+    private void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
     {
         var occupied = sleeper.Comp.Occupant != null;
         _appearance.SetData(sleeper, SleeperVisuals.Occupied, occupied);
