@@ -2097,22 +2097,22 @@
 - type: entity
   parent: RMCBeltHolsterPistolEIAF
   id: RMCBeltHolsterPistolEIAFM44
-  suffix: Filled, M44
+  suffix: Filled, Warwick
   components:
     - type: StorageFill
       contents:
-        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
+        - id: RMCWeaponRevolverWarwickMkVII
         - id: RMCSpeedLoaderM44
           amount: 7
 
 - type: entity
   parent: RMCBeltHolsterPistolEIAF
   id: RMCBeltHolsterPistolEIAFM44Random
-  suffix: Random, M44
+  suffix: Random, Warwick
   components:
     - type: StorageFill
       contents:
-        - id: RMCWeaponRevolverM44 #Replace with custom ISAF M44 later
+        - id: RMCWeaponRevolverWarwickMkVII
         - id: RMCSpeedLoaderM44
         - id: RMCSpeedLoaderM44
           prob: 0.66
