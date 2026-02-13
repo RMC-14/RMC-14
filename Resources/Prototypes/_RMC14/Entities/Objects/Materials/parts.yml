@@ -39,6 +39,7 @@
     buildable:
     - RMCGrilleBuild
     - RMCFenceBuild
+    - RMCWeaponMountBuild
   - type: UserInterface
     interfaces:
       enum.RMCConstructionUiKey.Key:
