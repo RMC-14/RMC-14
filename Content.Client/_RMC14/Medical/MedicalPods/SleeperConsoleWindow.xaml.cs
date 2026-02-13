@@ -85,8 +85,8 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.ForegroundStyleBoxOverride = state.Health switch
         {
             _ when state.Health >= crisisDamageThreshold => new StyleBoxFlat(Color.FromHex("#408040")),
-            >= 0 => new StyleBoxFlat(Color.FromHex("#FFFF00")),
-            _ => new StyleBoxFlat(Color.FromHex("#FF0000"))
+            >= 0 => new StyleBoxFlat(Color.FromHex("#A0A030")),
+            _ => new StyleBoxFlat(Color.FromHex("#A04040"))
         };
         StatusLabel.Text = state.OccupantState switch
         {
@@ -133,8 +133,8 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             BloodBar.ForegroundStyleBoxOverride = state.BloodPercent switch
             {
                 >= 90 => new StyleBoxFlat(Color.FromHex("#408040")),
-                >= 60 => new StyleBoxFlat(Color.FromHex("#FFFF00")),
-                _ => new StyleBoxFlat(Color.FromHex("#FF0000"))
+                >= 60 => new StyleBoxFlat(Color.FromHex("#A0A030")),
+                _ => new StyleBoxFlat(Color.FromHex("#A04040"))
             };
 
             PulseLabel.Text = state.Pulse switch
@@ -192,11 +192,11 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
             if (overdosing)
             {
-                amountBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#FF0000"));
+                amountBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#A04040"));
             }
             else if (odWarning)
             {
-                amountBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#FFFF00"));
+                amountBar.ForegroundStyleBoxOverride = new StyleBoxFlat(Color.FromHex("#A0A030"));
             }
             row.AddChild(amountBar);
 
@@ -225,8 +225,8 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         bar.ForegroundStyleBoxOverride = damage switch
         {
             < 25 => new StyleBoxFlat(Color.FromHex("#408040")),
-            < 50 => new StyleBoxFlat(Color.FromHex("#FFFF00")),
-            _ => new StyleBoxFlat(Color.FromHex("#FF0000"))
+            < 50 => new StyleBoxFlat(Color.FromHex("#A0A030")),
+            _ => new StyleBoxFlat(Color.FromHex("#A04040"))
         };
     }
 }

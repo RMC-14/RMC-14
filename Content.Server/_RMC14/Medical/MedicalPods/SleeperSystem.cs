@@ -42,6 +42,14 @@ public sealed class SleeperSystem : SharedSleeperSystem
     private const string AirlossGroup = "Airloss";
     private const string GeneticGroup = "Genetic";
 
+    // TODO RMC14 RMCTemperatureSystem => put these in RMCTemperatureComponent (Temperatures in Kelvin)
+    private const float ColdLevel3 = 120f;
+    private const float ColdLevel2 = 240f;
+    private const float ColdLevel1 = 260.15f;
+    private const float HeatLevel1 = 373.15f;
+    private const float HeatLevel2 = 400f;
+    private const float HeatLevel3 = 800f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -184,84 +192,71 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var bodyTemp = 0f;
         var temperatureSuitability = 0f;
         FixedPoint2 totalReagents = 0;
+        Solution? cachedChemSol = null;
 
-        if (occupant == null)
-            return;
-
-        if (TryComp<DamageableComponent>(occupant, out var damageable))
+        if (occupant != null)
         {
-            netOccupant = GetNetEntity(occupant.Value);
-            occupantName = Identity.Name(occupant.Value, EntityManager);
-
-            if (_mobState.IsDead(occupant.Value))
-                occupantState = SleeperOccupantMobState.Dead;
-            else if (_mobState.IsCritical(occupant.Value))
-                occupantState = SleeperOccupantMobState.Critical;
-            else
-                occupantState = SleeperOccupantMobState.Alive;
-
-            totalDamage = damageable.TotalDamage;
-
-            if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold) &&
-                _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
+            if (TryComp<DamageableComponent>(occupant, out var damageable))
             {
-                maxHealth = (float) critThreshold;
-                minHealth = (float) deadThreshold;
-                health = (float) (critThreshold - totalDamage);
+                netOccupant = GetNetEntity(occupant.Value);
+                occupantName = Identity.Name(occupant.Value, EntityManager);
+
+                if (_mobState.IsDead(occupant.Value))
+                    occupantState = SleeperOccupantMobState.Dead;
+                else if (_mobState.IsCritical(occupant.Value))
+                    occupantState = SleeperOccupantMobState.Critical;
+                else
+                    occupantState = SleeperOccupantMobState.Alive;
+
+                totalDamage = damageable.TotalDamage;
+
+                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold) &&
+                    _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
+                {
+                    maxHealth = (float) critThreshold;
+                    minHealth = (float) deadThreshold;
+                    health = (float) (critThreshold - totalDamage);
+                }
+
+                bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
+                burnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
+                toxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
+                oxyLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
+                geneticLoss = damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup).Float();
             }
 
-            bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
-            burnLoss = damageable.DamagePerGroup.GetValueOrDefault(BurnGroup).Float();
-            toxinLoss = damageable.DamagePerGroup.GetValueOrDefault(ToxinGroup).Float();
-            oxyLoss = damageable.DamagePerGroup.GetValueOrDefault(AirlossGroup).Float();
-            geneticLoss = damageable.DamagePerGroup.GetValueOrDefault(GeneticGroup).Float();
+            if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
+                blood.BloodSolution != null &&
+                _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
+            {
+                hasBlood = true;
+                bloodLevel = bloodSol.Volume;
+                var bloodMax = bloodSol.MaxVolume;
+                bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
+
+                pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
+            }
+
+            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var currentTemperature))
+            {
+                bodyTemp = currentTemperature;
+                temperatureSuitability = bodyTemp switch
+                {
+                    < ColdLevel3 => -3,
+                    < ColdLevel2 => -2,
+                    < ColdLevel1 => -1,
+                    > HeatLevel3 => 3,
+                    > HeatLevel2 => 2,
+                    > HeatLevel1 => 1,
+                    _ => 0
+                };
+            }
+
+            // Cache chemical solution to avoid repeated lookups in the loop
+            _solution.TryGetSolution(occupant.Value, "chemicals", out _, out cachedChemSol);
+            if (cachedChemSol != null)
+                totalReagents = cachedChemSol.Volume;
         }
-
-        if (TryComp<BloodstreamComponent>(occupant, out var blood) &&
-            blood.BloodSolution != null &&
-            _solution.TryGetSolution(occupant.Value, blood.BloodSolutionName, out _, out var bloodSol))
-        {
-            hasBlood = true;
-            bloodLevel = bloodSol.Volume;
-            var bloodMax = bloodSol.MaxVolume;
-            bloodPercent = bloodMax > 0 ? (bloodLevel / bloodMax).Float() * 100f : 0f;
-
-            pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
-        }
-
-        if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var currentTemperature))
-        {
-            // TODO RMC14 RMCTemperatureSystem => put these in RMCTemperatureComponent
-            var coldLevel1 = 260.15f;
-            var coldLevel2 = 240f;
-            var coldLevel3 = 120f;
-
-            var heatLevel1 = 373.15f;
-            var heatLevel2 = 400f;
-            var heatLevel3 = 800f;
-
-            bodyTemp = currentTemperature;
-
-            if (bodyTemp < coldLevel3)
-                temperatureSuitability = -3;
-            else if (bodyTemp < coldLevel2)
-                temperatureSuitability = -2;
-            else if (bodyTemp < coldLevel1)
-                temperatureSuitability = -1;
-            else if (bodyTemp > heatLevel3)
-                temperatureSuitability = 3;
-            else if (bodyTemp > heatLevel2)
-                temperatureSuitability = 2;
-            else if (bodyTemp > heatLevel1)
-                temperatureSuitability = 1;
-            else
-                temperatureSuitability = 0;
-        }
-
-        // Cache chemical solution to avoid repeated lookups in the loop
-        _solution.TryGetSolution(occupant.Value, "chemicals", out _, out var cachedChemSol);
-        if (cachedChemSol != null)
-            totalReagents = cachedChemSol.Volume;
 
         // Build emergency chem lookup for O(1) checks
         _emergencyChemLookup.Clear();
