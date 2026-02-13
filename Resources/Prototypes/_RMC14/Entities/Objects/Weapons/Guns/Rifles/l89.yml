@@ -4,7 +4,7 @@
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
   id: RMCWeaponRifleL89A1
   name: L89A1 marksman rifle
-  description: The L89A1.
+  description: The L89A1 is the standard-issue DMR of the RMC's Paramarine regiments, a lightweight and reliable marksman rifle that boasts an integrated 2x optic.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/l89.rsi
