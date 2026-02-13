@@ -32,23 +32,15 @@ public sealed class SleeperSystem : SharedSleeperSystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
 
-    private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = new();
-    private readonly HashSet<string> _emergencyChemLookup = new();
-    private readonly HashSet<string> _nonTransferableLookup = new();
+    private readonly List<ProtoId<ReagentPrototype>> _reagentRemovalBuffer = [];
+    private readonly HashSet<string> _emergencyChemLookup = [];
+    private readonly HashSet<string> _nonTransferableLookup = [];
 
     private const string BruteGroup = "Brute";
     private const string BurnGroup = "Burn";
     private const string ToxinGroup = "Toxin";
     private const string AirlossGroup = "Airloss";
     private const string GeneticGroup = "Genetic";
-
-    // TODO RMC14 RMCTemperatureSystem => put these in RMCTemperatureComponent (Temperatures in Kelvin)
-    private const float HeatLevel3 = 800f;
-    private const float HeatLevel2 = 400f;
-    private const float HeatLevel1 = 373.15f;
-    private const float ColdLevel1 = 260.15f;
-    private const float ColdLevel2 = 240f;
-    private const float ColdLevel3 = 120f;
 
     public override void Initialize()
     {
@@ -167,7 +159,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var occupantState = SleeperOccupantMobState.None;
         var health = 0f;
         var maxHealth = 0f;
-        var minHealth = 0f;
         FixedPoint2 totalDamage = 0;
         var bruteLoss = 0f;
         var burnLoss = 0f;
@@ -179,7 +170,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var bloodPercent = 0f;
         var pulse = 0;
         var bodyTemp = 0f;
-        var temperatureSuitability = 0f;
         FixedPoint2 totalReagents = 0;
         Solution? cachedChemSol = null;
 
@@ -199,11 +189,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
                 totalDamage = damageable.TotalDamage;
 
-                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold) &&
-                    _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
+                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold))
                 {
                     maxHealth = (float) critThreshold;
-                    minHealth = (float) deadThreshold;
                     health = (float) (critThreshold - totalDamage);
                 }
 
@@ -226,19 +214,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
             }
 
-            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp))
-            {
-                temperatureSuitability = bodyTemp switch
-                {
-                    < ColdLevel3 => -3,
-                    < ColdLevel2 => -2,
-                    < ColdLevel1 => -1,
-                    > HeatLevel3 => 3,
-                    > HeatLevel2 => 2,
-                    > HeatLevel1 => 1,
-                    _ => 0
-                };
-            }
+            _rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp);
 
             // Cache chemical solution to avoid repeated lookups in the loop
             _solution.TryGetSolution(occupant.Value, "chemicals", out _, out cachedChemSol);
@@ -283,7 +259,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
             occupantState,
             health,
             maxHealth,
-            minHealth,
             bruteLoss,
             burnLoss,
             toxinLoss,
@@ -294,7 +269,6 @@ public sealed class SleeperSystem : SharedSleeperSystem
             bloodPercent,
             pulse,
             bodyTemp,
-            temperatureSuitability,
             sleeper.IsFiltering,
             totalReagents,
             sleeper.DialysisStartedReagentVolume,

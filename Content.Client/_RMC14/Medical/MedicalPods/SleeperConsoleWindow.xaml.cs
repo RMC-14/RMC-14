@@ -109,14 +109,15 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         TemperatureBar.MaxValue = 1000; // Kelvin
         TemperatureBarText.Text = $"{tempCelsius:F0}°C, {tempFahrenheit:F0}°F";
 
-        TemperatureBar.ForegroundStyleBoxOverride = state.TemperatureSuitability switch
+        TemperatureBar.ForegroundStyleBoxOverride = state.BodyTemperature switch
         {
-            -3 => new StyleBoxFlat(Color.FromHex("#0000AA")),
-            -2 => new StyleBoxFlat(Color.FromHex("#0066FF")),
-            -1 => new StyleBoxFlat(Color.FromHex("#66CCFF")),
-            1 => new StyleBoxFlat(Color.FromHex("#FFFF00")),
-            2 => new StyleBoxFlat(Color.FromHex("#FF8800")),
-            3 => new StyleBoxFlat(Color.FromHex("#FF0000")),
+            // TODO RMC14 RMCTemperatureSystem Component HeatLevel 1-3 ColdLevel 1-3 (in Kelvin)
+            <= 120f => new StyleBoxFlat(Color.FromHex("#0000AA")),
+            <= 240f => new StyleBoxFlat(Color.FromHex("#0066FF")),
+            <= 260.15f => new StyleBoxFlat(Color.FromHex("#66CCFF")),
+            >= 800f => new StyleBoxFlat(Color.FromHex("#FF0000")),
+            >= 400f => new StyleBoxFlat(Color.FromHex("#FF8800")),
+            >= 373.15f => new StyleBoxFlat(Color.FromHex("#FFFF00")),
             _ => new StyleBoxFlat(Color.FromHex("#408040"))
         };
 

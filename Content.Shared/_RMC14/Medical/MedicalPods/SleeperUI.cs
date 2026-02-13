@@ -12,7 +12,6 @@ public sealed class SleeperBuiState(
     SleeperOccupantMobState occupantState,
     float health,
     float maxHealth,
-    float minHealth,
     float bruteLoss,
     float burnLoss,
     float toxinLoss,
@@ -23,7 +22,6 @@ public sealed class SleeperBuiState(
     float bloodPercent,
     int pulse,
     float bodyTemperature,
-    float temperatureSuitability,
     bool filtering,
     FixedPoint2 totalReagents,
     FixedPoint2 reagentsWhenStarted,
@@ -39,7 +37,6 @@ public sealed class SleeperBuiState(
     public readonly SleeperOccupantMobState OccupantState = occupantState;
     public readonly float Health = health;
     public readonly float MaxHealth = maxHealth;
-    public readonly float MinHealth = minHealth;
     public readonly float BruteLoss = bruteLoss;
     public readonly float BurnLoss = burnLoss;
     public readonly float ToxinLoss = toxinLoss;
@@ -50,7 +47,6 @@ public sealed class SleeperBuiState(
     public readonly float BloodPercent = bloodPercent;
     public readonly int Pulse = pulse;
     public readonly float BodyTemperature = bodyTemperature;
-    public readonly float TemperatureSuitability = temperatureSuitability;
     public readonly bool Filtering = filtering;
     public readonly FixedPoint2 TotalReagents = totalReagents;
     public readonly FixedPoint2 ReagentsWhenStarted = reagentsWhenStarted;
