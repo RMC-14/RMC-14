@@ -66,7 +66,6 @@
   - type: XenoToggleChargingDamage
     sound: /Audio/_RMC14/Effects/metal_crash.ogg
     stageLoss: 1
-    passOnDestroy: true
     damage:
       types:
         Blunt: 15

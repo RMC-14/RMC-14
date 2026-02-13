@@ -39,7 +39,6 @@
     buildable:
     - RMCGrilleBuild
     - RMCFenceBuild
-    - RMCWeaponMountBuild
   - type: UserInterface
     interfaces:
       enum.RMCConstructionUiKey.Key:
@@ -97,6 +96,9 @@
     amount: 2
     spawn:
     - id: CMSheetPlasteel1
+  - type: RMCConstructionItem
+    buildable:
+    - RMCWeaponMountBuild
 
 - type: entity
   parent: CMRodPlasteel
