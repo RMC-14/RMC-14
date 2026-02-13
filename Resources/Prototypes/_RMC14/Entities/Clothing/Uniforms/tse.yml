@@ -71,21 +71,22 @@
   - type: WebbingClothing
     startingWebbing: RMCWebbingDropPouchRoyal
 
-# EIAF
+# RCM Paramarines
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
-  id: RMCJumpsuitMarineEIAFNo8
-  name: EIAF No.8 combat uniform
-  description: Standard issue No.8 Pattern BDU used by the Extrasolar Imperial Airborne Force. Identical in cut and protection to the Royal Crown Marine variant, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  id: RMCJumpsuitMarinePara
+  name: paramarine battle dress uniform
+  description: No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+    - RMCPatchTSEPara
   - type: WebbingClothing
-    startingWebbing: RMCEEIAFWebbing
+    startingWebbing: RMCParaWebbing
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: Foldable
@@ -95,33 +96,34 @@
     foldedEquippedPrefix: sleeves
     
 - type: entity
-  parent: RMCJumpsuitMarineEIAFNo8
-  id: RMCJumpsuitMarineEIAFNo8F90
-  suffix: webbing. F90
+  parent: RMCJumpsuitMarinePara
+  id: RMCJumpsuitMarineParaL88
+  suffix: Webbing, L88
   components:
     - type: WebbingClothing
-      startingWebbing: RMCEEIAFWebbingF90
+      startingWebbing: RMCParaWebbingL88
     
 - type: entity
-  parent: RMCJumpsuitMarineEIAFNo8
-  id: RMCJumpsuitMarineEIAFNo8PDW90
+  parent: RMCJumpsuitMarinePara
+  id: RMCJumpsuitMarineParaPDW90
   suffix: webbing. PDW90AP
   components:
     - type: WebbingClothing
-      startingWebbing: RMCEEIAFWebbingPDW90AP
+      startingWebbing: RMCParaWebbingPDW90AP
     
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
-  id: RMCJumpsuitMarineEIAFNo2
-  name: EIAF No.2 service uniform
-  description: A formal No.2 service uniform worn by EIAF officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  id: RMCJumpsuitMarineParaService
+  name: paramarine service uniform
+  description: A formal No.2 service uniform worn by RCM-P officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf_officer.rsi
+      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para_officer.rsi
     - type: UniformAccessoryHolder
       startingAccessories:
         - RMCPatchTSEMarines
         - RMCPatchTSE
+        - RMCPatchTSEPara
     - type: ItemCamouflage
       camouflageVariations: {}
     - type: Foldable

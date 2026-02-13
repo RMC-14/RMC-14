@@ -514,7 +514,7 @@
   
 - type: alert
   parent: SquadTracker
-  id: SquadTrackerEIAFSquadLeader
+  id: SquadTrackerParaSquadLeader
   category: SquadTracker
   icons:
     - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
@@ -537,7 +537,7 @@
       state: trackon-west_tl
     - sprite: /Textures/_RMC14/Interface/Alerts/marine_tracker.rsi
       state: trackon-southwest_tl
-  description: Tracks the EIAF Squad Leader
+  description: Tracks the Paramarine Squad Leader
 
 
 - type: alert

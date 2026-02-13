@@ -38,38 +38,39 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/beret_tl.rsi
 
+# Paramarines
 - type: entity
   parent: RMCHeadRoyalBeret
-  id: RMCHeadEIAFBeret
-  name: EIAF beret
-  description: A distinctive crimson beret worn by the Extrasolar Imperial Airborne Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  id: RMCHeadParaBeret
+  name: paramarine beret
+  description: A distinctive crimson beret worn by the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
     
 - type: entity
   parent: RMCHeadRoyalBeret
-  id: RMCHeadEIAFBeretLead
-  name: EIAF team lead beret
-  description: A distinctive crimson beret worn by the Extrasolar Imperial Airborne Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  id: RMCHeadParaBeretLead
+  name: paramarine team lead beret
+  description: A distinctive crimson beret worn by NCOs of the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_tl_beret.rsi
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi
     - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_tl_beret.rsi
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi
 
 - type: entity
   parent: RMCHeadCapTSEPA
-  id: RMCHeadCapPeakedEIAF
-  name: EIAF officer's service cap
-  description: A distinguished service cap worn by officers of the Extrasolar Imperial Airborne Forces. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
+  id: RMCHeadCapPeakedPara
+  name: paramarine officer's service cap
+  description: A distinguished service cap worn by officers of the RCM's Paramarine regiments. Featuring a crimson band, gold RCM-P emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s paramarine command.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_peaked.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_peaked.rsi
 
 # Royal marine helmets
 - type: entity

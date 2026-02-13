@@ -53,8 +53,8 @@
       
 - type: entity
   parent: RMCSatchelBlack
-  id: RMCSatchelBlackFillEIAFCO
-  suffix: Filled, EIAF, CO
+  id: RMCSatchelBlackFillParaCO
+  suffix: Filled, Paramarine CO
   components:
     - type: StorageFill
       contents:
@@ -873,8 +873,8 @@
 
 - type: entity
   parent: RMCSatchelLightpack5Slot
-  id: RMCSatchelLightpackFilledEIAF
-  suffix: Filled, EIAF
+  id: RMCSatchelLightpackFilledPara
+  suffix: Filled, Paramarine
   components:
     - type: StorageFill
       contents:
@@ -883,23 +883,21 @@
           
 - type: entity
   parent: RMCSatchelLightpack5Slot
-  id: RMCSatchelLightpackFilledEIAFSynth
-  suffix: Filled, EIAF, Synth
+  id: RMCSatchelLightpackFilledParaSynth
+  suffix: Filled, Paramarine Synth
   components:
     - type: StorageFill
       contents:
         - id: CMSheetMetal20
-        - id: RMCRadioHandheldColony
         - id: CMRollerBedSpawnFolded
         - id: CMMultitool
-        - id: RMCCableCoil30
-        - id: CMHealthAnalyzer
+        - id: CMDefibrillator
         - id: RMCSynthResetKey
           
 - type: entity
   parent: RMCSatchelLightpack5Slot #Replace Medic bag with RCM medic bag and move to the PVP varients of both bags
-  id: RMCSatchelLightpackFilledEIAFMedic
-  suffix: Filled, EIAF, Medic
+  id: RMCSatchelLightpackFilledParaMedic
+  suffix: Filled, Paramarine Medic
   components:
     - type: StorageFill
       contents:
@@ -907,7 +905,6 @@
         - id: RMCHeadRoyalL1HelmetBallistic
         - id: CMFireExtinguisherPortable
         - id: CMDefibrillator
-        - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCSatchelLightpack

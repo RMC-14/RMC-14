@@ -1946,7 +1946,7 @@
     tags:
     - RMCMachineGunnerRig
       
-# RCM/EIAF Belts
+# RCM/Paramarines Belts
 
 - type: entity
   parent: CMBeltMedical
@@ -2003,8 +2003,8 @@
             
 - type: entity
   parent: RMCL75Medical
-  id: RMCL75MedicalFillEIAF
-  suffix: Filled, EIAF, Survivor
+  id: RMCL75MedicalFillPara
+  suffix: Filled, Paramarine Survivor
   components:
     - type: StorageFill
       contents:
@@ -2036,29 +2036,47 @@
   name: RCM general utility belt
   description: A small, lightweight pouch that can be clipped onto armor to provide additional storage. This new RCM model, while uncomfortable, can also be clipped around the waist.
   components:
-    - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
-    - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
-    - type: Storage
-      maxItemSize: Normal
-      grid:
-        - 0,0,9,1 # 9 slots
-      blacklist:
-        tags:
-          - CMFirstAidKit
-          - RMCEngineerKit
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+      - 0,0,9,1 # 9 slots
+    blacklist:
+      tags:
+        - CMFirstAidKit
+        - RMCEngineerKit
+  - type: Tag
+    tags:
+    - RMCG8Pouch
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCBeltHolsterPistolEIAF
-  name: EIAF paratrooper belt
-  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
+  id: RMCBeltHolsterPistolPara
+  name: paramarine load bearing rig
+  description: A sturdy belt fitted with a black leather holster designed for RCM Paramarines. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
+      layers:
+      - state: icon
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: warwick
+        map: [ "enum.CMHolsterLayers.Fill" ]
+        visible: false
+      - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
+        state: icon-front
+      - state: half
+        map: [ "openLayer" ]
+      - state: full
+        map: [ "closedLayer" ]
     - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
     - type: ItemCamouflage
       camouflageVariations: {}
     - type: Storage # holds up to 7 mags plus gun
@@ -2095,8 +2113,8 @@
           - Sidearm
 
 - type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFM44
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44
   suffix: Filled, Warwick
   components:
     - type: StorageFill
@@ -2106,8 +2124,8 @@
           amount: 7
 
 - type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFM44Random
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44Random
   suffix: Random, Warwick
   components:
     - type: StorageFill
@@ -2120,16 +2138,28 @@
           prob: 0.33
 
 - type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFCustom
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaCustom
   suffix: Filled, L54 Custom
-  name: EIAF custom paratrooper belt
-  description: A modified EIAF paratrooper belt featuring a black leather holster with gold inlay, a large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for EIAF airborne forces dropping into hostile territory.
+  name: paramarine custom load-bearing rig
+  description: A modified RCM Paramarine belt featuring a black leather holster with gold inlay, a large utility pouch, and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
   components:
     - type: Sprite
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
+      layers:
+      - state: icon
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: warwick
+        map: [ "enum.CMHolsterLayers.Fill" ]
+        visible: false
+      - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
+        state: icon-front
+      - state: half
+        map: [ "openLayer" ]
+      - state: full
+        map: [ "closedLayer" ]
     - type: Clothing
-      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf_custom.rsi
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
     - type: ItemCamouflage
       camouflageVariations: { }
     - type: StorageFill

@@ -1,0 +1,74 @@
+- type: job
+  parent: RMCSurvivorParaBase
+  id: RMCSurvivorParaCommander
+  name: rmc-job-name-para-commander
+  ranks:
+    RMCRankParaLieutenantColonel: [ ]
+  accessGroups:
+  - ColonistAllAccessNoArmory
+  startingGear: RMCGearParaCommander
+  icon: RMCJobIconParaCommander
+  spawnMenuRoleName: RCM-P Commander (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - TSE
+        - type: Skills
+          preset: RMCSkillPresetCommander
+        - type: RMCAllowSuitStorage
+        - type: IntelRescueSurvivorObjective
+        - type: MotionDetectorTracked
+        - type: MarineOrders
+        - type: RMCPointing
+        - type: CommandAccent
+        - type: RMCTrackable
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: rmc_commander
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_para
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadPara
+        - type: JobPrefix
+          prefix: rmc-job-prefix-paramarine-commander
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearParaBase
+  id: RMCGearParaCommander
+  equipment:
+    id: CMIDCardGold
+    jumpsuit: RMCJumpsuitMarineParaService
+    head: RMCHeadCapPeakedPara
+    ears: RMCHeadsetParaOfficer
+    eyes: RMCGlassesAviators
+    outerClothing: RMCJacketParaCOJacketFilled
+    belt: RMCBeltHolsterPistolParaCustom
+    back: RMCSatchelBlackFillParaCO
+    pocket1: RMCPouchSurvivalFill
+    pocket2: RMCPouchGeneralLargeFilledParaCO
+    suitstorage: RMCWeaponRifleL88A2Filled
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointParaCommander
+  name: paramarine commander spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParaCommander
+  - type: Sprite
+    state: surv_tse
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParaCommander
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_commander_alt
+    

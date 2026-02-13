@@ -32,8 +32,8 @@
       
 - type: entity
   parent: RMCPouchGeneralLarge
-  id: RMCPouchGeneralLargeFilledEIAFCO
-  suffix: Filled, EIAF, CO
+  id: RMCPouchGeneralLargeFilledParaCO
+  suffix: Filled, Paramarine CO
   components:
     - type: StorageFill
       contents:

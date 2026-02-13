@@ -152,13 +152,13 @@
   alert: SquadTrackerCommandingOfficer
   
 - type: trackerMode
-  id: EIAFSquadLeader
-  job: RMCSurvivorEIAFSquadLeader
-  alert: SquadTrackerEIAFSquadLeader
+  id: ParaSquadLeader
+  job: RMCSurvivorParaSquadLeader
+  alert: SquadTrackerParaSquadLeader
 
 - type: trackerMode
-  id: EIAFCommander
-  job: RMCSurvivorEIAFCommander
+  id: ParaCommander
+  job: RMCSurvivorParaCommander
   alert: SquadTrackerCommandingOfficer
 
 - type: trackerMode
