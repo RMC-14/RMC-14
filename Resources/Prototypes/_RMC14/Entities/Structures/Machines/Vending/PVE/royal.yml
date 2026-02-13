@@ -266,7 +266,7 @@
       - id: RMCHeadRoyalBeanie
         name: Tactical Beanie
         amount: 15
-      - id: RMCHeadsetRoyalMarine
+      - id: RMCHeadsetRoyalMarinePVE
         name: Radio Headset
         amount: 15
     - name: Webbings
