@@ -88,8 +88,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         // Emergency chemicals only work in crisis mode
         if (isEmergency && !isAvailable)
         {
-            if (!TryComp<DamageableComponent>(occupant, out var damageable) ||
-                damageable.TotalDamage <= sleeper.CrisisMinDamage)
+            if (!TryComp<DamageableComponent>(occupant, out var damageable) || damageable.TotalDamage <= sleeper.CrisisMinDamage)
                 return;
         }
 
@@ -108,8 +107,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
     private void OnConsoleToggleFilter(Entity<SleeperConsoleComponent> console, ref SleeperToggleFilterBuiMsg args)
     {
-        if (console.Comp.LinkedSleeper is not { } sleeperId ||
-            !TryComp(sleeperId, out SleeperComponent? sleeper))
+        if (console.Comp.LinkedSleeper is not { } sleeperId || !TryComp(sleeperId, out SleeperComponent? sleeper))
             return;
 
         ToggleDialysis((sleeperId, sleeper));
@@ -118,8 +116,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
     private void OnConsoleEject(Entity<SleeperConsoleComponent> console, ref SleeperEjectBuiMsg args)
     {
-        if (console.Comp.LinkedSleeper is not { } sleeperId ||
-            !TryComp(sleeperId, out SleeperComponent? sleeper))
+        if (console.Comp.LinkedSleeper is not { } sleeperId || !TryComp(sleeperId, out SleeperComponent? sleeper))
             return;
 
         if (sleeper.Occupant is { } occupant)
@@ -130,8 +127,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
     private void OnConsoleAutoEjectDead(Entity<SleeperConsoleComponent> console, ref SleeperAutoEjectDeadBuiMsg args)
     {
-        if (console.Comp.LinkedSleeper is not { } sleeperId ||
-            !TryComp(sleeperId, out SleeperComponent? sleeper))
+        if (console.Comp.LinkedSleeper is not { } sleeperId || !TryComp(sleeperId, out SleeperComponent? sleeper))
             return;
 
         sleeper.AutoEjectDead = args.Enabled;
@@ -310,6 +306,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
             if (sleeper.AutoEjectDead && _mobState.IsDead(sleeper.Occupant.Value))
             {
                 _audio.PlayPvs(sleeper.AutoEjectDeadSound, uid);
+                sleeper.AutoEjectDead = false;
+                Dirty(uid, sleeper);
                 EjectOccupant((uid, sleeper), sleeper.Occupant.Value);
                 continue;
             }
@@ -343,9 +341,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             foreach (var reagentQuantity in chemSol.Contents)
             {
                 if (!_nonTransferableLookup.Contains(reagentQuantity.Reagent.Prototype))
-                {
                     _reagentRemovalBuffer.Add(reagentQuantity.Reagent.Prototype);
-                }
             }
 
             foreach (var reagent in _reagentRemovalBuffer)
@@ -395,13 +391,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
             if (reagentProto.Overdose != null)
             {
                 if (occupantAmount >= reagentProto.Overdose)
-                {
                     overdosing = true;
-                }
                 else if (occupantAmount + 10 > reagentProto.Overdose)
-                {
                     odWarning = true;
-                }
             }
         }
 

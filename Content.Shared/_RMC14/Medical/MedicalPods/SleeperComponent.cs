@@ -105,12 +105,6 @@ public sealed partial class SleeperComponent : Component
     public TimeSpan ExitStun = TimeSpan.FromSeconds(1);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan InsertSelfDelay = TimeSpan.FromSeconds(2);
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan InsertOthersDelay = TimeSpan.FromSeconds(2);
-
-    [DataField, AutoNetworkedField]
     public EntityUid? LinkedConsole;
 
     [DataField, AutoNetworkedField]

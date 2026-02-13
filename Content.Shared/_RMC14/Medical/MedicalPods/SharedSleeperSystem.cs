@@ -1,8 +1,7 @@
 using Content.Shared._RMC14.Storage;
-using Content.Shared.DoAfter;
-using Content.Shared.DragDrop;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.UserInterface;
@@ -18,7 +17,6 @@ public abstract class SharedSleeperSystem : EntitySystem
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -36,13 +34,11 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, EntInsertedIntoContainerMessage>(OnSleeperEntInserted);
         SubscribeLocalEvent<SleeperComponent, EntRemovedFromContainerMessage>(OnSleeperEntRemoved);
         SubscribeLocalEvent<SleeperComponent, InteractHandEvent>(OnSleeperInteractHand);
-        SubscribeLocalEvent<SleeperComponent, SleeperEntryDoAfterEvent>(OnSleeperEntryDoAfter);
-        SubscribeLocalEvent<SleeperComponent, SleeperPushInDoAfterEvent>(OnSleeperPushInDoAfter);
-        SubscribeLocalEvent<SleeperComponent, CanDropTargetEvent>(OnSleeperCanDrop);
-        SubscribeLocalEvent<SleeperComponent, DragDropTargetEvent>(OnSleeperDragDrop);
 
         SubscribeLocalEvent<SleeperConsoleComponent, ComponentShutdown>(OnConsoleShutdown);
         SubscribeLocalEvent<SleeperConsoleComponent, ActivatableUIOpenAttemptEvent>(OnConsoleUIOpenAttempt);
+
+        SubscribeLocalEvent<InsideSleeperComponent, MoveInputEvent>(OnInsideSleeperMoveInput);
     }
 
     private void OnSleeperInit(Entity<SleeperComponent> sleeper, ref ComponentInit args)
@@ -104,6 +100,13 @@ public abstract class SharedSleeperSystem : EntitySystem
         sleeper.Comp.Occupant = args.Entity;
         Dirty(sleeper);
         UpdateSleeperVisuals(sleeper);
+
+        if (!_timing.ApplyingState)
+        {
+            var inside = EnsureComp<InsideSleeperComponent>(args.Entity);
+            inside.Sleeper = sleeper;
+            Dirty(args.Entity, inside);
+        }
     }
 
     private void OnSleeperEntRemoved(Entity<SleeperComponent> sleeper, ref EntRemovedFromContainerMessage args)
@@ -118,7 +121,9 @@ public abstract class SharedSleeperSystem : EntitySystem
             sleeper.Comp.DialysisStartedReagentVolume = 0;
             Dirty(sleeper);
         }
+
         UpdateSleeperVisuals(sleeper);
+        RemCompDeferred<InsideSleeperComponent>(args.Entity);
     }
 
     private void OnSleeperInteractHand(Entity<SleeperComponent> sleeper, ref InteractHandEvent args)
@@ -130,74 +135,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         {
             EjectOccupant(sleeper, occupant);
             args.Handled = true;
-        }
-    }
-
-    private void OnSleeperEntryDoAfter(Entity<SleeperComponent> sleeper, ref SleeperEntryDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (sleeper.Comp.Occupant != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), args.User, args.User);
-            return;
-        }
-
-        InsertOccupant(sleeper, args.User);
-    }
-
-    private void OnSleeperPushInDoAfter(Entity<SleeperComponent> sleeper, ref SleeperPushInDoAfterEvent args)
-    {
-        if (args.Cancelled || args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (sleeper.Comp.Occupant != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), args.User, args.User);
-            return;
-        }
-
-        if (args.Target is not { } target)
-            return;
-
-        InsertOccupant(sleeper, target);
-        _popup.PopupClient(Loc.GetString("rmc-sleeper-inserted-other", ("target", target), ("sleeper", sleeper)), args.User, args.User);
-    }
-
-    private static void OnSleeperCanDrop(Entity<SleeperComponent> sleeper, ref CanDropTargetEvent args)
-    {
-        if (sleeper.Comp.Occupant != null)
-            return;
-
-        args.Handled = true;
-        args.CanDrop = true;
-    }
-
-    private void OnSleeperDragDrop(Entity<SleeperComponent> sleeper, ref DragDropTargetEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (sleeper.Comp.Occupant != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), args.User, args.User);
-            return;
-        }
-
-        if (args.Dragged == args.User)
-        {
-            TryEnterSleeper(sleeper, args.User);
-        }
-        else
-        {
-            TryPushIntoSleeper(sleeper, args.User, args.Dragged);
         }
     }
 
@@ -245,62 +182,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         }
     }
 
-    private void TryEnterSleeper(Entity<SleeperComponent> sleeper, EntityUid user)
-    {
-        if (sleeper.Comp.Occupant != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), user, user);
-            return;
-        }
-
-        if (sleeper.Comp.InsertSelfDelay > TimeSpan.Zero)
-        {
-            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.InsertSelfDelay, new SleeperEntryDoAfterEvent(), sleeper, sleeper)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-            };
-            _doAfter.TryStartDoAfter(doAfter);
-        }
-        else
-        {
-            InsertOccupant(sleeper, user);
-        }
-    }
-
-    private void TryPushIntoSleeper(Entity<SleeperComponent> sleeper, EntityUid user, EntityUid target)
-    {
-        if (sleeper.Comp.Occupant != null)
-        {
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-already-occupied", ("sleeper", sleeper)), user, user);
-            return;
-        }
-
-        _popup.PopupClient(Loc.GetString("rmc-sleeper-inserting", ("target", target), ("sleeper", sleeper)), user, user);
-        if (sleeper.Comp.InsertOthersDelay > TimeSpan.Zero)
-        {
-            var doAfter = new DoAfterArgs(EntityManager, user, sleeper.Comp.InsertOthersDelay, new SleeperPushInDoAfterEvent(), sleeper, target)
-            {
-                BreakOnMove = true,
-                BreakOnDamage = true,
-            };
-            _doAfter.TryStartDoAfter(doAfter);
-        }
-        else
-        {
-            InsertOccupant(sleeper, target);
-            _popup.PopupClient(Loc.GetString("rmc-sleeper-inserted-other", ("target", target), ("sleeper", sleeper)), user, user);
-        }
-    }
-
-    private void InsertOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
-    {
-        if (!_container.TryGetContainer(sleeper, sleeper.Comp.ContainerId, out var container))
-            return;
-
-        _container.Insert(occupant, container);
-    }
-
     protected void EjectOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
     {
         if (!_container.TryGetContainer(sleeper, sleeper.Comp.ContainerId, out var container))
@@ -310,14 +191,10 @@ public abstract class SharedSleeperSystem : EntitySystem
         _audio.PlayPvs(sleeper.Comp.EjectSound, sleeper);
 
         if (sleeper.Comp.ExitStun > TimeSpan.Zero && !HasComp<NoStunOnExitComponent>(sleeper))
-        {
             _stun.TryStun(occupant, sleeper.Comp.ExitStun, true);
-        }
 
         if (_net.IsServer)
-        {
             _popup.PopupEntity(Loc.GetString("rmc-sleeper-ejected", ("entity", occupant)), sleeper);
-        }
     }
 
     private void UpdateSleeperVisuals(Entity<SleeperComponent> sleeper)
@@ -350,14 +227,27 @@ public abstract class SharedSleeperSystem : EntitySystem
 
         sleeper.Comp.IsFiltering = !sleeper.Comp.IsFiltering;
         if (sleeper.Comp.IsFiltering)
-        {
             sleeper.Comp.NextDialysisTick = _timing.CurTime + sleeper.Comp.DialysisTickDelay;
-        }
         else
-        {
             sleeper.Comp.DialysisStartedReagentVolume = 0;
-        }
 
         Dirty(sleeper);
+    }
+
+    private void OnInsideSleeperMoveInput(Entity<InsideSleeperComponent> ent, ref MoveInputEvent args)
+    {
+        if (!args.HasDirectionalMovement)
+            return;
+
+        if (_timing.ApplyingState)
+            return;
+
+        if (ent.Comp.Sleeper is not { } sleeperId)
+            return;
+
+        if (!TryComp<SleeperComponent>(sleeperId, out var sleeper))
+            return;
+
+        EjectOccupant((sleeperId, sleeper), ent);
     }
 }

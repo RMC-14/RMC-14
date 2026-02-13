@@ -35,8 +35,9 @@
     needsPower: false # TODO RMC14 power
   - type: DragInsertContainer
     containerId: sleeper
-  - type: ExitContainerOnMove
-    containerId: sleeper
+    entryDelay: 2
+    delaySelfEntry: true
+  - type: NoStunOnExit # Custom stun exit behavior + sound in SharedSleeperSystem
   - type: ContainerContainer
     containers:
       sleeper: !type:ContainerSlot {}
@@ -57,7 +58,6 @@
     blacklist:
       components:
       - Xeno
-  - type: NoStunOnExit
   - type: RMCMesonsNonviewable
 
 - type: entity
