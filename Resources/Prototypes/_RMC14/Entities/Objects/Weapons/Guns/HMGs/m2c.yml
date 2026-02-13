@@ -173,7 +173,7 @@
     amount: 30
   - type: RMCProjectileDamageFalloff
     thresholds:
-    - range: 2 # cm13 code says 7 but after testing it looks like it starts losing damage after the first tile
+    - range: 1 # cm13 code says 7 but after testing it looks like it starts losing damage after the first tile
       falloff: 3
     - range: 15
       falloff: 9999
@@ -181,7 +181,11 @@
     accuracy: 75
     thresholds:
     - range: 6 # porting this 1:1, which is what the component mentions, from cm13(10), makes it too accurate at high ranges so I lowered it
-      falloff: 5
+      falloff: 15
+    - range: 7 # Lose a chunk of accuracy at once instead of gradually over distance.
+      falloff: -15
+    - range: 10 # Start losing accuracy every unit of distance again
+      falloff: 10
 
 # Tags
 - type: Tag
