@@ -15,10 +15,12 @@ using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Tag;
+using Content.Shared.IdentityManagement;
 
 namespace Content.Server._RMC14.Xenonids.Construction;
 
@@ -163,7 +165,15 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", tripper)), core);
+            var othersFilter = Filter.Pvs(core);
+                foreach (var other in othersFilter.Recipients)
+                {
+                    if (other.AttachedEntity is not { } otherEnt)
+                        continue;
+
+                    _popup.PopupEntity(Loc.GetString("rmc-xeno-larva-recovered", ("larva", Identity.Name(tripper, EntityManager, otherEnt))),
+                    core, othersFilter, true, PopupType.Medium);
+                }
             _hive.IncreaseBurrowedLarva(1);
             QueueDel(tripper);
         }
