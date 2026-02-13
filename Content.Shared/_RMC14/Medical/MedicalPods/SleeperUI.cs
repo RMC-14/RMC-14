@@ -27,7 +27,7 @@ public sealed class SleeperBuiState(
     FixedPoint2 reagentsWhenStarted,
     bool autoEjectDead,
     FixedPoint2 maxChem,
-    float crisisMinDamage,
+    float crisisDamageBeforeCrit,
     SleeperChemicalData[] chemicals,
     int[] injectionAmounts)
     : BoundUserInterfaceState
@@ -52,7 +52,7 @@ public sealed class SleeperBuiState(
     public readonly FixedPoint2 ReagentsWhenStarted = reagentsWhenStarted;
     public readonly bool AutoEjectDead = autoEjectDead;
     public readonly FixedPoint2 MaxChem = maxChem;
-    public readonly float CrisisMinDamage = crisisMinDamage;
+    public readonly float CrisisDamageBeforeCrit = crisisDamageBeforeCrit;
     public readonly SleeperChemicalData[] Chemicals = chemicals;
     public readonly int[] InjectionAmounts = injectionAmounts;
 }

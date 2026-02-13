@@ -81,10 +81,9 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         HealthBar.MinValue = 0;
         HealthBarText.Text = $"{state.Health:F0}";
 
-        var crisisDamageThreshold = state.MaxHealth - state.CrisisMinDamage;
         HealthBar.ForegroundStyleBoxOverride = state.Health switch
         {
-            _ when state.Health >= crisisDamageThreshold => new StyleBoxFlat(Color.FromHex("#408040")),
+            _ when state.Health >= state.CrisisDamageBeforeCrit => new StyleBoxFlat(Color.FromHex("#408040")),
             >= 0 => new StyleBoxFlat(Color.FromHex("#A0A030")),
             _ => new StyleBoxFlat(Color.FromHex("#A04040"))
         };

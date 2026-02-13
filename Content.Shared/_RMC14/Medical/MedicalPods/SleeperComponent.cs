@@ -62,11 +62,11 @@ public sealed partial class SleeperComponent : Component
     public FixedPoint2 MaxChemical = 40;
 
     /// <summary>
-    /// Damage threshold for crisis mode. When total damage exceeds this, EmergencyChemicals become available to use.
+    /// How much damage BEFORE going crit. When this threshold is reached, enter crisis mode.
     /// 0 = healthy, 150 = crit, 200 = dead
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float CrisisMinDamage = 90;
+    public float CrisisDamageBeforeCrit = 60;
 
     [DataField, AutoNetworkedField]
     public bool IsFiltering;

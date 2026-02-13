@@ -88,7 +88,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         // Emergency chemicals only work in crisis mode
         if (isEmergency && !isAvailable)
         {
-            if (!TryComp<DamageableComponent>(occupant, out var damageable) || damageable.TotalDamage <= sleeper.CrisisMinDamage)
+            if (!TryComp<DamageableComponent>(occupant, out var damageable) || damageable.TotalDamage <= sleeper.CrisisDamageBeforeCrit)
                 return;
         }
 
@@ -168,6 +168,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var bloodPercent = 0f;
         var pulse = 0;
         var bodyTemp = 0f;
+        var crisisDamageBeforeCrit = 0f;
         FixedPoint2 totalReagents = 0;
         Solution? cachedChemSol = null;
 
@@ -191,6 +192,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 {
                     maxHealth = (float) critThreshold;
                     health = (float) (critThreshold - totalDamage);
+                    crisisDamageBeforeCrit = (float) (critThreshold - sleeper.CrisisDamageBeforeCrit);
                 }
 
                 bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
@@ -227,7 +229,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             _emergencyChemLookup.Add(chem);
         }
 
-        var inCrisis = totalDamage > sleeper.CrisisMinDamage;
+        var inCrisis = totalDamage >= crisisDamageBeforeCrit;
         var totalChemCount = sleeper.AvailableChemicals.Length;
         if (inCrisis)
             totalChemCount += sleeper.EmergencyChemicals.Length;
@@ -272,7 +274,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.DialysisStartedReagentVolume,
             sleeper.AutoEjectDead,
             sleeper.MaxChemical,
-            sleeper.CrisisMinDamage,
+            crisisDamageBeforeCrit,
             chemicals.ToArray(),
             sleeper.InjectionAmounts.ToArray());
 
