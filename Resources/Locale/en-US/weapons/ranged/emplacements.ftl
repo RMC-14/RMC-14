@@ -7,6 +7,7 @@ emplacement-mount-deploy-broken = You can't set up the {$mount}, it's completely
 emplacement-mounted-weapon-overheated = The {$weapon} is damaged by overheating!
 emplacement-mount-broken-examine = [color=red]The gun can't be used in it's current broken state, use a [/color] [color=cyan]welder[/color][color=red] to start repairing it.[/color]
 emplacement-mount-need-hands-free = You need both hands free to grab the handles!
+emplacement-mount-too-far = You are too far from the handles to man the {$mount}!
 
 mountable-weapon-no-free-hands = You need both hands free to operate the weapon.
 

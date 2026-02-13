@@ -145,6 +145,12 @@ public sealed partial class WeaponMountComponent : Component
     [DataField, AutoNetworkedField]
     public bool AcidableWhileDeployed;
 
+    /// <summary>
+    ///     How close you need to be to the mount to strap yourself to it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float MountableDistance = 2;
+
     [DataField, AutoNetworkedField]
     public string? DeployFixture = "mount";
 

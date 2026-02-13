@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
@@ -16,6 +17,7 @@ using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode;
 using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
@@ -63,6 +65,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionBlock = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly FixtureSystem _fixture = default!;
     [Dependency] private readonly FoldableSystem _foldable = default!;
@@ -510,6 +513,17 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     {
         if (!HasHandsFreePopup(args.Buckle, ent, args.Popup))
         {
+            args.Cancelled = true;
+            return;
+        }
+
+        if (!_directionBlock.IsBehindTarget(ent ,args.Buckle) ||
+            ent.Owner.ToCoordinates().TryDistance(EntityManager, args.Buckle.Owner.ToCoordinates(), out var distance )
+            && distance > ent.Comp.MountableDistance)
+        {
+            var msg = Loc.GetString("emplacement-mount-too-far", ("mount", ent));
+            _popup.PopupClient(msg, args.Buckle, args.Buckle, PopupType.SmallCaution );
+
             args.Cancelled = true;
             return;
         }
