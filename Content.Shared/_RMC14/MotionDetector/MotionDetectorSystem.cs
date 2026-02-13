@@ -362,6 +362,9 @@ public sealed class MotionDetectorSystem : EntitySystem
             if (time < detector.NextScanAt)
                 continue;
 
+            if (detector.LastUser is not { } lastUser)
+                continue;
+
             detector.LastScan = time;
             detector.NextScanAt = time + GetRefreshRate((uid, detector));
             Dirty(uid, detector);
@@ -370,17 +373,13 @@ public sealed class MotionDetectorSystem : EntitySystem
             _tracked.Clear();
             _entityLookup.GetEntitiesInRange(uid.ToCoordinates(), range, _tracked, LookupFlags.Uncontained);
 
-            var userUid = Transform(uid).ParentUid;
-            if (!HasComp<UserIFFComponent>(userUid))
-                userUid = Transform(userUid).ParentUid;
-
             _userFactions.Clear();
-            var hasFaction = _gunIFF.TryGetFactions((userUid, null), _userFactions);
+            var hasFaction = _gunIFF.TryGetFactions((lastUser, null), _userFactions);
 
             detector.Blips.Clear();
             foreach (var tracked in _tracked)
             {
-                if (tracked.Owner == detector.LastUser)
+                if (tracked.Owner == lastUser)
                     continue;
 
                 if (tracked.Comp.LastMove < time - detector.MoveTime)
