@@ -11,10 +11,12 @@ using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.UserInterface;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
+using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -23,6 +25,7 @@ namespace Content.Server._RMC14.Medical.MedicalPods;
 public sealed class SleeperSystem : SharedSleeperSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
@@ -54,7 +57,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<SleeperComponent, MobStateChangedEvent>(OnSleeperMobStateChanged);
+        SubscribeLocalEvent<MobStateComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<SleeperConsoleComponent, AfterActivatableUIOpenEvent>(OnConsoleUIOpened);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperInjectChemicalBuiMsg>(OnConsoleInjectChemical);
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperToggleFilterBuiMsg>(OnConsoleToggleFilter);
@@ -62,20 +65,26 @@ public sealed class SleeperSystem : SharedSleeperSystem
         SubscribeLocalEvent<SleeperConsoleComponent, SleeperAutoEjectDeadBuiMsg>(OnConsoleAutoEjectDead);
     }
 
-    private void OnSleeperMobStateChanged(Entity<SleeperComponent> sleeper, ref MobStateChangedEvent args)
+    private void OnMobStateChanged(Entity<MobStateComponent> mob, ref MobStateChangedEvent args)
     {
-        if (sleeper.Comp.Occupant != args.Target)
+        if (!_container.TryGetContainingContainer((mob, null), out var container))
             return;
 
-        UpdateSleeperVisuals(sleeper);
+        if (!TryComp<SleeperComponent>(container.Owner, out var sleeper))
+            return;
 
-        if (!sleeper.Comp.AutoEjectDead)
+        if (sleeper.Occupant != mob.Owner)
+            return;
+
+        UpdateSleeperVisuals((container.Owner, sleeper));
+
+        if (!sleeper.AutoEjectDead)
             return;
 
         if (args.NewMobState == MobState.Dead)
         {
-            _audio.PlayPvs(sleeper.Comp.AutoEjectDeadSound, sleeper);
-            EjectOccupant(sleeper, args.Target);
+            _audio.PlayPvs(sleeper.AutoEjectDeadSound, container.Owner);
+            EjectOccupant((container.Owner, sleeper), mob.Owner);
         }
     }
 
@@ -160,6 +169,13 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
         sleeper.AutoEjectDead = args.Enabled;
         Dirty(sleeperId, sleeper);
+
+        if (args.Enabled && sleeper.Occupant is { } occupant && _mobState.IsDead(occupant))
+        {
+            _audio.PlayPvs(sleeper.AutoEjectDeadSound, sleeperId);
+            EjectOccupant((sleeperId, sleeper), occupant);
+        }
+
         UpdateUI(console);
     }
 
