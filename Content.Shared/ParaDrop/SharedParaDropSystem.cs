@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Rules;
+using Content.Shared._RMC14.Xenonids.Neurotoxin;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
 using Content.Shared.Interaction.Events;
@@ -61,6 +62,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         SubscribeLocalEvent<ParaDroppingComponent, ThrowPushbackAttemptEvent>(OnThrowPushbackAttempt);
         SubscribeLocalEvent<ParaDroppingComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
         SubscribeLocalEvent<ParaDroppingComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
+        SubscribeLocalEvent<ParaDroppingComponent, NeurotoxinInjectAttemptEvent>(OnNeurotoxinInjectAttempt);
 
         SubscribeLocalEvent<SkyFallingComponent, ComponentShutdown>(OnComponentShutdown);
     }
@@ -192,6 +194,11 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     private void OnUpdateCanMove(Entity<ParaDroppingComponent> ent, ref UpdateCanMoveEvent args)
     {
         args.Cancel();
+    }
+
+    private void OnNeurotoxinInjectAttempt(Entity<ParaDroppingComponent> ent, ref NeurotoxinInjectAttemptEvent args)
+    {
+        args.Cancelled = true;
     }
 
     /// <summary>

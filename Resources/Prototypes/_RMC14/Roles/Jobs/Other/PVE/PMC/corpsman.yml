@@ -25,19 +25,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVECorpsman
     - type: CMVendorUser
       id: CMPMCCorpsmanPVE
       points: 0
