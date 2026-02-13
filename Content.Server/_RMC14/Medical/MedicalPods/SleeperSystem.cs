@@ -122,7 +122,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
             !TryComp(sleeperId, out SleeperComponent? sleeper))
             return;
 
-        TryEjectOccupant((sleeperId, sleeper), args.Actor);
+        if (sleeper.Occupant is { } occupant)
+            EjectOccupant((sleeperId, sleeper), occupant);
+
         UpdateUI(console);
     }
 

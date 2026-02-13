@@ -6,7 +6,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.UserInterface;
-using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -37,7 +36,6 @@ public abstract class SharedSleeperSystem : EntitySystem
         SubscribeLocalEvent<SleeperComponent, EntInsertedIntoContainerMessage>(OnSleeperEntInserted);
         SubscribeLocalEvent<SleeperComponent, EntRemovedFromContainerMessage>(OnSleeperEntRemoved);
         SubscribeLocalEvent<SleeperComponent, InteractHandEvent>(OnSleeperInteractHand);
-        SubscribeLocalEvent<SleeperComponent, GetVerbsEvent<InteractionVerb>>(OnSleeperVerbs);
         SubscribeLocalEvent<SleeperComponent, SleeperEntryDoAfterEvent>(OnSleeperEntryDoAfter);
         SubscribeLocalEvent<SleeperComponent, SleeperPushInDoAfterEvent>(OnSleeperPushInDoAfter);
         SubscribeLocalEvent<SleeperComponent, CanDropTargetEvent>(OnSleeperCanDrop);
@@ -128,34 +126,10 @@ public abstract class SharedSleeperSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (sleeper.Comp.Occupant != null)
+        if (sleeper.Comp.Occupant is { } occupant)
         {
-            TryEjectOccupant(sleeper, args.User);
+            EjectOccupant(sleeper, occupant);
             args.Handled = true;
-        }
-    }
-
-    private void OnSleeperVerbs(Entity<SleeperComponent> sleeper, ref GetVerbsEvent<InteractionVerb> args)
-    {
-        if (!args.CanAccess || !args.CanInteract)
-            return;
-
-        var user = args.User;
-        if (sleeper.Comp.Occupant != null)
-        {
-            args.Verbs.Add(new InteractionVerb
-            {
-                Act = () => TryEjectOccupant(sleeper, user),
-                Text = Loc.GetString("rmc-sleeper-eject-verb"),
-            });
-        }
-        else if (args.Target != user)
-        {
-            args.Verbs.Add(new InteractionVerb
-            {
-                Act = () => TryEnterSleeper(sleeper, user),
-                Text = Loc.GetString("rmc-sleeper-enter-verb"),
-            });
         }
     }
 
@@ -325,14 +299,6 @@ public abstract class SharedSleeperSystem : EntitySystem
             return;
 
         _container.Insert(occupant, container);
-    }
-
-    protected void TryEjectOccupant(Entity<SleeperComponent> sleeper, EntityUid? user)
-    {
-        if (sleeper.Comp.Occupant is not { } occupant)
-            return;
-
-        EjectOccupant(sleeper, occupant);
     }
 
     protected void EjectOccupant(Entity<SleeperComponent> sleeper, EntityUid occupant)
