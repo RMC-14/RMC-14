@@ -230,6 +230,9 @@
     - RMCStethoscope
     - RMCSurgicalCaseRCMFilled
     - CMHealthAnalyzer
+    - RMCBurnAidKitFilledPVE
+    - RMCBruteAidKitFilledPVE
+    - RMCStandardAidKitFilledPVE
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
