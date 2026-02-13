@@ -71,5 +71,5 @@ rmc-squad-info-RCMPVETroopCommander = Troop Commander
 rmc-squad-info-RCMTeamLead = Team Leader
 rmc-squad-info-RCMLieutenant = Lieutenant
 
-rmc-squad-info-EIAFSquadLeader = Squad Leader
-rmc-squad-info-EIAFCommander = Commander
+rmc-squad-info-ParaSquadLeader = Squad Leader
+rmc-squad-info-ParaCommander = Commander

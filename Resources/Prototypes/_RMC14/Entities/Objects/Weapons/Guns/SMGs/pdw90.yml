@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: CMBaseWeaponSMG
-  name: FN PDW90 submachinegun
+  name: FN PDW90 submachine gun
   id: RMCWeaponSMGPDW90
-  description: The FN PDW90 submachine gun. An archaic design, but still widely used by corporate and mercenary groups, sometimes seen in the hands of civilian populations. This weapon only accepts 5.7×28mm rounds.
+  description: The PDW90 submachine gun. An archaic design, but still widely used by corporate and mercenary groups, sometimes seen in the hands of civilian populations. This weapon only accepts 5.7×28mm rounds.
   suffix: Filled
   components:
   - type: Sprite
@@ -94,9 +94,9 @@
     
 - type: entity
   parent: RMCWeaponSMGPDW90
-  name: FN-TSE PDW90 submachinegun
+  name: L57 submachine gun
   id: RMCWeaponSMGPDW90TSE
-  description: A variation of the FN PDW90 submachine gun. Used by mercenaries and TSE royal marines. This weapon only accepts 5.7x28mm rounds.
+  description: A PDW90 submachine gun in the colors of the Royal Crown Marines, manufactured for the TSE's armed forces under license. This weapon only accepts 5.7x28mm rounds.
   suffix: Filled
   components:
     - type: Sprite
@@ -124,7 +124,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGPDW90
-  name: "FN PDW90 magazine (5.7×28mm)"
+  name: "PDW90 magazine (5.7×28mm)"
   description: "A 5.7×28mm magazine for the FN PDW90."
   components:
   - type: Tag
@@ -155,7 +155,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineSMGPDW90AP
-  name: "FN PDW90 AP magazine (5.7×28mm)"
+  name: "PDW90 AP magazine (5.7×28mm)"
   description: "An armor-piercing 5.7x28mm magazine for the FN PDW90."
   components:
     - type: Tag

@@ -100,100 +100,100 @@
   prefix: Gen.
   paygrade: O10
 
-# The below ranks are for the EIAF insert on Hybrisa
+# The below ranks are for the Para insert on Hybrisa
 
 - type: rank
-  id: RMCRankEIAFPrivate
+  id: RMCRankParaPrivate
   name: Private
   prefix: Pte.
   paygrade: E1
 
 - type: rank
-  id: RMCRankEIAFPrivateSecondClass
+  id: RMCRankParaPrivateSecondClass
   name: Private Second Class
   prefix: Pte2.
   paygrade: E2
 
 - type: rank
-  id: RMCRankEIAFLanceCorporal
+  id: RMCRankParaLanceCorporal
   name: Lance Corporal
   prefix: LCpl.
   paygrade: E3
 
 - type: rank
-  id: RMCRankEIAFCorporal
+  id: RMCRankParaCorporal
   name: Corporal
   prefix: Cpl.
   paygrade: E4
 
 - type: rank
-  id: RMCRankEIAFSergeant
+  id: RMCRankParaSergeant
   name: Sergeant
   prefix: Sgt.
   paygrade: E5
 
 - type: rank
-  id: RMCRankEIAFStaffSergeant
+  id: RMCRankParaStaffSergeant
   name: Staff Sergeant
   prefix: SSgt.
   paygrade: E6
 
 - type: rank
-  id: RMCRankEIAFWarrantOfficerClass2
+  id: RMCRankParaWarrantOfficerClass2
   name: Warrant Officer Class 2
   prefix: WO2.
   paygrade: E7
 
 - type: rank
-  id: RMCRankEIAFSecondLieutenant
+  id: RMCRankParaSecondLieutenant
   name: Second Lieutenant.
   prefix: 2Lt.
   paygrade: O1
 
 - type: rank
-  id: RMCRankEIAFLieutenant
+  id: RMCRankParaLieutenant
   name: Lieutenant
   prefix: Lt.
   paygrade: O2
 
 - type: rank
-  id: RMCRankEIAFCaptain
+  id: RMCRankParaCaptain
   name: Captain
   prefix: Capt.
   paygrade: O3
 
 - type: rank
-  id: RMCRankEIAFMajor
+  id: RMCRankParaMajor
   name: Major
   prefix: Maj.
   paygrade: O4
 
 - type: rank
-  id: RMCRankEIAFLieutenantColonel
+  id: RMCRankParaLieutenantColonel
   name: Lieutenant Colonel
   prefix: LtCol.
   paygrade: O5
 
 - type: rank
-  id: RMCRankEIAFColonel
+  id: RMCRankParaColonel
   name: Colonel
   prefix: Col.
   paygrade: O6
 
 - type: rank
-  id: RMCRankEIAFBrigadier
+  id: RMCRankParaBrigadier
   name: Brigadier
   prefix: Brig.
   paygrade: O7
 
 - type: rank
-  id: RMCRankEIAFMajorGeneral
+  id: RMCRankParaMajorGeneral
   name: Major General
   prefix: MajGen.
   paygrade: O8
 
 - type: rank
-  id: RMCRankEIAFGeneralBrigade
+  id: RMCRankParaGeneralBrigade
   name: General of the Brigade
   prefix: GenBrig.
   paygrade: O9

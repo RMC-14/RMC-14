@@ -685,6 +685,22 @@
     - RMCAttachmentRail
     - RMCAttachmentSASOS
 
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentL89Scope
+  name: L89 integrated optic
+  description: The rifle's about as useful as you are now, you wanker. Put it back on.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    state: l89_scope
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentL89Scope
+
 - type: Tag
   id: RMCAttachmentRail
 
@@ -744,3 +760,6 @@
 
 - type: Tag
   id: RMCAttachmentSASOS
+
+- type: Tag
+  id: RMCAttachmentL89Scope

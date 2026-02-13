@@ -249,12 +249,12 @@
     - SquadLeader
     - FORECONCommandingOfficer
       
-# EIAF Hybrisa survivor insert
+# Paramarine Hybrisa survivor insert
 - type: entity
-  parent: RMCHeadsetIconsEIAF
-  id: RMCHeadsetEIAF
-  name: EIAF headset
-  description: A sleek headset used by the EIAF. Low profile enough to fit under any headgear.
+  parent: RMCHeadsetIconsPara
+  id: RMCHeadsetPara
+  name: paramarine headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
   suffix: Survivor
   components:
     - type: Sprite
@@ -268,16 +268,16 @@
       channels:
         - RoyalMarine
     - type: GrantSquadLeaderTracker
-      defaultMode: EIAFSquadLeader
+      defaultMode: ParaSquadLeader
       trackerModes:
-        - EIAFSquadLeader
-        - EIAFCommander
+        - ParaSquadLeader
+        - ParaCommander
 
 - type: entity
-  parent: RMCHeadsetEIAF
-  id: RMCHeadsetEIAFTeamLead
-  name: EIAF team leader's headset
-  description: A sleek headset used by the EIAF. Low profile enough to fit under any headgear.
+  parent: RMCHeadsetPara
+  id: RMCHeadsetParaTeamLead
+  name: paramarine team leader's headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
   suffix: Survivor
   components:
     - type: RMCHeadset
@@ -285,13 +285,13 @@
         - RoyalMarine
       radioTextIncrease: 2
     - type: GrantSquadLeaderTracker
-      defaultMode: EIAFCommander
+      defaultMode: ParaCommander
           
 - type: entity
-  parent: RMCHeadsetEIAF
-  id: RMCHeadsetEIAFOfficer
-  name: EIAF officer's headset
-  description: A sleek headset used by the EIAF. Low profile enough to fit under any headgear. This one is heavier with the weight of responsibility.
+  parent: RMCHeadsetPara
+  id: RMCHeadsetParaOfficer
+  name: paramarine officer's headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear. This one is heavier with the weight of responsibility.
   suffix: Survivor
   components:
     - type: RMCHeadset
@@ -299,7 +299,7 @@
         - RoyalMarine
       radioTextIncrease: 3
     - type: GrantSquadLeaderTracker
-      defaultMode: EIAFSquadLeader
+      defaultMode: ParaSquadLeader
 
 #for UNMC personnel
 - type: entity

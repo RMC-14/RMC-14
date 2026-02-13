@@ -287,8 +287,8 @@
       
 - type: entity
   parent: SquadBase
-  id: SquadEIAF
-  name: EIAF
+  id: SquadPara
+  name: Paramarine
   components:
   - type: SquadTeam
     color: "#3D6F43"
@@ -303,18 +303,18 @@
     radio: TSE
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_eiaf
+      state: background_para
     canSupplyDrop: false
-    group: EIAF
+    group: Paramarine
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: rmc_teamleader
   - type: Tag
     tags:
-      - SquadEIAF
+      - SquadPara
 
 - type: Tag
-  id: SquadEIAF
+  id: SquadPara
 
 - type: entity
   parent: SquadBase

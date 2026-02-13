@@ -200,11 +200,11 @@ rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
 rmc-job-name-survivor-construction-worker = Construction Worker
 rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
-# EIAF survs
+# Paramarine survs
 
-rmc-job-greeting-eiaf = You are a member of the EIAF Parachute Regiment!
+rmc-job-greeting-para = You are a member of the RCM's 24th Parachute Regiment!
 
-  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world — the EIAF included. Your Regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers
+  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 
@@ -212,23 +212,23 @@ rmc-job-greeting-eiaf = You are a member of the EIAF Parachute Regiment!
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-name-eiaf = EIAF Survivor
-rmc-job-description-eiaf = You are a stranded TSE EIAF paratrooper. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
+rmc-job-name-para = Paramarine Survivor
+rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
 
-rmc-job-name-eiaf-paratrooper = Paratrooper
-rmc-job-name-eiaf-pilot = Fleet Air Arm (Dropship Pilot)
-rmc-job-name-eiaf-engineer = Paratrooper (Combat Engineer)
-rmc-job-name-eiaf-medic = Paratrooper (Combat Medical Technician)
-rmc-job-prefix-eiaf-paratrooper = 24/PARA
+rmc-job-name-paramarine = Rifleman
+rmc-job-name-para-pilot = Fleet Air Arm Pilot
+rmc-job-name-para-engineer = Assault Engineer
+rmc-job-name-para-medic = Medical Technician
+rmc-job-prefix-paratrooper = 24/PARA
 
-rmc-job-name-eiaf-squad-leader = Paratrooper (Squad Leader)
-rmc-job-prefix-eiaf-squad-leader = 24/PARA SL
+rmc-job-name-para-squad-leader = Squad Leader
+rmc-job-prefix-para-squad-leader = 24/PARA SL
 
-rmc-job-name-eiaf-synth = Support Synthetic
-rmc-job-prefix-eiaf-synth = 24/PARA Syn
+rmc-job-name-para-synth = Support Synthetic
+rmc-job-prefix-para-synth = 24/PARA Syn
 
-rmc-job-name-eiaf-commander = Commander
-rmc-job-prefix-eiaf-commander = EIAF CDR
+rmc-job-name-para-commander = Commander
+rmc-job-prefix-para-commander = 24/PARA CDR
 
 # Sorokyne Strata Survs
 
