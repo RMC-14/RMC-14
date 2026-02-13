@@ -145,6 +145,9 @@ public sealed partial class WeaponMountComponent : Component
     [DataField, AutoNetworkedField]
     public bool AcidableWhileDeployed;
 
+    [DataField, AutoNetworkedField]
+    public string? DeployFixture = "mount";
+
     [DataField]
     public SoundSpecifier? UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
 
