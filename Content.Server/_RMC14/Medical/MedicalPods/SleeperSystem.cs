@@ -43,12 +43,12 @@ public sealed class SleeperSystem : SharedSleeperSystem
     private const string GeneticGroup = "Genetic";
 
     // TODO RMC14 RMCTemperatureSystem => put these in RMCTemperatureComponent (Temperatures in Kelvin)
-    private const float ColdLevel3 = 120f;
-    private const float ColdLevel2 = 240f;
-    private const float ColdLevel1 = 260.15f;
-    private const float HeatLevel1 = 373.15f;
-    private const float HeatLevel2 = 400f;
     private const float HeatLevel3 = 800f;
+    private const float HeatLevel2 = 400f;
+    private const float HeatLevel1 = 373.15f;
+    private const float ColdLevel1 = 260.15f;
+    private const float ColdLevel2 = 240f;
+    private const float ColdLevel3 = 120f;
 
     public override void Initialize()
     {

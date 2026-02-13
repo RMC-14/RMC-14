@@ -114,7 +114,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
             -3 => new StyleBoxFlat(Color.FromHex("#0000AA")),
             -2 => new StyleBoxFlat(Color.FromHex("#0066FF")),
             -1 => new StyleBoxFlat(Color.FromHex("#66CCFF")),
-            0 => new StyleBoxFlat(Color.FromHex("#408040")),
             1 => new StyleBoxFlat(Color.FromHex("#FFFF00")),
             2 => new StyleBoxFlat(Color.FromHex("#FF8800")),
             3 => new StyleBoxFlat(Color.FromHex("#FF0000")),
