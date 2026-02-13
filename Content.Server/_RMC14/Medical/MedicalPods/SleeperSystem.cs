@@ -237,9 +237,8 @@ public sealed class SleeperSystem : SharedSleeperSystem
                 pulse = _rmcPulse.GetPulseValue(occupant.Value, true);
             }
 
-            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out var currentTemperature))
+            if (_rmcTemperature.TryGetCurrentTemperature(occupant.Value, out bodyTemp))
             {
-                bodyTemp = currentTemperature;
                 temperatureSuitability = bodyTemp switch
                 {
                     < ColdLevel3 => -3,
