@@ -193,9 +193,6 @@
   description: The Fujin 4100 Power Loader is a commercial mechanized exoskeleton used for lifting heavy materials and objects based on the LU-50 Power Loader, first designed on October 28, 2025 by the Weston Corporation. An old but trusted design used in warehouses, constructions and military ships everywhere. This one has a signature green and yellow livery of Fujin. The label claims they make electronics and machinery, though you've never heard of them before.
   components:
   - type: Sprite
-    drawdepth: Mobs
-    noRot: true
-    sprite: _RMC14/Objects/power_loader.rsi
     layers:
     - state: owerloader_open_j
       map: [ "strap" ]
@@ -215,9 +212,6 @@
   description: The Ferret Heavy Industries Mk4 Power Loader is a commercial mechanized exoskeleton used for lifting heavy materials and objects based on the LU-50, first designed on October 28, 2025 by the Weston Corporation. An old but trusted design used in warehouses, constructions and military ships everywhere. This one has the signature blue and white livery of the now defunct Ferret Heavy Industries that went bankrupt in 2123.
   components:
   - type: Sprite
-    drawdepth: Mobs
-    noRot: true
-    sprite: _RMC14/Objects/power_loader.rsi
     layers:
     - state: powerloader_open_ft
       map: [ "strap" ]
