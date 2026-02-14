@@ -2091,6 +2091,7 @@
         map: [ "l54_fill" ]
       - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
         state: icon-front
+        map: [ "holstered" ]
       - state: half
         map: [ "openLayer" ]
       - state: full
@@ -2143,7 +2144,8 @@
               - Sidearm
         warwick_fill:
           whitelist:
-            - RMCWeaponRevolverWarwickMkVII
+            tags:
+              - RMCWeaponRevolverWarwickMkVII
         l54_fill:
           whitelist:
             tags:
