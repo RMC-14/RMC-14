@@ -1,5 +1,5 @@
 using Content.Shared.Actions;
-using Content.Shared._RMC14.Xenonids.Eye; // RMC14
+using Content.Shared._RMC14.Actions; // RMC14
 using Content.Shared.Interaction;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -10,7 +10,7 @@ namespace Content.Shared.Actions.Components;
 /// An action that targets an entity or map.
 /// Requires <see cref="ActionComponent"/>.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(QueenEyeSystem))] // RMC14
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(SwappableActionSystem))] // RMC14
 [EntityCategory("Actions")]
 [AutoGenerateComponentState] // RMC14
 public sealed partial class TargetActionComponent : Component
