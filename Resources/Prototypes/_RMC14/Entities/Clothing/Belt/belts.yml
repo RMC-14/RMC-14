@@ -2187,10 +2187,6 @@
       sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
       layers:
       - state: icon
-      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
-        state: warwick
-        map: [ "enum.CMHolsterLayers.Fill" ]
-        visible: false
       - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
         state: icon-front
       - state: half
