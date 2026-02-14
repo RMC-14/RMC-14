@@ -151,9 +151,6 @@
 
 - type: Tag
   id: RMCWeaponPistolL54
-  
-- type: tag
-  id: RMCWeaponPistolL54Custom
 
 - type: Tag
   id: RMCMagazinePistolL54
