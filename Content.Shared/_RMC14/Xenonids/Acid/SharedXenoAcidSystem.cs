@@ -359,8 +359,15 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
-    public void SetCorrodible(CorrodibleComponent component, bool isCorrodible)
+    /// <summary>
+    ///     Set the entity's corrodible status.
+    /// </summary>
+    /// <param name="entity">The entity whose corrodible state is being changed</param>
+    /// <param name="isCorrodible">The new corrodible value</param>
+    public void SetCorrodible(EntityUid entity, bool isCorrodible)
     {
-        component.IsCorrodible = isCorrodible;
+        var corrodible = EnsureComp<CorrodibleComponent>(entity);
+        corrodible.IsCorrodible = isCorrodible;
+        Dirty(entity, corrodible);
     }
 }
