@@ -687,6 +687,39 @@
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
+  id: RMCAttachmentScopeMGLIntegrated
+  name: L989A2 collimator sight assembly
+  description: Blimey... I think that's supposed to be stuck on...
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+    state: collisight
+  - type: AttachableToggleable
+    breakOnMove: false
+    icon:
+      sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
+      state: collisight
+    actionName: Look through collimator sight
+    actionDesc: Lets you see further and rain down explosives on the enemy without hitting your fellow Marines.
+  - type: Scope
+    zoomLevels:
+    - zoom: 1
+      offset: 10
+      allowMovement: true
+      doAfter: 0
+  - type: AttachableSpeedMods
+    modifiers:
+    - conditions:
+        activeOnly: true
+      walk: -0.31
+      sprint: -0.448
+  - type: Tag
+    tags:
+    - RMCAttachmentRail
+    - RMCAttachmentMGLIntegratedScope
+
+- type: entity
+  parent: RMCAttachmentS42xTelescopicMiniscope
   id: RMCAttachmentL89Scope
   name: L89 integrated optic
   description: The rifle's about as useful as you are now, you wanker. Put it back on.
@@ -760,6 +793,9 @@
 
 - type: Tag
   id: RMCAttachmentSASOS
+
+- type: Tag
+  id: RMCAttachmentMGLIntegratedScope
 
 - type: Tag
   id: RMCAttachmentL89Scope

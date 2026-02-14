@@ -1341,17 +1341,6 @@
     - id: RMCMK80
 
 - type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCMK80BeltPMCFilled
-  suffix: Filled, MK80
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolMK80
-      amount: 6
-    - id: RMCMK80
-
-- type: entity
   parent: RMCBeltHolsterPistolRCM
   id: RMCMK80BeltRoyalFilled
   suffix: Filled, MK80
@@ -2228,6 +2217,89 @@
           whitelist:
             tags:
               - RMCWeaponPistolL54
+
+# PVE RCM belts
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltRoyalMortar
+  name: L79 pattern load-bearing rig
+  description: An L79 pattern load-bearing rig configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
+  suffix: PVE, RCM, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.375, 0
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,17,1
+    whitelist:
+      components:
+      - MortarShell
+      tags:
+      - Sidearm
+      - RMCGrenadePacket20mm
+      - RMCGrenade20mm
+      - CMMagazinePistol
+  #      - # TODO RMC14 pistol, revolver, flaregun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+    - popup: rmc-storage-limit-max-shells
+      count: 10
+      whitelist:
+        components:
+        - MortarShell
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+
+- type: entity 
+  parent: RMCBeltRoyalMortar
+  id: RMCBeltRoyalMortarFilled
+  suffix: PVE, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL14
+      amount: 1
+    - id: RMCMagazinePistolL14
+      amount: 1
+    - id: RMCPacketGrenade20mmHEFilled
+      amount: 2
+    - id: RMCPacketGrenade20mmIncendiaryFilled
+      amount: 1
+
+- type: entity
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCBeltHolsterPistolRCM
+  name: L29 sidearm rig
+  description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
+  suffix: PVE, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL14
+      amount: 1
+    - id: RMCMagazinePistolL14
+      amount: 5
 
 - type: Tag
   id: RMCNailgunHolster
