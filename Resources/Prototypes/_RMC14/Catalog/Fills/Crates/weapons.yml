@@ -65,7 +65,7 @@
 - type: entity
   parent: RMCCrateWeapons
   id: RMCCrateM34
-  name: M34 Flamethrower Crate (M34 x2, Broiler-T Fuelback x2)
+  name: M34 Flamethrower Crate (M34 x2, G4-1 fueltank x2)
   components:
   - type: StorageFill
     contents:

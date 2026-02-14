@@ -1,32 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: Correspondents now have the Command, JTAC, and Intel channels as read-only.
-    type: Tweak
-  id: 2432
-  time: '2025-10-06T10:25:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7986
-- author: CatAndHats
-  changes:
-  - message: Combat Technician chat prefix changed from "ComTech" to "CT"
-    type: Tweak
-  id: 2433
-  time: '2025-10-06T10:28:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7961
-- author: DummeHytteOst
-  changes:
-  - message: Fixed windows taking an incorrect amount of damage.
-    type: Fix
-  id: 2434
-  time: '2025-10-06T12:23:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8063
-- author: CyberTropic
-  changes:
-  - message: Added a southern extension to Kutjevo.
-    type: Add
-  id: 2435
-  time: '2025-10-06T19:48:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7998
 - author: OmerF-afk
   changes:
   - message: Added L42A Rifle and magazine types for it
@@ -4553,5 +4525,49 @@
   id: 2933
   time: '2026-02-11T22:32:05.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9223
+- author: DrSmugleaf
+  changes:
+  - message: Added remote transfer plasma for Queen while in ovi. It restores 75%
+      of the target's plasma and costs 400 plasma to use.
+    type: Add
+  - message: Added remote expand weeds for Queen while in ovi. It creates new weeds
+      next to other weeds for 50 plasma, and can turn weeds into weed nodes for 260
+      plasma.
+    type: Add
+  - message: Fixed projectiles including Praetorian tail seize being blocked by HMGs
+      when not directly clicking them.
+    type: Fix
+  - message: Fixed some projectiles having higher accuracy than intended on some targets,
+      such as the M2C bullets.
+    type: Fix
+  - message: Fixed being able to mount onto an HMG without your hands being free.
+      You can still pick up items after mounting.
+    type: Fix
+  id: 2934
+  time: '2026-02-12T01:33:57.417424+00:00'
+  url: null
+- author: kleinerstation13
+  changes:
+  - message: Added missing locale for sentry and sentry laptop multitool ports
+    type: Fix
+  id: 2935
+  time: '2026-02-12T01:35:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9224
+- author: LeoKarz
+  changes:
+  - message: Designer hivelord can now build plasma trees!
+    type: Fix
+  - message: Design nodes are visibile through walls to xenos
+    type: Tweak
+  id: 2936
+  time: '2026-02-12T01:34:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9226
+- author: Ian321
+  changes:
+  - message: You can now always extinguish yourself with the under-barrel extinguisher.
+    type: Fix
+  id: 2937
+  time: '2026-02-12T01:34:31.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9225
 Name: RMC14
 Order: -1
