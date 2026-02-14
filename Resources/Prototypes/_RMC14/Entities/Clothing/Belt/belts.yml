@@ -2084,7 +2084,7 @@
       - state: icon
       - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
         state: warwick
-        map: [ "enum.CMHolsterLayers.Fill" ]
+        map: [ "warwick_fill" ]
         visible: false
       - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
         state: icon-front
