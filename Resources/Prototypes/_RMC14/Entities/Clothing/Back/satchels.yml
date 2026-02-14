@@ -895,19 +895,6 @@
         - id: RMCCableCoil30
         - id: CMHealthAnalyzer
         - id: RMCSynthResetKey
-          
-- type: entity
-  parent: RMCSatchelLightpack5Slot #Replace Medic bag with RCM medic bag and move to the PVP varients of both bags
-  id: RMCSatchelLightpackFilledParaMedic
-  suffix: Filled, Paramarine Medic
-  components:
-    - type: StorageFill
-      contents:
-        - id: RMCRadioHandheldColony
-        - id: RMCHeadRoyalL1HelmetBallistic
-        - id: CMFireExtinguisherPortable
-        - id: CMDefibrillator
-        - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCSatchelLightpack

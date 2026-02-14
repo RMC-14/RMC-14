@@ -39,7 +39,7 @@
   id: RMCGearParaMedicalTechnician
   equipment:
     jumpsuit: RMCJumpsuitMarineParaPDW90
-    back: RMCSatchelLightpackFilledParaMedic
+    back: RMCBackpackRCMMedicPVPFilledParaMedic
     eyes: RMCGlassesMedicalHUDGlasses
     belt: RMCL75MedicalFillPara
     outerClothing: RMCArmorParaVest
