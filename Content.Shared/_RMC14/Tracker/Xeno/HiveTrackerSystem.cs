@@ -8,6 +8,7 @@ using Content.Shared.Alert;
 using Content.Shared.Mobs;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -109,7 +110,11 @@ public sealed class HiveTrackerSystem : EntitySystem
             return;
 
         args.Handled = true;
-        _xenoWatch.Watch(ent.Owner, target.Value);
+
+        if (HasComp<XenoWatchingComponent>(ent.Owner) && TryComp(ent.Owner, out ActorComponent? actor))
+            _xenoWatch.Unwatch(ent.Owner, actor.PlayerSession);
+        else
+            _xenoWatch.Watch(ent.Owner, target.Value);
     }
 
     private void OnAltClickedAlert(Entity<HiveTrackerComponent> ent, ref HiveTrackerAltClickedAlertEvent args)
