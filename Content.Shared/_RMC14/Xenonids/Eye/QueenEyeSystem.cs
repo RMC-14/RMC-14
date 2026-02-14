@@ -167,6 +167,9 @@ public sealed class QueenEyeSystem : EntitySystem
         if (TerminatingOrDeleted(ent))
             return;
 
+        if (!args.NewPosition.IsValid(EntityManager))
+            return;
+
         var newCoords = args.NewPosition;
         var nearbyWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(newCoords, ent.Comp.SoftWeedDistance);
 
