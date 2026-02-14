@@ -1946,15 +1946,18 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
+      - RMCSmartGunMounted
       components:
       - Welder
       - EntrenchingTool
       - BarbedWire
       - EmptySandbag
+      - WeaponMount
   - type: IgnoreContentsSize
     items:
       components:
       - EntrenchingTool
+      - MountableWeapon
   - type: Tag
     tags:
     - RMCMachineGunnerRig
@@ -2012,7 +2015,7 @@
       components:
       - Gun
 
-- type: entity 
+- type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilled
   suffix: PVE, RCM, Filled
