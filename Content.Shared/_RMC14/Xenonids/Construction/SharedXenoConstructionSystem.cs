@@ -279,7 +279,59 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
     private void OnXenoPlantWeedsAction(Entity<XenoConstructionComponent> xeno, ref XenoPlantWeedsActionEvent args)
     {
-        var coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
+        EntityCoordinates coordinates;
+
+        // If in Queen Eye mode, plant at the eye's location (requires being on weeds)
+        if (TryComp(xeno.Owner, out QueenEyeActionComponent? eyeAction) &&
+            eyeAction.Eye is { } eye)
+        {
+            coordinates = _transform.GetMoverCoordinates(eye).SnapToGrid(EntityManager, _map);
+
+            if (_transform.GetGrid(coordinates) is not { } eyeGridUid ||
+                !TryComp(eyeGridUid, out MapGridComponent? eyeGridComp))
+            {
+                return;
+            }
+
+            var eyeGrid = new Entity<MapGridComponent>(eyeGridUid, eyeGridComp);
+
+            // Queen Eye must be on weeds to plant
+            if (!_xenoWeeds.IsOnWeeds(eyeGrid, coordinates))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-xeno-weeds-plant-requires-weeds"), eye, xeno.Owner);
+                return;
+            }
+
+            if (_xenoWeeds.IsOnWeeds(eyeGrid, coordinates, true))
+            {
+                _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), eye, xeno.Owner);
+                return;
+            }
+
+            var eyeTile = _mapSystem.CoordinatesToTile(eyeGridUid, eyeGridComp, coordinates);
+            if (!_xenoWeeds.CanSpreadWeedsPopup(eyeGrid, eyeTile, xeno, args.UseOnSemiWeedable, true))
+                return;
+
+            if (!_xenoWeeds.CanPlaceWeedsPopup(xeno, eyeGrid, coordinates, args.LimitDistance))
+                return;
+
+            if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, args.PlasmaCost))
+                return;
+
+            args.Handled = true;
+            if (_net.IsServer)
+            {
+                var weeds = Spawn(args.Prototype, coordinates);
+                _adminLogs.Add(LogType.RMCXenoPlantWeeds, $"Xeno {ToPrettyString(xeno):xeno} planted weeds {ToPrettyString(weeds):weeds} at {coordinates} via Queen Eye");
+                _hive.SetSameHive(xeno.Owner, weeds);
+            }
+
+            _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
+            return;
+        }
+
+        // Normal plant weeds behavior
+        coordinates = _transform.GetMoverCoordinates(xeno).SnapToGrid(EntityManager, _map);
         if (_transform.GetGrid(coordinates) is not { } gridUid ||
             !TryComp(gridUid, out MapGridComponent? gridComp))
         {
@@ -329,18 +381,11 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_queenEye.IsInQueenEye(xeno.Owner) &&
-            _rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(coordinates))
-        {
-            _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
-            return;
-        }
-
         var grid = new Entity<MapGridComponent>(gridUid, gridComp);
         var existing = _xenoWeeds.GetWeedsOnFloor(grid, coordinates);
         if (existing is { Comp.IsSource: true })
         {
-            _popup.PopupCoordinates(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
+            _popup.PopupClient(Loc.GetString("cm-xeno-weeds-source-already-here"), args.Target, xeno.Owner);
             return;
         }
 
@@ -355,7 +400,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
             if (adjacent == default)
             {
-                _popup.PopupCoordinates("You can only plant weeds if there is a nearby node.",
+                _popup.PopupClient("You can only plant weeds if there is a nearby node.",
                     args.Target,
                     xeno,
                     PopupType.MediumCaution);
@@ -374,18 +419,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         var plasmaCost = existing == null ? args.PlasmaCost : args.SourcePlasmaCost;
         if (!_xenoPlasma.TryRemovePlasmaPopup(xeno.Owner, plasmaCost, popupOn: args.Target))
-        {
-            if (_queenEye.IsInQueenEye(xeno.Owner))
-                _popup.PopupCoordinates(Loc.GetString("cm-xeno-not-enough-plasma"), coordinates, xeno.Owner, PopupType.MediumCaution);
-
             return;
-        }
 
-        if (existing != null)
-            _actions.SetCooldown(args.Action.AsNullable(), args.SourceCooldown);
-        else
-            args.Handled = true;
-
+        args.Handled = true;
         if (_net.IsServer)
         {
             var newWeeds = Spawn(toSpawn, coordinates);
@@ -396,9 +432,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
                 _xenoWeeds.AssignSource(newWeeds, adjacent.Comp?.Source ?? adjacent);
         }
 
-        // passes null so weedplant sound still plays for queen
-        var audioUser = _queenEye.IsInQueenEye(xeno.Owner) ? null : (EntityUid?) xeno.Owner;
-        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, audioUser);
+        _audio.PlayPredicted(xeno.Comp.BuildSound, coordinates, xeno);
     }
 
     private void OnXenoChooseStructureAction(Entity<XenoConstructionComponent> xeno, ref XenoChooseStructureActionEvent args)

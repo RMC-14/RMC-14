@@ -1,9 +1,10 @@
 using System.Numerics;
-using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids.Construction.Events;
 using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Xenonids.Weeds;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.Mind;
 using Content.Shared.Movement.Components;
@@ -21,12 +22,13 @@ public sealed class QueenEyeSystem : EntitySystem
 {
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IParallelManager _parallel = default!;
-    [Dependency] private readonly SwappableActionSystem _swappableAction = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
@@ -108,7 +110,7 @@ public sealed class QueenEyeSystem : EntitySystem
         _eye.SetDrawFov(ent, false);
         _mover.SetRelay(ent, ent.Comp.Eye.Value);
 
-        // When queen eye is activated, swap plant weeds to world-target expand weeds
+        // When queen eye is activated while on ovi, swap plant weeds to world-target expand weeds
         if (HasComp<XenoAttachedOvipositorComponent>(ent.Owner))
             SwapPlantWeedsToWorldTarget(ent);
     }
@@ -161,57 +163,35 @@ public sealed class QueenEyeSystem : EntitySystem
 
     private void OnQueenEyeMove(Entity<QueenEyeComponent> ent, ref MoveEvent args)
     {
+        // Skip if we're already reverting; prevents infitnite loop then crash.
         if (_isRevertingMove)
             return;
 
+        // Skip if entity is being deleted
         if (TerminatingOrDeleted(ent))
             return;
 
+        // Check if new position is too far from any weed
         var newCoords = args.NewPosition;
-        var nearbyWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(newCoords, ent.Comp.SoftWeedDistance);
+
+        // Find the nearest weed to the new position
+        var nearbyWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(newCoords, ent.Comp.MaxWeedDistance);
 
         if (nearbyWeeds.Count == 0)
         {
             _isRevertingMove = true;
 
-            // Find nearest weed from old position to use as anchor
-            var anchorWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(args.OldPosition, ent.Comp.MaxWeedDistance);
-            if (anchorWeeds.Count > 0)
+            // Check if old position still has weeds nearby (weed might have been deleted)
+            var oldWeeds = _entityLookup.GetEntitiesInRange<XenoWeedsComponent>(args.OldPosition, ent.Comp.MaxWeedDistance);
+            if (oldWeeds.Count > 0)
             {
-                var newWorldPos = _transform.ToMapCoordinates(newCoords).Position;
-                var oldWorldPos = _transform.ToMapCoordinates(args.OldPosition).Position;
-                var closestDistSq = float.MaxValue;
-                var closestWeedPos = oldWorldPos;
-
-                foreach (var weed in anchorWeeds)
-                {
-                    var weedPos = _transform.GetWorldPosition(weed.Owner);
-                    var distSq = Vector2.DistanceSquared(oldWorldPos, weedPos);
-                    if (distSq < closestDistSq)
-                    {
-                        closestDistSq = distSq;
-                        closestWeedPos = weedPos;
-                    }
-                }
-
-                // Lerp damping: smoothly reduce movement as the eye approaches the boundary
-                var offset = newWorldPos - closestWeedPos;
-                var dist = offset.Length();
-                var soft = ent.Comp.SoftWeedDistance;
-                var max = ent.Comp.MaxWeedDistance;
-                if (dist > soft && dist > 0)
-                {
-                    var t = Math.Clamp((dist - soft) / (max - soft), 0f, 1f);
-                    var dampedDist = soft + (max - soft) * t * t;
-                    _transform.SetWorldPosition(ent, closestWeedPos + offset / dist * dampedDist);
-                }
+                // Old position still valid, revert to it
+                _transform.SetCoordinates(ent, args.OldPosition);
             }
-            // TODO RMC14 Find some way to teleport eye back without jittery movements
-            else if (ent.Comp.Queen is { } queen &&
-                     !TerminatingOrDeleted(queen) &&
-                     TryComp(queen, out QueenEyeActionComponent? queenAction))
+            else if (ent.Comp.Queen is { } queen && !TerminatingOrDeleted(queen))
             {
-                RemoveQueenEye((queen, queenAction));
+                // Weed leash was deleted, teleport back to queen
+                _transform.SetCoordinates(ent, Transform(queen).Coordinates);
             }
 
             _isRevertingMove = false;
@@ -298,18 +278,68 @@ public sealed class QueenEyeSystem : EntitySystem
         return true;
     }
 
+    // Swaps plant weeds action from instant to world-target mode when queen eye activates while ovi
     private void SwapPlantWeedsToWorldTarget(Entity<QueenEyeActionComponent> queen)
     {
-        _swappableAction.SwapInstantToWorldTarget<XenoPlantWeedsActionEvent>(
-            queen.Owner,
-            new XenoExpandWeedsActionEvent(),
-            "Expand Weeds (50)",
-            "Expand existing weeds or turn a weed tile into a node.");
+        foreach (var (actionId, _) in _actions.GetActions(queen.Owner))
+        {
+            if (!TryComp<InstantActionComponent>(actionId, out var instant) ||
+                instant.Event is not XenoPlantWeedsActionEvent)
+            {
+                continue;
+            }
+
+            // Store which action we swapped
+            queen.Comp.SwappedPlantWeedsAction = actionId;
+            Dirty(queen);
+
+            // Remove instant action component
+            RemComp<InstantActionComponent>(actionId);
+
+            // Add target action components for world targeting
+            var targetAction = EnsureComp<TargetActionComponent>(actionId);
+            targetAction.CheckCanAccess = false;
+            targetAction.Range = -1;
+            targetAction.DeselectOnMiss = false;
+            targetAction.Repeat = false;
+            Dirty(actionId, targetAction);
+
+            var worldTarget = EnsureComp<WorldTargetActionComponent>(actionId);
+            worldTarget.Event = new XenoExpandWeedsActionEvent();
+            Dirty(actionId, worldTarget);
+
+            // Update name and description to reflect expand weeds behavior
+            _metaData.SetEntityName(actionId, "Expand Weeds (50)");
+            _metaData.SetEntityDescription(actionId, "Expand existing weeds or turn a weed tile into a node.");
+
+            break;
+        }
     }
 
+    // Swaps plant weeds action back from world-target to instant mode when queen eye deactivates.
     private void SwapPlantWeedsToInstant(Entity<QueenEyeActionComponent> queen)
     {
-        _swappableAction.SwapAllToInstant(queen.Owner, new XenoPlantWeedsActionEvent());
+        if (queen.Comp.SwappedPlantWeedsAction is not { } actionId ||
+            TerminatingOrDeleted(actionId))
+        {
+            queen.Comp.SwappedPlantWeedsAction = null;
+            return;
+        }
+
+        queen.Comp.SwappedPlantWeedsAction = null;
+        Dirty(queen);
+
+        // Remove world target components
+        RemComp<WorldTargetActionComponent>(actionId);
+        RemComp<TargetActionComponent>(actionId);
+
+        // Add instant action component back
+        var instant = EnsureComp<InstantActionComponent>(actionId);
+        instant.Event = new XenoPlantWeedsActionEvent();
+
+        // Restore original name and description
+        _metaData.SetEntityName(actionId, "Plant Weeds (75)");
+        _metaData.SetEntityDescription(actionId, "Plant a weed node that will spread more weeds.");
     }
 
     public bool IsInQueenEye(Entity<QueenEyeActionComponent?> queen)
