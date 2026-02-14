@@ -231,11 +231,12 @@
   - type: Storage
     maxItemSize: Ginormous
     grid:
-    - 0,0,15,1
+    - 0,0,17,1
     whitelist:
       tags:
       - RMCRifleL91SWS
       - RMCMagazineRifleL90
+      - RMCMagazineRifleL90AP
       - RMCMagazineRifleL90Drum
       - RMCAttachmentRail
       - RMCAttachmentBarrel

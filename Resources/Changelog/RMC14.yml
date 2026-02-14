@@ -1,75 +1,4 @@
 ﻿Entries:
-- author: OmerF-afk
-  changes:
-  - message: Added L42A Rifle and magazine types for it
-    type: Add
-  - message: Missing Chance's claim MAR-30 and AP/Ext mags and HT ammo
-    type: Add
-  - message: Fixed nailgun magazines being too big to fit in some storages.
-    type: Fix
-  id: 2436
-  time: '2025-10-06T20:47:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8066
-- author: Tunguso4ka
-  changes:
-  - message: Fixed double lights on Sorokyne, Solaris, and Trijent.
-    type: Fix
-  id: 2437
-  time: '2025-10-10T07:46:28.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8078
-- author: Vermidia
-  changes:
-  - message: Fixed xenos not being kicked out of unanchored vents.
-    type: Fix
-  - message: Fixed vent crawling being possible while crit/dead.
-    type: Fix
-  - message: Fixed sometimes being unable to exit open pipes under a floor.
-    type: Fix
-  id: 2438
-  time: '2025-10-19T06:07:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8176
-- author: Vermidia
-  changes:
-  - message: Fixed upgrading structures not being able to be resin surged.
-    type: Fix
-  id: 2439
-  time: '2025-10-19T06:09:58.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8172
-- author: YO0teacher
-  changes:
-  - message: Fixed acider runners gaining acid from hitting training dummies.
-    type: Fix
-  id: 2440
-  time: '2025-10-19T06:09:35.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8159
-- author: Vixting
-  changes:
-  - message: Synth vision now uses half vision.
-    type: Tweak
-  id: 2441
-  time: '2025-10-19T06:10:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8165
-- author: Timemaster99
-  changes:
-  - message: Fixed requisitions auto chat highlights not applying.
-    type: Fix
-  id: 2442
-  time: '2025-10-19T06:14:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8155
-- author: CatAndHats
-  changes:
-  - message: The Nutrimax vendor now stocks the correct RMC plant bag.
-    type: Fix
-  id: 2443
-  time: '2025-10-19T06:14:11.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8136
-- author: CatAndHats
-  changes:
-  - message: Added MP comms to the UNMC Synthetic headset
-    type: Add
-  id: 2444
-  time: '2025-10-19T06:17:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8149
 - author: CyberTropic
   changes:
   - message: Added Kutjevo nightmare inserts.
@@ -4569,5 +4498,88 @@
   id: 2937
   time: '2026-02-12T01:34:31.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9225
+- author: Dygon
+  changes:
+  - message: Fixed parasites sometimes being unable to leap while under a resin door.
+    type: Fix
+  - message: Fixed parasites sometimes being able to leap through closed doors.
+    type: Fix
+  id: 2938
+  time: '2026-02-14T18:50:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9245
+- author: Ian321
+  changes:
+  - message: Motion detectors inside of bags now ignore survivors that have been given
+      IFF.
+    type: Fix
+  id: 2939
+  time: '2026-02-14T18:51:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9243
+- author: Dygon
+  changes:
+  - message: The Praetorian can now hit over barricades using their Pierce ability.
+    type: Fix
+  id: 2940
+  time: '2026-02-14T18:49:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9249
+- author: t0wnshark
+  changes:
+  - message: '[PVE] Added the L989A2 multiple grenade launcher, a PVE weapon for the
+      Royal Crown Marines bombardier, and two types of 20mm impact grenade ammo for
+      it (HE and incendiary)'
+    type: Add
+  - message: '[PVE] Added 20mm HE and incendiary impact grenades for the L989A2'
+    type: Add
+  - message: '[PVE] Added the HMS Pratchett, a PVE shipmap for the Royal Crown Marines
+      faction'
+    type: Add
+  - message: '[PVE] Added the Section Scout-Sniper equipment vendor for RCM PVE'
+    type: Add
+  - message: '[PVE] Added RCM backpacks for PVE, including heavy, standard, lightweight,
+      technician, and medical variants'
+    type: Add
+  - message: Added AI walls without the LED blinkenlights, for mapping purposes
+    type: Add
+  id: 2941
+  time: '2026-02-14T18:48:20.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8981
+- author: Dygon
+  changes:
+  - message: Damage popups now always correctly apply a gun's damage modifier.
+    type: Fix
+  id: 2942
+  time: '2026-02-14T18:49:03.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9250
+- author: Dygon
+  changes:
+  - message: Fixed claymores being able to pass through walls while undeployed.
+    type: Fix
+  - message: You no longer instantly pick up a claymore when you cancel the disarm
+      doafter.
+    type: Fix
+  id: 2943
+  time: '2026-02-14T18:51:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9246
+- author: Vixting
+  changes:
+  - message: Fix flamer overlays not being visible under some circumstances
+    type: Fix
+  id: 2944
+  time: '2026-02-14T18:50:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9238
+- author: Dygon
+  changes:
+  - message: Structure damage modifiers now apply to airlocks.
+    type: Fix
+  id: 2945
+  time: '2026-02-14T18:52:35.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9252
+- author: wheelwrightt
+  changes:
+  - message: Typo in smart gun ammo switching
+    type: Fix
+  id: 2946
+  time: '2026-02-14T18:52:57.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9233
 Name: RMC14
 Order: -1
