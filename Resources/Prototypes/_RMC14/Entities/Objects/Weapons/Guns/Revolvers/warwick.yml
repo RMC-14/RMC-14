@@ -20,3 +20,10 @@
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_alt.rsi
     - type: Clothing
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_alt.rsi
+
+- tag:
+  id: RMCWeaponRevolverWarwickMkVII
+    
+- tag:
+  id: RMCWeaponRevolverWarwickMkVIIAlt
+    
