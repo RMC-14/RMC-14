@@ -21,9 +21,9 @@
     - type: Clothing
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_alt.rsi
 
-- tag:
+- type: Tag
   id: RMCWeaponRevolverWarwickMkVII
     
-- tag:
+- type: Tag
   id: RMCWeaponRevolverWarwickMkVIIAlt
     
