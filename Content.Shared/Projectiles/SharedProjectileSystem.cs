@@ -212,8 +212,17 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         var additionalHits = new AfterProjectileHitEvent(projectile, target);
         RaiseLocalEvent(uid, ref additionalHits);
 
+        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
+        {
+            var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
+            if (_net.IsServer)
+                RaiseNetworkEvent(impactEffectEv, filter);
+            else
+                RaiseLocalEvent(impactEffectEv);
+        }
+
         if (!predicted && component.DeleteOnCollide && (_net.IsServer || IsClientSide(uid)))
-            QueueDel(uid);
+            Del(uid);
 
         else if (_net.IsServer && component.DeleteOnCollide)
         {
@@ -225,15 +234,6 @@ public abstract partial class SharedProjectileSystem : EntitySystem
                 predictedComp.Distance = distance;
 
             Dirty(uid, predictedComp);
-        }
-
-        if ((_net.IsServer || IsClientSide(uid)) && component.ImpactEffect != null)
-        {
-            var impactEffectEv = new ImpactEffectEvent(component.ImpactEffect, GetNetCoordinates(coordinates));
-            if (_net.IsServer)
-                RaiseNetworkEvent(impactEffectEv, filter);
-            else
-                RaiseLocalEvent(impactEffectEv);
         }
     }
 
