@@ -37,7 +37,7 @@
             tags:
               - SquadPara
         - type: JobPrefix
-          prefix: rmc-job-prefix-paramarine-commander
+          prefix: rmc-job-prefix-para-commander
   hidden: true
 
 - type: startingGear
