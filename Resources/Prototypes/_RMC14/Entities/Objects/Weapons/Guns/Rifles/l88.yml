@@ -25,7 +25,8 @@
     - FullAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_l88.ogg
-      volume: -2
+      params:
+        volume: -2
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
