@@ -3374,7 +3374,7 @@ entities:
     - type: Transform
       pos: 10.5,12.5
       parent: 1
-- proto: RMCBeltHolsterPistolParaL54
+- proto: RMCBeltHolsterPistolPara
   entities:
   - uid: 702
     components:
