@@ -1939,7 +1939,7 @@
 
 - type: entity
   parent: CMBeltMedical
-  id: RMCL75Medical
+  id: RMCMedicalL75RCM
   name: L75 pattern medical storage rig
   description: The L75 is the standard load-bearing equipment of the RCM. It consists of a modular belt with various clips. This version is designed to transport medical supplies and pistol ammunition.
   suffix: RCM, Medical
@@ -1991,8 +1991,8 @@
           - RMCLighter
             
 - type: entity
-  parent: RMCL75Medical
-  id: RMCL75MedicalFillPara
+  parent: RMCMedicalL75RCM
+  id: RMCMedicalL75RCMFillPara
   suffix: Filled, Paramarine Survivor
   components:
     - type: StorageFill
@@ -2289,7 +2289,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistolTSE
-  id: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCML29Filled
   name: L29 sidearm rig
   description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
   suffix: PVE, RCM, Filled
@@ -2300,6 +2300,20 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 5
+      
+- type: entity
+  parent: RMCBeltUtilityGeneralRCM
+  id: RMCBeltUtilityGeneralRCMPVE
+  suffix: RCM, PVE
+  components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,9,1 # 10 slots
+      blacklist:
+        tags:
+          - CMFirstAidKit
+          - RMCEngineerKit
 
 - type: Tag
   id: RMCNailgunHolster

@@ -60,7 +60,7 @@
   equipment:
     jumpsuit: RMCJumpsuitMarinePara
     back: RMCSatchelLightpackFilledParaSynth
-    belt: RMCL75MedicalFillPara
+    belt: RMCMedicalL75RCMFillPara
     pocket1: RMCPouchSurvivalSynthFill
     pocket2: RMCPouchElectronics
     outerClothing: RMCArmorParaSynthVestFill
