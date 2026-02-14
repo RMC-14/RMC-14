@@ -77,7 +77,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (projectile.Comp1.ProjectileSpent)
         {
             if (_net.IsServer && component.DeleteOnCollide)
-                QueueDel(uid);
+                Del(uid);
 
             return;
         }
