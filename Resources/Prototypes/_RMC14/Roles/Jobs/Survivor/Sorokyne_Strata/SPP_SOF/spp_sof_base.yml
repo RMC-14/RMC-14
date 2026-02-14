@@ -5,7 +5,7 @@
   description: rmc-job-description-soro-sof
   ranks:
     RMCRankSPPRyadovoy: []
-  supervisors: rmc-job-supervisors-commander
+  supervisors: cm-job-supervisors-sl
   accessGroups:
   - Colonist
   joinNotifyCrew: false
@@ -16,11 +16,6 @@
   spawnMenuRoleName: SPP SOF Survivor (Base)
   useLoadoutOfJob: CMSurvivor
   basePlaytimeTracker: true
-  medals:
-    Bronze: RMCMedalBronzeService
-    Silver: RMCMedalSilverService
-    Gold: RMCMedalGoldService
-    Platinum: RMCMedalPlatinumService
   abstract: true
   hidden: true
 

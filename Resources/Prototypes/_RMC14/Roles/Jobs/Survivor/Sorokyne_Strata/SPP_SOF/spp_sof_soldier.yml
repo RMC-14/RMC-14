@@ -29,9 +29,9 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSPPSOFRifleman
-  name: spp sof rifleman spawn point
+  name: special survivor spp sof rifleman spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorSPPSOFSoldier
   - type: Sprite
-    state: spp_spawn
+    state: surv_spp

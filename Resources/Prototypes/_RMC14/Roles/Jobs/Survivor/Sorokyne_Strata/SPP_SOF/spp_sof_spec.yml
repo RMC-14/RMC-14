@@ -46,3 +46,13 @@
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047
     - RMCMagazineRifleAK4047
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFSpec
+  name: special survivor spp sof specialist spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFSL
+  - type: Sprite
+    state: surv_spp

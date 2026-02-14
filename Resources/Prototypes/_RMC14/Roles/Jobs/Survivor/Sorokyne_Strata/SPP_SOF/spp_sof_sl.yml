@@ -61,9 +61,9 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSPPSOFSL
-  name: spp sof squad leader spawn point
+  name: special survivor spp sof squad leader spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorSPPSOFSL
   - type: Sprite
-    state: spp_spawn
+    state: surv_spp

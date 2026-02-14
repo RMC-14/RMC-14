@@ -43,9 +43,9 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: CMSpawnPointSPPSOFSapper
-  name: spp sof sapper spawn point
+  name: special survivor spp sof sapper spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorSPPSOFSapper
   - type: Sprite
-    state: spp_spawn
+    state: surv_spp
