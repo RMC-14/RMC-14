@@ -83,7 +83,7 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
 
         HealthBar.ForegroundStyleBoxOverride = state.Health switch
         {
-            _ when state.Health >= state.CrisisDamageBeforeCrit => new StyleBoxFlat(Color.FromHex("#408040")),
+            _ when state.Health >= state.EmergencyHealthThreshold => new StyleBoxFlat(Color.FromHex("#408040")),
             >= 0 => new StyleBoxFlat(Color.FromHex("#A0A030")),
             _ => new StyleBoxFlat(Color.FromHex("#A04040"))
         };
@@ -105,7 +105,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         var tempCelsius = TemperatureHelpers.KelvinToCelsius(state.BodyTemperature);
         var tempFahrenheit = TemperatureHelpers.KelvinToFahrenheit(state.BodyTemperature);
         TemperatureBar.Value = state.BodyTemperature;
-        TemperatureBar.MaxValue = 1000; // Kelvin
         TemperatureBarText.Text = $"{tempCelsius:F0}°C, {tempFahrenheit:F0}°F";
 
         TemperatureBar.ForegroundStyleBoxOverride = state.BodyTemperature switch
@@ -125,8 +124,6 @@ public sealed partial class SleeperConsoleWindow : DefaultWindow
         if (state.HasBlood)
         {
             BloodBar.Value = state.BloodPercent;
-            BloodBar.MaxValue = 100;
-            BloodBar.MinValue = 0;
             BloodBarText.Text = $"{state.BloodPercent:F2}%, {state.BloodLevel}cl";
 
             BloodBar.ForegroundStyleBoxOverride = state.BloodPercent switch

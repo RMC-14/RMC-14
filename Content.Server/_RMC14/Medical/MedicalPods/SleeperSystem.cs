@@ -85,10 +85,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
         if (!isAvailable && !isEmergency)
             return;
 
-        // Emergency chemicals only work in crisis mode
         if (isEmergency && !isAvailable)
         {
-            if (!TryComp<DamageableComponent>(occupant, out var damageable) || damageable.TotalDamage <= sleeper.CrisisDamageBeforeCrit)
+            if (!TryComp<DamageableComponent>(occupant, out var damageable) || damageable.TotalDamage <= sleeper.PercentHealthThreshold)
                 return;
         }
 
@@ -168,7 +167,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
         var bloodPercent = 0f;
         var pulse = 0;
         var bodyTemp = 0f;
-        var crisisDamageBeforeCrit = 0f;
+        var emergencyHealthThreshold = 0f;
         FixedPoint2 totalReagents = 0;
         Solution? cachedChemSol = null;
 
@@ -188,11 +187,12 @@ public sealed class SleeperSystem : SharedSleeperSystem
 
                 totalDamage = damageable.TotalDamage;
 
-                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold))
+                if (_mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Critical, out var critThreshold) &&
+                    _mobThreshold.TryGetThresholdForState(occupant.Value, MobState.Dead, out var deadThreshold))
                 {
                     maxHealth = (float) critThreshold;
                     health = (float) (critThreshold - totalDamage);
-                    crisisDamageBeforeCrit = (float) (critThreshold - sleeper.CrisisDamageBeforeCrit);
+                    emergencyHealthThreshold = (float) (deadThreshold - deadThreshold * sleeper.PercentHealthThreshold);
                 }
 
                 bruteLoss = damageable.DamagePerGroup.GetValueOrDefault(BruteGroup).Float();
@@ -229,9 +229,9 @@ public sealed class SleeperSystem : SharedSleeperSystem
             _emergencyChemLookup.Add(chem);
         }
 
-        var inCrisis = totalDamage >= crisisDamageBeforeCrit;
+        var isEmergency = totalDamage >= emergencyHealthThreshold;
         var totalChemCount = sleeper.AvailableChemicals.Length;
-        if (inCrisis)
+        if (isEmergency)
             totalChemCount += sleeper.EmergencyChemicals.Length;
 
         // Build chemical list - always show AvailableChemicals
@@ -241,7 +241,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             AddChemicalToList(chemicals, chemId, occupant, cachedChemSol, true);
         }
 
-        if (inCrisis)
+        if (isEmergency)
         {
             foreach (var chemId in sleeper.EmergencyChemicals)
             {
@@ -274,7 +274,7 @@ public sealed class SleeperSystem : SharedSleeperSystem
             sleeper.DialysisStartedReagentVolume,
             sleeper.AutoEjectDead,
             sleeper.MaxChemical,
-            crisisDamageBeforeCrit,
+            emergencyHealthThreshold,
             chemicals.ToArray(),
             sleeper.InjectionAmounts.ToArray());
 

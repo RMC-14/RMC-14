@@ -45,7 +45,7 @@ public sealed partial class SleeperComponent : Component
     ];
 
     /// <summary>
-    /// Additional chemicals that become available when in crisis mode.
+    /// Additional chemicals that become available when in emergency mode.
     /// </summary>
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype>[] EmergencyChemicals =
@@ -62,11 +62,11 @@ public sealed partial class SleeperComponent : Component
     public FixedPoint2 MaxChemical = 40;
 
     /// <summary>
-    /// How much damage BEFORE going crit. When this threshold is reached, enter crisis mode.
-    /// 0 = healthy, 150 = crit, 200 = dead
+    /// How much remaining health in percentage for triggering emergency mode.
     /// </summary>
+    /// <example>0.4f means emergency mode will trigger when health drops below 40%.</example>
     [DataField, AutoNetworkedField]
-    public float CrisisDamageBeforeCrit = 60;
+    public float PercentHealthThreshold = 0.5f;
 
     [DataField, AutoNetworkedField]
     public bool IsFiltering;

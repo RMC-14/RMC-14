@@ -58,14 +58,14 @@
                 </BoxContainer>
                 <BoxContainer Orientation="Horizontal" Margin="0 2 0 2">
                     <Label Text="{Loc rmc-sleeper-temperature}" MinWidth="120" Modulate="#5B88B0" />
-                    <ProgressBar Name="TemperatureBar" HorizontalExpand="True" MinHeight="16">
+                    <ProgressBar Name="TemperatureBar" HorizontalExpand="True" MinValue="0" MaxValue="1000" MinHeight="16">
                         <Label Name="TemperatureBarText" Align="Right" Margin="0 0 5 0" />
                     </ProgressBar>
                 </BoxContainer>
                 <BoxContainer Name="BloodSection" Orientation="Vertical" Margin="0 2 0 2" Visible="False">
                     <BoxContainer Orientation="Horizontal">
                         <Label Text="{Loc rmc-sleeper-blood-level}" MinWidth="120" Modulate="#5B88B0" />
-                        <ProgressBar Name="BloodBar" HorizontalExpand="True" MinHeight="16">
+                        <ProgressBar Name="BloodBar" HorizontalExpand="True" MinValue="0" MaxValue="100" MinHeight="16">
                             <Label Name="BloodBarText" Align="Right" Margin="0 0 5 0" />
                         </ProgressBar>
                     </BoxContainer>
