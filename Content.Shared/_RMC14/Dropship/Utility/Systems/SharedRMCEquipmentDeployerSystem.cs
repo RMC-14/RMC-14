@@ -193,7 +193,7 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         if (TerminatingOrDeleted(GetEntity(equipmentDeployerComponent.DeployEntity)))
         {
             equipmentDeployerComponent.DeployEntity = null;
-            Dirty(deployer, equipmentDeployerComponent);
+            DirtyField(deployer, equipmentDeployerComponent, nameof(RMCEquipmentDeployerComponent.DeployEntity));
             return false;
         }
 
