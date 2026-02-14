@@ -144,7 +144,8 @@
           "/Audio/Weapons/smash.ogg"
   - type: AirlockReceiverXenoClaws
   - type: Damageable
-    damageContainer: Inorganic
+    damageContainer: StructuralMarine
+    damageModifierSet: StructuralMarine
   - type: Destructible
     thresholds:
     - trigger:
