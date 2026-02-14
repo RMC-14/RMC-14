@@ -815,6 +815,30 @@
       amount: 5
 
 - type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingMARSOCMedic
+  suffix: MARSOC, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+    - id: CMEpinephrineAutoInjector
+    - id: RMCMedicAutoInjectorIronNutrimentDexalinPlus15
+    - id: RMCMedicAutoInjectorMeraBic15
+    - id: RMCMedicAutoInjectorKeloDerm15
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingMARSOCGrenades
+  suffix: Buckshot, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+      amount: 4
+    - id: CMMRE
+
+- type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchRoyal
   suffix: Filled, Royal

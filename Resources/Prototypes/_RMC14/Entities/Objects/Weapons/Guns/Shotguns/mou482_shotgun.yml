@@ -1,0 +1,94 @@
+- type: entity
+  parent: [ CMBaseWeaponRifleNoDualWieldPenalty, RMCBaseAttachableHolder, RMCBaseWeaponMagazineVisuals ]
+  name: MOU482 tactical shotgun
+  id: RMCWeaponShotgunMOU482
+  description: A semi-automatic 12 gauge magazine fed shotgun. Deemed to expensive to be standard issue, use of the MOU482 is relegated to elite special forces units within the UNMC.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-mou482
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou482.rsi
+    layers:
+    - state: bolt-open
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Shotguns/mou482.rsi
+    slots:
+    - suitStorage
+    - belt
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ShootUseDelay
+  - type: RMCMagneticItem
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCXM38Shoot
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 2
+    recoilUnwielded: 4
+    scatterWielded: 10
+    scatterUnwielded: 20
+    baseFireRate: 1.45
+    burstFireRateMultiplier: 5
+  - type: RMCExtraProjectilesDamageMods
+    damageMultiplier:  1.2
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.20
+    accuracyMultiplierUnwielded: 0.95
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineShotgunMOU482Buckshot
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineShotgunMOU482
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentRailFlashlight
+      rmc-aslot-underbarrel:
+        locked: true
+        startingAttachable: RMCAttachmentMOU482GrenadeLauncher
+        whitelist:
+          tags:
+          - RMCAttachmentMOU482GrenadeLauncher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-barrel: 0.8, 0.06
+      rmc-aslot-rail: -0.15, 0.10
+      rmc-aslot-stock: -0.65, -0.18
+      rmc-aslot-underbarrel: 0.41, -.44
+  - type: GunDamageMultipliers
+    multipliers:
+      Breaching: 5
+  - type: Tag
+    tags:
+    - RMCWeaponShotgun
+    - RMCWeaponShotgunMOU482
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/shotgun_mouse.rsi
+      state: all
+
+- type: Tag
+  id: RMCWeaponShotgunMOU482
+
