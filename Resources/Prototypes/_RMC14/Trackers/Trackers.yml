@@ -152,9 +152,9 @@
   alert: SquadTrackerCommandingOfficer
   
 - type: trackerMode
-  id: ParaSquadLeader
-  job: RMCSurvivorParaSquadLeader
-  alert: SquadTrackerParaSquadLeader
+  id: ParaTeamLeader
+  job: RMCSurvivorParaTeamLeader
+  alert: SquadTrackerParaTeamLeader
 
 - type: trackerMode
   id: ParaCommander

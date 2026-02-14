@@ -163,7 +163,6 @@
           - RMCMagazineRifleL88
           - RMCMagazineRifleL88AP
   - type: AttachableHolder
-    randomAttachmentChance: 0.25
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -174,22 +173,12 @@
           - RMCM5Bayonet
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentExtendedCompensator
-        random:
-        - RMCAttachmentSuppressor
-        - RMCTantoA
-        - RMCAttachmentRecoilCompensator
-        - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-        random:
-        - RMCAttachmentRailFlashlight
-        - RMCAttachmentMagneticHarness
-        - RMCAttachmentS5RedDotSight
-        - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         locked: true
         startingAttachable: RMCAttachmentL88Grip
@@ -215,7 +204,6 @@
           - RMCMagazineRifleL88
           - RMCMagazineRifleL88AP
   - type: AttachableHolder
-    randomAttachmentChance: 0.25
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -226,11 +214,6 @@
           - RMCM5Bayonet
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentExtendedCompensator
-        random:
-        - RMCAttachmentSuppressor
-        - RMCTantoA
-        - RMCAttachmentRecoilCompensator
-        - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -238,10 +221,6 @@
           - RMCAttachmentMagneticHarness
           - RMCAttachmentS5RedDotSight
           - RMCAttachmentS6ReflexSight
-        random:
-        - RMCAttachmentRailFlashlight
-        - RMCAttachmentS5RedDotSight
-        - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         whitelist:
           tags:
@@ -254,12 +233,6 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
-        random:
-        - RMCAttachmentL90GL
-        - RMCAttachmentL90UBS
-        - RMCAttachmentAngledGrip
-        - RMCAttachmentVerticalGrip
-        - RMCAttachmentBipod
 
 # Magazines
 

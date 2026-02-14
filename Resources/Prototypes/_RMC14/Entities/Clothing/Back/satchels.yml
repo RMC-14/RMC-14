@@ -889,9 +889,11 @@
     - type: StorageFill
       contents:
         - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
         - id: CMRollerBedSpawnFolded
         - id: CMMultitool
-        - id: CMDefibrillator
+        - id: RMCCableCoil30
+        - id: CMHealthAnalyzer
         - id: RMCSynthResetKey
           
 - type: entity
@@ -905,6 +907,7 @@
         - id: RMCHeadRoyalL1HelmetBallistic
         - id: CMFireExtinguisherPortable
         - id: CMDefibrillator
+        - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCSatchelLightpack

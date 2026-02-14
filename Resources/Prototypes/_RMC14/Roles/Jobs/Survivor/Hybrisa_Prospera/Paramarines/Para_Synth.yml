@@ -12,6 +12,7 @@
       components:
         - type: NpcFactionMember
           factions:
+            - RoyalMarines
             - TSE
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
@@ -63,7 +64,7 @@
     pocket1: RMCPouchSurvivalSynthFill
     pocket2: RMCPouchElectronics
     outerClothing: RMCArmorParaSynthVestFill
-    suitstorage: RMCBeltUtilityGeneralRCM
+    suitstorage: RMCFlashlight
 
 - type: entity
   parent: CMSpawnPointJobBase

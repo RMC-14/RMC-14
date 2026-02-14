@@ -231,7 +231,7 @@
   id: RMCHeadsetForecon
   name: UNMC SOF headset
   description: Issued exclusively to Marine Raiders and members of the UNMC's Force Reconnaissance.
-  suffix: Survivor
+  suffix: Survivor, RCM-P
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -255,7 +255,7 @@
   id: RMCHeadsetPara
   name: paramarine headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
-  suffix: Survivor
+  suffix: Survivor, RCM-P
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/headsets.rsi
@@ -268,9 +268,9 @@
       channels:
         - RoyalMarine
     - type: GrantSquadLeaderTracker
-      defaultMode: ParaSquadLeader
+      defaultMode: ParaTeamLeader
       trackerModes:
-        - ParaSquadLeader
+        - ParaTeamLeader
         - ParaCommander
 
 - type: entity
@@ -278,7 +278,7 @@
   id: RMCHeadsetParaTeamLead
   name: paramarine team leader's headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
-  suffix: Survivor
+  suffix: Survivor, RCM-P
   components:
     - type: RMCHeadset
       channels:
@@ -292,14 +292,14 @@
   id: RMCHeadsetParaOfficer
   name: paramarine officer's headset
   description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear. This one is heavier with the weight of responsibility.
-  suffix: Survivor
+  suffix: Survivor, RCM-P
   components:
     - type: RMCHeadset
       channels:
         - RoyalMarine
       radioTextIncrease: 3
     - type: GrantSquadLeaderTracker
-      defaultMode: ParaSquadLeader
+      defaultMode: ParaTeamLeader
 
 #for UNMC personnel
 - type: entity

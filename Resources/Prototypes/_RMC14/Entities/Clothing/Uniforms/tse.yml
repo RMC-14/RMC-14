@@ -82,7 +82,6 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
-    - RMCPatchTSEMarines
     - RMCPatchTSE
     - RMCPatchTSEPara
   - type: WebbingClothing
@@ -121,7 +120,6 @@
       sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para_officer.rsi
     - type: UniformAccessoryHolder
       startingAccessories:
-        - RMCPatchTSEMarines
         - RMCPatchTSE
         - RMCPatchTSEPara
     - type: ItemCamouflage

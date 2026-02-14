@@ -6,12 +6,13 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaCombatEngineer
   icon: RMCJobIconParaCombatEngineer
-  spawnMenuRoleName: RCM-P Assault Engineer (Survivor)
+  spawnMenuRoleName: RCM-P Paratrooper (Combat Engineer) (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
       - type: NpcFactionMember
         factions:
+          - RoyalMarines
           - TSE
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective

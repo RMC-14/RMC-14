@@ -35,7 +35,7 @@
       choices: { CMBelt: 1 }
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
-      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneral
     - name: Accessories
       choices: { CMAccessories: 1 }
@@ -212,7 +212,7 @@
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
         amount: 15
-      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltHolsterPistolRCM
         amount: 15
       - id: RMCBeltUtilityGeneral
         amount: 5

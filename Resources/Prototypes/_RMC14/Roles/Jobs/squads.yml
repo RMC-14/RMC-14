@@ -288,7 +288,7 @@
 - type: entity
   parent: SquadBase
   id: SquadPara
-  name: Paramarine
+  name: RCM-P
   components:
   - type: SquadTeam
     color: "#3D6F43"

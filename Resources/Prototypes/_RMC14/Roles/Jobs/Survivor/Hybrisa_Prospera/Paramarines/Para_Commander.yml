@@ -14,6 +14,7 @@
       components:
         - type: NpcFactionMember
           factions:
+            - RoyalMarines
             - TSE
         - type: Skills
           preset: RMCSkillPresetCommander
@@ -40,20 +41,20 @@
   hidden: true
 
 - type: startingGear
-  parent: RMCGearParaBase
   id: RMCGearParaCommander
   equipment:
     id: CMIDCardGold
     jumpsuit: RMCJumpsuitMarineParaService
+    shoes: RMCBootsRoyalFilled
     head: RMCHeadCapPeakedPara
     ears: RMCHeadsetParaOfficer
     eyes: RMCGlassesAviators
     outerClothing: RMCJacketParaCOJacketFilled
+    gloves: RMCHandsVeteranRoyalMarine
     belt: RMCBeltHolsterPistolParaCustom
     back: RMCSatchelBlackFillParaCO
     pocket1: RMCPouchSurvivalFill
     pocket2: RMCPouchGeneralLargeFilledParaCO
-    suitstorage: RMCWeaponRifleL88A2Filled
 
 - type: entity
   parent: CMSpawnPointJobBase

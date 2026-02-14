@@ -202,7 +202,7 @@ rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
 # Paramarine survs
 
-rmc-job-greeting-para = You are a member of the RCM's 24th Parachute Regiment!
+rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
 
   Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
 
@@ -215,14 +215,14 @@ rmc-job-greeting-para = You are a member of the RCM's 24th Parachute Regiment!
 rmc-job-name-para = Paramarine Survivor
 rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
 
-rmc-job-name-paramarine = Rifleman
-rmc-job-name-para-pilot = Fleet Air Arm Pilot
-rmc-job-name-para-engineer = Assault Engineer
-rmc-job-name-para-medic = Medical Technician
-rmc-job-prefix-paratrooper = 24/PARA
+rmc-job-name-paramarine = Paratrooper
+rmc-job-name-para-pilot = Fleet Air Arm (Dropship Pilot)
+rmc-job-name-para-engineer = Paratrooper (Combat Engineer)
+rmc-job-name-para-medic = Paratrooper (Combat Medical Technician)
+rmc-job-prefix-paramarine = 24/PARA
 
-rmc-job-name-para-squad-leader = Squad Leader
-rmc-job-prefix-para-squad-leader = 24/PARA SL
+rmc-job-name-para-team-leader = Team Leader
+rmc-job-prefix-para-team-leader = 24/PARA TL
 
 rmc-job-name-para-synth = Support Synthetic
 rmc-job-prefix-para-synth = 24/PARA Syn

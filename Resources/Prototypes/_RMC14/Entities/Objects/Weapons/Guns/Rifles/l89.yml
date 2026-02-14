@@ -148,7 +148,6 @@
           - RMCMagazineRifleL88
           - RMCMagazineRifleL88AP
   - type: AttachableHolder
-    randomAttachmentChance: 0.5
     slots:
       rmc-aslot-barrel:
         whitelist:
@@ -159,11 +158,6 @@
           - RMCM5Bayonet
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentExtendedCompensator
-        random:
-        - RMCAttachmentSuppressor
-        - RMCTantoA
-        - RMCAttachmentRecoilCompensator
-        - RMCAttachmentExtendedBarrel
       rmc-aslot-rail:
         locked: true
         startingAttachable: RMCAttachmentL89Scope

@@ -30,7 +30,7 @@
     belt: RMCBeltHolsterPistolParaM44Random
     pocket1: RMCPouchFirstAidSplintsGauzeOintment 
     pocket2: RMCPouchFlareFilled
-    suitstorage: RMCWeaponRifleL88A1Filled
+    suitstorage: RMCWeaponRifleL88A2Filled
     
 - type: entity
   id: RMCGearSurvivorPresetPara
