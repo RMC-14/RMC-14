@@ -29,7 +29,7 @@
     ears: RMCHeadsetPara
     belt: RMCBeltHolsterPistolParaM44Random
     pocket1: RMCPouchFirstAidSplintsGauzeOintment 
-    pocket2: RMCPouchFlareFilled
+    pocket2: RMCPouchFlareL96Filled
     suitstorage: RMCWeaponRifleL88A2Filled
     
 - type: entity
