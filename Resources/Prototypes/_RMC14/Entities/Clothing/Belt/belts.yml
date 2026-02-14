@@ -1946,18 +1946,18 @@
       - RMCNailgunCompact
       - RMCNailgunTactical
       - RMCExplosiveClaymoreMine
-      - RMCSmartGunMounted
+      - RMCSmartGunMounted # Not parity
       components:
       - Welder
       - EntrenchingTool
       - BarbedWire
       - EmptySandbag
-      - WeaponMount
+      - WeaponMount # Not parity
   - type: IgnoreContentsSize
     items:
       components:
       - EntrenchingTool
-      - MountableWeapon
+      - MountableWeapon # Not parity
   - type: Tag
     tags:
     - RMCMachineGunnerRig
