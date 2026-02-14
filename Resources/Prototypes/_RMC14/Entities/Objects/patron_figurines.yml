@@ -2560,3 +2560,14 @@
     state: kara_hathaway
   - type: PatronFigurine
     id: 6e7476de-f328-4764-834c-7ac2478a5aab
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaraHathaway
+  name: Kara Hathaway figurine
+  description: ""
+  components:
+  - type: Sprite
+    state: kara_hathaway
+  - type: PatronFigurine
+    id: 6e7476de-f328-4764-834c-7ac2478a5aab
