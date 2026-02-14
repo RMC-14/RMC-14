@@ -198,7 +198,6 @@
       RMCSkillLeadership: 2
       RMCSkillOverwatch: 1
       RMCSkillJtac: 2
-      RMCSkillIntel: 2
 
 - type: entity
   parent: RMCSkillPresetSurvivor
@@ -208,10 +207,11 @@
   components:
   - type: SkillPreset
     skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillMedical: 1
+      RMCSkillCqc: 3
+      RMCSkillPolice: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillFireman: 5
+      RMCSkillMedical: 2
       RMCSkillEndurance: 2
       RMCSkillFirearms: 2
       RMCSkillVehicles: 1
