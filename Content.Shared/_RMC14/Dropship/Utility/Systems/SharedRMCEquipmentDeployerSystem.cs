@@ -190,6 +190,13 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
         if (!Resolve(deployer, ref equipmentDeployerComponent, false))
             return false;
 
+        if (TerminatingOrDeleted(GetEntity(equipmentDeployerComponent.DeployEntity)))
+        {
+            equipmentDeployerComponent.DeployEntity = null;
+            Dirty(deployer, equipmentDeployerComponent);
+            return false;
+        }
+
         if (!_container.TryGetContainer(deployer, equipmentDeployerComponent.DeploySlotId, out var container))
             return false;
 
