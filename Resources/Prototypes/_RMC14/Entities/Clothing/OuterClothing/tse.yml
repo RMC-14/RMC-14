@@ -92,6 +92,7 @@
   id: RMCJacketParaCOJacket
   name: paramarine commanding officer’s service jacket
   description: A service jacket typically worn by Commanding Officers of the RCM's Paramarine regiments. Reinforced with lightweight Kevlar shards, it offers limited protection against stabbing weapons and small arms fire while maintaining a formal yet practical design for leadership in the field.
+  suffix: Survivor, Paramarine, CO
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/para_co.rsi
@@ -106,6 +107,7 @@
   id: RMCJacketParaCOJacketAlt
   name: paramarine commanding officer’s service jacket
   description: A service jacket typically worn by Commanding Officers of the RCM's Paramarine regiments. Reinforced with lightweight Kevlar shards, it offers limited protection against stabbing weapons and small arms fire while maintaining a formal yet practical design for leadership in the field.
+  suffix: Survivor, Paramarine, CO alt
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/OuterClothing/TSE/para_co_alt.rsi
@@ -115,7 +117,7 @@
 - type: entity
   parent: RMCJacketParaCOJacket
   id: RMCJacketParaCOJacketFilled
-  suffix: Filled, Paramarine CO
+  suffix: Survivor, Paramarine, Filled, CO
   components:
     - type: StorageFill
       contents:

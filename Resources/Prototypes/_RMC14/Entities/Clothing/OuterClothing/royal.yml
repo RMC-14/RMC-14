@@ -141,12 +141,13 @@
     - id: RMCMagazineRifleL24
 
 # Paramarines
+
 - type: entity
   parent: RMCArmorRoyal
   id: RMCArmorParaVest
   name: goshawk airborne vest
-  suffix: Paramarine
   description: A lightweight, high-mobility flak vest designed for the RCM's Paramarines. Developed by Weston-Yamada, the Goshawk offers crucial protection while ensuring paratroopers retain full freedom of movement during high-risk insertions. Advanced composite plating and reinforced webbing make it effective against shrapnel and small-arms fire, striking the perfect balance between defense and agility for those who strike fast and strike hard.
+  suffix: Survivor, Paramarine
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/para_vest.rsi
@@ -167,8 +168,8 @@
   parent: RMCArmorParaVest
   id: RMCArmorParaSynthVest
   name: goshawk airborne synthetic vest
-  suffix: Paramarine Synth
   description: A lightweight, high-mobility flak vest designed for synthetic units attached to the RCM's Paramarine regiments. Developed by Weston-Yamada, the Goshawk offers crucial protection while ensuring paratroopers retain full freedom of movement during high-risk insertions. Advanced composite plating and reinforced webbing make it effective against shrapnel and small-arms fire, striking the perfect balance between defense and agility for those who strike fast and strike hard.
+  suffix: Survivor, Paramarine, Filled
   components:
     - type: CMArmor
       melee: 0 # CLOTHING_ARMOR_NONE

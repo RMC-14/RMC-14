@@ -1993,7 +1993,7 @@
 - type: entity
   parent: RMCMedicalL75RCM
   id: RMCMedicalL75RCMFillPara
-  suffix: Filled, Paramarine Survivor
+  suffix: Paramaine, Survivor, Filled, Medical
   components:
     - type: StorageFill
       contents:
@@ -2011,7 +2011,7 @@
   id: RMCBeltRCM
   name: L70 pattern ammo load rig
   description: Good for carrying around extra ammo in the heat of the jungle. Made of special rot-resistant fabric.
-  suffix: RCM
+  suffix: RCM, Ammo
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
@@ -2025,7 +2025,7 @@
   id: RMCBeltUtilityGeneralRCM
   name: L26 general utility belt
   description: A small, lightweight pouch that can be clipped onto armor to provide additional storage. This new RCM model, while uncomfortable, can also be clipped around the waist.
-  suffix: RCM, PVP
+  suffix: PVP, RCM
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
@@ -2051,7 +2051,7 @@
   id: RMCBeltHolsterPistolRCM
   name: L80 general pistol holster rig
   description: The L80 is the standard load-bearing equipment of the Royal Crown Marines. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
-  suffix: RCM
+  suffix: RCM, Pistol Belt
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_rcm.rsi
@@ -2065,7 +2065,7 @@
   id: RMCBeltHolsterPistolPara
   name: paramarine load bearing rig
   description: A sturdy belt fitted with a black leather holster designed for RCM Paramarines. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
-  suffix: Royal Paramarine
+  suffix: Paramaine, Survivor
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
@@ -2143,7 +2143,7 @@
 - type: entity
   parent: RMCBeltHolsterPistolPara
   id: RMCBeltHolsterPistolParaM44
-  suffix: Filled, Warwick
+  suffix: Paramaine, Survivor, Filled, Warwick
   components:
     - type: StorageFill
       contents:
@@ -2154,7 +2154,7 @@
 - type: entity
   parent: RMCBeltHolsterPistolPara
   id: RMCBeltHolsterPistolParaM44Random
-  suffix: Random, Warwick, Royal Paramarines
+  suffix: Paramaine, Survivor, Random, Warwick
   components:
     - type: StorageFill
       contents:
@@ -2168,9 +2168,9 @@
 - type: entity
   parent: RMCBeltHolsterPistolPara
   id: RMCBeltHolsterPistolParaCustom
-  suffix: Filled, L54 Custom, RMC-P
   name: paramarine custom load-bearing rig
   description: A modified RCM Paramarine belt featuring a black leather holster with gold inlay, a large utility pouch, and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
+  suffix: Paramaine, Survivor, Filled, L54 Custom
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
@@ -2304,7 +2304,7 @@
 - type: entity
   parent: RMCBeltUtilityGeneralRCM
   id: RMCBeltUtilityGeneralRCMPVE
-  suffix: RCM, PVE
+  suffix: PVE, RCM
   components:
     - type: Storage
       maxItemSize: Normal

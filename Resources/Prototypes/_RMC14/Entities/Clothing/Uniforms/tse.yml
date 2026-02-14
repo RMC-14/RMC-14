@@ -100,6 +100,7 @@
   id: RMCJumpsuitMarinePara
   name: paramarine battle dress uniform
   description: No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  suffix: Survivor, Paramarine
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para.rsi
@@ -121,7 +122,7 @@
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaL88
-  suffix: Webbing, L88
+  suffix: Survivor, Paramarine. Webbing, L88
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingL88
@@ -129,7 +130,7 @@
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaPDW90
-  suffix: webbing. PDW90AP
+  suffix: Survivor, Paramarine. webbing. PDW90AP
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingPDW90AP
@@ -139,6 +140,7 @@
   id: RMCJumpsuitMarineParaService
   name: paramarine service uniform
   description: A formal No.2 service uniform worn by RCM-P officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  suffix: Survivor, Paramarine
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para_officer.rsi

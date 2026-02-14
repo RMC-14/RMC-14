@@ -33,7 +33,7 @@
 - type: entity
   parent: RMCPouchGeneralLarge
   id: RMCPouchGeneralLargeFilledParaCO
-  suffix: Filled, Paramarine CO
+  suffix: Survivor, Paramarine, Filled, CO
   components:
     - type: StorageFill
       contents:
