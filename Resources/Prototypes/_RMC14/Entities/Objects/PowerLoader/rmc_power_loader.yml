@@ -11,7 +11,7 @@
     sprite: _RMC14/Objects/power_loader.rsi
     layers:
     - state: powerloader_open
-      map: [ "strap" ]
+      map: [ "buckledLayer" ]
   - type: MobMover
   - type: DoAfter
   - type: MeleeWeapon
@@ -59,26 +59,25 @@
   - type: RMCAllowStrapMovement
   - type: Strap
     buckleSound:
-      path: _RMC14/Mecha/powerloader_buckle.ogg
+      path: /Audio/_RMC14/Mecha/powerloader_buckle.ogg
       params:
         variation: 0.1
     unbuckleSound:
-      path: _RMC14/Mecha/powerloader_unbuckle.ogg
+      path: /Audio/_RMC14/Mecha/powerloader_unbuckle.ogg
       params:
         variation: 0.1
     blacklist:
       components:
       - Xeno
-  - type: RMCStrapDrawDepthComponent
+  - type: RMCStrapDrawDepth
     unstrappedDepth: Mobs
     strappedDepth: OverMobs
-  - type: RMCStrapVisualsComponent
   - type: GenericVisualizer
     visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        strap:
-          Strapped: { state: powerloader_overlay }
-          Unstrapped: { state: powerloader_open }
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay }
+          False: { state: powerloader_open }
   - type: Destructible
     thresholds:
     - trigger:
@@ -194,14 +193,14 @@
   components:
   - type: Sprite
     layers:
-    - state: owerloader_open_j
-      map: [ "strap" ]
+    - state: powerloader_open_jd
+      map: [ "buckledLayer" ]
   - type: GenericVisualizer
     visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        strap:
-          Strapped: { state: powerloader_overlay_jd }
-          Unstrapped: { state: powerloader_open_jd }
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay_jd }
+          False: { state: powerloader_open_jd }
   - type: SpawnOnTerminate
     spawn: RMCMechPowerLoaderWreckageGreen
 
@@ -214,12 +213,12 @@
   - type: Sprite
     layers:
     - state: powerloader_open_ft
-      map: [ "strap" ]
+      map: [ "buckledLayer" ]
   - type: GenericVisualizer
     visuals:
-      enum.SharedBagOpenVisuals.BagState:
-        strap:
-          Strapped: { state: powerloader_overlay_ft }
-          Unstrapped: { state: powerloader_open_ft }
+      enum.StrapVisuals.State:
+        buckledLayer:
+          True: { state: powerloader_overlay_ft }
+          False: { state: powerloader_open_ft }
   - type: SpawnOnTerminate
     spawn: RMCMechPowerLoaderWreckageBlue

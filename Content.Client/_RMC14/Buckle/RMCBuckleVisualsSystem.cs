@@ -18,7 +18,7 @@ public sealed class RMCBuckleVisualsSystem : EntitySystem
         SubscribeLocalEvent<StrapComponent, AfterAutoHandleStateEvent>(UpdateDrawDepth);
 
         SubscribeLocalEvent<RMCBuckleDrawDepthComponent, GetDrawDepthEvent>(OnGetDrawDepth, after: [typeof(XenoVisualizerSystem)]);
-        SubscribeLocalEvent<RMCStrapDrawDepthComponent, GetDrawDepthEvent>(OnGetDrawDepth);
+        SubscribeLocalEvent<RMCStrapDrawDepthComponent, GetDrawDepthEvent>(OnGetDrawDepth, after: [typeof(XenoVisualizerSystem)]);
     }
 
     private void UpdateDrawDepth<T>(Entity<T> ent, ref AfterAutoHandleStateEvent args) where T : IComponent?

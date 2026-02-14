@@ -31,10 +31,6 @@ public sealed class RMCBuckleSystem : EntitySystem
         SubscribeLocalEvent<BuckleComponent, AttemptMobTargetCollideEvent>(OnBuckleAttemptMobTargetCollide);
         SubscribeLocalEvent<StrapComponent, EntParentChangedMessage>(OnBuckleParentChanged);
         SubscribeLocalEvent<StrapComponent, CombatModeShouldHandInteractEvent>(OnStrapCombatModeShouldHandInteract);
-
-        SubscribeLocalEvent<RMCStrapVisualsComponent, MapInitEvent>(OnStrapVisualsMapInit);
-        SubscribeLocalEvent<RMCStrapVisualsComponent, StrappedEvent>(OnStrapVisualsStrapped);
-        SubscribeLocalEvent<RMCStrapVisualsComponent, UnstrappedEvent>(OnStrapVisualsUnstrapped);
     }
 
     private void OnBuckleClimbableStrapped(Entity<BuckleClimbableComponent> ent, ref StrappedEvent args)
@@ -88,30 +84,6 @@ public sealed class RMCBuckleSystem : EntitySystem
     {
         if (HasComp<XenoComponent>(args.User))
             args.Cancelled = true;
-    }
-
-    private void OnStrapVisualsMapInit(Entity<RMCStrapVisualsComponent> ent, ref MapInitEvent args)
-    {
-        UpdateStrapVisuals(ent);
-    }
-
-    private void OnStrapVisualsStrapped(Entity<RMCStrapVisualsComponent> ent, ref StrappedEvent args)
-    {
-        UpdateStrapVisuals(ent);
-    }
-
-    private void OnStrapVisualsUnstrapped(Entity<RMCStrapVisualsComponent> ent, ref UnstrappedEvent args)
-    {
-        UpdateStrapVisuals(ent);
-    }
-
-    public void UpdateStrapVisuals(Entity<RMCStrapVisualsComponent> ent)
-    {
-        if (!TryComp(ent.Owner, out StrapComponent? strap))
-            return;
-
-        var isStrapped = strap.BuckledEntities.Count > 0;
-        _appearance.SetData(ent.Owner, StrapVisuals.StrapState, isStrapped ? StrapState.Strapped : StrapState.Unstrapped);
     }
 
     public Vector2 GetOffset(Entity<RMCBuckleOffsetComponent?> offset)
