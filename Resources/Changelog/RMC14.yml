@@ -1,37 +1,4 @@
 ﻿Entries:
-- author: CyberTropic
-  changes:
-  - message: Added Kutjevo nightmare inserts.
-    type: Add
-  id: 2445
-  time: '2025-10-19T06:16:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8151
-- author: CatAndHats
-  changes:
-  - message: Fixed PK-7 description having the wrong gun name.
-    type: Fix
-  id: 2446
-  time: '2025-10-19T06:16:22.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8148
-- author: yagwog
-  changes:
-  - message: Fixed Hedgehog Ravager spike shed not giving its movement speed buff.
-    type: Fix
-  - message: Fixed Hedgehog Ravager gaining shards from barbed barricades.
-    type: Fix
-  - message: Fixed Hedgehog Ravager spike shield and spike shed not being temporarily
-      disabled by baton slugs.
-    type: Fix
-  id: 2447
-  time: '2025-10-19T06:20:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8070
-- author: CatAndHats
-  changes:
-  - message: Fixed the echo supply drop console not having a requisitions access requirement.
-    type: Fix
-  id: 2448
-  time: '2025-10-19T06:20:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8140
 - author: noctynral
   changes:
   - message: Fixed being able to pry open powered podlocks and shutters.
@@ -4581,5 +4548,34 @@
   id: 2946
   time: '2026-02-14T18:52:57.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9233
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Corporate Liaison briefings not having any text on them.
+    type: Fix
+  id: 2947
+  time: '2026-02-14T19:56:21.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9240
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The ComTech squad tool vendor now has 4 sentry laptops.
+    type: Add
+  id: 2948
+  time: '2026-02-14T19:55:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9251
+- author: PursuitinAshes
+  changes:
+  - message: '[PVE] Sentry Cases will now spawn with a Sentry Laptop stored inside.'
+    type: Add
+  id: 2949
+  time: '2026-02-14T19:56:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9242
+- author: Dutch-VanDerLinde
+  changes:
+  - message: The hive tracker now unwatches the xenonid you are currently watching
+      on click. If you are not watching anyone, it watches the target like normal.
+    type: Fix
+  id: 2950
+  time: '2026-02-14T19:56:41.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9241
 Name: RMC14
 Order: -1
