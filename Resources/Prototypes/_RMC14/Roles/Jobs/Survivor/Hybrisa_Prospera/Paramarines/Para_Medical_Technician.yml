@@ -6,7 +6,7 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
-  spawnMenuRoleName: RCM-P Paratrooper (Combat Medical Technician) (Survivor)
+  spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
   special:
     - !type:AddComponentSpecial
       components:

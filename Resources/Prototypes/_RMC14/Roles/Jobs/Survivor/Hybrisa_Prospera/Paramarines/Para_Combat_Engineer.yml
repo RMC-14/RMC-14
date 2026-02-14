@@ -1,12 +1,12 @@
 - type: job
   parent: RMCSurvivorParaBase
-  id: RMCSurvivorParaCombatEngineer
+  id: RMCSurvivorParaAssaultEngineer
   name: rmc-job-name-para-engineer
   ranks:
     RMCRankParaLanceCorporal: [ ]
-  startingGear: RMCGearParaCombatEngineer
-  icon: RMCJobIconParaCombatEngineer
-  spawnMenuRoleName: RCM-P Paratrooper (Combat Engineer) (Survivor)
+  startingGear: RMCGearParaAssaultEngineer
+  icon: RMCJobIconParaAssaultEngineer
+  spawnMenuRoleName: Royal Paramarine Assault Engineer (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -36,7 +36,7 @@
 
 - type: startingGear
   parent: RMCGearParaBase
-  id: RMCGearParaCombatEngineer
+  id: RMCGearParaAssaultEngineer
   equipment:
     eyes: RMCWeldingGoggles
     belt: CMBeltUtilityFilled
@@ -44,17 +44,17 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointParaCombatEngineer
-  name: paramarine combat engineer spawn point
+  id: RMCSpawnPointParaAssaultEngineer
+  name: paramarine assault engineer spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCSurvivorParaCombatEngineer
+    job_id: RMCSurvivorParaAssaultEngineer
   - type: Sprite
     state: surv_tse
 
 - type: jobIcon
   parent: CMJobIconBase
-  id: RMCJobIconParaCombatEngineer
+  id: RMCJobIconParaAssaultEngineer
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_engi

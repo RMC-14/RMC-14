@@ -1,6 +1,6 @@
 - type: entity
   id: RMCSkillPresetParamarine
-  name: RCM-P Paratrooper
+  name: Royal Paramarine Rifleman
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -20,7 +20,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaPilot
-  name: RCM-P Paratrooper - Pilot
+  name: Royal Paramarine Pilot
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -30,7 +30,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaEngineer
-  name: RCM-P Paratrooper - Engineer
+  name: Royal Paramarine Engineer
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -42,7 +42,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaMedic
-  name: RCM-P Paratrooper - Medic
+  name: Royal Paramarine Medic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -54,7 +54,7 @@
 - type: entity
   parent: RMCSkillPresetParamarine
   id: RMCSkillPresetParaLeader
-  name: RCM-P Paratrooper - Squad Leader
+  name: Royal Paramarine Squad Leader
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset
@@ -68,7 +68,7 @@
         
 - type: entity
   id: RMCSkillPresetParaSynth
-  name: RCM-P Paratrooper - Synthetic
+  name: Royal Paramarine Synthetic
   categories: [ HideSpawnMenu ]
   components:
   - type: SkillPreset

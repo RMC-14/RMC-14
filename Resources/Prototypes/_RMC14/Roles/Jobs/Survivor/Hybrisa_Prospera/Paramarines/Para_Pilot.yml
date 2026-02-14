@@ -6,7 +6,7 @@
     RMCRankParaCorporal: [ ]
   startingGear: RMCGearParaPilot
   icon: RMCJobIconParaPilot
-  spawnMenuRoleName: RCM-P Fleet Air Arm (Dropship Pilot) (Survivor)
+  spawnMenuRoleName: Royal Paramarine Fleet Air Arm Pilot (Survivor)
   special:
     - !type:AddComponentSpecial
       components:

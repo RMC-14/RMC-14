@@ -6,7 +6,7 @@
     RMCRankParaSergeant: [ ]
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
-  spawnMenuRoleName: RCM-P Paratrooper (Team Leader) (Survivor)
+  spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)
   special:
     - !type:AddComponentSpecial
       components:

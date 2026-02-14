@@ -6,7 +6,7 @@
     RMCRankSyntheticColonist: [ ]
   startingGear: RMCGearParaSupportSynthetic
   icon: RMCJobIconParaSupportSynthetic
-  spawnMenuRoleName: RCM-P Support Synthetic (Survivor)
+  spawnMenuRoleName: Royal Paramarine Support Synthetic (Survivor)
   special:
     - !type:AddComponentSpecial
       components:

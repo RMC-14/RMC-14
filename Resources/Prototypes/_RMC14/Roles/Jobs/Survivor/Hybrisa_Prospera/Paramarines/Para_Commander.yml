@@ -8,7 +8,7 @@
   - ColonistAllAccessNoArmory
   startingGear: RMCGearParaCommander
   icon: RMCJobIconParaCommander
-  spawnMenuRoleName: RCM-P Commander (Survivor)
+  spawnMenuRoleName: Royal Paramarine Commander (Survivor)
   special:
     - !type:AddComponentSpecial
       components:

@@ -13,7 +13,7 @@
   hasIcon: true
   greeting: rmc-job-greeting-para
   playTimeTracker: RMCJobSurvivorMilitary
-  spawnMenuRoleName: RCM-P Survivor (Base)
+  spawnMenuRoleName: Royal Paramarine Survivor (Base)
   abstract: true
   hidden: true
 

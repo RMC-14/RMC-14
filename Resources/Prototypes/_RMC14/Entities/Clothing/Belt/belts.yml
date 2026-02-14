@@ -2076,7 +2076,7 @@
   id: RMCBeltHolsterPistolPara
   name: paramarine load bearing rig
   description: A sturdy belt fitted with a black leather holster designed for RCM Paramarines. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
-  suffix: RCM-P
+  suffix: Royal Paramarine
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
@@ -2165,7 +2165,7 @@
 - type: entity
   parent: RMCBeltHolsterPistolPara
   id: RMCBeltHolsterPistolParaM44Random
-  suffix: Random, Warwick, RCM-P
+  suffix: Random, Warwick, Royal Paramarines
   components:
     - type: StorageFill
       contents:

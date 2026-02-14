@@ -3,7 +3,7 @@
   id: RMCSurvivorParamarine
   name: rmc-job-name-paramarine
   icon: RMCJobIconParamarine
-  spawnMenuRoleName: RCM-P Paratrooper (Survivor)
+  spawnMenuRoleName: Royal Paramarine Rifleman (Survivor)
   special:
     - !type:AddComponentSpecial
       components:
@@ -36,7 +36,7 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointParamarine
-  name: paramarine spawn point
+  name: paramarine rifleman spawn point
   components:
   - type: SpawnPoint
     job_id: RMCSurvivorParamarine
