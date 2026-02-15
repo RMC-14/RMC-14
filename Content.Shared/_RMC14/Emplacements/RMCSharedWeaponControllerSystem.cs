@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Buckle;
 using Content.Shared.Mobs;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 
@@ -18,6 +19,7 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
         SubscribeLocalEvent<WeaponControllerComponent, BeforeAttemptShootEvent>(OnAdjustShotOrigin);
         SubscribeLocalEvent<WeaponControllerComponent, DismountActionEvent>(OnDismountAction);
         SubscribeLocalEvent<WeaponControllerComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<WeaponControllerComponent, KnockedDownEvent>(OnKnockedDown);
     }
 
     private void OnAdjustShotOrigin(Entity<WeaponControllerComponent> ent, ref BeforeAttemptShootEvent args)
@@ -48,6 +50,11 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
         if (args.NewMobState == MobState.Alive)
             return;
 
+        _buckle.Unbuckle(ent.Owner, ent);
+    }
+
+    private void OnKnockedDown(Entity<WeaponControllerComponent> ent, ref KnockedDownEvent args)
+    {
         _buckle.Unbuckle(ent.Owner, ent);
     }
 
