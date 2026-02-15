@@ -10,8 +10,8 @@
       map: ["enum.AmmoVisualLayers.Base"]
   - type: CartridgeAmmo
     proto: RMCProjectileLTBCannon
-    muzzleFlash: MuzzleFlashEffectVehicleOver
-    muzzleFlashOffset: 1.5, 0
+    muzzleFlash: MuzzleFlashEffectVehicleOverLarge
+    muzzleFlashOffset: 2.2, 0
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -60,33 +60,27 @@
 
 # Projectiles
 - type: entity
-  parent: RMCProjectileRocket84mm
-  id: RMCProjectileLTBCannon
-  name: LTB cannon shell
+  id: RMCVehicleLTBCannonImpact
+  name: LTB cannon impact
   categories: [ HideSpawnMenu ]
   components:
-  - type: Projectile
-    impactEffect: BulletImpactEffect
-    damage:
-      types:
-        Blunt: 30
-        Piercing: 20
-    maxFixedRange: 8
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: DeleteOnTrigger
+  - type: CMExplosionEffect
+    minShrapnel: 40
+    maxShrapnel: 100
+    shrapnelSpeed: 8
+  - type: RMCScorchEffect
+    radius: 3
+    centerRadius: 1
   - type: Explosive
-    explosionType: RMC
-    maxIntensity: 25
-    intensitySlope: 8
-    totalIntensity: 220
-    maxTileBreak: 0
-  - type: RMCProjectileAccuracy
-    accuracy: 110
-    thresholds:
-    - range: 8
-      falloff: 10
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/m5spec_projectiles.rsi
-    layers:
-    - state: m5_84mm_he
+    explosionType: RMCLTBCannon
+    maxIntensity: 40
+    intensitySlope: 18
+    totalIntensity: 650
+    tileBreakScale: 4
+    maxTileBreak: 12
 
 - type: entity
   parent: RMCBaseBullet
@@ -124,6 +118,10 @@
   name: DRGN flame jet
   categories: [ HideSpawnMenu ]
   components:
+  - type: DeleteOnFixedDistanceStop
+  - type: TriggerOnCollide
+    fixtureID: projectile
+    ignoreOtherNonHard: false
   - type: IgniteOnProjectileHit
   - type: RMCFireProjectile
   - type: Sprite
@@ -144,6 +142,7 @@
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
     spawn: RMCVehicleDragonFlameImpact
+    projectileAdjust: false
   - type: IgnoreArc
   - type: IgnorePredictionHide
   - type: Fixtures
@@ -163,6 +162,9 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: TriggerOnSpawn
+  - type: SpawnOnTrigger
+    proto: RMCSmokeFireSentry
+    mapCoords: true
   - type: SpawnOnTrigger
     proto: RMCTileFireHCNapalm
     mapCoords: true
@@ -234,7 +236,7 @@
     delay: 0
   - type: DeleteOnTrigger
   - type: SpawnOnTerminate
-    spawn: RMCTileFireHCNapalm
+    spawn: RMCVehicleTankFlamerImpact
   - type: IgnoreArc
   - type: IgnorePredictionHide
   - type: Fixtures
@@ -247,3 +249,16 @@
         mask:
         - Impassable
         - BulletImpassable
+
+- type: entity
+  id: RMCVehicleTankFlamerImpact
+  name: tank flamer impact
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: SpawnOnTrigger
+    proto: RMCSmokeFireSentry
+    mapCoords: true
+  - type: TileFireOnTrigger
+    range: 0
+    spawn: RMCTileFireHCNapalm

@@ -180,7 +180,7 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (turret.VisualEntity is not { } visual)
             return;
 
-        if (Exists(visual))
+        if (Exists(visual) && !TerminatingOrDeleted(visual) && !EntityManager.IsQueuedForDeletion(visual))
             Del(visual);
 
         turret.VisualEntity = null;
@@ -598,6 +598,9 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (!targetTurret.RotateToCursor)
             return;
 
+        var alignmentTolerance = MathHelper.DegreesToRadians(
+            MathF.Max(FireAlignmentToleranceDegrees + ent.Comp.FireWhileRotatingGraceDegrees, 0f));
+
         if (!TryGetVehicle(targetUid, out var vehicle))
             return;
 
@@ -614,7 +617,7 @@ public sealed class VehicleTurretSystem : EntitySystem
                 var desiredWorldRotation = direction.ToWorldAngle();
                 var currentWorldRotation = (targetTurret.WorldRotation + vehicleRot).Reduced();
                 var desiredDelta = Angle.ShortestDistance(currentWorldRotation, desiredWorldRotation);
-                if (Math.Abs(desiredDelta.Theta) > MathHelper.DegreesToRadians(FireAlignmentToleranceDegrees))
+                if (Math.Abs(desiredDelta.Theta) > alignmentTolerance)
                 {
                     args.Cancelled = true;
                     args.ResetCooldown = true;
@@ -629,7 +632,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             : (targetTurret.TargetRotation + vehicleRot).Reduced();
 
         var delta = Angle.ShortestDistance(worldRotation, targetWorldRotation);
-        if (Math.Abs(delta.Theta) <= MathHelper.DegreesToRadians(FireAlignmentToleranceDegrees))
+        if (Math.Abs(delta.Theta) <= alignmentTolerance)
             return;
 
         args.Cancelled = true;

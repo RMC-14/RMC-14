@@ -458,6 +458,8 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
     public void SpawnFireDiamond(EntProtoId spawn, EntityCoordinates center, int range, int? intensity = null, int? duration = null)
     {
         var chain = _onCollide.SpawnChain();
+        // Ensure the center tile is ignited as part of the diamond.
+        SpawnFire(center, spawn, chain, range, intensity, duration, out _);
         SpawnFires(spawn, center, range, chain, intensity, duration);
     }
 

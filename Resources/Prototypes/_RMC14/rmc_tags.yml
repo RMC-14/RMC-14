@@ -131,6 +131,12 @@
   id: RMCVehicleHardpointWheel
 
 - type: Tag
+  id: RMCVehicleHardpointTreads
+
+- type: Tag
+  id: RMCVehicleHardpointTires
+
+- type: Tag
   id: RMCVehicleHardpointTurret
 
 - type: Tag

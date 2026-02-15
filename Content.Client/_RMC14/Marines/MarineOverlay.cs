@@ -181,6 +181,7 @@ public sealed class MarineOverlay : Overlay
             }
         }
 
+        handle.SetTransform(Matrix3x2.Identity);
         handle.UseShader(null);
     }
 }

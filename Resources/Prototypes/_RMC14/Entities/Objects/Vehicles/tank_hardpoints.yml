@@ -52,16 +52,6 @@
         - RMCVehicleHardpointLauncher
 
 - type: entity
-  parent: RMCVehicleTankTurret
-  id: RMCVehicleTankMarineTurret
-  name: marine tank turret
-  description: A marine tank turret hardpoint.
-  components:
-  - type: VehicleTurret
-    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
-    overlayState: tank_turret_0
-
-- type: entity
   parent: RMCVehicleTankHardpointBase
   id: RMCVehicleTankTreads
   name: tank treads
@@ -74,6 +64,7 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
+    - RMCVehicleHardpointTreads
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -89,6 +80,7 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointWheel
+    - RMCVehicleHardpointTires
   - type: RMCVehicleWheelItem
 
 - type: entity
@@ -194,12 +186,13 @@
     overlayState: ltb_cannon_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
+  - type: ShootAtFixedPoint
   - type: Gun
     fireRate: 0.9
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/cannon_fire1.ogg
     cameraRecoilScalar: 0
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 5
@@ -228,15 +221,6 @@
   - type: RMCHardpointVisual
     vehicleState: ltb_cannon_0
 
-- type: entity
-  parent: RMCVehicleTankLTBCannon
-  id: RMCVehicleTankMarineLTBCannon
-  name: marine LTB cannon
-  description: A marine light tank cannon hardpoint.
-  components:
-  - type: VehicleTurret
-    overlayRsi: _RMC14/Structures/Vehicles/Tank_Marine.rsi
-    overlayState: ltb_cannon_0
 
 - type: entity
   parent: RMCVehicleTankHardpointBase
@@ -253,24 +237,42 @@
     - RMCVehicleHardpointCannon
   - type: VehicleTurretAttachment
   - type: VehicleTurret
+    fireWhileRotatingGraceDegrees: 12
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,-10"
-    pixelOffsetEast: "-10,0"
-    pixelOffsetSouth: "0,10"
-    pixelOffsetWest: "10,0"
+    pixelOffsetNorth: "0,30"
+    pixelOffsetEast: "40,0"
+    pixelOffsetSouth: "0,-50"
+    pixelOffsetWest: "-40,0"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltaaap_minigun_0
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 12
+    fireRate: 1.5
     selectedMode: FullAuto
     availableModes:
     - FullAuto
-    soundGunshot: /Audio/Weapons/Guns/Gunshots/gun_sentry.ogg
     cameraRecoilScalar: 0
+  - type: GunSpinup
+    baseShotDelay: 0.7
+    baseScatter: 10
+    initialWindupDelay: 0.7
+    spinUpTime: 10
+    graceAfterStop: 2
+    spinDownTime: 3
+    minSpinLevel: 1
+    maxSpinLevel: 11
+    rateTiers: [1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 5]
+    startSound:
+      path: /Audio/_RMC14/Vehicle/weapons/minigun_start.ogg
+    loopSound:
+      path: /Audio/Weapons/Guns/Gunshots/minigun.ogg
+    stopSound:
+      path: /Audio/_RMC14/Vehicle/weapons/minigun_stop.ogg
+    selectSound:
+      path: /Audio/_RMC14/Vehicle/weapons/minigun_select.ogg
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
     accuracyMultiplierUnwielded: 4
@@ -380,8 +382,7 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    soundGunshot:
-      collection: RMCFlamerShoot
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/flamethrower.ogg
     cameraRecoilScalar: 0
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4
@@ -441,8 +442,7 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
-    soundGunshot:
-      collection: RMCFlamerShoot
+    soundGunshot: /Audio/_RMC14/Vehicle/weapons/flamethrower.ogg
     cameraRecoilScalar: 0
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 4

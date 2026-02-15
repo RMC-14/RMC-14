@@ -9,6 +9,8 @@ using Content.Shared.UserInterface;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Movement.Systems;
+using Content.Shared._RMC14.Weapons.Ranged;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
@@ -32,6 +34,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -208,6 +211,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             return;
         }
 
+        var playSelectSound = !string.IsNullOrWhiteSpace(args.SlotId) &&
+                              (!weapons.OperatorSelections.TryGetValue(args.Actor, out var priorSlot) ||
+                               !string.Equals(priorSlot, args.SlotId, StringComparison.OrdinalIgnoreCase));
+
         if (weapons.OperatorSelections.TryGetValue(args.Actor, out var existingSlot) &&
             string.Equals(existingSlot, args.SlotId, StringComparison.OrdinalIgnoreCase))
         {
@@ -224,6 +231,13 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             weapons.OperatorSelections[args.Actor] = args.SlotId;
             weapons.HardpointOperators[args.SlotId] = args.Actor;
             weapons.SelectedWeapon = item;
+
+            if (playSelectSound &&
+                TryComp(item, out GunSpinupComponent? spinup) &&
+                spinup.SelectSound != null)
+            {
+                _audio.PlayPredicted(spinup.SelectSound, item, args.Actor);
+            }
         }
 
         Dirty(vehicleUid, weapons);

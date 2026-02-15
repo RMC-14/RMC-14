@@ -1497,9 +1497,15 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTreads
     - id: wheel-2
       hardpointType: Wheel
       insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTires
   - type: RMCVehicleWheelSlots
     slotCount: 2
   - type: RMCHardpointIntegrity
@@ -1578,12 +1584,18 @@
   - type: InteractionOutline
   - type: Sprite
     drawdepth: Mobs
-    sprite: _RMC14/Structures/Vehicles/Tank_Marine.rsi
+    sprite: _RMC14/Structures/Vehicles/tank.rsi
     layers:
     - map: [ base ]
       state: tank_base
+    - map: [ armor ]
+      state: ARMOR
+      visible: false
     - map: [ primary ]
       state: tank_turret_0
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: SpriteMovement
@@ -1615,12 +1627,27 @@
   - type: ItemSlots
     slots:
       primary:
-        startingItem: RMCVehicleTankMarineTurret
+        startingItem: RMCVehicleTankTurret
         whitelist:
           tags:
           - RMCVehicleHardpointTurret
+      wheel-1:
+        startingItem: RMCVehicleTankTreads
+        whitelist:
+          tags:
+          - RMCVehicleHardpointTreads
+      wheel-2:
+        startingItem: RMCVehicleTankTires
+        whitelist:
+          tags:
+          - RMCVehicleHardpointTires
   - type: RMCHardpointSlots
     slots:
+    - id: armor
+      hardpointType: Armor
+      visualLayer: armor
+      insertDelay: 2.5
+      required: false
     - id: primary
       hardpointType: Turret
       visualLayer: primary
@@ -1634,9 +1661,15 @@
     - id: wheel-1
       hardpointType: Wheel
       insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTreads
     - id: wheel-2
       hardpointType: Wheel
       insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointTires
   - type: RMCVehicleWheelSlots
     slotCount: 2
   - type: RMCHardpointIntegrity
@@ -1651,7 +1684,7 @@
     fuelUsed: 8
   - type: Appearance
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/humvee_arc_interior.yml
+    interiorPath: /Maps/_RMC14/Vehicles/humvee_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
     maxPassengers: 4
