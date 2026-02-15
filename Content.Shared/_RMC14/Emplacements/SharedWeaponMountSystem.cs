@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Construction;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Scoping;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
@@ -82,6 +83,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -208,9 +210,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         if (!CanDeployPopup(ent, args.User, out _, out _))
             return;
 
+        var delay = ent.Comp.AssembleDelay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.AssembleSkill);
+
         var doAfterArgs = new DoAfterArgs(EntityManager,
             args.User,
-            ent.Comp.AssembleDelay,
+            delay,
             new MountDeployDoafterEvent(),
             ent,
             ent,
@@ -248,6 +252,8 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
         }
 
+        var delay = ent.Comp.AssembleDelay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.AssembleSkill);
+
         if (ent.Comp.MountedEntity != null)
         {
             args.Cancel();
@@ -255,7 +261,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             {
                 var doAfterArgs = new DoAfterArgs(EntityManager,
                     args.User,
-                    ent.Comp.AssembleDelay,
+                    delay,
                     new SecureToMountDoAfterEvent(),
                     ent,
                     ent,
@@ -897,9 +903,11 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private bool TryUndeployMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used = null)
     {
+        var delay = ent.Comp.AssembleDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.AssembleSkill);
+
         var undeployDoAfterArgs = new DoAfterArgs(EntityManager,
             user,
-            ent.Comp.DisassembleDelay,
+            delay,
             new MountUnDeployDoAfterEvent(),
             ent,
             ent,

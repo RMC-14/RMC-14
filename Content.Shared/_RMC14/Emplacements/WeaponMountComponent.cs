@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tools;
 using Content.Shared.Whitelist;
@@ -50,13 +51,13 @@ public sealed partial class WeaponMountComponent : Component
     public bool IsWeaponLocked;
 
     /// <summary>
-    ///     The DoAfter duration for any assembling related actions.
+    ///     The DoAfter duration for any assembling related actions, affected by the <see cref="AssembleSkill"/>
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan AssembleDelay = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
-    ///     The DOAfter duration for any disassembling related actions.
+    ///     The DOAfter duration for any disassembling related actions, affected by the <see cref="AssembleSkill"/>
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan DisassembleDelay = TimeSpan.FromSeconds(1.5f);
@@ -150,6 +151,12 @@ public sealed partial class WeaponMountComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float MountableDistance = 2;
+
+    /// <summary>
+    ///     The skill that lowers the duration of the assemble/disassemble doafter.
+    /// </summary>
+    [DataField]
+    public EntProtoId<SkillDefinitionComponent> AssembleSkill = "RMCSkillEngineer";
 
     [DataField, AutoNetworkedField]
     public string? DeployFixture = "mount";
