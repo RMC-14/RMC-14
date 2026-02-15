@@ -961,7 +961,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         if (!_system.TryGetGridDropship(Owner, out var dropship))
             return;
 
-        var weapons = new List<DropshipWeaponsButtonData?>();
+        var weapons = new List<OrderedWeapon>();
         var utility = new List<DropshipWeaponsButtonData?>();
         var electronicSystem = new List<DropshipWeaponsButtonData?>();
         foreach (var pointId in dropship.Comp.AttachmentPoints)
@@ -1064,17 +1064,21 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                     _ => SendPredictedMessage(msg),
                     netEnt
                 );
-                weapons.Add(data);
+
+                var order = hasLocation ? (int)location : int.MaxValue;
+                weapons.Add(new OrderedWeapon(data, order));
 
                 if (weapons.Count >= 4)
                     break;
             }
         }
 
-        weapons.TryGetValue(0, out one);
-        weapons.TryGetValue(1, out two);
-        weapons.TryGetValue(2, out three);
-        weapons.TryGetValue(3, out four);
+        weapons.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+        one = weapons.Count > 0 ? weapons[0].Data : null;
+        two = weapons.Count > 1 ? weapons[1].Data : null;
+        three = weapons.Count > 2 ? weapons[2].Data : null;
+        four = weapons.Count > 3 ? weapons[3].Data : null;
 
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);
@@ -1082,6 +1086,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
         electronicSystem.TryGetValue(0, out electronicSystemOne);
         electronicSystem.TryGetValue(1, out electronicSystemTwo);
+    }
+
+    private readonly struct OrderedWeapon
+    {
+        public readonly DropshipWeaponsButtonData Data;
+        public readonly int Order;
+
+        public OrderedWeapon(DropshipWeaponsButtonData data, int order)
+        {
+            Data = data;
+            Order = order;
+        }
     }
 
     protected override void Dispose(bool disposing)
