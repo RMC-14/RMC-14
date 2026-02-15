@@ -1,0 +1,286 @@
+- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem]
+  id: RMCSmartGunMounted
+  name: ML66D heavy machine gun
+  description: The top half of a ML66D heavy machine gun post. However it ain't much use without the tripod.
+  components:
+  - type: Item
+    size: Huge
+  - type: AmmoCounter
+  - type: StaticPrice
+    price: 500
+  - type: MagazineAmmoProvider
+    autoEject: true
+  - type: RMCAmmoEject
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+  - type: Corrodible
+    isCorrodible: false
+  - type: GunIFF
+    enabled: true
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/HMGs/ML66D/ml66d.rsi
+    layers:
+    - state: ml66d_gun_e
+    - state: mag-0
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - Back
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 20
+  - type: Gun
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a.ogg
+    soundEmpty:
+      path: /Audio/Weapons/Guns/Empty/lmg_empty.ogg
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    - SemiAuto
+    recoilUnwielded: 0
+    scatterUnwielded: 0
+    baseFireRate: 3.33
+    modifiers:
+      FullAuto:
+        maxScatterModifier: 0
+        useBurstScatterMult: false
+        unwieldedScatterMultiplier: 0
+        shotsToMaxScatter: 700
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.05
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineML66D
+          - RMCMagazineML66DLarge
+  - type: GunDamageModifier
+    multiplier: 1
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillEngineer: 1
+  - type: GunSkilledRecoil
+    setRecoil: 0
+    skills:
+      RMCSkillFirearms: 0
+    mustBeWielded: false
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/smartgun_mouse.rsi
+      state: all
+  - type: MountableWeapon
+  - type: GunUnskilledPenalty
+    firearms: 0
+    angleIncrease: 0
+    accuracyAddMult: 0
+  - type: Scope
+    scopePopup: null
+    unScopePopup: null
+    canUseInsideContainer: true
+    canUseNightVision: true
+    zoomLevels:
+    - zoom: 1
+      offset: 7
+      doAfter: 0
+      allowMovement: true
+    scopingToggleAction: null
+  - type: Tag
+    tags:
+    - RMCSmartGunMounted
+
+- type: entity
+  parent: RMCSmartGunMounted
+  id: RMCSmartGunMountedLoaded
+  suffix: Loaded
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineML66D
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineML66D
+          - RMCMagazineML66DLarge
+
+- type: entity
+  parent: RMCSmartGunMounted
+  id: RMCSmartGunMountedStatic
+  name: ML66D heavy machine gun
+  suffix: Scoped
+  components:
+  - type: MagazineAmmoProvider
+    autoEject: false
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - FullAuto
+    - SemiAuto
+    baseFireRate: 5
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: RMCMagazineML66DLarge
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_sg_reload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCMagazineML66DLarge
+  - type: Scope
+    zoomLevels:
+    - zoom: 1
+      offset: 12
+      doAfter: 0
+      allowMovement: true
+    scopingToggleAction: null
+  - type: GunRequiresSkills
+    skills:
+      RMCSkillEngineer: 0
+  - type: Gun
+    shootOriginOffset: 0, -0.5 #Shifts the spawn position of the projectile 0.5 tiles towards the front of the mount.
+
+# Magazines
+
+- type: entity
+  parent: CMMagazineRifleBase
+  id: RMCMagazineML66D
+  name: ML66D drum magazine (10x28mm)
+  description: A box of 700, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineML66D
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeHMG10x28mm
+    proto: RMCCartridgeHMG10x28mm
+    capacity: 700
+    deleteWhenEmpty: false
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/ml66d.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-1
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Clothing
+    slots:
+    - suitStorage
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: RMCMagazineML66D
+  id: RMCMagazineML66DLarge
+  name: large ML66D drum magazine (10x28mm)
+  description: A box of 1500, 10x28mm caseless tungsten rounds for the ML66D heavy machine gun system.
+  components:
+  - type: Tag
+    tags:
+    - RMCMagazineML66DLarge
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - RMCCartridgeHMG10x28mm
+    proto: RMCCartridgeHMG10x28mmOffset
+    capacity: 1500
+
+# Cartridges
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCCartridgeHMG10x28mm
+  name: cartridge (10x28mm)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCBulletHMG10x28mm
+  - type: Tag
+    tags:
+    - RMCCartridgeHMG10x28mm
+
+- type: entity
+  parent: RMCCartridgeHMG10x28mm
+  id: RMCCartridgeHMG10x28mmOffset #DIfferent muzzle flash location
+  name: cartridge (10x28mm)
+  components:
+  - type: CartridgeAmmo
+    muzzleFlashOffset: 0.25, 0
+    proto: RMCBulletHMG10x28mm
+
+# Projectiles
+
+- type: entity
+  parent: CMBulletBase
+  id: RMCBulletHMG10x28mm
+  name: bullet (10x28mm)
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Piercing: 36
+  - type: CMArmorPiercing
+    amount: 50
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 1
+      falloff: 1
+    - range: 22
+      falloff: 9999
+  - type: RMCProjectileAccuracy
+    accuracy: 105
+    thresholds:
+    - range: 8
+      falloff: 10
+
+# Tags
+
+- type: Tag
+  id: RMCSmartGunMounted
+
+- type: Tag
+  id: RMCMagazineML66D
+
+- type: Tag
+  id: RMCMagazineML66DLarge
+
+- type: Tag
+  id: RMCCartridgeHMG10x28mm

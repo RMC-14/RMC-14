@@ -11,6 +11,9 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Corrodible
     structure: false
   - type: Rotatable
