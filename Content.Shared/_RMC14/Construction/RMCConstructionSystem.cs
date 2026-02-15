@@ -272,14 +272,6 @@ public sealed class RMCConstructionSystem : EntitySystem
             }
         }
 
-        var attempt = new RMCConstructionAttemptEvent(coordinates, proto.Name);
-        RaiseLocalEvent(ref attempt);
-        if (attempt.Cancelled)
-        {
-            reason = RMCConstructionFailureReason.InvalidLocation;
-            return false;
-        }
-
         if (proto.MaterialCost is { } materialCost && TryComp<StackComponent>(constructionItem, out var stack))
         {
             var totalAmount = amount / proto.Amount;
@@ -293,7 +285,6 @@ public sealed class RMCConstructionSystem : EntitySystem
 
         return true;
     }
-
 
     public void OnUseInHand(Entity<RMCConstructionItemComponent> ent, ref UseInHandEvent args)
     {
@@ -323,9 +314,6 @@ public sealed class RMCConstructionSystem : EntitySystem
             _popup.PopupEntity(message, ent, user, PopupType.SmallCaution);
             return false;
         }
-
-        var direction = transform.LocalRotation.GetCardinalDir();
-        var coordinates = transform.Coordinates;
 
         if (proto.Type == RMCConstructionType.Structure)
         {
@@ -593,14 +581,20 @@ public sealed class RMCConstructionSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        var graph = _prototype.Index(ev.Prototype.Graph);
+        if (!_prototype.TryIndex(ev.Prototype.Graph, out var graph))
+        {
+            ev.Cancelled = true;
+            return;
+        }
+
         var node = graph.Nodes[ev.Prototype.TargetNode];
         var entProtoId = node.Entity.GetId(null, null, new(EntityManager));
 
         if (entProtoId == null)
             return;
 
-        var entProto = _prototype.Index<EntityPrototype>(entProtoId);
+        if (!_prototype.TryIndex(entProtoId, out var entProto))
+            return;
 
         if (!CanBuildAt(ev.Location, entProto, out var popup, user: ev.User))
         {
