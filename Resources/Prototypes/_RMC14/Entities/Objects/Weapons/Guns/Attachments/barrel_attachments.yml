@@ -339,7 +339,9 @@
   - type: AttachableSilencer
     sound:
       collection: CMSilencedShoot
-      
+      params:
+        maxDistance: 6
+
 - type: entity
   parent: RMCBarrelAttachmentBase
   id: RMCAttachmentSuppressorL112

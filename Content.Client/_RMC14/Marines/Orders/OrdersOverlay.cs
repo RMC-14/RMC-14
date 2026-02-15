@@ -67,6 +67,7 @@ public sealed class OrdersOverlay : Overlay
         {
             DrawIcon((uid, sprite, xform), in args, focus.Icon, scaleMatrix, rotationMatrix);
         }
+
         handle.SetTransform(Matrix3x2.Identity);
         handle.UseShader(null);
     }

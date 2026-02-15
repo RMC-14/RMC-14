@@ -621,6 +621,7 @@ public sealed class CMGunSystem : EntitySystem
         RaiseLocalEvent(gun, ref ev);
 
         gun.Comp.ModifiedMultiplier = ev.Multiplier;
+        Dirty(gun);
     }
 
     public bool HasRequiredEquippedPopup(Entity<GunRequireEquippedComponent?> gun, EntityUid user)
