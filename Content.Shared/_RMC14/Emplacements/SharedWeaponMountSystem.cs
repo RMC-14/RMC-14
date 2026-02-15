@@ -478,7 +478,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         if (TryComp(user, out EntityTurnInvisibleComponent? invisible))
         {
-            if (invisible.RestrictWeapons && invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            if (invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
             {
                 var popup = Loc.GetString("emplacement-mount-deploy-invisible");
                 _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
@@ -547,7 +547,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
         if (TryComp(args.Buckle, out EntityTurnInvisibleComponent? invisible))
         {
-            if (invisible.RestrictWeapons && invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            if (invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
             {
                 var popup = Loc.GetString("rmc-cloak-attempt-mount-weapon");
                 _popup.PopupClient(popup, args.Buckle, args.Buckle, PopupType.SmallCaution);
