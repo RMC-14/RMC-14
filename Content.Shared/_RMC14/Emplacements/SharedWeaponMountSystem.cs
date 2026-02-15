@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Scoping;
+using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared._RMC14.Xenonids;
@@ -46,6 +47,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Emplacements;
@@ -81,6 +83,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
     [Dependency] private readonly ItemSlotsSystem _slots = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedToolSystem _tool = default!;
     [Dependency] private readonly RMCSharedWeaponControllerSystem _weaponController = default!;
@@ -469,6 +472,16 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return false;
         }
 
+        if (TryComp(user, out EntityTurnInvisibleComponent? invisible))
+        {
+            if (invisible.RestrictWeapons && invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            {
+                var popup = Loc.GetString("emplacement-mount-deploy-invisible");
+                _popup.PopupClient(popup, user, user, PopupType.SmallCaution);
+                return false;
+            }
+        }
+
         var direction = rotation.GetCardinalDir();
         coordinates = coordinates.Offset(direction.ToVec());
         if (_rmcMap.IsTileBlocked(coordinates, CollisionGroup.MidImpassable))
@@ -526,6 +539,17 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
             args.Cancelled = true;
             return;
+        }
+
+        if (TryComp(args.Buckle, out EntityTurnInvisibleComponent? invisible))
+        {
+            if (invisible.RestrictWeapons && invisible.Enabled || invisible.UncloakTime + invisible.UncloakWeaponLock > _timing.CurTime)
+            {
+                var popup = Loc.GetString("rmc-cloak-attempt-mount-weapon");
+                _popup.PopupClient(popup, args.Buckle, args.Buckle, PopupType.SmallCaution);
+                args.Cancelled = true;
+                return;
+            }
         }
 
         if (args.User == args.Buckle)
