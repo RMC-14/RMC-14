@@ -2579,3 +2579,14 @@
     state: selina_cavity_alara
   - type: PatronFigurine
     id: e85c8c96-2258-43b3-914d-15f2466f7fee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaraLifelineGreenland
+  name: Kara 'Lifeline' Greenland figurine
+  description: "Smells faintly of... Blueberries???"
+  components:
+  - type: Sprite
+    state: kara_lifeline_greenland
+  - type: PatronFigurine
+    id: 1d7a863e-6004-4dda-ae4c-6c0ed0b58fcc
