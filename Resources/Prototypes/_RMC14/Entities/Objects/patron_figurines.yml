@@ -2557,6 +2557,7 @@
     id: a440be4b-5667-44f7-a375-cfc151fdf8f7
   - type: ParaDroppable
     dropScatter: 1
+  - type: CrashLandable
 
 - type: entity
   parent: RMCBaseFigurinePatron
