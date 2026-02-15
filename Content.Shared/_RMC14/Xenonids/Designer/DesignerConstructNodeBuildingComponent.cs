@@ -18,4 +18,7 @@ public sealed partial class DesignerConstructNodeBuildingComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool ThickVariant;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? AnimationEffect;
 }

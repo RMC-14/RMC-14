@@ -2,17 +2,21 @@
   id: RMCClosetRCMTroopSgtFill
   table: !type:AllSelector
     children:
-    - id: RMCLaserDesignator
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCLaserDesignatorPVE
     - id: RMCBackpackAmmoRCM
     - id: CMAdvFirstAidKit
-    - id: RMCBoxMagazineRifleSSG45
+    - id: RMCBoxMagazineRifleL90Drum
+    - id: RMCArmorWebbingDrum
 
 - type: entityTable
   id: RMCClosetRCMSectionLeaderFill
   table: !type:AllSelector
     children:
-    - id: RMCLaserDesignator
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
+    - id: RMCBackpackRTOTSE
 
 - type: entityTable
   id: RMCClosetRCMGPMGFill
@@ -20,9 +24,10 @@
     children:
     - id: RMCSmartGunRCMPVE
     - id: RMCPowerCellSmartgun
-    - id: RMCArmorRoyalHarnessNoBackpack # RMC14 TODO: This can be changed to the new(er) ID once PR #8946 gets merged, with this current entity being fully removed.
+    - id: RMCPVEArmorCaseRoyalHarness
     - id: RMCMagazineSmartGunHT
       amount: 3
+    - id: RMCArmorWebbingDrum
     - id: RMCGlassesSmartGunSight
 
 - type: entityTable
@@ -30,6 +35,35 @@
   table: !type:AllSelector
     children:
     - id: RMCHeadRoyalBeret
-    - id: RMCJumpsuitMarineRoyal
+    - id: RMCJumpsuitMarineRoyalPVE
     - id: RMCBootsRoyalFilled
-    - id: RMCHeadsetRoyalMarine # TODO RMC14 replace with RMCHeadsetRoyalMarinePVE after #8076 is merged
+    - id: RMCHeadsetRoyalMarinePVE
+
+- type: entityTable
+  id: RMCClosetRCMTeamLeaderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCLaserDesignatorPVE
+    - id: RMCWhistle
+    - id: RMCBackpackRTOTSE
+
+- type: entityTable
+  id: RMCClosetRCMTroopCommanderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCLaserDesignatorPVE
+    - id: RMCWhistle
+    - id: RMCBeltHolsterPistolRCM
+    - id: RMCPVEArmorCaseRoyalLight
+    - id: RMCBackpackRTOTSE
+
+- type: entityTable
+  id: RMCClosetRCMSapperFill
+  table: !type:AllSelector
+    children:
+    - id: RMCBoxShotgunBuckshot
+      amount: 4
+    - id: RMCWeldingGoggles
+      amount: 2

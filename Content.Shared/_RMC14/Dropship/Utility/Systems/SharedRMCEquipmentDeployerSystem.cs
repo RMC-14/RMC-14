@@ -181,7 +181,8 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
     /// <param name="deployOffset">The position offset of the deployed entity.</param>
     /// <param name="rotationOffset">The rotation offset of the deployed entity.</param>
     /// <param name="equipmentDeployerComponent">The <see cref="RMCEquipmentDeployerComponent"/> of the deployer</param>
-    /// <returns>True if deploying succeeds</returns>
+    /// <param name="user">The entity using the deployer</param>
+    /// <returns>True if deploying/undeploying succeeds</returns>
     public bool TryDeploy(EntityUid deployer, bool deploy, Vector2 deployOffset = new (), float rotationOffset = 0, RMCEquipmentDeployerComponent? equipmentDeployerComponent = null, EntityUid? user = null)
     {
         if (TerminatingOrDeleted(deployer))
@@ -189,6 +190,13 @@ public abstract partial class SharedRMCEquipmentDeployerSystem : EntitySystem
 
         if (!Resolve(deployer, ref equipmentDeployerComponent, false))
             return false;
+
+        if (TerminatingOrDeleted(GetEntity(equipmentDeployerComponent.DeployEntity)))
+        {
+            equipmentDeployerComponent.DeployEntity = null;
+            DirtyField(deployer, equipmentDeployerComponent, nameof(RMCEquipmentDeployerComponent.DeployEntity));
+            return false;
+        }
 
         if (!_container.TryGetContainer(deployer, equipmentDeployerComponent.DeploySlotId, out var container))
             return false;
