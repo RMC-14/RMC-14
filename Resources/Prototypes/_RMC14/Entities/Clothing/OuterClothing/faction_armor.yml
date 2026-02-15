@@ -150,6 +150,7 @@
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
+  - type: CMHardArmor
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
