@@ -126,7 +126,6 @@
     maxItemSize: Small
 
 # Colonial militia
-# TODO: implement storage whitelist for this
 - type: entity
   parent: ClothingOuterStorageBase
   id: RMCCoatMilitia
@@ -149,6 +148,7 @@
     walkModifier: 0.897
     sprintModifier: 0.897
   - type: Storage
+    maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
   - type: CMHardArmor
@@ -156,9 +156,9 @@
   - type: IgnoreContentsSize
     items:
       tags:
-      - RMCMagazineMar50LMG
-      - RMCMagazineRifleMAR40
-      - RMCMagazineSMGMAC15
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
 
 - type: entity
   parent: RMCCoatMilitia
