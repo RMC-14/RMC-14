@@ -2591,3 +2591,14 @@
     state: kara_lifeline_greenland
   - type: PatronFigurine
     id: 1d7a863e-6004-4dda-ae4c-6c0ed0b58fcc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBorisScavmanchez
+  name: Boris Scavmanchez figurine
+  description: "Seems like this guy gets around just about everywhere. Though he's sporting his MP uniform, here, with a M42 shotgun held by his hip in one hand and a stun baton resting on his shoulder in the other. He truly IS the law!"
+  components:
+  - type: Sprite
+    state: boris_scavmanchez
+  - type: PatronFigurine
+    id: effa13df-5875-4437-a454-dbb70ce9f5da
