@@ -2140,6 +2140,14 @@
     state: olive_orr
   - type: PatronFigurine
     id: e1c32e3b-05ae-4684-beec-50b3ee32a5d8
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/mouse_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
