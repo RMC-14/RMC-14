@@ -1,0 +1,7 @@
+﻿- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseUNMCRifleman
+  name: Corpse Spawner - UNMC Rifleman
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseUNMCRifleman

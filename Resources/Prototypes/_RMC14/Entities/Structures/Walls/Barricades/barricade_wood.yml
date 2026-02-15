@@ -46,3 +46,71 @@
   - type: XenoCrusherChargable
     instantDestroy: true
   - type: Climbable
+
+- type: entity
+  parent: CMBarricadeBase
+  id: RMCBarricadeRazorWireFence
+  name: razor wire fence
+  description: A tough wooden barricade made in a chevaux de frise, with multiple lines of sharp razorwire going along it. Doesn't look pleasant to walk through at all.
+  components:
+    - type: Anchorable
+    - type: Sprite
+      sprite: _RMC14/Structures/Walls/Barricades/razor_wire_fence.rsi
+      drawdepth: SmallObjects
+      layers:
+      - state: razor_wire_fence
+      - map: [ "acided" ]
+    - type: Destructible
+      thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 500
+        behaviors:
+        - !type:SpawnEntitiesBehavior
+          spawn:
+            RMCPlankWood1:
+              min: 3
+              max: 3
+        - !type:PlaySoundBehavior
+          sound:
+            collection: WoodDestroy
+        - !type:DoActsBehavior
+          acts: [ "Destruction" ]
+    - type: RMCRepairable
+      heal: 200
+      skill: RMCSkillConstruction
+      delay: 10
+      fuelUsed: 2
+    - type: Damageable
+      damageContainer: Inorganic
+      damageModifierSet: Wood
+    - type: SpeedModifierContacts
+      walkSpeedModifier: 0.1
+      sprintSpeedModifier: 0.1
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeAabb
+            bounds: "-0.5,-0.2,0.2,0.5"
+          layer:
+            - SlipLayer
+          mask:
+            - ItemMask
+          density: 1000
+          hard: false
+    - type: DamageOnCollide
+      damageDead: false
+      damage:
+        groups:
+          Brute: 20
+      ignoreResistances: true
+    - type: InteractionPopup
+      interactSuccessString: fence-rattle-success
+      messagePerceivedByOthers: fence-rattle-success
+      interactSuccessSound:
+        collection: FenceRattle
+    - type: NailgunRepairable
+      # cm13 max_health%: 0.3, 0.45
+      repairMetal: 135
+      repairPlasteel: 200

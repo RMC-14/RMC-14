@@ -664,5 +664,28 @@
   - type: Sprite
     state: platform_sm_stair_alt
 
+- type: entity
+  parent: CMPlatformBaseDestructible
+  id: RMCPlatformLadder
+  name: Ladder
+  description: A simple wooden ladder.
+  components:
+  - type: Sprite
+    state: ladder
+    drawdepth: SmallObjects
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,-0.36"
+        density: 1500
+        mask:
+        - TableMask
+        layer:
+        - TableLayer
+
+
 - type: Tag
   id: Platform
