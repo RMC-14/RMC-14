@@ -1,0 +1,69 @@
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEBomber
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: bomber
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEGPMG
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: gpmg
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSEGunner
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: gunner
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESapper
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sapper
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESectionLead
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: section
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSESniper
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sniper
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETeamLead
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: team
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETroopCommander
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: commander
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSETroopSergeant
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: sergeant
+
+- type: decal
+  parent: CMDecalBase
+  id: RMCDecalTSERifleman
+  sprite:
+    sprite: _RMC14/Decals/tse.rsi
+    state: rifleman

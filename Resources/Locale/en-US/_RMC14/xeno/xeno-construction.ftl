@@ -101,3 +101,22 @@ rmc-xeno-construction-recovery-node-heal-other = {CAPITALIZE(THE($target))} glow
 
 rmc-xeno-construction-no-map-structure = The ground isn't solid.
 rmc-xeno-construction-must-have-weeds-structure = We can only make this on weeds!
+
+rmc-xeno-designer-ui-nodes-count = Design nodes: {$count}/{$max}
+
+rmc-designnode-human-interact = You don't understand how to interact with this strange node.
+rmc-designnode-no-plasma = You lack the plasma to feed this node.
+
+rmc-xeno-designer-delete-node-none = There's no design node here.
+rmc-xeno-designer-delete-node-not-owned = We can only delete our own design nodes.
+rmc-xeno-designer-use-node-wrong-hive = This node does not belong to your hive!
+rmc-xeno-designer-node-needs-weed = There are no weeds to create a connection!
+
+rmc-xeno-designer-thicken-none = There's no resin structure here to thicken.
+rmc-xeno-designer-thicken-weedbound = We can't thicken weedbound resin.
+rmc-xeno-designer-thicken-success = We thicken the resin.
+
+rmc-xeno-designer-greater-surge-cooldown = We need to wait before using Greater Resin Surge again.
+rmc-xeno-designer-greater-surge-none = There's no design nodes nearby.
+rmc-xeno-designer-greater-surge-success = We convert {$count} design nodes into thick resin walls.
+rmc-xeno-designer-infuse-node = You infuse the node with plasma.

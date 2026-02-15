@@ -99,11 +99,13 @@
     scopePopup: null
     unScopePopup: null
     canUseInsideContainer: true
+    canUseNightVision: true
     zoomLevels:
     - zoom: 1
       offset: 7
       doAfter: 0
       allowMovement: true
+    scopingToggleAction: null
   - type: Tag
     tags:
     - RMCSmartGunMounted
@@ -157,6 +159,7 @@
       offset: 12
       doAfter: 0
       allowMovement: true
+    scopingToggleAction: null
   - type: GunRequiresSkills
     skills:
       RMCSkillEngineer: 0
@@ -180,7 +183,7 @@
       - RMCCartridgeHMG10x28mm
     proto: RMCCartridgeHMG10x28mm
     capacity: 700
-    deleteWhenEmpty: true
+    deleteWhenEmpty: false
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/HMGs/ml66d.rsi
     layers:

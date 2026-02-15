@@ -219,6 +219,63 @@
           tags:
           - RMCType88SniperRifle
 
+- type: entity
+  parent: RMCBasePVEEquipmentCase
+  id: RMCPVECaseL91SWS
+  name: L91 SWS case
+  suffix: PVE, no IFF
+  description: A heavy case for storing a complete L91 Support Weapon System, alongside a suppressor, three drums and three magazines of ammunition - regular and armor-penetrating rounds respectively. This particular case is missing its SASOS, which has been replaced with a standard 2x optic.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/PVE_Cases/l91.rsi
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,17,1
+    whitelist:
+      tags:
+      - RMCRifleL91SWS
+      - RMCMagazineRifleL90
+      - RMCMagazineRifleL90AP
+      - RMCMagazineRifleL90Drum
+      - RMCAttachmentRail
+      - RMCAttachmentBarrel
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleL91SWS
+    - id: RMCAttachmentS42xTelescopicMiniscope
+    - id: RMCAttachmentSuppressor
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90AP
+    - id: RMCMagazineRifleL90AP
+    - id: RMCMagazineRifleL90AP
+  - type: ItemMapper
+    mapLayers:
+      gun:
+        whitelist:
+          tags:
+          - RMCRifleL91SWS
+
+- type: entity
+  parent: RMCPVECaseL91SWS
+  id: RMCPVECaseL91SWSIFF
+  suffix: PVE, SASOS IFF
+  description: A heavy case for storing a complete L91 Support Weapon System, alongside three drums and three magazines of ammunition - regular and armor-penetrating rounds respectively.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRifleL91SWS
+    - id: RMCAttachmentSASOS
+    - id: RMCAttachmentSuppressor
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90Drum
+    - id: RMCMagazineRifleL90AP
+    - id: RMCMagazineRifleL90AP
+    - id: RMCMagazineRifleL90AP
+
 # Sentry
 
 - type: entity
@@ -232,15 +289,17 @@
   - type: Storage
     maxItemSize: Ginormous
     grid:
-    - 0,0,3,1
+    - 0,0,5,1
     whitelist:
       tags:
       - RMCSentry
       - RMCMagazineSentry
+      - RMCSentryLaptop
   - type: StorageFill
     contents:
     - id: RMCSentry
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
   - type: ItemMapper
     mapLayers:
       gun:
@@ -258,6 +317,7 @@
     contents:
     - id: RMCSentryMiniSPP
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
 
 - type: entity
   parent: RMCPVECaseSentry
@@ -270,10 +330,12 @@
       tags:
       - RMCSentryWeYa
       - RMCMagazineSentry
+      - RMCSentryLaptop
   - type: StorageFill
     contents:
     - id: RMCSentryMiniWeYa
     - id: RMCMagazineSentry
+    - id: RMCSentryLaptop
   - type: ItemMapper
     mapLayers:
       gun:

@@ -55,6 +55,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
     mesons: true
+    defaultState: half
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -91,6 +92,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
     mesons: true
+    defaultState: half
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -117,6 +119,7 @@
   - type: NightVisionItem
     skills:
       RMCSkillSmartGun: 1
+    defaultState: half
   - type: ClothingRequireEquipped
     whitelist:
       components:
