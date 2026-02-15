@@ -2505,7 +2505,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  description: "Calm under pressure.\nPatient beyond measure.\n\nKnown to observe, endure, and occasionally give horrible OB coordinates.\n\nWhere others advanced, he was already there.\nWhere uncertainty spread, he quietly made it someone else’s problem.\n\nNormally beyond the frontline, always questioning why."
   components:
   - type: Sprite
     state: seth_xi
