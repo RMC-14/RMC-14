@@ -142,11 +142,12 @@
     melee: 20 # CLOTHING_ARMOR_MEDIUM
     bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.725
-    sprintModifier: 0.725
+    speedTier: medium
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
   - type: Storage
     grid:
     - 0,0,3,1 # 2 slots
@@ -169,11 +170,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
   - type: IgnoreContentsSize
     items:
       tags:
@@ -190,11 +186,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
 
 - type: entity
   parent: RMCCoatMilitia
@@ -206,11 +197,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
 
 - type: entity
   parent: RMCCoatMilitia
