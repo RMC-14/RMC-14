@@ -133,6 +133,18 @@ public sealed partial class WeaponMountComponent : Component
     [DataField, AutoNetworkedField]
     public bool Broken;
 
+    /// <summary>
+    ///     Whether the mount is acidable while undeployed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AcidableWhileUndeployed;
+
+    /// <summary>
+    ///     Whether the mount is acidable while deployed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool AcidableWhileDeployed;
+
     [DataField]
     public SoundSpecifier? UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");
 
