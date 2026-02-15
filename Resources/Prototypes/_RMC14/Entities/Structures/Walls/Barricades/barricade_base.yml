@@ -11,6 +11,9 @@
   parent: CMBaseStructureCorrodible
   id: CMBarricadeBase
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Corrodible
     structure: false
   - type: Rotatable
@@ -27,7 +30,7 @@
         layer:
         - TableLayer
         - BarricadeImpassable
-        - BulletImpassable
+        # - BulletImpassable TODO
   - type: RotationDrawDepth
     southDrawDepth: OverMobs
   - type: Barricade
@@ -83,7 +86,7 @@
     maximumFireStacks: 0.5
     damage:
       types:
-        Heat: 3.75
+        Heat: 2
   - type: ExaminableDamage
     messages: RMCBarricadeMessages
   # - type: RMCGenericExamine TODO

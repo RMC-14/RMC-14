@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 11/30/2025 23:40:17
-  entityCount: 17349
+  time: 02/08/2026 01:14:32
+  entityCount: 17427
 maps:
 - 1
 grids:
@@ -103,7 +103,6 @@ tilemap:
   7: CMShuttleTileRasputin15
   5: FloorShuttleBlack
   20: FloorSteel
-  883: Plating
   76: PlatingDamaged
   92: RMCFloorCement8
   95: RMCFloorHybrisaBlackAlt
@@ -42971,7 +42970,7 @@ entities:
     - type: MetaData
       name: 'LZ2: Research Landing Zone'
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 1168
     components:
@@ -53921,6 +53920,567 @@ entities:
     components:
     - type: Transform
       pos: 126.5,46.5
+      parent: 1
+- proto: LandingZoneLightFour
+  entities:
+  - uid: 17408
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,149.5
+      parent: 1
+  - uid: 17409
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,149.5
+      parent: 1
+  - uid: 17410
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,149.5
+      parent: 1
+  - uid: 17411
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 28.5,149.5
+      parent: 1
+  - uid: 17412
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,147.5
+      parent: 1
+  - uid: 17413
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,143.5
+      parent: 1
+  - uid: 17414
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,139.5
+      parent: 1
+  - uid: 17415
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,135.5
+      parent: 1
+  - uid: 17416
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,131.5
+      parent: 1
+  - uid: 17417
+    components:
+    - type: Transform
+      pos: 29.5,128.5
+      parent: 1
+  - uid: 17418
+    components:
+    - type: Transform
+      pos: 26.5,127.5
+      parent: 1
+  - uid: 17419
+    components:
+    - type: Transform
+      pos: 22.5,127.5
+      parent: 1
+  - uid: 17420
+    components:
+    - type: Transform
+      pos: 18.5,127.5
+      parent: 1
+  - uid: 17422
+    components:
+    - type: Transform
+      pos: 15.5,128.5
+      parent: 1
+  - uid: 17423
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,131.5
+      parent: 1
+  - uid: 17424
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,135.5
+      parent: 1
+  - uid: 17425
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,139.5
+      parent: 1
+  - uid: 17426
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,143.5
+      parent: 1
+  - uid: 17427
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,147.5
+      parent: 1
+- proto: LandingZoneLightOne
+  entities:
+  - uid: 14213
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,128.5
+      parent: 1
+  - uid: 14214
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,132.5
+      parent: 1
+  - uid: 14215
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,136.5
+      parent: 1
+  - uid: 14216
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,140.5
+      parent: 1
+  - uid: 14217
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,144.5
+      parent: 1
+  - uid: 14218
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,148.5
+      parent: 1
+  - uid: 14219
+    components:
+    - type: Transform
+      pos: 21.5,127.5
+      parent: 1
+  - uid: 14220
+    components:
+    - type: Transform
+      pos: 17.5,127.5
+      parent: 1
+  - uid: 14221
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,130.5
+      parent: 1
+  - uid: 14222
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,134.5
+      parent: 1
+  - uid: 14223
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 28.5,127.5
+      parent: 1
+  - uid: 14224
+    components:
+    - type: Transform
+      pos: 25.5,127.5
+      parent: 1
+  - uid: 17364
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,138.5
+      parent: 1
+  - uid: 17365
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,146.5
+      parent: 1
+  - uid: 17366
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,142.5
+      parent: 1
+  - uid: 17367
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 28.5,149.5
+      parent: 1
+  - uid: 17368
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 25.5,149.5
+      parent: 1
+  - uid: 17369
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 21.5,149.5
+      parent: 1
+  - uid: 17370
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 17.5,149.5
+      parent: 1
+- proto: LandingZoneLightStanding
+  entities:
+  - uid: 14226
+    components:
+    - type: Transform
+      pos: 27.5,148.5
+      parent: 1
+  - uid: 14227
+    components:
+    - type: Transform
+      pos: 17.5,148.5
+      parent: 1
+  - uid: 14228
+    components:
+    - type: Transform
+      pos: 29.5,141.5
+      parent: 1
+  - uid: 14229
+    components:
+    - type: Transform
+      pos: 28.5,147.5
+      parent: 1
+  - uid: 14230
+    components:
+    - type: Transform
+      pos: 29.5,138.5
+      parent: 1
+  - uid: 14231
+    components:
+    - type: Transform
+      pos: 16.5,147.5
+      parent: 1
+  - uid: 14232
+    components:
+    - type: Transform
+      pos: 15.5,138.5
+      parent: 1
+  - uid: 14233
+    components:
+    - type: Transform
+      pos: 15.5,141.5
+      parent: 1
+  - uid: 14234
+    components:
+    - type: Transform
+      pos: 27.5,128.5
+      parent: 1
+  - uid: 14235
+    components:
+    - type: Transform
+      pos: 28.5,129.5
+      parent: 1
+  - uid: 17352
+    components:
+    - type: Transform
+      pos: 17.5,22.5
+      parent: 1
+  - uid: 17353
+    components:
+    - type: Transform
+      pos: 15.5,24.5
+      parent: 1
+  - uid: 17354
+    components:
+    - type: Transform
+      pos: 15.5,30.5
+      parent: 1
+  - uid: 17355
+    components:
+    - type: Transform
+      pos: 16.5,37.5
+      parent: 1
+  - uid: 17356
+    components:
+    - type: Transform
+      pos: 28.5,39.5
+      parent: 1
+  - uid: 17357
+    components:
+    - type: Transform
+      pos: 18.5,39.5
+      parent: 1
+  - uid: 17358
+    components:
+    - type: Transform
+      pos: 30.5,37.5
+      parent: 1
+  - uid: 17359
+    components:
+    - type: Transform
+      pos: 31.5,30.5
+      parent: 1
+  - uid: 17360
+    components:
+    - type: Transform
+      pos: 31.5,24.5
+      parent: 1
+  - uid: 17361
+    components:
+    - type: Transform
+      pos: 29.5,22.5
+      parent: 1
+  - uid: 17362
+    components:
+    - type: Transform
+      pos: 17.5,128.5
+      parent: 1
+  - uid: 17363
+    components:
+    - type: Transform
+      pos: 16.5,129.5
+      parent: 1
+- proto: LandingZoneLightThree
+  entities:
+  - uid: 17390
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,149.5
+      parent: 1
+  - uid: 17391
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 19.5,149.5
+      parent: 1
+  - uid: 17392
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 23.5,149.5
+      parent: 1
+  - uid: 17393
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 27.5,149.5
+      parent: 1
+  - uid: 17394
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,148.5
+      parent: 1
+  - uid: 17395
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,144.5
+      parent: 1
+  - uid: 17396
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,140.5
+      parent: 1
+  - uid: 17397
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,136.5
+      parent: 1
+  - uid: 17398
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,132.5
+      parent: 1
+  - uid: 17399
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,128.5
+      parent: 1
+  - uid: 17400
+    components:
+    - type: Transform
+      pos: 27.5,127.5
+      parent: 1
+  - uid: 17401
+    components:
+    - type: Transform
+      pos: 23.5,127.5
+      parent: 1
+  - uid: 17402
+    components:
+    - type: Transform
+      pos: 19.5,127.5
+      parent: 1
+  - uid: 17403
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,130.5
+      parent: 1
+  - uid: 17404
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,134.5
+      parent: 1
+  - uid: 17405
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,138.5
+      parent: 1
+  - uid: 17406
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,142.5
+      parent: 1
+  - uid: 17407
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,146.5
+      parent: 1
+  - uid: 17421
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,127.5
+      parent: 1
+- proto: LandingZoneLightTwo
+  entities:
+  - uid: 17371
+    components:
+    - type: Transform
+      pos: 16.5,127.5
+      parent: 1
+  - uid: 17372
+    components:
+    - type: Transform
+      pos: 20.5,127.5
+      parent: 1
+  - uid: 17373
+    components:
+    - type: Transform
+      pos: 24.5,127.5
+      parent: 1
+  - uid: 17374
+    components:
+    - type: Transform
+      pos: 28.5,127.5
+      parent: 1
+  - uid: 17375
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,129.5
+      parent: 1
+  - uid: 17376
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,133.5
+      parent: 1
+  - uid: 17377
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,137.5
+      parent: 1
+  - uid: 17378
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,141.5
+      parent: 1
+  - uid: 17379
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,145.5
+      parent: 1
+  - uid: 17380
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 29.5,148.5
+      parent: 1
+  - uid: 17381
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 26.5,149.5
+      parent: 1
+  - uid: 17382
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 22.5,149.5
+      parent: 1
+  - uid: 17383
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,149.5
+      parent: 1
+  - uid: 17384
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,148.5
+      parent: 1
+  - uid: 17385
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,129.5
+      parent: 1
+  - uid: 17386
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,133.5
+      parent: 1
+  - uid: 17387
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,137.5
+      parent: 1
+  - uid: 17388
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,141.5
+      parent: 1
+  - uid: 17389
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,145.5
       parent: 1
 - proto: PowerCellRecharger
   entities:
@@ -109893,116 +110453,213 @@ entities:
       parent: 1
 - proto: RMCGeneratorFusionColony
   entities:
-  - uid: 13840
-    components:
-    - type: Transform
-      pos: 165.5,80.5
-      parent: 1
-  - uid: 13841
-    components:
-    - type: Transform
-      pos: 166.5,80.5
-      parent: 1
-  - uid: 13842
-    components:
-    - type: Transform
-      pos: 167.5,81.5
-      parent: 1
-  - uid: 13843
-    components:
-    - type: Transform
-      pos: 167.5,82.5
-      parent: 1
-  - uid: 13844
-    components:
-    - type: Transform
-      pos: 167.5,83.5
-      parent: 1
-  - uid: 13845
-    components:
-    - type: Transform
-      pos: 166.5,84.5
-      parent: 1
   - uid: 13846
     components:
     - type: Transform
       pos: 165.5,84.5
-      parent: 1
-  - uid: 13847
-    components:
-    - type: Transform
-      pos: 187.5,133.5
-      parent: 1
-  - uid: 13848
-    components:
-    - type: Transform
-      pos: 186.5,133.5
-      parent: 1
-  - uid: 13849
-    components:
-    - type: Transform
-      pos: 188.5,136.5
-      parent: 1
-  - uid: 13850
-    components:
-    - type: Transform
-      pos: 188.5,138.5
-      parent: 1
-  - uid: 13851
-    components:
-    - type: Transform
-      pos: 188.5,139.5
-      parent: 1
-  - uid: 13852
-    components:
-    - type: Transform
-      pos: 188.5,137.5
-      parent: 1
-  - uid: 13853
-    components:
-    - type: Transform
-      pos: 186.5,139.5
-      parent: 1
-  - uid: 13854
-    components:
-    - type: Transform
-      pos: 186.5,137.5
-      parent: 1
-  - uid: 13855
-    components:
-    - type: Transform
-      pos: 186.5,136.5
       parent: 1
   - uid: 13856
     components:
     - type: Transform
       pos: 186.5,138.5
       parent: 1
-  - uid: 13857
-    components:
-    - type: Transform
-      pos: 186.5,142.5
-      parent: 1
-  - uid: 13858
-    components:
-    - type: Transform
-      pos: 187.5,142.5
-      parent: 1
-  - uid: 13859
-    components:
-    - type: Transform
-      pos: 55.5,154.5
-      parent: 1
   - uid: 13860
     components:
     - type: Transform
       pos: 57.5,154.5
       parent: 1
+- proto: RMCGeneratorFusionColonyNoMapIcon
+  entities:
+  - uid: 13840
+    components:
+    - type: Transform
+      pos: 166.5,84.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13841
+    components:
+    - type: Transform
+      pos: 167.5,83.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13842
+    components:
+    - type: Transform
+      pos: 167.5,82.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13843
+    components:
+    - type: Transform
+      pos: 167.5,81.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13844
+    components:
+    - type: Transform
+      pos: 166.5,80.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13845
+    components:
+    - type: Transform
+      pos: 165.5,80.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13847
+    components:
+    - type: Transform
+      pos: 186.5,133.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13848
+    components:
+    - type: Transform
+      pos: 187.5,133.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13849
+    components:
+    - type: Transform
+      pos: 188.5,136.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13850
+    components:
+    - type: Transform
+      pos: 188.5,138.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13851
+    components:
+    - type: Transform
+      pos: 188.5,139.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13852
+    components:
+    - type: Transform
+      pos: 188.5,137.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13853
+    components:
+    - type: Transform
+      pos: 186.5,139.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13854
+    components:
+    - type: Transform
+      pos: 186.5,137.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13855
+    components:
+    - type: Transform
+      pos: 186.5,136.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13857
+    components:
+    - type: Transform
+      pos: 187.5,142.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13858
+    components:
+    - type: Transform
+      pos: 186.5,142.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
+  - uid: 13859
+    components:
+    - type: Transform
+      pos: 55.5,154.5
+      parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
   - uid: 13861
     components:
     - type: Transform
       pos: 59.5,154.5
       parent: 1
+    missingComponents:
+    - MarineMapTracked
+    - XenoMapTracked
+    - TacticalMapTracked
+    - TacticalMapIcon
 - proto: RMCGlassesJensen
   entities:
   - uid: 13863
@@ -111953,120 +112610,10 @@ entities:
       parent: 1
 - proto: RMCLampTripodGrey
   entities:
-  - uid: 14213
-    components:
-    - type: Transform
-      pos: 16.5,147.5
-      parent: 1
-  - uid: 14214
-    components:
-    - type: Transform
-      pos: 17.5,148.5
-      parent: 1
-  - uid: 14215
-    components:
-    - type: Transform
-      pos: 27.5,148.5
-      parent: 1
-  - uid: 14216
-    components:
-    - type: Transform
-      pos: 28.5,147.5
-      parent: 1
-  - uid: 14217
-    components:
-    - type: Transform
-      pos: 29.5,141.5
-      parent: 1
-  - uid: 14218
-    components:
-    - type: Transform
-      pos: 29.5,138.5
-      parent: 1
-  - uid: 14219
-    components:
-    - type: Transform
-      pos: 15.5,138.5
-      parent: 1
-  - uid: 14220
-    components:
-    - type: Transform
-      pos: 15.5,141.5
-      parent: 1
-  - uid: 14221
-    components:
-    - type: Transform
-      pos: 16.5,129.5
-      parent: 1
-  - uid: 14222
-    components:
-    - type: Transform
-      pos: 17.5,128.5
-      parent: 1
-  - uid: 14223
-    components:
-    - type: Transform
-      pos: 27.5,128.5
-      parent: 1
-  - uid: 14224
-    components:
-    - type: Transform
-      pos: 28.5,129.5
-      parent: 1
   - uid: 14225
     components:
     - type: Transform
       pos: 12.5,104.5
-      parent: 1
-  - uid: 14226
-    components:
-    - type: Transform
-      pos: 28.5,39.5
-      parent: 1
-  - uid: 14227
-    components:
-    - type: Transform
-      pos: 30.5,37.5
-      parent: 1
-  - uid: 14228
-    components:
-    - type: Transform
-      pos: 16.5,37.5
-      parent: 1
-  - uid: 14229
-    components:
-    - type: Transform
-      pos: 18.5,39.5
-      parent: 1
-  - uid: 14230
-    components:
-    - type: Transform
-      pos: 15.5,30.5
-      parent: 1
-  - uid: 14231
-    components:
-    - type: Transform
-      pos: 31.5,30.5
-      parent: 1
-  - uid: 14232
-    components:
-    - type: Transform
-      pos: 31.5,24.5
-      parent: 1
-  - uid: 14233
-    components:
-    - type: Transform
-      pos: 29.5,22.5
-      parent: 1
-  - uid: 14234
-    components:
-    - type: Transform
-      pos: 17.5,22.5
-      parent: 1
-  - uid: 14235
-    components:
-    - type: Transform
-      pos: 15.5,24.5
       parent: 1
   - uid: 14236
     components:
@@ -116320,6 +116867,13 @@ entities:
     - type: Transform
       pos: 123.5,21.5
       parent: 1
+- proto: RMCMapInsertShivaCLFRaid
+  entities:
+  - uid: 17350
+    components:
+    - type: Transform
+      pos: 95.5,63.5
+      parent: 1
 - proto: RMCMapInsertShivaSouthCaves
   entities:
   - uid: 14815
@@ -116362,7 +116916,7 @@ entities:
     - type: MetaData
       name: LZ2
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 14821
     components:
@@ -116674,7 +117228,7 @@ entities:
   - uid: 14872
     components:
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
 - proto: RMCMotionDetector
   entities:
@@ -127505,6 +128059,12 @@ entities:
     components:
     - type: Transform
       pos: 17.5,135.5
+      parent: 1
+  - uid: 17351
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,128.5
       parent: 1
 - proto: RMCUtilityAttachmentPoint
   entities:

@@ -11,4 +11,10 @@ public sealed partial class DropshipDestinationComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool AutoRecall;
+
+    [DataField, AutoNetworkedField]
+    public int LightSearchRadius = 14;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid? ArrivalSoundEntity;
 }

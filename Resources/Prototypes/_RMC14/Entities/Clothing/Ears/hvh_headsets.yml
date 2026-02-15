@@ -1,0 +1,57 @@
+# For WeYa PMCs
+- type: entity
+  parent: RMCHeadsetIconsWeYa
+  id: RMCHeadsetHvHWeYaPMC
+  name: WeYa corporate headset
+  description: A special headset used by corporate personnel.
+  suffix: WeYa, PMC, HvH,
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/headsets.rsi
+    state: pmc_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
+  - type: GrantTacMapAlert
+  - type: GrantSquadLeaderTracker
+    defaultMode: LeaderPmc
+    trackerModes:
+    - SupervisorWeYaExecutive
+    - SupervisorWeYaSpecialist
+    - DirectorPmc
+    - LeaderPmc
+    - CorporateLiaison
+
+- type: entity
+  parent: RMCHeadsetHvHWeYaPMC
+  id: RMCHeadsetHvHWeYaPMCMedic
+  name: PMC-MED headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
+      # TODO RMC14: /obj/item/device/encryptionkey/pmc/medic
+
+- type: entity
+  parent: RMCHeadsetHvHWeYaPMC
+  id: RMCHeadsetHvHWeYaPMCEngineer
+  name: PMC-CCT headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
+      # TODO RMC14: /obj/item/device/encryptionkey/pmc/engi
+
+- type: entity
+  parent: RMCHeadsetHvHWeYaPMC
+  id: RMCHeadsetHvHWeYaPMCLeader
+  name: PMC-CMD headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
+      # TODO RMC14: /obj/item/device/encryptionkey/pmc/command

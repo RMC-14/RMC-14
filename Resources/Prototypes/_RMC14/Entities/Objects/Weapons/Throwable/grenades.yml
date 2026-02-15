@@ -201,7 +201,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 # TODO RMC14 shrapnel lag
+    capacity: 48
     directHit: false
   - type: ContainerContainer
     containers:
@@ -234,7 +234,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 #same as HEFA # TODO RMC14 shrapnel lag
+    capacity: 48 #same as HEFA
     directHit: false
   - type: ContainerContainer
     containers:
@@ -265,7 +265,7 @@
     deleteAfterExplosion: false
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
-    capacity: 1 #same as HEFA
+    capacity: 48 #same as HEFA
     directHit: false
   - type: ContainerContainer
     containers:
@@ -362,6 +362,57 @@
     - Grenade
     - RMCGrenadeIED
 
+# RCM grenades for PVE
+- type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenade20mmIncendiary
+  name: L109A2 20mm incendiary grenade
+  suffix: PvE
+  description: A 20mm grenade that creates flames upon impact. Less powerful than full-sized grenades. Be careful how you handle these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcm20mm/incend.rsi
+  - type: TriggerOnThrowEnd
+    delay: 0
+  - type: TileFireOnTrigger
+    spawn: RMCTileFire
+  - type: Ammo
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenade20mm
+
+- type: entity
+  parent: CMGrenadeBase
+  id: RMCGrenade20mmHE
+  name: L109A1 20mm HE grenade
+  suffix: PVE
+  description: A 20mm grenade that explodes upon impact. Less powerful than full-sized grenades. Be careful how you handle these.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Grenades/rcm20mm/he.rsi
+  - type: TriggerOnThrowEnd
+    delay: 0
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    maxIntensity: 16
+    intensitySlope: 6
+    totalIntensity: 160
+    canCreateVacuum: false
+  - type: Ammo
+  - type: CMExplosionEffect
+  - type: CMVocalizeTrigger
+  - type: RMCScorchEffect
+  - type: Tag
+    tags:
+    - Grenade
+    - LauncherCompatibleGrenade
+    - RMCGrenade20mm
+
+
 - type: entity
   id: CMExplosionEffectGrenade
   categories: [ HideSpawnMenu ]
@@ -434,3 +485,6 @@
 
 - type: Tag
   id: RMCGrenadeIED
+
+- type: Tag
+  id: RMCGrenade20mm

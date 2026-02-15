@@ -293,3 +293,28 @@
   license: "CC-BY-4.0"
   copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
   source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"
+
+- files: ["gun_l90.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from FilipKZhong"
+  source: "https://github.com/FilipKZhong/Surviv.io-Sounds/blob/master/Surviv.io%20GS/mk12_01.mp3"
+
+- files: ["gun_l14.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay (content license at https://pixabay.com/service/license-summary/) and modified by @TadJohnson00 (GitHub)."
+  source: "https://pixabay.com/sound-effects/single-pistol-gunshot-42-40781/"
+
+- files: ["gun_silenced_l112.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/desert-eagle-50-ae-close-single-gunshot-a-wwwfesliyanstudios-8831/"
+
+- files: ["gun_shotgun_choke.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/28bf8164895c60155d482b9e435c3e728c6f090f/sound/weapons/gun_shotgun_choke.ogg"
+
+- files: ["gun_m2c2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by pgi (freesound), modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/pgi/sounds/257962/"

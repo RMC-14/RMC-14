@@ -33,6 +33,7 @@
           CMWeaponsSpecialist: [ -1, -1 ]
           CMCMO: [ -1, -1 ]
           CMDoctor: [ -1, -1 ]
+          RMCFieldDoctor: [ -1, -1 ]
           CMNurse: [ -1, -1 ]
           CMResearcher: [ -1, -1 ]
           CMChiefMP: [ -1, -1 ]
