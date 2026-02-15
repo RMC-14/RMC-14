@@ -2573,7 +2573,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSelinaCavityAlara
   name: Selina 'Cavity' Alara figurine
-  description: ""
+  description: "This figure is covered in cookie crumbs and smells like pure sugar!"
   components:
   - type: Sprite
     state: selina_cavity_alara
