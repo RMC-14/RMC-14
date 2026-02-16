@@ -64,6 +64,8 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
+    private const float LoaderInteractRange = 2.5f;
+
     private static readonly EntProtoId DefaultHandVisual = "RMCVirtualDropshipGearRight";
 
     private EntityQuery<PowerLoaderGrabbableComponent> _powerLoaderGrabbableQuery;
@@ -296,7 +298,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
+            DistanceThreshold = LoaderInteractRange,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -509,7 +511,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!_interaction.InRangeUnobstructed(args.User, target, 2.5f))
+        if (!_interaction.InRangeUnobstructed(args.User, target, LoaderInteractRange))
         {
             var msg = Loc.GetString("rmc-power-loader-too-far");
             foreach (var buckled in GetBuckled(args.User))
@@ -548,7 +550,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
+            DistanceThreshold = LoaderInteractRange,
         };
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
             loader.DoAfter = ev.DoAfter;
@@ -591,7 +593,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
+            DistanceThreshold = LoaderInteractRange,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
@@ -1052,7 +1054,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = 2.5f,
+            DistanceThreshold = LoaderInteractRange,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
