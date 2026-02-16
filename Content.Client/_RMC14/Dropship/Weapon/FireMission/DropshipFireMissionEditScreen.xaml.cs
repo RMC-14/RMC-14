@@ -215,7 +215,7 @@ public sealed partial class DropshipFireMissionEditScreen : PanelContainer
         _activeOffsetRows.Clear();
         _offsetCount = 0;
 
-        if (_weapon == null)
+        if (_weapon == null || _weapon.AmmoConsumption == 0)
             return;
 
         foreach (var offset in _weapon.Offsets)
@@ -245,6 +245,9 @@ public sealed partial class DropshipFireMissionEditScreen : PanelContainer
 
     private void OnOffsetPressed(int row, int? offset, DropshipFireMissionOffsetButton pressed)
     {
+        if (_weapon == null || _weapon.AmmoConsumption == 0)
+            return;
+
         foreach (var btn in _buttonsByRow[row])
         {
             btn.SetClickPressed(btn == pressed);

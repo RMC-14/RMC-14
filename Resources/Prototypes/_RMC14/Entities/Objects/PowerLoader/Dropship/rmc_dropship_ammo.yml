@@ -181,6 +181,7 @@
     cost: 500
   - type: DropshipAmmo # TODO RMC14 not usable in fire mission, only direct bombardment
     travelTime: 6
+    fireMissionDelay: null
     explosion:
       total: 1780
       slope: 7.2

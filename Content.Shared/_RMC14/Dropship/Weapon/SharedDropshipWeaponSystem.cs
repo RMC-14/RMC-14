@@ -1319,9 +1319,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryComp(weaponEntity, out DropshipWeaponComponent? weaponComp))
             return false;
 
+        if (!TryGetWeaponAmmo((weaponEntity, weaponComp), out var ammo))
+            return false;
+
         // Check if a weapons has ammo loaded that can't be used during a fire mission.
-        if (TryGetWeaponAmmo((weaponEntity, weaponComp), out var ammo) &&
-            ammo.Comp.FireMissionDelay == null)
+        if(ammo.Comp.FireMissionDelay == null)
         {
             var msg = Loc.GetString("rmc-dropship-firemission-invalid-ammo");
             _popup.PopupCursor(msg, user, PopupType.SmallCaution);

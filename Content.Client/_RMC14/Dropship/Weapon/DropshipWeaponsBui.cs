@@ -790,10 +790,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                             weaponInfo.FireDelay = weaponAmmo.Comp.FireMissionDelay.Value;
                         else
                         {
-                            var name = EntMan.TryGetComponent(weaponAmmo, out MetaDataComponent? metaData)
-                                ? metaData.EntityName
-                                : "Loaded Ammo";
-
                             validAmmo = false;
                             labelMessage = Loc.GetString("rmc-dropship-firemission-invalid-ammo",("ammo", weaponAmmo));
                         }
