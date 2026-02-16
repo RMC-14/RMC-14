@@ -1,12 +1,7 @@
 ﻿<Document>
-  Guide by Kynthos on Discord
-
-  [color=#5f698a]█    █ █▄ █[/color] [head=2][bold]UNITED NATIONS MARINE CORPS[/bold][/head]\n
-  [color=#5f698a]▀ ▄▀ █ ▀█ [/color]
 
   #Combat Technician
 
-  It is recommended that you play [textlink="Maintenance Technician" link="RMCGuideRoleMaintenanceTechnician"] to learn the basics of Engineering.
 
   The Combat Technician is the frontline Engineer for the Marine squads. Their primary responsibilities include fixing power, breaching into buildings, and setting up forward fortifications. Your work will provide your fellow Marines with cover to fight from, allowing them to engage the enemy in areas they would not be able to safely do otherwise.
 
@@ -75,7 +70,25 @@
 
   ##Fixing Power and Repairing Lights
 
-  Each facility the UNMC is deployed to is powered by [bold]G-11 Geothermal Generators[/bold], which will be depowered and broken when you arrive. These items are usually located in the local engineering facility, but your superiors will inform you of their exact location in case they’re not. You’ll need a blowtorch, wire cutters, and wrench to get them in working order.
+  In the AO, power is supplied by [bold]G-11 Geothermal Generators[/bold]. These will be unpowered and broken when marines land in the AO, and it will usually be the job of the Combat Technicians to get these repaired. The amount of work required will depend on the extent of the damage. To repair a generator:
+
+  - First use a [bold]blowtorch[/bold] to weld the panels back together
+  - Then use [bold]wire cutters[/bold] to mend the wires.
+  - Finally use a [bold]wrench[/bold] to secure the machine in place.
+
+  <Box>
+    <GuideEntityEmbed Entity="CMWelder"/>
+    <GuideEntityEmbed Entity="CMWirecutter"/>
+    <GuideEntityEmbed Entity="CMWrench"/>
+  </Box>
+
+  When the blue screen turns on the generator is working and supplying power.
+
+  Power generated will be automatically distributed to APCs, which will store a small amount of power within its installed power cell in case the generators fail. Power is then distributed to nearby electronics in the area, such as doors, lights, and vendors. The total power draw will be listed on the APC's interface. If the local APC is destroyed, or its power cell depleted, the immediate area will become unpowered.
+
+  To replace the power cell of an APC, first swipe your Engineering ID card or Dogtags to unlock the interface and disengage the cover lock. Then use a crowbar to force the cover open, allowing access to the power cell, which can be removed with an empty hand and replaced with a charged power cell. Once swapped, use a crowbar to close the panel, engage the cover lock, and swipe your ID to lock the APC interface again. This can be used to temporarily keep a small area powered in case despite the lack of power generation.
+
+  If the APC is destroyed, it can be reassembled by using a screwdriver.
 
   <Box>
     <GuideEntityEmbed Entity="RMCGeneratorFusionColony"/>
@@ -141,5 +154,5 @@
 
   ##Scavenging Materials
 
-  You will [bold]always[/bold] need additional building materials, and the lives of your fellow Marines are worth more than the buildings around you. Chairs, metal railings, and window frames can be quickly deconstructed for more metal, while walls and doors can be slowly deconstructed for the same purpose. Some AOs will have preinstalled fortifications that you can use yourself or deconstruct to obtain the building materials. Instructions for deconstruction are provided upon inspection.
+  You will [bold]always[/bold] need additional building materials, and the lives of your fellow Marines are worth more than the surrounding buildings. Chairs, metal railings, and window frames can be quickly deconstructed for more metal, while walls and doors can be slowly deconstructed for the same purpose. Some AOs will have preinstalled fortifications that you can use yourself or deconstruct to obtain the building materials. Instructions for deconstruction are provided upon inspection.
 </Document>

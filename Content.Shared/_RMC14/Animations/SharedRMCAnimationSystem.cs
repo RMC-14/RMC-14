@@ -50,6 +50,7 @@ public abstract class SharedRMCAnimationSystem : EntitySystem
         if (!TryGetNetEntity(ent, out var netEnt))
             return;
 
+        EnsureComp<RMCAnimationComponent>(ent);
         var ev = new RMCFlickEvent(netEnt.Value, animationRsi, defaultRsi, layer);
         var filter = Filter.Pvs(ent);
         RaiseNetworkEvent(ev, filter);

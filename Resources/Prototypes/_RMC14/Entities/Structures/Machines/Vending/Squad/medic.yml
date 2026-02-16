@@ -112,8 +112,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    # - id: CMM20MineBox4
-    #   points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     # - id: RMCElectroshockGrenadex3
     #   points: 16
     - name: Primary Ammunition
@@ -533,6 +533,53 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_chemical.rsi
   - type: CMAutomatedVendor
+    pointsType: Chemicals
+    sections:
+    # TODO RMC14: newmed
+    # - name: Essential Medication
+    #   choices: { RMCEssentialChemical: 1 }
+    #   entries:
+    #   - id: RMCPillCanisterImidazolineAlkysine
+    #     recommended: true
+    #   - id: RMCLargeBottleImidazolineAlkysine
+    #     recommended: true
+    - name: Pill Bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        points: 60
+      - id: CMPillCanisterKelotaneDermaline
+        points: 60
+      # TODO RMC14: newmed
+      # - id: RMCPillCanisterNitrogenWater
+      #   points: 30
+      - id: RMCPillCanisterDexalinPlus
+        points: 30
+      - id: RMCPillCanisterIron
+        points: 30
+    - name: Liquid Bottles
+      entries:
+      - id: RMCLargeBottleMeralyneBicaridine
+        points: 40
+      - id: RMCLargeBottleKelotaneDermaline
+        points: 40
+      - id: RMCLargeBottleDexalinPlus
+        points: 30
+    # TODO RMC14: the minitank is currently non functional
+    # - name: Injectors
+    #   entries:
+    #   - id: CMMiniTank
+    #     points: 40
+
+- type: entity
+  parent: ColMarTechMedicalChemicalPVE
+  id: RMCRCMMedicalChemicalPVE
+  suffix: PVE, RCM
+  name: We-Ya section medical chemical rack
+  description: An automated gear rack for specialized chemicals for the medical assistants.
+  components:
+  - type: CMAutomatedVendor
+    jobs: 
+    - CMRoyalMarinesMedicPVE
     pointsType: Chemicals
     sections:
     # TODO RMC14: newmed
