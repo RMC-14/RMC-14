@@ -64,7 +64,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
 
-    private const float LoaderInteractRange = 2.5f;
+    private const float LoaderInteractRange = 2f;
 
     private static readonly EntProtoId DefaultHandVisual = "RMCVirtualDropshipGearRight";
 
@@ -1184,7 +1184,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             return true;
         }
 
-        if (distance > InteractionRange)
+        if (distance > LoaderInteractRange)
         {
             var msg = Loc.GetString("rmc-power-loader-too-far");
             foreach (var buckled in GetBuckled(loader))
