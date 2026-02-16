@@ -269,7 +269,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (ent.Comp.Origin is not { } origin)
             return;
 
-        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(args.OtherEntity), out var distance))
+        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(ent), out var distance))
             return;
 
         if (distance < ent.Comp.Max)
