@@ -424,6 +424,60 @@
           - RMCTankFlamer
 
 - type: entity
+  parent: RMCPVECaseFlamerFuel
+  id: RMCPVECaseFlamerFuelLPO80
+  name: LPO80 fuel canister case
+  description: A heavy case containing six fuel canisters for the LPO80 incinerator unit.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,7,1
+    whitelist:
+      tags:
+      - RMCTankFlamerSPP
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+    - id: RMCTankFlamerSPP
+  - type: ItemMapper
+    mapLayers:
+      ammo_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_3:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_4:
+        minCount: 4
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_5:
+        minCount: 5
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+      ammo_6:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+
+- type: entity
   parent: RMCBasePVEEquipmentCase
   id: RMCPVECaseMotionDetector
   name: motion detectors case

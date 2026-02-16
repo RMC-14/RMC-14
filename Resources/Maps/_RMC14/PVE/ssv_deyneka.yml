@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/05/2026 05:17:50
-  entityCount: 9074
+  time: 02/16/2026 15:13:53
+  entityCount: 9078
 maps:
 - 1
 grids:
@@ -22223,7 +22223,7 @@ entities:
     - type: Transform
       pos: -7.3304253,69.67122
       parent: 1
-- proto: RMCBoxShellsBuckshot
+- proto: RMCBoxShellsHeavyBuckshot
   entities:
   - uid: 1814
     components:
@@ -22235,7 +22235,7 @@ entities:
     - type: Transform
       pos: -9.61689,69.35247
       parent: 1
-- proto: RMCBoxShellsSlugs
+- proto: RMCBoxShellsHeavySlugs
   entities:
   - uid: 1816
     components:
@@ -30410,7 +30410,7 @@ entities:
     - type: Transform
       pos: -17.684433,33.787018
       parent: 1
-- proto: RMCGunRackM34IncineratorFilled
+- proto: RMCGunRackLPO80IncineratorFilled
   entities:
   - uid: 3328
     components:
@@ -41129,7 +41129,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 68.06843,30.961895
       parent: 1
-- proto: RMCPVECaseFlamerFuel
+- proto: RMCPVECaseFlamerFuelLPO80
   entities:
   - uid: 5135
     components:
@@ -41387,28 +41387,34 @@ entities:
   - uid: 5179
     components:
     - type: MetaData
-      name: SSV Deyneka Briefing
+      name: SSV Deyneka - Briefing
     - type: Transform
       pos: -28.524343,48.108963
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
   - uid: 5180
     components:
     - type: MetaData
-      name: SSV Deyneka Flight Office
+      name: SSV Deyneka - Flight Office
     - type: Transform
       pos: 62.72532,60.074722
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
   - uid: 5181
     components:
     - type: MetaData
-      name: SSV Deyneka Bridge
+      name: SSV Deyneka - Bridge
     - type: Transform
       pos: 6.614361,100.432556
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
 - proto: RMCRotaryPhoneWallmount
@@ -41416,29 +41422,81 @@ entities:
   - uid: 5182
     components:
     - type: MetaData
-      name: SSV Deyneka Dorms
+      name: SSV Deyneka - Dorms
     - type: Transform
       pos: 7.6964903,25.498539
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
   - uid: 5184
     components:
     - type: MetaData
-      name: SSV Deyneka Logistics Office
+      name: SSV Deyneka - Logistics Office
     - type: Transform
       pos: 36.868977,30.364044
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
   - uid: 5185
     components:
     - type: MetaData
-      name: SSV Deyneka AI CORE
+      name: SSV Deyneka - AI CORE
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -8.956347,-21.275322
       parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9075
+    components:
+    - type: MetaData
+      name: SSV Deyneka - Medbay
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -4.951335,36.495388
+      parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9076
+    components:
+    - type: MetaData
+      name: SSV Deyneka -  Locker Room
+    - type: Transform
+      pos: -9.749998,18.465933
+      parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9077
+    components:
+    - type: MetaData
+      name: SSV Deyneka - Mess Hall
+    - type: Transform
+      pos: -23.353071,34.37172
+      parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
+    - type: Fixtures
+      fixtures: {}
+  - uid: 9078
+    components:
+    - type: MetaData
+      name: SSV Deyneka - Torpedo Room
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 45.482464,72.776794
+      parent: 1
+    - type: RotaryPhone
+      category: SSV Deyneka
     - type: Fixtures
       fixtures: {}
 - proto: RMCSecureCase
@@ -62536,6 +62594,24 @@ entities:
     - type: Transform
       pos: 62.611305,59.57628
       parent: 1
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        rmc-aslot-barrel: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-rail: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
 - proto: RMCWeldingGoggles
   entities:
   - uid: 8908
