@@ -509,7 +509,7 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!_interaction.InRangeUnobstructed(args.User, target))
+        if (!_interaction.InRangeUnobstructed(args.User, target, 2.5f))
         {
             var msg = Loc.GetString("rmc-power-loader-too-far");
             foreach (var buckled in GetBuckled(args.User))
