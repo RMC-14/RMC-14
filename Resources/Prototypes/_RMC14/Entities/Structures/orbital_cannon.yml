@@ -444,3 +444,5 @@
           6: { visible: true, state: cannon_tray_6 }
   - type: RMCMesonsNonviewable
   - type: OrbitalCannonTray
+  - type: WallMount
+    arc: 175
