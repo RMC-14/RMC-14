@@ -279,7 +279,7 @@
       No further information available at this time."
     nightmareScenarios:
     - scenarioName: surveillancecenter_varadero
-      scenarioProbability: 0.1
+      scenarioProbability: 0.35
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
