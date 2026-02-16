@@ -153,6 +153,9 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: panic_room_hold
+      scenarioProbability: 1
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -165,6 +168,28 @@
       - RMCSurvivorShivasILRCPeacekeeper: -1
       CMSurvivorScientist:
       - RMCSurvivorShivasResearcher: -1
+    survivorJobScenarios:
+      panic_room_hold:
+      - CMSurvivorSecurity: 1
+      - CMSurvivor: 2
+      - CMSurvivorCorporate: 1
+      - CMSurvivorDoctor: 2
+      - CMSurvivorEngineer: 2
+      - CMSurvivorScientist: 2
+    survivorJobVariantScenarios:
+      panic_room_hold:
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorSecurity:
+        - RMCSurvivorPMCCommandoShivas: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorAssistantManager: 1
+        CMSurvivor:
+        - RMCSurvivorShivasPanicRoomCivilian: 2
 
 - type: entity
   id: RMCPlanetFiorina

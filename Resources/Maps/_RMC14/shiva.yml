@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/08/2026 01:14:32
-  entityCount: 17427
+  time: 02/16/2026 02:50:29
+  entityCount: 17428
 maps:
 - 1
 grids:
@@ -116870,6 +116870,13 @@ entities:
 - proto: RMCMapInsertShivaCLFRaid
   entities:
   - uid: 17350
+    components:
+    - type: Transform
+      pos: 95.5,63.5
+      parent: 1
+- proto: RMCMapInsertShivaPanicRoomHold
+  entities:
+  - uid: 17428
     components:
     - type: Transform
       pos: 95.5,63.5

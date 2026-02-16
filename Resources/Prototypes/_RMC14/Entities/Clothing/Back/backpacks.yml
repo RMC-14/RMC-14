@@ -322,3 +322,12 @@
     storageOpen: null
   - type: ItemCamouflage
     camouflageVariations: {}
+
+- type: entity
+  parent: RMCSatchelPMC
+  id: RMCSatchelPMCCommando
+  name: We-Ya Commando combat backpack
+  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada Commandos.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/commando.rsi

@@ -364,3 +364,56 @@ rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
 rmc-job-name-survivor-shivas-doctor = Shivas Doctor
 rmc-job-name-survivor-shivas-researcher = Shivas Researcher
 rmc-job-name-survivor-shivas-engineer = Shivas Engineer
+
+rmc-job-name-survivor-shivas-weya-commando = Weston-Yamada Commando
+rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
+
+rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Administrator on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are the Assistant Operations Manager stationed on 'Ifrit' by Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons you one-day said were 'useless' and a waste of Company dollars. You remember that Administrator Stahl sent out a distress beacon to any ship in range, hoping to get picked up by the Company, he ran to the Spaceport. You have not seen him since. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-commando = You are the last living security element on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a mercenary stationed on 'Ifrit' by Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. While you were assigned to protecting the people taking shelter in the Panic Room, the rest of your team was spread out throughout the colony. You have not seen any of them since. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientist on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a Scientist working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the Xenonid species, codenamed that by Research Director Clarke, have a variety of different species, what you can assume is a 'leader' of some sort and that their acid is deadly should it come in contact with you or the shutters. You ran far from the labs and have not seen your coworkers since. In their attempts at trying to breach in, these so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a Doctor working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids have a sort of implanter which latches on to your face and then... something bursts out of your chest, through the rib cage. You had plenty of those cases at the Medical Bay. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are an Engineer working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids seem to be able to see in the dark, as you saw one grab a co-worker trying to fix the generators after the power went out. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
