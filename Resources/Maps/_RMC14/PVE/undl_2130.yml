@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/16/2026 00:28:30
-  entityCount: 16281
+  time: 02/16/2026 04:33:15
+  entityCount: 16295
 maps:
 - 1
 grids:
@@ -56274,7 +56274,22 @@ entities:
           occludes: True
           ents:
           - 5219
-          - 5220
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 5280
+    components:
+    - type: Transform
+      pos: 79.5,-78.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 5323
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -56326,13 +56341,6 @@ entities:
     components:
     - type: Transform
       pos: 40.07432,-98.16132
-      parent: 1
-- proto: RMCCrateMagazineML66DDrum
-  entities:
-  - uid: 7013
-    components:
-    - type: Transform
-      pos: 79.5,-78.5
       parent: 1
 - proto: RMCCrateMini
   entities:
@@ -71381,7 +71389,7 @@ entities:
     - type: Transform
       pos: 58.585716,32.495495
       parent: 1
-- proto: RMCMagazineML66D
+- proto: RMCMagazineML66DLarge
   entities:
   - uid: 5219
     components:
@@ -71393,74 +71401,64 @@ entities:
   - uid: 5220
     components:
     - type: Transform
-      parent: 5218
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 81.132935,-97.36729
+      parent: 1
   - uid: 5249
     components:
     - type: Transform
-      pos: 60.602116,-75.274666
-      parent: 1
-  - uid: 5250
-    components:
-    - type: Transform
-      pos: 60.43024,-75.555916
+      pos: 60.512703,-75.46189
       parent: 1
   - uid: 5279
     components:
     - type: Transform
-      pos: 58.398354,-103.27319
-      parent: 1
-  - uid: 5280
-    components:
-    - type: Transform
-      pos: 58.585854,-103.49194
+      pos: 58.53531,-103.49988
       parent: 1
   - uid: 5323
     components:
     - type: Transform
-      pos: 61.67567,-8.296002
-      parent: 1
+      parent: 5280
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 5324
     components:
     - type: Transform
-      pos: 61.441296,-8.530377
-      parent: 1
-  - uid: 6867
-    components:
-    - type: Transform
-      pos: 78.45381,-15.499272
+      pos: 61.392838,-8.336548
       parent: 1
   - uid: 6897
     components:
     - type: Transform
-      pos: 78.50606,-37.468967
+      pos: 78.53757,-15.464908
       parent: 1
   - uid: 6962
     components:
     - type: Transform
-      pos: 74.54072,-57.25923
+      pos: 78.49221,-37.424835
+      parent: 1
+  - uid: 7013
+    components:
+    - type: Transform
+      pos: 74.54465,-57.329865
       parent: 1
   - uid: 10460
     components:
     - type: Transform
-      pos: 64.389145,17.839115
+      pos: 65.36999,17.85238
       parent: 1
   - uid: 10461
     components:
     - type: Transform
-      pos: 64.607895,17.557865
+      pos: 65.57311,17.50863
       parent: 1
   - uid: 10462
     components:
     - type: Transform
-      pos: 65.40477,17.82349
+      pos: 64.40124,17.774256
       parent: 1
   - uid: 10463
     components:
     - type: Transform
-      pos: 65.65477,17.557865
+      pos: 64.61999,17.524256
       parent: 1
 - proto: RMCMagazineWeYaOrreryN202
   entities:
@@ -107266,6 +107264,94 @@ entities:
     components:
     - type: Transform
       pos: 93.5,-16.5
+      parent: 1
+- proto: RMCSpawnRatBlack
+  entities:
+  - uid: 16290
+    components:
+    - type: Transform
+      pos: 95.5,-103.5
+      parent: 1
+- proto: RMCSpawnRatBrown
+  entities:
+  - uid: 16282
+    components:
+    - type: Transform
+      pos: 43.5,-10.5
+      parent: 1
+  - uid: 16283
+    components:
+    - type: Transform
+      pos: 75.5,-128.5
+      parent: 1
+  - uid: 16284
+    components:
+    - type: Transform
+      pos: 10.5,-107.5
+      parent: 1
+  - uid: 16285
+    components:
+    - type: Transform
+      pos: 55.5,-39.5
+      parent: 1
+  - uid: 16287
+    components:
+    - type: Transform
+      pos: 42.5,-23.5
+      parent: 1
+  - uid: 16289
+    components:
+    - type: Transform
+      pos: 51.5,-95.5
+      parent: 1
+  - uid: 16292
+    components:
+    - type: Transform
+      pos: 95.5,-78.5
+      parent: 1
+  - uid: 16294
+    components:
+    - type: Transform
+      pos: 90.5,-16.5
+      parent: 1
+  - uid: 16295
+    components:
+    - type: Transform
+      pos: 103.5,-5.5
+      parent: 1
+- proto: RMCSpawnRatGray
+  entities:
+  - uid: 5250
+    components:
+    - type: Transform
+      pos: 64.5,-20.5
+      parent: 1
+  - uid: 6867
+    components:
+    - type: Transform
+      pos: 63.5,-121.5
+      parent: 1
+  - uid: 16286
+    components:
+    - type: Transform
+      pos: 72.5,-18.5
+      parent: 1
+  - uid: 16288
+    components:
+    - type: Transform
+      pos: 31.5,-55.5
+      parent: 1
+  - uid: 16291
+    components:
+    - type: Transform
+      pos: 102.5,-89.5
+      parent: 1
+- proto: RMCSpawnRatWhite
+  entities:
+  - uid: 16293
+    components:
+    - type: Transform
+      pos: 103.5,-63.5
       parent: 1
 - proto: RMCSpoon
   entities:
