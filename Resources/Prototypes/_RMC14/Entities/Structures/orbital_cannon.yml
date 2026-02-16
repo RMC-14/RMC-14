@@ -405,11 +405,11 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
         hard: false
   - type: Sprite
     sprite: _RMC14/Structures/orbital_cannon_tray.rsi
-    drawdepth: SmallObjects
+    drawdepth: LargeObjects
     offset: 0.5, 0.5
     layers:
     - state: cannon_tray
