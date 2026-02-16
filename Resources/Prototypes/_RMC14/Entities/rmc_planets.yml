@@ -155,7 +155,7 @@
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     nightmareScenarios:
     - scenarioName: panic_room_hold
-      scenarioProbability: 1
+      scenarioProbability: 0.1
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
