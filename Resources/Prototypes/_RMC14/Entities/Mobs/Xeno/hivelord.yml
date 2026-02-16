@@ -94,6 +94,10 @@
     prefix: hivelord
   - type: FixedIdentity
     name: cm-job-name-xeno-hivelord
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: CMXenoHivelordBase
@@ -147,10 +151,6 @@
     strains:
     - CMXenoHivelordResinWhisperer
     - CMXenoHivelordDesigner
-  - type: IntelRecoverCorpseObjectiveOnDeath
-    value: 0.2
-  - type: RMCSurgeryXenoHeart
-    item: RMCOrganXenoHeartT2
   - type: RMCActionOrder
     id: CMXenoHivelord
 
@@ -244,6 +244,25 @@
     greaterResinSurgeBuildTime: 1
     greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
     greaterResinSurgeWallPrototype: WallXenoResinThickSurge
+  - type: DesignerCrosshair
+    optimizedWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_optimized
+    optimizedDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_optimized
+    flexibleWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_flex
+    flexibleDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_flex
+    constructWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_construct
+    constructDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_construct
   - type: XenoConstruction
     buildRange: 15
     buildDelay: 0.25
@@ -258,6 +277,7 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoPlasma
     plasma: 700
     maxPlasma: 700
