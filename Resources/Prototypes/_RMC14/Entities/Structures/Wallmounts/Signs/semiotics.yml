@@ -817,6 +817,7 @@
     sprite: _RMC14/Structures/Wallmounts/trench_signs.rsi
     state: trench_sign_frontline
     noRot: true
+    drawdepth: OverMobs
 
 - type: entity
   parent: RMCSemioticWoodFrontline

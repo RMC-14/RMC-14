@@ -487,3 +487,12 @@
     map: /Maps/_RMC14/PVE/sorokyne_repaired.yml
     camouflage: Jungle
     inRotation: false
+
+- type: entity
+  id: RMCPlanetUNDL2310
+  name: United Nations Defence Line 2130
+  components:
+  - type: RMCPlanetMapPrototype
+    map: /Maps/_RMC14/PVE/undl_2130.yml
+    camouflage: Urban
+    inRotation: false
