@@ -446,7 +446,7 @@
     state: oppressor_tail_hook
     drawDepth: Effects # Draws above mobs
   - type: ProjectileMaxRange
-    max: 3.95 # Same surface area as a 7x7 grid
+    max: 3.5
   - type: PreventCollideWithDead
   - type: Projectile
     impactEffect: null
