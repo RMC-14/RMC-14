@@ -32,8 +32,10 @@
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
     - RMCWeaponPistolMK45: RMCMagazinePistolMK45
-    # TODO 3 KT-42 automag
-    - CMWeaponPistolM1984: CMMagazinePistolM1984 # TODO M1911
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - RMCWeaponPistolKT42: RMCMagazinePistolKT42
+    - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
     # TODO desert eagle
     # TODO S&W revolver
