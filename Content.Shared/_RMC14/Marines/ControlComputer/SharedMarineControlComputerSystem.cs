@@ -44,8 +44,6 @@ public abstract class SharedMarineControlComputerSystem : EntitySystem
     [Dependency] private readonly WarshipSystem _warship = default!;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
-
-    private LocalizedDatasetPrototype _medalsDataset = default!;
     private int _characterLimit = 1000;
 
     public override void Initialize()
