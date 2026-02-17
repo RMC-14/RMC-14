@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: noctynral
-  changes:
-  - message: Fixed being able to pry open powered podlocks and shutters.
-    type: Fix
-  - message: Fixed Xenos being able to pry doors closed.
-    type: Fix
-  id: 2449
-  time: '2025-10-19T06:21:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8145
 - author: CatAndHats
   changes:
   - message: Fixed the requisitions uniform vendor missing some uniforms, boots, backpacks,
@@ -4577,5 +4568,16 @@
   id: 2950
   time: '2026-02-14T19:56:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9241
+- author: KompaniLinge
+  changes:
+  - message: Adds SPP Command roles.
+    type: Add
+  - message: Adds SPP Political Kommissars, and SPP Political Ranks.
+    type: Add
+  - message: Adds SPP Officer IDcard.
+    type: Add
+  id: 2951
+  time: '2026-02-17T10:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8139
 Name: RMC14
 Order: -1
