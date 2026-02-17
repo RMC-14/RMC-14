@@ -34,6 +34,7 @@
       - CMMagazinePistol
       - RMCMagazineRevolver
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - Grenade
@@ -48,6 +49,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -68,7 +70,15 @@
     sprite: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
     layers:
     - state: icon
+    - state: sixth
+      visible: false
+    - state: third
+      visible: false
     - state: half
+      visible: false
+    - state: twothirds
+      visible: false
+    - state: fivesixths
       visible: false
     - state: full
       visible: false
@@ -88,6 +98,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
   - type: FixedItemSizeStorage
   - type: ItemCamouflage
@@ -99,8 +110,32 @@
       Classic: _RMC14/Objects/Clothing/Belt/shotgun/jungle-classic.rsi
   - type: ItemMapper
     mapLayers:
-      half:
+      sixth:
         minCount: 1
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      third:
+        minCount: 3
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      half:
+        minCount: 6
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      twothirds:
+        minCount: 9
+        whitelist:
+          tags:
+          - RMCShellShotgun
+          - RMCCartridge458SOCOM
+      fivesixths:
+        minCount: 12
         whitelist:
           tags:
           - RMCShellShotgun
@@ -354,6 +389,7 @@
       - Dropper
       - GlassBeaker
       - Bottle
+      - PillPacket
       - PillCanister
       - Syringe
       - CMSurgicalLine
@@ -375,7 +411,7 @@
       - CigPack
       - RMCPenlight
       - Flare
-      #      - # TODO RMC14 minitank (needs full implementation and a tag to fit it in here, but the item exists as CMMiniTank)
+      - RMCMiniTank
       #      - # TODO RMC14 reagent analyzer
       #      - # TODO RMC14 plant analyzer
       components:
@@ -461,6 +497,7 @@
       tags:
       - CMMagazinePistol
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
       - RMCMagazineSmartGun
@@ -847,6 +884,30 @@
     - id: CMMagazinePistolMK80
       amount: 6
     - id: RMCMK80
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolEIAF
+  name: EIAF paratrooper belt
+  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
+  - type: ItemCamouflage
+    camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistolEIAF
+  id: RMCBeltHolsterPistolEIAFL54
+  suffix: Filled, L54
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL54
+    - id: RMCMagazinePistolL54
+      amount: 6
 
 - type: entity
   parent: RMCBeltHolsterPistol
@@ -1258,8 +1319,20 @@
 
 - type: entity
   parent: RMCMatebaBelt
+  id: RMCMatebaBeltFilledAmmo
+  suffix: Filled, Mateba Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMatebaHIAP
+      amount: 2
+    - id: RMCSpeedLoaderMatebaHighImpact
+      amount: 3
+
+- type: entity
+  parent: RMCMatebaBelt
   id: RMCMatebaBeltFilled
-  suffix: Filled
+  suffix: Filled, Mateba
   components:
   - type: StorageFill
     contents:
@@ -1292,8 +1365,8 @@
     - id: RMCMK80
 
 - type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCMK80BeltPMCFilled
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCMK80BeltRoyalFilled
   suffix: Filled, MK80
   components:
   - type: StorageFill
@@ -1312,28 +1385,6 @@
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
-
-- type: entity
-  parent: RMCBeltHolsterPistol
-  id: CMM77BeltFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
-
-- type: entity
-  parent: RMCBeltHolsterPistolPMC
-  id: RMCM77BeltPMCFilled
-  suffix: Filled, M77
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMMagazinePistolM77AP
-      amount: 6
-    - id: RMCWeaponPistolM77
 
 - type: entity
   parent: RMCBeltHolsterRevolver
@@ -1434,6 +1485,7 @@
     items:
       tags:
       - CMMagazineRifle
+      - RMCMagazineShotgun
       - CMMagazineSmg
       - RMCShellShotgun
   - type: FixedItemSizeStorage
@@ -1453,8 +1505,20 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
+  id: RMCD50WinterWyvernBeltFilledAmmo
+  suffix: Filled, Winter Wyvern Ammo
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannonHI
+      amount: 4
+    - id: RMCMagazinePistolHandcannonHIAP
+      amount: 2
+
+- type: entity
+  parent: RMCBeltHolsterPistol
   id: RMCD50WinterWyvernBeltFilled
-  suffix: Filled
+  suffix: Filled, Winter Wyvern
   components:
   - type: StorageFill
     contents:
@@ -1481,7 +1545,7 @@
   parent: CMBeltMarine
   id: RMCBeltHolsterM13
   name: M276 pattern M13 holster rig
-  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments
+  description: Special issue variant of the M276 - designed exclusively to securely hold an M13 Auto Pistol and seven spare magazines, allowing quick access in close-quarters situations. Ideal for defending against boarding threats, this belt supports rapid deployment of high-rate sidearms while maintaining stability in zero-G environments.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/holster_autopistol.rsi
@@ -1721,7 +1785,7 @@
     - popup: rmc-storage-limit-one-gun
       whitelist:
         tags:
-        - Sidearm
+        - RMCNailgunCompact
     - popup: rmc-storage-limit-max-mags
       count: 2
       whitelist:
@@ -1815,6 +1879,9 @@
     whitelist:
       tags:
       - RMCFlareGun
+  - type: Tag
+    tags:
+    - RMCM82FHolster
 
 - type: entity
   parent: RMCM82FHolster
@@ -1851,6 +1918,130 @@
     - id: RMCMagazineRifleAK4047
       amount: 2
 
+- type: entity
+  parent: CMBeltUtility
+  id: RMCBeltMachineGunner
+  name: M804 heavygunner storage rig
+  description: The M804 heavygunner storage rig is an M276 pattern toolbelt rig modified to carry ammunition for heavy machinegun systems, and engineering tools for the gunner.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/machinegunner.rsi
+  - type: Storage
+    grid:
+    - 0,0,13,1 # 7 slots
+    whitelist:
+      tags:
+      - Wrench
+      - Screwdriver
+      - Crowbar
+      - Wirecutter
+      - CMFireExtinguisherPortable
+      - RMCMagazineML66D
+      - RMCMagazineM2C
+      - CableCoil
+      - Multitool
+      - RMCExplosiveBreachingCharge
+      - RMCNailgunCompact
+      - RMCNailgunTactical
+      - RMCExplosiveClaymoreMine
+      components:
+      - Welder
+      - EntrenchingTool
+      - BarbedWire
+      - EmptySandbag
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - EntrenchingTool
+  - type: Tag
+    tags:
+    - RMCMachineGunnerRig
+
+# PVE RCM belts
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltRoyalMortar
+  name: L79 pattern load-bearing rig
+  description: An L79 pattern load-bearing rig configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
+  suffix: PVE, RCM, Filled
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+    layers:
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m1984 # TODO RMC14 per-gun underlay
+      offset: 0.375, 0
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,17,1
+    whitelist:
+      components:
+      - MortarShell
+      tags:
+      - Sidearm
+      - RMCGrenadePacket20mm
+      - RMCGrenade20mm
+      - CMMagazinePistol
+  #      - # TODO RMC14 pistol, revolver, flaregun
+  - type: FixedItemSizeStorage
+  - type: LimitedStorage
+    limits:
+    - popup: rmc-storage-limit-one-gun
+      whitelist:
+        components:
+        - Gun
+    - popup: rmc-storage-limit-max-shells
+      count: 10
+      whitelist:
+        components:
+        - MortarShell
+  - type: CMHolster
+    whitelist:
+      components:
+      - Gun
+
+- type: entity 
+  parent: RMCBeltRoyalMortar
+  id: RMCBeltRoyalMortarFilled
+  suffix: PVE, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL14
+      amount: 1
+    - id: RMCMagazinePistolL14
+      amount: 1
+    - id: RMCPacketGrenade20mmHEFilled
+      amount: 2
+    - id: RMCPacketGrenade20mmIncendiaryFilled
+      amount: 1
+
+- type: entity
+  parent: RMCBeltHolsterPistolTSE
+  id: RMCBeltHolsterPistolRCM
+  name: L29 sidearm rig
+  description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
+  suffix: PVE, RCM, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolL14
+      amount: 1
+    - id: RMCMagazinePistolL14
+      amount: 5
+
 - type: Tag
   id: RMCNailgunHolster
 
@@ -1862,3 +2053,6 @@
 
 - type: Tag
   id: RMCM82FHolster
+
+- type: Tag
+  id: RMCMachineGunnerRig

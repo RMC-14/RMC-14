@@ -54,6 +54,10 @@
     job: RMCCLFEngineer
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobCombatTech
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
@@ -61,7 +65,7 @@
   id: RMCGearCLFEngineer
   equipment:
     head: RMCHelmetWelding
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
   #  eyes: RMCMesonGoggles TODO RMC14
     jumpsuit: RMCJumpsuitCLFWebbingBuckshot

@@ -331,14 +331,14 @@ public sealed class AreaSystem : EntitySystem
         return false;
     }
 
-    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user)
+    public bool CanResinPopup(Entity<MapGridComponent, AreaGridComponent?> grid, Vector2i indices, EntityUid? user, bool popup = true)
     {
         if (!TryGetArea(grid, indices, out var area, out _))
             return true;
 
         if (area.Value.Comp.WeedKilling)
         {
-            if (user != null)
+            if (user != null && popup)
                 _popup.PopupClient("This area is unsuited to host the hive!", user.Value, user.Value, PopupType.MediumCaution);
 
             return false;
@@ -351,7 +351,7 @@ public sealed class AreaSystem : EntitySystem
         if (roundDuration > _earlySpreadHiveTime)
             return true;
 
-        if (user != null)
+        if (user != null && popup)
             _popup.PopupClient("It's too early to spread the hive this far.", user.Value, user.Value, PopupType.MediumCaution);
 
         return false;
@@ -366,6 +366,25 @@ public sealed class AreaSystem : EntitySystem
             return false;
 
         return area.Value.Comp.SupplyDrop;
+    }
+
+    public void TrySetCanOrbitalBombardRoofing(Entity<RoofingEntityComponent?> roofing, bool ob)
+    {
+        if (!Resolve(roofing, ref roofing.Comp, false) ||
+            roofing.Comp.CanOrbitalBombard == ob)
+        {
+            return;
+        }
+
+        roofing.Comp.CanOrbitalBombard = ob;
+        Dirty(roofing);
+    }
+
+    public string GetAreaName(EntityUid coordinates)
+    {
+        return TryGetArea(coordinates.ToCoordinates(), out _, out var area)
+            ? area.Name
+            : Loc.GetString("rmc-tacmap-alert-no-area");
     }
 
     public override void Update(float frameTime)

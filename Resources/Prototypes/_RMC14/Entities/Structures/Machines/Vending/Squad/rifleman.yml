@@ -23,7 +23,7 @@
     - name: Armor
       choices: { CMArmour: 1 }
       entries:
-      - id: RMCArmorVestRifleman
+      - id: RMCArmorVestSquad
         name: armor vest
       - id: RMCArmorM3LightVariants
         name: light armor
@@ -36,8 +36,10 @@
       choices: { CMBackpack: 1 }
       entries:
       - id: CMBackpackMarine
+        replaceSlot: back
         name: backpack
       - id: CMSatchelMarine
+        replaceSlot: back
         name: satchel
         recommended: true
       - id: RMCScabbardShotgun
@@ -123,8 +125,8 @@
         points: 10
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 15
-    #- id: CMM20MineBox4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     - name: Primary Ammunition
       entries:
       - id: CMMagazineRifleM4SPRAP
@@ -194,13 +196,14 @@
         name: machete pouch (Full)
         points: 15
       - id: RMCBackpackRTO
+        replaceSlot: back
         points: 15
       - id: RMCPouchFuelTank
         points: 5
       - id: RMCWeldingGoggles
         points: 5
-    #- id: CMSlingPouch
-    #  points: 15
+      - id: RMCPouchSling
+        points: 15
       - id: RMCPouchGeneralLarge
         points: 15
     - name: Utilities

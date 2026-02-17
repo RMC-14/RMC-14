@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.HUD.Events;
 using Content.Shared._RMC14.Medical.Scanner;
@@ -43,7 +44,7 @@ public sealed class HolocardSystem : EntitySystem
         if (!TryGetEntity(args.Owner, out var viewer))
             return;
 
-        if (!_transform.InRange(ent.Owner, viewer.Value, 15f))
+        if (!_transform.InRange(ent.Owner, viewer.Value, 15f) && !HasComp<OverwatchWatchingComponent>(viewer.Value))
             return;
 
         // A player with insufficient medical skill cannot change holocards

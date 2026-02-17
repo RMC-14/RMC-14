@@ -25,7 +25,10 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
         using (args.PushGroup(nameof(RMCMedicalExamineSystem), -1))
         {
             if (ent.Comp.Simple && _mobState.IsDead(ent.Owner))
+            {
                 args.PushMarkup(Loc.GetString(ent.Comp.DeadText, ("victim", ent.Owner)));
+                return;
+            }
 
             if (HasComp<RMCBlockMedicalExamineComponent>(args.Examiner))
                 return;
@@ -41,6 +44,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
         if (TryComp<BloodstreamComponent>(ent, out var bloodstream) && bloodstream.BleedAmount > 0)
         {
             msg.AddMarkupOrThrow(Loc.GetString(ent.Comp.BleedText, ("victim", ent.Owner)));
+            msg.PushNewline();
         }
 
         LocId? stateText = null;
@@ -51,10 +55,7 @@ public sealed class RMCMedicalExamineSystem : EntitySystem
             stateText = ent.Comp.CritText;
 
         if (stateText != null)
-        {
-            msg.PushNewline();
             msg.AddMarkupOrThrow(Loc.GetString(stateText, ("victim", ent.Owner)));
-        }
 
         return msg;
     }

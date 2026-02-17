@@ -33,8 +33,8 @@
         points: 9
       - id: RMCPacketGrenadeM74AGMSHornetFilled
         points: 13
-    #- id: CMM20MineBoxx4
-    #  points: 20
+      - id: RMCBoxClaymoreMineFilled
+        points: 20
     #- id: CMM40MFHSMetalFoamGrenade
     #  points: 5
     # -id: RMCElectroshockGrenadex3
@@ -180,6 +180,8 @@
       takeAll: CMStandard
       entries:
       - id: CMVendorBundleFireteamLeaderApparel
+      - id: RMCBackpackRTO
+        replaceSlot: back
       - id: CMMRE
       #- id: CMMap # TODO: Make a map
       - id: RMCVendorBundleCrewFireteamLeader
@@ -193,7 +195,7 @@
       entries:
       - id: CMArmorM4
         recommended: true
-      - id: RMCArmorVestFireteamLeader
+      - id: RMCArmorVestSquad
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -227,7 +229,7 @@
         name: Flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
-      #- id: CMSlingPouch
+      - id: RMCPouchSling
       - id: RMCPouchMagazinePistolLarge
       - id: RMCPouchMagazine
       - id: RMCPouchShotgun
@@ -260,7 +262,7 @@
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleCrewFireteamLeader
   name: essential fireteam leader utilities
-  description: Contains a laser designator, two packs of signal flares and a Radio Telephone pack.
+  description: Contains a laser designator, and two packs of signal flares.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/binoculars.rsi
@@ -269,7 +271,6 @@
     - state: laser_cas
   - type: CMVendorBundle
     bundle:
-    - RMCBackpackRTO
     - RMCPackFlareCAS
     - RMCPackFlareCAS
     - RMCLaserDesignator

@@ -5,6 +5,7 @@
   tags:
   - CMAccessCMO
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessResearch
   - RMCAccessCommand
   - CMAccessChemistry
@@ -18,7 +19,9 @@
   name: Doctor
   tags:
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessChemistry
+  - RMCAccessDatabase
 
 - type: accessGroup
   id: Nurse
@@ -26,7 +29,9 @@
   name: Nurse
   tags:
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessChemistry
+  - RMCAccessDatabase
 
 - type: accessGroup
   id: Researcher
@@ -36,3 +41,4 @@
   - CMAccessMedical
   - CMAccessResearch
   - CMAccessChemistry
+  - RMCAccessMorgue

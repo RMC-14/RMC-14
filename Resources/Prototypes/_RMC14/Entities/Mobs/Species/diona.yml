@@ -8,6 +8,7 @@
   - type: HumanoidAppearance
     species: Diona
     hideLayersOnEquip:
+    - UndergarmentTop
     - HeadTop
   - type: Icon
     sprite: Mobs/Species/Diona/parts.rsi

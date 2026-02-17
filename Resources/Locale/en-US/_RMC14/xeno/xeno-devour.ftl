@@ -9,6 +9,7 @@ cm-xeno-devour-start-observer = {$user} starts to devour {$target}!
 cm-xeno-devour-regurgitate = We're about to regurgitate {$target}...
 cm-xeno-devour-hurl-out = We hurl out the contents of our stomach!
 
+cm-xeno-devour-fake-host = That wouldn't serve a purpose.
 cm-xeno-devour-success = That wouldn't taste very good.
 
 cm-xeno-devour-failed = You can't devour {$target}!
@@ -17,3 +18,4 @@ cm-xeno-devour-failed-stomach-full = You already have something in your belly, t
 cm-xeno-devour-failed-target-roting = Ew, {$target} is already starting to rot.
 cm-xeno-devour-failed-target-buckled = {$target} is buckled to {$strap}.
 cm-xeno-devour-failed-target-resisting = {$target} is resisting, ground them!
+cm-xeno-devour-failed-target-not-grabbed = We need to get a better grip on {$target}, grab them!

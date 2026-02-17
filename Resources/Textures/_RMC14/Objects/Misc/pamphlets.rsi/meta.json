@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3a94024f59bfd350ecf02c511a7d99d597da3d6c/icons/obj/items/pamphlets.dmi",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3a94024f59bfd350ecf02c511a7d99d597da3d6c/icons/obj/items/pamphlets.dmi, pamphlet_honorguard.png made by CatAndHats (github) based on pamphlet.png",
   "size": {
     "x": 32,
     "y": 32
@@ -51,6 +51,9 @@
     },
     {
       "name": "pamphlet_mortar"
+    },
+    {
+      "name": "pamphlet_honorguard"
     }
   ]
 }

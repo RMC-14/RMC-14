@@ -7,7 +7,7 @@
   ranks:
    RMCRankCorporal: []
   startingGear: RMCJobFORECONPVERadioTelephoneOperator
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconRTO"
   joinNotifyCrew: false
   accessGroups:
   - Rifleman
@@ -20,20 +20,26 @@
       - UNMC
     - type: Skills
       skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
         RMCSkillEngineer: 2
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillSmartGun: 1
+        RMCSkillConstruction: 2
+        RMCSkillFireman: 2
         RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
         RMCSkillJtac: 3
+        RMCSkillEndurance: 1
+        RMCSkillFirearms: 1
+        RMCSkillCqc: 1
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rto
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadFORECON
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rto
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

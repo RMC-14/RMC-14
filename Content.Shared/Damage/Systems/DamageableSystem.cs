@@ -139,6 +139,15 @@ namespace Content.Shared.Damage
         }
 
         /// <summary>
+        ///     Directly adds a damage specifier to a damageable component. Should rarely be used over TryChangeDamage.
+        /// </summary>
+        public void AddDamage(EntityUid uid, DamageableComponent damageable, DamageSpecifier damage)
+        {
+            damageable.Damage += damage;
+            DamageChanged(uid, damageable, interruptsDoAfters: false);
+        }
+
+        /// <summary>
         ///     If the damage in a DamageableComponent was changed, this function should be called.
         /// </summary>
         /// <remarks>
@@ -186,7 +195,7 @@ namespace Content.Shared.Damage
                 return damage;
             }
 
-            var before = new BeforeDamageChangedEvent(damage, origin);
+            var before = new BeforeDamageChangedEvent(damage, origin, tool); //RMC14, added a parameter
             RaiseLocalEvent(uid.Value, ref before);
 
             if (before.Cancelled)
@@ -378,7 +387,7 @@ namespace Content.Shared.Damage
     ///     Raised before damage is done, so stuff can cancel it if necessary.
     /// </summary>
     [ByRefEvent]
-    public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, bool Cancelled = false);
+    public record struct BeforeDamageChangedEvent(DamageSpecifier Damage, EntityUid? Origin = null, EntityUid? Source = null, bool Cancelled = false); //RMC14
 
     /// <summary>
     ///     Raised on an entity when damage is about to be dealt,

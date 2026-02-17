@@ -71,6 +71,10 @@
       - cost: 4000
         crate: RMCCrateMagazineNapthalUT
       - cost: 4000
+        crate: RMCCrateMagazineBGel
+      - cost: 4000
+        crate: RMCCrateMagazineFlamerMixed
+      - cost: 4000
         crate: RMCCrateBoxMagazineSentryShotgun
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFire
@@ -78,6 +82,10 @@
         crate: RMCCrateBoxMagazineSentryFireBlue
       - cost: 4000
         crate: RMCCrateBoxMagazineSentryFireSmoke
+      - cost: 2500
+        crate: RMCCrateMagazineML66DDrum
+      - cost: 2500
+        crate: RMCCrateMagazineM2C
     - name: Attachments
       entries:
       - cost: 3000
@@ -217,6 +225,8 @@
         crate: RMCCrateGrenadesAirburstStarShell
       - cost: 1000
         crate: RMCCrateGrenadesBatonSlug
+      - cost: 3000
+        crate: RMCCrateExplosiveClaymoreMine
     - name: Food
       entries:
       - cost: 1000
@@ -243,17 +253,21 @@
         crate: RMCCrateGearParachute
     - name: Medical
       entries:
-      - cost: 3200
+      - cost: 2500
         crate: RMCCrateMedicalSurgery
-      - cost: 2000
+      - cost: 3500
+        crate: RMCCrateFieldDoctor
+        entities:
+        - CMIV # TODO RMC14 Make IV fit in crate.
+      - cost: 700
         crate: RMCCrateMedicalBodyBag
-      - cost: 1200
+      - cost: 1500
         crate: RMCCrateMedicalStasisBag
-      - cost: 1600
+      - cost: 1100
         crate: RMCCrateMedicalFirstAid
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalFilled
-      - cost: 2100
+      - cost: 1500
         crate: RMCCrateMedicalPill
     - name: Mortar
       entries:
@@ -319,6 +333,10 @@
         crate: RMCCrateXM51
       - cost: 4000
         crate: RMCCrateM85A1
+      - cost: 6000
+        crate: RMCCrateML66D
+      - cost: 6000
+        crate: RMCCrateM2C
     - name: Weapons Specialist Ammo
       entries:
       - cost: 4000
@@ -347,6 +365,14 @@
         crate: RMCCrateMagazineM4SPRCustomImpact
       - cost: 3000
         crate: RMCCrateMagazineM4SPRCustomIncendiary
+      - cost: 6000
+        crate: RMCCratePyroTankMixed
+      - cost: 3000
+        crate: RMCCratePyroTankExtended
+      - cost: 3000
+        crate: RMCCratePyroTankTypeB
+      - cost: 4000
+        crate: RMCCratePyroTankTypeX
 
 
 

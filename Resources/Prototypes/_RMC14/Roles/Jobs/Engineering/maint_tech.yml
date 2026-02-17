@@ -39,6 +39,9 @@
         RMCSkillPowerLoader: 2
     - type: JobPrefix
       prefix: cm-job-prefix-maint-tech
+    - type: CMVendorUser
+      id: CMMaintTech
+      points: 45
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

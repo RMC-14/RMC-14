@@ -19,6 +19,9 @@ rmc-job-description-survivor-co = You are a Major of the UNMC.
 rmc-job-name-survivor-synth = Survivor Synthetic
 rmc-job-description-survivor-synth = You are a synthetic survivor of the attack on a corporate facility.
 
+rmc-job-name-survivor-military = Military Survivor
+rmc-job-description-survivor-military = You are a survivor of the xenonid infestation on the colony, apart of some kind of military organization.
+
 # Playtime trackers
 rmc-playtime-tracker-job-name-survivor = Civilian Survivor
 rmc-playtime-tracker-job-name-survivor-doctor = Doctor Survivor
@@ -42,6 +45,13 @@ CMJobSurvivorISR = Interstellar Life Rights Observer
 rmc-job-name-survivor-cmb-deputy = CMB Deputy
 CMSurvivorCMBDeputy = CMB Deputy
 
+rmc-job-name-survivor-bureau-marshal = CMB Marshal
+cm-job-prefix-survivor-cmb-marshal = CMB MAR
+
+cm-job-name-survivor-flight-control-operator = Flight Control Operator
+
+cm-job-name-survivor-unmc = UNMC Remnant
+
 # misc survs
 
 cm-job-name-survivor-prisoner = Prisoner
@@ -61,7 +71,7 @@ rmc-job-greeting-survivor = You are a survivor of the attack on the colony. You 
 # Misc variants
 cm-job-name-survivor-miner = Miner Colonist
 
-cm-job-name-surivor-priest = Priest Colonist
+cm-job-name-surivor-priest = Chaplain
 
 # FORECON survs
 
@@ -153,7 +163,7 @@ cm-job-name-survivor-medical-technician = New Varadero Medical Technician
 
 cm-job-name-survivor-technician = New Varadero Engineering Technician
 
-cm-job-name-survivor-un-peacekeeper = United Nations Peacekeeper
+cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
@@ -268,3 +278,89 @@ rmc-job-name-survivor-kutjevo-goon = Kutjevo Security
 rmc-job-name-survivor-kutjevo-researcher = Kutjevo Researcher
 
 rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
+
+# Solaris Ridge Survs
+
+rmc-job-name-survivor-solaris-chaplain = Solaris Chaplain
+
+rmc-job-name-survivor-solaris-corporate-liaison = Solaris Corporate Liaison
+
+rmc-job-name-survivor-solaris-doctor = Solaris Doctor
+
+rmc-job-name-survivor-solaris-engineer = Solaris Engineer
+
+rmc-job-name-survivor-solaris-scientist = Solaris Scientist
+
+rmc-job-name-survivor-solaris-trucker = Solaris Heavy Vehicle Operator
+
+rmc-job-name-survivor-unmc-recruiter = UNMC Recruiter
+
+rmc-job-name-survivor-solaris-corporate-supervisor = Colony Supervisor
+rmc-job-prefix-survivor-solaris-corporate-supervisor = Supervisor
+
+rmc-job-greeting-solaris-pmc = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are a PMC from Weston-Yamada. Your ship was enroute to Solaris Ridge to escort an Assistant Manager. On the way, your ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, your pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your squadmates lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You need to find out what happened to the colony, see if you can find any of your squadmates, and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-solaris-pmc-medic = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are a PMC medic from Weston-Yamada. Your ship was enroute to Solaris Ridge to escort an Assistant Manager. On the way, your ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, your pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your squadmates lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You need to find out what happened to the colony, see if you can find any of your squadmates, and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-solaris-pmc-engineer = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are a PMC engineer from Weston-Yamada. Your ship was enroute to Solaris Ridge to escort an Assistant Manager. On the way, your ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, your pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your squadmates lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You need to find out what happened to the colony, see if you can find any of your squadmates, and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-solaris-pmc-leader = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are a PMC team leader from Weston-Yamada. Your ship was enroute to Solaris Ridge to escort an Assistant Manager. On the way, your ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, your pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your squadmates lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You need to find out what happened to the colony, see if you can find any of your squadmates, and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-solaris-pmc-commander = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are a PMC field operations leader from Weston-Yamada. Your ship was enroute to Solaris Ridge to escort an Assistant Manager. On the way, your ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, your pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your squadmates lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You need to find out what happened to the colony, see if you can find any of your squadmates, and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-solaris-pmc-supervisor = You are a survivor of a crash landing!
+
+  You are NOT aware of the xenomorph threat.
+
+  Your primary objective is to survive. You believe a second dropship crashed somewhere to the north, which was carrying additional supplies.
+
+  You are an Assistant Manager from Weston-Yamada. You were being escorted onboard a PMC ship to Solaris Ridge. On the way, the ship received a distress signal from the colony about an attack. Worried that it might be a CLF attack, the pilot set full speed for the colony. However, during atmospheric entry the engine failed and you fell unconscious from the G-Forces. You wake up wounded... and see that the ship has crashed onto the colony. Your PMC escorts lie dead beside you, but there's some missing. Perhaps they survived and moved elsewhere? You must get up and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+# Shivas survs
+
+rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
+rmc-job-name-survivor-shivas-doctor = Shivas Doctor
+rmc-job-name-survivor-shivas-researcher = Shivas Researcher
+rmc-job-name-survivor-shivas-engineer = Shivas Engineer

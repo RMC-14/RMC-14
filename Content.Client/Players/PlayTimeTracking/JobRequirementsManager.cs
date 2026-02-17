@@ -95,6 +95,26 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         Updated?.Invoke();
     }
 
+    // RMC14-Whitelist-Tweak-Start
+    private bool IsWhitelistedInternal(string jobId)
+    {
+        if (_jobWhitelists.Contains(jobId))
+            return true;
+
+        if (!_prototypes.TryIndex<JobPrototype>(jobId, out var jobPrototype))
+        {
+            _sawmill.Error($"Failed to index job prototype {jobId} during whitelist check. Assuming not whitelisted");
+            return false;
+        }
+
+        if (jobPrototype.WhitelistParent != null)
+        {
+            return IsWhitelistedInternal(jobPrototype.WhitelistParent.Value.Id);
+        }
+
+        return false;
+    }
+    // RMC14-Whitelist-Tweak-End
     public bool IsAllowed(JobPrototype job, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = null;
@@ -151,8 +171,13 @@ public sealed class JobRequirementsManager : ISharedPlaytimeManager
         if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
             return true;
 
-        if (job.Whitelisted && !_jobWhitelists.Contains(job.ID))
+        // RMC14-Whitelist-Tweak-Start
+        if (job.Whitelisted)
         {
+            if (IsWhitelistedInternal(job.ID))
+                return true;
+        // RMC14-Whitelist-Tweak-Start
+
             reason = FormattedMessage.FromUnformatted(Loc.GetString("role-not-whitelisted"));
             return false;
         }

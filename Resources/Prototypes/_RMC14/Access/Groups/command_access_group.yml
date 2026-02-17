@@ -25,6 +25,7 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
@@ -71,6 +72,7 @@
   - CMAccessMaint # maints
   - CMAccessMarinePrep # access to the basic areas of marine prep, where marines exit cryo and get food.
   - CMAccessMedical # the medical department locked doors, like surgery rooms and the supply closet
+  - RMCAccessMorgue # morgue access
   - CMAccessMedPrep # hospital corpsman
   - CMAccessOT # ordnance tech
   - CMAccessPilot # dropship pilot door access
@@ -119,6 +121,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot
@@ -161,6 +164,7 @@
   - CMAccessMaint
   - CMAccessMarinePrep
   - CMAccessMedical
+  - RMCAccessMorgue
   - CMAccessMedPrep
   - CMAccessOT
   - CMAccessPilot

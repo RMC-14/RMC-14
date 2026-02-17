@@ -22,6 +22,28 @@
     - id: CMMagazineRifleM54C
       amount: 10
 
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseL90Mag
+  name: L90/91 magazine case (x20)
+  description: An ammunition case containing 20 L90/91 magazines.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMagazineRifleL90
+      amount: 20
+
+- type: entity
+  parent: RMCSecureCase
+  id: RMCSecureCaseL90MagHalf
+  name: L90/91 magazine case (x10)
+  description: An ammunition case containing 10 L90/91 magazines.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMagazineRifleL90
+      amount: 10
+
 # Strapped
 
 - type: entity
@@ -55,6 +77,17 @@
   - type: CrateOpenable
     spawn:
     - id: CMMRE
+      amount: 60
+
+- type: entity
+  parent: RMCSecureCaseStrapped
+  id: RMCSecureCaseStrappedTSEMRE
+  name: TSE ORP rations crate (x60)
+  description: A supply crate containing sixty TSE ORP ration packets.
+  components:
+  - type: CrateOpenable
+    spawn:
+    - id: RMCMRETSE
       amount: 60
 
 - type: entity

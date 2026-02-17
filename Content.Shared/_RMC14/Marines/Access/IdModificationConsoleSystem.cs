@@ -1,8 +1,12 @@
 using System.Collections.Frozen;
 using Content.Shared._RMC14.ARES;
 using Content.Shared._RMC14.ARES.Logs;
+using System.Linq;
+using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Roles;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
@@ -12,6 +16,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Containers;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
@@ -24,11 +29,14 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
+    [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly ISerializationManager _serialization = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
 
     private FrozenDictionary<string, AccessGroupPrototype> _accessGroup =
@@ -38,8 +46,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         FrozenDictionary<string, AccessLevelPrototype>.Empty;
 
     private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIdentificationLogs";
+    private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
+
     public override void Initialize()
     {
+        _originalRoleQuery = GetEntityQuery<OriginalRoleComponent>();
+
         Subs.BuiEvents<IdModificationConsoleComponent>(IdModificationConsoleUIKey.Key,
             subs =>
             {
@@ -50,6 +62,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleIFFChangeBuiMsg>(OnIFFChangeMsg);
                 subs.Event<IdModificationConsoleJobChangeBuiMsg>(OnJobChangeMsg);
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
+                subs.Event<IdModificationConsoleAssignSquadMsg>(OnTerminalAssignSquadMsg);
             });
         SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
@@ -83,6 +96,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             access.Tags.Add(tag);
         }
 
+        Dirty(uid.Value, access);
+
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
@@ -115,6 +130,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 
         idCard._jobTitle = "Civilian";
         Dirty(uid.Value, idCard);
+        Dirty(uid.Value, access);
         if (idCard.OriginalOwner != null)
         {
             _rank.SetRank(idCard.OriginalOwner.Value, "RMCRankCivilian");
@@ -141,20 +157,32 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             return;
 
         EnsureComp<ItemIFFComponent>(uid.Value, out var iff);
+        var targetFaction = ent.Comp.Faction;
 
-        if (iff.Faction != ent.Comp.Faction && !args.Revoke)
+        if (!args.Revoke)
         {
-            _iff.SetIdFaction((uid.Value, iff), ent.Comp.Faction);
-            ent.Comp.HasIFF = true;
+            if (!iff.Factions.Contains(targetFaction))
+                iff.Factions.Add(targetFaction);
+
+            Dirty(uid.Value, iff);
             _adminLogger.Add(LogType.RMCIdModify,
-                LogImpact.Low,
-                $"{ToPrettyString(args.Actor):player} has granted the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
+                LogImpact.Medium,
+                $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}"
+            
             _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted IFF for ID card: {Name(uid.Value)}");
-
+            ent.Comp.HasIFF = true;
         }
-        else if (args.Revoke)
+        else
         {
-            _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+            var removed = iff.Factions.Remove(targetFaction);
+
+            if (iff.Factions.Count == 0)
+            {
+                _iff.SetIdFaction((uid.Value, iff), "FactionSurvivor");
+            }
+            else if (removed)
+                Dirty(uid.Value, iff);
+
             ent.Comp.HasIFF = false;
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Medium,
@@ -162,6 +190,13 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked IFF for ID card: {Name(uid.Value)}");
         }
 
+            if (removed)
+            {
+                _adminLogger.Add(LogType.RMCIdModify,
+                    LogImpact.Low,
+                    $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
+            }
+        }
 
         Dirty(ent);
     }
@@ -267,6 +302,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 break;
         }
 
+        Dirty(uid.Value, access);
         Dirty(ent);
     }
 
@@ -295,6 +331,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
             _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked {Loc.GetString(_prototype.Index(args.Access).Name ?? "unknown")} to ID card: {Name(uid.Value)}");
         }
+
+        Dirty(uid.Value, access);
     }
 
     //TODO RMC14 add ranks tab
@@ -367,11 +405,23 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         if (accessComponent.Tags.Contains(ent.Comp.Access) && containerType == ent.Comp.PrivilegedIdSlot)
             ent.Comp.Authenticated = true;
 
+        ent.Comp.HasIFF = false;
         if (TryComp(handItem, out ItemIFFComponent? iff) && containerType == ent.Comp.TargetIdSlot)
-            ent.Comp.HasIFF = iff.Faction == ent.Comp.Faction;
+            ent.Comp.HasIFF = iff.Factions.Contains(ent.Comp.Faction);
 
         var container = _container.EnsureContainer<ContainerSlot>(ent, containerType);
         _container.Insert(handItem.Value, container);
+
+        var query = EntityQueryEnumerator<SquadTeamComponent>();
+        ent.Comp.Squads = [];
+        while (query.MoveNext(out var uid, out var team))
+        {
+            if (ent.Comp.SquadGroup != "ADMINISTRATOR" && team.Group != ent.Comp.SquadGroup)
+                continue;
+
+            ent.Comp.Squads.Add(new(GetNetEntity(uid), Name(uid), team.Color));
+        }
+
         Dirty(ent);
         return true;
     }
@@ -446,14 +496,100 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 else
                     groupList.Add(accessGroup);
             }
-            // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
-            // {
-            //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
-            //         groupListHidden.Add(accessGroup);
-            // }
         }
+        // else if (accessGroup.Faction == ent.Comp.Faction && accessGroup.Hidden)
+        // {
+        //     if(accessGroup.Name != null && !accessGroup.Name.Contains("protobaseaccess"))
+        //         groupListHidden.Add(accessGroup);
+        // }
 
         ent.Comp.JobGroups = groupGroups;
         ent.Comp.JobList = groupList;
+    }
+
+    private void OnTerminalAssignSquadMsg(Entity<IdModificationConsoleComponent> ent, ref IdModificationConsoleAssignSquadMsg args)
+    {
+        // Too many mispredictions.
+        if (_net.IsClient)
+            return;
+
+        var actor = args.Actor;
+        if (!ent.Comp.Authenticated)
+            return;
+
+        if (!TryContainerEntity(ent, ent.Comp.TargetIdSlot, out var uid) ||
+            !TryComp(uid, out IdCardComponent? idCard) ||
+            idCard.OriginalOwner is not { } marineId ||
+            !_originalRoleQuery.TryComp(marineId, out var role) ||
+            role.Job is not { } job)
+            return;
+
+        var jobName = job.Id;
+        if (_prototype.TryIndex(job, out var jobProto))
+            jobName = Loc.GetString(jobProto.Name);
+
+        if (args.Squad is not { } squadNetEnt)
+        {
+            _squad.RemoveSquad(marineId, null);
+            _metaData.SetEntityName(uid.Value,
+                $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({jobName})");
+
+            idCard._jobTitle = jobName;
+            Dirty(uid.Value, idCard);
+
+            var selfMsgUnassign = $"{Name(marineId)} has been unassigned.";
+            _marineAnnounce.AnnounceSingle(selfMsgUnassign, actor);
+            _popup.PopupCursor(selfMsgUnassign, actor, PopupType.Large);
+
+            var targetMsgUnassign = "You've been unassigned from your squad.";
+            _marineAnnounce.AnnounceSingle(targetMsgUnassign, marineId);
+            _popup.PopupEntity(targetMsgUnassign, marineId, marineId, PopupType.Large);
+
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
+                $"{ToPrettyString(actor):player} has unassigned {ToPrettyString(marineId):player}");
+            return;
+        }
+
+        if (!TryGetEntity(squadNetEnt, out var newSquadEnt))
+        {
+            _popup.PopupCursor($"There was an error assigning {Name(marineId)}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (TryComp(newSquadEnt, out SquadTeamComponent? newSquadComp) &&
+            !_squad.HasSpaceForRole((newSquadEnt.Value, newSquadComp), job))
+        {
+            _popup.PopupCursor($"{Name(newSquadEnt.Value)} can't have another {jobName}.", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        if (ent.Comp.EnlistmentRequirement is { } requirements && !_skills.HasAllSkills(marineId, requirements))
+        {
+            _popup.PopupCursor("You cannot assign untrained civilians to squads!", actor, PopupType.LargeCaution);
+            return;
+        }
+
+        var newSquadName = Name(newSquadEnt.Value);
+
+        RemComp<SquadLeaderComponent>(marineId);
+        _squad.AssignSquad(marineId, newSquadEnt.Value, null);
+        _metaData.SetEntityName(uid.Value,
+            $"{MetaData(idCard.OriginalOwner.Value).EntityName} ({newSquadName} {jobName})");
+
+        idCard._jobTitle = $"{newSquadName} {jobName}";
+        Dirty(uid.Value, idCard);
+
+        var selfMsg = $"{Name(marineId)} has been assigned to {Name(newSquadEnt.Value)}.";
+        _marineAnnounce.AnnounceSingle(selfMsg, actor);
+        _popup.PopupCursor(selfMsg, actor, PopupType.Large);
+
+        var targetMsg = $"You've been transferred to {Name(newSquadEnt.Value)}!";
+        _marineAnnounce.AnnounceSingle(targetMsg, marineId);
+        _popup.PopupEntity(targetMsg, marineId, marineId, PopupType.Large);
+
+        _adminLogger.Add(LogType.RMCIdModify,
+            LogImpact.Medium,
+            $"{ToPrettyString(actor):player} has assigned {ToPrettyString(marineId):player} to {Name(newSquadEnt.Value)}");
     }
 }

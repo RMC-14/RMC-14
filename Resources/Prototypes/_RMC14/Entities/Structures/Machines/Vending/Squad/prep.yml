@@ -50,7 +50,7 @@
         amount: 25
       - id: RMCWeaponPistolM13Empty
         amount: 25
-      - id: RMCWeaponPistolM82F
+      - id: RMCWeaponPistolM82FEmpty
         amount: 10
     - name: Sidearm ammunition
       entries:
@@ -83,7 +83,7 @@
       - id: CMPackFlare
         amount: 10
         recommended: true
-    - name: Boxes
+    - name: Magazine Boxes
       hasBoxes: true
       jobs:
       - CMQuartermaster
@@ -104,6 +104,38 @@
         box: CMMagazineSMGM63
       - id: RMCBoxMagazineRifleM54C
         box: CMMagazineRifleM54C
+      - id: RMCBoxMagazinePistolM77AP
+        box: CMMagazinePistolM77AP
+      - id: RMCBoxMagazineRevolverM44
+        box: RMCSpeedLoaderM44
+      - id: RMCBoxMagazinePistolM1984
+        box: CMMagazinePistolM1984
+      - id: RMCBoxMagazinePistolM13
+        box: RMCMagazinePistolM13
+    - name: Ammunition Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M4SPR)
+        box: CMMagazineRifleM4SPR
+        boxSlots: 24 # 600 / 25
+      - id: RMCBoxBulletsSMG
+        name: SMG HV ammunition box (10x20mm) (M63)
+        box: CMMagazineSMGM63
+        boxSlots: 13 # 600 / 48, yes we lose half a mag to the void
+      - id: RMCBoxBulletsRifle
+        name: rifle ammunition box (10x24mm) (M54C)
+        box: CMMagazineRifleM54C
+        boxSlots: 15 # 600 / 40
+    - name: Other Boxes
+      hasBoxes: true
+      jobs:
+      - CMQuartermaster
+      - CMCargoTech
+      entries:
       - id: RMCBoxPackFlare
         box: CMPackFlare
 
@@ -277,8 +309,8 @@
         amount: 2
       - id: RMCPouchTools
         amount: 1
-#      - id: Sling Pouch
-#        amount: 1
+      - id: RMCPouchSling
+        amount: 1
     - name: Mask
       entries:
       - id: CMMaskGas
@@ -402,10 +434,10 @@
         amount: 6
       - id: RMCTankFlamer
         amount: 3
-      #- id: CMMagazineDrumM56D
-      #  amount: 2
-      #- id: CMMagazineBoxM2C
-      #  amount: 2
+      - id: RMCMagazineML66D
+        amount: 2
+      - id: RMCMagazineM2C
+        amount: 2
       - id: RMCBoxShotgunBreaching
         amount: 2
       - id: RMCBatonSlugHIRR
@@ -555,6 +587,8 @@
         amount: 2
       - id: RMCAttachmentLaserSight
         amount: 3
+      - id: RMCAttachmentMicroLaserSight
+        amount: 2
       - id: RMCAttachmentMiniFlamethrower
         amount: 2
 #      - id: CMAttachmentXMVESG1FlamerNozzle
@@ -573,9 +607,9 @@
         amount: 2
       - id: RMCAttachmentM42A2CollapsibleStock
         amount: 2
-      - id: RMCAttachmentM63ArmBrace
-        amount: 2
       - id: RMCAttachmentM63Stock
+        amount: 2
+      - id: RMCAttachmentM63ArmBrace
         amount: 2
       - id: RMCAttachmentM54CStockSolid
         amount: 2

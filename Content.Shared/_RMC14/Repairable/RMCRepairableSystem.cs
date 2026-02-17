@@ -96,12 +96,16 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
         }
 
+        if (!CanRepairPopup(user, repairable))
+            return;
+
         if (!UseFuel(args.Used, args.User, repairable.Comp.FuelUsed, true))
             return;
 
         var ev = new RMCRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, used: args.Used)
         {
+            NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
@@ -126,6 +130,9 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
 
         args.Handled = true;
+
+        if (!CanRepairPopup(args.User, repairable))
+            return;
 
         if (args.Used == null ||
             !UseFuel(args.Used.Value, args.User, repairable.Comp.FuelUsed))
@@ -225,6 +232,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         var ev = new RMCNailgunRepairableDoAfterEvent();
         var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, repairable, used: args.Used)
         {
+            NeedHand = true,
             BreakOnMove = true,
             BlockDuplicate = true,
             DuplicateCondition = DuplicateConditions.SameEvent
@@ -377,5 +385,16 @@ public sealed class RMCRepairableSystem : EntitySystem
 
             args.Handled = true;
         }
+    }
+
+    private bool CanRepairPopup(EntityUid user, EntityUid target)
+    {
+        var ev = new RMCRepairableTargetAttemptEvent(user, target);
+        RaiseLocalEvent(target, ref ev);
+        if (!ev.Cancelled)
+            return true;
+
+        _popup.PopupClient(ev.Popup, user, user, PopupType.MediumCaution);
+        return false;
     }
 }

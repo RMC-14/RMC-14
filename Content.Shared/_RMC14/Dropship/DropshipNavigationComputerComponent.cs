@@ -32,4 +32,11 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
+    public bool RemoteControl = false;
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LockoutDuration = TimeSpan.FromMinutes(10);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan LockedOutUntil = TimeSpan.Zero;
 }
