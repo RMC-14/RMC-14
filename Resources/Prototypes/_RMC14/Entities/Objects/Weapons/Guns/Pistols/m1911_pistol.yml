@@ -82,8 +82,8 @@
     mayTransfer: True
     whitelist:
       tags:
-      - CMBulletPistol45ACP
-    proto: CMBulletPistol45ACP
+      - CMCartridgePistol45ACP
+    proto: CMCartridgePistol45ACP
     capacity: 8
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/m1911.rsi
@@ -119,6 +119,9 @@
   - type: Tag
     tags:
     - Cartridge
-    - CMBulletPistol45ACP
+    - CMCartridgePistol45ACP
   - type: CartridgeAmmo
     proto: CMBulletPistol45ACP
+
+- type: Tag
+  id: CMCartridgePistol45ACP
