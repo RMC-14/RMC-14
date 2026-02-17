@@ -77,6 +77,7 @@
     - id: RMCSurgicalCaseFilledCommandoElite
     - id: CMRollerBedSpawnFolded
 #  /obj/item/stack/medical/splint/nano(src, rand(1,2))
+
   - type: Sprite
     layers:
     - state: advfirstaid
