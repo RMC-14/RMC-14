@@ -3,7 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
     Title="Hardpoints"
-    MinSize="680 500">
+    MinSize="600 420">
 
     <PanelContainer HorizontalExpand="True" VerticalExpand="True">
         <PanelContainer.PanelOverride>
@@ -13,9 +13,9 @@
                 BorderThickness="2"/>
         </PanelContainer.PanelOverride>
 
-        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True">
-                <PanelContainer MinSize="118 118" VerticalAlignment="Center">
+        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
+                <PanelContainer MinSize="84 84" VerticalAlignment="Center">
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat
                             BackgroundColor="#0D2235"
@@ -27,18 +27,24 @@
                         <SpriteView
                             Name="VehicleIcon"
                             Access="Public"
-                            MinSize="118 118"
+                            MinSize="84 84"
                             SpriteOffset="True"
                             Stretch="Fill"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Margin="10"/>
+                            Margin="6"/>
                     </PanelContainer>
                 </PanelContainer>
 
-                <BoxContainer Orientation="Vertical" SeparationOverride="6" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="3" HorizontalExpand="True">
                     <Label Text="Vehicle Hardpoints" StyleClasses="LabelHeading"/>
-                    <Label Text="Configure and monitor." FontColorOverride="#9DB5D1"/>
+                    <Label
+                        Name="ErrorLabel"
+                        Access="Public"
+                        Visible="False"
+                        FontColorOverride="#FF8C7A"
+                        Text=""
+                        HorizontalExpand="True"/>
                     <BoxContainer
                         Name="FrameHealthRow"
                         Access="Public"
@@ -64,7 +70,7 @@
                             MaxValue="1"
                             Value="0"
                             HorizontalExpand="True"
-                            MinSize="0 18">
+                            MinSize="0 12">
                             <ProgressBar.ForegroundStyleBoxOverride>
                                 <graphics:StyleBoxFlat BackgroundColor="#53D188"/>
                             </ProgressBar.ForegroundStyleBoxOverride>
@@ -81,12 +87,12 @@
                         BorderThickness="1"/>
                 </PanelContainer.PanelOverride>
 
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="10">
+                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
                     <BoxContainer
                         Name="HardpointList"
                         Access="Public"
                         Orientation="Vertical"
-                        SeparationOverride="10"
+                        SeparationOverride="6"
                         HorizontalExpand="True"/>
                 </ScrollContainer>
             </PanelContainer>

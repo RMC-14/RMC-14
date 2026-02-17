@@ -37,9 +37,9 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
             return;
 
         var useTreads = false;
-        if (!_sprite.LayerMapTryGet((uid, sprite), RMCVehicleWheelLayers.Wheels, out var layer, true))
+        if (!_sprite.LayerMapTryGet((uid, sprite), RMCVehicleWheelLayers.Wheels, out var layer, false))
         {
-            if (!_sprite.LayerMapTryGet((uid, sprite), RMCVehicleWheelLayers.Treads, out layer, true))
+            if (!_sprite.LayerMapTryGet((uid, sprite), RMCVehicleWheelLayers.Treads, out layer, false))
                 return;
 
             useTreads = true;

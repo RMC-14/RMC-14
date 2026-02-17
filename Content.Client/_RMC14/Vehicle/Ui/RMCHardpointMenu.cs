@@ -14,6 +14,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Client.Utility;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
+using Robust.Shared.Input;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using Robust.Shared.GameObjects;
@@ -117,10 +118,16 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         IReadOnlyList<RMCHardpointUiEntry> hardpoints,
         float frameIntegrity,
         float frameMaxIntegrity,
-        bool hasFrameIntegrity)
+        bool hasFrameIntegrity,
+        string? error)
     {
         TrySetVehicleIcon();
         UpdatePreviewOverlays(hardpoints);
+        UpdateWindowSizing(hardpoints.Count, hasFrameIntegrity, !string.IsNullOrWhiteSpace(error));
+
+        var hasError = !string.IsNullOrWhiteSpace(error);
+        ErrorLabel.Visible = hasError;
+        ErrorLabel.Text = hasError ? error! : string.Empty;
 
         HardpointList.DisposeAllChildren();
 
@@ -130,7 +137,8 @@ public sealed partial class RMCHardpointMenu : FancyWindow
             FrameHealthRow.Visible = true;
             FrameHealthBar.Value = percent;
             FrameHealthBar.ForegroundStyleBoxOverride = CreateIntegrityStyle(percent);
-            FrameHealthLabel.Text = $"{MathF.Round(percent * 100f)}%";
+            FrameHealthBar.BackgroundStyleBoxOverride = CreateIntegrityTrackStyle();
+            FrameHealthLabel.Text = $"{MathF.Round(frameIntegrity)}/{MathF.Round(frameMaxIntegrity)} ({MathF.Round(percent * 100f)}%)";
         }
         else
         {
@@ -140,25 +148,44 @@ public sealed partial class RMCHardpointMenu : FancyWindow
         foreach (var hardpoint in hardpoints)
         {
             var isRemoving = hardpoint.Removing;
+            var canRemove = hardpoint.HasItem && !isRemoving;
+            var slotId = hardpoint.SlotId;
 
             var panel = new PanelContainer
             {
                 HorizontalExpand = true,
-                MinSize = new Vector2(0, 42)
+                MinSize = new Vector2(0, 48),
+                MouseFilter = Control.MouseFilterMode.Stop
             };
 
             panel.PanelOverride = new StyleBoxFlat
             {
-                BackgroundColor = Color.FromHex("#0E1B2B"),
-                BorderColor = Color.FromHex("#2D5E8E"),
+                BackgroundColor = isRemoving
+                    ? Color.FromHex("#2A1E10")
+                    : hardpoint.HasItem
+                        ? Color.FromHex("#0E1B2B")
+                        : Color.FromHex("#121722"),
+                BorderColor = isRemoving
+                    ? Color.FromHex("#E2B36A")
+                    : canRemove
+                        ? Color.FromHex("#2D5E8E")
+                        : Color.FromHex("#314155"),
                 BorderThickness = new Thickness(1.5f)
+            };
+            panel.OnKeyBindDown += args =>
+            {
+                if (args.Function != EngineKeyFunctions.UIClick || !canRemove)
+                    return;
+
+                OnRemove?.Invoke(slotId);
+                args.Handle();
             };
 
             var root = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                SeparationOverride = 12,
-                Margin = new Thickness(10, 10),
+                SeparationOverride = 8,
+                Margin = new Thickness(6),
                 HorizontalExpand = true
             };
 
@@ -168,7 +195,7 @@ public sealed partial class RMCHardpointMenu : FancyWindow
             {
                 Stretch = SpriteView.StretchMode.Fill,
                 VerticalAlignment = Control.VAlignment.Center,
-                MinSize = new Vector2(56, 56),
+                MinSize = new Vector2(40, 40),
                 OverrideDirection = Direction.South
             };
 
@@ -185,7 +212,7 @@ public sealed partial class RMCHardpointMenu : FancyWindow
             var centerColumn = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 3,
+                SeparationOverride = 1,
                 HorizontalExpand = true
             };
 
@@ -221,24 +248,19 @@ public sealed partial class RMCHardpointMenu : FancyWindow
             var rightColumn = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
-                SeparationOverride = 8,
+                SeparationOverride = 3,
                 VerticalAlignment = Control.VAlignment.Center,
-                MinSize = new Vector2(130, 0)
+                MinSize = new Vector2(170, 0)
             };
 
-            var remove = new RMCHardpointButton
+            if (isRemoving)
             {
-                LabelText = isRemoving
-                    ? Loc.GetString("rmc-hardpoint-ui-removing")
-                    : Loc.GetString("rmc-hardpoint-ui-remove"),
-                Disabled = !hardpoint.HasItem || isRemoving,
-                MinSize = new Vector2(98, 26),
-                Pulse = isRemoving
-            };
-
-            remove.OnPressed += _ => OnRemove?.Invoke(hardpoint.SlotId);
-
-            rightColumn.AddChild(remove);
+                rightColumn.AddChild(new Label
+                {
+                    Text = Loc.GetString("rmc-hardpoint-ui-removing"),
+                    FontColorOverride = Color.FromHex("#E2B36A")
+                });
+            }
 
             if (hardpoint.HasIntegrity)
             {
@@ -259,14 +281,15 @@ public sealed partial class RMCHardpointMenu : FancyWindow
                     MaxValue = 1,
                     Value = percent,
                     HorizontalExpand = true,
-                    MinSize = new Vector2(130, 16)
+                    MinSize = new Vector2(120, 12)
                 };
 
                 bar.ForegroundStyleBoxOverride = CreateIntegrityStyle(percent);
+                bar.BackgroundStyleBoxOverride = CreateIntegrityTrackStyle();
 
                 var percentLabel = new Label
                 {
-                    Text = $"{MathF.Round(percent * 100f)}%",
+                    Text = $"{MathF.Round(hardpoint.Integrity)}/{MathF.Round(hardpoint.MaxIntegrity)}",
                     VerticalAlignment = Control.VAlignment.Center,
                     FontColorOverride = Color.FromHex("#6BC7FF")
                 };
@@ -275,14 +298,6 @@ public sealed partial class RMCHardpointMenu : FancyWindow
                 barRow.AddChild(percentLabel);
 
                 rightColumn.AddChild(barRow);
-            }
-            else
-            {
-                rightColumn.AddChild(new Label
-                {
-                    Text = Loc.GetString("rmc-hardpoint-ui-no-integrity"),
-                    FontColorOverride = Color.FromHex("#6BC7FF")
-                });
             }
 
             root.AddChild(centerColumn);
@@ -584,6 +599,37 @@ public sealed partial class RMCHardpointMenu : FancyWindow
     {
         base.Dispose(disposing);
         ClearPreviewOverlays();
+    }
+
+    private void UpdateWindowSizing(int hardpointCount, bool hasFrameIntegrity, bool hasError)
+    {
+        const float baseHeight = 215f;
+        const float rowHeight = 56f;
+        var targetHeight = baseHeight + hardpointCount * rowHeight;
+
+        if (!hasFrameIntegrity)
+            targetHeight -= 24f;
+
+        if (hasError)
+            targetHeight += 24f;
+
+        var rootHeight = UserInterfaceManager.WindowRoot?.Size.Y ?? 900f;
+        var maxHeight = MathF.Max(420f, rootHeight - 80f);
+        var clampedHeight = Math.Clamp(targetHeight, 420f, maxHeight);
+        var targetSize = new Vector2(670f, clampedHeight);
+
+        if (SetSize != targetSize)
+            SetSize = targetSize;
+    }
+
+    private static StyleBoxFlat CreateIntegrityTrackStyle()
+    {
+        return new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#1E2B3B"),
+            BorderColor = Color.FromHex("#3A4B5E"),
+            BorderThickness = new Thickness(1f)
+        };
     }
 
     private static StyleBoxFlat CreateIntegrityStyle(float percent)

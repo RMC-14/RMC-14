@@ -57,17 +57,20 @@ public sealed class RMCHardpointBoundUserInterfaceState : BoundUserInterfaceStat
     public readonly float FrameIntegrity;
     public readonly float FrameMaxIntegrity;
     public readonly bool HasFrameIntegrity;
+    public readonly string? Error;
 
     public RMCHardpointBoundUserInterfaceState(
         List<RMCHardpointUiEntry> hardpoints,
         float frameIntegrity,
         float frameMaxIntegrity,
-        bool hasFrameIntegrity)
+        bool hasFrameIntegrity,
+        string? error)
     {
         Hardpoints = hardpoints;
         FrameIntegrity = frameIntegrity;
         FrameMaxIntegrity = frameMaxIntegrity;
         HasFrameIntegrity = hasFrameIntegrity;
+        Error = error;
     }
 }
 

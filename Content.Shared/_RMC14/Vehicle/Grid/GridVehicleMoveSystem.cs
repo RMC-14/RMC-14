@@ -73,6 +73,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private const float PushAxisHysteresis = 0.05f;
     private const float PushWallSkin = 0.1f;
     private const float PushWallOverlapArea = 0.01f;
+    private const float MovementFixedStep = 1f / 60f;
+    private const int MaxFixedStepsPerFrame = 6;
+    private const float ClientSmoothingSnapDistance = 1.25f;
+    private const float ClientSmoothingRate = 22f;
 
 
     public static readonly List<(EntityUid grid, Vector2i tile)> DebugTestedTiles = new();
@@ -80,6 +84,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private readonly Dictionary<EntityUid, TimeSpan> _lastMobCollision = new();
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
+    private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
 
     public readonly record struct DebugCollision(
         EntityUid Tested,
@@ -122,6 +127,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.IsCommittedToMove = false;
         ent.Comp.IsPushMove = false;
         _hardState[uid] = true;
+        _movementAccumulator[uid] = 0f;
 
         Dirty(uid, ent.Comp);
     }
@@ -129,6 +135,7 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private void OnMoverShutdown(Entity<GridVehicleMoverComponent> ent, ref ComponentShutdown args)
     {
         _hardState.Remove(ent.Owner);
+        _movementAccumulator.Remove(ent.Owner);
     }
 
     private void OnMoverCanRun(Entity<GridVehicleMoverComponent> ent, ref VehicleCanRunEvent args)
@@ -183,9 +190,60 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             if (xform.GridUid is not { } grid || !gridQ.TryComp(grid, out var gridComp))
                 continue;
 
-            var inputDir = GetMoverInput(uid, mover, vehicle, out var pushing);
+            if (_net.IsClient && !ShouldPredictVehicleMovement(vehicle))
+            {
+                SmoothReplicatedVehicle(uid, grid, mover, frameTime);
+                continue;
+            }
 
-            UpdateMovement(uid, mover, vehicle, grid, gridComp, inputDir, pushing, frameTime);
+            var inputDir = GetMoverInput(uid, mover, vehicle, out var pushing);
+            var accumulator = _movementAccumulator.GetValueOrDefault(uid) + frameTime;
+            var maxAccum = MovementFixedStep * MaxFixedStepsPerFrame;
+            if (accumulator > maxAccum)
+                accumulator = maxAccum;
+
+            var steps = 0;
+            while (accumulator >= MovementFixedStep && steps < MaxFixedStepsPerFrame)
+            {
+                UpdateMovement(uid, mover, vehicle, grid, gridComp, inputDir, pushing, MovementFixedStep);
+                accumulator -= MovementFixedStep;
+                steps++;
+            }
+
+            _movementAccumulator[uid] = accumulator;
         }
+    }
+
+    private bool ShouldPredictVehicleMovement(VehicleComponent vehicle)
+    {
+        if (!_net.IsClient)
+            return true;
+
+        if (!_timing.InPrediction)
+            return false;
+
+        return vehicle.Operator != null && vehicle.Operator == _player.LocalEntity;
+    }
+
+    private void SmoothReplicatedVehicle(EntityUid uid, EntityUid grid, GridVehicleMoverComponent mover, float frameTime)
+    {
+        var xform = Transform(uid);
+        if (!xform.ParentUid.IsValid())
+            return;
+
+        var coords = new EntityCoordinates(grid, mover.Position);
+        var target = coords.WithEntityId(xform.ParentUid, transform, EntityManager).Position;
+        var current = xform.LocalPosition;
+        var delta = target - current;
+
+        if (delta.LengthSquared() >= ClientSmoothingSnapDistance * ClientSmoothingSnapDistance)
+        {
+            transform.SetLocalPosition(uid, target, xform);
+            return;
+        }
+
+        var alpha = 1f - MathF.Exp(-ClientSmoothingRate * frameTime);
+        var smoothed = Vector2.Lerp(current, target, alpha);
+        transform.SetLocalPosition(uid, smoothed, xform);
     }
 }

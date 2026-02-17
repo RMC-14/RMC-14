@@ -124,6 +124,8 @@ public sealed class RMCHardpointSystem : EntitySystem
             Log.Info($"[rmc-hardpoints] Inserted: owner={ToPrettyString(ent.Owner)} slot={slot.Id} slotType={slot.HardpointType} item={ToPrettyString(args.Entity)} itemType={itemType} attachment={isAttachment}");
         }
 
+        ent.Comp.LastUiError = null;
+
         if (TryComp(args.Entity, out GunComponent? gun))
             _guns.RefreshModifiers((args.Entity, gun));
 
@@ -151,6 +153,7 @@ public sealed class RMCHardpointSystem : EntitySystem
             Log.Info($"[rmc-hardpoints] Removed: owner={ToPrettyString(ent.Owner)} slot={args.Container.ID} item={ToPrettyString(args.Entity)} attachment=true stack={Environment.StackTrace}");
         }
 
+        ent.Comp.LastUiError = null;
         RefreshCanRun(ent.Owner);
         ent.Comp.PendingRemovals.Remove(args.Container.ID);
         UpdateHardpointUi(ent.Owner, ent.Comp);
@@ -643,6 +646,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!Equals(args.UiKey, RMCHardpointUiKey.Key))
             return;
 
+        ent.Comp.LastUiError = null;
         UpdateHardpointUi(ent.Owner, ent.Comp);
     }
 
@@ -653,6 +657,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         // Clear any pending operations when UI closes
         ent.Comp.PendingRemovals.Clear();
+        ent.Comp.LastUiError = null;
     }
 
     private void OnHardpointRemoveMessage(Entity<RMCHardpointSlotsComponent> ent, ref RMCHardpointRemoveMessage args)
@@ -672,7 +677,14 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         if (args.Cancelled || args.Handled)
         {
+            if (args.Cancelled)
+            {
+                ent.Comp.LastUiError = "Hardpoint removal cancelled.";
+                SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
+            }
+
             UpdateHardpointUi(ent.Owner, ent.Comp);
+            UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
@@ -680,23 +692,42 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
         {
+            ent.Comp.LastUiError = "Unable to access hardpoint slots.";
+            SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
             UpdateHardpointUi(ent.Owner, ent.Comp);
+            UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
         if (!TryGetSlot(ent.Comp, args.SlotId, out _))
         {
+            ent.Comp.LastUiError = "That hardpoint slot is no longer available.";
+            SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
             UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
         if (!_itemSlots.TryGetSlot(ent.Owner, args.SlotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
         {
+            ent.Comp.LastUiError = "No hardpoint is installed in that slot.";
+            SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
             UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            UpdateContainingVehicleUi(ent.Owner);
             return;
         }
 
-        _itemSlots.TryEjectToHands(ent.Owner, itemSlot, args.User, true);
+        if (!_itemSlots.TryEjectToHands(ent.Owner, itemSlot, args.User, true))
+        {
+            ent.Comp.LastUiError = "Couldn't remove the hardpoint. Free a hand and try again.";
+            SetContainingVehicleUiError(ent.Owner, ent.Comp.LastUiError);
+            UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
+            UpdateContainingVehicleUi(ent.Owner);
+            return;
+        }
+
+        ent.Comp.LastUiError = null;
+        SetContainingVehicleUiError(ent.Owner, null);
         UpdateHardpointUi(ent.Owner, ent.Comp, itemSlots);
         UpdateContainingVehicleUi(ent.Owner);
         RefreshCanRun(ent.Owner);
@@ -969,53 +1000,89 @@ public sealed class RMCHardpointSystem : EntitySystem
         return container.Owner;
     }
 
-    private void TryStartHardpointRemoval(EntityUid uid, RMCHardpointSlotsComponent component, EntityUid user, string? slotId)
+    private void TryStartHardpointRemoval(
+        EntityUid uid,
+        RMCHardpointSlotsComponent component,
+        EntityUid user,
+        string? slotId,
+        EntityUid? uiOwnerUid = null,
+        RMCHardpointSlotsComponent? uiOwnerComp = null)
     {
+        var rootCall = uiOwnerUid == null || uiOwnerComp == null;
+        uiOwnerUid ??= uid;
+        uiOwnerComp ??= component;
+
+        void RefreshUi(ItemSlotsComponent? currentItemSlots = null)
+        {
+            UpdateHardpointUi(uid, component, currentItemSlots);
+
+            if (uiOwnerUid.Value != uid || !ReferenceEquals(uiOwnerComp, component))
+                UpdateHardpointUi(uiOwnerUid.Value, uiOwnerComp);
+        }
+
+        void SetError(string error)
+        {
+            uiOwnerComp.LastUiError = error;
+        }
+
+        if (rootCall)
+            uiOwnerComp.LastUiError = null;
+
         if (string.IsNullOrWhiteSpace(slotId))
+        {
+            SetError("Invalid hardpoint slot.");
+            RefreshUi();
             return;
+        }
 
         if (RMCVehicleTurretSlotIds.TryParse(slotId, out var parentSlotId, out var childSlotId))
         {
             if (!TryComp(uid, out ItemSlotsComponent? parentItemSlots) ||
                 !TryGetSlot(component, parentSlotId, out _))
             {
-                UpdateHardpointUi(uid, component, parentItemSlots);
+                SetError("Unable to find that turret slot.");
+                RefreshUi(parentItemSlots);
                 return;
             }
 
             if (!_itemSlots.TryGetSlot(uid, parentSlotId, out var parentSlot, parentItemSlots) || !parentSlot.HasItem)
             {
-                UpdateHardpointUi(uid, component, parentItemSlots);
+                SetError("Install a turret before removing turret hardpoints.");
+                RefreshUi(parentItemSlots);
                 return;
             }
 
             var turretUid = parentSlot.Item!.Value;
             if (!TryComp(turretUid, out RMCHardpointSlotsComponent? parentTurretSlots))
             {
-                UpdateHardpointUi(uid, component, parentItemSlots);
+                SetError("Turret hardpoint slots are unavailable.");
+                RefreshUi(parentItemSlots);
                 return;
             }
 
-            TryStartHardpointRemoval(turretUid, parentTurretSlots, user, childSlotId);
-            UpdateHardpointUi(uid, component, parentItemSlots);
+            TryStartHardpointRemoval(turretUid, parentTurretSlots, user, childSlotId, uiOwnerUid, uiOwnerComp);
+            RefreshUi(parentItemSlots);
             return;
         }
 
         if (!TryComp(uid, out ItemSlotsComponent? itemSlots))
         {
-            UpdateHardpointUi(uid, component);
+            SetError("Unable to access hardpoint slots.");
+            RefreshUi();
             return;
         }
 
         if (!TryGetSlot(component, slotId, out var slot))
         {
-            UpdateHardpointUi(uid, component, itemSlots);
+            SetError("That hardpoint slot does not exist.");
+            RefreshUi(itemSlots);
             return;
         }
 
         if (!_itemSlots.TryGetSlot(uid, slotId, out var itemSlot, itemSlots) || !itemSlot.HasItem)
         {
-            UpdateHardpointUi(uid, component, itemSlots);
+            SetError("No hardpoint is installed in that slot.");
+            RefreshUi(itemSlots);
             return;
         }
 
@@ -1023,33 +1090,46 @@ public sealed class RMCHardpointSystem : EntitySystem
             TryComp(itemSlot.Item!.Value, out ItemSlotsComponent? attachedItemSlots) &&
             HasAttachedHardpoints(itemSlot.Item!.Value, attachedSlots, attachedItemSlots))
         {
-            _popup.PopupEntity("Remove the turret attachments before removing the turret.", uid, user);
-            UpdateHardpointUi(uid, component, itemSlots);
+            const string error = "Remove the turret attachments before removing the turret.";
+            _popup.PopupEntity(error, uid, user);
+            SetError(error);
+            RefreshUi(itemSlots);
             return;
         }
 
         if (HasComp<RMCHardpointNoRemoveComponent>(itemSlot.Item!.Value))
         {
-            _popup.PopupEntity(Loc.GetString("rmc-hardpoint-remove-blocked"), uid, user);
-            UpdateHardpointUi(uid, component, itemSlots);
+            var error = Loc.GetString("rmc-hardpoint-remove-blocked");
+            _popup.PopupEntity(error, uid, user);
+            SetError(error);
+            RefreshUi(itemSlots);
             return;
         }
 
         if (component.PendingInserts.Contains(slotId) || component.CompletingInserts.Contains(slotId))
         {
-            _popup.PopupEntity("Finish installing that hardpoint before removing it.", user, user);
+            const string error = "Finish installing that hardpoint before removing it.";
+            _popup.PopupEntity(error, user, user);
+            SetError(error);
+            RefreshUi(itemSlots);
             return;
         }
 
         if (!TryGetPryingTool(user, out var tool))
         {
-            _popup.PopupEntity("You need a prying tool to remove this hardpoint.", user, user);
-            UpdateHardpointUi(uid, component, itemSlots);
+            const string error = "You need a prying tool to remove this hardpoint.";
+            _popup.PopupEntity(error, user, user);
+            SetError(error);
+            RefreshUi(itemSlots);
             return;
         }
 
         if (!component.PendingRemovals.Add(slotId))
+        {
+            SetError("That hardpoint is already being removed.");
+            RefreshUi(itemSlots);
             return;
+        }
 
         var delay = slot.RemoveDelay > 0f ? slot.RemoveDelay : slot.InsertDelay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, new RMCHardpointRemoveDoAfterEvent(slotId), uid, uid, tool)
@@ -1065,9 +1145,15 @@ public sealed class RMCHardpointSystem : EntitySystem
         };
 
         if (!_doAfter.TryStartDoAfter(doAfter))
+        {
             component.PendingRemovals.Remove(slotId);
+            SetError("Couldn't start hardpoint removal.");
+            RefreshUi(itemSlots);
+            return;
+        }
 
-        UpdateHardpointUi(uid, component, itemSlots);
+        uiOwnerComp.LastUiError = null;
+        RefreshUi(itemSlots);
     }
 
     private bool TryInsertTurretAttachment(Entity<RMCHardpointSlotsComponent> ent, EntityUid user, EntityUid used)
@@ -1265,7 +1351,14 @@ public sealed class RMCHardpointSystem : EntitySystem
             }
         }
 
-        _ui.SetUiState(uid, RMCHardpointUiKey.Key, new RMCHardpointBoundUserInterfaceState(entries, frameIntegrity, frameMaxIntegrity, hasFrameIntegrity));
+        _ui.SetUiState(uid,
+            RMCHardpointUiKey.Key,
+            new RMCHardpointBoundUserInterfaceState(
+                entries,
+                frameIntegrity,
+                frameMaxIntegrity,
+                hasFrameIntegrity,
+                component.LastUiError));
     }
 
     private bool HasAttachedHardpoints(EntityUid owner, RMCHardpointSlotsComponent slots, ItemSlotsComponent itemSlots)
@@ -1336,6 +1429,17 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         UpdateHardpointUi(vehicle);
+    }
+
+    private void SetContainingVehicleUiError(EntityUid owner, string? error)
+    {
+        if (!TryGetContainingVehicleFrame(owner, out var vehicle))
+            return;
+
+        if (!TryComp(vehicle, out RMCHardpointSlotsComponent? slots))
+            return;
+
+        slots.LastUiError = error;
     }
 
     private bool TryGetContainingVehicleFrame(EntityUid owner, out EntityUid vehicle)

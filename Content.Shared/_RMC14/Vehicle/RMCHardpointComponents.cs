@@ -45,6 +45,9 @@ public sealed partial class RMCHardpointSlotsComponent : Component
 
     [NonSerialized]
     public HashSet<EntityUid> PendingInsertUsers = new();
+
+    [NonSerialized]
+    public string? LastUiError;
 }
 
 [Serializable, NetSerializable, DataDefinition]

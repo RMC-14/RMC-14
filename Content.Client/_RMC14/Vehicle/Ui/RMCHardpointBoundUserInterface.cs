@@ -54,6 +54,7 @@ public sealed class RMCHardpointBoundUserInterface : BoundUserInterface
             hardpointState.Hardpoints,
             hardpointState.FrameIntegrity,
             hardpointState.FrameMaxIntegrity,
-            hardpointState.HasFrameIntegrity);
+            hardpointState.HasFrameIntegrity,
+            hardpointState.Error);
     }
 }
