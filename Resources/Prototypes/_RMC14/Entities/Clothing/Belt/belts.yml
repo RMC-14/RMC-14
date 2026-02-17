@@ -588,9 +588,9 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMMagazinePistolM1984
+    - id: CMMagazinePistolM1911
       amount: 2
-    - id: CMWeaponPistolM1984
+    - id: CMWeaponPistolM1911
 
 - type: entity
   parent: RMCBeltSmartGunOperatorPistol
@@ -814,6 +814,7 @@
         whitelist:
           tags:
           - CMWeaponPistolM1984
+          - CMWeaponPistolM1911
       mk80_fill:
         whitelist:
           tags:
@@ -1385,6 +1386,17 @@
     - id: CMMagazinePistolM1984
       amount: 6
     - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1911BeltFilledForecon
+  suffix: Filled, Forecon
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1911
+      amount: 2
+    - id: CMWeaponPistolM1911
 
 - type: entity
   parent: RMCBeltHolsterRevolver
@@ -2012,7 +2024,7 @@
       components:
       - Gun
 
-- type: entity 
+- type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilled
   suffix: PVE, RCM, Filled

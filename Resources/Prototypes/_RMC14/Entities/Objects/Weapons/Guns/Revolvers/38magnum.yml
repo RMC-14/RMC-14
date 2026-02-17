@@ -11,6 +11,8 @@
     - RMCWeaponRevolver38Magnum
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnum38.rsi
+  - type: GunDamageModifier
+    multiplier: 2
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/magnum38.rsi
   - type: RevolverAmmoProvider

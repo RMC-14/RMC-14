@@ -136,7 +136,7 @@
     - [ RMCWeaponPistolB92FS, RMCMagazinePistolB92FS ]
     - [ RMCWeaponRevolverSpearhead, RMCSpeedLoader357Hollowpoint ]
     - [ RMCWeaponPistolMK45, RMCMagazinePistolMK45 ]
-    - [ CMWeaponPistolM1984, CMMagazinePistolM1984 ]
+    - [ CMWeaponPistolM1911, CMMagazinePistolM1911 ]
     - [ RMCWeaponRevolver38Magnum, RMCSpeedLoader38 ]
     primaryWeapons:
     - [ CMBeltMarineHunting, RMCWeaponBoltActionRifle ]

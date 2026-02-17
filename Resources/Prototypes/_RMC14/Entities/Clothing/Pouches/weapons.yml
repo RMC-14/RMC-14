@@ -110,6 +110,7 @@
         whitelist:
           tags:
           - CMWeaponPistolM1984
+          - CMWeaponPistolM1911
       mk80_fill:
         whitelist:
           tags:
