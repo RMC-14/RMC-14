@@ -30,6 +30,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
     private readonly Vector2 _offsetLimit = new(OverwatchWatchingComponent.offsetAmount, OverwatchWatchingComponent.offsetAmount);
     private EntityUid? _overwatchActor = null;
     private OverwatchDirection? _pendingOffsetDirection = null;
+    private ContentEyeComponent? _eyeComp = null;
     private float offsetAmount = OverwatchWatchingComponent.offsetAmount;
     private float zoomAmount = OverwatchWatchingComponent.zoomAmount;
     private string? _previousContext;
@@ -190,7 +191,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             return;
         }
 
-        _overwatchActor = player;
+        if (_overwatchActor != player)
+        {
+            _overwatchActor = player;
+            TryComp(player, out _eyeComp);
+        }
         _toRelay.Clear();
 
         var eyePosition = _eye.CurrentEye.Position;
@@ -237,23 +242,25 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             audio.Comp2.Relay = relayedAudioEnt;
         }
 
-        if (_overwatchActor != null)
+        if (_overwatchActor is { } actor)
         {
-            var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
+            var comp = EnsureComp<EyeCursorOffsetComponent>(actor);
             // Disable mouse offset logic to stop the eye from panning towards the mouse
             comp.DisableMouseOffset = true;
             comp.TargetPosition = _overwatchTargetOffset ?? Vector2.Zero;
             comp.CurrentPosition = comp.TargetPosition;
-            Dirty(_overwatchActor.Value, comp);
+            Dirty(actor, comp);
+
+            // Only override the watcher's zoom amount if offset is active
             var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
-            // Set zoom back to default if there's no active offset
-            float zoom = (comp.CurrentPosition != Vector2.Zero) ? zoomAmount : 1.0f;
-            if (_player.LocalEntity != null && TryComp(_player.LocalEntity.Value, out ContentEyeComponent? eyeComp))
-                eyeSystem.SetZoom(_player.LocalEntity.Value, new Vector2(zoom, zoom), ignoreLimits: true, eye: eyeComp);
+            var targetZoom = _eyeComp?.TargetZoom ?? SharedContentEyeSystem.DefaultZoom;
+
+            var zoom = (comp.CurrentPosition != Vector2.Zero) ? new Vector2(zoomAmount, zoomAmount) : targetZoom;
+            eyeSystem.SetZoom(actor, zoom, ignoreLimits: true, eye: _eyeComp);
 
             if (_pendingOffsetDirection != null && comp.CurrentPosition == Vector2.Zero)
             {
-                var netEntity = EntityManager.GetNetEntity(_overwatchActor.Value);
+                var netEntity = EntityManager.GetNetEntity(actor);
                 OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, _pendingOffsetDirection.Value));
                 _pendingOffsetDirection = null;
             }
@@ -283,6 +290,14 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             comp.TargetPosition = Vector2.Zero;
             Dirty(_overwatchActor.Value, comp);
             var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+            if (_overwatchActor is { } actor)
+            {
+                if (_eyeComp == null)
+                    TryComp(actor, out _eyeComp);
+
+                var zoom = _eyeComp?.TargetZoom ?? SharedContentEyeSystem.DefaultZoom;
+                eyeSystem.SetZoom(actor, zoom, ignoreLimits: true, eye: _eyeComp);
+            }
             return;
         }
         _overwatchTargetOffset = offsetDelta;
@@ -318,6 +333,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         {
             _overwatchTargetOffset = null;
             _overwatchActor = null;
+            _eyeComp = null;
             return;
         }
 
@@ -329,5 +345,6 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
         _overwatchTargetOffset = null;
         _overwatchActor = null;
+        _eyeComp = null;
     }
 }
