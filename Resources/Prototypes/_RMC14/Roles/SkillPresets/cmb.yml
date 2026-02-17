@@ -1,0 +1,75 @@
+
+# Survivor Skills
+
+# CMB specialist
+- type: entity
+  id: RMCSkillPresetCMBSpecialist
+  name: CMB Specialist
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 1
+      RMCSkillCqc: 2
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillMedical: 1
+      RMCSkillSmartGun: 1
+
+# CMB technician
+- type: entity
+  id: RMCSkillPresetCMBTechnician
+  name: CMB Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillCqc: 2
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 2
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 2
+      RMCSkillMedical: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillSurgery: 1
+      RMCSkillVehicles: 1
+
+# ICB supervisor
+- type: entity
+  id: RMCSkillPresetICBSupervisor
+  name: ICB Supervisor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillConstruction: 2
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillEndurance: 2
+      RMCSkillEngineer: 1
+      RMCSkillExecution: 1
+      RMCSkillLeadership: 3
+      RMCSkillMedical: 2
+      RMCSkillNavigations: 1
+      RMCSkillPolice: 2
+      RMCSkillPowerLoader: 1
+      RMCSkillVehicles: 1
+
+# ICB commissioner
+- type: entity
+  id: RMCSkillPresetICBCommissioner
+  name: ICB Commissioner
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFirearms: 1
+      RMCSkillFireman: 1
+      RMCSkillEndurance: 2
+      RMCSkillLeadership: 2
+      RMCSkillMedical: 1
+      RMCSkillOverwatch: 1

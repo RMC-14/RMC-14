@@ -167,6 +167,46 @@ cm-job-name-survivor-un-peacekeeper = ILRC Peacekeeper
 
 cm-job-name-survivor-new-varadero-researcher = New Varadero Researcher
 
+rmc-job-greeting-new-varadero-cmb-specialist = You are a CMB Specialist!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive.
+
+  You are a Field Specialist employed by the Colonial Marshals Bureau. You were flown in to assist with a raid on a local facility inside the colony. On the day you planned to execute the raid, you heard screams and gunfire coming from outside your safehouse. Fearing a potential attack which could expose your activities, you decided to send a distress call, hunker down and lay low. You watched through your camera systems as the colony was slowly overrun by huge alien creatures, even losing a few who were unfortunate enough to stumble out of your hideout at the wrong time. Days went by, and as ammunition is starting to run low due to relentless xenonid attacks, you all finally decide to wander out in search of salvation. You're sure you'll need to find more supplies in order to survive long enough to be rescued.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-new-varadero-cmb-technician = You are a CMB Technician!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive.
+
+  You are a Field Technician employed by the Colonial Marshals Bureau. You were flown in to assist with a raid on a local facility inside the colony. On the day you planned to execute the raid, you heard screams and gunfire coming from outside your safehouse. Fearing a potential attack which could expose your activities, you decided to send a distress call, hunker down and lay low. You watched through your camera systems as the colony was slowly overrun by huge alien creatures, even losing a few who were unfortunate enough to stumble out of your hideout at the wrong time. Days went by, and as ammunition is starting to run low due to relentless xenonid attacks, you all finally decide to wander out in search of salvation. You're sure you'll need to find more supplies in order to survive long enough to be rescued.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-new-varadero-icb-supervisor = You are an ICB Supervisor!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive.
+
+  You are a Supervisor working for the Interstellar Commerce Bureau. You were assigned with the task of overseeing a large-scale surveillance operation to monitor suspicious activity concerning a local research lab from a surveillance center stationed inside the nearby cave system. On the day your superiors planned to execute a raid on the lab in order to uncover a piece of damming evidence, you heard screams and gunfire coming from outside your safehouse. Fearing a potential attack which could expose your activities, you made the call to send a distress call, hunker down and lay low. You watched through your camera systems as the colony was slowly overrun by huge alien creatures, even losing a few who were unfortunate enough to stumble out of your hideout at the wrong time. Days went by, and as ammunition is starting to run low due to relentless xenonid attacks, you all finally decide to wander out in search of salvation. You're sure you'll need to find more supplies in order to survive long enough to be rescued.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-new-varadero-icb-commissioner = You are an ICB Commissioner!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive.
+
+  You are a Commissioner working for the Interstellar Commerce Bureau. You were assigned with the task of organizing a large-scale surveillance operation to monitor suspicious activity concerning a local research lab from a surveillance center stationed inside the nearby cave system. On the day your superiors planned to execute a raid on the lab in order to uncover a piece of damming evidence, you heard screams and gunfire coming from outside your safehouse. Fearing a potential attack which could expose your activities, you made the call to send a distress call, hunker down and lay low. You watched through your camera systems as the colony was slowly overrun by huge alien creatures, even losing a few who were unfortunate enough to stumble out of your hideout at the wrong time. Days went by, and as ammunition is starting to run low due to relentless xenonid attacks, you all finally decide to wander out in search of salvation. You're sure you'll need to find more supplies in order to survive long enough to be rescued.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
 # Hybrisa Prospera Survs
 
 rmc-job-name-survivor-hybrisa-civilian = Civilian

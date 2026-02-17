@@ -395,6 +395,21 @@
       "name": "pve_inspector"
     },
     {
+       "name": "background_icb"
+    },
+    {
+       "name": "icb_supervisor"
+    },
+    {
+       "name": "icb_commissioner"
+    },
+    {
+       "name": "cmb_technician"
+    },
+    {
+       "name": "cmb_specialist"
+    },
+    {
       "name": "pve_advisor"
     },
     {

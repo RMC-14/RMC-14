@@ -317,3 +317,8 @@
   license: "CC0-1.0"
   copyright: "Created by pgi (freesound), modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/pgi/sounds/257962/"
+
+- files: ["mateba_2006m.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/Blundir/cmss13/blob/6ace80f348505c85d18ec67d06017436200b13ad/sound/weapons/gun_mateba_2006m.ogg"

@@ -46,6 +46,30 @@
   prefix: Agent
 
 - type: rank
+  id: RMCRankCMBSpecialist
+  name: CMB Specialist
+  prefix: Spec.
+  paygrade: CMB-SPC
+
+- type: rank
+  id: RMCRankICBSupervisor
+  name: Interstellar Commerce Bureau Supervisor
+  prefix: Spvsr.
+  paygrade: ICB-SPR
+
+- type: rank
+  id: RMCRankICBCommissioner
+  name: Interstellar Commerce Bureau Commissioner
+  prefix: Com.
+  paygrade: ICB-COM
+
+- type: rank
+  id: RMCRankCMBTechnician
+  name: CMB Technician
+  prefix: Tech.
+  paygrade: CMB-T
+
+- type: rank
   id: RMCRankICBCorporateLiaison
   name: Interstellar Commerce Bureau Corporate Liaison
   prefix: ICB Rep.

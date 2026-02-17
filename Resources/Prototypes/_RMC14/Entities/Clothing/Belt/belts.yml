@@ -1289,6 +1289,40 @@
     sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
 
 - type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltLuxurious2006M
+  name: luxurious M276 pattern 2006M holster rig
+  description: The M276 is the standard load-bearing equipment of the UNMC. It consists of a modular belt with various clips. This version is for the powerful 2006M autorevolver, along with five small pouches for speedloaders. This specific one is tinted black and engraved with gold, heavily customized for a high-ranking official.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/mateba2006m_belt.rsi
+    layers:
+    - state: mateba_2006m
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - state: icon
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/amateba_belt.rsi
+
+- type: entity
+  parent: RMCMatebaBeltLuxurious2006M
+  id: RMCMatebaBeltLuxurious2006MFilled
+  suffix: Filled, ICB Supervisor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 3
+    - id: RMCWeaponRevolverMateba2006M
+
+- type: entity
   parent: RMCMatebaBeltLuxurious
   id: RMCMatebaBeltLuxuriousFilled
   suffix: Filled

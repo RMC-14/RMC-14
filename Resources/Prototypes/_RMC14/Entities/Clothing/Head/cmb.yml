@@ -17,3 +17,23 @@
     explosionArmor: 25
     # armor_energy = 30
   - type: RMCEarProtection
+
+- type: entity # RMC14 - reskinned M11R for ICB surv insert
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10ICB
+  name: M11RI pattern ICB helmet
+  description: A redesignated identical copy of the M11R helmet, issued very rarely to ICB personnel who are expected to deploy into combat zones. ICB markings have been sewn into the front.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
+
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisor
+  suffix: Visor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT

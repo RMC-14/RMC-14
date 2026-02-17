@@ -197,6 +197,18 @@
             "name": "hudsquad_pve"
         },
         {
+            "name": "hudsquad_cmbs"
+        },
+        {
+            "name": "hudsquad_icbc"
+        },
+        {
+            "name": "hudsquad_icbs"
+        },
+        {
+            "name": "hudsquad_cmbt"
+        },
+        {
             "name": "hudsquad_pva"
         },
         {

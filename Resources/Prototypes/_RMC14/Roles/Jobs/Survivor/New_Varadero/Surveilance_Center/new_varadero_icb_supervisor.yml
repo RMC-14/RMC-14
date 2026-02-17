@@ -1,0 +1,97 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorNewVaraderoICBSupervisor
+  name: rmc-job-name-corp-icb-supervisor
+  ranks:
+    RMCRankICBSupervisor: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearSurvivorICBSupervisor
+  icon: "RMCJobIconICBSupervisor"
+  hasIcon: true
+  greeting: rmc-job-greeting-new-varadero-icb-supervisor
+  playTimeTracker: RMCJobSurvivorCO
+  spawnMenuRoleName: Interstellar Commerce Bureau Supervisor (New Varadero special commander)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: Skills
+      preset: RMCSkillPresetICBSupervisor
+    - type: RMCSurvivor
+    - type: RMCPointing
+    - type: MarineOrders
+    - type: InnateCommandSpeech
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetICBSupervisor
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-icb-supervisor
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: icb_supervisor
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_icb
+
+- type: startingGear
+  id: RMCGearSurvivorICBSupervisor
+  equipment:
+    head: RMCArmorHelmetPMCBlack
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: RMCMarshalCMBUniform
+    outerClothing: RMCCoatBureauTrenchCoatGrey
+    gloves: CMHandsBlackInsulated
+    shoes: RMCShoesJackboots
+    id: CMIDCardLiaisonColony
+    belt: RMCMatebaBeltLuxurious2006MFilled
+    back: RMCSatchelBlackFillSurvivorICB
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCSpeedLoaderMateba
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetICBSupervisor
+  name: interstellar commerce bureau supervisor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon: [ ]
+    primaryWeapons: [ ]
+    randomOutfits:
+    - [ ]
+    - [ RMCSunglassesBig ]
+
+- type: entity
+  parent: RMCMatebaBelt
+  id: RMCMatebaBeltICBSupervisorFilled
+  suffix: Filled, ICB Supervisor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderMateba
+      amount: 2
+    - id: RMCWeaponRevolverMatebaSpecial
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorICBSupervisor
+  name: survivor interstellar commerce bureau supervisor spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoICBSupervisor
+  - type: Sprite
+    state: co_spawn
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconICBSupervisor
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_icbs

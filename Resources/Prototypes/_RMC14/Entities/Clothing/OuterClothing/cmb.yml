@@ -33,6 +33,33 @@
   - type: ItemCamouflage
     camouflageVariations: { }
 
+- type: entity # RMC14 - reskinned armor vest for ICB surv insert with armor equip doafter
+  parent: RMCArmorM4RLight
+  id: RMCArmorM4RI
+  name: M4RI pattern ICB personal body armor
+  description: A custom modification of the M4R light armor set, issued only to ICB personnel who are expected to deploy into combat zones. The infamous metal insignia has been replaced with denim ICB patches, and some of the armor plating was stripped off in favor of mobility.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/CMB/icb_armor.rsi
+  - type: CMArmor
+    melee: 15
+    bullet: 20
+    bio: 20
+    explosionArmor: 10
+  - type: RMCArmorSpeedTier
+    speedTier: light
+
+- type: entity # RMC14 - reskinned SG harness for ICB surv insert
+  parent: CMArmorSmartGunCombatHarness
+  id: CMArmorSmartGunCombatHarnessCMB
+  name: ML66A-HMU combat harness
+  description: A heavy protective vest designed to be worn with the ML66A Smart Gun System. The HMU (High Mobility Upgrade) designation is a lighter design issued to CMB SWAT teams, featuring minor tweaks to its' ergonomics to accommodate close quarters combat. This one has a Bureau patch emblazoned on its' front plate.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/ml66a_hmu.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 - type: entity
   parent: [RMCBaseCMBArmor, RMCBaseMarineArmorLight]
   id: RMCArmorM4RMedium

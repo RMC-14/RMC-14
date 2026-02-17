@@ -1,0 +1,113 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorNewVaraderoCMBTechnician
+  name: rmc-job-name-corp-cmb-technician
+  ranks:
+    RMCRankCMBTechnician: []
+  accessGroups:
+  - ColonistEngi
+  startingGear: RMCGearSurvivorCMBTechnician
+  icon: "RMCJobIconCMBTechnician"
+  hasIcon: true
+  greeting: rmc-job-greeting-new-varadero-cmb-technician
+  playTimeTracker: CMJobSurvivorEngineer
+  spawnMenuRoleName: CMB Technician (New Varadero special survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: Skills
+      preset: RMCSkillPresetCMBTechnician
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCGearSurvivorPresetCMBTechnician
+    - type: JobPrefix
+      prefix: rmc-job-prefix-corp-cmb-technician
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: cmb_technician
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+
+- type: startingGear
+  id: RMCGearSurvivorCMBTechnician
+  equipment:
+    ears: RMCHeadsetDistressBureauDamaged
+    jumpsuit: RMCSwatICBUniform
+    outerClothing: RMCArmorM4RI
+    gloves: CMHandsBlackInsulated
+    shoes: RMCShoesJackboots
+    belt: CMBeltUtilityFilled
+    id: RMCIDCardCMBDeputySurvivor
+    back: RMCSatchelLightpack5Slot
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchMagazinePistolFilledCMBTechnician
+  storage:
+    back:
+    - CMSheetPlasteel20
+    - CMSheetMetal20
+    - CMDefibrillator
+    - CMHealthAnalyzer
+
+- type: entity
+  parent: RMCSurvivorPresetSecurity
+  id: RMCGearSurvivorPresetCMBTechnician
+  name: cmb technician preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomWeapon:
+    - [ ]
+    primaryWeapons:
+    - [ RMCBeltHolsterPistolHandcannonFilledCMBTechnician ]
+    primaryWeaponChance: 1
+    randomOutfits:
+    - [ RMCBoonieTan, RMCMaskNeckerchiefTan ]
+    - [ RMCHeadBeanieTan, RMCMaskNeckerchiefTan ]
+    - [ RMCHeadCapBureau, RMCMaskNeckerchiefBlack ]
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolHandcannonFilledCMBTechnician
+  suffix: Filled, Partial, Handcannon, CMB Technician
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 4
+    - id: RMCWeaponPistolHandcannonTactical
+
+- type: entity
+  parent: RMCPouchMagazinePistol
+  id: RMCPouchMagazinePistolFilledCMBTechnician
+  suffix: Filled, CMB Technician
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolHandcannon
+      amount: 4
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCMBTechnician
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_cmbt
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorCMBTechnician
+  name: survivor cmb technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorNewVaraderoCMBTechnician
+  - type: Sprite
+    state: engi_spawn
