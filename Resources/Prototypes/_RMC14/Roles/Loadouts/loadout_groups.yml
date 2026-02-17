@@ -734,6 +734,8 @@
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
+  - HeadCowboyHatDarkRMC
+  - HeadCowboyHatLightRMC
   - HeadBandRebelRMC
   # BiMex tactical shades TODO
   - ShoesBlackRMC
