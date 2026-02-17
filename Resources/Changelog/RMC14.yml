@@ -1,20 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Fixed the requisitions uniform vendor missing some uniforms, boots, backpacks,
-      goggles, and helmet accessories, and the requisitions attachment vendor missing
-      flashlight grips.
-    type: Fix
-  - message: Changed the order of items in the requisitions armament and uniform vendors,
-      with new categories.
-    type: Tweak
-  - message: Fixed the requisitions vendor descriptions to now mention the LO.
-    type: Fix
-  id: 2450
-  time: '2025-10-19T06:24:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8153
-- author: CatAndHats
-  changes:
   - message: The Engi Supply Kit is now shown as recommended in the SL vendor.
     type: Tweak
   id: 2451
@@ -4579,5 +4565,12 @@
   id: 2951
   time: '2026-02-17T10:25:44.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8139
+- author: Gosera
+  changes:
+  - message: Pizzas are now a consistant size and will fit pizza boxes
+    type: Tweak
+  id: 2952
+  time: '2026-02-17T11:37:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8575
 Name: RMC14
 Order: -1
