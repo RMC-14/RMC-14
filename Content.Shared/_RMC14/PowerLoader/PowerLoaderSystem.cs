@@ -509,6 +509,17 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         args.Handled = true;
 
+        if (!_interaction.InRangeUnobstructed(args.User, target))
+        {
+            var msg = Loc.GetString("rmc-power-loader-too-far");
+            foreach (var buckled in GetBuckled(args.User))
+            {
+                _popup.PopupClient(msg, args.User, buckled, PopupType.SmallCaution);
+            }
+
+            return;
+        }
+
         var user = new Entity<PowerLoaderComponent?>(args.User, null);
         var used = args.Used;
         var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());

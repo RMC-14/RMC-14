@@ -160,8 +160,6 @@
     whitelist:
       tags:
       - RMCDropshipEnginePoint
-      components:
-      - OrbitalCannonTray
     range: 2
   - type: SpawnOnTerminate
     spawn: RMCMechPowerLoaderWreckage
