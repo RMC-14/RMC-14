@@ -9,7 +9,7 @@
     - Sidearm
     - CMWeaponPistolM1911
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.15 # this CANNOT be right i can barely hit anything
+    accuracyMultiplier: 1.15
   - type: RMCSelectiveFire
     scatterWielded: 10
     scatterUnwielded: 10
