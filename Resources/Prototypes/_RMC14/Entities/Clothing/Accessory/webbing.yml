@@ -1069,3 +1069,13 @@
       - id: CMSurgicalLine
       - id: CMSynthGraft
 
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingSPPCommandFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineRifleType71AP
+    - id: RMCMagazineRifleType71AP
+    - id: RMCMagazineRifleType71AP
