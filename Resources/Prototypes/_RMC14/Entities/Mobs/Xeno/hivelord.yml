@@ -92,11 +92,16 @@
     prefix: hivelord
   - type: FixedIdentity
     name: cm-job-name-xeno-hivelord
+  - type: IntelRecoverCorpseObjectiveOnDeath
+    value: 0.2
+  - type: RMCSurgeryXenoHeart
+    item: RMCOrganXenoHeartT2
 
 - type: entity
   parent: CMXenoHivelordBase
   id: CMXenoHivelord
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleHivelord
@@ -126,11 +131,13 @@
     - DoorXenoResinThick
     - XenoStickyResin
     - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
     canUpgrade: true
   - type: XenoPlasma
     plasma: 1000
@@ -141,10 +148,7 @@
   - type: XenoEvolution
     strains:
     - CMXenoHivelordResinWhisperer
-  - type: IntelRecoverCorpseObjectiveOnDeath
-    value: 0.2
-  - type: RMCSurgeryXenoHeart
-    item: RMCOrganXenoHeartT2
+    - CMXenoHivelordDesigner
   - type: RMCActionOrder
     id: CMXenoHivelord
 
@@ -153,6 +157,7 @@
   id: CMXenoHivelordResinWhisperer
   suffix: Resin Whisperer
   components:
+  - type: CanBuildThickFromConstructNode
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Hivelord/resin_whisperer_hivelord.rsi
   - type: Xeno
@@ -184,6 +189,7 @@
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoPlasma
     plasma: 800
     maxPlasma: 800
@@ -199,3 +205,98 @@
   - type: XenoHidden
   - type: RMCActionOrder
     id: CMXenoHivelordResinWhisperer
+
+# Designer Strain for Hivelord
+- type: entity
+  parent: CMXenoHivelordBase
+  id: CMXenoHivelordDesigner
+  suffix: Designer
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
+  - type: Sprite
+    sprite: _RMC14/Mobs/Xenonids/Hivelord/designer_hivelord.rsi
+  - type: Xeno
+    role: CMXenoHivelord
+    actionIds:
+    - ActionXenoRest
+    - ActionXenoRegurgitate
+    - ActionXenoSecreteStructure
+    - ActionXenoDesignerSelectedDesign
+    - ActionXenoDesignerGreaterResinSurge
+    - ActionXenoWatch
+    - ActionXenoTailStab
+    - ActionXenoAcidNormal
+    - ActionXenoPheromones
+    - ActionXenoOrderConstruction
+    - ActionXenoPlantWeeds
+    - ActionXenoChooseStructure
+    - ActionXenoResinWalker
+    - ActionXenoDevolve
+    - ActionXenoZoom
+  - type: DesignerStrain
+    greaterResinSurgePlasmaCost: 250
+    greaterResinSurgeCooldown: 30
+    greaterResinSurgeRange: 7
+    greaterResinSurgeBuildTime: 1
+    greaterResinSurgeAnimationEffect: RMCEffectWallXenoResinThick
+    greaterResinSurgeWallPrototype: WallXenoResinThickSurge
+  - type: DesignerCrosshair
+    optimizedWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_optimized
+    optimizedDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_optimized
+    flexibleWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_flex
+    flexibleDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_flex
+    constructWallRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: wall_mark_construct
+    constructDoorRsi:
+      sprite: _RMC14/Structures/designer_nodes.rsi
+      state: door_mark_construct
+  - type: XenoConstruction
+    buildRange: 15
+    buildDelay: 0.25
+    canBuild:
+    - DesignNodeOptimizedWall
+    - DesignNodeFlexibleWall
+    - DesignNodeConstructWall
+    - DesignNodeRemoteDelete
+    - DesignNodeRemoteThickenResin
+    canOrderConstruction:
+    - HiveCoreXenoConstructionNode
+    - HiveEggMorpherXenoConstructionNode
+    - HiveClusterXenoConstructionNode
+    - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
+  - type: XenoPlasma
+    plasma: 700
+    maxPlasma: 700
+    plasmaRegenOnWeeds: 5.5
+    plasmaTransferDelay: 0.5
+  - type: XenoPheromones
+    pheromonesMultiplier: 3
+    pheroSuffix: strong
+  - type: Tackle
+    max: 4
+    chance: 0.45
+    stunMin: 5
+    stunMax: 6
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.15
+    baseSprintSpeed: 3.9
+  - type: XenoZoom
+  - type: XenoStrain
+    name: rmc-xeno-designer-name
+    description: rmc-xeno-designer-description
+    popup: rmc-xeno-designer-popup
+  - type: XenoHidden
+  - type: RMCActionOrder
+    id: CMXenoHivelordDesigner

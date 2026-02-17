@@ -35,7 +35,7 @@
           radius: 1.5
         hard: false
         layer:
-        - SmallMobLayer
+        - Opaque
         mask:
         - MobLayer
   - type: CollisionWake
@@ -66,6 +66,7 @@
   - type: Appearance
   - type: RMCMesonsNonviewable
   - type: XenoResinHole
+  - type: XenoFriendly
   - type: XenoAnnounceStructureDestruction
     messageID: rmc-xeno-construction-resin-hole-destroyed
     structureName: empty

@@ -41,6 +41,7 @@ using Content.Shared._RMC14.CameraShake;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Fax;
+using Content.Shared._RMC14.Humanoid;
 using Content.Shared._RMC14.Intel;
 using Content.Shared._RMC14.Item;
 using Content.Shared._RMC14.Light;
@@ -611,6 +612,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     _parasite.SpawnLarva((corpseMob, victimInfected), out var newXeno);
                     _parasite.SetBurstDelay((corpseMob, victimInfected), comp.XenoSurvivorCorpseBurstDelay);
 
+                    // Allow xenos to see their character that they bursted out of
+                    RemCompDeferred<HiddenAppearanceComponent>(corpseMob);
+
                     _xeno.MakeXeno(newXeno);
 
                     _adminLog.Add(LogType.RMCXenoSpawn, $"Player {player} with mob {ToPrettyString(newXeno):xeno} spawned as a xeno from their corpse {ToPrettyString(corpseMob):corpse}");
@@ -823,11 +827,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     foreach (var (job, players) in survivorCandidates)
                     {
                         var list = players[i];
+                        Log.Info($"Rolling survivor job {job} with priority {i} and players {string.Join(", ", list.Select(id => ev.Profiles.GetValueOrDefault(id)?.Name ?? id.ToString()))}");
                         var ignoreLimit = comp.IgnoreMaximumSurvivorJobs.Contains(job);
                         while (list.Count > 0 && (ignoreLimit || selectedSurvivors < totalSurvivors))
                         {
                             if (SpawnSurvivor(job, list, out var stop) is { } id)
                             {
+                                Log.Info($"Spawned survivor job {job} with name/id {ev.Profiles.GetValueOrDefault(id)?.Name ?? id.ToString()}, ignore limit: {ignoreLimit}");
                                 foreach (var (_, otherPlayersLists) in survivorCandidates)
                                 {
                                     foreach (var otherPlayers in otherPlayersLists)
@@ -841,7 +847,10 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                             }
 
                             if (stop)
+                            {
+                                Log.Info($"Stopped rolling survivor job {job}");
                                 break;
+                            }
                         }
                     }
                 }
@@ -925,7 +934,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
                         continue;
 
-                    var printout = new FaxPrintout(paperComponent.Content, entProto.Name, prototypeId: paper.Id, locked: true);
+                    var content = Loc.GetString(paperComponent.Content);
+                    var printout = new FaxPrintout(content, entProto.Name, prototypeId: paper.Id, locked: true);
                     _fax.Receive(faxId, printout, component: faxComp);
                 }
             }
@@ -1073,12 +1083,21 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
     {
         var hiveStructures = EntityQueryEnumerator<HiveConstructionLimitedComponent, TransformComponent>();
-        while (hiveStructures.MoveNext(out var hiveStructure, out _, out var transformComp))
+        while (hiveStructures.MoveNext(out var id, out _, out var xform))
         {
-            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(hiveStructure);
+            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(id);
 
-            if (transformComp.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(hiveStructure.ToCoordinates()))
-                _destruction.DestroyEntity(hiveStructure);
+            if (xform.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(id.ToCoordinates()))
+                _destruction.DestroyEntity(id);
+        }
+
+        var xenoLimitedStructures = EntityQueryEnumerator<XenoSecretionLimitedComponent, TransformComponent>();
+        while (xenoLimitedStructures.MoveNext(out var id, out _, out var xform))
+        {
+            EnsureComp<HiveConstructionSuppressAnnouncementsComponent>(id);
+
+            if (xform.ParentUid != ev.Dropship && _rmcPlanet.IsOnPlanet(id.ToCoordinates()))
+                _destruction.DestroyEntity(id);
         }
 
         var xenos = EntityQueryEnumerator<XenoComponent, MobStateComponent, TransformComponent>();

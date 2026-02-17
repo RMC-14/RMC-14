@@ -1,0 +1,222 @@
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPRT
+  name: Pratchett
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_pratchett.rsi
+    state: medical
+  - type: Area
+    buildSpecial: true
+    powerNet: ground
+    minimapColor: '#91BDCFE7'
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: true
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: false
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTHypersleep
+  name: Hypersleep Storage
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTGalley
+  name: Galley
+  components:
+  - type: Sprite
+    state: public
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTCanteen
+  name: Canteen
+  components:
+  - type: Sprite
+    state: public1
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTLounge
+  name: Common Lounge
+  components:
+  - type: Sprite
+    state: public
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTMedbay
+  name: Medical Bay
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTOffice
+  name: Troop Commander's Office
+  components:
+  - type: Sprite
+    state: medical
+
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTCargoBayUpper
+  name: Upper Deck Cargo Bay
+  components:
+  - type: Sprite
+    state: cargo
+
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTCargoBayLower
+  name: Lower Deck Auxiliary Cargo Transfer Station
+  components:
+  - type: Sprite
+    state: cargo
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTMaintenaceLower
+  name: Lower Deck Maintenance
+  components:
+  - type: Sprite
+    state: maints
+
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTMaintenanceUpper
+  name: Upper Deck Maintenance
+  components:
+  - type: Sprite
+    state: maints
+
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTEngineering
+  name: Engineering Bay
+  components:
+  - type: Sprite
+    state: engi
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTHangar
+  name: Hangar Bay
+  components:
+  - type: Sprite
+    state: hangar
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTHangarCargo
+  name: Hangar Storage
+  components:
+  - type: Sprite
+    state: cargo
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTHallways
+  name: Upper Deck Hallways
+  components:
+  - type: Sprite
+    state: public2
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTDisposalsLower
+  name: Processed Waste Primary Disposal Shaft
+  components:
+  - type: Sprite
+    state: public1
+
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTDisposalsUpper
+  name: Upper Deck Preliminary Waste Processing
+  components:
+  - type: Sprite
+    state: public
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTSurgicalBay
+  name: Surgical Bay
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTArmory
+  name: Armaments Storage
+  components:
+  - type: Sprite
+    state: public2
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTSynth
+  name: Synthetic Storage
+  components:
+  - type: Sprite
+    state: public
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTAICoreOuter
+  name: SHIVA Core Outer Chamber
+  components:
+  - type: Sprite
+    state: engi
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTAICoreInner
+  name: SHIVA Core Inner Chamber
+  components:
+  - type: Sprite
+    state: hangar
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTBunks
+  name: Bunkroom
+  components:
+  - type: Sprite
+    state: medical
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTBriefing
+  name: Briefing Room
+  components:
+  - type: Sprite
+    state: public2
+
+- type: entity
+  parent: RMCAreaPRT
+  id: RMCAreaPRTCraneTunnel
+  name: Cargo Transit Shaft
+  components:
+  - type: Sprite
+    state: maints

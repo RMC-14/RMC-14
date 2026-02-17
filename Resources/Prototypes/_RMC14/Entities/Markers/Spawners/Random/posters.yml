@@ -96,9 +96,9 @@
     - CMPosterMarineCorp6
     - CMPosterMarineCorp7
     - CMPosterFORECON
-    - CMPosterZSPA1
-    - CMPosterZSPA2
-    - CMPosterZSPA3
+    - RMCPosterTSEPA1
+    - RMCPosterTSEPA2
+    - RMCPosterTSEPA3
     - CMPosterSPP1
     - CMPosterSPP2
     - CMPosterSPP3
@@ -215,9 +215,9 @@
     - CMPosterMarineCorp6
     - CMPosterMarineCorp7
     - CMPosterFORECON
-    - CMPosterZSPA1
-    - CMPosterZSPA2
-    - CMPosterZSPA3
+    - RMCPosterTSEPA1
+    - RMCPosterTSEPA2
+    - RMCPosterTSEPA3
     chance: 0.95
     rarePrototypes:
     - PosterBroken

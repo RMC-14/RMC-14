@@ -26,6 +26,10 @@
       0: Alive
       550: Critical
       650: Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: Xeno
     role: CMXenoSpitter
     actionIds:

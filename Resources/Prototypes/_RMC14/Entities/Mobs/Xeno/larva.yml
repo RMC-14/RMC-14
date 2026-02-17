@@ -86,6 +86,7 @@
   - type: Tag
     tags:
     - RMCXenoLarva
+    - RMCSynthGrabbable
   - type: RMCBuckleOffset
     offset: 0, 0
   - type: XenoRankNames
