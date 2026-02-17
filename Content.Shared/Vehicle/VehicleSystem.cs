@@ -9,6 +9,7 @@ using Content.Shared.Vehicle.Components;
 using Content.Shared.Whitelist;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Vehicle;
 
@@ -20,6 +21,7 @@ public sealed partial class VehicleSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly SharedMoverController _mover = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {

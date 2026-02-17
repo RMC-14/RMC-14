@@ -31,7 +31,7 @@ public sealed partial class VehicleSystem
 
     private void OnContainerEntInserted(Entity<ContainerVehicleComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.ContainerId)
+        if (_timing.ApplyingState || args.Container.ID != ent.Comp.ContainerId)
             return;
 
         if (!TryComp<VehicleComponent>(ent, out var vehicle))
@@ -42,7 +42,7 @@ public sealed partial class VehicleSystem
 
     private void OnContainerEntRemoved(Entity<ContainerVehicleComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.ContainerId)
+        if (_timing.ApplyingState || args.Container.ID != ent.Comp.ContainerId)
             return;
 
         if (!TryComp<VehicleComponent>(ent, out var vehicle))

@@ -15,7 +15,7 @@ public sealed partial class VehicleSystem
 
     private void OnGenericKeyedInsertAttempt(Entity<GenericKeyedVehicleComponent> ent, ref ContainerIsInsertingAttemptEvent args)
     {
-        if (args.Cancelled || !ent.Comp.PreventInvalidInsertion || args.Container.ID != ent.Comp.ContainerId)
+        if (args.Cancelled || _timing.ApplyingState || !ent.Comp.PreventInvalidInsertion || args.Container.ID != ent.Comp.ContainerId)
             return;
 
         if (_entityWhitelist.IsWhitelistPass(ent.Comp.KeyWhitelist, args.EntityUid))
@@ -26,14 +26,14 @@ public sealed partial class VehicleSystem
 
     private void OnGenericKeyedEntInserted(Entity<GenericKeyedVehicleComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.ContainerId)
+        if (_timing.ApplyingState || args.Container.ID != ent.Comp.ContainerId)
             return;
         RefreshCanRun(ent.Owner);
     }
 
     private void OnGenericKeyedEntRemoved(Entity<GenericKeyedVehicleComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.ContainerId)
+        if (_timing.ApplyingState || args.Container.ID != ent.Comp.ContainerId)
             return;
         RefreshCanRun(ent.Owner);
     }

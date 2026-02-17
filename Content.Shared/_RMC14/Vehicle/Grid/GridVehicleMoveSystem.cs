@@ -64,9 +64,11 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                CollisionGroup.MidImpassable |
                CollisionGroup.BarricadeImpassable |
                CollisionGroup.DropshipImpassable);
-    private const CollisionGroup GridVehiclePushBlockMask =
-        CollisionGroup.MobMask |
-        CollisionGroup.BarricadeImpassable |
+    private const CollisionGroup GridVehiclePushHardBlockMask =
+        CollisionGroup.Impassable |
+        CollisionGroup.HighImpassable |
+        CollisionGroup.LowImpassable |
+        CollisionGroup.MidImpassable |
         CollisionGroup.DropshipImpassable;
     private const float PushTileBlockFraction = 0.005f;
     private const float PushOverlapEpsilon = 0.05f;
@@ -85,6 +87,14 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
     private readonly Dictionary<EntityUid, bool> _hardState = new();
     private readonly Dictionary<EntityUid, bool> _lastMobPushAxis = new();
     private readonly Dictionary<EntityUid, float> _movementAccumulator = new();
+
+    private enum VehicleCollisionClass : byte
+    {
+        Ignore = 0,
+        SoftMob = 1,
+        Breakable = 2,
+        Hard = 3,
+    }
 
     public readonly record struct DebugCollision(
         EntityUid Tested,
