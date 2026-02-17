@@ -19,8 +19,8 @@
     location: GM marker
   - type: RMCVisibleToGhostsOnly
   - type: Appearance
-  - type: MarineMapTracked
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines, Xenos]
   - type: TacticalMapTracked
 
 - type: entity

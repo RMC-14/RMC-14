@@ -12,6 +12,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -58,3 +63,5 @@
     job_id: RMCSurvivorForeconSmartgunOperator
   - type: Sprite
     state: smartgunner_spawn
+
+

@@ -21,16 +21,15 @@
   - type: RMCMesonsNonviewable
     xenoVisible: true
   - type: XenoTunnel
-  - type: XenoStructureMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: xenotunnel
   - type: TacticalMapAlwaysVisible
-    visibleToXenos: true
-    visibleAsXenoStructure: true
-    visibleToMarines: false
+    visibleLayers: [Xenos]
   - type: UserInterface
     interfaces:
       enum.SelectDestinationTunnelUI.Key:

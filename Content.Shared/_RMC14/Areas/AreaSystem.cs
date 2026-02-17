@@ -402,12 +402,52 @@ public sealed class AreaSystem : EntitySystem
                 areaGrid.Colors.Clear();
                 Dirty(ent, areaGrid);
 
+                var excludedBoundsAreas = new HashSet<EntProtoId<AreaComponent>>();
+                var excludedRenderAreas = new HashSet<EntProtoId<AreaComponent>>();
+                foreach (var (areaProto, areaEnt) in areaGrid.AreaEntities)
+                {
+                    if (!_areaQuery.TryComp(areaEnt, out var areaComp))
+                        continue;
+
+                    if (areaComp.ExcludeFromTacMapBounds)
+                        excludedBoundsAreas.Add(areaProto);
+
+                    if (areaComp.ExcludeFromTacMapRender)
+                        excludedRenderAreas.Add(areaProto);
+                }
+
+                var hasBounds = false;
+                var boundsMin = Vector2i.Zero;
+                var boundsMax = Vector2i.Zero;
+
                 var tiles = _map.GetAllTilesEnumerator(ent, mapGrid);
                 var areasOccupied = new Dictionary<EntProtoId<AreaComponent>, (int Resin, int Buildable)>();
                 while (tiles.MoveNext(out var tileRefNullable))
                 {
                     var tileRef = tileRefNullable.Value;
+                    if (tileRef.Tile.IsEmpty || _turf.IsSpace(tileRef))
+                        continue;
+
                     var pos = tileRef.GridIndices;
+                    if (!areaGrid.Areas.TryGetValue(pos, out var area))
+                        continue;
+
+                    var excludeRender = excludedRenderAreas.Contains(area);
+                    if (!excludedBoundsAreas.Contains(area))
+                    {
+                        if (!hasBounds)
+                        {
+                            boundsMin = pos;
+                            boundsMax = pos;
+                            hasBounds = true;
+                        }
+                        else
+                        {
+                            boundsMin = Vector2i.ComponentMin(boundsMin, pos);
+                            boundsMax = Vector2i.ComponentMax(boundsMax, pos);
+                        }
+                    }
+
                     var anchoredEnumerator = _map.GetAnchoredEntitiesEnumerator(ent, mapGrid, pos);
 
                     var found = false;
@@ -415,13 +455,13 @@ public sealed class AreaSystem : EntitySystem
                     var xenoConstruct = false;
                     while (anchoredEnumerator.MoveNext(out var anchored))
                     {
-                        if (_minimapColorQuery.TryComp(anchored, out var minimapColor))
+                        if (!excludeRender && _minimapColorQuery.TryComp(anchored, out var minimapColor))
                         {
                             areaGrid.Colors[pos] = minimapColor.Color;
                             found = true;
                         }
 
-                        if (_areaLabelQuery.HasComp(anchored))
+                        if (!excludeRender && _areaLabelQuery.HasComp(anchored))
                             areaGrid.Labels[pos] = _rmcWarp.GetName(anchored.Value) ?? Name(anchored.Value);
 
                         if (!invincibleWall && _tag.HasTag(anchored.Value, WallTag) && !_damageableQuery.HasComp(anchored.Value))
@@ -431,7 +471,6 @@ public sealed class AreaSystem : EntitySystem
                             xenoConstruct = true;
                     }
 
-                    areaGrid.Areas.TryGetValue(pos, out var area);
                     (int Resin, int Buildable)? areaOccupied = null;
                     if (xenoConstruct)
                     {
@@ -452,13 +491,13 @@ public sealed class AreaSystem : EntitySystem
                         continue;
 
                     var tile = _turf.GetContentTileDefinition(tileRef);
-                    if (tile.MinimapColor != default)
+                    if (!excludeRender && tile.MinimapColor != default)
                     {
                         areaGrid.Colors[pos] = tile.MinimapColor;
                         continue;
                     }
 
-                    if (areaGrid.Areas.TryGetValue(pos, out area) &&
+                    if (!excludeRender &&
                         area.TryGet(out var areaComp, _prototypes, _compFactory) &&
                         areaComp.MinimapColor != default)
                     {
@@ -466,7 +505,8 @@ public sealed class AreaSystem : EntitySystem
                         continue;
                     }
 
-                    areaGrid.Colors[pos] = Color.FromHex("#6c6767d8");
+                    if (!excludeRender)
+                        areaGrid.Colors[pos] = Color.FromHex("#6c6767d8");
                 }
 
                 foreach (var (areaProto, (resin, buildable)) in areasOccupied)
@@ -480,6 +520,19 @@ public sealed class AreaSystem : EntitySystem
                     areaComp.ResinConstructCount = resin;
                     areaComp.BuildableTiles = buildable;
                     Dirty(area, areaComp);
+                }
+
+                if (hasBounds)
+                {
+                    areaGrid.HasTacMapBounds = true;
+                    areaGrid.TacMapBoundsMin = boundsMin;
+                    areaGrid.TacMapBoundsMax = boundsMax;
+                }
+                else
+                {
+                    areaGrid.HasTacMapBounds = false;
+                    areaGrid.TacMapBoundsMin = default;
+                    areaGrid.TacMapBoundsMax = default;
                 }
 
                 Dirty(ent, areaGrid);

@@ -190,6 +190,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<bool> RMCTacticalMapShowAreaLabels =
         CVarDef.Create("rmc.tactical_map_show_area_labels", true, CVar.ARCHIVE | CVar.CLIENT | CVar.REPLICATED);
 
+    public static readonly CVarDef<bool> RMCTacticalMapReplayPublicAfterRound =
+        CVarDef.Create("rmc.tactical_map_replay_public_after_round", true, CVar.SERVER | CVar.SERVERONLY);
+
     public static readonly CVarDef<bool> RMCGunPrediction =
         CVarDef.Create("rmc.gun_prediction", true, CVar.SERVER | CVar.REPLICATED);
 

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCorporateLiaison
   name: cm-job-name-liaison
@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
@@ -76,3 +81,5 @@
       outerClothing:
       - RMCCoatExpensiveFur
       - RMCCoatExpensiveFurAlt
+
+

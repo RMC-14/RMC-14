@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorPriest
   id: CMSurvivorSolarisChaplain
   name: rmc-job-name-survivor-solaris-chaplain

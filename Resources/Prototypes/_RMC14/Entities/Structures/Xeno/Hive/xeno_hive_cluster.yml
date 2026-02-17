@@ -37,7 +37,8 @@
   - type: RepairableXenoStructure
     plasmaCost: 300
     repairLength: 4
-  - type: XenoStructureMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

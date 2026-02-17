@@ -314,7 +314,7 @@
   - type: TacMapXenoAlert
   - type: TacticalMapUser
     actionId: RMCActionOpenTacticalMapXeno
-    xenos: true
+    layerSets: [TacticalMapSetXeno]
   - type: TacticalMapLiveUpdateOnOvi
     enabled: true
   - type: MotionDetectorTracked
@@ -325,7 +325,8 @@
     background:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_xeno
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: Evasion
   - type: RMCWeaponAccuracy # This is so projectiles fired by xenos get a correctly-generated seed for RNG.
   - type: StunOnExplosionReceived

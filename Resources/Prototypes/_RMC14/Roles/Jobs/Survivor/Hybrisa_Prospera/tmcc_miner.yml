@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMiner
     - type: EquipSurvivorPreset
@@ -58,3 +63,5 @@
     - [ CMBackpackEngineer, RMCJumpsuitTMCC, RMCArmorTMCC, RMCArmorHelmetTMCCMiner, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
     - [ CMBackpackEngineer, RMCJumpsuitTMCC, RMCArmorTMCC, RMCArmorHelmetTMCCMiner, RMCShoesJackboots, RMCPouchToolsFill, RMCHandsCombat, WeaponRifleMAR40, RMCPouchMagazineFilledMAR40Ext ]
     - [ RMCSatchelLightpack, RMCPouchToolsFill, RMCJumpsuitTMCC, RMCArmorTMCCAlt, RMCArmorHelmetTMCCMiner, RMCBootsRoyalFilled, RMCHandsVeteranRoyalMarine, RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
+
+

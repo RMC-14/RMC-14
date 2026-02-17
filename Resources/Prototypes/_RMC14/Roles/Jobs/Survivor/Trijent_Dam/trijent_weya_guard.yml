@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorSecurity
   id: CMSurvivorTrijentGoon
   name: rmc-job-name-pmc-corporate-goon-secguard
@@ -12,6 +12,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor

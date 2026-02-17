@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorTrucker
   id: RMCSurvivorKutjevoTrucker
   name: rmc-job-name-survivor-kutjevo-trucker
@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillFireman: 1
@@ -54,3 +59,5 @@
   id: RMCGearSurvivorPresetKutjevoTrucker
   name: Kutjevo trucker colonist preset
   categories: [ HideSpawnMenu ]
+
+

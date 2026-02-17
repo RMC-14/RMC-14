@@ -1,4 +1,6 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.TacticalMap;
+using System.Collections.Generic;
 using Content.Shared.Tools;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -52,6 +54,12 @@ public sealed partial class SensorTowerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan DestroyDelay = TimeSpan.FromSeconds(4);
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> RevealForLayers = new();
+
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<TacticalMapLayerPrototype>> RevealLayers = new();
 }
 
 [Serializable, NetSerializable]

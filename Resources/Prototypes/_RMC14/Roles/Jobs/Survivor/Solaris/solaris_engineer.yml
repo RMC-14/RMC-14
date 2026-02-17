@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorSolarisEngineer
   name: rmc-job-name-survivor-solaris-engineer
@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2

@@ -41,8 +41,10 @@
           Off: { state: sensor_off }
           On: { state: sensor_ }
   - type: SensorTower
-  - type: MarineMapTracked
-  - type: XenoMapTracked
+    revealForLayers: [Marines]
+    revealLayers: [Xenos]
+  - type: TacticalMapLayerTracked
+    layers: [Marines, Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

@@ -12,6 +12,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -68,3 +73,5 @@
   - type: SurvivorPreset
     primaryWeapons:
     - [ WeaponRifleM4SPRCustom, RMCMagazineRifleM4SPRA19, RMCMagazineRifleM4SPRA19 ]
+
+

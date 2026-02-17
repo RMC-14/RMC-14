@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorCorporate
   id: RMCSurvivorHybrisaCommercialPilot
   name: rmc-job-name-survivor-commercial-pilot
@@ -16,6 +16,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -62,3 +67,5 @@
     randomGearOther:
     -
       - [ CMSheetMetal20, RMCBinoculars ]
+
+

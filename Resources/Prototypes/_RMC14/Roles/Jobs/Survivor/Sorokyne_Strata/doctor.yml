@@ -13,6 +13,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -94,5 +99,3 @@
       - CMJumpsuitLiaisonBrown
       - CMJumpsuitLiaisonBlue
       - CMJumpsuitLiaisonBlack
-
-

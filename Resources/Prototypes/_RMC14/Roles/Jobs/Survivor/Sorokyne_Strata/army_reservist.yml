@@ -17,6 +17,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorSPPPrivate
     - type: EquipSurvivorPreset
@@ -81,4 +86,3 @@
     - [ RMCArmorHelmetSPPArmy, RMCOuterClothingExternalWebbingBrown, RMCMaskBalaclava]
     - [ RMCArmorHelmetSPPArmy, RMCMaskGasSPP]
     - [ RMCHeadCapSPPBeretArmy, RMCMaskGasSPP]
-

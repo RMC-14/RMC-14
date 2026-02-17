@@ -6,6 +6,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -80,3 +85,5 @@
     randomGearOther:
     -
       - [ RMCToolSpade, RMCFlashlightLantern ]
+
+

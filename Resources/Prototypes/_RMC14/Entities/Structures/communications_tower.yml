@@ -69,8 +69,8 @@
           False: {visible: false}
   - type: MaxDamage
     max: 500
-  - type: MarineMapTracked
-  - type: XenoMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Marines, Xenos]
   - type: TacticalMapTracked
   - type: ActiveTacticalMapTracked
     icon:

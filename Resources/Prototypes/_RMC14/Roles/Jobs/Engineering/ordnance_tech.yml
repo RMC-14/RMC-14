@@ -1,6 +1,6 @@
-﻿- type: job
+- type: job
   id: CMOrdnanceTech
-  parent: CMJobBase
+  parent: RMCJobMarineBase
   name: cm-job-name-ordnance-tech
   description: cm-job-description-ordnance-tech
   playTimeTracker: CMJobOrdnanceTech
@@ -28,6 +28,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetMarine]
+    - type: TacticalMapLayerTracked
+      layers: [Marines]
     - type: Skills
       skills:
         RMCSkillConstruction: 3

@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor
@@ -52,3 +57,5 @@
   parent: RMCSurvivorPresetEngineer
   id: RMCGearSurvivorPresetLV624CargoTechnician
   name: lv624 cargo technician colonist preset # TODO RMC14 random research notes
+
+

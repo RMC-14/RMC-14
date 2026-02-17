@@ -18,6 +18,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -76,3 +81,5 @@
   - type: SurvivorPreset
     randomGear:
     - [ CMAdvFirstAidKitFilled ]
+
+

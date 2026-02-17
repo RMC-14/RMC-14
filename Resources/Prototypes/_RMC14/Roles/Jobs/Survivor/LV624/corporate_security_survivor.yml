@@ -12,6 +12,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorMarshal
     - type: RMCSurvivor
@@ -55,3 +60,5 @@
       state: green
     - sprite: _RMC14/Markers/cm_jobs.rsi
       state: survivor
+
+

@@ -26,7 +26,8 @@
   - type: HiveConstructionRequiresHiveWeeds
   - type: HiveConstructionRequiresSpace
   - type: DoAfter
-  - type: XenoStructureMapTracked
+  - type: TacticalMapLayerTracked
+    layers: [Xenos]
   - type: TacticalMapTracked
   - type: TacticalMapIcon
     icon:

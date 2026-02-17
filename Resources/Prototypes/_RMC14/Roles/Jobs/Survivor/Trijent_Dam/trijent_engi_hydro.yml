@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorEngineer
   id: CMSurvivorTrijentEngiHydro
   name: cm-job-name-survivor-trijent-engi-hydro
@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillEndurance: 2

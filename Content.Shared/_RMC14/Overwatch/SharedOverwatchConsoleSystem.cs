@@ -41,6 +41,7 @@ namespace Content.Shared._RMC14.Overwatch;
 
 public abstract class SharedOverwatchConsoleSystem : EntitySystem
 {
+
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
@@ -309,6 +310,9 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         ent.Comp.Squad = args.Squad;
         ent.Comp.Operator = Identity.Name(args.Actor, EntityManager);
         Dirty(ent);
+
+        if (_net.IsServer && args.Squad != null && TryGetEntity(args.Squad, out var squadEnt))
+            _tacticalMap.SetComputerDrawLayerFromSquad(ent.Owner, squadEnt.Value);
     }
 
     private void OnOverwatchViewTacticalMapBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchViewTacticalMapBuiMsg args)
@@ -382,19 +386,36 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         if (args.Target == default || !TryGetEntity(args.Target, out var target))
             return;
 
-        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target.Value, out var camera))
-            return;
+        TryWatchTarget(args.Actor, target.Value);
+    }
 
-        if (HasComp<ScopingComponent>(args.Actor))
+    public bool TryWatchTarget(EntityUid actor, EntityUid target)
+    {
+        if (actor == target)
         {
             if (_net.IsServer)
-            {
-                _popup.PopupCursor("You're too busy peering through optics.", args.Actor, PopupType.MediumCaution);
-            }
-            return;
+                _popup.PopupCursor("You can't overwatch yourself.", actor, PopupType.MediumCaution);
+            return false;
         }
 
-        Watch(args.Actor, camera);
+        if (!_inventory.TryGetInventoryEntity<OverwatchCameraComponent>(target, out var camera))
+        {
+            if (_net.IsServer)
+                _popup.PopupCursor("That marine has no overwatch camera.", actor, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        if (HasComp<ScopingComponent>(actor))
+        {
+            if (_net.IsServer)
+                _popup.PopupCursor("You're too busy peering through optics.", actor, PopupType.MediumCaution);
+
+            return false;
+        }
+
+        Watch(actor, camera);
+        return true;
     }
 
     private void OnOverwatchHideBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleHideBuiMsg args)

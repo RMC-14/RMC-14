@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorScientist
   id: RMCSurvivorKutjevoResearcher
   name: rmc-job-name-survivor-kutjevo-researcher

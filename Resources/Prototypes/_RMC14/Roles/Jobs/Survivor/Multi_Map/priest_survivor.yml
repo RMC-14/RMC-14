@@ -10,6 +10,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorChaplain
     - type: EquipSurvivorPreset
@@ -60,3 +65,5 @@
   id: RMCGearSurvivorPresetPriest
   name: priest colonist preset
   categories: [ HideSpawnMenu ]
+
+

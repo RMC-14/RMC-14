@@ -6,6 +6,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillCqc: 3
@@ -82,3 +87,5 @@
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestGreen ]
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCHardhatBlue, RMCHazardVestBlue ]
     - [ RMCJumpsuitCivilianEngineerWorkerAlt, RMCOuterEngineeringUtilityOversuitAlt, CMSheetPlasteel10 ]
+
+

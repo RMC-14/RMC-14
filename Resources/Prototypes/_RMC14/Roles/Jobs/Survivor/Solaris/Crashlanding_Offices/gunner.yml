@@ -17,6 +17,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -88,3 +93,5 @@
     - [ CMArmorM4PMCLight, ArmorHelmetPMC ]
     - [ RMCArmorM4PMCBulletProof, RMCArmorHelmetPMCBlack ]
     - [ WeaponSMGM63, ArmorHelmetPMC, RMCArmorM4PMCNoLight ] # TODO RMC14: PMC helmet (enclosed)
+
+

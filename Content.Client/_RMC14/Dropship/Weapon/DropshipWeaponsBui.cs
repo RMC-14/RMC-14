@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
@@ -20,6 +20,7 @@ using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsScreen
 using static Robust.Client.UserInterface.Control;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 using MedevacComponent = Content.Shared._RMC14.Dropship.Utility.Components.MedevacComponent;
+using Content.Client._RMC14.TacticalMap.UI;
 
 namespace Content.Client._RMC14.Dropship.Weapon;
 
@@ -551,9 +552,8 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         if (wrapper == null || !EntMan.TryGetComponent(Owner, out TacticalMapComputerComponent? computer))
             return;
 
-        TabContainer.SetTabTitle(wrapper.MapTab, Loc.GetString("rmc-dropship-weapons-maps"));
-        TabContainer.SetTabVisible(wrapper.MapTab, true);
-        TabContainer.SetTabVisible(wrapper.CanvasTab, false);
+        wrapper.SetCanvasAccess(false);
+        wrapper.MapSelectionRow.Visible = false;
 
         if (computer.Map != null && EntMan.TryGetComponent(computer.Map.Value, out AreaGridComponent? areaGrid))
         {
@@ -583,13 +583,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         var lines = EntMan.GetComponentOrNull<TacticalMapLinesComponent>(Owner);
         if (lines != null)
         {
-            wrapper.Map.Lines.AddRange(lines.MarineLines);
+            wrapper.Map.Lines.AddRange(lines.Lines);
         }
 
         var labels = EntMan.GetComponentOrNull<TacticalMapLabelsComponent>(Owner);
         if (labels != null)
         {
-            wrapper.UpdateTacticalLabels(labels.MarineLabels);
+            wrapper.UpdateTacticalLabels(labels.Labels);
         }
 
         wrapper.LastUpdateAt = computer.LastAnnounceAt;

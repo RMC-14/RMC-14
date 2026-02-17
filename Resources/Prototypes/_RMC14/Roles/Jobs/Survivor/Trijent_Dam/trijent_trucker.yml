@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMSurvivorTrucker
   id: CMSurvivorTrijentTrucker
   name: cm-job-name-survivor-trijent-trucker
@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorTrucker
     - type: RMCSurvivor

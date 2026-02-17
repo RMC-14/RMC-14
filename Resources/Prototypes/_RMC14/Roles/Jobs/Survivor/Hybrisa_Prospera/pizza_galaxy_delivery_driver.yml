@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorPizzaGalaxyDriver
     - type: EquipSurvivorPreset
@@ -60,3 +65,5 @@
     - [ RMCShoesRed, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazineFilledKT42 ]
     - [ RMCShoesRed, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazineFilledKT42 ]
     - [ RMCBootsCBRN, CMArmorM3VLBallistics, RMCWeaponShotgunM3717, RMCPouchShotgunFilledBuckshot ]
+
+

@@ -32,6 +32,8 @@
     noTunnel: true
     unweedable: true
     weatherEnabled: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
 
 - type: entity
   parent: RMCAreaPVE

@@ -11,6 +11,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor, Marines]
     - type: Skills
       preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset

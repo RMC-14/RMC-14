@@ -8,6 +8,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       skills:
         RMCSkillConstruction: 1
@@ -54,3 +59,5 @@
   parent: RMCSurvivorPresetDoctor
   id: RMCGearSurvivorPresetLV624MedicalTechnician
   name: lv624 medical technician colonist preset
+
+

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: RMCCLFMedic
   name: rmc-clf-medic

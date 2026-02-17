@@ -1,0 +1,15 @@
+- type: tacticalMapLayerSet
+  id: TacticalMapSetMarine
+  layers: [Marines]
+
+- type: tacticalMapLayerSet
+  id: TacticalMapSetXeno
+  layers: [Xenos]
+
+- type: tacticalMapLayerSet
+  id: TacticalMapSetSurvivor
+  layers: [FactionSurvivor]
+
+- type: tacticalMapLayerSet
+  id: TacticalMapSetGhost
+  layers: [Marines, Xenos]

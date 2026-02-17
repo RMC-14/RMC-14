@@ -1495,6 +1495,8 @@
   - type: Area
     noTunnel: true
     unweedable: true
+    excludeFromTacMapBounds: true
+    excludeFromTacMapRender: true
   - type: Sprite
     color: "#FF0000"
 

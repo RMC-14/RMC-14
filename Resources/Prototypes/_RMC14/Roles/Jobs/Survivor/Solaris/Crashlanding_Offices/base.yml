@@ -19,6 +19,11 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: TacticalMapUser
+      actionId: RMCActionOpenTacticalMapMarine
+      layerSets: [TacticalMapSetSurvivor]
+    - type: TacticalMapLayerTracked
+      layers: [FactionSurvivor]
     - type: Skills
       preset: RMCSkillPresetSurvivorWeYaPMCStandard
     - type: RMCSurvivor
@@ -60,3 +65,5 @@
   id: RMCGearSurvivorPresetPMCBase
   name: pmc base survivor preset
   categories: [ HideSpawnMenu ]
+
+

@@ -1,4 +1,4 @@
-﻿- type: job
+- type: job
   parent: CMJobBase
   id: CMProvostChiefInspector
   name: rmc-job-name-corp-provost-chief

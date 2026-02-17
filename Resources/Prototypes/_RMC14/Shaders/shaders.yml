@@ -14,6 +14,11 @@
   path: "/Textures/_RMC14/Shaders/invisible.swsl"
 
 - type: shader
+  id: RMCTacMapGrid
+  kind: source
+  path: "/Textures/_RMC14/Shaders/tacmap_grid.swsl"
+
+- type: shader
   id: RMCNightVision
   kind: source
   path: "/Textures/_RMC14/Shaders/night_vision.swsl"
