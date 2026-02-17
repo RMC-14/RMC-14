@@ -1,0 +1,134 @@
+﻿- type: entity
+  parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
+  id: RMCWeaponIncineratorL104
+  name: L104 incinerator
+  description: The L104 incinerator is the standard-issue flame projector unit of the Royal Crown Marines, a lightweight and ergonomic weapon that sees rare use in RCM doctrine despite its brutal effectiveness at close range.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/l104.rsi
+    state: base
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+    - state: lit
+      map: ["enum.RMCIgniterVisuals.Ignited"]
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/l104.rsi
+    size: Large
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/l104.rsi
+    slots:
+    - suitStorage
+    - Back
+  - type: Gun
+    cameraRecoilScalar: 0
+    fireRate: 2
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      collection: RMCFlamerShoot
+  - type: ShootUseDelay
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankIncineratorL104
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+  - type: Wieldable
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
+  - type: GunRequiresWield
+  - type: RMCFlamerAmmoProvider
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: AttachableHolder # TODO RMC14 barrel nozzle
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: 0.03, 0.092
+  - type: WieldedCrosshair
+    rsi:
+      sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
+      state: all
+  - type: RMCIgniter
+  - type: RMCAmmoEject
+  - type: GenericVisualizer
+    visuals:
+      enum.RMCIgniterVisuals.Ignited:
+        enum.RMCIgniterVisuals.Ignited:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorL104
+  - type: RMCNameItemOnVend
+    item: PrimaryGun
+
+- type: entity
+  parent: RMCWeaponIncineratorL104
+  id: RMCWeaponIncineratorL104Unloaded
+  suffix: Unloaded
+  components:
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: null
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankIncineratorL104
+
+- type: entity
+  parent: RMCBaseTankFlamer
+  id: RMCTankIncineratorL104
+  name: L104 incinerator fuel tank
+  description: A large tank, compatible with the L104 incinerator, designed to hold highly combustible fuel at immense pressure.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/flamethrower.rsi
+    state: flametank_l104
+  - type: SolutionContainerManager
+    solutions:
+      rmc_flamer_tank:
+        maxVol: 100
+        reagents:
+        - ReagentId: RMCNapalmUT
+          Quantity: 100
+  - type: RMCFlamerTank
+  - type: NoMixingReagents
+  - type: Appearance
+  - type: SolutionStorageFillable
+    solution: rmc_flamer_tank
+  - type: Tag
+    tags:
+    - RMCTankIncineratorL104
+
+- type: Tag
+  id: RMCWeaponIncineratorL104
+
+- type: Tag
+  id: RMCTankIncineratorL104
