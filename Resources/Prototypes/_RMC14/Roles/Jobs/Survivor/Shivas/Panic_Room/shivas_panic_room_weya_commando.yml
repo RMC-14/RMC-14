@@ -66,18 +66,25 @@
     contents:
     - id: RMCMREWeYaPMC
 
-
 - type: entity
-  parent: CMAdvFirstAidKit
-  id: CMAdvFirstAidKitFilledCommando
+  parent: CMFirstAidKit
+  id: CMFirstAidKitFilledCommando
   suffix: Filled, Commando
   components:
-  - type: StorageFill # todo: first aid boxes (looted variants)
+  - type: StorageFill
     contents:
     - id: RMCSyringeCaseFilledCommando
     - id: RMCSurgicalCaseFilledCommandoElite
     - id: CMRollerBedSpawnFolded
 #  /obj/item/stack/medical/splint/nano(src, rand(1,2))
+  - type: Sprite
+    layers:
+    - state: advfirstaid
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: advfirstaid
 
 - type: entity
   parent: CMSurgicalCase
@@ -102,6 +109,16 @@
 #  /obj/item/reagent_container/hypospray/autoinjector/adrenaline
 
 - type: entity
+  parent: CMMedicalUpgradeKit
+  id: CMMedicalUpgradeKitFilledCommando
+  suffix: Filled, Commando
+  components:
+  - type: StorageFill # todo: randomization (35% probability to spawn 1-4 trauma, and 35% to spawn 1-4 burn)
+    contents:
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
+
+- type: entity
   parent: RMCBeltPMC
   id: RMCBeltPMCFilledCommando
   suffix: Filled, Commando, Survivor
@@ -124,7 +141,8 @@
     - id: RMCZippo
     - id: RMCCigarettePackWeYaGold
     - id: CMDefibrillator # TODO: Low charge (?)
-    - id: CMAdvFirstAidKitFilledCommando
+    - id: CMFirstAidKitFilledCommando
+    - id: CMMedicalUpgradeKitFilledCommando
 
 - type: jobIcon
   parent: CMJobIconBase

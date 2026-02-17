@@ -17,6 +17,7 @@
     - 0,0,13,1 # 7 slots
     whitelist:
       tags:
+      - CMMedicalUpgradeKit
       - DiscreteHealthAnalyzer
       - Dropper
       - Pill
