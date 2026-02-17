@@ -36,6 +36,18 @@
     head: RMCHeadCapFlippable
 
 - type: loadout
+  id: CapRoyalRMC
+  cost: 2
+  equipment:
+    head: RMCHeadCapRoyal
+
+- type: loadout
+  id: BoonieRoyalRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBoonieRoyal
+
+- type: loadout
   id: BrownHeadbandRMC
   cost: 2
   equipment:
@@ -101,3 +113,10 @@
   storage:
     back:
     - RMCHeadUNMCHeadset
+
+- type: loadout
+  id: HeadsetRoyalRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHeadRoyalHeadset

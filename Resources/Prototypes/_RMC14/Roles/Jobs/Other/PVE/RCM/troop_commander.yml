@@ -53,14 +53,14 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_twe
-  hidden: true
+#  hidden: true
 
 - type: startingGear
   id: RMCGearRoyalTroopCommanderPVE
   equipment:
-    head: RMCHeadRoyalBeretLead
+    head: RMCHeadRoyalCapPeaked
     ears: RMCHeadsetRoyalMarineLeaderPVE
-    jumpsuit: RMCJumpsuitMarineRoyalPVE
+    jumpsuit: RMCJumpsuitMarineRoyalService
     gloves: RMCHandsVeteranRoyalMarine
     shoes: RMCBootsRoyalFilled
     id: RMCIDRoyalMarinesTroopCommanderPVE

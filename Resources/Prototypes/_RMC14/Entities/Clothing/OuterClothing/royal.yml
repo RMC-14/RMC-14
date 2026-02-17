@@ -140,6 +140,18 @@
     - id: RMCMagazineRifleL24Incendiary
     - id: RMCMagazineRifleL24
 
+# External Webbing
+
+- type: entity
+  parent: RMCOuterClothingExternalWebbing
+  id: RMCOuterClothingExternalWebbingRoyal
+  name: L1-pattern MOLS suspenders
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This particular setup consists of suspenders and several pouches, intended to be clipped outside of the uniform rather than directly onto it.
+  suffix: Royal
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Misc/mols_webbing.rsi
+
 # Paramarines
 
 - type: entity

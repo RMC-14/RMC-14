@@ -1,19 +1,22 @@
 - type: entity
   parent: RMCWeaponRevolverM44
   id: RMCWeaponRevolverWarwickMkVII
-  name: Warwick MkVII
-  description: A top-break revolver used by the RCM’s Paramarine regiments, and sometimes seen in the hands of other TSE military forces. Fires .44 Magnum. Archaic, yes, but brutally effective. Vacuum-sealed internals, Bakelite-style grips, and a recoil like getting kicked by a mule. Still puts things down Hard.
+  name: Warwick MkVII service revolver
+  description: The L187 Warwick MkVII top-break revolver is the standard-issue service revolver of the RCM’s Paramarine regiments. Despite the Warwick's archaic design, the MkVII's vacuum-sealed internals, bakelite grips, and .44 magnum chambering keep the weapon relevant and brutally effective.
   suffix: Paramarine
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick.rsi
     - type: Clothing
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick.rsi
+    - type: Tag
+      tags:
+      - RMCWeaponRevolverWarwickMkVII
 
 - type: entity
   parent: RMCWeaponRevolverWarwickMkVII
   id: RMCWeaponRevolverWarwickMkVIIAlt
-  name: Warwick MkVII
+  name: Warwick MkVII service revolver
   suffix: Paramarine, Alt
   components:
     - type: Sprite
@@ -21,9 +24,17 @@
     - type: Clothing
       sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_alt.rsi
 
+- type: entity
+  parent: RMCWeaponRevolverWarwickMkVII
+  id: RMCWeaponRevolverWarwickMkVIISnub
+  name: Warwick MkVII snubnose revolver
+  description: The L187 Warwick MkVII top-break revolver is the standard-issue service revolver of the RCM’s Paramarine regiments. This particular variant features a snubnose barrel and reduced profile grip, keeping the weapon compact and light.
+  suffix: RCM, Loadout
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_snub.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwick_snub.rsi
+
 - type: Tag
   id: RMCWeaponRevolverWarwickMkVII
-    
-- type: Tag
-  id: RMCWeaponRevolverWarwickMkVIIAlt
-    

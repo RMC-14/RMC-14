@@ -2222,8 +2222,8 @@
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltRoyalMortar
-  name: L79 pattern load-bearing rig
-  description: An L79 pattern load-bearing rig configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
+  name: L79-pattern bombardier belt
+  description: An L79-pattern bombardier belt configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
   suffix: PVE, RCM, Filled
   components:
   - type: Sprite
@@ -2288,10 +2288,8 @@
       amount: 1
 
 - type: entity
-  parent: RMCBeltHolsterPistolTSE
-  id: RMCBeltHolsterPistolRCML29Filled
-  name: L29 sidearm rig
-  description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
+  parent: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCMFilled
   suffix: PVE, RCM, Filled
   components:
   - type: StorageFill
@@ -2299,7 +2297,7 @@
     - id: RMCWeaponPistolL14
       amount: 1
     - id: RMCMagazinePistolL14
-      amount: 5
+      amount: 6
       
 - type: entity
   parent: RMCBeltUtilityGeneralRCM

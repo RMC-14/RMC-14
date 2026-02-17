@@ -124,6 +124,56 @@
     state: webbing
 
 - type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingRCM
+  name: L1-pattern MOLS leg webbing
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a number of leg pouches, capable of fitting several small items within.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_rcm.rsi
+    state: webbing
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,7,1 # 4 slots
+    blacklist:
+      tags:
+      - CMMagazineSmg
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - MRE
+      - PillPacket
+      - PillCanister
+      - CMSurgicalCase
+      - RMCSyringeCase
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,7,1 # 4 slots
+      blacklist:
+        tags:
+        - CMMagazineSmg
+    - type: IgnoreContentsSize
+      items:
+        tags:
+        - MRE
+        - PillPacket
+        - PillCanister
+        - CMSurgicalCase
+        - RMCSyringeCase
+    - type: FixedItemSizeStorage
+    - type: RMCStorageEjectHand
+      state: Open
+    - type: ExplosionResistance
+      damageCoefficient: 0
+      worn: false
+    - type: StoreAfterFailedInteract
+
+- type: entity
   parent: CMWebbing
   id: RMCWebbingBlackSmall
   name: black webbing
@@ -352,6 +402,16 @@
     state: holster
 
 - type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingHolsterRCM
+  name: L1-pattern MOLS holster
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a waist holster, capable of fitting a sidearm and two spare magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_rcm.rsi
+    state: holster
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
   name: drop pouch
@@ -440,6 +500,16 @@
       damageCoefficient: 0
       worn: false
     - type: StoreAfterFailedInteract
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingDropPouchRCM
+  name: L1-pattern MOLS drop pouch
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a drop pouch, capable of fitting loose objects within.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_rcm.rsi
+    state: webbing
 
 - type: entity
   parent: CMWebbingBase
@@ -598,16 +668,26 @@
 
 - type: entity
   parent: RMCToolWebbingSmall
-  id: RMCToolWebbingSmallFilledRCMPVEAssaultEngi
-  suffix: Filled, RCM, PVE
+  id: RMCToolWebbingSmallRoyal
+  name: L1-pattern MOLS tool harness
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and belt, with many pouches to fit engineering tools.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_tool_rcm.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCToolWebbingSmallRoyal
+  id: RMCToolWebbingSmallRoyalFilled
+  suffix: Filled, Royal
   components:
   - type: StorageFill
     contents:
     - id: CMScrewdriver
     - id: CMWrench
     - id: RMCWelderIndustrial
-    - id: CMCrowbar
-    - id: RMCCableCoil30
+    - id: RMCTacticalPrybar
+    - id: CMWirecutter
     - id: CMMultitool
 
 - type: entity

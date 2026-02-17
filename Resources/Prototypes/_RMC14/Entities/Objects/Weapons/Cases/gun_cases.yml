@@ -386,6 +386,99 @@
       tags:
       - RMCBeltHolsterM13
 
+# L14 Custom
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolL14Custom
+  name: L14 custom combat pistol case
+  description: A case containing a loaded custom L14 custom combat pistol and two spare magazines.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponPistolL14
+        - RMCMagazinePistolL14
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolL14Custom
+      - id: RMCMagazinePistolL14
+        amount: 2
+
+# L54 Custom
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCasePistolL54
+  name: L54 service pistol case
+  description: A case containing a loaded L54 service pistol and two spare magazines.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponPistolL54
+        - RMCMagazinePistolL54
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponPistolL54
+      - id: RMCMagazinePistolL54
+        amount: 2
+
+# Warwick Snubnose
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRevolverWarwickMkVIISnub
+  name: Warwick MkVII snubnose revolver case
+  description: A case containing a loaded Warwick MkVII snubnose revolver and two spare speedloaders.
+  components:
+    - type: Item
+      size: Small
+    - type: Sprite
+      noRot: false
+      sprite: _RMC14/Objects/Storage/D18case.rsi # TODO - closed sprites
+      layers:
+      - state: closed
+    - type: Icon
+      sprite: _RMC14/Objects/Storage/D18case.rsi
+      state: closed
+    - type: Storage
+      maxItemSize: Huge
+      grid:
+      - 0,0,5,1
+      whitelist:
+        tags:
+        - RMCWeaponRevolverWarwickMkVII
+        - RMCSpeedLoaderM44
+    - type: StorageFill
+      contents:
+      - id: RMCWeaponRevolverWarwickMkVIISnub
+      - id: RMCSpeedLoaderM44
+        amount: 2
+
 # rifles
 # M54C
 - type: entity

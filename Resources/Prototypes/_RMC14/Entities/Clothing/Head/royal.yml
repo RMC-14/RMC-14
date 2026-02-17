@@ -75,6 +75,122 @@
       explosionArmor: 25
       # armor_energy = 25
 
+# Cap
+
+- type: entity
+  parent: ClothingHeadBase
+  id: RMCHeadCapRoyal
+  name: royal marine cap
+  description: A soft cap available for private purchase, used to shield the face or neck from the sun depending on how it's worn.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/cap.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/cap.rsi
+  - type: Appearance
+  - type: Foldable
+    canFoldInsideContainer: true
+    unfoldVerbText: fold-flip-verb
+    foldVerbText: fold-flip-verb
+  - type: FoldableClothing
+    foldedEquippedPrefix: flipped
+    foldedHeldPrefix: flipped
+  - type: GenericVisualizer
+    visuals:
+      enum.FoldedVisuals.State:
+        foldedLayer:
+          True: {visible: true}
+          False: {visible: false}
+        unfoldedLayer:
+          True: {visible: false}
+          False: {visible: true}
+  - type: Tag
+    tags:
+    - ClothMade
+  - type: Storage
+    maxItemSize: Tiny
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      components:
+      - RMCLighter
+      - HelmetAccessory
+      tags:
+      - Cigarette
+      - Matchstick
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+        ents: [ ]
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: FixedItemSizeStorage
+  - type: IgnoreContentsSize
+    items:
+      components:
+      - HelmetAccessory
+  - type: HelmetAccessoryHolder
+
+# Boonie
+
+- type: entity
+  parent: RMCHeadCapRoyal
+  id: RMCHeadBoonieRoyal
+  name: royal marine boonie hat
+  description: The infamous boonie hat - available for private purchase, and protects all angles... from the sun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/boonie.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon_flipped
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/boonie.rsi
+
+# Headset
+
+- type: entity
+  parent: RMCHeadRoyalBeret
+  id: RMCHeadRoyalHeadset
+  name: royal marine commset
+  description: A single-ear military communications headset issued to Royal Crown Marines. The monoaural design minimises loss of situational awareness whilst operating the two-way radio. This one appears to be malfunctioning.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/headset.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/headset.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Head/Royal/headset.rsi
+      state: helmet
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Head/Royal/headset.rsi
+      state: hat
+
+# Peaked Service Cap
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadRoyalCapPeaked
+  name: royal marine service cap
+  description: A peaked service cap worn by officers of the Royal Crown Marines, with a green band and gold emblem.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/peaked.rsi
+
 # Paramarines
 - type: entity
   parent: RMCHeadRoyalBeret

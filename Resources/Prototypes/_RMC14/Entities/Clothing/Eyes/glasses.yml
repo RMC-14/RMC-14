@@ -585,6 +585,64 @@
       sprite: _RMC14/Objects/Clothing/Eyes/Glasses/squad_ballistic_goggles.rsi
       state: lenses
 
+- type: entity
+  parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
+  id: RMCGogglesBallisticRCM
+  name: L5 ballistic goggles
+  description: L5 ballistic goggles - standard-issue eyepro for Royal Crown Marines, featuring robust, orange-tinted lenses.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+      state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ballistic_goggles_rcm.rsi
+      state: hat-down
+
+- type: entity
+  parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
+  id: RMCGogglesPrescriptionBallisticRCM
+  name: L5 prescription ballistic goggles
+  description: L5 ballistic goggles - standard-issue eyepro for Royal Crown Marines. This pair has mirrored prescription lenses, for marines with irregular vision.
+  components:
+  - type: Item
+    storedRotation: 0
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+    slots:
+    - MASK
+    - EYES
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+      state: helmet
+    toggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+      state: helmet-down
+    hatRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+      state: hat
+    hatToggledRsi:
+      sprite: _RMC14/Objects/Clothing/Eyes/Glasses/rp_goggles_rcm.rsi
+      state: hat-down
+
 # Identical to upstream ones, sans the name and description
 - type: entity
   parent: ClothingEyesGlassesCheapSunglasses

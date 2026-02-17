@@ -1052,3 +1052,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelRoyalMOLS
+  name: L1-pattern MOLS day pack
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This particular item is the day pack, which can be worn with or without the full MOLS rig.
+  suffix: PVE, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/mols_pack.rsi
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10 slots

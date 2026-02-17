@@ -263,3 +263,25 @@
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+- type: entity
+  parent: RMCBoxMREEmpty
+  id: RMCBoxMRETSEEmpty
+  name: box of ORPs (x12)
+  description: A box of ORPs. Scrummy!
+  components:
+  - type: CMItemSlots
+    count: 12
+    slot:
+      name: ORP
+      whitelist:
+        tags:
+        - MRE
+
+- type: entity
+  parent: RMCBoxMRETSEEmpty
+  id: RMCBoxMRETSE
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMRETSE

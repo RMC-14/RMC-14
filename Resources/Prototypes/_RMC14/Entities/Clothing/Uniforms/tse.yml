@@ -17,7 +17,7 @@
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyal
   name: royal crown marine uniform
-  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
+  description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
   suffix: Filled, Royal
   components:
   - type: Sprite
@@ -59,7 +59,7 @@
   parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyalTeamlead
   name: royal crown marine uniform
-  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
+  description: The field uniform of Royal Crown Marine officers and NCOs, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
   suffix: Filled, Royal, Teamlead
   components:
   - type: Sprite
@@ -74,10 +74,10 @@
 # PVE RCM jumpsuit without webbings
 
 - type: entity
-  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  parent: [RMCJumpsuitTSEPA, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitMarineRoyalPVE
   name: royal crown marine uniform
-  description: The field uniform of the royal crown marines. They have shards of light Kevlar to help protect against stabbing weapons and bullets. Onpar with similar UNMC equipment.
+  description: The field uniform of the Royal Crown Marines, featuring shards of light Kevlar to help protect against stabbing weapons and bullets. On par with similar UNMC equipment.
   suffix: Royal, PVE
   components:
   - type: Sprite
@@ -88,12 +88,30 @@
     - RMCPatchTSE
   - type: ItemCamouflage
     camouflageVariations: {}
-  - type: Foldable
-    unfoldVerbText: rmc-sleeves-verb-unfold
-    foldVerbText: rmc-sleeves-verb-fold
-  - type: FoldableClothing
-    foldedEquippedPrefix: sleeves
-    
+
+# RCM service uniform
+
+- type: entity
+  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineRoyalService
+  name: royal crown marine service uniform
+  description: A formal service uniform worn by officers and NCOs of the RCM. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  suffix: Royal, Formal
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/service.rsi
+    - type: UniformAccessoryHolder
+      startingAccessories:
+        - RMCPatchTSE
+        - RMCPatchTSEMarines
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: Foldable
+      unfoldVerbText: rmc-sleeves-verb-unfold
+      foldVerbText: rmc-sleeves-verb-fold
+    - type: FoldableClothing
+      foldedEquippedPrefix: sleeves
+
 # RCM Paramarines
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]

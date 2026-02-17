@@ -617,6 +617,21 @@
     - id: RMCExplosivePlastic
     - id: RMCExplosivePlastic
 
+- type: entity
+  parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocRCMPVEAssaultEngi
+  suffix: Filled, RCM, PVE
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMFireExtinguisherPortable
+    - id: CMEntrenchingTool
+    - id: RMCExplosivePlastic
+      amount: 3
+    - id: RMCExplosiveBreachingCharge
+      amount: 3
+    - id: RMCNailgunCompact
+
 # Sling Pouch
 - type: entity
   parent: [RMCPouchClosed, RMCPouchStorage]
@@ -700,19 +715,3 @@
 
 - type: Tag
   id: RMCPouchShotgunShells
-
-- type: entity
-  parent: RMCPouchToolsSoc
-  id: RMCPouchToolsSocRCMPVEAssaultEngi
-  suffix: Filled, RCM, PVE
-  components:
-  - type: StorageFill
-    contents:
-    - id: CMFireExtinguisherPortable
-    - id: CMEntrenchingTool
-    - id: RMCExplosivePlastic
-    - id: RMCExplosivePlastic
-    - id: RMCExplosiveBreachingCharge
-      amount: 3
-    - id: RMCNailgunCompact
-    - id: CMMultitool
