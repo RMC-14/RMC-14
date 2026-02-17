@@ -6,14 +6,27 @@
   components:
   - type: Snoring
 
+# Drinking Traits
+
 - type: trait
   id: LightweightDrunk
   name: trait-lightweight-name
   description: trait-lightweight-desc
-  category: Quirks
+  category: RMCDrinkingTraits
+  cost: 1
   components:
   - type: LightweightDrunk
     boozeStrengthMultiplier: 2
+
+- type: trait
+  id: RMCHeavyweightDrunk
+  name: rmc-trait-heavyweight-name
+  description: rmc-trait-heavyweight-desc
+  category: RMCDrinkingTraits
+  cost: 1
+  components:
+  - type: LightweightDrunk
+    boozeStrengthMultiplier: 0.5
 
 - type: trait
   id: SocialAnxiety
