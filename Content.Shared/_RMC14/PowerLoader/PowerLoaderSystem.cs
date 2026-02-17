@@ -37,6 +37,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using static Content.Shared.Interaction.SharedInteractionSystem;
 using static Content.Shared.Physics.CollisionGroup;
 using DropshipUtilityComponent = Content.Shared._RMC14.Dropship.Utility.Components.DropshipUtilityComponent;
 
@@ -62,8 +63,6 @@ public sealed class PowerLoaderSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly TagSystem _tag = default!;
-
-    private const float LoaderInteractRange = 2f;
 
     private static readonly EntProtoId DefaultHandVisual = "RMCVirtualDropshipGearRight";
 
@@ -297,7 +296,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = LoaderInteractRange,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -510,17 +509,6 @@ public sealed class PowerLoaderSystem : EntitySystem
 
         args.Handled = true;
 
-        if (!_interaction.InRangeUnobstructed(args.User, target, LoaderInteractRange))
-        {
-            var msg = Loc.GetString("rmc-power-loader-too-far");
-            foreach (var buckled in GetBuckled(args.User))
-            {
-                _popup.PopupClient(msg, args.User, buckled, PopupType.SmallCaution);
-            }
-
-            return;
-        }
-
         var user = new Entity<PowerLoaderComponent?>(args.User, null);
         var used = args.Used;
         var powerLoaderEv = new PowerLoaderInteractEvent(args.User, target, args.Used, GetBuckled(args.User).ToList());
@@ -549,7 +537,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = LoaderInteractRange,
+            DistanceThreshold = 2.5f,
         };
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.User, out var loader))
             loader.DoAfter = ev.DoAfter;
@@ -592,7 +580,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = LoaderInteractRange,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter) && TryComp<PowerLoaderComponent>(args.PowerLoader, out var loader))
@@ -1053,7 +1041,7 @@ public sealed class PowerLoaderSystem : EntitySystem
         {
             BreakOnMove = true,
             DuplicateCondition = DuplicateConditions.SameEvent,
-            DistanceThreshold = LoaderInteractRange,
+            DistanceThreshold = 2.5f,
         };
 
         if (_doAfter.TryStartDoAfter(doAfter))
@@ -1183,7 +1171,7 @@ public sealed class PowerLoaderSystem : EntitySystem
             return true;
         }
 
-        if (distance > LoaderInteractRange)
+        if (distance > InteractionRange)
         {
             var msg = Loc.GetString("rmc-power-loader-too-far");
             foreach (var buckled in GetBuckled(loader))
