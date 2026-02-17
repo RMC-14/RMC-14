@@ -187,8 +187,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
-            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked IFF for ID card: {Name(uid.Value)}");
-        }
+            _core.CreateARESLog(ent,
+                LogCat,
+                (string)$"{Name(args.Actor)} has revoked IFF for ID card: {Name(uid.Value)}");
 
             if (removed)
             {
@@ -197,6 +198,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                     $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
             }
         }
+
 
         Dirty(ent);
     }
