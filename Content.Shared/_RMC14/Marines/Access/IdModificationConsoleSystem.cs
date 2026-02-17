@@ -167,8 +167,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             Dirty(uid.Value, iff);
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Medium,
-                $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}"
-            
+                $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
+
             _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted IFF for ID card: {Name(uid.Value)}");
             ent.Comp.HasIFF = true;
         }
