@@ -103,7 +103,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
 
         var ev = new RMCRepairableDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, repairable, used: args.Used)//
+        var doAfter = new DoAfterArgs(EntityManager, user, repairable.Comp.Delay, ev, repairable, repairable, used: args.Used)
         {
             NeedHand = true,
             BreakOnMove = true,
