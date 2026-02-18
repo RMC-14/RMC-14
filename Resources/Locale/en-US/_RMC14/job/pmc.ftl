@@ -130,5 +130,7 @@ rmc-job-name-corp-dep-director = WE-YA Deputy Director
 rmc-ghost-name-corp-director = WE-YA Director (Neutral)
 rmc-job-name-corp-director = WE-YA Director
 
+rmc-job-name-corp-admin = Colony Administrator
+
 # Corpses
 rmc-job-name-pmc-operator-corpse = PMC Operator

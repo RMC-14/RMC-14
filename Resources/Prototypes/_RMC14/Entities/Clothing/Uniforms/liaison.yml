@@ -565,3 +565,14 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/bluegrey_admin.rsi
+
+- type: entity
+  parent: RMCJumpsuitLiaisonOrange
+  id: RMCJumpsuitLiaisonColonialAdmin
+  name: colonial administrator uniform
+  description: An office grey polo with a We-Ya badge on the chest. Worn by administrators on colonies owned by the Company.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/colony_admin.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/colony_admin.rsi

@@ -75,7 +75,14 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: weya_director
-    
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconColonyAdministrator
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: weya_admin
+
 - type: jobIcon
   parent: CMJobIconBase
   id: RMCJobIconPMCSynthetic

@@ -1,0 +1,57 @@
+﻿# Executive Supervisor (Legal)
+- type: job
+  parent: CMJobBase
+  id: RMCCorporateColonyAdministrator
+  name: rmc-job-name-corp-admin
+  description: rmc-ghost-role-information-corp-exec-description
+  playTimeTracker: RMCJobCorporateColonyAdministrator
+  ranks:
+    RMCRankWeYaColonyAdmin: [ ]
+  startingGear: RMCGearCorporateColonyAdministrator
+  icon: "RMCJobIconColonyAdministrator"
+  joinNotifyCrew: false
+  accessGroups:
+  - RMCWeYaExec
+  - Colony
+  - RMCWeYa
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      skills:
+        RMCSkillEndurance: 2
+        RMCSkillLeadership: 3
+        RMCSkillOverwatch: 1
+        RMCSkillVehicles: 1
+        RMCSkillMedical: 1
+        RMCSkillEngineer: 1
+    - type: RMCTrackable
+    - type: MarineOrders
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: weya_admin
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_wy_management
+  hasIcon: true
+  hidden: true
+
+- type: startingGear
+  id: RMCGearCorporateColonyAdministrator
+  equipment:
+    jumpsuit: RMCJumpsuitLiaisonColonialAdmin
+    shoes: RMCShoesLaceup
+    back: CMSatchel
+    id: CMIDCardPMCExecutive
+    belt: RMCWeYaClipboard
+    ears: RMCHeadsetDistressWeYa
+    head: RMCHeadCapWestonYamadaDark
+    pocket1: CMFolderBlue
+    pocket2: CMPenClicky
+
+- type: playTimeTracker
+  id: RMCJobCorporateColonyAdministrator
