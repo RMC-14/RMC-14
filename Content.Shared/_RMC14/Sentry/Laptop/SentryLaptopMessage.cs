@@ -17,7 +17,8 @@ public record SentryInfo(
     string? CustomName = null,
     float VisionRadius = 5.0f,
     float MaxDeviation = 75.0f,
-    HashSet<string>? HumanoidAdded = null
+    HashSet<string>? HumanoidAdded = null,
+    string? TargetName = null
 );
 
 [Serializable, NetSerializable]

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.IdentityManagement;
 using Content.Shared._RMC14.Tools;
 using Content.Shared._RMC14.Weapons.Ranged.IFF;
+using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Damage;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceLinking;
@@ -55,6 +57,9 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         SubscribeLocalEvent<SentryLaptopComponent, ComponentShutdown>(OnLaptopShutdown);
         SubscribeLocalEvent<SentryLaptopComponent, ActivatableUIOpenAttemptEvent>(OnLaptopUIOpenAttempt);
         SubscribeLocalEvent<SentryLaptopComponent, EntParentChangedMessage>(OnLaptopParentChanged);
+
+        SubscribeLocalEvent<PlaceableSurfaceComponent, AnchorStateChangedEvent>(OnSurfaceAnchorChanged);
+        SubscribeLocalEvent<PlaceableSurfaceComponent, EntityTerminatingEvent>(OnSurfaceTerminating);
 
         SubscribeLocalEvent<SentryLaptopLinkedComponent, ComponentShutdown>(OnSentryLinkedShutdown);
 
@@ -193,7 +198,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         if (!TryGetLinkedLaptop(sentry.Owner, out var laptop))
             return;
 
-        var targetName = Name(gun.Target.Value);
+        var targetName = GetTargetDisplayName(gun.Target.Value);
         var laptopEntity = laptop!.Value;
         SendAlert(laptopEntity.Owner, sentry, SentryAlertType.TargetAcquired,
             $"{GetSentryDisplayName(laptopEntity, sentry)}: Engaging {targetName}");
@@ -422,6 +427,40 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             _ui.CloseUi(laptop.Owner, SentryLaptopUiKey.Key);
     }
 
+    private void OnSurfaceAnchorChanged(Entity<PlaceableSurfaceComponent> surface, ref AnchorStateChangedEvent args)
+    {
+        if (args.Anchored)
+            return;
+
+        DetachLaptopsFromSurface(surface.Owner);
+    }
+
+    private void OnSurfaceTerminating(Entity<PlaceableSurfaceComponent> surface, ref EntityTerminatingEvent args)
+    {
+        DetachLaptopsFromSurface(surface.Owner);
+    }
+
+    private void DetachLaptopsFromSurface(EntityUid surface)
+    {
+        var laptops = new List<EntityUid>();
+        var children = Transform(surface).ChildEnumerator;
+        while (children.MoveNext(out var child))
+        {
+            if (!HasComp<SentryLaptopComponent>(child))
+                continue;
+
+            laptops.Add(child);
+        }
+
+        foreach (var laptop in laptops)
+        {
+            if (TerminatingOrDeleted(laptop))
+                continue;
+
+            _transform.AttachToGridOrMap(laptop);
+        }
+    }
+
     private bool IsSentryAlreadyLinked(Entity<SentryComponent> sentry)
     {
         return TryComp<SentryLaptopLinkedComponent>(sentry, out var linked) && linked.LinkedLaptop != null;
@@ -579,7 +618,8 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
             customName,
             visionRadius,
             maxDeviation,
-            GetSentryHumanoidAdded(sentryUid)
+            GetSentryHumanoidAdded(sentryUid),
+            GetSentryTargetName(sentryUid)
         );
     }
 
@@ -663,10 +703,37 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
         return null;
     }
 
+    private string? GetSentryTargetName(EntityUid sentry)
+    {
+        if (TryComp<GunComponent>(sentry, out var gun) && gun.Target is { } target)
+            return GetTargetDisplayName(target);
+
+        return null;
+    }
+
+    private string GetTargetDisplayName(EntityUid target)
+    {
+        if (HasComp<XenoComponent>(target))
+        {
+            if (TryComp<FixedIdentityComponent>(target, out var fixedIdentity) &&
+                fixedIdentity.Name is { } nameId)
+            {
+                var name = Loc.GetString(nameId);
+                var ev = new RMCGetFixedIdentityEvent(name);
+                RaiseLocalEvent(target, ref ev);
+                return ev.Name;
+            }
+
+            return Loc.GetString("cm-xeno-name");
+        }
+
+        return Name(target);
+    }
+
     private HashSet<string> GetSentryFriendlyFactions(EntityUid sentry)
     {
         if (TryComp<SentryTargetingComponent>(sentry, out var targeting))
-            return targeting.FriendlyFactions;
+            return new HashSet<string>(targeting.FriendlyFactions);
 
         return new HashSet<string>();
     }
@@ -674,7 +741,7 @@ public abstract class SharedSentryLaptopSystem : EntitySystem
     private HashSet<string> GetSentryHumanoidAdded(EntityUid sentry)
     {
         if (TryComp<SentryTargetingComponent>(sentry, out var targeting))
-            return targeting.HumanoidAdded;
+            return new HashSet<string>(targeting.HumanoidAdded);
 
         return new HashSet<string>();
     }
