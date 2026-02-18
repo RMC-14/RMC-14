@@ -6,7 +6,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
-namespace Content.Shared._RMC14.Medical.MedicalPods;
+namespace Content.Shared._RMC14.Medical.Sleeper;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
 [Access(typeof(SharedSleeperSystem))]

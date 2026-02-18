@@ -10,7 +10,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
-namespace Content.Shared._RMC14.Medical.MedicalPods;
+namespace Content.Shared._RMC14.Medical.Sleeper;
 
 public abstract class SharedSleeperSystem : EntitySystem
 {

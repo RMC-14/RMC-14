@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared._RMC14.Medical.MedicalPods;
+namespace Content.Shared._RMC14.Medical.Sleeper;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedSleeperSystem))]

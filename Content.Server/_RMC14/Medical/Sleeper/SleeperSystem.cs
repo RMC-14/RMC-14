@@ -1,6 +1,6 @@
 using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
-using Content.Shared._RMC14.Medical.MedicalPods;
+using Content.Shared._RMC14.Medical.Sleeper;
 using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Body.Components;
@@ -18,7 +18,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
-namespace Content.Server._RMC14.Medical.MedicalPods;
+namespace Content.Server._RMC14.Medical.Sleeper;
 
 public sealed class SleeperSystem : SharedSleeperSystem
 {

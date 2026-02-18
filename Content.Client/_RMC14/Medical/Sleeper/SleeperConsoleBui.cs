@@ -1,8 +1,8 @@
-using Content.Shared._RMC14.Medical.MedicalPods;
+using Content.Shared._RMC14.Medical.Sleeper;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
 
-namespace Content.Client._RMC14.Medical.MedicalPods;
+namespace Content.Client._RMC14.Medical.Sleeper;
 
 [UsedImplicitly]
 public sealed class SleeperConsoleBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
