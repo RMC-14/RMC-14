@@ -143,7 +143,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
             // Find the encryption component
             var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
-            if (!encryptionQuery.MoveNext(out _, out encryptionComp))
+            if (!encryptionQuery.MoveNext(out var uid, out encryptionComp))
                 return;
 
             // Check if challenge has expired
@@ -179,7 +179,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
             if (code.ToUpper() == encryptionComp.ChallengePhrase.ToUpper())
             {
-                _encryption.RestoreClarity((ent.Owner, encryptionComp), true);
+                _encryption.RestoreClarity((uid, encryptionComp), true);
                 pongDisplay = pongChallenge;
             }
 
