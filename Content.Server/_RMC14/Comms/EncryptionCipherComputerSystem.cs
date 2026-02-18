@@ -43,6 +43,7 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
                 subs.Event<EncryptionCipherChangeSettingMsg>(OnChangeSetting);
                 subs.Event<EncryptionCipherPrintMsg>(OnPrint);
                 subs.Event<EncryptionCipherRefillMsg>(OnRefill);
+                subs.Event<EncryptionCipherShiftLetterMsg>(OnShiftLetter);
             });
     }
 
@@ -117,6 +118,40 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         UpdateCipherState(ent);
     }
 
+    private void OnShiftLetter(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherShiftLetterMsg args)
+    {
+        if (string.IsNullOrEmpty(ent.Comp.InputCode))
+            return;
+
+        var parts = ent.Comp.InputCode.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+        if (args.Index < 0 || args.Index >= parts.Count)
+            return;
+
+        // Parse hex like 0x41
+        var part = parts[args.Index];
+        if (!part.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase))
+            return;
+
+        if (!int.TryParse(part.Substring(2), System.Globalization.NumberStyles.HexNumber, null, out var value))
+            return;
+
+        // Only shift uppercase A-Z
+        if (value < 'A' || value > 'Z')
+            return;
+
+        var range = 26;
+        var baseChar = 'A';
+        var offset = (value - baseChar + args.Delta) % range;
+        if (offset < 0) offset += range;
+        var newVal = baseChar + offset;
+        parts[args.Index] = $"0x{newVal:X2}";
+
+        ent.Comp.InputCode = string.Join(" ", parts);
+        ent.Comp.DecipheredWord = DecipherCode(ent.Comp.InputCode, ent.Comp.CipherSetting);
+        Dirty(ent);
+        UpdateCipherState(ent);
+    }
+
     private void OnPrint(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherPrintMsg args)
     {
         if (ent.Comp.PunchcardCount <= 0)
@@ -131,19 +166,6 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         {
             punchComp.Data = $"{ent.Comp.DecipheredWord}:{ent.Comp.CipherSetting}";
             Dirty(punchcard, punchComp);
-
-            // Mispunch chance: 1/7
-            if (_random.Next(7) == 0)
-            {
-                var chars = punchComp.Data.ToCharArray();
-                if (chars.Length > 0)
-                {
-                    var index = _random.Next(chars.Length);
-                    chars[index] = '0';
-                    punchComp.Data = new string(chars);
-                    Dirty(punchcard, punchComp);
-                }
-            }
         }
 
         ent.Comp.PunchcardCount--;

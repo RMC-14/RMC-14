@@ -27,6 +27,13 @@ public sealed class EncryptionCipherSetInputMsg(string code) : BoundUserInterfac
 }
 
 [Serializable, NetSerializable]
+public sealed class EncryptionCipherShiftLetterMsg(int index, int delta) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+    public readonly int Delta = delta; // +1 or -1
+}
+
+[Serializable, NetSerializable]
 public sealed class EncryptionCipherRefillMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]

@@ -110,7 +110,19 @@ public sealed class DecoderComputerSystem : EntitySystem
                 if (parts.Length > 0)
                 {
                     var index = _random.Next(parts.Length);
-                    parts[index] = "0x00";
+                    var part = parts[index];
+                    if (part.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) &&
+                        int.TryParse(part.Substring(2), System.Globalization.NumberStyles.HexNumber, null, out var value))
+                    {
+                        if (value >= 'A' && value <= 'Z')
+                        {
+                            var range = 26;
+                            var baseChar = 'A';
+                            var offset = (value - baseChar + 1) % range; // shift by +1
+                            var newVal = baseChar + offset;
+                            parts[index] = $"0x{newVal:X2}";
+                        }
+                    }
                     punchComp.Data = string.Join(" ", parts);
                     Dirty(punchcard, punchComp);
                 }
@@ -189,7 +201,7 @@ public sealed class DecoderComputerSystem : EntitySystem
 
         ent.Comp.CurrentChallengeCode = hexCodes;
         ent.Comp.CurrentChallengeWord = word;
-        ent.Comp.ChallengeExpiry = _timing.CurTime + TimeSpan.FromSeconds(30);
+        ent.Comp.ChallengeExpiry = _timing.CurTime + TimeSpan.FromSeconds(60);
         ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-decoding");
         ent.Comp.HasGracePeriod = false;
         Dirty(ent);

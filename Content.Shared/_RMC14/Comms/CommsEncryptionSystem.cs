@@ -108,13 +108,13 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
     {
         if (fullRestore)
         {
-            ent.Comp.Clarity = ent.Comp.MaxClarity; // Restore to 95%
+            ent.Comp.Clarity = 1.0f; // Restore to 100%
             ent.Comp.LastDecryptionTime = _timing.CurTime;
         }
         else
         {
             // Quick restore +5%
-            ent.Comp.Clarity = Math.Min(ent.Comp.Clarity + 0.05f, ent.Comp.MaxClarity);
+            ent.Comp.Clarity = Math.Min(ent.Comp.Clarity + 0.05f, 1.0f);
         }
 
         ent.Comp.DegradationStartTime = _timing.CurTime;

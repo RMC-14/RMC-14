@@ -20,6 +20,7 @@ public sealed class EncryptionCipherComputerBui(EntityUid owner, Enum uiKey) : B
         _window.ChangeSetting += delta => SendPredictedMessage(new EncryptionCipherChangeSettingMsg(delta));
         _window.Print += () => SendPredictedMessage(new EncryptionCipherPrintMsg());
         _window.Refill += () => SendPredictedMessage(new EncryptionCipherRefillMsg());
+        _window.ShiftLetter += (index, delta) => SendPredictedMessage(new EncryptionCipherShiftLetterMsg(index, delta));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
