@@ -61,6 +61,7 @@
   - type: IgnoreContentsSize
     items:
       tags:
+      - CMMedicalUpgradeKit
       - PillPacket
       - PillCanister
       - CMSurgicalCase

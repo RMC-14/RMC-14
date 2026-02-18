@@ -76,6 +76,7 @@
     - id: RMCSyringeCaseFilledCommando
     - id: RMCSurgicalCaseFilledCommandoElite
     - id: CMRollerBedSpawnFolded
+    - id: CMMedicalUpgradeKitFilledCommando
 #  /obj/item/stack/medical/splint/nano(src, rand(1,2))
 
   - type: Sprite
@@ -143,7 +144,6 @@
     - id: RMCCigarettePackWeYaGold
     - id: CMDefibrillator # TODO: Low charge (?)
     - id: CMFirstAidKitFilledCommando
-    - id: CMMedicalUpgradeKitFilledCommando
 
 - type: jobIcon
   parent: CMJobIconBase
