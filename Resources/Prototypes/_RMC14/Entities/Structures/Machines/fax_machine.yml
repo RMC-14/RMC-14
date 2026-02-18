@@ -124,7 +124,6 @@
   components:
   - type: FaxMachine
     name: "Correspondent Tent"
-    notifyAdmins: false
 
 - type: entity
   parent: CMFax
