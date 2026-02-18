@@ -1,0 +1,53 @@
+# PVE Exclusive
+- type: entity
+  parent: CMBaseStructure
+  id: RMCDropshipStorageCompartment
+  name: storage compartment
+  description: A wide storage unit to allow it's users to store a wide variety of objects, from equipment to weapons and their ammo. Very versatile.
+  suffix: PVE
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _RMC14/Structures/Dropships/storage_container.rsi
+    state: closed
+  #- type: GenericVisualizer
+  #  visuals:
+  #    enum.StorageVisuals.Open:
+  #      lid:
+  #        True: { state: open }
+  #        False: { state: closed }
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,20,1
+  - type: FixedItemSizeStorage
+  - type: Clickable
+  - type: Corrodible
+    isCorrodible: false
+  - type: InteractionOutline
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: WallMount
+    arc: 360
+
+  # TODO: Make it a wallmount, reference of the nanomed
+# - type: Fixtures
+#     fixtures:
+#       fix1:
+#         shape:
+#           !type:PhysShapeAabb
+#           bounds: "-0.38,-0.5,0.35,0.5"
+#         mask:
+#         - MachineMask
+#         layer:
+#         - MachineLayer
+#         density: 200
+#         hard: false
+#   - type: Sprite
+#     drawdepth: WallMountedItems
+#     sprite: _RMC14/Structures/Machines/VendingMachines/nanomed.rsi
+#     layers:
+#     - state: "off"
+#     - state: "normal-unshaded"
