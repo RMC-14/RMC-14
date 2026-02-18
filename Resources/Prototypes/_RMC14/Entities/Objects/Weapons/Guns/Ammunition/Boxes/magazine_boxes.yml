@@ -1566,6 +1566,7 @@
       whitelist:
         tags:
         - RMCMagazineSniperType88
+
 # L90/91 REG
 - type: entity
   parent: RMCBoxMagazineRifleBase
@@ -1672,7 +1673,7 @@
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#318b11"
     - state: rifle_box_90
-      color: "#ffcb26"
+      color: "#ffa126"
     - state: rifle_box_marking
       color: "#318b11"
     - state: rifle_lid
@@ -1717,7 +1718,7 @@
       map: [ "enum.CMItemSlotsLayers2.Fill" ]
       color: "#318b11"
     - state: rifle_box_90d
-      color: "#ffcb26"
+      color: "#ffa126"
     - state: rifle_box_marking
       color: "#318b11"
     - state: rifle_lid

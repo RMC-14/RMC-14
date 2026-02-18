@@ -1,0 +1,786 @@
+# large rifle box base entity
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineBase
+  id: RMCBoxMagazineRifleLargeBase
+  name: generic rifle magazine box (? x ?)
+  description: A box of rifle magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box_large
+      color: "#ff8888"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#8888ff"
+    - state: rifle_box_generic # "size"_box_"label" - Label Colour
+      color: "#88ff88"
+    - state: rifle_box_large_marking # "size"_box_marking - Type Colour
+      color: "#8888ff"
+    - state: rifle_lid_large # "size"_lid - Base Colour
+      map: [ "lid" ]
+      color: "#ff8888"
+    - state: rifle_lid_large_marking # "size"_lid_marking - Type Colour
+      map: [ "lid_marking" ]
+      color: "#8888ff"
+  - type: GenericVisualizer
+    visuals:
+      enum.DeployableItemVisuals.Deployed:
+        lid:
+          True: { visible: false }
+          False: { visible: true }
+        lid_marking:
+          True: { visible: false }
+          False: { visible: true }
+      enum.CMItemSlotsLayers.Fill:
+        enum.CMItemSlotsLayers.Fill:
+          Empty: { state: rifle_ammo_large_full_mags_base, visible: false }
+          Low: { state: rifle_ammo_large_low_mags_base, visible: true }
+          Medium: { state: rifle_ammo_large_medium_mags_base, visible: true }
+          High: { state: rifle_ammo_large_high_mags_base, visible: true }
+          Full: { state: rifle_ammo_large_full_mags_base, visible: true }
+        enum.CMItemSlotsLayers2.Fill: # Second fill state for coloured casings
+          Empty: { state: rifle_ammo_large_full_mags_color, visible: false }
+          Low: { state: rifle_ammo_large_low_mags_color, visible: true }
+          Medium: { state: rifle_ammo_large_medium_mags_color, visible: true }
+          High: { state: rifle_ammo_large_high_mags_color, visible: true }
+          Full: { state: rifle_ammo_large_full_mags_color, visible: true }
+
+# M54C Reg
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CEmpty
+  name: large magazine box (M54C x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#7c4c1b"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54C
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CEmpty
+  id: RMCBoxLargeMagazineRifleM54C
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54C
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54C
+
+# M54C Ext
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CExtEmpty
+  name: large magazine box (Ext M54C x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffcb26"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#ffcb26"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#ffcb26"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CExt
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CExtEmpty
+  id: RMCBoxLargeMagazineRifleM54CExt
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CExt
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CExt
+
+# M54C AP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CAPEmpty
+  name: large magazine box (AP M54C x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#318b11"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CAPEmpty
+  id: RMCBoxLargeMagazineRifleM54CAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
+
+# M54C HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CHEAPEmpty
+  name: large magazine box (HEAP M54C x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_54
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#9C9A19"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CHEAPEmpty
+  id: RMCBoxLargeMagazineRifleM54CHEAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleM54CHEAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CAP
+
+# M54C MK1 Reg
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CMK1Empty
+  name: large magazine box (M54C MK1 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#7c4c1b"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CMK1Empty
+  id: RMCBoxLargeMagazineRifleM54CMK1
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CMK1
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1
+
+# M54C MK1 AP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CMK1APEmpty
+  name: large magazine box (AP M54C MK1 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#318b11"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1AP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CMK1APEmpty
+  id: RMCBoxLargeMagazineRifleM54CMK1AP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: CMMagazineRifleM54CMK1AP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - CMMagazineRifleM54CMK1AP
+
+# M54C MK1 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleM54CMK1HEAPEmpty
+  name: large magazine box (HEAP M54C MK1 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#7b8246"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_generic
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#9C9A19"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#7b8246"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1HEAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleM54CMK1HEAPEmpty
+  id: RMCBoxLargeMagazineRifleM54CMK1HEAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleM54CMK1HEAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleM54CMK1HEAP
+
+# Type 71 Reg
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleType71Empty
+  name: large magazine box (Type 71 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#962e23"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#7c4c1b"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleType71Empty
+  id: RMCBoxLargeMagazineRifleType71
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71
+
+# Type 71 AP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleType71APEmpty
+  name: large magazine box (AP Type 71 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#962e23"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#318b11"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71AP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleType71APEmpty
+  id: RMCBoxLargeMagazineRifleType71AP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71AP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71AP
+
+# Type 71 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleType71HEAPEmpty
+  name: large magazine box (HEAP Type 71 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#962e23"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_large_marking
+      color: "#9C9A19"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71HEAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleType71HEAPEmpty
+  id: RMCBoxLargeMagazineRifleType71HEAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71HEAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71AP
+
+# L90/91 Reg
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90Empty
+  name: large magazine box (L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_90
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#7c4c1b"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90Empty
+  id: RMCBoxLargeMagazineRifleL90
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90
+
+# L90/91 AP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90APEmpty
+  name: large magazine box (AP L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_90
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#318b11"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90AP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90APEmpty
+  id: RMCBoxLargeMagazineRifleL90AP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90AP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90AP
+
+# L90/91 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90HEAPEmpty
+  name: large magazine box (HEAP L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_90
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#9C9A19"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90HEAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90HEAPEmpty
+  id: RMCBoxLargeMagazineRifleL90HEAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90HEAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90HEAP
+
+# L90/91 Reg Drum
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90DrumEmpty
+  name: large magazine box (Drum L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_90d
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#7c4c1b"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#7c4c1b"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90Drum
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90DrumEmpty
+  id: RMCBoxLargeMagazineRifleL90Drum
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90Drum
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90Drum
+
+# L90/91 AP Drum
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90DrumAPEmpty
+  name: large magazine box (AP Drum L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#318b11"
+    - state: rifle_box_90d
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#318b11"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#318b11"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90DrumAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90DrumAPEmpty
+  id: RMCBoxLargeMagazineRifleL90DrumAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90DrumAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90DrumAP
+
+# L90/91 HEAP Drum
+- type: entity
+  parent: RMCBoxMagazineRifleLargeBase
+  id: RMCBoxLargeMagazineRifleL90DrumHEAPEmpty
+  name: large magazine box (HEAP Drum L90/91 x 32)
+  suffix: PVE
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box_large
+      color: "#3a3a4b"
+    - state: rifle_ammo_large_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_large_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#9C9A19"
+    - state: rifle_box_90d
+      color: "#ffa126"
+    - state: rifle_box_large_marking
+      color: "#9C9A19"
+    - state: rifle_lid_large
+      map: [ "lid" ]
+      color: "#3a3a4b"
+    - state: rifle_lid_large_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90DrumHEAP
+
+- type: entity
+  parent: RMCBoxLargeMagazineRifleL90DrumHEAPEmpty
+  id: RMCBoxLargeMagazineRifleL90DrumHEAP
+  suffix: PVE, Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleL90DrumHEAP
+    count: 32
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleL90DrumHEAP
