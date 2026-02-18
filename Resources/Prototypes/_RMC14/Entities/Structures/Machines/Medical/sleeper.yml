@@ -71,7 +71,7 @@
 - type: entity
   parent: CMBaseStructureCorrodible
   id: RMCSleeperConsole
-  name: sleeper console
+  name: sleeper console # TODO RMC14 Insert upgrade into console /obj/item/research_upgrades/sleeper
   description: A console used to control the sleeper. Allows chemical injection and dialysis.
   placement:
     mode: SnapgridCenter
@@ -125,7 +125,7 @@
 # Advanced Sleeper
 - type: entity
   parent: RMCSleeper
-  id: RMCSleeperAdvanced # TODO RMC14 /obj/item/research_upgrades/sleeper
+  id: RMCSleeperAdvanced
   name: advanced sleeper
   description: A more expensive model of the sleeper bed, comes with additional chemicals and an advanced dialysis machine, capable of removing chemicals much faster and more of them at the same time.
   suffix: Spawns with Console
