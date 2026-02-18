@@ -1,0 +1,120 @@
+- type: entity
+  abstract: true
+  parent: CMBaseStructure
+  id: RMCEncryptionComputerBase
+  name: RMC encryption computer base
+  description: Common components for RMC encryption-related computers.
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: InteractionOutline
+  - type: Clickable
+  - type: ApcPowerReceiver
+    powerLoad: 0
+    needsPower: false
+  - type: WallMount
+    arc: 360
+  - type: EmitSoundOnUIOpen
+    sound:
+      collection: RMCKeyboardTyping
+      params:
+        volume: -1
+  - type: RequiresSkill
+    skills:
+      RMCSkillIntel: 1
+  - type: ItemSlots
+  - type: ContainerContainer
+    containers:
+      storagebase: !type:Container
+      punchcard_slot: !type:ContainerSlot
+
+- type: entity
+  parent: RMCEncryptionComputerBase
+  id: RMCEncryptionCipherComputer
+  name: Encryption Cipher Computer
+  description: Used to decipher challenge tokens into words using a cipher phrase.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: sensor_comp2_off
+    layers:
+    - state: sensor_comp2
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: ActivatableUI
+    key: enum.EncryptionCipherComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.EncryptionCipherComputerUI.Key:
+        type: EncryptionCipherComputerBui
+  - type: EncryptionCipherComputer
+  - type: AccessReader
+    access: [[ "RMCAccessCommand" ]]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCPunchcardStack
+      components:
+      - Punchcard
+
+- type: entity
+  parent: RMCEncryptionComputerBase
+  id: RMCEncryptionCoderComputer
+  name: Encryption Encoder Computer
+  description: Used to check announcement clarity by submitting encodings.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: sensor_comp1_off
+    layers:
+    - state: sensor_comp1
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: ActivatableUI
+    key: enum.EncryptionCoderComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.EncryptionCoderComputerUI.Key:
+        type: EncryptionCoderComputerBui
+  - type: EncryptionCoderComputer
+  - type: AccessReader
+    access: [[ "RMCAccessCommand" ]]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1
+    whitelist:
+      components:
+      - Punchcard
+
+- type: entity
+  parent: RMCEncryptionComputerBase
+  id: RMCDecoderComputer
+  name: Encryption Decoder Computer
+  description: Used to generate challenge tokens from the current encryption stream.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/almayer_props.rsi
+    state: sensor_comp3_off
+    layers:
+    - state: sensor_comp3
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: ActivatableUI
+    key: enum.DecoderComputerUI.Key
+  - type: UserInterface
+    interfaces:
+      enum.DecoderComputerUI.Key:
+        type: DecoderComputerBui
+  - type: DecoderComputer
+  - type: AccessReader
+    access: [[ "RMCAccessSeniorCommand" ]]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,1,1
+    whitelist:
+      tags:
+      - RMCPunchcardStack

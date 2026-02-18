@@ -1,4 +1,5 @@
 using Robust.Shared.GameStates;
+using Content.Shared.Containers.ItemSlots;
 
 namespace Content.Shared._RMC14.Comms;
 
@@ -22,6 +23,9 @@ public sealed partial class DecoderComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public int PunchcardCount = 10;
+
+    [DataField]
+    public ItemSlot PunchcardSlot = new();
 
     [DataField, AutoNetworkedField]
     public TimeSpan ChallengeExpiry;

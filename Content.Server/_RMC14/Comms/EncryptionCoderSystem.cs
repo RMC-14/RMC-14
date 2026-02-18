@@ -2,6 +2,7 @@ using Content.Server.Interaction;
 using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
@@ -17,6 +18,8 @@ public sealed class EncryptionCoderSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -30,7 +33,10 @@ public sealed class EncryptionCoderSystem : EntitySystem
         SubscribeLocalEvent<EncryptionCoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<EncryptionCoderComputerComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<EncryptionCoderComputerComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<EncryptionCoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<EncryptionCoderComputerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
 
         Subs.BuiEvents<EncryptionCoderComputerComponent>(EncryptionCoderComputerUI.Key,
             subs =>
@@ -44,6 +50,32 @@ public sealed class EncryptionCoderSystem : EntitySystem
             });
     }
 
+    private void OnComponentInit(EntityUid uid, EncryptionCoderComputerComponent component, ComponentInit args)
+    {
+        const string SlotId = "punchcard_slot";
+        _itemSlotsSystem.AddItemSlot(uid, SlotId, component.PunchcardSlot);
+    }
+
+    private void OnComponentRemove(EntityUid uid, EncryptionCoderComputerComponent component, ComponentRemove args)
+    {
+        _itemSlotsSystem.RemoveItemSlot(uid, component.PunchcardSlot);
+    }
+
+    private void OnEntRemoved(EntityUid uid, EncryptionCoderComputerComponent component, EntRemovedFromContainerMessage args)
+    {
+        if (args.Container.ID != component.PunchcardSlot.ID)
+            return;
+
+        component.CurrentWord = "";
+        component.CurrentOffset = 0;
+        UpdateCoderState((uid, component));
+    }
+
+    private void OnMapInit(Entity<EncryptionCoderComputerComponent> ent, ref MapInitEvent args)
+    {
+        UpdateCoderState(ent);
+    }
+
     private void OnBUIOpened(Entity<EncryptionCoderComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateCoderState(ent);
@@ -52,11 +84,6 @@ public sealed class EncryptionCoderSystem : EntitySystem
     private void OnActivate(Entity<EncryptionCoderComputerComponent> ent, ref ActivateInWorldEvent args)
     {
         _ui.TryOpenUi(ent.Owner, EncryptionCoderComputerUI.Key, args.User);
-    }
-
-    private void OnMapInit(Entity<EncryptionCoderComputerComponent> ent, ref MapInitEvent args)
-    {
-        UpdateCoderState(ent);
     }
 
 
@@ -266,22 +293,16 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
     private void OnRefill(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerRefillMsg args)
     {
-        if (!TryComp<StorageComponent>(ent, out var storage))
+        var item = ent.Comp.PunchcardSlot.Item;
+        if (item == null || !TryComp<PunchcardStackComponent>(item, out var stack))
         {
             UpdateCoderState(ent);
             return;
         }
 
-        foreach (var item in storage.Container.ContainedEntities)
-        {
-            if (TryComp<PunchcardStackComponent>(item, out var stack))
-            {
-                ent.Comp.PunchcardCount += stack.Count;
-                EntityManager.QueueDeleteEntity(item);
-                Dirty(ent);
-                break;
-            }
-        }
+        ent.Comp.PunchcardCount += stack.Count;
+        EntityManager.QueueDeleteEntity(item.Value);
+        Dirty(ent);
 
         UpdateCoderState(ent);
     }
@@ -314,7 +335,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
     private void OnEntInserted(Entity<EncryptionCoderComputerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (!TryComp<StorageComponent>(ent, out var storage) || args.Container != storage.Container)
+        if (args.Container.ID != ent.Comp.PunchcardSlot.ID)
             return;
 
         if (TryComp<PunchcardComponent>(args.Entity, out var punchcard))
@@ -341,7 +362,8 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 // Old logic for hex codes
                 SubmitCode(ent, punchcard.Data);
             }
-            UpdateCoderState(ent);
         }
+
+        UpdateCoderState(ent);
     }
 }

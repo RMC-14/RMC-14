@@ -2,6 +2,8 @@ using Content.Server.Interaction;
 using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
+using Content.Shared.Containers.ItemSlots;
+using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Random;
@@ -18,6 +20,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
+    [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -31,6 +34,9 @@ public sealed class DecoderComputerSystem : EntitySystem
         SubscribeLocalEvent<DecoderComputerComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<DecoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<DecoderComputerComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<DecoderComputerComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<DecoderComputerComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<DecoderComputerComponent, ContainerModifiedMessage>(OnContainerModified);
 
         Subs.BuiEvents<DecoderComputerComponent>(DecoderComputerUI.Key,
             subs =>
@@ -40,6 +46,25 @@ public sealed class DecoderComputerSystem : EntitySystem
                 subs.Event<DecoderComputerRefillMsg>(OnRefill);
                 subs.Event<DecoderComputerGenerateMsg>(OnGenerate);
             });
+    }
+
+    private void OnComponentInit(EntityUid uid, DecoderComputerComponent component, ComponentInit args)
+    {
+        const string SlotId = "punchcard_slot";
+        _itemSlotsSystem.AddItemSlot(uid, SlotId, component.PunchcardSlot);
+    }
+
+    private void OnComponentRemove(EntityUid uid, DecoderComputerComponent component, ComponentRemove args)
+    {
+        _itemSlotsSystem.RemoveItemSlot(uid, component.PunchcardSlot);
+    }
+
+    private void OnContainerModified(EntityUid uid, DecoderComputerComponent component, ContainerModifiedMessage args)
+    {
+        if (args.Container.ID != component.PunchcardSlot.ID)
+            return;
+
+        // no immediate action needed; refill/print will read slot contents when invoked
     }
 
     private void OnMapInit(Entity<DecoderComputerComponent> ent, ref MapInitEvent args)
@@ -100,24 +125,18 @@ public sealed class DecoderComputerSystem : EntitySystem
 
     private void OnRefill(Entity<DecoderComputerComponent> ent, ref DecoderComputerRefillMsg args)
     {
-        if (!TryComp<StorageComponent>(ent, out var storage))
+        var item = ent.Comp.PunchcardSlot.Item;
+        if (item == null || !TryComp<PunchcardStackComponent>(item, out var stack))
         {
             ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-no-storage");
             UpdateDecoderState(ent);
             return;
         }
 
-        foreach (var item in storage.Container.ContainedEntities)
-        {
-            if (TryComp<PunchcardStackComponent>(item, out var stack))
-            {
-                ent.Comp.PunchcardCount += stack.Count;
-                EntityManager.QueueDeleteEntity(item);
-                ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-refilled-punchcards", ("count", stack.Count));
-                Dirty(ent);
-                break;
-            }
-        }
+        ent.Comp.PunchcardCount += stack.Count;
+        EntityManager.QueueDeleteEntity(item.Value);
+        ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-refilled-punchcards", ("count", stack.Count));
+        Dirty(ent);
 
         UpdateDecoderState(ent);
     }
