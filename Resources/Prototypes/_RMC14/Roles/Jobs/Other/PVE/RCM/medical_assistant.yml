@@ -53,7 +53,7 @@
     - type: CMVendorUser
       extraPoints:
         Chemicals: 120
-#  hidden: true
+  hidden: true
 
 - type: startingGear
   id: RMCGearRoyalMedicPVE
