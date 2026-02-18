@@ -270,8 +270,11 @@ public abstract class SharedMarineAnnounceSystem : EntitySystem
         AnnounceToMarines(wrappedMessage, sound, filter, excludeSurvivors);
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(sender):source} marine announced message: {message}");
 
-        if (_idCard.TryFindIdCard(sender, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF) && idCardIFF.Faction != null)
-            _core.CreateARESLog(idCardIFF.Faction.Value, LogCat, (string)$"{Name(sender)} sent an announcement: {message}");
+        if (_idCard.TryFindIdCard(sender, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
+            foreach (var faction in idCardIFF.Factions)
+            {
+                _core.CreateARESLog(faction, LogCat, (string)$"{Name(sender)} sent an announcement: {message}");
+            }
     }
 
     public string FormatHighCommand(string? author, string message)

@@ -491,14 +491,13 @@ public sealed class OrbitalCannonSystem : EntitySystem
         if (_net.IsServer)
             _audio.PlayPvs(cannon.Comp.ChamberSound, cannon);
 
-        if (_container.TryGetContainer(cannon, cannon.Comp.FuelContainer, out var fuelContainers) &&
-            _container.TryGetContainer(cannon, cannon.Comp.WarheadContainer, out var warHeads))
+        if (_container.TryGetContainer(cannon, cannon.Comp.CannonChamberContainer, out var fuelContainers))
         {
-            foreach (var warHead in warHeads.ContainedEntities)
+            foreach (var element in fuelContainers.ContainedEntities)
             {
                 _core.CreateARESLog(cannon,
                     LogCat,
-                    (string)$"{Name(args.Actor)} chambered a {Name(warHead)} with a fuel count of {fuelContainers.Count}");
+                    (string)$"{Name(args.Actor)} chambered a {Name(element)}");
             }
 
         }

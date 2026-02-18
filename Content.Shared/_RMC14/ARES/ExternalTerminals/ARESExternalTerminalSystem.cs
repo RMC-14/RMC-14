@@ -108,7 +108,7 @@ public sealed class ARESExternalTerminalSystem : EntitySystem
         SetAres(ent);
         if (!_idCard.TryFindIdCard(args.Actor, out var idCard) || !TryComp<AccessComponent>(idCard, out var access) ||
             !TryComp<ItemIFFComponent>(idCard, out var itemIff) || idCard.Comp.FullName == null ||
-            idCard.Comp._jobTitle == null || itemIff.Faction != ent.Comp.Faction)
+            idCard.Comp._jobTitle == null || !itemIff.Factions.Contains(ent.Comp.Faction))
             return;
 
         _core.CreateARESLog(ent.Comp.Faction,

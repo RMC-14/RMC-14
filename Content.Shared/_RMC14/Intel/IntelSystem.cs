@@ -509,8 +509,14 @@ public sealed class IntelSystem : EntitySystem
                     PopupType.Medium);
             }
 
-            if (_idCard.TryFindIdCard(args.User, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF) && idCardIFF.Faction != null)
-                _aresCore.CreateARESLog(idCardIFF.Faction.Value, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
+            if (_idCard.TryFindIdCard(args.User, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
+            {
+                foreach (var faction in idCardIFF.Factions)
+                {
+                    _aresCore.CreateARESLog(faction, LogCat, (string)$"{Name(args.User)} processed {args.Amount} intel entries");
+                }
+            }
+
         }
 
         if (!TryComp(args.User, out IntelKnowledgeComponent? knowledge))

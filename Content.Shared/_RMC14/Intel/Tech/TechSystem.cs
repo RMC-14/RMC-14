@@ -127,8 +127,11 @@ public sealed class TechSystem : EntitySystem
 
         _intel.UpdateTree(tree);
 
-        if (_idCard.TryFindIdCard(args.Actor, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF) && idCardIFF.Faction != null)
-            _core.CreateARESLog(idCardIFF.Faction.Value, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+        if (_idCard.TryFindIdCard(args.Actor, out var idCard) && TryComp(idCard, out ItemIFFComponent? idCardIFF))
+            foreach (var faction in idCardIFF.Factions)
+            {
+                _core.CreateARESLog(faction, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
+            }
         else
         {
             _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} purchased intel node: {option.Name}");
