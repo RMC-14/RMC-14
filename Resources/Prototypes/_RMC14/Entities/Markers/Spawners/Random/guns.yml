@@ -37,8 +37,6 @@
     - RMCWeaponPistolKT42: RMCMagazinePistolKT42
     - CMWeaponPistolM1911: CMMagazinePistolM1911
     - RMCWeaponRevolver38Magnum: RMCSpeedLoader38
-    # TODO desert eagle
-    # TODO S&W revolver
     - RMCWeaponPistolHandcannon: RMCMagazinePistolHandcannon
     # TODO CZ-81 machine pistol
 
