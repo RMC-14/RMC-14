@@ -425,7 +425,7 @@
 
 - type: entity
   parent: RMCBasePVEEquipmentCase
-  id: RMCPVECaseFlamerFuel
+  id: RMCPVECaseL104Fuel
   name: L104 incinerator fuel tank case
   description: A heavy case containing six fuel tanks for the L104 incinerator.
   components:
