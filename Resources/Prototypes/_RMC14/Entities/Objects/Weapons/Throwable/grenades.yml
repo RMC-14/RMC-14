@@ -256,7 +256,7 @@
     sprite: _RMC14/Objects/Weapons/Grenades/m12blast.rsi
   - type: Explosive
     maxIntensity: 30 # max 150 brute, 150 burn
-    intensitySlope: 6
+    intensitySlope: 3
     totalIntensity: 280
   - type: Tag
     tags:
