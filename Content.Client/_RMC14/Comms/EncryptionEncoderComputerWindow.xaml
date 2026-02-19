@@ -1,6 +1,6 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
-                      Title="Encoder">
+                      Title="Encryption Encoder Computer">
     <BoxContainer Orientation="Vertical" Margin="10">
         <Label Text="Challenge Code:" />
         <Label Name="WordLabel" Text="" Margin="0,0,0,10" />
