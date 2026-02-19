@@ -50,6 +50,7 @@
   - type: TileFire
     id: RMCTileFire
     extinguishInstantly: true
+    duration: 20
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -90,6 +91,7 @@
     extinguishInstantly: false
     patExtinguishMultiplier: 2
     sprayExtinguishMultiplier: 3
+    duration: 50
   - type: SpeedModifierContacts
     walkSpeedModifier: 0.666
     sprintSpeedModifier: 0.666
