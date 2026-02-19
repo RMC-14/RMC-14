@@ -19,22 +19,4 @@ public sealed partial class HefaSwordSplosionComponent : Component
 
     [DataField]
     public LocId DeprimedPopup = "rmc-hefa-sword-deprimed";
-
-    [DataField]
-    public EntProtoId ShrapnelPrototype = "CMProjectileShrapnel";
-
-    [DataField]
-    public int ShrapnelCount = 48;
-
-    [DataField]
-    public float SpreadAngle = 90f;
-
-    [DataField]
-    public float ProjectileSpeed = 20f;
-
-    [DataField]
-    public float MinVelocity = 2f;
-
-    [DataField]
-    public float MaxVelocity = 6f;
 }

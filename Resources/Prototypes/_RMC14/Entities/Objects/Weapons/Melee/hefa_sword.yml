@@ -11,7 +11,7 @@
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
     state: icon
   - type: Item
-    size: Large
+    size: Medium
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
   - type: HefaSwordSplosion
   - type: Explosive

@@ -180,7 +180,7 @@
 
 # HEFA
 - type: entity
-  parent: [RMCArmorHelmetM3G4, CMGrenadeBase]
+  parent: RMCArmorHelmetM3G4
   id: RMCArmorHelmetHEFA
   name: HEFA helmet
   description: For some reason, seeing this helmet causes you to feel extremely distressed.
@@ -227,31 +227,48 @@
       - CMAutoInjector
       - PillPacket
       - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
-  # Uses custom HefaHelmet component instead of ProjectileGrenade to properly handle equipped explosions.
-  # No ExplodeOnTrigger - HefaHelmet handles both explosion and shrapnel via TriggerEvent.
+  - type: GenericVisualizer
+    visuals:
+      enum.Trigger.TriggerVisuals.VisualState:
+        enum.ConstructionVisuals.Layer:
+          Primed: { state: primed, primed-equipped-HELMET }
+          Unprimed: { state: icon, equipped-HELMET }
+  - type: OnUseTimerTrigger
+    delay: 4
+    beepSound:
+      path: "/Audio/_RMC14/Explosion/armbomb.ogg"
+      params:
+        volume: -5
+    initialBeepDelay: 0
+    beepInterval: 10
+    doPopup: false
+  - type: ExplodeOnTrigger
   - type: Explosive
+    explosionType: RMC
     maxIntensity: 8 # max 40 brute 40 burn
     intensitySlope: 4
     totalIntensity: 110
     deleteAfterExplosion: false
-  - type: HefaHelmet
-    shrapnelPrototype: CMProjectileShrapnel
-    shrapnelCount: 48
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+    directHit: false
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
   - type: ClusterLimitHits
   - type: CMExplosionEffect
     maxShrapnel: 0
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: IgnorePredictionHide
+  - type: ChangeItemSizeOnTimerTrigger
+  - type: CancelUseWithCloak
   - type: Tag
     tags:
     - RMCHelmetHEFA
-  - type: GenericVisualizer
-    visuals: {}
-  - type: TimerTriggerVisuals
-    primingSprite: icon-up
-    unprimedSprite: icon
-  - type: TimerTriggerClothingVisuals
-    primedPrefix: up
 
 - type: Tag
   id: RMCHelmetHEFA
