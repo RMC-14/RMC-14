@@ -114,7 +114,47 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
     public void SubmitCode(Entity<EncryptionEncoderComputerComponent> ent, string code)
     {
         CommsEncryptionComponent? encryptionComp = null;
-        if (!string.IsNullOrEmpty(ent.Comp.CurrentWord))
+        if (!string.IsNullOrEmpty(ent.Comp.CurrentHex))
+        {
+            var decoded = DecodeHexWithOffset(ent.Comp.CurrentHex, ent.Comp.CurrentOffset);
+            var isKnown = ChallengePhrases.Contains(decoded.ToUpper());
+
+            var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+            if (!encryptionQuery.MoveNext(out var uid, out encryptionComp))
+            {
+                ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {_loc.GetString("rmc-ui-decoder-no-encryption-system")}";
+                Dirty(ent);
+                return;
+            }
+
+            var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
+
+            var decoderQuery = EntityQueryEnumerator<EncryptionDecoderComputerComponent>();
+            if (!decoderQuery.MoveNext(out _, out var decoderComp) || _timing.CurTime >= decoderComp.ChallengeExpiry)
+            {
+                var pongChallengeExpired = "PONG";
+                var pongDisplayExpired = "";
+                for (var i = 0; i < pongChallengeExpired.Length; i++)
+                {
+                    pongDisplayExpired += i < knownLetters ? pongChallengeExpired[i] : '?';
+                }
+                ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {pongDisplayExpired}";
+                ent.Comp.KnownLetters = knownLetters;
+                Dirty(ent);
+                return;
+            }
+
+            var pongChallenge = "PONG";
+            var pong = isKnown ? pongChallenge : new string('?', pongChallenge.Length);
+            ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {pong}";
+            ent.Comp.KnownLetters = isKnown ? pongChallenge.Length : 0;
+
+            if (isKnown)
+            {
+                _encryption.RestoreClarity((uid, encryptionComp), true);
+            }
+        }
+        else if (!string.IsNullOrEmpty(ent.Comp.CurrentWord))
         {
             var shifted = ShiftWord(ent.Comp.CurrentWord, ent.Comp.CurrentOffset);
             var hex = ToHexCodes(shifted);
@@ -231,6 +271,45 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
         return string.Join(" ", s.Select(c => $"0x{(int)c:X2}"));
     }
 
+    private string DecodeHexWithOffset(string hexCode, int offset)
+    {
+        if (string.IsNullOrEmpty(hexCode))
+            return string.Empty;
+
+        var parts = hexCode.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        var text = "";
+        foreach (var part in parts)
+        {
+            if (part.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) &&
+                int.TryParse(part[2..], System.Globalization.NumberStyles.HexNumber, null, out var val))
+            {
+                text += (char)val;
+            }
+        }
+
+        if (string.IsNullOrEmpty(text))
+            return string.Empty;
+
+        var result = "";
+        foreach (var c in text)
+        {
+            if (char.IsLetter(c))
+            {
+                var baseChar = char.IsUpper(c) ? 'A' : 'a';
+                var shift = (c - baseChar - offset) % 26;
+                if (shift < 0) shift += 26;
+                var shifted = (char)(baseChar + shift);
+                result += shifted;
+            }
+            else
+            {
+                result += c;
+            }
+        }
+
+        return result;
+    }
+
     private void GenerateNewWord(Entity<EncryptionEncoderComputerComponent> ent)
     {
         ent.Comp.CurrentWord = "PONG";
@@ -321,7 +400,8 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
             ent.Comp.LastSubmittedCode,
             ent.Comp.KnownLetters,
             ent.Comp.CurrentWord,
-            ent.Comp.CurrentOffset
+            ent.Comp.CurrentOffset,
+            ent.Comp.CurrentHex
         );
         _ui.SetUiState(ent.Owner, EncryptionEncoderComputerUI.Key, state);
         Dirty(ent);
@@ -353,8 +433,7 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
             }
             else
             {
-                // Old logic for hex codes
-                SubmitCode(ent, punchcard.Data);
+                ent.Comp.CurrentHex = punchcard.Data;
             }
         }
 

@@ -2,7 +2,7 @@
                       xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
                       Title="Decoder Computer">
     <BoxContainer Orientation="Vertical" Margin="10">
-        <Label Text="Current Challenge Code:" />
+        <Label Text="Challenge Code:" />
         <Label Name="ChallengeCodeLabel" Text="ABCD1234" Margin="0,0,0,10" />
 
         <Button Name="GenerateButton" Text="Decode Current Stream" Margin="0,0,0,10" />

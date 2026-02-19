@@ -28,7 +28,7 @@ public sealed class EncryptionEncoderComputerBui(EntityUid owner, Enum uiKey) : 
 
         _window.LastSubmittedCode = s.LastSubmittedCode;
         _window.KnownLetters = s.KnownLetters;
-        _window.CurrentWord = s.CurrentWord;
+        _window.CurrentHex = s.CurrentHex;
         _window.CurrentOffset = s.CurrentOffset;
     }
 }

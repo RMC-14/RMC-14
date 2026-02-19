@@ -19,6 +19,9 @@ public sealed partial class EncryptionEncoderComputerComponent : Component
     public int CurrentOffset;
 
     [DataField, AutoNetworkedField]
+    public string CurrentHex = "";
+
+    [DataField, AutoNetworkedField]
     public int PunchcardCount = 10;
 
     [DataField]

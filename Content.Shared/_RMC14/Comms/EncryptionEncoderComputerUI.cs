@@ -28,13 +28,15 @@ public sealed class EncryptionEncoderComputerBuiState(
     string lastSubmittedCode,
     int knownLetters,
     string currentWord,
-    int currentOffset
+    int currentOffset,
+    string currentHex
 ) : BoundUserInterfaceState
 {
     public readonly string LastSubmittedCode = lastSubmittedCode;
     public readonly int KnownLetters = knownLetters;
     public readonly string CurrentWord = currentWord;
     public readonly int CurrentOffset = currentOffset;
+    public readonly string CurrentHex = currentHex;
 }
 
 [Serializable, NetSerializable]

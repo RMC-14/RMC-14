@@ -24,7 +24,7 @@ public sealed partial class EncryptionEncoderComputerWindow : FancyWindow
         set => KnownLettersLabel.Text = value.ToString();
     }
 
-    public string CurrentWord
+    public string CurrentHex
     {
         get => WordLabel.Text ?? "";
         set => WordLabel.Text = value;

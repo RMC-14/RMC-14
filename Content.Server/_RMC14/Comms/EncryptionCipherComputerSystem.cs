@@ -171,7 +171,7 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         var punchcard = EntityManager.SpawnEntity("RMCPunchcard", Transform(ent).Coordinates);
         if (TryComp<PunchcardComponent>(punchcard, out var punchComp))
         {
-            punchComp.Data = $"{ent.Comp.DecipheredWord}:{ent.Comp.CipherSetting}";
+            punchComp.Data = ent.Comp.InputCode;
             Dirty(punchcard, punchComp);
         }
 
