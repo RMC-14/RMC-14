@@ -463,7 +463,6 @@
     preventFriendlyFire: true
   - type: AttachableWeaponRangedMods
     modifiers:
-    - damageAddMult: -0.2
     - conditions:
         wieldedOnly: true
         inactiveOnly: true
