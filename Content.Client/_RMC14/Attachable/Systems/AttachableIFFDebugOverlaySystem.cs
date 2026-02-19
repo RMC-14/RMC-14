@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared._RMC14.Attachable.Events;
 using Robust.Client.Graphics;
 using Robust.Shared.Enums;
@@ -13,8 +12,6 @@ public sealed class AttachableIFFDebugOverlaySystem : EntitySystem
     [Dependency] private readonly IOverlayManager _overlayManager = default!;
 
     private static readonly TimeSpan SampleLifetime = TimeSpan.FromSeconds(2);
-    private static readonly TimeSpan MispredictCompareWindow = TimeSpan.FromMilliseconds(500);
-    private const float MispredictPositionTolerance = 0.25f;
 
     private AttachableIFFDebugOverlay? _overlay;
     private IFFDebugSample? _clientSample;
@@ -91,38 +88,6 @@ public sealed class AttachableIFFDebugOverlaySystem : EntitySystem
             ev.BlockedByFriendly,
             _timing.CurTime);
         _serverSample = sample;
-
-        TryLogMispredict(sample);
-    }
-
-    private void TryLogMispredict(IFFDebugSample server)
-    {
-        if (_clientSample is not { } client)
-            return;
-
-        if (server.Time - client.Time > MispredictCompareWindow)
-            return;
-
-        if (client.From.MapId != server.From.MapId ||
-            client.To.MapId != server.To.MapId)
-        {
-            return;
-        }
-
-        if ((client.From.Position - server.From.Position).Length() > MispredictPositionTolerance ||
-            (client.To.Position - server.To.Position).Length() > MispredictPositionTolerance)
-        {
-            return;
-        }
-
-        if (client.BlockedByFriendly == server.BlockedByFriendly &&
-            client.HasHit == server.HasHit)
-        {
-            return;
-        }
-
-        Log.Warning(
-            $"IFF mispredict detected: client blocked={client.BlockedByFriendly}, server blocked={server.BlockedByFriendly}, client hasHit={client.HasHit}, server hasHit={server.HasHit}");
     }
 
     public void Draw(in OverlayDrawArgs args)
