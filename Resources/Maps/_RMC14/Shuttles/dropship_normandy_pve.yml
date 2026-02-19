@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/12/2025 18:13:44
-  entityCount: 126
+  time: 02/19/2026 17:50:36
+  entityCount: 128
 maps: []
 grids:
 - 1
@@ -21,7 +21,6 @@ tilemap:
   5: CMShuttleTileRasputin5
   7: CMShuttleTileRasputin6
   6: CMShuttleTileRasputin7
-  0: Plating
   4: RMCFloorEmpty
 entities:
 - proto: ""
@@ -792,6 +791,22 @@ entities:
     - type: Transform
       pos: 0.6699102,5.667495
       parent: 1
+- proto: RMCDropshipStorageCompartment
+  entities:
+  - uid: 127
+    components:
+    - type: Transform
+      pos: -0.5,4.5
+      parent: 1
+    - type: Physics
+      canCollide: False
+  - uid: 128
+    components:
+    - type: Transform
+      pos: 1.5,4.5
+      parent: 1
+    - type: Physics
+      canCollide: False
 - proto: RMCEngineAttachmentPoint
   entities:
   - uid: 105
@@ -902,6 +917,8 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -0.04285574,6.7461143
       parent: 1
+    - type: RotaryPhone
+      category: Dropship
     - type: Fixtures
       fixtures: {}
 - proto: RMCStairsOffset
