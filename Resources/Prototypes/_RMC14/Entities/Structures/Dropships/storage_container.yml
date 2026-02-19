@@ -13,7 +13,10 @@
     state: closed
   - type: Storage
     maxItemSize: Ginormous
-    blacklist: Backpack
+    blacklist:
+      tags:
+      - Backpack
+      - RMCAmmoBox
     grid:
     - 0,0,20,1
   - type: InteractedBlacklist
