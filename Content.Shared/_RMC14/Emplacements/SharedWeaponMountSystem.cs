@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Construction;
+using Content.Shared._RMC14.DoAfter;
 using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Folded;
 using Content.Shared._RMC14.Map;
@@ -80,6 +81,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly RMCDoAfterSystem _rmcDoAfter = default!;
     [Dependency] private readonly RMCFoldableSystem _rmcFoldable = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly SharedScopeSystem _scope = default!;
@@ -576,6 +578,7 @@ public abstract class SharedWeaponMountSystem : EntitySystem
         }
 
         _actions.AddAction(args.Buckle, ref ent.Comp.DismountActionEntity, ent.Comp.DismountAction, args.Buckle);
+        _rmcDoAfter.TryCancelAll(args.Buckle.Owner);
     }
 
     private void OnUnStrapped(Entity<WeaponMountComponent> ent, ref UnstrappedEvent args)
