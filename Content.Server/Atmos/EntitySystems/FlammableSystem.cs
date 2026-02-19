@@ -530,7 +530,7 @@ namespace Content.Server.Atmos.EntitySystems
                     {
                         if (flammable.TileDamage is { } tileDamage)
                         {
-                            damage += flammable.Intensity * tileDamage / 3; // Divided by 3 because from my testing, the CM code for standing on a fire tile runs every +/- 30 ticks(3 seconds)
+                            damage += flammable.Intensity * tileDamage / 3; // Divided by 3, because from my testing the CM code for standing on a fire tile runs every +/- 30 ticks(3 seconds)
                         }
                     }
 
