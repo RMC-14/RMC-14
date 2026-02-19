@@ -1,12 +1,11 @@
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
-using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Explosion;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SharedHefaKnightsExplosionSystem))]
-public sealed partial class HefaSwordSplosionComponent : Component
+[Access(typeof(SharedHefaSwordTriggerOnHitSystem))]
+public sealed partial class HefaSwordTriggerOnHitComponent : Component
 {
     [DataField, AutoNetworkedField]
     public bool Primed;

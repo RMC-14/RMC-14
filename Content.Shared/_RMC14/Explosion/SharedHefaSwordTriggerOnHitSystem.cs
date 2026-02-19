@@ -8,20 +8,19 @@ using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.Explosion;
 
-public abstract class SharedHefaKnightsExplosionSystem : EntitySystem
+public abstract class SharedHefaSwordTriggerOnHitSystem : EntitySystem
 {
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] protected readonly SharedTransformSystem TransformSystem = default!;
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<HefaSwordSplosionComponent, UseInHandEvent>(OnUseInHand, before: [typeof(ClothingSystem)]);
-        SubscribeLocalEvent<HefaSwordSplosionComponent, MeleeHitEvent>(OnMeleeHit);
+        SubscribeLocalEvent<HefaSwordTriggerOnHitComponent, UseInHandEvent>(OnUseInHand, before: [typeof(ClothingSystem)]);
+        SubscribeLocalEvent<HefaSwordTriggerOnHitComponent, MeleeHitEvent>(OnMeleeHit);
     }
 
-    private void OnUseInHand(Entity<HefaSwordSplosionComponent> ent, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<HefaSwordTriggerOnHitComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
             return;
@@ -42,7 +41,7 @@ public abstract class SharedHefaKnightsExplosionSystem : EntitySystem
         }
     }
 
-    private void OnMeleeHit(Entity<HefaSwordSplosionComponent> ent, ref MeleeHitEvent args)
+    private void OnMeleeHit(Entity<HefaSwordTriggerOnHitComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || !ent.Comp.Primed)
             return;
@@ -50,17 +49,17 @@ public abstract class SharedHefaKnightsExplosionSystem : EntitySystem
             return;
 
         // Only triggers on mobs.
-        foreach (var hit in args.HitEntities)
+        foreach (var target in args.HitEntities)
         {
-            if (!HasComp<MobStateComponent>(hit))
+            if (!HasComp<MobStateComponent>(target))
                 continue;
 
-            ExplodeSword(ent, args.User, hit);
+            TriggerSword(ent, args.User, target);
             return;
         }
     }
 
-    protected virtual void ExplodeSword(Entity<HefaSwordSplosionComponent> ent, EntityUid user, EntityUid target)
+    protected virtual void TriggerSword(Entity<HefaSwordTriggerOnHitComponent> ent, EntityUid user, EntityUid target)
     {
     }
 }

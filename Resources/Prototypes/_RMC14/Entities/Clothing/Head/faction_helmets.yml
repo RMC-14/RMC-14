@@ -215,9 +215,9 @@
       tags:
       - CigPack
       - Cigarette
-      #      - TODO RMC14 cards
+      #- TODO RMC14 cards
       - Slice
-      #      - TODO RMC14 glasses (eyewear)
+      #- TODO RMC14 glasses (eyewear)
       - Pen
       - Crayon
       - RMCHandful
@@ -227,6 +227,8 @@
       - CMAutoInjector
       - PillPacket
       - RMCGrenadeHEFA # Repeating all these just to fit HEFA nades. :(
+  - type: Appearance
+  - type: AnimationPlayer
   - type: GenericVisualizer
     visuals:
       enum.Trigger.TriggerVisuals.VisualState:
@@ -252,7 +254,9 @@
   - type: ProjectileGrenade
     fillPrototype: CMProjectileShrapnel
     capacity: 48
-    directHit: false
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    evenSpread: true
   - type: ContainerContainer
     containers:
       cluster-payload: !type:Container
@@ -261,17 +265,9 @@
     maxShrapnel: 0
   - type: CMVocalizeTrigger
   - type: RMCScorchEffect
-  - type: Appearance
-  - type: AnimationPlayer
   - type: IgnorePredictionHide
   - type: ChangeItemSizeOnTimerTrigger
   - type: CancelUseWithCloak
-  - type: Tag
-    tags:
-    - RMCHelmetHEFA
-
-- type: Tag
-  id: RMCHelmetHEFA
 
 - type: entity
   parent: RMCArmorHelmetHEFA
