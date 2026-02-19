@@ -554,7 +554,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/disco_uniform.rsi
 
-
 - type: entity
   parent: RMCJumpsuitLiaisonKhakiWorkwear
   id: RMCJumpsuitLiaisonBlueGreyAdmin
