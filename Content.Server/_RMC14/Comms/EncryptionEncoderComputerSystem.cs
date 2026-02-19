@@ -206,11 +206,6 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
             ent.Comp.LastSubmittedCode = $"{_loc.GetString("rmc-ui-coder-ping-arrow")} {_loc.GetString("rmc-ui-coder-pong-colon")} {pongDisplay}";
         }
 
-        if (encryptionComp != null)
-        {
-            ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
-        }
-        Dirty(ent);
     }
 
     private string ShiftWord(string word, int offset)
@@ -321,12 +316,10 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
             return;
 
         ent.Comp.KnownLetters = _encryption.GetKnownPongLetters(encryptionComp);
-        ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
 
         var state = new EncryptionEncoderComputerBuiState(
             ent.Comp.LastSubmittedCode,
             ent.Comp.KnownLetters,
-            ent.Comp.ClarityDescription,
             ent.Comp.CurrentWord,
             ent.Comp.CurrentOffset
         );

@@ -24,12 +24,6 @@ public sealed partial class EncryptionEncoderComputerWindow : FancyWindow
         set => KnownLettersLabel.Text = value.ToString();
     }
 
-    public string ClarityDescription
-    {
-        get => ClarityDescriptionLabel.Text ?? "unknown";
-        set => ClarityDescriptionLabel.Text = value;
-    }
-
     public string CurrentWord
     {
         get => WordLabel.Text ?? "";

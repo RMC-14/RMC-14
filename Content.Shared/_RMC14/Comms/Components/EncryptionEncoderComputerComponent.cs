@@ -13,9 +13,6 @@ public sealed partial class EncryptionEncoderComputerComponent : Component
     public int KnownLetters;
 
     [DataField, AutoNetworkedField]
-    public string ClarityDescription = "unknown";
-
-    [DataField, AutoNetworkedField]
     public string CurrentWord = "";
 
     [DataField, AutoNetworkedField]

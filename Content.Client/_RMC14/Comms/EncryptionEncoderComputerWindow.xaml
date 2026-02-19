@@ -20,9 +20,6 @@
 
         <Label Text="Known Letters of PONG:" />
         <Label Name="KnownLettersLabel" Text="0" Margin="0,0,0,10" />
-
-        <Label Text="Announcement Clarity:" />
-        <Label Name="ClarityDescriptionLabel" Text="unknown" />
     </BoxContainer>
 </controls:FancyWindow>
 

@@ -27,14 +27,12 @@ public sealed class EncryptionEncoderComputerGenerateMsg : BoundUserInterfaceMes
 public sealed class EncryptionEncoderComputerBuiState(
     string lastSubmittedCode,
     int knownLetters,
-    string clarityDescription,
     string currentWord,
     int currentOffset
 ) : BoundUserInterfaceState
 {
     public readonly string LastSubmittedCode = lastSubmittedCode;
     public readonly int KnownLetters = knownLetters;
-    public readonly string ClarityDescription = clarityDescription;
     public readonly string CurrentWord = currentWord;
     public readonly int CurrentOffset = currentOffset;
 }
