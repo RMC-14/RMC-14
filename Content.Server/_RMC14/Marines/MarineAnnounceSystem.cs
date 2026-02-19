@@ -236,9 +236,55 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     {
         base.AnnounceSquad(message, squad, sound);
 
+        // Get all squad member recipients
+        var recipients = new List<EntityUid>();
+        var memberQuery = EntityQueryEnumerator<SquadMemberComponent>();
+        while (memberQuery.MoveNext(out var uid, out _))
+        {
+            if (_squad.IsInSquad(uid, squad))
+                recipients.Add(uid);
+        }
+
+        // Also include ghosts who might be listening
+        var ghostQuery = EntityQueryEnumerator<GhostComponent>();
+        while (ghostQuery.MoveNext(out var uid, out _))
+        {
+            if (_squad.IsInSquad(uid, squad))
+                recipients.Add(uid);
+        }
+
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        // Find encryption component for garbling
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (!encryptionQuery.MoveNext(out _, out var encryptionComp))
+        {
+            // No encryption system, send clear messages to all
+            foreach (var recipient in recipients)
+            {
+                if (TryComp(recipient, out ActorComponent? actor))
+                    _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+            }
+            _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+            return;
+        }
+
+        // Send messages to each recipient, garbling based on location
+        foreach (var recipient in recipients)
+        {
+            var recipientMessage = message;
+
+            // Only garble for groundside recipients when encryption is active and no comms towers are up
+            if (encryptionComp.IsGroundside && IsRecipientGroundside(recipient) && !IsAnyCommsTowerActive())
+            {
+                var garblePercent = _encryption.GetGarblePercentage(encryptionComp);
+                recipientMessage = _encryption.GarbleMessage(message, garblePercent);
+            }
+
+            if (TryComp(recipient, out ActorComponent? actor))
+                _chatManager.ChatMessageToOne(ChatChannel.Radio, recipientMessage, recipientMessage, default, false, actor.PlayerSession.Channel);
+        }
+
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
@@ -246,9 +292,55 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
     {
         base.AnnounceSquad(message, squad, sound);
 
+        // Get all squad member recipients
+        var recipients = new List<EntityUid>();
+        var memberQuery = EntityQueryEnumerator<SquadMemberComponent>();
+        while (memberQuery.MoveNext(out var uid, out _))
+        {
+            if (_squad.IsInSquad(uid, squad))
+                recipients.Add(uid);
+        }
+
+        // Also include ghosts who might be listening
+        var ghostQuery = EntityQueryEnumerator<GhostComponent>();
+        while (ghostQuery.MoveNext(out var uid, out _))
+        {
+            if (_squad.IsInSquad(uid, squad))
+                recipients.Add(uid);
+        }
+
         var filter = Filter.Empty().AddWhereAttachedEntity(e => _squad.IsInSquad(e, squad));
 
-        _chatManager.ChatMessageToManyFiltered(filter, ChatChannel.Radio, message, message, default, false, true, null);
+        // Find encryption component for garbling
+        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
+        if (!encryptionQuery.MoveNext(out _, out var encryptionComp))
+        {
+            // No encryption system, send clear messages to all
+            foreach (var recipient in recipients)
+            {
+                if (TryComp(recipient, out ActorComponent? actor))
+                    _chatManager.ChatMessageToOne(ChatChannel.Radio, message, message, default, false, actor.PlayerSession.Channel);
+            }
+            _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
+            return;
+        }
+
+        // Send messages to each recipient, garbling based on location
+        foreach (var recipient in recipients)
+        {
+            var recipientMessage = message;
+
+            // Only garble for groundside recipients when encryption is active and no comms towers are up
+            if (encryptionComp.IsGroundside && IsRecipientGroundside(recipient) && !IsAnyCommsTowerActive())
+            {
+                var garblePercent = _encryption.GetGarblePercentage(encryptionComp);
+                recipientMessage = _encryption.GarbleMessage(message, garblePercent);
+            }
+
+            if (TryComp(recipient, out ActorComponent? actor))
+                _chatManager.ChatMessageToOne(ChatChannel.Radio, recipientMessage, recipientMessage, default, false, actor.PlayerSession.Channel);
+        }
+
         _audio.PlayGlobal(sound ?? DefaultSquadSound, filter, true, AudioParams.Default.WithVolume(-2f));
     }
 
