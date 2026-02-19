@@ -912,7 +912,7 @@ entities:
   - uid: 120
     components:
     - type: MetaData
-      name: Dropship Alamo
+      name: Dropship Normandy
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -0.04285574,6.7461143
