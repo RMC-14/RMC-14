@@ -186,14 +186,14 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
         var item = ent.Comp.PunchcardSlot.Item;
         if (item == null || !TryComp<StackComponent>(item, out var stack))
         {
-            // Allow refilling directly from the user's active hand (common UX expectation).
+            // Allow refilling directly active hand
             if (_hands.TryGetActiveItem(args.Actor, out var held) &&
                 held != null &&
                 TryComp<StackComponent>(held.Value, out var heldStack))
             {
                 ent.Comp.PunchcardCount += heldStack.Count;
 
-                // Ensure it's no longer held before deleting.
+                // Ensure item no longer held before deleting.
                 _hands.TryDrop((args.Actor, CompOrNull<HandsComponent>(args.Actor)),
                     held.Value,
                     checkActionBlocker: false,
