@@ -458,8 +458,9 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
     actionName: Look through B8 Smart-Scope
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+    actionDesc: Lets you see further and prevents firing when friendlies are in your line of fire.
   - type: AttachableIFF
+    preventFriendlyFire: true
   - type: AttachableWeaponRangedMods
     modifiers:
     - damageAddMult: -0.2
