@@ -3,31 +3,28 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Comms;
 
 [Serializable, NetSerializable]
-public enum EncryptionCoderComputerUI
+public enum EncryptionEncoderComputerUI
 {
     Key,
 }
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerSubmitCodeMsg(string code) : BoundUserInterfaceMessage
+public sealed class EncryptionEncoderComputerSubmitCodeMsg(string code) : BoundUserInterfaceMessage
 {
     public readonly string Code = code;
 }
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerQuickRestoreMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionEncoderComputerPrintMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerPrintMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionEncoderComputerRefillMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerRefillMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionEncoderComputerGenerateMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerGenerateMsg : BoundUserInterfaceMessage;
-
-[Serializable, NetSerializable]
-public sealed class EncryptionCoderComputerBuiState(
+public sealed class EncryptionEncoderComputerBuiState(
     string lastSubmittedCode,
     int knownLetters,
     string clarityDescription,
@@ -43,7 +40,8 @@ public sealed class EncryptionCoderComputerBuiState(
 }
 
 [Serializable, NetSerializable]
-public sealed class EncryptionCoderChangeOffsetMsg(int delta) : BoundUserInterfaceMessage
+public sealed class EncryptionEncoderChangeOffsetMsg(int delta) : BoundUserInterfaceMessage
 {
     public readonly int Delta = delta;
 }
+

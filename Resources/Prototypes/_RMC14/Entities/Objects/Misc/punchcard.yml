@@ -1,0 +1,46 @@
+- type: entity
+  parent: BaseItem
+  id: RMCPunchcard
+  name: punchcard
+  description: A punchcard for storing encrypted data.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi  # Placeholder, use paper sprite for now
+    state: punchcard
+  - type: Punchcard
+  - type: Item
+    size: Tiny
+  - type: Tag
+    tags:
+    - Document
+    - Trash
+
+- type: stack
+  id: RMCPunchcard
+  name: punchcards
+  icon: { sprite: _RMC14/Objects/Misc/paper.rsi, state: punchcard }
+  spawn: RMCPunchcardStack
+  maxCount: 50
+
+- type: entity
+  parent: BaseItem
+  id: RMCPunchcardStack
+  name: punchcard stack
+  description: A stack of 5 punchcards for refilling computers.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi  # Placeholder
+    state: punchcard
+  - type: Stack
+    stackType: RMCPunchcard
+    count: 5
+    baseLayer: base
+    layerStates:
+    - punchcard
+    - paper
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - RMCPunchcardStack
+

@@ -7,7 +7,7 @@ using Robust.Shared.GameObjects;
 namespace Content.Client._RMC14.Comms;
 
 [GenerateTypedNameReferences]
-public sealed partial class EncryptionCoderComputerWindow : FancyWindow
+public sealed partial class EncryptionEncoderComputerWindow : FancyWindow
 {
     public event Action<int>? ChangeOffset;
     public event Action? SubmitCode;
@@ -38,17 +38,18 @@ public sealed partial class EncryptionCoderComputerWindow : FancyWindow
 
     public int CurrentOffset
     {
-        get => int.TryParse(OffsetLabel.Text, out var o) ? o : 0;
+        get => int.TryParse(OffsetLabel.Text, out var i) ? i : 0;
         set => OffsetLabel.Text = value.ToString();
     }
 
-    public EncryptionCoderComputerWindow()
+    public EncryptionEncoderComputerWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
 
         DecreaseOffsetButton.OnPressed += _ => ChangeOffset?.Invoke(-1);
-        IncreaseOffsetButton.OnPressed += _ => ChangeOffset?.Invoke(1);
+        IncreaseOffsetButton.OnPressed += _ => ChangeOffset?.Invoke(+1);
         SubmitButton.OnPressed += _ => SubmitCode?.Invoke();
     }
 }
+

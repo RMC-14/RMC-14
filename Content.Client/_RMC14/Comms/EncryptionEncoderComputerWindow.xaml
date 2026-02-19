@@ -25,3 +25,4 @@
         <Label Name="ClarityDescriptionLabel" Text="unknown" />
     </BoxContainer>
 </controls:FancyWindow>
+

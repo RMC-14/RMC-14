@@ -3,6 +3,9 @@ using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
@@ -12,14 +15,14 @@ using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
 
-public sealed class EncryptionCoderSystem : EntitySystem
+public sealed class EncryptionEncoderComputerSystem : EntitySystem
 {
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
-
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -30,64 +33,65 @@ public sealed class EncryptionCoderSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, ActivateInWorldEvent>(OnActivate);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, ComponentRemove>(OnComponentRemove);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
-        SubscribeLocalEvent<EncryptionCoderComputerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
+        SubscribeLocalEvent<EncryptionEncoderComputerComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
 
-        Subs.BuiEvents<EncryptionCoderComputerComponent>(EncryptionCoderComputerUI.Key,
+        Subs.BuiEvents<EncryptionEncoderComputerComponent>(EncryptionEncoderComputerUI.Key,
             subs =>
             {
-                subs.Event<EncryptionCoderComputerSubmitCodeMsg>(OnSubmitCode);
-                subs.Event<EncryptionCoderComputerQuickRestoreMsg>(OnQuickRestore);
-                subs.Event<EncryptionCoderComputerPrintMsg>(OnPrint);
-                subs.Event<EncryptionCoderComputerRefillMsg>(OnRefill);
-                subs.Event<EncryptionCoderComputerGenerateMsg>(OnGenerate);
-                subs.Event<EncryptionCoderChangeOffsetMsg>(OnChangeOffset);
+                subs.Event<EncryptionEncoderComputerSubmitCodeMsg>(OnSubmitCode);
+                subs.Event<EncryptionEncoderComputerPrintMsg>(OnPrint);
+                subs.Event<EncryptionEncoderComputerRefillMsg>(OnRefill);
+                subs.Event<EncryptionEncoderComputerGenerateMsg>(OnGenerate);
+                subs.Event<EncryptionEncoderChangeOffsetMsg>(OnChangeOffset);
             });
     }
 
-    private void OnComponentInit(EntityUid uid, EncryptionCoderComputerComponent component, ComponentInit args)
+    private void OnComponentInit(EntityUid uid, EncryptionEncoderComputerComponent component, ComponentInit args)
     {
         const string SlotId = "punchcard_slot";
         _itemSlotsSystem.AddItemSlot(uid, SlotId, component.PunchcardSlot);
     }
 
-    private void OnComponentRemove(EntityUid uid, EncryptionCoderComputerComponent component, ComponentRemove args)
+    private void OnComponentRemove(EntityUid uid, EncryptionEncoderComputerComponent component, ComponentRemove args)
     {
         _itemSlotsSystem.RemoveItemSlot(uid, component.PunchcardSlot);
     }
 
-    private void OnEntRemoved(EntityUid uid, EncryptionCoderComputerComponent component, EntRemovedFromContainerMessage args)
+    private void OnEntRemoved(EntityUid uid, EncryptionEncoderComputerComponent component, EntRemovedFromContainerMessage args)
     {
         if (args.Container.ID != component.PunchcardSlot.ID)
             return;
 
         component.CurrentWord = "";
         component.CurrentOffset = 0;
-        UpdateCoderState((uid, component));
+        UpdateEncoderState((uid, component));
     }
 
-    private void OnMapInit(Entity<EncryptionCoderComputerComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<EncryptionEncoderComputerComponent> ent, ref MapInitEvent args)
     {
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnBUIOpened(Entity<EncryptionCoderComputerComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnBUIOpened(Entity<EncryptionEncoderComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnActivate(Entity<EncryptionCoderComputerComponent> ent, ref ActivateInWorldEvent args)
+    private void OnActivate(Entity<EncryptionEncoderComputerComponent> ent, ref ActivateInWorldEvent args)
     {
-        _ui.TryOpenUi(ent.Owner, EncryptionCoderComputerUI.Key, args.User);
+        if (args.Handled)
+            return;
+
+        args.Handled = _ui.TryOpenUi(ent.Owner, EncryptionEncoderComputerUI.Key, args.User);
     }
 
-
-    public void SubmitCode(Entity<EncryptionCoderComputerComponent> ent, string code)
+    public void SubmitCode(Entity<EncryptionEncoderComputerComponent> ent, string code)
     {
         CommsEncryptionComponent? encryptionComp = null;
         if (!string.IsNullOrEmpty(ent.Comp.CurrentWord))
@@ -107,7 +111,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
             var knownLetters = _encryption.GetKnownPongLetters(encryptionComp);
 
             // Check if challenge has expired
-            var decoderQuery = EntityQueryEnumerator<DecoderComputerComponent>();
+            var decoderQuery = EntityQueryEnumerator<EncryptionDecoderComputerComponent>();
             if (!decoderQuery.MoveNext(out _, out var decoderComp) || _timing.CurTime >= decoderComp.ChallengeExpiry)
             {
                 var pongChallengeExpired = "PONG";
@@ -131,10 +135,6 @@ public sealed class EncryptionCoderSystem : EntitySystem
             {
                 _encryption.RestoreClarity((uid, encryptionComp), true);
             }
-            else
-            {
-                _encryption.RestoreClarity((uid, encryptionComp), false);
-            }
         }
         else
         {
@@ -147,7 +147,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
                 return;
 
             // Check if challenge has expired
-            var decoderQuery = EntityQueryEnumerator<DecoderComputerComponent>();
+            var decoderQuery = EntityQueryEnumerator<EncryptionDecoderComputerComponent>();
             if (!decoderQuery.MoveNext(out _, out var decoderComp) || _timing.CurTime >= decoderComp.ChallengeExpiry)
             {
                 var knownLettersExpired = _encryption.GetKnownPongLetters(encryptionComp);
@@ -216,66 +216,30 @@ public sealed class EncryptionCoderSystem : EntitySystem
         return string.Join(" ", s.Select(c => $"0x{(int)c:X2}"));
     }
 
-    public bool QuickRestore(Entity<EncryptionCoderComputerComponent> ent)
-    {
-        // Find the encryption component
-        var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
-        if (!encryptionQuery.MoveNext(out var uid, out var encryptionComp))
-        {
-            return false;
-        }
-
-        // Quick restore +5%
-        _encryption.RestoreClarity((uid, encryptionComp), false);
-
-        return true;
-    }
-
-    private void GenerateNewWord(Entity<EncryptionCoderComputerComponent> ent)
+    private void GenerateNewWord(Entity<EncryptionEncoderComputerComponent> ent)
     {
         ent.Comp.CurrentWord = "PONG";
         ent.Comp.CurrentOffset = 0;
         Dirty(ent);
     }
 
-    private string GetPongDisplay(string submitted, string challenge)
-    {
-        var minLen = Math.Min(submitted.Length, challenge.Length);
-        var result = "";
-        for (var i = 0; i < minLen; i++)
-        {
-            if (submitted[i] == challenge[i])
-                result += challenge[i];
-            else
-                result += "?";
-        }
-        return result;
-    }
-
-    private void OnChangeOffset(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderChangeOffsetMsg args)
+    private void OnChangeOffset(Entity<EncryptionEncoderComputerComponent> ent, ref EncryptionEncoderChangeOffsetMsg args)
     {
         ent.Comp.CurrentOffset = (ent.Comp.CurrentOffset + args.Delta + 26) % 26;
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnSubmitCode(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerSubmitCodeMsg args)
+    private void OnSubmitCode(Entity<EncryptionEncoderComputerComponent> ent, ref EncryptionEncoderComputerSubmitCodeMsg args)
     {
         SubmitCode(ent, args.Code);
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnQuickRestore(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerQuickRestoreMsg args)
-    {
-        QuickRestore(ent);
-        UpdateCoderState(ent);
-    }
-
-    private void OnPrint(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerPrintMsg args)
+    private void OnPrint(Entity<EncryptionEncoderComputerComponent> ent, ref EncryptionEncoderComputerPrintMsg args)
     {
         if (ent.Comp.PunchcardCount <= 0)
         {
-            // TODO: status message
-            UpdateCoderState(ent);
+            UpdateEncoderState(ent);
             return;
         }
 
@@ -288,15 +252,32 @@ public sealed class EncryptionCoderSystem : EntitySystem
 
         ent.Comp.PunchcardCount--;
         Dirty(ent);
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnRefill(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerRefillMsg args)
+    private void OnRefill(Entity<EncryptionEncoderComputerComponent> ent, ref EncryptionEncoderComputerRefillMsg args)
     {
         var item = ent.Comp.PunchcardSlot.Item;
-        if (item == null || !TryComp<PunchcardStackComponent>(item, out var stack))
+        if (item == null || !TryComp<StackComponent>(item, out var stack))
         {
-            UpdateCoderState(ent);
+            if (_hands.TryGetActiveItem(args.Actor, out var held) &&
+                held != null &&
+                TryComp<StackComponent>(held.Value, out var heldStack))
+            {
+                ent.Comp.PunchcardCount += heldStack.Count;
+
+                _hands.TryDrop((args.Actor, CompOrNull<HandsComponent>(args.Actor)),
+                    held.Value,
+                    checkActionBlocker: false,
+                    doDropInteraction: false);
+                EntityManager.QueueDeleteEntity(held.Value);
+
+                Dirty(ent);
+                UpdateEncoderState(ent);
+                return;
+            }
+
+            UpdateEncoderState(ent);
             return;
         }
 
@@ -304,16 +285,16 @@ public sealed class EncryptionCoderSystem : EntitySystem
         EntityManager.QueueDeleteEntity(item.Value);
         Dirty(ent);
 
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void OnGenerate(Entity<EncryptionCoderComputerComponent> ent, ref EncryptionCoderComputerGenerateMsg args)
+    private void OnGenerate(Entity<EncryptionEncoderComputerComponent> ent, ref EncryptionEncoderComputerGenerateMsg args)
     {
         GenerateNewWord(ent);
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 
-    private void UpdateCoderState(Entity<EncryptionCoderComputerComponent> ent)
+    private void UpdateEncoderState(Entity<EncryptionEncoderComputerComponent> ent)
     {
         var encryptionQuery = EntityQueryEnumerator<CommsEncryptionComponent>();
         if (!encryptionQuery.MoveNext(out _, out var encryptionComp))
@@ -322,18 +303,18 @@ public sealed class EncryptionCoderSystem : EntitySystem
         ent.Comp.KnownLetters = _encryption.GetKnownPongLetters(encryptionComp);
         ent.Comp.ClarityDescription = _encryption.GetClarityDescription(encryptionComp);
 
-        var state = new EncryptionCoderComputerBuiState(
+        var state = new EncryptionEncoderComputerBuiState(
             ent.Comp.LastSubmittedCode,
             ent.Comp.KnownLetters,
             ent.Comp.ClarityDescription,
             ent.Comp.CurrentWord,
             ent.Comp.CurrentOffset
         );
-        _ui.SetUiState(ent.Owner, EncryptionCoderComputerUI.Key, state);
+        _ui.SetUiState(ent.Owner, EncryptionEncoderComputerUI.Key, state);
         Dirty(ent);
     }
 
-    private void OnEntInserted(Entity<EncryptionCoderComputerComponent> ent, ref EntInsertedIntoContainerMessage args)
+    private void OnEntInserted(Entity<EncryptionEncoderComputerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (args.Container.ID != ent.Comp.PunchcardSlot.ID)
             return;
@@ -364,6 +345,7 @@ public sealed class EncryptionCoderSystem : EntitySystem
             }
         }
 
-        UpdateCoderState(ent);
+        UpdateEncoderState(ent);
     }
 }
+

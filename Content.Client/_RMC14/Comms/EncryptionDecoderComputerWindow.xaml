@@ -25,3 +25,4 @@
         <Label Name="StatusLabel" Text="Ready for decode" />
     </BoxContainer>
 </controls:FancyWindow>
+

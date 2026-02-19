@@ -5,10 +5,10 @@ using Robust.Client.UserInterface;
 namespace Content.Client._RMC14.Comms;
 
 [UsedImplicitly]
-public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed class EncryptionEncoderComputerBui(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     [ViewVariables]
-    private EncryptionCoderComputerWindow? _window;
+    private EncryptionEncoderComputerWindow? _window;
 
     protected override void Open()
     {
@@ -16,14 +16,14 @@ public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : Bo
         if (_window != null)
             return;
 
-        _window = this.CreateWindow<EncryptionCoderComputerWindow>();
-        _window.ChangeOffset += delta => SendPredictedMessage(new EncryptionCoderChangeOffsetMsg(delta));
-        _window.SubmitCode += () => SendPredictedMessage(new EncryptionCoderComputerSubmitCodeMsg(""));
+        _window = this.CreateWindow<EncryptionEncoderComputerWindow>();
+        _window.ChangeOffset += delta => SendPredictedMessage(new EncryptionEncoderChangeOffsetMsg(delta));
+        _window.SubmitCode += () => SendPredictedMessage(new EncryptionEncoderComputerSubmitCodeMsg(""));
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)
     {
-        if (state is not EncryptionCoderComputerBuiState s || _window == null)
+        if (state is not EncryptionEncoderComputerBuiState s || _window == null)
             return;
 
         _window.LastSubmittedCode = s.LastSubmittedCode;
@@ -33,3 +33,4 @@ public sealed class EncryptionCoderComputerBui(EntityUid owner, Enum uiKey) : Bo
         _window.CurrentOffset = s.CurrentOffset;
     }
 }
+

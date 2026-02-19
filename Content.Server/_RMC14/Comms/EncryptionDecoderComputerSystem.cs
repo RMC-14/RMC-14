@@ -3,6 +3,9 @@ using Content.Shared.Interaction;
 using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Stacks;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
@@ -13,7 +16,7 @@ using System.Linq;
 
 namespace Content.Server._RMC14.Comms;
 
-public sealed class DecoderComputerSystem : EntitySystem
+public sealed class EncryptionDecoderComputerSystem : EntitySystem
 {
     [Dependency] private readonly SharedCommsEncryptionSystem _encryption = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
@@ -21,6 +24,7 @@ public sealed class DecoderComputerSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
     private static readonly string[] ChallengePhrases = [
         "WEYLAND", "_YUTANI", "COMPANY", "ALMAYER", "GENESIS", "SCIENCE", "ANDROID",
@@ -31,35 +35,35 @@ public sealed class DecoderComputerSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<DecoderComputerComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DecoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
-        SubscribeLocalEvent<DecoderComputerComponent, ActivateInWorldEvent>(OnActivate);
-        SubscribeLocalEvent<DecoderComputerComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<DecoderComputerComponent, ComponentRemove>(OnComponentRemove);
-        SubscribeLocalEvent<DecoderComputerComponent, ContainerModifiedMessage>(OnContainerModified);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, BoundUIOpenedEvent>(OnBUIOpened);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, ActivateInWorldEvent>(OnActivate);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<EncryptionDecoderComputerComponent, ContainerModifiedMessage>(OnContainerModified);
 
-        Subs.BuiEvents<DecoderComputerComponent>(DecoderComputerUI.Key,
+        Subs.BuiEvents<EncryptionDecoderComputerComponent>(EncryptionDecoderComputerUI.Key,
             subs =>
             {
-                subs.Event<DecoderComputerSubmitCodeMsg>(OnSubmitCode);
-                subs.Event<DecoderComputerPrintMsg>(OnPrint);
-                subs.Event<DecoderComputerRefillMsg>(OnRefill);
-                subs.Event<DecoderComputerGenerateMsg>(OnGenerate);
+                subs.Event<EncryptionDecoderComputerSubmitCodeMsg>(OnSubmitCode);
+                subs.Event<EncryptionDecoderComputerPrintMsg>(OnPrint);
+                subs.Event<EncryptionDecoderComputerRefillMsg>(OnRefill);
+                subs.Event<EncryptionDecoderComputerGenerateMsg>(OnGenerate);
             });
     }
 
-    private void OnComponentInit(EntityUid uid, DecoderComputerComponent component, ComponentInit args)
+    private void OnComponentInit(EntityUid uid, EncryptionDecoderComputerComponent component, ComponentInit args)
     {
         const string SlotId = "punchcard_slot";
         _itemSlotsSystem.AddItemSlot(uid, SlotId, component.PunchcardSlot);
     }
 
-    private void OnComponentRemove(EntityUid uid, DecoderComputerComponent component, ComponentRemove args)
+    private void OnComponentRemove(EntityUid uid, EncryptionDecoderComputerComponent component, ComponentRemove args)
     {
         _itemSlotsSystem.RemoveItemSlot(uid, component.PunchcardSlot);
     }
 
-    private void OnContainerModified(EntityUid uid, DecoderComputerComponent component, ContainerModifiedMessage args)
+    private void OnContainerModified(EntityUid uid, EncryptionDecoderComputerComponent component, ContainerModifiedMessage args)
     {
         if (args.Container.ID != component.PunchcardSlot.ID)
             return;
@@ -67,28 +71,31 @@ public sealed class DecoderComputerSystem : EntitySystem
         // no immediate action needed; refill/print will read slot contents when invoked
     }
 
-    private void OnMapInit(Entity<DecoderComputerComponent> ent, ref MapInitEvent args)
+    private void OnMapInit(Entity<EncryptionDecoderComputerComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.StatusMessage = "Ready to decode current stream.";
     }
 
-    private void OnBUIOpened(Entity<DecoderComputerComponent> ent, ref BoundUIOpenedEvent args)
+    private void OnBUIOpened(Entity<EncryptionDecoderComputerComponent> ent, ref BoundUIOpenedEvent args)
     {
         UpdateDecoderState(ent);
     }
 
-    private void OnActivate(Entity<DecoderComputerComponent> ent, ref ActivateInWorldEvent args)
+    private void OnActivate(Entity<EncryptionDecoderComputerComponent> ent, ref ActivateInWorldEvent args)
     {
-        _ui.TryOpenUi(ent.Owner, DecoderComputerUI.Key, args.User);
+        if (args.Handled)
+            return;
+
+        args.Handled = _ui.TryOpenUi(ent.Owner, EncryptionDecoderComputerUI.Key, args.User);
     }
 
-    private void OnSubmitCode(Entity<DecoderComputerComponent> ent, ref DecoderComputerSubmitCodeMsg args)
+    private void OnSubmitCode(Entity<EncryptionDecoderComputerComponent> ent, ref EncryptionDecoderComputerSubmitCodeMsg args)
     {
         AttemptDecode(ent, args.Code);
         UpdateDecoderState(ent);
     }
 
-    private void OnPrint(Entity<DecoderComputerComponent> ent, ref DecoderComputerPrintMsg args)
+    private void OnPrint(Entity<EncryptionDecoderComputerComponent> ent, ref EncryptionDecoderComputerPrintMsg args)
     {
         if (ent.Comp.PunchcardCount <= 0)
         {
@@ -135,11 +142,29 @@ public sealed class DecoderComputerSystem : EntitySystem
         UpdateDecoderState(ent);
     }
 
-    private void OnRefill(Entity<DecoderComputerComponent> ent, ref DecoderComputerRefillMsg args)
+    private void OnRefill(Entity<EncryptionDecoderComputerComponent> ent, ref EncryptionDecoderComputerRefillMsg args)
     {
         var item = ent.Comp.PunchcardSlot.Item;
-        if (item == null || !TryComp<PunchcardStackComponent>(item, out var stack))
+        if (item == null || !TryComp<StackComponent>(item, out var stack))
         {
+            if (_hands.TryGetActiveItem(args.Actor, out var held) &&
+                held != null &&
+                TryComp<StackComponent>(held.Value, out var heldStack))
+            {
+                ent.Comp.PunchcardCount += heldStack.Count;
+
+                _hands.TryDrop((args.Actor, CompOrNull<HandsComponent>(args.Actor)),
+                    held.Value,
+                    checkActionBlocker: false,
+                    doDropInteraction: false);
+                EntityManager.QueueDeleteEntity(held.Value);
+
+                ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-refilled-punchcards", ("count", heldStack.Count));
+                Dirty(ent);
+                UpdateDecoderState(ent);
+                return;
+            }
+
             ent.Comp.StatusMessage = _loc.GetString("rmc-ui-decoder-no-storage");
             UpdateDecoderState(ent);
             return;
@@ -153,13 +178,13 @@ public sealed class DecoderComputerSystem : EntitySystem
         UpdateDecoderState(ent);
     }
 
-    private void OnGenerate(Entity<DecoderComputerComponent> ent, ref DecoderComputerGenerateMsg args)
+    private void OnGenerate(Entity<EncryptionDecoderComputerComponent> ent, ref EncryptionDecoderComputerGenerateMsg args)
     {
         GenerateNewChallenge(ent);
         UpdateDecoderState(ent);
     }
 
-    public bool AttemptDecode(Entity<DecoderComputerComponent> ent, string submittedCode)
+    public bool AttemptDecode(Entity<EncryptionDecoderComputerComponent> ent, string submittedCode)
     {
         if (submittedCode.ToUpper() != ent.Comp.CurrentChallengeWord.ToUpper())
         {
@@ -190,7 +215,7 @@ public sealed class DecoderComputerSystem : EntitySystem
         return true;
     }
 
-    private void GenerateNewChallenge(Entity<DecoderComputerComponent> ent)
+    private void GenerateNewChallenge(Entity<EncryptionDecoderComputerComponent> ent)
     {
         // Generate a random challenge phrase
         var random = new Random();
@@ -240,7 +265,7 @@ public sealed class DecoderComputerSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
-        var query = EntityQueryEnumerator<DecoderComputerComponent>();
+        var query = EntityQueryEnumerator<EncryptionDecoderComputerComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.ChallengeExpiry != default && _timing.CurTime > comp.ChallengeExpiry)
@@ -252,9 +277,9 @@ public sealed class DecoderComputerSystem : EntitySystem
         }
     }
 
-    private void UpdateDecoderState(Entity<DecoderComputerComponent> ent)
+    private void UpdateDecoderState(Entity<EncryptionDecoderComputerComponent> ent)
     {
-        var state = new DecoderComputerBuiState(
+        var state = new EncryptionDecoderComputerBuiState(
             ent.Comp.CurrentChallengeCode,
             ent.Comp.HasGracePeriod,
             ent.Comp.GracePeriodEnd,
@@ -262,7 +287,8 @@ public sealed class DecoderComputerSystem : EntitySystem
             ent.Comp.PunchcardCount
         );
 
-        _ui.SetUiState(ent.Owner, DecoderComputerUI.Key, state);
+        _ui.SetUiState(ent.Owner, EncryptionDecoderComputerUI.Key, state);
         Dirty(ent);
     }
 }
+

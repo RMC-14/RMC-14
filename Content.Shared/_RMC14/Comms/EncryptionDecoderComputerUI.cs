@@ -3,28 +3,28 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Comms;
 
 [Serializable, NetSerializable]
-public enum DecoderComputerUI
+public enum EncryptionDecoderComputerUI
 {
     Key,
 }
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerSubmitCodeMsg(string code) : BoundUserInterfaceMessage
+public sealed class EncryptionDecoderComputerSubmitCodeMsg(string code) : BoundUserInterfaceMessage
 {
     public readonly string Code = code;
 }
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerPrintMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionDecoderComputerPrintMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerRefillMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionDecoderComputerRefillMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerGenerateMsg : BoundUserInterfaceMessage;
+public sealed class EncryptionDecoderComputerGenerateMsg : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
-public sealed class DecoderComputerBuiState(
+public sealed class EncryptionDecoderComputerBuiState(
     string currentChallengeCode,
     bool hasGracePeriod,
     TimeSpan gracePeriodEnd,
@@ -38,3 +38,4 @@ public sealed class DecoderComputerBuiState(
     public readonly string StatusMessage = statusMessage;
     public readonly int PunchcardCount = punchcardCount;
 }
+

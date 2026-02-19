@@ -4,7 +4,7 @@ using Content.Shared.Containers.ItemSlots;
 namespace Content.Shared._RMC14.Comms;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class DecoderComputerComponent : Component
+public sealed partial class EncryptionDecoderComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string CurrentChallengeCode = "Awaiting current stream...";
@@ -30,3 +30,4 @@ public sealed partial class DecoderComputerComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan ChallengeExpiry;
 }
+

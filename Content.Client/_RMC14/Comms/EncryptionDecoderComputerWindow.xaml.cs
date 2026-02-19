@@ -9,7 +9,7 @@ using System.Numerics;
 namespace Content.Client._RMC14.Comms;
 
 [GenerateTypedNameReferences]
-public sealed partial class DecoderComputerWindow : FancyWindow
+public sealed partial class EncryptionDecoderComputerWindow : FancyWindow
 {
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -59,7 +59,7 @@ public sealed partial class DecoderComputerWindow : FancyWindow
     private bool _hasGracePeriod;
     private TimeSpan _gracePeriodEnd;
 
-    public DecoderComputerWindow()
+    public EncryptionDecoderComputerWindow()
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
@@ -112,3 +112,4 @@ public sealed partial class DecoderComputerWindow : FancyWindow
 
     // UI updated explicitly via CurrentChallengeCode setter
 }
+

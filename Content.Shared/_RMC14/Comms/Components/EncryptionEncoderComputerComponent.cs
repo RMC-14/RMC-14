@@ -4,7 +4,7 @@ using Content.Shared.Containers.ItemSlots;
 namespace Content.Shared._RMC14.Comms;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class EncryptionCoderComputerComponent : Component
+public sealed partial class EncryptionEncoderComputerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public string LastSubmittedCode = "";
@@ -27,3 +27,4 @@ public sealed partial class EncryptionCoderComputerComponent : Component
     [DataField]
     public ItemSlot PunchcardSlot = new();
 }
+

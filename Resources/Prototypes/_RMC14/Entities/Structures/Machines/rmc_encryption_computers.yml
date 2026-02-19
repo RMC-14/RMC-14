@@ -51,15 +51,6 @@
   - type: EncryptionCipherComputer
   - type: AccessReader
     access: [[ "RMCAccessCommand" ]]
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,1,1
-    whitelist:
-      tags:
-      - RMCPunchcardStack
-      components:
-      - Punchcard
 
 - type: entity
   parent: RMCEncryptionComputerBase
@@ -74,21 +65,14 @@
     - state: sensor_comp1
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: ActivatableUI
-    key: enum.EncryptionCoderComputerUI.Key
+    key: enum.EncryptionEncoderComputerUI.Key
   - type: UserInterface
     interfaces:
-      enum.EncryptionCoderComputerUI.Key:
-        type: EncryptionCoderComputerBui
-  - type: EncryptionCoderComputer
+      enum.EncryptionEncoderComputerUI.Key:
+        type: EncryptionEncoderComputerBui
+  - type: EncryptionEncoderComputer
   - type: AccessReader
     access: [[ "RMCAccessCommand" ]]
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,1,1
-    whitelist:
-      components:
-      - Punchcard
 
 - type: entity
   parent: RMCEncryptionComputerBase
@@ -103,18 +87,11 @@
     - state: sensor_comp3
       map: ["enum.PowerDeviceVisualLayers.Powered"]
   - type: ActivatableUI
-    key: enum.DecoderComputerUI.Key
+    key: enum.EncryptionDecoderComputerUI.Key
   - type: UserInterface
     interfaces:
-      enum.DecoderComputerUI.Key:
-        type: DecoderComputerBui
-  - type: DecoderComputer
+      enum.EncryptionDecoderComputerUI.Key:
+        type: EncryptionDecoderComputerBui
+  - type: EncryptionDecoderComputer
   - type: AccessReader
     access: [[ "RMCAccessSeniorCommand" ]]
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,1,1
-    whitelist:
-      tags:
-      - RMCPunchcardStack

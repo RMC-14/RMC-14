@@ -4,6 +4,9 @@ using Content.Shared._RMC14.Comms;
 using Content.Shared.Storage;
 using Robust.Shared.Containers;
 using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Stacks;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Random;
@@ -18,6 +21,7 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ILocalizationManager _loc = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private readonly SharedHandsSystem _hands = default!;
 
 
     private static readonly string[] ChallengePhrases = [
@@ -100,7 +104,10 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
 
     private void OnActivate(Entity<EncryptionCipherComputerComponent> ent, ref ActivateInWorldEvent args)
     {
-        _ui.TryOpenUi(ent.Owner, EncryptionCipherComputerUI.Key, args.User);
+        if (args.Handled)
+            return;
+
+        args.Handled = _ui.TryOpenUi(ent.Owner, EncryptionCipherComputerUI.Key, args.User);
     }
 
     private void OnSetInput(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherSetInputMsg args)
@@ -177,8 +184,28 @@ public sealed class EncryptionCipherComputerSystem : EntitySystem
     private void OnRefill(Entity<EncryptionCipherComputerComponent> ent, ref EncryptionCipherRefillMsg args)
     {
         var item = ent.Comp.PunchcardSlot.Item;
-        if (item == null || !TryComp<PunchcardStackComponent>(item, out var stack))
+        if (item == null || !TryComp<StackComponent>(item, out var stack))
         {
+            // Allow refilling directly from the user's active hand (common UX expectation).
+            if (_hands.TryGetActiveItem(args.Actor, out var held) &&
+                held != null &&
+                TryComp<StackComponent>(held.Value, out var heldStack))
+            {
+                ent.Comp.PunchcardCount += heldStack.Count;
+
+                // Ensure it's no longer held before deleting.
+                _hands.TryDrop((args.Actor, CompOrNull<HandsComponent>(args.Actor)),
+                    held.Value,
+                    checkActionBlocker: false,
+                    doDropInteraction: false);
+                EntityManager.QueueDeleteEntity(held.Value);
+
+                ent.Comp.StatusMessage = $"Refilled with {heldStack.Count} punchcards.";
+                Dirty(ent);
+                UpdateCipherState(ent);
+                return;
+            }
+
             ent.Comp.StatusMessage = "No punchcard stack in slot.";
             UpdateCipherState(ent);
             return;
