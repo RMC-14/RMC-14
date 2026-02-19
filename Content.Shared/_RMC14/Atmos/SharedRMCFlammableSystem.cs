@@ -311,7 +311,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!CanBeIgnited(args.Target, ent, ent.Comp.Intensity, true)) // Direct hits can ignore pyro/firesuit ignition resistance
             return;
 
-        Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks);
+        Ignite(args.Target, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks, tileDamage: ent.Comp.TileDamage);
     }
 
     private void OnSteppingOnFireRemoved(Entity<SteppingOnFireComponent> ent, ref ComponentRemove args)
@@ -383,7 +383,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         return Resolve(ent, ref ent.Comp, false) && ent.Comp.OnFire;
     }
 
-    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true)
+    public virtual bool Ignite(Entity<FlammableComponent?> flammable, int intensity, int duration, int? maxStacks, bool igniteDamage = true, DamageSpecifier? tileDamage = null)
     {
         // TODO RMC14
         return false;
@@ -799,7 +799,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (!tileEv.Ignite)
             return;
 
-        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks))
+        if (!Ignite(flammableEnt, ent.Comp.Intensity, ent.Comp.Duration, ent.Comp.MaxStacks, tileDamage:ent.Comp.TileDamage))
             return;
 
         ChangeBurnColor(flammableEnt, ent.Comp.BurnColor);
@@ -820,7 +820,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
             _damageable.TryChangeDamage(flammableEnt, flammableEnt.Comp.Damage * ent.Comp.Intensity, true);
     }
 
-    private void ApplyTileEffect(Entity<SteppingOnFireComponent> ent, RMCIgniteOnCollideComponent ignite, EntityUid fireEntity)
+    private void ApplyTileEffect(Entity<SteppingOnFireComponent> ent, RMCIgniteOnCollideComponent ignite, EntityUid fireEntity)//
     {
         var timing = _timing.CurTime;
 
@@ -860,7 +860,7 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
         if (canIgnite)
         {
-            Ignite((uid, flammable), ignite.Intensity, ignite.Duration, ignite.MaxStacks);
+            Ignite((uid, flammable), ignite.Intensity, ignite.Duration, ignite.MaxStacks, tileDamage:ignite.TileDamage);
 
             // If this fire can bypass immunity, mark the target as having bypass-active fire
             if (!CanFireBypassImmunity(fireEntity, uid))
