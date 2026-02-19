@@ -48,16 +48,15 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
 
     public int GetKnownPongLetters(CommsEncryptionComponent comp)
     {
-        var timeSinceLastDecryption = _timing.CurTime - comp.LastDecryptionTime;
-        var minutes = timeSinceLastDecryption.TotalMinutes;
+        var clarityPercent = comp.Clarity * 100f;
 
-        if (minutes <= 1)
+        if (clarityPercent >= 90f)
             return 4;
-        if (minutes <= 4)
+        if (clarityPercent >= 75f)
             return 3;
-        if (minutes <= 7)
+        if (clarityPercent >= 60f)
             return 2;
-        if (minutes <= 10)
+        if (clarityPercent > 45f)
             return 1;
         return 0;
     }
@@ -108,7 +107,7 @@ public abstract class SharedCommsEncryptionSystem : EntitySystem
     {
         if (fullRestore)
         {
-            ent.Comp.Clarity = 0.95f; // Restore to 95%
+            ent.Comp.Clarity = ent.Comp.MaxClarity;
             ent.Comp.LastDecryptionTime = _timing.CurTime;
         }
 

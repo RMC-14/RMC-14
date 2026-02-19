@@ -30,6 +30,8 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
         "RAIDERS", "ROSETTA", "SCANNER", "SHADOWS", "SHUTTLE", "TACHYON", "WARSHIP", "ROSTOCK"
     ];
 
+    private float _accumulator;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -50,6 +52,24 @@ public sealed class EncryptionEncoderComputerSystem : EntitySystem
                 subs.Event<EncryptionEncoderComputerGenerateMsg>(OnGenerate);
                 subs.Event<EncryptionEncoderChangeOffsetMsg>(OnChangeOffset);
             });
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        _accumulator += frameTime;
+        if (_accumulator < 10f)
+            return;
+
+        _accumulator = 0f;
+
+        var query = EntityQueryEnumerator<EncryptionEncoderComputerComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (_ui.IsUiOpen(uid, EncryptionEncoderComputerUI.Key))
+                UpdateEncoderState((uid, comp));
+        }
     }
 
     private void OnComponentInit(EntityUid uid, EncryptionEncoderComputerComponent component, ComponentInit args)

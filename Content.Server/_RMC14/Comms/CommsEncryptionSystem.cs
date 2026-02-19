@@ -20,7 +20,7 @@ public sealed class CommsEncryptionSystem : SharedCommsEncryptionSystem
 
     private void OnStartup(Entity<CommsEncryptionComponent> ent, ref ComponentStartup args)
     {
-        // Check if we're on a planet (groundside)
+        // Check if on a planet
         ent.Comp.IsGroundside = _distressSignal.SelectedPlanetMapName != null;
         Dirty(ent);
     }

@@ -5,7 +5,7 @@
   description: A punchcard for storing encrypted data.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi  # Placeholder, use paper sprite for now
+    sprite: _RMC14/Objects/Misc/paper.rsi
     state: punchcard
   - type: Punchcard
   - type: Item
@@ -29,7 +29,7 @@
   description: A stack of 5 punchcards for refilling computers.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi  # Placeholder
+    sprite: _RMC14/Objects/Misc/paper.rsi
     state: punchcard
   - type: Stack
     stackType: RMCPunchcard
