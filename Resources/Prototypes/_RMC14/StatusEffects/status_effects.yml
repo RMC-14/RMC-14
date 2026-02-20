@@ -21,3 +21,9 @@
   icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
   name: alerts-muted-name
   description: alerts-muted-desc
+
+- type: alert
+  id: RMCHushed
+  icons: [ /Textures/Interface/Alerts/Abilities/silenced.png ]
+  name: rmc-alerts-hushed-name
+  description: rmc-alerts-hushed-desc
