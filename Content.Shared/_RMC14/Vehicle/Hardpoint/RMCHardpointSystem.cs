@@ -31,6 +31,7 @@ using Robust.Shared.Utility;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
+using Content.Shared.Explosion.EntitySystems;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -55,6 +56,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly SharedGunSystem _guns = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly SharedExplosionSystem _explosion = default!;
 
     public override void Initialize()
     {
@@ -358,10 +360,7 @@ public sealed class RMCHardpointSystem : EntitySystem
         {
             if (adding)
             {
-                var resistance = EnsureComp<ExplosionResistanceComponent>(vehicle);
-                resistance.DamageCoefficient = armor.ExplosionCoefficient.Value;
-                resistance.Worn = false;
-                Dirty(vehicle, resistance);
+                _explosion.SetExplosionResistance(vehicle, armor.ExplosionCoefficient.Value, worn: false);
             }
             else if (TryComp(vehicle, out ExplosionResistanceComponent? resistance) &&
                      MathF.Abs(resistance.DamageCoefficient - armor.ExplosionCoefficient.Value) < 0.0001f)

@@ -30,6 +30,9 @@ public sealed class RMCVehicleWeaponsUiEntry
     public readonly bool HasMagazineData;
     public readonly string? OperatorName;
     public readonly bool OperatorIsSelf;
+    public readonly float Integrity;
+    public readonly float MaxIntegrity;
+    public readonly bool HasIntegrity;
 
     public RMCVehicleWeaponsUiEntry(
         string slotId,
@@ -47,7 +50,10 @@ public sealed class RMCVehicleWeaponsUiEntry
         int maxStoredMagazines,
         bool hasMagazineData,
         string? operatorName,
-        bool operatorIsSelf)
+        bool operatorIsSelf,
+        float integrity,
+        float maxIntegrity,
+        bool hasIntegrity)
     {
         SlotId = slotId;
         HardpointType = hardpointType;
@@ -65,12 +71,16 @@ public sealed class RMCVehicleWeaponsUiEntry
         HasMagazineData = hasMagazineData;
         OperatorName = operatorName;
         OperatorIsSelf = operatorIsSelf;
+        Integrity = integrity;
+        MaxIntegrity = maxIntegrity;
+        HasIntegrity = hasIntegrity;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class RMCVehicleWeaponsUiState : BoundUserInterfaceState
 {
+    public readonly NetEntity Vehicle;
     public readonly List<RMCVehicleWeaponsUiEntry> Hardpoints;
     public readonly bool CanToggleStabilization;
     public readonly bool StabilizationEnabled;
@@ -78,12 +88,14 @@ public sealed class RMCVehicleWeaponsUiState : BoundUserInterfaceState
     public readonly bool AutoEnabled;
 
     public RMCVehicleWeaponsUiState(
+        NetEntity vehicle,
         List<RMCVehicleWeaponsUiEntry> hardpoints,
         bool canToggleStabilization,
         bool stabilizationEnabled,
         bool canToggleAuto,
         bool autoEnabled)
     {
+        Vehicle = vehicle;
         Hardpoints = hardpoints;
         CanToggleStabilization = canToggleStabilization;
         StabilizationEnabled = stabilizationEnabled;

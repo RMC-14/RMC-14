@@ -114,6 +114,14 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        if (TryComp(args.Buckle.Owner, out VehicleWeaponsOperatorComponent? operatorComp))
+            ClearHardpointActions(args.Buckle.Owner, operatorComp);
+
+        RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
+        _ui.CloseUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
+        UpdateGunnerView(args.Buckle.Owner, ent.Owner, removeOnly: true);
+        _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);
+
         if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
             return;
 
@@ -133,17 +141,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             UpdateWeaponsUi(ent.Owner, vehicleUid, otherWeapons);
         }
 
-        if (TryComp(args.Buckle.Owner, out VehicleWeaponsOperatorComponent? operatorComp))
-            ClearHardpointActions(args.Buckle.Owner, operatorComp);
-
-        RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
-        _ui.CloseUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
-        UpdateGunnerView(args.Buckle.Owner, vehicleUid, removeOnly: true);
-
         if (TryComp(args.Buckle.Owner, out EyeComponent? eye) && eye.Target == vehicleUid)
             _eye.SetTarget(args.Buckle.Owner, null, eye);
-
-        _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);
     }
 
     private void OnWeaponsUiOpened(Entity<VehicleWeaponsSeatComponent> ent, ref BoundUIOpenedEvent args)
@@ -175,6 +174,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         if (args.Actor == default || !Exists(args.Actor))
             return;
+
+        if (!CanUseHardpointActions(args.Actor))
+            return;
+
         TrySelectHardpoint(ent.Owner, args.Actor, args.SlotId);
     }
 
@@ -192,6 +195,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             return;
 
         if (args.Performer == default || !Exists(args.Performer) || args.Performer != ent.Owner)
+            return;
+
+        if (!CanUseHardpointActions(args.Performer))
             return;
 
         if (!TryComp(args.Performer, out BuckleComponent? buckle) ||
@@ -541,6 +547,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         }
 
         var entries = new List<RMCVehicleWeaponsUiEntry>(hardpoints.Slots.Count);
+        var canUseHardpointActions = operatorUid == null || CanUseHardpointActions(operatorUid.Value);
 
         foreach (var slot in hardpoints.Slots)
         {
@@ -567,7 +574,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf = operatorUid != null && slotOperator == operatorUid.Value;
             }
 
-            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value);
+            var selectable = canUseHardpointActions &&
+                             item != null &&
+                             HasComp<VehicleTurretComponent>(item.Value);
             if (selectable && hasOperator && !operatorIsSelf)
                 selectable = false;
 
@@ -590,6 +599,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             var storedMagazines = 0;
             var maxStoredMagazines = 0;
             var hasMagazineData = false;
+            var integrity = 0f;
+            var maxIntegrity = 0f;
+            var hasIntegrity = false;
 
             if (item != null && TryComp(item.Value, out RMCVehicleHardpointAmmoComponent? hardpointAmmo))
             {
@@ -597,6 +609,13 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 storedMagazines = hardpointAmmo.StoredMagazines;
                 maxStoredMagazines = hardpointAmmo.MaxStoredMagazines;
                 hasMagazineData = hardpointAmmo.MagazineSize > 0 || hardpointAmmo.MaxStoredMagazines > 0;
+            }
+
+            if (item != null && TryComp(item.Value, out RMCHardpointIntegrityComponent? hardpointIntegrity))
+            {
+                integrity = hardpointIntegrity.Integrity;
+                maxIntegrity = hardpointIntegrity.MaxIntegrity;
+                hasIntegrity = true;
             }
 
             entries.Add(new RMCVehicleWeaponsUiEntry(
@@ -615,11 +634,14 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 maxStoredMagazines,
                 hasMagazineData,
                 operatorName,
-                operatorIsSelf));
+                operatorIsSelf,
+                integrity,
+                maxIntegrity,
+                hasIntegrity));
 
             if (item != null)
             {
-                AppendTurretEntries(entries, item.Value, slot.Id, weapons, operatorUid, operatorSlot);
+                AppendTurretEntries(entries, item.Value, slot.Id, weapons, operatorUid, operatorSlot, canUseHardpointActions);
             }
         }
 
@@ -644,7 +666,13 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         }
 
         _ui.SetUiState(seat, RMCVehicleWeaponsUiKey.Key,
-            new RMCVehicleWeaponsUiState(entries, canToggleStabilization, stabilizationEnabled, canToggleAuto, autoEnabled));
+            new RMCVehicleWeaponsUiState(
+                GetNetEntity(vehicle),
+                entries,
+                canToggleStabilization,
+                stabilizationEnabled,
+                canToggleAuto,
+                autoEnabled));
     }
 
     private void AppendTurretEntries(
@@ -653,7 +681,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         string parentSlotId,
         RMCVehicleWeaponsComponent weapons,
         EntityUid? operatorUid,
-        string? operatorSlot)
+        string? operatorSlot,
+        bool canUseHardpointActions)
     {
         if (!TryComp(turretUid, out RMCHardpointSlotsComponent? turretSlots) ||
             !TryComp(turretUid, out ItemSlotsComponent? turretItemSlots))
@@ -688,7 +717,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf = operatorUid != null && slotOperator == operatorUid.Value;
             }
 
-            var selectable = item != null && HasComp<VehicleTurretComponent>(item.Value);
+            var selectable = canUseHardpointActions &&
+                             item != null &&
+                             HasComp<VehicleTurretComponent>(item.Value);
             if (selectable && hasOperator && !operatorIsSelf)
                 selectable = false;
 
@@ -711,6 +742,9 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             var storedMagazines = 0;
             var maxStoredMagazines = 0;
             var hasMagazineData = false;
+            var integrity = 0f;
+            var maxIntegrity = 0f;
+            var hasIntegrity = false;
 
             if (item != null && TryComp(item.Value, out RMCVehicleHardpointAmmoComponent? hardpointAmmo))
             {
@@ -718,6 +752,13 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 storedMagazines = hardpointAmmo.StoredMagazines;
                 maxStoredMagazines = hardpointAmmo.MaxStoredMagazines;
                 hasMagazineData = hardpointAmmo.MagazineSize > 0 || hardpointAmmo.MaxStoredMagazines > 0;
+            }
+
+            if (item != null && TryComp(item.Value, out RMCHardpointIntegrityComponent? hardpointIntegrity))
+            {
+                integrity = hardpointIntegrity.Integrity;
+                maxIntegrity = hardpointIntegrity.MaxIntegrity;
+                hasIntegrity = true;
             }
 
             entries.Add(new RMCVehicleWeaponsUiEntry(
@@ -736,7 +777,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 maxStoredMagazines,
                 hasMagazineData,
                 operatorName,
-                operatorIsSelf));
+                operatorIsSelf,
+                integrity,
+                maxIntegrity,
+                hasIntegrity));
         }
     }
 
@@ -888,15 +932,19 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         if (_net.IsClient || !Resolve(user, ref operatorComp, logMissing: false))
             return;
 
+        var canUseHardpointActions = CanUseHardpointActions(user);
         var selectedSlot = weapons.OperatorSelections.TryGetValue(user, out var slot)
             ? slot
             : null;
 
         foreach (var pair in operatorComp.HardpointActions)
         {
+            _actions.SetEnabled(pair.Value, canUseHardpointActions);
             _actions.SetToggled(
                 pair.Value,
-                selectedSlot != null && string.Equals(pair.Key, selectedSlot, StringComparison.OrdinalIgnoreCase));
+                canUseHardpointActions &&
+                selectedSlot != null &&
+                string.Equals(pair.Key, selectedSlot, StringComparison.OrdinalIgnoreCase));
         }
     }
 
@@ -1040,6 +1088,14 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             return false;
 
         item = slotData.Item!.Value;
+        return true;
+    }
+
+    private bool CanUseHardpointActions(EntityUid user)
+    {
+        if (TryComp(user, out RMCVehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
+            return false;
+
         return true;
     }
 

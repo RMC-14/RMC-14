@@ -381,6 +381,7 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
 
         var old = _vehicleActions.ToList();
         var desiredOrdered = new List<EntityUid?>();
+        var includeHardpointActions = true;
 
         if (_playerManager.LocalEntity is { } user &&
             EntityManager.TryGetComponent<CombatModeComponent>(user, out var combat) &&
@@ -390,23 +391,32 @@ public sealed class ActionUIController : UIController, IOnStateChanged<GameplayS
             desiredOrdered.Add(combatAction);
         }
 
-        var hardpointActions = _actionsSystem
-            .GetClientActions()
-            .Where(action => EntityManager.TryGetComponent<RMCVehicleHardpointActionComponent>(action, out _))
-            .OrderBy(action =>
-            {
-                EntityManager.TryGetComponent<RMCVehicleHardpointActionComponent>(action, out var hardpointAction);
-                return hardpointAction?.SortOrder ?? 0;
-            });
-
-        foreach (var (uid, _) in hardpointActions)
+        if (_playerManager.LocalEntity is { } localUser &&
+            EntityManager.TryGetComponent<RMCVehicleViewToggleComponent>(localUser, out var viewToggle))
         {
-            desiredOrdered.Add(uid);
+            includeHardpointActions = viewToggle.IsOutside;
         }
 
-        if (_playerManager.LocalEntity is { } localUser &&
-            EntityManager.TryGetComponent<RMCVehicleViewToggleComponent>(localUser, out var viewToggle) &&
-            viewToggle.Action is { } viewAction &&
+        if (includeHardpointActions)
+        {
+            var hardpointActions = _actionsSystem
+                .GetClientActions()
+                .Where(action => EntityManager.TryGetComponent<RMCVehicleHardpointActionComponent>(action, out _))
+                .OrderBy(action =>
+                {
+                    EntityManager.TryGetComponent<RMCVehicleHardpointActionComponent>(action, out var hardpointAction);
+                    return hardpointAction?.SortOrder ?? 0;
+                });
+
+            foreach (var (uid, _) in hardpointActions)
+            {
+                desiredOrdered.Add(uid);
+            }
+        }
+
+        if (_playerManager.LocalEntity is { } toggleUser &&
+            EntityManager.TryGetComponent<RMCVehicleViewToggleComponent>(toggleUser, out var toggleState) &&
+            toggleState.Action is { } viewAction &&
             !EntityManager.HasComponent<RMCVehicleHardpointActionComponent>(viewAction))
         {
             desiredOrdered.Add(viewAction);

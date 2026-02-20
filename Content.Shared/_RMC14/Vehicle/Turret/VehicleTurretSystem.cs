@@ -114,6 +114,9 @@ public sealed class VehicleTurretSystem : EntitySystem
             if (session.SenderSession.AttachedEntity is not { } user)
                 return;
 
+            if (TryComp(user, out RMCVehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
+                return;
+
             if (!TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
                 weapons.Operator != user ||
                 weapons.SelectedWeapon != turretUid)
@@ -592,6 +595,13 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        if (!CanOperatorUseTurret(ent.Owner, args.User))
+        {
+            args.Cancelled = true;
+            args.ResetCooldown = true;
+            return;
+        }
+
         if (!TryResolveRotationTarget(ent.Owner, ent.Comp, out var targetUid, out var targetTurret))
             return;
 
@@ -637,6 +647,20 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         args.Cancelled = true;
         args.ResetCooldown = true;
+    }
+
+    private bool CanOperatorUseTurret(EntityUid turretUid, EntityUid user)
+    {
+        if (!TryGetVehicle(turretUid, out var vehicle))
+            return true;
+
+        if (!TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) || weapons.Operator != user)
+            return true;
+
+        if (TryComp(user, out RMCVehicleViewToggleComponent? viewToggle) && !viewToggle.IsOutside)
+            return false;
+
+        return true;
     }
 
     private static bool ShouldUpdateTransforms(VehicleTurretComponent turret)

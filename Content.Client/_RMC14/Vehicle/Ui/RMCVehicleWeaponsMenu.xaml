@@ -1,44 +1,35 @@
 <controls:RMCVehicleWeaponsMenu
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
-    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-    Title="Vehicle Weapons"
-    MinSize="500 360">
+    Title=""
+    MinSize="420 160">
 
-    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
-        <PanelContainer.PanelOverride>
-            <graphics:StyleBoxFlat
-                BackgroundColor="#070E18"
-                BorderColor="#6BC7FF"
-                BorderThickness="2"/>
-        </PanelContainer.PanelOverride>
+    <BoxContainer Orientation="Vertical" Margin="0" SeparationOverride="0" HorizontalExpand="True" VerticalExpand="False">
+        <ScrollContainer Name="HardpointScroll"
+                         Access="Public"
+                         HorizontalExpand="True"
+                         VerticalExpand="False"
+                         MinSize="0 56"
+                         HScrollEnabled="True"
+                         VScrollEnabled="False">
+            <BoxContainer Name="HardpointStrip"
+                          Access="Public"
+                          Orientation="Horizontal"
+                          SeparationOverride="0"
+                          HorizontalExpand="True"
+                          VerticalExpand="False" />
+        </ScrollContainer>
 
-        <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
-            <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
-                <Label Text="Vehicle Weapons" StyleClasses="LabelHeading"/>
-                <BoxContainer Orientation="Horizontal" SeparationOverride="6" HorizontalExpand="True" HorizontalAlignment="Right">
-                    <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="Auto Turret" HorizontalAlignment="Right"/>
-                    <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization" HorizontalAlignment="Right"/>
-                </BoxContainer>
-            </BoxContainer>
-
-            <PanelContainer HorizontalExpand="True" VerticalExpand="True">
-                <PanelContainer.PanelOverride>
-                    <graphics:StyleBoxFlat
-                        BackgroundColor="#0B131F"
-                        BorderColor="#1E3450"
-                        BorderThickness="1"/>
-                </PanelContainer.PanelOverride>
-
-                <ScrollContainer HorizontalExpand="True" VerticalExpand="True" Margin="6">
-                    <BoxContainer
-                        Name="WeaponList"
-                        Access="Public"
-                        Orientation="Vertical"
-                        SeparationOverride="8"
-                        HorizontalExpand="True"/>
-                </ScrollContainer>
-            </PanelContainer>
+        <BoxContainer Orientation="Horizontal" SeparationOverride="0" HorizontalExpand="True">
+            <CheckBox Name="AutoTurretToggle" Access="Public" ToggleMode="True" Text="Auto Turret"/>
+            <CheckBox Name="StabilizationToggle" Access="Public" ToggleMode="True" Text="Stabilization"/>
         </BoxContainer>
-    </PanelContainer>
+
+        <Label Name="AmmoCounter"
+               Access="Public"
+               Text="Ammo: --"
+               FontColorOverride="#C7D9ED"
+               HorizontalExpand="True"
+               ClipText="True"/>
+    </BoxContainer>
 </controls:RMCVehicleWeaponsMenu>

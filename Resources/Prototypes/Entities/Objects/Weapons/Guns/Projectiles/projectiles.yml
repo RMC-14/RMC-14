@@ -769,6 +769,7 @@
       types:
         Blunt: 25
         Piercing: 15
+    maxFixedRange: 0
   - type: TriggerOnFixedDistanceStop
     delay: 0
   - type: DeleteOnTrigger

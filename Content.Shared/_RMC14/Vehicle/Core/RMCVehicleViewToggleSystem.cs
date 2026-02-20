@@ -47,15 +47,8 @@ public sealed class RMCVehicleViewToggleSystem : EntitySystem
         if (!TryComp(user, out RMCVehicleViewToggleComponent? toggle))
             return;
 
-        if (toggle.Source != source)
-            return;
-
-        if (toggle.Action is { } action &&
-            TryComp(action, out ActionComponent? actionComp) &&
-            actionComp.AttachedEntity == user)
-        {
-            _actions.RemoveAction(user, action);
-        }
+        if (toggle.Action is { } action)
+            _actions.RemoveAction(action);
 
         toggle.Action = null;
 
@@ -67,11 +60,7 @@ public sealed class RMCVehicleViewToggleSystem : EntitySystem
         if (ent.Comp.Action is not { } action)
             return;
 
-        if (TryComp(action, out ActionComponent? actionComp) &&
-            actionComp.AttachedEntity == ent.Owner)
-        {
-            _actions.RemoveAction(ent.Owner, action);
-        }
+        _actions.RemoveAction(action);
     }
 
     private void OnToggleViewAction(Entity<RMCVehicleViewToggleComponent> ent, ref RMCVehicleToggleViewActionEvent args)
