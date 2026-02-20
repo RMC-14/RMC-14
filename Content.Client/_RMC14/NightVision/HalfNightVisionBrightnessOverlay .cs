@@ -8,13 +8,20 @@ public sealed class HalfNightVisionBrightnessOverlay : Overlay
 {
     public override OverlaySpace Space => OverlaySpace.BeforeLighting;
 
+    private readonly float _brightness;
+
+    public HalfNightVisionBrightnessOverlay(float brightness = 0.45f)
+    {
+        _brightness = brightness;
+    }
+
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (args.DrawingHandle is not DrawingHandleWorld worldHandle)
             return;
 
         var worldBounds = args.WorldAABB;
-        var brightnessColor = new Color(0.45f, 0.45f, 0.45f, 1.0f);
+        var brightnessColor = new Color(_brightness, _brightness, _brightness, 1.0f);
 
         worldHandle.DrawRect(worldBounds, brightnessColor);
     }
