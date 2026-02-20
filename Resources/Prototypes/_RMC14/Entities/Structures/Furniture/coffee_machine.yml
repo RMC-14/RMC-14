@@ -10,6 +10,7 @@
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/coffee_machine.rsi
+    drawdepth: SmallObjects
     state: coffee_empty_on
     noRot: true
   - type: InteractionOutline

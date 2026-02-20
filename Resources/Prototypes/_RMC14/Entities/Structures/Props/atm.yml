@@ -1,0 +1,51 @@
+﻿- type: entity
+  id: RMCATMMachine
+  name: We-Ya Automatic Teller Machine
+  description: For all your monetary needs!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.2,-0.5,0.2,0.45"
+        density: 190
+        layer:
+        - MobMask
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/atm.rsi
+    state: atm
+
+- type: entity
+  parent: RMCATMMachine
+  id: RMCATMMachineOff
+  suffix: "Off"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Props/atm.rsi
+    state: atm_off
+
+- type: entity
+  parent: RMCNewscaster
+  id: RMCATM
+  name: We-Ya Automatic Teller Machine
+  description: For all your monetary needs!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm
+
+- type: entity
+  parent: RMCATM
+  id: RMCATMOff
+  suffix: "Off"
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/terminals.rsi
+    state: atm_off

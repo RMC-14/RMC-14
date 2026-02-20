@@ -1,0 +1,214 @@
+﻿- type: entity
+  parent: RMCAreaProtectionFour
+  id: RMCAreaOCPMaintsLevel
+  name: OCP-583 Alpha Spire Floor 171 (Maintenance)
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_maints_level
+  - type: Area
+    minimapColor: '#8a4e23'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPCargo
+  name: OCP-583 Alpha Spire Maintenance Landing Zone & Cargo Hold
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: cargo
+  - type: Area
+    minimapColor: '#bc9923'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPEngi
+  name: OCP-583 Alpha Spire Engineering Bay
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: engi
+  - type: Area
+    minimapColor: '#c87816'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPMainLevel
+  name: OCP-583 Alpha Spire Floor 172 (Main Floor)
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_main_level
+  - type: Area
+    minimapColor: '#335F8C'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPSpaceport
+  name: OCP-583 Alpha Spire Thorpe International Spaceport
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: spaceport
+  - type: Area
+    minimapColor: '#6C3280'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPMedbay
+  name: OCP-583 Alpha Spire Anandamayi Medical Centre
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: medbay
+  - type: Area
+    minimapColor: '#3f7fad'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPOffice
+  name: OCP-583 Alpha Spire Weston-Yamada Offices
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: office
+  - type: Area
+    minimapColor: '#499751'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPDorms
+  name: OCP-583 Alpha Spire Dormitories
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: dorms
+  - type: Area
+    minimapColor: '#4552a2'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPResearch
+  name: OCP-583 Alpha Spire Applied Sciences Research Facility
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: research
+  - type: Area
+    minimapColor: '#babc7a'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPCMB
+  name: OCP-583 Alpha Spire Colonial Marshals Kōban
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: cmb
+  - type: Area
+    minimapColor: '#a22a27'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPApartments
+  name: OCP-583 Alpha Spire Seacourt Apartments
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: apartments
+  - type: Area
+    minimapColor: '#20a86f'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperLevel
+  name: OCP-583 Alpha Spire Floor 173 (Upper Floor)
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: ocp_upper_level
+  - type: Area
+    minimapColor: '#35a430'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperMed
+  name: OCP-583 Alpha Spire Upper Anandamayi Medical Centre
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_med
+  - type: Area
+    minimapColor: '#203fa8'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperOffice
+  name: OCP-583 Alpha Spire Upper Weston-Yamada Offices
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_office
+  - type: Area
+    minimapColor: '#b5a93d'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPUpperResearch
+  name: OCP-583 Alpha Spire Upper Research Facility
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: upper_research
+  - type: Area
+    minimapColor: '#8344bc'
+
+- type: entity
+  parent: RMCAreaOCPMaintsLevel
+  id: RMCAreaOCPComms
+  name: OCP-583 Alpha Spire Communications Grid
+  suffix: OCP Area
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_ocp_alpha_spire.rsi
+    state: comms
+  - type: Area
+    minimapColor: '#44bcb9'
+
+- type: entity
+  parent: RMCAreaPVE
+  id: RMCAreaOCPOOB
+  name: OCP Out Of Bounds
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_fiorina.rsi
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: true

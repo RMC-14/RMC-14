@@ -319,3 +319,54 @@
       map: [ "enum.DamageStateVisualLayers.Base" ]
   - type: ExamineRequiresSkill
     skilledExamine: rmc-pill-contents-iron
+
+- type: entity
+  parent: CMPill
+  id: RMCPillMethylphenidate
+  suffix: Pill
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: RMCMethylphenidate
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill20
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: RMCPillCitalopram
+  suffix: Pill
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: RMCCitalopram
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill8
+      map: [ "enum.DamageStateVisualLayers.Base" ]
+
+- type: entity
+  parent: CMPill
+  id: RMCPillParoxetine
+  suffix: Pill
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 10
+        reagents:
+        - ReagentId: RMCParoxetine
+          Quantity: 10
+  - type: Sprite
+    layers:
+    - state: pill15
+      map: [ "enum.DamageStateVisualLayers.Base" ]

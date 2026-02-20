@@ -1,0 +1,59 @@
+﻿{
+    "version": 1,
+    "license": "CC-BY-SA-4.0",
+    "copyright": "Made by SharkSnake98 on GitHub",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cargo"
+        },
+        {
+            "name": "engi"
+        },
+        {
+            "name": "ocp_maints_level"
+        },
+        {
+            "name": "ocp_main_level"
+        },
+        {
+            "name": "spaceport"
+        },
+        {
+            "name": "medbay"
+        },
+        {
+            "name": "office"
+        },
+        {
+            "name": "dorms"
+        },
+        {
+            "name": "research"
+        },
+        {
+            "name": "cmb"
+        },
+        {
+            "name": "apartments"
+        },
+        {
+            "name": "ocp_upper_level"
+        },
+        {
+            "name": "upper_med"
+        },
+        {
+            "name": "upper_office"
+        },
+        {
+            "name": "upper_research"
+        },
+        {
+            "name": "comms"
+        }
+    ]
+}
