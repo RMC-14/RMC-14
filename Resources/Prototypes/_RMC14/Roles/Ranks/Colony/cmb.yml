@@ -41,6 +41,11 @@
   prefix: Spec.
 
 - type: rank
+  id: RMCRankCMBSWATMarksman
+  name: CMB SWAT Marksman
+  prefix: Mark.
+
+- type: rank
   id: RMCRankICBAgent
   name: Interstellar Commerce Bureau Agent
   prefix: Agent
