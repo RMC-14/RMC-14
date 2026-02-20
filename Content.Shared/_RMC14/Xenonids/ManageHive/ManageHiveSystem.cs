@@ -7,6 +7,7 @@ using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.ManageHive.Boons;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared._RMC14.Xenonids.Plasma;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Administration.Logs;
@@ -89,6 +90,8 @@ public sealed class ManageHiveSystem : EntitySystem
 
         options.Add(new DialogOption(Loc.GetString("rmc-hivemanagement-exchange-larva"), new ManageHiveSacrificeBurrowedEvent()));
         options.Add(new DialogOption(Loc.GetString("rmc-boon-activate"), new ManageHiveActivateBoonsEvent()));
+        options.Add(new DialogOption(Loc.GetString("rmc-banish-button"), new ManageHiveBanishEvent()));
+        options.Add(new DialogOption(Loc.GetString("rmc-readmit-button"), new ManageHiveReadmitEvent()));
 
         _dialog.OpenOptions(manage, Loc.GetString("rmc-hivemanagement-hive-management"), options, Loc.GetString("rmc-hivemanagement-manage-the-hive"));
     }
@@ -229,7 +232,7 @@ public sealed class ManageHiveSystem : EntitySystem
         if (!CanSacrificeBurrowedPopup(ent, out var hive))
             return;
 
-        _hive.IncreaseBurrowedLarva(hive, -1);
+        _hive.ChangeBurrowedLarva(hive, -1);
         var given = _xenoEvolution.AddPointsCapped(target, _burrowedLarvaEvolutionPointsPer);
 
         _popup.PopupCursor(Loc.GetString("rmc-hivemanagement-exchange-larva-given-user", ("target", ent), ("points", given)), ent);

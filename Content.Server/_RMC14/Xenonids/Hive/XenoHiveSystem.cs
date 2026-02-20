@@ -47,6 +47,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     {
         base.Initialize();
         SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
+        SubscribeLocalEvent<JoinBurrowedLarvaAttemptEvent>(OnJoinBurrowedLarvaAttempt);
 
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentStartup>(OnBurrowedSurgeStartup);
         SubscribeLocalEvent<HijackBurrowedSurgeComponent, ComponentShutdown>(OnBurrowedSurgeShutdown);
@@ -90,7 +91,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
 
             hive.LateJoinMarines -= lateJoinsPer;
-            IncreaseBurrowedLarva((uid, hive), 1);
+            ChangeBurrowedLarva((uid, hive), 1);
         }
     }
 
@@ -102,6 +103,11 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
     private void OnBurrowedSurgeShutdown(Entity<HijackBurrowedSurgeComponent> hive, ref ComponentShutdown args)
     {
         _xenoAnnounce.AnnounceToHive(EntityUid.Invalid, hive, Loc.GetString("rmc-xeno-burrowed-surge-end"));
+    }
+
+    private void OnJoinBurrowedLarvaAttempt(ref JoinBurrowedLarvaAttemptEvent ev)
+    {
+        // Banishment checking removed - handled by XenoServerBanishSystem
     }
 
     public override void Update(float frameTime)
@@ -179,7 +185,7 @@ public sealed class XenoHiveSystem : SharedXenoHiveSystem
                 continue;
             }
 
-            IncreaseBurrowedLarva(1);
+            ChangeBurrowedLarva(1);
             burrowed.PooledLarva--;
             if (burrowed.PooledLarva < 1)
                 RemCompDeferred<HijackBurrowedSurgeComponent>(id);

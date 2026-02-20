@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Construction.Tunnel;
+using Content.Shared._RMC14.Xenonids.Banish;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
@@ -9,7 +10,7 @@ using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 namespace Content.Shared._RMC14.Xenonids.Hive;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem))]
+[Access(typeof(SharedXenoHiveSystem), typeof(SharedXenoPylonSystem), typeof(XenoTunnelSystem), typeof(XenoBanishSystem))]
 public sealed partial class HiveComponent : Component
 {
     [DataField, AutoNetworkedField]
@@ -93,4 +94,7 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId BurrowedLarvaId = "CMXenoLarva";
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> BanishedXenos = new();
 }

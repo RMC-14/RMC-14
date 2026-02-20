@@ -13,8 +13,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleWarrior
-  - type: GhostRole
-    name: cm-job-name-xeno-warrior
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Warrior/warrior.rsi
   - type: MobState
