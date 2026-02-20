@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Item;
 using Content.Shared.Tools;
 using Content.Shared.Whitelist;
@@ -56,7 +57,7 @@ public sealed partial class WeaponMountComponent : Component
     public TimeSpan AssembleDelay = TimeSpan.FromSeconds(1.5f);
 
     /// <summary>
-    ///     The DOAfter duration for any disassembling related actions.
+    ///     The DOAfter duration for any disassembling related actions, affected by the <see cref="DisassembleSkill"/>
     /// </summary>
     [DataField, AutoNetworkedField]
     public TimeSpan DisassembleDelay = TimeSpan.FromSeconds(1.5f);
@@ -144,6 +145,21 @@ public sealed partial class WeaponMountComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool AcidableWhileDeployed;
+
+    /// <summary>
+    ///     How close you need to be to the mount to strap yourself to it.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float MountableDistance = 2;
+
+    /// <summary>
+    ///     The skill that lowers the duration of the disassemble/undeploy doafter.
+    /// </summary>
+    [DataField]
+    public EntProtoId<SkillDefinitionComponent> DisassembleSkill = "RMCSkillEngineer";
+
+    [DataField, AutoNetworkedField]
+    public string? DeployFixture = "mount";
 
     [DataField]
     public SoundSpecifier? UndeploySound = new SoundPathSpecifier("/Audio/Items/screwdriver.ogg");

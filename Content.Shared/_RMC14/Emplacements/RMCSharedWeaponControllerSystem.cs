@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Armor.ThermalCloak;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Buckle;
 using Content.Shared.Mobs;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Shared.Containers;
 
@@ -10,14 +12,17 @@ namespace Content.Shared._RMC14.Emplacements;
 public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
 {
     [Dependency] private readonly SharedBuckleSystem _buckle = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+
 
     public override void Initialize()
     {
         SubscribeLocalEvent<WeaponControllerComponent, BeforeAttemptShootEvent>(OnAdjustShotOrigin);
         SubscribeLocalEvent<WeaponControllerComponent, DismountActionEvent>(OnDismountAction);
         SubscribeLocalEvent<WeaponControllerComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<WeaponControllerComponent, KnockedDownEvent>(OnKnockedDown);
+        SubscribeLocalEvent<WeaponControllerComponent, ToggleInvisibilityAttemptEvent>(OnToggleInvisibilityAttempt);
     }
 
     private void OnAdjustShotOrigin(Entity<WeaponControllerComponent> ent, ref BeforeAttemptShootEvent args)
@@ -48,6 +53,16 @@ public abstract partial class RMCSharedWeaponControllerSystem : EntitySystem
         if (args.NewMobState == MobState.Alive)
             return;
 
+        _buckle.Unbuckle(ent.Owner, ent);
+    }
+
+    private void OnKnockedDown(Entity<WeaponControllerComponent> ent, ref KnockedDownEvent args)
+    {
+        _buckle.Unbuckle(ent.Owner, ent);
+    }
+
+    private void OnToggleInvisibilityAttempt(Entity<WeaponControllerComponent> ent, ref ToggleInvisibilityAttemptEvent args)
+    {
         _buckle.Unbuckle(ent.Owner, ent);
     }
 

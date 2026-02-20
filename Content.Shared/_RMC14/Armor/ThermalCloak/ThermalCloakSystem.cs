@@ -75,6 +75,12 @@ public sealed class ThermalCloakSystem : EntitySystem
         if (args.Handled)
             return;
 
+        var invisibilityAttemptEvent = new ToggleInvisibilityAttemptEvent();
+        RaiseLocalEvent(args.Performer, ref invisibilityAttemptEvent);
+
+        if (invisibilityAttemptEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
         if (!_whitelist.IsWhitelistPass(ent.Comp.Whitelist, args.Performer))
@@ -302,3 +308,6 @@ public sealed class ThermalCloakSystem : EntitySystem
         Spawn(cloakProtoId, coordinates, rotation: rotation);
     }
 }
+
+[ByRefEvent]
+public record struct ToggleInvisibilityAttemptEvent(bool Cancelled = false);
