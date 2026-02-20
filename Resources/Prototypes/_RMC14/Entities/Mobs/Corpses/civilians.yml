@@ -404,7 +404,7 @@
         Slash: 77
         Blunt: 43
 
-# United Nations Riot Officer
+# CMB Riot Control Officer
 - type: randomHumanoidSettings
   parent: RMCCorpse
   id: RMCCorpseUnitedNationsRiotOfficer

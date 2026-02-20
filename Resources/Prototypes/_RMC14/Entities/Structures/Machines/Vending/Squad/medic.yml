@@ -569,3 +569,50 @@
     #   entries:
     #   - id: CMMiniTank
     #     points: 40
+
+- type: entity
+  parent: ColMarTechMedicalChemicalPVE
+  id: RMCRCMMedicalChemicalPVE
+  suffix: PVE, RCM
+  name: We-Ya section medical chemical rack
+  description: An automated gear rack for specialized chemicals for the medical assistants.
+  components:
+  - type: CMAutomatedVendor
+    jobs: 
+    - CMRoyalMarinesMedicPVE
+    pointsType: Chemicals
+    sections:
+    # TODO RMC14: newmed
+    # - name: Essential Medication
+    #   choices: { RMCEssentialChemical: 1 }
+    #   entries:
+    #   - id: RMCPillCanisterImidazolineAlkysine
+    #     recommended: true
+    #   - id: RMCLargeBottleImidazolineAlkysine
+    #     recommended: true
+    - name: Pill Bottles
+      entries:
+      - id: RMCPillCanisterMeralyneBicaridine
+        points: 60
+      - id: CMPillCanisterKelotaneDermaline
+        points: 60
+      # TODO RMC14: newmed
+      # - id: RMCPillCanisterNitrogenWater
+      #   points: 30
+      - id: RMCPillCanisterDexalinPlus
+        points: 30
+      - id: RMCPillCanisterIron
+        points: 30
+    - name: Liquid Bottles
+      entries:
+      - id: RMCLargeBottleMeralyneBicaridine
+        points: 40
+      - id: RMCLargeBottleKelotaneDermaline
+        points: 40
+      - id: RMCLargeBottleDexalinPlus
+        points: 30
+    # TODO RMC14: the minitank is currently non functional
+    # - name: Injectors
+    #   entries:
+    #   - id: CMMiniTank
+    #     points: 40

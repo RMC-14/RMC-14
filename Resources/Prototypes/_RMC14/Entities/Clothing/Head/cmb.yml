@@ -17,3 +17,11 @@
     explosionArmor: 25
     # armor_energy = 30
   - type: RMCEarProtection
+
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisorSWAT
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT
