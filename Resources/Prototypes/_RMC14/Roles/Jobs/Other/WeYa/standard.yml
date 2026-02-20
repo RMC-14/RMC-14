@@ -24,7 +24,7 @@
       skills:
         RMCSkillCqc: 1
         RMCSkillFirearms: 3
-        RMCSkillPolice: 2
+        RMCSkillPolice: 0 # RMC14
         RMCSkillFireman: 2
         RMCSkillConstruction: 2
         RMCSkillEngineer: 1
