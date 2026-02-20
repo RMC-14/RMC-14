@@ -1,0 +1,17 @@
+- type: entity
+  parent: CMSeatBase
+  id: RMCSeatDriver
+  name: driver's chair
+  description: A specially designed chair for driver to sit in.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
+    state: pilot_chair
+  - type: VehicleDriverSeat
+    skills:
+      all:
+        RMCSkillVehicles: 1
