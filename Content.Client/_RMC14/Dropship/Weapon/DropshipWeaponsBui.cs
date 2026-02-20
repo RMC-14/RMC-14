@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
+using Content.Client._RMC14.Dropship.Weapon.FireMission;
 using Content.Client._RMC14.TacticalMap;
 using Content.Client._RMC14.UserInterface;
 using Content.Client.Eye;
@@ -37,6 +39,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
     private TacticalMapWrapper? _embeddedTacMapWrapperScreen1;
     private TacticalMapWrapper? _embeddedTacMapWrapperScreen2;
 
+    private const int FireMissionCreateButtonsPerPage= 10;
+    private const int FireMissionStrikeButtonsPerPage = 5;
+
     protected override DropshipWeaponsWindow? Window { get; set; }
 
     public DropshipWeaponsBui(EntityUid owner, Enum uiKey) : base(owner, uiKey)
@@ -73,6 +78,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         Window.ResetOffsetButton.OnPressed += _ =>
             SendPredictedMessage(new DropshipTerminalWeaponsResetOffsetMsg());
 
+        foreach (var screen in new[] { Window.ScreenOne, Window.ScreenTwo })
+        {
+            screen.FireMissionCreate.FireMissionNameEntered += name =>
+                SendPredictedMessage(new DropshipTerminalWeaponsCreateFireMissionMsg(name));
+        }
+
+        foreach (var screen in new[] { Window.ScreenOne, Window.ScreenTwo })
+        {
+            screen.FireMissionEdit.FireMissionOffsetSelected += (missionId, row, column)=>
+                SendPredictedMessage(new DropshipTerminalWeaponsEditFireMissionMsg(screen == Window.ScreenOne, missionId, row, column));
+        }
+
         Window.ScreenOne.TopRow.Refresh();
         Window.ScreenOne.LeftRow.Refresh();
         Window.ScreenOne.RightRow.Refresh();
@@ -108,6 +125,14 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         {
             RefreshEmbeddedTacMap(_embeddedTacMapWrapperScreen2);
         }
+
+        if (terminal != null)
+        {
+            foreach (var createScreen in Window.Panel.GetControlOfType<DropshipFireMissionCreateScreen>())
+            {
+                createScreen.RefreshFireMissions(terminal.FireMissions);
+            }
+        }
     }
 
     private void RefreshButtons()
@@ -118,6 +143,11 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         foreach (var button in Window.Panel.GetControlOfType<DropshipWeaponsButton>())
         {
             button.Refresh();
+        }
+
+        foreach (var offsetButton in Window.Panel.GetControlOfType<DropshipFireMissionOffsetButton>())
+        {
+            offsetButton.Refresh();
         }
     }
 
@@ -133,6 +163,9 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
         screen.Viewport.RemoveAllChildren();
         screen.Viewport.Visible = false;
+        screen.FireMissionCreate.Visible = false;
+        screen.FireMissionView.Visible = false;
+        screen.FireMissionEdit.Visible = false;
 
         static DropshipWeaponsButtonData ButtonAction(string suffix, Action<ButtonEventArgs> onPressed)
         {
@@ -149,12 +182,36 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         string TargetAcquisition()
         {
             var weapon = EntMan.GetEntity(compScreen.Weapon);
+
+            var mode = compScreen.Weapon != null ? "WEAPON" :
+                compScreen.FireMissionId != null ? "FIREMISSION" :
+                "NONE";
+
+            var weaponText = compScreen.Weapon != null ? weapon.ToString() ?? ""
+                : compScreen.FireMissionId != null ? GetFireMissionName(compScreen.FireMissionId.Value)
+                : "";
+
+            if (EntMan.TryGetComponent(weapon, out MetaDataComponent? meta))
+                weaponText = meta.EntityName;
+
             return Loc.GetString("rmc-dropship-weapons-target-strike",
-                ("mode", compScreen.Weapon == null ? "NONE" : "WEAPON"),
-                ("weapon", weapon == null ? "" : weapon),
-                ("target", terminal.Target == null ? "NONE" : terminal.Target.Value),
+                ("mode", mode),
+                ("weapon", weaponText),
+                ("target", terminal.Target != null ? terminal.Target.Value : "NONE"),
+                ("vector", Loc.GetString("rmc-dropship-firemission-vector-" + $"{terminal.StrikeVector}")),
                 ("xOffset", terminal.Offset.X),
                 ("yOffset", terminal.Offset.Y));
+        }
+
+        string GetFireMissionName(int id)
+        {
+            foreach (var t in terminal.FireMissions)
+            {
+                if (t.Id == id)
+                    return t.Name;
+            }
+
+            return "";
         }
 
         void AddButtons(
@@ -245,6 +302,13 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(true)));
         var equipmentAutoDeployOff = ButtonAction("auto-deploy",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(false)));
+        var firemissionCreate = Button("fire-mission", FireMissionCreate);
+        var firemissionView = Button("view", FireMissionView);
+        var firemissionEdit = Button("edit", FireMissionEdit);
+        var firemissionDelete = ButtonAction("delete",
+            _ => SendPredictedMessage(new DropshipTerminalWeaponsDeleteFireMissionMsg(first)));
+        var firemission = Button("fire-mission", StrikeFireMission);
+        var strikeVector = Button("vector", StrikeVector);
 
         screen.ScreenLabel.Text = Loc.GetString("rmc-dropship-weapons-main-screen-text");
         screen.ScreenLabel.VerticalAlignment = VAlignment.Stretch;
@@ -256,7 +320,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         {
             case Main:
                 screen.BottomRow.SetData(two: tacMap, three: cams);
-                screen.TopRow.SetData(equip, four: target);
+                screen.TopRow.SetData(equip,firemissionCreate, four: target);
                 break;
             case Equip:
             {
@@ -314,8 +378,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 AddTargets(out var previous, out var next);
                 screen.BottomRow.SetData(exit, five: next);
                 screen.TopRow.SetData(fire, five: previous);
-                // TODO RMC14 left two vector
-                screen.LeftRow.SetData(strike);
+                screen.LeftRow.SetData(strike, strikeVector);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
             }
@@ -324,7 +387,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 AddTargets(out var previous, out var next);
                 screen.BottomRow.SetData(exit, five: next);
                 screen.TopRow.SetData(fire, five: previous);
-                screen.LeftRow.SetData(cancel, weapon);
+                screen.LeftRow.SetData(cancel, weapon, firemission);
                 screen.ScreenLabel.Text = TargetAcquisition();
                 break;
             }
@@ -366,12 +429,12 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 screen.LeftRow.SetData(nightVisionOn, nightVisionOff);
                 screen.ScreenLabel.Visible = false;
 
-                if (_oldEye != null && _oldEye != terminal.Target)
+                if (_oldEye != null && _oldEye != terminal.CameraTarget)
                     _eyeLerping.RemoveEye(_oldEye.Value);
 
-                _oldEye = terminal.Target;
-                if (terminal.Target != null &&
-                    _weaponSystem.TryGetTargetEye((Owner, terminal), terminal.Target.Value, out var eyeId))
+                _oldEye = terminal.CameraTarget;
+                if (terminal.CameraTarget != null &&
+                    _weaponSystem.TryGetTargetEye((Owner, terminal), terminal.CameraTarget.Value, out var eyeId))
                 {
                     if (!EntMan.HasComponent<LerpingEyeComponent>(eyeId))
                         _eyeLerping.AddEye(eyeId);
@@ -538,6 +601,272 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 }
                 break;
             }
+            case FireMissionCreate:
+            {
+                DropshipWeaponsButtonData? previousButton = null;
+                DropshipWeaponsButtonData? nextButton = null;
+
+                var currentPage = first ? terminal.ScreenOneFireMissionPage : terminal.ScreenTwoFireMissionPage;
+                if (currentPage > 0)
+                {
+                    previousButton = new DropshipWeaponsButtonData(
+                        Loc.GetString("rmc-dropship-weapons-previous"),
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMissionPreviousMsg(
+                            first,
+                            FireMissionCreateButtonsPerPage,
+                            0
+                        ))
+                    );
+                }
+
+                if (terminal.FireMissions.Count > FireMissionCreateButtonsPerPage * (currentPage + 1))
+                {
+                    nextButton = new DropshipWeaponsButtonData(
+                        Loc.GetString("rmc-dropship-weapons-next"),
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMissionNextMsg(
+                            first,
+                            FireMissionCreateButtonsPerPage,
+                            0
+                        ))
+                    );
+                }
+
+                AddPagedButtons(
+                    terminal.FireMissions,
+                    (mission, index) => new DropshipWeaponsButtonData(
+                        $"FM {index}",
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsViewFireMissionMsg(first, mission.Id))
+                    ),
+                    new[] { screen.LeftRow, screen.RightRow },
+                    buttonsPerRow: FireMissionCreateButtonsPerPage / 2,
+                    currentPage
+                );
+
+                screen.TopRow.SetData(five: previousButton);
+                screen.BottomRow.SetData(exit, five: nextButton);
+                screen.ScreenLabel.Visible = false;
+                screen.FireMissionCreate.Visible = true;
+                break;
+            }
+            case FireMissionView:
+            {
+                screen.TopRow.SetData(firemissionDelete, firemissionCreate, firemissionEdit);
+                screen.BottomRow.SetData(exit);
+
+                // Determine which fire mission is selected for this screen
+                var selectedId = first
+                    ? terminal.ScreenOneViewingFireMissionId
+                    : terminal.ScreenTwoViewingFireMissionId;
+
+                if (selectedId != null)
+                {
+                    var selectedMission = terminal.FireMissions
+                        .FirstOrDefault(fm => fm.Id == selectedId.Value);
+
+                    TryGetWeapons(
+                        first,
+                        out var one,
+                        out var two,
+                        out var three,
+                        out var four,
+                        out _,
+                        out _,
+                        out _,
+                        out _,
+                        out _
+                    );
+
+                    var weaponButtons = new [] { one, two, three, four };
+                    var weaponData = new List<WeaponDisplayInfo>();
+
+                    foreach (var button in weaponButtons)
+                    {
+                        if (button?.Weapon == null)
+                            continue;
+
+                        var weaponEntity = EntMan.GetEntity(button.Value.Weapon.Value);
+                        if (!EntMan.TryGetComponent(weaponEntity, out DropshipWeaponComponent? weaponComp))
+                            continue;
+
+                        var offsets = selectedMission.WeaponOffsets
+                            .Where(wo => wo.WeaponId == button.Value.Weapon.Value)
+                            .ToList();
+
+                        var hasLocation = _weaponSystem.TryGetWeaponLocation(weaponEntity, out var locationId);
+
+                        var info = new WeaponDisplayInfo
+                        {
+                            Name = hasLocation
+                                ? $"{weaponComp.Abbreviation} {(int) locationId}"
+                                : weaponComp.Abbreviation,
+                            Offsets = offsets,
+                        };
+
+                        var setOffsetCount = 0;
+                        foreach (var offset in offsets)
+                        {
+                            if (offset.Offset != null)
+                                setOffsetCount++;
+                        }
+
+                        if (_weaponSystem.TryGetWeaponAmmo(weaponEntity, out var weaponAmmo))
+                        {
+                            info.MaxAmmo = weaponAmmo.Comp.MaxRounds;
+                            info.Ammo = weaponAmmo.Comp.Rounds;
+                            info.AmmoConsumption = weaponAmmo.Comp.RoundsPerShot * setOffsetCount;
+                        }
+
+                        weaponData.Add(info);
+                    }
+
+                    screen.FireMissionView.SetData(selectedMission, weaponData, terminal.MinTiming, terminal.MaxTiming);
+                    screen.ScreenLabel.Visible = false;
+                    screen.FireMissionView.Visible = true;
+                }
+                break;
+            }
+            case FireMissionEdit:
+            {
+                TryGetWeapons(
+                    first,
+                    out var one,
+                    out var two,
+                    out var three,
+                    out var four,
+                    out _,
+                    out _,
+                    out _,
+                    out _,
+                    out _
+                );
+                screen.RightRow.SetData(one, two, three, four);
+
+                var selectedWeaponId = first
+                    ? terminal.ScreenOne.Weapon
+                    : terminal.ScreenTwo.Weapon;
+
+                var validAmmo = true;
+                var labelMessage = Loc.GetString("rmc-dropship-firemission-edit");
+                if (selectedWeaponId != null)
+                {
+                    var weaponEntity = EntMan.GetEntity(selectedWeaponId.Value);
+
+                    if (!EntMan.TryGetComponent(weaponEntity, out DropshipWeaponComponent? weaponComp))
+                        break;
+
+                    // Determine offsets for this weapon
+                    var selectedMissionId = first
+                        ? terminal.ScreenOneViewingFireMissionId
+                        : terminal.ScreenTwoViewingFireMissionId;
+
+                    // Make sure offsets exist
+                    var selectedMission = terminal.FireMissions.FirstOrDefault(fm => fm.Id == selectedMissionId);
+                    _weaponSystem.EnsureWeaponOffsets(Owner, selectedMission, weaponEntity);
+                    var offsets = selectedMission.WeaponOffsets
+                        .Where(o => o.WeaponId == selectedWeaponId.Value)
+                        .ToList();
+
+                    // Determine weapon location
+                    var hasLocation = _weaponSystem.TryGetWeaponLocation(weaponEntity, out var location);
+                    var locationOffsets = terminal.AllowedOffsets;
+                    if (!locationOffsets.TryGetValue(location, out var allowedOffsets))
+                        break;
+
+                    var weaponInfo = new WeaponDisplayInfo
+                    {
+                        Name = hasLocation
+                            ? $"{weaponComp.Abbreviation} {(int) location}"
+                            : weaponComp.Abbreviation,
+                        Offsets = offsets,
+                    };
+
+                    if (_weaponSystem.TryGetWeaponAmmo(weaponEntity, out var weaponAmmo))
+                    {
+                        weaponInfo.MaxAmmo = weaponAmmo.Comp.MaxRounds;
+                        weaponInfo.Ammo = weaponAmmo.Comp.Rounds;
+                        weaponInfo.AmmoConsumption = weaponAmmo.Comp.RoundsPerShot;
+
+                        if (weaponAmmo.Comp.FireMissionDelay != null)
+                            weaponInfo.FireDelay = weaponAmmo.Comp.FireMissionDelay.Value;
+                        else
+                        {
+                            validAmmo = false;
+                            labelMessage = Loc.GetString("rmc-dropship-firemission-invalid-ammo",("ammo", weaponAmmo));
+                        }
+                    }
+
+                    screen.FireMissionEdit.SetData(selectedMission, weaponInfo, terminal.MinTiming, terminal.MaxTiming, allowedOffsets);
+                    if (validAmmo)
+                    {
+                        screen.ScreenLabel.Visible = false;
+                        screen.FireMissionEdit.Visible = true;
+                    }
+                }
+
+                screen.TopRow.SetData(firemissionDelete,firemissionCreate, firemissionView);
+                screen.BottomRow.SetData(exit);
+                screen.ScreenLabel.Text = labelMessage;
+                break;
+            }
+            case StrikeFireMission:
+            {
+                DropshipWeaponsButtonData? previousButton = null;
+                DropshipWeaponsButtonData? nextButton = null;
+
+                var currentPage = first ? terminal.ScreenOneFireMissionPage : terminal.ScreenTwoFireMissionPage;
+                var fixedButtons = new List<DropshipWeaponsButtonData>() { cancel };
+
+                if (currentPage > 0)
+                {
+                    previousButton = new DropshipWeaponsButtonData(
+                        Loc.GetString("rmc-dropship-weapons-previous"),
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMissionPreviousMsg(
+                            first,
+                            FireMissionStrikeButtonsPerPage,
+                            fixedButtons.Count
+                        ))
+                    );
+                }
+
+                if (terminal.FireMissions.Count > (FireMissionStrikeButtonsPerPage - fixedButtons.Count) * (currentPage + 1))
+                {
+                    nextButton = new DropshipWeaponsButtonData(
+                        Loc.GetString("rmc-dropship-weapons-next"),
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsFireMissionNextMsg(
+                            first,
+                            FireMissionStrikeButtonsPerPage,
+                            fixedButtons.Count
+                        ))
+                    );
+                }
+
+                AddPagedButtons(
+                    terminal.FireMissions,
+                    (mission, index) => new DropshipWeaponsButtonData(
+                        $"FM {index}",
+                        _ => SendPredictedMessage(new DropshipTerminalWeaponsSelectFireMissionMsg(first, mission.Id))
+                    ),
+                    new[] { screen.LeftRow },
+                    buttonsPerRow: FireMissionStrikeButtonsPerPage,
+                    currentPage,
+                    fixedButtons
+                );
+
+                AddTargets(out var previous, out var next);
+                screen.TopRow.SetData(fire, previousButton, five: previous);
+                screen.BottomRow.SetData(exit, nextButton, five: next);
+                screen.ScreenLabel.Text = TargetAcquisition();
+                break;
+            }
+            case StrikeVector:
+            {
+                AddTargets(out var previous, out var next);
+                screen.BottomRow.SetData(exit, five: next);
+                screen.TopRow.SetData(fire, five: previous);
+                AddStrikeVectorButtons(screen.LeftRow, first, cancel);
+                screen.ScreenLabel.Text = TargetAcquisition();
+                break;
+            }
             default:
                 screen.BottomRow.SetData(exit);
                 break;
@@ -628,7 +957,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         if (!_system.TryGetGridDropship(Owner, out var dropship))
             return;
 
-        var weapons = new List<DropshipWeaponsButtonData?>();
+        var weapons = new List<OrderedWeapon>();
         var utility = new List<DropshipWeaponsButtonData?>();
         var electronicSystem = new List<DropshipWeaponsButtonData?>();
         foreach (var pointId in dropship.Comp.AttachmentPoints)
@@ -714,6 +1043,7 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 if (weapon == null && deployer == null)
                     continue;
 
+                var hasLocation = _weaponSystem.TryGetWeaponLocation(contained, out var location);
                 var abbreviation = string.Empty;
 
                 if (weapon != null)
@@ -724,21 +1054,27 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
                 var netEnt = EntMan.GetNetEntity(contained);
                 var msg = new DropshipTerminalWeaponsChooseWeaponMsg(first, netEnt);
                 var data = new DropshipWeaponsButtonData(
-                    abbreviation,
+                    hasLocation
+                        ? $"{abbreviation} {(int) location}"
+                        : abbreviation,
                     _ => SendPredictedMessage(msg),
                     netEnt
                 );
-                weapons.Add(data);
+
+                var order = hasLocation ? (int)location : int.MaxValue;
+                weapons.Add(new OrderedWeapon(data, order));
 
                 if (weapons.Count >= 4)
                     break;
             }
         }
 
-        weapons.TryGetValue(0, out one);
-        weapons.TryGetValue(1, out two);
-        weapons.TryGetValue(2, out three);
-        weapons.TryGetValue(3, out four);
+        weapons.Sort((a, b) => a.Order.CompareTo(b.Order));
+
+        one = weapons.Count > 0 ? weapons[0].Data : null;
+        two = weapons.Count > 1 ? weapons[1].Data : null;
+        three = weapons.Count > 2 ? weapons[2].Data : null;
+        four = weapons.Count > 3 ? weapons[3].Data : null;
 
         utility.TryGetValue(0, out utilityOne);
         utility.TryGetValue(1, out utilityTwo);
@@ -746,6 +1082,18 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
 
         electronicSystem.TryGetValue(0, out electronicSystemOne);
         electronicSystem.TryGetValue(1, out electronicSystemTwo);
+    }
+
+    private readonly struct OrderedWeapon
+    {
+        public readonly DropshipWeaponsButtonData Data;
+        public readonly int Order;
+
+        public OrderedWeapon(DropshipWeaponsButtonData data, int order)
+        {
+            Data = data;
+            Order = order;
+        }
     }
 
     protected override void Dispose(bool disposing)
@@ -763,5 +1111,84 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
         }
 
         base.Dispose(disposing);
+    }
+
+    private void AddPagedButtons<T>(
+        List<T> items,
+        Func<T, int, DropshipWeaponsButtonData> makeButton,
+        DropshipWeaponsButtonRow[] rows,
+        int buttonsPerRow,
+        int currentPage,
+        List<DropshipWeaponsButtonData>? fixedButtons = null)
+    {
+        fixedButtons ??= new List<DropshipWeaponsButtonData>();
+
+        var slotsFirstRow = buttonsPerRow - fixedButtons.Count;
+        var slotsOtherRows = buttonsPerRow * (rows.Length - 1);
+        var totalSlotsPerPage = Math.Max(slotsFirstRow, 0) + slotsOtherRows;
+
+        var totalPages = Math.Max(1, (items.Count + totalSlotsPerPage - 1) / totalSlotsPerPage);
+        var clampedPage = Math.Clamp(currentPage, 0, totalPages - 1);
+
+        var startIndex = clampedPage * totalSlotsPerPage;
+        var currentItemIndex = startIndex;
+
+        for (var r = 0; r < rows.Length; r++)
+        {
+            var rowButtons = new DropshipWeaponsButtonData?[buttonsPerRow];
+
+            if (r == 0)
+            {
+                for (var i = 0; i < fixedButtons.Count && i < buttonsPerRow; i++)
+                {
+                    rowButtons[i] = fixedButtons[i];
+                }
+
+                var slot = fixedButtons.Count;
+                while (slot < buttonsPerRow && currentItemIndex < items.Count)
+                {
+                    rowButtons[slot] = makeButton(items[currentItemIndex], currentItemIndex + 1);
+                    slot++;
+                    currentItemIndex++;
+                }
+            }
+            else
+            {
+                for (var i = 0; i < buttonsPerRow && currentItemIndex < items.Count; i++)
+                {
+                    rowButtons[i] = makeButton(items[currentItemIndex], currentItemIndex + 1);
+                    currentItemIndex++;
+                }
+            }
+
+            rows[r].SetData(
+                rowButtons.Length > 0 ? rowButtons[0] : null,
+                rowButtons.Length > 1 ? rowButtons[1] : null,
+                rowButtons.Length > 2 ? rowButtons[2] : null,
+                rowButtons.Length > 3 ? rowButtons[3] : null,
+                rowButtons.Length > 4 ? rowButtons[4] : null
+            );
+        }
+    }
+
+    private void AddStrikeVectorButtons(DropshipWeaponsButtonRow row, bool first, DropshipWeaponsButtonData cancel)
+    {
+        var north = new DropshipWeaponsButtonData(Loc.GetString("rmc-dropship-firemission-vector-North"),
+            _ =>
+            SendPredictedMessage(new DropshipTerminalWeaponsSelectStrikeVectorMsg(first, Direction.North)));
+
+        var east = new DropshipWeaponsButtonData(Loc.GetString("rmc-dropship-firemission-vector-East"),
+            _ =>
+            SendPredictedMessage(new DropshipTerminalWeaponsSelectStrikeVectorMsg(first, Direction.East)));
+
+        var south = new DropshipWeaponsButtonData(Loc.GetString("rmc-dropship-firemission-vector-South"),
+            _ =>
+            SendPredictedMessage(new DropshipTerminalWeaponsSelectStrikeVectorMsg(first, Direction.South)));
+
+        var west = new DropshipWeaponsButtonData(Loc.GetString("rmc-dropship-firemission-vector-West"),
+            _ =>
+            SendPredictedMessage(new DropshipTerminalWeaponsSelectStrikeVectorMsg(first, Direction.West)));
+
+        row.SetData(cancel, north, east, south, west);
     }
 }

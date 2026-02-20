@@ -24,6 +24,11 @@ public enum DropshipTerminalWeaponsScreen
     Spotlight,
     TacMap,
     EquipmentDeployer,
+    FireMissionCreate,
+    FireMissionView,
+    FireMissionEdit,
+    StrikeFireMission,
+    StrikeVector,
 }
 
 [Serializable, NetSerializable]
@@ -163,4 +168,62 @@ public sealed class DropShipTerminalWeaponsEquipmentDeployToggleMsg(bool deploy)
 public sealed class DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(bool autoDeploy) : BoundUserInterfaceMessage
 {
     public readonly bool AutoDeploy = autoDeploy;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsCreateFireMissionMsg(string name) : BoundUserInterfaceMessage
+{
+    public readonly string Name = name;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsViewFireMissionMsg(bool first, int id) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly int Id = id;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsEditFireMissionMsg(bool first, int missionId, int step, int? offset) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly int MissionId = missionId;
+    public readonly int Step = step;
+    public readonly int? Offset = offset;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsDeleteFireMissionMsg(bool first) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsSelectFireMissionMsg(bool first, int id) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly int Id = id;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsSelectStrikeVectorMsg(bool first, Direction direction) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly Direction Direction = direction;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsFireMissionPreviousMsg(bool first, int targetsPerPage, int fixedButtonsCount) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly int TargetsPerPage = targetsPerPage;
+    public readonly int FixedButtonsCount = fixedButtonsCount;
+}
+
+[Serializable, NetSerializable]
+public sealed class DropshipTerminalWeaponsFireMissionNextMsg(bool first, int targetsPerPage, int fixedButtonsCount) : BoundUserInterfaceMessage
+{
+    public readonly bool First = first;
+    public readonly int TargetsPerPage = targetsPerPage;
+    public readonly int FixedButtonsCount = fixedButtonsCount;
 }

@@ -22,11 +22,9 @@ rmc-dropship-weapons-target-strike = Target Acquisition
 
   Target selected: {$target}
 
+  Attack Vector {$vector}
+
   Offset {$xOffset},{$yOffset}
-
-#  Attack Vector {$vector}
-
-#  Offset 0,0
 
 #  Guidance computer INCOMPLETE
 
@@ -47,6 +45,9 @@ rmc-dropship-weapons-disable = DISABLE
 rmc-dropship-weapons-deploy = DEPLOY
 rmc-dropship-weapons-retract = RETRACT
 rmc-dropship-weapons-auto-deploy = AUTO-DEPLOY
+rmc-dropship-weapons-view = VIEW
+rmc-dropship-weapons-edit = EDIT
+rmc-dropship-weapons-delete = DELETE
 
 rmc-dropship-weapons-offset-calibration = Camera
   Offset
@@ -67,7 +68,7 @@ rmc-dropship-weapons-next = v
 rmc-dropship-weapons-fire-no-weapon = No weapon selected.
 rmc-dropship-weapons-fire-not-flying = Dropships can only fire fire while in flight.
 rmc-dropship-weapons-fire-not-skilled = You don't have the training to fire this weapon!
-rmc-dropship-weapons-fire-no-ammo = {$weapon} has no ammo.
+rmc-dropship-weapons-fire-no-ammo = {$weapon} doesn't have enough ammo.
 rmc-dropship-weapons-fire-cooldown = {$weapon} just fired, wait for it to cool down.
 
 rmc-dropship-attached = It has a {$attachment} loaded.
@@ -91,6 +92,17 @@ rmc-dropship-fabricator-busy = The dropship part fabricator is busy. Please wait
 
 rmc-dropship-firemission-warning = A DROPSHIP FIRES TOWARDS THE {$direction}
 rmc-dropship-firemission-warning-above = A DROPSHIP FIRES RIGHT ONTOP OF YOU!
+rmc-dropship-firemission-warning-early = YOU HEAR THE DROPSHIP ROAR AS IT PREPARES TO FIRE NEAR YOU!
+rmc-dropship-firemission-warning-early-above = YOU HEAR THE DROPSHIP ROAR AS IT PREPARES TO FIRE NEAR YOU!
+rmc-dropship-firemission-invalid-value-admin-announcement = Player {$player} attempted to set a fire mission value that should not be possible through normal gameplay.
+rmc-dropship-firemission-vector-North = NORTH
+rmc-dropship-firemission-vector-East = EAST
+rmc-dropship-firemission-vector-South = SOUTH
+rmc-dropship-firemission-vector-West = WEST
+rmc-dropship-firemission-started = Firemission underway!
+rmc-dropship-firemission-cooldown = Firemission in progress.
+rmc-dropship-firemission-edit = Select a weapon.
+rmc-dropship-firemission-invalid-ammo = {$ammo} can't be used during a fire mission.
 
 rmc-dropship-paradrop-target-screen-text = HPU-1 Paradrop Deployment System
     {$hasTarget}
