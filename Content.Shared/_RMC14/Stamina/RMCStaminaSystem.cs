@@ -211,7 +211,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         foreach (var (hit, comp) in toHit)
         {
-            DoStaminaDamage(hit, damage / toHit.Count, true, args.User);
+            DoStaminaDamage(hit, damage / toHit.Count, true, ent.Owner, args.User);
             if (_net.IsServer)
                 _jitter.DoJitter(hit, ent.Comp.JitterDuration, true, 7, 5);
             _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(hit):target} was dealt {damage} stamina damage from {args.User} with {args.Weapon}.");
