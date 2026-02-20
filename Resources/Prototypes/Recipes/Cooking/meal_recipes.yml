@@ -56,6 +56,7 @@
   solids:
     FoodBreadBun: 1
     OrganHumanAppendix: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe #Added to metamorph recipes
   id: RecipeBaconBurger
@@ -110,6 +111,7 @@
   solids:
     FoodBreadBun: 1
     OrganHumanBrain: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeCatBurger
@@ -254,6 +256,7 @@
   solids:
     FoodBreadBun: 1
     FoodMeatHuman: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe #Changed for RMC
   id: RecipeJellyBurger
@@ -318,6 +321,7 @@
   solids:
     FoodBreadBun: 1
     FoodMeatRat: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeRobotBurger
@@ -386,6 +390,7 @@
   solids:
     FoodBreadBun: 1
     FoodMeatXeno: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeMothRoachburger
@@ -511,6 +516,7 @@
     FoodDough: 1
     FoodMeatXenoCutlet: 2
     FoodCheeseSlice: 2
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 #Slices Only
 
@@ -955,6 +961,7 @@
     OrganHumanEyes: 1
     FoodCarrot: 1
     FoodPotato: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeAmanitaJelly
@@ -1046,6 +1053,7 @@
   solids:
     FoodBowlBig: 1
     FoodMeatXenoCutlet: 2
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeWingFangChuSoupSpider
@@ -1262,6 +1270,7 @@
     FoodDoughPie: 1
     FoodMeatXeno: 3
     FoodPlateTin: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 #Tarts
 
@@ -1700,6 +1709,7 @@
   solids:
     FoodCakePlain: 1
     OrganHumanBrain: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeSlimeCake
@@ -2314,6 +2324,7 @@
     FoodTacoShell: 1
     FoodCheeseSlice: 1
     FoodMeatRat: 1
+    RMCBlackGooGlassFull: 1 #RMC14 - Disable LRP Recipes
 
 - type: microwaveMealRecipe
   id: RecipeTacoBeefSupreme
