@@ -2,9 +2,11 @@
   parent: CMJobXenoBase
   id: CMXenoSelectableXeno
   name: cm-job-name-selectable-xenonid
+  description: Spawn as a Xenonid larva, coordinate with your hive!
   playTimeTracker: CMJobSelectableXeno
   hidden: false
   jobPreviewEntity: RMCPlayerXenoLarvaPreview
+  newToJobInfo: rmc-new-to-job-Xenonidnid
 
 - type: playTimeTracker
   id: CMJobSelectableXeno
