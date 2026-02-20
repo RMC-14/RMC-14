@@ -62,7 +62,7 @@
 
 # Royal marine helmets
 - type: entity
-  parent: ArmorHelmetM10
+  parent: RMCArmorHelmetM10
   id: RMCHeadRoyalHelmet
   name: royal L5A2 ballistic helmet
   description: A high-cut ballistic helmet. Designed to be used by Royal Crown Marines as part of the Kestrel armour system.

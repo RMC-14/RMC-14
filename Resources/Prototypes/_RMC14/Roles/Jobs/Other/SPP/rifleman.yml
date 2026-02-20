@@ -86,7 +86,7 @@
 - type: startingGear
   id: RMCGearSPPRifleman
   equipment:
-    head: ArmorHelmetSPP
+    head: RMCArmorHelmetSPP
     ears: RMCHeadsetSPP
     jumpsuit: CMJumpsuitSPP
     outerClothing: RMCArmorSPPRifleman

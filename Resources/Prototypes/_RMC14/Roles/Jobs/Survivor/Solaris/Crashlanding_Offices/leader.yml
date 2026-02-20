@@ -59,7 +59,7 @@
     gloves: RMCHandsVeteranPMC
     mask: RMCMaskCoifPMC # TODO RMC14: M8 pattern armored balaclava
     ears: RMCHeadsetHvHWeYaPMCLeader
-    head: ArmorHelmetPMCOfficer
+    head: RMCArmorHelmetPMCOfficer
     outerClothing: CMArmorM4PMCLeader
     back: RMCSatchelPMC
     belt: RMCM77BeltPMCFilledNearEmpty

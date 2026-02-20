@@ -11,7 +11,7 @@
   id: RMCGearSurvivorKutjevoChaplain
   equipment:
     eyes: RMCGogglesKutjevo
-    head: ArmorHelmetPMCKutjevo
+    head: RMCArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     back: CMSatchelFillSurvivorPriest
     shoes: RMCShoesJackboots

@@ -53,7 +53,7 @@
         amount: 5
     - name: Armor
       entries:
-      - id: ArmorHelmetSPP
+      - id: RMCArmorHelmetSPP
         amount: 15
       - id: RMCArmorSPP
         name: Standard UM5 Pattern Armor Set

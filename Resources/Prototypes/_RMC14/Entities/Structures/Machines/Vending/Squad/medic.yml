@@ -422,7 +422,7 @@
       - id: CMMaskSterile
       - id: RMCSatchelPMCMedic
         recommended: true
-      - id: ArmorHelmetPMC
+      - id: RMCArmorHelmetPMC
         recommended: true
     - name: Belt
       choices: { CMBelt: 1 }

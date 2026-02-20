@@ -728,7 +728,7 @@
         amount: 10
     - name: Armor
       entries:
-      - id: ArmorHelmetM10
+      - id: RMCArmorHelmetM10
         amount: 20
       - id: CMArmorHelmetM10Tech
         amount: 20

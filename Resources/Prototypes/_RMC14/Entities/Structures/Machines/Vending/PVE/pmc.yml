@@ -113,7 +113,7 @@
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
-      - id: ArmorHelmetPMC
+      - id: RMCArmorHelmetPMC
         amount: 15
 
 - type: entity

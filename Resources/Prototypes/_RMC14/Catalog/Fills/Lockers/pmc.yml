@@ -10,7 +10,7 @@
   id: RMCClosetPMCSLFill
   table: !type:AllSelector
     children:
-    - id: ArmorHelmetPMCOfficer
+    - id: RMCArmorHelmetPMCOfficer
     - id: CMArmorM4PMCLeader
     - id: RMCLaserDesignator
     - id: RMCWhistle
@@ -19,7 +19,7 @@
   id: RMCClosetPMCSGOFill
   table: !type:AllSelector
     children:
-    - id: ArmorHelmetPMCGunner
+    - id: RMCArmorHelmetPMCGunner
     - id: RMCSmartGunPMCPVE
     - id: RMCPowerCellSmartgun
     - id: CMArmorM4PMCSmartGunHarness

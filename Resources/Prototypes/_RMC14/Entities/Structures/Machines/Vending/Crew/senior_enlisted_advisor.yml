@@ -50,7 +50,7 @@
     - name: Helmet
       choices: { CMHelmet: 1 }
       entries:
-      - id: ArmorHelmetM10
+      - id: RMCArmorHelmetM10
     - name: Armor
       choices: { CMArmor: 1 }
       entries:

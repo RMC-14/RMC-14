@@ -26,7 +26,7 @@
   parent: RMCGearSurvivorSecurity
   id: RMCGearSurvivorILRCPeacekeeper
   equipment:
-    head: ArmorHelmetPMCRiotShield
+    head: RMCArmorHelmetPMCRiotShield
     jumpsuit: RMCJumpsuitRiotControl
     outerClothing: RMCArmorPMCRiot
 

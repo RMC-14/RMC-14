@@ -32,7 +32,7 @@
   parent: RMCGearSurvivorEngineer
   id: RMCGearSurvivorKutjevoEngineer
   equipment:
-    head: ArmorHelmetPMCKutjevo
+    head: RMCArmorHelmetPMCKutjevo
     mask: RMCMaskKutjevoRespirator
     jumpsuit: RMCJumpsuitKutjevoDrysuit
     outerClothing: RMCHazardVestBlack
