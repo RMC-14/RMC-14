@@ -465,6 +465,32 @@
   - type: Sprite
     state: aegiscontainerright
 
+- type: entity
+  parent: RMCContainerBase
+  id: RMCContainerAvantLeft
+  name: Avant Biomedical Cargo Container
+  description: "A huge industrial shipping container. This one is from the Avant Biomedical Group, a producer of biotechnology and medical goods. Despite being renowned for making high-quality products, rumors of shady projects seem to follow them."
+  suffix: Avant, Left
+  components:
+  - type: Sprite
+    state: avantcontainerleft
+
+- type: entity
+  parent: RMCContainerAvantLeft
+  id: RMCContainerAvantMiddle
+  suffix: Avant, Middle
+  components:
+  - type: Sprite
+    state: avantcontainermiddle
+
+- type: entity
+  parent: RMCContainerAvantLeft
+  id: RMCContainerAvantRight
+  suffix: Avant, Right
+  components:
+  - type: Sprite
+    state: avantcontainerright
+
 # Small
 
 - type: entity

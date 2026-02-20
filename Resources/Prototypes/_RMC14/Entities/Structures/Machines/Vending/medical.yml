@@ -385,7 +385,7 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: RMCNanoMed
-  name: NanoMed
+  name: QuickMed
   description: A wall-mounted medical equipment dispenser.
   components:
   - type: Fixtures
@@ -440,7 +440,7 @@
 - type: entity
   parent: RMCNanoMed
   id: RMCNanoMedLimited
-  description: A wall-mounted medical equipment dispenser. This version is more limited than standard UNMC NanoMeds.
+  description: A wall-mounted medical equipment dispenser. This version is more limited than standard UNMC QuickMeds.
   suffix: Limited
   components:
   - type: CMSolutionRefiller
@@ -513,8 +513,8 @@
 - type: entity
   parent: ColMarTechBaseAnchorable
   id: CMVendorBlood
-  name: MM Blood Dispenser
-  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! #dont update year, that`s a joke from cm13
+  name: Avant Blood Dispenser
+  description: The Marine Med Brand Blood Pack Dispensary is the premier, top-of-the-line blood dispenser of 2105! Get yours today! Made by Avant Biomedical. #dont update year, that`s a joke from cm13
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/blood.rsi
