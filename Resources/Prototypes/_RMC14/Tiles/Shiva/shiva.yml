@@ -9,27 +9,27 @@
   sprite: /Textures/_RMC14/Tiles/shiva/floor3.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: CMFloorSteelShiva
   id: CMFloorSteelShivaMultiTile
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_0.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: CMFloorSteelShiva
   id: CMFloorSteelShivaMultiTile1
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_1.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: CMFloorSteelShiva
   id: CMFloorSteelShivaMultiTile2
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_2.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: CMFloorSteelShiva
   id: CMFloorSteelShivaMultiTile3
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_3.png
 
 - type: tile
-  parent: CMFloorStripedBase
+  parent: CMFloorSteelShiva
   id: CMFloorSteelShivaMultiTile4
   sprite: /Textures/_RMC14/Tiles/shiva/multi_tiles_4.png
 
@@ -44,4 +44,3 @@
   id: CMFloorShivaFoam
   name: metal foam
   sprite: /Textures/_RMC14/Tiles/shiva/metalfoam.png
-  
