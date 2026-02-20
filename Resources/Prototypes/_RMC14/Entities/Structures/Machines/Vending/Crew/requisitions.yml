@@ -808,7 +808,7 @@
         amount: 10
     - name: Miscellaneous
       entries:
-      - id: BedrollFolded
+      - id: RMCBedrollFolded
         amount: 30
       - id: RMCM5CameraGear
         amount: 5

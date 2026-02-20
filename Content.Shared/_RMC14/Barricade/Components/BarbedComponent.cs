@@ -22,7 +22,7 @@ public sealed partial class BarbedComponent : Component
     public int MaxHealthIncrease = 50;
 
     [DataField]
-    public EntProtoId Spawn = "BarbedWire1";
+    public EntProtoId Spawn = "RMCBarbedWire1";
 
     [DataField]
     public ProtoId<ToolQualityPrototype> RemoveQuality = "Cutting";

@@ -19,7 +19,7 @@
       - id: RMCSheetCardboard10
         name: Cardboard x10
         amount: 1
-      - id: BarbedWire10
+      - id: RMCBarbedWire10
         name: Barbed Wire x10
         amount: 0
       - id: CMSheetMetal10
