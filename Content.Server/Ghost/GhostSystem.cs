@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Administration.Logs;
+using Content.Server.Body.Components; //RMC14
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.Ghost.Components;
@@ -27,6 +28,7 @@ using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NameModifier.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Borgs.Components; //RMC14
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Content.Shared.Warps;
@@ -368,26 +370,30 @@ namespace Content.Server.Ghost
 
             while (allQuery.MoveNext(out var uid, out var warp))
             {
-                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), true);
+                yield return new GhostWarp(GetNetEntity(uid), warp.Location ?? Name(uid), null, true); // RMC14: Added null for display job
             }
         }
 
+        /// <remarks> RMC14: Method changed to support dead and ghosts in GhostTargetWindow. </remarks>
         private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
         {
-            foreach (var player in _player.Sessions)
+            var query = EntityQueryEnumerator<MetaDataComponent, MindContainerComponent>();
+            while (query.MoveNext(out var uid, out var meta, out var mindContainer))
             {
-                if (player.AttachedEntity is not {Valid: true} attached)
+                if (uid == except) continue;
+
+                // RMC14: Exclude brain-related entities from warp targets
+                if (HasComp<BrainComponent>(uid) || HasComp<BorgBrainComponent>(uid) || HasComp<MMIComponent>(uid))
                     continue;
 
-                if (attached == except) continue;
+                // RMC14: checking via MindContainerComponent allows you to get entities even if the player left the round or took another role
+                if (!mindContainer.EverHadMind)
+                    continue;
 
-                TryComp<MindContainerComponent>(attached, out var mind);
+                var jobName = _jobs.MindTryGetJobName(mindContainer.Mind);
+                var playerName = meta.EntityName;
 
-                var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
-
-                if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
-                    yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
+                yield return new GhostWarp(GetNetEntity(uid), playerName, jobName, false); // RMC14: Added jobName for display job
             }
         }
 
