@@ -30,6 +30,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
           - RMCMagazinePistolM1984Rubber
         startingItem: CMMagazinePistolM1984
   - type: AttachableHolder
@@ -79,6 +80,7 @@
           tags:
           - CMMagazinePistolM1984
           - RMCMagazinePistolM1984AP
+          - RMCMagazinePistolM1984HP
 
 #9mm
 - type: entity
@@ -173,6 +175,10 @@
   name: M1984 hollowpoint magazine (9mm)
   description: A hollow-point 9mm pistol magazine for the M1984. These hollow-point bullets have noticeably higher stopping power on unarmored targets, and noticeably less on armored targets.
   components:
+  - type: Tag
+    tags:
+    - CMMagazinePistol
+    - RMCMagazinePistolM1984HP
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -211,4 +217,4 @@
         Piercing: 55 # TODO RMC14 30 shrapneltPistol9mmHP
 
 - type: Tag
-  id: RMCCartridgePistol9mmHP
+  id: RMCMagazinePistolM1984HP
