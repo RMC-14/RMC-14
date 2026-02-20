@@ -7,6 +7,7 @@
 - type: rmcConstruction
   id: RMCFloorTileWoodBuild
   name: wood floor tile
+  constructionType: Item
   prototype: CMTileItemWood
   doAfterTime: 0
   doAfterTimeMin: 0
@@ -20,6 +21,7 @@
 - type: rmcConstruction
   id: RMCCampfireBuild
   name: campfire
+  constructionType: Structure
   prototype: RMCCampfire
   noRotate: true
   doAfterTime: 1.5
@@ -28,6 +30,7 @@
 - type: rmcConstruction
   id: RMCWoodenBarricadeBuild
   name: wooden barricade
+  constructionType: Structure
   prototype: RMCBarricadeWood
   doAfterTime: 2
   materialCost: 5
@@ -35,6 +38,7 @@
 - type: rmcConstruction
   id: RMCWoodenCrateBuild
   name: wooden crate
+  constructionType: Structure
   prototype: RMCCrateWoodenBuildable
   noRotate: true
   doAfterTime: 2
