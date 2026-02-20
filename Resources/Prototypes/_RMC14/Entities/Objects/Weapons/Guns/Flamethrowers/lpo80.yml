@@ -43,6 +43,17 @@
       rmc-aslot-rail: -0.032, 0.092
       rmc-aslot-stock: -0.468, 0.064
       rmc-aslot-underbarrel: 0.284, -0.313
+  - type: Tag
+    tags:
+    - RMCWeaponIncineratorLPO80
+
+- type: entity
+  parent: RMCWeaponFlamerSPP
+  id: RMCWeaponFlamerSPPPVE
+  suffix: PVE
+  components:
+  - type: Gun
+    fireRate: 2
 
 - type: entity
   parent: RMCTankFlamer
@@ -67,3 +78,6 @@
 
 - type: Tag
   id: RMCTankFlamerSPP
+
+- type: Tag
+  id: RMCWeaponIncineratorLPO80
