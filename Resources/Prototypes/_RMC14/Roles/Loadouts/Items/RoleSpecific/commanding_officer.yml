@@ -83,3 +83,14 @@
   storage:
     back:
     - RMCWeaponPistolHandcannonWinterWyvern
+
+- type: loadout
+  id: CORapierRMC
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobCommandingOfficer
+      time: 252000 # 70 hours
+  equipment:
+    pocket2: RMCPouchCORapierFilled
