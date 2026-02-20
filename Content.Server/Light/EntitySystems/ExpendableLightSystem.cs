@@ -2,6 +2,7 @@ using Content.Server.Light.Components;
 using Content.Server.Stack;
 using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.IgnitionSource;
@@ -201,6 +202,11 @@ namespace Content.Server.Light.EntitySystems
 
                 case ExpendableLightState.Dead:
                     _appearance.SetData(ent, ExpendableLightVisuals.Behavior, string.Empty, appearance);
+                    // RMC14
+                    if (TryComp<CartridgeAmmoComponent>(ent, out var cartridge))
+                        cartridge.Spent = true;
+                        Dirty(ent,cartridge);
+
                     var ignite = new IgnitionEvent(false);
                     RaiseLocalEvent(ent, ref ignite);
                     break;
