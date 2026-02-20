@@ -90,6 +90,12 @@
     },
     {
       "name": "sentry_system_destroyed"
+    },
+    {
+      "name": "launch_bay"
+    },
+    {
+      "name": "launch_bay_deployed"
     }
   ]
 }

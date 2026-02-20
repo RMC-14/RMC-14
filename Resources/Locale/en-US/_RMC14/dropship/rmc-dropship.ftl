@@ -126,3 +126,12 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-launch-bay-screen-text = LAG-14 Internal Sentry Launcher
+rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
+
+    Loaded: {$loaded}
+
+    Ammo: {$current} / {$max}
+
+
