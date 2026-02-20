@@ -27,6 +27,7 @@ using Content.Shared.Inventory;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Security.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Configuration;
@@ -95,6 +96,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         SubscribeLocalEvent<OverwatchConsoleComponent, BoundUIOpenedEvent>(OnBUIOpened);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSelectedEvent>(OnTransferMarineSelected);
         SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchTransferMarineSquadEvent>(OnTransferMarineSquad);
+        SubscribeLocalEvent<OverwatchConsoleComponent, OverwatchInsubordinateMarineSelectedEvent>(OnInsubordinationSelected);
 
         SubscribeLocalEvent<OverwatchWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<OverwatchWatchingComponent, DamageChangedEvent>(OnWatchingDamageChanged);
@@ -109,6 +111,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             subs.Event<OverwatchConsoleShowDeadBuiMsg>(OnOverwatchShowDeadBui);
             subs.Event<OverwatchConsoleShowHiddenBuiMsg>(OnOverwatchShowHiddenBui);
             subs.Event<OverwatchConsoleTransferMarineBuiMsg>(OnOverwatchTransferMarineBui);
+            subs.Event<OverwatchConsoleInsubordinateMarineBuiMsg>(OnOverwatchMarkForInsubordinationBui);
             subs.Event<OverwatchConsoleWatchBuiMsg>(OnOverwatchWatchBui);
             subs.Event<OverwatchConsoleHideBuiMsg>(OnOverwatchHideBui);
             subs.Event<OverwatchConsolePromoteLeaderBuiMsg>(OnOverwatchPromoteLeaderBui);
@@ -123,6 +126,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
             // subs.Event<OverwatchConsoleOrbitalSaveBuiMsg>(OnOverwatchOrbitalSaveBui);
             // subs.Event<OverwatchConsoleOrbitalCommentBuiMsg>(OnOverwatchOrbitalCommentBui);
             subs.Event<OverwatchConsoleSendMessageBuiMsg>(OnOverwatchSendMessageBui);
+            subs.Event<OverwatchConsoleSendMessageSquadLeaderBuiMsg>(OnOverwatchMessageSquadLeaderBui);
             subs.Event<OverwatchConsoleSetSquadObjectiveBuiMsg>(OnOverwatchSetSquadObjectiveBui);
             subs.Event<OverwatchConsoleClearSquadObjectiveBuiMsg>(OnOverwatchClearSquadObjectiveBui);
         });
@@ -260,6 +264,35 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         _squad.AssignSquad(marineId.Value, newSquadEnt.Value, null); //We do this later so that the announcement about transfer to another squad is before the text of the squad's objectives
     }
 
+    private void OnInsubordinationSelected(Entity<OverwatchConsoleComponent> ent, ref OverwatchInsubordinateMarineSelectedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (GetEntity(args.Actor) is not { Valid: true } actor)
+            return;
+
+        if (!TryGetEntity(args.Marine, out var marineId))
+            return;
+
+        var criminalComp = EnsureComp<CriminalRecordComponent>(marineId.Value);
+        if (criminalComp.StatusIcon == "SecurityIconWanted")
+        {
+            _popup.PopupCursor($"{Name(marineId.Value)} is already marked for insubordination.", actor, PopupType.LargeCaution);
+            return;
+        }
+        criminalComp.StatusIcon = "SecurityIconWanted";
+        Dirty(marineId.Value, criminalComp);
+
+        var selfMsg = $"{Name(marineId.Value)} has been reported for insubordination. Logging to enlistment file.";
+        _marineAnnounce.AnnounceSingle(selfMsg, actor);
+        _popup.PopupCursor(selfMsg, actor, PopupType.Large);
+
+        var targetMsg = $"You've been reported for insubordination by your overwatch officer.";
+        _marineAnnounce.AnnounceSingle(targetMsg, marineId.Value);
+        _popup.PopupEntity(targetMsg, marineId.Value, marineId.Value, PopupType.Large);
+    }
+
     private void OnWatchingMoveInput(Entity<OverwatchWatchingComponent> ent, ref MoveInputEvent args)
     {
         if (!args.HasDirectionalMovement)
@@ -375,6 +408,32 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         }
 
         _dialog.OpenOptions(ent, args.Actor, Loc.GetString("rmc-overwatch-console-transfer-marine-title"), options, Loc.GetString("rmc-overwatch-console-choose-marine-transfer"));
+    }
+    private void OnOverwatchMarkForInsubordinationBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleInsubordinateMarineBuiMsg args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (ent.Comp.Squad is not { } selectedSquad)
+            return;
+
+        var state = GetOverwatchBuiState(ent);
+        var options = new List<DialogOption>();
+        if (state.Marines.TryGetValue(selectedSquad, out var marines))
+        {
+            foreach (var marine in marines)
+            {
+                var option = new DialogOption
+                {
+                    Text = $"{marine.Name}",
+                    Event = new OverwatchInsubordinateMarineSelectedEvent(GetNetEntity(args.Actor), marine.Id),
+                };
+
+                options.Add(option);
+            }
+        }
+
+        _dialog.OpenOptions(ent, args.Actor, "Mark for Insubordination", options, "Report a marine for insubordination");
     }
 
     private void OnOverwatchWatchBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleWatchBuiMsg args)
@@ -661,6 +720,45 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
 
         var userMsg = Loc.GetString("rmc-overwatch-console-objective-cancelled", ("squadName", Name(squad.Value)), ("objectiveType", objectiveTypeName), ("objective", cancelledObjective));
+        var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
+        _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
+    }
+    private void OnOverwatchMessageSquadLeaderBui(Entity<OverwatchConsoleComponent> ent, ref OverwatchConsoleSendMessageSquadLeaderBuiMsg args)
+    {
+        if (!ent.Comp.CanMessageSquad)
+            return;
+
+        var time = _timing.CurTime;
+        if (time < ent.Comp.LastMessage + ent.Comp.MessageCooldown)
+            return;
+
+        var message = args.Message;
+        if (message.Length > 200)
+            message = message[..200];
+
+        if (string.IsNullOrWhiteSpace(message))
+            return;
+
+        if (!TryGetEntity(ent.Comp.Squad, out var squad) ||
+            Prototype(squad.Value) is not { } squadProto)
+        {
+            return;
+        }
+
+        ent.Comp.LastMessage = time;
+        Dirty(ent);
+
+        _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad leader message: {args.Message}");
+        if (TryComp<SquadTeamComponent>(squad.Value, out var squadComp) && _squad.TryGetSquadLeader((squad.Value, squadComp), out var SL))
+        {
+            _marineAnnounce.AnnounceSingle($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits directly: [font size=16][bold]{message}[/bold][/font][/color]", 
+            SL.Owner, sound: SharedMarineAnnounceSystem.DefaultSquadSound);
+        }
+        
+        var coordinates = _transform.GetMapCoordinates(ent);
+        var players = Filter.Empty().AddInRange(coordinates, 12, _player, EntityManager);
+        players.RemoveWhereAttachedEntity(HasComp<XenoComponent>);
+        var userMsg = $"[bold][color=#6685F5]'{Name(squad.Value)}' squad leader message sent: '{message}'.[/color][/bold]";
         var author = CompOrNull<ActorComponent>(args.Actor)?.PlayerSession.UserId;
         _rmcChat.ChatMessageToMany(userMsg, userMsg, players, ChatChannel.Local, author: author);
     }
