@@ -34,3 +34,15 @@
       probability: 1
       nightmareScenario: rocinante_clf
     replaceAreas: true
+
+- type: entity
+  parent: RMCMapInsertFiorinaBase
+  id: RMCMapInsertFiorinaRiotInProgress
+  name: Riot In Progress
+  suffix: Insert Fiorina
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Fiorina/riot_in_progress.yml"
+      probability: 1
+      nightmareScenario: riot_in_progress

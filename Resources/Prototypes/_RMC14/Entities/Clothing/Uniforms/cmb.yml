@@ -18,6 +18,13 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/CMB/cmb_swat_uniform.rsi
 
 - type: entity
+  parent: RMCSwatCMBUniform
+  id: RMCSwatCMBUniformSpearhead
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackSpearhead
+
+- type: entity
   parent: RMCCMBUniformBase
   id: RMCSwatLeaderCMBUniform
   name: CMB Riot Control Marshal uniform
