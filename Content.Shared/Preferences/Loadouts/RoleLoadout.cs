@@ -3,6 +3,8 @@ using System.Linq;
 using Content.Shared.CCVar;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Random;
+using Content.Shared.Roles;
+using Content.Shared.Players.PlayTimeTracking;
 using Robust.Shared.Collections;
 using Robust.Shared.Configuration;
 using Robust.Shared.Player;
@@ -77,6 +79,11 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         {
             EntityName = null;
         }
+
+        // RMC14 - Set loadout points and work out playtime point rewards.
+        int playtimeHours = GetPlaytimeHoursForRole(session, Role);
+        roleProto.Points = CalculatePointsFromPlaytime(playtimeHours);
+        // End RMC14
 
         // Validate name length
         // TODO: Probably allow regex to be supplied?
@@ -233,7 +240,14 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             var loadouts = new List<Loadout>();
             SelectedLoadouts[group] = loadouts;
 
-            Points = roleProto.Points;
+            // RMC14 - Set loadout points and work out playtime point rewards.
+            int playtimeHours = 0;
+            if (session != null)
+            {
+                playtimeHours = GetPlaytimeHoursForRole(session, Role);
+            };
+            Points = CalculatePointsFromPlaytime(playtimeHours);
+            // End RMC14
 
             if (groupProto.MinLimit > 0)
             {
@@ -401,4 +415,43 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     {
         return HashCode.Combine(Role, SelectedLoadouts, Points);
     }
+
+    // RMC14
+    private int CalculatePointsFromPlaytime(int playtimeHours)
+    {
+        // 250 hours = 1 addtional point + base amount 7
+        int points = (int)(playtimeHours / 250) + 7;
+        return points;
+    }
+
+    private int GetPlaytimeHoursForRole(ICommonSession session, ProtoId<RoleLoadoutPrototype> role)
+    {
+        var protoManager = IoCManager.Resolve<IPrototypeManager>();
+
+        if (!protoManager.TryIndex(role, out var roleProto))
+            return 0;
+
+        if (roleProto is not { } || string.IsNullOrEmpty(roleProto.ID))
+            return 0;
+        //Role loadout prefixes "Job" onto ID so we need to strip it off
+        var jobId = roleProto.ID.Replace("Job", "");
+
+        //Gets the Job prototype from the stripped Role ID
+        if (!protoManager.TryIndex(new ProtoId<JobPrototype>(jobId), out var jobProto))
+            return 0;
+
+        // Get the playtime tracker ID from the job
+        var playTimeTrackerId = jobProto.PlayTimeTracker;
+        if (string.IsNullOrEmpty(playTimeTrackerId))
+            return 0;
+
+        var playtimes = IoCManager.Resolve<ISharedPlaytimeManager>().GetPlayTimes(session);
+
+        if (!playtimes.TryGetValue(playTimeTrackerId, out var playtime))
+            return 0;
+
+        // Cast to round it down
+        return (int)playtime.TotalHours;
+    }
+    // End RMC14
 }
