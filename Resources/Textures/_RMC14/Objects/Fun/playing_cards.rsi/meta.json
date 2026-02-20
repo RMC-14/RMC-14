@@ -1,0 +1,182 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/master/icons/obj/items/playing_cards.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "deck"
+        },
+        {
+            "name": "deck_open"
+        },
+        {
+            "name": "deck_empty"
+        },
+        {
+            "name": "back_deck"
+        },
+        {
+            "name": "empty"
+        },
+        {
+            "name": "clubs_ace"
+        },
+        {
+            "name": "clubs_two"
+        },
+        {
+            "name": "clubs_three"
+        },
+        {
+            "name": "clubs_four"
+        },
+        {
+            "name": "clubs_five"
+        },
+        {
+            "name": "clubs_six"
+        },
+        {
+            "name": "clubs_seven"
+        },
+        {
+            "name": "clubs_eight"
+        },
+        {
+            "name": "clubs_nine"
+        },
+        {
+            "name": "clubs_ten"
+        },
+        {
+            "name": "clubs_jack"
+        },
+        {
+            "name": "clubs_queen"
+        },
+        {
+            "name": "clubs_king"
+        },
+        {
+            "name": "spades_ace"
+        },
+        {
+            "name": "spades_two"
+        },
+        {
+            "name": "spades_three"
+        },
+        {
+            "name": "spades_four"
+        },
+        {
+            "name": "spades_five"
+        },
+        {
+            "name": "spades_six"
+        },
+        {
+            "name": "spades_seven"
+        },
+        {
+            "name": "spades_eight"
+        },
+        {
+            "name": "spades_nine"
+        },
+        {
+            "name": "spades_ten"
+        },
+        {
+            "name": "spades_jack"
+        },
+        {
+            "name": "spades_queen"
+        },
+        {
+            "name": "spades_king"
+        },
+        {
+            "name": "diamonds_ace"
+        },
+        {
+            "name": "diamonds_two"
+        },
+        {
+            "name": "diamonds_three"
+        },
+        {
+            "name": "diamonds_four"
+        },
+        {
+            "name": "diamonds_five"
+        },
+        {
+            "name": "diamonds_six"
+        },
+        {
+            "name": "diamonds_seven"
+        },
+        {
+            "name": "diamonds_eight"
+        },
+        {
+            "name": "diamonds_nine"
+        },
+        {
+            "name": "diamonds_ten"
+        },
+        {
+            "name": "diamonds_jack"
+        },
+        {
+            "name": "diamonds_queen"
+        },
+        {
+            "name": "diamonds_king"
+        },
+        {
+            "name": "hearts_ace"
+        },
+        {
+            "name": "hearts_two"
+        },
+        {
+            "name": "hearts_three"
+        },
+        {
+            "name": "hearts_four"
+        },
+        {
+            "name": "hearts_five"
+        },
+        {
+            "name": "hearts_six"
+        },
+        {
+            "name": "hearts_seven"
+        },
+        {
+            "name": "hearts_eight"
+        },
+        {
+            "name": "hearts_nine"
+        },
+        {
+            "name": "hearts_ten"
+        },
+        {
+            "name": "hearts_jack"
+        },
+        {
+            "name": "hearts_queen"
+        },
+        {
+            "name": "hearts_king"
+        }
+    ]
+}

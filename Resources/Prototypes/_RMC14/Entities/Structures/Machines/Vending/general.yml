@@ -38,7 +38,9 @@
       - id: RMCCassetteTapeCustom
         amount: 20
     - name: Cards
-      entries: []
+      entries:
+      - id: RMCPlayingCardDeck
+        amount: 10
     - name: Magazines
       entries:
       - id: RMCMagazineBootsN160

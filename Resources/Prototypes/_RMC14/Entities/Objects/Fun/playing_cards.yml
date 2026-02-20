@@ -1,0 +1,64 @@
+# Playing Cards - RMC14
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: RMCPlayingCardBase
+  categories: [ HideSpawnMenu ]
+  name: Playing card
+  description: A standard playing card.
+  components:
+  - type: PlayingCard
+    suit: Spades
+    rank: Ace
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: spades_ace
+  - type: Item
+    size: Tiny
+
+# Individual card (spawned from deck)
+- type: entity
+  parent: RMCPlayingCardBase
+  id: RMCPlayingCard
+  categories: [ HideSpawnMenu ]
+
+# Hand of cards
+- type: entity
+  parent: BaseItem
+  id: RMCPlayingCardHand
+  name: Hand of cards
+  description: A hand of playing cards.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: PlayingCardHand
+    maxCards: 52
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: back_deck
+  - type: Item
+    size: Small
+  - type: UseDelay
+    delay: 0.1
+  - type: UserInterface
+    interfaces:
+      enum.PlayingCardHandUi.Key:
+        type: PlayingCardHandBui
+
+# Deck of cards
+- type: entity
+  parent: BaseItem
+  id: RMCPlayingCardDeck
+  name: Deck of cards
+  suffix: RMC
+  description: I swear the game was called Goldfish!
+  components:
+  - type: PlayingCardDeck
+    cardsRemaining: 52
+    cardPrototype: RMCPlayingCard
+  - type: Sprite
+    sprite: _RMC14/Objects/Fun/playing_cards.rsi
+    state: deck
+  - type: Item
+    size: Small
+  - type: UseDelay
+    delay: 0.1
