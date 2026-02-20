@@ -565,6 +565,7 @@
     CMFirstAidKitFilled: 2
     CMBurnAidKitFilled: 2
     RMCRadiationAidKitFilled: 1
+    RMCCPRDummy: 5
     # Crew Monitor
 
 
