@@ -27,3 +27,6 @@ chat-speech-verb-skrell-4 = chirps
 chat-speech-verb-name-megaphone = Megaphone
 chat-speech-verb-megaphone-1 = broadcasts
 chat-speech-verb-megaphone-2 = announces
+
+chat-speech-verb-name-average-joe = Average Joe
+chat-speech-verb-average-joe-1 = coldly states
