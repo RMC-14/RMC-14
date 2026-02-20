@@ -20,6 +20,8 @@ using Robust.Shared.Timing;
 using System.Linq;
 using Content.Shared.Jittering;
 using Content.Shared.Item.ItemToggle;
+using Content.Shared._RMC14.Policing;
+using YamlDotNet.Helpers;
 
 namespace Content.Shared._RMC14.Stamina;
 
@@ -38,10 +40,19 @@ public sealed partial class RMCStaminaSystem : EntitySystem
     [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly RMCSizeStunSystem _sizeStun = default!;
+    [Dependency] private readonly RMCPolicingSystem _policing = default!;
+
+    private EntityQuery<RMCPolicingToolComponent> _policingToolQuery;
+    private EntityQuery<ProjectileComponent> _projectileQuery;
+    private EntityQuery<ThrownItemComponent> _thrownItemQuery;
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _policingToolQuery = GetEntityQuery<RMCPolicingToolComponent>();
+        _projectileQuery = GetEntityQuery<ProjectileComponent>();
+        _thrownItemQuery = GetEntityQuery<ThrownItemComponent>();
 
         SubscribeLocalEvent<RMCStaminaComponent, ComponentStartup>(OnStaminaStartup);
         SubscribeLocalEvent<RMCStaminaComponent, RefreshMovementSpeedModifiersEvent>(OnStaminaMovementSpeedModify);
@@ -85,10 +96,22 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         }
     }
 
-    public void DoStaminaDamage(Entity<RMCStaminaComponent?> ent, double amount, bool visual = true)
+    public void DoStaminaDamage(Entity<RMCStaminaComponent?> ent, double amount, bool visual = true, EntityUid? tool = null, EntityUid? origin = null)
     {
         if (!Resolve(ent, ref ent.Comp, false))
             return;
+
+        // Ensure interfaction policing is less effective
+        if (origin != null && tool != null)
+        {
+            if (_policingToolQuery.HasComp(tool) && !_policing.CanBePoliced(ent.Owner, origin))
+            {
+                var resistanceEvent = new GetPolicingResistanceEvent();
+                RaiseLocalEvent(ent.Owner, ref resistanceEvent);
+
+                amount *= resistanceEvent.Multiplier;
+            }
+        }
 
         ent.Comp.Current = Math.Clamp(ent.Comp.Current - amount, 0, ent.Comp.Max);
 
@@ -189,7 +212,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
         foreach (var (hit, comp) in toHit)
         {
-            DoStaminaDamage(hit, damage / toHit.Count, true);
+            DoStaminaDamage(hit, damage / toHit.Count, true, args.User);
             if (_net.IsServer)
                 _jitter.DoJitter(hit, ent.Comp.JitterDuration, true, 7, 5);
             _adminLogger.Add(LogType.Stamina, $"{ToPrettyString(hit):target} was dealt {damage} stamina damage from {args.User} with {args.Weapon}.");
@@ -198,15 +221,25 @@ public sealed partial class RMCStaminaSystem : EntitySystem
 
     private void OnStaminaOnProjectileHit(Entity<RMCStaminaDamageOnCollideComponent> ent, ref ProjectileHitEvent args)
     {
-        OnCollide(ent, args.Target);
+        EntityUid? weapon = null;
+
+        if (_projectileQuery.TryComp(ent.Owner, out var projectile) && projectile.Weapon != null)
+            weapon = projectile.Weapon.Value;
+
+        OnCollide(ent, args.Target, weapon, args.Shooter);
     }
 
     private void OnStaminaOnThrowHit(Entity<RMCStaminaDamageOnCollideComponent> ent, ref ThrowDoHitEvent args)
     {
-        OnCollide(ent, args.Target);
+        EntityUid? thrower = null;
+
+        if (_thrownItemQuery.TryComp(ent.Owner, out var thrown) && thrown.Thrower != null)
+            thrower = thrown.Thrower.Value;
+
+        OnCollide(ent, args.Target, ent.Owner, thrower);
     }
 
-    private void OnCollide(Entity<RMCStaminaDamageOnCollideComponent> ent, EntityUid target)
+    private void OnCollide(Entity<RMCStaminaDamageOnCollideComponent> ent, EntityUid target, EntityUid? tool = null, EntityUid? origin = null)
     {
         if (!TryComp<RMCStaminaComponent>(target, out var stam))
             return;
@@ -214,7 +247,7 @@ public sealed partial class RMCStaminaSystem : EntitySystem
         if (!_itemToggle.IsActivated(ent.Owner))
             return;
 
-        DoStaminaDamage((target, stam), ent.Comp.Damage, true);
+        DoStaminaDamage((target, stam), ent.Comp.Damage, true, tool, origin);
     }
 
     private void SetStaminaAlert(Entity<RMCStaminaComponent> ent)

@@ -60,9 +60,9 @@ public sealed class RMCSizeStunSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCStunOnHitComponent, MapInitEvent>(OnSizeStunMapInit);
-        SubscribeLocalEvent<RMCStunOnHitComponent, ProjectileHitEvent>(OnHit);
-        SubscribeLocalEvent<RMCStunOnHitComponent, RMCTriggerEvent>(OnTrigger);
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, MapInitEvent>(OnSizeStunMapInit);
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, RMCTriggerEvent>(OnTrigger);
 
         SubscribeLocalEvent<RMCStunOnTriggerComponent, RMCTriggerEvent>(OnStunOnTrigger);
 
@@ -79,6 +79,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     {
         return ent.Comp.Size <= RMCSizes.Humanoid;
     }
+
     public bool IsHumanoidSized(RMCSizes size)
     {
         return size <= RMCSizes.Humanoid;
@@ -107,13 +108,13 @@ public sealed class RMCSizeStunSystem : EntitySystem
         return true;
     }
 
-    private void OnSizeStunMapInit(Entity<RMCStunOnHitComponent> projectile, ref MapInitEvent args)
+    private void OnSizeStunMapInit(Entity<RMCStunOnProjectileHitComponent> projectile, ref MapInitEvent args)
     {
         projectile.Comp.ShotFrom = _transform.GetMapCoordinates(projectile.Owner);
         Dirty(projectile);
     }
 
-    private void OnHit(Entity<RMCStunOnHitComponent> bullet, ref ProjectileHitEvent args)
+    private void OnHit(Entity<RMCStunOnProjectileHitComponent> bullet, ref ProjectileHitEvent args)
     {
         if (bullet.Comp.ShotFrom == null)
             return;
@@ -215,7 +216,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to stun a target near the entity when it is triggered.
     /// </summary>
-    private void OnTrigger(Entity<RMCStunOnHitComponent> ent, ref RMCTriggerEvent args)
+    private void OnTrigger(Entity<RMCStunOnProjectileHitComponent> ent, ref RMCTriggerEvent args)
     {
         var moverCoordinates = _transform.GetMoverCoordinates(ent, Transform(ent));
         foreach (var stun in ent.Comp.Stuns)

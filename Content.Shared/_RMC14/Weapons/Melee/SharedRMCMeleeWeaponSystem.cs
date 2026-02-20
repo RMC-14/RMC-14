@@ -2,6 +2,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Policing;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Damage;
@@ -31,12 +32,15 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly RMCPolicingSystem _policing = default!;
 
+    private EntityQuery<RMCPolicingToolComponent> _policingToolQuery;
     private EntityQuery<MeleeWeaponComponent> _meleeWeaponQuery;
     private EntityQuery<XenoComponent> _xenoQuery;
 
     public override void Initialize()
     {
+        _policingToolQuery = GetEntityQuery<RMCPolicingToolComponent>();
         _meleeWeaponQuery = GetEntityQuery<MeleeWeaponComponent>();
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
@@ -86,7 +90,22 @@ public abstract class SharedRMCMeleeWeaponSystem : EntitySystem
         foreach (var hit in args.HitEntities)
         {
             if (_whitelist.IsValid(ent.Comp.Whitelist, hit))
-                _stun.TryParalyze(hit, ent.Comp.Duration, true);
+            {
+                var finalDuration = ent.Comp.Duration;
+
+                if (_policingToolQuery.HasComp(ent.Owner) && !_policing.CanBePoliced(hit, args.User))
+                {
+                    if (!ent.Comp.UsableInterfaction)
+                        continue;
+
+                    var resistanceEvent = new GetPolicingResistanceEvent();
+                    RaiseLocalEvent(hit, ref resistanceEvent);
+
+                    finalDuration *= resistanceEvent.Multiplier;
+                }
+
+                _stun.TryParalyze(hit, finalDuration, true);
+            }
         }
     }
 

@@ -42,7 +42,7 @@
     thresholds:
     - range: 4
       falloff: 10
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno
@@ -76,7 +76,7 @@
       falloff: 1
   - type: CMArmorPiercing
     amount: 20
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno

@@ -69,6 +69,7 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: RMCPolicingTool
 
 - type: entity
   parent:

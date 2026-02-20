@@ -377,7 +377,7 @@
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
   - type: CMArmorPiercing
     amount: 10
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno
@@ -445,7 +445,7 @@
         Blunt: 15
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno
