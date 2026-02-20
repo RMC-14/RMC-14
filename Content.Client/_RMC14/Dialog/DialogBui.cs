@@ -242,6 +242,9 @@ public sealed class DialogBui(EntityUid owner, Enum uiKey) : BoundUserInterface(
         container.CharacterCount.Text = min > 0
             ? $"{textLength} / {min}-{max}"
             : $"{textLength} / {max}";
+        container.CharacterCount.Modulate = smartCheck && textLength != text.Length
+            ? Color.Red
+            : Color.White;
         container.OkButton.Disabled = textLength > max || textLength < min;
     }
 }

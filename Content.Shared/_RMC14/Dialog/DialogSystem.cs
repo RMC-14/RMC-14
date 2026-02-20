@@ -127,21 +127,7 @@ public sealed class DialogSystem : EntitySystem
             return text.Length;
         }
 
-        var length = 0;
-        var previousSpace = false;
-
-        foreach (var ch in text)
-        {
-            var isSpace = ch == ' ';
-
-            if (isSpace && previousSpace)
-                continue;
-
-            length++;
-            previousSpace = isSpace;
-        }
-
-        return length;
+        return AppendSmartChars(text, null, int.MaxValue);
     }
 
     public string TrimToLimit(ReadOnlySpan<char> text, int maxLength, bool smartCheck = false)
@@ -158,45 +144,93 @@ public sealed class DialogSystem : EntitySystem
         }
 
         var builder = new StringBuilder(text.Length);
+        AppendSmartChars(text, builder, maxLength);
+        return builder.ToString();
+    }
+
+    private static int AppendSmartChars(ReadOnlySpan<char> text, StringBuilder? builder, int maxLength)
+    {
         var length = 0;
+        var previousChar = '\0';
+        var hasPrevious = false;
         var consecutiveSpaces = 0;
-        var previousSpace = false;
+        var consecutivePunctuation = 0;
+        var consecutiveSymbols = 0;
+        var consecutiveSame = 0;
+        var consecutiveSameDigits = 0;
 
-        foreach (var ch in text)
+        var consecutivePair = 0;
+        var lastPairFirst = '\0';
+        var lastPairSecond = '\0';
+        var skipPairSecond = false;
+
+        for (var i = 0; i < text.Length; i++)
         {
+            var ch = text[i];
+            var skipPair = false;
+
+            if (skipPairSecond)
+            {
+                skipPair = true;
+                skipPairSecond = false;
+            }
+            else if (i % 2 == 0 && i + 1 < text.Length)
+            {
+                var pairFirst = ch;
+                var pairSecond = text[i + 1];
+                consecutivePair = pairFirst == lastPairFirst && pairSecond == lastPairSecond
+                    ? consecutivePair + 1
+                    : 1;
+                lastPairFirst = pairFirst;
+                lastPairSecond = pairSecond;
+                if (consecutivePair > 2)
+                {
+                    skipPair = true;
+                    skipPairSecond = true;
+                }
+            }
+
             var isSpace = ch == ' ';
+            var isPunctuation = char.IsPunctuation(ch);
+            var isSymbol = char.IsSymbol(ch);
+            var isDigit = char.IsDigit(ch);
 
-            if (isSpace)
-            {
-                if (previousSpace)
-                {
-                    consecutiveSpaces++;
-                    // Skip 4th and subsequent consecutive spaces
-                    if (consecutiveSpaces >= 3)
-                        continue;
-                }
-                else
-                {
-                    consecutiveSpaces = 1;
-                }
-            }
+            if (hasPrevious && ch == previousChar)
+                consecutiveSame++;
             else
+                consecutiveSame = 1;
+
+            if (isDigit && hasPrevious && ch == previousChar)
+                consecutiveSameDigits++;
+            else if (isDigit)
+                consecutiveSameDigits = 1;
+            else
+                consecutiveSameDigits = 0;
+
+            consecutiveSpaces = isSpace ? consecutiveSpaces + 1 : 0;
+            consecutivePunctuation = isPunctuation ? consecutivePunctuation + 1 : 0;
+            consecutiveSymbols = isSymbol ? consecutiveSymbols + 1 : 0;
+
+            var skip = skipPair
+                || consecutiveSpaces > 1
+                || (!isDigit && consecutiveSame > 3)
+                || consecutiveSameDigits > 5
+                || consecutivePunctuation > 3
+                || consecutiveSymbols > 3;
+
+            if (!skip)
             {
-                consecutiveSpaces = 0;
+                if (length >= maxLength)
+                    break;
+
+                length++;
+                builder?.Append(ch);
             }
 
-            var countsTowardsLimit = !(isSpace && previousSpace);
-
-            if (countsTowardsLimit && length >= maxLength)
-                break;
-
-            if (countsTowardsLimit)
-                length++;
-
-            builder.Append(ch);
-            previousSpace = isSpace;
+            hasPrevious = true;
+            previousChar = ch;
         }
 
-        return builder.ToString();
+        return length;
     }
 }
