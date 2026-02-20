@@ -1,23 +1,38 @@
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Animations;
+using Content.Shared._RMC14.Armor;
+using Content.Shared._RMC14.Attachable.Components;
+using Content.Shared._RMC14.Cassette;
+using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Holiday;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Medical.IV;
+using Content.Shared._RMC14.Medical.Refill;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.TacticalMap;
 using Content.Shared._RMC14.Tools;
+using Content.Shared._RMC14.Weapons.Ranged.Ammo.BulletBox;
+using Content.Shared._RMC14.Weapons.Ranged.Chamber;
+using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Webbing;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Clothing.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
+using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands;
@@ -27,23 +42,28 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
+using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Roles;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Roles.Jobs;
-using Content.Shared.UserInterface;
-using Content.Shared.Wall;
-using Robust.Shared.Audio.Systems;
-using Content.Shared.Destructible;
+using Content.Shared.Stacks;
+using Content.Shared.Storage;
+using Content.Shared.Storage.Components;
+using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Shared.UserInterface;
+using Content.Shared.Verbs;
+using Content.Shared.Wall;
+using Content.Shared.Weapons.Ranged;
+using Content.Shared.Weapons.Ranged.Components;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
-using Content.Shared.Storage.EntitySystems;
-using Content.Shared.Storage;
-using Content.Shared._RMC14.Cryostorage;
 
 namespace Content.Shared._RMC14.Vendors;
 
@@ -54,33 +74,39 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedCMInventorySystem _cmInventory = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedJobSystem _job = default!;
     [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly SharedStorageSystem _storage = default!;
     [Dependency] private readonly INetManager _net = default!;
-    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly SharedRankSystem _rank = default!;
     [Dependency] private readonly SharedRMCAnimationSystem _rmcAnimation = default!;
-    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedRMCHolidaySystem _rmcHoliday = default!;
     [Dependency] private readonly RMCPlanetSystem _rmcPlanet = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly SquadSystem _squads = default!;
+    [Dependency] private readonly SharedStackSystem _stack = default!;
+    [Dependency] private readonly SharedStorageSystem _storage = default!;
+    [Dependency] private readonly TagSystem _tags = default!;
+    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWebbingSystem _webbing = default!;
-    [Dependency] private readonly ThrowingSystem _throwingSystem = default!;
-    [Dependency] private readonly SharedRankSystem _rank = default!;
 
     // TODO RMC14 make this a prototype
     public const string SpecialistPoints = "Specialist";
 
     private readonly Dictionary<EntProtoId, CMVendorEntry> _entries = new();
     private readonly List<CMVendorEntry> _boxEntries = new();
+    private static readonly ProtoId<ReagentPrototype> FlamerTankReagent = "RMCNapalmUT";
 
     public override void Initialize()
     {
@@ -90,8 +116,10 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         SubscribeLocalEvent<CMAutomatedVendorComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<CMAutomatedVendorComponent, ActivatableUIOpenAttemptEvent>(OnUIOpenAttempt);
         SubscribeLocalEvent<CMAutomatedVendorComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, GetVerbsEvent<AlternativeVerb>>(OnAltInteractRestockVerb);
         SubscribeLocalEvent<CMAutomatedVendorComponent, RMCAutomatedVendorHackDoAfterEvent>(OnHack);
         SubscribeLocalEvent<CMAutomatedVendorComponent, DestructionEventArgs>(OnVendorDestruction);
+        SubscribeLocalEvent<CMAutomatedVendorComponent, RMCVendorRestockFromStorageDoAfterEvent>(OnRestockFromContainer);
 
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedHandEvent>(OnRecentlyGotEquipped);
         SubscribeLocalEvent<RMCRecentlyVendedComponent, GotEquippedEvent>(OnRecentlyGotEquipped);
@@ -147,11 +175,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         var transform = Transform(ent.Owner);
         _entries.Clear();
         _boxEntries.Clear();
+        ent.Comp.EntryByPrototype.Clear();
+        ent.Comp.EntryByStackType.Clear();
         foreach (var section in ent.Comp.Sections)
         {
             foreach (var entry in section.Entries)
             {
                 _entries.TryAdd(entry.Id, entry);
+                ent.Comp.EntryByPrototype.TryAdd(entry.Id, entry);
+
+                if (_prototypes.TryIndex(entry.Id, out var entryProto) &&
+                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                {
+                    ent.Comp.EntryByStackType.TryAdd(entryStack.StackTypeId, entry);
+                }
+
                 if (entry.Box != null)
                 {
                     _boxEntries.Add(entry);
@@ -291,29 +329,85 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
     private void OnInteractUsing(Entity<CMAutomatedVendorComponent> ent, ref InteractUsingEvent args)
     {
-        if (!HasComp<MultitoolComponent>(args.Used))
+        if (HasComp<MultitoolComponent>(args.Used))
+        {
+            args.Handled = true;
+            TryHackVendor(ent, args.User, args.Used);
+            return;
+        }
+
+        // Medical vendor restocking QoL - single items only
+        if (!HasComp<RMCMedLinkPortReceiverComponent>(ent) || !ent.Comp.CanManualRestock)
+            return;
+        if (args.Handled) // CMRefillableSolutionSystem. Only try to restock if the refill system didn't handle it (e.g., autoinjector already full).
+            return;
+        if (HasComp<StorageComponent>(args.Used)) // Use alt click for bulk restock
+            return;
+        if (TryRestockSingleItem(ent, args.Used, args.User))
+            args.Handled = true;
+    }
+
+    // Better than drag and drop to restock.
+    private void OnAltInteractRestockVerb(Entity<CMAutomatedVendorComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
+    {
+        if (!ent.Comp.CanManualRestock)
+            return;
+        if (!args.CanAccess || !args.CanInteract)
+            return;
+        if (!_hands.TryGetActiveItem(args.User, out var heldItem))
             return;
 
-        args.Handled = true;
+        var user = args.User;
+        var item = heldItem.Value;
+
+        var ignoreBulkRestock = false;
+        var itemProtoId = MetaData(item).EntityPrototype?.ID;
+        if (itemProtoId != null)
+            ignoreBulkRestock = ent.Comp.IgnoreBulkRestockById.Contains(itemProtoId) || IgnoreBulkRestockByComponent(item);
+
+        if (TryComp<StorageComponent>(item, out var storage) && !ignoreBulkRestock)
+        {
+            // Bulk restock verb for storage containers
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Text = Loc.GetString("rmc-vending-machine-restock-bulk-verb"),
+                Act = () => TryRestockFromContainer(ent, item, user, storage),
+                Priority = 2
+            });
+        }
+        else
+        {
+            // Single item restock verb
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Text = Loc.GetString("rmc-vending-machine-restock-single-verb"),
+                Act = () => TryRestockSingleItem(ent, item, user),
+                Priority = 2
+            });
+        }
+    }
+
+    private void TryHackVendor(Entity<CMAutomatedVendorComponent> ent, EntityUid user, EntityUid multitool)
+    {
         if (!ent.Comp.Hackable)
         {
-            _popup.PopupClient(Loc.GetString("rmc-vending-machine-cannot-hack", ("vendor", ent)), ent, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-cannot-hack", ("vendor", ent)), ent, user);
             return;
         }
 
-        if (!_skills.HasSkill(args.User, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
+        if (!_skills.HasSkill(user, ent.Comp.HackSkill, ent.Comp.HackSkillLevel))
         {
             var msg = Loc.GetString("rmc-vending-machine-hack-no-skill", ("vendor", ent));
-            _popup.PopupClient(msg, ent, args.User, PopupType.SmallCaution);
+            _popup.PopupClient(msg, ent, user, PopupType.SmallCaution);
             return;
         }
 
-        var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.HackSkill);
+        var delay = ent.Comp.HackDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.HackSkill);
         var ev = new RMCAutomatedVendorHackDoAfterEvent();
-        var doAfter = new DoAfterArgs(EntityManager, args.User, delay, ev, ent, ent, args.Used);
+        var doAfter = new DoAfterArgs(EntityManager, user, delay, ev, ent, ent, multitool);
         if (_doAfter.TryStartDoAfter(doAfter))
         {
-            _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, args.User);
+            _popup.PopupClient(Loc.GetString("rmc-vending-machine-hack-start", ("vendor", ent)), ent, user);
         }
     }
 
@@ -627,6 +721,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
                 AmountUpdated(vendor, entry);
             }
         }
+        // Check if we just vended the last item, and it has partial stacks. This needs to happen AFTER Amount-- to detect when we hit 0.
+        EntProtoId? partialStackItemId = null;
+        int? partialStackAmount = null;
+        if (entry.Amount == 0 &&
+            _prototypes.TryIndex(entry.Id, out var entryProto) &&
+            entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory) &&
+            comp.PartialProductStacks.TryGetValue(entryStack.StackTypeId, out var partial) &&
+            partial > 0)
+        {
+            partialStackItemId = entry.Id;
+            partialStackAmount = partial;
+            comp.PartialProductStacks[entryStack.StackTypeId] = 0; // Clear the partial after using it
+            Dirty(vendor);
+        }
 
         if (entry.GiveSquadRoleName != null || entry.GiveIcon != null)
         {
@@ -662,16 +770,20 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         for (var i = 0; i < entry.Spawn; i++)
         {
             var offset = _random.NextVector2Box(min.X, min.Y, max.X, max.Y);
+            var currentPartialAmount = i == 0 ? partialStackAmount : null;
+            var currentPartialItemId = i == 0 ? partialStackItemId : null;
             if (entity.TryGetComponent(out CMVendorBundleComponent? bundle, _compFactory))
             {
                 foreach (var bundled in bundle.Bundle)
                 {
-                    Vend(vendor, actor, bundled, offset, entry.ReplaceSlot);
+                    // Only apply partial stack to the specific item that has it
+                    var bundledPartialAmount = bundled == currentPartialItemId ? currentPartialAmount : null;
+                    Vend(vendor, actor, bundled, offset, bundledPartialAmount, entry.ReplaceSlot);
                 }
             }
             else
             {
-                Vend(vendor, actor, entry.Id, offset, entry.ReplaceSlot);
+                Vend(vendor, actor, entry.Id, offset, currentPartialAmount, entry.ReplaceSlot);
             }
         }
 
@@ -682,7 +794,7 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
         }
     }
 
-    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, SlotFlags? replaceSlot = null)
+    private void Vend(EntityUid vendor, EntityUid player, EntProtoId toVend, Vector2 offset, int? partialStackAmount = null, SlotFlags? replaceSlot = null)
     {
         if (_prototypes.Index(toVend).TryGetComponent(out CMVendorMapToSquadComponent? mapTo, _compFactory))
         {
@@ -710,12 +822,21 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
             var itemPlacementOffset = requisitionsChair.Comp.OffsetItem;
             var finalPlacementCoordinates = requisitionsChair.Owner.ToCoordinates().Offset(itemPlacementOffset);
             var spawn = SpawnAtPosition(toVend, finalPlacementCoordinates);
+            if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
+            {
+                _stack.SetCount(spawn, partialStackAmount.Value, stack);
+            }
 
             AfterVend(spawn, player, vendor, offset, true, replaceSlot);
         }
         else
         {
             var spawn = SpawnNextToOrDrop(toVend, vendor);
+            if (partialStackAmount.HasValue && TryComp<StackComponent>(spawn, out var stack))
+            {
+                _stack.SetCount(spawn, partialStackAmount.Value, stack);
+            }
+
             AfterVend(spawn, player, vendor, offset, replaceSlot: replaceSlot);
         }
     }
@@ -874,5 +995,709 @@ public abstract class SharedCMAutomatedVendorSystem : EntitySystem
 
         vendor.GlobalSharedVends[ent.Comp.Entry] = current - 1;
         Dirty(ent.Comp.Vendor, vendor);
+    }
+
+    private void TryRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (storage.Container.ContainedEntities.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-empty", ("container", container)), vendor, user);
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-start", ("vendor", vendor), ("container", container)), vendor, user);
+
+        StartNextRestock(vendor, container, user, storage);
+    }
+
+    private void StartNextRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid container, EntityUid user, StorageComponent storage, HashSet<NetEntity>? failedItems = null)
+    {
+        if (_net.IsClient)
+            return;
+
+        failedItems ??= [];
+
+        var items = storage.Container.ContainedEntities;
+        var itemCount = items.Count;
+        for (var i = 0; i < itemCount; i++)
+        {
+            var item = items[i];
+            var netItem = GetNetEntity(item);
+            if (failedItems.Contains(netItem))
+                continue;
+
+            if (!EntityManager.EntityExists(item))
+            {
+                _container.Remove(item, storage.Container);
+                i--;
+                itemCount--;
+                continue;
+            }
+
+            // Skip nested storage containers to prevent recursive processing
+            if (HasComp<StorageComponent>(item))
+            {
+                failedItems.Add(netItem);
+                continue;
+            }
+
+            var ev = new RMCVendorRestockFromStorageDoAfterEvent
+            {
+                Container = GetNetEntity(container),
+                FailedBulkRestockItems = failedItems,
+                Item = netItem,
+            };
+            var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(1), ev, vendor, vendor, vendor)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+            };
+
+            _doAfter.TryStartDoAfter(doAfter);
+            return;
+        }
+
+        _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-finish", ("vendor", vendor), ("container", container)), vendor, user);
+    }
+
+    private void OnRestockFromContainer(Entity<CMAutomatedVendorComponent> vendor, ref RMCVendorRestockFromStorageDoAfterEvent args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        var container = GetEntity(args.Container);
+        var item = GetEntity(args.Item);
+        if (!TryComp(container, out StorageComponent? storage))
+            return;
+
+        if (!EntityManager.EntityExists(item))
+        {
+            StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
+            return;
+        }
+
+        _container.Remove(item, storage.Container);
+        // Refillable items (bottles, autoinjectors) use the CMRefillableSolutionSystem
+        if (HasComp<CMRefillableSolutionComponent>(item))
+        {
+            var vendorCoords = Transform(vendor).Coordinates;
+            _interaction.InteractUsing(args.User, item, vendor, vendorCoords, checkCanInteract: false, checkCanUse: false);
+
+            if (EntityManager.EntityExists(item))
+            {
+                _container.Insert(item, storage.Container);
+                args.FailedBulkRestockItems.Add(GetNetEntity(item));
+            }
+        }
+        else
+        {
+            // Standard vendor items: validate and restock directly
+            var restocked = TryRestockSingleItem(vendor, item, args.User, valid: true);
+            if (!restocked)
+            {
+                _container.Insert(item, storage.Container);
+                args.FailedBulkRestockItems.Add(GetNetEntity(item));
+            }
+        }
+
+        StartNextRestock(vendor, container, args.User, storage, args.FailedBulkRestockItems);
+    }
+
+    private bool TryRestockSingleItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid = false)
+    {
+        if (_net.IsClient)
+            return false;
+
+        var itemProto = MetaData(item).EntityPrototype?.ID;
+        if (itemProto == null)
+            return false;
+
+        // Try direct prototype match first
+        vendor.Comp.EntryByPrototype.TryGetValue(itemProto, out var matchingEntry);
+
+        // Try stack type match for split/merged stacks (e.g., CMTraumaKit1 matching CMTraumaKit10)
+        if (matchingEntry == null && TryComp<StackComponent>(item, out var itemStackComp))
+        {
+            vendor.Comp.EntryByStackType.TryGetValue(itemStackComp.StackTypeId, out matchingEntry);
+        }
+
+        var ignoreBulkRestock = vendor.Comp.IgnoreBulkRestockById.Contains(itemProto) ||
+                                IgnoreBulkRestockByComponent(item);
+        if (matchingEntry == null || HasComp<StorageComponent>(item) && !HasComp<ClothingComponent>(item) && !ignoreBulkRestock)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", vendor, user, ("item", item));
+            return false;
+        }
+
+        if (!ValidateItemForRestock(vendor, item, user, valid))
+            return false;
+        if (TryRestockStackableItem(vendor, item, user, valid, matchingEntry))
+            return true;
+        if (TryRestockBoxItem(vendor, item, user, valid, matchingEntry))
+            return true;
+
+        if (!valid)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
+        }
+
+        matchingEntry.Amount++;
+        Dirty(vendor);
+        AmountUpdated(vendor, matchingEntry);
+        QueueDel(item);
+        return true;
+    }
+
+    /// <summary>
+    /// Handles restocking items that have a Box reference (magazine boxes, ammo boxes).
+    /// When vending, these items deduct from the underlying box entry, so restocking should add them back.
+    /// </summary>
+    private bool TryRestockBoxItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry matchingEntry)
+    {
+        if (matchingEntry.Box is not { } boxId)
+            return false;
+
+        if (!vendor.Comp.EntryByPrototype.TryGetValue(boxId, out var boxEntry))
+            return false;
+
+        var amountToAdd = GetBoxRemoveAmount(matchingEntry);
+        boxEntry.Amount += amountToAdd;
+        Dirty(vendor);
+        AmountUpdated(vendor, boxEntry);
+
+        if (!suppressPopup)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
+        }
+
+        QueueDel(item);
+        return true;
+    }
+
+    /// <summary>
+    /// Attempts to restock a stackable item into the vendor.
+    /// Calculates full vendor entries from the stack, tracks partial remainders.
+    /// </summary>
+    private bool TryRestockStackableItem(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool suppressPopup, CMVendorEntry entry)
+    {
+        if (!TryComp<StackComponent>(item, out var stack))
+            return false;
+
+        var stackTypeId = stack.StackTypeId;
+
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return false;
+
+        var entryStackSize = entryStack.Count;
+        if (entryStackSize <= 0)
+            return false;
+
+        vendor.Comp.PartialProductStacks.TryAdd(stackTypeId, 0);
+        var currentPartial = vendor.Comp.PartialProductStacks[stackTypeId];
+        var itemCount = stack.Count;
+
+        var plan = CalculateStackRestockPlan(currentPartial, itemCount, entryStackSize);
+        if (!plan.CanRestock)
+            return false;
+
+        vendor.Comp.PartialProductStacks[stackTypeId] = plan.RemainingPartial;
+        if (plan.EntriesToAdd > 0)
+        {
+            entry.Amount += plan.EntriesToAdd;
+            AmountUpdated(vendor, entry);
+        }
+
+        Dirty(vendor);
+
+        if (plan.ItemsToConsume >= itemCount)
+            QueueDel(item);
+        else
+            _stack.SetCount(item, itemCount - plan.ItemsToConsume, stack);
+
+        if (!suppressPopup)
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-vending-machine-restock-item-finish", ("vendor", vendor), ("item", item)), vendor, user);
+        }
+
+        return true;
+    }
+
+    private static StackRestockPlan CalculateStackRestockPlan(int currentPartial, int itemCount, int maxStackSize)
+    {
+        if (maxStackSize <= 0 || itemCount <= 0)
+            return new StackRestockPlan { CanRestock = false };
+
+        var totalItems = currentPartial + itemCount;
+        var fullEntries = totalItems / maxStackSize;
+        var remainingPartial = totalItems % maxStackSize;
+        if (currentPartial > 0 && fullEntries == 0)
+        {
+            return new StackRestockPlan
+            {
+                CanRestock = true,
+                EntriesToAdd = 0,
+                ItemsToConsume = itemCount,
+                RemainingPartial = totalItems
+            };
+        }
+
+        var entriesToAdd = (currentPartial > 0, remainingPartial > 0) switch
+        {
+            (true, true) => fullEntries,
+            (true, false) => Math.Max(0, fullEntries - 1),
+            (false, true) => fullEntries + 1,
+            (false, false) => fullEntries
+        };
+
+        return new StackRestockPlan
+        {
+            CanRestock = true,
+            EntriesToAdd = entriesToAdd,
+            ItemsToConsume = itemCount,
+            RemainingPartial = remainingPartial
+        };
+    }
+
+    /// <summary>
+    /// Clears any partial stack for an entry, turning it to a full stack.
+    /// Primarily used by the Medical Supply Link.
+    /// </summary>
+    /// <param name="vendor">The vendor entity.</param>
+    /// <param name="entry">The vendor entry to clear partial stacks for.</param>
+    /// <returns>True if a partial stack was cleared, false otherwise.</returns>
+    public bool TryClearPartialStack(Entity<CMAutomatedVendorComponent> vendor, CMVendorEntry entry)
+    {
+        if (!_prototypes.TryIndex(entry.Id, out var entryProto) ||
+            !entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+            return false;
+
+        var stackTypeId = entryStack.StackTypeId;
+        if (!vendor.Comp.PartialProductStacks.TryGetValue(stackTypeId, out var partialAmount) ||
+            partialAmount == 0)
+            return false;
+
+        vendor.Comp.PartialProductStacks[stackTypeId] = 0;
+        Dirty(vendor);
+        return true;
+    }
+
+    /// <summary>
+    /// Validates that an item meets all requirements for restocking into the vendor.
+    /// All applicable validation checks must pass for the item to be restocked.
+    /// Uses short-circuit evaluation: returns false on first failed check.
+    /// </summary>
+    /// <returns>True if all applicable validation checks pass, false otherwise.</returns>
+    private bool ValidateItemForRestock(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
+    {
+        return ValidateReagentContainers(item, user, valid)
+               && (!HasComp<GunComponent>(item) || ValidateGun(item, user, valid))
+               && ValidateAmmunition(vendor, item, user, valid)
+               && ValidateEquipment(vendor, item, user, valid);
+    }
+
+    /// <summary>
+    /// Validates reagent containers.
+    /// Checks flamer tanks for correct fuel type and fill level, blood packs are full,
+    /// and refillable solution containers (autoinjectors, bottles, etc.) are full.
+    /// </summary>
+    private bool ValidateReagentContainers(EntityUid item, EntityUid user, bool valid)
+    {
+        if (TryComp<CMRefillableSolutionComponent>(item, out var refillable) && !ValidateRefillableSolution(item, refillable, user, valid))
+            return false;
+
+        if (TryComp<RMCFlamerTankComponent>(item, out var flamerTank) && !ValidateFlamerTank(item, flamerTank, user, valid))
+            return false;
+
+        if (TryComp<BloodPackComponent>(item, out var bloodPack) && !ValidateBloodPack(item, bloodPack, user, valid))
+            return false;
+
+        return true;
+    }
+
+    private bool ValidateRefillableSolution(EntityUid item, CMRefillableSolutionComponent refillable, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(item, refillable.Solution, out _, out var solution))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", item, user, ("item", item));
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-refillable-not-full", item, user, ("item", item));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateFlamerTank(EntityUid tank, RMCFlamerTankComponent flamerTank, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(tank, flamerTank.SolutionId, out _, out var solution))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", tank, user, ("item", tank));
+            return false;
+        }
+
+        var hasCorrectFuel = solution.Contents.Count == 1 && solution.Contents.Any(r => r.Reagent.Prototype == FlamerTankReagent);
+
+        if (!hasCorrectFuel)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flamer-tank-wrong-fuel", tank, user, ("item", tank));
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flamer-tank-not-full", tank, user, ("item", tank));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateBloodPack(EntityUid pack, BloodPackComponent bloodPack, EntityUid user, bool valid)
+    {
+        if (!_solution.TryGetSolution(pack, bloodPack.Solution, out _, out var solution))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", pack, user, ("item", pack));
+            return false;
+        }
+
+        if (solution.Volume < solution.MaxVolume)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-blood-pack-not-full", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Validates that a gun is in proper condition for restocking.
+    /// Checks for loaded magazines, chambered rounds, internal ammo, and non-standard attachments.
+    /// </summary>
+    private bool ValidateGun(EntityUid gun, EntityUid user, bool valid)
+    {
+        if (IsGunLoaded(gun))
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-loaded", gun, user, ("gun", gun));
+            return false;
+        }
+
+        return ValidateGunAttachments(gun, user, valid);
+    }
+
+    private bool IsGunLoaded(EntityUid gun)
+    {
+        // Check magazine
+        if (TryComp<MagazineAmmoProviderComponent>(gun, out _) &&
+            _container.TryGetContainer(gun, "gun_magazine", out var magContainer) &&
+            magContainer.ContainedEntities.Count > 0)
+            return true;
+
+        // Check chamber
+        if (TryComp<RMCGunChamberComponent>(gun, out var chamber) &&
+            _container.TryGetContainer(gun, chamber.ContainerId, out var chamberContainer) &&
+            chamberContainer.ContainedEntities.Count > 0)
+            return true;
+
+        // Check internal ammo
+        if (TryComp<BallisticAmmoProviderComponent>(gun, out var ballisticProvider) &&
+            (ballisticProvider.UnspawnedCount > 0 || ballisticProvider.Entities.Count > 0))
+            return true;
+
+        return false;
+    }
+
+    private bool ValidateGunAttachments(EntityUid gun, EntityUid user, bool valid)
+    {
+        if (!TryComp<AttachableHolderComponent>(gun, out var holderComp))
+            return true;
+
+        var holder = new Entity<AttachableHolderComponent>(gun, holderComp);
+        foreach (var slotId in holder.Comp.Slots.Keys)
+        {
+            var hasAttachment = _container.TryGetContainer(gun, slotId, out var slotContainer) &&
+                                slotContainer.ContainedEntities.Count > 0;
+            var hasStartingAttachment = holder.Comp.StartingAttachments.TryGetValue(slotId, out var startingProto);
+            if (!hasAttachment && !hasStartingAttachment)
+                continue;
+
+            if (hasAttachment != hasStartingAttachment)
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
+                return false;
+            }
+
+            var attachedEntity = slotContainer!.ContainedEntities[0];
+            var attachedProto = MetaData(attachedEntity).EntityPrototype?.ID;
+            if (attachedProto == null || attachedProto != startingProto)
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-gun-attachments", gun, user, ("gun", gun));
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Validates if ammunition items (magazines, ammo boxes, etc.) are full.
+    /// </summary>
+    private bool ValidateAmmunition(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
+    {
+        if (TryComp<BallisticAmmoProviderComponent>(item, out var ammoProvider) &&
+            !HasComp<GunComponent>(item) && // Skip guns with BallisticAmmoProviderComponent (flare guns, shotguns, revolvers)
+            ammoProvider.Count < ammoProvider.Capacity)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", item, user, ("mag", item));
+            return false;
+        }
+
+        if (TryComp<ItemSlotsComponent>(item, out var boxSlots) &&
+            !HasComp<CMHolsterComponent>(item) &&
+            !ValidateMagazineBox(item, boxSlots, user, valid))
+        {
+            return false;
+        }
+
+        if (TryComp<BulletBoxComponent>(item, out var bulletBox) && bulletBox.Amount < bulletBox.Max)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
+            return false;
+        }
+
+        return ValidateStorageBasedAmmoBox(vendor, item, user, valid); // Shotgun shell boxes and similar
+    }
+
+    private bool ValidateMagazineBox(EntityUid box, ItemSlotsComponent slots, EntityUid user, bool valid)
+    {
+        var totalSlots = slots.Slots.Count;
+        var filledSlots = 0;
+
+        foreach (var (slotId, _) in slots.Slots)
+        {
+            if (!_container.TryGetContainer(box, slotId, out var container) ||
+                container.ContainedEntities.Count == 0)
+                continue;
+
+            filledSlots++;
+            var magazine = container.ContainedEntities[0];
+            if (!TryComp<BallisticAmmoProviderComponent>(magazine, out var magAmmo))
+                continue;
+
+            if (magAmmo.Count < magAmmo.Capacity)
+            {
+                RestockValidationPopup(valid, "rmc-vending-machine-restock-mag-not-full", box, user, ("mag", magazine));
+                return false;
+            }
+        }
+
+        if (totalSlots > 1 && filledSlots < totalSlots)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", box, user, ("item", box));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateStorageBasedAmmoBox(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
+    {
+        var itemProto = MetaData(item).EntityPrototype?.ID;
+        if (itemProto == null || !vendor.Comp.IgnoreBulkRestockById.Contains(itemProto))
+            return true;
+
+        if (!TryComp<StorageComponent>(item, out var storage))
+            return true;
+
+        var expectedTotal = 0;
+        if (_prototypes.TryIndex(itemProto, out var proto) &&
+            proto.TryGetComponent(out StorageFillComponent? storageFill, _compFactory))
+        {
+            foreach (var entry in storageFill.Contents)
+            {
+                if (_prototypes.TryIndex(entry.PrototypeId, out var entryProto) &&
+                    entryProto.TryGetComponent(out StackComponent? entryStack, _compFactory))
+                {
+                    expectedTotal += entry.Amount * entryStack.Count;
+                }
+            }
+        }
+
+        var actualTotal = 0;
+        foreach (var contained in storage.Container.ContainedEntities)
+        {
+            actualTotal += TryComp<StackComponent>(contained, out var stack) ? stack.Count : 1;
+        }
+
+        if (actualTotal >= expectedTotal)
+            return true;
+        RestockValidationPopup(valid, "rmc-vending-machine-restock-box-not-full", item, user, ("item", item));
+        return false;
+    }
+
+    /// <summary>
+    /// Validates equipment items (armor, helmets, machete holsters, flare packs, power cells) are in proper state.
+    /// </summary>
+    private bool ValidateEquipment(Entity<CMAutomatedVendorComponent> vendor, EntityUid item, EntityUid user, bool valid)
+    {
+        var itemProto = MetaData(item).EntityPrototype?.ID;
+        var isSpecialAmmoBox = itemProto != null && vendor.Comp.IgnoreBulkRestockById.Contains(itemProto);
+        if (!isSpecialAmmoBox && TryComp<StorageComponent>(item, out var storage) && storage.Container.ContainedEntities.Count > 0)
+        {
+            // Armor/helmets use IgnoreBulkRestockByComponent to get here.
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-storage-not-empty", item, user, ("item", item));
+            return false;
+        }
+
+        if (HasComp<CMHolsterComponent>(item) &&
+            MetaData(item).EntityName.Contains("machete", StringComparison.OrdinalIgnoreCase) &&
+            !ValidateMacheteHolster(item, user, valid))
+        {
+            return false;
+        }
+
+        if (TryComp<CMItemSlotsComponent>(item, out var cmItemSlots) &&
+            (_tags.HasTag(item, new ProtoId<TagPrototype>("CMFlarePack")) ||
+             _tags.HasTag(item, new ProtoId<TagPrototype>("RMCPackFlareCAS"))) &&
+            !ValidateFlarePack(item, cmItemSlots, user, valid))
+        {
+            return false;
+        }
+
+        if (TryComp<CassettePlayerComponent>(item, out var cassettePlayer) &&
+            !ValidateCassettePlayer(item, cassettePlayer, user, valid))
+        {
+            return false;
+        }
+
+        return ValidatePowerCell(item, user, valid);
+    }
+
+    private bool ValidateMacheteHolster(EntityUid holster, EntityUid user, bool valid)
+    {
+        if (!TryComp<ItemSlotsComponent>(holster, out var itemSlots))
+            return true;
+
+        foreach (var (slotId, _) in itemSlots.Slots)
+        {
+            if (_container.TryGetContainer(holster, slotId, out var container) &&
+                container.ContainedEntities.Count > 0)
+            {
+                return true;
+            }
+        }
+
+        RestockValidationPopup(valid, "rmc-vending-machine-restock-machete-holster-empty", holster, user, ("item", holster));
+        return false;
+    }
+
+    private bool ValidateFlarePack(EntityUid pack, CMItemSlotsComponent slots, EntityUid user, bool valid)
+    {
+        if (slots.Count == null)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-item-invalid", pack, user, ("item", pack));
+            return false;
+        }
+
+        var maxSlots = slots.Count.Value;
+        var slotBaseName = slots.Slot?.Name ?? "Flare";
+        var filledSlotCount = 0;
+        for (var slotIndex = 1; slotIndex <= maxSlots; slotIndex++)
+        {
+            var slotId = $"{slotBaseName}{slotIndex}";
+            if (!_container.TryGetContainer(pack, slotId, out var container) ||
+                container.ContainedEntities.Count == 0)
+                continue;
+
+            filledSlotCount++;
+
+            if (!ValidateFlareCondition(container.ContainedEntities[0], pack, user, valid))
+                return false;
+        }
+
+        if (filledSlotCount < maxSlots)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-pack-not-full", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateFlareCondition(EntityUid flare, EntityUid pack, EntityUid user, bool valid)
+    {
+        if (!TryComp<ExpendableLightComponent>(flare, out var expendable))
+            return true;
+
+        if (expendable.CurrentState != ExpendableLightState.BrandNew)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-flare-spent", pack, user, ("item", pack));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidateCassettePlayer(EntityUid player, CassettePlayerComponent cassettePlayer, EntityUid user, bool valid)
+    {
+        if (_container.TryGetContainer(player, cassettePlayer.ContainerId, out var container) &&
+            container.ContainedEntities.Count > 0)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-cassette-player-has-tape", player, user, ("item", player));
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ValidatePowerCell(EntityUid item, EntityUid user, bool valid)
+    {
+        if (!TryComp<PowerCellSlotComponent>(item, out var powerCellSlot))
+            return true;
+
+        if (!_container.TryGetContainer(item, powerCellSlot.CellSlotId, out var cellContainer) ||
+            cellContainer.ContainedEntities.Count == 0)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-power-cell-missing", item, user, ("item", item));
+            return false;
+        }
+
+        var (currentCharge, maxCharge) = GetBatteryCharge(item, powerCellSlot);
+        if (maxCharge > 0 && currentCharge < maxCharge)
+        {
+            RestockValidationPopup(valid, "rmc-vending-machine-restock-power-cell-not-charged", item, user, ("item", item));
+            return false;
+        }
+
+        return true;
+    }
+
+    protected virtual (float currentCharge, float maxCharge) GetBatteryCharge(EntityUid item, PowerCellSlotComponent powerCellSlot)
+    {
+        return (0, 0);
+    }
+
+    private bool IgnoreBulkRestockByComponent(EntityUid item)
+    {
+        // For armor/helmets because they have storage component
+        return HasComp<CMArmorComponent>(item) || HasComp<CMHardArmorComponent>(item);
+    }
+
+    private void RestockValidationPopup(bool showError, string locKey, EntityUid target, EntityUid user, params (string, object)[] args)
+    {
+        if (showError)
+            return;
+
+        var message = Loc.GetString(locKey, args);
+        _popup.PopupEntity(message, target, user);
     }
 }

@@ -11,10 +11,27 @@
     anchored: true
   - type: Sprite
     sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
-    state: medlink_green_clamped # TODO RMC14 change states dynamically
     drawdepth: FloorObjects
+    layers:
+    - state: medlink_green_unclamped
+      map: ["MedLinkLayerKey"]
   - type: CMMedicalSupplyLink
+    baseState: medlink_green
+  - type: RMCAnimation
   - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: CMMedilinkSupplyPort
+  id: RMCMedilinkSupplyPortGrey
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/medilink.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: medlink_unclamped
+      map: [ "MedLinkLayerKey" ]
+  - type: CMMedicalSupplyLink
+    baseState: medlink
 
 - type: entity
   parent: ColMarTechBaseAnchorable
@@ -32,7 +49,7 @@
     randomizeReagentsPlanetside: true
     current: 600
     max: 600
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMBicaridine
@@ -52,7 +69,9 @@
       - Vial
       tags:
       - Bottle
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor # TODO RMC14 different ui style
+    canManualRestock: true
     hackable: true
     randomUnstockAmount: -1 # -1 is between 1 and the original amount
     randomEmptyChance: 0.25 # 25% chance
@@ -340,7 +359,7 @@
   - type: CMSolutionRefiller
     current: 600
     max: 600
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -348,7 +367,9 @@
     whitelist:
       components:
       - Hypospray
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor
+    canManualRestock: true
     sections:
     - name: Autoinjectors
       entries:
@@ -409,7 +430,7 @@
   - type: CMSolutionRefiller
     current: 250
     max: 250
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -417,7 +438,10 @@
     whitelist:
       components:
       - Hypospray
+  - type: RMCMedLinkPortReceiver
+    allowSupplyLinkRestock: false
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Supplies
@@ -446,7 +470,7 @@
   - type: CMSolutionRefiller
     current: 150
     max: 150
-    recharge: 125 # TODO RMC14 auto-restock items as well if round is >= 20 minutes in
+    recharge: 125
     rechargeCooldown: 4
     reagents:
     - CMTricordrazine
@@ -534,7 +558,9 @@
   - type: AccessReader
     access:
     - [ "CMAccessMedical" ]
+  - type: RMCMedLinkPortReceiver
   - type: CMAutomatedVendor
+    canManualRestock: true
     hackable: true
     sections:
     - name: Blood Packs
