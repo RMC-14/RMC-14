@@ -1479,3 +1479,8 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+ 
+# 2026-02-13 - Prefix RMC entities (Gear)
+ArmorHelmetM10RMC: RMCArmorHelmetM10CMB
+GoldHandcannonBeltFilled: RMCGoldHandcannonBeltFilled
+JumpsuitMarine: RMCJumpsuitMarine

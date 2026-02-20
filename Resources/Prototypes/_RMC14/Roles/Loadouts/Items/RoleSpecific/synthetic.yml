@@ -60,7 +60,7 @@
 - type: loadout
   id: MarineUniformRMC
   equipment:
-    jumpsuit: JumpsuitMarine
+    jumpsuit: RMCJumpsuitMarine
 
 - type: loadout
   id: CorpsmanUniformRMC
@@ -276,7 +276,7 @@
     - CMHeadCapOfficer
 
 - type: loadout
-  id: ArmorHelmetM10RMC
+  id: RMCArmorHelmetM10RMC
   storage:
     back:
     - ArmorHelmetM10
