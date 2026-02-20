@@ -239,13 +239,13 @@
 
 - type: entity
   parent: CMSatchelSecurity
-  id: CMSatchelSecuritySurvivorFillRiotOfficer
+  id: RMCSatchelSecuritySurvivorFillRiotControlOfficer
   suffix: Survivor
   components:
   - type: StorageFill
     contents:
     - id: CMSheetMetal20
-    - id: RMCRC6RiotShield
+    - id: CMGrenadeFragOld
 
 - type: entity
   parent: CMSatchelSecurity

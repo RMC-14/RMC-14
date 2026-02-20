@@ -104,6 +104,15 @@
     - FactionWeYa
 
 - type: entity
+  parent: CMIDCardPMC
+  id: CMIDCardCommando
+  name: commando holo-badge
+  suffix: WeYa
+  components:
+  - type: Sprite
+    state: commando
+
+- type: entity
   parent: CMIDCardLiaison
   id: CMIDCardPMCExecutive
   name: corporate holo-badge
