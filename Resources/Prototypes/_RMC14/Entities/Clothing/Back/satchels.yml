@@ -69,6 +69,15 @@
 
 - type: entity
   parent: CMSatchel
+  id: RMCSatchelHydro
+  name: hydroponics satchel
+  description: A green satchel for plant-related work.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Civilians/hydro.rsi
+
+- type: entity
+  parent: CMSatchel
   id: CMBackpackSniper
   name: M3 sniper's waist-rig
   description: A specially-designed rig attached to the waist with a pocket, designed for marksmen.

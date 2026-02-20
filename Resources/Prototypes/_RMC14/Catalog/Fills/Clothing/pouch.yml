@@ -21,6 +21,50 @@
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillWheat
+  suffix: Wheat, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: WheatBushel
+      amount: 3
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillHighroller
+  suffix: Dice, Smokes, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTarbackTube
+    - id: d6Dice
+    - id: RMCZippoGold
+    - id: RMCSpaceCash1000
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillSPPRations
+  suffix: SPP Rations, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMarinePreparedMealSPPCuban
+    - id: RMCMarinePreparedMealSPPBanush
+    - id: CMCanteen
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFillStowaway
+  suffix: Stowaway, .38 Magnum, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpaceCash1000
+    - id: RMCSpeedLoader38
+      amount: 2
+
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -294,3 +338,30 @@
     - id: RMCCableCoil
     - id: RMCRadioHandheldColony
     - id: RMCM5Bayonet
+
+# Auto Injector Pouch
+- type: entity
+  parent: RMCPouchAutoinjector
+  id: RMCPouchAutoinjectorFill
+  suffix: Filled, Default
+  components:
+  - type: StorageFill
+    contents: # todo rmc14 autoinjectors kelo x2, tramad x2, emerg
+    - id: CMBicaridineAutoInjector
+      amount: 2
+    - id: CMKelotaneAutoInjector
+      amount: 2
+#    - id: CMTramadolAutoInjector
+#      amount: 2
+    - id: CMEmergencyAutoInjector
+      amount: 1
+
+- type: entity
+  parent: RMCPouchAutoinjector
+  id: RMCPouchAutoinjectorFillEmergencyInjectors
+  suffix: Filled, Emergency Injectors
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMEmergencyAutoInjector
+      amount: 4

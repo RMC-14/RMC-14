@@ -109,3 +109,84 @@
     - id: RMCDrinkAlcoholTequila
     - id: RMCDrinkAlcoholRum
     - id: RMCBaseballBat
+
+# Unique Civ Survivor Fills
+- type: entity
+  parent: CMSatchelEngineer
+  id: RMCSatchelEngineerFarmerFill
+  suffix: Farmer Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCToolMiniHoe
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelSleepyColonistFill
+  suffix: Sleepy Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBedsheetWhite
+    - id: CMBedsheetBlue
+    - id: RMCJumpsuitRedPjs
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelBartenderFill
+  suffix: Bartender Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCDrinkAlcoholWhiskey
+    - id: RMCGrenadeMolotov
+    - id: CMPaperBin30
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelStowawayFill
+  suffix: Stowaway Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolver38Magnum
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelButcherFill
+  suffix: Butcher Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCKitchenKnifeButcher
+
+- type: entity
+  parent: RMCSatchelVirology
+  id: RMCSatchelVirologyJanitorFill
+  suffix: Janitor Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenadeCustomMetalFoam
+
+- type: entity
+  parent: CMBackpackMarineTech
+  id: RMCBackpackMarineTechPrepperFill
+  suffix: Prepper Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMRE
+      amount: 2
+    - id: CMDrinkWEYAWaterBottle30
+      amount: 2
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderProWelderFill
+  suffix: Pro Welder Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWelderIndustrialHighCapacity
+    - id: CMPamphletEngineer

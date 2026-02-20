@@ -74,5 +74,5 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, ClothingHeadHatFedoraBrown, ClothingUniformJumpsuitDetective ]
-    - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, ClothingHeadHatFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]
+    - [ RMCGlassesSecurityBlue, RMCCoatBureauTrenchCoatBrown, RMCHeadCapFedoraBrown, ClothingUniformJumpsuitDetective ]
+    - [ CMGlassesSecurity, RMCCoatBureauTrenchCoatGrey, RMCHeadCapFedoraGrey, ClothingUniformJumpsuitDetectiveGrey ]

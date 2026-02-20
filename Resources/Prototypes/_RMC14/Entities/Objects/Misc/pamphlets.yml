@@ -50,6 +50,19 @@
     addSkills:
       RMCSkillMedical: 1
 
+# gives science skill
+- type: entity
+  parent: CMPamphlet
+  id: RMCPamphletScience
+  name: scientific instructional pamphlet
+  description: A pamphlet used to quickly impart vital knowledge. This one has a scientific insignia.
+  components:
+  - type: Sprite
+    state: pamphlet_science
+  - type: SkillPamphlet
+    addSkills:
+      RMCSkillResearch: 1
+
 # gives miniengie skill
 - type: entity
   parent: CMPamphlet
