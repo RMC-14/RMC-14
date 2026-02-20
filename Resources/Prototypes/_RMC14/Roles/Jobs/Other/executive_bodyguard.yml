@@ -1,0 +1,101 @@
+﻿# Executive Bodyguard
+- type: job
+  parent: RMCJobNametagBase
+  id: RMCWeYaExecutiveBodyguard
+  name: rmc-job-name-executive-bodyguard
+  description: rmc-job-description-executive-bodyguard
+  newToJobInfo: rmc-new-to-job-wyeb
+  playTimeTracker: RMCJobWeYaExecutiveBodyguard
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: CMMilitaryPolice
+    time: 18000 # 5 hours
+  - !type:RoleTimeRequirement
+    role: CMJobLiaison
+    time: 90000 # 25 hours
+  ranks:
+    RMCRankWeYaBodyguardPPC:
+    - !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 630000 # 175 hours
+    RMCRankWeYaBodyguardPPS:
+    - !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 252000 # 70 hours
+    RMCRankWeYaBodyguardPPO:
+    - !type:RoleTimeRequirement
+      role: RMCJobWeYaExecutiveBodyguard
+      time: 36000 # 10 hours
+    RMCRankWeYaBodyguardTPPO: []
+  startingGear: RMCJobWeYaExecutiveBodyguard
+  icon: "RMCJobIconPMCGoonStandard"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-we-ya
+  roleWeight: 0.25
+  accessGroups:
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Executive Bodyguard
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: JobPrefix
+      prefix: rmc-job-prefix-executive-bodyguard
+    - type: Skills
+      skills:
+        RMCSkillCqc: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 2
+        RMCSkillEndurance: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillFirearms: 1
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: goon_standard
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_goon
+
+- type: playTimeTracker
+  id: RMCJobWeYaExecutiveBodyguard
+  isHumanoid: true
+
+- type: startingGear
+  id: RMCJobWeYaExecutiveBodyguard
+  equipment:
+    id: RMCIDCardPMC
+    ears: RMCHeadsetLiaison
+    jumpsuit: RMCJumpsuitLiaisonBlackCorporateBodyguard
+    outerClothing: RMCJacketCorporateBlack
+    eyes: RMCGlassesSecurityBlue
+    shoes: RMCBootsPMCFilled
+    back: RMCSatchelBlack
+    pocket1: RMCPouchFirstAidWEYA
+    pocket2: RMCPouchSecurityTools
+  storage:
+    back:
+    - RMCBoxZiptie
+    - CMCrowbar
+    - RMCMREWeYa
+    - RMCPaperBodyguardInstructions
+    pocket2:
+    - CMStunbaton
+    - RMCWeaponTaser
+    - CMFlash
+    - RMCHandcuffs
+    # TODO: RMCPepperSpray
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointExecutiveBodyguard
+  name: weston-yamada executive bodyguard spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCWeYaExecutiveBodyguard
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: wyeb_spawn

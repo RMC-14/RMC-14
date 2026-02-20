@@ -516,6 +516,9 @@
       "name": "clf_spawn"
     },
     {
+      "name": "wyeb_spawn"
+    },
+    {
       "name": "unmc_spawn"
     }
   ]

@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 12/01/2025 22:17:20
-  entityCount: 1475
+  time: 02/05/2026 13:14:22
+  entityCount: 1476
 maps:
 - 1
 grids:
@@ -26,7 +26,6 @@ tilemap:
   136: CMFloorWhite
   305: FloorTechMaint
   321: Lattice
-  322: Plating
 entities:
 - proto: ""
   entities:
@@ -3971,13 +3970,6 @@ entities:
     components:
     - type: Transform
       pos: -1.5,0.5
-      parent: 2
-- proto: RMCSpawnPointFieldDoctor
-  entities:
-  - uid: 1475
-    components:
-    - type: Transform
-      pos: 2.5,-1.5
       parent: 2
 - proto: CMSpawnPointFireteamLeader
   entities:
@@ -10046,6 +10038,20 @@ entities:
     components:
     - type: Transform
       pos: 3.5,17.5
+      parent: 2
+- proto: RMCSpawnPointExecutiveBodyguard
+  entities:
+  - uid: 1476
+    components:
+    - type: Transform
+      pos: -0.5,3.5
+      parent: 2
+- proto: RMCSpawnPointFieldDoctor
+  entities:
+  - uid: 1475
+    components:
+    - type: Transform
+      pos: 2.5,-1.5
       parent: 2
 - proto: RMCSpawnPointProvostInspector
   entities:
