@@ -80,8 +80,6 @@
   - rmgrid
   - rmmap
   - mapinit
-  - savegrid
-  - savemap
   - setambientlight
   - tpgrid
   - gridtc
@@ -134,6 +132,9 @@
   - restart
   - shutdown
   - pausemap
+  # RMC 14
+  - savemap
+  - savegrid
 
 - Flags: QUERY
   Commands:
