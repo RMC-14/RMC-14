@@ -42,6 +42,8 @@ rmc-examine-text-scatter-max = Current maximum scatter is [color={$colour}]{TOST
 rmc-examine-text-scatter-min = Current minimum scatter is [color={$colour}]{TOSTRING($scatter, "F1")}[/color] degrees.
 rmc-examine-text-shots-to-max-scatter = It takes [color={$colour}]{$shots}[/color] shots to reach maximum scatter.
 rmc-examine-text-iff = [color=cyan]This gun will ignore and shoot past friendlies![/color]
+rmc-examine-text-iff-prevent-friendly-fire = [color=cyan]This gun will not fire if friendlies are in the line of fire.[/color]
+rmc-iff-friendly-in-line = IFF lockout: friendly in line of fire.
 rmc-examine-text-id-lock-no-user = [color=chartreuse]It's unregistered. Pick it up to register yourself as its owner.[/color]
 rmc-examine-text-id-lock = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse].[/color]
 rmc-examine-text-id-lock-unlocked = [color=chartreuse]It is registered to [/color][color={$color}]{$name}[/color][color=chartreuse], but has its fire restrictions unlocked.[/color]
