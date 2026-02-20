@@ -1,6 +1,11 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using System.Linq;
+using System.Numerics;
+using Content.Shared._RMC14.Overwatch;
 using Robust.Server.GameObjects;
+using Robust.Shared.GameObjects;
+using Robust.Server.GameStates;
 using Robust.Shared.Player;
+using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Overwatch;
 
@@ -8,6 +13,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityLookupSystem _lookup = default!;
+
+    private float cameraRadius = OverwatchWatchingComponent.cameraRadius;
 
     public override void Initialize()
     {
@@ -26,7 +36,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             if (TerminatingOrDeleted(watching))
                 continue;
 
-            RemCompDeferred<OverwatchWatchingComponent>(watching);
+            RemoveWatcher(watching);
         }
     }
 
@@ -54,8 +64,54 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp1.PlayerSession);
 
+        var watchSession = watcher.Comp1.PlayerSession;
+        var isCameraOverridden = false;
+        if (watchSession != null && watchSession.AttachedEntity is not null)
+        {
+            try
+            {
+                _pvsOverride.AddSessionOverride(toWatch.Owner, watchSession);
+                isCameraOverridden = true;
+            }
+            catch
+            {
+            }
+        }
+
         RemoveWatcher(watcher);
-        EnsureComp<OverwatchWatchingComponent>(watcher).Watching = toWatch;
+        var watchingComp = EnsureComp<OverwatchWatchingComponent>(watcher);
+        watchingComp.Watching = toWatch;
+        watchingComp.isOverridden = isCameraOverridden;
+
+        var overridden = new List<EntityUid>();
+
+        try
+        {
+            var mapCoords = _transform.GetMapCoordinates(toWatch.Owner);
+            var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+            foreach (var ent in nearby)
+            {
+                if (ent == watcher.Owner)
+                    continue;
+
+                try
+                {
+                    if (watchSession != null)
+                    {
+                        _pvsOverride.AddSessionOverride(ent, watchSession);
+                        overridden.Add(ent);
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
+        catch
+        {
+        }
+
+        watchingComp.OverriddenEntities = overridden.Count > 0 ? overridden : null;
         toWatch.Comp.Watching.Add(watcher);
     }
 
@@ -69,7 +125,19 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         base.Unwatch(watcher, player);
 
         if (oldTarget != null && oldTarget != watcher.Owner)
+        {
             _viewSubscriber.RemoveViewSubscriber(oldTarget.Value, player);
+            if (TryComp(watcher, out OverwatchWatchingComponent? watchingComp) && watchingComp.isOverridden)
+            {
+                try
+                {
+                    _pvsOverride.RemoveSessionOverride(oldTarget.Value, player);
+                }
+                catch
+                {
+                }
+            }
+        }
 
         RemoveWatcher(watcher);
     }
@@ -82,7 +150,91 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         if (TryComp(watching.Watching, out OverwatchCameraComponent? watched))
             watched.Watching.Remove(toRemove);
 
+        // Removes any entities that were overridden to load for the watcher
+        if (TryComp(toRemove, out ActorComponent? actor) && watched != null)
+        {
+            var session = actor?.PlayerSession;
+            if (session != null)
+            {
+                try
+                {
+                    if (watching.isOverridden)
+                        _pvsOverride.RemoveSessionOverride(watched.Owner, session);
+                }
+                catch
+                {
+                }
+
+                if (watching.OverriddenEntities != null)
+                {
+                    foreach (var ent in watching.OverriddenEntities)
+                    {
+                        try
+                        {
+                            _pvsOverride.RemoveSessionOverride(ent, session);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+            }
+        }
+
         watching.Watching = null;
         RemCompDeferred<OverwatchWatchingComponent>(toRemove);
+    }
+
+    protected override void OnCameraAdjustOffsetEvent(OverwatchCameraAdjustOffsetEvent args)
+    {
+        base.OnCameraAdjustOffsetEvent(args);
+        
+        if (!TryGetEntity(args.Actor, out var watcherEntity) ||
+            !TryComp(watcherEntity, out OverwatchWatchingComponent? watcherComp) || 
+            watcherComp.Watching == null)
+            return;
+
+        var watched = watcherComp.Watching.Value;
+        if (!TryComp(watched, out OverwatchCameraComponent? camComp))
+            return;
+
+        foreach (var watcher in camComp.Watching.ToArray())
+        {
+            if (TerminatingOrDeleted(watcher) ||
+                !TryComp(watcher, out OverwatchWatchingComponent? watchingComp) ||
+                !TryComp(watcher, out ActorComponent? actor))
+                continue;
+
+            var session = actor.PlayerSession;
+
+            var overridden = new List<EntityUid>();
+            try
+            {
+                var mapCoords = _transform.GetMapCoordinates(watched);
+                var nearby = _lookup.GetEntitiesInRange(mapCoords, cameraRadius);
+                foreach (var ent in nearby)
+                {
+                    if (ent == watcher)
+                        continue;
+
+                    try
+                    {
+                        if (session != null)
+                        {
+                            _pvsOverride.AddSessionOverride(ent, session);
+                            overridden.Add(ent);
+                        }
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch
+            {
+            }
+
+            watchingComp.OverriddenEntities = overridden.Count > 0 ? overridden : null;
+        }
     }
 }

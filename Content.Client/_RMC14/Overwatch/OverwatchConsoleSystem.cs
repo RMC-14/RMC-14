@@ -1,10 +1,18 @@
-﻿using Content.Shared._RMC14.Overwatch;
+﻿using System.Numerics;
+using Content.Shared._RMC14.Overwatch;
 using Robust.Client.Audio;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
+using Robust.Shared.Player;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Components;
+using Robust.Shared.Input.Binding;
+using Robust.Client.Input;
 using Robust.Shared.Map;
+using Content.Client.Movement.Components;
+using Content.Shared._RMC14.Input;
+using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Systems;
 
 namespace Content.Client._RMC14.Overwatch;
 
@@ -12,18 +20,82 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
 {
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] public readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IInputManager _input = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     private readonly List<(Entity<AudioComponent, OverwatchRelayedSoundComponent> Audio, EntityCoordinates Position)> _toRelay = new();
+
+    private Vector2? _overwatchTargetOffset = null;
+    private readonly Vector2 _offsetLimit = new(OverwatchWatchingComponent.offsetAmount, OverwatchWatchingComponent.offsetAmount);
+    private EntityUid? _overwatchActor = null;
+    private OverwatchDirection? _pendingOffsetDirection = null;
+    private ContentEyeComponent? _eyeComp = null;
+    private float offsetAmount = OverwatchWatchingComponent.offsetAmount;
+    private float zoomAmount = OverwatchWatchingComponent.zoomAmount;
+    private string? _previousContext;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<OverwatchConsoleComponent, AfterAutoHandleStateEvent>(OnOverwatchAfterState);
 
+        SubscribeLocalEvent<OverwatchCameraAdjustOffsetMsg>(OnCameraAdjustOffset);
         SubscribeLocalEvent<OverwatchRelayedSoundComponent, ComponentRemove>(OnRelayedRemove);
         SubscribeLocalEvent<OverwatchRelayedSoundComponent, EntityTerminatingEvent>(OnRelayedRemove);
+
+        CommandBinds.Builder
+        .Bind(CMKeyFunctions.RMCCameraAdjustNorth,
+            InputCmdHandler.FromDelegate(session =>
+            {
+                if (_player.LocalEntity is { } player)
+                {
+                    var netEntity = EntityManager.GetNetEntity(player);
+                    OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.North));
+                    RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.North));
+                }
+            }, handle: true))
+        .Bind(CMKeyFunctions.RMCCameraAdjustWest,
+            InputCmdHandler.FromDelegate(session =>
+            {
+                if (_player.LocalEntity is { } player)
+                {
+                    var netEntity = EntityManager.GetNetEntity(player);
+                    OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.West));
+                    RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.West));
+                }
+            }, handle: true))
+        .Bind(CMKeyFunctions.RMCCameraAdjustSouth,
+            InputCmdHandler.FromDelegate(session =>
+            {
+                if (_player.LocalEntity is { } player)
+                {
+                    var netEntity = EntityManager.GetNetEntity(player);
+                    OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.South));
+                    RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.South));
+                }
+            }, handle: true))
+        .Bind(CMKeyFunctions.RMCCameraAdjustEast,
+            InputCmdHandler.FromDelegate(session =>
+            {
+                if (_player.LocalEntity is { } player)
+                {
+                    var netEntity = EntityManager.GetNetEntity(player);
+                    OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.East));
+                    RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.East));
+                }
+            }, handle: true))
+        .Bind(CMKeyFunctions.RMCCameraReset,
+            InputCmdHandler.FromDelegate(session =>
+            {
+                if (_player.LocalEntity is { } player)
+                {
+                    var netEntity = EntityManager.GetNetEntity(player);
+                    OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, OverwatchDirection.Reset));
+                    RaiseNetworkEvent(new OverwatchCameraAdjustOffsetEvent(netEntity, OverwatchDirection.Reset));
+                }
+            }, handle: true))
+        .Register<OverwatchConsoleSystem>();
     }
 
     private void OnOverwatchAfterState(Entity<OverwatchConsoleComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -42,6 +114,47 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
         catch (Exception e)
         {
             Log.Error($"Error refreshing {nameof(OverwatchConsoleBui)}\n{e}");
+        }
+    }
+
+    protected override void Watch(Entity<ActorComponent?, EyeComponent?> watcher, Entity<OverwatchCameraComponent?> toWatch)
+    {
+        base.Watch(watcher, toWatch);
+
+        // Add overwatch context to enable offset control keybinds
+        if (_player.LocalEntity is { } local && watcher.Owner == local)
+        {
+            var contexts = _input?.Contexts;
+            if (contexts != null)
+            {
+                _previousContext = contexts.ActiveContext?.Name;
+                if (contexts.Exists("overwatch"))
+                    contexts.SetActiveContext("overwatch");
+            }
+        }
+    }
+
+    protected override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    {
+        ResetOverwatchOffset();
+        base.Unwatch(watcher, player);
+
+        // Restore previous context, preventing offset control keybinds from interfering with normal movement
+        if (_player.LocalEntity is { } local && watcher.Owner == local)
+        {
+            var contexts = _input?.Contexts;
+            if (contexts != null)
+            {
+                if (!string.IsNullOrEmpty(_previousContext) && contexts.Exists(_previousContext))
+                {
+                    contexts.SetActiveContext(_previousContext);
+                    _previousContext = null;
+                }
+                else if (contexts.Exists("human"))
+                {
+                    contexts.SetActiveContext("human");
+                }
+            }
         }
     }
 
@@ -67,6 +180,7 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             !HasComp<OverwatchWatchingComponent>(player) ||
             !TryComp(player, out TransformComponent? playerTransform))
         {
+            ResetOverwatchOffset();
             var relayQuery = AllEntityQuery<OverwatchRelayedSoundComponent>();
             while (relayQuery.MoveNext(out var uid, out var relay))
             {
@@ -77,6 +191,11 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             return;
         }
 
+        if (_overwatchActor != player)
+        {
+            _overwatchActor = player;
+            TryComp(player, out _eyeComp);
+        }
         _toRelay.Clear();
 
         var eyePosition = _eye.CurrentEye.Position;
@@ -122,5 +241,110 @@ public sealed class OverwatchConsoleSystem : SharedOverwatchConsoleSystem
             _audio.SetPlaybackPosition(relayedAudioEnt, audio.Comp1.PlaybackPosition);
             audio.Comp2.Relay = relayedAudioEnt;
         }
+
+        if (_overwatchActor is { } actor)
+        {
+            var comp = EnsureComp<EyeCursorOffsetComponent>(actor);
+            // Disable mouse offset logic to stop the eye from panning towards the mouse
+            comp.DisableMouseOffset = true;
+            comp.TargetPosition = _overwatchTargetOffset ?? Vector2.Zero;
+            comp.CurrentPosition = comp.TargetPosition;
+            Dirty(actor, comp);
+
+            // Only override the watcher's zoom amount if offset is active
+            var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+            var targetZoom = _eyeComp?.TargetZoom ?? SharedContentEyeSystem.DefaultZoom;
+
+            var zoom = (comp.CurrentPosition != Vector2.Zero) ? new Vector2(zoomAmount, zoomAmount) : targetZoom;
+            eyeSystem.SetZoom(actor, zoom, ignoreLimits: true, eye: _eyeComp);
+
+            if (_pendingOffsetDirection != null && comp.CurrentPosition == Vector2.Zero)
+            {
+                var netEntity = EntityManager.GetNetEntity(actor);
+                OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(netEntity, _pendingOffsetDirection.Value));
+                _pendingOffsetDirection = null;
+            }
+        }
+    }
+
+    private void OnCameraAdjustOffset(OverwatchCameraAdjustOffsetMsg msg)
+    {
+        if (!TryGetEntity(msg.Actor, out var actorUid) || _overwatchActor != actorUid)
+            return;
+
+        Vector2 offsetDelta = msg.Direction switch
+        {
+            OverwatchDirection.North => new Vector2(0, offsetAmount),
+            OverwatchDirection.South => new Vector2(0, -offsetAmount),
+            OverwatchDirection.East => new Vector2(offsetAmount, 0),
+            OverwatchDirection.West => new Vector2(-offsetAmount, 0),
+            _ => Vector2.Zero
+        };
+
+        // If there's no offset, return zoom back to default
+        if (offsetDelta == Vector2.Zero)
+        {
+            _overwatchTargetOffset = Vector2.Zero;
+            var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
+            comp.CurrentPosition = Vector2.Zero;
+            comp.TargetPosition = Vector2.Zero;
+            Dirty(_overwatchActor.Value, comp);
+            var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+            if (_overwatchActor is { } actor)
+            {
+                if (_eyeComp == null)
+                    TryComp(actor, out _eyeComp);
+
+                var zoom = _eyeComp?.TargetZoom ?? SharedContentEyeSystem.DefaultZoom;
+                eyeSystem.SetZoom(actor, zoom, ignoreLimits: true, eye: _eyeComp);
+            }
+            return;
+        }
+        _overwatchTargetOffset = offsetDelta;
+
+        var clamped = new Vector2(
+            Math.Clamp(_overwatchTargetOffset.Value.X, -_offsetLimit.X, _offsetLimit.X),
+            Math.Clamp(_overwatchTargetOffset.Value.Y, -_offsetLimit.Y, _offsetLimit.Y)
+        );
+        _overwatchTargetOffset = clamped;
+
+        if (_overwatchActor != null)
+        {
+            var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
+            Dirty(_overwatchActor.Value, comp);
+            var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+            if (_player.LocalEntity != null && TryComp(_player.LocalEntity.Value, out ContentEyeComponent? eyeComp))
+                eyeSystem.SetZoom(_player.LocalEntity.Value, new Vector2(zoomAmount, zoomAmount), ignoreLimits: true, eye: eyeComp);
+        }
+    }
+
+    // Applies offset from UI controls immediately, makes the zoom transition smoother
+    public void ApplyCameraOffset(NetEntity actorNetEntity, OverwatchDirection direction)
+    {
+        OnCameraAdjustOffset(new OverwatchCameraAdjustOffsetMsg(actorNetEntity, direction));
+    }
+
+    private void ResetOverwatchOffset()
+    {
+        if (_overwatchActor == null)
+            return;
+
+        if (TerminatingOrDeleted(_overwatchActor.Value))
+        {
+            _overwatchTargetOffset = null;
+            _overwatchActor = null;
+            _eyeComp = null;
+            return;
+        }
+
+        var comp = EnsureComp<EyeCursorOffsetComponent>(_overwatchActor.Value);
+        comp.CurrentPosition = Vector2.Zero;
+        comp.TargetPosition = Vector2.Zero;
+        comp.DisableMouseOffset = true;
+        Dirty(_overwatchActor.Value, comp);
+        var eyeSystem = EntitySystem.Get<SharedContentEyeSystem>();
+        _overwatchTargetOffset = null;
+        _overwatchActor = null;
+        _eyeComp = null;
     }
 }
