@@ -2072,7 +2072,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     "Saving operational report to archive.",
                     rule.AllClearChannel);
                 _marineAnnounce.AnnounceRadio(ares,
-                    "Commencing final systems scan in 3 minutes.",
+                    "Commencing final systems scan in " + rule.AllClearEndDelay.Minutes + " minutes.",
                     rule.AllClearChannel);
                 rule.EndAtAllClear ??= Timing.CurTime + rule.AllClearEndDelay;
                 break;
