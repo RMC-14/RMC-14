@@ -59,8 +59,7 @@
     autoEject: true
   - type: RMCNameItemOnVend
     item: Sidearm
-  - type: GunUnskilledPenalty
-    angleIncrease: 5
+  - type: GunUnskilledUsable
   - type: GunPointBlank
   - type: GunDualWielding
     weaponGroup: Handgun
