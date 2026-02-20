@@ -1,4 +1,5 @@
-﻿rmc-repairable-need-blowtorch = You need a stronger blowtorch!
+rmc-repairable-need-blowtorch = You need a stronger blowtorch!
+rmc-repairable-needs-eye-protection = You need welding eye protection to do that.
 rmc-repairable-not-damaged = {CAPITALIZE(THE($target))} doesn't need repairs.
 rmc-repairable-too-damaged = {CAPITALIZE(THE($target))} has sustained too much structural damage to be repaired.
 rmc-repairable-not-trained = You are not trained to repair {THE($target)}...

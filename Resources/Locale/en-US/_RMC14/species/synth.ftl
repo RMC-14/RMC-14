@@ -11,6 +11,7 @@ rmc-species-synth-reset-key-invalid = You can't use the reset key on them, they 
 
 rmc-synth-repair-brute-start-others = {THE($user)} begins fixing some dents on their {$limb}.
 rmc-synth-repair-brute-start-self = You begin to carefully patch some dents on your {$limb} so as not to void your warranty.
+rmc-synth-repair-needs-eye-protection = You need welding eye protection to repair a synthetic with a welder.
 
 rmc-synth-repair-burn-start-others = {THE($user)} begins fixing some burn damage on their {$limb}.
 rmc-synth-repair-burn-start-self = You begin to carefully repair some burn damage on your {$limb} so as not to void your warranty.

@@ -33,5 +33,11 @@ public sealed partial class RMCRepairableComponent : Component
     public FixedPoint2 FuelUsed = FixedPoint2.New(0);
 
     [DataField, AutoNetworkedField]
+    public bool RequireWeldingEyeProtection;
+
+    [DataField, AutoNetworkedField]
+    public LocId EyeProtectionPopup = "rmc-repairable-needs-eye-protection";
+
+    [DataField, AutoNetworkedField]
     public float RepairableDamageLimit;
 }
