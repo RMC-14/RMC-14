@@ -1,0 +1,82 @@
+﻿- type: entity
+  parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
+  id: RMCWeaponRevolverWarwick
+  name: Warwick MkX TBR
+  suffix: DO NOT MAP
+  description: "For centuries, the Warwick accompanied officers of the TSE into battle, known ubiquitously as being 'the gentleman's sidearm'. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwickmkx.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwickmkx.rsi
+  - type: Tag
+    tags:
+    - Sidearm
+    - RMCRevolver
+    - RMCWeaponRevolverWarwick
+  - type: Corrodible
+    isCorrodible: false
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+      - RMCSpeedLoaderMateba
+      - RMCSpeedLoaderMatebaHE
+      - RMCSpeedLoaderMatebaHIAP
+      - RMCSpeedLoaderMatebaHighImpact
+      - RMCCartridgeRevolverMatebaHE
+      - RMCCartridgeRevolverMatebaHIAP
+      - RMCCartridgeRevolverMatebaHighImpact
+      - RMCCartridgeRevolverMateba
+    proto: RMCCartridgeRevolverMatebaHighImpact
+    capacity: 6
+    chambers: [ True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null ]
+  - type: Gun
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+    soundEmpty:
+      path: /Audio/_RMC14/Weapons/Guns/gun_cmb_click1.ogg
+  - type: GunDamageModifier
+    multiplier: 1.1
+  - type: RMCSelectiveFire
+    baseFireModes:
+    - SemiAuto
+    recoilWielded: 4
+    recoilUnwielded: 4
+    scatterWielded: 4
+    scatterUnwielded: 16
+    baseFireRate: 1.5
+    burstScatterMult: 4
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 1.5
+  - type: Appearance
+  - type: RMCAirShot
+    preparationTime: 1.5
+    requiresCombat: true
+    doAfterBreakOnMove: false
+    ignoreRoof: true
+    shakeAmount: 5
+    requiredSkills:
+      RMCSkillLeadership: 3
+  - type: RMCBattleExecute
+
+- type: entity
+  parent: RMCWeaponRevolverWarwick
+  id: RMCWeaponRevolverWarwickEmpty
+  suffix: Empty
+  components:
+  - type: RevolverAmmoProvider
+    proto: null
+    chambers:
+    - null
+    - null
+    - null
+    - null
+    - null
+    - null
+
+- type: Tag
+  id: RMCWeaponRevolverWarwick
