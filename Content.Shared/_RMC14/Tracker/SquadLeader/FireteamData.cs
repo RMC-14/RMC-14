@@ -7,7 +7,7 @@ namespace Content.Shared._RMC14.Tracker.SquadLeader;
 public partial record FireteamData
 {
     [DataField]
-    public SquadLeaderTrackerFireteam?[] Fireteams = new SquadLeaderTrackerFireteam?[3];
+    public SquadLeaderTrackerFireteam?[] Fireteams = new SquadLeaderTrackerFireteam?[5];
 
     [DataField]
     public string? SquadLeader;
