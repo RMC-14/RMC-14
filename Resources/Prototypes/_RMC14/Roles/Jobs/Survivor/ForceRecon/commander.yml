@@ -39,6 +39,7 @@
         - RMCSquadFORECON
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
+    - type: RMCAllowSuitStorage
     - type: SpotterWhitelist
     - type: RMCAwardRecommendation
       maxRecommendations: 4

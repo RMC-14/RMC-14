@@ -61,6 +61,7 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_mp
+    - type: RMCAllowSuitStorage
     - type: RMCTrackable
     - type: RMCAwardRecommendation
     - type: SeeNewPlayers

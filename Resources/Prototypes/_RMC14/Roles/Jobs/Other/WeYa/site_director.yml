@@ -38,6 +38,7 @@
     - type: MarineOrders
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-director
+    - type: RMCAllowSuitStorage
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
