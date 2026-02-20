@@ -26,6 +26,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Policing;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -53,12 +54,17 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCPolicingSystem _policing = default!;
+
+    private EntityQuery<RMCPolicingToolComponent> _policingToolQuery;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
     public override void Initialize()
     {
         base.Initialize();
+
+        _policingToolQuery = GetEntityQuery<RMCPolicingToolComponent>();
 
         SubscribeLocalEvent<RMCStunOnProjectileHitComponent, MapInitEvent>(OnSizeStunMapInit);
         SubscribeLocalEvent<RMCStunOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
@@ -292,6 +298,19 @@ public sealed class RMCSizeStunSystem : EntitySystem
         {
             stun += flashAdditionalStunTime;
             paralyze += flashAdditionalStunTime;
+        }
+
+        // Ensure interfaction policing is less effective
+        if (user != null)
+        {
+            if (_policingToolQuery.HasComp(ent.Owner) && !_policing.CanBePoliced(target, user))
+            {
+                var resistanceEvent = new GetPolicingResistanceEvent();
+                RaiseLocalEvent(ent.Owner, ref resistanceEvent);
+
+                stun *= resistanceEvent.Multiplier;
+                paralyze *= resistanceEvent.Multiplier;
+            }
         }
 
         if (stun > TimeSpan.Zero)

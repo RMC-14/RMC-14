@@ -33,7 +33,7 @@ public sealed class RMCPolicingSystem : EntitySystem
 
     private void OnInterFactionFlashAttempt(Entity<RMCImmuneToInterFactionPolicingComponent> ent, ref FlashAttemptEvent args)
     {
-        if (!HasComp<RMCPolicingToolComponent>(ent.Owner))
+        if (args.Used != null && !HasComp<RMCPolicingToolComponent>(args.Used))
             return;
 
         if (CanBePoliced(ent.Owner, args.User))
