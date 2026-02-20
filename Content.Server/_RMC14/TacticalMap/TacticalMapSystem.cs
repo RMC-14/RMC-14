@@ -73,6 +73,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     private TimeSpan _mapUpdateEvery;
     private TimeSpan _forceMapUpdateEvery;
     private TimeSpan _nextForceMapUpdate = TimeSpan.FromSeconds(30);
+    private TimeSpan _objectiveUpdateInterval = TimeSpan.FromSeconds(5);
+    private TimeSpan _nextObjectiveUpdate;
 
     public override void Initialize()
     {
@@ -158,6 +160,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
             RMCCVars.RMCTacticalMapForceUpdateEverySeconds,
             v => _forceMapUpdateEvery = TimeSpan.FromSeconds(v),
             true);
+
+        _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
     }
 
     private void OnOvipositorChanged(ref XenoOvipositorChangedEvent ev)
@@ -1042,6 +1046,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         {
             _toInit.Clear();
             _toUpdate.Clear();
+        }
+
+        if (_net.IsServer)
+        {
+            if (_timing.CurTime >= _nextObjectiveUpdate)
+            {
+                _nextObjectiveUpdate = _timing.CurTime + _objectiveUpdateInterval;
+                var activeUsers = EntityQueryEnumerator<ActiveTacticalMapUserComponent, TacticalMapUserComponent>();
+                while (activeUsers.MoveNext(out var uid, out _, out var user))
+                {
+                    UpdateTacticalMapState((uid, user));
+                }
+            }
         }
 
         try
