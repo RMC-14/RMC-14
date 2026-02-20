@@ -65,3 +65,11 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
                                              In the case of a medevac, go to the back of the ship and interact with the red medevac module. This will bring the patient up onto your ship from the ground. Inform the Almayer's medical staff that they are coming aboard and make sure they are brought into their care.
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
+
+rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
+
+                                             Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
+
+                                             You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
+
+                                             If you have any other questions, consult the guidebook's Corporate Liaison page.
