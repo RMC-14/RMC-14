@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   id: RMCRotaryPhone
   name: rotary phone
   description: The finger plate is a little stiff.
@@ -110,6 +110,11 @@
   parent: RMCRotaryPhone
   id: RMCRotaryPhoneMPTent
   name: Military Police Tent
+
+- type: entity
+  parent: RMCRotaryPhone
+  id: RMCRotaryPhoneCorrespondentTent
+  name: Correspondent Tent
 
 # Admin
 - type: entity

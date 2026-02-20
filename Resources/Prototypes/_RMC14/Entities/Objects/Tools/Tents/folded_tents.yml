@@ -336,3 +336,66 @@
           offset: 0.5, -1.5
         - prototype: CMLockerPolice
           offset: 1.5, -1.5
+
+
+- type: entity
+  parent: BaseItem
+  id: RMCTentUNMCExtendedCorrespondentFolded
+  name: folded Correspondent Field Tent
+  description: A standard civilian tent. This one is equipped for news on the go. Unfold in a suitable location for interviews. ENTRANCE TO THE SOUTH.
+  components:
+    - type: Item
+      size: Huge
+    - type: Sprite
+      sprite: _RMC14/Objects/Tents/folded_tents.rsi
+      layers:
+        - state: big_tent
+        - state: correspondent_big
+    - type: RMCDeployable
+      deployArea:
+        !type:PhysShapeAabb
+        bounds: "-0.4,0.6,3.4,4.4" # The non-perfect rectangle allows the tent to be placed close to the walls
+      collapseToolPrototype: CMEntrenchingTool
+      deploySetups:
+        - prototype: RMCTentUNMCExtendedCorrespondent
+          mode: ReactiveParental
+          anchor: true
+          offset: -0.2, 0
+          angle: 0
+        - prototype: CMChair
+          offset: 0.5, -0.5
+          angle: 90
+        - prototype: CMTable
+          offset: 1.5, 0.5
+        - prototype: CMTable
+          offset: 1.5, -0.5
+        - prototype: CMTable
+          offset: -1.5, 0.5
+        - prototype: CMTable
+          offset: 0.5, 0.5
+        - prototype: CMTable
+          offset: -1.5, -0.5
+        - prototype: CMRack
+          offset: 0.5, -1.5
+        - prototype: RMCDigitalClock
+          offset: -1.5, -0.5
+          angle: 90
+          neverRedeployableSetup: true
+        - prototype: RMCRotaryPhoneCorrespondentTent
+          offset: 0.5, 0.5
+          mode: Reactive
+          neverRedeployableSetup: true
+        - prototype: CMFilingCabinetTall
+          offset: -0.5, 0.5
+          angle: 180
+        - prototype: RMCLamp
+          offset: 1.5, -0.5
+          mode: Reactive
+          neverRedeployableSetup: true
+        - prototype: CMFaxPressTent 
+          offset: -1.5, 0.5
+          mode: Reactive
+        - prototype: CMPaperBin10
+          offset: 1.5, 0.5
+          neverRedeployableSetup: true
+         
