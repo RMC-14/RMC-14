@@ -25,6 +25,7 @@
       # - id: RMCJumpsuitPilotAlt
       # - id: CMHandsInsulated
       # - id: CMHandsBlackInsulated
+      - id: RMCOuterClothingExternalWebbing
       - id: CMArmorHelmetM30
       - id: RMCHeadCapPatrol
       - id: CMSatchel
