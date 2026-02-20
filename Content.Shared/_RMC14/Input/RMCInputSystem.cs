@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 
@@ -23,7 +24,21 @@ public sealed class RMCInputSystem : EntitySystem
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerAttachedEvent>(OnActiveAttached);
         SubscribeLocalEvent<ActiveInputMoverComponent, PlayerDetachedEvent>(OnActiveDetached);
 
+        // Clean up RelativeEntity refs when grids/maps are deleted.
+        SubscribeLocalEvent<MapGridComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
+        SubscribeLocalEvent<MapComponent, EntityTerminatingEvent>(OnGridOrMapTerminating);
+
         Subs.CVar(_config, RMCCVars.RMCActiveInputMoverEnabled, v => _activeInputMoverEnabled = v, true);
+    }
+
+    private void OnGridOrMapTerminating(EntityUid uid, Component comp, ref EntityTerminatingEvent args)
+    {
+        var query = EntityQueryEnumerator<InputMoverComponent>();
+        while (query.MoveNext(out _, out var mover))
+        {
+            if (mover.RelativeEntity == uid)
+                mover.RelativeEntity = null;
+        }
     }
 
     private void OnActiveMapInit(Entity<ActiveInputMoverComponent> ent, ref MapInitEvent args)

@@ -1,4 +1,4 @@
-# Welding fuel amounts are multiplied by 2.5 from 13 until we make them work exactly the same
+# Welding fuel amounts are parity with CM now
 - type: entity
   parent: [BaseItem, RMCBaseMeleeWeapon]
   id: RMCWelderBase
@@ -102,7 +102,7 @@
       collection: Welder
     qualities: Welding
   - type: Welder
-    fuelConsumption: 0.06 # TODO RMC14 change this when welders are fixed
+    fuelConsumption: 0.025
     fuelLitCost: 0
   - type: PointLight
     enabled: false
@@ -114,6 +114,7 @@
   - type: IgnitionSource
     temperature: 700
   - type: Blowtorch
+  - type: RMCBlowtorchWeldFuel
   - type: Clothing
     quickEquip: false
     slots:
@@ -133,8 +134,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+          Quantity: 40
+        maxVol: 40
 
 - type: entity
   parent: CMWelder
@@ -146,7 +147,7 @@
     solutions:
       Welder:
         reagents: []
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+        maxVol: 40
 
 - type: entity
   parent: RMCWelderBase
@@ -178,8 +179,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 12.5
-        maxVol: 12.5 # TODO RMC14 5 when welders are fixed
+          Quantity: 5
+        maxVol: 5
 
 - type: entity
   parent: RMCWelderBase
@@ -203,8 +204,8 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 150
-        maxVol: 150 # TODO RMC14 60 when welders are fixed
+          Quantity: 60
+        maxVol: 60
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 70
@@ -222,5 +223,5 @@
       Welder:
         reagents:
         - ReagentId: WeldingFuel
-          Quantity: 100
-        maxVol: 100 # TODO RMC14 40 when welders are fixed
+          Quantity: 40
+        maxVol: 40
