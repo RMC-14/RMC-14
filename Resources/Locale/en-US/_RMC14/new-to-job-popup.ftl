@@ -70,6 +70,8 @@ rmc-new-to-job-wyeb = Your job as an Executive Bodyguard is to ensure the safety
 
                                              To preform your duties, your vendors should have both clothing and gear; at first, the items avalible to you are limited, but will expand as you gain experience and time in the role.
 
-                                             You are not an antagonist; work with the shipside Military Police when needed, and don't interfere in their duties, even if it's arresting the Liaison. Personnel detained in the office for trespassing or for attacks on the CL are to be transferred over to the Military Police
+                                             You are not an antagonist; work with the shipside Military Police when needed, and don't interfere in their duties, even if it's arresting the Liaison. Personnel detained in the office for trespassing or for attacks on the CL are to be transferred over to the Military Police.
+
+                                             Whenever possible, attempt to verbally discourage the Liaison from taking antagonistic action against the ship, causing trouble for other players, or being excessively rude without IC reason. You are also encouraged to report any illegal action the CL commits to the MPs, and detain them and transfer them to the MPs if they are an active threat to other players.
 
                                              Avoid deploying to fight the Xenonids, and remember that your greatest strength is in the roleplay you can provide the CL and the ship. You are permitted to carry a sidearm on Code Green and a longarm on Code Blue, although this right can be revoked by the Commanding Officer or CMP. Remember to strictly adhere to both escalation rules and MLaw.
