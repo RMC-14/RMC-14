@@ -44,6 +44,15 @@
   - sprite: _RMC14/Mobs/Feroxi/ear_markings.rsi
     state: feroxi-ears-tips
 
+- type: marking
+  id: FeroxiEarless
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/ear_markings.rsi
+    state: feroxi-earless
+
 # Snout Markings
 - type: marking
   id: FeroxiSnoutStripe
@@ -103,6 +112,69 @@
     state: feroxi-snout-countershading
   - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
     state: feroxi-snout-nurse
+
+- type: marking
+  id: FeroxiSnoutBullRound
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-bull-round
+
+- type: marking
+  id: FeroxiSnoutBullSharp
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-bull-sharp
+
+- type: marking
+  id: FeroxiSnoutGoblin
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-goblin
+
+- type: marking
+  id: FeroxiSnoutGreatWhiteRound
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-great-white-round
+
+- type: marking
+  id: FeroxiSnoutGreatWhiteSharp
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-great-white-sharp
+
+- type: marking
+  id: FeroxiSnoutLeopard
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-leopard
+
+- type: marking
+  id: FeroxiSnoutMako
+  bodyPart: Snout
+  markingCategory: Snout
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/snout_markings.rsi
+    state: feroxi-mako
 
 # Tail Markings
 - type: marking
@@ -293,6 +365,392 @@
     state: feroxi-tail
   - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
     state: feroxi-tail-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+
+- type: marking
+  id: FeroxiNurseTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+
+- type: marking
+  id: FeroxiNurseStripedTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+
+- type: marking
+  id: FeroxiNurseStripedTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiNurseTipTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+
+- type: marking
+  id: FeroxiNurseTipTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+
+- type: marking
+  id: FeroxiNurseTailBlitz
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiNurseTailBlitzNoDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+
+- type: marking
+  id: FeroxiNurseTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+
+- type: marking
+  id: FeroxiNurseTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+
+- type: marking
+  id: FeroxiNurseStripeTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+
+- type: marking
+  id: FeroxiNurseStripeTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiNurseTipTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+
+- type: marking
+  id: FeroxiNurseTipTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-nurse-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+
+- type: marking
+  id: FeroxiThresherTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+
+- type: marking
+  id: FeroxiThresherStripedTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+
+- type: marking
+  id: FeroxiThresherStripedTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiThresherTipTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+
+- type: marking
+  id: FeroxiThresherTipTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-tip
+
+- type: marking
+  id: FeroxiThresherTailBlitz
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiThresherTailBlitzNoDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+
+- type: marking
+  id: FeroxiThresherTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+
+- type: marking
+  id: FeroxiThresherTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+
+- type: marking
+  id: FeroxiThresherStripeTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+
+- type: marking
+  id: FeroxiThresherStripeTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-stripe
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-dorsal-stripes
+
+- type: marking
+  id: FeroxiThresherTipTwoToneTail
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-bottom-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-second-dorsal-tip
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-under
+
+- type: marking
+  id: FeroxiThresherTipTwoToneTailAndDorsal
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [ Feroxi ]
+  sprites:
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher
+  - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
+    state: feroxi-tail-thresher-top-tip
   - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi
     state: feroxi-tail-bottom-tip
   - sprite: _RMC14/Mobs/Feroxi/tail_markings.rsi

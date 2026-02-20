@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-NC-SA-3.0",
-    "copyright": "Made by BlitzTheSquishy",
+    "copyright": "Made by BlitzTheSquishy, some edited by SharkSnake98 on GitHub",
     "size": {
         "x": 32,
         "y": 32
@@ -21,6 +21,34 @@
         },
         {
             "name": "feroxi-snout-nurse",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-bull-round",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-bull-sharp",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-goblin",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-great-white-round",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-great-white-sharp",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-leopard",
+            "directions": 4
+        },
+        {
+            "name": "feroxi-mako",
             "directions": 4
         }
     ]
