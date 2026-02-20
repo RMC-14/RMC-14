@@ -84,3 +84,17 @@
     contents:
     - id: CMPaper
       amount: 4
+
+- type: entity
+  parent: CMClipboard
+  id: RMCProvostClipboard
+  name: clipboard
+  components:
+  - type: ItemSlots
+    slots:
+      pen_slot:
+        startingItem: RMCProvostPen
+  - type: StorageFill
+    contents:
+    - id: CMPaper
+      amount: 4

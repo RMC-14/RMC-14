@@ -9,6 +9,7 @@
   startingGear: RMCGearProvostAdvisor
   icon: RMCJobIconProvostAdvisor
   joinNotifyCrew: false
+  supervisors: rmc-job-supervisors-provost-marshal
   accessGroups:
   - ShipMasterAccess
   special:
@@ -61,10 +62,10 @@
     ears: RMCHeadsetProvost
     jumpsuit: CMJumpsuitProvostSenior
     outerClothing: RMCProvostJacketFilled
-    gloves: CMHandsBlackMarine # TODO RMC14 black gloves
+    gloves: RMCHandsBlackFireResistance
     shoes: CMBootsBlackFilled
     id: RMCIDCardProvostAdvisor
-    belt: CMBeltSecurityMPFilled
+    belt: RMCM1984BeltFilled
     back: CMSatchelSecurityFilledProvost
 #    pocket1: # TODO RMC14 tape recorder
     pocket2: RMCPouchGeneralLarge # TODO RMC14 3 listening devices

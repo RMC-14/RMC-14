@@ -49,3 +49,13 @@
     sprite: _RMC14/Objects/Misc/paper.rsi
   - type: RMCLoreExaminable
     content: rmc-lore-examinable-fountain-pen
+
+- type: entity
+  parent: CMPenFountain
+  id: RMCProvostPen
+  name: provost pen
+  description: A sleek black shell pen with the Provost Office sigil engraved into the side. It can change colors as needed for various functions within the Provost and Military Police.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    state: provost_pen
