@@ -109,8 +109,10 @@
         - ReagentId: WeldingFuel
           Quantity: 1000
   - type: Explosive
-    explosionType: Default
-    totalIntensity: 60
+    explosionType: RMC
+    totalIntensity: 120
+    intensitySlope: 6.0
+    maxIntensity: 450.0
   - type: ReagentTank
     tankType: Fuel
   - type: Destructible
