@@ -1,0 +1,11 @@
+rmc-marines-evac-ui-inform-display = [bold]Information display[/bold]
+rmc-marines-evac-ui-status-label = Escape Pod Status: NO EVACUATION
+rmc-marines-evac-ui-hatch-label = Docking Hatch: UNSECURED
+rmc-marines-evac-ui-pod-control = [bold]Pod controls[/bold]
+rmc-marines-evac-ui-unlock-door = Unlock door
+rmc-marines-evac-ui-eject-button = Manual eject
+rmc-marines-evac-ui-delay-button = Delay launch
+rmc-marines-lifeboat-ui-launch-question = Launch the lifeboat?
+rmc-marines-lifeboat-ui-emergency-launch = Emergency Launch
+rmc-marines-lifeboat-ui-no = No
+rmc-marines-lifeboat-ui-yes = Yes

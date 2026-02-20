@@ -17,13 +17,13 @@
                     MinHeight="24"
                     MinWidth="50" />
             <Button Name="CancelButton" Access="Public"
-                    Text="Cancel"
+                    Text="{Loc 'rmc-tactical-map-cancel'}"
                     HorizontalExpand="True"
                     Margin="0 0 4 0"
                     MinHeight="24"
                     MinWidth="60" />
             <Button Name="DeleteButton" Access="Public"
-                    Text="Delete"
+                    Text="{Loc 'rmc-tactical-map-ui-delete'}"
                     HorizontalExpand="True"
                     Visible="False"
                     MinHeight="24"
