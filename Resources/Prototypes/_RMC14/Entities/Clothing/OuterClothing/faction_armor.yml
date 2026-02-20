@@ -126,7 +126,6 @@
     maxItemSize: Small
 
 # Colonial militia
-# TODO: implement storage whitelist for this
 - type: entity
   parent: ClothingOuterStorageBase
   id: RMCCoatMilitia
@@ -142,21 +141,24 @@
     melee: 20 # CLOTHING_ARMOR_MEDIUM
     bullet: 15 # CLOTHING_ARMOR_MEDIUMLOW (bullets)
     explosionArmor: 20 # CLOTHING_ARMOR_MEDIUM
+    bio: 15 # CLOTHING_ARMOR_MEDIUMLOW
   - type: RMCArmorSpeedTier
-    speedTier: light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_LIGHT
-    walkModifier: 0.725
-    sprintModifier: 0.725
+    speedTier: medium
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
   - type: Storage
+    maxItemSize: Small
     grid:
     - 0,0,3,1 # 2 slots
+  - type: CMHardArmor
   - type: FixedItemSizeStorage
   - type: IgnoreContentsSize
     items:
       tags:
-      - RMCMagazineMar50LMG
-      - RMCMagazineRifleMAR40
-      - RMCMagazineSMGMAC15
+      - CMMagazineRifle
+      - CMMagazineSmg
+      - CMMagazineSniper
 
 - type: entity
   parent: RMCCoatMilitia
@@ -168,16 +170,7 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/vest.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
-  - type: IgnoreContentsSize
-    items:
-      tags:
-      - RMCMagazineRifleMAR40
-      - RMCMagazineSMGMAC15
+  # TODO BODY_FLAG_CHEST|BODY_FLAG_GROIN for armor protection flags
 
 - type: entity
   parent: RMCCoatMilitia
@@ -189,14 +182,10 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/brace.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
+  # TODO BODY_FLAG_GROIN|BODY_FLAG_ARMS|BODY_FLAG_LEGS for armor protection flags
 
 - type: entity
-  parent: RMCCoatMilitia
+  parent: RMCCoatMilitiaBrace
   id: RMCCoatMilitiaHauberk
   name: colonial militia partial hauberk
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This even lighter variant has some of the arm pieces removed.
@@ -205,11 +194,6 @@
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/hauberk.rsi
-  - type: RMCArmorSpeedTier
-    speedTier: very light
-  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
-    walkModifier: 0.897
-    sprintModifier: 0.897
 
 - type: entity
   parent: RMCCoatMilitia
@@ -219,6 +203,9 @@
   description: The hauberk of a colonist militia member, created from boiled leather and some modern armored plates. While not the most powerful form of armor, and primitive compared to most modern suits of armor, it gives the wearer almost perfect mobility, which suits the needs of the local colonists. It is also quick to don, easy to hide, and cheap to produce in large workshops. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
   components:
   - type: SmartGunArmor
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
 
 # Mercenaries
 # TODO: implement storage whitelist for this
