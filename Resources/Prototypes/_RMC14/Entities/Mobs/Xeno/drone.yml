@@ -12,8 +12,6 @@
   name: Drone
   description: An alien drone.
   components:
-  - type: GhostRole
-    name: cm-job-name-xeno-drone
   - type: MobState
     allowedStates:
     - Alive

@@ -161,7 +161,7 @@ public sealed class XenoPylonSystem : SharedXenoPylonSystem
         var tripper = args.Tripper;
         if (CanTrigger(tripper))
         {
-            _hive.IncreaseBurrowedLarva(1);
+            _hive.ChangeBurrowedLarva(1);
             QueueDel(tripper);
         }
     }

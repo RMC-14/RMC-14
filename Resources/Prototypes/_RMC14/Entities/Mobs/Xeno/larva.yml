@@ -9,8 +9,6 @@
   - type: GuideHelp
     guides:
     - RMCGuideRoleDrone
-  - type: GhostRole
-    name: cm-job-name-xeno-larva
   - type: Sprite
     sprite: _RMC14/Mobs/Xenonids/Larva/larva.rsi
   - type: MobState
