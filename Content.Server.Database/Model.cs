@@ -597,6 +597,7 @@ namespace Content.Server.Database
         public RMCNamedItems? NamedItems { get; set; }
         public RMCSquadPreference? SquadPreference { get; set; }
         public string ArmorPreference { get; set; } = null!;
+        public List<Rank> Ranks { get; } = new();
         public bool PlaytimePerks { get; set; } = true;
         public string XenoPrefix { get; set; } = string.Empty;
         public string XenoPostfix { get; set; } = string.Empty;
@@ -638,6 +639,17 @@ namespace Content.Server.Database
 
         public string TraitName { get; set; } = null!;
     }
+
+    public class Rank
+    {
+        public int Id { get; set; }
+        public Profile Profile { get; set; } = null!;
+        public int ProfileId { get; set; }
+
+        public string JobName { get; set; } = null!;
+        public int Priority { get; set; }
+    }
+
 
     #region Loadouts
 
