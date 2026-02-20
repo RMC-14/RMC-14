@@ -1464,6 +1464,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (Timing.CurTime >= distress.QueenDiedCheck)
             {
+                if (distress.Hijack)
+                {
+                    EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
+                    continue;
+                }
+
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                     EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
