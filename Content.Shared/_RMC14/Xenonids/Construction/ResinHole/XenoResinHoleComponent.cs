@@ -10,11 +10,11 @@ public sealed partial class XenoResinHoleComponent : Component
 {
     public const string ParasitePrototype = "CMXenoParasite";
 
-    public const string BoilerAcid = "XenoBombardAcidProjectile";
+    public const string BoilerAcid = "RMCXenoBombardAcidProjectile";
 
     public const string AcidGasPrototype = "RMCSmokeAcid";
 
-    public const string BoilerNeuro = "XenoBombardNeurotoxinProjectile";
+    public const string BoilerNeuro = "RMCXenoBombardNeurotoxinProjectile";
 
     public const string NeuroGasPrototype = "RMCSmokeNeurotoxin";
 
