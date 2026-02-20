@@ -30,12 +30,12 @@
   startingGear: RMCJobWeYaExecutiveBodyguard
   icon: "RMCJobIconPMCGoonStandard"
   joinNotifyCrew: false
-  supervisors: cm-job-supervisors-cl
+  supervisors: cm-job-supervisors-we-ya
   roleWeight: 0.25
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: Weston-Yamada Executive Bodyguard
+  spawnMenuRoleName: Executive Bodyguard
   special:
   - !type:AddComponentSpecial
     components:
