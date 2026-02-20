@@ -40,6 +40,8 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconNoPistol
     - type: SpotterWhitelist
+    - type: RMCAwardRecommendation
+      maxRecommendations: 4
   hidden: true
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
 

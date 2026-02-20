@@ -57,6 +57,8 @@
     curve: !type:BoolCurve
   - !type:CanFaceCon
     curve: !type:BoolCurve
+  - !type:TargetNotBurrowedCon
+    curve: !type:BoolCurve
 
 - type: entity
   parent: BaseItem
@@ -64,6 +66,9 @@
   name: engineering upgrade kit
   description: A kit used to upgrade the defenses of an engineer's sentry. Back in 1980 when the machines tried to break free, it was a single android who laid them low. Now their technology is used widely on the rim.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: Sprite
     sprite: _RMC14/Objects/engineering_kit.rsi
     state: icon
@@ -71,10 +76,13 @@
 
 - type: entity
   parent: RMCBaseSentry
-  id: RMCSentry
+  id: RMCSentryConstruct
   name: UN 571-C sentry gun
   description: A deployable, semi-automated turret with AI targeting capabilities. Armed with an M30 Autocannon and a 500-round drum magazine.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleCombatTechnician
   - type: SentryTargeting
     friendlyFactions:
     - UNMC
@@ -99,6 +107,13 @@
     tags:
     - RMCSentry
   - type: PointLight
+
+- type: entity
+  parent: [RMCSentryConstruct, BaseItem]
+  id: RMCSentry
+  components:
+  - type: Item
+    size: Normal
 
 - type: Tag
   id: RMCSentry
@@ -408,6 +423,7 @@
     deviation: 75
   - type: ProjectileDamageReceived
     multiplier: 0.1
+
 - type: entity
   parent: RMCSentry
   id: RMCSentryMiniFire
@@ -469,7 +485,6 @@
         - BulletImpassable
         hard: false
   - type: Sentry
-    homingShots: false
     deployDelay: 0.75
     undeployDelay: 0.75
     upgrades: null
@@ -477,7 +492,7 @@
     magazineTag: RMCMagazineSentryFire
 
 - type: entity
-  parent: RMCBaseSentry
+  parent: RMCSentry
   id: RMCSentryFire
   name: UN 55-FA assault sentry flamer
   description: The Flamethrower Sentry Gun automatically tracks and fires upon any target that is wearing an ID not hooked up to the Almayer's systems. Just like the UA 571-C Sentry gun, this sentry has IFF but the fire that lingers doesn't.
@@ -507,7 +522,6 @@
     factions:
     - FactionMarine
   - type: Sentry
-    homingShots: false
     upgrades: ["RMCSentryMiniFire", "RMCSentrySniperFire"]
     startingMagazine: RMCMagazineSentryFireBlue
     magazineTag: RMCMagazineSentryFireBlue
@@ -566,7 +580,6 @@
       AggroVisionRadius: !type:Single
         11.0
   - type: Sentry
-    homingShots: false
     deployDelay: 2
     upgrades: null
     startingMagazine: RMCMagazineSentryFireSmoke
@@ -592,4 +605,5 @@
     - CLF
   - type: UserIFF
     factions:
+    - FactionCLF
     - FactionSurvivor

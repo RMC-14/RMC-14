@@ -67,7 +67,6 @@ public sealed class SentrySystem : EntitySystem
         SubscribeLocalEvent<SentryComponent, UseInHandEvent>(OnSentryUseInHand);
         SubscribeLocalEvent<SentryComponent, SentryDeployDoAfterEvent>(OnSentryDeployDoAfter);
         SubscribeLocalEvent<SentryComponent, ActivateInWorldEvent>(OnSentryActivateInWorld);
-        SubscribeLocalEvent<SentryComponent, AmmoShotEvent>(OnSentryAmmoShot);
         SubscribeLocalEvent<SentryComponent, AttemptShootEvent>(OnSentryAttemptShoot);
         SubscribeLocalEvent<SentryComponent, InteractUsingEvent>(OnSentryInteractUsing);
         SubscribeLocalEvent<SentryComponent, SentryInsertMagazineDoAfterEvent>(OnSentryInsertMagazineDoAfter);
@@ -145,7 +144,7 @@ public sealed class SentrySystem : EntitySystem
     private void OnSentryActivateInWorld(Entity<SentryComponent> sentry, ref ActivateInWorldEvent args)
     {
         ref var mode = ref sentry.Comp.Mode;
-        if (mode == SentryMode.Item)
+        if (mode == SentryMode.Item || sentry.Comp.IsLocked)
             return;
 
         args.Handled = true;
@@ -188,24 +187,11 @@ public sealed class SentrySystem : EntitySystem
             args.Cancelled = true;
     }
 
-    private void OnSentryAmmoShot(Entity<SentryComponent> ent, ref AmmoShotEvent args)
-    {
-        if(!ent.Comp.HomingShots)
-            return;
-
-        //Make projectiles shot from a sentry gun homing.
-        foreach (var projectile in args.FiredProjectiles)
-        {
-            if(!TryComp(projectile, out TargetedProjectileComponent? targeted))
-                return;
-
-            var homing = EnsureComp<HomingProjectileComponent>(projectile);
-            homing.Target = targeted.Target;
-        }
-    }
-
     private void OnSentryInteractUsing(Entity<SentryComponent> sentry, ref InteractUsingEvent args)
     {
+        if (sentry.Comp.IsLocked)
+            return;
+
         var user = args.User;
         var used = args.Used;
         if (TryComp(used, out SentryUpgradeItemComponent? upgrade))
@@ -328,8 +314,11 @@ public sealed class SentrySystem : EntitySystem
                 args.PushMarkup(rot);
             }
 
-            var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
-            args.PushMarkup(msg);
+            if (!ent.Comp.IsLocked)
+            {
+                var msg = Loc.GetString("rmc-sentry-disassembled-with-multitool");
+                args.PushMarkup(msg);
+            }
 
             if (ent.Comp.Mode == SentryMode.Off)
             {

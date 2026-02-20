@@ -1,0 +1,69 @@
+- type: entityTable
+  id: RMCClosetRCMTroopSgtFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCLaserDesignatorPVE
+    - id: RMCBackpackAmmoRCM
+    - id: CMAdvFirstAidKit
+    - id: RMCBoxMagazineRifleL90Drum
+    - id: RMCArmorWebbingDrum
+
+- type: entityTable
+  id: RMCClosetRCMSectionLeaderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCLaserDesignatorPVE
+    - id: RMCWhistle
+    - id: RMCBackpackRTOTSE
+
+- type: entityTable
+  id: RMCClosetRCMGPMGFill
+  table: !type:AllSelector
+    children:
+    - id: RMCSmartGunRCMPVE
+    - id: RMCPowerCellSmartgun
+    - id: RMCPVEArmorCaseRoyalHarness
+    - id: RMCMagazineSmartGunHT
+      amount: 3
+    - id: RMCArmorWebbingDrum
+    - id: RMCGlassesSmartGunSight
+
+- type: entityTable
+  id: RMCClosetRCMFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalBeret
+    - id: RMCJumpsuitMarineRoyalPVE
+    - id: RMCBootsRoyalFilled
+    - id: RMCHeadsetRoyalMarinePVE
+
+- type: entityTable
+  id: RMCClosetRCMTeamLeaderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCLaserDesignatorPVE
+    - id: RMCWhistle
+    - id: RMCBackpackRTOTSE
+
+- type: entityTable
+  id: RMCClosetRCMTroopCommanderFill
+  table: !type:AllSelector
+    children:
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCLaserDesignatorPVE
+    - id: RMCWhistle
+    - id: RMCBeltHolsterPistolRCM
+    - id: RMCPVEArmorCaseRoyalLight
+    - id: RMCBackpackRTOTSE
+
+- type: entityTable
+  id: RMCClosetRCMSapperFill
+  table: !type:AllSelector
+    children:
+    - id: RMCBoxShotgunBuckshot
+      amount: 4
+    - id: RMCWeldingGoggles
+      amount: 2
