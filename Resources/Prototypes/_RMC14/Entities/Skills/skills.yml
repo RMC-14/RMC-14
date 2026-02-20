@@ -171,3 +171,9 @@
   id: RMCSkillVehicles
   name: Vehicles
   categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent: RMCSkillBase
+  id: RMCSkillGrenadeStorage
+  name: Grenade Storage
+  categories: [ HideSpawnMenu ]

@@ -36,6 +36,7 @@
         RMCSkillFirearms: 1
         RMCSkillFireman: 1
         RMCSkillPowerLoader: 2
+        RMCSkillGrenadeStorage: 1
     - type: CMVendorUser
       id: CMCargoTech
     - type: JobPrefix

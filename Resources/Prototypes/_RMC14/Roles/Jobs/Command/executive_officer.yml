@@ -44,6 +44,7 @@
         RMCSkillPowerLoader: 2
         RMCSkillSurgery: 1
         RMCSkillVehicles: 1
+        RMCSkillGrenadeStorage: 1
     - type: MarineOrders
     - type: CMVendorUser
       id: CMExecutiveOfficer

@@ -66,6 +66,7 @@
         RMCSkillResearch: 1
         RMCSkillSurgery: 2
         RMCSkillVehicles: 2
+        RMCSkillGrenadeStorage: 1
     - type: MarineOrders
     - type: CMVendorUser
       id: CMSeniorEnlistedAdvisor
