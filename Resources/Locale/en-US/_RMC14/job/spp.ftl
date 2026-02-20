@@ -78,3 +78,18 @@ rmc-job-name-spp-squadlead = Squad Lead
 rmc-job-prefix-spp-squadlead = SL
 rmc-ghost-name-spp-squadlead = SPP Squad Lead
 rmc-job-description-spp-squadlead = Follow the section sergeant's orders and command your squad. 
+
+rmc-job-name-spp-so= Staff Officer
+rmc-job-prefix-spp-so = SO
+rmc-ghost-name-spp-so= SPP SO
+rmc-job-description-spp-so = A Staff Officer for the SPP's military. You answer directly to the XO and CO.
+
+rmc-job-name-spp-xo= Executive Officer
+rmc-job-prefix-spp-xo = XO
+rmc-ghost-name-spp-xo= SPP XO
+rmc-job-description-spp-xo = A Executive officer for the SPP's military. You answer directly to the CO.
+
+rmc-job-name-spp-co= Commanding Officer
+rmc-job-prefix-spp-co = CO
+rmc-ghost-name-spp-co= SPP CO
+rmc-job-description-spp-co = The commanding officer of an SPP unit, you answer directly to SPP high command.
