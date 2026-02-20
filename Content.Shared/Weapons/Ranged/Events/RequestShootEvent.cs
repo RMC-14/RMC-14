@@ -13,6 +13,11 @@ public sealed class RequestShootEvent : EntityEventArgs
     public NetEntity Gun;
     public NetCoordinates Coordinates;
     public NetEntity? Target;
+    /// <summary>
+    /// If the client wants to continuously shoot.
+    /// If true, the gun will continue firing until a stop event is sent from the client.
+    /// </summary>
+    public bool Continuous;
     public List<int>? Shot;
     public GameTick LastRealTick;
 }
