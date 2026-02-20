@@ -114,6 +114,7 @@
   - type: Tag
     tags:
     - RMCWeaponRifleType71PVE
+
 - type: entity
   parent: RMCWeaponRifleType71
   name: Type 71-F assault rifle

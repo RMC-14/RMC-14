@@ -930,7 +930,7 @@
   - type: StorageFill
     contents:
     - id: RMCMagazinePistolT73
-      amount: 5
+      amount: 6
     - id: RMCWeaponPistolT73
 
 - type: entity
@@ -943,6 +943,17 @@
     - id: RMCWeaponPistolNPZ92
     - id: RMCMagazinePistolNP92
       amount: 5
+
+- type: entity
+  parent: RMCBeltHolsterPistolSPP
+  id: RMCBeltHolsterPistolSPPNP92
+  suffix: Filled, NP92
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolNP92
+      amount: 6
+    - id: RMCWeaponPistolNP92
 
 - type: entity
   parent: RMCBeltHolsterPistol
