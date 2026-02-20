@@ -269,7 +269,7 @@
 - type: entity
   id: ActionXenoHeadbutt
   parent: ActionXenoBase
-  name: Headbutt (10) # TODO RMC14 proper plasma costs
+  name: Headbutt
   description: Charge towards the targeted enemy and push back the first enemy hit, piercing armor slightly. Does less damage but has more knockback when crest is lowered.
   components:
   - type: Action
@@ -277,15 +277,17 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: headbutt
-    useDelay: 6
+    useDelay: 4
   - type: TargetAction
     range: 3.5
     deselectOnMiss: false
   - type: EntityTargetAction
     event: !type:XenoHeadbuttActionEvent
+    whitelist:
+      components:
+      - Marine
+      - Xeno
   - type: XenoOffensiveAction
-  - type: XenoActionPlasma
-    cost: 10
 
 - type: entity
   parent: CMGuidebookActionXenoBase
@@ -298,7 +300,7 @@
 - type: entity
   id: ActionXenoTailSweep
   parent: ActionXenoBase
-  name: Tail Sweep (10) # TODO RMC14 proper plasma costs
+  name: Tail Sweep (10) # See XenoTailSweepComponent.cs for cost
   description: Knock down any enemies close to you.
   components:
   - type: Action
@@ -306,7 +308,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: tail_sweep
-    useDelay: 15
+    useDelay: 11
   - type: InstantAction
     event: !type:XenoTailSweepActionEvent
   - type: RMCDazeableAction
