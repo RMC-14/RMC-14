@@ -582,9 +582,22 @@
   - type: RMCBulkyArmor
     isBulky: false
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/press.rsi
+    sprite: Resources/Textures/_RMC14/Objects/Clothing/OuterClothing/Armor/press/press.rsi
   - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
     camouflageVariations: { }
+
+- type: entity
+  parent: CMArmorPress
+  id: RMCArmorPressBlue
+  name: press body armor
+  description: Body armor used by war correspondents in battles and wars across the universe.
+  components:
+  - type: RMCBulkyArmor
+    isBulky: false
+  - type: Sprite
+    sprite: Resources/Textures/_RMC14/Objects/Clothing/OuterClothing/Armor/press/press-armor-blue.rsi
+  - type: ItemCamouflage # this is needed, otherwise it looks like M3MediumArmor
+    camouflageVariations: { }    
 
 - type: Tag
   id: RMCScoutArmor

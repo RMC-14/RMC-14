@@ -319,9 +319,25 @@
   description: A special helmet variant worn by the press.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Helmets/press.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press.rsi
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: RMCBulkyArmor
+    isBulky: false
+
+# Press
+- type: entity
+  parent: ArmorHelmetM10
+  id: RMCArmorHelmetPressBlue
+  name: press helmet
+  description: A special helmet variant worn by the press.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press-helmet-blue.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Helmets/press/press-helmet-blue.rsi
   - type: ItemCamouflage
     camouflageVariations: { }
   - type: RMCBulkyArmor
