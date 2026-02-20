@@ -663,7 +663,7 @@
 
 # Dinnerware
 - type: entity
-  parent: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBaseAnchorable
   id: CMVendorDinnerware
   name: Dinnerware
   description: A kitchen and restaurant equipment vendor.

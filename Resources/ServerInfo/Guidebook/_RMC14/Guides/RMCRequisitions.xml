@@ -18,12 +18,12 @@ You are authorized to deny any request that is excessive, unreasonable, or inten
 </Box>
 You, Technician, are in control. Take your seat and get comfortable — but stay alert. You command the shutters using the orange control button. Maintain order and efficiency at all times.
 <Box>
-  <GuideEntityEmbed Entity="ColMarTechCargoAttachments" Caption="attachements vendor"/>
-  <GuideEntityEmbed Entity="ColMarTechCargoGuns" Caption="armaments vendor"/>
+  <GuideEntityEmbed Entity="RMCColMarTechCargoAttachments" Caption="attachements vendor"/>
+  <GuideEntityEmbed Entity="RMCColMarTechCargoGuns" Caption="armaments vendor"/>
 </Box>
 <Box>
-  <GuideEntityEmbed Entity="ColMarTechCargoAmmo" Caption="munitions vendor"/>
-  <GuideEntityEmbed Entity="ColMarTechCargoUniform" Caption="surplus vendor"/>
+  <GuideEntityEmbed Entity="RMCColMarTechCargoAmmo" Caption="munitions vendor"/>
+  <GuideEntityEmbed Entity="RMCColMarTechCargoUniform" Caption="surplus vendor"/>
 </Box>
 You have four supply vendors at your disposal: [bold]Attachments, Armaments, Munitions, and Surplus[/bold]. Use them wisely to equip our forces. Precision, speed, and discipline are expected.
 
@@ -122,7 +122,7 @@ Line's secured. Crates are packed. Supplies running low. Time to move, Techie. C
 
 Requisitions are tapped. Vendors are dry. Time to relocate to the Squad Preparation Room—that's your new ammo-packing station. Listen up, Techie: Marine ammo vendors are off-limits. You'll need the [color=#FFA500]Logistics Officer[/color] to issue all packing supplies. Proceed accordingly.
 <Box>
-  <GuideEntityEmbed Entity="ColMarTechEquipment" Caption="Weapons rack"/>
+  <GuideEntityEmbed Entity="RMCColMarTechEquipment" Caption="Weapons rack"/>
 </Box>
 Now the ammunition is dispensed—let's get to packing, Technician. Let's make a box. Press ([color=yellow][keybind="g"][/color]) to open the build menu and use the search bar to find the boxes you will craft. There are three basic boxes you will pack: M54C, SPR, and M63. Press ([color=yellow][keybind="z"][/color]) to place it down, open it, and ([color=yellow][keybind="alt left click"][/color]) to pick it up. Now simply ([color=yellow][keybind="left click"][/color]) on the boxes with a magazine in hand to pack.
 <Box>

@@ -1,8 +1,8 @@
 # REQUISITIONS
 - type: entity
   abstract: true
-  parent: ColMarTechBase
-  id: ColMarTechCargo
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCargo
   components:
   - type: AccessReader
     access:
@@ -16,8 +16,8 @@
 
 # ARMAMENTS VENDOR
 - type: entity
-  parent: ColMarTechCargo
-  id: ColMarTechCargoGuns
+  parent: RMCColMarTechCargo
+  id: RMCColMarTechCargoGuns
   name: ASRS automated armaments vendor
   description: An automated supply rack hooked up to a big storage of various firearms, explosives, load carrying equipment, and other miscellaneous items. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
@@ -350,8 +350,8 @@
 
 #AMMUNITION VENDOR
 - type: entity
-  parent: ColMarTechCargo
-  id: ColMarTechCargoAmmo
+  parent: RMCColMarTechCargo
+  id: RMCColMarTechCargoAmmo
   name: ASRS automated munition vendor
   description: An automated supply rack hooked up to a big storage of various ammunition types. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
@@ -582,8 +582,8 @@
 
 #ATTACHMENTS VENDOR
 - type: entity
-  parent: ColMarTechCargo
-  id: ColMarTechCargoAttachments
+  parent: RMCColMarTechCargo
+  id: RMCColMarTechCargoAttachments
   name: AEGIS Armaments attachments vendor
   description: An automated supply rack hooked up to a big storage of weapons attachments. Can be accessed by the Logistics Officer and Requisitions Technicians.
   components:
@@ -683,8 +683,8 @@
 
 #UNIFORM VENDOR
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCargoUniform
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCargoUniform
   name: ASRS surplus uniform vendor
   description: An automated supply rack hooked up to a big storage of standard marine uniforms. Can be accessed by the Logistics Officer and Requisitions Technicians.
   suffix: Requisitions

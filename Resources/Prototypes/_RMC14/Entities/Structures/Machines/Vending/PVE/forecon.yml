@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechSurplus
+  parent: RMCColMarTechSurplus
   id: RMCColMarTechSurplusFORECONPVE
   suffix: PVE, FORECON
   components:

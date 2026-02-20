@@ -1,8 +1,8 @@
 # SMART GUN OPERATOR
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSGGear
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSGGear
   name: ColMarTech squad smart gun operator gear rack
   description: An automated gear rack for Squad Smart Gun Operators.
   components:
@@ -122,8 +122,8 @@
         points: 5
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechSGEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechSGEquipment
   name: ColMarTech squad Smart Gun equipment rack
   description: An automated rack hooked up to a colossal storage of Squad Smart Gun standard-issue equipment.
   components:

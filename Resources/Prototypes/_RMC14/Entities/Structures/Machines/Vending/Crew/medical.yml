@@ -1,8 +1,8 @@
 # MEDICAL
 
 - type: entity
-  parent: ColMarTechBase
-  id: ColMarTechCrewMedicalEquipment
+  parent: RMCColMarTechBase
+  id: RMCColMarTechCrewMedicalEquipment
   name: ColMarTech medical equipment rack
   description: An automated equipment vendor for the Medical Department.
   components:

@@ -1,5 +1,5 @@
 - type: entity
-  parent: ColMarTechSurplus
+  parent: RMCColMarTechSurplus
   id: RMCColMarTechSurplusPVE
   suffix: PVE, Marine
   components:
@@ -181,7 +181,7 @@
         amount: 15
 
 - type: entity
-  parent: ColMarTechUtilities
+  parent: RMCColMarTechUtilities
   id: RMCColMarTechUtilitiesPVE
   suffix: PVE, Marine
   components:

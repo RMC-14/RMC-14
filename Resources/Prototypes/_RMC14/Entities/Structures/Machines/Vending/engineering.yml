@@ -2,7 +2,7 @@
 
 # Tools
 - type: entity
-  parent: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBaseAnchorable
   id: CMVendorTool
   name: tool storage machine
   description: A large storage machine containing various tools and devices for general repair.
@@ -190,7 +190,7 @@
 
 # Science
 - type: entity
-  parent: ColMarTechBaseAnchorable
+  parent: RMCColMarTechBaseAnchorable
   id: CMVendorScience
   name: We-Ya SciVend
   description: Vendor containing basic equipment for your experiments.
