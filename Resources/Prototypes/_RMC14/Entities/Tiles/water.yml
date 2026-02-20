@@ -93,3 +93,11 @@
   components:
   - type: Sprite
     color: "#990000"
+
+- type: entity
+  parent: CMFloorShallowWaterEntity
+  id: RMCFloorShallowWaterMuddy
+  suffix: Muddy
+  components:
+  - type: Sprite
+    color: "#A37E51"

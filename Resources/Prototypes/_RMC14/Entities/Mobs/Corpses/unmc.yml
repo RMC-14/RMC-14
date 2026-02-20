@@ -1,0 +1,20 @@
+﻿# Rifleman
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseUNMCRifleman
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseUNMCRifleman ]
+  - type: Rank
+    rank: RMCRankPrivate
+
+- type: startingGear
+  id: RMCGearCorpseUNMCRifleman
+  equipment:
+    jumpsuit: JumpsuitMarine
+    shoes: CMBootsBlackFilled
+    head: ArmorHelmetM10
+    outerClothing: RMCArmorM3MediumVariants
+    gloves: CMHandsBlackMarine
+    id: CMDogtagRifleman
+    ears: CMHeadsetAlpha

@@ -806,3 +806,123 @@
   components:
   - type: Sprite
     state: 9
+
+- type: entity
+  parent: CMSemioticBase
+  id: RMCSemioticWoodFrontline
+  name: frontline sign
+  description: "A wooden sign pointing towards the frontline."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Wallmounts/trench_signs.rsi
+    state: trench_sign_frontline
+    noRot: true
+    drawdepth: OverMobs
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodAmmo
+  name: ammo storage sign
+  description: "A wooden sign pointing towards an ammo storage depot."
+  components:
+  - type: Sprite
+    state: trench_sign_ammo
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodBunks
+  name: bunks sign
+  description: "A wooden sign indicating the presence of sleeping quarters."
+  components:
+  - type: Sprite
+    state: trench_sign_bunks
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodCommand
+  name: command sign
+  description: "A wooden sign pointing towards a nearby command centre."
+  components:
+  - type: Sprite
+    state: trench_sign_cmd
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodMortarPit
+  name: mortar pit sign
+  description: "A wooden sign indicating the presence of a Mortar pit."
+  components:
+  - type: Sprite
+    state: trench_sign_mortar
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodLMGNest
+  name: LMG nest sign
+  description: "A wooden sign indicating the presence of a light machine-gun nest."
+  components:
+  - type: Sprite
+    state: trench_sign_lmg
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodLMGBunker
+  name: LMG bunker sign
+  description: "A wooden sign indicating the presence of a highly-fortified machine-gun bunker."
+  components:
+  - type: Sprite
+    state: trench_sign_lmg_bunker
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodLZ
+  name: LZ sign
+  description: "A wooden sign pointing towards a nearby landing zone."
+  components:
+  - type: Sprite
+    state: trench_sign_lz
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodMed
+  name: field hospital sign
+  description: "A wooden sign pointing towards a nearby field hospital."
+  components:
+  - type: Sprite
+    state: trench_sign_med
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodMess
+  name: mess sign
+  description: "A wooden sign pointing towards a nearby mess."
+  components:
+  - type: Sprite
+    state: trench_sign_mess
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodStairs
+  name: stairs sign
+  description: "A wooden sign pointing towards a nearby flight of stairs."
+  components:
+  - type: Sprite
+    state: trench_sign_stairs
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodStorage
+  name: storage sign
+  description: "A wooden sign pointing towards a nearby storage area."
+  components:
+  - type: Sprite
+    state: trench_sign_strg
+
+- type: entity
+  parent: RMCSemioticWoodFrontline
+  id: RMCSemioticWoodWC
+  name: WC sign
+  description: "A wooden sign indicating a nearby Water Closet, more commonly known as a latrine or washroom."
+  components:
+  - type: Sprite
+    state: trench_sign_wc
