@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Grayscale recolor & Inhands done by UnicornOnLSD (Git). Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/tree/master/icons/mob/humans/onmob/clothing/helmet_garb/visors.dmi, palette taken from Taken from CM-SS13 at https://github.com/cmss13-devs/cmss13/tree/master/icons/mob/humans/onmob/clothing/helmet_garb/helmet_covers.dmi.",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "base"
+    },
+    {
+      "name": "camo"
+    },
+    {
+      "name": "helmet-color",
+      "directions": 4
+    },
+    {
+      "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left-color",
+      "directions": 4
+    },
+    {
+      "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-color",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right",
+      "directions": 4
+    }
+  ]
+}
