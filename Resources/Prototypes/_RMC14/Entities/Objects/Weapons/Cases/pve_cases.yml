@@ -86,7 +86,7 @@
       - RMCMagazineRifleM5SPRHVP
   - type: StorageFill
     contents:
-    - id: WeaponRifleM5SPR
+    - id: RMCWeaponRifleM5SPR
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP
@@ -144,7 +144,7 @@
       - RMCMagazineRifleM5SPRHVP
   - type: StorageFill
     contents:
-    - id: WeaponRifleM5SPR2
+    - id: RMCWeaponRifleM5SPR2
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP
     - id: RMCMagazineRifleM5SPRHVP

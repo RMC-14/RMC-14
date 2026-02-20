@@ -1,6 +1,6 @@
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleMAR40
+  id: RMCWeaponRifleMAR40
   name: MAR-40 battle rifle
   description: A cheap, reliable assault rifle chambered in 7.62x39mm. Commonly found in the hands of criminals or mercenaries, or in the hands of the SPP or CLF.
   suffix: Filled
@@ -208,11 +208,11 @@
     - Cartridge
     - RMCCartridgeRifleMAR40
   - type: CartridgeAmmo
-    proto: BulletRifleMAR40
+    proto: RMCBulletRifleMAR40
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifleMAR40
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifleMAR40
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile

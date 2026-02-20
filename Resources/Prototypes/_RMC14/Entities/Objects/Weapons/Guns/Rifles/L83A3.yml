@@ -335,7 +335,7 @@
     - Cartridge
     - RMCCartridgeRifleL83AHEAP
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mmHEAP
+    proto: RMCBulletRifle556x45mmHEAP
 
 - type: entity
   parent: CMBaseCartridgeRifle
@@ -348,11 +348,11 @@
     - Cartridge
     - RMCCartridgeRifleL83AIncendiary
   - type: CartridgeAmmo
-    proto: BulletRifle556x45mmIncendiary
+    proto: RMCBulletRifle556x45mmIncendiary
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle556x45mmHEAP
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifle556x45mmHEAP
   components:
   - type: Projectile
     damage:
@@ -362,8 +362,8 @@
     amount: 50
 
 - type: entity
-  parent: BulletRifle10x24mm
-  id: BulletRifle556x45mmIncendiary
+  parent: RMCBulletRifle10x24mm
+  id: RMCBulletRifle556x45mmIncendiary
   components:
   - type: Projectile
     damage:
@@ -396,7 +396,7 @@
 
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL83A3F
+  id: RMCWeaponRifleL83A3F
   name: L83A3F rifle
   description: A variant of the L83A3 with a heavily modified firing mechanism, which grants it a burst-fire option.
   suffix: Filled
@@ -532,7 +532,7 @@
       rmc-aslot-underbarrel: 0.3, -0.30
 
 - type: entity
-  parent: WeaponRifleL83A3F
+  parent: RMCWeaponRifleL83A3F
   id: RMCWeaponRifleL83A3FStripped
   suffix: Stripped
   components:
@@ -597,7 +597,7 @@
 # Marksman L83A3 Variant will call it L83A3M (M for Marksman)
 - type: entity
   parent: [ CMBaseWeaponRifle, RMCBaseWeaponMagazineVisuals ]
-  id: WeaponRifleL83A3M
+  id: RMCWeaponRifleL83A3M
   name: L83A3M rifle
   description: The L83A3M Battle Rifle is a modification sold to the Three Suns Empire. This particular version of the weapon has been given a custom stock and variable zoom scope. Reliable and deadly.
   suffix: Filled
