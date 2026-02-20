@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
@@ -22,6 +24,9 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class RMCVehicleWeaponsSystem : EntitySystem
 {
+    private const string HardpointSelectActionId = "ActionRMCVehicleSelectHardpoint";
+
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
@@ -35,6 +40,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {
@@ -47,6 +53,8 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsSelectMessage>(OnWeaponsSelect);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsStabilizationMessage>(OnWeaponsStabilization);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsAutoModeMessage>(OnWeaponsAutoMode);
+        SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ComponentShutdown>(OnOperatorShutdown);
+        SubscribeLocalEvent<VehicleWeaponsOperatorComponent, RMCVehicleHardpointSelectActionEvent>(OnHardpointActionSelect);
 
         SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
 
@@ -84,7 +92,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         var operatorComp = EnsureComp<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
         operatorComp.Vehicle = vehicle;
+        operatorComp.HardpointActions.Clear();
         Dirty(args.Buckle.Owner, operatorComp);
+
+        RefreshHardpointActions(args.Buckle.Owner, vehicleUid, weapons, operatorComp);
 
         if (HasComp<VehicleEnterComponent>(vehicleUid))
         {
@@ -92,7 +103,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             _viewToggle.EnableViewToggle(args.Buckle.Owner, vehicleUid, ent.Owner, insideTarget: null, isOutside: true);
         }
 
-        UpdateArtilleryView(args.Buckle.Owner, vehicleUid);
+        UpdateGunnerView(args.Buckle.Owner, vehicleUid);
 
         _ui.OpenUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateWeaponsUi(ent.Owner, vehicleUid, weapons);
@@ -122,9 +133,12 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             UpdateWeaponsUi(ent.Owner, vehicleUid, otherWeapons);
         }
 
+        if (TryComp(args.Buckle.Owner, out VehicleWeaponsOperatorComponent? operatorComp))
+            ClearHardpointActions(args.Buckle.Owner, operatorComp);
+
         RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
         _ui.CloseUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
-        UpdateArtilleryView(args.Buckle.Owner, vehicleUid, removeOnly: true);
+        UpdateGunnerView(args.Buckle.Owner, vehicleUid, removeOnly: true);
 
         if (TryComp(args.Buckle.Owner, out EyeComponent? eye) && eye.Target == vehicleUid)
             _eye.SetTarget(args.Buckle.Owner, null, eye);
@@ -161,65 +175,108 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
 
         if (args.Actor == default || !Exists(args.Actor))
             return;
+        TrySelectHardpoint(ent.Owner, args.Actor, args.SlotId);
+    }
 
-        if (!_vehicleSystem.TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle == null)
+    private void OnOperatorShutdown(Entity<VehicleWeaponsOperatorComponent> ent, ref ComponentShutdown args)
+    {
+        if (_net.IsClient)
             return;
+
+        ClearHardpointActions(ent.Owner, ent.Comp);
+    }
+
+    private void OnHardpointActionSelect(Entity<VehicleWeaponsOperatorComponent> ent, ref RMCVehicleHardpointSelectActionEvent args)
+    {
+        if (_net.IsClient || args.Handled)
+            return;
+
+        if (args.Performer == default || !Exists(args.Performer) || args.Performer != ent.Owner)
+            return;
+
+        if (!TryComp(args.Performer, out BuckleComponent? buckle) ||
+            buckle.BuckledTo is not { } seat ||
+            !HasComp<VehicleWeaponsSeatComponent>(seat))
+        {
+            return;
+        }
+
+        if (!TryComp(args.Action, out RMCVehicleHardpointActionComponent? hardpointAction))
+            return;
+
+        if (TrySelectHardpoint(seat, args.Performer, hardpointAction.SlotId))
+            args.Handled = true;
+    }
+
+    private bool TrySelectHardpoint(EntityUid seat, EntityUid actor, string? slotId)
+    {
+        if (_net.IsClient)
+            return false;
+
+        if (!_vehicleSystem.TryGetVehicleFromInterior(seat, out var vehicle) || vehicle == null)
+            return false;
 
         var vehicleUid = vehicle.Value;
-        if (!TryComp(vehicleUid, out RMCVehicleWeaponsComponent? weapons) || weapons.Operator != args.Actor)
-            return;
+        if (!TryComp(vehicleUid, out RMCVehicleWeaponsComponent? weapons) || weapons.Operator != actor)
+            return false;
 
-        if (!TryComp(args.Actor, out BuckleComponent? buckle) || buckle.BuckledTo != ent.Owner)
-            return;
+        if (!TryComp(actor, out BuckleComponent? buckle) || buckle.BuckledTo != seat)
+            return false;
 
-        if (TryComp(args.Actor, out VehiclePortGunOperatorComponent? portGunOperator) &&
+        if (TryComp(actor, out VehiclePortGunOperatorComponent? portGunOperator) &&
             portGunOperator.Gun != null)
         {
-            _popup.PopupClient(Loc.GetString("rmc-vehicle-portgun-active"), ent, args.Actor);
-            return;
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-portgun-active"), seat, actor);
+            return true;
         }
 
         if (!TryComp(vehicleUid, out RMCHardpointSlotsComponent? hardpoints) ||
             !TryComp(vehicleUid, out ItemSlotsComponent? itemSlots))
         {
-            return;
+            return false;
         }
 
-        if (string.IsNullOrWhiteSpace(args.SlotId) ||
-            !TryGetSlotItem(vehicleUid, args.SlotId, itemSlots, out var item))
+        if (!TryComp(actor, out VehicleWeaponsOperatorComponent? operatorComp))
+            return false;
+
+        if (string.IsNullOrWhiteSpace(slotId) ||
+            !TryGetSlotItem(vehicleUid, slotId, itemSlots, out var item))
         {
-            ClearOperatorSelections(weapons, args.Actor);
+            ClearOperatorSelections(weapons, actor);
             weapons.SelectedWeapon = null;
             Dirty(vehicleUid, weapons);
-            UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
-            return;
+            UpdateHardpointActionStates(actor, weapons, operatorComp);
+            UpdateWeaponsUi(seat, vehicleUid, weapons, hardpoints, itemSlots, actor);
+            return true;
         }
+
         if (!HasComp<VehicleTurretComponent>(item) || !HasComp<GunComponent>(item))
         {
-            ClearOperatorSelections(weapons, args.Actor);
+            ClearOperatorSelections(weapons, actor);
             weapons.SelectedWeapon = null;
             Dirty(vehicleUid, weapons);
-            UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
-            return;
+            UpdateHardpointActionStates(actor, weapons, operatorComp);
+            UpdateWeaponsUi(seat, vehicleUid, weapons, hardpoints, itemSlots, actor);
+            return true;
         }
 
-        if (weapons.HardpointOperators.TryGetValue(args.SlotId, out var currentOperator) &&
-            currentOperator != args.Actor)
+        if (weapons.HardpointOperators.TryGetValue(slotId, out var currentOperator) &&
+            currentOperator != actor)
         {
-            _popup.PopupClient(Loc.GetString("rmc-vehicle-weapons-ui-hardpoint-in-use", ("operator", currentOperator)), ent, args.Actor);
-            UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
-            return;
+            _popup.PopupClient(Loc.GetString("rmc-vehicle-weapons-ui-hardpoint-in-use", ("operator", currentOperator)), seat, actor);
+            UpdateWeaponsUi(seat, vehicleUid, weapons, hardpoints, itemSlots, actor);
+            return true;
         }
 
-        var playSelectSound = !string.IsNullOrWhiteSpace(args.SlotId) &&
-                              (!weapons.OperatorSelections.TryGetValue(args.Actor, out var priorSlot) ||
-                               !string.Equals(priorSlot, args.SlotId, StringComparison.OrdinalIgnoreCase));
+        var playSelectSound = !string.IsNullOrWhiteSpace(slotId) &&
+                              (!weapons.OperatorSelections.TryGetValue(actor, out var priorSlot) ||
+                               !string.Equals(priorSlot, slotId, StringComparison.OrdinalIgnoreCase));
 
-        if (weapons.OperatorSelections.TryGetValue(args.Actor, out var existingSlot) &&
-            string.Equals(existingSlot, args.SlotId, StringComparison.OrdinalIgnoreCase))
+        if (weapons.OperatorSelections.TryGetValue(actor, out var existingSlot) &&
+            string.Equals(existingSlot, slotId, StringComparison.OrdinalIgnoreCase))
         {
-            weapons.OperatorSelections.Remove(args.Actor);
-            weapons.HardpointOperators.Remove(args.SlotId);
+            weapons.OperatorSelections.Remove(actor);
+            weapons.HardpointOperators.Remove(slotId);
             if (weapons.SelectedWeapon == item)
                 weapons.SelectedWeapon = null;
         }
@@ -228,20 +285,22 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             if (existingSlot != null)
                 weapons.HardpointOperators.Remove(existingSlot);
 
-            weapons.OperatorSelections[args.Actor] = args.SlotId;
-            weapons.HardpointOperators[args.SlotId] = args.Actor;
+            weapons.OperatorSelections[actor] = slotId;
+            weapons.HardpointOperators[slotId] = actor;
             weapons.SelectedWeapon = item;
 
             if (playSelectSound &&
                 TryComp(item, out GunSpinupComponent? spinup) &&
                 spinup.SelectSound != null)
             {
-                _audio.PlayPredicted(spinup.SelectSound, item, args.Actor);
+                _audio.PlayPredicted(spinup.SelectSound, item, actor);
             }
         }
 
         Dirty(vehicleUid, weapons);
-        UpdateWeaponsUi(ent.Owner, vehicleUid, weapons, hardpoints, itemSlots, args.Actor);
+        UpdateHardpointActionStates(actor, weapons, operatorComp);
+        UpdateWeaponsUi(seat, vehicleUid, weapons, hardpoints, itemSlots, actor);
+        return true;
     }
 
     private void OnWeaponsStabilization(Entity<VehicleWeaponsSeatComponent> ent, ref RMCVehicleWeaponsStabilizationMessage args)
@@ -354,21 +413,26 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             UpdateWeaponsUi(seat, args.Vehicle, weapons, hardpoints, itemSlots);
 
         if (weapons.Operator != null)
-            UpdateArtilleryView(weapons.Operator.Value, args.Vehicle);
+        {
+            if (TryComp(weapons.Operator.Value, out VehicleWeaponsOperatorComponent? operatorComp))
+                RefreshHardpointActions(weapons.Operator.Value, args.Vehicle, weapons, operatorComp, hardpoints, itemSlots);
+
+            UpdateGunnerView(weapons.Operator.Value, args.Vehicle);
+        }
     }
 
-    private void UpdateArtilleryView(EntityUid user, EntityUid vehicle, bool removeOnly = false)
+    private void UpdateGunnerView(EntityUid user, EntityUid vehicle, bool removeOnly = false)
     {
-        if (!removeOnly && TryComp(vehicle, out RMCVehicleArtilleryViewComponent? artillery) && artillery.PvsScale > 0f)
+        if (!removeOnly && TryComp(vehicle, out RMCVehicleGunnerViewComponent? gunnerView) && gunnerView.PvsScale > 0f)
         {
-            var view = EnsureComp<RMCVehicleArtilleryViewUserComponent>(user);
-            view.PvsScale = artillery.PvsScale;
+            var view = EnsureComp<RMCVehicleGunnerViewUserComponent>(user);
+            view.PvsScale = gunnerView.PvsScale;
             Dirty(user, view);
             _eyeSystem.UpdatePvsScale(user);
             return;
         }
 
-        if (RemCompDeferred<RMCVehicleArtilleryViewUserComponent>(user))
+        if (RemCompDeferred<RMCVehicleGunnerViewUserComponent>(user))
             _eyeSystem.UpdatePvsScale(user);
     }
 
@@ -674,6 +738,191 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorName,
                 operatorIsSelf));
         }
+    }
+
+    private readonly record struct HardpointActionSlot(string SlotId, EntityUid IconEntity, string DisplayName);
+
+    private void RefreshHardpointActions(
+        EntityUid user,
+        EntityUid vehicle,
+        RMCVehicleWeaponsComponent weapons,
+        VehicleWeaponsOperatorComponent? operatorComp = null,
+        RMCHardpointSlotsComponent? hardpoints = null,
+        ItemSlotsComponent? itemSlots = null)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!Resolve(user, ref operatorComp, logMissing: false))
+            return;
+
+        if (!Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
+        {
+            ClearHardpointActions(user, operatorComp);
+            return;
+        }
+
+        var desired = GetSelectableHardpointActionSlots(vehicle, user, weapons, hardpoints, itemSlots);
+        var desiredSlots = new HashSet<string>(desired.Select(slot => slot.SlotId));
+
+        foreach (var pair in operatorComp.HardpointActions.ToArray())
+        {
+            if (!desiredSlots.Contains(pair.Key) || !Exists(pair.Value))
+            {
+                RemoveAndDeleteHardpointAction(user, pair.Value);
+                operatorComp.HardpointActions.Remove(pair.Key);
+            }
+        }
+
+        for (var i = 0; i < desired.Count; i++)
+        {
+            var desiredSlot = desired[i];
+            if (operatorComp.HardpointActions.TryGetValue(desiredSlot.SlotId, out var existingAction) &&
+                Exists(existingAction) &&
+                TryComp(existingAction, out ActionComponent? existingActionComp) &&
+                existingActionComp.Container == desiredSlot.IconEntity)
+            {
+                if (TryComp(existingAction, out RMCVehicleHardpointActionComponent? existingHardpointAction))
+                {
+                    existingHardpointAction.SlotId = desiredSlot.SlotId;
+                    existingHardpointAction.SortOrder = i;
+                    Dirty(existingAction, existingHardpointAction);
+                }
+
+                _actions.SetTemporary((existingAction, existingActionComp), false);
+                _metaData.SetEntityName(existingAction, desiredSlot.DisplayName);
+
+                continue;
+            }
+
+            if (operatorComp.HardpointActions.TryGetValue(desiredSlot.SlotId, out var staleAction) &&
+                Exists(staleAction))
+            {
+                RemoveAndDeleteHardpointAction(user, staleAction);
+                operatorComp.HardpointActions.Remove(desiredSlot.SlotId);
+            }
+
+            EntityUid? action = null;
+            if (!_actions.AddAction(user, ref action, HardpointSelectActionId, container: desiredSlot.IconEntity) ||
+                action == null)
+            {
+                continue;
+            }
+
+            var hardpointAction = EnsureComp<RMCVehicleHardpointActionComponent>(action.Value);
+            hardpointAction.SlotId = desiredSlot.SlotId;
+            hardpointAction.SortOrder = i;
+            Dirty(action.Value, hardpointAction);
+            _actions.SetTemporary((action.Value, Comp<ActionComponent>(action.Value)), false);
+            _metaData.SetEntityName(action.Value, desiredSlot.DisplayName);
+            operatorComp.HardpointActions[desiredSlot.SlotId] = action.Value;
+        }
+
+        UpdateHardpointActionStates(user, weapons, operatorComp);
+    }
+
+    private List<HardpointActionSlot> GetSelectableHardpointActionSlots(
+        EntityUid vehicle,
+        EntityUid user,
+        RMCVehicleWeaponsComponent weapons,
+        RMCHardpointSlotsComponent hardpoints,
+        ItemSlotsComponent itemSlots)
+    {
+        var slots = new List<HardpointActionSlot>();
+
+        foreach (var slot in hardpoints.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) &&
+                itemSlot.HasItem &&
+                itemSlot.Item is { } installed &&
+                HasComp<VehicleTurretComponent>(installed) &&
+                HasComp<GunComponent>(installed) &&
+                (!weapons.HardpointOperators.TryGetValue(slot.Id, out var slotOperator) || slotOperator == user))
+            {
+                slots.Add(new HardpointActionSlot(slot.Id, installed, Name(installed)));
+            }
+
+            if (itemSlot?.Item is not { } turret ||
+                !TryComp(turret, out RMCHardpointSlotsComponent? turretSlots) ||
+                !TryComp(turret, out ItemSlotsComponent? turretItemSlots))
+            {
+                continue;
+            }
+
+            foreach (var turretSlot in turretSlots.Slots)
+            {
+                if (string.IsNullOrWhiteSpace(turretSlot.Id))
+                    continue;
+
+                var compositeId = RMCVehicleTurretSlotIds.Compose(slot.Id, turretSlot.Id);
+                if (!_itemSlots.TryGetSlot(turret, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
+                    !turretItemSlot.HasItem ||
+                    turretItemSlot.Item is not { } turretItem ||
+                    !HasComp<VehicleTurretComponent>(turretItem) ||
+                    !HasComp<GunComponent>(turretItem))
+                {
+                    continue;
+                }
+
+                if (weapons.HardpointOperators.TryGetValue(compositeId, out var turretOperator) &&
+                    turretOperator != user)
+                {
+                    continue;
+                }
+
+                slots.Add(new HardpointActionSlot(compositeId, turretItem, Name(turretItem)));
+            }
+        }
+
+        return slots;
+    }
+
+    private void UpdateHardpointActionStates(
+        EntityUid user,
+        RMCVehicleWeaponsComponent weapons,
+        VehicleWeaponsOperatorComponent? operatorComp = null)
+    {
+        if (_net.IsClient || !Resolve(user, ref operatorComp, logMissing: false))
+            return;
+
+        var selectedSlot = weapons.OperatorSelections.TryGetValue(user, out var slot)
+            ? slot
+            : null;
+
+        foreach (var pair in operatorComp.HardpointActions)
+        {
+            _actions.SetToggled(
+                pair.Value,
+                selectedSlot != null && string.Equals(pair.Key, selectedSlot, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    private void ClearHardpointActions(EntityUid user, VehicleWeaponsOperatorComponent? operatorComp = null)
+    {
+        if (_net.IsClient || !Resolve(user, ref operatorComp, logMissing: false))
+            return;
+
+        foreach (var action in operatorComp.HardpointActions.Values.ToArray())
+        {
+            if (Exists(action))
+                RemoveAndDeleteHardpointAction(user, action);
+        }
+
+        operatorComp.HardpointActions.Clear();
+    }
+
+    private void RemoveAndDeleteHardpointAction(EntityUid user, EntityUid action)
+    {
+        if (!Exists(action))
+            return;
+
+        _actions.RemoveAction(user, action);
+
+        if (Exists(action))
+            QueueDel(action);
     }
 
     private void ClearOperatorSelections(RMCVehicleWeaponsComponent weapons, EntityUid operatorUid)

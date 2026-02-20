@@ -27,20 +27,10 @@ public sealed class RMCVehicleHornSystem : EntitySystem
                     if (session?.AttachedEntity is not { } user)
                         return;
 
-                    EntityUid? vehicleUid = null;
-                    if (TryComp<VehicleOperatorComponent>(user, out var op) && op.Vehicle != null)
-                    {
-                        vehicleUid = op.Vehicle.Value;
-                    }
-                    else if (_rmcVehicles.TryGetVehicleFromInterior(user, out var interiorVehicle) && interiorVehicle != null)
-                    {
-                        vehicleUid = interiorVehicle.Value;
-                    }
-
-                    if (vehicleUid == null)
+                    if (!_rmcVehicles.TryResolveControlledVehicle(user, out var vehicleUid))
                         return;
 
-                    RaiseNetworkEvent(new RMCVehicleHornRequestEvent(GetNetEntity(vehicleUid.Value)));
+                    RaiseNetworkEvent(new RMCVehicleHornRequestEvent(GetNetEntity(vehicleUid)));
                 }, handle: false))
                 .Register<RMCVehicleHornSystem>();
         }

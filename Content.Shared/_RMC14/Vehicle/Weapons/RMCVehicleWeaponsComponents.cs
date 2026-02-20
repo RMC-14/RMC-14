@@ -29,6 +29,9 @@ public sealed partial class VehicleWeaponsOperatorComponent : Component
 {
     [DataField, AutoNetworkedField]
     public EntityUid? Vehicle;
+
+    [NonSerialized]
+    public Dictionary<string, EntityUid> HardpointActions = new();
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

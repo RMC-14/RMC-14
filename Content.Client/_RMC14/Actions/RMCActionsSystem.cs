@@ -4,6 +4,7 @@ using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions.Components;
 using Robust.Client.Player;
+using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 
 namespace Content.Client._RMC14.Actions;
@@ -32,10 +33,16 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         var actionPrototypes = new List<EntProtoId>();
         foreach (var action in actions)
         {
-            if (action == null || Prototype(action.Value) is not { } proto)
+            if (action is not { } actionUid || !Exists(actionUid))
                 continue;
 
-            actionPrototypes.Add(proto);
+            if (!TryComp(actionUid, out MetaDataComponent? meta) ||
+                meta.EntityPrototype is not { } prototype)
+            {
+                continue;
+            }
+
+            actionPrototypes.Add(prototype.ID);
         }
 
         var ev = new RMCActionOrderChangeEvent(actionPrototypes);
@@ -106,14 +113,14 @@ public sealed class RMCActionsSystem : SharedRMCActionsSystem
         var extraActions = new List<Entity<ActionComponent>>();
         foreach (var action in clientActions)
         {
-            var prototype = Prototype(action)?.ID;
-            if (prototype == null)
+            if (!TryComp(action, out MetaDataComponent? meta) ||
+                meta.EntityPrototype is not { } prototype)
             {
                 extraActions.Add(action);
                 continue;
             }
 
-            var index = order.IndexOf(prototype);
+            var index = order.IndexOf(prototype.ID);
             if (index < 0)
             {
                 extraActions.Add(action);

@@ -6,7 +6,9 @@
   - type: InstantAction
     event: !type:RMCVehicleToggleViewActionEvent
   - type: Action
-    itemIconStyle: BigItem
+    icon: Interface/Actions/eyeopen.png
+    iconOn: Interface/Actions/eyeclose.png
+    itemIconStyle: BigAction
 
 - type: entity
   id: ActionRMCVehicleDeploy
@@ -16,4 +18,17 @@
   - type: InstantAction
     event: !type:RMCVehicleDeployActionEvent
   - type: Action
+    itemIconStyle: BigItem
+
+- type: entity
+  id: ActionRMCVehicleSelectHardpoint
+  name: Select Hardpoint
+  description: Select this hardpoint for firing.
+  components:
+  - type: InstantAction
+    event: !type:RMCVehicleHardpointSelectActionEvent
+  - type: Action
+    autoPopulate: false
+    temporary: false
+    raiseOnUser: true
     itemIconStyle: BigItem

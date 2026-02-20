@@ -576,6 +576,29 @@ public sealed class RMCVehicleSystem : EntitySystem
         return true;
     }
 
+    public bool TryResolveControlledVehicle(EntityUid user, out EntityUid vehicle)
+    {
+        vehicle = EntityUid.Invalid;
+
+        if (TryComp<VehicleOperatorComponent>(user, out var op) &&
+            op.Vehicle is { } operatedVehicle &&
+            EntityManager.EntityExists(operatedVehicle))
+        {
+            vehicle = operatedVehicle;
+            return true;
+        }
+
+        if (!TryGetVehicleFromInterior(user, out var interiorVehicle) ||
+            interiorVehicle is not { } interiorVehicleUid ||
+            !EntityManager.EntityExists(interiorVehicleUid))
+        {
+            return false;
+        }
+
+        vehicle = interiorVehicleUid;
+        return true;
+    }
+
     public bool TryGetInteriorMapId(EntityUid vehicle, out MapId mapId)
     {
         mapId = MapId.Nullspace;

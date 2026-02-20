@@ -203,7 +203,7 @@ public sealed class RMCHardpointSystem : EntitySystem
                 hasSpeedMods = true;
             }
 
-            if (TryComp(item, out RMCVehicleArtilleryViewAttachmentComponent? viewMod))
+            if (TryComp(item, out RMCVehicleGunnerViewAttachmentComponent? viewMod))
             {
                 viewScale = Math.Max(viewScale, viewMod.PvsScale);
                 hasViewMods = true;
@@ -267,13 +267,13 @@ public sealed class RMCHardpointSystem : EntitySystem
 
         if (hasViewMods && viewScale > 0f)
         {
-            var view = EnsureComp<RMCVehicleArtilleryViewComponent>(vehicle);
+            var view = EnsureComp<RMCVehicleGunnerViewComponent>(vehicle);
             view.PvsScale = viewScale;
             Dirty(vehicle, view);
         }
         else
         {
-            RemCompDeferred<RMCVehicleArtilleryViewComponent>(vehicle);
+            RemCompDeferred<RMCVehicleGunnerViewComponent>(vehicle);
         }
 
         RefreshVehicleGunModifiers(vehicle, hardpoints, itemSlots);

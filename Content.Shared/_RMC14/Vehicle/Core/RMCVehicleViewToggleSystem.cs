@@ -33,8 +33,8 @@ public sealed class RMCVehicleViewToggleSystem : EntitySystem
 
         if (toggle.Action is { } actionUid && TryComp(actionUid, out ActionComponent? actionComp))
         {
-            actionComp.ItemIconStyle = ItemActionIconStyle.BigItem;
-            actionComp.EntIcon = outsideTarget;
+            actionComp.ItemIconStyle = ItemActionIconStyle.BigAction;
+            actionComp.EntIcon = null;
             Dirty(actionUid, actionComp);
         }
 
@@ -50,16 +50,28 @@ public sealed class RMCVehicleViewToggleSystem : EntitySystem
         if (toggle.Source != source)
             return;
 
-        if (toggle.Action != null)
-            _actions.RemoveAction(user, toggle.Action.Value);
+        if (toggle.Action is { } action &&
+            TryComp(action, out ActionComponent? actionComp) &&
+            actionComp.AttachedEntity == user)
+        {
+            _actions.RemoveAction(user, action);
+        }
+
+        toggle.Action = null;
 
         RemCompDeferred<RMCVehicleViewToggleComponent>(user);
     }
 
     private void OnToggleViewShutdown(Entity<RMCVehicleViewToggleComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.Action != null)
-            _actions.RemoveAction(ent.Owner, ent.Comp.Action.Value);
+        if (ent.Comp.Action is not { } action)
+            return;
+
+        if (TryComp(action, out ActionComponent? actionComp) &&
+            actionComp.AttachedEntity == ent.Owner)
+        {
+            _actions.RemoveAction(ent.Owner, action);
+        }
     }
 
     private void OnToggleViewAction(Entity<RMCVehicleViewToggleComponent> ent, ref RMCVehicleToggleViewActionEvent args)

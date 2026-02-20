@@ -879,7 +879,7 @@
   - type: Tag
     tags:
     - RMCVehicleHardpointSupportAttachment
-  - type: RMCVehicleArtilleryViewAttachment
+  - type: RMCVehicleGunnerViewAttachment
     pvsScale: 0.35
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0

@@ -55,7 +55,7 @@ public sealed partial class RMCVehicleSpeedModifierComponent : Component
 /// Applied to support hardpoints that increase gunner view.
 /// </summary>
 [RegisterComponent]
-public sealed partial class RMCVehicleArtilleryViewAttachmentComponent : Component
+public sealed partial class RMCVehicleGunnerViewAttachmentComponent : Component
 {
     [DataField]
     public float PvsScale = 0.35f;
@@ -66,18 +66,18 @@ public sealed partial class RMCVehicleArtilleryViewAttachmentComponent : Compone
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(RMCHardpointSystem))]
-public sealed partial class RMCVehicleArtilleryViewComponent : Component
+public sealed partial class RMCVehicleGunnerViewComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float PvsScale;
 }
 
 /// <summary>
-/// Added to gunners to increase their view while operating a vehicle with an artillery module installed.
+/// Added to gunners to increase their view while operating a vehicle with a view module installed.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(RMCVehicleWeaponsSystem), typeof(RMCVehicleArtilleryViewSystem))]
-public sealed partial class RMCVehicleArtilleryViewUserComponent : Component
+[Access(typeof(RMCVehicleWeaponsSystem), typeof(RMCVehicleGunnerViewSystem))]
+public sealed partial class RMCVehicleGunnerViewUserComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float PvsScale;

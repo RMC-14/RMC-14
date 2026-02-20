@@ -1,7 +1,5 @@
 using System;
 using Content.Shared._RMC14.Input;
-using Content.Shared.Input;
-using Content.Shared.Movement.Systems;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.GameObjects;
@@ -31,20 +29,10 @@ public sealed class RMCVehicleOverchargeSystem : EntitySystem
                     if (session?.AttachedEntity is not { } user)
                         return;
 
-                    EntityUid? vehicleUid = null;
-                    if (TryComp<VehicleOperatorComponent>(user, out var op) && op.Vehicle != null)
-                    {
-                        vehicleUid = op.Vehicle.Value;
-                    }
-                    else if (_rmcVehicles.TryGetVehicleFromInterior(user, out var interiorVehicle) && interiorVehicle != null)
-                    {
-                        vehicleUid = interiorVehicle.Value;
-                    }
-
-                    if (vehicleUid == null)
+                    if (!_rmcVehicles.TryResolveControlledVehicle(user, out var vehicleUid))
                         return;
 
-                    RaiseNetworkEvent(new RMCVehicleOverchargeRequestEvent(GetNetEntity(vehicleUid.Value)));
+                    RaiseNetworkEvent(new RMCVehicleOverchargeRequestEvent(GetNetEntity(vehicleUid)));
                 }, handle: false))
                 .Register<RMCVehicleOverchargeSystem>();
         }
