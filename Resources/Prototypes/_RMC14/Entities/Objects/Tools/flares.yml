@@ -22,6 +22,7 @@
   - type: ExpendableLight
     spentName: expendable-light-spent-flare-name
     spentDesc: expendable-light-spent-flare-desc
+    usesOverlay: false
     glowDuration: 600
     fadeOutDuration: 30
     iconStateSpent: flare_spent
@@ -105,6 +106,12 @@
   - type: FlareSignal
   - type: ExpendableLight
     glowDuration: 180
+  - type: GenericVisualizer
+    visuals:
+      enum.SignalFlareVisuals.BeaconState:
+        enum.ExpendableLightVisualLayers.Base:
+          True: { state: flare-on }
+          False: { state: flare }
   - type: LightBehaviour
     behaviours:
     - !type:FadeBehaviour # faster then base flares

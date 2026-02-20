@@ -33,6 +33,9 @@
       "name": "torch_spent"
     },
     {
+      "name": "overlay"
+    },
+    {
       "name": "lit-inhand-left",
       "directions": 4,
       "delays": [
