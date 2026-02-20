@@ -107,6 +107,42 @@
       "name": "rifle_ammo_medium_rounds_color"
     },
     {
+      "name": "rifle_box_large"
+    },
+    {
+      "name": "rifle_lid_large"
+    },
+    {
+      "name": "rifle_box_large_marking"
+    },
+    {
+      "name": "rifle_lid_large_marking"
+    },
+    {
+      "name": "rifle_ammo_large_full_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_full_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_high_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_high_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_medium_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_medium_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_low_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_low_mags_color"
+    },
+    {
       "name": "smg"
     },
     {
