@@ -1,26 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: Fixed the dropship crew vendor not having M4SPR extended mags, S6 reflex
-      sights, and patrol caps.
-    type: Fix
-  - message: Fixed the purchasable m44 ammunition in the flight crew vendor not being
-      marksman.
-    type: Fix
-  - message: M4SPR extended mag now has a description.
-    type: Fix
-  id: 2452
-  time: '2025-10-19T06:27:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8125
-- author: OmerF-afk
-  changes:
-  - message: Added empty L42A mags
-    type: Add
-  id: 2453
-  time: '2025-10-19T06:29:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8107
-- author: CatAndHats
-  changes:
   - message: 'Added cardboard construction menu, Press Z with cardboard in-hand to
       open the menu: Craft ammo boxes and newly-craftable donut box, pizza boxes,
       and folders!'
@@ -4572,5 +4552,26 @@
   id: 2953
   time: '2026-02-20T13:06:29.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9148
+- author: kleinerstation13
+  changes:
+  - message: Ported Panic Room Insert on Shiva's Snowball
+    type: Add
+  id: 2954
+  time: '2026-02-20T13:08:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9274
+- author: CatAndHats
+  changes:
+  - message: Added Riot In Progress, a Fiorina survivor special scenario. A 15% chance
+      that a CMB Riot Control team respond first to the distress signal, can they
+      survive the xenonids before the marines arrive?
+    type: Add
+  - message: United Nations Riot Officers are now CMB Riot Control Officers, and fixed
+      them not having the correct hud icon.
+    type: Tweak
+  - message: The Fiorina armoury and flamer cabinets no longer have an access lock.
+    type: Fix
+  id: 2955
+  time: '2026-02-20T13:08:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8979
 Name: RMC14
 Order: -1
