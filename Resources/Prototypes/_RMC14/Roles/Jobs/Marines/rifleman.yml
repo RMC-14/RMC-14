@@ -33,6 +33,7 @@
       skills:
         RMCSkillEndurance: 1
         RMCSkillFirearms: 1
+        RMCSkillFireman: 1
     - type: CMVendorUser
       id: CMRifleman
       points: 45
