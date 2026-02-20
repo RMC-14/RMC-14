@@ -14,9 +14,9 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Content.Shared.IdentityManagement;
 using Content.Shared.IdentityManagement.Components;
+using Content.Shared._RMC14.Marines.Roles.Ranks;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
-using Content.Shared._RMC14.Marines.Roles.Ranks;
 
 namespace Content.Shared.Paper;
 
@@ -32,7 +32,7 @@ public sealed class PaperSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly MetaDataSystem _metaSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedIdentitySystem _identitySystem = default!;
+
 
     private static readonly ProtoId<TagPrototype> WriteIgnoreStampsTag = "WriteIgnoreStamps";
     private static readonly ProtoId<TagPrototype> WriteTag = "Write";
@@ -83,6 +83,8 @@ public sealed class PaperSystem : EntitySystem
 
     private void BeforeUIOpen(Entity<PaperComponent> entity, ref BeforeActivatableUIOpenEvent args)
     {
+        // Always set to Read mode when opening without a pen
+        // Mode will be set to Write in OnInteractUsing if opened with a pen
         entity.Comp.Mode = PaperAction.Read;
         UpdateUserInterface(entity);
     }
@@ -257,14 +259,14 @@ public sealed class PaperSystem : EntitySystem
         if (!entity.Comp.StampedBy.Contains(stampInfo))
         {
             entity.Comp.StampedBy.Add(stampInfo);
-            
+
             // Clean unfilled form and signature tags when stamping to finalize the document
             var cleanedContent = CleanUnfilledTags(entity.Comp.Content);
             if (cleanedContent != entity.Comp.Content)
             {
                 SetContent(entity, cleanedContent);
             }
-            
+
             Dirty(entity);
             if (entity.Comp.StampState == null && TryComp<AppearanceComponent>(entity, out var appearance))
             {
@@ -335,14 +337,14 @@ public sealed class PaperSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets the player's signature using the identity system, including rank, name, and role.
+    /// Gets the player's signature using the identity system.
     /// </summary>
-    private string GetPlayerSignature(EntityUid player)
+private string GetPlayerSignature(EntityUid player)
     {
         var name = string.Empty;
         var rank = string.Empty;
         var role = string.Empty;
-        
+
         // Get the identity entity (ID card, etc.)
         var identityEntity = player;
         if (TryComp<IdentityComponent>(player, out var identity) &&
@@ -350,17 +352,17 @@ public sealed class PaperSystem : EntitySystem
         {
             identityEntity = idEntity;
         }
-        
+
         // Get name from identity or fallback to entity name
         name = MetaData(identityEntity).EntityName;
-        
+
         // Get rank from RankComponent
         if (TryComp<RankComponent>(player, out var rankComp))
         {
             var rankSystem = EntityManager.System<SharedRankSystem>();
             rank = rankSystem.GetRankString(player, isShort: true) ?? string.Empty;
         }
-        
+
         // Get role from mind system
         if (TryComp<MindContainerComponent>(player, out var mindContainer) &&
             mindContainer.Mind != null)
@@ -372,7 +374,7 @@ public sealed class PaperSystem : EntitySystem
                 role = Loc.GetString(roleInfo[0].Name);
             }
         }
-        
+
         // Format: "Rank Name, Role" or fallback combinations
         var signature = string.Empty;
         if (!string.IsNullOrEmpty(rank) && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(role))
@@ -391,7 +393,7 @@ public sealed class PaperSystem : EntitySystem
         {
             signature = name;
         }
-        
+
         return signature;
     }
 
