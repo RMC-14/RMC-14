@@ -52,6 +52,21 @@
 # PMC Commando
 - type: entity
   parent: RMCHandsVeteranPMC
+  id: RMCHandsVeteranPMCCommandoSurvivor
+  name: We-Ya Commando gloves
+  description: Standard issue kevlon fiber gloves manufactured for and by Weston-Yamada Commandos. They are insulated against electrical shock.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/gauntlets.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 40
+    explosionArmor: 30
+
+- type: entity
+  parent: RMCHandsVeteranPMC
   id: RMCHandsVeteranPMCCommando
   name: M5X gauntlets
   description: A pair of heavily armored gloves made to complete the M5X exoskeleton armor.
