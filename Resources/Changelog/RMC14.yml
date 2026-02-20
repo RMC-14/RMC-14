@@ -1,13 +1,6 @@
 ﻿Entries:
 - author: CatAndHats
   changes:
-  - message: The Engi Supply Kit is now shown as recommended in the SL vendor.
-    type: Tweak
-  id: 2451
-  time: '2025-10-19T06:25:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8022
-- author: CatAndHats
-  changes:
   - message: Fixed the dropship crew vendor not having M4SPR extended mags, S6 reflex
       sights, and patrol caps.
     type: Fix
@@ -4572,5 +4565,12 @@
   id: 2952
   time: '2026-02-17T11:37:15.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8575
+- author: SharkSnake98
+  changes:
+  - message: Changed the vendors to SPP vendors on both Sorokyne maps
+    type: Tweak
+  id: 2953
+  time: '2026-02-20T13:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9148
 Name: RMC14
 Order: -1
