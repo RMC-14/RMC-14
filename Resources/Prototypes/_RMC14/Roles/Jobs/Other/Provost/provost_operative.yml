@@ -1,0 +1,92 @@
+﻿- type: job
+  parent: CMJobBase
+  id: CMProvostOperative
+  name: rmc-job-name-corp-provost-operative
+  description: rmc-ghost-role-information-provost-description
+  playTimeTracker: CMJobProvostOperative
+  ranks:
+    RMCRankProvostOperative: []
+  startingGear: RMCGearProvostOperative
+  icon: RMCJobIconProvostOperative
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 3
+        RMCSkillEndurance: 5
+        RMCSkillEngineer: 2
+        RMCSkillExecution: 1
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 3
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 2
+    - type: MarineOrders
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: JobPrefix
+      prefix: rmc-job-prefix-provost-operative
+    - type: RMCTrackable
+    - type: RMCAllowSuitStorage
+  hidden: true
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCProvostOperative
+  components:
+  - type: GhostRole
+    name: rmc-ghost-name-corp-provost-operative
+    description: rmc-ghost-role-information-provost-description
+    rules: rmc-ghost-role-information-provost-rules
+    reregister: false
+    job: CMProvostOperative
+    raffle:
+      settings: short
+  - type: GhostRoleApplySpecial
+
+- type: startingGear
+  id: RMCGearProvostOperative
+  equipment:
+    head: RMCHeadBeretAgent
+    eyes: RMCGlassesPIDCommandoNightVision
+    ears: CMHeadsetHighCommand
+    jumpsuit: CMJumpsuitProvostAgentWebbing
+    outerClothing: RMCArmorProvostAgentFilled
+    gloves: CMHandsBlackInsulated
+    shoes: RMCScoutShoes
+    suitstorage: RMCWeaponRifleXM40
+    id: RMCIDCardProvostOperative
+    belt: RMCMatebaBeltFilled
+    back: RMCBackpackPIDFilled
+    mask: RMCMaskCoifPMC
+    #    pocket1: # TODO RMC14 tape recorder
+    pocket2: RMCPouchMagazinePistolFilledMateba # TODO RMC14 3 listening devices
+  inhand:
+    - RMCMatebaCustomizationCase
+
+- type: playTimeTracker
+  id: CMJobProvostOperative
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconProvostOperative
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_tisio
+
