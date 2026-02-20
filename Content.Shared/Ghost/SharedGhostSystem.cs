@@ -116,33 +116,20 @@ namespace Content.Shared.Ghost
     /// <summary>
     /// An individual place a ghost can warp to.
     /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
+    ///
+    /// RMC14: Changed type to record
     /// </summary>
     [Serializable, NetSerializable]
-    public struct GhostWarp
-    {
-        public GhostWarp(NetEntity entity, string displayName, bool isWarpPoint)
-        {
-            Entity = entity;
-            DisplayName = displayName;
-            IsWarpPoint = isWarpPoint;
-        }
+    public record GhostWarp(NetEntity entity, string entityName, bool isWarpPoint);
 
-        /// <summary>
-        /// The entity representing the warp point.
-        /// This is passed back to the server in <see cref="GhostWarpToTargetRequestEvent"/>
-        /// </summary>
-        public NetEntity Entity { get; }
-
-        /// <summary>
-        /// The display name to be surfaced in the ghost warps menu
-        /// </summary>
-        public string DisplayName { get; }
-
-        /// <summary>
-        /// Whether this warp represents a warp point or a player
-        /// </summary>
-        public bool IsWarpPoint { get;  }
-    }
+    /// <summary>
+    /// RMC14: New ghost warp type
+    ///
+    /// A player a ghost can warp to.
+    /// This is used as part of <see cref="GhostWarpsResponseEvent"/>
+    /// </summary>
+    [Serializable, NetSerializable]
+    public record PlayerGhostWarp(NetEntity entity, string entityName, string jobName) : GhostWarp(entity, entityName, false);
 
     /// <summary>
     /// A server to client response for a <see cref="GhostWarpsRequestEvent"/>.

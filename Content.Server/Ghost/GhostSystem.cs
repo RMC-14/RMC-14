@@ -372,7 +372,7 @@ namespace Content.Server.Ghost
             }
         }
 
-        private IEnumerable<GhostWarp> GetPlayerWarps(EntityUid except)
+        private IEnumerable<PlayerGhostWarp> GetPlayerWarps(EntityUid except) // RMC14: Change return type to PlayerGhostWarp
         {
             foreach (var player in _player.Sessions)
             {
@@ -384,10 +384,10 @@ namespace Content.Server.Ghost
                 TryComp<MindContainerComponent>(attached, out var mind);
 
                 var jobName = _jobs.MindTryGetJobName(mind?.Mind);
-                var playerInfo = $"{Comp<MetaDataComponent>(attached).EntityName} ({jobName})";
+                var entityName = Comp<MetaDataComponent>(attached).EntityName; // RMC14: Entity name contains only entity name now
 
                 if (_mobState.IsAlive(attached) || _mobState.IsCritical(attached))
-                    yield return new GhostWarp(GetNetEntity(attached), playerInfo, false);
+                    yield return new PlayerGhostWarp(GetNetEntity(attached), entityName, jobName); // RMC14: Initialize new GhostWarp type
             }
         }
 

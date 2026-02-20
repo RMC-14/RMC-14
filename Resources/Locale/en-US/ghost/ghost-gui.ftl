@@ -14,6 +14,13 @@ ghost-gui-toggle-hearing-popup-off = You can now only hear radio and nearby mess
 ghost-target-window-title = Ghost Warp
 ghost-target-window-current-button = Warp: {$name}
 ghost-target-window-warp-to-most-followed = Warp to Most Followed
+ghost-target-window-type-filter-all-title = All
+ghost-target-window-type-filter-marines-title = Marines
+ghost-target-window-type-filter-xeno-title = Xeno
+ghost-target-window-type-filter-warps-title = Warps
+ghost-target-window-type-sort-dir-button = Sort: {$type}
+ghost-target-window-type-sort-dir-asc-title = Ascending
+ghost-target-window-type-sort-dir-desc-title = Descending
 
 ghost-roles-window-title = Ghost Roles
 ghost-roles-window-available-button = Available ({$rolesCount})
