@@ -20,6 +20,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.PowerCell;
+using Content.Shared.PowerCell.Components;
 using Content.Shared.Timing;
 using Content.Shared.Traits.Assorted;
 using Robust.Shared.Audio.Systems;
@@ -53,12 +55,14 @@ public sealed class DefibrillatorSystem : EntitySystem
     // RMC14
     [Dependency] private readonly RMCDefibrillatorSystem _rmcDefibrillator = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<DefibrillatorComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<DefibrillatorComponent, DefibrillatorZapDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<DefibrillatorComponent, PowerCellChangedEvent>(OnChangeCharge);
     }
 
     private void OnAfterInteract(EntityUid uid, DefibrillatorComponent component, AfterInteractEvent args)
@@ -299,4 +303,37 @@ public sealed class DefibrillatorSystem : EntitySystem
         var ev = new TargetDefibrillatedEvent(user, (uid, component));
         RaiseLocalEvent(target, ref ev);
     }
+
+    //RMC14
+    private void OnChangeCharge(Entity<DefibrillatorComponent> entity, ref PowerCellChangedEvent args)
+    {
+        UpdateChargeVisuals(entity);
+    }
+    private void UpdateChargeVisuals(EntityUid uid)
+    {
+        if (!_powerCell.TryGetBatteryFromSlot(uid, out var battery) || !TryComp<PowerCellDrawComponent>(uid, out var draw))
+            return;
+
+        var maxUses = (int)(battery.MaxCharge / draw.UseRate);
+        var uses = (int)(battery.CurrentCharge / draw.UseRate);
+        var charge = DefibrillatorChargeVisuals.Full;
+        switch (3 * uses / maxUses)
+        {
+            case 0:
+                charge = DefibrillatorChargeVisuals.Low;
+                break;
+            case 1:
+                charge = DefibrillatorChargeVisuals.Half;
+                break;
+            case 2:
+                charge = DefibrillatorChargeVisuals.Full;
+                break;
+        }
+        if (uses == 0)
+            charge = DefibrillatorChargeVisuals.Empty;
+
+        if (TryComp<AppearanceComponent>(uid, out var appearance))
+            _appearance.SetData(uid, DefibrillatorVisuals.DefibrillatorCharge, charge, appearance);
+    }
+    //RMC14
 }
