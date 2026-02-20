@@ -5,6 +5,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/lv624.yml
     camouflage: Jungle
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingLV624
     announcement: "An automated distress signal has been received from the archaeological site of Lazarus Landing, on the border world of LV-624. A response team from the UNS Almayer will be dispatched shortly to investigate."
     nightmareScenarios:
     - scenarioName: fallen_ship
@@ -152,6 +154,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingShivas
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     nightmareScenarios:
     - scenarioName: panic_room_hold
@@ -199,6 +203,8 @@
     map: /Maps/_RMC14/prison.yml
     camouflage: Classic
     minPlayers: 130
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingFiorina
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     nightmareScenarios:
     - scenarioName: riot_in_progress
@@ -312,6 +318,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/varadero.yml
     camouflage: Jungle
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingVaradero
     announcement: "An automated distress signal has been received from UN Outpost New Varadero. A response team from the UNS Almayer will be dispatched shortly to investigate.
       Designation: Island research station and mining facility
 
@@ -382,6 +390,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/chances.yml
     camouflage: Classic
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingChances
     announcement: "Pan-Pan. This is the commander of the UNS Hanyut, UNMC FORECON. We are currently grounded on planet LV-522 in the immediate area of Chance's Claim. We are unable to contact the Hanyut and our dropships are unable to take off at this time. We are requesting assistance from any nearby vessels; this broadcast is set to repeat every 24 hours."
     selectRandomSurvivorVariant: false
     survivorJobs:
@@ -412,6 +422,8 @@
   - type: RMCPlanetMapPrototype
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingHybrisa
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
     minPlayers: 130
     survivorJobVariants:
@@ -449,6 +461,8 @@
     map: /Maps/_RMC14/sorokyne.yml
     camouflage: Jungle
     minPlayers: 130
+    specialFaxes:
+      Liaison: RMCPaperWeYaLiaisonBriefingSorokyne
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
     survivorJobVariants:
       CMSurvivor:
