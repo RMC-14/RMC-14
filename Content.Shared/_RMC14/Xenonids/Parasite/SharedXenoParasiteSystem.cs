@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Sprite;
 using Content.Shared._RMC14.Stealth;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared._RMC14.Xenonids.Construction.ResinWhisper;
 using Content.Shared._RMC14.Xenonids.Hide;
@@ -245,7 +246,9 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
 
     private void OnParasiteTryPull(Entity<XenoParasiteComponent> ent, ref PullAttemptEvent args)
     {
-        if (HasComp<ParasiteAIComponent>(ent) && !HasComp<InfectableComponent>(args.PullerUid))
+        if (HasComp<ParasiteAIComponent>(ent) &&
+            !HasComp<InfectableComponent>(args.PullerUid) &&
+            !HasComp<SynthComponent>(args.PullerUid))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-nonplayer-pull", ("parasite", ent)), ent, args.PullerUid, PopupType.SmallCaution);
             args.Cancelled = true;
