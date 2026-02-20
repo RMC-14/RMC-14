@@ -14,8 +14,8 @@
   - !type:TotalJobsTimeRequirement
     group: CMJobsEngineering
     time: 18000 # 5 hours
-  - !type:DepartmentTimeRequirement
-    department: CMAuxiliarySupport
+  - !type:RoleTimeRequirement
+    role: CMJobPilotDropship
     time: 18000 # 5 hours
   - !type:DepartmentTimeRequirement
     department: CMCommand
