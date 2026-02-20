@@ -243,7 +243,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/553029b58d42439bef45e30a593bdcf370d99f9a/sound/weapons/gun_mg.ogg"
 
-- files: ["gun_ak4047.ogg"]
+- files: ["gun_type77.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/sound/weapons/gun_ak4047.ogg"
