@@ -2140,6 +2140,14 @@
     state: olive_orr
   - type: PatronFigurine
     id: e1c32e3b-05ae-4684-beec-50b3ee32a5d8
+  - type: EmitSoundOnUse
+    sound:
+      path: /Audio/Animals/mouse_squeak.ogg
+      params:
+        volume: 5
+        maxDistance: 1
+  - type: UseDelay
+    delay: 30
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -2497,7 +2505,7 @@
   parent: RMCBaseFigurinePatron
   id: RMCFigurinePatronSethXi
   name: Seth Xi figurine
-  description: "As you gaze upon the figurine, a sudden surge of motivation stirs within you. From afar comes the clash of blades and the shatter of glass, drifting toward you like the warning of an approaching storm."
+  description: "Calm under pressure.\nPatient beyond measure.\n\nKnown to observe, endure, and occasionally give horrible OB coordinates.\n\nWhere others advanced, he was already there.\nWhere uncertainty spread, he quietly made it someone else’s problem.\n\nNormally beyond the frontline, always questioning why."
   components:
   - type: Sprite
     state: seth_xi
@@ -2549,6 +2557,7 @@
     id: a440be4b-5667-44f7-a375-cfc151fdf8f7
   - type: ParaDroppable
     dropScatter: 1
+  - type: CrashLandable
 
 - type: entity
   parent: RMCBaseFigurinePatron
@@ -2560,3 +2569,36 @@
     state: kara_hathaway
   - type: PatronFigurine
     id: 6e7476de-f328-4764-834c-7ac2478a5aab
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronSelinaCavityAlara
+  name: Selina 'Cavity' Alara figurine
+  description: "This figure is covered in cookie crumbs and smells like pure sugar!"
+  components:
+  - type: Sprite
+    state: selina_cavity_alara
+  - type: PatronFigurine
+    id: e85c8c96-2258-43b3-914d-15f2466f7fee
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronKaraLifelineGreenland
+  name: Kara 'Lifeline' Greenland figurine
+  description: "Smells faintly of... Blueberries???"
+  components:
+  - type: Sprite
+    state: kara_lifeline_greenland
+  - type: PatronFigurine
+    id: 1d7a863e-6004-4dda-ae4c-6c0ed0b58fcc
+
+- type: entity
+  parent: RMCBaseFigurinePatron
+  id: RMCFigurinePatronBorisScavmanchez
+  name: Boris Scavmanchez figurine
+  description: "Seems like this guy gets around just about everywhere. Though he's sporting his MP uniform, here, with a M42 shotgun held by his hip in one hand and a stun baton resting on his shoulder in the other. He truly IS the law!"
+  components:
+  - type: Sprite
+    state: boris_scavmanchez
+  - type: PatronFigurine
+    id: effa13df-5875-4437-a454-dbb70ce9f5da
