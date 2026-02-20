@@ -21,7 +21,6 @@ using System.Linq;
 using Content.Shared.Jittering;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared._RMC14.Policing;
-using YamlDotNet.Helpers;
 
 namespace Content.Shared._RMC14.Stamina;
 
