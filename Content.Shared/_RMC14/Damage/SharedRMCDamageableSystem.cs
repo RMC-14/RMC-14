@@ -320,14 +320,7 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
 
     private void OnActiveDamageOnPulledDevoured(Entity<ActiveDamageOnPulledWhileCritComponent> ent, ref XenoTargetDevouredAttemptEvent args)
     {
-        if (_mobThresholds.TryGetDeadThreshold(ent.Owner, out var mobThreshold) && TryComp<DamageableComponent>(ent, out var damageable))
-        {
-            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
-            var type = _prototypes.Index<DamageTypePrototype>(LethalDamageType);
-            var damage = new DamageSpecifier(type, lethalAmountOfDamage);
-            _damageable.TryChangeDamage(ent.Owner, damage, true);
-        }
-
+        DoLethalDamage(ent.Owner);
         args.Cancelled = true;
     }
 
@@ -517,6 +510,24 @@ public abstract class SharedRMCDamageableSystem : EntitySystem
         }
 
         return false;
+    }
+
+    /// <summary>
+    ///   Does a lethal amount of asphyxiation damage to the given mob. Optionally checks for critical state.
+    /// </summary>
+    public void DoLethalDamage(EntityUid target, bool checkCrit = true, EntityUid? origin = null)
+    {
+        if (!_mobState.IsCritical(target) && checkCrit)
+            return;
+
+        if (_mobThresholds.TryGetDeadThreshold(target, out var mobThreshold)
+            && TryComp<DamageableComponent>(target, out var damageable))
+        {
+            var lethalAmountOfDamage = mobThreshold.Value - damageable.TotalDamage;
+            var type = _prototypes.Index(LethalDamageType);
+            var lethalDamage = new DamageSpecifier(type, lethalAmountOfDamage);
+            _damageable.TryChangeDamage(target, lethalDamage, true, origin: origin);
+        }
     }
 
     public override void Update(float frameTime)
