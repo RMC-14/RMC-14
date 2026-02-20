@@ -188,6 +188,7 @@
     RMCFoodSnackCheeseburgerPackaged: 12
     RMCFoodSnackBurritoPackaged: 12
     RMCFoodSnackHotdogPackaged: 12
+    RMCFoodSnackSamosaPackaged: 12
     RMCFoodSnackKeplarCrisps: 12
     RMCFoodSnackKeplarFlamehotCrisps: 12
     RMCFoodSnackChipsPepper: 12
@@ -210,6 +211,7 @@
     RMCFoodSnackCheeseburgerPackaged: 40
     RMCFoodSnackBurritoPackaged: 40
     RMCFoodSnackHotdogPackaged: 40
+    RMCFoodSnackSamosaPackaged: 40
 
 - type: entity
   parent: CMVendorSnack
