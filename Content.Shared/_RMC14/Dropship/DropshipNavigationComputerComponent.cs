@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -30,6 +31,7 @@ public sealed partial class DropshipNavigationComputerComponent : Component
     public bool Hijackable = true;
 
     [DataField, AutoNetworkedField]
+    public EntProtoId<IFFFactionComponent> Faction = "FactionMarine";
     public bool RemoteControl = false;
 
     [DataField, AutoNetworkedField]

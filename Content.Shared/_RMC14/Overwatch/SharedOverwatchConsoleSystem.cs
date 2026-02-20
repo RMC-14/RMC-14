@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
@@ -44,6 +46,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly DialogSystem _dialog = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
@@ -63,6 +66,7 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+
     private EntityQuery<ActorComponent> _actor;
     private EntityQuery<MobStateComponent> _mobStateQuery;
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
@@ -79,6 +83,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
     private TimeSpan _updateEvery;
     private readonly Dictionary<Entity<SquadTeamComponent>, Queue<EntityUid>> _toProcess = new();
     private readonly HashSet<Entity<SquadTeamComponent>> _toRemove = new();
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabAnnouncementLogs";
 
     public override void Initialize()
     {
@@ -561,6 +567,8 @@ public abstract class SharedOverwatchConsoleSystem : EntitySystem
         Dirty(ent);
 
         _adminLog.Add(LogType.RMCMarineAnnounce, $"{ToPrettyString(args.Actor)} sent {squadProto.Name} squad message: {args.Message}");
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} sent a squad announcement: {args.Message}");
+        _marineAnnounce.AnnounceSquad($"[color=#3C70FF][bold]Overwatch:[/bold] {Name(args.Actor)} transmits: [font size=16][bold]{message}[/bold][/font][/color]", squadProto.ID);
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-announce-message", ("operatorName", Name(args.Actor)), ("message", message)), squadProto.ID);
 
         var coordinates = _transform.GetMapCoordinates(ent);

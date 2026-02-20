@@ -1,4 +1,6 @@
 using System.Collections.Frozen;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using System.Linq;
 using Content.Shared._RMC14.Marines.Announce;
 using Content.Shared._RMC14.Marines.Roles.Ranks;
@@ -24,6 +26,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
 {
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly GunIFFSystem _iff = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
@@ -42,6 +45,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
     private FrozenDictionary<string, AccessLevelPrototype> _accessLevel =
         FrozenDictionary<string, AccessLevelPrototype>.Empty;
 
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabIdentificationLogs";
     private EntityQuery<OriginalRoleComponent> _originalRoleQuery;
 
     public override void Initialize()
@@ -60,7 +64,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 subs.Event<IdModificationConsoleTerminateConfirmBuiMsg>(OnTerminateConfirmMsg);
                 subs.Event<IdModificationConsoleAssignSquadMsg>(OnTerminalAssignSquadMsg);
             });
-        SubscribeLocalEvent<IdModificationConsoleComponent, MapInitEvent>(OnComponentInit);
+        SubscribeLocalEvent<IdModificationConsoleComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
         SubscribeLocalEvent<IdModificationConsoleComponent, InteractUsingEvent>(OnInteractHand);
 
@@ -97,6 +101,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.Low,
             $"{ToPrettyString(args.Actor):player} has changed the accesses of {ToPrettyString(uid):entity} to {accessGroupPrototype.Name}");
+
+        _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} modified ID: {Name(uid.Value)} to {accessGroupPrototype.Name}");
     }
 
     private void OnTerminateConfirmMsg(Entity<IdModificationConsoleComponent> ent,
@@ -136,6 +142,9 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         _adminLogger.Add(LogType.RMCIdModify,
             LogImpact.High,
             $"{ToPrettyString(args.Actor):player} has terminated {ToPrettyString(uid):entity} & {ToPrettyString(idCard.OriginalOwner):player}");
+
+        if(idCard.OriginalOwner != null)
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has terminated {Name(idCard.OriginalOwner.Value)}");
     }
 
     private void OnIFFChangeMsg(Entity<IdModificationConsoleComponent> ent,
@@ -160,6 +169,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} has granted the {targetFaction} IFF for {ToPrettyString(uid):entity}");
 
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted IFF for ID card: {Name(uid.Value)}");
             ent.Comp.HasIFF = true;
         }
         else
@@ -174,6 +184,12 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 Dirty(uid.Value, iff);
 
             ent.Comp.HasIFF = false;
+            _adminLogger.Add(LogType.RMCIdModify,
+                LogImpact.Medium,
+                $"{ToPrettyString(args.Actor):player} has revoked the {ent.Comp.Faction} IFF for {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent,
+                LogCat,
+                (string)$"{Name(args.Actor)} has revoked IFF for ID card: {Name(uid.Value)}");
 
             if (removed)
             {
@@ -182,6 +198,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                     $"{ToPrettyString(args.Actor):player} has revoked the {targetFaction} IFF for {ToPrettyString(uid):entity}");
             }
         }
+
 
         Dirty(ent);
     }
@@ -246,6 +263,8 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
+
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted all accesses for {args.AccessList} for ID card: {Name(uid.Value)}");
                 break;
             case "RevokeAll":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -259,6 +278,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses for {args.AccessList} on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked all accesses for {args.AccessList} for ID card: {Name(uid.Value)}");
                 break;
             case "GrantAllGroup":
                 foreach (var accessToAdd in ent.Comp.AccessList)
@@ -269,6 +289,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has granted all accesses on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted all accesses on ID card: {Name(uid.Value)}");
                 break;
             case "RevokeAllGroup":
                 foreach (var accessToRemove in ent.Comp.AccessList)
@@ -279,6 +300,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
                 _adminLogger.Add(LogType.RMCIdModify,
                     LogImpact.Medium,
                     $"{ToPrettyString(args.Actor):player} has revoked all accesses on {ToPrettyString(uid):entity}");
+                _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked all accesses on ID card: {Name(uid.Value)}");
                 break;
         }
 
@@ -301,6 +323,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has granted {args.Access} to {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has granted {Loc.GetString(_prototype.Index(args.Access).Name ?? "unknown")} to ID card: {Name(uid.Value)}");
         }
         else
         {
@@ -308,6 +331,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
             _adminLogger.Add(LogType.RMCIdModify,
                 LogImpact.Low,
                 $"{ToPrettyString(args.Actor):player} has revoked {args.Access} to {ToPrettyString(uid):entity}");
+            _core.CreateARESLog(ent, LogCat, (string)$"{Name(args.Actor)} has revoked {Loc.GetString(_prototype.Index(args.Access).Name ?? "unknown")} to ID card: {Name(uid.Value)}");
         }
 
         Dirty(uid.Value, access);
@@ -430,7 +454,7 @@ public sealed class IdModificationConsoleSystem : EntitySystem
         return contained != null;
     }
 
-    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref MapInitEvent args)
+    private void OnComponentInit(Entity<IdModificationConsoleComponent> ent, ref ComponentInit args)
     {
         UpdateAccessList(ent);
     }

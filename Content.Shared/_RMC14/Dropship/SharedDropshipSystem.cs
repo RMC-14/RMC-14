@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Shared._RMC14.ARES;
+using Content.Shared._RMC14.ARES.Logs;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.Dropship.Utility.Components;
@@ -26,6 +28,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Dropship;
@@ -35,6 +38,7 @@ public abstract class SharedDropshipSystem : EntitySystem
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly ARESCoreSystem _core = default!;
     [Dependency] private readonly SharedGameTicker _gameTicker = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
@@ -47,6 +51,8 @@ public abstract class SharedDropshipSystem : EntitySystem
 
     private TimeSpan _dropshipInitialDelay;
     private TimeSpan _hijackInitialDelay;
+
+    private static readonly EntProtoId<ARESLogTypeComponent> LogCat = "ARESTabDropshipLogs";
 
     public override void Initialize()
     {
@@ -489,6 +495,10 @@ public abstract class SharedDropshipSystem : EntitySystem
         }
 
         FlyTo(ent, destination.Value, user);
+
+        var grid = _transform.GetGrid((ent.Owner, Transform(ent.Owner)));
+        if (grid != null)
+            _core.CreateARESLog(ent.Comp.Faction, LogCat, (string)$"{Name(args.Actor)} launched the {Name(grid.Value)} to {Name(destination.Value)}");
     }
 
     private void OnDropshipNavigationCancelMsg(Entity<DropshipNavigationComputerComponent> ent,
