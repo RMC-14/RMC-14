@@ -10,11 +10,11 @@ public sealed class HefaSwordTriggerOnHitSystem : SharedHefaSwordTriggerOnHitSys
 
     protected override void TriggerSword(Entity<HefaSwordTriggerOnHitComponent> ent, EntityUid user, EntityUid target)
     {
-        var targetCoords = Transform(target).Coordinates;
-        _transform.SetCoordinates(ent, targetCoords);
-
         var userRotation = _transform.GetWorldRotation(user);
         _transform.SetWorldRotation(ent, userRotation);
+
+        var targetCoords = Transform(target).Coordinates;
+        _transform.SetCoordinates(ent, targetCoords);
         _trigger.Trigger(ent, user);
     }
 }

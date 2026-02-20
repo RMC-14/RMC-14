@@ -232,9 +232,11 @@
   - type: GenericVisualizer
     visuals:
       enum.Trigger.TriggerVisuals.VisualState:
-        enum.ConstructionVisuals.Layer:
-          Primed: { state: primed, primed-equipped-HELMET }
-          Unprimed: { state: icon, equipped-HELMET }
+        enum.TriggerVisualLayers.Base:
+          Primed: { state: primed }
+          Unprimed: { state: icon }
+  - type: ClothingPrefixOnTimerTrigger
+    prefix: primed
   - type: OnUseTimerTrigger
     delay: 4
     beepSound:
