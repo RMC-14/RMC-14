@@ -1,5 +1,4 @@
 ﻿using Content.Shared._RMC14.CCVar;
-using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Weapons.Melee;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Chat.Prototypes;
@@ -15,12 +14,17 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared._RMC14.Input;
+using Content.Shared.Chat;
+using Content.Shared.Speech;
+using Robust.Shared.Input.Binding;
 
 namespace Content.Shared._RMC14.Emote;
 
 public abstract class SharedRMCEmoteSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly IPrototypeManager _protoManager = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly RotateToFaceSystem _rotate = default!;
@@ -34,6 +38,8 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
 
     private readonly float _interactRange = 1f;
 
+    private Dictionary<string, Dictionary<int, string>> _emoteBindings = new();
+
     public override void Initialize()
     {
         SubscribeLocalEvent<RMCHandEmotesComponent, InteractHandEvent>(OnInteractHand);
@@ -41,6 +47,80 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
         SubscribeLocalEvent<RMCHandEmotesComponent, MoveInputEvent>(OnMove);
 
         Subs.CVar(_config, RMCCVars.RMCEmoteCooldownSeconds, v => _emoteCooldown = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.RMCEmoteBindings, v => _emoteBindings = StringToEmoteBinding(v), true);
+
+        CommandBinds.Builder // this fucking sucks... but if you try to do it dynamically it throws a fit
+                .Bind(CMKeyFunctions.RMCHumanoidEmote1,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 0))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote2,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 1))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote3,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 2))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote4,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 3))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote5,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 4))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote6,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 5))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote7,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 6))
+                )
+                .Bind(CMKeyFunctions.RMCHumanoidEmote8,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Humanoid", 7))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote1,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 0))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote2,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 1))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote3,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 2))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote4,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 3))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote5,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 4))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote6,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 5))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote7,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 6))
+                )
+                .Bind(CMKeyFunctions.RMCXenoEmote8,
+                    InputCmdHandler.FromDelegate(session => TriggerBoundEmote(session, "Xeno", 7))
+                )
+                .Register<SharedRMCEmoteSystem>();
+    }
+
+    private void TriggerBoundEmote(ICommonSession? session, string type, int index)
+    {
+        // Ensure entity can actually speak (can add hand actions here too if needed later)
+        if (session?.AttachedEntity is not { } entity || !TryComp<SpeechComponent>(entity, out var speechComp))
+            return;
+
+        if (speechComp.SpeechVerb == "Xeno" && type == "Xeno")
+        {
+            if (!_emoteBindings["Xeno"].TryGetValue(index, out var emoteProtoXeno))
+                return;
+            LogManager.RootSawmill.Debug($"{entity.Id} : Xeno Emote {index} -> {emoteProtoXeno}");
+            RaisePredictiveEvent(new PlayEmoteMessage(emoteProtoXeno));
+        }
+        else if (speechComp.SpeechVerb != "Xeno" && type == "Humanoid")
+        {
+            if (!_emoteBindings["Humanoid"].TryGetValue(index, out var emoteProtoHumanoid))
+                return;
+            LogManager.RootSawmill.Debug($"{entity.Id} : Humanoid Emote {index} -> {emoteProtoHumanoid}");
+            RaisePredictiveEvent(new PlayEmoteMessage(emoteProtoHumanoid));
+        }
     }
 
     public virtual void TryEmoteWithChat(
@@ -306,5 +386,28 @@ public abstract class SharedRMCEmoteSystem : EntitySystem
             var leaveHangingMessage = Loc.GetString("rmc-hands-emotes-left-hanging");
             _popup.PopupEntity(leaveHangingMessage, uid, uid, PopupType.SmallCaution);
         }
+    }
+
+    // Converts the EmoteBinding CVar string into a more usable Dictionary construct.
+    private Dictionary<string, Dictionary<int, string>> StringToEmoteBinding(string input)
+    {
+        Dictionary<string, Dictionary<int, string>> data = new Dictionary<string, Dictionary<int, string>>();
+        foreach (var dict in input.Split("|")) // Separate Types
+        {
+            if (!dict.Contains(">"))
+                continue;
+            var values = dict.Split('>'); // 0 = Type, 1 = Dict of Bindings
+            data.Add(values[0], new Dictionary<int, string>());
+            Logger.Log(LogLevel.Debug, $"> Split: {values[0]} {values[1]}");
+            foreach (var index in values[1].Split(','))
+            {
+                if (!index.Contains(":"))
+                    continue;
+                var values2 = index.Split(':');
+                Logger.Log(LogLevel.Debug, $": Split: {values2[0]} {values2[1]}");
+                data[values[0]].Add(int.Parse(values2[0]), values2[1]);
+            }
+        }
+        return data;
     }
 }

@@ -45,4 +45,7 @@ public sealed partial class RMCCVars
 
     public static readonly CVarDef<bool> RMCPlayEmotesSkrell =
         CVarDef.Create("rmc.play_emotes_skrell", true, CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
+
+    public static readonly CVarDef<string> RMCEmoteBindings =
+        CVarDef.Create("rmc.emote_bindings", "", CVar.REPLICATED | CVar.CLIENT | CVar.ARCHIVE);
 }

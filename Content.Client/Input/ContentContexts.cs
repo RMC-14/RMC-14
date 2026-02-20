@@ -148,11 +148,27 @@ namespace Content.Client.Input
             human.AddFunction(CMKeyFunctions.RMCPickUpDroppedItems);
             human.AddFunction(CMKeyFunctions.RMCInteractWithOtherHand);
             human.AddFunction(CMKeyFunctions.RMCRest);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote1);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote2);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote3);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote4);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote5);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote6);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote7);
+            human.AddFunction(CMKeyFunctions.RMCHumanoidEmote8);
 
             //Xenonid
             var xenonid = contexts.New("xenonid", "human");
             xenonid.AddFunction(CMKeyFunctions.CMXenoWideSwing);
             xenonid.AddFunction(CMKeyFunctions.RMCXenoRest);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote1);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote2);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote3);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote4);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote5);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote6);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote7);
+            xenonid.AddFunction(CMKeyFunctions.RMCXenoEmote8);
         }
     }
 }

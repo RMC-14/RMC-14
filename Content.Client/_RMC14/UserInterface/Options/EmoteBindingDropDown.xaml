@@ -1,0 +1,6 @@
+﻿<BoxContainer HorizontalExpand="True"
+              xmlns="https://spacestation14.io">
+    <Label Name="DropDownLabel" Text="" />
+    <Control HorizontalExpand="True"/>
+    <OptionButton Name="DropDownButton" HorizontalAlignment="Right" />
+</BoxContainer>
