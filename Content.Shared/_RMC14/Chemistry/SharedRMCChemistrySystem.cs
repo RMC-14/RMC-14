@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Content.Shared._RMC14.Chemistry.Reagent;
+using Content.Shared._RMC14.Scaling;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -25,6 +26,7 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly ScalingSystem _scaling = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -354,8 +356,17 @@ public abstract class SharedRMCChemistrySystem : EntitySystem
                     _dispensers.Add((dispenserId, dispenser));
             }
 
-            storage.MaxEnergy = storage.BaseMax + storage.MaxPer * _dispensers.Count;
-            storage.Recharge = storage.BaseRecharge + storage.RechargePer * _dispensers.Count;
+            var baseMax = storage.BaseMax;
+            var baseRecharge = storage.BaseRecharge;
+            if (storage.PopulationEnergyScaling && _scaling.TryGetScaling(out var scaling))
+            {
+                var scale = scaling.Comp.MaxScale;
+                baseMax *= scale;
+                baseRecharge *= scale;
+            }
+
+            storage.MaxEnergy = baseMax + storage.MaxPer * _dispensers.Count;
+            storage.Recharge = baseRecharge + storage.RechargePer * _dispensers.Count;
 
             if (!storage.Updated)
             {
