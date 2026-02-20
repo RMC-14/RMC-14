@@ -3,6 +3,7 @@ using Content.Shared.Examine;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
 using JetBrains.Annotations;
@@ -58,6 +59,28 @@ namespace Content.Shared.Stacks
             if (!TryComp(args.Used, out StackComponent? recipientStack))
                 return;
 
+            // #RMC Block merging stacks covered in acid
+            if (TryGetAcidedStack(uid, args.Used, out var acidUid))
+            {
+                if (_gameTiming.IsFirstTimePredicted)
+                {
+                    var acidPopupPos = args.ClickLocation;
+                    var acidUserCoords = Transform(args.User).Coordinates;
+
+                    if (!acidPopupPos.IsValid(EntityManager))
+                        acidPopupPos = acidUserCoords;
+
+                    Popup.PopupCoordinates(
+                        Loc.GetString("rmc-acid-pickup-blocked", ("target", acidUid)),
+                        acidPopupPos,
+                        Filter.Local(),
+                        false);
+                }
+
+                args.Handled = true;
+                return;
+            }
+
             var localRotation = Transform(args.Used).LocalRotation;
 
             if (!TryMergeStacks(uid, args.Used, out var transfered, stack, recipientStack))
@@ -111,6 +134,10 @@ namespace Content.Shared.Stacks
                 return false;
 
             if (!Resolve(recipient, ref recipientStack, false) || !Resolve(donor, ref donorStack, false))
+                return false;
+
+            // #RMC Acided stacks cannot be merged
+            if (IsAcidicStack(donor) || IsAcidicStack(recipient))
                 return false;
 
             if (string.IsNullOrEmpty(recipientStack.StackTypeId) || !recipientStack.StackTypeId.Equals(donorStack.StackTypeId))
@@ -332,6 +359,10 @@ namespace Content.Shared.Stacks
             if (!Resolve(insertEnt, ref insertStack) || !Resolve(targetEnt, ref targetStack))
                 return false;
 
+            // #RMC Acided stacks cannot be added to other stacks
+            if (IsAcidicStack(insertEnt) || IsAcidicStack(targetEnt))
+                return false;
+
             if (insertStack.StackTypeId != targetStack.StackTypeId)
                 return false;
 
@@ -388,6 +419,31 @@ namespace Content.Shared.Stacks
                     ("markupCountColor", "lightgray")
                 )
             );
+        }
+
+        // #RMC: Sared check for acid on stack entities
+        protected bool IsAcidicStack(EntityUid uid)
+        {
+            return HasComp<TimedCorrodingComponent>(uid) || HasComp<DamageableCorrodingComponent>(uid);
+        }
+
+        // #RMC identify which stack is acided for popups
+        private bool TryGetAcidedStack(EntityUid donor, EntityUid recipient, out EntityUid acidUid)
+        {
+            if (IsAcidicStack(donor))
+            {
+                acidUid = donor;
+                return true;
+            }
+
+            if (IsAcidicStack(recipient))
+            {
+                acidUid = recipient;
+                return true;
+            }
+
+            acidUid = default;
+            return false;
         }
     }
 

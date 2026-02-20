@@ -115,6 +115,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCCorrosiveAcidDamageTimeSeconds =
         CVarDef.Create("rmc.corrosive_acid_damage_time_seconds", 40, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> RMCCorrosiveAcidInstant =
+        CVarDef.Create("rmc.corrosive_acid_instant", false, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCEvolutionPointsRequireOvipositorMinutes =
         CVarDef.Create("rmc.evolution_points_require_ovipositor_minutes", 5, CVar.REPLICATED | CVar.SERVER);
 

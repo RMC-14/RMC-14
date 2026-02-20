@@ -4,21 +4,33 @@ using Content.Shared._RMC14.Dropship;
 using Content.Shared._RMC14.Dropship.AttachmentPoint;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids.Energy;
+using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Coordinates;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
+using Content.Shared.Item;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Storage.EntitySystems;
+using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Physics;
 using Robust.Shared.Network;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.GameObjects;
+using Robust.Shared.Physics;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared._RMC14.Chemistry;
 
 namespace Content.Shared._RMC14.Xenonids.Acid;
 
@@ -33,14 +45,22 @@ public abstract class SharedXenoAcidSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
+    [Dependency] private readonly XenoAcidHoleSystem _acidHole = default!;
     [Dependency] protected readonly IPrototypeManager PrototypeManager = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
     [Dependency] private readonly XenoEnergySystem _xenoEnergy = default!;
+    [Dependency] private readonly FixtureSystem _fixtures = default!;
+    [Dependency] private readonly CollisionWakeSystem _collisionWake = default!;
 
     protected int CorrosiveAcidTickDelaySeconds;
     protected ProtoId<DamageTypePrototype> CorrosiveAcidDamageTypeStr = "Heat";
+    protected bool CorrosiveAcidInstant;
+    private static readonly ProtoId<ReagentPrototype> AcidRemovedBy = "Water";
+    // #RMC Fixture used to detect extinguisher vapor hits on items.
+    private const string AcidVaporFixtureId = "rmc-acid-vapor";
 
     public override void Initialize()
     {
@@ -52,6 +72,11 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         SubscribeLocalEvent<InheritAcidComponent, AmmoShotEvent>(OnAmmoShot);
         SubscribeLocalEvent<InheritAcidComponent, GrenadeContentThrownEvent>(OnGrenadeContentThrown);
+        SubscribeLocalEvent<TimedCorrodingComponent, GettingPickedUpAttemptEvent>(OnAcidPickupAttempt);
+        SubscribeLocalEvent<DamageableCorrodingComponent, GettingPickedUpAttemptEvent>(OnAcidPickupAttempt);
+        SubscribeLocalEvent<TimedCorrodingComponent, VaporHitEvent>(OnAcidVaporHit);
+        SubscribeLocalEvent<DamageableCorrodingComponent, VaporHitEvent>(OnAcidVaporHit);
+        SubscribeLocalEvent<PickupAttemptEvent>(OnPickupAttempt);
 
         Subs.CVar(_config,
             RMCCVars.RMCCorrosiveAcidTickDelaySeconds,
@@ -68,6 +93,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
                 CorrosiveAcidDamageTypeStr = obj;
                 OnXenoAcidSystemCVarsUpdated();
             },
+            true);
+        Subs.CVar(_config,
+            RMCCVars.RMCCorrosiveAcidInstant,
+            obj => CorrosiveAcidInstant = obj,
             true);
     }
 
@@ -113,7 +142,14 @@ public abstract class SharedXenoAcidSystem : EntitySystem
 
         args.Handled = true;
 
-        var doAfter = new DoAfterArgs(EntityManager, xeno, time * args.ApplyTimeMultiplier, new XenoCorrosiveAcidDoAfterEvent(args), xeno, target)
+        var doAfterEvent = new XenoCorrosiveAcidDoAfterEvent(args);
+        var delay = time * args.ApplyTimeMultiplier;
+        if (CorrosiveAcidInstant)
+        {
+            delay = TimeSpan.Zero;
+        }
+
+        var doAfter = new DoAfterArgs(EntityManager, xeno, delay, doAfterEvent, xeno, target)
         {
             BreakOnMove = true,
             RequireCanInteract = false,
@@ -165,6 +201,10 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         if (_net.IsServer && IsMelted(target))
             RemoveAcid(target);
 
+        if (_acidHole.HasActiveHole(target))
+            return;
+
+        _acidHole.TryStoreAcidDirection(target, xeno.Owner);
         ApplyAcid(args.AcidId, args.Strength, target, args.Dps, args.ExpendableLightDps, args.Time * mult);
     }
 
@@ -193,6 +233,59 @@ public abstract class SharedXenoAcidSystem : EntitySystem
         }
     }
 
+    private void OnAcidPickupAttempt<T>(EntityUid uid, T component, ref GettingPickedUpAttemptEvent args) where T : Component
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Cancel();
+        _popup.PopupClient(Loc.GetString("rmc-acid-pickup-blocked", ("target", args.Item)), args.User, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnAcidVaporHit<T>(Entity<T> ent, ref VaporHitEvent args) where T : Component
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<ItemComponent>(ent.Owner))
+            return;
+
+        var vaporSolution = (args.Solution.Owner, (SolutionContainerManagerComponent?) args.Solution.Comp);
+        foreach (var (_, solution) in _solutionContainer.EnumerateSolutions(vaporSolution))
+        {
+            if (!solution.Comp.Solution.ContainsReagent(AcidRemovedBy, null))
+                continue;
+
+            if (HasComp<GunComponent>(ent.Owner) &&
+                (!TryComp(ent.Owner, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind))
+            {
+                _popup.PopupEntity(
+                    Loc.GetString("rmc-acid-gun-second-wind-spent", ("target", ent.Owner)),
+                    ent.Owner,
+                    PopupType.SmallCaution);
+                return;
+            }
+
+            RemoveAcid(ent.Owner);
+            break;
+        }
+    }
+
+    private void OnPickupAttempt(PickupAttemptEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        if (!HasComp<TimedCorrodingComponent>(args.Item) &&
+            !HasComp<DamageableCorrodingComponent>(args.Item))
+        {
+            return;
+        }
+
+        args.Cancel();
+        _popup.PopupClient(Loc.GetString("rmc-acid-pickup-blocked", ("target", args.Item)), args.User, args.User, PopupType.SmallCaution);
+    }
+
     private bool CheckCorrodiblePopupsWithReplacement(Entity<XenoAcidComponent> xeno, EntityUid target, XenoAcidStrength newStrength, out TimeSpan time, out float mult)
     {
         time = TimeSpan.Zero;
@@ -201,6 +294,12 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             !corrodible.IsCorrodible)
         {
             _popup.PopupClient(Loc.GetString("cm-xeno-acid-not-corrodible", ("target", target)), xeno, xeno, PopupType.SmallCaution);
+            return false;
+        }
+
+        if (_acidHole.HasActiveHole(target))
+        {
+            _popup.PopupClient(Loc.GetString("rmc-acid-hole-already-weakened"), xeno, xeno, PopupType.SmallCaution);
             return false;
         }
 
@@ -266,6 +365,9 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             Dps = dps,
             LightDps = lightDps,
         });
+
+        EnsureAcidVaporFixture(target);
+        EnsureAcidCollisionWake(target);
     }
 
     public override void Update(float frameTime)
@@ -300,8 +402,18 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             if (time < timedCorrodingComponent.CorrodesAt)
                 continue;
 
+            if (TryConsumeGunSecondWind(uid))
+                continue;
+
             var ev = new BeforeMeltedEvent();
             RaiseLocalEvent(uid, ref ev);
+
+            if (_acidHole.TryCreateHoleFromMelt(uid))
+            {
+                QueueDel(timedCorrodingComponent.Acid);
+                RemCompDeferred<TimedCorrodingComponent>(uid);
+                continue;
+            }
 
             _entityStorage.EmptyContents(uid);
 
@@ -320,6 +432,17 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             QueueDel(uid);
             QueueDel(timedCorrodingComponent.Acid);
         }
+    }
+
+    private bool TryConsumeGunSecondWind(EntityUid uid)
+    {
+        if (!TryComp(uid, out GunSecondWindComponent? secondWind) || !secondWind.HasSecondWind)
+            return false;
+
+        secondWind.HasSecondWind = false;
+        Dirty(uid, secondWind);
+        RemoveAcid(uid);
+        return true;
     }
 
     public bool IsMelted(EntityUid uid)
@@ -357,6 +480,95 @@ public abstract class SharedXenoAcidSystem : EntitySystem
             QueueDel(damageable.Acid);
             RemComp<DamageableCorrodingComponent>(uid);
         }
+
+        RemoveAcidVaporFixture(uid);
+        RestoreAcidCollisionWake(uid);
+    }
+
+    private void EnsureAcidVaporFixture(EntityUid uid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<ItemComponent>(uid))
+            return;
+
+        if (!TryComp(uid, out FixturesComponent? fixtures))
+            return;
+
+        if (_fixtures.GetFixtureOrNull(uid, AcidVaporFixtureId, fixtures) != null)
+            return;
+
+        if (fixtures.Fixtures.Count == 0)
+            return;
+
+        var shape = fixtures.Fixtures.Values.First().Shape;
+        if (_fixtures.TryCreateFixture(
+            uid,
+            shape,
+            AcidVaporFixtureId,
+            hard: false,
+            collisionLayer: (int) CollisionGroup.VaporLayer,
+            collisionMask: (int) CollisionGroup.ItemMask,
+            manager: fixtures))
+        {
+        }
+    }
+
+    private void EnsureAcidCollisionWake(EntityUid uid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(uid, out CollisionWakeComponent? wake))
+            return;
+
+        if (HasComp<RMCAcidCollisionWakeOverrideComponent>(uid))
+            return;
+
+        var overrideComp = AddComp<RMCAcidCollisionWakeOverrideComponent>(uid);
+        overrideComp.PreviousEnabled = wake.Enabled;
+
+        _collisionWake.SetEnabled(uid, false, wake);
+    }
+
+    private void RestoreAcidCollisionWake(EntityUid uid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TryComp(uid, out RMCAcidCollisionWakeOverrideComponent? overrideComp))
+            return;
+
+        if (TryComp(uid, out CollisionWakeComponent? wake))
+        {
+            _collisionWake.SetEnabled(uid, overrideComp.PreviousEnabled, wake);
+        }
+
+        RemComp<RMCAcidCollisionWakeOverrideComponent>(uid);
+    }
+
+    private void RemoveAcidVaporFixture(EntityUid uid)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!HasComp<ItemComponent>(uid))
+        {
+            return;
+        }
+
+        if (!TryComp(uid, out FixturesComponent? fixtures))
+        {
+            return;
+        }
+
+        if (_fixtures.GetFixtureOrNull(uid, AcidVaporFixtureId, fixtures) == null)
+        {
+            return;
+        }
+
+        _fixtures.DestroyFixture(uid, AcidVaporFixtureId, manager: fixtures);
     }
 
     /// <summary>

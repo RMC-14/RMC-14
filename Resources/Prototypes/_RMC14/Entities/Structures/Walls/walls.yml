@@ -1,3 +1,11 @@
+- type: examinableDamage
+  id: RMCWallMessages
+  messages:
+    - rmc-wall-integrity-1
+    - rmc-wall-integrity-2
+    - rmc-wall-integrity-3
+    - rmc-wall-integrity-4
+
 # Standard
 - type: entity
   parent: CMBaseWall
@@ -170,8 +178,10 @@
         !type:DamageTrigger
         damage: 9000
       behaviors:
+      - !type:ChangeConstructionNodeBehavior
+        node: girder
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts: [ "Breakage" ]
   - type: IconSmooth
     key: walls
     additionalKeys:

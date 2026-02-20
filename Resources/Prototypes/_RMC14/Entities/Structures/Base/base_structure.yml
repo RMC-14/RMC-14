@@ -137,10 +137,23 @@
   - type: Damageable
     damageContainer: StructuralMarine
     damageModifierSet: StructuralMarine
+  - type: ExaminableDamage
+    messages: RMCWallMessages
+  - type: RMCIntegrityExamine
+  - type: RMCRepairable
+    heal: 1000
+    delay: 1
+  - type: NailgunRepairable
+  - type: RMCGenericExamine
+    message: rmc-structure-wall-repair-examine-tip
+    whitelist:
+      components:
+      - Marine
   - type: Corrodible
     isCorrodible: true
     structure: true
     meltTimeMult: 3
+  - type: XenoAcidHoleWall
   - type: Clickable
   - type: RMCWallExplosionDeletable
   - type: DestroyedByExplosionType
