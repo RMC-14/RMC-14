@@ -273,16 +273,16 @@
     - name: Pouches
       entries:
       - id: RMCPouchBayonetFill
-        name: Bayonet Sheath (Full)
+        name: bayonet sheath (Full)
         amount: 15
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: First-Aid Pouch (Splints, Gauze, Ointment)
+        name: first-aid pouch (splints, gauze, ointment)
         amount: 15
       - id: RMCPouchFirstAidPills
-        name: First-Aid Pouch (Pill Packets)
+        name: first-aid pouch (pill packets)
         amount: 15
       - id: RMCPouchFlareFilled
-        name: Flare Pouch (Full)
+        name: flare pouch (Full)
         amount: 15
       - id: RMCPouchDocumentSmall
         amount: 15
@@ -303,7 +303,7 @@
       - id: RMCPouchExplosive
         amount: 1
       - id: RMCPouchFirstResponder
-        name: First Responder Pouch (Empty)
+        name: first responder pouch (empty)
         amount: 2
       - id: RMCPouchMagazinePistolLarge
         amount: 2

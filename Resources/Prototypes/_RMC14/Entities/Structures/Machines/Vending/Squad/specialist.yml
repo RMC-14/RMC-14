@@ -225,7 +225,7 @@
         name: first-aid pouch (pills)
         recommended: true
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchMagazine
         recommended: true
       - id: RMCPouchShotgun
@@ -264,6 +264,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman

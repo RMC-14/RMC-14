@@ -45,10 +45,6 @@
         points: 10
       - id: CMMagazineRifleM4SPRExt
         points: 10
-      - id: RMCMagazinePistolM13AP
-        points: 6
-      - id: RMCMagazinePistolM13ExtAP
-        points: 8
       - id: CMMagazineSMGM63AP
         points: 10
       - id: CMMagazineSMGM63Ext
@@ -61,6 +57,10 @@
       entries:
       - id: RMCMagazinePistolM13Ext
         points: 6
+      - id: RMCMagazinePistolM13AP
+        points: 6
+      - id: RMCMagazinePistolM13ExtAP
+        points: 8
       # - id: RMCSpeedLoader44Heavy
       #  points: 10
       - id: RMCSpeedLoader44Marksman
@@ -226,7 +226,7 @@
         name: first-aid pouch (pills)
       - id: RMCPouchFirstResponder
       - id: RMCPouchFlareFilled
-        name: Flare pouch (Full)
+        name: flare pouch (Full)
       - id: RMCPouchFuelTank
       - id: RMCPouchGeneralLarge
       - id: RMCPouchSling
@@ -236,7 +236,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchToolsFill
         recommended: true
-        name: Tools pouch (Full)
+        name: tools pouch (Full)
     - name: Accessories
       choices: { CMAccessories: 1 }
       entries:
