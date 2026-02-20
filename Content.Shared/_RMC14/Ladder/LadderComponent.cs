@@ -30,4 +30,13 @@ public sealed partial class LadderComponent : Component
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Watching = new();
+
+    [DataField, AutoNetworkedField]
+    public LadderDirection Direction;
+}
+
+public enum LadderDirection
+{
+    Up,
+    Down,
 }
