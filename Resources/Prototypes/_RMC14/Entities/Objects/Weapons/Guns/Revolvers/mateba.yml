@@ -262,7 +262,7 @@
     - state: base-5
       map: [ "enum.GunVisualLayers.Mag" ]
     - state: base-unshaded-5
-      color: "#30C223"
+      color: "#f7f6da"
       map: [ "enum.GunVisualLayers.MagUnshaded" ]
   - type: MagazineVisuals
     magState: base

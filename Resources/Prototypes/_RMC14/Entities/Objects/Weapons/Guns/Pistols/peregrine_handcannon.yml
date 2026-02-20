@@ -221,7 +221,7 @@
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
     - state: ammo_band
-      color: "#429C60"
+      color: "#f7f6da"
 
 - type: entity
   id: RMCCartridgePistolHandcannon

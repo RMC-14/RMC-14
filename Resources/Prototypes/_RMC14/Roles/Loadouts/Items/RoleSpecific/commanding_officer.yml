@@ -83,3 +83,9 @@
   storage:
     back:
     - RMCWeaponPistolHandcannonWinterWyvern
+
+- type: loadout
+  id: M1984MatchRMC
+  storage:
+    back:
+    - RMCWeaponPistolM1984Match
