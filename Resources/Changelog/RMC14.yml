@@ -1,13 +1,4 @@
 ﻿Entries:
-- author: CatAndHats
-  changes:
-  - message: 'Added cardboard construction menu, Press Z with cardboard in-hand to
-      open the menu: Craft ammo boxes and newly-craftable donut box, pizza boxes,
-      and folders!'
-    type: Add
-  id: 2454
-  time: '2025-10-19T06:30:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8010
 - author: BreakpointDebug1234
   changes:
   - message: CMB corpses no longer spawn with all access badges.
@@ -4573,5 +4564,13 @@
   id: 2955
   time: '2026-02-20T13:08:11.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/8979
+- author: kleinerstation13
+  changes:
+  - message: Added a scenario for 121/RECON, an SPP SOF investigating the Sorokyne
+      Outpost distress signal.
+    type: Add
+  id: 2956
+  time: '2026-02-20T13:10:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9260
 Name: RMC14
 Order: -1
