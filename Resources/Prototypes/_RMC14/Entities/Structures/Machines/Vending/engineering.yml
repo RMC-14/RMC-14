@@ -15,6 +15,9 @@
     - state: "normal-unshaded"
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded" ]
       shader: unshaded
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
   - type: AccessReader
     access: [["CMAccessCombatTechPrep"], ["CMAccessEngineering"], ["CMAccessColonyEngineering"]]
   - type: CMAutomatedVendor

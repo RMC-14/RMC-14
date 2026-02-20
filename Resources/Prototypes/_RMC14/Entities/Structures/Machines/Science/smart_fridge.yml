@@ -1,5 +1,5 @@
 ﻿- type: entity
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  parent: [ BaseMachinePowered, RMCConstructibleMachine ]
   id: RMCSmartFridge
   name: smart chemical storage
   description: A refrigerated storage unit for medicine and chemical storage.
@@ -23,6 +23,12 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Corrodible
+    timeToApply: 4
+    structure: true
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: null
   - type: Destructible
     thresholds:
     - trigger:
@@ -32,10 +38,8 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
-      - !type:ChangeConstructionNodeBehavior
-        node: machineFrame
       - !type:DoActsBehavior
-        acts: [ "Destruction" ]
+        acts: ["Destruction"]
   - type: ActivatableUI
     key: enum.RMCSmartFridgeUI.Key
   - type: ActivatableUIRequiresPower
