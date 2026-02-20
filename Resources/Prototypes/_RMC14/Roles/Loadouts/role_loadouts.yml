@@ -126,6 +126,7 @@
   groups:
   - MarineLeatherBackpack
   - CommandingOfficerIDRMC
+  - CommandingOfficerCareerPathRMC
   - CommandingOfficerWeaponRMC
   - CommandingOfficerRoleSpecificRMC
   - HeadwearRMC

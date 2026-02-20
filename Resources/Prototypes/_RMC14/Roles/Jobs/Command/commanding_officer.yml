@@ -90,8 +90,6 @@
   equipment:
     jumpsuit: CMJumpsuitBO
     shoes: CMShoesLaceupCommander
-    head: CMHeadBeretCO
-    outerClothing: RMCCoatService
     ears: CMHeadsetSeniorCommand
     pocket1: RMCPouchCommand
     pocket2: RMCPouchGeneralLarge
