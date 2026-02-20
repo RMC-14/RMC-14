@@ -10,7 +10,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnCMTestDummy
+  id: RMCSpawnCMTestDummy
   name: RMC Test Dummy Spawner
   suffix: DEBUG
   components:

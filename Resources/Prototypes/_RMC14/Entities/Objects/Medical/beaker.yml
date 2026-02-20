@@ -359,7 +359,7 @@
     price: 40
   - type: Tag
     tags:
-    - PressurizedCanister
+    - RMCPressurizedCanister
     - ChemDispensable
   - type: PhysicalComposition
     materialComposition:
@@ -452,7 +452,7 @@
           Quantity: 240
 
 - type: Tag
-  id: PressurizedCanister
+  id: RMCPressurizedCanister
 
 - type: entity
   parent: CMBeakerBase

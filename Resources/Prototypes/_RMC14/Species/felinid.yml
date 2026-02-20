@@ -7,7 +7,7 @@
   prototype: CMMobFelinid
   sprites: MobFelinidSprites
   markingLimits: MobFelinidMarkingLimits
-  dollPrototype: MobFelinidDummy
+  dollPrototype: RMCMobFelinidDummy
   skinColoration: Hues
 
 - type: speciesBaseSprites

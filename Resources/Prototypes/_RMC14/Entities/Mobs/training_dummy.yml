@@ -34,7 +34,7 @@
 
 - type: entity
   parent: MarkerBase
-  id: SpawnRMCTrainingDummy
+  id: RMCSpawnRMCTrainingDummy
   name: RMC Training Dummy Spawner
   components:
   - type: Sprite

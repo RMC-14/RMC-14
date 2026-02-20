@@ -25,7 +25,7 @@ public abstract class SharedSentryTargetingSystem : EntitySystem
         { "UNMC", "FactionMarine" },
         { "CLF", "FactionCLF" },
         { "SPP", "FactionSPP" },
-        { "Halcyon", "FactionHalcyon" },
+        { "Halcyon", "FactionSPP" },
         { "WeYa", "FactionWeYa" },
         { "Civilian", "FactionSurvivor" },
         { "RoyalMarines", "FactionRoyalMarines" },
