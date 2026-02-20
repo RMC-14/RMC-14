@@ -36,3 +36,16 @@
     useDelay: 1 # Prevents Emote Spam
   - type: InstantAction
     event: !type:ToggleActionEvent
+
+- type: marking
+  id: AvaliTailStripeOneAnimated
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: []
+  sprites:
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedbase_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedprimary_wag
+    - sprite: _RMC14/Mobs/Avali/avali_parts.rsi
+      state: avali_tailstripedsecondary_wag
