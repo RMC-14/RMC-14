@@ -38,6 +38,9 @@ public sealed partial class HiveComponent : Component
     public bool AnnouncedQueenDeathCooldownOver;
 
     [DataField, AutoNetworkedField]
+    public bool AnnouncedNoQueenCooldownOver;
+
+    [DataField, AutoNetworkedField]
     public bool AnnouncedHiveCoreCooldownOver;
 
     [DataField, AutoNetworkedField]
@@ -57,6 +60,9 @@ public sealed partial class HiveComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan NewQueenCooldown = TimeSpan.FromMinutes(5);
+
+    [DataField, AutoNetworkedField]
+    public TimeSpan NoQueenAlertTime = TimeSpan.FromMinutes(4);
 
     [DataField, AutoNetworkedField]
     public bool GotOvipositorPopup;
