@@ -35,12 +35,25 @@
 - type: entity
   parent: CMSatchelMarine
   id: RMCSatchelHEFAFill
+  name: HEFA storage bag
   suffix: HEFA, Filled
   components:
   - type: StorageFill
     contents:
     - id: CMGrenadeFrag
+      amount: 7
+
+- type: entity
+  parent: CMSatchelMarine
+  id: RMCSatchelHEFAKnightFill
+  name: HEFA storage bag
+  suffix: HEFA, Filled, Melee
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeFrag
       amount: 6
+    - id: RMCSwordHEFA
 
 - type: entity
   parent: CMSatchelMarine

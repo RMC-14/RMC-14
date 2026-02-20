@@ -2,17 +2,39 @@
   parent: CMM2132Machete
   id: RMCSwordHEFA
   name: HEFA sword
-  description: A blade known to be used by the Order of the HEFA. # this highly dangerous blade blows up in a shower of shrapnel on impact. # TODO RMC14 HEFA sword explosion
+  description: A blade known to be used by the Order of the HEFA, this highly dangerous blade blows up in a shower of shrapnel on impact.
   components:
   - type: Tag
     tags:
-    - RMCSwordHEFA #no scabbard/holster
+    - RMCSwordHEFA # Prevents using the machete scabbard/holster.
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
     state: icon
   - type: Item
-    size: Large
+    size: Medium
     sprite: _RMC14/Objects/Weapons/Melee/hefa_sword.rsi
+  - type: HefaSwordTriggerOnHit
+  - type: ExplodeOnTrigger
+  - type: Explosive
+    explosionType: RMC
+    maxIntensity: 8 # max 40 brute 40 burn
+    intensitySlope: 4
+    totalIntensity: 110
+    deleteAfterExplosion: false
+  - type: ProjectileGrenade
+    fillPrototype: CMProjectileShrapnel
+    capacity: 48
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    spreadAngle: 90
+    evenSpread: true
+  - type: ContainerContainer
+    containers:
+      cluster-payload: !type:Container
+  - type: ClusterLimitHits
+  - type: CMExplosionEffect
+    maxShrapnel: 0
+  - type: RMCScorchEffect
 
 - type: Tag
   id: RMCSwordHEFA

@@ -96,9 +96,9 @@
 - type: startingGear
   id: RMCGearHEFAShrapnelsworn
   equipment:
-    head: RMCArmorHelmetHEFA
+    head: RMCArmorHelmetHEFAFilled
     jumpsuit: RMCJumpsuitHEFA
-    outerClothing: RMCArmorMercenaryHEFA
+    outerClothing: RMCArmorMercenaryHEFAFilled
     gloves: CMHandsBlackMarine
     shoes: CMBootsBlack
     suitstorage: WeaponLauncherM83HEFA
