@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -39,6 +40,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -610,6 +612,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 QueueDel(uid);
                 continue;
             }
+            comp.Chain ??= _onCollide.SpawnChain();
 
             foreach (var tile in comp.Tiles)
             {
@@ -617,6 +620,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 {
                     comp.Tiles.Remove(tile);
                     var fire = Spawn(comp.Spawn, tile.Coordinates);
+
+                    EnsureComp<DamageOnCollideComponent>(fire, out var collide);
+                    _onCollide.SetChain((fire, collide), comp.Chain.Value);
 
                     // check for any fires on the same tile other than the one we just spawned, and delete them
                     if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(_transform.ToCoordinates(fire, tile.Coordinates), out var oldTileFire)
