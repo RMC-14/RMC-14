@@ -29,6 +29,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: ClothingFactionLockIgnore
   hidden: true
 
 - type: entity

@@ -35,6 +35,7 @@
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: tl
     - type: RMCTrackable
+    - type: ClothingFactionLockIgnore
   hidden: true
 
 - type: playTimeTracker

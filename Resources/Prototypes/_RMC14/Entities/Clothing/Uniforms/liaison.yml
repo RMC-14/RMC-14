@@ -10,6 +10,10 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_regular.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Liaison/liaison_regular.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
+    - WeYa
 
 - type: entity
   parent: CMJumpsuitLiaison

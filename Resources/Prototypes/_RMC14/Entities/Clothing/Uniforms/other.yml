@@ -158,6 +158,9 @@
   - type: Foldable
     unfoldVerbText: rmc-sleeves-verb-unfold
     foldVerbText: rmc-sleeves-verb-fold
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilian
@@ -288,7 +291,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/blue_jumpsuit.rsi
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCUniformBase
   id: RMCJumpsuitRedShorts
   name: red shorts
   description: A ratty pair of red shorts. Smells of cigarettes.
@@ -297,9 +300,12 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_shorts.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCJumpsuitCivilian
   id: RMCJumpsuitChaplain
   name: chaplain's jumpsuit
   description: It's a black jumpsuit, often worn by religious folk.
@@ -363,6 +369,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/weyamart.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -374,6 +383,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/sanitation.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -385,6 +397,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/pizza_galaxy.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -396,6 +411,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/daily_grind.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -407,6 +425,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/tartarus_mining.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilian
@@ -429,6 +450,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Civilian/emt.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitEMT
@@ -450,6 +474,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/laborers_overalls.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 # Kutjevo
 - type: entity
@@ -462,6 +489,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_jumper.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -473,6 +503,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/kutjevo_drysuit.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 # Security
 - type: entity
@@ -490,6 +523,9 @@
   - type: Tag
     tags:
     - RMCUniformUNSecurity
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -505,6 +541,9 @@
     tags:
     - RMCUniformMarine
     - RMCUniformUNSecurity
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitRiotControl
@@ -537,6 +576,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/janitor.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCUniformBase
@@ -548,6 +590,9 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/engineer_worker.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
 
 - type: entity
   parent: RMCJumpsuitCivilianEngineerWorker
@@ -575,6 +620,10 @@
     startingAccessories:
     - RMCCLFArmband
     - RMCPatchCLF
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian
+    - CLF
 
 # TODO RMC14 - Should be surgical webbing instead
 - type: entity
@@ -620,3 +669,6 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/frontier.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - Civilian

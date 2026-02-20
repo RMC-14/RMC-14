@@ -44,6 +44,9 @@
   - type: Tag
     tags:
     - RMCUniformSPP
+  - type: ClothingFactionLocked
+    whitelist:
+    - SPP
 
 - type: entity
   parent: RMCJumpsuitSPPPaP

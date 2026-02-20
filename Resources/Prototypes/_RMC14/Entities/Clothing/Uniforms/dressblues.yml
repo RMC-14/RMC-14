@@ -7,6 +7,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/enlisted.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -16,6 +19,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/senior.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 - type: entity
   parent: RMCMarineUniformBase
@@ -25,6 +31,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/DressBlues/general.rsi
+  - type: ClothingFactionLocked
+    whitelist:
+    - UNMC
 
 
 
