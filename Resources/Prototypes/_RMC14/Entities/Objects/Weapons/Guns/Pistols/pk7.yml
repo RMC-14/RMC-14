@@ -90,6 +90,7 @@
     - RMCCartridgePistol9mmElectrostatic
   - type: CartridgeAmmo
     proto: RMCBulletPistol9mmElectrostatic
+    muzzleFlash: RMCMuzzleFlashEffectEnergy
 
 - type: entity
   parent: RMCProjectileTaser
