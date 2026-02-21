@@ -156,7 +156,6 @@
 
 - type: loadoutGroup
   id: MasksRMCSquad
-  parent: MasksRMC
   name: rmc-loadout-group-masks
   minLimit: 0
   maxLimit: 21
@@ -246,7 +245,6 @@
 
 - type: loadoutGroup
   id: HeadwearRMCSquad
-  parent: HeadwearRMC
   name: rmc-loadout-group-headwear
   minLimit: 0
   maxLimit: 10
