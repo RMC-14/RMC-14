@@ -46,6 +46,25 @@
       sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
       state: heavylaser_flash
 
+- type: entity
+  parent: MuzzleFlashEffect
+  id: MuzzleFlashEffectVehicleOver
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: OverMobs
+    offset: 0, 0
+
+- type: entity
+  parent: MuzzleFlashEffectVehicleOver
+  id: MuzzleFlashEffectVehicleOverLarge
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    drawdepth: OverMobs
+    offset: 0.2, 0
+    scale: "1.6, 1.6"
+
 # One bullet to bring them all into the darkness and bind them
 - type: entity
   id: BaseBullet
@@ -734,6 +753,48 @@
     particleType: Sigma
 
 # Launcher projectiles (grenade / rocket)
+- type: entity
+  parent: RMCProjectileRocket84mm
+  id: RMCProjectileLTBCannon
+  name: LTB cannon shell
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DeleteOnFixedDistanceStop
+  - type: TriggerOnCollide
+    fixtureID: projectile
+    ignoreOtherNonHard: false
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Blunt: 25
+        Piercing: 15
+    maxFixedRange: 0
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
+  - type: SpawnOnTerminate
+    spawn: RMCVehicleLTBCannonImpact
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.5
+    maxVelocity: 1.5
+    fillPrototype: RMCShrapnelJagged
+    rebounds: true
+    capacity: 8
+    spreadAngle: 25
+  - type: RMCProjectileAccuracy
+    accuracy: 110
+    thresholds:
+    - range: 8
+      falloff: 10
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Projectiles/projectiles.rsi
+    scale: "1.2, 1.2"
+    layers:
+    - state: ltb
+      shader: unshaded
+
 - type: entity
   id: BulletRocket
   name: rocket

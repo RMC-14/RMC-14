@@ -273,6 +273,10 @@
       whitelist:
         tags:
         - RMCFlare
+  - type: BulletBox
+    amount: 8
+    max: 8
+    bulletType: RMCFlarePackAmmo
   - type: Sprite
     sprite: _RMC14/Objects/Storage/boxes.rsi
     layers:
@@ -452,15 +456,15 @@
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5.0
-       startValue: 2.5
-       endValue: 7.0
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
       - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 7.0
-       endValue: 1.0
+        id: fade_out
+        maxDuration: 30
+        startValue: 7.0
+        endValue: 1.0
   - type: PointLight
     color: "#A7FFA7"
     radius: 8.0
@@ -471,9 +475,16 @@
     lifetime: 180
 
 - type: entity
+  parent: BaseItem
+  id: RMCFlarePackAmmo
   name: flare
+  abstract: true
+  categories: [ HideSpawnMenu ]
+
+- type: entity
   parent: BaseItem
   id: RMCFlareL96
+  name: flare
   description: A vibrant purple Royal Crown Marines issued flare. There are instructions on the side, it reads 'To light, pull cord'.
   components:
   - type: Tag
@@ -594,15 +605,15 @@
   - type: LightBehaviour
     behaviours:
       - !type:FadeBehaviour
-       id: turn_on
-       maxDuration: 5.0
-       startValue: 2.5
-       endValue: 7.0
+        id: turn_on
+        maxDuration: 5.0
+        startValue: 2.5
+        endValue: 7.0
       - !type:FadeBehaviour
-       id: fade_out
-       maxDuration: 30
-       startValue: 7.0
-       endValue: 1.0
+        id: fade_out
+        maxDuration: 30
+        startValue: 7.0
+        endValue: 1.0
   - type: PointLight
     enabled: true
     color: "#C8BFE7"

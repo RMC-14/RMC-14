@@ -1,0 +1,74 @@
+<controls:RMCVehicleSupplyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Vehicle.Supply"
+    xmlns:ui="clr-namespace:Robust.Client.UserInterface.Controls;assembly=Robust.Client"
+    xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:rmcui="clr-namespace:Content.Client._RMC14.Vehicle.Ui"
+    MinSize="720 360">
+    <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+        <PanelContainer.PanelOverride>
+            <graphics:StyleBoxFlat
+                BackgroundColor="#070E18"
+                BorderColor="#6BC7FF"
+                BorderThickness="2"/>
+        </PanelContainer.PanelOverride>
+
+        <BoxContainer Orientation="Vertical" Margin="14" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True">
+                <BoxContainer Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" VerticalExpand="True">
+                    <Label Name="StatusLabel" Access="Public" FontColorOverride="#9DB5D1"/>
+                </BoxContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="12" HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer HorizontalExpand="True" VerticalExpand="True">
+                <PanelContainer.PanelOverride>
+                    <graphics:StyleBoxFlat
+                        BackgroundColor="#0B131F"
+                        BorderColor="#1E3450"
+                        BorderThickness="1"/>
+                </PanelContainer.PanelOverride>
+
+                <BoxContainer Orientation="Vertical" SeparationOverride="6" Margin="10" HorizontalExpand="True" VerticalExpand="True">
+                    <Label Text="Stored Vehicles" FontColorOverride="#C7D7EA"/>
+                    <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                        <BoxContainer Name="AvailableRows" Access="Public" Orientation="Vertical" SeparationOverride="4" HorizontalExpand="True" />
+                    </ScrollContainer>
+                </BoxContainer>
+                </PanelContainer>
+
+                <PanelContainer Name="PreviewPanel" MinSize="160 0" VerticalExpand="True">
+                    <PanelContainer.PanelOverride>
+                        <graphics:StyleBoxFlat
+                            BackgroundColor="#0D2235"
+                            BorderColor="#2D5E8E"
+                            BorderThickness="2"/>
+                    </PanelContainer.PanelOverride>
+
+                    <BoxContainer Orientation="Vertical" SeparationOverride="4" Margin="8" HorizontalExpand="True" VerticalExpand="True">
+                        <Label Name="PreviewTitle" Access="Public" Text="Vehicle" FontColorOverride="#C7D7EA"/>
+                        <PanelContainer Name="VehiclePreviewContainer" HorizontalExpand="True" VerticalExpand="True">
+                            <ui:EntityPrototypeView Name="VehiclePreview"
+                                                    MinSize="120 120"
+                                                    SpriteOffset="True"
+                                                    Stretch="Fill"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Access="Public" />
+                        </PanelContainer>
+                    </BoxContainer>
+                </PanelContainer>
+            </BoxContainer>
+
+            <BoxContainer Orientation="Horizontal" SeparationOverride="6">
+                <rmcui:RMCHardpointButton Name="RaiseButton" Access="Public" LabelText="Raise" MinSize="98 26" />
+                <rmcui:RMCHardpointButton Name="LowerButton" Access="Public" LabelText="Lower" MinSize="98 26" />
+                <BoxContainer Name="LiftActivity" Access="Public" Orientation="Horizontal" SeparationOverride="4" VerticalAlignment="Center" Margin="6,0,0,0">
+                    <PanelContainer Name="LiftDot1" Access="Public" MinSize="8 8" MaxSize="8 8" />
+                    <PanelContainer Name="LiftDot2" Access="Public" MinSize="8 8" MaxSize="8 8" />
+                    <PanelContainer Name="LiftDot3" Access="Public" MinSize="8 8" MaxSize="8 8" />
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </PanelContainer>
+</controls:RMCVehicleSupplyWindow>

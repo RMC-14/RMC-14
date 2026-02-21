@@ -151,12 +151,6 @@ public abstract partial class SharedMoverController : VirtualController
                 dirtied = true;
             }
 
-            if (relayTargetMover.CanMove != mover.CanMove)
-            {
-                relayTargetMover.CanMove = mover.CanMove;
-                dirtied = true;
-            }
-
             if (dirtied)
             {
                 Dirty(relay.RelayEntity, relayTargetMover);
@@ -169,7 +163,9 @@ public abstract partial class SharedMoverController : VirtualController
             return;
 
         RelayTargetQuery.TryComp(uid, out var relayTarget);
-        var relaySource = relayTarget?.Source;
+        EntityUid? relaySource = null;
+        if (relayTarget != null && EnsureValidRelayTarget(uid, relayTarget))
+            relaySource = relayTarget.Source;
 
         // If we're not the target of a relay then handle lerp data.
         if (relaySource == null)

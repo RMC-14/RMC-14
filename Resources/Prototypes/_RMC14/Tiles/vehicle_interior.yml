@@ -1,0 +1,575 @@
+- type: tile
+  abstract: true
+  parent: CMTileBase
+  id: RMCFloorVehicleInteriorBase
+  name: vehicle interior floor
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_4
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_4.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_5
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_5.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_6
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_6.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_7
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_7.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_8
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_8.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_9
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_9.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_10
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_10.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_11
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_11.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_12
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_12.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_13
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_13.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_14
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_14.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor0_1_15
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_0_1_15.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorWithBars
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/with_bars.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_1_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_1_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_1_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_1_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_1_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_1_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_2_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_2_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_2_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_2_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_2_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_2_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_3_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_3_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_3_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_3_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_3_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_3_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_4
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_4.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_4_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_4_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_4_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_4_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_4_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_4_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_5
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_5.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_6
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_6.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_7
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_7.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_7_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_7_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_8
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_8.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_8_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_8_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_9
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_9.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_9_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_9_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_10
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_10.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_10_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_10_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_11
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_11.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_12
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_12.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_13
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_13.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor1_14
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_1_14.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkType
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_type.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_4
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_4.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_5
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_5.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_6
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_6.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_7
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_7.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_8
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_8.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_9
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_9.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_10
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_10.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_11
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_11.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_12
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_12.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_13
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_13.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_14
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_14.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor2_15
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_2_15.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkTypeWithBars
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_type_with_bars.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_1_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_1_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_1_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_1_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_1_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_1_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_2_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_2_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_2_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_2_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_2_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_2_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_3_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_3_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_3_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_3_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_3_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_3_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_4
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_4.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_4_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_4_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_4_2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_4_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_4_3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_4_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_5
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_5.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_6
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_6.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_7
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_7.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_7_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_7_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_8
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_8.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_8_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_8_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_9
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_9.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_9_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_9_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_10
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_10.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_10_1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_10_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_11
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_11.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_12
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_12.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_13
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_13.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorFloor3_14
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/floor_3_14.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorMedType
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/med_type.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterile
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorSterileGreen
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/sterile_green.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen1
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_1.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen2
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_2.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen3
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_3.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen4
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_4.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen5
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_5.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen6
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_6.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen7
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_7.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen8
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_8.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen9
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_9.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen10
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_10.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen11
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_11.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen12
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_12.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen13
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_13.png"
+
+- type: tile
+  parent: RMCFloorVehicleInteriorBase
+  id: RMCFloorVehicleInteriorDarkSterileGreen14
+  sprite: "/Textures/Tiles/vehicle_interior.rsi/dark_sterile_green_14.png"

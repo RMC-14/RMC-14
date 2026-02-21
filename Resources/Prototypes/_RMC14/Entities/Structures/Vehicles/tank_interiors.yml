@@ -1,0 +1,369 @@
+- type: entity
+  abstract: true
+  id: RMCVehicleTankInteriorBase
+  name: tank interior piece
+  description: A decorative interior piece for the tank.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  id: RMCVehicleTankRoofBase
+  name: tank interior roof
+  description: A removable roof section for the tank interior.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankWallBase
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+        - InteractImpassable
+
+- type: entity
+  abstract: true
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankDoorBase
+  components:
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  abstract: true
+  parent: CMClosetBase
+  id: RMCVehicleTankLockerBase
+  name: tank interior locker
+  description: A storage locker for tank interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: WallMount
+    arc: 360
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/tank.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: locker
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: locker
+      map: ["enum.StorageVisualLayers.Door"]
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker
+    stateBaseOpen: locker_open
+    stateDoorClosed:
+    stateDoorOpen:
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankWall
+  components:
+  - type: Sprite
+    state: wall
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankWallAlt
+  components:
+  - type: Sprite
+    state: wall_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankFront1
+  components:
+  - type: Sprite
+    state: front_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankFront2
+  components:
+  - type: Sprite
+    state: front_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankFront3
+  components:
+  - type: Sprite
+    state: front_3
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankBack1
+  components:
+  - type: Sprite
+    state: back_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankBack2
+  components:
+  - type: Sprite
+    state: back_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankBack3
+  components:
+  - type: Sprite
+    state: back_3
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankFront1
+  components:
+  - type: Sprite
+    state: trank_front_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankFront2
+  components:
+  - type: Sprite
+    state: tank_front_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankFront3
+  components:
+  - type: Sprite
+    state: tank_front_3
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankBack1
+  components:
+  - type: Sprite
+    state: tank_back_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankBack2
+  components:
+  - type: Sprite
+    state: tank_back_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankBack3
+  components:
+  - type: Sprite
+    state: tank_back_3
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankLeft1
+  components:
+  - type: Sprite
+    state: tank_left_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankLeft2
+  components:
+  - type: Sprite
+    state: tank_left_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankLeft3
+  components:
+  - type: Sprite
+    state: tank_left_3
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankRight1
+  components:
+  - type: Sprite
+    state: tank_right_1
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankRight2
+  components:
+  - type: Sprite
+    state: tank_right_2
+
+- type: entity
+  parent: RMCVehicleTankWallBase
+  id: RMCVehicleTankTankRight3
+  components:
+  - type: Sprite
+    state: tank_right_3
+
+- type: entity
+  parent: RMCVehicleTankDoorBase
+  id: RMCVehicleTankHatch
+  components:
+  - type: Sprite
+    state: hatch
+
+- type: entity
+  parent: RMCVehicleTankHatch
+  id: RMCVehicleTankExitHatch
+  components:
+  - type: VehicleExit
+
+- type: entity
+  parent: RMCVehicleTankRoofBase
+  id: RMCVehicleTankExterior1
+  components:
+  - type: Sprite
+    layers:
+    - state: exterior_1
+      map: ["roof"]
+
+- type: entity
+  parent: RMCVehicleTankRoofBase
+  id: RMCVehicleTankExterior2
+  components:
+  - type: Sprite
+    layers:
+    - state: exterior_2
+      map: ["roof"]
+
+- type: entity
+  parent: RMCVehicleTankRoofBase
+  id: RMCVehicleTankExterior3
+  components:
+  - type: Sprite
+    layers:
+    - state: exterior_3
+      map: ["roof"]
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp0
+  components:
+  - type: Sprite
+    state: prop0
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp1
+  components:
+  - type: Sprite
+    state: prop1
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp2
+  components:
+  - type: Sprite
+    state: prop2
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp3
+  components:
+  - type: Sprite
+    state: prop3
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp4
+  components:
+  - type: Sprite
+    state: prop4
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp5
+  components:
+  - type: Sprite
+    state: prop5
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp6
+  components:
+  - type: Sprite
+    state: prop6
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp7
+  components:
+  - type: Sprite
+    state: prop7
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankProp8Extra
+  components:
+  - type: Sprite
+    state: prop8_extra
+
+- type: entity
+  parent: RMCVehicleTankInteriorBase
+  id: RMCVehicleTankNewStuff
+  components:
+  - type: Sprite
+    state: "new stuff"
+
+- type: entity
+  parent: RMCVehicleTankLockerBase
+  id: RMCVehicleTankLocker
+  name: tank locker
+
+- type: entity
+  parent: RMCVehicleTankLockerBase
+  id: RMCVehicleTankLockerOpen
+  name: tank locker (open)
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: locker_open
+    stateBaseOpen: locker_open

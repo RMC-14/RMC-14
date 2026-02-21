@@ -1,0 +1,278 @@
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCVehicleCartridgeLTBCannon
+  name: cartridge (LTB cannon)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCProjectileLTBCannon
+    muzzleFlash: MuzzleFlashEffectVehicleOverLarge
+    muzzleFlashOffset: 2.2, 0
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCVehicleCartridgeAceAutocannon
+  name: cartridge (ACE autocannon)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCProjectileAceAutocannonFlak
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCVehicleCartridgeDragonFlame
+  name: cartridge (DRGN flame)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCVehicleProjectileDragonFlame
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+- type: entity
+  parent: CMBaseCartridgeRifle
+  id: RMCVehicleCartridgeTankFlamer
+  name: cartridge (tank flamer)
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Ammunition/Casings/large_casing.rsi
+    layers:
+    - state: base
+      map: ["enum.AmmoVisualLayers.Base"]
+  - type: CartridgeAmmo
+    proto: RMCVehicleProjectileTankFlamer
+    muzzleFlash: MuzzleFlashEffectVehicleOver
+    muzzleFlashOffset: 1.2, 0
+
+# Projectiles
+- type: entity
+  id: RMCVehicleLTBCannonImpact
+  name: LTB cannon impact
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: ExplodeOnTrigger
+  - type: DeleteOnTrigger
+  - type: CMExplosionEffect
+    minShrapnel: 40
+    maxShrapnel: 100
+    shrapnelSpeed: 8
+  - type: RMCScorchEffect
+    radius: 3
+    centerRadius: 1
+  - type: Explosive
+    explosionType: RMCLTBCannon
+    maxIntensity: 40
+    intensitySlope: 18
+    totalIntensity: 650
+    tileBreakScale: 4
+    maxTileBreak: 12
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCProjectileAceAutocannonFlak
+  name: ACE flak round
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    layers:
+    - state: bullet
+      shader: unshaded
+  - type: Projectile
+    impactEffect: BulletImpactEffect
+    maxFixedRange: 32
+    damage:
+      types:
+        Piercing: 60
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: RMCProjectileAccuracy
+    accuracy: 130
+    thresholds:
+    - range: 32
+      falloff: 5
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
+  - type: ProjectileGrenade
+    evenSpread: true
+    minVelocity: 0.4
+    maxVelocity: 1.8
+    fillPrototype: RMCShrapnelJagged
+    rebounds: true
+    capacity: 10
+    spreadAngle: 28
+  - type: RMCAreaDamage
+    damageArea: 2.5
+    falloffDistance: 1.5
+  - type: CMArmorPiercing
+    amount: 40
+  - type: IgnorePredictionHide
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCVehicleProjectileDragonFlame
+  name: DRGN flame jet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: DeleteOnFixedDistanceStop
+  - type: TriggerOnCollide
+    fixtureID: projectile
+    ignoreOtherNonHard: false
+  - type: IgniteOnProjectileHit
+  - type: RMCFireProjectile
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    layers:
+    - state: pulse0
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 30
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
+  - type: SpawnOnTerminate
+    spawn: RMCVehicleDragonFlameImpact
+    projectileAdjust: false
+  - type: IgnoreArc
+  - type: IgnorePredictionHide
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+
+- type: entity
+  id: RMCVehicleDragonFlameImpact
+  name: DRGN flame impact
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: SpawnOnTrigger
+    proto: RMCSmokeFireSentry
+    mapCoords: true
+  - type: SpawnOnTrigger
+    proto: RMCTileFireHCNapalm
+    mapCoords: true
+  - type: TileFireOnTrigger
+    range: 1
+    spawn: RMCTileFireHCNapalm
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCVehicleProjectileDragonFlameShard
+  name: DRGN flame jet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IgniteOnProjectileHit
+  - type: RMCFireProjectile
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    layers:
+    - state: pulse0
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 30
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
+  - type: SpawnOnTerminate
+    spawn: RMCTileFireHCNapalm
+  - type: IgnoreArc
+  - type: IgnorePredictionHide
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+
+- type: entity
+  parent: RMCBaseBullet
+  id: RMCVehicleProjectileTankFlamer
+  name: tank flamer jet
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: IgniteOnProjectileHit
+  - type: RMCFireProjectile
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    layers:
+    - state: pulse0
+      shader: unshaded
+  - type: Projectile
+    deleteOnCollide: true
+    impactEffect: BulletImpactEffect
+    damage:
+      types:
+        Heat: 22
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
+  - type: DeleteOnTrigger
+  - type: SpawnOnTerminate
+    spawn: RMCVehicleTankFlamerImpact
+  - type: IgnoreArc
+  - type: IgnorePredictionHide
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.15,-0.45,0.15,0.15"
+        hard: false
+        mask:
+        - Impassable
+        - BulletImpassable
+
+- type: entity
+  id: RMCVehicleTankFlamerImpact
+  name: tank flamer impact
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TriggerOnSpawn
+  - type: SpawnOnTrigger
+    proto: RMCSmokeFireSentry
+    mapCoords: true
+  - type: TileFireOnTrigger
+    range: 0
+    spawn: RMCTileFireHCNapalm

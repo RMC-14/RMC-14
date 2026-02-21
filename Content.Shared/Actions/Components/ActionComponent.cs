@@ -1,4 +1,5 @@
 using Content.Shared.Actions;
+using Content.Shared._RMC14.Vehicle;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -11,7 +12,7 @@ namespace Content.Shared.Actions.Components;
 /// <summary>
 /// Component all actions are required to have.
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem))]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedActionsSystem), typeof(RMCVehicleViewToggleSystem))]
 [AutoGenerateComponentState(true, true)]
 [EntityCategory("Actions")]
 public sealed partial class ActionComponent : Component

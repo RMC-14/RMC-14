@@ -1,0 +1,221 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleHumveeHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/humvee.rsi
+  - type: Item
+    size: Large
+  - type: RMCHardpointIntegrity
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeWheel
+  name: humvee wheel
+  description: A reinforced humvee wheel.
+  components:
+  - type: Sprite
+    state: tires
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointWheel
+  - type: RMCVehicleWheelItem
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeTurret
+  name: humvee turret
+  description: A roof-mounted humvee turret.
+  components:
+  - type: Sprite
+    state: humveeturret
+  - type: RMCHardpointItem
+    hardpointType: Turret
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointTurret
+    - RMCVehicleHardpointHumveeTurret
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 180
+    showOverlay: true
+    useDirectionalOffsets: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveeturret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-6,16"
+    pixelOffsetSouth: "0,15"
+    pixelOffsetWest: "6,16"
+  - type: RMCHardpointSlots
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      required: false
+      insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointCannon
+    - id: turret-launcher
+      hardpointType: Launcher
+      required: false
+      insertDelay: 2.0
+      whitelist:
+        tags:
+        - RMCVehicleHardpointLauncher
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeCannon
+  name: humvee cannon
+  description: A fixed forward cannon for a humvee hardpoint.
+  components:
+  - type: Sprite
+    state: humveecannon
+  - type: RMCHardpointItem
+    hardpointType: Cannon
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointCannon
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveecannon_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: Gun
+    fireRate: 10
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/Effects/Vehicle/sound_weapons_humvee_cannon.ogg
+    cameraRecoilScalar: 0
+  - type: GunIFF
+    enabled: true
+    intrinsic: true
+  - type: UserIFF
+    factions:
+    - FactionMarine
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeSentry10x50mm
+    capacity: 200
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 200
+    maxStoredMagazines: 1
+  - type: GunFireArc
+    arc: 180
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxFrontal
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    muzzleOffset: "0,-1.2"
+    useAimDirection: true
+    useContainerOwner: false
+  - type: RMCHardpointVisual
+    vehicleState: humveecannon_0
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeLauncher
+  name: humvee launcher
+  description: A launcher hardpoint for a humvee.
+  components:
+  - type: Sprite
+    state: humveelauncher
+  - type: RMCHardpointItem
+    hardpointType: Launcher
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointLauncher
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/humvee.rsi
+    overlayState: humveelauncher_0
+  - type: RMCHardpointVisual
+    vehicleState: humveelauncher_0
+  - type: GunUseGunOrigin
+  - type: GunIgnoreContainerOwnerCollision
+  - type: GunIgnorePrediction
+  - type: Gun
+    fireRate: 0.7
+    projectileSpeed: 18
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
+    cameraRecoilScalar: 0
+  - type: RMCWeaponAccuracy
+    accuracyMultiplier: 5
+    accuracyMultiplierUnwielded: 5
+  - type: OnShootTriggerAmmoTimer
+    delay: 0.2
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMC40MMGrenadeM74AGMSVehicle
+    capacity: 6
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 6
+    maxStoredMagazines: 2
+  - type: GunFireArc
+    arc: 120
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxGrenadeLauncher
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeSnowplow
+  name: humvee snowplow
+  description: A reinforced plow attachment for a humvee.
+  components:
+  - type: Sprite
+    state: snowplow
+  - type: RMCHardpointItem
+    hardpointType: FrontAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointFrontAttachment
+  - type: RMCHardpointVisual
+    vehicleState: snowplow_0
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeOverlight
+  name: humvee overlight
+  description: An overlight array for a humvee.
+  components:
+  - type: Sprite
+    state: overlight
+  - type: RMCHardpointItem
+    hardpointType: RoofAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointRoofAttachment
+  - type: RMCVehicleSpotlightModifier
+    radiusMultiplier: 2.0
+  - type: RMCHardpointVisual
+    vehicleState: overlight_0
+
+- type: entity
+  parent: RMCVehicleHumveeHardpointBase
+  id: RMCVehicleHumveeHatch
+  name: humvee hatch
+  description: A hatch assembly for a humvee.
+  components:
+  - type: Sprite
+    state: humveehatch
+  - type: RMCHardpointItem
+    hardpointType: RoofAttachment
+  - type: Tag
+    tags:
+    - RMCVehicleHardpointRoofAttachment
+  - type: RMCHardpointVisual
+    vehicleState: humveehatch_0

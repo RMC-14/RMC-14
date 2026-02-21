@@ -233,6 +233,80 @@
 
 - type: entity
   parent: MarkerBase
+  id: RMCWallInvisibleBulletBlocker
+  name: wall blocker
+  suffix: Projectile Blocker
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: PlacementReplacement
+    key: walls
+  - type: Occluder
+    enabled: false
+  - type: Airtight
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        - MobMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+        density: 1000
+  - type: RMCDropshipBlocked
+
+- type: entity
+  parent: MarkerBase
+  id: RMCWallInvisibleBulletLightBlocker
+  name: wall blocker
+  suffix: Projectile + Light Blocker
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Sprite
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+  - type: PlacementReplacement
+    key: walls
+  - type: Occluder
+  - type: Airtight
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        mask:
+        - FullTileMask
+        - MobMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - BulletImpassable
+        - Opaque
+        density: 1000
+  - type: RMCDropshipBlocked
+
+- type: entity
+  parent: MarkerBase
   id: RMCBlockerAirtight
   name: airtight blocker
   placement:

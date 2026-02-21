@@ -3,6 +3,8 @@
   id: CMSeatPassenger
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -16,7 +18,7 @@
   name: pilot's chair
   description: A specially designed chair for pilots to sit in.
   placement:
-    mode: SnapgridCenter
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -26,9 +28,29 @@
 
 - type: entity
   parent: CMSeatBase
+  id: RMCSeatDriver
+  name: driver's chair
+  description: A specially designed chair for driver to sit in.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Furniture/vehicle_seats.rsi
+    state: pilot_chair
+  - type: VehicleDriverSeat
+    skills:
+      all:
+        RMCSkillVehicles: 1
+
+- type: entity
+  parent: CMSeatBase
   id: RMCSeatHunter
   name: hunter chair
   description: An exquisitely crafted chair for a large humanoid hunter.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -41,6 +63,8 @@
   id: RMCSeatWhite
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
@@ -53,9 +77,105 @@
   id: RMCSeatDark
   name: passenger seat
   description: A sturdy chair with a brace that lowers over your body. Prevents being flung around in vehicle during crash being injured as a result. Fasten your seatbelts, kids! Fix with welding tool in case of damage.
+  placement:
+    mode: PlaceFree
   components:
   - type: Physics
     bodyType: Static
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/hotseat.rsi
     state: base
+
+- type: entity
+  abstract: true
+  parent: CMSeatBase
+  id: RMCSeatArmoredBase
+  name: armored seat
+  description: A reinforced chair designed for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general.rsi
+    state: armor_chair
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmored
+  name: armored seat
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredDriver
+  name: armored driver's seat
+  components:
+  - type: VehicleDriverSeat
+    skills:
+      all: {}
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredWeaponsOperator
+  name: armored weapons operator seat
+  components:
+  - type: VehicleWeaponsSeat
+    skills:
+      all: {}
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface
+
+- type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatArmoredPortGunOperator
+  name: armored port gun operator seat
+  components:
+  - type: VehiclePortGunSeat
+    skills:
+      all: {}
+
+- type: entity
+  abstract: true
+  parent: CMSeatBase
+  id: RMCSeatHumveeBase
+  name: humvee seat
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/general_humvee.rsi
+    state: car_seat
+    drawdepth: BelowMobs
+  - type: RMCStrapNoDrawDepthChange
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveePassenger
+  name: humvee passenger seat
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeDriver
+  name: humvee driver seat
+  components:
+  - type: VehicleDriverSeat
+    skills:
+      all: {}
+
+- type: entity
+  parent: RMCSeatHumveeBase
+  id: RMCSeatHumveeWeaponsOperator
+  name: humvee gunner seat
+  components:
+  - type: VehicleWeaponsSeat
+    skills:
+      all: {}
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface

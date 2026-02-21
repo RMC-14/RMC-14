@@ -8,6 +8,7 @@ using Content.Shared._RMC14.Random;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Vehicle;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Administration.Logs;
@@ -182,8 +183,41 @@ public abstract partial class SharedGunSystem : EntitySystem
         return true;
     }
 
+    /// <summary>
+    /// Sets the current gun target, returning the previous value.
+    /// </summary>
+    public EntityUid? SwapTarget(Entity<GunComponent> gun, EntityUid? target)
+    {
+        var previous = gun.Comp.Target;
+        gun.Comp.Target = target;
+        return previous;
+    }
+
     public bool TryGetGun(EntityUid entity, out EntityUid gunEntity, [NotNullWhen(true)] out GunComponent? gunComp)
     {
+        if (TryComp(entity, out VehiclePortGunOperatorComponent? portGunOperator) &&
+            portGunOperator.Gun is { } portGun &&
+            TryComp(portGun, out VehiclePortGunComponent? portGunComp) &&
+            portGunComp.Operator == entity &&
+            TryComp(portGun, out GunComponent? portGunGun))
+        {
+            gunEntity = portGun;
+            gunComp = portGunGun;
+            return true;
+        }
+
+        if (TryComp(entity, out VehicleWeaponsOperatorComponent? vehicleOperator) &&
+            vehicleOperator.Vehicle is { } vehicle &&
+            TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) &&
+            weapons.Operator == entity &&
+            weapons.SelectedWeapon is { } selected &&
+            TryComp(selected, out GunComponent? selectedGun))
+        {
+            gunEntity = selected;
+            gunComp = selectedGun;
+            return true;
+        }
+
         if(_attachableHolder.TryGetInhandSupercedingGun(entity, out gunEntity, out gunComp))
             return true;
 
@@ -345,7 +379,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             shots = Math.Min(shots, gun.ShotsPerBurstModified - gun.ShotCounter);
         }
 
-        var fromCoordinates = Transform(user).Coordinates;
+        var originEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : user;
+        var fromCoordinates = Transform(originEntity).Coordinates;
 
         //RMC14
         var shotOriginEv = new BeforeAttemptShootEvent(fromCoordinates, gun.ShootOriginOffset);
@@ -358,6 +393,7 @@ public abstract partial class SharedGunSystem : EntitySystem
         var attemptEv = new AttemptShootEvent(user, null, fromCoordinates, toCoordinates);
         RaiseLocalEvent(gunUid, ref attemptEv);
 
+
         if (attemptEv.Cancelled)
         {
             if (attemptEv.Message != null)
@@ -369,6 +405,8 @@ public abstract partial class SharedGunSystem : EntitySystem
             gun.NextFire = attemptEv.ResetCooldown ? curTime : TimeSpan.FromSeconds(Math.Max(lastFire.TotalSeconds + SafetyNextFire, gun.NextFire.TotalSeconds));
             return null;
         }
+
+        fromCoordinates = attemptEv.FromCoordinates;
 
         // Remove ammo
         var ev = new TakeAmmoEvent(shots, new List<(EntityUid? Entity, IShootable Shootable)>(), fromCoordinates, user);

@@ -40,6 +40,7 @@
   categories: [ HideSpawnMenu ]
   description: A storage barrel.
   components:
+  - type: RMCVehicleSmashable
   - type: Sprite
     sprite: _RMC14/Structures/barrels.rsi
     noRot: true

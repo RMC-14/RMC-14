@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "license": null,
+  "copyright": null,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "glauncher_2"
+    },
+    {
+      "name": "glauncher_1"
+    },
+    {
+      "name": "glauncher_0"
+    },
+    {
+      "name": "ltbcannon_0"
+    },
+    {
+      "name": "ltbcannon_1"
+    },
+    {
+      "name": "ltbcannon_2"
+    },
+    {
+      "name": "ltbcannon_3"
+    },
+    {
+      "name": "ltbcannon_4"
+    },
+    {
+      "name": "slauncher_1"
+    },
+    {
+      "name": "slauncher_0"
+    },
+    {
+      "name": "cupola_1"
+    },
+    {
+      "name": "cupola_0"
+    },
+    {
+      "name": "frontal_1"
+    },
+    {
+      "name": "frontal_0"
+    },
+    {
+      "name": "ace_autocannon"
+    },
+    {
+      "name": "ace_autocannon_empty"
+    },
+    {
+      "name": "drgn_flametank"
+    },
+    {
+      "name": "drgn_flametank_empty"
+    },
+    {
+      "name": "ltaa"
+    },
+    {
+      "name": "ltaa_e"
+    },
+    {
+    "name": "quad_rocket"
+    },
+    {
+    "name": "quad_rocket_e"
+    }
+  ]
+}
