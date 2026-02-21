@@ -59,6 +59,12 @@ public sealed partial class VehicleTurretComponent : Component
     public float RotationSpeed = 0f;
 
     [DataField, AutoNetworkedField]
+    public float ReverseDirectionDelay = 0.06f;
+
+    [DataField, AutoNetworkedField]
+    public float RotationInputDeadzoneDegrees = 1.5f;
+
+    [DataField, AutoNetworkedField]
     public bool ShowOverlay = false;
 
     [DataField, AutoNetworkedField]
@@ -96,4 +102,16 @@ public sealed partial class VehicleTurretComponent : Component
 
     [NonSerialized]
     public EntityUid? VisualEntity;
+
+    [NonSerialized]
+    public Angle? PendingTargetRotation;
+
+    [NonSerialized]
+    public TimeSpan PendingTargetApplyAt = TimeSpan.Zero;
+
+    [NonSerialized]
+    public int PendingDirectionSign = 0;
+
+    [NonSerialized]
+    public int LastAppliedDirectionSign = 0;
 }

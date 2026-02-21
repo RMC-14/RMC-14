@@ -354,9 +354,68 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
             facing = inputDir;
 
         var reversing = hadFacing && inputDir == -facing;
+        var turnRequested = !reversing && hadFacing && inputDir != facing;
+        var canTurnNow = !turnRequested || CanApplyTurn(mover);
+        var turnInPlaceMaxSpeed = MathF.Max(0f, mover.TurnInPlaceMaxSpeed);
+        var atStop = MathF.Abs(mover.CurrentSpeed) <= turnInPlaceMaxSpeed;
 
-        if (!reversing)
+        if (mover.TurnInPlace &&
+            atStop &&
+            !reversing &&
+            (turnRequested || !hadFacing))
+        {
+            if (!CanApplyTurn(mover))
+            {
+                mover.TargetTile = mover.CurrentTile;
+                mover.IsCommittedToMove = false;
+                mover.IsPushMove = false;
+                return;
+            }
+
+            var desiredFacing = inputDir;
+            var desiredTurnRot = new Vector2(desiredFacing.X, desiredFacing.Y).ToWorldAngle();
+            var currentCenter = new Vector2(mover.CurrentTile.X + 0.5f, mover.CurrentTile.Y + 0.5f);
+
+            if (CanOccupyTransform(uid, mover, grid, currentCenter, desiredTurnRot, Clearance))
+            {
+                var turned = mover.CurrentDirection != desiredFacing;
+                mover.CurrentDirection = desiredFacing;
+                if (turned)
+                {
+                    StartTurnDelay(mover);
+                    if (mover.TurnDelay > 0f)
+                        mover.InPlaceTurnBlockUntil = _timing.CurTime + TimeSpan.FromSeconds(mover.TurnDelay);
+                }
+
+                transform.SetLocalRotation(uid, desiredTurnRot);
+                mover.TargetTile = mover.CurrentTile;
+                mover.IsCommittedToMove = false;
+                mover.IsPushMove = false;
+                mover.CurrentSpeed = 0f;
+                return;
+            }
+        }
+
+        if (!reversing && canTurnNow)
             facing = inputDir;
+        else if (turnRequested && !canTurnNow && MathF.Abs(mover.CurrentSpeed) <= 0.01f)
+        {
+            mover.TargetTile = mover.CurrentTile;
+            mover.IsCommittedToMove = false;
+            mover.IsPushMove = false;
+            return;
+        }
+
+        if (mover.TurnInPlace &&
+            !reversing &&
+            atStop &&
+            mover.InPlaceTurnBlockUntil > _timing.CurTime)
+        {
+            mover.TargetTile = mover.CurrentTile;
+            mover.IsCommittedToMove = false;
+            mover.IsPushMove = false;
+            return;
+        }
 
         Vector2i moveDir;
 
@@ -372,12 +431,15 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (!CanOccupyTransform(uid, mover, grid, targetCenter, desiredRot, Clearance))
         {
             // Try to at least rotate in place if there's room on the current tile.
-            if (!reversing)
+            if (!reversing && canTurnNow)
             {
                 var currentCenter = new Vector2(mover.CurrentTile.X + 0.5f, mover.CurrentTile.Y + 0.5f);
                 if (CanOccupyTransform(uid, mover, grid, currentCenter, desiredRot, Clearance))
                 {
+                    var turned = mover.CurrentDirection != facing;
                     mover.CurrentDirection = facing;
+                    if (turned && hadFacing)
+                        StartTurnDelay(mover);
                     transform.SetLocalRotation(uid, desiredRot);
                 }
             }
@@ -391,7 +453,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (!reversing)
         {
+            var turned = mover.CurrentDirection != facing;
             mover.CurrentDirection = facing;
+            if (turned && hadFacing)
+                StartTurnDelay(mover);
             transform.SetLocalRotation(uid, desiredRot);
         }
 
@@ -432,6 +497,22 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         mover.TargetTile = targetTile;
         mover.IsCommittedToMove = true;
         mover.IsPushMove = true;
+    }
+
+    private bool CanApplyTurn(GridVehicleMoverComponent mover)
+    {
+        if (mover.TurnDelay <= 0f)
+            return true;
+
+        return _timing.CurTime >= mover.NextTurnTime;
+    }
+
+    private void StartTurnDelay(GridVehicleMoverComponent mover)
+    {
+        if (mover.TurnDelay <= 0f)
+            return;
+
+        mover.NextTurnTime = _timing.CurTime + TimeSpan.FromSeconds(mover.TurnDelay);
     }
 
     private void SetGridPosition(EntityUid uid, EntityUid grid, Vector2 gridPos)

@@ -47,8 +47,23 @@ public sealed partial class GridVehicleMoverComponent : Component
     [DataField, AutoNetworkedField]
     public float PushCooldown = 0f;
 
+    [DataField, AutoNetworkedField]
+    public float TurnDelay = 0.08f;
+
+    [DataField, AutoNetworkedField]
+    public bool TurnInPlace = false;
+
+    [DataField, AutoNetworkedField]
+    public float TurnInPlaceMaxSpeed = 0.35f;
+
     [AutoNetworkedField]
     public TimeSpan NextPushTime;
+
+    [AutoNetworkedField]
+    public TimeSpan NextTurnTime;
+
+    [AutoNetworkedField]
+    public TimeSpan InPlaceTurnBlockUntil;
 
     [AutoNetworkedField]
     public bool IsCommittedToMove;

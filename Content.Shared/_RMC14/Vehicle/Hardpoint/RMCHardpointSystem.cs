@@ -745,20 +745,8 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
 
         var intactHardpoints = new List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity)>();
-
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (!_itemSlots.TryGetSlot(ent.Owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            if (itemSlot.Item is not { } item || !TryComp(item, out RMCHardpointIntegrityComponent? integrity))
-                continue;
-
-            if (integrity.Integrity <= 0f)
-                continue;
-
-            intactHardpoints.Add((item, integrity));
-        }
+        var visited = new HashSet<EntityUid>();
+        CollectIntactHardpoints(ent.Owner, ent.Comp, itemSlots, intactHardpoints, visited);
 
         var anyIntact = intactHardpoints.Count > 0;
 
@@ -776,6 +764,35 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity))
             DamageHardpoint(ent.Owner, ent.Owner, totalDamage * hullFraction, frameIntegrity);
         args.Damage = ScaleDamage(args.Damage, hullFraction);
+    }
+
+    private void CollectIntactHardpoints(
+        EntityUid owner,
+        RMCHardpointSlotsComponent slots,
+        ItemSlotsComponent itemSlots,
+        List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity)> intactHardpoints,
+        HashSet<EntityUid> visited)
+    {
+        foreach (var slot in slots.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
+                continue;
+
+            if (itemSlot.Item is not { } item || !visited.Add(item))
+                continue;
+
+            if (TryComp(item, out RMCHardpointIntegrityComponent? integrity) && integrity.Integrity > 0f)
+                intactHardpoints.Add((item, integrity));
+
+            if (TryComp(item, out RMCHardpointSlotsComponent? childSlots) &&
+                TryComp(item, out ItemSlotsComponent? childItemSlots))
+            {
+                CollectIntactHardpoints(item, childSlots, childItemSlots, intactHardpoints, visited);
+            }
+        }
     }
 
     private DamageSpecifier ScaleDamage(DamageSpecifier source, float fraction)

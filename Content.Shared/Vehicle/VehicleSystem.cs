@@ -41,6 +41,12 @@ public sealed partial class VehicleSystem : EntitySystem
         if (!ent.Comp.TransferDamage || !args.Damage.AnyPositive() || ent.Comp.Operator is not { } operatorUid)
             return;
 
+        // in case this ever wants to be a thing
+        var vehicleMap = Transform(ent.Owner).MapID;
+        var operatorMap = Transform(operatorUid).MapID;
+        if (vehicleMap != operatorMap)
+            return;
+
         var damage = DamageSpecifier.GetPositive(args.Damage);
 
         if (ent.Comp.TransferDamageModifier is { } modifierSet)

@@ -134,6 +134,8 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         ent.Comp.Position = new Vector2(tile.X + 0.5f, tile.Y + 0.5f);
         ent.Comp.CurrentSpeed = 0f;
         ent.Comp.NextPushTime = TimeSpan.Zero;
+        ent.Comp.NextTurnTime = TimeSpan.Zero;
+        ent.Comp.InPlaceTurnBlockUntil = TimeSpan.Zero;
         ent.Comp.IsCommittedToMove = false;
         ent.Comp.IsPushMove = false;
         _hardState[uid] = true;

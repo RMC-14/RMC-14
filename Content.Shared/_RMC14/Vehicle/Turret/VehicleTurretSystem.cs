@@ -36,6 +36,9 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        if (_net.IsClient && _timing.ApplyingState)
+            return;
+
         var query = EntityQueryEnumerator<VehicleTurretComponent>();
         while (query.MoveNext(out var uid, out var turret))
         {
@@ -73,6 +76,9 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     private void OnInserted(Entity<VehicleTurretComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        if (_net.IsClient && _timing.ApplyingState)
+            return;
+
         if (!ShouldUpdateTransforms(ent.Comp))
             return;
 
@@ -100,6 +106,9 @@ public sealed class VehicleTurretSystem : EntitySystem
     private void OnRotateEvent(VehicleTurretRotateEvent args, EntitySessionEventArgs session)
     {
         if (_net.IsClient && !_timing.IsFirstTimePredicted)
+            return;
+
+        if (_net.IsClient && _timing.ApplyingState)
             return;
 
         var turretUid = GetEntity(args.Turret);
@@ -147,17 +156,7 @@ public sealed class VehicleTurretSystem : EntitySystem
             ? direction.ToWorldAngle()
             : (direction.ToWorldAngle() - vehicleRot).Reduced();
 
-        targetTurret.TargetRotation = desiredRotation;
-        if (targetTurret.RotationSpeed <= 0f)
-        {
-            var desiredLocal = targetTurret.StabilizedRotation
-                ? (desiredRotation - vehicleRot).Reduced()
-                : desiredRotation;
-            targetTurret.WorldRotation = desiredLocal;
-        }
-        Dirty(targetUid, targetTurret);
-
-        UpdateTurretTransforms(targetUid, targetTurret, vehicle, targetUid, targetTurret);
+        SetTargetRotation(targetUid, targetTurret, vehicle, desiredRotation, allowReverseDelay: true);
     }
 
     private void EnsureVisual(EntityUid turretUid, VehicleTurretComponent turret, EntityUid vehicle)
@@ -541,6 +540,8 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (!turret.RotateToCursor)
             return;
 
+        ApplyPendingTargetRotation(turretUid, turret, vehicle);
+
         var vehicleRot = _transform.GetWorldRotation(vehicle);
         if (turret.TargetRotation == Angle.Zero && turret.WorldRotation != Angle.Zero)
         {
@@ -647,6 +648,94 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         args.Cancelled = true;
         args.ResetCooldown = true;
+    }
+
+    private void ApplyPendingTargetRotation(EntityUid turretUid, VehicleTurretComponent turret, EntityUid vehicle)
+    {
+        if (turret.PendingTargetRotation is not { } pending)
+            return;
+
+        if (_timing.CurTime < turret.PendingTargetApplyAt)
+            return;
+
+        turret.PendingTargetRotation = null;
+        turret.PendingTargetApplyAt = TimeSpan.Zero;
+
+        var sign = turret.PendingDirectionSign;
+        turret.PendingDirectionSign = 0;
+
+        ApplyTargetRotation(turretUid, turret, vehicle, pending, sign);
+    }
+
+    private void SetTargetRotation(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        EntityUid vehicle,
+        Angle desiredRotation,
+        bool allowReverseDelay)
+    {
+        var delta = Angle.ShortestDistance(turret.TargetRotation, desiredRotation);
+        var deadzone = MathHelper.DegreesToRadians(MathF.Max(0f, turret.RotationInputDeadzoneDegrees));
+
+        if (Math.Abs(delta.Theta) <= deadzone)
+            return;
+
+        var directionSign = Math.Sign(delta.Theta);
+
+        if (allowReverseDelay &&
+            turret.ReverseDirectionDelay > 0f &&
+            directionSign != 0 &&
+            turret.LastAppliedDirectionSign != 0 &&
+            directionSign != turret.LastAppliedDirectionSign)
+        {
+            if (turret.PendingTargetRotation == null || turret.PendingDirectionSign != directionSign)
+                turret.PendingTargetApplyAt = _timing.CurTime + TimeSpan.FromSeconds(turret.ReverseDirectionDelay);
+
+            turret.PendingTargetRotation = desiredRotation;
+            turret.PendingDirectionSign = directionSign;
+            return;
+        }
+
+        turret.PendingTargetRotation = null;
+        turret.PendingTargetApplyAt = TimeSpan.Zero;
+        turret.PendingDirectionSign = 0;
+        ApplyTargetRotation(turretUid, turret, vehicle, desiredRotation, directionSign);
+    }
+
+    private void ApplyTargetRotation(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        EntityUid vehicle,
+        Angle desiredRotation,
+        int directionSign)
+    {
+        var changed = false;
+
+        if (turret.TargetRotation != desiredRotation)
+        {
+            turret.TargetRotation = desiredRotation;
+            changed = true;
+        }
+
+        if (directionSign != 0)
+            turret.LastAppliedDirectionSign = directionSign;
+
+        if (turret.RotationSpeed <= 0f)
+        {
+            var vehicleRot = _transform.GetWorldRotation(vehicle);
+            var desiredLocal = turret.StabilizedRotation
+                ? (desiredRotation - vehicleRot).Reduced()
+                : desiredRotation;
+
+            if (turret.WorldRotation != desiredLocal)
+            {
+                turret.WorldRotation = desiredLocal;
+                changed = true;
+            }
+        }
+
+        if (changed)
+            Dirty(turretUid, turret);
     }
 
     private bool CanOperatorUseTurret(EntityUid turretUid, EntityUid user)

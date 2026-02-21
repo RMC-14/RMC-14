@@ -15,7 +15,7 @@
 
         <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="6" HorizontalExpand="True" VerticalExpand="True">
             <BoxContainer Orientation="Horizontal" SeparationOverride="8" HorizontalExpand="True">
-                <PanelContainer MinSize="84 84" VerticalAlignment="Center">
+                <PanelContainer MinSize="150 96" VerticalAlignment="Center">
                     <PanelContainer.PanelOverride>
                         <graphics:StyleBoxFlat
                             BackgroundColor="#0D2235"
@@ -27,9 +27,9 @@
                         <SpriteView
                             Name="VehicleIcon"
                             Access="Public"
-                            MinSize="84 84"
+                            MinSize="136 82"
                             SpriteOffset="True"
-                            Stretch="Fill"
+                            Stretch="Fit"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Margin="6"/>

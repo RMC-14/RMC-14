@@ -1215,9 +1215,14 @@
     movementKind: Grid
   - type: Clickable
   - type: GridVehicleMover
-    maxSpeed: 6
-    acceleration: 3
+    maxSpeed: 3
+    acceleration: 1
     deceleration: 8
+    maxReverseSpeed: 2
+    reverseAcceleration: 1
+    turnDelay: 1
+    turnInPlace: true
+    turnInPlaceMaxSpeed: 0.5
     pushCooldown: 2
     xenoBlockMinimumSize: Immobile
     xenoMoveMinimumSize: Immobile

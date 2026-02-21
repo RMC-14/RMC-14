@@ -111,7 +111,6 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
             return;
         }
 
-        // Trust authoritative state from server: if no hardpoint is selected, clear local selection.
         _selectedSlotId = null;
     }
 
