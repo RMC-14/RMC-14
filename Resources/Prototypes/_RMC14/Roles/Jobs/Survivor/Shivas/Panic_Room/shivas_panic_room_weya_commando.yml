@@ -45,7 +45,7 @@
   equipment:
     jumpsuit: RMCJumpsuitVeteranPMCCommandoSurvivor
     shoes: RMCBootsPMCCommandoFilled
-    head: ArmorHelmetPMCCommandoSurvivor
+    head: RMCArmorHelmetPMCCommandoDamaged
     ears: RMCHeadsetHvHWeYaPMCCommando
     belt: RMCBeltPMCFilledCommando
     id: CMIDCardCommando
