@@ -99,6 +99,11 @@
   name: General
   prefix: Gen.
   paygrade: O10
+  
+- type: rank
+  id: RMCRankTSEEmpress
+  name: Empress # This needs to be changed to allow it to change dynamically for genders
+  prefix: HRM.
 
 # The below ranks are for the Para insert on Hybrisa
 
@@ -197,9 +202,3 @@
   name: General of the Brigade
   prefix: GenBrig.
   paygrade: O9
-
-- type: rank
-  id: RMCRankTSEEmpress
-  name: Empress
-  prefix: HRM.
-# This needs to be changed to allow it to change dynamically for genders

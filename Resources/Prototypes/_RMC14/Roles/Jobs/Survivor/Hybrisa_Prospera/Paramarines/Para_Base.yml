@@ -5,7 +5,7 @@
   description: rmc-job-description-para
   ranks:
     RMCRankParaPrivateSecondClass: []
-  supervisors: rmc-job-supervisors-commander
+  supervisors: cm-job-supervisors-royal-tl
   accessGroups:
     - Colonist
   joinNotifyCrew: false
