@@ -51,3 +51,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/thighguards.rsi
+
+# Paint
+
+- type: entity
+  parent: RMCPVEArmorPaintBase
+  id: RMCPVEArmorPaintTSE
+  name: TSE flag armor paint
+  description: A set of paint tones to etch the tricolor into a Marine's armor.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/paint/tse.rsi
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/PVE/Royal/paint/tse.rsi
+      state: equipped

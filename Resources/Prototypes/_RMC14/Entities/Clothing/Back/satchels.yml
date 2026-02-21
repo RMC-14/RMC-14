@@ -50,6 +50,16 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
+      
+- type: entity
+  parent: RMCSatchelBlack
+  id: RMCSatchelBlackFillParaCO
+  suffix: Paramaine, Survivor, Filled, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCTieBlack
 
 - type: entity
   parent: CMSatchel
@@ -862,6 +872,31 @@
     - id: CMPackFlare
 
 - type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledPara
+  suffix: Paramaine, Survivor, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+          
+- type: entity
+  parent: RMCSatchelLightpack5Slot
+  id: RMCSatchelLightpackFilledParaSynth
+  suffix: Paramaine, Survivor, Filled, Synth
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMSheetMetal20
+        - id: RMCRadioHandheldColony
+        - id: CMRollerBedSpawnFolded
+        - id: CMMultitool
+        - id: RMCCableCoil30
+        - id: CMHealthAnalyzer
+        - id: RMCSynthResetKey
+
+- type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledHighCommand
   suffix: Filled, High Command
@@ -1017,3 +1052,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/tsepa_standard.rsi
+
+- type: entity
+  parent: CMSatchel
+  id: RMCSatchelRoyalMOLS
+  name: L1-pattern MOLS day pack
+  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This particular item is the day pack, which can be worn with or without the full MOLS rig.
+  suffix: PVE, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/mols_pack.rsi
+  - type: Storage
+    grid:
+    - 0,0,9,1 # 10 slots

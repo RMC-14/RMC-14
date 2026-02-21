@@ -255,3 +255,56 @@
 
 - type: Tag
   id: ArmorWebbing
+
+# RCM Armor Webbing
+
+
+- type: entity
+  parent: RMCArmorWebbingDrum
+  id: RMCArmorWebbingDrumRCM
+  name: MOLS drum armor webbing
+  description: A set of L1-pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a pair of large pouches capable of carrying high-capacity drums and other large magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/drum.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingMag
+  id: RMCArmorWebbingMagRCM
+  name: MOLS magazine armor webbing
+  description: A set of L1-pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a set of four magazine pouches.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/mag.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingGrenade
+  id: RMCArmorWebbingGrenadeRCM
+  name: MOLS grenade armor webbing
+  description: A set of L1-pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features an array of small pouches, capable of holding up to 6 grenades.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/nade.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingPouch
+  id: RMCArmorWebbingPouchRCM
+  name: MOLS general armor webbing
+  description: A set of L1-pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features several small pouches, capable of carrying assorted small items.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/shell.rsi
+    state: webbing
+
+- type: entity
+  parent: RMCArmorWebbingShell
+  id: RMCArmorWebbingShellRCM
+  name: MOLS shell armor webbing
+  description: A set of L1-pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a number of loops designed to hold loose shotgun shells.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/shell.rsi
+    state: webbing

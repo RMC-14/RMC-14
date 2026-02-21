@@ -48,7 +48,7 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ RMCWeaponSMGP90, RMCPouchMagazineFilledP90 ]
+    - [ RMCWeaponSMGPDW90, RMCPouchMagazineFilledPDW90 ]
     primaryWeaponChance: 1
     randomOutfits:
     - [ RMCHeadCapWestonYamadaDark, RMCJumpsuitVeteranPMCHybrisa, CMArmorM4PMCCorporateLead ]

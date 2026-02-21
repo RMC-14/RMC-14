@@ -61,6 +61,25 @@
     tags:
     - GasMask
 
+- type: entity
+  parent: CMBaseMask
+  id: RMCMaskGasRCM
+  name: L4 respirator
+  description: The L4 service CBRN respirator is the standard-issue protective gas mask of the Royal Crown Marines, equipped with a secondary speech transmitter and drinking straw for extended wear in adverse conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Mask/gas_rcm.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Mask/gas_rcm.rsi
+  - type: HideLayerClothing
+    slots:
+    - Snout
+  - type: Item
+    size: Small
+  - type: Tag
+    tags:
+    - GasMask
+
 - type: Tag
   id: GasMask
 

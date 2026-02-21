@@ -967,7 +967,7 @@
   - MiscellaneousRMC
   - MeleeWeaponsRMC
 
-# PVE
+# PVE - UNMC
 
 - type: roleLoadout
   id: JobCMPVERifleman
@@ -1051,3 +1051,155 @@
   - PlushiesRMC
   - WeaponsRMC
   - RMCLoadoutGroupPins
+
+# PVE - RCM
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesRiflemanPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesMedicPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesAssaultEngineerPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesSmartgunnerPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesScoutSniperPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesBombSpecPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesTeamLeaderPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesSectionLeaderPVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesTroopSargePVE
+  points: 20
+  groups:
+  - RoyalBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC
+
+- type: roleLoadout
+  id: JobCMRoyalMarinesTroopCommanderPVE
+  points: 20
+  groups:
+  - MarineLeatherBackpack
+  - HeadwearRoyalRMC
+  - EyewearRoyalRMC
+  - MasksRoyalRMC
+  - HelmetGarbsRoyalRMC
+  - AccessoriesRoyalRMC
+  - PlushiesRMC
+  - WeaponsRoyalRMC
+  - RMCLoadoutGroupPins
+  - MeleeWeaponsRoyalRMC

@@ -44,12 +44,12 @@
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledP90
-  suffix: Filled, P90
+  id: RMCPouchMagazineFilledPDW90
+  suffix: Filled, PDW90
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineSMGP90
+    - id: RMCMagazineSMGPDW90
       amount: 3
 
 - type: entity

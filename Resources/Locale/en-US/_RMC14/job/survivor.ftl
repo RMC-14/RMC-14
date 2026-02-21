@@ -200,6 +200,36 @@ rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
 rmc-job-name-survivor-construction-worker = Construction Worker
 rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
+# Paramarine survs
+
+rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
+
+  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-para = Paramarine Survivor
+rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-paramarine = Rifleman
+rmc-job-name-para-pilot = Fleet Air Arm Pilot
+rmc-job-name-para-engineer = Assault Engineer
+rmc-job-name-para-medic =  Medical Technician
+rmc-job-prefix-paramarine = 24/PARA
+
+rmc-job-name-para-team-leader = Team Leader
+rmc-job-prefix-para-team-leader = 24/PARA TL
+
+rmc-job-name-para-synth = Support Synthetic
+rmc-job-prefix-para-synth = 24/PARA Syn
+
+rmc-job-name-para-commander = Commander
+rmc-job-prefix-para-commander = 24/PARA CDR
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury

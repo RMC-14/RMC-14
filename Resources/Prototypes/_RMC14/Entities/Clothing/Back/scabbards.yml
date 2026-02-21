@@ -121,6 +121,54 @@
 
 - type: entity
   parent: RMCScabbardBase
+  id: RMCScabbardRoyalMachete
+  name: L225 Kukri scabbard
+  description: A large leather scabbard used to carry an L225 Kukri machete, with clips allowing it to be strapped to the back or the waist.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_kukri.rsi
+    state: sheath
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Back/Scabbards/machete_kukri.rsi
+    quickEquip: false
+    slots:
+    - back
+    - belt
+    - suitstorage
+  - type: ItemSlots
+    slots:
+      item:
+        name: Kukri
+        insertVerbText: sheath-insert-verb
+        ejectVerbText: sheath-eject-verb
+        insertSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/gun_rifle_draw.ogg
+        whitelist:
+          tags:
+          - RMCRoyalMachete
+  - type: ItemMapper
+    mapLayers:
+      sheath-machete:
+        whitelist:
+          tags:
+          - RMCRoyalMachete
+  - type: Tag
+    tags:
+    - Scabbard
+    - RMCMacheteScabbard
+
+- type: entity
+  parent: RMCScabbardRoyalMachete
+  id: RMCScabbardRoyalMacheteFilled
+  suffix: Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item:
+      - RMCRoyalMachete
+
+- type: entity
+  parent: RMCScabbardBase
   id: RMCScabbardMacheteSG
   name: ML66A harness machete scabbard
   description: A scabbard that connects to the ML66A combat harness for carrying a M2132 machete.

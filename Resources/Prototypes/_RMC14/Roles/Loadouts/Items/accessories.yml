@@ -52,6 +52,13 @@
     - RMCPVEArmorPaintUN
 
 - type: loadout
+  id: PaintTSERMC
+  cost: 1
+  storage:
+    back:
+    - RMCPVEArmorPaintTSE
+
+- type: loadout
   id: PaintTargetRMC
   cost: 1
   storage:

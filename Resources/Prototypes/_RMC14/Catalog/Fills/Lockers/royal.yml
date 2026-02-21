@@ -2,18 +2,20 @@
   id: RMCClosetRCMTroopSgtFill
   table: !type:AllSelector
     children:
-    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCBackpackAmmoRCM
     - id: CMAdvFirstAidKit
     - id: RMCBoxMagazineRifleL90Drum
-    - id: RMCArmorWebbingDrum
+    - id: RMCArmorWebbingDrumRCM
 
 - type: entityTable
   id: RMCClosetRCMSectionLeaderFill
   table: !type:AllSelector
     children:
     - id: RMCHeadRoyalBeretLead
+    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
@@ -27,7 +29,7 @@
     - id: RMCPVEArmorCaseRoyalHarness
     - id: RMCMagazineSmartGunHT
       amount: 3
-    - id: RMCArmorWebbingDrum
+    - id: RMCArmorWebbingDrumRCM
     - id: RMCGlassesSmartGunSight
 
 - type: entityTable
@@ -43,7 +45,8 @@
   id: RMCClosetRCMTeamLeaderFill
   table: !type:AllSelector
     children:
-    - id: RMCHeadRoyalHelmetBallistic
+    - id: RMCHeadRoyalBeretLead
+    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
@@ -52,10 +55,9 @@
   id: RMCClosetRCMTroopCommanderFill
   table: !type:AllSelector
     children:
-    - id: RMCHeadRoyalBeretLead
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
-    - id: RMCBeltHolsterPistolRCM
+    - id: RMCBeltHolsterPistolRCMFilled
     - id: RMCPVEArmorCaseRoyalLight
     - id: RMCBackpackRTOTSE
 
@@ -67,3 +69,5 @@
       amount: 4
     - id: RMCWeldingGoggles
       amount: 2
+    - id: RMCWeaponRifleL90A2Breacher
+      amount: 1

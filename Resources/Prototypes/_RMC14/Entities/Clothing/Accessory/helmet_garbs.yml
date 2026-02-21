@@ -122,6 +122,37 @@
       sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_jungle.rsi
       state: helmet
 
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingRCM
+  name: brown scrim net helmet cover
+  description: Simple open-weave fabric crudely cut so as to break up the recognisable shape of a helmet.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm.rsi
+      state: helmet
+
+- type: entity
+  parent: RMCHelmetGarbNetting
+  id: RMCHelmetGarbNettingRCMAlt
+  name: tan scrim net helmet cover
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm_alt.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm_alt.rsi
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/HelmetGarb/HelmetCovers/netting_rcm_alt.rsi
+      state: helmet
+
 # Rain Cover
 
 - type: entity
