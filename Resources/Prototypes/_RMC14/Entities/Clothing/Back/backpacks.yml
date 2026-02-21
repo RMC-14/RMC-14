@@ -323,15 +323,23 @@
   - type: ItemCamouflage
     camouflageVariations: {}
 
-# RCM backpacks
+- type: entity
+  parent: RMCSatchelPMC
+  id: RMCSatchelPMCCommando
+  name: We-Ya Commando combat backpack
+  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada Commandos.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/commando.rsi
 
+# RCM backpacks
 - type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMSmall
   name: lightweight RCM backpack
   description: "A TSE military light-carry RCM combat pack MK3."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/small.rsi
     layers:
@@ -364,7 +372,7 @@
   name: standard RCM backpack
   description: "A TSE military standard-carry RCM combat pack MK3."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medium.rsi
     layers:
@@ -399,7 +407,7 @@
   name: heavyweight RCM backpack
   description: "The heavy-carry pack of the RCM forces. Designed to lug the most amount of gear into the battlefield."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/large.rsi
     layers:
@@ -432,7 +440,7 @@
   name: RCM engineering backpack
   description: "A TSE military standard-carry RCM combat pack MK3. Modified by ingenious Royal Engineers to better fit their requirements."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/tech.rsi
     layers:
@@ -455,7 +463,7 @@
   name: RCM medical backpack
   description: "A TSE military standard-carry RCM combat pack MK3. Modified by Medical Assistants to fit their needs better."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medic.rsi
     layers:

@@ -412,6 +412,54 @@
     state: holster
 
 - type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackB92FS
+  suffix: Filled, B92FS
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolB92FS
+      amount: 1
+    - id: RMCMagazinePistolB92FS
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackMK45
+  suffix: Filled, MK45
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolMK45
+      amount: 1
+    - id: RMCMagazinePistolMK45
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackM1984
+  suffix: Filled, M1984
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1984
+      amount: 1
+    - id: CMMagazinePistolM1984
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackSpearhead
+  suffix: Filled, Spearhead
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+      amount: 1
+    - id: RMCSpeedLoader357
+      amount: 2
+
+- type: entity
   parent: CMWebbingBase
   id: RMCWebbingDropPouch
   name: drop pouch

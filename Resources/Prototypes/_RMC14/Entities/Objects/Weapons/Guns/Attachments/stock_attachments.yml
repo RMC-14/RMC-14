@@ -787,6 +787,21 @@
       scatterFlat: -4
 
 - type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentM16A5Stock
+  name: M16A5 bump stock
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
+    state: m16a5-stock
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentStock
+    - RMCAttachmentM16A5Stock
+
+- type: entity
   parent: RMCStockAttachmentBase
   id: RMCAttachmentM63Stock
   name: submachinegun solid stock
@@ -1277,6 +1292,9 @@
 
 - type: Tag
   id: RMCAttachmentM16StockCollapsible
+
+- type: Tag
+  id: RMCAttachmentM16A5Stock
 
 - type: Tag
   id: RMCAttachmentM63Stock
