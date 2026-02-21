@@ -510,7 +510,7 @@
   parent: BulletRifleM5SPRHVP
   id: BulletRifleM5SPRHVHIP
   components:
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno

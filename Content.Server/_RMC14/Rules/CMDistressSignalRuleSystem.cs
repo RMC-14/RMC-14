@@ -49,6 +49,7 @@ using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Marines.HyperSleep;
 using Content.Shared._RMC14.Marines.Squads;
+using Content.Shared._RMC14.Policing;
 using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Scaling;
 using Content.Shared._RMC14.Spawners;
@@ -562,7 +563,6 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 _mind.TransferTo(mind.Value, survivorMob);
 
                 _roles.MindAddJobRole(mind.Value, jobPrototype: spawnAsJob);
-
                 _playTime.PlayerRolesChanged(player);
 
                 var spawnEv = new PlayerSpawnCompleteEvent(
@@ -575,7 +575,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     default,
                     profile
                 );
+
                 RaiseLocalEvent(survivorMob, spawnEv, true);
+
+                // Non-hostile survivors can be policed by the marines
+                if (_prototypes.TryIndex(spawnAsJob, out var jobProto))
+                {
+                    if (!jobProto.Hostile)
+                        RemCompDeferred<RMCImmuneToInterFactionPolicingComponent>(survivorMob);
+                }
+
                 return playerId;
             }
 

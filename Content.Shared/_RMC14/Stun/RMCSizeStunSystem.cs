@@ -21,11 +21,11 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Content.Shared.Pointing;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._RMC14.Policing;
 
 namespace Content.Shared._RMC14.Stun;
 
@@ -53,6 +53,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RMCPolicingSystem _policing = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
+
+    private EntityQuery<RMCPolicingToolComponent> _policingToolQuery;
 
     private readonly HashSet<Entity<MarineComponent>> _marines = new();
 
@@ -60,9 +64,11 @@ public sealed class RMCSizeStunSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<RMCStunOnHitComponent, MapInitEvent>(OnSizeStunMapInit);
-        SubscribeLocalEvent<RMCStunOnHitComponent, ProjectileHitEvent>(OnHit);
-        SubscribeLocalEvent<RMCStunOnHitComponent, RMCTriggerEvent>(OnTrigger);
+        _policingToolQuery = GetEntityQuery<RMCPolicingToolComponent>();
+
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, MapInitEvent>(OnSizeStunMapInit);
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, ProjectileHitEvent>(OnHit);
+        SubscribeLocalEvent<RMCStunOnProjectileHitComponent, RMCTriggerEvent>(OnTrigger);
 
         SubscribeLocalEvent<RMCStunOnTriggerComponent, RMCTriggerEvent>(OnStunOnTrigger);
 
@@ -79,6 +85,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     {
         return ent.Comp.Size <= RMCSizes.Humanoid;
     }
+
     public bool IsHumanoidSized(RMCSizes size)
     {
         return size <= RMCSizes.Humanoid;
@@ -107,13 +114,13 @@ public sealed class RMCSizeStunSystem : EntitySystem
         return true;
     }
 
-    private void OnSizeStunMapInit(Entity<RMCStunOnHitComponent> projectile, ref MapInitEvent args)
+    private void OnSizeStunMapInit(Entity<RMCStunOnProjectileHitComponent> projectile, ref MapInitEvent args)
     {
         projectile.Comp.ShotFrom = _transform.GetMapCoordinates(projectile.Owner);
         Dirty(projectile);
     }
 
-    private void OnHit(Entity<RMCStunOnHitComponent> bullet, ref ProjectileHitEvent args)
+    private void OnHit(Entity<RMCStunOnProjectileHitComponent> bullet, ref ProjectileHitEvent args)
     {
         if (bullet.Comp.ShotFrom == null)
             return;
@@ -215,7 +222,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     /// <summary>
     ///     Tries to stun a target near the entity when it is triggered.
     /// </summary>
-    private void OnTrigger(Entity<RMCStunOnHitComponent> ent, ref RMCTriggerEvent args)
+    private void OnTrigger(Entity<RMCStunOnProjectileHitComponent> ent, ref RMCTriggerEvent args)
     {
         var moverCoordinates = _transform.GetMoverCoordinates(ent, Transform(ent));
         foreach (var stun in ent.Comp.Stuns)
@@ -242,67 +249,71 @@ public sealed class RMCSizeStunSystem : EntitySystem
         _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _marines);
         foreach (var target in _marines)
         {
-            if (ent.Comp.Filters != null)
+            var coordinates = Transform(target).Coordinates;
+            if (!_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.Range))
+                return;
+
+            var trained = _entityWhitelist.IsWhitelistPass(ent.Comp.TrainedWhitelist, target);
+
+            var attempt = new FlashAttemptEvent(target, args.User, ent.Owner);
+            RaiseLocalEvent(target, ref attempt, true);
+
+            var stun = ent.Comp.Stun;
+            var paralyze = ent.Comp.Paralyze;
+            var deafen = ent.Comp.Deafen;
+
+            if (!attempt.Cancelled)
             {
-                var passedFilter = false;
-                foreach (var filter in ent.Comp.Filters)
-                {
-                    if (_entityWhitelist.IsWhitelistFail(filter.Whitelist, target))
-                        continue;
-
-                    var probability = filter.Probability ?? ent.Comp.Probability;
-                    var range = filter.Range ?? ent.Comp.Range;
-                    var stun = filter.Stun ?? ent.Comp.Stun;
-                    var flash = filter.Flash ?? ent.Comp.Flash;
-                    var flashAdditionalStunTime = filter.FlashAdditionalStunTime ?? ent.Comp.FlashAdditionalStunTime;
-                    var paralyze = filter.Paralyze ?? ent.Comp.Paralyze;
-                    Stun(ent, target, args.User, probability, range, stun, flash, flashAdditionalStunTime, paralyze);
-                    passedFilter = true;
-                    break;
-                }
-
-                if (passedFilter)
-                    continue;
+                _flash.Flash(target, args.User, ent.Owner, ent.Comp.Flash, ent.Comp.FlashSlowTo, displayPopup: false);
+                stun += ent.Comp.FlashAdditionalStunTime;
+                paralyze += ent.Comp.FlashAdditionalParalyzeTime;
             }
 
-            Stun(
-                ent,
-                target,
-                args.User,
-                ent.Comp.Probability,
-                ent.Comp.Range,
-                ent.Comp.Stun,
-                ent.Comp.Flash,
-                ent.Comp.FlashAdditionalStunTime,
-                ent.Comp.Paralyze
-            );
+            if (trained)
+            {
+                deafen = TimeSpan.Zero;
+                paralyze = TimeSpan.Zero;
+            }
+
+            // Ensure interfaction policing is less effective
+            if (args.User != null)
+            {
+                if (_policingToolQuery.HasComp(ent.Owner) && !_policing.CanBePoliced(target, args.User))
+                {
+                    var resistanceEvent = new GetPolicingResistanceEvent();
+                    RaiseLocalEvent(target, ref resistanceEvent);
+
+                    stun *= resistanceEvent.Multiplier;
+                    paralyze *= resistanceEvent.Multiplier;
+                    deafen *= resistanceEvent.Multiplier;
+                }
+            }
+
+            if (_deafness.HasEarProtection(target))
+            {
+                _popup.PopupEntity(Loc.GetString("rmc-flashbang-ear-protection"), target, target, PopupType.MediumCaution);
+
+                stun *= ent.Comp.EarProtectionMultiplier;
+                paralyze *= ent.Comp.EarProtectionMultiplier;
+                deafen = TimeSpan.Zero;
+            }
+
+            if (deafen > TimeSpan.Zero)
+                _deafness.TryDeafen(target, deafen);
+
+            if (stun > TimeSpan.Zero)
+            {
+                _stun.TryKnockdown(target, stun, true);
+                _stun.TryStun(target, stun, true);
+            }
+
+            if (paralyze > TimeSpan.Zero)
+            {
+                TryKnockOut(target, paralyze, true);
+            }
         }
 
         args.Handled = true;
-    }
-
-    private void Stun(Entity<RMCStunOnTriggerComponent> ent, EntityUid target, EntityUid? user, float probability, float range, TimeSpan stun, TimeSpan flash, TimeSpan flashAdditionalStunTime, TimeSpan paralyze)
-    {
-        var coordinates = Transform(target).Coordinates;
-        if (!_random.Prob(probability) || !_interaction.InRangeUnobstructed(ent, coordinates, range))
-            return;
-
-        if (_flash.Flash(target, user, ent, (float)flash.TotalMilliseconds, displayPopup: false))
-        {
-            stun += flashAdditionalStunTime;
-            paralyze += flashAdditionalStunTime;
-        }
-
-        if (stun > TimeSpan.Zero)
-        {
-            _stun.TryStun(target, stun, true);
-            _stun.TryKnockdown(target, stun, true);
-        }
-
-        if (paralyze > TimeSpan.Zero)
-        {
-            TryKnockOut(target, paralyze, true);
-        }
     }
 
     //Equal to KnockOut/PARALYZE in parity

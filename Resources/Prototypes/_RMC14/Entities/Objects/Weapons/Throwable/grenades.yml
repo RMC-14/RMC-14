@@ -46,11 +46,9 @@
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
   - type: RMCStunOnTrigger
-    filters:
-    - paralyze: 2.5
-      whitelist:
-        skills:
-          RMCSkillPolice: 2
+    trainedWhitelist:
+      skills:
+        RMCSkillPolice: 2
   - type: SoundOnTrigger
     sound:
       path: "/Audio/Effects/flash_bang.ogg"
@@ -69,6 +67,7 @@
   - type: RequiresSkill
     skills:
       RMCSkillPolice: 2
+  - type: RMCPolicingTool
 
 - type: entity
   parent:

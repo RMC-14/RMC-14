@@ -242,7 +242,7 @@
     damage:
       types:
         Piercing: 55
-  - type: RMCStunOnHit
+  - type: RMCStunOnProjectileHit
     stuns:
     - whitelist:
         minMobSize: VerySmallXeno
