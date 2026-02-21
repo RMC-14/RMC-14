@@ -459,7 +459,7 @@
       entries:
       - id: RMCWeaponPistolL14
         amount: 2
-      - id: RMCMK80
+      - id: RMCMK80RCM
         amount: 2
       - id: RMCWeaponRevolverWarwickMkVIIAlt
         name: L187 service revolver

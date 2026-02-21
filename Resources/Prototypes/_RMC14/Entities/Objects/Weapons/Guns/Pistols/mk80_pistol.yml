@@ -81,6 +81,28 @@
     - RMCMK80
 
 - type: entity
+  parent: RMCMK80
+  id: RMCMK80RCM
+  name: L189 offensive handgun
+  description: A large-frame, semi-automatic 9mm offensive handgun in limited use by members of the TSE's military. Although commercially produced by We-Ya and sold as the Mk80, this handgun has been produced under contract specifically for the TSE's military and designated the L189 offensive handgun. The slide is engraved with the Three Suns flag, location of manufacture, and serial number.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l189.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Pistols/l189.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        insertSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/gun_mk80_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - CMMagazinePistolMK80
+        startingItem: RMCMagazinePistolMK80RCM
+
+- type: entity
   parent: CMBaseMagazinePistol
   id: CMMagazinePistolMK80
   name: MK80 magazine (9mm Squash-Head)
@@ -104,6 +126,12 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: RMCMagazinePistolMK80RCM
+  name: L189 squash-head magazine (9mm)
+  description: A an eighteen-round magazine for the L189 offensive handgun, loaded with 9mm high-explosive squash-head rounds.
 
 - type: entity
   parent: CMMagazinePistolMK80
