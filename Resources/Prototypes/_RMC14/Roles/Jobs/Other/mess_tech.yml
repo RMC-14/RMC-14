@@ -44,6 +44,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: mst
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_shipside
 
 - type: startingGear
   id: CMGearMessTech

@@ -35,6 +35,9 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: correspondent
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_civillian
   hasIcon: false
 
 - type: startingGear
