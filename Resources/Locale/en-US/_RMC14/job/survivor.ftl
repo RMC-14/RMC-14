@@ -213,7 +213,7 @@ rmc-job-prefix-army-reservist = 202/ARMY
 
 rmc-job-name-survivor-moh-doctor = Doktor Ministerstva Zdravookhraneniya
 
-rmc-job-name-survivor-cec-researcher = Issledovatel' Korpusa Kosmicheskoy Eksploratsii
+rmc-job-name-survivor-msc-researcher = Issledovatel' Ministerstva Kolonizatsii
 
 rmc-job-name-survivor-soro-civilian = Grazhdanin
 

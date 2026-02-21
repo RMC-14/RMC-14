@@ -779,7 +779,7 @@
   - PatchWeYaRMCBlack
   - PatchWeYaRMCFury161
   - PatchTSERMC
-  - PatchCECRMC
+  - PatchMSCRMC
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
