@@ -271,8 +271,8 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
             if (trained)
             {
-                deafen = TimeSpan.FromSeconds(0);
-                paralyze = TimeSpan.FromSeconds(0);
+                deafen = TimeSpan.Zero;
+                paralyze = TimeSpan.Zero;
             }
 
             // Ensure interfaction policing is less effective
@@ -289,12 +289,17 @@ public sealed class RMCSizeStunSystem : EntitySystem
                 }
             }
 
-            if (!_deafness.TryDeafen(target, deafen, true))
+            if (_deafness.HasEarProtection(target))
             {
                 _popup.PopupEntity(Loc.GetString("rmc-flashbang-ear-protection"), target, target, PopupType.MediumCaution);
+
                 stun *= ent.Comp.EarProtectionMultiplier;
                 paralyze *= ent.Comp.EarProtectionMultiplier;
+                deafen = TimeSpan.Zero;
             }
+
+            if (deafen > TimeSpan.Zero)
+                _deafness.TryDeafen(target, deafen);
 
             if (stun > TimeSpan.Zero)
             {
