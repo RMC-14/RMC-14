@@ -21,7 +21,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Content.Shared.Pointing;
 using Robust.Shared.Physics.Components;
-using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -55,6 +54,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
     [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly RMCPolicingSystem _policing = default!;
+    [Dependency] private readonly SharedDeafnessSystem _deafness = default!;
 
     private EntityQuery<RMCPolicingToolComponent> _policingToolQuery;
 
@@ -249,80 +249,86 @@ public sealed class RMCSizeStunSystem : EntitySystem
         _entityLookup.GetEntitiesInRange(ent.Owner.ToCoordinates(), ent.Comp.Range, _marines);
         foreach (var target in _marines)
         {
-            if (ent.Comp.Filters != null)
+            var coordinates = Transform(target).Coordinates;
+            if (!_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.Range))
+                return;
+
+            var trained = _entityWhitelist.IsWhitelistPass(ent.Comp.TrainedWhitelist, target);
+
+            var attempt = new FlashAttemptEvent(target, args.User, ent.Owner);
+            RaiseLocalEvent(target, ref attempt, true);
+
+            var stun = ent.Comp.Stun;
+            var paralyze = ent.Comp.Paralyze;
+            var deafen = ent.Comp.Deafen;
+
+            if (!attempt.Cancelled)
             {
-                var passedFilter = false;
-                foreach (var filter in ent.Comp.Filters)
-                {
-                    if (_entityWhitelist.IsWhitelistFail(filter.Whitelist, target))
-                        continue;
-
-                    var probability = filter.Probability ?? ent.Comp.Probability;
-                    var range = filter.Range ?? ent.Comp.Range;
-                    var stun = filter.Stun ?? ent.Comp.Stun;
-                    var flash = filter.Flash ?? ent.Comp.Flash;
-                    var flashAdditionalStunTime = filter.FlashAdditionalStunTime ?? ent.Comp.FlashAdditionalStunTime;
-                    var paralyze = filter.Paralyze ?? ent.Comp.Paralyze;
-                    Stun(ent, target, args.User, probability, range, stun, flash, flashAdditionalStunTime, paralyze);
-                    passedFilter = true;
-                    break;
-                }
-
-                if (passedFilter)
-                    continue;
+                _flash.Flash(target, args.User, ent.Owner, ent.Comp.Flash, ent.Comp.FlashSlowTo, displayPopup: false);
+                stun += ent.Comp.FlashAdditionalStunTime;
+                paralyze += ent.Comp.FlashAdditionalParalyzeTime;
             }
 
-            Stun(
-                ent,
-                target,
-                args.User,
-                ent.Comp.Probability,
-                ent.Comp.Range,
-                ent.Comp.Stun,
-                ent.Comp.Flash,
-                ent.Comp.FlashAdditionalStunTime,
-                ent.Comp.Paralyze
-            );
+            if (_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.CloseRange))
+            {
+                stun += ent.Comp.CloseAdditionalStunTime;
+                paralyze += ent.Comp.CloseAdditionalParalyzeTime;
+                deafen += ent.Comp.CloseAdditionalDeafenTime;
+
+                if (trained)
+                {
+                    stun *= 0.25f;
+                    paralyze *= 0.25f;
+                    deafen = TimeSpan.FromSeconds(0);
+                }
+            }
+            else if (_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.MidRange) && !trained)
+            {
+                stun += ent.Comp.MidAdditionalStunTime;
+                paralyze += ent.Comp.MidAdditionalParalyzeTime;
+                deafen += ent.Comp.MidAdditionalDeafenTime;
+            }
+            else if (trained)
+            {
+                stun = TimeSpan.FromSeconds(0);
+                paralyze = TimeSpan.FromSeconds(0);
+                deafen = TimeSpan.FromSeconds(0);
+            }
+
+            // Ensure interfaction policing is less effective
+            if (args.User != null)
+            {
+                if (_policingToolQuery.HasComp(ent.Owner) && !_policing.CanBePoliced(target, args.User))
+                {
+                    var resistanceEvent = new GetPolicingResistanceEvent();
+                    RaiseLocalEvent(target, ref resistanceEvent);
+
+                    stun *= resistanceEvent.Multiplier;
+                    paralyze *= resistanceEvent.Multiplier;
+                    deafen *= resistanceEvent.Multiplier;
+                }
+            }
+
+            if (!_deafness.TryDeafen(target, deafen, true))
+            {
+                _popup.PopupClient(Loc.GetString("rmc-flashbang-ear-protection"), target, target, PopupType.MediumCaution);
+                stun *= ent.Comp.EarProtectionMultiplier;
+                paralyze *= ent.Comp.EarProtectionMultiplier;
+            }
+
+            if (stun > TimeSpan.Zero)
+            {
+                _stun.TryKnockdown(target, stun, true);
+                _stun.TryStun(target, stun, true);
+            }
+
+            if (paralyze > TimeSpan.Zero)
+            {
+                TryKnockOut(target, paralyze, true);
+            }
         }
 
         args.Handled = true;
-    }
-
-    private void Stun(Entity<RMCStunOnTriggerComponent> ent, EntityUid target, EntityUid? user, float probability, float range, TimeSpan stun, TimeSpan flash, TimeSpan flashAdditionalStunTime, TimeSpan paralyze)
-    {
-        var coordinates = Transform(target).Coordinates;
-        if (!_random.Prob(probability) || !_interaction.InRangeUnobstructed(ent, coordinates, range))
-            return;
-
-        if (_flash.Flash(target, user, ent, (float)flash.TotalMilliseconds, displayPopup: false))
-        {
-            stun += flashAdditionalStunTime;
-            paralyze += flashAdditionalStunTime;
-        }
-
-        // Ensure interfaction policing is less effective
-        if (user != null)
-        {
-            if (_policingToolQuery.HasComp(ent.Owner) && !_policing.CanBePoliced(target, user))
-            {
-                var resistanceEvent = new GetPolicingResistanceEvent();
-                RaiseLocalEvent(ent.Owner, ref resistanceEvent);
-
-                stun *= resistanceEvent.Multiplier;
-                paralyze *= resistanceEvent.Multiplier;
-            }
-        }
-
-        if (stun > TimeSpan.Zero)
-        {
-            _stun.TryStun(target, stun, true);
-            _stun.TryKnockdown(target, stun, true);
-        }
-
-        if (paralyze > TimeSpan.Zero)
-        {
-            TryKnockOut(target, paralyze, true);
-        }
     }
 
     //Equal to KnockOut/PARALYZE in parity
