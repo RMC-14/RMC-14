@@ -33,7 +33,7 @@ public sealed class WebbingSystem : SharedWebbingSystem
 
     private WebbingVisualLayers GetWebbingLayer(WebbingClothingComponent comp)
     {
-        if (comp.Whitelist is { } &&                        // if the clothing that accepts webbing has a defined whitelist, AND
+        if (comp.Whitelist? is { } &&                        // if the clothing that accepts webbing has a defined whitelist (which could be null..... obviously), AND
             comp.Whitelist.Tags.Contains("ArmorWebbing"))   // if that whitelist contains the "ArmorWebbing" tag, THEN
         {
             return WebbingVisualLayers.Outer;               // display the webbing on the OUTER webbing visual layer,
