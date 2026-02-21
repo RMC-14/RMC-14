@@ -33,12 +33,9 @@ public sealed class WebbingSystem : SharedWebbingSystem
 
     private WebbingVisualLayers GetWebbingLayer(WebbingClothingComponent comp)
     {
-        if (!comp.Whitelist.Tags.Contains("ArmorWebbing"))   // if that whitelist does not contain the "ArmorWebbing" tag, THEN
-        {
-            return WebbingVisualLayers.Base;               // display the webbing on the BASE webbing visual layer,
-        }                                                   // OTHERWISE
-
-        return WebbingVisualLayers.Outer;                    // display the webbing on the OUTER webbing visual layer
+        return comp.Whitelist?.Tags?.Contains("ArmorWebbing") == true   // if the ArmorWebbing whitelist contains the "ArmorWebbing" tag, THEN
+            ? WebbingVisualLayers.Outer;                                // display the webbing on the BASE layer,
+            : WebbingVisualLayers.Inner;                                // otherwise use the OUTER layer
     }                                                       // it's ugly, but I'm not a programmer.
 
     private void OnWebbingClothingEquipmentVisuals(Entity<WebbingClothingComponent> ent, ref GetEquipmentVisualsEvent args)
