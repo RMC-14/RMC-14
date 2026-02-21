@@ -269,30 +269,10 @@ public sealed class RMCSizeStunSystem : EntitySystem
                 paralyze += ent.Comp.FlashAdditionalParalyzeTime;
             }
 
-            if (_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.CloseRange))
+            if (trained)
             {
-                stun += ent.Comp.CloseAdditionalStunTime;
-                paralyze += ent.Comp.CloseAdditionalParalyzeTime;
-                deafen += ent.Comp.CloseAdditionalDeafenTime;
-
-                if (trained)
-                {
-                    stun *= 0.25f;
-                    paralyze *= 0.25f;
-                    deafen = TimeSpan.FromSeconds(0);
-                }
-            }
-            else if (_interaction.InRangeUnobstructed(ent, coordinates, ent.Comp.MidRange) && !trained)
-            {
-                stun += ent.Comp.MidAdditionalStunTime;
-                paralyze += ent.Comp.MidAdditionalParalyzeTime;
-                deafen += ent.Comp.MidAdditionalDeafenTime;
-            }
-            else if (trained)
-            {
-                stun = TimeSpan.FromSeconds(0);
-                paralyze = TimeSpan.FromSeconds(0);
                 deafen = TimeSpan.FromSeconds(0);
+                paralyze = TimeSpan.FromSeconds(0);
             }
 
             // Ensure interfaction policing is less effective
@@ -311,7 +291,7 @@ public sealed class RMCSizeStunSystem : EntitySystem
 
             if (!_deafness.TryDeafen(target, deafen, true))
             {
-                _popup.PopupClient(Loc.GetString("rmc-flashbang-ear-protection"), target, target, PopupType.MediumCaution);
+                _popup.PopupEntity(Loc.GetString("rmc-flashbang-ear-protection"), target, target, PopupType.MediumCaution);
                 stun *= ent.Comp.EarProtectionMultiplier;
                 paralyze *= ent.Comp.EarProtectionMultiplier;
             }
