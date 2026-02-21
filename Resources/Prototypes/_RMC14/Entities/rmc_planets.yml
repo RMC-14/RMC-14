@@ -466,7 +466,7 @@
       - CMJobSurvivorArmedPoliceOfficer: 2
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
-      - CMJobSurvivorCECResearcher: 2
+      - CMJobSurvivorMSCResearcher: 2
 #    survivorJobVariantScenarios:
 #      clfcamp:
 #        CMSurvivor:
