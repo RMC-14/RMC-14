@@ -85,6 +85,16 @@
       sprite: _RMC14/Objects/Clothing/Head/Hats/headband/tan.rsi
       state: hat
 
+- type: entity
+  parent: CMHeadCap
+  id: RMCHeadbandWhite
+  name: white headband
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/white.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Hats/headband/white.rsi
+
 # Squad headbands
 - type: entity
   parent: CMHeadBandGreen

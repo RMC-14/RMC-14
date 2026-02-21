@@ -122,6 +122,48 @@
   - BalaclavaRMC
   - BalaclavaGreenRMC
   - CoifRMC
+  - MaskScarfRedRMC
+  - MaskScarfBlackRMC
+  - MaskScarfGrayRMC
+  - MaskScarfGreenRMC
+  - MaskScarfTanRMC
+  - GasMaskRMC
+  - TornScarfBlackRMC
+  - TornScarfDesertRMC
+  - TornScarfGreenRMC
+  - TornScarfGreyRMC
+  - TornScarfUrbanRMC
+  - TornScarfSnowRMC
+  - CoifGreenRMC
+  - CoifGreyRMC
+  - CoifTanRMC
+  - BalaclavaSkullBlueRMC
+  - BalaclavaSkullBlackRMC
+  - KeffiyehRMC
+  - KeffiyehBlackRMC
+  - KeffiyehBlueRMC
+  - KeffiyehGreenRMC
+  - KeffiyehWhiteRMC
+  - KeffiyehRedRMC
+  - SmockRMC
+  - SmockCamoRMC
+  - NeckerchiefRedRMC
+  - NeckerchiefBlackRMC
+  - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
+  - NeckerchiefWhiteRMC
+
+- type: loadoutGroup
+  id: MasksRMCSquad
+  parent: MasksRMC
+  name: rmc-loadout-group-masks
+  minLimit: 0
+  maxLimit: 21
+  loadouts:
+  - BalaclavaRMC
+  - BalaclavaGreenRMC
+  - CoifRMC
   - MaskScarfSquadRMC
   - MaskScarfRedRMC
   - MaskScarfBlackRMC
@@ -155,7 +197,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
-  
+
 - type: loadoutGroup
   id: MasksRMCPVE
   name: rmc-loadout-group-masks
@@ -184,9 +226,9 @@
   minLimit: 0
   maxLimit: 10
   loadouts:
-  - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - GreyBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -195,7 +237,33 @@
   - GrayHeadbandRMC
   - RedHeadbandRMC
   - TanHeadbandRMC
+  - WhiteHeadbandRMC
+  - HeadBeanieRMC
+  - HeadBeanieTanRMC
+  - HeadBeanieGreenRMC
+  - HeadBeanieGrayRMC
+  - UNMCHeadsetRMC
+
+- type: loadoutGroup
+  id: HeadwearRMCSquad
+  parent: HeadwearRMC
+  name: rmc-loadout-group-headwear
+  minLimit: 0
+  maxLimit: 10
+  loadouts:
+  - SquadBeretRMC
+  - GreenBeretRMC
+  - TanBeretRMC
+  - BoonieRMC
+  - BoonieTanRMC
+  - CapRMC
   - SquadHeadbandRMC
+  - BrownHeadbandRMC
+  - GreenHeadbandRMC
+  - GrayHeadbandRMC
+  - RedHeadbandRMC
+  - TanHeadbandRMC
+  - WhiteHeadbandRMC
   - HeadBeanieRMC
   - HeadBeanieTanRMC
   - HeadBeanieGreenRMC
@@ -213,6 +281,7 @@
   - GrayHeadbandRMC
   - RedHeadbandRMC
   - TanHeadbandRMC
+  - WhiteHeadbandRMC
   - UNMCHeadsetRMC
 
 # Helmet Garbs
@@ -676,7 +745,6 @@
   minLimit: 0
   maxLimit: 2
   loadouts:
-  - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
   - BoonieRMC

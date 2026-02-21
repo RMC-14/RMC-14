@@ -18,6 +18,12 @@
     head: CMHeadBeretTan
 
 - type: loadout
+  id: GreyBeretRMC
+  cost: 2
+  equipment:
+    head: RMCHeadBeretGrey
+
+- type: loadout
   id: BoonieRMC
   cost: 2
   equipment:
@@ -64,6 +70,12 @@
   cost: 2
   equipment:
     head: CMHeadBandTan
+
+- type: loadout
+  id: WhiteHeadbandRMC
+  cost: 2
+  equipment:
+    head: RMCHeadbandWhite
 
 - type: loadout
   id: SquadHeadbandRMC
