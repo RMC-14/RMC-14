@@ -31,5 +31,21 @@
                FontColorOverride="#C7D9ED"
                HorizontalExpand="True"
                ClipText="True"/>
+
+        <Label Name="CooldownLabel"
+               Access="Public"
+               Text=""
+               FontColorOverride="#53D188"
+               HorizontalExpand="True"
+               ClipText="True"/>
+
+        <ProgressBar Name="CooldownBar"
+                     Access="Public"
+                     MinValue="0"
+                     MaxValue="1"
+                     Value="1"
+                     MinSize="0 6"
+                     HorizontalExpand="True"
+                     Visible="False"/>
     </BoxContainer>
 </controls:RMCVehicleWeaponsMenu>

@@ -33,6 +33,9 @@ public sealed class RMCVehicleWeaponsUiEntry
     public readonly float Integrity;
     public readonly float MaxIntegrity;
     public readonly bool HasIntegrity;
+    public readonly float CooldownRemaining;
+    public readonly float CooldownTotal;
+    public readonly bool IsOnCooldown;
 
     public RMCVehicleWeaponsUiEntry(
         string slotId,
@@ -53,7 +56,10 @@ public sealed class RMCVehicleWeaponsUiEntry
         bool operatorIsSelf,
         float integrity,
         float maxIntegrity,
-        bool hasIntegrity)
+        bool hasIntegrity,
+        float cooldownRemaining,
+        float cooldownTotal,
+        bool isOnCooldown)
     {
         SlotId = slotId;
         HardpointType = hardpointType;
@@ -74,6 +80,9 @@ public sealed class RMCVehicleWeaponsUiEntry
         Integrity = integrity;
         MaxIntegrity = maxIntegrity;
         HasIntegrity = hasIntegrity;
+        CooldownRemaining = cooldownRemaining;
+        CooldownTotal = cooldownTotal;
+        IsOnCooldown = isOnCooldown;
     }
 }
 
@@ -134,5 +143,16 @@ public sealed class RMCVehicleWeaponsAutoModeMessage : BoundUserInterfaceMessage
     public RMCVehicleWeaponsAutoModeMessage(bool enabled)
     {
         Enabled = enabled;
+    }
+}
+
+[Serializable, NetSerializable]
+public sealed class RMCVehicleWeaponsCooldownFeedbackMessage : BoundUserInterfaceMessage
+{
+    public readonly float RemainingSeconds;
+
+    public RMCVehicleWeaponsCooldownFeedbackMessage(float remainingSeconds)
+    {
+        RemainingSeconds = remainingSeconds;
     }
 }

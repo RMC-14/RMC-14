@@ -19,6 +19,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Containers;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Vehicle.Components;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -41,6 +42,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
     [Dependency] private readonly SharedContentEyeSystem _eyeSystem = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -54,6 +56,7 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsStabilizationMessage>(OnWeaponsStabilization);
         SubscribeLocalEvent<VehicleWeaponsSeatComponent, RMCVehicleWeaponsAutoModeMessage>(OnWeaponsAutoMode);
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ComponentShutdown>(OnOperatorShutdown);
+        SubscribeLocalEvent<VehicleWeaponsOperatorComponent, ShotAttemptedEvent>(OnOperatorShotAttempted);
         SubscribeLocalEvent<VehicleWeaponsOperatorComponent, RMCVehicleHardpointSelectActionEvent>(OnHardpointActionSelect);
 
         SubscribeLocalEvent<RMCHardpointSlotsChangedEvent>(OnHardpointSlotsChanged);
@@ -187,6 +190,47 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             return;
 
         ClearHardpointActions(ent.Owner, ent.Comp);
+    }
+
+    private void OnOperatorShotAttempted(Entity<VehicleWeaponsOperatorComponent> ent, ref ShotAttemptedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (args.User != ent.Owner)
+            return;
+
+        if (ent.Comp.Vehicle is not { } vehicle ||
+            !TryComp(vehicle, out RMCVehicleWeaponsComponent? weapons) ||
+            weapons.Operator != ent.Owner ||
+            weapons.SelectedWeapon != args.Used.Owner)
+        {
+            return;
+        }
+
+        var remaining = args.Used.Comp.NextFire - _timing.CurTime;
+        if (remaining <= TimeSpan.Zero)
+            return;
+
+        if (_timing.CurTime < ent.Comp.NextCooldownFeedbackAt)
+            return;
+
+        ent.Comp.NextCooldownFeedbackAt = _timing.CurTime + TimeSpan.FromSeconds(0.25);
+
+        if (!TryComp(ent.Owner, out BuckleComponent? buckle) ||
+            buckle.BuckledTo is not { } seat ||
+            !HasComp<VehicleWeaponsSeatComponent>(seat))
+        {
+            return;
+        }
+
+        _ui.ServerSendUiMessage(
+            seat,
+            RMCVehicleWeaponsUiKey.Key,
+            new RMCVehicleWeaponsCooldownFeedbackMessage((float) remaining.TotalSeconds),
+            ent.Owner);
+
+        _audio.PlayPredicted(args.Used.Comp.SoundEmpty, args.Used.Owner, ent.Owner);
     }
 
     private void OnHardpointActionSelect(Entity<VehicleWeaponsOperatorComponent> ent, ref RMCVehicleHardpointSelectActionEvent args)
@@ -585,14 +629,27 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             var ammoCount = 0;
             var ammoCapacity = 0;
             var hasAmmo = false;
+            var cooldownRemaining = 0f;
+            var cooldownTotal = 0f;
+            var isOnCooldown = false;
 
-            if (item != null && HasComp<GunComponent>(item.Value))
+            if (item != null && TryComp(item.Value, out GunComponent? gun))
             {
                 var ammoEv = new GetAmmoCountEvent();
                 RaiseLocalEvent(item.Value, ref ammoEv);
                 ammoCount = ammoEv.Count;
                 ammoCapacity = ammoEv.Capacity;
                 hasAmmo = ammoEv.Capacity > 0;
+
+                if (gun.FireRateModified > 0f)
+                    cooldownTotal = 1f / gun.FireRateModified;
+
+                var remaining = gun.NextFire - _timing.CurTime;
+                if (remaining > TimeSpan.Zero)
+                {
+                    cooldownRemaining = (float) remaining.TotalSeconds;
+                    isOnCooldown = cooldownRemaining > 0.001f;
+                }
             }
 
             var magazineSize = 0;
@@ -637,7 +694,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf,
                 integrity,
                 maxIntegrity,
-                hasIntegrity));
+                hasIntegrity,
+                cooldownRemaining,
+                cooldownTotal,
+                isOnCooldown));
 
             if (item != null)
             {
@@ -728,14 +788,27 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
             var ammoCount = 0;
             var ammoCapacity = 0;
             var hasAmmo = false;
+            var cooldownRemaining = 0f;
+            var cooldownTotal = 0f;
+            var isOnCooldown = false;
 
-            if (item != null && HasComp<GunComponent>(item.Value))
+            if (item != null && TryComp(item.Value, out GunComponent? gun))
             {
                 var ammoEv = new GetAmmoCountEvent();
                 RaiseLocalEvent(item.Value, ref ammoEv);
                 ammoCount = ammoEv.Count;
                 ammoCapacity = ammoEv.Capacity;
                 hasAmmo = ammoEv.Capacity > 0;
+
+                if (gun.FireRateModified > 0f)
+                    cooldownTotal = 1f / gun.FireRateModified;
+
+                var remaining = gun.NextFire - _timing.CurTime;
+                if (remaining > TimeSpan.Zero)
+                {
+                    cooldownRemaining = (float) remaining.TotalSeconds;
+                    isOnCooldown = cooldownRemaining > 0.001f;
+                }
             }
 
             var magazineSize = 0;
@@ -780,7 +853,10 @@ public sealed class RMCVehicleWeaponsSystem : EntitySystem
                 operatorIsSelf,
                 integrity,
                 maxIntegrity,
-                hasIntegrity));
+                hasIntegrity,
+                cooldownRemaining,
+                cooldownTotal,
+                isOnCooldown));
         }
     }
 

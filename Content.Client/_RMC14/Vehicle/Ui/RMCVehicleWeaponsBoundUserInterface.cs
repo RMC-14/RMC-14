@@ -58,4 +58,12 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
             weaponsState.CanToggleAuto,
             weaponsState.AutoEnabled);
     }
+
+    protected override void ReceiveMessage(BoundUserInterfaceMessage message)
+    {
+        base.ReceiveMessage(message);
+
+        if (message is RMCVehicleWeaponsCooldownFeedbackMessage cooldown)
+            _menu?.FlashCooldownFeedback(cooldown.RemainingSeconds);
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Shared._RMC14.Marines.Skills;
@@ -32,6 +33,9 @@ public sealed partial class VehicleWeaponsOperatorComponent : Component
 
     [NonSerialized]
     public Dictionary<string, EntityUid> HardpointActions = new();
+
+    [NonSerialized]
+    public TimeSpan NextCooldownFeedbackAt = TimeSpan.Zero;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

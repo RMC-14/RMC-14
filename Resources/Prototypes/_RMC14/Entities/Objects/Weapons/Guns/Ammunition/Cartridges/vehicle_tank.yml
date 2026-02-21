@@ -95,21 +95,35 @@
       shader: unshaded
   - type: Projectile
     impactEffect: BulletImpactEffect
+    maxFixedRange: 32
     damage:
       types:
-        Piercing: 25
+        Piercing: 60
     soundHit:
       path: /Audio/Weapons/Guns/Hits/bullet_hit.ogg
+  - type: RMCProjectileAccuracy
+    accuracy: 130
+    thresholds:
+    - range: 32
+      falloff: 5
+  - type: RMCProjectileDamageFalloff
+    thresholds:
+    - range: 32
+      falloff: 9999
+      ignoreModifiers: true
   - type: ProjectileGrenade
     evenSpread: true
-    minVelocity: 0.5
-    maxVelocity: 1.5
+    minVelocity: 0.4
+    maxVelocity: 1.8
     fillPrototype: RMCShrapnelJagged
     rebounds: true
-    capacity: 6
-    spreadAngle: 20
+    capacity: 10
+    spreadAngle: 28
+  - type: RMCAreaDamage
+    damageArea: 2.5
+    falloffDistance: 1.5
   - type: CMArmorPiercing
-    amount: 10
+    amount: 40
   - type: IgnorePredictionHide
 
 - type: entity

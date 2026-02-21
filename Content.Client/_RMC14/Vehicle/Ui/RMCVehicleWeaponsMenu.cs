@@ -13,6 +13,7 @@ using Robust.Client.UserInterface.XAML;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Localization;
 using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Vehicle.Ui;
 
@@ -24,11 +25,17 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
     public event Action<bool>? OnToggleAutoTurret;
 
     private readonly IEntityManager _entManager = IoCManager.Resolve<IEntityManager>();
+    private readonly IGameTiming _timing = IoCManager.Resolve<IGameTiming>();
     private readonly List<RMCVehicleWeaponsUiEntry> _hardpoints = new();
 
     private bool _suppressStabilization;
     private bool _suppressAuto;
     private string? _selectedSlotId;
+    private float _selectedCooldownRemaining;
+    private float _selectedCooldownTotal;
+    private TimeSpan _selectedCooldownSampleTime;
+    private bool _hasSelectedCooldown;
+    private TimeSpan _cooldownFlashUntil;
 
     public RMCVehicleWeaponsMenu()
     {
@@ -53,6 +60,12 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
         };
     }
 
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        UpdateCooldownDisplay();
+    }
+
     public void Update(
         NetEntity vehicle,
         IReadOnlyList<RMCVehicleWeaponsUiEntry> hardpoints,
@@ -72,6 +85,7 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
         _suppressStabilization = false;
 
         _suppressAuto = true;
+        AutoTurretToggle.Visible = canToggleAuto;
         AutoTurretToggle.Disabled = !canToggleAuto;
         AutoTurretToggle.Pressed = autoEnabled;
         AutoTurretToggle.Text = autoEnabled
@@ -224,18 +238,95 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
         {
             AmmoCounter.Visible = false;
             AmmoCounter.Text = string.Empty;
+            CooldownLabel.Visible = false;
+            CooldownLabel.Text = string.Empty;
+            CooldownBar.Visible = false;
+            _hasSelectedCooldown = false;
             return;
         }
 
-        if (!HasAmmoDisplayData(selected))
+        if (HasAmmoDisplayData(selected))
+        {
+            AmmoCounter.Visible = true;
+            AmmoCounter.Text = BuildAmmoCounter(selected);
+        }
+        else
         {
             AmmoCounter.Visible = false;
             AmmoCounter.Text = string.Empty;
+        }
+
+        _selectedCooldownRemaining = Math.Max(0f, selected.CooldownRemaining);
+        _selectedCooldownTotal = Math.Max(0f, Math.Max(selected.CooldownTotal, _selectedCooldownRemaining));
+        _selectedCooldownSampleTime = _timing.CurTime;
+        _hasSelectedCooldown = _selectedCooldownTotal > 0.001f || selected.IsOnCooldown;
+
+        UpdateCooldownDisplay();
+    }
+
+    public void FlashCooldownFeedback(float remainingSeconds)
+    {
+        var remaining = Math.Max(0f, remainingSeconds);
+        if (remaining > _selectedCooldownRemaining)
+        {
+            _selectedCooldownRemaining = remaining;
+            _selectedCooldownSampleTime = _timing.CurTime;
+            _selectedCooldownTotal = Math.Max(_selectedCooldownTotal, remaining);
+            _hasSelectedCooldown = true;
+        }
+
+        _cooldownFlashUntil = _timing.CurTime + TimeSpan.FromSeconds(0.25);
+        UpdateCooldownDisplay();
+    }
+
+    private void UpdateCooldownDisplay()
+    {
+        if (!_hasSelectedCooldown)
+        {
+            CooldownLabel.Visible = false;
+            CooldownLabel.Text = string.Empty;
+            CooldownBar.Visible = false;
             return;
         }
 
-        AmmoCounter.Visible = true;
-        AmmoCounter.Text = BuildAmmoCounter(selected);
+        var elapsed = (float) (_timing.CurTime - _selectedCooldownSampleTime).TotalSeconds;
+        var remaining = Math.Max(0f, _selectedCooldownRemaining - Math.Max(0f, elapsed));
+        var total = Math.Max(0.001f, _selectedCooldownTotal);
+        var ratio = Math.Clamp(1f - remaining / total, 0f, 1f);
+        var flashing = _timing.CurTime < _cooldownFlashUntil;
+
+        CooldownLabel.Visible = true;
+        CooldownBar.Visible = true;
+        CooldownBar.Value = ratio;
+
+        if (remaining > 0.001f)
+        {
+            CooldownLabel.Text = Loc.GetString("rmc-vehicle-weapons-ui-cooldown-recharging", ("seconds", remaining.ToString("0.0")));
+            CooldownLabel.FontColorOverride = flashing ? Color.FromHex("#E1786A") : Color.FromHex("#D6C45A");
+
+            CooldownBar.ForegroundStyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = flashing ? Color.FromHex("#E1786A") : Color.FromHex("#D6C45A")
+            };
+        }
+        else
+        {
+            CooldownLabel.Text = Loc.GetString("rmc-vehicle-weapons-ui-cooldown-ready");
+            CooldownLabel.FontColorOverride = Color.FromHex("#53D188");
+
+            CooldownBar.ForegroundStyleBoxOverride = new StyleBoxFlat
+            {
+                BackgroundColor = Color.FromHex("#53D188")
+            };
+        }
+
+        CooldownBar.BackgroundStyleBoxOverride = new StyleBoxFlat
+        {
+            BackgroundColor = Color.FromHex("#1E2B3B")
+        };
+
+        if (AmmoCounter.Visible)
+            AmmoCounter.FontColorOverride = flashing ? Color.FromHex("#E1786A") : Color.FromHex("#C7D9ED");
     }
 
     private static bool HasAmmoDisplayData(RMCVehicleWeaponsUiEntry selected)
