@@ -237,13 +237,13 @@
     - RMCVehicleHardpointCannon
   - type: VehicleTurretAttachment
   - type: VehicleTurret
-    fireWhileRotatingGraceDegrees: 12
+    fireWhileRotatingGraceDegrees: 180
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
     pixelOffsetNorth: "0,30"
-    pixelOffsetEast: "40,0"
+    pixelOffsetEast: "35,0"
     pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-40,0"
+    pixelOffsetWest: "-35,0"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
     overlayState: ltaaap_minigun_0
@@ -259,7 +259,7 @@
     baseShotDelay: 0.7
     baseScatter: 10
     initialWindupDelay: 0.7
-    spinUpTime: 10
+    spinUpTime: 6
     graceAfterStop: 2
     spinDownTime: 3
     minSpinLevel: 1
@@ -279,19 +279,22 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: CMCartridge10x20mmAP
-    capacity: 100
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 100
+    magazineSize: 500
     maxStoredMagazines: 1
   - type: GunFireArc
     arc: 140
   - type: RefillableByBulletBox
     bulletType: RMCVehicleAmmoBoxLTAA
   - type: GunMuzzleOffset
-    offset: "0,0"
+    applyToMuzzleFlash: true
     useDirectionalOffsets: true
-    offsetEast: "0,0.2"
-    muzzleOffset: "0,-1"
+    rotateDirectionalOffsets: true
+    offsetEast: "0.45,-1.05"
+    offsetWest: "-0.45, -1.05"
+    offsetSouth: "0, -0.55"
+    offsetNorth: "0, -0.9"
     useAimDirection: true
     useContainerOwner: false
   - type: RMCHardpointVisual
@@ -319,22 +322,23 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 4
+    fireRate: 1
+    projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:
     - FullAuto
     soundGunshot: /Audio/_RMC14/Vehicle/weapons/dual_autocannon_fire.ogg
     cameraRecoilScalar: 0
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 4
-    accuracyMultiplierUnwielded: 4
+    accuracyMultiplier: 6
+    accuracyMultiplierUnwielded: 6
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeAceAutocannon
-    capacity: 10
+    capacity: 40
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 10
-    maxStoredMagazines: 3
+    magazineSize: 40
+    maxStoredMagazines: 2
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -497,23 +501,30 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIgnorePrediction
   - type: Gun
-    fireRate: 0.7
+    fireRate: 0.3333
     projectileSpeed: 18
+    minAngle: 10
+    maxAngle: 10
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     cameraRecoilScalar: 0
+  - type: ShootAtFixedPoint
+    shootArcProj: true
+    maxFixedRange: 10
+  - type: OnShootTriggerAmmoTimer
+    delay: 1.5
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 5
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
     proto: CMGrenadeHighExplosive
-    capacity: 4
+    capacity: 3
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 4
-    maxStoredMagazines: 3
+    magazineSize: 3
+    maxStoredMagazines: 10
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -618,6 +629,8 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
     fireRate: 6
+    minAngle: 3
+    maxAngle: 3
     selectedMode: FullAuto
     availableModes:
     - FullAuto
@@ -635,10 +648,10 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: RMCVehicleCartridgeSentry10x50mm
-    capacity: 100
+    capacity: 500
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 100
-    maxStoredMagazines: 3
+    magazineSize: 500
+    maxStoredMagazines: 1
   - type: GunFireArc
     arc: 180
   - type: RefillableByBulletBox
