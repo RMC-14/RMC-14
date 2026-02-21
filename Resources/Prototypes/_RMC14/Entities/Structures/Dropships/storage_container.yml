@@ -30,3 +30,7 @@
     bodyType: Static
   - type: WallMount
     arc: 360
+  - type: RemoveComponents
+    components:
+    - type: Item
+    - type: RMCItemPickup
