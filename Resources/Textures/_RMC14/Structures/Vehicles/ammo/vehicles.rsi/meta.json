@@ -69,6 +69,12 @@
     },
     {
       "name": "ltaa_e"
+    },
+    {
+    "name": "quad_rocket"
+    },
+    {
+    "name": "quad_rocket_e"
     }
   ]
 }

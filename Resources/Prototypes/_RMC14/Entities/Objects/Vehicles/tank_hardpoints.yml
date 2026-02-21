@@ -504,8 +504,6 @@
     - SemiAuto
     soundGunshot: /Audio/Weapons/Guns/Gunshots/grenade_launcher.ogg
     cameraRecoilScalar: 0
-  - type: OnShootTriggerAmmoTimer
-    delay: 0.2
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 5
     accuracyMultiplierUnwielded: 5
@@ -558,26 +556,26 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: GunIgnorePrediction
   - type: Gun
-    fireRate: 0.5
+    fireRate: 0.0667 # 15 seconds between shots
     projectileSpeed: 18
+    minAngle: 4
+    maxAngle: 4
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/m5_shoot.ogg
     cameraRecoilScalar: 0
-  - type: OnShootTriggerAmmoTimer
-    delay: 0.2
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 5
     accuracyMultiplierUnwielded: 5
   - type: BallisticAmmoProvider
     cycleable: false
-    proto: RMCRocket84mmAntiArmor
-    capacity: 1
+    proto: RMCVehicleRocket84mmAntiArmor
+    capacity: 5
   - type: RMCVehicleHardpointAmmo
-    magazineSize: 1
-    maxStoredMagazines: 2
+    magazineSize: 5
+    maxStoredMagazines: 3
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox

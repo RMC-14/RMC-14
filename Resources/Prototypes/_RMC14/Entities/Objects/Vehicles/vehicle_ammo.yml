@@ -134,17 +134,17 @@
   components:
   - type: Sprite
     layers:
-    - state: slauncher_0
+    - state: quad_rocket
       map: [ "enum.BulletBoxLayers.Fill" ]
   - type: GenericVisualizer
     visuals:
       enum.BulletBoxLayers.Fill:
         enum.BulletBoxLayers.Fill:
-          Empty: { state: slauncher_1, visible: true }
-          Low: { state: slauncher_1, visible: true }
-          Medium: { state: slauncher_0, visible: true }
-          High: { state: slauncher_0, visible: true }
-          Full: { state: slauncher_0, visible: true }
+          Empty: { state: quad_rocket_e, visible: true }
+          Low: { state: quad_rocket_e, visible: true }
+          Medium: { state: quad_rocket, visible: true }
+          High: { state: quad_rocket, visible: true }
+          Full: { state: quad_rocket, visible: true }
   - type: BulletBox
     amount: 90
     max: 90
@@ -221,3 +221,22 @@
     amount: 200
     max: 200
     bulletType: RMCVehicleAmmoBoxLTAA
+
+- type: entity
+  parent: RMCRocket84mmAntiArmor
+  id: RMCVehicleRocket84mmAntiArmor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: CartridgeAmmo
+    proto: RMCVehicleProjectileRocket84mmAntiArmor
+    deleteOnSpawn: false
+
+- type: entity
+  parent: RMCProjectileRocket84mmAntiArmor
+  id: RMCVehicleProjectileRocket84mmAntiArmor
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    maxFixedRange: 32
+  - type: TriggerOnFixedDistanceStop
+    delay: 0
