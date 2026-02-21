@@ -10,6 +10,30 @@
     clearDecals: true
     replaceAreas: true
 
+- type: entity
+  parent: RMCMapInsertSorokyneBase
+  id: RMCMapInsertSorokyneSPPSOF
+  name: SPP SOF Dropship
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/spp_sof.yml"
+      probability: 0.4 # "weight": 4, "type": "def", "values": { "lvevent": "sof_insert" } } // TODO: Hook 40% chance up to scenario once spawners are mapped
+#     probability: 1
+#     nightmareScenario: spp_sof
+
+- type: entity
+  parent: RMCMapInsertSorokyneBase
+  id: RMCMapInsertSorokyneSPPSOFAlt
+  name: SPP SOF Supply Ship
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Sorokyne/spp_sof_alt.yml"
+      probability: 0.4 # "weight": 4, "type": "def", "values": { "lvevent": "sof_insert" } } // TODO: Hook chance up to scenario once spawners are mapped
+#     probability: 1
+#     nightmareScenario: spp_sof
+
 # Standalones
 - type: entity
   parent: RMCMapInsertSorokyneBase

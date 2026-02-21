@@ -1,0 +1,1193 @@
+meta:
+  format: 7
+  category: Grid
+  engineVersion: 264.0.2
+  forkId: ""
+  forkVersion: ""
+  time: 02/11/2026 23:28:01
+  entityCount: 166
+maps: []
+grids:
+- 1
+orphans:
+- 1
+nullspace: []
+tilemap:
+  0: Space
+  198: CMFloorPlating
+  2: CMFloorSteelPrisonKitchen
+  1: CMPlanetWood
+  3: CMPlanetWoodDamaged
+entities:
+- proto: ""
+  entities:
+  - uid: 1
+    components:
+    - type: MetaData
+      name: grid
+    - type: Transform
+      parent: invalid
+    - type: MapGrid
+      chunks:
+        0,0:
+          ind: 0,0
+          tiles: xgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAADAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAMAAAAAAAADAAAAAAAAAQAAAAAAAAEAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAABAAAAAAAAAwAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMYAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAMYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADGAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAADGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAMYAAAAAAADGAAAAAAAAxgAAAAAAAAEAAAAAAAABAAAAAAAAxgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+          version: 7
+    - type: Broadphase
+    - type: Physics
+      bodyStatus: InAir
+      angularDamping: 0.05
+      linearDamping: 0.05
+      fixedRotation: False
+      bodyType: Dynamic
+    - type: Fixtures
+      fixtures: {}
+    - type: OccluderTree
+    - type: SpreaderGrid
+    - type: Shuttle
+      dampingModifier: 0.25
+    - type: GridPathfinding
+    - type: Gravity
+      gravityShakeSound: !type:SoundPathSpecifier
+        path: /Audio/Effects/alert.ogg
+    - type: DecalGrid
+      chunkCollection:
+        version: 2
+        nodes: []
+    - type: GridAtmosphere
+      version: 2
+      data:
+        chunkSize: 4
+    - type: GasTileOverlay
+    - type: RadiationGridResistance
+    - type: ImplicitRoof
+    - type: AreaGrid
+      labels: {}
+      areaEntities: {}
+      colors: {}
+      areas:
+        12,9: RMCAreaVaraderoInteriorRestaurant
+        12,8: RMCAreaVaraderoInteriorRestaurant
+        12,7: RMCAreaVaraderoInteriorRestaurant
+        12,6: RMCAreaVaraderoInteriorRestaurant
+        12,5: RMCAreaVaraderoInteriorRestaurant
+        12,4: RMCAreaVaraderoInteriorRestaurant
+        12,3: RMCAreaVaraderoInteriorRestaurant
+        12,2: RMCAreaVaraderoInteriorRestaurant
+        12,1: RMCAreaVaraderoInteriorRestaurant
+        12,0: RMCAreaVaraderoInteriorRestaurant
+        11,9: RMCAreaVaraderoInteriorRestaurant
+        11,8: RMCAreaVaraderoInteriorRestaurant
+        11,7: RMCAreaVaraderoInteriorRestaurant
+        11,6: RMCAreaVaraderoInteriorRestaurant
+        11,5: RMCAreaVaraderoInteriorRestaurant
+        11,4: RMCAreaVaraderoInteriorRestaurant
+        11,3: RMCAreaVaraderoInteriorRestaurant
+        11,2: RMCAreaVaraderoInteriorRestaurant
+        11,1: RMCAreaVaraderoInteriorRestaurant
+        11,0: RMCAreaVaraderoInteriorRestaurant
+        10,9: RMCAreaVaraderoInteriorRestaurant
+        10,8: RMCAreaVaraderoInteriorRestaurant
+        10,7: RMCAreaVaraderoInteriorRestaurant
+        10,6: RMCAreaVaraderoInteriorRestaurant
+        10,5: RMCAreaVaraderoInteriorRestaurant
+        10,4: RMCAreaVaraderoInteriorRestaurant
+        10,3: RMCAreaVaraderoInteriorRestaurant
+        10,2: RMCAreaVaraderoInteriorRestaurant
+        10,1: RMCAreaVaraderoInteriorRestaurant
+        10,0: RMCAreaVaraderoInteriorRestaurant
+        9,9: RMCAreaVaraderoInteriorRestaurant
+        9,8: RMCAreaVaraderoInteriorRestaurant
+        9,7: RMCAreaVaraderoInteriorRestaurant
+        9,6: RMCAreaVaraderoInteriorRestaurant
+        9,5: RMCAreaVaraderoInteriorRestaurant
+        9,4: RMCAreaVaraderoInteriorRestaurant
+        9,3: RMCAreaVaraderoInteriorRestaurant
+        9,2: RMCAreaVaraderoInteriorRestaurant
+        9,1: RMCAreaVaraderoInteriorRestaurant
+        9,0: RMCAreaVaraderoInteriorRestaurant
+        8,9: RMCAreaVaraderoInteriorRestaurant
+        8,8: RMCAreaVaraderoInteriorRestaurant
+        8,7: RMCAreaVaraderoInteriorRestaurant
+        8,6: RMCAreaVaraderoInteriorRestaurant
+        8,5: RMCAreaVaraderoInteriorRestaurant
+        8,4: RMCAreaVaraderoInteriorRestaurant
+        8,3: RMCAreaVaraderoInteriorRestaurant
+        8,2: RMCAreaVaraderoInteriorRestaurant
+        8,1: RMCAreaVaraderoInteriorRestaurant
+        8,0: RMCAreaVaraderoInteriorRestaurant
+        7,9: RMCAreaVaraderoInteriorRestaurant
+        7,8: RMCAreaVaraderoInteriorRestaurant
+        7,7: RMCAreaVaraderoInteriorRestaurant
+        7,6: RMCAreaVaraderoInteriorRestaurant
+        7,5: RMCAreaVaraderoInteriorRestaurant
+        7,4: RMCAreaVaraderoInteriorRestaurant
+        7,3: RMCAreaVaraderoInteriorRestaurant
+        7,2: RMCAreaVaraderoInteriorRestaurant
+        7,1: RMCAreaVaraderoInteriorRestaurant
+        7,0: RMCAreaVaraderoInteriorRestaurant
+        6,9: RMCAreaVaraderoInteriorRestaurant
+        6,8: RMCAreaVaraderoInteriorRestaurant
+        6,7: RMCAreaVaraderoInteriorRestaurant
+        6,6: RMCAreaVaraderoInteriorRestaurant
+        6,5: RMCAreaVaraderoInteriorRestaurant
+        6,4: RMCAreaVaraderoInteriorRestaurant
+        6,3: RMCAreaVaraderoInteriorRestaurant
+        6,2: RMCAreaVaraderoInteriorRestaurant
+        6,1: RMCAreaVaraderoInteriorRestaurant
+        6,0: RMCAreaVaraderoInteriorRestaurant
+        5,9: RMCAreaVaraderoInteriorRestaurant
+        5,8: RMCAreaVaraderoInteriorRestaurant
+        5,7: RMCAreaVaraderoInteriorRestaurant
+        5,6: RMCAreaVaraderoInteriorRestaurant
+        5,5: RMCAreaVaraderoInteriorRestaurant
+        5,4: RMCAreaVaraderoInteriorRestaurant
+        5,3: RMCAreaVaraderoInteriorRestaurant
+        5,2: RMCAreaVaraderoInteriorRestaurant
+        5,1: RMCAreaVaraderoInteriorRestaurant
+        5,0: RMCAreaVaraderoInteriorRestaurant
+        4,9: RMCAreaVaraderoInteriorRestaurant
+        4,8: RMCAreaVaraderoInteriorRestaurant
+        4,7: RMCAreaVaraderoInteriorRestaurant
+        4,6: RMCAreaVaraderoInteriorRestaurant
+        4,5: RMCAreaVaraderoInteriorRestaurant
+        4,4: RMCAreaVaraderoInteriorRestaurant
+        4,3: RMCAreaVaraderoInteriorRestaurant
+        4,2: RMCAreaVaraderoInteriorRestaurant
+        4,1: RMCAreaVaraderoInteriorRestaurant
+        4,0: RMCAreaVaraderoInteriorRestaurant
+        3,9: RMCAreaVaraderoInteriorRestaurant
+        3,8: RMCAreaVaraderoInteriorRestaurant
+        3,7: RMCAreaVaraderoInteriorRestaurant
+        3,6: RMCAreaVaraderoInteriorRestaurant
+        3,5: RMCAreaVaraderoInteriorRestaurant
+        3,4: RMCAreaVaraderoInteriorRestaurant
+        3,3: RMCAreaVaraderoInteriorRestaurant
+        3,2: RMCAreaVaraderoInteriorRestaurant
+        3,1: RMCAreaVaraderoInteriorRestaurant
+        3,0: RMCAreaVaraderoInteriorRestaurant
+        2,9: RMCAreaVaraderoInteriorRestaurant
+        2,8: RMCAreaVaraderoInteriorRestaurant
+        2,7: RMCAreaVaraderoInteriorRestaurant
+        2,6: RMCAreaVaraderoInteriorRestaurant
+        2,5: RMCAreaVaraderoInteriorRestaurant
+        2,4: RMCAreaVaraderoInteriorRestaurant
+        2,3: RMCAreaVaraderoInteriorRestaurant
+        2,2: RMCAreaVaraderoInteriorRestaurant
+        2,1: RMCAreaVaraderoInteriorRestaurant
+        2,0: RMCAreaVaraderoInteriorRestaurant
+        1,9: RMCAreaVaraderoInteriorRestaurant
+        1,8: RMCAreaVaraderoInteriorRestaurant
+        1,7: RMCAreaVaraderoInteriorRestaurant
+        1,6: RMCAreaVaraderoInteriorRestaurant
+        1,5: RMCAreaVaraderoInteriorRestaurant
+        1,4: RMCAreaVaraderoInteriorRestaurant
+        1,3: RMCAreaVaraderoInteriorRestaurant
+        1,2: RMCAreaVaraderoInteriorRestaurant
+        1,1: RMCAreaVaraderoInteriorRestaurant
+        1,0: RMCAreaVaraderoInteriorRestaurant
+        0,9: RMCAreaVaraderoInteriorRestaurant
+        0,8: RMCAreaVaraderoInteriorRestaurant
+        0,7: RMCAreaVaraderoInteriorRestaurant
+        0,6: RMCAreaVaraderoInteriorRestaurant
+        0,5: RMCAreaVaraderoInteriorRestaurant
+        0,4: RMCAreaVaraderoInteriorRestaurant
+        0,3: RMCAreaVaraderoInteriorRestaurant
+        0,2: RMCAreaVaraderoInteriorRestaurant
+        0,1: RMCAreaVaraderoInteriorRestaurant
+        0,0: RMCAreaVaraderoInteriorRestaurant
+- proto: CMAirlockMaintLockedColony
+  entities:
+  - uid: 155
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 0.5,5.5
+      parent: 1
+- proto: CMApcNoPower
+  entities:
+  - uid: 116
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,4.5
+      parent: 1
+    - type: SpriteSetRenderOrder
+      offset: 0.7,-1.45
+- proto: CMChairWoodWings
+  entities:
+  - uid: 128
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.26241,8.604179
+      parent: 1
+  - uid: 129
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.26241,7.729179
+      parent: 1
+  - uid: 130
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.746785,8.588554
+      parent: 1
+  - uid: 131
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.778035,7.713554
+      parent: 1
+  - uid: 132
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.684285,7.713554
+      parent: 1
+  - uid: 133
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.746785,8.604179
+      parent: 1
+  - uid: 134
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.23116,8.588554
+      parent: 1
+  - uid: 135
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.19991,7.682304
+      parent: 1
+  - uid: 136
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.246785,2.572929
+      parent: 1
+  - uid: 137
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.215535,1.7291789
+      parent: 1
+  - uid: 138
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.79366,2.541679
+      parent: 1
+  - uid: 139
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.79366,1.6198039
+      parent: 1
+  - uid: 140
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.184285,1.6510539
+      parent: 1
+  - uid: 141
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.215535,2.572929
+      parent: 1
+  - uid: 142
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.73116,2.604179
+      parent: 1
+  - uid: 143
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 6.76241,1.6666789
+      parent: 1
+- proto: CMDispenserSoda
+  entities:
+  - uid: 76
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,4.5
+      parent: 1
+- proto: CMMicrowave
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+- proto: CMRodMetal1
+  entities:
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 4.6762896,8.510429
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 4.7856646,2.682304
+      parent: 1
+- proto: CMScrewdriver
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 2.3169146,3.869804
+      parent: 1
+- proto: CMSemioticAirlock
+  entities:
+  - uid: 24
+    components:
+    - type: Transform
+      pos: 0.76909924,0.5
+      parent: 1
+  - uid: 25
+    components:
+    - type: Transform
+      pos: 12.800349,0.5
+      parent: 1
+- proto: CMSemioticWater
+  entities:
+  - uid: 26
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+- proto: CMShardGlass
+  entities:
+  - uid: 117
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+  - uid: 118
+    components:
+    - type: Transform
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 119
+    components:
+    - type: Transform
+      pos: 3.5,8.5
+      parent: 1
+  - uid: 120
+    components:
+    - type: Transform
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 121
+    components:
+    - type: Transform
+      pos: 4.5,2.5
+      parent: 1
+- proto: CMSink
+  entities:
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 2.5436602,9.166679
+      parent: 1
+- proto: CMSpawnPointSurvivor
+  entities:
+  - uid: 165
+    components:
+    - type: Transform
+      pos: 2.5,4.5
+      parent: 1
+- proto: CMTableAlmayer
+  entities:
+  - uid: 58
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,6.5
+      parent: 1
+  - uid: 59
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,7.5
+      parent: 1
+  - uid: 60
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 61
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,4.5
+      parent: 1
+  - uid: 62
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,1.5
+      parent: 1
+- proto: CMTableReinforced
+  entities:
+  - uid: 63
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,8.5
+      parent: 1
+  - uid: 64
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,4.5
+      parent: 1
+- proto: CMTableWoodenFancy
+  entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 7.5,1.5
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 7.5,2.5
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 9.5,2.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 9.5,7.5
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 7.5,8.5
+      parent: 1
+  - uid: 99
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+- proto: CMVendorDinnerware
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 4.5,3.5
+      parent: 1
+- proto: CMVentPump
+  entities:
+  - uid: 43
+    components:
+    - type: Transform
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 44
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 1
+- proto: CMWallMetal
+  entities:
+  - uid: 2
+    components:
+    - type: Transform
+      pos: 0.5,0.5
+      parent: 1
+  - uid: 3
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 5
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 6
+    components:
+    - type: Transform
+      pos: 0.5,6.5
+      parent: 1
+  - uid: 7
+    components:
+    - type: Transform
+      pos: 0.5,9.5
+      parent: 1
+  - uid: 8
+    components:
+    - type: Transform
+      pos: 1.5,9.5
+      parent: 1
+  - uid: 9
+    components:
+    - type: Transform
+      pos: 2.5,9.5
+      parent: 1
+  - uid: 10
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+  - uid: 11
+    components:
+    - type: Transform
+      pos: 4.5,9.5
+      parent: 1
+  - uid: 12
+    components:
+    - type: Transform
+      pos: 5.5,9.5
+      parent: 1
+  - uid: 13
+    components:
+    - type: Transform
+      pos: 12.5,9.5
+      parent: 1
+  - uid: 14
+    components:
+    - type: Transform
+      pos: 9.5,9.5
+      parent: 1
+  - uid: 15
+    components:
+    - type: Transform
+      pos: 12.5,6.5
+      parent: 1
+  - uid: 16
+    components:
+    - type: Transform
+      pos: 12.5,5.5
+      parent: 1
+  - uid: 17
+    components:
+    - type: Transform
+      pos: 12.5,4.5
+      parent: 1
+  - uid: 18
+    components:
+    - type: Transform
+      pos: 12.5,3.5
+      parent: 1
+  - uid: 19
+    components:
+    - type: Transform
+      pos: 12.5,0.5
+      parent: 1
+  - uid: 20
+    components:
+    - type: Transform
+      pos: 9.5,0.5
+      parent: 1
+  - uid: 21
+    components:
+    - type: Transform
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 22
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+- proto: CMWindoor
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,7.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,6.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,4.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,3.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,1.5
+      parent: 1
+- proto: CMWindowWhiteColony
+  entities:
+  - uid: 27
+    components:
+    - type: Transform
+      pos: 0.5,8.5
+      parent: 1
+  - uid: 28
+    components:
+    - type: Transform
+      pos: 0.5,7.5
+      parent: 1
+  - uid: 29
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 30
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 31
+    components:
+    - type: Transform
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 32
+    components:
+    - type: Transform
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 33
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 34
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 8.5,0.5
+      parent: 1
+  - uid: 36
+    components:
+    - type: Transform
+      pos: 12.5,1.5
+      parent: 1
+  - uid: 37
+    components:
+    - type: Transform
+      pos: 12.5,2.5
+      parent: 1
+  - uid: 38
+    components:
+    - type: Transform
+      pos: 12.5,8.5
+      parent: 1
+  - uid: 39
+    components:
+    - type: Transform
+      pos: 12.5,7.5
+      parent: 1
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 8.5,9.5
+      parent: 1
+  - uid: 41
+    components:
+    - type: Transform
+      pos: 7.5,9.5
+      parent: 1
+  - uid: 42
+    components:
+    - type: Transform
+      pos: 6.5,9.5
+      parent: 1
+- proto: CMWirecutter
+  entities:
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 2.4575396,3.416679
+      parent: 1
+- proto: FoodBowlBig
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      pos: 4.496785,6.557304
+      parent: 1
+- proto: FoodPlateSmall
+  entities:
+  - uid: 108
+    components:
+    - type: Transform
+      pos: 7.50756,8.510429
+      parent: 1
+  - uid: 122
+    components:
+    - type: Transform
+      pos: 4.496785,7.619804
+      parent: 1
+  - uid: 123
+    components:
+    - type: Transform
+      pos: 4.465535,7.276054
+      parent: 1
+- proto: FoodSoupMeatball
+  entities:
+  - uid: 111
+    components:
+    - type: Transform
+      pos: 9.523185,8.479179
+      parent: 1
+- proto: RiotShield
+  entities:
+  - uid: 152
+    components:
+    - type: Transform
+      pos: 9.215535,5.135429
+      parent: 1
+- proto: RMCBarricadeHandrail
+  entities:
+  - uid: 100
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,7.5
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 102
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 103
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 5.5,4.5
+      parent: 1
+- proto: RMCCalendarUNMC
+  entities:
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 3.5,9.5
+      parent: 1
+- proto: RMCCandle4
+  entities:
+  - uid: 113
+    components:
+    - type: Transform
+      pos: 9.554435,2.276054
+      parent: 1
+  - uid: 114
+    components:
+    - type: Transform
+      pos: 9.554435,1.6198039
+      parent: 1
+- proto: RMCCondimentHotsauceCholula
+  entities:
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 4.3481646,8.932304
+      parent: 1
+- proto: RMCCondimentHotsauceFranks
+  entities:
+  - uid: 82
+    components:
+    - type: Transform
+      pos: 4.6450396,8.916679
+      parent: 1
+- proto: RMCCondimentSmallPepper
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 4.3794146,8.307304
+      parent: 1
+- proto: RMCCondimentSmallSalt
+  entities:
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 4.5981646,8.338554
+      parent: 1
+- proto: RMCDecalSpawnerBloodSplatters
+  entities:
+  - uid: 146
+    components:
+    - type: Transform
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 147
+    components:
+    - type: Transform
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 148
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+  - uid: 149
+    components:
+    - type: Transform
+      pos: 8.5,3.5
+      parent: 1
+- proto: RMCDecalSpawnerOilSplatters
+  entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 2.5,3.5
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+- proto: RMCDecalSpawnerXenoSplatters
+  entities:
+  - uid: 144
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 1
+  - uid: 145
+    components:
+    - type: Transform
+      pos: 10.5,3.5
+      parent: 1
+- proto: RMCDoubleDoorGenericGlass
+  entities:
+  - uid: 156
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,9.5
+      parent: 1
+  - uid: 157
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,0.5
+      parent: 1
+- proto: RMCFireAxe
+  entities:
+  - uid: 151
+    components:
+    - type: Transform
+      pos: 8.278035,4.026054
+      parent: 1
+- proto: RMCForkPlastic
+  entities:
+  - uid: 110
+    components:
+    - type: Transform
+      pos: 7.32006,8.541679
+      parent: 1
+- proto: RMCGasPipeStraight
+  entities:
+  - uid: 45
+    components:
+    - type: Transform
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 46
+    components:
+    - type: Transform
+      pos: 6.5,1.5
+      parent: 1
+  - uid: 47
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 1
+  - uid: 48
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 1
+  - uid: 49
+    components:
+    - type: Transform
+      pos: 6.5,4.5
+      parent: 1
+  - uid: 51
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 5.5,5.5
+      parent: 1
+  - uid: 52
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,5.5
+      parent: 1
+  - uid: 53
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,5.5
+      parent: 1
+  - uid: 54
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,5.5
+      parent: 1
+  - uid: 55
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 8.5,5.5
+      parent: 1
+  - uid: 56
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 9.5,5.5
+      parent: 1
+  - uid: 57
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 10.5,5.5
+      parent: 1
+- proto: RMCGasPipeTJunction
+  entities:
+  - uid: 50
+    components:
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+- proto: RMCKitchenKnifeButcher
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 1.5825396,7.760429
+      parent: 1
+- proto: RMCKitchenKnifeChef
+  entities:
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 1.3169146,7.760429
+      parent: 1
+- proto: RMCKitchenKnifePlastic
+  entities:
+  - uid: 109
+    components:
+    - type: Transform
+      pos: 7.75756,8.463554
+      parent: 1
+- proto: RMCLampGreen
+  entities:
+  - uid: 104
+    components:
+    - type: Transform
+      pos: 7.50756,2.729179
+      parent: 1
+  - uid: 105
+    components:
+    - type: Transform
+      pos: 9.523185,2.682304
+      parent: 1
+  - uid: 106
+    components:
+    - type: Transform
+      pos: 9.50756,7.494804
+      parent: 1
+  - uid: 107
+    components:
+    - type: Transform
+      pos: 7.50756,7.526054
+      parent: 1
+- proto: RMCLightFixtureOffset
+  entities:
+  - uid: 158
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 11.5,5.5
+      parent: 1
+  - uid: 163
+    components:
+    - type: Transform
+      pos: 1.5,1.5
+      parent: 1
+  - uid: 164
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,8.5
+      parent: 1
+- proto: RMCLightFixtureSmallOffset
+  entities:
+  - uid: 159
+    components:
+    - type: Transform
+      pos: 5.5,1.5
+      parent: 1
+  - uid: 160
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,8.5
+      parent: 1
+  - uid: 161
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 9.5,8.5
+      parent: 1
+  - uid: 162
+    components:
+    - type: Transform
+      pos: 9.5,1.5
+      parent: 1
+- proto: RMCLockerFridgeFish
+  entities:
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 1.5,2.5
+      parent: 1
+    - type: Lock
+      locked: False
+- proto: RMCLockerFridgeGroceries
+  entities:
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 1.5,3.5
+      parent: 1
+    - type: Lock
+      locked: False
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 166
+    components:
+    - type: MetaData
+      name: Resturant
+    - type: Transform
+      pos: 6.5,5.5
+      parent: 1
+- proto: RMCRollingPin
+  entities:
+  - uid: 81
+    components:
+    - type: Transform
+      pos: 1.5200396,6.666679
+      parent: 1
+- proto: RMCSpawnerCorpseSecurity
+  entities:
+  - uid: 150
+    components:
+    - type: Transform
+      pos: 8.5,4.5
+      parent: 1
+- proto: RMCSpawnerIntelClose
+  entities:
+  - uid: 115
+    components:
+    - type: Transform
+      pos: 7.5,2.5
+      parent: 1
+- proto: RMCSpawnRatGray
+  entities:
+  - uid: 23
+    components:
+    - type: Transform
+      pos: 2.5,2.5
+      parent: 1
+- proto: RMCSpoonPlastic
+  entities:
+  - uid: 112
+    components:
+    - type: Transform
+      pos: 9.69506,8.401054
+      parent: 1
+- proto: RMCTrayEmpty
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      pos: 1.5669146,7.572929
+      parent: 1
+  - uid: 125
+    components:
+    - type: Transform
+      pos: 4.57491,4.666679
+      parent: 1
+  - uid: 126
+    components:
+    - type: Transform
+      pos: 4.57491,4.713554
+      parent: 1
+  - uid: 127
+    components:
+    - type: Transform
+      pos: 4.496785,4.651054
+      parent: 1
+...

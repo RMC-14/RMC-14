@@ -1566,7 +1566,6 @@
       whitelist:
         tags:
         - RMCMagazineSniperType88
-
 # L90/91 REG
 - type: entity
   parent: RMCBoxMagazineRifleBase

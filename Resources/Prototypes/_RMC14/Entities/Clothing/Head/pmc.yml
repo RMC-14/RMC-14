@@ -101,6 +101,25 @@
       - state: equipped-HELMET
 
 - type: entity
+  parent: ArmorHelmetM10
+  id: ArmorHelmetPMCCommandoSurvivor
+  name: damaged We-Ya Commando helmet
+  description: A standard enclosed helmet utilized by Weston-Yamada Commandos. Has been through a lot of wear and tear.
+  components:
+  - type: ItemCamouflage
+    camouflageVariations: { }
+  - type: Sprite # TODO: Sprites
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/PMC/commando.rsi
+  - type: CMArmor
+    melee: 20
+    bio: 20
+    # armor_internaldamage = 20
+  - type: Corrodible
+    isCorrodible: false
+
+- type: entity
   parent: RMCArmorHelmetPMCTactical
   id: ArmorHelmetPMCCommando
   name: PMC M5X helmet
