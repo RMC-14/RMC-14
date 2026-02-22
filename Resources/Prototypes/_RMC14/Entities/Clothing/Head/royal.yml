@@ -81,7 +81,7 @@
   id: RMCHeadParaBeret
   name: paramarine beret
   description: A distinctive crimson beret worn by the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
-  suffix: Paramaine, Survivor
+  suffix: Paramarine, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
@@ -93,7 +93,7 @@
   id: RMCHeadParaBeretLead
   name: paramarine team lead beret
   description: A distinctive crimson beret worn by NCOs of the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
-  suffix: Paramaine, Survivor, Team Leader
+  suffix: Paramarine, Survivor, Team Leader
   components:
     - type: Sprite
       sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi
@@ -105,7 +105,7 @@
   id: RMCHeadCapPeakedPara
   name: paramarine officer's service cap
   description: A distinguished service cap worn by officers of the RCM's Paramarine regiments. Featuring a crimson band, gold RCM-P emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s paramarine command.
-  suffix: Paramaine, Survivor, CO
+  suffix: Paramarine, Survivor, CO
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/para_peaked.rsi
@@ -117,7 +117,7 @@
   id: RMCHeadRoyalL1HelmetBallistic
   name: L1 ballistic helmet
   description: A versatile ballistic helmet designed by Weston-Yamada for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
-  suffix: Paramaine, Survivor
+  suffix: Paramarine, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
@@ -129,7 +129,7 @@
   id: RMCHeadRoyalFlightHelmet
   name: PH-4 'Spitfire' flight helmet
   description: Standard flight helmet used across the Three Suns Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire.
-  suffix: Paramaine, Survivor
+  suffix: Paramarine, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi
