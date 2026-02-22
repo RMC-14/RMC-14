@@ -58,7 +58,7 @@
 					<graphics:StyleBoxFlat BackgroundColor="#984A16" />
 				</PanelContainer.PanelOverride>
 				<Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160" Margin="2 2"/>
-			</PanelContainer>			
+			</PanelContainer>
             <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
