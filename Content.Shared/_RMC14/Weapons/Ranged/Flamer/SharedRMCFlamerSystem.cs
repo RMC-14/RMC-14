@@ -78,6 +78,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         SubscribeLocalEvent<RMCCanUseBroilerComponent, UniqueActionEvent>(OnBroilerUniqueAction);
         SubscribeLocalEvent<RMCCanUseBroilerComponent, ExaminedEvent>(OnBroilerUniqueActionExamine, before: [typeof(SharedGunSystem)]);
+
+        SubscribeLocalEvent<RMCFlamerReagentOverrideComponent, UniqueActionEvent>(OnFlamerReagentOverrideUniqueAction);
+        SubscribeLocalEvent<RMCFlamerReagentOverrideComponent, RMCFlamerReagentOverrideActionEvent>(OnFlamerReagentOverrideAction);
+        SubscribeLocalEvent<RMCFlamerReagentOverrideComponent, ExaminedEvent>(OnFlamerReagentOverrideUniqueActionExamine, before: [typeof(SharedGunSystem)]);
     }
 
     private void OnMapInit(Entity<RMCFlamerAmmoProviderComponent> ent, ref MapInitEvent args)
@@ -323,11 +327,36 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
         var chain = Spawn();
         var chainComp = EnsureComp<RMCFlamerChainComponent>(chain);
-        chainComp.Spawn = reagent.FireEntity;
+        var maxIntensity = tank.Value.Comp.MaxIntensity;
+        var maxDuration = tank.Value.Comp.MaxDuration;
+        var fireTile = reagent.FireEntity;
+        var fireReagent = reagent.ID;
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp))
+        {
+            if (!overComp.Intense)
+            {
+                if (overComp.NormalIntensity != null)
+                    maxIntensity = (int)overComp.NormalIntensity;
+                if (overComp.NormalDuration != null)
+                    maxDuration = (int)overComp.NormalDuration;
+                if (overComp.NormalFireReagent != null)
+                    fireReagent = overComp.NormalFireReagent;
+            }
+            else
+            {
+                if (overComp.IntenseIntensity != null)
+                    maxIntensity = (int)overComp.IntenseIntensity;
+                if (overComp.IntenseDuration != null)
+                    maxDuration = (int)overComp.IntenseDuration;
+                if (overComp.IntenseFireReagent != null)
+                    fireReagent = overComp.IntenseFireReagent;
+            }
+        }
+        chainComp.Spawn = fireTile;
         chainComp.Tiles = tiles;
-        chainComp.Reagent = reagent.ID;
-        chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
-        chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.Reagent = fireReagent;
+        chainComp.MaxIntensity = maxIntensity;
+        chainComp.MaxDuration = maxDuration;
 
         Dirty(chain, chainComp);
     }
@@ -386,6 +415,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         reagent = _reagent.Index(firstReagent.Value.Reagent.Prototype);
 
         var maxRange = Math.Min(tank.Value.Comp.MaxRange, reagent.Radius);
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp))
+        {
+            if (!overComp.Intense && overComp.NormalRange != null)
+                maxRange = (int)overComp.NormalRange;
+            else if (overComp.IntenseRange != null)
+                maxRange = (int)overComp.IntenseRange;
+        }
         var range = Math.Min((volume / flamer.Comp.CostPer).Int(), maxRange);
         if (delta.Length() > maxRange)
             toCoordinates = fromCoordinates.Offset(normalized * range);
@@ -594,6 +630,74 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public void OnBroilerUniqueActionExamine(Entity<RMCCanUseBroilerComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
+    }
+
+    public void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
+    {
+        if (args.Handled || !ent.Comp.HasIntenseMode)
+            return;
+
+        args.Handled = true;
+        ent.Comp.Intense = !ent.Comp.Intense;
+        var ev = new RMCFlamerReagentOverrideActionEvent();
+        ev.Performer = args.UserUid;
+        RaiseLocalEvent(ent, ev);
+        Dirty(ent);
+    }
+
+    private void OnFlamerReagentOverrideAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref RMCFlamerReagentOverrideActionEvent args)
+    {
+        if (args.Handled || !ent.Comp.HasIntenseMode)
+            return;
+
+        args.Handled = true;
+        if (ent.Comp.Intense)
+        {
+            _popup.PopupClient(Loc.GetString(ent.Comp.ActivateText), ent, args.Performer);
+            _audio.PlayPredicted(ent.Comp.ActivateSound, ent, args.Performer);
+        }
+        else
+        {
+            _popup.PopupClient(Loc.GetString(ent.Comp.DeactivateText), ent, args.Performer);
+            _audio.PlayPredicted(ent.Comp.DeactivateSound, ent, args.Performer);
+        }
+        if (TryComp(ent, out RMCFlamerAmmoProviderComponent? providerComp))
+        {
+            if (!ent.Comp.Intense && ent.Comp.NormalFireCost != null)
+                providerComp.CostPer = (int)ent.Comp.NormalFireCost;
+            else if (ent.Comp.IntenseFireCost != null)
+                providerComp.CostPer = (int)ent.Comp.IntenseFireCost;
+        }
+        /// Changes the flamer tank component to reflect the overriden values.
+        /// Only for inspect text; reagent values are replaced when firing.
+        if (TryComp(ent, out RMCFlamerTankComponent? tankComp))
+        {
+            if (!ent.Comp.Intense)
+            {
+                if (ent.Comp.NormalIntensity != null)
+                    tankComp.MaxIntensity = (int)ent.Comp.NormalIntensity;
+                if (ent.Comp.NormalDuration != null)
+                    tankComp.MaxDuration = (int)ent.Comp.NormalDuration;
+                if (ent.Comp.NormalRange != null)
+                    tankComp.MaxRange = (int)ent.Comp.NormalRange;
+            }
+            else
+            {
+                if (ent.Comp.IntenseIntensity != null)
+                    tankComp.MaxIntensity = (int)ent.Comp.IntenseIntensity;
+                if (ent.Comp.IntenseDuration != null)
+                    tankComp.MaxDuration = (int)ent.Comp.IntenseDuration;
+                if (ent.Comp.IntenseRange != null)
+                    tankComp.MaxRange = (int)ent.Comp.IntenseRange;
+            }
+        }
+        Dirty(ent);
+    }
+
+    public void OnFlamerReagentOverrideUniqueActionExamine(Entity<RMCFlamerReagentOverrideComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.HasIntenseMode)
+            args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
     public override void Update(float frameTime)

@@ -287,6 +287,7 @@
   - type: RMCFlamerTank
     maxIntensity: 10
     maxDuration: 10
+    maxRange: 5
     reagentWhitelist:
     - RMCNapalmUT
     - WeldingFuel
@@ -319,6 +320,19 @@
     solution: rmc_flamer_tank
     flushTime: 1.5
   - type: NoMixingReagents
+  - type: UniqueAction
+  - type: RMCFlamerReagentOverride
+    normalIntensity: 10
+    normalDuration: 10
+    normalRange: 5
+    normalFireCost: 1
+    normalFireReagent: WeldingFuel
+    intenseIntensity: 30
+    intenseDuration: 20
+    intenseRange: 2
+    intenseFireCost: 5
+    intenseFireReagent: RMCNapalmUT
+    hasIntenseMode: true
 
 - type: entity
   parent: RMCUnderAttachmentBase
