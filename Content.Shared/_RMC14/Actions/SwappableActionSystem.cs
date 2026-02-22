@@ -3,7 +3,7 @@ using Content.Shared.Actions.Components;
 
 namespace Content.Shared._RMC14.Actions;
 
-// Swaps actions between instant and worldtarget keeps action bar position.
+// Swaps between instant and WorldTarget actions whilst keeping action bar position.
 public sealed class SwappableActionSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actions = default!;
