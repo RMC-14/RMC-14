@@ -326,7 +326,7 @@
     normalDuration: 10
     normalRange: 5
     normalFireCost: 1
-    normalFireReagent: RMCNapalmUT
+    normalFireReagent: WeldingFuel
     intenseIntensity: 30
     intenseDuration: 20
     intenseRange: 2
