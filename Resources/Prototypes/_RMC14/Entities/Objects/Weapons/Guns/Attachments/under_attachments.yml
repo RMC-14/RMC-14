@@ -257,11 +257,13 @@
 - type: entity
   parent: RMCUnderAttachmentBase
   id: RMCAttachmentMiniFlamethrower
-  name: underbarrel flamethrower # TODO RMC14 intensity toggle
+  name: underbarrel flamethrower
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
-    state: flamethrower
+    layers:
+    - state: flamethrower
+      map: [ "enum.IntenseVisuals.Intense" ]
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -320,6 +322,13 @@
     solution: rmc_flamer_tank
     flushTime: 1.5
   - type: NoMixingReagents
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.IntenseVisuals.Intense:
+        enum.IntenseVisuals.Intense:
+          True: { state: flamethrower_intense }
+          False: { state: flamethrower }
   - type: UniqueAction
   - type: RMCFlamerReagentOverride
     normalIntensity: 10
@@ -333,6 +342,7 @@
     intenseFireCost: 5
     intenseFireReagent: RMCNapalmUT
     hasIntenseMode: true
+    hasIntenseVisuals: true
 
 - type: entity
   parent: RMCUnderAttachmentBase

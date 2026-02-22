@@ -632,7 +632,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
-    public void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
+    public virtual void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
     {
         if (args.Handled || !ent.Comp.HasIntenseMode)
             return;
@@ -668,6 +668,8 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             else if (ent.Comp.IntenseFireCost != null)
                 providerComp.CostPer = (int)ent.Comp.IntenseFireCost;
         }
+        if (ent.Comp.HasIntenseVisuals && TryComp(ent, out AppearanceComponent? appearComp))
+            _appearance.SetData(ent, IntenseVisuals.Intense, ent.Comp.Intense, appearComp);
         /// Changes the flamer tank component to reflect the overriden values.
         /// Only for inspect text; reagent values are replaced when firing.
         if (TryComp(ent, out RMCFlamerTankComponent? tankComp))
