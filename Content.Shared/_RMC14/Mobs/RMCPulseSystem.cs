@@ -26,7 +26,7 @@ public sealed class RMCPulseSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets the pulse value for an entity.
+    /// Gets the pulse value for an entity that has RMCPulseComponent.
     /// </summary>
     /// <param name="uid">The entity to get a pulse value from.</param>
     /// <param name="byMachine">True for machine readings (more accurate), false for hand readings (less accurate with ±10 variation).</param>
@@ -42,7 +42,7 @@ public sealed class RMCPulseSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets a localized display string for the pulse value.
+    /// Converts the pulse value into a localized display string.
     /// Use this method instead of manually formatting pulse values.
     /// </summary>
     /// <param name="pulseValue">The pulse value from <see cref="GetPulseValue"/>.</param>

@@ -26,10 +26,10 @@ public sealed partial class RMCPulseComponent : Component
 
 public enum PulseState : byte
 {
-    None = 0, // Dead or species without blood.
-    Slow = 1, // 40-60 bpm
-    Normal = 2, // 60-90 bpm
-    Fast = 3, // 90-120 bpm
+    None = 0,     // Dead or species without blood.
+    Slow = 1,     // 40-60 bpm
+    Normal = 2,   // 60-90 bpm
+    Fast = 3,     // 90-120 bpm
     VeryFast = 4, // 120-160 bpm
     /// <summary>
     /// Thready pulse - extremely weak and fast, displayed as ">250".
