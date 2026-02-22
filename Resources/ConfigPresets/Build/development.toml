@@ -1,6 +1,7 @@
 ﻿[game]
 # Straight in-game baby
-lobbyenabled = false
+lobbyenabled = true
+lobbyduration = 500
 # Dev map for faster loading & convenience
 map = "RMCDev"
 role_timers = false
