@@ -89,6 +89,7 @@
   intensity: 30
   duration: 20
   radius: 5
+  fireEntity: RMCTileFireNapalmUT
 
 - type: reagent
   parent: [ CMReagent, BasePyrotechnic ]

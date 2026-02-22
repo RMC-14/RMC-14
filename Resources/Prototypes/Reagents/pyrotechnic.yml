@@ -161,6 +161,7 @@
   intensity: 10 # <RMC14>
   duration: 10
   radius: 4
+  fireEntity: RMCTileFireWeldingFuel
   intensityMod: 0.1
   durationMod: 0.7
   radiusMod: -0.08

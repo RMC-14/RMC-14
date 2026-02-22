@@ -992,9 +992,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
 
                 if (time < fire.SpawnedAt + fire.BigFireDuration)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Four);
-                else if (timeLeft < TimeSpan.FromSeconds(9))
+                else if (timeLeft < fire.Duration * 0.33)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.One);
-                else if (timeLeft < TimeSpan.FromSeconds(25))
+                else if (timeLeft < fire.Duration * 0.66)
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Two);
                 else
                     _appearance.SetData(uid, TileFireLayers.Base, TileFireVisuals.Three);

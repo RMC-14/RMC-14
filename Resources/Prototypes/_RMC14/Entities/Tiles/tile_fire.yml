@@ -87,6 +87,7 @@
     burnColor: "#00FF00"
   - type: TileFire
     id: RMCTileFireGreen
+    duration: 50
     extinguishInstantly: false
     patExtinguishMultiplier: 2
     sprayExtinguishMultiplier: 3
@@ -148,6 +149,7 @@
     burnColor: "#8fcbeb"
   - type: TileFire
     id: RMCTileFireOB
+    duration: 70
     extinguishInstantly: false
   - type: GenericVisualizer
     visuals:
@@ -175,6 +177,7 @@
     burnColor: "#faeffa"
   - type: TileFire
     id: RMCTileFireOBAegis
+    duration: 70
     extinguishInstantly: false
   - type: RMCFireImmunityBypass  # This component allows it to bypass fire immunity
   - type: GenericVisualizer
@@ -659,3 +662,43 @@
           Two: { state: dynamic_2 }
           Three: { state: dynamic_3 }
           Four: { state: dynamic_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireWeldingFuel
+  suffix: Welding Fuel
+  components:
+  - type: Sprite
+    color: "#df8c81"
+    layers:
+    - map: [ "base" ]
+      state: dynamic_4
+  - type: TileFire
+    duration: 10
+  - type: RMCIgniteOnCollide
+    intensity: 10
+    duration: 10
+    burnColor: "#ee3515"
+  - type: PointLight
+    radius: 4
+    color: "#bf4702"
+  - type: GenericVisualizer
+    visuals:
+      enum.TileFireLayers.Base:
+        base:
+          One: { state: red_1 }
+          Two: { state: red_2 }
+          Three: { state: red_3 }
+          Four: { state: red_4 }
+
+- type: entity
+  parent: RMCTileFire
+  id: RMCTileFireNapalmUT
+  suffix: UT Napalm
+  components:
+  - type: TileFire
+    duration: 20
+  - type: RMCIgniteOnCollide
+    intensity: 30
+    duration: 20
+    burnColor: "#EE6515"
