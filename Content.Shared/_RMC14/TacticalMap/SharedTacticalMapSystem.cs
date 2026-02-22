@@ -129,12 +129,7 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     {
         if (_ui.IsUiOpen(oldXeno.Owner, TacticalMapUserUi.Key, oldXeno))
         {
-            Log.Debug("when evolving, tacmap open: TRUE");
             EnsureComp<ReopenTacticalMapComponent>(newXeno);
-        }
-        else
-        {
-            Log.Debug("when evolving, tacmap open: FALSE");
         }
     }
 
@@ -152,14 +147,10 @@ public abstract class SharedTacticalMapSystem : EntitySystem
     // whether to reopen the Tacmap
     private void RestoreTacmapOpen(Entity<TacticalMapUserComponent> newXeno)
     {
-        Log.Debug("beginning restore process for tacmap");
-
         if (!TryComp<ReopenTacticalMapComponent>(newXeno.Owner, out _))
         {
             return;
         }
-
-        Log.Debug("trying to restore tacmap when it is open: " + _ui.IsUiOpen(newXeno.Owner, TacticalMapUserUi.Key));
 
         _ui.TryOpenUi(newXeno.Owner, TacticalMapUserUi.Key, newXeno);
 
