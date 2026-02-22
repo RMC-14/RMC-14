@@ -11,6 +11,7 @@ using Content.Shared._RMC14.Medical.HUD.Systems;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Medical.Wounds;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
@@ -237,6 +238,10 @@ public sealed class HealthScannerBui : BoundUserInterface
         }
 
         _window.BodyTemperatureLabel.SetMessage(temperatureMsg);
+
+        var pulseMsg = new FormattedMessage();
+        pulseMsg.AddText(RMCPulseSystem.GetPulseLocalizedDisplayString(uiState.Pulse, true));
+        _window.PulseLabel.SetMessage(pulseMsg);
 
         _window.AdviceContainer.DisposeAllChildren();
         //Medication Advice
