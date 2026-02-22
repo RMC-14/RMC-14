@@ -3063,7 +3063,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: 16.5,21.5
       parent: 1
-- proto: RMCArmorEIAFVest
+- proto: RMCArmorParaVest
   entities:
   - uid: 678
     components:
@@ -3374,7 +3374,7 @@ entities:
     - type: Transform
       pos: 10.5,12.5
       parent: 1
-- proto: RMCBeltHolsterPistolEIAFL54
+- proto: RMCBeltHolsterPistolPara
   entities:
   - uid: 702
     components:
@@ -4913,14 +4913,14 @@ entities:
     - type: Transform
       pos: 17.400862,9.680672
       parent: 1
-- proto: RMCHeadCapPeakedEIAF
+- proto: RMCHeadCapPeakedPara
   entities:
   - uid: 802
     components:
     - type: Transform
       pos: 19.60573,26.798523
       parent: 1
-- proto: RMCHeadEIAFBeret
+- proto: RMCHeadParaBeret
   entities:
   - uid: 685
     components:
@@ -4995,7 +4995,7 @@ entities:
     - type: Transform
       pos: 7.5,14.5
       parent: 1
-- proto: RMCJacketEIAFCombatJacket
+- proto: RMCJacketParaCombatJacket
   entities:
   - uid: 668
     components:
@@ -5004,7 +5004,7 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCJumpsuitMarineEIAFNo8
+- proto: RMCJumpsuitMarinePara
   entities:
   - uid: 654
     components:
@@ -5446,7 +5446,7 @@ entities:
     - type: Transform
       pos: 7.2478848,4.312557
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: RMCMagazineSMGPDW90
   entities:
   - uid: 705
     components:
@@ -8446,7 +8446,7 @@ entities:
           endTime: 7911.1872773
           startTime: 7927.7587389
           length: 0.4
-- proto: RMCWeaponSMGP90
+- proto: RMCWeaponSMGPDW90
   entities:
   - uid: 703
     components:

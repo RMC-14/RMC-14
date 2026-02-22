@@ -40,3 +40,14 @@
     - id: CMGrenadeFragOld #TODO rmc14, port SPP grenades.
     - id: CMGrenadeFragOld
 #TODO rmc14, someone please port Phosphorus greandes. I have naught the ability to add those.
+
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeFilledParaCO
+  suffix: Survivor, Paramarine, Filled, CO
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMClipboard #notepad
+        - id: CMPenFountain 
+          

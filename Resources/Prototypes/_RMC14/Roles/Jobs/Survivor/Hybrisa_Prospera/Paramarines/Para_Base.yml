@@ -1,0 +1,45 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorParaBase
+  name: rmc-job-name-para
+  description: rmc-job-description-para
+  ranks:
+    RMCRankParaPrivateSecondClass: []
+  supervisors: cm-job-supervisors-royal-tl
+  accessGroups:
+    - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearParaBase
+  hasIcon: true
+  greeting: rmc-job-greeting-para
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Royal Paramarine Survivor (Base)
+  abstract: true
+  hidden: true
+
+- type: startingGear
+  id: RMCGearParaBase
+  equipment:
+    head: RMCHeadParaBeret
+    jumpsuit: RMCJumpsuitMarineParaL88
+    back: RMCSatchelLightpackFilledPara
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    id: CMIDCardStandardDogtag
+    ears: RMCHeadsetPara
+    belt: RMCBeltHolsterPistolParaM44Random
+    pocket1: RMCPouchFirstAidSplintsGauzeOintment 
+    pocket2: RMCPouchFlareL96Filled
+    suitstorage: RMCWeaponRifleL88A2Filled
+    
+- type: entity
+  id: RMCGearSurvivorPresetPara
+  name: para preset
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: SurvivorPreset
+      randomOutfits:
+        - [ RMCArmorParaVest ]
+        - [ RMCArmorParaVest ]
+        - [ RMCJacketParaCombatJacket ]
+        - []

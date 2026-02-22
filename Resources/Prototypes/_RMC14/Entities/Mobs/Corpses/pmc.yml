@@ -139,7 +139,7 @@
     outerClothing: CMArmorM4PMCCorporateLead
     belt: RMCMK80BeltPMCFilled
     pocket1: RMCPouchFirstAidPMCFill
-    pocket2: RMCPouchMagazineFilledP90
+    pocket2: RMCPouchMagazineFilledPDW90
 
 - type: randomHumanoidSettings
   parent: RMCCorpseWeYaGoon
