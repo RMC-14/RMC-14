@@ -158,8 +158,8 @@
   boilingPoint: -84.7 # Acetylene. Close enough.
   meltingPoint: -80.7
   friction: 0.4
-  intensity: 10 # <RMC14>
-  duration: 10
+  intensity: 16 # <RMC14>
+  duration: 33
   radius: 4
   fireEntity: RMCTileFireWeldingFuel
   intensityMod: 0.1
