@@ -1,11 +1,15 @@
 ﻿using Content.Shared._RMC14.CCVar;
+using Content.Shared._RMC14.Tracker.Xeno;
+using Content.Shared._RMC14.Xenonids.Evolution;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
 public abstract class SharedTacticalMapSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
     public int LineLimit { get; private set; }
@@ -16,6 +20,11 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         SubscribeLocalEvent<TacticalMapUserComponent, OpenTacMapAlertEvent>(OnUserOpenAlert);
 
         Subs.CVar(_config, RMCCVars.RMCTacticalMapLineLimit, v => LineLimit = v, true);
+
+        SubscribeLocalEvent<TacticalMapUserComponent, NewXenoEvolvedEvent>(OnXenoEvolve);
+        SubscribeLocalEvent<TacticalMapUserComponent, XenoDevolvedEvent>(OnXenoDevolve);
+        SubscribeLocalEvent<TacticalMapUserComponent, XenoEvolutionDoAfterEvent>(DoAfterXenoEvolve);
+        SubscribeLocalEvent<TacticalMapUserComponent, AfterNewXenoEvolvedEvent>(OnAfterXenoDevolve);
     }
 
     private void OnUserOpenAction(Entity<TacticalMapUserComponent> ent, ref OpenTacticalMapActionEvent args)
@@ -101,5 +110,59 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         }
 
         _ui.TryOpenUi(user.Owner, TacticalMapUserUi.Key, user);
+    }
+
+    private void OnXenoEvolve(Entity<TacticalMapUserComponent> newXeno, ref NewXenoEvolvedEvent args)
+    {
+        MaintainTacmapOpen(newXeno, args.OldXeno);
+    }
+
+
+    private void OnXenoDevolve(Entity<TacticalMapUserComponent> newXeno, ref XenoDevolvedEvent args)
+    {
+        MaintainTacmapOpen(newXeno, args.OldXeno!);
+    }
+
+    // When a xeno begins to evolve or devolve, give the new entity a component
+    // to mark it as needing to reopen the Tacmap
+    private void MaintainTacmapOpen(Entity<TacticalMapUserComponent> newXeno, Entity<XenoEvolutionComponent> oldXeno)
+    {
+        if (_ui.IsUiOpen(oldXeno.Owner, TacticalMapUserUi.Key, oldXeno))
+        {
+            Log.Debug("when evolving, tacmap open: TRUE");
+            EnsureComp<ReopenTacticalMapComponent>(newXeno);
+        }
+        else
+        {
+            Log.Debug("when evolving, tacmap open: FALSE");
+        }
+    }
+
+    private void DoAfterXenoEvolve(Entity<TacticalMapUserComponent> newXeno, ref XenoEvolutionDoAfterEvent args)
+    {
+        RestoreTacmapOpen(newXeno);
+    }
+
+    private void OnAfterXenoDevolve(Entity<TacticalMapUserComponent> newXeno, ref AfterNewXenoEvolvedEvent args)
+    {
+        RestoreTacmapOpen(newXeno);
+    }
+
+    // When a xeno evolution finishes evolving, look for a component marking
+    // whether to reopen the Tacmap
+    private void RestoreTacmapOpen(Entity<TacticalMapUserComponent> newXeno)
+    {
+        Log.Debug("beginning restore process for tacmap");
+
+        if (!TryComp<ReopenTacticalMapComponent>(newXeno.Owner, out _))
+        {
+            return;
+        }
+
+        Log.Debug("trying to restore tacmap when it is open: " + _ui.IsUiOpen(newXeno.Owner, TacticalMapUserUi.Key));
+
+        _ui.TryOpenUi(newXeno.Owner, TacticalMapUserUi.Key, newXeno);
+
+        RemComp<ReopenTacticalMapComponent>(newXeno.Owner);
     }
 }
