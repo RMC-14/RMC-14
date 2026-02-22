@@ -406,3 +406,6 @@ rmc-doomed-fail = It's not working...
 # Destroy
 rmc-destroy-cant-reach = We don't have a clear path to that location!
 rmc-destroy-cant-area = We can't leap to that area!
+
+# Queen Eye
+rmc-xeno-queen-eye-no-weeds = We can't move our eye there, there are no weeds!

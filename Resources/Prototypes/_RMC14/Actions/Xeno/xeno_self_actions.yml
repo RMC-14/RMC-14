@@ -210,7 +210,7 @@
 - type: entity
   id: ActionXenoGrowOvipositor
   parent: ActionXenoBase
-  name: Grow Ovipositor (700) # TODO RMC14 proper plasma costs
+  name: Grow Ovipositor (500)
   description: Become immobile and start laying eggs which will produce children. Has a 5 minute cooldown. [color=red]You must be in ovipositor mode for other xenonids to gain evolution points after round-start![/color]
   components:
   - type: Action
