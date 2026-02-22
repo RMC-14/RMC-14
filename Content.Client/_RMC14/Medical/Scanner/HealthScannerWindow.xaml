@@ -70,7 +70,7 @@
             <Label Text="Body Temperature:" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="BodyTemperatureLabel" Access="Public" />
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
+        <BoxContainer Orientation="Horizontal" Visible="False">
             <Label Text="Pulse:" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="PulseLabel" Access="Public" />
         </BoxContainer>

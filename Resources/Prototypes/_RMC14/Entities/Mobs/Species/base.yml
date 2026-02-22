@@ -33,7 +33,6 @@
   - type: InjectableSolution
     solution: chemicals
   - type: RMCStamina
-  - type: RMCPulse
   - type: Bloodstream
     bloodReagent: Blood
     bloodMaxVolume: 560
