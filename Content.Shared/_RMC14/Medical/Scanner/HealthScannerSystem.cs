@@ -1,6 +1,7 @@
 using Content.Shared._RMC14.Body;
 using Content.Shared._RMC14.Hands;
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Mobs;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
@@ -26,6 +27,7 @@ public sealed class HealthScannerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCBloodstreamSystem _rmcBloodstream = default!;
     [Dependency] private readonly RMCHandsSystem _rmcHands = default!;
+    [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -178,8 +180,9 @@ public sealed class HealthScannerSystem : EntitySystem
         _rmcBloodstream.TryGetChemicalSolution(target, out _, out var chemicals);
         _rmcTemperature.TryGetCurrentTemperature(target, out var temperature);
 
+        var pulse = _rmcPulse.GetPulseValue(target, true);
         var bleeding = _rmcBloodstream.IsBleeding(target);
-        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, chemicals, bleeding);
+        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding);
 
         _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
     }
