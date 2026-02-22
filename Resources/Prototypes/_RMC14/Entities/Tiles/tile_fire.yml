@@ -690,15 +690,3 @@
           Two: { state: red_2 }
           Three: { state: red_3 }
           Four: { state: red_4 }
-
-- type: entity
-  parent: RMCTileFire
-  id: RMCTileFireNapalmUT
-  suffix: UT Napalm
-  components:
-  - type: TileFire
-    duration: 20
-  - type: RMCIgniteOnCollide
-    intensity: 30
-    duration: 20
-    burnColor: "#EE6515"

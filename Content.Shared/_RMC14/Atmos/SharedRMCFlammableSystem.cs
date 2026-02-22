@@ -411,11 +411,15 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         if (intensity != null || duration != null)
         {
             var ignite = EnsureComp<RMCIgniteOnCollideComponent>(spawned);
+            var tileFire = EnsureComp<TileFireComponent>(spawned);
             if (intensity != null)
                 ignite.Intensity = intensity.Value;
 
             if (duration != null)
+            {
                 ignite.Duration = duration.Value;
+                tileFire.Duration = TimeSpan.FromSeconds(duration.Value);
+            }
 
             Dirty(spawned, ignite);
         }
@@ -755,9 +759,9 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
         }
     }
 
-    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?> ent, int? intensity, int? duration)
+    public void SetIntensityDuration(Entity<RMCIgniteOnCollideComponent?, DamageOnCollideComponent?, TileFireComponent?> ent, int? intensity, int? duration)
     {
-        Resolve(ent, ref ent.Comp1, ref ent.Comp2, false);
+        Resolve(ent, ref ent.Comp1, ref ent.Comp2, ref ent.Comp3, false);
         if (ent.Comp1 != null)
         {
             if (intensity != null)
@@ -775,6 +779,14 @@ public abstract class SharedRMCFlammableSystem : EntitySystem
                 ent.Comp2.Damage.DamageDict[HeatDamage] = intensity.Value * ent.Comp2.DirectHitMultiplier;
 
             Dirty(ent, ent.Comp2);
+        }
+
+        if (ent.Comp3 != null)
+        {
+            if (duration != null)
+                ent.Comp3.Duration = TimeSpan.FromSeconds(duration.Value);
+
+            Dirty(ent, ent.Comp3);
         }
     }
 
