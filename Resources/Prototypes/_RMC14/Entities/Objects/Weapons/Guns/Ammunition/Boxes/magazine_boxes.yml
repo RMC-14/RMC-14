@@ -2431,7 +2431,7 @@
     slot:
       whitelist:
         tags:
-        - RMCMagazinePistolL14AP
+        - RMCMagazinePistolL14
 
 # L14 AP
 - type: entity
