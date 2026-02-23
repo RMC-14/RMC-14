@@ -2301,7 +2301,7 @@
     - id: RMCMortarShellHE
       amount: 3
 
-- type:
+- type: entity
   parent: RMCBeltHolsterPistolRCM
   id: RMCBeltHolsterPistolRCMFilled
   suffix: PVE, RCM, Filled
