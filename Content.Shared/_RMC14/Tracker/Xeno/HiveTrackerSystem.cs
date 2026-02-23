@@ -272,6 +272,7 @@ public sealed class HiveTrackerSystem : EntitySystem
             if (TryComp(uid, out HiveMemberComponent? member) && trackerMode?.Component != null)
             {
                 var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
+                var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
                 while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
                 {
                     if (member.Hive != targetMember.Hive)
@@ -280,7 +281,6 @@ public sealed class HiveTrackerSystem : EntitySystem
                     // Only automatically track the first found target if looking for a queen
                     if (trackerMode.Component == QueenTrackerComponent)
                     {
-                        var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
                         if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
                         {
                             SetTarget((uid, tracker), trackableUid);
