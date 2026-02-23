@@ -4,6 +4,7 @@
   parent: RMCBoxMagazineBase
   id: RMCBoxMagazineRifleLargeBase
   name: generic rifle magazine box (? x ?)
+  suffix: PVE
   description: A box of rifle magazines.
   components:
   - type: Sprite
@@ -54,7 +55,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CEmpty
   name: large magazine box (M54C x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -100,7 +100,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CExtEmpty
   name: large magazine box (Ext M54C x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -146,7 +145,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CAPEmpty
   name: large magazine box (AP M54C x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -192,7 +190,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CHEAPEmpty
   name: large magazine box (HEAP M54C x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -238,7 +235,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CMK1Empty
   name: large magazine box (M54C MK1 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -284,7 +280,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CMK1APEmpty
   name: large magazine box (AP M54C MK1 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -330,7 +325,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleM54CMK1HEAPEmpty
   name: large magazine box (HEAP M54C MK1 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -376,7 +370,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleType71Empty
   name: large magazine box (Type 71 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -422,7 +415,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleType71APEmpty
   name: large magazine box (AP Type 71 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -468,7 +460,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleType71HEAPEmpty
   name: large magazine box (HEAP Type 71 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -514,7 +505,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90Empty
   name: large magazine box (L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -560,7 +550,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90APEmpty
   name: large magazine box (AP L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -606,7 +595,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90HEAPEmpty
   name: large magazine box (HEAP L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -652,7 +640,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90DrumEmpty
   name: large magazine box (Drum L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -698,7 +685,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90DrumAPEmpty
   name: large magazine box (AP Drum L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
@@ -744,7 +730,6 @@
   parent: RMCBoxMagazineRifleLargeBase
   id: RMCBoxLargeMagazineRifleL90DrumHEAPEmpty
   name: large magazine box (HEAP Drum L90/91 x 32)
-  suffix: PVE
   components:
   - type: Sprite
     layers:
