@@ -15,7 +15,6 @@
   table: !type:AllSelector
     children:
     - id: RMCHeadRoyalBeretLead
-    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
@@ -47,7 +46,6 @@
   table: !type:AllSelector
     children:
     - id: RMCHeadRoyalBeretLead
-    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE

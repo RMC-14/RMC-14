@@ -135,7 +135,9 @@
       takeOne: CMPrimary
       entries:
       - id: RMCVendorBundleRCMPVEMGL
+        name: multiple grenade launcher kit
       - id: RMCVendorBundleRCMPVEMortar
+        name: assault mortar kit
     - name: Specialist Equipment (Mandatory)
       takeAll: RMCAccessories 
       entries:
