@@ -44,7 +44,7 @@ public sealed partial class RMCLandmineSystem : SharedRMCLandmineSystem
 
     private void OnStartCollide(Entity<RMCLandmineComponent> ent, ref StartCollideEvent args)
     {
-        if (!HasComp<XenoProjectileComponent>(args.OtherEntity))
+        if (!ent.Comp.Armed || !HasComp<XenoProjectileComponent>(args.OtherEntity))
             return;
 
         ent.Comp.ShotStacks++;

@@ -934,7 +934,8 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!_prototypes.TryIndex(paper.Id, out var entProto, logError: false))
                         continue;
 
-                    var printout = new FaxPrintout(paperComponent.Content, entProto.Name, prototypeId: paper.Id, locked: true);
+                    var content = Loc.GetString(paperComponent.Content);
+                    var printout = new FaxPrintout(content, entProto.Name, prototypeId: paper.Id, locked: true);
                     _fax.Receive(faxId, printout, component: faxComp);
                 }
             }
