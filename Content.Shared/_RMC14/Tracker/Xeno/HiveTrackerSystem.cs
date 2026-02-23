@@ -255,7 +255,7 @@ public sealed class HiveTrackerSystem : EntitySystem
             // If the tracker is tracking an entity, point towards the target.
             if (tracker.Target != null)
             {
-                if (!HasComp<RMCTrackableComponent>(tracker.Target.Value))
+                if (!HasComp<RMCTrackableComponent>(tracker.Target))
                 {
                     SetTarget((uid, tracker), null);
                     continue;
@@ -269,33 +269,41 @@ public sealed class HiveTrackerSystem : EntitySystem
             _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
 
             // If the tracker is not tracking an entity, and the tracker is a hive member, try to find a new target.
-            if (TryComp(uid, out HiveMemberComponent? member) && trackerMode?.Component == QueenTrackerComponent)
+            if (TryComp(uid, out HiveMemberComponent? member) && trackerMode?.Component != null)
             {
-                var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent, XenoOvipositorCapableComponent>(); // TODO remove the queen only restriction if we ever get a fire team equivalent for xenonids
-                while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember, out _))
+                var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
+                while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
                 {
                     if (member.Hive != targetMember.Hive)
                         continue;
 
-                    var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
-                    if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
+                    // Only automatically track the first found target if looking for a queen
+                    if (trackerMode.Component == QueenTrackerComponent)
                     {
-                        SetTarget((uid, tracker), trackableUid);
-                        if (tracker.Target != null)
+                        var trackingComponent = _factory.GetComponent(trackerMode.Component).GetType();
+                        if (EntityManager.TryGetComponent(trackableUid, trackingComponent, out _))
                         {
-                            UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
-                            foundTarget = true;
+                            SetTarget((uid, tracker), trackableUid);
+                            if (tracker.Target != null)
+                            {
+                                UpdateDirection((uid, tracker), _transform.GetMapCoordinates(tracker.Target.Value));
+                                foundTarget = true;
+                            }
                         }
                     }
+
                     if (foundTarget)
                         break;
                 }
+            }
+            else if (tracker.Target != null)
+            {
+                SetTarget((uid, tracker), null);
             }
 
             if (foundTarget)
                 continue;
 
-            SetTarget((uid, tracker), null);
             UpdateDirection((uid, tracker));
         }
     }
