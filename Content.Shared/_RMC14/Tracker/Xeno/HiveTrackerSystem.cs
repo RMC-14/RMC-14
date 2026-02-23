@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Tracker.SquadLeader;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Egg;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
@@ -29,6 +30,7 @@ public sealed class HiveTrackerSystem : EntitySystem
     [Dependency] private readonly SharedXenoWatchSystem _xenoWatch = default!;
 
     private const string HiveTrackerCategory = "HiveTracker";
+    private const string QueenTrackerComponent = "XenoOvipositorCapable";
 
     public override void Initialize()
     {
@@ -267,10 +269,10 @@ public sealed class HiveTrackerSystem : EntitySystem
             _prototypeManager.TryIndex(tracker.Mode, out var trackerMode);
 
             // If the tracker is not tracking an entity, and the tracker is a hive member, try to find a new target.
-            if (TryComp(uid, out HiveMemberComponent? member) && trackerMode?.Component != null)
+            if (TryComp(uid, out HiveMemberComponent? member) && trackerMode?.Component == QueenTrackerComponent)
             {
-                var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent>();
-                while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember))
+                var trackableQuery = EntityQueryEnumerator<RMCTrackableComponent, HiveMemberComponent, XenoOvipositorCapableComponent>(); // TODO remove the queen only restriction if we ever get a fire team equivalent for xenonids
+                while (trackableQuery.MoveNext(out var trackableUid, out _, out var targetMember, out _))
                 {
                     if (member.Hive != targetMember.Hive)
                         continue;
