@@ -31,13 +31,6 @@ public sealed class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
     }
 
-    private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
-    {
-        // try to add scream action when vocal comp added
-        _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
-        LoadSounds(uid, component);
-    }
-
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
     {
         // remove scream action when component removed
@@ -46,6 +39,7 @@ public sealed class VocalSystem : EntitySystem
             _actions.RemoveAction(uid, component.ScreamActionEntity);
         }
     }
+
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
     {
@@ -71,6 +65,11 @@ public sealed class VocalSystem : EntitySystem
         args.Handled = _chat.TryPlayEmoteSound(uid, _proto.Index(sounds), args.Emote);
     }
 
+    private void OnMapInit(EntityUid uid, VocalComponent component, MapInitEvent args)
+    {
+        
+        LoadSounds(uid, component);
+    }
     private void OnScreamAction(EntityUid uid, VocalComponent component, ScreamActionEvent args)
     {
         if (args.Handled)
