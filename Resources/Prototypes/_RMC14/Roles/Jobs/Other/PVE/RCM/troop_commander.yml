@@ -4,6 +4,10 @@
   name: rmc-job-name-rcm-pve-troop-commander
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalTroopCommanderPVE
+  requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobExecutiveOfficer
+      time: 10800 # 3 hours
   ranks:
     RMCRankTSESecondLieutenant: [ ]
   startingGear: RMCGearRoyalTroopCommanderPVE
@@ -23,7 +27,7 @@
     - type: Skills
       skills:
         RMCSkillCqc: 3
-        RMCSkillFirearms: 1 
+        RMCSkillFirearms: 1
         RMCSkillFireman: 3
         RMCSkillConstruction: 1
         RMCSkillEngineer: 2

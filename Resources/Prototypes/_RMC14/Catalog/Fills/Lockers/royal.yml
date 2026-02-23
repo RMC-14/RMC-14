@@ -3,12 +3,12 @@
   table: !type:AllSelector
     children:
     - id: RMCHeadRoyalBeretLead
-    - id: RMCPVEArmorCaseRoyalLight
     - id: RMCLaserDesignatorPVE
     - id: RMCBackpackAmmoRCM
     - id: CMAdvFirstAidKit
     - id: RMCBoxMagazineRifleL90Drum
     - id: RMCArmorWebbingDrumRCM
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMSectionLeaderFill
@@ -19,6 +19,7 @@
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMGPMGFill
@@ -50,6 +51,7 @@
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMTroopCommanderFill
@@ -70,4 +72,4 @@
     - id: RMCWeldingGoggles
       amount: 2
     - id: RMCWeaponRifleL90A2Breacher
-      amount: 1
+      amount: 2

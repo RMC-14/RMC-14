@@ -425,10 +425,10 @@
     cooldownPopup: You need to wait before taking another flare!
     count: 16
     slot:
-      name: RMCFlareL96
+      name: Flare
       whitelist:
         tags:
-        - RMCFlareL96
+        - Flare
 
 # Radio Pouch
 - type: entity

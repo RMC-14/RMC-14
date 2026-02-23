@@ -259,7 +259,7 @@
 - type: entity
   parent: RMCBoxMREEmpty
   id: RMCBoxMRE
-  suffix: Filled
+  suffix: Filled, UN
   components:
   - type: CMItemSlots
     startingItem: CMMRE
@@ -281,7 +281,7 @@
 - type: entity
   parent: RMCBoxMRETSEEmpty
   id: RMCBoxMRETSE
-  suffix: Filled
+  suffix: Filled, TSE
   components:
   - type: CMItemSlots
     startingItem: RMCMRETSE

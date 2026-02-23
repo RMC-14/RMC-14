@@ -134,14 +134,13 @@
     - name: Fire Support Set (Mandatory)
       takeOne: CMPrimary
       entries:
-      - id: RMCRoyalGrenadeLauncher
-      - id: RMCMortarKit # TODO RMC14 L53A1 light mortar kit
+      - id: RMCVendorBundleRCMPVEMGL
+      - id: RMCVendorBundleRCMPVEMortar
     - name: Specialist Equipment (Mandatory)
       takeAll: RMCAccessories 
       entries:
       - id: RMCPVEArmorCaseRoyalPointman
         name: modular armor kit
-      - id: RMCBeltRoyalMortar
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -149,7 +148,7 @@
       - id: RMCBackpackRCMMedium
       - id: RMCBackpackRCMLarge
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingDrumRCM
         name: drum armor webbing
@@ -159,8 +158,6 @@
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
-      - id: RMCArmorWebbingShellRCM
-        name: shell armor webbing
     - name: Uniform Webbing
       choices: { RMCWebbing: 1 } 
       entries:
@@ -198,7 +195,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCRoyalScoutSniperVendor
-  name: We-Ya Section Scout-Sniper Gear Rack 
+  name: We-Ya Section Scout-Sniper Gear Rack
   description: An automated rack hooked up to a colossal storage of scout-sniper standard-issue equipment.
   suffix: PVE, RCM
   components:
@@ -237,7 +234,7 @@
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingDrumRCM
         name: drum armor webbing
@@ -247,8 +244,6 @@
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
-      - id: RMCArmorWebbingShellRCM
-        name: shell armor webbing
     - name: Uniform Webbing
       choices: { RMCWebbing: 1 } 
       entries:
@@ -310,9 +305,6 @@
         amount: 5
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
-        amount: 5
-      - id: RMCArmorWebbingShellRCM
-        name: shell armor webbing
         amount: 5
     - name: Webbing
       entries:
@@ -508,3 +500,6 @@
         amount: 2
       - id: RMCTantoA
         amount: 25
+      - id: RMCM5CameraGear #RMC14 TODO: TSE Camera Gear
+        amount: 20
+
