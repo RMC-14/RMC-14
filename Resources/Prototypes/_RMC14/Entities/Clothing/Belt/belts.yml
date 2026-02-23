@@ -2301,6 +2301,7 @@
     - id: RMCMortarShellHE
       amount: 3
 
+- type:
   parent: RMCBeltHolsterPistolRCM
   id: RMCBeltHolsterPistolRCMFilled
   suffix: PVE, RCM, Filled
