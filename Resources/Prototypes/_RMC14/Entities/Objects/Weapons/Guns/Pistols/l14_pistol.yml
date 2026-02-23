@@ -110,6 +110,7 @@
   - type: Tag
     tags:
     - CMMagazinePistol
+    - RMCMagazinePistolL14
     - RMCMagazinePistolL14AP
   - type: BallisticAmmoProvider
     mayTransfer: True

@@ -135,7 +135,7 @@
     zeroVisible: false
     zeroOnlyOnEmpty: true
   - type: Appearance
-  
+
 - type: entity
   parent: CMCartridgeSMGBase
   id: RMCCartridgeSMG9mmSquashHead
@@ -167,8 +167,10 @@
       falloff: 8
   - type: CMArmorPiercing
     amount: 15
-- type: Tag 
+
+- type: Tag    
   id: RMCWeaponSMGL7A3
+
 - type: Tag    
   id: RMCMagazineSMGL7A3SquashHead
 
