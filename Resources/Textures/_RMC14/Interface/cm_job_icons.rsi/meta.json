@@ -377,6 +377,9 @@
             "name": "cmb_syn"
         },
         {
+            "name": "cmb_rco"
+        },
+        {
             "name": "empty"
         },
         {
@@ -447,6 +450,51 @@
         },
         {
             "name": "rmc_teamleader_pve"
+        },
+        {
+            "name": "para_commander"
+        },
+        {
+            "name": "para_commander_alt"
+        },
+        {
+            "name": "para_engi"
+        },
+        {
+            "name": "para_general"
+        },
+        {
+            "name": "para_lieutenant"
+        },
+        {
+            "name": "para_lieutenant_alt"
+        },
+        {
+            "name": "para_medic"
+        },
+        {
+            "name": "para_pilot"
+        },
+        {
+            "name": "para_rifleman"
+        },
+        {
+            "name": "para_smartgunner"
+        },
+        {
+            "name": "para_sniper"
+        },
+        {
+            "name": "para_spec"
+        },
+        {
+            "name": "para_synth"
+        },
+        {
+            "name": "para_teamleader"
+        },
+        {
+            "name": "para_teamleader_alt"
         },
         {
             "name": "hudsquad_vo"
@@ -561,6 +609,9 @@
         },
         {
             "name": "weya_goon_medic"
+        },
+        {
+            "name": "pmc_commando_gun"
         },
         {
             "name": "spp_kommissar"

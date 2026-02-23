@@ -518,6 +518,9 @@
       "name": "background_nspa"
     },
     {
+      "name": "background_para"
+    },
+    {
       "name": "background_twe"
     },
     {
@@ -952,6 +955,9 @@
     },
     {
       "name": "gm_hash"
+    },
+    {
+      "name": "background_wy_com"
     }
   ]
 }
