@@ -4,6 +4,7 @@
   name: rmc-job-name-para-team-leader
   ranks:
     RMCRankParaSergeant: [ ]
+  supervisors: rmc-job-supervisors-commander
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
   spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)

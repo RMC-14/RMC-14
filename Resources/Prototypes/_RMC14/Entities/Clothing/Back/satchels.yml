@@ -54,7 +54,7 @@
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
-  suffix: Paramaine, Survivor, Filled, CO
+  suffix: Paramarine, Survivor, Filled, CO
   components:
     - type: StorageFill
       contents:
@@ -874,7 +874,7 @@
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledPara
-  suffix: Paramaine, Survivor, Filled
+  suffix: Paramarine, Survivor, Filled
   components:
     - type: StorageFill
       contents:
@@ -884,7 +884,7 @@
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
-  suffix: Paramaine, Survivor, Filled, Synth
+  suffix: Paramarine, Survivor, Filled, Synth
   components:
     - type: StorageFill
       contents:

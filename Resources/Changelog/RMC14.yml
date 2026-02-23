@@ -1,11 +1,4 @@
 ﻿Entries:
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Aegis spawns and spawer icon changed.
-    type: Tweak
-  id: 2457
-  time: '2025-10-19T21:39:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8183
 - author: Vermidia
   changes:
   - message: Fixed hedgehog rav gaining stacks on melee damage sources
@@ -4571,5 +4564,14 @@
   id: 2958
   time: '2026-02-20T13:12:50.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9280
+- author: MoonlightHollow
+  changes:
+  - message: Royal Paramarines roles and the equipment needed for them
+    type: Add
+  - message: Ported the RCM belts
+    type: Add
+  id: 2959
+  time: '2026-02-23T06:58:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9151
 Name: RMC14
 Order: -1

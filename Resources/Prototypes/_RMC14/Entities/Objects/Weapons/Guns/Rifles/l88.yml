@@ -94,7 +94,7 @@
   parent: RMCWeaponRifleL88A1
   id: RMCWeaponRifleL88A2
   name: L88A2 bullpup rifle
-  description: The L88A2 is the second iteration in the L88 series of rifles, approved for limited testing by NCOs and officers of the RCM's Paramarine regiments. The A2 variant offers greater modularity with a rail spanning the underside of the handguard.
+  description: The L88A2 is the second iteration in the L88 series of rifles. The A2 variant offers greater modularity with a rail spanning the underside of the handguard.
   components:
   - type: ItemSlots
     slots:
