@@ -94,19 +94,23 @@
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
     
-# EIAF
+# RCM Paramarines
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
-  id: RMCJumpsuitMarineEIAFNo8
-  name: EIAF No.8 combat uniform
-  description: Standard issue No.8 Pattern BDU used by the Extrasolar Imperial Airborne Force. Identical in cut and protection to the Royal Crown Marine variant, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  id: RMCJumpsuitMarinePara
+  name: paramarine battle dress uniform
+  description: No.8 Pattern BDU used by the RCM's Paramarine regiments. Identical in cut and protection to standard issue uniforms, but issued in woodland camouflage. Lightweight Kevlar mesh offers limited protection against shrapnel and close-quarters threats.
+  suffix: Survivor, Paramarine
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/eiaf.rsi
+    sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para.rsi
   - type: UniformAccessoryHolder
     startingAccessories:
     - RMCPatchTSEMarines
     - RMCPatchTSE
+    - RMCPatchTSEPara
+  - type: WebbingClothing
+    startingWebbing: RMCParaWebbing
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: Foldable
@@ -114,3 +118,41 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
+    
+- type: entity
+  parent: RMCJumpsuitMarinePara
+  id: RMCJumpsuitMarineParaL88
+  suffix: Survivor, Paramarine, Webbing, L88
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCParaWebbingL88
+    
+- type: entity
+  parent: RMCJumpsuitMarinePara
+  id: RMCJumpsuitMarineParaPDW90
+  suffix: Survivor, Paramarine, Webbing. PDW90AP
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCParaWebbingPDW90AP
+    
+- type: entity
+  parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
+  id: RMCJumpsuitMarineParaService
+  name: paramarine service uniform
+  description: A formal No.2 service uniform worn by RCM-P officers. Features the same upper torso cut as the No.8 BDU, but paired with pressed khaki trousers. Issued for inspections, ceremonial duties, or when deployed in an advisory role.
+  suffix: Survivor, Paramarine
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Uniforms/TSE/RCM/para_officer.rsi
+    - type: UniformAccessoryHolder
+      startingAccessories:
+        - RMCPatchTSE
+        - RMCPatchTSEPara
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: Foldable
+      unfoldVerbText: rmc-sleeves-verb-unfold
+      foldVerbText: rmc-sleeves-verb-fold
+    - type: FoldableClothing
+      foldedEquippedPrefix: sleeves
+      
