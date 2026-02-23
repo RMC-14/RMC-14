@@ -1,11 +1,15 @@
-﻿using Content.Server.Chat.Systems;
+using Content.Server.Chat.Systems;
 using Content.Server.Popups;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Watch;
+using Content.Shared._RMC14.Actions;
 using Content.Shared.Mobs.Systems;
+using Content.Shared._RMC14.Xenonids.Zoom;
+using Content.Shared.Movement.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Actions;
 using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 using static Content.Server.Chat.Systems.ChatSystem;
@@ -22,6 +26,9 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
     [Dependency] private readonly XenoEvolutionSystem _xenoEvolution = default!;
+    [Dependency] private readonly SharedContentEyeSystem _contentEye = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
 
     private EntityQuery<ActorComponent> _actorQuery;
     private EntityQuery<XenoWatchedComponent> _xenoWatchedQuery;
@@ -100,7 +107,7 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
     {
         args.Handled = true;
 
-        if (_hive.GetHive(ent.Owner) is not {} hive)
+        if (_hive.GetHive(ent.Owner) is not { } hive)
             return;
 
         if (!HasQueenPopup(ent))
@@ -125,6 +132,27 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
         xenos.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
         _ui.SetUiState(ent.Owner, XenoWatchUIKey.Key, new XenoWatchBuiState(xenos, hive.Comp.BurrowedLarva));
+
+    }
+
+    public override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
+    {
+        if (!Resolve(watcher, ref watcher.Comp))
+            return;
+
+        var oldTarget = watcher.Comp.Target;
+
+        if (TryComp<XenoZoomedBeforeWatchComponent>(watcher, out var zoomed) && zoomed.WasZoomed)
+            EnsureComp<XenoZoomComponent>(watcher);
+
+        RemComp<XenoZoomedBeforeWatchComponent>(watcher);
+
+        base.Unwatch(watcher, player);
+
+        if (oldTarget != null && oldTarget != watcher.Owner)
+            _viewSubscriber.RemoveViewSubscriber(oldTarget.Value, player);
+
+        RemoveWatcher(watcher);
     }
 
     public override void Watch(Entity<HiveMemberComponent?, ActorComponent?, EyeComponent?> watcher, Entity<HiveMemberComponent?> toWatch)
@@ -142,6 +170,20 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
         if (!Resolve(watcher, ref watcher.Comp2, false))
             return;
+        var hadZoom = HasComp<XenoZoomComponent>(watcher);
+        if (hadZoom)
+        {
+            var zoomed = EnsureComp<XenoZoomedBeforeWatchComponent>(watcher);
+            zoomed.WasZoomed = true;
+            RemComp<XenoZoomComponent>(watcher);
+
+            _contentEye.ResetZoom(watcher);
+
+            foreach (var action in _rmcActions.GetActionsWithEvent<XenoZoomActionEvent>(watcher))
+            {
+                _actions.SetToggled((action, action), false);
+            }
+        }
 
         _eye.SetTarget(watcher, toWatch, watcher);
         _viewSubscriber.AddViewSubscriber(toWatch, watcher.Comp2.PlayerSession);
@@ -152,21 +194,6 @@ public sealed class XenoWatchSystem : SharedXenoWatchSystem
 
         var ev = new XenoWatchEvent();
         RaiseLocalEvent(watcher, ref ev);
-    }
-
-    public override void Unwatch(Entity<EyeComponent?> watcher, ICommonSession player)
-    {
-        if (!Resolve(watcher, ref watcher.Comp))
-            return;
-
-        var oldTarget = watcher.Comp.Target;
-
-        base.Unwatch(watcher, player);
-
-        if (oldTarget != null && oldTarget != watcher.Owner)
-            _viewSubscriber.RemoveViewSubscriber(oldTarget.Value, player);
-
-        RemoveWatcher(watcher);
     }
 
     private void RemoveWatcher(EntityUid toRemove)
