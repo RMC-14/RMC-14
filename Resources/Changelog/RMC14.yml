@@ -1,85 +1,4 @@
 ﻿Entries:
-- author: noctynral
-  changes:
-  - message: Fixed being able to pry open powered podlocks and shutters.
-    type: Fix
-  - message: Fixed Xenos being able to pry doors closed.
-    type: Fix
-  id: 2449
-  time: '2025-10-19T06:21:49.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8145
-- author: CatAndHats
-  changes:
-  - message: Fixed the requisitions uniform vendor missing some uniforms, boots, backpacks,
-      goggles, and helmet accessories, and the requisitions attachment vendor missing
-      flashlight grips.
-    type: Fix
-  - message: Changed the order of items in the requisitions armament and uniform vendors,
-      with new categories.
-    type: Tweak
-  - message: Fixed the requisitions vendor descriptions to now mention the LO.
-    type: Fix
-  id: 2450
-  time: '2025-10-19T06:24:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8153
-- author: CatAndHats
-  changes:
-  - message: The Engi Supply Kit is now shown as recommended in the SL vendor.
-    type: Tweak
-  id: 2451
-  time: '2025-10-19T06:25:04.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8022
-- author: CatAndHats
-  changes:
-  - message: Fixed the dropship crew vendor not having M4SPR extended mags, S6 reflex
-      sights, and patrol caps.
-    type: Fix
-  - message: Fixed the purchasable m44 ammunition in the flight crew vendor not being
-      marksman.
-    type: Fix
-  - message: M4SPR extended mag now has a description.
-    type: Fix
-  id: 2452
-  time: '2025-10-19T06:27:00.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8125
-- author: OmerF-afk
-  changes:
-  - message: Added empty L42A mags
-    type: Add
-  id: 2453
-  time: '2025-10-19T06:29:03.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8107
-- author: CatAndHats
-  changes:
-  - message: 'Added cardboard construction menu, Press Z with cardboard in-hand to
-      open the menu: Craft ammo boxes and newly-craftable donut box, pizza boxes,
-      and folders!'
-    type: Add
-  id: 2454
-  time: '2025-10-19T06:30:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8010
-- author: BreakpointDebug1234
-  changes:
-  - message: CMB corpses no longer spawn with all access badges.
-    type: Fix
-  id: 2455
-  time: '2025-10-19T06:30:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8132
-- author: 0awful
-  changes:
-  - message: Requisition can now give you powerloader certification. Come quick there's
-      only 1.
-    type: Add
-  id: 2456
-  time: '2025-10-19T09:16:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8106
-- author: DoguhanOzgurAkca
-  changes:
-  - message: Aegis spawns and spawer icon changed.
-    type: Tweak
-  id: 2457
-  time: '2025-10-19T21:39:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8183
 - author: Vermidia
   changes:
   - message: Fixed hedgehog rav gaining stacks on melee damage sources
@@ -4577,5 +4496,82 @@
   id: 2950
   time: '2026-02-14T19:56:41.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9241
+- author: KompaniLinge
+  changes:
+  - message: Adds SPP Command roles.
+    type: Add
+  - message: Adds SPP Political Kommissars, and SPP Political Ranks.
+    type: Add
+  - message: Adds SPP Officer IDcard.
+    type: Add
+  id: 2951
+  time: '2026-02-17T10:25:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8139
+- author: Gosera
+  changes:
+  - message: Pizzas are now a consistant size and will fit pizza boxes
+    type: Tweak
+  id: 2952
+  time: '2026-02-17T11:37:15.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8575
+- author: SharkSnake98
+  changes:
+  - message: Changed the vendors to SPP vendors on both Sorokyne maps
+    type: Tweak
+  id: 2953
+  time: '2026-02-20T13:06:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9148
+- author: kleinerstation13
+  changes:
+  - message: Ported Panic Room Insert on Shiva's Snowball
+    type: Add
+  id: 2954
+  time: '2026-02-20T13:08:51.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9274
+- author: CatAndHats
+  changes:
+  - message: Added Riot In Progress, a Fiorina survivor special scenario. A 15% chance
+      that a CMB Riot Control team respond first to the distress signal, can they
+      survive the xenonids before the marines arrive?
+    type: Add
+  - message: United Nations Riot Officers are now CMB Riot Control Officers, and fixed
+      them not having the correct hud icon.
+    type: Tweak
+  - message: The Fiorina armoury and flamer cabinets no longer have an access lock.
+    type: Fix
+  id: 2955
+  time: '2026-02-20T13:08:11.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8979
+- author: kleinerstation13
+  changes:
+  - message: Added a scenario for 121/RECON, an SPP SOF investigating the Sorokyne
+      Outpost distress signal.
+    type: Add
+  id: 2956
+  time: '2026-02-20T13:10:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9260
+- author: SharkSnake98
+  changes:
+  - message: 'Added 3 new Varadero inserts: Alt. Medical, Engi Hold, and Restaurant'
+    type: Add
+  id: 2957
+  time: '2026-02-20T13:12:00.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9228
+- author: PursuitInAshes
+  changes:
+  - message: The fog has been removed from the LV-624 bridge inserts.
+    type: Fix
+  id: 2958
+  time: '2026-02-20T13:12:50.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9280
+- author: MoonlightHollow
+  changes:
+  - message: Royal Paramarines roles and the equipment needed for them
+    type: Add
+  - message: Ported the RCM belts
+    type: Add
+  id: 2959
+  time: '2026-02-23T06:58:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9151
 Name: RMC14
 Order: -1

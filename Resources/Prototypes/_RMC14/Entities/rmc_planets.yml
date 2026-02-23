@@ -153,6 +153,9 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: panic_room_hold
+      scenarioProbability: 0.1
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -165,6 +168,28 @@
       - RMCSurvivorShivasILRCPeacekeeper: -1
       CMSurvivorScientist:
       - RMCSurvivorShivasResearcher: -1
+    survivorJobScenarios:
+      panic_room_hold:
+      - CMSurvivorSecurity: 1
+      - CMSurvivor: 2
+      - CMSurvivorCorporate: 1
+      - CMSurvivorDoctor: 2
+      - CMSurvivorEngineer: 2
+      - CMSurvivorScientist: 2
+    survivorJobVariantScenarios:
+      panic_room_hold:
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorSecurity:
+        - RMCSurvivorPMCCommandoShivas: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorAssistantManager: 1
+        CMSurvivor:
+        - RMCSurvivorShivasPanicRoomCivilian: 2
 
 - type: entity
   id: RMCPlanetFiorina
@@ -175,6 +200,9 @@
     camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: riot_in_progress
+      scenarioProbability: 0.15
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -192,6 +220,22 @@
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
+    survivorJobScenarios:
+      riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, the rest as supporting officers.
+        - CMSurvivorSecurity: 1
+        - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      riot_in_progress: # Riot In Progress Riot Control team
+        CMSurvivorSecurity:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        CMSurvivor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
+    survivorJobOverrideScenarios:
+      riot_in_progress: # Riot In Progress job overrides.
+        CMSurvivorCorporate: CMSurvivor
+        CMSurvivorEngineer: CMSurvivor
+        CMSurvivorDoctor: CMSurvivor
+        CMSurvivorScientist: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent
@@ -441,6 +485,26 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
+#    survivorJobScenarios: # TODO: Check if these job slots are actually parity
+#      spp_sof:
+#      - CMSurvivorEngineer: 1
+#      - CMSurvivorDoctor: 1
+#      - CMSurvivorSecurity: 2
+#      - CMSurvivor: -1
+#    survivorJobVariantScenarios:
+#      spp_sof:
+#        CMSurvivorSecurity:
+#        - RMCSurvivorSPPSOFSpec: 1
+#        - RMCSurvivorSPPSOFSL: 1
+#        CMSurvivorDoctor:
+#        - RMCSurvivorSPPSOFMedic: 1
+#        CMSurvivorEngineer:
+#        - RMCSurvivorSPPSOFSapper: 1
+#        CMSurvivor:
+#        - RMCSurvivorSPPSOFSoldier: -1
+#    survivorJobOverrideScenarios: # Scientist rolls for SOF medic
+#      spp_sof :
+#        CMSurvivorScientist: CMSurvivorDoctor
 
 # PVE Maps Below
 - type: entity
