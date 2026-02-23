@@ -632,7 +632,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         args.PushMarkup(Loc.GetString(ent.Comp.ExamineText), 1);
     }
 
-    public virtual void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
+    public void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
     {
         if (args.Handled || !ent.Comp.HasIntenseMode)
             return;

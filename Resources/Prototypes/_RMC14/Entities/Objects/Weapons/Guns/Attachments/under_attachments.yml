@@ -314,6 +314,7 @@
       state: flamethrower-on
   - type: AttachableVisuals
     offset: -0.125, 0.245
+    redrawOnAppearanceChange: true
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi

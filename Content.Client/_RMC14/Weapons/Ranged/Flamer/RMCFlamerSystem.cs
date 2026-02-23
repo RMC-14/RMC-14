@@ -1,11 +1,9 @@
 ﻿using Content.Client.Popups;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
-using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
-using Content.Client._RMC14.Attachable.Components;
 
 namespace Content.Client._RMC14.Weapons.Ranged.Flamer;
 
@@ -41,12 +39,5 @@ public sealed class RMCFlamerSystem : SharedRMCFlamerSystem
                 : Loc.GetString(ent.Comp.Popup);
             _popup.PopupClient(message, args.User, args.User);
         }
-    }
-
-    public override void OnFlamerReagentOverrideUniqueAction(Entity<RMCFlamerReagentOverrideComponent> ent, ref UniqueActionEvent args)
-    {
-        base.OnFlamerReagentOverrideUniqueAction(ent, ref args);
-        if (TryComp(args.UserUid, out AttachableHolderVisualsComponent? attachComp))
-            Dirty(args.UserUid, attachComp);
     }
 }
