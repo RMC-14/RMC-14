@@ -273,6 +273,8 @@ cm-job-name-survivor-trijent-dam-tech = Dam Maintenance Technician
 cm-job-name-survivor-trijent-corporate = Trijent Corporation Liaison
 CMSurvivorTrijentCorporate = Trijent Corporation Liaison
 
+rmc-job-name-survivor-trijent-dam-supervisor = Trijent Dam Supervisor
+
 # Fiorina Science Annex Survs
 
 cm-job-name-survivor-fiorina-corporate-liaison = Fiorina Corporate Liaison
