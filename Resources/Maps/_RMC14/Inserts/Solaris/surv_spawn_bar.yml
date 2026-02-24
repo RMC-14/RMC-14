@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 17:17:25
-  entityCount: 152
+  time: 02/24/2026 20:15:19
+  entityCount: 154
 maps: []
 grids:
 - 1
@@ -796,6 +796,18 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 8.5,4.5
+      parent: 1
+- proto: RMCHelmetGarbBuckshot
+  entities:
+  - uid: 153
+    components:
+    - type: Transform
+      pos: 2.968163,5.788377
+      parent: 1
+  - uid: 154
+    components:
+    - type: Transform
+      pos: 13.28378,2.1337528
       parent: 1
 - proto: RMCHelmetWelding
   entities:

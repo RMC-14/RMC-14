@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 18:52:34
-  entityCount: 67
+  time: 02/24/2026 19:55:04
+  entityCount: 89
 maps: []
 grids:
 - 1
@@ -103,6 +103,13 @@ entities:
         chunkSize: 4
     - type: GasTileOverlay
     - type: ImplicitRoof
+- proto: CigarSpent
+  entities:
+  - uid: 88
+    components:
+    - type: Transform
+      pos: 7.7366533,3.7762923
+      parent: 1
 - proto: CMApc
   entities:
   - uid: 13
@@ -135,6 +142,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,9.5
       parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,7.5
+      parent: 1
 - proto: CMGirder
   entities:
   - uid: 8
@@ -154,12 +167,17 @@ entities:
   - uid: 41
     components:
     - type: Transform
-      pos: 4.5,6.5
+      pos: 4.3440676,6.401011
       parent: 1
   - uid: 43
     components:
     - type: Transform
       pos: 3.5,2.5
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      pos: 7.669012,6.697886
       parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
@@ -230,6 +248,12 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,8.5
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 7.5,3.5
       parent: 1
 - proto: CMWallSolaris
   entities:
@@ -377,6 +401,20 @@ entities:
       rot: 3.141592653589793 rad
       pos: 6.5,6.5
       parent: 1
+- proto: DrinkWaterCup
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 7.3203926,3.5206316
+      parent: 1
+- proto: RMCAshtray
+  entities:
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 7.6272783,3.5419173
+      parent: 1
 - proto: RMCBarricadeWood
   entities:
   - uid: 9
@@ -407,6 +445,13 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 6.5,1.5
+      parent: 1
+- proto: RMCCalendarColonist
+  entities:
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 6.5,6.5
       parent: 1
 - proto: RMCDecalSpawnerBloodSplatters
   entities:
@@ -460,6 +505,88 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 7.5,10.5
       parent: 1
+- proto: RMCGasPipeStraight
+  entities:
+  - uid: 68
+    components:
+    - type: Transform
+      pos: 0.5,5.5
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      pos: 0.5,4.5
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      pos: 0.5,3.5
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      pos: 0.5,2.5
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 0.5,1.5
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 1.5,0.5
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,0.5
+      parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 3.5,0.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 4.5,0.5
+      parent: 1
+  - uid: 77
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 6.5,0.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 7.5,0.5
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,-0.5
+      parent: 1
+- proto: RMCGasPipeTJunction
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 5.5,0.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,0.5
+      parent: 1
 - proto: RMCLightFixtureOffset
   entities:
   - uid: 38
@@ -510,5 +637,12 @@ entities:
     components:
     - type: Transform
       pos: 7.5,8.5
+      parent: 1
+- proto: RMCWaterCoolerStacks
+  entities:
+  - uid: 83
+    components:
+    - type: Transform
+      pos: 3.2489882,5.6617894
       parent: 1
 ...

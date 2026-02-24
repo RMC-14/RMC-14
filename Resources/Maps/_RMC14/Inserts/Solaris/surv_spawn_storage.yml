@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 18:05:53
-  entityCount: 71
+  time: 02/24/2026 20:13:51
+  entityCount: 93
 maps: []
 grids:
 - 1
@@ -74,8 +74,12 @@ entities:
             3: 1,4
             4: 7,4
             5: 5,5
-            6: 7,1
             7: 9,5
+            8: 4,5
+            9: 5,5
+            10: 6,5
+            12: 8,1
+            13: 7,0
     - type: GridAtmosphere
       version: 2
       data:
@@ -83,6 +87,27 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
+- proto: CMBloodPack
+  entities:
+  - uid: 78
+    components:
+    - type: Transform
+      pos: 6.21498,6.8248215
+      parent: 1
+- proto: CMDrinkWEYAWaterBottle30
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      pos: 2.0306206,6.3578396
+      parent: 1
+- proto: CMRollerBed
+  entities:
+  - uid: 54
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
   - uid: 60
@@ -147,12 +172,6 @@ entities:
       parent: 1
 - proto: CMWallSolarisHull
   entities:
-  - uid: 4
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 4.5,7.5
-      parent: 1
   - uid: 5
     components:
     - type: Transform
@@ -172,6 +191,12 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.5,2.5
+      parent: 1
+  - uid: 4
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,7.5
       parent: 1
 - proto: CMWallSolarisRock
   entities:
@@ -204,6 +229,23 @@ entities:
     components:
     - type: Transform
       pos: 5.5,8.5
+      parent: 1
+- proto: CMWarningCone
+  entities:
+  - uid: 72
+    components:
+    - type: Transform
+      pos: 9.701497,6.033844
+      parent: 1
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 9.685872,5.283844
+      parent: 1
+  - uid: 74
+    components:
+    - type: Transform
+      pos: 9.685872,4.486969
       parent: 1
 - proto: RMCBarrelBlue
   entities:
@@ -270,12 +312,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 0.5,6.5
       parent: 1
-  - uid: 35
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 8.5,5.5
-      parent: 1
   - uid: 36
     components:
     - type: Transform
@@ -310,17 +346,92 @@ entities:
       rot: 3.141592653589793 rad
       pos: 7.5,7.5
       parent: 1
+- proto: RMCBasePropCasing11
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.241197,4.7504215
+      parent: 1
+  - uid: 81
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.350572,4.1566715
+      parent: 1
+  - uid: 82
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.694322,4.3285465
+      parent: 1
+  - uid: 83
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5014324,7.1309752
+      parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.7826824,7.0528502
+      parent: 1
+  - uid: 86
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.6233463,7.025539
+      parent: 1
+  - uid: 87
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.6233463,7.134914
+      parent: 1
+  - uid: 88
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.713822,3.9492247
+      parent: 1
+  - uid: 89
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.541947,3.7929747
+      parent: 1
+  - uid: 90
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.416947,3.9335997
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.026321,4.0429745
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.173569,3.8613877
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 8.142319,3.9707627
+      parent: 1
 - proto: RMCCrateLarge
   entities:
   - uid: 46
     components:
     - type: Transform
       pos: 1.5,6.5
-      parent: 1
-  - uid: 54
-    components:
-    - type: Transform
-      pos: 1.5,7.5
       parent: 1
 - proto: RMCDecalSpawnerBloodSplatters
   entities:
@@ -349,6 +460,23 @@ entities:
     - type: Transform
       pos: 2.5,7.5
       parent: 1
+  - uid: 75
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 76
+    components:
+    - type: Transform
+      pos: 6.5,6.5
+      parent: 1
+- proto: RMCDecalSpawnerGibsDrone
+  entities:
+  - uid: 85
+    components:
+    - type: Transform
+      pos: 7.5,0.5
+      parent: 1
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
   - uid: 55
@@ -364,17 +492,24 @@ entities:
   - uid: 57
     components:
     - type: Transform
-      pos: 8.5,1.5
+      pos: 8.5,0.5
       parent: 1
   - uid: 58
     components:
     - type: Transform
-      pos: 7.5,0.5
+      pos: 7.5,1.5
       parent: 1
   - uid: 59
     components:
     - type: Transform
       pos: 8.5,9.5
+      parent: 1
+- proto: RMCDirtBandageProp3
+  entities:
+  - uid: 35
+    components:
+    - type: Transform
+      pos: 8.5,5.5
       parent: 1
 - proto: RMCFoodPacketHotdogTrash
   entities:
@@ -499,5 +634,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 4.5,1.5
+      parent: 1
+- proto: RMCSpawnerCorpseColonist
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      pos: 5.5,6.5
       parent: 1
 ...

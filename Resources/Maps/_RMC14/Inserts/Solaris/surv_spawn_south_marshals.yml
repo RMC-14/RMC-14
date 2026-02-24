@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 17:40:51
-  entityCount: 63
+  time: 02/24/2026 20:12:40
+  entityCount: 73
 maps: []
 grids:
 - 1
@@ -308,6 +308,62 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 3.5,3.5
       parent: 1
+- proto: RMCBasePropCasing11
+  entities:
+  - uid: 64
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.3019807,13.770785
+      parent: 1
+  - uid: 65
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.3957307,13.66141
+      parent: 1
+  - uid: 66
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.4582307,13.59891
+      parent: 1
+  - uid: 67
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.2863557,13.53641
+      parent: 1
+  - uid: 68
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.0207307,3.6387267
+      parent: 1
+  - uid: 69
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.92698073,3.4824767
+      parent: 1
+  - uid: 70
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.92698073,3.3418517
+      parent: 1
+  - uid: 71
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.78635573,10.980431
+      parent: 1
+  - uid: 72
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.2394807,10.777072
+      parent: 1
 - proto: RMCCrateBase
   entities:
   - uid: 52
@@ -354,6 +410,13 @@ entities:
     - type: Transform
       pos: 2.5,12.5
       parent: 1
+- proto: RMCDecalSpawnerGibsDrone
+  entities:
+  - uid: 73
+    components:
+    - type: Transform
+      pos: 1.5,0.5
+      parent: 1
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
   - uid: 46
@@ -380,6 +443,13 @@ entities:
     components:
     - type: Transform
       pos: 1.5,0.5
+      parent: 1
+- proto: RMCDirtBandageProp8
+  entities:
+  - uid: 40
+    components:
+    - type: Transform
+      pos: 1.9740472,3.9720016
       parent: 1
 - proto: RMCGrassDesert1
   entities:
@@ -410,11 +480,6 @@ entities:
       fixtures: {}
 - proto: RMCPlankWood1
   entities:
-  - uid: 40
-    components:
-    - type: Transform
-      pos: 2.5,2.5
-      parent: 1
   - uid: 41
     components:
     - type: Transform
