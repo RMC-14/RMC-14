@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 19:55:04
-  entityCount: 89
+  time: 02/24/2026 20:30:24
+  entityCount: 98
 maps: []
 grids:
 - 1
@@ -178,6 +178,11 @@ entities:
     components:
     - type: Transform
       pos: 7.669012,6.697886
+      parent: 1
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 2.6234412,2.7000253
       parent: 1
 - proto: CMSpawnPointSurvivor
   entities:
@@ -445,6 +450,48 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 6.5,1.5
+      parent: 1
+- proto: RMCBasePropCasing11
+  entities:
+  - uid: 90
+    components:
+    - type: Transform
+      pos: 7.082871,7.549503
+      parent: 1
+  - uid: 91
+    components:
+    - type: Transform
+      pos: 7.317246,7.518253
+      parent: 1
+  - uid: 92
+    components:
+    - type: Transform
+      pos: 7.239121,7.346378
+      parent: 1
+  - uid: 93
+    components:
+    - type: Transform
+      pos: 7.504746,7.221378
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 7.317246,7.112003
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 0.8128669,3.9420304
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 0.9691169,3.8170304
+      parent: 1
+  - uid: 98
+    components:
+    - type: Transform
+      pos: 0.8441169,3.5670304
       parent: 1
 - proto: RMCCalendarColonist
   entities:

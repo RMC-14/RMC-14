@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 20:13:51
-  entityCount: 93
+  time: 02/24/2026 21:02:50
+  entityCount: 97
 maps: []
 grids:
 - 1
@@ -65,6 +65,30 @@ entities:
       chunkCollection:
         version: 2
         nodes:
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped0
+          decals:
+            19: 0,4
+            20: 1,4
+            21: 3,4
+            22: 2,4
+            23: 4,4
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped1
+          decals:
+            14: 0,5
+            15: 2,5
+            16: 1,5
+            17: 3,5
+            18: 4,5
+        - node:
+            color: '#FFFFFFFF'
+            id: CMDecalStriped2
+          decals:
+            24: 4,5
+            25: 4,4
         - node:
             color: '#FFFFFFFF'
             id: Dirt
@@ -246,6 +270,16 @@ entities:
     components:
     - type: Transform
       pos: 9.685872,4.486969
+      parent: 1
+  - uid: 94
+    components:
+    - type: Transform
+      pos: 3.1857264,1.4124391
+      parent: 1
+  - uid: 97
+    components:
+    - type: Transform
+      pos: 3.2794764,0.69368917
       parent: 1
 - proto: RMCBarrelBlue
   entities:
@@ -476,6 +510,18 @@ entities:
     components:
     - type: Transform
       pos: 7.5,0.5
+      parent: 1
+- proto: RMCDecalSpawnerOilSplatters
+  entities:
+  - uid: 95
+    components:
+    - type: Transform
+      pos: 3.5,2.5
+      parent: 1
+  - uid: 96
+    components:
+    - type: Transform
+      pos: 5.5,0.5
       parent: 1
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
