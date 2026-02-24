@@ -482,8 +482,6 @@
         amount: 3
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 1
-      - id: RMCAttachmentL90UBF
-        amount: 1
       - id: RMCAttachmentBurstFireAssembly
         amount: 1
     - name: Miscellaneous
