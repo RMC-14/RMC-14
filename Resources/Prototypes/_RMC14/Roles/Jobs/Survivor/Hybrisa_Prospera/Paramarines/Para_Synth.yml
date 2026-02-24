@@ -1,0 +1,85 @@
+- type: job
+  parent: RMCSurvivorParaBase
+  id: RMCSurvivorParaSupportSynthetic
+  name: rmc-job-name-para-synth 
+  ranks:
+    RMCRankSyntheticColonist: [ ]
+  startingGear: RMCGearParaSupportSynthetic
+  icon: RMCJobIconParaSupportSynthetic
+  spawnMenuRoleName: Royal Paramarine Support Synthetic (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - RoyalMarines
+            - TSE
+        - type: RMCAllowSuitStorage
+        - type: IntelRescueSurvivorObjective
+        - type: MotionDetectorTracked
+        - type: Skills
+          preset: RMCSkillPresetParaSynth
+        - type: DemoSpecWhitelist
+        - type: GrenadeSpecWhitelist
+        - type: ScoutWhitelist
+        - type: SniperWhitelist
+        - type: PyroWhitelist
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: synth
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_para
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadPara
+        - type: JobPrefix
+          prefix: rmc-job-prefix-para-synth
+        - type: MeleeWeapon
+          soundHit:
+            path: /Audio/_RMC14/Weapons/synthpunch1.ogg
+            params:
+              variation: 0.15
+              volume: -1
+          angle: 30
+          animation: WeaponArcFist
+          attackRate: 1
+          damage:
+            types:
+              Blunt: 35
+        - type: Synth
+          generation: rmc-species-synth-generation-second
+  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearParaBase
+  id: RMCGearParaSupportSynthetic
+  equipment:
+    jumpsuit: RMCJumpsuitMarinePara
+    back: RMCSatchelLightpackFilledParaSynth
+    belt: RMCMedicalL75RCMFillPara
+    pocket1: RMCPouchSurvivalSynthFill
+    pocket2: RMCPouchElectronics
+    outerClothing: RMCArmorParaSynthVestFill
+    suitstorage: RMCFlashlight
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointParaSupportSynthetic
+  name: paramarine support synthetic spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParaSupportSynthetic
+  - type: Sprite
+    state: surv_tse
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParaSupportSynthetic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_synth
+    
