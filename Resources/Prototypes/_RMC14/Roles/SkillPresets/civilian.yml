@@ -50,6 +50,19 @@
       RMCSkillFireman: 2
 
 - type: entity
+  parent: RMCSkillPresetSurvivorMarshal
+  id: RMCSkillPresetSurvivorRiotControlTeamLeader
+  name: Survivor CMB Riot Control Team Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 0
+      RMCSkillCqc: 3
+      RMCSkillJtac: 1
+      RMCSkillEndurance: 3
+
+- type: entity
   parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetSurvivorGoon
   name: Survivor Goon
