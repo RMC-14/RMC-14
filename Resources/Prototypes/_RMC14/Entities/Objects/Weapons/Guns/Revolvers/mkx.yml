@@ -1,9 +1,9 @@
 ﻿- type: entity
   parent: [RMCBaseSlideMagazineVisualsBallistic, RMCWeaponRevolverBase]
-  id: RMCWeaponRevolverWarwick
+  id: RMCWeaponRevolverMkX
   name: Warwick MkX TBR
   suffix: DO NOT MAP
-  description: "For centuries, the Warwick accompanied officers of the TSE into battle, known ubiquitously as being 'the gentleman's sidearm'. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
+  description: "For centuries, throughout peacetime and war, the Warwick has been the choice sidearm of the TSE's armed forces. The Mark 10 top-break revolver, chambered in .454, carries the Warwick's legacy into the modern age."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/warwickmkx.rsi
@@ -13,7 +13,7 @@
     tags:
     - Sidearm
     - RMCRevolver
-    - RMCWeaponRevolverWarwick
+    - RMCWeaponRevolverMkX
   - type: Corrodible
     isCorrodible: false
   - type: RevolverAmmoProvider
@@ -64,8 +64,8 @@
   - type: RMCBattleExecute
 
 - type: entity
-  parent: RMCWeaponRevolverWarwick
-  id: RMCWeaponRevolverWarwickEmpty
+  parent: RMCWeaponRevolverMkX
+  id: RMCWeaponRevolverMkXEmpty
   suffix: Empty
   components:
   - type: RevolverAmmoProvider
@@ -79,4 +79,4 @@
     - null
 
 - type: Tag
-  id: RMCWeaponRevolverWarwick
+  id: RMCWeaponRevolverMkX

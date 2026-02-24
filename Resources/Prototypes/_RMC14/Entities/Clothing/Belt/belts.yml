@@ -1331,19 +1331,21 @@
 
 - type: entity
   parent: CMBeltBaseStorage
-  id: RMCWarwickBelt
-  name: L16 pattern Warwick revolver holster
+  id: RMCMkXBelt
+  name: L21 pattern revolver holster
   suffix: PVE, CO
-  description: A beautiful dark chocolate brown leather belt designed to fit the Warwick top-break revolver. Available to senior officers of the RCM by back order only.
+  description: An expensive tan leather belt designed to fit the MkX top-break revolver. Available to senior officers of the RCM by back order only.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
     layers:
     - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
       state: mkx
       map: [ "enum.CMHolsterLayers.Fill" ]
       visible: false
     - state: icon
+    - state: icon-front
+      map: [ "holstered" ]
     - state: half
       map: [ "openLayer" ]
     - state: full
@@ -1352,7 +1354,7 @@
     slots:
     - suitStorage
     - belt
-    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_tse.rsi
+    sprite: _RMC14/Objects/Clothing/Belt/holster_revolver_rcm.rsi
   - type: Storage
     maxItemSize: Normal
     grid:
@@ -1363,7 +1365,7 @@
       - RMCSpeedLoaderMatebaHE
       - RMCSpeedLoaderMatebaHIAP
       - RMCSpeedLoaderMatebaHighImpact
-      - RMCWeaponRevolverWarwick
+      - RMCWeaponRevolverMkX
   - type: FixedItemSizeStorage
   - type: CMHolster
     whitelist:
@@ -1375,16 +1377,24 @@
       whitelist:
         components:
         - Gun
+  - type: ItemMapper
+    spriteLayers:
+    - holstered
+    mapLayers:
+      holstered:
+        whitelist:
+          tags:
+          - Sidearm
   - type: Tag
     tags:
-    - RMCWarwickBelt
+    - RMCMkXBelt
 
 - type: Tag
-  id: RMCWarwickBelt
+  id: RMCMkXBelt
 
 - type: entity
-  parent: RMCWarwickBelt
-  id: RMCWarwickBeltFilled
+  parent: RMCMkXBelt
+  id: RMCMkXBeltFilled
   suffix: PVE, Filled
   components:
   - type: StorageFill
@@ -1393,7 +1403,7 @@
       amount: 3
     - id: RMCSpeedLoaderMatebaHighImpact
       amount: 3
-    - id: RMCWeaponRevolverWarwick
+    - id: RMCWeaponRevolverMkX
 
 - type: entity
   parent: RMCBeltHolsterPistol
