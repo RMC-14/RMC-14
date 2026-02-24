@@ -2319,7 +2319,7 @@
   parent: CMBeltBaseStorage
   id: RMCBeltL49
   name: L28-pattern shotgun shell rig
-  description: "An L28-pattern shotgun holster rig, equipped with loops to hold loose 12ga shells and featuring a holster on the back capable of holding an L49 assault shotgun.\nShotguns equipped with magnetic slings can be strapped directly to the belt, preventing them from being dropped."
+  description: "An L28-pattern shotgun holster rig, equipped with loops to hold loose 12ga shells and featuring a holster on the back capable of holding an L49 assault shotgun.\nShotguns equipped with magnetic harnesses or slings can be strapped directly to the belt, preventing them from being dropped."
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Belt/l49.rsi
