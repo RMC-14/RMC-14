@@ -13,6 +13,7 @@
   - type: CMAutomatedVendor
     jobs:
     - CMRoyalMarinesAssaultEngineerPVE
+    pointsType: AssaultEngineer
     sections:
     - name: Sapper Equipment (Mandatory)
       takeAll: CMStandard
@@ -21,13 +22,14 @@
       - id: RMCPVEArmorCaseRoyalPointman
       - id: CMHandsBlackInsulated
       - id: RMCWeaponRifleL90A2Breacher
-    - name: Heavy-Duty Breaching Equipment # TODO RMC royal marines breaching hammer, XM51 is placeholder
+    - name: Breaching Equipment (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
       choices: { CMPrimary: 1 }
+      takeOne: CMAccessories
       entries:
       # - id: RMCBreachingHammerD2
       #   name: Breaching Hammer
-      - id: RMCXM51Case
-        name: Breaching Shotgun
+      - id: RMCL49Case
+        name: assault shotgun case
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
@@ -47,6 +49,16 @@
         name: Shoulder Holster
       - id: RMCWebbingDropPouchBlack
         name: Drop Pouch
+    - name: Shotgun Shells
+      entries:
+      - id: RMCBoxShotgunBuckshot
+        points: 20
+      - id: RMCBoxShotgunSlugs
+        points: 20
+      - id: RMCBoxShotgunFlechette
+        points: 20
+      - id: RMCBoxShotgunL49B
+        points: 20
 
 - type: entity
   parent: ColMarTechBase

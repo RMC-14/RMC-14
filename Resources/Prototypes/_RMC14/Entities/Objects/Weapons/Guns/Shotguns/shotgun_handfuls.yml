@@ -270,6 +270,54 @@
   spawn: CMShellShotgunIncendiaryBuckshot
   maxCount: 5
 
+# RCM, PVE
+
+- type: entity
+  parent: CMShellShotgunBase
+  id: RMCShellShotgunL49B
+  suffix: PVE, RCM
+  name: handful of L49B shells
+  description: A handful of breaching shells, compatible with the L49 assault shotgun.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi
+    layers:
+    - state: breaching_shell_1
+      map: [ "base" ]
+  - type: CartridgeAmmo
+    proto: RMCPelletShotgunL49B
+  - type: Stack
+    count: 5
+    stackType: RMCShellShotgunL49B
+    baseLayer: base
+    layerStates:
+    - breaching_shell_1
+    - breaching_shell_1
+    - breaching_shell_2
+    - breaching_shell_3
+    - breaching_shell_4
+    - breaching_shell_5
+  - type: Tag
+    tags:
+    - RMCHandful
+    - Cartridge
+    - RMCShellShotgun
+    - RMCShellShotgunL49B
+
+- type: entity
+  parent: RMCShellShotgunL49B
+  id: RMCShellShotgunL49B1
+  components:
+  - type: Stack
+    count: 1
+
+- type: stack
+  id: RMCShellShotgunL49B
+  name: handful of L49B shells
+  icon: { sprite: /Textures/_RMC14/Objects/Weapons/Guns/Ammunition/Handfuls/shotgun_handfuls.rsi, state: breaching_shell_1 }
+  spawn: RMCShellShotgunL49B
+  maxCount: 5
+
 - type: Tag
   id: RMCHandful
 
@@ -296,3 +344,6 @@
 
 - type: Tag
   id: RMCShellShotgunBreaching
+
+- type: Tag
+  id: RMCShellShotgunL49B

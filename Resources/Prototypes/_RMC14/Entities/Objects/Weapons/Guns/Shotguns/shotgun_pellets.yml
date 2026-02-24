@@ -201,3 +201,26 @@
     proto: RMCPelletShotgunBreaching
     count: 4
     spread: 8
+
+# RCM, PVE
+- type: entity
+  parent: CMPelletShotgunBase
+  id: RMCPelletShotgunL49B
+  name: L49B pellets
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/shotgun_projectiles.rsi
+    layers:
+    - state: flechette
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+        Structural: 245
+  - type: CMArmorPiercing
+    amount: 5
+  - type: ProjectileSpread
+    proto: RMCPelletShotgunL49B
+    count: 4
+    spread: 8
