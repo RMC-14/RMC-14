@@ -40,7 +40,7 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false, bool ignoreBarricades = false)
     {
         blocker = null;
         start = _mapSystem.AlignToGrid(start);
@@ -93,7 +93,7 @@ public sealed class LineSystem : EntitySystem
             for (var j = 0; j < coords.Count; j++)
             {
                 var entityCoords = coords[j];
-                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride);
+                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride, ignoreBarricades);
                 hitBlocker = hitBlockerOverride;
 
                 if (j == 0 && blocked && !hitBlocker)
@@ -135,7 +135,7 @@ public sealed class LineSystem : EntitySystem
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride, bool ignoreBarricades = false)
     {
         blocker = default;
         hitBlockerOverride = hitBlocker;
@@ -146,12 +146,11 @@ public sealed class LineSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (_barricadeQuery.HasComp(uid))
+            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
             {
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
-                var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
                 if (_directionalBlock.IsBehindTarget(uid.Value, coords.EntityId, previousCoords))
                 {
                     blocker = uid.Value;

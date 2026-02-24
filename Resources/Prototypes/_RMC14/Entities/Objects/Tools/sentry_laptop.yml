@@ -52,4 +52,7 @@
   - type: RequiresSkill
     skills:
       RMCSkillEngineer: 2
+  - type: Tag
+    tags:
+    - RMCSentryLaptop
 

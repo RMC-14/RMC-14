@@ -93,6 +93,11 @@ rmc-ui-auto-punctuate = Automatically punctuate in-character messages
 rmc-ui-auto-eject-magazines = Automatically eject magazines from guns
 rmc-ui-damage-yourself = Enable being able to hurt yourself with melee and guns
 rmc-ui-show-new-player-icons = Show new player icons as mentor or department head roles
+rmc-ui-xeno-night-vision-default = Xeno night vision default
+rmc-ui-xeno-night-vision-default-off = Off
+rmc-ui-xeno-night-vision-default-half = Half light
+rmc-ui-xeno-night-vision-default-full = Full
+rmc-night-vision-mode-verb = Set night vision: {$mode}
 
 rmc-area-info = {$area}{$restrictions}
 rmc-tacmap-alert-ceiling-level-0 = [color=green]✓[/color] All actions allowed
