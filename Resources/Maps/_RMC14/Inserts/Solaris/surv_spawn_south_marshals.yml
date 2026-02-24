@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/24/2026 20:28:33
-  entityCount: 76
+  time: 02/24/2026 21:09:06
+  entityCount: 81
 maps: []
 grids:
 - 1
@@ -487,6 +487,40 @@ entities:
     components:
     - type: Transform
       pos: 1.9740472,3.9720016
+      parent: 1
+- proto: RMCGasPipeBend
+  entities:
+  - uid: 81
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,14.5
+      parent: 1
+- proto: RMCGasPipeStraight
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 4.5,14.5
+      parent: 1
+  - uid: 78
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 3.5,14.5
+      parent: 1
+  - uid: 79
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 2.5,14.5
+      parent: 1
+  - uid: 80
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 1.5,14.5
       parent: 1
 - proto: RMCGrassDesert1
   entities:
