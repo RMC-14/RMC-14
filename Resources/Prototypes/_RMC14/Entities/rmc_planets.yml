@@ -247,6 +247,8 @@
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     survivorJobVariants:
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorTrijentDamSupervisor: 1
       CMSurvivor:
       - CMSurvivor: -1
       - CMSurvivorMiner: -1
