@@ -27,6 +27,7 @@
         RMCSkillEndurance: 2
         RMCSkillSurgery: 2
     - type: MarineOrders
+    - type: RMCSurvivor
     - type: RMCPointing
     - type: CommandAccent
     - type: InnateCommandSpeech
