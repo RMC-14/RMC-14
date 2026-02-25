@@ -293,6 +293,42 @@
     - type: StoreAfterFailedInteract
     - type: RMCStorageEjectHand
       state: Open
+      
+- type: entity
+  parent: CMWebbing
+  id: RMCParaWebbing
+  name: paramarine webbing
+  description: A durable harness system issued to the RCM's Paramarines, designed to distribute weight evenly for comfort and mobility. Fitted with reinforced pouches for carrying essential gear during high-risk insertions.
+  suffix: Paramarine, Survivor
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Webbing/para_webbing.rsi
+      state: webbing
+    - type: Appearance
+      
+- type: entity
+  parent: RMCParaWebbing
+  id: RMCParaWebbingL88
+  name: paramarine webbing
+  suffix: Paramarine, Survivor, Filled, L88
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar
+        - id: RMCMagazineRifleL88
+        - id: RMCMagazineRifleL88
+        
+- type: entity
+  parent: RMCParaWebbing
+  id: RMCParaWebbingPDW90AP
+  name: paramarine webbing
+  suffix: Paramarine, Survivor, Filled, PDW90
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar
+        - id: RMCMagazineSMGPDW90AP
+        - id: RMCMagazineSMGPDW90AP
 
 - type: entity
   parent: CMWebbingHolster
