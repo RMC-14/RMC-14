@@ -68,13 +68,13 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
 
 rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline engineer is to help your squad by building fortifications, repairing machinery, and performing demolitions.
 
-                                             You will want a full compliment of tools; make sure to pack a blowtorch, wrench, wirecutters, crowbar, multitool, and screwdriver. Additional tools that you can choose to take are an entrenching tool to fill sandbags and clear tunnels, or a light replacer to replace broken lights. Most tools can be found in tools vendors.
+                                             You will want a full compliment of tools; make sure to pack a blowtorch, wrench, wirecutters, crowbar, screwdriver, and security access tuner (often called a multitool). Additional tools that you can choose to take are an entrenching tool to fill sandbags and clear tunnels, or a light replacer to replace broken lights. Most tools can be found in tools vendors, including the middle vendor in your preperation room.
 
                                              Your turret is a valuable bit of equipment, pick it up by using your multitool and keep it safe by repairing it with your blowtorch, you can inspect your turret to see if it needs repairs. Always remember to wear eye protection before welding, otherwise you will blind yourself! Welding goggles, welding helmets, or welding visors will all keep your eyes safe.
 
                                              You are a skilled engineer, so by using your tools you can perform a number of useful repairs in the field: generators, APCs, static communications towers, and the experimental sensor tower all might need your expertise to fix. If you are unsure how to repair something, you can always inspect it and the tooltip will tell you the next required step.
 
-                                             Use the metal and plasteel in your possession to build barricades to keep your squad safe, you can open any material's construction menu by interacting with it in your hand. Always remember to put barbed wires on your cades!
+                                             Use the metal and plasteel in your possession to build barricades to keep your squad safe, you can open any material's construction menu by pressing Z with it in your hand. Always remember to put barbed wires on your cades!
 
                                              You can help deconstruct the area of operations to remove obstacles blocking your squad. You can purchase plastic explosives and breaching charges in your vendor to provide quick explosive openings, or you can use your tools to slowly deconstruct the walls.
 
