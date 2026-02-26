@@ -72,7 +72,7 @@ rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline eng
 
                                              Your turret is a valuable bit of equipment, pick it up by using your multitool and keep it safe by repairing it with your blowtorch, you can inspect your turret to see if it needs repairs. Always remember to wear eye protection before welding, otherwise you will blind yourself! Welding goggles, welding helmets, or welding visors will all keep your eyes safe.
 
-                                             You are a skilled engineer, so using your tools you can perform a number of useful repairs in the field: generators, APCs, static communications towers, and the experimental sensor tower all might need your expertise to fix. If you are unsure how to repair something, you can always inspect it and the tooltip will tell you the next required step.
+                                             You are a skilled engineer, so by using your tools you can perform a number of useful repairs in the field: generators, APCs, static communications towers, and the experimental sensor tower all might need your expertise to fix. If you are unsure how to repair something, you can always inspect it and the tooltip will tell you the next required step.
 
                                              Use the metal and plasteel in your possession to build barricades to keep your squad safe, you can open any material's construction menu by interacting with it in your hand. Always remember to put barbed wires on your cades!
 
