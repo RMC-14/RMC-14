@@ -65,17 +65,27 @@ public sealed class TargetingOverlay : Overlay
                 var angle = diff.ToWorldAngle();
                 var length = diff.Length() / 2f;
                 var midPoint = gunWorldPos + diff / 2;
-                const float width = 0.02f;
 
-                var box = new Box2(-width, -length, width, length);
+                var box = new Box2(-targetingLaser.LaserWidth, -length, targetingLaser.LaserWidth, length);
                 var rotated = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
-                var color = targetingLaser.CurrentLaserColor;
-                var alpha = targetingLaser.GradualAlpha && targeted.AlphaMultipliers.TryGetValue(targeter, out var mult)
-                    ? targetingLaser.LaserAlpha * mult
-                    : targetingLaser.LaserAlpha;
+                var alpha = 0f;
+                if (targetingLaser.GradualAlpha)
+                {
+                    if(targeted.AlphaMultipliers.TryGetValue(targeter, out var multiplier))
+                        alpha = targetingLaser.LaserAlpha * multiplier;
+                }
+                else
+                    alpha = targetingLaser.LaserAlpha;
 
-                worldHandle.DrawRect(rotated, color.WithAlpha(alpha));
+                var rsiState = targetingLaser.LaserType == TargetingLaserType.Normal
+                    ? targetingLaser.LaserState
+                    : targetingLaser.LaserIntenseState;
+
+                var laserTexture = _sprite.GetState(new SpriteSpecifier.Rsi(targetingLaser.RsiPath, rsiState));
+                var laserRsi = laserTexture.Frame0;
+
+                worldHandle.DrawTextureRect(laserRsi, rotated, Color.White.WithAlpha(alpha));
             }
 
             if (!xformQuery.TryGetComponent(uid, out var targetXform))

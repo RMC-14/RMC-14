@@ -200,6 +200,36 @@ rmc-job-name-survivor-hybrisa-engineer = Electrical Engineer
 rmc-job-name-survivor-construction-worker = Construction Worker
 rmc-job-name-survivor-heavy-vehicle-operator = Heavy Vehicle Operator
 
+# Paramarine survs
+
+rmc-job-greeting-para = You are a member of the RCM's 24th Paramarine Regiment!
+
+  Outpost Souter was your final posting before withdrawal. With Weston-Yamada buying out Hybrisa, the TSE began pulling its forces off-world. Your regiment was standing down, preparing to hand over control during the transition. Then the outbreak hit. You've spent the last weeks barely holding the outpost together, repelling wave after wave while sheltering what few survivors you could. Now, only your squad remains. The outpost is falling apart, the armoury's dry, and the dropship in the hangar still has no fuel. A distress signal was sent over a week ago. All you can do now is hold your ground — and pray someone answers.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-name-para = Paramarine Survivor
+rmc-job-description-para = You are a stranded TSE RCM Paramarine. Your dropship is out of fuel and you are stranded on the planet. Do what it takes to survive!
+
+rmc-job-name-paramarine = Rifleman
+rmc-job-name-para-pilot = Fleet Air Arm Pilot
+rmc-job-name-para-engineer = Assault Engineer
+rmc-job-name-para-medic =  Medical Technician
+rmc-job-prefix-paramarine = 24/PARA
+
+rmc-job-name-para-team-leader = Team Leader
+rmc-job-prefix-para-team-leader = 24/PARA TL
+
+rmc-job-name-para-synth = Support Synthetic
+rmc-job-prefix-para-synth = 24/PARA Syn
+
+rmc-job-name-para-commander = Commander
+rmc-job-prefix-para-commander = 24/PARA CDR
+
 # Sorokyne Strata Survs
 
 rmc-job-name-survivor-infrastructure-engineer = Inzhener Infrastruktury
@@ -257,11 +287,31 @@ CMSurvivorFiorinaEngineer = Fiorina Engineer
 cm-job-name-survivor-fiorina-researcher = Fiorina Researcher
 CMSurvivorFiorinaResearcher = Fiorina Researcher
 
-cm-job-name-survivor-riot-officer = United Nations Riot Officer
-CMSurvivorFiorinaRiotOfficer = United Nations Riot Officer
-cm-job-prefix-survivor-riot-officer = UN RO
+cm-job-name-survivor-riot-officer = CMB Riot Control Officer
+CMSurvivorFiorinaRiotOfficer = CMB Riot Control Officer
+cm-job-prefix-survivor-riot-officer = CMB RCO
 
 CMSurvivorFiorinaPrisonGuard = We-Ya Corporate Security
+
+rmc-job-greeting-riot-in-progress-CMB-RCTL = You are a CMB Riot Control Team Leader!
+
+  You are aware of the xenonid threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a CMB Riot Control Team Leader, you run a team as part of the Riot Control Unit of the Colony Marshal Bureau. Your dispatcher received a distress signal from the infamous Fiorina Orbital Penitentiary. You figured it was just another typical case of the prison dealing with a riot their understaffed security force couldn't handle, with more and more of its personnel getting dispatched elsewhere in the galaxy. This wasn't the first time CMB officers were called in to assist, but unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you and the rest of your team had gone towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-riot-in-progress-CMB-RCO = You are a CMB Riot Control Officer!
+
+  You are aware of the xenonid threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a CMB Riot Control Officer, a team member of the Riot Control Unit of the Colony Marshal Bureau. Your team leader briefed you on a distress signal coming from the infamous Fiorina Orbital Penitentiary, probably another minor riot going sour fast. The prison was an understaffed mess so you weren't too surprised they had sent out a distress signal, calling you in to do their jobs yet again. Unfortunately for you, this time it also wasn't the 'minor riot' you expected it to be. Loaded up with only beanbags and finding nobody to greet you on the LZ after being dropped off, you and the rest of your team had gone towards the armory to speak to the Quartermaster, but only found corpses of both prisoners and security littered around on the way. Worried about armed prisoners, your team was in the process of switching to lethals in the armory when some sort of huge alien jumped out from the shadows and snatched Jerry away while he was off praying. The thing dragged him off too fast to catch and his screams faded away down the halls, poor bastard. Now, you'll need to decide whether to look for more clues about what the hell happened here, hunt whatever's out there, or hold a position and hope someone else will respond to the distress signal before it's too late...
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
 # Kutjevo Refinery Survs
 
@@ -364,3 +414,56 @@ rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
 rmc-job-name-survivor-shivas-doctor = Shivas Doctor
 rmc-job-name-survivor-shivas-researcher = Shivas Researcher
 rmc-job-name-survivor-shivas-engineer = Shivas Engineer
+
+rmc-job-name-survivor-shivas-weya-commando = Weston-Yamada Commando
+rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
+
+rmc-job-greeting-shivas-assistant-manager = You are the last alive Senior Administrator on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are the Assistant Operations Manager stationed on 'Ifrit' by Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons you one-day said were 'useless' and a waste of Company dollars. You remember that Administrator Stahl sent out a distress beacon to any ship in range, hoping to get picked up by the Company, he ran to the Spaceport. You have not seen him since. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-commando = You are the last living security element on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a mercenary stationed on 'Ifrit' by Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. While you were assigned to protecting the people taking shelter in the Panic Room, the rest of your team was spread out throughout the colony. You have not seen any of them since. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-researcher = You are a Weston-Yamada Scientist on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a Scientist working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the Xenonid species, codenamed that by Research Director Clarke, have a variety of different species, what you can assume is a 'leader' of some sort and that their acid is deadly should it come in contact with you or the shutters. You ran far from the labs and have not seen your coworkers since. In their attempts at trying to breach in, these so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-doctor = You are a Medical Doctor on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are a Doctor working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids have a sort of implanter which latches on to your face and then... something bursts out of your chest, through the rib cage. You had plenty of those cases at the Medical Bay. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-shivas-panic-room-engineer = You are an Engineer on the Colony!
+
+  You are aware of the xenomorph threat.
+
+  Your primary objective is to survive the outbreak.
+
+  You are an Engineer working on 'Ifrit' for Weston-Yamada. This whole outbreak has been a giant mess, you and all other Company personnel ran to the Operations Panic Room, until you heard shooting outside and closed the shutters. You are running low on food, water and ammunition for the weapons. You remember that the xenonids seem to be able to see in the dark, as you saw one grab a co-worker trying to fix the generators after the power went out. In their attempts at trying to breach in, the so called 'xenonids' have tried attacking the shutters, but to no avail. They will soon try again. You must survive and find a way to contact Weston-Yamada.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
