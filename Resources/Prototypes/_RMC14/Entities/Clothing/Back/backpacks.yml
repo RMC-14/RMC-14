@@ -323,14 +323,24 @@
   - type: ItemCamouflage
     camouflageVariations: {}
 
-# PVE RCM backpacks
+- type: entity
+  parent: RMCSatchelPMC
+  id: RMCSatchelPMCCommando
+  name: We-Ya Commando combat backpack
+  description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada Commandos.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/commando.rsi
+
+# RCM backpacks
+
 - type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMSmall
   name: lightweight RCM backpack
   description: "A TSE military light-carry RCM combat pack MK3."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/small.rsi
     layers:
@@ -348,12 +358,22 @@
     - 0,0,14,1
 
 - type: entity
+  parent: RMCBackpackRCMSmall
+  id: RMCBackpackRCMSmallPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1 # 21 Slots
+
+- type: entity
   parent: CMPersonalStorageBase
   id: RMCBackpackRCMMedium
   name: standard RCM backpack
   description: "A TSE military standard-carry RCM combat pack MK3."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medium.rsi
     layers:
@@ -371,6 +391,16 @@
     - 0,0,17,1
   - type: StorageCloseOnMove
     skipInHand: true
+    
+- type: entity
+  parent: RMCBackpackRCMMedium
+  id: RMCBackpackRCMMediumPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,1 # 24 Slots
 
 - type: entity
   parent: CMBackpack
@@ -378,7 +408,7 @@
   name: heavyweight RCM backpack
   description: "The heavy-carry pack of the RCM forces. Designed to lug the most amount of gear into the battlefield."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/large.rsi
     layers:
@@ -394,6 +424,16 @@
     maxItemSize: Normal
     grid:
     - 0,0,23,1
+      
+- type: entity
+  parent: RMCBackpackRCMLarge
+  id: RMCBackpackRCMLargePVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,26,1 # 27 Slots
 
 - type: entity
   parent: RMCSatchelWelder
@@ -401,7 +441,7 @@
   name: RCM engineering backpack
   description: "A TSE military standard-carry RCM combat pack MK3. Modified by ingenious Royal Engineers to better fit their requirements."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/tech.rsi
     layers:
@@ -424,7 +464,7 @@
   name: RCM medical backpack
   description: "A TSE military standard-carry RCM combat pack MK3. Modified by Medical Assistants to fit their needs better."
   suffix: PVE, RCM
-  components: 
+  components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/medic.rsi
     layers:
@@ -440,3 +480,26 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1
+
+- type: entity
+  parent: RMCBackpackRCMMedic
+  id: RMCBackpackRCMMedicPVP
+  suffix: PVP, RCM
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,23,1 # 24 Slots
+
+- type: entity
+  parent: RMCBackpackRCMMedicPVP 
+  id: RMCBackpackRCMMedicPVPFilledParaMedic
+  suffix: Filled, Paramarine Medic
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCRadioHandheldColony
+        - id: RMCHeadRoyalL1HelmetBallistic
+        - id: CMFireExtinguisherPortable
+        - id: CMDefibrillator
+        - id: CMHealthAnalyzer
