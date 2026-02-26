@@ -17,17 +17,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillPolice: 1
-        RMCSkillConstruction: 2
-        RMCSkillLeadership: 2
-        RMCSkillMedical: 2
-        RMCSkillEngineer: 3
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillVehicles: 2
-        RMCSkillEndurance: 2
-        RMCSkillPowerLoader: 2
+      preset: RMCSkillPresetSurvivorTrijentDamSupervisor
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
