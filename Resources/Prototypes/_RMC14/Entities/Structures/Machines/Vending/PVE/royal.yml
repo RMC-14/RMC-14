@@ -12,32 +12,33 @@
     - [ "CMAccessCombatTechPrep" ]
   - type: CMAutomatedVendor
     jobs:
-    - CMCombatTech # TODO RMC14 CMRoyalMarinesAssaultEngineerPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
+    - CMRoyalMarinesAssaultEngineerPVE
     sections:
-    - name: Engineering Set (Mandatory)
+    - name: Sapper Equipment (Mandatory)
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleRCMPVEAssaultEngi
-    #- name: Heavy-Duty Breaching Equipment (Choose 1) // TODO RMC14 D2 breaching hammer
-    #  choices: { IDKwhatthefuckbutitschoose1notmandatory }
-    #  - id: RMCBreachingHammerD2
-    #    name: Breaching Hammer
-    - name: Backpack (Choose 1)
+      - id: RMCPVEArmorCaseRoyalPointman
+      - id: CMHandsBlackInsulated
+      - id: RMCWeaponRifleL90A2Breacher
+    - name: Heavy-Duty Breaching Equipment # TODO RMC royal marines breaching hammer, XM51 is placeholder
+      choices: { CMPrimary: 1 }
+      entries:
+      # - id: RMCBreachingHammerD2
+      #   name: Breaching Hammer
+      - id: RMCXM51Case
+        name: Breaching Shotgun
+    - name: Backpack
       choices: { CMBackpack: 1 }
-      entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
-      - id: CMBackpackMarine
-        name: Backpack
-      - id: CMSatchelMarine
-        name: Satchel
-      - id: CMBackpackWelder
-        name: Engineering Backpack
+      entries:
+      - id: RMCBackpackRCMTechnician
     - name: Belt
       choices: { CMBelt: 1 }
       entries: # TODO RMC14 TWE belts
       - id: CMBeltMarine
       - id: RMCBeltHolsterPistolTSE
       - id: RMCBeltUtilityGeneral
-    - name: Accessories
+    - name: Uniform Webbing
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
@@ -61,17 +62,18 @@
     - [ "CMAccessMedPrep" ]
   - type: CMAutomatedVendor
     jobs:
-    - CMHospitalCorpsman # TODO RMC14 CMRoyalMarinesMedicPVE // USED FOR TESTING, FIX JOB WITH PR 8076!!!!
+    - CMRoyalMarinesMedicPVE
     sections:
     - name: Medical Set (Mandatory)
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleRCMPVEMedic
-    - name: Backpack (Choose 1)
+      - id: RMCPVEArmorCaseRoyalLight
+      - id: CMHandsLatex
+    - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: CMSatchelMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
-      - id: CMBackpackMarineMedic # TODO RMC14 TWE heavy-duty medical backpack
+      - id: RMCBackpackRCMMedic
     - name: Belt
       choices: { CMBelt: 1 }
       entries: # TODO RMC14 TWE belts
@@ -90,7 +92,7 @@
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
       - id: RMCPouchVialFill
         name: vial pouch (Full)
-    - name: Accessories
+    - name: Uniform Webbing
       choices: { CMAccessories: 1 }
       entries:
       - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
@@ -105,6 +107,7 @@
   id: RMCRoyalBombSpecVendor
   name: We-Ya Section Fire Support Gear Rack # Labeled "OFS" in parity.
   description: An automated rack hooked up to a colossal storage of bombardment specialist standard-issue equipment.
+  suffix: PVE, RCM
   components:
   - type: AccessReader
     access:
@@ -113,14 +116,47 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
     jobs:
-    - CMWeaponsSpecialist # RMC14 TODO: Change to Bombardier Spec job ID.
+    - CMRoyalMarinesBombSpecPVE
     pointsType: Specialist
     sections:
     - name: Fire Support Set (Mandatory)
       takeOne: CMPrimary
       entries:
-      - id: WeaponLauncherM83 # TODO RMC14 L164A3 MGL kit
+      - id: RMCVendorBundleRCMPVEMGL
       - id: RMCMortarKit # TODO RMC14 L53A1 light mortar kit
+    - name: Helmet (Mandatory)
+      takeOne: RMCAccessories 
+      entries:
+      - id: RMCHeadRoyalHelmetBallistic
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCBackpackRCMSmall
+      - id: RMCBackpackRCMMedium
+      - id: RMCBackpackRCMLarge
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMarine
+      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltUtilityGeneral
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 } 
+      entries:
+      - id: RMCArmorWebbingGrenade
+      - id: RMCArmorWebbingDrum
+      - id: RMCArmorWebbingPouch
+      - id: RMCArmorWebbingMag
+      - id: RMCArmorWebbingShell
+    - name: Uniform Webbing
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
+        name: Webbing
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
     - name: Mortar Shells
       entries:
       - id: RMCMortarShellHE
@@ -135,26 +171,75 @@
       #  points: 10
       #- id: RMCMortarShellWhitePhosphorus
       #  points: 25
-    - name: Grenade Packets # TODO RMC14 20mm grenades
+    - name: Grenade Packets # TODO RMC14 20mm grenades (other than HE and incendiary)
       entries:
-      - id: CMPacketGrenadeHighExplosiveFilled
+      - id: RMCPacketGrenade20mmHEFilled
         points: 20
-      - id: RMCPacketGrenadeM74AGMFFilled
+      - id: RMCPacketGrenade20mmIncendiaryFilled
         points: 20
-      - id: RMCPacketGrenadeM74AGMIFilled
-        points: 20
-      #- id: CMPacketGrenade20mmHESHFilled
+      #- id: RMCPacketGrenade20mmHoloTargetingFilled
       #  points: 20
-      #- id: CMPacketGrenade20mmHoloTargetingFilled
+      #- id: RMCPacketGrenade20mmCN20Filled
       #  points: 20
-      #- id: CMPacketGrenade20mmCN20Filled
-      #  points: 20
+
+- type: entity
+  parent: ColMarTechBase
+  id: RMCRoyalScoutSniperVendor
+  name: We-Ya Section Scout-Sniper Gear Rack 
+  description: An automated rack hooked up to a colossal storage of scout-sniper standard-issue equipment.
+  suffix: PVE, RCM
+  components:
+  - type: AccessReader
+    access:
+    - [ "CMAccessSpecPrep" ]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    jobs:
+    - CMRoyalMarinesScoutSniperPVE
+    pointsType: Specialist
+    sections:
+    - name: Precision Weapon Set (Mandatory)
+      takeOne: CMPrimary
+      entries:
+      - id: RMCScoutSniperSniperEquipmentCase
+        name: Sniper Equipment Kit
+      - id: RMCScoutSniperMarksmanEquipmentCase
+        name: Marksman Equipment Kit
+    - name: Backpack
+      choices: { CMBackpack: 1 }
+      entries:
+      - id: RMCBackpackRCMSmall
+      - id: RMCBackpackRCMMedium
+      - id: RMCBackpackRCMLarge
+    - name: Belt
+      choices: { CMBelt: 1 }
+      entries: # TODO RMC14 TWE belts
+      - id: CMBeltMarine
+      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltUtilityGeneral
+    - name: Armor Webbing
+      choices: { RMCArmorWebbing: 1 } 
+      entries:
+      - id: RMCArmorWebbingDrum
+      - id: RMCArmorWebbingPouch
+      - id: RMCArmorWebbingMag
+      - id: RMCArmorWebbingShell
+    - name: Uniform Webbing
+      choices: { CMAccessories: 1 }
+      entries:
+      - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
+        name: Webbing
+      - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
+        name: Shoulder Holster
+      - id: RMCWebbingDropPouchBlack
+        name: Drop Pouch
 
 
 - type: entity
   parent: ColMarTechBase
   id: RMCColMarTechSurplusRCMPVE
-  name: We-Ya Surplus Uniform Vendor
+  name: We-Ya Section Surplus Uniform Vendor
   description: An automated rack hooked up to a small storage of Royal Crown Marines uniforms.
   suffix: PVE, RCM
   components:
@@ -170,7 +255,7 @@
       - id: RMCBootsRoyal
         name: Combat Boots
         amount: 15
-      - id: RMCJumpsuitMarineRoyal
+      - id: RMCJumpsuitMarineRoyalPVE
         amount: 15
       - id: RMCHandsVeteranRoyalMarine
         name: Combat Gloves
@@ -181,32 +266,46 @@
       - id: RMCHeadRoyalBeanie
         name: Tactical Beanie
         amount: 15
-      - id: RMCHeadsetRoyalMarine
+      - id: RMCHeadsetRoyalMarinePVE
         name: Radio Headset
         amount: 15
-    - name: Webbings # TODO RMC14 armor webbings
+    - name: Webbings
       entries:
-      - id: CMWebbingBlack # TODO RMC14 small pouch webbing (4 small slots)
-        name: Webbing
-        amount: 10
+      - id: RMCArmorWebbingPouch
+        amount: 5
+      - id: RMCArmorWebbingMag
+        amount: 5
+      - id: RMCArmorWebbingShell
+        amount: 5
+      - id: CMWebbingBlack # TODO RMC14 small pouch (4 small slots)
+        amount: 5
       - id: RMCWebbingHolsterBlack # TODO RMC14 waist holster - mechanically the same, different sprite
-        name: Shoulder Holster
-        amount: 3
+        amount: 5
       - id: RMCWebbingDropPouchBlack
-        name: Drop Pouch
         amount: 5
     - name: Armor
-      entries: # TODO RMC14 shoulder pads and leg guards for modular armor
-      - id: RMCArmorRoyal
-        name: Kestrel Armored Cuirass
+      entries:
+      - id: RMCArmorRoyalPVE
         amount: 15
-    - name: Backpack
-      entries: # TODO RMC14 TWE backpacks - very rough job just to fill out space here
-      - id: CMBackpackMarine
-        name: Backpack
+      - id: RMCPVEArmorPadsKestrel
         amount: 15
-      - id: CMSatchelMarine
-        name: Satchel
+      - id: RMCPVEArmorBracersKestrel
+        amount: 15
+      - id: RMCPVEArmorNeckGuardKestrel
+        amount: 15
+      - id: RMCPVEArmorGroinPlateKestrel
+        amount: 15
+      - id: RMCPVEArmorShinGuardKestrel
+        amount: 15
+      - id: RMCPVEArmorKneeGuardKestrel
+        amount: 15
+    - name: Backpacks
+      entries: 
+      - id: RMCBackpackRCMSmall
+        amount: 15
+      - id: RMCBackpackRCMMedium
+        amount: 15
+      - id: RMCBackpackRCMLarge
         amount: 15
     - name: Belts
       entries: # TODO RMC14 TWE belts
@@ -320,11 +419,9 @@
         amount: 10
     - name: Sidearms
       entries:
-      - id: RMCWeaponPistolM77
+      - id: RMCWeaponPistolL14
         amount: 2
       - id: RMCMK80
-        amount: 2
-      - id: RMCWeaponPistolL54
         amount: 2
     - name: Miscellaneous
       entries:

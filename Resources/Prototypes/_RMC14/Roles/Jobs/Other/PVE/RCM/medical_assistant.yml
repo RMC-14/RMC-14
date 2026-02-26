@@ -50,6 +50,9 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_twe
+    - type: CMVendorUser
+      extraPoints:
+        Chemicals: 120
   hidden: true
 
 - type: startingGear
