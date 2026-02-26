@@ -169,7 +169,11 @@ public abstract class SharedSynthSystem : EntitySystem
                     RaiseLocalEvent(used, toolUseAttempt);
                 }
 
-                var selfMsg = Loc.GetString("rmc-synth-repair-brute-start-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
+                var selfMsg = Loc.GetString(selfRepair ? "rmc-synth-repair-brute-start-self" : "rmc-synth-repair-brute-start-target-self",
+                    ("user", user),
+                    ("target", synth),
+                    ("tool", used),
+                    ("limb", "chest"));
                 var othersMsg = Loc.GetString("rmc-synth-repair-brute-start-others", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
 
                 _popup.PopupPredicted(selfMsg, othersMsg, user, user);
@@ -183,7 +187,11 @@ public abstract class SharedSynthSystem : EntitySystem
             {
                 if (_doAfter.TryStartDoAfter(doAfter))
                 {
-                    var selfMsg = Loc.GetString("rmc-synth-repair-burn-start-self", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
+                    var selfMsg = Loc.GetString(selfRepair ? "rmc-synth-repair-burn-start-self" : "rmc-synth-repair-burn-start-target-self",
+                        ("user", user),
+                        ("target", synth),
+                        ("tool", used),
+                        ("limb", "chest"));
                     var othersMsg = Loc.GetString("rmc-synth-repair-burn-start-others", ("user", user), ("target", synth), ("tool", used), ("limb", "chest"));
 
                     _popup.PopupPredicted(selfMsg, othersMsg, user, user);

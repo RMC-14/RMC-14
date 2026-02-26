@@ -103,7 +103,7 @@ public sealed class RMCRepairableSystem : EntitySystem
             return;
 
         if (repairable.Comp.RequireWeldingEyeProtection &&
-            !HasWeldingProtection(user, used, repairable.Comp.EyeProtectionPopup))
+            !HasWeldingProtection(user, used))
         {
             return;
         }
@@ -195,7 +195,7 @@ public sealed class RMCRepairableSystem : EntitySystem
         return true;
     }
 
-    public bool HasWeldingProtection(EntityUid user, EntityUid tool, LocId popup)
+    public bool HasWeldingProtection(EntityUid user, EntityUid tool)
     {
         if (!TryComp<RequiresEyeProtectionComponent>(tool, out var protection) || !protection.Toggled)
             return true;
@@ -206,7 +206,6 @@ public sealed class RMCRepairableSystem : EntitySystem
         if (ev.Protection > TimeSpan.Zero)
             return true;
 
-        _popup.PopupClient(Loc.GetString(popup), user, user, PopupType.SmallCaution);
         return false;
     }
 

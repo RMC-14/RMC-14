@@ -36,8 +36,5 @@ public sealed partial class RMCRepairableComponent : Component
     public bool RequireWeldingEyeProtection;
 
     [DataField, AutoNetworkedField]
-    public LocId EyeProtectionPopup = "rmc-repairable-needs-eye-protection";
-
-    [DataField, AutoNetworkedField]
     public float RepairableDamageLimit;
 }
