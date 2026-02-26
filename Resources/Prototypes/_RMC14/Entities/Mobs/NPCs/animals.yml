@@ -404,6 +404,22 @@
     heatDamageThreshold: 423
     coldDamageThreshold: 0
 
+- type: entity
+  parent: [RMCSimpleMob, MobFox]
+  id: RMCMobFox
+  name: Fox
+  suffix: RMC
+  components:
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: GhostRole
+    prob: 0
+  - type: Inventory
+    templateId: RMCFox
+    speciesId: fox 
+
 # Spawners
 - type: entity
   parent: SpawnMobMouse

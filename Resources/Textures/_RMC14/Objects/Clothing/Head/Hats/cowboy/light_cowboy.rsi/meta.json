@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/obj/items/clothing/hats/hats.dmi, https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/mob/humans/onmob/clothing/head/hats.dmi, -puppy edits by @x5tink",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/obj/items/clothing/hats/hats.dmi, https://github.com/cmss13-devs/cmss13/blob/de8d4b8f26e3fbc43bcfea4452d2a8087fb3cc63/icons/mob/humans/onmob/clothing/head/hats.dmi, -puppy and -fox edits by @x5tink",
   "size": {
     "x": 32,
     "y": 32
@@ -16,6 +16,10 @@
     },
     {
       "name": "equipped-HELMET-puppy",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-fox",
       "directions": 4
     }
   ]

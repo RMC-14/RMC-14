@@ -200,3 +200,6 @@
 
 - type: Tag
   id: RMCPuppyWearable
+  
+- type: Tag
+  id: RMCFoxWearable

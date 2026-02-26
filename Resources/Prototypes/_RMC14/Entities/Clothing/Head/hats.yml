@@ -65,9 +65,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -84,9 +87,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -121,9 +127,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -140,9 +149,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -159,9 +171,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -178,9 +193,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -297,9 +315,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadCapMP
@@ -493,9 +514,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadCap
@@ -512,9 +536,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadCap
@@ -531,9 +558,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadCap
@@ -561,9 +591,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadCapMP
@@ -781,9 +814,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -800,9 +836,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 # The squad beret
 - type: entity
@@ -919,9 +958,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 # beanies
 
@@ -1164,9 +1206,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: RMCHeadCowboyHatLight
@@ -1182,9 +1227,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
 
 - type: entity
   parent: ClothingHeadBase
@@ -1234,9 +1282,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
   - type: ItemCamouflage
     camouflageVariations: {}
   - type: CMArmor
@@ -1313,9 +1364,12 @@
       - state: equipped-HELMET
       head-dog:
       - state: equipped-HELMET-puppy
+      head-fox:
+      - state: equipped-HELMET-fox
   - type: Tag
     tags:
     - RMCPuppyWearable
+    - RMCFoxWearable
   - type: HelmetAccessory
     rsi:
       sprite: _RMC14/Objects/Clothing/Head/Hats/horizons_wreath.rsi
