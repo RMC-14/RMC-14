@@ -28,10 +28,13 @@
       - state: equipped-HELMET-puppy
       head-fox:
       - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
   - type: Tag
     tags:
     - RMCPuppyWearable
     - RMCFoxWearable
+    - RMCCatWearable
 
 - type: entity
   parent: RMCHeadBeretProvost
@@ -49,10 +52,13 @@
       - state: equipped-HELMET-puppy
       head-fox:
       - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
   - type: Tag
     tags:
     - RMCPuppyWearable
     - RMCFoxWearable
+    - RMCCatWearable
 
 - type: entity
   parent: RMCHeadBeretProvost
@@ -175,10 +181,13 @@
       - state: equipped-HELMET-puppy
       head-fox:
       - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
   - type: Tag
     tags:
     - RMCPuppyWearable
     - RMCFoxWearable
+    - RMCCatWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -197,10 +206,13 @@
       - state: equipped-HELMET-puppy
       head-fox:
       - state: equipped-HELMET-fox
+      head-cat:
+      - state: equipped-HELMET-cat
   - type: Tag
     tags:
     - RMCPuppyWearable
     - RMCFoxWearable
+    - RMCCatWearable
 
 #UNMC Headset
 - type: entity

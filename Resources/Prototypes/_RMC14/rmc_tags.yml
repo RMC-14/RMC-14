@@ -203,3 +203,6 @@
   
 - type: Tag
   id: RMCFoxWearable
+
+- type: Tag
+  id: RMCCatWearable

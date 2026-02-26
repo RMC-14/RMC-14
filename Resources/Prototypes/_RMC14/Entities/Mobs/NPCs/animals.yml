@@ -314,6 +314,9 @@
       gender: epicene
   - type: FixedIdentity
     name: cm-chatsan-replacement-cat
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
 
 - type: entity
   parent: RMCMobCat
@@ -362,6 +365,13 @@
   - type: WarpPoint
     follow: true
     location: Jones
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: RMCMobCatCalico
@@ -372,6 +382,13 @@
   - type: WarpPoint
     follow: true
     location: Orion
+  - type: CrashLandable
+  - type: PressureImmunity
+  - type: Respirator
+    minSaturation: 5.0
+  - type: Temperature
+    heatDamageThreshold: 423
+    coldDamageThreshold: 0
 
 - type: entity
   parent: RMCMobCat

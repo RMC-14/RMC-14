@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by github noctyrnal, -puppy and -fox edits by @x5tink",
+  "copyright": "Sprites by github noctyrnal, -puppy,-fox and -cat edits by @x5tink",
   "size": {
     "x": 32,
     "y": 32
@@ -28,6 +28,10 @@
     },
     {
       "name": "equipped-HELMET-fox",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-cat",
       "directions": 4
     }
   ]
