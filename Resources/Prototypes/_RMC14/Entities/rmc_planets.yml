@@ -157,6 +157,8 @@
     - scenarioName: panic_room_hold
       scenarioProbability: 0.1
     survivorJobVariants: # Civ survivor is default one
+      RMCSurvivorCommandingOfficer:
+      - RMCSurvivorShivasResearchDirector: 1
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
       CMSurvivorDoctor:

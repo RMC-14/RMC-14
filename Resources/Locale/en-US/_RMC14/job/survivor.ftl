@@ -414,6 +414,7 @@ rmc-job-name-survivor-shivas-liaison = Shivas Corporate Liaison
 rmc-job-name-survivor-shivas-doctor = Shivas Doctor
 rmc-job-name-survivor-shivas-researcher = Shivas Researcher
 rmc-job-name-survivor-shivas-engineer = Shivas Engineer
+rmc-job-name-survivor-shivas-rd = Shivas Research Director
 
 rmc-job-name-survivor-shivas-weya-commando = Weston-Yamada Commando
 rmc-job-name-survivor-shivas-assman = Assistant Operations Manager
