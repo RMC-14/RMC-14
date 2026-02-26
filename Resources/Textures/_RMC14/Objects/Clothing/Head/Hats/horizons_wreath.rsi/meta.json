@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-4.0",
-  "copyright": "Sprites by github noctyrnal",
+  "copyright": "Sprites by github noctyrnal, -puppy edits by @x5tink",
   "size": {
     "x": 32,
     "y": 32
@@ -20,6 +20,10 @@
     },
     {
       "name": "helmet",
+      "directions": 4
+    },
+    {
+      "name": "equipped-HELMET-puppy",
       "directions": 4
     }
   ]

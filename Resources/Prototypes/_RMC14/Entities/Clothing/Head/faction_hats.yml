@@ -21,6 +21,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_wo.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
 
 - type: entity
   parent: RMCHeadBeretProvost
@@ -31,6 +39,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/CO/beret_black.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
 
 - type: entity
   parent: RMCHeadBeretProvost
@@ -146,6 +162,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/quartermaster_cap.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
 
 - type: entity
   parent: CMHeadBeret
@@ -157,6 +181,14 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/beret_quartermaster.rsi
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+      head-dog:
+      - state: equipped-HELMET-puppy
+  - type: Tag
+    tags:
+    - RMCPuppyWearable
 
 #UNMC Headset
 - type: entity

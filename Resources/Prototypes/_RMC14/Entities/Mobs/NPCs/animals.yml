@@ -244,6 +244,9 @@
   - type: WarpPoint
     follow: true
     location: Mister Wiggles
+  - type: Inventory
+    templateId: RMCCorgi
+    speciesId: dog     
 
 
 - type: entity

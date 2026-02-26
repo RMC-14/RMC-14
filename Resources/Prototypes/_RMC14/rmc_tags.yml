@@ -197,3 +197,6 @@
 
 - type: Tag
   id: RMCDataDisk
+
+- type: Tag
+  id: RMCPuppyWearable
