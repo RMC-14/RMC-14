@@ -82,7 +82,7 @@ rmc-new-to-job-maint-tech = As a Maintenance Technician, your job is to perform 
 
                                              One of the most important engineering duties is preparing the orbital cannon. Assist the Chief Engineer with fueling and loading the cannon at CIC's direction.
 
-                                             Enter the maintenance tunnels to scrap barrels and crates with your crowbar. Make sure to only scrap barrels and crates, everything else is off limits for scrapping... unless the Commander calls for shipside deconstruction: this allows you to begin deconstructing more parts of the ship for metal to help the battle. Bring any metal and wood you salvage to Requisitions so they can make good use of it!
+                                             Enter the maintenance tunnels to scrap barrels and crates with your crowbar. Make sure to only scrap barrels and crates, everything else is off limits for scrapping... unless the Commander calls for shipside deconstruction: this allows you to begin deconstructing more parts of the ship for metal to help the battle. If you are unsure, you can ask your Chief Engineer. Bring any metal and wood you salvage to Requisitions so they can make good use of it!
 
                                              You have the time and freedom to do other things like:
 
