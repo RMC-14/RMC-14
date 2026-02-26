@@ -45,8 +45,6 @@ public abstract class SharedSynthSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
-    private readonly Dictionary<EntityUid, TimeSpan> _nextUnableUsePopup = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -55,7 +53,6 @@ public abstract class SharedSynthSystem : EntitySystem
         SubscribeLocalEvent<SynthComponent, AttackAttemptEvent>(OnMeleeAttempted);
         SubscribeLocalEvent<SynthComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<SynthComponent, TryingToSleepEvent>(OnSleepAttempt);
-        SubscribeLocalEvent<SynthComponent, EntityTerminatingEvent>(OnSynthTerminating);
         SubscribeLocalEvent<SynthComponent, InteractUsingEvent>(OnSynthInteractUsing);
         SubscribeLocalEvent<SynthComponent, RMCSynthRepairEvent>(OnSynthRepairDoAfter);
 
@@ -124,11 +121,6 @@ public abstract class SharedSynthSystem : EntitySystem
     private void OnSleepAttempt(Entity<SynthComponent> ent, ref TryingToSleepEvent args)
     {
         args.Cancelled = true; // Synths dont sleep
-    }
-
-    private void OnSynthTerminating(Entity<SynthComponent> ent, ref EntityTerminatingEvent args)
-    {
-        _nextUnableUsePopup.Remove(ent.Owner);
     }
 
     private void OnSynthInteractUsing(Entity<SynthComponent> synth, ref InteractUsingEvent args)
@@ -282,11 +274,14 @@ public abstract class SharedSynthSystem : EntitySystem
 
     public void DoSynthUnableToUsePopup(EntityUid synth, EntityUid tool)
     {
-        var time = _timing.CurTime;
-        if (_nextUnableUsePopup.TryGetValue(synth, out var nextAllowed) && time < nextAllowed)
+        if (!TryComp<SynthComponent>(synth, out var synthComp))
             return;
 
-        _nextUnableUsePopup[synth] = time + UnableUsePopupCooldown;
+        var time = _timing.CurTime;
+        if (time < synthComp.NextUnableUsePopup)
+            return;
+
+        synthComp.NextUnableUsePopup = time + UnableUsePopupCooldown;
 
         var msg = Loc.GetString("rmc-species-synth-programming-prevents-use", ("user", synth), ("tool", tool));
         _popup.PopupClient(msg, synth, synth, PopupType.SmallCaution);
