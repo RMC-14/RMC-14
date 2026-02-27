@@ -181,14 +181,13 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretXO
-  name: XO's beret
+  name: executive officer's beret
   description: A beret with Captain insignia on it.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
-  - type: Appearance
   - type: ItemCamouflage
     camouflageVariations:
       Jungle: _RMC14/Objects/Clothing/Head/Hats/XO/beret_xo_green.rsi
@@ -200,7 +199,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretXOOcean
-  name: XO's ocean-wave beret
+  name: executive officer's ocean-wave beret
   description: A light-green beret with Captain insignia on it. Filled with pride, its colour symbolizes ocean waves.
   components:
   - type: Sprite
@@ -211,7 +210,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretXOBlack
-  name: XO's black beret
+  name: executive officer's black beret
   description: An old-fashioned black beret with Captain insignia on it. Its design may be old, but it speaks of old blood.
   components:
   - type: Sprite
