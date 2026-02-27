@@ -449,12 +449,6 @@
         amount: 15
       #- id: RMCTramadolAutoInjector # TODO RMC14 implement newmed
       #  amount: 15
-    - name: Explosives
-      entries:
-      - id: RMCExplosivePlastic
-        amount: 2
-      - id: RMCExplosiveBreachingCharge
-        amount: 2
     - name: Flare and Light
       entries:
       - id: RMCFlashlight

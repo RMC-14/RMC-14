@@ -28,6 +28,7 @@
     - id: RMCPVEArmorCaseRoyalHarness
     - id: RMCMagazineSmartGunHT
       amount: 3
+    - id: RMCScabbardRoyalMacheteFilled
     - id: RMCGlassesSmartGunSight
 
 - type: entityTable

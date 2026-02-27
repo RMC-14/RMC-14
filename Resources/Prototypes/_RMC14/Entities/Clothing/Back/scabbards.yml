@@ -135,6 +135,7 @@
     - back
     - belt
     - suitstorage
+  - type: ClothingIgnoreBlockBackpack
   - type: ItemSlots
     slots:
       item:
