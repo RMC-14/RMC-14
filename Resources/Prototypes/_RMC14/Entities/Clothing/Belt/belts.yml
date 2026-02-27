@@ -2222,8 +2222,8 @@
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltRoyalMortar
-  name: L79-pattern bombardier belt
-  description: An L79-pattern bombardier belt configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
+  name: L79 pattern bombardier belt
+  description: An L79 pattern bombardier belt configured to carry support ammunition for either the light mortar or L989A2 multiple grenade launcher, along with a sidearm & magazine. Made of special rot-resistant fabric.
   suffix: PVE, RCM, Filled
   components:
   - type: Sprite

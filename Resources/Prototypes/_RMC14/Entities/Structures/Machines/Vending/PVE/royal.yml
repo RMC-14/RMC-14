@@ -372,12 +372,6 @@
       - id: RMCGogglesPrescriptionBallisticRCM
         name: prescription ballistic goggles
         amount: 10
-      - id: RMCHelmetGarbNettingRCM
-        name: brown netting
-        amount: 10
-      - id: RMCHelmetGarbNettingRCMAlt
-        name: tan netting
-        amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15

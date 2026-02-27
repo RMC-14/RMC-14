@@ -18,24 +18,12 @@
       "directions": 4
     },
     {
-        "name": "full-equipped-BACKPACK",
-        "directions": 4
-    },
-    {
       "name": "equipped-SUITSTORAGE",
       "directions": 4
     },
     {
-        "name": "full-equipped-SUITSTORAGE",
-        "directions": 4
-    },
-    {
       "name": "equipped-BELT",
       "directions": 4
-    },
-    {
-        "name": "full-equipped-BELT",
-        "directions": 4
     },
     {
       "name": "inhand-right",

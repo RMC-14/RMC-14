@@ -126,8 +126,9 @@
 - type: entity
   parent: CMWebbingBase
   id: RMCWebbingRCM
-  name: L1-pattern MOLS leg webbing
-  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a number of leg pouches, capable of fitting several small items within.
+  name: MOLS leg webbing
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a number of leg pouches, capable of fitting several small items within.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_rcm.rsi
@@ -404,8 +405,9 @@
 - type: entity
   parent: CMWebbingHolster
   id: RMCWebbingHolsterRCM
-  name: L1-pattern MOLS holster
-  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a waist holster, capable of fitting a sidearm and two spare magazines.
+  name: MOLS waist holster
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a waist holster, capable of fitting a sidearm and two spare magazines.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_rcm.rsi
@@ -552,8 +554,9 @@
 - type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingDropPouchRCM
-  name: L1-pattern MOLS drop pouch
-  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a drop pouch, capable of fitting loose objects within.
+  name: MOLS drop pouch
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a drop pouch, capable of fitting loose objects within.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/drop_pouch_rcm.rsi
@@ -717,8 +720,9 @@
 - type: entity
   parent: RMCToolWebbingSmall
   id: RMCToolWebbingSmallRoyal
-  name: L1-pattern MOLS tool harness
-  description: The L1-pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and belt, with many pouches to fit engineering tools.
+  name: MOLS tool harness
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and belt, with many pouches to fit engineering tools.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_tool_rcm.rsi
@@ -1100,6 +1104,65 @@
       components:
       - CMSurgeryTool
   - type: FixedItemSizeStorage
+  - type: StorageFill
+    contents:
+#     - PICT System
+      - id: CMScalpel
+      - id: CMHemostat
+      - id: CMRetractor
+      - id: CMTraumaKit10
+      - id: CMCautery
+      - id: CMCircularSaw
+      - id: CMSurgicalDrill
+      - id: CMBoneGel
+      - id: CMBonesetter
+#     - FixOVein
+#     - Nanopaste
+      - id: CMSurgicalLine
+      - id: CMSynthGraft
+
+- type: entity
+  parent: CMWebbingBase
+  id: RMCWebbingSurgicalRCM
+  name: MOLS medical carry harness
+  suffix: Royal
+  description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This configuration features a harness and webbing capable of fitting a wide variety of surgical equipment.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_rcm.rsi
+    state: webbing
+  - type: Webbing
+    components:
+    - type: Storage
+      maxItemSize: Small
+      grid:
+      - 0,0,13,3 # 14 slots
+      whitelist:
+        tags:
+        - CMTraumaKit
+        - CMSurgicalLine
+        - CMSynthGraft
+        components:
+        - CMSurgeryTool
+    - type: FixedItemSizeStorage
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,13,3 # 14 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMSurgicalLine
+      - CMSynthGraft
+      components:
+      - CMSurgeryTool
+  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: RMCWebbingSurgicalRCM
+  id: RMCWebbingSurgicalRCMFilled
+  suffix: Filled, Royal
+  components:
   - type: StorageFill
     contents:
 #     - PICT System

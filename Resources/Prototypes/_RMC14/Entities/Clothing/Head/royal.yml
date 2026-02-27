@@ -231,7 +231,7 @@
 - type: entity
   parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalL1HelmetBallistic
-  name: royal L5A1 ballistic helmet
+  name: L1 ballistic helmet
   description: A versatile ballistic helmet designed by Weston-Yamada for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
   suffix: Paramarine, Survivor
   components:
