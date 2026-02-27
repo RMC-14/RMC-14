@@ -49,6 +49,7 @@
   equipment:
     head: RMCHeadParaBeretLead
     outerClothing: RMCArmorParaVest
+    back: RMCSatchelLightpackFilledPara
 
 - type: entity
   parent: CMSpawnPointJobBase

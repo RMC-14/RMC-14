@@ -41,6 +41,7 @@
     eyes: RMCWeldingGoggles
     belt: CMBeltUtilityFilled
     outerClothing: RMCArmorParaVest
+    back: RMCSatchelLightpackFilledPara
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -41,6 +41,7 @@
     head: RMCHeadRoyalFlightHelmet
     jumpsuit: RMCJumpsuitMarineParaPDW90
     outerClothing: RMCArmorParaVest
+    back: RMCSatchelLightpackFilledPara
     suitstorage: RMCWeaponSMGPDW90TSE
 
 - type: entity
