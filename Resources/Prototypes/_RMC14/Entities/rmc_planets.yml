@@ -454,7 +454,7 @@
     survivorJobScenarios:
       tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
       - RMCSurvivorCommandingOfficer: 1
-      # RMCSurvivorSynth: 1
+      - RMCJobSyntheticColony: 1
       - CMSurvivorDoctor: 1
       - CMSurvivorEngineer: 1
       - CMSurvivorSecurity: 2
@@ -463,8 +463,8 @@
       tse_airbase: # RCM Paramarines
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorParaCommander: 1
-        # RMCSurvivorSynth:
-        # - RMCSurvivorParaSupportSynthetic: 1
+        RMCJobSyntheticColony:
+        - RMCSurvivorParaSupportSynthetic: 1
         CMSurvivorDoctor:
         - RMCSurvivorParaMedicalTechnician: 1
         CMSurvivorEngineer:
