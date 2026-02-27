@@ -1,7 +1,7 @@
 - type: job
   parent: RMCSurvivorParaBase
   id: RMCSurvivorParaSupportSynthetic
-  name: rmc-job-name-para-synth 
+  name: rmc-job-name-para-synth
   ranks:
     RMCRankSyntheticColonist: [ ]
   startingGear: RMCGearParaSupportSynthetic
@@ -51,7 +51,7 @@
               Blunt: 35
         - type: Synth
           generation: rmc-species-synth-generation-second
-  useLoadoutOfJob: RMCJobSyntheticColony # for inheritance
+  useLoadoutOfJob: RMCSyntheticColony # for inheritance
   hidden: true
 
 - type: startingGear
@@ -82,4 +82,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_synth
-    
