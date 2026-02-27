@@ -372,6 +372,9 @@
       - id: RMCGogglesPrescriptionBallisticRCM
         name: prescription ballistic goggles
         amount: 10
+      - id: RMCGogglesTintedBallisticRCM
+        name: tinted ballistic goggles
+        amount: 10
       - id: RMCHelmetGarbGunOil
         name: firearm lubricant
         amount: 15
