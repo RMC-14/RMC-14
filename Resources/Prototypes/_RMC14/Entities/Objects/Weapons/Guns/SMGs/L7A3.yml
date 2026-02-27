@@ -3,7 +3,7 @@
   name: "L7A3 submachine gun"   #CM name is L6A2
   suffix: Filled, Royal, PVE
   id: RMCWeaponSMGL7A3
-  description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearing, where the L24A1 proved a tad too unwieldy for such tasks.
+  description: RCM adopted variant of the M63 SMG, re-engineered for better weight, handling and accuracy. Typically used in CQB engagements such as building-clearing, where the L24A1 proved a tad too unwieldy for such tasks. # RMC TODO resprite and redesc
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/SMGs/L7A3.rsi
