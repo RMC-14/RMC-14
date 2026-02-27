@@ -290,6 +290,8 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 10
+  - type: AimedShotEffect
+    extraHits: 1
 
 - type: entity
   parent: RMCBaseBullet
@@ -313,6 +315,8 @@
       ignoreModifiers: true
   - type: CMArmorPiercing
     amount: 30
+  - type: AimedShotEffect
+    extraHits: 1
 
 - type: Tag
   id: RMCL112SniperRifle
