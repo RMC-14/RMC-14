@@ -1,7 +1,7 @@
 # Executive Officer
 - type: loadout
   id: XOBlackBeretRMC
-  cost: 3 # same price as headwear
+  cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
@@ -13,7 +13,7 @@
 
 - type: loadout
   id: XOOceanBeretRMC
-  cost: 3
+  cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
