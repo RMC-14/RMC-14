@@ -14,14 +14,7 @@
     jobs:
     - CMRoyalMarinesAssaultEngineerPVE
     sections:
-    - name: Sapper Equipment (Mandatory)
-      takeAll: CMStandard
-      entries:
-      - id: RMCVendorBundleRCMPVEAssaultEngi
-      - id: RMCPVEArmorCaseRoyalPointman
-      - id: CMHandsBlackInsulated
-      - id: RMCBackpackRCMTechnician
-    - name: Breaching Equipment (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
+    - name: Assault Engineering Set (Mandatory) # TODO RMC royal marines breaching hammer, XM51 is placeholder
       choices: { CMPrimary: 1 }
       takeOne: CMAccessories
       entries:
@@ -29,6 +22,13 @@
       #   name: Breaching Hammer
       - id: RMCXM51Case
         name: Breaching Shotgun
+    - name: Specialist Equipment (Mandatory)
+      takeAll: CMStandard
+      entries:
+      - id: RMCVendorBundleRCMPVEAssaultEngi
+      - id: RMCPVEArmorCaseRoyalPointman
+      - id: CMHandsBlackInsulated
+      - id: RMCBackpackRCMTechnician
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
@@ -38,16 +38,17 @@
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 } 
       entries:
-      - id: RMCArmorWebbingDrumRCM
-        name: drum armor webbing
+      - id: RMCArmorWebbingShellRCM
+        name: shell armor webbing
+        recommended: true
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
       - id: RMCArmorWebbingGrenadeRCM
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
-      - id: RMCArmorWebbingShellRCM
-        name: shell armor webbing
 
 - type: entity
   parent: ColMarTechBase
@@ -65,50 +66,54 @@
     jobs:
     - CMRoyalMarinesMedicPVE
     sections:
-    - name: Medical Assistant Equipment (Mandatory)
+    - name: Medical Storage Set (Mandatory)
+      takeOne: CMAccessories
+      choices: { CMBelt: 1 }
+      entries: 
+      - id: RMCMedicalL75RCM
+      - id: RMCBeltUtilityGeneralRCMPVE
+    - name: Specialist Equipment (Mandatory)
       takeAll: CMStandard
       entries:
       - id: RMCVendorBundleRCMPVEMedic
       - id: RMCPVEArmorCaseRoyalLight
       - id: RMCBackpackRCMMedic
       - id: CMHandsLatex
-    - name: Belt (Mandatory)
-      takeOne: CMAccessories
-      choices: { CMBelt: 1 }
-      entries: 
-      - id: RMCMedicalL75RCM
-      - id: RMCBeltUtilityGeneralRCMPVE
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
-      - id: RMCPouchMedkit
-      - id: RMCPouchAutoinjector
       - id: RMCPouchReagentCanisterMeraBic
         name: Pressurized Reagent Canister Pouch\n(Meralyne-Bicaridine)
+        recommended: true
       - id: RMCPouchReagentCanisterKeloDerm
         name: Pressurized Reagent Canister Pouch\n(Kelotane-Dermaline)
+        recommended: true
       - id: RMCPouchReagentCanisterTricordrazine
         name: Pressurized Reagent Canister Pouch\n(Tricordrazine)
+        recommended: true
+      - id: RMCPouchMedkit
+        recommended: true
+      - id: RMCPouchAutoinjector
       - id: RMCPouchVialFill
         name: vial pouch (Full)
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 } 
       entries:
-      - id: RMCArmorWebbingDrumRCM
-        name: drum armor webbing
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
       - id: RMCArmorWebbingGrenadeRCM
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
         name: general armor webbing
-      - id: RMCArmorWebbingShellRCM
-        name: shell armor webbing
     - name: Uniform Webbing
       choices: { RMCWebbing: 1 } 
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
+        recommended: true
       - id: RMCWebbingHolsterRCM
         name: waist holster
       - id: RMCWebbingDropPouchRCM
@@ -146,16 +151,18 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackRCMSmall
       - id: RMCBackpackRCMMedium
+        recommended: true
+      - id: RMCBackpackRCMSmall
       - id: RMCBackpackRCMLarge
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 }
       entries:
-      - id: RMCArmorWebbingDrumRCM
-        name: drum armor webbing
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
       - id: RMCArmorWebbingGrenadeRCM
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
@@ -165,6 +172,7 @@
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
+        recommended: true
       - id: RMCWebbingHolsterRCM
         name: waist holster
       - id: RMCWebbingDropPouchRCM
@@ -226,22 +234,25 @@
     - name: Backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RMCBackpackRCMSmall
       - id: RMCBackpackRCMMedium
+        recommended: true
+      - id: RMCBackpackRCMSmall
       - id: RMCBackpackRCMLarge
     - name: Belt
       choices: { CMBelt: 1 }
       entries:
       - id: RMCBeltRCM
+        recommended: true
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 }
       entries:
-      - id: RMCArmorWebbingDrumRCM
-        name: drum armor webbing
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
+        recommended: true
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
       - id: RMCArmorWebbingGrenadeRCM
         name: grenade armor webbing
       - id: RMCArmorWebbingPouchRCM
@@ -251,6 +262,7 @@
       entries:
       - id: RMCWebbingRCM
         name: leg pouches
+        recommended: true
       - id: RMCWebbingHolsterRCM
         name: waist holster
       - id: RMCWebbingDropPouchRCM
@@ -301,6 +313,9 @@
       - id: RMCArmorWebbingMagRCM
         name: magazine armor webbing
         recommended: true
+        amount: 5
+      - id: RMCArmorWebbingDrumRCM
+        name: drum armor webbing
         amount: 5
       - id: RMCArmorWebbingGrenadeRCM
         name: grenade armor webbing

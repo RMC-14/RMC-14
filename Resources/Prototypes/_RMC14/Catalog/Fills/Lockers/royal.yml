@@ -7,7 +7,6 @@
     - id: RMCBackpackAmmoRCM
     - id: CMAdvFirstAidKit
     - id: RMCBoxMagazineRifleL90Drum
-    - id: RMCArmorWebbingDrumRCM
     - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
@@ -29,7 +28,6 @@
     - id: RMCPVEArmorCaseRoyalHarness
     - id: RMCMagazineSmartGunHT
       amount: 3
-    - id: RMCArmorWebbingDrumRCM
     - id: RMCGlassesSmartGunSight
 
 - type: entityTable
