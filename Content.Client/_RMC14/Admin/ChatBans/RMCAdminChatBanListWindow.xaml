@@ -1,0 +1,20 @@
+﻿<controls:RMCAdminChatBanListWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Admin.ChatBans"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="{Loc rmc-chat-bans-list}"
+    MinSize="930 300">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="{Loc rmc-chat-bans-list-type}" MinWidth="150" />
+            <Label Text="{Loc rmc-chat-bans-list-banned-at}" MinWidth="175" />
+            <Label Text="{Loc rmc-chat-bans-list-expires-at}" MinWidth="275" />
+            <Label Text="{Loc rmc-chat-bans-list-reason}" SetWidth="300" />
+            <Label MinWidth="100" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+            <BoxContainer Name="Container" Access="Public" Orientation="Vertical" />
+        </ScrollContainer>
+    </BoxContainer>
+</controls:RMCAdminChatBanListWindow>

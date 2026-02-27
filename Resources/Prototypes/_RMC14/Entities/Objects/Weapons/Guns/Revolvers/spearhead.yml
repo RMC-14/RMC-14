@@ -47,14 +47,17 @@
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-stock:
@@ -72,6 +75,19 @@
       rmc-aslot-rail: -0.14, 0.158
       rmc-aslot-stock: -0.59375, 0.09375
       rmc-aslot-underbarrel: 0.38, -0.24
+
+- type: entity
+  parent: RMCWeaponRevolverSpearhead
+  id: RMCWeaponRevolverSpearheadTactitcal
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        startingAttachable: RMCAttachmentExtendedBarrel
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentLaserSight
 
 - type: entity
   parent: RMCWeaponRevolverSpearhead

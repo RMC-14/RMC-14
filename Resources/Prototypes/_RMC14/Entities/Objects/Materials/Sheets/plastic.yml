@@ -5,7 +5,7 @@
   stackEntity: RMCSheetPlastic
   name: materials-plastic
   icon: { sprite: _RMC14/Objects/Materials/Sheets/plastic.rsi, state: plastic }
-  price: 0.2
+  price: 0.01
 
 - type: stack
   id: RMCPlastic
@@ -28,10 +28,18 @@
       map: ["base"]
   - type: Item
     size: Normal
+  - type: RMCConstructionItem
+    buildable:
+      - RMCCratePlasticBuild
+      - RMCAshtrayBuild
+      - RMCDividerConstruction
+      - RMCForkPlasticBuild
+      - RMCSpoonPlasticBuild
+      - RMCKitchenKnifePlasticBuild
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RMCPlastic: 100
+      RMCPlastic: 2000
   - type: Stack
     stackType: RMCPlastic
     count: 50
@@ -46,6 +54,10 @@
     tags:
     - Sheet
     - Plastic
+  - type: UserInterface
+    interfaces:
+      enum.RMCConstructionUiKey.Key:
+        type: RMCConstructionBui
 
 - type: entity
   parent: RMCSheetPlastic

@@ -78,9 +78,9 @@ public sealed class WheelchairSystem : EntitySystem
                 _actions.RemoveAction(buckle.Owner, pilot.BellActionEntity.Value);
             }
             
-            // Remove components
-            RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
+            // Clear relay and remove components
             RemCompDeferred<RelayInputMoverComponent>(buckle);
+            RemCompDeferred<ActiveWheelchairPilotComponent>(buckle);
 
             _movementSpeed.RefreshMovementSpeedModifiers(ent);
         }

@@ -6,7 +6,7 @@
   components:
   - type: Flash
     slowTo: 0.25
-    meleeStunDuration: 20
+    meleeStunDuration: 12
     range: 3
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/flash.rsi

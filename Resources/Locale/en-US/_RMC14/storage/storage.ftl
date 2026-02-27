@@ -13,6 +13,7 @@ rmc-storage-limit-accessories = You can't fit any more accessories in the helmet
 rmc-storage-limit-grenades = You can't fit any more grenades!
 rmc-storage-limit-not-ziptie-box = That slot is reserved for a ziptie box!
 rmc-storage-nothing-left = {CAPITALIZE(THE($storage))} is empty. Nothing to grab.
+rmc-storage-limit-generic = The storage cannot hold more of that item!
 
 rmc-holster-verb = Unholster
 rmc-storage-webbing-remove-verb = Remove webbing

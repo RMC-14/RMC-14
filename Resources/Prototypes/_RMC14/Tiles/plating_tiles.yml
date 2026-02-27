@@ -1,9 +1,14 @@
-﻿- type: tile
-  parent: CMTileBase
+- type: tile
+  abstract: true
   id: CMFloorStripedBase
   name: tiles-cm-striped
   baseTurf: ""
   deconstructTools: [ ]
+  footstepSounds:
+    collection: FootstepFloor
+  heatCapacity: 10000
+  isSubfloor: true
+  friction: 1
 
 - type: tile
   parent: CMFloorStripedBase
@@ -31,6 +36,11 @@
   parent: CMFloorPlating
   id: RMCFloorPlatingScorched
   sprite: /Textures/_RMC14/Tiles/floors/panelscorched.png
+
+- type: tile
+  parent: CMFloorPlating
+  id: RMCFloorPlatingThermite
+  sprite: /Textures/_RMC14/Tiles/floors/wall_thermite.png
 
 - type: tile
   parent: CMFloorStripedBase

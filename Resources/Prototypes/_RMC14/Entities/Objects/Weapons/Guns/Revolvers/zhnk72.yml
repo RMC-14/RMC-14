@@ -50,11 +50,13 @@
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:

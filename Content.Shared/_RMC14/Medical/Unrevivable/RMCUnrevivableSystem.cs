@@ -42,7 +42,7 @@ public sealed class RMCUnrevivableSystem : EntitySystem
         return HasComp<UnrevivableComponent>(uid);
     }
 
-    public void MakeUnrevivable(Entity<RMCRevivableComponent?> ent)
+    public void MakeUnrevivable(Entity<RMCRevivableComponent?> ent, bool killLarva = true)
     {
         if (!Resolve(ent.Owner, ref ent.Comp, false))
             return;
@@ -51,7 +51,17 @@ public sealed class RMCUnrevivableSystem : EntitySystem
         unrevivable.Analyzable = false;
         unrevivable.Cloneable = false;
         unrevivable.ReasonMessage = ent.Comp.UnrevivableReasonMessage;
+
+        ent.Comp.KillLarva = killLarva;
         Dirty(ent);
+    }
+
+    public bool DoesKillLarvaOnUnrevivable(Entity<RMCRevivableComponent?> ent)
+    {
+        if (!Resolve(ent.Owner, ref ent.Comp, false))
+            return false;
+
+        return ent.Comp.KillLarva;
     }
 
     public int GetUnrevivableStage(Entity<RMCRevivableComponent?> ent, int maxStages)

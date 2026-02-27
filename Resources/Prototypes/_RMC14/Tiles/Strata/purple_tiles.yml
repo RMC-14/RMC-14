@@ -3,6 +3,7 @@
   parent: CMTileBase
   id: RMCFloorStrataPurpleBase
   name: tiles-cm-default-purple
+  suffix: Sorokyne
 
 - type: tile
   parent: RMCFloorStrataPurpleBase

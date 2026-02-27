@@ -18,7 +18,7 @@
       gun_magazine: !type:ContainerSlot
       gun_chamber: !type:ContainerSlot
   - type: Gun
-    burstCooldown: 0.625
+    burstCooldown: 1.5
     shotsPerBurst: 2
     selectedMode: SemiAuto
     availableModes:
@@ -35,7 +35,14 @@
     scatterWielded: 10
     scatterUnwielded: 30
     baseFireRate: 0.625
-    burstFireRateMultiplier: 15
+    burstFireRateMultiplier: 25
+    modifiers:
+      Burst:
+        fireDelay: 0.1665
+        maxScatterModifier: 10
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 6
   - type: RMCExtraProjectilesDamageMods
     damageMultiplier:  0.18
   - type: RMCWeaponAccuracy

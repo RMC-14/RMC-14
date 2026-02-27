@@ -98,6 +98,73 @@
       - Xeno
 
 - type: entity
+  parent: CMMRE
+  id: RMCMRESPP # TODO RMC14 - Custom Contents
+  name: SPP IRP ration pack
+  description: An Individual Meal Ration, mainly composed of a selection of canned food, despite being heavier, it has proven to be a lot more reliable.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_spp.rsi
+
+- type: entity
+  parent: CMMRE
+  id: RMCMREWeYa # TODO RMC14 - Custom Contents
+  name: We-Ya brand ration pack
+  description: "A more or less cohesive ration, intended for colonist and corporate security, packed with a medium quality foods with a long shelf life.\nOn the box is the Weston-Yamada logo, with a slogan surrounding it:\nWESTON-YAMADA. FEEDING BETTER WORLDS."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_weya.rsi
+
+- type: entity
+  parent: CMMRE
+  id: RMCMREWeYaPMC # TODO RMC14 - Custom Contents
+  name: PMC CFR ration
+  description: A Combat Field Ration. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive foods, not much different from going to a restaurant. Eating better worlds.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_weya_pmc.rsi
+
+- type: entity
+  parent: CMMRE
+  id: RMCMRETSE # TODO RMC14 - Custom Contents
+  name: TSE ORP ration
+  description: An Operation Ration Pack. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive meals from TSE cuisine.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_tse.rsi
+
+- type: entity
+  parent: BaseItem
+  id: RMCMRECLF
+  name: wrapped makeshift meal
+  description: Some home cooked or salvaged meal, you do what you must within your capabilities.
+  components:
+  - type: Tag
+    tags:
+    - MRE
+  - type: Item
+    size: Small
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMREFoodMeatSlab
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodMeatSlabCheese
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodBread
+      orGroup: RMCMRECLFFood
+    - id: RMCMREFoodMargaritaPizza
+      orGroup: RMCMRECLFFood
+    sound:
+      collection: CMFoodRip
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_clf.rsi
+    state: closed
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
+- type: entity
   abstract: true
   parent: BaseItem
   id: CMMREComponentBase
@@ -125,6 +192,37 @@
     size: Small
   - type: MREItem
 
+# SPP survival bar
+
+- type: entity
+  parent: BaseItem
+  id: RMCSurvivalRationSPP
+  name: SPP survival ration
+  description: A small compressed package containing a single portion of food you cannot distinguish.
+  components:
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-spp-survival-ration
+  - type: Tag
+    tags:
+    - MRE
+  - type: Item
+    size: Tiny
+  - type: SpawnItemsOnUse
+    items:
+    - id: RMCMRESPPSurvivalRationTypeA
+      orGroup: main
+    - id: RMCMRESPPSurvivalRationTypeB
+      orGroup: main
+    sound:
+      collection: CMFoodRip
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_components.rsi
+    state: spp_ration
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+
 - type: entity
   parent: RMCBoxMagazineSupplySmallBase
   id: RMCBoxMREEmpty
@@ -145,15 +243,18 @@
   - type: Sprite
     layers:
     - state: supply_box_small
-      color: "#887b67"
+      color: "#b59471"
     - state: supply_ammo_small_full
       map: [ "enum.CMItemSlotsLayers.Fill" ]
       color: "#a69571"
     - state: supply_box_small_food
-      color: "#e0d5c2"
+      color: "#b59471"
     - state: supply_lid_small_closed
       map: [ "lid" ]
-      color: "#887b67"
+      color: "#b59471"
+    - state: supply_lid_small_closed_marking
+      map: [ "lid_marking" ]
+      color: "#b59471"
 
 - type: entity
   parent: RMCBoxMREEmpty

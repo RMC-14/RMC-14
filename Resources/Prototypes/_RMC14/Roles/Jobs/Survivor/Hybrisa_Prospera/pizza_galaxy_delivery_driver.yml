@@ -9,11 +9,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivorPizzaGalaxyDriver
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHybrisaPizzaGalaxy
     - type: RMCSurvivor
@@ -28,6 +24,14 @@
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
   id: RMCGearSurvivorHybrisaPizzaGalaxy
+  equipment:
+    jumpsuit: RMCJumpsuitPizzaGalaxy
+    back: RMCSatchelNorm
+    head: RMCHeadCapPizzaGalaxy
+  storage:
+    back:
+    - RMCBoxPizzaGalaxyMystery
+    - CMSheetMetal20
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -49,10 +53,10 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazine, RMCPouchMagazineFilledKT42]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCShoesRed, RMCBoxPizzaGalaxyMystery, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazine, RMCPouchMagazineFilledKT42]
-    - [ RMCHeadCapPizzaGalaxy, RMCJumpsuitPizzaGalaxy, RMCSatchelNorm, RMCBootsCBRN, CMArmorM3VLBallistics, RMCBoxPizzaGalaxyMystery, RMCWeaponShotgunHG3712, RMCPouchShotgunFilledBuckshot] # TODO RMC14 : Replace RMCWeaponShotgunHG3712 with RMCWeaponShotgunM3717
+    - [ RMCShoesRed ] # Repeated entries for rarity
+    - [ RMCShoesRed ]
+    - [ RMCShoesRed ]
+    - [ RMCShoesRed ]
+    - [ RMCShoesRed, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazineFilledKT42 ]
+    - [ RMCShoesRed, RMCArmorVestCivilian, RMCWeaponPistolKT42, RMCPouchMagazineFilledKT42 ]
+    - [ RMCBootsCBRN, CMArmorM3VLBallistics, RMCWeaponShotgunM3717, RMCPouchShotgunFilledBuckshot ]

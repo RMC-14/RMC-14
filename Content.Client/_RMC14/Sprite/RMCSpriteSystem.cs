@@ -14,6 +14,7 @@ namespace Content.Client._RMC14.Sprite;
 public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 {
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly SpriteSystem _sprite = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     public override void Initialize()
@@ -36,7 +37,7 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
         if (!TryComp(sprite, out SpriteComponent? comp))
             return depth;
 
-        comp.DrawDepth = (int) depth;
+        _sprite.SetDrawDepth((sprite, comp), (int) depth);
         return depth;
     }
 
@@ -52,7 +53,7 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
         if (Transform(uid).MapID == MapId.Nullspace)
         {
             if (TryComp(uid, out SpriteComponent? sprite))
-                sprite.Offset = new Vector2();
+                _sprite.SetOffset((uid, sprite), new Vector2());
 
             return;
         }
@@ -63,30 +64,66 @@ public sealed class RMCSpriteSystem : SharedRMCSpriteSystem
 
     public override void Update(float frameTime)
     {
-        var colors = EntityQueryEnumerator<SpriteColorComponent, SpriteComponent>();
-        while (colors.MoveNext(out var color, out var sprite))
+        UpdateColors();
+        UpdatePositions();
+        UpdateLocalDrawDepth();
+    }
+
+    private void UpdateColors()
+    {
+        try
         {
-            sprite.Color = color.Color;
+            var colors = EntityQueryEnumerator<SpriteColorComponent, SpriteComponent>();
+            while (colors.MoveNext(out var uid, out var color, out var sprite))
+            {
+                _sprite.SetColor((uid, sprite), color.Color);
+            }
         }
-
-        var location = EntityQueryEnumerator<RMCUpdateClientLocationComponent>();
-        while (location.MoveNext(out var uid, out _))
+        catch (Exception e)
         {
-            UpdatePosition(uid);
+            Log.Error($"Error updating {nameof(SpriteColorComponent)} colors:\n{e}");
         }
+    }
 
-        if (_player.LocalEntity is not { } player)
-            return;
+    private void UpdatePositions()
+    {
+        try
+        {
+            var location = EntityQueryEnumerator<RMCUpdateClientLocationComponent>();
+            while (location.MoveNext(out var uid, out _))
+            {
+                UpdatePosition(uid);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error updating {nameof(RMCUpdateClientLocationComponent)} positions:\n{e}");
+        }
+    }
 
-        if (HasComp<GhostComponent>(player))
-            return;
+    private void UpdateLocalDrawDepth()
+    {
+        try
+        {
+            if (_player.LocalEntity is not { } player)
+                return;
 
-        if (TryComp(player, out XenoHideComponent? hide) && hide.Hiding)
-            return;
+            if (HasComp<GhostComponent>(player))
+                return;
 
-        if (TryComp(player, out SpriteComponent? playerSprite) &&
-            !HasComp<ParaDroppingComponent>(player) &&
-            !HasComp<CrashLandingComponent>(player))
-            playerSprite.DrawDepth = (int) Shared.DrawDepth.DrawDepth.BelowMobs;
+            if (TryComp(player, out XenoHideComponent? hide) && hide.Hiding)
+                return;
+
+            if (TryComp(player, out SpriteComponent? playerSprite) &&
+                !HasComp<ParaDroppingComponent>(player) &&
+                !HasComp<CrashLandingComponent>(player))
+            {
+                _sprite.SetDrawDepth((player, playerSprite), (int) Shared.DrawDepth.DrawDepth.BelowMobs);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"Error updating local draw depth:\n{e}");
+        }
     }
 }

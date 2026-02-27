@@ -1,0 +1,125 @@
+- type: entity
+  id: RMCSkillPresetPVEPlatoonCommander
+  name: Platoon Commander
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillIntel: 2
+        RMCSkillJtac: 4
+        RMCSkillLeadership: 3
+        RMCSkillMedical: 2
+        RMCSkillNavigations: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 2
+        RMCSkillSurgery: 2 # RMC14 Surgery 1 -> 2. RMC14 TODO: Lower back to 1 once we get autodocs.
+        RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPVESectionSergeant
+  name: Section Sergeant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 3
+        RMCSkillIntel: 1
+        RMCSkillJtac: 3
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 2
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPVESquadLeader
+  name: Squad Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 2
+        RMCSkillFireman: 2
+        RMCSkillJtac: 2
+        RMCSkillLeadership: 1
+        RMCSkillMedical: 1
+        RMCSkillPilot: 1
+        RMCSkillPolice: 2
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPVECorpsman
+  name: Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
+        RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSurgery: 1
+        RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPVESGO
+  name: Smartgun Operator
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillJtac: 1
+        RMCSkillPilot: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillSmartGun: 1
+        RMCSkillVehicles: 1
+
+- type: entity
+  id: RMCSkillPresetPVERifleman
+  name: Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+        RMCSkillConstruction: 2
+        RMCSkillCqc: 1
+        RMCSkillEndurance: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 2
+        RMCSkillJtac: 1
+        RMCSkillPowerLoader: 1
+        RMCSkillVehicles: 1

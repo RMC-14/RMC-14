@@ -54,7 +54,7 @@
 - type: entity
   parent: RMCDropshipAttachmentElectronicSystem
   id: RMCDropShipLZDetector
-  name: AN/AVD-60 LZ detector.
+  name: AN/AVD-60 LZ detector
   description: An electronic device linked to the dropship's camera system that lets you observe your landing zone mid-flight
   components:
   - type: Sprite

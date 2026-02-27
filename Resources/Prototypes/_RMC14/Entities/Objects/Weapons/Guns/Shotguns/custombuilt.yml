@@ -27,8 +27,6 @@
     modifiers:
       Burst:
         fireDelay: 0.1665
-  - type: GunDamageModifier
-    multiplier: 1
   - type: BallisticAmmoProvider
     cycleable: false
     whitelist:
@@ -41,20 +39,6 @@
         whitelist:
           tags:
           - RMCAttachmentRecoilCompensator
-          - RMCM5Bayonet
-      rmc-aslot-rail:
-        whitelist:
-          tags:
-          - RMCAttachmentRailFlashlight
-          - RMCAttachmentMagneticHarness
-      rmc-aslot-underbarrel:
-        whitelist:
-          tags:
-          - RMCAttachmentGyroscopicStabilizer
-          - RMCAttachmentFlashlightGrip
-          - RMCAttachmentAngledGrip
-          - RMCAttachmentVerticalGrip
-          - RMCAttachmentLaserSight
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.780, 0.06

@@ -30,7 +30,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly RMCSizeStunSystem _rmcSize = default!;
     [Dependency] private readonly StandingStateSystem _standing = default!;
@@ -109,7 +109,7 @@ public sealed class XenoRetrieveSystem : EntitySystem
 
             xeno.Comp.Visuals.Clear();
 
-            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero, out _))
+            foreach (var tile in _line.DrawLine(xeno.Owner.ToCoordinates(), target.ToCoordinates(), TimeSpan.Zero, xeno.Comp.Range, out _))
             {
                 xeno.Comp.Visuals.Add(Spawn(xeno.Comp.Visual, tile.Coordinates));
             }

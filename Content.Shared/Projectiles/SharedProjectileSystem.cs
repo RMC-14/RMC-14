@@ -1,6 +1,8 @@
 using System.Numerics;
 using Content.Shared._RMC14.Projectiles.Penetration;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
+using Content.Shared._RMC14.Xenonids.Damage;
+using Content.Shared._RMC14.Xenonids.Projectile;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Camera;
 using Content.Shared.Damage;
@@ -105,12 +107,34 @@ public abstract partial class SharedProjectileSystem : EntitySystem
             : new DamageSpecifier(ev.Damage);
         var deleted = Deleted(target);
 
-        var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
-        if (_guns.GunPrediction &&
-            TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
-            serverProjectile.Shooter is { } shooter)
+        // RMC14 this is already done on the server in TryChangeDamage.
+        if (_net.IsClient)
         {
-            filter = filter.RemovePlayer(shooter);
+            var modifyEvent = new DamageModifyEvent(ev.Damage, component.Shooter, uid);
+            RaiseLocalEvent(target, modifyEvent);
+            modifiedDamage = modifyEvent.Damage;
+        }
+
+        var popupEv = new ProjectileDamageDealtEvent(component.Shooter, modifiedDamage);
+            RaiseLocalEvent(target, ref popupEv);
+        //
+
+        var filter = Filter.Pvs(coordinates, entityMan: EntityManager);
+        if (_guns.GunPrediction)
+        {
+            // TODO RMC14 clean this up once gun prediction is using new lag compensation
+            if (TryComp(projectile, out PredictedProjectileServerComponent? serverProjectile) &&
+                serverProjectile.Shooter is { } shooter)
+            {
+                filter = filter.RemovePlayer(shooter);
+            }
+
+            if (_net.IsServer &&
+                TryComp(projectile, out XenoProjectileShotComponent? shot) &&
+                shot.Shooter is { } xenoShooter)
+            {
+                filter = filter.RemovePlayer(xenoShooter);
+            }
         }
 
         if (modifiedDamage is not null && (EntityManager.EntityExists(component.Shooter) || EntityManager.EntityExists(component.Weapon)))
@@ -169,7 +193,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         //     component.ProjectileSpent = true;
         // }
 
-        if (!deleted)
+        if (!deleted && filter.Count > 0)
         {
             _guns.PlayImpactSound(target, modifiedDamage, component.SoundHit, component.ForceSound, filter, projectile);
 

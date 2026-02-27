@@ -125,6 +125,11 @@
         NameColor = 1 << 21,
 
         /// <summary>
+        ///     Lets you to administer commendations.
+        /// </summary>
+        Commendations = 1 << 29,
+
+        /// <summary>
         ///     Lets you use the mentor help system.
         /// </summary>
         MentorHelp = 1 << 30,

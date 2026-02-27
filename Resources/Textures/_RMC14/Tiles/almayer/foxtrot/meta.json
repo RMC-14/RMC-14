@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/09a5191fb11aab8ddffe3f9be94292b53e4d96f6/icons/turf/almayer.dmi, Modified by Aurallianz",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "foxtrot_4"
+    },
+    {
+      "name": "foxtrot_5"
+    },
+    {
+      "name": "foxtrot_6"
+    },
+    {
+      "name": "foxtrot_7"
+    },
+    {
+      "name": "foxtrotcorner_0"
+    },
+    {
+      "name": "foxtrotcorner_1"
+    },
+    {
+      "name": "foxtrotcorner_2"
+    },
+    {
+      "name": "foxtrotcorner_3"
+    },
+    {
+      "name": "foxtrotfull"
+    },
+    {
+      "name": "foxtrot_0"
+    },
+    {
+      "name": "foxtrot_1"
+    },
+    {
+      "name": "foxtrot_2"
+    },
+    {
+      "name": "foxtrot_3"
+    }
+  ]
+}

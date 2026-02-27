@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/c81728b30ea930721b71221aa36e2bdd8c1f3eec/icons/obj/items/clothing/uniforms.dmi, https://github.com/cmss13-devs/cmss13/blob/c81728b30ea930721b71221aa36e2bdd8c1f3eec/icons/mob/humans/onmob/uniform_0.dmi, sprites modified by github noctyrnal",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-INNERCLOTHING",
+      "directions": 4
+    },
+    {
+      "name": "jacket-equipped-INNERCLOTHING",
+      "directions": 4
+    }
+  ]
+}

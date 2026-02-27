@@ -56,11 +56,13 @@
           - RMCAttachmentExtendedBarrel
           - RMCAttachmentRecoilCompensator
           - RMCAttachmentSuppressor
+          - RMCAttachmentSuppressorCompact
       rmc-aslot-rail:
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS5MicroRedDotSight
           - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         locked: true
@@ -102,6 +104,14 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
+
+- type: entity
+  parent: CMMagazinePistolMK80
+  id: RMCMagazinePistolMK80Empty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
 
 - type: entity
   id: RMCCartridgePistol9mmSquashHead

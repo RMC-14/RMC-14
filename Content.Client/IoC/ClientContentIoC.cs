@@ -1,6 +1,7 @@
 using Content.Client._RMC14.Commendations;
 using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.PlayTimeTracking;
+using Content.Client._RMC14.TacticalMap;
 using Content.Client.Administration.Managers;
 using Content.Client.Changelog;
 using Content.Client.Chat.Managers;
@@ -70,6 +71,7 @@ namespace Content.Client.IoC
             collection.Register<LinkAccountManager>();
             collection.Register<RMCPlayTimeManager>();
             collection.Register<CommendationsManager>();
+            collection.Register<TacticalMapSettingsManager>();
         }
     }
 }

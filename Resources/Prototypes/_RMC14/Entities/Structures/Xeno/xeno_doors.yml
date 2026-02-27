@@ -1,6 +1,6 @@
 - type: entity
   parent: CMBaseXenoStructure
-  id: DoorXenoResin # TODO RMC14 make them only buildable next to other resin walls
+  id: DoorXenoResin
   name: resin door
   description: That's a resin door.
   placement:
@@ -85,6 +85,7 @@
       types:
         Slash: 600
   - type: XenoConstructionRequiresSupport
+  - type: XenoConstructionMinRange
   - type: ExplosionResistance
     damageCoefficient: 7.5 # Doors take 15x explosive damage, resin doors reduce that by 50%
   - type: XenoConstruct
@@ -96,6 +97,7 @@
   - type: XenoToggleChargingDamage
     stageLoss: 2
     destroy: true
+  - type: XenoRecentlyBuiltPreventCollisions
 
 - type: entity
   parent: DoorXenoResin
@@ -144,3 +146,57 @@
     scalingCost: true
   - type: XenoStructureUpgradeable
     to: null
+
+- type: entity
+  parent: DoorXenoResin
+  id: DoorXenoResinWeedbound
+  name: Weedbound Resin Door
+  description: That's a resin door, bound to weeds.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
+    layers:
+    - state: "weedbound_resin"
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: "closed_unlit"
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: "closed_unlit"
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: Door
+    openSpriteState: "weedbound_resinopen"
+    closedSpriteState: "weedbound_resin"
+    openingSpriteState: "weedbound_resinopening"
+    closingSpriteState: "weedbound_resinclosing"
+  - type: XenoStructureUpgradeable
+    to: DoorXenoResinThickWeedbound
+    cost: 25
+  - type: WeedboundWall
+
+- type: entity
+  parent: DoorXenoResinThick
+  id: DoorXenoResinThickWeedbound
+  name: Thick Weedbound Resin Door
+  description: A thick resin door, bound to weeds.
+  components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
+    layers:
+    - state: "thick_weedbound_resin"
+      map: ["enum.DoorVisualLayers.Base"]
+    - state: "closed_unlit"
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: "closed_unlit"
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+  - type: Door
+    openSpriteState: "thick_weedbound_resinopen"
+    closedSpriteState: "thick_weedbound_resin"
+    openingSpriteState: "thick_weedbound_resinopening"
+    closingSpriteState: "thick_weedbound_resinclosing"
+  - type: WeedboundWall
+    isThickVariant: true

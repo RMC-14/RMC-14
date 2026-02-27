@@ -634,7 +634,7 @@
   - type: Sprite
     state: chevrechaud-cotton
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true - Disabled for RMC
   - type: Tag
     tags:
     - ClothMade
@@ -827,7 +827,7 @@
   - type: Sprite
     state: croissant-cotton
   - type: Food
-    requiresSpecialDigestion: true
+    # requiresSpecialDigestion: true -Disabled for RMC
   - type: Tag
     tags:
     - ClothMade
@@ -885,7 +885,7 @@
     sprite: Objects/Consumable/Food/Baked/misc.rsi
     state: grilled-cheese-cotton
   - type: Food
-    requiresSpecialDigestion: true
+    #requiresSpecialDigestion: true -Disabled for RMC
   - type: Tag
     tags:
     - ClothMade

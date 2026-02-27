@@ -4,4 +4,4 @@ namespace Content.Shared._RMC14.Telephone;
 ///     Raised when playing rotary telephone ring sound.
 /// </summary>
 [ByRefEvent]
-public readonly record struct RMCTelephoneRingEvent(EntityUid Receiving);
+public readonly record struct RMCTelephoneRingEvent(EntityUid Receiving, EntityUid Calling, EntityUid Actor);

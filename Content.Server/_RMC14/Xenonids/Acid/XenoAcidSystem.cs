@@ -1,4 +1,4 @@
-﻿using Content.Shared._RMC14.Entrenching;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Light.Components;
@@ -42,6 +42,7 @@ public sealed class XenoAcidSystem : SharedXenoAcidSystem
             Acid = args.Acid,
             Dps = args.Dps,
             Damage = new(PrototypeManager.Index<DamageTypePrototype>(CorrosiveAcidDamageTypeStr), args.Dps * CorrosiveAcidTickDelaySeconds),
+            Strength = args.AcidStrength,
             AcidExpiresAt = _timing.CurTime + TimeSpan.FromSeconds(CorrosiveAcidDamageTimeSeconds),
         });
 

@@ -4,7 +4,9 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Robust.Shared.Physics.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Foldable;
 
@@ -14,6 +16,14 @@ public sealed class DeployFoldableSystem : EntitySystem
     [Dependency] private readonly FoldableSystem _foldable = default!;
     [Dependency] private readonly AnchorableSystem _anchorable = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+
+    // RMC14
+    [Dependency] private readonly TagSystem _tag = default!;
+
+    private static readonly ProtoId<TagPrototype> CatwalkTag = "Catwalk";
+    private static readonly ProtoId<TagPrototype> StairsTag = "RMCStairs";
+    private static readonly ProtoId<TagPrototype> CarpetTag = "Carpet";
+    // RMC14
 
     public override void Initialize()
     {
@@ -63,7 +73,7 @@ public sealed class DeployFoldableSystem : EntitySystem
             return;
 
         // Don't do anything unless you clicked on the floor.
-        if (args.Target.HasValue)
+        if (args.Target.HasValue && !_tag.HasAnyTag(args.Target.Value, CatwalkTag, StairsTag, CarpetTag)) // RMC14
             return;
 
         if (!TryComp<FoldableComponent>(ent, out var foldable))

@@ -21,7 +21,7 @@ public sealed class XenoSoakSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly RMCActionsSystem _rmcActions = default!;
+    [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedRMCDamageableSystem _rmcDamageable = default!;
 
     public override void Initialize()

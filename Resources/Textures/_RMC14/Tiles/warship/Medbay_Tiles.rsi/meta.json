@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "taken from https://github.com/RMC-14/RMC-14/blob/873199f94484fb7304ed37dd4b793906639b1100/Resources/Textures/_RMC14/Tiles/almayer/dark_sterile.png modified by Xelidayne",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "peach_metal_sterile_q412"
+    },
+    {
+      "name": "peach_metal_sterile_q1234"
+    },
+    {
+      "name": "rose_metal_sterile_q1"
+    },
+    {
+      "name": "rose_metal_sterile_q2"
+    },
+    {
+      "name": "rose_metal_sterile_q3"
+    },
+    {
+      "name": "rose_metal_sterile_q4"
+    },
+    {
+      "name": "rose_metal_sterile_q12"
+    },
+    {
+      "name": "rose_metal_sterile_q23"
+    },
+    {
+      "name": "rose_metal_sterile_q34"
+    },
+    {
+      "name": "rose_metal_sterile_q41"
+    },
+    {
+      "name": "rose_metal_sterile_q123"
+    },
+    {
+      "name": "rose_metal_sterile_q234"
+    },
+    {
+      "name": "rose_metal_sterile_q341"
+    },
+    {
+      "name": "rose_metal_sterile_q412"
+    },
+    {
+      "name": "rose_metal_sterile_q1234"
+    },
+    {
+      "name": "sky_metal_sterile_q1"
+    },
+    {
+      "name": "sky_metal_sterile_q2"
+    },
+    {
+      "name": "sky_metal_sterile_q3"
+    },
+    {
+      "name": "sky_metal_sterile_q4"
+    },
+    {
+      "name": "sky_metal_sterile_q12"
+    },
+    {
+      "name": "sky_metal_sterile_q23"
+    },
+    {
+      "name": "sky_metal_sterile_q34"
+    },
+    {
+      "name": "sky_metal_sterile_q41"
+    },
+    {
+      "name": "sky_metal_sterile_q123"
+    },
+    {
+      "name": "sky_metal_sterile_q234"
+    },
+    {
+      "name": "sky_metal_sterile_q341"
+    },
+    {
+      "name": "sky_metal_sterile_q412"
+    },
+    {
+      "name": "sky_metal_sterile_q1234"
+    },
+    {
+      "name": "ash_metal_sterile_q1"
+    },
+    {
+      "name": "ash_metal_sterile_q2"
+    },
+    {
+      "name": "ash_metal_sterile_q3"
+    },
+    {
+      "name": "ash_metal_sterile_q4"
+    },
+    {
+      "name": "ash_metal_sterile_q12"
+    },
+    {
+      "name": "ash_metal_sterile_q23"
+    },
+    {
+      "name": "ash_metal_sterile_q34"
+    },
+    {
+      "name": "ash_metal_sterile_q41"
+    },
+    {
+      "name": "ash_metal_sterile_q123"
+    },
+    {
+      "name": "ash_metal_sterile_q234"
+    },
+    {
+      "name": "ash_metal_sterile_q341"
+    },
+    {
+      "name": "ash_metal_sterile_q412"
+    },
+    {
+      "name": "ash_metal_sterile_q1234"
+    },
+    {
+      "name": "mauve_metal_sterile_q1"
+    },
+    {
+      "name": "mauve_metal_sterile_q2"
+    },
+    {
+      "name": "mauve_metal_sterile_q3"
+    },
+    {
+      "name": "mauve_metal_sterile_q4"
+    },
+    {
+      "name": "mauve_metal_sterile_q12"
+    },
+    {
+      "name": "mauve_metal_sterile_q23"
+    },
+    {
+      "name": "mauve_metal_sterile_q34"
+    },
+    {
+      "name": "mauve_metal_sterile_q41"
+    },
+    {
+      "name": "mauve_metal_sterile_q123"
+    },
+    {
+      "name": "mauve_metal_sterile_q234"
+    },
+    {
+      "name": "mauve_metal_sterile_q341"
+    },
+    {
+      "name": "mauve_metal_sterile_q412"
+    },
+    {
+      "name": "mauve_metal_sterile_q1234"
+    },
+    {
+      "name": "peach_metal_sterile_q1"
+    },
+    {
+      "name": "peach_metal_sterile_q2"
+    },
+    {
+      "name": "peach_metal_sterile_q3"
+    },
+    {
+      "name": "peach_metal_sterile_q4"
+    },
+    {
+      "name": "peach_metal_sterile_q12"
+    },
+    {
+      "name": "peach_metal_sterile_q23"
+    },
+    {
+      "name": "peach_metal_sterile_q34"
+    },
+    {
+      "name": "peach_metal_sterile_q41"
+    },
+    {
+      "name": "peach_metal_sterile_q123"
+    },
+    {
+      "name": "peach_metal_sterile_q234"
+    },
+    {
+      "name": "peach_metal_sterile_q341"
+    }
+  ]
+}

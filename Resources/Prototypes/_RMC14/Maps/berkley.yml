@@ -7,7 +7,7 @@
   maxRandomOffset: 0
   randomRotation: false
   stations:
-    Savannah:
+    Berkley:
       stationProto: StandardUNMCWarship
       components:
         - type: StationNameSetup
@@ -46,7 +46,7 @@
             # Requisition
             CMQuartermaster: [1, 1]
             CMCargoTech: [1, 1]
-            CMMessTech: [1, 1]
+#            CMMessTech: [1, 1]
 
             # Marines
             CMSquadLeader: [4, 4]

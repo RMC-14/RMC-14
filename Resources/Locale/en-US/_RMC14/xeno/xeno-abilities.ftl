@@ -14,8 +14,12 @@ rmc-xeno-not-enough-fury = We're not angry enough for this!
 rmc-xeno-fury-increase-user = We are overcome with rage!
 
 # Acid reserves
-rmc-xeno-not-enough-acid = Your don't have enough acid built up!
-rmc-xeno-acid-increase-user = You feel your acid reserves increase!
+rmc-xeno-not-enough-acid = We don't have enough acid built up!
+rmc-xeno-acid-increase-user = We feel your acid reserves increase!
+
+# Shards
+rmc-xeno-not-enough-shards = We don't have enough shards!
+rmc-xeno-shards-increase-user = We grow more shards!
 
 # Construction
 cm-xeno-choose-resin-structure = Choose Resin Structure
@@ -73,8 +77,9 @@ rmc-xeno-weeds-blocked = We can't do that here.
 
 # Corrosive acid
 cm-xeno-acid-not-corrodible = We cannot dissolve {THE($target)}!
-cm-xeno-acid-already-corroding = {THE($target)} already has corrosive acid on it!
+cm-xeno-acid-already-corroding = {CAPITALIZE(THE($target))} already has corrosive acid on it!
 rmc-xeno-acid-structure-unmeltable = We can only melt barricades and items!
+rmc-xeno-acid-too-weak = {CAPITALIZE(THE($target))} is too tough to be melted by our weak acid.
 
 # Paralyzing Slash
 cm-xeno-paralyzing-slash-activate = Our next slash will apply neurotoxin!
@@ -379,7 +384,25 @@ rmc-xeno-fling-too-big = {CAPITALIZE(THE($target))} is too big for us to fling!
 
 # Gut
 rmc-gut-start-self = We plunge our claws into the body of this unfortunate host, starting to tear them in half!
-rmc-gut-start-others = {$user} plunges their claws into the body of {$target}, starting to tear them in half!
+rmc-gut-start-xenos = {$user} plunges their claws into the body of this unfortunate host, starting to tear them in half!
+rmc-gut-start-marines = The Queen plunges their claws into the body of {$target}, starting to tear them in half!
 
 rmc-gut-finish-self = We tear this pathetic host in half!!
-rmc-gut-finish-others = {$user} tears {$target} in half!!
+rmc-gut-finish-xenos = {$user} tears the pathetic host in half!!
+rmc-gut-finish-marines = The Queen tears {$target} in half!!
+
+# Shed Spikes
+rmc-shed-spikes = We have shed our shards and cannot gain any more for 30 seconds!
+rmc-shed-spikes-back = We can gain shards again!
+
+# Spike Shield
+rmc-spike-shield-self = We ruffle our bone-shard quills, forming a defensive shell!
+rmc-spike-shield-others = {$user} ruffles its bone-shard quills, forming a defensive shell!
+rmc-spike-shield-hit = {$user} sprays bone quills everywhere!
+
+# Doomed
+rmc-doomed-fail = It's not working...
+
+# Destroy
+rmc-destroy-cant-reach = We don't have a clear path to that location!
+rmc-destroy-cant-area = We can't leap to that area!

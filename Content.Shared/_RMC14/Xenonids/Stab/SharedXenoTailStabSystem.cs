@@ -220,7 +220,8 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                 if (_net.IsServer)
                     _popup.PopupEntity(msg, stab, stab);
 
-                msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", stab));
+                var userName = Identity.Name(stab, EntityManager, hit);
+                msg = Loc.GetString("rmc-xeno-tail-stab-target", ("user", userName));
                 _popup.PopupEntity(msg, stab, hit, PopupType.MediumCaution);
 
                 var othersFilter = Filter.PvsExcept(stab).RemovePlayerByAttachedEntity(hit);
@@ -229,8 +230,9 @@ public abstract class SharedXenoTailStabSystem : EntitySystem
                     if (other.AttachedEntity is not { } otherEnt)
                         continue;
 
+                    userName = Identity.Name(stab, EntityManager, otherEnt);
                     hitName = Identity.Name(hit, EntityManager, otherEnt);
-                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", stab), ("target", hitName));
+                    msg = Loc.GetString("rmc-xeno-tail-stab-others", ("user", userName), ("target", hitName));
                     _popup.PopupEntity(msg, stab, othersFilter, true, PopupType.SmallCaution);
                 }
             }

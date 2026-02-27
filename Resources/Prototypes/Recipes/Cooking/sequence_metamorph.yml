@@ -37,14 +37,14 @@
   - !type:SequenceLength
     range:
       min: 2
-      max: 3
-  - !type:IngredientsWithTags # 1 meat cutlet
+      max: 2
+  - !type:IngredientsWithTags # 1 meat cutlet, cant do normal leeway because it conflicts with several other recipes.
     tags:
     - Cooked
     - Meat
     count:
       min: 1
-      max: 2
+      max: 1
   - !type:LastElementHasTags # last bun
     tags:
     - Bun
@@ -61,17 +61,16 @@
   - !type:IngredientsWithTags # 1 chicken meat
     tags:
     - Cooked
-    - Cutlet
     - Meat
     - Chicken
     count:
       min: 1
       max: 2
-  - !type:FoodHasReagent # 5 +- 2 mayo
+  - !type:FoodHasReagent # 3 +- 2 mayo
     reagent: Mayo
     count:
-      min: 3
-      max: 7
+      min: 1
+      max: 5
   - !type:LastElementHasTags # last bun
     tags:
     - Bun

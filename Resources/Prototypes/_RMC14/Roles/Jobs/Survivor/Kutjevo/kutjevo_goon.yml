@@ -1,0 +1,30 @@
+﻿- type: job
+  parent: CMSurvivorGoon
+  id: RMCSurvivorKutjevoGoon
+  name: rmc-job-name-pmc-corporate-goon
+  description: cm-job-description-survivor
+  startingGear: RMCGearSurvivorKutjevoGoon
+  hasIcon: true
+  spawnMenuRoleName: We-Ya Goon (Kutjevo Survivor)
+
+- type: startingGear
+  parent: RMCGearSurvivorGoon
+  id: RMCGearSurvivorKutjevoGoon
+  equipment:
+    eyes: RMCGogglesKutjevo
+    head: RMCArmorHelmetPMCKutjevoSecurity
+    mask: RMCMaskKutjevoRespirator
+    jumpsuit: RMCJumpsuitVeteranPMCKutjevo
+    ears: RMCHeadsetDistressWeYa
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorKutjevoGoon
+  name: kutjevo goon spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorKutjevoGoon
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv
