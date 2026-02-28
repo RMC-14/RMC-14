@@ -93,7 +93,7 @@
   name: synthetic colonist spawn point
   components:
   - type: SpawnPoint
-    job_id: RMCJobSyntheticColony
+    job_id: RMCSyntheticColony
   - type: Sprite
     state: syn_spawn
 
