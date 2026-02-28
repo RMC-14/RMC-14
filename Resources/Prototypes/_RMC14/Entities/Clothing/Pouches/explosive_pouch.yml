@@ -14,6 +14,7 @@
       tags:
       - Grenade
       - RMCExplosiveBreachingCharge
+      - RMCExplosiveClaymoreMine
   - type: FixedItemSizeStorage
 
 - type: entity
@@ -59,4 +60,13 @@
   - type: StorageFill
     contents:
     - id: RMCExplosivePlastic
+      amount: 4
+
+- type: entity
+  parent: RMCPouchExplosive
+  id: RMCPouchExplosiveFilledHIRR
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBatonSlugHIRR
       amount: 4

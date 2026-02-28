@@ -1,4 +1,4 @@
-using Content.Shared._RMC14.Marines.Skills;
+﻿using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Sentry.Laptop;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Ranged.Components;
@@ -81,6 +81,12 @@ public sealed partial class SentryComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan AlertCooldown = TimeSpan.FromSeconds(5);
+
+    /// <summary>
+    ///     Can the sentry be picked up or toggled on/off.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool IsLocked;
 }
 
 [Serializable, NetSerializable]
