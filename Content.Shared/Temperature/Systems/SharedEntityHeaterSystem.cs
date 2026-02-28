@@ -92,7 +92,7 @@ public abstract partial class SharedEntityHeaterSystem : EntitySystem
             EntityHeaterSetting.Low => max / 3f,
             EntityHeaterSetting.Medium => max * 2f / 3f,
             EntityHeaterSetting.High => max,
-            _ => 0.01f,
+            EntityHeaterSetting.Off => 0.01f,
         };
     }
 }

@@ -14,6 +14,8 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
 {
     [Dependency] private readonly TemperatureSystem _temperature = default!;
 
+    private float _grillpower; //SurfinNinja- HOW THE HELL DOES THIS SPAGHETTI WORK? GOD I WISH I KNEW HOW TO CODE
+
     public override void Initialize()
     {
         base.Initialize();
@@ -25,21 +27,21 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
     {
         // Set initial power level
         if (TryComp<RMCPowerReceiverComponent>(ent, out var power)) //Changed for RMC
-            ent.Comp.Power = (int)SettingPower(ent.Comp.Setting, ent.Comp.Power);
+            _grillpower = SettingPower(ent.Comp.Setting, ent.Comp.Power);
     }
 
     public override void Update(float deltaTime)
     {
         var query = EntityQueryEnumerator<EntityHeaterComponent, ItemPlacerComponent, RMCPowerReceiverComponent>(); //Changed for RMC
-        while (query.MoveNext(out _, out _, out var placer, out var power))
+        while (query.MoveNext(out var entity, out var settingPower, out var placer, out _))
         {
-            if (power.Mode == RMCPowerMode.Off) //Changed for RMC
+            if (settingPower.Setting == EntityHeaterSetting.Off) //Changed for RMC
                 continue;
 
             // don't divide by total entities since it's a big grill
             // excess would just be wasted in the air but that's not worth simulating
             // if you want a heater thermomachine just use that...
-            var energy = power.ActiveLoad * deltaTime; //Changed for RMC
+            var energy = _grillpower * deltaTime; //Changed for RMC
             foreach (var ent in placer.PlacedEntities)
             {
                 _temperature.ChangeHeat(ent, energy);
@@ -58,6 +60,6 @@ public sealed class EntityHeaterSystem : SharedEntityHeaterSystem
         if (!TryComp<RMCPowerReceiverComponent>(ent, out var power)) //Changed for RMC
             return;
 
-        ent.Comp.Power = (int)SettingPower(setting, ent.Comp.Power); //Changed for RMC
+        _grillpower = (int)SettingPower(setting, 2400f); //Changed for RMC
     }
 }
