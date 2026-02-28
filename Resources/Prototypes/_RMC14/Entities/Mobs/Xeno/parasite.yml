@@ -5,7 +5,7 @@
   - CMXenoFlammable
   - RMCXenoVentCrawler
   id: CMXenoParasiteBase
-  name: Parasite
+  name: Child
   components:
   - type: GuideHelp
     guides:
