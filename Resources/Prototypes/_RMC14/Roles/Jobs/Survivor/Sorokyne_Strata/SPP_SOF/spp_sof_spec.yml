@@ -30,10 +30,6 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-spec
     - type: DemoSpecWhitelist
-    - type: GrenadeSpecWhitelist
-    - type: ScoutWhitelist
-    - type: SniperWhitelist
-    - type: PyroWhitelist
   hidden: true
 
 - type: startingGear
