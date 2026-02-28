@@ -136,10 +136,7 @@
       4: rmc-xeno-ancient-parasite
       5: rmc-xeno-prime-parasite
   - type: FixedIdentity
-    name: cm-job-name-xeno-parasite-xeno
-    whitelist:
-      components:
-      - Xeno
+    name: cm-job-name-xeno-parasite
   - type: VentCrawler
     ventCrawlIcon: parasite
   - type: Unshieldable
