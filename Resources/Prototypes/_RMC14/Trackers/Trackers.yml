@@ -150,6 +150,16 @@
   id: FORECONCommandingOfficer
   job: RMCSurvivorForeconCommander
   alert: SquadTrackerCommandingOfficer
+  
+- type: trackerMode
+  id: ParaTeamLeader
+  job: RMCSurvivorParaTeamLeader
+  alert: SquadTrackerParaTeamLeader
+
+- type: trackerMode
+  id: ParaCommander
+  job: RMCSurvivorParaCommander
+  alert: SquadTrackerCommandingOfficer
 
 - type: trackerMode
   id: RCMPVESectionLead

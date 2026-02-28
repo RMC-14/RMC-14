@@ -248,6 +248,58 @@
     trackerModes:
     - SquadLeader
     - FORECONCommandingOfficer
+      
+# Paramarine Hybrisa survivor insert
+- type: entity
+  parent: RMCHeadsetIconsPara
+  id: RMCHeadsetPara
+  name: paramarine headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
+  suffix: Survivor, Paramarine
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/headsets.rsi
+      state: vai_headset
+    - type: ContainerFill
+      containers:
+        key_slots:
+          - CMEncryptionKeyColony
+    - type: RMCHeadset
+      channels:
+        - RoyalMarine
+    - type: GrantSquadLeaderTracker
+      defaultMode: ParaTeamLeader
+      trackerModes:
+        - ParaTeamLeader
+        - ParaCommander
+
+- type: entity
+  parent: RMCHeadsetPara
+  id: RMCHeadsetParaTeamLead
+  name: paramarine team leader's headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear.
+  suffix: Survivor, Paramarine
+  components:
+    - type: RMCHeadset
+      channels:
+        - RoyalMarine
+      radioTextIncrease: 2
+    - type: GrantSquadLeaderTracker
+      defaultMode: ParaCommander
+          
+- type: entity
+  parent: RMCHeadsetPara
+  id: RMCHeadsetParaOfficer
+  name: paramarine officer's headset
+  description: A sleek headset used by the RCM's Paramarines. Low profile enough to fit under any headgear. This one is heavier with the weight of responsibility.
+  suffix: Survivor, Paramarine
+  components:
+    - type: RMCHeadset
+      channels:
+        - RoyalMarine
+      radioTextIncrease: 3
+    - type: GrantSquadLeaderTracker
+      defaultMode: ParaTeamLeader
 
 #for UNMC personnel
 - type: entity

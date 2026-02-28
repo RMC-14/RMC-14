@@ -38,27 +38,6 @@
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/beret_tl.rsi
 
-- type: entity
-  parent: RMCHeadRoyalBeret
-  id: RMCHeadEIAFBeret
-  name: EIAF beret
-  description: A distinctive crimson beret worn by the Extrasolar Imperial Airborne Force. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_beret.rsi
-
-- type: entity
-  parent: RMCHeadCapTSEPA
-  id: RMCHeadCapPeakedEIAF
-  name: EIAF officer's service cap
-  description: A distinguished service cap worn by officers of the Extrasolar Imperial Airborne Forces. Featuring a crimson band, gold EIAF emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s airborne command.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/eiaf_peaked.rsi
 
 # Royal marine helmets
 - type: entity
@@ -67,17 +46,17 @@
   name: royal L5A2 ballistic helmet
   description: A high-cut ballistic helmet. Designed to be used by Royal Crown Marines as part of the Kestrel armour system.
   components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
-  - type: CMArmor
-    bio: 10
-    explosionArmor: 20
-    # armor_energy = 15
-    # armor_internaldamage = 10
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/Royal/helmet.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: CMArmor
+      bio: 10
+      explosionArmor: 20
+      # armor_energy = 15
+      # armor_internaldamage = 10
 
 - type: entity
   parent: RMCHeadRoyalHelmet
@@ -85,22 +64,60 @@
   name: royal L5A3 ballistic helmet
   description: A high-cut ballistic helmet featuring an attached mandible. Designed to be used by Royal Crown Marines as part of the Kestrel armour system.
   components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    - type: CMArmor
+      melee: 30
+      bullet: 35
+      bio: 20
+      explosionArmor: 25
+      # armor_energy = 25
+
+# Paramarines
+- type: entity
+  parent: RMCHeadRoyalBeret
+  id: RMCHeadParaBeret
+  name: paramarine beret
+  description: A distinctive crimson beret worn by the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  suffix: Paramarine, Survivor
+  components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
-  - type: CMArmor
-    melee: 30
-    bullet: 35
-    bio: 20
-    explosionArmor: 25
-    # armor_energy = 25
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi
+    
+- type: entity
+  parent: RMCHeadRoyalBeret
+  id: RMCHeadParaBeretLead
+  name: paramarine team lead beret
+  description: A distinctive crimson beret worn by NCOs of the RCM's Paramarine regiments. Reinforced with flexible Kevlar, it offers minimal protection while maintaining a traditional and respected appearance.
+  suffix: Paramarine, Survivor, Team Leader
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi
+
+- type: entity
+  parent: RMCHeadCapTSEPA
+  id: RMCHeadCapPeakedPara
+  name: paramarine officer's service cap
+  description: A distinguished service cap worn by officers of the RCM's Paramarine regiments. Featuring a crimson band, gold RCM-P emblem, and a black patent peak, it reflects the discipline and authority of the Empire’s paramarine command.
+  suffix: Paramarine, Survivor, CO
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_peaked.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Head/Royal/para_peaked.rsi
 
 - type: entity
   parent: RMCHeadRoyalHelmet
   id: RMCHeadRoyalL1HelmetBallistic
   name: L1 ballistic helmet
   description: A versatile ballistic helmet designed by Weston-Yamada for general use across various branches of the TSE military and affiliated organizations. Drawing some design inspiration from the UNMC’s M10 Pattern Helmet, the L1 offers reliable protection against shrapnel and ballistic threats..
+  suffix: Paramarine, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/l1ballistic.rsi
@@ -112,6 +129,7 @@
   id: RMCHeadRoyalFlightHelmet
   name: PH-4 'Spitfire' flight helmet
   description: Standard flight helmet used across the Three Suns Empire’s aerospace forces, from fighter pilots to atmospheric crews. This PH-4 variant is tailored for dropship operations in space, featuring reinforced plating, HUD optics, and encrypted comms. Essential for high-risk insertions, landings, and exfil missions. Nicknamed “Spitfire” for its reliability under fire.
+  suffix: Paramarine, Survivor
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/flighthelmet.rsi

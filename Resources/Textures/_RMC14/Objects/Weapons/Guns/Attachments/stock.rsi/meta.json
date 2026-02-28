@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/stock.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/f34d783a28859a36813c88778d57c38655076eb0/icons/obj/items/weapons/guns/attachments/stock.dmi, all m42a2 wooden stock camo types edited by SG6732",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e38a6a747b200b3854888a3eacd18b47992d066/icons/obj/items/weapons/guns/attachments/stock.dmi, https://github.com/cmss13-devs/cmss13-pve/blob/f34d783a28859a36813c88778d57c38655076eb0/icons/obj/items/weapons/guns/attachments/stock.dmi, all m42a2 wooden stock camo types edited by SG6732, m16a5-stock modified from m16a5 taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7e3da429d0abfe55f0d948bb689bd7b49f3f304f/icons/obj/items/weapons/guns/guns_by_faction/colony/assault_rifles.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -126,6 +126,9 @@
     },
     {
       "name": "m16-folding"
+    },
+    {
+      "name": "m16a5-stock"
     },
     {
       "name": "boomslang-stock"

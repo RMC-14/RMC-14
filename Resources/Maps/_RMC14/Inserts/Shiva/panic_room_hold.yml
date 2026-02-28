@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/18/2025 20:41:36
-  entityCount: 463
+  time: 02/16/2026 02:09:59
+  entityCount: 483
 maps: []
 grids:
 - 2
@@ -107,6 +107,16 @@ entities:
     - type: Transform
       pos: 16.5,3.5
       parent: 2
+  - uid: 464
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 2
+  - uid: 481
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 2
 - proto: BedrollFolded
   entities:
   - uid: 102
@@ -134,6 +144,16 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 4.5,13.5
+      parent: 2
+    - type: SpriteSetRenderOrder
+      offset: -0.7,-0.4
+- proto: CMBarricadeMetal
+  entities:
+  - uid: 465
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 10.5,18.5
       parent: 2
 - proto: CMBedsheetWhite
   entities:
@@ -193,6 +213,14 @@ entities:
     - type: Transform
       pos: 13.5,3.5
       parent: 2
+- proto: CMChairComfy
+  entities:
+  - uid: 479
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 7.5,5.5
+      parent: 2
 - proto: CMChairComfyOrange
   entities:
   - uid: 431
@@ -251,6 +279,12 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 14.5,16.5
+      parent: 2
+  - uid: 482
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,3.5
       parent: 2
 - proto: CMChairWood
   entities:
@@ -648,6 +682,17 @@ entities:
     - type: Transform
       pos: 16.5,12.5
       parent: 2
+  - uid: 467
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 8.5,18.5
+      parent: 2
+  - uid: 468
+    components:
+    - type: Transform
+      pos: 7.5,19.5
+      parent: 2
 - proto: CMSheetMetal1
   entities:
   - uid: 342
@@ -674,6 +719,18 @@ entities:
     components:
     - type: Transform
       pos: 21.5,12.5
+      parent: 2
+- proto: CMSpawnPointPanicRoomSurvivor
+  entities:
+  - uid: 472
+    components:
+    - type: Transform
+      pos: 5.5,7.5
+      parent: 2
+  - uid: 473
+    components:
+    - type: Transform
+      pos: 13.5,6.5
       parent: 2
 - proto: CMTable
   entities:
@@ -1906,12 +1963,22 @@ entities:
     - type: Transform
       pos: 18.5,15.5
       parent: 2
+  - uid: 470
+    components:
+    - type: Transform
+      pos: 11.5,12.5
+      parent: 2
 - proto: RMCDecalSpawnerOilSplatters
   entities:
   - uid: 429
     components:
     - type: Transform
       pos: 24.5,8.5
+      parent: 2
+  - uid: 469
+    components:
+    - type: Transform
+      pos: 25.5,9.5
       parent: 2
 - proto: RMCDecalSpawnerXenoSplatters
   entities:
@@ -2159,8 +2226,8 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 74
           - 72
+          - 74
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -2194,21 +2261,21 @@ entities:
           showEnts: False
           occludes: True
           ents:
-          - 79
           - 80
           - 81
+          - 79
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-- proto: RMCMagazinePistolMK45
+- proto: RMCMagazinePistolHoldout
   entities:
-  - uid: 440
+  - uid: 228
     components:
     - type: Transform
       pos: 13.5,-0.5
       parent: 2
-  - uid: 442
+  - uid: 230
     components:
     - type: Transform
       pos: 15.5,0.5
@@ -2558,6 +2625,56 @@ entities:
     - type: Transform
       pos: 5.5,4.5
       parent: 2
+- proto: RMCSpawnPointSurvivorPanicRoomAssistantManager
+  entities:
+  - uid: 483
+    components:
+    - type: Transform
+      pos: 8.5,3.5
+      parent: 2
+- proto: RMCSpawnPointSurvivorPanicRoomCommando
+  entities:
+  - uid: 480
+    components:
+    - type: Transform
+      pos: 10.5,6.5
+      parent: 2
+- proto: RMCSpawnPointSurvivorShivasPanicRoomDoctor
+  entities:
+  - uid: 475
+    components:
+    - type: Transform
+      pos: 6.5,2.5
+      parent: 2
+  - uid: 476
+    components:
+    - type: Transform
+      pos: 11.5,3.5
+      parent: 2
+- proto: RMCSpawnPointSurvivorShivasPanicRoomEngineer
+  entities:
+  - uid: 471
+    components:
+    - type: Transform
+      pos: 2.5,5.5
+      parent: 2
+  - uid: 474
+    components:
+    - type: Transform
+      pos: 6.5,3.5
+      parent: 2
+- proto: RMCSpawnPointSurvivorShivasPanicRoomResearcher
+  entities:
+  - uid: 477
+    components:
+    - type: Transform
+      pos: 15.5,4.5
+      parent: 2
+  - uid: 478
+    components:
+    - type: Transform
+      pos: 7.5,5.5
+      parent: 2
 - proto: RMCStairs
   entities:
   - uid: 35
@@ -2902,9 +3019,9 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCWeaponPistolMK45
+- proto: RMCWeaponPistolHoldout
   entities:
-  - uid: 439
+  - uid: 229
     components:
     - type: Transform
       pos: 13.5,-0.5
@@ -2930,20 +3047,27 @@ entities:
     - type: Transform
       pos: 21.5,13.5
       parent: 2
-  - uid: 228
+- proto: RMCWindowFrameShiva
+  entities:
+  - uid: 439
     components:
     - type: Transform
       pos: 21.5,19.5
       parent: 2
-  - uid: 229
+  - uid: 440
     components:
     - type: Transform
       pos: 9.5,19.5
       parent: 2
-  - uid: 230
+  - uid: 442
     components:
     - type: Transform
       pos: 12.5,19.5
+      parent: 2
+  - uid: 466
+    components:
+    - type: Transform
+      pos: 7.5,19.5
       parent: 2
 - proto: WeaponRifleAR10
   entities:

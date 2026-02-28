@@ -248,7 +248,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/sound/weapons/gun_ak4047.ogg"
 
-- files: ["p90_shot.ogg"]
+- files: ["pdw90_shot.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/sound/weapons/p90.ogg"
@@ -317,3 +317,8 @@
   license: "CC0-1.0"
   copyright: "Created by pgi (freesound), modified by kleinerstation13 (Github)"
   source: "https://freesound.org/people/pgi/sounds/257962/"
+
+- files: [ "gun_l88" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Created by GreenFireSound, modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/GreenFireSound/sounds/396271/"

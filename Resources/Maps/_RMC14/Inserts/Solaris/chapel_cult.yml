@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/06/2026 19:14:59
-  entityCount: 225
+  time: 02/24/2026 19:15:59
+  entityCount: 224
 maps: []
 grids:
 - 1
@@ -23,7 +23,6 @@ tilemap:
   2: CMFloorSteelPlanetDarkish
   8: CMFloorSteelPlanetDelivery
   6: CMFloorSteelPlanetRed5
-  5: Plating
 entities:
 - proto: ""
   entities:
@@ -623,13 +622,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 15.5,8.5
-      parent: 1
-- proto: CMSpawnPointSurvivor
-  entities:
-  - uid: 225
-    components:
-    - type: Transform
-      pos: 7.5,3.5
       parent: 1
 - proto: CMTableWooden
   entities:

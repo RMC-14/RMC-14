@@ -195714,7 +195714,7 @@ entities:
     - type: Transform
       pos: -175.5,-169.5
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: RMCMagazineSMGPDW90
   entities:
   - uid: 1262
     components:

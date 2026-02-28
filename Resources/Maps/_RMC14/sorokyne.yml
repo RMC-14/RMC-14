@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/08/2026 01:26:44
-  entityCount: 34643
+  time: 02/14/2026 03:08:58
+  entityCount: 34645
 maps:
 - 1
 grids:
@@ -56479,7 +56479,7 @@ entities:
     - type: Transform
       pos: 138.5,120.5
       parent: 1
-- proto: CMVendorCola
+- proto: RMCVendorColaSPP
   entities:
   - uid: 2074
     components:
@@ -56568,7 +56568,7 @@ entities:
     - type: Transform
       pos: 179.5,9.5
       parent: 1
-- proto: CMVendorSnack
+- proto: RMCVendorSnackSPP
   entities:
   - uid: 2089
     components:
@@ -71057,6 +71057,8 @@ entities:
     - type: Transform
       pos: 119.5,44.5
       parent: 1
+    - type: Campfire
+      fuel: 5
 - proto: RMCCashRegisterOff
   entities:
   - uid: 4384
@@ -76098,7 +76100,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 7656.8256765
     - type: Door
-      secondsUntilStateChange: -11403.961
+      secondsUntilStateChange: -12565.437
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -76112,7 +76114,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 7656.8256765
     - type: Door
-      secondsUntilStateChange: -11403.961
+      secondsUntilStateChange: -12565.437
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -100488,6 +100490,20 @@ entities:
     components:
     - type: Transform
       pos: 146.5,139.5
+      parent: 1
+- proto: RMCMapInsertSorokyneSPPSOF
+  entities:
+  - uid: 34644
+    components:
+    - type: Transform
+      pos: 137.5,66.5
+      parent: 1
+- proto: RMCMapInsertSorokyneSPPSOFAlt
+  entities:
+  - uid: 34645
+    components:
+    - type: Transform
+      pos: 9.5,42.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:
@@ -128733,7 +128749,7 @@ entities:
     - type: Transform
       pos: 207.5,51.5
       parent: 1
-- proto: RMCVendorCigsWeYa
+- proto: RMCVendorCigsSPP
   entities:
   - uid: 12561
     components:

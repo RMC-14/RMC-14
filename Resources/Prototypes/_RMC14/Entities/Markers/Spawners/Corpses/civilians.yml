@@ -115,7 +115,7 @@
 - type: entity
   parent: RMCSpawnerCorpse
   id: RMCSpawnerCorpseUNRiotOfficer
-  name: Corpse Spawner - United Nations Riot Officer
+  name: Corpse Spawner - CMB Riot Control Officer
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseUnitedNationsRiotOfficer
@@ -123,7 +123,7 @@
 - type: entity
   parent: RMCSpawnerCorpseUNRiotOfficer
   id: RMCSpawnerCorpseUNRiotOfficerBurst
-  name: Corpse Spawner - United Nations Riot Officer
+  name: Corpse Spawner - CMB Riot Control Officer
   suffix: RMC14, Burst
   components:
   - type: CorpseSpawner

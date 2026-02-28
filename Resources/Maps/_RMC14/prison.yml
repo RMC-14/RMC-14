@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/08/2026 01:08:48
-  entityCount: 21844
+  time: 02/15/2026 19:41:09
+  entityCount: 21717
 maps:
 - 1
 grids:
@@ -96739,6 +96739,8 @@ entities:
     - type: Transform
       pos: 16.5,-52.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96759,6 +96761,8 @@ entities:
     - type: Transform
       pos: 16.5,-51.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96800,6 +96804,8 @@ entities:
     - type: Transform
       pos: 12.5,-49.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96821,6 +96827,8 @@ entities:
     - type: Transform
       pos: 10.5,-50.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96840,6 +96848,8 @@ entities:
     - type: Transform
       pos: 16.5,-50.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96863,6 +96873,8 @@ entities:
     - type: Transform
       pos: 13.5,-51.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96883,6 +96895,8 @@ entities:
     - type: Transform
       pos: 10.5,-52.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96900,6 +96914,8 @@ entities:
     - type: Transform
       pos: 10.5,-51.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96918,6 +96934,8 @@ entities:
     - type: Transform
       pos: 14.5,-51.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96940,6 +96958,8 @@ entities:
     - type: Transform
       pos: 12.5,-50.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -96958,6 +96978,8 @@ entities:
     - type: Transform
       pos: -75.5,-27.5
       parent: 1
+    - type: AccessReader
+      access: []
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -97220,6 +97242,13 @@ entities:
     components:
     - type: Transform
       pos: -27.5,-84.5
+      parent: 1
+- proto: RMCMapInsertFiorinaRiotInProgress
+  entities:
+  - uid: 21845
+    components:
+    - type: Transform
+      pos: 9.5,-40.5
       parent: 1
 - proto: RMCMapInsertFiorinaRocinanteCLF
   entities:

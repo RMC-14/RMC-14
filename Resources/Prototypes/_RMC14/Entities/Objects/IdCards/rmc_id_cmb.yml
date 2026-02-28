@@ -17,7 +17,7 @@
 - type: entity
   parent: RMCIDCardCMBDeputy
   id: RMCIDCardCMBRiotOfficer
-  name: CMB riot officer silver badge
+  name: CMB riot control officer silver badge
   description: The silver badge which represents that the wearer is a CMB Riot Control Officer. It is a sign of justice, authority, and protection. Protecting those who can't. This badge represents a commitment to a sworn oath always kept.
 
 - type: entity

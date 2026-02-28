@@ -1,0 +1,50 @@
+- type: entity
+  parent: BaseStorageItem
+  id: CMMedicalUpgradeKit
+  name: medical upgrade kit
+  description: This kit holds upgraded trauma and burn kits, for critical injuries.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/medical_upgrade_kit.rsi
+    layers:
+    - state: medical_upgrade_kit_base
+    - state: medical_upgrade_kit_open
+      map: [ "openLayer" ]
+      visible: false
+    - state: medical_upgrade_kit_closed
+      map: [ "closedLayer" ]
+      visible: false
+  - type: Item
+    size: Small
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,3,1 # 2 slots
+    whitelist:
+      tags:
+      - CMTraumaKit
+      - CMBurnKit
+  - type: FixedItemSizeStorage
+  - type: Tag
+    tags:
+    - CMMedicalUpgradeKit
+  - type: GenericVisualizer
+    visuals:
+      enum.SharedBagOpenVisuals.BagState:
+        openLayer:
+          Open: { visible: true }
+          Closed: { visible: false }
+        closedLayer:
+          Open: { visible: false }
+          Closed: { visible: true }
+  - type: Appearance
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 1000
+
+- type: Tag
+  id: CMMedicalUpgradeKit

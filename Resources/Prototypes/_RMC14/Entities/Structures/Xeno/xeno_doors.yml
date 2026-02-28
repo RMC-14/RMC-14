@@ -150,7 +150,7 @@
 - type: entity
   parent: DoorXenoResin
   id: DoorXenoResinWeedbound
-  name: Weedbound Resin Door
+  name: weedbound resin door
   description: That's a resin door, bound to weeds.
   components:
   - type: GuideHelp
@@ -178,7 +178,7 @@
 - type: entity
   parent: DoorXenoResinThick
   id: DoorXenoResinThickWeedbound
-  name: Thick Weedbound Resin Door
+  name: thick weedbound resin door
   description: A thick resin door, bound to weeds.
   components:
   - type: GuideHelp

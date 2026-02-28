@@ -180989,7 +180989,7 @@ entities:
     - type: Transform
       pos: -175.5,-169.5
       parent: 1
-- proto: RMCMagazineSMGP90
+- proto: RMCMagazineSMGPDW90
   entities:
   - uid: 4888
     components:
@@ -322016,7 +322016,7 @@ entities:
     - type: Transform
       pos: -215.5,-179.5
       parent: 1
-- proto: RMCWeaponSMGP90
+- proto: RMCWeaponSMGPDW90
   entities:
   - uid: 4886
     components:

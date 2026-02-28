@@ -507,6 +507,27 @@
     - RMCUniformUNSecurity
 
 - type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlB92FS
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackB92FS
+
+- type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlMK45
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackMK45
+
+- type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlM1984
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackM1984
+
+- type: entity
   parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]
   id: RMCJumpsuitCivilianJanitor
   name: janitor's jumpsuit

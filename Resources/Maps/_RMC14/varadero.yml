@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/08/2026 01:36:03
-  entityCount: 27342
+  time: 02/11/2026 23:33:10
+  entityCount: 27345
 maps:
 - 1
 grids:
@@ -151482,7 +151482,7 @@ entities:
       pos: 94.5,21.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -26837.312
+      secondsUntilStateChange: -26901.777
       state: Opening
   - uid: 20552
     components:
@@ -156422,7 +156422,7 @@ entities:
       pos: 73.5,59.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -76531.7
+      secondsUntilStateChange: -76596.164
       state: Opening
   - uid: 21267
     components:
@@ -171468,12 +171468,33 @@ entities:
     - type: Transform
       pos: 28.5,80.5
       parent: 1
+- proto: RMCMapInsertVaraderoAltHospital
+  entities:
+  - uid: 27344
+    components:
+    - type: Transform
+      pos: 46.5,84.5
+      parent: 1
 - proto: RMCMapInsertVaraderoCLFRaid
   entities:
   - uid: 27256
     components:
     - type: Transform
       pos: 8.5,66.5
+      parent: 1
+- proto: RMCMapInsertVaraderoEngiHold
+  entities:
+  - uid: 27343
+    components:
+    - type: Transform
+      pos: 46.5,68.5
+      parent: 1
+- proto: RMCMapInsertVaraderoResturant
+  entities:
+  - uid: 27345
+    components:
+    - type: Transform
+      pos: 84.5,106.5
       parent: 1
 - proto: RMCMarkerAreaLabel
   entities:

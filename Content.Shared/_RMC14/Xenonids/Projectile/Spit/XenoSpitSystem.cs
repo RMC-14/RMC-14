@@ -313,7 +313,8 @@ public sealed class XenoSpitSystem : EntitySystem
             1,
             Angle.Zero,
             ent.Comp.Speed,
-            distance
+            distance,
+            predicted: false
         );
 
         foreach (var action in _rmcActions.GetActionsWithEvent<XenoAcidBallActionEvent>(ent))

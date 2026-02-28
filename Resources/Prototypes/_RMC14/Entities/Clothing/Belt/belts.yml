@@ -887,30 +887,6 @@
 
 - type: entity
   parent: RMCBeltHolsterPistol
-  id: RMCBeltHolsterPistolEIAF
-  name: EIAF paratrooper belt
-  description: A sturdy belt fitted with a black leather holster designed for EIAF Paratroopers. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials—standard gear for Extrasolar Imperial Airborne Forces dropping into hostile territory.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
-  - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_eiaf.rsi
-  - type: ItemCamouflage
-    camouflageVariations: {}
-
-- type: entity
-  parent: RMCBeltHolsterPistolEIAF
-  id: RMCBeltHolsterPistolEIAFL54
-  suffix: Filled, L54
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCWeaponPistolL54
-    - id: RMCMagazinePistolL54
-      amount: 6
-
-- type: entity
-  parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolSPP
   name: Type 47-S pistol holster rig
   description: The Type 47-S is the standard load-bearing equipment of the SPP. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
@@ -1064,7 +1040,7 @@
     - id: RMCSpeedLoaderZHNK72
       amount: 6
     - id: RMCWeaponRevolverZHNK72
-
+          
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -1365,7 +1341,7 @@
     - id: RMCMK80
 
 - type: entity
-  parent: RMCBeltHolsterPistolTSE
+  parent: RMCBeltHolsterPistolRCM
   id: RMCMK80BeltRoyalFilled
   suffix: Filled, MK80
   components:
@@ -1958,6 +1934,289 @@
   - type: Tag
     tags:
     - RMCMachineGunnerRig
+      
+# RCM/Paramarines Belts
+
+- type: entity
+  parent: CMBeltMedical
+  id: RMCMedicalL75RCM
+  name: L75 pattern medical storage rig
+  description: The L75 is the standard load-bearing equipment of the RCM. It consists of a modular belt with various clips. This version is designed to transport medical supplies and pistol ammunition.
+  suffix: RCM, Medical
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_medical.rsi
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,13,5 # 21 slots
+      whitelist:
+        tags:
+          - CMMagazinePistol
+          - DiscreteHealthAnalyzer
+          - Dropper
+          - GlassBeaker
+          - Bottle
+          - PillPacket
+          - PillCanister
+          - Syringe
+          - CMSurgicalLine
+          - CMSynthGraft
+          - Brutepack
+          - CMBloodPack
+          - Gauze
+          - Ointment
+          - CMOintment
+          - CMTraumaKit
+          - CMBurnKit
+          #      - # TODO RMC14 splints
+          - CMAutoInjector
+          - CMRollerItem
+          - BodyBag
+          - RMCGlovesLatex
+          - SterileMask
+          - Hypospray
+          - CigPack
+          - RMCPenlight
+          - Flare
+          - RMCMiniTank
+          #      - # TODO RMC14 reagent analyzer
+          #      - # TODO RMC14 plant analyzer
+        components:
+          - Hypospray
+          - Defibrillator
+          - Pill
+          - RMCLighter
+            
+- type: entity
+  parent: RMCMedicalL75RCM
+  id: RMCMedicalL75RCMFillPara
+  suffix: Paramarine, Survivor, Filled, Medical
+  components:
+    - type: StorageFill
+      contents:
+        - id: CMPillCanisterBicaridine
+        - id: CMPillCanisterKelotane
+        # - id: CMPillCanisterTramadol
+        - id: CMPillCanisterTricordrazine
+        - id: CMTraumaKit10
+        - id: CMBurnKit10
+        # - id: 5 splints
+        - id: CMHealthAnalyzer
+          
+- type: entity
+  parent: CMBeltMarine
+  id: RMCBeltRCM
+  name: L70 pattern ammo load rig
+  description: Good for carrying around extra ammo in the heat of the jungle. Made of special rot-resistant fabric.
+  suffix: RCM, Ammo
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}         
+      
+- type: entity
+  parent: CMBeltBaseStorage
+  id: RMCBeltUtilityGeneralRCM
+  name: L26 general utility belt
+  description: A small, lightweight pouch that can be clipped onto armor to provide additional storage. This new RCM model, while uncomfortable, can also be clipped around the waist.
+  suffix: PVP, RCM
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+  - type: Clothing
+    slots:
+    - suitStorage
+    - belt
+    sprite: _RMC14/Objects/Clothing/Belt/rcm_general.rsi
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+      - 0,0,14,1 # 15 slots
+    blacklist:
+      tags:
+        - CMFirstAidKit
+        - RMCEngineerKit
+  - type: Tag
+    tags:
+    - RMCG8Pouch
+      
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolRCM
+  name: L80 general pistol holster rig
+  description: The L80 is the standard load-bearing equipment of the Royal Crown Marines. It consists of a modular belt with various clips. This version has a holster assembly that allows one to carry the most common pistols. It also contains side pouches that can store most pistol magazines.
+  suffix: RCM, Pistol Belt
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_rcm.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_rcm.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCBeltHolsterPistolPara
+  name: paramarine load bearing rig
+  description: A sturdy belt fitted with a black leather holster designed for RCM Paramarines. A large utility pouch and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
+  suffix: Paramarine, Survivor
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
+      layers:
+      - state: icon
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: warwick
+        map: [ "warwick_fill" ]
+        visible: false
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: l54
+        map: [ "l54_fill" ]
+      - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
+        state: icon-front
+        map: [ "holstered" ]
+      - state: half
+        map: [ "openLayer" ]
+      - state: full
+        map: [ "closedLayer" ]
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para.rsi
+    - type: ItemCamouflage
+      camouflageVariations: {}
+    - type: Storage # holds up to 7 mags plus gun
+      maxItemSize: Normal
+      grid:
+        - 0,0,15,1 # 8 slots
+      whitelist:
+        tags:
+          - Sidearm
+          - CMMagazinePistol
+          - RMCRevolver
+          - RMCMagazineRevolver
+      blacklist:
+        tags:
+          - RMCSmartPistol
+          - RMCMagazinePistolSU6
+    - type: FixedItemSizeStorage
+    - type: LimitedStorage
+      limits:
+        - popup: rmc-storage-limit-one-gun
+          whitelist:
+            tags:
+              - Sidearm
+              - RMCRevolver
+        - popup: rmc-storage-limit-max-loaders
+          count: 7
+          whitelist:
+            tags:
+              - CMMagazinePistol
+              - RMCMagazineRevolver
+    - type: CMHolster
+      whitelist:
+        tags:
+          - Sidearm
+    - type: ItemMapper
+      spriteLayers:
+        - holstered
+        - warwick_fill
+        - l54_fill
+      mapLayers:
+        holstered:
+          whitelist:
+            tags:
+              - Sidearm
+        warwick_fill:
+          whitelist:
+            tags:
+              - RMCWeaponRevolverWarwickMkVII
+        l54_fill:
+          whitelist:
+            tags:
+              - RMCWeaponPistolL54   
+
+- type: entity
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44
+  suffix: Paramarine, Survivor, Filled, Warwick
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRevolverWarwickMkVII
+        - id: RMCSpeedLoaderM44
+          amount: 7
+
+- type: entity
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaM44Random
+  suffix: Paramarine, Survivor, Random, Warwick
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponRevolverWarwickMkVII
+        - id: RMCSpeedLoaderM44
+        - id: RMCSpeedLoaderM44
+          prob: 0.66
+        - id: RMCSpeedLoaderM44
+          prob: 0.33
+
+- type: entity
+  parent: RMCBeltHolsterPistolPara
+  id: RMCBeltHolsterPistolParaCustom
+  name: paramarine custom load-bearing rig
+  description: A modified RCM Paramarine belt featuring a black leather holster with gold inlay, a large utility pouch, and several smaller compartments provide ample space for extra ammunition and field essentials — standard gear for Paramarines dropping into hostile territory.
+  suffix: Paramarine, Survivor, Filled, L54 Custom
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
+      layers:
+      - state: icon
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: warwick
+        map: [ "warwick_fill" ]
+        visible: false
+      - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+        state: l54
+        map: [ "l54_fill" ]
+      - sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
+        state: icon-front
+        map: [ "holstered" ]
+      - state: half
+        map: [ "openLayer" ]
+      - state: full
+        map: [ "closedLayer" ]
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Belt/holster_pistol_para_custom.rsi
+    - type: ItemCamouflage
+      camouflageVariations: { }
+    - type: StorageFill
+      contents:
+        - id: RMCWeaponPistolL54Custom
+        - id: RMCMagazinePistolL54Custom
+          amount: 7
+    - type: ItemMapper
+      spriteLayers:
+        - holstered
+        - warwick_fill
+        - l54_fill
+      mapLayers:
+        holstered:
+          whitelist:
+            tags:
+              - Sidearm
+        warwick_fill:
+          whitelist:
+            tags:
+              - RMCWeaponRevolverWarwickMkVII
+        l54_fill:
+          whitelist:
+            tags:
+              - RMCWeaponPistolL54
 
 # PVE RCM belts
 - type: entity
@@ -2030,7 +2289,7 @@
 
 - type: entity
   parent: RMCBeltHolsterPistolTSE
-  id: RMCBeltHolsterPistolRCM
+  id: RMCBeltHolsterPistolRCML29Filled
   name: L29 sidearm rig
   description: A dark brown leather pistol belt commonly issued to RCM officers. Although designed for the L14 service pistol, it accommodates most sidearms along with spare magazines. Standard issue across TSE law enforcement, military, and security forces.
   suffix: PVE, RCM, Filled
@@ -2041,6 +2300,20 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 5
+      
+- type: entity
+  parent: RMCBeltUtilityGeneralRCM
+  id: RMCBeltUtilityGeneralRCMPVE
+  suffix: PVE, RCM
+  components:
+    - type: Storage
+      maxItemSize: Normal
+      grid:
+        - 0,0,9,1 # 10 slots
+      blacklist:
+        tags:
+          - CMFirstAidKit
+          - RMCEngineerKit
 
 - type: Tag
   id: RMCNailgunHolster

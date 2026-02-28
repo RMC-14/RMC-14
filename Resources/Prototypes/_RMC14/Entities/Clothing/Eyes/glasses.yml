@@ -28,6 +28,17 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
 
 - type: entity
+  parent: CMGlassesSecurity
+  id: RMCGlassesSecuritySwat
+  name: tactical SWAT HUD
+  description: Flash-resistant goggles with inbuilt combat and security information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/swatgoggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/swatgoggles.rsi
+
+- type: entity
   parent: [ ClothingEyesBase , ShowMedicalIcons ]
   id: CMGlassesM42ScoutSight
   name: M96 scout sight

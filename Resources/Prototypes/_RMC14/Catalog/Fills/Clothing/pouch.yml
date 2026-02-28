@@ -34,12 +34,22 @@
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledP90
-  suffix: Filled, P90
+  id: RMCPouchMagazineFilledM16
+  suffix: Filled, M16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineSMGP90
+    - id: RMCMagazineRifleM16
+      amount: 3
+
+- type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledPDW90
+  suffix: Filled, PDW90
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGPDW90
       amount: 3
 
 - type: entity
@@ -106,8 +116,8 @@
 
 - type: entity
   parent: RMCPouchShotgun
-  id: RMCPouchShotgunFilledConstable
-  suffix: Filled, Constable
+  id: RMCPouchShotgunFilledPolicing
+  suffix: Filled, Policing
   components:
   - type: StorageFill
     contents:
@@ -117,6 +127,16 @@
       amount: 1
     - id: CMShellShotgunBeanbag
       amount: 1
+
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunFilledBeanbag
+  suffix: Filled, Beanbag
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 4
 
 # Large Shotgun Pouch
 - type: entity

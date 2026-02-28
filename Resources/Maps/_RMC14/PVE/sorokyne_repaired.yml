@@ -54689,7 +54689,7 @@ entities:
     - type: Transform
       pos: 138.5,120.5
       parent: 1
-- proto: CMVendorCola
+- proto: RMCVendorColaSPP
   entities:
   - uid: 2342
     components:
@@ -54778,7 +54778,7 @@ entities:
     - type: Transform
       pos: 179.5,9.5
       parent: 1
-- proto: CMVendorSnack
+- proto: RMCVendorSnackSPP
   entities:
   - uid: 2357
     components:
@@ -112759,8 +112759,6 @@ entities:
     - type: Transform
       pos: 23.5,129.5
       parent: 1
-- proto: RMCVendorCigsWeYa
-  entities:
   - uid: 2312
     components:
     - type: Transform

@@ -916,6 +916,22 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: ubs-l90-on
 
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL88Grip
+  name: L88 integrated foregrip
+  description: Oi, you bloody galah! Put this back on your rifle and get back to it!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: l88grip
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL88Grip
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -975,3 +991,6 @@
 
 - type: Tag
   id: RMCAttachmentL91Bipod
+
+- type: Tag
+  id: RMCAttachmentL88Grip
