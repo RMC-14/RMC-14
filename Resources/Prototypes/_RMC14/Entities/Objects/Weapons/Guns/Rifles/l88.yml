@@ -135,8 +135,9 @@
           - RMCAttachmentBipod
           - RMCAttachmentExtinguisher
           - RMCAttachmentLaserSight
-          - RMCAttachmentL90GL
-          - RMCAttachmentL90UBS
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-barrel: 0.84, 0
@@ -233,8 +234,9 @@
           - RMCAttachmentBipod
           - RMCAttachmentExtinguisher
           - RMCAttachmentLaserSight
-          - RMCAttachmentL90GL
-          - RMCAttachmentL90UBS
+          - RMCAttachmentFlamer
+          - RMCAttachmentU1GrenadeLauncher
+          - RMCAttachmentU7UnderbarrelShotgun
 
 # Magazines
 
