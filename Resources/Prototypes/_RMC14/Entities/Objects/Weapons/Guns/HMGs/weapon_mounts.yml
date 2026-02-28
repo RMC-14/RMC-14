@@ -13,7 +13,7 @@
     buckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_reload.ogg
     unbuckleSound: /Audio/_RMC14/Weapons/Guns/Reload/hpr_unload.ogg
     buckledAlertType: null
-    buckleOffset: "0,0.5"
+    buckleOffset: "0,0.48"
   - type: WeaponMount
   - type: Fixtures
     fixtures:
