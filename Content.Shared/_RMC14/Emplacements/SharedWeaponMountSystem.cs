@@ -726,6 +726,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private void OnChargeCollide(Entity<WeaponMountComponent> ent, ref XenoToggleChargingCollideEvent args)
     {
+        if (args.Charger.Comp.Stage <= 0)
+            return;
+
         UndeployMount(ent);
     }
 
