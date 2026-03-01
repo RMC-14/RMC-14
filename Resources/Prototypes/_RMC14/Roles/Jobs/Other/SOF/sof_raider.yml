@@ -41,8 +41,8 @@
   suffix: Role
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/OuterClothing/marsoc.rsi
-    state: icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: unmc_spawn
   - type: RandomHumanoidSpawner
     settings: RMCMarineRaider
 
