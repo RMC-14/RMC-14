@@ -13,6 +13,9 @@
   placement:
     mode: SnapgridCenter
   components:
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleDesigner
     - type: Transform
       anchored: true
     - type: Clickable
@@ -41,6 +44,9 @@
       soundGroups:
         Brute:
           collection: XenoMove
+    - type: RMCNightVisionVisible
+      priority: -1
+      transparency: 0.2
     - type: DesignNode
       nodeType: Construct
       boundXeno: null
@@ -79,7 +85,6 @@
   components:
     - type: DesignerRemoteThickenResin
       plasmaCost: 60
-      cooldown: 0.5
       doAfter: 1
       range: 10
     - type: Icon
@@ -104,6 +109,9 @@
       sprite: _RMC14/Structures/designer_nodes.rsi
     - type: Visibility
       layer: 32768
+    - type: RMCNightVisionVisible
+      priority: -1
+      transparency: 0.2
     - type: Tag
       tags:
         - HideContextMenu

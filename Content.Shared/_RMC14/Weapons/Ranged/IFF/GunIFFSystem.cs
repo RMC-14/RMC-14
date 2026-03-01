@@ -79,11 +79,17 @@ public sealed class GunIFFSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (!ent.Comp.Enabled)
-            return;
-
         foreach (var faction in ent.Comp.Factions)
         {
+            if (HasComp<EntityIFFComponent>(args.OtherEntity) && IsInFaction(args.OtherEntity, faction))
+            {
+                args.Cancelled = true;
+                return;
+            }
+
+            if (!ent.Comp.Enabled)
+                continue;
+
             if (IsInFaction(args.OtherEntity, faction))
             {
                 args.Cancelled = true;

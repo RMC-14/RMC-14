@@ -153,6 +153,9 @@
   name: Weedbound Resin Door
   description: That's a resin door, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
     layers:
@@ -178,6 +181,9 @@
   name: Thick Weedbound Resin Door
   description: A thick resin door, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_doors.rsi
     layers:

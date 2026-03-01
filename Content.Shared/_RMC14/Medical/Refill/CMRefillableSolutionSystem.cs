@@ -18,7 +18,6 @@ using System.Diagnostics.CodeAnalysis;
 using Robust.Shared.Prototypes;
 using Content.Shared.Verbs;
 using Content.Shared.DoAfter;
-using Content.Shared.Nutrition.Components;
 using Content.Shared.Chemistry.Reagent;
 using Robust.Shared.Audio.Systems;
 using Content.Shared.Tag;
@@ -137,15 +136,12 @@ public sealed class CMRefillableSolutionSystem : EntitySystem
 
         if (anyRefilled)
         {
+            Dirty(ent);
             var ev = new RefilledSolutionEvent();
             RaiseLocalEvent(args.Used, ref ev);
 
             _popup.PopupClient(Loc.GetString("cm-refillable-solution-whirring-noise", ("user", ent.Owner), ("target", fillable)), args.User, args.User);
-
-            if (_net.IsServer)
-                _audio.PlayPvs(ent.Comp.RefillSound, ent.Owner);
-
-            Dirty(ent);
+            _audio.PlayPredicted(ent.Comp.RefillSound, ent.Owner, args.User);
         }
         else
         {
