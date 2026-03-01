@@ -52,6 +52,3 @@
   - type: Sprite
     sprite: Objects/Misc/zipties.rsi
     state: cuff
-  - type: GuideHelp
-    guides:
-    - RMCGuideRoleMilitaryPolice
