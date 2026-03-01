@@ -102,8 +102,7 @@ public sealed class XenoBombardSystem : EntitySystem
         var projectile = Spawn(ent.Comp.Projectile, source);
         _hive.SetSameHive(ent.Owner, projectile);
 
-        var max = EnsureComp<ProjectileMaxRangeComponent>(projectile);
-        _rmcProjectile.SetMaxRange((projectile, max), direction.Length());
+        _rmcProjectile.SetMaxRange(projectile, direction.Length());
 
         _gun.ShootProjectile(projectile, direction, Vector2.Zero, ent, ent, speed: 7.5f);
         _audio.PlayEntity(ent.Comp.ShootSound, ent, ent);
