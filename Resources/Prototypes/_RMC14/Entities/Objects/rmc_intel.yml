@@ -20,6 +20,9 @@
   - type: Tag
     tags:
     - RMCIntelItem
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: RMCIntelReadableBase
@@ -116,6 +119,9 @@
   - type: IntelClues
     clues: 8
   - type: IntelSerial
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   parent: [CMHealthAnalyzer, RMCIntelRetrieveDeviceBase]
@@ -158,6 +164,9 @@
     state: terminal1_old
   - type: InteractionOutline
   - type: IntelConsole
+  - type: GuideHelp
+    guides:
+    - RMCIntel
 
 - type: entity
   id: RMCIntelTechTree

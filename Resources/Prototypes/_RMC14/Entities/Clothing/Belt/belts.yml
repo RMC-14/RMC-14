@@ -478,6 +478,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/mortar/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/mortar/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/mortar/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBeltMarine
@@ -515,6 +518,9 @@
       Desert: _RMC14/Objects/Clothing/Belt/smart_gun_operator/desert.rsi
       Urban: _RMC14/Objects/Clothing/Belt/smart_gun_operator/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Belt/smart_gun_operator/jungle-classic.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: entity
   parent: CMBeltMarine
@@ -577,6 +583,9 @@
     - RMCSmartGunSidearmHolster
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
 
 - type: Tag
   id: RMCSmartGunSidearmHolster
@@ -1040,7 +1049,7 @@
     - id: RMCSpeedLoaderZHNK72
       amount: 6
     - id: RMCWeaponRevolverZHNK72
-          
+
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -1934,7 +1943,7 @@
   - type: Tag
     tags:
     - RMCMachineGunnerRig
-      
+
 # RCM/Paramarines Belts
 
 - type: entity
@@ -1989,7 +1998,7 @@
           - Defibrillator
           - Pill
           - RMCLighter
-            
+
 - type: entity
   parent: RMCMedicalL75RCM
   id: RMCMedicalL75RCMFillPara
@@ -2005,7 +2014,7 @@
         - id: CMBurnKit10
         # - id: 5 splints
         - id: CMHealthAnalyzer
-          
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltRCM
@@ -2018,8 +2027,8 @@
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
-      camouflageVariations: {}         
-      
+      camouflageVariations: {}
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneralRCM
@@ -2045,7 +2054,7 @@
   - type: Tag
     tags:
     - RMCG8Pouch
-      
+
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolRCM
@@ -2138,7 +2147,7 @@
         l54_fill:
           whitelist:
             tags:
-              - RMCWeaponPistolL54   
+              - RMCWeaponPistolL54
 
 - type: entity
   parent: RMCBeltHolsterPistolPara
@@ -2271,7 +2280,7 @@
       components:
       - Gun
 
-- type: entity 
+- type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilled
   suffix: PVE, RCM, Filled
@@ -2300,7 +2309,7 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 5
-      
+
 - type: entity
   parent: RMCBeltUtilityGeneralRCM
   id: RMCBeltUtilityGeneralRCMPVE

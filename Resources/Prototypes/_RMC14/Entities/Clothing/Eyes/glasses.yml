@@ -131,6 +131,10 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleSGO
+
 
 - type: entity
   parent: ClothingEyesBase

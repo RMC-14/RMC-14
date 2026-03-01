@@ -27,6 +27,9 @@
       size: Normal
       sprite: _RMC14/Objects/Materials/Sheets/metal.rsi
     - type: Appearance
+    - type: GuideHelp
+      guides:
+      - RMCGuideRoleCombatTechnician
 
 - type: entity
   parent: CMSheetMetalBase

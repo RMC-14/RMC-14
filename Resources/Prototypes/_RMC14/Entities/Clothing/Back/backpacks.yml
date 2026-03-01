@@ -200,6 +200,9 @@
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/jungle-desert-classic.rsi
       Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/mortar/snow-urban.rsi
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleMortar
 
 - type: entity
   parent: CMBackpack
@@ -391,7 +394,7 @@
     - 0,0,17,1
   - type: StorageCloseOnMove
     skipInHand: true
-    
+
 - type: entity
   parent: RMCBackpackRCMMedium
   id: RMCBackpackRCMMediumPVP
@@ -424,7 +427,7 @@
     maxItemSize: Normal
     grid:
     - 0,0,23,1
-      
+
 - type: entity
   parent: RMCBackpackRCMLarge
   id: RMCBackpackRCMLargePVP
@@ -492,7 +495,7 @@
     - 0,0,23,1 # 24 Slots
 
 - type: entity
-  parent: RMCBackpackRCMMedicPVP 
+  parent: RMCBackpackRCMMedicPVP
   id: RMCBackpackRCMMedicPVPFilledParaMedic
   suffix: Filled, Paramarine Medic
   components:

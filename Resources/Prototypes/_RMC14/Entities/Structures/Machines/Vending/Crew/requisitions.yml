@@ -347,6 +347,9 @@
         box: RMCBatonSlugHIRR
         boxAmount: 3
         boxSlots: 3
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #AMMUNITION VENDOR
 - type: entity
@@ -579,6 +582,9 @@
         name: rifle ammunition box (10x24mm AP) (M54C)
         box: CMMagazineRifleM54CAP
         boxSlots: 15 # 600 / 40
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #ATTACHMENTS VENDOR
 - type: entity
@@ -680,6 +686,9 @@
         amount: 5
       - id: RMCAttachmentM44MagnumSharpshooterStock
         amount: 5
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions
 
 #UNIFORM VENDOR
 - type: entity
@@ -839,3 +848,6 @@
         amount: 10
       - id: RMCGuidebookSOP
         amount: 10
+  - type: GuideHelp
+    guides:
+    - RMCRequisitions

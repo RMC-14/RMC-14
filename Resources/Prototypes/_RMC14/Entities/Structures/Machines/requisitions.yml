@@ -91,7 +91,7 @@
     - OrderSender
   - type: GuideHelp
     guides:
-    - Cargo
+    - RMCRequisitions
   - type: CargoSellBlacklist
   - type: ApcPowerReceiver
     powerLoad: 0
