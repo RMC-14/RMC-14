@@ -11,5 +11,9 @@
   layers: [FactionSurvivor]
 
 - type: tacticalMapLayerSet
+  id: TacticalMapSetForecon
+  layers: [SquadFORECON]
+
+- type: tacticalMapLayerSet
   id: TacticalMapSetGhost
   layers: [Marines, Xenos]

@@ -21,9 +21,9 @@
     components:
     - type: TacticalMapUser
       actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
+      layerSets: [TacticalMapSetForecon]
     - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
+      layers: [SquadFORECON]
     - type: Skills
       skills:
         RMCSkillCqc: 5
@@ -99,5 +99,3 @@
     job_id: RMCSurvivorForeconSynth
   - type: Sprite
     state: syn_spawn
-
-

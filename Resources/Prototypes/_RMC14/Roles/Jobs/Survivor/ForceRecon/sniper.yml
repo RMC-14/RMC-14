@@ -10,9 +10,9 @@
     components:
     - type: TacticalMapUser
       actionId: RMCActionOpenTacticalMapMarine
-      layerSets: [TacticalMapSetSurvivor]
+      layerSets: [TacticalMapSetForecon]
     - type: TacticalMapLayerTracked
-      layers: [FactionSurvivor]
+      layers: [SquadFORECON]
     - type: Skills
       skills:
         RMCSkillEngineer: 1
@@ -66,5 +66,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hudsquad_spec_sniper
-
-

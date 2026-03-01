@@ -19,8 +19,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadAlpha
   canDraw: true
@@ -33,8 +31,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadBravo
   canDraw: true
@@ -47,8 +43,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadCharlie
   canDraw: true
@@ -61,8 +55,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadDelta
   canDraw: true
@@ -75,8 +67,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadEcho
   canDraw: true
@@ -89,8 +79,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadFoxtrot
   canDraw: true
@@ -103,8 +91,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadIntel
   canDraw: true
@@ -117,8 +103,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadSPP
   canDraw: true
@@ -131,8 +115,6 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadRoyalMarines
   canDraw: true
@@ -145,10 +127,20 @@
   sortOrder: 5
   kind: Squad
   group: Marines
-  parentLayer: Marines
-  requiresParentVisible: true
   visibility: SquadMembers
   squadId: SquadProvost
+  canDraw: true
+  canContainBlips: true
+
+- type: tacticalMapLayer
+  id: SquadFORECON
+  name: ui-tactical-map-layer-squad-forecon
+  logName: squad forecon
+  sortOrder: 5
+  kind: Squad
+  group: Marines
+  visibility: SquadMembers
+  squadId: SquadFORECON
   canDraw: true
   canContainBlips: true
 

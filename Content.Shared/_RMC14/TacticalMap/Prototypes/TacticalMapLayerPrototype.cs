@@ -30,13 +30,7 @@ public sealed partial class TacticalMapLayerPrototype : IPrototype
     public string? Group;
 
     [DataField]
-    public ProtoId<TacticalMapLayerPrototype>? ParentLayer;
-
-    [DataField]
     public TacticalMapLayerVisibility Visibility = TacticalMapLayerVisibility.All;
-
-    [DataField]
-    public bool RequiresParentVisible;
 
     [DataField]
     public EntProtoId<SquadTeamComponent>? SquadId;

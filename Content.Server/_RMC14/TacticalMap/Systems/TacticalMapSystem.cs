@@ -123,6 +123,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         SubscribeLocalEvent<TacticalMapTrackedComponent, RoleAddedEvent>(OnTrackedChanged);
         SubscribeLocalEvent<TacticalMapTrackedComponent, MindAddedMessage>(OnTrackedChanged);
         SubscribeLocalEvent<TacticalMapTrackedComponent, SquadMemberUpdatedEvent>(OnTrackedChanged);
+        SubscribeLocalEvent<TacticalMapUserComponent, SquadMemberUpdatedEvent>(OnUserSquadMemberUpdated);
+        SubscribeLocalEvent<TacticalMapUserComponent, SquadMemberRemovedEvent>(OnUserSquadMemberRemoved);
         SubscribeLocalEvent<TacticalMapTrackedComponent, EntParentChangedMessage>(OnTrackedChanged);
         SubscribeLocalEvent<SquadObjectivesChangedEvent>(OnSquadObjectivesChanged);
         SubscribeLocalEvent<TacticalMapLayerTrackedComponent, SquadMemberUpdatedEvent>(OnLayerTrackedSquadMemberUpdated);
@@ -196,7 +198,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         if (!TryResolveMap(user.Owner, user.Comp.Map, out map))
             return false;
 
-        if (user.Comp.Map != map.Owner) 
+        if (user.Comp.Map != map.Owner)
         {
             user.Comp.Map = map.Owner;
             Dirty(user);
@@ -515,6 +517,37 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         EnsureComp<ActiveTacticalMapUserComponent>(ent);
         RefreshUserVisibleLayers(ent);
         UpdateTacticalMapState(ent);
+    }
+
+    private void OnUserSquadMemberUpdated(Entity<TacticalMapUserComponent> ent, ref SquadMemberUpdatedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        RefreshUserVisibleLayers(ent);
+        var options = ent.Comp.LayerOptions;
+        var baseLayers = EnsureBaseLayers(ent);
+
+        if (TryGetViewerSquadLayer(ent.Owner, out var squadLayer) &&
+            options.Contains(squadLayer) &&
+            !ent.Comp.VisibleLayers.Contains(squadLayer))
+        {
+            ent.Comp.VisibleLayers.Add(squadLayer);
+            ApplyVisibleLayerSelection(ent, options, baseLayers);
+        }
+
+        if (TryResolveUserMap(ent, out var map))
+            UpdateUserData(ent, map.Comp);
+    }
+
+    private void OnUserSquadMemberRemoved(Entity<TacticalMapUserComponent> ent, ref SquadMemberRemovedEvent args)
+    {
+        if (_timing.ApplyingState)
+            return;
+
+        RefreshUserVisibleLayers(ent);
+        if (TryResolveUserMap(ent, out var map))
+            UpdateUserData(ent, map.Comp);
     }
 
     private void OnComputerBUIOpened(Entity<TacticalMapComputerComponent> ent, ref BoundUIOpenedEvent args)
@@ -915,7 +948,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         FilterSquadGroups(layers, allowedSquadGroups);
         ApplyLayerVisibilityRules(viewer, layers, accessLayers, includeAllSquads);
         FilterEmptySquadLayers(layers);
-        EnsureParentLayers(layers);
 
         return OrderLayers(layers, baseOrder);
     }
@@ -1054,23 +1086,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         return squadId != null && squadId == layer.SquadId.Value.Id;
     }
 
-    private void EnsureParentLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
-    {
-        var added = true;
-        while (added)
-        {
-            added = false;
-            foreach (var layerId in layers.ToArray())
-            {
-                if (!_prototypes.TryIndex(layerId, out var layer) || layer.ParentLayer == null)
-                    continue;
-
-                if (layer.RequiresParentVisible && layers.Add(layer.ParentLayer.Value))
-                    added = true;
-            }
-        }
-    }
-
     private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _layerAccessBuffer = new();
 
     private void AddLayerAccessLayers(EntityUid user, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
@@ -1102,11 +1117,19 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void AddViewerSquadLayer(EntityUid viewer, HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
     {
-        if (!_squad.TryGetMemberSquad(viewer, out var squad))
-            return;
-
-        if (TryGetSquadLayer(squad.Owner, out var layer))
+        if (TryGetViewerSquadLayer(viewer, out var layer))
             layers.Add(layer);
+    }
+
+    private bool TryGetViewerSquadLayer(EntityUid viewer, out ProtoId<TacticalMapLayerPrototype> layer)
+    {
+        if (!_squad.TryGetMemberSquad(viewer, out var squad))
+        {
+            layer = default;
+            return false;
+        }
+
+        return TryGetSquadLayer(squad.Owner, out layer);
     }
 
     private void AddAllSquadLayers(HashSet<ProtoId<TacticalMapLayerPrototype>> layers)
@@ -1216,11 +1239,20 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options,
         IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> baseLayers)
     {
-        var selected = user.Comp.VisibleLayers.Count == 0
+        var usingDefaults = user.Comp.VisibleLayers.Count == 0;
+        var selected = usingDefaults
             ? (baseLayers.Count > 0
                 ? new List<ProtoId<TacticalMapLayerPrototype>>(baseLayers)
                 : new List<ProtoId<TacticalMapLayerPrototype>>(options))
             : new List<ProtoId<TacticalMapLayerPrototype>>(user.Comp.VisibleLayers);
+
+        if (usingDefaults &&
+            TryGetViewerSquadLayer(user.Owner, out var squadLayer) &&
+            options.Contains(squadLayer) &&
+            !selected.Contains(squadLayer))
+        {
+            selected.Add(squadLayer);
+        }
 
         selected = selected.Distinct().Where(options.Contains).ToList();
         if (selected.Count == 0 && options.Count > 0)
@@ -1263,13 +1295,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         }
 
         EnsureActiveLayer(computer, options);
-    }
-
-    private List<ProtoId<TacticalMapLayerPrototype>> EnsureParentLayersSelected(List<ProtoId<TacticalMapLayerPrototype>> selected)
-    {
-        var set = new HashSet<ProtoId<TacticalMapLayerPrototype>>(selected);
-        EnsureParentLayers(set);
-        return set.ToList();
     }
 
     private void EnsureActiveLayer(Entity<TacticalMapUserComponent> user, IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
@@ -1371,9 +1396,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     }
 
     private List<ProtoId<TacticalMapLayerPrototype>> GetEffectiveVisibleLayers(
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers,
-        ProtoId<TacticalMapLayerPrototype>? activeLayer,
-        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> options)
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> visibleLayers)
     {
         return new List<ProtoId<TacticalMapLayerPrototype>>(GetVisibleLayers(visibleLayers));
     }
@@ -1826,22 +1849,113 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         return layer.Id;
     }
 
-    private void AddAlwaysVisibleBlips(ProtoId<TacticalMapLayerPrototype> layer, TacticalMapComponent map, Dictionary<int, TacticalMapBlip> blips)
+    private Dictionary<int, TacticalMapBlip> BuildBlipsFromLayers(
+        TacticalMapComponent map,
+        IReadOnlyCollection<ProtoId<TacticalMapLayerPrototype>> layers,
+        bool useLastUpdateBlips)
     {
-        if (!LayerAllowsBlipStorage(layer))
+        var blips = new Dictionary<int, TacticalMapBlip>();
+        foreach (var layer in layers)
+        {
+            if (!LayerAllowsBlipStorage(layer))
+                continue;
+
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            var sourceBlips = useLastUpdateBlips ? layerData.LastUpdateBlips : layerData.Blips;
+            foreach (var (id, blip) in sourceBlips)
+            {
+                blips.TryAdd(id, blip);
+            }
+        }
+
+        return blips;
+    }
+
+    private void BuildLineAndLabelState(
+        TacticalMapComponent map,
+        IReadOnlyList<ProtoId<TacticalMapLayerPrototype>> layers,
+        out List<TacticalMapLine> lines,
+        out Dictionary<Vector2i, TacticalMapLabelData> labels)
+    {
+        lines = new List<TacticalMapLine>();
+        labels = new Dictionary<Vector2i, TacticalMapLabelData>();
+
+        foreach (var layer in layers)
+        {
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            lines.AddRange(layerData.Lines);
+            foreach (var (pos, label) in layerData.Labels)
+            {
+                labels[pos] = label;
+            }
+        }
+    }
+
+    private bool TryFindBlipInLayers(
+        int entityId,
+        TacticalMapComponent map,
+        IReadOnlyCollection<ProtoId<TacticalMapLayerPrototype>> layers,
+        out TacticalMapBlip blip)
+    {
+        if (layers.Count == 0)
+        {
+            blip = default;
+            return false;
+        }
+
+        var orderedLayers = layers.ToList();
+        orderedLayers.Sort(CompareLayerOrder);
+
+        foreach (var layer in orderedLayers)
+        {
+            if (!map.Layers.TryGetValue(layer, out var layerData))
+                continue;
+
+            if (layerData.Blips.TryGetValue(entityId, out blip))
+                return true;
+        }
+
+        blip = default;
+        return false;
+    }
+
+    private void AddAlwaysVisibleBlips(
+        IReadOnlySet<ProtoId<TacticalMapLayerPrototype>> layers,
+        TacticalMapComponent map,
+        Dictionary<int, TacticalMapBlip> blips)
+    {
+        if (layers.Count == 0)
             return;
 
         var alwaysVisible = EntityQueryEnumerator<TacticalMapAlwaysVisibleComponent>();
         while (alwaysVisible.MoveNext(out var uid, out var comp))
         {
-            if (!comp.VisibleLayers.Contains(layer) || blips.ContainsKey(uid.Id))
+            if (blips.ContainsKey(uid.Id))
                 continue;
 
-            var blip = FindBlipInMap(uid.Id, map);
-            if (blip == null)
+            var candidateLayers = new List<ProtoId<TacticalMapLayerPrototype>>();
+            foreach (var layer in comp.VisibleLayers)
+            {
+                if (layers.Contains(layer) && LayerAllowsBlipStorage(layer))
+                    candidateLayers.Add(layer);
+            }
+
+            if (candidateLayers.Count == 0)
                 continue;
 
-            blips[uid.Id] = blip.Value;
+            if (TryFindBlipInLayers(uid.Id, map, candidateLayers, out var layerBlip))
+            {
+                blips[uid.Id] = layerBlip;
+                continue;
+            }
+
+            var fallback = FindBlipInMap(uid.Id, map);
+            if (fallback != null)
+                blips[uid.Id] = fallback.Value;
         }
     }
 
@@ -2064,14 +2178,26 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         AddLayerAccessLayers(ent.Owner, layerIds);
 
+        foreach (var (layerId, layerData) in tacticalMap.Layers)
+        {
+            if (layerIds.Contains(layerId) && LayerAllowsBlipStorage(layerId))
+                continue;
+
+            if (layerData.Blips.Remove(ent.Owner.Id))
+                updated = true;
+        }
+
         foreach (var layerId in layerIds)
         {
             if (!LayerAllowsBlipStorage(layerId))
                 continue;
 
             var layerData = EnsureLayer(tacticalMap, layerId);
-            layerData.Blips[ent.Owner.Id] = blip;
-            updated = true;
+            if (!layerData.Blips.TryGetValue(ent.Owner.Id, out var existing) || !existing.Equals(blip))
+            {
+                layerData.Blips[ent.Owner.Id] = blip;
+                updated = true;
+            }
         }
 
         if (updated)
@@ -2084,26 +2210,10 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var labels = EnsureComp<TacticalMapLabelsComponent>(user);
 
         RefreshUserVisibleLayers(user);
-        var visibleLayers = GetEffectiveVisibleLayers(user.Comp.VisibleLayers, user.Comp.ActiveLayer, user.Comp.LayerOptions);
+        var visibleLayers = GetEffectiveVisibleLayers(user.Comp.VisibleLayers);
         var blipLayers = ApplyLayerVisibilityRules(user.Owner, visibleLayers);
-        var blips = new Dictionary<int, TacticalMapBlip>();
-
-        foreach (var layer in blipLayers)
-        {
-            if (!LayerAllowsBlipStorage(layer))
-                continue;
-
-            if (map.Layers.TryGetValue(layer, out var layerData))
-            {
-                var sourceBlips = user.Comp.LiveUpdate ? layerData.Blips : layerData.LastUpdateBlips;
-                foreach (var (id, blip) in sourceBlips)
-                {
-                    blips.TryAdd(id, blip);
-                }
-            }
-
-            AddAlwaysVisibleBlips(layer, map, blips);
-        }
+        var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: !user.Comp.LiveUpdate);
+        AddAlwaysVisibleBlips(blipLayers, map, blips);
 
         AddSelfBlip(user.Owner, map, blips);
         FilterXenoBlipsForHive(user.Owner, blips);
@@ -2115,42 +2225,14 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         user.Comp.Blips = blips;
 
-        var combinedLines = new List<TacticalMapLine>();
-        var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
-
-        foreach (var layer in visibleLayers)
-        {
-            if (!map.Layers.TryGetValue(layer, out var layerData))
-                continue;
-
-            combinedLines.AddRange(layerData.Lines);
-            foreach (var (pos, label) in layerData.Labels)
-            {
-                combinedLabels[pos] = label;
-            }
-        }
-
+        BuildLineAndLabelState(map, visibleLayers, out var combinedLines, out var combinedLabels);
         lines.Lines = combinedLines;
         labels.Labels = combinedLabels;
 
         var activeLines = EnsureComp<TacticalMapActiveLayerLinesComponent>(user);
         var activeLabels = EnsureComp<TacticalMapActiveLayerLabelsComponent>(user);
         var activeLayers = GetActiveLayers(visibleLayers, user.Comp.ActiveLayer);
-        var activeLayerLines = new List<TacticalMapLine>();
-        var activeLayerLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
-
-        foreach (var layer in activeLayers)
-        {
-            if (!map.Layers.TryGetValue(layer, out var layerData))
-                continue;
-
-            activeLayerLines.AddRange(layerData.Lines);
-            foreach (var (pos, label) in layerData.Labels)
-            {
-                activeLayerLabels[pos] = label;
-            }
-        }
-
+        BuildLineAndLabelState(map, activeLayers, out var activeLayerLines, out var activeLayerLabels);
         activeLines.Lines = activeLayerLines;
         activeLabels.Labels = activeLayerLabels;
 
@@ -2199,11 +2281,8 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private TacticalMapBlip? FindBlipInMap(int entityId, TacticalMapComponent map)
     {
-        foreach (var layer in map.Layers.Values)
-        {
-            if (layer.Blips.TryGetValue(entityId, out var blip))
-                return blip;
-        }
+        if (TryFindBlipInLayers(entityId, map, map.Layers.Keys, out var blip))
+            return blip;
 
         return null;
     }
@@ -2275,66 +2354,24 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     protected override void UpdateMapData(Entity<TacticalMapComputerComponent> computer, TacticalMapComponent map)
     {
         RefreshComputerVisibleLayers(computer);
-        var visibleLayers = GetEffectiveVisibleLayers(computer.Comp.VisibleLayers, computer.Comp.ActiveLayer, computer.Comp.LayerOptions);
+        var visibleLayers = GetEffectiveVisibleLayers(computer.Comp.VisibleLayers);
         var blipLayers = ApplyLayerVisibilityRules(computer.Owner, visibleLayers);
 
-        var blips = new Dictionary<int, TacticalMapBlip>();
-        foreach (var layer in blipLayers)
-        {
-            if (!LayerAllowsBlipStorage(layer))
-                continue;
-
-            if (!map.Layers.TryGetValue(layer, out var layerData))
-                continue;
-
-            foreach (var (id, blip) in layerData.Blips)
-            {
-                blips.TryAdd(id, blip);
-            }
-        }
-
+        var blips = BuildBlipsFromLayers(map, blipLayers, useLastUpdateBlips: false);
         computer.Comp.Blips = blips;
         Dirty(computer);
 
         var lines = EnsureComp<TacticalMapLinesComponent>(computer);
         var labels = EnsureComp<TacticalMapLabelsComponent>(computer);
 
-        var combinedLines = new List<TacticalMapLine>();
-        var combinedLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
-
-        foreach (var layer in visibleLayers)
-        {
-            if (!map.Layers.TryGetValue(layer, out var layerData))
-                continue;
-
-            combinedLines.AddRange(layerData.Lines);
-            foreach (var (pos, label) in layerData.Labels)
-            {
-                combinedLabels[pos] = label;
-            }
-        }
-
+        BuildLineAndLabelState(map, visibleLayers, out var combinedLines, out var combinedLabels);
         lines.Lines = combinedLines;
         labels.Labels = combinedLabels;
 
         var activeLines = EnsureComp<TacticalMapActiveLayerLinesComponent>(computer);
         var activeLabels = EnsureComp<TacticalMapActiveLayerLabelsComponent>(computer);
         var activeLayers = GetActiveLayers(visibleLayers, computer.Comp.ActiveLayer);
-        var activeLayerLines = new List<TacticalMapLine>();
-        var activeLayerLabels = new Dictionary<Vector2i, TacticalMapLabelData>();
-
-        foreach (var layer in activeLayers)
-        {
-            if (!map.Layers.TryGetValue(layer, out var layerData))
-                continue;
-
-            activeLayerLines.AddRange(layerData.Lines);
-            foreach (var (pos, label) in layerData.Labels)
-            {
-                activeLayerLabels[pos] = label;
-            }
-        }
-
+        BuildLineAndLabelState(map, activeLayers, out var activeLayerLines, out var activeLayerLabels);
         activeLines.Lines = activeLayerLines;
         activeLabels.Labels = activeLayerLabels;
 
