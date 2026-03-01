@@ -6,7 +6,7 @@
   components:
   - type: Sprite
     # TODO: draw a sprite
-    sprite: Structures/Machines/electric_grill.rsi
+    sprite: _RMC14/Structures/Machines/electric_grill.rsi
     drawdepth: SmallObjects
     snapCardinals: true
     layers:
