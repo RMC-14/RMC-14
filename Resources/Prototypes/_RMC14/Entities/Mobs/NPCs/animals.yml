@@ -247,6 +247,7 @@
   - type: Inventory
     templateId: RMCCorgi
     speciesId: dog     
+  - type: DropHatOnDeadOrCrit
 
 
 - type: entity
@@ -372,6 +373,10 @@
   - type: Temperature
     heatDamageThreshold: 423
     coldDamageThreshold: 0
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
+  - type: DropHatOnDeadOrCrit
 
 - type: entity
   parent: RMCMobCatCalico
@@ -389,6 +394,10 @@
   - type: Temperature
     heatDamageThreshold: 423
     coldDamageThreshold: 0
+  - type: Inventory
+    templateId: RMCCat
+    speciesId: cat
+  - type: DropHatOnDeadOrCrit
 
 - type: entity
   parent: RMCMobCat
@@ -436,6 +445,7 @@
   - type: Inventory
     templateId: RMCFox
     speciesId: fox 
+  - type: DropHatOnDeadOrCrit
 
 # Spawners
 - type: entity
