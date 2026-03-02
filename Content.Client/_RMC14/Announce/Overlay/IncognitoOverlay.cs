@@ -28,7 +28,6 @@ public sealed class IncognitoOverlay : Control
     public float EyeBandHeightFraction { get; set; } = 0.18f;
     public float EyeBandOffsetFraction { get; set; } = -0.05f;
     public float EyeBandAlpha { get; set; } = 0.9f;
-    private bool _loggedOnce;
 
     public IncognitoOverlay()
     {
@@ -45,12 +44,6 @@ public sealed class IncognitoOverlay : Control
 
         var deltaTime = (float) _timing.FrameTime.TotalSeconds;
         _noiseTimer += deltaTime;
-
-        if (!_loggedOnce)
-        {
-            Logger.Info($"[IncognitoOverlay] Draw start rect={rect}, BaseAlpha={BaseAlpha}, NoiseIntensity={NoiseIntensity}, NoiseAlpha={NoiseAlpha}, NoiseUpdateFrequency={NoiseUpdateFrequency}");
-            _loggedOnce = true;
-        }
 
         // Base translucent cover.
         handle.DrawRect(rect, Color.Black.WithAlpha(BaseAlpha));

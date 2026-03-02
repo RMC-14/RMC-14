@@ -18,13 +18,13 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         }
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var style = context.Style;
 
         context.State.TypewriterTimer += deltaTime;
         if (context.State.TypewriterTimer < style.PrintSpeed)
-            return false;
+            return AnnouncementAnimationStatus.Running;
 
         context.State.TypewriterTimer = 0f;
 
@@ -33,19 +33,21 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         var currentChar = context.State.CurrentChar;
 
         if (currentLine >= cleanText.Length)
-            return true;
+            return AnnouncementAnimationStatus.Finished;
 
         var lineText = cleanText[currentLine];
         if (currentChar >= lineText.Length)
         {
             context.State.CurrentLine++;
             context.State.CurrentChar = 0;
-            return context.State.CurrentLine >= cleanText.Length;
+            return context.State.CurrentLine >= cleanText.Length
+                ? AnnouncementAnimationStatus.Finished
+                : AnnouncementAnimationStatus.Running;
         }
 
         context.State.CurrentChar++;
         UpdateDisplay(context);
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 
     private static void UpdateDisplay(AnnouncementAnimationContext context)

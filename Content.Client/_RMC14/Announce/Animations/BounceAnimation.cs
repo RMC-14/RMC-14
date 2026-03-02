@@ -12,22 +12,21 @@ public sealed class BounceAnimation : IAnnouncementAnimation
         context.State.CurrentBounceOffset = Vector2.Zero;
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationEnhancements;
         if (enhancements?.EnableBounce != true)
-            return true;
+            return AnnouncementAnimationStatus.Finished;
 
         var bounceCount = enhancements.BounceCount;
         var bounceHeight = enhancements.BounceHeight;
-        const float cycleDuration = 0.5f;
         var totalPhases = bounceCount * 2;
 
         if (context.State.BouncePhase >= totalPhases)
         {
             context.State.CurrentBounceOffset = Vector2.Zero;
             context.SetAllLabels();
-            return true;
+            return AnnouncementAnimationStatus.Finished;
         }
 
         context.State.BounceTimer += deltaTime * 4f;
@@ -41,6 +40,6 @@ public sealed class BounceAnimation : IAnnouncementAnimation
             context.State.BouncePhase++;
         }
 
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 }

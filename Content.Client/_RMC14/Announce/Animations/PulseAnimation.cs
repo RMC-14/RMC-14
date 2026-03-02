@@ -11,7 +11,7 @@ public sealed class PulseAnimation : IAnnouncementAnimation
         context.State.PulseAlpha = 1f;
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         const float pulseSpeed = 4.0f;
         const float pulseIntensity = 0.3f;
@@ -22,6 +22,6 @@ public sealed class PulseAnimation : IAnnouncementAnimation
         context.State.PulseAlpha = 0.7f + (pulseValue * 0.3f);
 
         context.SetAllLabels();
-        return false;
+        return AnnouncementAnimationStatus.Hold;
     }
 }

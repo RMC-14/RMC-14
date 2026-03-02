@@ -12,14 +12,21 @@ public sealed class SlideAnimation : IAnnouncementAnimation
         context.State.CurrentSlideOffset = context.State.SlideStartPosition;
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationEnhancements;
         if (enhancements?.EnableSlide != true)
-            return true;
+            return AnnouncementAnimationStatus.Finished;
 
         context.State.SlideTimer += deltaTime;
         var duration = enhancements.SlideDuration;
+        if (duration <= 0f)
+        {
+            context.State.CurrentSlideOffset = Vector2.Zero;
+            context.SetAllLabels();
+            return AnnouncementAnimationStatus.Finished;
+        }
+
         var progress = Math.Min(context.State.SlideTimer / duration, 1.0f);
 
         var currentOffset = Vector2.Lerp(context.State.SlideStartPosition, Vector2.Zero, progress);
@@ -28,9 +35,9 @@ public sealed class SlideAnimation : IAnnouncementAnimation
         if (progress >= 1.0f)
         {
             context.SetAllLabels();
-            return true;
+            return AnnouncementAnimationStatus.Finished;
         }
 
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 }

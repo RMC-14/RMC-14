@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-
 namespace Content.Client._RMC14.Announce.Animations;
 
 public sealed class HeartbeatAnimation : IAnnouncementAnimation
@@ -13,7 +11,7 @@ public sealed class HeartbeatAnimation : IAnnouncementAnimation
         ResetLabelMargins(context);
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         const float beatInterval = 1.2f;
         const float firstBeatOffset = 0.0f;
@@ -35,7 +33,7 @@ public sealed class HeartbeatAnimation : IAnnouncementAnimation
         ApplyLineOffsets(context, cycleTime, beatInterval);
 
         context.SetAllLabels();
-        return false;
+        return AnnouncementAnimationStatus.Hold;
     }
 
     private static void ApplyLineOffsets(AnnouncementAnimationContext context, float cycleTime, float beatInterval)

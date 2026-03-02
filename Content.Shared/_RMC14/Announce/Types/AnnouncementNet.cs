@@ -1,6 +1,7 @@
 using Robust.Shared.GameObjects;
 using Robust.Shared.Serialization;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 
 namespace Content.Shared._RMC14.Announce;
@@ -46,9 +47,13 @@ public sealed class AnnouncementNetMessage : EntityEventArgs
 public sealed class AnnouncementPreferenceNetMessage : EntityEventArgs
 {
     public AnnouncementDisplayPreference Preference { get; }
+    public Dictionary<string, AnnouncementDisplayPreference> Overrides { get; }
 
-    public AnnouncementPreferenceNetMessage(AnnouncementDisplayPreference preference)
+    public AnnouncementPreferenceNetMessage(
+        AnnouncementDisplayPreference preference,
+        Dictionary<string, AnnouncementDisplayPreference>? overrides = null)
     {
         Preference = preference;
+        Overrides = overrides ?? new Dictionary<string, AnnouncementDisplayPreference>();
     }
 }

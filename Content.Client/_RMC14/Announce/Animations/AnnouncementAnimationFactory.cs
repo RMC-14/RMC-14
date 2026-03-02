@@ -9,6 +9,7 @@ public static class AnnouncementAnimationFactory
     {
         return style.Animation switch
         {
+            AnnouncementAnimation.None => new NoneAnimation(),
             AnnouncementAnimation.Typewriter => new TypewriterAnimation(),
             AnnouncementAnimation.Glitch => new GlitchAnimation(),
             AnnouncementAnimation.Slide => new SlideAnimation(),
@@ -18,7 +19,7 @@ public static class AnnouncementAnimationFactory
             AnnouncementAnimation.Pulse => new PulseAnimation(),
             AnnouncementAnimation.Heartbeat => new HeartbeatAnimation(),
             AnnouncementAnimation.Warp => new WarpAnimation(),
-            _ => new TypewriterAnimation()
+            _ => new NoneAnimation()
         };
     }
 }

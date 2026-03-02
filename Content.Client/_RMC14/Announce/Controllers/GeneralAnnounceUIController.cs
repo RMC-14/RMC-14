@@ -7,10 +7,13 @@ namespace Content.Client._RMC14.Announce;
 
 public sealed class GeneralAnnounceUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
-    private readonly Queue<AnnouncementNetData> _queuedAnnouncements = new();
+    private const int MaxQueuedAnnouncements = 32;
+    private readonly List<QueuedAnnouncement> _queuedAnnouncements = new();
+    private long _nextOrder;
 
     public void OnStateEntered(GameplayState state)
     {
+        TryShowNextQueuedAnnouncement();
     }
 
     public void OnStateExited(GameplayState state)
@@ -34,7 +37,7 @@ public sealed class GeneralAnnounceUIController : UIController, IOnStateEntered<
         var screen = UIManager.ActiveScreen;
         if (screen == null)
         {
-            _queuedAnnouncements.Enqueue(announcement);
+            EnqueueAnnouncement(announcement);
             return;
         }
 
@@ -44,10 +47,9 @@ public sealed class GeneralAnnounceUIController : UIController, IOnStateEntered<
         widget.OnAnnouncementFinished += OnAnnouncementFinished;
 
         if (widget.ActiveAnnouncement != null &&
-            widget.ActiveAnnouncement.Data.CanBeInterrupted == false &&
-            announcement.Priority <= widget.ActiveAnnouncement.Data.Priority)
+            !CanInterrupt(widget.ActiveAnnouncement.Data, announcement))
         {
-            _queuedAnnouncements.Enqueue(announcement);
+            EnqueueAnnouncement(announcement);
             return;
         }
 
@@ -56,10 +58,108 @@ public sealed class GeneralAnnounceUIController : UIController, IOnStateEntered<
 
     private void OnAnnouncementFinished()
     {
-        if (_queuedAnnouncements.Count > 0)
-        {
-            var next = _queuedAnnouncements.Dequeue();
-            ShowAnnouncement(next);
-        }
+        TryShowNextQueuedAnnouncement();
     }
+
+    private void TryShowNextQueuedAnnouncement()
+    {
+        if (!TryDequeueNext(out var next))
+            return;
+        ShowAnnouncement(next);
+    }
+
+    private void EnqueueAnnouncement(AnnouncementNetData announcement)
+    {
+        var queued = new QueuedAnnouncement(announcement, _nextOrder++);
+
+        if (_queuedAnnouncements.Count >= MaxQueuedAnnouncements)
+        {
+            var lowestIndex = FindLowestPriorityIndex();
+            if (lowestIndex < 0 || !HasHigherQueuePriority(queued, _queuedAnnouncements[lowestIndex]))
+                return;
+
+            _queuedAnnouncements.RemoveAt(lowestIndex);
+        }
+
+        _queuedAnnouncements.Add(queued);
+    }
+
+    private bool TryDequeueNext(out AnnouncementNetData announcement)
+    {
+        announcement = default!;
+        if (_queuedAnnouncements.Count == 0)
+            return false;
+
+        var nextIndex = FindHighestPriorityIndex();
+        if (nextIndex < 0)
+            return false;
+
+        announcement = _queuedAnnouncements[nextIndex].Data;
+        _queuedAnnouncements.RemoveAt(nextIndex);
+        return true;
+    }
+
+    private int FindHighestPriorityIndex()
+    {
+        if (_queuedAnnouncements.Count == 0)
+            return -1;
+
+        var bestIndex = 0;
+        var best = _queuedAnnouncements[0];
+        for (var i = 1; i < _queuedAnnouncements.Count; i++)
+        {
+            var current = _queuedAnnouncements[i];
+            if (HasHigherQueuePriority(current, best))
+            {
+                best = current;
+                bestIndex = i;
+            }
+        }
+
+        return bestIndex;
+    }
+
+    private int FindLowestPriorityIndex()
+    {
+        if (_queuedAnnouncements.Count == 0)
+            return -1;
+
+        var worstIndex = 0;
+        var worst = _queuedAnnouncements[0];
+        for (var i = 1; i < _queuedAnnouncements.Count; i++)
+        {
+            var current = _queuedAnnouncements[i];
+            if (HasHigherQueuePriority(worst, current))
+            {
+                worst = current;
+                worstIndex = i;
+            }
+        }
+
+        return worstIndex;
+    }
+
+    private static bool HasHigherQueuePriority(QueuedAnnouncement incoming, QueuedAnnouncement current)
+    {
+        if (incoming.Data.Priority > current.Data.Priority)
+            return true;
+
+        if (incoming.Data.Priority < current.Data.Priority)
+            return false;
+
+        return incoming.Order < current.Order;
+    }
+
+    private static bool CanInterrupt(AnnouncementNetData current, AnnouncementNetData incoming)
+    {
+        if (!incoming.CanInterrupt)
+            return false;
+
+        if (current.CanBeInterrupted)
+            return true;
+
+        return incoming.Priority > current.Priority;
+    }
+
+    private readonly record struct QueuedAnnouncement(AnnouncementNetData Data, long Order);
 }

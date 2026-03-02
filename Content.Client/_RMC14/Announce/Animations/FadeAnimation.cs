@@ -10,7 +10,7 @@ public sealed class FadeAnimation : IAnnouncementAnimation
         context.State.FadeAlpha = 0f;
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         const float duration = 2.0f;
         context.State.FadeTimer += deltaTime;
@@ -21,9 +21,9 @@ public sealed class FadeAnimation : IAnnouncementAnimation
         if (progress >= 1.0f)
         {
             context.SetAllLabels();
-            return true;
+            return AnnouncementAnimationStatus.Finished;
         }
 
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 }

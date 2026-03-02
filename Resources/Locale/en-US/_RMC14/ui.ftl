@@ -110,3 +110,5 @@ rmc-ui-options-announcements-style-stylized = Stylized
 rmc-ui-options-announcements-style-default = Default
 rmc-ui-options-announcements-style-simplified = Simple
 rmc-ui-options-announcements-style-disabled = Disabled
+rmc-ui-options-announcements-style-per-announcement = Announcement visuals by source
+rmc-ui-options-announcements-style-inherit = Use global setting

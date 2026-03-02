@@ -31,7 +31,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
     private AnnouncementValidator _validator = default!;
     private AnnouncementPresetResolver _presetResolver = default!;
     private AnnouncementTargetFilter _targetFilter = default!;
-    private readonly Dictionary<NetUserId, AnnouncementDisplayPreference> _preferences = new();
+    private readonly Dictionary<NetUserId, AnnouncementClientPreferences> _preferences = new();
 
     private const float PvsCleanupBufferSeconds = 2.0f;
 
@@ -96,7 +96,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         var simplifiedSessions = new List<ICommonSession>();
         foreach (var session in filter.Recipients)
         {
-            var preference = GetPreference(session);
+            var preference = GetPreference(session, preset.ID);
             switch (preference)
             {
                 case AnnouncementDisplayPreference.Disabled:
@@ -391,10 +391,14 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
     private bool TryResolvePreset(string? presetId, out AnnouncementPresetPrototype preset)
     {
-        preset = _presetResolver.Resolve(presetId);
-        if (preset != null)
+        var resolved = _presetResolver.Resolve(presetId);
+        if (resolved != null)
+        {
+            preset = resolved;
             return true;
+        }
 
+        preset = default!;
         Log.Warning($"No valid preset found for announcement request with preset '{presetId}'");
         return false;
     }
@@ -541,10 +545,15 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         }
     }
 
-    private AnnouncementDisplayPreference GetPreference(ICommonSession session)
+    private AnnouncementDisplayPreference GetPreference(ICommonSession session, string presetId)
     {
-        if (_preferences.TryGetValue(session.UserId, out var preference))
-            return preference;
+        if (_preferences.TryGetValue(session.UserId, out var preferences))
+        {
+            if (preferences.Overrides.TryGetValue(presetId, out var overridePreference))
+                return overridePreference;
+
+            return preferences.GlobalPreference;
+        }
 
         return AnnouncementDisplayPreference.Default;
     }
@@ -590,6 +599,19 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
     private void OnAnnouncementPreference(AnnouncementPreferenceNetMessage msg, EntitySessionEventArgs args)
     {
-        _preferences[args.SenderSession.UserId] = msg.Preference;
+        var sanitizedOverrides = new Dictionary<string, AnnouncementDisplayPreference>();
+        foreach (var (key, value) in msg.Overrides)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+                continue;
+
+            sanitizedOverrides[key] = value;
+        }
+
+        _preferences[args.SenderSession.UserId] = new AnnouncementClientPreferences(msg.Preference, sanitizedOverrides);
     }
+
+    private sealed record AnnouncementClientPreferences(
+        AnnouncementDisplayPreference GlobalPreference,
+        Dictionary<string, AnnouncementDisplayPreference> Overrides);
 }

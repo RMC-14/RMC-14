@@ -6,9 +6,6 @@ namespace Content.Client._RMC14.Announce;
 public sealed class ActiveAnnouncement
 {
     public AnnouncementNetData Data { get; set; } = default!;
-    public float Priority { get; set; }
-    public bool CanInterrupt { get; set; }
-    public bool CanBeInterrupted { get; set; }
     public TimeSpan StartTime { get; set; }
     public int CurrentLine { get; set; }
     public int CurrentChar { get; set; }

@@ -1,28 +1,24 @@
 using Content.Client._RMC14.Announce.Animations;
 using Content.Client._RMC14.Announce.Effects;
 using Content.Shared._RMC14.Announce;
-using Robust.Client.UserInterface;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Announce;
 
 public sealed partial class AnnouncementWidget
 {
-    private IAnnouncementAnimation? _animation;
-    private readonly List<IAnnouncementVisualEffect> _effects = new();
-    private TimeSpan? _animationCompletedAt;
+    private readonly AnnouncementPlayback _playback = new();
+    private AnnouncementAnimationContext? _animationContext;
 
     private void ConfigureAnimationAndEffects()
     {
         if (ActiveAnnouncement == null)
             return;
 
-        _animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.Data.Style, _random);
-        _effects.Clear();
-        _effects.AddRange(AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.Data.Style));
-        _animationCompletedAt = null;
-
-        _animation?.Reset(CreateAnimationContext());
+        var animation = AnnouncementAnimationFactory.Create(ActiveAnnouncement.Data.Style, _random);
+        var effects = AnnouncementEffectsRegistry.BuildEffects(ActiveAnnouncement.Data.Style);
+        _animationContext = CreateAnimationContext();
+        _playback.Configure(animation, effects, _animationContext);
     }
 
     private void UpdateAnnouncement(float deltaTime, TimeSpan currentTime)
@@ -30,56 +26,19 @@ public sealed partial class AnnouncementWidget
         if (ActiveAnnouncement == null)
             return;
 
-        if (ActiveAnnouncement.State == AnnouncementState.Animating && _animation != null)
-        {
-            var ctx = CreateAnimationContext();
-            var finished = _animation.Update(ctx, deltaTime);
-            if (_animationCompletedAt == null && 
-                (ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Pulse ||
-                 ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Heartbeat ||
-                 ActiveAnnouncement.Data.Style.Animation == AnnouncementAnimation.Warp))
-            {
-                _animationCompletedAt = currentTime;
-            }
-            if (finished)
-            {
-                ActiveAnnouncement.State = AnnouncementState.Holding;
-                _animationCompletedAt = currentTime;
-                SetAllLabelsText();
-            }
-        }
-        if (_animationCompletedAt.HasValue)
-        {
-            var holdDuration = ActiveAnnouncement.Data.Style.HoldDuration;
-            var elapsedHold = (float) (currentTime - _animationCompletedAt.Value).TotalSeconds;
-            if (elapsedHold >= holdDuration)
-            {
-                FinishAnnouncement();
-                return;
-            }
-        }
-
-        ApplyVisualEffects(currentTime);
-    }
-
-    private void ApplyVisualEffects(TimeSpan currentTime)
-    {
-        if (ActiveAnnouncement == null)
+        if (_animationContext == null)
             return;
 
-        foreach (var label in _richTextLabels)
-        {
-            label.Modulate = ActiveAnnouncement.Data.Style.PrimaryColor;
-        }
-
-        var effectContext = new AnnouncementEffectContext(
+        _playback.Update(
+            _animationContext,
             ActiveAnnouncement.Data.Style,
             ActiveAnnouncement,
-            _richTextLabels);
-
-        foreach (var effect in _effects)
+            _richTextLabels,
+            currentTime,
+            deltaTime);
+        if (_playback.IsFinished)
         {
-            effect.Apply(effectContext, currentTime);
+            FinishAnnouncement();
         }
     }
 
@@ -102,7 +61,7 @@ public sealed partial class AnnouncementWidget
         if (style.AnimationEnhancements?.EnableSlide != true)
             return Vector2.Zero;
 
-        var screenSize = Parent is UIScreen screen ? screen.Size : new Vector2(1920, 1080);
+        var screenSize = ResolveScreenSize();
 
         return style.AnimationEnhancements.SlideFrom switch
         {

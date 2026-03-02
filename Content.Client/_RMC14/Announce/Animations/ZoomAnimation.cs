@@ -9,14 +9,21 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
         context.State.ZoomTimer = 0f;
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationEnhancements;
         if (enhancements?.EnableZoom != true)
-            return true;
+            return AnnouncementAnimationStatus.Finished;
 
         context.State.ZoomTimer += deltaTime;
         var duration = enhancements.ZoomDuration;
+        if (duration <= 0f)
+        {
+            context.State.ZoomCurrentScale = 1f;
+            context.SetAllLabels();
+            return AnnouncementAnimationStatus.Finished;
+        }
+
         var progress = Math.Min(context.State.ZoomTimer / duration, 1.0f);
 
         var startScale = enhancements.ZoomStartScale;
@@ -26,9 +33,9 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
         if (progress >= 1.0f)
         {
             context.SetAllLabels();
-            return true;
+            return AnnouncementAnimationStatus.Finished;
         }
 
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 }

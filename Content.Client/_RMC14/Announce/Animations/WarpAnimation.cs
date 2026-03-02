@@ -11,7 +11,7 @@ public sealed class WarpAnimation : IAnnouncementAnimation
         ResetLabelMargins(context);
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         const float waveSpeed = 2.5f;
         const float amplitude = 3.5f;
@@ -29,7 +29,7 @@ public sealed class WarpAnimation : IAnnouncementAnimation
             context.Labels[i].Margin = new Thickness(x, y, 0, 0);
         }
 
-        return false;
+        return AnnouncementAnimationStatus.Hold;
     }
 
     private static void ResetLabelMargins(AnnouncementAnimationContext context)

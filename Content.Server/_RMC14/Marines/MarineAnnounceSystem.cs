@@ -239,7 +239,7 @@ public sealed class MarineAnnounceSystem : SharedMarineAnnounceSystem
         var request = new AnnouncementRequest
         {
             Message = $"Overwatch transmits: {message}",
-            Preset = "MarineCommand",
+            Preset = "MarineOverwatch",
             Target = AnnouncementTarget.Marines,
             Title = title,
             ShowSprite = true,

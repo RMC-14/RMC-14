@@ -433,6 +433,12 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<AnnouncementDisplayPreference> RMCAnnouncementStyle =
         CVarDef.Create("rmc.announcement_style", AnnouncementDisplayPreference.Default, CVar.ARCHIVE | CVar.CLIENTONLY);
 
+    /// <summary>
+    /// Per-announcement display overrides keyed by announcement preset id.
+    /// </summary>
+    public static readonly CVarDef<string> RMCAnnouncementStyleOverrides =
+        CVarDef.Create("rmc.announcement_style_overrides", string.Empty, CVar.ARCHIVE | CVar.CLIENTONLY);
+
     public static readonly CVarDef<int> RMCSunsetDuration =
         CVarDef.Create("rmc.lighting_sunset_duration", 280, CVar.REPLICATED | CVar.SERVER);
 

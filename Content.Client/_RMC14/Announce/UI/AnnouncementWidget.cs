@@ -9,7 +9,6 @@ using Robust.Shared.IoC;
 using Robust.Shared.Maths;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using Robust.Shared.Log;
 using Robust.Client.ResourceManagement;
 using Robust.Shared.Prototypes;
 
@@ -17,6 +16,8 @@ namespace Content.Client._RMC14.Announce;
 
 public sealed partial class AnnouncementWidget : UIWidget
 {
+    private static readonly Vector2 FallbackScreenSize = new(1920f, 1080f);
+
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -30,12 +31,18 @@ public sealed partial class AnnouncementWidget : UIWidget
     private RichTextLabel[] _richTextLabels = Array.Empty<RichTextLabel>();
     private Control? _spriteContainer;
     private readonly List<Control> _textContainers = new();
+    private readonly TextLayoutBuilder _textLayoutBuilder;
+    private readonly DecalBuilder _decalBuilder;
+    private readonly SpriteBuilder _spriteBuilder;
     private bool _hasTitle;
     private int _titleOffset;
-    private int _incognitoDebugFrames;
+    private float _activeTextMaxWidth;
 
     public AnnouncementWidget()
     {
+        _decalBuilder = new DecalBuilder(this);
+        _spriteBuilder = new SpriteBuilder(this, _decalBuilder);
+        _textLayoutBuilder = new TextLayoutBuilder(this);
         Orientation = LayoutOrientation.Horizontal;
         HorizontalAlignment = HAlignment.Center;
         VerticalAlignment = VAlignment.Center;
@@ -50,9 +57,6 @@ public sealed partial class AnnouncementWidget : UIWidget
         ActiveAnnouncement = new ActiveAnnouncement
         {
             Data = announcement,
-            Priority = announcement.Priority,
-            CanInterrupt = announcement.CanInterrupt,
-            CanBeInterrupted = announcement.CanBeInterrupted,
             StartTime = _timing.CurTime,
             CurrentLine = 0,
             CurrentChar = 0,
@@ -84,12 +88,6 @@ public sealed partial class AnnouncementWidget : UIWidget
 
         UpdateAnnouncement(deltaTime, currentTime);
         UpdatePosition();
-
-        if (ActiveAnnouncement?.Data.IncognitoMask == true && _spriteContainer != null && _incognitoDebugFrames < 8)
-        {
-            Logger.Info($"[AnnouncementWidget] Frame incognito debug #{_incognitoDebugFrames}: sprite Desired={_spriteContainer.DesiredSize}, Pixel={_spriteContainer.PixelSize}, GlobalRect={_spriteContainer.GlobalPixelRect}, parent={_spriteContainer.Parent?.GetType().Name}, parentRect={( _spriteContainer.Parent as Control)?.GlobalPixelRect}, widgetRect={GlobalPixelRect}, position={Position}");
-            _incognitoDebugFrames++;
-        }
     }
 
     private void FinishAnnouncement()
@@ -101,6 +99,8 @@ public sealed partial class AnnouncementWidget : UIWidget
 
     private void CleanupCurrentAnnouncement()
     {
+        _playback.Clear();
+        _animationContext = null;
         ActiveAnnouncement = null;
         RemoveAllChildren();
         _textContainers.Clear();
@@ -109,7 +109,7 @@ public sealed partial class AnnouncementWidget : UIWidget
         Modulate = Color.White;
         _hasTitle = false;
         _titleOffset = 0;
-        _incognitoDebugFrames = 0;
+        _activeTextMaxWidth = 0f;
     }
 
     private string[] PreprocessText(string[] originalText)
@@ -128,6 +128,38 @@ public sealed partial class AnnouncementWidget : UIWidget
         if (string.IsNullOrEmpty(text))
             return text;
 
-        return System.Text.RegularExpressions.Regex.Replace(text, @"\[/?[^\]]*\]", "");
+        var tagStart = text.IndexOf('[');
+        if (tagStart == -1)
+            return text;
+
+        var sb = new System.Text.StringBuilder(text.Length);
+        var insideTag = false;
+
+        foreach (var c in text)
+        {
+            if (c == '[')
+            {
+                insideTag = true;
+                continue;
+            }
+
+            if (insideTag)
+            {
+                if (c == ']')
+                    insideTag = false;
+
+                continue;
+            }
+
+            sb.Append(c);
+        }
+
+        return sb.ToString();
     }
+
+    private Vector2 ResolveScreenSize()
+    {
+        return Parent is UIScreen screen ? screen.Size : FallbackScreenSize;
+    }
+
 }

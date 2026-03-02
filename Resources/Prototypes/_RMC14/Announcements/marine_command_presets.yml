@@ -16,7 +16,7 @@
     fontSize: 20
     lineHeight: 48
     printSpeed: 0.025
-    responsiveScaleFactor: 3
+    responsiveScaleFactor: 1.15
     holdDuration: 10
     shakeIntensity: 0.8
     flickerChance: 0
@@ -91,6 +91,101 @@
   canInterrupt: true
   canBeInterrupted: false
   aliases: ["command", "cmd", "hc", "marine_command"]
+  incognitoMask: false
+
+- type: announcementPreset
+  id: MarineOverwatch
+  name: "Marine Overwatch"
+  description: "Overwatch squad announcements"
+  target: Marines
+  defaultVariant: MarineCommandDefault
+  simplifiedVariant: MarineCommandSimplified
+  style:
+    animation: Typewriter
+    position: TopLeft
+    showBackground: false
+    backgroundAlpha: 0.7
+    backgroundColor: "#0a1a2d"
+    primaryColor: "#a8d6ff"
+    font: "Cozette"
+    fontSize: 20
+    lineHeight: 48
+    printSpeed: 0.025
+    responsiveScaleFactor: 1.15
+    holdDuration: 10
+    shakeIntensity: 0.8
+    flickerChance: 0
+    glitchChance: 0.01
+    showSpriteBox: true
+    spriteBoxColor: "#0a1a2d"
+    spriteBoxBorderColor: "#4a9eff"
+    spriteBoxBorderThickness: 2
+    spriteBoxPadding: 18
+    spriteGlow: true
+    spriteGlowColor: "#4a9eff"
+    spriteGlowIntensity: 0.6
+    showSpeakerName: true
+    speakerNameColor: "#ffffff"
+    speakerNameFontSize: 14
+    speakerNamePosition: Below
+    spritePosition: Left
+    spriteSpacing: 0
+    spriteDisplayMode: TopHalf
+    spriteScale: 1
+    uiScale: 3
+    showTitle: true
+    title: ">> OVERWATCH <<"
+    titleColor: "#4a9eff"
+    titleFontSize: 40
+    titleFont: "CozetteBold"
+    titleUnderline: true
+    titleUnderlineThickness: 2
+    titlePosition: Above
+    animationEnhancements:
+      typewriterMode: Linear
+      randomizeSpeed: false
+      speedVariation: 0.2
+      enableSlide: false
+      slideDuration: 1.0
+      slideDirection: Top
+      enableZoom: false
+      zoomStartScale: 0.1
+      zoomDuration: 1.0
+      enableBounce: false
+      bounceCount: 3
+      bounceHeight: 15
+      easingIn: EaseInOut
+      easingOut: EaseInOut
+      enableCRT: true
+      crtSettings:
+        enabled: true
+        showScanlines: true
+        scanlineSpacing: 6
+        scanlineThickness: 10
+        scanlineAlpha: 0.95
+        scanlineSpeed: 60
+        scanlineColor: "#1c99ff"
+        showNoise: true
+        noiseIntensity: 4
+        noiseAlpha: 0.6
+        showVignette: true
+        vignetteIntensity: 3
+        vignetteColor: "#000000"
+        showGlow: true
+        glowIntensity: 1.4
+        glowSpeed: 1
+        glowColor: "#4a9eff"
+        showCurvature: true
+        curvatureAmount: 0.3
+        showChromaticAberration: true
+        chromaticAmount: 1
+  sound:
+    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
+  soundVolume: 1.0
+  priority: 8
+  canInterrupt: true
+  canBeInterrupted: false
+  aliases: ["overwatch", "marine_overwatch"]
   incognitoMask: false
 
 - type: announcementPreset
@@ -216,197 +311,4 @@
   # decalAlpha: 0.5
   # decalOffset: "150,0"
   # textOffset: "-75,0"
-  incognitoMask: false
-
-- type: announcementPreset
-  id: MarineAlertLevel
-  name: "Evacuation Alert"
-  description: "Alert level announcement styling"
-  target: All
-  showSprite: false
-  style:
-    animation: Typewriter
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.7
-    backgroundColor: "#0a1a2d"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.025
-    responsiveScaleFactor: 1.15
-    holdDuration: 10
-    shakeIntensity: 0.0
-    flickerChance: 0
-    glitchChance: 0
-    showSpriteBox: false
-    showSpeakerName: false
-    spritePosition: Left
-    spriteDisplayMode: FullSprite
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: "ALERT LEVEL"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      typewriterMode: Linear
-      randomizeSpeed: false
-      speedVariation: 0.2
-      enableSlide: false
-      enableZoom: false
-      enableBounce: false
-      enableCRT: false
-  priority: 8
-  canInterrupt: true
-  canBeInterrupted: false
-  incognitoMask: false
-
-- type: announcementPreset
-  id: RedAlertAnimated
-  name: "Red Alert"
-  description: "Animated red alert display"
-  target: All
-  showSprite: false
-  style:
-    animation: Fade
-    position: TopLeft
-    showBackground: true
-    backgroundAlpha: 0.6
-    backgroundColor: "#1a0a0a"
-    primaryColor: "#ff4d4d"
-    fontSize: 24
-    lineHeight: 46
-    printSpeed: 0.015
-    holdDuration: 8
-    shakeIntensity: 0.1
-    flickerChance: 0.02
-    glitchChance: 0
-    showSpriteBox: false
-    showSpeakerName: false
-    spritePosition: Left
-    spriteDisplayMode: FullSprite
-    spriteScale: 1
-    uiScale: 2
-    title: "RED ALERT"
-    titleColor: "#ff4d4d"
-    titleFontSize: 28
-    titleFont: "DefaultBold"
-    titlePosition: Above
-    animationEnhancements:
-      enableCRT: false
-  sound:
-    path: "/Audio/Misc/redalert.ogg"
-    params:
-      volume: -2
-  soundVolume: 1.0
-  priority: 9
-  canInterrupt: true
-  canBeInterrupted: false
-  decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
-  decalState: "redalert_framed"
-  decalPlacement: Above
-  decalScale: 3.5
-  decalAlpha: 1.0
-  decalOffset: "0,-12"
-  incognitoMask: false
-
-- type: announcementPreset
-  id: PMC
-  name: "PMC Dispatch"
-  description: "Private Military Contractor transmission"
-  target: Marines
-
-  style:
-    animation: Typewriter
-    position: TopCenter
-    showBackground: true
-    backgroundAlpha: 0.4
-    backgroundColor: "#0a0d12"
-
-    primaryColor: "#c8f4ff"
-
-    fontSize: 22
-    lineHeight: 46
-    printSpeed: 0.022
-
-    holdDuration: 11
-
-    shakeIntensity: 0.45
-
-    flickerChance: 0
-    glitchChance: 0
-
-    showSpriteBox: true
-    spriteBoxColor: "#0a0d12"
-    spriteBoxBorderColor: "#89dfff"
-    spriteBoxBorderThickness: 1
-    spriteBoxPadding: 0
-
-    spriteGlow: true
-    spriteGlowColor: "#89dfff"
-    spriteGlowIntensity: 0.75
-
-    showSpeakerName: false
-    speakerNameColor: "#d8f9ff"
-    speakerNameFontSize: 14
-    speakerNamePosition: Left
-
-    spritePosition: Above
-    spriteSpacing: 0
-    spriteDisplayMode: TopHalf
-    spriteScale: 1
-    uiScale: 3
-
-    showTitle: true
-    title: ">> PMC DISPATCH <<"
-    titleColor: "#89dfff"
-    titleFontSize: 40
-    titleFont: "DefaultBold"
-    titlePosition: Above
-
-    animationEnhancements:
-      enableCRT: true
-      crtSettings:
-        enabled: true
-
-        showScanlines: true
-        scanlineSpacing: 0
-        scanlineThickness: 10
-        scanlineAlpha: 0.9
-        scanlineSpeed: 999
-        scanlineColor: "#89dfff"
-
-        showNoise: true
-        noiseIntensity: 55
-        noiseAlpha: 0.45
-
-        showVignette: true
-        vignetteIntensity: 2.8
-        vignetteColor: "#89dfff"
-
-        showGlow: true
-        glowIntensity: 1.35
-        glowSpeed: 1
-        glowColor: "#89dfff"
-
-        showCurvature: true
-        curvatureAmount: 999
-
-        showChromaticAberration: true
-        chromaticAmount: 99
-
-  sound:
-    path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
-  soundVolume: 1.0
-
-  priority: 8
-  canInterrupt: true
-  canBeInterrupted: false
-  aliases: ["pmc", "contractor", "dispatch"]
   incognitoMask: false

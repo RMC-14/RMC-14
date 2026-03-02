@@ -24,21 +24,21 @@ public sealed class AnnouncementPresetResolver
 
         if (_prototypes.TryIndex<AnnouncementPresetPrototype>(presetId, out var prototypePreset))
         {
-            Log.Debug($"Found preset by direct ID: {presetId}");
             return prototypePreset;
         }
 
         foreach (var preset in _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>())
         {
-            if (preset.Aliases.Contains(presetId, StringComparer.OrdinalIgnoreCase))
+            foreach (var alias in preset.Aliases)
             {
-                Log.Debug($"Found preset by alias: {presetId} -> {preset.ID}");
+                if (!string.Equals(alias, presetId, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
                 return preset;
             }
         }
 
         var available = _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>().ToList();
-        Log.Warning($"No preset found for '{presetId}'. Available: {string.Join(", ", available.Select(p => p.ID))}");
         return null;
     }
 }

@@ -22,7 +22,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         }
     }
 
-    public bool Update(AnnouncementAnimationContext context, float deltaTime)
+    public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var style = context.Style;
         var printSpeed = style.PrintSpeed * 0.5f;
@@ -33,13 +33,13 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
             context.State.GlitchTimer = 0f;
             var finished = Advance(context);
             if (finished)
-                return true;
+                return AnnouncementAnimationStatus.Finished;
         }
 
         if (RandomChance(context.Random, style.GlitchChance))
             ApplyGlitchEffect(context);
 
-        return false;
+        return AnnouncementAnimationStatus.Running;
     }
 
     private static bool Advance(AnnouncementAnimationContext context)
