@@ -3,4 +3,4 @@
 namespace Content.Shared._RMC14.Chemistry;
 
 [ByRefEvent]
-public readonly record struct VaporHitEvent(Entity<SolutionContainerManagerComponent> Solution);
+public readonly record struct VaporHitEvent(Entity<SolutionContainerManagerComponent> Solution, int Power);

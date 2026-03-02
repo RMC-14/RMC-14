@@ -45,6 +45,7 @@ public sealed partial class AccessibilityTab : Control
         };
         Control.AddOptionDropDown(RMCCVars.RMCAnnouncementStyle, AnnouncementStyleDropDown, announcementEntries);
         AddPerAnnouncementOverrides();
+        Control.AddOptionCheckBox(RMCCVars.RMCXenoAbilityPreviews, XenoAbilityPreviewsCheckBox); // RMC14
 
         Control.AddOptionCheckBox(CCVars.AccessibilityClientCensorNudity, CensorNudityCheckBox);
 

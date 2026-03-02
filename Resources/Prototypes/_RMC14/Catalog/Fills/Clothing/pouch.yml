@@ -34,12 +34,22 @@
 
 - type: entity
   parent: RMCPouchMagazine
-  id: RMCPouchMagazineFilledP90
-  suffix: Filled, P90
+  id: RMCPouchMagazineFilledM16
+  suffix: Filled, M16
   components:
   - type: StorageFill
     contents:
-    - id: RMCMagazineSMGP90
+    - id: RMCMagazineRifleM16
+      amount: 3
+
+- type: entity
+  parent: RMCPouchMagazine
+  id: RMCPouchMagazineFilledPDW90
+  suffix: Filled, PDW90
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGPDW90
       amount: 3
 
 - type: entity
@@ -106,8 +116,8 @@
 
 - type: entity
   parent: RMCPouchShotgun
-  id: RMCPouchShotgunFilledConstable
-  suffix: Filled, Constable
+  id: RMCPouchShotgunFilledPolicing
+  suffix: Filled, Policing
   components:
   - type: StorageFill
     contents:
@@ -117,6 +127,16 @@
       amount: 1
     - id: CMShellShotgunBeanbag
       amount: 1
+
+- type: entity
+  parent: RMCPouchShotgun
+  id: RMCPouchShotgunFilledBeanbag
+  suffix: Filled, Beanbag
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunBeanbag
+      amount: 4
 
 # Large Shotgun Pouch
 - type: entity
@@ -147,6 +167,14 @@
   components:
   - type: CMItemSlots
     startingItem: CMFlare
+
+- type: entity
+  parent: RMCPouchFlareL96
+  id: RMCPouchFlareL96Filled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlareL96
 
 # Electronics Pouch
 - type: entity
@@ -223,7 +251,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
@@ -238,7 +266,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: RMCFlashlightLantern
     - id: CMCrowbarRed
     - id: CMPacketPillsTricordrazine
     - id: CMGauze10
@@ -251,7 +279,7 @@
   id: RMCPouchSurvivalBlackFilled
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/Pouches/soctools.rsi
+    sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
 
 - type: entity
   parent: RMCPouchSurvivalSynth
@@ -260,7 +288,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCFlashlight
+    - id: CMSheetMetal50
     - id: CMCrowbarRed
     - id: CMWelder
     - id: RMCCableCoil

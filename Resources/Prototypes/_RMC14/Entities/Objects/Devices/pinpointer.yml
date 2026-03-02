@@ -1,8 +1,9 @@
 - type: entity
-  name: RMCPinpointer
-  description: A rugged military-grade tracking device. Changes colors based on the distance from the target. Keep upright to retain accuracy.
   parent: BaseItem
   id: RMCPinpointerBase
+  name: Pinpointer
+  description: A rugged military-grade tracking device. Changes colors based on the distance from the target. Keep upright to retain accuracy.
+  suffix: RMC
   abstract: true
   components:
   - type: Transform
@@ -33,7 +34,7 @@
       enum.PinpointerVisuals.IsActive:
         enum.PinpointerLayers.Screen:
           True: { visible: True }
-          False: { visible: False } 
+          False: { visible: False }
       enum.PinpointerVisuals.TargetDistance:
         enum.PinpointerLayers.Screen:
           Unknown: { state: pinonnull }
@@ -42,15 +43,24 @@
           Medium: { state: pinonmedium }
           Far: { state: pinonfar }
   - type: AnimationPlayer
+  - type: Tag
+    tags:
+    - RMCPinpointer
 
 - type: entity
-  name: Pinpointer
-  id: RMCPinpointerAegisID
   parent: RMCPinpointerBase
+  id: RMCPinpointerUniversal
+  suffix: Universal
+  components:
+  - type: Pinpointer
+    updateTargetName: true
+    canRetarget: true
+
+- type: entity
+  parent: RMCPinpointerBase
+  id: RMCPinpointerAegisID
+  suffix: AEGIS
   components:
   - type: Pinpointer
     component: AegisTrackable
     targetName: AEGIS ID card
-  - type: Tag
-    tags:
-    - RMCPinpointer

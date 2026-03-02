@@ -21,6 +21,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using YamlDotNet.Serialization.TypeInspectors;
+using Content.Client._RMC14.Interaction;
 
 namespace Content.Client.Gameplay
 {
@@ -124,7 +125,7 @@ namespace Content.Client.Gameplay
             return GetClickableEntities(coordinates, _eyeManager.CurrentEye, excludeFaded);
         }
 
-        public IEnumerable<EntityUid> GetClickableEntities(MapCoordinates coordinates, IEye? eye, bool excludeFaded = true)
+        public IEnumerable<EntityUid> GetClickableEntities(MapCoordinates coordinates, IEye? eye, bool excludeFaded = true, bool ignoreInteractionTransparency = false)
         {
             /*
              * TODO:
@@ -146,6 +147,10 @@ namespace Content.Client.Gameplay
 
             foreach (var entity in entities)
             {
+                // RMC14: Filter by InteractionTransparencyComponent (if not ignored)
+                if (!ignoreInteractionTransparency && _entitySystemManager.GetEntitySystem<RMCClientInteractionSystem>().IsInteractionTransparency(entity.Uid, _playerManager.LocalEntity, eye))
+                    continue;
+
                 if (clickQuery.TryGetComponent(entity.Uid, out var component) &&
                     clickables.CheckClick((entity.Uid, component, entity.Component, entity.Transform), coordinates.Position, eye, excludeFaded, out var drawDepthClicked, out var renderOrder, out var bottom))
                 {

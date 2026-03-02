@@ -31,6 +31,9 @@
     tags:
     - Knife
   - type: DeleteOnExplosion
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 12000
 
 - type: entity
   parent: RMCKitchenKnife
@@ -40,6 +43,8 @@
   components:
   - type: Sprite
     state: plastic
+  - type: PhysicalComposition
+    materialComposition: {}
 
 - type: entity
   parent: RMCKitchenKnife

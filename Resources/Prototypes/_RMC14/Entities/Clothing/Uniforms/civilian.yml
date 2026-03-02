@@ -21,6 +21,14 @@
 
 - type: entity
   parent: RMCJumpsuitBlueWorkwear
+  id: RMCJumpsuitBlueWorkwearChancesGoon
+  components:
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchWeYaBlack
+
+- type: entity
+  parent: RMCJumpsuitBlueWorkwear
   id: RMCJumpsuitKhakiWorkwear
   name: khaki workwear
   description: A pair of jeans paired with a khaki workshirt. A common pairing among blue-collar workers due to its drab look.

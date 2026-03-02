@@ -94,6 +94,9 @@ namespace Content.IntegrationTests.Tests
             "Breakwater_Strand",
             "UNSEndeavour",
             "Berkley",
+            "SSVDeyneka",
+			"HMSPratchett",
+            "Rover"
         };
 
         private static readonly ProtoId<EntityCategoryPrototype> DoNotMapCategory = "DoNotMap";

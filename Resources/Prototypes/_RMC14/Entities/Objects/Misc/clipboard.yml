@@ -55,3 +55,32 @@
     blacklist:
       components:
       - Xeno
+
+- type: entity
+  parent: CMClipboard
+  id: RMCWeYaClipboard
+  name: Weston-Yamada clipboard
+  description: A branded clipboard, perfect for keeping your forms in order.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/weya_clipboard.rsi
+    layers:
+    - state: clipboard
+    - state: clipboard_paper
+      map: [ "clipboard_paper" ]
+      visible: false
+    - state: clipboard_pen
+      map: [ "clipboard_pen" ]
+      visible: false
+    - state: clipboard_over
+  - type: Item
+    sprite: _RMC14/Objects/Misc/weya_clipboard.rsi
+    size: Small
+  - type: Clothing
+    slots: [belt]
+    quickEquip: false
+    sprite: _RMC14/Objects/Misc/weya_clipboard.rsi
+  - type: StorageFill
+    contents:
+    - id: CMPaper
+      amount: 4

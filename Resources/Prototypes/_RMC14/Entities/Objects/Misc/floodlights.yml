@@ -9,8 +9,6 @@
   - type: Physics
     bodyType: Static
   - type: Anchorable
-    flags:
-    - Anchorable
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
@@ -60,8 +58,20 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
+
+- type: entity
+  parent: RMCSmallFloodlight
+  id: RMCSmallFloodlightUnanchored
+  name: small floodlight
+  description: A small bit of light in the darkness.
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: Transform
+      anchored: False
+    - type: Physics
+      bodyType: Dynamic
 
 - type: entity
   parent: BaseStructure
@@ -125,7 +135,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Appearance
   - type: ToggleableVisuals
     spriteLayer: light
@@ -168,7 +178,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # LZ Floodlights
 
@@ -205,6 +215,109 @@
   - type: Appearance
   - type: Eye
 
+- type: entity
+  abstract: true
+  id: LandingZoneLightBase
+  name: landing light
+  description: A landing light, if it's flashing stay clear!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe0
+      visible: false
+  - type: Appearance
+  - type: Clickable
+  - type: LandingLight
+  - type: PointLight
+    color: "#FF1A1A"
+    energy: 1
+    radius: 2
+    softness: 1
+    offset: "0, -0.5"
+    enabled: false
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightOne
+  suffix: 1
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightTwo
+  suffix: 2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe1
+      visible: false
+  - type: LandingLight
+    onState: landingstripe1
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightThree
+  suffix: 3
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe2
+      visible: false
+  - type: LandingLight
+    onState: landingstripe2
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightFour
+  suffix: 4
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: landingstripe
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: landingstripe3
+      visible: false
+  - type: LandingLight
+    onState: landingstripe3
+
+- type: entity
+  parent: LandingZoneLightBase
+  id: LandingZoneLightStanding
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/Lights/landinglight.rsi
+    layers:
+    - map: ["enum.LandingLightVisuals.Off"]
+      state: lz_spoke_light
+    - map: [ "enum.LandingLightVisuals.On" ]
+      state: lz_spoke_light1
+      visible: false
+  - type: LandingLight
+    onState: lz_spoke_light1
+  - type: PointLight
+    color: "#FF1A1A"
+    energy: 1.5
+    radius: 4
+    softness: 1
+    enabled: false
+
 # Engineer Ship Light
 
 - type: entity
@@ -239,7 +352,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/streetlight.rsi
@@ -279,7 +392,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
 
 # Traffic light
 
@@ -319,7 +432,7 @@
         mask:
         - MachineMask
         layer:
-        - WallLayer
+        - MachineLayer
   - type: Construction
     graph: RMCFloodlightBroken
     node: completed

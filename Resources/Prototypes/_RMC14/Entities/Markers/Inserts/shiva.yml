@@ -14,3 +14,34 @@
     clearEntities: true
     clearDecals: true
     replaceAreas: true
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertShivaPanicRoomHold
+  name: Panic Room Hold
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/panic_room_hold.yml"
+      probability: 1
+      nightmareScenario: panic_room_hold
+      offset: 0,2
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertBase
+  id: RMCMapInsertShivaCLFRaid
+  name: CLF Raid
+  suffix: Insert Shiva
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Shiva/clf_raid_shivas.yml"
+      probability: 1
+      nightmareScenario: clfraid_shivas
+    clearEntities: true
+    clearDecals: true
+    replaceAreas: true

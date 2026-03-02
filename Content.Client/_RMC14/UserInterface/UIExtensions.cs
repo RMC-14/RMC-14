@@ -27,7 +27,7 @@ public static class UIExtensions
     public static T CreatePopOutableWindow<T>(this BoundUserInterface bui) where T : RMCPopOutWindow, new()
     {
         var window = bui.CreateDisposableControl<T>();
-        window.SetBui(bui);
+        window.OnFinalClose += bui.Close;
 
         if (IoCManager.Resolve<IEntityManager>().System<UserInterfaceSystem>().TryGetPosition(bui.Owner, bui.UiKey, out var position))
         {

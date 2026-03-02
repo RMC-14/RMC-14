@@ -2,7 +2,7 @@
   parent: CMWeaponPistolBase
   id: RMCWeaponPistolPK7
   name: PK-7 electrostatic pistol
-  description: A Weston-Yamada manufactured less-than-lethal pistol. Originally manufactured in the 2080s, the ES-4 electrostatic pistol fires electrically-charged bullets with high accuracy, though its cost and constant need for cleaning makes it a rare sight.
+  description: A Weston-Yamada manufactured less-than-lethal pistol. Originally manufactured in the 2080s, the PK-7 electrostatic pistol fires electrically-charged bullets with high accuracy, though its cost and constant need for cleaning makes it a rare sight.
   components:
   - type: Tag
     tags:
@@ -41,6 +41,7 @@
           tags:
            - RMCAttachmentRailFlashlight
            - RMCAttachmentS5RedDotSight
+           - RMCAttachmentS5MicroRedDotSight
            - RMCAttachmentS6ReflexSight
       rmc-aslot-underbarrel:
         whitelist:

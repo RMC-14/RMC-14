@@ -3,6 +3,7 @@
   id: CMRifleman
   name: cm-job-name-rifleman
   description: cm-job-description-rifleman
+  newToJobInfo: rmc-new-to-job-rifleman
   playTimeTracker: CMJobRifleman
   startingGear: CMGearRifleman
   dummyStartingGear: CMGearRiflemanEquipped
@@ -42,6 +43,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: private
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearRifleman
@@ -142,3 +144,20 @@
     - !type:RoleTimeRequirement
       role: CMJobRifleman
       time: 1
+
+## Guidebook downed marine
+- type: entity
+  id: RMCGuidebookCorpseMarine
+  parent: MobHuman
+  name: Wounded marine
+  categories: [ DoNotMap, HideSpawnMenu ]
+  components:
+  - type: Loadout
+    prototypes: [ CMGearRiflemanEquipped ]
+  - type: Damageable
+    damage:
+      types:
+        Bloodloss: 36
+        Asphyxiation: 44
+        Slash: 77
+        Blunt: 43

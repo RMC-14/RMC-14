@@ -1,6 +1,7 @@
 rmc-announcement-author = Command
 rmc-announcement-author-shipside = Command Ship
 rmc-announcement-author-highcommand = UNMC High Command
+rmc-announcement-author-queen-mother = The Queen Mother
 rmc-announcement-message = [font size=16][bold][color=#CECECE]{$author} Announcement[/color][/bold][/font][font size=16][color=red]
 
     {$message}

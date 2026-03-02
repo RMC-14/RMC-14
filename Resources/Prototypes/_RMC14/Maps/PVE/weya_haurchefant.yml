@@ -1,0 +1,24 @@
+- type: gameMap
+  id: Haurchefant
+  mapName: "UNCSS Haurchefant"
+  mapPath: /Maps/_RMC14/PVE/weya_haurchefant.yml
+  minPlayers: 0
+  maxRandomOffset: 0
+  randomRotation: false
+  stations:
+    Haurchefant:
+      stationProto: StandardUNMCWarship
+      components:
+        - type: StationNameSetup
+          mapNameTemplate: 'UNCSS Haurchefant'
+        - type: StationJobs
+          availableJobs:
+            # Command
+            CMPMCForceCommandPVE: [1, 1]
+
+            # Operatives
+            CMPMCForceLeadPVE: [1, 1]
+            CMPMCTeamLeadPVE: [2, 2]
+            CMPMCGunnerPVE: [2, 2]
+            CMPMCCorpsmanPVE: [2, 2]
+            CMPMCOperatorPVE: [ 14, 14 ]

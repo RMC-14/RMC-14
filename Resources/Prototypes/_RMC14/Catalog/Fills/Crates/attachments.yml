@@ -211,7 +211,7 @@
 - type: entity
   id: RMCCrateAttachmentSmgStock
   parent: RMCCrateBase
-  name: submachinegun stock attachment crate (x4)
+  name: submachinegun solid stock attachment crate (x4)
   components:
   - type: StorageFill
     contents:

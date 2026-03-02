@@ -4,7 +4,6 @@
     Title="Telephone" MinSize="600 400">
     <BoxContainer Orientation="Vertical">
         <TabContainer Name="Tabs" Access="Public" HorizontalExpand="True" VerticalExpand="True" />
-        <Button Name="DialButton" Access="Public" Text="Dial" StyleClasses="OpenBoth" />
-        <!-- <Button Name="DoNotDisturbButton" Access="Public" Text="Do Not Disturb" StyleClasses="OpenBoth" /> -->
+        <BoxContainer Name="Buttons" Access="Public" Orientation="Vertical" />
     </BoxContainer>
 </controls:TelephoneWindow>

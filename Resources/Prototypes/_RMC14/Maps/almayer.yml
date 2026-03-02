@@ -1,6 +1,5 @@
 ﻿# The Almayer map file is currently considered private content by RMC14.
 # The Almayer map file is to serve as a solution for a test fail that would result from the lack of its existence otherwise.
-# If you wish for this file to be public you may recreate them yourself and PR it to the repo.
 - type: gameMap
   id: Almayer
   mapName: Almayer
@@ -27,6 +26,7 @@
           CMChiefMP: [1, 1]
           CMMilitaryWarden: [1, 1]
           CMMilitaryPolice: [7, 10]
+          CMProvostInspector: [1, 1]
 
           #Auxiliary
           CMAuxiliarySupportOfficer: [1, 1]
@@ -42,7 +42,7 @@
 
           #Medical
           CMCMO: [1, 1]
-          CMDoctor: [4, 6]
+          CMDoctor: [6, 6]
           CMNurse: [4, 6]
 #          CMResearcher: [2, 2]
 
@@ -53,11 +53,11 @@
 
           #Marines
           CMSquadLeader: [4, 4]
-          CMFireteamLeader: [4, 8]
+          CMFireteamLeader: [8, 8]
           CMSmartGunOperator: [4, 4]
           CMWeaponsSpecialist: [4, 4]
-          CMCombatTech: [8, 12]
-          CMHospitalCorpsman: [8, 16]
+          CMCombatTech: [8, 16]
+          CMHospitalCorpsman: [8, 20]
           CMRifleman: [ -1, -1 ]
 
           #Civilians

@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Content.Server._RMC14.Admin;
 using Content.Server._RMC14.Chat.Chat;
 using Content.Server._RMC14.Emote;
 using Content.Server.Administration.Logs;
@@ -71,6 +72,8 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly RMCEmoteSystem _rmcEmote = default!;
     [Dependency] private readonly INetConfigurationManager _netConfigManager = default!;
 
+    // RMC14
+    [Dependency] private readonly RMCChatBansManager _rmcChatBans = default!;
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -660,6 +663,14 @@ public sealed partial class ChatSystem : SharedChatSystem
         }
         else if (!_loocEnabled) return;
 
+        // RMC14
+        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Looc))
+        {
+            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+            return;
+        }
+
         // If crit player LOOC is disabled, don't send the message at all.
         if (!_critLoocEnabled && _mobStateSystem.IsCritical(source))
             return;
@@ -682,6 +693,15 @@ public sealed partial class ChatSystem : SharedChatSystem
         string wrappedMessage;
         if (!_adminManager.IsAdmin(player) && !_DeadchatEnabled) // RMC14 - Check the status of the "rmc.dead_chat_enabled" CCvar before continuing.
             return;
+
+        // RMC14
+        if (_rmcChatBans.IsChatBanned(player.UserId, ChatType.Dead))
+        {
+            var bannedMsg = Loc.GetString("rmc-chat-bans-banned");
+            _chatManager.ChatMessageToOne(ChatChannel.Server, bannedMsg, bannedMsg, default, false, player.Channel);
+            return;
+        }
+
         if (_adminManager.IsAdmin(player))
         {
             wrappedMessage = Loc.GetString("chat-manager-send-admin-dead-chat-wrap-message",

@@ -1,0 +1,90 @@
+- type: job
+  parent: CMJobBase
+  id: CMRoyalMarinesLieutenant
+  name: rmc-job-name-rcm-lieutenant
+  description: rmc-ghost-role-information-rcm-description
+  playTimeTracker: RMCJobRoyalLieutenant
+  ranks:
+    RMCRankTSESecondLieutenant: [ ]
+  startingGear: RMCGearRoyalLieutenant
+  icon: "RMCJobIconRoyalLieutenant"
+  joinNotifyCrew: false
+  supervisors: cm-job-supervisors-royal-captain
+  spawnMenuRoleName: RCM Lieutenant
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - RoyalMarines
+      - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFirearms: 2
+        RMCSkillPolice: 2
+        RMCSkillFireman: 3
+        RMCSkillConstruction: 2
+        RMCSkillEngineer: 2
+        RMCSkillEndurance: 3
+        RMCSkillMedical: 2
+        RMCSkillSurgery: 1
+        RMCSkillMeleeWeapons: 1
+        RMCSkillJtac: 3
+        RMCSkillVehicles: 2
+        RMCSkillLeadership: 2
+        RMCSkillPilot: 1
+        RMCSkillIntel: 1
+        RMCSkillPowerLoader: 1
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: ViewIntelObjectives
+    - type: SquadLeader
+      icon:
+       sprite: _RMC14/Interface/cm_job_icons.rsi
+       state: rmc_lieutenant
+    - type: RMCTrackable
+    - type: JobPrefix
+      prefix: rmc-job-prefix-rcm-lieutenant
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadRoyalMarines
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_lieutenant
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
+  hidden: true
+
+# This lieutenant role is NOT part of the ERT. Omitting ghostrole functionality
+
+- type: startingGear # There's also a staff officer role with equivalent skills n shit but noncombatant gear that I don't feel like porting
+  id: RMCGearRoyalLieutenant
+  equipment:
+    head: RMCHeadRoyalBeretLead
+    eyes: RMCGlassesMedicalHUDGlasses
+    ears: RMCHeadsetRoyalMarineOfficer
+    jumpsuit: RMCJumpsuitMarineRoyalTeamlead
+    outerClothing: RMCArmorRoyalPaddedFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL24
+    id: RMCIDRoyalMarines
+    belt: RMCBeltHolsterPistolFilledL54
+    back: RMCSatchelLightpackFilledRoyalLieutenant
+    pocket1: RMCPouchToolsFilledRCM
+    pocket2: RMCPouchMedkitFillRoyal
+
+- type: playTimeTracker
+  id: RMCJobRoyalLieutenant
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconRoyalLieutenant
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: rmc_lieutenant

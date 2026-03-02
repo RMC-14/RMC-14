@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: RMCSPPHeavyGunnerPVE
   name: rmc-job-name-spp-gunner
-  description: rmc-ghost-role-information-spp-pve-description
+  description: rmc-job-description-spp-gunner-pve
   playTimeTracker: RMCJobSPPHeavyGunnerPVE
   ranks:
     RMCRankSPPMladshiySerzhant: []
@@ -19,21 +19,14 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillSmartGun: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetPVESGO
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-gunner
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSPP
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist
@@ -57,9 +50,6 @@
   id: RMCJobSPPHeavyGunnerPVEGear
   equipment:
     id: RMCIDSPP
-    ears: RMCHeadsetSPP
-    jumpsuit: CMJumpsuitSPP
-    shoes: CMBootsBlackFilled
 
 - type: playTimeTracker
   id: RMCJobSPPHeavyGunnerPVE
