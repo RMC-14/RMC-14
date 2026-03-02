@@ -34,10 +34,10 @@
       - id: RMCBackpackRCMTechnician
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: # TODO RMC14 TWE belts
-      - id: CMBeltMarine
-      - id: RMCBeltHolsterPistolTSE
-      - id: RMCBeltUtilityGeneral
+      entries:
+      - id: RMCBeltRCM
+      - id: RMCBeltHolsterPistolRCM
+      - id: RMCBeltUtilityGeneralRCMPVE
     - name: Uniform Webbing
       choices: { CMAccessories: 1 }
       entries:
@@ -76,9 +76,9 @@
       - id: RMCBackpackRCMMedic
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: # TODO RMC14 TWE belts
-      - id: CMBeltMedical
-      - id: RMCBeltUtilityGeneral
+      entries: 
+      - id: RMCMedicalL75RCM
+      - id: RMCBeltUtilityGeneralRCMPVE
     - name: Pouches
       choices: { RMCPouch: 2 }
       entries:
@@ -136,10 +136,10 @@
       - id: RMCBackpackRCMLarge
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: # TODO RMC14 TWE belts
-      - id: CMBeltMarine
-      - id: RMCBeltHolsterPistolTSE
-      - id: RMCBeltUtilityGeneral
+      entries:
+      - id: RMCBeltRCM
+      - id: RMCBeltHolsterPistolRCM
+      - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 } 
       entries:
@@ -214,10 +214,10 @@
       - id: RMCBackpackRCMLarge
     - name: Belt
       choices: { CMBelt: 1 }
-      entries: # TODO RMC14 TWE belts
-      - id: CMBeltMarine
-      - id: RMCBeltHolsterPistolTSE
-      - id: RMCBeltUtilityGeneral
+      entries:
+      - id: RMCBeltRCM
+      - id: RMCBeltHolsterPistolRCM
+      - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
       choices: { RMCArmorWebbing: 1 } 
       entries:
@@ -309,11 +309,11 @@
         amount: 15
     - name: Belts
       entries: # TODO RMC14 TWE belts
-      - id: CMBeltMarine
+      - id: RMCBeltRCM
         amount: 15
-      - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltHolsterPistolRCM
         amount: 15
-      - id: RMCBeltUtilityGeneral
+      - id: RMCBeltUtilityGeneralRCMPVE
         amount: 5
     - name: Pouches
       entries:
@@ -443,4 +443,3 @@
         amount: 5
       - id: RMCTantoA
         amount: 25
-
