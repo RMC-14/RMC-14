@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCSurvivorParaBase
+  id: RMCSurvivorParaTeamLeader
+  name: rmc-job-name-para-team-leader
+  ranks:
+    RMCRankParaSergeant: [ ]
+  supervisors: rmc-job-supervisors-commander
+  startingGear: RMCGearParaTeamLeader
+  icon: RMCJobIconParaTeamLeader
+  spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+        - type: NpcFactionMember
+          factions:
+            - RoyalMarines
+            - TSE
+        - type: Skills
+          preset: RMCSkillPresetParaLeader
+        - type: RMCAllowSuitStorage
+        - type: IntelRescueSurvivorObjective
+        - type: MotionDetectorTracked
+        - type: MarineOrders
+        - type: RMCPointing
+        - type: CommandAccent
+        - type: RMCTrackable
+        - type: SquadLeader
+          icon:
+            sprite: _RMC14/Interface/cm_job_icons.rsi
+            state: para_teamleader_alt
+        - type: TacticalMapIcon
+          icon:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: rmc_teamleader
+          background:
+            sprite: /Textures/_RMC14/Interface/map_blips.rsi
+            state: background_para
+        - type: AssignSquad
+          whitelist:
+            tags:
+              - SquadPara
+        - type: JobPrefix
+          prefix: rmc-job-prefix-para-team-leader
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearParaBase
+  id: RMCGearParaTeamLeader
+  equipment:
+    head: RMCHeadParaBeretLead
+    outerClothing: RMCArmorParaVest
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointParaTeamLeader
+  name: paramarine team leader spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParaTeamLeader
+  - type: Sprite
+    state: surv_tse
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParaTeamLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_teamleader_alt
+    

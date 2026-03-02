@@ -520,6 +520,25 @@
       sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/tse_patch.rsi
       state: helmet
 
+
+- type: entity
+  parent: RMCPatchBase
+  id: RMCPatchTSEPara
+  name: TSE RCM Paramarines patch
+  description: A fire-resistant shoulder patch, worn by the men and women of the RCM's Paramarine regiments. The patch proudly boasts a silver knife with forest green wings, overlaid on a red background.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/para_patch.rsi
+    state: icon
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/para_patch.rsi
+      state: patch
+  - type: HelmetAccessory
+    rsi:
+      sprite: _RMC14/Objects/Clothing/Accessory/Patches/TSE/para_patch.rsi
+      state: helmet
+
 # CLF
 - type: entity
   parent: RMCPatchBase
