@@ -129,12 +129,12 @@
     buildDelay: 1
     canBuild:
     - WallXenoResinThick
+    - WallXenoResinReflective
     - WallXenoMembraneThick
     - DoorXenoResinThick
     - XenoStickyResin
     - XenoFastResin
     - HiveAcidPillarXeno
-    - WallXenoResinReflective
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
