@@ -65,10 +65,18 @@
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     nightmareScenarios:
-    - scenarioName: clfmining
-      scenarioProbability: 0.1
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
+    - scenarioName: solaris_surv_spawn_admin # 80% chance of regular surv. Reduce to 70% (0.14 each) once CLF survs are in.
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_bar
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_office
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_south_marshals
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_storage
+      scenarioProbability: 0.16
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1

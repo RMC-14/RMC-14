@@ -1,62 +1,4 @@
 ﻿Entries:
-- author: Vermidia
-  changes:
-  - message: Fixed hedgehog rav gaining stacks on melee damage sources
-    type: Fix
-  - message: Fixed hedgehog spikes having too high of a max range (shield has a slightly
-      lower range than the other two)
-    type: Fix
-  - message: Fixed hedgehog spike visuals not showing up in most states.
-    type: Fix
-  - message: Fixed hedgehog not being stunnable by explosions when below 50 shards
-    type: Fix
-  - message: Fixed hedgehog using the wrong damage sprites.
-    type: Fix
-  id: 2458
-  time: '2025-10-19T21:41:18.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8177
-- author: to4no_fix
-  changes:
-  - message: Fixed an issue where ghosts could block tent deployment.
-    type: Fix
-  - message: Fixed an issue where the tent roof did not become transparent to ghosts.
-    type: Fix
-  - message: Fixed an issue where it was impossible to interact with the water tank
-      and microwave in the Mess Tent.
-    type: Fix
-  id: 2459
-  time: '2025-10-19T21:45:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8102
-- author: noctyrnal
-  changes:
-  - message: Added an M13 gun case to requisitions.
-    type: Add
-  - message: Added some attachments - M13 Compensator Regular / Spiked, Solid / Foldable
-      M13 Stock, S5 Micro Dot Sight, Micro Lazer, Compact Suppressor, and the Extended
-      Compensator.
-    type: Add
-  - message: Added new firing and reloading sounds to the M13.
-    type: Add
-  - message: Increased the M13's base damage, improved accuracy, and reduced bullet
-      spread.
-    type: Tweak
-  id: 2460
-  time: '2025-10-19T21:46:17.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8108
-- author: noctyrnal
-  changes:
-  - message: Windows will now correctly smooth with walls.
-    type: Tweak
-  id: 2461
-  time: '2025-10-19T21:49:27.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7289
-- author: Vixting
-  changes:
-  - message: fix girders being weak
-    type: Fix
-  id: 2462
-  time: '2025-10-19T21:50:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/7914
 - author: noctyrnal
   changes:
   - message: Removed the cyanide pill from the liaison's briefcase.
@@ -4573,5 +4515,46 @@
   id: 2959
   time: '2026-02-23T06:58:08.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9151
+- author: SharkSnake98
+  changes:
+  - message: Added multiple ERT Bays for the various factions.
+    type: Add
+  - message: Added 2 new unbreakable windows
+    type: Add
+  - message: Removed the previous ERT area
+    type: Remove
+  - message: Changed the draw-depth of the coffee machine
+    type: Tweak
+  id: 2960
+  time: '2026-02-27T13:21:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9088
+- author: GNUtopia
+  changes:
+  - message: Weedbound resin doors are no longer capitalised
+    type: Fix
+  id: 2961
+  time: '2026-02-27T13:36:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9283
+- author: Dygon
+  changes:
+  - message: Fixed acid ball projectiles from the Praetorian not being deleted.
+    type: Fix
+  id: 2962
+  time: '2026-02-27T13:37:58.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9270
+- author: Dygon
+  changes:
+  - message: Fixed barbed barricades not stunning xenonids that leap against it
+    type: Fix
+  id: 2963
+  time: '2026-02-27T13:38:36.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9276
+- author: Dygon
+  changes:
+  - message: FIxed xeno projectiles having slightly less range than intended.
+    type: Fix
+  id: 2964
+  time: '2026-02-27T13:37:18.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9277
 Name: RMC14
 Order: -1
