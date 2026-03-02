@@ -25,7 +25,7 @@ public sealed partial class RMCReflectSystem : EntitySystem
 
     private void OnProjectileReflect(Entity<RMCReflectiveComponent> ent, ref PreventCollideEvent args)
     {
-        if (!TryComp(args.OtherEntity, out ProjectileComponent? projectile))
+        if (!HasComp<ProjectileComponent>(args.OtherEntity))
             return;
 
         _rmcProjectile.SetProjectileAccuracy(args.OtherEntity, ent.Comp.Accuracy);
@@ -77,14 +77,14 @@ public sealed partial class RMCReflectSystem : EntitySystem
         args.Damage *= MathF.Pow(ent.Comp.ReflectionMultiplier, ent.Comp.ReflectedBy.Count);
     }
 
-    public bool TryReflectProjectile(EntityUid projectile, EntityUid target, Angle reflectionAngle, float reflectChance, PhysicsComponent? physics = null)
+    public bool TryReflectProjectile(EntityUid projectile, EntityUid reflector, Angle reflectionAngle, float reflectChance, PhysicsComponent? physics = null)
     {
         if (!Resolve(projectile, ref physics, false))
             return false;
 
         var tick = _timing.CurTick.Value;
-        var iD = GetNetEntity(target).Id;
-        var seed = ((long)tick << 32) | (uint)iD;
+        var reflectorId = GetNetEntity(reflector).Id;
+        var seed = ((long)tick << 32) | (uint)reflectorId;
         var rng = new Xoroshiro64S(seed);
         if (reflectChance < rng.NextFloat(0, 1))
             return false;
