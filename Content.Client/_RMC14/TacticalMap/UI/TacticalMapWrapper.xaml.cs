@@ -95,6 +95,7 @@ public sealed partial class TacticalMapWrapper : Control
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
+    [Dependency] private readonly IClipboardManager _clipboard = default!;
 
     public TimeSpan LastUpdateAt;
     public TimeSpan NextUpdateAt;
@@ -1569,13 +1570,18 @@ public sealed partial class TacticalMapWrapper : Control
     {
         EnsureContextPopup();
 
+        var showRawCoordinates = IsAdminGhost();
         var info = source.TryGetAreaInfo(indices, out var areaInfo)
             ? areaInfo
             : CreateFallbackAreaInfo(indices);
 
-        var calculatedCoordinates = TryGetCalculatedCoordinates(indices, out var currentCoordinates)
-            ? currentCoordinates
+        var calculatedCoordinates = TryGetCalculatedCoordinates(indices, out var calculated)
+            ? calculated
             : (Vector2i?) null;
+        var displayCoordinates = calculatedCoordinates
+            ?? (showRawCoordinates ? indices : (Vector2i?) null);
+        var canCopyCoordinates = displayCoordinates != null;
+
         bool showDeleteMortar = source.IsMortarOverlayTile(indices);
 
         _contextPopup!.OnCreateLabelPressed = () =>
@@ -1599,14 +1605,22 @@ public sealed partial class TacticalMapWrapper : Control
             OpenCoordinateDialog(indices);
             _contextPopup?.Close();
         };
+        _contextPopup.OnCopyCoordinatesPressed = () =>
+        {
+            if (displayCoordinates != null)
+                _clipboard.SetText(FormatCoordinates(displayCoordinates.Value));
+
+            _contextPopup?.Close();
+        };
 
         _contextPopup.SetInfo(
             info,
-            IsAdminGhost(),
+            showRawCoordinates,
             _enteredCoordinates,
             calculatedCoordinates,
             showDeleteMortar,
-            showCoordinateEntry: true);
+            showCoordinateEntry: true,
+            showCopyCoordinates: canCopyCoordinates);
         _contextPopup.Open(UIBox2.FromDimensions(screenPosition, new Vector2(1, 1)));
         _contextPopup.SetPositionLast();
     }
@@ -1664,6 +1678,14 @@ public sealed partial class TacticalMapWrapper : Control
 
         coordinates = indices + _coordinateOffset.Value;
         return true;
+    }
+
+    private static string FormatCoordinates(Vector2i coordinates)
+    {
+        return Loc.GetString(
+            "ui-tactical-map-copy-coords-format",
+            ("x", coordinates.X),
+            ("y", coordinates.Y));
     }
 
     private void EnsureContextPopup()

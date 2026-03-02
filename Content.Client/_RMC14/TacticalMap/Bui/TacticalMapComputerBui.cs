@@ -66,6 +66,7 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
         TryUpdateTextureFromComponent();
         Refresh();
         Window.Wrapper.UpdateObjectives(_objectives);
+        Window.Wrapper.Map.OnQueenEyeMove += position => SendPredictedMessage(new TacticalMapQueenEyeMoveMsg(position));
 
         if (EntMan.HasComponent<OverwatchConsoleComponent>(Owner))
         {

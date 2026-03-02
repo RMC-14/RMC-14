@@ -171,6 +171,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 subs.Event<TacticalMapSelectMapMsg>(OnComputerSelectMapMsg);
                 subs.Event<TacticalMapSelectLayerMsg>(OnComputerSelectLayerMsg);
                 subs.Event<TacticalMapUpdateCanvasMsg>(OnComputerUpdateCanvasMsg);
+                subs.Event<TacticalMapQueenEyeMoveMsg>(OnComputerQueenEyeMoveMsg);
                 subs.Event<TacticalMapOverwatchBlipMsg>(OnOverwatchBlipMsg);
                 subs.Event<TacticalMapSetVisibleLayersMsg>(OnComputerSetVisibleLayersMsg);
             });
@@ -1698,6 +1699,21 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         HandleQueenEyeMove(ent, args.Actor, args.Position);
     }
 
+    private void OnComputerQueenEyeMoveMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapQueenEyeMoveMsg args)
+    {
+        var actor = args.Actor;
+        if (!HasComp<GhostComponent>(actor))
+            return;
+
+        if (!TryResolveComputerMap(ent, out var map) ||
+            !_mapGridQuery.TryComp(map.Owner, out var grid))
+        {
+            return;
+        }
+
+        TeleportGhostToMapPosition(actor, map.Owner, grid.TileSize, args.Position);
+    }
+
     private void HandleQueenEyeMove(Entity<TacticalMapUserComponent> user, EntityUid actor, Vector2i position)
     {
         if (HasComp<GhostComponent>(actor))
@@ -1708,14 +1724,7 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
                 return;
             }
 
-            var ghostTileCoords = new Vector2(position.X, position.Y);
-            var coords = new EntityCoordinates(ghostMap.Owner, ghostTileCoords * ghostGrid.TileSize);
-            _transform.SetCoordinates(actor, coords);
-            _transform.AttachToGridOrMap(actor);
-
-            if (TryComp(actor, out PhysicsComponent? physics))
-                _physics.SetLinearVelocity(actor, Vector2.Zero, body: physics);
-
+            TeleportGhostToMapPosition(actor, ghostMap.Owner, ghostGrid.TileSize, position);
             return;
         }
 
@@ -1740,6 +1749,17 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
         var worldPos = _transform.ToMapCoordinates(new EntityCoordinates(map.Owner, tileCoords * grid.TileSize));
 
         _transform.SetWorldPosition(eye, worldPos.Position);
+    }
+
+    private void TeleportGhostToMapPosition(EntityUid actor, EntityUid mapUid, float tileSize, Vector2i position)
+    {
+        var tileCoords = new Vector2(position.X, position.Y);
+        var coords = new EntityCoordinates(mapUid, tileCoords * tileSize);
+        _transform.SetCoordinates(actor, coords);
+        _transform.AttachToGridOrMap(actor);
+
+        if (TryComp(actor, out PhysicsComponent? physics))
+            _physics.SetLinearVelocity(actor, Vector2.Zero, body: physics);
     }
 
     public override void OpenComputerMap(Entity<TacticalMapComputerComponent?> computer, EntityUid user)

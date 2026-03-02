@@ -25,6 +25,7 @@ public sealed class TacticalMapContextPopup : Popup
     private readonly TacticalMapButton _createMortarButton;
     private readonly TacticalMapButton _deleteMortarButton;
     private readonly TacticalMapButton _enterCoordinatesButton;
+    private readonly TacticalMapButton _copyCoordinatesButton;
     private readonly SpriteSystem _spriteSystem;
 
     private static readonly ResPath AreaInfoRsiPath = new("/Textures/_RMC14/Structures/Machines/ceiling.rsi");
@@ -33,6 +34,7 @@ public sealed class TacticalMapContextPopup : Popup
     public Action? OnCreateMortarPressed;
     public Action? OnDeleteMortarPressed;
     public Action? OnEnterCoordinatesPressed;
+    public Action? OnCopyCoordinatesPressed;
 
     public TacticalMapContextPopup()
     {
@@ -107,6 +109,13 @@ public sealed class TacticalMapContextPopup : Popup
         };
         _enterCoordinatesButton.Button.OnPressed += _ => OnEnterCoordinatesPressed?.Invoke();
 
+        _copyCoordinatesButton = new TacticalMapButton
+        {
+            MinHeight = 20,
+            HorizontalExpand = true
+        };
+        _copyCoordinatesButton.Button.OnPressed += _ => OnCopyCoordinatesPressed?.Invoke();
+
         _headerRow.AddChild(_areaIcon);
         _headerRow.AddChild(_areaNameLabel);
         root.AddChild(_headerRow);
@@ -123,7 +132,8 @@ public sealed class TacticalMapContextPopup : Popup
         Vector2i? enteredCoordinates,
         Vector2i? calculatedCoordinates,
         bool showDeleteMortar,
-        bool showCoordinateEntry)
+        bool showCoordinateEntry,
+        bool showCopyCoordinates)
     {
         _areaNameLabel.Text = info.AreaName;
         _infoContainer.RemoveAllChildren();
@@ -176,6 +186,8 @@ public sealed class TacticalMapContextPopup : Popup
         _deleteMortarButton.Visible = showDeleteMortar;
         _enterCoordinatesButton.Text = Loc.GetString("ui-tactical-map-enter-coordinates");
         _enterCoordinatesButton.Visible = showCoordinateEntry;
+        _copyCoordinatesButton.Text = Loc.GetString("ui-tactical-map-copy-coordinates");
+        _copyCoordinatesButton.Visible = showCopyCoordinates;
         AddActionRow(allowed, blocked);
     }
 
@@ -251,6 +263,7 @@ public sealed class TacticalMapContextPopup : Popup
         _createMortarButton.Orphan();
         _deleteMortarButton.Orphan();
         _enterCoordinatesButton.Orphan();
+        _copyCoordinatesButton.Orphan();
 
         var buttonColumn = new BoxContainer
         {
@@ -265,6 +278,8 @@ public sealed class TacticalMapContextPopup : Popup
             buttonColumn.AddChild(_deleteMortarButton);
         if (_enterCoordinatesButton.Visible)
             buttonColumn.AddChild(_enterCoordinatesButton);
+        if (_copyCoordinatesButton.Visible)
+            buttonColumn.AddChild(_copyCoordinatesButton);
         row.AddChild(buttonColumn);
 
         _infoContainer.AddChild(row);

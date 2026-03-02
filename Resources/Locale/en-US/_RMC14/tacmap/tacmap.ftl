@@ -100,6 +100,8 @@ ui-tactical-map-action-medevac = Medevac
 ui-tactical-map-action-paradrop = Paradrop
 ui-tactical-map-action-fulton = Fulton
 ui-tactical-map-action-landing-zone = LZ
+ui-tactical-map-copy-coordinates = Copy Coordinates
+ui-tactical-map-copy-coords-format = {$x}, {$y}
 
 ui-tactical-map-coords-dialog-title = Enter Coordinates
 ui-tactical-map-coords-dialog-x = X
