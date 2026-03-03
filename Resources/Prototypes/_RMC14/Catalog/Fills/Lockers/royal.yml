@@ -54,6 +54,7 @@
   id: RMCClosetRCMTroopCommanderFill
   table: !type:AllSelector
     children:
+    - id: RMCHeadRoyalBeretLead
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBeltHolsterPistolRCMFilled

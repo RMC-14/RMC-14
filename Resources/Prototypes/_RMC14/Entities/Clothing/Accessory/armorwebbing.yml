@@ -292,7 +292,7 @@
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features several small pouches, capable of carrying assorted small items.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/shell.rsi
+    sprite: _RMC14/Objects/Clothing/ArmorWebbing/Royal/pouch.rsi
     state: webbing
 
 - type: entity
