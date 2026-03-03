@@ -10,6 +10,7 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
       - SPP
