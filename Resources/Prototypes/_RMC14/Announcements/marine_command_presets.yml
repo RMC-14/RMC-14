@@ -6,84 +6,91 @@
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
-    animation: Typewriter
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.7
-    backgroundColor: "#0a1a2d"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.025
-    responsiveScaleFactor: 1.15
-    holdDuration: 10
-    shakeIntensity: 0.8
-    flickerChance: 0
-    glitchChance: 0.01
-    showSpriteBox: true
-    spriteBoxColor: "#0a1a2d"
-    spriteBoxBorderColor: "#4a9eff"
-    spriteBoxBorderThickness: 2
-    spriteBoxPadding: 18
-    spriteGlow: true
-    spriteGlowColor: "#4a9eff"
-    spriteGlowIntensity: 0.6
-    showSpeakerName: true
-    speakerNameColor: "#ffffff"
-    speakerNameFontSize: 14
-    speakerNamePosition: Below
-    spritePosition: Left
-    spriteSpacing: 0
-    spriteDisplayMode: TopHalf
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: ">> COMMAND <<"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      typewriterMode: Linear
-      randomizeSpeed: false
-      speedVariation: 0.2
-      enableSlide: false
-      slideDuration: 1.0
-      slideDirection: Top
-      enableZoom: false
-      zoomStartScale: 0.1
-      zoomDuration: 1.0
-      enableBounce: false
-      bounceCount: 3
-      bounceHeight: 15
-      easingIn: EaseInOut
-      easingOut: EaseInOut
-      enableCRT: true
-      crtSettings:
-        enabled: true
-        showScanlines: true
-        scanlineSpacing: 6
-        scanlineThickness: 10
-        scanlineAlpha: 0.95
-        scanlineSpeed: 60
-        scanlineColor: "#1c99ff"
-        showNoise: true
-        noiseIntensity: 4
-        noiseAlpha: 0.6
-        showVignette: true
-        vignetteIntensity: 3
-        vignetteColor: "#000000"
-        showGlow: true
-        glowIntensity: 1.4
-        glowSpeed: 1
-        glowColor: "#4a9eff"
-        showCurvature: true
-        curvatureAmount: 0.3
-        showChromaticAberration: true
-        chromaticAmount: 1
+    animation:
+      animation: Typewriter
+      printSpeed: 0.025
+      holdDuration: 10
+      shakeIntensity: 0.8
+      flickerChance: 0
+      glitchChance: 0.01
+      animationEnhancements:
+        typewriterMode: Linear
+        randomizeSpeed: false
+        speedVariation: 0.2
+        enableSlide: false
+        slideDuration: 1.0
+        slideDirection: Top
+        enableZoom: false
+        zoomStartScale: 0.1
+        zoomDuration: 1.0
+        enableBounce: false
+        bounceCount: 3
+        bounceHeight: 15
+        easingIn: EaseInOut
+        easingOut: EaseInOut
+        enableCRT: true
+        crtSettings:
+          enabled: true
+          showScanlines: true
+          scanlineSpacing: 6
+          scanlineThickness: 10
+          scanlineAlpha: 0.95
+          scanlineSpeed: 60
+          scanlineColor: "#1c99ff"
+          showNoise: true
+          noiseIntensity: 4
+          noiseAlpha: 0.6
+          showVignette: true
+          vignetteIntensity: 3
+          vignetteColor: "#000000"
+          showGlow: true
+          glowIntensity: 1.4
+          glowSpeed: 1
+          glowColor: "#4a9eff"
+          showCurvature: true
+          curvatureAmount: 0.3
+          showChromaticAberration: true
+          chromaticAmount: 1
+    layout:
+      position: TopLeft
+      speakerNamePosition: Below
+      spritePosition: Left
+      spriteSpacing: 0
+      spriteDisplayMode: TopHalf
+      uiScale: 3
+      titlePosition: Above
+    background:
+      showBackground: false
+      backgroundAlpha: 0.7
+      backgroundColor: "#0a1a2d"
+    text:
+      primaryColor: "#a8d6ff"
+      font: "Cozette"
+      fontSize: 20
+      lineHeight: 48
+      showSpeakerName: true
+      speakerNameColor: "#ffffff"
+      speakerNameFontSize: 14
+    sprite:
+      showSpriteBox: true
+      spriteBoxColor: "#0a1a2d"
+      spriteBoxBorderColor: "#4a9eff"
+      spriteBoxBorderThickness: 2
+      spriteBoxPadding: 18
+      spriteGlow: true
+      spriteGlowColor: "#4a9eff"
+      spriteGlowIntensity: 0.6
+      spriteScale: 1
+    title:
+      showTitle: true
+      title: ">> COMMAND <<"
+      titleColor: "#4a9eff"
+      titleFontSize: 40
+      titleFont: "CozetteBold"
+      titleUnderline: true
+      titleUnderlineThickness: 2
+    scaling:
+      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
@@ -101,84 +108,91 @@
   defaultVariant: MarineCommandDefault
   simplifiedVariant: MarineCommandSimplified
   style:
-    animation: Typewriter
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.7
-    backgroundColor: "#0a1a2d"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.025
-    responsiveScaleFactor: 1.15
-    holdDuration: 10
-    shakeIntensity: 0.8
-    flickerChance: 0
-    glitchChance: 0.01
-    showSpriteBox: true
-    spriteBoxColor: "#0a1a2d"
-    spriteBoxBorderColor: "#4a9eff"
-    spriteBoxBorderThickness: 2
-    spriteBoxPadding: 18
-    spriteGlow: true
-    spriteGlowColor: "#4a9eff"
-    spriteGlowIntensity: 0.6
-    showSpeakerName: true
-    speakerNameColor: "#ffffff"
-    speakerNameFontSize: 14
-    speakerNamePosition: Below
-    spritePosition: Left
-    spriteSpacing: 0
-    spriteDisplayMode: TopHalf
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: ">> OVERWATCH <<"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      typewriterMode: Linear
-      randomizeSpeed: false
-      speedVariation: 0.2
-      enableSlide: false
-      slideDuration: 1.0
-      slideDirection: Top
-      enableZoom: false
-      zoomStartScale: 0.1
-      zoomDuration: 1.0
-      enableBounce: false
-      bounceCount: 3
-      bounceHeight: 15
-      easingIn: EaseInOut
-      easingOut: EaseInOut
-      enableCRT: true
-      crtSettings:
-        enabled: true
-        showScanlines: true
-        scanlineSpacing: 6
-        scanlineThickness: 10
-        scanlineAlpha: 0.95
-        scanlineSpeed: 60
-        scanlineColor: "#1c99ff"
-        showNoise: true
-        noiseIntensity: 4
-        noiseAlpha: 0.6
-        showVignette: true
-        vignetteIntensity: 3
-        vignetteColor: "#000000"
-        showGlow: true
-        glowIntensity: 1.4
-        glowSpeed: 1
-        glowColor: "#4a9eff"
-        showCurvature: true
-        curvatureAmount: 0.3
-        showChromaticAberration: true
-        chromaticAmount: 1
+    animation:
+      animation: Typewriter
+      printSpeed: 0.025
+      holdDuration: 10
+      shakeIntensity: 0.8
+      flickerChance: 0
+      glitchChance: 0.01
+      animationEnhancements:
+        typewriterMode: Linear
+        randomizeSpeed: false
+        speedVariation: 0.2
+        enableSlide: false
+        slideDuration: 1.0
+        slideDirection: Top
+        enableZoom: false
+        zoomStartScale: 0.1
+        zoomDuration: 1.0
+        enableBounce: false
+        bounceCount: 3
+        bounceHeight: 15
+        easingIn: EaseInOut
+        easingOut: EaseInOut
+        enableCRT: true
+        crtSettings:
+          enabled: true
+          showScanlines: true
+          scanlineSpacing: 6
+          scanlineThickness: 10
+          scanlineAlpha: 0.95
+          scanlineSpeed: 60
+          scanlineColor: "#1c99ff"
+          showNoise: true
+          noiseIntensity: 4
+          noiseAlpha: 0.6
+          showVignette: true
+          vignetteIntensity: 3
+          vignetteColor: "#000000"
+          showGlow: true
+          glowIntensity: 1.4
+          glowSpeed: 1
+          glowColor: "#4a9eff"
+          showCurvature: true
+          curvatureAmount: 0.3
+          showChromaticAberration: true
+          chromaticAmount: 1
+    layout:
+      position: TopLeft
+      speakerNamePosition: Below
+      spritePosition: Left
+      spriteSpacing: 0
+      spriteDisplayMode: TopHalf
+      uiScale: 3
+      titlePosition: Above
+    background:
+      showBackground: false
+      backgroundAlpha: 0.7
+      backgroundColor: "#0a1a2d"
+    text:
+      primaryColor: "#a8d6ff"
+      font: "Cozette"
+      fontSize: 20
+      lineHeight: 48
+      showSpeakerName: true
+      speakerNameColor: "#ffffff"
+      speakerNameFontSize: 14
+    sprite:
+      showSpriteBox: true
+      spriteBoxColor: "#0a1a2d"
+      spriteBoxBorderColor: "#4a9eff"
+      spriteBoxBorderThickness: 2
+      spriteBoxPadding: 18
+      spriteGlow: true
+      spriteGlowColor: "#4a9eff"
+      spriteGlowIntensity: 0.6
+      spriteScale: 1
+    title:
+      showTitle: true
+      title: ">> OVERWATCH <<"
+      titleColor: "#4a9eff"
+      titleFontSize: 40
+      titleFont: "CozetteBold"
+      titleUnderline: true
+      titleUnderlineThickness: 2
+    scaling:
+      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
@@ -194,63 +208,70 @@
   description: "Standard marine announcements"
   target: Marines
   style:
-    animation: Typewriter
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.7
-    backgroundColor: "#0a1a2d"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.025
-    responsiveScaleFactor: 1.15
-    holdDuration: 10
-    shakeIntensity: 0.8
-    flickerChance: 0
-    glitchChance: 0.01
-    showSpriteBox: true
-    spriteBoxColor: "#0a1a2d"
-    spriteBoxBorderColor: "#4a9eff"
-    spriteBoxBorderThickness: 2
-    spriteBoxPadding: 18
-    spriteBoxShader: RMCMarineAnnouncementGrid
-    spriteGlow: false
-    spriteGlowColor: "#4a9eff"
-    spriteGlowIntensity: 0.6
-    showSpeakerName: true
-    speakerNameColor: "#ffffff"
-    speakerNameFontSize: 14
-    speakerNamePosition: Below
-    spritePosition: Left
-    spriteSpacing: 0
-    spriteDisplayMode: TopHalf
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: ">> COMMAND <<"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      typewriterMode: Linear
-      randomizeSpeed: false
-      speedVariation: 0.2
-      enableSlide: false
-      slideDuration: 1.0
-      slideDirection: Top
-      enableZoom: false
-      zoomStartScale: 0.1
-      zoomDuration: 1.0
-      enableBounce: false
-      bounceCount: 3
-      bounceHeight: 15
-      easingIn: EaseInOut
-      easingOut: EaseInOut
-      enableCRT: false
+    animation:
+      animation: Typewriter
+      printSpeed: 0.025
+      holdDuration: 10
+      shakeIntensity: 0.8
+      flickerChance: 0
+      glitchChance: 0.01
+      animationEnhancements:
+        typewriterMode: Linear
+        randomizeSpeed: false
+        speedVariation: 0.2
+        enableSlide: false
+        slideDuration: 1.0
+        slideDirection: Top
+        enableZoom: false
+        zoomStartScale: 0.1
+        zoomDuration: 1.0
+        enableBounce: false
+        bounceCount: 3
+        bounceHeight: 15
+        easingIn: EaseInOut
+        easingOut: EaseInOut
+        enableCRT: false
+    layout:
+      position: TopLeft
+      speakerNamePosition: Below
+      spritePosition: Left
+      spriteSpacing: 0
+      spriteDisplayMode: TopHalf
+      uiScale: 3
+      titlePosition: Above
+    background:
+      showBackground: false
+      backgroundAlpha: 0.7
+      backgroundColor: "#0a1a2d"
+    text:
+      primaryColor: "#a8d6ff"
+      font: "Cozette"
+      fontSize: 20
+      lineHeight: 48
+      showSpeakerName: true
+      speakerNameColor: "#ffffff"
+      speakerNameFontSize: 14
+    sprite:
+      showSpriteBox: true
+      spriteBoxColor: "#0a1a2d"
+      spriteBoxBorderColor: "#4a9eff"
+      spriteBoxBorderThickness: 2
+      spriteBoxPadding: 18
+      spriteBoxShader: RMCMarineAnnouncementGrid
+      spriteGlow: false
+      spriteGlowColor: "#4a9eff"
+      spriteGlowIntensity: 0.6
+      spriteScale: 1
+    title:
+      showTitle: true
+      title: ">> COMMAND <<"
+      titleColor: "#4a9eff"
+      titleFontSize: 40
+      titleFont: "CozetteBold"
+      titleUnderline: true
+      titleUnderlineThickness: 2
+    scaling:
+      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
@@ -267,37 +288,44 @@
   target: Marines
   showSprite: false
   style:
-    animation: None
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.35
-    backgroundColor: "#0d1320"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.02
-    responsiveScaleFactor: 1.15
-    holdDuration: 8
-    shakeIntensity: 0
-    flickerChance: 0
-    glitchChance: 0
-    showSpriteBox: false
-    showSpeakerName: false
-    spritePosition: Left
-    spriteDisplayMode: FullSprite
-    spriteScale: 0.85
-    uiScale: 2
-    showTitle: true
-    title: ">> COMMAND <<"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      enableCRT: false
+    animation:
+      animation: None
+      printSpeed: 0.02
+      holdDuration: 8
+      shakeIntensity: 0
+      flickerChance: 0
+      glitchChance: 0
+      animationEnhancements:
+        enableCRT: false
+    layout:
+      position: TopLeft
+      spritePosition: Left
+      spriteDisplayMode: FullSprite
+      uiScale: 2
+      titlePosition: Above
+    background:
+      showBackground: false
+      backgroundAlpha: 0.35
+      backgroundColor: "#0d1320"
+    text:
+      primaryColor: "#a8d6ff"
+      font: "Cozette"
+      fontSize: 20
+      lineHeight: 48
+      showSpeakerName: false
+    sprite:
+      showSpriteBox: false
+      spriteScale: 0.85
+    title:
+      showTitle: true
+      title: ">> COMMAND <<"
+      titleColor: "#4a9eff"
+      titleFontSize: 40
+      titleFont: "CozetteBold"
+      titleUnderline: true
+      titleUnderlineThickness: 2
+    scaling:
+      responsiveScaleFactor: 1.15
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 0.8

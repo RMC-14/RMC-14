@@ -5,53 +5,66 @@ namespace Content.Shared._RMC14.Announce;
 [DataDefinition, Serializable, NetSerializable]
 public sealed partial class AnnouncementStyle : ISerializationHooks, IRobustCloneable<AnnouncementStyle>
 {
-    private AnnouncementAnimationConfig _animation = new();
-    private AnnouncementLayoutConfig _layout = new();
-    private AnnouncementBackgroundConfig _background = new();
-    private AnnouncementTextConfig _text = new();
-    private AnnouncementSpriteConfig _sprite = new();
-    private AnnouncementTitleConfig _title = new();
-    private AnnouncementScalingConfig _scaling = new();
+    [DataField]
+    private AnnouncementAnimationConfig animation = new();
 
-    public AnnouncementAnimationConfig AnimationConfig => _animation;
-    public AnnouncementLayoutConfig LayoutConfig => _layout;
-    public AnnouncementBackgroundConfig BackgroundConfig => _background;
-    public AnnouncementTextConfig TextConfig => _text;
-    public AnnouncementSpriteConfig SpriteConfig => _sprite;
-    public AnnouncementTitleConfig TitleConfig => _title;
-    public AnnouncementScalingConfig ScalingConfig => _scaling;
+    [DataField]
+    private AnnouncementLayoutConfig layout = new();
+
+    [DataField]
+    private AnnouncementBackgroundConfig background = new();
+
+    [DataField]
+    private AnnouncementTextConfig text = new();
+
+    [DataField]
+    private AnnouncementSpriteConfig sprite = new();
+
+    [DataField]
+    private AnnouncementTitleConfig title = new();
+
+    [DataField]
+    private AnnouncementScalingConfig scaling = new();
+
+    public AnnouncementAnimationConfig AnimationConfig => animation;
+    public AnnouncementLayoutConfig LayoutConfig => layout;
+    public AnnouncementBackgroundConfig BackgroundConfig => background;
+    public AnnouncementTextConfig TextConfig => text;
+    public AnnouncementSpriteConfig SpriteConfig => sprite;
+    public AnnouncementTitleConfig TitleConfig => title;
+    public AnnouncementScalingConfig ScalingConfig => scaling;
 
     public AnnouncementStyle Clone()
     {
         return new AnnouncementStyle
         {
-            _animation = _animation.Clone(),
-            _layout = _layout.Clone(),
-            _background = _background.Clone(),
-            _text = _text.Clone(),
-            _sprite = _sprite.Clone(),
-            _title = _title.Clone(),
-            _scaling = _scaling.Clone(),
+            animation = animation.Clone(),
+            layout = layout.Clone(),
+            background = background.Clone(),
+            text = text.Clone(),
+            sprite = sprite.Clone(),
+            title = title.Clone(),
+            scaling = scaling.Clone(),
         };
     }
 
     public void ValidateAndNormalize()
     {
-        _animation ??= new AnnouncementAnimationConfig();
-        _layout ??= new AnnouncementLayoutConfig();
-        _background ??= new AnnouncementBackgroundConfig();
-        _text ??= new AnnouncementTextConfig();
-        _sprite ??= new AnnouncementSpriteConfig();
-        _title ??= new AnnouncementTitleConfig();
-        _scaling ??= new AnnouncementScalingConfig();
+        animation ??= new AnnouncementAnimationConfig();
+        layout ??= new AnnouncementLayoutConfig();
+        background ??= new AnnouncementBackgroundConfig();
+        text ??= new AnnouncementTextConfig();
+        sprite ??= new AnnouncementSpriteConfig();
+        title ??= new AnnouncementTitleConfig();
+        scaling ??= new AnnouncementScalingConfig();
 
-        _animation.ValidateAndNormalize();
-        _layout.ValidateAndNormalize();
-        _background.ValidateAndNormalize();
-        _text.ValidateAndNormalize();
-        _sprite.ValidateAndNormalize();
-        _title.ValidateAndNormalize();
-        _scaling.ValidateAndNormalize();
+        animation.ValidateAndNormalize();
+        layout.ValidateAndNormalize();
+        background.ValidateAndNormalize();
+        text.ValidateAndNormalize();
+        sprite.ValidateAndNormalize();
+        title.ValidateAndNormalize();
+        scaling.ValidateAndNormalize();
     }
 
     void ISerializationHooks.AfterDeserialization()

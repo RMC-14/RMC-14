@@ -102,7 +102,7 @@ public static class AnnouncementStyling
         if (text.Length == 0)
             return baseFontSize;
 
-        if (style?.EnableResponsiveScaling == false)
+        if (style?.ScalingConfig.EnableResponsiveScaling == false)
             return baseFontSize;
 
         var totalWordCount = text.Sum(line => CountWords(line));
@@ -127,12 +127,12 @@ public static class AnnouncementStyling
             combinedScaleFactor *= screenScaleFactor;
         }
 
-        var scalingFactor = style?.ResponsiveScaleFactor ?? 1.0f;
+        var scalingFactor = style?.ScalingConfig.ResponsiveScaleFactor ?? 1.0f;
         combinedScaleFactor *= scalingFactor;
 
         var finalFontSize = baseFontSize * combinedScaleFactor;
-        var minScale = style?.MinScale ?? 0.4f;
-        var maxScale = style?.MaxScale ?? 1.5f;
+        var minScale = style?.ScalingConfig.MinScale ?? 0.4f;
+        var maxScale = style?.ScalingConfig.MaxScale ?? 1.5f;
         var minFontSize = baseFontSize * minScale;
         var maxFontSize = baseFontSize * maxScale;
 

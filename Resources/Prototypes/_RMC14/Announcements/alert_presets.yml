@@ -5,43 +5,50 @@
   target: All
   showSprite: false
   style:
-    animation: Typewriter
-    position: TopLeft
-    showBackground: false
-    backgroundAlpha: 0.7
-    backgroundColor: "#0a1a2d"
-    primaryColor: "#a8d6ff"
-    font: "Cozette"
-    fontSize: 20
-    lineHeight: 48
-    printSpeed: 0.025
-    responsiveScaleFactor: 1.15
-    holdDuration: 10
-    shakeIntensity: 0.0
-    flickerChance: 0
-    glitchChance: 0
-    showSpriteBox: false
-    showSpeakerName: false
-    spritePosition: Left
-    spriteDisplayMode: FullSprite
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: "ALERT LEVEL"
-    titleColor: "#4a9eff"
-    titleFontSize: 40
-    titleFont: "CozetteBold"
-    titleUnderline: true
-    titleUnderlineThickness: 2
-    titlePosition: Above
-    animationEnhancements:
-      typewriterMode: Linear
-      randomizeSpeed: false
-      speedVariation: 0.2
-      enableSlide: false
-      enableZoom: false
-      enableBounce: false
-      enableCRT: false
+    animation:
+      animation: Typewriter
+      printSpeed: 0.025
+      holdDuration: 10
+      shakeIntensity: 0.0
+      flickerChance: 0
+      glitchChance: 0
+      animationEnhancements:
+        typewriterMode: Linear
+        randomizeSpeed: false
+        speedVariation: 0.2
+        enableSlide: false
+        enableZoom: false
+        enableBounce: false
+        enableCRT: false
+    layout:
+      position: TopLeft
+      spritePosition: Left
+      spriteDisplayMode: FullSprite
+      uiScale: 3
+      titlePosition: Above
+    background:
+      showBackground: false
+      backgroundAlpha: 0.7
+      backgroundColor: "#0a1a2d"
+    text:
+      primaryColor: "#a8d6ff"
+      font: "Cozette"
+      fontSize: 20
+      lineHeight: 48
+      showSpeakerName: false
+    sprite:
+      showSpriteBox: false
+      spriteScale: 1
+    title:
+      showTitle: true
+      title: "ALERT LEVEL"
+      titleColor: "#4a9eff"
+      titleFontSize: 40
+      titleFont: "CozetteBold"
+      titleUnderline: true
+      titleUnderlineThickness: 2
+    scaling:
+      responsiveScaleFactor: 1.15
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
@@ -54,32 +61,38 @@
   target: All
   showSprite: false
   style:
-    animation: Fade
-    position: TopLeft
-    showBackground: true
-    backgroundAlpha: 0.6
-    backgroundColor: "#1a0a0a"
-    primaryColor: "#ff4d4d"
-    fontSize: 24
-    lineHeight: 46
-    printSpeed: 0.015
-    holdDuration: 8
-    shakeIntensity: 0.1
-    flickerChance: 0.02
-    glitchChance: 0
-    showSpriteBox: false
-    showSpeakerName: false
-    spritePosition: Left
-    spriteDisplayMode: FullSprite
-    spriteScale: 1
-    uiScale: 2
-    title: "RED ALERT"
-    titleColor: "#ff4d4d"
-    titleFontSize: 28
-    titleFont: "DefaultBold"
-    titlePosition: Above
-    animationEnhancements:
-      enableCRT: false
+    animation:
+      animation: Fade
+      printSpeed: 0.015
+      holdDuration: 8
+      shakeIntensity: 0.1
+      flickerChance: 0.02
+      glitchChance: 0
+      animationEnhancements:
+        enableCRT: false
+    layout:
+      position: TopLeft
+      spritePosition: Left
+      spriteDisplayMode: FullSprite
+      uiScale: 2
+      titlePosition: Above
+    background:
+      showBackground: true
+      backgroundAlpha: 0.6
+      backgroundColor: "#1a0a0a"
+    text:
+      primaryColor: "#ff4d4d"
+      fontSize: 24
+      lineHeight: 46
+      showSpeakerName: false
+    sprite:
+      showSpriteBox: false
+      spriteScale: 1
+    title:
+      title: "RED ALERT"
+      titleColor: "#ff4d4d"
+      titleFontSize: 28
+      titleFont: "DefaultBold"
   sound:
     path: "/Audio/Misc/redalert.ogg"
     params:

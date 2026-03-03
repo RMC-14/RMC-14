@@ -146,12 +146,12 @@ public sealed partial class AnnouncementWidget
                     VerticalAlignment = VAlignment.Center
                 };
 
-                var message = _owner.CreateFormattedMessage(announcement.SpeakerName, new AnnouncementStyle
-                {
-                    PrimaryColor = style.TextConfig.SpeakerNameColor,
-                    FontSize = style.TextConfig.SpeakerNameFontSize,
-                    Font = style.TextConfig.Font
-                });
+                var speakerNameStyle = style.Clone();
+                speakerNameStyle.TextConfig.PrimaryColor = style.TextConfig.SpeakerNameColor;
+                speakerNameStyle.TextConfig.FontSize = style.TextConfig.SpeakerNameFontSize;
+                speakerNameStyle.TextConfig.Font = style.TextConfig.Font;
+
+                var message = _owner.CreateFormattedMessage(announcement.SpeakerName, speakerNameStyle);
 
                 label.SetMessage(message);
 

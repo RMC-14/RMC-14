@@ -4,66 +4,72 @@
   description: "Private Military Contractor transmission"
   target: Marines
   style:
-    animation: Typewriter
-    position: TopCenter
-    showBackground: true
-    backgroundAlpha: 0.4
-    backgroundColor: "#0a0d12"
-    primaryColor: "#c8f4ff"
-    fontSize: 22
-    lineHeight: 46
-    printSpeed: 0.022
-    holdDuration: 11
-    shakeIntensity: 0.45
-    flickerChance: 0
-    glitchChance: 0
-    showSpriteBox: true
-    spriteBoxColor: "#0a0d12"
-    spriteBoxBorderColor: "#89dfff"
-    spriteBoxBorderThickness: 1
-    spriteBoxPadding: 0
-    spriteGlow: true
-    spriteGlowColor: "#89dfff"
-    spriteGlowIntensity: 0.75
-    showSpeakerName: false
-    speakerNameColor: "#d8f9ff"
-    speakerNameFontSize: 14
-    speakerNamePosition: Left
-    spritePosition: Above
-    spriteSpacing: 0
-    spriteDisplayMode: TopHalf
-    spriteScale: 1
-    uiScale: 3
-    showTitle: true
-    title: ">> PMC DISPATCH <<"
-    titleColor: "#89dfff"
-    titleFontSize: 40
-    titleFont: "DefaultBold"
-    titlePosition: Above
-    animationEnhancements:
-      enableCRT: true
-      crtSettings:
-        enabled: true
-        showScanlines: true
-        scanlineSpacing: 0
-        scanlineThickness: 10
-        scanlineAlpha: 0.9
-        scanlineSpeed: 999
-        scanlineColor: "#89dfff"
-        showNoise: true
-        noiseIntensity: 55
-        noiseAlpha: 0.45
-        showVignette: true
-        vignetteIntensity: 2.8
-        vignetteColor: "#89dfff"
-        showGlow: true
-        glowIntensity: 1.35
-        glowSpeed: 1
-        glowColor: "#89dfff"
-        showCurvature: true
-        curvatureAmount: 999
-        showChromaticAberration: true
-        chromaticAmount: 99
+    animation:
+      animation: Typewriter
+      printSpeed: 0.022
+      holdDuration: 11
+      shakeIntensity: 0.45
+      flickerChance: 0
+      glitchChance: 0
+      animationEnhancements:
+        enableCRT: true
+        crtSettings:
+          enabled: true
+          showScanlines: true
+          scanlineSpacing: 0
+          scanlineThickness: 10
+          scanlineAlpha: 0.9
+          scanlineSpeed: 999
+          scanlineColor: "#89dfff"
+          showNoise: true
+          noiseIntensity: 55
+          noiseAlpha: 0.45
+          showVignette: true
+          vignetteIntensity: 2.8
+          vignetteColor: "#89dfff"
+          showGlow: true
+          glowIntensity: 1.35
+          glowSpeed: 1
+          glowColor: "#89dfff"
+          showCurvature: true
+          curvatureAmount: 999
+          showChromaticAberration: true
+          chromaticAmount: 99
+    layout:
+      position: TopCenter
+      speakerNamePosition: Left
+      spritePosition: Above
+      spriteSpacing: 0
+      spriteDisplayMode: TopHalf
+      uiScale: 3
+      titlePosition: Above
+    background:
+      showBackground: true
+      backgroundAlpha: 0.4
+      backgroundColor: "#0a0d12"
+    text:
+      primaryColor: "#c8f4ff"
+      fontSize: 22
+      lineHeight: 46
+      showSpeakerName: false
+      speakerNameColor: "#d8f9ff"
+      speakerNameFontSize: 14
+    sprite:
+      showSpriteBox: true
+      spriteBoxColor: "#0a0d12"
+      spriteBoxBorderColor: "#89dfff"
+      spriteBoxBorderThickness: 1
+      spriteBoxPadding: 0
+      spriteGlow: true
+      spriteGlowColor: "#89dfff"
+      spriteGlowIntensity: 0.75
+      spriteScale: 1
+    title:
+      showTitle: true
+      title: ">> PMC DISPATCH <<"
+      titleColor: "#89dfff"
+      titleFontSize: 40
+      titleFont: "DefaultBold"
   sound:
     path: "/Audio/_RMC14/Announcements/Marine/notice2.ogg"
   soundVolume: 1.0
