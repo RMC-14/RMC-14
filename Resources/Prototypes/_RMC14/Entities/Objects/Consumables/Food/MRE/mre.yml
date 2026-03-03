@@ -269,6 +269,7 @@
   parent: RMCBoxMREEmpty
   id: RMCBoxMRETSEEmpty
   name: box of ORPs (x12)
+  suffix: TSE
   description: A box of ORPs. Scrummy!
   components:
   - type: CMItemSlots
@@ -281,8 +282,6 @@
 
 - type: entity
   parent: RMCBoxMRETSEEmpty
-  name: box of ORPs (x12)
-  description: A box of ORPs. Nutritious, but not delicious.
   id: RMCBoxMRETSE
   suffix: Filled, TSE
   components:
