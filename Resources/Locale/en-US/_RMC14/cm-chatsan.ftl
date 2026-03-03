@@ -796,7 +796,7 @@ cm-chatsan-word-xenoover = xenover
 cm-chatsan-word-replacement-xover = over
 
 cm-chatsan-word-m2c = m2c
-cm-chatsan-word-replacement-m2c = heavy spitter
+cm-chatsan-word-replacement-m2c = heavy mounted spitter
 
 cm-chatsan-word-m13 = m13
 cm-chatsan-word-replacement-m13 = fast spitter
