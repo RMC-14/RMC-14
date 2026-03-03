@@ -28,7 +28,7 @@
         startingItem: RMCMagazinePistolL54
 
 - type: entity
-  parent: RMCWeaponPistolT73
+  parent: RMCWeaponPistolL54
   id: RMCWeaponPistolL54Empty
   suffix: Empty
   components:
@@ -41,7 +41,40 @@
         priority: 2
         whitelist:
           tags:
-          - RMCMagazinePistolT73
+          - RMCMagazinePistolL54
+
+- type: entity
+  parent: RMCWeaponPistolL54
+  id: RMCWeaponPistolL54Custom
+  name: L54 custom service pistol
+  description: The standard-issue semi-automatic sidearm of the TSPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a gold-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications.
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom.rsi
+    - type: RMCWeaponAccuracy
+      accuracyMultiplier: 1.5
+    - type: GunDamageModifier
+      multiplier: 1.25
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          whitelist:
+            tags:
+              - RMCMagazinePistolL54Custom
+          startingItem: RMCMagazinePistolL54Custom
+          
+- type: entity
+  parent: RMCWeaponPistolL54Custom
+  id: RMCWeaponPistolL54CustomAlt
+  suffix: Alt
+  description: The standard-issue semi-automatic sidearm of the TSPA and various military forces within the Three Sun Empire, chambered in 9x20mm. Functionally comparable to the UNMC’s M1984 service pistol, this particular example has been heavily customized—featuring a dark special-alloy finish, extended barrel with an integrated compensator, and precision-tuned internals, as well as an auto-eject feature. These modifications push its performance well beyond standard service specifications
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom_alt.rsi
+    - type: Clothing
+      sprite: _RMC14/Objects/Weapons/Guns/Pistols/l54_custom_alt.rsi
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -68,9 +101,65 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: MagazineVisuals
     magState: mag
+    
+- type: entity
+  parent: CMBaseMagazinePistol
+  id: RMCMagazinePistolL54Custom
+  name: L54-S magazine (9x20mm)
+  components:
+    - type: Tag
+      tags:
+        - CMMagazinePistol
+        - RMCMagazinePistolL54Custom
+    - type: BallisticAmmoProvider
+      mayTransfer: True
+      whitelist:
+        tags:
+          - RMCCartridge9x20mm
+      proto: RMCCartridge9x20mm
+      capacity: 12
+    - type: Sprite
+      sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Magazines/l54.rsi
+      layers:
+        - state: base
+          map: ["enum.GunVisualLayers.Base"]
+        - state: mag-1
+          map: ["enum.GunVisualLayers.Mag"]
+    - type: MagazineVisuals
+      magState: mag
+      
+- type: entity
+  parent: CMCartridgePistol9mm
+  id: RMCCartridge9x20mm
+  name: cartridge (9×20mm)
+  description: A 9×20mm cartridge for the L54 Custom.
+  components:
+    - type: Tag
+      tags:
+        - Cartridge
+        - RMCCartridge9x20mm
+    - type: CartridgeAmmo
+      proto: RMCBullet9x20mm
+      
+- type: entity
+  parent: CMBulletPistol9mm
+  id: RMCBullet9x20mm
+  categories: [ HideSpawnMenu ]
+  components:
+    - type: CMArmorPiercing
+      amount: 15
 
 - type: Tag
   id: RMCWeaponPistolL54
 
 - type: Tag
   id: RMCMagazinePistolL54
+  
+- type: Tag
+  id: RMCMagazinePistolL54Custom
+  
+- type: Tag
+  id: RMCCartridge9x20mm
+  
+- type: Tag
+  id: RMCBullet9x20mm

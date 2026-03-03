@@ -357,6 +357,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Reagent = fireReagent;
         chainComp.MaxIntensity = maxIntensity;
         chainComp.MaxDuration = maxDuration;
+        chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
     }
@@ -734,7 +735,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                     if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration + (int)(comp.FuelPressure * reagent.DurationMod));
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 
