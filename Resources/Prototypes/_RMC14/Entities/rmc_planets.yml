@@ -496,7 +496,7 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
-    survivorJobScenarios: # TODO: Check if these job slots are actually parity
+    survivorJobScenarios:
       spp_sof:
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
@@ -516,6 +516,7 @@
     survivorJobOverrideScenarios: # Scientist rolls for SOF medic
       spp_sof :
         CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 
 # PVE Maps Below
 - type: entity
