@@ -1,16 +1,22 @@
+using Robust.Shared.IoC;
+using Robust.Shared.Serialization.Manager;
+
 namespace Content.Shared._RMC14.Announce;
 
 public static class AnnouncementStyleMerger
 {
     public static AnnouncementStyle Merge(AnnouncementStyle baseStyle, AnnouncementStyleOverride? overrideStyle)
     {
-        var merged = baseStyle.Clone();
+        var serialization = IoCManager.Resolve<ISerializationManager>();
+        var merged = serialization.CreateCopy(baseStyle, notNullableOverride: true)!;
 
         if (overrideStyle != null)
         {
             merged.AnimationConfig.Animation = overrideStyle.Animation ?? merged.AnimationConfig.Animation;
             merged.AnimationConfig.AnimationEnhancements =
-                overrideStyle.AnimationEnhancements?.Clone() ?? merged.AnimationConfig.AnimationEnhancements;
+                overrideStyle.AnimationEnhancements == null
+                    ? merged.AnimationConfig.AnimationEnhancements
+                    : serialization.CreateCopy(overrideStyle.AnimationEnhancements, notNullableOverride: true)!;
 
             merged.TextConfig.PrimaryColor = overrideStyle.PrimaryColor ?? merged.TextConfig.PrimaryColor;
             merged.TitleConfig.TitleColor = overrideStyle.TitleColor ?? merged.TitleConfig.TitleColor;

@@ -2,7 +2,9 @@ using Content.Shared._RMC14.Announce;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
+using Robust.Shared.IoC;
 using Robust.Shared.Maths;
+using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Utility;
 using System.Linq;
 using System.Numerics;
@@ -15,7 +17,8 @@ public static class AnnouncementStyling
     public static AnnouncementStyle CreateResponsiveStyle(AnnouncementStyle baseStyle, float responsiveFontSize, Vector2 screenSize)
     {
         var scaleFactor = CalculateScreenScaleFactor(screenSize);
-        var style = baseStyle.Clone();
+        var serialization = IoCManager.Resolve<ISerializationManager>();
+        var style = serialization.CreateCopy(baseStyle, notNullableOverride: true)!;
 
         style.TextConfig.FontSize = responsiveFontSize;
         style.TextConfig.LineHeight = baseStyle.TextConfig.LineHeight * scaleFactor;
@@ -23,7 +26,7 @@ public static class AnnouncementStyling
         style.SpriteConfig.SpriteBoxBorderThickness = baseStyle.SpriteConfig.SpriteBoxBorderThickness * scaleFactor;
         style.SpriteConfig.SpriteBoxPadding = baseStyle.SpriteConfig.SpriteBoxPadding * scaleFactor;
         style.TextConfig.SpeakerNameFontSize = baseStyle.TextConfig.SpeakerNameFontSize * scaleFactor;
-        style.AnimationConfig.AnimationEnhancements = baseStyle.AnimationConfig.AnimationEnhancements?.Clone() ?? new RealisticAnimations();
+        style.AnimationConfig.AnimationEnhancements = serialization.CreateCopy(baseStyle.AnimationConfig.AnimationEnhancements, notNullableOverride: true)!;
 
         return style;
     }

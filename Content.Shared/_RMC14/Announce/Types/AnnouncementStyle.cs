@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Announce;
 
 [DataDefinition, Serializable, NetSerializable]
-public sealed partial class AnnouncementStyle : IRobustCloneable<AnnouncementStyle>
+public sealed partial class AnnouncementStyle
 {
     [DataField]
     private AnnouncementAnimationConfig animation = new();
@@ -33,18 +33,4 @@ public sealed partial class AnnouncementStyle : IRobustCloneable<AnnouncementSty
     public AnnouncementSpriteConfig SpriteConfig => sprite ??= new AnnouncementSpriteConfig();
     public AnnouncementTitleConfig TitleConfig => title ??= new AnnouncementTitleConfig();
     public AnnouncementScalingConfig ScalingConfig => scaling ??= new AnnouncementScalingConfig();
-
-    public AnnouncementStyle Clone()
-    {
-        return new AnnouncementStyle
-        {
-            animation = AnimationConfig.Clone(),
-            layout = LayoutConfig.Clone(),
-            background = BackgroundConfig.Clone(),
-            text = TextConfig.Clone(),
-            sprite = SpriteConfig.Clone(),
-            title = TitleConfig.Clone(),
-            scaling = ScalingConfig.Clone(),
-        };
-    }
 }

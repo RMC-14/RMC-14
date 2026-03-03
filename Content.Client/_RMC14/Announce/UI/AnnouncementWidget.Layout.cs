@@ -330,13 +330,33 @@ public sealed partial class AnnouncementWidget
 
     private FormattedMessage CreateFormattedMessage(string text, AnnouncementStyle style)
     {
+        return CreateFormattedMessageWithOverrides(text, style, null, null, null);
+    }
+
+    private FormattedMessage CreateFormattedMessageWithOverrides(
+        string text,
+        AnnouncementStyle style,
+        float? fontSizeOverride,
+        Color? colorOverride,
+        string? fontOverride)
+    {
         var screenSize = ResolveScreenSize();
         var maxAllowedWidth = _activeTextMaxWidth > 0f
             ? _activeTextMaxWidth
             : AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.TextConfig.FontSize, maxAllowedWidth, screenSize, style);
+        var baseFontSize = fontSizeOverride ?? style.TextConfig.FontSize;
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
+            ActiveAnnouncement?.Data.Text ?? new[] { text },
+            baseFontSize,
+            maxAllowedWidth,
+            screenSize,
+            style);
 
-        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.TextConfig.PrimaryColor, style.TextConfig.Font);
+        return AnnouncementStyling.CreateFormattedMessage(
+            text,
+            responsiveFontSize,
+            colorOverride ?? style.TextConfig.PrimaryColor,
+            fontOverride ?? style.TextConfig.Font);
     }
 
     private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)
