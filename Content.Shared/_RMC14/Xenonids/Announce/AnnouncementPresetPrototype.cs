@@ -78,4 +78,7 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
 
     [DataField]
     public Vector2 TextOffset { get; private set; } = Vector2.Zero;
+
+    [DataField]
+    public bool VisibleInSettings { get; private set; } = true;
 }

@@ -30,8 +30,7 @@ public sealed partial class AccessibilityTab
 
     private void AddPerAnnouncementOverrides()
     {
-        var presets = _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>()
-            .Where(HasAnyVariant)
+        var presets = GetRootPresets()
             .OrderBy(preset => preset.Name)
             .ToList();
 
@@ -62,11 +61,26 @@ public sealed partial class AccessibilityTab
         }
     }
 
-    private static bool HasAnyVariant(AnnouncementPresetPrototype preset)
+    private List<AnnouncementPresetPrototype> GetRootPresets()
     {
-        return !string.IsNullOrWhiteSpace(preset.StylizedVariant) ||
-               !string.IsNullOrWhiteSpace(preset.DefaultVariant) ||
-               !string.IsNullOrWhiteSpace(preset.SimplifiedVariant);
+        var presets = _prototypeManager.EnumeratePrototypes<AnnouncementPresetPrototype>().ToList();
+        var variantIds = new HashSet<string>();
+
+        foreach (var preset in presets)
+        {
+            if (!string.IsNullOrWhiteSpace(preset.StylizedVariant))
+                variantIds.Add(preset.StylizedVariant);
+
+            if (!string.IsNullOrWhiteSpace(preset.DefaultVariant))
+                variantIds.Add(preset.DefaultVariant);
+
+            if (!string.IsNullOrWhiteSpace(preset.SimplifiedVariant))
+                variantIds.Add(preset.SimplifiedVariant);
+        }
+
+        return presets
+            .Where(preset => !variantIds.Contains(preset.ID) && preset.VisibleInSettings)
+            .ToList();
     }
 
     private List<AnnouncementDisplayPreference> GetAvailablePreferences(AnnouncementPresetPrototype preset)
@@ -81,6 +95,8 @@ public sealed partial class AccessibilityTab
 
         if (!string.IsNullOrWhiteSpace(preset.SimplifiedVariant))
             list.Add(AnnouncementDisplayPreference.Simplified);
+
+        list.Add(AnnouncementDisplayPreference.Disabled);
 
         return list;
     }
@@ -140,6 +156,7 @@ public sealed partial class AccessibilityTab
                     AnnouncementDisplayPreference.Stylized => "rmc-ui-options-announcements-style-stylized",
                     AnnouncementDisplayPreference.Default => "rmc-ui-options-announcements-style-default",
                     AnnouncementDisplayPreference.Simplified => "rmc-ui-options-announcements-style-simplified",
+                    AnnouncementDisplayPreference.Disabled => "rmc-ui-options-announcements-style-disabled",
                     _ => null
                 };
 

@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Announce;
+using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
@@ -14,4 +15,5 @@ public sealed record AnnouncementAnimationContext(
     int TitleOffset,
     Func<string, AnnouncementStyle, FormattedMessage> FormatMessage,
     Action SetAllLabels,
+    Control? VisualContainer,
     IRobustRandom Random);

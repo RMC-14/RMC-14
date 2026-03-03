@@ -9,6 +9,7 @@ public sealed partial class GeneralAnnounceSystem
     private const string PresetMarineCommand = "MarineCommand";
     private const string PresetAres = "Ares";
     private const string PresetCritical = "Critical";
+    private const string PresetCLF = "CLF";
 
     public void AnnounceAsPlayer(
         EntityUid playerEntity,
@@ -68,6 +69,21 @@ public sealed partial class GeneralAnnounceSystem
             Message = message,
             Preset = PresetCritical,
             Target = AnnouncementTarget.All
+        };
+
+        AnnounceAdvanced(request);
+    }
+
+    public void AnnounceCLF(EntityUid? source, string message, SoundSpecifier? sound = null)
+    {
+        var request = new AnnouncementRequest
+        {
+            Message = message,
+            Preset = PresetCLF,
+            Target = AnnouncementTarget.All,
+            Source = source,
+            ShowSprite = false,
+            SoundOverride = sound
         };
 
         AnnounceAdvanced(request);

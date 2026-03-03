@@ -178,10 +178,9 @@ public sealed partial class AnnouncementWidget
 
         private static Control ApplyIncognitoFinal(AnnouncementNetData announcement, Vector2 screenSize, Control spriteContainer)
         {
-            var wantsEyeBand = string.Equals(announcement.ConfigId, "PMC", StringComparison.OrdinalIgnoreCase);
             var applyMask = announcement.IncognitoMask;
 
-            if (!applyMask && !wantsEyeBand)
+            if (!applyMask)
                 return spriteContainer;
 
             spriteContainer.Measure(screenSize);
@@ -222,18 +221,6 @@ public sealed partial class AnnouncementWidget
                     SetHeight = spriteSize.Y
                 };
                 wrapper.AddChild(mask);
-            }
-
-            if (applyMask || wantsEyeBand)
-            {
-                var eyeBand = new EyeBandOverlay
-                {
-                    HorizontalAlignment = HAlignment.Stretch,
-                    VerticalAlignment = VAlignment.Stretch,
-                    HorizontalExpand = true,
-                    VerticalExpand = true
-                };
-                wrapper.AddChild(eyeBand);
             }
 
             wrapper.Measure(screenSize);

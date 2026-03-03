@@ -53,6 +53,7 @@ public sealed partial class AnnouncementWidget
             _titleOffset,
             CreateFormattedMessage,
             SetAllLabelsText,
+            _spriteContainer,
             _random);
     }
 

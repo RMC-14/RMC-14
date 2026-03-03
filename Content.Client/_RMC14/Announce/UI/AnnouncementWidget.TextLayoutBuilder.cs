@@ -45,7 +45,15 @@ public sealed partial class AnnouncementWidget
             }
 
             optimalWidth = Math.Min(maxAllowedWidth, optimalWidth);
-            var effectiveTextWidth = Math.Max(1f, optimalWidth);
+            var effectiveTextWidth = CalculateContentDrivenTextWidth(
+                text,
+                titleText,
+                hasTitle,
+                style,
+                screenSize,
+                screenScaleFactor,
+                optimalWidth,
+                maxAllowedWidth);
             var bodyResponsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
                 text.Length > 0 ? text : new[] { string.Empty },
                 style.TextConfig.FontSize,
@@ -80,7 +88,7 @@ public sealed partial class AnnouncementWidget
             container.SetWidth = effectiveTextWidth;
             container.MinWidth = effectiveTextWidth;
 
-            var textAlign = AnnouncementWidget.GetTextAlignment(style);
+            var textAlign = AnnouncementWidget.GetTextAlignment(style, spriteContainer != null);
             var textContainer = new BoxContainer
             {
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
@@ -197,6 +205,45 @@ public sealed partial class AnnouncementWidget
             crtOverlayRef?.Measure(screenSize);
 
             return new TextLayoutBuildResult(labels, outerContainer, effectiveTextWidth);
+        }
+
+        private static float CalculateContentDrivenTextWidth(
+            string[] text,
+            string? titleText,
+            bool hasTitle,
+            AnnouncementStyle style,
+            Vector2 screenSize,
+            float screenScaleFactor,
+            float optimalWidth,
+            float maxAllowedWidth)
+        {
+            var longestBodyLine = 0;
+            foreach (var line in text)
+            {
+                var plain = AnnouncementWidget.StripMarkup(line);
+                if (plain.Length > longestBodyLine)
+                    longestBodyLine = plain.Length;
+            }
+
+            var bodyEstimate = longestBodyLine * style.TextConfig.FontSize * 0.60f;
+            var titleEstimate = 0f;
+
+            if (hasTitle && !string.IsNullOrEmpty(titleText))
+            {
+                var plainTitle = AnnouncementWidget.StripMarkup(titleText);
+                var titleBaseFont = Math.Min(style.TitleConfig.TitleFontSize, style.TextConfig.FontSize * 0.9f);
+                titleEstimate = plainTitle.Length * titleBaseFont * 0.60f;
+            }
+
+            var estimatedContentWidth = MathF.Max(bodyEstimate, titleEstimate);
+            var horizontalPadding = style.BackgroundConfig.ShowBackground ? 24f * screenScaleFactor : 10f * screenScaleFactor;
+            var minReadableWidth = MathF.Max(120f * screenScaleFactor, style.TextConfig.FontSize * 6f);
+            var minOptimalWidth = optimalWidth * 0.72f;
+            var minWidth = MathF.Min(maxAllowedWidth, MathF.Max(minReadableWidth, minOptimalWidth));
+
+            var preferredWidth = estimatedContentWidth + horizontalPadding;
+            preferredWidth = MathF.Max(preferredWidth, minWidth);
+            return MathHelper.Clamp(preferredWidth, minWidth, maxAllowedWidth);
         }
     }
 

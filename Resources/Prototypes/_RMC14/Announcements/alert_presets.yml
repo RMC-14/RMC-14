@@ -3,6 +3,7 @@
   name: "Evacuation Alert"
   description: "Alert level announcement styling"
   target: All
+  visibleInSettings: false
   showSprite: false
   style:
     animation:
@@ -52,6 +53,7 @@
   name: "Red Alert"
   description: "Animated red alert display"
   target: All
+  visibleInSettings: false
   showSprite: false
   style:
     animation:

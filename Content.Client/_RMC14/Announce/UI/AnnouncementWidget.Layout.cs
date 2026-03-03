@@ -197,8 +197,17 @@ public sealed partial class AnnouncementWidget
         spriteView.Stretch = SpriteView.StretchMode.Fill;
     }
 
-    private static HAlignment GetTextAlignment(AnnouncementStyle style)
+    private static HAlignment GetTextAlignment(AnnouncementStyle style, bool hasSpriteContent)
     {
+        if (hasSpriteContent)
+        {
+            if (style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Left)
+                return HAlignment.Left;
+
+            if (style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Right)
+                return HAlignment.Right;
+        }
+
         return style.LayoutConfig.Position switch
         {
             AnnouncementPosition.TopLeft or AnnouncementPosition.MiddleLeft or AnnouncementPosition.BottomLeft => HAlignment.Left,

@@ -90,7 +90,9 @@ public static class AnnouncementStyling
 
         var wordCountScaleFactor = CalculateWordCountScaleFactor(totalWordCount, totalCharCount);
 
-        var combinedScaleFactor = Math.Min(widthScaleFactor, wordCountScaleFactor);
+        // Width is the primary constraint; word-count pressure is intentionally softened.
+        var softenedWordCountScale = 1f - ((1f - wordCountScaleFactor) * 0.10f);
+        var combinedScaleFactor = widthScaleFactor * softenedWordCountScale;
 
         if (screenSize.HasValue)
         {

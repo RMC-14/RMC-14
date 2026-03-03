@@ -136,8 +136,8 @@ public sealed partial class AnnouncementWidget
                 {
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Top,
-                    HorizontalExpand = true,
-                    VerticalExpand = true
+                    HorizontalExpand = false,
+                    VerticalExpand = false
                 };
                 animatedRect.SetFromSpriteSpecifier(new SpriteSpecifier.Rsi(resPath, announcement.DecalState!));
                 animatedRect.DisplayRect.Stretch = TextureRect.StretchMode.Scale;
@@ -157,6 +157,10 @@ public sealed partial class AnnouncementWidget
                     HorizontalAlignment = HAlignment.Center,
                     VerticalAlignment = VAlignment.Top,
                     RectClipContent = true,
+                    HorizontalExpand = false,
+                    VerticalExpand = false,
+                    MinWidth = width,
+                    MinHeight = height,
                     SetWidth = width,
                     SetHeight = height
                 };
