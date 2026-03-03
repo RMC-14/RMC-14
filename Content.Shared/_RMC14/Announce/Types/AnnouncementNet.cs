@@ -1,4 +1,5 @@
 using Robust.Shared.GameObjects;
+using Robust.Shared.Audio;
 using Robust.Shared.Serialization;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ public sealed class AnnouncementNetData
     public Vector2 SpriteOffset { get; set; }
     public Vector2 TextOffset { get; set; }
     public string? Title { get; set; }
+    public SoundSpecifier? Sound { get; set; }
+    public float SoundVolume { get; set; } = 0f;
     public string? DecalRsi { get; set; }
     public string? DecalState { get; set; }
     public AnnouncementDecalPlacement? DecalPlacement { get; set; }

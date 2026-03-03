@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Numerics;
 using Content.Server._RMC14.Announce.Core;
 using Content.Server._RMC14.Announce.Validation;
@@ -8,11 +7,8 @@ using Content.Shared._RMC14.Announce;
 using Content.Shared.Database;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
-using Robust.Shared.Audio;
-using Robust.Shared.Audio.Systems;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Log;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -23,7 +19,6 @@ namespace Content.Server._RMC14.Announce;
 public sealed partial class GeneralAnnounceSystem : EntitySystem
 {
     [Dependency] private readonly IAdminLogManager _adminLogs = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
@@ -101,7 +96,6 @@ public sealed partial class GeneralAnnounceSystem : EntitySystem
 
             var clientData = BuildClientData(request, group.Preset, group.Style, plan.Lines, plan.SpeakerName);
             RaiseNetworkEvent(new AnnouncementNetMessage(clientData), group.Filter);
-            PlayAnnouncementSound(request, group.Preset, group.Filter);
         }
 
         LogAnnouncement(preset.ID, plan.Lines, request.Target, request.Source, plan.DeliveredCount);
@@ -129,6 +123,8 @@ public sealed partial class GeneralAnnounceSystem : EntitySystem
             SpriteOffset = request.SpriteOffset ?? Vector2.Zero,
             TextOffset = request.TextOffset ?? preset.TextOffset,
             Title = request.Title,
+            Sound = request.SoundOverride ?? preset.Sound,
+            SoundVolume = request.VolumeOverride ?? preset.SoundVolume,
             DecalRsi = request.DecalRsi ?? preset.DecalRsi,
             DecalState = request.DecalState ?? preset.DecalState,
             DecalPlacement = request.DecalPlacement ?? preset.DecalPlacement,
@@ -165,28 +161,5 @@ public sealed partial class GeneralAnnounceSystem : EntitySystem
         }
     }
 
-    private void PlayAnnouncementSound(AnnouncementRequest request, AnnouncementPresetPrototype preset, Filter filter)
-    {
-        var sound = request.SoundOverride ?? preset.Sound;
-        if (sound == null)
-            return;
-
-        var volume = request.VolumeOverride ?? preset.SoundVolume;
-
-        try
-        {
-            _audio.PlayGlobal(sound, filter, true, AudioParams.Default.WithVolume(volume));
-        }
-        catch (FileNotFoundException ex)
-        {
-            Log.Warning($"Audio file not found for announcement '{preset.ID}': {ex.Message}");
-            Log.Warning($"Announcement will continue without sound. Please check audio file path: {sound}");
-        }
-        catch (Exception ex)
-        {
-            Log.Error($"Failed to play announcement audio for '{preset.ID}': {ex.Message}");
-            Log.Warning("Announcement will continue without sound.");
-        }
-    }
 }
 
