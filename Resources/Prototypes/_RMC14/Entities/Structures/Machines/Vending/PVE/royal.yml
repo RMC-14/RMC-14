@@ -493,16 +493,16 @@
     - name: Miscellaneous
       entries:
       - id: CMFireExtinguisherPortable
-        name: fire extinguisher (Portable)
+        name: Fire Extinguisher (Portable)
         amount: 2
       - id: CMRollerBedSpawnFolded
+        amount: 2
+      - id: RMCTacticalPrybar
         amount: 2
       - id: RMCScabbardRoyalMacheteFilled
         name: kukri scabbard (Full)
         amount: 5
       - id: CMEntrenchingTool
-        amount: 2
-      - id: RMCTacticalPrybar
         amount: 2
       - id: RMCBinocularsPVE
         amount: 2
