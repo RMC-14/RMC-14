@@ -603,6 +603,21 @@
 
 - type: entity
   parent: RMCPouchToolsSoc
+  id: RMCPouchToolsSocFilledSOF
+  suffix: Filled, SOF
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMScrewdriver
+    - id: RMCTacticalPrybar
+    - id: CMWirecutter
+    - id: CMWrench
+    - id: RMCCableCoil30
+    - id: CMMultitool
+    - id: CMWelder
+
+- type: entity
+  parent: RMCPouchToolsSoc
   id: RMCPouchToolsSocFilledTactical
   suffix: Filled, Tactical
   components:

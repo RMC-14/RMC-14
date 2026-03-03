@@ -4,7 +4,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.GameTicking.Commands
 {
-    [AdminCommand(AdminFlags.Round)]
+    [AdminCommand(AdminFlags.Round | AdminFlags.RMCMaintainer)] //RMC14
     sealed class StartRoundCommand : IConsoleCommand
     {
         [Dependency] private readonly IEntityManager _e = default!;
