@@ -9,16 +9,9 @@
       animation: Typewriter
       printSpeed: 0.025
       holdDuration: 10
-      shakeIntensity: 0.0
       flickerChance: 0
       glitchChance: 0
       animationEnhancements:
-        typewriterMode: Linear
-        randomizeSpeed: false
-        speedVariation: 0.2
-        enableSlide: false
-        enableZoom: false
-        enableBounce: false
         enableCRT: false
     layout:
       position: TopLeft
@@ -65,7 +58,6 @@
       animation: Fade
       printSpeed: 0.015
       holdDuration: 8
-      shakeIntensity: 0.1
       flickerChance: 0.02
       glitchChance: 0
       animationEnhancements:

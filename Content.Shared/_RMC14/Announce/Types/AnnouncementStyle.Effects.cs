@@ -115,16 +115,7 @@ public sealed partial class CRTSettings
     [DataField]
     public float VignetteEdgeAlpha { get; set; } = 0.6f;
 
-    // Glow Settings
-    [DataField]
-    public bool ShowGlow { get; set; } = true;
-
-    [DataField]
-    public float GlowIntensity { get; set; } = 0.8f;
-
-    [DataField]
-    public float GlowSpeed { get; set; } = 2f;
-
+    // Flash Tint Settings
     [DataField]
     public Color GlowColor { get; set; } = Color.FromHex("#00ff41");
 
@@ -201,8 +192,9 @@ public sealed partial class CRTSettings
 
     public void ValidateAndNormalize()
     {
-        ScanlineSpacing = MathF.Max(0.1f, ScanlineSpacing);
-        ScanlineThickness = MathF.Max(0.1f, ScanlineThickness);
+        // Keep these aligned with CRTOverlay draw-time minimums so authoring values stay predictable.
+        ScanlineSpacing = MathF.Max(2f, ScanlineSpacing);
+        ScanlineThickness = MathF.Max(1f, ScanlineThickness);
         ScanlineAlpha = MathHelper.Clamp(ScanlineAlpha, 0f, 1f);
         ScanlineSpeed = MathF.Max(0f, ScanlineSpeed);
         ScanlineWaveFrequency = MathF.Max(0f, ScanlineWaveFrequency);
@@ -232,9 +224,6 @@ public sealed partial class CRTSettings
         VignetteCornerSize = MathF.Max(0f, VignetteCornerSize);
         VignetteEdgeAlpha = MathHelper.Clamp(VignetteEdgeAlpha, 0f, 1f);
 
-        GlowIntensity = MathF.Max(0f, GlowIntensity);
-        GlowSpeed = MathF.Max(0f, GlowSpeed);
-
         CurvatureAmount = MathF.Max(0f, CurvatureAmount);
         CurvatureSteps = Math.Max(1, CurvatureSteps);
         CurvatureWidthMultiplier = MathF.Max(0f, CurvatureWidthMultiplier);
@@ -261,25 +250,10 @@ public sealed partial class CRTSettings
 public sealed partial class RealisticAnimations
 {
     [DataField]
-    public TypewriterStyle TypewriterMode { get; set; } = TypewriterStyle.Linear;
-
-    [DataField]
-    public bool RandomizeSpeed { get; set; }
-
-    [DataField]
-    public float SpeedVariation { get; set; } = 0.2f;
-
-    [DataField]
-    public bool EnableSlide { get; set; }
-
-    [DataField]
     public float SlideDuration { get; set; } = 1.0f;
 
     [DataField]
     public SlideDirection SlideFrom { get; set; } = SlideDirection.Top;
-
-    [DataField]
-    public bool EnableZoom { get; set; }
 
     [DataField]
     public float ZoomStartScale { get; set; } = 0.1f;
@@ -288,19 +262,10 @@ public sealed partial class RealisticAnimations
     public float ZoomDuration { get; set; } = 1.0f;
 
     [DataField]
-    public bool EnableBounce { get; set; }
-
-    [DataField]
     public int BounceCount { get; set; } = 3;
 
     [DataField]
     public float BounceHeight { get; set; } = 15f;
-
-    [DataField]
-    public EasingType EasingIn { get; set; } = EasingType.EaseInOut;
-
-    [DataField]
-    public EasingType EasingOut { get; set; } = EasingType.EaseInOut;
 
     [DataField]
     public bool EnableCRT { get; set; } = false;
@@ -312,20 +277,12 @@ public sealed partial class RealisticAnimations
     {
         return new RealisticAnimations
         {
-            TypewriterMode = TypewriterMode,
-            RandomizeSpeed = RandomizeSpeed,
-            SpeedVariation = SpeedVariation,
-            EnableSlide = EnableSlide,
             SlideDuration = SlideDuration,
             SlideFrom = SlideFrom,
-            EnableZoom = EnableZoom,
             ZoomStartScale = ZoomStartScale,
             ZoomDuration = ZoomDuration,
-            EnableBounce = EnableBounce,
             BounceCount = BounceCount,
             BounceHeight = BounceHeight,
-            EasingIn = EasingIn,
-            EasingOut = EasingOut,
             EnableCRT = EnableCRT,
             CRTSettings = CRTSettings?.Clone(),
         };
@@ -333,7 +290,6 @@ public sealed partial class RealisticAnimations
 
     public void ValidateAndNormalize()
     {
-        SpeedVariation = MathF.Max(0f, SpeedVariation);
         SlideDuration = MathF.Max(0.01f, SlideDuration);
         ZoomStartScale = MathF.Max(0.01f, ZoomStartScale);
         ZoomDuration = MathF.Max(0.01f, ZoomDuration);

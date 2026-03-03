@@ -63,8 +63,8 @@ public sealed partial class AnnouncementWidget : UIWidget
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
             SlideStartPosition = GetSlideStartPosition(announcement.Style),
-            ZoomCurrentScale = announcement.Style.AnimationConfig.AnimationEnhancements?.EnableZoom == true
-                ? announcement.Style.AnimationConfig.AnimationEnhancements.ZoomStartScale
+            ZoomCurrentScale = announcement.Style.AnimationConfig.Animation == AnnouncementAnimation.Zoom
+                ? announcement.Style.AnimationConfig.AnimationEnhancements?.ZoomStartScale ?? 0.1f
                 : 1.0f,
             FadeAlpha = announcement.Style.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
             PulseScale = 1.0f,

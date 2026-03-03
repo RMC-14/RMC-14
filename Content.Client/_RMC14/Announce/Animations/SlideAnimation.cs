@@ -15,11 +15,8 @@ public sealed class SlideAnimation : IAnnouncementAnimation
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
-        if (enhancements?.EnableSlide != true)
-            return AnnouncementAnimationStatus.Finished;
-
         context.State.SlideTimer += deltaTime;
-        var duration = enhancements.SlideDuration;
+        var duration = enhancements?.SlideDuration ?? 1.0f;
         if (duration <= 0f)
         {
             context.State.CurrentSlideOffset = Vector2.Zero;

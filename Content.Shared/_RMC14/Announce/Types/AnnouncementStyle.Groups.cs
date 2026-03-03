@@ -18,9 +18,6 @@ public sealed partial class AnnouncementAnimationConfig
     public float HoldDuration { get; set; } = 3f;
 
     [DataField]
-    public float ShakeIntensity { get; set; } = 0.5f;
-
-    [DataField]
     public float FlickerChance { get; set; } = 0.01f;
 
     [DataField]
@@ -36,7 +33,6 @@ public sealed partial class AnnouncementAnimationConfig
             Animation = Animation,
             PrintSpeed = PrintSpeed,
             HoldDuration = HoldDuration,
-            ShakeIntensity = ShakeIntensity,
             FlickerChance = FlickerChance,
             GlitchChance = GlitchChance,
             AnimationEnhancements = AnimationEnhancements?.Clone() ?? new RealisticAnimations(),
@@ -47,7 +43,6 @@ public sealed partial class AnnouncementAnimationConfig
     {
         PrintSpeed = MathF.Max(0.001f, PrintSpeed);
         HoldDuration = MathF.Max(0f, HoldDuration);
-        ShakeIntensity = MathF.Max(0f, ShakeIntensity);
         FlickerChance = MathHelper.Clamp(FlickerChance, 0f, 1f);
         GlitchChance = MathHelper.Clamp(GlitchChance, 0f, 1f);
 

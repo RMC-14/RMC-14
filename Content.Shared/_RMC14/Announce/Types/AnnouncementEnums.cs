@@ -75,16 +75,6 @@ public enum GradientDirection : byte
 }
 
 [Serializable, NetSerializable]
-public enum TypewriterStyle : byte
-{
-    Linear,
-    Burst,
-    Random,
-    Word,
-    Sentence
-}
-
-[Serializable, NetSerializable]
 public enum AnnouncementSpritePosition : byte
 {
     Left,
@@ -119,18 +109,6 @@ public enum AnnouncementDecalPlacement : byte
     Right,
     Above,
     Below
-}
-
-[Serializable, NetSerializable]
-public enum EasingType : byte
-{
-    Linear,
-    EaseIn,
-    EaseOut,
-    EaseInOut,
-    BounceIn,
-    BounceOut,
-    Elastic
 }
 
 [Serializable, NetSerializable]

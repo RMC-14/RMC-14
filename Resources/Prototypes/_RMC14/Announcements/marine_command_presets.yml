@@ -10,24 +10,15 @@
       animation: Typewriter
       printSpeed: 0.025
       holdDuration: 10
-      shakeIntensity: 0.8
       flickerChance: 0
       glitchChance: 0.01
       animationEnhancements:
-        typewriterMode: Linear
-        randomizeSpeed: false
-        speedVariation: 0.2
-        enableSlide: false
         slideDuration: 1.0
         slideDirection: Top
-        enableZoom: false
         zoomStartScale: 0.1
         zoomDuration: 1.0
-        enableBounce: false
         bounceCount: 3
         bounceHeight: 15
-        easingIn: EaseInOut
-        easingOut: EaseInOut
         enableCRT: true
         crtSettings:
           enabled: true
@@ -43,9 +34,6 @@
           showVignette: true
           vignetteIntensity: 3
           vignetteColor: "#000000"
-          showGlow: true
-          glowIntensity: 1.4
-          glowSpeed: 1
           glowColor: "#4a9eff"
           showCurvature: true
           curvatureAmount: 0.3
@@ -112,24 +100,15 @@
       animation: Typewriter
       printSpeed: 0.025
       holdDuration: 10
-      shakeIntensity: 0.8
       flickerChance: 0
       glitchChance: 0.01
       animationEnhancements:
-        typewriterMode: Linear
-        randomizeSpeed: false
-        speedVariation: 0.2
-        enableSlide: false
         slideDuration: 1.0
         slideDirection: Top
-        enableZoom: false
         zoomStartScale: 0.1
         zoomDuration: 1.0
-        enableBounce: false
         bounceCount: 3
         bounceHeight: 15
-        easingIn: EaseInOut
-        easingOut: EaseInOut
         enableCRT: true
         crtSettings:
           enabled: true
@@ -145,9 +124,6 @@
           showVignette: true
           vignetteIntensity: 3
           vignetteColor: "#000000"
-          showGlow: true
-          glowIntensity: 1.4
-          glowSpeed: 1
           glowColor: "#4a9eff"
           showCurvature: true
           curvatureAmount: 0.3
@@ -212,24 +188,15 @@
       animation: Typewriter
       printSpeed: 0.025
       holdDuration: 10
-      shakeIntensity: 0.8
       flickerChance: 0
       glitchChance: 0.01
       animationEnhancements:
-        typewriterMode: Linear
-        randomizeSpeed: false
-        speedVariation: 0.2
-        enableSlide: false
         slideDuration: 1.0
         slideDirection: Top
-        enableZoom: false
         zoomStartScale: 0.1
         zoomDuration: 1.0
-        enableBounce: false
         bounceCount: 3
         bounceHeight: 15
-        easingIn: EaseInOut
-        easingOut: EaseInOut
         enableCRT: false
     layout:
       position: TopLeft
@@ -292,7 +259,6 @@
       animation: None
       printSpeed: 0.02
       holdDuration: 8
-      shakeIntensity: 0
       flickerChance: 0
       glitchChance: 0
       animationEnhancements:

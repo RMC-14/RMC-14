@@ -15,11 +15,8 @@ public sealed class BounceAnimation : IAnnouncementAnimation
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
-        if (enhancements?.EnableBounce != true)
-            return AnnouncementAnimationStatus.Finished;
-
-        var bounceCount = enhancements.BounceCount;
-        var bounceHeight = enhancements.BounceHeight;
+        var bounceCount = enhancements?.BounceCount ?? 3;
+        var bounceHeight = enhancements?.BounceHeight ?? 15f;
         var totalPhases = bounceCount * 2;
 
         if (context.State.BouncePhase >= totalPhases)

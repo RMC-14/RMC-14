@@ -352,7 +352,7 @@ public sealed partial class AnnouncementWidget
 
         LayoutContainer.SetPosition(this, position);
 
-        if (style.AnimationConfig.AnimationEnhancements?.EnableZoom == true)
+        if (style.AnimationConfig.Animation == AnnouncementAnimation.Zoom)
         {
             SetWidth = widgetSize.X * ActiveAnnouncement.ZoomCurrentScale;
             SetHeight = widgetSize.Y * ActiveAnnouncement.ZoomCurrentScale;

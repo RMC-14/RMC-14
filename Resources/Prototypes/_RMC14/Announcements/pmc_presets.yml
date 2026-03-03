@@ -8,7 +8,6 @@
       animation: Typewriter
       printSpeed: 0.022
       holdDuration: 11
-      shakeIntensity: 0.45
       flickerChance: 0
       glitchChance: 0
       animationEnhancements:
@@ -27,9 +26,6 @@
           showVignette: true
           vignetteIntensity: 2.8
           vignetteColor: "#89dfff"
-          showGlow: true
-          glowIntensity: 1.35
-          glowSpeed: 1
           glowColor: "#89dfff"
           showCurvature: true
           curvatureAmount: 999

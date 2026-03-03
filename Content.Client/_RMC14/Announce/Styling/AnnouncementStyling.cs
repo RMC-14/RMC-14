@@ -19,7 +19,6 @@ public static class AnnouncementStyling
 
         style.TextConfig.FontSize = responsiveFontSize;
         style.TextConfig.LineHeight = baseStyle.TextConfig.LineHeight * scaleFactor;
-        style.AnimationConfig.ShakeIntensity = baseStyle.AnimationConfig.ShakeIntensity * scaleFactor;
         style.LayoutConfig.SpriteSpacing = baseStyle.LayoutConfig.SpriteSpacing * scaleFactor;
         style.SpriteConfig.SpriteBoxBorderThickness = baseStyle.SpriteConfig.SpriteBoxBorderThickness * scaleFactor;
         style.SpriteConfig.SpriteBoxPadding = baseStyle.SpriteConfig.SpriteBoxPadding * scaleFactor;
@@ -55,34 +54,6 @@ public static class AnnouncementStyling
             AnnouncementPosition.BottomRight => new Vector2(screenSize.X - contentSize.X - 50f, screenSize.Y - contentSize.Y - 50f),
             _ => new Vector2((screenSize.X - contentSize.X) * 0.5f, (screenSize.Y - contentSize.Y) * 0.5f)
         };
-    }
-
-    public static Color ApplyFlicker(Color baseColor, float flickerChance, float time)
-    {
-        var flicker = MathF.Sin(time * 15f) * 0.5f + 0.5f;
-        if (flicker < flickerChance)
-        {
-            return baseColor.WithAlpha(baseColor.A * 0.3f);
-        }
-        return baseColor;
-    }
-
-    public static Color ApplyGlow(Color baseColor, float intensity, float time)
-    {
-        var pulse = (MathF.Sin(time * 3f) + 1f) * 0.5f;
-        var glowFactor = 1f + (intensity * pulse);
-
-        return new Color(
-            Math.Min(1f, baseColor.R * glowFactor),
-            Math.Min(1f, baseColor.G * glowFactor),
-            Math.Min(1f, baseColor.B * glowFactor),
-            baseColor.A
-        );
-    }
-
-    public static Color CreateGradientColor(Color startColor, Color endColor, float progress)
-    {
-        return Color.InterpolateBetween(startColor, endColor, progress);
     }
 
     public static float CalculateMaxTextWidth(Vector2 screenSize, AnnouncementPosition position)
@@ -178,34 +149,6 @@ public static class AnnouncementStyling
         }
 
         return maxLineWidth;
-    }
-
-    public static Vector2 CalculateContentSize(string[] text, AnnouncementStyle style, Vector2 screenSize)
-    {
-        var scaleFactor = CalculateScreenScaleFactor(screenSize);
-        var optimalWidth = CalculateOptimalTextWidth(text, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(text, style.TextConfig.FontSize, optimalWidth, screenSize, style);
-        var lineHeight = style.TextConfig.LineHeight * scaleFactor;
-
-        var estimatedWidth = optimalWidth;
-        var estimatedHeight = text.Length * lineHeight * fontSize / style.TextConfig.FontSize;
-
-        return new Vector2(estimatedWidth, estimatedHeight);
-    }
-
-    public static void ConfigureTextLabel(RichTextLabel label, string text, AnnouncementStyle style, Vector2 screenSize)
-    {
-        var textArray = new[] { text };
-        var optimalWidth = CalculateOptimalTextWidth(textArray, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(textArray, style.TextConfig.FontSize, optimalWidth, screenSize, style);
-
-        label.HorizontalAlignment = HAlignment.Center;
-        label.VerticalAlignment = VAlignment.Center;
-
-        label.MaxWidth = optimalWidth;
-
-        var formattedText = CreateFormattedTextWithSize(text, fontSize, style.TextConfig.PrimaryColor);
-        label.Text = formattedText;
     }
 
     public static string CreateFormattedTextWithSize(string text, float fontSize, Color color, string? font = null)

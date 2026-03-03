@@ -12,11 +12,8 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
-        if (enhancements?.EnableZoom != true)
-            return AnnouncementAnimationStatus.Finished;
-
         context.State.ZoomTimer += deltaTime;
-        var duration = enhancements.ZoomDuration;
+        var duration = enhancements?.ZoomDuration ?? 1.0f;
         if (duration <= 0f)
         {
             context.State.ZoomCurrentScale = 1f;
@@ -26,7 +23,7 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
 
         var progress = Math.Min(context.State.ZoomTimer / duration, 1.0f);
 
-        var startScale = enhancements.ZoomStartScale;
+        var startScale = enhancements?.ZoomStartScale ?? 0.1f;
         var currentScale = startScale + (1.0f - startScale) * progress;
         context.State.ZoomCurrentScale = currentScale;
 
