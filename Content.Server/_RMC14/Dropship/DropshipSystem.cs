@@ -782,7 +782,9 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 dropship.AnnouncedCrash = true;
                 Dirty(uid, dropship);
 
-                _marineAnnounce.AnnounceToMarines(Loc.GetString("rmc-announcement-emergency-dropship-crash"), dropship.CrashWarningSound);
+                var crashAnnouncement = Loc.GetString("rmc-announcement-emergency-dropship-crash");
+                _marineAnnounce.AnnounceToMarines(crashAnnouncement, dropship.CrashWarningSound);
+                _marineAnnounce.AnnounceAlertLevel(RMCAlertLevels.Delta, crashAnnouncement);
                 continue;
             }
 

@@ -45,7 +45,7 @@
       responsiveScaleFactor: 1.15
   priority: 8
   canInterrupt: true
-  canBeInterrupted: false
+  canBeInterrupted: true
   incognitoMask: false
 
 - type: announcementPreset
@@ -94,7 +94,7 @@
   soundVolume: 1.0
   priority: 9
   canInterrupt: true
-  canBeInterrupted: false
+  canBeInterrupted: true
   decalRsi: "/Textures/_RMC14/Structures/Machines/status_display.rsi"
   decalState: "redalert_framed"
   decalPlacement: Above
