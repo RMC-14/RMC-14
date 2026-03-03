@@ -16,6 +16,7 @@
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: Skills
           preset: RMCSkillPresetCommander
         - type: RMCAllowSuitStorage
