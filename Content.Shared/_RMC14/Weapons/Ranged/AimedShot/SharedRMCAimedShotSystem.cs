@@ -216,7 +216,7 @@ public abstract class SharedRMCAimedShotSystem : EntitySystem
             }
         }
         // Update ammo visualiser because client doesn't know about the shot.
-        var ev = new UpdateClientAmmoEvent();
+        var ev = new UpdateClientAmmoEvent(-1);
         RaiseLocalEvent(ent, ref ev);
     }
 
