@@ -46,4 +46,3 @@
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
-  incognitoMask: false

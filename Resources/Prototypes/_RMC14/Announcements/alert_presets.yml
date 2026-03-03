@@ -46,7 +46,6 @@
   priority: 8
   canInterrupt: true
   canBeInterrupted: true
-  incognitoMask: false
 
 - type: announcementPreset
   id: RedAlertAnimated
@@ -101,4 +100,3 @@
   decalScale: 3.5
   decalAlpha: 1.0
   decalOffset: "0,-12"
-  incognitoMask: false

@@ -84,7 +84,6 @@
   canInterrupt: true
   canBeInterrupted: false
   aliases: ["command", "cmd", "hc", "marine_command"]
-  incognitoMask: false
 
 - type: announcementPreset
   id: MarineOverwatch
@@ -172,7 +171,6 @@
   canInterrupt: true
   canBeInterrupted: false
   aliases: ["overwatch", "marine_overwatch"]
-  incognitoMask: false
 
 - type: announcementPreset
   id: MarineCommandDefault
@@ -242,7 +240,6 @@
   canInterrupt: true
   canBeInterrupted: false
   aliases: ["command_default", "marine_default"]
-  incognitoMask: false
 
 - type: announcementPreset
   id: MarineCommandSimplified
@@ -301,4 +298,3 @@
   # decalAlpha: 0.5
   # decalOffset: "150,0"
   # textOffset: "-75,0"
-  incognitoMask: false

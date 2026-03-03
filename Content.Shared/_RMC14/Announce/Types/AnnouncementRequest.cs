@@ -29,5 +29,4 @@ public sealed class AnnouncementRequest
     public float? DecalAlpha { get; set; }
     public Vector2? DecalOffset { get; set; }
     public Vector2? TextOffset { get; set; }
-    public bool IncognitoMask { get; set; }
 }

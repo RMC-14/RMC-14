@@ -62,9 +62,6 @@ public sealed partial class AnnouncementPresetPrototype : IPrototype
     public AnnouncementDecalPlacement? DecalPlacement { get; private set; }
 
     [DataField]
-    public bool IncognitoMask { get; private set; }
-
-    [DataField]
     public bool ShowSprite { get; private set; } = true;
 
     [DataField]

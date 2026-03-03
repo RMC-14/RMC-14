@@ -28,7 +28,6 @@ public sealed class AnnouncementNetData
     public float DecalScale { get; set; } = 4f;
     public float DecalAlpha { get; set; } = 1f;
     public Vector2 DecalOffset { get; set; } = Vector2.Zero;
-    public bool IncognitoMask { get; set; }
 }
 
 [Serializable, NetSerializable]

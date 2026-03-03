@@ -30,7 +30,7 @@ public sealed partial class AnnouncementWidget
             {
                 decalControl = _decalBuilder.CreateDecalContainer(announcement, screenSize);
                 if (announcement.DecalPlacement == AnnouncementDecalPlacement.ReplaceSprite && decalControl != null)
-                    return ApplyIncognitoFinal(announcement, screenSize, decalControl);
+                    return decalControl;
             }
 
             if (!announcement.SpeakerEntity.HasValue ||
@@ -40,7 +40,7 @@ public sealed partial class AnnouncementWidget
                 if (decalControl == null)
                     return null;
 
-                return ApplyIncognitoFinal(announcement, screenSize, decalControl);
+                return decalControl;
             }
 
             var style = announcement.Style;
@@ -130,7 +130,7 @@ public sealed partial class AnnouncementWidget
 
             if (style.TextConfig.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
             {
-                var spriteWithMask = ApplyIncognitoFinal(announcement, screenSize, container);
+                var spriteWithMask = container;
 
                 var nameContainer = new BoxContainer
                 {
@@ -170,61 +170,9 @@ public sealed partial class AnnouncementWidget
             }
             else
             {
-                container = ApplyIncognitoFinal(announcement, screenSize, container);
             }
 
             return _decalBuilder.ApplyDecalPlacement(container, decalControl, announcement, screenSize);
-        }
-
-        private static Control ApplyIncognitoFinal(AnnouncementNetData announcement, Vector2 screenSize, Control spriteContainer)
-        {
-            var applyMask = announcement.IncognitoMask;
-
-            if (!applyMask)
-                return spriteContainer;
-
-            spriteContainer.Measure(screenSize);
-            var spriteSize = spriteContainer.DesiredSize;
-
-            var wrapper = new Control
-            {
-                HorizontalAlignment = HAlignment.Center,
-                VerticalAlignment = VAlignment.Top,
-                HorizontalExpand = true,
-                VerticalExpand = true,
-                MinWidth = spriteSize.X,
-                MinHeight = spriteSize.Y,
-                SetWidth = spriteSize.X,
-                SetHeight = spriteSize.Y,
-                RectClipContent = true
-            };
-
-            spriteContainer.HorizontalAlignment = HAlignment.Stretch;
-            spriteContainer.VerticalAlignment = VAlignment.Stretch;
-            spriteContainer.HorizontalExpand = true;
-            spriteContainer.VerticalExpand = true;
-            spriteContainer.MinWidth = spriteSize.X;
-            spriteContainer.MinHeight = spriteSize.Y;
-
-            wrapper.AddChild(spriteContainer);
-            if (applyMask)
-            {
-                var mask = new IncognitoOverlay
-                {
-                    HorizontalAlignment = HAlignment.Stretch,
-                    VerticalAlignment = VAlignment.Stretch,
-                    HorizontalExpand = true,
-                    VerticalExpand = true,
-                    MinWidth = spriteSize.X,
-                    MinHeight = spriteSize.Y,
-                    SetWidth = spriteSize.X,
-                    SetHeight = spriteSize.Y
-                };
-                wrapper.AddChild(mask);
-            }
-
-            wrapper.Measure(screenSize);
-            return wrapper;
         }
     }
 }

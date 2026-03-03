@@ -134,8 +134,7 @@ public sealed partial class GeneralAnnounceSystem : EntitySystem
             DecalPlacement = request.DecalPlacement ?? preset.DecalPlacement,
             DecalScale = request.DecalScale ?? preset.DecalScale,
             DecalAlpha = request.DecalAlpha ?? preset.DecalAlpha,
-            DecalOffset = request.DecalOffset ?? preset.DecalOffset,
-            IncognitoMask = request.IncognitoMask || preset.IncognitoMask
+            DecalOffset = request.DecalOffset ?? preset.DecalOffset
         };
     }
 
