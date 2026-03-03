@@ -93,3 +93,10 @@ rmc-new-to-job-maint-tech = As a Maintenance Technician, your job is to perform 
                                              Perform a rennovation of an area. Make sure to get permission from both the Chief Engineer and the Department Head of the area you wish to rennovate.
 
                                              Deploy to help construct the FOB alongside Bravo squad, your engineering skills could prove invaluable. Make sure to get deployment permission from the Chief Engineer or Commander.
+rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
+
+                                             Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
+
+                                             You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
+
+                                             If you have any other questions, consult the guidebook's Corporate Liaison page.
