@@ -35,8 +35,6 @@
           vignetteIntensity: 3
           vignetteColor: "#000000"
           glowColor: "#4a9eff"
-          showCurvature: true
-          curvatureAmount: 0.3
           showChromaticAberration: true
           chromaticAmount: 1
     layout:
@@ -125,8 +123,6 @@
           vignetteIntensity: 3
           vignetteColor: "#000000"
           glowColor: "#4a9eff"
-          showCurvature: true
-          curvatureAmount: 0.3
           showChromaticAberration: true
           chromaticAmount: 1
     layout:

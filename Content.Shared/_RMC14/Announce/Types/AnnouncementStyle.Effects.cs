@@ -119,28 +119,6 @@ public sealed partial class CRTSettings
     [DataField]
     public Color GlowColor { get; set; } = Color.FromHex("#00ff41");
 
-    // Curvature Settings
-    [DataField]
-    public bool ShowCurvature { get; set; } = false;
-
-    [DataField]
-    public float CurvatureAmount { get; set; } = 0.2f;
-
-    [DataField]
-    public int CurvatureSteps { get; set; } = 20;
-
-    [DataField]
-    public float CurvatureWidthMultiplier { get; set; } = 0.1f;
-
-    [DataField]
-    public Color CurvatureColor { get; set; } = Color.Black;
-
-    [DataField]
-    public float CurvatureAlpha { get; set; } = 0.2f;
-
-    [DataField]
-    public float CurvatureAnimationSpeed { get; set; } = 0.5f;
-
     // Chromatic Aberration Settings
     [DataField]
     public bool ShowChromaticAberration { get; set; } = false;
@@ -223,12 +201,6 @@ public sealed partial class CRTSettings
         VignettePulseAmplitude = MathF.Max(0f, VignettePulseAmplitude);
         VignetteCornerSize = MathF.Max(0f, VignetteCornerSize);
         VignetteEdgeAlpha = MathHelper.Clamp(VignetteEdgeAlpha, 0f, 1f);
-
-        CurvatureAmount = MathF.Max(0f, CurvatureAmount);
-        CurvatureSteps = Math.Max(1, CurvatureSteps);
-        CurvatureWidthMultiplier = MathF.Max(0f, CurvatureWidthMultiplier);
-        CurvatureAlpha = MathHelper.Clamp(CurvatureAlpha, 0f, 1f);
-        CurvatureAnimationSpeed = MathF.Max(0f, CurvatureAnimationSpeed);
 
         ChromaticAmount = MathF.Max(0f, ChromaticAmount);
         ChromaticParticleCount = Math.Max(0, ChromaticParticleCount);

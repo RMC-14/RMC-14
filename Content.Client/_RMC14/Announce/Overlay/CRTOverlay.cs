@@ -18,7 +18,6 @@ public sealed class CRTOverlay : Control
     private float _scanlineOffset;
     private float _noiseTimer;
     private float _flickerTimer;
-    private float _curvatureOffset;
     private float _chromaticTimer;
     private readonly Random _random = new();
 
@@ -50,9 +49,6 @@ public sealed class CRTOverlay : Control
         if (Settings.ShowScanlines)
             DrawScanlines(handle, rect);
 
-        if (Settings.ShowCurvature)
-            DrawCurvature(handle, rect);
-
         if (Settings.ShowChromaticAberration)
             DrawChromaticAberration(handle, rect);
 
@@ -67,7 +63,6 @@ public sealed class CRTOverlay : Control
 
         _noiseTimer += deltaTime;
         _flickerTimer += deltaTime;
-        _curvatureOffset += deltaTime * Settings.CurvatureAnimationSpeed;
         _chromaticTimer += deltaTime * Settings.ChromaticAnimationSpeed;
     }
 
@@ -83,7 +78,8 @@ public sealed class CRTOverlay : Control
         {
             if (y >= rect.Top && y <= rect.Bottom)
             {
-                var wave = MathF.Sin((y / rect.Height) * MathF.PI * Settings.ScanlineWaveFrequency + _curvatureOffset) * Settings.ScanlineWaveAmplitude;
+                var wavePhase = _flickerTimer * 0.5f;
+                var wave = MathF.Sin((y / rect.Height) * MathF.PI * Settings.ScanlineWaveFrequency + wavePhase) * Settings.ScanlineWaveAmplitude;
                 var scanlineRect = new UIBox2(rect.Left + wave, y, rect.Right + wave, y + thickness);
 
                 var clampedRect = new UIBox2(
@@ -183,29 +179,6 @@ public sealed class CRTOverlay : Control
 
         var rightEdge = new UIBox2(rect.Right - edgeThickness, rect.Top + cornerSize, rect.Right, rect.Bottom - cornerSize);
         handle.DrawRect(rightEdge, edgeColor);
-    }
-
-    private void DrawCurvature(DrawingHandleScreen handle, UIBox2 rect)
-    {
-        if (!Settings.ShowCurvature)
-            return;
-
-        var curvatureAmount = Settings.CurvatureAmount;
-        var steps = Settings.CurvatureSteps;
-
-        for (int i = 0; i < steps; i++)
-        {
-            var t = (float)i / steps;
-            var y = rect.Top + t * rect.Height;
-            var curve = MathF.Sin(t * MathF.PI) * curvatureAmount * rect.Width * Settings.CurvatureWidthMultiplier;
-
-            var leftCurve = new UIBox2(rect.Left, y, rect.Left + Math.Abs(curve), y + rect.Height / steps);
-            var rightCurve = new UIBox2(rect.Right - Math.Abs(curve), y, rect.Right, y + rect.Height / steps);
-
-            var curveColor = Settings.CurvatureColor.WithAlpha(Settings.CurvatureAlpha);
-            handle.DrawRect(leftCurve, curveColor);
-            handle.DrawRect(rightCurve, curveColor);
-        }
     }
 
     private void DrawChromaticAberration(DrawingHandleScreen handle, UIBox2 rect)
