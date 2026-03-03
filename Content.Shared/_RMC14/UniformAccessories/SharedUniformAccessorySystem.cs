@@ -1,5 +1,6 @@
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Examine;
+using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
@@ -26,7 +27,7 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<StartingGearEquippedEvent>(OnStartingGearEquipped);
+        SubscribeLocalEvent<HandsComponent, StartingGearEquippedEvent>(OnStartingGearEquipped);
 
         SubscribeLocalEvent<UniformAccessoryHolderComponent, MapInitEvent>(OnHolderMapInit);
         SubscribeLocalEvent<UniformAccessoryHolderComponent, InteractUsingEvent>(OnHolderInteractUsing);
@@ -42,9 +43,9 @@ public abstract class SharedUniformAccessorySystem : EntitySystem
             });
     }
 
-    private void OnStartingGearEquipped(ref StartingGearEquippedEvent args)
+    private void OnStartingGearEquipped(Entity<HandsComponent> ent, ref StartingGearEquippedEvent args)
     {
-        TryInsertInhandAccessories(args.Entity);
+        TryInsertInhandAccessories(ent.Owner);
     }
 
     private void OnHolderMapInit(Entity<UniformAccessoryHolderComponent> ent, ref MapInitEvent args)
