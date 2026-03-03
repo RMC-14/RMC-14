@@ -4,3 +4,4 @@ rmc-pamphlets-already-know = You know this already!
 rmc-pamphlets-reading = You read over the pamphlet a few times, learning a new skill.
 rmc-pamphlets-rifleman-warning = Only squad riflemen can use this.
 rmc-pamphlets-mp-warning = Only military police can use this.
+rmc-pamphlets-k9-warning = Only hospital corpsman and military police can use this.
