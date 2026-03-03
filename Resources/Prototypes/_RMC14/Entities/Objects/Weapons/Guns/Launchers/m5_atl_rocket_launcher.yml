@@ -54,6 +54,10 @@
   - type: WieldDelay
     baseDelay: 1.2
     preventFiring: true
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 15
   - type: IgnorePredictionHide
   - type: GunIgnorePrediction
   - type: AssistedReloadWeapon
