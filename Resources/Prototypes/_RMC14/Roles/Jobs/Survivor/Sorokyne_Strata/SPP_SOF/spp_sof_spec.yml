@@ -42,6 +42,7 @@
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047
     - RMCMagazineRifleAK4047
+    - RMCRadioHandheldColony
 
 - type: entity
   parent: CMSpawnPointJobBase
