@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Radio;
@@ -325,5 +325,34 @@ public sealed class HiveLeaderSystem : EntitySystem
     public bool IsLeader(EntityUid leader, [NotNullWhen(true)] out HiveLeaderComponent? leaderComp)
     {
         return TryComp(leader, out leaderComp);
+    }
+
+    public void GrantLeader(EntityUid granter, EntityUid target)
+    {
+        if (!_hiveLeaderGranterQuery.TryComp(granter, out var granterComp))
+            return;
+
+        if (_hiveLeaderQuery.HasComp(target))
+            return;
+
+        if (granterComp.Leaders.Count >= granterComp.MaxLeaders)
+            return;
+
+        var leaderComp = EnsureComp<HiveLeaderComponent>(target);
+        leaderComp.Granter = granter;
+        Dirty(target, leaderComp);
+
+        granterComp.Leaders.Add(target);
+        Dirty(granter, granterComp);
+
+        AddLeader((target, leaderComp), (granter, granterComp));
+    }
+
+    public void RevokeLeader(EntityUid target)
+    {
+        if (!_hiveLeaderQuery.TryComp(target, out var leaderComp))
+            return;
+
+        RemoveLeader((target, leaderComp));
     }
 }
