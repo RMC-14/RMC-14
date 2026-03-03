@@ -144,3 +144,11 @@
   components:
   - type: CorpseSpawner
     spawn: RMCCorpseCLF
+
+- type: entity
+  parent: RMCSpawnerCorpse
+  id: RMCSpawnerCorpseCLFNoArmor
+  name: Corpse Spawner - CLF Soldier (No Armor)
+  components:
+  - type: CorpseSpawner
+    spawn: RMCCorpseCLFNoArmor

@@ -146,6 +146,37 @@
       Classic: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/classic.rsi
       Urban: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12/urban.rsi
 
+# For Sun Riders insert
+- type: entity
+  parent: CMArmorM3Medium
+  id: CMArmorB12Damaged
+  suffix: Survivor
+  name: damaged B12 pattern marine armor
+  description: A lightweight suit of carbon fiber body armor built for quick movement. This one seems to have been heavily splattered by acid.
+  components:
+  - type: Clothing
+    clothingVisuals:
+      outerClothing:
+      - state: equipped-OUTERCLOTHING
+      - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12_damaged.rsi
+        state: acid
+        color: "#bed700"
+  - type: Sprite
+    layers:
+    - state: icon
+    - map: [ "enum.WebbingVisualLayers.Base" ]
+    - sprite: _RMC14/Objects/Clothing/OuterClothing/Armor/m3/b12_damaged.rsi
+      state: acid_icon
+      color: "#bed700"
+  - type: ClothingSpeedModifier
+    walkModifier: .725
+    sprintModifier: .725
+  - type: CMArmor
+    melee: 20
+    bio: 10
+  - type: ItemCamouflage
+    camouflageVariations: { }
+
 - type: entity
   parent: CMArmorM3Medium
   id: CMArmorM3Heavy

@@ -379,6 +379,15 @@
       Urban: _RMC14/Objects/Clothing/Head/Hats/cap_officer/urban.rsi
 
 - type: entity
+  parent: CMHeadCapOfficer
+  id: CMHeadCapOfficerGasmask
+  suffix: Gasmask
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmask
+
+- type: entity
   parent: RMCHeadCapFlippable
   id: RMCHeadCapASO
   name: UNMC ASO cap

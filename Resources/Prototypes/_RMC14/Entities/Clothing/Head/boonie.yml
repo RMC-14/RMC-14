@@ -35,3 +35,21 @@
       jungle: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/jungle.rsi
       snow: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/snow.rsi
       urban: _RMC14/Objects/Clothing/Head/Hats/boonie_tan/urban.rsi
+
+- type: entity
+  parent: RMCBoonieTan
+  id: RMCBoonieTanGasmaskBlack
+  suffix: Tan, Gasmask Black
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmask
+
+- type: entity
+  parent: RMCBoonieTan
+  id: RMCBoonieTanGasmaskTan
+  suffix: Tan, Gasmask Tan
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCHelmetGarbGasmaskDesert

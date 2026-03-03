@@ -24,3 +24,12 @@
   - type: StorageFill
     contents:
     - id: RMCTacticalPrybar
+
+- type: entity
+  parent: RMCJacketWindbreakerBrown
+  id: RMCJacketWindbreakerBrownFilledSurvivor
+  suffix: Survivor, Sun Riders, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTacticalPrybar

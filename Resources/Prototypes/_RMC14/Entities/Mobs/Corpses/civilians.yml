@@ -522,3 +522,21 @@
     shoes: RMCShoesBrown
     id: RMCIDCardCLFSoldier
     pocket1: RMCFlashlight
+
+- type: randomHumanoidSettings
+  parent: RMCCorpse
+  id: RMCCorpseCLFNoArmor
+  components:
+  - type: Loadout
+    prototypes: [ RMCGearCorpseCLFNoArmor ]
+
+- type: startingGear
+  id: RMCGearCorpseCLFNoArmor
+  equipment:
+    head: RMCHeadMilitiaHood
+    ears: CMHeadsetColony
+    jumpsuit: RMCJumpsuitCLFSoldier
+    gloves: CMHandsBlackMarine
+    shoes: RMCShoesBrown
+    id: RMCIDCardCLFSoldier
+    pocket1: RMCFlashlight

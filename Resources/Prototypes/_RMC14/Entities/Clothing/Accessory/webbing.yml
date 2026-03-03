@@ -293,7 +293,7 @@
     - type: StoreAfterFailedInteract
     - type: RMCStorageEjectHand
       state: Open
-      
+
 - type: entity
   parent: CMWebbing
   id: RMCParaWebbing
@@ -305,7 +305,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/para_webbing.rsi
       state: webbing
     - type: Appearance
-      
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingL88
@@ -317,7 +317,7 @@
         - id: RMCTacticalPrybar
         - id: RMCMagazineRifleL88
         - id: RMCMagazineRifleL88
-        
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingPDW90AP
@@ -930,6 +930,16 @@
       - id: CMMarineFlask
       # - id: RMCFacepaint # TODO FACEPAINT
       - id: CMMRE
+
+- type: entity
+  parent: RMCWebbingDropPouch
+  id: RMCWebbingPouchSurvivorSunRiders
+  suffix: Filled, Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazinePistolM13
+      amount: 2
 
 - type: entity
   parent: CMWebbingBase

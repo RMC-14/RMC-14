@@ -356,6 +356,9 @@
     map: /Maps/_RMC14/kutjevo.yml
     camouflage: Desert
     announcement: "An automated distress signal has been received from Weston-Yamada colony Kutjevo Refinery, known for botanical research, export, and raw materials processing and refinement. The UNS Almayer has been dispatched to investigate."
+    nightmareScenarios:
+    - scenarioName: sunriders
+      scenarioProbability: 1
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingKutjevo
     survivorJobVariants:
@@ -374,6 +377,31 @@
       - RMCSurvivorKutjevoGoon: 1
       CMSurvivorScientist:
       - RMCSurvivorKutjevoResearcher: 2
+    survivorJobScenarios:
+      sunriders: # Sun Riders insert (Non Parity)
+      - RMCSurvivorSunRidersBase: 6 # rmc14 todo: 7 after parity surv slots
+      - RMCSurvivorSunRidersCorpsman: 1
+      - RMCSurvivorCommandingOfficer: 1
+    survivorJobVariantScenarios:
+      sunriders:
+        RMCSurvivorSunRidersBase:
+        - RMCSurvivorSunRidersSectionSergeant: 1
+        - RMCSurvivorSunRidersDM: 1
+        - RMCSurvivorSunRidersPilot: 1
+        - RMCSurvivorSunRidersRifleman: 1
+        - RMCSurvivorSunRidersSquadLeader: 1
+        - RMCSurvivorSunRidersSquadSpecialist: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorSunRidersCorpsman: 1
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorSunRidersPlatCo: 1
+    survivorJobOverrideScenarios: # doc rolls for corpsman, everyone else rolls for regular marines
+      sunriders:
+        CMSurvivorScientist: RMCSurvivorSunRidersBase
+        CMSurvivorEngineer: RMCSurvivorSunRidersBase
+        CMSurvivorSecurity: RMCSurvivorSunRidersBase
+        CMSurvivorCorporate: RMCSurvivorSunRidersBas
+        CMSurvivor: RMCSurvivorSunRidersBase
 
 - type: entity
   id: RMCPlanetChances

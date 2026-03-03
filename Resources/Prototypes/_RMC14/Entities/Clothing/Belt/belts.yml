@@ -1040,7 +1040,7 @@
     - id: RMCSpeedLoaderZHNK72
       amount: 6
     - id: RMCWeaponRevolverZHNK72
-          
+
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -1191,6 +1191,17 @@
     contents:
     - id: CMMagazineSMGM63Ext
       amount: 2
+    - id: RMCWeaponSMGM63ExtendedFilled
+
+- type: entity
+  parent: RMCBeltHolsterSMGPouch
+  id: RMCHolsterSMGPouchFilledExtendedAlt
+  suffix: Filled, Extended Mag, Alt
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63Ext
+      amount: 1
     - id: RMCWeaponSMGM63ExtendedFilled
 
 - type: entity
@@ -1360,6 +1371,17 @@
     contents:
     - id: CMMagazinePistolM1984
       amount: 6
+    - id: CMWeaponPistolM1984
+
+- type: entity
+  parent: RMCBeltHolsterPistol
+  id: RMCM1984BeltFilledSurvivorSunRiders
+  suffix: Filled, Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazinePistolM1984
+      amount: 3
     - id: CMWeaponPistolM1984
 
 - type: entity
@@ -1582,6 +1604,17 @@
     - RMCBeltHolsterM13
 
 - type: entity
+  parent: RMCBeltHolsterM13
+  id: RMCBeltHolsterM13FilledSurvivor
+  suffix: Filled, Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolM13
+    - id: RMCMagazinePistolM13
+      amount: 2
+
+- type: entity
   parent: CMBeltMarine
   id: RMCM17BeltFilled
   suffix: Filled
@@ -1640,6 +1673,17 @@
     contents:
     - id: RMCMagazineRifleL83A3
       amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM4SPRBeltFilledSunRidersSurvivor
+  suffix: Filled, Sun Riders, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM4SPR
+      amount: 2
+    - id: CMMagazineRifleM4SPRExt
 
 - type: entity
   parent: RMCBeltUtilityGeneral
@@ -1934,7 +1978,7 @@
   - type: Tag
     tags:
     - RMCMachineGunnerRig
-      
+
 # RCM/Paramarines Belts
 
 - type: entity
@@ -1989,7 +2033,7 @@
           - Defibrillator
           - Pill
           - RMCLighter
-            
+
 - type: entity
   parent: RMCMedicalL75RCM
   id: RMCMedicalL75RCMFillPara
@@ -2005,7 +2049,7 @@
         - id: CMBurnKit10
         # - id: 5 splints
         - id: CMHealthAnalyzer
-          
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltRCM
@@ -2018,8 +2062,8 @@
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
-      camouflageVariations: {}         
-      
+      camouflageVariations: {}
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneralRCM
@@ -2045,7 +2089,7 @@
   - type: Tag
     tags:
     - RMCG8Pouch
-      
+
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolRCM
@@ -2138,7 +2182,7 @@
         l54_fill:
           whitelist:
             tags:
-              - RMCWeaponPistolL54   
+              - RMCWeaponPistolL54
 
 - type: entity
   parent: RMCBeltHolsterPistolPara
@@ -2271,7 +2315,7 @@
       components:
       - Gun
 
-- type: entity 
+- type: entity
   parent: RMCBeltRoyalMortar
   id: RMCBeltRoyalMortarFilled
   suffix: PVE, RCM, Filled
@@ -2300,7 +2344,7 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 5
-      
+
 - type: entity
   parent: RMCBeltUtilityGeneralRCM
   id: RMCBeltUtilityGeneralRCMPVE

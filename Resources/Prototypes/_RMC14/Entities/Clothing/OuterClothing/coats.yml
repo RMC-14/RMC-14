@@ -412,6 +412,16 @@
     foldedEquippedPrefix: jacket
     foldedHeldPrefix: jacket
 
+- type: entity
+  parent: RMCCoatPilot
+  id: RMCCoatPilotSurvivorFilled
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTacticalPrybar
+    - id: RMCRadioHandheldColony
+
 # Commanding Officer
 - type: entity
   parent: RMCBaseJacket

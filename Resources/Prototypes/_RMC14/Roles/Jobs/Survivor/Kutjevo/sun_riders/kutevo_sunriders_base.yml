@@ -1,0 +1,69 @@
+- type: job
+  parent: RMCSurvivorMilitary
+  id: RMCSurvivorSunRidersBase
+  name: rmc-job-name-sr
+  description: rmc-job-description-sr
+  ranks:
+    RMCRankPrivateFirstClass: []
+  supervisors: rmc-job-supervisors-commander
+  accessGroups:
+  - Colonist
+  joinNotifyCrew: false
+  startingGear: RMCGearSunRidersBase
+  hasIcon: true
+  greeting: rmc-job-greeting-sr
+  playTimeTracker: RMCJobSurvivorMilitary
+  spawnMenuRoleName: Sun Riders Survivor (Base)
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSunRidersBase
+  equipment:
+    jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
+    back: RMCSatchelMarineForeconSurvivorFill
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCOuterClothingExternalWebbingForeconSurvivorFill
+    id: CMIDCardSilver
+    gloves: CMHandsBrown
+    ears: RMCHeadsetSunRidersPVP
+    pocket1: RMCPouchFirstAidInjectors
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+
+- type: entity
+  id: RMCSurvivorPresetSunRidersNoPrimary
+  name: sun riders no primary survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ ArmorHelmetM10Gasmask, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10GasmaskTan, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10Gasmask, RMCMaskScarfTan ]
+    - [ ArmorHelmetM10GasmaskTan, RMCMaskScarfTan ]
+    - [ RMCBoonieTanGasmaskBlack, RMCMaskTornScarfDesert ]
+    - [ RMCBoonieTanGasmaskTan, RMCMaskTornScarfDesert ]
+    - [ RMCBoonieTanGasmaskBlack, RMCMaskScarfTan ]
+    - [ RMCBoonieTanGasmaskTan, RMCMaskScarfTan ]
+    - [ CMMaskGas, RMCMaskScarfTan ]
+    - [ CMMaskGas, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10, RMCMaskTornScarfDesert ]
+    - [ ArmorHelmetM10, RMCMaskScarfTan ]
+    randomWeapon:
+    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCMotionDetector ]
+    tryEquipRandomWeapon: true
+
+- type: entity
+  parent: RMCSurvivorPresetSunRidersNoPrimary
+  id: RMCSurvivorPresetSunRiders
+  name: sun riders survivor preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    primaryWeapons:
+    - [ RMCWeaponRifleM54CFilled, CMMagazineRifleM54C, CMMagazineRifleM54C ]
+    - [ CMMagazineRifleM4SPR, CMMagazineRifleM4SPR, WeaponRifleM4SPRFilled ]
+    primaryWeaponChance: 1

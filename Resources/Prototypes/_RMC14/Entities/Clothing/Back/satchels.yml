@@ -50,7 +50,7 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
-      
+
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
@@ -460,6 +460,18 @@
       Urban: _RMC14/Objects/Clothing/Back/Satchels/Marines/medic/snow-urban.rsi
 
 - type: entity
+  parent: CMSatchelMarineMedic
+  id: CMSatchelMarineMedicFilledSurvivor
+  suffix: Filled, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
+    - id: CMFireExtinguisherPortable
+    - id: CMDefibrillator
+    - id: CMHealthAnalyzer
+
+- type: entity
   parent: CMSatchelMarine
   id: CMSatchelMarineTech
   name: Marine technician chestrig
@@ -653,6 +665,15 @@
       Snow: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
       Classic: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/jungle-desert-classic.rsi
       Urban: _RMC14/Objects/Clothing/Back/Backpacks/Marines/rto/snow-urban.rsi
+
+- type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOFilledSurvivor
+  suffix: Survivor, Sun Riders
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCRadioHandheldColony
 
 - type: entity
   parent: CMSatchel
@@ -880,7 +901,7 @@
       contents:
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth

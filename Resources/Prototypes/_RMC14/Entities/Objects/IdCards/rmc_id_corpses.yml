@@ -32,6 +32,15 @@
   - type: IdCard
     jobTitle: rmc-job-name-forecon-spotter
 
+# Sun Riders
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCIDCardSunRidersRifleman
+  components:
+  - type: IdCard
+    jobTitle: cm-job-name-rifleman
+
 # Misc
 - type: entity
   parent: CMIDCardLanyard

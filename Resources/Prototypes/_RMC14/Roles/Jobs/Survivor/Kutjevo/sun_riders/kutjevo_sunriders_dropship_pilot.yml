@@ -1,0 +1,78 @@
+- type: job
+  parent: RMCSurvivorSunRidersBase
+  id: RMCSurvivorSunRidersPilot
+  name: rmc-job-name-sr-pilot
+  icon: "CMJobIconPilotDropshipSunriders"
+  ranks:
+    RMCRankCorporal: []
+  greeting: rmc-job-greeting-sr-pilot
+  spawnMenuRoleName: Sun Riders Dropship Pilot (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCAllowSuitStorage
+    - type: Skills
+      preset: RMCSkillPresetSunRidersRifleman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pilot
+    - type: IntelRescueSurvivorObjective
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadSunRidersPVP
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetSunRidersPilot
+  startingGear: RMCGearSunRidersPilot
+  hidden: true
+
+- type: startingGear
+  id: RMCGearSunRidersPilot
+  inhand:
+  - CMFlare
+  equipment:
+    jumpsuit: RMCJumpsuitPilotAlt
+    back: RMCParachute
+    shoes: CMBootsBlackFilled
+    outerClothing: RMCCoatPilotSurvivorFilled
+    id: CMIDCardSilver
+    gloves: CMHandsBrown
+    ears: RMCHeadsetSunRidersPVP
+    pocket1: RMCPouchFlareFilled
+    pocket2: RMCPouchFirstAidSplintsGauzeOintment
+    suitstorage: RMCFlashlight
+
+- type: entity
+  id: RMCSurvivorPresetSunRidersPilot
+  name: sun riders pilot preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ CMArmorHelmetM30, RMCMaskScarfTanDown ]
+    - [ CMArmorHelmetM30, RMCMaskTornScarfDesert ]
+    randomWeapon:
+    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCM1984BeltFilledSurvivorSunRiders ]
+    - [ RMCHolsterSMGPouchFilledExtendedAlt ]
+    - [ RMCHolsterSMGPouchFilledExtendedAlt ]
+    - [ RMCHolsterSMGPouchFilledExtendedAlt ]
+    tryEquipRandomWeapon: true
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: CMJobIconPilotDropshipSunriders
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_po_sunriders
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSunRidersPilot
+  name: sun riders pilot spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSunRidersPilot
+  - type: Sprite
+    state: marine_spawn
