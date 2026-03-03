@@ -252,7 +252,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
             return;
         }
 
-        var delay = ent.Comp.DisassembleDelay * _skills.GetSkillDelayMultiplier(args.User, ent.Comp.DisassembleSkill);
+        var delay = ent.Comp.DisassembleDelay;
+        if (ent.Comp.DisassembleSkill != null)
+            delay *= _skills.GetSkillDelayMultiplier(args.User, ent.Comp.DisassembleSkill.Value);
 
         if (ent.Comp.MountedEntity != null)
         {
@@ -914,7 +916,9 @@ public abstract class SharedWeaponMountSystem : EntitySystem
 
     private bool TryUndeployMount(Entity<WeaponMountComponent> ent, EntityUid user, EntityUid? used = null)
     {
-        var delay = ent.Comp.DisassembleDelay * _skills.GetSkillDelayMultiplier(user, ent.Comp.DisassembleSkill);
+        var delay = ent.Comp.DisassembleDelay;
+        if (ent.Comp.DisassembleSkill != null)
+            delay *= _skills.GetSkillDelayMultiplier(user, ent.Comp.DisassembleSkill.Value);
 
         var undeployDoAfterArgs = new DoAfterArgs(EntityManager,
             user,

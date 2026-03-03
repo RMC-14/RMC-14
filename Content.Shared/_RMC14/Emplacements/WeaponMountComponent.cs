@@ -156,7 +156,7 @@ public sealed partial class WeaponMountComponent : Component
     ///     The skill that lowers the duration of the disassemble/undeploy doafter.
     /// </summary>
     [DataField]
-    public EntProtoId<SkillDefinitionComponent> DisassembleSkill = "RMCSkillEngineer";
+    public EntProtoId<SkillDefinitionComponent>? DisassembleSkill; //TODO make this RMCSkillEngineer after rebalancing of the deploy/undeploy doafter durations
 
     [DataField, AutoNetworkedField]
     public string? DeployFixture = "mount";
