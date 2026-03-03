@@ -14,7 +14,7 @@ public sealed partial class XenoAcidShotgunComponent : Component
     public FixedPoint2 PlasmaCost = 40;
 
     [DataField, AutoNetworkedField]
-    public float Speed = 20;
+    public float Speed = 40;
 
     [DataField, AutoNetworkedField]
     public EntProtoId ProjectileId = "XenoAcidShotgunProjectile";

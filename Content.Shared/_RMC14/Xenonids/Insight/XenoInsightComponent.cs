@@ -15,8 +15,4 @@ public sealed partial class XenoInsightComponent : Component
     //max stacks
     [DataField, AutoNetworkedField]
     public int MaxInsight = 10;
-
-    [DataField, AutoNetworkedField]
-    public bool Empowered = false;
-
 }

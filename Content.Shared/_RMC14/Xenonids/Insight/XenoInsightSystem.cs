@@ -1,4 +1,5 @@
 ﻿using Content.Shared._RMC14.Slow;
+using Content.Shared._RMC14.Xenonids.DeployTraps;
 using Content.Shared._RMC14.Xenonids.Insight;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Shotgun;
 using Content.Shared.Damage;
@@ -46,10 +47,8 @@ public sealed class XenoInsightSystem : EntitySystem
 
     public void InsightEmpower(Entity<XenoInsightComponent> xeno)
     {
-        xeno.Comp.Empowered = true;
-        Dirty(xeno);
-
-        //empower popup TBD
+        if (TryComp(xeno.Owner, out XenoDeployTrapsComponent? deployTraps))
+            deployTraps.Empowered = true;
         _popup.PopupClient(Loc.GetString("rmc-xeno-insight-empower"), xeno, xeno, PopupType.Medium);
     }
 }

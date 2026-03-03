@@ -1,5 +1,7 @@
-﻿namespace Content.Shared._RMC14.Xenonids.DeployTraps;
+﻿using Robust.Shared.GameStates;
+
+namespace Content.Shared._RMC14.Xenonids.DeployTraps;
 
 
-//Used to hopefully stop traps from spawning on top of traps.
+[RegisterComponent, NetworkedComponent]
 public sealed partial class DeployTrapsBlockerComponent : Component;

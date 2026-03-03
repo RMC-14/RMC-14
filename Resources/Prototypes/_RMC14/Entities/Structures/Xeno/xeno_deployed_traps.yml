@@ -1,0 +1,70 @@
+﻿- type: entity
+  id: XenoTrapperTrap
+  name: xeno trap
+  description: A resin trap laid by a Trapper.
+  components:
+  - type: DeployTrapsBlocker
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Xenos/xeno_resin_trap.rsi
+    drawdepth: FloorObjects
+    layers:
+    - state: trap
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 20
+        mask:
+        - ItemMask
+        layer:
+        - BulletImpassable
+        restitution: 0.3
+        friction: 0.2
+      trap_trigger:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.5
+        hard: false
+        layer:
+        - Opaque
+        mask:
+        - MobLayer
+  - type: Damageable
+    damageContainer: StructuralXeno
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTypeTrigger
+        damageType: Heat
+        damage: 10
+      behaviors:
+      - !type:BurnBodyBehavior { }
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+    stepOn: true
+  - type: XenoDeployedTraps
+    stunDuration: 1.75
+  - type: XenoFriendly
+
+
+- type: entity
+  id: XenoTrapperEmpoweredTrap
+  parent: XenoTrapperTrap
+  name: xeno empowered trap
+  description: A strengthened resin trap laid by a Trapper.
+  components:
+  - type: XenoDeployedTraps
+    stunDuration: 10

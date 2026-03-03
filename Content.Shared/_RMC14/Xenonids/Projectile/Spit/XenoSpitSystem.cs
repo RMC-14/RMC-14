@@ -7,6 +7,7 @@ using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Shields;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Synth;
+using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Insight;
 using Content.Shared._RMC14.Xenonids.Projectile.Spit.Ball;
@@ -246,7 +247,7 @@ public sealed class XenoSpitSystem : EntitySystem
         if (!_xeno.CanAbilityAttackTarget(shooter, args.Target))
             return;
 
-        if (HasComp<RMCRootedComponent>(args.Target))
+        if (HasComp<XenoCaughtInTrapComponent>(args.Target))
         {
             args.Damage *= 1.75;
             _insight.IncrementInsight(shooter, 10);

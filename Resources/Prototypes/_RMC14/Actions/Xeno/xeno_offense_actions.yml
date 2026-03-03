@@ -1524,9 +1524,11 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
-    useDelay: 1
+    useDelay: 6
+  - type: TargetAction
+    range: 10
+    deselectOnMiss: false
   - type: WorldTargetAction
-    range: 7
     event: !type:XenoAcidMineActionEvent
   - type: ActionBlockIfResting
   - type: XenoActionPlasma
@@ -1543,7 +1545,7 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
-    useDelay: 7
+    useDelay: 6
   - type: TargetAction
     range: 15
     checkCanAccess: false
@@ -1564,9 +1566,9 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
-    useDelay: 60
+    useDelay: 20
   - type: TargetAction
-    range: 7
+    range: 10
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoDeployTrapsActionEvent

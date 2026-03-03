@@ -54,7 +54,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStabBoiler
+    - ActionXenoTailStab
     - ActionXenoAcidStrong
     - ActionXenoBombard
     - ActionXenoToggleGasType
@@ -87,9 +87,6 @@
   - type: XenoAcidShroud
   - type: XenoGasToggle
   - type: XenoTailStab
-    toggle: true
-    inject:
-      RMCMolecularAcid: 6
     tailDamage:
       groups:
         Brute: 30
@@ -206,7 +203,6 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStabBoiler
     - ActionXenoAcidStrong
     - ActionXenoAcidMine
     - ActionXenoAcidShotgun
@@ -226,13 +222,13 @@
   - type: XenoAcidMine
     damageToMobs:
       types:
-        Caustic: 45
+        Heat: 45
     damageToStructures:
       types:
-        Caustic: 76
+        Heat: 76
     damageToStructuresEmpowered:
       types:
-        Caustic: 114
+        Heat: 114
   - type: XenoAcidShotgun
   - type: XenoDeployTraps
   - type: XenoInsight
