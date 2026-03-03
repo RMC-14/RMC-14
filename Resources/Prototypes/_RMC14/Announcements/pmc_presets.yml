@@ -57,8 +57,6 @@
     sprite:
       showSpriteBox: true
       spriteBoxColor: "#0a0d12"
-      spriteBoxBorderColor: "#89dfff"
-      spriteBoxBorderThickness: 1
       spriteBoxPadding: 0
       spriteGlow: true
       spriteGlowColor: "#89dfff"

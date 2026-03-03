@@ -15,7 +15,6 @@ public sealed class AnnouncementNetData
     public bool CanInterrupt { get; set; }
     public bool CanBeInterrupted { get; set; }
     public AnnouncementStyle Style { get; set; } = new();
-    public AnnouncementStyleOverride? StyleOverride { get; set; }
     public NetEntity? SpeakerEntity { get; set; }
     public string? SpeakerName { get; set; }
     public bool ShowSprite { get; set; } = true;

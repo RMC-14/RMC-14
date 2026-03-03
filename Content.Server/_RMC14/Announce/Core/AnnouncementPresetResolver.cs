@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Content.Shared._RMC14.Announce;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
-using Serilog;
 
 namespace Content.Server._RMC14.Announce.Core;
 
@@ -38,7 +34,6 @@ public sealed class AnnouncementPresetResolver
             }
         }
 
-        var available = _prototypes.EnumeratePrototypes<AnnouncementPresetPrototype>().ToList();
         return null;
     }
 }

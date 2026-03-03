@@ -11,7 +11,6 @@ public sealed class AnnouncementRequest
     public AnnouncementTarget Target { get; set; } = AnnouncementTarget.All;
     public EntityUid? Speaker { get; set; }
     public EntityUid? Source { get; set; }
-    public EntityUid? TargetEntity { get; set; }
     public AnnouncementStyleOverride? StyleOverride { get; set; }
     public SoundSpecifier? SoundOverride { get; set; }
     public float? VolumeOverride { get; set; }

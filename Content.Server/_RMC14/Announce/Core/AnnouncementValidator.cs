@@ -64,10 +64,6 @@ public sealed class AnnouncementValidator
             result.AddError($"Source entity {request.Source.Value} does not exist");
         }
 
-        if (request.TargetEntity.HasValue && !_entityManager.EntityExists(request.TargetEntity.Value))
-        {
-            result.AddError($"Target entity {request.TargetEntity.Value} does not exist");
-        }
     }
 
     private void ValidateParameters(AnnouncementRequest request, ValidationResult result)
