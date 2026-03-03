@@ -63,10 +63,10 @@ public sealed partial class AnnouncementWidget : UIWidget
             State = AnnouncementState.Animating,
             CleanText = PreprocessText(announcement.Text),
             SlideStartPosition = GetSlideStartPosition(announcement.Style),
-            ZoomCurrentScale = announcement.Style.AnimationEnhancements?.EnableZoom == true
-                ? announcement.Style.AnimationEnhancements.ZoomStartScale
+            ZoomCurrentScale = announcement.Style.AnimationConfig.AnimationEnhancements?.EnableZoom == true
+                ? announcement.Style.AnimationConfig.AnimationEnhancements.ZoomStartScale
                 : 1.0f,
-            FadeAlpha = announcement.Style.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
+            FadeAlpha = announcement.Style.AnimationConfig.Animation == AnnouncementAnimation.Fade ? 0.0f : 1.0f,
             PulseScale = 1.0f,
             PulseAlpha = 1.0f
         };
@@ -163,3 +163,4 @@ public sealed partial class AnnouncementWidget : UIWidget
     }
 
 }
+

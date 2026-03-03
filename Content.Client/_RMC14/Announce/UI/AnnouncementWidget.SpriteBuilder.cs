@@ -44,7 +44,7 @@ public sealed partial class AnnouncementWidget
             }
 
             var style = announcement.Style;
-            var spriteScale = style.SpriteScale * announcement.SpriteScale;
+            var spriteScale = style.SpriteConfig.SpriteScale * announcement.SpriteScale;
             var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
 
             var clipContainer = new Control
@@ -68,7 +68,7 @@ public sealed partial class AnnouncementWidget
 
             Control container = clipContainer;
 
-            if (style.ShowSpriteBox)
+            if (style.SpriteConfig.ShowSpriteBox)
             {
                 var outerPanel = new Control
                 {
@@ -86,14 +86,14 @@ public sealed partial class AnnouncementWidget
 
                 var styleBox = new StyleBoxFlat
                 {
-                    BackgroundColor = style.SpriteBoxColor,
-                    BorderColor = style.SpriteBoxBorderColor,
-                    BorderThickness = new Thickness(style.SpriteBoxBorderThickness)
+                    BackgroundColor = style.SpriteConfig.SpriteBoxColor,
+                    BorderColor = style.SpriteConfig.SpriteBoxBorderColor,
+                    BorderThickness = new Thickness(style.SpriteConfig.SpriteBoxBorderThickness)
                 };
 
-                var padding = style.SpriteDisplayMode == SpriteDisplayMode.TopHalf
-                    ? Math.Max(style.SpriteBoxPadding * 0.3f, 5f * screenScaleFactor)
-                    : Math.Max(style.SpriteBoxPadding, 15f * screenScaleFactor);
+                var padding = style.LayoutConfig.SpriteDisplayMode == SpriteDisplayMode.TopHalf
+                    ? Math.Max(style.SpriteConfig.SpriteBoxPadding * 0.3f, 5f * screenScaleFactor)
+                    : Math.Max(style.SpriteConfig.SpriteBoxPadding, 15f * screenScaleFactor);
 
                 styleBox.ContentMarginTopOverride = padding;
                 styleBox.ContentMarginBottomOverride = padding;
@@ -107,7 +107,7 @@ public sealed partial class AnnouncementWidget
                 container = outerPanel;
             }
 
-            if (style.AnimationEnhancements?.EnableCRT == true)
+            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true)
             {
                 var crtWrapper = new Control
                 {
@@ -128,7 +128,7 @@ public sealed partial class AnnouncementWidget
                 container = crtWrapper;
             }
 
-            if (style.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
+            if (style.TextConfig.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
             {
                 var spriteWithMask = ApplyIncognitoFinal(announcement, screenSize, container);
 
@@ -148,14 +148,14 @@ public sealed partial class AnnouncementWidget
 
                 var message = _owner.CreateFormattedMessage(announcement.SpeakerName, new AnnouncementStyle
                 {
-                    PrimaryColor = style.SpeakerNameColor,
-                    FontSize = style.SpeakerNameFontSize,
-                    Font = style.Font
+                    PrimaryColor = style.TextConfig.SpeakerNameColor,
+                    FontSize = style.TextConfig.SpeakerNameFontSize,
+                    Font = style.TextConfig.Font
                 });
 
                 label.SetMessage(message);
 
-                if (style.SpeakerNamePosition == AnnouncementSpeakerNamePosition.Above)
+                if (style.LayoutConfig.SpeakerNamePosition == AnnouncementSpeakerNamePosition.Above)
                 {
                     nameContainer.AddChild(label);
                     nameContainer.AddChild(spriteWithMask);
@@ -241,3 +241,4 @@ public sealed partial class AnnouncementWidget
         }
     }
 }
+

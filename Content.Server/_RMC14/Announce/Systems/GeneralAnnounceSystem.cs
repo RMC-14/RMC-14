@@ -405,30 +405,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
     private AnnouncementStyle MergeStyle(AnnouncementStyle baseStyle, AnnouncementStyleOverride? overrideStyle)
     {
-        if (overrideStyle == null)
-            return baseStyle;
-
-        return baseStyle with
-        {
-            Animation = overrideStyle.Animation ?? baseStyle.Animation,
-            AnimationEnhancements = overrideStyle.AnimationEnhancements ?? baseStyle.AnimationEnhancements,
-
-            PrimaryColor = overrideStyle.PrimaryColor ?? baseStyle.PrimaryColor,
-            TitleColor = overrideStyle.TitleColor ?? baseStyle.TitleColor,
-            BackgroundColor = overrideStyle.BackgroundColor ?? baseStyle.BackgroundColor,
-            BackgroundAlpha = overrideStyle.BackgroundAlpha ?? baseStyle.BackgroundAlpha,
-
-            Position = overrideStyle.Position ?? baseStyle.Position,
-            SpritePosition = overrideStyle.SpritePosition ?? baseStyle.SpritePosition,
-
-            ShowSpeakerName = overrideStyle.ShowSpeakerName ?? baseStyle.ShowSpeakerName,
-            SpeakerNameColor = overrideStyle.SpeakerNameColor ?? baseStyle.SpeakerNameColor,
-            SpeakerNameFontSize = overrideStyle.SpeakerNameFontSize ?? baseStyle.SpeakerNameFontSize,
-            SpeakerNamePosition = overrideStyle.SpeakerNamePosition ?? baseStyle.SpeakerNamePosition,
-
-            SpriteScale = overrideStyle.SpriteScale ?? baseStyle.SpriteScale,
-            SpriteSpacing = overrideStyle.SpriteSpacing ?? baseStyle.SpriteSpacing
-        };
+        return AnnouncementStyleMerger.Merge(baseStyle, overrideStyle);
     }
 
     private static string[] BuildLines(string message)
@@ -505,7 +482,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
 
         _pvsOverride.AddSessionOverrides(speaker, filter);
 
-        var totalDuration = AnnouncementDurationCalculator.Calculate(style) + style.HoldDuration + PvsCleanupBufferSeconds;
+        var totalDuration = AnnouncementDurationCalculator.Calculate(style) + style.AnimationConfig.HoldDuration + PvsCleanupBufferSeconds;
         Timer.Spawn(TimeSpan.FromSeconds(totalDuration), () => RemoveSpeakerOverrides(speaker, filter));
     }
 
@@ -586,7 +563,7 @@ public sealed class GeneralAnnounceSystem : EntitySystem
             if (style == null)
                 continue;
 
-            var duration = AnnouncementDurationCalculator.Calculate(style) + style.HoldDuration;
+            var duration = AnnouncementDurationCalculator.Calculate(style) + style.AnimationConfig.HoldDuration;
             if (longest == null || duration >= longestDuration)
             {
                 longest = style;
@@ -615,3 +592,4 @@ public sealed class GeneralAnnounceSystem : EntitySystem
         AnnouncementDisplayPreference GlobalPreference,
         Dictionary<string, AnnouncementDisplayPreference> Overrides);
 }
+

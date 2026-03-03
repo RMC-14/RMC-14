@@ -58,12 +58,12 @@ public sealed partial class AnnouncementWidget
 
     private Vector2 GetSlideStartPosition(AnnouncementStyle style)
     {
-        if (style.AnimationEnhancements?.EnableSlide != true)
+        if (style.AnimationConfig.AnimationEnhancements?.EnableSlide != true)
             return Vector2.Zero;
 
         var screenSize = ResolveScreenSize();
 
-        return style.AnimationEnhancements.SlideFrom switch
+        return style.AnimationConfig.AnimationEnhancements.SlideFrom switch
         {
             SlideDirection.Left => new Vector2(-screenSize.X, 0),
             SlideDirection.Right => new Vector2(screenSize.X, 0),
@@ -92,3 +92,4 @@ public sealed partial class AnnouncementWidget
         }
     }
 }
+

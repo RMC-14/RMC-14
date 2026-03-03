@@ -7,7 +7,7 @@ public sealed class GlowEffect : IAnnouncementVisualEffect
     public void Apply(AnnouncementEffectContext context, TimeSpan currentTime)
     {
         var time = (float) currentTime.TotalSeconds;
-        var intensity = context.Style.SpriteGlowIntensity;
+        var intensity = context.Style.SpriteConfig.SpriteGlowIntensity;
 
         foreach (var label in context.Labels)
         {
@@ -23,3 +23,4 @@ public sealed class GlowEffect : IAnnouncementVisualEffect
         }
     }
 }
+

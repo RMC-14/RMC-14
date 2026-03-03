@@ -23,7 +23,7 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         var style = context.Style;
 
         context.State.TypewriterTimer += deltaTime;
-        if (context.State.TypewriterTimer < style.PrintSpeed)
+        if (context.State.TypewriterTimer < style.AnimationConfig.PrintSpeed)
             return AnnouncementAnimationStatus.Running;
 
         context.State.TypewriterTimer = 0f;
@@ -79,3 +79,4 @@ public sealed class TypewriterAnimation : IAnnouncementAnimation
         }
     }
 }
+

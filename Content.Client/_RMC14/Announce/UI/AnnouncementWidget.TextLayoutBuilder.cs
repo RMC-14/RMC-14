@@ -29,17 +29,17 @@ public sealed partial class AnnouncementWidget
             Vector2 textOffset,
             Vector2 screenSize)
         {
-            var baseMaxWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
+            var baseMaxWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
             var optimalWidth = AnnouncementStyling.CalculateOptimalTextWidth(text, style, screenSize);
             var maxAllowedWidth = Math.Min(baseMaxWidth, optimalWidth * 1.1f);
             var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
 
             if (spriteContainer != null &&
-                (style.SpritePosition == AnnouncementSpritePosition.Left || style.SpritePosition == AnnouncementSpritePosition.Right))
+                (style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Left || style.LayoutConfig.SpritePosition == AnnouncementSpritePosition.Right))
             {
                 spriteContainer.Measure(screenSize);
                 var spriteWidth = spriteContainer.DesiredSize.X;
-                var spriteSpacing = style.SpriteSpacing * screenScaleFactor;
+                var spriteSpacing = style.LayoutConfig.SpriteSpacing * screenScaleFactor;
                 var horizontalTextBudget = Math.Max(baseMaxWidth * 0.45f, baseMaxWidth - spriteWidth - spriteSpacing);
                 maxAllowedWidth = Math.Min(maxAllowedWidth, horizontalTextBudget);
             }
@@ -48,7 +48,7 @@ public sealed partial class AnnouncementWidget
             var effectiveTextWidth = Math.Max(1f, optimalWidth);
             var bodyResponsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
                 text.Length > 0 ? text : new[] { string.Empty },
-                style.FontSize,
+                style.TextConfig.FontSize,
                 effectiveTextWidth,
                 screenSize,
                 style);
@@ -105,9 +105,9 @@ public sealed partial class AnnouncementWidget
                 var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
                 titleLabel.SetMessage(titleMessage);
 
-                if (style.TitleUnderline)
+                if (style.TitleConfig.TitleUnderline)
                 {
-                    var underlineThickness = Math.Max(1f, style.TitleUnderlineThickness * scaleFactor);
+                    var underlineThickness = Math.Max(1f, style.TitleConfig.TitleUnderlineThickness * scaleFactor);
                     titleLabel.Measure(new Vector2(effectiveTextWidth, float.PositiveInfinity));
                     var underlineWidth = MathF.Min(effectiveTextWidth, titleLabel.DesiredSize.X);
                     var titleStack = new BoxContainer
@@ -129,7 +129,7 @@ public sealed partial class AnnouncementWidget
                         MinHeight = underlineThickness,
                         SetHeight = underlineThickness
                     };
-                    underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleColor };
+                    underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleConfig.TitleColor };
 
                     titleStack.AddChild(titleLabel);
                     titleStack.AddChild(underline);
@@ -173,7 +173,7 @@ public sealed partial class AnnouncementWidget
             outerContainer.AddChild(container);
 
             CRTOverlay? crtOverlayRef = null;
-            if (style.AnimationEnhancements?.EnableCRT == true)
+            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true)
             {
                 var crtSettings = _owner.GetCRTSettingsFromStyle(style);
                 var crtOverlay = new CRTOverlay
@@ -202,3 +202,4 @@ public sealed partial class AnnouncementWidget
 
     private readonly record struct TextLayoutBuildResult(RichTextLabel[] Labels, Control Container, float MaxAllowedWidth);
 }
+

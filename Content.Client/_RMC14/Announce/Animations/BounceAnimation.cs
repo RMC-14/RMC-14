@@ -14,7 +14,7 @@ public sealed class BounceAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var enhancements = context.Style.AnimationEnhancements;
+        var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
         if (enhancements?.EnableBounce != true)
             return AnnouncementAnimationStatus.Finished;
 
@@ -43,3 +43,4 @@ public sealed class BounceAnimation : IAnnouncementAnimation
         return AnnouncementAnimationStatus.Running;
     }
 }
+

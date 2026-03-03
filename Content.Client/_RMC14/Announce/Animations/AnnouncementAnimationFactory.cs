@@ -7,7 +7,7 @@ public static class AnnouncementAnimationFactory
 {
     public static IAnnouncementAnimation Create(AnnouncementStyle style, IRobustRandom random)
     {
-        return style.Animation switch
+        return style.AnimationConfig.Animation switch
         {
             AnnouncementAnimation.None => new NoneAnimation(),
             AnnouncementAnimation.Typewriter => new TypewriterAnimation(),
@@ -23,3 +23,4 @@ public static class AnnouncementAnimationFactory
         };
     }
 }
+

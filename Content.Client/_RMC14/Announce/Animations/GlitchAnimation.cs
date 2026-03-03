@@ -25,7 +25,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
         var style = context.Style;
-        var printSpeed = style.PrintSpeed * 0.5f;
+        var printSpeed = style.AnimationConfig.PrintSpeed * 0.5f;
 
         context.State.GlitchTimer += deltaTime;
         if (context.State.GlitchTimer >= printSpeed)
@@ -36,7 +36,7 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
                 return AnnouncementAnimationStatus.Finished;
         }
 
-        if (RandomChance(context.Random, style.GlitchChance))
+        if (RandomChance(context.Random, style.AnimationConfig.GlitchChance))
             ApplyGlitchEffect(context);
 
         return AnnouncementAnimationStatus.Running;
@@ -118,3 +118,4 @@ public sealed class GlitchAnimation : IAnnouncementAnimation
         return random.NextFloat() < probability;
     }
 }
+

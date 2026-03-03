@@ -15,46 +15,19 @@ public static class AnnouncementStyling
     public static AnnouncementStyle CreateResponsiveStyle(AnnouncementStyle baseStyle, float responsiveFontSize, Vector2 screenSize)
     {
         var scaleFactor = CalculateScreenScaleFactor(screenSize);
+        var style = baseStyle.Clone();
 
-        return new AnnouncementStyle
-        {
-            Animation = baseStyle.Animation,
-            Position = baseStyle.Position,
-            PrimaryColor = baseStyle.PrimaryColor,
+        style.TextConfig.FontSize = responsiveFontSize;
+        style.TextConfig.LineHeight = baseStyle.TextConfig.LineHeight * scaleFactor;
+        style.AnimationConfig.ShakeIntensity = baseStyle.AnimationConfig.ShakeIntensity * scaleFactor;
+        style.LayoutConfig.SpriteSpacing = baseStyle.LayoutConfig.SpriteSpacing * scaleFactor;
+        style.SpriteConfig.SpriteBoxBorderThickness = baseStyle.SpriteConfig.SpriteBoxBorderThickness * scaleFactor;
+        style.SpriteConfig.SpriteBoxPadding = baseStyle.SpriteConfig.SpriteBoxPadding * scaleFactor;
+        style.TextConfig.SpeakerNameFontSize = baseStyle.TextConfig.SpeakerNameFontSize * scaleFactor;
+        style.AnimationConfig.AnimationEnhancements = baseStyle.AnimationConfig.AnimationEnhancements?.Clone() ?? new RealisticAnimations();
+        style.ValidateAndNormalize();
 
-            PrintSpeed = baseStyle.PrintSpeed,
-            ShakeIntensity = baseStyle.ShakeIntensity * scaleFactor,
-            FlickerChance = baseStyle.FlickerChance,
-            GlitchChance = baseStyle.GlitchChance,
-            HoldDuration = baseStyle.HoldDuration,
-
-            FontSize = responsiveFontSize,
-            LineHeight = baseStyle.LineHeight * scaleFactor,
-
-            ShowBackground = baseStyle.ShowBackground,
-            BackgroundColor = baseStyle.BackgroundColor,
-            BackgroundAlpha = baseStyle.BackgroundAlpha,
-
-            SpritePosition = baseStyle.SpritePosition,
-            SpriteSpacing = baseStyle.SpriteSpacing * scaleFactor,
-
-            ShowSpriteBox = baseStyle.ShowSpriteBox,
-            SpriteBoxColor = baseStyle.SpriteBoxColor,
-            SpriteBoxBorderColor = baseStyle.SpriteBoxBorderColor,
-            SpriteBoxBorderThickness = baseStyle.SpriteBoxBorderThickness * scaleFactor,
-            SpriteBoxPadding = baseStyle.SpriteBoxPadding * scaleFactor,
-
-            SpriteGlow = baseStyle.SpriteGlow,
-            SpriteGlowColor = baseStyle.SpriteGlowColor,
-            SpriteGlowIntensity = baseStyle.SpriteGlowIntensity,
-
-            ShowSpeakerName = baseStyle.ShowSpeakerName,
-            SpeakerNameColor = baseStyle.SpeakerNameColor,
-            SpeakerNameFontSize = baseStyle.SpeakerNameFontSize * scaleFactor,
-            SpeakerNamePosition = baseStyle.SpeakerNamePosition,
-
-            AnimationEnhancements = baseStyle.AnimationEnhancements
-        };
+        return style;
     }
 
     public static float CalculateScreenScaleFactor(Vector2 screenSize)
@@ -192,7 +165,7 @@ public static class AnnouncementStyling
     public static float CalculateOptimalTextWidth(string[] text, AnnouncementStyle style, Vector2 screenSize)
     {
         var totalWordCount = text.Sum(line => CountWords(line));
-        var maxLineWidth = CalculateMaxTextWidth(screenSize, style.Position);
+        var maxLineWidth = CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
 
         if (totalWordCount <= 5)
         {
@@ -211,11 +184,11 @@ public static class AnnouncementStyling
     {
         var scaleFactor = CalculateScreenScaleFactor(screenSize);
         var optimalWidth = CalculateOptimalTextWidth(text, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(text, style.FontSize, optimalWidth, screenSize, style);
-        var lineHeight = style.LineHeight * scaleFactor;
+        var fontSize = CalculateResponsiveFontSize(text, style.TextConfig.FontSize, optimalWidth, screenSize, style);
+        var lineHeight = style.TextConfig.LineHeight * scaleFactor;
 
         var estimatedWidth = optimalWidth;
-        var estimatedHeight = text.Length * lineHeight * fontSize / style.FontSize;
+        var estimatedHeight = text.Length * lineHeight * fontSize / style.TextConfig.FontSize;
 
         return new Vector2(estimatedWidth, estimatedHeight);
     }
@@ -224,14 +197,14 @@ public static class AnnouncementStyling
     {
         var textArray = new[] { text };
         var optimalWidth = CalculateOptimalTextWidth(textArray, style, screenSize);
-        var fontSize = CalculateResponsiveFontSize(textArray, style.FontSize, optimalWidth, screenSize, style);
+        var fontSize = CalculateResponsiveFontSize(textArray, style.TextConfig.FontSize, optimalWidth, screenSize, style);
 
         label.HorizontalAlignment = HAlignment.Center;
         label.VerticalAlignment = VAlignment.Center;
 
         label.MaxWidth = optimalWidth;
 
-        var formattedText = CreateFormattedTextWithSize(text, fontSize, style.PrimaryColor);
+        var formattedText = CreateFormattedTextWithSize(text, fontSize, style.TextConfig.PrimaryColor);
         label.Text = formattedText;
     }
 
@@ -258,3 +231,4 @@ public static class AnnouncementStyling
         return FormattedMessage.FromMarkupPermissive(formattedText);
     }
 }
+

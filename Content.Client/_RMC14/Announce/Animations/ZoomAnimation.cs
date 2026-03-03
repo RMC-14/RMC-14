@@ -11,7 +11,7 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var enhancements = context.Style.AnimationEnhancements;
+        var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
         if (enhancements?.EnableZoom != true)
             return AnnouncementAnimationStatus.Finished;
 
@@ -39,3 +39,4 @@ public sealed class ZoomAnimation : IAnnouncementAnimation
         return AnnouncementAnimationStatus.Running;
     }
 }
+

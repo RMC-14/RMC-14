@@ -61,7 +61,7 @@ public sealed class AnnouncementPlayback
         if (_holdStartedAt.HasValue)
         {
             var elapsedHold = (float) (currentTime - _holdStartedAt.Value).TotalSeconds;
-            if (elapsedHold >= style.HoldDuration)
+            if (elapsedHold >= style.AnimationConfig.HoldDuration)
             {
                 IsFinished = true;
                 return;
@@ -85,7 +85,7 @@ public sealed class AnnouncementPlayback
     {
         foreach (var label in labels)
         {
-            label.Modulate = style.PrimaryColor;
+            label.Modulate = style.TextConfig.PrimaryColor;
         }
     }
 
@@ -105,3 +105,4 @@ public sealed class AnnouncementPlayback
         }
     }
 }
+

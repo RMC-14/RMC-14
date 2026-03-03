@@ -25,8 +25,8 @@ public sealed partial class AnnouncementWidget
         var announcement = ActiveAnnouncement.Data;
         var style = announcement.Style;
 
-        var titleText = !string.IsNullOrEmpty(announcement.Title) ? announcement.Title : style.Title;
-        _hasTitle = style.ShowTitle && !string.IsNullOrEmpty(titleText);
+        var titleText = !string.IsNullOrEmpty(announcement.Title) ? announcement.Title : style.TitleConfig.Title;
+        _hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
         _titleOffset = _hasTitle ? 1 : 0;
 
         var contentContainer = new BoxContainer
@@ -57,7 +57,7 @@ public sealed partial class AnnouncementWidget
 
         if (_spriteContainer != null)
         {
-            var spritePos = style.SpritePosition;
+            var spritePos = style.LayoutConfig.SpritePosition;
 
             var spriteWrapper = new Control
             {
@@ -134,7 +134,7 @@ public sealed partial class AnnouncementWidget
 
         AddChild(contentContainer);
         SetInitialVisibility();
-        ApplyUIScale(style.UIScale);
+        ApplyUIScale(style.LayoutConfig.UIScale);
     }
 
     private void SetSpriteDisplayProperties(Control clipContainer, SpriteView spriteView, AnnouncementStyle style, float spriteScale, float screenScaleFactor)
@@ -144,7 +144,7 @@ public sealed partial class AnnouncementWidget
 
         var spriteMultiplier = 2.0f;
 
-        switch (style.SpriteDisplayMode)
+        switch (style.LayoutConfig.SpriteDisplayMode)
         {
             case SpriteDisplayMode.TopHalf:
                 var topHalfWidth = baseContainerWidth * spriteScale;
@@ -174,13 +174,13 @@ public sealed partial class AnnouncementWidget
                 break;
 
             case SpriteDisplayMode.CustomClip:
-                var clipSize = style.SpriteClipSize * spriteScale * screenScaleFactor;
+                var clipSize = style.LayoutConfig.SpriteClipSize * spriteScale * screenScaleFactor;
                 clipContainer.SetWidth = Math.Max(clipSize.X, baseContainerWidth * spriteScale);
                 clipContainer.SetHeight = Math.Max(clipSize.Y, baseContainerHeight * spriteScale);
                 spriteView.SetWidth = clipContainer.Width * spriteMultiplier;
                 spriteView.SetHeight = clipContainer.Height * spriteMultiplier;
 
-                var offset = style.SpriteClipOffset * screenScaleFactor;
+                var offset = style.LayoutConfig.SpriteClipOffset * screenScaleFactor;
                 spriteView.Margin = new Thickness(-offset.X * spriteScale, -offset.Y * spriteScale, 0, 0);
                 break;
 
@@ -199,7 +199,7 @@ public sealed partial class AnnouncementWidget
 
     private static HAlignment GetTextAlignment(AnnouncementStyle style)
     {
-        return style.Position switch
+        return style.LayoutConfig.Position switch
         {
             AnnouncementPosition.TopLeft or AnnouncementPosition.MiddleLeft or AnnouncementPosition.BottomLeft => HAlignment.Left,
             AnnouncementPosition.TopRight or AnnouncementPosition.MiddleRight or AnnouncementPosition.BottomRight => HAlignment.Right,
@@ -209,12 +209,12 @@ public sealed partial class AnnouncementWidget
 
     private void AddSpriteBoxShaderOverlay(AnnouncementStyle style, Control container, bool underlay)
     {
-        if (string.IsNullOrWhiteSpace(style.SpriteBoxShader))
+        if (string.IsNullOrWhiteSpace(style.SpriteConfig.SpriteBoxShader))
             return;
 
-        if (!_prototypeManager.TryIndex<ShaderPrototype>(style.SpriteBoxShader, out var shaderPrototype))
+        if (!_prototypeManager.TryIndex<ShaderPrototype>(style.SpriteConfig.SpriteBoxShader, out var shaderPrototype))
         {
-            Logger.Warning($"[AnnouncementWidget] Sprite box shader '{style.SpriteBoxShader}' not found.");
+            Logger.Warning($"[AnnouncementWidget] Sprite box shader '{style.SpriteConfig.SpriteBoxShader}' not found.");
             return;
         }
 
@@ -246,10 +246,10 @@ public sealed partial class AnnouncementWidget
 
     private CRTSettings GetCRTSettingsFromStyle(AnnouncementStyle style)
     {
-        if (style.AnimationEnhancements?.EnableCRT == true &&
-            style.AnimationEnhancements.CRTSettings != null)
+        if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true &&
+            style.AnimationConfig.AnimationEnhancements.CRTSettings != null)
         {
-            return style.AnimationEnhancements.CRTSettings;
+            return style.AnimationConfig.AnimationEnhancements.CRTSettings;
         }
 
         return new CRTSettings
@@ -280,9 +280,9 @@ public sealed partial class AnnouncementWidget
             {
                 var styleBox = new StyleBoxFlat();
 
-                if (style.ShowBackground)
+                if (style.BackgroundConfig.ShowBackground)
                 {
-                    styleBox.BackgroundColor = style.BackgroundColor.WithAlpha(style.BackgroundAlpha);
+                    styleBox.BackgroundColor = style.BackgroundConfig.BackgroundColor.WithAlpha(style.BackgroundConfig.BackgroundAlpha);
                     const float padding = 10f;
                     styleBox.ContentMarginTopOverride = padding;
                     styleBox.ContentMarginBottomOverride = padding;
@@ -304,7 +304,7 @@ public sealed partial class AnnouncementWidget
         if (ActiveAnnouncement == null)
             return;
 
-        var animation = ActiveAnnouncement.Data.Style.Animation;
+        var animation = ActiveAnnouncement.Data.Style.AnimationConfig.Animation;
 
         if (animation == AnnouncementAnimation.Typewriter || animation == AnnouncementAnimation.Glitch)
         {
@@ -324,17 +324,17 @@ public sealed partial class AnnouncementWidget
         var screenSize = ResolveScreenSize();
         var maxAllowedWidth = _activeTextMaxWidth > 0f
             ? _activeTextMaxWidth
-            : AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.Position);
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.FontSize, maxAllowedWidth, screenSize, style);
+            : AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(ActiveAnnouncement?.Data.Text ?? new[] { text }, style.TextConfig.FontSize, maxAllowedWidth, screenSize, style);
 
-        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.PrimaryColor, style.Font);
+        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.TextConfig.PrimaryColor, style.TextConfig.Font);
     }
 
     private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)
     {
-        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleFontSize, maxAllowedWidth, screenSize, style);
-        var cappedFontSize = Math.Min(responsiveFontSize, style.FontSize * 0.9f);
-        return AnnouncementStyling.CreateFormattedMessage(text, cappedFontSize, style.TitleColor, style.TitleFont);
+        var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleConfig.TitleFontSize, maxAllowedWidth, screenSize, style);
+        var cappedFontSize = Math.Min(responsiveFontSize, style.TextConfig.FontSize * 0.9f);
+        return AnnouncementStyling.CreateFormattedMessage(text, cappedFontSize, style.TitleConfig.TitleColor, style.TitleConfig.TitleFont);
     }
 
     private void UpdatePosition()
@@ -352,7 +352,7 @@ public sealed partial class AnnouncementWidget
 
         LayoutContainer.SetPosition(this, position);
 
-        if (style.AnimationEnhancements?.EnableZoom == true)
+        if (style.AnimationConfig.AnimationEnhancements?.EnableZoom == true)
         {
             SetWidth = widgetSize.X * ActiveAnnouncement.ZoomCurrentScale;
             SetHeight = widgetSize.Y * ActiveAnnouncement.ZoomCurrentScale;
@@ -364,7 +364,7 @@ public sealed partial class AnnouncementWidget
         const float padding = 50f;
         const float topPadding = 100f;
 
-        return style.Position switch
+        return style.LayoutConfig.Position switch
         {
             AnnouncementPosition.TopLeft => new Vector2(padding, topPadding),
             AnnouncementPosition.TopCenter => new Vector2((screenSize.X - widgetSize.X) / 2, padding),
@@ -379,3 +379,4 @@ public sealed partial class AnnouncementWidget
         };
     }
 }
+

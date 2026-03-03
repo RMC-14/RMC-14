@@ -1,150 +1,61 @@
-using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
-using System.Numerics;
 
 namespace Content.Shared._RMC14.Announce;
 
 [DataDefinition, Serializable, NetSerializable]
-public sealed partial record AnnouncementStyle
+public sealed partial class AnnouncementStyle : ISerializationHooks, IRobustCloneable<AnnouncementStyle>
 {
-    [DataField]
-    public AnnouncementAnimation Animation { get; set; } = AnnouncementAnimation.Typewriter;
+    private AnnouncementAnimationConfig _animation = new();
+    private AnnouncementLayoutConfig _layout = new();
+    private AnnouncementBackgroundConfig _background = new();
+    private AnnouncementTextConfig _text = new();
+    private AnnouncementSpriteConfig _sprite = new();
+    private AnnouncementTitleConfig _title = new();
+    private AnnouncementScalingConfig _scaling = new();
 
-    [DataField]
-    public AnnouncementPosition Position { get; set; } = AnnouncementPosition.MiddleCenter;
+    public AnnouncementAnimationConfig AnimationConfig => _animation;
+    public AnnouncementLayoutConfig LayoutConfig => _layout;
+    public AnnouncementBackgroundConfig BackgroundConfig => _background;
+    public AnnouncementTextConfig TextConfig => _text;
+    public AnnouncementSpriteConfig SpriteConfig => _sprite;
+    public AnnouncementTitleConfig TitleConfig => _title;
+    public AnnouncementScalingConfig ScalingConfig => _scaling;
 
-    [DataField]
-    public bool ShowBackground { get; set; } = true;
+    public AnnouncementStyle Clone()
+    {
+        return new AnnouncementStyle
+        {
+            _animation = _animation.Clone(),
+            _layout = _layout.Clone(),
+            _background = _background.Clone(),
+            _text = _text.Clone(),
+            _sprite = _sprite.Clone(),
+            _title = _title.Clone(),
+            _scaling = _scaling.Clone(),
+        };
+    }
 
-    [DataField]
-    public float BackgroundAlpha { get; set; } = 0.8f;
+    public void ValidateAndNormalize()
+    {
+        _animation ??= new AnnouncementAnimationConfig();
+        _layout ??= new AnnouncementLayoutConfig();
+        _background ??= new AnnouncementBackgroundConfig();
+        _text ??= new AnnouncementTextConfig();
+        _sprite ??= new AnnouncementSpriteConfig();
+        _title ??= new AnnouncementTitleConfig();
+        _scaling ??= new AnnouncementScalingConfig();
 
-    [DataField]
-    public Color BackgroundColor { get; set; } = Color.Black;
+        _animation.ValidateAndNormalize();
+        _layout.ValidateAndNormalize();
+        _background.ValidateAndNormalize();
+        _text.ValidateAndNormalize();
+        _sprite.ValidateAndNormalize();
+        _title.ValidateAndNormalize();
+        _scaling.ValidateAndNormalize();
+    }
 
-    [DataField]
-    public Color PrimaryColor { get; set; } = Color.White;
-
-    [DataField]
-    public string Font { get; set; } = "Default";
-
-    [DataField]
-    public float FontSize { get; set; } = 16f;
-
-    [DataField]
-    public float LineHeight { get; set; } = 40f;
-
-    [DataField]
-    public float PrintSpeed { get; set; } = 0.03f;
-
-    [DataField]
-    public float HoldDuration { get; set; } = 3f;
-
-    [DataField]
-    public float ShakeIntensity { get; set; } = 0.5f;
-
-    [DataField]
-    public float FlickerChance { get; set; } = 0.01f;
-
-    [DataField]
-    public float GlitchChance { get; set; } = 0.005f;
-
-    [DataField]
-    public bool ShowSpriteBox { get; set; } = true;
-
-    [DataField]
-    public Color SpriteBoxColor { get; set; } = Color.Black;
-
-    [DataField]
-    public Color SpriteBoxBorderColor { get; set; } = Color.White;
-
-    [DataField]
-    public float SpriteBoxBorderThickness { get; set; } = 2f;
-
-    [DataField]
-    public float SpriteBoxPadding { get; set; } = 10f;
-
-    [DataField]
-    public string? SpriteBoxShader { get; set; }
-
-    [DataField]
-    public bool SpriteGlow { get; set; }
-
-    [DataField]
-    public Color SpriteGlowColor { get; set; } = Color.White;
-
-    [DataField]
-    public float SpriteGlowIntensity { get; set; } = 0.5f;
-
-    [DataField]
-    public bool ShowSpeakerName { get; set; } = true;
-
-    [DataField]
-    public Color SpeakerNameColor { get; set; } = Color.White;
-
-    [DataField]
-    public float SpeakerNameFontSize { get; set; } = 12f;
-
-    [DataField]
-    public AnnouncementSpeakerNamePosition SpeakerNamePosition { get; set; } = AnnouncementSpeakerNamePosition.Below;
-
-    [DataField]
-    public AnnouncementSpritePosition SpritePosition { get; set; } = AnnouncementSpritePosition.Left;
-
-    [DataField]
-    public float SpriteSpacing { get; set; } = 20f;
-
-    [DataField]
-    public RealisticAnimations AnimationEnhancements { get; set; } = new();
-
-    [DataField]
-    public SpriteDisplayMode SpriteDisplayMode { get; set; } = SpriteDisplayMode.TopHalf;
-
-    [DataField]
-    public float SpriteScale { get; set; } = 1.0f;
-
-    [DataField]
-    public float UIScale { get; set; } = 1.0f;
-
-    [DataField]
-    public bool ShowTitle { get; set; } = false;
-
-    [DataField]
-    public string Title { get; set; } = string.Empty;
-
-    [DataField]
-    public string TitleFont { get; set; } = "DefaultBold";
-
-    [DataField]
-    public Color TitleColor { get; set; } = Color.White;
-
-    [DataField]
-    public float TitleFontSize { get; set; } = 20f;
-
-    [DataField]
-    public bool TitleUnderline { get; set; }
-
-    [DataField]
-    public float TitleUnderlineThickness { get; set; } = 2f;
-
-    [DataField]
-    public AnnouncementTitlePosition TitlePosition { get; set; } = AnnouncementTitlePosition.Above;
-
-    [DataField]
-    public bool EnableResponsiveScaling { get; set; } = true;
-
-    [DataField]
-    public float ResponsiveScaleFactor { get; set; } = 1.0f;
-
-    [DataField]
-    public float MinScale { get; set; } = 0.5f;
-
-    [DataField]
-    public float MaxScale { get; set; } = 2.0f;
-
-    [DataField]
-    public Vector2 SpriteClipOffset { get; set; } = Vector2.Zero;
-
-    [DataField]
-    public Vector2 SpriteClipSize { get; set; } = new Vector2(64f, 64f);
+    void ISerializationHooks.AfterDeserialization()
+    {
+        ValidateAndNormalize();
+    }
 }

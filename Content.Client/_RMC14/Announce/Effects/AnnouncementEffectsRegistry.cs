@@ -7,16 +7,17 @@ public static class AnnouncementEffectsRegistry
 {
     public static IEnumerable<IAnnouncementVisualEffect> BuildEffects(AnnouncementStyle style)
     {
-        if (style.SpriteGlow)
+        if (style.SpriteConfig.SpriteGlow)
             yield return new GlowEffect();
 
-        if (style.FlickerChance > 0)
+        if (style.AnimationConfig.FlickerChance > 0)
             yield return new FlickerEffect();
 
-        if (style.Animation == AnnouncementAnimation.Fade)
+        if (style.AnimationConfig.Animation == AnnouncementAnimation.Fade)
             yield return new FadeEffect();
 
-        if (style.Animation == AnnouncementAnimation.Pulse || style.Animation == AnnouncementAnimation.Heartbeat)
+        if (style.AnimationConfig.Animation == AnnouncementAnimation.Pulse || style.AnimationConfig.Animation == AnnouncementAnimation.Heartbeat)
             yield return new PulseEffect();
     }
 }
+

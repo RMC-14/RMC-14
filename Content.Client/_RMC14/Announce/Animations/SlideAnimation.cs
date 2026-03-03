@@ -14,7 +14,7 @@ public sealed class SlideAnimation : IAnnouncementAnimation
 
     public AnnouncementAnimationStatus Update(AnnouncementAnimationContext context, float deltaTime)
     {
-        var enhancements = context.Style.AnimationEnhancements;
+        var enhancements = context.Style.AnimationConfig.AnimationEnhancements;
         if (enhancements?.EnableSlide != true)
             return AnnouncementAnimationStatus.Finished;
 
@@ -41,3 +41,4 @@ public sealed class SlideAnimation : IAnnouncementAnimation
         return AnnouncementAnimationStatus.Running;
     }
 }
+

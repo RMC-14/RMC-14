@@ -12,7 +12,7 @@ public sealed class FlickerEffect : IAnnouncementVisualEffect
         {
             var baseColor = label.Modulate;
             var noise = MathF.Sin(time * 100f) * 0.5f + 0.5f;
-            if (noise < context.Style.FlickerChance)
+            if (noise < context.Style.AnimationConfig.FlickerChance)
             {
                 baseColor = new Color(
                     baseColor.R * 0.3f,
@@ -25,3 +25,4 @@ public sealed class FlickerEffect : IAnnouncementVisualEffect
         }
     }
 }
+
