@@ -24,7 +24,6 @@ public static class AnnouncementStyling
         style.SpriteConfig.SpriteBoxPadding = baseStyle.SpriteConfig.SpriteBoxPadding * scaleFactor;
         style.TextConfig.SpeakerNameFontSize = baseStyle.TextConfig.SpeakerNameFontSize * scaleFactor;
         style.AnimationConfig.AnimationEnhancements = baseStyle.AnimationConfig.AnimationEnhancements?.Clone() ?? new RealisticAnimations();
-        style.ValidateAndNormalize();
 
         return style;
     }

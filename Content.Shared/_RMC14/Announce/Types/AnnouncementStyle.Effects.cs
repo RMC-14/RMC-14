@@ -1,6 +1,5 @@
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
-using System;
 
 namespace Content.Shared._RMC14.Announce;
 
@@ -167,55 +166,6 @@ public sealed partial class CRTSettings
     {
         return (CRTSettings) MemberwiseClone();
     }
-
-    public void ValidateAndNormalize()
-    {
-        // Keep these aligned with CRTOverlay draw-time minimums so authoring values stay predictable.
-        ScanlineSpacing = MathF.Max(2f, ScanlineSpacing);
-        ScanlineThickness = MathF.Max(1f, ScanlineThickness);
-        ScanlineAlpha = MathHelper.Clamp(ScanlineAlpha, 0f, 1f);
-        ScanlineSpeed = MathF.Max(0f, ScanlineSpeed);
-        ScanlineWaveFrequency = MathF.Max(0f, ScanlineWaveFrequency);
-        ScanlineWaveAmplitude = MathF.Max(0f, ScanlineWaveAmplitude);
-        ScanlineFlickerIntensity = MathF.Max(0f, ScanlineFlickerIntensity);
-        ScanlineFlickerSpeed = MathF.Max(0f, ScanlineFlickerSpeed);
-        ScanlineGlitchChance = MathHelper.Clamp(ScanlineGlitchChance, 0f, 1f);
-        ScanlineGlitchAlpha = MathHelper.Clamp(ScanlineGlitchAlpha, 0f, 1f);
-
-        NoiseIntensity = MathF.Max(0f, NoiseIntensity);
-        NoiseAlpha = MathHelper.Clamp(NoiseAlpha, 0f, 1f);
-        NoiseUpdateFrequency = MathF.Max(0.001f, NoiseUpdateFrequency);
-        NoiseMinSize = MathF.Max(0.1f, NoiseMinSize);
-        NoiseMaxSize = MathF.Max(NoiseMinSize, NoiseMaxSize);
-        NoiseStaticChance = MathHelper.Clamp(NoiseStaticChance, 0f, 1f);
-        NoiseStaticMinWidth = MathF.Max(0.1f, NoiseStaticMinWidth);
-        NoiseStaticMaxWidth = MathF.Max(NoiseStaticMinWidth, NoiseStaticMaxWidth);
-        NoiseStaticMinHeight = MathF.Max(0.1f, NoiseStaticMinHeight);
-        NoiseStaticMaxHeight = MathF.Max(NoiseStaticMinHeight, NoiseStaticMaxHeight);
-        NoiseStaticAlpha = MathHelper.Clamp(NoiseStaticAlpha, 0f, 1f);
-
-        VignetteIntensity = MathF.Max(0f, VignetteIntensity);
-        VignetteSizeMultiplier = MathF.Max(0f, VignetteSizeMultiplier);
-        VignetteAlphaMultiplier = MathF.Max(0f, VignetteAlphaMultiplier);
-        VignettePulseSpeed = MathF.Max(0f, VignettePulseSpeed);
-        VignettePulseAmplitude = MathF.Max(0f, VignettePulseAmplitude);
-        VignetteCornerSize = MathF.Max(0f, VignetteCornerSize);
-        VignetteEdgeAlpha = MathHelper.Clamp(VignetteEdgeAlpha, 0f, 1f);
-
-        ChromaticAmount = MathF.Max(0f, ChromaticAmount);
-        ChromaticParticleCount = Math.Max(0, ChromaticParticleCount);
-        ChromaticParticleChance = MathHelper.Clamp(ChromaticParticleChance, 0f, 1f);
-        ChromaticParticleMinSize = MathF.Max(0.1f, ChromaticParticleMinSize);
-        ChromaticParticleMaxSize = MathF.Max(ChromaticParticleMinSize, ChromaticParticleMaxSize);
-        ChromaticParticleAlpha = MathHelper.Clamp(ChromaticParticleAlpha, 0f, 1f);
-        ChromaticAnimationSpeed = MathF.Max(0f, ChromaticAnimationSpeed);
-
-        FlickerThreshold = MathHelper.Clamp(FlickerThreshold, 0f, 1f);
-        FlickerChance = MathHelper.Clamp(FlickerChance, 0f, 1f);
-        FlickerAlpha = MathHelper.Clamp(FlickerAlpha, 0f, 1f);
-        FlashChance = MathHelper.Clamp(FlashChance, 0f, 1f);
-        FlashMaxBrightness = MathHelper.Clamp(FlashMaxBrightness, 0f, 1f);
-    }
 }
 
 [DataDefinition, Serializable, NetSerializable]
@@ -258,20 +208,5 @@ public sealed partial class RealisticAnimations
             EnableCRT = EnableCRT,
             CRTSettings = CRTSettings?.Clone(),
         };
-    }
-
-    public void ValidateAndNormalize()
-    {
-        SlideDuration = MathF.Max(0.01f, SlideDuration);
-        ZoomStartScale = MathF.Max(0.01f, ZoomStartScale);
-        ZoomDuration = MathF.Max(0.01f, ZoomDuration);
-        BounceCount = Math.Max(0, BounceCount);
-        BounceHeight = MathF.Max(0f, BounceHeight);
-
-        if (EnableCRT)
-        {
-            CRTSettings ??= new CRTSettings();
-            CRTSettings.ValidateAndNormalize();
-        }
     }
 }

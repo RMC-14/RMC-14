@@ -3,7 +3,7 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Announce;
 
 [DataDefinition, Serializable, NetSerializable]
-public sealed partial class AnnouncementStyle : ISerializationHooks, IRobustCloneable<AnnouncementStyle>
+public sealed partial class AnnouncementStyle : IRobustCloneable<AnnouncementStyle>
 {
     [DataField]
     private AnnouncementAnimationConfig animation = new();
@@ -26,49 +26,25 @@ public sealed partial class AnnouncementStyle : ISerializationHooks, IRobustClon
     [DataField]
     private AnnouncementScalingConfig scaling = new();
 
-    public AnnouncementAnimationConfig AnimationConfig => animation;
-    public AnnouncementLayoutConfig LayoutConfig => layout;
-    public AnnouncementBackgroundConfig BackgroundConfig => background;
-    public AnnouncementTextConfig TextConfig => text;
-    public AnnouncementSpriteConfig SpriteConfig => sprite;
-    public AnnouncementTitleConfig TitleConfig => title;
-    public AnnouncementScalingConfig ScalingConfig => scaling;
+    public AnnouncementAnimationConfig AnimationConfig => animation ??= new AnnouncementAnimationConfig();
+    public AnnouncementLayoutConfig LayoutConfig => layout ??= new AnnouncementLayoutConfig();
+    public AnnouncementBackgroundConfig BackgroundConfig => background ??= new AnnouncementBackgroundConfig();
+    public AnnouncementTextConfig TextConfig => text ??= new AnnouncementTextConfig();
+    public AnnouncementSpriteConfig SpriteConfig => sprite ??= new AnnouncementSpriteConfig();
+    public AnnouncementTitleConfig TitleConfig => title ??= new AnnouncementTitleConfig();
+    public AnnouncementScalingConfig ScalingConfig => scaling ??= new AnnouncementScalingConfig();
 
     public AnnouncementStyle Clone()
     {
         return new AnnouncementStyle
         {
-            animation = animation.Clone(),
-            layout = layout.Clone(),
-            background = background.Clone(),
-            text = text.Clone(),
-            sprite = sprite.Clone(),
-            title = title.Clone(),
-            scaling = scaling.Clone(),
+            animation = AnimationConfig.Clone(),
+            layout = LayoutConfig.Clone(),
+            background = BackgroundConfig.Clone(),
+            text = TextConfig.Clone(),
+            sprite = SpriteConfig.Clone(),
+            title = TitleConfig.Clone(),
+            scaling = ScalingConfig.Clone(),
         };
-    }
-
-    public void ValidateAndNormalize()
-    {
-        animation ??= new AnnouncementAnimationConfig();
-        layout ??= new AnnouncementLayoutConfig();
-        background ??= new AnnouncementBackgroundConfig();
-        text ??= new AnnouncementTextConfig();
-        sprite ??= new AnnouncementSpriteConfig();
-        title ??= new AnnouncementTitleConfig();
-        scaling ??= new AnnouncementScalingConfig();
-
-        animation.ValidateAndNormalize();
-        layout.ValidateAndNormalize();
-        background.ValidateAndNormalize();
-        text.ValidateAndNormalize();
-        sprite.ValidateAndNormalize();
-        title.ValidateAndNormalize();
-        scaling.ValidateAndNormalize();
-    }
-
-    void ISerializationHooks.AfterDeserialization()
-    {
-        ValidateAndNormalize();
     }
 }

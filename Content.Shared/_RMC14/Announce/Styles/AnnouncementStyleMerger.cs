@@ -29,7 +29,6 @@ public static class AnnouncementStyleMerger
             merged.LayoutConfig.SpriteSpacing = overrideStyle.SpriteSpacing ?? merged.LayoutConfig.SpriteSpacing;
         }
 
-        merged.ValidateAndNormalize();
         return merged;
     }
 }

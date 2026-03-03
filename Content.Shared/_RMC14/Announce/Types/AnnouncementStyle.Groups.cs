@@ -1,6 +1,5 @@
 using Robust.Shared.Maths;
 using Robust.Shared.Serialization;
-using System;
 using System.Numerics;
 
 namespace Content.Shared._RMC14.Announce;
@@ -38,17 +37,6 @@ public sealed partial class AnnouncementAnimationConfig
             AnimationEnhancements = AnimationEnhancements?.Clone() ?? new RealisticAnimations(),
         };
     }
-
-    public void ValidateAndNormalize()
-    {
-        PrintSpeed = MathF.Max(0.001f, PrintSpeed);
-        HoldDuration = MathF.Max(0f, HoldDuration);
-        FlickerChance = MathHelper.Clamp(FlickerChance, 0f, 1f);
-        GlitchChance = MathHelper.Clamp(GlitchChance, 0f, 1f);
-
-        AnimationEnhancements ??= new RealisticAnimations();
-        AnimationEnhancements.ValidateAndNormalize();
-    }
 }
 
 [DataDefinition, Serializable, NetSerializable]
@@ -85,15 +73,6 @@ public sealed partial class AnnouncementLayoutConfig
     {
         return (AnnouncementLayoutConfig) MemberwiseClone();
     }
-
-    public void ValidateAndNormalize()
-    {
-        SpriteSpacing = MathF.Max(0f, SpriteSpacing);
-        UIScale = MathF.Max(0.1f, UIScale);
-        SpriteClipSize = new Vector2(
-            MathF.Max(1f, SpriteClipSize.X),
-            MathF.Max(1f, SpriteClipSize.Y));
-    }
 }
 
 [DataDefinition, Serializable, NetSerializable]
@@ -111,11 +90,6 @@ public sealed partial class AnnouncementBackgroundConfig
     public AnnouncementBackgroundConfig Clone()
     {
         return (AnnouncementBackgroundConfig) MemberwiseClone();
-    }
-
-    public void ValidateAndNormalize()
-    {
-        BackgroundAlpha = MathHelper.Clamp(BackgroundAlpha, 0f, 1f);
     }
 }
 
@@ -146,16 +120,6 @@ public sealed partial class AnnouncementTextConfig
     public AnnouncementTextConfig Clone()
     {
         return (AnnouncementTextConfig) MemberwiseClone();
-    }
-
-    public void ValidateAndNormalize()
-    {
-        if (string.IsNullOrWhiteSpace(Font))
-            Font = "Default";
-
-        FontSize = MathF.Max(1f, FontSize);
-        LineHeight = MathF.Max(1f, LineHeight);
-        SpeakerNameFontSize = MathF.Max(1f, SpeakerNameFontSize);
     }
 }
 
@@ -196,14 +160,6 @@ public sealed partial class AnnouncementSpriteConfig
     {
         return (AnnouncementSpriteConfig) MemberwiseClone();
     }
-
-    public void ValidateAndNormalize()
-    {
-        SpriteBoxBorderThickness = MathF.Max(0f, SpriteBoxBorderThickness);
-        SpriteBoxPadding = MathF.Max(0f, SpriteBoxPadding);
-        SpriteGlowIntensity = MathF.Max(0f, SpriteGlowIntensity);
-        SpriteScale = MathF.Max(0.1f, SpriteScale);
-    }
 }
 
 [DataDefinition, Serializable, NetSerializable]
@@ -234,17 +190,6 @@ public sealed partial class AnnouncementTitleConfig
     {
         return (AnnouncementTitleConfig) MemberwiseClone();
     }
-
-    public void ValidateAndNormalize()
-    {
-        Title ??= string.Empty;
-
-        if (string.IsNullOrWhiteSpace(TitleFont))
-            TitleFont = "DefaultBold";
-
-        TitleFontSize = MathF.Max(1f, TitleFontSize);
-        TitleUnderlineThickness = MathF.Max(0f, TitleUnderlineThickness);
-    }
 }
 
 [DataDefinition, Serializable, NetSerializable]
@@ -265,15 +210,5 @@ public sealed partial class AnnouncementScalingConfig
     public AnnouncementScalingConfig Clone()
     {
         return (AnnouncementScalingConfig) MemberwiseClone();
-    }
-
-    public void ValidateAndNormalize()
-    {
-        ResponsiveScaleFactor = MathF.Max(0.01f, ResponsiveScaleFactor);
-        MinScale = MathF.Max(0.1f, MinScale);
-        MaxScale = MathF.Max(0.1f, MaxScale);
-
-        if (MinScale > MaxScale)
-            (MinScale, MaxScale) = (MaxScale, MinScale);
     }
 }
