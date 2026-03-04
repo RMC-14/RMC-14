@@ -6,6 +6,13 @@
   ranks:
     RMCRankSPPMladshiySerzhant: []
   icon: "RMCJobIconSPPMedic"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
   spawnMenuRoleName: SPP SOF Medic (Survivor)
   special:
   - !type:AddComponentSpecial

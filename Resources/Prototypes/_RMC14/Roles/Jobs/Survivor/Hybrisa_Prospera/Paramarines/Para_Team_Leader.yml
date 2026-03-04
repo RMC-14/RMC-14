@@ -7,6 +7,13 @@
   supervisors: rmc-job-supervisors-commander
   startingGear: RMCGearParaTeamLeader
   icon: RMCJobIconParaTeamLeader
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 18000 # 5 hour
   spawnMenuRoleName: Royal Paramarine Team Leader (Survivor)
   special:
     - !type:AddComponentSpecial

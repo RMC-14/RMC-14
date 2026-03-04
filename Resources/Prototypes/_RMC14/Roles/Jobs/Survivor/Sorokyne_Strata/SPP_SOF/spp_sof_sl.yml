@@ -6,6 +6,13 @@
   ranks:
     RMCRankSPPStarshiySerzhant: []
   icon: "RMCJobIconSPPLeader"
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobSquadLeader
+    time: 18000  # 5 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 18000 # 5 hour
   spawnMenuRoleName: SPP SOF Squad Leader (Survivor)
   special:
   - !type:AddComponentSpecial
