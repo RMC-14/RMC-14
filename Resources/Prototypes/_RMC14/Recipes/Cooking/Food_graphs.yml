@@ -1,5 +1,5 @@
 ﻿- type: constructionGraph
-  id: FoodMeatSausage
+  id: Sausage
   start: start
   graph:
 

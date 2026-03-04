@@ -554,6 +554,15 @@
     - meaty
   - type: Food
     transferAmount: 5
+  - type: Temperature
+    currentTemperature: 290
+  - type: InternalTemperature
+    thickness: 0.02
+    area: 0.02
+  - type: Construction
+    graph: Sausage
+    node: start
+    defaultTarget: sausage cooked
   - type: SolutionContainerManager
     solutions:
       food:
@@ -561,9 +570,6 @@
         reagents:
         - ReagentId: Protein
           Quantity: 4
-  - type: Construction
-    graph: FoodMeatSausage
-    node: start
 
 - type: entity
   name: cooked sausage
@@ -577,6 +583,9 @@
   - type: FlavorProfile
     flavors:
     - meaty
+  - type: Construction
+    graph: Sausage
+    node: sausage cooked
   - type: Food
     transferAmount: 5
   - type: SolutionContainerManager
