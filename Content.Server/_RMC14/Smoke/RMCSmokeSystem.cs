@@ -1,8 +1,10 @@
 using System.Diagnostics;
+using Content.Server.Atmos.Components;
 using Content.Server.Spreader;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Smoke;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Atmos;
 using Content.Shared.Coordinates;
 using Content.Shared.Prototypes;
 using Robust.Shared.Map;
@@ -123,9 +125,28 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
             var nextFrontier = new List<(MapGridComponent Grid, TileRef Tile)>();
             foreach (var (currGrid, currTile) in frontier)
             {
+                var anchoredEnumerator = _rmcMap.GetAnchoredEntitiesEnumerator((currTile.GridUid, currGrid), currTile.GridIndices);
+                var blockedDirs = AtmosDirection.Invalid;
+                var existingSmokes = new HashSet<Vector2i>();
+
+                while (anchoredEnumerator.MoveNext(out var ent))
+                {
+                    if (TryComp<AirtightComponent>(ent, out var airtight) && airtight.AirBlocked)
+                        blockedDirs |= airtight.AirBlockedDirection;
+
+                    if (TryComp<EvenSmokeComponent>(ent, out var evenSmoke) && evenSmoke.Spawn == parent.Comp.Spawn)
+                        existingSmokes.Add(currTile.GridIndices);
+                }
+
                 foreach (var direction in RMCDirectionExtensions.GetCardinals())
                 {
+                    if ((blockedDirs & direction.ToAtmosDirection()) != 0)
+                        continue;
+
                     var neighborIndices = currTile.GridIndices + direction.ToIntVec();
+
+                    if (existingSmokes.Contains(neighborIndices))
+                        continue;
 
                     if (!_map.TryGetTileRef(currTile.GridUid, currGrid, neighborIndices, out var neighborTile))
                         continue;
@@ -134,19 +155,6 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
                         continue;
 
                     var coords = _map.GridTileToLocal(neighborTile.GridUid, currGrid, neighborTile.GridIndices);
-                    var enumerator = _rmcMap.GetAnchoredEntitiesEnumerator(coords);
-                    var blocked = false;
-                    while (enumerator.MoveNext(out var uid))
-                    {
-                        if (TryComp<EvenSmokeComponent>(uid, out var evenSmoke) && evenSmoke.Spawn == parent.Comp.Spawn)
-                        {
-                            blocked = true;
-                            break;
-                        }
-                    }
-                    if (blocked)
-                        continue;
-
                     var smoke = SpawnAtPosition(parent.Comp.Spawn, coords);
                     _hive.SetSameHive(parent.Owner, smoke);
 

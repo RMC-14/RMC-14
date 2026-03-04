@@ -195,7 +195,7 @@
   components:
   - type: EvenSmoke
     spawn: RMCSmokeFireSentryNoSpread
-    initialSpread: 2
+    initialSpread: 1
     range: 1
 
 - type: entity

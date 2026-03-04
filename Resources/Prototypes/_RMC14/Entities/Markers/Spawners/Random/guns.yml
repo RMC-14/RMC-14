@@ -440,6 +440,7 @@
     prototypes:
     - RMCRocket84mm
     - RMCRocket84mmAntiArmor
+    - RMCRocket84mmWhitePhosphorus
 
 - type: entity
   parent: RMCSpawnerRandomRockets
