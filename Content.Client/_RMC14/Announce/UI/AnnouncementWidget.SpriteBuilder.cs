@@ -24,13 +24,14 @@ public sealed partial class AnnouncementWidget
 
         public Control? CreateSpriteContainer(AnnouncementNetData announcement, Vector2 screenSize)
         {
+            var style = announcement.Style;
             Control? decalControl = null;
 
             if (!string.IsNullOrEmpty(announcement.DecalRsi) && !string.IsNullOrEmpty(announcement.DecalState))
             {
                 decalControl = _decalBuilder.CreateDecalContainer(announcement, screenSize);
                 if (announcement.DecalPlacement == AnnouncementDecalPlacement.ReplaceSprite && decalControl != null)
-                    return decalControl;
+                    return WrapWithCrtIfEnabled(decalControl, style, screenSize);
             }
 
             if (!announcement.SpeakerEntity.HasValue ||
@@ -40,10 +41,9 @@ public sealed partial class AnnouncementWidget
                 if (decalControl == null)
                     return null;
 
-                return decalControl;
+                return WrapWithCrtIfEnabled(decalControl, style, screenSize);
             }
 
-            var style = announcement.Style;
             var spriteScale = style.SpriteConfig.SpriteScale * announcement.SpriteScale;
             var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
 
@@ -107,26 +107,8 @@ public sealed partial class AnnouncementWidget
                 container = outerPanel;
             }
 
-            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT == true)
-            {
-                var crtWrapper = new Control
-                {
-                    HorizontalAlignment = HAlignment.Center,
-                    VerticalAlignment = VAlignment.Top
-                };
-
-                crtWrapper.AddChild(container);
-
-                var crtOverlay = new CRTOverlay
-                {
-                    Settings = _owner.GetCRTSettingsFromStyle(style),
-                    HorizontalAlignment = HAlignment.Stretch,
-                    VerticalAlignment = VAlignment.Stretch
-                };
-
-                crtWrapper.AddChild(crtOverlay);
-                container = crtWrapper;
-            }
+            container = _decalBuilder.ApplyDecalPlacement(container, decalControl, announcement, screenSize);
+            container = WrapWithCrtIfEnabled(container, style, screenSize);
 
             if (style.TextConfig.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
             {
@@ -172,7 +154,48 @@ public sealed partial class AnnouncementWidget
             {
             }
 
-            return _decalBuilder.ApplyDecalPlacement(container, decalControl, announcement, screenSize);
+            return container;
+        }
+
+        private Control WrapWithCrtIfEnabled(Control container, AnnouncementStyle style, Vector2 screenSize)
+        {
+            if (style.AnimationConfig.AnimationEnhancements?.EnableCRT != true)
+                return container;
+
+            container.Measure(screenSize);
+            var desiredSize = container.DesiredSize;
+            var width = MathF.Max(1f, desiredSize.X);
+            var height = MathF.Max(1f, desiredSize.Y);
+
+            var crtWrapper = new Control
+            {
+                HorizontalAlignment = HAlignment.Center,
+                VerticalAlignment = VAlignment.Top,
+                HorizontalExpand = false,
+                VerticalExpand = false,
+                MinWidth = width,
+                MinHeight = height,
+                SetWidth = width,
+                SetHeight = height
+            };
+
+            container.HorizontalAlignment = HAlignment.Stretch;
+            container.VerticalAlignment = VAlignment.Stretch;
+            container.HorizontalExpand = true;
+            container.VerticalExpand = true;
+            crtWrapper.AddChild(container);
+
+            var crtOverlay = new CRTOverlay
+            {
+                Settings = _owner.GetCRTSettingsFromStyle(style),
+                HorizontalAlignment = HAlignment.Stretch,
+                VerticalAlignment = VAlignment.Stretch,
+                HorizontalExpand = true,
+                VerticalExpand = true
+            };
+
+            crtWrapper.AddChild(crtOverlay);
+            return crtWrapper;
         }
     }
 }

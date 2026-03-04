@@ -14,7 +14,7 @@
       glitchChance: 0.035
       animationEnhancements:
         enableCRT: true
-        crtSettings:
+        cRTSettings:
           enabled: true
           showScanlines: true
           scanlineSpacing: 6
@@ -41,7 +41,7 @@
       spritePosition: Left
       spriteSpacing: 2
       spriteDisplayMode: TopHalf
-      uiScale: 2.6
+      uIScale: 2.6
       titlePosition: Above
     background:
       showBackground: false
@@ -80,3 +80,4 @@
   decalScale: 2.4
   decalAlpha: 0.95
   decalOffset: "105,0"
+

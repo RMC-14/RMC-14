@@ -18,7 +18,7 @@
       position: TopLeft
       spritePosition: Left
       spriteDisplayMode: FullSprite
-      uiScale: 3
+      uIScale: 3
       titlePosition: Above
     background:
       showBackground: false
@@ -67,7 +67,7 @@
       position: TopLeft
       spritePosition: Left
       spriteDisplayMode: FullSprite
-      uiScale: 2
+      uIScale: 2
       titlePosition: Above
     background:
       showBackground: true
@@ -100,3 +100,4 @@
   decalScale: 3.5
   decalAlpha: 1.0
   decalOffset: "0,-12"
+

@@ -14,13 +14,13 @@
       glitchChance: 0.01
       animationEnhancements:
         slideDuration: 1.0
-        slideDirection: Top
+        slideFrom: Top
         zoomStartScale: 0.1
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
         enableCRT: true
-        crtSettings:
+        cRTSettings:
           enabled: true
           showScanlines: true
           scanlineSpacing: 6
@@ -43,7 +43,7 @@
       spritePosition: Left
       spriteSpacing: 0
       spriteDisplayMode: TopHalf
-      uiScale: 3
+      uIScale: 3
       titlePosition: Above
     background:
       showBackground: false
@@ -101,13 +101,13 @@
       glitchChance: 0.01
       animationEnhancements:
         slideDuration: 1.0
-        slideDirection: Top
+        slideFrom: Top
         zoomStartScale: 0.1
         zoomDuration: 1.0
         bounceCount: 3
         bounceHeight: 15
         enableCRT: true
-        crtSettings:
+        cRTSettings:
           enabled: true
           showScanlines: true
           scanlineSpacing: 6
@@ -130,7 +130,7 @@
       spritePosition: Left
       spriteSpacing: 0
       spriteDisplayMode: TopHalf
-      uiScale: 3
+      uIScale: 3
       titlePosition: Above
     background:
       showBackground: false
@@ -186,7 +186,7 @@
       glitchChance: 0.01
       animationEnhancements:
         slideDuration: 1.0
-        slideDirection: Top
+        slideFrom: Top
         zoomStartScale: 0.1
         zoomDuration: 1.0
         bounceCount: 3
@@ -198,7 +198,7 @@
       spritePosition: Left
       spriteSpacing: 0
       spriteDisplayMode: TopHalf
-      uiScale: 3
+      uIScale: 3
       titlePosition: Above
     background:
       showBackground: false
@@ -260,7 +260,7 @@
       position: TopLeft
       spritePosition: Left
       spriteDisplayMode: FullSprite
-      uiScale: 2
+      uIScale: 2
       titlePosition: Above
     background:
       showBackground: false
@@ -298,3 +298,4 @@
   # decalAlpha: 0.5
   # decalOffset: "150,0"
   # textOffset: "-75,0"
+

@@ -19,7 +19,7 @@
       spritePosition: Left
       spriteSpacing: 4
       spriteDisplayMode: TopHalf
-      uiScale: 2.6
+      uIScale: 2.6
       titlePosition: Above
     background:
       showBackground: false
@@ -46,3 +46,4 @@
   priority: 8
   canInterrupt: true
   canBeInterrupted: false
+
