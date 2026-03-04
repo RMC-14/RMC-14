@@ -16,6 +16,10 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Tools.Systems;
 using Content.Shared._RMC14.Doors;
+using Content.Shared.Mobs.Systems;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared._RMC14.Xenonids;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map.Components;
@@ -50,6 +54,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
     [Dependency] protected readonly SharedPopupSystem Popup = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
     [Dependency] private readonly SharedPowerReceiverSystem _powerReceiver = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
 
     public static readonly ProtoId<TagPrototype> DoorBumpTag = "DoorBumpOpener";
 
@@ -209,6 +214,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
     {
         if (args.Handled || !args.Complex || !door.ClickOpen)
             return;
+
+        if (HasComp<XenoComponent>(args.User))
+        {
+            var mobState = CompOrNull<MobStateComponent>(args.User);
+            if (mobState?.CurrentState == MobState.Dead)
+                return;
+        }
 
         if (!TryToggleDoor(uid, door, args.User, predicted: true))
             _pryingSystem.TryPry(uid, args.User, out _);
@@ -630,6 +642,13 @@ public abstract partial class SharedDoorSystem : EntitySystem
             return;
 
         var otherUid = args.OtherEntity;
+
+        if (HasComp<XenoComponent>(otherUid))
+        {
+            var mobState = CompOrNull<MobStateComponent>(otherUid);
+            if (mobState?.CurrentState == MobState.Dead)
+                return; 
+        }
 
         if (Tags.HasTag(otherUid, DoorBumpTag))
             TryOpen(uid, door, otherUid, quiet: door.State == DoorState.Denying, predicted: true);
