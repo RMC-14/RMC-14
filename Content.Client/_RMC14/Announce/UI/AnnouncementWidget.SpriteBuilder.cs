@@ -107,7 +107,9 @@ public sealed partial class AnnouncementWidget
                 container = outerPanel;
             }
 
-            container = _decalBuilder.ApplyDecalPlacement(container, decalControl, announcement, screenSize);
+            var placedContainer = _decalBuilder.ApplyDecalPlacement(container, decalControl, announcement, screenSize);
+            if (placedContainer != null)
+                container = placedContainer;
             container = WrapWithCrtIfEnabled(container, style, screenSize);
 
             if (style.TextConfig.ShowSpeakerName && !string.IsNullOrEmpty(announcement.SpeakerName))
