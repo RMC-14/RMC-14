@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Shared._RMC14.CCVar;
@@ -214,30 +215,29 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_mapManager.TryFindGridAt(mousePos, out var gridUid, out var grid))
             return;
 
-        var direction = (mousePos.Position - originMap.Position);
+        // Snap to tile center
+        var tileIndices = _mapSystem.CoordinatesToTile(gridUid, grid, mousePos);
+        var tileCenter = _mapSystem.GridTileToWorld(gridUid, grid, tileIndices);
+        var snappedPos = tileCenter.Position;
+
+        var direction = (snappedPos - originMap.Position);
         if (direction.LengthSquared() <= 0f)
             return;
 
         direction = direction.Normalized();
         var ortho = new Vector2(-direction.Y, direction.X);
 
-        var tip = mousePos.Position;
-        var startWorld = tip + ortho * deployTraps.DeployTrapsRadius;
-        var endWorld = tip - ortho * deployTraps.DeployTrapsRadius;
+        var startWorld = new MapCoordinates(snappedPos + ortho * (deployTraps.DeployTrapsRadius +  1), mousePos.MapId);
+        var endWorld   = new MapCoordinates(snappedPos - ortho * deployTraps.DeployTrapsRadius, mousePos.MapId);
 
-        var startTile = _mapSystem.CoordinatesToTile(gridUid, grid, new MapCoordinates(startWorld, mousePos.MapId));
-        var endTile = _mapSystem.CoordinatesToTile(gridUid, grid, new MapCoordinates(endWorld, mousePos.MapId));
+        var startCoords = _mapSystem.MapToGrid(gridUid, startWorld);
+        var endCoords   = _mapSystem.MapToGrid(gridUid, endWorld);
 
-        var tiles = new HashSet<Vector2i>();
-        var delta = endTile - startTile;
-        var steps = Math.Max(Math.Abs(delta.X), Math.Abs(delta.Y));
-        for (var i = 0; i <= steps; i++)
-        {
-            var t = steps == 0 ? 0f : (float) i / steps;
-            var x = (int) MathF.Round(startTile.X + delta.X * t);
-            var y = (int) MathF.Round(startTile.Y + delta.Y * t);
-            tiles.Add(new Vector2i(x, y));
-        }
+        var trapTiles = _line.DrawLine(startCoords, endCoords, TimeSpan.Zero, deployTraps.Range, out _);
+
+        var tiles = trapTiles
+            .Select(t => _mapSystem.CoordinatesToTile(gridUid, grid, t.Coordinates))
+            .ToHashSet();
 
         DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
     }

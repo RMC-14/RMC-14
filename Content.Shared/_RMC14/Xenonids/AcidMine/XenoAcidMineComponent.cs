@@ -5,6 +5,7 @@ using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Xenonids.AcidMine;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -64,4 +65,10 @@ public sealed partial class XenoAcidMineComponent : Component
 
     [DataField, AutoNetworkedField]
     public EntProtoId SmokeEffect = "XenoAcidExplosionEffect";
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi ActionIcon = new(new ResPath("_RMC14/Actions/xeno_actions.rsi"), "acid_mine");
+
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier.Rsi ActionIconEmpowered = new(new ResPath("_RMC14/Actions/xeno_actions.rsi"), "acid_mine_empowered");
 }

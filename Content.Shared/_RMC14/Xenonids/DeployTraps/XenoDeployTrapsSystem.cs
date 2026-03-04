@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.AcidMine;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Insight;
 using Content.Shared._RMC14.Xenonids.Plasma;
+using Content.Shared.Actions;
 using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
@@ -32,7 +33,9 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly XenoInsightSystem _insight = default!;
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+
 
     public override void Initialize()
     {
@@ -87,13 +90,14 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
+        _audio.PlayPredicted(xeno.Comp.DeploySound, coords, xeno);
+
         var popupSelf = Loc.GetString("rmc-xeno-deploy-traps-self");
         var popupOthers = Loc.GetString("rmc-xeno-deploy-traps-others", ("xeno", xeno));
         _popup.PopupPredicted(popupSelf, popupOthers, xeno, xeno);
 
         if (_net.IsServer)
         {
-            // All math in world space using Vector2
             var xenoPos = _transform.ToWorldPosition(xeno.Owner.ToCoordinates());
             var targetPos = _transform.ToWorldPosition(coords);
 
@@ -101,8 +105,9 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             var ortho = new Vector2(-direction.Y, direction.X);
 
             // Project to range, then extend orthogonally
+            //+1 to get the 5 traps we want, rather than 4.
             var tip = targetPos;
-            var trapStart = new EntityCoordinates(gridId, tip + ortho * xeno.Comp.DeployTrapsRadius);
+            var trapStart = new EntityCoordinates(gridId, tip + ortho * (xeno.Comp.DeployTrapsRadius + 1));
             var trapEnd = new EntityCoordinates(gridId, tip - ortho * xeno.Comp.DeployTrapsRadius);
 
             var trapTiles = _line.DrawLine(trapStart, trapEnd, TimeSpan.Zero, xeno.Comp.Range, out _);
@@ -116,7 +121,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
                 if (!blocked)
                 {
                     DeployTraps(xeno, turfCoords, empowered);
-                    _audio.PlayPredicted(xeno.Comp.DeploySound, turfCoords, xeno);
                 }
             }
 
@@ -124,9 +128,14 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             {
                 DeployTrapsEmpower(xeno);
                 if (xeno.Comp.Emote is { } emote)
-                    _emote.TryEmoteWithChat(xeno, emote);
+                    _emote.TryEmoteWithChat(xeno, emote, false, null, false, true);
                 xeno.Comp.Empowered = false;
                 _insight.IncrementInsight(xeno.Owner, -10);
+                foreach (var action in _actions.GetActions(xeno.Owner))
+                {
+                    if (_actions.GetEvent(action) is XenoDeployTrapsActionEvent)
+                        _actions.SetIcon(action.AsNullable(), xeno.Comp.ActionIcon);
+                }
             }
         }
     }
@@ -135,7 +144,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     {
         if (!target.IsValid(EntityManager))
             return;
-
 
         if (_net.IsServer)
         {
@@ -159,6 +167,12 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
 
         if (TryComp(xeno.Owner, out XenoAcidMineComponent? acidMine))
             acidMine.Empowered = true;
-        _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-empower"), xeno, xeno, PopupType.Medium);
+        _popup.PopupPredicted(Loc.GetString("rmc-xeno-deploy-traps-empower"), xeno, xeno, PopupType.Medium);
+        foreach (var action in _actions.GetActions(xeno.Owner))
+        {
+            if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
+                _actions.SetIcon(action.AsNullable(), acidMine?.ActionIconEmpowered);
+        }
+
     }
 }

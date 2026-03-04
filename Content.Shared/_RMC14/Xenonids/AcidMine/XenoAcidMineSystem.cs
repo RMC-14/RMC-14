@@ -48,7 +48,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
-
+    [Dependency] private readonly MountableWeaponSystem _mg = default!;
 
     public override void Initialize()
     {
@@ -140,13 +140,17 @@ public sealed class XenoAcidMineSystem : EntitySystem
         var empoweredMobDamageMod = 1.25f;
         var empoweredStructureDamageMod = 1.70f;
 
-        //bootleg ability hit check that includes structures (sentries, barricades, tables, MGs and such)
+        //bootleg ahh ability hit check that includes marine deployables and structures
+        bool IsValidStructure(EntityUid target) =>
+            !HasComp<MobStateComponent>(target) &&
+            !_hive.FromSameHive(xeno.Owner, target) &&
+            HasComp<DamageableComponent>(target) &&
+            (HasComp<WeaponMountComponent>(target) ||
+             HasComp<SentryComponent>(target) ||
+             HasComp<BarricadeComponent>(target));
+
         bool CanHit(EntityUid target) =>
-            _xeno.CanAbilityAttackTarget(xeno, target, true, true) ||
-            (!HasComp<MobStateComponent>(target) &&
-             !_hive.FromSameHive(xeno.Owner, target) &&
-             HasComp<DamageableComponent>(target) &&
-             (Transform(target).Anchored || HasComp<BarricadeComponent>(target)));
+            _xeno.CanAbilityAttackTarget(xeno, target, true, true) || IsValidStructure(target);
 
         //sort out only valid targets
         foreach (var target in hitEntities)
@@ -157,6 +161,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
             if (!CanHit(target))
                 continue;
 
+
             _audio.PlayPredicted(xeno.Comp.SizzleSound, Transform(target).Coordinates, xeno, xeno.Comp.SizzleSound.Params.WithVolume(-10f));
 
             if (!_net.IsClient)
@@ -164,10 +169,12 @@ public sealed class XenoAcidMineSystem : EntitySystem
                 //apply damage
                 if (!HasComp<MobStateComponent>(target))
                 {
+                    //specific check for HMGs to make sure they take damage proper, the spoiled bastards.
+                    var damageTarget = ResolveDamageTarget(target);
                     var structureDamage = xeno.Comp.Empowered
                         ? xeno.Comp.BaseDamage * empoweredStructureDamageMod
                         : xeno.Comp.BaseDamage;
-                    _damage.TryChangeDamage(target, structureDamage, origin: xeno, tool: xeno);
+                    _damage.TryChangeDamage(damageTarget, structureDamage, origin: xeno, tool: xeno);
                 }
                 else
                 {
@@ -223,6 +230,12 @@ public sealed class XenoAcidMineSystem : EntitySystem
         //gotta remove empowered after cast.
         xeno.Comp.Empowered = false;
 
+        foreach (var action in _actions.GetActions(xeno.Owner))
+        {
+            if (_actions.GetEvent(action) is XenoAcidMineActionEvent)
+                _actions.SetIcon(action.AsNullable(), xeno.Comp.ActionIcon);
+        }
+
         foreach (var usedAction in _rmcActions.GetActionsWithEvent<XenoAcidMineActionEvent>(xeno))
         {
             _actions.SetCooldown(usedAction.AsNullable(), xeno.Comp.Cooldown);
@@ -244,6 +257,14 @@ public sealed class XenoAcidMineSystem : EntitySystem
                     _actions.SetCooldown(action.AsNullable(), action.Comp.Cooldown.Value.Start, cooldownEnd);
             }
         }
+    }
+
+    //If HMGs show up we call their parent (mount)
+    EntityUid ResolveDamageTarget(EntityUid target)
+    {
+        if (_mg.TryGetWeaponMount(target, out var mount))
+            return mount.Value;
+        return target;
     }
 }
 

@@ -5,6 +5,7 @@ using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
 
@@ -17,6 +18,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly DestructibleSystem _destructible = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -55,6 +57,8 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
     private void OnStepTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOnEvent args)
     {
             _root.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
+
+            _audio.PlayPredicted(trap.Comp.CatchSound, args.Tripper, trap);
 
             var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
             caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;

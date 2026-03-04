@@ -1524,6 +1524,9 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: acid_mine_empowered
     useDelay: 5.5
   - type: TargetAction
     range: 10
@@ -1564,6 +1567,9 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine
+    actionIconEmpowered:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: gas_mine_empowered
     useDelay: 20.5
   - type: TargetAction
     range: 10
