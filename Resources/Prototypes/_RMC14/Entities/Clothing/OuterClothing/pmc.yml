@@ -201,6 +201,23 @@
       - RMCMagazineSmartGun
 
 - type: entity
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCCommandoSurvivor
+  name: damaged MY7 pattern Commando armor
+  description: A modification of the W-Y PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 40
+    bio: 20
+    explosionArmor: 35
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+
+- type: entity
   parent: RMCArmorM4PMCNoLight
   id: CMArmorM4PMCCommando
   name: M5X exoskeleton armor
