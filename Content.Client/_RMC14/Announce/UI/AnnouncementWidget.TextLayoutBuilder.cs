@@ -30,8 +30,7 @@ public sealed partial class AnnouncementWidget
             Vector2 screenSize)
         {
             var baseMaxWidth = AnnouncementStyling.CalculateMaxTextWidth(screenSize, style.LayoutConfig.Position);
-            var optimalWidth = AnnouncementStyling.CalculateOptimalTextWidth(text, style, screenSize);
-            var maxAllowedWidth = Math.Min(baseMaxWidth, optimalWidth * 1.1f);
+            var maxAllowedWidth = baseMaxWidth;
             var screenScaleFactor = AnnouncementStyling.CalculateScreenScaleFactor(screenSize);
 
             if (spriteContainer != null &&
@@ -44,7 +43,6 @@ public sealed partial class AnnouncementWidget
                 maxAllowedWidth = Math.Min(maxAllowedWidth, horizontalTextBudget);
             }
 
-            optimalWidth = Math.Min(maxAllowedWidth, optimalWidth);
             var effectiveTextWidth = CalculateContentDrivenTextWidth(
                 text,
                 titleText,
@@ -52,7 +50,6 @@ public sealed partial class AnnouncementWidget
                 style,
                 screenSize,
                 screenScaleFactor,
-                optimalWidth,
                 maxAllowedWidth);
             var bodyResponsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
                 text.Length > 0 ? text : new[] { string.Empty },
@@ -214,36 +211,105 @@ public sealed partial class AnnouncementWidget
             AnnouncementStyle style,
             Vector2 screenSize,
             float screenScaleFactor,
-            float optimalWidth,
             float maxAllowedWidth)
         {
             var longestBodyLine = 0;
+            var longestBodyMeasured = 0f;
+
+            var responsiveBodyFontSize = AnnouncementStyling.CalculateResponsiveFontSize(
+                text.Length > 0 ? text : new[] { string.Empty },
+                style.TextConfig.FontSize,
+                maxAllowedWidth,
+                screenSize,
+                style);
+
             foreach (var line in text)
             {
                 var plain = AnnouncementWidget.StripMarkup(line);
                 if (plain.Length > longestBodyLine)
                     longestBodyLine = plain.Length;
+
+                if (plain.Length == 0)
+                    continue;
+
+                var measured = MeasureFormattedTextWidth(
+                    plain,
+                    responsiveBodyFontSize,
+                    style.TextConfig.PrimaryColor,
+                    style.TextConfig.Font,
+                    screenSize);
+                if (measured > longestBodyMeasured)
+                    longestBodyMeasured = measured;
             }
 
-            var bodyEstimate = longestBodyLine * style.TextConfig.FontSize * 0.60f;
-            var titleEstimate = 0f;
+            var titleMeasured = 0f;
+            var longestTitleLine = 0;
 
             if (hasTitle && !string.IsNullOrEmpty(titleText))
             {
                 var plainTitle = AnnouncementWidget.StripMarkup(titleText);
-                var titleBaseFont = Math.Min(style.TitleConfig.TitleFontSize, style.TextConfig.FontSize * 0.9f);
-                titleEstimate = plainTitle.Length * titleBaseFont * 0.60f;
+                longestTitleLine = plainTitle.Length;
+
+                if (plainTitle.Length > 0)
+                {
+                    var responsiveTitleFont = AnnouncementStyling.CalculateResponsiveFontSize(
+                        new[] { plainTitle },
+                        style.TitleConfig.TitleFontSize,
+                        maxAllowedWidth,
+                        screenSize,
+                        style);
+                    var titleFontSize = Math.Min(responsiveTitleFont, style.TextConfig.FontSize * 0.9f);
+                    titleMeasured = MeasureFormattedTextWidth(
+                        plainTitle,
+                        titleFontSize,
+                        style.TitleConfig.TitleColor,
+                        style.TitleConfig.TitleFont,
+                        screenSize);
+                }
             }
 
-            var estimatedContentWidth = MathF.Max(bodyEstimate, titleEstimate);
+            var longestVisibleLine = Math.Max(longestBodyLine, longestTitleLine);
+            var measuredContentWidth = MathF.Max(longestBodyMeasured, titleMeasured);
             var horizontalPadding = style.BackgroundConfig.ShowBackground ? 24f * screenScaleFactor : 10f * screenScaleFactor;
-            var minReadableWidth = MathF.Max(120f * screenScaleFactor, style.TextConfig.FontSize * 6f);
-            var minOptimalWidth = optimalWidth * 0.72f;
-            var minWidth = MathF.Min(maxAllowedWidth, MathF.Max(minReadableWidth, minOptimalWidth));
+            var minReadableWidth = MathF.Max(120f * screenScaleFactor, responsiveBodyFontSize * 6f);
+            var minWidth = MathF.Min(maxAllowedWidth, minReadableWidth);
 
-            var preferredWidth = estimatedContentWidth + horizontalPadding;
+            var fillRatio = longestVisibleLine switch
+            {
+                <= 16 => 0.88f,
+                <= 28 => 0.90f,
+                <= 42 => 0.92f,
+                _ => 0.94f
+            };
+
+            var basePreferredWidth = measuredContentWidth + horizontalPadding;
+            var preferredWidth = basePreferredWidth / fillRatio;
+
+            var maxExtraHeadroom = MathF.Max(20f * screenScaleFactor, responsiveBodyFontSize * 1.15f);
+            preferredWidth = MathF.Min(preferredWidth, basePreferredWidth + maxExtraHeadroom);
+
+            preferredWidth = MathF.Max(preferredWidth, basePreferredWidth + (4f * screenScaleFactor));
             preferredWidth = MathF.Max(preferredWidth, minWidth);
             return MathHelper.Clamp(preferredWidth, minWidth, maxAllowedWidth);
+        }
+
+        private static float MeasureFormattedTextWidth(
+            string text,
+            float fontSize,
+            Color color,
+            string? font,
+            Vector2 screenSize)
+        {
+            var label = new RichTextLabel
+            {
+                HorizontalExpand = false,
+                MaxWidth = float.MaxValue
+            };
+
+            label.SetMessage(AnnouncementStyling.CreateFormattedMessage(text, fontSize, color, font));
+            label.Measure(screenSize);
+
+            return label.DesiredSize.X;
         }
     }
 
