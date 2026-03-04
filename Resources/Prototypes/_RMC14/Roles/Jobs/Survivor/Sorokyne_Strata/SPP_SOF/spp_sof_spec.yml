@@ -28,6 +28,8 @@
   equipment:
     outerClothing: RMCArmorSPPSOFHeavy
   storage:
+    back:
+    - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047

@@ -30,6 +30,7 @@
     back:
     - CMDefibrillator
     - CMHealthAnalyzer
+    - CMSheetMetal20
     belt:
     - CMUpgradedTraumaKit10
     - CMUpgradedTraumaKit10

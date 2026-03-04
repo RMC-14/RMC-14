@@ -37,6 +37,7 @@
   storage:
     back:
     - RMCArmorHelmetSPPSOF
+    - CMSheetMetal20
     outerClothing:
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047
