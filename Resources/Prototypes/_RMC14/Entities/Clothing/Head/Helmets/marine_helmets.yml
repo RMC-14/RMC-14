@@ -399,6 +399,17 @@
       Urban: _RMC14/Objects/Clothing/Head/Helmets/m35/urban.rsi
   - type: TemperatureProtection
     heatingCoefficient: 0.001
+  - type: FoldableClothing
+    foldedHideLayers:
+    - Hair
+    - HeadTop
+    - HeadSide
+    - Snout
+    unfoldedHideLayers:
+    - Snout
+  - type: HideLayerClothing
+    slots:
+    - Snout
 
 # M45 Sniper Spec
 - type: entity
