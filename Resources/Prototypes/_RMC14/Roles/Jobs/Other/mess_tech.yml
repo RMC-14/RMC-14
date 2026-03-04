@@ -3,6 +3,7 @@
   id: CMMessTech
   name: cm-job-name-messtech
   description: cm-job-description-messtech
+  newToJobInfo: rmc-new-to-job-mst
   playTimeTracker: CMJobMessTech
   requirements:
   - !type:DepartmentTimeRequirement

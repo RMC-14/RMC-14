@@ -602,64 +602,94 @@
 
 # Seeds
 - type: entity
-  parent: CMVendor
+  parent: ColMarTechBaseAnchorable
   id: CMVendorSeeds
   name: MegaSeed Servitor
   description: When you need seeds fast!
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Machines/VendingMachines/seeds.rsi
-  - type: VendingMachine
-    pack: CMVendorSeeds
-    denyState: deny-unshaded
-    ejectState: eject-unshaded
-
-- type: vendingMachineInventory
-  id: CMVendorSeeds
-  startingInventory: # TODO RMC14
-    BananaSeeds: 3
-    BerrySeeds: 3
-    CarrotSeeds: 3
-    ChanterelleSeeds: 2
-    ChiliSeeds: 3
-    CornSeeds: 3
-    CottonSeeds: 3
-    EggplantSeeds: 3
-    PotatoSeeds: 3
-    SoybeanSeeds: 3
-    SunflowerSeeds: 2
-    TomatoSeeds: 3
-    WheatSeeds: 3
-    OatSeeds: 3
-    AppleSeeds: 3
-    PoppySeeds: 3
-    SugarcaneSeeds: 3
-    PeanutSeeds: 3
-    WhiteBeetSeeds: 3
-    WatermelonSeeds: 3
-    LimeSeeds: 3
-    LemonSeeds: 3
-    OrangeSeeds: 3
-    PineappleSeeds: 3
-    GrassSeeds: 3
-    CocoaSeeds: 3
-    PlumpSeeds: 2
-    CabbageSeeds: 3
-    GrapeSeeds: 3
-    PumpkinSeeds: 3
-    CherrySeeds: 3
-    RiceSeeds: 3
-    # LibertyMycelium: 1 #Contraband
-    # MessaTearSeeds: 1 #Contraband
-    # AmbrosiaVulgarisSeeds: 1 #Contraband
-    NettleSeeds: 1 #Contraband
-    LingzhiSeeds: 1 #ReishiMycelium #Contraband
-    # WaterFlower: 1 #Premium
-    GarlicSeeds: 3
-    OnionSeeds: 3
-    OnionRedSeeds: 3
-    RMCMangoSeeds: 3
-
+  - type: CMAutomatedVendor
+    hackable: true
+    sections:
+    - name: Seeds
+      entries:
+      - id: BananaSeeds
+        amount: 16
+      - id: BerrySeeds
+        amount: 16
+      - id: CarrotSeeds
+        amount: 16
+      - id: ChanterelleSeeds
+        amount: 16
+      - id: ChiliSeeds
+        amount: 16
+      - id: CornSeeds
+        amount: 16
+      - id: CottonSeeds
+        amount: 16
+      - id: EggplantSeeds
+        amount: 16
+      - id: PotatoSeeds
+        amount: 16
+      - id: SoybeanSeeds
+        amount: 16
+      - id: SunflowerSeeds
+        amount: 16
+      - id: TomatoSeeds
+        amount: 16
+      - id: WheatSeeds
+        amount: 16
+      - id: OatSeeds
+        amount: 16
+      - id: AppleSeeds
+        amount: 16
+      - id: PoppySeeds
+        amount: 16
+      - id: SugarcaneSeeds
+        amount: 16
+      - id: PeanutSeeds
+        amount: 16
+      - id: WhiteBeetSeeds
+        amount: 16
+      - id: WatermelonSeeds
+        amount: 16
+      - id: LimeSeeds
+        amount: 16
+      - id: LemonSeeds
+        amount: 16
+      - id: OrangeSeeds
+        amount: 16
+      - id: PineappleSeeds
+        amount: 16
+      - id: GrassSeeds
+        amount: 16
+      - id: CocoaSeeds
+        amount: 16
+      - id: PlumpSeeds
+        amount: 16
+      - id: CabbageSeeds
+        amount: 16
+      - id: GrapeSeeds
+        amount: 16
+      - id: PumpkinSeeds
+        amount: 16
+      - id: CherrySeeds
+        amount: 16
+      - id: RiceSeeds
+        amount: 16
+      - id: NettleSeeds
+        amount: 16
+      - id: LingzhiSeeds
+        amount: 16
+      - id: GarlicSeeds
+        amount: 16
+      - id: OnionSeeds
+        amount: 16
+      - id: OnionRedSeeds
+        amount: 16
+      - id: RMCMangoSeeds
+        amount: 16
 
 # Dinnerware
 - type: entity
@@ -738,6 +768,8 @@
         amount: 5
       - id: CMBeakerLarge
         amount: 5
+      - id: RMCReagentJug
+        amount: 3
       - id: Pitcher
         amount: 2
       - id: DrinkMug
@@ -760,6 +792,8 @@
         amount: 2
       - id: DrinkMugRed
         amount: 2
+      - id: Mousetrap
+        amount: 8
 
 - type: entity
   parent: CMVendorDinnerware
@@ -809,82 +843,84 @@
     - name: Products
       entries:
       - id: FoodContainerEgg
-        amount: 12
+        amount: 16
       - id: FoodMeatChicken
-        amount: 24
+        amount: 32
       - id: FoodMeatFish
-        amount: 18
+        amount: 32
       - id: RMCFoodMeatFish
-        amount: 12
+        amount: 32
       - id: FoodMeat
-        amount: 24
+        amount: 32
       - id: FoodMeatBacon
-        amount: 24
+        amount: 32
       - id: FoodMeatSausage
-        amount: 18
+        amount: 32
       - id: DrinkMilkCarton
-        amount: 24
+        amount: 32
       - id: DrinkSoyMilkCarton
-        amount: 12
+        amount: 32
       - id: RMCCondimentEnzyme
-        amount: 12
+        amount: 16
       - id: ReagentContainerFlour
-        amount: 12
+        amount: 16
       - id: RMCCondimentSugar
-        amount: 12
+        amount: 16
       - id: RMCCondimentCornOil
-        amount: 12
+        amount: 16
       - id: RMCCondimentSmallSalt
-        amount: 12
+        amount: 16
       - id: RMCCondimentSmallPepper
-        amount: 12
+        amount: 16
       # TODO RMC14 Mint 12
       - id: FoodApple
-        amount: 12
+        amount: 32
       - id: FoodBanana
-        amount: 12
+        amount: 32
       - id: FoodMushroom
-        amount: 12
+        amount: 32
       - id: FoodCherry
-        amount: 12
+        amount: 32
       - id: FoodChiliPepper
-        amount: 12
+        amount: 32
       - id: FoodCabbage
-        amount: 12
+        amount: 32
       - id: FoodCarrot
-        amount: 12
+        amount: 32
       - id: FoodCorn
-        amount: 12
+        amount: 32
       - id: FoodEggplant
-        amount: 12
+        amount: 32
       - id: FoodLemon
-        amount: 12
+        amount: 32
       - id: FoodLime
-        amount: 12
+        amount: 32
       - id: FoodOrange
-        amount: 12
+        amount: 32
       - id: FoodPotato
-        amount: 12
+        amount: 32
       - id: FoodTomato
-        amount: 12
+        amount: 32
       - id: FoodWhiteBeet
-        amount: 12
+        amount: 32
       - id: FoodOnion
-        amount: 12
+        amount: 32
       - id: FoodOnionRed
-        amount: 12
+        amount: 32
       - id: FoodGarlic
-        amount: 12
+        amount: 32
       - id: ReagentContainerRice
-        amount: 12
+        amount: 16
       - id: ReagentContainerOliveoil
-        amount: 12
+        amount: 16
       - id: FoodCondimentBottleVinegar
-        amount: 12
+        amount: 16
       - id: ReagentContainerCornmeal
-        amount: 12
+        amount: 16
       - id: ReagentContainerMayo
-        amount: 12
+        amount: 16
+      - id: MonkeyCubeBox
+        amount: 6
 
 - type: entity
   parent: CMVendorIngredients

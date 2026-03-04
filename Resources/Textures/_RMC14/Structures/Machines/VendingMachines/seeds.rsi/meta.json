@@ -8,22 +8,22 @@
   },
   "states": [
     {
-      "name": "normal-unshaded"
+      "name": "base"
     },
     {
-      "name": "deny-unshaded",
+      "name": "deny",
       "delays": [
         [
-          0.1, 
+          0.1,
           0.1
         ]
       ]
     },
     {
-      "name": "eject-unshaded",
+      "name": "vend",
       "delays": [
         [
-          0.1, 
+          0.1,
           0.1
         ]
       ]

@@ -65,3 +65,11 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
                                              In the case of a medevac, go to the back of the ship and interact with the red medevac module. This will bring the patient up onto your ship from the ground. Inform the Almayer's medical staff that they are coming aboard and make sure they are brought into their care.
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
+
+rmc-new-to-job-mst = As a Mess Technician, your job is to prepare meals and drinks for all personnel aboard the ship.
+
+                                             After you wake up you will want to head straight to the Mess Hall, which is south of where you spawned in.  You will want to have a kitchen knife and rolling pin ready for whatever you feel is going to be on today's menu. You should also check the Galley Auxiliary Storage Requisition System as it contains a wide array of ingredients.
+
+                                             Once the marines are deployed and the FOB is secure, you can grab the mess tent from maints and set up a groundside kitchen if you so wish.
+
+                                             This job is mostly roleplay, so have fun with it!
