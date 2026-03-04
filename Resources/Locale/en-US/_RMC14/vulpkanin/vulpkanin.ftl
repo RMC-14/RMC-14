@@ -179,7 +179,6 @@ marking-VulpTailFox4-m_tail_fox4_secondary = Tip
 
 marking-VulpTailLong = Long (no wag)
 marking-VulpTailLong-long = Base
-marking-VulpTailLong-long-tip = Tipmarking-VulpTailLong-long = Base
 marking-VulpTailLong-long-tip = Tip
 
 
