@@ -164,7 +164,8 @@
 
 - type: entity
   parent: Smoke
-  id: RMCSmokeFireSentry
+  id: RMCSmokeFireSentryNoSpread
+  categories: [ HideSpawnMenu ]
   components:
   - type: Transform
     anchored: true
@@ -178,13 +179,24 @@
     tags:
     - HideContextMenu
   - type: Appearance
-  - type: ActiveEdgeSpreader
-  - type: EdgeSpreader
-    id: RMCSmokeAcid
-  - type: EvenSmoke
-    spawn: RMCSmoke
-    range: 1
   - type: DeleteOnExplosion
+  - type: RMCIgniteOnCollide
+    maxStacks: 20
+    tileDamage:
+      types:
+        Heat: 0.5
+    burnColor: "#EE6515"
+  - type: EdgeSpreader
+    id: RMCSmoke
+
+- type: entity
+  parent: RMCSmokeFireSentryNoSpread
+  id: RMCSmokeFireSentry
+  components:
+  - type: EvenSmoke
+    spawn: RMCSmokeFireSentryNoSpread
+    initialSpread: 2
+    range: 1
 
 - type: entity
   parent: CMGrenadeHighExplosive
