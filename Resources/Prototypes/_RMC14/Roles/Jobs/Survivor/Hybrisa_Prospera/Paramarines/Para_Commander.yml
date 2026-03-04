@@ -39,7 +39,7 @@
               - SquadPara
         - type: JobPrefix
           prefix: rmc-job-prefix-para-commander
-  hidden: true
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer
 
 - type: startingGear
   id: RMCGearParaCommander
