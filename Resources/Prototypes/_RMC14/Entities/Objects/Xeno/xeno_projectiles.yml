@@ -161,7 +161,7 @@
   - type: Sprite
     sprite: _RMC14/Objects/Xeno/xeno_projectiles.rsi
     layers:
-    - state: neurotoxin
+    - state: xeno_acid_strong
       shader: unshaded
   - type: XenoAcidShotgun
   - type: Projectile

@@ -1523,29 +1523,27 @@
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: acid_shotgun
-    useDelay: 6
+      state: acid_mine
+    useDelay: 5.5
   - type: TargetAction
     range: 10
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoAcidMineActionEvent
   - type: ActionBlockIfResting
-  - type: XenoActionPlasma
-    cost: 40
 
 - type: entity
   id: ActionXenoAcidShotgun
   parent: ActionXenoBase
   name: Acid Shotgun (40)
-  description: Launches multiple acid projectiles that deal increased damage to restrained targets.
+  description: Launches multiple acid projectiles that deal increased damage to trapped targets.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_shotgun
-    useDelay: 6
+    useDelay: 13
   - type: TargetAction
     range: 15
     checkCanAccess: false
@@ -1559,14 +1557,14 @@
   id: ActionXenoDeployTraps
   parent: ActionXenoBase
   name: Deploy Traps (60)
-  description: Deploys a line of temporary snaring traps.
+  description: Deploys a line of snaring traps.
   components:
   - type: Action
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
-      state: acid_shotgun
-    useDelay: 20
+      state: gas_mine
+    useDelay: 20.5
   - type: TargetAction
     range: 10
     deselectOnMiss: false

@@ -1,6 +1,7 @@
 ﻿using Content.Shared._RMC14.Xenonids.Insight;
-using Content.Shared._RMC14.Xenonids.ResinSurge;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.DoAfter;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -12,18 +13,24 @@ public sealed partial class XenoDeployTrapsComponent : Component
 {
     // Length of do-after
     [DataField, AutoNetworkedField]
-    public TimeSpan DeployTrapsDoAfterPeriod = TimeSpan.FromSeconds(1);
+    public TimeSpan DeployTrapsDoAfterPeriod = TimeSpan.FromSeconds(0.2);
 
     [DataField, AutoNetworkedField]
-    public int DeployTrapsRadius = 3;
+    public int DeployTrapsRadius = 2;
 
     // Prototype for trap to create
     [DataField, AutoNetworkedField]
     public EntProtoId DeployTrapsId = "XenoTrapperTrap";
 
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype>? Emote = "XenoRoar";
+
     // Prototype for trap to create
     [DataField, AutoNetworkedField]
     public EntProtoId DeployEmpoweredTrapsId = "XenoTrapperEmpoweredTrap";
+
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier DeploySound = new SoundCollectionSpecifier("XenoResinBreak");
 
     [DataField, AutoNetworkedField]
     public int Range = 12;

@@ -8,7 +8,4 @@ public sealed partial class XenoDeployTrapsActionComponent : Component
 {
     [DataField, AutoNetworkedField]
     public float FailCooldownMult = 0.5f;
-
-    [DataField, AutoNetworkedField]
-    public TimeSpan SuccessCooldown = TimeSpan.FromSeconds(20);
 }

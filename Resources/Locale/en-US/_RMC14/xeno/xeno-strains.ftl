@@ -1,5 +1,17 @@
 rmc-xeno-strain-specialized-into = It has specialized into {INDEFINITE($strain)} {$strain}.
 
+rmc-xeno-trapper-name = Trapper
+rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud and acid spray in order to gain some speed and the ability to create acid explosions and restrain enemies within them.
+   You gain the ability to:
+   - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
+   - - Gain stacks of Insight when you strike enemies with your shotgun, at 10 stacks you empower your next trap deployment.
+   - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
+   - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
+   - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
+   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that will burn enemies and corrode through structures.
+   - - When empowered, deals greatly increased damage to structures and slightly increased damage against enemies but also applying a lingering acid to them.
+rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
+
 rmc-xeno-dancer-name = Dancer
 rmc-xeno-dancer-description = You trade your spit, acid ball, acid spray, corrosive acid, dash, and a small bit of armor for high single-target damage.
    You gain the ability to:

@@ -1,4 +1,5 @@
 ﻿using Content.Server.Destructible;
+using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Xenonids.Construction.DeployedTraps;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared.Damage;
@@ -11,7 +12,7 @@ namespace Content.Server._RMC14.Xenonids.Construction.DeployedTraps;
 
 public sealed class XenoDeployedTrapsSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly RMCSlowSystem _root = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -53,7 +54,7 @@ public sealed class XenoDeployedTrapsSystem : EntitySystem
     }
     private void OnStepTriggered(Entity<XenoDeployedTrapsComponent> trap, ref StepTriggeredOnEvent args)
     {
-            _stun.TryStun(args.Tripper, trap.Comp.StunDuration, true);
+            _root.TryRoot(args.Tripper, trap.Comp.StunDuration, true);
 
             var caught = EnsureComp<XenoCaughtInTrapComponent>(args.Tripper);
             caught.ExpireTime = _timing.CurTime + trap.Comp.StunDuration;

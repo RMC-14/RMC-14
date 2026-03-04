@@ -58,7 +58,14 @@
   - type: XenoDeployedTraps
     stunDuration: 1.75
   - type: XenoFriendly
-
+  - type: RequireProjectileTarget
+  - type: MeleeSound
+    soundGroups:
+      Brute:
+        collection: XenoResinBreak
+  - type: Clickable
+  - type: TimedDespawn
+    lifetime: 60
 
 - type: entity
   id: XenoTrapperEmpoweredTrap
@@ -67,4 +74,4 @@
   description: A strengthened resin trap laid by a Trapper.
   components:
   - type: XenoDeployedTraps
-    stunDuration: 10
+    stunDuration: 3

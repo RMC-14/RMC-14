@@ -58,6 +58,20 @@ rmc-xeno-evolution-failed-bad-location = We can't evolve here.
 rmc-xeno-evolution-start-self = We begin to twist and contort.
 rmc-xeno-evolution-start-others = {$xeno} begins to twist and contort.
 
+# Insight
+rmc-xeno-insight-empower = We have gained sufficient insight in our prey to empower our next Deploy Traps!
+
+# Deploy Traps
+rmc-xeno-deploy-traps-self = We create a sudden surge of traps!
+rmc-xeno-deploy-traps-others = {$xeno} creates a sudden surge of traps!
+rmc-xeno-deploy-traps-empower = We have tapped into our reserves to prepare a stronger Acid Mine!
+rmc-xeno-deploy-traps-see-fail = Theres something in the way!
+
+# Acid Mine
+rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
+rmc-xeno-acid-mine-others = {$xeno} coaxes a hidden mine to detonate!
+rmc-xeno-acid-mine-see-fail = Theres something in the way!
+
 # Fortify
 cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
 cm-xeno-fortify-cant-rest = We can't rest while fortifying!

@@ -202,6 +202,7 @@
     actionIds:
     - ActionXenoRest
     - ActionXenoRegurgitate
+    - ActionXenoTailStabBoiler
     - ActionXenoWatch
     - ActionXenoAcidStrong
     - ActionXenoAcidMine
@@ -219,16 +220,15 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 1.75
     baseSprintSpeed: 3.25
+  - type: XenoZoom
+    zoom: 1, 1
+    offsetLength: 0
+    speed: 1
+    doAfter: 0
   - type: XenoAcidMine
-    damageToMobs:
+    baseDamage:
       types:
         Heat: 45
-    damageToStructures:
-      types:
-        Heat: 76
-    damageToStructuresEmpowered:
-      types:
-        Heat: 114
   - type: XenoAcidShotgun
   - type: XenoDeployTraps
   - type: XenoInsight

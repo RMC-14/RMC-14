@@ -1,6 +1,8 @@
 ﻿using Content.Shared._RMC14.Xenonids.Projectile.Spit;
+using Content.Shared.Chat.Prototypes;
 using Content.Shared.FixedPoint;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Xenonids.Insight;
 
@@ -15,4 +17,7 @@ public sealed partial class XenoInsightComponent : Component
     //max stacks
     [DataField, AutoNetworkedField]
     public int MaxInsight = 10;
+
+    [DataField, AutoNetworkedField]
+    public ProtoId<EmotePrototype>? Emote = "XenoHiss";
 }
