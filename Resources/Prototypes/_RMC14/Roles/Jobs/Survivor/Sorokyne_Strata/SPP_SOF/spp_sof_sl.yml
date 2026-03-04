@@ -36,7 +36,7 @@
     head: RMCHeadCapSPPSOF
   storage:
     back:
-    - ArmorHelmetSPPHeavy
+    - RMCArmorHelmetSPPSOF
     outerClothing:
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047

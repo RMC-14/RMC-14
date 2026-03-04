@@ -24,12 +24,13 @@
   parent: RMCGearSPPSOFBase
   id: RMCGearSPPSOFSapper
   equipment:
+    back: RMCSatchelLightpackWelderBlack
     eyes: RMCWeldingGoggles
     gloves: CMHandsInsulated
     pocket2: RMCPouchToolsSocFilledSOF
   storage:
     back:
-    - CMSheetMetal20
+    - CMSheetMetal40
 
 - type: entity
   parent: CMSpawnPointJobBase
