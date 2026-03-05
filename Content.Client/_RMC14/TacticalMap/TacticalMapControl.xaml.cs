@@ -9,6 +9,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
@@ -54,6 +55,8 @@ public sealed partial class TacticalMapControl : TextureRect
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    // [UISystemDependency] private readonly TacticalMapSystem _transform = null!;
+    private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     private readonly Font _font;
     private readonly Label? _tunnelInfoLabel;
@@ -67,6 +70,10 @@ public sealed partial class TacticalMapControl : TextureRect
     private int[]? _blipEntityIds;
     private int? _localPlayerEntityId;
     private Dictionary<Vector2i, string> _areaLabels = new();
+
+    private int? _watchingEntityId;
+    private bool? _watchingLiveUpdate;
+    private Vector2i? _watchingIndices;
 
     private Vector2i _min;
     private Vector2i _delta;
@@ -229,6 +236,14 @@ public sealed partial class TacticalMapControl : TextureRect
     public void SetLocalPlayerEntityId(int? entityId)
     {
         _localPlayerEntityId = entityId;
+    }
+
+    public void SetWatchingData(int? entityId, bool? liveUpdate, Vector2i? watchingIndices)
+    {
+        _logger.Debug($"Setting watching: {entityId}");
+        _watchingEntityId = entityId;
+        _watchingLiveUpdate = liveUpdate;
+        _watchingIndices = watchingIndices;
     }
 
 
@@ -571,6 +586,8 @@ public sealed partial class TacticalMapControl : TextureRect
         if (_blips == null)
             return;
 
+        var watchingPingSeperate = _watchingLiveUpdate == false && _watchingEntityId.HasValue;
+
         for (int i = 0; i < _blips.Length; i++)
         {
             TacticalMapBlip blip = _blips[i];
@@ -581,11 +598,21 @@ public sealed partial class TacticalMapControl : TextureRect
             handle.DrawTextureRect(blip.Background != null ? system.GetFrame(blip.Background, curTime) : background, rect, blip.Color);
             handle.DrawTextureRect(system.GetFrame(blip.Image, curTime), rect);
 
+            // Draw location ping for local character
             if (_localPlayerEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
             {
                 if (_blipEntityIds[i] == _localPlayerEntityId.Value)
                 {
-                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, blip.Color);
+                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.FromHex("#00FFFF"));
+                }
+            }
+
+            // Draw location ping for player you're watching
+            if (_watchingEntityId.HasValue && _blipEntityIds != null && i < _blipEntityIds.Length)
+            {
+                if (_blipEntityIds[i] == _watchingEntityId.Value && !watchingPingSeperate)
+                {
+                    DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.Orange);
                 }
             }
 
@@ -604,6 +631,36 @@ public sealed partial class TacticalMapControl : TextureRect
             if (defibTexture != null)
                 handle.DrawTextureRect(system.GetFrame(defibTexture, curTime), rect);
         }
+
+        // If live updating is disabled, draw the location ping for who you're watching anyways
+        if (watchingPingSeperate && _watchingEntityId.HasValue && _watchingIndices.HasValue)
+        {
+            // MapGridComponent? gridComp = null;
+            // Vector2i indices = Vector2i.Zero;
+
+
+            // var netEntity = _entityManager.GetNetEntity(new EntityUid(_watchingEntityId.Value));
+
+            // var entity = new EntityUid(_watchingEntityId.Value);
+
+            _logger.Debug($"Attempting to draw w/ no ovi {_watchingEntityId.Value}");
+
+            var indices = _watchingIndices.Value;
+
+            // if (!_transform.HasValidPosition(entity,
+            //         ref gridComp,
+            //         ref indices))
+            //     return;
+
+            _logger.Debug("Drawing w/ no ovi!");
+
+            // TacticalMapBlip blip = _blips[i];
+            Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
+            float scaledBlipSize = GetScaledBlipSize(overlayScale);
+            // UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
+
+            DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.Orange);
+        }
     }
 
     private void DrawPingEffect(DrawingHandleScreen handle, Vector2 center, float blipSize, float overlayScale, TimeSpan curTime, Color blipColor)
@@ -617,7 +674,7 @@ public sealed partial class TacticalMapControl : TextureRect
         float ringSize = blipSize * scale;
         Vector2 ringCenter = center + new Vector2(blipSize / 2, blipSize / 2);
 
-        Color pingColor = Color.FromHex("#00FFFF").WithAlpha(alpha);
+        Color pingColor = blipColor.WithAlpha(alpha);
 
         float thickness = PingRingThickness * overlayScale;
         int segments = 32;

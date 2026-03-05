@@ -1,5 +1,6 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
+using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.TacticalMap;
 
@@ -101,5 +102,10 @@ public abstract class SharedTacticalMapSystem : EntitySystem
         }
 
         _ui.TryOpenUi(user.Owner, TacticalMapUserUi.Key, user);
+    }
+
+    public virtual bool HasValidPosition(EntityUid ent, ref Vector2i indices)
+    {
+        return false;
     }
 }
