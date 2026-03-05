@@ -12,9 +12,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     [Dependency] private readonly IPlayerManager _player = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
-    private readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
-
-
     private EntityQuery<TransformComponent> _transformQuery;
     private EntityQuery<TacticalMapComponent> _tacticalMapQuery;
     private EntityQuery<MapGridComponent> _mapGridQuery;
@@ -39,50 +36,11 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
     public override bool HasValidPosition(EntityUid ent,
         ref Vector2i indices)
     {
-        var a = _transformQuery.TryComp(ent, out var xform);
-        if (!a || xform == null)
-        {
-            _logger.Debug("First check fails");
-            return false;
-        }
-
-        var gridId = EntityUid.Invalid;
-        a = xform.GridUid is { };
-        if (!a || !xform.GridUid.HasValue)
-        {
-            _logger.Debug("Second check fails");
-            return false;
-        }
-
-        gridId = xform.GridUid.Value;
-
-        a = _mapGridQuery.TryComp(gridId, out var gridComp);
-        if (!a)
-        {
-            _logger.Debug("Third check fails");
-            return false;
-        }
-
-        a = _tacticalMapQuery.TryComp(gridId, out var _);
-        if (!a)
-        {
-            _logger.Debug("Fourth check fails");
-            return false;
-        }
-
-        a = _transform.TryGetGridTilePosition((ent, xform), out indices, gridComp);
-
-        if (!a)
-            _logger.Debug("Fifth check fails");
-        else
-            _logger.Debug("All 5 checks PASS");
-
-        return a;
-        // return _transformQuery.TryComp(ent, out var xform) &&
-        //        xform.GridUid is { } gridId &&
-        //        _mapGridQuery.TryComp(gridId, out gridComp) &&
-        //        _tacticalMapQuery.TryComp(gridId, out var tacticalMap) &&
-        //        _transform.TryGetGridTilePosition((ent, xform), out indices, gridComp);
+        return _transformQuery.TryComp(ent, out var xform) &&
+               xform.GridUid is { } gridId &&
+               _mapGridQuery.TryComp(gridId, out var gridComp) &&
+               _tacticalMapQuery.TryComp(gridId, out var tacticalMap) &&
+               _transform.TryGetGridTilePosition((ent, xform), out indices, gridComp);
     }
 
     // watchTargetUid exists to be passed to TacticalMapControl.SetWatchingEntityId() as the EyeComponent.Target
@@ -162,7 +120,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
         bool? liveUpdate = userComponent?.LiveUpdate ?? null;
 
-        _logger.Debug($"xeno watch seen from tacmap system ! {args.Watching}");
         RefreshUser(ent, args.Watching, liveUpdate);
 
         if (HasComp<TacticalMapComputerComponent>(ent))
@@ -171,7 +128,6 @@ public sealed class TacticalMapSystem : SharedTacticalMapSystem
 
     private void OnXenoUnwatch(Entity<XenoWatchingComponent> ent, ref XenoUnwatchEvent args)
     {
-        _logger.Debug("xeno unwatch seen from tacmap system !");
         RefreshUser(ent, EntityUid.Invalid);
 
         if (HasComp<TacticalMapComputerComponent>(ent))

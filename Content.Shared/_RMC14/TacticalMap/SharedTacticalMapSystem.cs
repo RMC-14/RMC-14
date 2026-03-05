@@ -1,6 +1,5 @@
 ﻿using Content.Shared._RMC14.CCVar;
 using Robust.Shared.Configuration;
-using Robust.Shared.Map.Components;
 
 namespace Content.Shared._RMC14.TacticalMap;
 

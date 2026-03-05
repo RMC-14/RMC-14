@@ -14,8 +14,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
-
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
     private string? _currentMapName;
@@ -186,8 +184,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 
         Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
         Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
-
-        // EntMan.TryGetComponent<EyeComponent>(_player.LocalEntity, out var eyeComponent);
 
         // EntityUid.Invalid is used to denote an Unwatch event, non-null means a Watch event
         if (watchTargetUid == null)
