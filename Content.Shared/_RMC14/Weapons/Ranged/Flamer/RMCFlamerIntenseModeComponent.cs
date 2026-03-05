@@ -2,6 +2,7 @@ using Robust.Shared.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Content.Shared.Chemistry.Reagent;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
@@ -48,6 +49,9 @@ public sealed partial class RMCFlamerIntenseModeComponent : Component
     [DataField, AutoNetworkedField]
     public bool Intense = false;
 
+    [DataField, AutoNetworkedField]
+    public bool HasIntenseVisuals = false;
+
 
     [DataField, AutoNetworkedField]
     public string ActivateText = "rmc-flamer-intense-activate";
@@ -64,4 +68,10 @@ public sealed partial class RMCFlamerIntenseModeComponent : Component
 
     [DataField, AutoNetworkedField]
     public SoundPathSpecifier? DeactivateSound = new("/Audio/_RMC14/Weapons/Handling/flamer_ignition.ogg");
+}
+
+[Serializable, NetSerializable]
+public enum IntenseVisuals : byte
+{
+    Intense
 }
