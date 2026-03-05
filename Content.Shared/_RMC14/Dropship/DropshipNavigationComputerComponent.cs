@@ -37,4 +37,7 @@ public sealed partial class DropshipNavigationComputerComponent : Component
 
     [DataField, AutoNetworkedField]
     public TimeSpan LockedOutUntil = TimeSpan.Zero;
+
+    [DataField, AutoNetworkedField]
+    public bool LaunchAlarmStatus;
 }

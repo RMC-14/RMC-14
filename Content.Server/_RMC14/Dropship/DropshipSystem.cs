@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Numerics;
+using Content.Server._RMC14.GameStates;
 using Content.Server._RMC14.Marines;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
@@ -63,6 +64,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
     [Dependency] private readonly SharedXenoAnnounceSystem _xenoAnnounce = default!;
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
+    [Dependency] private readonly RMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly RMCAlertLevelSystem _alertLevelSystem = default!;
     [Dependency] private readonly AreaSystem _area = default!;
 
@@ -105,6 +107,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             {
                 subs.Event<DropshipLockdownMsg>(OnDropshipNavigationLockdownMsg);
                 subs.Event<DropshipRemoteControlToggleMsg>(OnDropshipRemoteControlToggleMsg);
+                subs.Event<DropshipLaunchAlarmToggleMsg>(OnDropshipLaunchAlarmToggleMsg);
             });
 
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
@@ -249,6 +252,36 @@ public sealed class DropshipSystem : SharedDropshipSystem
     {
         ent.Comp.RemoteControl = !ent.Comp.RemoteControl;
         Dirty(ent, ent.Comp);
+        RefreshUI();
+    }
+
+    private void OnDropshipLaunchAlarmToggleMsg(Entity<DropshipNavigationComputerComponent> ent, ref DropshipLaunchAlarmToggleMsg args)
+    {
+        if (!TryGetGridDropship(ent, out var dropship))
+            return;
+
+        var launchAlarmStatus = false;
+        if (dropship.Comp.LaunchAlarmEntity != null)
+        {
+            Del(dropship.Comp.LaunchAlarmEntity);
+            dropship.Comp.LaunchAlarmEntity = null;
+        }
+        else
+        {
+            var sound = _audio.PlayPvs(dropship.Comp.LaunchAlarmSound, dropship);
+            if (sound == null)
+                return;
+
+            _rmcPvs.AddGlobalOverride(sound.Value.Entity);
+            dropship.Comp.LaunchAlarmEntity = sound.Value.Entity;
+            launchAlarmStatus = true;
+        }
+
+        Dirty(dropship);
+
+        ent.Comp.LaunchAlarmStatus = launchAlarmStatus;
+        Dirty(ent);
+
         RefreshUI();
     }
 
@@ -522,7 +555,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
                 destinations.Add(destination);
             }
 
-            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl);
+            var state = new DropshipNavigationDestinationsBuiState(flyBy, destinations, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
             _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, state);
             return;
         }
@@ -544,7 +577,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
             }
         }
 
-        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.RemoteControl);
+        var travelState = new DropshipNavigationTravellingBuiState(ftl.State, ftl.StateTime, destinationName, departureName, doorLockStatus, computer.Comp.RemoteControl, computer.Comp.LaunchAlarmStatus);
         _ui.SetUiState(computer.Owner, DropshipNavigationUiKey.Key, travelState);
     }
 
