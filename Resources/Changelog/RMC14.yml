@@ -1,34 +1,4 @@
 ﻿Entries:
-- author: Ian321
-  changes:
-  - message: You can no longer store boots inside of helmets.
-    type: Fix
-  id: 2505
-  time: '2025-11-17T10:04:57.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8405
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed pocket defibrillators being medium instead of small
-    type: Fix
-  id: 2506
-  time: '2025-11-17T10:04:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8408
-- author: CatAndHats
-  changes:
-  - message: Fixed the weapon specialist vendor having fragmentation and smoke grenades.
-    type: Fix
-  - message: Fixed the cost of AGM grenades in the CT/HM/SL/FTL vendors being too
-      high.
-    type: Fix
-  - message: Squad vendors now have medical comms key for purchase.
-    type: Fix
-  - message: Fixed a number of missing items in squad vendors, including; welding
-      goggles in the engi supply kit, electronics pouch in the SGO vendor, and data
-      detector and range finder in the WS vendor.
-    type: Fix
-  id: 2507
-  time: '2025-11-17T10:04:05.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8355
 - author: noctyrnal
   changes:
   - message: Resprited the M5 ATL.
@@ -4517,5 +4487,31 @@
   id: 3006
   time: '2026-03-03T02:47:14.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9329
+- author: DrSmugleaf
+  changes:
+  - message: Fixed M5-ATL HE rockets not exploding when colliding with a target.
+    type: Fix
+  - message: Fixed not being able to give admins RMCMaintainer or AdminGhost permission.
+    type: Fix
+  id: 3007
+  time: '2026-03-03T05:17:25.616872+00:00'
+  url: null
+- author: CatAndHats, SharkSnake98, MoonlightHollow, TadJohnson00, Drazamaffin, kleinerstation13
+  changes:
+  - message: Added the RCM Paramarine survivor special scenario on Hybrisa Prospera
+      with a 30% chance to spawn, can these paratroopers withstand the xenonids before
+      the marines can come to their aid?
+    type: Add
+  id: 3008
+  time: '2026-03-03T05:17:25.618554+00:00'
+  url: null
+- author: CatAndHats, SharkSnake98
+  changes:
+  - message: 'Added inserts for survivors to spawn together on Solaris: in Admin,
+      Bar, Storage, Office, and south of Marshals.'
+    type: Add
+  id: 3009
+  time: '2026-03-03T05:17:25.618985+00:00'
+  url: null
 Name: RMC14
 Order: -1

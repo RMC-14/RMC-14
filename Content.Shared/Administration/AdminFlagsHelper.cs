@@ -100,7 +100,7 @@ namespace Content.Shared.Administration
             var ai = 0;
             for (var i = 0; i < 64 - highest; i++)
             {
-                var flagValue = (AdminFlags) (1u << i);
+                var flagValue = (AdminFlags) (1ul << i);
                 if ((flags & flagValue) != 0)
                 {
                     array[ai++] = FlagsNameMap[i];
