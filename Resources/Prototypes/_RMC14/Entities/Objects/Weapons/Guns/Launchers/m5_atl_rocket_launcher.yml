@@ -315,7 +315,7 @@
     intensity: 40
     burnColor: "#00b8ff"
   - type: EdgeSpreader
-    id: RMCSmoke
+    id: Smoke
 
 - type: entity
   parent: RMCSmokeWhitePhosphorusNoSpread

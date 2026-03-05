@@ -187,7 +187,7 @@
         Heat: 0.5
     burnColor: "#EE6515"
   - type: EdgeSpreader
-    id: RMCSmoke
+    id: Smoke
 
 - type: entity
   parent: RMCSmokeFireSentryNoSpread
