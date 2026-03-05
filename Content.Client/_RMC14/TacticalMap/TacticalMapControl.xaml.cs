@@ -9,7 +9,6 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Input;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using SixLabors.ImageSharp;
@@ -55,8 +54,6 @@ public sealed partial class TacticalMapControl : TextureRect
 
     [Dependency] private readonly IResourceCache _resourceCache = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
-    // [UISystemDependency] private readonly TacticalMapSystem _transform = null!;
-    private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
 
     private readonly Font _font;
     private readonly Label? _tunnelInfoLabel;
@@ -240,7 +237,6 @@ public sealed partial class TacticalMapControl : TextureRect
 
     public void SetWatchingData(int? entityId, bool? liveUpdate, Vector2i? watchingIndices)
     {
-        _logger.Debug($"Setting watching: {entityId}");
         _watchingEntityId = entityId;
         _watchingLiveUpdate = liveUpdate;
         _watchingIndices = watchingIndices;
@@ -635,29 +631,10 @@ public sealed partial class TacticalMapControl : TextureRect
         // If live updating is disabled, draw the location ping for who you're watching anyways
         if (watchingPingSeperate && _watchingEntityId.HasValue && _watchingIndices.HasValue)
         {
-            // MapGridComponent? gridComp = null;
-            // Vector2i indices = Vector2i.Zero;
-
-
-            // var netEntity = _entityManager.GetNetEntity(new EntityUid(_watchingEntityId.Value));
-
-            // var entity = new EntityUid(_watchingEntityId.Value);
-
-            _logger.Debug($"Attempting to draw w/ no ovi {_watchingEntityId.Value}");
-
             var indices = _watchingIndices.Value;
 
-            // if (!_transform.HasValidPosition(entity,
-            //         ref gridComp,
-            //         ref indices))
-            //     return;
-
-            _logger.Debug("Drawing w/ no ovi!");
-
-            // TacticalMapBlip blip = _blips[i];
             Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
             float scaledBlipSize = GetScaledBlipSize(overlayScale);
-            // UIBox2 rect = UIBox2.FromDimensions(position, new Vector2(scaledBlipSize, scaledBlipSize));
 
             DrawPingEffect(handle, position, scaledBlipSize, overlayScale, curTime, Color.Orange);
         }

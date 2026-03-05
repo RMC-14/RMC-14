@@ -14,8 +14,6 @@ public sealed class TacticalMapComputerBui(EntityUid owner, Enum uiKey) : RMCPop
 {
     [Dependency] private readonly IPlayerManager _player = default!;
 
-    private static readonly ISawmill _logger = Logger.GetSawmill("tactical_map_settings");
-
     protected override TacticalMapWindow? Window { get; set; }
     private bool _refreshed;
     private string? _currentMapName;
