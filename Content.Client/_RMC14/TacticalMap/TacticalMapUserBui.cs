@@ -206,8 +206,6 @@ public sealed class TacticalMapUserBui(EntityUid owner, Enum uiKey) : RMCPopOutB
         Window.Wrapper.Map.SetLocalPlayerEntityId(localPlayerId);
         Window.Wrapper.Canvas.SetLocalPlayerEntityId(localPlayerId);
 
-        // EntMan.TryGetComponent<EyeComponent>(_player.LocalEntity, out var eyeComponent);
-
         // EntityUid.Invalid is used to denote an Unwatch event, non-null means a Watch event
         if (watchTargetUid == null)
             return;
