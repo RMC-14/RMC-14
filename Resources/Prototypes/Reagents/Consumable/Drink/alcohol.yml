@@ -60,6 +60,14 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
   fizziness: 0.6
 
 - type: reagent
@@ -170,10 +178,11 @@
   metabolisms:
     Alcohol:
       effects:
-      - !type:HealthChange
+      - !type:HealthChange # scale up toxin damage with ethanol in body
         conditions:
         - !type:ReagentThreshold
           min: 15
+          max: 29
         - !type:OrganType
           type: Dwarf
           shouldHave: false
@@ -184,6 +193,7 @@
         conditions:
         - !type:ReagentThreshold
           min: 30
+          max: 44
         - !type:OrganType
           type: Dwarf
           shouldHave: false
@@ -200,16 +210,35 @@
         damage:
           types:
             Poison: 2.25
-      # dwarves take less toxin damage and heal a marginal amount of brute
-      - !type:HealthChange
+      - !type:HealthChange # dwarves take less toxin damage and heal a marginal amount of brute
         conditions:
         - !type:ReagentThreshold
           min: 15
+          max: 29
         - !type:OrganType
           type: Dwarf
         damage:
           types:
-            Poison: 0.02
+            Poison: 0.1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+          max: 44
+        - !type:OrganType
+          type: Dwarf
+        damage:
+          types:
+            Poison: 0.4
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 45
+        - !type:OrganType
+          type: Dwarf
+        damage:
+          types:
+            Poison: 0.8
       - !type:HealthChange
         conditions:
         - !type:ReagentThreshold
@@ -219,22 +248,41 @@
         damage:
           groups:
             Brute: -0.01
-      - !type:ChemVomit
-        probability: 0.04
+      - !type:ChemVomit # scale up vomit chance with ethanol in body
+        probability: 0.05
         conditions:
         - !type:ReagentThreshold
           reagent: Ethanol
-          min: 12
-        # dwarves immune to vomiting from alcohol
+          min: 15
+          max: 29
+        - !type:OrganType # dwarves aren't actually immune to vomit for some reason
+          type: Dwarf
+          shouldHave: false
+      - !type:ChemVomit
+        probability: 0.1
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 30
+          max: 44
         - !type:OrganType
           type: Dwarf
           shouldHave: false
-      - !type:Drunk
+      - !type:ChemVomit
+        probability: 0.25
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 45
+        - !type:OrganType
+          type: Dwarf
+          shouldHave: false
+      - !type:Drunk # scale up drunk level with ethanol in body
         boozePower: 2
         conditions:
         - !type:ReagentThreshold
           reagent: Ethanol
-          min: 120
+          min: 1
 
 - type: reagent
   id: Gin
@@ -258,7 +306,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: CoffeeLiqueur
@@ -274,6 +322,14 @@
   metamorphicMaxFillLevels: 3
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
 
 - type: reagent
   id: MelonLiquor
@@ -289,6 +345,14 @@
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
 
 - type: reagent
   id: NTCahors
@@ -304,6 +368,14 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
 
 - type: reagent
   id: PoisonWine
@@ -326,7 +398,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.05
+        amount: 0.15
     Poison:
       effects:
       - !type:HealthChange
@@ -356,7 +428,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: Sake
@@ -379,7 +451,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.15
 
 - type: reagent
   id: Tequila
@@ -402,7 +474,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: Vermouth
@@ -418,6 +490,14 @@
   metamorphicMaxFillLevels: 4
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
 
 - type: reagent
   id: Vodka
@@ -441,7 +521,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.8
+        amount: 0.4
 
 - type: reagent
   id: Whiskey
@@ -482,6 +562,14 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.1
 
 - type: reagent
   id: Champagne
@@ -502,10 +590,10 @@
     Drink:
       effects:
       - !type:SatiateThirst
-        factor: 3
+        factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.3
+        amount: 0.1
   fizziness: 0.8
 
 # Mixed Alcohol
@@ -524,6 +612,14 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.15
 
 - type: reagent
   id: AlienBrainHemorrhage
@@ -539,6 +635,14 @@
   metamorphicMaxFillLevels: 5
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.2
 
 - type: reagent
   id: AlliesCocktail
