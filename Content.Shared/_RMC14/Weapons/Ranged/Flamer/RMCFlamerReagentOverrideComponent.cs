@@ -14,7 +14,6 @@ namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 [Access(typeof(SharedRMCFlamerSystem))]
 public sealed partial class RMCFlamerReagentOverrideComponent : Component
 {
-
     [DataField, AutoNetworkedField]
     public int? Intensity;
 

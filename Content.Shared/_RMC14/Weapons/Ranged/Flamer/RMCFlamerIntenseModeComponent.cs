@@ -7,13 +7,12 @@ using Robust.Shared.Serialization;
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
 /// <summary>
-/// Handles toggling the flamer reagent override bwtween two modes.
+/// Handles toggling the flamer reagent override between two modes.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 [Access(typeof(SharedRMCFlamerSystem))]
 public sealed partial class RMCFlamerIntenseModeComponent : Component
 {
-
     [DataField, AutoNetworkedField]
     public int? NormalIntensity;
 
@@ -28,7 +27,6 @@ public sealed partial class RMCFlamerIntenseModeComponent : Component
 
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype>? NormalFireReagent;
-
 
     [DataField, AutoNetworkedField]
     public int? IntenseIntensity;
@@ -45,13 +43,11 @@ public sealed partial class RMCFlamerIntenseModeComponent : Component
     [DataField, AutoNetworkedField]
     public ProtoId<ReagentPrototype>? IntenseFireReagent;
 
-
     [DataField, AutoNetworkedField]
     public bool Intense = false;
 
     [DataField, AutoNetworkedField]
     public bool HasIntenseVisuals = false;
-
 
     [DataField, AutoNetworkedField]
     public string ActivateText = "rmc-flamer-intense-activate";
@@ -61,7 +57,6 @@ public sealed partial class RMCFlamerIntenseModeComponent : Component
 
     [DataField, AutoNetworkedField]
     public string ExamineText = "rmc-flamer-intense-action-examine";
-
 
     [DataField, AutoNetworkedField]
     public SoundPathSpecifier? ActivateSound = new("/Audio/_RMC14/Handling/weldingtool_on.ogg");
