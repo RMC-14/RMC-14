@@ -12,7 +12,7 @@ namespace Content.Shared._RMC14.Xenonids.AcidMine;
 [Access(typeof(XenoAcidMineSystem), typeof(XenoDeployTrapsSystem))]
 public sealed partial class XenoAcidMineComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public DamageSpecifier BaseDamage;
 
     [DataField, AutoNetworkedField]

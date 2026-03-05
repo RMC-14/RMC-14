@@ -19,5 +19,5 @@ public sealed partial class XenoInsightComponent : Component
     public int MaxInsight = 10;
 
     [DataField, AutoNetworkedField]
-    public ProtoId<EmotePrototype>? Emote = "XenoHiss";
+    public ProtoId<EmotePrototype>? Emote = "XenoRoar";
 }

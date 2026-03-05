@@ -1524,10 +1524,11 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine
+    useDelay: 5.5
+  - type: XenoAcidMine
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine_empowered
-    useDelay: 5.5
   - type: TargetAction
     range: 10
     deselectOnMiss: false
@@ -1567,10 +1568,11 @@
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine
+      useDelay: 20.5
+  - type: XenoDeployTraps
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine_empowered
-    useDelay: 20.5
   - type: TargetAction
     range: 10
     deselectOnMiss: false

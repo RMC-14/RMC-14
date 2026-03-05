@@ -160,7 +160,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
         }
     }
 
-    public void DeployTrapsEmpower(Entity<XenoDeployTrapsComponent> xeno)
+    private void DeployTrapsEmpower(Entity<XenoDeployTrapsComponent> xeno)
     {
         if (!_net.IsServer)
             return;

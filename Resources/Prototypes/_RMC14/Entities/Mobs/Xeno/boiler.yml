@@ -54,7 +54,7 @@
     - ActionXenoRest
     - ActionXenoRegurgitate
     - ActionXenoWatch
-    - ActionXenoTailStab
+    - ActionXenoTailStabBoiler
     - ActionXenoAcidStrong
     - ActionXenoBombard
     - ActionXenoToggleGasType
@@ -87,6 +87,9 @@
   - type: XenoAcidShroud
   - type: XenoGasToggle
   - type: XenoTailStab
+    toggle: true
+    inject:
+      RMCMolecularAcid: 6
     tailDamage:
       groups:
         Brute: 30
