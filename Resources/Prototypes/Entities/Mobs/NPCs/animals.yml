@@ -1469,6 +1469,10 @@
         Blunt: 1
     clumsySound:
       path: /Audio/Animals/monkey_scream.ogg
+  - type: Butcherable #RMC start
+    spawned:
+    - id: FoodMeat
+      amount: 3 #RMC end
 
 
 - type: entity
