@@ -35,7 +35,7 @@ public sealed class XenoPingWaypointOverlay : RMCPingWaypointOverlay
             return Color.White;
 
         if (Entity.HasComponent<XenoEvolutionGranterComponent>(creator))
-            return Color.Gold;
+            return Color.FromHex("#D8B4FF");
 
         if (Entity.HasComponent<HiveLeaderComponent>(creator))
             return Color.Orange;

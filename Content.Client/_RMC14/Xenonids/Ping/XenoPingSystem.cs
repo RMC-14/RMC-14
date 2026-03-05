@@ -1,15 +1,18 @@
 using Content.Client._RMC14.Ping;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.HiveLeader;
 using Content.Shared._RMC14.Xenonids.Ping;
+using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Xenonids.Ping;
 
 public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent, XenoPingDataComponent>
 {
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
 
     protected override bool ShouldShowPing(EntityUid pingUid, XenoPingEntityComponent pingComp)
     {
@@ -35,6 +38,9 @@ public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent
 
     public bool CanViewXenoPings(EntityUid player)
     {
+        if (!_config.GetCVar(RMCCVars.RMCShowPings))
+            return false;
+
         return HasComp<XenoComponent>(player) && HasComp<HiveMemberComponent>(player);
     }
 

@@ -34,6 +34,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private readonly XenoPingSystem _ping = default!;
     [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
 
     public override void Initialize()
@@ -139,6 +140,8 @@ public sealed class XenoResinMarkSystem : EntitySystem
 
         AddHivePvsOverrides(marker, hive.Owner);
         AddHivePvsOverrides(ping, hive.Owner);
+
+        _ping.SendRoleBasedPingCallout(ent.Owner, ping, pingData, coordinates, hive);
 
         ent.Comp.LastPlacedAt = _timing.CurTime;
         Dirty(ent);

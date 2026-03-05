@@ -96,14 +96,21 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
     private EntityUid CreatePingBasedOnRole(EntityUid creator, string pingEntityId, XenoPingDataComponent pingData,
         EntityCoordinates coordinates, Entity<HiveComponent> hive, EntityUid? targetEntity, CreatorRole role)
     {
-        var (lifetime, roleColor, popupType) = role switch
-        {
-            CreatorRole.Queen => (TimeSpan.FromSeconds(QueenPingLifetimeSeconds), Color.FromHex("#D8B4FF"), PopupType.Large),
-            CreatorRole.HiveLeader => (TimeSpan.FromSeconds(HiveLeaderPingLifetimeSeconds), Color.FromHex("#FF4500"), PopupType.Large),
-            _ => (TimeSpan.FromSeconds(NormalPingLifetimeSeconds), (Color?)null, PopupType.Medium)
-        };
+        var (lifetime, roleColor, popupType) = GetRolePingSettings(role);
 
         return CreatePingWithRole(creator, pingEntityId, pingData, coordinates, hive, lifetime, roleColor, popupType, targetEntity);
+    }
+
+    public void SendRoleBasedPingCallout(
+        EntityUid creator,
+        EntityUid pingEntity,
+        XenoPingDataComponent pingData,
+        EntityCoordinates coordinates,
+        Entity<HiveComponent> hive,
+        EntityUid? targetEntity = null)
+    {
+        var (_, roleColor, popupType) = GetRolePingSettings(DetermineCreatorRole(creator));
+        SendPingCallout(creator, pingEntity, pingData, coordinates, hive, roleColor, popupType, targetEntity);
     }
 
     private void EnforcePingLimits(EntityUid creator, CreatorRole role)
@@ -159,15 +166,38 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
             Dirty(ping, pingComp);
         }
 
+        SendPingCallout(creator, ping, pingData, coordinates, hive, chatColor, popupType, targetEntity);
+
+        return ping;
+    }
+
+    private void SendPingCallout(
+        EntityUid creator,
+        EntityUid pingEntity,
+        XenoPingDataComponent pingData,
+        EntityCoordinates coordinates,
+        Entity<HiveComponent> hive,
+        Color? chatColor,
+        PopupType popupType,
+        EntityUid? targetEntity)
+    {
         var locationName = GetLocationName(coordinates);
         var creatorName = Name(creator);
         var targetMessage = GetTargetMessage(targetEntity);
 
         SendHivemindMessage(creator, pingData, locationName, targetMessage, creatorName, chatColor, hive);
         ShowPopupToHiveMembers(creator, pingData, targetMessage, coordinates, hive, popupType);
-        PlayPingSound(pingData, ping, hive);
+        PlayPingSound(pingData, pingEntity, hive);
+    }
 
-        return ping;
+    private static (TimeSpan Lifetime, Color? ChatColor, PopupType PopupType) GetRolePingSettings(CreatorRole role)
+    {
+        return role switch
+        {
+            CreatorRole.Queen => (TimeSpan.FromSeconds(QueenPingLifetimeSeconds), Color.FromHex("#D8B4FF"), PopupType.Large),
+            CreatorRole.HiveLeader => (TimeSpan.FromSeconds(HiveLeaderPingLifetimeSeconds), Color.FromHex("#FF4500"), PopupType.Large),
+            _ => (TimeSpan.FromSeconds(NormalPingLifetimeSeconds), null, PopupType.Medium)
+        };
     }
 
     private string GetLocationName(EntityCoordinates coordinates)
