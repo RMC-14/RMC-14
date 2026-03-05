@@ -205,36 +205,25 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
 
         private void UpdateResinMarkerDirectionalOverlay(Entity<SpriteComponent> spriteEnt, SpriteSpecifier icon)
         {
-            var centerGlowLayer = EnsureCenterGlowLayer(spriteEnt);
-            var directionLayer = EnsureDirectionLayer(spriteEnt);
+            var ent = spriteEnt.AsNullable();
+
+            if (!_sprite.LayerMapTryGet(ent, AlertVisualLayers.CenterGlow, out var centerGlowLayer, false))
+                centerGlowLayer = _sprite.LayerMapReserve(ent, AlertVisualLayers.CenterGlow);
+
+            if (!_sprite.LayerMapTryGet(ent, AlertVisualLayers.Direction, out var directionLayer, false))
+                directionLayer = _sprite.LayerMapReserve(ent, AlertVisualLayers.Direction);
 
             if (!_severity.HasValue || _severity.Value <= 0)
             {
-                _sprite.LayerSetVisible(spriteEnt.AsNullable(), centerGlowLayer, false);
-                _sprite.LayerSetVisible(spriteEnt.AsNullable(), directionLayer, false);
+                _sprite.LayerSetVisible(ent, centerGlowLayer, false);
+                _sprite.LayerSetVisible(ent, directionLayer, false);
                 return;
             }
 
-            _sprite.LayerSetSprite(spriteEnt.AsNullable(), centerGlowLayer, ResinMarkerCenterGlow);
-            _sprite.LayerSetVisible(spriteEnt.AsNullable(), centerGlowLayer, true);
-            _sprite.LayerSetSprite(spriteEnt.AsNullable(), directionLayer, icon);
-            _sprite.LayerSetVisible(spriteEnt.AsNullable(), directionLayer, true);
-        }
-
-        private int EnsureCenterGlowLayer(Entity<SpriteComponent> spriteEnt)
-        {
-            if (_sprite.LayerMapTryGet(spriteEnt.AsNullable(), AlertVisualLayers.CenterGlow, out var existingLayer, false))
-                return existingLayer;
-
-            return _sprite.LayerMapReserve(spriteEnt.AsNullable(), AlertVisualLayers.CenterGlow);
-        }
-
-        private int EnsureDirectionLayer(Entity<SpriteComponent> spriteEnt)
-        {
-            if (_sprite.LayerMapTryGet(spriteEnt.AsNullable(), AlertVisualLayers.Direction, out var existingLayer, false))
-                return existingLayer;
-
-            return _sprite.LayerMapReserve(spriteEnt.AsNullable(), AlertVisualLayers.Direction);
+            _sprite.LayerSetSprite(ent, centerGlowLayer, ResinMarkerCenterGlow);
+            _sprite.LayerSetVisible(ent, centerGlowLayer, true);
+            _sprite.LayerSetSprite(ent, directionLayer, icon);
+            _sprite.LayerSetVisible(ent, directionLayer, true);
         }
 
         protected override void EnteredTree()
