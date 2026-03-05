@@ -147,6 +147,8 @@
     interfaces:
       enum.RMCConstructionUiKey.Key:
         type: RMCConstructionBui
+  - type: CampfireFuel
+    fuelAmount: 1
 
 - type: entity
   parent: RMCPlankWood
