@@ -1529,6 +1529,9 @@
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine_empowered
+    baseDamage:
+      types:
+        Heat: 45
   - type: TargetAction
     range: 10
     deselectOnMiss: false

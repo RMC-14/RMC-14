@@ -13,7 +13,7 @@ namespace Content.Shared._RMC14.Xenonids.AcidMine;
 public sealed partial class XenoAcidMineComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public DamageSpecifier BaseDamage;
+    public DamageSpecifier BaseDamage = new();
 
     [DataField, AutoNetworkedField]
     public bool Empowered = false;

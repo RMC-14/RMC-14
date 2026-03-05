@@ -229,9 +229,6 @@
     speed: 1
     doAfter: 0
   - type: XenoAcidMine
-    baseDamage:
-      types:
-        Heat: 45
   - type: XenoAcidShotgun
   - type: XenoDeployTraps
   - type: XenoInsight
