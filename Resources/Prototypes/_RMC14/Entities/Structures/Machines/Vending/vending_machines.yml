@@ -919,8 +919,8 @@
         amount: 16
       - id: ReagentContainerMayo
         amount: 16
-      - id: MonkeyCubeBox
-        amount: 6
+      - id: RMCCondimentProteinPropagator
+        amount: 3
 
 - type: entity
   parent: CMVendorIngredients

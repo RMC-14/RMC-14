@@ -39,3 +39,29 @@
       amount: 1
   products:
     RMCVirusFood: 3
+
+- type: reaction
+  id: CreateMeatProteinPropagation
+  impact: Low
+  quantized: true
+  conserveEnergy: false
+  reactants:
+    RMCProteinPropagator:
+      amount: 3
+    UncookedAnimalProteins:
+      amount: 3
+  effects:
+  - !type:CreateEntityReactionEffect
+    entity: FoodMeat
+
+- type: reaction
+  id: RMCTriplePMix
+  reactants:
+    Water:
+      amount: 1
+    RMCCarbon:
+      amount: 1
+    Nutriment:
+      amount: 1
+  products:
+    RMCProteinPropagator: 3
