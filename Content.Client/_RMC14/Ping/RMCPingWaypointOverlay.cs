@@ -6,7 +6,6 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using System.Linq;
 using System.Numerics;
 
 namespace Content.Client._RMC14.Ping;
@@ -57,6 +56,10 @@ public abstract class RMCPingWaypointOverlay : Overlay
     private readonly List<WaypointPositionData> _workingPositions = new();
     private readonly HashSet<EntityUid> _expiredEntities = new();
     private readonly Dictionary<EntityUid, Vector2> _velocities = new();
+    private readonly List<PingWaypointData> _filteredWaypoints = new();
+    private readonly List<PingWaypointData> _groupedWaypoints = new();
+    private readonly HashSet<EntityUid> _groupedProcessed = new();
+    private readonly List<PingWaypointData> _groupScratch = new();
     private readonly float _fadeRange;
 
     protected RMCPingWaypointOverlay()
@@ -101,9 +104,9 @@ public abstract class RMCPingWaypointOverlay : Overlay
 
         CleanExpiredEntities(waypoints);
 
-        var filteredWaypoints = FilterWaypoints(waypoints, player);
-        var groupedWaypoints = GroupWaypoints(filteredWaypoints, playerPos);
-        CalculateAndResolvePositions(groupedWaypoints, playerPos, screenSize);
+        FilterWaypoints(waypoints, player, _filteredWaypoints);
+        GroupWaypoints(_filteredWaypoints, playerPos, _groupedWaypoints);
+        CalculateAndResolvePositions(_groupedWaypoints, playerPos, screenSize);
 
         foreach (var positionData in _workingPositions)
         {
@@ -112,18 +115,21 @@ public abstract class RMCPingWaypointOverlay : Overlay
 
         handle.UseShader(null);
         _workingPositions.Clear();
+        _filteredWaypoints.Clear();
+        _groupedWaypoints.Clear();
     }
 
-    private List<PingWaypointData> FilterWaypoints(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints, EntityUid player)
+    private void FilterWaypoints(
+        IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints,
+        EntityUid player,
+        List<PingWaypointData> result)
     {
-        var result = new List<PingWaypointData>();
+        result.Clear();
         foreach (var waypoint in waypoints.Values)
         {
             if (ShouldIncludeWaypoint(waypoint, player))
                 result.Add(waypoint);
         }
-
-        return result;
     }
 
     private void CalculateAndResolvePositions(List<PingWaypointData> waypoints, Vector2 playerPos, Vector2 screenSize)
@@ -157,8 +163,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
                 _waypointCache[waypoint.EntityUid] = new CachedWaypointData
                 {
                     Position = currentPosition,
-                    LastUpdate = currentTime,
-                    Priority = GetWaypointPriority(waypoint)
+                    LastUpdate = currentTime
                 };
             }
 
@@ -240,8 +245,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
                 _waypointCache[uid] = new CachedWaypointData
                 {
                     Position = newPosition,
-                    LastUpdate = currentTime,
-                    Priority = current.Priority
+                    LastUpdate = currentTime
                 };
             }
 
@@ -291,30 +295,29 @@ public abstract class RMCPingWaypointOverlay : Overlay
         }
     }
 
-    private List<PingWaypointData> GroupWaypoints(List<PingWaypointData> waypoints, Vector2 playerPos)
+    private void GroupWaypoints(List<PingWaypointData> waypoints, Vector2 playerPos, List<PingWaypointData> result)
     {
-        var result = new List<PingWaypointData>();
-        var processed = new HashSet<EntityUid>();
+        result.Clear();
+        _groupedProcessed.Clear();
 
         foreach (var waypoint in waypoints)
         {
-            if (processed.Contains(waypoint.EntityUid))
+            if (!_groupedProcessed.Add(waypoint.EntityUid))
                 continue;
 
             var playerDistanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, playerPos);
             if (playerDistanceSquared < MinGroupingViewDistanceSquared)
             {
                 result.Add(waypoint);
-                processed.Add(waypoint.EntityUid);
                 continue;
             }
 
-            var group = new List<PingWaypointData> { waypoint };
-            processed.Add(waypoint.EntityUid);
+            _groupScratch.Clear();
+            _groupScratch.Add(waypoint);
 
             foreach (var otherWaypoint in waypoints)
             {
-                if (processed.Contains(otherWaypoint.EntityUid))
+                if (_groupedProcessed.Contains(otherWaypoint.EntityUid))
                     continue;
                 if (otherWaypoint.Creator != waypoint.Creator)
                     continue;
@@ -324,15 +327,13 @@ public abstract class RMCPingWaypointOverlay : Overlay
                 var distanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, otherWaypoint.WorldPosition);
                 if (distanceSquared <= GroupingDistanceSquared)
                 {
-                    group.Add(otherWaypoint);
-                    processed.Add(otherWaypoint.EntityUid);
+                    _groupScratch.Add(otherWaypoint);
+                    _groupedProcessed.Add(otherWaypoint.EntityUid);
                 }
             }
 
-            result.Add(group.Count > 1 ? CreateGroupedWaypoint(group) : waypoint);
+            result.Add(_groupScratch.Count > 1 ? CreateGroupedWaypoint(_groupScratch) : waypoint);
         }
-
-        return result;
     }
 
     private PingWaypointData CreateGroupedWaypoint(List<PingWaypointData> group)
@@ -340,6 +341,9 @@ public abstract class RMCPingWaypointOverlay : Overlay
         var totalWeight = 0f;
         var weightedCenter = Vector2.Zero;
         var currentTime = _timing.CurTime;
+        var baseWaypoint = group[0];
+        var maxDeleteAt = baseWaypoint.DeleteAt;
+        var groupedUid = baseWaypoint.EntityUid;
 
         foreach (var waypoint in group)
         {
@@ -347,14 +351,21 @@ public abstract class RMCPingWaypointOverlay : Overlay
             var weight = Math.Max(0.1f, remainingLifetime + 0.1f);
             weightedCenter += waypoint.WorldPosition * weight;
             totalWeight += weight;
+
+            if (waypoint.DeleteAt > maxDeleteAt)
+            {
+                maxDeleteAt = waypoint.DeleteAt;
+                baseWaypoint = waypoint;
+            }
+
+            if (waypoint.EntityUid.Id < groupedUid.Id)
+                groupedUid = waypoint.EntityUid;
         }
 
         weightedCenter /= totalWeight;
 
-        var baseWaypoint = group.OrderByDescending(w => w.DeleteAt).First();
-
         return new PingWaypointData(
-            baseWaypoint.EntityUid,
+            groupedUid,
             baseWaypoint.PingType,
             baseWaypoint.Creator,
             weightedCenter,
@@ -362,7 +373,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
             baseWaypoint.MapId,
             baseWaypoint.Color,
             baseWaypoint.Texture,
-            group.Max(w => w.DeleteAt))
+            maxDeleteAt)
         {
             EntityIsLoaded = baseWaypoint.EntityIsLoaded,
             GroupCount = group.Count
@@ -570,14 +581,29 @@ public abstract class RMCPingWaypointOverlay : Overlay
     {
         var bounds = _screenBounds;
         var center = _screenCenter;
-        var candidates = new List<Vector2>();
+        var rayTarget = center + direction * 1000f;
+        var fallback = center + direction * 100f;
+        var bestCandidate = fallback;
+        var bestDistanceSquared = float.MaxValue;
+        var hasCandidate = false;
+
+        void TryCandidate(Vector2 candidate)
+        {
+            var distSq = Vector2.DistanceSquared(candidate, rayTarget);
+            if (distSq < bestDistanceSquared)
+            {
+                bestDistanceSquared = distSq;
+                bestCandidate = candidate;
+                hasCandidate = true;
+            }
+        }
 
         if (direction.X > 0.001f)
         {
             var t = (bounds.Right - center.X) / direction.X;
             var y = center.Y + direction.Y * t;
             if (y >= bounds.Top && y <= bounds.Bottom)
-                candidates.Add(new Vector2(bounds.Right, y));
+                TryCandidate(new Vector2(bounds.Right, y));
         }
 
         if (direction.X < -0.001f)
@@ -585,7 +611,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
             var t = (bounds.Left - center.X) / direction.X;
             var y = center.Y + direction.Y * t;
             if (y >= bounds.Top && y <= bounds.Bottom)
-                candidates.Add(new Vector2(bounds.Left, y));
+                TryCandidate(new Vector2(bounds.Left, y));
         }
 
         if (direction.Y > 0.001f)
@@ -593,7 +619,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
             var t = (bounds.Bottom - center.Y) / direction.Y;
             var x = center.X + direction.X * t;
             if (x >= bounds.Left && x <= bounds.Right)
-                candidates.Add(new Vector2(x, bounds.Bottom));
+                TryCandidate(new Vector2(x, bounds.Bottom));
         }
 
         if (direction.Y < -0.001f)
@@ -601,12 +627,10 @@ public abstract class RMCPingWaypointOverlay : Overlay
             var t = (bounds.Top - center.Y) / direction.Y;
             var x = center.X + direction.X * t;
             if (x >= bounds.Left && x <= bounds.Right)
-                candidates.Add(new Vector2(x, bounds.Top));
+                TryCandidate(new Vector2(x, bounds.Top));
         }
 
-        return candidates.Count > 0
-            ? candidates.OrderBy(p => Vector2.Distance(p, center + direction * 1000f)).First()
-            : center + direction * 100f;
+        return hasCandidate ? bestCandidate : fallback;
     }
 
     private static bool IsValidScreenPosition(Vector2 screenPos)
@@ -634,7 +658,6 @@ public abstract class RMCPingWaypointOverlay : Overlay
     {
         public Vector2 Position;
         public TimeSpan LastUpdate;
-        public int Priority;
     }
 
     private record struct WaypointPositionData

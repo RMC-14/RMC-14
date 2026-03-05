@@ -208,7 +208,6 @@ namespace Content.Client.UserInterface.Systems.Alerts.Controls
             var centerGlowLayer = EnsureCenterGlowLayer(spriteEnt);
             var directionLayer = EnsureDirectionLayer(spriteEnt);
 
-            // Severity 0 is the untracked state: only show the base marker icon.
             if (!_severity.HasValue || _severity.Value <= 0)
             {
                 _sprite.LayerSetVisible(spriteEnt.AsNullable(), centerGlowLayer, false);
