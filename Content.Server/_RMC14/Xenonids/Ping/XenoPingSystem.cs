@@ -53,6 +53,8 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
         if (!ValidateXenoCreator(creator, out var hive))
             return;
 
+        targetEntity = ValidateTargetEntity(creator, targetEntity);
+
         var creatorRole = DetermineCreatorRole(creator);
 
         EnforcePingLimits(creator, creatorRole);
@@ -62,6 +64,17 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
         {
             AddPingToPvsOverrides(createdPingUid);
         }
+    }
+
+    private EntityUid? ValidateTargetEntity(EntityUid creator, EntityUid? targetEntity)
+    {
+        if (targetEntity == null)
+            return null;
+
+        if (!_xenoQuery.HasComponent(targetEntity.Value))
+            return null;
+
+        return _hive.FromSameHive(creator, targetEntity.Value) ? targetEntity : null;
     }
 
     private bool ValidateXenoCreator(EntityUid creator, out Entity<HiveComponent> hive)

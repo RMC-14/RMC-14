@@ -28,6 +28,7 @@
     - state: marker_nub
   - type: XenoFriendly
   - type: XenoResinMarker
+  - type: RMCTrackable
   - type: Damageable
     damageContainer: StructuralXeno
   - type: Destructible

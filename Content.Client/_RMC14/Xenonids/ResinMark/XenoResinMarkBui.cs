@@ -20,6 +20,7 @@ public sealed class XenoResinMarkBui : BoundUserInterface
     private readonly XenoResinMarkClientSystem _markClient;
     private EntProtoId _selectedType = "XenoPingMove";
     private NetEntity? _selectedPlacedMarker;
+    private bool _canForceTrack;
 
     [ViewVariables]
     private XenoResinMarkWindow? _window;
@@ -51,6 +52,7 @@ public sealed class XenoResinMarkBui : BoundUserInterface
             return;
 
         _selectedType = s.SelectedType;
+        _canForceTrack = s.CanForceTrack;
         var window = EnsureWindow();
 
         var selectedName = s.Types.FirstOrDefault(t => t.Id == s.SelectedType).Name;
@@ -129,6 +131,11 @@ public sealed class XenoResinMarkBui : BoundUserInterface
             if (_selectedPlacedMarker is { } marker)
                 SendPredictedMessage(new XenoResinMarkDestroyBuiMsg(marker));
         };
+        _window.ForceTrackSelectedButton.OnPressed += _ =>
+        {
+            if (_selectedPlacedMarker is { } marker)
+                SendPredictedMessage(new XenoResinMarkForceTrackBuiMsg(marker));
+        };
         return _window;
     }
 
@@ -162,6 +169,7 @@ public sealed class XenoResinMarkBui : BoundUserInterface
         var hasSelection = _selectedPlacedMarker != null && selected.Marker == _selectedPlacedMarker.Value;
         window.WatchSelectedButton.Disabled = !hasSelection;
         window.DestroySelectedButton.Disabled = !hasSelection;
+        window.ForceTrackSelectedButton.Disabled = !hasSelection || !_canForceTrack;
     }
 
 }

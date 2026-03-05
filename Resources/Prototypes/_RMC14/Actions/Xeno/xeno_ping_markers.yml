@@ -161,7 +161,7 @@
     chatMessage: Help at
     popupMessage: Need Assistance!
     priority: 70
-    categories: [ support ]
+    categories: [ tactical ]
 
 # Construction Pings
 - type: entity

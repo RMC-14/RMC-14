@@ -73,20 +73,26 @@ public abstract class SharedRMCPingSystem<TPingEntityComponent, TPingDataCompone
         if (!_transformQuery.TryGetComponent(targetEntity, out var targetTransform))
             return;
 
-        var targetWorldPos = _transform.GetWorldPosition(targetEntity);
+        var targetCoordinates = targetTransform.Coordinates;
+        var displayCoordinates = targetCoordinates.Offset(ping.AttachedOffset);
+        var displayWorldPos = _transform.ToMapCoordinates(displayCoordinates).Position;
         var currentWorldPos = _transform.GetWorldPosition(pingUid);
-        var distanceMoved = Vector2.Distance(targetWorldPos, currentWorldPos);
+        var distanceMoved = Vector2.Distance(displayWorldPos, currentWorldPos);
 
         if (distanceMoved > AttachedTargetPositionThreshold)
         {
-            UpdatePingPosition(pingUid, ping, targetTransform.Coordinates, targetWorldPos);
+            UpdatePingPosition(pingUid, ping, targetCoordinates, displayCoordinates, displayWorldPos);
         }
     }
 
     private void HandleDetachedTarget(EntityUid pingUid, TPingEntityComponent ping)
     {
         if (ping.LastKnownCoordinates.HasValue)
-            _transform.SetCoordinates(pingUid, ping.LastKnownCoordinates.Value);
+        {
+            var displayCoordinates = ping.LastKnownCoordinates.Value.Offset(ping.AttachedOffset);
+            _transform.SetCoordinates(pingUid, displayCoordinates);
+            ping.WorldPosition = _transform.ToMapCoordinates(displayCoordinates).Position;
+        }
 
         ping.AttachedTarget = null;
         Dirty(pingUid, ping);
@@ -96,11 +102,12 @@ public abstract class SharedRMCPingSystem<TPingEntityComponent, TPingDataCompone
         EntityUid pingUid,
         TPingEntityComponent ping,
         EntityCoordinates targetCoordinates,
-        Vector2 targetWorldPos)
+        EntityCoordinates displayCoordinates,
+        Vector2 displayWorldPos)
     {
         ping.LastKnownCoordinates = targetCoordinates;
-        ping.WorldPosition = targetWorldPos;
-        _transform.SetCoordinates(pingUid, targetCoordinates);
+        ping.WorldPosition = displayWorldPos;
+        _transform.SetCoordinates(pingUid, displayCoordinates);
         Dirty(pingUid, ping);
     }
 

@@ -2,6 +2,7 @@ using Content.Client.Gameplay;
 using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Ping;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -39,11 +40,10 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
     private static readonly SpriteSpecifier DefaultPingSprite = new SpriteSpecifier.Rsi(XenoMarkersRsi, "no_direction");
     private static readonly Color MenuBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.1f);
     private static readonly Color MenuHoverBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.5f);
-    private static readonly string[] CategoryOrder = ["tactical", "support", "construction"];
+    private static readonly string[] CategoryOrder = ["tactical", "construction"];
     private static readonly Dictionary<string, (string Name, SpriteSpecifier Icon)> CategoryInfo = new()
     {
         ["tactical"] = ("Tactical Commands", new SpriteSpecifier.Rsi(XenoMarkersRsi, "fortify")),
-        ["support"] = ("Support Commands", new SpriteSpecifier.Rsi(XenoMarkersRsi, "aide")),
         ["construction"] = ("Construction", new SpriteSpecifier.Rsi(XenoMarkersRsi, "weed")),
     };
 
@@ -126,12 +126,27 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         }
 
         if (entityToClick != null &&
-            _entityManager.HasComponent<XenoComponent>(entityToClick.Value))
+            _entityManager.HasComponent<XenoComponent>(entityToClick.Value) &&
+            _playerManager.LocalEntity is { } player &&
+            AreSameHive(player, entityToClick.Value))
         {
             return entityToClick;
         }
 
         return null;
+    }
+
+    private bool AreSameHive(EntityUid a, EntityUid b)
+    {
+        if (!_entityManager.TryGetComponent(a, out HiveMemberComponent? aHiveComp) ||
+            !_entityManager.TryGetComponent(b, out HiveMemberComponent? bHiveComp))
+        {
+            return false;
+        }
+
+        return aHiveComp.Hive != null &&
+               bHiveComp.Hive != null &&
+               aHiveComp.Hive == bHiveComp.Hive;
     }
 
     private EntityCoordinates GetTargetCoordinates(EntityUid player)
@@ -233,8 +248,8 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
             "tactical" when IsPrimaryTactical(pingType) => "primary",
             "tactical" => "tactical",
             "construction" => "construction",
-            "support" => "support",
-            "hunting" => "support",
+            "support" => "tactical",
+            "hunting" => "tactical",
             "warning" => "primary",
             _ => null
         };

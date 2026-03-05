@@ -30,6 +30,7 @@
                     <BoxContainer Orientation="Horizontal" SeparationOverride="4">
                         <Button Name="WatchSelectedButton" Access="Public" Text="Watch" HorizontalExpand="True" />
                         <Button Name="DestroySelectedButton" Access="Public" Text="Destroy" HorizontalExpand="True" />
+                        <Button Name="ForceTrackSelectedButton" Access="Public" Text="Force Track" HorizontalExpand="True" />
                     </BoxContainer>
                 </BoxContainer>
             </PanelContainer>

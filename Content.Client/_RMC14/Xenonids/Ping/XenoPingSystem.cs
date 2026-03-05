@@ -32,6 +32,9 @@ public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent
 
     protected override bool ShouldCreateWaypoint(EntityUid pingUid, XenoPingEntityComponent pingComp)
     {
+        if (!pingComp.ShowWaypoint)
+            return false;
+
         return HasComp<XenoEvolutionGranterComponent>(pingComp.Creator) ||
                HasComp<HiveLeaderComponent>(pingComp.Creator);
     }

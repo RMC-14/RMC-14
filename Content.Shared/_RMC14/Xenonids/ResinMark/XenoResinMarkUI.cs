@@ -22,11 +22,13 @@ public readonly record struct XenoResinPlacedMark(NetEntity Marker, string Name,
 public sealed class XenoResinMarkBuiState(
     EntProtoId selectedType,
     List<XenoResinMarkType> types,
-    List<XenoResinPlacedMark> marks) : BoundUserInterfaceState
+    List<XenoResinPlacedMark> marks,
+    bool canForceTrack) : BoundUserInterfaceState
 {
     public readonly EntProtoId SelectedType = selectedType;
     public readonly List<XenoResinMarkType> Types = types;
     public readonly List<XenoResinPlacedMark> Marks = marks;
+    public readonly bool CanForceTrack = canForceTrack;
 }
 
 [Serializable, NetSerializable]
@@ -43,6 +45,12 @@ public sealed class XenoResinMarkWatchBuiMsg(NetEntity marker) : BoundUserInterf
 
 [Serializable, NetSerializable]
 public sealed class XenoResinMarkDestroyBuiMsg(NetEntity marker) : BoundUserInterfaceMessage
+{
+    public readonly NetEntity Marker = marker;
+}
+
+[Serializable, NetSerializable]
+public sealed class XenoResinMarkForceTrackBuiMsg(NetEntity marker) : BoundUserInterfaceMessage
 {
     public readonly NetEntity Marker = marker;
 }

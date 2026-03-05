@@ -1,9 +1,12 @@
 using Content.Server._RMC14.Xenonids.Ping;
 using Content.Server._RMC14.Xenonids.Watch;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Tracker.SquadLeader;
+using Content.Shared._RMC14.Tracker.Xeno;
 using Content.Shared._RMC14.Xenonids.Hive;
 using Content.Shared._RMC14.Xenonids.Ping;
 using Content.Shared._RMC14.Xenonids.ResinMark;
+using Content.Shared._RMC14.Xenonids.Word;
 using Content.Shared._RMC14.Xenonids.Watch;
 using Content.Shared.Movement.Events;
 using Content.Shared.Popups;
@@ -18,6 +21,7 @@ using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server._RMC14.Xenonids.ResinMark;
 
@@ -34,13 +38,18 @@ public sealed class XenoResinMarkSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriber = default!;
+    [Dependency] private readonly ResinMarkerTrackerSystem _resinMarkerTracker = default!;
     [Dependency] private readonly XenoPingSystem _ping = default!;
     [Dependency] private readonly XenoWatchSystem _xenoWatch = default!;
+
+    private readonly HashSet<EntityUid> _pendingUiRefreshHives = new();
+    private static readonly Vector2 MarkerPingOffset = new(0f, 0.3f);
 
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoResinMarkComponent, XenoResinMarkActionEvent>(OnMarkAction);
         SubscribeLocalEvent<XenoResinMarkerComponent, ComponentShutdown>(OnMarkerShutdown);
+        SubscribeLocalEvent<XenoResinMarkerComponent, RequestTrackableNameEvent>(OnRequestTrackableName);
         SubscribeLocalEvent<XenoResinMarkWatchingComponent, MoveInputEvent>(OnWatchingMoveInput);
         SubscribeLocalEvent<XenoResinMarkWatchingComponent, ComponentShutdown>(OnWatchingShutdown);
         SubscribeLocalEvent<XenoResinMarkWatchingComponent, EntityTerminatingEvent>(OnWatchingTerminating);
@@ -51,6 +60,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
             subs.Event<XenoResinMarkSelectTypeBuiMsg>(OnSelectMarkType);
             subs.Event<XenoResinMarkWatchBuiMsg>(OnWatchMark);
             subs.Event<XenoResinMarkDestroyBuiMsg>(OnDestroyMark);
+            subs.Event<XenoResinMarkForceTrackBuiMsg>(OnForceTrackMark);
         });
     }
 
@@ -121,7 +131,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
         markerComp.Hive = hive.Owner;
         markerComp.PingType = ent.Comp.SelectedPingType;
 
-        var ping = Spawn(ent.Comp.SelectedPingType, coordinates);
+        var ping = Spawn(ent.Comp.SelectedPingType, coordinates.Offset(MarkerPingOffset));
         if (TryComp<XenoPingEntityComponent>(ping, out var pingComp))
         {
             pingComp.PingType = ent.Comp.SelectedPingType;
@@ -132,6 +142,8 @@ public sealed class XenoResinMarkSystem : EntitySystem
             pingComp.AttachedTarget = marker;
             pingComp.LastKnownCoordinates = coordinates;
             pingComp.WorldPosition = Transform(marker).MapPosition.Position;
+            pingComp.ShowWaypoint = false;
+            pingComp.AttachedOffset = MarkerPingOffset;
             Dirty(ping, pingComp);
         }
 
@@ -204,7 +216,41 @@ public sealed class XenoResinMarkSystem : EntitySystem
         }
 
         QueueDel(markerUid);
-        RefreshUi(ent, hive);
+        QueueUiRefreshForHive(hive.Owner);
+    }
+
+    private void OnForceTrackMark(Entity<XenoResinMarkComponent> ent, ref XenoResinMarkForceTrackBuiMsg args)
+    {
+        if (!HasComp<XenoWordQueenComponent>(ent.Owner))
+        {
+            _popup.PopupEntity("Only the Queen can force marker tracking.", ent, ent, PopupType.SmallCaution);
+            return;
+        }
+
+        if (!TryGetEntity(args.Marker, out var markerUidNullable) ||
+            markerUidNullable == null)
+        {
+            return;
+        }
+
+        var markerUid = markerUidNullable.Value;
+        if (!TryComp<XenoResinMarkerComponent>(markerUid, out var markerComp) ||
+            _hive.GetHive(ent.Owner) is not { } hive ||
+            markerComp.Hive != hive.Owner)
+        {
+            return;
+        }
+
+        var trackerQuery = EntityQueryEnumerator<HiveMemberComponent, ResinMarkerTrackerComponent>();
+        while (trackerQuery.MoveNext(out var uid, out var member, out _))
+        {
+            if (member.Hive != hive.Owner)
+                continue;
+
+            _resinMarkerTracker.ForceTrackTarget(uid, markerUid);
+        }
+
+        _popup.PopupEntity("Forced the hive to track this marker.", ent, ent, PopupType.Small);
     }
 
     private void OnMarkerShutdown(Entity<XenoResinMarkerComponent> ent, ref ComponentShutdown args)
@@ -222,7 +268,21 @@ public sealed class XenoResinMarkSystem : EntitySystem
 
         RemovePvsOverrides(ent.Owner);
 
-        RefreshUiForHive(ent.Comp.Hive);
+        QueueUiRefreshForHive(ent.Comp.Hive);
+    }
+
+    private void OnRequestTrackableName(Entity<XenoResinMarkerComponent> ent, ref RequestTrackableNameEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var typeName = ent.Comp.PingType;
+        if (TryGetMarkType(ent.Comp.PingType, out var pingData))
+            typeName = pingData.Name;
+
+        var locationName = _areas.TryGetArea(Transform(ent).Coordinates, out _, out var area) ? area.Name : "Unknown Area";
+        args.Name = $"{typeName} ({locationName})";
+        args.Handled = true;
     }
 
     private void OnWatchingMoveInput(Entity<XenoResinMarkWatchingComponent> ent, ref MoveInputEvent args)
@@ -270,6 +330,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
         if (_net.IsClient)
             return;
 
+        var canForceTrack = HasComp<XenoWordQueenComponent>(ent.Owner);
         var types = new List<XenoResinMarkType>();
         foreach (var (id, data) in GetAvailableMarkTypes())
         {
@@ -279,7 +340,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
         if (types.Count == 0)
         {
             _ui.SetUiState(ent.Owner, XenoResinMarkUIKey.Key,
-                new XenoResinMarkBuiState(ent.Comp.SelectedPingType, types, new List<XenoResinPlacedMark>()));
+                new XenoResinMarkBuiState(ent.Comp.SelectedPingType, types, new List<XenoResinPlacedMark>(), canForceTrack));
             return;
         }
 
@@ -303,7 +364,7 @@ public sealed class XenoResinMarkSystem : EntitySystem
 
         marks.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
 
-        _ui.SetUiState(ent.Owner, XenoResinMarkUIKey.Key, new XenoResinMarkBuiState(ent.Comp.SelectedPingType, types, marks));
+        _ui.SetUiState(ent.Owner, XenoResinMarkUIKey.Key, new XenoResinMarkBuiState(ent.Comp.SelectedPingType, types, marks, canForceTrack));
     }
 
     private Dictionary<EntProtoId, XenoPingDataComponent> GetAvailableMarkTypes()
@@ -397,6 +458,25 @@ public sealed class XenoResinMarkSystem : EntitySystem
 
             RefreshUi((uid, markComp), hive);
         }
+    }
+
+    private void QueueUiRefreshForHive(EntityUid hiveUid)
+    {
+        if (hiveUid != EntityUid.Invalid)
+            _pendingUiRefreshHives.Add(hiveUid);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_pendingUiRefreshHives.Count == 0)
+            return;
+
+        foreach (var hiveUid in _pendingUiRefreshHives)
+        {
+            RefreshUiForHive(hiveUid);
+        }
+
+        _pendingUiRefreshHives.Clear();
     }
 
     private void UnwatchMarker(EntityUid watcher, ICommonSession session)

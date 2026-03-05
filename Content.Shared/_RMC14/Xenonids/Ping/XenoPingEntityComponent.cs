@@ -33,6 +33,12 @@ public sealed partial class XenoPingEntityComponent : Component, RMCPingEntityCo
     [DataField, AutoNetworkedField]
     public Vector2 WorldPosition;
 
+    [DataField, AutoNetworkedField]
+    public bool ShowWaypoint = true;
+
+    [DataField, AutoNetworkedField]
+    public Vector2 AttachedOffset = Vector2.Zero;
+
     string RMCPingEntityComponent.PingType
     {
         get => PingType;
@@ -73,5 +79,17 @@ public sealed partial class XenoPingEntityComponent : Component, RMCPingEntityCo
     {
         get => WorldPosition;
         set => WorldPosition = value;
+    }
+
+    bool RMCPingEntityComponent.ShowWaypoint
+    {
+        get => ShowWaypoint;
+        set => ShowWaypoint = value;
+    }
+
+    Vector2 RMCPingEntityComponent.AttachedOffset
+    {
+        get => AttachedOffset;
+        set => AttachedOffset = value;
     }
 }

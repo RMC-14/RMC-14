@@ -63,7 +63,10 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
             spriteComp.Visible = shouldShow;
 
         if (!shouldShow || !ShouldCreateWaypoint(pingUid, pingComp))
+        {
+            _pingWaypoints.Remove(pingUid);
             return;
+        }
 
         if (!_pingWaypoints.ContainsKey(pingUid))
             CreateWaypoint(pingUid, pingComp);
@@ -145,15 +148,22 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
                 spriteComp.Visible = shouldShow;
 
             if (!shouldShow)
+            {
+                _pingWaypoints.Remove(uid);
                 continue;
+            }
 
             loadedPings.Add(uid);
+            var shouldCreateWaypoint = ShouldCreateWaypoint(uid, ping);
+            if (!shouldCreateWaypoint)
+            {
+                _pingWaypoints.Remove(uid);
+                continue;
+            }
 
             if (!_pingWaypoints.TryGetValue(uid, out var waypointData))
             {
-                if (ShouldCreateWaypoint(uid, ping))
-                    CreateWaypoint(uid, ping);
-
+                CreateWaypoint(uid, ping);
                 continue;
             }
 

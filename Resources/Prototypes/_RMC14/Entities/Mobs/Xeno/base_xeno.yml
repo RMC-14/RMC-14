@@ -312,6 +312,7 @@
     - HiveLeader
     - Tunnel
     - HiveCore
+  - type: ResinMarkerTracker
   - type: RequireProjectileTarget
     active: false
   - type: TacticalMapTracked
