@@ -261,7 +261,9 @@
   description: A weapon-mounted refillable flamethrower attachment. It has a secondary setting for a more intense flame with far less propulsion ability and heavy fuel usage.
   components:
   - type: Sprite
-    state: flamethrower
+    layers:
+    - state: flamethrower
+      map: [ "enum.IntenseVisuals.Intense" ]
   - type: Tag
     tags:
     - RMCAttachmentUnderbarrel
@@ -312,6 +314,7 @@
       state: flamethrower-on
   - type: AttachableVisuals
     offset: -0.125, 0.245
+    redrawOnAppearanceChange: true
   - type: WieldedCrosshair
     rsi:
       sprite: _RMC14/Interface/MousePointer/flamer_mouse.rsi
@@ -320,6 +323,13 @@
     solution: rmc_flamer_tank
     flushTime: 1.5
   - type: NoMixingReagents
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.IntenseVisuals.Intense:
+        enum.IntenseVisuals.Intense:
+          True: { state: flamethrower_intense }
+          False: { state: flamethrower }
   - type: UniqueAction
   - type: RMCFlamerReagentOverride
     Intensity: 10
@@ -934,6 +944,22 @@
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: ubs-l90-on
 
+- type: entity
+  parent: RMCAttachableBase
+  id: RMCAttachmentL88Grip
+  name: L88 integrated foregrip
+  description: Oi, you bloody galah! Put this back on your rifle and get back to it!
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
+    state: l88grip
+  - type: AttachableVisuals
+    suffix: ""
+  - type: Tag
+    tags:
+    - RMCAttachmentUnderbarrel
+    - RMCAttachmentL88Grip
+
 - type: Tag
   id: RMCAttachmentUnderbarrel
 
@@ -993,3 +1019,6 @@
 
 - type: Tag
   id: RMCAttachmentL91Bipod
+
+- type: Tag
+  id: RMCAttachmentL88Grip
