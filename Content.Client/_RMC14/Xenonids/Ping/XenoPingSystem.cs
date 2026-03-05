@@ -11,6 +11,14 @@ public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent
 {
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
 
+    protected override bool ShouldShowPing(EntityUid pingUid, XenoPingEntityComponent pingComp)
+    {
+        if (LocalPlayer is not { } player || !CanViewXenoPings(player))
+            return false;
+
+        return pingComp.Hive != EntityUid.Invalid && _hive.IsMember(player, pingComp.Hive);
+    }
+
     protected override bool ShouldShowPing(EntityUid pingCreator)
     {
         if (LocalPlayer is not { } player)
@@ -40,5 +48,19 @@ public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent
         return playerHive != null &&
                creatorHive != null &&
                playerHive.Value.Owner == creatorHive.Value.Owner;
+    }
+
+    public bool CanSeePing(EntityUid player, PingWaypointData waypoint)
+    {
+        if (!CanViewXenoPings(player))
+            return false;
+
+        if (TryComp<XenoPingEntityComponent>(waypoint.EntityUid, out var pingComp) &&
+            pingComp.Hive != EntityUid.Invalid)
+        {
+            return _hive.IsMember(player, pingComp.Hive);
+        }
+
+        return CanSeePingCreator(player, waypoint.Creator);
     }
 }

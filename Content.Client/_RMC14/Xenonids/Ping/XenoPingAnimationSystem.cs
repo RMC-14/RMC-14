@@ -11,8 +11,8 @@ public sealed class XenoPingAnimationSystem : EntitySystem
     [Dependency] private readonly AnimationPlayerSystem _animationPlayer = default!;
 
     private const float PulseDuration = 2.0f;
-    private const float InitialScale = 1.4f;
-    private const float PulseScale = 1.8f;
+    private const float InitialScale = 0.5f;
+    private const float PulseScale = 0.7f;
     private const string AnimationKey = "ping_pulse";
 
     public override void Initialize()

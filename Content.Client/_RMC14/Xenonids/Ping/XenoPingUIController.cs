@@ -3,19 +3,19 @@ using Content.Client.UserInterface.Controls;
 using Content.Shared._RMC14.Input;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared._RMC14.Xenonids.Ping;
+using Robust.Client.GameObjects;
+using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
 using Robust.Client.State;
 using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using System.Collections.Generic;
-using Robust.Client.GameObjects;
-using Robust.Client.Graphics;
-using Robust.Client.UserInterface.CustomControls;
-using Robust.Shared.Prototypes;
 using System.Linq;
 
 namespace Content.Client._RMC14.Xenonids.Ping;
@@ -35,8 +35,26 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
     private EntityCoordinates? _targetCoordinates;
     private EntityUid? _targetEntity;
 
+    private static readonly ResPath XenoMarkersRsi = new("/Textures/_RMC14/Markers/xeno_markers.rsi");
+    private static readonly SpriteSpecifier DefaultPingSprite = new SpriteSpecifier.Rsi(XenoMarkersRsi, "no_direction");
     private static readonly Color MenuBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.1f);
     private static readonly Color MenuHoverBackgroundColor = Color.FromHex("#8000FF").WithAlpha(0.5f);
+    private static readonly string[] CategoryOrder = ["tactical", "support", "construction"];
+    private static readonly Dictionary<string, (string Name, SpriteSpecifier Icon)> CategoryInfo = new()
+    {
+        ["tactical"] = ("Tactical Commands", new SpriteSpecifier.Rsi(XenoMarkersRsi, "fortify")),
+        ["support"] = ("Support Commands", new SpriteSpecifier.Rsi(XenoMarkersRsi, "aide")),
+        ["construction"] = ("Construction", new SpriteSpecifier.Rsi(XenoMarkersRsi, "weed")),
+    };
+
+    private readonly record struct PingButtonData(
+        string PingType,
+        string Name,
+        string Description,
+        Color Color,
+        int Priority,
+        string? UiCategory,
+        SpriteSpecifier Sprite);
 
     public void OnStateEntered(GameplayState state)
     {
@@ -52,11 +70,11 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         CloseMenu();
     }
 
-    private void TogglePingMenu()
+    private bool TogglePingMenu()
     {
         if (_playerManager.LocalEntity is not { } player)
         {
-            return;
+            return false;
         }
 
         var hasXenoComp = _entityManager.HasComponent<XenoComponent>(player);
@@ -64,19 +82,19 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
         if (!hasXenoComp || !hasPingComp)
         {
-            return;
+            return false;
         }
 
         if (_menu != null)
         {
             CloseMenu();
-            return;
+            return true;
         }
 
-        _targetEntity = GetEntityUnderCursor(player);
+        _targetEntity = GetEntityUnderCursor();
         _targetCoordinates = GetTargetCoordinates(player);
 
-        var models = ConvertToPingButtons(player);
+        var models = ConvertToPingButtons();
 
         _menu = new ColoredSimpleRadialMenu();
         _menu.SetButtons(models, new SimpleRadialMenuSettings
@@ -90,9 +108,10 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
         _menu.Open();
         _menu.OpenOverMouseScreenPosition();
+        return true;
     }
 
-    private EntityUid? GetEntityUnderCursor(EntityUid player)
+    private EntityUid? GetEntityUnderCursor()
     {
         var currentState = _stateManager.CurrentState;
         if (currentState is not GameplayStateBase screen)
@@ -147,72 +166,59 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         }
     }
 
-    private IEnumerable<RadialMenuOption> ConvertToPingButtons(EntityUid player)
+    private IEnumerable<RadialMenuOption> ConvertToPingButtons()
     {
         var clientPingSystem = _entityManager.System<XenoPingSystem>();
         var availablePings = clientPingSystem.GetAvailablePingTypesWithColors();
+        var pingButtons = BuildPingButtons(availablePings);
+        var options = new List<RadialMenuOption>(pingButtons.Count);
 
-        var pingsByCategory = GroupPingsByCategory(availablePings);
-        var options = new List<RadialMenuOption>();
-
-        var primaryPings = GetPrimaryPings(availablePings);
-        foreach (var (pingType, pingInfo) in primaryPings)
+        foreach (var ping in GetPrimaryPings(pingButtons))
         {
-            options.Add(CreatePingOption(pingType, pingInfo));
+            options.Add(CreatePingOption(ping));
         }
 
-        foreach (var (category, pings) in pingsByCategory)
+        foreach (var category in CategoryOrder)
         {
-            if (category == "primary") continue;
+            var categoryActions = pingButtons
+                .Where(ping => ping.UiCategory == category)
+                .Select(CreatePingOption)
+                .Cast<RadialMenuOption>()
+                .ToList();
 
-            var categoryActions = pings.Select(kvp => CreatePingOption(kvp.Key, kvp.Value)).Cast<RadialMenuOption>().ToList();
+            if (categoryActions.Count == 0)
+                continue;
 
-            if (categoryActions.Count > 0)
-            {
-                var nestedOption = CreateNestedCategoryOption(category, categoryActions);
-                options.Add(nestedOption);
-            }
+            options.Add(CreateNestedCategoryOption(category, categoryActions));
         }
 
         return options;
     }
 
-    private Dictionary<string, Dictionary<string, (string Name, Color Color, string Description)>> GroupPingsByCategory(
+    private List<PingButtonData> BuildPingButtons(
         Dictionary<string, (string Name, Color Color, string Description)> availablePings)
     {
-        var grouped = new Dictionary<string, Dictionary<string, (string Name, Color Color, string Description)>>();
+        var buttons = new List<PingButtonData>(availablePings.Count);
 
         foreach (var (pingType, pingInfo) in availablePings)
         {
-            var pingData = GetPingDataFromEntityId(pingType);
-            if (pingData == null)
+            if (!TryGetPingDataAndSprite(pingType, out var pingData, out var sprite))
                 continue;
 
-            var category = pingData.Categories.FirstOrDefault();
-            if (string.IsNullOrEmpty(category))
-                continue;
-
-            var uiCategory = category switch
-            {
-                "tactical" when IsPrimaryTactical(pingType) => "primary",
-                "tactical" => "tactical",
-                "construction" => "construction",
-                "support" => "support",
-                "hunting" => "support",
-                "warning" => "primary",
-                _ => null
-            };
-
-            if (uiCategory == null)
-                continue;
-
-            if (!grouped.ContainsKey(uiCategory))
-                grouped[uiCategory] = new Dictionary<string, (string Name, Color Color, string Description)>();
-
-            grouped[uiCategory][pingType] = pingInfo;
+            var firstCategory = pingData.Categories.FirstOrDefault();
+            var uiCategory = GetUiCategory(pingType, firstCategory);
+            buttons.Add(new PingButtonData(
+                PingType: pingType,
+                Name: pingInfo.Name,
+                Description: pingInfo.Description,
+                Color: pingInfo.Color,
+                Priority: pingData.Priority,
+                UiCategory: uiCategory,
+                Sprite: sprite
+            ));
         }
 
-        return grouped;
+        return buttons;
     }
 
     private bool IsPrimaryTactical(string pingType)
@@ -220,36 +226,31 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         return pingType is "XenoPingMove" or "XenoPingDefend" or "XenoPingAttack" or "XenoPingRegroup";
     }
 
-    private Dictionary<string, (string Name, Color Color, string Description)> GetPrimaryPings(
-        Dictionary<string, (string Name, Color Color, string Description)> availablePings)
+    private string? GetUiCategory(string pingType, string? prototypeCategory)
     {
-        var primary = new Dictionary<string, (string Name, Color Color, string Description)>();
-
-        foreach (var (pingType, pingInfo) in availablePings)
+        return prototypeCategory switch
         {
-            var pingData = GetPingDataFromEntityId(pingType);
-            if (pingData == null)
-                continue;
+            "tactical" when IsPrimaryTactical(pingType) => "primary",
+            "tactical" => "tactical",
+            "construction" => "construction",
+            "support" => "support",
+            "hunting" => "support",
+            "warning" => "primary",
+            _ => null
+        };
+    }
 
-            if (pingData.Priority >= 85 || IsPrimaryTactical(pingType))
-            {
-                primary[pingType] = pingInfo;
-            }
-        }
-
-        return primary
-            .OrderByDescending(kvp =>
-            {
-                var pingData = GetPingDataFromEntityId(kvp.Key);
-                return pingData?.Priority ?? 0;
-            })
-            .Take(6)
-            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    private IEnumerable<PingButtonData> GetPrimaryPings(List<PingButtonData> pingButtons)
+    {
+        return pingButtons
+            .Where(ping => ping.Priority >= 85 || IsPrimaryTactical(ping.PingType))
+            .OrderByDescending(ping => ping.Priority)
+            .Take(6);
     }
 
     private RadialMenuNestedLayerOption CreateNestedCategoryOption(string category, List<RadialMenuOption> actions)
     {
-        var (categoryName, categoryIcon, categoryColor) = GetCategoryInfo(category);
+        var (categoryName, categoryIcon) = GetCategoryInfo(category);
 
         return new RadialMenuNestedLayerOption(actions, 100)
         {
@@ -260,84 +261,91 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         };
     }
 
-    private (string Name, SpriteSpecifier Icon, Color Color) GetCategoryInfo(string category)
+    private (string Name, SpriteSpecifier Icon) GetCategoryInfo(string category)
     {
-        return category switch
-        {
-            "tactical" => ("Tactical Commands",
-                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "fortify"),
-                Color.OrangeRed),
-
-            "support" => ("Support Commands",
-                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "aide"),
-                Color.LimeGreen),
-
-            "construction" => ("Construction",
-                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "weed"),
-                Color.ForestGreen),
-
-            _ => ("Commands",
-                new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "no_direction"),
-                Color.Gray)
-        };
+        return CategoryInfo.TryGetValue(category, out var info)
+            ? info
+            : ("Commands", DefaultPingSprite);
     }
 
-    private ColoredRadialMenuActionOption<string> CreatePingOption(string pingType, (string Name, Color Color, string Description) pingInfo)
+    private ColoredRadialMenuActionOption<string> CreatePingOption(PingButtonData ping)
     {
-        var sprite = GetSpriteForPingType(pingType);
-        var tooltip = BuildTooltip(pingInfo, pingType);
+        var tooltip = BuildTooltip(ping);
 
-        return new ColoredRadialMenuActionOption<string>(HandlePingSelection, pingType)
+        return new ColoredRadialMenuActionOption<string>(HandlePingSelection, ping.PingType)
         {
             ToolTip = tooltip,
             BackgroundColor = MenuBackgroundColor,
             HoverBackgroundColor = MenuHoverBackgroundColor,
-            Sprite = sprite,
-            SpriteColor = pingInfo.Color
+            Sprite = ping.Sprite,
+            SpriteColor = ping.Color
         };
     }
 
-    private SpriteSpecifier GetSpriteForPingType(string pingType)
+    private bool TryGetPingDataAndSprite(
+        string entityId,
+        out XenoPingDataComponent pingData,
+        out SpriteSpecifier sprite)
     {
-        if (_prototypeManager.TryIndex<EntityPrototype>(pingType, out var entityProto))
-        {
-            if (entityProto.Components.TryGetValue("Sprite", out var spriteData))
-            {
-                try
-                {
-                    var spriteComp = (SpriteComponent)spriteData.Component;
-                    if (spriteComp.BaseRSI != null && spriteComp[0].RsiState.IsValid)
-                    {
-                        var stateName = spriteComp[0].RsiState.Name;
-                        if (!string.IsNullOrEmpty(stateName))
-                        {
-                            return new SpriteSpecifier.Rsi(new ResPath(spriteComp.BaseRSI.Path.ToString()), stateName);
-                        }
-                    }
-                }
-                catch
-                {
+        sprite = DefaultPingSprite;
+        pingData = default!;
 
-                }
-            }
+        if (!_prototypeManager.TryIndex<EntityPrototype>(entityId, out var prototype))
+            return false;
+
+        if (!prototype.TryGetComponent<XenoPingDataComponent>(out var pingDataComponent, _entityManager.ComponentFactory) ||
+            pingDataComponent == null)
+            return false;
+
+        pingData = pingDataComponent;
+
+        if (prototype.TryGetComponent<SpriteComponent>(out var spriteComponent, _entityManager.ComponentFactory) &&
+            TryGetSpriteSpecifier(spriteComponent, out var spriteSpecifier))
+        {
+            sprite = spriteSpecifier;
         }
 
-        return new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Markers/xeno_markers.rsi"), "no_direction");
+        return true;
     }
 
-    private string BuildTooltip((string Name, Color Color, string Description) pingInfo, string pingType)
+    private static bool TryGetSpriteSpecifier(SpriteComponent spriteComponent, out SpriteSpecifier sprite)
     {
-        var tooltip = $"{pingInfo.Name}\n{pingInfo.Description}";
+        sprite = DefaultPingSprite;
 
-        var pingData = GetPingDataFromEntityId(pingType);
-        if (pingData != null && pingData.Priority > 90)
+        if (spriteComponent.BaseRSI == null)
+            return false;
+
+        foreach (var layer in spriteComponent.AllLayers)
+        {
+            if (!layer.RsiState.IsValid)
+                continue;
+
+            var stateName = layer.RsiState.Name;
+            if (string.IsNullOrWhiteSpace(stateName))
+                continue;
+
+            var rsi = layer.Rsi ?? spriteComponent.BaseRSI;
+            sprite = new SpriteSpecifier.Rsi(new ResPath(rsi.Path.ToString()), stateName);
+            return true;
+        }
+
+        return false;
+    }
+
+    private string BuildTooltip(PingButtonData ping)
+    {
+        var tooltip = $"{ping.Name}\n{ping.Description}";
+
+        if (ping.Priority > 90)
         {
             tooltip += "\n[High Priority]";
         }
 
         if (_targetEntity != null)
         {
-            var targetName = _entityManager.GetComponent<MetaDataComponent>(_targetEntity.Value).EntityName ?? "Unknown";
+            var targetName = _entityManager.TryGetComponent(_targetEntity.Value, out MetaDataComponent? metaData)
+                ? metaData.EntityName
+                : "Unknown";
             tooltip += $"\nTarget: {targetName}";
         }
         else
@@ -346,17 +354,6 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
         }
 
         return tooltip;
-    }
-
-    private XenoPingDataComponent? GetPingDataFromEntityId(string entityId)
-    {
-        if (!_prototypeManager.TryIndex<EntityPrototype>(entityId, out var prototype))
-            return null;
-
-        if (!prototype.Components.TryGetValue("XenoPingData", out var pingDataComponent))
-            return null;
-
-        return (XenoPingDataComponent)pingDataComponent.Component;
     }
 
     private void HandlePingSelection(string pingType)
@@ -381,12 +378,15 @@ public sealed class XenoPingUIController : UIController, IOnStateChanged<Gamepla
 
     private void CloseMenu()
     {
+        _targetCoordinates = null;
+        _targetEntity = null;
+
         if (_menu == null)
             return;
 
         _menu.OnClose -= OnWindowClosed;
+        _menu.Close();
+        _menu.Dispose();
         _menu = null;
-        _targetCoordinates = null;
-        _targetEntity = null;
     }
 }

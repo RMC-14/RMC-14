@@ -27,7 +27,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
     public override OverlaySpace Space => OverlaySpace.ScreenSpace;
 
     private const float EdgePadding = 120f;
-    private const float BaseWaypointScale = 1.5f;
+    private const float BaseWaypointScale = 1.2f;
     private const float PulseAmplitude = 0.08f;
     private const float PulseFrequency = 1.8f;
     private const float FadeInDistance = 300f;
@@ -35,7 +35,7 @@ public abstract class RMCPingWaypointOverlay : Overlay
     private const float MaxVisibleDistanceSquared = MaxVisibleDistance * MaxVisibleDistance;
     private const float ScreenMargin = 50f;
 
-    private const float WaypointRadius = 28f;
+    private const float WaypointRadius = 22f;
     private const float MinSeparationDistance = 5f;
     private const int MaxOverlapIterations = 4;
     private const float GroupingDistance = 180f;
@@ -453,8 +453,8 @@ public abstract class RMCPingWaypointOverlay : Overlay
 
     private void DrawGroupIndicator(DrawingHandleScreen handle, Vector2 position, int count, float alpha)
     {
-        var indicatorPos = position + new Vector2(22f, -22f);
-        const float radius = 9f;
+        var indicatorPos = position + new Vector2(18f, -18f);
+        const float radius = 7f;
 
         handle.DrawCircle(indicatorPos, radius + 1f, Color.Black.WithAlpha(alpha * 0.6f), true);
         handle.DrawCircle(indicatorPos, radius, Color.FromHex("#2a4d3a").WithAlpha(alpha * 0.9f), true);

@@ -16,6 +16,9 @@ public sealed partial class XenoPingEntityComponent : Component, RMCPingEntityCo
     public EntityUid Creator;
 
     [DataField, AutoNetworkedField]
+    public EntityUid Hive;
+
+    [DataField, AutoNetworkedField]
     public TimeSpan Lifetime = TimeSpan.FromSeconds(30);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField, AutoPausedField]

@@ -57,10 +57,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
         if (!Exists(pingUid) || !TryComp<TPingEntityComponent>(pingUid, out var pingComp))
             return;
 
-        if (pingComp.Creator == EntityUid.Invalid || !Exists(pingComp.Creator))
-            return;
-
-        var shouldShow = ShouldShowPing(pingComp.Creator);
+        var shouldShow = ShouldShowPing(pingUid, pingComp);
 
         if (TryComp<SpriteComponent>(pingUid, out var spriteComp))
             spriteComp.Visible = shouldShow;
@@ -142,7 +139,12 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
         var query = EntityQueryEnumerator<TPingEntityComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var ping, out var xform))
         {
-            if (!ShouldShowPing(ping.Creator))
+            var shouldShow = ShouldShowPing(uid, ping);
+
+            if (TryComp<SpriteComponent>(uid, out var spriteComp))
+                spriteComp.Visible = shouldShow;
+
+            if (!shouldShow)
                 continue;
 
             loadedPings.Add(uid);
@@ -220,6 +222,12 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
             if (TryComp<TPingEntityComponent>(uid, out var pingComp))
             {
+                if (!ShouldShowPing(uid, pingComp))
+                {
+                    _pingWaypoints.Remove(uid);
+                    continue;
+                }
+
                 waypointData.AttachedTarget = pingComp.AttachedTarget;
                 waypointData.WorldPosition = pingComp.WorldPosition;
                 waypointData.IsTargetValid = pingComp.AttachedTarget.HasValue;
@@ -234,7 +242,11 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
         foreach (var (uid, data) in _pingWaypoints)
         {
-            if (currentTime >= data.DeleteAt || !ShouldShowPing(data.Creator))
+            var shouldShow = ShouldShowPing(data.Creator);
+            if (TryComp<TPingEntityComponent>(uid, out var pingComp))
+                shouldShow = ShouldShowPing(uid, pingComp);
+
+            if (currentTime >= data.DeleteAt || !shouldShow)
                 toRemove.Add(uid);
         }
 
@@ -245,6 +257,11 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
     }
 
     protected abstract bool ShouldShowPing(EntityUid pingCreator);
+
+    protected virtual bool ShouldShowPing(EntityUid pingUid, TPingEntityComponent pingComp)
+    {
+        return ShouldShowPing(pingComp.Creator);
+    }
 
     public IReadOnlyDictionary<EntityUid, PingWaypointData> GetPingWaypoints() => _pingWaypoints;
 

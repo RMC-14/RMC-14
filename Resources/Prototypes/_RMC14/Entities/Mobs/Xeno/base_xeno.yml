@@ -196,6 +196,8 @@
         type: XenoFruitChooseBui
       enum.XenoWordQueenUI.Key:
         type: XenoWordQueenBui
+      enum.XenoResinMarkUIKey.Key:
+        type: XenoResinMarkBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:

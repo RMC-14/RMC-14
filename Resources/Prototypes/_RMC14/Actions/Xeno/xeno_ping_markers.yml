@@ -10,7 +10,9 @@
   - type: Sprite
     sprite: _RMC14/Markers/xeno_markers.rsi
     drawdepth: Effects
-    scale: 1.5, 1.5
+    scale: 0.5, 0.5
+  - type: Visibility
+    layer: 32768
   - type: AnimationPlayer
   - type: Tag
     tags:

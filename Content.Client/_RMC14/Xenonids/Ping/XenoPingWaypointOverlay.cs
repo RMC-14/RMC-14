@@ -26,7 +26,7 @@ public sealed class XenoPingWaypointOverlay : RMCPingWaypointOverlay
 
     protected override bool ShouldIncludeWaypoint(PingWaypointData waypoint, EntityUid player)
     {
-        return _ping.CanSeePingCreator(player, waypoint.Creator);
+        return _ping.CanSeePing(player, waypoint);
     }
 
     protected override Color GetCreatorTextColor(EntityUid creator)

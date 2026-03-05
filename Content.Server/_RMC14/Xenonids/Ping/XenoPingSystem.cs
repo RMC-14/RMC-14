@@ -98,7 +98,7 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
     {
         var (lifetime, roleColor, popupType) = role switch
         {
-            CreatorRole.Queen => (TimeSpan.FromSeconds(QueenPingLifetimeSeconds), Color.FromHex("#FFD700"), PopupType.Large),
+            CreatorRole.Queen => (TimeSpan.FromSeconds(QueenPingLifetimeSeconds), Color.FromHex("#D8B4FF"), PopupType.Large),
             CreatorRole.HiveLeader => (TimeSpan.FromSeconds(HiveLeaderPingLifetimeSeconds), Color.FromHex("#FF4500"), PopupType.Large),
             _ => (TimeSpan.FromSeconds(NormalPingLifetimeSeconds), (Color?)null, PopupType.Medium)
         };
@@ -153,6 +153,12 @@ public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEn
         PopupType popupType, EntityUid? targetEntity = null)
     {
         var ping = SpawnPingEntity(creator, pingEntityId, coordinates, lifetime, targetEntity);
+        if (TryComp<XenoPingEntityComponent>(ping, out var pingComp))
+        {
+            pingComp.Hive = hive.Owner;
+            Dirty(ping, pingComp);
+        }
+
         var locationName = GetLocationName(coordinates);
         var creatorName = Name(creator);
         var targetMessage = GetTargetMessage(targetEntity);
