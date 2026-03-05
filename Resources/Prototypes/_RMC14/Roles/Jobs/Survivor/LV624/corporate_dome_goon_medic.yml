@@ -3,6 +3,13 @@
   id: CMSurvivorLV624CorporateDomeGoonMedic
   name: rmc-job-name-pmc-corporate-goon-medic
   description: cm-job-description-survivor
+  requirements:
+  - !type:RoleTimeRequirement
+    role: CMJobHospitalCorpsman
+    time: 36000 # 10 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsSurvivor
+    time: 5400 # 1.5 hours
   spawnMenuRoleName: We-Ya Goon Medic (Survivor Special)
   startingGear: RMCGearSurvivorGoon
   icon: "RMCJobIconPMCGoonMedic"
