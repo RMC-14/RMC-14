@@ -104,7 +104,7 @@ public sealed class RMCSmokeSystem : SharedRMCSmokeSystem
 
         if (_prototype.TryIndex(ent.Comp.Spawn, out var spawnProto) && spawnProto.HasComponent<EvenSmokeComponent>())
         {
-            Debug.Assert(!spawnProto.HasComponent<EvenSmokeComponent>()); // This will cause an infinite loop.
+            Debug.Assert(!spawnProto.HasComponent<EvenSmokeComponent>()); // This would cause an infinite loop, so we return.
             return;
         }
 

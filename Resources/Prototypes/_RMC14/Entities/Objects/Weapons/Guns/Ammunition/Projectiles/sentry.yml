@@ -100,7 +100,6 @@
     duration: 5
     offsetForward: true
 
-
 - type: entity
   parent: RMCBaseBulletSentryFireProjectile
   id: RMCBulletSentryFireProjectileBlue
