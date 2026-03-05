@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Ping;
 using Robust.Shared.Audio;
 using Robust.Shared.GameObjects;
 using System.Collections.Generic;
@@ -5,29 +6,31 @@ using System.Collections.Generic;
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
 [RegisterComponent]
-public sealed partial class XenoPingDataComponent : Component
+public sealed partial class XenoPingDataComponent : Component, RMCPingDataComponent
 {
-    [DataField("name", required: true)]
+    [DataField(required: true)]
     public string Name { get; set; } = string.Empty;
 
-    [DataField("description")]
+    [DataField]
     public string Description { get; set; } = string.Empty;
 
-    [DataField("chatMessage", required: true)]
+    [DataField(required: true)]
     public string ChatMessage { get; set; } = string.Empty;
 
-    [DataField("popupMessage", required: true)]
+    [DataField(required: true)]
     public string PopupMessage { get; set; } = string.Empty;
 
-    [DataField("sound")]
+    [DataField]
     public SoundSpecifier? Sound { get; set; }
 
-    [DataField("priority")]
+    [DataField]
     public int Priority { get; set; } = 0;
 
-    [DataField("isConstruction")]
+    [DataField]
     public bool IsConstruction { get; set; } = false;
 
-    [DataField("categories")]
+    [DataField]
     public HashSet<string> Categories { get; set; } = new();
+
+    IReadOnlyCollection<string> RMCPingDataComponent.Categories => Categories;
 }

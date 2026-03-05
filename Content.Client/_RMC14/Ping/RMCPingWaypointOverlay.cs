@@ -1,10 +1,4 @@
-using System.Numerics;
 using Content.Client.Resources;
-using Content.Shared._RMC14.Xenonids.Ping;
-using Content.Shared._RMC14.Xenonids.Evolution;
-using Content.Shared._RMC14.Xenonids.HiveLeader;
-using Content.Shared._RMC14.Xenonids;
-using Content.Shared._RMC14.Xenonids.Hive;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -12,24 +6,21 @@ using Robust.Client.ResourceManagement;
 using Robust.Shared.Enums;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Robust.Shared.Utility;
 using System.Linq;
+using System.Numerics;
 
-namespace Content.Client._RMC14.Xenonids.Ping;
+namespace Content.Client._RMC14.Ping;
 
-//this code is cursed
-public sealed class PingWaypointOverlay : Overlay
+public abstract class RMCPingWaypointOverlay : Overlay
 {
-    [Dependency] private readonly IEntityManager _entity = default!;
+    [Dependency] protected readonly IEntityManager Entity = default!;
     [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IEyeManager _eye = default!;
     [Dependency] private readonly IResourceCache _resourceCache = default!;
 
-    private readonly SpriteSystem _sprite;
     private readonly TransformSystem _transform;
-    private readonly SharedXenoHiveSystem _hive;
     private readonly ShaderInstance _shader;
     private readonly Font _font;
 
@@ -44,73 +35,74 @@ public sealed class PingWaypointOverlay : Overlay
     private const float MaxVisibleDistanceSquared = MaxVisibleDistance * MaxVisibleDistance;
     private const float ScreenMargin = 50f;
 
-    // layout
     private const float WaypointRadius = 28f;
     private const float MinSeparationDistance = 5f;
-    private const float MaxOverlapResolutionDistance = 150f;
     private const int MaxOverlapIterations = 4;
-    private const float CornerAvoidanceRadius = 40f;
-    private const float EdgePreferenceWeight = 0.4f;
-    private const float RepulsionForce = 10f;
-
-    // grouping
     private const float GroupingDistance = 180f;
     private const float GroupingDistanceSquared = GroupingDistance * GroupingDistance;
     private const float MinGroupingViewDistance = 25f;
     private const float MinGroupingViewDistanceSquared = MinGroupingViewDistance * MinGroupingViewDistance;
-
-    // cahe
-    private Vector2 _lastScreenSize = Vector2.Zero;
-    private TimeSpan _lastScreenSizeCheck = TimeSpan.Zero;
-    private const double ScreenSizeCheckInterval = 0.3;
-    private const double PositionCacheTimeout = 0.8;
-
-    // pre-calculated screen values (updated when screen size changes)
-    private Vector2 _screenCenter;
-    private WaypointBounds _screenBounds;
-    private float _fadeRange;
-
-    private readonly Dictionary<EntityUid, CachedWaypointData> _waypointCache = new();
-    private readonly List<WaypointPositionData> _workingPositions = new();
-    private readonly HashSet<EntityUid> _expiredEntities = new();
-
-    private readonly Dictionary<EntityUid, Vector2> _velocities = new();
+    private const float RepulsionForce = 10f;
     private const float Damping = 0.85f;
     private const float MaxVelocity = 5f;
 
-    public PingWaypointOverlay()
+    private const double ScreenSizeCheckInterval = 0.3;
+    private const double PositionCacheTimeout = 0.8;
+
+    private Vector2 _lastScreenSize = Vector2.Zero;
+    private TimeSpan _lastScreenSizeCheck = TimeSpan.Zero;
+    private Vector2 _screenCenter;
+    private WaypointBounds _screenBounds;
+    private readonly Dictionary<EntityUid, CachedWaypointData> _waypointCache = new();
+    private readonly List<WaypointPositionData> _workingPositions = new();
+    private readonly HashSet<EntityUid> _expiredEntities = new();
+    private readonly Dictionary<EntityUid, Vector2> _velocities = new();
+    private readonly float _fadeRange;
+
+    protected RMCPingWaypointOverlay()
     {
         IoCManager.InjectDependencies(this);
 
-        _sprite = _entity.System<SpriteSystem>();
-        _transform = _entity.System<TransformSystem>();
-        _hive = _entity.System<SharedXenoHiveSystem>();
+        _transform = Entity.System<TransformSystem>();
         _shader = _prototype.Index<ShaderPrototype>("unshaded").Instance();
         _font = _resourceCache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 9);
-
-        ZIndex = 100;
-
         _fadeRange = MaxVisibleDistance - FadeInDistance;
+        ZIndex = 100;
+    }
+
+    protected abstract IReadOnlyDictionary<EntityUid, PingWaypointData> GetWaypoints();
+    protected abstract bool CanViewWaypoints(EntityUid player);
+    protected abstract bool ShouldIncludeWaypoint(PingWaypointData waypoint, EntityUid player);
+    protected abstract Color GetCreatorTextColor(EntityUid creator);
+
+    protected virtual int GetWaypointPriority(PingWaypointData waypoint) => 0;
+
+    protected virtual float GetWaypointRadius(PingWaypointData waypoint)
+    {
+        var radius = WaypointRadius;
+        if (waypoint.GroupCount > 1)
+            radius *= 1.2f;
+
+        return radius;
     }
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        var player = _players.LocalEntity;
-        if (!player.HasValue) return;
+        if (_players.LocalEntity is not { } player || !CanViewWaypoints(player))
+            return;
 
         var handle = args.ScreenHandle;
         var screenSize = CheckAndUpdateScreenSize(args);
 
         handle.UseShader(_shader);
 
-        var playerPos = _transform.GetWorldPosition(player.Value);
-        var waypoints = _entity.System<XenoPingSystem>().GetPingWaypoints();
+        var playerPos = _transform.GetWorldPosition(player);
+        var waypoints = GetWaypoints();
 
         CleanExpiredEntities(waypoints);
 
-        var filteredWaypoints = FilterWaypointsByHive(waypoints, player.Value);
+        var filteredWaypoints = FilterWaypoints(waypoints, player);
         var groupedWaypoints = GroupWaypoints(filteredWaypoints, playerPos);
-
         CalculateAndResolvePositions(groupedWaypoints, playerPos, screenSize);
 
         foreach (var positionData in _workingPositions)
@@ -122,27 +114,12 @@ public sealed class PingWaypointOverlay : Overlay
         _workingPositions.Clear();
     }
 
-    private List<PingWaypointData> FilterWaypointsByHive(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints, EntityUid player)
+    private List<PingWaypointData> FilterWaypoints(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints, EntityUid player)
     {
         var result = new List<PingWaypointData>();
-
-        if (!_entity.HasComponent<XenoComponent>(player) || !_entity.HasComponent<HiveMemberComponent>(player))
-            return result;
-
-        var playerHive = _hive.GetHive(player);
-        if (playerHive == null)
-            return result;
-
         foreach (var waypoint in waypoints.Values)
         {
-            if (!_entity.HasComponent<HiveMemberComponent>(waypoint.Creator))
-                continue;
-
-            var creatorHive = _hive.GetHive(waypoint.Creator);
-            if (creatorHive == null)
-                continue;
-
-            if (playerHive.Value.Owner == creatorHive.Value.Owner)
+            if (ShouldIncludeWaypoint(waypoint, player))
                 result.Add(waypoint);
         }
 
@@ -155,17 +132,19 @@ public sealed class PingWaypointOverlay : Overlay
 
         foreach (var waypoint in waypoints)
         {
-            if (!waypoint.IsValid || waypoint.Texture == null) continue;
+            if (!waypoint.IsValid || waypoint.Texture == null)
+                continue;
 
             var distanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, playerPos);
-            if (distanceSquared > MaxVisibleDistanceSquared) continue;
+            if (distanceSquared > MaxVisibleDistanceSquared)
+                continue;
 
-            if (!ShouldDrawWaypoint(waypoint, screenSize)) continue;
+            if (!ShouldDrawWaypoint(waypoint, screenSize))
+                continue;
 
             var distance = MathF.Sqrt(distanceSquared);
             var targetPosition = CalculateTargetPosition(waypoint.WorldPosition, playerPos);
 
-            // use cache if possible
             Vector2 currentPosition;
             if (_waypointCache.TryGetValue(waypoint.EntityUid, out var cached) &&
                 (currentTime - cached.LastUpdate).TotalSeconds < PositionCacheTimeout)
@@ -194,18 +173,19 @@ public sealed class PingWaypointOverlay : Overlay
             });
         }
 
-        // force based collision
         ResolveCollisionsWithForces(currentTime);
     }
 
     private void ResolveCollisionsWithForces(TimeSpan currentTime)
     {
-        var deltaTime = 1f / 60f; //assuming 60fps
+        const float deltaTime = 1f / 60f;
 
         _workingPositions.Sort((a, b) =>
         {
             var priorityComp = a.Priority.CompareTo(b.Priority);
-            if (priorityComp != 0) return priorityComp;
+            if (priorityComp != 0)
+                return priorityComp;
+
             return a.Distance.CompareTo(b.Distance);
         });
 
@@ -222,15 +202,12 @@ public sealed class PingWaypointOverlay : Overlay
                     _velocities[uid] = Vector2.Zero;
 
                 var force = Vector2.Zero;
+                force += (current.TargetPosition - current.Position) * 0.3f;
 
-                // attraction to target positions
-                var targetForce = (current.TargetPosition - current.Position) * 0.3f;
-                force += targetForce;
-
-                // repulsion
                 for (var j = 0; j < _workingPositions.Count; j++)
                 {
-                    if (i == j) continue;
+                    if (i == j)
+                        continue;
 
                     var other = _workingPositions[j];
                     var separation = current.Position - other.Position;
@@ -241,39 +218,25 @@ public sealed class PingWaypointOverlay : Overlay
                     {
                         var overlap = minDistance - distance;
                         var repulsion = separation / distance * overlap * RepulsionForce;
-
-                        // higher priority waypoints push away lower priority ones more strongly
-                        if (current.Priority <= other.Priority)
-                        {
+                        if (current.Priority > other.Priority)
                             repulsion *= 1.5f;
-                        }
 
                         force += repulsion;
                     }
                 }
 
-                // boundary forces (keep them on screen)
                 force += CalculateBoundaryForces(current.Position, current.Radius);
 
                 _velocities[uid] = (_velocities[uid] + force * deltaTime) * Damping;
-
                 if (_velocities[uid].LengthSquared() > MaxVelocity * MaxVelocity)
-                {
                     _velocities[uid] = Vector2.Normalize(_velocities[uid]) * MaxVelocity;
-                }
 
-                // increase
                 var newPosition = current.Position + _velocities[uid] * deltaTime * 3f;
                 newPosition = ClampToScreenBounds(newPosition, current.Radius);
-
                 if (Vector2.Distance(current.Position, newPosition) > 0.2f)
-                {
                     hasSignificantMovement = true;
-                }
 
                 _workingPositions[i] = current with { Position = newPosition };
-
-                // Update cache
                 _waypointCache[uid] = new CachedWaypointData
                 {
                     Position = newPosition,
@@ -282,7 +245,6 @@ public sealed class PingWaypointOverlay : Overlay
                 };
             }
 
-            // if positions have stabilized, stop iterating
             if (!hasSignificantMovement)
                 break;
         }
@@ -291,21 +253,14 @@ public sealed class PingWaypointOverlay : Overlay
     private Vector2 CalculateBoundaryForces(Vector2 position, float radius)
     {
         var force = Vector2.Zero;
-        var pushForce = 25f;
+        const float pushForce = 25f;
 
-        // left
         if (position.X - radius < _screenBounds.Left)
             force.X += pushForce;
-
-        // right
         if (position.X + radius > _screenBounds.Right)
             force.X -= pushForce;
-
-        // top
         if (position.Y - radius < _screenBounds.Top)
             force.Y += pushForce;
-
-        // bottom
         if (position.Y + radius > _screenBounds.Bottom)
             force.Y -= pushForce;
 
@@ -316,8 +271,7 @@ public sealed class PingWaypointOverlay : Overlay
     {
         return new Vector2(
             Math.Clamp(position.X, _screenBounds.Left + radius, _screenBounds.Right - radius),
-            Math.Clamp(position.Y, _screenBounds.Top + radius, _screenBounds.Bottom - radius)
-        );
+            Math.Clamp(position.Y, _screenBounds.Top + radius, _screenBounds.Bottom - radius));
     }
 
     private void CleanExpiredEntities(IReadOnlyDictionary<EntityUid, PingWaypointData> waypoints)
@@ -327,9 +281,7 @@ public sealed class PingWaypointOverlay : Overlay
         foreach (var uid in _waypointCache.Keys)
         {
             if (!waypoints.ContainsKey(uid))
-            {
                 _expiredEntities.Add(uid);
-            }
         }
 
         foreach (var uid in _expiredEntities)
@@ -346,7 +298,8 @@ public sealed class PingWaypointOverlay : Overlay
 
         foreach (var waypoint in waypoints)
         {
-            if (processed.Contains(waypoint.EntityUid)) continue;
+            if (processed.Contains(waypoint.EntityUid))
+                continue;
 
             var playerDistanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, playerPos);
             if (playerDistanceSquared < MinGroupingViewDistanceSquared)
@@ -356,15 +309,17 @@ public sealed class PingWaypointOverlay : Overlay
                 continue;
             }
 
-            // all nearby waypoints from the same creator with the same ping type
             var group = new List<PingWaypointData> { waypoint };
             processed.Add(waypoint.EntityUid);
 
             foreach (var otherWaypoint in waypoints)
             {
-                if (processed.Contains(otherWaypoint.EntityUid)) continue;
-                if (otherWaypoint.Creator != waypoint.Creator) continue;
-                if (otherWaypoint.PingType != waypoint.PingType) continue;
+                if (processed.Contains(otherWaypoint.EntityUid))
+                    continue;
+                if (otherWaypoint.Creator != waypoint.Creator)
+                    continue;
+                if (otherWaypoint.PingType != waypoint.PingType)
+                    continue;
 
                 var distanceSquared = Vector2.DistanceSquared(waypoint.WorldPosition, otherWaypoint.WorldPosition);
                 if (distanceSquared <= GroupingDistanceSquared)
@@ -382,23 +337,21 @@ public sealed class PingWaypointOverlay : Overlay
 
     private PingWaypointData CreateGroupedWaypoint(List<PingWaypointData> group)
     {
-
-        // weighted center based on recency
         var totalWeight = 0f;
         var weightedCenter = Vector2.Zero;
         var currentTime = _timing.CurTime;
 
         foreach (var waypoint in group)
         {
-            var age = (float)(currentTime - waypoint.DeleteAt + waypoint.DeleteAt).TotalSeconds;
-            var weight = Math.Max(0.1f, 1f - age / 30f); // newer waypoints have more weight
+            var remainingLifetime = (float) Math.Max(0, (waypoint.DeleteAt - currentTime).TotalSeconds);
+            var weight = Math.Max(0.1f, remainingLifetime + 0.1f);
             weightedCenter += waypoint.WorldPosition * weight;
             totalWeight += weight;
         }
 
         weightedCenter /= totalWeight;
 
-        var baseWaypoint = group.OrderByDescending(w => currentTime - w.DeleteAt + w.DeleteAt).First();
+        var baseWaypoint = group.OrderByDescending(w => w.DeleteAt).First();
 
         return new PingWaypointData(
             baseWaypoint.EntityUid,
@@ -409,8 +362,7 @@ public sealed class PingWaypointOverlay : Overlay
             baseWaypoint.MapId,
             baseWaypoint.Color,
             baseWaypoint.Texture,
-            group.Max(w => w.DeleteAt)
-        )
+            group.Max(w => w.DeleteAt))
         {
             EntityIsLoaded = baseWaypoint.EntityIsLoaded,
             GroupCount = group.Count
@@ -431,8 +383,6 @@ public sealed class PingWaypointOverlay : Overlay
                 _lastScreenSize = gameViewportSize;
                 _screenCenter = gameViewportSize * 0.5f;
                 _screenBounds = new WaypointBounds(gameViewportSize, EdgePadding);
-
-                // Clear caches on screen resize
                 _waypointCache.Clear();
                 _velocities.Clear();
             }
@@ -449,21 +399,21 @@ public sealed class PingWaypointOverlay : Overlay
 
         var gameViewportSize = new Vector2(
             Math.Abs(bottomRight.X - topLeft.X),
-            Math.Abs(bottomRight.Y - topLeft.Y)
-        );
+            Math.Abs(bottomRight.Y - topLeft.Y));
 
         return gameViewportSize.X < 100 || gameViewportSize.Y < 100 ? args.Viewport.Size : gameViewportSize;
     }
 
     private bool ShouldDrawWaypoint(PingWaypointData waypointData, Vector2 screenSize)
     {
-        if (!waypointData.EntityIsLoaded) return true;
+        if (!waypointData.EntityIsLoaded)
+            return true;
 
         var screenPos = _eye.WorldToScreen(waypointData.WorldPosition);
         return !IsOnScreenWithMargin(screenPos, screenSize) || !IsValidScreenPosition(screenPos);
     }
 
-    private bool IsOnScreenWithMargin(Vector2 screenPos, Vector2 screenSize)
+    private static bool IsOnScreenWithMargin(Vector2 screenPos, Vector2 screenSize)
     {
         return screenPos.X >= -ScreenMargin &&
                screenPos.X <= screenSize.X + ScreenMargin &&
@@ -474,12 +424,12 @@ public sealed class PingWaypointOverlay : Overlay
     private void DrawWaypoint(DrawingHandleScreen handle, WaypointPositionData positionData)
     {
         var waypoint = positionData.Waypoint;
-        if (waypoint.Texture == null) return;
+        if (waypoint.Texture == null)
+            return;
 
-        var time = (float)_timing.CurTime.TotalSeconds;
+        var time = (float) _timing.CurTime.TotalSeconds;
         var baseScale = waypoint.GroupCount > 1 ? BaseWaypointScale * 1.15f : BaseWaypointScale;
 
-        // pulsing animation
         var pulsePhase = time * PulseFrequency + waypoint.EntityUid.Id * 0.1f;
         var scale = baseScale * (1.0f + MathF.Sin(pulsePhase) * PulseAmplitude);
 
@@ -496,25 +446,20 @@ public sealed class PingWaypointOverlay : Overlay
         handle.SetTransform(Matrix3x2.Identity);
 
         if (waypoint.GroupCount > 1)
-        {
             DrawGroupIndicator(handle, positionData.Position, waypoint.GroupCount, alpha);
-        }
 
         DrawWaypointInfo(handle, positionData.Position, waypoint, positionData.Distance, alpha);
     }
 
     private void DrawGroupIndicator(DrawingHandleScreen handle, Vector2 position, int count, float alpha)
     {
-        // Draw a small circle with the count number
         var indicatorPos = position + new Vector2(22f, -22f);
-        var radius = 9f;
+        const float radius = 9f;
 
-        // Draw background circle
         handle.DrawCircle(indicatorPos, radius + 1f, Color.Black.WithAlpha(alpha * 0.6f), true);
         handle.DrawCircle(indicatorPos, radius, Color.FromHex("#2a4d3a").WithAlpha(alpha * 0.9f), true);
         handle.DrawCircle(indicatorPos, radius, Color.LimeGreen.WithAlpha(alpha * 0.8f));
 
-        // Draw count text
         var countText = count.ToString();
         var textDimensions = handle.GetDimensions(_font, countText, 0.75f);
         var textPos = indicatorPos - textDimensions * 0.5f;
@@ -525,95 +470,75 @@ public sealed class PingWaypointOverlay : Overlay
     {
         var distanceText = distance < 1000 ? $"{distance:F0}m" : $"{distance / 1000:F1}km";
         var creatorName = ExtractCreatorName(waypoint.Creator);
-        var groupInfo = waypoint.GroupCount > 1 ? $" (×{waypoint.GroupCount})" : "";
+        var groupInfo = waypoint.GroupCount > 1 ? $" (x{waypoint.GroupCount})" : "";
 
         var distanceLine = distanceText;
         var creatorLine = $"{creatorName}{groupInfo}";
 
         var textColor = GetCreatorTextColor(waypoint.Creator).WithAlpha(alpha * 0.95f);
         var shadowColor = Color.Black.WithAlpha(alpha * 0.8f);
-        var scale = 0.85f;
+        const float scale = 0.85f;
 
-        // text dimensions for positioning
         var distanceDimensions = handle.GetDimensions(_font, distanceLine, scale);
         var creatorDimensions = handle.GetDimensions(_font, creatorLine, scale);
         var maxWidth = Math.Max(distanceDimensions.X, creatorDimensions.X);
 
-        // label position based on waypoint location
         var labelOffset = CalculateLabelOffset(position, maxWidth);
         var labelBasePos = position + labelOffset;
 
-        // distance text
         var distancePos = labelBasePos + new Vector2(-distanceDimensions.X * 0.5f, 0f);
         DrawTextWithBackground(handle, distancePos, distanceLine, scale, textColor, shadowColor, alpha);
 
-        // creator text below distance
         var creatorPos = labelBasePos + new Vector2(-creatorDimensions.X * 0.5f, 12f);
         DrawTextWithBackground(handle, creatorPos, creatorLine, scale * 0.9f, textColor, shadowColor, alpha);
     }
 
     private Vector2 CalculateLabelOffset(Vector2 waypointPos, float textWidth)
     {
-
-        // which edge the waypoint is closest to
         var distToLeft = waypointPos.X - _screenBounds.Left;
         var distToRight = _screenBounds.Right - waypointPos.X;
         var distToTop = waypointPos.Y - _screenBounds.Top;
         var distToBottom = _screenBounds.Bottom - waypointPos.Y;
 
         var minDist = Math.Min(Math.Min(distToLeft, distToRight), Math.Min(distToTop, distToBottom));
+        const float baseOffset = 18f;
 
-        // base offset distance - closer to waypoint
-        var baseOffset = 18f;
-
-        // label position based on closest edge to avoid going off-screen
         if (minDist == distToLeft)
             return new Vector2(baseOffset + textWidth * 0.3f, -8f);
-        else if (minDist == distToRight)
+        if (minDist == distToRight)
             return new Vector2(-baseOffset - textWidth * 0.3f, -8f);
-        else if (minDist == distToTop)
+        if (minDist == distToTop)
             return new Vector2(0f, baseOffset);
-        else if (minDist == distToBottom)
+        if (minDist == distToBottom)
             return new Vector2(0f, -baseOffset - 16f);
-        else
-            return new Vector2(0f, baseOffset);
+
+        return new Vector2(0f, baseOffset);
     }
 
-    private void DrawTextWithBackground(DrawingHandleScreen handle, Vector2 position, string text, float scale, Color textColor, Color shadowColor, float alpha)
+    private void DrawTextWithBackground(
+        DrawingHandleScreen handle,
+        Vector2 position,
+        string text,
+        float scale,
+        Color textColor,
+        Color shadowColor,
+        float alpha)
     {
         var textDimensions = handle.GetDimensions(_font, text, scale);
         var padding = new Vector2(3f, 1f);
 
-        var bgRect = new UIBox2(
-            position - padding,
-            position + textDimensions + padding
-        );
-
+        var bgRect = new UIBox2(position - padding, position + textDimensions + padding);
         handle.DrawRect(bgRect, Color.Black.WithAlpha(alpha * 0.4f));
         handle.DrawString(_font, position + new Vector2(0.5f, 0.5f), text, scale, shadowColor);
         handle.DrawString(_font, position, text, scale, textColor);
     }
 
-    private Color GetCreatorTextColor(EntityUid creator)
-    {
-        if (!_entity.EntityExists(creator))
-            return Color.White;
-
-        if (_entity.HasComponent<XenoEvolutionGranterComponent>(creator))
-            return Color.Gold;
-
-        if (_entity.HasComponent<HiveLeaderComponent>(creator))
-            return Color.Orange;
-
-        return Color.LightGray;
-    }
-
     private string ExtractCreatorName(EntityUid creator)
     {
-        if (!_entity.EntityExists(creator))
+        if (!Entity.EntityExists(creator))
             return "Unknown";
 
-        var fullName = _entity.GetComponent<MetaDataComponent>(creator).EntityName ?? "Unknown";
+        var fullName = Entity.GetComponent<MetaDataComponent>(creator).EntityName ?? "Unknown";
 
         var openParen = fullName.LastIndexOf('(');
         if (openParen != -1)
@@ -632,10 +557,11 @@ public sealed class PingWaypointOverlay : Overlay
         return CalculateEdgePosition(direction);
     }
 
-    private Vector2 GetDirectionToEdge(Vector2 worldPos, Vector2 playerPos)
+    private static Vector2 GetDirectionToEdge(Vector2 worldPos, Vector2 playerPos)
     {
         var delta = worldPos - playerPos;
-        if (delta.LengthSquared() < 0.0001f) return Vector2.UnitX;
+        if (delta.LengthSquared() < 0.0001f)
+            return Vector2.UnitX;
 
         return Vector2.Normalize(new Vector2(delta.X, -delta.Y));
     }
@@ -644,11 +570,8 @@ public sealed class PingWaypointOverlay : Overlay
     {
         var bounds = _screenBounds;
         var center = _screenCenter;
-
-        // calculate intersection with screen boundaries
         var candidates = new List<Vector2>();
 
-        // right edge
         if (direction.X > 0.001f)
         {
             var t = (bounds.Right - center.X) / direction.X;
@@ -657,7 +580,6 @@ public sealed class PingWaypointOverlay : Overlay
                 candidates.Add(new Vector2(bounds.Right, y));
         }
 
-        // left edge
         if (direction.X < -0.001f)
         {
             var t = (bounds.Left - center.X) / direction.X;
@@ -666,7 +588,6 @@ public sealed class PingWaypointOverlay : Overlay
                 candidates.Add(new Vector2(bounds.Left, y));
         }
 
-        // bottom edge
         if (direction.Y > 0.001f)
         {
             var t = (bounds.Bottom - center.Y) / direction.Y;
@@ -675,7 +596,6 @@ public sealed class PingWaypointOverlay : Overlay
                 candidates.Add(new Vector2(x, bounds.Bottom));
         }
 
-        // top edge
         if (direction.Y < -0.001f)
         {
             var t = (bounds.Top - center.Y) / direction.Y;
@@ -689,32 +609,15 @@ public sealed class PingWaypointOverlay : Overlay
             : center + direction * 100f;
     }
 
-    private int GetWaypointPriority(PingWaypointData waypoint)
+    private static bool IsValidScreenPosition(Vector2 screenPos)
     {
-        if (_entity.HasComponent<XenoEvolutionGranterComponent>(waypoint.Creator))
-            return 0;
-        if (_entity.HasComponent<HiveLeaderComponent>(waypoint.Creator))
-            return 1;
-        return 2;
+        return !float.IsNaN(screenPos.X) &&
+               !float.IsNaN(screenPos.Y) &&
+               !float.IsInfinity(screenPos.X) &&
+               !float.IsInfinity(screenPos.Y) &&
+               Math.Abs(screenPos.X) < 50000 &&
+               Math.Abs(screenPos.Y) < 50000;
     }
-
-    private float GetWaypointRadius(PingWaypointData waypoint)
-    {
-        var baseRadius = WaypointRadius;
-
-        if (waypoint.GroupCount > 1)
-            baseRadius *= 1.2f;
-
-        if (_entity.HasComponent<XenoEvolutionGranterComponent>(waypoint.Creator))
-            baseRadius *= 1.1f;
-
-        return baseRadius;
-    }
-
-    private static bool IsValidScreenPosition(Vector2 screenPos) =>
-        !float.IsNaN(screenPos.X) && !float.IsNaN(screenPos.Y) &&
-        !float.IsInfinity(screenPos.X) && !float.IsInfinity(screenPos.Y) &&
-        Math.Abs(screenPos.X) < 50000 && Math.Abs(screenPos.Y) < 50000;
 
     private readonly record struct WaypointBounds(float Left, float Right, float Top, float Bottom)
     {

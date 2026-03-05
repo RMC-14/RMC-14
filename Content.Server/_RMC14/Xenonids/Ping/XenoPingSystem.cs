@@ -1,3 +1,4 @@
+using Content.Server._RMC14.Ping;
 using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Xenonids;
@@ -13,29 +14,22 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 
 namespace Content.Server._RMC14.Xenonids.Ping;
 
-public sealed class XenoPingSystem : SharedXenoPingSystem
+public sealed class XenoPingSystem : RMCPingSystem<XenoPingComponent, XenoPingEntityComponent, XenoPingDataComponent, XenoPingRequestEvent>
 {
     [Dependency] private readonly AreaSystem _areas = default!;
     [Dependency] private readonly SharedCMChatSystem _cmChat = default!;
     [Dependency] private readonly SharedChatSystem _chatSystem = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly HiveLeaderSystem _hiveLeader = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private readonly IPlayerManager _playerManager = default!;
 
-    private const double MinPingDelaySeconds = 2.0;
     private const int NormalXenoPingLimit = 3;
     private const int HiveLeaderPingLimit = 8;
     private const double QueenPingLifetimeSeconds = 40.0;
@@ -43,7 +37,6 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
     private const double NormalPingLifetimeSeconds = 8.0;
 
     private EntityQuery<XenoComponent> _xenoQuery;
-    private readonly Dictionary<EntityUid, TimeSpan> _lastPingTimes = new();
 
     public override void Initialize()
     {
@@ -51,76 +44,15 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
 
         _xenoQuery = GetEntityQuery<XenoComponent>();
 
-        SubscribeLocalEvent<XenoPingComponent, XenoPingRequestEvent>(OnPingRequest);
-        SubscribeNetworkEvent<XenoPingRequestEvent>(OnNetworkPingRequest);
         SubscribeLocalEvent<XenoPingEntityComponent, ComponentShutdown>(OnPingEntityShutdown);
     }
 
-    private void OnPingRequest(Entity<XenoPingComponent> ent, ref XenoPingRequestEvent args)
-    {
-        if (!ValidatePingCooldown(ent.Owner))
-            return;
-
-        var coordinates = GetCoordinates(args.Coordinates);
-        if (!IsValidCoordinates(coordinates))
-            return;
-
-        var targetEntity = ResolveTargetEntity(args.TargetEntity);
-        CreatePing(ent.Owner, args.PingType, coordinates, targetEntity);
-    }
-
-    private void OnNetworkPingRequest(XenoPingRequestEvent msg, EntitySessionEventArgs args)
-    {
-        if (args.SenderSession.AttachedEntity is not { } player)
-            return;
-
-        if (!ValidatePingCooldown(player))
-            return;
-
-        var coordinates = GetCoordinates(msg.Coordinates);
-        if (!IsValidCoordinates(coordinates))
-            return;
-
-        var targetEntity = ResolveTargetEntity(msg.TargetEntity);
-        CreatePing(player, msg.PingType, coordinates, targetEntity);
-    }
-
-    private bool ValidatePingCooldown(EntityUid creator)
-    {
-        var currentTime = _timing.CurTime;
-
-        if (_lastPingTimes.TryGetValue(creator, out var lastPing))
-        {
-            var timeSinceLastPing = (currentTime - lastPing).TotalSeconds;
-            if (timeSinceLastPing < MinPingDelaySeconds)
-            {
-                _popup.PopupEntity("You must wait before pinging again.", creator, creator, PopupType.SmallCaution);
-                return false;
-            }
-        }
-
-        _lastPingTimes[creator] = currentTime;
-        return true;
-    }
-
-    private void CreatePing(EntityUid creator, string pingEntityId, EntityCoordinates coordinates, EntityUid? targetEntity = null)
+    protected override void OnPingRequestValidated(EntityUid creator, string pingEntityId, XenoPingDataComponent pingData,
+        EntityCoordinates coordinates, EntityUid? targetEntity)
     {
         if (!ValidateXenoCreator(creator, out var hive))
             return;
 
-        if (!_prototypeManager.TryIndex<EntityPrototype>(pingEntityId, out var entityProto))
-        {
-            _popup.PopupEntity("Invalid ping type.", creator, creator, PopupType.SmallCaution);
-            return;
-        }
-
-        if (!entityProto.Components.TryGetValue("XenoPingData", out var pingDataComponent))
-        {
-            _popup.PopupEntity("Invalid ping configuration.", creator, creator, PopupType.SmallCaution);
-            return;
-        }
-
-        var pingData = (XenoPingDataComponent)pingDataComponent.Component;
         var creatorRole = DetermineCreatorRole(creator);
 
         EnforcePingLimits(creator, creatorRole);
@@ -142,7 +74,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         var hiveEntity = _hive.GetHive(creator);
         if (hiveEntity == null)
         {
-            _popup.PopupEntity("You must be in a hive to ping.", creator, creator, PopupType.SmallCaution);
+            Popup.PopupEntity("You must be in a hive to ping.", creator, creator, PopupType.SmallCaution);
             return false;
         }
 
@@ -220,7 +152,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         EntityCoordinates coordinates, Entity<HiveComponent> hive, TimeSpan lifetime, Color? chatColor,
         PopupType popupType, EntityUid? targetEntity = null)
     {
-        var ping = CreatePingEntity(creator, pingEntityId, coordinates, lifetime, targetEntity);
+        var ping = SpawnPingEntity(creator, pingEntityId, coordinates, lifetime, targetEntity);
         var locationName = GetLocationName(coordinates);
         var creatorName = Name(creator);
         var targetMessage = GetTargetMessage(targetEntity);
@@ -229,32 +161,6 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         ShowPopupToHiveMembers(creator, pingData, targetMessage, coordinates, hive, popupType);
         PlayPingSound(pingData, ping, hive);
 
-        return ping;
-    }
-
-    private EntityUid CreatePingEntity(EntityUid creator, string pingEntityId, EntityCoordinates coordinates,
-        TimeSpan lifetime, EntityUid? targetEntity)
-    {
-        var ping = Spawn(pingEntityId, coordinates);
-        var pingComp = EnsureComp<XenoPingEntityComponent>(ping);
-
-        pingComp.PingType = pingEntityId;
-        pingComp.Creator = creator;
-        pingComp.Lifetime = lifetime;
-        pingComp.DeleteAt = _timing.CurTime + lifetime;
-        pingComp.AttachedTarget = targetEntity;
-
-        if (targetEntity != null)
-        {
-            pingComp.LastKnownCoordinates = coordinates;
-            pingComp.WorldPosition = _transform.GetWorldPosition(targetEntity.Value);
-        }
-        else
-        {
-            pingComp.WorldPosition = _transform.ToMapCoordinates(coordinates).Position;
-        }
-
-        Dirty(ping, pingComp);
         return ping;
     }
 
@@ -296,7 +202,7 @@ public sealed class XenoPingSystem : SharedXenoPingSystem
         {
             if (member.Hive == hive.Owner)
             {
-                _popup.PopupCoordinates(message, coordinates, xenoUid, popupType);
+                Popup.PopupCoordinates(message, coordinates, xenoUid, popupType);
             }
         }
     }

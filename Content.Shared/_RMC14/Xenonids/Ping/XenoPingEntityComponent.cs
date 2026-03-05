@@ -1,3 +1,4 @@
+using Content.Shared._RMC14.Ping;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
@@ -6,7 +7,7 @@ using System.Numerics;
 namespace Content.Shared._RMC14.Xenonids.Ping;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause]
-public sealed partial class XenoPingEntityComponent : Component
+public sealed partial class XenoPingEntityComponent : Component, RMCPingEntityComponent
 {
     [DataField, AutoNetworkedField]
     public string PingType = "XenoPingMove";
@@ -28,4 +29,46 @@ public sealed partial class XenoPingEntityComponent : Component
 
     [DataField, AutoNetworkedField]
     public Vector2 WorldPosition;
+
+    string RMCPingEntityComponent.PingType
+    {
+        get => PingType;
+        set => PingType = value;
+    }
+
+    EntityUid RMCPingEntityComponent.Creator
+    {
+        get => Creator;
+        set => Creator = value;
+    }
+
+    TimeSpan RMCPingEntityComponent.Lifetime
+    {
+        get => Lifetime;
+        set => Lifetime = value;
+    }
+
+    TimeSpan RMCPingEntityComponent.DeleteAt
+    {
+        get => DeleteAt;
+        set => DeleteAt = value;
+    }
+
+    EntityUid? RMCPingEntityComponent.AttachedTarget
+    {
+        get => AttachedTarget;
+        set => AttachedTarget = value;
+    }
+
+    EntityCoordinates? RMCPingEntityComponent.LastKnownCoordinates
+    {
+        get => LastKnownCoordinates;
+        set => LastKnownCoordinates = value;
+    }
+
+    Vector2 RMCPingEntityComponent.WorldPosition
+    {
+        get => WorldPosition;
+        set => WorldPosition = value;
+    }
 }
