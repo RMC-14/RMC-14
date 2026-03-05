@@ -26,5 +26,5 @@ public sealed partial class XenoAcidShotgunComponent : Component
     public int MaxProjectiles = 9;
 
     [DataField, AutoNetworkedField]
-    public Angle MaxDeviation = Angle.FromDegrees(60);
+    public Angle MaxDeviation = Angle.FromDegrees(30);
 }
