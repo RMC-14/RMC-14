@@ -55,7 +55,7 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RMCCrateM5DemoSpecMixed
-  name: M5-ATL Mixed Crate (HE x2, AP x1)
+  name: M5-ATL Mixed Crate (HE x1, AP x1, WP x1)
   components:
   - type: StorageFill
     contents:

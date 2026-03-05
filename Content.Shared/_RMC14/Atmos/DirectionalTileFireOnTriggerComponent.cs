@@ -66,7 +66,7 @@ public sealed partial class DirectionalTileFireOnTriggerComponent : Component
     public int? Duration;
 
     /// <summary>
-    ///     IF the start of the fire should be slightly offset forward.
+    ///     Whether the start of the fire should be slightly offset forward.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool OffsetForward;
