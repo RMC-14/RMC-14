@@ -2,4 +2,4 @@ using Content.Shared.Actions;
 
 namespace Content.Shared._RMC14.Weapons.Ranged.Flamer;
 
-public sealed partial class RMCFlamerReagentOverrideActionEvent : InstantActionEvent;
+public sealed partial class RMCFlamerIntenseModeActionEvent : InstantActionEvent;
