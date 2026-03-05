@@ -77,6 +77,14 @@
   metamorphicMaxFillLevels: 6
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: true
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 2
+      - !type:AdjustReagent
+        reagent: Ethanol
+        amount: 0.05
   fizziness: 0.6
 
 - type: reagent
@@ -100,7 +108,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.1
+        amount: 0.25
 
 - type: reagent
   id: Cognac
@@ -124,7 +132,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: DeadRum
@@ -147,7 +155,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: Ethanol
@@ -171,7 +179,27 @@
           shouldHave: false
         damage:
           types:
-            Poison: 0.01
+            Poison: 0.25
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 30
+        - !type:OrganType
+          type: Dwarf
+          shouldHave: false
+        damage:
+          types:
+            Poison: 1
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentThreshold
+          min: 45
+        - !type:OrganType
+          type: Dwarf
+          shouldHave: false
+        damage:
+          types:
+            Poison: 2.25
       # dwarves take less toxin damage and heal a marginal amount of brute
       - !type:HealthChange
         conditions:
@@ -203,6 +231,10 @@
           shouldHave: false
       - !type:Drunk
         boozePower: 2
+        conditions:
+        - !type:ReagentThreshold
+          reagent: Ethanol
+          min: 120
 
 - type: reagent
   id: Gin
@@ -409,7 +441,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.8
 
 - type: reagent
   id: Whiskey
@@ -433,7 +465,7 @@
         factor: 2
       - !type:AdjustReagent
         reagent: Ethanol
-        amount: 0.2
+        amount: 0.4
 
 - type: reagent
   id: Wine
