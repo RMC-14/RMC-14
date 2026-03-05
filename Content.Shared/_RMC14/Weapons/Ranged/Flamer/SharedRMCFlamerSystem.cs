@@ -338,7 +338,10 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
             if (overComp.Duration != null)
                 maxDuration = (int)overComp.Duration;
             if (overComp.Reagent != null)
+            {
                 fireReagent = overComp.Reagent;
+                fireTile = _reagent.Index(fireReagent).FireEntity;
+            }
         }
         chainComp.Spawn = fireTile;
         chainComp.Tiles = tiles;
@@ -362,6 +365,12 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
     {
         color = default;
+
+        if (TryComp(flamer, out RMCFlamerReagentOverrideComponent? overComp) && overComp.Reagent != null)
+        {
+            color = _reagent.Index((string)overComp.Reagent).SubstanceColor;
+            return true;
+        }
         if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
             return false;
 

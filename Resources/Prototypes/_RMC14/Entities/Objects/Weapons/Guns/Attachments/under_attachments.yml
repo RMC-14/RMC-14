@@ -332,10 +332,10 @@
           False: { state: flamethrower }
   - type: UniqueAction
   - type: RMCFlamerReagentOverride
-    Intensity: 10
-    Duration: 10
-    Range: 5
-    Reagent: WeldingFuel
+    intensity: 10
+    duration: 10
+    range: 5
+    reagent: WeldingFuel
   - type: RMCFlamerIntenseMode
     normalIntensity: 10
     normalDuration: 10
@@ -347,6 +347,7 @@
     intenseRange: 2
     intenseFireCost: 5
     intenseFireReagent: RMCNapalmUT
+    hasIntenseVisuals: true
 
 - type: entity
   parent: RMCUnderAttachmentBase
