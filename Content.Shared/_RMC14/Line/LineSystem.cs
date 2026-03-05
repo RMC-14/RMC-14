@@ -170,8 +170,11 @@ public sealed class LineSystem : EntitySystem
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
+            if (_barricadeQuery.HasComp(uid))
             {
+                if (ignoreBarricades)
+                    continue;
+
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
