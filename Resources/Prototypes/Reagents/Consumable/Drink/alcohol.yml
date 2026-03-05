@@ -255,9 +255,6 @@
           reagent: Ethanol
           min: 15
           max: 29
-        - !type:OrganType # dwarves aren't actually immune to vomit for some reason
-          type: Dwarf
-          shouldHave: false
       - !type:ChemVomit
         probability: 0.1
         conditions:
@@ -265,24 +262,19 @@
           reagent: Ethanol
           min: 30
           max: 44
-        - !type:OrganType
-          type: Dwarf
-          shouldHave: false
       - !type:ChemVomit
         probability: 0.25
         conditions:
         - !type:ReagentThreshold
           reagent: Ethanol
           min: 45
-        - !type:OrganType
-          type: Dwarf
-          shouldHave: false
       - !type:Drunk # scale up drunk level with ethanol in body
         boozePower: 2
         conditions:
         - !type:ReagentThreshold
           reagent: Ethanol
           min: 1
+# TODO RMC14: make Dwarves actually not vomit with ethanol in their system
 
 - type: reagent
   id: Gin
