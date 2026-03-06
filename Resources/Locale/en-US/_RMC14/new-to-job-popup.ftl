@@ -65,3 +65,38 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
                                              In the case of a medevac, go to the back of the ship and interact with the red medevac module. This will bring the patient up onto your ship from the ground. Inform the Almayer's medical staff that they are coming aboard and make sure they are brought into their care.
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
+
+rmc-new-to-job-combat-tech = As a Combat Technician, your job as a frontline engineer is to help your squad by building fortifications, repairing machinery, and performing demolitions.
+
+                                             You will want a full compliment of tools; make sure to pack a blowtorch, wrench, wirecutters, crowbar, screwdriver, and security access tuner (often called a multitool). Additional tools that you can choose to take are an entrenching tool to fill sandbags and clear tunnels, or a light replacer to replace broken lights. Most tools can be found in tools vendors, including the middle vendor in your preperation room.
+
+                                             Your turret is a valuable bit of equipment, pick it up by using your multitool and keep it safe by repairing it with your blowtorch, you can inspect your turret to see if it needs repairs. Always remember to wear eye protection before welding, otherwise you will blind yourself! Welding goggles, welding helmets, or welding visors will all keep your eyes safe.
+
+                                             You are a skilled engineer, so by using your tools you can perform a number of useful repairs in the field: generators, APCs, static communications towers, and the experimental sensor tower all might need your expertise to fix. If you are unsure how to repair something, you can always inspect it and the tooltip will tell you the next required step.
+
+                                             Use the metal and plasteel in your possession to build barricades to keep your squad safe, you can open any material's construction menu by pressing Z with it in your hand. Always remember to put barbed wires on your cades!
+
+                                             You can help deconstruct the area of operations to remove obstacles blocking your squad. You can purchase plastic explosives and breaching charges in your vendor to provide quick explosive openings, or you can use your tools to slowly deconstruct the walls.
+
+rmc-new-to-job-maint-tech = As a Maintenance Technician, your job is to perform any required shipside engineering tasks and busy yourself with projects.
+
+                                             One of the most important engineering duties is preparing the orbital cannon. Assist the Chief Engineer with fueling and loading the cannon at CIC's direction.
+
+                                             Enter the maintenance tunnels to scrap barrels and crates with your crowbar. Make sure to only scrap barrels and crates, everything else is off limits for scrapping... unless the Commander calls for shipside deconstruction: this allows you to begin deconstructing more parts of the ship for metal to help the battle. If you are unsure, you can ask your Chief Engineer. Bring any metal and wood you salvage to Requisitions so they can make good use of it!
+
+                                             You have the time and freedom to do other things like:
+
+                                             Explore the ship and learn its layout, there are interesting things to be found in out-of-the-way places.
+
+                                             Build televisions and lathes. Construct a machine frame out of metal sheet and complete the construction steps shown when you inspect it, the required circuit boards can be found inside vendors in the engineering section.
+
+                                             Perform a rennovation of an area. Make sure to get permission from both the Chief Engineer and the Department Head of the area you wish to rennovate.
+
+                                             Deploy to help construct the FOB alongside Bravo squad, your engineering skills could prove invaluable. Make sure to get deployment permission from the Chief Engineer or Commander.
+rmc-new-to-job-cl = You are a Liaison from the Corporate Relations Division of the Weston-Yamada Corporation, sent to make sure both WEYA has their interests maintained while improving and aiding relations with the UNMC. As a Corporate Liaison, you serve as a roleplay role, intended to create interesting and fun roleplay while not having a major effect on the operation. You are subject to Marine Law and are expected not to break it.
+
+                                             Your office contains a large amount of RP-relevant supplies, from papers and pens to clothing and cigars. Make sure to familiarize yourself with your office; it's essentially your home base. Use your fax machine to fax Weston-Yamada to report information or make requests. You will oftentimes not receive a response, and this is normal.
+
+                                             You are not an antagonistic role, nor are you a combat role. Do not be antagonistic to other players or take antagonistic action: You are supposed to positively represent Weston-Yamada. Do not deploy to the planet in order to fight xenos. You are not trained to fight, nor are you expected to.
+
+                                             If you have any other questions, consult the guidebook's Corporate Liaison page.

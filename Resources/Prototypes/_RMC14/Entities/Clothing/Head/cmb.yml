@@ -18,6 +18,15 @@
     # armor_energy = 30
   - type: RMCEarProtection
 
+- type: entity
+  parent: RMCArmorHelmetM10CMB
+  id: RMCArmorHelmetM10CMBVisorSWAT
+  suffix: Visor
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCVisorSWAT
+
 - type: entity # RMC14 - reskinned M11R for ICB surv insert
   parent: RMCArmorHelmetM10CMB
   id: RMCArmorHelmetM10ICB
@@ -28,12 +37,3 @@
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Helmets/CMB/icb_helmet.rsi
-
-- type: entity
-  parent: RMCArmorHelmetM10CMB
-  id: RMCArmorHelmetM10CMBVisor
-  suffix: Visor
-  components:
-  - type: StorageFill
-    contents:
-    - id: RMCVisorSWAT

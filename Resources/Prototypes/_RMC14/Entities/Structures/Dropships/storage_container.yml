@@ -1,0 +1,36 @@
+# PVE Dropship Exclusive
+- type: entity
+  parent: BaseStorageItem
+  id: RMCDropshipStorageCompartment
+  name: storage compartment
+  description: A wide storage unit to allow it's users to store a wide variety of objects, from equipment to weapons and their ammo. Very versatile.
+  suffix: PVE
+  components:
+  - type: Sprite # TODO: Use Open and Close Sprites if someone is interacting with the storage.
+    drawdepth: WallMountedItems
+    noRot: true
+    sprite: _RMC14/Structures/Dropships/storage_container.rsi
+    state: closed
+  - type: Storage
+    maxItemSize: Ginormous
+    blacklist:
+      tags:
+      - Backpack
+      - RMCAmmoBox
+    grid:
+    - 0,0,20,1
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: Appearance
+  - type: Corrodible
+    isCorrodible: false
+  - type: Physics
+    bodyType: Static
+  - type: WallMount
+    arc: 360
+  - type: RemoveComponents
+    components:
+    - type: Item
+    - type: RMCItemPickup

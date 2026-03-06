@@ -122,6 +122,46 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/engi.rsi
 
+- type: entity
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitSPPSOF
+  name: CCC5-L compression undersuit
+  description: A temperature-regulating pressure suit forming the base layer of the CCC5-L system. It provides compression support, limited vacuum resistance, moisture-wicking properties, and NBC protection to sustain operators in hazardous conditions.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/sof_uniform.rsi
+  - type: Tag
+    tags:
+    - RMCUniformSPP
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPMariner
+  name: SPP Mariner Fatigues
+  description: A set of SPP fatigues specifcially designed for Marines and Mariners.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/mariner.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-jacket-verb-unfold
+    foldVerbText: rmc-jacket-verb-fold
+
+- type: entity
+  parent: CMJumpsuitSPP
+  id: RMCJumpsuitSPPOfficerShirt
+  name: SPP Officer's Shirt
+  description: A well-tailored off-white shirt and pants, designed for officers who don't use fatigues.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
+    
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: RMCJumpsuitSPPOfficerAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSPPCommandFilled
+
 # Civilians
 - type: entity
   parent: RMCUniformBase
