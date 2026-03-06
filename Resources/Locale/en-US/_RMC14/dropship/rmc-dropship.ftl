@@ -126,3 +126,5 @@ rmc-dropship-equipment-undeployed = UNDEPLOYED
 rmc-dropship-equipment-operational = OPERATIONAL
 rmc-dropship-equipment-damaged = DAMAGED
 rmc-dropship-equipment-destroyed = DESTROYED
+
+rmc-dropship-launch-alarm-xeno-shutdown = We slash at {$console}, silencing its squawking!
