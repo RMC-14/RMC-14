@@ -144,9 +144,11 @@ namespace Content.Server.GameTicking
             ProtoId<JobPrototype> job,
             IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
         {
+            var currentMap = _distressSignal?.SelectedPlanetMapId;
+
             if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
             {
-                var selected = prefs.SelectProfileForJob(job);
+                var selected = prefs.SelectProfileForJob(job, currentMap);
                 if (selected != null)
                     return selected;
 
@@ -285,7 +287,7 @@ namespace Content.Server.GameTicking
             // For non-randomized characters, try to pick a profile that requested the chosen job.
             if (!_randomizeCharacters)
             {
-                var matchingProfile = playerPreferences.SelectProfileForJob(jobId);
+                var matchingProfile = playerPreferences.SelectProfileForJob(jobId, _distressSignal?.SelectedPlanetMapId);
                 if (matchingProfile != null)
                 {
                     character = matchingProfile;

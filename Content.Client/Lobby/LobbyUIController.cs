@@ -396,7 +396,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (profile != null && jobClothes)
         {
             job ??= GetPreferredJob(profile);
-            previewEntity = job.JobPreviewEntity ?? (EntProtoId?) job.JobEntity;
+            if (job != null)
+                previewEntity = job.JobPreviewEntity ?? (EntProtoId?) job.JobEntity;
         }
 
         if (previewEntity != null)
@@ -418,28 +419,59 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (profile != null && jobClothes)
         {
             job ??= GetPreferredJob(profile);
-            GiveDummyJobClothes(dummy, profile, job);
-
-            if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
+            if (job != null)
             {
-                var loadout = profile.GetLoadoutOrDefault(
-                    LoadoutSystem.GetJobPrototype(job.ID),
-                    _playerManager.LocalSession,
-                    profile.Species,
-                    EntityManager,
-                    _prototypeManager);
+                GiveDummyJobClothes(dummy, profile, job);
 
-                GiveDummyLoadout(dummy, loadout);
+                if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
+                {
+                    var loadout = profile.GetLoadoutOrDefault(
+                        LoadoutSystem.GetJobPrototype(job.ID),
+                        _playerManager.LocalSession,
+                        profile.Species,
+                        EntityManager,
+                        _prototypeManager);
+
+                    GiveDummyLoadout(dummy, loadout);
+                }
             }
         }
 
         return dummy;
     }
 
-    private JobPrototype GetPreferredJob(HumanoidCharacterProfile profile)
+    private JobPrototype? GetPreferredJob(HumanoidCharacterProfile profile)
     {
-        var highPriority = profile.JobPriorities.FirstOrDefault(p => p.Value == JobPriority.High).Key;
-        return _prototypeManager.Index<JobPrototype>(highPriority.Id ?? SharedGameTicker.FallbackOverflowJob);
+        var globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? [];
+        var candidates = profile.JobPreferences
+            .Where(jobId => _prototypeManager.HasIndex<JobPrototype>(jobId))
+            .Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
+            .ToList();
+
+        if (candidates.Count == 0)
+            return null;
+
+        JobPriority GetEffectivePriority(JobPrototype job)
+        {
+            if (globalPriorities.TryGetValue(job.ID, out var globalPriority))
+                return globalPriority;
+
+            if (profile.JobPriorities.TryGetValue(job.ID, out var profilePriority))
+                return profilePriority;
+
+            return JobPriority.Never;
+        }
+
+        candidates.Sort((a, b) =>
+        {
+            var priorityCompare = GetEffectivePriority(b).CompareTo(GetEffectivePriority(a));
+            if (priorityCompare != 0)
+                return priorityCompare;
+
+            return string.CompareOrdinal(a.ID, b.ID);
+        });
+
+        return candidates[0];
     }
 
     private void GiveDummyLoadout(EntityUid uid, RoleLoadout? roleLoadout)
@@ -464,7 +496,9 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (!_inventory.TryGetSlots(dummy, out var slots))
             return;
 
-        if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
+        var previewStartingGear = job.DummyStartingGear ?? job.StartingGear;
+        if (previewStartingGear == null ||
+            !_prototypeManager.TryIndex(previewStartingGear.Value, out var gear))
             return;
 
         foreach (var slot in slots)

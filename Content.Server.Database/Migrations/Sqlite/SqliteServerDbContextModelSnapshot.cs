@@ -841,6 +841,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasDefaultValue(true)
                         .HasColumnName("playtime_perks");
 
+                    b.Property<string>("PreferredMap")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("preferred_map");
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("INTEGER")
                         .HasColumnName("preference_id");

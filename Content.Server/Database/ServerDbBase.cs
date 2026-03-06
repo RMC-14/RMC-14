@@ -11,6 +11,7 @@ using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server.IP;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Database;
@@ -269,6 +270,9 @@ namespace Content.Server.Database
 
             var spawnPriority = (SpawnPriorityPreference) profile.SpawnPriority;
             var squadPreference = profile.SquadPreference?.Squad;
+            EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap = null;
+            if (!string.IsNullOrWhiteSpace(profile.PreferredMap))
+                preferredMap = new EntProtoId<RMCPlanetMapPrototypeComponent>(profile.PreferredMap!);
 
             var armorPreference = ArmorPreference.Random;
             if (Enum.TryParse<ArmorPreference>(profile.ArmorPreference, true, out var armorVal))
@@ -354,6 +358,7 @@ namespace Content.Server.Database
                 profile.PlaytimePerks,
                 profile.XenoPrefix,
                 profile.XenoPostfix,
+                preferredMap,
                 profile.Enabled
             );
         }
@@ -450,6 +455,7 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
+            profile.PreferredMap = humanoid.PreferredMap?.Id;
             profile.Enabled = humanoid.Enabled;
 
             return profile;

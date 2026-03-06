@@ -2,6 +2,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Xenonids.Name;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
@@ -160,6 +161,13 @@ namespace Content.Shared.Preferences
         [DataField]
         public bool Enabled { get; private set; } = true;
 
+        /// <summary>
+        /// Optional preferred distress-signal planet map for this character.
+        /// If set and currently active, this character is preferred for matching jobs.
+        /// </summary>
+        [DataField]
+        public EntProtoId<RMCPlanetMapPrototypeComponent>? PreferredMap { get; private set; }
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -180,6 +188,7 @@ namespace Content.Shared.Preferences
             bool playtimePerks,
             string xenoPrefix,
             string xenoPostfix,
+            EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap = null,
             bool enabled = true)
         {
             Name = name;
@@ -203,6 +212,7 @@ namespace Content.Shared.Preferences
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            PreferredMap = preferredMap;
             Enabled = enabled;
         }
 
@@ -227,6 +237,7 @@ namespace Content.Shared.Preferences
                 other.PlaytimePerks,
                 other.XenoPrefix,
                 other.XenoPostfix,
+                other.PreferredMap,
                 other.Enabled)
         {
         }
@@ -379,6 +390,11 @@ namespace Content.Shared.Preferences
         public HumanoidCharacterProfile WithEnabled(bool enabled)
         {
             return new(this) { Enabled = enabled };
+        }
+
+        public HumanoidCharacterProfile WithPreferredMap(EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap)
+        {
+            return new(this) { PreferredMap = preferredMap };
         }
 
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
@@ -569,6 +585,7 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (PreferredMap != other.PreferredMap) return false;
             if (Enabled != other.Enabled) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
@@ -725,6 +742,15 @@ namespace Content.Shared.Preferences
                 !team.RoundStart)
             {
                 SquadPreference = null;
+            }
+
+            if (PreferredMap is { } preferredMap)
+            {
+                if (!prototypeManager.TryIndex(preferredMap, out var preferredMapProto) ||
+                    !preferredMapProto.TryGetComponent<RMCPlanetMapPrototypeComponent>(out _, compFactory))
+                {
+                    PreferredMap = null;
+                }
             }
 
             _jobPriorities.Clear();
@@ -896,6 +922,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(PreferredMap);
             hashCode.Add(Enabled);
             return hashCode.ToHashCode();
         }

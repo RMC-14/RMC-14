@@ -206,6 +206,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
     public string? SelectedPlanetMapName => SelectedPlanetMap?.Proto.Name;
 
     [ViewVariables]
+    public EntProtoId<RMCPlanetMapPrototypeComponent>? SelectedPlanetMapId => SelectedPlanetMap?.Proto.ID;
+
+    [ViewVariables]
     public string? OperationName { get; private set; }
 
     public string? ActiveNightmareScenario { get; set; }
@@ -365,15 +368,16 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             HumanoidCharacterProfile SelectSpawnProfile(ICommonSession player, ProtoId<JobPrototype> primaryJob, ProtoId<JobPrototype>? secondaryJob = null)
             {
                 var fallbackProfile = GameTicker.GetPlayerProfile(player);
+                var currentMap = SelectedPlanetMap?.Proto.ID;
 
                 if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
                     return fallbackProfile;
 
-                if (preferences.SelectProfileForJob(primaryJob) is { } primaryProfile)
+                if (preferences.SelectProfileForJob(primaryJob, currentMap) is { } primaryProfile)
                     return primaryProfile;
 
                 if (secondaryJob is { } secondary &&
-                    preferences.SelectProfileForJob(secondary) is { } secondaryProfile)
+                    preferences.SelectProfileForJob(secondary, currentMap) is { } secondaryProfile)
                 {
                     return secondaryProfile;
                 }

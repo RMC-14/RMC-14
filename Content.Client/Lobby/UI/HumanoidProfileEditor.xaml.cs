@@ -14,6 +14,7 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.Marines.Squads;
 using Content.Shared._RMC14.NamedItems;
+using Content.Shared._RMC14.Rules;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
@@ -103,6 +104,7 @@ namespace Content.Client.Lobby.UI
         public HumanoidCharacterProfile? Profile;
 
         private List<SpeciesPrototype> _species = new();
+        private readonly List<EntProtoId<RMCPlanetMapPrototypeComponent>> _preferredMaps = new();
 
         private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector)> _jobPriorities = new();
 
@@ -425,6 +427,28 @@ namespace Content.Client.Lobby.UI
             };
 
             #endregion SquadPreference
+
+            #region MapPreference
+
+            RefreshPreferredMaps();
+            PreferredMapButton.OnItemSelected += args =>
+            {
+                PreferredMapButton.SelectId(args.Id);
+
+                if (args.Id == 0)
+                {
+                    SetPreferredMap(null);
+                    return;
+                }
+
+                var index = args.Id - 1;
+                if (index < 0 || index >= _preferredMaps.Count)
+                    return;
+
+                SetPreferredMap(_preferredMaps[index]);
+            };
+
+            #endregion MapPreference
 
             #region PlaytimePerks
 
@@ -878,6 +902,8 @@ namespace Content.Client.Lobby.UI
             UpdateSpawnPriorityControls();
             UpdateArmorPreferenceControls();
             UpdateSquadPreferenceControls();
+            RefreshPreferredMaps();
+            UpdatePreferredMapControls();
             UpdateAgeEdit();
             UpdateEyePickers();
             UpdateSaveButton();
@@ -1387,6 +1413,12 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        private void SetPreferredMap(EntProtoId<RMCPlanetMapPrototypeComponent>? preferredMap)
+        {
+            Profile = Profile?.WithPreferredMap(preferredMap);
+            SetDirty();
+        }
+
         private void SetPlaytimePerks(bool playtimePerks)
         {
             Profile = Profile?.WithPlaytimePerks(playtimePerks);
@@ -1624,6 +1656,43 @@ namespace Content.Client.Lobby.UI
             }
 
             SquadPreferenceButton.SelectId(index);
+        }
+
+        private void RefreshPreferredMaps()
+        {
+            _preferredMaps.Clear();
+            PreferredMapButton.Clear();
+            PreferredMapButton.AddItem(Loc.GetString("humanoid-profile-editor-preferred-map-none"), 0);
+
+            var planets = _entManager.System<RMCPlanetSystem>()
+                .GetAllPlanets()
+                .OrderBy(planet => planet.Proto.Name);
+
+            var index = 1;
+            foreach (var planet in planets)
+            {
+                _preferredMaps.Add(planet.Proto.ID);
+                PreferredMapButton.AddItem(planet.Proto.Name, index);
+                index++;
+            }
+        }
+
+        private void UpdatePreferredMapControls()
+        {
+            if (Profile == null)
+            {
+                PreferredMapButton.SelectId(0);
+                return;
+            }
+
+            if (Profile.PreferredMap is not { } preferredMap)
+            {
+                PreferredMapButton.SelectId(0);
+                return;
+            }
+
+            var index = _preferredMaps.IndexOf(preferredMap);
+            PreferredMapButton.SelectId(index >= 0 ? index + 1 : 0);
         }
 
         private void UpdateHairPickers()

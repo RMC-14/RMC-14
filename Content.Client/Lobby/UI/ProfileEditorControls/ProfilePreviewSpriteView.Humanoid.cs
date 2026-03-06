@@ -142,23 +142,36 @@ public sealed partial class ProfilePreviewSpriteView
     /// <param name="profile">Profile to get job for</param>
     private JobPrototype? GetPreferredJob(HumanoidCharacterProfile profile)
     {
-        ProtoId<JobPrototype> highPriorityJob = default;
-        if (profile.JobPreferences.Count == 1)
+        var globalPriorities = _preferencesManager.Preferences?.JobPriorities ?? [];
+        var candidates = profile.JobPreferences
+            .Where(jobId => _prototypeManager.HasIndex<JobPrototype>(jobId))
+            .Select(jobId => _prototypeManager.Index<JobPrototype>(jobId))
+            .ToList();
+
+        if (candidates.Count == 0)
+            return null;
+
+        JobPriority GetEffectivePriority(JobPrototype job)
         {
-            highPriorityJob = profile.JobPreferences.First();
+            if (globalPriorities.TryGetValue(job.ID, out var globalPriority))
+                return globalPriority;
+
+            if (profile.JobPriorities.TryGetValue(job.ID, out var profilePriority))
+                return profilePriority;
+
+            return JobPriority.Never;
         }
-        else
+
+        candidates.Sort((a, b) =>
         {
-            var priorities = _preferencesManager.Preferences?.JobPriorities ?? [];
-            foreach (var priority in new List<JobPriority>{JobPriority.High, JobPriority.Medium, JobPriority.Low})
-            {
-                highPriorityJob = profile.JobPreferences.FirstOrDefault(p => priorities.GetValueOrDefault(p) == priority);
-                if (highPriorityJob.Id != null)
-                    break;
-            }
-        }
-        // ReSharper disable once NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract (what is resharper smoking?)
-        return highPriorityJob.Id == null ? null : _prototypeManager.Index(highPriorityJob);
+            var priorityCompare = GetEffectivePriority(b).CompareTo(GetEffectivePriority(a));
+            if (priorityCompare != 0)
+                return priorityCompare;
+
+            return string.CompareOrdinal(a.ID, b.ID);
+        });
+
+        return candidates[0];
     }
 
     private string? GetLoadoutName(RoleLoadout? loadout)
@@ -198,7 +211,8 @@ public sealed partial class ProfilePreviewSpriteView
             return;
 
         // Apply loadout
-        if (profile.Loadouts.TryGetValue(job.ID, out var jobLoadout))
+        if (profile.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out var jobLoadout) ||
+            profile.Loadouts.TryGetValue(job.ID, out jobLoadout))
         {
             foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
             {
@@ -246,7 +260,9 @@ public sealed partial class ProfilePreviewSpriteView
             }
         }
 
-        if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
+        var previewStartingGear = job.DummyStartingGear ?? job.StartingGear;
+        if (previewStartingGear == null ||
+            !_prototypeManager.TryIndex(previewStartingGear.Value, out var gear))
             return;
 
         foreach (var slot in slots)

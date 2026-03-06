@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared._RMC14.Rules;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Roles;
 using Robust.Shared.Random;
@@ -123,7 +124,9 @@ namespace Content.Shared.Preferences
         /// <summary>
         /// Given a job, return a random enabled character asking for this job.
         /// </summary>
-        public HumanoidCharacterProfile? SelectProfileForJob(ProtoId<JobPrototype> job)
+        public HumanoidCharacterProfile? SelectProfileForJob(
+            ProtoId<JobPrototype> job,
+            EntProtoId<RMCPlanetMapPrototypeComponent>? currentMap = null)
         {
             List<HumanoidCharacterProfile> pool = [];
             foreach (var profile in Characters.Values)
@@ -138,7 +141,20 @@ namespace Content.Shared.Preferences
             }
 
             var random = IoCManager.Resolve<IRobustRandom>();
-            return pool.Count == 0 ? null : random.Pick(pool);
+            if (pool.Count == 0)
+                return null;
+
+            if (currentMap is { } map)
+            {
+                var mapPreferredPool = pool
+                    .Where(profile => profile.PreferredMap == map)
+                    .ToList();
+
+                if (mapPreferredPool.Count > 0)
+                    return random.Pick(mapPreferredPool);
+            }
+
+            return random.Pick(pool);
         }
 
         public Dictionary<int, HumanoidCharacterProfile> GetAllProfilesForJob(JobPrototype job)

@@ -890,6 +890,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasDefaultValue(true)
                         .HasColumnName("playtime_perks");
 
+                    b.Property<string>("PreferredMap")
+                        .HasColumnType("text")
+                        .HasColumnName("preferred_map");
+
                     b.Property<int>("PreferenceId")
                         .HasColumnType("integer")
                         .HasColumnName("preference_id");
