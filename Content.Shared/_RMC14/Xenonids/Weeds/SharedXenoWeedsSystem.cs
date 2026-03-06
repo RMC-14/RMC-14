@@ -383,6 +383,7 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
             _toUpdate.Add(ent);
     }
 
+    // Note: this only looks for source weeds (i.e. nodes)
     public bool HasWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 5)
     {
         var position = _mapSystem.LocalToTile(grid, grid, coordinates);
@@ -396,6 +397,35 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         }
 
         return false;
+    }
+
+    // Note: this looks for any type of weeds, not just source weeds (i.e. not just nodes)
+    public Entity<XenoWeedsComponent>[] GetWeedsNearby(Entity<MapGridComponent> grid, EntityCoordinates coordinates, int range = 1)
+    {
+        var position = _mapSystem.LocalToTile(grid, grid, coordinates);
+
+        var nearbyWeeds = new List<Entity<XenoWeedsComponent>>();
+
+        var minTile = new Vector2i(position.X - range, position.Y - range);
+        var maxTile = new Vector2i(position.X + range, position.Y + range);
+
+        for (int x = minTile.X; x <= maxTile.X; x++)
+        {
+            for (int y = minTile.Y; y <= maxTile.Y; y++)
+            {
+                var entEnumerator = _mapSystem.GetAnchoredEntitiesEnumerator(grid, grid, new Vector2i(x, y));
+
+                while (entEnumerator.MoveNext(out var anchored))
+                {
+                    if (!_weedsQuery.TryComp(anchored, out var weeds))
+                        continue;
+
+                    nearbyWeeds.Add(new Entity<XenoWeedsComponent>(anchored.Value, weeds));
+                }
+            }
+        }
+
+        return nearbyWeeds.ToArray();
     }
 
     public bool IsOnHiveWeeds(Entity<MapGridComponent> grid, EntityCoordinates coordinates, bool sourceOnly = false)
