@@ -7,11 +7,10 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Content.Client._RMC14.Ping;
 
-public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataComponent>
+public abstract class RMCPingSystem<TPingEntityComponent, TPingDataComponent>
     : SharedRMCPingSystem<TPingEntityComponent, TPingDataComponent>
     where TPingEntityComponent : Component, RMCPingEntityComponent
     where TPingDataComponent : Component, RMCPingDataComponent
@@ -21,6 +20,8 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     private readonly Dictionary<EntityUid, PingWaypointData> _pingWaypoints = new();
+    private readonly HashSet<EntityUid> _loadedPings = new();
+    private readonly List<EntityUid> _pendingRemovals = new();
 
     protected EntityUid? LocalPlayer => _playerManager.LocalEntity;
 
@@ -41,9 +42,6 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
     private void OnPingEntityInit(Entity<TPingEntityComponent> ent, ref ComponentInit args)
     {
-        if (TryComp<SpriteComponent>(ent.Owner, out var sprite))
-            sprite.Visible = false;
-
         ProcessPingVisibility(ent.Owner);
     }
 
@@ -137,7 +135,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
         if (LocalPlayer == null)
             return;
 
-        var loadedPings = new HashSet<EntityUid>();
+        _loadedPings.Clear();
 
         var query = EntityQueryEnumerator<TPingEntityComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var ping, out var xform))
@@ -153,7 +151,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
                 continue;
             }
 
-            loadedPings.Add(uid);
+            _loadedPings.Add(uid);
             var shouldCreateWaypoint = ShouldCreateWaypoint(uid, ping);
             if (!shouldCreateWaypoint)
             {
@@ -170,7 +168,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
             UpdateWaypointFromPing(waypointData, ping, xform, uid);
         }
 
-        CleanupUnloadedWaypoints(loadedPings);
+        CleanupUnloadedWaypoints(_loadedPings);
     }
 
     protected virtual void UpdateWaypointFromPing(
@@ -211,14 +209,16 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
     private void CleanupUnloadedWaypoints(HashSet<EntityUid> loadedPings)
     {
-        foreach (var (uid, waypointData) in _pingWaypoints.ToList())
+        _pendingRemovals.Clear();
+
+        foreach (var (uid, waypointData) in _pingWaypoints)
         {
             if (loadedPings.Contains(uid))
                 continue;
 
             if (!ShouldShowPing(waypointData.Creator))
             {
-                _pingWaypoints.Remove(uid);
+                _pendingRemovals.Add(uid);
                 continue;
             }
 
@@ -226,7 +226,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
             if (!EntityManager.EntityExists(uid))
             {
-                _pingWaypoints.Remove(uid);
+                _pendingRemovals.Add(uid);
                 continue;
             }
 
@@ -234,7 +234,7 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
             {
                 if (!ShouldShowPing(uid, pingComp))
                 {
-                    _pingWaypoints.Remove(uid);
+                    _pendingRemovals.Add(uid);
                     continue;
                 }
 
@@ -243,12 +243,17 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
                 waypointData.IsTargetValid = pingComp.AttachedTarget.HasValue;
             }
         }
+
+        foreach (var uid in _pendingRemovals)
+        {
+            _pingWaypoints.Remove(uid);
+        }
     }
 
     public sealed override void Update(float frameTime)
     {
         var currentTime = _timing.CurTime;
-        var toRemove = new List<EntityUid>();
+        _pendingRemovals.Clear();
 
         foreach (var (uid, data) in _pingWaypoints)
         {
@@ -257,10 +262,10 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
                 shouldShow = ShouldShowPing(uid, pingComp);
 
             if (currentTime >= data.DeleteAt || !shouldShow)
-                toRemove.Add(uid);
+                _pendingRemovals.Add(uid);
         }
 
-        foreach (var uid in toRemove)
+        foreach (var uid in _pendingRemovals)
         {
             _pingWaypoints.Remove(uid);
         }
@@ -277,35 +282,22 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
 
     public Dictionary<string, (string Name, Color Color, string Description)> GetAvailablePingTypesWithColors()
     {
-        var basePings = GetAvailablePingTypes();
-        var result = new Dictionary<string, (string Name, Color Color, string Description)>();
-
-        foreach (var (entityId, (name, description)) in basePings)
-        {
-            var color = GetColorFromEntityPrototype(entityId);
-            result[entityId] = (name, color, description);
-        }
-
-        return result;
+        return BuildPingTypeColorMap(GetAvailablePingTypes());
     }
 
     public Dictionary<string, (string Name, Color Color, string Description)> GetAvailableConstructionPingTypesWithColors()
     {
-        var basePings = GetAvailableConstructionPingTypes();
-        var result = new Dictionary<string, (string Name, Color Color, string Description)>();
-
-        foreach (var (entityId, (name, description)) in basePings)
-        {
-            var color = GetColorFromEntityPrototype(entityId);
-            result[entityId] = (name, color, description);
-        }
-
-        return result;
+        return BuildPingTypeColorMap(GetAvailableConstructionPingTypes());
     }
 
     public Dictionary<string, (string Name, Color Color, string Description)> GetPingsByCategoryWithColors(string category)
     {
-        var basePings = GetPingsByCategory(category);
+        return BuildPingTypeColorMap(GetPingsByCategory(category));
+    }
+
+    private Dictionary<string, (string Name, Color Color, string Description)> BuildPingTypeColorMap(
+        Dictionary<string, (string Name, string Description)> basePings)
+    {
         var result = new Dictionary<string, (string Name, Color Color, string Description)>();
 
         foreach (var (entityId, (name, description)) in basePings)
@@ -320,16 +312,10 @@ public abstract class RMCPingClientSystem<TPingEntityComponent, TPingDataCompone
     private Color GetColorFromEntityPrototype(string entityId)
     {
         if (_prototypeManager.TryIndex<EntityPrototype>(entityId, out var entityProto) &&
-            entityProto.Components.TryGetValue("Sprite", out var spriteComponent))
+            entityProto.Components.TryGetValue("Sprite", out var spriteComponent) &&
+            spriteComponent.Component is SpriteComponent spriteComp)
         {
-            try
-            {
-                var spriteComp = (SpriteComponent) spriteComponent.Component;
-                return spriteComp.Color;
-            }
-            catch
-            {
-            }
+            return spriteComp.Color;
         }
 
         return Color.White;

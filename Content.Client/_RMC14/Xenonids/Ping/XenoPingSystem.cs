@@ -9,7 +9,7 @@ using Robust.Shared.Configuration;
 
 namespace Content.Client._RMC14.Xenonids.Ping;
 
-public sealed class XenoPingSystem : RMCPingClientSystem<XenoPingEntityComponent, XenoPingDataComponent>
+public sealed class XenoPingSystem : RMCPingSystem<XenoPingEntityComponent, XenoPingDataComponent>
 {
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
