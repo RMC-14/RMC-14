@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Marines.Squads;
 [Access(typeof(SquadSystem))]
 public sealed partial class AssignSquadComponent : Component
 {
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public EntityWhitelist? Whitelist;
 
     [DataField, AutoNetworkedField]
