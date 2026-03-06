@@ -88,6 +88,11 @@ namespace Content.Client.Lobby.UI
         public JobPrototype? JobOverride;
 
         /// <summary>
+        /// Current state of the show-clothes toggle for profile previews.
+        /// </summary>
+        public bool ShouldShowClothes => ShowClothes.Pressed;
+
+        /// <summary>
         /// The character slot for the current profile.
         /// </summary>
         public int? CharacterSlot;
@@ -897,6 +902,17 @@ namespace Content.Client.Lobby.UI
             {
                 PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
             }
+        }
+
+        public void SetProfile(int slot)
+        {
+            if (_preferencesManager.Preferences?.TryGetHumanoidInSlot(slot, out var humanoid) != true)
+            {
+                SetProfile(null, null);
+                return;
+            }
+
+            SetProfile(humanoid, slot);
         }
 
 
