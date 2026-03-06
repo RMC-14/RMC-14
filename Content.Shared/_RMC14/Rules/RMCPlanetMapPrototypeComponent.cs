@@ -86,6 +86,7 @@ public sealed partial class RMCPlanetMapPrototypeComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Dictionary<string, EntProtoId<PaperComponent>>? SpecialFaxes;
+
 }
 
 [DataDefinition]

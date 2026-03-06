@@ -17,6 +17,7 @@
   requireAdminNotify: true
   hidden: false
   supervisors: nobody
+  icon: "RMCJobIconXenoQueen"
   jobPreviewEntity: RMCPlayerXenoQueenPreview
   accessGroups:
   - CMAccessXeno

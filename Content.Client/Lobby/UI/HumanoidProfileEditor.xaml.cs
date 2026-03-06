@@ -104,7 +104,7 @@ namespace Content.Client.Lobby.UI
 
         private List<SpeciesPrototype> _species = new();
 
-        private List<(string, RequirementsSelector)> _jobPriorities = new();
+        private List<(ProtoId<JobPrototype> JobId, RequirementsSelector PrioritySelector)> _jobPriorities = new();
 
         private readonly Dictionary<string, BoxContainer> _jobCategories;
 
@@ -922,6 +922,9 @@ namespace Content.Client.Lobby.UI
         private void ReloadProfilePreview()
         {
             if (Profile == null || !_entManager.EntityExists(PreviewDummy))
+                return;
+
+            if (!_entManager.TryGetComponent<HumanoidAppearanceComponent>(PreviewDummy, out _))
                 return;
 
             _entManager.System<HumanoidAppearanceSystem>().LoadProfile(PreviewDummy, Profile);

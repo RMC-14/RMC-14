@@ -345,6 +345,48 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 return true;
             }
 
+            var profileJobPriorities = new Dictionary<NetUserId, IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority>>();
+            foreach (var (id, profile) in ev.Profiles)
+            {
+                if (_prefsManager.TryGetCachedPreferences(id, out var preferences))
+                    profileJobPriorities[id] = preferences.JobPrioritiesFiltered();
+                else
+                    profileJobPriorities[id] = profile.JobPriorities;
+            }
+
+            bool TryGetPriority(NetUserId id, ProtoId<JobPrototype> job, out JobPriority priority)
+            {
+                priority = JobPriority.Never;
+                return profileJobPriorities.TryGetValue(id, out var priorities) &&
+                       priorities.TryGetValue(job, out priority) &&
+                       priority > JobPriority.Never;
+            }
+
+            HumanoidCharacterProfile SelectSpawnProfile(ICommonSession player, ProtoId<JobPrototype> primaryJob, ProtoId<JobPrototype>? secondaryJob = null)
+            {
+                var fallbackProfile = GameTicker.GetPlayerProfile(player);
+
+                if (!_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
+                    return fallbackProfile;
+
+                if (preferences.SelectProfileForJob(primaryJob) is { } primaryProfile)
+                    return primaryProfile;
+
+                if (secondaryJob is { } secondary &&
+                    preferences.SelectProfileForJob(secondary) is { } secondaryProfile)
+                {
+                    return secondaryProfile;
+                }
+
+                if (preferences.TryGetHumanoidInSlot(preferences.SelectedCharacterIndex, out var selectedProfile) &&
+                    selectedProfile != null)
+                {
+                    return selectedProfile;
+                }
+
+                return fallbackProfile;
+            }
+
             NetUserId? SpawnXeno(List<NetUserId> list, EntProtoId ent, bool doBurst = false)
             {
                 var playerId = _random.PickAndTake(list);
@@ -551,7 +593,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 ev.PlayerPool.Remove(player);
                 GameTicker.PlayerJoinGame(player);
 
-                var profile = GameTicker.GetPlayerProfile(player);
+                var profile = SelectSpawnProfile(player, spawnAsJob, job);
                 var coordinates = _transform.GetMoverCoordinates(spawner);
                 var survivorMob = _stationSpawning.SpawnPlayerMob(coordinates, spawnAsJob, profile, null);
 
@@ -589,7 +631,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
                 if (doBurst)
                 {
-                    var profile = GameTicker.GetPlayerProfile(player);
+                    var profile = SelectSpawnProfile(player, comp.XenoSurvivorCorpseJob);
                     var coordinates = _transform.GetMoverCoordinates(point);
                     var corpseMob = _stationSpawning.SpawnPlayerMob(coordinates, comp.XenoSurvivorCorpseJob, profile, null);
 
@@ -684,13 +726,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                 xenoCandidates[i] = [];
             }
 
-            foreach (var (id, profile) in ev.Profiles)
+            foreach (var (id, _) in ev.Profiles)
             {
                 if (!IsAllowed(id, comp.QueenJob))
                     continue;
 
-                if (profile.JobPriorities.TryGetValue(comp.QueenJob, out var priority) &&
-                    priority > JobPriority.Never)
+                if (TryGetPriority(id, comp.QueenJob, out var priority))
                 {
                     xenoCandidates[(int) priority].Add(id);
                 }
@@ -721,7 +762,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     list.Clear();
                 }
 
-                foreach (var (id, profile) in ev.Profiles)
+                foreach (var (id, _) in ev.Profiles)
                 {
                     if (id == queenSelected)
                         continue;
@@ -729,8 +770,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                     if (!IsAllowed(id, comp.XenoSelectableJob))
                         continue;
 
-                    if (profile.JobPriorities.TryGetValue(comp.XenoSelectableJob, out var priority) &&
-                        priority > JobPriority.Never)
+                    if (TryGetPriority(id, comp.XenoSelectableJob, out var priority))
                     {
                         xenoCandidates[(int) priority].Add(id);
                     }
@@ -791,17 +831,14 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (!IsAllowed(id, comp.CivilianSurvivorJob) || !IsAllowed(id, job))
                             continue;
 
-                        if (!ev.Profiles.TryGetValue(id, out var profile))
-                            continue;
-
                         var overriden = false;
 
                         if (comp.SurvivorJobOverrides != null)
                         { // Override the job
                             foreach (var (originalJob, overrideJob) in comp.SurvivorJobOverrides)
                             {
-                                if (profile.JobPriorities.TryGetValue(originalJob, out var originalPriority) &&
-                                    originalPriority > JobPriority.Never && overrideJob == job)
+                                if (TryGetPriority(id, originalJob, out var originalPriority) &&
+                                    overrideJob == job)
                                 {
                                     players[(int)originalPriority].Add(id);
                                     overriden = true;
@@ -813,8 +850,7 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
                         if (overriden)
                             continue;
 
-                        if (profile.JobPriorities.TryGetValue(job, out var priority) &&
-                            priority > JobPriority.Never)
+                        if (TryGetPriority(id, job, out var priority))
                         {
                             players[(int)priority].Add(id);
                         }
@@ -1279,13 +1315,13 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
             {
                 if (_prefsManager.TryGetCachedPreferences(player.UserId, out var preferences))
                 {
-                    var profile = (HumanoidCharacterProfile) preferences.GetProfile(preferences.SelectedCharacterIndex);
-                    if (profile.JobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
+                    var jobPriorities = preferences.JobPrioritiesFiltered();
+                    if (jobPriorities.TryGetValue(distress.XenoSelectableJob, out var xenoPriority) &&
                         xenoPriority > JobPriority.Never)
                     {
                         xenoCandidates++;
                     }
-                    else if (profile.JobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
+                    else if (jobPriorities.TryGetValue(distress.QueenJob, out var queenPriority) &&
                         queenPriority > JobPriority.Never)
                     {
                         xenoCandidates++;

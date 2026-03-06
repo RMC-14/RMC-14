@@ -72,6 +72,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _prototypeManager.PrototypesReloaded += OnProtoReload;
         _preferencesManager.OnServerDataLoaded += PreferencesDataLoaded;
         _requirements.Updated += OnRequirementsUpdated;
+        OnAnyCharacterOrJobChange += RefreshLobbyPreview;
 
         _configurationManager.OnValueChanged(CCVars.FlavorText, args =>
         {
@@ -327,6 +328,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         _characterSetup.SelectCharacter += args =>
         {
+            _preferencesManager.SelectCharacter(args);
             _profileEditor.SetProfile(args);
             if (_characterSetup != null)
                 _characterSetup.SelectedCharacterSlot = args;
@@ -347,6 +349,8 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 // Only need to reload character pickers
                 _characterSetup?.ReloadCharacterPickers();
             }
+
+            OnAnyCharacterOrJobChange?.Invoke();
         };
 
         _characterSetup.SetCharacterEnable += args =>
@@ -354,6 +358,23 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             _preferencesManager.SetCharacterEnable(args.Item1, args.Item2);
             OnAnyCharacterOrJobChange?.Invoke();
             _characterSetup?.ReloadCharacterPickers();
+        };
+
+        _characterSetup.OverrideJobPriorities += slot =>
+        {
+            if (!_preferencesManager.Preferences!.TryGetHumanoidInSlot(slot, out var humanoid) ||
+                humanoid == null)
+            {
+                return;
+            }
+
+            var priorities = humanoid.JobPriorities
+                .Where(kvp => kvp.Value != JobPriority.Never)
+                .ToDictionary();
+            _preferencesManager.UpdateJobPriorities(priorities);
+            OnAnyCharacterOrJobChange?.Invoke();
+            _jobPriorityEditor?.LoadJobPriorities();
+            _characterSetup?.ReloadCharacterPickers(selectJobPriorities: _jobPriorityEditor?.Visible == true);
         };
 
         if (_stateManager.CurrentState is LobbyState lobby)

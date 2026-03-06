@@ -54,21 +54,12 @@ namespace Content.Client.Lobby
 
         public void SelectCharacter(int slot)
         {
-            var updatedJobPriorities = Preferences.JobPriorities;
-            if (Preferences.Characters.TryGetValue(slot, out var selected) &&
-                selected is HumanoidCharacterProfile humanoid)
-            {
-                updatedJobPriorities = humanoid.JobPriorities
-                    .Where(kvp => kvp.Value != JobPriority.Never)
-                    .ToDictionary();
-            }
-
             Preferences = new PlayerPreferences(
                 Preferences.Characters,
                 slot,
                 Preferences.AdminOOCColor,
                 Preferences.ConstructionFavorites,
-                updatedJobPriorities);
+                Preferences.JobPriorities);
             var msg = new MsgSelectCharacter
             {
                 SelectedCharacterIndex = slot
@@ -82,21 +73,12 @@ namespace Content.Client.Lobby
             profile.EnsureValid(_playerManager.LocalSession!, collection);
             var characters = new Dictionary<int, ICharacterProfile>(Preferences.Characters) {[slot] = profile};
 
-            var updatedJobPriorities = Preferences.JobPriorities;
-            if (slot == Preferences.SelectedCharacterIndex &&
-                profile is HumanoidCharacterProfile humanoid)
-            {
-                updatedJobPriorities = humanoid.JobPriorities
-                    .Where(kvp => kvp.Value != JobPriority.Never)
-                    .ToDictionary();
-            }
-
             Preferences = new PlayerPreferences(
                 characters,
                 Preferences.SelectedCharacterIndex,
                 Preferences.AdminOOCColor,
                 Preferences.ConstructionFavorites,
-                updatedJobPriorities);
+                Preferences.JobPriorities);
             var msg = new MsgUpdateCharacter
             {
                 Profile = profile,

@@ -18,7 +18,9 @@
                                           SetSize="64 64"/>
 
         <!-- Name and job text -->
-        <Label Name="DescriptionLabel" HorizontalExpand="True" ClipText="True"/>
+        <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 4 0 4">
+            <Label Name="DescriptionLabel" HorizontalExpand="True" ClipText="True"/>
+        </BoxContainer>
 
         <!-- Vertical rule to separate the buttons -->
         <PanelContainer Name="ButtonDivider" MinSize="2 0">

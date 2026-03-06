@@ -11,7 +11,7 @@
   ranks:
     RMCRankCivilian: []
   startingGear: CMGearCorrespondent
-  icon: "CMJobIconEmpty"
+  icon: "RMCJobIconCorrespondent"
   joinNotifyCrew: false
   supervisors: rmc-job-supervisors-commander
   accessGroups:

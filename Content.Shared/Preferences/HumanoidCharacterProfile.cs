@@ -121,6 +121,11 @@ namespace Content.Shared.Preferences
         public IReadOnlyDictionary<ProtoId<JobPrototype>, JobPriority> JobPriorities => _jobPriorities;
 
         /// <summary>
+        /// Jobs this profile is willing to take.
+        /// </summary>
+        public IReadOnlySet<ProtoId<JobPrototype>> JobPreferences => _jobPriorities.Keys.ToHashSet();
+
+        /// <summary>
         /// <see cref="_antagPreferences"/>
         /// </summary>
         public IReadOnlySet<ProtoId<AntagPrototype>> AntagPreferences => _antagPreferences;
@@ -149,6 +154,12 @@ namespace Content.Shared.Preferences
         [DataField]
         public string XenoPostfix { get; private set; } = string.Empty;
 
+        /// <summary>
+        /// Whether this character slot is active for multi-slot assignment.
+        /// </summary>
+        [DataField]
+        public bool Enabled { get; private set; } = true;
+
         public HumanoidCharacterProfile(
             string name,
             string flavortext,
@@ -168,7 +179,8 @@ namespace Content.Shared.Preferences
             SharedRMCNamedItems namedItems,
             bool playtimePerks,
             string xenoPrefix,
-            string xenoPostfix)
+            string xenoPostfix,
+            bool enabled = true)
         {
             Name = name;
             FlavorText = flavortext;
@@ -185,25 +197,13 @@ namespace Content.Shared.Preferences
             _antagPreferences = antagPreferences;
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
-
-            var hasHighPrority = false;
-            foreach (var (key, value) in _jobPriorities)
-            {
-                if (value == JobPriority.Never)
-                    _jobPriorities.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    _jobPriorities[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            _jobPriorities = SanitizeJobPriorities(_jobPriorities);
 
             NamedItems = namedItems;
             PlaytimePerks = playtimePerks;
             XenoPrefix = xenoPrefix;
             XenoPostfix = xenoPostfix;
+            Enabled = enabled;
         }
 
         /// <summary>Copy constructor</summary>
@@ -226,7 +226,8 @@ namespace Content.Shared.Preferences
                 other.NamedItems,
                 other.PlaytimePerks,
                 other.XenoPrefix,
-                other.XenoPostfix)
+                other.XenoPostfix,
+                other.Enabled)
         {
         }
 
@@ -375,28 +376,49 @@ namespace Content.Shared.Preferences
             return new(this) { XenoPostfix = postfix };
         }
 
+        public HumanoidCharacterProfile WithEnabled(bool enabled)
+        {
+            return new(this) { Enabled = enabled };
+        }
+
         public HumanoidCharacterProfile WithJobPriorities(IEnumerable<KeyValuePair<ProtoId<JobPrototype>, JobPriority>> jobPriorities)
         {
-            var dictionary = new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities);
-            var hasHighPrority = false;
-
-            foreach (var (key, value) in dictionary)
-            {
-                if (value == JobPriority.Never)
-                    dictionary.Remove(key);
-                else if (value != JobPriority.High)
-                    continue;
-
-                if (hasHighPrority)
-                    dictionary[key] = JobPriority.Medium;
-
-                hasHighPrority = true;
-            }
+            var dictionary = SanitizeJobPriorities(new Dictionary<ProtoId<JobPrototype>, JobPriority>(jobPriorities));
 
             return new(this)
             {
                 _jobPriorities = dictionary
             };
+        }
+
+        private static Dictionary<ProtoId<JobPrototype>, JobPriority> SanitizeJobPriorities(
+            Dictionary<ProtoId<JobPrototype>, JobPriority> priorities)
+        {
+            var sanitized = new Dictionary<ProtoId<JobPrototype>, JobPriority>(priorities.Count);
+            var hasHighPriority = false;
+
+            foreach (var (job, priority) in priorities)
+            {
+                if (priority == JobPriority.Never)
+                    continue;
+
+                if (priority == JobPriority.High)
+                {
+                    if (hasHighPriority)
+                        sanitized[job] = JobPriority.Medium;
+                    else
+                    {
+                        sanitized[job] = JobPriority.High;
+                        hasHighPriority = true;
+                    }
+
+                    continue;
+                }
+
+                sanitized[job] = priority;
+            }
+
+            return sanitized;
         }
 
         public HumanoidCharacterProfile WithJobPriority(ProtoId<JobPrototype> jobId, JobPriority priority)
@@ -547,6 +569,7 @@ namespace Content.Shared.Preferences
             if (PlaytimePerks != other.PlaytimePerks) return false;
             if (XenoPrefix != other.XenoPrefix) return false;
             if (XenoPostfix != other.XenoPostfix) return false;
+            if (Enabled != other.Enabled) return false;
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -873,6 +896,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(PlaytimePerks);
             hashCode.Add(XenoPrefix);
             hashCode.Add(XenoPostfix);
+            hashCode.Add(Enabled);
             return hashCode.ToHashCode();
         }
 

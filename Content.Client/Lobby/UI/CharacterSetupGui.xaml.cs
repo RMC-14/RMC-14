@@ -52,6 +52,11 @@ namespace Content.Client.Lobby.UI
         public event Action<(int, bool)>? SetCharacterEnable;
 
         /// <summary>
+        /// Action invoked when all player-level job priorities should be overridden from a character slot.
+        /// </summary>
+        public event Action<int>? OverrideJobPriorities;
+
+        /// <summary>
         /// UI Class for the character customization window that pops up when you click "Customize" on the lobby screen
         /// </summary>
         public CharacterSetupGui(HumanoidProfileEditor profileEditor, JobPriorityEditor jobPriorityEditor)
@@ -98,6 +103,15 @@ namespace Content.Client.Lobby.UI
                 JobPriorityEditor.Visible = true;
                 ReloadCharacterPickers(selectJobPriorities: true);
             };
+
+            OverrideJobPrioritiesButton.OnPressed += _ =>
+            {
+                if (!_preferencesManager.ServerDataLoaded || _preferencesManager.Preferences == null)
+                    return;
+
+                var slot = SelectedCharacterSlot ?? _preferencesManager.Preferences.SelectedCharacterIndex;
+                OverrideJobPriorities?.Invoke(slot);
+            };
         }
 
         /// <summary>
@@ -127,6 +141,7 @@ namespace Content.Client.Lobby.UI
             _createNewCharacterButton.ToolTip =
                 Loc.GetString("character-setup-gui-create-new-character-button-tooltip",
                     ("maxCharacters", _preferencesManager.Settings!.MaxCharacterSlots));
+            OverrideJobPrioritiesButton.Disabled = _preferencesManager.Preferences!.Characters.Count == 0;
 
             // If there is no slot selected and no profile loaded, we will select the first one
             var first = !SelectedCharacterSlot.HasValue;

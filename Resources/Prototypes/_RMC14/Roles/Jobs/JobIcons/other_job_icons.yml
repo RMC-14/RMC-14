@@ -26,6 +26,34 @@
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: hc_exec
 
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSurvivor
+  icon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: surv
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconCorrespondent
+  icon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: correspondent
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconXeno
+  icon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xeno
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconXenoQueen
+  icon:
+    sprite: _RMC14/Interface/map_blips.rsi
+    state: xenoqueen
+
 # WEYA Job Icons
 - type: jobIcon
   parent: CMJobIconBase

@@ -122,7 +122,12 @@ namespace Content.Server.GameTicking
                 if (job == null)
                     continue;
 
-                SpawnPlayer(_playerManager.GetSessionById(player), profiles[player], station, job, false);
+                var session = _playerManager.GetSessionById(player);
+                var profile = SelectProfileForAssignedJob(player, job.Value, profiles);
+                if (profile == null)
+                    continue;
+
+                SpawnPlayer(session, profile, station, job, false);
             }
 
             RefreshLateJoinAllowed();
@@ -132,6 +137,24 @@ namespace Content.Server.GameTicking
                 assignedJobs.Keys.Select(x => _playerManager.GetSessionById(x)).ToArray(),
                 profiles,
                 force));
+        }
+
+        private HumanoidCharacterProfile? SelectProfileForAssignedJob(
+            NetUserId userId,
+            ProtoId<JobPrototype> job,
+            IReadOnlyDictionary<NetUserId, HumanoidCharacterProfile> fallbackProfiles)
+        {
+            if (_prefsManager.TryGetCachedPreferences(userId, out var prefs))
+            {
+                var selected = prefs.SelectProfileForJob(job);
+                if (selected != null)
+                    return selected;
+
+                if (prefs.TryGetHumanoidInSlot(prefs.SelectedCharacterIndex, out var selectedProfile))
+                    return selectedProfile;
+            }
+
+            return fallbackProfiles.GetValueOrDefault(userId);
         }
 
         private void SpawnPlayer(ICommonSession player,
@@ -158,7 +181,7 @@ namespace Content.Server.GameTicking
         }
 
         private void SpawnPlayer(ICommonSession player,
-            HumanoidCharacterProfile character,
+            HumanoidCharacterProfile? character,
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
@@ -184,6 +207,7 @@ namespace Content.Server.GameTicking
                 return;
             }
 
+            character ??= HumanoidCharacterProfile.Random();
             string speciesId;
             if (_randomizeCharacters)
             {
@@ -234,9 +258,12 @@ namespace Content.Server.GameTicking
             if (jobBans != null)
                 restrictedRoles.UnionWith(jobBans);
 
+            var playerPreferences = _prefsManager.GetPreferences(player.UserId);
+            var requestedJob = jobId;
+
             // Pick best job best on prefs.
             jobId ??= _stationJobs.PickBestAvailableJobWithPriority(station,
-                character.JobPriorities,
+                playerPreferences.JobPrioritiesFiltered(),
                 true,
                 restrictedRoles);
             // If no job available, stay in lobby, or if no lobby spawn as observer
@@ -253,6 +280,23 @@ namespace Content.Server.GameTicking
                 _chatManager.DispatchServerMessage(player,
                     Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
                 return;
+            }
+
+            // For non-randomized characters, try to pick a profile that requested the chosen job.
+            if (!_randomizeCharacters)
+            {
+                var matchingProfile = playerPreferences.SelectProfileForJob(jobId);
+                if (matchingProfile != null)
+                {
+                    character = matchingProfile;
+                }
+                else if (requestedJob == null)
+                {
+                    // Auto-assigned jobs should always have a matching enabled profile.
+                    _chatManager.DispatchServerMessage(player,
+                        Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
+                    return;
+                }
             }
 
             PlayerJoinGame(player, silent);

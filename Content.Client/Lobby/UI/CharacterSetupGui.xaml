@@ -50,6 +50,11 @@
                             MinHeight="64"
                             Margin="0 5"
                             StyleClasses="ButtonBig"/>
+                    <Button Name="OverrideJobPrioritiesButton"
+                            Text="{Loc 'character-setup-gui-override-job-priorities-button'}"
+                            MaxWidth="300"
+                            Margin="0 0 0 5"
+                            StyleClasses="ButtonBig"/>
 
                     <!-- Horizontal rule -->
                     <PanelContainer>
