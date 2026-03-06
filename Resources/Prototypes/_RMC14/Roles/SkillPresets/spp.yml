@@ -50,7 +50,6 @@
   - type: SkillPreset
     skills:
       RMCSkillSpecialistWeapons: 1
-      RMCSkillFirearms: 2
       RMCSkillVehicles: 2
       RMCSkillLeadership: 1
 
