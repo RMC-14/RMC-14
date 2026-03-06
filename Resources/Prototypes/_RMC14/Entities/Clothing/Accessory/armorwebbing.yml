@@ -58,16 +58,12 @@
     maxItemSize: Normal
     grid:
     - 0,0,3,1
-    whitelist:
+    blacklist:
+      components:
+      - Bible
       tags:
-      - CMMagazinePistol
-      - RMCMagazineRevolver
-      - CMMagazineRifle
-      - RMCMagazineShotgun
-      - CMMagazineSmg
-      - CMMagazineSniper
-      - RMCShellShotgun
-      - RMCMagazineSmartGun
+      - CMFirstAidKit
+      - RMCBoxStorage
   - type: FixedItemSizeStorage
   - type: Webbing
     components:
@@ -75,16 +71,12 @@
       maxItemSize: Normal
       grid:
       - 0,0,3,1
-      whitelist:
+      blacklist:
+        components:
+        - Bible
         tags:
-        - CMMagazinePistol
-        - RMCMagazineRevolver
-        - CMMagazineRifle
-        - RMCMagazineShotgun
-        - CMMagazineSmg
-        - CMMagazineSniper
-        - RMCShellShotgun
-        - RMCMagazineSmartGun
+        - CMFirstAidKit
+        - RMCBoxStorage
     - type: FixedItemSizeStorage
     - type: RMCStorageEjectHand
       state: Open

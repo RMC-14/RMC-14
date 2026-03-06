@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/14/2026 01:25:28
-  entityCount: 180
+  time: 03/03/2026 01:53:10
+  entityCount: 195
 maps: []
 grids:
 - 1
@@ -188,6 +188,26 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 5.383629,8.5312195
       parent: 1
+  - uid: 181
+    components:
+    - type: Transform
+      pos: 7.831556,10.198413
+      parent: 1
+  - uid: 182
+    components:
+    - type: Transform
+      pos: 7.331556,10.189147
+      parent: 1
+  - uid: 183
+    components:
+    - type: Transform
+      pos: 5.238963,10.175248
+      parent: 1
+  - uid: 184
+    components:
+    - type: Transform
+      pos: 5.7435927,10.165982
+      parent: 1
 - proto: CMSheetGlass10
   entities:
   - uid: 26
@@ -199,6 +219,66 @@ entities:
     components:
     - type: Transform
       pos: 9.5,15.5
+      parent: 1
+- proto: CMSpawnPointSPPSOFMedic
+  entities:
+  - uid: 192
+    components:
+    - type: Transform
+      pos: 5.5,8.5
+      parent: 1
+- proto: CMSpawnPointSPPSOFRifleman
+  entities:
+  - uid: 188
+    components:
+    - type: Transform
+      pos: 3.5,10.5
+      parent: 1
+  - uid: 189
+    components:
+    - type: Transform
+      pos: 9.5,10.5
+      parent: 1
+  - uid: 190
+    components:
+    - type: Transform
+      pos: 12.5,6.5
+      parent: 1
+  - uid: 191
+    components:
+    - type: Transform
+      pos: 1.5,8.5
+      parent: 1
+  - uid: 193
+    components:
+    - type: Transform
+      pos: 5.5,6.5
+      parent: 1
+  - uid: 194
+    components:
+    - type: Transform
+      pos: 7.5,6.5
+      parent: 1
+- proto: CMSpawnPointSPPSOFSapper
+  entities:
+  - uid: 195
+    components:
+    - type: Transform
+      pos: 7.5,7.5
+      parent: 1
+- proto: CMSpawnPointSPPSOFSL
+  entities:
+  - uid: 186
+    components:
+    - type: Transform
+      pos: 6.5,11.5
+      parent: 1
+- proto: CMSpawnPointSPPSOFSpec
+  entities:
+  - uid: 187
+    components:
+    - type: Transform
+      pos: 7.5,9.5
       parent: 1
 - proto: CMSPPSOFCockpit
   entities:
@@ -766,6 +846,13 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 13.5,0.5
+      parent: 1
+- proto: RMCHeadCapSPPSOF
+  entities:
+  - uid: 185
+    components:
+    - type: Transform
+      pos: 5.5,9.5
       parent: 1
 - proto: RMCLightFixtureBlueOffset
   entities:
