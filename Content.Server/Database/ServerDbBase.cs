@@ -135,6 +135,50 @@ namespace Content.Server.Database
             await db.DbContext.SaveChangesAsync();
         }
 
+        public async Task SaveJobPrioritiesAsync(NetUserId userId, Dictionary<ProtoId<JobPrototype>, JobPriority> newJobPriorities)
+        {
+            await using var db = await GetDb();
+
+            var prefs = await db.DbContext
+                .Preference
+                .Include(p => p.Profiles)
+                    .ThenInclude(p => p.Jobs)
+                .SingleOrDefaultAsync(p => p.UserId == userId.UserId);
+
+            if (prefs == null)
+                return;
+
+            var selectedProfile = prefs.Profiles.SingleOrDefault(p => p.Slot == prefs.SelectedCharacterSlot);
+            if (selectedProfile == null)
+                return;
+
+            selectedProfile.Jobs.Clear();
+
+            var hasHighPriority = false;
+            foreach (var (job, priority) in newJobPriorities)
+            {
+                if (priority == JobPriority.Never)
+                    continue;
+
+                var fixedPriority = priority;
+                if (fixedPriority == JobPriority.High)
+                {
+                    if (hasHighPriority)
+                        fixedPriority = JobPriority.Medium;
+                    else
+                        hasHighPriority = true;
+                }
+
+                selectedProfile.Jobs.Add(new Job
+                {
+                    JobName = job,
+                    Priority = (DbJobPriority) fixedPriority,
+                });
+            }
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
         private static async Task DeleteCharacterSlot(ServerDbContext db, NetUserId userId, int slot)
         {
             var profile = await db.Profile.Include(p => p.Preference)
@@ -309,7 +353,8 @@ namespace Content.Server.Database
                 },
                 profile.PlaytimePerks,
                 profile.XenoPrefix,
-                profile.XenoPostfix
+                profile.XenoPostfix,
+                profile.Enabled
             );
         }
 
@@ -405,6 +450,7 @@ namespace Content.Server.Database
             profile.PlaytimePerks = humanoid.PlaytimePerks;
             profile.XenoPrefix = humanoid.XenoPrefix;
             profile.XenoPostfix = humanoid.XenoPostfix;
+            profile.Enabled = humanoid.Enabled;
 
             return profile;
         }
