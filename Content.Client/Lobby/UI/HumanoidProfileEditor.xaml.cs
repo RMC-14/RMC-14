@@ -874,6 +874,14 @@ namespace Content.Client.Lobby.UI
             SetDirty();
         }
 
+        public void RefreshPreviewForPriorityUpdate()
+        {
+            if (Profile == null || JobOverride != null)
+                return;
+
+            ReloadPreview();
+        }
+
         /// <summary>
         /// Resets the profile to the defaults.
         /// </summary>

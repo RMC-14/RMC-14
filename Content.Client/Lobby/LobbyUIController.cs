@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
@@ -5,6 +6,7 @@ using Content.Client.Inventory;
 using Content.Client.Lobby.UI;
 using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Station;
+using Content.Shared._RMC14.Armor;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.GameTicking;
@@ -42,6 +44,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     [UISystemDependency] private readonly ClientInventorySystem _inventory = default!;
     [UISystemDependency] private readonly StationSpawningSystem _spawn = default!;
     [UISystemDependency] private readonly GuidebookSystem _guide = default!;
+    [UISystemDependency] private readonly CMArmorSystem _armorSystem = default!;
 
     private CharacterSetupGui? _characterSetup;
     private HumanoidProfileEditor? _profileEditor;
@@ -149,7 +152,14 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     public void OnStateEntered(LobbyState state)
     {
-        PreviewPanel?.SetLoaded(_preferencesManager.ServerDataLoaded);
+        var previewPanel = state.Lobby?.CharacterPreview;
+        if (previewPanel != null)
+        {
+            previewPanel.PrioritiesUpdated -= OnLobbyPrioritiesUpdated;
+            previewPanel.PrioritiesUpdated += OnLobbyPrioritiesUpdated;
+            previewPanel.SetLoaded(_preferencesManager.ServerDataLoaded);
+        }
+
         if (_characterSetup != null)
             _characterSetup.SelectedCharacterSlot = null;
         ReloadCharacterSetup();
@@ -157,7 +167,12 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     public void OnStateExited(LobbyState state)
     {
-        PreviewPanel?.SetLoaded(false);
+        var previewPanel = state.Lobby?.CharacterPreview;
+        if (previewPanel != null)
+        {
+            previewPanel.PrioritiesUpdated -= OnLobbyPrioritiesUpdated;
+            previewPanel.SetLoaded(false);
+        }
 
         if (_stateManager.CurrentState is LobbyState lobby)
         {
@@ -193,6 +208,19 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         _jobPriorityEditor?.RefreshJobs();
     }
 
+    private void OnLobbyPrioritiesUpdated()
+    {
+        OnAnyCharacterOrJobChange?.Invoke();
+
+        if (_characterSetup != null)
+        {
+            var showingJobPriorities = _jobPriorityEditor?.Visible == true && _profileEditor?.Visible != true;
+            _characterSetup.ReloadCharacterPickers(selectJobPriorities: showingJobPriorities);
+        }
+
+        _profileEditor?.RefreshPreviewForPriorityUpdate();
+    }
+
     /// <summary>
     /// Save job priorities locally and on the remote server, reload the character setup gui appropriately
     /// </summary>
@@ -211,6 +239,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
     {
         _preferencesManager.UpdateJobPriorities(newJobPriorities);
         OnAnyCharacterOrJobChange?.Invoke();
+        _profileEditor?.RefreshPreviewForPriorityUpdate();
         _jobPriorityEditor?.LoadJobPriorities();
         var (characterGui, _) = EnsureGui();
         characterGui.ReloadCharacterPickers(selectJobPriorities: true);
@@ -373,6 +402,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 .ToDictionary();
             _preferencesManager.UpdateJobPriorities(priorities);
             OnAnyCharacterOrJobChange?.Invoke();
+            _profileEditor?.RefreshPreviewForPriorityUpdate();
             _jobPriorityEditor?.LoadJobPriorities();
             _characterSetup?.ReloadCharacterPickers(selectJobPriorities: _jobPriorityEditor?.Visible == true);
         };
@@ -423,10 +453,11 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             {
                 GiveDummyJobClothes(dummy, profile, job);
 
-                if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
+                var loadoutRoleId = ResolveLoadoutRoleId(job);
+                if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(loadoutRoleId))
                 {
                     var loadout = profile.GetLoadoutOrDefault(
-                        LoadoutSystem.GetJobPrototype(job.ID),
+                        loadoutRoleId,
                         _playerManager.LocalSession,
                         profile.Species,
                         EntityManager,
@@ -474,6 +505,32 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         return candidates[0];
     }
 
+    private string ResolveLoadoutRoleId(JobPrototype job)
+    {
+        var sourceJob = ResolveLoadoutSourceJob(job) ?? job;
+        return LoadoutSystem.GetJobPrototype(sourceJob.ID);
+    }
+
+    private JobPrototype? ResolveLoadoutSourceJob(JobPrototype job)
+    {
+        var visited = new HashSet<string>();
+        var current = job;
+
+        while (visited.Add(current.ID))
+        {
+            if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(current.ID)))
+                return current;
+
+            if (current.UseLoadoutOfJob is not { } parentId ||
+                !_prototypeManager.TryIndex(parentId, out current))
+            {
+                break;
+            }
+        }
+
+        return null;
+    }
+
     private void GiveDummyLoadout(EntityUid uid, RoleLoadout? roleLoadout)
     {
         if (roleLoadout == null)
@@ -496,14 +553,63 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
         if (!_inventory.TryGetSlots(dummy, out var slots))
             return;
 
-        var previewStartingGear = job.DummyStartingGear ?? job.StartingGear;
-        if (previewStartingGear == null ||
-            !_prototypeManager.TryIndex(previewStartingGear.Value, out var gear))
+        var resolvedLoadoutRoleId = ResolveLoadoutRoleId(job);
+        var defaultLoadoutRoleId = LoadoutSystem.GetJobPrototype(job.ID);
+
+        if (profile.Loadouts.TryGetValue(resolvedLoadoutRoleId, out var jobLoadout) ||
+            profile.Loadouts.TryGetValue(defaultLoadoutRoleId, out jobLoadout) ||
+            profile.Loadouts.TryGetValue(job.ID, out jobLoadout))
+        {
+            foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
+            {
+                foreach (var loadout in loadouts)
+                {
+                    if (!_prototypeManager.TryIndex(loadout.Prototype, out var loadoutProto))
+                        continue;
+
+                    foreach (var slot in slots)
+                    {
+                        if (_prototypeManager.TryIndex(loadoutProto.StartingGear, out var loadoutGear))
+                        {
+                            var itemType = ((IEquipmentLoadout) loadoutGear).GetGear(slot.Name);
+
+                            if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                                EntityManager.DeleteEntity(unequippedItem.Value);
+
+                            if (itemType != string.Empty)
+                            {
+                                var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                                _inventory.TryEquip(dummy, item, slot.Name, true, true);
+                            }
+                        }
+                        else
+                        {
+                            var itemType = ((IEquipmentLoadout) loadoutProto).GetGear(slot.Name);
+
+                            if (_inventory.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
+                                EntityManager.DeleteEntity(unequippedItem.Value);
+
+                            if (itemType != string.Empty)
+                            {
+                                var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+                                _inventory.TryEquip(dummy, item, slot.Name, true, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
             return;
+
+        _prototypeManager.TryIndex(job.DummyStartingGear, out var dummyGear);
 
         foreach (var slot in slots)
         {
             var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
+            if (itemType == string.Empty && dummyGear != null)
+                itemType = ((IEquipmentLoadout) dummyGear).GetGear(slot.Name);
 
             if (_inventory.TryUnequip(dummy, slot.Name, out var unequipped, silent: true, force: true, reparent: false))
                 EntityManager.DeleteEntity(unequipped.Value);
@@ -512,6 +618,15 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
                 continue;
 
             var item = EntityManager.SpawnEntity(itemType, MapCoordinates.Nullspace);
+            if (EntityManager.TryGetComponent<RMCArmorVariantComponent>(item, out var variantComponent))
+            {
+                var variantItemProtoId = _armorSystem.GetArmorVariant((item, variantComponent), profile.ArmorPreference);
+                var variantItem = EntityManager.SpawnEntity(variantItemProtoId, MapCoordinates.Nullspace);
+                _inventory.TryEquip(dummy, variantItem, slot.Name, true, true);
+                EntityManager.QueueDeleteEntity(item);
+                continue;
+            }
+
             _inventory.TryEquip(dummy, item, slot.Name, true, true);
         }
     }

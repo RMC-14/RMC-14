@@ -20,6 +20,7 @@
         <!-- Name and job text -->
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" Margin="0 4 0 4">
             <Label Name="DescriptionLabel" HorizontalExpand="True" ClipText="True"/>
+            <Label Name="PreferredMapLabel" HorizontalExpand="True" ClipText="True" Visible="False"/>
         </BoxContainer>
 
         <!-- Vertical rule to separate the buttons -->

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using Content.Client.Humanoid;
 using Content.Client.Station;
 using Content.Shared.Clothing;
@@ -49,10 +50,11 @@ public sealed partial class ProfilePreviewSpriteView
 
         if(job != null)
         {
+            var loadoutRoleId = ResolveLoadoutRoleId(job);
             try
             {
                 loadout = humanoid.GetLoadoutOrDefault(
-                    LoadoutSystem.GetJobPrototype(job.ID),
+                    loadoutRoleId,
                     _playerManager.LocalSession,
                     humanoid.Species,
                     EntMan,
@@ -118,11 +120,12 @@ public sealed partial class ProfilePreviewSpriteView
         }
         GiveDummyJobClothes(PreviewDummy, humanoid, job);
 
-        if (!_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID)))
+        var resolvedLoadoutRoleId = ResolveLoadoutRoleId(job);
+        if (!_prototypeManager.HasIndex<RoleLoadoutPrototype>(resolvedLoadoutRoleId))
             return;
 
         loadout = humanoid.GetLoadoutOrDefault(
-            LoadoutSystem.GetJobPrototype(job.ID),
+            resolvedLoadoutRoleId,
             _playerManager.LocalSession,
             humanoid.Species,
             EntMan,
@@ -210,8 +213,12 @@ public sealed partial class ProfilePreviewSpriteView
         if (!inventorySys.TryGetSlots(dummy, out var slots))
             return;
 
+        var resolvedLoadoutRoleId = ResolveLoadoutRoleId(job);
+        var defaultLoadoutRoleId = LoadoutSystem.GetJobPrototype(job.ID);
+
         // Apply loadout
-        if (profile.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out var jobLoadout) ||
+        if (profile.Loadouts.TryGetValue(resolvedLoadoutRoleId, out var jobLoadout) ||
+            profile.Loadouts.TryGetValue(defaultLoadoutRoleId, out jobLoadout) ||
             profile.Loadouts.TryGetValue(job.ID, out jobLoadout))
         {
             foreach (var loadouts in jobLoadout.SelectedLoadouts.Values)
@@ -260,14 +267,16 @@ public sealed partial class ProfilePreviewSpriteView
             }
         }
 
-        var previewStartingGear = job.DummyStartingGear ?? job.StartingGear;
-        if (previewStartingGear == null ||
-            !_prototypeManager.TryIndex(previewStartingGear.Value, out var gear))
+        if (!_prototypeManager.TryIndex(job.StartingGear, out var gear))
             return;
+
+        _prototypeManager.TryIndex(job.DummyStartingGear, out var dummyGear);
 
         foreach (var slot in slots)
         {
             var itemType = ((IEquipmentLoadout) gear).GetGear(slot.Name);
+            if (itemType == string.Empty && dummyGear != null)
+                itemType = ((IEquipmentLoadout) dummyGear).GetGear(slot.Name);
 
             if (inventorySys.TryUnequip(dummy, slot.Name, out var unequippedItem, silent: true, force: true, reparent: false))
             {
@@ -280,6 +289,32 @@ public sealed partial class ProfilePreviewSpriteView
                 inventorySys.TryEquip(dummy, item, slot.Name, true, true);
             }
         }
+    }
+
+    private string ResolveLoadoutRoleId(JobPrototype job)
+    {
+        var sourceJob = ResolveLoadoutSourceJob(job) ?? job;
+        return LoadoutSystem.GetJobPrototype(sourceJob.ID);
+    }
+
+    private JobPrototype? ResolveLoadoutSourceJob(JobPrototype job)
+    {
+        var visited = new HashSet<string>();
+        var current = job;
+
+        while (visited.Add(current.ID))
+        {
+            if (_prototypeManager.HasIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(current.ID)))
+                return current;
+
+            if (current.UseLoadoutOfJob is not { } parentId ||
+                !_prototypeManager.TryIndex(parentId, out current))
+            {
+                break;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
