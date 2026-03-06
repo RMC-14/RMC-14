@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Marines.Squads;
 
@@ -9,4 +10,7 @@ public sealed partial class AssignSquadComponent : Component
 {
     [DataField(required: true), AutoNetworkedField]
     public EntityWhitelist? Whitelist;
+
+    [DataField, AutoNetworkedField]
+    public EntProtoId<SquadTeamComponent>? Squad;
 }
