@@ -388,10 +388,8 @@ public sealed class SquadSystem : EntitySystem
 
             if (TryComp<ClothingComponent>(newItem, out var clothing))
             {
-                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing)))
-                {
+                if (!_cmInventory.TryEquipClothing(user, (newItem, clothing), false))
                     _hands.TryPickupAnyHand(user, newItem);
-                }
             }
         }
 
