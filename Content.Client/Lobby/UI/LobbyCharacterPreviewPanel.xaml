@@ -10,6 +10,11 @@
         <!-- Header and the checkbox for locking/unlocking priority icons -->
         <BoxContainer>
             <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}" />
+            <Button Name="TogglePrioritiesButton"
+                    Text="v"
+                    MinSize="24 24"
+                    Margin="4 0 0 0"
+                    ToolTip="{Loc 'lobby-character-preview-panel-collapse-job-priorities-tooltip'}"/>
             <CheckBox Name="PriorityLock" Text="{Loc 'ui-lobby-lock-priorities-checkbox-label'}"
                       HorizontalExpand="True" HorizontalAlignment="Right" VerticalAlignment="Center"
                       ToolTip="{Loc 'ui-lobby-lock-priorities-checkbox-tooltip'}"/>
@@ -17,57 +22,59 @@
 
         <!-- This is the main bit, only shows once we have preferences from the server -->
         <BoxContainer Name="Loaded" Orientation="Vertical" Visible="False">
+            <BoxContainer Name="PrioritiesSection" Orientation="Vertical">
 
-            <!-- Where we show ALL the jobs, separated into priorities -->
-            <BoxContainer Name="JobGrid"
-                          VerticalExpand="True"
-                          HorizontalExpand="True"
-                          HorizontalAlignment="Center"
-                          SeparationOverride="6">
+                <!-- Where we show ALL the jobs, separated into priorities -->
+                <BoxContainer Name="JobGrid"
+                              VerticalExpand="True"
+                              HorizontalExpand="True"
+                              HorizontalAlignment="Center"
+                              SeparationOverride="6">
 
-                <!-- Jobs with "Never" priority -->
-                <ui:DraggableJobTarget Name="NeverBox" Priority="Never" />
+                    <!-- Jobs with "Never" priority -->
+                    <ui:DraggableJobTarget Name="NeverBox" Priority="Never" />
 
-                <!-- Vertical rule -->
-                <PanelContainer MinSize="2 0">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                    </PanelContainer.PanelOverride>
-                </PanelContainer>
+                    <!-- Vertical rule -->
+                    <PanelContainer MinSize="2 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
 
-                <!-- Jobs with "Low" priority -->
-                <ui:DraggableJobTarget Name="LowBox" Priority="Low" />
+                    <!-- Jobs with "Low" priority -->
+                    <ui:DraggableJobTarget Name="LowBox" Priority="Low" />
 
-                <!-- Vertical rule -->
-                <PanelContainer MinSize="2 0">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                    </PanelContainer.PanelOverride>
-                </PanelContainer>
+                    <!-- Vertical rule -->
+                    <PanelContainer MinSize="2 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
 
-                <!-- Jobs with "Medium" priority -->
-                <ui:DraggableJobTarget Name="MediumBox" Priority="Medium" />
+                    <!-- Jobs with "Medium" priority -->
+                    <ui:DraggableJobTarget Name="MediumBox" Priority="Medium" />
 
-                <!-- Vertical rule -->
-                <PanelContainer MinSize="2 0">
-                    <PanelContainer.PanelOverride>
-                        <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
-                    </PanelContainer.PanelOverride>
-                </PanelContainer>
+                    <!-- Vertical rule -->
+                    <PanelContainer MinSize="2 0">
+                        <PanelContainer.PanelOverride>
+                            <graphics:StyleBoxFlat BackgroundColor="{x:Static style:StyleNano.NanoGold}" ContentMarginTopOverride="2" />
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
 
-                <!-- THE job with "HIGH" priority -->
-                <ui:DraggableJobTarget Name="HighBox" Priority="High" />
+                    <!-- THE job with "HIGH" priority -->
+                    <ui:DraggableJobTarget Name="HighBox" Priority="High" />
 
-            </BoxContainer> <!-- End job grids -->
+                </BoxContainer> <!-- End job grids -->
 
-            <controls:VSpacer/>
+                <controls:VSpacer/>
 
-            <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
-                        HorizontalAlignment="Center"
-                        Margin="0 5 0 0"/>
-                <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
-                        Margin="0 5 0 0" Visible="False" />
+                <BoxContainer Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Name="CharacterSetup" Text="{Loc 'lobby-character-preview-panel-character-setup-button'}"
+                            HorizontalAlignment="Center"
+                            Margin="0 5 0 0"/>
+                    <Button Name="PatronPerks" Access="Public" Text="{Loc 'rmc-ui-patron-perks'}"
+                            Margin="0 5 0 0" Visible="False" />
+                </BoxContainer>
             </BoxContainer>
         </BoxContainer>
         <Label Name="Unloaded" Text="{Loc 'lobby-character-preview-panel-unloaded-preferences-label'}"/>

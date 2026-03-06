@@ -95,7 +95,7 @@
                     <controls:HSpacer Spacing="10" />
                     <!-- Server info -->
                     <controls:NanoHeading Text="{Loc 'ui-lobby-server-info-block'}" />
-                    <info:ServerInfo Name="ServerInfo" Access="Public" MinSize="0 30" VerticalExpand="false"
+                    <info:ServerInfo Name="ServerInfo" Access="Public" VerticalExpand="false"
                                      Margin="3 3 3 3" MaxWidth="400" HorizontalAlignment="Left" />
                     <Label Name="StationTime" Access="Public" FontColorOverride="{x:Static maths:Color.LightGray}"
                            Margin="3 3 3 3" HorizontalAlignment="Left" />

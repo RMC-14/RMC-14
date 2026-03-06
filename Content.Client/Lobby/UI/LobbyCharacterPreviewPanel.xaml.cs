@@ -38,6 +38,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     private const int JobGridElementCount = 7;
     private const float SeparatorWidth = 2f;
     private const int SeparatorCount = 3;
+    private bool _prioritiesCollapsed;
 
     /// <summary>
     /// <see cref="LobbyState"/> needs to register events on this button, so provide a property to access it publicly.
@@ -73,7 +74,9 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         // in another high priority job.
         GetTargetControl(JobPriority.High).SetFallbackTarget(GetTargetControl(JobPriority.Medium));
 
+        TogglePrioritiesButton.OnPressed += _ => SetPrioritiesCollapsed(!_prioritiesCollapsed);
         OnResized += BalanceColumns;
+        SetPrioritiesCollapsed(false);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
@@ -90,6 +93,26 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     {
         Loaded.Visible = value;
         Unloaded.Visible = !value;
+        PrioritiesSection.Visible = value && !_prioritiesCollapsed;
+        PriorityLock.Visible = !_prioritiesCollapsed;
+    }
+
+    private void SetPrioritiesCollapsed(bool collapsed)
+    {
+        _prioritiesCollapsed = collapsed;
+        TogglePrioritiesButton.Text = collapsed ? ">" : "v";
+        TogglePrioritiesButton.ToolTip = Loc.GetString(
+            collapsed
+                ? "lobby-character-preview-panel-expand-job-priorities-tooltip"
+                : "lobby-character-preview-panel-collapse-job-priorities-tooltip");
+
+        if (Loaded.Visible)
+            PrioritiesSection.Visible = !collapsed;
+
+        PriorityLock.Visible = !collapsed;
+
+        if (!collapsed)
+            BalanceColumns();
     }
 
     /// <summary>
