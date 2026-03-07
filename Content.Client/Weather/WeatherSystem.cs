@@ -134,8 +134,7 @@ public sealed class WeatherSystem : SharedWeatherSystem
         if (_playerManager.LocalEntity is not { } localPlayer)
             return true;
 
-        var entXform = Transform(localPlayer);
-        if (entXform.MapUid != uid)
+        if (Transform(localPlayer).MapUid != uid)
         {
             weather.Stream = _audio.Stop(weather.Stream);
             return true;
