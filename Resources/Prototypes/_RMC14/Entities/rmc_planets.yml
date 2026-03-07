@@ -371,10 +371,13 @@
       surveillancecenter_varadero:
         CMSurvivorEngineer:
         - RMCSurvivorNewVaraderoCMBTechnician: 1
+        - CMSurvivorTechnician: 1
+        - CMSurvivorCargoTechnician: 1
         CMSurvivorSecurity:
         - RMCSurvivorNewVaraderoCMBSpecialist: 1
         CMSurvivorCorporate:
         - RMCSurvivorNewVaraderoICBCommissioner: 1
+        - CMSurvivorVaraderoICB: 1
         RMCSurvivorCommandingOfficer:
         - RMCSurvivorNewVaraderoICBSupervisor: 1
 
