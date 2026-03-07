@@ -63,7 +63,7 @@
     primaryWeapons:
     - [ ]
     randomOutfits:
-    - [ RMCArmorHelmetM10CMBVisor, RMCSwatCMBUniform ]
+    - [ RMCArmorHelmetM10CMBVisorSWAT, RMCSwatCMBUniform ]
     - [ RMCArmorHelmetM10ICB, RMCSwatICBUniform ]
 
 - type: entity
