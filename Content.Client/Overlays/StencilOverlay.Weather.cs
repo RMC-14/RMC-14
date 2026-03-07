@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Shared._RMC14.Weather;
+using Content.Client._RMC14.Sprite;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Graphics;
@@ -54,19 +54,21 @@ public sealed partial class StencilOverlay
             }
 
             // RMC14
-            var playerPos = _transform.GetMapCoordinates(_playerManager.LocalEntity!.Value).Position;
-
-            var query = _entManager.EntityQueryEnumerator<RMCBlockWeatherComponent>();
-            while (query.MoveNext(out var entity, out _))
+            if (_entManager.TryGetComponent(_playerManager.LocalEntity, out TransformComponent? playerXform))
             {
-                var roofBounds = _entLookup.GetAABBNoContainer(entity,
-                    _transform.GetWorldPosition(entity),
-                    _transform.GetWorldRotation(entity));
+                var playerPos = _transform.GetMapCoordinates(_playerManager.LocalEntity!.Value, playerXform).Position;
 
-                if (roofBounds.Contains(playerPos))
-                    worldHandle.DrawRect(roofBounds, Color.White);
+                var query = _entManager.EntityQueryEnumerator<RMCFadingSpriteComponent>();
+                while (query.MoveNext(out var entity, out _))
+                {
+                    var roofBounds = _entLookup.GetAABBNoContainer(entity,
+                        _transform.GetWorldPosition(entity),
+                        _transform.GetWorldRotation(entity));
+
+                    if (roofBounds.Contains(playerPos))
+                        worldHandle.DrawRect(roofBounds, Color.White);
+                }
             }
-            //
 
         }, Color.Transparent);
 
