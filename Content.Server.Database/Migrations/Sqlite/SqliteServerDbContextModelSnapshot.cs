@@ -1114,7 +1114,8 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.HasKey("Id")
                         .HasName("PK_rmc_commendations");
 
-                    b.HasIndex("DeletedById");
+                    b.HasIndex("DeletedById")
+                        .HasDatabaseName("IX_rmc_commendations_deleted_by_id");
 
                     b.HasIndex("GiverId");
 
