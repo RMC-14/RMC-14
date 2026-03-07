@@ -1,5 +1,3 @@
-# Playing Cards localization
-
 # Card suits
 rmc-playing-card-suit-spades = Spades
 rmc-playing-card-suit-hearts = Hearts
