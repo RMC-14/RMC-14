@@ -71,6 +71,7 @@
   components:
   - type: SkillPreset
     skills:
+      RMCSkillFirearms: 2
       RMCSkillConstruction: 2
       RMCSkillLeadership: 2
 
