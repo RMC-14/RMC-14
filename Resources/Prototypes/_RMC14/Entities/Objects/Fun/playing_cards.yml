@@ -8,8 +8,6 @@
   description: A standard playing card.
   components:
   - type: PlayingCard
-    suit: Spades
-    rank: Ace
   - type: Sprite
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: spades_ace
