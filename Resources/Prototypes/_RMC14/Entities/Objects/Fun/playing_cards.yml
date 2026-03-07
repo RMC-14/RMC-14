@@ -54,6 +54,5 @@
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: deck
   - type: Item
-    size: Small
   - type: UseDelay
     delay: 0.1
