@@ -169,7 +169,7 @@ namespace Content.Server.GameTicking
             var character = GetPlayerProfile(player);
 
             var jobBans = _banManager.GetJobBans(player.UserId);
-            if (jobBans == null || jobId != null && jobBans.Contains(jobId))
+            if (jobId != null && jobBans?.Contains(jobId) == true)
                 return;
 
             if (jobId != null)
@@ -304,13 +304,6 @@ namespace Content.Server.GameTicking
                 if (matchingProfile != null)
                 {
                     character = matchingProfile;
-                }
-                else if (requestedJob == null)
-                {
-                    // Auto-assigned jobs should always have a matching enabled profile.
-                    _chatManager.DispatchServerMessage(player,
-                        Loc.GetString("game-ticker-player-no-jobs-available-when-joining"));
-                    return;
                 }
             }
 
