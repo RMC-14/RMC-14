@@ -23,6 +23,7 @@
         - type: MotionDetectorTracked
         - type: MarineOrders
         - type: RMCPointing
+        - type: InnateCommandSpeech
         - type: CommandAccent
         - type: RMCTrackable
         - type: TacticalMapIcon
@@ -72,4 +73,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_commander_alt
-    
