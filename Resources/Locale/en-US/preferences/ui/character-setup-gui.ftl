@@ -1,6 +1,8 @@
 character-setup-gui-character-setup-label = Character setup
 character-setup-gui-character-setup-adminremarks-button = Admin Remarks
 character-setup-gui-character-setup-stats-button = Stats
+character-setup-gui-character-setup-commendations-received-button = Commendations Received
+character-setup-gui-character-setup-commendations-given-button = Commendations Given
 character-setup-gui-character-setup-rules-button = Rules
 character-setup-gui-character-setup-close-button = Close
 character-setup-gui-edit-job-priorities-button = Edit job priorities

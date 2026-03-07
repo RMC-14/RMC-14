@@ -18,6 +18,12 @@
                         Text="{Loc 'character-setup-gui-character-setup-stats-button'}"
                         StyleClasses="ButtonBig"
                         HorizontalAlignment="Right" />
+                <Button Name="CommendationsReceivedButton"
+                        Text="{Loc 'character-setup-gui-character-setup-commendations-received-button'}"
+                        StyleClasses="ButtonBig" />
+                <Button Name="CommendationsGivenButton"
+                        Text="{Loc 'character-setup-gui-character-setup-commendations-given-button'}"
+                        StyleClasses="ButtonBig" />
                 <cc:CommandButton Name="AdminRemarksButton"
                                   Command="adminremarks"
                                   Text="{Loc 'character-setup-gui-character-setup-adminremarks-button'}"

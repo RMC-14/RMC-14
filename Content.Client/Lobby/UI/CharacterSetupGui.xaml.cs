@@ -1,5 +1,6 @@
+using Content.Client._RMC14.Commendations;
+using Content.Client._RMC14.RMCPlaytimeStats;
 using Content.Client.Info;
-using Content.Client.Info.PlaytimeStats;
 using Content.Client.Resources;
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
@@ -91,7 +92,11 @@ namespace Content.Client.Lobby.UI
             JobPriorityEditor.AddChild(jobPriorityEditor);
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
-            StatsButton.OnPressed += _ => new PlaytimeStatsWindow().OpenCentered();
+            StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered();
+            CommendationsReceivedButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
+            CommendationsGivenButton.OnPressed += _ =>
+                IoCManager.Resolve<CommendationsManager>().OpenGivenWindow();
 
             _cfg.OnValueChanged(CCVars.SeeOwnNotes, p => AdminRemarksButton.Visible = p, true);
 
