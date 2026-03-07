@@ -131,8 +131,7 @@ public sealed class WeatherSystem : SharedWeatherSystem
             return true;
 
         // RMC14
-        var ent = _playerManager.LocalEntity;
-        if (ent is not { } localPlayer)
+        if (_playerManager.LocalEntity is not { } localPlayer)
             return true;
 
         var entXform = Transform(localPlayer);
