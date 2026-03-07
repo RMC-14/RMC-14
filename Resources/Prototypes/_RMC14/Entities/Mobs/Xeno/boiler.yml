@@ -221,8 +221,13 @@
     xenoArmor: 0
     explosionArmor: 20
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.75
-    baseSprintSpeed: 3.25
+    baseWalkSpeed: 1.50
+    baseSprintSpeed: 3.00
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      590: Critical
+      690: Dead
   - type: XenoZoom
     zoom: 1.25, 1.25
     offsetLength: 0

@@ -40,7 +40,7 @@ public sealed partial class XenoDeployTrapsComponent : Component
     public SpriteSpecifier.Rsi ActionIconEmpowered = new(new ResPath("_RMC14/Actions/xeno_actions.rsi"), "gas_mine_empowered");
 
     [DataField, AutoNetworkedField]
-    public int Range = 12;
+    public int Range = 13;
 
     [DataField, AutoNetworkedField]
     public bool Empowered = false;

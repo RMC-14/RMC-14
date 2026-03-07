@@ -11,7 +11,7 @@ namespace Content.Shared._RMC14.Xenonids.Projectile.Spit.Shotgun;
 public sealed partial class XenoAcidShotgunComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public FixedPoint2 PlasmaCost = 40;
+    public FixedPoint2 PlasmaCost = 60;
 
     [DataField, AutoNetworkedField]
     public float Speed = 40;

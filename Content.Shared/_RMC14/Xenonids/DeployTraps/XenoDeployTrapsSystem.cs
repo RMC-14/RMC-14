@@ -11,6 +11,8 @@ using Content.Shared.Coordinates;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Interaction;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -35,7 +37,7 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedRMCEmoteSystem _emote = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-
+    [Dependency] private readonly SharedInteractionSystem _interaction = default!;
 
     public override void Initialize()
     {
@@ -53,13 +55,16 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_examine.InRangeUnOccluded(xeno.Owner, args.Target, xeno.Comp.Range))
+        if (!_interaction.InRangeUnobstructed(
+                _transform.GetMapCoordinates(xeno.Owner),
+                _transform.ToMapCoordinates(args.Target),
+                xeno.Comp.Range,
+                CollisionGroup.Opaque,
+                e => e == xeno.Owner || !Transform(e).Anchored))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-deploy-traps-see-fail"), xeno, xeno);
             return;
         }
-
-        args.Handled = true;
 
         var target = args.Target.SnapToGrid(EntityManager, _map);
 

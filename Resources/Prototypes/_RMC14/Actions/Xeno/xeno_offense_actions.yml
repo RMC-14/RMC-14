@@ -1533,7 +1533,7 @@
       types:
         Heat: 45
   - type: TargetAction
-    range: 10
+    range: 15 # the actual range is in XenoAcidMineComponent
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoAcidMineActionEvent
@@ -1567,17 +1567,17 @@
   description: Deploys a line of snaring traps.
   components:
   - type: Action
+    useDelay: 20.5
     itemIconStyle: NoItem
     icon:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine
-      useDelay: 20.5
   - type: XenoDeployTraps
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine_empowered
   - type: TargetAction
-    range: 10
+    range: 15 # the actual range is in XenoDeployTrapsComponent
     deselectOnMiss: false
   - type: WorldTargetAction
     event: !type:XenoDeployTrapsActionEvent

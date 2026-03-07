@@ -253,6 +253,8 @@ public sealed class XenoSpitSystem : EntitySystem
             _insight.IncrementInsight(shooter, 10);
         }
         else
+        {
+            _slow.TrySlowdown(args.Target, TimeSpan.FromSeconds(3.5));
             _insight.IncrementInsight(shooter, 1);
     }
 

@@ -19,7 +19,7 @@ public sealed partial class XenoAcidMineComponent : Component
     public bool Empowered = false;
 
     [DataField, AutoNetworkedField]
-    public int Range = 10;
+    public int Range = 13;
 
     [DataField]
     public DoAfterId? AcidMineDoAfter;

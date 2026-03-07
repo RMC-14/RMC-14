@@ -65,7 +65,7 @@
         collection: XenoResinBreak
   - type: Clickable
   - type: TimedDespawn
-    lifetime: 60
+    lifetime: 10
 
 - type: entity
   id: XenoTrapperEmpoweredTrap

@@ -18,6 +18,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -29,27 +30,23 @@ namespace Content.Shared._RMC14.Xenonids.AcidMine;
 
 public sealed class XenoAcidMineSystem : EntitySystem
 {
-    [Dependency] private readonly IMapManager _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedMapSystem _sharedMap = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
-    [Dependency] private readonly SharedRMCDamageableSystem _rmcDamage = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _colorFlash = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
     [Dependency] private readonly SharedRMCActionsSystem _rmcActions = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedXenoHiveSystem _hive = default!;
     [Dependency] private readonly MountableWeaponSystem _mg = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoAcidMineComponent, XenoAcidMineActionEvent>(OnXenoAcidMineAction);
@@ -67,7 +64,12 @@ public sealed class XenoAcidMineSystem : EntitySystem
             !TryComp(gridId, out MapGridComponent? grid))
             return;
 
-        if (!_examine.InRangeUnOccluded(xeno.Owner, args.Target, xeno.Comp.Range))
+        if (!_interaction.InRangeUnobstructed(
+                _transform.GetMapCoordinates(xeno.Owner),
+                _transform.ToMapCoordinates(args.Target),
+                xeno.Comp.Range,
+                CollisionGroup.Opaque,
+                e => e == xeno.Owner || !Transform(e).Anchored))
         {
             _popup.PopupClient(Loc.GetString("rmc-xeno-acid-mine-see-fail"), xeno, xeno);
             return;
@@ -92,8 +94,6 @@ public sealed class XenoAcidMineSystem : EntitySystem
         //spawn telegraphs
         foreach (var tile in explodingTiles)
         {
-            if (!_interaction.InRangeUnobstructed(xeno.Owner, _turf.GetTileCenter(tile), xeno.Comp.Range + 0.5f))
-                continue;
             PredictedSpawnAtPosition(xeno.Comp.TelegraphEffect, _turf.GetTileCenter(tile));
         }
 
