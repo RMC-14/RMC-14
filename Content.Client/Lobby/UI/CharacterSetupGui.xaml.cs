@@ -92,7 +92,7 @@ namespace Content.Client.Lobby.UI
             JobPriorityEditor.AddChild(jobPriorityEditor);
             RulesButton.OnPressed += _ => new RulesAndInfoWindow().Open();
 
-            StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered();
+            StatsButton.OnPressed += _ => new RMCPlaytimeStatsWindow().OpenCentered(); // RMC-PlaytimeStats-Tweak
             CommendationsReceivedButton.OnPressed += _ =>
                 IoCManager.Resolve<CommendationsManager>().OpenReceivedWindow();
             CommendationsGivenButton.OnPressed += _ =>

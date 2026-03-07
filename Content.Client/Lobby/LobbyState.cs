@@ -33,6 +33,7 @@ namespace Content.Client.Lobby
         [Dependency] private readonly ClientsidePlaytimeTrackingManager _playtimeTracking = default!;
         [Dependency] private readonly IPrototypeManager _protoMan = default!;
         [Dependency] private readonly IClientPreferencesManager _preferences = default!;
+        // RMC14
         [Dependency] private readonly LinkAccountManager _linkAccount = default!;
 
         private ClientGameTicker _gameTicker = default!;
@@ -80,6 +81,7 @@ namespace Content.Client.Lobby
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
             Lobby.ReadyButton.TooltipSupplier = GetReadyButtonTooltip;
+            // RMC14
             Lobby.JoinXenoButton.OnPressed += OnJoinXenoPressed;
             Lobby.JoinXenoButton.AddStyleClass("OpenRight");
 
@@ -129,6 +131,7 @@ namespace Content.Client.Lobby
             Lobby.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
+            // RMC14
             Lobby.JoinXenoButton.OnPressed -= OnJoinXenoPressed;
 
             Lobby = null;
@@ -145,12 +148,12 @@ namespace Content.Client.Lobby
             SetReady(false);
             Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
         }
-
+        // RMC14
         private void OnPatronPerksPressed(BaseButton.ButtonEventArgs args)
         {
             _userInterfaceManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
         }
-
+        // RMC14
         private void OnJoinXenoPressed(BaseButton.ButtonEventArgs args)
         {
             _userInterfaceManager.GetUIController<RMCLobbyUIController>().OpenJoinXenoWindow();
@@ -264,7 +267,7 @@ namespace Content.Client.Lobby
             var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
             if (minutesToday > 60)
             {
-                Lobby!.PlaytimeComment.Visible = true;
+                Lobby!.PlaytimeComment.Visible = false; // RMC14
 
                 var hoursToday = Math.Round(minutesToday / 60f, 1);
 
