@@ -1,4 +1,3 @@
-# Playing Cards - RMC14
 - type: entity
   abstract: true
   parent: BaseItem
