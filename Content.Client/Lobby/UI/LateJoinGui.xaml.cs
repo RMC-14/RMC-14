@@ -59,6 +59,7 @@ namespace Content.Client.Lobby.UI
             _crewManifest = _entitySystem.GetEntitySystem<CrewManifestSystem>();
             _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
             _sawmill = _logManager.GetSawmill("latejoin.panel");
+            _selectedSlot = _preferencesManager.Preferences?.SelectedCharacterIndex;
 
             _jobRequirements.Updated += RebuildUI;
             RebuildUI();
@@ -84,10 +85,12 @@ namespace Content.Client.Lobby.UI
             CharacterList.RemoveAllChildren();
 
             var group = new ButtonGroup();
-            var first = !_selectedSlot.HasValue;
+            var selectedExists = _selectedSlot.HasValue &&
+                                 _preferencesManager.Preferences!.Characters.ContainsKey(_selectedSlot.Value);
+            var first = !selectedExists;
             foreach (var (slot, profile) in _preferencesManager.Preferences!.Characters)
             {
-                var isSelected = _selectedSlot.HasValue ? slot == _selectedSlot : first;
+                var isSelected = selectedExists ? slot == _selectedSlot : first;
                 if (profile is not HumanoidCharacterProfile humanoid)
                     continue;
                 var characterPickerButton =

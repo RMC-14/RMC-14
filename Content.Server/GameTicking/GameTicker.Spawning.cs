@@ -163,7 +163,8 @@ namespace Content.Server.GameTicking
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             var character = GetPlayerProfile(player);
 
@@ -179,7 +180,7 @@ namespace Content.Server.GameTicking
                     return;
             }
 
-            SpawnPlayer(player, character, station, jobId, lateJoin, silent);
+            SpawnPlayer(player, character, station, jobId, lateJoin, silent, selectedCharacterSlot);
         }
 
         private void SpawnPlayer(ICommonSession player,
@@ -187,7 +188,8 @@ namespace Content.Server.GameTicking
             EntityUid station,
             string? jobId = null,
             bool lateJoin = true,
-            bool silent = false)
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             // Can't spawn players with a dummy ticker!
             if (DummyTicker)
@@ -287,7 +289,18 @@ namespace Content.Server.GameTicking
             // For non-randomized characters, try to pick a profile that requested the chosen job.
             if (!_randomizeCharacters)
             {
-                var matchingProfile = playerPreferences.SelectProfileForJob(jobId, _distressSignal?.SelectedPlanetMapId);
+                HumanoidCharacterProfile? matchingProfile = null;
+                if (selectedCharacterSlot != null &&
+                    playerPreferences.TryGetHumanoidInSlot(selectedCharacterSlot.Value, out var preferredProfile) &&
+                    preferredProfile != null)
+                {
+                    matchingProfile = preferredProfile;
+                }
+                else
+                {
+                    matchingProfile = playerPreferences.SelectProfileForJob(jobId, _distressSignal?.SelectedPlanetMapId);
+                }
+
                 if (matchingProfile != null)
                 {
                     character = matchingProfile;
@@ -421,7 +434,15 @@ namespace Content.Server.GameTicking
         /// <param name="station">The station they're spawning on</param>
         /// <param name="jobId">An optional job for them to spawn as</param>
         /// <param name="silent">Whether or not the player should be greeted upon joining</param>
-        public void MakeJoinGame(ICommonSession player, EntityUid station, string? jobId = null, bool silent = false)
+        /// <param name="selectedCharacterSlot">
+        /// Optional character slot to force for this join if that slot is eligible for the selected job.
+        /// </param>
+        public void MakeJoinGame(
+            ICommonSession player,
+            EntityUid station,
+            string? jobId = null,
+            bool silent = false,
+            int? selectedCharacterSlot = null)
         {
             if (!_playerGameStatuses.ContainsKey(player.UserId))
                 return;
@@ -429,7 +450,7 @@ namespace Content.Server.GameTicking
             if (!_userDb.IsLoadComplete(player))
                 return;
 
-            SpawnPlayer(player, station, jobId, silent: silent);
+            SpawnPlayer(player, station, jobId, silent: silent, selectedCharacterSlot: selectedCharacterSlot);
         }
 
         /// <summary>

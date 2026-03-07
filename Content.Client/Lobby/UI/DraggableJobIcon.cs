@@ -23,12 +23,12 @@ public sealed class DraggableJobIcon : TextureRect
     /// <summary>
     /// The TextureScale of a job icon
     /// </summary>
-    private const float DefaultScale = 3;
+    private const float DefaultScale = 2.6f;
 
     /// <summary>
     /// The TextureScale of a job icon if it's in the high priority bucket
     /// </summary>
-    private const float DefaultHighScale = 5.25f;
+    private const float DefaultHighScale = 4.6f;
 
     /// <summary>
     /// The job prototype represented by this icon

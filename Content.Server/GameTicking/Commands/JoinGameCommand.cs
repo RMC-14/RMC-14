@@ -59,15 +59,17 @@ namespace Content.Server.GameTicking.Commands
             else if (ticker.RunLevel == GameRunLevel.InRound)
             {
                 // Optional first argument is character slot from the multi-slot late-join UI.
+                int? selectedCharacterSlot = null;
                 var argOffset = 0;
                 if (args.Length == 3)
                 {
-                    if (!int.TryParse(args[0], out _))
+                    if (!int.TryParse(args[0], out var parsedSlot))
                     {
                         shell.WriteError(Loc.GetString("shell-argument-must-be-number"));
                         return;
                     }
 
+                    selectedCharacterSlot = parsedSlot;
                     argOffset = 1;
                 }
 
@@ -97,7 +99,7 @@ namespace Content.Server.GameTicking.Commands
                     _adminManager.DeAdmin(player);
                 }
 
-                ticker.MakeJoinGame(player, station, id);
+                ticker.MakeJoinGame(player, station, id, selectedCharacterSlot: selectedCharacterSlot);
                 return;
             }
 

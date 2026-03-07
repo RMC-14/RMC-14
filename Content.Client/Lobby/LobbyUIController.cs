@@ -404,7 +404,7 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
             OnAnyCharacterOrJobChange?.Invoke();
             _profileEditor?.RefreshPreviewForPriorityUpdate();
             _jobPriorityEditor?.LoadJobPriorities();
-            _characterSetup?.ReloadCharacterPickers(selectJobPriorities: _jobPriorityEditor?.Visible == true);
+            _characterSetup?.ReloadCharacterPickers(selectJobPriorities: false);
         };
 
         if (_stateManager.CurrentState is LobbyState lobby)
