@@ -31,7 +31,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: PlayingCardHand
-    maxCards: 52
   - type: Sprite
     sprite: _RMC14/Objects/Fun/playing_cards.rsi
     state: back_deck
