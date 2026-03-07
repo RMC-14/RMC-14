@@ -130,6 +130,19 @@ public sealed class WeatherSystem : SharedWeatherSystem
         if (!Timing.IsFirstTimePredicted)
             return true;
 
+        // RMC14
+        var ent = _playerManager.LocalEntity;
+        if (ent is not { } localPlayer)
+            return true;
+
+        var entXform = Transform(localPlayer);
+        if (entXform.MapUid != uid)
+        {
+            weather.Stream = _audio.Stop(weather.Stream);
+            return true;
+        }
+        //
+
         // TODO: Fades (properly)
         weather.Stream = _audio.Stop(weather.Stream);
         weather.Stream = _audio.PlayGlobal(weatherProto.Sound, Filter.Local(), true)?.Entity;
