@@ -1,4 +1,3 @@
-﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Numerics;
 using Content.Client.Stylesheets;
@@ -20,14 +19,14 @@ namespace Content.Client.Lobby.UI;
 public sealed class DraggableJobTarget : Control
 {
     /// <summary>
-    /// A cached ordered list of jobs. This will be the sorted order of the job icons.
+    /// A cached ordered list of jobs for this target. This will be the sorted order of the job icons.
     /// </summary>
-    private static readonly List<JobPrototype> OrderedJobsInternal = new ();
+    private readonly List<JobPrototype> _orderedJobs = new();
 
     /// <summary>
-    /// A public immutable accessor for the ordered jobs list
+    /// Ordered jobs used for icon sorting and initial icon construction.
     /// </summary>
-    public static ImmutableList<JobPrototype> OrderedJobs => OrderedJobsInternal.ToImmutableList();
+    public IReadOnlyList<JobPrototype> OrderedJobs => _orderedJobs;
 
     /// <summary>
     /// This will be the main "layout" box of the control, which contains the job container and label header
@@ -46,23 +45,33 @@ public sealed class DraggableJobTarget : Control
     private Container? _jobIconContainer;
 
     /// <summary>
-    /// This is used if <see cref="Priority"/> is "High". If this is not null and an icon is dropped into this target
-    /// while there is already a icon here, it will first kick the occupying icon to the fallback target before
-    /// placing the dropped icon in.
-    /// If it is null, it will simply not handle the icon (and <see cref="DraggableJobIcon"/> will probably kick it back
-    /// to where it was before the drag)
-    /// </summary>
-    private DraggableJobTarget? _fallbackTarget;
-
-    /// <summary>
     /// The job priority that this drop target represents.
+    /// Setting this updates the visual layout for this target immediately.
     /// </summary>
-    public JobPriority Priority { get; set; }
+    public JobPriority Priority
+    {
+        get => _priority;
+        set
+        {
+            if (_priority == value)
+                return;
+
+            _priority = value;
+            RebuildLayout();
+        }
+    }
+    private JobPriority _priority = JobPriority.Never;
 
     /// <summary>
     /// Since this has different behavior with high priority, this is a simple helper property to ask that question.
     /// </summary>
     private bool IsHighPriority => Priority == JobPriority.High;
+
+    /// <summary>
+    /// Fired when an icon is dropped over this target.
+    /// Drop handling policy should be implemented by the parent control.
+    /// </summary>
+    public event Action<DraggableJobTarget, DraggableJobIcon>? JobIconDropped;
 
     public DraggableJobTarget()
     {
@@ -72,48 +81,24 @@ public sealed class DraggableJobTarget : Control
         AddChild(_backgroundPanel);
 
         // Add the main content box
-        _mainBox = new BoxContainer()
+        _mainBox = new BoxContainer
         {
             Margin = new Thickness(10, 0),
             Orientation = BoxContainer.LayoutOrientation.Vertical,
             HorizontalExpand = true,
         };
         AddChild(_mainBox);
+
+        RebuildLayout();
     }
 
-    /// <summary>
-    /// Set the fallback target for a high priority drop target.
-    /// Generally this should be the medium priority drop target.
-    /// </summary>
-    /// <param name="target">fallback target to be set, should NOT be high priority</param>
-    /// <exception cref="InvalidOperationException">
-    /// Throws if <see cref="Priority"/> is not "High", as it wouldn't do anything.
-    /// Throws if <paramref name="target"/> <see cref="Priority"/> is "High", as this is sussy baka and you could make
-    /// some weird infinite loop that I'm too lazy to check for.
-    /// </exception>
-    public void SetFallbackTarget(DraggableJobTarget target)
+    private void RebuildLayout()
     {
-        if (!IsHighPriority)
-            throw new InvalidOperationException("Only the high priority job target can have a fallback set");
+        var existingIcons = _jobIconContainer?.Children.OfType<DraggableJobIcon>().ToList() ?? [];
 
-        if (target.IsHighPriority)
-            throw new InvalidOperationException("The fallback target shouldn't also be high priority. this sus");
-
-        _fallbackTarget = target;
-    }
-
-    protected override void EnteredTree()
-    {
-        base.EnteredTree();
-
-        // When this enters the tree, let's remake everything.
-        // I wanted to put most of this in the constructor, but other xaml elements weren't initialized at that stage
-
-        // Nuke everything in the main content box
         _mainBox.RemoveAllChildren();
         _jobIconContainer = null;
 
-        // Make and add the text header
         var header = new Label
         {
             Text = Loc.GetString($"humanoid-profile-editor-job-priority-{Priority.ToString().ToLower()}-button"),
@@ -121,44 +106,35 @@ public sealed class DraggableJobTarget : Control
             StyleClasses = { "LabelBig" },
             Margin = new Thickness(0, 6),
         };
-
         _mainBox.AddChild(header);
 
-        // Make and add the control that will hold the job icons
         if (Priority != JobPriority.High)
         {
-            _jobIconContainer = new GridContainer()
+            _jobIconContainer = new GridContainer
             {
-                // Columns will be adjusted later anyway
                 Columns = 5,
+                HSeparationOverride = 1,
+                VSeparationOverride = 1,
                 HorizontalAlignment = HAlignment.Center,
             };
         }
         else
         {
-            _jobIconContainer = new BoxContainer()
+            _jobIconContainer = new BoxContainer
             {
                 Name = "HighBox",
                 HorizontalAlignment = HAlignment.Center,
                 VerticalAlignment = VAlignment.Center,
-                // This is the size of one high priority icon
-                // Just makes sure it doesn't change size when you take it out
-                MinWidth = 96,
+                MinWidth = 88,
             };
         }
 
         _mainBox.AddChild(_jobIconContainer);
-    }
 
-    /// <summary>
-    /// Just to be safe and nuke everything in the main content box when it exits the tree
-    /// </summary>
-    protected override void ExitedTree()
-    {
-        base.ExitedTree();
-
-        _mainBox.RemoveAllChildren();
-        _jobIconContainer = null;
+        foreach (var icon in existingIcons)
+        {
+            AddJobIcon(icon);
+        }
     }
 
     /// <summary>
@@ -172,7 +148,6 @@ public sealed class DraggableJobTarget : Control
     /// <summary>
     /// Register a <see cref="DraggableJobIcon"/>
     /// </summary>
-    /// <param name="icon"></param>
     public void RegisterJobIcon(DraggableJobIcon icon)
     {
         icon.OnMouseMove += pos => HandleMouseMove(pos, icon);
@@ -189,20 +164,11 @@ public sealed class DraggableJobTarget : Control
     /// </param>
     public void AddJobIcon(DraggableJobIcon icon, bool preOrdered = false)
     {
-        if (IsHighPriority && _jobIconContainer?.ChildCount > 0)
-        {
-            if (_fallbackTarget is null)
-                return;
-            if (_jobIconContainer.Children.First() is not DraggableJobIcon toBump)
-                return;
-            _fallbackTarget.AddJobIcon(toBump);
-        }
-
         icon.SetScale(Priority);
         var insertIndex = preOrdered ? -1 : FindInsertLocation(icon);
         icon.Orphan();
         _jobIconContainer?.AddChild(icon);
-        if(insertIndex >= 0)
+        if (insertIndex >= 0)
             icon.SetPositionInParent(insertIndex);
     }
 
@@ -211,16 +177,27 @@ public sealed class DraggableJobTarget : Control
     /// </summary>
     private int FindInsertLocation(DraggableJobIcon icon)
     {
-        if (IsHighPriority)
+        if (IsHighPriority || _jobIconContainer is null)
             return -1;
 
-        var thisIndex = OrderedJobs.IndexOf(icon.JobProto);
+        var thisIndex = _orderedJobs.IndexOf(icon.JobProto);
 
-        var insertAt = _jobIconContainer?.Children.Cast<DraggableJobIcon>()
-            .ToImmutableList()
-            .FindIndex(curIcon => OrderedJobs.IndexOf(curIcon.JobProto) > thisIndex);
+        var i = 0;
+        foreach (var child in _jobIconContainer.Children)
+        {
+            if (child is not DraggableJobIcon current)
+            {
+                i++;
+                continue;
+            }
 
-        return insertAt ?? -1;
+            if (_orderedJobs.IndexOf(current.JobProto) > thisIndex)
+                return i;
+
+            i++;
+        }
+
+        return -1;
     }
 
     /// <summary>
@@ -231,7 +208,11 @@ public sealed class DraggableJobTarget : Control
         if (!icon.Dragging || !GlobalRect.Contains(pos))
             return;
 
-        AddJobIcon(icon);
+        if (JobIconDropped is not null)
+            JobIconDropped.Invoke(this, icon);
+        else
+            AddJobIcon(icon);
+
         if (_backgroundPanel is not null)
             _backgroundPanel.Visible = false;
     }
@@ -244,22 +225,24 @@ public sealed class DraggableJobTarget : Control
         var contained = GlobalRect.Contains(pos);
         if (_backgroundPanel is not null)
             _backgroundPanel.Visible = contained;
-        if(contained)
+
+        if (contained)
             icon.SetScale(Priority);
     }
 
     /// <summary>
-    /// Update the cached list of sorted jobs
+    /// Update the cached list of sorted jobs.
     /// </summary>
-    public static void UpdatedOrderedJobs(IPrototypeManager protoMan)
+    public void UpdateOrderedJobs(IPrototypeManager protoMan)
     {
-        OrderedJobsInternal.Clear();
+        _orderedJobs.Clear();
 
         // Get and sort departments
         var departments = protoMan.EnumerateCM<DepartmentPrototype>()
             .Where(dep => !dep.Hidden && !dep.EditorHidden)
             .ToList();
         departments.Sort(DepartmentUIComparer.Instance);
+
         foreach (var department in departments)
         {
             // Get and sort jobs in department
@@ -268,10 +251,11 @@ public sealed class DraggableJobTarget : Control
                 .Where(job => job.IsCM && !job.Hidden && job.SetPreference)
                 .ToList();
             jobs.Sort(JobUIComparer.Instance);
+
             foreach (var job in jobs)
             {
-                if (!OrderedJobsInternal.Contains(job))
-                    OrderedJobsInternal.Add(job);
+                if (!_orderedJobs.Contains(job))
+                    _orderedJobs.Add(job);
             }
         }
     }
@@ -285,6 +269,17 @@ public sealed class DraggableJobTarget : Control
             return [];
 
         return _jobIconContainer.Children.Cast<DraggableJobIcon>().Select(icon => icon.JobProto);
+    }
+
+    /// <summary>
+    /// Get the draggable icons currently contained in this control.
+    /// </summary>
+    public IEnumerable<DraggableJobIcon> GetContainedIcons()
+    {
+        if (_jobIconContainer is null)
+            return [];
+
+        return _jobIconContainer.Children.Cast<DraggableJobIcon>();
     }
 
     /// <summary>

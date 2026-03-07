@@ -33,7 +33,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     private const int MinColumnMedium = 3;
     private const float RegularPriorityIconWidth = 48f;
     private const float TargetHorizontalMargin = 20f;
-    private const float HighPriorityTargetWidth = 116f;
+    private const float HighPriorityTargetWidth = 96f;
     private const float JobGridSeparationWidth = 6f;
     private const int JobGridElementCount = 7;
     private const float SeparatorWidth = 2f;
@@ -68,11 +68,12 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         _prototypeManager.PrototypesReloaded += OnPrototypesReloaded;
 
         // Make sure that the cached job ordering is set up and up to date.
-        DraggableJobTarget.UpdatedOrderedJobs(_prototypeManager);
+        RefreshOrderedJobs();
 
-        // We need to tell the high priority target control where to bump its current job if someone tries to drag
-        // in another high priority job.
-        GetTargetControl(JobPriority.High).SetFallbackTarget(GetTargetControl(JobPriority.Medium));
+        foreach (var priority in Enum.GetValues<JobPriority>())
+        {
+            GetTargetControl(priority).JobIconDropped += OnJobIconDropped;
+        }
 
         TogglePrioritiesButton.OnPressed += _ => SetPrioritiesCollapsed(!_prioritiesCollapsed);
         OnResized += BalanceColumns;
@@ -84,7 +85,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         if (args.WasModified<JobPrototype>() || args.WasModified<DepartmentPrototype>())
         {
             // Update the job ordering and refresh the job icon layout.
-            DraggableJobTarget.UpdatedOrderedJobs(_prototypeManager);
+            RefreshOrderedJobs();
             Refresh();
         }
     }
@@ -120,6 +121,8 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     /// </summary>
     public void Refresh()
     {
+        RefreshOrderedJobs();
+
         foreach (var prio in Enum.GetValues<JobPriority>())
         {
             GetTargetControl(prio).ClearIcons();
@@ -133,7 +136,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         var priorities = prefs.JobPriorities;
 
         // Create the job icons in order
-        foreach (var job in DraggableJobTarget.OrderedJobs)
+        foreach (var job in GetTargetControl(JobPriority.Never).OrderedJobs)
         {
             if (!job.SetPreference)
                 continue;
@@ -163,6 +166,26 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         }
 
         BalanceColumns();
+    }
+
+    private void RefreshOrderedJobs()
+    {
+        foreach (var priority in Enum.GetValues<JobPriority>())
+        {
+            GetTargetControl(priority).UpdateOrderedJobs(_prototypeManager);
+        }
+    }
+
+    private void OnJobIconDropped(DraggableJobTarget target, DraggableJobIcon icon)
+    {
+        if (target.Priority == JobPriority.High)
+        {
+            var currentHigh = target.GetContainedIcons().FirstOrDefault(existing => existing != icon);
+            if (currentHigh is not null)
+                GetTargetControl(JobPriority.Medium).AddJobIcon(currentHigh);
+        }
+
+        target.AddJobIcon(icon);
     }
 
     /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+using System.Numerics;
+using Content.Client.Interaction;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Client.GameObjects;
@@ -44,7 +45,7 @@ public sealed class DraggableJobIcon : TextureRect
     /// <summary>
     /// If the icon is being dragged, this will hold the <see cref="TextureRect.TextureScale"/> that was set before the
     /// dragging. If the drag has ended and no other elements reparented this icon, it will reset the
-    /// <see cref="TextureRect.TextureScale"/> back to this value..
+    /// <see cref="TextureRect.TextureScale"/> back to this value.
     /// </summary>
     private Vector2? _oldScale;
 
@@ -82,6 +83,7 @@ public sealed class DraggableJobIcon : TextureRect
     /// The delegate instance to call to check if dragging should be allowed
     /// </summary>
     private readonly CheckCanDrag? _canDragFunc;
+    private readonly DragDropHelper<DraggableJobIcon> _dragDropHelper;
 
     public DraggableJobIcon(JobPrototype jobPrototype, CheckCanDrag? checkDrag = null, TooltipSupplier? tooltipSupplier = null)
     {
@@ -90,6 +92,7 @@ public sealed class DraggableJobIcon : TextureRect
         JobProto = jobPrototype;
 
         _canDragFunc = checkDrag;
+        _dragDropHelper = new DragDropHelper<DraggableJobIcon>(OnBeginDrag, OnContinueDrag, OnEndDrag);
 
         var sprite = _entManager.System<SpriteSystem>();
         var iconProto = _prototypeManager.Index(jobPrototype.Icon);
@@ -101,7 +104,7 @@ public sealed class DraggableJobIcon : TextureRect
         MouseFilter = MouseFilterMode.Pass;
 
         // Add a little sugar to suppress the tooltip while dragging the icon
-        if(tooltipSupplier is not null)
+        if (tooltipSupplier is not null)
             TooltipSupplier = obj => Dragging ? null : tooltipSupplier(obj);
     }
 
@@ -132,53 +135,40 @@ public sealed class DraggableJobIcon : TextureRect
     /// <summary>
     /// Start the process of dragging the icon
     /// </summary>
-    private void StartDragging(GUIBoundKeyEventArgs args)
+    private void StartDragging()
     {
         // Save the current parent and texture scale
         _oldParent = Parent;
         _oldScale = TextureScale;
+
         // Put it into PopupRoot
         Orphan();
         _uiManager.PopupRoot.AddChild(this);
-
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
-
-        // We only need to do stuff if we're dragging
-        if (!Dragging)
-            return;
-
-        // Track the icon to the mouse cursor
-        var mousePos = _uiManager.MousePositionScaled.Position;
-        LayoutContainer.SetPosition(this, mousePos - Size / 2.0f);
-        // Let the drop targets check if you're dragging over them
-        OnMouseMove?.Invoke(mousePos);
+        _dragDropHelper.Update(args.DeltaSeconds);
     }
 
     protected override void KeyBindDown(GUIBoundKeyEventArgs args)
     {
         base.KeyBindDown(args);
-        // Make sure we're allowed to drag as well
-        if (args.Function == EngineKeyFunctions.UIClick && _canDragFunc is not null && _canDragFunc())
-        {
-            StartDragging(args);
-            OnMouseDown?.Invoke(args);
-        }
+        if (args.Function != EngineKeyFunctions.UIClick)
+            return;
+
+        OnMouseDown?.Invoke(args);
+        _dragDropHelper.MouseDown(this);
     }
 
     protected override void KeyBindUp(GUIBoundKeyEventArgs args)
     {
         base.KeyBindUp(args);
-        if (args.Function == EngineKeyFunctions.UIClick)
-        {
-            // Invoke this to let drop targets handle the icon
-            OnMouseUp?.Invoke(_uiManager.MousePositionScaled.Position);
-            // Clean up
-            StopDragging();
-        }
+        if (args.Function != EngineKeyFunctions.UIClick)
+            return;
+
+        _dragDropHelper.EndDrag();
     }
 
     /// <summary>
@@ -195,5 +185,34 @@ public sealed class DraggableJobIcon : TextureRect
     private void SetScale(float scale)
     {
         TextureScale = new Vector2(scale);
+    }
+
+    private bool OnBeginDrag()
+    {
+        if (_canDragFunc is not null && !_canDragFunc())
+            return false;
+
+        StartDragging();
+        return true;
+    }
+
+    private bool OnContinueDrag(float frameTime)
+    {
+        if (!Dragging)
+            return false;
+
+        var mousePos = _uiManager.MousePositionScaled.Position;
+        LayoutContainer.SetPosition(this, mousePos - Size / 2f);
+        OnMouseMove?.Invoke(mousePos);
+        return true;
+    }
+
+    private void OnEndDrag()
+    {
+        if (!Dragging)
+            return;
+
+        OnMouseUp?.Invoke(_uiManager.MousePositionScaled.Position);
+        StopDragging();
     }
 }
