@@ -360,13 +360,13 @@
       - RMCSurvivorNewVaraderoResearcher: 2
     survivorJobScenarios:
       surveillancecenter_varadero:
-      - CMSurvivorSecurity: 2
       - RMCSurvivorCommandingOfficer: 1
-      - CMSurvivor: -1
-      - CMSurvivorCorporate: 2
+      - CMSurvivorSecurity: 1
+      - CMSurvivorEngineer: 3
       - CMSurvivorDoctor: 3
-      - CMSurvivorEngineer: 4
       - CMSurvivorScientist: 2
+      - CMSurvivorCorporate: 2
+      - CMSurvivor: -1
     survivorJobVariantScenarios:
       surveillancecenter_varadero:
         CMSurvivorEngineer:
