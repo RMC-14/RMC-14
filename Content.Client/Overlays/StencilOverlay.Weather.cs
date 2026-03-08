@@ -1,5 +1,4 @@
 using System.Numerics;
-using Content.Client._RMC14.Sprite;
 using Content.Shared._RMC14.Weather;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
