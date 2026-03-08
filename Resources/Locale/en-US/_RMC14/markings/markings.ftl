@@ -1,2 +1,2 @@
 ﻿marking-LongEarsStandard = Long Ears Standard
-marking-LongEarsDrow = Long Ears Drow
+marking-LongEarsDrow = Long Ears Down
