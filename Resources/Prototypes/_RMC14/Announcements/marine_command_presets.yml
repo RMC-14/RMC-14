@@ -21,22 +21,22 @@
         bounceHeight: 15
         enableCRT: true
         cRTSettings:
-          enabled: true
-          showScanlines: true
-          scanlineSpacing: 6
-          scanlineThickness: 10
-          scanlineAlpha: 0.95
-          scanlineSpeed: 60
-          scanlineColor: "#1c99ff"
-          showNoise: true
-          noiseIntensity: 4
-          noiseAlpha: 0.6
-          showVignette: true
-          vignetteIntensity: 3
-          vignetteColor: "#000000"
-          glowColor: "#4a9eff"
-          showChromaticAberration: true
-          chromaticAmount: 1
+          # enabled: true
+          # showScanlines: true
+          # scanlineSpacing: 6
+          # scanlineThickness: 10
+          # scanlineAlpha: 0.95
+          # scanlineSpeed: 60
+          # scanlineColor: "#1c99ff"
+          # showNoise: true
+          # noiseIntensity: 4
+          # noiseAlpha: 0.6
+          # showVignette: true
+          # vignetteIntensity: 3
+          # vignetteColor: "#000000"
+          # glowColor: "#4a9eff"
+          # showChromaticAberration: true
+          # chromaticAmount: 1
     layout:
       position: TopLeft
       speakerNamePosition: Below
@@ -108,22 +108,22 @@
         bounceHeight: 15
         enableCRT: true
         cRTSettings:
-          enabled: true
-          showScanlines: true
-          scanlineSpacing: 6
-          scanlineThickness: 10
-          scanlineAlpha: 0.95
-          scanlineSpeed: 60
-          scanlineColor: "#1c99ff"
-          showNoise: true
-          noiseIntensity: 4
-          noiseAlpha: 0.6
-          showVignette: true
-          vignetteIntensity: 3
-          vignetteColor: "#000000"
-          glowColor: "#4a9eff"
-          showChromaticAberration: true
-          chromaticAmount: 1
+          # enabled: true
+          # showScanlines: true
+          # scanlineSpacing: 6
+          # scanlineThickness: 10
+          # scanlineAlpha: 0.95
+          # scanlineSpeed: 60
+          # scanlineColor: "#1c99ff"
+          # showNoise: true
+          # noiseIntensity: 4
+          # noiseAlpha: 0.6
+          # showVignette: true
+          # vignetteIntensity: 3
+          # vignetteColor: "#000000"
+          # glowColor: "#4a9eff"
+          # showChromaticAberration: true
+          # chromaticAmount: 1
     layout:
       position: TopLeft
       speakerNamePosition: Below

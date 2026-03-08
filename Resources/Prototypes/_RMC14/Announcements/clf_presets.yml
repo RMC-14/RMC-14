@@ -15,26 +15,26 @@
       animationEnhancements:
         enableCRT: true
         cRTSettings:
-          enabled: true
-          showScanlines: true
-          scanlineSpacing: 6
-          scanlineThickness: 6
-          scanlineAlpha: 0.55
-          scanlineSpeed: 56
-          scanlineColor: "#133500"
-          showNoise: true
-          noiseIntensity: 8
-          noiseAlpha: 0.30
-          showVignette: true
-          vignetteIntensity: 1.2
-          vignetteColor: "#0b0b0b"
-          glowColor: "#a6ff7a"
-          showChromaticAberration: true
-          chromaticAmount: 2.4
-          chromaticParticleCount: 8
-          chromaticParticleChance: 0.45
-          chromaticParticleAlpha: 0.35
-          chromaticAnimationSpeed: 3.0
+          # enabled: true
+          # showScanlines: true
+          # scanlineSpacing: 6
+          # scanlineThickness: 6
+          # scanlineAlpha: 0.55
+          # scanlineSpeed: 56
+          # scanlineColor: "#133500"
+          # showNoise: true
+          # noiseIntensity: 8
+          # noiseAlpha: 0.30
+          # showVignette: true
+          # vignetteIntensity: 1.2
+          # vignetteColor: "#0b0b0b"
+          # glowColor: "#a6ff7a"
+          # showChromaticAberration: true
+          # chromaticAmount: 2.4
+          # chromaticParticleCount: 3
+          # chromaticParticleChance: 0.45
+          # chromaticParticleAlpha: 0.35
+          # chromaticAnimationSpeed: 3.0
     layout:
       position: TopCenter
       speakerNamePosition: Below
