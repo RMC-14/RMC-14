@@ -337,7 +337,6 @@
         - prototype: CMLockerPolice
           offset: 1.5, -1.5
 
-
 - type: entity
   parent: BaseItem
   id: RMCTentUNMCExtendedCorrespondentFolded
@@ -398,4 +397,3 @@
         - prototype: CMPaperBin10
           offset: 1.5, 0.5
           neverRedeployableSetup: true
-         
