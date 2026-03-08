@@ -1529,12 +1529,10 @@
     actionIconEmpowered:
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: acid_mine_empowered
-    baseDamage:
-      types:
-        Heat: 45
   - type: TargetAction
-    range: 15 # the actual range is in XenoAcidMineComponent
     deselectOnMiss: false
+    checkCanAccess: false
+    range: 15 #Actual range on the AcidMine component.
   - type: WorldTargetAction
     event: !type:XenoAcidMineActionEvent
   - type: ActionBlockIfResting
@@ -1577,8 +1575,9 @@
       sprite: _RMC14/Actions/xeno_actions.rsi
       state: gas_mine_empowered
   - type: TargetAction
-    range: 15 # the actual range is in XenoDeployTrapsComponent
+    checkCanAccess: false
     deselectOnMiss: false
+    range: 15 #Actual range on the AcidMine component.
   - type: WorldTargetAction
     event: !type:XenoDeployTrapsActionEvent
   - type: XenoActionPlasma

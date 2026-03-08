@@ -12,10 +12,6 @@ namespace Content.Shared._RMC14.Xenonids.DeployTraps;
 [Access(typeof(XenoDeployTrapsSystem), typeof(XenoInsightSystem))]
 public sealed partial class XenoDeployTrapsComponent : Component
 {
-    // Length of do-after
-    [DataField, AutoNetworkedField]
-    public TimeSpan DeployTrapsDoAfterPeriod = TimeSpan.FromSeconds(0.2);
-
     [DataField, AutoNetworkedField]
     public float DeployTrapsRadius = 2f;
 
@@ -44,10 +40,4 @@ public sealed partial class XenoDeployTrapsComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool Empowered = false;
-
-    [DataField]
-    public DoAfterId? DeployTrapsDoAfter;
-
-
-
 }

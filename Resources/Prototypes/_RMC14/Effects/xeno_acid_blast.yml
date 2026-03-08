@@ -1,0 +1,10 @@
+﻿- type: entity
+  id: XenoAcidBlast
+  name: acid blast
+  noSpawn: true
+  components:
+  - type: XenoAcidBlast
+    delay: 1.35
+    baseDamage:
+      types:
+        Heat: 45

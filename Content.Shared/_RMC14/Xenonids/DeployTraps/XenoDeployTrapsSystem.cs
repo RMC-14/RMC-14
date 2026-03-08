@@ -29,8 +29,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly XenoPlasmaSystem _xenoPlasma = default!;
-    [Dependency] private readonly ExamineSystemShared _examine = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly XenoInsightSystem _insight = default!;
@@ -42,7 +40,6 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<XenoDeployTrapsComponent, XenoDeployTrapsActionEvent>(OnXenoDeployTrapsAction);
-        SubscribeLocalEvent<XenoDeployTrapsComponent, XenoDeployTrapsDoAfter>(OnDeployTrapsDoAfter);
     }
 
     private void OnXenoDeployTrapsAction(Entity<XenoDeployTrapsComponent> xeno, ref XenoDeployTrapsActionEvent args)
@@ -66,34 +63,13 @@ public sealed class XenoDeployTrapsSystem : EntitySystem
             return;
         }
 
-        var target = args.Target.SnapToGrid(EntityManager, _map);
-
         // Check if user has enough plasma
-        if (xeno.Comp.DeployTrapsDoAfter != null ||
-            !_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
+        if (!_xenoPlasma.TryRemovePlasmaPopup((xeno.Owner, null), args.PlasmaCost))
             return;
 
-        // Deploy Traps
-        var ev = new XenoDeployTrapsDoAfter(GetNetCoordinates(target));
-        var doAfter = new DoAfterArgs(EntityManager, xeno, xeno.Comp.DeployTrapsDoAfterPeriod, ev, xeno)
-            { BreakOnMove = false, DuplicateCondition = DuplicateConditions.SameEvent };
-        if (_doAfter.TryStartDoAfter(doAfter, out var id))
-        {
-            xeno.Comp.DeployTrapsDoAfter = id;
-        }
-    }
+        args.Handled = true;
 
-    private void OnDeployTrapsDoAfter(Entity<XenoDeployTrapsComponent> xeno, ref XenoDeployTrapsDoAfter args)
-    {
-        xeno.Comp.DeployTrapsDoAfter = null;
-
-        if (args.Cancelled)
-            return;
-
-        var coords = GetCoordinates(args.Coordinates);
-        if (_transform.GetGrid(coords) is not { } gridId ||
-            !TryComp(gridId, out MapGridComponent? grid))
-            return;
+        var coords = args.Target.SnapToGrid(EntityManager, _map);
 
         _audio.PlayPredicted(xeno.Comp.DeploySound, coords, xeno);
 
