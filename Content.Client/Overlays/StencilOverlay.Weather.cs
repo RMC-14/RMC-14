@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Client._RMC14.Sprite;
+using Content.Shared._RMC14.Weather;
 using Content.Shared.Light.Components;
 using Content.Shared.Weather;
 using Robust.Client.Graphics;
@@ -58,7 +59,7 @@ public sealed partial class StencilOverlay
             {
                 var playerPos = _transform.GetMapCoordinates(_playerManager.LocalEntity!.Value, playerXform).Position;
 
-                var query = _entManager.EntityQueryEnumerator<RMCFadingSpriteComponent>();
+                var query = _entManager.EntityQueryEnumerator<RMCBlockWeatherComponent>();
                 while (query.MoveNext(out var entity, out _))
                 {
                     var roofBounds = _entLookup.GetAABBNoContainer(entity,
