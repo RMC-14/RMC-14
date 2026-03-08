@@ -101,7 +101,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     private void SetPrioritiesCollapsed(bool collapsed)
     {
         _prioritiesCollapsed = collapsed;
-        TogglePrioritiesButton.Text = collapsed ? ">" : "v";
+        TogglePrioritiesButton.Text = collapsed ? "▶" : "▼";
         TogglePrioritiesButton.ToolTip = Loc.GetString(
             collapsed
                 ? "lobby-character-preview-panel-expand-job-priorities-tooltip"

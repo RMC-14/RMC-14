@@ -11,7 +11,7 @@
         <BoxContainer>
             <controls:NanoHeading Name="Header" Text="{Loc 'lobby-character-preview-panel-header'}" />
             <Button Name="TogglePrioritiesButton"
-                    Text="v"
+                    Text="▼"
                     MinSize="24 24"
                     Margin="4 0 0 0"
                     ToolTip="{Loc 'lobby-character-preview-panel-collapse-job-priorities-tooltip'}"/>

@@ -13,8 +13,8 @@ namespace Content.Client.Lobby.UI.Loadouts;
 [GenerateTypedNameReferences]
 public sealed partial class LoadoutGroupContainer : BoxContainer
 {
-    private const string ClosedGroupMark = ">";
-    private const string OpenedGroupMark = "v";
+    private const string ClosedGroupMark = "▶";
+    private const string OpenedGroupMark = "▼";
 
     /// <summary>
     /// A dictionary that stores open groups
