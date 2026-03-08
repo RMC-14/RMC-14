@@ -233,6 +233,13 @@
     offsetLength: 0
     speed: 1
     doAfter: 0
+  - type: XenoTailStab
+    toggle: true
+    inject:
+      RMCMolecularAcid: 6
+    tailDamage:
+      groups:
+        Brute: 30
   - type: XenoAcidMine
   - type: XenoAcidShotgun
   - type: XenoDeployTraps

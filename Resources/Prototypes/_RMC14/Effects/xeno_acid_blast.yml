@@ -1,9 +1,20 @@
 ﻿- type: entity
   id: XenoAcidBlast
   name: acid blast
-  noSpawn: true
   components:
   - type: XenoAcidBlast
+    delay: 1.35
+    baseDamage:
+      types:
+        Heat: 45
+
+- type: entity
+  id: XenoAcidBlastEmpowered
+  parent: XenoAcidBlast
+  name: acid blast
+  components:
+  - type: XenoAcidBlast
+    empowered: true
     delay: 1.35
     baseDamage:
       types:
