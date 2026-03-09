@@ -3,6 +3,7 @@
   id: RMCSurvivorParamarine
   name: rmc-job-name-paramarine
   icon: RMCJobIconParamarine
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Royal Paramarine Rifleman (Survivor)
   special:
     - !type:AddComponentSpecial

@@ -6,6 +6,7 @@
     RMCRankParaCorporal: [ ]
   startingGear: RMCGearParaPilot
   icon: RMCJobIconParaPilot
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Royal Paramarine Fleet Air Arm Pilot (Survivor)
   special:
     - !type:AddComponentSpecial

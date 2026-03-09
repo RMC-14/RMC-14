@@ -6,6 +6,7 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
   special:
     - !type:AddComponentSpecial
