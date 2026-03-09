@@ -66,7 +66,7 @@
       - !type:FadeBehaviour
         id: turn_on
         maxDuration: 5
-        startValue: 6
+        startValue: 2.5
         endValue: 7
       - !type:FadeBehaviour
         id: phase_1
@@ -147,7 +147,7 @@
     - !type:FadeBehaviour
       id: turn_on
       maxDuration: 5
-      startValue: 4
+      startValue: 2.5
       endValue: 5
     - !type:FadeBehaviour
       id: phase_1
@@ -225,7 +225,7 @@
     - !type:FadeBehaviour
       id: turn_on
       maxDuration: 5
-      startValue: 5
+      startValue: 2.5
       endValue: 6
     - !type:FadeBehaviour
       id: phase_1
@@ -511,7 +511,7 @@
       - !type:FadeBehaviour
         id: turn_on
         maxDuration: 5.0
-        startValue: 5
+        startValue: 2.5
         endValue: 7.0
       - !type:FadeBehaviour
         id: phase_1
@@ -561,7 +561,7 @@
       - !type:FadeBehaviour
        id: turn_on
        maxDuration: 5
-       startValue: 5
+       startValue: 2.5
        endValue: 5
       - !type:FadeBehaviour
         id: phase_1
