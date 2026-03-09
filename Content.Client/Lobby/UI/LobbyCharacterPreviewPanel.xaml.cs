@@ -2,6 +2,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Client.Lobby.UI.ProfileEditorControls;
 using Content.Client.Players.PlayTimeTracking;
+using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Content.Client.UserInterface.Controls;
@@ -39,6 +40,8 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     private const float SeparatorWidth = 2f;
     private const int SeparatorCount = 3;
     private bool _prioritiesCollapsed;
+    private readonly List<JobPrototype> _orderedJobs = [];
+    private readonly Dictionary<ProtoId<JobPrototype>, int> _orderedJobIndices = [];
 
     /// <summary>
     /// <see cref="LobbyState"/> needs to register events on this button, so provide a property to access it publicly.
@@ -136,7 +139,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         var priorities = prefs.JobPriorities;
 
         // Create the job icons in order
-        foreach (var job in GetTargetControl(JobPriority.Never).OrderedJobs)
+        foreach (var job in _orderedJobs)
         {
             if (!job.SetPreference)
                 continue;
@@ -162,7 +165,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
             icon.OnPriorityChanged += SendUpdatedPriorities;
             icon.OnPriorityChanged += BalanceColumns;
 
-            GetTargetControl(prio).AddJobIcon(icon, preOrdered: true);
+            PlaceIconInPriority(icon, prio, preOrdered: true);
         }
 
         BalanceColumns();
@@ -170,9 +173,30 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
 
     private void RefreshOrderedJobs()
     {
-        foreach (var priority in Enum.GetValues<JobPriority>())
+        _orderedJobs.Clear();
+        _orderedJobIndices.Clear();
+
+        var departments = _prototypeManager.EnumerateCM<DepartmentPrototype>()
+            .Where(dep => !dep.Hidden && !dep.EditorHidden)
+            .ToList();
+        departments.Sort(DepartmentUIComparer.Instance);
+
+        foreach (var department in departments)
         {
-            GetTargetControl(priority).UpdateOrderedJobs(_prototypeManager);
+            var jobs = department.Roles
+                .Select(_prototypeManager.Index)
+                .Where(job => job.IsCM && !job.Hidden && job.SetPreference)
+                .ToList();
+            jobs.Sort(JobUIComparer.Instance);
+
+            foreach (var job in jobs)
+            {
+                if (_orderedJobIndices.ContainsKey(job.ID))
+                    continue;
+
+                _orderedJobIndices[job.ID] = _orderedJobs.Count;
+                _orderedJobs.Add(job);
+            }
         }
     }
 
@@ -182,10 +206,38 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         {
             var currentHigh = target.GetContainedIcons().FirstOrDefault(existing => existing != icon);
             if (currentHigh is not null)
-                GetTargetControl(JobPriority.Medium).AddJobIcon(currentHigh);
+                PlaceIconInPriority(currentHigh, JobPriority.Medium);
         }
 
-        target.AddJobIcon(icon);
+        PlaceIconInPriority(icon, target.Priority);
+    }
+
+    private void PlaceIconInPriority(DraggableJobIcon icon, JobPriority priority, bool preOrdered = false)
+    {
+        var target = GetTargetControl(priority);
+        int? insertIndex = null;
+
+        if (!preOrdered && priority != JobPriority.High)
+            insertIndex = FindInsertLocation(target, icon);
+
+        target.AddJobIcon(icon, insertIndex);
+    }
+
+    private int? FindInsertLocation(DraggableJobTarget target, DraggableJobIcon icon)
+    {
+        var thisIndex = _orderedJobIndices.GetValueOrDefault(icon.JobProto.ID, int.MaxValue);
+        var i = 0;
+
+        foreach (var existing in target.GetContainedIcons())
+        {
+            var existingIndex = _orderedJobIndices.GetValueOrDefault(existing.JobProto.ID, int.MaxValue);
+            if (existingIndex > thisIndex)
+                return i;
+
+            i++;
+        }
+
+        return null;
     }
 
     /// <summary>

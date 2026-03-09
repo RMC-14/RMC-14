@@ -1,13 +1,11 @@
 using System.Linq;
 using System.Numerics;
 using Content.Client.Stylesheets;
-using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
 using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
-using Robust.Shared.Prototypes;
 
 namespace Content.Client.Lobby.UI;
 
@@ -18,16 +16,6 @@ namespace Content.Client.Lobby.UI;
 /// </summary>
 public sealed class DraggableJobTarget : Control
 {
-    /// <summary>
-    /// A cached ordered list of jobs for this target. This will be the sorted order of the job icons.
-    /// </summary>
-    private readonly List<JobPrototype> _orderedJobs = new();
-
-    /// <summary>
-    /// Ordered jobs used for icon sorting and initial icon construction.
-    /// </summary>
-    public IReadOnlyList<JobPrototype> OrderedJobs => _orderedJobs;
-
     /// <summary>
     /// This will be the main "layout" box of the control, which contains the job container and label header
     /// </summary>
@@ -61,11 +49,6 @@ public sealed class DraggableJobTarget : Control
         }
     }
     private JobPriority _priority = JobPriority.Never;
-
-    /// <summary>
-    /// Since this has different behavior with high priority, this is a simple helper property to ask that question.
-    /// </summary>
-    private bool IsHighPriority => Priority == JobPriority.High;
 
     /// <summary>
     /// Fired when an icon is dropped over this target.
@@ -150,54 +133,24 @@ public sealed class DraggableJobTarget : Control
     /// </summary>
     public void RegisterJobIcon(DraggableJobIcon icon)
     {
-        icon.OnMouseMove += pos => HandleMouseMove(pos, icon);
+        icon.OnMouseMove += HandleMouseMove;
         icon.OnMouseUp += args => HandleMouseUp(args, ref icon);
     }
 
     /// <summary>
     /// Add a job icon to this control. The icon will be reparented if it is already parented.
     /// </summary>
-    /// <param name="icon">Job icon to be added and parented</param>
-    /// <param name="preOrdered">
-    /// If false, it will figure out where to insert the icon to remain sorted.
-    /// If you are adding icons in order from an empty state, set this to true to save some cycles.
+    /// <param name="icon">Job icon to be added and parented.</param>
+    /// <param name="insertIndex">
+    /// Optional index in the target container where this icon should be inserted. If null, it is appended.
     /// </param>
-    public void AddJobIcon(DraggableJobIcon icon, bool preOrdered = false)
+    public void AddJobIcon(DraggableJobIcon icon, int? insertIndex = null)
     {
         icon.SetScale(Priority);
-        var insertIndex = preOrdered ? -1 : FindInsertLocation(icon);
         icon.Orphan();
         _jobIconContainer?.AddChild(icon);
-        if (insertIndex >= 0)
-            icon.SetPositionInParent(insertIndex);
-    }
-
-    /// <summary>
-    /// Find which index the icon should be assigned to keep it in order.
-    /// </summary>
-    private int FindInsertLocation(DraggableJobIcon icon)
-    {
-        if (IsHighPriority || _jobIconContainer is null)
-            return -1;
-
-        var thisIndex = _orderedJobs.IndexOf(icon.JobProto);
-
-        var i = 0;
-        foreach (var child in _jobIconContainer.Children)
-        {
-            if (child is not DraggableJobIcon current)
-            {
-                i++;
-                continue;
-            }
-
-            if (_orderedJobs.IndexOf(current.JobProto) > thisIndex)
-                return i;
-
-            i++;
-        }
-
-        return -1;
+        if (insertIndex is { } index && index >= 0)
+            icon.SetPositionInParent(index);
     }
 
     /// <summary>
@@ -220,44 +173,11 @@ public sealed class DraggableJobTarget : Control
     /// <summary>
     /// Check if an icon is hovering above the target and handle the feedback effects
     /// </summary>
-    private void HandleMouseMove(Vector2 pos, DraggableJobIcon icon)
+    private void HandleMouseMove(Vector2 pos)
     {
         var contained = GlobalRect.Contains(pos);
         if (_backgroundPanel is not null)
             _backgroundPanel.Visible = contained;
-
-        if (contained)
-            icon.SetScale(Priority);
-    }
-
-    /// <summary>
-    /// Update the cached list of sorted jobs.
-    /// </summary>
-    public void UpdateOrderedJobs(IPrototypeManager protoMan)
-    {
-        _orderedJobs.Clear();
-
-        // Get and sort departments
-        var departments = protoMan.EnumerateCM<DepartmentPrototype>()
-            .Where(dep => !dep.Hidden && !dep.EditorHidden)
-            .ToList();
-        departments.Sort(DepartmentUIComparer.Instance);
-
-        foreach (var department in departments)
-        {
-            // Get and sort jobs in department
-            var jobs = department.Roles
-                .Select(protoMan.Index)
-                .Where(job => job.IsCM && !job.Hidden && job.SetPreference)
-                .ToList();
-            jobs.Sort(JobUIComparer.Instance);
-
-            foreach (var job in jobs)
-            {
-                if (!_orderedJobs.Contains(job))
-                    _orderedJobs.Add(job);
-            }
-        }
     }
 
     /// <summary>

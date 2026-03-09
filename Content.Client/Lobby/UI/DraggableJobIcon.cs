@@ -6,6 +6,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Input;
+using Robust.Shared.Maths;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -37,17 +38,25 @@ public sealed class DraggableJobIcon : TextureRect
     public JobPrototype JobProto { get; private init; }
 
     /// <summary>
-    /// If the icon is being dragged, this will hold a reference to the control that contained it before the dragging.
-    /// If the drag has ended and no other elements reparented this icon, it will snap back to _oldParent.
+    /// If the icon is being dragged, this will hold a reference to the control that contained it before dragging.
     /// </summary>
     private Control? _oldParent;
 
     /// <summary>
-    /// If the icon is being dragged, this will hold the <see cref="TextureRect.TextureScale"/> that was set before the
-    /// dragging. If the drag has ended and no other elements reparented this icon, it will reset the
-    /// <see cref="TextureRect.TextureScale"/> back to this value.
+    /// If the icon is being dragged, this stores the original <see cref="TextureRect.TextureScale"/> so canceled drags
+    /// can restore it.
     /// </summary>
     private Vector2? _oldScale;
+
+    /// <summary>
+    /// A transient drag visualization control. The real icon remains in the layout while dragging.
+    /// </summary>
+    private TextureRect? _dragGhost;
+
+    /// <summary>
+    /// Original icon modulate restored when dragging ends.
+    /// </summary>
+    private Color _oldModulate = Color.White;
 
     /// <summary>
     /// Helper to check if this icon is being dragged. The icon is being dragged if and only if _oldParent isn't null.
@@ -115,21 +124,23 @@ public sealed class DraggableJobIcon : TextureRect
     {
         var oldParent = _oldParent;
         var oldScale = _oldScale;
+        var oldModulate = _oldModulate;
+        var dragGhost = _dragGhost;
 
         _oldParent = null;
         _oldScale = null;
+        _dragGhost = null;
+        _oldModulate = Color.White;
 
         _uiManager.DeferAction(() =>
         {
-            // If nothing reparented the icon from the OnMouseUp events, then we should snap the icon back to
-            // its original parent.
-            if (Parent == _uiManager.PopupRoot)
-            {
-                Orphan();
-                oldParent?.AddChild(this);
-                if (oldScale is not null)
-                    TextureScale = oldScale.Value;
-            }
+            dragGhost?.Orphan();
+
+            Modulate = oldModulate;
+
+            // If nothing reparented the icon from the drop handling, restore its pre-drag scale.
+            if (Parent == oldParent && oldScale is not null)
+                TextureScale = oldScale.Value;
 
             // If the parent changed, then invoke the event that priorities changed.
             if (Parent != oldParent)
@@ -145,15 +156,29 @@ public sealed class DraggableJobIcon : TextureRect
         // Save the current parent and texture scale
         _oldParent = Parent;
         _oldScale = TextureScale;
+        _oldModulate = Modulate;
+        Modulate = new Color(Modulate.R, Modulate.G, Modulate.B, 0.35f);
 
-        // Put it into PopupRoot outside of the current control-tree iteration.
+        _dragGhost = new TextureRect
+        {
+            Texture = Texture,
+            TextureScale = TextureScale,
+            VerticalAlignment = VAlignment.Center,
+            HorizontalAlignment = HAlignment.Center,
+            MouseFilter = MouseFilterMode.Ignore,
+        };
+
+        // Put the drag ghost into PopupRoot outside of the current control-tree iteration.
         _uiManager.DeferAction(() =>
         {
             if (!Dragging)
                 return;
 
-            Orphan();
-            _uiManager.PopupRoot.AddChild(this);
+            if (_dragGhost is null)
+                return;
+
+            _uiManager.PopupRoot.AddChild(_dragGhost);
+            LayoutContainer.SetPosition(_dragGhost, _uiManager.MousePositionScaled.Position - Size / 2f);
         });
     }
 
@@ -213,7 +238,9 @@ public sealed class DraggableJobIcon : TextureRect
             return false;
 
         var mousePos = _uiManager.MousePositionScaled.Position;
-        LayoutContainer.SetPosition(this, mousePos - Size / 2f);
+        if (_dragGhost is not null)
+            LayoutContainer.SetPosition(_dragGhost, mousePos - Size / 2f);
+
         OnMouseMove?.Invoke(mousePos);
         return true;
     }
