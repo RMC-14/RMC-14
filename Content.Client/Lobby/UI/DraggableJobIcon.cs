@@ -79,11 +79,6 @@ public sealed class DraggableJobIcon : TextureRect
     public event Action<Vector2>? OnMouseMove;
 
     /// <summary>
-    /// Event invoked after the icon stopped dragging and it ended up parented to a different object
-    /// </summary>
-    public event Action? OnPriorityChanged;
-
-    /// <summary>
     /// Invoked when a drag is about to start, will be canceled if this returns false.
     /// </summary>
     public delegate bool CheckCanDrag();
@@ -93,6 +88,7 @@ public sealed class DraggableJobIcon : TextureRect
     /// </summary>
     private readonly CheckCanDrag? _canDragFunc;
     private readonly DragDropHelper<DraggableJobIcon> _dragDropHelper;
+    private bool _dropConsumed;
 
     public DraggableJobIcon(JobPrototype jobPrototype, CheckCanDrag? checkDrag = null, TooltipSupplier? tooltipSupplier = null)
     {
@@ -142,9 +138,6 @@ public sealed class DraggableJobIcon : TextureRect
             if (Parent == oldParent && oldScale is not null)
                 TextureScale = oldScale.Value;
 
-            // If the parent changed, then invoke the event that priorities changed.
-            if (Parent != oldParent)
-                OnPriorityChanged?.Invoke();
         });
     }
 
@@ -157,6 +150,7 @@ public sealed class DraggableJobIcon : TextureRect
         _oldParent = Parent;
         _oldScale = TextureScale;
         _oldModulate = Modulate;
+        _dropConsumed = false;
         Modulate = new Color(Modulate.R, Modulate.G, Modulate.B, 0.35f);
 
         _dragGhost = new TextureRect
@@ -252,5 +246,17 @@ public sealed class DraggableJobIcon : TextureRect
 
         OnMouseUp?.Invoke(_uiManager.MousePositionScaled.Position);
         StopDragging();
+    }
+
+    /// <summary>
+    /// Attempt to consume this drop. Returns false if another target already handled it.
+    /// </summary>
+    public bool TryConsumeDrop()
+    {
+        if (_dropConsumed)
+            return false;
+
+        _dropConsumed = true;
+        return true;
     }
 }

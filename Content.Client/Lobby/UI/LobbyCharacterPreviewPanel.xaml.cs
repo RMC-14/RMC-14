@@ -42,6 +42,8 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     private bool _prioritiesCollapsed;
     private readonly List<JobPrototype> _orderedJobs = [];
     private readonly Dictionary<ProtoId<JobPrototype>, int> _orderedJobIndices = [];
+    private readonly List<(DraggableJobIcon Icon, JobPriority Priority)> _pendingPriorityChanges = [];
+    private bool _priorityFlushQueued;
 
     /// <summary>
     /// <see cref="LobbyState"/> needs to register events on this button, so provide a property to access it publicly.
@@ -124,6 +126,8 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
     /// </summary>
     public void Refresh()
     {
+        _pendingPriorityChanges.Clear();
+        _priorityFlushQueued = false;
         RefreshOrderedJobs();
 
         foreach (var prio in Enum.GetValues<JobPriority>())
@@ -162,10 +166,7 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
                 targetControl.RegisterJobIcon(icon);
             }
 
-            icon.OnPriorityChanged += SendUpdatedPriorities;
-            icon.OnPriorityChanged += BalanceColumns;
-
-            PlaceIconInPriority(icon, prio, preOrdered: true);
+            ApplyPriorityChange(icon, prio, preOrdered: true);
         }
 
         BalanceColumns();
@@ -206,19 +207,63 @@ public sealed partial class LobbyCharacterPreviewPanel : Control
         {
             var currentHigh = target.GetContainedIcons().FirstOrDefault(existing => existing != icon);
             if (currentHigh is not null)
-                PlaceIconInPriority(currentHigh, JobPriority.Medium);
+                QueuePriorityChange(currentHigh, JobPriority.Medium);
         }
 
-        PlaceIconInPriority(icon, target.Priority);
+        QueuePriorityChange(icon, target.Priority);
     }
 
-    private void PlaceIconInPriority(DraggableJobIcon icon, JobPriority priority, bool preOrdered = false)
+    private void QueuePriorityChange(DraggableJobIcon icon, JobPriority priority)
+    {
+        for (var i = _pendingPriorityChanges.Count - 1; i >= 0; i--)
+        {
+            if (_pendingPriorityChanges[i].Icon == icon)
+                _pendingPriorityChanges.RemoveAt(i);
+        }
+
+        _pendingPriorityChanges.Add((icon, priority));
+
+        if (_priorityFlushQueued)
+            return;
+
+        _priorityFlushQueued = true;
+        _uiManager.DeferAction(FlushPriorityChanges);
+    }
+
+    private void FlushPriorityChanges()
+    {
+        _priorityFlushQueued = false;
+
+        if (_pendingPriorityChanges.Count == 0)
+            return;
+
+        foreach (var (icon, priority) in _pendingPriorityChanges)
+        {
+            ApplyPriorityChange(icon, priority);
+        }
+
+        _pendingPriorityChanges.Clear();
+        SendUpdatedPriorities();
+        BalanceColumns();
+    }
+
+    private void ApplyPriorityChange(DraggableJobIcon icon, JobPriority priority, bool preOrdered = false)
     {
         var target = GetTargetControl(priority);
         int? insertIndex = null;
 
         if (!preOrdered && priority != JobPriority.High)
             insertIndex = FindInsertLocation(target, icon);
+
+        var inTarget = target.GetContainedIcons().Contains(icon);
+        if (inTarget)
+        {
+            if (insertIndex is null)
+                return;
+
+            if (icon.GetPositionInParent() == insertIndex.Value)
+                return;
+        }
 
         target.AddJobIcon(icon, insertIndex);
     }

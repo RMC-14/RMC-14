@@ -160,11 +160,10 @@ public sealed class DraggableJobTarget : Control
     {
         if (!icon.Dragging || !GlobalRect.Contains(pos))
             return;
+        if (!icon.TryConsumeDrop())
+            return;
 
-        if (JobIconDropped is not null)
-            JobIconDropped.Invoke(this, icon);
-        else
-            AddJobIcon(icon);
+        JobIconDropped?.Invoke(this, icon);
 
         if (_backgroundPanel is not null)
             _backgroundPanel.Visible = false;

@@ -210,8 +210,6 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
     private void OnLobbyPrioritiesUpdated()
     {
-        OnAnyCharacterOrJobChange?.Invoke();
-
         if (_characterSetup != null)
         {
             var showingJobPriorities = _jobPriorityEditor?.Visible == true && _profileEditor?.Visible != true;
