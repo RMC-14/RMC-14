@@ -213,7 +213,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 62f;
+    public float ProjectileSpeed = 55f; //RMC14 changed from 62
 
     /// <summary>
     /// How fast the projectile moves.
@@ -268,6 +268,14 @@ public sealed partial class GunComponent : Component
     // RMC14
     [DataField]
     public bool MeleeCooldownOnShoot = true;
+
+    // RMC14
+    /// <summary>
+    /// Offsets the spawn location of the projectile.
+    /// </summary>
+    /// <example>[0, -1] means the projectile spawns 1 tile in front of the shooter</example>
+    [DataField]
+    public Vector2 ShootOriginOffset = Vector2.Zero;
 }
 
 [Flags]

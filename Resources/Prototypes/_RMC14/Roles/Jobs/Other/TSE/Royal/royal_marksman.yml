@@ -33,6 +33,13 @@
         RMCSkillVehicles: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-marksman
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: rmc_marksman
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_twe
   hidden: true
 
 - type: entity
@@ -58,13 +65,19 @@
     job: CMRoyalMarinesMarksman
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobRifleman
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
-
+    squad: SquadRoyalMarines
+  
 - type: startingGear
   id: RMCGearRoyalMarksman
   equipment:
     head: RMCHeadRoyalHelmet
     ears: RMCHeadsetRoyalMarine
+    eyes: RMCGlassesM4SPRBattleSight
     mask: RMCMaskScarfTan
     jumpsuit: RMCJumpsuitMarineRoyalMK80
     outerClothing: RMCArmorRoyalLightFilled

@@ -18,6 +18,8 @@
     interfaces:
       enum.MarineCommunicationsComputerUI.Key:
         type: MarineCommunicationsComputerBui
+      enum.MarineControlComputerUi.MedalsPanel:
+        type: MedalsPanelBui
       enum.TacticalMapComputerUi.Key:
         type: TacticalMapComputerBui
       enum.DialogUiKey.Key:
@@ -28,6 +30,7 @@
     canInitiateEvac: true
   - type: TacticalMapComputer
   - type: MarineControlComputer
+    canPrintCommendations: false
   - type: Tag
     tags:
     - CommandTablet

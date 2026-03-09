@@ -12,6 +12,16 @@
 
 - type: entity
   parent: RMCSkillPresetSurvivor
+  id: RMCSkillPresetSurvivorChaplain
+  name: Survivor Chaplain
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillLeadership: 1
+
+- type: entity
+  parent: RMCSkillPresetSurvivor
   id: RMCSkillPresetSurvivorWeYaManager
   name: Survivor WeYa Manager
   categories: [ HideSpawnMenu ]
@@ -38,6 +48,19 @@
       RMCSkillFirearms: 2
       RMCSkillPolice: 0 # RMC14 Survivors do not have police skill.
       RMCSkillFireman: 2
+
+- type: entity
+  parent: RMCSkillPresetSurvivorMarshal
+  id: RMCSkillPresetSurvivorRiotControlTeamLeader
+  name: Survivor CMB Riot Control Team Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 0
+      RMCSkillCqc: 3
+      RMCSkillJtac: 1
+      RMCSkillEndurance: 3
 
 - type: entity
   parent: RMCSkillPresetSurvivor
@@ -188,7 +211,6 @@
       RMCSkillLeadership: 2
       RMCSkillOverwatch: 1
       RMCSkillJtac: 2
-      RMCSkillIntel: 2
 
 - type: entity
   parent: RMCSkillPresetSurvivor
@@ -198,10 +220,11 @@
   components:
   - type: SkillPreset
     skills:
-      RMCSkillCqc: 1
-      RMCSkillPolice: 0 # RMC14
-      RMCSkillFireman: 2
-      RMCSkillMedical: 1
+      RMCSkillCqc: 3
+      RMCSkillPolice: 2
+      RMCSkillMeleeWeapons: 1
+      RMCSkillFireman: 5
+      RMCSkillMedical: 2
       RMCSkillEndurance: 2
       RMCSkillFirearms: 2
       RMCSkillVehicles: 1

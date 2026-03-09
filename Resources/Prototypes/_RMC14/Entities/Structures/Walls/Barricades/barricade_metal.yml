@@ -105,7 +105,7 @@
     - type: Flammable
       damage:
         types:
-          Heat: 2.8125
+          Heat: 1.5
 
 - type: entity
   parent: CMBarricadeMetal
@@ -154,7 +154,7 @@
     - type: Flammable
       damage:
         types:
-          Heat: 1.875
+          Heat: 1
 
 # Turnstile (not sure how to make a one-way door so for now it is a glorified fence)
 - type: entity

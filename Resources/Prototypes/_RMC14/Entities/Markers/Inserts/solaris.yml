@@ -286,3 +286,70 @@
         probability: 1
         nightmareScenario: crashlanding_offices
       replaceAreas: false
+
+# Regular Surv Spawns
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisSurvSpawnAdmin
+  name: Admin Surv Spawn
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_admin.yml"
+        probability: 1
+        nightmareScenario: solaris_surv_spawn_admin
+      replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisSurvSpawnBar
+  name: Bar Surv Spawn
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_bar.yml"
+        probability: 1
+        nightmareScenario: solaris_surv_spawn_bar
+      replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisSurvSpawnOffice
+  name: Office Surv Spawn
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_office.yml"
+        probability: 1
+        nightmareScenario: solaris_surv_spawn_office
+      replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisSurvSpawnSouthMarshals
+  name: South Marshals Surv Spawn
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_south_marshals.yml"
+        probability: 1
+        nightmareScenario: solaris_surv_spawn_south_marshals
+      replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertSolarisBase
+  id: RMCMapInsertSolarisSurvSpawnStorage
+  name: Storage Surv Spawn
+  suffix: Insert Solaris
+  components:
+    - type: MapInsert
+      variations:
+      - spawn: "/Maps/_RMC14/Inserts/Solaris/surv_spawn_storage.yml"
+        probability: 1
+        nightmareScenario: solaris_surv_spawn_storage
+      replaceAreas: false

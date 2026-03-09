@@ -5,6 +5,7 @@
   description: cm-job-description-survivor
   spawnMenuRoleName: Paranoid Corporate Liaison (LV624 Special Survivor)
   startingGear: RMCGearSurvivorLV624CorporateLiaison
+  icon: "CMJobIconExecSpec"
   ranks:
     RMCRankWeYaExecutiveSpecialist: []
   special:

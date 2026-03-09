@@ -99,6 +99,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterBicaridineNoSkill
   name: bicaridine pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Bicaridine (15u, 2 pill OD) Used to treat brute damage."
   suffix: Bicaridine, 16, No Skill
   components:
   - type: Item
@@ -131,6 +132,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterMeralyneBicaridineNoSkill
   name: meralyne-bicaridine pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Meralyne-Bicaridine (7.5u/7.5u, 2 pill OD) Rapidly treats brute damage."
   suffix: Meralyne-Bicaridine, 16, No Skill
   components:
   - type: Item
@@ -160,10 +162,11 @@
       RMCSkillMedical: 2
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterDexalin
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterDexalinNoSkill
   name: dexalin pill bottle
-  suffix: Dexalin, 16
+  description: It's an airtight container for storing medication. It's labeled "Dexalin (15u, 2 pill OD) Used to treat oxygen deprivation."
+  suffix: Dexalin, 16, No Skill
   components:
   - type: Item
     heldPrefix: 1
@@ -183,10 +186,20 @@
     labelTextLocId: rmc-dexalin-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterDylovene
+  parent: RMCPillCanisterDexalinNoSkill
+  id: CMPillCanisterDexalin
+  suffix: Dexaline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterDyloveneNoSkill
   name: dylovene pill bottle
-  suffix: Dylovene, 16
+  description: It's an airtight container for storing medication. It's labeled "Dylovene (15u, 2 pill OD) An anti-toxin medication. It neutralizes many common toxins, as well as treating toxin damage."
+  suffix: Dylovene, 16, No Skill
   components:
   - type: Item
     heldPrefix: 6
@@ -206,9 +219,19 @@
     labelTextLocId: rmc-dylovene-container-label-text
 
 - type: entity
+  parent: RMCPillCanisterDyloveneNoSkill
+  id: CMPillCanisterDylovene
+  suffix: Dylovene, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterInaprovalineNoSkill
   name: inaprovaline pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Inaprovaline (15u, 4 pill OD) Used to stabilize patients."
   suffix: Inaprovaline, 16, No Skill
   components:
   - type: Item
@@ -241,6 +264,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterKelotaneNoSkill
   name: kelotane pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Kelotane (15u, 2 pill OD) Used to treat burns."
   suffix: Kelotane, 16, No Skill
   components:
   - type: Item
@@ -273,6 +297,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterKelotaneDermalineNoSkill
   name: kelotane-dermaline pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Kelotane-Dermaline (7.5u/7.5u, 2 pill OD) Rapidly treats burn damage."
   suffix: Kelotane-Dermaline, 16, No Skill
   components:
   - type: Item
@@ -302,10 +327,11 @@
       RMCSkillMedical: 2
 
 - type: entity
-  parent: CMPillCanister
-  id: CMPillCanisterTricordrazine
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterTricordrazineNoSkill
   name: tricordrazine pill bottle
-  suffix: Tricordrazine, 16
+  description: It's an airtight container for storing medication. It's labeled "Tricordrazine (15u, 2 pill OD) A weak general use medication for treating damage."
+  suffix: Tricordrazine, 16, No Skill
   components:
   - type: Item
     heldPrefix: 7
@@ -325,10 +351,20 @@
     labelTextLocId: rmc-tricordazine-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: RMCPillCanisterRussianRed
-  name: Russian red pill bottle
-  suffix: Russian Red, 16
+  parent: RMCPillCanisterTricordrazineNoSkill
+  id: CMPillCanisterTricordrazine
+  suffix: Tricordrazine, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterRussianRedNoSkill
+  name: russian red pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Russian Red (10u, 2 pill OD) A very dangerous radiation-countering substance."
+  suffix: Russian Red, 16, No Skill
   components:
   - type: Sprite
     layers:
@@ -346,10 +382,20 @@
     labelTextLocId: rmc-russianred-container-label-text
 
 - type: entity
-  parent: CMPillCanister
-  id: RMCPillCanisterImidazoline
+  parent: RMCPillCanisterRussianRedNoSkill
+  id: RMCPillCanisterRussianRed
+  suffix: Russian Red, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
+- type: entity
+  parent: RMCPillCanisterNoSkill
+  id: RMCPillCanisterImidazolineNoSkill
   name: imidazoline pill bottle
-  suffix: Imidazoline, 16
+  description: It's an airtight container for storing medication. It's labeled "Imidazoline (1u, 30 pill OD) Used to restore vision from non-congenital eye damage."
+  suffix: Imidazoline, 16, No Skill
   components:
   - type: Item
     heldPrefix: 7
@@ -368,12 +414,22 @@
   - type: IconLabel
     labelTextLocId: rmc-imidazoline-container-label-text
 
+- type: entity
+  parent: RMCPillCanisterImidazolineNoSkill
+  id: RMCPillCanisterImidazoline
+  suffix: Imidazoline, 16
+  components:
+  - type: StorageSkillRequired
+    skills:
+      RMCSkillMedical: 2
+
 # TODO RMC14 peridaxon, tramadol
 
 - type: entity
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterDexalinPlusNoSkill
   name: dexalin plus pill bottle
+  description: It's an airtight container for storing medication. It's labeled "Dexalin Plus (10u, 15u OD) Used to instantly treat oxygen deprivation."
   suffix: DexalinPlus, 16, No Skill
   components:
   - type: Item
@@ -406,6 +462,7 @@
   parent: RMCPillCanisterNoSkill
   id: RMCPillCanisterIronNoSkill
   name: iron pill bottle
+  description: It's an airtight container for storing medication. It's labeled "FN (Iron 10u, Nutriment 5u, No OD) Used to quickly restore blood."
   suffix: Iron, 16, No Skill
   components:
   - type: Item

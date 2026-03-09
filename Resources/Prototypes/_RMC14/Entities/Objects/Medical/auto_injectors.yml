@@ -183,6 +183,26 @@
       CMDexalinPlus: 3
   - type: IconLabel
     labelTextLocId: rmc-dexalin-plus-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCDyloveneAutoInjector
+  name: dylovene autoinjector
+  description: An autoinjector loaded with 3 doses of 15u of Dylovene, a common toxin damage medicine. You can refill it at Weya-Med vending machines.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMDylovene: 45
+  - type: IconLabel
+    labelTextLocId: rmc-dylovene-container-label-text
+
 # TODO RMC14 tramadol
 
 - type: entity
@@ -203,6 +223,7 @@
       CMBicaridine: 45
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
 - type: entity
   parent: CMAutoInjector
   id: CMInaprovalineAutoInjector

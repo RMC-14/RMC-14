@@ -95,3 +95,8 @@
   - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire2.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire3.ogg
   - /Audio/_RMC14/Weapons/Guns/Flamer/surv_flamer_fire4.ogg
+
+- type: soundCollection
+  id: RMCL112Shoot
+  files:
+  - /Audio/_RMC14/Weapons/Guns/Gunshots/gun_silenced_l112.ogg

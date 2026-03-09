@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 22:45:41
-  entityCount: 17351
+  time: 02/17/2026 10:10:56
+  entityCount: 17428
 maps:
 - 1
 grids:
@@ -38646,48 +38646,36 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 383
+  - uid: 386
     components:
     - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 97.5,69.5
+      parent: 1
   - uid: 389
     components:
     - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 395
+      pos: 98.5,69.5
+      parent: 1
+  - uid: 401
     components:
     - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,69.5
+      parent: 1
   - uid: 403
     components:
     - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 411
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 420
     components:
     - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 417
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 421
     components:
     - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,72.5
+      parent: 1
 - proto: CMBeltMedicalFilled
   entities:
   - uid: 422
@@ -42970,7 +42958,7 @@ entities:
     - type: MetaData
       name: 'LZ2: Research Landing Zone'
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 1168
     components:
@@ -45921,34 +45909,26 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 412
+  - uid: 383
     components:
     - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 413
+      pos: 97.5,69.5
+      parent: 1
+  - uid: 384
     components:
     - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 418
+      pos: 97.5,69.5
+      parent: 1
+  - uid: 392
     components:
     - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 419
+      pos: 98.5,69.5
+      parent: 1
+  - uid: 393
     components:
     - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 98.5,69.5
+      parent: 1
   - uid: 1732
     components:
     - type: Transform
@@ -45956,64 +45936,48 @@ entities:
       parent: 1
 - proto: CMMagazineRifleM54CExt
   entities:
-  - uid: 414
-    components:
-    - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 420
-    components:
-    - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: CMMagazineRifleM54CMK1
-  entities:
-  - uid: 384
-    components:
-    - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
   - uid: 385
     components:
     - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 386
-    components:
-    - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 390
-    components:
-    - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 97.5,69.5
+      parent: 1
   - uid: 391
     components:
     - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 392
+      pos: 98.5,69.5
+      parent: 1
+- proto: CMMagazineRifleM54CMK1
+  entities:
+  - uid: 395
     components:
     - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,69.5
+      parent: 1
+  - uid: 396
+    components:
+    - type: Transform
+      pos: 96.5,69.5
+      parent: 1
+  - uid: 397
+    components:
+    - type: Transform
+      pos: 96.5,69.5
+      parent: 1
+  - uid: 398
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 399
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
+  - uid: 400
+    components:
+    - type: Transform
+      pos: 96.5,70.5
+      parent: 1
   - uid: 1733
     components:
     - type: Transform
@@ -53920,6 +53884,567 @@ entities:
     components:
     - type: Transform
       pos: 126.5,46.5
+      parent: 1
+- proto: LandingZoneLightFour
+  entities:
+  - uid: 17408
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 16.5,149.5
+      parent: 1
+  - uid: 17409
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 20.5,149.5
+      parent: 1
+  - uid: 17410
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 24.5,149.5
+      parent: 1
+  - uid: 17411
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 28.5,149.5
+      parent: 1
+  - uid: 17412
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,147.5
+      parent: 1
+  - uid: 17413
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,143.5
+      parent: 1
+  - uid: 17414
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,139.5
+      parent: 1
+  - uid: 17415
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,135.5
+      parent: 1
+  - uid: 17416
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,131.5
+      parent: 1
+  - uid: 17417
+    components:
+    - type: Transform
+      pos: 29.5,128.5
+      parent: 1
+  - uid: 17418
+    components:
+    - type: Transform
+      pos: 26.5,127.5
+      parent: 1
+  - uid: 17419
+    components:
+    - type: Transform
+      pos: 22.5,127.5
+      parent: 1
+  - uid: 17420
+    components:
+    - type: Transform
+      pos: 18.5,127.5
+      parent: 1
+  - uid: 17422
+    components:
+    - type: Transform
+      pos: 15.5,128.5
+      parent: 1
+  - uid: 17423
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,131.5
+      parent: 1
+  - uid: 17424
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,135.5
+      parent: 1
+  - uid: 17425
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,139.5
+      parent: 1
+  - uid: 17426
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,143.5
+      parent: 1
+  - uid: 17427
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,147.5
+      parent: 1
+- proto: LandingZoneLightOne
+  entities:
+  - uid: 14213
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,128.5
+      parent: 1
+  - uid: 14214
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,132.5
+      parent: 1
+  - uid: 14215
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,136.5
+      parent: 1
+  - uid: 14216
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,140.5
+      parent: 1
+  - uid: 14217
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,144.5
+      parent: 1
+  - uid: 14218
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,148.5
+      parent: 1
+  - uid: 14219
+    components:
+    - type: Transform
+      pos: 21.5,127.5
+      parent: 1
+  - uid: 14220
+    components:
+    - type: Transform
+      pos: 17.5,127.5
+      parent: 1
+  - uid: 14221
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,130.5
+      parent: 1
+  - uid: 14222
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,134.5
+      parent: 1
+  - uid: 14223
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 28.5,127.5
+      parent: 1
+  - uid: 14224
+    components:
+    - type: Transform
+      pos: 25.5,127.5
+      parent: 1
+  - uid: 17364
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,138.5
+      parent: 1
+  - uid: 17365
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,146.5
+      parent: 1
+  - uid: 17366
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,142.5
+      parent: 1
+  - uid: 17367
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 28.5,149.5
+      parent: 1
+  - uid: 17368
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 25.5,149.5
+      parent: 1
+  - uid: 17369
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 21.5,149.5
+      parent: 1
+  - uid: 17370
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 17.5,149.5
+      parent: 1
+- proto: LandingZoneLightStanding
+  entities:
+  - uid: 14226
+    components:
+    - type: Transform
+      pos: 27.5,148.5
+      parent: 1
+  - uid: 14227
+    components:
+    - type: Transform
+      pos: 17.5,148.5
+      parent: 1
+  - uid: 14228
+    components:
+    - type: Transform
+      pos: 29.5,141.5
+      parent: 1
+  - uid: 14229
+    components:
+    - type: Transform
+      pos: 28.5,147.5
+      parent: 1
+  - uid: 14230
+    components:
+    - type: Transform
+      pos: 29.5,138.5
+      parent: 1
+  - uid: 14231
+    components:
+    - type: Transform
+      pos: 16.5,147.5
+      parent: 1
+  - uid: 14232
+    components:
+    - type: Transform
+      pos: 15.5,138.5
+      parent: 1
+  - uid: 14233
+    components:
+    - type: Transform
+      pos: 15.5,141.5
+      parent: 1
+  - uid: 14234
+    components:
+    - type: Transform
+      pos: 27.5,128.5
+      parent: 1
+  - uid: 14235
+    components:
+    - type: Transform
+      pos: 28.5,129.5
+      parent: 1
+  - uid: 17352
+    components:
+    - type: Transform
+      pos: 17.5,22.5
+      parent: 1
+  - uid: 17353
+    components:
+    - type: Transform
+      pos: 15.5,24.5
+      parent: 1
+  - uid: 17354
+    components:
+    - type: Transform
+      pos: 15.5,30.5
+      parent: 1
+  - uid: 17355
+    components:
+    - type: Transform
+      pos: 16.5,37.5
+      parent: 1
+  - uid: 17356
+    components:
+    - type: Transform
+      pos: 28.5,39.5
+      parent: 1
+  - uid: 17357
+    components:
+    - type: Transform
+      pos: 18.5,39.5
+      parent: 1
+  - uid: 17358
+    components:
+    - type: Transform
+      pos: 30.5,37.5
+      parent: 1
+  - uid: 17359
+    components:
+    - type: Transform
+      pos: 31.5,30.5
+      parent: 1
+  - uid: 17360
+    components:
+    - type: Transform
+      pos: 31.5,24.5
+      parent: 1
+  - uid: 17361
+    components:
+    - type: Transform
+      pos: 29.5,22.5
+      parent: 1
+  - uid: 17362
+    components:
+    - type: Transform
+      pos: 17.5,128.5
+      parent: 1
+  - uid: 17363
+    components:
+    - type: Transform
+      pos: 16.5,129.5
+      parent: 1
+- proto: LandingZoneLightThree
+  entities:
+  - uid: 17390
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,149.5
+      parent: 1
+  - uid: 17391
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 19.5,149.5
+      parent: 1
+  - uid: 17392
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 23.5,149.5
+      parent: 1
+  - uid: 17393
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 27.5,149.5
+      parent: 1
+  - uid: 17394
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,148.5
+      parent: 1
+  - uid: 17395
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,144.5
+      parent: 1
+  - uid: 17396
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,140.5
+      parent: 1
+  - uid: 17397
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,136.5
+      parent: 1
+  - uid: 17398
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,132.5
+      parent: 1
+  - uid: 17399
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,128.5
+      parent: 1
+  - uid: 17400
+    components:
+    - type: Transform
+      pos: 27.5,127.5
+      parent: 1
+  - uid: 17401
+    components:
+    - type: Transform
+      pos: 23.5,127.5
+      parent: 1
+  - uid: 17402
+    components:
+    - type: Transform
+      pos: 19.5,127.5
+      parent: 1
+  - uid: 17403
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,130.5
+      parent: 1
+  - uid: 17404
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,134.5
+      parent: 1
+  - uid: 17405
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,138.5
+      parent: 1
+  - uid: 17406
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,142.5
+      parent: 1
+  - uid: 17407
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,146.5
+      parent: 1
+  - uid: 17421
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 16.5,127.5
+      parent: 1
+- proto: LandingZoneLightTwo
+  entities:
+  - uid: 17371
+    components:
+    - type: Transform
+      pos: 16.5,127.5
+      parent: 1
+  - uid: 17372
+    components:
+    - type: Transform
+      pos: 20.5,127.5
+      parent: 1
+  - uid: 17373
+    components:
+    - type: Transform
+      pos: 24.5,127.5
+      parent: 1
+  - uid: 17374
+    components:
+    - type: Transform
+      pos: 28.5,127.5
+      parent: 1
+  - uid: 17375
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,129.5
+      parent: 1
+  - uid: 17376
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,133.5
+      parent: 1
+  - uid: 17377
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,137.5
+      parent: 1
+  - uid: 17378
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,141.5
+      parent: 1
+  - uid: 17379
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 29.5,145.5
+      parent: 1
+  - uid: 17380
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 29.5,148.5
+      parent: 1
+  - uid: 17381
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 26.5,149.5
+      parent: 1
+  - uid: 17382
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 22.5,149.5
+      parent: 1
+  - uid: 17383
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,149.5
+      parent: 1
+  - uid: 17384
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 15.5,148.5
+      parent: 1
+  - uid: 17385
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,129.5
+      parent: 1
+  - uid: 17386
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,133.5
+      parent: 1
+  - uid: 17387
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,137.5
+      parent: 1
+  - uid: 17388
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,141.5
+      parent: 1
+  - uid: 17389
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 15.5,145.5
       parent: 1
 - proto: PowerCellRecharger
   entities:
@@ -112049,120 +112574,10 @@ entities:
       parent: 1
 - proto: RMCLampTripodGrey
   entities:
-  - uid: 14213
-    components:
-    - type: Transform
-      pos: 16.5,147.5
-      parent: 1
-  - uid: 14214
-    components:
-    - type: Transform
-      pos: 17.5,148.5
-      parent: 1
-  - uid: 14215
-    components:
-    - type: Transform
-      pos: 27.5,148.5
-      parent: 1
-  - uid: 14216
-    components:
-    - type: Transform
-      pos: 28.5,147.5
-      parent: 1
-  - uid: 14217
-    components:
-    - type: Transform
-      pos: 29.5,141.5
-      parent: 1
-  - uid: 14218
-    components:
-    - type: Transform
-      pos: 29.5,138.5
-      parent: 1
-  - uid: 14219
-    components:
-    - type: Transform
-      pos: 15.5,138.5
-      parent: 1
-  - uid: 14220
-    components:
-    - type: Transform
-      pos: 15.5,141.5
-      parent: 1
-  - uid: 14221
-    components:
-    - type: Transform
-      pos: 16.5,129.5
-      parent: 1
-  - uid: 14222
-    components:
-    - type: Transform
-      pos: 17.5,128.5
-      parent: 1
-  - uid: 14223
-    components:
-    - type: Transform
-      pos: 27.5,128.5
-      parent: 1
-  - uid: 14224
-    components:
-    - type: Transform
-      pos: 28.5,129.5
-      parent: 1
   - uid: 14225
     components:
     - type: Transform
       pos: 12.5,104.5
-      parent: 1
-  - uid: 14226
-    components:
-    - type: Transform
-      pos: 28.5,39.5
-      parent: 1
-  - uid: 14227
-    components:
-    - type: Transform
-      pos: 30.5,37.5
-      parent: 1
-  - uid: 14228
-    components:
-    - type: Transform
-      pos: 16.5,37.5
-      parent: 1
-  - uid: 14229
-    components:
-    - type: Transform
-      pos: 18.5,39.5
-      parent: 1
-  - uid: 14230
-    components:
-    - type: Transform
-      pos: 15.5,30.5
-      parent: 1
-  - uid: 14231
-    components:
-    - type: Transform
-      pos: 31.5,30.5
-      parent: 1
-  - uid: 14232
-    components:
-    - type: Transform
-      pos: 31.5,24.5
-      parent: 1
-  - uid: 14233
-    components:
-    - type: Transform
-      pos: 29.5,22.5
-      parent: 1
-  - uid: 14234
-    components:
-    - type: Transform
-      pos: 17.5,22.5
-      parent: 1
-  - uid: 14235
-    components:
-    - type: Transform
-      pos: 15.5,24.5
       parent: 1
   - uid: 14236
     components:
@@ -115938,10 +116353,8 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.1462
+        temperature: 75.311554
         moles:
-        - 1.606311
-        - 6.042789
         - 0
         - 0
         - 0
@@ -115952,21 +116365,8 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 383
-          - 384
-          - 385
-          - 387
-          - 386
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+        - 0
+        - 0
   - uid: 388
     components:
     - type: Transform
@@ -115976,7 +116376,7 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 147.9231
+        temperature: 75.311554
         moles:
         - 0
         - 0
@@ -115990,21 +116390,6 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 389
-          - 392
-          - 391
-          - 390
-          - 393
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
   - uid: 394
     components:
     - type: Transform
@@ -116014,10 +116399,8 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.1462
+        temperature: 147.9231
         moles:
-        - 1.606311
-        - 6.042789
         - 0
         - 0
         - 0
@@ -116028,27 +116411,35 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 401
-          - 400
-          - 396
-          - 399
-          - 398
-          - 397
-          - 395
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+        - 0
+        - 0
   - uid: 402
     components:
     - type: Transform
       pos: 96.5,72.5
+      parent: 1
+    - type: EntityStorage
+      air:
+        volume: 200
+        immutable: False
+        temperature: 75.311554
+        moles:
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+        - 0
+  - uid: 410
+    components:
+    - type: Transform
+      pos: 97.5,69.5
       parent: 1
     - type: EntityStorage
       air:
@@ -116068,61 +116459,6 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 408
-          - 403
-          - 405
-          - 404
-          - 406
-          - 407
-          - 409
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 410
-    components:
-    - type: Transform
-      pos: 97.5,69.5
-      parent: 1
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 293.1462
-        moles:
-        - 1.606311
-        - 6.042789
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 411
-          - 415
-          - 412
-          - 414
-          - 413
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
   - uid: 416
     components:
     - type: Transform
@@ -116132,10 +116468,8 @@ entities:
       air:
         volume: 200
         immutable: False
-        temperature: 293.1462
+        temperature: 147.9231
         moles:
-        - 1.606311
-        - 6.042789
         - 0
         - 0
         - 0
@@ -116146,21 +116480,8 @@ entities:
         - 0
         - 0
         - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 421
-          - 419
-          - 418
-          - 420
-          - 417
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
+        - 0
+        - 0
 - proto: RMCLockerPoliceSoro
   entities:
   - uid: 3214
@@ -116247,76 +116568,56 @@ entities:
       parent: 1
 - proto: RMCMagazineRifleHunting
   entities:
-  - uid: 396
-    components:
-    - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 397
-    components:
-    - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 398
-    components:
-    - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 399
-    components:
-    - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 400
-    components:
-    - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 404
-    components:
-    - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 405
-    components:
-    - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 406
-    components:
-    - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 407
-    components:
-    - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
   - uid: 408
     components:
     - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 409
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 411
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 412
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 413
+    components:
+    - type: Transform
+      pos: 96.5,72.5
+      parent: 1
+  - uid: 414
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 415
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 417
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 418
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
+  - uid: 419
+    components:
+    - type: Transform
+      pos: 96.5,71.5
+      parent: 1
   - uid: 2152
     components:
     - type: Transform
@@ -116423,6 +116724,13 @@ entities:
     - type: Transform
       pos: 95.5,63.5
       parent: 1
+- proto: RMCMapInsertShivaPanicRoomHold
+  entities:
+  - uid: 17428
+    components:
+    - type: Transform
+      pos: 95.5,63.5
+      parent: 1
 - proto: RMCMapInsertShivaSouthCaves
   entities:
   - uid: 14815
@@ -116465,7 +116773,7 @@ entities:
     - type: MetaData
       name: LZ2
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
   - uid: 14821
     components:
@@ -116777,7 +117085,7 @@ entities:
   - uid: 14872
     components:
     - type: Transform
-      pos: 22.5,139.5
+      pos: 22.5,138.5
       parent: 1
 - proto: RMCMotionDetector
   entities:
@@ -128990,20 +129298,38 @@ entities:
       parent: 1
 - proto: RMCWeaponBoltActionRifle
   entities:
-  - uid: 401
+  - uid: 406
     components:
     - type: Transform
-      parent: 394
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 409
+      pos: 96.5,72.5
+      parent: 1
+    - type: ContainerContainer
+      containers:
+        gun_magazine: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        gun_chamber: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+        rmc-aslot-barrel: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-rail: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        rmc-aslot-stock: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+  - uid: 407
     components:
     - type: Transform
-      parent: 402
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,71.5
+      parent: 1
   - uid: 16975
     components:
     - type: Transform
@@ -129182,20 +129508,16 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 415
+  - uid: 387
     components:
     - type: Transform
-      parent: 410
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 421
+      pos: 97.5,69.5
+      parent: 1
+  - uid: 390
     components:
     - type: Transform
-      parent: 416
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 98.5,69.5
+      parent: 1
 - proto: RMCWeaponRifleM54CE2
   entities:
   - uid: 17000
@@ -129205,20 +129527,16 @@ entities:
       parent: 1
 - proto: RMCWeaponRifleM54CMK1
   entities:
-  - uid: 387
+  - uid: 404
     components:
     - type: Transform
-      parent: 382
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 393
+      pos: 96.5,69.5
+      parent: 1
+  - uid: 405
     components:
     - type: Transform
-      parent: 388
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
+      pos: 96.5,70.5
+      parent: 1
   - uid: 17001
     components:
     - type: Transform

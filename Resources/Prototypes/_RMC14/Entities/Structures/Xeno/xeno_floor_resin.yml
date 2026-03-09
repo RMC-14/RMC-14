@@ -104,3 +104,14 @@
   - type: ResinSpeedupModifier
     hiveSpeedModifier: 1.33 #MOVE_DELAY * 0.8 on CM, stacks with weed speed
 
+- type: entity
+  parent: XenoStickyResin
+  id: XenoStickyResinWeakWeedbound
+  name: weak sticky resin
+  description: A thin and weak layer of disgusting sticky slime.
+  components:
+  - type: Sprite
+    state: sticky_weak
+  - type: ResinSlowdownModifier # Equal to Hive speed debuff
+    outsiderSpeedModifier: 0.338
+    outsiderSpeedModifierArmor: 0.4856
