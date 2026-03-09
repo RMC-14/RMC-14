@@ -113,8 +113,8 @@ public sealed class DraggableJobTarget : Control
             _jobIconContainer = new GridContainer
             {
                 Columns = 5,
-                HSeparationOverride = 1,
-                VSeparationOverride = 1,
+                HSeparationOverride = 0,
+                VSeparationOverride = 0,
                 HorizontalAlignment = HAlignment.Center,
             };
         }

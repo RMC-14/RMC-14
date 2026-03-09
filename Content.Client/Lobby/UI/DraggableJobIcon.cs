@@ -113,23 +113,28 @@ public sealed class DraggableJobIcon : TextureRect
     /// </summary>
     private void StopDragging()
     {
-        // If nothing reparented the icon from the OnMouseUp events, then we should snap the icon back to its original
-        // parent
-        if (Parent == _uiManager.PopupRoot)
-        {
-            // Put it back and make sure the TextureScale is reset
-            Orphan();
-            _oldParent?.AddChild(this);
-            if (_oldScale is not null)
-                TextureScale = _oldScale.Value;
-        }
-
-        // If the parent changed, then invoke the event that priorities changed!
-        if (Parent != _oldParent)
-            OnPriorityChanged?.Invoke();
+        var oldParent = _oldParent;
+        var oldScale = _oldScale;
 
         _oldParent = null;
         _oldScale = null;
+
+        _uiManager.DeferAction(() =>
+        {
+            // If nothing reparented the icon from the OnMouseUp events, then we should snap the icon back to
+            // its original parent.
+            if (Parent == _uiManager.PopupRoot)
+            {
+                Orphan();
+                oldParent?.AddChild(this);
+                if (oldScale is not null)
+                    TextureScale = oldScale.Value;
+            }
+
+            // If the parent changed, then invoke the event that priorities changed.
+            if (Parent != oldParent)
+                OnPriorityChanged?.Invoke();
+        });
     }
 
     /// <summary>
@@ -141,9 +146,15 @@ public sealed class DraggableJobIcon : TextureRect
         _oldParent = Parent;
         _oldScale = TextureScale;
 
-        // Put it into PopupRoot
-        Orphan();
-        _uiManager.PopupRoot.AddChild(this);
+        // Put it into PopupRoot outside of the current control-tree iteration.
+        _uiManager.DeferAction(() =>
+        {
+            if (!Dragging)
+                return;
+
+            Orphan();
+            _uiManager.PopupRoot.AddChild(this);
+        });
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
