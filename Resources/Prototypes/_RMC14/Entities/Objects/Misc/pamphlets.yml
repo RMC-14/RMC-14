@@ -91,6 +91,7 @@
     - type: SpotterWhitelist
     addSkills:
       RMCSkillJtac: 1
+    bypassLimit: true
     giveJobTitle: rmc-job-name-spotter
     givePrefix: rmc-job-prefix-spotter
     isAppendPrefix: false
