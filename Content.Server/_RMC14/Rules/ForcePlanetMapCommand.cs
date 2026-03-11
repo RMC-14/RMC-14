@@ -8,6 +8,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._RMC14.Rules;
 
+[AdminCommand(AdminFlags.RMCMaintainer)] //RMC14
 [ToolshedCommand, AdminCommand(AdminFlags.Round)]
 public sealed class ForcePlanetMapCommand : ToolshedCommand
 {

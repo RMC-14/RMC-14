@@ -216,7 +216,7 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Appearance
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsRifleTSE
+    bulletType: RMCBoxBulletsRifleL24
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -246,7 +246,7 @@
       color: "#1F951F"
   - type: Appearance
   - type: RefillableByBulletBox
-    bulletType: RMCBoxBulletsRifleTSEAP
+    bulletType: RMCBoxBulletsRifleL24AP
 
 - type: entity
   parent: RMCMagazineRifleL24
@@ -331,7 +331,7 @@
         map: [ "enum.GunVisualLayers.Mag" ]
     - type: Appearance
     - type: RefillableByBulletBox
-      bulletType: RMCBoxBulletsRifleTSE
+      bulletType: RMCBoxBulletsRifleL24
 
 - type: entity
   parent: CMBaseCartridgeRifle
