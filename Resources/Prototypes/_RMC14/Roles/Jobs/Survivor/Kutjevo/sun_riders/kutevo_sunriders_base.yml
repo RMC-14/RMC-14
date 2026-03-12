@@ -49,6 +49,11 @@
     - [ CMMaskGas, RMCMaskTornScarfDesert ]
     - [ ArmorHelmetM10, RMCMaskTornScarfDesert ]
     - [ ArmorHelmetM10, RMCMaskScarfTan ]
+    randomGearOther: # 1/4 chance for no flares
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
     randomWeapon:
     - [ RMCM1984BeltFilledSurvivorSunRiders ]
     - [ RMCM1984BeltFilledSurvivorSunRiders ]

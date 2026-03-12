@@ -36,6 +36,11 @@
     primaryWeapons:
     - [ WeaponRifleM4SPRFilled, CMMagazineRifleM4SPR, CMMagazineRifleM4SPR ]
     primaryWeaponChance: 1
+    randomGearOther: # 1/4 chance for no flares
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
 
 - type: entity
   parent: CMSpawnPointJobBase

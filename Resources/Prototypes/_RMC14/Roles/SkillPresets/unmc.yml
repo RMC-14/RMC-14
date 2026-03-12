@@ -45,6 +45,24 @@
 
 - type: entity
   parent: RMCSkillPresetSunRidersRifleman
+  id: RMCSkillPresetSunRidersPlatCo
+  name: Sun Riders Platoon Commander
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillJtac: 3
+      RMCSkillLeadership: 3
+      RMCSkillMedical: 2
+      RMCSkillConstruction: 2
+      RMCSkillNavigations: 1
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 1
+      RMCSkillSurgery: 1
+      RMCSkillVehicles: 1
+
+- type: entity
+  parent: RMCSkillPresetSunRidersRifleman
   id: RMCSkillPresetSunRidersPilot
   name: Sun Riders Pilot
   categories: [ HideSpawnMenu ]
@@ -62,6 +80,7 @@
   - type: SkillPreset
     skills:
       RMCSkillLeadership: 1
+      RMCSkillConstruction: 2
 
 - type: entity
   parent: RMCSkillPresetSunRidersRifleman
@@ -73,6 +92,7 @@
     skills:
       RMCSkillFirearms: 2
       RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
       RMCSkillLeadership: 2
 
 - type: entity

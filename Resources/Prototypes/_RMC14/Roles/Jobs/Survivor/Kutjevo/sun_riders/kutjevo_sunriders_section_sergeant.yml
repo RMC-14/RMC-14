@@ -35,7 +35,6 @@
   id: RMCGearSunRidersSectionSergeant
   equipment:
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
-    mask: CMMaskGas
     head: RMCHeadDurag
     back: RMCBackpackRTOFilledSurvivor
     shoes: CMBootsBlackFilled
@@ -45,6 +44,7 @@
     pocket1: RMCPouchFirstAidInjectors
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
     suitstorage: RMCFlashlight
+    gloves: CMHandsBrown
 
 - type: entity
   parent: CMSpawnPointJobBase

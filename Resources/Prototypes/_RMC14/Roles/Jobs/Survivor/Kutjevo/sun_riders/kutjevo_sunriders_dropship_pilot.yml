@@ -30,7 +30,7 @@
 - type: startingGear
   id: RMCGearSunRidersPilot
   inhand:
-  - CMFlare
+  - RMCFlareM94BP
   equipment:
     jumpsuit: RMCJumpsuitPilotAlt
     back: RMCParachute
@@ -39,7 +39,7 @@
     id: CMIDCardSilver
     gloves: CMHandsBrown
     ears: RMCHeadsetSunRidersPVP
-    pocket1: RMCPouchFlareFilled
+    pocket1: RMCPouchFlareM94BPFilled
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
     suitstorage: RMCFlashlight
 

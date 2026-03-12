@@ -49,6 +49,11 @@
     - [ RMCMaskScarfTan, CMTraumaKit10 ]
     - [ RMCMaskTornScarfDesert, CMBurnKit10 ]
     - [ RMCMaskScarfTan, CMBurnKit10 ]
+    randomGearOther:
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
 
 - type: entity
   parent: CMSpawnPointJobBase

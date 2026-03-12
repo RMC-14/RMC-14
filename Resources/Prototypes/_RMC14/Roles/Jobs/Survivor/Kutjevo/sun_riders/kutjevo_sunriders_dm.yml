@@ -49,6 +49,11 @@
     randomOutfits:
     - [ RMCMaskScarfTan ]
     - [ RMCMaskTornScarfDesert ]
+    randomGearOther:
+    -
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP ]
     primaryWeapons:
     - [ WeaponRifleM4SPRDM ]
     primaryWeaponChance: 1
