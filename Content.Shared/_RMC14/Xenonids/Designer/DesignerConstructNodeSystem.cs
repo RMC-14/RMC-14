@@ -52,6 +52,13 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
 
         SubscribeLocalEvent<DesignNodeComponent, ActivateInWorldEvent>(OnDesignNodeActivate);
         SubscribeLocalEvent<DesignNodeComponent, GettingInteractedWithAttemptEvent>(OnDesignNodeGettingInteractedWithAttempt);
+        SubscribeLocalEvent<DesignerConstructNodeBuildingComponent, ComponentRemove>(OnBuildingRemoved);
+    }
+
+    private void OnBuildingRemoved(Entity<DesignerConstructNodeBuildingComponent> ent, ref ComponentRemove args)
+    {
+        if (_net.IsServer && ent.Comp.AnimationEffect is { } effect && Exists(effect) && !Terminating(effect))
+            QueueDel(effect);
     }
 
     public override void Update(float frameTime)
@@ -181,6 +188,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         if (_prototype.HasIndex(effectId))
         {
             var effect = Spawn(effectId, coords);
+            build.AnimationEffect = effect;
             if (TryGetNetEntity(effect, out var netEffect) && TryGetNetEntity(user, out var netUser))
             {
                 RaiseNetworkEvent(
@@ -264,7 +272,7 @@ public sealed partial class DesignerConstructNodeSystem : EntitySystem
         _weedbound.RegisterWeedboundStructure(spawned, boundWeed);
 
         EntityManager.DeleteEntity(nodeUid);
-        _popup.PopupEntity("You infuse the node with plasma", spawned, PopupType.Small);
+        _popup.PopupClient(Loc.GetString("rmc-xeno-designer-infuse-node"), user, user, PopupType.Small);
     }
 
     // Some castes build thick walls/doors from construct nodes.

@@ -185,6 +185,9 @@
   name: weedbound resin wall
   description: Weird slime solidified into a wall, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
   - type: Icon
@@ -204,6 +207,9 @@
   name: thick weedbound resin wall
   description: Weird slime solidified into a thick wall, bound to weeds.
   components:
+  - type: GuideHelp
+    guides:
+    - RMCGuideRoleDesigner
   - type: Sprite
     sprite: _RMC14/Structures/Xenos/weedbound_resin_walls.rsi
   - type: Icon
@@ -219,10 +225,18 @@
 - type: entity
   parent: WallXenoResinThick
   id: WallXenoResinThickSurge
-  name: Unstable thick resin wall
-  description: A hastily-thickened resin wall. It won't last long.
+  name: Unstable resin wall
+  description: A hastily-constructed resin wall. It won't last long.
   categories: [ HideSpawnMenu ]
   components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+  - type: Icon
+    sprite: _RMC14/Structures/Walls/bone_resin.rsi
+    state: bone_resin
+  - type: IconSmooth
+    key: walls
+    base: bone_resin
   - type: TimedDespawn
     lifetime: 13.0
   - type: XenoStructureUpgradeable
