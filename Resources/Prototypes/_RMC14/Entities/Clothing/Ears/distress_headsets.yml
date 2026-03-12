@@ -270,6 +270,7 @@
         trackerModes:
         - SunRidersSectionSergeant
         - SunRidersPlatCo
+
 # Paramarine Hybrisa survivor insert
 - type: entity
   parent: RMCHeadsetIconsPara
