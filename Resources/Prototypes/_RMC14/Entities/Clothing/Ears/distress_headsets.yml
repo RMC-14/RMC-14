@@ -265,11 +265,11 @@
     containers:
       key_slots:
       - CMEncryptionKeyColony
-      - type: GrantSquadLeaderTracker
-        defaultMode: SunRidersSectionSergeant
-        trackerModes:
-        - SunRidersSectionSergeant
-        - SunRidersPlatCo
+  - type: GrantSquadLeaderTracker
+    defaultMode: SunRidersSectionSergeant
+    trackerModes:
+      - SunRidersSectionSergeant
+      - SunRidersPlatCo
 
 # Paramarine Hybrisa survivor insert
 - type: entity

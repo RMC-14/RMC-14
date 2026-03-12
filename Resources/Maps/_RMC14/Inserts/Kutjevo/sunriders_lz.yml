@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/28/2026 22:42:46
+  time: 03/12/2026 16:44:15
   entityCount: 227
 maps: []
 grids:
@@ -484,6 +484,13 @@ entities:
     components:
     - type: Transform
       pos: 3.5,9.5
+      parent: 1
+- proto: CMSpawnPointSunRidersSectionSergeant
+  entities:
+  - uid: 204
+    components:
+    - type: Transform
+      pos: 3.5,12.5
       parent: 1
 - proto: CMSpawnPointSunRidersSquadLeader
   entities:
@@ -980,13 +987,6 @@ entities:
     components:
     - type: Transform
       pos: 11.5,4.5
-      parent: 1
-- proto: RMCHeadsetSunRidersPVP
-  entities:
-  - uid: 204
-    components:
-    - type: Transform
-      pos: 10.1601095,20.009645
       parent: 1
 - proto: RMCMagazineRifleM4SPRAPEmpty
   entities:
