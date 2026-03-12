@@ -12,6 +12,7 @@ using Content.Shared.Coordinates;
 using Content.Shared.Damage;
 using Content.Shared.GameTicking;
 using Content.Shared.Maps;
+using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
@@ -35,6 +36,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedMarineAnnounceSystem _marineAnnounce = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedParaDropSystem _paradrop = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly RMCCameraShakeSystem _rmcCameraShake = default!;
@@ -55,6 +57,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<BeingSupplyDroppedComponent, StorageOpenAttemptEvent>(OnBeingSupplyDroppedOpenAttempt);
+        SubscribeLocalEvent<BeingSupplyDroppedComponent, ParaDropFinishedEvent>(OnBeingSupplyDroppedParadropFinished);
 
         Subs.BuiEvents<SupplyDropComputerComponent>(SupplyDropComputerUi.Key,
             subs =>
@@ -75,6 +78,39 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     private void OnBeingSupplyDroppedOpenAttempt(Entity<BeingSupplyDroppedComponent> ent, ref StorageOpenAttemptEvent args)
     {
         args.Cancelled = true;
+    }
+
+    private void OnBeingSupplyDroppedParadropFinished(Entity<BeingSupplyDroppedComponent> ent, ref ParaDropFinishedEvent args)
+    {
+        if (_net.IsClient)
+            return;
+
+        if (!TerminatingOrDeleted(ent.Comp.LandingEffect))
+        {
+            QueueDel(ent.Comp.LandingEffect);
+            ent.Comp.LandingEffect = null;
+            Dirty(ent);
+        }
+
+        if (ent.Comp.LandingDamage is { } landingDamage)
+        {
+            _intersecting.Clear();
+            _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
+            foreach (var intersecting in _intersecting)
+            {
+                _damageable.TryChangeDamage(intersecting, landingDamage, true);
+            }
+        }
+
+        var mapPos = _transform.GetMapCoordinates(ent);
+        var filter = Filter.Empty().AddInRange(mapPos, 7);
+        foreach (var recipient in filter.Recipients)
+        {
+            if (recipient.AttachedEntity is not { } player)
+                continue;
+
+            _rmcCameraShake.ShakeCamera(player, 4, 5);
+        }
     }
 
     private void OnSupplyDropComputerLongitudeMsg(Entity<SupplyDropComputerComponent> ent, ref SupplyDropComputerLongitudeBuiMsg args)
@@ -209,7 +245,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
 
         var crateCoordinates = _transform.GetMoverCoordinates(crate);
         _popup.PopupClient(Loc.GetString("rmc-supply-drop-crate-load", ("crate", crate)), crateCoordinates, user, PopupType.Medium);
-        _audio.PlayPredicted(crate.Comp.LaunchSound, crateCoordinates, user);
+        _audio.PlayPvs(crate.Comp.LaunchSound, crateCoordinates);
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-supply-drop-squad-announcement", ("crate", crate)), squad);
         _rmcpulling.TryStopAllPullsFromAndOn(crate);
 
@@ -217,17 +253,18 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         _transform.SetMapCoordinates(crate, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
 
         var dropping = EnsureComp<BeingSupplyDroppedComponent>(crate);
-        dropping.Target = _transform.ToCoordinates(mapCoordinates).Offset(new Vector2(0.5f, -0.5f));
-        dropping.ArrivingSoundAt = time + crate.Comp.ArrivingSoundDelay;
-        dropping.DropAt = time + crate.Comp.DropDelay;
+        var dropLocation = mapCoordinates.Offset(new Vector2(0.5f, 0.5f));
         dropping.OpenAt = time + crate.Comp.OpenDelay;
-        dropping.LandingEffect = Spawn(crate.Comp.LandingEffectId, dropping.Target);
+        dropping.LandingEffect = Spawn(crate.Comp.LandingEffectId, dropLocation);
         dropping.LandingDamage = crate.Comp.LandingDamage;
         Dirty(crate, dropping);
 
         computer.Comp.LastLaunchAt = time;
         computer.Comp.NextLaunchAt = time + computer.Comp.Cooldown;
         Dirty(computer);
+
+        _paradrop.DoParaDrop(crate, _transform.ToCoordinates(dropLocation), (float) crate.Comp.ArrivingSoundDelay.TotalSeconds, (float) crate.Comp.DropDuration.TotalSeconds, crate.Comp.ArrivingSound);
+
         return true;
     }
 
@@ -282,50 +319,6 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         var droppingQuery = EntityQueryEnumerator<BeingSupplyDroppedComponent>();
         while (droppingQuery.MoveNext(out var uid, out var dropping))
         {
-            if (!dropping.PlayedArrivingSound &&
-                time > dropping.ArrivingSoundAt &&
-                dropping.LandingEffect != null)
-            {
-                dropping.PlayedArrivingSound = true;
-                _audio.PlayPvs(dropping.ArrivingSound, _transform.GetMoverCoordinates(dropping.LandingEffect.Value));
-                Dirty(uid, dropping);
-            }
-
-            if (time < dropping.DropAt)
-                continue;
-
-            if (!dropping.Landed)
-            {
-                dropping.Landed = true;
-                if (!TerminatingOrDeleted(dropping.LandingEffect))
-                {
-                    QueueDel(dropping.LandingEffect);
-                    dropping.LandingEffect = null;
-                    Dirty(uid, dropping);
-                }
-
-                if (dropping.LandingDamage is { } landingDamage)
-                {
-                    _intersecting.Clear();
-                    _entityLookup.GetEntitiesInRange(dropping.Target, 0.33f, _intersecting);
-                    foreach (var intersecting in _intersecting)
-                    {
-                        _damageable.TryChangeDamage(intersecting, landingDamage, true);
-                    }
-                }
-
-                _transform.SetCoordinates(uid, _transform.GetMoverCoordinates(dropping.Target));
-                var mapPos = _transform.ToMapCoordinates(dropping.Target);
-                var filter = Filter.Empty().AddInRange(mapPos, 7);
-                foreach (var recipient in filter.Recipients)
-                {
-                    if (recipient.AttachedEntity is not { } player)
-                        continue;
-
-                    _rmcCameraShake.ShakeCamera(player, 4, 5);
-                }
-            }
-
             if (time < dropping.OpenAt)
                 continue;
 

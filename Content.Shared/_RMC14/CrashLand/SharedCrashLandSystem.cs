@@ -234,6 +234,7 @@ public abstract partial class SharedCrashLandSystem : EntitySystem
             return;
 
         var skyFalling = EnsureComp<SkyFallingComponent>(crashLandable);
+        skyFalling.RemainingTime = crashLandable.Comp.SkyFallDuration;
         skyFalling.TargetCoordinates = location;
         Dirty(crashLandable, skyFalling);
 

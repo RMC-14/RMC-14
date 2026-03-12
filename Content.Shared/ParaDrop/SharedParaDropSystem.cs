@@ -17,6 +17,7 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Shuttles.Systems;
 using Content.Shared.Throwing;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
@@ -248,7 +249,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             // Cancel the jump if there is no viable target
             if (randomCoordinates == null)
             {
-                _popup.PopupClient("Your harness got stuck and is preventing your from jumping", dropping, PopupType.SmallCaution);
+                _popup.PopupClient(Loc.GetString("rmc-dropship-paradrop-failed "), dropping, PopupType.SmallCaution);
                 return;
             }
 
@@ -265,6 +266,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
     /// </summary>
     /// <param name="dropping">The paradropping entity</param>
     /// <param name="dropCoordinates">The coordinates the entity is being dropped at</param>
+    /// <param name="skyFallDuration">How long it takes before you get teleported to the drop location's map</param>
     /// <returns>True if the paradrop succeeded</returns>
     private bool TryDrop(EntityUid dropping, EntityCoordinates dropCoordinates)
     {
@@ -290,6 +292,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             dropCoordinates = adjustedCoordinates;
 
         var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
+        skyFalling.RemainingTime = paraDroppable.SkyFallDuration;
         skyFalling.TargetCoordinates = dropCoordinates;
         Dirty(dropping, skyFalling);
 
@@ -316,7 +319,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         while (distressQuery.MoveNext(out var grid, out _))
         {
             if (!TryComp<MapGridComponent>(grid, out var gridComp))
-                return false;
+                continue;
 
             var position = _mapSystem.LocalToTile(grid, gridComp, targetLocation);
             var dropArea = new Box2(position.X - dropScatter, position.Y - dropScatter, position.X + dropScatter, position.Y + dropScatter);
@@ -339,6 +342,30 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    ///     Starts a paradrop towards the given location, giving the dropping entity the <see cref="ParaDroppableComponent"/>.
+    ///     The component will be removed after the paradrop finishes if the entity didn't already have it.
+    /// </summary>
+    /// <param name="dropping">The dropping entity</param>
+    /// <param name="targetLocation">The coordinates to paradrop to</param>
+    /// <param name="skyFallDuration">How long it takes before the entity is teleported to the target map</param>
+    /// <param name="dropDuration">The duration of the falling animation</param>
+    /// <param name="dropSound">The sound to play at the target location after the entity is teleported to the target map</param>
+    /// <param name="dropScatter">The distance up to which the drop location can randomly deviate from the target location</param>
+    public void DoParaDrop(EntityUid dropping, EntityCoordinates targetLocation, float skyFallDuration, float dropDuration, SoundSpecifier? dropSound, int dropScatter = 0)
+    {
+        if (!EnsureComp<ParaDroppableComponent>(dropping, out var paraDroppable))
+            paraDroppable.RemoveComponentAfterDrop = true;
+
+        paraDroppable.SkyFallDuration = skyFallDuration;
+        paraDroppable.DropScatter = dropScatter;
+        paraDroppable.DropDuration = dropDuration;
+        paraDroppable.DropSound = dropSound;
+        Dirty(dropping, paraDroppable);
+
+        AttemptParaDrop(dropping, targetLocation);
     }
 
     public override void Update(float frameTime)
