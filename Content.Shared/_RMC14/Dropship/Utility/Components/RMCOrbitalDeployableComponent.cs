@@ -1,3 +1,6 @@
+using Content.Shared._RMC14.Sentry;
+using Content.Shared.Damage;
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -31,8 +34,50 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
     public int RemainingDeployCount = 1;
 
     /// <summary>
+    ///     The time it takes before the entity starts dropping on the target map.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float ArrivingSoundDelay = 5;
+
+    /// <summary>
+    ///     The duration of the drop animation.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public float DropDuration = 3;
+
+    /// <summary>
+    ///     The amount of seconds after the drop has started after which a soun will play at the target location.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public TimeSpan OpenDelay = TimeSpan.FromSeconds(10);
+
+    /// <summary>
+    ///     The amount of damage dealt to entities near the target location when the drop is finished.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier? LandingDamage;
+
+    /// <summary>
+    ///     The range to check for entities with the <see cref="TurretComponent"/>, deployment is not possible if one is found.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int DefenseExclusionRange = 4;
+
+    /// <summary>
     ///     The effect to display at the landing location during the drop.
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? LandingEffectId = "RMCEffectAlert";
+
+    /// <summary>
+    ///     The sound to play on the deployer's location when the deployer is activated.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? LaunchSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg");
+
+    /// <summary>
+    ///     The sound to play on the target location when the dropped entity start it's dropping animation.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");
 }

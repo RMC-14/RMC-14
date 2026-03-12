@@ -129,6 +129,7 @@
   - type: RequireProjectileTarget
   - type: RMCWeaponAccuracy
   - type: HomingShots
+  - type: Turret
 
 - type: entity
   parent: RMCBaseTurret
@@ -185,3 +186,4 @@
     rotationSpeed: 180
     simple4DirMode: false
   - type: SleepNPC
+  - type: Turret

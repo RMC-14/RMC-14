@@ -16,6 +16,7 @@ using Content.Shared.ParaDrop;
 using Content.Shared.Popups;
 using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -222,6 +223,14 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
         }
 
+        SharedEntityStorageComponent? storage = null;
+        if (_entityStorage.ResolveStorage(crate, ref storage) &&
+            storage.Open)
+        {
+            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-crate-open"), user, PopupType.MediumCaution);
+            return false;
+        }
+
         if (!_area.CanSupplyDrop(mapCoordinates))
         {
             _popup.PopupCursor(Loc.GetString("rmc-supply-drop-underground"), user, PopupType.MediumCaution);
@@ -235,37 +244,52 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             return false;
         }
 
-        SharedEntityStorageComponent? storage = null;
-        if (_entityStorage.ResolveStorage(crate, ref storage) &&
-            storage.Open)
-        {
-            _popup.PopupCursor(Loc.GetString("rmc-supply-drop-crate-open"), user, PopupType.MediumCaution);
-            return false;
-        }
-
+        var skyFallDuration = (float) crate.Comp.ArrivingSoundDelay.TotalSeconds;
+        var dropDuration = (float) crate.Comp.DropDuration.TotalSeconds;
+        var dropCoordinates = mapCoordinates.Offset(new Vector2(0.5f, 0.5f));
         var crateCoordinates = _transform.GetMoverCoordinates(crate);
+
+        LaunchSupplyDrop(crate,
+            dropCoordinates,
+            skyFallDuration,
+            dropDuration,
+            crate.Comp.OpenDelay,
+            crate.Comp.LandingDamage,
+            crate.Comp.LandingEffectId,
+            crate.Comp.ArrivingSound);
+
         _popup.PopupClient(Loc.GetString("rmc-supply-drop-crate-load", ("crate", crate)), crateCoordinates, user, PopupType.Medium);
-        _audio.PlayPvs(crate.Comp.LaunchSound, crateCoordinates);
         _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-supply-drop-squad-announcement", ("crate", crate)), squad);
-        _rmcpulling.TryStopAllPullsFromAndOn(crate);
-
-        var mapId = EnsureMap();
-        _transform.SetMapCoordinates(crate, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
-
-        var dropping = EnsureComp<BeingSupplyDroppedComponent>(crate);
-        var dropLocation = mapCoordinates.Offset(new Vector2(0.5f, 0.5f));
-        dropping.OpenAt = time + crate.Comp.OpenDelay;
-        dropping.LandingEffect = Spawn(crate.Comp.LandingEffectId, dropLocation);
-        dropping.LandingDamage = crate.Comp.LandingDamage;
-        Dirty(crate, dropping);
+        _audio.PlayPvs(crate.Comp.LaunchSound, crateCoordinates);
 
         computer.Comp.LastLaunchAt = time;
         computer.Comp.NextLaunchAt = time + computer.Comp.Cooldown;
         Dirty(computer);
 
-        _paradrop.DoParaDrop(crate, _transform.ToCoordinates(dropLocation), (float) crate.Comp.ArrivingSoundDelay.TotalSeconds, (float) crate.Comp.DropDuration.TotalSeconds, crate.Comp.ArrivingSound);
-
         return true;
+    }
+
+    public void LaunchSupplyDrop(EntityUid droppingEntity, MapCoordinates dropCoordinates, float skyFallDuration, float dropDuration, TimeSpan openDelay, DamageSpecifier? landingDamage = null, EntProtoId? landingEffect = null, SoundSpecifier? arrivingSound = null, int dropScatter = 0)
+    {
+        if (_net.IsClient)
+            return;
+
+        var time = _timing.CurTime;
+
+        _rmcpulling.TryStopAllPullsFromAndOn(droppingEntity);
+
+        var mapId = EnsureMap();
+        _transform.SetMapCoordinates(droppingEntity, new MapCoordinates(_supplyDropCount++ * 50, 0, mapId));
+
+        var dropping = EnsureComp<BeingSupplyDroppedComponent>(droppingEntity);
+        var dropEntityCoordinates = _transform.ToCoordinates(dropCoordinates);
+
+        dropping.OpenAt = time + openDelay;
+        dropping.LandingEffect = Spawn(landingEffect, dropEntityCoordinates);
+        dropping.LandingDamage = landingDamage;
+        Dirty(droppingEntity, dropping);
+
+        _paradrop.DoParaDrop(droppingEntity, dropEntityCoordinates, skyFallDuration, dropDuration, arrivingSound, dropScatter);
     }
 
     private MapId EnsureMap()

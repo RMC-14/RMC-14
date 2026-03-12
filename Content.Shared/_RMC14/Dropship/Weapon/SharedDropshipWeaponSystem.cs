@@ -1086,7 +1086,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryComp(selectedSystem, out RMCOrbitalDeployerComponent? deployer))
             return;
 
-        _rmcOrbitalDeployable.TryDeploy(selectedSystem.Value, target, deployer);
+        _rmcOrbitalDeployable.TryDeploy(selectedSystem.Value, target,  args.Actor, deployer);
 
         RefreshWeaponsUI(ent);
     }
