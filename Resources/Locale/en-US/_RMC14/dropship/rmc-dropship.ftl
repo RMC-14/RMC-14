@@ -135,5 +135,3 @@ rmc-dropship-launch-bay-screen-text-loaded = LAG-14 Internal Sentry Launcher
     Loaded: {$loaded}
 
     Ammo: {$current} / {$max}
-
-

@@ -461,7 +461,7 @@ public sealed class PowerLoaderSystem : EntitySystem
     private void OnDropshipAttach(Entity<DropshipUtilityPointComponent> ent, ref DropshipAttachDoAfterEvent args)
     {
         if (!TryGetPointContainer(args, out var user, out var container, out var contained, out var slot))
-            return; //
+            return;
 
         if (TryComp(contained, out DropshipUtilityComponent? utilityComp))
             utilityComp.AttachmentPoint = container;
