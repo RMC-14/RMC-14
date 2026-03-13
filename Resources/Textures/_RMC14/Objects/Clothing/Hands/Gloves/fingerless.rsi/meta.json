@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/3e15ed0f797bf072b6feb55bcff6f8d6497aad68/icons/obj/items/clothing/gloves.dmi, https://github.com/cmss13-devs/cmss13/blob/3e15ed0f797bf072b6feb55bcff6f8d6497aad68/icons/mob/humans/onmob/clothing/hands.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "equipped-HAND",
+      "directions": 4
+    }
+  ]
+}

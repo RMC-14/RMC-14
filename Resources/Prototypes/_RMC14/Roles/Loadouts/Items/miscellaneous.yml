@@ -47,3 +47,10 @@
   storage:
     back:
     - RMCHandsBrownMarine
+
+- type: loadout
+  id: HandsFingerlessMarineRMC
+  cost: 2
+  storage:
+    back:
+    - RMCHandsFingerlessMarine

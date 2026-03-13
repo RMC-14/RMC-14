@@ -482,7 +482,7 @@
   - BootsGreyFilledRMC
   - HandsBrownMarineRMC
   - HandsGreyMarineRMC
-
+  - HandsFingerlessMarineRMC
 
 # Food (sweets)
 - type: loadoutGroup

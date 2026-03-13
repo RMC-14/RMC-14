@@ -90,3 +90,14 @@
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Hands/Gloves/grey.rsi
+
+- type: entity
+  parent: CMHandsBlackMarine
+  id: RMCHandsFingerlessMarine # todo; clense this relm of the sins of my predecessors, sins they hath lain atop mine own inept, dilettantish and wicked sholders. That is to say; fix the parenting
+  name: marine fingerless combat gloves
+  description: "Standard issue marine tactical gloves. It reads: 'knit by Marine Widows Association'. These ones have have been modified with the fingertips removed."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/fingerless.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Hands/Gloves/fingerless.rsi
