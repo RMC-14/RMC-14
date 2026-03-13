@@ -26,7 +26,6 @@ public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
 
     private void OnDropshipWeaponShot(Entity<DropshipComponent> ent, ref DropshipWeaponShotEvent args)
     {
-        var found = false;
         foreach (var point in ent.Comp.AttachmentPoints)
         {
             if (!TryComp(point, out DropshipElectronicSystemPointComponent? electronic) ||
@@ -41,12 +40,8 @@ public abstract class SharedDropshipElectronicSystemSystem : EntitySystem
                 args.Spread = Math.Max(MinSpread, args.Spread + targeting.SpreadModifier);
                 args.BulletSpread = Math.Max(MinBulletSpread, args.BulletSpread + targeting.BulletSpreadModifier);
                 args.TravelTime = TimeSpan.FromSeconds(Math.Max(MinTravelTime, args.TravelTime.TotalSeconds + targeting.TravelingTimeModifier.TotalSeconds));
-                found = true;
-                break;
+                return;
             }
-
-            if (found)
-                break;
         }
     }
 
