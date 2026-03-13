@@ -710,7 +710,11 @@
         amount: 20
       - id: CMBootsBrown
         amount: 5
+      - id: CMBootsJungle
+        amount: 5
       - id: CMBootsGrey
+        amount: 5
+      - id: CMBootsUrban
         amount: 5
     - name: Backpacks
       entries:
@@ -754,12 +758,14 @@
         amount: 10
     - name: Gloves
       entries:
-      - id: CMHandsBrown
-        amount: 40
-      - id: RMCHandsGreyMarine
-        amount: 40
       - id: CMHandsBlackMarine
         amount: 40
+      - id: RMCHandsBrownMarine
+        amount: 20
+      - id: RMCHandsGreyMarine
+        amount: 20
+      - id: RMCHandsFingerlessMarine
+        amount: 20
     - name: Radio
       entries:
       - id: RMCHeadsetShip
