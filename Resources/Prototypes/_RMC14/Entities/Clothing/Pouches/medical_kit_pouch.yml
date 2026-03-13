@@ -168,3 +168,18 @@
     - id: CMBicaridineAutoInjector
     - id: CMKelotaneAutoInjector
     - id: CMHealthAnalyzer
+
+- type: entity
+  parent: RMCPouchMedkit
+  id: RMCPouchMedkitFillRoyalMedic
+  suffix: Filled, Royal Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMBloodPackFull
+    - id: CMBloodPackFull
+    - id: CMTraumaKit10
+    - id: CMTraumaKit10
+    - id: CMBurnKit10
+    - id: CMBurnKit10
+    #- id: RMCSplints5 # TODO RMC14

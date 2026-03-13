@@ -13,7 +13,10 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
+using Robust.Shared.Serialization;
+using Robust.Shared.Timing;
 
 namespace Content.Shared.Interaction;
 
@@ -33,9 +36,15 @@ public sealed class SmartEquipSystem : EntitySystem
     [Dependency] private readonly MotionDetectorSystem _motionDetectorSystem = default!;
     [Dependency] private readonly IntelDetectorSystem _intelDetectorSystem = default!;
 
+    // RMC14
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+
     /// <inheritdoc/>
     public override void Initialize()
     {
+        SubscribeAllEvent<SmartEquipEvent>(HandleSmartEquipEvent);
+
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.SmartEquipBackpack, InputCmdHandler.FromDelegate(HandleSmartEquipBackpack, handle: false, outsidePrediction: false))
             .Bind(ContentKeyFunctions.SmartEquipBelt, InputCmdHandler.FromDelegate(HandleSmartEquipBelt, handle: false, outsidePrediction: false))
@@ -61,9 +70,27 @@ public sealed class SmartEquipSystem : EntitySystem
 
     private void HandleSmartEquip(ICommonSession? session, string equipmentSlot)
     {
-        if (session is not { } playerSession)
+        if (!_net.IsClient || !_timing.IsFirstTimePredicted)
             return;
 
+        var ev = new SmartEquipEvent(equipmentSlot);
+        RaisePredictiveEvent(ev);
+    }
+
+    [Serializable, NetSerializable]
+    private sealed class SmartEquipEvent(string equipmentSlot) : EntityEventArgs
+    {
+        public readonly string EquipmentSlot = equipmentSlot;
+    }
+
+    private void HandleSmartEquipEvent(SmartEquipEvent msg, EntitySessionEventArgs args)
+    {
+        if (args.SenderSession is not { } playerSession)
+            return;
+
+        // RMC14
+        var session = playerSession;
+        var equipmentSlot = msg.EquipmentSlot;
         if (playerSession.AttachedEntity is not { Valid: true } uid || !Exists(uid))
             return;
 

@@ -1,0 +1,28 @@
+- type: entity
+  parent: RMCDropshipCockpitBase
+  id: CMSPPSOFCockpit
+  suffix: Voron
+  components:
+  - type: RemoveComponents
+    components:
+    - type: DoorBolt
+  - type: Sprite
+    sprite: _RMC14/Structures/Dropships/normandy.rsi
+    layers:
+    - state: pilot_door_closed
+      map: [ "enum.DoorVisualLayers.Base" ]
+      color: "#b09e90"
+    - state: unlit
+      map: ["enum.DoorVisualLayers.BaseUnlit"]
+    - state: unlit
+      map: [ "enum.WeldableLayers.BaseWelded" ]
+      color: "#b09e90"
+    - state: pilot_door_locked
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseBolted"]
+    - state: pilot_door_spark
+      shader: unshaded
+      map: ["enum.DoorVisualLayers.BaseEmergencyAccess"]
+    - state: panel_open
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+      color: "#b09e90"
