@@ -83,7 +83,7 @@ public sealed partial class HiveComponent : Component
     public int BurrowedLarva;
 
     [DataField, AutoNetworkedField]
-    public int BurrowedLarvaSlotFactor = 4;
+    public float BurrowedLarvaSlotFactor = 0.66f;
 
     [DataField, AutoNetworkedField]
     public bool LateJoinGainLarva;
