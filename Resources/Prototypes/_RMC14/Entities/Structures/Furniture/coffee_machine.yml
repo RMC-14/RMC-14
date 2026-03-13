@@ -3,7 +3,7 @@
   id: RMCCoffeeMachine
   name: coffee machine
   description: A coffee machine
-  components: #TODO: Make the coffee machine actually function
+  components:
   - type: RMCCoffeeMachine
     reagent: Coffee
     dispenseAmount: 30
