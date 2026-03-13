@@ -159,6 +159,7 @@ public sealed class IntelSystem : EntitySystem
 
         SubscribeLocalEvent<ViewIntelObjectivesComponent, MapInitEvent>(OnViewIntelObjectivesMapInit, after: [typeof(AreaSystem)]);
         SubscribeLocalEvent<ViewIntelObjectivesComponent, ViewIntelObjectivesActionEvent>(OnViewIntelObjectivesAction);
+        SubscribeLocalEvent<ViewIntelObjectivesComponent, BoundUIOpenedEvent>(OnViewIntelObjectivesUIOpened);
 
         SubscribeLocalEvent<IntelHasUnlockedComponent, RefreshNameModifiersEvent>(OnHasUnlockedRefreshName);
 
@@ -366,6 +367,16 @@ public sealed class IntelSystem : EntitySystem
         }
 
         _ui.OpenUi(ent.Owner, ViewIntelObjectivesUI.Key, ent);
+    }
+
+    private void OnViewIntelObjectivesUIOpened(Entity<ViewIntelObjectivesComponent> ent, ref BoundUIOpenedEvent args)
+    {
+        if (_net.IsServer && args.UiKey.Equals(ViewIntelObjectivesUI.Key))
+        {
+            var tree = EnsureTechTree().Comp.Tree;
+            ent.Comp.Tree = tree;
+            Dirty(ent);
+        }
     }
 
     private void OnHasUnlockedRefreshName(Entity<IntelHasUnlockedComponent> ent, ref RefreshNameModifiersEvent args)
