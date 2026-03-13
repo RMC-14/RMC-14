@@ -54,6 +54,10 @@
   parent: RMCBaseMedicalAccess
   name: rmc-job-name-researcher
 
+- type: accessLevel
+  id: RMCAccessFieldDoctor
+  parent: RMCBaseMedicalAccess
+  name: rmc-job-name-field-doctor
 
 # correspondent
 - type: accessLevel

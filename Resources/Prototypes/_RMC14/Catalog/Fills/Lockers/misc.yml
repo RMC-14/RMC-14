@@ -129,8 +129,8 @@
     - id: RMCMagazinePistolPK7
 
 - type: entity
-  parent: CMLockerBase
-  id: RMCLockerFieldDoctor
+  parent: RMCLockerFieldDoctor
+  id: RMCLockerFieldDoctorFilled
   suffix: Filled, Field Doctor
   components:
   - type: StorageFill
