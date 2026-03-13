@@ -18,6 +18,7 @@ using Content.Shared.Storage.Components;
 using Content.Shared.Storage.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -31,6 +32,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
     [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly IComponentFactory _compFactory = default!;
+    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
@@ -99,6 +101,9 @@ public abstract class SharedSupplyDropSystem : EntitySystem
             _entityLookup.GetEntitiesInRange(ent, 0.33f, _intersecting);
             foreach (var intersecting in _intersecting)
             {
+                if (_container.TryGetContainingContainer(intersecting, out var container) && container.Owner == ent.Owner)
+                        continue;
+
                 _damageable.TryChangeDamage(intersecting, landingDamage, true);
             }
         }
@@ -248,12 +253,13 @@ public abstract class SharedSupplyDropSystem : EntitySystem
         var dropDuration = (float) crate.Comp.DropDuration.TotalSeconds;
         var dropCoordinates = mapCoordinates.Offset(new Vector2(0.5f, 0.5f));
         var crateCoordinates = _transform.GetMoverCoordinates(crate);
+        var openAt = crate.Comp.ArrivingSoundDelay + crate.Comp.DropDuration + crate.Comp.OpenDelay;
 
         LaunchSupplyDrop(crate,
             dropCoordinates,
             skyFallDuration,
             dropDuration,
-            crate.Comp.OpenDelay,
+            openAt,
             crate.Comp.LandingDamage,
             crate.Comp.LandingEffectId,
             crate.Comp.ArrivingSound);
@@ -347,7 +353,7 @@ public abstract class SharedSupplyDropSystem : EntitySystem
                 continue;
 
             RemCompDeferred<BeingSupplyDroppedComponent>(uid);
-            _audio.PlayPvs(dropping.OpenSound, uid);
+            _audio.PlayPvs(dropping.OpenSound, _transform.GetMoverCoordinates(uid));
         }
     }
 }

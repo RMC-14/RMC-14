@@ -19,7 +19,7 @@ public sealed partial class CanBeSupplyDroppedComponent : Component
     public TimeSpan DropDuration = TimeSpan.FromSeconds(3);
 
     [DataField, AutoNetworkedField]
-    public TimeSpan OpenDelay = TimeSpan.FromSeconds(14);
+    public TimeSpan OpenDelay = TimeSpan.FromSeconds(2);
 
     [DataField, AutoNetworkedField]
     public EntProtoId LandingEffectId = "RMCEffectAlert";

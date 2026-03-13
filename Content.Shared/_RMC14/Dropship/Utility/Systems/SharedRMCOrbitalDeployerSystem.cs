@@ -3,7 +3,6 @@ using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
 using Content.Shared.Popups;
-using Content.Shared.Tag;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -12,14 +11,14 @@ namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
 public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 {
+    [Dependency] protected readonly SharedContainerSystem Container = default!;
+
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedSupplyDropSystem SupplyDrop = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     /// <summary>
@@ -35,7 +34,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         if (!Resolve(deployer, ref deployerComp, false))
             return false;
 
-        if (!_container.TryGetContainer(Transform(deployer).ParentUid, deployerComp.DeployableContainerSlotId, out var container))
+        if (!Container.TryGetContainer(Transform(deployer).ParentUid, deployerComp.DeployableContainerSlotId, out var container))
             return false;
 
         var deployableEnt = container.ContainedEntities.Count > 0 ? container.ContainedEntities[0] : default;
@@ -68,12 +67,25 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             Dirty(deployableEnt, deployable);
         }
 
+        var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);
+
+        if (deployable.DropPod)
+        {
+            var dropPod = Spawn(deployerComp.DropPodPrototype);
+            var podComponent = EnsureComp<SupplyDropPodComponent>(dropPod);
+            var podContainer = Container.EnsureContainer<Container>(dropPod, podComponent.DeploySlotId);
+            Container.Insert(deploying, podContainer);
+
+            deploying = dropPod;
+            openAt += podComponent.OpenTimeRemaining;
+        }
+
         _audio.PlayPredicted(deployerComp.LaunchSound, _transform.GetMoverCoordinates(deployer), user);
         SupplyDrop.LaunchSupplyDrop(deploying,
             _transform.ToMapCoordinates(dropLocation),
             deployable.ArrivingSoundDelay,
             deployable.DropDuration,
-            deployable.OpenDelay,
+            openAt,
             deployable.LandingDamage,
             deployable.LandingEffectId,
             deployable.ArrivingSound,

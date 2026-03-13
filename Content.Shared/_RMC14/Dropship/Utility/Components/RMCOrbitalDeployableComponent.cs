@@ -43,13 +43,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
     ///     The duration of the drop animation.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float DropDuration = 3;
-
-    /// <summary>
-    ///     The amount of seconds after the drop has started after which a soun will play at the target location.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public TimeSpan OpenDelay = TimeSpan.FromSeconds(10);
+    public float DropDuration = 3f;
 
     /// <summary>
     ///     The amount of damage dealt to entities near the target location when the drop is finished.
@@ -62,6 +56,12 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public int DefenseExclusionRange = 4;
+
+    /// <summary>
+    ///     Whether the deployed entity will be put in a drop pod before being dropped.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DropPod = true;
 
     /// <summary>
     ///     The effect to display at the landing location during the drop.
