@@ -318,6 +318,29 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadSFGp
+  name: SFGp
+  components:
+    - type: SquadTeam
+      color: "#3D6F43"
+      background:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: empty
+      blacklistedSquadArmor:
+        - Helmet
+        - Goggles
+        - Armor
+        - Gloves
+      radio: TSE
+      minimapBackground:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_para
+      leaderIcon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi
+        state: para_lieutenant
+
+- type: entity
+  parent: SquadBase
   id: SquadProvost
   name: Provost
   components:

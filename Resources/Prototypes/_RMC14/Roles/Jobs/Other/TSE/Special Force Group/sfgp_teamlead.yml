@@ -1,0 +1,119 @@
+- type: job
+  parent: CMJobBase
+  id: RMCJobSFGpTeamLead
+  name: rmc-job-name-sfgp-team-leader
+  description: rmc-ghost-role-information-sfgp-description
+  playTimeTracker: RMCJobSFGpTeamLead
+  ranks:
+    RMCRankParaLieutenant: [ ]
+  startingGear: RMCGearSFGpTeamLead
+  icon: RMCJobIconSFGpTeamLead
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: Special Force Group Team Leader (Death Squad)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+        - RoyalMarines
+        - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFireman: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 2
+        RMCSkillLeadership: 2
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 2
+    - type: JobPrefix
+      prefix: rmc-job-prefix-sfgp-team-leader
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+    - type: MarineOrders
+    - type: SquadLeader
+      icon:
+        sprite: _RMC14/Interface/cm_job_icons.rsi #TODO Unique Icon?
+        state: para_lieutenant
+    - type: RMCPointing
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSFGpTeamLead
+  name: DEATHSQUAD sfgp team leader ghost role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCJobSFGpTeamLead
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCJobSFGpTeamLead
+  components:
+  - type: GhostRole
+    name: rmc-job-name-sfgp-team-leader
+    description: rmc-ghost-role-information-sfgp-description
+    rules: rmc-ghost-role-information-sfgp-rules
+    reregister: false
+    job: RMCJobSFGpTeamLead
+    raffle:
+      settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSFGp
+
+- type: startingGear
+  id: RMCGearSFGpTeamLead
+  equipment:
+    head: RMCHeadSFGpBeretLead
+    mask: RMCMaskScarfBlack
+    ears: RMCHeadsetRoyalSFGpTeamLead
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitMarineSFGp
+    outerClothing: RMCArmorRoyalHunterFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL90A2FFilled
+    id: RMCDogtagSFGpTeamLead
+    belt: RMCBeltRCMFillSPGp
+    back: RMCBackpackRCMSmallPVPFilledSFGp
+    pocket1: RMCPouchToolsSocFill
+    pocket2: RMCPouchExplosiveFilledSFGp
+
+- type: playTimeTracker
+  id: RMCJobSFGpTeamLead
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSFGpTeamLead
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_lieutenant #TODO Unique Icon?
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagSFGpTeamLead
+  name: SFGp Team Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCJobSFGpTeamLead
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagSFGpTeamLead ]
+  id: RMCDogtagSFGpTeamLeadHidden
+  categories: [ HideSpawnMenu ]

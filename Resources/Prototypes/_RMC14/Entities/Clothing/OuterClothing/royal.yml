@@ -189,3 +189,37 @@
       contents:
         - id: RMCFlashlight
         - id: CMScrewdriver
+          
+- type: entity
+  parent: RMCArmorRoyal
+  id: RMCArmorRoyalHunter
+  name: kestrel armoured hunter vest
+  description: A customized suit of kestrel armor with assistance of Weston-Yamada managing to lighten the weight of the armor while keeping it's heavy armor plates. Dubbed the hunter variant because of it expensive cost to create it is used exclusively by the RCM SFGp.
+  suffix: SFGp
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/OuterClothing/Royal/padded.rsi #TODO Custom sprite?
+    - type: CMArmor
+      melee: 30
+      bullet: 40
+      bio: 15
+      explosionArmor: 40
+    - type: RMCArmorSpeedTier
+      speedTier: light
+    - type: ClothingSpeedModifier 
+      walkModifier: 0.949
+      sprintModifier: 0.949
+    - type: Storage
+      grid:
+        - 0,0,7,1 # 4 slots
+
+- type: entity
+  parent: RMCArmorRoyalHunter
+  id: RMCArmorRoyalHunterFilled
+  suffix: SFGp, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCMagazineRifleL90Incendiary
+          amount: 4
+          

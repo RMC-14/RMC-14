@@ -67,3 +67,20 @@ rmc-job-prefix-rcm-pve-bombardment-specialist = BMBRD
 
 rmc-job-name-rcm-pve-troop-commander = Commander
 rmc-job-prefix-rcm-pve-troop-commander = Com
+
+# Special Forces Group
+
+rmc-ghost-role-information-sfgp-rules = You are a [color=red][bold]Special Forces Group[/bold][/color]. You may or may not be hostile to the marines, depending on admin instructions.
+                                             You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
+                                             You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
+                                             You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
+
+rmc-ghost-role-information-sfgp-description = You are an elite Special Forces Group Operator, the best of the best, absolutely loyal to RCM High Command and must follow their directives. Execute the mission assigned to you with extreme prejudice!
+
+rmc-ghost-name-sfgp-operator = Special Forces Group Operator (Friendly)
+rmc-job-name-sfgp-operator = Operator
+rmc-job-prefix-sfgp-operator = Op.
+
+rmc-ghost-name-sfgp-team-leader = Special Forces Group Team Leader (Friendly)
+rmc-job-name-sfgp-team-leader = Team Leader
+rmc-job-prefix-sfgp-team-leader = TL.

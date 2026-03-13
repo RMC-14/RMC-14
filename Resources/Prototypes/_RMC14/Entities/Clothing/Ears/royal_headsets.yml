@@ -47,6 +47,37 @@
   - type: RMCHeadset
     radioTextIncrease: 3
   - type: GrantTacMapAlert
+    
+- type: entity
+  parent: RMCHeadsetIconsTSE
+  id: RMCHeadsetRoyalSFGp
+  name: SFGp headset
+  description: A sleek headset used by the SFPg. Low profile enough to fit under their unique helmets.
+  components:
+  - type: GrantSquadLeaderTracker
+    defaultMode: RCMSFGpTeamLead
+    trackerModes:
+      - RCMSFGpTeamLead
+  - type: Sprite
+    state: vai_headset
+  - type: ContainerFill
+    containers:
+      key_slots:
+        - RMCEncryptionKeyRoyalMarineCommand
+  - type: RMCHeadset
+    channels:
+      - RoyalMarine
+  - type: GrantTacMapAlert
+      
+- type: entity
+  parent: RMCHeadsetRoyalSFGp
+  id: RMCHeadsetRoyalSFGpTeamLead
+  name: SFGp team leader headset
+  description: A sleek headset used by the SFPg team leader. Low profile enough to fit under their unique helmets.
+  components:
+  - type: RMCHeadset
+    radioTextIncrease: 3
+  - type: GrantTacMapAlert
 
 - type: entity
   parent: RMCHeadsetRoyalMarine

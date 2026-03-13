@@ -366,6 +366,21 @@
     maxItemSize: Normal
     grid:
     - 0,0,20,1 # 21 Slots
+      
+- type: entity
+  parent: RMCBackpackRCMSmallPVP
+  id: RMCBackpackRCMSmallPVPFilledSFGp
+  suffix: Filled, SPFg
+  components:
+    - type: StorageFill
+      contents:
+      - id: RMCStandardAidKitFilledSFGp
+      - id: RMCBruteAidKitFilledSFGp
+      - id: RMCBurnAidKitFilledSFGp
+      - id: RMCDefibrillatorCompact
+      - id: CMHealthAnalyzer
+      - id: CMPacketGrenadeHighExplosiveFilled
+      - id: CMPacketGrenadeHighExplosiveFilled 
 
 - type: entity
   parent: CMPersonalStorageBase

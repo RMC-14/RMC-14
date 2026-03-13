@@ -2018,7 +2018,17 @@
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
-      camouflageVariations: {}         
+      camouflageVariations: {}     
+      
+- type: entity
+  parent: RMCBeltRCM
+  id: RMCBeltRCMFillSPGp
+  suffix: SPGp, Filled
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCMagazineRifleL90HEAP
+          amount: 5
       
 - type: entity
   parent: CMBeltBaseStorage
