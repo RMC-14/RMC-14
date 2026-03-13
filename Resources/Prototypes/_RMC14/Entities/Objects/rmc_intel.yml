@@ -161,8 +161,8 @@
 
 - type: entity
   parent: RMCCommunicationsConsoleBase
-  id: RMCComputerDatabase
-  name: Database computer
+  id: RMCComputerIntelDatabase
+  name: Intel Database computer
   description: An UNMC Intel Computer used for consulting the current intel database.
   components:
   - type: Sprite
@@ -176,6 +176,10 @@
       enum.ViewIntelObjectivesUI.Key:
         type: ViewIntelObjectivesBui
   - type: ViewIntelObjectives
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   id: RMCIntelTechTree
