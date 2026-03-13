@@ -47,6 +47,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
 
     /// <summary>
     ///     The amount of damage dealt to entities near the target location when the drop is finished.
+    ///     Only used if <see cref="DropPod"/> is false.
     /// </summary>
     [DataField, AutoNetworkedField]
     public DamageSpecifier? LandingDamage;

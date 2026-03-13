@@ -334,6 +334,3 @@
   - type: Appearance
   - type: RMCOrbitalDeployable
     deployPrototype: RMCSentryDropship
-    landingDamage:
-      types:
-        Blunt: 5000

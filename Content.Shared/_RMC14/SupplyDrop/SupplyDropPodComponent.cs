@@ -1,3 +1,4 @@
+using Content.Shared.Damage;
 using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 
@@ -29,4 +30,10 @@ public sealed partial class SupplyDropPodComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_open.ogg");
+
+    /// <summary>
+    ///     The amount of damage dealt to entities near the area where this entity lands from a drop.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public DamageSpecifier? LandingDamage;
 }

@@ -68,6 +68,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         }
 
         var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);
+        var landingDamage = deployable.LandingDamage;
 
         if (deployable.DropPod)
         {
@@ -78,6 +79,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 
             deploying = dropPod;
             openAt += podComponent.OpenTimeRemaining;
+            landingDamage = podComponent.LandingDamage;
         }
 
         _audio.PlayPredicted(deployerComp.LaunchSound, _transform.GetMoverCoordinates(deployer), user);
@@ -86,10 +88,11 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             deployable.ArrivingSoundDelay,
             deployable.DropDuration,
             openAt,
-            deployable.LandingDamage,
+            landingDamage,
             deployable.LandingEffectId,
             deployable.ArrivingSound,
             deployerComp.DropScatter);
+
         return true;
     }
 }
