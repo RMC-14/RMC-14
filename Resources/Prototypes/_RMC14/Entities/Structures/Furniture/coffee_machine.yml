@@ -1,9 +1,24 @@
-﻿- type: entity
+- type: entity
   parent: BaseStructureDynamic
   id: RMCCoffeeMachine
   name: coffee machine
   description: A coffee machine
   components: #TODO: Make the coffee machine actually function
+  - type: RMCCoffeeMachine
+    reagent: Coffee
+    dispenseAmount: 30
+    dispenseSound: /Audio/Machines/machine_vend_hot_drink.ogg
+    cooldown: 2
+  - type: ItemSlots
+    slots:
+      coffee_machine_slot:
+        name: Coffee Machine
+        whitelist:
+          components:
+          - RefillableSolution
+  - type: ContainerContainer
+    containers:
+      coffee_machine_slot: !type:ContainerSlot {}
   - type: Transform
     noRot: true
   - type: Physics
