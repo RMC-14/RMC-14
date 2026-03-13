@@ -22,8 +22,15 @@ rmc-playing-card-draw-deck = You draw a card from the deck.
 rmc-playing-card-combine = You combine the cards into a hand of {$count} cards.
 rmc-playing-card-add-to-hand = You add the card to the hand. ({$count} cards total)
 
-# Deck actions
+# Deck examination
 rmc-playing-card-deck-examine = The deck has {$count} cards remaining.
+rmc-playing-card-deck-examine-verb = Controls
+rmc-playing-card-deck-examine-verb-message = View deck controls.
+rmc-playing-card-deck-examine-shuffle = [bold][color=cyan]Alt[/color]+[color=yellow]Activate[/color][/bold] — Shuffles the deck.
+rmc-playing-card-deck-examine-draw = [bold][color=yellow]Activate[/color] (E) or [color=yellow]Activate in-hand[/color] (Z)[/bold] — Draws a card.
+rmc-playing-card-deck-examine-pickup = [bold][color=cyan]In-hand and click on empty ground[/color][/bold] — Picks up nearby cards.
+
+# Deck actions
 rmc-playing-card-deck-empty = The deck is empty!
 rmc-playing-card-deck-full = The deck is full!
 rmc-playing-card-deck-shuffle = You shuffle {THE($deck)}.
@@ -37,7 +44,17 @@ rmc-playing-card-stack-name = stack of cards
 rmc-playing-card-hand-examine = A hand of {$count} cards:
 rmc-playing-card-hand-examine-hidden = A hand of {$count} cards, face down.
 rmc-playing-card-hand-card = - {$rank} of {$suit}
+
+# Hand examination
+rmc-playing-card-hand-examine-verb = Controls
+rmc-playing-card-hand-examine-verb-message = View hand controls.
+rmc-playing-card-hand-examine-face-down = [bold][color=cyan]Face down[/color] [color=yellow]E[/color] or [color=yellow]Z[/color][/bold] — Draws a card from the top.
+rmc-playing-card-hand-examine-face-up = [bold][color=cyan]Face up[/color] [color=yellow]E[/color] or [color=yellow]Z[/color][/bold] — Opens hand to pick a specific card.
+rmc-playing-card-hand-examine-flip = [bold][color=cyan]Flip[/color] [color=yellow]ALT + Activate[/color][/bold] — Flips the cards.
+
+# Hand actions
 rmc-playing-card-hand-flip = You flip the hand face {$direction}.
+rmc-playing-card-hand-shuffle = You shuffle {THE($hand)}.
 rmc-playing-card-hand-empty = The hand is empty!
 rmc-playing-card-hand-full = The stack is full!
 rmc-playing-card-merge-hands = You merge the hands together. ({$count} cards total)
@@ -46,4 +63,4 @@ rmc-playing-card-merge-hands = You merge the hands together. ({$count} cards tot
 rmc-playing-card-verb-flip = Flip
 rmc-playing-card-verb-draw = Draw card
 rmc-playing-card-verb-pick = Pick card
-rmc-playing-card-verb-shuffle = Shuffle deck
+rmc-playing-card-verb-shuffle = Shuffle

@@ -8,11 +8,11 @@ namespace Content.Shared._RMC14.PlayingCards;
 public sealed partial class PlayingCardComponent : Component
 {
     /// The suit of the card (spades, hearts, diamonds, clubs).
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public CardSuit Suit = CardSuit.Spades;
 
     /// The rank of the card (ace, 2-10, jack, queen, king).
-    [DataField(required: true), AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public CardRank Rank = CardRank.Ace;
 
     /// Whether the card is face up (showing its value) or face down.

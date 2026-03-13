@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -20,6 +21,10 @@ public sealed partial class PlayingCardHandComponent : Component
     /// Whether the hand is face up or face down by default.
     [DataField, AutoNetworkedField]
     public bool FaceUp;
+
+    /// Sound to play when shuffling.
+    [DataField]
+    public SoundSpecifier? ShuffleSound = new SoundPathSpecifier("/Audio/_RMC14/Handling/paper_drop.ogg");
 
     /// Cooldown between popups in seconds.
     [DataField]

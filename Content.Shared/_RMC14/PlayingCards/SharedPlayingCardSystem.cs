@@ -12,6 +12,7 @@ using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.PlayingCards;
 
@@ -27,6 +28,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly UseDelaySystem _useDelay = default!;
 
@@ -48,6 +50,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardDeckComponent, ActivateInWorldEvent>(OnDeckActivateInWorld);
         SubscribeLocalEvent<PlayingCardDeckComponent, AfterInteractEvent>(OnDeckAfterInteract);
         SubscribeLocalEvent<PlayingCardDeckComponent, ExaminedEvent>(OnDeckExamined);
+        SubscribeLocalEvent<PlayingCardDeckComponent, GetVerbsEvent<ExamineVerb>>(OnDeckGetExamineVerbs);
         SubscribeLocalEvent<PlayingCardDeckComponent, GetVerbsEvent<AlternativeVerb>>(OnDeckGetAltVerbs);
         SubscribeLocalEvent<PlayingCardDeckComponent, MapInitEvent>(OnDeckMapInit);
         SubscribeLocalEvent<PlayingCardDeckComponent, InteractUsingEvent>(OnDeckInteractUsing);
@@ -57,6 +60,7 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         SubscribeLocalEvent<PlayingCardHandComponent, UseInHandEvent>(OnHandUseInHand);
         SubscribeLocalEvent<PlayingCardHandComponent, ActivateInWorldEvent>(OnHandActivateInWorld);
         SubscribeLocalEvent<PlayingCardHandComponent, ExaminedEvent>(OnHandExamined);
+        SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<ExamineVerb>>(OnHandGetExamineVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, GetVerbsEvent<AlternativeVerb>>(OnHandGetAltVerbs);
         SubscribeLocalEvent<PlayingCardHandComponent, InteractUsingEvent>(OnHandInteractUsing);
 
@@ -170,6 +174,27 @@ public abstract class SharedPlayingCardSystem : EntitySystem
     private void OnDeckExamined(Entity<PlayingCardDeckComponent> ent, ref ExaminedEvent args)
     {
         args.PushMarkup(Loc.GetString("rmc-playing-card-deck-examine", ("count", ent.Comp.CardsRemaining)));
+    }
+
+    private void OnDeckGetExamineVerbs(Entity<PlayingCardDeckComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        var msg = new FormattedMessage();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-deck-examine-shuffle"));
+        msg.PushNewline();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-deck-examine-draw"));
+        msg.PushNewline();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-deck-examine-pickup"));
+
+        _examine.AddDetailedExamineVerb(
+            args,
+            ent.Comp,
+            msg,
+            Loc.GetString("rmc-playing-card-deck-examine-verb"),
+            "/Textures/Interface/VerbIcons/examine.svg.192dpi.png",
+            Loc.GetString("rmc-playing-card-deck-examine-verb-message"));
     }
 
     private void OnDeckGetAltVerbs(Entity<PlayingCardDeckComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -403,6 +428,27 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
     }
 
+    private void OnHandGetExamineVerbs(Entity<PlayingCardHandComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
+    {
+        if (!args.CanInteract || !args.CanAccess)
+            return;
+
+        var msg = new FormattedMessage();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-hand-examine-face-down"));
+        msg.PushNewline();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-hand-examine-face-up"));
+        msg.PushNewline();
+        msg.AddMarkupOrThrow(Loc.GetString("rmc-playing-card-hand-examine-flip"));
+
+        _examine.AddDetailedExamineVerb(
+            args,
+            ent.Comp,
+            msg,
+            Loc.GetString("rmc-playing-card-hand-examine-verb"),
+            "/Textures/Interface/VerbIcons/examine.svg.192dpi.png",
+            Loc.GetString("rmc-playing-card-hand-examine-verb-message"));
+    }
+
     private void OnHandGetAltVerbs(Entity<PlayingCardHandComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         if (!args.CanAccess || !args.CanInteract)
@@ -414,6 +460,18 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         {
             Text = Loc.GetString("rmc-playing-card-verb-flip"),
             Act = () => FlipHand(ent, user),
+            Priority = 3
+        });
+
+        args.Verbs.Add(new AlternativeVerb
+        {
+            Text = Loc.GetString("rmc-playing-card-verb-shuffle"),
+            Act = () =>
+            {
+                ShuffleHand(ent);
+                _popup.PopupPredicted(Loc.GetString("rmc-playing-card-hand-shuffle", ("hand", ent.Owner)), ent, user);
+                _audio.PlayPredicted(ent.Comp.ShuffleSound, ent, user);
+            },
             Priority = 2
         });
 
@@ -542,6 +600,17 @@ public abstract class SharedPlayingCardSystem : EntitySystem
         }
 
         Dirty(deck);
+    }
+
+    public void ShuffleHand(Entity<PlayingCardHandComponent> hand)
+    {
+        for (var i = hand.Comp.Cards.Count - 1; i > 0; i--)
+        {
+            var j = _random.Next(i + 1);
+            (hand.Comp.Cards[i], hand.Comp.Cards[j]) = (hand.Comp.Cards[j], hand.Comp.Cards[i]);
+        }
+
+        Dirty(hand);
     }
 
     protected virtual void DrawCard(Entity<PlayingCardDeckComponent> deck, EntityUid user)
