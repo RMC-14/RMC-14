@@ -76,6 +76,18 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: Lock
+    locked: true
+    unlockOnClick: false
+    lockOnClick: false
+    showToggleLockVerb: false
+  - type: RMCSafe
+  - type: ActivatableUI
+    key: enum.RMCSafeUIKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.RMCSafeUIKey.Key:
+        type: RMCSafeBoundUserInterface
 
 - type: entity
   parent: RMCLockerSecureSafe
@@ -95,6 +107,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
+  - type: RMCSafe
+    autoPrintPaperPrototype: Paper
+    autoPrintPaperName: "Confidential Safe Combination"
+    autoPrintPaperDesc: "A Weyland-Yutani branded note with dial positions written on it."
+    autoPrintFormat: "Liasion Safe Code:\nDial 1: {0}\nDial 2: {1}"
+    autoPrintToJob: CMLiaison
   - type: AccessReader
     access: [["RMCAccessWeYa"]]
 

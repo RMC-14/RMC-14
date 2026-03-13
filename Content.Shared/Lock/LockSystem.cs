@@ -288,6 +288,9 @@ public sealed class LockSystem : EntitySystem
         if (!args.CanAccess || !args.CanInteract || !args.CanComplexInteract)
             return;
 
+        if (!component.ShowToggleLockVerb)
+            return;
+
         AlternativeVerb verb = new()
         {
             Act = component.Locked

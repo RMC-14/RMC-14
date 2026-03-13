@@ -84,6 +84,13 @@ public sealed partial class LockComponent : Component
     [DataField]
     [AutoNetworkedField]
     public TimeSpan UnlockTime;
+
+    /// <summary>
+    /// Whether to show the lock/unlock verb in the right-click context menu.
+    /// Set to false to hide the verb entirely (e.g., for entities with custom UI unlock logic).
+    /// </summary>
+    [DataField]
+    public bool ShowToggleLockVerb = true;
 }
 
 /// <summary>
