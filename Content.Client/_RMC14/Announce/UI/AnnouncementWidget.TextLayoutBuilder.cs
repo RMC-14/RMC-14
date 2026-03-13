@@ -64,6 +64,11 @@ public sealed partial class AnnouncementWidget
             var scaleFactor = screenScaleFactor;
             var labelIndex = 0;
             RichTextLabel? titleLabelRef = null;
+            RichTextLabel[] titleLabels = Array.Empty<RichTextLabel>();
+            Control? titleTrackRef = null;
+            var titleViewportWidth = 0f;
+            var titleContentWidth = 0f;
+            var titleScrollGap = 0f;
             Control? titleUnderlineRef = null;
 
             var outerContainer = new Control
@@ -99,59 +104,153 @@ public sealed partial class AnnouncementWidget
 
             if (hasTitle && !string.IsNullOrEmpty(titleText))
             {
-                var titleLabel = new RichTextLabel
-                {
-                    HorizontalAlignment = textAlign,
-                    VerticalAlignment = VAlignment.Center,
-                    MaxWidth = effectiveTextWidth,
-                    HorizontalExpand = false
-                };
-
                 var titleMessage = _owner.CreateFormattedTitleMessage(titleText, style, screenSize, effectiveTextWidth);
+                var enableAssaultScroll = false;
+                var titleLabel = CreateTitleLabel(textAlign, effectiveTextWidth);
                 titleLabel.SetMessage(titleMessage);
 
-                if (style.TitleConfig.TitleUnderline)
+                if (enableAssaultScroll)
                 {
-                    var underlineThickness = Math.Max(1f, style.TitleConfig.TitleUnderlineThickness * scaleFactor);
-                    titleLabel.Measure(new Vector2(effectiveTextWidth, float.PositiveInfinity));
-                    var underlineWidth = MathF.Min(effectiveTextWidth, titleLabel.DesiredSize.X);
-                    var titleStack = new BoxContainer
-                    {
-                        Orientation = BoxContainer.LayoutOrientation.Vertical,
-                        HorizontalAlignment = textAlign,
-                        VerticalAlignment = VAlignment.Top,
-                        SeparationOverride = Math.Max(2, (int) MathF.Ceiling(underlineThickness))
-                    };
+                    var marqueeMeasureSize = new Vector2(MathF.Max(screenSize.X * 2f, effectiveTextWidth * 2f), float.PositiveInfinity);
+                    titleLabel.Measure(marqueeMeasureSize);
+                    titleContentWidth = MathF.Max(titleLabel.DesiredSize.X, effectiveTextWidth);
+                    titleViewportWidth = effectiveTextWidth;
+                    titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
 
-                    var underline = new PanelContainer
+                    var titleViewport = new LayoutContainer
                     {
+                        InheritChildMeasure = false,
                         HorizontalAlignment = textAlign,
-                        VerticalAlignment = VAlignment.Top,
+                        VerticalAlignment = VAlignment.Center,
                         HorizontalExpand = false,
-                        VerticalExpand = false,
-                        MinWidth = underlineWidth,
-                        SetWidth = underlineWidth,
-                        MinHeight = underlineThickness,
-                        SetHeight = underlineThickness
+                        RectClipContent = true,
+                        MinWidth = effectiveTextWidth,
+                        SetWidth = effectiveTextWidth
                     };
-                    underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleConfig.TitleColor };
 
-                    titleStack.AddChild(titleLabel);
-                    titleStack.AddChild(underline);
-                    textContainer.AddChild(titleStack);
+                    var duplicateTitleLabel = CreateTitleLabel(HAlignment.Left, float.PositiveInfinity);
+                    duplicateTitleLabel.SetMessage(titleMessage);
+                    duplicateTitleLabel.Measure(marqueeMeasureSize);
 
-                    var spacerHeight = Math.Max(underlineThickness * 1.5f, bodyResponsiveFontSize * 0.35f);
-                    var titleSpacer = new Control
+                    var titleHeight = MathF.Max(titleLabel.DesiredSize.Y, duplicateTitleLabel.DesiredSize.Y);
+                    titleViewport.MinHeight = titleHeight;
+                    titleViewport.SetHeight = titleHeight;
+                    titleLabel.MinWidth = titleContentWidth;
+                    titleLabel.SetWidth = titleContentWidth;
+                    titleLabel.MinHeight = titleHeight;
+                    titleLabel.SetHeight = titleHeight;
+                    duplicateTitleLabel.MinWidth = titleContentWidth;
+                    duplicateTitleLabel.SetWidth = titleContentWidth;
+                    duplicateTitleLabel.MinHeight = titleHeight;
+                    duplicateTitleLabel.SetHeight = titleHeight;
+
+                    LayoutContainer.SetAnchorPreset(titleLabel, LayoutContainer.LayoutPreset.TopLeft);
+                    LayoutContainer.SetGrowHorizontal(titleLabel, LayoutContainer.GrowDirection.Constrain);
+                    LayoutContainer.SetGrowVertical(titleLabel, LayoutContainer.GrowDirection.Constrain);
+                    LayoutContainer.SetAnchorPreset(duplicateTitleLabel, LayoutContainer.LayoutPreset.TopLeft);
+                    LayoutContainer.SetGrowHorizontal(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
+                    LayoutContainer.SetGrowVertical(duplicateTitleLabel, LayoutContainer.GrowDirection.Constrain);
+
+                    SetLayoutRect(titleLabel, Vector2.Zero, new Vector2(titleContentWidth, titleHeight));
+                    SetLayoutRect(duplicateTitleLabel, new Vector2(titleContentWidth + titleScrollGap, 0f), new Vector2(titleContentWidth, titleHeight));
+
+                    titleViewport.AddChild(titleLabel);
+                    titleViewport.AddChild(duplicateTitleLabel);
+
+                    titleLabels = new[] { titleLabel, duplicateTitleLabel };
+                    titleTrackRef = titleViewport;
+
+                    if (style.TitleConfig.TitleUnderline)
                     {
-                        MinHeight = spacerHeight,
-                        SetHeight = spacerHeight
-                    };
-                    textContainer.AddChild(titleSpacer);
-                    titleUnderlineRef = underline;
+                        var underlineThickness = Math.Max(1f, style.TitleConfig.TitleUnderlineThickness * scaleFactor);
+                        var titleStack = new BoxContainer
+                        {
+                            Orientation = BoxContainer.LayoutOrientation.Vertical,
+                            HorizontalAlignment = textAlign,
+                            VerticalAlignment = VAlignment.Top,
+                            SeparationOverride = Math.Max(2, (int) MathF.Ceiling(underlineThickness))
+                        };
+
+                        var underline = new PanelContainer
+                        {
+                            HorizontalAlignment = textAlign,
+                            VerticalAlignment = VAlignment.Top,
+                            HorizontalExpand = false,
+                            VerticalExpand = false,
+                            MinWidth = effectiveTextWidth,
+                            SetWidth = effectiveTextWidth,
+                            MinHeight = underlineThickness,
+                            SetHeight = underlineThickness
+                        };
+                        underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleConfig.TitleColor };
+
+                        titleStack.AddChild(titleViewport);
+                        titleStack.AddChild(underline);
+                        textContainer.AddChild(titleStack);
+
+                        var spacerHeight = Math.Max(underlineThickness * 1.5f, bodyResponsiveFontSize * 0.35f);
+                        var titleSpacer = new Control
+                        {
+                            MinHeight = spacerHeight,
+                            SetHeight = spacerHeight
+                        };
+                        textContainer.AddChild(titleSpacer);
+                        titleUnderlineRef = underline;
+                    }
+                    else
+                    {
+                        textContainer.AddChild(titleViewport);
+                    }
                 }
                 else
                 {
-                    textContainer.AddChild(titleLabel);
+                    titleLabels = new[] { titleLabel };
+                    titleLabel.Measure(new Vector2(effectiveTextWidth, float.PositiveInfinity));
+                    titleViewportWidth = effectiveTextWidth;
+                    titleContentWidth = titleLabel.DesiredSize.X;
+                    titleScrollGap = Math.Max(style.TitleConfig.Effect.Gap * scaleFactor, 24f * scaleFactor);
+                    if (style.TitleConfig.TitleUnderline)
+                    {
+                        var underlineThickness = Math.Max(1f, style.TitleConfig.TitleUnderlineThickness * scaleFactor);
+                        var underlineWidth = MathF.Min(effectiveTextWidth, titleLabel.DesiredSize.X);
+                        var titleStack = new BoxContainer
+                        {
+                            Orientation = BoxContainer.LayoutOrientation.Vertical,
+                            HorizontalAlignment = textAlign,
+                            VerticalAlignment = VAlignment.Top,
+                            SeparationOverride = Math.Max(2, (int) MathF.Ceiling(underlineThickness))
+                        };
+
+                        var underline = new PanelContainer
+                        {
+                            HorizontalAlignment = textAlign,
+                            VerticalAlignment = VAlignment.Top,
+                            HorizontalExpand = false,
+                            VerticalExpand = false,
+                            MinWidth = underlineWidth,
+                            SetWidth = underlineWidth,
+                            MinHeight = underlineThickness,
+                            SetHeight = underlineThickness
+                        };
+                        underline.PanelOverride = new StyleBoxFlat { BackgroundColor = style.TitleConfig.TitleColor };
+
+                        titleStack.AddChild(titleLabel);
+                        titleStack.AddChild(underline);
+                        textContainer.AddChild(titleStack);
+
+                        var spacerHeight = Math.Max(underlineThickness * 1.5f, bodyResponsiveFontSize * 0.35f);
+                        var titleSpacer = new Control
+                        {
+                            MinHeight = spacerHeight,
+                            SetHeight = spacerHeight
+                        };
+                        textContainer.AddChild(titleSpacer);
+                        titleUnderlineRef = underline;
+                    }
+                    else
+                    {
+                        textContainer.AddChild(titleLabel);
+                    }
                 }
 
                 labels[labelIndex] = titleLabel;
@@ -201,7 +300,50 @@ public sealed partial class AnnouncementWidget
             titleUnderlineRef?.Measure(screenSize);
             crtOverlayRef?.Measure(screenSize);
 
-            return new TextLayoutBuildResult(labels, outerContainer, effectiveTextWidth);
+            if (titleTrackRef is LayoutContainer titleViewportControl && titleLabels.Length > 0)
+            {
+                var measuredTitleHeight = 0f;
+                foreach (var title in titleLabels)
+                {
+                    measuredTitleHeight = MathF.Max(measuredTitleHeight, MathF.Max(title.DesiredSize.Y, title.Size.Y));
+                }
+
+                if (measuredTitleHeight > 0f)
+                {
+                    titleViewportControl.MinHeight = measuredTitleHeight;
+                    titleViewportControl.SetHeight = measuredTitleHeight;
+                }
+            }
+
+            return new TextLayoutBuildResult(
+                labels,
+                outerContainer,
+                effectiveTextWidth,
+                titleLabels,
+                titleTrackRef,
+                titleViewportWidth,
+                titleContentWidth,
+                titleScrollGap,
+                CalculateTitleFontSize(style, screenSize, effectiveTextWidth, titleText ?? string.Empty));
+        }
+
+        private static RichTextLabel CreateTitleLabel(HAlignment alignment, float maxWidth)
+        {
+            return new RichTextLabel
+            {
+                HorizontalAlignment = alignment,
+                VerticalAlignment = VAlignment.Center,
+                MaxWidth = maxWidth,
+                HorizontalExpand = false
+            };
+        }
+
+        private static void SetLayoutRect(Control control, Vector2 position, Vector2 size)
+        {
+            LayoutContainer.SetMarginLeft(control, position.X);
+            LayoutContainer.SetMarginTop(control, position.Y);
+            LayoutContainer.SetMarginRight(control, position.X + size.X);
+            LayoutContainer.SetMarginBottom(control, position.Y + size.Y);
         }
 
         private static float CalculateContentDrivenTextWidth(
@@ -311,8 +453,23 @@ public sealed partial class AnnouncementWidget
 
             return label.DesiredSize.X;
         }
+
+        private static float CalculateTitleFontSize(AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth, string titleText)
+        {
+            var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { titleText }, style.TitleConfig.TitleFontSize, maxAllowedWidth, screenSize, style);
+            return Math.Min(responsiveFontSize, style.TextConfig.FontSize * 0.9f);
+        }
     }
 
-    private readonly record struct TextLayoutBuildResult(RichTextLabel[] Labels, Control Container, float MaxAllowedWidth);
+    private readonly record struct TextLayoutBuildResult(
+        RichTextLabel[] Labels,
+        Control Container,
+        float MaxAllowedWidth,
+        RichTextLabel[] TitleLabels,
+        Control? TitleTrack,
+        float TitleViewportWidth,
+        float TitleContentWidth,
+        float TitleScrollGap,
+        float TitleRenderedFontSize);
 }
 

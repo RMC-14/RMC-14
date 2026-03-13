@@ -152,6 +152,9 @@ public sealed partial class AnnouncementTitleConfig
 
     [DataField]
     public float TitleUnderlineThickness { get; set; } = 2f;
+
+    [DataField]
+    public AnnouncementTitleEffectConfig Effect { get; set; } = new();
 }
 
 [DataDefinition, Serializable, NetSerializable]

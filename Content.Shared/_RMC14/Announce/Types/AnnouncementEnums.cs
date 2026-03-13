@@ -101,6 +101,14 @@ public enum AnnouncementTitlePosition : byte
 }
 
 [Serializable, NetSerializable]
+public enum AnnouncementTitleEffectType : byte
+{
+    None,
+    AssaultPulse,
+    AssaultScroll
+}
+
+[Serializable, NetSerializable]
 public enum AnnouncementDecalPlacement : byte
 {
     ReplaceSprite,

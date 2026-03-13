@@ -53,6 +53,13 @@ public sealed partial class AnnouncementWidget
         _richTextLabels = textLayout.Labels;
         _textContainers.Add(textLayout.Container);
         _activeTextMaxWidth = textLayout.MaxAllowedWidth;
+        ActiveAnnouncement.TitleLabels = textLayout.TitleLabels;
+        ActiveAnnouncement.TitleTrack = textLayout.TitleTrack;
+        ActiveAnnouncement.TitleViewportWidth = textLayout.TitleViewportWidth;
+        ActiveAnnouncement.TitleContentWidth = textLayout.TitleContentWidth;
+        ActiveAnnouncement.TitleScrollGap = textLayout.TitleScrollGap;
+        ActiveAnnouncement.TitleText = titleText;
+        ActiveAnnouncement.TitleRenderedFontSize = textLayout.TitleRenderedFontSize;
         ApplyTextStyling();
 
         if (_spriteContainer != null)
@@ -372,8 +379,7 @@ public sealed partial class AnnouncementWidget
     private FormattedMessage CreateFormattedTitleMessage(string text, AnnouncementStyle style, Vector2 screenSize, float maxAllowedWidth)
     {
         var responsiveFontSize = AnnouncementStyling.CalculateResponsiveFontSize(new[] { text }, style.TitleConfig.TitleFontSize, maxAllowedWidth, screenSize, style);
-        var cappedFontSize = Math.Min(responsiveFontSize, style.TextConfig.FontSize * 0.9f);
-        return AnnouncementStyling.CreateFormattedMessage(text, cappedFontSize, style.TitleConfig.TitleColor, style.TitleConfig.TitleFont);
+        return AnnouncementStyling.CreateFormattedMessage(text, responsiveFontSize, style.TitleConfig.TitleColor, style.TitleConfig.TitleFont);
     }
 
     private void UpdatePosition()
@@ -389,7 +395,7 @@ public sealed partial class AnnouncementWidget
         var position = CalculatePosition(screenSize, widgetSize, style);
         position += ActiveAnnouncement.CurrentSlideOffset + ActiveAnnouncement.CurrentBounceOffset;
 
-        LayoutContainer.SetPosition(this, position);
+        UpdateLayoutRect(position, widgetSize);
 
         if (style.AnimationConfig.Animation == AnnouncementAnimation.Zoom)
         {
@@ -416,6 +422,14 @@ public sealed partial class AnnouncementWidget
             AnnouncementPosition.BottomRight => new Vector2(screenSize.X - widgetSize.X - padding, screenSize.Y - widgetSize.Y - padding),
             _ => new Vector2((screenSize.X - widgetSize.X) / 2, (screenSize.Y - widgetSize.Y) / 2)
         };
+    }
+
+    private void UpdateLayoutRect(Vector2 position, Vector2 size)
+    {
+        LayoutContainer.SetMarginLeft(this, position.X);
+        LayoutContainer.SetMarginTop(this, position.Y);
+        LayoutContainer.SetMarginRight(this, position.X + size.X);
+        LayoutContainer.SetMarginBottom(this, position.Y + size.Y);
     }
 }
 

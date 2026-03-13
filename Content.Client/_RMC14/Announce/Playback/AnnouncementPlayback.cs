@@ -46,7 +46,7 @@ public sealed class AnnouncementPlayback
         if (IsFinished || _animation == null)
             return;
 
-        ResetBaseLabelColor(style, labels);
+        ResetBaseLabelColor(style, state, labels);
 
         var status = _animation.Update(animationContext, deltaTime);
         if (status == AnnouncementAnimationStatus.Hold || status == AnnouncementAnimationStatus.Finished)
@@ -81,11 +81,21 @@ public sealed class AnnouncementPlayback
         context.SetAllLabels();
     }
 
-    private static void ResetBaseLabelColor(AnnouncementStyle style, IReadOnlyList<RichTextLabel> labels)
+    private static void ResetBaseLabelColor(AnnouncementStyle style, ActiveAnnouncement state, IReadOnlyList<RichTextLabel> labels)
     {
-        foreach (var label in labels)
+        var titleText = !string.IsNullOrEmpty(state.Data.Title) ? state.Data.Title : style.TitleConfig.Title;
+        var hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
+
+        for (var i = 0; i < labels.Count; i++)
         {
-            label.Modulate = style.TextConfig.PrimaryColor;
+            labels[i].Modulate = hasTitle && i == 0
+                ? style.TitleConfig.TitleColor
+                : style.TextConfig.PrimaryColor;
+        }
+
+        foreach (var titleLabel in state.TitleLabels)
+        {
+            titleLabel.Modulate = style.TitleConfig.TitleColor;
         }
     }
 
@@ -98,7 +108,9 @@ public sealed class AnnouncementPlayback
         if (_effects.Count == 0)
             return;
 
-        var effectContext = new AnnouncementEffectContext(style, state, labels);
+        var titleText = !string.IsNullOrEmpty(state.Data.Title) ? state.Data.Title : style.TitleConfig.Title;
+        var hasTitle = style.TitleConfig.ShowTitle && !string.IsNullOrEmpty(titleText);
+        var effectContext = new AnnouncementEffectContext(style, state, labels, hasTitle);
         foreach (var effect in _effects)
         {
             effect.Apply(effectContext, currentTime);

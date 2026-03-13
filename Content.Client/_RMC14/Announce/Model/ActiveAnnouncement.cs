@@ -1,5 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Announce;
+using Robust.Client.UserInterface;
+using Robust.Client.UserInterface.Controls;
 
 namespace Content.Client._RMC14.Announce;
 
@@ -31,4 +33,12 @@ public sealed class ActiveAnnouncement
     public float PulseTimer { get; set; }
 
     public string[]? GlitchText { get; set; }
+
+    public RichTextLabel[] TitleLabels { get; set; } = Array.Empty<RichTextLabel>();
+    public Control? TitleTrack { get; set; }
+    public float TitleViewportWidth { get; set; }
+    public float TitleContentWidth { get; set; }
+    public float TitleScrollGap { get; set; }
+    public string TitleText { get; set; } = string.Empty;
+    public float TitleRenderedFontSize { get; set; }
 }

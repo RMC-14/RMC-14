@@ -44,8 +44,11 @@ public sealed partial class AnnouncementWidget : UIWidget
         _spriteBuilder = new SpriteBuilder(this, _decalBuilder);
         _textLayoutBuilder = new TextLayoutBuilder(this);
         Orientation = LayoutOrientation.Horizontal;
-        HorizontalAlignment = HAlignment.Center;
-        VerticalAlignment = VAlignment.Center;
+        HorizontalAlignment = HAlignment.Left;
+        VerticalAlignment = VAlignment.Top;
+        LayoutContainer.SetAnchorPreset(this, LayoutContainer.LayoutPreset.TopLeft);
+        LayoutContainer.SetGrowHorizontal(this, LayoutContainer.GrowDirection.Constrain);
+        LayoutContainer.SetGrowVertical(this, LayoutContainer.GrowDirection.Constrain);
         Visible = false;
     }
 
@@ -53,6 +56,8 @@ public sealed partial class AnnouncementWidget : UIWidget
     {
         if (ActiveAnnouncement != null)
             CleanupCurrentAnnouncement();
+
+        ResetLayoutState();
 
         ActiveAnnouncement = new ActiveAnnouncement
         {
@@ -110,6 +115,21 @@ public sealed partial class AnnouncementWidget : UIWidget
         _hasTitle = false;
         _titleOffset = 0;
         _activeTextMaxWidth = 0f;
+        ResetLayoutState();
+    }
+
+    private void ResetLayoutState()
+    {
+        SetWidth = float.NaN;
+        SetHeight = float.NaN;
+        MinWidth = 0f;
+        MinHeight = 0f;
+        MaxWidth = float.PositiveInfinity;
+        MaxHeight = float.PositiveInfinity;
+        LayoutContainer.SetMarginLeft(this, 0f);
+        LayoutContainer.SetMarginTop(this, 0f);
+        LayoutContainer.SetMarginRight(this, 0f);
+        LayoutContainer.SetMarginBottom(this, 0f);
     }
 
     private string[] PreprocessText(string[] originalText)
