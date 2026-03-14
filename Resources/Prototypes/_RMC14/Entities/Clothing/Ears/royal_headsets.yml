@@ -57,7 +57,7 @@
   - type: GrantSquadLeaderTracker
     defaultMode: RCMSFGpTeamLead
     trackerModes:
-      - RCMSFGpTeamLead
+    - RCMSFGpTeamLead
   - type: Sprite
     state: vai_headset
   - type: ContainerFill

@@ -44,6 +44,7 @@
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi #TODO Unique Icon?
         state: para_lieutenant
+    - type: RMCTrackable
     - type: RMCPointing
   hidden: true
 
