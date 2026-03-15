@@ -5,17 +5,16 @@
   description: A coffee machine
   components:
   - type: RMCCoffeeMachine
-    reagent: Coffee
+    reagent: RMCCoffee
     dispenseAmount: 30
-    dispenseSound: /Audio/Machines/machine_vend_hot_drink.ogg
-    cooldown: 2
+    dispenseSound: /Audio/_RMC14/Machines/coffee1.ogg
   - type: ItemSlots
     slots:
       coffee_machine_slot:
         name: Coffee Machine
         whitelist:
-          components:
-          - RefillableSolution
+          tags:
+          - DrinkGlass
   - type: ContainerContainer
     containers:
       coffee_machine_slot: !type:ContainerSlot {}
@@ -26,8 +25,12 @@
   - type: Sprite
     sprite: _RMC14/Structures/Furniture/coffee_machine.rsi
     drawdepth: SmallObjects
-    state: coffee_empty_on
     noRot: true
+    layers:
+    - state: coffee_empty_on
+    - state: coffee_cup_generic
+      map: ["enum.CoffeeMachineLayers.Cup"]
+      visible: false
   - type: InteractionOutline
   - type: Fixtures
     fixtures:
