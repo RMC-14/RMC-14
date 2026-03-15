@@ -148,6 +148,14 @@
           - RMCMagazineSMGM63HEAP
 
 - type: entity
+  parent: RMCWeaponSMGM63WhiteNoLock
+  id: RMCWeaponSMGM63White
+  suffix: ID Lock
+  description: A Weston-Yamada creation, this M63 comes equipped in corporate white. Uses 10x20mm caseless ammunition.
+  components:
+  - type: GunIDLock
+
+- type: entity
   parent: WeaponSMGM63
   id: RMCWeaponSMGM63ExtendedFilled
   suffix: Filled, Extended
