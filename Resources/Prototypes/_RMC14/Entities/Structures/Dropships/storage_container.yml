@@ -3,7 +3,7 @@
   parent: BaseStorageItem
   id: RMCDropshipStorageCompartment
   name: storage compartment
-  description: A wide storage unit to allow it's users to store a wide variety of objects, from equipment to weapons and their ammo. Very versatile.
+  description: A wide storage unit to allow its users to store a wide variety of objects, from equipment to weapons and their ammo. Very versatile.
   suffix: PVE
   components:
   - type: Sprite # TODO: Use Open and Close Sprites if someone is interacting with the storage.
@@ -17,6 +17,8 @@
       tags:
       - Backpack
       - RMCAmmoBox
+      components: # TODO If this should be able to contain storage entities, make sure to blacklist ones that would allow infinite storage recursion.
+      - Storage
     grid:
     - 0,0,20,1
   - type: InteractedBlacklist
