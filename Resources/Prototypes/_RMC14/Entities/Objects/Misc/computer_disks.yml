@@ -6,7 +6,7 @@
   components:
   - type: Tag
     tags:
-    - RMCIntelItem
+    - RMCDataDisk
   - type: Item
     size: Tiny
 
