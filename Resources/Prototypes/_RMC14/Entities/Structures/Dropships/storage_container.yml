@@ -13,12 +13,13 @@
     state: closed
   - type: Storage
     maxItemSize: Ginormous
+    whitelist:
+      components:
+      - Item
     blacklist:
       tags:
       - Backpack
       - RMCAmmoBox
-      components: # TODO If this should be able to contain storage entities, make sure to blacklist ones that would allow infinite storage recursion.
-      - Storage
     grid:
     - 0,0,20,1
   - type: InteractedBlacklist
