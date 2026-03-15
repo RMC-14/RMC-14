@@ -258,3 +258,9 @@
   parent: RMCPaperWeYa
   id: RMCPaperWeYaLiaison
   name: weston-yamada document
+
+- type: entity
+  parent: RMCPaperWeYaLiaison
+  id: RMCPaperSafeCombination
+  components:
+  - type: BlockEntityStorage

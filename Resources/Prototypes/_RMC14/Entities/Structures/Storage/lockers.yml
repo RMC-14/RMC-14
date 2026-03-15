@@ -77,11 +77,13 @@
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: Lock
-    locked: true
     unlockOnClick: false
-    lockOnClick: false
     showToggleLockVerb: false
   - type: RMCSafe
+    #soundSuccess: /Audio/_RMC14/Lobby/subscrube.ogg
+    #soundFail: /Audio/_RMC14/Lobby/buzzer.ogg
+  - type: EntityStorageCloseOnMapInit
+    _remove: true
   - type: ActivatableUI
     key: enum.RMCSafeUIKey.Key
   - type: UserInterface
@@ -105,14 +107,11 @@
   description: A huge chunk of metal with a dial embedded in it. Fine print on the dial reads "Scarborough Arms - 2 tumbler safe, guaranteed thermite resistant, and explosion resistant."
   suffix: Corporate Liaison
   components:
-  - type: Sprite
-    sprite: _RMC14/Structures/Storage/Lockers/safe.rsi
   - type: RMCSafe
-    autoPrintPaperPrototype: Paper
+    autoPrintPaperPrototype: RMCPaperSafeCombination
     autoPrintPaperName: "Confidential Safe Combination"
     autoPrintPaperDesc: "A Weyland-Yutani branded note with dial positions written on it."
     autoPrintFormat: "Liasion Safe Code:\nDial 1: {0}\nDial 2: {1}"
-    autoPrintToJob: CMLiaison
   - type: AccessReader
     access: [["RMCAccessWeYa"]]
 

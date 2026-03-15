@@ -1,3 +1,4 @@
+using Robust.Shared.Audio;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
 
@@ -34,7 +35,9 @@ public sealed partial class RMCSafeComponent : Component
     [DataField]
     public string AutoPrintFormat = "The code is: {0} - {1}";
 
-    /// If set, the safe will attempt to give the combination paper directly to a player with this job.
     [DataField]
-    public string? AutoPrintToJob;
+    public SoundSpecifier? SoundSuccess;
+
+    [DataField]
+    public SoundSpecifier? SoundFail;
 }

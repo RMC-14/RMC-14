@@ -1,15 +1,14 @@
+using System.Numerics;
 using Content.Shared._RMC14.SecureSafe;
 using Content.Shared.Interaction;
 using Content.Shared.Lock;
 using Content.Shared.UserInterface;
 using Content.Shared.Paper;
-using Content.Shared.Roles.Jobs;
-using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Popups;
+using Content.Shared.Storage.EntitySystems;
 using Content.Server.Station.Systems;
-using Content.Shared.GameTicking;
-using Content.Shared.Mind;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Server._RMC14.SecureSafe;
 
@@ -20,11 +19,9 @@ public sealed class RMCSafeSystem : SharedRMCSafeSystem
     [Dependency] private readonly PaperSystem _paper = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-    [Dependency] private readonly StationSystem _station = default!;
-    [Dependency] private readonly SharedJobSystem _jobs = default!;
-    [Dependency] private readonly SharedHandsSystem _hands = default!;
-    [Dependency] private readonly SharedMindSystem _mind = default!;
-    [Dependency] private readonly IPlayerManager _playerManager = default!;
+    [Dependency] private readonly SharedEntityStorageSystem _entityStorage = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedAudioSystem _audio = default!;
 
     public override void Initialize()
     {
@@ -38,8 +35,6 @@ public sealed class RMCSafeSystem : SharedRMCSafeSystem
 
         // Prevent normal lock toggling — only the safe cracking UI should unlock
         SubscribeLocalEvent<RMCSafeComponent, LockToggleAttemptEvent>(OnLockToggleAttempt);
-
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnPlayerSpawnComplete);
 
         Subs.BuiEvents<RMCSafeComponent>(RMCSafeUIKey.Key, subs =>
         {
@@ -58,66 +53,28 @@ public sealed class RMCSafeSystem : SharedRMCSafeSystem
         ent.Comp.Dial2 = 0;
         Dirty(ent);
 
-        // Ensure locked on spawn
+        // Locked and CLOSED on spawn.
+        // Closing it now prevents storagesystem from sucking in the paper later.
+        _entityStorage.CloseStorage(ent);
+
         if (TryComp<LockComponent>(ent, out var lockComp))
             _lock.Lock(ent, null, lockComp);
 
-        // Give to existing players if any match
-        if (!string.IsNullOrEmpty(ent.Comp.AutoPrintToJob))
+        // Spawn combination paper if configured
+        if (ent.Comp.AutoPrintPaperPrototype != null)
         {
-            var station = _station.GetOwningStation(ent);
-            if (station != null)
-            {
-                foreach (var session in _playerManager.Sessions)
-                {
-                    if (session.AttachedEntity is not { Valid: true } mob)
-                        continue;
+            var coords = _transform.GetMoverCoordinates(ent).Offset(new Vector2(0, -1));
+            var paper = Spawn(ent.Comp.AutoPrintPaperPrototype, coords);
 
-                    if (_station.GetOwningStation(mob) != station)
-                        continue;
+            _metaData.SetEntityName(paper, ent.Comp.AutoPrintPaperName);
+            _metaData.SetEntityDescription(paper, ent.Comp.AutoPrintPaperDesc);
 
-                    if (!_jobs.MindHasJobWithId(_mind.GetMind(mob), ent.Comp.AutoPrintToJob))
-                        continue;
+            var text = string.Format(ent.Comp.AutoPrintFormat, ent.Comp.Code1, ent.Comp.Code2);
+            _paper.SetContent(paper, text);
 
-                    GivePaperToPlayer(mob, ent.Comp);
-                }
-            }
+            // Ensure it's outside the safe
+            _transform.PlaceNextTo(paper, ent.Owner);
         }
-    }
-
-    private void OnPlayerSpawnComplete(PlayerSpawnCompleteEvent ev)
-    {
-        if (string.IsNullOrEmpty(ev.JobId))
-            return;
-
-        var station = ev.Station;
-        var query = EntityQueryEnumerator<RMCSafeComponent>();
-        while (query.MoveNext(out var uid, out var safe))
-        {
-            if (safe.AutoPrintToJob != ev.JobId)
-                continue;
-
-            if (_station.GetOwningStation(uid) != station)
-                continue;
-
-            GivePaperToPlayer(ev.Mob, safe);
-        }
-    }
-
-    private void GivePaperToPlayer(EntityUid player, RMCSafeComponent safe)
-    {
-        if (safe.AutoPrintPaperPrototype == null)
-            return;
-
-        var paper = Spawn(safe.AutoPrintPaperPrototype, Transform(player).Coordinates);
-
-        _metaData.SetEntityName(paper, safe.AutoPrintPaperName);
-        _metaData.SetEntityDescription(paper, safe.AutoPrintPaperDesc);
-
-        var text = string.Format(safe.AutoPrintFormat, safe.Code1, safe.Code2);
-        _paper.SetContent(paper, text);
-
-        _hands.PickupOrDrop(player, paper);
     }
 
     private void OnUIOpenAttempt(Entity<RMCSafeComponent> ent, ref ActivatableUIOpenAttemptEvent args)
@@ -171,9 +128,16 @@ public sealed class RMCSafeSystem : SharedRMCSafeSystem
         {
             if (TryComp<LockComponent>(ent, out var lockComp))
             {
+                _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-success"), ent, args.Actor);
+                _audio.PlayPvs(ent.Comp.SoundSuccess, ent);
                 _lock.Unlock(ent, args.Actor, lockComp);
                 _ui.CloseUi(ent.Owner, RMCSafeUIKey.Key);
             }
+        }
+        else
+        {
+            _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-fail"), ent, args.Actor);
+            _audio.PlayPvs(ent.Comp.SoundFail, ent);
         }
     }
 
