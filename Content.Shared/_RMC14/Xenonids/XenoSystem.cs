@@ -359,9 +359,6 @@ public sealed partial class XenoSystem : EntitySystem
         if (args.Handled)
             return;
 
-        if (!_hive.FromSameHive(args.User, ent.Owner))
-            return;
-
         if (!CanTackleOtherXeno(args.User, ent, out var time))
             return;
 
