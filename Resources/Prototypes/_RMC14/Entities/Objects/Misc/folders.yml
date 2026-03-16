@@ -7,10 +7,10 @@
   suffix: Empty
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi
-    state: folder
+    sprite: _RMC14/Objects/Misc/Folders/folder.rsi
+    state: icon
   - type: Item
-    sprite: _RMC14/Objects/Misc/paper.rsi
+    sprite: _RMC14/Objects/Misc/Folders/folder.rsi
     size: Small
     shape: null
   - type: Storage
@@ -50,13 +50,17 @@
     - id: CMPaper
       prob: 0.2
 
+
 - type: entity
   parent: CMFolderBase
   id: CMFolderBlue
   description: A formal blue folder.
   components:
   - type: Sprite
-    state: folder_blue
+    sprite: _RMC14/Objects/Misc/Folders/blue_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/blue_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -64,7 +68,11 @@
   description: A formal blue folder.
   components:
   - type: Sprite
-    state: folder_blue
+    sprite: _RMC14/Objects/Misc/Folders/blue_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/blue_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -72,7 +80,10 @@
   description: A firey red folder.
   components:
   - type: Sprite
-    state: folder_red
+    sprite: _RMC14/Objects/Misc/Folders/red_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/red_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -80,7 +91,11 @@
   description: A firey red folder.
   components:
   - type: Sprite
-    state: folder_red
+    sprite: _RMC14/Objects/Misc/Folders/red_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/red_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -88,7 +103,10 @@
   description: A cheerful yellow folder.
   components:
   - type: Sprite
-    state: folder_yellow
+    sprite: _RMC14/Objects/Misc/Folders/yellow_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/yellow_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -96,7 +114,11 @@
   description: A cheerful yellow folder.
   components:
   - type: Sprite
-    state: folder_yellow
+    sprite: _RMC14/Objects/Misc/Folders/yellow_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/yellow_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -104,7 +126,10 @@
   description: A plain white folder.
   components:
   - type: Sprite
-    state: folder_white
+    sprite: _RMC14/Objects/Misc/Folders/white_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/white_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -112,15 +137,22 @@
   description: A plain white folder.
   components:
   - type: Sprite
-    state: folder_white
-    
+    sprite: _RMC14/Objects/Misc/Folders/white_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/white_folder.rsi
+
+
 - type: entity
   parent: CMFolderBase
   id: CMFolderGreen
   description: A fresh green folder.
   components:
   - type: Sprite
-    state: folder_green
+    sprite: _RMC14/Objects/Misc/Folders/green_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/green_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -128,7 +160,10 @@
   description: A fresh green folder.
   components:
   - type: Sprite
-    state: folder_green
+    sprite: _RMC14/Objects/Misc/Folders/green_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/green_folder.rsi
 
 
 - type: entity
@@ -137,7 +172,10 @@
   description: A sleek black folder.
   components:
   - type: Sprite
-    state: folder_black
+    sprite: _RMC14/Objects/Misc/Folders/black_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -145,7 +183,11 @@
   description: A sleek black folder.
   components:
   - type: Sprite
-    state: folder_black
+    sprite: _RMC14/Objects/Misc/Folders/black_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -153,7 +195,10 @@
   description: A sleek black folder accented with blue stripes.
   components:
   - type: Sprite
-    state: folder_black_blue
+    sprite: _RMC14/Objects/Misc/Folders/black_blue_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_blue_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -161,7 +206,11 @@
   description: A sleek black folder accented with blue stripes.
   components:
   - type: Sprite
-    state: folder_black_blue
+    sprite: _RMC14/Objects/Misc/Folders/black_blue_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_blue_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -169,7 +218,10 @@
   description: A sleek black folder accented with green stripes.
   components:
   - type: Sprite
-    state: folder_black_green
+    sprite: _RMC14/Objects/Misc/Folders/black_green_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_green_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -177,7 +229,11 @@
   description: A sleek black folder accented with green stripes.
   components:
   - type: Sprite
-    state: folder_black_green
+    sprite: _RMC14/Objects/Misc/Folders/black_green_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_green_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -185,7 +241,10 @@
   description: A sleek black folder accented with red stripes.
   components:
   - type: Sprite
-    state: folder_black_red
+    sprite: _RMC14/Objects/Misc/Folders/black_red_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_red_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -193,7 +252,11 @@
   description: A sleek black folder accented with red stripes.
   components:
   - type: Sprite
-    state: folder_black_red
+    sprite: _RMC14/Objects/Misc/Folders/black_red_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_red_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -201,7 +264,10 @@
   description: A sleek black folder accented with white stripes.
   components:
   - type: Sprite
-    state: folder_black_white
+    sprite: _RMC14/Objects/Misc/Folders/black_white_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_white_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -209,7 +275,11 @@
   description: A sleek black folder accented with white stripes.
   components:
   - type: Sprite
-    state: folder_black_white
+    sprite: _RMC14/Objects/Misc/Folders/black_white_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_white_folder.rsi
+
 
 - type: entity
   parent: CMFolderBase
@@ -217,7 +287,10 @@
   description: A sleek black folder accented with yellow stripes.
   components:
   - type: Sprite
-    state: folder_black_yellow
+    sprite: _RMC14/Objects/Misc/Folders/black_yellow_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_yellow_folder.rsi
 
 - type: entity
   parent: CMFolderBaseEmpty
@@ -225,5 +298,7 @@
   description: A sleek black folder accented with yellow stripes.
   components:
   - type: Sprite
-    state: folder_black_yellow
-
+    sprite: _RMC14/Objects/Misc/Folders/black_yellow_folder.rsi
+    state: icon
+  - type: Item
+    sprite: _RMC14/Objects/Misc/Folders/black_yellow_folder.rsi
