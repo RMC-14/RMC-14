@@ -120,23 +120,34 @@ public sealed class RMCSafeSystem : SharedRMCSafeSystem
 
         Dirty(ent);
         UpdateBUI(ent);
+
+        // Auto-check the code. Only trigger success automatically to avoid "incorrect" spam while dialing.
+        if (ent.Comp.Dial1 == ent.Comp.Code1 && ent.Comp.Dial2 == ent.Comp.Code2)
+        {
+            CheckCode(ent, args.Actor);
+        }
     }
 
     private void OnBuiTryOpen(Entity<RMCSafeComponent> ent, ref RMCSafeTryOpenMessage args)
+    {
+        CheckCode(ent, args.Actor, true);
+    }
+
+    private void CheckCode(Entity<RMCSafeComponent> ent, EntityUid user, bool manual = false)
     {
         if (ent.Comp.Dial1 == ent.Comp.Code1 && ent.Comp.Dial2 == ent.Comp.Code2)
         {
             if (TryComp<LockComponent>(ent, out var lockComp))
             {
-                _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-success"), ent, args.Actor);
+                _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-success"), ent, user);
                 _audio.PlayPvs(ent.Comp.SoundSuccess, ent);
-                _lock.Unlock(ent, args.Actor, lockComp);
+                _lock.Unlock(ent, user, lockComp);
                 _ui.CloseUi(ent.Owner, RMCSafeUIKey.Key);
             }
         }
-        else
+        else if (manual)
         {
-            _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-fail"), ent, args.Actor);
+            _popup.PopupEntity(Loc.GetString("rmc-safe-unlock-fail"), ent, user);
             _audio.PlayPvs(ent.Comp.SoundFail, ent);
         }
     }
