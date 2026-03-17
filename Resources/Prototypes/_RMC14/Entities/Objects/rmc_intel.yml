@@ -32,6 +32,12 @@
     state: paper_words
   - type: Item
     size: Tiny
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    inhandVisuals:
+      left:
+      - state: paper-inhand-left
+      right:
+      - state: paper-inhand-right
   - type: IntelReadObjective
     state: Active
   - type: IntelClues
@@ -48,6 +54,12 @@
     state: paper_p_words
   - type: Item
     size: Tiny
+    sprite: _RMC14/Objects/Misc/paper.rsi
+    inhandVisuals:
+      left:
+      - state: paper-inhand-left
+      right:
+      - state: paper-inhand-right
   - type: IntelReadObjective
     value: 0.2
     delay: 6
