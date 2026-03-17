@@ -70,6 +70,7 @@
   - type: SkillPreset
     skills:
       RMCSkillPilot: 2
+      RMCSkillPowerLoader: 2
 
 - type: entity
   parent: RMCSkillPresetSunRidersRifleman
@@ -94,6 +95,7 @@
       RMCSkillConstruction: 2
       RMCSkillEngineer: 2
       RMCSkillLeadership: 2
+      RMCSkillJtac: 2
 
 - type: entity
   parent: RMCSkillPresetSunRidersRifleman
