@@ -1522,6 +1522,51 @@
         tags:
         - RMCMagazineRifleType71AP
 
+# Type 71 HEAP
+- type: entity
+  parent: RMCBoxMagazineRifleBase
+  id: RMCBoxMagazineRifleType71HEAPEmpty
+  name: magazine box (HEAP Type 71 x 10)
+  components:
+  - type: Sprite
+    layers:
+    - state: rifle_box
+      color: "#962e23"
+    - state: rifle_ammo_full_mags_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: rifle_box_71
+      color: "#ffcb26"
+    - state: rifle_box_marking
+      color: "#9C9A19"
+    - state: rifle_lid
+      map: [ "lid" ]
+      color: "#962e23"
+    - state: rifle_lid_marking
+      map: [ "lid_marking" ]
+      color: "#9C9A19"
+  - type: CMItemSlots
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71HEAP
+
+- type: entity
+  parent: RMCBoxMagazineRifleType71HEAPEmpty
+  id: RMCBoxMagazineRifleType71HEAP
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMagazineRifleType71HEAP
+    count: 10
+    slot:
+      whitelist:
+        tags:
+        - RMCMagazineRifleType71HEAP
+
 # Type 88
 - type: entity
   parent: RMCBoxMagazineRifleBase
