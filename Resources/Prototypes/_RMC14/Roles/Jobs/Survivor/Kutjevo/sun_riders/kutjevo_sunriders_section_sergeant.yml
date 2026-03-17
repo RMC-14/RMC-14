@@ -36,6 +36,7 @@
   equipment:
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouchAlt
     head: RMCHeadDurag
+    eyes: RMCWeldingGoggles
     back: RMCBackpackRTOFilledSurvivor
     shoes: CMBootsBlackFilled
     outerClothing: CMArmorB12Damaged
@@ -45,6 +46,7 @@
     pocket2: RMCPouchFirstAidSplintsGauzeOintment
     suitstorage: RMCFlashlight
     gloves: CMHandsBrown
+    belt: CMBeltUtilityFilled
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -68,12 +70,6 @@
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
-    randomWeapon:
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCMotionDetector ]
-    tryEquipRandomWeapon: true
 
 - type: entity
   parent: RMCSurvivorPresetSunRiderSectionSergeantNoPrimary

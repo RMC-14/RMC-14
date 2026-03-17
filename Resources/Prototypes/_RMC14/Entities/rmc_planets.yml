@@ -379,19 +379,18 @@
       - RMCSurvivorKutjevoResearcher: 2
     survivorJobScenarios:
       sunriders: # Sun Riders insert (Non Parity)
-      - CMSurvivor: 6 # rmc14 todo: 7 after parity surv slots (gonna have to map more spawnpoints too)
+      - CMSurvivor: 5 # rmc14 todo: 7 after parity surv slots (gonna have to map more spawnpoints too)
       - CMSurvivorEngineer: 1
       - CMSurvivorDoctor: 1
       - RMCSurvivorCommandingOfficer: 1
     survivorJobVariantScenarios:
       sunriders:
         CMSurvivor:
-        - RMCSurvivorSunRidersSectionSergeant: 1
-        - RMCSurvivorSunRidersDM: 1
-        - RMCSurvivorSunRidersPilot: 1
-        - RMCSurvivorSunRidersRifleman: 1
         - RMCSurvivorSunRidersSquadLeader: 1
+        - RMCSurvivorSunRidersDM: 1
         - RMCSurvivorSunRidersSquadSpecialist: 1
+        - RMCSurvivorSunRidersRifleman: 1
+        - RMCSurvivorSunRidersPilot: 1
         CMSurvivorDoctor:
         - RMCSurvivorSunRidersCorpsman: 1
         RMCSurvivorCommandingOfficer:

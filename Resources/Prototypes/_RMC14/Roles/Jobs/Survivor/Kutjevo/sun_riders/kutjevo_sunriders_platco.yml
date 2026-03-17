@@ -60,11 +60,11 @@
       - [ RMCPackFlareM94BP ]
       - [ RMCPackFlareM94BP ]
     randomWeapon:
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCM1984BeltFilledSurvivorSunRiders ]
-    - [ RMCMotionDetector ]
     -
+      - [ RMCM1984BeltFilledSurvivorSunRiders ]
+      - [ RMCM1984BeltFilledSurvivorSunRiders ]
+      - [ RMCM1984BeltFilledSurvivorSunRiders ]
+      - [ RMCMotionDetector ]
     tryEquipRandomWeapon: true
 
 - type: entity
