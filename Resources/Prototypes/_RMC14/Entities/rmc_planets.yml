@@ -256,7 +256,7 @@
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
     nightmareScenarios:
     - scenarioName: spp_bar
-      scenarioProbability: 1
+      scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
