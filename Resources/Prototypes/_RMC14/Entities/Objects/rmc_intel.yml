@@ -68,13 +68,7 @@
       map: ["base"]
   - type: Item
     size: Tiny
-    inhandVisuals:
-      left:
-      - state: folder-inhand-left
-        map: ["inhand-left"]
-      right:
-      - state: folder-inhand-right
-        map: ["inhand-right"]
+    sprite: _RMC14/Objects/Misc/folders.rsi
   - type: IntelReadObjective
     value: 0.2
     delay: 4
@@ -83,6 +77,7 @@
   - type: IntelClues
     clue: rmc-intel-clue-folder
     category: rmc-intel-folders
+  - type: IntelRandomSprite
   - type: RandomSprite
     available:
     - base:
@@ -97,30 +92,6 @@
         folder_black_red: ""
         folder_black_white: ""
         folder_black_yellow: ""
-    - inhand-left:
-        folder_black-inhand-left: ""
-        folder_blue-inhand-left: ""
-        folder_red-inhand-left: ""
-        folder_yellow-inhand-left: ""
-        folder_green-inhand-left: ""
-        folder_white-inhand-left: ""
-        folder_black_blue-inhand-left: ""
-        folder_black_green-inhand-left: ""
-        folder_black_red-inhand-left: ""
-        folder_black_white-inhand-left: ""
-        folder_black_yellow-inhand-left: ""
-    - inhand-right:
-        folder_black-inhand-right: ""
-        folder_blue-inhand-right: ""
-        folder_red-inhand-right: ""
-        folder_yellow-inhand-right: ""
-        folder_green-inhand-right: ""
-        folder_white-inhand-right: ""
-        folder_black_blue-inhand-right: ""
-        folder_black_green-inhand-right: ""
-        folder_black_red-inhand-right: ""
-        folder_black_white-inhand-right: ""
-        folder_black_yellow-inhand-right: ""
 
 - type: entity
   parent: RMCIntelReadableBase
