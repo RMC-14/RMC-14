@@ -406,6 +406,8 @@ namespace Content.Server.Database
 
         Task IncreaseInfects(Guid player);
 
+        Task<int> GetParasiteInfects(Guid player);
+
         Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player);
 
         Task SetActionOrder(Guid player, string id, List<string> actions);
@@ -1318,6 +1320,12 @@ namespace Content.Server.Database
         {
             DbWriteOpsMetric.Inc();
             return RunDbCommand(() => _db.IncreaseInfects(player));
+        }
+
+        public Task<int> GetParasiteInfects(Guid player)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetParasiteInfects(player));
         }
 
         public Task<Dictionary<string, List<string>>?> GetAllActionOrders(Guid player)
