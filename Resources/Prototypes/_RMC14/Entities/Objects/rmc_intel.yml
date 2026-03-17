@@ -1,4 +1,4 @@
-﻿- type: entity
+- type: entity
   abstract: true
   parent: BaseItem
   id: RMCIntelBase
@@ -62,12 +62,19 @@
   description: A folder with some documents inside.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Misc/paper.rsi
+    sprite: _RMC14/Objects/Misc/folders.rsi
     layers:
     - state: folder
-      map: ["base" ]
+      map: ["base"]
   - type: Item
     size: Tiny
+    inhandVisuals:
+      left:
+      - state: folder-inhand-left
+        map: ["inhand-left"]
+      right:
+      - state: folder-inhand-right
+        map: ["inhand-right"]
   - type: IntelReadObjective
     value: 0.2
     delay: 4
@@ -79,17 +86,41 @@
   - type: RandomSprite
     available:
     - base:
-        folder: ""
         folder_black: ""
         folder_blue: ""
         folder_red: ""
         folder_yellow: ""
         folder_green: ""
+        folder_white: ""
         folder_black_blue: ""
         folder_black_green: ""
         folder_black_red: ""
         folder_black_white: ""
         folder_black_yellow: ""
+    - inhand-left:
+        folder_black-inhand-left: ""
+        folder_blue-inhand-left: ""
+        folder_red-inhand-left: ""
+        folder_yellow-inhand-left: ""
+        folder_green-inhand-left: ""
+        folder_white-inhand-left: ""
+        folder_black_blue-inhand-left: ""
+        folder_black_green-inhand-left: ""
+        folder_black_red-inhand-left: ""
+        folder_black_white-inhand-left: ""
+        folder_black_yellow-inhand-left: ""
+    - inhand-right:
+        folder_black-inhand-right: ""
+        folder_blue-inhand-right: ""
+        folder_red-inhand-right: ""
+        folder_yellow-inhand-right: ""
+        folder_green-inhand-right: ""
+        folder_white-inhand-right: ""
+        folder_black_blue-inhand-right: ""
+        folder_black_green-inhand-right: ""
+        folder_black_red-inhand-right: ""
+        folder_black_white-inhand-right: ""
+        folder_black_yellow-inhand-right: ""
 
 - type: entity
   parent: RMCIntelReadableBase
