@@ -110,7 +110,7 @@
     tags:
     - RMCWeaponRifleM4SPR
 
-# Sun Riders insert variant - different sprites, starts loaded with WP
+# Sun Riders insert variant
 - type: entity
   parent: WeaponRifleM4SPR
   id: WeaponRifleM4SPRDM
