@@ -5,8 +5,7 @@
   components:
     - type: Sprite
       layers:
-        - state: red
-        - sprite: _RMC14/Objects/Misc/paper.rsi
+        - sprite: _RMC14/Objects/Misc/folders.rsi
           state: folder
     - type: RandomSpawner
       prototypes:
@@ -30,9 +29,8 @@
   components:
     - type: Sprite
       layers:
-        - state: red
-        - sprite: _RMC14/Objects/Misc/paper.rsi
-          state: folder
+        - sprite: _RMC14/Objects/Misc/folders.rsi
+          state: folder_green
     - type: RandomSpawner
       prototypes:
         - CMFolderBlue
@@ -49,9 +47,8 @@
   components:
     - type: Sprite
       layers:
-        - state: red
-        - sprite: _RMC14/Objects/Misc/paper.rsi
-          state: folder
+        - sprite: _RMC14/Objects/Misc/folders.rsi
+          state: folder_black
     - type: RandomSpawner
       prototypes:
         - CMFolderBlack
