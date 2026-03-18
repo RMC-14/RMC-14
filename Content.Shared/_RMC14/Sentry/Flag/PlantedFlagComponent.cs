@@ -51,7 +51,7 @@ public sealed partial class PlantedFlagComponent : Component
     public bool ApplyMove;
 
     /// <summary>
-    ///
+    ///     The round time at which the flag will apply a buff.
     /// </summary>
     [DataField, AutoNetworkedField, AutoPausedField]
     public TimeSpan NextOrder;

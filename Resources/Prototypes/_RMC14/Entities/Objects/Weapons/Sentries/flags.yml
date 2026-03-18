@@ -336,7 +336,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: PlantedFlag
-    applyMove: true
     range: 6.77
     upgrades: null
   - type: RMCDeployableEquipment
@@ -387,7 +386,6 @@
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: PlantedFlag
-    applyMove: true
     range: 6.77
     upgrades: null
   - type: RMCDeployableEquipment
