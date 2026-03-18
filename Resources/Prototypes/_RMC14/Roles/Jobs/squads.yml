@@ -469,7 +469,7 @@
     radio: Colony
     minimapBackground:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
-      state: background_sunriders_pvp
+      state: background_solardevils
     canSupplyDrop: false
     group: SunRiders
 
