@@ -382,7 +382,7 @@ rmc-job-greeting-sr-spec = You are a marine hailing from Sun Riders platoon of t
 
   You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
 
-rmc-job-greeting-sr-pilot = You are a Dropship Pilot hailing from Sun Riders platoon from the UNS Endeavour. Mid-transit, you receive a mayday call on your ship's console. Expecting a regular transmission, you are instead informed the local battalion has been largely wiped out, and that there remains only one combat effective unit on the colony. In a rush, you set course to rescue them. However, during atmospheric entry, your left engine was rendered inoperable by automated anti-air emplacements, and you only managed to survive via a last minute ejection.
+rmc-job-greeting-sr-pilot = You are a Dropship Pilot hailing from Sun Riders platoon from the UNS Endeavour. Mid-transit, you receive a distress call on your ship's console. Expecting a regular transmission, you are instead informed the local battalion has been largely wiped out, and that there remains only one combat effective unit on the colony. In a rush, you set course to rescue them. However, during atmospheric entry, your left engine was rendered inoperable by automated anti-air emplacements, and you only managed to survive via a last minute ejection.
 
   With your chances looking slim, and your supplies minimal, your radio suddenly chimes with a message:
 
