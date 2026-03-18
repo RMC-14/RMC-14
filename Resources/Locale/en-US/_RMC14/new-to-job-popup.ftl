@@ -66,7 +66,7 @@ rmc-new-to-job-dcc = As a Dropship Crew Chief, your job is to assist the pilots 
 
                                              You may be required to perform additional tasks, such as retrieving medical supplies, obtaining parachutes, triage of revivable marine personnel, and any other task given by your assigned pilot.
 
-rmc-new-to-job-Xenonidnid = Welcome sister, and glory to the hive! You are now a member of the Xenonid faction. Rejoice!
+rmc-new-to-job-xenonid = Welcome sister, and glory to the hive! You are now a member of the Xenonid faction. Rejoice!
 
 
                                              As you wake up, you are in your larva form. In this form, you are weak, and cannot fight. It's best that you move quickly to your Queen for protection! To find your way to the queen, follow the Xenonid Tracker on the right hand side of your screen, it has the appearance of an arrow that will point to certain things, but by default will point to the Xenonid Queen. Follow this tracker to the queen to stay safe for now.
