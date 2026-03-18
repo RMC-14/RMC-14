@@ -10,7 +10,7 @@
     sprite: _RMC14/Objects/Weapons/Guns/Pistols/m2112.rsi
   - type: Gun
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_mateba.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_model.ogg
       params:
         pitch: 2
         volume: 3
