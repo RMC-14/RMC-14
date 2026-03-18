@@ -123,11 +123,16 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/engi.rsi
 
 - type: entity
-  parent: CMJumpsuitSPPOfficer
-  id: RMCJumpsuitSPPOfficerAmmoFilled
+  parent: RMCMarineUniformBase
+  id: RMCJumpsuitSPPSOF
+  name: CCC5-L compression undersuit
+  description: A temperature-regulating pressure suit forming the base layer of the CCC5-L system. It provides compression support, limited vacuum resistance, moisture-wicking properties, and NBC protection to sustain operators in hazardous conditions.
   components:
-  - type: WebbingClothing
-    startingWebbing: RMCWebbingSPPCommandFilled
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Uniforms/SPP/sof_uniform.rsi
+  - type: Tag
+    tags:
+    - RMCUniformSPP
 
 - type: entity
   parent: CMJumpsuitSPP
@@ -149,6 +154,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/SPP/officershirtspp.rsi
+    
+- type: entity
+  parent: CMJumpsuitSPPOfficer
+  id: RMCJumpsuitSPPOfficerAmmoFilled
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSPPCommandFilled
 
 # Civilians
 - type: entity
