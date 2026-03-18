@@ -254,7 +254,7 @@ rmc-job-name-survivor-soro-miner = Jùtóu Combine - Shakhtyor
 
 rmc-job-name-survivor-halcyon-dynamics-liaison = Halcyon Dynamics - Corporate Liaison
 
-# Sorokyne SOF insert survs 
+# Sorokyne SOF insert survs
 
 rmc-job-greeting-soro-sof = You are a member of an SPP SOF QRF team! Your primary objective is to survive. You believe a second dropship crashed somewhere to the south west, which was carrying additional weapons. You are part of an SOF QRF team of the Socialist Progressive Peoples, deployed alongside the Ministry of Space Colonization to build garrisons on distant worlds. On the return trip from the frontier, you receive a distress signal from the Peoples' colony of 'Sorokyne Strata' on the planet 'Thermae I' (LV-976). Your team is sent to investigate. Intel suggests CLF separatists or a UN/TSE incursion, but as you touch down in the hangar, something feels wrong. No welcome party. No usual hustle of a working colony. Nothing to suggest an incursion of any kind. Your mission is clear—find out what happened to your supply ship and comrades, retrieve your equipment, and uncover the truth of what really happened to the colony.
 
@@ -360,7 +360,7 @@ rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
 
 # Kutjevo Sun Riders Survs
 
-rmc-job-greeting-sr = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team  to the xenonid horde, only the battered remnants remain...
+rmc-job-greeting-sr = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team to the xenonid horde, only the battered remnants remain...
 
   One of you brings up a [bold]secondary evac site at the Hydroelectric Dam.[/bold] Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
 
