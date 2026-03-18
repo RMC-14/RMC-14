@@ -382,6 +382,25 @@
       collection: WindowShatter
 
 - type: entity
+  parent: CMBaseWindowIndestructible
+  id: CMWindowWhiteColonyHull
+  name: hull window
+  description: A glass window. Light refracts incorrectly when looking through. It looks rather strong. No way to get through here.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+  - type: Icon
+    sprite: _RMC14/Structures/Windows/colony_rwindow.rsi
+    state: col_rwindow0
+  - type: IconSmooth
+    key: windows
+    additionalKeys:
+    - doors
+    base: col_rwindow
+    mode: CardinalFlags
+
+- type: entity
   parent: CMBaseWindow
   id: RMCHunterReinforcedWindow
   suffix: hunter
