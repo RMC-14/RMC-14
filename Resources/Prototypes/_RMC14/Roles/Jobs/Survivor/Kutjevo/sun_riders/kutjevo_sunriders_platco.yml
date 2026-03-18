@@ -3,6 +3,7 @@
   id: RMCSurvivorSunRidersPlatCo
   name: rmc-job-name-sr-platco
   icon: "RMCJobIconPVEPlatoonCommander"
+  playTimeTracker: RMCJobSurvivorCO
   spawnMenuRoleName: Sun Riders Platoon Commander (Survivor)
   ranks:
     RMCRankFirstLT: []
@@ -37,6 +38,7 @@
     back: RMCSatchelMarineForeconSurvivorFill
     shoes: CMBootsBlackFilled
     belt: RMCM2112BeltFilled
+    head: CMHeadBeretSR
     outerClothing: RMCJacketWindbreakerBrownFilledSurvivor
     id: CMIDCardStandardDogtag
     ears: RMCHeadsetSunRidersPVP
@@ -51,9 +53,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ CMHeadCapOfficerGasmask, RMCMaskTornScarfDesert ]
-    - [ CMHeadCapOfficerGasmask, RMCMaskScarfTan ]
     randomGearOther: # 1/2 chance for no flares
     -
       - [ RMCPackFlareM94BP ]
