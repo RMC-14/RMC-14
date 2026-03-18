@@ -34,6 +34,8 @@ public sealed class PlantedFlagSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
 
+    private const string DropshipFaction = "FactionMarine";
+
     public override void Initialize()
     {
         SubscribeLocalEvent<PlantedFlagComponent, MapInitEvent>(OnMapInit);
@@ -85,10 +87,9 @@ public sealed class PlantedFlagSystem : EntitySystem
             case FlagMode.Off:
             {
                 mode = FlagMode.On;
-                if (flag.Comp.Id is { } id)
+                if (flag.Comp.Id is { } id && _gunIFF.IsInFaction(flag, DropshipFaction))
                 {
                     var abbreviation = _dropshipWeapon.GetUserAbbreviation(user, id);
-
                     _dropshipWeapon.MakeDropshipTarget(flag, abbreviation);
                 }
                 break;
