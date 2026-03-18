@@ -58,6 +58,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly SharedGunSystem _guns = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
 
     public override void Initialize()
     {
@@ -1657,22 +1658,7 @@ public sealed class RMCHardpointSystem : EntitySystem
 
     private bool TryGetContainingVehicleFrame(EntityUid owner, out EntityUid vehicle)
     {
-        vehicle = default;
-        var current = owner;
-
-        while (_containers.TryGetContainingContainer(current, out var container))
-        {
-            var containerOwner = container.Owner;
-            if (HasComp<VehicleComponent>(containerOwner))
-            {
-                vehicle = containerOwner;
-                return true;
-            }
-
-            current = containerOwner;
-        }
-
-        return false;
+        return _topology.TryGetVehicle(owner, out vehicle);
     }
 
     private void UpdateFrameDamageAppearance(EntityUid uid, RMCHardpointIntegrityComponent component)

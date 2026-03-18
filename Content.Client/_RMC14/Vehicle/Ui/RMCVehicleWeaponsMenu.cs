@@ -20,7 +20,7 @@ namespace Content.Client._RMC14.Vehicle.Ui;
 [GenerateTypedNameReferences]
 public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 {
-    public event Action<string>? OnSelect;
+    public event Action<NetEntity?>? OnSelect;
     public event Action<bool>? OnToggleStabilization;
     public event Action<bool>? OnToggleAutoTurret;
 
@@ -30,7 +30,7 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 
     private bool _suppressStabilization;
     private bool _suppressAuto;
-    private string? _selectedSlotId;
+    private NetEntity? _selectedMountedEntity;
     private float _selectedCooldownRemaining;
     private float _selectedCooldownTotal;
     private TimeSpan _selectedCooldownSampleTime;
@@ -121,11 +121,11 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
             if (!hardpoint.Selected)
                 continue;
 
-            _selectedSlotId = hardpoint.SlotId;
+            _selectedMountedEntity = hardpoint.MountedEntity;
             return;
         }
 
-        _selectedSlotId = null;
+        _selectedMountedEntity = null;
     }
 
     private void RebuildHardpointButtons()
@@ -139,8 +139,8 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
 
         foreach (var hardpoint in ordered)
         {
-            var selected = _selectedSlotId != null &&
-                           string.Equals(_selectedSlotId, hardpoint.SlotId, StringComparison.OrdinalIgnoreCase);
+            var selected = _selectedMountedEntity != null &&
+                           hardpoint.MountedEntity == _selectedMountedEntity;
 
             var button = new ContainerButton
             {
@@ -162,12 +162,12 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
                 if (!hardpoint.Selectable)
                     return;
 
-                var wasSelected = _selectedSlotId != null &&
-                                  string.Equals(_selectedSlotId, hardpoint.SlotId, StringComparison.OrdinalIgnoreCase);
-                _selectedSlotId = wasSelected ? null : hardpoint.SlotId;
+                var wasSelected = _selectedMountedEntity != null &&
+                                  hardpoint.MountedEntity == _selectedMountedEntity;
+                _selectedMountedEntity = wasSelected ? null : hardpoint.MountedEntity;
                 UpdateSelectedInfo();
                 RebuildHardpointButtons();
-                OnSelect?.Invoke(hardpoint.SlotId);
+                OnSelect?.Invoke(hardpoint.MountedEntity);
             };
 
             var column = new BoxContainer
@@ -359,7 +359,7 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
     {
         selected = default!;
 
-        if (_selectedSlotId != null && TryGetEntry(_selectedSlotId, out selected))
+        if (_selectedMountedEntity != null && TryGetEntry(_selectedMountedEntity, out selected))
             return true;
 
         var fallback = _hardpoints.FirstOrDefault(h => h.Selected) ?? _hardpoints.FirstOrDefault();
@@ -370,11 +370,11 @@ public sealed partial class RMCVehicleWeaponsMenu : FancyWindow
         return true;
     }
 
-    private bool TryGetEntry(string slotId, out RMCVehicleWeaponsUiEntry entry)
+    private bool TryGetEntry(NetEntity? mountedEntity, out RMCVehicleWeaponsUiEntry entry)
     {
         foreach (var hardpoint in _hardpoints)
         {
-            if (!string.Equals(hardpoint.SlotId, slotId, StringComparison.OrdinalIgnoreCase))
+            if (hardpoint.MountedEntity != mountedEntity)
                 continue;
 
             entry = hardpoint;

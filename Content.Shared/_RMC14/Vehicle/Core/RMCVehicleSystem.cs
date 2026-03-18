@@ -7,7 +7,6 @@ using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle;
 using Content.Shared.Vehicle.Components;
@@ -16,7 +15,6 @@ using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Localization;
-using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
@@ -35,25 +33,10 @@ public sealed class RMCVehicleSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedRMCTeleporterSystem _rmcTeleporter = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
+    [Dependency] private readonly MetaDataSystem _meta = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
     [Dependency] private readonly RMCVehicleLockSystem _vehicleLock = default!;
-
-    private readonly Dictionary<EntityUid, InteriorData> _vehicleInteriors = new();
-    private readonly Dictionary<MapId, EntityUid> _mapToVehicle = new();
-    private readonly Dictionary<EntityUid, HashSet<int>> _entryLocks = new();
-    private readonly HashSet<EntityUid> _exitLocks = new();
-    private readonly Dictionary<EntityUid, HashSet<EntityUid>> _vehiclePassengers = new();
-    private readonly Dictionary<EntityUid, HashSet<EntityUid>> _vehicleXenos = new();
-
-    private sealed class InteriorData
-    {
-        public EntityUid Map = EntityUid.Invalid;
-        public MapId MapId = MapId.Nullspace;
-        public EntityCoordinates Entry;
-        public EntityUid EntryParent = EntityUid.Invalid;
-        public EntityUid Grid = EntityUid.Invalid;
-    }
 
     public override void Initialize()
     {
@@ -69,6 +52,10 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleEnteredEvent>(OnVehicleOperatorEntered);
         SubscribeLocalEvent<VehicleOperatorComponent, OnVehicleExitedEvent>(OnVehicleOperatorExited);
+        SubscribeLocalEvent<RMCVehicleInteriorOccupantComponent, ComponentStartup>(OnOccupantStartup);
+        SubscribeLocalEvent<RMCVehicleInteriorOccupantComponent, ComponentRemove>(OnOccupantRemove);
+        SubscribeLocalEvent<RMCVehicleInteriorOccupantComponent, MapUidChangedEvent>(OnOccupantMapChanged);
+        SubscribeLocalEvent<RMCVehicleInteriorOccupantComponent, MetaFlagRemoveAttemptEvent>(OnOccupantMetaFlagRemoveAttempt);
     }
 
     private void OnVehicleEnterActivate(Entity<VehicleEnterComponent> ent, ref ActivateInWorldEvent args)
@@ -76,11 +63,8 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Enter activate vehicle={ToPrettyString(ent.Owner)} user={ToPrettyString(args.User)} handled={args.Handled}");
-
         if (IsEntryBlockedByLock(ent.Owner, args.User))
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Entry blocked vehicle={ToPrettyString(ent.Owner)} user={ToPrettyString(args.User)}");
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
             return;
@@ -93,23 +77,17 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         if (!TryFindEntry(ent, args.User, out var entryIndex))
         {
-            _popup.PopupEntity("You need to use a doorway to enter.", args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-use-doorway"), args.User, args.User);
             return;
         }
 
-        if (!_entryLocks.TryGetValue(ent.Owner, out var locks))
-        {
-            locks = new HashSet<int>();
-            _entryLocks[ent.Owner] = locks;
-        }
+        var interior = EnsureComp<RMCVehicleInteriorComponent>(ent.Owner);
 
-        if (locks.Contains(entryIndex))
+        if (!interior.EntryLocks.Add(entryIndex))
         {
-            _popup.PopupEntity("Someone is already entering there.", args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-busy"), args.User, args.User);
             return;
         }
-
-        locks.Add(entryIndex);
 
         var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.EnterDoAfter, new VehicleEnterDoAfterEvent { EntryIndex = entryIndex }, ent.Owner)
         {
@@ -120,7 +98,7 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            locks.Remove(entryIndex);
+            interior.EntryLocks.Remove(entryIndex);
             return;
         }
 
@@ -131,33 +109,29 @@ public sealed class RMCVehicleSystem : EntitySystem
     {
         if (IsEntryBlockedByLock(ent.Owner, user))
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] TryEnter blocked vehicle={ToPrettyString(ent.Owner)} user={ToPrettyString(user)} entryIndex={entryIndex}");
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
             return false;
         }
 
-        if (!_vehicleInteriors.TryGetValue(ent.Owner, out var interior))
-        {
-            if (!EnsureInterior(ent, out interior))
-                return false;
-        }
+        if (!EnsureInterior(ent, out var interior))
+            return false;
 
-        EnsureOccupantTracking(ent.Owner, interior, out var passengers, out var xenos);
+        PruneTrackedOccupants(ent.Owner, interior);
 
         var isXeno = HasComp<XenoComponent>(user);
         if (isXeno)
         {
-            if (ent.Comp.MaxXenos > 0 && !xenos.Contains(user) && xenos.Count >= ent.Comp.MaxXenos)
+            if (ent.Comp.MaxXenos > 0 && !interior.Xenos.Contains(user) && interior.Xenos.Count >= ent.Comp.MaxXenos)
             {
-                _popup.PopupEntity("There's no room for more xenos inside.", user, user);
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-xeno-full"), user, user);
                 return false;
             }
         }
         else
         {
-            if (ent.Comp.MaxPassengers > 0 && !passengers.Contains(user) && passengers.Count >= ent.Comp.MaxPassengers)
+            if (ent.Comp.MaxPassengers > 0 && !interior.Passengers.Contains(user) && interior.Passengers.Count >= ent.Comp.MaxPassengers)
             {
-                _popup.PopupEntity("There's no room for more passengers inside.", user, user);
+                _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-passenger-full"), user, user);
                 return false;
             }
         }
@@ -173,31 +147,31 @@ public sealed class RMCVehicleSystem : EntitySystem
                 var entityCoords = new EntityCoordinates(parent, interiorCoord);
                 targetMapCoords = _transform.ToMapCoordinates(entityCoords);
                 _rmcTeleporter.HandlePulling(user, targetMapCoords);
-                if (isXeno)
-                    xenos.Add(user);
-                else
-                    passengers.Add(user);
+                TrackOccupant(user, ent.Owner, isXeno);
                 return true;
             }
         }
 
         targetMapCoords = _transform.ToMapCoordinates(coords);
         _rmcTeleporter.HandlePulling(user, targetMapCoords);
-        if (isXeno)
-            xenos.Add(user);
-        else
-            passengers.Add(user);
+        TrackOccupant(user, ent.Owner, isXeno);
         return true;
     }
 
-    private bool EnsureInterior(Entity<VehicleEnterComponent> ent, [NotNullWhen(true)] out InteriorData? interior)
+    private bool EnsureInterior(Entity<VehicleEnterComponent> ent, [NotNullWhen(true)] out RMCVehicleInteriorComponent? interior)
     {
-        if (_vehicleInteriors.TryGetValue(ent.Owner, out interior))
+        if (TryComp(ent.Owner, out interior) &&
+            interior.MapId != MapId.Nullspace &&
+            _mapManager.MapExists(interior.MapId))
+        {
             return true;
+        }
 
         interior = null;
         if (_net.IsClient)
             return false;
+
+        interior = EnsureComp<RMCVehicleInteriorComponent>(ent.Owner);
 
         var deserializeOptions = new DeserializationOptions
         {
@@ -214,6 +188,7 @@ public sealed class RMCVehicleSystem : EntitySystem
             return false;
 
         var mapId = map.Comp.MapId;
+        var mapUid = map.Owner;
 
         EntityUid entryParent = map.Owner;
         EntityUid interiorGrid = EntityUid.Invalid;
@@ -241,17 +216,16 @@ public sealed class RMCVehicleSystem : EntitySystem
             break;
         }
 
-        interior = new InteriorData
-        {
-            Map = map.Owner,
-            MapId = mapId,
-            Entry = entryCoords,
-            EntryParent = entryParent,
-            Grid = interiorGrid,
-        };
+        interior.Map = mapUid;
+        interior.MapId = mapId;
+        interior.Entry = entryCoords;
+        interior.EntryParent = entryParent;
+        interior.Grid = interiorGrid;
+        interior.Passengers.Clear();
+        interior.Xenos.Clear();
 
-        _vehicleInteriors[ent.Owner] = interior;
-        _mapToVehicle[mapId] = ent.Owner;
+        var link = EnsureComp<RMCVehicleInteriorLinkComponent>(mapUid);
+        link.Vehicle = ent.Owner;
 
         return true;
     }
@@ -263,14 +237,36 @@ public sealed class RMCVehicleSystem : EntitySystem
 
     private void CleanupInterior(EntityUid vehicle)
     {
-        if (!_vehicleInteriors.Remove(vehicle, out var interior))
+        if (!TryComp(vehicle, out RMCVehicleInteriorComponent? interior))
             return;
 
-        _entryLocks.Remove(vehicle);
-        _vehiclePassengers.Remove(vehicle);
-        _vehicleXenos.Remove(vehicle);
+        foreach (var passenger in new List<EntityUid>(interior.Passengers))
+        {
+            if (TryComp(passenger, out RMCVehicleInteriorOccupantComponent? occupant) &&
+                occupant.Vehicle == vehicle)
+            {
+                RemComp<RMCVehicleInteriorOccupantComponent>(passenger);
+            }
+        }
 
-        _mapToVehicle.Remove(interior.MapId);
+        foreach (var xeno in new List<EntityUid>(interior.Xenos))
+        {
+            if (TryComp(xeno, out RMCVehicleInteriorOccupantComponent? occupant) &&
+                occupant.Vehicle == vehicle)
+            {
+                RemComp<RMCVehicleInteriorOccupantComponent>(xeno);
+            }
+        }
+
+        if (interior.Map.IsValid() &&
+            EntityManager.EntityExists(interior.Map) &&
+            TryComp(interior.Map, out RMCVehicleInteriorLinkComponent? link) &&
+            link.Vehicle == vehicle)
+        {
+            RemComp<RMCVehicleInteriorLinkComponent>(interior.Map);
+        }
+
+        RemComp<RMCVehicleInteriorComponent>(vehicle);
 
         if (_net.IsClient)
             return;
@@ -290,38 +286,32 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Exit activate exit={ToPrettyString(ent.Owner)} user={ToPrettyString(args.User)} handled={args.Handled}");
-
         if (args.Handled)
             return;
 
-        if (_exitLocks.Contains(ent.Owner))
+        if (ent.Comp.PendingExit)
         {
-            _popup.PopupEntity("Someone is already using this exit.", args.User, args.User);
+            _popup.PopupEntity(Loc.GetString("rmc-vehicle-exit-busy"), args.User, args.User);
             return;
         }
 
         if (!TryComp(ent, out TransformComponent? exitXform) || exitXform.MapID == MapId.Nullspace)
             return;
 
-        if (!_mapToVehicle.TryGetValue(exitXform.MapID, out var vehicle) || Deleted(vehicle))
-        {
-            _mapToVehicle.Remove(exitXform.MapID);
-            return;
-        }
-
-        if (!TryComp(vehicle, out VehicleEnterComponent? enter))
+        if (!TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is not { } vehicleUid)
             return;
 
-        if (IsExitBlockedByLock(vehicle, args.User))
+        if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
+            return;
+
+        if (IsExitBlockedByLock(vehicleUid, args.User))
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Exit blocked vehicle={ToPrettyString(vehicle)} user={ToPrettyString(args.User)}");
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), args.User, args.User, PopupType.SmallCaution);
             args.Handled = true;
             return;
         }
 
-        _exitLocks.Add(ent.Owner);
+        ent.Comp.PendingExit = true;
 
         var doAfter = new DoAfterArgs(EntityManager, args.User, enter.ExitDoAfter, new VehicleExitDoAfterEvent(), ent.Owner)
         {
@@ -330,7 +320,7 @@ public sealed class RMCVehicleSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
-            _exitLocks.Remove(ent.Owner);
+            ent.Comp.PendingExit = false;
             return;
         }
 
@@ -399,8 +389,8 @@ public sealed class RMCVehicleSystem : EntitySystem
 
     private void OnVehicleEnterDoAfter(Entity<VehicleEnterComponent> ent, ref VehicleEnterDoAfterEvent args)
     {
-        if (_entryLocks.TryGetValue(ent.Owner, out var locks))
-            locks.Remove(args.EntryIndex);
+        if (TryComp(ent.Owner, out RMCVehicleInteriorComponent? interior))
+            interior.EntryLocks.Remove(args.EntryIndex);
 
         if (args.Cancelled || args.Handled)
             return;
@@ -413,23 +403,19 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (!TryComp(ent, out TransformComponent? exitXform) || exitXform.MapID == MapId.Nullspace)
             return false;
 
-        if (!_mapToVehicle.TryGetValue(exitXform.MapID, out var vehicle) || Deleted(vehicle))
-        {
-            _mapToVehicle.Remove(exitXform.MapID);
-            return false;
-        }
-
-        if (!TryComp(vehicle, out VehicleEnterComponent? enter))
+        if (!TryGetVehicleFromInterior(ent.Owner, out var vehicle) || vehicle is not { } vehicleUid)
             return false;
 
-        if (IsExitBlockedByLock(vehicle, user))
+        if (!TryComp(vehicleUid, out VehicleEnterComponent? enter))
+            return false;
+
+        if (IsExitBlockedByLock(vehicleUid, user))
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] TryExit blocked vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)}");
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-enter-locked"), user, user, PopupType.SmallCaution);
             return false;
         }
 
-        var vehicleXform = Transform(vehicle);
+        var vehicleXform = Transform(vehicleUid);
 
         EntityUid? parent = vehicleXform.ParentUid;
         if (parent == null || !parent.Value.IsValid())
@@ -455,16 +441,13 @@ public sealed class RMCVehicleSystem : EntitySystem
         var exitCoords = new EntityCoordinates(parent.Value, position);
         var exitMapCoords = _transform.ToMapCoordinates(exitCoords);
         _rmcTeleporter.HandlePulling(user, exitMapCoords);
-        if (_vehiclePassengers.TryGetValue(vehicle, out var passengers))
-            passengers.Remove(user);
-        if (_vehicleXenos.TryGetValue(vehicle, out var xenos))
-            xenos.Remove(user);
+        UntrackOccupant(user, vehicleUid);
         return true;
     }
 
     private void OnVehicleExitDoAfter(Entity<VehicleExitComponent> ent, ref VehicleExitDoAfterEvent args)
     {
-        _exitLocks.Remove(ent.Owner);
+        ent.Comp.PendingExit = false;
 
         if (args.Cancelled || args.Handled)
             return;
@@ -472,40 +455,127 @@ public sealed class RMCVehicleSystem : EntitySystem
         args.Handled = TryExit(ent, args.User);
     }
 
-    private void EnsureOccupantTracking(EntityUid vehicle, InteriorData interior, out HashSet<EntityUid> passengers, out HashSet<EntityUid> xenos)
+    private void OnOccupantStartup(Entity<RMCVehicleInteriorOccupantComponent> ent, ref ComponentStartup args)
     {
-        if (!_vehiclePassengers.TryGetValue(vehicle, out passengers!) || passengers == null)
-        {
-            passengers = new HashSet<EntityUid>();
-            _vehiclePassengers[vehicle] = passengers;
-        }
-        else
-        {
-            passengers.Clear();
-        }
+        _meta.AddFlag(ent, MetaDataFlags.ExtraTransformEvents);
+    }
 
-        if (!_vehicleXenos.TryGetValue(vehicle, out xenos!) || xenos == null)
-        {
-            xenos = new HashSet<EntityUid>();
-            _vehicleXenos[vehicle] = xenos;
-        }
-        else
-        {
-            xenos.Clear();
-        }
+    private void OnOccupantRemove(Entity<RMCVehicleInteriorOccupantComponent> ent, ref ComponentRemove args)
+    {
+        _meta.RemoveFlag(ent, MetaDataFlags.ExtraTransformEvents);
 
-        if (interior.MapId == MapId.Nullspace)
+        if (ent.Comp.Vehicle.IsValid())
+            UnregisterTrackedOccupant(ent.Comp.Vehicle, ent.Owner, ent.Comp.IsXeno);
+    }
+
+    private void OnOccupantMapChanged(Entity<RMCVehicleInteriorOccupantComponent> ent, ref MapUidChangedEvent args)
+    {
+        if (ent.Comp.Vehicle == EntityUid.Invalid)
             return;
 
-        var query = EntityQueryEnumerator<MobStateComponent, TransformComponent>();
-        while (query.MoveNext(out var uid, out _, out var xform))
+        if (TryComp(ent.Comp.Vehicle, out RMCVehicleInteriorComponent? interior) &&
+            args.NewMapId == interior.MapId)
         {
-            if (xform.MapID != interior.MapId)
+            RegisterTrackedOccupant(ent.Comp.Vehicle, ent.Owner, ent.Comp.IsXeno, interior);
+            return;
+        }
+
+        RemCompDeferred<RMCVehicleInteriorOccupantComponent>(ent.Owner);
+    }
+
+    private void OnOccupantMetaFlagRemoveAttempt(Entity<RMCVehicleInteriorOccupantComponent> ent, ref MetaFlagRemoveAttemptEvent args)
+    {
+        if ((args.ToRemove & MetaDataFlags.ExtraTransformEvents) != 0 &&
+            ent.Comp.LifeStage <= ComponentLifeStage.Running)
+        {
+            args.ToRemove &= ~MetaDataFlags.ExtraTransformEvents;
+        }
+    }
+
+    private void TrackOccupant(EntityUid user, EntityUid vehicle, bool isXeno)
+    {
+        var occupant = EnsureComp<RMCVehicleInteriorOccupantComponent>(user);
+        if (occupant.Vehicle.IsValid() &&
+            occupant.Vehicle != vehicle)
+        {
+            UnregisterTrackedOccupant(occupant.Vehicle, user, occupant.IsXeno);
+        }
+
+        occupant.Vehicle = vehicle;
+        occupant.IsXeno = isXeno;
+        RegisterTrackedOccupant(vehicle, user, isXeno);
+    }
+
+    private void UntrackOccupant(EntityUid user, EntityUid vehicle)
+    {
+        if (!TryComp(user, out RMCVehicleInteriorOccupantComponent? occupant) ||
+            occupant.Vehicle != vehicle)
+        {
+            UnregisterTrackedOccupant(vehicle, user, HasComp<XenoComponent>(user));
+            return;
+        }
+
+        RemComp<RMCVehicleInteriorOccupantComponent>(user);
+    }
+
+    private void RegisterTrackedOccupant(
+        EntityUid vehicle,
+        EntityUid user,
+        bool isXeno,
+        RMCVehicleInteriorComponent? interior = null)
+    {
+        if (!Resolve(vehicle, ref interior, logMissing: false))
+            return;
+
+        if (isXeno)
+        {
+            interior.Passengers.Remove(user);
+            interior.Xenos.Add(user);
+        }
+        else
+        {
+            interior.Xenos.Remove(user);
+            interior.Passengers.Add(user);
+        }
+    }
+
+    private void UnregisterTrackedOccupant(EntityUid vehicle, EntityUid user, bool isXeno)
+    {
+        if (!TryComp(vehicle, out RMCVehicleInteriorComponent? interior))
+            return;
+
+        if (isXeno)
+            interior.Xenos.Remove(user);
+        else
+            interior.Passengers.Remove(user);
+    }
+
+    private void PruneTrackedOccupants(EntityUid vehicle, RMCVehicleInteriorComponent interior)
+    {
+        foreach (var passenger in new List<EntityUid>(interior.Passengers))
+        {
+            if (TryComp(passenger, out RMCVehicleInteriorOccupantComponent? occupant) &&
+                occupant.Vehicle == vehicle &&
+                !occupant.IsXeno &&
+                _transform.GetMapId(passenger) == interior.MapId)
+            {
                 continue;
-            if (HasComp<XenoComponent>(uid))
-                xenos.Add(uid);
-            else
-                passengers.Add(uid);
+            }
+
+            interior.Passengers.Remove(passenger);
+        }
+
+        foreach (var xeno in new List<EntityUid>(interior.Xenos))
+        {
+            if (TryComp(xeno, out RMCVehicleInteriorOccupantComponent? occupant) &&
+                occupant.Vehicle == vehicle &&
+                occupant.IsXeno &&
+                _transform.GetMapId(xeno) == interior.MapId)
+            {
+                continue;
+            }
+
+            interior.Xenos.Remove(xeno);
         }
     }
 
@@ -608,9 +678,7 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (!TryComp(vehicle, out RMCVehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
             return false;
 
-        var bypass = CanBypassLockWithDestroyedFrame(vehicle, user);
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Entry lock check vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)} locked={vehicleLock.Locked} bypass={bypass}");
-        return !bypass;
+        return !CanBypassLockWithDestroyedFrame(vehicle, user);
     }
 
     private bool IsExitBlockedByLock(EntityUid vehicle, EntityUid user)
@@ -618,41 +686,35 @@ public sealed class RMCVehicleSystem : EntitySystem
         if (!TryComp(vehicle, out RMCVehicleLockComponent? vehicleLock) || !vehicleLock.Locked)
             return false;
 
-        var bypass = CanBypassLockWithDestroyedFrame(vehicle, user);
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Exit lock check vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)} locked={vehicleLock.Locked} bypass={bypass}");
-        return !bypass;
+        return !CanBypassLockWithDestroyedFrame(vehicle, user);
     }
 
     private bool CanBypassLockWithDestroyedFrame(EntityUid vehicle, EntityUid user)
     {
         if (!HasComp<XenoComponent>(user))
-        {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Bypass denied vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)} reason=not-xeno");
             return false;
-        }
 
         if (!TryComp(vehicle, out RMCHardpointIntegrityComponent? frameIntegrity))
-        {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Bypass denied vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)} reason=no-frame-integrity");
             return false;
-        }
 
-        var bypass = frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f;
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Bypass eval vehicle={ToPrettyString(vehicle)} user={ToPrettyString(user)} bypassOnZero={frameIntegrity.BypassEntryOnZero} integrity={frameIntegrity.Integrity} bypass={bypass}");
-        return bypass;
+        return frameIntegrity.BypassEntryOnZero && frameIntegrity.Integrity <= 0f;
     }
 
     public bool TryGetVehicleFromInterior(EntityUid interiorEntity, out EntityUid? vehicle)
     {
         vehicle = null;
         var mapId = _transform.GetMapId(interiorEntity);
-        if (mapId == MapId.Nullspace)
+        if (mapId == MapId.Nullspace || !_mapManager.MapExists(mapId))
             return false;
 
-        if (!_mapToVehicle.TryGetValue(mapId, out var vehicleUid))
+        var mapUid = _mapManager.GetMapEntityId(mapId);
+        if (!TryComp(mapUid, out RMCVehicleInteriorLinkComponent? link) ||
+            Deleted(link.Vehicle))
+        {
             return false;
+        }
 
-        vehicle = vehicleUid;
+        vehicle = link.Vehicle;
         return true;
     }
 
@@ -682,7 +744,7 @@ public sealed class RMCVehicleSystem : EntitySystem
     public bool TryGetInteriorMapId(EntityUid vehicle, out MapId mapId)
     {
         mapId = MapId.Nullspace;
-        if (!_vehicleInteriors.TryGetValue(vehicle, out var interior))
+        if (!TryComp(vehicle, out RMCVehicleInteriorComponent? interior))
             return false;
 
         mapId = interior.MapId;

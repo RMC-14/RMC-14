@@ -38,10 +38,9 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
     [Dependency] private readonly SharedSentryTargetingSystem _targeting = default!;
     [Dependency] private readonly SharedGunSystem _guns = default!;
     [Dependency] private readonly VehicleTurretSystem _turret = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly INetManager _net = default!;
 
@@ -398,13 +397,7 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
                 continue;
             }
 
-            if (!TryComp(vehicle, out RMCHardpointSlotsComponent? hardpoints) ||
-                !TryComp(vehicle, out ItemSlotsComponent? itemSlots))
-            {
-                continue;
-            }
-
-            if (!TryFindAutoGun(vehicle, hardpoints, itemSlots, out var gunUid, out var gunComp))
+            if (!TryFindAutoGun(vehicle, out var gunUid, out var gunComp))
                 continue;
 
             if (deployable.AutoTarget != null &&
@@ -455,12 +448,7 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
         }
     }
 
-    private bool TryFindAutoGun(
-        EntityUid vehicle,
-        RMCHardpointSlotsComponent hardpoints,
-        ItemSlotsComponent itemSlots,
-        out EntityUid gunUid,
-        out GunComponent gunComp)
+    private bool TryFindAutoGun(EntityUid vehicle, out EntityUid gunUid, out GunComponent gunComp)
     {
         gunUid = default;
         gunComp = default!;
@@ -468,15 +456,10 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
         EntityUid? fallbackGun = null;
         GunComponent? fallbackComp = null;
 
-        foreach (var slot in hardpoints.Slots)
+        foreach (var mountedSlot in _topology.GetMountedSlots(vehicle))
         {
-            if (string.IsNullOrWhiteSpace(slot.Id))
+            if (mountedSlot.Item is not { } installed)
                 continue;
-
-            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            var installed = itemSlot.Item!.Value;
 
             if (TryGetGunCandidate(installed, out var directGun, out var directComp))
             {
@@ -489,38 +472,6 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
 
                 fallbackGun ??= directGun;
                 fallbackComp ??= directComp;
-            }
-
-            if (!TryComp(installed, out RMCHardpointSlotsComponent? turretSlots) ||
-                !TryComp(installed, out ItemSlotsComponent? turretItemSlots))
-            {
-                continue;
-            }
-
-            foreach (var turretSlot in turretSlots.Slots)
-            {
-                if (string.IsNullOrWhiteSpace(turretSlot.Id))
-                    continue;
-
-                if (!_itemSlots.TryGetSlot(installed, turretSlot.Id, out var turretItemSlot, turretItemSlots) ||
-                    !turretItemSlot.HasItem)
-                {
-                    continue;
-                }
-
-                var child = turretItemSlot.Item!.Value;
-                if (!TryGetGunCandidate(child, out var childGun, out var childComp))
-                    continue;
-
-                if (HasAmmo(childGun))
-                {
-                    gunUid = childGun;
-                    gunComp = childComp;
-                    return true;
-                }
-
-                fallbackGun ??= childGun;
-                fallbackComp ??= childComp;
             }
         }
 
@@ -599,51 +550,12 @@ public sealed class RMCVehicleDeploySystem : EntitySystem
         RMCHardpointSlotsComponent? hardpoints = null,
         ItemSlotsComponent? itemSlots = null)
     {
-        turretUid = default;
-
-        if (!Resolve(vehicle, ref hardpoints, ref itemSlots, logMissing: false))
-            return false;
-
-        foreach (var slot in hardpoints.Slots)
-        {
-            if (string.IsNullOrWhiteSpace(slot.Id))
-                continue;
-
-            if (!_itemSlots.TryGetSlot(vehicle, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
-                continue;
-
-            var installed = itemSlot.Item!.Value;
-            if (!HasComp<VehicleTurretComponent>(installed))
-                continue;
-
-            if (HasComp<VehicleTurretAttachmentComponent>(installed))
-                continue;
-
-            turretUid = installed;
-            return true;
-        }
-
-        return false;
+        return _topology.TryGetPrimaryTurret(vehicle, out turretUid, hardpoints, itemSlots);
     }
 
     private bool TryGetVehicleFromContained(EntityUid contained, out EntityUid vehicle)
     {
-        vehicle = default;
-        var current = contained;
-
-        while (_container.TryGetContainingContainer((current, null), out var container))
-        {
-            var owner = container.Owner;
-            if (HasComp<VehicleComponent>(owner))
-            {
-                vehicle = owner;
-                return true;
-            }
-
-            current = owner;
-        }
-
-        return false;
+        return _topology.TryGetVehicle(contained, out vehicle);
     }
 
     private bool IsValidAutoTarget(EntityUid vehicle, RMCVehicleDeployableComponent deployable, EntityUid target, float range)

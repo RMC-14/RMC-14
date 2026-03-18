@@ -16,6 +16,7 @@ public sealed class RMCVehicleWeaponsUiEntry
 {
     public readonly string SlotId;
     public readonly string HardpointType;
+    public readonly NetEntity? MountedEntity;
     public readonly string? InstalledName;
     public readonly NetEntity? InstalledEntity;
     public readonly bool HasItem;
@@ -40,6 +41,7 @@ public sealed class RMCVehicleWeaponsUiEntry
     public RMCVehicleWeaponsUiEntry(
         string slotId,
         string hardpointType,
+        NetEntity? mountedEntity,
         string? installedName,
         NetEntity? installedEntity,
         bool hasItem,
@@ -63,6 +65,7 @@ public sealed class RMCVehicleWeaponsUiEntry
     {
         SlotId = slotId;
         HardpointType = hardpointType;
+        MountedEntity = mountedEntity;
         InstalledName = installedName;
         InstalledEntity = installedEntity;
         HasItem = hasItem;
@@ -116,11 +119,11 @@ public sealed class RMCVehicleWeaponsUiState : BoundUserInterfaceState
 [Serializable, NetSerializable]
 public sealed class RMCVehicleWeaponsSelectMessage : BoundUserInterfaceMessage
 {
-    public readonly string SlotId;
+    public readonly NetEntity? MountedEntity;
 
-    public RMCVehicleWeaponsSelectMessage(string slotId)
+    public RMCVehicleWeaponsSelectMessage(NetEntity? mountedEntity)
     {
-        SlotId = slotId;
+        MountedEntity = mountedEntity;
     }
 }
 

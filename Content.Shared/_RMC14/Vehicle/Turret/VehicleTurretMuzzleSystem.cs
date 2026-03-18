@@ -1,9 +1,7 @@
 using System.Numerics;
 using Content.Shared._RMC14.Weapons.Ranged;
-using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
-using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Maths;
 
@@ -11,7 +9,7 @@ namespace Content.Shared._RMC14.Vehicle;
 
 public sealed class VehicleTurretMuzzleSystem : EntitySystem
 {
-    [Dependency] private readonly SharedContainerSystem _container = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -118,22 +116,14 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
     {
         parentUid = default;
         parentTurret = default!;
-        var current = turretUid;
-
-        while (_container.TryGetContainingContainer((current, null), out var container))
+        if (!_topology.TryGetParentTurret(turretUid, out parentUid) ||
+            !TryComp(parentUid, out VehicleTurretComponent? resolvedTurret))
         {
-            var owner = container.Owner;
-            if (TryComp(owner, out VehicleTurretComponent? turret))
-            {
-                parentUid = owner;
-                parentTurret = turret;
-                return true;
-            }
-
-            current = owner;
+            return false;
         }
 
-        return false;
+        parentTurret = resolvedTurret;
+        return true;
     }
 
 }

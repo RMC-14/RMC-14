@@ -2,7 +2,6 @@ using Content.Shared.Actions;
 using Content.Shared.Popups;
 using Content.Shared.Vehicle.Components;
 using Robust.Shared.GameObjects;
-using Robust.Shared.Log;
 using Robust.Shared.Localization;
 using Robust.Shared.Network;
 
@@ -102,20 +101,17 @@ public sealed class RMCVehicleLockSystem : EntitySystem
 
         if (ent.Comp.Vehicle is not { } vehicle || Deleted(vehicle))
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Lock action ignored user={ToPrettyString(ent.Owner)} reason=no-vehicle");
             return;
         }
 
         if (!TryComp(vehicle, out VehicleComponent? vehicleComp) || vehicleComp.Operator != ent.Owner)
         {
-            Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Lock action denied user={ToPrettyString(ent.Owner)} vehicle={ToPrettyString(vehicle)} reason=not-operator");
             _popup.PopupEntity(Loc.GetString("rmc-vehicle-lock-not-driver"), ent.Owner, ent.Owner, PopupType.SmallCaution);
             return;
         }
 
         var lockComp = EnsureComp<RMCVehicleLockComponent>(vehicle);
         lockComp.Locked = !lockComp.Locked;
-        Logger.InfoS("rmc.vehicle.lock", $"[VehicleLockDebug] Lock toggled user={ToPrettyString(ent.Owner)} vehicle={ToPrettyString(vehicle)} locked={lockComp.Locked}");
 
         if (ent.Comp.Action is { } actionUid)
             _actions.SetToggled(actionUid, lockComp.Locked);

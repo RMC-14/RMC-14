@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Vehicle;
 public sealed partial class RMCVehicleHardpointActionComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string SlotId = string.Empty;
+    public EntityUid? MountedWeapon;
 
     [DataField, AutoNetworkedField]
     public int SortOrder;

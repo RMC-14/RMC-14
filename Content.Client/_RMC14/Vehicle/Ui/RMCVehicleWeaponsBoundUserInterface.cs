@@ -21,7 +21,7 @@ public sealed class RMCVehicleWeaponsBoundUserInterface : BoundUserInterface
         _menu.OnClose += Close;
         _menu.Title = string.Empty;
 
-        _menu.OnSelect += slotId => SendMessage(new RMCVehicleWeaponsSelectMessage(slotId));
+        _menu.OnSelect += mountedEntity => SendMessage(new RMCVehicleWeaponsSelectMessage(mountedEntity));
         _menu.OnToggleStabilization += enabled => SendMessage(new RMCVehicleWeaponsStabilizationMessage(enabled));
         _menu.OnToggleAutoTurret += enabled => SendMessage(new RMCVehicleWeaponsAutoModeMessage(enabled));
         _menu.OpenCenteredAt(new Vector2(0.7f, 0.05f));

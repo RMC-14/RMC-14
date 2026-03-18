@@ -19,8 +19,8 @@ public sealed class VehicleTurretSystem : EntitySystem
     private const float PixelsPerMeter = 32f;
     private const float FireAlignmentToleranceDegrees = 2f;
 
-    [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
 
@@ -354,22 +354,7 @@ public sealed class VehicleTurretSystem : EntitySystem
 
     private bool TryGetVehicle(EntityUid turretUid, out EntityUid vehicle)
     {
-        vehicle = default;
-        var current = turretUid;
-
-        while (_container.TryGetContainingContainer((current, null), out var container))
-        {
-            var owner = container.Owner;
-            if (HasComp<VehicleComponent>(owner))
-            {
-                vehicle = owner;
-                return true;
-            }
-
-            current = owner;
-        }
-
-        return false;
+        return _topology.TryGetVehicle(turretUid, out vehicle);
     }
 
     public bool TryResolveRotationTarget(
@@ -413,22 +398,15 @@ public sealed class VehicleTurretSystem : EntitySystem
     {
         parentUid = default;
         parentTurret = default!;
-        var current = turretUid;
 
-        while (_container.TryGetContainingContainer((current, null), out var container))
+        if (!_topology.TryGetParentTurret(turretUid, out parentUid) ||
+            !TryComp(parentUid, out VehicleTurretComponent? resolvedTurret))
         {
-            var owner = container.Owner;
-            if (TryComp(owner, out VehicleTurretComponent? turret))
-            {
-                parentUid = owner;
-                parentTurret = turret;
-                return true;
-            }
-
-            current = owner;
+            return false;
         }
 
-        return false;
+        parentTurret = resolvedTurret;
+        return true;
     }
 
     public bool TryAimAtTarget(EntityUid turretUid, EntityUid target, out EntityCoordinates targetCoords)

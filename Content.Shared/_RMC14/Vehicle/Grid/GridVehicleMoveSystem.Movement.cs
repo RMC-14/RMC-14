@@ -55,10 +55,10 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
 
         if (!hasInput)
         {
-            if (mover.CurrentSpeed > 0f)
-                mover.CurrentSpeed = MathF.Max(0f, mover.CurrentSpeed - mover.Deceleration * frameTime);
-            else if (mover.CurrentSpeed < 0f)
-                mover.CurrentSpeed = MathF.Min(0f, mover.CurrentSpeed + mover.Deceleration * frameTime);
+            mover.CurrentSpeed = GridVehicleMotionSimulator.StepIdleSpeed(
+                mover.CurrentSpeed,
+                mover.Deceleration,
+                frameTime);
 
             var tile = GetTile(grid, gridComp, mover.Position);
             mover.CurrentTile = tile;
@@ -109,67 +109,48 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (TryComp<RMCVehicleAccelerationModifierComponent>(uid, out var accelMod))
             accelModifier = MathF.Max(0.05f, accelMod.AccelerationMultiplier);
 
-        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-        var toTarget = targetCenter - mover.Position;
-        var distToTarget = toTarget.Length();
-
         var hasInput = inputDir != Vector2i.Zero;
-        var hasInputForSpeed = hasInput || mover.IsCommittedToMove;
-        float targetSpeed;
-        float accel;
+        mover.CurrentSpeed = GridVehicleMotionSimulator.StepPushSpeed(
+            mover.CurrentSpeed,
+            maxSpeed,
+            mover.Acceleration * accelModifier,
+            mover.Deceleration,
+            hasInput,
+            mover.IsCommittedToMove,
+            frameTime);
 
-        if (!hasInputForSpeed)
-        {
-            targetSpeed = 0f;
-            accel = mover.Deceleration;
-        }
-        else
-        {
-            targetSpeed = maxSpeed;
-            accel = mover.Acceleration * accelModifier;
-        }
-
-        if (mover.CurrentSpeed < targetSpeed)
-            mover.CurrentSpeed = MathF.Min(mover.CurrentSpeed + accel * frameTime, targetSpeed);
-        else if (mover.CurrentSpeed > targetSpeed)
-            mover.CurrentSpeed = MathF.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
-
-        var speedMag = MathF.Abs(mover.CurrentSpeed);
-        var remaining = speedMag * frameTime;
+        var remaining = MathF.Abs(mover.CurrentSpeed) * frameTime;
         var steps = 0;
 
         while (true)
         {
-            if (distToTarget <= 0.0001f || remaining >= distToTarget)
+            var advance = GridVehicleMotionSimulator.AdvanceToTarget(
+                mover.Position,
+                mover.CurrentTile,
+                mover.TargetTile,
+                remaining);
+
+            mover.Position = advance.Position;
+            mover.CurrentTile = advance.CurrentTile;
+            remaining = advance.RemainingDistance;
+
+            if (!advance.ReachedTarget)
+                break;
+
+            if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
             {
-                mover.Position = targetCenter;
-                mover.CurrentTile = mover.TargetTile;
-                remaining -= distToTarget;
-
-                if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
-                {
-                    mover.IsCommittedToMove = false;
-                    mover.IsPushMove = false;
-                    mover.CurrentSpeed = 0f;
-                    break;
-                }
-
-                CommitPushTile(uid, mover, grid, gridComp, inputDir);
-                if (!mover.IsCommittedToMove)
-                    break;
-
-                if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
-                    break;
-
-                targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-                toTarget = targetCenter - mover.Position;
-                distToTarget = toTarget.Length();
-                continue;
+                mover.IsCommittedToMove = false;
+                mover.IsPushMove = false;
+                mover.CurrentSpeed = 0f;
+                break;
             }
 
-            var dir = toTarget / distToTarget;
-            mover.Position += dir * remaining;
-            break;
+            CommitPushTile(uid, mover, grid, gridComp, inputDir);
+            if (!mover.IsCommittedToMove)
+                break;
+
+            if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
+                break;
         }
 
         mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
@@ -233,102 +214,60 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
         if (TryComp<RMCVehicleAccelerationModifierComponent>(uid, out var accelMod))
             accelModifier = MathF.Max(0.05f, accelMod.AccelerationMultiplier);
 
-        var targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-        var toTarget = targetCenter - mover.Position;
-        var distToTarget = toTarget.Length();
-
         var hasInput = inputDir != Vector2i.Zero;
-        var hasInputForSpeed = hasInput || mover.IsCommittedToMove;
-        var facing = mover.CurrentDirection;
-        var reversing = hasInput && facing != Vector2i.Zero && inputDir == -facing;
+        var speedResult = GridVehicleMotionSimulator.StepDriveSpeed(
+            mover.CurrentSpeed,
+            new GridVehicleMotionSimulator.DriveProfile(
+                maxSpeed,
+                maxReverseSpeed,
+                mover.Acceleration * accelModifier,
+                mover.ReverseAcceleration * accelModifier,
+                mover.Deceleration),
+            mover.CurrentDirection,
+            inputDir,
+            hasInput,
+            mover.IsCommittedToMove,
+            frameTime);
 
-        float targetSpeed;
-        float accel;
-
-        if (!hasInputForSpeed)
-        {
-            targetSpeed = 0f;
-            accel = mover.Deceleration;
-        }
-        else if (reversing)
-        {
-            if (mover.CurrentSpeed > 0f)
-            {
-                targetSpeed = 0f;
-                accel = mover.Deceleration;
-            }
-            else
-            {
-                targetSpeed = -maxReverseSpeed;
-                accel = mover.ReverseAcceleration * accelModifier;
-            }
-        }
-        else
-        {
-            if (mover.CurrentSpeed < 0f && hasInputForSpeed)
-            {
-                targetSpeed = 0f;
-                accel = mover.Deceleration;
-            }
-            else
-            {
-                targetSpeed = maxSpeed;
-                accel = mover.Acceleration * accelModifier;
-            }
-        }
-
-        if (mover.CurrentSpeed < targetSpeed)
-            mover.CurrentSpeed = MathF.Min(mover.CurrentSpeed + accel * frameTime, targetSpeed);
-        else if (mover.CurrentSpeed > targetSpeed)
-            mover.CurrentSpeed = MathF.Max(mover.CurrentSpeed - mover.Deceleration * frameTime, targetSpeed);
-
-        var speedMag = MathF.Abs(mover.CurrentSpeed);
-        var remaining = speedMag * frameTime;
+        mover.CurrentSpeed = speedResult.CurrentSpeed;
+        var remaining = MathF.Abs(mover.CurrentSpeed) * frameTime;
         var steps = 0;
 
         while (true)
         {
-            if (distToTarget <= 0.0001f || remaining >= distToTarget)
+            var advance = GridVehicleMotionSimulator.AdvanceToTarget(
+                mover.Position,
+                mover.CurrentTile,
+                mover.TargetTile,
+                remaining);
+
+            mover.Position = advance.Position;
+            mover.CurrentTile = advance.CurrentTile;
+            remaining = advance.RemainingDistance;
+
+            if (!advance.ReachedTarget)
+                break;
+
+            if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
             {
-                mover.Position = targetCenter;
-                mover.CurrentTile = mover.TargetTile;
-                remaining -= distToTarget;
-
-                if (!hasInput || MathF.Abs(mover.CurrentSpeed) <= 0.0001f)
-                {
-                    mover.IsCommittedToMove = false;
-                    mover.CurrentSpeed = 0f;
-                    break;
-                }
-
-                var changingDirection =
-                    MathF.Abs(mover.CurrentSpeed) > 0.01f &&
-                    ((reversing && mover.CurrentSpeed > 0f) ||
-                     (!reversing && mover.CurrentSpeed < 0f));
-
-                if (changingDirection)
-                {
-                    mover.IsCommittedToMove = false;
-                    mover.CurrentSpeed = 0f;
-                    break;
-                }
-
-                CommitNextTile(uid, mover, grid, gridComp, inputDir);
-                if (!mover.IsCommittedToMove)
-                    break;
-
-                if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
-                    break;
-
-                targetCenter = new Vector2(mover.TargetTile.X + 0.5f, mover.TargetTile.Y + 0.5f);
-                toTarget = targetCenter - mover.Position;
-                distToTarget = toTarget.Length();
-                continue;
+                mover.IsCommittedToMove = false;
+                mover.CurrentSpeed = 0f;
+                break;
             }
 
-            var dir = toTarget / distToTarget;
-            mover.Position += dir * remaining;
-            break;
+            if (speedResult.ChangingDirection)
+            {
+                mover.IsCommittedToMove = false;
+                mover.CurrentSpeed = 0f;
+                break;
+            }
+
+            CommitNextTile(uid, mover, grid, gridComp, inputDir);
+            if (!mover.IsCommittedToMove)
+                break;
+
+            if (++steps >= MaxTileStepsPerFrame || remaining <= 0f)
+                break;
         }
         mover.IsMoving = MathF.Abs(mover.CurrentSpeed) > 0.01f;
         if (mover.IsMoving)
