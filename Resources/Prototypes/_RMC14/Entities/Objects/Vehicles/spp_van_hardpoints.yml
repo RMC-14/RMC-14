@@ -1,0 +1,39 @@
+- type: entity
+  parent: RMCVehicleTankM56Cupola
+  id: RMCVehicleSPPVanTurret
+  name: SPP van turret
+  description: A cupola-mounted weapon fitted to an SPP van.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    state: t60p3m_0
+  - type: RMCHardpointItem
+    hardpointType: Secondary
+    vehicleFamily: Van
+    slotType: Launcher
+    damageMultiplier: 0.0
+  - type: VehicleTurret
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
+    overlayState: t60p3m_0
+  - type: UserIFF
+    factions:
+    - FactionSPP
+  - type: RMCHardpointVisual
+    vehicleState: t60p3m_0
+
+- type: entity
+  parent: RMCVanWheel
+  id: RMCVehicleSPPVanWheel
+  name: SPP van wheel
+  description: A reinforced wheel for SPP vans.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/sppvan.rsi
+    state: spp_tires

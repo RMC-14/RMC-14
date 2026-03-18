@@ -1,0 +1,38 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "back_2"
+        },
+        {
+            "name": "back_1"
+        },
+        {
+            "name": "viewport_simple"
+        },
+        {
+            "name": "interior_door"
+        },
+        {
+            "name": "exterior_door_unique"
+        },
+        {
+            "name": "viewport_simple_front"
+        },
+        {
+            "name": "weapons_loader"
+        },
+        {
+            "name": "small_storage"
+        },
+        {
+            "name": "small_storage_open"
+        }
+    ]
+}

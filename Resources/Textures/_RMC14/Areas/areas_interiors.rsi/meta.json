@@ -1,32 +1,53 @@
 {
-  "version": 1,
-  "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cc60c815011c0e55147dbdc7d160f890377275df/icons/turf/areas_interiors.dmi",
-  "size": {
-    "x": 32,
-    "y": 32
-  },
-  "states": [
-    {
-      "name": "tank"
-    },
-    {
-      "name": "apc"
-    },
-    {
-      "name": "apc_med"
-    },
-    {
-      "name": "apc_cmd"
-    },
-    {
-      "name": "van"
-    },
-    {
-      "name": "arc"
-    },
-    {
-      "name": "interior"
-    }
-  ]
+    "version":  1,
+    "license":  "CC-BY-SA-3.0",
+    "copyright":  "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/cc60c815011c0e55147dbdc7d160f890377275df/icons/turf/areas_interiors.dmi",
+    "size":  {
+                 "x":  32,
+                 "y":  32
+             },
+    "states":  [
+                   {
+                       "name":  "tank"
+                   },
+                   {
+                       "name":  "apc"
+                   },
+                   {
+                       "name":  "apc_med"
+                   },
+                   {
+                       "name":  "apc_cmd"
+                   },
+                   {
+                       "name":  "van"
+                   },
+                   {
+                       "name":  "arc"
+                   },
+                   {
+                       "name":  "interior"
+                   },
+                   {
+                       "name":  "spp_apc"
+                   },
+                   {
+                       "name":  "spp_tank"
+                   },
+                   {
+                       "name":  "spp_van"
+                   },
+                   {
+                       "name":  "spp_vant"
+                   },
+                   {
+                       "name":  "spp_van_medical"
+                   },
+                   {
+                       "name":  "spp_van_logistics"
+                   },
+                   {
+                       "name":  "spp_van_prisoner"
+                   }
+               ]
 }

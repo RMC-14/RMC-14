@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "t60p3m"
+        },
+        {
+            "name": "p17702"
+        },
+        {
+            "name": "railgun"
+        },
+        {
+            "name": "turret_slauncher"
+        },
+        {
+            "name": "turret_slauncher_e"
+        },
+        {
+            "name": "turret_slauncher_installed"
+        },
+        {
+            "name": "hj35tlauncher"
+        },
+        {
+            "name": "reactive_armor"
+        }
+    ]
+}

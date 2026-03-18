@@ -1,0 +1,50 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "locker"
+        },
+        {
+            "name": "locker_open"
+        },
+        {
+            "name": "exit_door"
+        },
+        {
+            "name": "door_front"
+        },
+        {
+            "name": "door_back"
+        },
+        {
+            "name": "door_rear_center"
+        },
+        {
+            "name": "weapons_loader"
+        },
+        {
+            "name": "Weaponconsole"
+        },
+        {
+            "name": "Weaponconsole0"
+        },
+        {
+            "name": "Weaponconsoleb"
+        },
+        {
+            "name": "Driveconsole"
+        },
+        {
+            "name": "Driveconsole0"
+        },
+        {
+            "name": "Driveconsoleb"
+        }
+    ]
+}

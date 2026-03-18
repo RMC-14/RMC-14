@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "apc_autocannon"
+        },
+        {
+            "name": "apc_minigun"
+        },
+        {
+            "name": "hj35launcher"
+        },
+        {
+            "name": "spp_flare_launcher"
+        },
+        {
+            "name": "spp_flare_launcher_installed"
+        },
+        {
+            "name": "spp_tires"
+        }
+    ]
+}

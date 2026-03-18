@@ -1,0 +1,17 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 192,
+        "y": 128
+    },
+    "states": [
+        {
+            "name": "spptank_chassis"
+        },
+        {
+            "name": "spptank_chassis1"
+        }
+    ]
+}

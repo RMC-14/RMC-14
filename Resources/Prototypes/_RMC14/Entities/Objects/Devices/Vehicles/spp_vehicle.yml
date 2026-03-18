@@ -1,0 +1,290 @@
+- type: entity
+  parent: RMCVehicleVan
+  id: RMCVehicleSPPVan
+  name: SPP van
+  description: A rugged transport van painted in SPP colors.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    layers:
+    - map: [ base ]
+      state: sppvan_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleSPPVan
+  id: RMCVehicleSPPVanArmed
+  name: SPP van (armed)
+  description: An SPP van fitted with a roof-mounted weapon.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    layers:
+    - map: [ base ]
+      state: sppvant_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: RMCVehicleHardpointVisuals
+  - type: ItemSlots
+    slots:
+      secondary:
+        startingItem: RMCVehicleSPPVanTurret
+        whitelist:
+          components:
+          - RMCHardpointItem
+  - type: RMCHardpointSlots
+    vehicleFamily: Van
+    slots:
+    - id: secondary
+      hardpointType: Secondary
+      slotType: Launcher
+      visualLayer: secondary
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Wheel
+      insertDelay: 1.5
+      whitelist:
+        components:
+        - RMCVehicleWheelItem
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleSPPVan
+  id: RMCVehicleSPPVanMedical
+  name: SPP van (medical)
+  description: An SPP van marked for casualty evacuation and field treatment.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: sppvan_medical
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleSPPVan
+  id: RMCVehicleSPPVanPrisoner
+  name: SPP van (prisoner)
+  description: An SPP van refitted for prisoner transport.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: sppvan_prisoner
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1,-1
+      radius: 0.6
+      interiorCoords: 3.5,-0.34
+    - offset: -1,-1
+      radius: 0.6
+      interiorCoords: 3.25,-1
+    - offset: 0,2
+      radius: 0.75
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleBoxVan
+  id: RMCVehicleSPPVanLogistics
+  name: SPP van (logistics)
+  description: An SPP logistics van fitted with an enlarged cargo body.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan_logistics.rsi
+    layers:
+    - map: [ base ]
+      state: sppvan_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: -0.5,0
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: -0.5,0
+    - offset: 0,2
+      radius: 0.8
+      interiorCoords: -3,1.5
+
+- type: entity
+  parent: RMCVehicleAPC
+  id: RMCVehicleSPPAPC
+  name: SPP armored personnel carrier
+  description: An armored personnel carrier configured for SPP forces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppapc.rsi
+    layers:
+    - map: [ base ]
+      state: sppapc_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARIES
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleTank
+  id: RMCVehicleSPPTank
+  name: SPP tank
+  description: A heavy SPP battle tank.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/spptank.rsi
+    layers:
+    - map: [ base ]
+      state: tank_base
+    - map: [ armor ]
+      state: ARMOR
+      visible: false
+    - map: [ primary ]
+      state: tank_turret_0
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: ItemSlots
+    slots:
+      primary:
+        startingItem: RMCVehicleSPPTankTurret
+        whitelist:
+          components:
+          - RMCHardpointItem
+      wheel-1:
+        startingItem: RMCVehicleTankTreads
+        whitelist:
+          components:
+          - RMCVehicleWheelItem
+      wheel-2:
+        startingItem: RMCVehicleTankTires
+        whitelist:
+          components:
+          - RMCVehicleWheelItem
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,2
+      radius: 1
+      interiorCoords: 0.5,-1
