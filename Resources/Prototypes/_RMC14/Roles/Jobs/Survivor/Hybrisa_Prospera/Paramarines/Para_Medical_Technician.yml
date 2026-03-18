@@ -1,0 +1,64 @@
+- type: job
+  parent: RMCSurvivorParaBase
+  id: RMCSurvivorParaMedicalTechnician
+  name: rmc-job-name-para-medic
+  ranks:
+    RMCRankParaLanceCorporal: [ ]
+  startingGear: RMCGearParaMedicalTechnician
+  icon: RMCJobIconParaMedicalTechnican
+  spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+      - type: NpcFactionMember
+        factions:
+          - RoyalMarines
+          - TSE
+      - type: RMCAllowSuitStorage
+      - type: IntelRescueSurvivorObjective
+      - type: MotionDetectorTracked
+      - type: Skills
+        preset: RMCSkillPresetParaMedic
+      - type: TacticalMapIcon
+        icon:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: rmc_medic
+        background:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: background_para
+      - type: AssignSquad
+        whitelist:
+          tags:
+            - SquadPara
+      - type: JobPrefix
+        prefix: rmc-job-prefix-paramarine
+  hidden: true
+
+- type: startingGear
+  parent: RMCGearParaBase
+  id: RMCGearParaMedicalTechnician
+  equipment:
+    jumpsuit: RMCJumpsuitMarineParaPDW90
+    back: RMCBackpackRCMMedicPVPFilledParaMedic
+    eyes: RMCGlassesMedicalHUDGlasses
+    belt: RMCMedicalL75RCMFillPara
+    outerClothing: RMCArmorParaVest
+    suitstorage: RMCWeaponSMGPDW90TSE
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointParaMedicalTechnician
+  name: paramarine combat medical technician spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParaMedicalTechnician
+  - type: Sprite
+    state: surv_tse
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParaMedicalTechnican
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_medic
+    
