@@ -75,6 +75,7 @@
   - type: SentryUpgradeItem
 
 - type: entity
+  abstract: true
   parent: RMCBaseSentry
   id: RMCSentryConstruct
   name: UN 571-C sentry gun
@@ -114,6 +115,12 @@
   components:
   - type: Item
     size: Normal
+  - type: RMCDeployableEquipment
+    placeableBlacklist:
+      components:
+      - WeaponMount
+      - RMCDeployableEquipment
+    placeableCheckRange: 1
 
 - type: Tag
   id: RMCSentry
