@@ -331,9 +331,21 @@ rmc-job-name-survivor-kutjevo-trucker = Kutjevo Heavy Vehicle Operator
 
 # Kutjevo Sun Riders Survs
 
-rmc-job-greeting-sr = You are a marine hailing from Sun Riders platoon from the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to an ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians to the xenonid horde, only the battered remnants remain...
+rmc-job-greeting-sr = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team  to the xenonid horde, only the battered remnants remain...
 
-  One of you brings up a secondary evac site at the Hydroelectric Dam. Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
+  One of you brings up a [bold]secondary evac site at the Hydroelectric Dam.[/bold] Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
+
+  You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
+
+  You are NOT aware of the marines or their intentions.
+
+  You are [bold][color=#51A16C][font size=16]NON-HOSTILE to the UNMC![/font][/color][/bold]
+
+rmc-job-greeting-sr-spec = You are a marine hailing from Sun Riders platoon of the UNS Endeavour, stuck on the planet after your team was wiped out while fighting a large CLF cell embedded inside the colony. The Endeavour has mysteriously ceased communications with your Section Sergeant, and with the majority of your unit succumbing to a militia ambush inside the caves before the xenonids even attacked, you retreated to Evac Point Sierra and have spent your days using your skill, wits, and remaining supplies to stem the tide of the outbreak. However, after losing the last few remaining civilians and the rest of the planet's security team to the xenonid horde, only the battered remnants remain...
+
+  One of you brings up a [bold]secondary evac site at the Hydroelectric Dam.[/bold] Is it possible there are still supplies or a fueled ship left there? You must look if you hope to survive.
+
+  You remember ditching your thermal cloak to escape an oncoming horde at a small holdout east of the bioplant, inside the cave system. It would be risky to check, but it's likely still there.
 
   You are fully aware of the xenonid threat and are able to use this knowledge as you see fit.
 

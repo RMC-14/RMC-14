@@ -3,6 +3,7 @@
   id: RMCSurvivorSunRidersSquadSpecialist
   name: rmc-job-name-sr-squad-specialist
   icon: "CMJobIconWeaponsSpecialist"
+  greeting: rmc-job-greeting-sr-spec
   ranks:
     RMCRankCorporal: []
   spawnMenuRoleName: Sun Riders Squad Specialist (Survivor)

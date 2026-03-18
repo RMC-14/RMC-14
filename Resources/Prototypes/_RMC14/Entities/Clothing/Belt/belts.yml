@@ -1396,6 +1396,17 @@
     - id: RMCWeaponRevolverM44
 
 - type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCM2112BeltFilled
+  suffix: Filled, Model 2112
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSpeedLoaderM44
+      amount: 6
+    - id: RMCWeaponRevolverModel2112
+
+- type: entity
   parent: RMCBeltHolsterPistol
   id: RMCT73BeltFilled
   suffix: Filled
