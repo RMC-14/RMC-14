@@ -167,6 +167,7 @@
   - type: Sprite
     state: back_1
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleVanWallBase
@@ -176,6 +177,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleVanWallBase
@@ -399,6 +401,11 @@
     changeRate: 4.0
     reactToMouse: false
     fadeOnSharedGrid: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleVanInteriorBase

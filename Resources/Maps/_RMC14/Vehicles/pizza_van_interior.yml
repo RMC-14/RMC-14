@@ -260,6 +260,8 @@ entities:
     - type: Transform
       pos: 0.5,0.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehiclePizzaVanFront1
   entities:
   - uid: 21
@@ -311,6 +313,8 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 0
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehiclePizzaVanLeft1
   entities:
   - uid: 30
@@ -407,9 +411,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,0.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 42
     components:
     - type: Transform
       pos: -0.5,2.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 ...

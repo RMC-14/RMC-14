@@ -170,6 +170,7 @@
   - type: Sprite
     state: back_1
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -178,6 +179,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -193,6 +195,7 @@
   - type: Sprite
     state: back_1
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -201,6 +204,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase
@@ -258,6 +262,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehicleBoxVanWallBase

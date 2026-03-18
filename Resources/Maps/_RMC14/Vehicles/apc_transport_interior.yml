@@ -246,6 +246,8 @@ entities:
       entryIndex: 1
     - type: Fixtures
       fixtures: {}
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleAPCBack2
   entities:
   - uid: 16
@@ -304,6 +306,8 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 0
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleAPCFront1
   entities:
   - uid: 17
@@ -444,6 +448,8 @@ entities:
       parent: 2
     - type: Fixtures
       fixtures: {}
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleAPCWallSmallR
   entities:
   - uid: 63
@@ -611,6 +617,8 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 1.5,-1.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleViewportUnanchored
   entities:
   - uid: 59
@@ -618,10 +626,14 @@ entities:
     - type: Transform
       pos: -1.7136357,2.2514749
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 62
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 1.6941621,2.964356
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 ...

@@ -242,6 +242,8 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleVanFront1
   entities:
   - uid: 25
@@ -289,6 +291,8 @@ entities:
       pos: 3.5,0.5
       parent: 2
     - type: VehicleExit
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleVanRoof2
   entities:
   - uid: 31
@@ -360,10 +364,14 @@ entities:
     - type: Transform
       pos: 1.5,0.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 40
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 1.5,-1.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 ...

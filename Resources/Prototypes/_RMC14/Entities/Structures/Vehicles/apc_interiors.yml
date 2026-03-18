@@ -251,6 +251,11 @@
     fadeOnSharedGrid: true
     fadeLayers:
     - "roof"
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleAPCDoorBase
@@ -486,6 +491,10 @@
     fadeLayers:
     - "roof"
   - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleAPCWallBase
@@ -696,6 +705,11 @@
     state: door_back
   - type: Occluder
     enabled: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleAPCDoorBase

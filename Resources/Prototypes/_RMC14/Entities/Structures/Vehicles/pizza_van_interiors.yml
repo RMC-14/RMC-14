@@ -169,6 +169,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehiclePizzaVanWallBase
@@ -184,6 +185,7 @@
   - type: Sprite
     state: back_1
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehiclePizzaVanWallBase
@@ -192,6 +194,7 @@
   - type: Sprite
     state: back_2
   - type: Clickable
+  - type: InteractionOutline
 
 - type: entity
   parent: RMCVehiclePizzaVanWallBase
@@ -407,7 +410,11 @@
     changeRate: 4.0
     reactToMouse: false
     fadeOnSharedGrid: true
-  - type: InteractionTransparency
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehiclePizzaVanInteriorBase

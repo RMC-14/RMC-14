@@ -141,7 +141,6 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 1
-    - type: Clickable
 - proto: RMCVehicleBoxVanBackground2
   entities:
   - uid: 8
@@ -177,6 +176,8 @@ entities:
     - type: Transform
       pos: -0.5,0.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleBoxVanFront1
   entities:
   - uid: 13
@@ -207,7 +208,6 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-    - type: Clickable
   - uid: 17
     components:
     - type: Transform
@@ -247,7 +247,8 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 0
-    - type: Clickable
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleBoxVanLeft1
   entities:
   - uid: 22
@@ -257,7 +258,6 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 2
-    - type: Clickable
 - proto: RMCVehicleBoxVanLeft3
   entities:
   - uid: 23
@@ -312,9 +312,13 @@ entities:
       rot: 3.141592653589793 rad
       pos: -1.5,0.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 29
     components:
     - type: Transform
       pos: -1.5,2.5
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 ...
