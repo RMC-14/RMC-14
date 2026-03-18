@@ -434,7 +434,7 @@
   parent: RMCPouchFlare
   id: RMCPouchFlareM94BP
   name: M94-BP flare pouch
-  description: A pouch specially designed to hold Blue Phosphorous flares. Refillable with an M94-PB flare pack.
+  description: A pouch specially designed to hold Blue Phosphorous flares. Refillable with an M94-BP flare pack.
   components:
   - type: CMItemSlots
     cooldown: 1
