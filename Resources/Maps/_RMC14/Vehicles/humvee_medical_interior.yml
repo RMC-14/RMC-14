@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 01/28/2026 20:46:42
-  entityCount: 63
+  time: 03/18/2026 20:38:27
+  entityCount: 68
 maps:
 - 1
 grids:
@@ -158,7 +158,8 @@ entities:
       pos: 0.06984687,-0.36283207
       parent: 2
     - type: VehicleExit
-      entryIndex: 0
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleHumveeCarrierBackDoor2
   entities:
   - uid: 7
@@ -168,6 +169,8 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 1
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleHumveeChassisMedical
   entities:
   - uid: 3
@@ -186,6 +189,8 @@ entities:
       fixtures: {}
     - type: VehicleExit
       entryIndex: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleHumveeExitDoorDirectional
   entities:
   - uid: 5
@@ -195,6 +200,8 @@ entities:
       parent: 2
     - type: VehicleExit
       entryIndex: 3
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleHumveeLockerMedical
   entities:
   - uid: 13
@@ -209,11 +216,15 @@ entities:
     - type: Transform
       pos: 2.9131227,-1.6214356
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 21
     components:
     - type: Transform
       pos: 2.896731,0.07964587
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleHumveeViewportFrontNorth
   entities:
   - uid: 8
@@ -221,11 +232,15 @@ entities:
     - type: Transform
       pos: 3.7110634,-1.1560146
       parent: 2
+    missingComponents:
+    - InteractionTransparency
   - uid: 9
     components:
     - type: Transform
       pos: 3.7045069,-0.2546707
       parent: 2
+    missingComponents:
+    - InteractionTransparency
 - proto: RMCVehicleInteriorExtinguisher
   entities:
   - uid: 18
@@ -233,6 +248,10 @@ entities:
     - type: Transform
       pos: 2.3969595,-0.00884974
       parent: 2
+    - type: Physics
+      canCollide: False
+    - type: Fixtures
+      fixtures: {}
 - proto: RMCVehicleInteriorMedVendorVend
   entities:
   - uid: 14
@@ -293,14 +312,12 @@ entities:
   - uid: 30
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,0.5
+      pos: 3.0780654,0.5909536
       parent: 2
   - uid: 31
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,0.5
+      pos: 3.9469097,0.5909536
       parent: 2
   - uid: 32
     components:
@@ -317,14 +334,12 @@ entities:
   - uid: 35
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.11831522,-1.5
+      pos: -0.4560659,-1.5919371
       parent: 2
   - uid: 36
     components:
     - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.11831522,-0.5
+      pos: -0.4560659,-0.78983074
       parent: 2
   - uid: 61
     components:
@@ -343,6 +358,31 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 0.5,-2.5
+      parent: 2
+  - uid: 64
+    components:
+    - type: Transform
+      pos: 2.429349,0.5909536
+      parent: 2
+  - uid: 65
+    components:
+    - type: Transform
+      pos: 4.247023,-1.6705999
+      parent: 2
+  - uid: 66
+    components:
+    - type: Transform
+      pos: 4.3011155,-1.0265487
+      parent: 2
+  - uid: 67
+    components:
+    - type: Transform
+      pos: 4.296198,-0.42182904
+      parent: 2
+  - uid: 68
+    components:
+    - type: Transform
+      pos: -0.40333176,0.1822269
       parent: 2
 - proto: RMCWallInvisibleBulletLightBlocker
   entities:
