@@ -6,7 +6,7 @@
   playTimeTracker: CMJobSelectableXeno
   hidden: false
   jobPreviewEntity: RMCPlayerXenoLarvaPreview
-  newToJobInfo: rmc-new-to-job-Xenonidnid
+  newToJobInfo: rmc-new-to-job-xenonid
 
 - type: playTimeTracker
   id: CMJobSelectableXeno
