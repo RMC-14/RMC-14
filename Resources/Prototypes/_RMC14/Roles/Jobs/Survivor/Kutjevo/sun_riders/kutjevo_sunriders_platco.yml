@@ -54,7 +54,7 @@
     randomOutfits:
     - [ CMHeadCapOfficerGasmask, RMCMaskTornScarfDesert ]
     - [ CMHeadCapOfficerGasmask, RMCMaskScarfTan ]
-    randomGearOther: # 1/4 chance for no flares
+    randomGearOther: # 1/2 chance for no flares
     -
       - [ RMCPackFlareM94BP ]
 
