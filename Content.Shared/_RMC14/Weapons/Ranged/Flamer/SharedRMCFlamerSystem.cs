@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
@@ -246,6 +247,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
     {
+        if (TryComp<AttachableHolderComponent>(ent, out var holder) &&
+            holder.SupercedingAttachable != null)
+        {
+            args.IsHot = false;
+            return;
+        }
+
         args.IsHot = ent.Comp.Enabled;
     }
 
@@ -320,6 +328,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Reagent = reagent.ID;
         chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
         chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
     }
@@ -620,7 +629,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                     if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration + (int)(comp.FuelPressure * reagent.DurationMod));
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 
