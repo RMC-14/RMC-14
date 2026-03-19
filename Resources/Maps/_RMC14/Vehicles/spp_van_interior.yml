@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2-fix-physics
   forkId: ""
   forkVersion: ""
-  time: 03/19/2026 20:28:10
+  time: 03/19/2026 20:52:29
   entityCount: 66
 maps:
 - 1
@@ -212,6 +212,7 @@ entities:
       pos: 2.5086117,1.5218416
       parent: 3
     - type: VehicleExit
+      entryIndex: 1
     missingComponents:
     - InteractionTransparency
 - proto: RMCVehicleSPPVanInteriorDoor
@@ -219,9 +220,12 @@ entities:
   - uid: 5
     components:
     - type: Transform
-      pos: 2.4856632,-0.5338459
+      pos: 2.5,-0.5
       parent: 3
     - type: VehicleExit
+      entryIndex: 2
+    - type: Fixtures
+      fixtures: {}
     missingComponents:
     - InteractionTransparency
 - proto: RMCVehicleSPPVanViewportSimple
