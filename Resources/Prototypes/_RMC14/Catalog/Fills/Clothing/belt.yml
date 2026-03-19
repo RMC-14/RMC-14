@@ -919,7 +919,7 @@
             tags:
               - RMCWeaponPistolL54
 
-              - type: entity
+- type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCBeltHolsterRevolverSpearheadFill
   suffix: Filled
