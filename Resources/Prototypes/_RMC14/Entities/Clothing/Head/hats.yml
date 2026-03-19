@@ -689,7 +689,7 @@
   parent: CMHeadBeret
   id: RMCProvostSeniorBeret
   name: UNMC provost senior beret
-  description: A beret with the UNMC Military Police insignia emblazoned on it.
+  description: A beret with the UNMC Military Police insignia emblazoned on it. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Hats/pvciberet.rsi

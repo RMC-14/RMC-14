@@ -1,12 +1,44 @@
 # Provost Inspector
+## Outerwear
 - type: loadout
   id: ProvostJacketFilledRMC
-  cost: 1
+  cost: 0
   equipment:
     outerClothing: RMCProvostJacketFilled
 
 - type: loadout
   id: ProvostCoatFilledRMC
-  cost: 1
+  cost: 0
   equipment:
     outerClothing: RMCProvostCoatFilled
+
+- type: loadout
+  id: RMCProvostSeniorJacketFilled
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobProvostInspector
+      time: 432000 # 120 hrs
+  equipment:
+    outerClothing: RMCProvostSeniorJacketFilled
+
+## Headwear
+- type: loadout
+  id: RMCHeadBeretProvostSenior
+  cost: 0
+  equipment:
+    head: RMCHeadBeretProvostSenior
+
+- type: loadout
+  id: RMCProvostSeniorBeret
+  cost: 0
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: CMJobProvostInspector
+      time: 432000 # 120 hrs
+  equipment:
+    head: RMCProvostSeniorBeret

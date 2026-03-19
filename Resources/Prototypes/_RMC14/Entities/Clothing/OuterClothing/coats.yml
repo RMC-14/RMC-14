@@ -678,7 +678,7 @@
   parent: CMCoatOfficer
   id: RMCProvostSeniorJacket
   name: Provost Senior Jacket
-  description: A crisp jacket with the Provost sigil.
+  description: A crisp jacket with the Provost sigil. The blue mark symbolizes extensive service in their division.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Coats/Provost/provostci_jacket.rsi
