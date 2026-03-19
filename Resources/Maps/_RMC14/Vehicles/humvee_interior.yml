@@ -192,7 +192,7 @@ entities:
       entryIndex: 3
     missingComponents:
     - InteractionTransparency
-- proto: RMCVehicleHumveeInvisibleWallNoVision
+- proto: RMCVehicleInvisibleWallNoVision
   entities:
   - uid: 55
     components:

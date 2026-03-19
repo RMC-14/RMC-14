@@ -1,5 +1,33 @@
 - type: entity
   abstract: true
+  id: RMCVehicleSPPVanRoofBase
+  name: SPP van interior roof
+  description: Side door
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppvan.rsi
+    drawdepth: Overdoors
+    layers:
+    - state: interior_door
+      map: [ "roof" ]
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
   id: RMCVehicleSPPVanInteriorBase
   name: SPP van interior piece
   description: A decorative interior piece for an SPP van.
@@ -122,6 +150,21 @@
   components:
   - type: Sprite
     state: interior_door
+
+- type: entity
+  parent: RMCVehicleSPPVanRoofBase
+  id: RMCVehicleSPPVanInteriorDoorRoof
+  name: SPP van interior roof door
+  components:
+  - type: Sprite
+    layers:
+    - state: interior_door
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleSPPVanDoorBase

@@ -1,0 +1,113 @@
+- type: entity
+  parent: BaseItem
+  id: RMCVehicleTankHardpointBase
+  abstract: true
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/hardpoints/tank.rsi
+  - type: Item
+    size: Large
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTurret
+  name: tank turret
+  description: A tank turret hardpoint.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/tank.rsi
+    state: tank_turret_0
+  - type: RMCHardpointItem
+    hardpointType: Turret
+    vehicleFamily: Tank
+    slotType: Turret
+    damageMultiplier: 0.05
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 450
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 60
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/tank.rsi
+    overlayState: tank_turret_0
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,-10"
+    pixelOffsetEast: "-10,0"
+    pixelOffsetSouth: "0,10"
+    pixelOffsetWest: "10,0"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        whitelist:
+          components:
+          - RMCHardpointItem
+  - type: RMCHardpointSlots
+    vehicleFamily: Tank
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      slotType: Cannon
+      required: false
+      insertDelay: 2.0
+    - id: turret-launcher
+      hardpointType: Launcher
+      slotType: Launcher
+      required: false
+      insertDelay: 2.0
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTreads
+  name: tank treads
+  description: Heavy duty tank treads.
+  components:
+  - type: Sprite
+    state: treads
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+    vehicleFamily: Tank
+    slotType: Treads
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 300
+  - type: RMCVehicleWheelItem
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankReinforcedTreads
+  name: reinforced tank treads
+  description: Heavier tank treads with better durability and acid resistance at the cost of acceleration.
+  components:
+  - type: Sprite
+    state: treads
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+    vehicleFamily: Tank
+    slotType: Treads
+    damageMultiplier: 0.15
+  - type: RMCVehicleWheelItem
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
+  - type: RMCHardpointDamageModifier
+    modifierSets:
+    - RMCVehicleArmorCaustic
+  - type: RMCVehicleAccelerationModifierAttachment
+    accelerationMultiplier: 0.9
+
+- type: entity
+  parent: RMCVehicleTankHardpointBase
+  id: RMCVehicleTankTires
+  name: tank tires
+  description: Reinforced tank tires.
+  components:
+  - type: Sprite
+    state: tires
+  - type: RMCHardpointItem
+    hardpointType: Wheel
+    vehicleFamily: Tank
+    slotType: Tires
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
+  - type: RMCVehicleWheelItem

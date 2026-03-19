@@ -1,0 +1,293 @@
+- type: entity
+  id: RMCVehicleAPCBase
+  abstract: true
+  name: armored personnel carrier
+  description: A rugged armored personnel carrier outfitted for battlefield support.
+  components:
+  - type: Vehicle
+    movementKind: Grid
+  - type: Clickable
+  - type: GridVehicleMover
+    maxSpeed: 7
+    acceleration: 4
+    deceleration: 10
+    xenoBlockMinimumSize: Immobile
+    xenoPushMinimumSize: Immobile
+  - type: RMCVehicleOvercharge
+    speedMultiplier: 1.4
+    duration: 3
+    cooldown: 15
+    overchargeSound: /Audio/_RMC14/Vehicle/overdrive_activate.ogg
+  - type: RMCVehicleSound
+    runningSound: /Audio/Effects/Vehicle/vehicleengineidle.ogg
+    runningSoundCooldown: 2
+    hornSound: /Audio/Effects/Vehicle/carhorn.ogg
+    hornCooldown: 1
+    collisionSoundCooldown: 0.5
+    mobCollisionSound: /Audio/_RMC14/Xeno/alien_claw_block.ogg
+  - type: RMCVehicleSpotlight
+    radius: 7
+    energy: 3
+    softness: 2
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      world:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1,-1.2,1,1.2
+        density: 1200
+        mask:
+        - Impassable
+        - HighImpassable
+        - LowImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+      mob:
+        shape:
+          !type:PhysShapeAabb
+          bounds: -1,-1.2,1,1.2
+        density: 1200
+        mask:
+        - MidImpassable
+        - BarricadeImpassable
+        - LargeMobLayer
+        layer:
+        - LargeMobLayer
+  - type: Damageable
+    damageContainer: StructuralMarine
+    damageModifierSet: RMCVehicleFrameAPC
+  - type: InteractionOutline
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: _RMC14/Structures/Vehicles/apc.rsi
+    layers:
+    - map: [ base ]
+      state: apc_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: SpriteMovement
+    movementLayers:
+      rmc-wheels:
+        state: wheels_0
+    noMovementLayers:
+      rmc-wheels:
+        state: wheels_1
+  - type: PointLight
+    enabled: false
+    radius: 12
+    energy: 2.5
+    softness: 2
+    autoRot: true
+    offset: "0,0.9"
+  - type: Corrodible
+    isCorrodible: false
+  - type: DoAfter
+  - type: UserInterface
+    interfaces:
+      enum.RMCHardpointUiKey.Key:
+        type: RMCHardpointBoundUserInterface
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface
+  - type: RMCVehicleWeapons
+  - type: RMCVehicleHardpointVisuals
+  - type: InputMover
+  - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: RMCVehicleAPCM56FPWPortGunRight
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
+      port-gun-south:
+        startingItem: RMCVehicleAPCM56FPWPortGunLeft
+        insertOnInteract: false
+        ejectOnInteract: false
+        ejectOnUse: false
+        locked: true
+        disableEject: true
+        whitelist:
+          components:
+          - VehiclePortGun
+  - type: RMCHardpointSlots
+    vehicleFamily: APC
+    slots:
+    - id: primary
+      hardpointType: Turret
+      slotType: Turret
+      visualLayer: primary
+      insertDelay: 2.5
+      required: false
+    - id: secondary
+      hardpointType: Cannon
+      slotType: Cannon
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: SupportAttachment
+      slotType: SupportAttachment
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Wheel
+      insertDelay: 1.5
+  - type: RMCVehicleWheelSlots
+    slotCount: 1
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 1000
+    repairFuelCost: 15
+    bypassEntryOnZero: true
+  - type: RMCRepairable
+    heal: 200
+    fuelUsed: 6
+  - type: Appearance
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleAPCBase
+  id: RMCVehicleAPC
+
+- type: entity
+  parent: RMCVehicleAPCBase
+  id: RMCVehicleAPCMed
+  name: armored personnel carrier (medical)
+  description: A medical-configured APC outfitted with triage markings.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_med
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleAPCBase
+  id: RMCVehicleAPCCommand
+  name: armored personnel carrier (command)
+  description: A command-configured APC bristling with sensors and comms gear.
+  components:
+  - type: Sprite
+    layers:
+    - map: [ base ]
+      state: apc_base_com
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARY
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/apc_command_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 10
+    maxXenos: 3
+    entryPoints:
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,2.6
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.6,-1.5
+    - offset: 0,2
+      radius: 0.85
+      interiorCoords: 0.25,-1
+
+- type: entity
+  parent: RMCVehicleAPCBase
+  id: RMCVehicleSPPAPC
+  name: SPP armored personnel carrier
+  description: An armored personnel carrier configured for SPP forces.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppapc.rsi
+    layers:
+    - map: [ base ]
+      state: sppapc_base
+    - map: [ damaged_frame ]
+      state: damaged_frame
+      visible: false
+    - map: [ primary ]
+      state: PRIMARY
+      visible: false
+    - map: [ secondary ]
+      state: SECONDARIES
+      visible: false
+    - map: [ support ]
+      state: SUPPORT
+      visible: false
+    - map: [ rmc-wheels ]
+      state: wheels_1

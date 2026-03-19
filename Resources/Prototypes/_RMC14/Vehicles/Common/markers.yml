@@ -1,0 +1,30 @@
+- type: entity
+  id: RMCVehicleExitArea
+  name: vehicle exit marker
+  description: A clickable marker used for vehicle exits.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Sprite
+    drawdepth: Mobs
+    texture: /Textures/_RMC14/Tiles/floors/void.png
+  - type: VehicleExit
+  - type: Vehicle
+  - type: Clickable
+    bounds:
+      all: "-0.45,-0.45,0.45,0.45"
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Fixtures
+    fixtures:
+      marker:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 1
+        hard: false

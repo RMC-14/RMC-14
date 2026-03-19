@@ -242,6 +242,8 @@ entities:
     - type: Transform
       pos: 3.5,-1.5
       parent: 2
+    - type: VehicleExit
+      entryIndex: 0
     missingComponents:
     - InteractionTransparency
 - proto: RMCVehicleVanFront1

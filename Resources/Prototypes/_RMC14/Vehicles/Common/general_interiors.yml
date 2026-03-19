@@ -506,3 +506,68 @@
       Disabled: cameraemp
       Emp: cameraemp
 
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInvisibleWall
+  name: invisible wall (blocks vision)
+  description: An invisible blocking wall for vehicle interiors.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Occluder
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque
+  - type: Sprite
+    visible: false
+
+- type: entity
+  parent: RMCVehicleInteriorGeneralBase
+  id: RMCVehicleInvisibleWallNoVision
+  name: invisible wall (no vision block)
+  description: An invisible blocking wall for vehicle interiors that does not block vision or light.
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Icon
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+  - type: Physics
+    bodyType: Static
+    canCollide: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+  - type: Sprite
+    visible: false
+
+
