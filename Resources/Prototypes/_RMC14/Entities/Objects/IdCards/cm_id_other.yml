@@ -285,14 +285,6 @@
 
 - type: entity
   parent: RMCIDCardProvost
-  id: RMCIDCardProvostChiefInspector
-  name: provost chief inspector ID card
-  components:
-  - type: PresetIdCard
-    job: CMProvostChiefInspector
-
-- type: entity
-  parent: RMCIDCardProvost
   id: RMCIDCardProvostDeputyMarshal
   name: provost deputy marshal ID card
   components:
