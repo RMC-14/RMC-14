@@ -191,7 +191,7 @@ public sealed class StoodEvent : EntityEventArgs
 /// <summary>
 /// Raised when an entity is not standing
 /// </summary>
-public sealed class DownedEvent(EntityUid? downedBy = null) : EntityEventArgs //Added downedBy param
+public sealed class DownedEvent(EntityUid? downedBy = null) : EntityEventArgs // RMC14 Added downedBy param
 {
     public EntityUid? DownedBy = downedBy;
 }
