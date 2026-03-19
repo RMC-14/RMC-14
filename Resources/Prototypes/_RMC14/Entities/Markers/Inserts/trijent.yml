@@ -148,3 +148,16 @@
       probability: 1
       nightmareScenario: trijent_surv_spawn_bar
     replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentSurvSpawnTunnelDorm
+  name: Tunnel Dorm Surv Spawn
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/surv_spawn_tunneldorm.yml"
+      probability: 1
+      nightmareScenario: trijent_surv_spawn_tunneldorm
+    replaceAreas: false
