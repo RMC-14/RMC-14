@@ -514,9 +514,7 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Icon
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: invisible_wall
+  - type: Marker
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -537,7 +535,9 @@
         - LowImpassable
         - Opaque
   - type: Sprite
-    visible: false
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+    drawdepth: Overdoors
 
 - type: entity
   parent: RMCVehicleInteriorGeneralBase
@@ -547,9 +547,7 @@
   placement:
     mode: PlaceFree
   components:
-  - type: Icon
-    sprite: _RMC14/Markers/landmarks.rsi
-    state: invisible_wall
+  - type: Marker
   - type: Physics
     bodyType: Static
     canCollide: true
@@ -568,6 +566,8 @@
         - MidImpassable
         - LowImpassable
   - type: Sprite
-    visible: false
+    sprite: _RMC14/Markers/landmarks.rsi
+    state: invisible_wall
+    drawdepth: Overdoors
 
 

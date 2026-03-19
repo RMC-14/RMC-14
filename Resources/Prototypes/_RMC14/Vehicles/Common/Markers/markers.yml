@@ -9,7 +9,7 @@
     sprite: _RMC14/Markers/landmarks.rsi
     state: invisible_wall
   - type: Sprite
-    drawdepth: Mobs
+    drawdepth: LowFloors
     texture: /Textures/_RMC14/Tiles/floors/void.png
   - type: VehicleExit
   - type: Vehicle
@@ -19,12 +19,19 @@
   - type: InteractionOutline
   - type: Physics
     bodyType: Static
-    canCollide: false
+    canCollide: true
   - type: Fixtures
     fixtures:
       marker:
         shape:
           !type:PhysShapeAabb
-          bounds: "-0.45,-0.45,0.45,0.45"
-        density: 1
-        hard: false
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - Opaque

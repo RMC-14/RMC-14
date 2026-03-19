@@ -127,51 +127,81 @@
     state: back_2
 
 - type: entity
-  parent: RMCVehicleSPPVanWallBase
-  id: RMCVehicleSPPVanViewportSimple
+  parent: RMCVehicleSPPVanInteriorBase
+  id: RMCVehicleSPPVanViewportBase
+  placement:
+    mode: PlaceFree
   components:
-  - type: Sprite
-    state: viewport_simple
-  - type: Occluder
-    enabled: false
-
-- type: entity
-  parent: RMCVehicleSPPVanWallBase
-  id: RMCVehicleSPPVanViewportSimpleFront
-  components:
-  - type: Sprite
-    state: viewport_simple_front
-  - type: Occluder
-    enabled: false
-
-- type: entity
-  parent: RMCVehicleSPPVanDoorBase
-  id: RMCVehicleSPPVanInteriorDoor
-  components:
-  - type: Sprite
-    state: interior_door
-
-- type: entity
-  parent: RMCVehicleSPPVanRoofBase
-  id: RMCVehicleSPPVanInteriorDoorRoof
-  name: SPP van interior roof door
-  components:
-  - type: Sprite
-    layers:
-    - state: interior_door
-      map: [ "roof" ]
+  - type: WallMount
+    arc: 360
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCVehicleViewport
   - type: RemoveComponents
     components:
     - type: InteractionTransparency
 
 - type: entity
-  parent: RMCVehicleSPPVanDoorBase
+  parent: RMCVehicleSPPVanViewportBase
+  id: RMCVehicleSPPVanViewportSimple
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    state: viewport_simple
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCVehicleSPPVanViewportBase
+  id: RMCVehicleSPPVanViewportSimpleFront
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    state: viewport_simple_front
+  - type: Occluder
+    enabled: false
+
+- type: entity
+  parent: RMCVehicleSPPVanRoofBase
+  id: RMCVehicleSPPVanInteriorDoor
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+    layers:
+    - state: interior_door
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RMCVehicleViewport
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
+
+- type: entity
+  parent: RMCVehicleSPPVanInteriorDoor
+  id: RMCVehicleSPPVanInteriorDoorRoof
+  name: SPP van interior roof door
+  components:
+  - type: Sprite
+    drawdepth: BelowMobs
+
+- type: entity
+  parent: RMCVehicleSPPVanInteriorBase
   id: RMCVehicleSPPVanExteriorDoorUnique
   components:
   - type: Sprite
+    drawdepth: Walls
     state: exterior_door_unique
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   abstract: true
