@@ -445,3 +445,74 @@
     contents:
     - id: RMC40MMGrenadeM74AGMI
       amount: 25
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenade20mmHE
+  name: L109A1 HE grenade packet
+  suffix: PVE
+  description: It contains eight L109A1 20mm HE grenades.
+  components:
+  - type: Tag
+    tags: 
+    - RMCGrenadePacket20mm
+  - type: Sprite
+    layers:
+    - state: hedp_packet
+      map: [ "closedLayer" ]
+    - state: hedp_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCGrenade20mm
+
+- type: entity
+  parent: RMCPacketGrenade20mmHE
+  id: RMCPacketGrenade20mmHEFilled
+  suffix: PVE, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenade20mmHE
+      amount: 8
+
+- type: entity
+  parent: CMPacketBase
+  id: RMCPacketGrenade20mmIncendiary
+  name: L109A2 Incendiary grenade packet
+  suffix: PVE
+  description: It contains eight L109A2 20mm incendiary grenades.
+  components:
+  - type: Tag
+    tags: 
+    - RMCGrenadePacket20mm
+  - type: Sprite
+    layers:
+    - state: agmi_packet
+      map: [ "closedLayer" ]
+    - state: agmi_packet_e
+      map: [ "openLayer", "emptyLayer" ]
+  - type: Storage
+    maxItemSize: Small
+    grid:
+    - 0,0,15,1 # 8 slots
+    whitelist:
+      tags:
+      - RMCGrenade20mm
+
+- type: entity
+  parent: RMCPacketGrenade20mmIncendiary
+  id: RMCPacketGrenade20mmIncendiaryFilled
+  suffix: PVE, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCGrenade20mmIncendiary
+      amount: 8
+
+- type: Tag
+  id: RMCGrenadePacket20mm

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.Weapons.Ranged.Systems;
+using Content.Shared._RMC14.Attachable.Systems;
 using Content.Shared._RMC14.Weapons.Ranged.Flamer;
 using Content.Shared.Wieldable.Components;
 using Robust.Client.Graphics;
@@ -32,6 +33,7 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedTransformSystem _transform;
     private readonly SharedRMCFlamerSystem _flamer;
+    private readonly AttachableHolderSystem _attachableHolder;
     private readonly EntityQuery<RMCFlamerAmmoProviderComponent> _flamerQ;
     private readonly EntityQuery<WieldableComponent> _wieldableQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
@@ -47,6 +49,7 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
         _mapSystem = ents.System<SharedMapSystem>();
         _transform = ents.System<SharedTransformSystem>();
         _flamer = ents.System<SharedRMCFlamerSystem>();
+        _attachableHolder = ents.System<AttachableHolderSystem>();
         _flamerQ = ents.GetEntityQuery<RMCFlamerAmmoProviderComponent>();
         _wieldableQ = ents.GetEntityQuery<WieldableComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
@@ -61,7 +64,19 @@ public sealed class RMCFlamerPreviewOverlay : Overlay
         if (!_guns.TryGetGun(player.Value, out var gunUid, out _))
             return;
 
-        if (!_wieldableQ.TryComp(gunUid, out var wieldable) || !wieldable.Wielded)
+        var wielded = false;
+        if (_wieldableQ.TryComp(gunUid, out var wieldable))
+        {
+            wielded = wieldable.Wielded;
+        }
+        else if (_attachableHolder.TryGetHolder(gunUid, out var holderUid) &&
+                 holderUid != null &&
+                 _wieldableQ.TryComp(holderUid.Value, out var holderWieldable))
+        {
+            wielded = holderWieldable.Wielded;
+        }
+
+        if (!wielded)
             return;
 
         if (!_flamerQ.TryComp(gunUid, out var flamer))

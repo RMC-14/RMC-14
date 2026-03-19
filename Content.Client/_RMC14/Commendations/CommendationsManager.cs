@@ -47,8 +47,9 @@ public sealed class CommendationsManager : IPostInjectInit
 
         var commendationSystem = _systems.GetEntitySystem<CommendationSystem>();
         var awardableMedals = commendationSystem.GetAwardableMedalIds();
+        var specialMedals = commendationSystem.GetSpecialMedalIds();
 
-        foreach (var medalId in awardableMedals)
+        foreach (var medalId in awardableMedals.Concat(specialMedals))
         {
             if (!_prototype.TryIndex(medalId, out var medalProto))
                 continue;
