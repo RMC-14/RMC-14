@@ -9,7 +9,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/drop_pod.rsi
     state: techpod_closed
-    drawdepth: Mobs
+    drawdepth: Overdoors
     offset: 0, 0.5
   - type: Physics
     bodyType: Static
