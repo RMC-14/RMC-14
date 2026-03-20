@@ -145,6 +145,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCBioscanVariance =
         CVarDef.Create("rmc.bioscan_variance", 2, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<int> RMCCryoMarinesScale =
+        CVarDef.Create("rmc.cryo_marines_scale", 301, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<int> RMCDropshipFabricatorStartingPoints =
         CVarDef.Create("rmc.dropship_fabricator_starting_points", 10000, CVar.REPLICATED | CVar.SERVER);
 

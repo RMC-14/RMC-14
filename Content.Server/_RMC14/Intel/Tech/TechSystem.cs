@@ -2,9 +2,12 @@ using Content.Server.GameTicking.Events;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Humanoid.Components;
 using Content.Server.Spawners.Components;
+using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Intel.Tech;
 using Content.Shared.Humanoid.Prototypes;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -12,9 +15,11 @@ namespace Content.Server._RMC14.Intel.Tech;
 
 public sealed class ServerTechSystem : EntitySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
+    [Dependency] private readonly IConfigurationManager _config = default!;
+    [Dependency] private readonly ISharedPlayerManager _playerManager = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
 
     private static readonly EntProtoId CombatTechProto = "RMCRandomHumanoidFoxtrotCombatTech";
@@ -26,6 +31,7 @@ public sealed class ServerTechSystem : EntitySystem
     private static readonly EntProtoId WeaponsSpecialistProto = "RMCRandomHumanoidFoxtrotWeaponsSpecialist";
 
     private bool _cryoMarinesPurchased = false;
+    private int _cryoMarinesScale;
 
     public override void Initialize()
     {
@@ -33,6 +39,8 @@ public sealed class ServerTechSystem : EntitySystem
         SubscribeLocalEvent<TechCryoMarinesEvent>(OnTechCryoMarines);
         SubscribeLocalEvent<TechCryoSpecEvent>(OnTechCryoSpec);
         SubscribeLocalEvent<RoundStartingEvent>(OnRoundStart);
+
+        Subs.CVar(_config, RMCCVars.RMCCryoMarinesScale, v => _cryoMarinesScale = v, true);
     }
 
     private void OnRoundStart(RoundStartingEvent ev)
@@ -42,11 +50,14 @@ public sealed class ServerTechSystem : EntitySystem
 
     private void OnTechCryoMarines(TechCryoMarinesEvent ev)
     {
+        var players = (float)_playerManager.PlayerCount;
+        var scale = players / _cryoMarinesScale;
+
         // TODO RMC14 this should spawn you as your character but with random name
         SpawnCryo(_cryoMarinesPurchased ? FireteamLeaderProto : SquadLeaderProto, 1);
-        SpawnCryo(CombatTechProto, 1);
-        SpawnCryo(HospitalCorpsmanProto, 1);
-        SpawnCryo(RiflemanProto, 2);
+        SpawnCryo(CombatTechProto, Scale(scale, 1));
+        SpawnCryo(HospitalCorpsmanProto, Scale(scale, 1));
+        SpawnCryo(RiflemanProto, Scale(scale, 2));
 
         _cryoMarinesPurchased = true;
     }
@@ -56,7 +67,7 @@ public sealed class ServerTechSystem : EntitySystem
         SpawnCryo(WeaponsSpecialistProto, 1);
     }
 
-    private void SpawnCryo(EntProtoId spawnerId, uint amount)
+    private void SpawnCryo(EntProtoId spawnerId, int amount)
     {
         if (!_proto.TryIndex(spawnerId, out var spawner) ||
             !spawner.TryGetComponent<RandomHumanoidSpawnerComponent>(out var human, _componentFactory) ||
@@ -82,5 +93,10 @@ public sealed class ServerTechSystem : EntitySystem
             var choice = _random.Pick(valid);
             Spawn(spawnerId, _transform.GetMapCoordinates(choice));
         }
+    }
+
+    private static int Scale(float scale, int amount)
+    {
+        return (int)MathF.Floor((scale + 1) * amount);
     }
 }
