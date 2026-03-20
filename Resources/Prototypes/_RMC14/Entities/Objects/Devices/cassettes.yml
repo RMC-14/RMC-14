@@ -6,7 +6,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman
+    layers:
+    - state: walkman
+      map: ["base" ]
   - type: Item
     size: Small
   - type: Clothing
@@ -16,103 +18,16 @@
   - type: ClothingLimit
     slot: All
     id: RMCCassettePlayer
-
-- type: entity
-  parent: BaseItem
-  id: RMCCassettePlayerBlue
-  name: Blue cassette player
-  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman_1
-  - type: Item
-    size: Small
-  - type: Clothing
-    slots:
-    - ears
-  - type: CassettePlayer
-  - type: ClothingLimit
-    slot: All
-    id: RMCCassettePlayer
-
-- type: entity
-  parent: BaseItem
-  id: RMCCassettePlayerGreen
-  name: Green cassette player
-  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman_2
-  - type: Item
-    size: Small
-  - type: Clothing
-    slots:
-    - ears
-  - type: CassettePlayer
-  - type: ClothingLimit
-    slot: All
-    id: RMCCassettePlayer
-
-- type: entity
-  parent: BaseItem
-  id: RMCCassettePlayerRed
-  name: Red cassette player
-  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman_3
-  - type: Item
-    size: Small
-  - type: Clothing
-    slots:
-    - ears
-  - type: CassettePlayer
-  - type: ClothingLimit
-    slot: All
-    id: RMCCassettePlayer
-
-- type: entity
-  parent: BaseItem
-  id: RMCCassettePlayerOrange
-  name: Orange cassette player
-  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman_4
-  - type: Item
-    size: Small
-  - type: Clothing
-    slots:
-    - ears
-  - type: CassettePlayer
-  - type: ClothingLimit
-    slot: All
-    id: RMCCassettePlayer
-
-- type: entity
-  parent: BaseItem
-  id: RMCCassettePlayerRainbow
-  name: Colorful cassette player
-  description: A cassette player that first hit the market over 100 years ago. Crazy how these never went out of style.
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Devices/cassette_player.rsi
-    state: walkman_5
-  - type: Item
-    size: Small
-  - type: Clothing
-    slots:
-    - ears
-  - type: CassettePlayer
-  - type: ClothingLimit
-    slot: All
-    id: RMCCassettePlayer
-
-
+  - type: RandomSprite
+    available:
+    - base:
+        walkman: ""
+        walkman_1: ""
+        walkman_2: ""
+        walkman_3: ""
+        walkman_4: ""
+        walkman_5: ""
+    
 - type: entity
   abstract: true
   parent: BaseItem

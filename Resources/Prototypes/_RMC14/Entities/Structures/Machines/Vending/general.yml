@@ -13,22 +13,10 @@
   - type: CMAutomatedVendor
     hackable: true
     sections:
-    - name: Cassette players
-      entries:
-      - id: RMCCassettePlayer
-        amount: 20
-      - id: RMCCassettePlayerBlue
-        amount: 20
-      - id: RMCCassettePlayerGreen
-        amount: 20
-      - id: RMCCassettePlayerRed
-        amount: 20
-      - id: RMCCassettePlayerOrange
-        amount: 20
-      - id: RMCCassettePlayerRainbow
-        amount: 20
     - name: Cassettes
       entries:
+      - id: RMCCassettePlayer
+        amount: 50
       - id: RMCPouchCassette
         amount: 10
       - id: RMCCassetteTapeWigWoo1
