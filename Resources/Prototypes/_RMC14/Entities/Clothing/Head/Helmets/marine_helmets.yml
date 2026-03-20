@@ -37,6 +37,15 @@
 
 - type: entity
   parent: ArmorHelmetM10
+  id: ArmorHelmetM10Headband
+  suffix: Sun Riders, Headband
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandSunRiders
+
+- type: entity
+  parent: ArmorHelmetM10
   id: CMArmorHelmetM10MP
   name: M10 helmet MP
   description: A special variant of the M10 Pattern Helmet worn by the Military Police of the Marines.
@@ -135,6 +144,15 @@
     visorsToAdd:
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
+
+- type: entity
+  parent: CMArmorHelmetM10Medic
+  id: CMArmorHelmetM10MedicHeadband
+  suffix: Sun Riders, Headband
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHeadBandSunRiders
 
 - type: entity
   parent: CMArmorHelmetM10Medic

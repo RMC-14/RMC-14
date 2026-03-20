@@ -30,7 +30,6 @@
   id: RMCGearSunRidersCorpsman
   equipment:
     back: CMSatchelMarineMedicFilledSurvivor
-    head: CMArmorHelmetM10Medic
     belt: RMCBeltHolsterM13FilledSurvivor
     jumpsuit: RMCJumpsuitSurvivorMarineDropPouchSunRidersCorpsman
 
@@ -41,18 +40,16 @@
   components:
   - type: SurvivorPreset
     randomOutfits:
-    - [ RMCMaskTornScarfDesert, CMUpgradedTraumaKit10 ]
-    - [ RMCMaskScarfTan, CMUpgradedTraumaKit10 ]
-    - [ RMCMaskTornScarfDesert, CMUpgradedBurnKit10 ]
-    - [ RMCMaskScarfTan, CMBurnKit10 ]
-    - [ RMCMaskTornScarfDesert, CMTraumaKit10 ]
-    - [ RMCMaskScarfTan, CMTraumaKit10 ]
-    - [ RMCMaskTornScarfDesert, CMBurnKit10 ]
-    - [ RMCMaskScarfTan, CMBurnKit10 ]
+    - [ RMCMaskTornScarfDesert, CMArmorHelmetM10MedicHeadband ]
+    - [ RMCMaskTornScarfDesert, CMArmorHelmetM10Medic ]
+    - [ RMCMaskScarfTan, CMArmorHelmetM10Medic ]
+    - [ RMCMaskScarfTan, CMArmorHelmetM10MedicHeadband ]
+    - [ RMCMaskNeckerchiefSunRiders, CMArmorHelmetM10Medic ]
+    - [ RMCMaskNeckerchiefSunRiders, CMArmorHelmetM10MedicHeadband ]
     randomGearOther:
     -
-      - [ RMCPackFlareM94BP ]
-      - [ RMCPackFlareM94BP ]
+      - [ RMCPackFlareM94BP, CMUpgradedTraumaKit10 ]
+      - [ RMCPackFlareM94BP, CMUpgradedBurnKit10 ]
       - [ RMCPackFlareM94BP ]
 
 - type: entity

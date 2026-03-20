@@ -64,9 +64,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits:
-    - [ RMCMaskTornScarfDesert ]
-    - [ RMCMaskScarfTan ]
     randomGearOther:
     -
       - [ RMCCigarettePackLuckySloths ]
