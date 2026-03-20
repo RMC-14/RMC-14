@@ -231,3 +231,41 @@
         whitelist:
           components:
           - RMCVehicleWheelItem
+  - type: RMCHardpointSlots
+    vehicleFamily: Tank
+    slots:
+    - id: armor
+      hardpointType: Armor
+      slotType: Armor
+      compatibilityId: SPPTank
+      visualLayer: armor
+      insertDelay: 2.5
+      required: false
+    - id: primary
+      hardpointType: Turret
+      slotType: Turret
+      compatibilityId: SPPTank
+      visualLayer: primary
+      insertDelay: 3.0
+      required: false
+    - id: secondary
+      hardpointType: Secondary
+      compatibilityId: SPPTank
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: Support
+      slotType: SupportAttachment
+      compatibilityId: SPPTank
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Treads
+      insertDelay: 2.0
+    - id: wheel-2
+      hardpointType: Wheel
+      slotType: Tires
+      insertDelay: 2.0

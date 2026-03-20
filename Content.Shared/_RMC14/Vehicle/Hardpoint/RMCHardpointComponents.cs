@@ -28,6 +28,9 @@ public sealed partial class RMCHardpointItemComponent : Component
     public ProtoId<RMCHardpointSlotTypePrototype>? SlotType;
 
     [DataField]
+    public string? CompatibilityId;
+
+    [DataField]
     public float DamageMultiplier = 1f;
 }
 
@@ -75,6 +78,9 @@ public sealed partial class RMCHardpointSlot
 
     [DataField]
     public ProtoId<RMCHardpointSlotTypePrototype>? SlotType { get; set; }
+
+    [DataField]
+    public string? CompatibilityId { get; set; }
 
     [DataField]
     public string VisualLayer { get; set; } = string.Empty;

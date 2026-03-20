@@ -393,6 +393,14 @@
     - offset: -1.2,-0.3
       radius: 0.7
       interiorCoords: 2.5,-0.2
+  - type: RMCHardpointSlots
+    vehicleFamily: Van
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Wheel
+      compatibilityId: SPPVan
+      insertDelay: 1.5
 
 - type: entity
   parent: RMCVehicleSPPVan
@@ -426,16 +434,31 @@
     - id: secondary
       hardpointType: Secondary
       slotType: Launcher
+      compatibilityId: SPPVan
       visualLayer: secondary
       insertDelay: 2.0
       required: false
     - id: wheel-1
       hardpointType: Wheel
       slotType: Wheel
+      compatibilityId: SPPVan
       insertDelay: 1.5
-      whitelist:
-        components:
-        - RMCVehicleWheelItem
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_van_armed_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
 
 - type: entity
   parent: RMCVehicleSPPVan
@@ -452,6 +475,22 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_van_medical_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
 
 - type: entity
   parent: RMCVehicleSPPVan
@@ -468,6 +507,22 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_van_prisoner_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 8
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,1.5
+      radius: 0.8
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
 
 - type: entity
   parent: RMCVehicleBoxVanBase
@@ -486,18 +541,26 @@
     - map: [ rmc-wheels ]
       state: wheels_1
   - type: VehicleEnter
-    interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml
+    interiorPath: /Maps/_RMC14/Vehicles/spp_van_logistics_interior.yml
     enterDoAfter: 1.0
     exitDoAfter: 1.0
     maxPassengers: 8
     maxXenos: 2
     entryPoints:
-    - offset: 1.5,0
-      radius: 0.7
-      interiorCoords: -0.5,0
-    - offset: -1.5,0
-      radius: 0.7
-      interiorCoords: -0.5,0
-    - offset: 0,2
+    - offset: 0,1.5
       radius: 0.8
-      interiorCoords: -3,1.5
+      interiorCoords: 0.35,0.25
+    - offset: 1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,0.9
+    - offset: -1.2,-0.3
+      radius: 0.7
+      interiorCoords: 2.5,-0.2
+  - type: RMCHardpointSlots
+    vehicleFamily: Van
+    slots:
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Wheel
+      compatibilityId: SPPVan
+      insertDelay: 1.5

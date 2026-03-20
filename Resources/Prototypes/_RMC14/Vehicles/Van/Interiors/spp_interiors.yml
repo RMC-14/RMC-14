@@ -172,7 +172,6 @@
       map: [ "roof" ]
   - type: Clickable
   - type: InteractionOutline
-  - type: RMCVehicleViewport
   - type: RemoveComponents
     components:
     - type: InteractionTransparency

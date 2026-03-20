@@ -20,6 +20,7 @@
     hardpointType: Wheel
     vehicleFamily: APC
     slotType: Wheel
+    compatibilityId: SPPAPC
     damageMultiplier: 0.15
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
@@ -34,6 +35,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
     state: apc_minigun
+  - type: RMCHardpointItem
+    compatibilityId: SPPAPC
   - type: RMCHardpointVisual
     vehicleState: apc_minigun_0
 
@@ -46,6 +49,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
     state: apc_autocannon
+  - type: RMCHardpointItem
+    compatibilityId: SPPAPC
   - type: RMCHardpointVisual
     vehicleState: apc_autocannon_0
 
@@ -62,6 +67,7 @@
     hardpointType: Cannon
     vehicleFamily: APC
     slotType: Cannon
+    compatibilityId: SPPAPC
     damageMultiplier: 0.11
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
@@ -77,5 +83,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
     state: spp_flare_launcher
+  - type: RMCHardpointItem
+    compatibilityId: SPPAPC
   - type: RMCHardpointVisual
     vehicleState: spp_flare_launcher_0

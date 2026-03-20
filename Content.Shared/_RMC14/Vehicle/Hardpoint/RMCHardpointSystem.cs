@@ -569,6 +569,15 @@ public sealed class RMCHardpointSystem : EntitySystem
                 return false;
         }
 
+        if (!string.IsNullOrWhiteSpace(slot.CompatibilityId))
+        {
+            if (string.IsNullOrWhiteSpace(hardpoint.CompatibilityId))
+                return false;
+
+            if (!string.Equals(hardpoint.CompatibilityId, slot.CompatibilityId, StringComparison.OrdinalIgnoreCase))
+                return false;
+        }
+
         if (string.IsNullOrWhiteSpace(slot.HardpointType))
             return slot.Whitelist == null || _whitelist.IsValid(slot.Whitelist, item);
 

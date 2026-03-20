@@ -291,3 +291,32 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
+  - type: RMCHardpointSlots
+    vehicleFamily: APC
+    slots:
+    - id: primary
+      hardpointType: Turret
+      slotType: Turret
+      compatibilityId: SPPAPC
+      visualLayer: primary
+      insertDelay: 2.5
+      required: false
+    - id: secondary
+      hardpointType: Cannon
+      slotType: Cannon
+      compatibilityId: SPPAPC
+      visualLayer: secondary
+      insertDelay: 2.5
+      required: false
+    - id: support
+      hardpointType: SupportAttachment
+      slotType: SupportAttachment
+      compatibilityId: SPPAPC
+      visualLayer: support
+      insertDelay: 2.0
+      required: false
+    - id: wheel-1
+      hardpointType: Wheel
+      slotType: Wheel
+      compatibilityId: SPPAPC
+      insertDelay: 1.5
