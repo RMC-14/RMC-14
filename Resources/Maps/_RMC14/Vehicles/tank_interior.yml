@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 03/12/2026 10:11:34
-  entityCount: 39
+  entityCount: 40
 maps:
 - 1
 grids:
@@ -133,6 +133,14 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 0.70269585,-2.3210986
+      parent: 2
+- proto: RMCSeatTankCommander
+  entities:
+  - uid: 47
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 0.433,-1.558
       parent: 2
 - proto: RMCVehicleTankAmmoLoader
   entities:

@@ -182,6 +182,26 @@
         type: RMCVehicleWeaponsBoundUserInterface
 
 - type: entity
+  parent: RMCSeatArmoredBase
+  id: RMCSeatTankCommander
+  name: tank commander seat
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: VehicleWeaponsSeat
+    skills:
+      all: {}
+    isPrimaryOperatorSeat: false
+    allowUiSelection: true
+    allowHotbarSelection: true
+    allowedHardpointTypes:
+    - Secondary
+  - type: UserInterface
+    interfaces:
+      enum.RMCVehicleWeaponsUiKey.Key:
+        type: RMCVehicleWeaponsBoundUserInterface
+
+- type: entity
   abstract: true
   parent: CMSeatBase
   id: RMCSeatHumveeBase
