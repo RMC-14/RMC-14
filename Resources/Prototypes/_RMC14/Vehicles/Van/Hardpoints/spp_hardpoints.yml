@@ -1,31 +1,95 @@
 - type: entity
-  parent: RMCVehicleTankM56Cupola
+  parent: BaseItem
   id: RMCVehicleSPPVanTurret
   name: SPP van turret
-  description: A cupola-mounted weapon fitted to an SPP van.
+  description: A roof-mounted turret fitted to an SPP van.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppvan.rsi
-    state: t60p3m_0
+    state: van_turret_0
+  - type: Item
+    size: Large
   - type: RMCHardpointItem
     hardpointType: Secondary
     vehicleFamily: Van
     slotType: Launcher
     compatibilityId: SPPVan
-    damageMultiplier: 0.0
+    damageMultiplier: 0.15
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 100
   - type: VehicleTurret
-    offsetRotatesWithTurret: true
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 180
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,-10"
-    pixelOffsetEast: "-10,0"
-    pixelOffsetSouth: "0,10"
-    pixelOffsetWest: "10,0"
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
+    overlayState: van_turret_0
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: RMCVehicleSPPVanCannon
+        whitelist:
+          components:
+          - RMCHardpointItem
+  - type: RMCHardpointSlots
+    vehicleFamily: Van
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      slotType: Cannon
+      compatibilityId: SPPVan
+      required: false
+      insertDelay: 2.0
+
+- type: entity
+  parent: RMCVehicleHumveeCannon
+  id: RMCVehicleSPPVanCannon
+  name: SPP van cannon
+  description: A turret-mounted cannon for an SPP van.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppvan.rsi
+    state: t60p3m_0
+  - type: RMCHardpointItem
+    hardpointType: Cannon
+    vehicleFamily: Van
+    slotType: Cannon
+    compatibilityId: SPPVan
+    damageMultiplier: 0.0
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 350
+  - type: VehicleTurret
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/sppvan.rsi
     overlayState: t60p3m_0
+    fireWhileRotatingGraceDegrees: 20
+    useBarrelDirectionForShots: true
+    maxShotCurvatureDegrees: 10
+  - type: Gun
+    fireRate: 6
+    selectedMode: FullAuto
+    availableModes:
+    - FullAuto
+    soundGunshot: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_ml66a_2.ogg
+    cameraRecoilScalar: 0
   - type: UserIFF
     factions:
     - FactionSPP
+  - type: BallisticAmmoProvider
+    cycleable: false
+    proto: RMCVehicleCartridgeSentry10x50mm
+    capacity: 500
+  - type: RMCVehicleHardpointAmmo
+    magazineSize: 500
+    maxStoredMagazines: 1
+  - type: RefillableByBulletBox
+    bulletType: RMCVehicleAmmoBoxCupola
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    muzzleOffset: "0,-0.5"
+    useAimDirection: true
+    useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: t60p3m_0
 
