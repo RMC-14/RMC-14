@@ -362,7 +362,10 @@ public sealed class XenoChargeSystem : EntitySystem
         XenoCrusherChargableComponent? crush = null;
         var pass = false;
 
-        if (!_xeno.CanAbilityAttackTarget(xeno, targetId) && !TryComp(targetId, out crush))
+        var isValidTarget = _xeno.CanAbilityAttackTarget(xeno, targetId);
+        TryComp(targetId, out crush);
+
+        if (!isValidTarget && crush == null && !HasComp<DamageableComponent>(targetId))
             return;
 
         StopCrusherCharge(xeno);
@@ -389,7 +392,7 @@ public sealed class XenoChargeSystem : EntitySystem
         }
 
         var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage), origin: xeno, tool: xeno);
-        if (damage?.GetTotal() > FixedPoint2.Zero)
+        if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);
             _colorFlash.RaiseEffect(Color.Red, new List<EntityUid> { targetId }, filter);
@@ -420,7 +423,7 @@ public sealed class XenoChargeSystem : EntitySystem
         var origin = _transform.GetMapCoordinates(xeno);
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
-        _sizeStun.KnockBack(targetId, origin, 2, 2, knockBackSpeed: 10);
+        _sizeStun.KnockBack(targetId, origin, 3, 3, knockBackSpeed: 15);
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
