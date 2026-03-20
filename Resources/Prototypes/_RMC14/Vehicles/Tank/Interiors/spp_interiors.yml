@@ -247,6 +247,7 @@
   description: A loader for SPP tank hardpoint ammunition.
   components:
   - type: Sprite
+    drawdepth: BelowMobs
     sprite: _RMC14/Structures/Vehicles/Interiors/spptank.rsi
     state: weapons_loader
   - type: RMCVehicleAmmoLoader

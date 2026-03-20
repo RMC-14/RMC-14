@@ -196,6 +196,16 @@
   name: SPP tank
   description: A heavy SPP battle tank.
   components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_tank_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,2
+      radius: 1
+      interiorCoords: 0.5,0.5
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/spptank.rsi
     layers:
@@ -269,3 +279,20 @@
       hardpointType: Wheel
       slotType: Tires
       insertDelay: 2.0
+
+- type: entity
+  parent: RMCVehicleSPPTank
+  id: RMCVehicleSPPTankCommand
+  name: SPP command tank
+  description: A heavy SPP command tank.
+  components:
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_tank_command_interior.yml
+    enterDoAfter: 1.0
+    exitDoAfter: 1.0
+    maxPassengers: 4
+    maxXenos: 2
+    entryPoints:
+    - offset: 0,2
+      radius: 1
+      interiorCoords: 0.5,0.5
