@@ -59,6 +59,18 @@ public sealed partial class VehicleWeaponsSeatComponent : Component
 
     [DataField]
     public List<string> AllowedHardpointTypes = new();
+
+    [DataField]
+    public float BaseViewPvsScale;
+
+    [DataField]
+    public float BaseViewCursorMaxOffset;
+
+    [DataField]
+    public float BaseViewCursorOffsetSpeed = 0.5f;
+
+    [DataField]
+    public float BaseViewCursorPvsIncrease;
 }
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]

@@ -194,8 +194,12 @@
     isPrimaryOperatorSeat: false
     allowUiSelection: true
     allowHotbarSelection: true
+    baseViewPvsScale: 0.35
+    baseViewCursorMaxOffset: 5
+    baseViewCursorPvsIncrease: 0.5
     allowedHardpointTypes:
     - Secondary
+    - Launcher
   - type: UserInterface
     interfaces:
       enum.RMCVehicleWeaponsUiKey.Key:

@@ -24,7 +24,7 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
             return;
 
         var baseCoords = args.FromCoordinates;
-        var baseRotation = _transform.GetWorldRotation(ent.Owner);
+        var baseRotation = GetBaseRotation(ent.Owner);
         var useRight = ent.Comp.Alternate && ent.Comp.UseRightNext;
         var (offset, rotateOffset) = GetOffset(ent, baseRotation, useRight);
         if (offset == Vector2.Zero)
@@ -72,6 +72,11 @@ public sealed class VehicleTurretMuzzleSystem : EntitySystem
         };
 
         return (offset, true);
+    }
+
+    private Angle GetBaseRotation(EntityUid turretUid)
+    {
+        return _transform.GetWorldRotation(turretUid);
     }
 
     private bool TryGetTurretLocalDirection(EntityUid turretUid, out Direction dir)

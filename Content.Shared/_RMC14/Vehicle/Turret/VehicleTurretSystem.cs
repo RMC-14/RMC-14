@@ -66,11 +66,12 @@ public sealed class VehicleTurretSystem : EntitySystem
                 continue;
             }
 
-            TryGetAnchorTurret(uid, turret, out var anchorUid, out var anchorTurret);
+        TryGetAnchorTurret(uid, turret, out var anchorUid, out var anchorTurret);
+        TryResolveRotationTarget(uid, turret, out var rotationUid, out var rotationTurret);
 
-            EnsureVisual(uid, turret, vehicle);
-            InitializeRotation(anchorUid, anchorTurret, vehicle);
-            UpdateTurretTransforms(uid, turret, vehicle, anchorUid, anchorTurret);
+        EnsureVisual(uid, turret, vehicle);
+        InitializeRotation(rotationUid, rotationTurret, vehicle);
+        UpdateTurretTransforms(uid, turret, vehicle, anchorUid, anchorTurret);
         }
     }
 
@@ -87,9 +88,10 @@ public sealed class VehicleTurretSystem : EntitySystem
 
         UpdateTurretRotation(ent.Owner, ent.Comp, vehicle, 0f);
         TryGetAnchorTurret(ent.Owner, ent.Comp, out var anchorUid, out var anchorTurret);
+        TryResolveRotationTarget(ent.Owner, ent.Comp, out var rotationUid, out var rotationTurret);
 
         EnsureVisual(ent.Owner, ent.Comp, vehicle);
-        InitializeRotation(anchorUid, anchorTurret, vehicle);
+        InitializeRotation(rotationUid, rotationTurret, vehicle);
         UpdateTurretTransforms(ent.Owner, ent.Comp, vehicle, anchorUid, anchorTurret);
     }
 
@@ -199,9 +201,9 @@ public sealed class VehicleTurretSystem : EntitySystem
         var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
         var anchorFacingAngle = GetOffsetFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle);
         var anchorLocalOffset = (-vehicleRot).RotateVec(GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter);
-        var localRot = Angle.Zero;
+        var anchorLocalRot = Angle.Zero;
         if (anchorTurret.RotateToCursor)
-            localRot = anchorTurret.WorldRotation;
+            anchorLocalRot = anchorTurret.WorldRotation;
 
         EntityCoordinates turretCoords;
         Angle turretLocalRot;
@@ -211,9 +213,9 @@ public sealed class VehicleTurretSystem : EntitySystem
         if (anchorUid == turretUid)
         {
             turretCoords = new EntityCoordinates(vehicle, anchorLocalOffset);
-            turretLocalRot = localRot;
+            turretLocalRot = anchorLocalRot;
             visualCoords = turretCoords;
-            visualLocalRot = localRot;
+            visualLocalRot = anchorLocalRot;
         }
         else
         {
@@ -230,23 +232,24 @@ public sealed class VehicleTurretSystem : EntitySystem
                     var directionalOffset = (turret.PixelOffset + GetDirectionalOffset(turret, dir)) / PixelsPerMeter;
                     var snappedAngle = GetDirectionalAngle(dir);
                     relativeAnchorOffset = (-snappedAngle).RotateVec(directionalOffset);
-                    turretLocalOffset = (localRot - snappedAngle).RotateVec(directionalOffset);
+                    turretLocalOffset = (anchorLocalRot - snappedAngle).RotateVec(directionalOffset);
                 }
                 else
                 {
                     relativeAnchorOffset = worldOffset;
-                    turretLocalOffset = localRot.RotateVec(relativeAnchorOffset);
+                    turretLocalOffset = anchorLocalRot.RotateVec(relativeAnchorOffset);
                 }
             }
             else
             {
                 turretLocalOffset = (-vehicleRot).RotateVec(worldOffset);
-                relativeAnchorOffset = (-localRot).RotateVec(turretLocalOffset);
+                relativeAnchorOffset = (-anchorLocalRot).RotateVec(turretLocalOffset);
             }
+
             turretCoords = new EntityCoordinates(anchorUid, relativeAnchorOffset);
             turretLocalRot = Angle.Zero;
             visualCoords = new EntityCoordinates(vehicle, anchorLocalOffset + turretLocalOffset);
-            visualLocalRot = localRot;
+            visualLocalRot = anchorLocalRot;
         }
 
         var turretXform = Transform(turretUid);

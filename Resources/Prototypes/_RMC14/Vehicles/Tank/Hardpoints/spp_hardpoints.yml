@@ -26,14 +26,15 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: tank_turret_0
-    useDirectionalOffsets: false
+    useDirectionalOffsets: true
     pixelOffsetNorth: "0,-10"
-    pixelOffsetEast: "-10,0"
-    pixelOffsetSouth: "0,10"
-    pixelOffsetWest: "10,0"
+    pixelOffsetEast: "-5,0"
+    pixelOffsetSouth: "0,0"
+    pixelOffsetWest: "5,0"
   - type: ItemSlots
     slots:
       turret-cannon:
+        startingItem: RMCVehicleSPPTankRailgun
         whitelist:
           components:
           - RMCHardpointItem
@@ -83,6 +84,16 @@
     compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: p17702_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankLTBCannon
@@ -96,10 +107,10 @@
   - type: VehicleTurret
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,30"
-    pixelOffsetEast: "30,0"
+    pixelOffsetNorth: "0,20"
+    pixelOffsetEast: "24,10"
     pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-30,0"
+    pixelOffsetWest: "-28,14"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: railgun_0
@@ -107,6 +118,16 @@
     compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: railgun_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,-1"
+    offsetEast: "0,-1"
+    offsetSouth: "0,0"
+    offsetWest: "0,-1"
+    muzzleOffset: "0,-1"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankTowLauncher
@@ -131,6 +152,16 @@
     compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: hj35t_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankM56Cupola
@@ -158,6 +189,16 @@
     overlayState: t60p3m_0
   - type: RMCHardpointVisual
     vehicleState: t60p3m_0
+  - type: GunMuzzleOffset
+    offset: "0,0"
+    useDirectionalOffsets: true
+    offsetNorth: "0,0"
+    offsetEast: "0,0"
+    offsetSouth: "0,0"
+    offsetWest: "0,0"
+    muzzleOffset: "0,0"
+    useAimDirection: true
+    useContainerOwner: false
 
 - type: entity
   parent: RMCVehicleTankArmorBallistic

@@ -110,8 +110,7 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
             _viewToggle.EnableViewToggle(args.Buckle.Owner, vehicleUid, ent.Owner, insideTarget: null, isOutside: true);
         }
 
-        if (ent.Comp.IsPrimaryOperatorSeat)
-            UpdateGunnerView(args.Buckle.Owner, vehicleUid);
+        UpdateGunnerView(args.Buckle.Owner, vehicleUid, ent.Comp);
 
         _ui.OpenUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
         UpdateWeaponsUiForAllOperators(vehicleUid, weapons);
@@ -127,8 +126,7 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
 
         RemCompDeferred<VehicleWeaponsOperatorComponent>(args.Buckle.Owner);
         _ui.CloseUi(ent.Owner, RMCVehicleWeaponsUiKey.Key, args.Buckle.Owner);
-        if (ent.Comp.IsPrimaryOperatorSeat)
-            UpdateGunnerView(args.Buckle.Owner, ent.Owner, removeOnly: true);
+        UpdateGunnerView(args.Buckle.Owner, ent.Owner, ent.Comp, removeOnly: true);
 
         _viewToggle.DisableViewToggle(args.Buckle.Owner, ent.Owner);
 
@@ -351,20 +349,77 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
         PruneHardpointOperators(args.Vehicle, weapons, hardpoints, itemSlots);
         RecalculateSelectedWeapon(args.Vehicle, weapons, itemSlots);
         RefreshOperatorSelectedWeapons(args.Vehicle, weapons, itemSlots);
+        RefreshSeatGunnerViews(args.Vehicle);
         Dirty(args.Vehicle, weapons);
 
         UpdateWeaponsUiForAllOperators(args.Vehicle, weapons, hardpoints, itemSlots, refreshActions: true);
     }
 
-    private void UpdateGunnerView(EntityUid user, EntityUid vehicle, bool removeOnly = false)
+    private void RefreshSeatGunnerViews(EntityUid vehicle)
     {
-        if (!removeOnly && TryComp(vehicle, out RMCVehicleGunnerViewComponent? gunnerView) && gunnerView.PvsScale > 0f)
+        var query = EntityQueryEnumerator<VehicleWeaponsOperatorComponent>();
+        while (query.MoveNext(out var user, out var op))
+        {
+            if (op.Vehicle != vehicle)
+                continue;
+
+            if (!TryGetUserWeaponsSeat(user, out _, out var seatComp))
+                continue;
+
+            UpdateGunnerView(user, vehicle, seatComp);
+        }
+    }
+
+    private void UpdateGunnerView(
+        EntityUid user,
+        EntityUid vehicle,
+        VehicleWeaponsSeatComponent? seatComp = null,
+        bool removeOnly = false)
+    {
+        seatComp ??= CompOrNull<VehicleWeaponsSeatComponent>(Transform(user).ParentUid);
+
+        if (removeOnly)
+        {
+            if (RemCompDeferred<RMCVehicleGunnerViewUserComponent>(user))
+                _eyeSystem.UpdatePvsScale(user);
+
+            return;
+        }
+
+        var hasView = false;
+        var pvsScale = 0f;
+        var cursorMaxOffset = 0f;
+        var cursorOffsetSpeed = 0.5f;
+        var cursorPvsIncrease = 0f;
+
+        if (seatComp != null && HasBaseGunnerView(seatComp))
+        {
+            pvsScale = Math.Max(pvsScale, seatComp.BaseViewPvsScale);
+            cursorMaxOffset = Math.Max(cursorMaxOffset, seatComp.BaseViewCursorMaxOffset);
+            cursorOffsetSpeed = MathF.Max(cursorOffsetSpeed, seatComp.BaseViewCursorOffsetSpeed);
+            cursorPvsIncrease = Math.Max(cursorPvsIncrease, seatComp.BaseViewCursorPvsIncrease);
+            hasView = true;
+        }
+
+        if (seatComp != null &&
+            (seatComp.IsPrimaryOperatorSeat || HasBaseGunnerView(seatComp)) &&
+            TryComp(vehicle, out RMCVehicleGunnerViewComponent? gunnerView) &&
+            gunnerView.PvsScale > 0f)
+        {
+            pvsScale = Math.Max(pvsScale, gunnerView.PvsScale);
+            cursorMaxOffset = Math.Max(cursorMaxOffset, gunnerView.CursorMaxOffset);
+            cursorOffsetSpeed = MathF.Max(cursorOffsetSpeed, gunnerView.CursorOffsetSpeed);
+            cursorPvsIncrease = Math.Max(cursorPvsIncrease, gunnerView.CursorPvsIncrease);
+            hasView = true;
+        }
+
+        if (hasView && pvsScale > 0f)
         {
             var view = EnsureComp<RMCVehicleGunnerViewUserComponent>(user);
-            view.PvsScale = gunnerView.PvsScale;
-            view.CursorMaxOffset = gunnerView.CursorMaxOffset;
-            view.CursorOffsetSpeed = gunnerView.CursorOffsetSpeed;
-            view.CursorPvsIncrease = gunnerView.CursorPvsIncrease;
+            view.PvsScale = pvsScale;
+            view.CursorMaxOffset = cursorMaxOffset;
+            view.CursorOffsetSpeed = cursorOffsetSpeed;
+            view.CursorPvsIncrease = cursorPvsIncrease;
             Dirty(user, view);
             _eyeSystem.UpdatePvsScale(user);
             return;
@@ -372,6 +427,13 @@ public sealed partial class RMCVehicleWeaponsSystem : EntitySystem
 
         if (RemCompDeferred<RMCVehicleGunnerViewUserComponent>(user))
             _eyeSystem.UpdatePvsScale(user);
+    }
+
+    private static bool HasBaseGunnerView(VehicleWeaponsSeatComponent seatComp)
+    {
+        return seatComp.BaseViewPvsScale > 0f ||
+               seatComp.BaseViewCursorMaxOffset > 0f ||
+               seatComp.BaseViewCursorPvsIncrease > 0f;
     }
 
     private bool IsSelectedWeaponInstalled(EntityUid vehicle, EntityUid selected, RMCHardpointSlotsComponent hardpoints, ItemSlotsComponent itemSlots)
