@@ -337,7 +337,7 @@ public sealed class XenoChargeSystem : EntitySystem
     private void StopCrusherCharge(Entity<XenoChargeComponent> xeno)
     {
         if (_physicsQuery.TryGetComponent(xeno, out var physics) &&
-_thrownItemQuery.TryGetComponent(xeno, out var thrown))
+            _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         {
             _thrownItem.LandComponent(xeno, thrown, physics, true);
             _thrownItem.StopThrow(xeno, thrown);
@@ -359,15 +359,13 @@ _thrownItemQuery.TryGetComponent(xeno, out var thrown))
         if (_mobState.IsDead(targetId))
             return;
 
-        StopCrusherCharge(xeno);
-
         XenoCrusherChargableComponent? crush = null;
         var pass = false;
 
         if (!_xeno.CanAbilityAttackTarget(xeno, targetId) && !TryComp(targetId, out crush))
-        {
             return;
-        }
+
+        StopCrusherCharge(xeno);
 
         if (_net.IsServer)
             _audio.PlayPvs(xeno.Comp.Sound, xeno);
