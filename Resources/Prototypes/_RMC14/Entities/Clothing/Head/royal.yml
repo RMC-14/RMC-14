@@ -78,66 +78,17 @@
 # Cap
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: RMCHeadCapFlippable
   id: RMCHeadCapRoyal
   name: royal marine cap
   description: A soft cap available for private purchase, used to shield the face or neck from the sun depending on how it's worn.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/cap.rsi
-    layers:
-    - state: icon
-      map: [ "unfoldedLayer" ]
-    - state: icon_flipped
-      map: ["foldedLayer"]
-      visible: false
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Royal/cap.rsi
-  - type: Appearance
-  - type: Foldable
-    canFoldInsideContainer: true
-    unfoldVerbText: fold-flip-verb
-    foldVerbText: fold-flip-verb
-  - type: FoldableClothing
-    foldedEquippedPrefix: flipped
-    foldedHeldPrefix: flipped
-  - type: GenericVisualizer
-    visuals:
-      enum.FoldedVisuals.State:
-        foldedLayer:
-          True: {visible: true}
-          False: {visible: false}
-        unfoldedLayer:
-          True: {visible: false}
-          False: {visible: true}
-  - type: Tag
-    tags:
-    - ClothMade
-  - type: Storage
-    maxItemSize: Tiny
-    grid:
-    - 0,0,3,1 # 2 slots
-    whitelist:
-      components:
-      - RMCLighter
-      - HelmetAccessory
-      tags:
-      - Cigarette
-      - Matchstick
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-        ents: [ ]
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-  - type: FixedItemSizeStorage
-  - type: IgnoreContentsSize
-    items:
-      components:
-      - HelmetAccessory
-  - type: HelmetAccessoryHolder
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 # Boonie
 
@@ -145,7 +96,7 @@
   parent: RMCHeadCapRoyal
   id: RMCHeadBoonieRoyal
   name: royal marine boonie hat
-  description: The infamous boonie hat - available for private purchase, and protects all angles... from the sun.
+  description: The infamous boonie hat - available for private purchase, and protects all angles... from the sun, at least.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/Royal/boonie.rsi
