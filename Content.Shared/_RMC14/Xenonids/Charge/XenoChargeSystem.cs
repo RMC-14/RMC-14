@@ -363,9 +363,8 @@ public sealed class XenoChargeSystem : EntitySystem
         var pass = false;
 
         var isValidTarget = _xeno.CanAbilityAttackTarget(xeno, targetId);
-        TryComp(targetId, out crush);
 
-        if (!isValidTarget && crush == null && !HasComp<DamageableComponent>(targetId))
+        if (!isValidTarget && !TryComp(targetId, out crush) && !HasComp<DamageableComponent>(targetId))
             return;
 
         StopCrusherCharge(xeno);
@@ -391,7 +390,9 @@ public sealed class XenoChargeSystem : EntitySystem
 
         }
 
-        var damage = _damageable.TryChangeDamage(targetId, _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage), origin: xeno, tool: xeno);
+        var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
+        var damage = _damageable.TryChangeDamage(targetId, finalDamage, origin: xeno, tool: null);
+
         if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {
             var filter = Filter.Pvs(targetId, entityManager: EntityManager).RemoveWhereAttachedEntity(o => o == xeno.Owner);

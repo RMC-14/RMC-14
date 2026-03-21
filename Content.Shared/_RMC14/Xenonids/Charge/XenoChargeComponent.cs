@@ -18,7 +18,7 @@ public sealed partial class XenoChargeComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 8;
+    public float Range = 9;
 
     [DataField, AutoNetworkedField]
     public float SlowRange = 1.5f;

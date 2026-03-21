@@ -34,6 +34,9 @@
     graph: CMGirder
     node: wall
   - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Structural: 750
 
 - type: entity
   parent: CMWallMetal
@@ -183,6 +186,10 @@
     node: reinforcedWall
   - type: StaticPrice
     price: 150
+  - type: XenoCrusherChargable
+    setDamage:
+      types:
+        Structural: 750
 
 - type: entity
   parent: RMCBaseWallReinforced
