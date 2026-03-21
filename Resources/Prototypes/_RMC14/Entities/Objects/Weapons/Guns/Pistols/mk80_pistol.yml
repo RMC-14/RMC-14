@@ -100,7 +100,7 @@
         whitelist:
           tags:
           - CMMagazinePistolMK80
-        startingItem: RMCMagazinePistolMK80RCM
+        startingItem: CMMagazinePistolMK80
 
 - type: entity
   parent: CMBaseMagazinePistol
@@ -126,12 +126,6 @@
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-
-- type: entity
-  parent: CMMagazinePistolMK80
-  id: RMCMagazinePistolMK80RCM
-  name: L189 squash-head magazine (9mm)
-  description: An RCM-issue eighteen-round magazine for the L189 offensive handgun, loaded with 9mm high-explosive squash-head rounds.
 
 - type: entity
   parent: CMMagazinePistolMK80
