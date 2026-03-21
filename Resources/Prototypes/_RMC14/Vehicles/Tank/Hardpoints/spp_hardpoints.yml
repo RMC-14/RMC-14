@@ -26,15 +26,15 @@
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: tank_turret_0
-    useDirectionalOffsets: true
-    pixelOffsetNorth: "0,-10"
+    useDirectionalOffsets: false
+    pixelOffsetNorth: "0,6"
     pixelOffsetEast: "-5,0"
     pixelOffsetSouth: "0,0"
     pixelOffsetWest: "5,0"
   - type: ItemSlots
     slots:
       turret-cannon:
-        startingItem: RMCVehicleSPPTankRailgun
+        startingItem: RMCVehicleSPPTankP17702
         whitelist:
           components:
           - RMCHardpointItem
@@ -73,10 +73,10 @@
     maxShotCurvatureDegrees: 10
     offsetRotatesWithTurret: true
     useDirectionalOffsets: true
-    pixelOffsetNorth: "0,40"
-    pixelOffsetEast: "33,0"
-    pixelOffsetSouth: "0,-50"
-    pixelOffsetWest: "-33,0"
+    pixelOffsetNorth: "-1,18"
+    pixelOffsetEast: "17,12"
+    pixelOffsetSouth: "0,-35"
+    pixelOffsetWest: "-15,13"
     showOverlay: true
     overlayRsi: _RMC14/Structures/Vehicles/spptank.rsi
     overlayState: p17702_0
@@ -86,12 +86,13 @@
     vehicleState: p17702_0
   - type: GunMuzzleOffset
     offset: "0,0"
+    applyToMuzzleFlash: true
     useDirectionalOffsets: true
-    offsetNorth: "0,0"
-    offsetEast: "0,0"
-    offsetSouth: "0,0"
-    offsetWest: "0,0"
-    muzzleOffset: "0,0"
+    rotateDirectionalOffsets: true
+    offsetEast: "-0.1,-1.7"
+    offsetWest: "0.1, -1.7"
+    offsetSouth: "0, -1"
+    offsetNorth: "0, -1.8"
     useAimDirection: true
     useContainerOwner: false
 
