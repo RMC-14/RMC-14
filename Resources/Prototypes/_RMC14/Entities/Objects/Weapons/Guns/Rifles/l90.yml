@@ -178,7 +178,7 @@
   parent: RMCWeaponRifleL90A2
   id: RMCWeaponRifleL90A2F
   name: L90A2F 'Para' infantry carbine
-  description: The L90A2F 'Para' infantry carbine. Modify version of the L90A2 which incudes ID lock and built lighter materials, it the standard issue rifle of the SFGp. Chambered in 7x43mm.
+  description: The L90A2F 'Para' infantry carbine is a modified version of the L90A2 which includes an ID lock and lighter materials. It is the standard issue rifle of the SFGp. Chambered in 7x43mm.
   components:
   - type: GunIDLock
 

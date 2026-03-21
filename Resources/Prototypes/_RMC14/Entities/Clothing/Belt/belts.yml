@@ -2023,7 +2023,7 @@
 - type: entity
   parent: RMCBeltRCM
   id: RMCBeltRCMFillSPGp
-  suffix: SPGp, Filled
+  suffix: SFGp, Filled
   components:
     - type: StorageFill
       contents:

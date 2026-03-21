@@ -370,7 +370,7 @@
 - type: entity
   parent: RMCBackpackRCMSmallPVP
   id: RMCBackpackRCMSmallPVPFilledSFGp
-  suffix: Filled, SPFg
+  suffix: Filled, SFGg
   components:
     - type: StorageFill
       contents:

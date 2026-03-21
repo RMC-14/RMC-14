@@ -154,8 +154,8 @@
 - type: entity
   parent: RMCHeadRoyalHelmetBallistic
   id: RMCHeadSFGpBeret
-  name: spgp beret
-  description: A distinctive crimson beret worn by the Special Force Group. Reinforced with flexible Kevlar, it offers protection while maintaining a traditional and respected appearance.
+  name: sfgp beret
+  description: A distinctive crimson beret worn by the RCM's Special Force Group. Reinforced with flexible kevlar, it offers protection while maintaining a traditional and respected appearance.
   suffix: SFGp
   components:
     - type: Sprite
@@ -166,8 +166,8 @@
 - type: entity
   parent: RMCHeadRoyalHelmetBallistic
   id: RMCHeadSFGpBeretLead
-  name: spgp team lead beret
-  description: A distinctive crimson beret worn by Team Leaders of the Special Force Group. Reinforced with flexible Kevlar, it offers protection while maintaining a traditional and respected appearance.
+  name: sfgp team lead beret
+  description: A distinctive crimson beret worn by Team Leaders of the RCM's Special Force Group. Reinforced with flexible kevlar, it offers protection while maintaining a traditional and respected appearance.
   suffix: SFGp
   components:
     - type: Sprite

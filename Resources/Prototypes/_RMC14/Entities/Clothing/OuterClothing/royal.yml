@@ -194,7 +194,7 @@
   parent: RMCArmorRoyal
   id: RMCArmorRoyalHunter
   name: kestrel armoured hunter vest
-  description: A customized suit of kestrel armor with assistance of Weston-Yamada managing to lighten the weight of the armor while keeping it's heavy armor plates. Dubbed the hunter variant because of it expensive cost to create it is used exclusively by the RCM SFGp.
+  description: A customized suit of Kestrel armor. With the assistance of Weston-Yamada, the armor manages to remain light while keeping its' heavy armor plates. Dubbed the "Hunter" variant due to its' expensive cost, it is used exclusively by the RCM SFGp.
   suffix: SFGp
   components:
     - type: Sprite

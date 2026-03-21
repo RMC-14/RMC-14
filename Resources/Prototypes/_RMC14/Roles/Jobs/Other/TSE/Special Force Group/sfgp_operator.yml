@@ -38,9 +38,6 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
-      icon:
-        sprite: _RMC14/Interface/cm_job_icons.rsi #TODO Unique Icon?
-        state: para_smartgunner
   hidden: true
 
 - type: entity
