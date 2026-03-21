@@ -42,3 +42,12 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Flags/unmc_flag.rsi
+
+- type: entity
+  parent: RMCFlagCarriableBase
+  id: RMCFlagCarriableCLF
+  name: CLF flag
+  description: "The flag of the CLF." # This one looks ready to be planted into the ground."
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Flags/clf_flag.rsi
