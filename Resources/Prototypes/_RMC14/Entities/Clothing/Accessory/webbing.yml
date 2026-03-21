@@ -1047,3 +1047,14 @@
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingCLFFP9000
+  suffix: Filled, FP9000
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGFP9000
+    - id: RMCMagazineSMGFP9000
+    - id: RMCMagazineSMGFP9000

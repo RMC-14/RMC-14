@@ -157,6 +157,7 @@
       - RMCMagazineMar50LMG
       - RMCMagazineRifleMAR40
       - RMCMagazineSMGMAC15
+      - RMCMagazineSMGFP9000
 
 - type: entity
   parent: RMCCoatMilitia
@@ -210,6 +211,29 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
+
+- type: entity
+  parent: RMCCoatMilitia
+  id: RMCCoatMilitiaFullArmor
+  name: colonial militia full armor
+  description: A rare privilege within the disorganized partisans, a set of somewhat full armor, created from boiled leather and more modern armor places, this one includes full set of armor for all limbs and full torso protection.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/full.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/full.rsi
+  - type: RMCArmorSpeedTier
+    speedTier: very light
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
+    walkModifier: 0.897
+    sprintModifier: 0.897
+  - type: IgnoreContentsSize
+    items:
+      tags:
+       - RMCMagazineSMGFP9000
 
 - type: entity
   parent: RMCCoatMilitia
