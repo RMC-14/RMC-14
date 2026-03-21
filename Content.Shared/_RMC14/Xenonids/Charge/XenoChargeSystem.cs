@@ -97,6 +97,7 @@ public sealed class XenoChargeSystem : EntitySystem
         SubscribeLocalEvent<XenoChargeComponent, ThrowDoHitEvent>(OnXenoChargeHit);
         SubscribeLocalEvent<XenoChargeComponent, XenoChargeDoAfterEvent>(OnXenoChargeDoAfterEvent);
         SubscribeLocalEvent<XenoChargeComponent, StopThrowEvent>(OnXenoChargeStop);
+        SubscribeLocalEvent<XenoChargeComponent, PreventCollideEvent>(OnXenoChargePreventCollide);
 
         SubscribeLocalEvent<XenoToggleChargingComponent, XenoToggleChargingActionEvent>(OnXenoToggleChargingAction);
 
@@ -360,8 +361,6 @@ public sealed class XenoChargeSystem : EntitySystem
             return;
 
         XenoCrusherChargableComponent? crush = null;
-        var pass = false;
-
         var isValidTarget = _xeno.CanAbilityAttackTarget(xeno, targetId);
 
         if (!isValidTarget && !TryComp(targetId, out crush) && !HasComp<DamageableComponent>(targetId))
@@ -378,16 +377,6 @@ public sealed class XenoChargeSystem : EntitySystem
         {
             if (crush.SetDamage != null)
                 structDamage = crush.SetDamage;
-
-            if(crush.InstantDestroy)
-            {
-                if (_net.IsClient && pass)
-                    _transform.DetachEntity(targetId, Transform(targetId));
-                else if (_net.IsServer)
-                    _destruct.DestroyEntity(targetId);
-                return;
-            }
-
         }
 
         var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
@@ -406,18 +395,11 @@ public sealed class XenoChargeSystem : EntitySystem
                 if (damage != null && crush.PassOnDestroy &&
                     crush.DestroyDamage > FixedPoint2.Zero && damageable.TotalDamage >= crush.DestroyDamage)
                 {
-                    pass = true;
-
                     if (_net.IsClient)
                         _transform.DetachEntity(targetId, Transform(targetId));
                 }
             }
         }
-
-        var range = xeno.Comp.Range;
-
-        if (crush != null && crush.ThrowRange != null)
-            range = crush.ThrowRange.Value;
 
         _rmcPulling.TryStopAllPullsFromAndOn(targetId);
 
@@ -425,6 +407,28 @@ public sealed class XenoChargeSystem : EntitySystem
 
         _stun.TryParalyze(targetId, xeno.Comp.StunTime, true);
         _sizeStun.KnockBack(targetId, origin, 3, 3, knockBackSpeed: 15);
+    }
+
+    private void OnXenoChargePreventCollide(Entity<XenoChargeComponent> xeno, ref PreventCollideEvent args)
+    {
+        if (xeno.Comp.Charge == null)
+            return;
+
+        if (TerminatingOrDeleted(args.OtherEntity))
+            return;
+
+        if (!TryComp(args.OtherEntity, out XenoCrusherChargableComponent? crush))
+            return;
+
+        if (!crush.InstantDestroy || !crush.PassOnDestroy)
+            return;
+
+        if (_net.IsServer)
+            _destruct.DestroyEntity(args.OtherEntity);
+        else if (_net.IsClient)
+            _transform.DetachEntity(args.OtherEntity, Transform(args.OtherEntity));
+
+        args.Cancelled = true;
     }
 
     private void OnXenoChargeDoAfterEvent(Entity<XenoChargeComponent> xeno, ref XenoChargeDoAfterEvent args)
@@ -458,6 +462,9 @@ public sealed class XenoChargeSystem : EntitySystem
 
             _slow.TrySlowdown(slower, xeno.Comp.SlowTime, ignoreDurationModifier: true);
         }
+
+        xeno.Comp.Charge = null;
+        Dirty(xeno);
     }
 
     private void OnXenoToggleChargingAction(Entity<XenoToggleChargingComponent> ent, ref XenoToggleChargingActionEvent args)
@@ -720,7 +727,6 @@ public sealed class XenoChargeSystem : EntitySystem
         {
             _hit.Clear();
         }
-
         var query = EntityQueryEnumerator<ActiveXenoToggleChargingComponent, XenoToggleChargingComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var active, out var charging, out var physics))
         {
