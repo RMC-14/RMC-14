@@ -1,0 +1,37 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "clothtable"
+        },
+        {
+            "name": "clothmiddle"
+        },
+        {
+            "name": "cloth1tileendtable",
+            "directions": 4
+        },
+        {
+            "name": "cloth1tilethick",
+            "directions": 8
+        },
+        {
+            "name": "clothdir",
+            "directions": 8
+        },
+        {
+            "name": "clothdir2",
+            "directions": 4
+        },
+        {
+            "name": "clothdir3",
+            "directions": 8
+        }
+    ]
+}
