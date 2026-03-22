@@ -29,13 +29,13 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
     [Dependency] private readonly RMCPulseSystem _rmcPulse = default!;
     [Dependency] private readonly RMCReagentSystem _rmcReagent = default!;
     [Dependency] private readonly SharedRMCTemperatureSystem _rmcTemperature = default!;
-    [Dependency] private readonly StationRecordsSystem _stationRecords = default!;
+    //[Dependency] private readonly StationRecordsSystem _stationRecords = default!;
     [Dependency] private readonly SharedGameTicker _ticker = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> BruteGroup = "Brute";
     private static readonly ProtoId<DamageGroupPrototype> BurnGroup = "Burn";
     private static readonly ProtoId<DamageGroupPrototype> ToxinGroup = "Toxin";
-
+/* TODO RMC14 Medical Records Console
     public override void Initialize()
     {
         base.Initialize();
@@ -48,7 +48,7 @@ public sealed class RMCMedicalRecordsSystem : SharedRMCMedicalRecordsSystem
         _stationRecords.AddRecordEntry(ev.Key, new RMCMedicalRecord());
         _stationRecords.Synchronize(ev.Key);
     }
-
+*/
     public void UpdateMedicalRecordFromScan(EntityUid target, HealthScanDetailLevel detailLevel)
     {
         if (!TryGetMedicalRecord(target, out var medRecord))

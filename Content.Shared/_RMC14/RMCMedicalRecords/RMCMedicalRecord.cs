@@ -1,7 +1,7 @@
 using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.RMCMedicalRecords;
-
+/* TODO RMC14 Medical Records Console
 /// <summary>
 ///     Medical record stored in the station record set.
 ///     Created automatically when a general record is created.
@@ -48,3 +48,4 @@ public sealed partial record RMCMedicalRecord
 
 [Serializable, NetSerializable]
 public record struct RMCMedicalComment(TimeSpan AddTime, string Comment, string? AuthorName);
+*/
