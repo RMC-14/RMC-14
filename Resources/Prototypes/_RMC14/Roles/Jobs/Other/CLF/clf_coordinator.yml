@@ -41,7 +41,7 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFCoordinator
-  name: rmc-ghost-role-clf-coordinator
+  name: clf ghost role coordinator
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -55,7 +55,7 @@
   id: RMCCLFCoordinator
   components:
   - type: GhostRole
-    name: clf ghost role coordinator 
+    name: rmc-ghost-role-clf-coordinator
     description: rmc-ghost-role-information-clf-description
     rules: rmc-ghost-role-information-clf-rules
     reregister: false
