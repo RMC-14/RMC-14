@@ -95,6 +95,7 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/bullet_projectiles.rsi
+    drawdepth: Effects
     layers:
     - state: bullet
       shader: unshaded
@@ -145,6 +146,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded
@@ -212,6 +214,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded
@@ -251,6 +254,7 @@
   - type: RMCFireProjectile
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Projectiles/firesentry_projectile.rsi
+    drawdepth: Effects
     layers:
     - state: pulse0
       shader: unshaded

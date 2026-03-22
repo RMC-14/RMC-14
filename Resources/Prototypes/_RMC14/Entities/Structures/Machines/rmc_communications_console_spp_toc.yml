@@ -1,0 +1,20 @@
+- type: entity
+  parent: RMCOverwatchConsoleSPP
+  id: RMCOverwatchConsoleSPPTOC
+  name: SPP tactical operations console
+  description: A tactical operations console configured for SPP overwatch duties.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/toc_spp.rsi
+    state: toc
+    overrideDir: West
+    enableOverrideDir: true
+
+- type: entity
+  parent: RMCOverwatchConsoleSPPTOC
+  id: RMCOverwatchConsoleSPPTOCRotating
+  suffix: Rotating
+  components:
+  - type: Sprite
+    overrideDir: South
+    enableOverrideDir: false

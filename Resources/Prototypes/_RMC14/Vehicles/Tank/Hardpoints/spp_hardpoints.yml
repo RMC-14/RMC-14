@@ -39,6 +39,7 @@
           components:
           - RMCHardpointItem
       turret-launcher:
+        startingItem: RMCVehicleSPPTankCupola
         whitelist:
           components:
           - RMCHardpointItem
@@ -156,10 +157,11 @@
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
-    offsetNorth: "0,0"
-    offsetEast: "0,0"
-    offsetSouth: "0,0"
-    offsetWest: "0,0"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.5,-0.7"
+    offsetEast: "0,-0.5"
+    offsetSouth: "-0.5,0"
+    offsetWest: "-0.7,-0.4"
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false
@@ -193,10 +195,11 @@
   - type: GunMuzzleOffset
     offset: "0,0"
     useDirectionalOffsets: true
-    offsetNorth: "0,0"
-    offsetEast: "0,0"
-    offsetSouth: "0,0"
-    offsetWest: "0,0"
+    rotateDirectionalOffsets: true
+    offsetNorth: "-0.5,-0.7"
+    offsetEast: "0,-0.5"
+    offsetSouth: "-0.5,0"
+    offsetWest: "-0.7,-0.4"
     muzzleOffset: "0,0"
     useAimDirection: true
     useContainerOwner: false

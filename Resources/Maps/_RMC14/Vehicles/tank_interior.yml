@@ -134,14 +134,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 0.70269585,-2.3210986
       parent: 2
-- proto: RMCSeatTankCommander
-  entities:
-  - uid: 47
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 0.433,-1.558
-      parent: 2
 - proto: RMCVehicleTankAmmoLoader
   entities:
   - uid: 38

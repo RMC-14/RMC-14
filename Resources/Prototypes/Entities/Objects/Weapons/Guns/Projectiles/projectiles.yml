@@ -52,7 +52,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    drawdepth: OverMobs
+    drawdepth: Effects
     offset: 0, 0
 
 - type: entity
@@ -61,7 +61,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
-    drawdepth: OverMobs
+    drawdepth: Effects
     offset: 0.2, 0
     scale: "1.6, 1.6"
 
