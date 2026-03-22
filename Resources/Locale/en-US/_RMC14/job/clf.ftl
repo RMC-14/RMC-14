@@ -22,6 +22,10 @@ rmc-ghost-role-clf-engineer = CLF Technician (Hostile)
 rmc-clf-engineer = Technician
 rmc-job-prefix-clf-engineer = TECH
 
+rmc-ghost-role-clf-coordinator = CLF Coordinator (Hostile)
+rmc-clf-coordinator = Coordinator
+rmc-job-prefix-clf-coordinator = CR
+
 rmc-ghost-role-clf-medic = CLF Medic (Hostile)
 rmc-clf-medic = Medic
 rmc-job-prefix-clf-medic = MED

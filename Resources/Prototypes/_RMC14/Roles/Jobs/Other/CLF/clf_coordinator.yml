@@ -1,7 +1,7 @@
 - type: job
   parent: CMJobBase
   id: RMCCLFCoordinator
-  name: CLF Coordinator
+  name: rmc-clf-coordinator
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: CMJobCLFCoordinator
   ranks:
@@ -41,7 +41,7 @@
 
 - type: entity
   id: RMCRandomHumanoidCLFCoordinator
-  name: clf ghost role coordinator
+  name: rmc-ghost-role-clf-coordinator
   suffix: Spawner, Player
   components:
   - type: Sprite
@@ -55,7 +55,7 @@
   id: RMCCLFCoordinator
   components:
   - type: GhostRole
-    name: clf coordinator
+    name: clf ghost role coordinator 
     description: rmc-ghost-role-information-clf-description
     rules: rmc-ghost-role-information-clf-rules
     reregister: false
@@ -64,7 +64,7 @@
       settings: short
     requirements:
     - !type:RoleTimeRequirement
-      role: CMRifleman
+      role: CMJobRifleman
       time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF

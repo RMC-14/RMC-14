@@ -93,6 +93,7 @@
     outerClothing:
     - RMCSpeedLoaderMatebaHighImpact
     - RMCSpeedLoaderMatebaHighImpact
+    - RMCSpeedLoaderMatebaHighImpact
 
 - type: playTimeTracker
   id: CMJobCLFCellCommander
