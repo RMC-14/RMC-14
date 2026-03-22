@@ -216,7 +216,7 @@
   parent: RMCCoatMilitia
   id: RMCCoatMilitiaFullArmor
   name: colonial militia full armor
-  description: A rare privilege within the disorganized partisans, a set of somewhat full armor, created from boiled leather and more modern armor places, this one includes full set of armor for all limbs and full torso protection.
+  description: A rare privilege within the disorganized partisans, a set of somewhat full armor, created from boiled leather and more modern armor plates, this one includes full set of armor for all limbs and full torso protection.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/Militia/full.rsi
@@ -240,7 +240,7 @@
   id: RMCCoatMilitiaHarness
   name: colonial militia full armor harness
   suffix: smart gun harness
-  description: A rare privilege within the disorganized partisans, a set of somewhat full armor, created from boiled leather and more modern armor places, this one includes full set of armor for all limbs and full torso protection. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
+  description: A rare privilege within the disorganized partisans, a set of somewhat full armor, created from boiled leather and more modern armor plates, this one includes full set of armor for all limbs and full torso protection. This one has straps interweaved with the plates, that allow the user to fire a captured smart gun, if a bit uncomfortably.
   components:
   - type: SmartGunArmor
 
