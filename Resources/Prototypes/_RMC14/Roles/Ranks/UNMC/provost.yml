@@ -26,13 +26,6 @@
   prefix: PvDM.
   paygrade: O6
 
-# Any player with high law understanding
-- type: rank
-  id: RMCRankProvostChiefInspector
-  name: Chief Inspector
-  prefix: PvCI.
-  paygrade: O5
-
 # Any player with medium-low law understanding
 - type: rank
   id: RMCRankProvostInspector
