@@ -27,16 +27,64 @@
   - type: RMCVehicleWheelItem
 
 - type: entity
+  parent: RMCVehicleSPPAPCHardpointBase
+  id: RMCVehicleSPPAPCTurret
+  name: SPP APC turret
+  description: A rotating turret mount for an SPP APC.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/sppapc.rsi
+    state: apc_turret_0
+  - type: RMCHardpointItem
+    hardpointType: Turret
+    vehicleFamily: APC
+    slotType: Turret
+    compatibilityId: SPPAPC
+    damageMultiplier: 0.2
+  - type: RMCHardpointIntegrity
+    maxIntegrity: 500
+  - type: VehicleTurret
+    rotateToCursor: true
+    stabilizedRotation: false
+    rotationSpeed: 180
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
+    overlayState: apc_turret_0
+  - type: RMCHardpointSlots
+    vehicleFamily: APC
+    slots:
+    - id: turret-cannon
+      hardpointType: Cannon
+      slotType: Cannon
+      compatibilityId: SPPAPCTurret
+      required: false
+      insertDelay: 2.0
+  - type: RMCHardpointVisual
+    vehicleState: apc_turret_0
+
+- type: entity
   parent: RMCAPCDualCannon
   id: RMCVehicleSPPAPCMinigun
-  name: SPP APC minigun turret
-  description: A roof-mounted minigun turret for an SPP APC.
+  name: SPP APC minigun
+  description: A minigun fitted to an SPP APC turret.
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/hardpoints/sppapc.rsi
     state: apc_minigun
   - type: RMCHardpointItem
-    compatibilityId: SPPAPC
+    hardpointType: Cannon
+    vehicleFamily: APC
+    slotType: Cannon
+    compatibilityId: SPPAPCTurret
+    damageMultiplier: 0.2
+  - type: VehicleTurretAttachment
+  - type: VehicleTurret
+    showOverlay: true
+    overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
+    overlayState: apc_minigun_0
+    fireWhileRotatingGraceDegrees: 20
+    useBarrelDirectionForShots: true
+    maxShotCurvatureDegrees: 10
   - type: RMCHardpointVisual
     vehicleState: apc_minigun_0
 

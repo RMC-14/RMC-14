@@ -170,15 +170,12 @@
     maxPassengers: 10
     maxXenos: 3
     entryPoints:
-    - offset: 1.5,0
-      radius: 0.7
-      interiorCoords: 1.6,2.6
     - offset: -1.5,0
       radius: 0.7
-      interiorCoords: 1.6,-1.5
-    - offset: 0,2
-      radius: 0.85
-      interiorCoords: 0.25,-1
+      interiorCoords: 4.6,-1.25
+    - offset: 1.5,0
+      radius: 0.7
+      interiorCoords: 4.6,1.7
 
 - type: entity
   parent: RMCVehicleAPCBase
@@ -320,3 +317,5 @@
       slotType: Wheel
       compatibilityId: SPPAPC
       insertDelay: 1.5
+  - type: VehicleEnter
+    interiorPath: /Maps/_RMC14/Vehicles/spp_apc_interior.yml

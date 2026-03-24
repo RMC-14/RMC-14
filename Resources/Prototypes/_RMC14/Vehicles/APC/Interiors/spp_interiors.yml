@@ -13,6 +13,30 @@
 
 - type: entity
   abstract: true
+  id: RMCVehicleSPPAPCRoofBase
+  name: SPP APC Side Door
+  placement:
+    mode: PlaceFree
+  components:
+  - type: Transform
+    anchored: false
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Sprite
+    sprite: _RMC14/Structures/Vehicles/Interiors/sppapc.rsi
+    drawdepth: Overdoors
+  - type: InteractionTransparency
+  - type: RMCSpriteFade
+    targetAlpha: 0.35
+    changeRate: 4.0
+    reactToMouse: false
+    fadeOnSharedGrid: true
+    fadeLayers:
+    - "roof"
+
+- type: entity
+  abstract: true
   id: RMCVehicleSPPAPCChassisBase
   name: SPP APC interior chassis
   description: A chassis segment for an SPP APC interior.
@@ -76,13 +100,38 @@
   components:
   - type: Sprite
     state: door_front
+  - type: Occluder
+    enabled: false
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,0.49,0.49"
+        density: 20000
+        hard: true
+        mask:
+        - FullTileMask
+        layer:
+        - HighImpassable
+        - MidImpassable
+        - LowImpassable
+        - InteractImpassable
 
 - type: entity
-  parent: RMCVehicleSPPAPCDoorBase
+  parent: RMCVehicleSPPAPCRoofBase
   id: RMCVehicleSPPAPCDoorBack
   components:
   - type: Sprite
-    state: door_back
+    drawdepth: BelowMobs
+    layers:
+    - state: door_back
+      map: [ "roof" ]
+  - type: Clickable
+  - type: InteractionOutline
+  - type: RemoveComponents
+    components:
+    - type: InteractionTransparency
 
 - type: entity
   parent: RMCVehicleSPPAPCDoorBase
