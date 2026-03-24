@@ -1009,7 +1009,7 @@
     - id: CMPortableSurgicalBedSpawnFolded
     - id: CMBloodPackFull
     - id: CMBloodPackFull
-    - id: RMCSynthResetKeyHalcyon
+    - id: RMCSynthResetKeyNovaris
 
 - type: entity
   parent: RMCSatchelWelder
