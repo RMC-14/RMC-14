@@ -50,6 +50,7 @@
   id: RMCGearParaTeamLeader
   equipment:
     head: RMCHeadParaBeretLead
+    ears: RMCHeadsetParaTeamLead
     outerClothing: RMCArmorParaVest
     back: RMCSatchelLightpackFilledPara
 
