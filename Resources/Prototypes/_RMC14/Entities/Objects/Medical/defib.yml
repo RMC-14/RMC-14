@@ -186,15 +186,15 @@
 
 - type: entity
   parent: RMCSynthResetKey
-  id: RMCSynthResetKeyHalcyon # TODO RMC14 unique sprite for this
-  name: Halcyon synthetic reset key
-  description: An independent Halcyon design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
+  id: RMCSynthResetKeyNovaris # TODO RMC14 unique sprite for this
+  name: Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset.
 
 - type: entity
   parent: RMCSynthResetKey
-  id: RMCSynthResetKeyHalcyonSMART # TODO RMC14 unique sprite for this
-  name: SMART Halcyon synthetic reset key
-  description: An independent Halcyon design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a micro-function AI and can be operated by anyone.
+  id: RMCSynthResetKeyNovarisSMART # TODO RMC14 unique sprite for this
+  name: SMART Novaris synthetic reset key
+  description: An independent Novaris design, based on a previous collaboration with Weston-Yamada. This device can fix major glitches or programming errors of synthetic units, as well as being able to restart a synthetic that has suffered critical failure. It can only be used once before being reset. This one has a micro-function AI and can be operated by anyone.
   components:
   - type: RequiresSkill
     skills:
