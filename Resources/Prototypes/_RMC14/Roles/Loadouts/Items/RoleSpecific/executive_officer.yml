@@ -7,7 +7,7 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobExecutiveOfficer
-      time: 432000 # 175 hrs
+      time: 432000 # 120 hrs
   equipment:
     head: RMCHeadBeretXOBlack 
 
@@ -19,6 +19,6 @@
     requirement:
       !type:RoleTimeRequirement
       role: CMJobExecutiveOfficer
-      time: 180000 # 70 hrs
+      time: 180000 # 50 hrs
   equipment:
     head: RMCHeadBeretXOOcean
