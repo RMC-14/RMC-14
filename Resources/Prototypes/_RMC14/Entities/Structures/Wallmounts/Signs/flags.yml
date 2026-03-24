@@ -16,6 +16,15 @@
     state: clfflag
 
 - type: entity
+  parent: RMCBannerCLF
+  id: RMCBannerCLFAltDraw
+  suffix: Over Podlocks
+  components:
+  - type: Sprite
+    state: clfflag
+    drawdepth: BlastDoors
+
+- type: entity
   parent: RMCBannerBase
   id: RMCBannerCLFWorn
   name: worn CLF flag

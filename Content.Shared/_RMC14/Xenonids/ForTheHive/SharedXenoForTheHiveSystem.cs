@@ -6,6 +6,7 @@ using Content.Shared._RMC14.Xenonids.Construction;
 using Content.Shared._RMC14.Xenonids.Energy;
 using Content.Shared._RMC14.Xenonids.Evolution;
 using Content.Shared._RMC14.Xenonids.Hive;
+using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
@@ -43,6 +44,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] protected readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedInteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly DamageableSystem _damage = default!;
     [Dependency] private readonly SharedXenoAcidSystem _acid = default!;
@@ -198,7 +200,7 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                             // Only proceed if our acid is stronger, otherwise skip this barricade
                             if (!_acid.CanReplaceAcid(cade, active.AcidStrength))
                                 continue;
-                            
+
                             _acid.RemoveAcid(cade);
                         }
 
@@ -244,14 +246,13 @@ public abstract partial class SharedXenoForTheHiveSystem : EntitySystem
                         var smoke = SpawnAtPosition(active.AcidSmoke, _turf.GetTileCenter(turf));
                     }
 
-                    //TODO CM gibs the runner
                     if (GetHiveCore(xeno, out var core))
                         ForTheHiveRespawn(xeno, active.CoreSpawnTime);
                     else
                         ForTheHiveRespawn(xeno, active.CorpseSpawnTime, true, origin);
 
                     _audio.PlayStatic(active.KaboomSound, Filter.PvsExcept(xeno), origin, true);
-                    QueueDel(xeno);
+                    _body.GibBody(xeno);
                     RemCompDeferred<ActiveForTheHiveComponent>(xeno);
                 }
             }

@@ -41,6 +41,14 @@
   loadouts:
   - MarineSecuritySatchel
 
+- type: loadoutGroup
+  id: ProvostSecurityBackpack
+  name: rmc-loadout-group-backpack
+  minLimit: 1
+  hidden: true
+  loadouts:
+  - ProvostSecuritySatchel
+
 # Eyewear
 - type: loadoutGroup
   id: EyewearRMC
@@ -141,10 +149,11 @@
   - SmockRMC
   - SmockCamoRMC
   - NeckerchiefSquadRMC
-  - NeckerchiefTanRMC
+  - NeckerchiefRedRMC
   - NeckerchiefBlackRMC
-  - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
+  - NeckerchiefGrayRMC
+  - NeckerchiefTanRMC
   - NeckerchiefWhiteRMC
 
 - type: loadoutGroup
@@ -178,6 +187,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -214,6 +224,7 @@
   maxLimit: 10
   loadouts:
   - FakeNVGRMC
+  - FakeNVGPVERMC
   - NettingRMC
   - NettingUrbanRMC
   - NettingDesertRMC
@@ -288,6 +299,24 @@
   - SquadArmbandRMC
   - PatchPeaceRMC
 
+# Accessories
+- type: loadoutGroup
+  id: AccessoriesRMCPVE
+  name: rmc-loadout-group-accessories
+  minLimit: 0
+  maxLimit: 2
+  loadouts:
+  - PaintSkullRMC
+  - PaintHeartRMC
+  - PaintMedicRMC
+  - PaintUNRMC
+  - PaintTargetRMC
+  - PaintSmileyFaceRMC
+  - PaintNeutralFaceRMC
+  - PaintCrossRMC
+  - PaintInscriptionRMC
+  - PaintMixtapeRMC
+
 # Paperwork
 - type: loadoutGroup
   id: PaperworkRMC
@@ -343,6 +372,19 @@
   - D20DiceRMC
   - D6DiceRMC
 
+# Melee Weapons
+- type: loadoutGroup
+  id: MeleeWeaponsRMC
+  name: rmc-loadout-group-melee-weapons
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - TantoARMC
+  - TantoBRMC
+  - CombatUtilityARMC
+  - CombatUtilityBRMC
+  - SawtoothDaggerARMC
+  - SawtoothDaggerBRMC
 
 # Weapons
 - type: loadoutGroup
@@ -522,6 +564,15 @@
   - ColIDCardRMC
   - ColNormalIDCardRMC
 
+- type: loadoutGroup
+  id: CommandingOfficerWeaponRMC
+  name: rmc-loadout-group-role-specific-weapon
+  loadouts:
+  - MatebaRMC
+  - HandcannonRMC
+  - GoldMatebaRMC
+  - GoldHandcannonRMC
+
 # Corporate Liaison
 - type: loadoutGroup
   id: LiaisonRoleSpecificRMC
@@ -629,6 +680,7 @@
   - SquadBeretRMC
   - GreenBeretRMC
   - TanBeretRMC
+  - CamoBeretRMC
   - BoonieRMC
   - BoonieTanRMC
   - CapRMC
@@ -715,6 +767,7 @@
   - NeckerchiefGrayRMC
   - NeckerchiefGreenRMC
   - NeckerchiefWhiteRMC
+  - NeckerchiefRedRMC
 
 # Civilian
 - type: loadoutGroup
@@ -728,7 +781,7 @@
   - PatchWeYaRMCBlack
   - PatchWeYaRMCFury161
   - PatchTSERMC
-  - PatchCECRMC
+  - PatchMSCRMC
   - PatchOliveBranch
   # - PatchCLFRMC # RMC14 - Disabled intentionally to reduce admin burden.
   # TODO Halcyon Dynamics patch
@@ -754,3 +807,13 @@
   - PlushieTherapyRMC
   - PlushieGnarpGnarpRMC
   - PlushieGnarpGnarpAltRMC
+
+# Provost Inspector
+- type: loadoutGroup
+  id: ProvostRoleSpecificOuterwearRMC
+  name: rmc-loadout-group-provost-role-specific-outerwear
+  minLimit: 0
+  maxLimit: 1
+  loadouts:
+  - ProvostJacketFilledRMC
+  - ProvostCoatFilledRMC

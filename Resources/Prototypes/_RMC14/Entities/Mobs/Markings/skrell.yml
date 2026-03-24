@@ -7,6 +7,8 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_f_s
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_f_s_tips
 
 - type: marking
   id: RMCHairSkrellShort
@@ -16,6 +18,276 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/hair.rsi
       state: skrell_hair_m_s
+
+- type: marking
+  id: RMCHairSkrellShorter #couple of pixels of difference
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_short
+
+- type: marking
+  id: RMCHairSkrellLonger
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_long
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_hair_long_tips
+
+- type: marking
+  id: RMCHairSkrellFluff
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_fluff_hair
+
+- type: marking
+  id: RMCHairSkrellShortTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_short_tuux
+
+- type: marking
+  id: RMCHairSkrellLongTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_long_tuux
+
+- type: marking
+  id: RMCHairSkrellStraightTuux
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_straight_tuux
+
+- type: marking
+  id: RMCHairSkrellStraightTuuxLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_straight_tuux_long
+
+- type: marking
+  id: RMCHairSkrellMullet
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mullet
+
+- type: marking
+  id: RMCHairSkrellRightEmo
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_right_emo
+
+- type: marking
+  id: RMCHairSkrellLeftEmo
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_left_emo
+
+- type: marking
+  id: RMCHairSkrellRightEmoLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_right_emo_long
+
+- type: marking
+  id: RMCHairSkrellLeftEmoLong
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_left_emo_long
+  
+- type: marking
+  id: RMCHairSkrellLooseBraid
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_loose_braid
+
+- type: marking
+  id: RMCHairSkrellMidBun
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun_hairtie
+
+- type: marking
+  id: RMCHairSkrellLongMidBun
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_long_mid_bun
+    - sprite: _RMC14/Mobs/Skrells/hair.rsi
+      state: skrell_mid_bun_hairtie
+
+# Headdresses (all defined as tails so they load over your head, in special because they are a different type of overlay)
+- type: marking
+  id: RMCHeaddressSkrellFestive
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_fest_s
+
+- type: marking
+  id: RMCHeaddressSkrellGold
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_gold_s
+
+- type: marking
+  id: RMCHeaddressSkrellGoldDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellTanDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_tandia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellGreenDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_greendia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellBlackDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_blackdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_golddia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverTanDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_tansilvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverGreenDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_greensilvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+- type: marking
+  id: RMCHeaddressSkrellSilverBlackDiamond
+  bodyPart: Tail # Cursed
+  markingCategory: Special
+  speciesRestriction: [Skrell]
+  forcedColoring: true
+  RMCFollowSkinColor: false
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_blacksilvdia_s
+    - sprite: _RMC14/Mobs/Skrells/headdress.rsi
+      state: skrell_silvdia_gem_s
+
+# Face Markings
+- type: marking
+  id: RMCEyesSkrellAxiori # Alternate eye markings in case you wanna have giant frog eyes
+  bodyPart: Eyes
+  markingCategory: Head
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: skr-axiori-eyes
 
 # Spots
 - type: marking
@@ -37,6 +309,15 @@
       state: spots-hair-right
 
 - type: marking
+  id: RMCSpotsSkrellHairTiny
+  bodyPart: HeadTop
+  markingCategory: Overlay
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/markings.rsi
+      state: spots-hair-tiny
+
+- type: marking
   id: RMCSpotsSkrellBodyLeft
   bodyPart: LLeg
   markingCategory: Overlay
@@ -53,3 +334,84 @@
   sprites:
     - sprite: _RMC14/Mobs/Skrells/markings.rsi
       state: spots-right
+
+# Tails, which are intended to be completely opt-in
+- type: marking
+  id: RMCTailSkrellFringeShort
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_shortfringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_shortfringetail_fringe
+
+- type: marking
+  id: RMCTailSkrellFringe
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_fringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_fringetail_fringe
+
+- type: marking
+  id: RMCTailSkrellFringeLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_longfringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_longfringetail_fringe
+
+- type: marking
+  id: TailSkrellFringeExtraLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_xlongfringetail
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_xlongfringetail_fringe
+
+- type: marking
+  id: RMCTailSkrell
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail
+
+- type: marking
+  id: RMCTailSkrellShort
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_short
+
+- type: marking
+  id: RMCTailSkrellLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_long
+
+- type: marking
+  id: RMCTailSkrellExtraLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [Skrell]
+  sprites:
+    - sprite: _RMC14/Mobs/Skrells/tails.rsi
+      state: skrell_tail_xlong

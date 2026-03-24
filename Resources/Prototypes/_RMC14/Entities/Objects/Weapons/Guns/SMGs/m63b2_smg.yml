@@ -58,6 +58,8 @@
           - CMMagazineSMGM63Ext
           - RMCMagazineSMGM63Rubber
           - RMCMagazineSMGM63HEAP
+          - RMCMagazineSMGM63WP
+          - RMCMagazineSMGM63Incendiary
   - type: GunDamageModifier
     multiplier: 1.35
   - type: AttachableHolder

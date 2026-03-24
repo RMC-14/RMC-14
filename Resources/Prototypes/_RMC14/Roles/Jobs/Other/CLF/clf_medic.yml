@@ -52,13 +52,17 @@
     job: RMCCLFMedic
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobHospitalCorpsman
+      time: 18000 # 5 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
 - type: startingGear
   id: RMCGearCLFMedic
   equipment:
-    mask: RMCM5Bayonet # TODO RMC14
+    mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
     head: CMHeadBandRed

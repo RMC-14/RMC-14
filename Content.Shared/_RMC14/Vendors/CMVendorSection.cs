@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Marines.Roles.Ranks;
+using Content.Shared.Inventory;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -114,4 +115,7 @@ public sealed partial record CMVendorEntry
 
     [DataField]
     public SpriteSpecifier.Rsi? GiveMapBlip;
+
+    [DataField]
+    public SlotFlags? ReplaceSlot;
 }

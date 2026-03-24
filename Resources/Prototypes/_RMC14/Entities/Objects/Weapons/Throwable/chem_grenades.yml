@@ -40,6 +40,9 @@
     containers:
       payload: !type:Container
       payloadTrigger: !type:Container
+  - type: PhysicalComposition
+    materialComposition:
+      CMSteel: 4250 # large custom grenade = 7000
 
 # Metal Foam Grenade
 - type: entity

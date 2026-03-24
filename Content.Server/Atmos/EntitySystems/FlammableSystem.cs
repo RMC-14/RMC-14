@@ -30,6 +30,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using IgniteOnCollideComponent = Content.Server.Atmos.Components.IgniteOnCollideComponent;
 
@@ -54,6 +55,7 @@ namespace Content.Server.Atmos.EntitySystems
         [Dependency] private readonly IRobustRandom _random = default!;
         [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
         [Dependency] private readonly XenoSpitSystem _xenoSpit = default!;
+        [Dependency] private readonly IPrototypeManager _prototype = default!;
 
         private EntityQuery<InventoryComponent> _inventoryQuery;
         private EntityQuery<PhysicsComponent> _physicsQuery;
@@ -277,9 +279,9 @@ namespace Content.Server.Atmos.EntitySystems
             if (args.Handled)
                 return;
 
+            _rmcFlammable.DoStopDropRollAnimation(ent.Owner);
             Resist(ent, ent);
             _xenoSpit.Resist(ent.Owner);
-            RaiseNetworkEvent(new RMCStopDropRollVisualsNetworkEvent(GetNetEntity(ent.Owner)), Filter.Pvs(ent.Owner));
             args.Handled = true;
         }
 
@@ -525,19 +527,29 @@ namespace Content.Server.Atmos.EntitySystems
                     }
 
                     if (_steppingOnFireQuery.HasComp(uid))
-                        damage *= 2;
+                    {
+                        if (flammable.TileDamage is { } tileDamage)
+                        {
+                            damage += flammable.Intensity * tileDamage / 3; // Divided by 3, because from my testing the CM code for standing on a fire tile runs every +/- 30 ticks(3 seconds)
+                        }
+                    }
+
                     // Check fire immunity for DOT damage
-                    if (TryComp<RMCImmuneToFireTileDamageComponent>(uid, out var immunity))
+                    var tileEv = new RMCGetFireImmunityEvent(null);
+                    RaiseLocalEvent(uid, ref tileEv);
+
+                    if (tileEv.Immune ||
+                        HasComp<RMCImmuneToFireTileDamageComponent>(uid))
                     {
                         // If entity has fire immunity, only deal damage if they have the bypass component
                         if (HasComp<RMCFireBypassActiveComponent>(uid) && damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
                     else
                     {
                         // No immunity, deal damage normally
                         if (damage != null)
-                            _damageableSystem.TryChangeDamage(uid, damage, true, false);
+                            _damageableSystem.TryChangeDamage(uid, damage, true, false, origin: uid);
                     }
 
                     AdjustFireStacks(uid, flammable.Resisting ? flammable.ResistStacks : -0.25f, flammable, flammable.OnFire);

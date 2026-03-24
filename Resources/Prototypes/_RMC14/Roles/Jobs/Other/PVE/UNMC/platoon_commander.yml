@@ -23,23 +23,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillCqc: 2
-        RMCSkillConstruction: 2
-        RMCSkillEndurance: 2
-        RMCSkillEngineer: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 2
-        RMCSkillIntel: 2
-        RMCSkillJtac: 4
-        RMCSkillLeadership: 3
-        RMCSkillMedical: 3
-        RMCSkillNavigations: 1
-        RMCSkillOverwatch: 1
-        RMCSkillPolice: 2
-        RMCSkillPowerLoader: 2
-        RMCSkillSurgery: 2 # Surgery 1 -> 2 until we get autodoc
-        RMCSkillVehicles: 1
+      preset: RMCSkillPresetPVEPlatoonCommander
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

@@ -28,6 +28,8 @@
       entries:
       - id: RMCFlashlight
         amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       - id: RMCHardhatBlue
         amount: 4
       - id: CMHandsInsulated

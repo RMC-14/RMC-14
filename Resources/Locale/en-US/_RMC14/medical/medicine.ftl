@@ -64,9 +64,17 @@ rmc-keloderm-container-label-text = KD
 rmc-merabic-container-label-text = MB
 rmc-russianred-container-label-text = Rr
 rmc-imidazoline-container-label-text = IM
+rmc-dermaline-container-label-text = DE
 rmc-iron-container-label-text = Fe
 
 rmc-custom-container-label-text = {$customLabel}
+
+# Set Icon Label Verb
+rmc-set-icon-label-verb = Set icon label
+rmc-set-icon-label-dialog-title = Set On-Sprite Label
+rmc-set-icon-label-dialog-prompt = Label text? ({$max} characters maximum)
+rmc-set-icon-label-cleared = You clear the label off {THE($item)}.
+rmc-set-icon-label-set = You label {THE($item)} with '{$label}' in big, blocky letters.
 
 # Antidepressants
 reagent-name-rmcmethylphenidate = Methylphenidate

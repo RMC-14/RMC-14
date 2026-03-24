@@ -17,6 +17,9 @@
   - type: Tag
     tags:
     - RMCBoxStorage
+  - type: PhysicalComposition
+    materialComposition:
+      RMCSheetCardboard: 3750
   - type: InteractedBlacklist
     blacklist:
       components:

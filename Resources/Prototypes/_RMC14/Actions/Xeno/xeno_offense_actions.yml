@@ -653,8 +653,9 @@
     range: 5
     deselectOnMiss: false
   - type: EntityTargetAction
-    event: !type:XenoLungeActionEvent
     toggleOutline: false
+  - type: WorldTargetAction
+    event: !type:XenoLungeActionEvent
   - type: XenoOffensiveAction
   - type: RMCDazeableAction
   - type: RMCCooldownOnMiss
@@ -1170,7 +1171,7 @@
   parent: ActionXenoBase
   id: ActionXenoTailSeize
   name: Tail Seize
-  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival. [color=red]Has a 3-tile range![/color]
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -1462,7 +1463,7 @@
   parent: ActionXenoBase
   id: ActionXenoSpikeShed
   name: Spike Shed (all shards)
-  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 150 shards minimum
+  description: Shred all of your shards to launch them all in all directions around yourself. Lose the bonus armor in the process while also gaining a speed boost. This will disable you from gaining any shards for 30 seconds. Requires 50 shards minimum
   components:
   - type: Action
     itemIconStyle: NoItem
@@ -1475,3 +1476,38 @@
   - type: ActionBlockIfResting
   - type: RMCDazeableAction
 
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoRend
+  name: Rend (25)
+  description: Claw at enemies around you.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: rav_eviscerate
+    useDelay: 2.5
+  - type: InstantAction
+    event: !type:XenoRendActionEvent
+  - type: ActionBlockIfResting
+  - type: XenoActionPlasma
+    cost: 50
+
+- type: entity
+  parent: ActionXenoBase
+  id: ActionXenoDestroy
+  name: Destroy
+  description: After a short time, jump to the targeted location, destroying structures and gibbing hostiles within a 3x3 range. Works over barricades and other short barriers.
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: _RMC14/Actions/xeno_actions.rsi
+      state: charge
+    useDelay: 60
+  - type: TargetAction
+    range: 7
+    deselectOnMiss: false
+  - type: WorldTargetAction
+    event: !type:XenoDestroyActionEvent

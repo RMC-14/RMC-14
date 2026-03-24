@@ -1,13 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Numerics;
+using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Entrenching;
-using Content.Shared._RMC14.Map;
 using Content.Shared.Beam.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
+using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -17,10 +22,12 @@ public sealed class LineSystem : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedDirectionalAttackBlockSystem _directionalBlock = default!;
 
     private static readonly ProtoId<TagPrototype> StructureTag = "Structure";
     private static readonly ProtoId<TagPrototype> WallTag = "Wall";
@@ -37,11 +44,11 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false, bool ignoreBarricades = false)
     {
         blocker = null;
-        start = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(start));
-        end = _mapSystem.AlignToGrid(_transform.GetMoverCoordinates(end));
+        start = _mapSystem.AlignToGrid(start);
+        end = _mapSystem.AlignToGrid(end);
         var tiles = new List<LineTile>();
         if (!start.TryDistance(EntityManager, _transform, end, out var distance))
             return tiles;
@@ -60,78 +67,129 @@ public sealed class LineSystem : EntitySystem
         var gridComp = gridId == null ? null : _mapGridQuery.CompOrNull(gridId.Value);
         Entity<MapGridComponent>? grid = gridComp == null ? null : new Entity<MapGridComponent>(gridId!.Value, gridComp);
         var lastCoords = start;
-        var delay = 0;
 
         for (var i = 0; i < distance; i++)
         {
             x += xOffset;
             y += yOffset;
-
-            var entityCoords = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
-            if (entityCoords == lastCoords)
+            var center = new EntityCoordinates(start.EntityId, x, y).SnapToGrid(EntityManager, _mapManager);
+            if (center == lastCoords)
                 continue;
 
-            var direction = (entityCoords.Position - lastCoords.Position).ToWorldAngle();
-            var blocked = IsTileBlocked(grid, entityCoords, direction, out blocker);
-            if (blocked && !hitBlocker)
+            List<EntityCoordinates> coords = new(9);
+            coords.Add(center);
+            if (thick && i > 1)
+            {
+                for (var xo = -1; xo < 2; xo++)
+                {
+                    for (var yo = -1; yo < 2; yo++)
+                    {
+                        if (xo == 0 && yo == 0)
+                            continue;
+
+                        var point = new EntityCoordinates(start.EntityId, x + xo, y + yo).SnapToGrid(EntityManager, _mapManager);
+                        coords.Add(point);
+                    }
+                }
+            }
+
+            var centerBlocked = false;
+            for (var j = 0; j < coords.Count; j++)
+            {
+                var entityCoords = coords[j];
+                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride, ignoreBarricades);
+                hitBlocker = hitBlockerOverride;
+
+                if (j == 0 && blocked && !hitBlocker)
+                {
+                    centerBlocked = true;
+                    break;
+                }
+
+                var mapCoords = _transform.ToMapCoordinates(entityCoords);
+
+                var isDuplicate = false;
+                foreach (var existing in tiles)
+                {
+                    if (existing.Coordinates.Position == mapCoords.Position)
+                    {
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (!isDuplicate)
+                {
+                    var delay = Vector2.Distance(entityCoords.Position, start.Position) - 1;
+                    tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
+                }
+
+                if (blocked && j == 0)
+                {
+                    centerBlocked = true;
+                    break;
+                }
+            }
+
+            if (centerBlocked)
                 break;
 
-            lastCoords = entityCoords;
-            var mapCoords = _transform.ToMapCoordinates(entityCoords);
-            tiles.Add(new LineTile(mapCoords, time + delayPer * delay));
-            delay++;
-
-            if (blocked)
-                break;
+            lastCoords = center;
         }
 
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates coords, Angle angle, [NotNullWhen(true)] out EntityUid? blocker)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride, bool ignoreBarricades = false)
     {
         blocker = default;
+        hitBlockerOverride = hitBlocker;
         if (grid == null)
             return false;
+
+        // Check if the next tile is blocked by more than one wall/structure to prevent the line from passing through diagonally.
+        var direction = coords.Position - previousCoords.Position;
+        var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
+        var results = intersect.Select(r => r.HitEntity).ToHashSet();
+        var blockCount = 0;
+        foreach (var entity in results)
+        {
+            if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
+                continue;
+
+            blockCount++;
+
+            if (blockCount < 2)
+                continue;
+
+            blocker = entity;
+            return true;
+        }
 
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (_barricadeQuery.HasComp(uid))
+            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
             {
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
-                var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
-                var direction = angle.GetDir();
-                if (barricadeDir == direction || barricadeDir == direction.GetOpposite())
+                if (_directionalBlock.IsBehindTarget(uid.Value, coords.EntityId, previousCoords))
                 {
                     blocker = uid.Value;
                     return true;
                 }
-
-                if (!direction.IsCardinal())
+                if (_directionalBlock.IsFacingTarget(uid.Value, coords.EntityId, previousCoords))
                 {
-                    var blocked = direction switch
-                    {
-                        Direction.SouthEast => barricadeDir is Direction.North or Direction.West,
-                        Direction.NorthEast => barricadeDir is Direction.South or Direction.West,
-                        Direction.NorthWest => barricadeDir is Direction.South or Direction.East,
-                        Direction.SouthWest => barricadeDir is Direction.North or Direction.East,
-                        _ => false,
-                    };
-
-                    if (blocked)
-                    {
-                        blocker = uid.Value;
-                        return true;
-                    }
+                    blocker = uid.Value;
+                    hitBlockerOverride = false;
+                    return true;
                 }
             }
             else if (_doorQuery.TryComp(uid, out var door))
             {
-                if (door.State != DoorState.Closed)
+                if (door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
                     continue;
 
                 blocker = uid.Value;

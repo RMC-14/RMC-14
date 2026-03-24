@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/20/2025 01:50:56
+  time: 12/09/2025 22:20:25
   entityCount: 5991
 maps:
 - 1
@@ -10008,11 +10008,6 @@ entities:
       parent: 1
 - proto: CMSpawnPointMilitaryPolice
   entities:
-  - uid: 5752
-    components:
-    - type: Transform
-      pos: -60.5,3.5
-      parent: 1
   - uid: 5753
     components:
     - type: Transform
@@ -10039,6 +10034,13 @@ entities:
     components:
     - type: Transform
       pos: -58.5,3.5
+      parent: 1
+- proto: RMCSpawnPointProvostInspector
+  entities:
+  - uid: 5752
+    components:
+    - type: Transform
+      pos: -60.5,3.5
       parent: 1
 - proto: CMSpawnPointNurse
   entities:

@@ -458,6 +458,29 @@
     - id: RMCAttachmentMatebaMarksman
     - id: RMCAttachmentMatebaSnubNose
 
+- type: entity
+  parent: RMCMatebaCustomizationCase
+  id: RMCMatebaCustomizationCaseWeapon
+  suffix: Filled, Mateba
+  description: A wooden case used for storing the tools and parts needed to customize a Mateba revolver. Comes with three barrel lengths, necessary key to swap them out, and the mateba handcannon itself.
+  components:
+  - type: IgnoreContentsSize
+    items:
+      tags:
+      - RMCMateba
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCMateba
+      - RMCAttachmentMatebaStandard
+      - RMCAttachmentMatebaMarksman
+      - RMCAttachmentMatebaSnubNose
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverMateba
+    - id: RMCAttachmentMatebaStandard
+    - id: RMCAttachmentMatebaMarksman
+    - id: RMCAttachmentMatebaSnubNose
 
 - type: entity
   parent: RMCMatebaCustomizationCase
@@ -485,6 +508,31 @@
     - id: RMCAttachmentMatebaMarksmanGolden
     - id: RMCAttachmentMatebaSnubNoseGolden
 
+- type: entity
+  parent: RMCMatebaCustomizationCaseWeapon
+  id: RMCMatebaCustomizationCaseLuxuryWeapon
+  description: A black case used for storing the tools and parts needed to customize a Mateba revolver. This variant is made for general-grade golden Matebas and comes with golden barrel attachments, and the mateba handcannon itself.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    layers:
+    - state: c_matebacase
+  - type: Icon
+    sprite: _RMC14/Objects/Weapons/Guns/Attachments/mateba_kit.rsi
+    state: c_matebacase
+  - type: Storage
+    whitelist:
+      tags:
+      - RMCMateba
+      - RMCAttachmentMatebaStandardGolden
+      - RMCAttachmentMatebaMarksmanGolden
+      - RMCAttachmentMatebaSnubNoseGolden
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverMatebaGold
+    - id: RMCAttachmentMatebaStandardGolden
+    - id: RMCAttachmentMatebaMarksmanGolden
+    - id: RMCAttachmentMatebaSnubNoseGolden
 
 - type: Tag
   id: RMCSpeedLoaderMateba

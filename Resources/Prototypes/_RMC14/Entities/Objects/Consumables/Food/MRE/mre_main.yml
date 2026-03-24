@@ -207,6 +207,32 @@
   - type: Sprite
     state: open_pizza
 
+# SPP survival ration
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMRESPPSurvivalRationTypeA
+  name: survival ration
+  suffix: Type A
+  description: A compact chunk of freeze-dried meat or fish featuring nutrient additives in the form of a dense powder. Having little flavoring or colouration as a result of its preparation for long term storage, the appeal of this item is purely in its capacity to provide sustenance.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    state: spp_1
+
+- type: entity
+  parent: CMMREFoodMain
+  id: RMCMRESPPSurvivalRationTypeB
+  name: survival ration
+  suffix: Type B
+  description: A compact ball of dough-like rice or oats featuring nutrient additives in the form of a dense powder. Having little flavoring or colouration as a result of its preparation for long term storage, the appeal of this item is purely in its capacity to provide sustenance.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    state: spp_2
+
 # Flavors
 - type: flavor
   id: BonelessPorkRibs

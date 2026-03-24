@@ -19,7 +19,7 @@
     base: solaris_interior
 
 - type: entity
-  parent: CMWallReinforced
+  parent: RMCBaseWallReinforced
   id: CMWallSolarisReinforced
   name: reinforced colony wall
   description: Tough looking walls that have been blasted by sand since the day they were erected. A testament to human willpower.

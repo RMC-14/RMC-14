@@ -94,3 +94,16 @@
       offset: 0,-2.0
       nightmareScenario: spp_bar
     replaceAreas: false
+
+- type: entity
+  parent: RMCMapInsertTrijentBase
+  id: RMCMapInsertTrijentMiniEvacWestResearch
+  name: Mini-evac West Research
+  suffix: Insert Trijent
+  components:
+  - type: MapInsert
+    variations:
+    - spawn: "/Maps/_RMC14/Inserts/Trijent/minievac_westresearch.yml"
+      probability: 0.2
+    clearDecals: false
+    replaceAreas: false

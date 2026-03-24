@@ -40,8 +40,11 @@
     delay: 0.333
   - type: IconLabel
     textColor: White
-    storedOffset: 0, 12
+    storedOffset: -12, 12
   - type: RMCSmartFridgeInsertable
+  - type: PhysicalComposition
+    materialComposition:
+      RMCPlastic: 300
 
 - type: entity
   parent: CMAutoInjectorBase
@@ -180,6 +183,26 @@
       CMDexalinPlus: 3
   - type: IconLabel
     labelTextLocId: rmc-dexalin-plus-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCDyloveneAutoInjector
+  name: dylovene autoinjector
+  description: An autoinjector loaded with 3 doses of 15u of Dylovene, a common toxin damage medicine. You can refill it at Weya-Med vending machines.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMDylovene
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMDylovene: 45
+  - type: IconLabel
+    labelTextLocId: rmc-dylovene-container-label-text
+
 # TODO RMC14 tramadol
 
 - type: entity
@@ -200,6 +223,7 @@
       CMBicaridine: 45
   - type: IconLabel
     labelTextLocId: rmc-bicaridine-container-label-text
+
 - type: entity
   parent: CMAutoInjector
   id: CMInaprovalineAutoInjector
@@ -243,6 +267,44 @@
       CMEpinephrine: 15.75
   - type: IconLabel
     labelTextLocId: rmc-epinephrine-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCIronAutoInjector
+  name: iron autoinjector
+  description: An autoinjector loaded with 3 uses of iron, a chemical commonly used to treat blood loss.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: RMCIron
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      RMCIron: 45
+  - type: IconLabel
+    labelTextLocId: rmc-iron-container-label-text
+
+- type: entity
+  parent: CMAutoInjector
+  id: RMCDermalineAutoInjector
+  name: dermaline autoinjector
+  description: An autoinjector loaded with 3 uses of Dermaline, an advanced burn treatment chemical.
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      pen:
+        maxVol: 45
+        reagents:
+        - ReagentId: CMDermaline
+          Quantity: 45
+  - type: CMRefillableSolution
+    reagents:
+      CMDermaline: 45
+  - type: IconLabel
+    labelTextLocId: rmc-dermaline-container-label-text
 
 - type: entity
   parent: RMCMedicAutoInjectorBase

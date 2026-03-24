@@ -48,6 +48,8 @@
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetForeconSquadLead
     - type: SpotterWhitelist
+    - type: RMCTrackable
+    - type: RMCAwardRecommendation
   hidden: true
 
 - type: entity

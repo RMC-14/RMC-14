@@ -2,8 +2,12 @@
   parent: CMJobBase
   id: CMPMCCorpsmanPVE
   name: rmc-job-name-pmc-medic
-  description: rmc-ghost-role-information-pmc-description
+  description: rmc-job-description-pmc-pve-medic
   playTimeTracker: CMJobPMCCorpsmanPVE
+  requirements:
+  - !type:TotalJobsTimeRequirement
+    group: CMJobsMedical
+    time: 10800 # 3 hours
   ranks:
     RMCRankWeYaMedicalSpecialist: []
   startingGear: RMCJobPMCCorpsmanPVE
@@ -12,6 +16,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
+  - HospitalCorpsman
   spawnMenuRoleName: WEYA PMC Medic (PVE)
   special:
   - !type:AddComponentSpecial
@@ -20,19 +25,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 2
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1
-        RMCSkillEndurance: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
-        RMCSkillSmartGun: 1
+      preset: RMCSkillPresetPVECorpsman
     - type: CMVendorUser
       id: CMPMCCorpsmanPVE
       points: 0
@@ -40,6 +33,10 @@
         Chemicals: 120
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-medic
+    - type: AssignSquad
+      whitelist:
+        tags:
+        - RMCSquadPMC
     - type: DemoSpecWhitelist
     - type: GrenadeSpecWhitelist
     - type: ScoutWhitelist

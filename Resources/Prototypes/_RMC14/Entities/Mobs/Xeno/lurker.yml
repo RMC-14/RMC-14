@@ -20,6 +20,10 @@
     - Alive
     - Critical
     - Dead
+  - type: Tag
+    tags:
+    - DoorBumpOpener
+    - RMCSynthGrabbable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -119,6 +123,7 @@
   - type: XenoCripplingStrike
     removeOnHit: true
     preventTackle: true
+    resetMeleeCooldown: true
   - type: XenoTailStab
     tailDamage:
       groups:

@@ -193,20 +193,21 @@
         - !type:ReagentThreshold
           min: 60
         key: Unconscious
-        component: RMCUnconscious
-        time: 20 #Yes, it's this much.
+        component: RMCUnconscious # Change to Knockdown+Stun refresh: true
+        time: 40
         type: Add
-        refresh: false
+        refresh: true
       - !type:GenericStatusEffect
         conditions:
         - !type:ReagentThreshold #0.25 heart damage/s
           min: 100               #5% chance emote twitch, blink_r, shiver
+        # TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
         key: Unconscious
         component: RMCUnconscious
         probability: 0.05
         time: 10
         type: Add
-        refresh: false
+        refresh: true
 
 - type: reagent
   parent: [ CMReagentMedicine, Kelotane ]

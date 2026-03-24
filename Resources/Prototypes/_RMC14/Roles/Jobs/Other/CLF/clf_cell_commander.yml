@@ -21,7 +21,7 @@
         RMCSkillLeadership: 3
         RMCSkillOverwatch: 1
         RMCSkillMeleeWeapons: 1
-        RMCSkillPolice: 2
+        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
         RMCSkillFireman: 3
         RMCSkillPowerLoader: 1
         RMCSkillVehicles: 2
@@ -65,6 +65,10 @@
     job: RMCCLFCellCommander
     raffle:
       settings: short
+    requirements:
+    - !type:RoleTimeRequirement
+      role: CMJobSquadLeader
+      time: 36000 # 10 Hours
   - type: GhostRoleApplySpecial
     squad: SquadCLF
 
@@ -72,11 +76,12 @@
   id: RMCGearCLFCellCommander
   equipment:
     head: RMCArmorHelmetMercenaryMiner
+    mask: RMCCombatUtilityKnifeB
     ears: RMCHeadsetDistressCLF
     jumpsuit: RMCJumpsuitCLFSoldier
     outerClothing: RMCCoatMilitiaHarness
     gloves: CMHandsBlackMarine
-    shoes: CMBootsBlackFilled # TODO RMC14
+    shoes: RMCShoesCombat
     suitstorage: RMCSmartGunCLF
     id: RMCIDCardCLFCellCommander # TODO RMC14
     belt: RMCBeltSmartGunOperatorPistolCLF

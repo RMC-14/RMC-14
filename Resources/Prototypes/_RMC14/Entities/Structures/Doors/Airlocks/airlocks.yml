@@ -9,11 +9,6 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Doors/Airlocks/personal_door.rsi
-  - type: Construction
-    graph: CMAirlock
-    node: airlock
-    containers:
-    - board
   - type: Occluder
   - type: PaintableAirlock
     department: CMSquad

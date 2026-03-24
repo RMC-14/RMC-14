@@ -51,6 +51,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Dropship.Weapon.DropshipTerminalWeaponsComponent;
@@ -69,6 +70,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly SharedDoorSystem _door = default!;
     [Dependency] private readonly SharedDropshipSystem _dropship = default!;
+    [Dependency] private readonly SharedRMCEquipmentDeployerSystem _equipmentDeployer = default!;
     [Dependency] private readonly DropshipUtilitySystem _dropshipUtility = default!;
     [Dependency] private readonly EntityLookupSystem _entityLookup = default!;
     [Dependency] private readonly SharedEyeSystem _eye = default!;
@@ -139,6 +141,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseFultonMsg>(OnWeaponsChooseFultonMsg);
                 subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
                 subs.Event<DropshipTerminalWeaponsChooseSpotlightMsg>(OnWeaponsChooseSpotlightMsg);
+                subs.Event<DropshipTerminalWeaponsChooseEquipmentDeployerMsg>(OnWeaponsChooseEquipmentDeployerMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -156,6 +159,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsFultonSelectMsg>(OnWeaponsFultonSelect);
                 subs.Event<DropShipTerminalWeaponsParaDropTargetSelectMsg>(OnWeaponsParaDropSelect);
                 subs.Event<DropShipTerminalWeaponsSpotlightToggleMsg>(OnWeaponsSpotlightSelect);
+                subs.Event<DropShipTerminalWeaponsEquipmentDeployToggleMsg>(OnEquipmentDeploy);
+                subs.Event<DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg>(OnEquipmentToggleAutoDeploy);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -476,6 +481,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         if (!TryGetEntity(args.Weapon, out var weapon) ||
             !_dropship.IsWeaponAttached(weapon.Value))
         {
+            if (HasComp<RMCEquipmentDeployerComponent>(weapon))
+            {
+                var point = Transform(GetEntity(args.Weapon)).ParentUid;
+                SetScreenUtility<RMCEquipmentDeployerComponent>(ent, args.First, EquipmentDeployer, GetNetEntity(point));
+            }
             return;
         }
 
@@ -509,6 +519,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnWeaponsChooseSpotlightMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseSpotlightMsg args)
     {
         SetScreenUtility<DropshipSpotlightComponent>(ent, args.First, Spotlight, args.Slot);
+    }
+
+    private void OnWeaponsChooseEquipmentDeployerMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseEquipmentDeployerMsg args)
+    {
+        SetScreenUtility<RMCEquipmentDeployerComponent>(ent, args.First, EquipmentDeployer, args.Slot);
     }
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
@@ -614,6 +629,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             ammo.Comp.SoundMarker,
             ammo.Comp.SoundGround,
             ammo.Comp.SoundImpact,
+            ammo.Comp.SoundWarning,
+            ammo.Comp.MarkerWarning,
             ammo.Comp.ImpactEffects,
             ammo.Comp.Explosion,
             ammo.Comp.Implosion,
@@ -650,6 +667,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ev.SoundMarker,
             SoundGround = ev.SoundGround,
             SoundImpact = ev.SoundImpact,
+            SoundWarning = ev.SoundWarning,
+            MarkerWarning = ev.MarkerWarning,
+            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
             ImpactEffects = ev.ImpactEffect,
             Explosion = ev.Explosion,
             Implosion = ev.Implosion,
@@ -686,6 +706,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             SoundMarker = ammo.SoundMarker,
             SoundGround = ammo.SoundGround,
             SoundImpact = ammo.SoundImpact,
+            SoundWarning = ammo.SoundWarning,
+            MarkerWarning = ammo.MarkerWarning,
+            WarningMarkerAt = time + TimeSpan.FromSeconds(1),
             ImpactEffects = ammo.ImpactEffects,
             Explosion = ammo.Explosion,
             Implosion = ammo.Implosion,
@@ -983,6 +1006,46 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         RefreshWeaponsUI(ent);
     }
 
+    private void OnEquipmentDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
+        ref DropShipTerminalWeaponsEquipmentDeployToggleMsg args)
+    {
+        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (selectedSystem == null || !_equipmentDeployer.TryGetContainer(selectedSystem.Value, out var container))
+            return;
+
+        var deployOffset = new Vector2();
+        var rotationOffset = 0f;
+        if (TryComp(selectedSystem, out DropshipWeaponPointComponent? weaponPoint))
+        {
+            _equipmentDeployer.TryGetOffset(container.ContainedEntities[0],
+                out deployOffset,
+                out rotationOffset,
+                weaponPoint.Location);
+        }
+
+        _equipmentDeployer.TryDeploy(container.ContainedEntities[0], args.Deploy, deployOffset, rotationOffset, user: args.Actor);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnEquipmentToggleAutoDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
+        ref DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg args)
+    {
+        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (selectedSystem == null || !_equipmentDeployer.TryGetContainer(selectedSystem.Value, out var container))
+            return;
+
+        _equipmentDeployer.SetAutoDeploy(container.ContainedEntities[0], args.AutoDeploy);
+        RefreshWeaponsUI(ent);
+    }
+
     private void OnRefreshNameModifier(Entity<ActiveFlareSignalComponent> ent, ref RefreshNameModifiersEvent args)
     {
         if (ent.Comp.Abbreviation == null)
@@ -1191,6 +1254,28 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             if (_net.IsClient)
                 continue;
 
+            if (!flight.WarnedSound)
+            {
+                flight.WarnedSound = true;
+                Dirty(uid, flight);
+
+                if (flight.SoundWarning != null)
+                    _audio.PlayPvs(flight.SoundWarning, flight.Target);
+            }
+
+            if (time >= flight.WarningMarkerAt && !flight.WarnedMarker)
+            {
+                flight.WarnedMarker = true;
+                Dirty(uid, flight);
+
+                if (flight.MarkerWarning)
+                {
+                    flight.WarningMarker = Spawn(DropshipTargetMarker, flight.Target);
+                    var despawn = EnsureComp<TimedDespawnComponent>(flight.WarningMarker.Value);
+                    despawn.Lifetime = (float) (flight.MarkerAt - _timing.CurTime).TotalSeconds;
+                }
+            }
+
             if (flight.MarkerAt > time)
                 continue;
 
@@ -1201,6 +1286,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 Dirty(uid, flight);
 
                 _audio.PlayPvs(flight.SoundMarker, flight.Marker.Value);
+
+                if (_net.IsServer)
+                    QueueDel(flight.WarningMarker);
+
+                flight.WarningMarker = null;
             }
 
             if (flight.MarkerAt.Add(TimeSpan.FromSeconds(1)) > time)
@@ -1439,6 +1529,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         var hasUtility = false;
         var hasElectronicSystem = false;
+        var hasWeaponSystem = false;
         foreach (var point in dropship.Comp.AttachmentPoints)
         {
             if (TryComp(point, out DropshipElectronicSystemPointComponent? electronicSystemComp) &&
@@ -1451,6 +1542,20 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                         continue;
 
                     hasElectronicSystem = true;
+                    break;
+                }
+            }
+
+            if (TryComp(point, out DropshipWeaponPointComponent? weaponPointComponent) &&
+                _container.TryGetContainer(point, weaponPointComponent.WeaponContainerSlotId, out var weaponContainer) &&
+                weaponContainer.ContainedEntities.Count > 0)
+            {
+                foreach (var contained in weaponContainer.ContainedEntities)
+                {
+                    if (!HasComp<T>(contained))
+                        continue;
+
+                    hasWeaponSystem = true;
                     break;
                 }
             }
@@ -1472,7 +1577,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             }
         }
 
-        if (!hasUtility && !hasElectronicSystem)
+        if (!hasUtility && !hasElectronicSystem && !hasWeaponSystem)
             return;
 
         ref var screen = ref first ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
@@ -1501,6 +1606,8 @@ public record struct DropshipWeaponShotEvent(
     SoundSpecifier? SoundMarker,
     SoundSpecifier? SoundGround,
     SoundSpecifier? SoundImpact,
+    SoundSpecifier? SoundWarning,
+    bool MarkerWarning,
     List<EntProtoId> ImpactEffect,
     RMCExplosion? Explosion,
     RMCImplosion? Implosion,

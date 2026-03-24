@@ -11,6 +11,7 @@
   spawnMenuRoleName: Survivor CO (Base)
   useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
   basePlaytimeTracker: true
+  whitelistParent: CMCommandingOfficer
 
 - type: playTimeTracker
   id: RMCJobSurvivorCO

@@ -159,6 +159,19 @@
   iconColor: "#695d42"
   objectType: Item
 
+# SOCOM
+- type: construction
+  parent: RMC
+  name: .458 SOCOM bullet bundle box
+  id: RMCBoxBullets458
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBullets458Empty
+  category: construction-category-cm-box-magazine
+  description: A box of bundled .458 SOCOM rounds.
+  iconColor: "#695d42"
+  objectType: Item
+
 # M1984
 - type: construction
   parent: RMC
@@ -319,6 +332,30 @@
   category: construction-category-cm-box-magazine
   description: A magazine box that can contain drum armor piercing M13 mags.
   iconColor: "#7c4c1b"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: pistol ammunition box (10x20mm-APC)
+  id: RMCBoxBulletsPistolEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBulletsPistolEmpty
+  category: construction-category-cm-box-magazine
+  description: A 10x20mm-APC ammunition box. Used to refill M13 regular, extended and drum magazines. It comes with a leather strap allowing to wear it on the back.
+  iconColor: "#727e90"
+  objectType: Item
+
+- type: construction
+  parent: RMC
+  name: pistol ammunition box (10x20mm-APC (AP))
+  id: RMCBoxBulletsPistolAPEmpty
+  graph: RMCBoxMagazine
+  startNode: start
+  targetNode: RMCBoxBulletsPistolAPEmpty
+  category: construction-category-cm-box-magazine
+  description: A 10x20mm-APC armor-piercing ammunition box. Used to refill M13 regular, extended and drum AP magazines. It comes with a leather strap allowing to wear it on the back.
+  iconColor: "#727e90"
   objectType: Item
 
 # M34 Incinerator
@@ -596,6 +633,13 @@
         amount: 1
         doAfter: 0.25
 
+    # SOCOM
+    - to: RMCBoxBullets458Empty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
     # M13 Auto Pistol
     - to: RMCBoxMagazinePistolM13Empty
       steps:
@@ -628,6 +672,18 @@
         doAfter: 0.25
 
     - to: RMCBoxMagazinePistolM13DrumAPEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxBulletsPistolEmpty
+      steps:
+      - material: RMCSheetCardboard
+        amount: 1
+        doAfter: 0.25
+
+    - to: RMCBoxBulletsPistolAPEmpty
       steps:
       - material: RMCSheetCardboard
         amount: 1
@@ -815,6 +871,10 @@
   - node: RMCBoxMagazineRifleM4SPRExtEmpty
     entity: RMCBoxMagazineRifleM4SPRExtEmpty
 
+  # SOCOM
+  - node: RMCBoxBullets458Empty
+    entity: RMCBoxBullets458Empty
+
   # M13
   - node: RMCBoxMagazinePistolM13Empty
     entity: RMCBoxMagazinePistolM13Empty
@@ -828,6 +888,10 @@
     entity: RMCBoxMagazinePistolM13ExtAPEmpty
   - node: RMCBoxMagazinePistolM13DrumAPEmpty
     entity: RMCBoxMagazinePistolM13DrumAPEmpty
+  - node: RMCBoxBulletsPistolEmpty
+    entity: RMCBoxBulletsPistolEmpty
+  - node: RMCBoxBulletsPistolAPEmpty
+    entity: RMCBoxBulletsPistolAPEmpty
 
   # M16
   - node: RMCBoxMagazineRifleM16Empty

@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Utility;
 using static Robust.Shared.Utility.SpriteSpecifier;
 
@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.UniformAccessories;
 public sealed partial class UniformAccessoryComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public Rsi? PlayerSprite = new(new ResPath("_RMC14/Objects/Medals/bronze.rsi"), "equipped");
+    public Rsi? PlayerSprite;
 
     [DataField, AutoNetworkedField]
     public NetEntity? User;
@@ -26,7 +26,7 @@ public sealed partial class UniformAccessoryComponent : Component
     public bool HiddenByJacketRolling = false;
 
     [DataField, AutoNetworkedField]
-    public string? LayerKey;
+    public List<string>? LayerKeys;
 
     [DataField, AutoNetworkedField]
     public bool HasIconSprite = false;

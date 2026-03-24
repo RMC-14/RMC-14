@@ -26,6 +26,12 @@
     - 0,0,3,1 # 2 slots
   - type: ItemCamouflage
     camouflageVariations: { }
+  - type: ClothingRequireEquipped
+    autoUnequip: true
+    denyReason: rmc-armor-not-pmc-jumpsuit
+    whitelist:
+      tags:
+      - RMCUniformPMC
 
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBasePMCArmorLight]
@@ -48,6 +54,22 @@
   - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_VERY_LIGHT
     walkModifier: 0.897
     sprintModifier: 0.897
+
+- type: entity
+  parent: CMArmorM4PMCLight
+  id: RMCArmorM4PMCBulletProof
+  name: M4 pattern PMC bulletproof armor
+  description: A modification of the standard M3 armor. Designed for high-profile security operators and corporate mercenaries in mind. This set is designed for protecting against ballistics, and has minimal protection against blades and biohazards.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/bulletproof.rsi
+  - type: CMArmor
+    melee: 10 # CLOTHING_ARMOR_LOW
+    bullet: 30 # CLOTHING_ARMOR_HIGH
+    bio: 10 # CLOTHING_ARMOR_LOW
+  - type: ClothingSpeedModifier # SLOWDOWN_ARMOR_SUPER_LIGHT
+    walkModifier: 0.949
+    sprintModifier: 0.949
 
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]
@@ -177,6 +199,23 @@
       tags:
       - RMCMagazineSmartGunirradiated
       - RMCMagazineSmartGun
+
+- type: entity
+  parent: CMArmorM4PMC
+  id: CMArmorM4PMCCommandoSurvivor
+  name: damaged MY7 pattern Commando armor
+  description: A modification of the W-Y PMC armor patterns. Designed for elite corporate mercenaries in mind. This one has a lot of scratches and acid damage.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/commando.rsi
+  - type: CMArmor
+    melee: 20
+    bullet: 40
+    bio: 20
+    explosionArmor: 35
+  - type: Storage
+    grid:
+    - 0,0,5,1 # 3 slots
 
 - type: entity
   parent: RMCArmorM4PMCNoLight

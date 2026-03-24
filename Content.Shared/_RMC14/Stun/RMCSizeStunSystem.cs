@@ -20,6 +20,7 @@ using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Content.Shared.Pointing;
+using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
@@ -195,8 +196,11 @@ public sealed class RMCSizeStunSystem : EntitySystem
             return;
 
         //TODO Camera Shake
-        _physics.SetLinearVelocity(target, Vector2.Zero);
-        _physics.SetAngularVelocity(target, 0f);
+        if (TryComp(target, out PhysicsComponent? physics))
+        {
+            _physics.SetLinearVelocity(target, Vector2.Zero, body: physics);
+            _physics.SetAngularVelocity(target, 0f, body: physics);
+        }
 
         var vec = _transform.GetMoverCoordinates(target).Position - knockedBackFrom.Value.Position;
         if (vec.Length() != 0)
