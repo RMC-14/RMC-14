@@ -67,6 +67,9 @@
       - id: RMCVisorMedical
         points: 4
         recommended: true
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 4
+        recommended: true
       - id: RMCVisorNightVision
         points: 25
         recommended: true

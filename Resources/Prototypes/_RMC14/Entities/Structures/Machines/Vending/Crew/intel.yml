@@ -94,6 +94,8 @@
       entries:
       - id: RMCVisorMedical
         points: 5
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 5
       - id: RMCVisorWelding
         points: 5
       - id: RMCVisorNightVision

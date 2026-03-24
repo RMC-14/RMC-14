@@ -97,7 +97,7 @@
 - type: startingGear
   id: RMCGearFreelancerMedic
   equipment:
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     back: RMCSatchelLightpackFreelancerMedic
     belt: CMBeltMedicBagFilled
     suitstorage: WeaponRifleMAR40

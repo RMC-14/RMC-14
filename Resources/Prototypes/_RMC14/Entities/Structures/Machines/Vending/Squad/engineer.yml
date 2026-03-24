@@ -184,6 +184,8 @@
       entries:
       - id: RMCVisorMedical
         points: 12
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 12
       - id: RMCVisorWelding
         points: 5
     - name: Pamphlets

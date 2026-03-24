@@ -34,7 +34,7 @@
   parent: RMCGearSPPSOFBase
   id: RMCGearSPPSOFMedic
   equipment:
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     belt: RMCBeltMedicBagSPP
   storage:
     back:

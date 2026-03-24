@@ -95,7 +95,7 @@
     head: CMHeadCapSPP
     ears: RMCHeadsetSPPMedic
     ears2: RMCM5CameraGear
-    eyes: RMCGlassesMedicalHUDGlasses
+    eyes: RMCGlassesMedicalHUDGlassesAdvanced
     jumpsuit: CMJumpsuitSPPMedic
     outerClothing: RMCArmorSPPSupport
     gloves: RMCHandsVeteranSPP
