@@ -1,0 +1,69 @@
+﻿- type: entity
+  parent: RMCWeaponFlamer
+  id: RMCWeaponFlamerSPP
+  name: LPO80 incinerator unit
+  description: An aged but effective lightweight combat incinerator officially in service as a anti-fortification tool but, in practice, utilized in close quarters combat for flushing out enemy combatants.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/lpo80.rsi
+  - type: Item
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/lpo80.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Weapons/Guns/Flamethrower/lpo80.rsi
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Tank
+        startingItem: RMCTankFlamerSPP
+        insertSound: /Audio/_RMC14/Weapons/Handling/flamer_reload.ogg
+        ejectSound: /Audio/_RMC14/Weapons/Handling/flamer_unload.ogg
+        priority: 2
+        whitelist:
+          tags:
+          - RMCTankFlamerSPP
+  - type: AttachableHolder # TODO RMC14 barrel nozzle
+    slots:
+      rmc-aslot-rail:
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+      rmc-aslot-stock:
+        locked: true
+        startingAttachable: RMCAttachmentLPO80Stock
+        whitelist:
+          tags:
+          - RMCAttachmentLPO80Stock
+      rmc-aslot-underbarrel:
+        whitelist:
+          tags:
+          - RMCAttachmentExtinguisher
+  - type: AttachableHolderVisuals
+    offsets:
+      rmc-aslot-rail: -0.032, 0.092
+      rmc-aslot-stock: -0.468, 0.064
+      rmc-aslot-underbarrel: 0.284, -0.313
+
+- type: entity
+  parent: RMCTankFlamer
+  id: RMCTankFlamerSPP
+  name: LPO80 incinerator tank
+  description: A fuel tank used to store fuel for use in the LPO80 incinerator unit. Handle with care.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/lpo80.rsi
+    state: flametank
+    layers:
+    - state: flametank
+    - state: flametank_strip1
+    - state: flametank_strip2
+      map: [ "enum.SolutionContainerLayers.Fill" ]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 2
+    fillBaseName: flametank_strip
+  - type: Tag
+    tags:
+    - RMCTankFlamerSPP
+
+- type: Tag
+  id: RMCTankFlamerSPP

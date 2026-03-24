@@ -1684,7 +1684,7 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: CMLightFixture
+- proto: RMCLightFixture
   entities:
   - uid: 638
     components:
@@ -1732,7 +1732,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 9.5,21.5
       parent: 1
-- proto: CMLightFixtureSmall
+- proto: RMCLightFixtureSmall
   entities:
   - uid: 637
     components:

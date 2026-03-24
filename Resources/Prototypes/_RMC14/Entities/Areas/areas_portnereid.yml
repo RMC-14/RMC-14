@@ -1,0 +1,436 @@
+﻿- type: entity
+  parent: RMCAreaShuttleDrop1
+  id: RMCAreaShuttleDrop1PortNereid
+  name: Port Nereid Cargo Depot AC-170 - LZ1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#EBE5E5E3'
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+    landingZone: true
+
+- type: entity
+  parent: RMCAreaShuttleDrop1PortNereid
+  id: RMCAreaShuttleDrop2PortNereid
+  name: Port Nereid International Spaceport - LZ2
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_shiva.rsi
+    state: shuttle2
+  - type: Area
+    linkedLz: dropship_lz2
+    minimapColor: '#EBE5E5E3'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaProtectionOne
+  id: RMCAreaPortNereidCargo
+  name: Port Nereid - AC-170 Cargo Depot
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: req0
+  - type: Area
+    minimapColor: '#a16027'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: true
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidMining
+  name: Port Nereid - TMCC Mining Outpost
+  components:
+  - type: Sprite
+    state: tunnels0
+    weatherEnabled: false
+  - type: Area
+    minimapColor: '#a16027'
+
+- type: entity
+  parent: RMCAreaProtectionFour
+  id: RMCAreaPortNereidDeepsiteUAS1
+  name: Port Nereid - Deepsite UAS-1
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: colony_caves_0
+  - type: Area
+    minimapColor: '#491c75'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaProtectionTwo
+  id: RMCAreaPortNereidSecurity
+  name: Port Nereid - Security Headquarters
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: offices4
+  - type: Area
+    minimapColor: '#8c1b0e'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: true
+    fulton: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargo
+  id: RMCAreaPortNereidEngineering
+  name: Port Nereid - Engineering Bay
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: req4
+  - type: Area
+    minimapColor: '#bab714'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargo
+  id: RMCAreaPortNereidSpaceport
+  name: Port Nereid - Port Nereid International Spaceport
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: wyspaceport
+  - type: Area
+    minimapColor: '#0b7545'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargo
+  id: RMCAreaPortNereidHeavyHaulter
+  name: Port Nereid - WEYA Hauler
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: wyspaceport
+  - type: Area
+    minimapColor: '#19666b'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargo
+  id: RMCAreaPortNereidShack
+  name: Port Nereid - Lakeside Shack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: req3
+  - type: Area
+    minimapColor: '#402116'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaProtectionThree
+  id: RMCAreaPortNereidStorage
+  name: Port Nereid - Storage
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_kutjevo.rsi
+    state: colony_caves_1
+  - type: Area
+    minimapColor: '#5e5b2c'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: true
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaBase
+  id: RMCAreaPortNereidCargoComms
+  name: Port Nereid - Cargo Comms
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: comms2
+  - type: Area
+    weatherEnabled: true
+    CAS: true
+    fulton: true
+    mortarPlacement: true
+    mortarFire: true
+    lasing: true
+    medevac: true
+    paradropping: true
+    OB: true
+    supplyDrop: true
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidSouthWestJungle
+  name: Port Nereid - South West Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero1
+  - type: Area
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidSouthEastJungle
+  name: Port Nereid - South East Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero2
+  - type: Area
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidWeymart
+  name: Port Nereid - Weymart
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: weymart
+  - type: Area
+    minimapColor: '#91BDCFE7'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidHabitationEast
+  name: Port Nereid - Eastern Habitation Complex
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: offices2
+  - type: Area
+    minimapColor: '#418896'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidHabitationWest
+  name: Port Nereid - Western Habitation Complex
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: offices1
+  - type: Area
+    minimapColor: '#418896'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidMedical
+  name: Port Nereid - Medical Clinic
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: medical
+  - type: Area
+    minimapColor: '#5c96a1'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidBotany
+  name: Port Nereid - Botany Bay
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: botany
+  - type: Area
+    minimapColor: '#35ab50'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidSecurity
+  id: RMCAreaPortNereidDisposals
+  name: Port Nereid - Disposals & Waste Processing
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: recycling
+  - type: Area
+    minimapColor: '#470f75'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargo
+  id: RMCAreaPortNereidDam
+  name: Port Nereid - River Dam
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: comms1
+  - type: Area
+    minimapColor: '#67bfcf'
+    weatherEnabled: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidNorthWestJungle
+  name: Port Nereid - North West Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero3
+  - type: Area
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidNorthEastJungle
+  name: Port Nereid - North East Jungle
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: varadero4
+  - type: Area
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaReinforcedMetal
+  id: RMCAreaPortNereidCentralAtmosphericProcessor
+  name: Port Nereid - Central PAEK-500 Heavy Atmospheric Processor (Duel-Fusion Atmospheric Processing Engine)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: caves_central
+  - type: Area
+    minimapColor: '#d1b228'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaReinforcedMetal
+  id: RMCAreaPortNereidWestAtmosphericProcessor
+  name: Port Nereid - West PAEK-500 Heavy Atmospheric Processor (Reactor Coolant Reserves & Control)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: caves_west
+  - type: Area
+    minimapColor: '#1f6699'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaReinforcedMetal
+  id: RMCAreaPortNereidEastAtmosphericProcessor
+  name: Port Nereid - East PAEK-500 Heavy Atmospheric Processor (Primary Power Generator Grid)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: caves_east
+  - type: Area
+    minimapColor: '#688008'
+    weatherEnabled: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    CAS: false
+    fulton: false
+    OB: false
+    supplyDrop: false
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidRoadSystem
+  name: Port Nereid - Road System
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: hall2
+  - type: Area
+    minimapColor: '#434544'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaPortNereidCargoComms
+  id: RMCAreaPortNereidPort
+  name: Port Nereid - Oceanside Port
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/areas_varadero.rsi
+    state: tunnels0
+  - type: Area
+    minimapColor: '#636664'
+    weatherEnabled: true
+
+- type: entity
+  parent: RMCAreaVaraderoInteriorOob
+  id: RMCAreaPortNereidOob
+  name: Port Nereid - Out Of Bounds
+  components:
+  - type: Sprite
+    state: oob
+  - type: Area
+    CAS: false
+    fulton: false
+    lasing: false
+    mortarPlacement: false
+    mortarFire: false
+    medevac: false
+    paradropping: false
+    OB: false
+    supplyDrop: false
+    resinAllowed: false
+    avoidBioscan: false
+    noTunnel: true
+    unweedable: true
+    weatherEnabled: false

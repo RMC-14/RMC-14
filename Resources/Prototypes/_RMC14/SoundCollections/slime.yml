@@ -1,0 +1,14 @@
+- type: soundCollection
+  id: Bubbles
+  files:
+    - /Audio/_RMC14/Voice/Slime/slime_bubble.ogg
+
+- type: soundCollection
+  id: Pops
+  files:
+    - /Audio/_RMC14/Voice/Slime/slime_pop.ogg
+
+- type: soundCollection
+  id: Wobbles
+  files:
+    - /Audio/_RMC14/Voice/Slime/slime_wobble.ogg

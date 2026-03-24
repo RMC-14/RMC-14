@@ -17,3 +17,4 @@
     step: 0.5
     speed: 1
   - type: Appearance
+  - type: RMCPointingArrow

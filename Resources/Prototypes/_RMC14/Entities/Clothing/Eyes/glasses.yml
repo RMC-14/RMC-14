@@ -28,6 +28,17 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/security_glasses_blue.rsi
 
 - type: entity
+  parent: CMGlassesSecurity
+  id: RMCGlassesSecuritySwat
+  name: tactical SWAT HUD
+  description: Flash-resistant goggles with inbuilt combat and security information.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/swatgoggles.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/swatgoggles.rsi
+
+- type: entity
   parent: [ ClothingEyesBase , ShowMedicalIcons ]
   id: CMGlassesM42ScoutSight
   name: M96 scout sight
@@ -44,6 +55,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
     mesons: true
+    defaultState: half
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -51,6 +63,17 @@
         icon:
           True: { state: icon_on }
           False: { state: icon }
+
+- type: entity
+  parent: CMGlassesM42ScoutSight
+  id: RMCGlassesSPPCommandoNightVision
+  name: Type 9 commando goggles
+  description: A headset and night vision goggles system used by SPP forces. Allows highlighted imaging of surroundings.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/spp_nv.rsi
 
 - type: entity
   parent: ClothingEyesHudMedical
@@ -69,6 +92,7 @@
     sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
     mesons: true
+    defaultState: half
   - type: Appearance
   - type: GenericVisualizer
     visuals:
@@ -91,10 +115,11 @@
     - state: icon
       map: [ "icon" ]
   - type: Clothing
-    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/ml66a_sight.rsi
+    sprite: _RMC14/Objects/Clothing/Eyes/Glasses/m42_scoutsight.rsi
   - type: NightVisionItem
     skills:
       RMCSkillSmartGun: 1
+    defaultState: half
   - type: ClothingRequireEquipped
     whitelist:
       components:

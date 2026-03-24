@@ -2,7 +2,7 @@
   parent: WeaponShotgunM42A2
   name: M42A1 pump shotgun
   id: WeaponShotgunM42A1
-  description: An Aegis Battlefield Armaments classic design, the M42A1 combines close-range firepower with long term reliability. Needs to be pumped.
+  description: An AEGIS Armaments classic design, the M42A1 combines close-range firepower with long term reliability. Needs to be pumped.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Shotguns/m42a1/desert.rsi

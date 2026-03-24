@@ -62,14 +62,21 @@ public sealed class JobWhitelistManager : IPostInjectInit
     {
         if (!_config.GetCVar(CCVars.GameRoleWhitelist))
             return true;
-
-        if (!_prototypes.TryIndex(job, out var jobPrototype) ||
-            !jobPrototype.Whitelisted)
-        {
+        // RMC14-Whitelist-Tweak-Start
+        if (!_prototypes.TryIndex(job, out var jobPrototype))
             return true;
-        }
 
-        return IsWhitelisted(session.UserId, job);
+        if (!jobPrototype.Whitelisted)
+            return true;
+
+        if (IsWhitelisted(session.UserId, job))
+            return true;
+
+        if (jobPrototype.WhitelistParent != null)
+            return IsAllowed(session, jobPrototype.WhitelistParent.Value);
+
+        return false;
+        // RMC14-Whitelist-Tweak-End
     }
 
     public bool IsWhitelisted(NetUserId player, ProtoId<JobPrototype> job)

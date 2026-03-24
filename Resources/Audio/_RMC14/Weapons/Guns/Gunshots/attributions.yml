@@ -248,7 +248,7 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/48e570bd697f2476e28d89cd255d0539a5228228/sound/weapons/gun_ak4047.ogg"
 
-- files: ["p90_shot.ogg"]
+- files: ["pdw90_shot.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/789a362bc55d2d6331bc89699bb4f9f792695853/sound/weapons/p90.ogg"
@@ -262,3 +262,63 @@
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/8086109b2dbf8d1d98aec106a07d86b65fe63e1b/sound/weapons/gun_kt42.ogg"
+
+- files: ["gun_m10_auto_pistol.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_m10_auto_pistol.ogg"
+
+- files: ["gun_m10_auto_pistol2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_m10_auto_pistol2.ogg"
+
+- files: ["gun_silenced_alt_shot1.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot1.ogg"
+
+- files: ["gun_silenced_alt_shot2.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot2.ogg"
+
+- files: ["gun_silenced_alt_shot3.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/44751f0cc11332a5ba4f05ef91b2d72a0b08082b/sound/weapons/gun_silenced_alt_shot3.ogg"
+
+- files: ["gun_type71.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/single-gunshot-43-79835"
+
+- files: ["gun_l90.ogg"]
+  license: "CC0-1.0"
+  copyright: "Taken and modified from FilipKZhong"
+  source: "https://github.com/FilipKZhong/Surviv.io-Sounds/blob/master/Surviv.io%20GS/mk12_01.mp3"
+
+- files: ["gun_l14.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken from Pixabay (content license at https://pixabay.com/service/license-summary/) and modified by @TadJohnson00 (GitHub)."
+  source: "https://pixabay.com/sound-effects/single-pistol-gunshot-42-40781/"
+
+- files: ["gun_silenced_l112.ogg"]
+  license: "CC-BY-4.0"
+  copyright: "Taken and modified from Pixabay, Pixabay usage terms at https://pixabay.com/service/terms/"
+  source: "https://pixabay.com/sound-effects/desert-eagle-50-ae-close-single-gunshot-a-wwwfesliyanstudios-8831/"
+
+- files: ["gun_shotgun_choke.ogg"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/28bf8164895c60155d482b9e435c3e728c6f090f/sound/weapons/gun_shotgun_choke.ogg"
+
+- files: ["gun_m2c2.ogg"]
+  license: "CC0-1.0"
+  copyright: "Created by pgi (freesound), modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/pgi/sounds/257962/"
+
+- files: [ "gun_l88" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Created by GreenFireSound, modified by kleinerstation13 (Github)"
+  source: "https://freesound.org/people/GreenFireSound/sounds/396271/"

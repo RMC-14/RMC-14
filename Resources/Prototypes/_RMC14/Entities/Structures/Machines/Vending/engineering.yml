@@ -28,6 +28,8 @@
       entries:
       - id: RMCFlashlight
         amount: 4
+      - id: RMCSentryLaptop
+        amount: 4
       - id: RMCHardhatBlue
         amount: 4
       - id: CMHandsInsulated
@@ -62,7 +64,7 @@
         amount: 4
       - id: CMWrench
         amount: 4
-      - id: CMLightReplacer
+      - id: RMCLightReplacer
         amount: 4
 
 # Circuits

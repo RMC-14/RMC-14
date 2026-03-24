@@ -1,14 +1,28 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/05eaa3484b1a35aa759300bcfc8f0119f009daae, https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/obj/items/clothing/masks.dmi, equipped-MASK-reptilian edited by Dutch-VanDerLinde, equipped-MASK-avali modified by DasIrrlicht, equipped-MASK-rodentia unmodified from equipped-MASK-reptilian",
+  "copyright": "Greyscaled by UnicornOnLSD (Git). Inhands by UnicornOnLSD (Git). Taken from CM-SS13 at commit https://github.com/cmss13-devs/cmss13/commit/05eaa3484b1a35aa759300bcfc8f0119f009daae, https://github.com/cmss13-devs/cmss13/blob/106c92cdf232ebc12c9d7a2feb23956c6755496f/icons/mob/humans/onmob/items_righthand_0.dmi, https://github.com/cmss13-devs/cmss13/blob/05eaa3484b1a35aa759300bcfc8f0119f009daae/icons/obj/items/clothing/masks.dmi, equipped-MASK-reptilian edited by Dutch-VanDerLinde, equipped-MASK-avali modified by DasIrrlicht, equipped-MASK-rodentia unmodified from equipped-MASK-reptilian",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
+      "name": "base"
+    },
+    {
+      "name": "camo"
+    },
+    {
+      "name": "equipped-MASK-color",
+      "directions": 4
+    },
+    {
       "name": "equipped-MASK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-reptilian-color",
       "directions": 4
     },
     {
@@ -16,7 +30,15 @@
       "directions": 4
     },
     {
+      "name": "equipped-MASK-avali-color",
+      "directions": 4
+    },
+    {
       "name": "equipped-MASK-avali",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-vulpkanin-color",
       "directions": 4
     },
     {
@@ -24,7 +46,15 @@
       "directions": 4
     },
     {
+      "name": "equipped-MASK-rodentia-color",
+      "directions": 4
+    },
+    {
       "name": "equipped-MASK-rodentia",
+      "directions": 4
+    },
+    {
+      "name": "equipped-MASK-feroxi-color",
       "directions": 4
     },
     {
@@ -32,15 +62,20 @@
       "directions": 4
     },
     {
+      "name": "inhand-left-color",
+      "directions": 4
+    },
+    {
       "name": "inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "inhand-right-color",
       "directions": 4
     },
     {
       "name": "inhand-right",
       "directions": 4
-    },
-    {
-      "name": "icon"
     }
   ]
 }

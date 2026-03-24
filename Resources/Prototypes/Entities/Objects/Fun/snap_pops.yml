@@ -55,4 +55,8 @@
       - id: SnapPop
         amount: 5
   - type: Dumpable
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 

@@ -1,6 +1,6 @@
 - type: entity
   id: CMVendorBundleRiflemanApparel
-  name: standard marine apparel
+  name: Uniform, helmet, headset, gloves, boots
   description: Contains a marine jumpsuit, a M10 helmet, a headset, combat gloves and combat boots.
   categories: [ HideSpawnMenu ]
   components:
@@ -94,7 +94,7 @@
     - CMSheetPlasteel40
     - RMCPowerCellHigh
     - CMEntrenchingTool
-    - CMLightReplacer
+    - RMCLightReplacer
     - CMAPCElectronics
     - RMCNailgunTactical
 
@@ -197,3 +197,73 @@
     - RMCWeaponTaser
     - RMCMegaphone
     #TODO RMC14 Paper Map.
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEAssaultEngi
+  name: Essential Engineering Set
+  description: Contains an engineer kit, tool pouch, and webbing with a variety of items to engineer and/or assault with.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Tools/crowbar.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCEngineerKitRCMPVEFilled
+    - RMCPouchToolsSocRCMPVEAssaultEngi
+    - RMCToolWebbingSmallFilledRCMPVEAssaultEngi
+    - RMCTeslaTSE
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMedic
+  name: Essential Medical Set
+  description: Contains a surgical case, stethoscope, penlight, and assortment of medical tools to put people back together. Make use of that Navy training.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/surgical_case.rsi
+    layers:
+    - state: surgical_case_base
+  - type: CMVendorBundle
+    bundle:
+    - RMCFlashlightPen
+    - RMCStethoscope
+    - RMCSurgicalCaseRCMFilled
+    - CMHealthAnalyzer
+    - RMCBurnAidKitFilledPVE
+    - RMCBruteAidKitFilledPVE
+    - RMCStandardAidKitFilledPVE
+
+# PVE
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMGL
+  name: Multiple Grenade Launcher Set
+  description: Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/rcmgl.rsi
+    state: icon
+  - type: CMVendorBundle
+    bundle:
+    - RMCRoyalGrenadeLauncher
+    - RMCBeltRoyalMortarFilledGrenades
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMortar
+  name: Light Mortar Kit
+  description: Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig. #
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: mortar
+      map: [ label ]
+  - type: CMVendorBundle
+    bundle:
+    - RMCMortarKit # RMC14 TODO: RCM Custom Light Mortar
+    - RMCBeltRoyalMortarFilledMortarShells # RMC14 TODO: Check Parity Fill
+    - RMCLaserDesignatorPVE

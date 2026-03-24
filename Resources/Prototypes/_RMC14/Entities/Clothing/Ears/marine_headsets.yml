@@ -464,7 +464,7 @@
 # PVE
 
 - type: entity
-  parent: RMCHeadsetMarine
+  parent: RMCHeadsetShip
   id: RMCHeadsetGoldenArrow
   name: sun riders radio headset
   description: This is used by the UNMC Sun Riders Platoon.
@@ -475,3 +475,13 @@
     containers:
       key_slots:
       - RMCEncryptionKeySunRiders
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Ears/headset_onmob.rsi
+  - type: GrantSquadLeaderTracker
+    defaultMode: SectionSergeant
+    trackerModes:
+    - SectionSergeant
+    - PVESquadLeader
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: HeadsetAutoSquad

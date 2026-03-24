@@ -1,7 +1,7 @@
 ﻿- type: entity
-  id: RMCOrbitalCannon
-  name: orbital cannon
-  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  id: RMCOrbitalCannonDerelict
+  name: derelict orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. This one appears inoperable."
   placement:
     mode: SnapgridCenter
   components:
@@ -25,26 +25,26 @@
     offset: 1.5, 0.5
     layers:
     - state: obc_unloaded
-      map: [ "base" ]
+      map: [ "CannonLayerKey" ]
   - type: Clickable
   - type: InteractionOutline
+  - type: RMCAnimation
+  - type: RMCLoreExaminable
+    content: rmc-lore-examniable-orbital-cannon
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCOrbitalCannonDerelict
+  id: RMCOrbitalCannon
+  name: orbital cannon
+  description: "The UNMC Orbital Cannon System. Used for shooting large targets on the planet that is orbited. It accelerates its payload with solid fuel for devastating results upon impact."
+  components:
   - type: OrbitalCannon
     warheadTypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
     - RMCOrbitalCannonWarheadIncendiary
     - RMCOrbitalCannonWarheadAegis
-  - type: Appearance
-  - type: GenericVisualizer # TODO RMC14 animations
-    visuals:
-      enum.OrbitalCannonVisuals.Base:
-        base:
-          Loaded: { state: obc_loaded }
-          Unloaded: { state: obc_unloaded }
-          Chambered: { state: obc_chambered }
-  - type: RMCLoreExaminable
-    content: rmc-lore-examniable-orbital-cannon
-  - type: RMCMesonsNonviewable
 
 - type: entity
   id: RMCOrbitalCannonFuel
@@ -96,6 +96,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadExplosive
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in heavily-fortified areas, and causes a large circular explosion if it manages to reach the ground."
   name: HE orbital warhead
   components:
   - type: Sprite
@@ -106,6 +107,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadIncendiary
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for cutting off enemy forces, and creates a large diamond of ultra-hot blue fire."
   name: incendiary orbital warhead
   components:
   - type: Sprite
@@ -116,6 +118,7 @@
 - type: entity
   parent: RMCOrbitalCannonWarheadBase
   id: RMCOrbitalCannonWarheadCluster
+  description: "An orbital warhead designed to be fired from the UNMC Orbital Cannon system, after sufficient solid fuel has been inserted. This particular model is designed for use in cramped heavily-fortified areas, and causes multiple explosions in a vaguely rectangular shape."
   name: cluster orbital warhead
   components:
   - type: Sprite
@@ -161,7 +164,8 @@
   - type: Sprite
     sprite: _RMC14/Structures/almayer_props.rsi
     state: ob_warhead_1
-  - type: RandomSpawner
+  - type: UniqueRandomSpawner
+    spawnerGroup: RMCOrbitalCannonWarheadSpawner
     prototypes:
     - RMCOrbitalCannonWarheadExplosive
     - RMCOrbitalCannonWarheadCluster
@@ -282,6 +286,7 @@
   - type: Sprite
     sprite: _RMC14/Structures/Machines/computer.rsi
     state: ob_console # TODO RMC14 powered off, broken
+    drawdepth: HighFloorObjects
   - type: Clickable
   - type: InteractionOutline
   - type: UserInterface
@@ -291,6 +296,10 @@
   - type: ActivatableUI
     key: enum.OrbitalCannonComputerUI.Key
   - type: OrbitalCannonComputer
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: CMSeatBase
@@ -373,3 +382,65 @@
     falloffPower: 50
     sharpness: 25
     width: 0.7
+
+# Tray
+- type: entity
+  id: RMCOrbitalCannonTray
+  name: loading tray
+  description: "The orbital cannon's loading tray."
+  suffix: Cannon spawns with one that's linked to it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.49,-0.49,1.04,0.24"
+        density: 155
+        mask:
+        - MachineMask
+        layer:
+        - WallLayer
+        hard: false
+  - type: Sprite
+    sprite: _RMC14/Structures/orbital_cannon_tray.rsi
+    drawdepth: SmallObjects
+    offset: 0.5, 0.5
+    layers:
+    - state: cannon_tray
+      map: [ "base" ]
+    - state: cannon_tray_explosive
+      map: [ "warhead" ]
+      visible: false
+    - state: cannon_tray_1
+      map: [ "fuel" ]
+      visible: false
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Climbable
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.OrbitalCannonTrayVisuals.Warhead:
+        warhead:
+          None: { visible: false }
+          RMCOrbitalCannonWarheadExplosive: { visible: true, state: cannon_tray_explosive }
+          RMCOrbitalCannonWarheadIncendiary: { visible: true, state: cannon_tray_incendiary }
+          RMCOrbitalCannonWarheadCluster: { visible: true, state: cannon_tray_cluster }
+          RMCOrbitalCannonWarheadAegis: { visible: true, state: cannon_tray_explosive } # We don't have aegis tray sprite
+      enum.OrbitalCannonTrayVisuals.Fuel:
+        fuel:
+          0: { visible: false }
+          1: { visible: true, state: cannon_tray_1 }
+          2: { visible: true, state: cannon_tray_2 }
+          3: { visible: true, state: cannon_tray_3 }
+          4: { visible: true, state: cannon_tray_4 }
+          5: { visible: true, state: cannon_tray_5 }
+          6: { visible: true, state: cannon_tray_6 }
+  - type: RMCMesonsNonviewable
+  - type: OrbitalCannonTray

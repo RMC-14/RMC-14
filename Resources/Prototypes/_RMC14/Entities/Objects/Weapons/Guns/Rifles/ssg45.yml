@@ -81,6 +81,7 @@
           tags:
           - RMCAttachmentBarrelCharger
           - RMCAttachmentExtendedBarrel
+          - RMCAttachmentExtendedCompensator
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
@@ -168,7 +169,7 @@
 - type: entity
   parent: CMMagazineRifleBase
   id: RMCMagazineRifleSSG45
-  name: "SSG45 magazine (7x62mm)"
+  name: "SSG45 magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -195,7 +196,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45Extended
-  name: "SSG45 extended magazine (7x62mm)"
+  name: "SSG45 extended magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -223,7 +224,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45AP
-  name: "SSG45 AP magazine (7x62mm)"
+  name: "SSG45 AP magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -249,7 +250,7 @@
 - type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45HEAP
-  name: "SSG45 HEAP magazine (7x62mm)"
+  name: "SSG45 HEAP magazine (10x24mm)"
   components:
   - type: Tag
     tags:
@@ -273,9 +274,17 @@
       color: "#9C9A19"
 
 - type: entity
+  parent: RMCMagazineRifleSSG45HEAP
+  id: RMCMagazineRifleSSG45HEAPEmpty
+  suffix: HEAP, Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null
+
+- type: entity
   parent: RMCMagazineRifleSSG45
   id: RMCMagazineRifleSSG45Incend
-  name: "SSG45 Incendiary magazine (7x62mm)"
+  name: "SSG45 Incendiary magazine (10x24mm)"
   components:
   - type: Tag
     tags:

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/81c7806eb705f3a6b43085056cef1be0055d8ed2/icons/mob/humans/onmob/suit_1.dmi, snpr armor by github noctyrnal",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/81c7806eb705f3a6b43085056cef1be0055d8ed2/icons/mob/humans/onmob/suit_1.dmi, snpr armor and pmc lights by github noctyrnal",
   "size": {
     "x": 32,
     "y": 32
@@ -25,6 +25,40 @@
     },
     {
       "name": "lamp-on",
+      "directions": 4,
+      "delays": [
+        [
+          0.7,
+          0.4,
+          0.2,
+          0.4
+        ],
+        [
+          0.7,
+          0.4,
+          0.2,
+          0.4
+        ],
+        [
+          0.7,
+          0.4,
+          0.2,
+          0.4
+        ],
+        [
+          0.7,
+          0.4,
+          0.2,
+          0.4
+        ]
+      ]
+    },
+    {
+      "name": "pmc-lamp-off",
+      "directions": 4
+    },
+    {
+      "name": "pmc-lamp-on",
       "directions": 4,
       "delays": [
         [

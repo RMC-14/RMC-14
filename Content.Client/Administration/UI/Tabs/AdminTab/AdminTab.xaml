@@ -22,6 +22,8 @@
         <GridContainer Columns="3">
             <cc:CommandButton Command="rmcadminui" Text="{Loc rmc-ui-admin}" />
             <cc:CommandButton Command="> rmcrejuvenate:marineplayersinrange 7" Text="{Loc rmc-ui-rejuvenate-nearby-marines}" />
+            <cc:CommandButton Command="rmcadminchatban" Text="{Loc rmc-ui-chat-bans}" />
+            <cc:CommandButton Command="rmcdelayroundend" Text="{Loc rmc-ui-delay-round-end}" />
         </GridContainer>
     </BoxContainer>
 </Control>

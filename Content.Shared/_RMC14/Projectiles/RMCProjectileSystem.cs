@@ -34,6 +34,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         SubscribeLocalEvent<DeleteOnCollideComponent, StartCollideEvent>(OnDeleteOnCollideStartCollide);
         SubscribeLocalEvent<ModifyTargetOnHitComponent, ProjectileHitEvent>(OnModifyTargetOnHit);
         SubscribeLocalEvent<ProjectileMaxRangeComponent, MapInitEvent>(OnProjectileMaxRangeMapInit);
+        SubscribeLocalEvent<ProjectileMaxRangeComponent, PreventCollideEvent>(OnProjectileMaxRangePreventCollide);
 
         SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, MapInitEvent>(OnFalloffProjectileMapInit);
         SubscribeLocalEvent<RMCProjectileDamageFalloffComponent, ProjectileHitEvent>(OnFalloffProjectileHit);
@@ -125,6 +126,13 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        var netOther = GetNetEntity(args.OtherEntity);
+        if (projectile.Comp.Dodged.Contains(netOther))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
             return;
 
@@ -173,6 +181,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+
+        projectile.Comp.Dodged.Add(netOther);
+        Dirty(projectile);
     }
 
     private bool IsProjectileTargetFriendly(EntityUid projectile, EntityUid target)
@@ -240,7 +251,7 @@ public sealed class RMCProjectileSystem : EntitySystem
     {
         if (ent.Comp.Delete)
         {
-            if (_net.IsServer)
+            if (_net.IsServer || IsClientSide(ent))
                 QueueDel(ent);
         }
         else
@@ -250,11 +261,26 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
     }
 
-    public override void Update(float frameTime)
+    private void OnProjectileMaxRangePreventCollide(Entity<ProjectileMaxRangeComponent> ent, ref PreventCollideEvent args)
     {
-        if (_net.IsClient)
+        if (args.Cancelled)
             return;
 
+        if (ent.Comp.Origin is not { } origin)
+            return;
+
+        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(ent), out var distance))
+            return;
+
+        if (distance < ent.Comp.Max)
+            return;
+
+        args.Cancelled = true;
+        StopProjectile(ent);
+    }
+
+    public override void Update(float frameTime)
+    {
         var maxQuery = EntityQueryEnumerator<ProjectileMaxRangeComponent>();
         while (maxQuery.MoveNext(out var uid, out var comp))
         {
@@ -273,3 +299,6 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct ProjectileShotEvent(EntityUid? Shooter, bool Predicted = true);

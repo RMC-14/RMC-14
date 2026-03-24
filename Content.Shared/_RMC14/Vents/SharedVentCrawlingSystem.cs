@@ -25,6 +25,7 @@ using Content.Shared._RMC14.Storage.Containers;
 using Content.Shared.Hands;
 using Content.Shared.Item;
 using Content.Shared.Interaction.Events;
+using Content.Shared.Mobs.Systems;
 
 namespace Content.Shared._RMC14.Vents;
 public abstract class SharedVentCrawlingSystem : EntitySystem
@@ -42,6 +43,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
     [Dependency] private readonly SharedEyeSystem _eye = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly MobStateSystem _mob = default!;
 
     private bool _relativeMovement;
     public override void Initialize()
@@ -115,8 +117,10 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
 
     private void EmptyVent(EntityUid vent)
     {
-        if (!TryGetVent(vent, out var comp, out var container))
+        if (!TryComp<VentCrawlableComponent>(vent, out var ventComp))
             return;
+
+        var container = _container.EnsureContainer<Container>(vent, ventComp.ContainerId);
 
         var ents = _container.EmptyContainer(container, true);
         foreach (var en in ents)
@@ -340,6 +344,9 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
             if (crawling.TravelDirection == null)
                 continue;
 
+            if (!_mob.IsAlive(uid))
+                continue;
+
             if (!_container.TryGetContainingContainer(uid, out var container) || !TryComp<VentCrawlableComponent>(container.Owner, out var vent))
                 continue;
 
@@ -389,7 +396,7 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                 }
 
                 if (_rmcmap.IsTileBlocked(container.Owner.ToCoordinates()))
-                    return;
+                    continue;
 
                 var ev = new VentExitDoafterEvent();
 
@@ -398,7 +405,8 @@ public abstract class SharedVentCrawlingSystem : EntitySystem
                     BreakOnMove = true,
                     DuplicateCondition = DuplicateConditions.SameEvent,
                     CancelDuplicate = false,
-                    BlockDuplicate = true
+                    BlockDuplicate = true,
+                    RequireCanInteract = false
                 };
 
                 _doafter.TryStartDoAfter(doafter);

@@ -1,0 +1,22 @@
+﻿- type: entity
+  id: RMCBasketballHoop
+  name: basketball hoop
+  description: Boom, Shakalaka!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Physics
+    bodyType: Static
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Sprite
+    sprite: _RMC14/Structures/basketball_hoop.rsi
+    state: hoop
+
+- type: entity
+  parent: RMCBasketballHoop
+  id: RMCBasketballHoopAlt
+  suffix: Alt
+  components:
+  - type: Sprite
+    state: hoop_alt

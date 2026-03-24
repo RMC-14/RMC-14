@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from Starlight at https://github.com/ss14Starlight/space-station-14/tree/540ec9003640e5842f11a54acb1fcedb910ad14a/Resources/Textures/_Starlight/Mobs/Customization/vulpkanin/tail_markings.rsi",
+  "size": {"x": 32, "y": 32},
+  "states": [
+    {
+      "name": "long",
+      "directions": 4
+    },
+    {
+      "name": "long-tip",
+      "directions": 4
+    }
+  ]
+}

@@ -38,7 +38,7 @@ public sealed partial class DropshipAmmoComponent : Component
     public int ArmorPiercing = 10;
 
     [DataField(required: true), AutoNetworkedField]
-    public EntProtoId<DropshipWeaponComponent> Weapon = new("");
+    public EntProtoId<DropshipWeaponComponent> Weapon = new(string.Empty);
 
     [DataField, AutoNetworkedField]
     public TimeSpan TravelTime = TimeSpan.FromSeconds(10);
@@ -59,7 +59,10 @@ public sealed partial class DropshipAmmoComponent : Component
     public SoundSpecifier? SoundImpact;
 
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> ImpactEffects = new ();
+    public SoundSpecifier? SoundWarning;
+
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> ImpactEffects = new();
 
     [DataField, AutoNetworkedField]
     public string? AmmoType;
@@ -78,6 +81,9 @@ public sealed partial class DropshipAmmoComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool DeleteOnEmpty;
+
+    [DataField, AutoNetworkedField]
+    public bool MarkerWarning;
 }
 
 [Serializable, NetSerializable]

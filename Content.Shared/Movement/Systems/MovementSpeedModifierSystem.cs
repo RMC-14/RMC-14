@@ -37,8 +37,8 @@ namespace Content.Shared.Movement.Systems
             ent.Comp.WeightlessFrictionNoInput = _airDamping * ent.Comp.BaseWeightlessFriction;
             ent.Comp.OffGridFriction = _offGridDamping * ent.Comp.BaseWeightlessFriction;
             ent.Comp.Acceleration = ent.Comp.BaseAcceleration;
-            ent.Comp.Friction = _frictionModifier * ent.Comp.BaseFriction;
-            ent.Comp.FrictionNoInput = _frictionModifier * ent.Comp.BaseFriction;
+            ent.Comp.Friction = _frictionModifier * 2.5f; // RMC14 ent.Comp.BaseFriction;
+            ent.Comp.FrictionNoInput = _frictionModifier * 2.5f; // RMC14 ent.Comp.BaseFriction;
             Dirty(ent);
         }
 

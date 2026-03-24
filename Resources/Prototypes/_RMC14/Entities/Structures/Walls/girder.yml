@@ -37,7 +37,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 125
       behaviors:
         - !type:DoActsBehavior
           acts: [ "Destruction" ]
@@ -55,6 +55,10 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    minimumClawStrength: VerySharp
+    maxHealth: 125
+    minimumXenoTier: 2
   - type: RMCDropshipBlocked
   - type: DamageMultiplierFlags
     flags: Breaching
@@ -64,6 +68,11 @@
       types:
         Blunt: 40
   - type: XenoCrusherChargable
+  - type: RMCGenericExamine
+    message: rmc-structure-girder-examine-tip
+    whitelist:
+      components:
+      - Marine
 
 - type: entity
   parent: CMGirder
@@ -83,7 +92,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
+        damage: 500
       behaviors:
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
@@ -104,6 +113,8 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: ReceiverXenoClaws
+    maxHealth: 500
   - type: StaticPrice
     price: 66
 
@@ -119,3 +130,8 @@
     state: displaced
   - type: Icon
     state: displaced
+  - type: RMCGenericExamine
+    message: rmc-structure-displaced-examine-tip
+    whitelist:
+      components:
+      - Marine

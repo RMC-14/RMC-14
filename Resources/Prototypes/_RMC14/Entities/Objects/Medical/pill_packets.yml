@@ -23,7 +23,7 @@
     - PillPacket
   - type: IconLabel
     textColor: White
-    storedOffset: 2, 12
+    storedOffset: -12, 12
   - type: InteractedBlacklist
     blacklist:
       components:

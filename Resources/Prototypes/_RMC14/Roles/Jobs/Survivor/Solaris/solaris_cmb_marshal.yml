@@ -1,0 +1,101 @@
+- type: job
+  parent: CMSurvivor
+  id: CMSurvivorSolarisCMBMarshal
+  name: rmc-job-name-survivor-bureau-marshal
+  description: cm-job-description-commanding-officer
+  playTimeTracker: RMCJobSurvivorCO
+  ranks:
+    RMCRankCMBMarshal: []
+  startingGear: RMCGearSurvivorSolarisCMBMarshal
+  accessGroups:
+  - ColonistCMBSurvivor
+  roleWeight: 0.25
+  icon: "RMCJobIconBureauMarshal"
+  hasIcon: true
+  spawnMenuRoleName: CMB Marshal (Solaris Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      skills:
+        RMCSkillPolice: 2
+        RMCSkillCqc: 3
+        RMCSkillConstruction: 2
+        RMCSkillLeadership: 1
+        RMCSkillOverwatch: 1
+        RMCSkillMedical: 2
+        RMCSkillEngineer: 1
+        RMCSkillFireman: 5
+        RMCSkillFirearms: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillVehicles: 1
+        RMCSkillEndurance: 2
+        RMCSkillJtac: 3
+    - type: MarineOrders
+    - type: RMCPointing
+    - type: CommandAccent
+    - type: InnateCommandSpeech
+    - type: IntelRescueSurvivorObjective
+    - type: RMCAllowSuitStorage
+    - type: NpcFactionMember
+      factions:
+      - Bureau
+      - Civilian
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: deputy
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_cmb
+    - type: JobPrefix
+      prefix: cm-job-prefix-survivor-cmb-marshal
+  useLoadoutOfJob: RMCSurvivorCommandingOfficer # for inheritance
+
+- type: startingGear
+  id: RMCGearSurvivorSolarisCMBMarshal
+  equipment:
+    id: RMCIDCardCMBMarshalSurvivor
+    jumpsuit: RMCMarshalCMBUniformSurvivorMarshal
+    outerClothing: RMCArmorM4RLight
+    eyes: CMGlassesSecurity
+    head: RMCHeadCapBureau
+    suitstorage: RMCWeaponSMGMP5Alt
+    belt: CMBeltMarineMP5
+    back: RMCSatchelSecuritySurvivorFillCMBMarshal
+    gloves: RMCHandsVeteran # TODO RMC14: swat gloves
+    shoes: CMBootsBlackFilled
+    ears: RMCHeadsetDistressBureauDamaged
+    pocket1: RMCPouchSurvivalFill # TODO RMC14: wy survival pouch
+    pocket2: RMCPouchFirstAidInjectors
+
+- type: entity
+  parent: RMCMarshalCMBUniform
+  id: RMCMarshalCMBUniformSurvivorMarshal
+  suffix: Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingSurvivorCMBMarshal
+
+- type: entity
+  parent: CMWebbingHolster
+  id: RMCWebbingSurvivorCMBMarshal
+  suffix: Marshal, Survivor, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearheadTactitcal
+    - id: RMCSpeedLoader357
+    - id: RMCSpeedLoader357
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSolarisCMBMarshal
+  name: solaris cmb marshal spawn point
+  components:
+  - type: SpawnPoint
+    job_id: CMSurvivorSolarisCMBMarshal
+  - type: Sprite
+    state: co_spawn

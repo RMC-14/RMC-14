@@ -173,6 +173,28 @@
     - id: RMCTankFlamer
       amount: 4
 
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineBGel
+  name: M34 B-Gel fuel (4x)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 4
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineFlamerMixed
+  name: M34 Mixed fuel (2x UT-Napthal, 2x B-Gel)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamerBGel
+      amount: 2
+    - id: RMCTankFlamer
+      amount: 2
+
 # Smart Pistol
 - type: entity
   parent: RMCCrateAmmo
@@ -302,3 +324,23 @@
   - type: StorageFill
     contents:
     - id: RMCBoxMagazinePistolM13Drum
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineML66DDrum
+  name: ML66D drum magazine crate (x1)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineML66D
+      amount: 1
+
+- type: entity
+  parent: RMCCrateAmmo
+  id: RMCCrateMagazineM2C
+  name: M2C ammunition crate (x2)
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineM2C
+      amount: 2

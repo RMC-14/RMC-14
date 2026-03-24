@@ -3,6 +3,7 @@
   id: CMCombatTech
   name: cm-job-name-combat-tech
   description: cm-job-description-combat-tech
+  newToJobInfo: rmc-new-to-job-combat-tech
   playTimeTracker: CMJobCombatTech
   requirements:
   - !type:DepartmentTimeRequirement
@@ -52,6 +53,7 @@
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: engi
+    - type: MutinyEligible
 
 - type: startingGear
   id: CMGearCombatTech
@@ -144,3 +146,14 @@
     - !type:RoleTimeRequirement
       role: CMJobCombatTech
       time: 1
+
+# Guidebook
+- type: entity
+  parent: CMGuidebookRole
+  id: RMCGuidebookRoleCT
+  name: Combat Technician
+  description: Combat Technician
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: combat_tech

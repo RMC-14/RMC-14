@@ -1,4 +1,6 @@
-﻿using Content.Shared.Damage;
+﻿using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared.Body.Prototypes;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.DoAfter;
 using Robust.Shared.Audio;
@@ -22,12 +24,6 @@ public sealed partial class DefibrillatorComponent : Component
     /// </summary>
     [DataField("zapHeal", required: true), ViewVariables(VVAccess.ReadWrite)]
     public DamageSpecifier ZapHeal = default!;
-
-    /// <summary>
-    /// How much damage is healed from getting zapped.
-    /// </summary>
-    [DataField("cmZapHeal"), ViewVariables(VVAccess.ReadWrite)]
-    public List<(ProtoId<DamageGroupPrototype> Group, int Amount)>? CMZapDamage;
 
     /// <summary>
     /// The electrical damage from getting zapped.
@@ -88,6 +84,24 @@ public sealed partial class DefibrillatorComponent : Component
 
     [DataField]
     public EntityUid? ChargeSoundEntity;
+
+    // RMC14
+    /// <summary>
+    /// How much damage is healed from getting zapped.
+    /// </summary>
+    [DataField("rmcZapHeal"), ViewVariables(VVAccess.ReadWrite)]
+    public List<(ProtoId<DamageGroupPrototype> Group, int Amount)>? RMCZapDamage;
+
+    // TODO RMC14 different sound per skill level
+    [DataField]
+    public EntProtoId<SkillDefinitionComponent> Skill = "RMCSkillMedical";
+
+    [DataField]
+    public TimeSpan SkillMultiplierDuration = TimeSpan.FromSeconds(3);
+
+    [DataField]
+    public ProtoId<MetabolismGroupPrototype> MetabolismId = "Medicine";
+    // RMC14
 }
 
 [Serializable, NetSerializable]
