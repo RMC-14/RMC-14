@@ -8728,7 +8728,7 @@ entities:
     - type: Transform
       pos: -22.5,13.5
       parent: 1
-- proto: RMCGlassesMedicalHUDGlassesAdvanced
+- proto: RMCGlassesMedicalHUDGlasses
   entities:
   - uid: 1276
     components:

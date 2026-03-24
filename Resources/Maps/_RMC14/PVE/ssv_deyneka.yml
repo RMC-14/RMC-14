@@ -30926,7 +30926,7 @@ entities:
       parent: 3322
     - type: Physics
       canCollide: False
-- proto: RMCGlassesMedicalHUDGlassesAdvanced
+- proto: RMCGlassesMedicalHUDGlasses
   entities:
   - uid: 3324
     components:
