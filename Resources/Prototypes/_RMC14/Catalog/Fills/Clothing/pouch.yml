@@ -176,6 +176,22 @@
   - type: CMItemSlots
     startingItem: RMCFlareL96
 
+- type: entity
+  parent: RMCPouchFlareR44
+  id: RMCPouchFlareR44Filled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlareR44
+
+- type: entity
+  parent: RMCPouchFlareC18
+  id: RMCPouchFlareC18Filled
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    startingItem: RMCFlareC18
+
 # Electronics Pouch
 - type: entity
   parent: RMCPouchElectronics

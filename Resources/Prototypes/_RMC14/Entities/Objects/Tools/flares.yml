@@ -471,63 +471,22 @@
     lifetime: 180
 
 - type: entity
-  name: flare
-  parent: BaseItem
+  name: L96 flare
+  parent: CMFlare
   id: RMCFlareL96
   description: A vibrant purple Royal Crown Marines issued flare. There are instructions on the side, it reads 'To light, pull cord'.
   components:
   - type: Tag
     tags:
+    - Flare
+    - RMCFlare
     - RMCFlareL96
-  - type: ExpendableLight
-    spentName: expendable-light-spent-flare-name
-    spentDesc: expendable-light-spent-flare-desc
-    glowDuration: 600
-    fadeOutDuration: 30
-    iconStateSpent: flare_spent
-    turnOnBehaviourID: turn_on
-    fadeOutBehaviourID: fade_out
-    litSound:
-      path: /Audio/_RMC14/Machines/flare_activate_2.ogg
-      params:
-        variation: 0.08
-    loopedSound: /Audio/Items/Flare/flare_burn.ogg
-  - type: Sprite
-    sprite: _RMC14/Objects/Misc/flares.rsi
-    layers:
-      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
-        state: flare
-      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-        state: flare_flame
-        color: "#C156C2"
-        visible: false
-      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-        state: overlay
-  - type: Icon
-    sprite: _RMC14/Objects/Misc/flares.rsi
-    state: icon
-  - type: Item
-    size: Small
-    heldPrefix: unlit
-  - type: Appearance
   - type: PointLight
     enabled: false
     color: "#C8BFE7"
     radius: 1
     energy: 5.0
     netsync: false
-  - type: LightBehaviour
-    behaviours:
-      - !type:FadeBehaviour
-        id: turn_on
-        maxDuration: 5.0
-        startValue: 2.5
-        endValue: 7.0
-      - !type:FadeBehaviour
-        id: fade_out
-        maxDuration: 570
-        startValue: 7.0
-        endValue: 1.0
   - type: RMCNightVisionVisibleOnIgnite
   - type: CartridgeAmmo
     deleteOnSpawn: true
@@ -550,7 +509,7 @@
     - state: l96_e
       map: [ "emptyLayer" ]
     - state: l96
-      map: [ "fullLayer" ] # TODO RMC14 proper sprites for this
+      map: [ "fullLayer" ]
   - type: CMItemSlots
     count: 8
     startingItem: RMCFlareL96
@@ -607,6 +566,218 @@
     enabled: true
     color: "#C8BFE7"
 
+- type: entity
+  parent: CMFlare
+  id: RMCFlareR44
+  name: R44 illumination flare
+  description: A bright yellow-orange flare, issued by the SPP. The side reads "DANGER - FIRE!" in easily a dozen different languages.
+  components:
+  - type: Tag
+    tags:
+    - Flare
+    - RMCFlare
+    - RMCFlareR44
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#F7AD35"
+        visible: false
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
+  - type: PointLight
+    enabled: false
+    color: "#F5D5A2"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareR44Bullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareR44
+
+- type: entity
+  parent: CMPackFlareBase
+  id: RMCPackFlareR44
+  name: R44 illumination flare pack
+  description: A packet of eight R44 Illumination Flares.
+  suffix: Filled
+  components:
+  - type: Tag
+    tags:
+    - RMCPackFlareR44
+  - type: Sprite
+    layers:
+    - state: r44_e
+      map: [ "emptyLayer" ]
+    - state: r44
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    count: 8
+    startingItem: RMCFlareR44
+    slot:
+      whitelist:
+        tags:
+        - RMCFlareR44
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareR44Bullet
+  name: R44 flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareR44
+  - type: PointLight
+    enabled: true
+    color: "#F5D5A2"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  parent: RMCAirFlare
+  id: RMCAirFlareR44
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#F7AD35"
+  - type: PointLight
+    enabled: true
+    color: "#F5D5A2"
+
+- type: entity
+  parent: RMCBoxPackFlareEmpty
+  id: RMCBoxPackFlareR44
+  name: box of R44 illumination flare packs (x10)
+  description: A cardboard box holding 10 packs of R44 illumination flares.
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        tags:
+        - RMCPackFlareR44
+    startingItem: RMCPackFlareR44
+
+- type: entity
+  parent: CMFlare
+  id: RMCFlareC18
+  name: C18 flare
+  description: A Weston-Yamada-issued flare that burns with a distinct blue shade. Dense text on the label warns of the health risks of breathing burning copper fumes.
+  components:
+  - type: Tag
+    tags:
+    - Flare
+    - RMCFlare
+    - RMCFlareC18
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/flares.rsi
+    layers:
+      - map: [ "enum.ExpendableLightVisualLayers.Base" ]
+        state: flare
+      - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+        state: flare_flame
+        color: "#155FFF"
+        visible: false
+      - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
+        state: overlay
+  - type: PointLight
+    enabled: false
+    color: "#8EACED"
+    radius: 1
+    energy: 5.0
+    netsync: false
+  - type: CartridgeAmmo
+    deleteOnSpawn: true
+    proto: RMCFlareR44Bullet
+  - type: RMCAirProjectile
+    prototype: RMCAirFlareR44
+
+- type: entity
+  parent: CMPackFlareBase
+  id: RMCPackFlareC18
+  name: C18 flare pack
+  description: A packet of eight C18 flares.
+  suffix: Filled
+  components:
+  - type: Tag
+    tags:
+    - RMCPackFlareC18
+  - type: Sprite
+    layers:
+    - state: c18_e
+      map: [ "emptyLayer" ]
+    - state: c18
+      map: [ "fullLayer" ]
+  - type: CMItemSlots
+    count: 8
+    startingItem: RMCFlareC18
+    slot:
+      whitelist:
+        tags:
+        - RMCFlareC18
+
+- type: entity
+  parent: RMCFlareBullet
+  id: RMCFlareC18Bullet
+  name: C18 flare projectile
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ScatteringGrenade
+    fillPrototype: RMCFlareC18
+  - type: PointLight
+    enabled: true
+    color: "#8EACED"
+    radius: 2.0
+    energy: 7.0
+
+- type: entity
+  parent: RMCAirFlare
+  id: RMCAirFlareC18
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: ExpendableLight
+    startsActivated: true
+    glowDuration: 150
+  - type: Sprite
+    sprite: _RMC14/Objects/Misc/air_flare.rsi
+    layers:
+    - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
+      state: air_flame
+      color: "#155FFF"
+  - type: PointLight
+    enabled: true
+    color: "#8EACED"
+
+- type: entity
+  parent: RMCBoxPackFlareEmpty
+  id: RMCBoxPackFlareC18
+  name: box of C18 flare packs (x10)
+  description: A cardboard box holding 10 packs of C18 flares.
+  suffix: Filled
+  components:
+  - type: CMItemSlots
+    count: 10
+    slot:
+      name: FlarePack
+      whitelist:
+        tags:
+        - RMCPackFlareC18
+    startingItem: RMCPackFlareC18
+
 - type: Tag
   id: RMCFlare
 
@@ -621,3 +792,15 @@
 
 - type: Tag
   id: RMCPackFlareL96
+
+- type: Tag
+  id: RMCFlareR44
+
+- type: Tag
+  id: RMCPackFlareR44
+
+- type: Tag
+  id: RMCFlareC18
+
+- type: Tag
+  id: RMCPackFlareC18
