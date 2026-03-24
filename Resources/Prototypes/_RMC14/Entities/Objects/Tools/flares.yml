@@ -702,9 +702,9 @@
     netsync: false
   - type: CartridgeAmmo
     deleteOnSpawn: true
-    proto: RMCFlareR44Bullet
+    proto: RMCFlareC18Bullet
   - type: RMCAirProjectile
-    prototype: RMCAirFlareR44
+    prototype: RMCAirFlareC18
 
 - type: entity
   parent: CMPackFlareBase
