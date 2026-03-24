@@ -3,7 +3,6 @@
   id: CMJobSurvivorHalcyonDynamicsLiaison
   name: rmc-job-name-survivor-halcyon-dynamics-liaison
   description: cm-job-description-survivor
-  playTimeTracker: CMJobSurvivorCorporate
   startingGear: RMCGearSurvivorHalcyonDynamicsLiaison
   accessGroups:
   - ColonistCorporate
@@ -13,11 +12,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      skills:
-        RMCSkillConstruction: 1
-        RMCSkillEndurance: 2
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetSurvivor
     - type: EquipSurvivorPreset
       preset: RMCGearSurvivorPresetHalcyonDynamicsLiaison
     - type: RMCSurvivor
@@ -29,7 +24,6 @@
       - Civilian
     - type: IntelRescueSurvivorObjective
     - type: RMCAllowSuitStorage
-  useLoadoutOfJob: CMSurvivorCorporate # for inheritance
 
 - type: startingGear
   parent: RMCGearSurvivorBase

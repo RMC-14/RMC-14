@@ -493,9 +493,9 @@
 
 - type: entity
   parent: RMCMarineUniformBase
-  id: RMCJumpsuitUNSecurity
-  name: United Nations Security uniform
-  description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized by United Nations security personnel in riot control situations.
+  id: RMCJumpsuitRiotControl
+  name: riot control uniform
+  description: Overalls made of kevlar cover a snazzy blue dress shirt. Often utilized in riot control situations.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Survivor/varadero_riot.rsi
@@ -505,6 +505,27 @@
     tags:
     - RMCUniformMarine
     - RMCUniformUNSecurity
+
+- type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlB92FS
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackB92FS
+
+- type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlMK45
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackMK45
+
+- type: entity
+  parent: RMCJumpsuitRiotControl
+  id: RMCJumpsuitRiotControlM1984
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingHolsterBlackM1984
 
 - type: entity
   parent: [RMCUniformBase, RMCAlternateFoldableUniformBase]

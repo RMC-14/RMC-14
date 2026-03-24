@@ -19,18 +19,7 @@
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillFirearms: 1
-        RMCSkillPolice: 2
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillSmartGun: 1
-        RMCSkillEndurance: 1
-        RMCSkillJtac: 1
-        RMCSkillPilot: 1
-        RMCSkillPowerLoader: 1
+      preset: RMCSkillPresetPVESGO
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-gunner

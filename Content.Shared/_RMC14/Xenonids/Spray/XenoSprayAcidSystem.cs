@@ -101,14 +101,14 @@ public sealed class XenoSprayAcidSystem : EntitySystem
             _actions.StartUseDelay(action.AsNullable());
         }
 
-        var start = xeno.Owner.ToCoordinates();
-        var end = GetCoordinates(args.Coordinates);
-        var tiles = _line.DrawLine(start, end, xeno.Comp.Delay, xeno.Comp.Range, out var blocker);
-        var active = EnsureComp<ActiveAcidSprayingComponent>(xeno);
-        active.Blocker = blocker;
-        active.Acid = xeno.Comp.Acid;
-        active.Spawn = tiles;
-        Dirty(xeno, active);
+        CreateLine(
+            xeno,
+            xeno.Owner.ToCoordinates(),
+            GetCoordinates(args.Coordinates),
+            xeno.Comp.Delay,
+            xeno.Comp.Range,
+            xeno.Comp.Acid
+        );
     }
 
     private void OnSprayAcidedMapInit(Entity<SprayAcidedComponent> ent, ref MapInitEvent args)
@@ -160,6 +160,19 @@ public sealed class XenoSprayAcidSystem : EntitySystem
         comp.Damage = acid.Comp.BarricadeDamage;
         comp.ExpireAt = time + acid.Comp.BarricadeDuration;
         Dirty(target, comp);
+    }
+
+    public void CreateLine(EntityUid user, EntityCoordinates start, EntityCoordinates end, TimeSpan delay, float range, EntProtoId acid, bool ignoreBlocker = true)
+    {
+        var tiles = _line.DrawLine(start, end, delay, range, out var blocker);
+        if (!ignoreBlocker && blocker != null)
+            return;
+
+        var active = EnsureComp<ActiveAcidSprayingComponent>(user);
+        active.Blocker = blocker;
+        active.Acid = acid;
+        active.Spawn = tiles;
+        Dirty(user, active);
     }
 
     public override void Update(float frameTime)

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
@@ -49,6 +50,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly RMCMapSystem _rmcMap = default!;
     [Dependency] private readonly RMCReagentSystem _reagent = default!;
+    [Dependency] private readonly IPrototypeManager _prototypes = default!;
 
     public override void Initialize()
     {
@@ -245,6 +247,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
     {
+        if (TryComp<AttachableHolderComponent>(ent, out var holder) &&
+            holder.SupercedingAttachable != null)
+        {
+            args.IsHot = false;
+            return;
+        }
+
         args.IsHot = ent.Comp.Enabled;
     }
 
@@ -319,8 +328,28 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Reagent = reagent.ID;
         chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
         chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
+    }
+
+    public bool TryGetPreviewTiles(
+        Entity<RMCFlamerAmmoProviderComponent> flamer,
+        EntityCoordinates fromCoordinates,
+        EntityCoordinates toCoordinates,
+        [NotNullWhen(true)] out List<LineTile>? tiles)
+    {
+        return CanShootFlamer(flamer, fromCoordinates, toCoordinates, out tiles, out _, out _, out _);
+    }
+
+    public bool TryGetFuelColor(Entity<RMCFlamerAmmoProviderComponent> flamer, out Color color)
+    {
+        color = default;
+        if (!TryGetTankSolution(flamer, out var solutionEnt, out _))
+            return false;
+
+        color = solutionEnt.Value.Comp.Solution.GetColor(_prototypes);
+        return true;
     }
 
     private bool CanShootFlamer(
@@ -600,7 +629,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                     if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration + (int)(comp.FuelPressure * reagent.DurationMod));
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 

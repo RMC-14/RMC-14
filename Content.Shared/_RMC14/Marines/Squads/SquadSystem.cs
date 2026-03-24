@@ -1,7 +1,10 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Content.Shared._RMC14.Admin;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._RMC14.Commendations;
+using Content.Shared._RMC14.Recommendation;
 using Content.Shared._RMC14.Cryostorage;
 using Content.Shared._RMC14.Inventory;
 using Content.Shared._RMC14.Marines.Announce;
@@ -57,6 +60,7 @@ public sealed class SquadSystem : EntitySystem
     [Dependency] private readonly MobStateSystem _mobState = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
+    [Dependency] private readonly SharedAwardRecommendationSystem _awardRecommendation = default!;
     [Dependency] private readonly SharedRMCBanSystem _rmcBan = default!;
     [Dependency] private readonly SharedCMChatSystem _rmcChat = default!;
 
@@ -96,6 +100,7 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadMemberComponent, LeftCryostorageEvent>(OnSquadMemberLeftCryo);
         SubscribeLocalEvent<SquadMemberComponent, GetMarineSquadNameEvent>(OnSquadRoleGetName);
 
+        SubscribeLocalEvent<SquadLeaderComponent, ComponentRemove>(OnSquadLeaderRemoved);
         SubscribeLocalEvent<SquadLeaderComponent, EntityTerminatingEvent>(OnSquadLeaderTerminating);
         SubscribeLocalEvent<SquadLeaderComponent, GetMarineIconEvent>(OnSquadLeaderGetMarineIcon, after: [typeof(SharedMarineSystem)]);
 
@@ -103,6 +108,8 @@ public sealed class SquadSystem : EntitySystem
         SubscribeLocalEvent<SquadLeaderHeadsetComponent, EntityTerminatingEvent>(OnSquadLeaderHeadsetTerminating);
 
         SubscribeLocalEvent<AssignSquadComponent, PlayerSpawnCompleteEvent>(OnAssignSquadPlayerSpawnComplete);
+
+        SubscribeLocalEvent<SquadMemberAddedEvent>(OnSquadMemberAdded);
 
         SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
 
@@ -237,6 +244,12 @@ public sealed class SquadSystem : EntitySystem
         squad.Roles[jobId] = roles + 1;
     }
 
+    private void OnSquadLeaderRemoved(Entity<SquadLeaderComponent> ent, ref ComponentRemove args)
+    {
+        // Disable recommendation ability when squad leader is demoted
+        _awardRecommendation.SetCanRecommend(ent, false);
+    }
+
     private void OnSquadLeaderTerminating(Entity<SquadLeaderComponent> ent, ref EntityTerminatingEvent args)
     {
         if (ent.Comp.Headset is { } headset)
@@ -262,6 +275,44 @@ public sealed class SquadSystem : EntitySystem
         {
             leader.Headset = null;
             Dirty(ent.Comp.Leader, leader);
+        }
+    }
+
+    private void OnSquadMemberAdded(ref SquadMemberAddedEvent ev)
+    {
+        if (_net.IsClient)
+            return;
+
+        // Get squad objectives
+        var squadTeam = ev.Squad.Comp;
+        if (squadTeam.Objectives.Count == 0)
+            return;
+
+        // Check if member has ActorComponent (player is attached)
+        if (!TryComp(ev.Member, out ActorComponent? actor))
+            return;
+
+        var objectivesText = new List<string>();
+        foreach (var (objectiveType, objectiveText) in squadTeam.Objectives)
+        {
+            if (string.IsNullOrWhiteSpace(objectiveText))
+                continue;
+
+            var objectiveName = objectiveType switch
+            {
+                SquadObjectiveType.Primary => Loc.GetString("rmc-overwatch-console-objective-primary"),
+                SquadObjectiveType.Secondary => Loc.GetString("rmc-overwatch-console-objective-secondary"),
+                _ => objectiveType.ToString()
+            };
+
+            objectivesText.Add($"{objectiveName}: {objectiveText}");
+        }
+
+        if (objectivesText.Count > 0)
+        {
+            var message = Loc.GetString("rmc-overwatch-console-objectives",
+                ("objectives", string.Join("\n", objectivesText)));
+            _rmcChat.ChatMessageToOne(message, ev.Member, ChatChannel.Radio);
         }
     }
 
@@ -396,6 +447,17 @@ public sealed class SquadSystem : EntitySystem
 
         squad = (member.Comp.Squad.Value, team);
         return true;
+    }
+
+    /// <summary>
+    /// Gets the squad name for a given marine entity. Returns null if the marine is not in a squad.
+    /// </summary>
+    public string? GetSquadName(EntityUid marine)
+    {
+        if (TryGetMemberSquad((marine, null), out var squad))
+            return Name(squad);
+
+        return null;
     }
 
     public bool HasSquad(EntProtoId id)
@@ -616,13 +678,13 @@ public sealed class SquadSystem : EntitySystem
 
         if (_rmcBan.IsJobBanned(toPromote.Owner, SquadLeaderJob))
         {
-            _popup.PopupCursor($"{Name(toPromote)} is unfit to lead!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-unfit-to-lead", ("marineName", Name(toPromote))), user, PopupType.MediumCaution);
             return;
         }
 
         if (_mobState.IsDead(toPromote))
         {
-            _popup.PopupCursor($"{Name(toPromote)} is KIA!", user, PopupType.MediumCaution);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-marine-is-kia-exclamation", ("marineName", Name(toPromote))), user, PopupType.MediumCaution);
             return;
         }
 
@@ -661,6 +723,10 @@ public sealed class SquadSystem : EntitySystem
 
         var newLeader = EnsureComp<SquadLeaderComponent>(toPromote);
         newLeader.Icon = icon;
+
+        EnsureComp<RMCAwardRecommendationComponent>(toPromote);
+        _awardRecommendation.SetCanRecommend(toPromote, true);
+
         if (!EnsureComp(toPromote, out MarineOrdersComponent orders))
         {
             orders.Intrinsic = false;
@@ -691,14 +757,14 @@ public sealed class SquadSystem : EntitySystem
         if (TryComp(toPromote, out ActorComponent? actor))
         {
             var squadStr = Exists(squad) ? $" for {Name(squad.Value)}" : string.Empty;
-            var message = $"Overwatch: You've been promoted to 'ACTING SQUAD LEADER'{squadStr}. Your headset has access to the command channel (:v).";
+            var message = Loc.GetString("rmc-overwatch-console-promoted-to-leader", ("squadStr", squadStr));
             _rmcChat.ChatMessageToOne(ChatChannel.Local, message, message, default, false, actor.PlayerSession.Channel, Color.FromHex("#0084FF"), true);
         }
 
         if (Exists(squad) && Prototype(squad.Value) is { } squadProto)
         {
-            _marineAnnounce.AnnounceSquad($"Attention: A new Squad Leader has been set: {Name(toPromote)}", squadProto.ID);
-            _popup.PopupCursor($"{Name(toPromote)} is {Name(squad.Value)}'s new leader!", user, PopupType.Medium);
+            _marineAnnounce.AnnounceSquad(Loc.GetString("rmc-overwatch-console-new-squad-leader-announce", ("leaderName", Name(toPromote))), squadProto.ID);
+            _popup.PopupCursor(Loc.GetString("rmc-overwatch-console-new-squad-leader-popup", ("leaderName", Name(toPromote)), ("squadName", Name(squad.Value))), user, PopupType.Medium);
         }
     }
 
@@ -822,6 +888,73 @@ public sealed class SquadSystem : EntitySystem
             return;
 
         squad.Comp.MaxRoles[job] = amount;
+    }
+
+    /// <summary>
+    /// Gets all objectives for a squad.
+    /// </summary>
+    public Dictionary<SquadObjectiveType, string> GetSquadObjectives(Entity<SquadTeamComponent?> squad)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return new Dictionary<SquadObjectiveType, string>();
+
+        return new Dictionary<SquadObjectiveType, string>(squad.Comp.Objectives);
+    }
+
+    /// <summary>
+    /// Gets a specific objective for a squad.
+    /// </summary>
+    public bool TryGetSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type, out string objective)
+    {
+        objective = string.Empty;
+        if (!Resolve(squad, ref squad.Comp, false))
+            return false;
+
+        if (squad.Comp.Objectives.TryGetValue(type, out var value))
+        {
+            objective = value ?? string.Empty;
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Sets an objective for a squad.
+    /// </summary>
+    public void SetSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type, string objective)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        if (string.IsNullOrWhiteSpace(objective))
+        {
+            squad.Comp.Objectives.Remove(type);
+        }
+        else
+        {
+            squad.Comp.Objectives[type] = objective;
+        }
+
+        Dirty(squad);
+
+        var ev = new SquadObjectivesChangedEvent((squad.Owner, squad.Comp));
+        RaiseLocalEvent(squad, ref ev);
+    }
+
+    /// <summary>
+    /// Removes an objective from a squad.
+    /// </summary>
+    public void RemoveSquadObjective(Entity<SquadTeamComponent?> squad, SquadObjectiveType type)
+    {
+        if (!Resolve(squad, ref squad.Comp, false))
+            return;
+
+        squad.Comp.Objectives.Remove(type);
+        Dirty(squad);
+
+        var ev = new SquadObjectivesChangedEvent((squad.Owner, squad.Comp));
+        RaiseLocalEvent(squad, ref ev);
     }
 
     public override void Update(float frameTime)

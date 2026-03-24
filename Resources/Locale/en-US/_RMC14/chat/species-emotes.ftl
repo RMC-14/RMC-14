@@ -46,3 +46,11 @@ rmc-emote-peep = peeps with surprise!
 rmc-emote-anger = trills angrily!
 rmc-emote-trill = trill!
 rmc-emote-warble = warbles!
+
+rmc-emote-name-slime-bubble = Bubble
+rmc-emote-name-slime-pop = Pop
+rmc-emote-name-slime-wobble = Wobble
+
+rmc-emote-slime-bubble = bubbles.
+rmc-emote-slime-pop = pops!
+rmc-emote-slime-wobble = wobbles.

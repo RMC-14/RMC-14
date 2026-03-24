@@ -3,6 +3,7 @@
     xmlns:controls="clr-namespace:Content.Client._RMC14.SupplyDrop"
     xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
     xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
+    xmlns:uiControls="clr-namespace:Content.Client.UserInterface.Controls"
     Title="{Loc ui-supply-drop-consle-name}"
     MinSize="400 300">
     <PanelContainer>
@@ -78,8 +79,9 @@
                                 MinHeight="20">
                         <Label Name="CooldownLabel" Access="Public" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ProgressBar>
-                    <Button Name="LaunchButton" Access="Public" 
-                          Text="{Loc ui-supply-drop-console-launch}" StyleClasses="OpenBoth"
+                    <uiControls:ConfirmButton Name="LaunchButton" Access="Public" 
+                          Text="{Loc ui-supply-drop-console-launch}" ConfirmationText="{Loc ui-supply-drop-console-launch-confirmation}"
+                          StyleClasses="OpenBoth"
                           Margin="0 8 0 0" MinHeight="30"/>
                 </BoxContainer>
             </PanelContainer>
