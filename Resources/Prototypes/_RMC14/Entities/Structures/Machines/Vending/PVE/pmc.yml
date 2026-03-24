@@ -76,7 +76,7 @@
       entries:
       - id: RMCPouchFirstAid
         amount: 15
-      - id: RMCPouchFlareFilledC18
+      - id: RMCPouchFlareC18Filled
         name: flare pouch (Full)
         amount: 15
       - id: RMCPouchMagazine

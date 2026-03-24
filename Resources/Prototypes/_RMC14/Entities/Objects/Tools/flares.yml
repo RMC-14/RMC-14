@@ -474,6 +474,7 @@
   name: L96 flare
   parent: CMFlare
   id: RMCFlareL96
+  suffix: RCM
   description: A vibrant purple Royal Crown Marines issued flare. There are instructions on the side, it reads 'To light, pull cord'.
   components:
   - type: Tag
@@ -499,7 +500,7 @@
   id: RMCPackFlareL96
   name: L96 marking flare pack
   description: A packet of eight L96 Signal Marking Flares.
-  suffix: Filled
+  suffix: Filled, RCM
   components:
   - type: Tag
     tags:
@@ -570,6 +571,7 @@
   parent: CMFlare
   id: RMCFlareR44
   name: R44 illumination flare
+  suffix: SPP
   description: A bright yellow-orange flare, issued by the SPP. The side reads "DANGER - FIRE!" in easily a dozen different languages.
   components:
   - type: Tag
@@ -605,7 +607,7 @@
   id: RMCPackFlareR44
   name: R44 illumination flare pack
   description: A packet of eight R44 Illumination Flares.
-  suffix: Filled
+  suffix: Filled, SPP
   components:
   - type: Tag
     tags:
@@ -661,7 +663,7 @@
   id: RMCBoxPackFlareR44
   name: box of R44 illumination flare packs (x10)
   description: A cardboard box holding 10 packs of R44 illumination flares.
-  suffix: Filled
+  suffix: Filled, SPP
   components:
   - type: CMItemSlots
     count: 10
@@ -676,6 +678,7 @@
   parent: CMFlare
   id: RMCFlareC18
   name: C18 flare
+  suffix: PMC
   description: A Weston-Yamada-issued flare that burns with a distinct blue shade. Dense text on the label warns of the health risks of breathing burning copper fumes.
   components:
   - type: Tag
@@ -711,7 +714,7 @@
   id: RMCPackFlareC18
   name: C18 flare pack
   description: A packet of eight C18 flares.
-  suffix: Filled
+  suffix: Filled, PMC
   components:
   - type: Tag
     tags:
@@ -767,7 +770,7 @@
   id: RMCBoxPackFlareC18
   name: box of C18 flare packs (x10)
   description: A cardboard box holding 10 packs of C18 flares.
-  suffix: Filled
+  suffix: Filled, PMC
   components:
   - type: CMItemSlots
     count: 10
