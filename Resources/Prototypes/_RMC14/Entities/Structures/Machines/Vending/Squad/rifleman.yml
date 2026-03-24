@@ -220,6 +220,8 @@
         points: 15
       - id: RMCWhistle
         points: 5
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 15
     - name: Binoculars
       entries:
       - id: RMCBinoculars
@@ -231,8 +233,6 @@
     - name: Helmet Optics
       entries:
       - id: RMCVisorMedical
-        points: 15
-      - id: RMCGlassesMedicalHUDGlasses
         points: 15
       - id: RMCVisorWelding
         points: 5

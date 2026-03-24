@@ -139,14 +139,14 @@
         points: 10
       - id: RMCLaserDesignator
         points: 15
+      - id: RMCGlassesMedicalHUDGlasses
+        points: 15
     - name: Helmet Optics
       entries:
       - id: RMCVisorNightVision
         points: 30
         recommended: true
       - id: RMCVisorMedical
-        points: 15
-      - id: RMCGlassesMedicalHUDGlasses
         points: 15
       - id: RMCVisorWelding
         points: 5
