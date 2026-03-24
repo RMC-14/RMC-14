@@ -13,7 +13,7 @@
     outerClothing: RMCProvostCoatFilled
 
 - type: loadout
-  id: RMCProvostSeniorJacketFilled
+  id: RMCProvostJacketBlueFilled
   cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -22,7 +22,7 @@
       role: CMJobProvostInspector
       time: 432000 # 120 hrs
   equipment:
-    outerClothing: RMCProvostSeniorJacketFilled
+    outerClothing: RMCProvostJacketBlueFilled
 
 ## Headwear
 - type: loadout
@@ -32,7 +32,7 @@
     head: RMCHeadBeretProvostSenior
 
 - type: loadout
-  id: RMCProvostSeniorBeret
+  id: RMCHeadBeretProvostBlue
   cost: 0
   effects:
   - !type:JobRequirementLoadoutEffect
@@ -41,4 +41,4 @@
       role: CMJobProvostInspector
       time: 432000 # 120 hrs
   equipment:
-    head: RMCProvostSeniorBeret
+    head: RMCHeadBeretProvostBlue

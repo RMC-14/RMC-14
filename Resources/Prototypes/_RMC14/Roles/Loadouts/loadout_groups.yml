@@ -817,7 +817,7 @@
   loadouts:
   - ProvostJacketFilledRMC
   - ProvostCoatFilledRMC
-  - RMCProvostSeniorJacketFilled
+  - RMCProvostJacketBlueFilled
 
 - type: loadoutGroup
   id: ProvostRoleSpecificHeadRMC
@@ -826,4 +826,4 @@
   maxLimit: 1
   loadouts:
   - RMCHeadBeretProvostSenior
-  - RMCProvostSeniorBeret
+  - RMCHeadBeretProvostBlue
