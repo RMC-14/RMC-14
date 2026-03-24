@@ -62,7 +62,7 @@
 
 - type: entity
   parent: RMCPouchSurvival
-  id: RMCPouchSurvivalBlack
+  id: RMCPouchSurvival
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/survivalpouch_black.rsi
@@ -442,7 +442,7 @@
   id: RMCPouchFlareC18
   name: C18 flare pouch
   suffix: PMC
-  description: A black flare pouch most often issued to Weston-Yamada PMCs meant for flares. Refillable with a C18 flare pack.
+  description: A black pouch most often issued to Weston-Yamada PMCs meant for flares. Refillable with a C18 flare pack.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/flarepmc.rsi
