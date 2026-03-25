@@ -63,6 +63,12 @@
   description: Some empty sandbags, best to fill them up if you want to use them.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: stack-inhand-left
+      right:
+      - state: stack-inhand-right
     size: Small
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
@@ -108,6 +114,12 @@
   description: Some bags filled with sand. For now, just cumbersome, but soon to be used for fortifications.
   components:
   - type: Item
+    sprite: _RMC14/Objects/Misc/sandbags.rsi
+    inhandVisuals:
+      left:
+      - state: pile-inhand-left
+      right:
+      - state: pile-inhand-right
     size: Large
   - type: Sprite
     sprite: _RMC14/Objects/Misc/sandbags.rsi
