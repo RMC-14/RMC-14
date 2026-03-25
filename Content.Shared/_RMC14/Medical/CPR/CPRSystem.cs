@@ -119,7 +119,7 @@ public sealed class CPRSystem : EntitySystem
         if (_net.IsClient)
             return;
 
-        var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", CPRCooldownSeconds));
+        var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", target), ("seconds", (int)CPRCooldownSeconds.TotalSeconds));
         _popups.PopupEntity(selfPopup, target, performer, PopupType.Medium);
 
         var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", target));
@@ -271,42 +271,42 @@ public sealed class CPRSystem : EntitySystem
         StartCPR(args.User, ent);
     }
 
-    private void HandleDummyCPR(Entity<CPRDummyComponent> ent, EntityUid user)
+    private void HandleDummyCPR(Entity<CPRDummyComponent> dummy, EntityUid performer)
     {
         var currentTime = _timing.CurTime;
-        var tooSoon = TryComp(ent, out CPRReceivedComponent? received) && received.Last > currentTime - CPRCooldownSeconds;
+        var tooSoon = TryComp(dummy, out CPRReceivedComponent? received) && received.Last > currentTime - CPRCooldownSeconds;
 
         if (tooSoon)
-            ent.Comp.CPRFailed++;
+            dummy.Comp.CPRFailed++;
         else
-            ent.Comp.CPRSuccess++;
+            dummy.Comp.CPRSuccess++;
 
-        Dirty(ent);
+        Dirty(dummy);
 
-        var cprReceived = EnsureComp<CPRReceivedComponent>(ent);
+        var cprReceived = EnsureComp<CPRReceivedComponent>(dummy);
         cprReceived.Last = currentTime;
-        Dirty(ent.Owner, cprReceived);
+        Dirty(dummy.Owner, cprReceived);
 
         if (_net.IsClient)
             return;
 
         if (tooSoon)
         {
-            var selfPopup = Loc.GetString("rmc-cpr-dummy-fail-self");
-            _popups.PopupEntity(selfPopup, ent, user, PopupType.MediumCaution);
+            var selfPopup = Loc.GetString("cm-cpr-self-perform-fail-received-too-recently", ("target", dummy));
+            _popups.PopupEntity(selfPopup, dummy, performer, PopupType.MediumCaution);
 
-            var othersPopup = Loc.GetString("rmc-cpr-dummy-fail-others", ("user", user));
-            var othersFilter = Filter.Pvs(user).RemoveWhereAttachedEntity(e => e == user);
-            _popups.PopupEntity(othersPopup, ent, othersFilter, true, PopupType.MediumCaution);
+            var othersPopup = Loc.GetString("cm-cpr-other-perform-fail", ("performer", performer), ("target", dummy));
+            var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
+            _popups.PopupEntity(othersPopup, dummy, othersFilter, true, PopupType.MediumCaution);
         }
         else
         {
-            var selfPopup = Loc.GetString("rmc-cpr-dummy-success-self");
-            _popups.PopupEntity(selfPopup, ent, user, PopupType.Medium);
+            var selfPopup = Loc.GetString("cm-cpr-self-perform", ("target", dummy), ("seconds", (int)CPRCooldownSeconds.TotalSeconds));
+            _popups.PopupEntity(selfPopup, dummy, performer, PopupType.Medium);
 
-            var othersPopup = Loc.GetString("rmc-cpr-dummy-success-others", ("user", user));
-            var othersFilter = Filter.Pvs(user).RemoveWhereAttachedEntity(e => e == user);
-            _popups.PopupEntity(othersPopup, ent, othersFilter, true, PopupType.Medium);
+            var othersPopup = Loc.GetString("cm-cpr-other-perform", ("performer", performer), ("target", dummy));
+            var othersFilter = Filter.Pvs(performer).RemoveWhereAttachedEntity(e => e == performer);
+            _popups.PopupEntity(othersPopup, dummy, othersFilter, true, PopupType.Medium);
         }
     }
 
