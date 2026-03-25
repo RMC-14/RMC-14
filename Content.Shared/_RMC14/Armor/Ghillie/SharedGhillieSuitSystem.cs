@@ -71,6 +71,12 @@ public sealed class SharedGhillieSuitSystem : EntitySystem
             return;
         }
 
+        var invisibilityAttemptEvent = new ToggleInvisibilityAttemptEvent();
+        RaiseLocalEvent(args.Performer, ref invisibilityAttemptEvent);
+
+        if (invisibilityAttemptEvent.Cancelled)
+            return;
+
         args.Handled = true;
 
         if (!comp.Enabled)

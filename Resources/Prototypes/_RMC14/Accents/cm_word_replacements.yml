@@ -29,7 +29,7 @@
     cm-chatsan-word-eorg-marine: cm-chatsan-replacement-eorg-marine
     cm-chatsan-word-xx121-marine: cm-chatsan-replacement-xx121-marine
     cm-chatsan-word-xx-121-marine: cm-chatsan-replacement-xx-121-marine
-    
+
     cm-chatsan-word-slopcade: cm-chatsan-replacement-slopcade
     cm-chatsan-word-surv: cm-chatsan-word-survivor
     cm-chatsan-word-survs: cm-chatsan-word-survivors
@@ -297,6 +297,7 @@
     cm-chatsan-word-batonged: cm-chatsan-word-replacement-batonged
     cm-chatsan-word-xover: cm-chatsan-word-replacement-xover
     cm-chatsan-word-xenover: cm-chatsan-word-replacement-xover
+    cm-chatsan-word-m2c: cm-chatsan-word-replacement-m2c
     cm-chatsan-word-m13: cm-chatsan-word-replacement-m13
     cm-chatsan-word-m63: cm-chatsan-word-replacement-m63
     cm-chatsan-word-p90: cm-chatsan-word-replacement-p90

@@ -127,5 +127,8 @@ public sealed partial class SynthComponent : Component
     [DataField, AutoNetworkedField]
     public string DamageVisualsColor = "#EEEEEE";
 
+    [DataField]
+    public TimeSpan NextUnableUsePopup;
+
 }
 

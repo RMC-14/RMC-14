@@ -707,12 +707,16 @@
 
 - type: entity
   parent: RMCBackpackRTO
-  id: RMCBackpackRTOTSE # TODO RMC14 - Different Sprites
+  id: RMCBackpackRTOTSE
   name: TSE radio telephone pack
   description: A heavy-duty extended-pack, used for telecommunications between central command. Commonly carried by RTOs. This one bears the Three Suns Empire's insignia.
   components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Backpacks/RCM/rto.rsi
   - type: RotaryPhone
     category: Three Suns Empire
+  - type: ItemCamouflage
+    camouflageVariations: {}
 
 - type: entity
   parent: CMSatchel

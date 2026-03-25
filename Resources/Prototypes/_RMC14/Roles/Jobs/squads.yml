@@ -257,7 +257,7 @@
 - type: entity # Duplicate entry for PVE to get unique icons + orange color palette
   parent: SquadBase
   id: SquadRoyalMarinesPVE
-  name: Gamma Troop
+  name: Whiskey Troop
   components:
   - type: SquadTeam
     color: "#AA740F"
@@ -274,7 +274,7 @@
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
       state: background_twe
     canSupplyDrop: false
-    group: Gamma Troop
+    group: Whiskey Troop
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
       state: rmc_troopleader_pve

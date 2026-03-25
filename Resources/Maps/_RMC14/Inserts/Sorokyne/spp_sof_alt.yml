@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 02/14/2026 01:23:01
-  entityCount: 191
+  time: 03/03/2026 01:57:18
+  entityCount: 201
 maps: []
 grids:
 - 1
@@ -104,6 +104,38 @@ entities:
     - type: Transform
       pos: 7.5,16.5
       parent: 1
+- proto: CMGrenadeHighExplosive
+  entities:
+  - uid: 196
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 197
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 198
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 199
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 200
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
+  - uid: 201
+    components:
+    - type: Transform
+      pos: 4.5,12.5
+      parent: 1
 - proto: CMRodMetal1
   entities:
   - uid: 65
@@ -200,6 +232,30 @@ entities:
     - type: Transform
       pos: 6.492432,20.453466
       parent: 1
+- proto: RMCArmorHelmetSPPSOF
+  entities:
+  - uid: 193
+    components:
+    - type: Transform
+      pos: 5,16
+      parent: 1
+- proto: RMCArmorSPPSOF
+  entities:
+  - uid: 192
+    components:
+    - type: Transform
+      pos: 5.5,15.5
+      parent: 1
+  - uid: 194
+    components:
+    - type: Transform
+      pos: 4.5,13.5
+      parent: 1
+  - uid: 195
+    components:
+    - type: Transform
+      pos: 4.5,13.5
+      parent: 1
 - proto: RMCBeltHolsterPistolSPPT73
   entities:
   - uid: 111
@@ -214,24 +270,22 @@ entities:
     - type: Transform
       pos: 5.492432,19.26514
       parent: 1
-- proto: RMCBoxMagazineRifleAK4047
-  entities:
-  - uid: 100
-    components:
-    - type: Transform
-      pos: 4.364705,11.565371
-      parent: 1
-  - uid: 101
-    components:
-    - type: Transform
-      pos: 4.3542886,11.836391
-      parent: 1
 - proto: RMCBoxMagazineRifleAK4047Empty
   entities:
   - uid: 99
     components:
     - type: Transform
       pos: 6.677205,11.294349
+      parent: 1
+  - uid: 100
+    components:
+    - type: Transform
+      pos: 4.496439,11.8118105
+      parent: 1
+  - uid: 101
+    components:
+    - type: Transform
+      pos: 4.5,11.5
       parent: 1
 - proto: RMCCrateAmmo
   entities:
@@ -499,7 +553,7 @@ entities:
   - uid: 113
     components:
     - type: Transform
-      pos: 4.989705,11.37774
+      pos: 5.044001,11.587695
       parent: 1
   - uid: 114
     components:

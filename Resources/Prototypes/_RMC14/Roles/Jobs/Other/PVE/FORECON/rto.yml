@@ -19,16 +19,7 @@
       factions:
       - UNMC
     - type: Skills
-      skills:
-        RMCSkillEngineer: 2
-        RMCSkillConstruction: 2
-        RMCSkillFireman: 2
-        RMCSkillPowerLoader: 1
-        RMCSkillVehicles: 1
-        RMCSkillJtac: 3
-        RMCSkillEndurance: 1
-        RMCSkillFirearms: 1
-        RMCSkillCqc: 1
+      preset: RMCSkillPresetPVEForeconRTO
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-pve-forecon-rto

@@ -29,5 +29,8 @@
   components:
   - type: MapInsert
     variations:
-    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase.yml"
-      probability: 0.28
+    - spawn: "/Maps/_RMC14/Inserts/Hybrisa/tse_airbase_survivors.yml"
+      probability: 1
+      nightmareScenario: tse_airbase
+
+# todo: fix the TSE non-surv airbase map insert (armoury is wrong) and make it work with the surv spawn together system

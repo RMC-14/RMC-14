@@ -3,6 +3,7 @@
   id: CMMaintTech
   name: cm-job-name-maint-tech
   description: cm-job-description-maint-tech
+  newToJobInfo: rmc-new-to-job-maint-tech
   playTimeTracker: CMJobMaintTech
   requirements:
   - !type:DepartmentTimeRequirement

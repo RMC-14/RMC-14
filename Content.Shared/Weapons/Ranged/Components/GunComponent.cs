@@ -213,7 +213,7 @@ public sealed partial class GunComponent : Component
     /// The base value for how fast the projectile moves.
     /// </summary>
     [DataField]
-    public float ProjectileSpeed = 62f;
+    public float ProjectileSpeed = 55f; //RMC14 changed from 62
 
     /// <summary>
     /// How fast the projectile moves.

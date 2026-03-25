@@ -234,6 +234,7 @@
     - RMCBruteAidKitFilledPVE
     - RMCStandardAidKitFilledPVE
 
+# PVE
 - type: entity
   parent: CMVendorBundleRiflemanApparel
   id: RMCVendorBundleRCMPVEMGL
@@ -244,6 +245,25 @@
     sprite: _RMC14/Objects/Weapons/Guns/GrenadeLaunchers/rcmgl.rsi
     state: icon
   - type: CMVendorBundle
-    bundle: 
+    bundle:
     - RMCRoyalGrenadeLauncher
-    - RMCBeltRoyalMortarFilled
+    - RMCBeltRoyalMortarFilledGrenades
+
+- type: entity
+  parent: CMVendorBundleRiflemanApparel
+  id: RMCVendorBundleRCMPVEMortar
+  name: Light Mortar Kit
+  description: Contains the L989A2 Multiple Grenade Launcher and the L79 pattern load-bearing rig. #
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/loadout_kits.rsi
+    layers:
+    - state: closed
+      map: [ base ]
+    - state: mortar
+      map: [ label ]
+  - type: CMVendorBundle
+    bundle:
+    - RMCMortarKit # RMC14 TODO: RCM Custom Light Mortar
+    - RMCBeltRoyalMortarFilledMortarShells # RMC14 TODO: Check Parity Fill
+    - RMCLaserDesignatorPVE

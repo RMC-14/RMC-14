@@ -22,18 +22,18 @@
       - TSE
     - type: Skills
       skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 1 
-        RMCSkillFireman: 3
         RMCSkillConstruction: 1
-        RMCSkillEngineer: 1
+        RMCSkillCqc: 3
         RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1  
-        RMCSkillMeleeWeapons: 1
+        RMCSkillEngineer: 1
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
         RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
         RMCSkillPilot: 1
         RMCSkillSpecialistWeapons: 1
+        RMCSkillSurgery: 1
     - type: SniperWhitelist
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-scout-sniper

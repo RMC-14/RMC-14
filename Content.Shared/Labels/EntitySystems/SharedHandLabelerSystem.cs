@@ -7,6 +7,7 @@ using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
 using Robust.Shared.GameStates;
 using Robust.Shared.Network;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Labels.EntitySystems;
 
@@ -73,7 +74,7 @@ public abstract class SharedHandLabelerSystem : EntitySystem
             return;
         }
         if (_netManager.IsServer)
-            _labelSystem.Label(target, handLabeler.AssignedLabel);
+            _labelSystem.Label(target, FormattedMessage.EscapeText(handLabeler.AssignedLabel)); //RMC14
         result = Loc.GetString("hand-labeler-successfully-applied");
     }
 

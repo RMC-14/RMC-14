@@ -8,6 +8,7 @@
     - id: CMAdvFirstAidKit
     - id: RMCBoxMagazineRifleL90Drum
     - id: RMCArmorWebbingDrum
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMSectionLeaderFill
@@ -17,6 +18,7 @@
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMGPMGFill
@@ -47,6 +49,7 @@
     - id: RMCLaserDesignatorPVE
     - id: RMCWhistle
     - id: RMCBackpackRTOTSE
+    - id: RMCPVEArmorCaseRoyalLight
 
 - type: entityTable
   id: RMCClosetRCMTroopCommanderFill
@@ -66,4 +69,6 @@
     - id: RMCBoxShotgunBuckshot
       amount: 4
     - id: RMCWeldingGoggles
+      amount: 2
+    - id: RMCWeaponRifleL90A2Breacher
       amount: 2

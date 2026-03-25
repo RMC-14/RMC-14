@@ -1,8 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
+using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Overheat;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -11,10 +13,11 @@ namespace Content.Shared._RMC14.Emplacements;
 
 public sealed class MountableWeaponSystem : EntitySystem
 {
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly RMCMapSystem _rmcMap = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedWeaponMountSystem _weaponMount = default!;
     public override void Initialize()
     {
@@ -43,7 +46,7 @@ public sealed class MountableWeaponSystem : EntitySystem
         var mountEntity = GetEntity(ent.Comp.MountedTo.Value);
 
         // Cancel the shot if not aiming inside the cone of fire
-        var mountPosition = _transform.GetWorldPosition(ent);
+        var mountPosition = _transform.GetWorldPosition(mountEntity);
         var aimedLocation = _transform.ToWorldPosition(args.ToCoordinates.Value);
 
         var targetDirection = Angle.FromWorldVec(aimedLocation - mountPosition);
@@ -54,11 +57,20 @@ public sealed class MountableWeaponSystem : EntitySystem
         {
             args.Cancelled = true;
 
+            var aimDirection = targetDirection.GetCardinalDir();
+            var coordinates = _transform.GetMoverCoordinates(mountEntity).Offset(aimDirection.GetOpposite().ToIntVec());
+            if (_rmcMap.IsTileBlocked(coordinates, CollisionGroup.HighImpassable))
+            {
+                var msg = Loc.GetString("emplacement-mount-rotate-fail");
+                _popup.PopupClient(msg, args.User, args.User, PopupType.SmallCaution);
+                return;
+            }
+
             // Rotate the mount to the aimed location if it's rotation is not locked
             if (TryComp(mountEntity, out WeaponMountComponent? mount) &&
                 mount.CanRotateWithoutTool && args.ToCoordinates != null)
             {
-                var diff = targetDirection.GetCardinalDir() - weaponFront.GetCardinalDir();
+                var diff = aimDirection - weaponFront.GetCardinalDir();
 
                 if (diff > 4)
                     diff -= 8;

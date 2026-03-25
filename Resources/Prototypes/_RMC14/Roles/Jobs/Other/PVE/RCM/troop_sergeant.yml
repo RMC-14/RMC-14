@@ -22,24 +22,24 @@
       - TSE
     - type: Skills
       skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 1 
-        RMCSkillFireman: 3
         RMCSkillConstruction: 1
-        RMCSkillEngineer: 2
+        RMCSkillCqc: 3
         RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1  
-        RMCSkillMeleeWeapons: 1
+        RMCSkillEngineer: 2
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
         RMCSkillJtac: 3
-        RMCSkillPilot: 1
-        RMCSkillOverwatch: 1
         RMCSkillLeadership: 2
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillOverwatch: 1
+        RMCSkillPilot: 1
+        RMCSkillSurgery: 1
     - type: MarineOrders
     - type: RMCPointing
     - type: CommandAccent
     - type: SquadLeader
-      icon: 
+      icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi
         state: rmc_troopleader_pve
     - type: RMCTrackable

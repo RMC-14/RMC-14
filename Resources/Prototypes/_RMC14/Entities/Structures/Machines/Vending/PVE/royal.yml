@@ -20,7 +20,6 @@
       - id: RMCVendorBundleRCMPVEAssaultEngi
       - id: RMCPVEArmorCaseRoyalPointman
       - id: CMHandsBlackInsulated
-      - id: RMCWeaponRifleL90A2Breacher
     - name: Heavy-Duty Breaching Equipment # TODO RMC royal marines breaching hammer, XM51 is placeholder
       choices: { CMPrimary: 1 }
       entries:
@@ -123,9 +122,9 @@
       takeOne: CMPrimary
       entries:
       - id: RMCVendorBundleRCMPVEMGL
-      - id: RMCMortarKit # TODO RMC14 L53A1 light mortar kit
+      - id: RMCVendorBundleRCMPVEMortar
     - name: Helmet (Mandatory)
-      takeOne: RMCAccessories 
+      takeOne: RMCAccessories
       entries:
       - id: RMCHeadRoyalHelmetBallistic
     - name: Backpack
@@ -141,7 +140,7 @@
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingGrenade
       - id: RMCArmorWebbingDrum
@@ -185,7 +184,7 @@
 - type: entity
   parent: ColMarTechBase
   id: RMCRoyalScoutSniperVendor
-  name: We-Ya Section Scout-Sniper Gear Rack 
+  name: We-Ya Section Scout-Sniper Gear Rack
   description: An automated rack hooked up to a colossal storage of scout-sniper standard-issue equipment.
   suffix: PVE, RCM
   components:
@@ -219,7 +218,7 @@
       - id: RMCBeltHolsterPistolRCM
       - id: RMCBeltUtilityGeneralRCMPVE
     - name: Armor Webbing
-      choices: { RMCArmorWebbing: 1 } 
+      choices: { RMCArmorWebbing: 1 }
       entries:
       - id: RMCArmorWebbingDrum
       - id: RMCArmorWebbingPouch
@@ -300,7 +299,7 @@
       - id: RMCPVEArmorKneeGuardKestrel
         amount: 15
     - name: Backpacks
-      entries: 
+      entries:
       - id: RMCBackpackRCMSmall
         amount: 15
       - id: RMCBackpackRCMMedium
@@ -377,7 +376,7 @@
       - id: RMCMRETSE
         name: MRE
         amount: 5
-      - id: RMCBoxMRE
+      - id: RMCBoxMRETSE
         name: MRE Box
         amount: 1
     - name: Medical
@@ -423,6 +422,24 @@
         amount: 2
       - id: RMCMK80
         amount: 2
+    - name: Attachments
+      entries:
+      - id: RMCAttachmentRailFlashlight
+        amount: 5
+      - id: RMCAttachmentExtendedCompensator
+        amount: 5
+      - id: RMCAttachmentAngledGrip
+        amount: 5
+      - id: RMCAttachmentVerticalGrip
+        amount: 5
+      - id: RMCAttachmentLaserSight
+        amount: 5
+      - id: RMCAttachmentS6ReflexSight
+        amount: 5
+      - id: RMCAttachmentS42xTelescopicMiniscope
+        amount: 2
+      - id: RMCAttachmentTwoPointSling
+        amount: 15
     - name: Miscellaneous
       entries:
       - id: CMFireExtinguisherPortable
@@ -435,7 +452,7 @@
         amount: 5
       - id: CMEntrenchingTool
         amount: 2
-      - id: RMCBinoculars
+      - id: RMCBinocularsPVE
         amount: 2
       - id: RMCAttachmentRailFlashlight
         amount: 5
@@ -443,3 +460,6 @@
         amount: 5
       - id: RMCTantoA
         amount: 25
+      - id: RMCM5CameraGear #RMC14 TODO: TSE Camera Gear
+        amount: 20
+

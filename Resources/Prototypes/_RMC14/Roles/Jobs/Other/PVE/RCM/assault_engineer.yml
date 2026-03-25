@@ -22,17 +22,17 @@
       - TSE
     - type: Skills
       skills:
-        RMCSkillCqc: 3
-        RMCSkillFirearms: 1 
-        RMCSkillFireman: 3
         RMCSkillConstruction: 3
-        RMCSkillEngineer: 3
+        RMCSkillCqc: 3
         RMCSkillEndurance: 3
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 1  
-        RMCSkillMeleeWeapons: 1
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillFireman: 3
         RMCSkillJtac: 1
+        RMCSkillMedical: 2
+        RMCSkillMeleeWeapons: 1
         RMCSkillPilot: 1
+        RMCSkillSurgery: 1
     - type: JobPrefix
       prefix: rmc-job-prefix-rcm-pve-assault-engineer
     - type: AssignSquad

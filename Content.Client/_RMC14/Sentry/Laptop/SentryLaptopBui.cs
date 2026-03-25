@@ -407,6 +407,10 @@ public sealed class SentryLaptopBui : BoundUserInterface
         {
             SendMessage(new SentryLaptopSetNameBuiMsg(info.Id, args.Text));
         };
+        card.NameLineEdit.OnFocusExit += args =>
+        {
+            SendMessage(new SentryLaptopSetNameBuiMsg(info.Id, args.Text));
+        };
 
         return card;
     }
@@ -424,10 +428,12 @@ public sealed class SentryLaptopBui : BoundUserInterface
 
         card.LocationLabel.Text = info.Location;
 
-        if (!string.IsNullOrWhiteSpace(info.CustomName))
-        {
-            card.NameLineEdit.Text = info.CustomName;
-        }
+        if (card.NameLineEdit.HasKeyboardFocus())
+            return;
+
+        var customName = info.CustomName ?? string.Empty;
+        if (card.NameLineEdit.Text != customName)
+            card.NameLineEdit.Text = customName;
     }
 
     private void PopulateSentryHealthInfo(SentryCard card, SentryInfo info)
@@ -467,7 +473,11 @@ public sealed class SentryLaptopBui : BoundUserInterface
             _ => "[color=#A42625]Packed[/color]"
         });
 
-        if (info.Target != null && _entities.TryGetEntity(info.Target.Value, out var targetEnt))
+        if (!string.IsNullOrWhiteSpace(info.TargetName))
+        {
+            card.TargetLabel.SetMarkupPermissive($"[color=#A42625]{info.TargetName}[/color]");
+        }
+        else if (info.Target != null && _entities.TryGetEntity(info.Target.Value, out var targetEnt))
         {
             var name = _entities.GetComponent<MetaDataComponent>(targetEnt.Value).EntityName;
             card.TargetLabel.SetMarkupPermissive($"[color=#A42625]{name}[/color]");
