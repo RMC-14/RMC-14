@@ -181,7 +181,7 @@
 - type: entity
   parent: CMHeadBeret
   id: RMCHeadBeretCLF
-  name: Colonial Liberation Front beret
+  name: Colony Liberation Front beret
   description: A repurposed captured police beret, with a CLF insignia mounted on a place where police cockade would usally sit.
   components:
   - type: Sprite

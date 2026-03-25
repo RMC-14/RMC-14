@@ -13,7 +13,7 @@
   parent: [ RMCMedalBase, ClothingNeckBase ]
   id: RMCtornCLFflag
   name: torn CLF flag
-  description: "A torn up CLF flag with a pin that allows it be worn as a cape"
+  description: A torn up CLF flag with a pin that allows it be worn as a cape.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Accessory/Patches/CLF/clf_cape.rsi

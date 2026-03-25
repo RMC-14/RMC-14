@@ -24,7 +24,7 @@
   parent: CMM2132Machete
   id: RMCDragonKatana
   name: dragon katana
-  description: A finely made Japanese sword, with a cherry colored handle. The blade has been filed to a molecular edge, and is extremely deadly. This one seems to have been handcrafted
+  description: A finely made Japanese sword, with a cherry colored handle. The blade has been filed to a molecular edge, and is extremely deadly. This one seems to have been handcrafted.
   suffix: RMC14
   components:
   - type: Tag
