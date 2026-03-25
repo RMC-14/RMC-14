@@ -46,10 +46,22 @@
   - type: VehicleTurret
     rotateToCursor: true
     stabilizedRotation: false
-    rotationSpeed: 180
+    rotationSpeed: 80
     showOverlay: true
+    useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
     overlayState: apc_turret_0
+    pixelOffsetNorth: "0,4"
+    pixelOffsetEast: "-1,28"
+    pixelOffsetSouth: "0,6"
+    pixelOffsetWest: "-1,28"
+  - type: ItemSlots
+    slots:
+      turret-cannon:
+        startingItem: RMCVehicleSPPAPCMinigun
+        whitelist:
+          components:
+          - RMCHardpointItem
   - type: RMCHardpointSlots
     vehicleFamily: APC
     slots:
@@ -80,11 +92,22 @@
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
+    offsetRotatesWithTurret: true
+    useDirectionalOffsets: true
     overlayRsi: _RMC14/Structures/Vehicles/sppapc.rsi
     overlayState: apc_minigun_0
     fireWhileRotatingGraceDegrees: 20
     useBarrelDirectionForShots: true
     maxShotCurvatureDegrees: 10
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    rotateDirectionalOffsets: true
+    offsetNorth: "0,-1.2"
+    offsetEast: "0,-1.2"
+    offsetSouth: "0,-1.2"
+    offsetWest: "0,-1.2"
+    muzzleOffset: "0,0"
+    useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: apc_minigun_0
 
@@ -99,6 +122,15 @@
     state: apc_autocannon
   - type: RMCHardpointItem
     compatibilityId: SPPAPC
+  - type: GunMuzzleOffset
+    useDirectionalOffsets: true
+    rotateDirectionalOffsets: true
+    offsetNorth: "0.5,-1.7"
+    offsetEast: "0.5,-1.7"
+    offsetSouth: "0.5,-1.7"
+    offsetWest: "0.5,-1.7"
+    muzzleOffset: "0,0"
+    useAimDirection: true
   - type: RMCHardpointVisual
     vehicleState: apc_autocannon_0
 

@@ -288,6 +288,22 @@
       visible: false
     - map: [ rmc-wheels ]
       state: wheels_1
+  - type: ItemSlots
+    slots:
+      port-gun-north:
+        startingItem: null
+      port-gun-south:
+        startingItem: null
+      primary:
+        startingItem: RMCVehicleSPPAPCTurret
+        whitelist:
+          components:
+          - RMCHardpointItem
+      wheel-1:
+        startingItem: RMCVehicleSPPAPCWheel
+        whitelist:
+          components:
+          - RMCVehicleWheelItem
   - type: RMCHardpointSlots
     vehicleFamily: APC
     slots:

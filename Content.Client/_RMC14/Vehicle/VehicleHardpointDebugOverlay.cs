@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Client._RMC14.Vehicle;
+using Content.Client.Resources;
 using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared.Vehicle.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Client.Graphics;
+using Robust.Client.ResourceManagement;
 using Robust.Shared.Containers;
 using Robust.Shared.Enums;
 using Robust.Shared.GameObjects;
@@ -17,9 +20,11 @@ namespace Content.Client.Vehicle;
 
 public sealed class VehicleHardpointDebugOverlay : Overlay
 {
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV | OverlaySpace.ScreenSpace;
 
     private const float PixelsPerMeter = 32f;
+    private static readonly Vector2 LabelWorldOffset = new(0.18f, -0.18f);
+    private const float LabelLineHeight = 13f;
 
     public bool Enabled { get; set; }
 
@@ -28,6 +33,8 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     private readonly SharedTransformSystem _transform;
     private readonly SharedContainerSystem _container;
     private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzle;
+    private readonly VehicleTurretVisualSystem _vehicleTurretVisual;
+    private readonly Font _font;
     private readonly EntityQuery<GunComponent> _gunQ;
     private readonly EntityQuery<GunFireArcComponent> _fireArcQ;
     private readonly EntityQuery<GridVehicleMoverComponent> _moverQ;
@@ -35,14 +42,18 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
     private readonly EntityQuery<VehicleTurretComponent> _turretQ;
     private readonly EntityQuery<VehicleTurretMuzzleComponent> _turretMuzzleQ;
     private readonly EntityQuery<VehiclePortGunComponent> _portGunQ;
+    private readonly List<DebugLabel> _labels = new();
 
     public VehicleHardpointDebugOverlay(IEntityManager ents)
     {
         _ents = ents;
         _eye = IoCManager.Resolve<IEyeManager>();
+        var cache = IoCManager.Resolve<IResourceCache>();
         _transform = ents.System<SharedTransformSystem>();
         _container = ents.System<SharedContainerSystem>();
         _vehicleTurretMuzzle = ents.System<VehicleTurretMuzzleOffsetSystem>();
+        _vehicleTurretVisual = ents.System<VehicleTurretVisualSystem>();
+        _font = cache.GetFont("/Fonts/NotoSans/NotoSans-Regular.ttf", 12);
         _gunQ = ents.GetEntityQuery<GunComponent>();
         _fireArcQ = ents.GetEntityQuery<GunFireArcComponent>();
         _moverQ = ents.GetEntityQuery<GridVehicleMoverComponent>();
@@ -52,11 +63,21 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         _portGunQ = ents.GetEntityQuery<VehiclePortGunComponent>();
     }
 
+    private readonly record struct DebugLine(string Text, Color Color);
+    private readonly record struct DebugLabel(Vector2 WorldPosition, List<DebugLine> Lines);
+
     protected override void Draw(in OverlayDrawArgs args)
     {
         if (!Enabled)
             return;
 
+        if (args.Space == OverlaySpace.ScreenSpace)
+        {
+            DrawLabels(args);
+            return;
+        }
+
+        _labels.Clear();
         var handle = args.WorldHandle;
         var query = _ents.EntityQueryEnumerator<GunMuzzleOffsetComponent>();
 
@@ -74,6 +95,7 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
 
             DrawShootArc(uid, origin, args.MapId, handle);
             DrawShootTarget(uid, origin, args.MapId, handle);
+            AddGunDebugLabel(uid, muzzle, origin, muzzlePos);
         }
 
         var turretMuzzleQuery = _ents.EntityQueryEnumerator<VehicleTurretMuzzleComponent>();
@@ -114,7 +136,208 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
                 handle.DrawLine(anchorPos, turretPos, new Color(1f, 0.7f, 0.2f, 0.8f));
                 handle.DrawCircle(turretPos, 0.08f, new Color(1f, 0.7f, 0.2f, 0.95f));
             }
+
+            if (!_muzzleQ.HasComp(uid))
+                AddTurretDebugLabel(uid, turret, basePos, anchorPos, turretPos);
         }
+    }
+
+    private void DrawLabels(in OverlayDrawArgs args)
+    {
+        if (args.ViewportControl == null || _labels.Count == 0)
+            return;
+
+        foreach (var label in _labels)
+        {
+            var screenPos = args.ViewportControl.WorldToScreen(label.WorldPosition);
+            var linePos = screenPos;
+
+            foreach (var line in label.Lines)
+            {
+                args.ScreenHandle.DrawString(_font, linePos + Vector2.One, line.Text, Color.Black);
+                args.ScreenHandle.DrawString(_font, linePos, line.Text, line.Color);
+                linePos.Y += LabelLineHeight;
+            }
+        }
+    }
+
+    private void AddGunDebugLabel(EntityUid uid, GunMuzzleOffsetComponent muzzle, Vector2 origin, Vector2 muzzlePos)
+    {
+        var lines = new List<DebugLine>();
+        var eyeRot = _eye.CurrentEye.Rotation;
+        var isTurret = _turretQ.TryComp(uid, out var turret);
+        var isPortGun = _portGunQ.HasComp(uid);
+        var role = isTurret ? "turret-gun" : isPortGun ? "port-gun" : "gun";
+        lines.Add(new DebugLine($"{role} {uid.Id}", Color.White));
+
+        var baseUid = uid;
+        var physicalRotation = _transform.GetWorldRotation(uid);
+        var visualRotation = physicalRotation;
+        if (isTurret && turret != null)
+        {
+            if (_vehicleTurretVisual.TryGetRenderedPose(uid, out _, out var renderedRotation))
+                visualRotation = renderedRotation;
+
+            if (TryGetVehicle(uid, out var vehicle))
+            {
+                TryGetAnchorTurret(uid, turret, out var anchorUid, out var anchorTurret);
+                var vehicleRot = _transform.GetWorldRotation(vehicle);
+                var vehicleFacing = GetVehicleFacingAngle(vehicle, vehicleRot);
+                var renderFacing = GetRenderFacing(turret, anchorTurret, vehicleRot, vehicleFacing, eyeRot);
+                var pixelDir = turret.UseDirectionalOffsets ? GetDirectionalDir(renderFacing) : Direction.Invalid;
+                var pixelPreset = turret.UseDirectionalOffsets ? GetDirectionalOffset(turret, pixelDir) : turret.PixelOffset;
+
+                lines.Add(new DebugLine(
+                    $"veh {vehicle.Id} face {vehicleFacing.GetCardinalDir()} vehRot {FmtDeg(vehicleRot)} eye {FmtDeg(eyeRot)}",
+                    new Color(0.80f, 0.80f, 0.80f, 1f)));
+                lines.Add(new DebugLine(
+                    $"anchor {anchorUid.Id} world {FmtDeg(turret.WorldRotation)} target {FmtDeg(turret.TargetRotation)} phys {FmtDeg(physicalRotation)} vis {FmtDeg(visualRotation)}",
+                    new Color(0.55f, 0.90f, 1f, 1f)));
+                lines.Add(new DebugLine(
+                    $"pix dir {(turret.UseDirectionalOffsets ? pixelDir.ToString() : "-")} add {FmtVec(pixelPreset)} base {FmtVec(turret.PixelOffset)}",
+                    new Color(1f, 0.75f, 0.30f, 1f)));
+                lines.Add(new DebugLine(
+                    $"flags cursor={FmtBool(turret.RotateToCursor)} offRot={FmtBool(turret.OffsetRotatesWithTurret)} dir={FmtBool(turret.UseDirectionalOffsets)} barrel={FmtBool(turret.UseBarrelDirectionForShots)}",
+                    new Color(0.75f, 0.95f, 0.65f, 1f)));
+            }
+        }
+        else
+        {
+            if (muzzle.UseContainerOwner &&
+                _container.TryGetContainingContainer((uid, null), out var container))
+            {
+                baseUid = container.Owner;
+            }
+
+            physicalRotation = GetBaseRotation(baseUid, muzzle.AngleOffset);
+            visualRotation = physicalRotation;
+            lines.Add(new DebugLine(
+                $"base {baseUid.Id} rot {FmtDeg(physicalRotation)} eye {FmtDeg(eyeRot)}",
+                new Color(0.80f, 0.80f, 0.80f, 1f)));
+        }
+
+        var selectedOffset = muzzle.Offset;
+        var appliedOffset = muzzle.Offset;
+        var dirText = "-";
+        if (muzzle.UseDirectionalOffsets)
+        {
+            var dir = GetBaseDirection(baseUid, physicalRotation);
+            dirText = dir.ToString();
+            selectedOffset = GetDirectionalGunOffset(muzzle, dir);
+            appliedOffset = selectedOffset;
+        }
+        var worldOffset = muzzle.UseDirectionalOffsets && !muzzle.RotateDirectionalOffsets
+            ? appliedOffset
+            : physicalRotation.RotateVec(appliedOffset);
+
+        var muzzleRotation = physicalRotation;
+        Vector2? targetPosition = null;
+        if (_gunQ.TryComp(uid, out var gun) &&
+            gun.ShootCoordinates is { } targetCoords)
+        {
+            var targetMap = _transform.ToMapCoordinates(targetCoords);
+            targetPosition = targetMap.Position;
+
+            if (muzzle.UseAimDirection)
+            {
+                var direction = targetMap.Position - origin;
+                if (direction.LengthSquared() > 0.0001f)
+                    muzzleRotation = direction.ToWorldAngle() + muzzle.AngleOffset;
+            }
+        }
+
+        lines.Add(new DebugLine(
+            $"origin {FmtPos(origin)} muzzle {FmtPos(muzzlePos)}",
+            new Color(0.30f, 0.90f, 1f, 1f)));
+        lines.Add(new DebugLine(
+            $"gun dir {dirText} pick {FmtVec(selectedOffset)} world {FmtVec(worldOffset)}",
+            new Color(1f, 0.82f, 0.25f, 1f)));
+        lines.Add(new DebugLine(
+            $"muzzleOff {FmtVec(muzzle.MuzzleOffset)} rot {FmtDeg(muzzleRotation)} aim={FmtBool(muzzle.UseAimDirection)} rotDir={FmtBool(muzzle.RotateDirectionalOffsets)}",
+            new Color(0.72f, 1f, 0.76f, 1f)));
+
+        if (targetPosition is { } target)
+        {
+            lines.Add(new DebugLine(
+                $"target {FmtPos(target)} dist {(target - origin).Length():0.00}",
+                new Color(0.95f, 0.40f, 0.95f, 1f)));
+        }
+
+        if (_turretMuzzleQ.TryComp(uid, out var turretMuzzle))
+        {
+            var dir = GetBaseDirection(uid, physicalRotation);
+            var left = GetDirectionalTurretOffset(turretMuzzle, dir, false);
+            var right = GetDirectionalTurretOffset(turretMuzzle, dir, true);
+            lines.Add(new DebugLine(
+                $"alt next={(turretMuzzle.UseRightNext ? "R" : "L")} dir {dir} L {FmtVec(left)} R {FmtVec(right)}",
+                new Color(1f, 0.65f, 0.25f, 1f)));
+        }
+
+        _labels.Add(new DebugLabel(muzzlePos + LabelWorldOffset, lines));
+    }
+
+    private void AddTurretDebugLabel(
+        EntityUid uid,
+        VehicleTurretComponent turret,
+        Vector2 basePos,
+        Vector2 anchorPos,
+        Vector2 turretPos)
+    {
+        var lines = new List<DebugLine>
+        {
+            new($"turret {uid.Id}", Color.White),
+            new($"base {FmtPos(basePos)} anchor {FmtPos(anchorPos)} pos {FmtPos(turretPos)}", new Color(0.30f, 0.90f, 1f, 1f)),
+        };
+
+        if (TryGetVehicle(uid, out var vehicle))
+        {
+            TryGetAnchorTurret(uid, turret, out var anchorUid, out var anchorTurret);
+            var vehicleRot = _transform.GetWorldRotation(vehicle);
+            var eyeRot = _eye.CurrentEye.Rotation;
+            var vehicleFacing = GetVehicleFacingAngle(vehicle, vehicleRot);
+            var renderFacing = GetRenderFacing(turret, anchorTurret, vehicleRot, vehicleFacing, eyeRot);
+            var pixelDir = turret.UseDirectionalOffsets ? GetDirectionalDir(renderFacing) : Direction.Invalid;
+            var pixelPreset = turret.UseDirectionalOffsets ? GetDirectionalOffset(turret, pixelDir) : turret.PixelOffset;
+            var renderedRotation = _transform.GetWorldRotation(uid);
+
+            if (_vehicleTurretVisual.TryGetRenderedPose(uid, out _, out var renderedPoseRotation))
+                renderedRotation = renderedPoseRotation;
+
+            lines.Add(new DebugLine(
+                $"veh {vehicle.Id} face {vehicleFacing.GetCardinalDir()} vehRot {FmtDeg(vehicleRot)} eye {FmtDeg(eyeRot)}",
+                new Color(0.80f, 0.80f, 0.80f, 1f)));
+            lines.Add(new DebugLine(
+                $"anchor {anchorUid.Id} world {FmtDeg(turret.WorldRotation)} target {FmtDeg(turret.TargetRotation)} rendered {FmtDeg(renderedRotation)}",
+                new Color(0.55f, 0.90f, 1f, 1f)));
+            lines.Add(new DebugLine(
+                $"pix dir {(turret.UseDirectionalOffsets ? pixelDir.ToString() : "-")} add {FmtVec(pixelPreset)} base {FmtVec(turret.PixelOffset)}",
+                new Color(1f, 0.75f, 0.30f, 1f)));
+            lines.Add(new DebugLine(
+                $"flags cursor={FmtBool(turret.RotateToCursor)} offRot={FmtBool(turret.OffsetRotatesWithTurret)} dir={FmtBool(turret.UseDirectionalOffsets)}",
+                new Color(0.75f, 0.95f, 0.65f, 1f)));
+        }
+
+        _labels.Add(new DebugLabel(turretPos + LabelWorldOffset, lines));
+    }
+
+    private static string FmtBool(bool value)
+    {
+        return value ? "Y" : "N";
+    }
+
+    private static string FmtDeg(Angle angle)
+    {
+        return $"{angle.Degrees:0.0}";
+    }
+
+    private static string FmtVec(Vector2 vector)
+    {
+        return $"<{vector.X:0.00},{vector.Y:0.00}>";
+    }
+
+    private static string FmtPos(Vector2 vector)
+    {
+        return $"{vector.X:0.00},{vector.Y:0.00}";
     }
 
     private bool TryGetMuzzlePositions(
@@ -128,13 +351,13 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         muzzlePos = default;
 
         if (_turretQ.HasComp(uid) &&
-            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(uid, null, out var renderedOrigin))
+            _vehicleTurretMuzzle.TryGetGunOrigin(uid, null, out var originCoords))
         {
-            var renderedMap = _transform.ToMapCoordinates(renderedOrigin);
-            if (renderedMap.MapId != mapId)
+            var originMap = _transform.ToMapCoordinates(originCoords);
+            if (originMap.MapId != mapId)
                 return false;
 
-            origin = renderedMap.Position;
+            origin = originMap.Position;
             muzzlePos = origin;
             return true;
         }
@@ -155,12 +378,12 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         var baseRotation = GetBaseRotation(baseUid, muzzle.AngleOffset);
 
         var (offset, rotateOffset) = GetOffset(muzzle, baseUid, baseRotation);
-        var originCoords = rotateOffset
+        var muzzleOriginCoords = rotateOffset
             ? baseCoords.Offset(baseRotation.RotateVec(offset))
             : baseCoords.Offset(offset);
-        origin = _transform.ToMapCoordinates(originCoords).Position;
+        origin = _transform.ToMapCoordinates(muzzleOriginCoords).Position;
 
-        var muzzleCoords = originCoords;
+        var muzzleCoords = muzzleOriginCoords;
         var muzzleRotation = baseRotation;
 
         if (muzzle.MuzzleOffset != Vector2.Zero)
@@ -169,14 +392,14 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
                 _gunQ.TryComp(uid, out var gun) &&
                 gun.ShootCoordinates is { } shootCoords)
             {
-                var pivotMap = _transform.ToMapCoordinates(originCoords);
+                var pivotMap = _transform.ToMapCoordinates(muzzleOriginCoords);
                 var targetMap = _transform.ToMapCoordinates(shootCoords);
                 var direction = targetMap.Position - pivotMap.Position;
                 if (direction.LengthSquared() > 0.0001f)
                     muzzleRotation = direction.ToWorldAngle() + muzzle.AngleOffset;
             }
 
-            muzzleCoords = originCoords.Offset(muzzleRotation.RotateVec(muzzle.MuzzleOffset));
+            muzzleCoords = muzzleOriginCoords.Offset(muzzleRotation.RotateVec(muzzle.MuzzleOffset));
         }
 
         muzzlePos = _transform.ToMapCoordinates(muzzleCoords).Position;
@@ -208,25 +431,27 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         if (turretXform.MapID != mapId)
             return false;
 
+        var baseRotation = _transform.GetWorldRotation(uid);
+        if (_vehicleTurretVisual.TryGetRenderedPose(uid, out var renderedTurretCoords, out var renderedRotation))
+        {
+            var renderedTurretMap = _transform.ToMapCoordinates(renderedTurretCoords);
+            if (renderedTurretMap.MapId != mapId)
+                return false;
+
+            turretBasePos = renderedTurretMap.Position;
+            baseRotation = renderedRotation;
+        }
+        else
+        {
+            turretBasePos = _transform.ToMapCoordinates(_transform.GetMoverCoordinates(uid)).Position;
+        }
+
         if (!TryGetGunOriginCoordinates(uid, mapId, out var originCoords))
             return false;
 
         basePos = _transform.ToMapCoordinates(originCoords).Position;
-        turretBasePos = _transform.ToMapCoordinates(_transform.GetMoverCoordinates(uid)).Position;
-
-        var turretRotation = _transform.GetWorldRotation(uid);
-        var leftOffset = GetTurretOffset(turretMuzzle, turretRotation, useRight: false);
-        var rightOffset = GetTurretOffset(turretMuzzle, turretRotation, useRight: true);
-
-        if (leftOffset != Vector2.Zero)
-            leftPos = basePos + turretRotation.RotateVec(leftOffset);
-        else
-            leftPos = basePos;
-
-        if (rightOffset != Vector2.Zero)
-            rightPos = basePos + turretRotation.RotateVec(rightOffset);
-        else
-            rightPos = basePos;
+        leftPos = basePos + GetTurretMuzzleWorldOffset(turretMuzzle, baseRotation, useRight: false);
+        rightPos = basePos + GetTurretMuzzleWorldOffset(turretMuzzle, baseRotation, useRight: true);
 
         leftRadius = (leftPos - turretBasePos).Length();
         rightRadius = (rightPos - turretBasePos).Length();
@@ -239,13 +464,13 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         originCoords = default;
 
         if (_turretQ.HasComp(uid) &&
-            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(uid, null, out var renderedOrigin))
+            _vehicleTurretMuzzle.TryGetGunOrigin(uid, null, out var gunOrigin))
         {
-            var renderedMap = _transform.ToMapCoordinates(renderedOrigin);
-            if (renderedMap.MapId != mapId)
+            var originMap = _transform.ToMapCoordinates(gunOrigin);
+            if (originMap.MapId != mapId)
                 return false;
 
-            originCoords = renderedOrigin;
+            originCoords = gunOrigin;
             return true;
         }
 
@@ -414,12 +639,24 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
         return dir.ToAngle();
     }
 
-    private Vector2 GetTurretOffset(VehicleTurretMuzzleComponent muzzle, Angle turretRotation, bool useRight)
+    private static Vector2 GetDirectionalGunOffset(GunMuzzleOffsetComponent muzzle, Direction dir)
+    {
+        return dir switch
+        {
+            Direction.North => muzzle.OffsetNorth,
+            Direction.East => muzzle.OffsetEast,
+            Direction.South => muzzle.OffsetSouth,
+            Direction.West => muzzle.OffsetWest,
+            _ => muzzle.Offset,
+        };
+    }
+
+    private static Vector2 GetDirectionalTurretOffset(VehicleTurretMuzzleComponent muzzle, Direction dir, bool useRight)
     {
         if (!muzzle.UseDirectionalOffsets)
             return useRight ? muzzle.OffsetRight : muzzle.OffsetLeft;
 
-        return turretRotation.GetCardinalDir() switch
+        return dir switch
         {
             Direction.North => useRight ? muzzle.OffsetRightNorth : muzzle.OffsetLeftNorth,
             Direction.East => useRight ? muzzle.OffsetRightEast : muzzle.OffsetLeftEast,
@@ -427,6 +664,18 @@ public sealed class VehicleHardpointDebugOverlay : Overlay
             Direction.West => useRight ? muzzle.OffsetRightWest : muzzle.OffsetLeftWest,
             _ => useRight ? muzzle.OffsetRight : muzzle.OffsetLeft
         };
+    }
+
+    private static Vector2 GetTurretMuzzleWorldOffset(
+        VehicleTurretMuzzleComponent muzzle,
+        Angle baseRotation,
+        bool useRight)
+    {
+        var renderOffset = GetDirectionalTurretOffset(
+            muzzle,
+            VehicleTurretDirectionHelpers.GetRenderAlignedCardinalDir(baseRotation),
+            useRight);
+        return baseRotation.RotateVec(renderOffset);
     }
 
     private void DrawShootArc(EntityUid uid, Vector2 origin, MapId mapId, DrawingHandleWorld handle)

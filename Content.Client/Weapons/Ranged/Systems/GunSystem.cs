@@ -2,13 +2,12 @@ using System.Linq;
 using System.Numerics;
 using Content.Client._RMC14.ItemPickup;
 using Content.Client._RMC14.Movement;
+using Content.Client._RMC14.Vehicle;
 using Content.Client._RMC14.Weapons.Ranged.Prediction;
 using Content.Client.Animations;
 using Content.Client.Gameplay;
 using Content.Client.Items;
-using Content.Client._RMC14.Vehicle;
 using Content.Client.Weapons.Ranged.Components;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared._RMC14.Weapons.Ranged;
 using Content.Shared._RMC14.Weapons.Ranged.Prediction;
 using Content.Shared.CombatMode;
@@ -43,13 +42,12 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedMapSystem _maps = default!;
     [Dependency] private readonly SharedTransformSystem _xform = default!;
     [Dependency] private readonly SpriteSystem _sprite = default!;
-    [Dependency] private readonly VehicleTurretInputSystem _vehicleTurretInput = default!;
-    [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzle = default!;
 
     // RMC14
     [Dependency] private readonly ItemPickupSystem _itemPickup = default!;
     [Dependency] private readonly GunPredictionSystem _gunPrediction = default!;
     [Dependency] private readonly RMCLagCompensationSystem _rmcLagCompensation = default!;
+    [Dependency] private readonly VehicleTurretMuzzleOffsetSystem _vehicleTurretMuzzleOffset = default!;
 
     public static readonly EntProtoId HitscanProto = "HitscanEffect";
 
@@ -197,11 +195,6 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
 
         var mousePos = _eyeManager.PixelToMap(_inputManager.MouseScreenPosition);
-        if (TryComp<VehicleTurretComponent>(gunUid, out _) &&
-            _vehicleTurretInput.TryGetLastAimCoordinates(gunUid, out var vehicleAim))
-        {
-            mousePos = vehicleAim;
-        }
 
         if (mousePos.MapId == MapId.Nullspace)
         {
@@ -211,19 +204,9 @@ public sealed partial class GunSystem : SharedGunSystem
             return;
         }
 
-        EntityCoordinates coordinates;
-        if (HasComp<ShootAtFixedPointComponent>(gunUid))
-        {
-            // Fixed-point weapons need a stable world target, not a target relative to the rotating gun.
-            // Otherwise the endpoint rotates with the barrel and diverges from the aimed map position.
-            coordinates = TransformSystem.ToCoordinates(mousePos);
-        }
-        else
-        {
-            // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
-            var coordinateEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : entity;
-            coordinates = TransformSystem.ToCoordinates(coordinateEntity, mousePos);
-        }
+        // Define target coordinates relative to gun entity, so that network latency on moving grids doesn't fuck up the target location.
+        var coordinateEntity = HasComp<GunUseGunOriginComponent>(gunUid) ? gunUid : entity;
+        var coordinates = TransformSystem.ToCoordinates(coordinateEntity, mousePos);
 
         NetEntity? target = null;
         if (_state.CurrentState is GameplayStateBase screen)
@@ -290,7 +273,21 @@ public sealed partial class GunSystem : SharedGunSystem
         var ent = Spawn(message.Prototype, coordinates);
         TransformSystem.SetWorldRotationNoLerp(ent, message.Angle);
 
-        if (tracked != null)
+        if (_vehicleTurretMuzzleOffset.TryGetRenderedGunPose(gunUid, null, out var renderedOrigin, out var renderedRotation))
+        {
+            var renderedMap = TransformSystem.ToMapCoordinates(renderedOrigin);
+            var effectXform = Transform(ent);
+            effectXform.ActivelyLerping = false;
+            var rotationOffset = (message.Angle - renderedRotation).Reduced();
+            TransformSystem.SetWorldRotationNoLerp((ent, effectXform), renderedRotation + rotationOffset);
+            TransformSystem.SetWorldPosition((ent, effectXform), renderedMap.Position + (renderedRotation + rotationOffset).RotateVec(offset));
+
+            var track = EnsureComp<VehicleTurretTrackedMuzzleFlashComponent>(ent);
+            track.Weapon = gunUid;
+            track.Offset = offset;
+            track.RotationOffset = rotationOffset;
+        }
+        else if (tracked != null)
         {
             var track = EnsureComp<TrackUserComponent>(ent);
             track.User = tracked;
@@ -383,11 +380,5 @@ public sealed partial class GunSystem : SharedGunSystem
         EnsureComp<PredictedProjectileClientComponent>(uid);
         Physics.UpdateIsPredicted(uid);
         base.ShootProjectile(uid, direction, gunVelocity, gunUid, user, speed);
-
-        if (gunUid is { } weaponUid &&
-            _vehicleTurretMuzzle.TryGetRenderedGunOrigin(weaponUid, null, out var renderedOrigin))
-        {
-            _xform.SetCoordinates(uid, renderedOrigin);
-        }
     }
 }

@@ -38,56 +38,44 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
             if (!TryComp(turretUid, out VehicleTurretComponent? turret))
                 continue;
 
-            if (!TryGetVehicle((EntityUid)turretUid, out var vehicle))
-                continue;
-
-            TryGetAnchorTurret((EntityUid)turretUid, turret, out var anchorUid, out var anchorTurret);
-
-            var vehicleRot = _transform.GetWorldRotation(vehicle);
-            var eyeRot = _eye.CurrentEye.Rotation;
-            var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
-            var anchorFacingAngle = GetRenderFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
-            var anchorPixelOffset = GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter;
-            var anchorLocalOffset = GetVehicleLocalOffset(anchorTurret, anchorPixelOffset, vehicleRot, eyeRot);
-
-            var targetLocalRotation = Angle.Zero;
-            if (anchorTurret.RotateToCursor)
-                targetLocalRotation = anchorTurret.WorldRotation;
-
-            var localOffset = anchorLocalOffset;
-            if (anchorUid != turretUid)
+            if (!TryComputeRenderedTransform((EntityUid) turretUid,
+                    turret,
+                    out _,
+                    out _,
+                    out var localOffset,
+                    out var localRotation))
             {
-                var turretFacingAngle = GetRenderFacing(turret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
-                var worldOffset = GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
-                Vector2 turretLocalOffset;
-
-                if (turret.OffsetRotatesWithTurret)
-                {
-                    if (turret.UseDirectionalOffsets)
-                    {
-                        var dir = GetDirectionalDir(turretFacingAngle);
-                        var snappedAngle = GetDirectionalAngle(dir);
-                        turretLocalOffset = (targetLocalRotation - snappedAngle).RotateVec(worldOffset);
-                    }
-                    else
-                    {
-                        turretLocalOffset = targetLocalRotation.RotateVec(worldOffset);
-                    }
-                }
-                else
-                {
-                    turretLocalOffset = GetVehicleLocalOffset(turret, worldOffset, vehicleRot, eyeRot);
-                }
-
-                localOffset += turretLocalOffset;
+                continue;
             }
-            var localRotation = targetLocalRotation;
 
             var visualXform = Transform(uid);
             visualXform.ActivelyLerping = false;
             _transform.SetLocalRotationNoLerp(uid, localRotation, visualXform);
             _transform.SetLocalPositionNoLerp(uid, localOffset, visualXform);
         }
+    }
+
+    public bool TryGetRenderedPose(EntityUid turretUid, out EntityCoordinates origin, out Angle worldRotation)
+    {
+        origin = default;
+        worldRotation = Angle.Zero;
+
+        if (!TryComp(turretUid, out VehicleTurretComponent? turret))
+            return false;
+
+        if (!TryComputeRenderedTransform(turretUid,
+                turret,
+                out var vehicle,
+                out var vehicleRotation,
+                out var localOffset,
+                out var localRotation))
+        {
+            return false;
+        }
+
+        origin = _transform.GetMoverCoordinates(new EntityCoordinates(vehicle, localOffset));
+        worldRotation = (vehicleRotation + localRotation).Reduced();
+        return true;
     }
 
     private void OnVisualInit(Entity<VehicleTurretVisualComponent> ent, ref ComponentInit args)
@@ -143,6 +131,64 @@ public sealed class VehicleTurretVisualSystem : EntitySystem
 
         if (sprite.DrawDepth != depth)
             sprite.DrawDepth = depth;
+    }
+
+    private bool TryComputeRenderedTransform(
+        EntityUid turretUid,
+        VehicleTurretComponent turret,
+        out EntityUid vehicle,
+        out Angle vehicleRot,
+        out Vector2 localOffset,
+        out Angle localRotation)
+    {
+        vehicle = default;
+        vehicleRot = Angle.Zero;
+        localOffset = Vector2.Zero;
+        localRotation = Angle.Zero;
+
+        if (!TryGetVehicle(turretUid, out vehicle))
+            return false;
+
+        TryGetAnchorTurret(turretUid, turret, out var anchorUid, out var anchorTurret);
+
+        vehicleRot = _transform.GetWorldRotation(vehicle);
+        var eyeRot = _eye.CurrentEye.Rotation;
+        var baseFacingAngle = GetVehicleFacingAngle(vehicle, vehicleRot);
+        var anchorFacingAngle = GetRenderFacing(anchorTurret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
+        var anchorPixelOffset = GetPixelOffset(anchorTurret, anchorFacingAngle) / PixelsPerMeter;
+        var anchorLocalOffset = GetVehicleLocalOffset(anchorTurret, anchorPixelOffset, vehicleRot, eyeRot);
+
+        var targetLocalRotation = anchorTurret.RotateToCursor ? anchorTurret.WorldRotation : Angle.Zero;
+        localOffset = anchorLocalOffset;
+        localRotation = targetLocalRotation;
+
+        if (anchorUid == turretUid)
+            return true;
+
+        var turretFacingAngle = GetRenderFacing(turret, anchorTurret, vehicleRot, baseFacingAngle, eyeRot);
+        var worldOffset = GetPixelOffset(turret, turretFacingAngle) / PixelsPerMeter;
+        Vector2 turretLocalOffset;
+
+        if (turret.OffsetRotatesWithTurret)
+        {
+            if (turret.UseDirectionalOffsets)
+            {
+                var dir = GetDirectionalDir(turretFacingAngle);
+                var snappedAngle = GetDirectionalAngle(dir);
+                turretLocalOffset = (targetLocalRotation - snappedAngle).RotateVec(worldOffset);
+            }
+            else
+            {
+                turretLocalOffset = targetLocalRotation.RotateVec(worldOffset);
+            }
+        }
+        else
+        {
+            turretLocalOffset = GetVehicleLocalOffset(turret, worldOffset, vehicleRot, eyeRot);
+        }
+
+        localOffset += turretLocalOffset;
+        return true;
     }
 
 
