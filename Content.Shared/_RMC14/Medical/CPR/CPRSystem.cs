@@ -129,8 +129,8 @@ public sealed class CPRSystem : EntitySystem
 
     private void OnReceivingCPRAttempt(Entity<ReceivingCPRComponent> ent, ref ReceiveCPRAttemptEvent args)
     {
-        var isStale = _timing.CurTime - ent.Comp.StartTime > CPRCooldownSeconds;
-        if (isStale) // If stale, remove the component and allow the new CPR attempt
+        // If stale, remove the component and allow the new CPR attempt
+        if (_timing.CurTime - ent.Comp.StartTime > CPRCooldownSeconds)
         {
             RemCompDeferred<ReceivingCPRComponent>(ent);
             return;
@@ -273,8 +273,8 @@ public sealed class CPRSystem : EntitySystem
 
     private void HandleDummyCPR(Entity<CPRDummyComponent> dummy, EntityUid performer)
     {
-        var currentTime = _timing.CurTime;
-        var tooSoon = TryComp(dummy, out CPRReceivedComponent? received) && received.Last > currentTime - CPRCooldownSeconds;
+        var received = EnsureComp<CPRReceivedComponent>(dummy);
+        var tooSoon = received.Last > _timing.CurTime - CPRCooldownSeconds;
 
         if (tooSoon)
             dummy.Comp.CPRFailed++;
@@ -283,9 +283,8 @@ public sealed class CPRSystem : EntitySystem
 
         Dirty(dummy);
 
-        var cprReceived = EnsureComp<CPRReceivedComponent>(dummy);
-        cprReceived.Last = currentTime;
-        Dirty(dummy.Owner, cprReceived);
+        received.Last = _timing.CurTime;
+        Dirty(dummy.Owner, received);
 
         if (_net.IsClient)
             return;
@@ -378,16 +377,14 @@ public sealed class CPRSystem : EntitySystem
 
     private void TryResetDummyCounter(Entity<CPRDummyComponent> ent, EntityUid user)
     {
-        var hasAllowedJob = _mind.TryGetMind(user, out var mindId, out _) &&
-            ent.Comp.ResetCPRCounterJobs.Any(job => _job.MindHasJobWithId(mindId, job));
-
-        if (!hasAllowedJob)
+        _mind.TryGetMind(user, out var mindId, out _);
+        if (!_job.MindTryGetJobId(mindId, out var jobId) || !ent.Comp.ResetCPRCounterJobs.Contains(jobId!.Value))
         {
             if (_net.IsClient)
                 return;
 
             var jobNames = ent.Comp.ResetCPRCounterJobs
-                .Select(jobId => _prototypes.Index(jobId).LocalizedName)
+                .Select(job => _prototypes.Index(job).LocalizedName)
                 .ToList();
             var jobsString = string.Join("; ", jobNames);
             _popups.PopupEntity(Loc.GetString("rmc-cpr-dummy-reset-denied", ("jobs", jobsString)), ent, user, PopupType.MediumCaution);
