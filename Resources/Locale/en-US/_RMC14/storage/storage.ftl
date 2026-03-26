@@ -28,3 +28,5 @@ rmc-storage-hand-eject-last-item = Clicking {THE($storage)} with an empty hand n
 rmc-storage-hand-eject-first-item = Clicking {THE($storage)} with an empty hand now puts the first stored item in your hand.
 rmc-storage-hand-eject-unequips = Clicking {THE($storage)} now unequips it.
 rmc-storage-hand-eject-open = Clicking {THE($storage)} now opens it.
+
+rmc-hijack-cabinet-locked = This cabinet will unlock and open itself during evacuation procedures.
