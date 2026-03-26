@@ -254,6 +254,15 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    nightmareScenarios:
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF/SPP survivors are in
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_hospital
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_dam
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_tunneldorm
+      scenarioProbability: 0.25
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
