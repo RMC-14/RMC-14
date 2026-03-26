@@ -102,7 +102,6 @@ public sealed class GridVehicleMoverSystem : EntitySystem
                 _lastPredictedVehicle = vehicle;
                 _physics.UpdateIsPredicted(vehicle);
             }
-
             return;
         }
 

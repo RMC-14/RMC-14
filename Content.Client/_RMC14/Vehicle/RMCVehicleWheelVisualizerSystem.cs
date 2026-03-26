@@ -3,12 +3,14 @@ using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Vehicle.Components;
 using Robust.Client.GameObjects;
 using Robust.Shared.Maths;
+using Robust.Shared.Timing;
 
 namespace Content.Client._RMC14.Vehicle;
 
 public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicleWheelSlotsComponent>
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     public override void Initialize()
     {
@@ -58,7 +60,10 @@ public sealed class RMCVehicleWheelVisualizerSystem : VisualizerSystem<RMCVehicl
 
         var isMoving = false;
         if (TryComp<GridVehicleMoverComponent>(uid, out var mover))
-            isMoving = Math.Abs(mover.CurrentSpeed) > 0.01f;
+        {
+            isMoving = Math.Abs(mover.CurrentSpeed) > 0.01f ||
+                (mover.TurnInPlace && mover.InPlaceTurnBlockUntil > _timing.CurTime);
+        }
 
         var destroyed = false;
         var brightness = 1f;

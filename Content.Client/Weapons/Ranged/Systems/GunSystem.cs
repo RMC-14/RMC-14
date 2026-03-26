@@ -273,14 +273,14 @@ public sealed partial class GunSystem : SharedGunSystem
         var ent = Spawn(message.Prototype, coordinates);
         TransformSystem.SetWorldRotationNoLerp(ent, message.Angle);
 
-        if (_vehicleTurretMuzzleOffset.TryGetRenderedGunPose(gunUid, null, out var renderedOrigin, out var renderedRotation))
+        if (_vehicleTurretMuzzleOffset.TryGetGunPose(gunUid, null, out var origin, out var rotation))
         {
-            var renderedMap = TransformSystem.ToMapCoordinates(renderedOrigin);
+            var renderedMap = TransformSystem.ToMapCoordinates(origin);
             var effectXform = Transform(ent);
             effectXform.ActivelyLerping = false;
-            var rotationOffset = (message.Angle - renderedRotation).Reduced();
-            TransformSystem.SetWorldRotationNoLerp((ent, effectXform), renderedRotation + rotationOffset);
-            TransformSystem.SetWorldPosition((ent, effectXform), renderedMap.Position + (renderedRotation + rotationOffset).RotateVec(offset));
+            var rotationOffset = (message.Angle - rotation).Reduced();
+            TransformSystem.SetWorldRotationNoLerp((ent, effectXform), rotation + rotationOffset);
+            TransformSystem.SetWorldPosition((ent, effectXform), renderedMap.Position + (rotation + rotationOffset).RotateVec(offset));
 
             var track = EnsureComp<VehicleTurretTrackedMuzzleFlashComponent>(ent);
             track.Weapon = gunUid;

@@ -170,12 +170,12 @@
     maxPassengers: 10
     maxXenos: 3
     entryPoints:
-    - offset: -1.5,0
-      radius: 0.7
-      interiorCoords: 4.6,-1.25
     - offset: 1.5,0
       radius: 0.7
-      interiorCoords: 4.6,1.7
+      interiorCoords: 1.55,2.65
+    - offset: -1.5,0
+      radius: 0.7
+      interiorCoords: 1.55,-1.2
 
 - type: entity
   parent: RMCVehicleAPCBase
@@ -269,6 +269,14 @@
   name: SPP armored personnel carrier
   description: An armored personnel carrier configured for SPP forces.
   components:
+  - type: GridVehicleMover
+    maxSpeed: 6.5
+    acceleration: 2.0
+    deceleration: 7.5
+    maxReverseSpeed: 2.5
+    reverseAcceleration: 2.0
+    turnDelay: 0.25
+    turnInPlace: false
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/sppapc.rsi
     layers:
