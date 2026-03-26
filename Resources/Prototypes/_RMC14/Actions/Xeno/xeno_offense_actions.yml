@@ -1538,6 +1538,14 @@
   - type: ActionBlockIfResting
 
 - type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoAcidMine
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: acid_mine
+
+- type: entity
   id: ActionXenoAcidShotgun
   parent: ActionXenoBase
   name: Acid Shotgun (40)
@@ -1582,6 +1590,14 @@
     event: !type:XenoDeployTrapsActionEvent
   - type: XenoActionPlasma
     cost: 60
+
+- type: entity
+  parent: CMGuidebookActionXenoBase
+  id: RMCGuidebookActionXenoDeployTraps
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    state: gas_mine
 
 
 
