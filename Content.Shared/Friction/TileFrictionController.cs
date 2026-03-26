@@ -77,12 +77,13 @@ namespace Content.Shared.Friction
 
                 // If we're not touching the ground, don't use tileFriction.
                 // TODO: Make IsWeightless event-based; we already have grid traversals tracked so just raise events
-                if (body.BodyStatus == BodyStatus.InAir || _gravity.IsWeightless(uid, body, xform) ||
-                    !xform.Coordinates.IsValid(EntityManager))
+                if (body.BodyStatus == BodyStatus.InAir || _gravity.IsWeightless(uid, body, xform) || !xform.Coordinates.IsValid(EntityManager))
                 {
                     if (_timing.IsFirstTimePredicted) // RMC14, added first time predicted check
                         friction = xform.GridUid == null || !_gridQuery.HasComp(xform.GridUid) ? _offGridDamping : _airDamping;
                 }
+                else
+                    friction = _frictionModifier * GetTileFriction(uid, body, xform);
 
                 var bodyModifier = 1f;
 
