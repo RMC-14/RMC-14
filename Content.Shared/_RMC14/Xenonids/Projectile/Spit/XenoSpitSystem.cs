@@ -249,12 +249,14 @@ public sealed class XenoSpitSystem : EntitySystem
 
         if (HasComp<XenoCaughtInTrapComponent>(args.Target))
         {
-            args.Damage *= 1.75;
+            //Currently not clear if this is bugged in CM13 or deliberately disabled; disabled here until clarified.
+            //args.Damage *= 1.75;
             _insight.IncrementInsight(shooter, 10);
         }
         else
         {
-            _slow.TrySlowdown(args.Target, TimeSpan.FromSeconds(3.5));
+            //Same reasoning as above.
+            //_slow.TrySlowdown(args.Target, TimeSpan.FromSeconds(3.5));
             _insight.IncrementInsight(shooter, 1);
         }
 
