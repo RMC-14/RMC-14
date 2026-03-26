@@ -7,6 +7,8 @@ using Content.Shared._RMC14.TacticalMap;
 using Content.Shared.CCVar;
 using Content.Shared.Movement.Components;
 using Robust.Shared.Configuration;
+using Robust.Shared.Log;
+using Robust.UnitTesting;
 
 namespace Content.IntegrationTests._RMC14;
 
@@ -24,6 +26,11 @@ public sealed class PlanetMapLoadTests
         });
 
         var server = pair.Server;
+
+        var cfg = server.ResolveDependency<IConfigurationManager>();
+        var originalFailLevel = cfg.GetCVar(RTCVars.FailureLogLevel);
+        cfg.SetCVar(RTCVars.FailureLogLevel, LogLevel.Fatal);
+
         var distress = server.System<CMDistressSignalRuleSystem>();
         var ticker = server.System<GameTicker>();
 
@@ -79,6 +86,7 @@ public sealed class PlanetMapLoadTests
 
         await PoolManager.WaitUntil(server, () => ticker.RunLevel != GameRunLevel.PreRoundLobby);
 
+        cfg.SetCVar(RTCVars.FailureLogLevel, originalFailLevel);
         await pair.CleanReturnAsync();
     }
 }
