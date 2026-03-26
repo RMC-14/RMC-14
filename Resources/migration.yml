@@ -1479,3 +1479,11 @@ CMPosterZSPA2: RMCPosterTSEPA2
 CMPosterZSPA3: RMCPosterTSEPA3
 RMCSpawnerERTShuttleZSPA: RMCSpawnerERTShuttleTSEPA
 RMCSpawnerShuttleZSPA: RMCSpawnerShuttleTSEPA
+
+# 2026-02-05
+RMCWeaponSMGP90: RMCWeaponSMGPDW90
+RMCMagazineSMGP90: RMCMagazineSMGPDW90
+
+# 2026-03-18
+CMWebbingSurgicalGreen: RMCWebbingSurgicalGreen
+CMWebbingSurgicalBlue: RMCWebbingSurgicalBlue
