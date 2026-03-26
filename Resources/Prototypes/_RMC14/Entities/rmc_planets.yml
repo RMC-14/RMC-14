@@ -65,10 +65,18 @@
     specialFaxes:
       Liaison: RMCPaperWeYaLiaisonBriefingSolaris
     nightmareScenarios:
-    - scenarioName: clfmining
-      scenarioProbability: 0.1
     - scenarioName: crashlanding_offices
       scenarioProbability: 0.2
+    - scenarioName: solaris_surv_spawn_admin # 80% chance of regular surv. Reduce to 70% (0.14 each) once CLF survs are in.
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_bar
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_office
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_south_marshals
+      scenarioProbability: 0.16
+    - scenarioName: solaris_surv_spawn_storage
+      scenarioProbability: 0.16
     survivorJobs:
     - RMCSurvivorCommandingOfficer: 1
     - CMSurvivor: -1
@@ -153,6 +161,9 @@
     map: /Maps/_RMC14/shiva.yml
     camouflage: Snow
     announcement: "An automated distress signal has been received from archaeology site \"Shiva's Snowball\", on border ice world \"Ifrit\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: panic_room_hold
+      scenarioProbability: 0.1
     survivorJobVariants: # Civ survivor is default one
       CMSurvivorCorporate:
       - RMCSurvivorShivasCorporateLiaison: -1
@@ -165,6 +176,28 @@
       - RMCSurvivorShivasILRCPeacekeeper: -1
       CMSurvivorScientist:
       - RMCSurvivorShivasResearcher: -1
+    survivorJobScenarios:
+      panic_room_hold:
+      - CMSurvivorSecurity: 1
+      - CMSurvivor: 2
+      - CMSurvivorCorporate: 1
+      - CMSurvivorDoctor: 2
+      - CMSurvivorEngineer: 2
+      - CMSurvivorScientist: 2
+    survivorJobVariantScenarios:
+      panic_room_hold:
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorSecurity:
+        - RMCSurvivorPMCCommandoShivas: 1
+        CMSurvivorCorporate:
+        - RMCSurvivorAssistantManager: 1
+        CMSurvivor:
+        - RMCSurvivorShivasPanicRoomCivilian: 2
 
 - type: entity
   id: RMCPlanetFiorina
@@ -175,6 +208,9 @@
     camouflage: Classic
     minPlayers: 130
     announcement: "An automated distress signal has been received from maximum-security prison \"Fiorina Orbital Penitentiary\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: riot_in_progress
+      scenarioProbability: 0.15
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -192,6 +228,22 @@
       - CMSurvivorFiorinaRiotOfficer: 2
       CMSurvivorScientist:
       - CMSurvivorFiorinaResearcher: 2
+    survivorJobScenarios:
+      riot_in_progress: # Riot In Progress CMB Team. One as the main CMB RCTL, the rest as supporting officers.
+        - CMSurvivorSecurity: 1
+        - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      riot_in_progress: # Riot In Progress Riot Control team
+        CMSurvivorSecurity:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlTeamLeader: 1
+        CMSurvivor:
+        - RMCSurvivorFiorinaRiotInProgressCMBRiotControlOfficer: -1
+    survivorJobOverrideScenarios:
+      riot_in_progress: # Riot In Progress job overrides.
+        CMSurvivorCorporate: CMSurvivor
+        CMSurvivorEngineer: CMSurvivor
+        CMSurvivorDoctor: CMSurvivor
+        CMSurvivorScientist: CMSurvivor
 
 - type: entity
   id: RMCPlanetTrijent
@@ -202,6 +254,15 @@
     camouflage: Desert
     minPlayers: 130
     announcement: "We've lost contact with Weston-Yamada's extra-solar colony, \"Trijent Dam\", on the planet \"Raijin.\" The UNS Almayer has been dispatched to assist."
+    nightmareScenarios:
+    - scenarioName: trijent_surv_spawn_bar # Reduce this once CLF/SPP survivors are in
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_hospital
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_dam
+      scenarioProbability: 0.25
+    - scenarioName: trijent_surv_spawn_tunneldorm
+      scenarioProbability: 0.25
     survivorJobVariants:
       CMSurvivor:
       - CMSurvivor: -1
@@ -369,6 +430,9 @@
     map: /Maps/_RMC14/hybrisa.yml
     camouflage: Urban
     announcement: "An automated distress signal has been received from the Weston-Yamada colony, Hybrisa Prospera — a vast, city-like settlement renowned for its immense wealth, extensive mining operations, and thriving commerce. Recently fully acquired from the TSE, this former colony is now a key asset for Weston-Yamada, with a sprawling urban center housing thousands of residents and numerous smaller outer colonies under its control. The UNS Almayer has been dispatched to investigate the situation."
+    nightmareScenarios:
+    - scenarioName: tse_airbase
+      scenarioProbability: 0.3
     minPlayers: 130
     survivorJobVariants:
       CMSurvivor:
@@ -396,6 +460,34 @@
       CMSurvivorScientist:
       - RMCSurvivorHybrisaXenoarchaeologist: 2
       - RMCSurvivorHybrisaXenobiologist: 2
+    survivorJobScenarios:
+      tse_airbase: # Order of job priority for paramarines. Scientist is overriden into doctor, Corporate into survivor
+      - RMCSurvivorCommandingOfficer: 1
+      - RMCJobSyntheticColony: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorEngineer: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      tse_airbase: # RCM Paramarines
+        RMCSurvivorCommandingOfficer:
+        - RMCSurvivorParaCommander: 1
+        RMCJobSyntheticColony:
+        - RMCSurvivorParaSupportSynthetic: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorParaMedicalTechnician: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorParaAssaultEngineer: 1
+        CMSurvivorSecurity:
+        - RMCSurvivorParaTeamLeader: 1
+        - RMCSurvivorParaPilot: 1
+        CMSurvivor:
+        - RMCSurvivorParamarine: -1
+    survivorJobOverrideScenarios:
+      tse_airbase: # RCM Paramarines
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
+
 
 - type: entity
   id: RMCPlanetSorokyne
@@ -406,6 +498,9 @@
     camouflage: Jungle
     minPlayers: 130
     announcement: "An automated distress signal has been recieved from a mining colony on border world LV-976, \"Sorokyne Outpost\". A response team from the UNS Almayer will be dispatched shortly to investigate."
+    nightmareScenarios:
+    - scenarioName: spp_sof
+      scenarioProbability: 0.4
     survivorJobVariants:
       CMSurvivor:
       - CMJobSurvivorSoroCivilian: -1
@@ -422,7 +517,7 @@
       - CMJobSurvivorArmedPoliceOfficer: 2
       - CMJobSurvivorArmyReservist: 2
       CMSurvivorScientist:
-      - CMJobSurvivorCECResearcher: 2
+      - CMJobSurvivorMSCResearcher: 2
 #    survivorJobVariantScenarios:
 #      clfcamp:
 #        CMSurvivor:
@@ -441,6 +536,27 @@
 #        - : -1
 #        CMSurvivorScientist:
 #        - : -1
+    survivorJobScenarios:
+      spp_sof:
+      - CMSurvivorEngineer: 1
+      - CMSurvivorDoctor: 1
+      - CMSurvivorSecurity: 2
+      - CMSurvivor: -1
+    survivorJobVariantScenarios:
+      spp_sof:
+        CMSurvivorSecurity:
+        - RMCSurvivorSPPSOFSpec: 1
+        - RMCSurvivorSPPSOFSL: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorSPPSOFMedic: 1
+        CMSurvivorEngineer:
+        - RMCSurvivorSPPSOFSapper: 1
+        CMSurvivor:
+        - RMCSurvivorSPPSOFSoldier: -1
+    survivorJobOverrideScenarios: # Scientist rolls for SOF medic
+      spp_sof :
+        CMSurvivorScientist: CMSurvivorDoctor
+        CMSurvivorCorporate: CMSurvivor
 
 # PVE Maps Below
 - type: entity

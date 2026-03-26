@@ -1,15 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Numerics;
 using Content.Shared._RMC14.Barricade;
 using Content.Shared._RMC14.Entrenching;
-using Content.Shared._RMC14.Map;
 using Content.Shared.Beam.Components;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Doors.Components;
+using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Network;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
@@ -19,6 +22,7 @@ public sealed class LineSystem : EntitySystem
 {
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedMapSystem _mapSystem = default!;
+    [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -40,7 +44,7 @@ public sealed class LineSystem : EntitySystem
         _mapGridQuery = GetEntityQuery<MapGridComponent>();
     }
 
-    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false)
+    public List<LineTile> DrawLine(EntityCoordinates start, EntityCoordinates end, TimeSpan delayPer, float? range, out EntityUid? blocker, bool hitBlocker = false, bool thick = false, bool ignoreBarricades = false)
     {
         blocker = null;
         start = _mapSystem.AlignToGrid(start);
@@ -93,7 +97,7 @@ public sealed class LineSystem : EntitySystem
             for (var j = 0; j < coords.Count; j++)
             {
                 var entityCoords = coords[j];
-                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride);
+                var blocked = IsTileBlocked(grid, lastCoords, entityCoords, hitBlocker, out blocker, out var hitBlockerOverride, ignoreBarricades);
                 hitBlocker = hitBlockerOverride;
 
                 if (j == 0 && blocked && !hitBlocker)
@@ -135,23 +139,42 @@ public sealed class LineSystem : EntitySystem
         return tiles;
     }
 
-    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride)
+    private bool IsTileBlocked(Entity<MapGridComponent>? grid, EntityCoordinates previousCoords, EntityCoordinates coords, bool hitBlocker, [NotNullWhen(true)] out EntityUid? blocker, out bool hitBlockerOverride, bool ignoreBarricades = false)
     {
         blocker = default;
         hitBlockerOverride = hitBlocker;
         if (grid == null)
             return false;
 
+        // Check if the next tile is blocked by more than one wall/structure to prevent the line from passing through diagonally.
+        var direction = coords.Position - previousCoords.Position;
+        var ray = new CollisionRay(previousCoords.Position, direction.Normalized(), (int)CollisionGroup.FullTileMask);
+        var intersect = _physics.IntersectRayWithPredicate(Transform(previousCoords.EntityId).MapID, ray, direction.Length(), e => !Transform(e).Anchored, false);
+        var results = intersect.Select(r => r.HitEntity).ToHashSet();
+        var blockCount = 0;
+        foreach (var entity in results)
+        {
+            if (!_tag.HasAnyTag(entity, StructureTag, WallTag))
+                continue;
+
+            blockCount++;
+
+            if (blockCount < 2)
+                continue;
+
+            blocker = entity;
+            return true;
+        }
+
         var indices = _mapSystem.TileIndicesFor(grid.Value, grid, coords);
         var anchored = _mapSystem.GetAnchoredEntitiesEnumerator(grid.Value, grid, indices);
         while (anchored.MoveNext(out var uid))
         {
-            if (_barricadeQuery.HasComp(uid))
+            if (!ignoreBarricades && _barricadeQuery.HasComp(uid))
             {
                 if (_doorQuery.TryComp(uid, out var door) && door.State != DoorState.Closed)
                     continue;
 
-                var barricadeDir = _transform.GetWorldRotation(uid.Value).GetCardinalDir();
                 if (_directionalBlock.IsBehindTarget(uid.Value, coords.EntityId, previousCoords))
                 {
                     blocker = uid.Value;
@@ -166,7 +189,7 @@ public sealed class LineSystem : EntitySystem
             }
             else if (_doorQuery.TryComp(uid, out var door))
             {
-                if (door.State != DoorState.Closed)
+                if (door.State != DoorState.Closed && door.State != DoorState.Denying && door.State != DoorState.Welded)
                     continue;
 
                 blocker = uid.Value;

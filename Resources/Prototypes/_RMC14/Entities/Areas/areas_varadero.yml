@@ -498,6 +498,18 @@
 
 - type: entity
   parent: RMCAreaVaraderoInterior
+  id: RMCAreaVaraderoInteriorRestaurant
+  name: New Varadero - Restaurant
+  components:
+  - type: Sprite
+    sprite: _RMC14/Areas/hybrisareas.rsi
+    state: pizza
+  - type: Area
+    linkedLz: dropship_lz1
+    minimapColor: '#132242EE'
+
+- type: entity
+  parent: RMCAreaVaraderoInterior
   id: RMCAreaVaraderoInteriorCourt
   name: New Varadero - Basketball Court
   components:

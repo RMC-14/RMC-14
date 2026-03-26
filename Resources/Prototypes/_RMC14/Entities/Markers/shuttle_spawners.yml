@@ -71,8 +71,8 @@
 
 - type: entity
   parent: RMCSpawnerERTShuttle
-  id: RMCSpawnerERTShuttleZSPA
-  suffix: ZSPA
+  id: RMCSpawnerERTShuttleTSEPA
+  suffix: TSEPA, ERT
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/ert_zspa_shuttle.yml"
@@ -87,8 +87,8 @@
 
 - type: entity
   parent: RMCSpawnerERTShuttle
-  id: RMCSpawnerShuttleZSPA
-  suffix: zspa
+  id: RMCSpawnerShuttleTSEPA
+  suffix: TSEPA
   components:
   - type: GridSpawner
     spawn: "/Maps/_RMC14/Shuttles/zspa_shuttle.yml"

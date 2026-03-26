@@ -119,9 +119,6 @@
     -   [color=#FF0000][bold]Select "Fire"[/bold][/color]: Confirm your selections by pressing the "Fire" button.
     -   [bold]If the sequence was performed correctly, you should hear the distinct sound of the selected weapon firing.[/bold]
 
-    -   There is also the [bold]Target Offset[/bold], instead of firing directly on the laser or signal flare you can offset away from it.
-    -   This offset works off of the XY Coordinates system, for more information on how it works, scroll down on the mortar guide until the [textlink="Coordinate System (You can click here)" link="RMCGuideRoleMortar"]
-
     <Box>[bold]Weapon Cooldowns & Rapid Fire:</Box>
     -   Individual weapons have a [italic]short internal cooldown[/italic] before they can be fired again.
     -   However, there is [bold]no hard delay between firing -different- guns[/bold]. This means once one weapon has fired (example GAU-21), you can immediately repeat the "Strike" -> "Weapon" (select a different GAU-21 or another weapon) -> "Fire" sequence to unleash another salvo with a different weapon system very quickly. This allows for potent combined-arms attacks.

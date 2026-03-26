@@ -1087,12 +1087,27 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("text");
 
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid?>("DeletedById")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("deleted_by_id");
+
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER")
                         .HasColumnName("type");
 
                     b.HasKey("Id")
                         .HasName("PK_rmc_commendations");
+
+                    b.HasIndex("DeletedById")
+                        .HasDatabaseName("IX_rmc_commendations_deleted_by_id");
 
                     b.HasIndex("GiverId");
 
@@ -2290,12 +2305,21 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .IsRequired()
                         .HasConstraintName("FK_rmc_commendations_player_receiver_id");
 
+                    b.HasOne("Content.Server.Database.Player", "DeletedBy")
+                        .WithMany("CommendationsDeleted")
+                        .HasForeignKey("DeletedById")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_rmc_commendations_player_deleted_by_id");
+
                     b.HasOne("Content.Server.Database.Round", "Round")
                         .WithMany("Commendations")
                         .HasForeignKey("RoundId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_rmc_commendations_round_round_id");
+
+                    b.Navigation("DeletedBy");
 
                     b.Navigation("Giver");
 
@@ -2760,6 +2784,8 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("AdminWatchlistsReceived");
 
                     b.Navigation("ChatBans");
+
+                    b.Navigation("CommendationsDeleted");
 
                     b.Navigation("CommendationsGiven");
 
