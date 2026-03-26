@@ -87,7 +87,7 @@
       - PortableDialysis
   - type: AccessReader
     access: [["CMAccessMedical"]]
-  - type: RMCLockerOnlyOpenOnHijack
+  - type: RMCLockerOpenOnHijack
   - type: RMCMesonsNonviewable
 
 - type: entity
