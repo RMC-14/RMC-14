@@ -45,10 +45,16 @@
   prototype: CMFolderBase
   listed:
   - RMCFolderBlueEmptyBuild
-  - RMCFolderBlackEmptyBuild
+  - RMCFolderGreenEmptyBuild
   - RMCFolderRedEmptyBuild
   - RMCFolderWhiteEmptyBuild
   - RMCFolderYellowEmptyBuild
+  - RMCFolderBlackEmptyBuild
+  - RMCFolderBlackBlueEmptyBuild
+  - RMCFolderBlackGreenEmptyBuild
+  - RMCFolderBlackRedEmptyBuild
+  - RMCFolderBlackWhiteEmptyBuild
+  - RMCFolderBlackYellowEmptyBuild
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
@@ -79,6 +85,43 @@
   id: RMCFolderYellowEmptyBuild
   name: yellow folder
   prototype: CMFolderYellowEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderGreenEmptyBuild
+  name: green folder
+  prototype: CMFolderGreenEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderBlackBlueEmptyBuild
+  name: black folder with blue stripes
+  prototype: CMFolderBlackBlueEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderBlackGreenEmptyBuild
+  name: black folder with green stripes
+  prototype: CMFolderBlackGreenEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderBlackRedEmptyBuild
+  name: black folder with red stripes
+  prototype: CMFolderBlackRedEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderBlackWhiteEmptyBuild
+  name: black folder with white stripes
+  prototype: CMFolderBlackWhiteEmpty
+
+- type: rmcConstruction
+  parent: RMCCardboardBuildBase
+  id: RMCFolderBlackYellowEmptyBuild
+  name: black folder with yellow stripes
+  prototype: CMFolderBlackYellowEmpty
+
 
 # empty ammunition boxes
 - type: rmcConstruction
