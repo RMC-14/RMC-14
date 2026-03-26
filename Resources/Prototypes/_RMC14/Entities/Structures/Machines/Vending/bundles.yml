@@ -212,7 +212,7 @@
     bundle:
     - RMCFlashlight
     - CMPen
-    - RMCBinocularsCiv
+    - RMCBinoculars
     - CMClipboard # notepad
     #- taperecorder
 
