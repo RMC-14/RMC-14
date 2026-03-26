@@ -1,0 +1,16 @@
+- type: job
+  parent: RMCSurvivorShivasResearcher
+  id: RMCSurvivorShivasPanicRoomResearcher
+  name: rmc-job-name-survivor-shivas-researcher
+  playTimeTracker: CMJobSurvivorScientist
+  startingGear: RMCGearSurvivorShivasResearcher
+  spawnMenuRoleName: Researcher (Shivas Panic Room Special Survivor)
+  greeting: rmc-job-greeting-shivas-panic-room-researcher
+
+- type: entity
+  parent: RMCSpawnPointSurvivorShivasResearcher
+  id: RMCSpawnPointSurvivorShivasPanicRoomResearcher
+  name: special survivor shivas panic room researcher spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorShivasPanicRoomResearcher

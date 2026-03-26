@@ -10,6 +10,7 @@
   name: Queen
   description: A huge, looming alien creature. The biggest and the baddest.
   components:
+  - type: CanBuildThickFromConstructNode
   - type: GuideHelp
     guides:
     - RMCGuideRoleQueen
@@ -30,18 +31,6 @@
       visible: false
     - map: [ "enum.RMCShieldVisuals.Base" ]
       sprite: _RMC14/Effects/xeno_shields.rsi
-      visible: false
-    - map: [ "focused" ]
-      sprite: _RMC14/Interface/xeno_hud.rsi
-      state: hudeye
-      visible: false
-    - map: [ "targetedDirection" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_direction
-      visible: false
-    - map: [ "targetedDirectionIntense" ]
-      sprite: _RMC14/Effects/targeted.rsi
-      state: sniper_lockon_intense_direction
       visible: false
   - type: MobState
     allowedStates:
@@ -93,11 +82,13 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - HiveAcidPillarXeno
     canOrderConstruction:
     - HiveCoreXenoConstructionNode
     - HiveEggMorpherXenoConstructionNode
     - HiveClusterXenoConstructionNode
     - HiveRecoveryNodeXenoConstructionNode
+    - HivePlasmaTreeXenoConstructionNode
   - type: XenoDevour
   - type: XenoPheromones
     pheromonesMultiplier: 4
@@ -106,11 +97,15 @@
     plasma: 1000
     maxPlasma: 1000
     plasmaRegenOnWeeds: 4
+    plasmaTransferDelay: 0
   - type: CMArmor
     xenoArmor: 25
     explosionArmor: 100
   - type: XenoWordQueen
   - type: InnateCommandSpeech
+  - type: RMCInnateRadioTextIncrease
+    radioTextIncrease: 3
+    instrinsic: true
   - type: XenoGut
   - type: XenoClaws
     clawType: VerySharp
@@ -277,6 +272,9 @@
   - type: RMCTrackable
   - type: ExcludedFromKingVote
     canVote: true
+  - type: RemoveComponents
+    components:
+    - type: Gibbable
 
 - type: entity
   parent: RMCXenoQueenBase

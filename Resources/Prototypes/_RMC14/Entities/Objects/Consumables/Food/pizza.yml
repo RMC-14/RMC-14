@@ -377,6 +377,10 @@
   - type: Tag
     tags:
     - BoxCardboard
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
 
 - type: entity
   parent: RMCBoxPizza

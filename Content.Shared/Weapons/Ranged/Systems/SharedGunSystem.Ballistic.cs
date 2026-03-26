@@ -266,7 +266,7 @@ public abstract partial class SharedGunSystem
 
         // Delete the source BAP if it has the flag and is empty after trying to load. Maybe useful for shell handfuls.
         if (component.DeleteWhenEmpty && (component.Entities.Count == 0))
-            Del(uid);
+            PredictedDel(uid);
 
     }
 

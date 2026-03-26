@@ -116,3 +116,38 @@
     name: "Corporate Liaison"
   - type: SpecialFax
     faxId: Liaison
+
+- type: entity
+  parent: CMFax
+  id: RMCFaxColony #todo for RMC: Colony Fax machine that can only fax We-Ya and cannot be faxed by Marines.
+  suffix: Colony, Unusable
+  description: This won't be much help to anyone.
+  components:
+  - type: RemoveComponents
+    components:
+    - type: ApcPowerReceiver
+      needsPower: false
+      powerLoad: 0
+    - type: FaxMachine
+      printPaperId: CMPaper
+      printOfficePaperId: CMPaper
+      paperSlot:
+        insertSound: /Audio/Machines/scanning.ogg
+        ejectSound: /Audio/Machines/tray_eject.ogg
+        whitelist:
+          components:
+          - FaxableObject #used to be PaperComponent - brainfood1183
+        blacklist:
+          components:
+          - CargoSlip
+    - type: ActivatableUI
+      key: enum.FaxUiKey.Key
+    - type: ActivatableUIRequiresPower
+    - type: UserInterface
+      interfaces:
+        enum.FaxUiKey.Key:
+          type: FaxBoundUi
+    - type: ItemSlots
+    - type: ContainerContainer
+    - type: DeviceNetworkRequiresPower
+    - type: DeviceNetwork

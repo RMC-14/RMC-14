@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 10/28/2025 15:55:50
-  entityCount: 1083
+  time: 01/25/2026 23:03:17
+  entityCount: 1085
 maps: []
 grids:
 - 1
@@ -4883,6 +4883,16 @@ entities:
     components:
     - type: Transform
       pos: 26.5,43.5
+      parent: 1
+  - uid: 1084
+    components:
+    - type: Transform
+      pos: 39.5,27.5
+      parent: 1
+  - uid: 1085
+    components:
+    - type: Transform
+      pos: 38.5,23.5
       parent: 1
 - proto: RMCWallKutjevoHull
   entities:

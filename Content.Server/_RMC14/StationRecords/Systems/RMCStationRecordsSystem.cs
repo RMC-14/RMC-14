@@ -37,8 +37,11 @@ public sealed class RMCStationRecordsSystem : EntitySystem
             return;
 
         if (_squad.TryGetMemberSquad(args.Mob, out var memberSquad))
+        {
             generalRecord.Squad = Name(memberSquad);
-        
+            generalRecord.SquadColor = memberSquad.Comp.Color;
+        }
+
         _record.Synchronize(key);
     }
 

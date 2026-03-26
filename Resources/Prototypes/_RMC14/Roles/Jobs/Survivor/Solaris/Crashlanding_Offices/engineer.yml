@@ -33,6 +33,13 @@
         - RMCSquadPMC
     - type: JobPrefix
       prefix: rmc-job-prefix-pmc-engineer
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: mt
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_pmc
   useLoadoutOfJob: CMSurvivorEngineer # for inheritance
 
 - type: startingGear
