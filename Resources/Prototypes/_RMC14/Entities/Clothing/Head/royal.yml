@@ -149,3 +149,28 @@
     - RMCVisorMedicalAdvancedIntegrated
     - RMCVisorSquadIntegrated
     - RMCVisorPilotBlack
+      
+#Special Force Group
+- type: entity
+  parent: RMCHeadRoyalHelmetBallistic
+  id: RMCHeadSFGpBeret
+  name: sfgp beret
+  description: A distinctive crimson beret worn by the RCM's Special Force Group. Reinforced with flexible kevlar, it offers protection while maintaining a traditional and respected appearance.
+  suffix: SFGp
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi #TODO Unique Icon?
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_beret.rsi #TODO Unique Icon?
+
+- type: entity
+  parent: RMCHeadRoyalHelmetBallistic
+  id: RMCHeadSFGpBeretLead
+  name: sfgp team lead beret
+  description: A distinctive crimson beret worn by Team Leaders of the RCM's Special Force Group. Reinforced with flexible kevlar, it offers protection while maintaining a traditional and respected appearance.
+  suffix: SFGp
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi #TODO Unique Icon?
+    - type: Clothing
+      sprite: _RMC14/Objects/Clothing/Head/Royal/para_tl_beret.rsi #TODO Unique Icon?

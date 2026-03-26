@@ -156,3 +156,11 @@
     - type: FoldableClothing
       foldedEquippedPrefix: sleeves
       
+- type: entity
+  parent: RMCJumpsuitMarinePara
+  id: RMCJumpsuitMarineSFGp
+  suffix: SFGp
+  components:
+    - type: WebbingClothing
+      startingWebbing: RMCWebbingDropPouchSFGp
+      

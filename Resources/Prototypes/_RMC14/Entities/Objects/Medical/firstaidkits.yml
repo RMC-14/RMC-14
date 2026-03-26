@@ -332,6 +332,21 @@
 #   - id: CMMedicalSplint5
 #   - id: CMOxycodoneAutoInjector
     - id: CMDexalinPlusAutoInjector
+      
+- type: entity
+  parent: RMCStandardAidKitPVE
+  id: RMCStandardAidKitFilledSFGp
+  suffix: Filled, SFGp
+  components:
+    - type: StorageFill
+      contents:
+      - id: CMTraumaKit10
+      - id: CMTraumaKit10
+      - id: CMBurnKit10
+      - id: CMBurnKit10
+      #   - id: CMMedicalSplint5
+      - id: RMCPillCanisterDexalinPlus
+      - id: RMCPillCanisterIron
 
 - type: entity
   parent: CMFirstAidKit
@@ -359,8 +374,21 @@
     - id: CMTraumaKit10
 #   - id: CMMedicalSplint5
     - id: CMSurgicalLine
-    - id: RMCIronAutoInjector
     - id: CMBicaridineAutoInjector
+      
+- type: entity
+  parent: RMCBruteAidKitPVE
+  id: RMCBruteAidKitFilledSFGp
+  suffix: Filled, SFGp
+  components:
+    - type: StorageFill
+      contents:
+      - id: CMTraumaKit10
+      - id: CMTraumaKit10
+      - id: CMTraumaKit10
+      #  - id: CMMedicalSplint5
+      - id: CMSurgicalLine
+      - id: RMCPillCanisterMeralyneBicaridine
 
 - type: entity
   parent: CMFirstAidKit
@@ -390,3 +418,17 @@
     - id: RMCDermalineAutoInjector
     - id: CMKelotaneAutoInjector
 #   - id: CMOxycodoneAutoInjector
+
+- type: entity
+  parent: RMCBurnAidKitPVE
+  id: RMCBurnAidKitFilledSFGp
+  suffix: Filled, SFGp
+  components:
+    - type: StorageFill
+      contents:
+      - id: CMBurnKit10
+      - id: CMBurnKit10
+      - id: CMBurnKit10
+      - id: CMSynthGraft
+      - id: CMPillCanisterKelotaneDermaline
+#     - id: CMOxycodoneAutoInjector

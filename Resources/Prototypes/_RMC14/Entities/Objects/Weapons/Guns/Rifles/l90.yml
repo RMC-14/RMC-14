@@ -173,6 +173,14 @@
     tags:
     - RMCRifleL90
     - RMCRifleL90A2
+      
+- type: entity
+  parent: RMCWeaponRifleL90A2
+  id: RMCWeaponRifleL90A2F
+  name: L90A2F 'Para' infantry carbine
+  description: The L90A2F 'Para' infantry carbine is a modified version of the L90A2 which includes an ID lock and lighter materials. It is the standard issue rifle of the SFGp. Chambered in 7x43mm.
+  components:
+  - type: GunIDLock
 
 - type: entity
   parent: RMCWeaponRifleL90A2
@@ -507,6 +515,66 @@
           - RMCAttachmentLaserSight
           - RMCAttachmentL90GL
           - RMCAttachmentL90UBS
+            
+- type: entity
+  parent: RMCWeaponRifleL90A2F
+  id: RMCWeaponRifleL90A2FFilled
+  suffix: Filled
+  components:
+    - type: ItemSlots
+      slots:
+        gun_magazine:
+          name: Magazine
+          startingItem: RMCMagazineRifleL90HEAP
+          insertSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_reload.ogg
+          ejectSound: /Audio/_RMC14/Weapons/Guns/Reload/m41_unload.ogg
+          priority: 2
+          whitelist:
+            tags:
+              - RMCMagazineRifleL90
+              - RMCMagazineRifleL90AP
+              - RMCMagazineRifleL90HEAP
+              - RMCMagazineRifleL90Incendiary
+              - RMCMagazineRifleL90Drum
+              - RMCMagazineRifleL90DrumAP
+              - RMCMagazineRifleL90DrumHEAP
+              - RMCMagazineRifleL90DrumIncendiary
+    - type: AttachableHolder
+      slots:
+        rmc-aslot-barrel:
+          startingAttachable: RMCAttachmentSuppressor
+          whitelist:
+            tags:
+              - RMCAttachmentBarrelCharger
+              - RMCAttachmentExtendedBarrel
+              - RMCAttachmentSuppressor
+              - RMCM5Bayonet
+              - RMCAttachmentRecoilCompensator
+              - RMCAttachmentExtendedCompensator
+        rmc-aslot-rail:
+          startingAttachable: RMCAttachmentS6ReflexSight
+          whitelist:
+            tags:
+              - RMCAttachmentRailFlashlight
+              - RMCAttachmentMagneticHarness
+              - RMCAttachmentS5RedDotSight
+              - RMCAttachmentS6ReflexSight
+              - RMCAttachmentS84xTelescopicScope
+              - RMCAttachmentS42xTelescopicMiniscope
+        rmc-aslot-underbarrel:
+          startingAttachable: RMCAttachmentL90GL
+          whitelist:
+            tags:
+              - RMCAttachmentAngledGrip
+              - RMCAttachmentVerticalGrip
+              - RMCAttachmentFlashlightGrip
+              - RMCAttachmentGyroscopicStabilizer
+              - RMCAttachmentBipod
+              - RMCAttachmentExtinguisher
+              - RMCAttachmentFlamer
+              - RMCAttachmentLaserSight
+              - RMCAttachmentL90GL
+              - RMCAttachmentL90UBS
 
 - type: entity
   parent: RMCWeaponRifleL91SWS

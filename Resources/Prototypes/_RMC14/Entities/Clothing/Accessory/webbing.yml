@@ -919,7 +919,19 @@
       - id: CMMaskGas # TODO RMC14 l7 gasmask
       - id: RMCHeadRoyalHelmetBallistic
       - id: RMCMRETSE
-
+        
+- type: entity
+  parent: RMCWebbingDropPouchBlack
+  id: RMCWebbingDropPouchSFGp
+  suffix: Filled, SFGp
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCHeadRoyalHelmetBallistic
+        - id: RMCVisorNightVision
+        - id: RMCMRETSE
+        - id: RMCRangefinder
+          
 - type: entity
   parent: RMCWebbingDropPouch
   id: RMCWebbingPouchForecon

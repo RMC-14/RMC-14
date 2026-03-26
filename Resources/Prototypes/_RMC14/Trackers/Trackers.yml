@@ -190,6 +190,11 @@
   id: RCMLieutenant
   job: CMRoyalMarinesLieutenant
   alert: SquadTrackerRCMLieutenant
+  
+- type: trackerMode
+  id: RCMSFGpTeamLead
+  job: RMCJobSFGpTeamLead
+  alert: SquadTrackerSFGpTeamLead
 
 - type: trackerMode
   id: MARSOCLeader

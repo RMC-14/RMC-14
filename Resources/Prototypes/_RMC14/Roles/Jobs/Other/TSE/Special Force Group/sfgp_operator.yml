@@ -1,0 +1,112 @@
+- type: job
+  parent: CMJobBase
+  id: RMCJobSFGpOperator
+  name: rmc-job-name-sfgp-operator
+  description: rmc-ghost-role-information-sfgp-description
+  playTimeTracker: RMCJobSFGpOperator
+  ranks:
+    RMCRankParaStaffSergeant: [ ]
+  startingGear: RMCGearSFGpOperator
+  icon: RMCJobIconSFGpOperator
+  joinNotifyCrew: false
+  accessGroups:
+  - ShipMasterAccess
+  spawnMenuRoleName: Special Force Group Operator (Death Squad)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+        - RoyalMarines
+        - TSE
+    - type: Skills
+      skills:
+        RMCSkillCqc: 3
+        RMCSkillFireman: 2
+        RMCSkillEngineer: 2
+        RMCSkillConstruction: 2
+        RMCSkillFirearms: 2
+        RMCSkillMedical: 3
+        RMCSkillSurgery: 2
+        RMCSkillMeleeWeapons: 1
+        RMCSkillEndurance: 5
+        RMCSkillJtac: 1
+    - type: JobPrefix
+      prefix: rmc-job-prefix-sfgp-operator
+    - type: DemoSpecWhitelist
+    - type: GrenadeSpecWhitelist
+    - type: ScoutWhitelist
+    - type: SniperWhitelist
+    - type: PyroWhitelist
+  hidden: true
+
+- type: entity
+  id: RMCRandomHumanoidSFGpOperator
+  name: DEATHSQUAD sfgp operator ghost role
+  suffix: Role
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Head/Royal/ballistic.rsi
+    state: icon
+  - type: RandomHumanoidSpawner
+    settings: RMCJobSFGpOperator
+
+- type: randomHumanoidSettings
+  parent: RMCEventHumanoid
+  id: RMCJobSFGpOperator
+  components:
+  - type: GhostRole
+    name: rmc-job-name-sfgp-operator
+    description: rmc-ghost-role-information-sfgp-description
+    rules: rmc-ghost-role-information-sfgp-rules
+    reregister: false
+    job: RMCJobSFGpOperator
+    raffle:
+      settings: short
+    requirements:
+      - !type:RoleTimeRequirement
+        role: CMJobRifleman
+        time: 18000 # 5 Hours
+  - type: GhostRoleApplySpecial
+    squad: SquadSFGp
+
+- type: startingGear
+  id: RMCGearSFGpOperator
+  equipment:
+    head: RMCHeadSFGpBeret
+    mask: RMCMaskScarfBlack
+    ears: RMCHeadsetRoyalSFGp
+    eyes: RMCGlassesMedicalHUDGlasses
+    jumpsuit: RMCJumpsuitMarineSFGp
+    outerClothing: RMCArmorRoyalHunterFilled
+    gloves: RMCHandsVeteranRoyalMarine
+    shoes: RMCBootsRoyalFilled
+    suitstorage: RMCWeaponRifleL90A2FFilled
+    id: RMCDogtagSFGpOperator
+    belt: RMCBeltRCMFillSPGp
+    back: RMCBackpackRCMSmallPVPFilledSFGp
+    pocket1: RMCPouchToolsSocFill
+    pocket2: RMCPouchExplosiveFilledSFGp
+
+- type: playTimeTracker
+  id: RMCJobSFGpOperator
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconSFGpOperator
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_smartgunner #TODO Unique Icon?
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: RMCDogtagSFGpOperator
+  name: SFGp Operator's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCJobSFGpOperator
+
+- type: entity
+  parent: [ RMCIDCardStandardDogtagHidden, RMCDogtagSFGpOperator ]
+  id: RMCDogtagSFGpOperatorHidden
+  categories: [ HideSpawnMenu ]
