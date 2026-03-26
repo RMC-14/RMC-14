@@ -36,6 +36,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     [Dependency] private readonly XenoSystem _xeno = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly MountableWeaponSystem _mg = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
     {
@@ -64,7 +65,11 @@ public sealed class XenoAcidBlastSystem : EntitySystem
     {
         ent.Comp.Activation = _timing.CurTime + ent.Comp.Delay;
         Dirty(ent.Owner, ent.Comp);
-        PredictedSpawnAtPosition(ent.Comp.TelegraphEffect, Transform(ent.Owner).Coordinates);
+        if (!_net.IsClient)
+        {
+            var telegraph = PredictedSpawnAtPosition(ent.Comp.TelegraphEffect, Transform(ent.Owner).Coordinates);
+            _transform.SetParent(telegraph, ent.Owner);
+        }
     }
 
     private void OnBlastActivate(Entity<XenoAcidBlastComponent> ent)
