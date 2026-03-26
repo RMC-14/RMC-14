@@ -13,7 +13,6 @@ using Content.Shared.Effects;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
-using Content.Shared.Mobs.Components;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Audio.Systems;
@@ -77,7 +76,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (projectile.Comp1.ProjectileSpent)
         {
             if (_net.IsServer && component.DeleteOnCollide)
-                Del(uid);
+            {
+                if (component.QueueDeletion)
+                    QueueDel(uid);
+                else
+                    Del(uid);
+            }
 
             return;
         }
@@ -222,7 +226,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
 
         if (!predicted && component.DeleteOnCollide && (_net.IsServer || IsClientSide(uid)))
-            Del(uid);
+        {
+            if (component.QueueDeletion)
+                QueueDel(uid);
+            else
+                Del(uid);
+        }
 
         else if (_net.IsServer && component.DeleteOnCollide)
         {
