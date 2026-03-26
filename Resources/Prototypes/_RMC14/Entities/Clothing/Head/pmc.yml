@@ -339,8 +339,8 @@
 # PPO
 - type: entity
   parent: CMHeadCapMP
-  id: RMCHeadCapPPO
-  name: corporate security cap
+  id: RMCHeadCapEB
+  name: executive bodyguard cap
   description: A protective cap made from flexible kevlar. Standard issue for most security firms in the place of a helmet.
   components:
   - type: Sprite
@@ -350,8 +350,8 @@
 
 - type: entity
   parent: ArmorHelmetPMC
-  id: ArmorHelmetPPO
-  name: We-Ya corporate security helmet
+  id: ArmorHelmetEB
+  name: We-Ya executive bodyguard helmet
   description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
   components:
   - type: Sprite

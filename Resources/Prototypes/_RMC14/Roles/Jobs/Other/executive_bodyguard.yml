@@ -4,7 +4,7 @@
   id: RMCWeYaExecutiveBodyguard
   name: rmc-job-name-executive-bodyguard
   description: rmc-job-description-executive-bodyguard
-  newToJobInfo: rmc-new-to-job-wyeb
+  newToJobInfo: rmc-new-to-job-eb
   playTimeTracker: RMCJobWeYaExecutiveBodyguard
   requirements:
   - !type:DepartmentTimeRequirement
@@ -69,7 +69,7 @@
   equipment:
     id: RMCIDCardPMC
     ears: RMCHeadsetLiaison
-    jumpsuit: RMCJumpsuitLiaisonBlackCorporateBodyguard
+    jumpsuit: RMCJumpsuitLiaisonBlackExecutiveBodyguard
     outerClothing: RMCJacketCorporateBlack
     eyes: RMCGlassesSecurityBlue
     shoes: RMCBootsPMCFilled
@@ -92,10 +92,10 @@
 - type: entity
   parent: CMSpawnPointJobBase
   id: RMCSpawnPointExecutiveBodyguard
-  name: weston-yamada executive bodyguard spawn point
+  name: executive bodyguard spawn point
   components:
   - type: SpawnPoint
     job_id: RMCWeYaExecutiveBodyguard
   - type: Sprite
     sprite: _RMC14/Markers/landmarks.rsi
-    state: wyeb_spawn
+    state: eb_spawn

@@ -193,8 +193,8 @@
 
 - type: entity
   parent: CMJumpsuitLiaisonBlack
-  id: RMCJumpsuitLiaisonBlackCorporateBodyguard
-  suffix: Corporate Bodyguard
+  id: RMCJumpsuitLiaisonBlackExecutiveBodyguard
+  suffix: Executive Bodyguard
   components:
   - type: UniformAccessoryHolder
     startingAccessories:

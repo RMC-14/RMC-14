@@ -3,8 +3,8 @@
   #Clothes Rack
 - type: entity
   parent: ColMarTechWardrobeCorp
-  id: ColMarTechWardrobeWYEB
-  name: Corporate Security Clothes Rack
+  id: ColMarTechWardrobeEB
+  name: Executive Bodyguard Clothes Rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
   suffix: Exec. Bodyguard
   components:
@@ -53,11 +53,11 @@
       - id: CMWebbingHolster
       - id: RMCWebbingHolsterBlack
 
-   # PPO Gear
+   # Executive Bodyguard Gear
 - type: entity
   parent: ColMarTechBase
-  id: ColMarTechGearRackWYEB
-  name: Corporate Security Gear Rack
+  id: ColMarTechGearRackEB
+  name: Executive Bodyguard Gear Rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue gear.
   suffix: Exec. Bodyguard
   components:
@@ -75,7 +75,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapPPO
+        - id: RMCHeadCapEB
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -100,7 +100,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranPPO
+        - id: RMCHandsVeteranEB
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -145,7 +145,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapPPO
+        - id: RMCHeadCapEB
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -158,7 +158,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1PPO
+        - id: RMCArmorM1EB
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardPPO
@@ -222,8 +222,8 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMHelmet: 1 }
         entries:
-        - id: RMCHeadCapPPO
-        - id: ArmorHelmetPPO
+        - id: RMCHeadCapEB
+        - id: ArmorHelmetEB
       - name: Mask
         ranks:
         - RMCRankWeYaBodyguardPPS
@@ -238,8 +238,8 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1PPO
-        - id: RMCArmorM4PPO
+        - id: RMCArmorM1EB
+        - id: RMCArmorM4EB
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardPPS
@@ -253,7 +253,7 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranPPO
+        - id: RMCHandsVeteranEB
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardPPS
