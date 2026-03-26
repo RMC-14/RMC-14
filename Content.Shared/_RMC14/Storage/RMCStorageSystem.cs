@@ -88,8 +88,8 @@ public sealed class RMCStorageSystem : EntitySystem
         SubscribeLocalEvent<OpenStorageOnGearEquipComponent, StartingGearEquippedEvent>(OnOpenStorageStartingGear);
 
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnLockerHijackStart);
-        SubscribeLocalEvent<RMCLockerOnlyOpenOnHijackComponent, StorageOpenAttemptEvent>(OnLockerOpenAttempt);
-        SubscribeLocalEvent<RMCLockerOnlyOpenOnHijackComponent, LockToggleAttemptEvent>(OnLockerLockToggleAttempt);
+        SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, StorageOpenAttemptEvent>(OnLockerOpenAttempt);
+        SubscribeLocalEvent<RMCLockerOpenOnHijackComponent, LockToggleAttemptEvent>(OnLockerLockToggleAttempt);
 
         Subs.BuiEvents<StorageCloseOnMoveComponent>(StorageUiKey.Key, subs =>
         {
@@ -564,10 +564,10 @@ public sealed class RMCStorageSystem : EntitySystem
 
     private void OnLockerHijackStart(ref DropshipHijackStartEvent ev)
     {
-        var query = EntityQueryEnumerator<RMCLockerOnlyOpenOnHijackComponent, LockComponent>();
+        var query = EntityQueryEnumerator<RMCLockerOpenOnHijackComponent, LockComponent>();
         while (query.MoveNext(out var locker, out var onHijackComp, out var lockComp))
         {
-            onHijackComp.IsHijack = true;
+            onHijackComp.DidHijackStart = true;
             Dirty(locker, onHijackComp);
 
             _lock.Unlock(locker, null, lockComp);
@@ -575,17 +575,17 @@ public sealed class RMCStorageSystem : EntitySystem
         }
     }
 
-    private static void OnLockerOpenAttempt(Entity<RMCLockerOnlyOpenOnHijackComponent> ent, ref StorageOpenAttemptEvent args)
+    private static void OnLockerOpenAttempt(Entity<RMCLockerOpenOnHijackComponent> ent, ref StorageOpenAttemptEvent args)
     {
-        if (ent.Comp.IsHijack)
+        if (ent.Comp.DidHijackStart)
             return;
 
         args.Cancelled = true;
     }
 
-    private void OnLockerLockToggleAttempt(Entity<RMCLockerOnlyOpenOnHijackComponent> ent, ref LockToggleAttemptEvent args)
+    private void OnLockerLockToggleAttempt(Entity<RMCLockerOpenOnHijackComponent> ent, ref LockToggleAttemptEvent args)
     {
-        if (ent.Comp.IsHijack)
+        if (ent.Comp.DidHijackStart)
             return;
 
         args.Cancelled = true;
