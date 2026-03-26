@@ -126,6 +126,13 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (args.Cancelled)
             return;
 
+        var netOther = GetNetEntity(args.OtherEntity);
+        if (projectile.Comp.Dodged.Contains(netOther))
+        {
+            args.Cancelled = true;
+            return;
+        }
+
         if (projectile.Comp.ForceHit || projectile.Comp.ShotFrom == null)
             return;
 
@@ -174,6 +181,9 @@ public sealed class RMCProjectileSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+
+        projectile.Comp.Dodged.Add(netOther);
+        Dirty(projectile);
     }
 
     private bool IsProjectileTargetFriendly(EntityUid projectile, EntityUid target)
@@ -259,7 +269,7 @@ public sealed class RMCProjectileSystem : EntitySystem
         if (ent.Comp.Origin is not { } origin)
             return;
 
-        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(args.OtherEntity), out var distance))
+        if (!origin.TryDistance(EntityManager, _transform.GetMoverCoordinates(ent), out var distance))
             return;
 
         if (distance < ent.Comp.Max)
@@ -289,3 +299,6 @@ public sealed class RMCProjectileSystem : EntitySystem
         }
     }
 }
+
+[ByRefEvent]
+public record struct ProjectileShotEvent(EntityUid? Shooter, bool Predicted = true);
