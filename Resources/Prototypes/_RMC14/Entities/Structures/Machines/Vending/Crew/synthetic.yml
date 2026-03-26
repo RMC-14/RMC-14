@@ -331,9 +331,9 @@
         points: 15
       - id: RMCTelescopicBaton
         points: 15
-      - id: CMWebbingSurgicalGreen
+      - id: RMCWebbingSurgicalGreen
         points: 15
-      - id: CMWebbingSurgicalBlue
+      - id: RMCWebbingSurgicalBlue
         points: 15
       # Surgical Drop Pouch (Green) - 15 Points
       # Surgical Drop Pouch (Blue) - 15 Points
