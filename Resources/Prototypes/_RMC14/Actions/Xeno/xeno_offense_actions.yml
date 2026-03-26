@@ -1171,7 +1171,7 @@
   parent: ActionXenoBase
   id: ActionXenoTailSeize
   name: Tail Seize
-  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival.
+  description: Throw out your tail in front of you. Uses up your melee attack. Pulls in the first enemy hit to you and roots and slows them on arrival. [color=red]Has a 3-tile range![/color]
   components:
   - type: Action
     itemIconStyle: NoItem
