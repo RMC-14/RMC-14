@@ -380,7 +380,7 @@ public sealed class XenoChargeSystem : EntitySystem
         }
 
         var finalDamage = _xeno.TryApplyXenoSlashDamageMultiplier(targetId, structDamage);
-        var damage = _damageable.TryChangeDamage(targetId, finalDamage, origin: xeno, tool: null);
+        var damage = _damageable.TryChangeDamage(targetId, finalDamage, origin: xeno, tool: xeno);
 
         if (damage?.GetTotal() > FixedPoint2.Zero && !TerminatingOrDeleted(targetId))
         {
@@ -446,6 +446,8 @@ public sealed class XenoChargeSystem : EntitySystem
         xeno.Comp.Charge = diff;
         Dirty(xeno);
 
+        EnsureComp<XenoChargingComponent>(xeno);
+
         _rmcObstacleSlamming.MakeImmune(xeno);
         _throwing.TryThrow(xeno, diff, xeno.Comp.Strength, animated: false);
     }
@@ -464,6 +466,7 @@ public sealed class XenoChargeSystem : EntitySystem
         }
 
         xeno.Comp.Charge = null;
+        RemComp<XenoChargingComponent>(xeno);
         Dirty(xeno);
     }
 

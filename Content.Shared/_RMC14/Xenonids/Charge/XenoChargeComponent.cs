@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared._RMC14.Maths;
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Audio;
@@ -18,7 +19,7 @@ public sealed partial class XenoChargeComponent : Component
     public DamageSpecifier Damage = new();
 
     [DataField, AutoNetworkedField]
-    public float Range = 9;
+    public float Range = RMCMathExtensions.CircleAreaFromSquareAbilityRange(7);
 
     [DataField, AutoNetworkedField]
     public float SlowRange = 1.5f;
