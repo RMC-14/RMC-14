@@ -2837,6 +2837,88 @@
         tags:
         - RMCShellShotgunIncendiaryBuckshot
 
+# Buckshot 8 Gauge
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsHeavyBuckshotEmpty
+  name: shell box (Heavy Buckshot x 80)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box # Main box base sprite
+      color: "#681a1a"
+    - state: shell_ammo_full_base # Default full ammo sprite
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_base # Default full ammo sprite
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#681a1a"
+    - state: shell_box_buckshot # Type Markings to place over Box
+      color: "#e0d5c2"
+    - state: rifle_lid # Lid to match with Box
+      map: [ "lid" ]
+      color: "#681a1a"
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavyBuckshot
+
+- type: entity
+  parent: RMCBoxShellsHeavyBuckshotEmpty
+  id: RMCBoxShellsHeavyBuckshot
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunHeavyBuckshot
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavyBuckshot
+
+# Slug 8 Gauge
+- type: entity
+  parent: RMCBoxMagazineShellBase
+  id: RMCBoxShellsHeavySlugsEmpty
+  name: shell box (Heavy Slugs x 80)
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: rifle_box # Main box base sprite
+      color: "#1e4c1e"
+    - state: shell_ammo_full_base # Default full ammo sprite
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: shell_ammo_full_base # Default full ammo sprite
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#1e4c1e"
+    - state: shell_box_buckshot # Type Markings to place over Box
+      color: "#e0d5c2"
+    - state: rifle_lid # Lid to match with Box
+      map: [ "lid" ]
+      color: "#1e4c1e"
+  - type: CMItemSlots
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavySlugs
+
+- type: entity
+  parent: RMCBoxShellsHeavySlugsEmpty
+  id: RMCBoxShellsHeavySlugs
+  suffix: Full
+  components:
+  - type: CMItemSlots
+    startingItem: RMCShellShotgunHeavySlugs
+    count: 20
+    slot:
+      whitelist:
+        tags:
+        - RMCShellShotgunHeavySlugs
+
 # -- SUPPLY BOXES --
 
 # Nailgun
