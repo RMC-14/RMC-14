@@ -441,7 +441,11 @@ public sealed class XenoChargeSystem : EntitySystem
         var coordinates = GetCoordinates(args.Coordinates);
         var origin = _transform.GetMapCoordinates(xeno);
         var diff = _transform.ToMapCoordinates(coordinates).Position - origin.Position;
-        diff = diff.Normalized() * xeno.Comp.Range;
+        var length = diff.Length();
+        if (length > xeno.Comp.Range)
+            diff = diff.Normalized() * xeno.Comp.Range;
+        else
+            diff = diff.Normalized() * MathF.Ceiling(length);
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);
