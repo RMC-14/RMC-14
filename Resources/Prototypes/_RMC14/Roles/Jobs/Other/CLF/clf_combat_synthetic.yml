@@ -1,15 +1,15 @@
 - type: job
   parent: CMJobBase
-  id: RMCCLFSynthetic
-  name: rmc-clf-synthetic
+  id: RMCCLFSyntheticCombat
+  name: rmc-clf-synthetic-combat
   description: rmc-ghost-role-information-clf-description
   playTimeTracker: RMCJobSyntheticCLF
   ranks:
     RMCRankSyntheticColonist: [ ]
-  startingGear: RMCGearSyntheticCLF
   icon: "RMCJobIconCLFSynthetic"
   joinNotifyCrew: false
-  spawnMenuRoleName: CLF Multipurpose Synthetic
+  spawnMenuRoleName: CLF Combat Synthetic
+  startingGear: RMCGearSyntheticCLFCombat
   special:
   - !type:AddComponentSpecial
     components:
@@ -51,21 +51,23 @@
         types:
           Blunt: 35
     - type: Synth
+      canUseGuns: true
       generation: rmc-species-synth-generation-first
   hidden: true
 
 - type: startingGear
-  id: RMCGearSyntheticCLF
+  id: RMCGearSyntheticCLFCombat
   equipment:
     head: RMCHeadBeretPurple
     mask: RMCCombatUtilityKnifeA
     ears: RMCHeadsetDistressCLF
     eyes: RMCGlassesMedicalHUDGlasses
-    jumpsuit: RMCJumpsuitCLFSoldier
+    jumpsuit: RMCJumpsuitCLFWebbing
     outerClothing: RMCCoatMilitia
     gloves: CMHandsBlackMarine
     shoes: RMCShoesCombat
-    id: RMCIDCardCLFSynthetic
+    suitstorage: WeaponRifleMAR40
+    id: RMCIDCardCLFSyntheticCombat
     belt: RMCBeltMedicalDefibAnalyzerFilled
     back: RMCSatchelLightpackWelder
     pocket1: RMCPouchToolsFill
@@ -80,14 +82,6 @@
     - RMCSynthResetKeyMakeshift
     - CMSurgicalLine
     - CMSynthGraft
-
-- type: playTimeTracker
-  id: RMCJobSyntheticCLF
-
-- type: jobIcon
-  parent: CMJobIconBase
-  id: RMCJobIconCLFSynthetic
-  icon:
-    sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: clf_synth
-
+    outerClothing:
+    - RMCMagazineRifleMAR40
+    - RMCMagazineRifleMAR40

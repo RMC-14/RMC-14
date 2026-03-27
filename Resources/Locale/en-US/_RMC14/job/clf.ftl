@@ -53,3 +53,5 @@ rmc-job-prefix-clf-pve-standard = GRL
 rmc-clf-synthetic = CLF Multipurpose Synthetic
 rmc-job-description-synth-clf = Support and assist the rebels.
 rmc-job-prefix-clf-synth = SYN
+
+rmc-clf-synthetic-combat = CLF Combat Synthetic

@@ -58,10 +58,19 @@
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFSynthetic
-  name: CLF Multipurpose Synthetic's ID card
+  name: clf multipurpose synthetic's ID card
   components:
   - type: PresetIdCard
-    job: RMCCLFSynthetic
+    job: RMCCLFSyntheticCombat
+
+- type: entity
+  parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSyntheticCombat
+  name: clf combat synthetic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSyntheticCombat
+
 
 - type: entity
   parent: RMCIDCardCLFBase
