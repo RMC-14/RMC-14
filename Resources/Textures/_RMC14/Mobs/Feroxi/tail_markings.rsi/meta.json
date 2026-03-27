@@ -43,34 +43,6 @@
         {
             "name": "feroxi-dorsal-stripes",
             "directions": 4
-        },
-        {
-            "name": "feroxi-tail-thresher",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-thresher-top-tip",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-thresher-stripe",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-nurse",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-nurse-under",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-nurse-tip",
-            "directions": 4
-        },
-        {
-            "name": "feroxi-tail-nurse-stripe",
-            "directions": 4
         }
     ]
 }
