@@ -17,7 +17,7 @@
       strength: Normal
       plasmaCost: 100
       time: 50 # seconds
-      dps: 9.125
+      dps: 7.2
       expendableLightDps: 2.5
 
 - type: entity
@@ -47,7 +47,7 @@
       strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
-      dps: 5
+      dps: 3.6
       expendableLightDps: 0.8
 
 - type: entity
@@ -69,7 +69,7 @@
       strength: Strong
       plasmaCost: 125
       time: 20 # seconds
-      dps: 25
+      dps: 18
       expendableLightDps: 35
 
 - type: entity
@@ -93,7 +93,7 @@
       energyCost: 100
       applyTimeMultiplier: 0.25
       time: 20 # seconds
-      dps: 25
+      dps: 18
       expendableLightDps: 35
 
 - type: entity
