@@ -66,6 +66,7 @@ public sealed class XenoAcidMineSystem : EntitySystem
                 var blastUid = Spawn(protoId, new EntityCoordinates(args.Target.EntityId, center + new Vector2(x, y)));
                 var blast = EnsureComp<XenoAcidBlastComponent>(blastUid);
                 blast.Attached = xeno.Owner;
+                blast.Empowered = xeno.Comp.Empowered;
                 Dirty(blastUid, blast);
                 _hive.SetSameHive(xeno.Owner, blastUid);
             }
