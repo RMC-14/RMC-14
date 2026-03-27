@@ -1,10 +1,12 @@
 using Content.Shared._RMC14.Marines.Skills;
+using Content.Shared._RMC14.Synth;
 using Content.Shared._RMC14.Overwatch;
 using Content.Shared._RMC14.Medical.HUD.Components;
 using Content.Shared._RMC14.Medical.HUD.Events;
 using Content.Shared._RMC14.Medical.Scanner;
 using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -19,6 +21,7 @@ public sealed class HolocardSystem : EntitySystem
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public const int MinimumRequiredSkill = 2;
     public static readonly EntProtoId<SkillDefinitionComponent> SkillType = "RMCSkillMedical";
@@ -47,6 +50,12 @@ public sealed class HolocardSystem : EntitySystem
         if (!_transform.InRange(ent.Owner, viewer.Value, 15f) && !HasComp<OverwatchWatchingComponent>(viewer.Value))
             return;
 
+        if (HasComp<SynthComponent>(ent.Owner))
+        {
+            _popup.PopupClient(Loc.GetString("ui-holocard-change-synth-invalid"), viewer.Value, viewer.Value, PopupType.SmallCaution);
+            return;
+        }
+
         // A player with insufficient medical skill cannot change holocards
         if (!_skills.HasSkill(viewer.Value, SkillType, MinimumRequiredSkill))
             return;
@@ -65,6 +74,9 @@ public sealed class HolocardSystem : EntitySystem
     private void OnHolocardExaminableVerb(Entity<HolocardStateComponent> entity, ref GetVerbsEvent<ExamineVerb> args)
     {
         if (!args.CanInteract)
+            return;
+
+        if (HasComp<SynthComponent>(args.Target))
             return;
 
         // A player with insufficient medical skill cannot change holocards
@@ -97,6 +109,13 @@ public sealed class HolocardSystem : EntitySystem
     {
         var localOwner = GetEntity(args.Owner);
         var localTarget = GetEntity(args.Target);
+
+        if (HasComp<SynthComponent>(localTarget))
+        {
+            _popup.PopupClient(Loc.GetString("ui-holocard-change-synth-invalid"), localOwner, localOwner, PopupType.SmallCaution);
+            return;
+        }
+
         _ui.OpenUi(localTarget, HolocardChangeUIKey.Key, localOwner);
     }
 
