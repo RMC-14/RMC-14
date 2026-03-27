@@ -71,7 +71,6 @@
   - type: PresetIdCard
     job: RMCCLFSyntheticCombat
 
-
 - type: entity
   parent: RMCIDCardCLFBase
   id: RMCIDCardCLFCellCommander
