@@ -61,7 +61,7 @@
   name: clf multipurpose synthetic's ID card
   components:
   - type: PresetIdCard
-    job: RMCCLFSyntheticCombat
+    job: RMCCLFSynthetic
 
 - type: entity
   parent: RMCIDCardCLFBase
