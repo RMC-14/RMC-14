@@ -493,8 +493,9 @@ public sealed class XenoLeapSystem : EntitySystem
             return false;
         }
 
-        if (HasComp<XenoParasiteComponent>(target) ||
-            !HasComp<MobStateComponent>(target))
+        if ((HasComp<XenoParasiteComponent>(target) ||
+            !HasComp<MobStateComponent>(target)) &&
+            !HasComp<RMCLeapProtectionComponent>(target))
         {
             return false;
         }

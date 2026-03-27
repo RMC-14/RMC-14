@@ -202,6 +202,9 @@ public abstract class SharedNightVisionSystem : EntitySystem
 
     private void OnNightVisionScoped(Entity<NightVisionVisorComponent> ent, ref VisorRelayedEvent<ScopedEvent> args)
     {
+        if (args.Event.Scope.Comp.CanUseNightVision)
+            return;
+
         _visor.DeactivateVisor(args.CycleableVisor, ent.Owner, args.Event.User);
     }
 
