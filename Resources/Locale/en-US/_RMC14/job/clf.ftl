@@ -1,4 +1,4 @@
-﻿rmc-ghost-role-information-clf-rules = You are a [color=red][bold]CLF member[/bold][/color]. You are hostile to the marines unless stated otherwise.
+rmc-ghost-role-information-clf-rules = You are a [color=red][bold]CLF member[/bold][/color]. You are hostile to the marines unless stated otherwise.
                                              You don't remember any of your previous life, and you don't remember anything you learned as a ghost.
                                              You are allowed to remember knowledge about the game in general, such as how to cook, how to use objects, etc.
                                              You are absolutely [color=red]NOT[/color] allowed to remember, say, the name, appearance, etc. of your previous character.
@@ -49,3 +49,7 @@ rmc-job-prefix-clf-pve-heavy-gunner = Hvy. Gnr.
 rmc-ghost-role-clf-pve-standard = CLF Standard (PVE)
 rmc-job-name-clf-pve-standard = Standard
 rmc-job-prefix-clf-pve-standard = GRL
+
+rmc-clf-synthetic = CLF Multipurpose Synthetic
+rmc-job-description-synth-clf = Support and assist the rebels.
+rmc-job-prefix-clf-synth = SYN

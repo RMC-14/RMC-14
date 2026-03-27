@@ -183,3 +183,23 @@
   - type: RequiresSkill
     skills:
       RMCSkillEngineer: 0
+
+
+- type: entity
+  parent: RMCSynthResetKey
+  id: RMCSynthResetKeyMakeshift
+  name: makeshift synthetic sparker
+  description: A tool resembling a synthetic reset key, but extremely crude and made from spare parts, only capable of rebooting the system of a synthetic, with a small chance of corrupting that system. It can only be used once before being reset.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Devices/makeshift_reset_key.rsi
+    layers:
+    - state: defib
+    - state: defib_on
+      map: [ "enum.ToggleableVisuals.Layer" ]
+      visible: false
+  - type: Item
+    size: Small
+    sprite: _RMC14/Objects/Devices/makeshift_reset_key.rsi
+    heldPrefix: null
+

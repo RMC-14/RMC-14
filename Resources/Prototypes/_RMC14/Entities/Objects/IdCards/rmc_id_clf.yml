@@ -57,6 +57,14 @@
 
 - type: entity
   parent: RMCIDCardCLFBase
+  id: RMCIDCardCLFSynthetic
+  name: CLF Multipurpose Synthetic's ID card
+  components:
+  - type: PresetIdCard
+    job: RMCCLFSynthetic
+
+- type: entity
+  parent: RMCIDCardCLFBase
   id: RMCIDCardCLFCellCommander
   name: clf cell commander's ID card
   components:

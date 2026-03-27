@@ -72,7 +72,7 @@
 - type: startingGear
   id: RMCGearCLFCoordinator
   equipment:
-    head: RMCHeadMilitiaHood
+    head: RMCHeadGreyMilitiaHood
     mask: RMCCarbonMask
     ears: RMCHeadsetDistressCLF
     neck: RMCtornCLFflag
