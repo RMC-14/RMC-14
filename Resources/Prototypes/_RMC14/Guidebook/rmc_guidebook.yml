@@ -423,12 +423,14 @@
   priority: 4
   name: "Boiler Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleBoiler.xml"
+  children:
+  - RMCGuideRoleTrapper
 
 - type: guideEntry
   parent: RMC
   id: RMCGuideRoleTrapper
   priority: 4
-  name: "Boiler Guide"
+  name: "Trapper Guide"
   text: "/ServerInfo/Guidebook/_RMC14/Guides/Xenonid/RMCGuideRoleTrapper.xml"
 
 - type: guideEntry
