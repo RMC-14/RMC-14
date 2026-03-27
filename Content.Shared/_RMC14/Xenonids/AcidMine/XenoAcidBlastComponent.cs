@@ -44,7 +44,7 @@ public sealed partial class XenoAcidBlastComponent : Component
     public TimeSpan DeployTrapsCooldownReduction = TimeSpan.FromSeconds(4);
 
     [DataField, AutoNetworkedField]
-    public EntProtoId TelegraphEffect = "RMCEffectXenoTelegraphRedSlow";
+    public EntProtoId TelegraphEffect = "RMCEffectXenoTelegraphYellowPulse";
 
     [DataField, AutoNetworkedField]
     public SoundSpecifier SizzleSound = new SoundCollectionSpecifier("XenoAcidSizzle");
