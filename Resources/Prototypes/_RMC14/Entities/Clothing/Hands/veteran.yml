@@ -80,7 +80,7 @@
 - type: entity
   parent: RMCHandsVeteran
   id: RMCHandsVeteranEB
-  name: WeYa EB gloves
+  name: WeYa executive bodyguard gloves
   description: Standard issue kevlon fiber gloves manufactured by Weston-Yamada for the Corporate Security Division. They are insulated against electrical shock.
   components:
   - type: Sprite

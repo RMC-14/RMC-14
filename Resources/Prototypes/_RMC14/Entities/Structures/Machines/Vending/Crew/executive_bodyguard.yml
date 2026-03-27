@@ -88,7 +88,7 @@
         - RMCRankWeYaBodyguardTPPO
         choices: { CMArmor: 1 }
         entries:
-        - id: RMCArmorM1PPO
+        - id: RMCArmorM1EB
       - name: Backpack
         ranks:
         - RMCRankWeYaBodyguardTPPO
@@ -170,7 +170,7 @@
         - RMCRankWeYaBodyguardPPO
         choices: { CMHands: 1 }
         entries:
-        - id: RMCHandsVeteranPPO
+        - id: RMCHandsVeteranEB
       - name: Pouches
         ranks:
         - RMCRankWeYaBodyguardPPO
