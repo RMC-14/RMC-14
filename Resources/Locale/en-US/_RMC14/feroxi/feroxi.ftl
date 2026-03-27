@@ -19,8 +19,6 @@ marking-FeroxiEarsTips-feroxi-ears = Base Ears
 marking-FeroxiEarsTips-feroxi-ears-inner = Inner Ear
 marking-FeroxiEarsTips-feroxi-ears-tips = Ear Tips
 
-marking-FeroxiEarless = Earless
-
 marking-FeroxiSnoutStripe = Striped Snout
 marking-FeroxiSnoutStripe-feroxi-snout = Base Snout
 marking-FeroxiSnoutStripe-feroxi-snout-stripe = Stripe
@@ -142,6 +140,9 @@ marking-FeroxiTipTwoToneTailAndDorsal-feroxi-tail-bottom-tip = Lower Tail Fin Ti
 marking-FeroxiTipTwoToneTailAndDorsal-feroxi-tail-under = Under Tail
 marking-FeroxiTipTwoToneTailAndDorsal-feroxi-dorsal = Base Dorsal
 marking-FeroxiTipTwoToneTailAndDorsal-feroxi-dorsal-tip = Dorsal Tip
+
+marking-FeroxiTorsoStripesBlitz = Small Under Arm Stripes
+marking-FeroxiTorsoStripesBlitz-feroxi-torso-stripes-blitz = Stripes
 
 marking-FeroxiTorsoStripesTiger = Full Stripes
 marking-FeroxiTorsoStripesTiger-feroxi-torso-stripes-tiger = Stripes
