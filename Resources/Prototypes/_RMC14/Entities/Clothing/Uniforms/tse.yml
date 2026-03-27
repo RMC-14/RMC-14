@@ -45,7 +45,7 @@
   suffix: Filled, Royal, Medic
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalBlue
+    startingWebbing: RMCWebbingSurgicalBlue
 
 - type: entity
   parent: RMCJumpsuitMarineRoyal
@@ -93,7 +93,7 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
-    
+
 # RCM Paramarines
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
@@ -118,7 +118,7 @@
     foldVerbText: rmc-sleeves-verb-fold
   - type: FoldableClothing
     foldedEquippedPrefix: sleeves
-    
+
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaL88
@@ -126,7 +126,7 @@
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingL88
-    
+
 - type: entity
   parent: RMCJumpsuitMarinePara
   id: RMCJumpsuitMarineParaPDW90
@@ -134,7 +134,7 @@
   components:
     - type: WebbingClothing
       startingWebbing: RMCParaWebbingPDW90AP
-    
+
 - type: entity
   parent: [RMCJumpsuitTSEPA, RMCFoldableUniformBase]
   id: RMCJumpsuitMarineParaService
@@ -155,4 +155,3 @@
       foldVerbText: rmc-sleeves-verb-fold
     - type: FoldableClothing
       foldedEquippedPrefix: sleeves
-      
