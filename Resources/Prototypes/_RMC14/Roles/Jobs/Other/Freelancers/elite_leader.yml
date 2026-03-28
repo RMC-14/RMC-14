@@ -64,7 +64,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
-    randomOutfits: # lower change for shotgun
+    randomOutfits: # lower chance for shotgun
     - [ RMCM63APBeltFilled, RMCWeaponSMGM63B2 ]
     - [ RMCM63APBeltFilled, RMCWeaponSMGM63B2 ]
     - [ RMCBeltMarineMK1, RMCWeaponRifleM54CMK1 ]

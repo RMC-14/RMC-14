@@ -816,7 +816,6 @@
     - id: RMCRangefinder
     # RMC14 TODO: Attachment box, SPP Phosphorous packet, hacked merc motion detector
 
-
 - type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFilledRoyal
