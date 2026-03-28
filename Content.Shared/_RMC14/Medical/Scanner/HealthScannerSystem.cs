@@ -183,9 +183,9 @@ public sealed class HealthScannerSystem : EntitySystem
 
         var pulse = _rmcPulse.TryGetPulseReading(target, true, out _);
         var bleeding = _rmcBloodstream.IsBleeding(target);
-        var state = new HealthScannerBuiState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding);
+        var state = new HealthScanState(GetNetEntity(target), blood, maxBlood, temperature, pulse, chemicals, bleeding, scanner.Comp.DetailLevel);
 
-        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, state);
+        _ui.SetUiState(scanner.Owner, HealthScannerUIKey.Key, new HealthScannerBuiState(state));
     }
 
     public override void Update(float frameTime)
