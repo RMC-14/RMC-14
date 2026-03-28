@@ -1,0 +1,106 @@
+- type: entity
+  id: RMCSkillPresetFreelancerRifleman
+  name: Freelancer Rifleman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillConstruction: 2
+      RMCSkillEngineer: 2
+      RMCSkillEndurance: 2
+      RMCSkillFireman: 1
+      RMCSkillFirearms: 1
+
+- type: entity
+  parent: RMCSkillPresetFreelancerRifleman
+  id: RMCSkillPresetFreelancerLeader
+  name: Freelancer Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillMedical: 2
+      RMCSkillFireman: 2
+      RMCSkillJtac: 3
+      RMCSkillLeadership: 2
+      RMCSkillOverwatch: 1
+      RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
+
+- type: entity
+  parent: RMCSkillPresetFreelancerRifleman
+  id: RMCSkillPresetFreelancerMedic
+  name: Freelancer Medic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 2
+      RMCSkillSurgery: 2
+
+- type: entity
+  id: RMCSkillPresetEliteMercenary
+  name: Elite Mercenary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillCqc: 2
+      RMCSkillFireman: 2
+      RMCSkillEngineer: 2
+      RMCSkillMedical: 1
+      RMCSkillConstruction: 2
+      RMCSkillEndurance: 5
+      RMCSkillJtac: 1
+      RMCSkillFirearms: 3
+      RMCSkillVehicles: 1
+      RMCSkillMeleeWeapons: 1
+
+- type: entity
+  parent: RMCSkillPresetEliteMercenary
+  id: RMCSkillPresetEliteMercenaryMedic
+  name: Elite Mercenary
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillMedical: 4
+      RMCSkillSurgery: 2
+
+- type: entity
+  parent: RMCSkillPresetEliteMercenary
+  id: RMCSkillPresetEliteMercenaryEngineer
+  name: Elite Mercenary Engineer
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillEngineer: 4
+      RMCSkillMedical: 1
+      RMCSkillConstruction: 3
+      RMCSkillEndurance: 5
+      RMCSkillPilot: 2
+      RMCSkillVehicles: 2
+
+- type: entity
+  parent: RMCSkillPresetEliteMercenary
+  id: RMCSkillPresetEliteMercenaryLeader
+  name: Elite Mercenary Leader
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillJtac: 4
+      RMCSkillLeadership: 3 # TODO RMC14: Leadership 4
+      RMCSkillOverwatch: 1
+      RMCSkillPilot: 2
+
+- type: entity
+  parent: RMCSkillPresetEliteMercenary
+  id: RMCSkillPresetEliteMercenaryHeavy
+  name: Elite Mercenary Heavy
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillSpecialistWeapons: 1

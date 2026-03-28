@@ -126,6 +126,15 @@
 
 - type: entity
   parent: CMMRE
+  id: RMCMREFreelance # TODO RMC14 - Custom Contents
+  name: FSR combat ration
+  description: The First Strike Ration, produced by the same manufacturer that produces MREs for UN militaries, but oriented on civilian and private markets.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Consumable/Food/mre_freelance.rsi
+
+- type: entity
+  parent: CMMRE
   id: RMCMRETSE # TODO RMC14 - Custom Contents
   name: TSE ORP ration
   description: An Operation Ration Pack. Uses similar to UNMC MRE format, but utilizes expensive preserving materials and methods and not less expensive meals from TSE cuisine.

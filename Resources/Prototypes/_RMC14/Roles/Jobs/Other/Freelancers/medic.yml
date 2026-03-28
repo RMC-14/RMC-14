@@ -13,22 +13,17 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: Freelancer Medic
+  spawnMenuRoleName: Freelancer (Medic)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetFreelancerMedic
     - type: NpcFactionMember
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 2
-        RMCSkillMedical: 2
-        RMCSkillSurgery: 2
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetFreelancerMedic
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-freelancer-medic
@@ -98,17 +93,13 @@
   id: RMCGearFreelancerMedic
   equipment:
     eyes: RMCGlassesMedicalHUDGlasses
-    back: RMCSatchelLightpackFreelancerMedic
-    belt: CMBeltMedicBagFilled
-    suitstorage: WeaponRifleMAR40
-    pocket1: RMCPouchMedicalERT
-    pocket2: RMCPouchMagazineLargeMAR40
-    gloves: RMCHandsVeteranPMC
-    jumpsuit: RMCJumpsuitFreelancer # TODO RMC14 add surg vest
+    gloves: RMCHandsVeteran
+    jumpsuit: RMCJumpsuitFreelancerMedic
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukes
+    pocket2: RMCPouchMedkitFillAdvanced
 
 - type: playTimeTracker
   id: RMCJobFreelancerMedic
@@ -119,3 +110,21 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: free_med
+
+- type: entity
+  id: RMCPresetFreelancerMedic
+  name: freelancer medic preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCSatchelLightpackFreelancerMedicShotgunner, CMBeltMedicalFilledFreelancer, RMCPouchShotgunLargeBuckshotAlt, RMCWeaponShotgunHG3712 ] # TODO RMC14: randomize shotgun shell types
+    - [ RMCSatchelLightpackFreelancerMedicShotgunner, CMBeltMedicalFilledFreelancer, RMCPouchShotgunLargeBuckshotAlt, WeaponShotgunCustomBuilt ]
+    - [ RMCSatchelLightpackFreelancerMedicShotgunner, CMBeltMedicalFilledFreelancer, RMCPouchShotgunLargeBuckshotAlt, WeaponShotgunM357 ]
+    - [ RMCSatchelLightpackFreelancerMedicShotgunner, CMBeltMedicalFilledFreelancer, RMCPouchShotgunLargeBuckshotAlt, WeaponShotgunM890 ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeMAR40, WeaponRifleMAR40 ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeMAR40, RMCWeaponRifleMAR30 ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeMAR50, RMCWeaponMar50LMG ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeM54CMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeFP9000, RMCWeaponSMGFP9000 ]
+    - [ RMCSatchelLightpackFreelancerMedic, RMCBeltMedicBagSPPFilled, RMCPouchMagazineLargeM16, WeaponRifleM16 ]

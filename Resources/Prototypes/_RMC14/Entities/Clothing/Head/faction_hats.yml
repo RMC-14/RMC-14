@@ -77,6 +77,15 @@
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_freelancer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Head/Hats/cap_freelancer.rsi
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 20
+    explosionArmor: 10
+    # armor_laser = low
+    # armor_energy = low
+    # armor_rad = low
+    # armor_internaldamage = medium
 
 - type: entity
   parent: RMCHeadCapFreelancer

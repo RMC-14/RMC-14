@@ -50,7 +50,7 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
-      
+
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
@@ -741,36 +741,81 @@
 
 - type: entity
   parent: RMCSatchelLightpack
-  id: RMCSatchelLightpackFreelancerMedic
-  suffix: Filled, Freelancer
+  id: RMCSatchelLightpackFreelancerMedicShotgunner
+  suffix: Filled, Freelancer Medic Shotgunner
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMREFreelance
+    - id: CMDefibrillator
+    - id: CMRollerBedSpawnFolded
+    - id: CMGrenadeFragOld
+    - id: CMGrenadeFragOld
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackFreelancerMedic
+  suffix: Filled, Freelancer Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMREFreelance
+    - id: CMDefibrillator
     - id: CMDefibrillator
     - id: CMAdvFirstAidKitFilled
     - id: CMRollerBedSpawnFolded
+    - id: CMHealthAnalyzer
 
 - type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFreelancerStandard
-  suffix: Filled, Freelancer
+  suffix: Filled, Freelancer Standard
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMREFreelance
+    - id: CMCrowbar
 
 - type: entity
   parent: RMCSatchelLightpack
   id: RMCSatchelLightpackFreelancerLeader
-  suffix: Filled, Freelancer
+  suffix: Filled, Freelancer Leader
   components:
   - type: StorageFill
     contents:
-    - id: CMMRE
+    - id: RMCMREFreelance
     - id: RMCRangefinder
     - id: RMCExplosivePlastic
     - id: RMCExplosivePlastic
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackEliteMercenary
+  suffix: Filled, Elite Mercenary
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+    - id: CMFirstAidKitFilled
+    - id: RMCPacketGrenadeSmokeFilled
+    - id: CMPacketGrenadeFragFilled
+    # RMC14 TODO: Attachment box
+
+- type: entity
+  parent: RMCSatchelLightpack
+  id: RMCSatchelLightpackEliteMercenaryLeader
+  suffix: Filled, Elite Mercenary Leader
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+    - id: CMFirstAidKitFilled
+    - id: RMCPacketGrenadeSmokeFilled
+    - id: CMPacketGrenadeFragFilled
+    - id: RMCMotionDetector
+    - id: RMCRangefinder
+    # RMC14 TODO: Attachment box, SPP Phosphorous packet, hacked merc motion detector
+
 
 - type: entity
   parent: RMCSatchelLightpack
@@ -884,7 +929,7 @@
       contents:
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
@@ -963,6 +1008,21 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderMercenaryEngineer
+  suffix: Filled, Mercenary Engineer
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCExplosivePlastic
+    - id: CMSheetMetal50
+    - id: CMSheetMetal50
+    - id: CMSheetPlasteel50
+    - id: RMCSentryMini
+    - id: RMCSentryMini
+    - id: CMFirstAidKitFilled # TODO RMC14: attachment box
 
 - type: entity
   parent: CMSatchel

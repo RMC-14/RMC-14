@@ -20,3 +20,6 @@ rmc-ghost-name-freelancer-hostile-leader = Mercenary Leader (Hostile)
 rmc-ghost-name-freelancer-friendly-leader = Mercenary Leader (Friendly)
 rmc-job-name-freelancer-leader = Leader
 rmc-job-prefix-freelancer-leader = SL
+
+rmc-job-name-freelancer-engineer = Engineer
+rmc-job-prefix-freelancer-engineer = ENG

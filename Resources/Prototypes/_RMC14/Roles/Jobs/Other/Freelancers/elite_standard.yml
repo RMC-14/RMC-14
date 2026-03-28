@@ -1,0 +1,70 @@
+# Elite Mercenary Miner
+- type: job
+  parent: CMJobBase
+  id: CMEliteMercenary
+  name: rmc-job-name-freelancer-standard
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: CMEliteMercenary
+  ranks:
+    RMCRankFLEliteFreelancer: []
+  startingGear: RMCGearEliteMercenary
+  icon: RMCJobIconEliteMercenary
+  joinNotifyCrew: false
+  accessGroups: # TODO RMC14: FACTION_MERCENARY
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Elite Mercenary (Standard)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetEliteMercenary
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      preset: RMCSkillPresetEliteMercenary
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-standard
+  hidden: true
+
+- type: playTimeTracker
+  id: CMEliteMercenary
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEliteMercenary
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: emerc_rfn
+
+- type: startingGear
+  id: RMCGearEliteMercenary
+  equipment:
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetMercenaryMiner
+    jumpsuit: RMCJumpsuitMercenaryMiner
+    outerClothing: RMCArmorMercenaryMiner
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskCoifPMC
+    id: RMCIDCardFreelancer
+    eyes: CMGlassesM42ScoutSight
+    ears: RMCHeadsetDistressDukes
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledC4SPP
+    back: RMCSatchelLightpackEliteMercenary
+
+- type: entity
+  id: RMCPresetEliteMercenary
+  name: elite mercenary preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCM63APBeltFilled, RMCWeaponSMGM63B2 ]
+    - [ RMCBeltMarineMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCWeaponRifleM54C2, RMCM54CAPBeltFilled ]
+    - [ WeaponShotgunM890, RMCM276ShotgunShellLoadingRigFill ]
+    - [ WeaponShotgunCustomBuilt, RMCM276ShotgunShellLoadingRigFill ]
+    - [ RMCWeaponShotgunType23, RMCM276ShotgunShellLoadingRigFillFreelancer]

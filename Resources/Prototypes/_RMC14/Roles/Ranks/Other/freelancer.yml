@@ -2,38 +2,46 @@
   id: RMCRankFLFreelancer
   name: Mercenary
   prefix: Merc.
+  paygrade: FL-S
 
 - type: rank
   id: RMCRankFLMedic
   name: Medic
   prefix: Med.
+  paygrade: FL-M
 
 - type: rank
   id: RMCRankFLLeader
   name: Leader
   prefix: Warlord
+  paygrade: FL-WL
 
 - type: rank
   id: RMCRankFLEliteFreelancer
   name: Elite
   prefix: Merc.
+  paygrade: EFL-S
 
 - type: rank
   id: RMCRankFLEliteHeavy
   name: Elite Heavy
   prefix: Hvy.
+  paygrade: EFL-H
 
 - type: rank
   id: RMCRankFLEliteEngineer
   name: Elite Engineer
   prefix: Eng.
+  paygrade: EFL-E
 
 - type: rank
   id: RMCRankFLEliteMedic
   name: Elite Medic
   prefix: Med.
+  paygrade: EFL-M
 
 - type: rank
   id: RMCRankFLEliteLeader
   name: Elite Leader
   prefix: Warlord
+  paygrade: EFL-TL

@@ -1,0 +1,67 @@
+# Elite Mercenary Medic
+- type: job
+  parent: CMJobBase
+  id: CMEliteMercenaryMedic
+  name: rmc-job-name-freelancer-medic
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: CMEliteMercenaryMedic
+  ranks:
+    RMCRankFLEliteMedic: []
+  startingGear: RMCGearEliteMercenaryMedic
+  icon: RMCJobIconEliteMercenaryMedic
+  joinNotifyCrew: false
+  accessGroups: # TODO RMC14: FACTION_MERCENARY
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Elite Mercenary (Medic)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetEliteMercenaryMedic
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      preset: RMCSkillPresetEliteMercenaryMedic
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-medic
+  hidden: true
+
+- type: playTimeTracker
+  id: CMEliteMercenaryMedic
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEliteMercenaryMedic
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: emerc_med
+
+- type: startingGear
+  id: RMCGearEliteMercenaryMedic
+  equipment:
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetMercenarySupport
+    jumpsuit: RMCJumpsuitMercenaryMedic
+    outerClothing: RMCArmorMercenaryEngineer
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskCoifPMC
+    id: RMCIDCardFreelancer
+    eyes: CMGlassesM42ScoutSight
+    ears: RMCHeadsetDistressDukes
+    belt: RMCBeltMedicBagSPPFilled
+    pocket2: RMCPouchMedkitFillAdvanced
+    back: RMCSatchelLightpackFreelancerMedic
+
+- type: entity
+  id: RMCPresetEliteMercenaryMedic
+  name: elite mercenary medic preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # no shotguns
+    - [ RMCPouchMagazineLargeM63AP, RMCWeaponSMGM63B2 ]
+    - [ RMCPouchMagazineLargeM54CMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCPouchMagazineLargeM54CAP, RMCWeaponRifleM54C2 ]

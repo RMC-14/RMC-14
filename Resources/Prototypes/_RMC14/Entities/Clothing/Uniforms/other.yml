@@ -75,8 +75,18 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Dutch/bandolier.rsi
 
 # Mercenaries
+
 - type: entity
+  abstract: true
   parent: RMCMarineUniformBase
+  id: RMCJumpsuitMercenaryBase
+  components:
+  - type: Tag
+    tags:
+    - RMCUniformPMC
+
+- type: entity
+  parent: RMCJumpsuitMercenaryBase
   id: RMCJumpsuitMercenaryHeavy
   name: mercenary fatigues
   description: A thick, beige suit with a red armband. There is an unknown symbol emblazed on the suit.
@@ -87,7 +97,7 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/heavy.rsi
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCJumpsuitMercenaryBase
   id: RMCJumpsuitMercenaryMiner
   name: mercenary miner fatigues
   description: A beige suit with a red armband. It looks a little thin, like it wasn't designed for protection. There is an unknown symbol emblazed on the suit.
@@ -98,10 +108,11 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/miner.rsi
 
 - type: entity
-  parent: RMCMarineUniformBase
+  parent: RMCJumpsuitMercenaryBase
   id: RMCJumpsuitMercenaryEngineer
   name: mercenary engineer fatigues
   description: A blue suit with yellow accents, used by engineers. There is an unknown symbol emblazed on the suit.
+  suffix: PMC Webbing
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
@@ -109,6 +120,22 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/Mercenary/engi.rsi
   - type: WebbingClothing
     startingWebbing: RMCWebbingPMCEngineer
+
+- type: entity
+  parent: RMCJumpsuitMercenaryEngineer
+  id: RMCJumpsuitMercenaryEngineerInjectorFill
+  suffix: Injector Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingEFLEngineer
+
+- type: entity
+  parent: RMCJumpsuitMercenaryEngineer
+  id: RMCJumpsuitMercenaryMedic
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
 
 # Other factions
 
@@ -143,6 +170,17 @@
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
   - type: Clothing
     sprite: _RMC14/Objects/Clothing/Uniforms/freelancer.rsi
+  - type: UniformAccessoryHolder
+    startingAccessories:
+    - RMCPatchFreelancer
+
+- type: entity
+  parent: RMCJumpsuitFreelancer
+  id: RMCJumpsuitFreelancerMedic
+  suffix: Surgical Webbing
+  components:
+  - type: WebbingClothing
+    startingWebbing: CMWebbingSurgicalGreen
 
 # "Civilian"
 - type: entity

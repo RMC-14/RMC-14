@@ -1,0 +1,67 @@
+# Elite Mercenary Engineer
+- type: job
+  parent: CMJobBase
+  id: CMEliteMercenaryEngineer
+  name: rmc-job-name-freelancer-engineer
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: CMEliteMercenaryEngineer
+  ranks:
+    RMCRankFLEliteEngineer: []
+  startingGear: RMCGearEliteMercenaryEngineer
+  icon: RMCJobIconEliteMercenaryEngineer
+  joinNotifyCrew: false
+  accessGroups: # TODO RMC14: FACTION_MERCENARY
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Elite Mercenary (Engineer)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetEliteMercenaryEngineer
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      preset: RMCSkillPresetEliteMercenary
+    - type: SquadArmorWearer
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-engineer
+  hidden: true
+
+- type: playTimeTracker
+  id: CMEliteMercenaryEngineer
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEliteMercenaryEngineer
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: emerc_engi
+
+- type: startingGear
+  id: RMCGearEliteMercenaryEngineer
+  equipment:
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetMercenaryEngineer
+    jumpsuit: RMCJumpsuitMercenaryEngineerInjectorFill
+    outerClothing: RMCArmorMercenaryEngineer
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskCoifPMC
+    id: RMCIDCardFreelancer
+    eyes: CMGlassesM42ScoutSight
+    ears: RMCHeadsetDistressDukes
+    belt: RMCMotionDetector # TODO RMC14: Hacked freelance MD
+    pocket1: RMCPouchToolsSocMarineRaiderFill
+    back: RMCSatchelLightpackWelderMercenaryEngineer
+
+- type: entity
+  id: RMCPresetEliteMercenaryEngineer
+  name: elite mercenary engineer preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # only shotguns
+    - [ WeaponShotgunM890, RMCPouchShotgunLargeMercenary ]
+    - [ WeaponShotgunCustomBuilt, RMCPouchShotgunLargeMercenary ]
+    - [ RMCWeaponShotgunType23, RMCPouchShotgunLargeMercenaryHeavy ]

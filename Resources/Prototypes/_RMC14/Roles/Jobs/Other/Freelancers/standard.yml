@@ -13,20 +13,17 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: Freelancer Conscript
+  spawnMenuRoleName: Freelancer (Standard)
   special:
   - !type:AddComponentSpecial
     components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetFreelancerStandard
     - type: NpcFactionMember
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillFireman: 1
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 2
-        RMCSkillFirearms: 1
+      preset: RMCSkillPresetFreelancerRifleman
     - type: SquadArmorWearer
     - type: JobPrefix
       prefix: rmc-job-prefix-freelancer-standard
@@ -95,17 +92,14 @@
 - type: startingGear
   id: RMCGearFreelancerStandard
   equipment:
-    back: RMCSatchelLightpackFreelancerStandard
-    belt: RMCMAR40BeltFilled
-    suitstorage: WeaponRifleMAR40
-    gloves: RMCHandsVeteranPMC
+    gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitFreelancer
     outerClothing: CMArmorFreelancer
     shoes: RMCBootsSPPFilled
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukes
     pocket1: RMCPouchFirstAidERTFill
-    pocket2: RMCPouchExplosiveFilledHEDP
+    back: RMCSatchelLightpackFreelancerStandard
 
 - type: playTimeTracker
   id: RMCJobFreelancerStandard
@@ -116,3 +110,33 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: free_rfn
+
+- type: entity # trying to do precise randomization via presets would result in this file being 500 lines long, but it's close enough. 12.5% for machinegunner and 18% for shotgunner and 68% for rifleman which should be within +-5% of parity percentage
+  id: RMCPresetFreelancerStandard
+  name: freelancer preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits:
+    - [ RMCCE2BeltFilled, RMCWeaponRifleM54CE2, CMMagazineRifleM54CE2HT, CMMagazineRifleM54CE2HT, RMCPouchExplosiveFilledPlasticExplosives ]
+    - [ RMCCE2BeltFilled, RMCWeaponRifleM54CE2, CMMagazineRifleM54CE2HT, CMMagazineRifleM54CE2HT, RMCPouchExplosiveFilledPlasticExplosives ]
+    - [ RMCWeaponShotgunType23, RMCPouchExplosiveFilledPlasticExplosives, RMCM276ShotgunShellLoadingRigFillFreelancer, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, RMCGrenadeIED, RMCGrenadeIED, CMGrenadeSmoke ] # TODO RMC14: Incend IED, /obj/item/storage/firstaid/regular/response
+    - [ RMCWeaponShotgunType23, RMCPouchExplosiveFilledPlasticExplosives, RMCM276ShotgunShellLoadingRigFillFreelancer, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, RMCGrenadeIED, RMCGrenadeIED, CMGrenadeSmoke ]
+    - [ RMCWeaponShotgunType23, RMCPouchExplosiveFilledPlasticExplosives, RMCM276ShotgunShellLoadingRigFillFreelancer, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, CMGrenadeFragOld, RMCGrenadeIED, RMCGrenadeIED, CMGrenadeSmoke ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCSlugBeltFilled, WeaponShotgunCustomBuilt ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, CMBeltMarineBuckshot, WeaponShotgunM357 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCIncendiarySlugBeltFilled, RMCWeaponShotgunHG3712 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, CMBeltMarineBuckshot, WeaponShotgunM890]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCMAR40BeltFilled, WeaponRifleMAR40 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCMAR40BeltFilled, RMCWeaponRifleMAR30 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCMAR50BeltFilled, RMCWeaponMar50LMG ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCBeltMarineMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCFP9000BeltFilled, RMCWeaponSMGFP9000 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCM17BeltFilled, RMCWeaponRifleM16 ]
+    - [ RMCPouchExplosiveFilledC4SPP, CMGrenadeFragOld, CMGrenadeFragOld, RMCType64BeltFilled, RMCWeaponSMGType64 ]
+    primaryWeapons: # no easy way to code this without adding 500 more lines to this file
+    - [ RMCHeadCapFreelancer ]
+    - [ RMCHeadBeanie ]
+    - [ CMHeadBandRed ]
+    - [ CMHeadBandTan ]
+    - [ RMCArmorHelmetSkullcap ]

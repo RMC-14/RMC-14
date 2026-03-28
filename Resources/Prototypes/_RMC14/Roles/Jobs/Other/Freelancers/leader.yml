@@ -13,7 +13,7 @@
   accessGroups:
   - Colony
   - RMCWeYa
-  spawnMenuRoleName: Freelancer Leader
+  spawnMenuRoleName: Freelancer (Leader)
   special:
   - !type:AddComponentSpecial
     components:
@@ -21,18 +21,7 @@
       factions:
       - WeYa
     - type: Skills
-      skills:
-        RMCSkillCqc: 1
-        RMCSkillMedical: 2
-        RMCSkillFirearms: 1
-        RMCSkillFireman: 2
-        RMCSkillConstruction: 2
-        RMCSkillEngineer: 2
-        RMCSkillEndurance: 2
-        RMCSkillJtac: 3
-        RMCSkillLeadership: 2
-        RMCSkillOverwatch: 1
-        RMCSkillPolice: 1 # RMC14 disallow use of flashbangs
+      preset: RMCSkillPresetFreelancerLeader
       # TODO RMC14 add English, russian, Chinese and Japanese languages
     - type: MarineOrders
     - type: SquadArmorWearer
@@ -112,8 +101,8 @@
   equipment:
     head: RMCHeadBeretFreelancer
     eyes: RMCGlassesMedicalHUDGlasses
-    belt: RMCMAR50BeltFilled
-    suitstorage: RMCWeaponMar50LMG
+    belt: RMCBeltMarineMK1
+    suitstorage: RMCWeaponRifleM54CMK1
     back: RMCSatchelLightpackFreelancerLeader
     gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitFreelancer
@@ -122,7 +111,7 @@
     id: RMCIDCardFreelancer
     ears: RMCHeadsetDistressDukesLeader
     pocket1: RMCPouchFirstAidERTFill
-    pocket2: RMCPouchFlareFilled
+    pocket2: RMCPouchExplosiveFilledPlasticExplosives
 
 - type: playTimeTracker
   id: RMCJobFreelancerLeader

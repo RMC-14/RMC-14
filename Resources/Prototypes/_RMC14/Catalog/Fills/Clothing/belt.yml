@@ -59,6 +59,35 @@
       amount: 1
 
 - type: entity
+  parent: CMBeltMedical
+  id: CMBeltMedicalFilledFreelancer
+  suffix: Filled, Freelancer
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMPillCanisterBicaridine
+      amount: 1
+    - id: CMPillCanisterDexalin
+      amount: 1
+    - id: CMPillCanisterDylovene
+      amount: 1
+    - id: CMPillCanisterKelotane
+      amount: 1
+    - id: CMPillCanisterInaprovaline
+      amount: 1
+    # TODO RMC14 tramadol and perixadon pills, splint
+    - id: CMBurnKit10
+      amount: 1
+    - id: CMTraumaKit10
+      amount: 1
+    - id: CMSynthGraft
+      amount: 1
+    - id: CMSurgicalLine
+      amount: 1
+    - id: CMHealthAnalyzer
+      amount: 1
+
+- type: entity
   parent: CMBeltMedicalFilled
   id: RMCBeltMedicalDefibAnalyzerFilled
   suffix: Filled, Better

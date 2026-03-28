@@ -1,0 +1,76 @@
+# Elite Mercenary Leader
+- type: job
+  parent: CMJobBase
+  id: CMEliteMercenaryLeader
+  name: rmc-job-name-freelancer-leader
+  description: rmc-ghost-role-information-freelancer-friendly-description
+  playTimeTracker: CMEliteMercenary
+  ranks:
+    RMCRankFLEliteLeader: []
+  startingGear: RMCGearEliteMercenaryLeader
+  icon: RMCJobIconEliteMercenaryLeader
+  joinNotifyCrew: false
+  accessGroups: # TODO RMC14: FACTION_MERCENARY
+  - Colony
+  - RMCWeYa
+  spawnMenuRoleName: Elite Mercenary (Leader)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: EquipSurvivorPreset
+      preset: RMCPresetEliteMercenaryLeader
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+    - type: Skills
+      preset: RMCSkillPresetEliteMercenaryLeader
+    - type: SquadArmorWearer
+      leader: true
+    - type: JobPrefix
+      prefix: rmc-job-prefix-freelancer-leader
+    - type: MarineOrders
+    - type: RMCPointing
+  hidden: true
+
+- type: playTimeTracker
+  id: CMEliteMercenaryLeader
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconEliteMercenaryLeader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: emerc_lead
+
+- type: startingGear
+  id: RMCGearEliteMercenaryLeader
+  equipment:
+    gloves: RMCHandsVeteran
+    head: RMCArmorHelmetMercenary
+    jumpsuit: RMCJumpsuitMercenaryHeavy
+    outerClothing: RMCArmorMercenary
+    shoes: RMCBootsPMCFilled
+    mask: RMCMaskCoifPMC
+    id: RMCIDCardFreelancer
+    eyes: CMGlassesM42ScoutSight # TODO RMC14: Mark 4 Battle Medic sight
+    ears: RMCHeadsetDistressDukes
+    pocket1: RMCPouchAutoinjectorFill
+    pocket2: RMCPouchExplosiveFilledPlasticExplosives
+    back: RMCSatchelLightpackEliteMercenaryLeader
+
+- type: entity
+  id: RMCPresetEliteMercenaryLeader
+  name: elite mercenary preset
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SurvivorPreset
+    randomOutfits: # lower change for shotgun
+    - [ RMCM63APBeltFilled, RMCWeaponSMGM63B2 ]
+    - [ RMCM63APBeltFilled, RMCWeaponSMGM63B2 ]
+    - [ RMCBeltMarineMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCBeltMarineMK1, RMCWeaponRifleM54CMK1 ]
+    - [ RMCWeaponRifleM54C2, RMCM54CAPBeltFilled ]
+    - [ RMCWeaponRifleM54C2, RMCM54CAPBeltFilled ]
+    - [ WeaponShotgunM890, RMCM276ShotgunShellLoadingRigFill ]
+    - [ WeaponShotgunCustomBuilt, RMCM276ShotgunShellLoadingRigFill ]
+    - [ RMCWeaponShotgunType23, RMCM276ShotgunShellLoadingRigFillFreelancer]

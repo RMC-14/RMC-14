@@ -293,7 +293,7 @@
     - type: StoreAfterFailedInteract
     - type: RMCStorageEjectHand
       state: Open
-      
+
 - type: entity
   parent: CMWebbing
   id: RMCParaWebbing
@@ -305,7 +305,7 @@
       sprite: _RMC14/Objects/Clothing/Webbing/para_webbing.rsi
       state: webbing
     - type: Appearance
-      
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingL88
@@ -317,7 +317,7 @@
         - id: RMCTacticalPrybar
         - id: RMCMagazineRifleL88
         - id: RMCMagazineRifleL88
-        
+
 - type: entity
   parent: RMCParaWebbing
   id: RMCParaWebbingPDW90AP
@@ -897,6 +897,19 @@
     contents:
     - id: CMShellShotgunBuckshot
       amount: 5
+
+- type: entity
+  parent: CMWebbingBlack
+  id: RMCWebbingEFLEngineer
+  suffix: Elite Freelancer Engineer, Filled
+  components:
+  - type: StorageFill
+    contents: # RMC14 TOOD: Tramadol
+    - id: CMEmergencyAutoInjector
+    - id: CMBicaridineAutoInjector
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    - id: CMKelotaneAutoInjector
 
 - type: entity
   parent: RMCWebbingDropPouch

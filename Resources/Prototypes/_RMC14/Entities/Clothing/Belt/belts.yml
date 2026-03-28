@@ -179,6 +179,22 @@
       amount: 3
 
 - type: entity
+  parent: RMCM276ShotgunShellLoadingRig
+  id: RMCM276ShotgunShellLoadingRigFillFreelancer
+  suffix: Filled, Freelancer Shotgunner
+  components: # TODO: randomization
+  - type: StorageFill
+    contents:
+    - id: RMCShellShotgunIncendiaryHeavyBuckshot
+      amount: 3
+    - id: RMCShellShotgunHeavyBuckshot
+      amount: 3
+    - id: RMCShellShotgunHeavyFlechette
+      amount: 3
+    - id: RMCShellShotgunHeavySlugs
+      amount: 3
+
+- type: entity
   parent: CMBeltBaseStorage
   id: CMBeltUtility
   name: M276 pattern toolbelt rig
@@ -1040,7 +1056,7 @@
     - id: RMCSpeedLoaderZHNK72
       amount: 6
     - id: RMCWeaponRevolverZHNK72
-          
+
 - type: entity
   parent: ClothingBeltBase # Can't have storage slots on this one
   id: RMCBeltHolsterSMG
@@ -1593,6 +1609,76 @@
 
 - type: entity
   parent: CMBeltMarine
+  id: RMCSlugBeltFilled
+  suffix: Filled, Slugs
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunSlugs
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCIncendiarySlugBeltFilled
+  suffix: Filled, Incendiary Slugs
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMShellShotgunIncendiary
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCFP9000BeltFilled
+  suffix: Filled, FP9000
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGFP9000
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCType64BeltFilled
+  suffix: Filled, Type 64
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMagazineSMGType64
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCCE2BeltFilled
+  suffix: Filled, M54CE2
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CE2
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM54CAPBeltFilled
+  suffix: Filled, M54C AP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54CAP
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
+  id: RMCM63APBeltFilled
+  suffix: Filled, M63 AP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63AP
+      amount: 5
+
+- type: entity
+  parent: CMBeltMarine
   id: RMCType71BeltFilled
   suffix: Filled
   components:
@@ -1934,7 +2020,7 @@
   - type: Tag
     tags:
     - RMCMachineGunnerRig
-      
+
 # RCM/Paramarines Belts
 
 - type: entity
@@ -1989,7 +2075,7 @@
           - Defibrillator
           - Pill
           - RMCLighter
-            
+
 - type: entity
   parent: RMCMedicalL75RCM
   id: RMCMedicalL75RCMFillPara
@@ -2005,7 +2091,7 @@
         - id: CMBurnKit10
         # - id: 5 splints
         - id: CMHealthAnalyzer
-          
+
 - type: entity
   parent: CMBeltMarine
   id: RMCBeltRCM
@@ -2018,8 +2104,8 @@
     - type: Clothing
       sprite: _RMC14/Objects/Clothing/Belt/rcm_ammo.rsi
     - type: ItemCamouflage
-      camouflageVariations: {}         
-      
+      camouflageVariations: {}
+
 - type: entity
   parent: CMBeltBaseStorage
   id: RMCBeltUtilityGeneralRCM
@@ -2045,7 +2131,7 @@
   - type: Tag
     tags:
     - RMCG8Pouch
-      
+
 - type: entity
   parent: RMCBeltHolsterPistol
   id: RMCBeltHolsterPistolRCM
@@ -2138,7 +2224,7 @@
         l54_fill:
           whitelist:
             tags:
-              - RMCWeaponPistolL54   
+              - RMCWeaponPistolL54
 
 - type: entity
   parent: RMCBeltHolsterPistolPara
@@ -2314,7 +2400,7 @@
       amount: 1
     - id: RMCMagazinePistolL14
       amount: 6
-      
+
 - type: entity
   parent: RMCBeltUtilityGeneralRCM
   id: RMCBeltUtilityGeneralRCMPVE
