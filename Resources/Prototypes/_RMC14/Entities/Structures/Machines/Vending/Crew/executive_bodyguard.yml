@@ -4,7 +4,7 @@
 - type: entity
   parent: ColMarTechWardrobeCorp
   id: ColMarTechWardrobeEB
-  name: Executive Bodyguard Clothes Rack
+  name: executive bodyguard clothes rack
   description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
   suffix: Exec. Bodyguard
   components:
