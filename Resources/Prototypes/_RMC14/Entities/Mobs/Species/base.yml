@@ -80,6 +80,7 @@
     - DoorBumpOpener
   - type: Marine
   - type: RMCSuitLight
+  - type: RMCLastBodyScanResult
   - type: HolocardState
   - type: Hunger
     baseDecayRate: 0.025
