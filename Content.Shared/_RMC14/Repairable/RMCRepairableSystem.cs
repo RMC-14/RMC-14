@@ -1,7 +1,6 @@
 ﻿using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Tools;
-using Content.Shared._RMC14.Vehicle;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -54,10 +53,6 @@ public sealed class RMCRepairableSystem : EntitySystem
     private void OnRepairableInteractUsing(Entity<RMCRepairableComponent> repairable, ref InteractUsingEvent args)
     {
         if (args.Handled)
-            return;
-
-        // Vehicle frames and hardpoints use RMCHardpointIntegrity repair, not generic damageable repair.
-        if (HasComp<RMCHardpointIntegrityComponent>(repairable))
             return;
 
         var used = args.Used;
