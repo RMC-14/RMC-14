@@ -214,7 +214,7 @@
         - id: RMCBoxZiptie
           amount: 4
     # ////////////////////////////////////
-    # PPO
+    # PPS / PPC
     # ////////////////////////////////////
       - name: Headgear
         ranks:
