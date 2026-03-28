@@ -279,7 +279,7 @@
   parent: CMArmorM4PMCLight
   id: RMCArmorM4EB
   name: M4 pattern executive bodyguard armor
-  description: A modification of the standard AEGIS M3 armor. This variant is worn by Executive Bodyguards protecting Weston-Yamada employees, as denoted by the blue detailing. Has some armor plating removed for extra mobility.
+  description: A modification of the standard AEGIS M3 armor. This variant is worn by Executive Bodyguards protecting Weston-Yamada employees, as denoted by the blue detailing. It has some armor plating removed for extra mobility.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/OuterClothing/PMC/ppo_armor.rsi
