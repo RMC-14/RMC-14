@@ -56,6 +56,52 @@
       item_2:
       - RMCWeaponFlamerPVE
 
+# LPO80 Incinerator
+
+- type: entity
+  parent: RMCGunRackM34IncineratorEmpty
+  id: RMCGunRackLPO80IncineratorEmpty
+  name: LPO80 Incinerator rack
+  suffix: LPO80 Incinerator, Empty
+  description: Some off-branded gun rack. This one has been modified slightly to fit 2 LPO80 Incinerator Units, while still meeting the SPP standards for firearm storage.
+  components:
+  - type: ItemSlots
+    slots:
+      item_1:
+        name: LPO80 Incinerator
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorLPO80
+      item_2:
+        name: LPO80 Incinerator
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorLPO80
+  - type: ItemMapper
+    mapLayers:
+      fill_1:
+        minCount: 1
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorLPO80
+      fill_2:
+        minCount: 2
+        whitelist:
+          tags:
+          - RMCWeaponIncineratorLPO80
+
+- type: entity
+  parent: RMCGunRackLPO80IncineratorEmpty
+  id: RMCGunRackLPO80IncineratorFilled
+  suffix: LPO80 Incinerator, Filled
+  components:
+  - type: ContainerFill
+    containers:
+      item_1:
+      - RMCWeaponFlamerSPPPVE
+      item_2:
+      - RMCWeaponFlamerSPPPVE
+
 # MAR 50 Wall-Mounted Rack
 
 - type: entity
