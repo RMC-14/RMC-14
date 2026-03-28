@@ -778,26 +778,21 @@ public sealed class RMCHardpointSystem : EntitySystem
         if (!TryComp(ent.Owner, out ItemSlotsComponent? itemSlots))
             return;
 
-        var intactHardpoints = new List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity, float Weight)>();
-        var visited = new HashSet<EntityUid>();
-        CollectIntactHardpoints(ent.Owner, ent.Comp, itemSlots, intactHardpoints, visited);
+        var topLevelHardpoints = new List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity)>();
+        CollectIntactTopLevelHardpoints(ent.Owner, ent.Comp, itemSlots, topLevelHardpoints);
 
-        var anyIntact = intactHardpoints.Count > 0;
+        var anyTopLevelIntact = topLevelHardpoints.Count > 0;
 
-        if (anyIntact)
+        if (anyTopLevelIntact)
         {
-            var hardpointFraction = ent.Comp.HardpointDamageMultiplier / intactHardpoints.Count;
-            foreach (var (item, integrity, weight) in intactHardpoints)
+            var visited = new HashSet<EntityUid>();
+            foreach (var (item, integrity) in topLevelHardpoints)
             {
-                if (weight <= 0f)
-                    continue;
-
-                var hardpointDamage = ScaleDamage(args.Damage, hardpointFraction * weight);
-                ApplyDamageToHardpoint(ent.Owner, item, integrity, hardpointDamage);
+                ApplyDamageToHardpointTree(ent.Owner, item, integrity, args.Damage, visited);
             }
         }
 
-        var hullFraction = anyIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
+        var hullFraction = anyTopLevelIntact ? ent.Comp.FrameDamageFractionWhileIntact : 1f;
         if (TryComp(ent.Owner, out RMCHardpointIntegrityComponent? frameIntegrity))
         {
             var frameDamage = ScaleDamage(args.Damage, hullFraction);
@@ -809,12 +804,11 @@ public sealed class RMCHardpointSystem : EntitySystem
         args.Damage = ScaleDamage(args.Damage, hullFraction);
     }
 
-    private void CollectIntactHardpoints(
+    private void CollectIntactTopLevelHardpoints(
         EntityUid owner,
         RMCHardpointSlotsComponent slots,
         ItemSlotsComponent itemSlots,
-        List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity, float Weight)> intactHardpoints,
-        HashSet<EntityUid> visited)
+        List<(EntityUid Item, RMCHardpointIntegrityComponent Integrity)> intactHardpoints)
     {
         foreach (var slot in slots.Slots)
         {
@@ -824,26 +818,51 @@ public sealed class RMCHardpointSystem : EntitySystem
             if (!_itemSlots.TryGetSlot(owner, slot.Id, out var itemSlot, itemSlots) || !itemSlot.HasItem)
                 continue;
 
-            if (itemSlot.Item is not { } item || !visited.Add(item))
+            if (itemSlot.Item is not { } item)
                 continue;
 
             if (TryComp(item, out RMCHardpointIntegrityComponent? integrity) && integrity.Integrity > 0f)
-                intactHardpoints.Add((item, integrity, GetHardpointDamageWeight(item)));
-
-            if (TryComp(item, out RMCHardpointSlotsComponent? childSlots) &&
-                TryComp(item, out ItemSlotsComponent? childItemSlots))
-            {
-                CollectIntactHardpoints(item, childSlots, childItemSlots, intactHardpoints, visited);
-            }
+                intactHardpoints.Add((item, integrity));
         }
     }
 
-    private float GetHardpointDamageWeight(EntityUid hardpoint)
+    private void ApplyDamageToHardpointTree(
+        EntityUid vehicle,
+        EntityUid hardpoint,
+        RMCHardpointIntegrityComponent integrity,
+        DamageSpecifier damage,
+        HashSet<EntityUid> visited)
     {
-        if (TryComp<RMCHardpointItemComponent>(hardpoint, out var hardpointItem))
-            return MathF.Max(hardpointItem.DamageMultiplier, 0f);
+        if (!visited.Add(hardpoint))
+            return;
 
-        return 1f;
+        ApplyDamageToHardpoint(vehicle, hardpoint, integrity, damage);
+
+        if (!TryComp(hardpoint, out RMCHardpointSlotsComponent? childSlots) ||
+            !TryComp(hardpoint, out ItemSlotsComponent? childItemSlots))
+        {
+            return;
+        }
+
+        foreach (var slot in childSlots.Slots)
+        {
+            if (string.IsNullOrWhiteSpace(slot.Id))
+                continue;
+
+            if (!_itemSlots.TryGetSlot(hardpoint, slot.Id, out var itemSlot, childItemSlots) ||
+                itemSlot.Item is not { } childHardpoint)
+            {
+                continue;
+            }
+
+            if (!TryComp(childHardpoint, out RMCHardpointIntegrityComponent? childIntegrity) ||
+                childIntegrity.Integrity <= 0f)
+            {
+                continue;
+            }
+
+            ApplyDamageToHardpointTree(vehicle, childHardpoint, childIntegrity, damage, visited);
+        }
     }
 
     private DamageSpecifier ScaleDamage(DamageSpecifier source, float fraction)
@@ -875,11 +894,16 @@ public sealed class RMCHardpointSystem : EntitySystem
         var modifierSets = new List<DamageModifierSet>();
         CollectHardpointDamageModifierSets(hardpoint, modifierSets);
 
-        if (modifierSets.Count == 0)
-            return total;
+        if (modifierSets.Count > 0)
+        {
+            var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage, modifierSets);
+            total = MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+        }
 
-        var modifiedDamage = DamageSpecifier.ApplyModifierSets(damage, modifierSets);
-        return MathF.Max(modifiedDamage.GetTotal().Float(), 0f);
+        if (TryComp<RMCHardpointItemComponent>(hardpoint, out var hardpointItem))
+            total *= MathF.Max(hardpointItem.DamageMultiplier, 0f);
+
+        return total;
     }
 
     private void CollectHardpointDamageModifierSets(EntityUid hardpoint, List<DamageModifierSet> modifierSets)

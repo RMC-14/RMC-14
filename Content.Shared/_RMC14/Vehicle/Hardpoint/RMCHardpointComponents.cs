@@ -46,9 +46,6 @@ public sealed partial class RMCHardpointSlotsComponent : Component
     public List<RMCHardpointSlot> Slots = new();
 
     [DataField]
-    public float HardpointDamageMultiplier = 0.9f;
-
-    [DataField]
     public float FrameDamageFractionWhileIntact = 0.1f;
 
     [NonSerialized]
