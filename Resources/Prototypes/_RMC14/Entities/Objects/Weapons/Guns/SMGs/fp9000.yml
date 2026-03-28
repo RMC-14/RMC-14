@@ -17,7 +17,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto
@@ -110,7 +110,7 @@
   - type: Gun
     shotsPerBurst: 3
     soundGunshot:
-      path: /Audio/_RMC14/Weapons/Guns/Gunshots/p90_shot.ogg
+      path: /Audio/_RMC14/Weapons/Guns/Gunshots/pdw90_shot.ogg
   - type: RMCSelectiveFire
     baseFireModes:
     - SemiAuto

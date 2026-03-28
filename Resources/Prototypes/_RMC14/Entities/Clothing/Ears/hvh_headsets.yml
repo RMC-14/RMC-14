@@ -55,3 +55,16 @@
       key_slots:
       - CMEncryptionKeyWEYAColony
       # TODO RMC14: /obj/item/device/encryptionkey/pmc/command
+
+- type: entity
+  parent: RMCHeadsetHvHWeYaPMC
+  id: RMCHeadsetHvHWeYaPMCCommando
+  name: We-Ya Commando headset
+  suffix: WeYa, PMC Commando, HvH
+  description: A special headset used by unidentified operatives.
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - CMEncryptionKeyWEYAColony
+      # TODO RMC14: /obj/item/device/encryptionkey/pmc
