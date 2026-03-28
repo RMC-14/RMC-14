@@ -12,6 +12,17 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._RMC14.Vehicle;
 
+[Serializable, NetSerializable]
+public enum RMCHardpointRepairCategory : byte
+{
+    Armor,
+    Turret,
+    Primary,
+    Secondary,
+    Support,
+    Wheel,
+}
+
 [RegisterComponent, NetworkedComponent]
 [Access(typeof(RMCHardpointSystem))]
 public sealed partial class RMCHardpointItemComponent : Component
@@ -32,6 +43,9 @@ public sealed partial class RMCHardpointItemComponent : Component
 
     [DataField]
     public float DamageMultiplier = 1f;
+
+    [DataField]
+    public RMCHardpointRepairCategory RepairCategory = RMCHardpointRepairCategory.Primary;
 }
 
 
@@ -112,15 +126,6 @@ public sealed partial class RMCHardpointIntegrityComponent : Component
 
     [DataField, AutoNetworkedField]
     public bool BypassEntryOnZero;
-
-    [DataField]
-    public float RepairTimePerIntegrity = 0.01f;
-
-    [DataField]
-    public float RepairTimeMin = 0.25f;
-
-    [DataField]
-    public float RepairTimeMax = 3f;
 
     [NonSerialized]
     public bool Repairing;

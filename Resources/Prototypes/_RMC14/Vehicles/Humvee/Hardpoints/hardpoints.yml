@@ -21,6 +21,7 @@
     vehicleFamily: Humvee
     slotType: Wheel
     damageMultiplier: 0.15
+    repairCategory: Wheel
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
@@ -38,6 +39,7 @@
     vehicleFamily: Humvee
     slotType: Turret
     damageMultiplier: 0.15
+    repairCategory: Turret
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
@@ -79,6 +81,7 @@
     vehicleFamily: Humvee
     slotType: Cannon
     damageMultiplier: 0.1
+    repairCategory: Primary
   - type: RMCHardpointIntegrity
     maxIntegrity: 125
   - type: VehicleTurretAttachment
@@ -153,6 +156,7 @@
     vehicleFamily: Humvee
     slotType: Launcher
     damageMultiplier: 0.0
+    repairCategory: Secondary
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurretAttachment
@@ -204,6 +208,7 @@
     vehicleFamily: Humvee
     slotType: FrontAttachment
     damageMultiplier: 0.075
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
@@ -222,6 +227,7 @@
     vehicleFamily: Humvee
     slotType: RoofAttachment
     damageMultiplier: 0.1
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleSpotlightModifier
@@ -242,6 +248,7 @@
     vehicleFamily: Humvee
     slotType: RoofAttachment
     damageMultiplier: 0.075
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual

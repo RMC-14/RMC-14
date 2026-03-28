@@ -21,6 +21,7 @@
     vehicleFamily: APC
     slotType: Wheel
     damageMultiplier: 0.15
+    repairCategory: Wheel
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
@@ -38,6 +39,7 @@
     vehicleFamily: APC
     slotType: Cannon
     damageMultiplier: 0.11
+    repairCategory: Primary
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurret
@@ -81,6 +83,7 @@
     vehicleFamily: APC
     slotType: Turret
     damageMultiplier: 0.2
+    repairCategory: Turret
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -129,6 +132,7 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual
@@ -147,6 +151,7 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.1
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -198,6 +203,7 @@
     vehicleFamily: APC
     slotType: SupportAttachment
     damageMultiplier: 0.075
+    repairCategory: Support
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: RMCHardpointVisual

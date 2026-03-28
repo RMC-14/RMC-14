@@ -136,10 +136,6 @@
       insertDelay: 1.5
   - type: RMCVehicleWheelSlots
     slotCount: 1
-  - type: RMCRepairable
-    delay: 8
-    heal: 150
-    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/humvee_interior.yml
@@ -172,8 +168,6 @@
     maxIntegrity: 1000
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
 
 - type: entity
   parent: RMCVehicleHumveeBase
@@ -188,8 +182,6 @@
     maxIntegrity: 1000
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_medical.rsi
     layers:
@@ -258,8 +250,6 @@
     maxIntegrity: 1000
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: Sprite
     sprite: _RMC14/Structures/Vehicles/humvee_transport.rsi
     layers:
@@ -328,8 +318,6 @@
     maxIntegrity: 800
     repairFuelCost: 12
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
   - type: RMCVehicleDeployable
     deployTime: 5
     undeployTime: 5

@@ -15,6 +15,7 @@
     slotType: Launcher
     compatibilityId: SPPVan
     damageMultiplier: 0.15
+    repairCategory: Secondary
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
@@ -57,6 +58,7 @@
     slotType: Cannon
     compatibilityId: SPPVan
     damageMultiplier: 0.0
+    repairCategory: Primary
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurret

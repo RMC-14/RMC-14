@@ -159,9 +159,6 @@
     maxIntegrity: 1000
     repairFuelCost: 15
     bypassEntryOnZero: true
-  - type: RMCRepairable
-    heal: 200
-    fuelUsed: 6
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/apc_transport_interior.yml

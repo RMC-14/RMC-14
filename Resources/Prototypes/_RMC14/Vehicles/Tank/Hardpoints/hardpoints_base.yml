@@ -22,6 +22,7 @@
     vehicleFamily: Tank
     slotType: Turret
     damageMultiplier: 0.05
+    repairCategory: Turret
   - type: RMCHardpointIntegrity
     maxIntegrity: 450
   - type: VehicleTurret
@@ -69,6 +70,7 @@
     vehicleFamily: Tank
     slotType: Treads
     damageMultiplier: 0.15
+    repairCategory: Wheel
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
   - type: RMCVehicleWheelItem
@@ -86,6 +88,7 @@
     vehicleFamily: Tank
     slotType: Treads
     damageMultiplier: 0.15
+    repairCategory: Wheel
   - type: RMCVehicleWheelItem
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
@@ -94,20 +97,3 @@
     - RMCVehicleArmorCaustic
   - type: RMCVehicleAccelerationModifierAttachment
     accelerationMultiplier: 0.9
-
-- type: entity
-  parent: RMCVehicleTankHardpointBase
-  id: RMCVehicleTankTires
-  name: tank tires
-  description: Reinforced tank tires.
-  components:
-  - type: Sprite
-    state: tires
-  - type: RMCHardpointItem
-    hardpointType: Wheel
-    vehicleFamily: Tank
-    slotType: Tires
-    damageMultiplier: 0.15
-  - type: RMCHardpointIntegrity
-    maxIntegrity: 100
-  - type: RMCVehicleWheelItem

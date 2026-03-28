@@ -115,12 +115,6 @@
     maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
-  - type: RMCRepairable
-    delay: 8
-    heal: 150
-    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/van_interior.yml
@@ -298,12 +292,6 @@
     maxIntegrity: 1000
     repairFuelCost: 10
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.03
-    repairTimeMax: 8
-  - type: RMCRepairable
-    delay: 8
-    heal: 150
-    fuelUsed: 5
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/box_van_interior.yml

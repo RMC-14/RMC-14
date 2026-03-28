@@ -22,6 +22,7 @@
     slotType: Wheel
     compatibilityId: SPPAPC
     damageMultiplier: 0.15
+    repairCategory: Wheel
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
@@ -41,6 +42,7 @@
     slotType: Turret
     compatibilityId: SPPAPC
     damageMultiplier: 0.2
+    repairCategory: Turret
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -89,6 +91,7 @@
     slotType: Cannon
     compatibilityId: SPPAPCTurret
     damageMultiplier: 0.2
+    repairCategory: Primary
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true

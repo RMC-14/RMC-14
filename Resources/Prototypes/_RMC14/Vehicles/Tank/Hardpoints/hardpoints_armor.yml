@@ -11,6 +11,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairCategory: Armor
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -32,6 +33,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairCategory: Armor
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -54,6 +56,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairCategory: Armor
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -75,6 +78,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairCategory: Armor
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -97,6 +101,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
+    repairCategory: Armor
   - type: RMCHardpointIntegrity
     maxIntegrity: 150
   - type: RMCHardpointVisual

@@ -33,6 +33,7 @@ using Robust.Shared.Prototypes;
 using Content.Shared.FixedPoint;
 using Content.Shared.Explosion.EntitySystems;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._RMC14.Marines.Skills;
 
 namespace Content.Shared._RMC14.Vehicle;
 
@@ -40,6 +41,16 @@ public sealed class RMCHardpointSystem : EntitySystem
 {
     private const float FrameWeldCapFraction = 0.75f;
     private const float FrameRepairEpsilon = 0.01f;
+    private const float RepairChunkFraction = 0.05f;
+    private const float RepairChunkMinimum = 0.01f;
+    private const float FrameRepairChunkSeconds = 2f;
+    private const float ArmorRepairRate = 0.007f;
+    private const float TurretRepairRate = 0.008f;
+    private const float PrimaryRepairRate = 0.01f;
+    private const float SecondaryRepairRate = 0.0125f;
+    private const float SupportRepairRate = 0.0125f;
+    private const float WheelRepairRate = 0.0165f;
+    private static readonly EntProtoId<SkillDefinitionComponent> EngineerSkill = "RMCSkillEngineer";
 
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
     [Dependency] private readonly VehicleSystem _vehicles = default!;
@@ -59,6 +70,7 @@ public sealed class RMCHardpointSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly SharedExplosionSystem _explosion = default!;
     [Dependency] private readonly RMCVehicleTopologySystem _topology = default!;
+    [Dependency] private readonly SkillsSystem _skills = default!;
 
     public override void Initialize()
     {
@@ -1162,22 +1174,16 @@ public sealed class RMCHardpointSystem : EntitySystem
             return;
         }
 
-        var missingIntegrity = ent.Comp.MaxIntegrity - ent.Comp.Integrity;
-        var weldTime = MathF.Max(
-            ent.Comp.RepairTimeMin,
-            MathF.Min(ent.Comp.RepairTimeMax, missingIntegrity * ent.Comp.RepairTimePerIntegrity)
-        );
-        var repairTime = usedWelder ? weldTime : ent.Comp.RepairTimeMin;
+        var repairAmount = GetRepairAmountForCurrentStep(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame);
+        if (repairAmount <= 0f)
+        {
+            args.Handled = true;
+            return;
+        }
+
+        var repairTime = GetRepairTimeForCurrentStep(ent.Owner, args.User, ent.Comp, repairAmount, isFrame);
 
         ent.Comp.Repairing = true;
-
-        if (used != null)
-        {
-            var toolEvent = new RMCToolUseEvent(args.User, TimeSpan.FromSeconds(repairTime));
-            RaiseLocalEvent(used, ref toolEvent);
-            if (toolEvent.Handled)
-                repairTime = (float) toolEvent.Delay.TotalSeconds;
-        }
 
         var doAfter = new DoAfterArgs(EntityManager, args.User, repairTime, new RMCHardpointRepairDoAfterEvent(), ent.Owner, ent.Owner, used)
         {
@@ -1218,20 +1224,11 @@ public sealed class RMCHardpointSystem : EntitySystem
                 return;
         }
 
-        var weldCap = ent.Comp.MaxIntegrity * FrameWeldCapFraction;
+        var repairAmount = GetRepairAmountForCurrentStep(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame);
+        if (repairAmount <= 0f)
+            return;
 
-        if (usedWelder)
-        {
-            var target = isFrame ? MathF.Min(weldCap, ent.Comp.MaxIntegrity) : ent.Comp.MaxIntegrity;
-            ent.Comp.Integrity = MathF.Max(ent.Comp.Integrity, target);
-        }
-        else if (usedWrench)
-        {
-            if (ent.Comp.Integrity < weldCap - FrameRepairEpsilon)
-                return;
-
-            ent.Comp.Integrity = ent.Comp.MaxIntegrity;
-        }
+        ent.Comp.Integrity = MathF.Min(ent.Comp.MaxIntegrity, ent.Comp.Integrity + repairAmount);
 
         Dirty(ent.Owner, ent.Comp);
         UpdateFrameDamageAppearance(ent.Owner, ent.Comp);
@@ -1256,6 +1253,98 @@ public sealed class RMCHardpointSystem : EntitySystem
             RefreshCanRun(vehicle);
 
         UpdateHardpointUi(vehicle);
+
+        if (ShouldRepeatRepair(ent.Owner, ent.Comp, usedWelder, usedWrench, isFrame))
+            args.Repeat = true;
+    }
+
+    private float GetRepairAmountForCurrentStep(
+        EntityUid uid,
+        RMCHardpointIntegrityComponent integrity,
+        bool usedWelder,
+        bool usedWrench,
+        bool isFrame)
+    {
+        if (integrity.MaxIntegrity <= 0f)
+            return 0f;
+
+        var chunkSize = MathF.Max(RepairChunkMinimum, integrity.MaxIntegrity * RepairChunkFraction);
+        var weldCap = integrity.MaxIntegrity * FrameWeldCapFraction;
+
+        if (usedWelder)
+        {
+            var target = isFrame ? MathF.Min(weldCap, integrity.MaxIntegrity) : integrity.MaxIntegrity;
+            return MathF.Max(0f, MathF.Min(chunkSize, target - integrity.Integrity));
+        }
+
+        if (usedWrench)
+            return MathF.Max(0f, MathF.Min(chunkSize, integrity.MaxIntegrity - integrity.Integrity));
+
+        return 0f;
+    }
+
+    private float GetRepairTimeForCurrentStep(
+        EntityUid uid,
+        EntityUid user,
+        RMCHardpointIntegrityComponent integrity,
+        float repairAmount,
+        bool isFrame)
+    {
+        if (integrity.MaxIntegrity <= 0f || repairAmount <= 0f)
+            return 0f;
+
+        var repairFraction = repairAmount / integrity.MaxIntegrity;
+        var skillMultiplier = _skills.GetSkillDelayMultiplier(user, EngineerSkill);
+
+        if (isFrame)
+            return FrameRepairChunkSeconds * (repairFraction / RepairChunkFraction) * skillMultiplier;
+
+        var repairRate = GetHardpointRepairRate(uid);
+        return (repairFraction / repairRate) * skillMultiplier;
+    }
+
+    private float GetHardpointRepairRate(EntityUid uid)
+    {
+        if (TryComp(uid, out RMCHardpointItemComponent? hardpoint))
+            return hardpoint.RepairCategory switch
+            {
+                RMCHardpointRepairCategory.Armor => ArmorRepairRate,
+                RMCHardpointRepairCategory.Turret => TurretRepairRate,
+                RMCHardpointRepairCategory.Primary => PrimaryRepairRate,
+                RMCHardpointRepairCategory.Secondary => SecondaryRepairRate,
+                RMCHardpointRepairCategory.Support => SupportRepairRate,
+                RMCHardpointRepairCategory.Wheel => WheelRepairRate,
+                _ => PrimaryRepairRate,
+            };
+
+        return PrimaryRepairRate;
+    }
+
+    private bool ShouldRepeatRepair(
+        EntityUid uid,
+        RMCHardpointIntegrityComponent integrity,
+        bool usedWelder,
+        bool usedWrench,
+        bool isFrame)
+    {
+        if (integrity.Integrity >= integrity.MaxIntegrity)
+            return false;
+
+        if (isFrame)
+        {
+            var weldCap = integrity.MaxIntegrity * FrameWeldCapFraction;
+
+            if (usedWelder)
+                return integrity.Integrity < weldCap - FrameRepairEpsilon;
+
+            if (usedWrench)
+                return integrity.Integrity >= weldCap - FrameRepairEpsilon &&
+                       integrity.Integrity < integrity.MaxIntegrity;
+
+            return false;
+        }
+
+        return usedWelder && integrity.Integrity > 0f && integrity.Integrity < integrity.MaxIntegrity;
     }
 
     private EntityUid? GetVehicleFromPart(EntityUid part)

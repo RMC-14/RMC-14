@@ -123,11 +123,6 @@
         whitelist:
           components:
           - RMCVehicleWheelItem
-      wheel-2:
-        startingItem: RMCVehicleTankTires
-        whitelist:
-          components:
-          - RMCVehicleWheelItem
   - type: RMCHardpointSlots
     vehicleFamily: Tank
     slots:
@@ -158,22 +153,12 @@
       hardpointType: Wheel
       slotType: Treads
       insertDelay: 2.0
-    - id: wheel-2
-      hardpointType: Wheel
-      slotType: Tires
-      insertDelay: 2.0
   - type: RMCVehicleWheelSlots
-    slotCount: 2
+    slotCount: 1
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
     repairFuelCost: 20
     bypassEntryOnZero: true
-    repairTimePerIntegrity: 0.04
-    repairTimeMax: 12
-  - type: RMCRepairable
-    delay: 10
-    heal: 250
-    fuelUsed: 8
   - type: Appearance
   - type: VehicleEnter
     interiorPath: /Maps/_RMC14/Vehicles/tank_interior.yml
@@ -236,11 +221,6 @@
         whitelist:
           components:
           - RMCVehicleWheelItem
-      wheel-2:
-        startingItem: RMCVehicleTankTires
-        whitelist:
-          components:
-          - RMCVehicleWheelItem
   - type: RMCHardpointSlots
     vehicleFamily: Tank
     slots:
@@ -274,10 +254,6 @@
     - id: wheel-1
       hardpointType: Wheel
       slotType: Treads
-      insertDelay: 2.0
-    - id: wheel-2
-      hardpointType: Wheel
-      slotType: Tires
       insertDelay: 2.0
 
 - type: entity
