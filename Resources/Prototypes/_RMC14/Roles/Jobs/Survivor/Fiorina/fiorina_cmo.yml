@@ -70,7 +70,7 @@
   suffix: Surgical Webbing
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalGreen
+    startingWebbing: RMCWebbingSurgicalGreen
 
 - type: entity
   parent: RMCLabcoatLongOpened
