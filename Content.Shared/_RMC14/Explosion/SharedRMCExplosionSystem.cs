@@ -203,20 +203,18 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (!ent.Comp.IsExplodable || TryComp(ent, out CorrodibleComponent? corrodible) && !corrodible.IsCorrodible)
             return;
 
-        if (HasComp<GunComponent>( ent)) //TODO Remove this after gun acid protection is added.
-            return;
-
         var deleteEntity = false;
         var damage = args.Damage.GetTotal();
         var destroyChance =
-            damage > ent.Comp.HighIntensityThreshold ? ent.Comp.HighIntensityDestroyChance :
-            damage > ent.Comp.LowIntensityThreshold  ? ent.Comp.MediumIntensityDestroyChance :
+            damage > ent.Comp.HighIntensityDamageThreshold ? ent.Comp.HighIntensityDestroyChance :
+            damage > ent.Comp.LowIntensityDamageThreshold  ? ent.Comp.MediumIntensityDestroyChance :
             ent.Comp.LowIntensityDestroyChance;
 
         if (_random.NextFloat() < destroyChance)
             deleteEntity = true;
 
-        //TODO Once gun acid protection is added, remove/reduce the protection and don't delete the gun.
+        if (HasComp<GunComponent>(ent) && ent.Comp.ExplosionProtection > 0)   //TODO Once gun acid protection is added, remove that protection instead.
+            ent.Comp.ExplosionProtection--;
 
         if (deleteEntity && !TerminatingOrDeleted(ent))
             QueueDel(ent);
