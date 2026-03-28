@@ -1025,6 +1025,13 @@
     - id: CMFirstAidKitFilled # TODO RMC14: attachment box
 
 - type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder_black.rsi
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelSPP
   name: UCP3 combat pack

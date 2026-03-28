@@ -645,7 +645,7 @@
   suffix: Surgical Webbing
   components:
   - type: WebbingClothing
-    startingWebbing: CMWebbingSurgicalGreen
+    startingWebbing: RMCWebbingSurgicalGreen
 
 # Frontier
 - type: entity
