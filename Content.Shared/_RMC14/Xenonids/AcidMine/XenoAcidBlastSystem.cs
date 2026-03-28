@@ -82,8 +82,7 @@ public sealed class XenoAcidBlastSystem : EntitySystem
 
         var coords = Transform(ent.Owner).Coordinates;
 
-        if (!_net.IsClient)
-            _audio.PlayPredicted(ent.Comp.ExplosionSound, coords, null, ent.Comp.ExplosionSound.Params.WithVolume(-10f));
+        _audio.PlayPredicted(ent.Comp.ExplosionSound, coords, ent.Owner, ent.Comp.ExplosionSound.Params.WithVolume(-10f));
 
         if (!_net.IsClient)
             PredictedSpawnAtPosition(ent.Comp.SmokeEffect, coords);
