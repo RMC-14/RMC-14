@@ -606,6 +606,22 @@ public abstract class SharedXenoWeedsSystem : EntitySystem
         _movementSpeed.RefreshMovementSpeedModifiers(update);
     }
 
+    public Entity<XenoWeedsComponent> AssignSource(Entity<XenoWeedsComponent?> weeds, Entity<XenoWeedsComponent?> source)
+    {
+        weeds.Comp ??= EnsureComp<XenoWeedsComponent>(weeds);
+        weeds.Comp.IsSource = false;
+        weeds.Comp.Source = source;
+        Dirty(weeds);
+
+        if (Resolve(source, ref source.Comp, false))
+        {
+            source.Comp.Spread.Add(weeds);
+            Dirty(source);
+        }
+
+        return (weeds, weeds.Comp);
+    }
+
     public override void Update(float frameTime)
     {
         try
