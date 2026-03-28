@@ -3,6 +3,7 @@ using Content.Shared._RMC14.BlurredVision;
 using Content.Shared._RMC14.Deafness;
 using Content.Shared._RMC14.Slow;
 using Content.Shared._RMC14.Stun;
+using Content.Shared._RMC14.Xenonids.Acid;
 using Content.Shared._RMC14.Xenonids.Construction.Nest;
 using Content.Shared.Body.Systems;
 using Content.Shared.Coordinates;
@@ -16,6 +17,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Sticky.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
+using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
@@ -58,6 +60,8 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         SubscribeLocalEvent<StunOnExplosionReceivedComponent, ExplosionReceivedEvent>(OnStunOnExplosionReceivedBeforeExplode);
 
         SubscribeLocalEvent<DestroyedByExplosionTypeComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
+
+        SubscribeLocalEvent<DestroyedByExplosionComponent, ExplosionReceivedEvent>(OnDestroyedByExplosionReceived);
 
         SubscribeLocalEvent<MobGibbedByExplosionTypeComponent, ExplosionReceivedEvent>(OnMobGibbedByExplosionReceived);
     }
@@ -191,6 +195,30 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         }
 
         if (!TerminatingOrDeleted(ent))
+            QueueDel(ent);
+    }
+
+    private void OnDestroyedByExplosionReceived(Entity<DestroyedByExplosionComponent> ent, ref ExplosionReceivedEvent args)
+    {
+        if (!ent.Comp.IsExplodable || TryComp(ent, out CorrodibleComponent? corrodible) && !corrodible.IsCorrodible)
+            return;
+
+        if (HasComp<GunComponent>( ent)) //TODO Remove this after gun acid protection is added.
+            return;
+
+        var deleteEntity = false;
+        var damage = args.Damage.GetTotal();
+        var destroyChance =
+            damage > ent.Comp.HighIntensityThreshold ? ent.Comp.HighIntensityDestroyChance :
+            damage > ent.Comp.LowIntensityThreshold  ? ent.Comp.MediumIntensityDestroyChance :
+            ent.Comp.LowIntensityDestroyChance;
+
+        if (_random.NextFloat() < destroyChance)
+            deleteEntity = true;
+
+        //TODO Once gun acid protection is added, remove/reduce the protection and don't delete the gun.
+
+        if (deleteEntity && !TerminatingOrDeleted(ent))
             QueueDel(ent);
     }
 

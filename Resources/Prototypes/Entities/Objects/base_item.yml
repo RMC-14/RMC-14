@@ -46,6 +46,7 @@
   - type: DamageExaminable
   - type: RMCItemPickup
   - type: RMCMesonsNonviewable
+  - type: DestroyedByExplosion
 
 - type: entity
   name: "storage item"
