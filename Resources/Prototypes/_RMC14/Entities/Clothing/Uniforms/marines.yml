@@ -158,6 +158,13 @@
   - type: WebbingClothing
     startingWebbing: RMCWebbingCBRNFTL
 
+- type: entity
+  parent: RMCCBRNSuit
+  id: RMCCBRNSuitSL
+  suffix: Webbing, SL
+  components:
+  - type: WebbingClothing
+    startingWebbing: RMCWebbingCBRNSL
 
 # Sun Riders
 

@@ -1028,3 +1028,15 @@
     - id: CMGrenadeHighExplosive
     - id: RMCGrenadeIncendiary
     - id: RMCGrenadeIncendiary
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNSL
+  suffix: CBRN, Filled, SL
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBottleAntiZed
+    - id: RMCBottleAntiZed
+    - id: RMCBoxSyringeCBRN
+

@@ -84,7 +84,7 @@
     outerClothing: RMCArmorCBRN
     gloves: RMCHandsVeteranCBRN
     shoes: RMCBootsCBRN
-    suitstorage: RMCWeaponFlamer
+    suitstorage: RMCWeaponFlamerExt
     id: CMDogtagCBRNFTL
     belt: RMCBeltMarineMK1
     back: RMCWeaponRifleM54CMK1

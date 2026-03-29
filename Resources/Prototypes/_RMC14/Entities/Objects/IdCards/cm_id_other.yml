@@ -399,3 +399,11 @@
   - type: PresetIdCard
     job: RMCCBRNFireteamLeader
 
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNSL
+  name: CBRN Squad Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNSquadLeader
+

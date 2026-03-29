@@ -19,16 +19,30 @@
     containers:
       key_slots:
       - RMCEncryptionKeyERT
+  - type: GrantSquadLeaderTracker
+    defaultMode: SquadLeader
+    trackerModes:
+    - SquadLeader
+    - FireteamLeader
+    - SeniorEnlistedAdvisor
+    - PrimaryLandingZone
+  - type: GrantTacMapAlert
+  - type: HeadsetAutoSquad
 
 - type: entity
-  parent: RMCHeadsetMarine
+  parent: CMHeadsetCBRN
   id: CMHeadsetCBRNLeader
   name: CBRN Leader headset
   description: A headset given to CBRN Team Leaders.
   components:
-  - type: ContainerFill
-    containers:
-      key_slots:
-      - RMCEncryptionKeyERT
   - type: RMCHeadset
     radioTextIncrease: 3
+  - type: GrantSquadLeaderTracker
+    defaultMode: CommandingOfficer
+    trackerModes:
+    - CommandingOfficer
+    - ExecutiveOfficer
+    - SquadLeader
+    - FireteamLeader
+    - PrimaryLandingZone
+

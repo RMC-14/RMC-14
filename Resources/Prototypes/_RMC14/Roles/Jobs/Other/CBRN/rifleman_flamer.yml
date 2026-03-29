@@ -30,7 +30,7 @@
     outerClothing: RMCArmorCBRN
     gloves: RMCHandsVeteranCBRN
     shoes: RMCBootsCBRN
-    suitstorage: RMCWeaponFlamer
+    suitstorage: RMCWeaponFlamerExt
     id: CMDogtagCBRNRifleman
     belt: RMCM77BeltFilled
     back: RMCBackpackFlamer
