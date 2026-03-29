@@ -352,7 +352,7 @@
   parent: ArmorHelmetPMC
   id: ArmorHelmetEB
   name: We-Ya executive bodyguard helmet
-  description: A basic skull-helm worn by corporate security assets, graded to protect your head from an unruly scientist armed with a crowbar.
+  description: A basic skull-helm worn by Security Division assets, graded to protect your head from an unruly scientist armed with a crowbar.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_helmet.rsi
