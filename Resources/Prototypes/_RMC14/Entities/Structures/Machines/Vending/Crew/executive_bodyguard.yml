@@ -117,26 +117,41 @@
       - name: Sidearm
         ranks:
         - RMCRankWeYaBodyguardTPPO
-        choices: { CMSidearm: 1 }
+        choices: { RMCBeltHolsterPistol: 1 }
         entries:
-        - id: RMCWeaponPistolPK7
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
       - name: Ammunition
         ranks:
         - RMCRankWeYaBodyguardTPPO
         entries:
         - id: RMCMagazinePistolPK7
-          amount: 4
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardTPPO
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
       - name: Spare Equipment
         ranks:
         - RMCRankWeYaBodyguardTPPO
         entries:
         - id: CMFlash
-          amount: 2
+          points: 2
         # Pepper Spray
         - id: CMStunbaton
-          amount: 4
+          points: 4
         - id: RMCBoxZiptie
-          amount: 4
+          points: 4
     # ////////////////////////////////////
     # PPO
     # ////////////////////////////////////
@@ -187,32 +202,50 @@
       - name: Sidearm
         ranks:
         - RMCRankWeYaBodyguardPPO
-        choices: { CMSidearm: 1 }
+        choices: { RMCBeltHolsterPistol: 1 }
         entries:
-        - id: RMCWeaponPistolPK7
-        - id: RMCMK80
-        - id: RMCWeaponPistolM77
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaMK80Fill
+          points: 8
+          name: MK80 pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
       - name: Ammunition
         ranks:
         - RMCRankWeYaBodyguardPPO
         entries:
         - id: RMCMagazinePistolPK7
-          amount: 4
+          points: 4
         - id: CMMagazinePistolMK80
-          amount: 6
+          points: 6
         - id: CMMagazinePistolM77AP
-          amount: 4
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardPPO
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
       - name: Spare Equipment
         ranks:
         - RMCRankWeYaBodyguardPPO
         entries:
         - id: CMFlash
-          amount: 2
+          points: 2
         # Pepper Spray
         - id: CMStunbaton
-          amount: 4
+          points: 4
         - id: RMCBoxZiptie
-          amount: 4
+          points: 4
     # ////////////////////////////////////
     # PPS / PPC
     # ////////////////////////////////////
@@ -274,6 +307,7 @@
         - RMCRankWeYaBodyguardPPC
         choices: { CMPrimary: 1 }
         entries:
+        # id: Shock Shotgun 15p
         - id: RMCWeaponRifleM54CWhite
         - id: WeaponSMGM63
         - id: RMCWeaponRifleSSG45Stripped
@@ -281,54 +315,74 @@
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
-        choices: { CMSidearm: 1 }
+        choices: { RMCBeltHolsterPistol: 1 }
         entries:
-        - id: RMCWeaponPistolPK7
-        - id: RMCMK80
-        - id: RMCWeaponPistolM77
+        - id: RMCBeltHolsterPistolWeYaPK7Fill
+          name: PK-7 electrostatic pistol
+        - id: RMCBeltHolsterPistolWeYaMK80Fill
+          points: 8
+          name: MK80 pistol
+        - id: RMCBeltHolsterPistolWeYaM77Fill
+          name: M77 combat pistol
       - name: Primary Ammunition
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
         entries:
+        #Shock Shotgun lethal 15p & Stun shells 10p
         - id: CMMagazineSMGM63
-          amount: 4
+          points: 6
         - id: CMMagazineSMGM63Ext
-          amount: 2
+          points: 8
         - id: CMMagazineSMGM63AP
-          amount: 2
+          points: 10
         - id: CMMagazineRifleM54C
-          amount: 4
+          points: 6
         - id: CMMagazineRifleM54CExt
-          amount: 2
+          points: 8
         - id: CMMagazineRifleM54CAP
-          amount: 2
+          points: 10
         - id: RMCMagazineRifleSSG45
-          amount: 4
+          points: 6
         - id: RMCMagazineRifleSSG45Extended
-          amount: 2
+          points: 8
         - id: RMCMagazineRifleSSG45AP
-          amount: 2
+          points: 10
       - name: Sidearm Ammunition
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
         entries:
         - id: RMCMagazinePistolPK7
-          amount: 4
+          points: 4
         - id: CMMagazinePistolMK80
-          amount: 6
+          points: 6
         - id: CMMagazinePistolM77AP
-          amount: 4
+          points: 4
+      - name: Attachments
+        ranks:
+        - RMCRankWeYaBodyguardPPS
+        - RMCRankWeYaBodyguardPPC
+        choices: { RMCAttachableBase: 2 }
+        entries:
+        - id: RMCAttachmentS5RedDotSight
+        - id: RMCAttachmentS6ReflexSight
+        - id: RMCAttachmentS42xTelescopicMiniscope
+        - id: RMCAttachmentMagneticHarness
+        - id: RMCAttachmentLaserSight
+        - id: RMCAttachmentAngledGrip
+        - id: RMCAttachmentVerticalGrip
+        - id: RMCAttachmentExtendedBarrel
+        - id: RMCAttachmentSuppressor
       - name: Spare Equipment
         ranks:
         - RMCRankWeYaBodyguardPPS
         - RMCRankWeYaBodyguardPPC
         entries:
         - id: CMFlash
-          amount: 2
+          points: 2
         # Pepper Spray
         - id: CMStunbaton
-          amount: 4
+          points: 4
         - id: RMCBoxZiptie
-          amount: 4
+          points: 4

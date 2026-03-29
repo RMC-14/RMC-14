@@ -28,7 +28,7 @@
       time: 36000 # 10 hours
     RMCRankWeYaBodyguardTPPO: []
   startingGear: RMCJobWeYaExecutiveBodyguard
-  icon: "RMCJobIconPMCGoonStandard"
+  icon: "RMCJobIconExecutiveBodyguard"
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-we-ya
   roleWeight: 0.25
@@ -59,6 +59,9 @@
       background:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
         state: background_goon
+    - type: CMVendorUser
+      points: 45
+      id: RMCWeYaExecutiveBodyguard
 
 - type: playTimeTracker
   id: RMCJobWeYaExecutiveBodyguard
@@ -68,7 +71,7 @@
   id: RMCJobWeYaExecutiveBodyguard
   equipment:
     id: RMCIDCardPMC
-    ears: RMCHeadsetLiaison
+    ears: RMCHeadsetExecutiveBodyguard
     jumpsuit: RMCJumpsuitLiaisonBlackExecutiveBodyguard
     outerClothing: RMCJacketCorporateBlack
     eyes: RMCGlassesSecurityBlue

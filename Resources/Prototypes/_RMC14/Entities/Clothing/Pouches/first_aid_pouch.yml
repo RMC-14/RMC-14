@@ -70,7 +70,13 @@
     - 0,0,9,1 #5 slots
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Pouches/wy_firstaid.rsi
-
+  - type: StorageFill
+    contents:
+    - id: CMBicaridineAutoInjector
+    - id: CMKelotaneAutoInjector
+    # Tramadol autoinjector
+    - id: CMEmergencyAutoInjector
+    - id: CMGauze10
 
 # First Aid ERT
 - type: entity
