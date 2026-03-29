@@ -181,7 +181,7 @@
   - type: Appearance
   - type: DeleteOnExplosion
   - type: RMCIgniteOnCollide
-    maxStacks: 20
+    maxStacks: 20 #TODO make this 45 after adding fire stacks over time works.
     duration: 5
     burnColor: "#EE6515"
     tileDamage:
@@ -222,7 +222,7 @@
   - type: TimedDespawn
     lifetime: 2
   - type: RMCIgniteOnCollide
-    maxStacks: 10
+    maxStacks: 15 #TODO make this 45 after adding fire stacks over time works.
     duration: 5
 
 - type: entity
