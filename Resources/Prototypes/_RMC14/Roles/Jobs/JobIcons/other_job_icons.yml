@@ -10,7 +10,7 @@
   id: RMCJobIconCorrespondent
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
-    state: correspondent
+    state: hudsquad_correspondent
 
 - type: jobIcon
   parent: CMJobIconBase
