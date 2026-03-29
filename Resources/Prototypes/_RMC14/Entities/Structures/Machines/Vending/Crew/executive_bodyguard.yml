@@ -58,7 +58,7 @@
   parent: ColMarTechBase
   id: ColMarTechGearRackEB
   name: executive bodyguard gear rack
-  description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue gear.
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue gear.
   suffix: Exec. Bodyguard
   components:
   - type: Sprite
