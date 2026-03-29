@@ -10,6 +10,7 @@ rmc-xeno-trapper-description = You trade your bombard, neurotoxin, acid shroud a
    - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
    - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that will burn enemies and corrode through structures.
    - - When empowered, deals greatly increased damage to structures and slightly increased damage against enemies but also applying a lingering acid to them.
+   - Gain a temporary speed boost when hurt, allowing a swifter escape.
 rmc-xeno-trapper-popup = The battlefield is my canvas, this one, my painter. Melt them where they stand.
 
 rmc-xeno-dancer-name = Dancer

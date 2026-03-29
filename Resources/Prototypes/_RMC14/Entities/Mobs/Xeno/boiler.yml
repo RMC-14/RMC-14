@@ -244,6 +244,7 @@
   - type: XenoAcidShotgun
   - type: XenoDeployTraps
   - type: XenoInsight
+  - type: XenoAdrenalineSurge
   - type: RMCActionOrder
     id: RMCXenoBoilerTrapper
 

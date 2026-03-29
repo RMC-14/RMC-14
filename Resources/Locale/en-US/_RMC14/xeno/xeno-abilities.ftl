@@ -72,6 +72,10 @@ rmc-xeno-acid-mine-self = We coax a hidden mine to detonate!
 rmc-xeno-acid-mine-others = {$xeno} coaxes a hidden mine to detonate!
 rmc-xeno-acid-mine-see-fail = Theres something in the way!
 
+# Adrenaline Surge
+rmc-xeno-adrenaline-surge-ready = You feel your adrenaline glands refill! Your speed boost will activate again.
+rmc-xeno-adrenaline-surge-start = Your adrenaline surges to enhance your speed!
+
 # Fortify
 cm-xeno-fortify-cant-headbutt = We can't headbutt while fortifying!
 cm-xeno-fortify-cant-rest = We can't rest while fortifying!
