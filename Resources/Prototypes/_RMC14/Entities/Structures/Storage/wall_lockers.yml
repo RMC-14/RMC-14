@@ -47,3 +47,65 @@
     children:
     - id: RMCTabletCO
     - id: CMHeadsetSeniorCommand
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCEmergencySurgicalCabinet
+  name: emergency surgical equipment cabinet
+  description: A hyper-safe, self-sterilizing, wall-mounted cabinet containing extra surgical beds, surgical webbing vests, and portable dialysis machines. It unlocks and opens itself when the ship is threatened by a hostile force.
+  suffix: Empty
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: WallMount
+    arc: 175
+  - type: Sprite
+    drawdepth: WallMountedItems
+    sprite: _RMC14/Structures/Wallmounts/surgical.rsi
+  - type: Corrodible
+    isCorrodible: false
+  - type: Destructible
+    thresholds: []
+  - type: EntityStorage
+    isCollidableWhenOpen: true
+    enteringOffset: 0, -0.6
+    enteringRange: 0.03
+    whitelist:
+      tags:
+      - CMRollerItem
+      - CMRollerBed
+      components:
+      - Webbing
+      - PortableDialysis
+  - type: RMCEntityStorageWhitelist
+    whitelist:
+      tags:
+      - CMRollerItem
+      - CMRollerBed
+      components:
+      - Webbing
+      - PortableDialysis
+  - type: AccessReader
+    access: [["CMAccessMedical"]]
+  - type: RMCLockerOpenOnHijack
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCEmergencySurgicalCabinet
+  id: RMCEmergencySurgicalCabinetFilled
+  suffix: Filled, Hijack
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWebbingSurgicalGreen
+    - id: RMCWebbingSurgicalGreen
+    - id: RMCWebbingSurgicalBlue
+    - id: RMCWebbingSurgicalBlue
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: CMPortableSurgicalBedSpawnFolded
+    - id: RMCPortableDialysis
+    - id: RMCPortableDialysis
+    - id: RMCPortableDialysis
+    - id: RMCPortableDialysis

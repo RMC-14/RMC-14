@@ -1,15 +1,15 @@
 - type: job
   parent: CMSurvivor
-  id: CMJobSurvivorCECResearcher
-  name: rmc-job-name-survivor-cec-researcher
+  id: CMJobSurvivorMSCResearcher
+  name: rmc-job-name-survivor-msc-researcher
   description: cm-job-description-survivor
   playTimeTracker: CMJobSurvivorScientist
   ranks:
     RMCRankCivilianDoctor: []
-  startingGear: RMCGearSurvivorCECResearcher
+  startingGear: RMCGearSurvivorMSCResearcher
   accessGroups:
   - ColonistMedical
-  spawnMenuRoleName: EC Researcher (Sorokyne Survivor)
+  spawnMenuRoleName: MSC Researcher (Sorokyne Survivor)
   special:
   - !type:AddComponentSpecial
     components:
@@ -23,7 +23,7 @@
         RMCSkillSurgery: 2
         RMCSkillResearch: 1
     - type: EquipSurvivorPreset
-      preset: RMCGearSurvivorPresetCECResearcher
+      preset: RMCGearSurvivorPresetMSCResearcher
     - type: RMCSurvivor
     - type: MotionDetectorTracked
     - type: NpcFactionMember
@@ -36,7 +36,7 @@
 
 - type: startingGear
   parent: RMCGearSurvivorBaseNoBackpack
-  id: RMCGearSurvivorCECResearcher
+  id: RMCGearSurvivorMSCResearcher
   equipment:
     gloves: RMCHandsVeteran
     jumpsuit: RMCJumpsuitCivilianScientist
@@ -45,8 +45,8 @@
 
 - type: entity
   parent: CMSpawnPointJobBase
-  id: RMCSpawnPointSurvivorCECResearcher
-  name: exploration corps researcher spawn point
+  id: RMCSpawnPointSurvivorMSCResearcher
+  name: ministry of space colonisation researcher spawn point
   components:
   - type: SpawnPoint
     job_id: CMSurvivor
@@ -57,8 +57,8 @@
 
 - type: entity
   parent: RMCSurvivorPresetScientist
-  id: RMCGearSurvivorPresetCECResearcher
-  name: exploration corps researcher preset
+  id: RMCGearSurvivorPresetMSCResearcher
+  name: ministry of space colonisation researcher preset
   categories: [ HideSpawnMenu ]
   components:
   - type: SurvivorPreset
