@@ -262,7 +262,7 @@
 - type: entity
   parent: RMCPaperWeYa
   id: RMCPaperBodyguardInstructions
-  name: Weston-Yamada liaison bodyguard instructions (Must Read)
+  name: Weston-Yamada executive bodyguard instructions (Must Read)
   components:
   - type: Paper
     stampState: paper_stamp-we_ya
