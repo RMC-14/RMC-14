@@ -1,27 +1,4 @@
 ﻿Entries:
-- author: x5tink
-  changes:
-  - message: Added SMO Admeme Plushie
-    type: Add
-  - message: Liliana Patron Figurine
-    type: Tweak
-  id: 2521
-  time: '2025-11-17T12:12:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8394
-- author: OmerF-afk
-  changes:
-  - message: Added lanterns to survivor pouches
-    type: Add
-  id: 2522
-  time: '2025-11-18T11:02:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8426
-- author: OmerF-afk
-  changes:
-  - message: Added extra functionality and sovl to welding masks
-    type: Add
-  id: 2523
-  time: '2025-11-18T11:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8411
 - author: Aurallianz
   changes:
   - message: improved Mutiny text
@@ -4509,5 +4486,27 @@
   id: 3022
   time: '2026-03-28T11:13:37.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9321
+- author: Arykh
+  changes:
+  - message: Added a heart rate monitor to the health analyzer.
+    type: Add
+  id: 3023
+  time: '2026-03-28T22:37:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9327
+- author: Arykh
+  changes:
+  - message: Added the Autodoc medical pod!
+    type: Add
+  id: 3024
+  time: '2026-03-28T22:38:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9363
+- author: Arykh
+  changes:
+  - message: Added the sleeper medical pod! Removes chemicals from the occupant and
+      can inject stabilizing chemicals, with more becoming available as injuries worsen.
+    type: Add
+  id: 3025
+  time: '2026-03-28T22:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9130
 Name: RMC14
 Order: -1
