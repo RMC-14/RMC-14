@@ -8,7 +8,7 @@ namespace Content.Shared._RMC14.Explosion;
 public sealed partial class DestroyedByExplosionComponent : Component
 {
     /// <summary>
-    ///     Whether the entity si able to be destroyed by explosions.
+    ///     Whether the entity can be destroyed by explosions.
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool IsExplodable = true;
