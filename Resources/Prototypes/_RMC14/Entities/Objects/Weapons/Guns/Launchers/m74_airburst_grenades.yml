@@ -201,8 +201,6 @@
   - type: DirectionalTileFireOnTrigger
     range: 3
     spawn: RMCTileFire
-    intensity: 20
-    duration: 15
 
 - type: entity
   parent: RMCBaseAirBurstProjectile

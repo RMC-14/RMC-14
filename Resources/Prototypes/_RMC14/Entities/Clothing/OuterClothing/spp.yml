@@ -198,7 +198,6 @@
     - id: RMCTacticalPrybar
     - id: RMCMagazineRifleAK4047
     - id: RMCMagazineRifleAK4047
-    - id: RMCRadioHandheldColony
 
 - type: entity
   parent: RMCArmorSPP

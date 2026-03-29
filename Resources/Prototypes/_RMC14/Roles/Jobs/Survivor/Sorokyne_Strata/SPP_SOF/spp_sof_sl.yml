@@ -10,12 +10,23 @@
   special:
   - !type:AddComponentSpecial
     components:
-    - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
       - SPP
     - type: Skills
-      preset: RMCSkillPresetSurvivorSPPLeader
+      skills:
+        RMCSkillCqc: 1
+        RMCSkillConstruction: 2
+        RMCSkillEndurance: 2
+        RMCSkillEngineer: 3
+        RMCSkillFirearms: 1
+        RMCSkillLeadership: 2
+        RMCSkillFireman: 1
+        RMCSkillJtac: 3
+        RMCSkillMeleeWeapons: 1
+        #RMCSkillSpecialistWeapons: 1
+        RMCSkillMedical: 2
+        RMCSkillOverwatch: 1
     - type: MarineOrders
     - type: IntelRescueSurvivorObjective
     - type: JobPrefix
@@ -37,13 +48,11 @@
     head: RMCHeadCapSPPSOF
   storage:
     back:
-    - RMCArmorHelmetSPPSOF
-    - CMSheetMetal20
+    - ArmorHelmetSPPHeavy
     outerClothing:
     - RMCTacticalPrybar
     - RMCMagazineRifleAK4047
     - RMCMagazineRifleAK4047
-    - RMCRadioHandheldColony
 
 - type: entity
   parent: CMSpawnPointJobBase

@@ -78,6 +78,7 @@
     - id: CMRollerBedSpawnFolded
     - id: CMMedicalUpgradeKitFilledCommando
 #  /obj/item/stack/medical/splint/nano(src, rand(1,2))
+
   - type: Sprite
     layers:
     - state: advfirstaid
