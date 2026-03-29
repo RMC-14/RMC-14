@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using Content.Client.Gameplay;
 using Content.Client.UserInterface.Systems.Actions;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Line;
@@ -8,7 +9,10 @@ using Content.Shared._RMC14.Projectiles;
 using Content.Shared._RMC14.Smoke;
 using Content.Shared._RMC14.Xenonids.Bombard;
 using Content.Shared._RMC14.Xenonids.Burrow;
+using Content.Shared._RMC14.Xenonids.Fruit.Components;
+using Content.Shared._RMC14.Xenonids.ResinSurge;
 using Content.Shared._RMC14.Xenonids.Spray;
+using Content.Shared._RMC14.Xenonids.Weeds;
 using Content.Shared.Actions.Components;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -16,6 +20,7 @@ using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
 using Robust.Client.Input;
 using Robust.Client.Player;
+using Robust.Client.State;
 using Robust.Client.UserInterface;
 using Robust.Shared.Configuration;
 using Robust.Shared.Enums;
@@ -32,11 +37,13 @@ namespace Content.Client._RMC14.Xenonids.Targeting;
 
 public sealed class XenoAbilityPreviewOverlay : Overlay
 {
-    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV;
+    public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowFOV | OverlaySpace.WorldSpace;
 
     private static readonly Color SprayOutlineColor = new Color(0.44f, 0.76f, 0.2f);
     private static readonly Color BombardFallbackColor = new Color(0.98f, 0.74f, 0.25f);
     private static readonly Color BurrowOutlineColor = new Color(0.95f, 0.85f, 0.2f);
+    private static readonly Color ResinSurgeOutlineColor = new Color(0.34f, 0.87f, 0.57f);
+    private static readonly Color InvalidOutlineColor = new Color(0.95f, 0.24f, 0.24f);
     private static readonly Color BlockerOutlineColor = new Color(0.65f, 0.65f, 0.65f);
     private const float OutlineAlpha = 0.8f;
     private const float OutlineThickness = 0.1f;
@@ -50,6 +57,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly IMapManager _mapManager;
     private readonly IPrototypeManager _prototypes;
     private readonly IComponentFactory _componentFactory;
+    private readonly IStateManager _stateManager;
     private readonly SharedMapSystem _mapSystem;
     private readonly SharedPhysicsSystem _physics;
     private readonly SharedTransformSystem _transform;
@@ -60,6 +68,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
     private readonly EntityQuery<XenoSprayAcidComponent> _sprayQ;
     private readonly EntityQuery<XenoBombardComponent> _bombardQ;
     private readonly EntityQuery<XenoBurrowComponent> _burrowQ;
+    private readonly EntityQuery<XenoResinSurgeComponent> _resinSurgeQ;
+    private readonly EntityQuery<ResinSurgeReinforcableComponent> _reinforcableQ;
+    private readonly EntityQuery<XenoFruitComponent> _fruitQ;
+    private readonly EntityQuery<XenoWeedsComponent> _weedsQ;
     private readonly EntityQuery<TransformComponent> _xformQ;
 
     public XenoAbilityPreviewOverlay(IEntityManager ents)
@@ -72,6 +84,7 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _mapManager = IoCManager.Resolve<IMapManager>();
         _prototypes = IoCManager.Resolve<IPrototypeManager>();
         _componentFactory = IoCManager.Resolve<IComponentFactory>();
+        _stateManager = IoCManager.Resolve<IStateManager>();
         _mapSystem = ents.System<SharedMapSystem>();
         _physics = ents.System<SharedPhysicsSystem>();
         _transform = ents.System<SharedTransformSystem>();
@@ -82,6 +95,10 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         _sprayQ = ents.GetEntityQuery<XenoSprayAcidComponent>();
         _bombardQ = ents.GetEntityQuery<XenoBombardComponent>();
         _burrowQ = ents.GetEntityQuery<XenoBurrowComponent>();
+        _resinSurgeQ = ents.GetEntityQuery<XenoResinSurgeComponent>();
+        _reinforcableQ = ents.GetEntityQuery<ResinSurgeReinforcableComponent>();
+        _fruitQ = ents.GetEntityQuery<XenoFruitComponent>();
+        _weedsQ = ents.GetEntityQuery<XenoWeedsComponent>();
         _xformQ = ents.GetEntityQuery<TransformComponent>();
     }
 
@@ -100,7 +117,9 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         var actionController = _ui.GetUIController<ActionUIController>();
         var originMap = _transform.GetMapCoordinates(player.Value, xform: xform);
         float? burrowRange = null;
-        if (_burrowQ.TryComp(player.Value, out var burrow) && IsBurrowed(burrow))
+        if (_burrowQ.TryComp(player.Value, out var burrow) &&
+            IsBurrowed(burrow) &&
+            args.Space == OverlaySpace.WorldSpace)
         {
             burrowRange = GetBurrowRange(player.Value, burrow, actionController.SelectingTargetFor);
             DrawBurrowRange(args, originMap, burrowRange.Value);
@@ -119,6 +138,23 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         if (!_worldTargetQ.TryComp(action, out var worldTarget) || worldTarget.Event == null)
             return;
 
+        if (args.Space == OverlaySpace.WorldSpace)
+        {
+            if (worldTarget.Event is not XenoBurrowActionEvent ||
+                !_burrowQ.TryComp(player.Value, out burrow) ||
+                !IsBurrowed(burrow))
+            {
+                return;
+            }
+
+            burrowRange ??= GetBurrowRange(player.Value, burrow, action);
+            DrawBurrowTarget(args, originMap, mousePos, burrowRange.Value);
+            return;
+        }
+
+        if (args.Space != OverlaySpace.WorldSpaceBelowFOV)
+            return;
+
         switch (worldTarget.Event)
         {
             case XenoSprayAcidActionEvent:
@@ -133,17 +169,39 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
 
                 DrawBombard(args, player.Value, xform, originMap, mousePos, bombard);
                 break;
-            case XenoBurrowActionEvent:
-                if (!_burrowQ.TryComp(player.Value, out burrow))
+            case XenoResinSurgeActionEvent:
+                if (!_resinSurgeQ.TryComp(player.Value, out var resinSurge))
                     return;
 
-                if (!IsBurrowed(burrow))
-                    return;
-
-                burrowRange ??= GetBurrowRange(player.Value, burrow, action);
-                DrawBurrowTarget(args, originMap, mousePos, burrowRange.Value);
+                DrawResinSurge(args, originMap, mousePos, resinSurge);
                 break;
         }
+    }
+
+    private void DrawResinSurge(
+        in OverlayDrawArgs args,
+        MapCoordinates originMap,
+        MapCoordinates mousePos,
+        XenoResinSurgeComponent resinSurge)
+    {
+        var range = resinSurge.Range;
+        if (range <= 0)
+            return;
+
+        if (!TryGetTileIndices(mousePos, out var targetTile))
+            return;
+
+        var targetCenter = _mapSystem.GridTileToWorld(targetTile.GridUid, targetTile.Grid, targetTile.Indices);
+        var valid = (targetCenter.Position - originMap.Position).LengthSquared() <= range * range;
+        var color = (valid ? ResinSurgeOutlineColor : InvalidOutlineColor).WithAlpha(OutlineAlpha);
+
+        if (TryGetResinSurgeDirectTarget(mousePos, out var directTargetTile))
+        {
+            DrawTileMarker(args.WorldHandle, directTargetTile, color);
+            return;
+        }
+
+        DrawResinSurgeSquare(args.WorldHandle, originMap, targetTile, resinSurge.StickyResinRadius);
     }
 
     private void DrawSpray(
@@ -224,6 +282,15 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
             return;
 
         var color = BurrowOutlineColor.WithAlpha(OutlineAlpha);
+        DrawTileRange(args, originMap, range, color);
+    }
+
+    private void DrawTileRange(
+        in OverlayDrawArgs args,
+        MapCoordinates originMap,
+        float range,
+        Color color)
+    {
         if (!_mapManager.TryFindGridAt(originMap, out var gridUid, out var grid))
             return;
 
@@ -364,6 +431,61 @@ public sealed class XenoAbilityPreviewOverlay : Overlay
         var indices = _mapSystem.CoordinatesToTile(gridUid, grid, target);
         var tiles = new HashSet<Vector2i> { indices };
         DrawTileBorder(args.WorldHandle, gridUid, grid, tiles, color);
+    }
+
+    private bool TryGetResinSurgeDirectTarget(MapCoordinates mousePos, out TileInfo target)
+    {
+        target = default;
+        if (_stateManager.CurrentState is not GameplayStateBase screen)
+            return false;
+
+        var entity = screen.GetClickedEntity(mousePos);
+        if (entity == null ||
+            (!_reinforcableQ.HasComp(entity.Value) &&
+             !_fruitQ.HasComp(entity.Value) &&
+             !_weedsQ.HasComp(entity.Value)))
+        {
+            return false;
+        }
+
+        return TryGetEntityTile(entity.Value, out target);
+    }
+
+    private void DrawTileSquare(DrawingHandleWorld handle, TileInfo center, int radius, Color color)
+    {
+        var tiles = new HashSet<Vector2i>();
+        for (var x = -radius; x <= radius; x++)
+        {
+            for (var y = -radius; y <= radius; y++)
+            {
+                tiles.Add(center.Indices + new Vector2i(x, y));
+            }
+        }
+
+        DrawTileBorder(handle, center.GridUid, center.Grid, tiles, color);
+    }
+
+    private void DrawResinSurgeSquare(DrawingHandleWorld handle, MapCoordinates originMap, TileInfo center, int radius)
+    {
+        var validTiles = new HashSet<Vector2i>();
+        var invalidTiles = new HashSet<Vector2i>();
+        var rangeSquared = MathF.Pow(_resinSurgeQ.GetComponent(_player.LocalEntity!.Value).Range, 2);
+
+        for (var x = -radius; x <= radius; x++)
+        {
+            for (var y = -radius; y <= radius; y++)
+            {
+                var tile = center.Indices + new Vector2i(x, y);
+                var tileCenter = _mapSystem.GridTileToWorld(center.GridUid, center.Grid, tile);
+                if ((tileCenter.Position - originMap.Position).LengthSquared() <= rangeSquared)
+                    validTiles.Add(tile);
+                else
+                    invalidTiles.Add(tile);
+            }
+        }
+
+        DrawTileBorder(handle, center.GridUid, center.Grid, validTiles, ResinSurgeOutlineColor.WithAlpha(OutlineAlpha));
+        DrawTileBorder(handle, center.GridUid, center.Grid, invalidTiles, InvalidOutlineColor.WithAlpha(OutlineAlpha));
     }
 
     private bool TryGetTileIndices(MapCoordinates coordinates, out TileInfo info)
