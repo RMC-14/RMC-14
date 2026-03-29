@@ -371,3 +371,31 @@
   - type: Sprite
     sprite: _RMC14/Objects/CMIDs/aegis.rsi
     state: bloody
+
+
+# CBRN
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNRifleman
+  name: CBRN Rifleman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNRifleman
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNCombatTech
+  name: CBRN Combat Technician's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNCombatTech
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNFTL
+  name: CBRN Fireteam Leader's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNFireteamLeader
+

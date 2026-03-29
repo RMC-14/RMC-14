@@ -1005,3 +1005,26 @@
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
     - id: RMCMagazineRifleType71AP
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNHedp
+  suffix: CBRN, Filled, 2 HEDP
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMGrenadeHighExplosive
+    - id: CMGrenadeHighExplosive
+
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNFTL
+  suffix: CBRN, Filled, FTL
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCBinoculars
+    - id: CMGrenadeHighExplosive
+    - id: CMGrenadeHighExplosive
+    - id: RMCGrenadeIncendiary
+    - id: RMCGrenadeIncendiary

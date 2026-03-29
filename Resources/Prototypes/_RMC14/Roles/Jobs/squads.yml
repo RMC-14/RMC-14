@@ -141,6 +141,36 @@
 
 - type: entity
   parent: SquadBase
+  id: SquadCBRN
+  name: CBRN
+  components:
+  - type: SquadTeam
+    color: "#8080FF"
+    accessLevels:
+    - CMAccessAlpha
+    - CMAccessBravo
+    - CMAccessCharlie
+    - CMAccessDelta
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    canSupplyDrop: false
+    group: SOF
+    radio: ""
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_cbrn
+  - type: Tag
+    tags:
+    - RMCSquadCBRN
+
+- type: Tag
+  id: RMCSquadCBRN
+
+- type: entity
+  parent: SquadBase
   id: SquadSPP
   name: SPP
   components:
