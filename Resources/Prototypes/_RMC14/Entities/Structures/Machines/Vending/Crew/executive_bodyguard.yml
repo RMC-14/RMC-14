@@ -5,7 +5,7 @@
   parent: ColMarTechWardrobeCorp
   id: ColMarTechWardrobeEB
   name: executive bodyguard clothes rack
-  description: An automated rack hooked up to a colossal storage of Corporate Security standard-issue clothing.
+  description: An automated rack hooked up to a colossal storage of Security Division standard-issue clothing.
   suffix: Exec. Bodyguard
   components:
   - type: CMAutomatedVendor
