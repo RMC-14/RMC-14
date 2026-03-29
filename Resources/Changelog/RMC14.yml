@@ -1,72 +1,4 @@
 ﻿Entries:
-- author: 0awful
-  changes:
-  - message: Req can now give you the fancy new xl armor vests.
-    type: Add
-  id: 2515
-  time: '2025-11-17T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8255
-- author: x5tink
-  changes:
-  - message: Fixed Rollerbeds not appearing in hand.
-    type: Fix
-  id: 2516
-  time: '2025-11-17T10:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8393
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed Basira-Armstrong magazines being medium instead of small sized.
-    type: Fix
-  id: 2517
-  time: '2025-11-17T10:25:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8389
-- author: PursuitInAshes
-  changes:
-  - message: The FORECON CO no longer has all access by default.
-    type: Tweak
-  id: 2518
-  time: '2025-11-17T11:45:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8224
-- author: Arykh
-  changes:
-  - message: You can now examine reagents inside a pressurized reagent canister pouch!
-      This requires medical skill 1 just like examining pills.
-    type: Add
-  - message: Fixed multiple reagent names in pills not properly seperated.
-    type: Fix
-  id: 2519
-  time: '2025-11-17T11:47:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8248
-- author: Ian321
-  changes:
-  - message: The logistics officer can now vend filled boxes from weapons racks.
-    type: Add
-  id: 2520
-  time: '2025-11-17T11:50:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8398
-- author: x5tink
-  changes:
-  - message: Added SMO Admeme Plushie
-    type: Add
-  - message: Liliana Patron Figurine
-    type: Tweak
-  id: 2521
-  time: '2025-11-17T12:12:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8394
-- author: OmerF-afk
-  changes:
-  - message: Added lanterns to survivor pouches
-    type: Add
-  id: 2522
-  time: '2025-11-18T11:02:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8426
-- author: OmerF-afk
-  changes:
-  - message: Added extra functionality and sovl to welding masks
-    type: Add
-  id: 2523
-  time: '2025-11-18T11:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8411
 - author: Aurallianz
   changes:
   - message: improved Mutiny text
@@ -4505,5 +4437,76 @@
   id: 3016
   time: '2026-03-26T10:50:07.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9435
+- author: kleinerstation13
+  changes:
+  - message: Fixed SPP SOF not being able to open their own dropship doors
+    type: Fix
+  - message: Fixed SPP SOF not spawning with shortwave radios
+    type: Fix
+  - message: Fixed SPP SOF hearing marine announcements
+    type: Fix
+  id: 3017
+  time: '2026-03-28T11:05:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9410
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the SPP SOF sorokyne survivors insert having the wrong skills.
+    type: Fix
+  - message: Fixed the SPP SOF sorokyne survivors not all spawning with 20 metal sheets.
+    type: Fix
+  id: 3018
+  time: '2026-03-28T11:07:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9408
+- author: GNUtopia
+  changes:
+  - message: Improvised firebombs and AGM-I grenades now burn for the proper time
+    type: Fix
+  id: 3019
+  time: '2026-03-28T11:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9409
+- author: Arykh
+  changes:
+  - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
+      but it's not continuous.
+    type: Add
+  id: 3020
+  time: '2026-03-28T11:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9398
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] added large magazine boxes for most PVE weapons.'
+    type: Add
+  id: 3021
+  time: '2026-03-28T11:15:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9293
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Mess Techs not being mutiny eligible
+    type: Fix
+  id: 3022
+  time: '2026-03-28T11:13:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9321
+- author: Arykh
+  changes:
+  - message: Added a heart rate monitor to the health analyzer.
+    type: Add
+  id: 3023
+  time: '2026-03-28T22:37:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9327
+- author: Arykh
+  changes:
+  - message: Added the Autodoc medical pod!
+    type: Add
+  id: 3024
+  time: '2026-03-28T22:38:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9363
+- author: Arykh
+  changes:
+  - message: Added the sleeper medical pod! Removes chemicals from the occupant and
+      can inject stabilizing chemicals, with more becoming available as injuries worsen.
+    type: Add
+  id: 3025
+  time: '2026-03-28T22:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9130
 Name: RMC14
 Order: -1
