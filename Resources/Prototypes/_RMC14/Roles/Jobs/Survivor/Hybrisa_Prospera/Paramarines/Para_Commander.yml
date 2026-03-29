@@ -44,7 +44,7 @@
 - type: startingGear
   id: RMCGearParaCommander
   equipment:
-    id: CMIDCardGold
+    id: RMCIDRoyalParamarinesCommander
     jumpsuit: RMCJumpsuitMarineParaService
     shoes: RMCBootsRoyalFilled
     head: RMCHeadCapPeakedPara

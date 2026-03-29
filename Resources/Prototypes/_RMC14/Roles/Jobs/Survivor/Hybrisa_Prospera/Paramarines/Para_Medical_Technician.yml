@@ -40,6 +40,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaMedicalTechnician
   equipment:
+    id: RMCIDRoyalParamarinesMedicalTechnician
     jumpsuit: RMCJumpsuitMarineParaPDW90
     back: RMCBackpackRCMMedicPVPFilledParaMedic
     eyes: RMCGlassesMedicalHUDGlasses

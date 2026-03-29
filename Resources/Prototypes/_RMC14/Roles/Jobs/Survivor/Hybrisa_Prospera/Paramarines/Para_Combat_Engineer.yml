@@ -40,6 +40,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaAssaultEngineer
   equipment:
+    id: RMCIDRoyalParamarinesCombatEngineer
     eyes: RMCWeldingGoggles
     belt: CMBeltUtilityFilled
     outerClothing: RMCArmorParaVest

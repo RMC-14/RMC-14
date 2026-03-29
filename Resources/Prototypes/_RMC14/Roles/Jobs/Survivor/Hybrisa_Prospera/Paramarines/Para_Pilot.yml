@@ -40,6 +40,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaPilot
   equipment:
+    id: RMCIDRoyalParamarinesPilot
     head: RMCHeadRoyalFlightHelmet
     jumpsuit: RMCJumpsuitMarineParaPDW90
     outerClothing: RMCArmorParaVest
