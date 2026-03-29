@@ -1040,3 +1040,15 @@
     - id: RMCBottleAntiZed
     - id: RMCBoxSyringeCBRN
 
+- type: entity
+  parent: CMWebbingBrown
+  id: RMCWebbingCBRNMedic
+  suffix: CBRN, Filled, Medic
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMHealthAnalyzer
+    - id: CMGrenadeHighExplosive
+    - id: RMCGrenadeIncendiary
+    - id: CMSurgicalLine
+    - id: CMSynthGraft

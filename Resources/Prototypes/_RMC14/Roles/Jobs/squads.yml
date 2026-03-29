@@ -145,7 +145,7 @@
   name: CBRN
   components:
   - type: SquadTeam
-    color: "#8080FF"
+    color: "#4A2070"
     accessLevels:
     - CMAccessAlpha
     - CMAccessBravo

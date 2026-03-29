@@ -407,3 +407,20 @@
   - type: PresetIdCard
     job: RMCCBRNSquadLeader
 
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNWS
+  name: CBRN Weapons Specialist's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNWS
+
+- type: entity
+  parent: CMIDCardStandardDogtag
+  id: CMDogtagCBRNMedic
+  name: CBRN Hospital Corpsman's dogtags
+  components:
+  - type: PresetIdCard
+    job: RMCCBRNMedic
+
+
