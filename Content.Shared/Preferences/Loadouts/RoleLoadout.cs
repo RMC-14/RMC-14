@@ -81,7 +81,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
         }
 
         // RMC14 - Set loadout points and work out playtime point rewards.
-        int playtimeHours = GetPlaytimeHoursForRole(session, Role);
+        int playtimeHours = GetOverallPlaytimeHours(session);
         roleProto.Points = CalculatePointsFromPlaytime(playtimeHours);
         // End RMC14
 
@@ -244,7 +244,7 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
             int playtimeHours = 0;
             if (session != null)
             {
-                playtimeHours = GetPlaytimeHoursForRole(session, Role);
+                playtimeHours = GetOverallPlaytimeHours(session);
             };
             Points = CalculatePointsFromPlaytime(playtimeHours);
             // End RMC14
@@ -419,39 +419,29 @@ public sealed partial class RoleLoadout : IEquatable<RoleLoadout>
     // RMC14
     private int CalculatePointsFromPlaytime(int playtimeHours)
     {
-        // 250 hours = 1 addtional point + base amount 7
-        int points = (int)(playtimeHours / 250) + 7;
+        // Every 100 hours = 1 additional point + base amount 7, capped at 20
+        int points = (int)(playtimeHours / 100) + 7;
+        if (points > 20)
+            points = 20;
+
         return points;
     }
 
-    private int GetPlaytimeHoursForRole(ICommonSession session, ProtoId<RoleLoadoutPrototype> role)
+    private int GetOverallPlaytimeHours(ICommonSession session)
     {
-        var protoManager = IoCManager.Resolve<IPrototypeManager>();
+        var playtimeManager = IoCManager.Resolve<ISharedPlaytimeManager>();
+        var playtimes = playtimeManager.GetPlayTimes(session!);
 
-        if (!protoManager.TryIndex(role, out var roleProto))
+        if (playtimes == null || playtimes.Count == 0)
             return 0;
 
-        if (roleProto is not { } || string.IsNullOrEmpty(roleProto.ID))
-            return 0;
-        //Role loadout prefixes "Job" onto ID so we need to strip it off
-        var jobId = roleProto.ID.Replace("Job", "");
+        var overallKey = PlayTimeTrackingShared.TrackerOverall.ToString();
 
-        //Gets the Job prototype from the stripped Role ID
-        if (!protoManager.TryIndex(new ProtoId<JobPrototype>(jobId), out var jobProto))
-            return 0;
+        var totalTicks = playtimes
+            .Where(kvp => kvp.Key != overallKey)
+            .Sum(kvp => kvp.Value.Ticks);
 
-        // Get the playtime tracker ID from the job
-        var playTimeTrackerId = jobProto.PlayTimeTracker;
-        if (string.IsNullOrEmpty(playTimeTrackerId))
-            return 0;
-
-        var playtimes = IoCManager.Resolve<ISharedPlaytimeManager>().GetPlayTimes(session);
-
-        if (!playtimes.TryGetValue(playTimeTrackerId, out var playtime))
-            return 0;
-
-        // Cast to round it down
-        return (int)playtime.TotalHours;
+        return (int)new TimeSpan(totalTicks).TotalHours;
     }
     // End RMC14
 }
