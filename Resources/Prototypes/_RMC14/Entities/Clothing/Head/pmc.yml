@@ -341,7 +341,7 @@
   parent: CMHeadCapMP
   id: RMCHeadCapEB
   name: executive bodyguard cap
-  description: A protective cap made from flexible kevlar. Standard issue for most security firms in the place of a helmet.
+  description: A protective cap made from flexible reinforced fiber. Standard issue for most security firms in the place of a helmet.
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Head/PMC/ppo_cap.rsi
