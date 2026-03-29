@@ -34,6 +34,7 @@
       prefix: rmc-job-prefix-crashland-medic
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandNoBelt
+    - type: RMCSurvivor
   hidden: true
 
 - type: startingGear

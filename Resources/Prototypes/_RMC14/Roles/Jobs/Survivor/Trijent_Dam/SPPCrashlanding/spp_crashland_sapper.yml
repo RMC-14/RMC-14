@@ -33,6 +33,7 @@
       prefix: rmc-job-prefix-crashland-sapper
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashlandNoBelt
+    - type: RMCSurvivor
   hidden: true
 
 - type: startingGear

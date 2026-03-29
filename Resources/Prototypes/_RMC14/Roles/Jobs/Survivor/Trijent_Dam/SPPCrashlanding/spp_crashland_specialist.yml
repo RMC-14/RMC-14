@@ -38,6 +38,7 @@
     - type: ScoutWhitelist
     - type: SniperWhitelist
     - type: PyroWhitelist
+    - type: RMCSurvivor
   hidden: true
 
 - type: startingGear

@@ -30,6 +30,7 @@
       prefix: rmc-job-prefix-crashland-soldier
     - type: EquipSurvivorPreset
       preset: RMCSurvivorPresetSPPCrashland
+    - type: RMCSurvivor
   hidden: true
 
 - type: entity
