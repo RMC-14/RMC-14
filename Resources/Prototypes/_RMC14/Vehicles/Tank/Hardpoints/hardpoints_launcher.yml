@@ -11,7 +11,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
-    repairCategory: Secondary
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 300
   - type: VehicleTurretAttachment
@@ -82,7 +82,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
-    repairCategory: Secondary
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -151,7 +151,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
-    repairCategory: Secondary
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -216,7 +216,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
-    repairCategory: Secondary
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
@@ -284,7 +284,7 @@
     vehicleFamily: Tank
     slotType: Launcher
     damageMultiplier: 0.0
-    repairCategory: Secondary
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
@@ -336,3 +336,4 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: m56cupola_0
+

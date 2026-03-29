@@ -22,7 +22,7 @@
     slotType: Wheel
     compatibilityId: SPPAPC
     damageMultiplier: 0.15
-    repairCategory: Wheel
+    repairRate: 0.0165
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
@@ -42,7 +42,7 @@
     slotType: Turret
     compatibilityId: SPPAPC
     damageMultiplier: 0.2
-    repairCategory: Turret
+    repairRate: 0.008
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -91,7 +91,7 @@
     slotType: Cannon
     compatibilityId: SPPAPCTurret
     damageMultiplier: 0.2
-    repairCategory: Primary
+    repairRate: 0.01
   - type: VehicleTurretAttachment
   - type: VehicleTurret
     showOverlay: true
@@ -170,3 +170,4 @@
     compatibilityId: SPPAPC
   - type: RMCHardpointVisual
     vehicleState: spp_flare_launcher_0
+

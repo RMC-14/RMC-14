@@ -14,7 +14,8 @@
     vehicleFamily: Van
     slotType: Wheel
     damageMultiplier: 0.15
-    repairCategory: Wheel
+    repairRate: 0.0165
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: RMCVehicleWheelItem
+

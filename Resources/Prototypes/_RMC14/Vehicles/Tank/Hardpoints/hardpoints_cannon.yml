@@ -11,7 +11,7 @@
     vehicleFamily: Tank
     slotType: Cannon
     damageMultiplier: 0.125
-    repairCategory: Primary
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -73,7 +73,7 @@
     vehicleFamily: Tank
     slotType: Cannon
     damageMultiplier: 0.125
-    repairCategory: Primary
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 350
   - type: VehicleTurretAttachment
@@ -156,7 +156,7 @@
     vehicleFamily: Tank
     slotType: Cannon
     damageMultiplier: 0.125
-    repairCategory: Primary
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurretAttachment
@@ -220,7 +220,7 @@
     vehicleFamily: Tank
     slotType: Cannon
     damageMultiplier: 0.125
-    repairCategory: Primary
+    repairRate: 0.01
   - type: RMCHardpointIntegrity
     maxIntegrity: 400
   - type: VehicleTurretAttachment
@@ -272,3 +272,4 @@
     useContainerOwner: false
   - type: RMCHardpointVisual
     vehicleState: drgn_flamer_0
+

@@ -11,7 +11,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
-    repairCategory: Armor
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -33,7 +33,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
-    repairCategory: Armor
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -56,7 +56,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
-    repairCategory: Armor
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -78,7 +78,7 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
-    repairCategory: Armor
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 1000
   - type: RMCVehicleArmorHardpoint
@@ -101,8 +101,9 @@
     vehicleFamily: Tank
     slotType: Armor
     damageMultiplier: 0.5
-    repairCategory: Armor
+    repairRate: 0.007
   - type: RMCHardpointIntegrity
     maxIntegrity: 150
   - type: RMCHardpointVisual
     vehicleState: snowplow_0
+

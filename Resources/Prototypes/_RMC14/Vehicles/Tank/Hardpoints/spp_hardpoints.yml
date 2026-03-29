@@ -19,7 +19,7 @@
     state: tank_turret_0
   - type: RMCHardpointItem
     compatibilityId: SPPTank
-    repairCategory: Primary
+    repairRate: 0.01
   - type: VehicleTurret
     rotateToCursor: true
     stabilizedRotation: false
@@ -288,3 +288,4 @@
     compatibilityId: SPPTank
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0
+

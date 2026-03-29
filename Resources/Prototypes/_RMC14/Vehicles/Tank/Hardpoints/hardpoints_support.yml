@@ -11,7 +11,7 @@
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
-    repairCategory: Support
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 250
   - type: RMCVehicleWeaponSupportAttachment
@@ -33,7 +33,7 @@
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
-    repairCategory: Support
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 250
   - type: RMCVehicleSpeedModifierAttachment
@@ -54,7 +54,7 @@
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
-    repairCategory: Support
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 100
   - type: VehicleTurret
@@ -111,7 +111,7 @@
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
-    repairCategory: Support
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 500
   - type: VehicleTurret
@@ -171,7 +171,7 @@
     vehicleFamily: Tank
     slotType: SupportAttachment
     damageMultiplier: 0.075
-    repairCategory: Support
+    repairRate: 0.0125
   - type: RMCHardpointIntegrity
     maxIntegrity: 250
   - type: RMCVehicleGunnerViewAttachment
@@ -180,3 +180,4 @@
     cursorPvsIncrease: 0.5
   - type: RMCHardpointVisual
     vehicleState: artillerymod_0
+
