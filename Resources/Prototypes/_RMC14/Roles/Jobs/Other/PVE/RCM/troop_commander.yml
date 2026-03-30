@@ -5,9 +5,12 @@
   description: rmc-ghost-role-information-rcm-description
   playTimeTracker: RMCJobRoyalTroopCommanderPVE
   requirements:
-    - !type:RoleTimeRequirement
-      role: CMJobExecutiveOfficer
-      time: 10800 # 3 hours
+  - !type:TotalJobsTimeRequirement
+    group: RMCJobsRCM
+    time: 3600 # 1 hour
+  - !type:RoleTimeRequirement
+    role: CMJobExecutiveOfficer
+    time: 10800 # 3 hours
   ranks:
     RMCRankTSESecondLieutenant: [ ]
   startingGear: RMCGearRoyalTroopCommanderPVE

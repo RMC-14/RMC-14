@@ -1,0 +1,18 @@
+- type: entity
+  id: RMCJobsRCM
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: JobGroup
+    name: role-timer-rcm-roles
+    color: "#AA740F"
+    jobs:
+    - CMRoyalMarinesAssaultEngineerPVE
+    - CMRoyalMarinesBombSpecPVE
+    - CMRoyalMarinesSmartgunnerPVE
+    - CMRoyalMarinesMedicPVE
+    - CMRoyalMarinesRiflemanPVE
+    - CMRoyalMarinesScoutSniperPVE
+    - CMRoyalMarinesSectionLeaderPVE
+    - CMRoyalMarinesTeamLeaderPVE
+    - CMRoyalMarinesTroopCommanderPVE
+    - CMRoyalMarinesTroopSargePVE
