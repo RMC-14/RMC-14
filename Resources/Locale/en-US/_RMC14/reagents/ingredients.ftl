@@ -50,7 +50,7 @@ reagent-name-instant-pineapple-powder = pineapple drink powder
 reagent-desc-instant-pineapple-powder = Powderized pineapple juice ready to be mixed with water. Smells of, surprise surprise, oranges.
 
 reagent-name-instant-orange = instant orange juice
-reagent-desc-instant-orange = Powderized orange juice ready to be mixed with water. Smells of, surprise surprise, oranges.
+reagent-desc-instant-orange = Both delicious AND rich in Vitamin C, what more do you need?
 
 reagent-name-instant-apple = instant apple juice
 reagent-desc-instant-apple = The pleasantly sweet taste of apples, now in liquid form.
