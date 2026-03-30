@@ -383,18 +383,6 @@ cm-chatsan-word-neaeras = neaeras
 cm-chatsan-word-yirens = yirens
 cm-chatsan-replacement-monkeys = small hosts
 
-cm-chatsan-word-claymore = claymore
-cm-chatsan-word-mine = mine
-cm-chatsan-word-tripmine = tripmine
-cm-chatsan-word-landmine = landmine
-cm-chatsan-replacement-claymore = boomrock
-
-cm-chatsan-word-claymores = claymores
-cm-chatsan-word-mines = mines
-cm-chatsan-word-tripmines = tripmines
-cm-chatsan-word-landmines = landmines
-cm-chatsan-replacement-claymores = boomrocks
-
 cm-chatsan-word-grenade = grenade
 cm-chatsan-replacement-grenade = boomstick
 

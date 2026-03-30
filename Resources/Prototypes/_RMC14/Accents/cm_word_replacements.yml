@@ -114,15 +114,6 @@
     cm-chatsan-word-marines: cm-chatsan-replacement-marines
     cm-chatsan-word-ship: cm-chatsan-replacement-ship
     cm-chatsan-word-ships: cm-chatsan-replacement-ships
-    cm-chatsan-word-claymore: cm-chatsan-replacement-claymore
-    cm-chatsan-word-mine: cm-chatsan-replacement-claymore
-    cm-chatsan-word-tripmine: cm-chatsan-replacement-claymore
-    cm-chatsan-word-landmine: cm-chatsan-replacement-claymore
-    cm-chatsan-word-claymores: cm-chatsan-replacement-claymores
-    cm-chatsan-word-mines: cm-chatsan-replacement-claymores
-    cm-chatsan-word-tripmines: cm-chatsan-replacement-claymores
-    cm-chatsan-word-landmines: cm-chatsan-replacement-claymores
-    cm-chatsan-word-: cm-chatsan-replacement-claymores
     cm-chatsan-word-grenade: cm-chatsan-replacement-grenade
     cm-chatsan-word-grenades: cm-chatsan-replacement-grenades
     cm-chatsan-word-gl: cm-chatsan-replacement-gl
