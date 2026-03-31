@@ -405,7 +405,7 @@
   - type: AccessReader
     access: [["CMAccessDelta"]]
 
-# new varadero
+# map lockers
 
 - type: entity
   parent: CMLockerBase
@@ -432,6 +432,16 @@
   components:
   - type: Sprite
     sprite: _RMC14/Structures/Storage/Lockers/detective.rsi
+
+- type: entity
+  parent: CMLockerBase
+  id: RMCLockerMiner
+  name: miner's equipment
+  suffix: Secure
+  components:
+  - type: Sprite
+    sprite: _RMC14/Structures/Storage/Lockers/mining.rsi
+
 
 # PVE
 
