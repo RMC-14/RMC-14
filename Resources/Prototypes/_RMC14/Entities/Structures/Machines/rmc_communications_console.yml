@@ -300,6 +300,7 @@
   components:
   - type: EvacuationComputer
     earlyCrashChance: 0
+  - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "RMCAccessWeYa" ] ]
 
@@ -320,6 +321,7 @@
       enum.LifeboatComputerUi.Key:
         type: LifeboatComputerBui
   - type: LifeboatComputer
+  - type: ActivatableUIRequiresAccess
   - type: AccessReader
     access: [ [ "CMAccessDropship" ], [ "RMCAccessSeniorCommand" ] ]
   - type: ActivatableUIBlacklist

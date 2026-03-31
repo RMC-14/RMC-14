@@ -11,7 +11,9 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidNormal
       strength: Normal
@@ -41,7 +43,9 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidWeak
       strength: Weak
@@ -63,7 +67,9 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong
@@ -85,7 +91,9 @@
       state: corrosive_acid
     checkCanInteract: false
   - type: TargetAction
+    repeat: true
   - type: EntityTargetAction
+    toggleOutline: false
     event: !type:XenoCorrosiveAcidEvent
       acidId: XenoAcidStrong
       strength: Strong

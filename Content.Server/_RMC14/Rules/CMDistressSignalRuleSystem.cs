@@ -1463,6 +1463,12 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
             if (Timing.CurTime >= distress.QueenDiedCheck)
             {
+                if (distress.Hijack)
+                {
+                    EndRound(distress, DistressSignalRuleResult.MinorXenoVictory);
+                    continue;
+                }
+
                 if (_xenoEvolution.HasLiving<XenoComponent>(4))
                     EndRound(distress, DistressSignalRuleResult.MinorMarineVictory);
                 else
@@ -1833,7 +1839,9 @@ public sealed class CMDistressSignalRuleSystem : GameRuleSystem<CMDistressSignal
 
         if (time >= component.QueenDiedCheck)
         {
-            if (_xenoEvolution.HasLiving<XenoComponent>(4))
+            if (component.Hijack)
+                EndRound(component, DistressSignalRuleResult.MinorXenoVictory);
+            else if (_xenoEvolution.HasLiving<XenoComponent>(4))
                 EndRound(component, DistressSignalRuleResult.MinorMarineVictory);
             else
                 EndRound(component, DistressSignalRuleResult.MajorMarineVictory, "rmc-distress-signal-majormarinevictory-timeout");
