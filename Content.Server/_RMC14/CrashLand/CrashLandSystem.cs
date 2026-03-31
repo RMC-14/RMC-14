@@ -24,6 +24,9 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
 
     private void OnCrashLanded(Entity<EntityStorageComponent> ent, ref CrashLandedEvent args)
     {
+        ent.Comp.OpenOnMove = true;
+        Dirty(ent);
+
         if (!args.ShouldDamage)
             return;
 
@@ -31,9 +34,6 @@ public sealed class CrashLandSystem : SharedCrashLandSystem
         {
             ApplyFallingDamage(entity);
         }
-
-        ent.Comp.OpenOnMove = true;
-        Dirty(ent);
 
         _entityStorage.OpenStorage(ent);
     }

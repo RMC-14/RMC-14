@@ -181,9 +181,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
             return;
 
         _transform.SetMapCoordinates(ent, _transform.ToMapCoordinates(ent.Comp.TargetCoordinates.Value));
-
-        if (TryComp(ent, out ParaDroppableComponent? paraDroppable))
-            _audio.PlayPvs(paraDroppable.DropSound, ent);
+        _audio.PlayPvs(ent.Comp.DropSound, ent);
     }
 
     private void OnIgniteAttempt(Entity<ParaDroppingComponent> ent, ref RMCIgniteAttemptEvent args)
@@ -294,6 +292,7 @@ public abstract partial class SharedParaDropSystem : EntitySystem
         var skyFalling = EnsureComp<SkyFallingComponent>(dropping);
         skyFalling.RemainingTime = paraDroppable.SkyFallDuration;
         skyFalling.TargetCoordinates = dropCoordinates;
+        skyFalling.DropSound = paraDroppable.DropSound;
         Dirty(dropping, skyFalling);
 
         var droppingComp = EnsureComp<ParaDroppingComponent>(dropping);

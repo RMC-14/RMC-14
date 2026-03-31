@@ -47,3 +47,7 @@
     landingDamage:
       types:
         Blunt: 5000
+  - type: SupplyDropPod
+    landingDamage:
+      types:
+        Blunt: 5000

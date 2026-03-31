@@ -1,8 +1,8 @@
 using Content.Shared._RMC14.Dropship.Utility.Components;
-using Content.Shared._RMC14.Sentry;
 using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
 using Content.Shared.Popups;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -20,6 +20,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] protected readonly SharedSupplyDropSystem SupplyDrop = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
 
     /// <summary>
     ///     Tries to paradrop an entity to the target's coordinates.
@@ -44,11 +45,17 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 
         var dropLocation =_map.AlignToGrid(target.ToCoordinates());
 
-        foreach (var defense in _entityLookup.GetEntitiesInRange<TurretComponent>(_transform.ToMapCoordinates(dropLocation), deployable.DefenseExclusionRange))
+        if (deployable.DeployBlacklist is { } blacklist)
         {
-            var msg = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
-            _popup.PopupPredictedCursor(msg, user, PopupType.SmallCaution);
-            return false;
+            foreach (var defense in _entityLookup.GetEntitiesInRange(_transform.ToMapCoordinates(dropLocation), deployable.DefenseExclusionRange))
+            {
+                if (!_whitelist.IsValid(blacklist, defense))
+                    continue;
+
+                var msg = Loc.GetString("rmc-sentry-too-close", ("defense", defense));
+                _popup.PopupPredictedCursor(msg, user, PopupType.SmallCaution);
+                return false;
+            }
         }
 
         var deploying = deployableEnt;
@@ -73,7 +80,9 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         if (deployable.DropPod)
         {
             var dropPod = Spawn(deployerComp.DropPodPrototype);
-            var podComponent = EnsureComp<SupplyDropPodComponent>(dropPod);
+            if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
+                return false;
+
             var podContainer = Container.EnsureContainer<Container>(dropPod, podComponent.DeploySlotId);
             Container.Insert(deploying, podContainer);
 
@@ -91,7 +100,8 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             landingDamage,
             deployable.LandingEffectId,
             deployable.ArrivingSound,
-            deployerComp.DropScatter);
+            deployerComp.DropScatter,
+            deployable.UseParachute);
 
         return true;
     }

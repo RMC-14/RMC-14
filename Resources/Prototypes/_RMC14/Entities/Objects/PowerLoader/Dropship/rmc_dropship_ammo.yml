@@ -334,3 +334,6 @@
   - type: Appearance
   - type: RMCOrbitalDeployable
     deployPrototype: RMCSentryDropship
+    deployBlacklist:
+      components:
+      - Turret
