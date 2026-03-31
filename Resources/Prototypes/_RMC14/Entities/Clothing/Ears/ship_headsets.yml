@@ -429,7 +429,7 @@
     - UNMC
     - WeYa
   - type: GrantSquadLeaderTracker
-    defaultMode: DirectorPmc
+    defaultMode: CorporateLiaison
     trackerModes:
     - DirectorPmc
     - LeaderPmc

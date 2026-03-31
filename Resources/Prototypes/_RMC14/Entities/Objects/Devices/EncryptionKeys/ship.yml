@@ -445,6 +445,7 @@
     channels:
     - MarineMedical
     - WEYA
+    - MarineMilitaryPolice
     defaultChannel: WEYA
   - type: Sprite
     state: cap_key
