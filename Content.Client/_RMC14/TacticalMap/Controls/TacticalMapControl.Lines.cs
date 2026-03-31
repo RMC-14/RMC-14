@@ -9,6 +9,52 @@ namespace Content.Client._RMC14.TacticalMap.Controls;
 
 public sealed partial class TacticalMapControl
 {
+    public void BeginStroke()
+    {
+        if (_strokeActive)
+            return;
+
+        _strokeActive = true;
+        _currentStrokeSegments = 0;
+    }
+
+    public void EndStroke()
+    {
+        if (!_strokeActive)
+            return;
+
+        if (_currentStrokeSegments > 0)
+            _strokeSegmentCounts.Add(_currentStrokeSegments);
+
+        _strokeActive = false;
+        _currentStrokeSegments = 0;
+    }
+
+    public void ClearStrokeHistory()
+    {
+        _strokeSegmentCounts.Clear();
+        _strokeActive = false;
+        _currentStrokeSegments = 0;
+    }
+
+    public bool UndoLastStroke()
+    {
+        if (_strokeSegmentCounts.Count == 0 || Lines.Count == 0)
+            return false;
+
+        var segmentsToRemove = _strokeSegmentCounts[^1];
+        _strokeSegmentCounts.RemoveAt(_strokeSegmentCounts.Count - 1);
+
+        for (var i = 0; i < segmentsToRemove && Lines.Count > 0; i++)
+        {
+            Lines.RemoveAt(Lines.Count - 1);
+            if (LineThicknesses.Count > 0)
+                LineThicknesses.RemoveAt(LineThicknesses.Count - 1);
+        }
+
+        return true;
+    }
+
     private void AddLineSegment(Vector2 start, Vector2 end)
     {
         if ((end - start).LengthSquared() < 0.01f)
@@ -94,12 +140,14 @@ public sealed partial class TacticalMapControl
     {
         Lines.Add(new TacticalMapLine(start, end, Color, LineThickness, smooth));
         LineThicknesses.Add(LineThickness);
+        RegisterAddedLine();
 
         while (LineLimit >= 0 && Lines.Count > LineLimit)
         {
             Lines.RemoveAt(0);
             if (LineThicknesses.Count > 0)
                 LineThicknesses.RemoveAt(0);
+            RegisterRemovedOldestLine();
         }
     }
 
@@ -346,5 +394,23 @@ public sealed partial class TacticalMapControl
         return line.Thickness > 0
             ? line.Thickness
             : (index < LineThicknesses.Count ? LineThicknesses[index] : 2.0f);
+    }
+
+    private void RegisterAddedLine()
+    {
+        if (_strokeActive)
+            _currentStrokeSegments++;
+        else
+            _strokeSegmentCounts.Add(1);
+    }
+
+    private void RegisterRemovedOldestLine()
+    {
+        if (_strokeSegmentCounts.Count == 0)
+            return;
+
+        _strokeSegmentCounts[0]--;
+        if (_strokeSegmentCounts[0] <= 0)
+            _strokeSegmentCounts.RemoveAt(0);
     }
 }

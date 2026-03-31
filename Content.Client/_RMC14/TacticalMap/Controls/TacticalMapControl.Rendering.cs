@@ -55,11 +55,11 @@ public sealed partial class TacticalMapControl
         DrawPreviewLine(handle, overlayScale, actualTopLeft);
         DrawPreviewSquare(handle, overlayScale, actualTopLeft);
         DrawRadiusPreview(handle, actualTopLeft, actualSize, overlayScale);
+        DrawLabels(handle, overlayScale, actualTopLeft);
         DrawHiveStructureOverlays(handle, system, background, actualTopLeft, overlayScale, curTime);
         DrawBlips(handle, system, background, defibbableRsi, defibbableRsi2, defibbableRsi3, defibbableRsi4, undefibbableRsi, hiveLeaderRsi, actualTopLeft, overlayScale, curTime);
         DrawMortarMarker(handle, system, mortarRsi, actualTopLeft, overlayScale, curTime);
         DrawEraserPreview(handle);
-        DrawLabels(handle, overlayScale, actualTopLeft);
     }
 
     private const float RadiusPreviewFillAlpha = 0.12f;

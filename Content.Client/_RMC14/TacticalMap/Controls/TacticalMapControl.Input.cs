@@ -94,6 +94,8 @@ public sealed partial class TacticalMapControl
         if (Drawing && !LabelEditMode)
         {
             _dragging = true;
+            if (!EraserMode)
+                BeginStroke();
             Vector2 startPixel = LogicalToPixel(args.RelativePosition);
             _dragStart = startPixel.Floored();
             _lastDrag = _dragStart;
@@ -227,6 +229,9 @@ public sealed partial class TacticalMapControl
                         }
                     }
                 }
+
+                if (!EraserMode)
+                    EndStroke();
 
                 _dragging = false;
                 _lastDrag = null;

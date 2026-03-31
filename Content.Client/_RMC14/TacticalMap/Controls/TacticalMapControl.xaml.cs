@@ -100,6 +100,7 @@ public sealed partial class TacticalMapControl : TextureRect
     public readonly List<TacticalMapLine> Lines = new();
     public readonly List<TacticalMapLine> BackgroundLines = new();
     public readonly List<float> LineThicknesses = new();
+    private readonly List<int> _strokeSegmentCounts = new();
     public readonly Dictionary<Vector2i, TacticalMapLabelData> TacticalLabels = new();
     public readonly Dictionary<Vector2i, TacticalMapLabelData> BackgroundLabels = new();
 
@@ -120,6 +121,8 @@ public sealed partial class TacticalMapControl : TextureRect
     private Vector2 _panOffset = Vector2.Zero;
 
     private bool _dragging;
+    private bool _strokeActive;
+    private int _currentStrokeSegments;
     private Vector2i? _lastDrag;
     private Vector2i? _dragStart;
     private Vector2i? _previewEnd;

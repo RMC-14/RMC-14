@@ -779,6 +779,7 @@ public sealed partial class TacticalMapWrapper : Control
         ClearCanvasButton.Button.OnPressed += _ => {
             Canvas.Lines.Clear();
             Canvas.LineThicknesses.Clear();
+            Canvas.ClearStrokeHistory();
             MarkCanvasDirty();
         };
         UndoButton.Button.OnPressed += _ => OnUndoPressed();
@@ -1861,11 +1862,8 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void OnUndoPressed()
     {
-        if (Canvas.Lines.Count > 0)
+        if (Canvas.UndoLastStroke())
         {
-            Canvas.Lines.RemoveAt(Canvas.Lines.Count - 1);
-            if (Canvas.LineThicknesses.Count > 0)
-                Canvas.LineThicknesses.RemoveAt(Canvas.LineThicknesses.Count - 1);
             MarkCanvasDirty();
         }
     }
