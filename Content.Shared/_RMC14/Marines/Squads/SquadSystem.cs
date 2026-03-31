@@ -716,8 +716,18 @@ public sealed class SquadSystem : EntitySystem
                 }
 
                 RemComp<SquadLeaderComponent>(uid);
-                RemComp<RMCTrackableComponent>(uid);
-                RemCompDeferred<RMCPointingComponent>(uid);
+
+                if (TryComp<RMCTrackableComponent>(uid, out var otherTrackable) &&
+                    !otherTrackable.Intrinsic)
+                {
+                    RemComp<RMCTrackableComponent>(uid);
+                }
+
+                if (TryComp<RMCPointingComponent>(uid, out var otherPointing) &&
+                    !otherPointing.Intrinsic)
+                {
+                    RemCompDeferred<RMCPointingComponent>(uid);
+                }
             }
         }
 
@@ -734,8 +744,17 @@ public sealed class SquadSystem : EntitySystem
             _marineOrders.StartActionUseDelay((toPromote, orders));
         }
 
-        EnsureComp<RMCTrackableComponent>(toPromote);
-        EnsureComp<RMCPointingComponent>(toPromote);
+        if (!EnsureComp(toPromote, out RMCTrackableComponent trackable))
+        {
+            trackable.Intrinsic = false;
+            Dirty(toPromote, trackable);
+        }
+
+        if (!EnsureComp(toPromote, out RMCPointingComponent pointing))
+        {
+            pointing.Intrinsic = false;
+            Dirty(toPromote, pointing);
+        }
 
         var slots = _inventory.GetSlotEnumerator(toPromote.Owner, SlotFlags.EARS);
         while (slots.MoveNext(out var slot))
