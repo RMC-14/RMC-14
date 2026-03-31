@@ -21,12 +21,6 @@ public sealed class WeaponMountSystem : SharedWeaponMountSystem
         if (destructible.IsBroken)
             return;
 
-        if (TryComp(ent, out CorrodibleComponent? corrodible))
-        {
-            XenoAcid.SetCorrodible(corrodible, false);
-            Dirty(ent, corrodible);
-        }
-
         ent.Comp.Broken = false;
         Dirty(ent);
     }
