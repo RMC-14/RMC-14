@@ -32,6 +32,12 @@ public sealed partial class SupplyDropPodComponent : Component
     public SoundSpecifier? OpenSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_open.ogg");
 
     /// <summary>
+    ///     The sound to play when the pod is falling towards its target.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public SoundSpecifier? ArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");
+
+    /// <summary>
     ///     The amount of damage dealt to entities near the area where this entity lands from a drop.
     /// </summary>
     [DataField, AutoNetworkedField]

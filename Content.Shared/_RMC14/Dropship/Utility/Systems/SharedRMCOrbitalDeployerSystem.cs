@@ -3,9 +3,12 @@ using Content.Shared._RMC14.SupplyDrop;
 using Content.Shared.Coordinates;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Map;
 using Robust.Shared.Network;
+using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
@@ -76,6 +79,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
 
         var openAt = TimeSpan.FromSeconds(deployable.ArrivingSoundDelay + deployable.DropDuration);
         var landingDamage = deployable.LandingDamage;
+        var arrivingSound = deployable.ArrivingSound;
 
         if (deployable.DropPod)
         {
@@ -89,6 +93,7 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             deploying = dropPod;
             openAt += podComponent.OpenTimeRemaining;
             landingDamage = podComponent.LandingDamage;
+            arrivingSound = podComponent.ArrivingSound;
         }
 
         _audio.PlayPredicted(deployerComp.LaunchSound, _transform.GetMoverCoordinates(deployer), user);
@@ -99,10 +104,37 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
             openAt,
             landingDamage,
             deployable.LandingEffectId,
-            deployable.ArrivingSound,
+            arrivingSound,
             deployerComp.DropScatter,
             deployable.UseParachute);
 
         return true;
+    }
+
+    public void DoOrbitalDeploy(EntityUid deploying, MapCoordinates dropLocation, float skyFallDuration = 5, float dropDuration = 3, float timeToOpen = 2, int dropScatter = 0, bool useParachute = true)
+    {
+        _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg"), _transform.GetMoverCoordinates(deploying));
+
+        var dropPod = Spawn("RMCSupplyDropPod");
+        if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
+            return;
+
+        var openAt = TimeSpan.FromSeconds(skyFallDuration + dropDuration + timeToOpen);
+        var landingEffectId = new EntProtoId("RMCEffectAlert");
+        var podContainer = Container.EnsureContainer<Container>(dropPod, podComponent.DeploySlotId);
+        Container.Insert(deploying, podContainer);
+
+        _audio.PlayPvs(new SoundPathSpecifier("/Audio/_RMC14/Effects/bamf.ogg"), _transform.GetMoverCoordinates(deploying)); // In case a player gets dropped.
+
+        SupplyDrop.LaunchSupplyDrop(dropPod,
+            _transform.ToMapCoordinates(_map.AlignToGrid(_transform.ToCoordinates(dropLocation))),
+            skyFallDuration,
+            dropDuration,
+            openAt,
+            podComponent.LandingDamage,
+            landingEffectId,
+            podComponent.ArrivingSound,
+            dropScatter,
+            useParachute);
     }
 }

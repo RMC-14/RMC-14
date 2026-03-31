@@ -51,3 +51,4 @@
     landingDamage:
       types:
         Blunt: 5000
+  - type: NoStunOnExit
