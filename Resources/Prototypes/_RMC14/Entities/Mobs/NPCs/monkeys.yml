@@ -78,7 +78,25 @@
           horns_floppy_kobold_ears: Inherit
           horns_double: Inherit
           horns_kobold_ears: Inherit
-#TODO: port other monkey vars; "Farwa" dog/cat monkey "Neaera" Skrell-key "Stok" Parrot monkey "Yiren" Wierd cartoon esq Alien looking monkey, Dont take cold damage
+
+- type: entity
+  parent: [RMCSmallHost]
+  id: RMCMobFrawa
+  name: frawa
+  suffix: RMC
+  components:
+  - type: NameIdentifier
+    group: frawa
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/frawa.rsi
+      state: frawa
+    - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
+      color: "#ffffff"
+      sprite: Objects/Misc/handcuffs.rsi
+      state: body-overlay-2
       visible: false
     - map: [ "ears" ]
     - map: [ "id" ]
