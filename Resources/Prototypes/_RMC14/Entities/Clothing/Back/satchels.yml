@@ -50,7 +50,7 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
-      
+
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
@@ -884,7 +884,7 @@
       contents:
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
@@ -963,6 +963,13 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder.rsi
+
+- type: entity
+  parent: RMCSatchelLightpackWelder
+  id: RMCSatchelLightpackWelderBlack
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/Other/lightpack_welder_black.rsi
 
 - type: entity
   parent: CMSatchel

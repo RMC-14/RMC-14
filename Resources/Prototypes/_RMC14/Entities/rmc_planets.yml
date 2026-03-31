@@ -186,16 +186,16 @@
       - CMSurvivorScientist: 2
     survivorJobVariantScenarios:
       panic_room_hold:
-        CMSurvivorEngineer:
-        - RMCSurvivorShivasPanicRoomEngineer: 2
-        CMSurvivorScientist:
-        - RMCSurvivorShivasPanicRoomResearcher: 2
-        CMSurvivorDoctor:
-        - RMCSurvivorShivasPanicRoomDoctor: 2
         CMSurvivorSecurity:
         - RMCSurvivorPMCCommandoShivas: 1
         CMSurvivorCorporate:
         - RMCSurvivorAssistantManager: 1
+        CMSurvivorDoctor:
+        - RMCSurvivorShivasPanicRoomDoctor: 2
+        CMSurvivorEngineer:
+        - RMCSurvivorShivasPanicRoomEngineer: 2
+        CMSurvivorScientist:
+        - RMCSurvivorShivasPanicRoomResearcher: 2
         CMSurvivor:
         - RMCSurvivorShivasPanicRoomCivilian: 2
 
