@@ -89,7 +89,7 @@
 
 - type: entity
   parent: RMCSimpleMob
-  id: RMCRodent # required for all our code to not blow up
+  id: RMCRodent # required for all our code to not blow up, yes, it is pretty much just a 1-1 copy past of upstream mouse code
   name: Abstract rodent
   abstract: true
   suffix: CM
@@ -194,7 +194,7 @@
   - type: FixedIdentity
     name: cm-chatsan-replacement-rat
 
-#TODO: Emotes: "chimper","scratch","jump","roll","tail","rocks about", "creaks", "chimpers". chance 80 to use, equip or throw nearby objects. chance 50 volcalise/emote
+#TODO: Emotes: "chimper","scratch","jump","roll","tail","rocks about", "creaks", "chimpers". chance 80 to use, equip or throw nearby objects. chance 50 volcalise/emote. What tf do those chance values mean? beats me check 13
 - type: entity
   id: RMCSmallHost
   parent: [RMCSimpleMob, StripableInventoryBase] #TODO: Just parent this to BaseOranic at some point down the line if it doesn't prove to be catastrophic
@@ -227,8 +227,8 @@
     drawdepth: Mobs
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
+      sprite: _RMC14/Mobs/Animals/monkeys/monkey.rsi
       state: monkey
-      sprite: Mobs/Animals/monkey.rsi
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.Handcuffs" ]
       color: "#ffffff"
@@ -279,9 +279,9 @@
   - type: MobThresholds # CM13 uses damage multipliers instead of setting a unique health for em. All small hosts use a 1.5 brute and burn mult so just doing this instead.
     thresholds:
       0: Alive
-      100: Critical # They get a crit state, not parity but i feel charitable
+      100: Critical # They get a crit state, not parity, just for anti code reasonance cascadey reasons
       130: Dead
-  - type: MeleeWeapon # TODO: give them a secondary attack method which is bite. It's the method CM13 uses
+  - type: MeleeWeapon # TODO: give them a secondary attack method which is bite. Parity
     soundHit:
       collection: Punch
     angle: 0
@@ -299,10 +299,10 @@
 #  - type: NPCRetaliation
 #    attackMemoryLength: 10
 #  - type: FactionException
-#  - type: NpcFactionMember
-#    factions:
-#      - Passive
+  - type: NpcFactionMember
+    factions:
+      - Passive
 #  - type: HTN
 #    rootTask:
 #      task: SimpleHostileCompound
-# objectively speaking getting killed by an ape is funny but it is not parity. commented out as we shouldn't be using it
+# objectively speaking getting killed by an ape is funny but it is not parity. commented out incase this non-parity feature is deemed vital for some reason

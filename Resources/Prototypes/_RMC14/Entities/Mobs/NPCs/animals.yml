@@ -5,7 +5,7 @@
   id: CMMobMouse
   name: mouse
   suffix: RMC
-  description: Squeak!
+  description: It's a small, disease-ridden rodent.
   components:
   - type: Sprite
     drawdepth: SmallMobs
