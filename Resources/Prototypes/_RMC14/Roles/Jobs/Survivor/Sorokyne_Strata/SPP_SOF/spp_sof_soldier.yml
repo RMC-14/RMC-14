@@ -1,0 +1,29 @@
+- type: job
+  parent: RMCSurvivorSPPSOFBase
+  id: RMCSurvivorSPPSOFSoldier
+  name: rmc-job-name-soro-sof-soldier
+  icon: "RMCJobIconSPPRifleman"
+  spawnMenuRoleName: SPP SOF Rifleman (Survivor)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: RMCSurvivor
+    - type: NpcFactionMember
+      factions:
+      - SPP
+    - type: Skills
+      preset: RMCSkillPresetSurvivorSPPPrivate
+    - type: IntelRescueSurvivorObjective
+    - type: JobPrefix
+      prefix: rmc-job-prefix-soro-sof-soldier
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: CMSpawnPointSPPSOFRifleman
+  name: special survivor spp sof rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorSPPSOFSoldier
+  - type: Sprite
+    state: surv_spp

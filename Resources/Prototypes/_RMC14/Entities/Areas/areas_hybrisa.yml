@@ -2659,7 +2659,7 @@
 - type: entity
   parent: RMCAreaLv759Indoors
   id: RMCAreaLv759IndoorsOutpostSouterMainHall
-  name: EIAF Outpost Souter - Main Hall
+  name: RCM-P Outpost Souter - Main Hall
   components:
   - type: Sprite
     state: security_checkpoint_central
@@ -2669,7 +2669,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterDorms
-  name: EIAF Outpost Souter - Dormitories
+  name: RCM-P Outpost Souter - Dormitories
   components:
   - type: Sprite
     state: security_hub
@@ -2677,7 +2677,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterArmoury
-  name: EIAF Outpost Souter - Armoury
+  name: RCM-P Outpost Souter - Armoury
   components:
   - type: Sprite
     state: security_hub
@@ -2685,7 +2685,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterFlightMaints
-  name: EIAF Outpost Souter - Flight Maintenance Room
+  name: RCM-P Outpost Souter - Flight Maintenance Room
   components:
   - type: Sprite
     state: security_hub
@@ -2693,7 +2693,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterHangar
-  name: EIAF Outpost Souter - Hangar
+  name: RCM-P Outpost Souter - Hangar
   components:
   - type: Sprite
     state: security_checkpoint_east
@@ -2701,7 +2701,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterReception
-  name: EIAF Outpost Souter - Reception Office
+  name: RCM-P Outpost Souter - Reception Office
   components:
   - type: Sprite
     state: security_hub
@@ -2709,7 +2709,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterEntrance
-  name: EIAF Outpost Souter - Entrance
+  name: RCM-P Outpost Souter - Entrance
   components:
   - type: Sprite
     state: security_checkpoint_west
@@ -2717,7 +2717,7 @@
 - type: entity
   parent: RMCAreaLv759IndoorsOutpostSouterMainHall
   id: RMCAreaLv759IndoorsOutpostSouterFlightControl
-  name: EIAF Outpost Souter - Flight Control
+  name: RCM-P Outpost Souter - Flight Control
   components:
   - type: Sprite
     state: security_hub

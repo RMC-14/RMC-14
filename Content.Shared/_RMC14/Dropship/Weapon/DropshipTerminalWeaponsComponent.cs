@@ -44,9 +44,6 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     [DataField, AutoNetworkedField]
     public bool NightVision;
 
-    [DataField, AutoNetworkedField]
-    public NetEntity? SelectedSystem;
-
     /// <summary>
     ///     The entity being looked at by the camera view.
     /// </summary>
@@ -118,6 +115,7 @@ public sealed partial class DropshipTerminalWeaponsComponent : Component
     public record struct Screen(
         DropshipTerminalWeaponsScreen State,
         NetEntity? Weapon,
+        NetEntity? System,
         int? FireMissionId
     );
 

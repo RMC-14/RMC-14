@@ -92,6 +92,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     [Dependency] private readonly SharedRMCFlammableSystem _rmcFlammable = default!;
     [Dependency] private readonly SharedRMCExplosionSystem _rmcExplosion = default!;
     [Dependency] private readonly RMCImplosionSystem _rmcImplosion = default!;
+    [Dependency] private readonly SharedRMCOrbitalDeployerSystem _rmcOrbitalDeployable = default!;
     [Dependency] private readonly SkillsSystem _skills = default!;
     [Dependency] private readonly SquadSystem _squad = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
@@ -149,6 +150,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsChooseParaDropMsg>(OnWeaponsChooseParaDropMsg);
                 subs.Event<DropshipTerminalWeaponsChooseSpotlightMsg>(OnWeaponsChooseSpotlightMsg);
                 subs.Event<DropshipTerminalWeaponsChooseEquipmentDeployerMsg>(OnWeaponsChooseEquipmentDeployerMsg);
+                subs.Event<DropshipTerminalWeaponsChooseLaunchBayMsg>(OnWeaponsChooseLaunchBayMsg);
                 subs.Event<DropshipTerminalWeaponsFireMsg>(OnWeaponsFireMsg);
                 subs.Event<DropshipTerminalWeaponsNightVisionMsg>(OnWeaponsNightVisionMsg);
                 subs.Event<DropshipTerminalWeaponsExitMsg>(OnWeaponsExitMsg);
@@ -176,6 +178,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
                 subs.Event<DropshipTerminalWeaponsSelectStrikeVectorMsg>(OnSelectStrikeVector);
                 subs.Event<DropshipTerminalWeaponsFireMissionNextMsg>(OnNextFireMission);
                 subs.Event<DropshipTerminalWeaponsFireMissionPreviousMsg>(OnPreviousFireMission);
+                subs.Event<DropShipTerminalWeaponsLaunchOrdnanceMsg>(OnWeaponsLaunchOrdnance);
             });
 
         Subs.CVar(_config, RMCCVars.RMCDropshipCASDebug, v => CasDebug = v, true);
@@ -541,6 +544,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnWeaponsChooseEquipmentDeployerMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseEquipmentDeployerMsg args)
     {
         SetScreenUtility<RMCEquipmentDeployerComponent>(ent, args.First, EquipmentDeployer, args.Slot);
+    }
+
+    private void OnWeaponsChooseLaunchBayMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsChooseLaunchBayMsg args)
+    {
+        SetScreenUtility<RMCOrbitalDeployerComponent>(ent, args.First, Launch, args.Slot);
     }
 
     private void OnWeaponsFireMsg(Entity<DropshipTerminalWeaponsComponent> ent, ref DropshipTerminalWeaponsFireMsg args)
@@ -951,7 +959,9 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnWeaponsSpotlightSelect(Entity<DropshipTerminalWeaponsComponent> ent,
         ref DropShipTerminalWeaponsSpotlightToggleMsg args)
     {
-        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
+
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
             return;
@@ -971,7 +981,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnEquipmentDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
         ref DropShipTerminalWeaponsEquipmentDeployToggleMsg args)
     {
-        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
             return;
@@ -996,7 +1007,8 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
     private void OnEquipmentToggleAutoDeploy(Entity<DropshipTerminalWeaponsComponent> ent,
         ref DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg args)
     {
-        var selectedSystem = GetEntity(ent.Comp.SelectedSystem);
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
         if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
             dropship.Comp.AttachmentPoints.Count == 0)
             return;
@@ -1005,6 +1017,39 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
             return;
 
         _equipmentDeployer.SetAutoDeploy(container.ContainedEntities[0], args.AutoDeploy);
+        RefreshWeaponsUI(ent);
+    }
+
+    private void OnWeaponsLaunchOrdnance(Entity<DropshipTerminalWeaponsComponent> ent, ref DropShipTerminalWeaponsLaunchOrdnanceMsg args)
+    {
+        ref var screen = ref args.First ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
+        var selectedSystem = GetEntity(screen.System);
+
+        if (!_dropship.TryGetGridDropship(ent, out var dropship) ||
+            dropship.Comp.AttachmentPoints.Count == 0)
+            return;
+
+        if (ent.Comp.Target is not { } target)
+            return;
+
+        if (!CasDebug)
+        {
+            if (!IsValidTarget(target))
+                return;
+
+            if (!_area.CanCAS(target.ToCoordinates()))
+            {
+                var msg = Loc.GetString("rmc-laser-designator-not-cas");
+                _popup.PopupCursor(msg, args.Actor);
+                return;
+            }
+        }
+
+        if (!TryComp(selectedSystem, out RMCOrbitalDeployerComponent? deployer))
+            return;
+
+        _rmcOrbitalDeployable.TryDeploy(selectedSystem.Value, target,  args.Actor, deployer);
+
         RefreshWeaponsUI(ent);
     }
 
@@ -1864,7 +1909,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
 
         ref var screen = ref first ? ref ent.Comp.ScreenOne : ref ent.Comp.ScreenTwo;
         screen.State = state;
-        ent.Comp.SelectedSystem = selected;
+        screen.System = selected;
 
         Dirty(ent);
         RefreshWeaponsUI(ent);
