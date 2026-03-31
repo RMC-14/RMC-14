@@ -1,0 +1,165 @@
+- type: job
+  parent: CMSurvivor
+  id: RMCSurvivorPMCCommandoShivas
+  name: rmc-job-name-survivor-shivas-weya-commando
+  description: rmc-job-description-survivor
+  ranks:
+    RMCRankWeYaCommando: []
+  supervisors: cm-job-supervisors-we-ya
+  accessGroups:
+  - ColonistPMC
+  startingGear: RMCGearSurvivorShivasCommando
+  icon: RMCJobIconPMCCommando # TODO RMC14: minimap icons of diff factions mechanic
+  hasIcon: true
+  joinNotifyCrew: false
+  camouflageStartingGear: null
+  greeting: rmc-job-greeting-shivas-commando
+  playTimeTracker: CMJobSurvivorSecurity
+  spawnMenuRoleName: Survivor - We-Ya Commando (Shivas)
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Skills
+      preset: RMCSkillPresetPMCCommando
+    - type: RMCSurvivor
+    - type: MotionDetectorTracked
+    - type: RMCAllowSuitStorage
+    - type: IntelRescueSurvivorObjective
+    - type: EquipSurvivorPreset
+      preset: RMCSurvivorPresetNoGun
+    - type: NpcFactionMember
+      factions:
+      - WeYa
+      - Civilian
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: pmc_gun
+      background:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: background_wy_com
+
+- type: startingGear
+  parent: RMCGearSurvivor
+  id: RMCGearSurvivorShivasCommando
+  equipment:
+    jumpsuit: RMCJumpsuitVeteranPMCCommandoSurvivor
+    shoes: RMCBootsPMCCommandoFilled
+    head: ArmorHelmetPMCCommandoSurvivor
+    ears: RMCHeadsetHvHWeYaPMCCommando
+    belt: RMCBeltPMCFilledCommando
+    id: CMIDCardCommando
+    mask: RMCMaskCoifPMC
+    outerClothing: CMArmorM4PMCCommandoSurvivorFilled
+    gloves: RMCHandsVeteranPMCCommandoSurvivor
+    suitstorage: RMCWeaponRifleM54CWhiteCommando
+    pocket1: RMCPouchSurvivalBlackFilled
+    pocket2: RMCPouchFirstAidPMCFill
+    back: RMCSatchelPMCCommandoFilled
+
+- type: entity
+  parent: CMArmorM4PMCCommandoSurvivor
+  id: CMArmorM4PMCCommandoSurvivorFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCMREWeYaPMC
+
+- type: entity
+  parent: CMFirstAidKit
+  id: CMFirstAidKitFilledCommando
+  suffix: Filled, Commando
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCSyringeCaseFilledCommando
+    - id: RMCSurgicalCaseFilledCommandoElite
+    - id: CMRollerBedSpawnFolded
+    - id: CMMedicalUpgradeKitFilledCommando
+#  /obj/item/stack/medical/splint/nano(src, rand(1,2))
+
+  - type: Sprite
+    layers:
+    - state: advfirstaid
+    - state: kit_empty
+      map: [ "openLayer" ]
+      visible: false
+  - type: Item
+    heldPrefix: advfirstaid
+
+- type: entity
+  parent: CMSurgicalCase
+  id: RMCSurgicalCaseFilledCommandoElite
+  suffix: Filled, Commando, Elite
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMSynthGraft
+    - id: CMSurgicalLine
+#  /obj/item/stack/medical/splint/nano(src, rand(1,2))
+
+- type: entity
+  parent: RMCSyringeCase
+  id: RMCSyringeCaseFilledCommando
+  suffix: Filled, Commando
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMInaprovalineAutoInjector
+#  /obj/item/reagent_container/hypospray/autoinjector/ultrazine/empty
+#  /obj/item/reagent_container/hypospray/autoinjector/adrenaline
+
+- type: entity
+  parent: CMMedicalUpgradeKit
+  id: CMMedicalUpgradeKitFilledCommando
+  suffix: Filled, Commando
+  components:
+  - type: StorageFill # todo: randomization (35% probability to spawn 1-4 trauma, and 35% to spawn 1-4 burn)
+    contents:
+    - id: CMUpgradedTraumaKit10
+    - id: CMUpgradedBurnKit10
+
+- type: entity
+  parent: RMCBeltPMC
+  id: RMCBeltPMCFilledCommando
+  suffix: Filled, Commando, Survivor
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineRifleM54C
+      amount: 5
+
+- type: entity
+  parent: RMCSatchelPMCCommando
+  id: RMCSatchelPMCCommandoFilled
+  suffix: Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCZipties
+    - id: CMStunbaton
+    - id: CMWEYAFlask
+    - id: RMCZippo
+    - id: RMCCigarettePackWeYaGold
+    - id: CMDefibrillator # TODO: Low charge (?)
+    - id: CMFirstAidKitFilledCommando
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconPMCCommando
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: pmc_commando_gun
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointSurvivorPanicRoomCommando
+  name: special survivor panic room commando spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorPMCCommandoShivas
+  - type: Sprite
+    layers:
+    - sprite: _RMC14/Markers/landmarks.rsi
+      state: surv

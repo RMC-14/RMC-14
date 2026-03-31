@@ -66,7 +66,7 @@
   equipment:
     outerClothing: RMCArmorVestTSEPA
     suitstorage: RMCWeaponShotgunHG3712
-    pocket1: RMCPouchShotgunFilledConstable
+    pocket1: RMCPouchShotgunFilledPolicing
   storage:
     back:
     - RMCHandcuffs

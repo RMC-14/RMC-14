@@ -1,0 +1,52 @@
+- type: job
+  parent: RMCSurvivorParaBase
+  id: RMCSurvivorParamarine
+  name: rmc-job-name-paramarine
+  icon: RMCJobIconParamarine
+  spawnMenuRoleName: Royal Paramarine Rifleman (Survivor)
+  special:
+    - !type:AddComponentSpecial
+      components:
+      - type: NpcFactionMember
+        factions:
+          - RoyalMarines
+          - TSE
+      - type: RMCAllowSuitStorage
+      - type: IntelRescueSurvivorObjective
+      - type: MotionDetectorTracked
+      - type: Skills
+        preset: RMCSkillPresetParamarine
+      - type: TacticalMapIcon
+        icon:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: rmc_rifleman
+        background:
+          sprite: /Textures/_RMC14/Interface/map_blips.rsi
+          state: background_para
+      - type: AssignSquad
+        whitelist:
+          tags:
+            - SquadPara
+      - type: JobPrefix
+        prefix: rmc-job-prefix-paramarine
+      - type: EquipSurvivorPreset
+        preset: RMCGearSurvivorPresetPara
+  hidden: true
+
+- type: entity
+  parent: CMSpawnPointJobBase
+  id: RMCSpawnPointParamarine
+  name: paramarine rifleman spawn point
+  components:
+  - type: SpawnPoint
+    job_id: RMCSurvivorParamarine
+  - type: Sprite
+    state: surv_tse
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RMCJobIconParamarine
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: para_rifleman
+    
