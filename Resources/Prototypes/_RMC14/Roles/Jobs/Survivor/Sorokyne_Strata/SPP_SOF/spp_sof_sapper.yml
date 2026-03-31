@@ -10,20 +10,12 @@
   special:
   - !type:AddComponentSpecial
     components:
+    - type: RMCSurvivor
     - type: NpcFactionMember
       factions:
       - SPP
     - type: Skills
-      skills:
-        RMCSkillEngineer: 3
-        RMCSkillConstruction: 2
-        RMCSkillMeleeWeapons: 1
-        RMCSkillCqc: 1
-        RMCSkillFireman: 1
-        RMCSkillFirearms: 1
-        RMCSkillMedical: 1
-        RMCSkillJtac: 1
-        RMCSkillEndurance: 2
+      preset: RMCSkillPresetSurvivorSPPSapper
     - type: IntelRescueSurvivorObjective # TODO RMC14 assign squad
     - type: JobPrefix
       prefix: rmc-job-prefix-soro-sof-sapper
@@ -33,12 +25,13 @@
   parent: RMCGearSPPSOFBase
   id: RMCGearSPPSOFSapper
   equipment:
+    back: RMCSatchelLightpackWelderBlack
     eyes: RMCWeldingGoggles
     gloves: CMHandsInsulated
     pocket2: RMCPouchToolsSocFilledSOF
   storage:
     back:
-    - CMSheetMetal20
+    - CMSheetMetal40
 
 - type: entity
   parent: CMSpawnPointJobBase
