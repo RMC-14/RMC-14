@@ -329,11 +329,40 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             return;
         }
 
-        if (_queenEye.IsInQueenEye(xeno.Owner) &&
-            _rmcMap.HasAnchoredEntityEnumerator<BarricadeComponent>(coordinates))
+        DirectionFlag barricadeFrontDirs = DirectionFlag.None;
+        if (_queenEye.IsInQueenEye(xeno.Owner))
         {
-            _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
-            return;
+            var barricadeEnum = _rmcMap.GetAnchoredEntitiesEnumerator<BarricadeComponent>(coordinates);
+            while (barricadeEnum.MoveNext(out var barricadeUid))
+            {
+                // Open folding barricades won't block expand weed
+                if (TryComp(barricadeUid, out DoorComponent? door) && door.State == DoorState.Open)
+                    continue;
+
+                barricadeFrontDirs |= _transform.GetWorldRotation(barricadeUid).GetCardinalDir().AsFlag();
+            }
+
+            if (barricadeFrontDirs != DirectionFlag.None)
+            {
+                var hasValidAdjacentWeed = false;
+                foreach (var direction in _rmcMap.CardinalDirections)
+                {
+                    if ((direction.AsFlag() & barricadeFrontDirs) != 0)
+                        continue;
+
+                    if (_rmcMap.HasAnchoredEntityEnumerator<XenoWeedsComponent>(coordinates, direction))
+                    {
+                        hasValidAdjacentWeed = true;
+                        break;
+                    }
+                }
+
+                if (!hasValidAdjacentWeed)
+                {
+                    _popup.PopupCoordinates(Loc.GetString("rmc-xeno-weeds-blocked"), coordinates, xeno.Owner);
+                    return;
+                }
+            }
         }
 
         var grid = new Entity<MapGridComponent>(gridUid, gridComp);
@@ -349,6 +378,9 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         {
             foreach (var direction in _rmcMap.CardinalDirections)
             {
+                if ((direction.AsFlag() & barricadeFrontDirs) != 0)
+                    continue;
+
                 if (_rmcMap.HasAnchoredEntityEnumerator(coordinates, out adjacent, direction))
                     break;
             }
