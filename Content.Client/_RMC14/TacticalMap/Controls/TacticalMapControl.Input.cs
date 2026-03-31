@@ -335,13 +335,20 @@ public sealed partial class TacticalMapControl
                 if ((currentPixelPos - _rightClickStartPosition.Value).Length() < MinDragDistance)
                     return;
 
+                if (GetPanResistance(_zoomFactor) <= 0f)
+                    return;
+
                 _rightClickMoved = true;
                 _lastPanPosition = currentPixelPos;
             }
 
             Vector2 panDelta = currentPixelPos - _lastPanPosition.Value;
+            float panResistance = GetPanResistance(_zoomFactor);
 
-            _panOffset += panDelta;
+            if (panResistance <= 0f)
+                return;
+
+            _panOffset += panDelta * panResistance;
             ApplyViewSettings();
             NotifyViewChanged();
 
@@ -366,30 +373,43 @@ public sealed partial class TacticalMapControl
         if (Texture == null)
             return;
 
-        Vector2 mousePixelPos = LogicalToPixel(args.RelativePosition);
+        if (!TryGetMapPixelPosition(args.RelativePosition, out var mousePixelPos, requireInside: true))
+            return;
+
         (Vector2 oldActualSize, Vector2 oldActualTopLeft, float oldOverlayScale) = GetDrawParameters();
 
         float oldZoom = _zoomFactor;
+        float targetZoom = oldZoom;
 
         if (args.Delta.Y > 0)
-            _zoomFactor *= ZoomSpeed;
+            targetZoom *= ZoomSpeed;
         else if (args.Delta.Y < 0)
-            _zoomFactor /= ZoomSpeed;
+            targetZoom /= ZoomSpeed;
 
-        _zoomFactor = Math.Clamp(_zoomFactor, MinZoom, MaxZoom);
+        targetZoom = Math.Clamp(targetZoom, MinZoom, MaxZoom);
 
-        if (Math.Abs(_zoomFactor - oldZoom) > 0.001f)
+        if (Math.Abs(targetZoom - oldZoom) > 0.001f)
         {
             Vector2 relativeToTexture = (mousePixelPos - oldActualTopLeft) / oldOverlayScale;
+            Vector2 availableSize = new(PixelWidth, PixelHeight);
+            Vector2 newPan = Vector2.Zero;
 
-            ApplyViewSettings();
+            if (!IsAtFitZoom(targetZoom))
+            {
+                Vector2 textureSize = Texture.Size;
+                float baseScaleX = availableSize.X / textureSize.X;
+                float baseScaleY = availableSize.Y / textureSize.Y;
+                float baseScale = Math.Min(baseScaleX, baseScaleY);
+                float actualScale = baseScale * targetZoom;
+                Vector2 actualSize = textureSize * actualScale;
+                float overlayScale = actualScale / MapScale;
+                Vector2 centeredTopLeft = (availableSize - actualSize) / 2;
 
-            (Vector2 newActualSize, Vector2 newActualTopLeft, float newOverlayScale) = GetDrawParameters();
-            Vector2 newMousePos = relativeToTexture * newOverlayScale + newActualTopLeft;
-            Vector2 mouseDelta = mousePixelPos - newMousePos;
+                newPan = mousePixelPos - relativeToTexture * overlayScale - centeredTopLeft;
+            }
 
-            _panOffset += mouseDelta;
-            ApplyViewSettings();
+            _zoomFactor = targetZoom;
+            _panOffset = ClampPanOffset(availableSize, _zoomFactor, newPan);
             NotifyViewChanged();
         }
 

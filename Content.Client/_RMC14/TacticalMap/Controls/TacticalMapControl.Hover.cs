@@ -12,6 +12,12 @@ public sealed partial class TacticalMapControl
         if (OnHoverAreaInfo == null || Texture == null)
             return;
 
+        if (!TryGetMapPixelPosition(controlPosition, out _, requireInside: true))
+        {
+            ClearHoverInfo();
+            return;
+        }
+
         Vector2i indices = PositionToIndices(controlPosition);
         if (!IsWithinMap(indices))
         {

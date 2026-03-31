@@ -192,6 +192,7 @@ public sealed partial class TacticalMapWrapper : Control
     private bool _roof3OverlayEnabled;
     private bool _roof4OverlayEnabled;
     private bool _canvasDirty;
+    private bool _suppressViewSync;
 
     public TacticalMapWrapper()
     {
@@ -218,6 +219,12 @@ public sealed partial class TacticalMapWrapper : Control
         UpdateBlipStaleAlpha();
         UpdateFocusHoverState();
         UpdateLayerVisibilityColumnsIfNeeded();
+    }
+
+    protected override void Resized()
+    {
+        base.Resized();
+        ApplyViewStateToControls();
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -369,8 +376,7 @@ public sealed partial class TacticalMapWrapper : Control
 
             _currentZoomFactor = settings.ZoomFactor;
             _currentPanOffset = settings.PanOffset;
-            Map.LoadViewSettings(settings.ZoomFactor, settings.PanOffset, null);
-            Canvas.LoadViewSettings(settings.ZoomFactor, settings.PanOffset, null);
+            ApplyViewStateToControls();
         }
         catch (Exception ex)
         {
@@ -404,8 +410,7 @@ public sealed partial class TacticalMapWrapper : Control
         Map.SetCurrentMapName(_currentMapId);
         Canvas.SetCurrentMapName(_currentMapId);
 
-        Map.ApplyViewSettings();
-        Canvas.ApplyViewSettings();
+        ApplyViewStateToControls();
     }
 
     public void UpdateMapList(IReadOnlyList<TacticalMapMapInfo> maps, NetEntity activeMap)
@@ -818,19 +823,39 @@ public sealed partial class TacticalMapWrapper : Control
         Map.OnContextMenuRequested += OnContextMenuRequested;
         Canvas.OnContextMenuRequested += OnContextMenuRequested;
 
-        Map.SetViewUpdateCallback((zoom, pan) => {
-            _currentZoomFactor = zoom;
-            _currentPanOffset = pan;
-        });
-
-        Canvas.SetViewUpdateCallback((zoom, pan) => {
-            _currentZoomFactor = zoom;
-            _currentPanOffset = pan;
-        });
+        Map.SetViewUpdateCallback(OnViewChangedFromControl);
+        Canvas.SetViewUpdateCallback(OnViewChangedFromControl);
 
         _rootMarginDefault = RootContainer.Margin;
         _mapMarginDefault = MapContainer.Margin;
         UpdateFocusModeButton();
+    }
+
+    private void OnViewChangedFromControl(float zoom, Vector2 pan)
+    {
+        if (_suppressViewSync)
+            return;
+
+        _currentZoomFactor = zoom;
+        _currentPanOffset = pan;
+        ApplyViewStateToControls();
+    }
+
+    private void ApplyViewStateToControls()
+    {
+        _suppressViewSync = true;
+        try
+        {
+            Map.LoadViewSettings(_currentZoomFactor, _currentPanOffset, null);
+            Canvas.LoadViewSettings(_currentZoomFactor, _currentPanOffset, null);
+
+            _currentZoomFactor = Map.GetCurrentZoomFactor();
+            _currentPanOffset = Map.GetCurrentPanOffset();
+        }
+        finally
+        {
+            _suppressViewSync = false;
+        }
     }
 
     private void SetupQueenEyeMode()
@@ -1900,10 +1925,9 @@ public sealed partial class TacticalMapWrapper : Control
 
     private void ResetView()
     {
-        Map.ResetZoomAndPan();
-        Canvas.ResetZoomAndPan();
         _currentZoomFactor = 1.0f;
         _currentPanOffset = Vector2.Zero;
+        ApplyViewStateToControls();
 
         if (_followingPlayer)
         {
@@ -1917,12 +1941,13 @@ public sealed partial class TacticalMapWrapper : Control
     {
         if (TryFindPlayerBlip(out Vector2i playerIndices))
         {
-            Map.CenterOnPosition(playerIndices);
-
-            if (Canvas.Visible)
-                Canvas.CenterOnPosition(playerIndices);
-
-            _lastPlayerPosition = playerIndices;
+            if (Map.CenterOnPosition(playerIndices))
+            {
+                _currentZoomFactor = Map.GetCurrentZoomFactor();
+                _currentPanOffset = Map.GetCurrentPanOffset();
+                ApplyViewStateToControls();
+                _lastPlayerPosition = playerIndices;
+            }
         }
     }
 
@@ -2098,12 +2123,13 @@ public sealed partial class TacticalMapWrapper : Control
         if (TryFindPlayerBlip(out Vector2i currentPlayerPosition) &&
             _lastPlayerPosition != currentPlayerPosition)
         {
-            Map.CenterOnPosition(currentPlayerPosition);
-
-            if (Canvas.Visible)
-                Canvas.CenterOnPosition(currentPlayerPosition);
-
-            _lastPlayerPosition = currentPlayerPosition;
+            if (Map.CenterOnPosition(currentPlayerPosition))
+            {
+                _currentZoomFactor = Map.GetCurrentZoomFactor();
+                _currentPanOffset = Map.GetCurrentPanOffset();
+                ApplyViewStateToControls();
+                _lastPlayerPosition = currentPlayerPosition;
+            }
         }
     }
 

@@ -161,11 +161,16 @@
             </BoxContainer>
 
             <BoxContainer Name="MapContainer" Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="2 0 2 2">
-                <controls:TacticalMapControl Name="Map" Access="Public" Stretch="KeepAspect"
-                                             MouseFilter="Pass" HorizontalExpand="True" VerticalExpand="True" />
-                <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="KeepAspect"
-                                             Drawing="True" MouseFilter="Pass" Visible="False"
-                                             HorizontalExpand="True" VerticalExpand="True" />
+                <BoxContainer Name="MapViewport" Access="Public" Orientation="Vertical"
+                              HorizontalExpand="True" VerticalExpand="True" RectClipContent="True">
+                    <controls:TacticalMapControl Name="Map" Access="Public" Stretch="KeepAspect"
+                                                 MouseFilter="Pass" HorizontalExpand="True" VerticalExpand="True"
+                                                 RectClipContent="True" />
+                    <controls:TacticalMapControl Name="Canvas" Access="Public" Stretch="KeepAspect"
+                                                 Drawing="True" MouseFilter="Pass" Visible="False"
+                                                 HorizontalExpand="True" VerticalExpand="True"
+                                                 RectClipContent="True" />
+                </BoxContainer>
             </BoxContainer>
         </BoxContainer>
     </BoxContainer>

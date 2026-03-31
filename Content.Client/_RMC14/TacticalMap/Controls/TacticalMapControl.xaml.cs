@@ -64,6 +64,10 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float LabelPadding = 2f;
     private const float MinZoom = 0.3f;
     private const float MaxZoom = 5.0f;
+    private const float FitZoom = 1.0f;
+    private const float FitZoomEpsilon = 0.001f;
+    private const float PanResistanceZoomRange = 0.35f;
+    private const float PanResistanceExponent = 1.5f;
     private const float ZoomSpeed = 1.2f;
     private const float LabelClickTolerance = 15f;
 

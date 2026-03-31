@@ -34,7 +34,6 @@ public sealed partial class TacticalMapControl
         _panOffset = panOffset;
 
         ApplyViewSettings();
-        NotifyViewChanged();
     }
 
     public void ApplyViewSettings()
@@ -47,9 +46,7 @@ public sealed partial class TacticalMapControl
             return;
 
         _zoomFactor = Math.Clamp(_zoomFactor, MinZoom, MaxZoom);
-
-        float maxPan = Math.Max(availableSize.X, availableSize.Y) * _zoomFactor * 0.5f;
-        _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
+        _panOffset = ClampPanOffset(availableSize, _zoomFactor, _panOffset);
     }
 
     public bool CenterOnPosition(Vector2i indices)
@@ -74,18 +71,22 @@ public sealed partial class TacticalMapControl
 
         Vector2 screenCenter = availableSize / 2;
         _panOffset = screenCenter - targetPosition * overlayScale - (availableSize - actualSize) / 2;
-
-        float maxPan = Math.Max(availableSize.X, availableSize.Y) * _zoomFactor * 0.5f;
-        _panOffset = Vector2.Clamp(_panOffset, new Vector2(-maxPan), new Vector2(maxPan));
+        _panOffset = ClampPanOffset(availableSize, _zoomFactor, _panOffset);
 
         return true;
     }
 
     public void ResetZoomAndPan()
     {
-        _zoomFactor = 1.0f;
+        _zoomFactor = FitZoom;
         _panOffset = Vector2.Zero;
+        ApplyViewSettings();
         NotifyViewChanged();
+    }
+
+    public bool IsAtFitZoom(float? zoomFactor = null)
+    {
+        return (zoomFactor ?? _zoomFactor) <= FitZoom + FitZoomEpsilon;
     }
 
     public Vector2 IndicesToPosition(Vector2i indices)
@@ -98,7 +99,9 @@ public sealed partial class TacticalMapControl
         if (Texture == null)
             return Vector2i.Zero;
 
-        Vector2 pixelPosition = LogicalToPixel(controlPosition);
+        if (!TryGetMapPixelPosition(controlPosition, out var pixelPosition))
+            return Vector2i.Zero;
+
         (Vector2 actualSize, Vector2 actualTopLeft, float overlayScale) = GetDrawParameters();
 
         Vector2 relativeToTexture = (pixelPosition - actualTopLeft) / overlayScale;
@@ -156,6 +159,61 @@ public sealed partial class TacticalMapControl
         float overlayScale = actualScale / MapScale;
 
         return (actualSize, actualTopLeft, overlayScale);
+    }
+
+    private Vector2 ClampPanOffset(Vector2 availableSize, float zoomFactor, Vector2 panOffset)
+    {
+        if (Texture == null)
+            return Vector2.Zero;
+
+        if (IsAtFitZoom(zoomFactor))
+            return Vector2.Zero;
+
+        Vector2 textureSize = Texture.Size;
+        float baseScaleX = availableSize.X / textureSize.X;
+        float baseScaleY = availableSize.Y / textureSize.Y;
+        float baseScale = Math.Min(baseScaleX, baseScaleY);
+        Vector2 actualSize = textureSize * (baseScale * zoomFactor);
+
+        Vector2 maxPan = new(
+            Math.Max(0f, (actualSize.X - availableSize.X) * 0.5f),
+            Math.Max(0f, (actualSize.Y - availableSize.Y) * 0.5f));
+
+        return new Vector2(
+            Math.Clamp(panOffset.X, -maxPan.X, maxPan.X),
+            Math.Clamp(panOffset.Y, -maxPan.Y, maxPan.Y));
+    }
+
+    private float GetPanResistance(float zoomFactor)
+    {
+        if (IsAtFitZoom(zoomFactor))
+            return 0f;
+
+        if (zoomFactor >= FitZoom + PanResistanceZoomRange)
+            return 1f;
+
+        float normalized = (zoomFactor - FitZoom) / PanResistanceZoomRange;
+        return MathF.Pow(Math.Clamp(normalized, 0f, 1f), PanResistanceExponent);
+    }
+
+    private bool TryGetMapPixelPosition(Vector2 controlPosition, out Vector2 pixelPosition, bool requireInside = false)
+    {
+        pixelPosition = Vector2.Zero;
+
+        if (Texture == null)
+            return false;
+
+        Vector2 logicalPixelPosition = LogicalToPixel(controlPosition);
+        (Vector2 actualSize, Vector2 actualTopLeft, _) = GetDrawParameters();
+        UIBox2 mapRect = UIBox2.FromDimensions(actualTopLeft, actualSize);
+
+        if (requireInside && !mapRect.Contains(logicalPixelPosition))
+            return false;
+
+        pixelPosition = new Vector2(
+            Math.Clamp(logicalPixelPosition.X, mapRect.Left, mapRect.Right),
+            Math.Clamp(logicalPixelPosition.Y, mapRect.Top, mapRect.Bottom));
+        return true;
     }
 
     private Vector2i GetDrawPosition(Vector2i pos)
