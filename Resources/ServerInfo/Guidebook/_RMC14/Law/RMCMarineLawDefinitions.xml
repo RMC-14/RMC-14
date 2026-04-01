@@ -13,13 +13,11 @@
   - The current [color=#008000][bold]Commander[/bold][/color] of an operation.
   - Transferable to a new [color=#008000][bold]Commander[/bold][/color], per the [textlink="Commander Succession" link="RMCCommandChain"].
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered incapable of command [bold]temporarily[/bold], the [color=#90EE90][bold]Duty Officer[/bold][/color] inherits [color=#008000][bold]Commander[/bold][/color] rights, but should the [color=#008000][bold]Commander[/bold][/color] return, they are still the [color=#008000][bold]Commander[/bold][/color]. This includes but is not limited to:
+  - If the current [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Commander Succession" link="RMCCommandChain"] becomes the new [color=#008000][bold]Commander[/bold][/color].
 
-  - Prolonged communications outage.
-  - The [color=#008000][bold]Commander[/bold][/color] deploying in the field.
+  [italic]Examples include but are not limited to:[/italic]
 
-  If the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]permanently[/bold] incapable of command, the next in the [textlink="Commander Succession" link="RMCCommandChain"] becomes the [color=#008000][bold]Commander[/bold][/color], rather than becoming a [color=#90EE90][bold]Duty Officer[/bold][/color]. This includes but is not limited to:
-  - The [color=#008000][bold]Commander[/bold][/color] is relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
+  - The [color=#008000][bold]Commander[/bold][/color] being relieved of duty due to [bold]arrest[/bold] or [bold]mutiny[/bold].
   - The [color=#008000][bold]Commander[/bold][/color] becoming [bold]unrevivable[/bold].
 
   Ensure when assigning a new [color=#008000][bold]Commander[/bold][/color], that this is announced. Include the new [color=#008000][bold]Commander[/bold][/color]'s name and the reason for them being assigned as the new [color=#008000][bold]Commander[/bold][/color], to avoid confusion.
@@ -27,8 +25,15 @@
   \n
 
   [color=#90EE90][bold]Duty Officer[/bold][/color]
-  - The ranking officer in the [textlink="Commander Succession" link="RMCCommandChain"] who, in the temporary absence of the [color=#008000][bold]Commander[/bold][/color], is placed in command of the warship.
-  - Unless explicitly stated otherwise, the [color=#90EE90][bold]Duty Officer[/bold][/color] is interchangeable with, and inherits the rights of [color=#008000][bold]Commander[/bold][/color] in this case.
+  - The ranking officer who is placed in command of the operation, in the absence of the [color=#008000][bold]Commander[/bold][/color].
+  - A [color=#90EE90][bold]Duty Officer[/bold][/color] should be assigned any time the [color=#008000][bold]Commander[/bold][/color] is no longer in the CIC during periods where the main combat force is active in an operation.
+  - The [color=#90EE90][bold]Duty Officer[/bold][/color] should not leave the CIC unless there is a danger to themselves, or the [color=#008000][bold]Commander[/bold][/color] is rendered [bold]temporarily[/bold] incapable of shipside command.
+  - If the [color=#008000][bold]Commander[/bold][/color] is rendered incapable of shipside command [bold]temporarily[/bold], the [color=#90EE90][bold]Duty Officer[/bold][/color] inherits all authority of the [color=#008000][bold]Commander[/bold][/color] until they return, including leaving CIC to handle related matters, such as appeals.
+
+  [italic]Examples of temporary cases include but are not limited to:[/italic]
+
+  - Prolonged communications outage, where the [color=#008000][bold]Commander[/bold][/color] can not be contacted.
+  - The [color=#008000][bold]Commander[/bold][/color] deploying in the field, to lead the combat force for an extended period. (In this case, the deployed [color=#008000][bold]Commander[/bold][/color] still has priority in providing orders)
 
   \n
 
