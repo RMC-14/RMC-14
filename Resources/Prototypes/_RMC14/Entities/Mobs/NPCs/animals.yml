@@ -36,7 +36,6 @@
   id: CMMobMouse1
   name: mouse
   suffix: RMC
-  description: Squeak!
   components:
   - type: Sprite
     layers:
@@ -232,6 +231,16 @@
         Base: puppy_dead
       Dead:
         Base: puppy_dead
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Mobs/Animals/corgi.rsi
+    heldPrefix: puppy
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Mobs/Animals/corgi.rsi
+    equippedPrefix: puppy
+    slots:
+    - HEAD
   - type: WarpPoint
     follow: true
     location: Mister Wiggles
@@ -269,6 +278,16 @@
         Base: cat_dead
       Dead:
         Base: cat_dead
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Mobs/Animals/cat.rsi
+    heldPrefix: cat1
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Mobs/Animals/cat.rsi
+    heldPrefix: cat1
+    slots:
+    - HEAD
   - type: Speech
     speechSounds: Cat
     speechVerb: SmallMob
@@ -311,6 +330,16 @@
         Base: cat2_dead
       Dead:
         Base: cat2_dead
+  - type: Item
+    size: Normal
+    sprite: _RMC14/Mobs/Animals/cat.rsi
+    heldPrefix: cat2
+  - type: Clothing
+    quickEquip: false
+    sprite: _RMC14/Mobs/Animals/cat.rsi
+    equippedPrefix: cat2
+    slots:
+    - HEAD
 
 - type: entity
   parent: RMCMobCatCalico
@@ -322,7 +351,7 @@
     thresholds:
       0: Alive
       45: Critical
-      50: Dead # A TOUGH old stray
+      50: Dead # A TOUGH old stray, yes this is parity reasoning
   - type: Grammar
     attributes:
       proper: true
