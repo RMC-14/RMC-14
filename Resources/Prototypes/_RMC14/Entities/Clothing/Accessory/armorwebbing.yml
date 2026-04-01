@@ -3,6 +3,7 @@
   abstract: true
   id: RMCArmorWebbingBase
   name: armor webbing
+  suffix: PVE
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/ArmorWebbing/pouch.rsi
@@ -255,7 +256,7 @@
   parent: RMCArmorWebbingDrum
   id: RMCArmorWebbingDrumRCM
   name: MOLS drum armor webbing
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a pair of large pouches capable of carrying high-capacity drums and other large magazines.
   components:
   - type: Sprite
@@ -266,7 +267,7 @@
   parent: RMCArmorWebbingMag
   id: RMCArmorWebbingMagRCM
   name: MOLS magazine armor webbing
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a set of four magazine pouches.
   components:
   - type: Sprite
@@ -277,7 +278,7 @@
   parent: RMCArmorWebbingGrenade
   id: RMCArmorWebbingGrenadeRCM
   name: MOLS grenade armor webbing
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features an array of small pouches, capable of holding up to 6 grenades.
   components:
   - type: Sprite
@@ -288,7 +289,7 @@
   parent: RMCArmorWebbingPouch
   id: RMCArmorWebbingPouchRCM
   name: MOLS general armor webbing
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features several small pouches, capable of carrying assorted small items.
   components:
   - type: Sprite
@@ -299,7 +300,7 @@
   parent: RMCArmorWebbingShell
   id: RMCArmorWebbingShellRCM
   name: MOLS shell armor webbing
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   description: A set of L1 pattern MOLS webbing, modified so as to clip onto an L3-pattern Kestrel modular vest. Features a number of loops designed to hold loose shotgun shells.
   components:
   - type: Sprite

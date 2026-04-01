@@ -1062,7 +1062,7 @@
   id: RMCSatchelRoyalMOLS
   name: L1 pattern MOLS day pack
   description: The L1 pattern Modular Operational Load-Bearing System designates the standard issue set of lightweight load-carrying equipment for the RCM. This particular item is the day pack, which can be worn with or without the full MOLS rig.
-  suffix: Royal, PVE
+  suffix: PVE, Royal
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Back/Satchels/TSE/mols_pack.rsi

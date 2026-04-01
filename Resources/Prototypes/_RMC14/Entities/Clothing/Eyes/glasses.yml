@@ -600,6 +600,7 @@
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
   id: RMCGogglesBallisticRCM
   name: L5 pattern ballistic goggles
+  suffix: PVE, Royal
   description: L5 pattern ballistic goggles - standard-issue eyepro for Royal Crown Marines, featuring robust, orange-tinted lenses.
   components:
   - type: Item
@@ -629,6 +630,7 @@
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
   id: RMCGogglesPrescriptionBallisticRCM
   name: L5 pattern prescription ballistic goggles
+  suffix: PVE, Royal
   description: L5 pattern ballistic goggles - standard-issue eyepro for Royal Crown Marines. This pair has mirrored prescription lenses, for marines with irregular vision.
   components:
   - type: Item
@@ -658,6 +660,7 @@
   parent: [ClothingEyesBase, RMCHelmetGarbToggleableBase]
   id: RMCGogglesTintedBallisticRCM
   name: L5 pattern polarised ballistic goggles
+  suffix: PVE, Royal
   description: L5 pattern ballistic goggles - standard-issue eyepro for Royal Crown Marines. This pair has tinted, polarised lenses.
   components:
   - type: Item
