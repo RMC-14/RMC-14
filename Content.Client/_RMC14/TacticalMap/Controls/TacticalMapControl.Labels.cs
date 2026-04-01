@@ -33,7 +33,7 @@ public sealed partial class TacticalMapControl
                 Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
                 position = position with { Y = position.Y - (LabelYOffset + LabelStackOffset * yOffsetMultiplier) * overlayScale };
 
-                float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+                float fontSize = GetLabelFontSize(overlayScale);
                 float textWidth = label.Length * fontSize * 0.6f;
                 float textHeight = fontSize;
                 Vector2 textSize = new(textWidth, textHeight);
@@ -56,7 +56,7 @@ public sealed partial class TacticalMapControl
                 Vector2 position = IndicesToPosition(indices) * overlayScale + actualTopLeft;
                 position = position with { Y = position.Y - (LabelYOffset + LabelStackOffset * yOffsetMultiplier) * overlayScale };
 
-                float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+                float fontSize = GetLabelFontSize(overlayScale);
                 float textWidth = label.Length * fontSize * 0.6f;
                 float textHeight = fontSize;
                 Vector2 textSize = new(textWidth, textHeight);
@@ -109,7 +109,7 @@ public sealed partial class TacticalMapControl
                 : 0f;
             position = position with { Y = position.Y - (LabelYOffset + stackOffset) * overlayScale };
 
-            float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+            float fontSize = GetLabelFontSize(overlayScale);
             float textWidth = label.Length * fontSize * 0.6f;
             float textHeight = fontSize;
             Vector2 textSize = new(textWidth, textHeight);

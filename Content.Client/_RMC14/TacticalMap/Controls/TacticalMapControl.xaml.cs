@@ -59,8 +59,8 @@ public sealed partial class TacticalMapControl : TextureRect
     private const float EraserRadiusPixels = 6f;
     private const float LabelYOffset = 6f;
     private const float LabelStackOffset = 9f;
-    private const float LabelMinFontSize = 7f;
-    private const float LabelFontScale = 9f;
+    private const float LabelMinFontSize = 6f;
+    private const float LabelFontScale = 6.5f;
     private const float LabelPadding = 2f;
     private const float MinZoom = 0.3f;
     private const float MaxZoom = 5.0f;

@@ -720,7 +720,7 @@ public sealed partial class TacticalMapControl
 
     private VectorFont GetLabelFont(float overlayScale)
     {
-        float fontSize = Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
+        float fontSize = GetLabelFontSize(overlayScale);
         int size = (int)MathF.Round(fontSize);
         if (size < 1)
             size = 1;
@@ -731,6 +731,11 @@ public sealed partial class TacticalMapControl
         font = new VectorFont(_resourceCache.GetResource<FontResource>(LabelFontPath), size);
         _labelFontCache[size] = font;
         return font;
+    }
+
+    private float GetLabelFontSize(float overlayScale)
+    {
+        return Math.Max(LabelMinFontSize, overlayScale * LabelFontScale);
     }
 
     private void DrawLineWithThickness(DrawingHandleScreen handle, TacticalMapLine line, float overlayScale, Vector2 actualTopLeft, float thickness)
