@@ -50,7 +50,7 @@
     contents:
     - id: CMSheetMetal20
     - id: RMCHandcuffs
-      
+
 - type: entity
   parent: RMCSatchelBlack
   id: RMCSatchelBlackFillParaCO
@@ -719,6 +719,38 @@
     camouflageVariations: {}
 
 - type: entity
+  parent: RMCBackpackRTO
+  id: RMCBackpackRTOBagPhone
+  name: WEYA T70 Portable Bag Phone
+  description: The T70 is the latest and greatest in portable telephone technology for the consumer market. Often seen on Corporate Executives, day-traders, and those who require a quick-dial to the buisness world.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Back/Satchels/PMC/bag_phone.rsi
+    layers:
+    - state: icon
+      map: [ "base" ]
+    - state: open
+      map: [ "openLayer" ]
+    - state: closed
+      map: [ "closedLayer" ]
+  - type: Storage
+    grid:
+    - 0,0,14,1 # 15
+  - type: RotaryPhone
+    category: Weston-Yamada
+  - type: ItemCamouflage
+    camouflageVariations: {}
+  - type: GenericVisualizer
+    visuals:
+      enum.RotaryPhoneLayers.Layer:
+        base:
+          Base: { state: icon }
+          Ring: { state: ring }
+          Ear: { state: ear }
+  - type: RMCLoreExaminable
+    content: rmc-lore-examinable-t70-bag-phone
+
+- type: entity
   parent: CMSatchel
   id: RMCSatchelLightpack #ERT pack
   name: lightweight combat pack
@@ -884,7 +916,7 @@
       contents:
         - id: CMSheetMetal20
         - id: RMCRadioHandheldColony
-          
+
 - type: entity
   parent: RMCSatchelLightpack5Slot
   id: RMCSatchelLightpackFilledParaSynth
