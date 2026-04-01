@@ -6,6 +6,7 @@
     RMCRankSyntheticColonist: [ ]
   startingGear: RMCGearParaSupportSynthetic
   icon: RMCJobIconParaSupportSynthetic
+  playTimeTracker: RMCJobSyntheticColony
   spawnMenuRoleName: Royal Paramarine Support Synthetic (Survivor)
   special:
     - !type:AddComponentSpecial
@@ -14,6 +15,7 @@
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: RMCAllowSuitStorage
         - type: IntelRescueSurvivorObjective
         - type: MotionDetectorTracked
@@ -58,6 +60,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaSupportSynthetic
   equipment:
+    id: RMCIDRoyalParamarinesSupportSynthetic
     jumpsuit: RMCJumpsuitMarinePara
     back: RMCSatchelLightpackFilledParaSynth
     belt: RMCMedicalL75RCMFillPara
@@ -82,4 +85,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_synth
-    

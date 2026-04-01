@@ -6,6 +6,7 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaAssaultEngineer
   icon: RMCJobIconParaAssaultEngineer
+  playTimeTracker: RMCJobSurvivorMilitary
   requirements:
   - !type:RoleTimeRequirement
     role: CMJobCombatTech
@@ -21,6 +22,7 @@
         factions:
           - RoyalMarines
           - TSE
+      - type: RMCSurvivor
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective
       - type: MotionDetectorTracked
@@ -45,9 +47,11 @@
   parent: RMCGearParaBase
   id: RMCGearParaAssaultEngineer
   equipment:
+    id: RMCIDRoyalParamarinesCombatEngineer
     eyes: RMCWeldingGoggles
     belt: CMBeltUtilityFilled
     outerClothing: RMCArmorParaVest
+    back: RMCSatchelLightpackFilledPara
 
 - type: entity
   parent: CMSpawnPointJobBase
@@ -65,4 +69,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_engi
-    

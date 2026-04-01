@@ -16,6 +16,7 @@
           factions:
             - RoyalMarines
             - TSE
+        - type: RMCSurvivor
         - type: Skills
           preset: RMCSkillPresetCommander
         - type: RMCAllowSuitStorage
@@ -43,7 +44,7 @@
 - type: startingGear
   id: RMCGearParaCommander
   equipment:
-    id: CMIDCardGold
+    id: RMCIDRoyalParamarinesCommander
     jumpsuit: RMCJumpsuitMarineParaService
     shoes: RMCBootsRoyalFilled
     head: RMCHeadCapPeakedPara
@@ -72,4 +73,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_commander_alt
-    
