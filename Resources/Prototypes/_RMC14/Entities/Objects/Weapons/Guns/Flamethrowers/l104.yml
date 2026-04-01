@@ -2,6 +2,7 @@
   parent: [ CMBaseWeaponGun, BaseItem, RMCBaseAttachableHolder ]
   id: RMCWeaponIncineratorL104
   name: L104 incinerator
+  suffix: PVE, Royal
   description: The L104 incinerator is the standard-issue flame projector unit of the Royal Crown Marines, a lightweight and ergonomic weapon that sees rare use in RCM doctrine despite its brutal effectiveness at close range.
   components:
   - type: Sprite
