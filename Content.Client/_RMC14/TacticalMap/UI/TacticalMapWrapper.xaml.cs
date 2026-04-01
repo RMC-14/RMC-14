@@ -79,6 +79,8 @@ public sealed partial class TacticalMapWrapper : Control
     private const float BlipStaleMinAlpha = 0.35f;
     private const float UpdateFeedbackSeconds = 1.2f;
     private const float LayerVisibilityButtonMinWidth = 80f;
+    private const float CompactTopButtonThreshold = 500f;
+    private const float CompactTopButtonWidth = 22f;
     private static readonly ProtoId<TacticalMapLayerPrototype> GlobalMarineLayer = "Marines";
 
     private static readonly Color CrtTintColor = Color.FromHex("#0B1B2E").WithAlpha(0.08f);
@@ -166,6 +168,8 @@ public sealed partial class TacticalMapWrapper : Control
     private readonly HashSet<ProtoId<TacticalMapLayerPrototype>> _visibleLayerSet = new();
     private readonly List<ProtoId<TacticalMapLayerPrototype>> _lastDrawLayers = new();
     private readonly Dictionary<ProtoId<TacticalMapLayerPrototype>, TacticalMapButton> _layerVisibilityButtons = new();
+    private readonly Dictionary<TacticalMapButton, string> _responsiveTopButtonTexts = new();
+    private readonly Dictionary<TacticalMapButton, float> _responsiveTopButtonMinWidths = new();
     private ProtoId<TacticalMapLayerPrototype>? _lastActiveLayer;
 
     private bool _blipStaleEnabled;
@@ -225,6 +229,7 @@ public sealed partial class TacticalMapWrapper : Control
     {
         base.Resized();
         ApplyViewStateToControls();
+        UpdateResponsiveTopButtons();
     }
 
     protected override void Draw(DrawingHandleScreen handle)
@@ -829,7 +834,9 @@ public sealed partial class TacticalMapWrapper : Control
 
         _rootMarginDefault = RootContainer.Margin;
         _mapMarginDefault = MapContainer.Margin;
+        RegisterResponsiveTopButtons();
         UpdateFocusModeButton();
+        UpdateResponsiveTopButtons();
     }
 
     private void OnViewChangedFromControl(float zoom, Vector2 pan)
@@ -2100,10 +2107,83 @@ public sealed partial class TacticalMapWrapper : Control
             button.Text = button.Text;
     }
 
-    private static void SetButtonText(TacticalMapButton button, string text, Color color)
+    private void SetButtonText(TacticalMapButton button, string text, Color color)
     {
         button.Button.TextColor = color;
+        SetButtonDisplayText(button, text);
+    }
+
+    private void RegisterResponsiveTopButtons()
+    {
+        RegisterResponsiveTopButton(LabelsButton);
+        RegisterResponsiveTopButton(FollowPlayerButton);
+        RegisterResponsiveTopButton(ResetViewButton);
+        RegisterResponsiveTopButton(ObjectivesToggleButton);
+        RegisterResponsiveTopButton(OverlaysToggleButton);
+        RegisterResponsiveTopButton(SettingsToggleButton);
+        RegisterResponsiveTopButton(FocusModeButton);
+        RegisterResponsiveTopButton(PopoutButton);
+        RegisterResponsiveTopButton(CloseButton);
+    }
+
+    private void RegisterResponsiveTopButton(TacticalMapButton button)
+    {
+        if (button.Text != null)
+            _responsiveTopButtonTexts[button] = button.Text;
+        _responsiveTopButtonMinWidths[button] = button.MinWidth;
+
+        UpdateResponsiveTopButton(button);
+    }
+
+    private void UpdateResponsiveTopButtons()
+    {
+        foreach (var button in _responsiveTopButtonTexts.Keys)
+        {
+            UpdateResponsiveTopButton(button);
+        }
+    }
+
+    private void UpdateResponsiveTopButton(TacticalMapButton button)
+    {
+        if (!_responsiveTopButtonTexts.TryGetValue(button, out var fullText))
+            return;
+
+        var compact = ShouldCompactTopButtons();
+        button.Text = compact
+            ? GetCompactButtonText(fullText)
+            : fullText;
+        if (_responsiveTopButtonMinWidths.TryGetValue(button, out var minWidth))
+            button.MinWidth = compact ? CompactTopButtonWidth : minWidth;
+        button.ToolTip = fullText;
+        button.Button.ToolTip = fullText;
+    }
+
+    private void SetButtonDisplayText(TacticalMapButton button, string text)
+    {
+        if (_responsiveTopButtonTexts.ContainsKey(button))
+        {
+            _responsiveTopButtonTexts[button] = text;
+            UpdateResponsiveTopButton(button);
+            return;
+        }
+
         button.Text = text;
+    }
+
+    private bool ShouldCompactTopButtons()
+    {
+        return MainButtonRow.Width > 0f && MainButtonRow.Width <= CompactTopButtonThreshold;
+    }
+
+    private static string GetCompactButtonText(string text)
+    {
+        foreach (var c in text)
+        {
+            if (!char.IsWhiteSpace(c))
+                return c.ToString();
+        }
+
+        return string.Empty;
     }
 
     private void UpdatePlayerFollowing(float deltaSeconds)
