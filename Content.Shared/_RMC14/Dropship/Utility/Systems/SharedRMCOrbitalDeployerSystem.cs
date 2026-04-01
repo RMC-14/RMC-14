@@ -9,6 +9,7 @@ using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared._RMC14.Dropship.Utility.Systems;
 
@@ -84,6 +85,8 @@ public abstract class SharedRMCOrbitalDeployerSystem : EntitySystem
         if (deployable.DropPod)
         {
             var dropPod = Spawn(deployerComp.DropPodPrototype);
+            DebugTools.Assert(HasComp<SupplyDropPodComponent>(dropPod));
+
             if (!TryComp(dropPod, out SupplyDropPodComponent? podComponent))
                 return false;
 
