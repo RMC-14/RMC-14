@@ -352,6 +352,7 @@
   parent: CMM2132Machete
   id: RMCRoyalMachete
   name: L225 Kukri
+  suffix: PVE, Royal
   description: The L225 Kukri is the standard-issue machete of the Royal Crown Marines, featuring a long and heavy curved blade that improves the effectiveness of a downswing in draw cuts.
   components:
   - type: Tag

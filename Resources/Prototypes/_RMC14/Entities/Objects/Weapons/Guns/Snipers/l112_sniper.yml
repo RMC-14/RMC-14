@@ -2,7 +2,7 @@
   parent: RMCBaseWeaponSniperRifle
   id: RMCL112SniperRifle
   name: L112A2 designated marksman rifle
-  suffix: Filled, Royal, PVE
+  suffix: PVE, Filled, Royal
   description: The L112A2 DMR, a more modular variation on the A1 model. This one foregoes the integral suppressor in favor of a threaded barrel, and features an attachment rail to install foregrips.
   components:
   - type: Sprite
