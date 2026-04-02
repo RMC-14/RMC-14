@@ -32,7 +32,7 @@ public sealed class HiveTeamBui : BoundUserInterface
             return;
 
         _window = EnsureWindow();
-        _window.UpdateState(s, GetTexture, OnSetLeader, OnRemoveLeader, OnAddMember, OnRemoveMember);
+        _window.UpdateState(s, GetTexture, OnSetLeader, OnRemoveLeader, OnAddMember, OnRemoveMember, OnSetRole);
     }
 
     private HiveTeamWindow EnsureWindow()
@@ -62,4 +62,7 @@ public sealed class HiveTeamBui : BoundUserInterface
 
     private void OnRemoveMember(int teamIndex, NetEntity xeno) =>
         SendPredictedMessage(new HiveTeamRemoveMemberMsg(teamIndex, xeno));
+
+    private void OnSetRole(int teamIndex, int role) =>
+        SendPredictedMessage(new HiveTeamSetRoleMsg(teamIndex, role));
 }

@@ -1,0 +1,16 @@
+<cc:HiveLeaderSquadWindow
+    xmlns="https://spacestation14.io"
+    xmlns:cc="clr-namespace:Content.Client._RMC14.Xenonids.HiveTeam"
+    Title="My Hive Squad"
+    MinSize="500 600">
+    <BoxContainer Orientation="Vertical" VerticalExpand="True">
+        <BoxContainer Orientation="Vertical" Name="TeamContainer" Access="Public"
+                      HorizontalExpand="True" VerticalExpand="True" />
+        <BoxContainer Orientation="Horizontal" Margin="4">
+            <LineEdit Name="AnnounceBox" Access="Public" HorizontalExpand="True"
+                      PlaceHolder="Send announcement to your squad..." />
+            <Button Name="AnnounceButton" Access="Public" Text="Send"
+                    StyleClasses="ButtonSquare" Margin="4 0 0 0" />
+        </BoxContainer>
+    </BoxContainer>
+</cc:HiveLeaderSquadWindow>

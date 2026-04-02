@@ -197,6 +197,8 @@
         type: XenoWordQueenBui
       enum.HiveTeamUIKey.Key:
         type: HiveTeamBui
+      enum.HiveLeaderSquadUIKey.Key:
+        type: HiveLeaderSquadBui
       enum.TacticalMapUserUi.Key:
         type: TacticalMapUserBui
       enum.XenoReserveParasiteChangeUI.Key:

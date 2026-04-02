@@ -26,16 +26,24 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
         Action<int, NetEntity> onAddMember,
-        Action<int, NetEntity> onRemoveMember)
+        Action<int, NetEntity> onRemoveMember,
+        Action<int, int> onSetRole)
     {
         TeamsGrid.DisposeAllChildren();
 
         foreach (var team in state.Teams)
         {
-            var panel = BuildTeamPanel(team, state.AllXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember);
+            var panel = BuildTeamPanel(team, state.AllXenos, getTexture, onSetLeader, onRemoveLeader, onAddMember, onRemoveMember, onSetRole);
             TeamsGrid.AddChild(panel);
         }
     }
+
+    private static StyleBoxFlat MakeBox(string borderHex, string bgHex) => new()
+    {
+        BorderColor = Color.FromHex(borderHex),
+        BorderThickness = new Thickness(2),
+        BackgroundColor = Color.FromHex(bgHex),
+    };
 
     private static Control BuildTeamPanel(
         HiveTeamData team,
@@ -44,16 +52,23 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         Action<int, NetEntity> onSetLeader,
         Action<int> onRemoveLeader,
         Action<int, NetEntity> onAddMember,
-        Action<int, NetEntity> onRemoveMember)
+        Action<int, NetEntity> onRemoveMember,
+        Action<int, int> onSetRole)
     {
+        // Outer panel — no background, just a border to group the team
         var outer = new PanelContainer
         {
             HorizontalExpand = true,
             VerticalExpand = true,
             Margin = new Thickness(4),
+            PanelOverride = MakeBox("#6b3fa0", "#00000000"),
         };
 
-        var vbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
+        var vbox = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Thickness(6),
+        };
         outer.AddChild(vbox);
 
         // Team title
@@ -61,36 +76,53 @@ public sealed partial class HiveTeamWindow : DefaultWindow
         {
             Text = $"HiveTeam {team.Index + 1}",
             HorizontalAlignment = HAlignment.Center,
-            Margin = new Thickness(0, 4, 0, 0),
+            Margin = new Thickness(0, 4, 0, 2),
         });
 
-        // "Hive Leader" subtitle
-        vbox.AddChild(new Label
+        // Role dropdown
+        var roleBox = new OptionButton
+        {
+            HorizontalExpand = true,
+            StyleClasses = { "ButtonSquare" },
+            Margin = new Thickness(0, 0, 0, 4),
+        };
+        for (var i = 0; i < HiveTeamsComponent.RoleNames.Length; i++)
+            roleBox.AddItem(HiveTeamsComponent.RoleNames[i], i);
+        roleBox.SelectId(team.Role);
+        var capturedIndex = team.Index;
+        roleBox.OnItemSelected += args => onSetRole(capturedIndex, args.Id);
+        vbox.AddChild(roleBox);
+
+        // Leader section — matches squad window style
+        var leaderPanel = new PanelContainer
+        {
+            HorizontalExpand = true,
+            Margin = new Thickness(0, 0, 0, 4),
+            PanelOverride = MakeBox("#6b3fa0", "#2a1a3e"),
+        };
+        var leaderVbox = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Thickness(4),
+        };
+        leaderPanel.AddChild(leaderVbox);
+
+        leaderVbox.AddChild(new Label
         {
             Text = "Hive Leader",
             HorizontalAlignment = HAlignment.Center,
             FontColorOverride = Color.FromHex("#aaaaaa"),
-            Margin = new Thickness(0, 0, 0, 2),
+            Margin = new Thickness(0, 0, 0, 4),
         });
-
-        // Leader slot — bigger via MinHeight
-        var leaderBox = new PanelContainer
-        {
-            HorizontalExpand = true,
-            MinHeight = 64,
-            Margin = new Thickness(4, 0, 4, 4),
-        };
-        var leaderInner = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
-        leaderBox.AddChild(leaderInner);
 
         if (team.Leader is { } leader)
         {
             var texture = getTexture(leader.Id);
-            // Bigger leader: use a custom layout with larger texture
             var btn = new Button
             {
                 HorizontalExpand = true,
-                MinHeight = 60,
+                MinHeight = 56,
+                StyleClasses = { "ButtonSquare" },
             };
             var hbox = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Horizontal };
             hbox.AddChild(new TextureRect
@@ -100,15 +132,11 @@ public sealed partial class HiveTeamWindow : DefaultWindow
                 Stretch = TextureRect.StretchMode.KeepAspectCentered,
                 Margin = new Thickness(4),
             });
-            hbox.AddChild(new Label
-            {
-                Text = leader.Name,
-                VerticalAlignment = VAlignment.Center,
-            });
+            hbox.AddChild(new Label { Text = leader.Name, VerticalAlignment = VAlignment.Center });
             btn.AddChild(hbox);
             btn.OnPressed += _ => onRemoveLeader(team.Index);
             btn.ToolTip = "Click to remove as leader";
-            leaderInner.AddChild(btn);
+            leaderVbox.AddChild(btn);
         }
         else
         {
@@ -116,33 +144,54 @@ public sealed partial class HiveTeamWindow : DefaultWindow
             {
                 Text = "+",
                 HorizontalExpand = true,
-                MinHeight = 60,
+                MinHeight = 56,
+                StyleClasses = { "ButtonSquare" },
             };
             addLeaderBtn.OnPressed += _ =>
             {
                 var picker = new XenoPickerWindow(allXenos, getTexture, xeno => onSetLeader(team.Index, xeno));
                 picker.OpenCentered();
             };
-            leaderInner.AddChild(addLeaderBtn);
+            leaderVbox.AddChild(addLeaderBtn);
         }
 
-        vbox.AddChild(leaderBox);
+        vbox.AddChild(leaderPanel);
 
-        // Members in a scrollable box, 2-per-row grid
-        var scroll = new ScrollContainer
+        // Members section — matches squad window style
+        var membersPanel = new PanelContainer
         {
-            HScrollEnabled = false,
             HorizontalExpand = true,
-            MinHeight = 120,
-            MaxHeight = 160,
-            Margin = new Thickness(4, 0, 4, 0),
+            VerticalExpand = true,
+            Margin = new Thickness(0, 0, 0, 4),
+            PanelOverride = MakeBox("#4a2870", "#221530"),
         };
+        var membersVbox = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+            Margin = new Thickness(4),
+        };
+        membersPanel.AddChild(membersVbox);
+
+        membersVbox.AddChild(new Label
+        {
+            Text = "Members",
+            HorizontalAlignment = HAlignment.Center,
+            FontColorOverride = Color.FromHex("#aaaaaa"),
+            Margin = new Thickness(0, 0, 0, 4),
+        });
+
+        var membersScroll = new ScrollContainer
+        {
+            HorizontalExpand = true,
+            VerticalExpand = true,
+            MinSize = new Vector2(0, 80),
+        };
+
         var membersGrid = new GridContainer
         {
             Columns = 2,
             HorizontalExpand = true,
         };
-        scroll.AddChild(membersGrid);
 
         foreach (var member in team.Members)
         {
@@ -156,21 +205,24 @@ public sealed partial class HiveTeamWindow : DefaultWindow
             membersGrid.AddChild(control);
         }
 
-        vbox.AddChild(scroll);
+        membersScroll.AddChild(membersGrid);
+        membersVbox.AddChild(membersScroll);
 
-        // Add member button
+        // Add member button inside the members panel
         var addMemberBtn = new Button
         {
             Text = "+ Add Member",
             HorizontalExpand = true,
-            Margin = new Thickness(4, 2, 4, 4),
+            Margin = new Thickness(0, 4, 0, 0),
+            StyleClasses = { "ButtonSquare" },
         };
         addMemberBtn.OnPressed += _ =>
         {
             var picker = new XenoPickerWindow(allXenos, getTexture, xeno => onAddMember(team.Index, xeno));
             picker.OpenCentered();
         };
-        vbox.AddChild(addMemberBtn);
+        membersVbox.AddChild(addMemberBtn);
+        vbox.AddChild(membersPanel);
 
         return outer;
     }

@@ -50,6 +50,9 @@ namespace Content.Client.MainMenu
             _mainMenuControl.ChangelogButton.OnPressed += ChangelogButtonPressed;
 
             _client.RunLevelChanged += RunLevelChanged;
+
+            if (_controllerProxy.LaunchState.FromLauncher == false)
+                TryConnect(_mainMenuControl.AddressBox.Text);
         }
 
         /// <inheritdoc />
