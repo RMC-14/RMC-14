@@ -101,3 +101,6 @@ rmc-lore-examinable-m13-extended-recoil-compensator = A limited-production muzzl
 
 rmc-lore-examinable-t70-bag-phone = A bulky satchel containing a phone, antenna, and a battery pack with a substantial lifespan, as well as room for items. These civilian bag phones utilize similar technology to a radiotelephone pack, but in a more compact, albeit less durable form. Following hot on the footsteps of Novaris Industries' recent bag-phone product lines, the T70 is designed for more high-end customers, especially those in the business sector, meaning it has a somewhat significant price tag associated with it.
                                     The model itself features several improvements over its predecessors, featuring less weight, more ergonomic design, and improved reception.
+
+rmc-lore-examinable-bag-phone = A basic radio telephone attached to a satchel. The flap has a small cut-out for the transceiver. This design is fairly old, being one of the first civilian bag-telephones originally patented by Novaris Industries.
+                                After the patent expired, it's design would be picked by various other corporations and widely sold. Nowadays, despite it's bulkier size and weight, this model sees frequent use among the more thrifty consumer for it's relatively low cost and for its reliability despite newer models being available.
