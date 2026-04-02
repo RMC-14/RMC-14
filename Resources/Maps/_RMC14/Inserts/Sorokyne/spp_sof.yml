@@ -4,8 +4,8 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 03/03/2026 01:53:10
-  entityCount: 195
+  time: 03/10/2026 23:51:39
+  entityCount: 196
 maps: []
 grids:
 - 1
@@ -912,6 +912,15 @@ entities:
     components:
     - type: Transform
       pos: 5.5,5.5
+      parent: 1
+- proto: RMCMarkerAreaLabel
+  entities:
+  - uid: 196
+    components:
+    - type: MetaData
+      name: Aerodrom
+    - type: Transform
+      pos: 7.5,11.5
       parent: 1
 - proto: RMCPatchSPPAlt
   entities:
