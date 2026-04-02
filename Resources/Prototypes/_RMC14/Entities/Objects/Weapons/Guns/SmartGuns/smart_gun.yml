@@ -341,7 +341,7 @@
 - type: entity # RMC14 - Reskinned SG for ICB insert
   parent: RMCSmartGunNoCamo
   id: RMCSmartGunCMB
-  name: ML66M "Spearhead" smart gun
+  name: ML66M 'Spearhead' smart gun
   description: A modification of the ML66 Smart Gun, manufactured under a license by Spearhead Armaments for limited use by CMB SWAT teams. Functionally identical to the variant currently provided to Marine Smart Gunners, save for the custom paint job, CMB insignia and some minor tweaks to the trigger assembly to allow for easier firing in cramped quarters.
   components:
   - type: Sprite
