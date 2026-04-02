@@ -63,10 +63,10 @@ public sealed class DesignerRemoteThickenResinSystem : EntitySystem
         var coords = Transform(target).Coordinates;
         var rotation = Transform(target).LocalRotation;
 
+        Del(target);
         var thickened = Spawn(upgradeable.To.Value, coords);
         _transform.SetLocalRotation(thickened, rotation);
         _hive.SetSameHive(ent.Owner, thickened);
-        QueueDel(target);
 
         _popup.PopupClient(Loc.GetString("rmc-xeno-designer-thicken-success"), ent.Owner, ent.Owner);
     }

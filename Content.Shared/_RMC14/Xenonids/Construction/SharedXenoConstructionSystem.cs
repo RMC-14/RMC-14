@@ -433,7 +433,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private EntProtoId GetQueenAnimationVariant(EntProtoId originalId)
+    private EntProtoId GetResinUpgradeTarget(EntProtoId originalId)
     {
         return originalId.Id switch
         {
@@ -444,14 +444,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
-    private bool CanUpgradeStructureForChoice(EntityUid structure, EntProtoId? choice)
-    {
-        if (choice is not { } buildChoice)
-            return false;
-
-        return Prototype(structure)?.ID == buildChoice.Id;
-    }
-
     private void HandleSecreteResinPlacement(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
         var snapped = args.Target.SnapToGrid(EntityManager, _map);
@@ -459,7 +451,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if ((xeno.Comp.CanUpgrade || hasBoost) &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
-            CanUpgradeStructureForChoice(upgradeable, xeno.Comp.BuildChoice) &&
             upgradeable.Comp.To is { } to &&
             _prototype.HasIndex(to))
         {
@@ -486,7 +477,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
             if (_net.IsClient)
                 return;
 
-            QueueDel(upgradeable);
+            Del(upgradeable);
             var spawn = Spawn(to, snapped);
             _hive.SetSameHive(xeno.Owner, spawn);
             args.Handled = true;
@@ -517,7 +508,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (attempt.Cancelled)
             return;
 
-        var animationChoice = hasBoost ? GetQueenAnimationVariant(choice) : choice;
+        var animationChoice = hasBoost ? GetResinUpgradeTarget(choice) : choice;
         var effectId = XenoStructuresAnimation + animationChoice;
         var coordinates = GetNetCoordinates(args.Target);
         var entityCoords = GetCoordinates(coordinates);
@@ -940,7 +931,6 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (ent.Comp.CanUpgrade &&
             (construction.CanUpgrade || hasBoost) &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
-            CanUpgradeStructureForChoice(upgradeable, construction.BuildChoice) &&
             upgradeable.Comp.To != null)
         {
             if (_queenEye.IsInQueenEye(args.User))
