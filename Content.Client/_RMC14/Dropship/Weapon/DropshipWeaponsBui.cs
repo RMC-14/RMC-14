@@ -304,7 +304,6 @@ public sealed class DropshipWeaponsBui : RMCPopOutBui<DropshipWeaponsWindow>
             _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(first, false)));
         var launch = ButtonAction("fire",
             _ => SendPredictedMessage(new DropShipTerminalWeaponsLaunchOrdnanceMsg(first)));
-            _ => SendPredictedMessage(new DropShipTerminalWeaponsEquipmentAutoDeployToggleMsg(false)));
         var firemissionCreate = Button("fire-mission", FireMissionCreate);
         var firemissionView = Button("view", FireMissionView);
         var firemissionEdit = Button("edit", FireMissionEdit);
