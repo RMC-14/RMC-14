@@ -444,6 +444,14 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         };
     }
 
+    private bool CanUpgradeStructureForChoice(EntityUid structure, EntProtoId? choice)
+    {
+        if (choice is not { } buildChoice)
+            return false;
+
+        return Prototype(structure)?.ID == buildChoice.Id;
+    }
+
     private void HandleSecreteResinPlacement(Entity<XenoConstructionComponent> xeno, ref XenoSecreteStructureActionEvent args)
     {
         var snapped = args.Target.SnapToGrid(EntityManager, _map);
@@ -451,6 +459,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
 
         if ((xeno.Comp.CanUpgrade || hasBoost) &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
+            CanUpgradeStructureForChoice(upgradeable, xeno.Comp.BuildChoice) &&
             upgradeable.Comp.To is { } to &&
             _prototype.HasIndex(to))
         {
@@ -931,6 +940,7 @@ public sealed class SharedXenoConstructionSystem : EntitySystem
         if (ent.Comp.CanUpgrade &&
             (construction.CanUpgrade || hasBoost) &&
             _rmcMap.HasAnchoredEntityEnumerator<XenoStructureUpgradeableComponent>(snapped, out var upgradeable) &&
+            CanUpgradeStructureForChoice(upgradeable, construction.BuildChoice) &&
             upgradeable.Comp.To != null)
         {
             if (_queenEye.IsInQueenEye(args.User))
