@@ -213,11 +213,17 @@ public abstract class SharedRMCExplosionSystem : EntitySystem
         if (_random.NextFloat() < destroyChance)
             deleteEntity = true;
 
-        if (HasComp<GunComponent>(ent) && ent.Comp.ExplosionProtection > 0)   //TODO Once gun acid protection is added, remove that protection instead.
-            ent.Comp.ExplosionProtection--;
 
-        if (deleteEntity && !TerminatingOrDeleted(ent))
-            QueueDel(ent);
+        if (!deleteEntity || TerminatingOrDeleted(ent))
+            return;
+
+        if (HasComp<GunComponent>(ent) && ent.Comp.ExplosionProtection > 0) //TODO Once gun acid protection is added, remove that protection instead.
+        {
+            ent.Comp.ExplosionProtection--;
+            return;
+        }
+
+        QueueDel(ent);
     }
 
     private void OnMobGibbedByExplosionReceived(Entity<MobGibbedByExplosionTypeComponent> ent, ref ExplosionReceivedEvent args)
