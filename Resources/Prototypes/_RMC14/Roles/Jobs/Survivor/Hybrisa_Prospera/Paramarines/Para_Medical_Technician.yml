@@ -6,6 +6,7 @@
     RMCRankParaLanceCorporal: [ ]
   startingGear: RMCGearParaMedicalTechnician
   icon: RMCJobIconParaMedicalTechnican
+  playTimeTracker: RMCJobSurvivorMilitary
   spawnMenuRoleName: Royal Paramarine Medical Technician (Survivor)
   special:
     - !type:AddComponentSpecial
@@ -14,6 +15,7 @@
         factions:
           - RoyalMarines
           - TSE
+      - type: RMCSurvivor
       - type: RMCAllowSuitStorage
       - type: IntelRescueSurvivorObjective
       - type: MotionDetectorTracked
@@ -38,6 +40,7 @@
   parent: RMCGearParaBase
   id: RMCGearParaMedicalTechnician
   equipment:
+    id: RMCIDRoyalParamarinesMedicalTechnician
     jumpsuit: RMCJumpsuitMarineParaPDW90
     back: RMCBackpackRCMMedicPVPFilledParaMedic
     eyes: RMCGlassesMedicalHUDGlasses
@@ -61,4 +64,3 @@
   icon:
     sprite: _RMC14/Interface/cm_job_icons.rsi
     state: para_medic
-    

@@ -308,7 +308,7 @@
     group: Paramarine
     leaderIcon:
       sprite: _RMC14/Interface/cm_job_icons.rsi
-      state: rmc_teamleader
+      state: para_teamleader_alt
   - type: Tag
     tags:
       - SquadPara

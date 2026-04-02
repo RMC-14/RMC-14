@@ -77,6 +77,7 @@ marking-VulpSnoutSwift = Vulpkanin Swift
 
 marking-VulpSnoutBlaze-blaze = Blaze
 marking-VulpSnoutBlaze = Vulpkanin Blaze
+marking-VulpSnoutBlaze-nose_blaze = Nose
 
 marking-VulpSnoutPatch-patch = Patch
 marking-VulpSnoutPatch = Vulpkanin Patch
