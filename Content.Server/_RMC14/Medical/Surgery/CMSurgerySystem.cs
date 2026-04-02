@@ -119,7 +119,10 @@ public sealed class CMSurgerySystem : SharedCMSurgerySystem
 
     private void OnStepScreamComplete(Entity<CMSurgeryStepEmoteEffectComponent> ent, ref CMSurgeryStepEvent args)
     {
-        _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+        if (!HasComp<RMCUnconsciousComponent>(args.Body))
+        {
+            _chat.TryEmoteWithChat(args.Body, ent.Comp.Emote);
+        }
     }
 
     private void OnStepSpawnComplete(Entity<RMCSurgeryStepSpawnEffectComponent> ent, ref CMSurgeryStepEvent args)
