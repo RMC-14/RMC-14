@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Areas;
+using Content.Shared._RMC14.Dropship.Weapon;
 using Content.Shared.GameTicking;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -23,11 +24,11 @@ public abstract class SharedRMCCameraSystem : EntitySystem
     {
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
-        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit, after: new [] { typeof(AreaSystem) });
+        SubscribeLocalEvent<RMCCameraComponent, MapInitEvent>(OnCameraMapInit, after: new [] { typeof(AreaSystem), typeof(SharedDropshipWeaponSystem) });
         SubscribeLocalEvent<RMCCameraComponent, ComponentRemove>(OnCameraRemove);
         SubscribeLocalEvent<RMCCameraComponent, EntityTerminatingEvent>(OnCameraTerminating);
 
-        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit, after: new [] { typeof(AreaSystem) });
+        SubscribeLocalEvent<RMCCameraComputerComponent, MapInitEvent>(OnComputerMapInit, after: new [] { typeof(AreaSystem), typeof(SharedDropshipWeaponSystem) });
 
         SubscribeLocalEvent<RMCCameraWatcherComponent, ComponentRemove>(OnWatcherRemove);
         SubscribeLocalEvent<RMCCameraWatcherComponent, EntityTerminatingEvent>(OnWatcherTerminating);

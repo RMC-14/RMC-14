@@ -116,11 +116,11 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<FlareSignalComponent, StopThrowEvent>(OnFlareSignalStopThrow);
         SubscribeLocalEvent<FlareSignalComponent, ContainerGettingInsertedAttemptEvent>(OnFlareSignalContainerGettingInsertedAttempt);
 
-        SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit,before: new[] { typeof(SharedRMCCameraSystem) });
+        SubscribeLocalEvent<DropshipTerminalWeaponsComponent, MapInitEvent>(OnTerminalMapInit);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIOpenedEvent>(OnTerminalBUIOpened);
         SubscribeLocalEvent<DropshipTerminalWeaponsComponent, BoundUIClosedEvent>(OnTerminalBUIClosed);
 
-        SubscribeLocalEvent<DropshipTargetComponent, MapInitEvent>(OnDropshipTargetMapInit,before: new[] { typeof(SharedRMCCameraSystem) });
+        SubscribeLocalEvent<DropshipTargetComponent, MapInitEvent>(OnDropshipTargetMapInit);
         SubscribeLocalEvent<DropshipTargetComponent, ComponentRemove>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, EntityTerminatingEvent>(OnDropshipTargetRemove);
         SubscribeLocalEvent<DropshipTargetComponent, ExaminedEvent>(OnActiveFlareExamined);
@@ -133,7 +133,7 @@ public abstract class SharedDropshipWeaponSystem : EntitySystem
         SubscribeLocalEvent<DropshipAmmoComponent, ExaminedEvent>(OnAmmoExamined);
         SubscribeLocalEvent<DropshipAmmoComponent, PowerLoaderInteractEvent>(OnAmmoInteract);
 
-        SubscribeLocalEvent<ActivateDropshipWeaponOnSpawnComponent, MapInitEvent>(OnDropshipWeaponOnSpawnFire,before: new[] { typeof(SharedRMCCameraSystem) });
+        SubscribeLocalEvent<ActivateDropshipWeaponOnSpawnComponent, MapInitEvent>(OnDropshipWeaponOnSpawnFire);
 
         Subs.BuiEvents<DropshipTerminalWeaponsComponent>(DropshipTerminalWeaponsUi.Key,
             subs =>
