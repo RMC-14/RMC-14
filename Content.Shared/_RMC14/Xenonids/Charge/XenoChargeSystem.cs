@@ -1,7 +1,9 @@
+using System.Numerics;
 using Content.Shared._RMC14.Actions;
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Damage.ObstacleSlamming;
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Entrenching;
 using Content.Shared._RMC14.Map;
 using Content.Shared._RMC14.Pulling;
 using Content.Shared._RMC14.Slow;
@@ -446,6 +448,42 @@ public sealed class XenoChargeSystem : EntitySystem
             diff = diff.Normalized() * xeno.Comp.Range;
         else
             diff = diff.Normalized() * MathF.Ceiling(length);
+        if (_net.IsServer)
+        {
+            foreach (var ent in _lookup.GetEntitiesInRange<BarricadeComponent>(origin, xeno.Comp.Range))
+            {
+                if (!TryComp<XenoCrusherChargableComponent>(ent, out var chargable))
+                    continue;
+
+                if (chargable.InstantDestroy)
+                    continue;
+
+                var entPos = _transform.GetMapCoordinates(ent);
+                if (entPos.MapId != origin.MapId)
+                    continue;
+
+                var toEnt = entPos.Position - origin.Position;
+                var dot = Vector2.Dot(toEnt, diff.Normalized());
+                if (dot <= 0)
+                    continue;
+
+                // Check barricade facing — only clamp distance if charging into the front (to prevent tunneling through)
+                // We dont clamp when hitting it fron other angles since it is less relevant there, and also to prevent cases of stopping short and dealing no damage.
+                var barricadeForward = _transform.GetWorldRotation(ent).ToWorldVec();
+                var facingDot = Vector2.Dot(diff.Normalized(), barricadeForward);
+                if (facingDot >= 0)
+                    continue; // charging from behind or side, ignore
+
+                var perpComponent = diff.Normalized() * dot;
+                var perpVec = toEnt - perpComponent;
+                var perpDist = perpVec.Length();
+                if (perpDist > 0.7f)
+                    continue;
+
+                if (dot < diff.Length())
+                    diff = diff.Normalized() * Math.Max(0, dot - 0.5f);
+            }
+        }
 
         xeno.Comp.Charge = diff;
         Dirty(xeno);
