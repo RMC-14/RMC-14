@@ -38,3 +38,15 @@
   - type: PhysicalComposition
     materialComposition:
       CMSteel: 200
+
+- type: entity
+  parent: CMHealthAnalyzer
+  id: RMCAdminHealthAnalyzer
+  name: HF2 advanced health analyzer
+  description: A highly advanced hand-held body scanner capable of providing a detailed health readout of the subject.
+  suffix: RMC14, Admin
+  components:
+  - type: Sprite
+    state: golden_health
+  - type: HealthScanner
+    detailLevel: Full

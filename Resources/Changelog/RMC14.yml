@@ -1,148 +1,4 @@
 ﻿Entries:
-- author: noctyrnal
-  changes:
-  - message: Resprited the M5 ATL.
-    type: Tweak
-  - message: The M5 ATL now has a built-in magnetic harness.
-    type: Tweak
-  id: 2508
-  time: '2025-11-17T10:08:09.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8333
-- author: noctyrnal
-  changes:
-  - message: Updated the Type 71 and 73 shooting sound.
-    type: Tweak
-  id: 2509
-  time: '2025-11-17T10:09:48.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8404
-- author: SharkSnake98
-  changes:
-  - message: Added a large quantity of posters from CM13
-    type: Add
-  - message: Added faction-specific poster spawners
-    type: Add
-  id: 2510
-  time: '2025-11-17T10:12:19.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8409
-- author: Vixting
-  changes:
-  - message: Fix setting IFF not working
-    type: Fix
-  id: 2511
-  time: '2025-11-17T10:13:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8365
-- author: CatAndHats
-  changes:
-  - message: Fixed minor ak-4047 sprite issues when wielded in-hand
-    type: Fix
-  id: 2512
-  time: '2025-11-17T10:15:12.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8420
-- author: Ian321
-  changes:
-  - message: Added M13 AP and extended AP magazines to requisitions.
-    type: Add
-  - message: Removed M13 drum magazines from requisitions.
-    type: Remove
-  id: 2513
-  time: '2025-11-17T10:16:39.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8374
-- author: SurfinNinja1
-  changes:
-  - message: added 8 new drinks
-    type: Add
-  - message: added 2 new pizzas
-    type: Add
-  - message: added 4 new cakes
-    type: Add
-  - message: added 14 new foods
-    type: Add
-  - message: added 15 new recipes
-    type: Add
-  - message: added cotton seeds to the seed vendor
-    type: Add
-  - message: tweaked several cotton foods to be edible by marines
-    type: Tweak
-  - message: adjusted plain burger stacking recipe (no more cheeseburgers turning
-      into plain burgers!)
-    type: Tweak
-  - message: adjusted onigiri recipe, now provides a bowl!
-    type: Tweak
-  - message: fried chicken is now batter fried!
-    type: Tweak
-  - message: the ghosts from burger stacking have now been exorcised!
-    type: Fix
-  id: 2514
-  time: '2025-11-17T10:20:16.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8239
-- author: 0awful
-  changes:
-  - message: Req can now give you the fancy new xl armor vests.
-    type: Add
-  id: 2515
-  time: '2025-11-17T10:20:59.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8255
-- author: x5tink
-  changes:
-  - message: Fixed Rollerbeds not appearing in hand.
-    type: Fix
-  id: 2516
-  time: '2025-11-17T10:24:06.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8393
-- author: monomethylhydrazine
-  changes:
-  - message: Fixed Basira-Armstrong magazines being medium instead of small sized.
-    type: Fix
-  id: 2517
-  time: '2025-11-17T10:25:52.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8389
-- author: PursuitInAshes
-  changes:
-  - message: The FORECON CO no longer has all access by default.
-    type: Tweak
-  id: 2518
-  time: '2025-11-17T11:45:51.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8224
-- author: Arykh
-  changes:
-  - message: You can now examine reagents inside a pressurized reagent canister pouch!
-      This requires medical skill 1 just like examining pills.
-    type: Add
-  - message: Fixed multiple reagent names in pills not properly seperated.
-    type: Fix
-  id: 2519
-  time: '2025-11-17T11:47:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8248
-- author: Ian321
-  changes:
-  - message: The logistics officer can now vend filled boxes from weapons racks.
-    type: Add
-  id: 2520
-  time: '2025-11-17T11:50:30.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8398
-- author: x5tink
-  changes:
-  - message: Added SMO Admeme Plushie
-    type: Add
-  - message: Liliana Patron Figurine
-    type: Tweak
-  id: 2521
-  time: '2025-11-17T12:12:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8394
-- author: OmerF-afk
-  changes:
-  - message: Added lanterns to survivor pouches
-    type: Add
-  id: 2522
-  time: '2025-11-18T11:02:43.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8426
-- author: OmerF-afk
-  changes:
-  - message: Added extra functionality and sovl to welding masks
-    type: Add
-  id: 2523
-  time: '2025-11-18T11:04:34.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8411
 - author: Aurallianz
   changes:
   - message: improved Mutiny text
@@ -4513,5 +4369,144 @@
   id: 3009
   time: '2026-03-03T05:17:25.618985+00:00'
   url: null
+- author: SharkSnake98
+  changes:
+  - message: Added the SPP Doors and ASAT Launcher prop
+    type: Add
+  - message: Added the PVE varient of the SPP Flamer, as well as tank storage case
+      and rack
+    type: Add
+  - message: Added ammo boxes for the heavy shotgun shells
+    type: Add
+  - message: Changed the doors and layout of the SSV Deyneka, and added the correct
+      flamer and shells. Also moved all the phones to the SSV Deyneka catagory, and
+      added some more around the ship.
+    type: Tweak
+  id: 3010
+  time: '2026-03-26T10:40:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9140
+- author: Arykh
+  changes:
+  - message: Added the emergency surgical equipment cabinet for doctors. These only
+      open on hijack.
+    type: Add
+  id: 3011
+  time: '2026-03-26T10:51:42.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9518
+- author: CatAndHats
+  changes:
+  - message: Added Container Room Xenos sprinkle insert to Solaris
+    type: Add
+  - message: Fixed the room near sensors on Solaris having the incorrect area
+    type: Fix
+  - message: Fixed the container room on Solaris not having an APC
+    type: Fix
+  id: 3012
+  time: '2026-03-26T10:51:10.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9493
+- author: CatAndHats
+  changes:
+  - message: Fixed shiva's snowball panic room insert not having its tactical map
+      labels
+    type: Fix
+  id: 3013
+  time: '2026-03-26T10:50:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9473
+- author: CatAndHats
+  changes:
+  - message: Fixed the missing aerodrom tacmap label on the Sorokyne Strata SPP SOF
+      map insert
+    type: Fix
+  id: 3014
+  time: '2026-03-26T10:50:45.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9474
+- author: kleinerstation13
+  changes:
+  - message: Survivor now spawn together instead of separately on Trijent Dam. Their
+      holdout locations include the Dam, Bar and Hospital.
+    type: Tweak
+  id: 3015
+  time: '2026-03-26T10:49:27.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9421
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Added United Nations Representative Steve Haifisch
+    type: Add
+  - message: The new varadero LZs have received a small passover
+    type: Tweak
+  id: 3016
+  time: '2026-03-26T10:50:07.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9435
+- author: kleinerstation13
+  changes:
+  - message: Fixed SPP SOF not being able to open their own dropship doors
+    type: Fix
+  - message: Fixed SPP SOF not spawning with shortwave radios
+    type: Fix
+  - message: Fixed SPP SOF hearing marine announcements
+    type: Fix
+  id: 3017
+  time: '2026-03-28T11:05:17.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9410
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the SPP SOF sorokyne survivors insert having the wrong skills.
+    type: Fix
+  - message: Fixed the SPP SOF sorokyne survivors not all spawning with 20 metal sheets.
+    type: Fix
+  id: 3018
+  time: '2026-03-28T11:07:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9408
+- author: GNUtopia
+  changes:
+  - message: Improvised firebombs and AGM-I grenades now burn for the proper time
+    type: Fix
+  id: 3019
+  time: '2026-03-28T11:06:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9409
+- author: Arykh
+  changes:
+  - message: Added the Body Scanner! Its scan is more detailed than the Health Analyzer,
+      but it's not continuous.
+    type: Add
+  id: 3020
+  time: '2026-03-28T11:09:28.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9398
+- author: TadJohnson00
+  changes:
+  - message: '[PVE] added large magazine boxes for most PVE weapons.'
+    type: Add
+  id: 3021
+  time: '2026-03-28T11:15:04.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9293
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed Mess Techs not being mutiny eligible
+    type: Fix
+  id: 3022
+  time: '2026-03-28T11:13:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9321
+- author: Arykh
+  changes:
+  - message: Added a heart rate monitor to the health analyzer.
+    type: Add
+  id: 3023
+  time: '2026-03-28T22:37:56.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9327
+- author: Arykh
+  changes:
+  - message: Added the Autodoc medical pod!
+    type: Add
+  id: 3024
+  time: '2026-03-28T22:38:37.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9363
+- author: Arykh
+  changes:
+  - message: Added the sleeper medical pod! Removes chemicals from the occupant and
+      can inject stabilizing chemicals, with more becoming available as injuries worsen.
+    type: Add
+  id: 3025
+  time: '2026-03-28T22:39:08.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9130
 Name: RMC14
 Order: -1
