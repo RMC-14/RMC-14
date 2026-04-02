@@ -38,6 +38,9 @@
   - type: CMArmor
     melee: 10 # CLOTHING_ARMOR_LOW
     bio: 10 # CLOTHING_ARMOR_LOW
+  - type: RemoveComponents
+    components:
+    - type: IngestionBlocker
 
 - type: Tag
   id: RMCHelmetWelding
