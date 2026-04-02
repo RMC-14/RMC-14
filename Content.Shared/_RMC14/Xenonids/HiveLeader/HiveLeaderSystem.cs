@@ -148,6 +148,7 @@ public sealed class HiveLeaderSystem : EntitySystem
         Dirty(watching, leaderComp);
 
         ent.Comp.Leaders.Add(watching);
+        SyncPheromones(ent);
         Dirty(ent);
 
         msg = $"You've selected {Name(watching)} as a Hive Leader.";
