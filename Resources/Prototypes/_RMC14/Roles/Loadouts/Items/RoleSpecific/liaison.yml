@@ -27,7 +27,7 @@
 
 - type: loadout
   id: WEYABagPhoneSatchel
-  cost: 0
+  cost: 1
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
