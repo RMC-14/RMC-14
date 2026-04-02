@@ -82,6 +82,9 @@ public sealed class ItemCamouflageSystem : EntitySystem
 
         while (_items.TryDequeue(out var ent))
         {
+            if (TerminatingOrDeleted(ent))
+                continue;
+
             _appearance.SetData(ent, ItemCamouflageVisuals.Camo, CurrentMapCamouflage);
         }
     }
