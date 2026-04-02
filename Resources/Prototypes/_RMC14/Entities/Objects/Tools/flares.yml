@@ -121,6 +121,13 @@
     proto: RMCFlareCASBullet
   - type: RMCAirProjectile
     prototype: RMCAirFlareCAS
+  - type: RMCCamera
+    id: null
+    rename: false
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.5, 0.5
+    drawFov: false
 
 - type: entity
   parent: CMFlare
@@ -469,6 +476,13 @@
   - type: RMCNightVisionVisibleOnIgnite
   - type: TimedDespawn
     lifetime: 180
+  - type: RMCCamera
+    id: null
+    rename: false
+  - type: RMCStaticZoomLevel
+  - type: Eye
+    zoom: 0.5, 0.5
+    drawFov: false
 
 - type: entity
   name: flare
