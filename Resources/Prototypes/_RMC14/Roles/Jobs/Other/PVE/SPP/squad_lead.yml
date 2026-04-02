@@ -24,9 +24,7 @@
     - type: JobPrefix
       prefix: rmc-job-prefix-spp-squadlead
     - type: AssignSquad
-      whitelist:
-        tags:
-        - RMCSquadSPP
+      squad: SquadSPP
     - type: MarineOrders
     - type: RMCPointing
     - type: RMCTrackable
