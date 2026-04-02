@@ -85,6 +85,7 @@ public sealed partial class RMCOrbitalDeployableComponent : Component
 
     /// <summary>
     ///     The sound to play on the target location when the dropped entity start it's dropping animation.
+    ///     If <see cref="DropPod"/> is true, the arriving sound stored on the drop pod prototype's <see cref="SupplyDropPodComponent"/> will be used instead.
     /// </summary>
     [DataField, AutoNetworkedField]
     public SoundSpecifier? ArrivingSound = new SoundPathSpecifier("/Audio/_RMC14/Machines/Techpod/techpod_drill.ogg");
