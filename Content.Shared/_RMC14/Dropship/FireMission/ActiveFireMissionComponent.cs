@@ -88,7 +88,7 @@ public sealed partial class ActiveFireMissionComponent : Component
     ///     The sound to play at the start location of the fire mission.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public SoundSpecifier StartSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/dropship_sonic_boom.ogg", AudioParams.Default.WithVolume(4).WithRolloffFactor(8).WithMaxDistance(50));
+    public SoundSpecifier StartSound = new SoundPathSpecifier("/Audio/_RMC14/Weapons/dropship_sonic_boom.ogg", AudioParams.Default.WithVolume(2).WithReferenceDistance(8).WithMaxDistance(50).WithVariation(0.1f).WithRolloffFactor(1.5f));
 
     /// <summary>
     ///     The time between starting a fire mission and being able to start a new one.

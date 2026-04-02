@@ -1,5 +1,6 @@
 using System.Numerics;
 using Content.Shared._RMC14.Dropship.Weapon;
+using Content.Shared._RMC14.GameStates;
 using Content.Shared._RMC14.Mortar;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Network;
@@ -13,6 +14,7 @@ public sealed class FireMissionSystem : EntitySystem
     [Dependency] private readonly SharedDropshipWeaponSystem _dropshipWeapon = default!;
     [Dependency] private readonly SharedMortarSystem _mortar = default!;
     [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly SharedRMCPvsSystem _rmcPvs = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
@@ -77,7 +79,9 @@ public sealed class FireMissionSystem : EntitySystem
                 if (fireMission is { WatchingTerminal: { } watchingTerminal, MissionEye: { } missionEye })
                     _dropshipWeapon.TryUpdateCameraTarget(watchingTerminal, missionEye, true);
 
-                _audio.PlayPvs(fireMission.StartSound, startCoordinates);
+                var startSound = _audio.PlayPvs(fireMission.StartSound, startCoordinates);
+                if (startSound is { } sound)
+                    _rmcPvs.AddGlobalOverride(sound.Entity);
             }
 
             // Don't shoot yet. Instead, display warnings to entities near the target location.
