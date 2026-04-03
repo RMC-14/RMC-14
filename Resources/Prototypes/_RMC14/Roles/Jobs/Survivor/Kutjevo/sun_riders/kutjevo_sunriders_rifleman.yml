@@ -42,7 +42,7 @@
   components:
   - type: SurvivorPreset
     primaryWeapons:
-    - [ RMCWeaponShotgunM42A2Filled, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
+    - [ RMCWeaponShotgunSKG12, CMShellShotgunBuckshot, CMShellShotgunBuckshot ]
     primaryWeaponChance: 1
 
 - type: jobIcon
