@@ -128,7 +128,7 @@
 
 - type: entity
   abstract: true
-  id: RMCPortableGeneratorBase # TODO RMC14 - Functionality
+  id: RMCPortableGeneratorBase
   parent: [ BaseMachine, SmallConstructibleMachine, StructureWheeled]
   components:
     - type: GuideHelp
@@ -153,6 +153,26 @@
     - type: Sprite
       sprite: _RMC14/Structures/Power/generators.rsi
       noRot: true
+    - type: InteractionOutline
+    - type: Corrodible
+      isCorrodible: false
+    - type: RMCPortableGenerator
+    - type: UserInterface
+      interfaces:
+        enum.RMCPortableGeneratorUiKey.Key:
+          type: RMCPortableGeneratorBui
+    - type: ActivatableUI
+      key: enum.RMCPortableGeneratorUiKey.Key
+    - type: ActivatableUIBlacklist
+      blacklist:
+        components:
+        - Xeno
+    - type: AmbientSound
+      range: 5
+      volume: -5
+      sound:
+        path: /Audio/Ambience/Objects/engine_hum.ogg
+      enabled: false
     - type: Destructible
       thresholds:
         - trigger:
@@ -183,6 +203,15 @@
       state: portgen0
     - type: Machine
       board: RMCPortableGeneratorPacmanMachineCircuitBoard
+    - type: RMCPortableGenerator
+      watts: 5000
+      timePerSheet: 70
+      fuelStackType: CMPhoron
+      fuelEntity: CMSheetPhoron1
+      fuelName: phoron
+      explosionIntensity: 50
+      explosionSlope: 5
+      explosionMaxIntensity: 10
 
 - type: entity
   parent: RMCPortableGeneratorBase
@@ -194,3 +223,12 @@
       state: portgen1
     - type: Machine
       board: RMCPortableGeneratorSuperPacmanMachineCircuitboard
+    - type: RMCPortableGenerator
+      watts: 15000
+      timePerSheet: 120
+      fuelStackType: Uranium
+      fuelEntity: SheetUranium1
+      fuelName: uranium
+      explosionIntensity: 80
+      explosionSlope: 3
+      explosionMaxIntensity: 15

@@ -1,0 +1,34 @@
+<controls:RMCPortableGeneratorWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="clr-namespace:Content.Client._RMC14.Power"
+    xmlns:ui="clr-namespace:Content.Client._RMC14.UserInterface"
+    Title="Portable Generator" MinSize="380 350">
+    <BoxContainer Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <RichTextLabel Text="[bold]Generator Status[/bold]" />
+            <Control HorizontalExpand="True" />
+            <RichTextLabel Name="StatusLabel" Access="Public" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Button Name="ToggleButton" Access="Public" Text="Start" StyleClasses="OpenBoth" MinWidth="80" />
+            <Control HorizontalExpand="True" />
+            <Button Name="EjectButton" Access="Public" Text="Eject Fuel" StyleClasses="OpenBoth" MinWidth="80" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <RichTextLabel Name="FuelLabel" Access="Public" Margin="0 5 0 0" />
+        <ProgressBar Name="FuelBar" Access="Public" HorizontalExpand="True" Margin="0 2">
+            <Label Name="FuelBarLabel" Access="Public" HorizontalAlignment="Right" Margin="0 3 5 3" />
+        </ProgressBar>
+        <ui:BlueHorizontalSeparator />
+        <RichTextLabel Name="PowerOutputLabel" Access="Public" Margin="0 5 0 0" />
+        <BoxContainer Orientation="Horizontal" Margin="0 5">
+            <Button Name="LowerPowerButton" Access="Public" Text="- Power" StyleClasses="OpenBoth" MinWidth="80" />
+            <Control HorizontalExpand="True" />
+            <Button Name="RaisePowerButton" Access="Public" Text="+ Power" StyleClasses="OpenBoth" MinWidth="80" />
+        </BoxContainer>
+        <ui:BlueHorizontalSeparator />
+        <RichTextLabel Name="HeatStatusLabel" Access="Public" Margin="0 5 0 0" />
+        <ProgressBar Name="HeatBar" Access="Public" HorizontalExpand="True" Margin="0 2" />
+    </BoxContainer>
+</controls:RMCPortableGeneratorWindow>

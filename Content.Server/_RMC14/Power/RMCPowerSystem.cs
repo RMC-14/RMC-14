@@ -1,14 +1,18 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
+using Content.Server.Explosion.EntitySystems;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.PowerCell;
+using Content.Shared._RMC14.Areas;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Power;
+using Content.Shared.Audio;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.PowerCell;
 using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
 
@@ -16,13 +20,17 @@ namespace Content.Server._RMC14.Power;
 
 public sealed class RMCPowerSystem : SharedRMCPowerSystem
 {
+    [Dependency] private readonly SharedAmbientSoundSystem _ambientSound = default!;
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
+    [Dependency] private readonly AreaSystem _area = default!;
     [Dependency] private readonly BatterySystem _battery = default!;
     [Dependency] private readonly PowerCellSystem _cell = default!;
     [Dependency] private readonly IConfigurationManager _config = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ExplosionSystem _explosion = default!;
     [Dependency] private readonly SharedPointLightSystem _light = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
 
     [ViewVariables]
     private TimeSpan _nextUpdate;
@@ -39,6 +47,7 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
     private EntityQuery<BatteryComponent> _batteryQuery;
 
     private readonly Dictionary<EntityUid, List<(Entity<RMCApcComponent, TransformComponent> Apc, Entity<BatteryComponent>? Cell)>> _apcs = new();
+    private readonly Dictionary<EntityUid, float> _portableGenPower = new();
     private readonly List<EntityUid> _toRemove = new();
 
     public override void Initialize()
@@ -110,6 +119,112 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         return TryComp(ent, out ApcPowerReceiverComponent? receiver) && receiver.Powered;
     }
 
+    private void UpdatePortableGenerators()
+    {
+        _portableGenPower.Clear();
+
+        var portableGens = EntityQueryEnumerator<RMCPortableGeneratorComponent, TransformComponent>();
+        while (portableGens.MoveNext(out var uid, out var gen, out var xform))
+        {
+            if (!gen.On)
+            {
+                if (gen.Heat > 0)
+                {
+                    gen.Heat = Math.Max(gen.Heat - 2f, 0f);
+                    Dirty(uid, gen);
+                }
+
+                continue;
+            }
+
+            if (!xform.Anchored)
+            {
+                gen.On = false;
+                Dirty(uid, gen);
+                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
+                _ambientSound.SetAmbience(uid, false);
+                continue;
+            }
+
+            if (gen.CritFail || gen.Sheets <= 0 && gen.SheetFraction <= 0)
+            {
+                gen.On = false;
+                Dirty(uid, gen);
+                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
+                _ambientSound.SetAmbience(uid, false);
+                continue;
+            }
+
+            var setting = gen.PowerGenPercent / 100;
+            var fuelUsed = setting / gen.TimePerSheet;
+
+            gen.SheetFraction -= fuelUsed;
+            while (gen.SheetFraction <= 0 && gen.Sheets > 0)
+            {
+                gen.Sheets--;
+                gen.SheetFraction += 1f;
+            }
+
+            if (gen.Sheets <= 0 && gen.SheetFraction <= 0)
+            {
+                gen.SheetFraction = 0;
+                gen.On = false;
+                Dirty(uid, gen);
+                _appearance.SetData(uid, RMCPortableGeneratorVisuals.Running, false);
+                _ambientSound.SetAmbience(uid, false);
+                continue;
+            }
+
+            var lowerLimit = 56f + setting * 10f;
+            var upperLimit = 76f + setting * 10f;
+            var bias = 0;
+
+            if (setting > 4)
+            {
+                upperLimit = 400f;
+                bias = setting * 3;
+            }
+
+            if (gen.Heat < lowerLimit)
+            {
+                gen.Heat += 3f;
+            }
+            else
+            {
+                gen.Heat += _random.Next(-7 + bias, 8 + bias);
+
+                if (gen.Heat < lowerLimit)
+                    gen.Heat = lowerLimit;
+
+                if (gen.Heat > upperLimit)
+                    gen.Heat = upperLimit;
+            }
+
+            // This can't ever happen under normal gameplay circumstances
+            if (gen.Heat > gen.OverheatThreshold)
+            {
+                _explosion.QueueExplosion(
+                    uid,
+                    ExplosionSystem.DefaultExplosionPrototypeId,
+                    gen.ExplosionIntensity,
+                    gen.ExplosionSlope,
+                    gen.ExplosionMaxIntensity);
+
+                QueueDel(uid);
+                continue;
+            }
+
+            if (_area.TryGetArea(uid, out var areaEnt, out _) &&
+                _areaPowerQuery.TryComp(areaEnt.Value, out _))
+            {
+                ref var areaPower = ref CollectionsMarshal.GetValueRefOrAddDefault(_portableGenPower, areaEnt.Value, out _);
+                areaPower += gen.Watts * setting;
+            }
+
+            Dirty(uid, gen);
+        }
+    }
+
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -134,6 +249,8 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
         }
 
         _toRemove.Clear();
+
+        UpdatePortableGenerators();
 
         var power = new Dictionary<EntityUid, float>();
         var generators = EntityQueryEnumerator<RMCFusionReactorComponent, TransformComponent>();
@@ -235,30 +352,38 @@ public sealed class RMCPowerSystem : SharedRMCPowerSystem
                     apcComp.Channels[i].Watts = load;
                 }
 
+                var effectiveWattsPer = wattsPer;
+                if (_portableGenPower.TryGetValue(apcComp.Area.Value, out var genWatts))
+                {
+                    var apcCountInArea = area.Comp.Apcs.Count;
+                    if (apcCountInArea > 0)
+                        effectiveWattsPer += genWatts / apcCountInArea;
+                }
+
                 if (cell == null)
                 {
                     apcComp.ChargePercentage = 0;
                 }
                 else
                 {
-                    var battery = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
-                    var drawn = wattsPer;
+                    var batteryEnt = new Entity<BatteryComponent>(cell.Value, cell.Value.Comp);
+                    var drawn = effectiveWattsPer;
                     drawn -= totalLoad;
                     if (drawn <= 0)
                     {
                         apcComp.ChargeStatus = RMCApcChargeStatus.NotCharging;
-                        _battery.UseCharge(battery, -drawn, battery);
+                        _battery.UseCharge(batteryEnt, -drawn, batteryEnt);
                     }
                     else
                     {
-                        _battery.SetCharge(battery, battery.Comp.CurrentCharge + drawn, battery);
+                        _battery.SetCharge(batteryEnt, batteryEnt.Comp.CurrentCharge + drawn, batteryEnt);
 
-                        apcComp.ChargeStatus = _battery.IsFull(battery, battery)
+                        apcComp.ChargeStatus = _battery.IsFull(batteryEnt, batteryEnt)
                             ? RMCApcChargeStatus.FullCharge
                             : RMCApcChargeStatus.Charging;
                     }
 
-                    apcComp.ChargePercentage = battery.Comp.CurrentCharge / battery.Comp.MaxCharge;
+                    apcComp.ChargePercentage = batteryEnt.Comp.CurrentCharge / batteryEnt.Comp.MaxCharge;
                 }
 
                 switch (apcComp.ChargePercentage)
