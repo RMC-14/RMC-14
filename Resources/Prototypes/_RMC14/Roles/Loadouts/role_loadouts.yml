@@ -866,7 +866,7 @@
   - MeleeWeaponsRMC
 
 - type: roleLoadout
-  id: JobRMCJobSyntheticColony
+  id: JobRMCSyntheticColony
   points: 7
   groups:
   - EyewearRMC
