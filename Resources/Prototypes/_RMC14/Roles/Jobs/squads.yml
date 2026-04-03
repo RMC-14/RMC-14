@@ -284,7 +284,7 @@
 
 - type: Tag
   id: RMCSquadRoyalMarinesPVE
-      
+
 - type: entity
   parent: SquadBase
   id: SquadPara

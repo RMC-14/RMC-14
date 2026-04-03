@@ -1,57 +1,4 @@
 ﻿Entries:
-- author: JustMyselfUwU
-  changes:
-  - message: Fixed MOU53 not receiving the correct accuracy bonus from the gyroscopic
-      stabilizer.
-    type: Fix
-  id: 2545
-  time: '2025-11-29T02:57:20.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8483
-- author: Vermidia
-  changes:
-  - message: Added even more avali names
-    type: Add
-  id: 2546
-  time: '2025-11-29T02:58:45.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8475
-- author: noctyrnal
-  changes:
-  - message: Added basketball hoops!
-    type: Add
-  - message: The Large Tree on LV has been resprited.
-    type: Add
-  id: 2547
-  time: '2025-11-29T03:03:47.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8466
-- author: BramvanZijp
-  changes:
-  - message: Ziptie boxes will now fit in armor and armor vests again.
-    type: Fix
-  id: 2548
-  time: '2025-11-29T03:04:07.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8444
-- author: noctyrnal
-  changes:
-  - message: The Civilian Binoculars have received new sprites.
-    type: Tweak
-  id: 2549
-  time: '2025-11-29T03:07:42.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8468
-- author: Majkl-J
-  changes:
-  - message: Fixed mag to mag repacking leaving floating ammo around unfortunate marines.
-    type: Fix
-  id: 2550
-  time: '2025-11-29T03:16:44.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8271
-- author: Vermidia
-  changes:
-  - message: Fixed bloodpacks refilling blood off of non-blood reagents contained
-      within them.
-    type: Fix
-  id: 2551
-  time: '2025-11-29T03:18:10.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8260
 - author: Arykh
   changes:
   - message: You can now transfer pill bottles into the chemmaster using via pill
@@ -4522,5 +4469,60 @@
   id: 3045
   time: '2026-04-01T07:02:23.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9375
+- author: Whisper
+  changes:
+  - message: LZ sentries have a rotating warning light.
+    type: Add
+  id: 3046
+  time: '2026-04-02T05:02:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9461
+- author: c0rigin
+  changes:
+  - message: Non-wagging vulp tails are now properly labeled as such
+    type: Fix
+  id: 3047
+  time: '2026-04-02T05:02:49.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9422
+- author: CatAndHats
+  changes:
+  - message: The xenonid mechanic of bringing dead larva to the hivecore, which opens
+      up a new burrowed larva slot, is now explained in a gameplay tip and has a popup
+      when it happens.
+    type: Add
+  id: 3048
+  time: '2026-04-02T05:04:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9034
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed PMC and Paramarine survivors not spawning with their squad.
+    type: Fix
+  id: 3049
+  time: '2026-04-02T05:04:44.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9450
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed the engi PMC armor having the incorrect stats. It now has fire
+      resistance and 20 melee protection as intended.
+    type: Fix
+  id: 3050
+  time: '2026-04-02T05:05:29.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9437
+- author: keegaroo65
+  changes:
+  - message: Fixed pheromones not relaying instantly to newly selected Xeno leaders
+    type: Fix
+  id: 3051
+  time: '2026-04-02T05:06:02.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9447
+- author: Arykh
+  changes:
+  - message: The HEFA helmet now acts like a HEFA grenade!
+    type: Add
+  - message: Added the ability to prime the HEFA sword so it detonates on hitting
+      a mob! This will destroy the sword.
+    type: Add
+  id: 3052
+  time: '2026-04-02T09:08:40.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/8985
 Name: RMC14
 Order: -1
