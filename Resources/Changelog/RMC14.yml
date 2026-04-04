@@ -1,99 +1,4 @@
 ﻿Entries:
-- author: Tunguso4ka
-  changes:
-  - message: Replaced most of reinforced walls on Sorokyne with standard walls.
-    type: Fix
-  id: 2553
-  time: '2025-11-29T03:28:55.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8453
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Modified the virology open nightmare insert on solaris ridge. It now
-      spawns with a flamethrower, syringe case, and has some new props.
-    type: Add
-  id: 2554
-  time: '2025-11-29T03:30:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8467
-- author: 0awful
-  changes:
-  - message: Rifleman's armor vest option now renders like the other armor options.
-    type: Tweak
-  id: 2555
-  time: '2025-11-29T03:37:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8419
-- author: Vermidia
-  changes:
-  - message: Fixed some heals not healing enough.
-    type: Fix
-  id: 2556
-  time: '2025-11-29T04:24:56.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8486
-- author: CatAndHats
-  changes:
-  - message: Pizza boxes now fit into storages like any other normal-sized item.
-    type: Fix
-  id: 2557
-  time: '2025-11-29T04:36:50.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8451
-- author: Gallagin
-  changes:
-  - message: Added a PvE visor helmet garb to the PvP loadout
-    type: Add
-  id: 2558
-  time: '2025-11-29T04:41:13.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8484
-- author: monomethylhydrazine
-  changes:
-  - message: Added more order callouts, ported from CM13.
-    type: Add
-  id: 2559
-  time: '2025-11-29T04:45:14.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8479
-- author: noctyrnaled
-  changes:
-  - message: Fixed IDs layering over armour and jackets.
-    type: Fix
-  id: 2560
-  time: '2025-11-29T04:48:53.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8460
-- author: Dutch-VanDerLinde
-  changes:
-  - message: Fixed the dead examine text for xenos appearing twice.
-    type: Fix
-  id: 2561
-  time: '2025-11-29T04:51:41.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8450
-- author: Vermidia
-  changes:
-  - message: Fixed hedgehog ravager having slightly too much base armor and not enough
-      explosion armor.
-    type: Fix
-  id: 2562
-  time: '2025-11-29T05:00:02.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8495
-- author: PursuitInAshes
-  changes:
-  - message: '[PvE] Three new sound markers have been added for GM use. (Vent Crawl/Pass,
-      Xeno Door Prying)'
-    type: Add
-  id: 2563
-  time: '2025-11-29T05:03:25.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8441
-- author: CatAndHats
-  changes:
-  - message: Fixed the Chief Engineer and Maintenance Technician vendors to now have
-      points and gave them some items they were missing.
-    type: Fix
-  id: 2564
-  time: '2025-11-29T05:16:38.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8124
-- author: Vermidia
-  changes:
-  - message: Fixed Queen gut ability sometimes being able to gib multiple marines
-    type: Fix
-  id: 2565
-  time: '2025-11-29T05:26:15.0000000+00:00'
-  url: https://github.com/RMC-14/RMC-14/pull/8281
 - author: CatAndHats
   changes:
   - message: Fixed maintenance semiotic name
@@ -4521,5 +4426,123 @@
   id: 3053
   time: '2026-04-03T00:29:12.0000000+00:00'
   url: https://github.com/RMC-14/RMC-14/pull/9458
+- author: RerBreab
+  changes:
+  - message: Fixed direct hit of the incinerator's stream dealing damage multiple
+      times.
+    type: Fix
+  id: 3054
+  time: '2026-04-03T09:14:47.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9056
+- author: kleinerstation13
+  changes:
+  - message: Added a green band to PDW90 AP magazines
+    type: Tweak
+  id: 3055
+  time: '2026-04-03T09:17:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9500
+- author: wheelwrightt
+  changes:
+  - message: Intel officer's uniform now properly changes with map.
+    type: Fix
+  id: 3056
+  time: '2026-04-03T09:18:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9475
+- author: Dygon
+  changes:
+  - message: Floodlights no longer provide light while turned off.
+    type: Fix
+  id: 3057
+  time: '2026-04-03T09:19:34.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9439
+- author: Dygon
+  changes:
+  - message: Being mounted to a door gun HMG while the dropship lifts off no longer
+      makes you fall to the planet.
+    type: Fix
+  id: 3058
+  time: '2026-04-03T09:20:05.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9452
+- author: Dygon
+  changes:
+  - message: Increased the initial item size of the ML66D mount component from small
+      to normal.
+    type: Fix
+  id: 3059
+  time: '2026-04-03T09:19:19.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9436
+- author: Dygon
+  changes:
+  - message: Weather effects no longer show inside tents.
+    type: Fix
+  - message: Weather sound effects can no longer be heard while in the lobby.
+    type: Fix
+  id: 3060
+  time: '2026-04-03T09:22:06.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9460
+- author: Dygon
+  changes:
+  - message: Fixed the aimed shot/spotting visuals not always appearing in the correct
+      location.
+    type: Fix
+  id: 3061
+  time: '2026-04-03T09:23:26.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9472
+- author: monomethylhydrazine
+  changes:
+  - message: Added a new lobby art, Covering Private Vuloss by SampleTex.
+    type: Add
+  id: 3062
+  time: '2026-04-04T10:23:13.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9266
+- author: Dygon
+  changes:
+  - message: The Vanguard Praetorian's Pierce ability can now also hit over folded
+      barricades, sandbags and window frames.
+    type: Fix
+  id: 3063
+  time: '2026-04-04T10:25:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9440
+- author: Ian321
+  changes:
+  - message: The M44 Combat Revolver case no longer fits inside pockets or backpacks.
+    type: Fix
+  id: 3064
+  time: '2026-04-04T10:24:25.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9485
+- author: Dygon
+  changes:
+  - message: Acid's total damage to barricades has been increased by 12.5%.
+    type: Fix
+  - message: 'Flares now get melted faster by acid: weak acid 27.5% faster, normal
+      acid 49% faster, strong acid 71.4% faster.'
+    type: Fix
+  - message: Extended the burn duration of M94 flares from 10 to 16 minutes and adjusted
+      their fade-out timing.
+    type: Fix
+  - message: M94 flares fired into the air with a flare gun now last twice as long.
+    type: Fix
+  - message: A signal flare now becomes a valid dropship target 5 seconds after landing
+      instead of instantly.
+    type: Fix
+  - message: Flares no longer ramp up their range as if newly spawned each time they
+      enter your view.
+    type: Fix
+  - message: Flares now gradually fade out instead of maintaining maximum brightness
+      for their entire burn duration.
+    type: Fix
+  - message: Fixed signal flares lasting 30 seconds longer than intended and appearing
+      unlit during this extra duration.
+    type: Fix
+  id: 3065
+  time: '2026-04-04T10:26:39.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9465
+- author: Dutch-VanDerLinde
+  changes:
+  - message: Fixed PMC Engineers spawning with the wrong backpack.
+    type: Fix
+  id: 3066
+  time: '2026-04-04T10:31:14.0000000+00:00'
+  url: https://github.com/RMC-14/RMC-14/pull/9456
 Name: RMC14
 Order: -1

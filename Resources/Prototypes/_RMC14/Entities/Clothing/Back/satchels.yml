@@ -962,9 +962,9 @@
     sprite: _RMC14/Objects/Clothing/Back/Backpacks/PMC/standard.rsi
 
 - type: entity
-  parent: [RMCSatchelPMC, RMCSatchelWelder]
+  parent: RMCSatchelLightpackWelder
   id: RMCSatchelWelderPMC
-  name: pmc technician welderpack
+  name: PMC technician welderpack
   description: Ergonomic, protected, high capacity backpack, designed for Weston-Yamada PMCs. Features a small fueltank for quick blowtorch refueling.
   components:
   - type: Sprite
