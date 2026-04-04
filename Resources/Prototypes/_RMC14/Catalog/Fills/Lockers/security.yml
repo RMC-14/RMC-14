@@ -1,5 +1,5 @@
 - type: entity
-  id: RMCClosetBombFilledSecurity
+  id: CMClosetBombFilled
   parent: CMClosetBomb
   suffix: Filled, Security
   components:
