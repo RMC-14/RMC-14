@@ -1,0 +1,142 @@
+# Autodoc Medical Pod
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCAutodoc
+  name: autodoc emergency medical system
+  description: An emergency surgical device designed to perform life-saving treatments and basic surgeries on patients automatically, without the need of a surgeon.
+  suffix: Spawns with Console
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/autodoc.rsi
+    drawdepth: Mobs
+    noRot: true
+    layers:
+    - state: autodoc_open
+      map: ["enum.AutodocVisualLayers.Base"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ApcPowerReceiver
+    powerLoad: 450 # 15 idle, 450 active
+    needsPower: false # TODO RMC14 power
+  - type: Autodoc
+  - type: DragInsertContainer
+    containerId: autodoc
+    entryDelay: 2
+    delaySelfEntry: true
+  - type: NoStunOnExit # Custom stun exit behavior + sound in SharedAutodocSystem
+  - type: ContainerContainer
+    containers:
+      autodoc: !type:ContainerSlot {}
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AutodocVisuals.State:
+        enum.AutodocVisualLayers.Base:
+          Empty: { state: autodoc_open }
+          Occupied: { state: autodoc_closed }
+          Operating: { state: autodoc_closed_operate }
+  - type: InsertBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+- type: entity
+  parent: RMCAutodoc
+  id: RMCAutodocNoConsole
+  suffix: No Console
+  components:
+  - type: Autodoc
+    spawnConsolePrototype: null
+
+- type: entity
+  parent: CMBaseStructureCorrodible
+  id: RMCAutodocConsole
+  name: autodoc medical system control console
+  description: The control interface used to operate the adjoining autodoc. Requires training to use properly.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/Medical/autodoc.rsi
+    noRot: true
+    layers:
+    - state: sleeperconsole-p
+    - state: sleeperconsole
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        density: 200
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+        hard: false
+  - type: AutodocConsole
+  - type: UserInterface
+    interfaces:
+      enum.AutodocUIKey.Key:
+        type: AutodocConsoleBui
+  - type: ActivatableUI
+    key: enum.AutodocUIKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: ApcPowerReceiver
+    powerLoad: 40
+    needsPower: false # TODO RMC14 power
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ActivatableUIBlacklist
+    blacklist:
+      components:
+      - Xeno
+  - type: RMCMesonsNonviewable
+
+# Upgraded, Unskilled, Autodoc
+- type: entity
+  parent: RMCAutodoc
+  id: RMCAutodocUnskilled
+  name: advanced autodoc emergency medical system
+  description: A much more expensive model of autodoc modified with an A.I. diagnostic unit. The result is a much simpler, point-and-click interface that anyone, regardless of training, can use.
+  suffix: Unskilled, Upgraded
+  components:
+  - type: Autodoc
+    spawnConsolePrototype: RMCAutodocConsoleUpgraded
+    skillRequired: {}
+
+- type: entity
+  parent: RMCAutodocConsole
+  id: RMCAutodocConsoleUpgraded
+  name: upgraded autodoc control console
+  components:
+  - type: AutodocConsole
+    installedUpgrades:
+    - InternalBleeding
+    - BrokenBone
+    - OrganDamage
+    - LarvaExtraction
