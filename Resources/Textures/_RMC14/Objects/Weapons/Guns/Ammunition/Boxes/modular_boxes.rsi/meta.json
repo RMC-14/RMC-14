@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on Github, RavenCaat on GitHub, github noctyrnal, and @TadJohnson00 (GitHub), _24 and _a3 by github monomethylhydrazine",
+  "copyright": "Original Sprite by Aleksh, Modified by Ramiris, SharkSnake98 on Github, RavenCaat on GitHub, github noctyrnal; _90, _90d, rifle_box_large, rifle_lid_large, rifle_ammo_large by @TadJohnson00 (GitHub); _24 and _a3 by github monomethylhydrazine",
   "size": {
     "x": 32,
     "y": 32
@@ -105,6 +105,42 @@
     },
     {
       "name": "rifle_ammo_medium_rounds_color"
+    },
+    {
+      "name": "rifle_box_large"
+    },
+    {
+      "name": "rifle_lid_large"
+    },
+    {
+      "name": "rifle_box_large_marking"
+    },
+    {
+      "name": "rifle_lid_large_marking"
+    },
+    {
+      "name": "rifle_ammo_large_full_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_full_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_high_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_high_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_medium_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_medium_mags_color"
+    },
+    {
+      "name": "rifle_ammo_large_low_mags_base"
+    },
+    {
+      "name": "rifle_ammo_large_low_mags_color"
     },
     {
       "name": "smg"
