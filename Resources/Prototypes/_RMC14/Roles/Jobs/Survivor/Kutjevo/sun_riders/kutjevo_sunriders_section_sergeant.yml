@@ -10,7 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetSunRidersRifleman
+      preset: RMCSkillPresetSunRidersSectionSergeant
     - type: MarineOrders
     - type: SquadLeader
     - type: RMCPointing

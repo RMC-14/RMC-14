@@ -12,7 +12,7 @@
     components:
     - type: RMCAllowSuitStorage
     - type: Skills
-      preset: RMCSkillPresetSunRidersRifleman
+      preset: RMCSkillPresetSunRidersPilot
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi

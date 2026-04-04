@@ -82,6 +82,7 @@
     skills:
       RMCSkillLeadership: 1
       RMCSkillConstruction: 2
+      RMCSkillJtac: 3
 
 - type: entity
   parent: RMCSkillPresetSunRidersRifleman
@@ -117,3 +118,15 @@
   - type: SkillPreset
     skills:
       RMCSkillFirearms: 2
+
+- type: entity
+  parent: RMCSkillPresetSunRidersRifleman
+  id: RMCSkillPresetSunRidersCorpsman
+  name: Sun Riders Corpsman
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SkillPreset
+    skills:
+      RMCSkillFireman: 3
+      RMCSkillMedical: 3
+      RMCSkillSurgery: 2

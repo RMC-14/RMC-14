@@ -10,7 +10,7 @@
   - !type:AddComponentSpecial
     components:
     - type: Skills
-      preset: RMCSkillPresetSunRidersRifleman
+      preset: RMCSkillPresetSunRidersCorpsman
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_RMC14/Interface/map_blips.rsi
