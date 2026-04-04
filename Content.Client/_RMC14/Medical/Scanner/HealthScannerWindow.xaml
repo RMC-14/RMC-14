@@ -58,7 +58,7 @@
 					<graphics:StyleBoxFlat BackgroundColor="#984A16" />
 				</PanelContainer.PanelOverride>
 				<Label Name="HolocardDescription" Access="Public" Align="Right" MinWidth="160" Margin="2 2"/>
-			</PanelContainer>			
+			</PanelContainer>
             <Button Name="ChangeHolocardButton" Access="Public" StyleClasses="OpenBoth" Margin="5 0 0 0" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
@@ -70,7 +70,7 @@
             <Label Text="Body Temperature:" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="BodyTemperatureLabel" Access="Public" />
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal" Visible="False">
+        <BoxContainer Orientation="Horizontal">
             <Label Text="Pulse:" MinWidth="160" Modulate="#5B88B0" />
             <RichTextLabel Name="PulseLabel" Access="Public" />
         </BoxContainer>
