@@ -1,5 +1,4 @@
-# Drink powders themselves
-
+# Drink Powders
 - type: reagent
   id: RMCInstantJuicePowderOrange
   parent: BaseDrink
@@ -45,8 +44,7 @@
   flavor: sweet
   color: "#FFC000"
 
-# Drink mixes
-
+# Drink Mixes
 - type: reagent
   id: RMCInstantJuiceOrange
   parent: BaseDrink
