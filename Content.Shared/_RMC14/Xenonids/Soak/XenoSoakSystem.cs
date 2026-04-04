@@ -52,7 +52,7 @@ public sealed class XenoSoakSystem : EntitySystem
 
     private void OnXenoSoakingDamageChanged(Entity<XenoSoakingDamageComponent> xeno, ref DamageChangedEvent args)
     {
-        if (!args.DamageIncreased || args.DamageDelta == null || args.DamageDelta.GetTotal() < 0 || xeno.Comp.LifeStage > ComponentLifeStage.Running)
+        if (!args.DamageIncreased || args.DamageDelta == null || args.DamageDelta.GetTotal() < 0 || !xeno.Comp.Running)
             return;
 
         xeno.Comp.DamageAccumulated += args.DamageDelta.GetTotal().Float();
