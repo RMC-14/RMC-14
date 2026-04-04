@@ -126,7 +126,7 @@
   - type: Ammo
 
 - type: entity
-  parent: 
+  parent:
   - CMGrenadeBase
   - RMCM40DPTags
   id: RMCWhitePhosphorus
@@ -529,9 +529,6 @@
 
 - type: Tag
   id: RMCSmokeWhitePhos
-<<<<<<< HEAD
 
 - type: Tag
   id: RMCGrenade20mm
-=======
->>>>>>> req_metal_foam_grenade
