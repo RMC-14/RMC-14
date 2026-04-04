@@ -1,9 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared._RMC14.Atmos;
+using Content.Shared._RMC14.Attachable.Components;
 using Content.Shared._RMC14.Chemistry.Reagent;
 using Content.Shared._RMC14.Fluids;
 using Content.Shared._RMC14.Line;
 using Content.Shared._RMC14.Map;
+using Content.Shared._RMC14.OnCollide;
 using Content.Shared._RMC14.Weapons.Common;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Actions;
@@ -38,6 +40,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ExamineSystemShared _examine = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
+    [Dependency] private readonly SharedOnCollideSystem _onCollide = default!;
     [Dependency] private readonly LineSystem _line = default!;
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
@@ -246,6 +249,13 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
 
     private void OnIgniterToggle(Entity<RMCIgniterComponent> ent, ref IsHotEvent args)
     {
+        if (TryComp<AttachableHolderComponent>(ent, out var holder) &&
+            holder.SupercedingAttachable != null)
+        {
+            args.IsHot = false;
+            return;
+        }
+
         args.IsHot = ent.Comp.Enabled;
     }
 
@@ -320,6 +330,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
         chainComp.Reagent = reagent.ID;
         chainComp.MaxIntensity = tank.Value.Comp.MaxIntensity;
         chainComp.MaxDuration = tank.Value.Comp.MaxDuration;
+        chainComp.FuelPressure = (int)flamer.Comp.CostPer;
 
         Dirty(chain, chainComp);
     }
@@ -602,6 +613,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 QueueDel(uid);
                 continue;
             }
+            comp.Chain ??= _onCollide.SpawnChain();
 
             foreach (var tile in comp.Tiles)
             {
@@ -609,6 +621,9 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                 {
                     comp.Tiles.Remove(tile);
                     var fire = Spawn(comp.Spawn, tile.Coordinates);
+
+                    EnsureComp<DamageOnCollideComponent>(fire, out var collide);
+                    _onCollide.SetChain((fire, collide), comp.Chain.Value);
 
                     // check for any fires on the same tile other than the one we just spawned, and delete them
                     if (_rmcMap.HasAnchoredEntityEnumerator<TileFireComponent>(_transform.ToCoordinates(fire, tile.Coordinates), out var oldTileFire)
@@ -620,7 +635,7 @@ public abstract class SharedRMCFlamerSystem : EntitySystem
                     if (_reagent.TryIndex(comp.Reagent, out var reagent))
                     {
                         var intensity = Math.Min(comp.MaxIntensity, reagent.Intensity);
-                        var duration = Math.Min(comp.MaxDuration, reagent.Duration);
+                        var duration = Math.Min(comp.MaxDuration, reagent.Duration + (int)(comp.FuelPressure * reagent.DurationMod));
                         _rmcFlammable.SetIntensityDuration(fire, intensity, duration);
                     }
 

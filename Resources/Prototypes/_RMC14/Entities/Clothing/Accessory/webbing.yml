@@ -295,6 +295,42 @@
       state: Open
 
 - type: entity
+  parent: CMWebbing
+  id: RMCParaWebbing
+  name: paramarine webbing
+  description: A durable harness system issued to the RCM's Paramarines, designed to distribute weight evenly for comfort and mobility. Fitted with reinforced pouches for carrying essential gear during high-risk insertions.
+  suffix: Paramarine, Survivor
+  components:
+    - type: Sprite
+      sprite: _RMC14/Objects/Clothing/Webbing/para_webbing.rsi
+      state: webbing
+    - type: Appearance
+
+- type: entity
+  parent: RMCParaWebbing
+  id: RMCParaWebbingL88
+  name: paramarine webbing
+  suffix: Paramarine, Survivor, Filled, L88
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar
+        - id: RMCMagazineRifleL88
+        - id: RMCMagazineRifleL88
+
+- type: entity
+  parent: RMCParaWebbing
+  id: RMCParaWebbingPDW90AP
+  name: paramarine webbing
+  suffix: Paramarine, Survivor, Filled, PDW90
+  components:
+    - type: StorageFill
+      contents:
+        - id: RMCTacticalPrybar
+        - id: RMCMagazineSMGPDW90AP
+        - id: RMCMagazineSMGPDW90AP
+
+- type: entity
   parent: CMWebbingHolster
   id: RMCWebbingHolsterMK80
   suffix: PMC FOL, Survivor, Filled
@@ -314,6 +350,54 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_holster_black.rsi
     state: holster
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackB92FS
+  suffix: Filled, B92FS
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolB92FS
+      amount: 1
+    - id: RMCMagazinePistolB92FS
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackMK45
+  suffix: Filled, MK45
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponPistolMK45
+      amount: 1
+    - id: RMCMagazinePistolMK45
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackM1984
+  suffix: Filled, M1984
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMWeaponPistolM1984
+      amount: 1
+    - id: CMMagazinePistolM1984
+      amount: 2
+
+- type: entity
+  parent: RMCWebbingHolsterBlack
+  id: RMCWebbingHolsterBlackSpearhead
+  suffix: Filled, Spearhead
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+      amount: 1
+    - id: RMCSpeedLoader357
+      amount: 2
 
 - type: entity
   parent: CMWebbingBase
@@ -849,7 +933,7 @@
 
 - type: entity
   parent: CMWebbingBase
-  id: CMWebbingSurgicalGreen
+  id: RMCWebbingSurgicalGreen
   name: surgical webbing vest
   description: A robust webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
@@ -885,24 +969,24 @@
   - type: FixedItemSizeStorage
   - type: StorageFill
     contents:
-#     - PICT System
-      - id: CMScalpel
-      - id: CMHemostat
-      - id: CMRetractor
-      - id: CMTraumaKit10
-      - id: CMCautery
-      - id: CMCircularSaw
-      - id: CMSurgicalDrill
-      - id: CMBoneGel
-      - id: CMBonesetter
-#     - FixOVein
-#     - Nanopaste
-      - id: CMSurgicalLine
-      - id: CMSynthGraft
+    #- PICT System
+    - id: CMScalpel
+    - id: CMHemostat
+    - id: CMRetractor
+    - id: CMTraumaKit10
+    - id: CMCautery
+    - id: CMCircularSaw
+    - id: CMSurgicalDrill
+    - id: CMBoneGel
+    - id: CMBonesetter
+    #- FixOVein
+    #- Nanopaste
+    - id: CMSurgicalLine
+    - id: CMSynthGraft
 
 - type: entity
-  parent: CMWebbingBase
-  id: CMWebbingSurgicalBlue
+  parent: RMCWebbingSurgicalGreen
+  id: RMCWebbingSurgicalBlue
   name: surgical webbing vest
   description: A robust blue webbing vest specially designed to hold a fully array of surgical equipment. Typically issued to field doctors or synthetic personnel.
   suffix: Medical, Filled
@@ -910,46 +994,14 @@
   - type: Sprite
     sprite: _RMC14/Objects/Clothing/Webbing/webbing_surgical_blue.rsi
     state: webbing
-  - type: Webbing
-    components:
-    - type: Storage
-      maxItemSize: Small
-      grid:
-      - 0,0,13,3 # 14 slots
-      whitelist:
-        tags:
-        - CMTraumaKit
-        - CMSurgicalLine
-        - CMSynthGraft
-        components:
-        - CMSurgeryTool
-    - type: FixedItemSizeStorage
-  - type: Storage
-    maxItemSize: Small
-    grid:
-    - 0,0,13,3 # 14 slots
-    whitelist:
-      tags:
-      - CMTraumaKit
-      - CMSurgicalLine
-      - CMSynthGraft
-      components:
-      - CMSurgeryTool
-  - type: FixedItemSizeStorage
+
+- type: entity
+  parent: CMWebbing
+  id: RMCWebbingSPPCommandFilled
+  suffix: Filled
+  components:
   - type: StorageFill
     contents:
-#     - PICT System
-      - id: CMScalpel
-      - id: CMHemostat
-      - id: CMRetractor
-      - id: CMTraumaKit10
-      - id: CMCautery
-      - id: CMCircularSaw
-      - id: CMSurgicalDrill
-      - id: CMBoneGel
-      - id: CMBonesetter
-#     - FixOVein
-#     - Nanopaste
-      - id: CMSurgicalLine
-      - id: CMSynthGraft
-
+    - id: RMCMagazineRifleType71AP
+    - id: RMCMagazineRifleType71AP
+    - id: RMCMagazineRifleType71AP

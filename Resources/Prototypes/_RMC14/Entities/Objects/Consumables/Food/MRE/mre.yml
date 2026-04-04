@@ -259,7 +259,18 @@
 - type: entity
   parent: RMCBoxMREEmpty
   id: RMCBoxMRE
-  suffix: Filled
+  suffix: Filled, UN
   components:
   - type: CMItemSlots
     startingItem: CMMRE
+
+# TSE Rations
+- type: entity
+  parent: RMCBoxMREEmpty
+  name: box of ORPs (x12)
+  description: A box of ORPs. Nutritious, but not delicious.
+  id: RMCBoxMRETSE
+  suffix: Filled, TSE
+  components:
+  - type: CMItemSlots
+    startingItem: RMCMRETSE

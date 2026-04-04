@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Marines;
+using Content.Server._RMC14.Shuttles;
 using Content.Server.Doors.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
@@ -93,6 +94,7 @@ public sealed class DropshipSystem : SharedDropshipSystem
         SubscribeLocalEvent<DropshipComponent, FTLStartedEvent>(OnFTLStarted);
         SubscribeLocalEvent<DropshipComponent, FTLCompletedEvent>(OnFTLCompleted);
         SubscribeLocalEvent<DropshipComponent, FTLUpdatedEvent>(OnFTLUpdated);
+        SubscribeLocalEvent<DropshipComponent, BeforeFTLStartedEvent>(OnBeforeFTLStarted);
 
         SubscribeLocalEvent<DropshipInFlyByComponent, FTLCompletedEvent>(OnInFlyByFTLCompleted);
 
@@ -186,15 +188,14 @@ public sealed class DropshipSystem : SharedDropshipSystem
         {
             ent.Comp.State = ftl.State;
             Dirty(ent);
-
-            if (ftl.State == FTLState.Arriving && ent.Comp.Destination is { } destination)
-            {
-                var audio = _audio.PlayPvs(ent.Comp.ArrivalSound, destination);
-                _audio.SetGridAudio(audio);
-            }
         }
 
         RefreshUI();
+    }
+
+    private void OnBeforeFTLStarted(Entity<DropshipComponent> ent, ref BeforeFTLStartedEvent args)
+    {
+        RelayToMountedEntities(ent, args);
     }
 
     private void OnRefreshUI<T>(Entity<DropshipComponent> ent, ref T args)
@@ -280,6 +281,10 @@ public sealed class DropshipSystem : SharedDropshipSystem
         if (ent.Comp.Ship != args.Relayer)
             return;
 
+        QueueDel(ent.Comp.ArrivalSoundEntity);
+        ent.Comp.ArrivalSoundEntity = null;
+        Dirty(ent);
+
         ToggleLandingLights(ent, false);
     }
 
@@ -293,6 +298,18 @@ public sealed class DropshipSystem : SharedDropshipSystem
 
         if (ftl.State is not FTLState.Arriving)
             return;
+
+        if (TryComp<DropshipComponent>(ent.Comp.Ship, out var dropship) &&
+            ftl.State == FTLState.Arriving &&
+            dropship.Destination is { } destination)
+        {
+            var audio = _audio.PlayPvs(dropship.ArrivalSound, destination);
+            if (audio != null)
+            {
+                ent.Comp.ArrivalSoundEntity = audio.Value.Entity;
+                Dirty(ent);
+            }
+        }
 
         ToggleLandingLights(ent, true);
     }

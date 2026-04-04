@@ -36,9 +36,6 @@ public sealed partial class DesignerStrainComponent : Component
     public int NextDesignNodeOrder;
 
     [DataField, AutoNetworkedField]
-    public TimeSpan NextRemoteThickenAt;
-
-    [DataField, AutoNetworkedField]
     public TimeSpan NextGreaterResinSurgeAt;
 
     [DataField, AutoNetworkedField]
