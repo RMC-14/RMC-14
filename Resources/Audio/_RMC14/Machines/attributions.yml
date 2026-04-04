@@ -113,6 +113,21 @@
   copyright: "Taken from cmss13"
   source: "https://github.com/cmss13-devs/cmss13/blob/cef82304df8e147afd4f66a1f475e69827fd1f07/sound/machines/fax.ogg"
 
+- files: [ "scanning.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/scanning.ogg"
+
+- files: [ "scanning_pod1.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/scanning_pod1.ogg"
+
+- files: [ "screen_output1.ogg" ]
+  license: "CC-BY-SA-3.0"
+  copyright: "Taken from cmss13"
+  source: "https://github.com/cmss13-devs/cmss13/blob/master/sound/machines/screen_output1.ogg"
+
 - files: [ "vending_drop.ogg" ]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from cmss13"
