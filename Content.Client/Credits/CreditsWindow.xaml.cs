@@ -374,7 +374,9 @@ public sealed partial class CreditsWindow : DefaultWindow
         }
 
         AddSection(Loc.GetString("credits-window-contributors-section-title"), "GitHub.txt");
-        AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt");
+        AddSection(Loc.GetString("credits-window-boon"), "_RMC14/Boone.txt");  // RMC14
+        AddSection(Loc.GetString("credits-window-avali"), "_RMC14/Avali.txt"); // RMC14
+        AddSection(Loc.GetString("credits-window-cm-ss13-section-title"), "_RMC14/CM-SS13.txt"); // RMC14
         AddSection(Loc.GetString("credits-window-codebases-section-title"), "SpaceStation13.txt");
         AddSection(Loc.GetString("credits-window-original-remake-team-section-title"), "OriginalRemake.txt");
         AddSection(Loc.GetString("credits-window-special-thanks-section-title"), "SpecialThanks.txt", true);
