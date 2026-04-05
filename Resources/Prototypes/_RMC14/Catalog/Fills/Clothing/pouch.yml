@@ -21,6 +21,15 @@
     - id: RMCSpaceCash1000
     - id: RMCSpaceCash1000 # TODO RMC14 tape recorder
 
+- type: entity
+  parent: RMCPouchGeneralLarge
+  id: RMCPouchGeneralLargeM63AP
+  suffix: M63 AP, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: CMMagazineSMGM63AP
+
 # Magazine Pouch
 - type: entity
   parent: RMCPouchMagazine
@@ -242,6 +251,17 @@
     contents:
     - id: RMCMagazineSmartGunirradiated
       amount: 3
+
+# Fuel Tank Strap Pouch
+- type: entity
+  parent: RMCPouchFuelTank
+  id: RMCPouchFuelTankFlamertankExtinguisher
+  suffix: Flamertank, Extinguisher, Filled
+  components:
+  - type: StorageFill
+    contents:
+    - id: RMCTankFlamer
+    - id: CMFireExtinguisher
 
 # Survival pouch
 - type: entity
