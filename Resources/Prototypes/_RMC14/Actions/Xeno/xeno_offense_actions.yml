@@ -19,7 +19,7 @@
       strength: Normal
       plasmaCost: 100
       time: 50 # seconds
-      dps: 8
+      dps: 7.2
       expendableLightDps: 2.5
 
 - type: entity
@@ -51,8 +51,8 @@
       strength: Weak
       plasmaCost: 75
       time: 125 # seconds or 2~ minutes
-      dps: 4
-      expendableLightDps: 0.3
+      dps: 3.6
+      expendableLightDps: 0.8
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -75,8 +75,8 @@
       strength: Strong
       plasmaCost: 125
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   parent: ActionXenoAcidNormal
@@ -101,8 +101,8 @@
       energyCost: 100
       applyTimeMultiplier: 0.25
       time: 20 # seconds
-      dps: 20
-      expendableLightDps: 23.4375
+      dps: 18
+      expendableLightDps: 35
 
 - type: entity
   id: ActionXenoRegurgitate
